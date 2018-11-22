@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{93948D83-BC84-47B4-AD0F-A6E295AFE823}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OpenBreed.Editor.UI.WinForms</RootNamespace>
+    <AssemblyName>OpenBreed.Editor.UI.WinForms</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=3.0.6.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DockPanelSuite.3.0.6\lib\net40\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\EditorOptionsABTA.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\EditorOptionsABTA.Designer.cs">
+      <DependentUpon>EditorOptionsABTA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Map\MapBodyEditorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Map\MapBodyEditorCtrl.Designer.cs">
+      <DependentUpon>MapBodyEditorCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Map\MapPropertiesCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Map\MapPropertiesCtrl.Designer.cs">
+      <DependentUpon>MapPropertiesCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Palettes\ColorEditorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Palettes\ColorEditorCtrl.Designer.cs">
+      <DependentUpon>ColorEditorCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Palettes\ColorSelectorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Palettes\ColorSelectorCtrl.designer.cs">
+      <DependentUpon>ColorSelectorCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Palettes\PaletteEditorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Palettes\PaletteEditorCtrl.Designer.cs">
+      <DependentUpon>PaletteEditorCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Palettes\PalettesCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Palettes\PalettesCtrl.Designer.cs">
+      <DependentUpon>PalettesCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Props\PropSelectorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Props\PropSelectorCtrl.Designer.cs">
+      <DependentUpon>PropSelectorCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Props\PropSetsCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Props\PropSetsCtrl.Designer.cs">
+      <DependentUpon>PropSetsCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Sprites\SpriteSetsCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Sprites\SpriteSetsCtrl.Designer.cs">
+      <DependentUpon>SpriteSetsCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Sprites\SpriteViewerCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Sprites\SpriteViewerCtrl.Designer.cs">
+      <DependentUpon>SpriteViewerCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Tiles\TileSetPaletteSelectorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Tiles\TileSetPaletteSelectorCtrl.Designer.cs">
+      <DependentUpon>TileSetPaletteSelectorCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Tiles\TileSetsCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Tiles\TileSetsCtrl.Designer.cs">
+      <DependentUpon>TileSetsCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Tiles\TileSetViewerCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Tiles\TileSetViewerCtrl.Designer.cs">
+      <DependentUpon>TileSetViewerCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogProvider.cs" />
+    <Compile Include="Forms\ABTAMapListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ABTAMapListForm.Designer.cs">
+      <DependentUpon>ABTAMapListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ABTAPasswordGeneratorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ABTAPasswordGeneratorForm.Designer.cs">
+      <DependentUpon>ABTAPasswordGeneratorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainFormGeneralHandler.cs" />
+    <Compile Include="Forms\MainFormMapEditHandler.cs" />
+    <Compile Include="Forms\OptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OptionsForm.Designer.cs">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\FolderBrowserDialogHelper.cs" />
+    <Compile Include="Helpers\OpenFileDialogHelper.cs" />
+    <Compile Include="Helpers\SaveFileDialogHelper.cs" />
+    <Compile Include="MapPropertiesCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MapPropertiesCtrl.designer.cs">
+      <DependentUpon>MapPropertiesCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\LogConsoleView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\LogConsoleView.Designer.cs">
+      <DependentUpon>LogConsoleView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MapBodyEditorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MapBodyEditorView.Designer.cs">
+      <DependentUpon>MapBodyEditorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MapPalettesView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MapPalettesView.Designer.cs">
+      <DependentUpon>MapPalettesView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MapPropertiesView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MapPropertiesView.Designer.cs">
+      <DependentUpon>MapPropertiesView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProjectView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\ProjectView.Designer.cs">
+      <DependentUpon>ProjectView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PropertiesView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PropertiesView.Designer.cs">
+      <DependentUpon>PropertiesView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PropSetsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PropSetsView.Designer.cs">
+      <DependentUpon>PropSetsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SpriteSetsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SpriteSetsView.Designer.cs">
+      <DependentUpon>SpriteSetsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TemplateSetView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TemplateSetView.Designer.cs">
+      <DependentUpon>TemplateSetView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TileSetsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TileSetsView.Designer.cs">
+      <DependentUpon>TileSetsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ToolsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ToolsView.Designer.cs">
+      <DependentUpon>ToolsView.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\InsertTile.bmp" />
+    <Content Include="Resources\InsertTilesFreeHand.bmp" />
+    <Content Include="Resources\InsertTilesLine.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\EditorOptionsABTA.resx">
+      <DependentUpon>EditorOptionsABTA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Map\MapPropertiesCtrl.resx">
+      <DependentUpon>MapPropertiesCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Palettes\ColorEditorCtrl.resx">
+      <DependentUpon>ColorEditorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Palettes\ColorSelectorCtrl.resx">
+      <DependentUpon>ColorSelectorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Palettes\PaletteEditorCtrl.resx">
+      <DependentUpon>PaletteEditorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Palettes\PalettesCtrl.resx">
+      <DependentUpon>PalettesCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Props\PropSelectorCtrl.resx">
+      <DependentUpon>PropSelectorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Props\PropSetsCtrl.resx">
+      <DependentUpon>PropSetsCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Sprites\SpriteSetsCtrl.resx">
+      <DependentUpon>SpriteSetsCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Sprites\SpriteViewerCtrl.resx">
+      <DependentUpon>SpriteViewerCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Tiles\TileSetPaletteSelectorCtrl.resx">
+      <DependentUpon>TileSetPaletteSelectorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Tiles\TileSetsCtrl.resx">
+      <DependentUpon>TileSetsCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Tiles\TileSetViewerCtrl.resx">
+      <DependentUpon>TileSetViewerCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ABTAMapListForm.resx">
+      <DependentUpon>ABTAMapListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ABTAPasswordGeneratorForm.resx">
+      <DependentUpon>ABTAPasswordGeneratorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OptionsForm.resx">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MapPropertiesCtrl.resx">
+      <DependentUpon>MapPropertiesCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\LogConsoleView.resx">
+      <DependentUpon>LogConsoleView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MapBodyEditorView.resx">
+      <DependentUpon>MapBodyEditorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MapPalettesView.resx">
+      <DependentUpon>MapPalettesView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MapPropertiesView.resx">
+      <DependentUpon>MapPropertiesView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ProjectView.resx">
+      <DependentUpon>ProjectView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PropertiesView.resx">
+      <DependentUpon>PropertiesView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PropSetsView.resx">
+      <DependentUpon>PropSetsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SpriteSetsView.resx">
+      <DependentUpon>SpriteSetsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TileSetsView.resx">
+      <DependentUpon>TileSetsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ToolsView.resx">
+      <DependentUpon>ToolsView.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="General\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common.UI.WinForms\OpenBreed.Common.UI.WinForms.csproj">
+      <Project>{9827deda-205f-465e-b8df-e0e3ff9cd8d1}</Project>
+      <Name>OpenBreed.Common.UI.WinForms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
+      <Project>{9894e7f4-7c85-4173-9d05-f50cfd2e4163}</Project>
+      <Name>OpenBreed.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Editor.Cfg\OpenBreed.Editor.Cfg.csproj">
+      <Project>{91F957F8-8C01-462C-9FE3-276BB56A7B7E}</Project>
+      <Name>OpenBreed.Editor.Cfg</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Editor.VM\OpenBreed.Editor.VM.csproj">
+      <Project>{4E57CB0D-A13B-48A9-9D47-52B96D75F283}</Project>
+      <Name>OpenBreed.Editor.VM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ToolsABTA\ToolsABTA.csproj">
+      <Project>{27037E0B-F963-4F7B-975D-741D683D66C7}</Project>
+      <Name>ToolsABTA</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

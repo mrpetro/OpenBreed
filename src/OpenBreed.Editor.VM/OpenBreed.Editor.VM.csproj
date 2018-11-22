@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4E57CB0D-A13B-48A9-9D47-52B96D75F283}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OpenBreed.Editor.VM</RootNamespace>
+    <AssemblyName>OpenBreed.Editor.VM</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Build\AnyCPU\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\Build\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base\BaseViewModel.cs" />
+    <Compile Include="CameraModel.cs" />
+    <Compile Include="Database\GameDatabaseDef.cs" />
+    <Compile Include="EditorVM.cs" />
+    <Compile Include="IDialogProvider.cs" />
+    <Compile Include="IToolController.cs" />
+    <Compile Include="Levels\Readers\XML\LevelDef.cs" />
+    <Compile Include="Levels\Readers\XML\LevelSetDef.cs" />
+    <Compile Include="Levels\Readers\XML\LevelDefReader.cs" />
+    <Compile Include="Maps\Commands\CmdPropertiesInsert.cs" />
+    <Compile Include="Maps\Commands\CmdResize.cs" />
+    <Compile Include="Maps\Commands\CmdTilesInsert.cs" />
+    <Compile Include="Maps\Helpers\ModifyOperation.cs" />
+    <Compile Include="Maps\Helpers\PropertyInserter.cs" />
+    <Compile Include="Maps\Helpers\PropertyInsertOperation.cs" />
+    <Compile Include="Maps\Helpers\TileInsertOperation.cs" />
+    <Compile Include="Maps\Helpers\TilesInserter.cs" />
+    <Compile Include="Maps\Layers\MapBodyBaseLayerVM.cs" />
+    <Compile Include="Maps\Layers\MapBodyGfxLayerVM.cs" />
+    <Compile Include="Maps\Layers\MapBodyPropertyLayerVM.cs" />
+    <Compile Include="Maps\MapBodyEditorM.cs" />
+    <Compile Include="Maps\MapBodyVM.cs" />
+    <Compile Include="Maps\MapPropertiesVM.cs" />
+    <Compile Include="Maps\MapVM.cs" />
+    <Compile Include="Maps\MapVMHelper.cs" />
+    <Compile Include="Maps\Tools\IEditorTool.cs" />
+    <Compile Include="Maps\Tools\InsertPropertyTool.cs" />
+    <Compile Include="Maps\Tools\InsertTileTool.cs" />
+    <Compile Include="Maps\Tools\LevelTool.cs" />
+    <Compile Include="Maps\Tools\ScrollTool.cs" />
+    <Compile Include="Maps\Tools\ToolsMan.cs" />
+    <Compile Include="Maps\Tools\ZoomTool.cs" />
+    <Compile Include="Palettes\PaletteEditorVM.cs" />
+    <Compile Include="Palettes\PalettesVM.cs" />
+    <Compile Include="Palettes\PaletteVM.cs" />
+    <Compile Include="Project\ProjectVM.cs" />
+    <Compile Include="Props\PropSelectorVM.cs" />
+    <Compile Include="Props\PropSetVM.cs" />
+    <Compile Include="Props\PropSetsVM.cs" />
+    <Compile Include="Props\PropVM.cs" />
+    <Compile Include="Sources\EPFArchiveFileSource.cs" />
+    <Compile Include="Sources\Formats\ABTABLKFormat.cs" />
+    <Compile Include="Sources\Formats\ABTAMAPFormat.cs" />
+    <Compile Include="Database\Sources\EPFArchiveFileSourceDef.cs" />
+    <Compile Include="Database\Sources\DirectoryFileSourceDef.cs" />
+    <Compile Include="Database\Resources\ResourceLevelDef.cs" />
+    <Compile Include="Database\Resources\ResourceDef.cs" />
+    <Compile Include="Database\Sources\SourceDef.cs" />
+    <Compile Include="Database\GameDatabase.cs" />
+    <Compile Include="Levels\Builders\LevelBuilder.cs" />
+    <Compile Include="Levels\ProjectDef.cs" />
+    <Compile Include="Levels\ProjectsHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sources\DirectoryFileSource.cs" />
+    <Compile Include="Sources\Formats\ABTASPRFormat.cs" />
+    <Compile Include="Sources\Formats\LevelXMLFormat.cs" />
+    <Compile Include="Sources\Formats\PropertySetXMLFormat.cs" />
+    <Compile Include="Sources\ISourceFormat.cs" />
+    <Compile Include="Sources\BaseSource.cs" />
+    <Compile Include="Sources\SourcesHandler.cs" />
+    <Compile Include="Sprites\SpriteSetsVM.cs" />
+    <Compile Include="Sprites\SpriteSetVM.cs" />
+    <Compile Include="Sprites\SpriteViewerVM.cs" />
+    <Compile Include="Sprites\SpriteVM.cs" />
+    <Compile Include="Tiles\Helpers\SelectionRectangle.cs" />
+    <Compile Include="Tiles\Helpers\TileSelectTool.cs" />
+    <Compile Include="Tiles\Helpers\TilesSelector.cs" />
+    <Compile Include="Tiles\TileSetPaletteSelectorVM.cs" />
+    <Compile Include="Tiles\TileSetViewerVM.cs" />
+    <Compile Include="Tiles\TileSetsVM.cs" />
+    <Compile Include="Tiles\TileSetVM.cs" />
+    <Compile Include="Tiles\TileVM.cs" />
+    <Compile Include="Tiles\Tools\TileSelectTool.cs" />
+    <Compile Include="ITool.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\EPFArchive\src\EPFArchive\EPFArchive.csproj">
+      <Project>{52249c4e-eaf8-45ce-a757-aaa3c3c125d4}</Project>
+      <Name>EPFArchive</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
+      <Project>{9894e7f4-7c85-4173-9d05-f50cfd2e4163}</Project>
+      <Name>OpenBreed.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Editor.Cfg\OpenBreed.Editor.Cfg.csproj">
+      <Project>{91f957f8-8c01-462c-9fe3-276bb56a7b7e}</Project>
+      <Name>OpenBreed.Editor.Cfg</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ToolsABTA\ToolsABTA.csproj">
+      <Project>{27037E0B-F963-4F7B-975D-741D683D66C7}</Project>
+      <Name>ToolsABTA</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Database\Levels\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
