@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<LevelDef Id="55" Name="OUTER COLONY SECTOR 5" >
+  <MapResourceRef>MAP.55</MapResourceRef>
+  <TileSetResourceRef>LEVEL1.BLK</TileSetResourceRef>
+  <SpriteSetResourceRefs>
+    <SpriteSetResourceRef>SPR1A.SPR</SpriteSetResourceRef>
+    <SpriteSetResourceRef>SPR1B.SPR</SpriteSetResourceRef>
+  </SpriteSetResourceRefs>
+</LevelDef>

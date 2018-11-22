@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<LevelDef Id="32" Name="CORRIDOR 3" >
+  <MapResourceRef>MAP.32</MapResourceRef>
+  <TileSetResourceRef>LEVELD.BLK</TileSetResourceRef>
+  <SpriteSetResourceRefs>
+    <SpriteSetResourceRef>SPRDA.SPR</SpriteSetResourceRef>
+    <SpriteSetResourceRef>SPRDB.SPR</SpriteSetResourceRef>
+  </SpriteSetResourceRefs>
+</LevelDef>

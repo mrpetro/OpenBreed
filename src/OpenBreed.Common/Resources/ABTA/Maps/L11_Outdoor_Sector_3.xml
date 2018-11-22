@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<LevelDef Id="11" Name="OUTDOOR SECTOR 3" >
+  <MapResourceRef>MAP.11</MapResourceRef>
+  <TileSetResourceRef>LEVEL1.BLK</TileSetResourceRef>
+  <SpriteSetResourceRefs>
+    <SpriteSetResourceRef>SPR1A.SPR</SpriteSetResourceRef>
+    <SpriteSetResourceRef>SPR1B.SPR</SpriteSetResourceRef>
+  </SpriteSetResourceRefs>
+</LevelDef>

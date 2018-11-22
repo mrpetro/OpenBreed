@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<LevelDef Id="17" Name="SECURITY ZONE 2" >
+  <MapResourceRef>MAP.17</MapResourceRef>
+  <TileSetResourceRef>LEVEL5.BLK</TileSetResourceRef>
+  <SpriteSetResourceRefs>
+    <SpriteSetResourceRef>SPR5A.SPR</SpriteSetResourceRef>
+    <SpriteSetResourceRef>SPR5B.SPR</SpriteSetResourceRef>
+  </SpriteSetResourceRefs>
+</LevelDef>

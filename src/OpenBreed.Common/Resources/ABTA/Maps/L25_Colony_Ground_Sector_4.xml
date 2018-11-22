@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<LevelDef Id="25" Name="COLONY GROUND SECTOR 4" >
+  <MapResourceRef>MAP.25</MapResourceRef>
+  <TileSetResourceRef>LEVEL1.BLK</TileSetResourceRef>
+  <SpriteSetResourceRefs>
+    <SpriteSetResourceRef>SPR1A.SPR</SpriteSetResourceRef>
+    <SpriteSetResourceRef>SPR1B.SPR</SpriteSetResourceRef>
+  </SpriteSetResourceRefs>
+</LevelDef>

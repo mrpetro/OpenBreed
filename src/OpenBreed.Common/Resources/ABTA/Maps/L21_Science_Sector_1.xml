@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<LevelDef Id="21" Name="SCIENCE SECTOR 1" >
+  <MapResourceRef>MAP.21</MapResourceRef>
+  <TileSetResourceRef>LEVEL6.BLK</TileSetResourceRef>
+  <SpriteSetResourceRefs>
+    <SpriteSetResourceRef>SPR6A.SPR</SpriteSetResourceRef>
+    <SpriteSetResourceRef>SPR6B.SPR</SpriteSetResourceRef>
+  </SpriteSetResourceRefs>
+</LevelDef>

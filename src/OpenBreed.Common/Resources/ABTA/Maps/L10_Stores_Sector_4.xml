@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<LevelDef Id="10" Name="STORES SECTOR 4" >
+  <MapResourceRef>MAP.10</MapResourceRef>
+  <TileSetResourceRef>LEVELD.BLK</TileSetResourceRef>
+  <SpriteSetResourceRefs>
+    <SpriteSetResourceRef>SPRDA.SPR</SpriteSetResourceRef>
+    <SpriteSetResourceRef>SPRDB.SPR</SpriteSetResourceRef>
+  </SpriteSetResourceRefs>
+</LevelDef>
