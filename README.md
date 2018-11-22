@@ -1,5 +1,5 @@
 # OpenBreed.Editor
-Map and resource editor for classic Alien Breed 2D games:
-  - Alien Breed
+Map and resources editor for classic Alien Breed 2D games:
+  - Alien Breed (Special Edition 92)
   - Alien Breed II: Horror continues
   - Alien Breed: Tower Assault
