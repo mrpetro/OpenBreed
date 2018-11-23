@@ -129,7 +129,7 @@
     <Compile Include="Sources\ISourceFormat.cs" />
     <Compile Include="Sources\BaseSource.cs" />
     <Compile Include="Sources\SourcesHandler.cs" />
-    <Compile Include="Sprites\SpriteSetsVM.cs" />
+    <Compile Include="Sprites\SpriteSetViewerVM.cs" />
     <Compile Include="Sprites\SpriteSetVM.cs" />
     <Compile Include="Sprites\SpriteViewerVM.cs" />
     <Compile Include="Sprites\SpriteVM.cs" />

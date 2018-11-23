@@ -33,6 +33,44 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Tiles
         public void Initialize(TileSetPaletteSelectorVM vm)
         {
             _vm = vm;
+
+            _vm.PropertyChanged += _vm_PropertyChanged;
+
+            //cbxTileSetPalettes.SelectedIndexChanged += (s, a) => _vm.CurrentItem = _vm.Items.FirstOrDefault(item => item == cbxSpriteSets.SelectedItem);
+            //cbxTileSetPalettes.DataSource = _vm.Items;
+            //cbxTileSetPalettes.DisplayMember = "Name";
+        }
+
+        private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            //switch (e.PropertyName)
+            //{
+            //    case (nameof(_vm.CurrentItem)):
+            //        //SpriteSetCtrl.Initialize(_vm.CurrentItem);
+            //        break;
+            //    default:
+            //        break;
+            //}
+        }
+
+        void UpdateSpriteSets()
+        {
+            //if (_vm.Items.Count == 0)
+            //    SetNoSpriteSetsState();
+            //else
+            //    SetSpriteSetsState();
+        }
+
+        private void SetNoSpriteSetsState()
+        {
+            //TabText = "No sprite sets";
+        }
+
+        private void SetSpriteSetsState()
+        {
+            //TabText = "Sprite sets";
+
+
         }
 
         #endregion Public Methods

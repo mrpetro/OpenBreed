@@ -9,12 +9,13 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using OpenBreed.Editor.VM.Sprites;
 using OpenBreed.Common.Sprites;
+using OpenBreed.Editor.VM;
 
 namespace OpenBreed.Editor.UI.WinForms.Views
 {
     public partial class SpriteSetsView : DockContent
     {
-        private SpriteSetsVM _vm;
+        private EditorVM _vm;
 
         public SpriteSetsView()
         {
@@ -22,11 +23,11 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         }
 
-        public void Initialize(SpriteSetsVM vm)
+        public void Initialize(EditorVM vm)
         {
             _vm = vm;
 
-            SpriteSets.Initialize(vm);
+            SpriteSets.Initialize(vm.SpriteSetViewer);
             SpriteViewer.Initialize(vm.SpriteViewer);
 
             _vm.PropertyChanged += _vm_PropertyChanged;

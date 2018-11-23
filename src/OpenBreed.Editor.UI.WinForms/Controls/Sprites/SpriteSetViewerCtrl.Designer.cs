@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
 {
-    partial class SpriteSetsCtrl
+    partial class SpriteSetViewerCtrl
     {
         /// <summary> 
         /// Required designer variable.

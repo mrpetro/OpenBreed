@@ -22,7 +22,6 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         public TileSetsView()
         {
             InitializeComponent();
-
         }
 
         public void Initialize(TileSetsVM vm)

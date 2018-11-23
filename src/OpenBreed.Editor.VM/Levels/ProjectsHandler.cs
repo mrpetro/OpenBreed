@@ -82,9 +82,9 @@ namespace OpenBreed.Editor.VM.Levels
             Editor.PropSets.Items.Clear();
             Editor.PropSets.AddPropertySet(levelDef.PropertySetResourceRef);
 
-            Editor.SpriteSets.Items.Clear();
+            Editor.SpriteSets.Clear();
             foreach (var spriteSetSourceRef in levelDef.SpriteSetResourceRefs)
-                Editor.SpriteSets.AddSpriteSet(spriteSetSourceRef);
+                Editor.AddSpriteSet(spriteSetSourceRef);
 
             return levelBuilder.Build();
         }

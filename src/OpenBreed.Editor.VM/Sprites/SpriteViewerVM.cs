@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Common;
+using OpenBreed.Editor.VM.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,21 +15,21 @@ namespace OpenBreed.Editor.VM.Sprites
         #region Private Fields
 
         private int _currentIndex = -1;
-        private SpriteVM _currentItem = null; 
-
-        private SpriteSetVM _currentSpriteSet;
+        private SpriteVM _currentItem = null;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public SpriteViewerVM(SpriteSetsVM spriteSets)
+        public SpriteViewerVM(EditorVM root)
         {
-            SpriteSets = spriteSets;
+            Root = root;
+
+            Items = new BindingList<SpriteVM>();
+            Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
 
             PropertyChanged += SpriteViewerVM_PropertyChanged;
-
-            SpriteSets.PropertyChanged += SpriteSets_PropertyChanged;
+            Root.SpriteSetViewer.PropertyChanged += SpriteSetViewer_PropertyChanged;
         }
 
         #endregion Public Constructors
@@ -44,30 +45,47 @@ namespace OpenBreed.Editor.VM.Sprites
         public SpriteVM CurrentItem
         {
             get { return _currentItem; }
-            private set { SetProperty(ref _currentItem, value); }
+            set { SetProperty(ref _currentItem, value); }
         }
 
-        public SpriteSetVM CurrentSpriteSet
-        {
-            get { return _currentSpriteSet; }
-            set { SetProperty(ref _currentSpriteSet, value); }
-        }
+        public BindingList<SpriteVM> Items { get; private set; }
 
-        public SpriteSetsVM SpriteSets { get; private set; }
+        public EditorVM Root { get; private set; }
 
         #endregion Public Properties
 
         #region Private Methods
 
-        private void SpriteSets_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void SpriteSetViewer_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            var spriteSetViewer = sender as SpriteSetViewerVM;
+
             switch (e.PropertyName)
             {
-                case nameof(SpriteSets.CurrentItem):
-                    CurrentSpriteSet = SpriteSets.CurrentItem;
+                case nameof(spriteSetViewer.CurrentItem):
+                    UpdateWithSpriteSet(spriteSetViewer.CurrentItem);
                     break;
                 default:
                     break;
+            }
+        }
+
+        private void UpdateWithSpriteSet(SpriteSetVM spriteSet)
+        {
+            try
+            {
+                Items.RaiseListChangedEvents = false;
+                Items.Clear();
+
+                if (spriteSet == null)
+                    return;
+
+                spriteSet.Items.ForEach(item => Items.Add(item));
+            }
+            finally
+            {
+                Items.RaiseListChangedEvents = true;
+                Items.ResetBindings();
             }
         }
 
@@ -81,8 +99,8 @@ namespace OpenBreed.Editor.VM.Sprites
                 case nameof(CurrentItem):
                     UpdateCurrentIndex();
                     break;
-                case nameof(CurrentSpriteSet):
-                    CurrentItem = CurrentSpriteSet.Items.FirstOrDefault();
+                case nameof(Items):
+                    CurrentItem = Items.FirstOrDefault();
                     break;
                 default:
                     break;
@@ -91,10 +109,10 @@ namespace OpenBreed.Editor.VM.Sprites
 
         private void UpdateCurrentIndex()
         {
-            if (CurrentItem == null)
+            if (Root.SpriteSetViewer.CurrentItem == null)
                 CurrentIndex = -1;
             else
-                CurrentIndex = CurrentSpriteSet.Items.IndexOf(CurrentItem);
+                CurrentIndex = Items.IndexOf(CurrentItem);
         }
 
         private void UpdateCurrentItem()
@@ -102,9 +120,10 @@ namespace OpenBreed.Editor.VM.Sprites
             if (CurrentIndex == -1)
                 CurrentItem = null;
             else
-                CurrentItem = CurrentSpriteSet.Items[CurrentIndex];
+                CurrentItem = Items[CurrentIndex];
         }
 
         #endregion Private Methods
+
     }
 }

@@ -13,32 +13,25 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
 {
     public partial class SpriteViewerCtrl : UserControl
     {
+        #region Private Fields
+
         private SpriteViewerVM _vm;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public SpriteViewerCtrl()
         {
             InitializeComponent();
 
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
-
-
         }
 
+        #endregion Public Constructors
 
-        private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case (nameof(_vm.CurrentSpriteSet)):
-                    UpdateControl();
-                    break;
-                case (nameof(_vm.CurrentItem)):
-                    pnlSprite.Invalidate();
-                    break;
-                default:
-                    break;
-            }
-        }
+
+        #region Public Methods
 
         public void Initialize(SpriteViewerVM vm)
         {
@@ -50,24 +43,31 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
             _vm.PropertyChanged += _vm_PropertyChanged;
             pnlSprite.Paint += PnlSprite_Paint;
 
-            UpdateControl();
+            UpdateItems();
         }
 
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case (nameof(_vm.CurrentItem)):
+                    pnlSprite.Invalidate();
+                    break;
+                case (nameof(_vm.Items)):
+                    UpdateItems();
+                    break;
+                default:
+                    break;
+            }
+        }
         private void PnlSprite_Paint(object sender, PaintEventArgs e)
         {
             if(_vm.CurrentItem != null)
                 _vm.CurrentItem.Draw(e.Graphics, 0, 0, 2);
-        }
-
-        void UpdateControl()
-        {
-            if (_vm.CurrentSpriteSet == null)
-                SetNoSpritesState();
-            else
-                SetSpritesState();
-
-            Invalidate();
-            pnlSprite.Invalidate();
         }
 
         private void SetNoSpritesState()
@@ -78,8 +78,21 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
         private void SetSpritesState()
         {
             numSpriteNo.Minimum = 0;
-            numSpriteNo.Maximum = _vm.CurrentSpriteSet.Items.Count - 1;
+            numSpriteNo.Maximum = _vm.Items.Count - 1;
             numSpriteNo.Value = 0;
         }
+
+        void UpdateItems()
+        {
+            if (_vm.Items.Count == 0)
+                SetNoSpritesState();
+            else
+                SetSpritesState();
+
+            Invalidate();
+            pnlSprite.Invalidate();
+        }
+
+        #endregion Private Methods
     }
 }

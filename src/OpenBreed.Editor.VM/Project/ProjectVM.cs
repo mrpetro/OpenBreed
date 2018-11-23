@@ -67,9 +67,14 @@ namespace OpenBreed.Editor.VM.Project
             Root.TileSets.Items.Clear();
             Root.TileSets.AddTileSet(projectDef.TileSetResourceRef);
 
-            Root.SpriteSets.Items.Clear();
+            Root.SpriteSets.Clear();
             foreach (var spriteSetSourceRef in projectDef.SpriteSetResourceRefs)
-                Root.SpriteSets.AddSpriteSet(spriteSetSourceRef);
+                Root.AddSpriteSet(spriteSetSourceRef);
+
+            Root.SpriteSetViewer.CurrentItem = Root.SpriteSets.FirstOrDefault();
+
+            if(Root.SpriteSetViewer.CurrentItem != null)
+                Root.SpriteViewer.CurrentItem = Root.SpriteSetViewer.CurrentItem.Items.FirstOrDefault();
 
             if (projectDef.PropertySetResourceRef != null)
                 Root.PropSets.AddPropertySet(projectDef.PropertySetResourceRef);

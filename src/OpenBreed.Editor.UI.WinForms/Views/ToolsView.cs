@@ -13,51 +13,24 @@ namespace OpenABEd
 {
     public partial class ToolsView : DockContent
     {
-        readonly private ToolsMan m_ToolsMan = null;
+        private ToolsMan _vm;
 
         //private List<System.Windows.Forms.Button> m_ToolButtons = new List<Button>();
 
-        public ToolsView(ToolsMan toolsMan)
+        public ToolsView()
         {
             InitializeComponent();
-
-            m_ToolsMan = toolsMan;
-
-            List<string> toolNames = m_ToolsMan.GetActivableToolsList();
-
-            //m_ToolButtons.Clear();
-            this.SuspendLayout();
-
-            foreach (var toolName in toolNames)
-                AddToolButton(toolName);
-
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
-            Resize += new EventHandler(ToolsView_Resize);
-        }
-
-        void ToolsView_Resize(object sender, EventArgs e)
-        {
-            //this.SuspendLayout();
-
-            //foreach (var toolButton in m_ToolButtons)
-            //    toolButton.Size = new Size(ClientRectangle.Height, ClientRectangle.Height);
-
-            //this.ResumeLayout(false);
-            //this.PerformLayout();
         }
 
         private void AddToolButton(string toolName)
         {
-
             var button = new ToolStripSplitButton();
 
             button.Name = toolName;
             button.AutoSize = false;
             button.Size = new System.Drawing.Size(32, 32);
             button.Text = toolName;
-            button.Click += (o, a) => { m_ToolsMan.ActivateTool(toolName); CheckOnlyOneButton(button); };
+            button.Click += (o, a) => { _vm.ActivateTool(toolName); CheckOnlyOneButton(button); };
             button.Margin = new System.Windows.Forms.Padding(20);
             ToolStrip.Items.Add(button);
 
@@ -83,6 +56,22 @@ namespace OpenABEd
 
 
 
+        }
+
+        public void Initialize(ToolsMan vm)
+        {
+            _vm = vm;
+
+            List<string> toolNames = _vm.GetActivableToolsList();
+
+            //m_ToolButtons.Clear();
+            this.SuspendLayout();
+
+            foreach (var toolName in toolNames)
+                AddToolButton(toolName);
+
+            this.ResumeLayout(false);
+            this.PerformLayout();
         }
     }
 }

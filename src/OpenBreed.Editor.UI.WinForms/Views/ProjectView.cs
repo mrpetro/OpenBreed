@@ -28,18 +28,51 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
     public partial class ProjectView : DockPanel
     {
-        private ProjectVM _vm;
-
-        private MapPalettesView m_MapPalettesView = null;
-        private TileSetsView m_TileSetView = null;
-        private SpriteSetsView m_SpriteSetsView = null;
-        private PropSetsView m_PropSetsView = null;
-        private MapPropertiesView m_MapPropertiesView = null;
-        private MapBodyEditorView m_MapBodyView = null;
-        private ToolsView m_ToolsView = null;
+        #region Private Fields
 
         private DeserializeDockContent _deserializeDockContent;
-        private bool m_bSaveLayout = true;
+        private ProjectVM _vm;
+
+        private bool _saveLayout = true;
+        private MapBodyEditorView _mapBodyView = new MapBodyEditorView();
+        private MapPalettesView _mapPalettesView = new MapPalettesView();
+        private MapPropertiesView _mapPropertiesView = new MapPropertiesView();
+        private PropSetsView _propSetsView = new PropSetsView();
+        private SpriteSetsView _spriteSetsView = new SpriteSetsView();
+        private TileSetsView _tileSetView = new TileSetsView();
+        private ToolsView _toolsView = new ToolsView();
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public ProjectView()
+        {
+            InitializeComponent();
+
+            _deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
+        }
+
+        #endregion Public Constructors
+
+        #region Public Methods
+
+        public void CloseView(ProjectViewType type)
+        {
+            var view = GetView(type);
+            view.Close();
+        }
+
+        public void DeinitViews()
+        {
+            _mapBodyView.Close();
+            _mapPropertiesView.Close();
+            _mapPalettesView.Close();
+            _propSetsView.Close();
+            _tileSetView.Close();
+            _spriteSetsView.Close();
+            _toolsView.Close();
+        }
 
         public void Initialize(ProjectVM vm)
         {
@@ -52,13 +85,79 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
             RestoreLayout();
         }
-
-        public ProjectView()
+        public void InitViews()
         {
-            InitializeComponent();
+            _toolsView.Initialize(_vm.Root.ToolsMan);
+            _tileSetView.Initialize(_vm.Root.TileSets);
+            _spriteSetsView.Initialize(_vm.Root);
+            _propSetsView.Initialize(_vm.Root.PropSets);
+            _mapPalettesView.Initialize(_vm.Root.Palettes);
+            _mapPropertiesView.Initialize(_vm.Root.Map.Properties);
+            _mapBodyView.Initialize(_vm.Root.MapBodyViewer);
 
-            _deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
+            _tileSetView.Show(this, DockState.DockLeft);
+            _spriteSetsView.Show(this, DockState.DockLeft);
+            _propSetsView.Show(this, DockState.DockLeft);
+            _mapPalettesView.Show(this, DockState.DockLeft);
+            _mapPropertiesView.Show(this, DockState.DockLeft);
+            _mapBodyView.Show(this, DockState.Document);
+            _toolsView.Show(this, DockState.DockTop);
         }
+
+        public void RestoreLayout()
+        {
+            string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "OpenAEdGUI.cfg");
+
+            if (File.Exists(configFile))
+                LoadFromXml(configFile, _deserializeDockContent);
+        }
+
+        public void ShowView(ProjectViewType type)
+        {
+            var view = GetView(type);
+
+            view.Show();
+        }
+
+        public void StoreLayout()
+        {
+            string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "OpenAEdGUI.cfg");
+            if (_saveLayout)
+                SaveAsXml(configFile);
+            else if (File.Exists(configFile))
+                File.Delete(configFile);
+        }
+
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        protected DockContent GetView(ProjectViewType viewType)
+        {
+            switch (viewType)
+            {
+                case ProjectViewType.MapBody:
+                    return _mapBodyView;
+                case ProjectViewType.MapProperties:
+                    return _mapPropertiesView;
+                case ProjectViewType.MapPalettes:
+                    return _mapPalettesView;
+                case ProjectViewType.TileSet:
+                    return _tileSetView;
+                case ProjectViewType.SpriteSets:
+                    return _spriteSetsView;
+                case ProjectViewType.PropertySet:
+                    return _propSetsView;
+                case ProjectViewType.Tools:
+                    return _toolsView;
+                default:
+                    throw new InvalidOperationException("Unknown ProjectViewType: " + viewType);
+            }
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
 
         private IDockContent GetContentFromPersistString(string persistString)
         {
@@ -84,101 +183,6 @@ namespace OpenBreed.Editor.UI.WinForms.Views
                 ShowView(ProjectViewType.TileSet);
         }
 
-        protected DockContent GetView(ProjectViewType viewType)
-        {
-            switch (viewType)
-            {
-                case ProjectViewType.MapBody:
-                    return m_MapBodyView;
-                case ProjectViewType.MapProperties:
-                    return m_MapPropertiesView;
-                case ProjectViewType.MapPalettes:
-                    return m_MapPalettesView;
-                case ProjectViewType.TileSet:
-                    return m_TileSetView;
-                case ProjectViewType.SpriteSets:
-                    return m_SpriteSetsView;
-                case ProjectViewType.PropertySet:
-                    return m_PropSetsView;
-                case ProjectViewType.Tools:
-                    return m_ToolsView;
-                default:
-                    throw new InvalidOperationException("Unknown ProjectViewType: " + viewType);
-            }
-        }
-
-        public void ShowView(ProjectViewType type )
-        {
-            var view = GetView(type);
-
-            view.Show();
-        }
-
-        public void CloseView(ProjectViewType type)
-        {
-            var view = GetView(type);
-            view.Close();
-        }
-
-        public void RestoreLayout()
-        {
-            string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "OpenAEdGUI.cfg");
-
-            if (File.Exists(configFile))
-                LoadFromXml(configFile, _deserializeDockContent);
-        }
-
-        public void StoreLayout()
-        {
-            string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "OpenAEdGUI.cfg");
-            if (m_bSaveLayout)
-                SaveAsXml(configFile);
-            else if (File.Exists(configFile))
-                File.Delete(configFile);
-        }
-
-        public void InitViews()
-        {
-            m_TileSetView = new TileSetsView();
-            m_SpriteSetsView = new SpriteSetsView();
-            m_PropSetsView = new PropSetsView();
-            m_MapPalettesView = new MapPalettesView();
-            m_MapPropertiesView = new MapPropertiesView();
-            m_MapBodyView = new MapBodyEditorView();
-            m_ToolsView = new ToolsView(_vm.Root.ToolsMan);
-
-            m_TileSetView.Initialize(_vm.Root.TileSets);
-            m_SpriteSetsView.Initialize(_vm.Root.SpriteSets);
-            m_PropSetsView.Initialize(_vm.Root.PropSets); 
-            m_MapPalettesView.Initialize(_vm.Root.Palettes);
-            m_MapPropertiesView.Initialize(_vm.Root.Map.Properties);
-            m_MapBodyView.Initialize(_vm.Root.MapBodyViewer);
-
-            m_TileSetView.Show(this, DockState.DockLeft);
-            m_SpriteSetsView.Show(this, DockState.DockLeft);
-            m_PropSetsView.Show(this, DockState.DockLeft);
-            m_MapPalettesView.Show(this, DockState.DockLeft);
-            m_MapPropertiesView.Show(this, DockState.DockLeft);
-            m_MapBodyView.Show(this, DockState.Document);
-            m_ToolsView.Show(this, DockState.DockTop);
-        }
-
-        public void DeinitViews()
-        {
-            m_MapBodyView.Close();
-            //m_MapBodyView = null;
-            m_MapPropertiesView.Close();
-            //m_MapPropertiesView = null;
-            m_MapPalettesView.Close();
-            //m_MapPalettesView = null;
-            m_PropSetsView.Close();
-            //m_PropertySetView = null;
-            m_TileSetView.Close();
-            //m_TileSetView = null;
-            m_SpriteSetsView.Close();
-            //m_SpriteSetsView = null;
-            m_ToolsView.Close();
-            //m_ToolsView = null;
-        }    
+        #endregion Private Methods
     }
 }

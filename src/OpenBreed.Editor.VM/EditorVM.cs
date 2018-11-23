@@ -23,6 +23,8 @@ using System.Diagnostics;
 using OpenBreed.Common;
 using OpenBreed.Common.Logging;
 using OpenBreed.Editor.Cfg;
+using System.ComponentModel;
+using OpenBreed.Editor.VM.Base;
 
 namespace OpenBreed.Editor.VM
 {
@@ -48,7 +50,7 @@ namespace OpenBreed.Editor.VM
 
     }
 
-    public class EditorVM : IDisposable
+    public class EditorVM : BaseViewModel, IDisposable
     {
         public IDialogProvider DialogProvider { get; private set; }
 
@@ -63,7 +65,12 @@ namespace OpenBreed.Editor.VM
             Project = new ProjectVM(this);
             TileSets = new TileSetsVM(this);
             Palettes = new PalettesVM(this);
-            SpriteSets = new SpriteSetsVM(this);
+
+            SpriteSets = new BindingList<SpriteSetVM>();
+            SpriteSets.ListChanged += (s, e) => OnPropertyChanged(nameof(SpriteSets));
+
+            SpriteSetViewer = new SpriteSetViewerVM(this);
+            SpriteViewer = new SpriteViewerVM(this);
             PropSets = new PropSetsVM(this);
             Projects = new ProjectsHandler(this);
             Map = new MapVM(this);
@@ -96,7 +103,9 @@ namespace OpenBreed.Editor.VM
 
         public SourcesHandler Sources { get; set; }
 
-        public SpriteSetsVM SpriteSets { get; private set; }
+        public SpriteSetViewerVM SpriteSetViewer { get; set; }
+        public SpriteViewerVM SpriteViewer { get; set; }
+        public BindingList<SpriteSetVM> SpriteSets { get; private set; }
 
         public TileSetsVM TileSets { get; private set; }
 
@@ -123,6 +132,20 @@ namespace OpenBreed.Editor.VM
         public void Dispose()
         {
             Settings.Store();
+        }
+
+        public void AddSpriteSet(string spriteSetRef)
+        {
+            var spriteSetSourceDef = CurrentDatabase.GetSourceDef(spriteSetRef);
+            if (spriteSetSourceDef == null)
+                throw new Exception("No SpriteSetSource definition found!");
+
+            var source = Sources.GetSource(spriteSetSourceDef);
+
+            if (source == null)
+                throw new Exception("SpriteSet source error: " + spriteSetRef);
+
+            SpriteSets.Add(SpriteSetVM.Create(this, source));
         }
 
         public void OpenABTADatabase()

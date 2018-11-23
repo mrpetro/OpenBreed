@@ -11,24 +11,24 @@ using OpenBreed.Editor.VM.Sprites;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
 {
-    public partial class SpriteSetsCtrl : UserControl
+    public partial class SpriteSetViewerCtrl : UserControl
     {
-        private SpriteSetsVM _vm;
+        private SpriteSetViewerVM _vm;
 
-        public SpriteSetsCtrl()
+        public SpriteSetViewerCtrl()
         {
             InitializeComponent();
 
         }
 
-        public void Initialize(SpriteSetsVM vm)
+        public void Initialize(SpriteSetViewerVM vm)
         {
             _vm = vm;
 
             _vm.PropertyChanged += _vm_PropertyChanged;
 
-            cbxSpriteSets.SelectedIndexChanged += (s, a) => _vm.CurrentItem = _vm.Items.FirstOrDefault(item => item == cbxSpriteSets.SelectedItem);
-            cbxSpriteSets.DataSource = _vm.Items;
+            cbxSpriteSets.DataBindings.Add(nameof(cbxSpriteSets.SelectedIndex), _vm, nameof(_vm.CurrentIndex), false, DataSourceUpdateMode.OnPropertyChanged);
+            cbxSpriteSets.DataSource = _vm.Root.SpriteSets;
             cbxSpriteSets.DisplayMember = "Name";
 
             UpdateSpriteSets();
@@ -48,7 +48,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
 
         void UpdateSpriteSets()
         {
-            if (_vm.Items.Count == 0)
+            if (_vm.Root.SpriteSets.Count == 0)
                 SetNoSpriteSetsState();
             else
                 SetSpriteSetsState();

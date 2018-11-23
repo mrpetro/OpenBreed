@@ -103,11 +103,11 @@
     <Compile Include="Controls\Props\PropSetsCtrl.Designer.cs">
       <DependentUpon>PropSetsCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Sprites\SpriteSetsCtrl.cs">
+    <Compile Include="Controls\Sprites\SpriteSetViewerCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Sprites\SpriteSetsCtrl.Designer.cs">
-      <DependentUpon>SpriteSetsCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Sprites\SpriteSetViewerCtrl.Designer.cs">
+      <DependentUpon>SpriteSetViewerCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Sprites\SpriteViewerCtrl.cs">
       <SubType>UserControl</SubType>
@@ -268,8 +268,8 @@
     <EmbeddedResource Include="Controls\Props\PropSetsCtrl.resx">
       <DependentUpon>PropSetsCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Sprites\SpriteSetsCtrl.resx">
-      <DependentUpon>SpriteSetsCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Sprites\SpriteSetViewerCtrl.resx">
+      <DependentUpon>SpriteSetViewerCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Sprites\SpriteViewerCtrl.resx">
       <DependentUpon>SpriteViewerCtrl.cs</DependentUpon>

@@ -11,9 +11,13 @@ namespace OpenBreed.Editor.VM.Tiles
 {
     public class TileSetPaletteSelectorVM : BaseViewModel
     {
+        #region Private Fields
+
         private PaletteVM _currentPalette;
 
-        public TileSetViewerVM Viewer { get; private set; }
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public TileSetPaletteSelectorVM(TileSetViewerVM viewer)
         {
@@ -21,6 +25,22 @@ namespace OpenBreed.Editor.VM.Tiles
 
             Viewer.PropertyChanged += Viewer_PropertyChanged;
         }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public PaletteVM CurrentPalette
+        {
+            get { return _currentPalette; }
+            set { SetProperty(ref _currentPalette, value); }
+        }
+
+        public TileSetViewerVM Viewer { get; private set; }
+
+        #endregion Public Properties
+
+        #region Private Methods
 
         private void Viewer_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -34,10 +54,6 @@ namespace OpenBreed.Editor.VM.Tiles
             }
         }
 
-        public PaletteVM CurrentPalette
-        {
-            get { return _currentPalette; }
-            set { SetProperty(ref _currentPalette, value); }
-        }
+        #endregion Private Methods
     }
 }
