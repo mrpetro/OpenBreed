@@ -76,8 +76,8 @@ namespace OpenBreed.Editor.VM.Levels
 
             Editor.Map.Set(levelDef.MapResourceRef);
 
-            Editor.TileSets.Items.Clear();
-            Editor.TileSets.AddTileSet(levelDef.TileSetResourceRef);
+            Editor.TileSets.Clear();
+            Editor.AddTileSet(levelDef.TileSetResourceRef);
 
             Editor.PropSets.Items.Clear();
             Editor.PropSets.AddPropertySet(levelDef.PropertySetResourceRef);

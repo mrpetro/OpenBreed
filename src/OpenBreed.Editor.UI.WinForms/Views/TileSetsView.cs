@@ -17,31 +17,31 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 {
     public partial class TileSetsView : DockContent, IToolController
     {
-        private TileSetsVM _vm;
+        private EditorVM _vm;
 
         public TileSetsView()
         {
             InitializeComponent();
         }
 
-        public void Initialize(TileSetsVM vm)
+        public void Initialize(EditorVM vm)
         {
             _vm = vm;
 
-            TileSets.Initialize(vm);
-            TileSelector.Initialize(vm.TileSetViewer);
+            TileSets.Initialize(_vm.TileSetSelector);
+            TileSelector.Initialize(_vm.TileSetViewer);
 
             _vm.PropertyChanged += _vm_PropertyChanged;
 
-            TabText = _vm.Title;
+            TabText = _vm.TileSetSelector.Title;
         }
 
         private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
-                case nameof(_vm.Title):
-                    TabText = _vm.Title;
+                case nameof(_vm.TileSetSelector.Title):
+                    TabText = _vm.TileSetSelector.Title;
                     break;
                 default:
                     break;

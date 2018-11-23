@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SpriteSets = new OpenBreed.Editor.UI.WinForms.Controls.Sprites.SpriteSetViewerCtrl();
+            this.SpriteSets = new OpenBreed.Editor.UI.WinForms.Controls.Sprites.SpriteSetSelectorCtrl();
             this.SpriteViewer = new OpenBreed.Editor.UI.WinForms.Controls.Sprites.SpriteViewerCtrl();
             this.SuspendLayout();
             // 
@@ -64,7 +64,7 @@
 
         #endregion
 
-        private Controls.Sprites.SpriteSetViewerCtrl SpriteSets;
+        private Controls.Sprites.SpriteSetSelectorCtrl SpriteSets;
         private Controls.Sprites.SpriteViewerCtrl SpriteViewer;
     }
 }

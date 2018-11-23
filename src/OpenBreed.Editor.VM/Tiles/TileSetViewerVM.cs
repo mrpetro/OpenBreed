@@ -19,6 +19,7 @@ namespace OpenBreed.Editor.VM.Tiles
 
     public class TileSetViewerVM : BaseViewModel
     {
+
         #region Public Fields
 
         public Point CenterCoord;
@@ -35,16 +36,36 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #region Public Constructors
 
-        public TileSetViewerVM(TileSetsVM tileSets)
+        public TileSetViewerVM(EditorVM root)
         {
-            TileSets = tileSets;
+            Root = root;
 
             SelectedIndexes = new List<int>();
             SelectionRectangle = new SelectionRectangle();
             SelectMode = SelectModeEnum.Nothing;
             MultiSelect = false;
 
-            TileSets.PropertyChanged += TileSets_PropertyChanged;
+            Root.TileSetSelector.PropertyChanged += TileSetSelector_PropertyChanged;
+        }
+
+        private void TileSetSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var tileSetSelector = sender as TileSetSelectorVM;
+
+            switch (e.PropertyName)
+            {
+                case nameof(tileSetSelector.CurrentItem):
+                    UpdateWithTileSet(tileSetSelector.CurrentItem);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void UpdateWithTileSet(TileSetVM tileSet)
+        {
+            CurrentTileSet = tileSet;
+            SelectedIndexes.Clear();
         }
 
         #endregion Public Constructors
@@ -59,10 +80,10 @@ namespace OpenBreed.Editor.VM.Tiles
 
         public bool IsEmpty { get { return SelectedIndexes.Count == 0; } }
         public bool MultiSelect { get; set; }
+        public EditorVM Root { get; private set; }
         public List<int> SelectedIndexes { get; private set; }
         public SelectionRectangle SelectionRectangle { get; private set; }
         public SelectModeEnum SelectMode { get; private set; }
-        public TileSetsVM TileSets { get; private set; }
 
         #endregion Public Properties
 
@@ -188,19 +209,7 @@ namespace OpenBreed.Editor.VM.Tiles
             CenterCoord = CurrentTileSet.GetSnapCoords(new Point((MinCoord.X + MaxCoord.X) / 2, (MinCoord.Y + MaxCoord.Y) / 2));
         }
 
-        private void TileSets_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(TileSets.CurrentItem):
-                    CurrentTileSet = TileSets.CurrentItem;
-                    SelectedIndexes.Clear();
-                    break;
-                default:
-                    break;
-            }
-        }
-
         #endregion Private Methods
+
     }
 }

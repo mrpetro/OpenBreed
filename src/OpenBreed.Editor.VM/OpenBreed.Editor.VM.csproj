@@ -129,7 +129,7 @@
     <Compile Include="Sources\ISourceFormat.cs" />
     <Compile Include="Sources\BaseSource.cs" />
     <Compile Include="Sources\SourcesHandler.cs" />
-    <Compile Include="Sprites\SpriteSetViewerVM.cs" />
+    <Compile Include="Sprites\SpriteSetSelectorVM.cs" />
     <Compile Include="Sprites\SpriteSetVM.cs" />
     <Compile Include="Sprites\SpriteViewerVM.cs" />
     <Compile Include="Sprites\SpriteVM.cs" />
@@ -138,7 +138,7 @@
     <Compile Include="Tiles\Helpers\TilesSelector.cs" />
     <Compile Include="Tiles\TileSetPaletteSelectorVM.cs" />
     <Compile Include="Tiles\TileSetViewerVM.cs" />
-    <Compile Include="Tiles\TileSetsVM.cs" />
+    <Compile Include="Tiles\TileSetSelectorVM.cs" />
     <Compile Include="Tiles\TileSetVM.cs" />
     <Compile Include="Tiles\TileVM.cs" />
     <Compile Include="Tiles\Tools\TileSelectTool.cs" />

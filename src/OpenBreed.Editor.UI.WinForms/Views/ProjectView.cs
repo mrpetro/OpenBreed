@@ -88,7 +88,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         public void InitViews()
         {
             _toolsView.Initialize(_vm.Root.ToolsMan);
-            _tileSetView.Initialize(_vm.Root.TileSets);
+            _tileSetView.Initialize(_vm.Root);
             _spriteSetsView.Initialize(_vm.Root);
             _propSetsView.Initialize(_vm.Root.PropSets);
             _mapPalettesView.Initialize(_vm.Root.Palettes);

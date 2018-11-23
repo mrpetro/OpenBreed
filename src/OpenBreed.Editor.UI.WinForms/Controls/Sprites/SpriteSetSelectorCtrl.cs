@@ -11,17 +11,17 @@ using OpenBreed.Editor.VM.Sprites;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
 {
-    public partial class SpriteSetViewerCtrl : UserControl
+    public partial class SpriteSetSelectorCtrl : UserControl
     {
-        private SpriteSetViewerVM _vm;
+        private SpriteSetSelectorVM _vm;
 
-        public SpriteSetViewerCtrl()
+        public SpriteSetSelectorCtrl()
         {
             InitializeComponent();
 
         }
 
-        public void Initialize(SpriteSetViewerVM vm)
+        public void Initialize(SpriteSetSelectorVM vm)
         {
             _vm = vm;
 

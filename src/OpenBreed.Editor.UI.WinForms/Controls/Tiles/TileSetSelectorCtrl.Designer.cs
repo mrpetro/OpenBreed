@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Tiles
 {
-    partial class TileSetsCtrl
+    partial class TileSetSelectorCtrl
     {
         /// <summary> 
         /// Required designer variable.

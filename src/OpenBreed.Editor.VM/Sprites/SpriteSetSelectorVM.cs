@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
-    public class SpriteSetViewerVM : BaseViewModel
+    public class SpriteSetSelectorVM : BaseViewModel
     {
 
         #region Private Fields
@@ -21,11 +21,11 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Public Constructors
 
-        public SpriteSetViewerVM(EditorVM root)
+        public SpriteSetSelectorVM(EditorVM root)
         {
             Root = root;
 
-            PropertyChanged += SpriteSetsVM_PropertyChanged;
+            PropertyChanged += SpriteSetViewerVM_PropertyChanged;
         }
 
         #endregion Public Constructors
@@ -50,7 +50,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Private Methods
 
-        private void SpriteSetsVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void SpriteSetViewerVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {

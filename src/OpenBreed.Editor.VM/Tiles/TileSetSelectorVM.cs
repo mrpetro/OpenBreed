@@ -8,28 +8,24 @@ using System.Drawing;
 
 namespace OpenBreed.Editor.VM.Tiles
 {
-    public class TileSetsVM : BaseViewModel
+    public class TileSetSelectorVM : BaseViewModel
     {
+
         #region Private Fields
 
         private int _currentIndex = -1;
-        private TileSetVM _currentItem;
+        private TileSetVM _currentItem = null;
         private string _title;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TileSetsVM(EditorVM root)
+        public TileSetSelectorVM(EditorVM root)
         {
             Root = root;
 
-            TileSetViewer = new TileSetViewerVM(this);
-
-            Items = new BindingList<TileSetVM>();
-            Items.ListChanged += (s, e) => OnPropertyChanged(nameof(Items));
-
-            PropertyChanged += TileSetsVM_PropertyChanged;
+            PropertyChanged += TileSetSelectorVM_PropertyChanged;
         }
 
         #endregion Public Constructors
@@ -39,26 +35,16 @@ namespace OpenBreed.Editor.VM.Tiles
         public int CurrentIndex
         {
             get { return _currentIndex; }
-            set
-            {
-                if (SetProperty(ref _currentIndex, value))
-                    CurrentItem = Items[value];
-            }
+            set { SetProperty(ref _currentIndex, value); }
         }
 
         public TileSetVM CurrentItem
         {
             get { return _currentItem; }
-            set
-            {
-                if (SetProperty(ref _currentItem, value))
-                    CurrentIndex = Items.IndexOf(value);
-            }
+            set { SetProperty(ref _currentItem, value); }
         }
 
         public EditorVM Root { get; private set; }
-
-        public BindingList<TileSetVM> Items { get; private set; }
 
         public string Title
         {
@@ -66,35 +52,21 @@ namespace OpenBreed.Editor.VM.Tiles
             set { SetProperty(ref _title, value); }
         }
 
-        public TileSetViewerVM TileSetViewer { get; private set; }
-
         #endregion Public Properties
 
-        #region Public Methods
-
-        public void AddTileSet(string tileSetRef)
-        {
-            var tileSetSourceDef = Root.CurrentDatabase.GetSourceDef(tileSetRef);
-            if (tileSetSourceDef == null)
-                throw new Exception("No TileSetSource definition found with name: " + tileSetRef);
-
-            var source = Root.Sources.GetSource(tileSetSourceDef);
-
-            if (source == null)
-                throw new Exception("TileSet source error: " + tileSetRef);
-
-            Items.Add(TileSetVM.Create(this, source));
-
-            CurrentItem = Items.LastOrDefault();
-        }
+        #region Internal Methods
 
         internal void DrawTile(Graphics gfx, TileRef tileRef, float x, float y, int tileSize)
         {
-            if (tileRef.TileSetId < Items.Count)
-                Items[tileRef.TileSetId].DrawTile(gfx, tileRef.TileId, x, y, tileSize);
+            if (tileRef.TileSetId < Root.TileSets.Count)
+                Root.TileSets[tileRef.TileSetId].DrawTile(gfx, tileRef.TileId, x, y, tileSize);
             else
                 DrawDefaultTile(gfx, tileRef, x, y, tileSize);
         }
+
+        #endregion Internal Methods
+
+        #region Private Methods
 
         private void DrawDefaultTile(Graphics gfx, TileRef tileRef, float x, float y, int tileSize)
         {
@@ -117,9 +89,20 @@ namespace OpenBreed.Editor.VM.Tiles
             gfx.DrawString(string.Format("{0,2:D2}", tileRef.TileId % 100), font, brush, x + 2, y + 7);
         }
 
-        #endregion Public Methods
-
-        #region Private Methods
+        private void TileSetSelectorVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(CurrentIndex):
+                    UpdateCurrentItem();
+                    break;
+                case nameof(CurrentItem):
+                    UpdateCurrentIndex();
+                    break;
+                default:
+                    break;
+            }
+        }
 
         private void TileSetsVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -134,6 +117,19 @@ namespace OpenBreed.Editor.VM.Tiles
                 default:
                     break;
             }
+        }
+
+        private void UpdateCurrentIndex()
+        {
+            CurrentIndex = Root.TileSets.IndexOf(CurrentItem);
+        }
+
+        private void UpdateCurrentItem()
+        {
+            if (CurrentIndex == -1)
+                CurrentItem = null;
+            else
+                CurrentItem = Root.TileSets[CurrentIndex];
         }
 
         #endregion Private Methods

@@ -15,25 +15,25 @@ namespace OpenBreed.Editor.VM.Tiles
 {
     public class TileSetVM : BaseViewModel
     {
+
         #region Private Fields
 
         private string _name;
-        private TileSetsVM _owner;
         private PaletteVM _palette;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TileSetVM(TileSetsVM owner)
+        public TileSetVM(EditorVM root)
         {
-            Owner = owner;
+            Root = root;
 
             Items = new BindingList<TileVM>();
             Items.ListChanged += (s, e) => OnPropertyChanged(nameof(Items));
 
             PropertyChanged += TileSetVM_PropertyChanged;
-            Owner.Root.Palettes.PropertyChanged += Palettes_PropertyChanged;
+            Root.Palettes.PropertyChanged += Palettes_PropertyChanged;
         }
 
         #endregion Public Constructors
@@ -49,12 +49,6 @@ namespace OpenBreed.Editor.VM.Tiles
             set { SetProperty(ref _name, value); }
         }
 
-        public TileSetsVM Owner
-        {
-            get { return _owner; }
-            set { SetProperty(ref _owner, value); }
-        }
-
         public PaletteVM Palette
         {
             get { return _palette; }
@@ -63,7 +57,7 @@ namespace OpenBreed.Editor.VM.Tiles
                 var prevPalette = _palette;
                 if (SetProperty(ref _palette, value))
                 {
-                    if(prevPalette != null)
+                    if (prevPalette != null)
                         prevPalette.PropertyChanged -= Palette_PropertyChanged;
 
                     _palette.PropertyChanged += Palette_PropertyChanged;
@@ -71,6 +65,7 @@ namespace OpenBreed.Editor.VM.Tiles
             }
         }
 
+        public EditorVM Root { get; private set; }
         public BaseSource Source { get; private set; }
 
         public int TileSize { get; private set; }
@@ -83,11 +78,11 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #region Public Methods
 
-        public static TileSetVM Create(TileSetsVM owner, BaseSource source)
+        public static TileSetVM Create(EditorVM root, BaseSource source)
         {
             var model = source.Load() as TileSetModel;
 
-            var newTileSet = new TileSetVM(owner);
+            var newTileSet = new TileSetVM(root);
             newTileSet.Source = source;
             newTileSet.Name = source.Name;
             newTileSet.TileSize = model.TileSize;
@@ -273,8 +268,8 @@ namespace OpenBreed.Editor.VM.Tiles
         {
             switch (e.PropertyName)
             {
-                case nameof(Owner.Root.Palettes.CurrentItem):
-                    Palette = Owner.Root.Palettes.CurrentItem;
+                case nameof(Root.Palettes.CurrentItem):
+                    Palette = Root.Palettes.CurrentItem;
                     break;
                 default:
                     break;

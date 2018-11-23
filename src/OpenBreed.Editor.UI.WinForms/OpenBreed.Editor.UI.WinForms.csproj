@@ -103,11 +103,11 @@
     <Compile Include="Controls\Props\PropSetsCtrl.Designer.cs">
       <DependentUpon>PropSetsCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Sprites\SpriteSetViewerCtrl.cs">
+    <Compile Include="Controls\Sprites\SpriteSetSelectorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Sprites\SpriteSetViewerCtrl.Designer.cs">
-      <DependentUpon>SpriteSetViewerCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Sprites\SpriteSetSelectorCtrl.Designer.cs">
+      <DependentUpon>SpriteSetSelectorCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Sprites\SpriteViewerCtrl.cs">
       <SubType>UserControl</SubType>
@@ -121,11 +121,11 @@
     <Compile Include="Controls\Tiles\TileSetPaletteSelectorCtrl.Designer.cs">
       <DependentUpon>TileSetPaletteSelectorCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Tiles\TileSetsCtrl.cs">
+    <Compile Include="Controls\Tiles\TileSetSelectorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Tiles\TileSetsCtrl.Designer.cs">
-      <DependentUpon>TileSetsCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Tiles\TileSetSelectorCtrl.Designer.cs">
+      <DependentUpon>TileSetSelectorCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Tiles\TileSetViewerCtrl.cs">
       <SubType>UserControl</SubType>
@@ -268,8 +268,8 @@
     <EmbeddedResource Include="Controls\Props\PropSetsCtrl.resx">
       <DependentUpon>PropSetsCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Sprites\SpriteSetViewerCtrl.resx">
-      <DependentUpon>SpriteSetViewerCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Sprites\SpriteSetSelectorCtrl.resx">
+      <DependentUpon>SpriteSetSelectorCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Sprites\SpriteViewerCtrl.resx">
       <DependentUpon>SpriteViewerCtrl.cs</DependentUpon>
@@ -277,8 +277,8 @@
     <EmbeddedResource Include="Controls\Tiles\TileSetPaletteSelectorCtrl.resx">
       <DependentUpon>TileSetPaletteSelectorCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Tiles\TileSetsCtrl.resx">
-      <DependentUpon>TileSetsCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Tiles\TileSetSelectorCtrl.resx">
+      <DependentUpon>TileSetSelectorCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Tiles\TileSetViewerCtrl.resx">
       <DependentUpon>TileSetViewerCtrl.cs</DependentUpon>

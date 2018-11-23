@@ -29,7 +29,7 @@ namespace OpenBreed.Editor.VM.Sprites
             Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
 
             PropertyChanged += SpriteViewerVM_PropertyChanged;
-            Root.SpriteSetViewer.PropertyChanged += SpriteSetViewer_PropertyChanged;
+            Root.SpriteSetViewer.PropertyChanged += SpriteSetSelector_PropertyChanged;
         }
 
         #endregion Public Constructors
@@ -56,14 +56,14 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Private Methods
 
-        private void SpriteSetViewer_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void SpriteSetSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            var spriteSetViewer = sender as SpriteSetViewerVM;
+            var spriteSetSelector = sender as SpriteSetSelectorVM;
 
             switch (e.PropertyName)
             {
-                case nameof(spriteSetViewer.CurrentItem):
-                    UpdateWithSpriteSet(spriteSetViewer.CurrentItem);
+                case nameof(spriteSetSelector.CurrentItem):
+                    UpdateWithSpriteSet(spriteSetSelector.CurrentItem);
                     break;
                 default:
                     break;

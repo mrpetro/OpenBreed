@@ -54,6 +54,11 @@ namespace OpenBreed.Editor.VM
     {
         public IDialogProvider DialogProvider { get; private set; }
 
+
+        public TileSetViewerVM TileSetViewer { get; private set; }
+
+
+
         #region Public Constructors
 
         public EditorVM(IDialogProvider dialogProvider)
@@ -63,13 +68,17 @@ namespace OpenBreed.Editor.VM
             Settings = new SettingsMan();
             ToolsMan = new ToolsMan();
             Project = new ProjectVM(this);
-            TileSets = new TileSetsVM(this);
+            TileSetSelector = new TileSetSelectorVM(this);
             Palettes = new PalettesVM(this);
 
             SpriteSets = new BindingList<SpriteSetVM>();
             SpriteSets.ListChanged += (s, e) => OnPropertyChanged(nameof(SpriteSets));
 
-            SpriteSetViewer = new SpriteSetViewerVM(this);
+            TileSets = new BindingList<TileSetVM>();
+            TileSets.ListChanged += (s, e) => OnPropertyChanged(nameof(TileSets));
+
+            TileSetViewer = new TileSetViewerVM(this);
+            SpriteSetViewer = new SpriteSetSelectorVM(this);
             SpriteViewer = new SpriteViewerVM(this);
             PropSets = new PropSetsVM(this);
             Projects = new ProjectsHandler(this);
@@ -103,11 +112,13 @@ namespace OpenBreed.Editor.VM
 
         public SourcesHandler Sources { get; set; }
 
-        public SpriteSetViewerVM SpriteSetViewer { get; set; }
+        public SpriteSetSelectorVM SpriteSetViewer { get; set; }
         public SpriteViewerVM SpriteViewer { get; set; }
         public BindingList<SpriteSetVM> SpriteSets { get; private set; }
 
-        public TileSetsVM TileSets { get; private set; }
+        public BindingList<TileSetVM> TileSets { get; private set; }
+
+        public TileSetSelectorVM TileSetSelector { get; private set; }
 
         public ToolsMan ToolsMan { get; private set; }
 
@@ -132,6 +143,20 @@ namespace OpenBreed.Editor.VM
         public void Dispose()
         {
             Settings.Store();
+        }
+
+        public void AddTileSet(string tileSetRef)
+        {
+            var tileSetSourceDef = CurrentDatabase.GetSourceDef(tileSetRef);
+            if (tileSetSourceDef == null)
+                throw new Exception("No TileSetSource definition found with name: " + tileSetRef);
+
+            var source = Sources.GetSource(tileSetSourceDef);
+
+            if (source == null)
+                throw new Exception("TileSet source error: " + tileSetRef);
+
+            TileSets.Add(TileSetVM.Create(this, source));
         }
 
         public void AddSpriteSet(string spriteSetRef)

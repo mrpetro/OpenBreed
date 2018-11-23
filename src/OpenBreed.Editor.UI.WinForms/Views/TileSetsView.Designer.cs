@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TileSets = new OpenBreed.Editor.UI.WinForms.Controls.Tiles.TileSetsCtrl();
+            this.TileSets = new OpenBreed.Editor.UI.WinForms.Controls.Tiles.TileSetSelectorCtrl();
             this.TileSelector = new OpenBreed.Editor.UI.WinForms.Controls.Tiles.TileSetViewerCtrl();
             this.Panel = new System.Windows.Forms.Panel();
             this.Panel.SuspendLayout();
@@ -82,7 +82,7 @@
 
         #endregion
 
-        private Controls.Tiles.TileSetsCtrl TileSets;
+        private Controls.Tiles.TileSetSelectorCtrl TileSets;
         private Controls.Tiles.TileSetViewerCtrl TileSelector;
         private System.Windows.Forms.Panel Panel;
     }
