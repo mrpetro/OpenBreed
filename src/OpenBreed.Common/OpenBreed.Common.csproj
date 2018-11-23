@@ -48,6 +48,7 @@
     <Compile Include="Configs\IConfig.cs" />
     <Compile Include="Configs\IConfigCtrl.cs" />
     <Compile Include="Drawing\BitmapHelper.cs" />
+    <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="FileMan.cs" />
     <Compile Include="Helpers\MathHelper.cs" />
     <Compile Include="Logging\LogFile.cs" />
