@@ -20,7 +20,8 @@ BLK(tileset) reader for ABTA
 
 For starters, write some missing readers for the resources from first two titles (ABSE and ABHC) and put them in OpenBreed.Common repository.
 
-**Development platform**
+**Development stuff**
+
 Source code language: C#
 Platform: .NET 4.6.1 for now
 DevEnv: MSVS 2017 (Community or compatible)
