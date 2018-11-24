@@ -6,25 +6,7 @@ Open source reimplementation of classic Alien Breed 2D games:
  
  **Obtaining game resources**
  
-Here is a table of *Alien Breed* games with their ports and information about resources extraction possibility:
-
-+--------+-----------------------------------------------------------------------------+
-|        |                                    PORTS                                    |
-|  Game  +-----------------------------------------------------------------------------+
-|        |        PC DOS           |   Amiga(500/600/1200)   |       Amiga CD32        |
-+--------+-------------------------+-------------------------+-------------------------+
-|  ABSE  |     Doesn't exist       |      Amiga DOS files    |      Doesn't exist      |
-|        |                         |(Some crunched with ATN!)|                         |
-+--------+-------------------------+-------------------------+-------------------------+
-|  ABHC  |     Doesn't exist       |       No AmigaDOS       |      Amiga DOS files    |
-|        |                         |  (Difficult to extract) |(Some crunched with ATN!)|
-+--------+-------------------------+-------------------------+-------------------------+
-|  ABTA  |     EPF archive         |       No AmigaDOS       |       No AmigaDOS       |
-|        |  (Easy to extract)      |  (Difficult to extract) |  (Difficult to extract) |
-+--------+-------------------------+-------------------------+-------------------------+
-
-
-So the table states that to obtain resources for ABSE is to get them from Amiga port. This would require some decrunching of ATN! files.
+Best way to obtain resources for ABSE is to get them from Amiga port. This would require some decrunching of ATN! files.
 As for ABHC, luckly the game was added as a bonus to ABTA CD32 release and this verion has standard file system on CD.  This would also require some ATN! decrunching.
 ABTA PC port uses exactly same resources as Amiga version but the container is EPF archive, which can be handled.
 
