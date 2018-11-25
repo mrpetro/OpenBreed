@@ -11,86 +11,135 @@ using OpenBreed.Editor.VM.Tiles;
 using OpenBreed.Editor.VM.Maps;
 using OpenBreed.Editor.VM.Props;
 using OpenBreed.Editor.VM.Maps.Tools;
+using OpenBreed.Editor.VM.Base;
+using System.IO;
+using OpenBreed.Common;
 
 namespace OpenBreed.Editor.VM.Project
 {
-    public delegate void CurrentProjectChangedEventHandler(object sender, CurrentProjectChangedEventArgs e);
-
-    public class CurrentProjectChangedEventArgs : EventArgs
+    public enum ProjectState
     {
-        public LevelDef Project { get; set; }
-
-        public CurrentProjectChangedEventArgs(LevelDef project)
-        {
-            Project = project;
-        }
+        Closed,
+        New,
+        Opened,
+        Closing
     }
 
-    public class ProjectVM
+    public class ProjectVM : BaseViewModel
     {
-        private LevelDef m_CurrentProject = null;
 
-        public EditorVM Root { get; private set; }
+        #region Private Fields
 
-        public bool IsProjectOpened { get { return CurrentProject != null; } }
+        private LevelDef _currentLevel;
+        private ProjectState _state;
 
-        public event CurrentProjectChangedEventHandler CurrentProjectChanged;
+        #endregion Private Fields
 
-        public LevelDef CurrentProject
-        {
-            get
-            {
-                return m_CurrentProject;
-            }
-
-            set
-            {
-                if (m_CurrentProject != value)
-                {
-                    m_CurrentProject = value;
-                    OnCurrentProjectChanged(new CurrentProjectChangedEventArgs(m_CurrentProject));
-                }
-            }
-        }
+        #region Public Constructors
 
         public ProjectVM(EditorVM root)
         {
             Root = root;
         }
 
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public LevelDef CurrentLevel
+        {
+            get { return _currentLevel; }
+            set { SetProperty(ref _currentLevel, value); }
+        }
+
+        public bool IsLevelOpened { get { return CurrentLevel != null; } }
+
+        public EditorVM Root { get; private set; }
+
+        public ProjectState State
+        {
+            get { return _state; }
+            set { SetProperty(ref _state, value); }
+        }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
         public void Load(SourceDef sourceDef)
         {
             var source = Root.Sources.GetSource(sourceDef);
 
-            var projectDef = source.Load() as LevelDef;
+            var levelDef = source.Load() as LevelDef;
 
             Root.TileSets.Clear();
-            Root.AddTileSet(projectDef.TileSetResourceRef);
+            Root.AddTileSet(levelDef.TileSetResourceRef);
 
             Root.TileSetSelector.CurrentItem = Root.TileSets.FirstOrDefault();
 
             Root.SpriteSets.Clear();
-            foreach (var spriteSetSourceRef in projectDef.SpriteSetResourceRefs)
+            foreach (var spriteSetSourceRef in levelDef.SpriteSetResourceRefs)
                 Root.AddSpriteSet(spriteSetSourceRef);
 
             Root.SpriteSetViewer.CurrentItem = Root.SpriteSets.FirstOrDefault();
-            if(Root.SpriteSetViewer.CurrentItem != null)
+            if (Root.SpriteSetViewer.CurrentItem != null)
                 Root.SpriteViewer.CurrentItem = Root.SpriteSetViewer.CurrentItem.Items.FirstOrDefault();
 
-            if (projectDef.PropertySetResourceRef != null)
-                Root.PropSets.AddPropertySet(projectDef.PropertySetResourceRef);
+            if (levelDef.PropertySetResourceRef != null)
+                Root.PropSets.AddPropertySet(levelDef.PropertySetResourceRef);
 
-            var mapSourceDef = Root.CurrentDatabase.GetSourceDef(projectDef.MapResourceRef);
+            var mapSourceDef = Root.CurrentDatabase.GetSourceDef(levelDef.MapResourceRef);
             if (mapSourceDef != null)
                 Root.Map.Load(mapSourceDef);
 
-
-            CurrentProject = projectDef;
+            CurrentLevel = levelDef;
         }
 
-        protected virtual void OnCurrentProjectChanged(CurrentProjectChangedEventArgs e)
+        public void TryNewLevel()
         {
-            if (CurrentProjectChanged != null) CurrentProjectChanged(this, e);
+            Root.DialogProvider.ShowMessage("Creating new project is not implemented yet.", "Feature not implemented");
         }
+
+        public bool TryOpenLevel()
+        {
+            if (Root.CurrentDatabase == null)
+                Root.OpenABTADatabase();
+
+            string resourcesDir = Path.Combine(ProgramTools.AppDir, "Resources", "ABTA", "Maps");
+
+            var openFileDialog = Root.DialogProvider.OpenFileDialog();
+            openFileDialog.Title = "Open Map project file...";
+            openFileDialog.Filter = "OpenABEd project files (*.xml)|*.xml|All Files (*.*)|*.*";
+            openFileDialog.Multiselect = false;
+            var answer = openFileDialog.Show();
+
+            if (answer == DialogAnswer.OK)
+            {
+                string filePath = openFileDialog.FileName;
+
+                var sourceDef = new DirectoryFileSourceDef();
+                sourceDef.DirectoryPath = Path.GetDirectoryName(filePath);
+                sourceDef.Name = Path.GetFileName(filePath);
+                sourceDef.Type = "LevelXML";
+
+                Load(sourceDef);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        #endregion Public Methods
+
+        #region Internal Methods
+
+        internal bool TryClose()
+        {
+            return true;
+        }
+
+        #endregion Internal Methods
+
     }
 }

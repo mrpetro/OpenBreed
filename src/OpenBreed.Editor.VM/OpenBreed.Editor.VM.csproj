@@ -74,10 +74,11 @@
     <Compile Include="Database\GameDatabaseDef.cs" />
     <Compile Include="EditorVM.cs" />
     <Compile Include="IDialogProvider.cs" />
+    <Compile Include="IFolderBrowserQuery.cs" />
+    <Compile Include="IOpenFileQuery.cs" />
+    <Compile Include="ISaveFileQuery.cs" />
     <Compile Include="IToolController.cs" />
     <Compile Include="Levels\Readers\XML\LevelDef.cs" />
-    <Compile Include="Levels\Readers\XML\LevelSetDef.cs" />
-    <Compile Include="Levels\Readers\XML\LevelDefReader.cs" />
     <Compile Include="Maps\Commands\CmdPropertiesInsert.cs" />
     <Compile Include="Maps\Commands\CmdResize.cs" />
     <Compile Include="Maps\Commands\CmdTilesInsert.cs" />
@@ -118,8 +119,6 @@
     <Compile Include="Database\Resources\ResourceDef.cs" />
     <Compile Include="Database\Sources\SourceDef.cs" />
     <Compile Include="Database\GameDatabase.cs" />
-    <Compile Include="Levels\Builders\LevelBuilder.cs" />
-    <Compile Include="Levels\ProjectDef.cs" />
     <Compile Include="Levels\ProjectsHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sources\DirectoryFileSource.cs" />

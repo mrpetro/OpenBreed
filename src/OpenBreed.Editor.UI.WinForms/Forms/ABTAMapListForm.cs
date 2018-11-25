@@ -58,17 +58,6 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             }
         }
 
-        private void UpdateLevelInfo(LevelDef levelDef)
-        {
-            using (var model = m_Model.Projects.GetModel(levelDef))
-            {
-                tbxName.Text = model.Name;
-                //tbxMap.Text = model.Map.Source.Name;
-                //tbxDescription.Text = model.Map.Mission.MTXT;
-                //cbxSpriteSets.DataSource = model.SpriteSets.Select(item => item.PresentationName).ToList();
-            }
-        }
-
         private void btnLevelEdit_Click(object sender, EventArgs e)
         {
             DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -79,8 +68,8 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         {
             SelectedLevelDef = (LevelDef)lstLevels.SelectedItem;
 
-            if(lstLevels.SelectedItem != null)
-                UpdateLevelInfo(SelectedLevelDef);
+            //if(lstLevels.SelectedItem != null)
+            //    UpdateLevelInfo(SelectedLevelDef);
         }
     }
 }

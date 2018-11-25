@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.VM;
+﻿using OpenBreed.Editor.UI.WinForms.Views;
+using OpenBreed.Editor.VM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace OpenBreed.Editor.UI.WinForms
             }
         }
 
-        private DialogAnswer ToDialogAnswer(DialogResult result)
+        internal static DialogAnswer ToDialogAnswer(DialogResult result)
         {
             switch (result)
             {
@@ -71,59 +72,19 @@ namespace OpenBreed.Editor.UI.WinForms
             return ToDialogAnswer(MessageBox.Show(text, caption, ToMessageBoxButtons(buttons)));
         }
 
-        public FileDialogResult ShowOpenFileDialog(string title, string filter, bool mutliSelect)
+        public IFolderBrowserQuery FolderBrowserDialog()
         {
-            using (var fileDialog = new OpenFileDialog())
-            {
-                fileDialog.Title = title;
-                fileDialog.Filter = filter;
-                fileDialog.Multiselect = mutliSelect;
-                var answer = ToDialogAnswer(fileDialog.ShowDialog());
-                var fileNames = fileDialog.FileNames;
-                return new FileDialogResult(answer, fileNames);
-            }
+            return new FolderBrowserQuery();
         }
 
-        public FileDialogResult ShowOpenFileDialog(string title, string filter, string initialDirectory, string fileName = null)
+        public IOpenFileQuery OpenFileDialog()
         {
-            using (var fileDialog = new OpenFileDialog())
-            {
-                fileDialog.Title = title;
-                fileDialog.Filter = filter;
-                fileDialog.InitialDirectory = initialDirectory;
-                fileDialog.FileName = fileName;
-
-                var answer = ToDialogAnswer(fileDialog.ShowDialog());
-                var fileNames = fileDialog.FileNames;
-                return new FileDialogResult(answer, fileNames);
-            }
+            return new OpenFileQuery();
         }
 
-        public FileDialogResult ShowSaveFileDialog(string title, string filter, string initialDirectory, string fileName = null)
+        public ISaveFileQuery SaveFileDialog()
         {
-            using (var fileDialog = new SaveFileDialog())
-            {
-                fileDialog.Title = title;
-                fileDialog.Filter = filter;
-                fileDialog.InitialDirectory = initialDirectory;
-                fileDialog.FileName = fileName;
-
-                var answer = ToDialogAnswer(fileDialog.ShowDialog());
-                var fileNames = fileDialog.FileNames;
-                return new FileDialogResult(answer, fileNames);
-            }
-        }
-
-        public FolderBrowserResult ShowFolderBrowserDialog(string title, string initialDirectory)
-        {
-            using (var folderBrower = new FolderBrowserDialog())
-            {
-                folderBrower.Description = title;
-                folderBrower.SelectedPath = initialDirectory;
-                var answer = ToDialogAnswer(folderBrower.ShowDialog());
-                var selectedDirectory = folderBrower.SelectedPath;
-                return new FolderBrowserResult(answer, selectedDirectory);
-            }
+            return new SaveFileQuery();
         }
     }
 }

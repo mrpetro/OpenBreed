@@ -6,22 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Xml.Serialization;
-using System.Xml;
-using OpenABEd.Modules.MapEditor;
-using OpenABEd.Modules;
+
 using OpenBreed.Editor.VM;
-using OpenBreed.Editor.VM.Database;
-using OpenBreed.Editor.VM.Maps;
-using OpenBreed.Editor.VM.Tiles;
-using OpenBreed.Editor.VM.Palettes;
-using OpenBreed.Editor.VM.Levels;
-using OpenBreed.Editor.UI.WinForms.Views;
-using OpenBreed.Editor.UI.WinForms.Forms;
-using System.Diagnostics;
-using OpenBreed.Editor.VM.Project;
+
 using OpenBreed.Common;
 
 namespace OpenBreed.Editor.UI.WinForms.Forms
@@ -31,17 +18,14 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
         #region Public Fields
 
-        public const string APP_NAME = "Alien Breed Map Editor";
+        public const string APP_NAME = "Open Breed Map Editor";
+
+        public readonly MainFormGeneralState GeneralState;
+        public readonly MainFormLevelState LevelState;
 
         #endregion Public Fields
 
-        #region Private Fields
-
-        private readonly MainFormMapEditHandler m_LevelEditHandler;
-        private readonly MainFormGeneralHandler m_MapsHandler;
         //private LogConsoleView m_LogConsoleView = null;
-
-        #endregion Private Fields
 
         #region Public Constructors
 
@@ -49,17 +33,23 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         {
             InitializeComponent();
 
-            m_MapsHandler = new MainFormGeneralHandler(this);
-            m_LevelEditHandler = new MainFormMapEditHandler(this);
+            FormClosing += new FormClosingEventHandler(MainForm_FormClosing);
+
+            GeneralState = new MainFormGeneralState(this);
+            LevelState = new MainFormLevelState(this);
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!VM.TryExit())
+                e.Cancel = true;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public EditorVM _vm { get; private set; }
-        public MainFormGeneralHandler GeneralHandler { get { return m_MapsHandler; } }
-        public MainFormMapEditHandler LevelEditHandler { get { return m_LevelEditHandler; } }
+        public EditorVM VM { get; private set; }
 
         #endregion Public Properties
 
@@ -70,7 +60,29 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             if (vm == null)
                 throw new ArgumentNullException(nameof(vm));
 
-            _vm = vm;
+            VM = vm;
+
+            VM.Project.PropertyChanged += Project_PropertyChanged;
+        }
+
+        private void Project_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(VM.Project.CurrentLevel):
+                    ProjectOpened();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void ProjectOpened()
+        {
+            if(VM.Project.CurrentLevel != null)
+                LevelState.SetMapEditState(VM.Project);
+            //else
+
         }
 
         #endregion Public Methods
@@ -84,7 +96,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
         private void ABTAGameRunToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _vm.TryRunABTAGame();
+            VM.TryRunABTAGame();
         }
 
         void ChangeCheckedState(ToolStripMenuItem menuItem, Control ctrl)
@@ -113,7 +125,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
         private void OpenOptionsForm()
         {
-            using (OptionsForm optionsForm = new OptionsForm(_vm.Settings))
+            using (OptionsForm optionsForm = new OptionsForm(VM.Settings))
             {
                 DialogResult result = optionsForm.ShowDialog();
 

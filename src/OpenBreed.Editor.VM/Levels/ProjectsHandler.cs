@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using OpenBreed.Editor.VM.Database;
 using System.Collections;
-using OpenBreed.Editor.VM.Levels.Builders;
-using OpenBreed.Editor.VM.Levels.Readers.XML;
 using OpenBreed.Editor.VM.Sources;
+using OpenBreed.Editor.VM.Levels.Readers.XML;
 
 namespace OpenBreed.Editor.VM.Levels
 {
@@ -50,43 +49,6 @@ namespace OpenBreed.Editor.VM.Levels
         public void Save()
         {
 
-        }
-
-        public ProjectDef GetModel(string levelRef)
-        {
-            var levelSourceDef = Editor.CurrentDatabase.GetSourceDef(levelRef);
-
-            if (levelSourceDef == null)
-                throw new Exception("No Level definition found with name: " + levelSourceDef);
-
-            var source = Editor.Sources.GetSource(levelSourceDef);
-
-            if (source == null)
-                throw new Exception("Level source error: " + levelRef);
-
-            return source.Load() as ProjectDef;
-        }
-
-        public ProjectDef GetModel(LevelDef levelDef)
-        {
-            var levelBuilder = LevelBuilder.NewLevel();
-
-            levelBuilder.SetId(levelDef.Id);
-            levelBuilder.SetName(levelDef.Name);
-
-            Editor.Map.Set(levelDef.MapResourceRef);
-
-            Editor.TileSets.Clear();
-            Editor.AddTileSet(levelDef.TileSetResourceRef);
-
-            Editor.PropSets.Items.Clear();
-            Editor.PropSets.AddPropertySet(levelDef.PropertySetResourceRef);
-
-            Editor.SpriteSets.Clear();
-            foreach (var spriteSetSourceRef in levelDef.SpriteSetResourceRefs)
-                Editor.AddSpriteSet(spriteSetSourceRef);
-
-            return levelBuilder.Build();
         }
     }
 }

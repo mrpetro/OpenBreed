@@ -17,9 +17,9 @@ using OpenBreed.Common.Commands;
 
 namespace OpenBreed.Editor.UI.WinForms.Forms
 {
-    public class MainFormMapEditHandler
+    public class MainFormLevelState
     {
-        private readonly MainForm m_MainForm;
+        public readonly MainForm MainForm;
 
         private ProjectView _projectView;
 
@@ -46,9 +46,9 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
         private string m_ActiveName;
 
-        public MainFormMapEditHandler(MainForm mainForm)
+        public MainFormLevelState(MainForm mainForm)
         {
-            m_MainForm = mainForm;
+            MainForm = mainForm;
         }
 
         void ProjectView_ActiveContentChanged(object sender, EventArgs e)
@@ -70,28 +70,28 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         public void UnsetLevelEditState(ProjectVM projectPmod)
         {
             //Setup the File menu
-            m_MainForm.FileToolStripMenuItem.DropDownItems.Remove(FileSeparator1);
-            m_MainForm.FileToolStripMenuItem.DropDownItems.Remove(FileSaveToolStripMenuItem);
-            m_MainForm.FileToolStripMenuItem.DropDownItems.Remove(FileSaveAsToolStripMenuItem);
-            m_MainForm.FileToolStripMenuItem.DropDownItems.Remove(FileCloseToolStripMenuItem);
-            m_MainForm.FileToolStripMenuItem.DropDownItems.Remove(FileSeparator2);
+            MainForm.FileToolStripMenuItem.DropDownItems.Remove(FileSeparator1);
+            MainForm.FileToolStripMenuItem.DropDownItems.Remove(FileSaveToolStripMenuItem);
+            MainForm.FileToolStripMenuItem.DropDownItems.Remove(FileSaveAsToolStripMenuItem);
+            MainForm.FileToolStripMenuItem.DropDownItems.Remove(FileCloseToolStripMenuItem);
+            MainForm.FileToolStripMenuItem.DropDownItems.Remove(FileSeparator2);
 
             //Setup the Edit menu
-            m_MainForm.EditToolStripMenuItem.Enabled = false;
+            MainForm.EditToolStripMenuItem.Enabled = false;
 
             projectPmod.Root.Map.Commands.CommandsUpdated -= Commands_CommandsUpdated;
 
-            m_MainForm.EditToolStripMenuItem.DropDownItems.Remove(EditUndoToolStripMenuItem);
-            m_MainForm.EditToolStripMenuItem.DropDownItems.Remove(EditRedoToolStripMenuItem);
+            MainForm.EditToolStripMenuItem.DropDownItems.Remove(EditUndoToolStripMenuItem);
+            MainForm.EditToolStripMenuItem.DropDownItems.Remove(EditRedoToolStripMenuItem);
 
             //Setup the View menu
-            m_MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewMapBodyMenuItem);
-            m_MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewMapPropertiesMenuItem);
-            m_MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewMapPalettesMenuItem);
-            m_MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewTileSetMenuItem);
-            m_MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewSpriteSetsMenuItem);
-            m_MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewPropertySetMenuItem);
-            m_MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewToolsMenuItem);
+            MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewMapBodyMenuItem);
+            MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewMapPropertiesMenuItem);
+            MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewMapPalettesMenuItem);
+            MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewTileSetMenuItem);
+            MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewSpriteSetsMenuItem);
+            MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewPropertySetMenuItem);
+            MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewToolsMenuItem);
         }
 
         private void Commands_CommandsUpdated(object sender, CommandsUpdatedEventArgs e)
@@ -107,14 +107,13 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             if (_projectView != null)
                 throw new InvalidOperationException("Previous ProjectView not closed!");
 
-
-            m_MainForm.SuspendLayout();
+            MainForm.SuspendLayout();
             _projectView = new ProjectView();
-            _projectView.Initialize(projectPmod);
             _projectView.Dock = DockStyle.Fill;
-            m_MainForm.Controls.Add(_projectView);
-            m_MainForm.Controls.SetChildIndex(_projectView, 0);
-            m_MainForm.ResumeLayout();
+            MainForm.Controls.Add(_projectView);
+            MainForm.Controls.SetChildIndex(_projectView, 0);
+            _projectView.Initialize(projectPmod);
+            MainForm.ResumeLayout();
 
             //Setup the File menu
             FileSeparator1 = new ToolStripSeparator();
@@ -126,15 +125,15 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             FileCloseToolStripMenuItem = new ToolStripMenuItem("Close");
             FileCloseToolStripMenuItem.Click += (s, a) => Tools.TryAction(CloseProject);
 
-            m_MainForm.FileToolStripMenuItem.DropDownItems.Add(FileSeparator1);
-            m_MainForm.FileToolStripMenuItem.DropDownItems.Add(FileSaveToolStripMenuItem);
-            m_MainForm.FileToolStripMenuItem.DropDownItems.Add(FileSaveAsToolStripMenuItem);
-            m_MainForm.FileToolStripMenuItem.DropDownItems.Add(FileSeparator2);
-            m_MainForm.FileToolStripMenuItem.DropDownItems.Add(FileCloseToolStripMenuItem);
+            MainForm.FileToolStripMenuItem.DropDownItems.Add(FileSeparator1);
+            MainForm.FileToolStripMenuItem.DropDownItems.Add(FileSaveToolStripMenuItem);
+            MainForm.FileToolStripMenuItem.DropDownItems.Add(FileSaveAsToolStripMenuItem);
+            MainForm.FileToolStripMenuItem.DropDownItems.Add(FileSeparator2);
+            MainForm.FileToolStripMenuItem.DropDownItems.Add(FileCloseToolStripMenuItem);
 
             //Setup the Edit menu
-            m_MainForm.EditToolStripMenuItem.Enabled = true;
-            m_MainForm.EditToolStripMenuItem.Visible = true;
+            MainForm.EditToolStripMenuItem.Enabled = true;
+            MainForm.EditToolStripMenuItem.Visible = true;
 
             EditUndoToolStripMenuItem = new ToolStripMenuItem("Undo");
             EditUndoToolStripMenuItem.ShowShortcutKeys = true;
@@ -151,12 +150,12 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
             projectPmod.Root.Map.Commands.CommandsUpdated += Commands_CommandsUpdated;
 
-            m_MainForm.EditToolStripMenuItem.DropDownItems.Add(EditUndoToolStripMenuItem);
-            m_MainForm.EditToolStripMenuItem.DropDownItems.Add(EditRedoToolStripMenuItem);
+            MainForm.EditToolStripMenuItem.DropDownItems.Add(EditUndoToolStripMenuItem);
+            MainForm.EditToolStripMenuItem.DropDownItems.Add(EditRedoToolStripMenuItem);
 
             //Setup the View menu
-            m_MainForm.ViewToolStripMenuItem.Enabled = true;
-            m_MainForm.ViewToolStripMenuItem.Visible = true;
+            MainForm.ViewToolStripMenuItem.Enabled = true;
+            MainForm.ViewToolStripMenuItem.Visible = true;
 
             ViewMapBodyMenuItem = new ToolStripMenuItem("Map body");
             ViewMapBodyMenuItem.Click += (s, a) => _projectView.ShowView(ProjectViewType.MapBody);
@@ -179,19 +178,21 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             ViewToolsMenuItem = new ToolStripMenuItem("Tools");
             ViewToolsMenuItem.Click += (s, a) => _projectView.ShowView(ProjectViewType.Tools);
 
-            m_MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewMapBodyMenuItem);
-            m_MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewMapPropertiesMenuItem);
-            m_MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewMapPalettesMenuItem);
-            m_MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewTileSetMenuItem);
-            m_MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewSpriteSetsMenuItem);
-            m_MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewPropertySetMenuItem);
-            m_MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewToolsMenuItem);
+            MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewMapBodyMenuItem);
+            MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewMapPropertiesMenuItem);
+            MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewMapPalettesMenuItem);
+            MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewTileSetMenuItem);
+            MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewSpriteSetsMenuItem);
+            MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewPropertySetMenuItem);
+            MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewToolsMenuItem);
 
-            m_MainForm.Text = $"{MainForm.APP_NAME} - {projectPmod.CurrentProject.Name}";
+            MainForm.Text = $"{MainForm.APP_NAME} - {projectPmod.CurrentLevel.Name}";
 
-            m_MainForm.FormClosing += MainForm_FormClosing;
+            MainForm.FormClosing += MainForm_FormClosing;
 
             _projectView.ActiveContentChanged += new EventHandler(ProjectView_ActiveContentChanged);
+
+            _projectView.InitViews();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -201,19 +202,19 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
         public void SaveMap()
         {
-            m_MainForm._vm.Project.Root.Map.Save();
+            MainForm.VM.Project.Root.Map.Save();
         }
 
         public void SaveMapAs()
         {
-            string proposedFileName = m_MainForm._vm.Project.Root.Map.Title.Replace("*", "");
-            SaveFileDialogHelper.PrepareToSaveMAPFile(m_MainForm.SaveFileDialog, proposedFileName);
+            string proposedFileName = MainForm.VM.Project.Root.Map.Title.Replace("*", "");
+            SaveFileDialogHelper.PrepareToSaveMAPFile(MainForm.SaveFileDialog, proposedFileName);
 
-            DialogResult result = m_MainForm.SaveFileDialog.ShowDialog();
+            DialogResult result = MainForm.SaveFileDialog.ShowDialog();
 
             if (result == System.Windows.Forms.DialogResult.OK)
             {
-                string filePath = m_MainForm.SaveFileDialog.FileName;
+                string filePath = MainForm.SaveFileDialog.FileName;
 
                 var sourceDef = new DirectoryFileSourceDef();
                 sourceDef.DirectoryPath = Path.GetDirectoryName(filePath);
@@ -221,41 +222,15 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
                 sourceDef.Type = "ABTAMAP";
 
 
-                var newSource = m_MainForm._vm.Sources.Create(sourceDef);
-                m_MainForm._vm.Project.Root.Map.SaveAs(newSource);
+                var newSource = MainForm.VM.Sources.Create(sourceDef);
+                MainForm.VM.Project.Root.Map.SaveAs(newSource);
             }
         }
 
         public void CloseProject()
         {
-            UnsetLevelEditState(m_MainForm._vm.Project);
+            UnsetLevelEditState(MainForm.VM.Project);
             _projectView.DeinitViews();
-        }
-
-        internal void OpenProject()
-        {
-            if (m_MainForm._vm.CurrentDatabase == null)
-                m_MainForm._vm.OpenABTADatabase();
-
-            string resourcesDir = Path.Combine(ProgramTools.AppDir, "Resources", "ABTA", "Maps");
-            OpenFileDialogHelper.PrepareToOpenABEdProjFile(m_MainForm.OpenFileDialog, resourcesDir);
-
-            DialogResult result = m_MainForm.OpenFileDialog.ShowDialog();
-
-            if (result == System.Windows.Forms.DialogResult.OK)
-            {
-                string filePath = m_MainForm.OpenFileDialog.FileName;
-
-                var sourceDef = new DirectoryFileSourceDef();
-                sourceDef.DirectoryPath = Path.GetDirectoryName(filePath);
-                sourceDef.Name = Path.GetFileName(filePath);
-                sourceDef.Type = "LevelXML";
-
-                m_MainForm._vm.Project.Load(sourceDef);
-
-                SetMapEditState(m_MainForm._vm.Project);
-                _projectView.InitViews();
-            }
         }
     }
 }
