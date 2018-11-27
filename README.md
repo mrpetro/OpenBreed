@@ -10,7 +10,7 @@ Common code and resources for open source implementation of classic Alien Breed 
  
 For ABSE & ABHC - LXMA files (like L1MA, LAMA, L3MA)
 
-For ABTA - \*.MAP files ()
+For ABTA - \*.MAP files
 
 These files contains tile map layout, each one with property(like spawn point of monster, walls, keys, etc...). It also contains two palette sets for usage with right input tile set. There are some other data that purpose is questionable. maps file format is shared between all three AB titles. But... ABTA contains one additional MISS(Mission?) data block which describes message texts, entrances/exists from map, monster speeds, strengths and some other unknown data.
 
