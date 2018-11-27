@@ -22,7 +22,9 @@ For starters, write some missing readers for the resources from first two titles
 
 ## Associated repositories
 *OpenBreed.Common* - which should contain information and implementation of various data formats existing in all three games.
+
 *OpenBreed.Editor* - map editor for games and for OpenBreed implementation.
+
 *EPFArchive* - contains EPF files manager useful when handling data from PC port of ABTA.
 
 ## Development stuff
