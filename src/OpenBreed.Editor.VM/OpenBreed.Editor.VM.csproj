@@ -110,9 +110,6 @@
     <Compile Include="Props\PropSetVM.cs" />
     <Compile Include="Props\PropSetsVM.cs" />
     <Compile Include="Props\PropVM.cs" />
-    <Compile Include="Sources\EPFArchiveFileSource.cs" />
-    <Compile Include="Sources\Formats\ABTABLKFormat.cs" />
-    <Compile Include="Sources\Formats\ABTAMAPFormat.cs" />
     <Compile Include="Database\Sources\EPFArchiveFileSourceDef.cs" />
     <Compile Include="Database\Sources\DirectoryFileSourceDef.cs" />
     <Compile Include="Database\Resources\ResourceLevelDef.cs" />
@@ -121,12 +118,16 @@
     <Compile Include="Database\GameDatabase.cs" />
     <Compile Include="Levels\ProjectsHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sources\BaseSource.cs" />
     <Compile Include="Sources\DirectoryFileSource.cs" />
+    <Compile Include="Sources\EPFArchiveFileSource.cs" />
+    <Compile Include="Sources\Formats\ABTABLKFormat.cs" />
+    <Compile Include="Sources\Formats\ABTAMAPFormat.cs" />
     <Compile Include="Sources\Formats\ABTASPRFormat.cs" />
+    <Compile Include="Sources\Formats\ACBMTileSetFormat.cs" />
     <Compile Include="Sources\Formats\LevelXMLFormat.cs" />
     <Compile Include="Sources\Formats\PropertySetXMLFormat.cs" />
     <Compile Include="Sources\ISourceFormat.cs" />
-    <Compile Include="Sources\BaseSource.cs" />
     <Compile Include="Sources\SourcesHandler.cs" />
     <Compile Include="Sprites\SpriteSetSelectorVM.cs" />
     <Compile Include="Sprites\SpriteSetVM.cs" />
@@ -141,7 +142,6 @@
     <Compile Include="Tiles\TileSetVM.cs" />
     <Compile Include="Tiles\TileVM.cs" />
     <Compile Include="Tiles\Tools\TileSelectTool.cs" />
-    <Compile Include="ITool.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\EPFArchive\src\EPFArchive\EPFArchive.csproj">

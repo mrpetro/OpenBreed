@@ -34,6 +34,7 @@ namespace OpenBreed.Editor.VM.Sources
             m_Formats.Add("ABTAMAP", new ABTAMAPFormat());
             m_Formats.Add("ABTABLK", new ABTABLKFormat());
             m_Formats.Add("ABTASPR", new ABTASPRFormat());
+            m_Formats.Add("ACBM_TILE_SET", new ACBMTileSetFormat());
             m_Formats.Add("LevelXML", new LevelXMLFormat());
             m_Formats.Add("PropertySetXML", new PropertySetXMLFormat());
         }

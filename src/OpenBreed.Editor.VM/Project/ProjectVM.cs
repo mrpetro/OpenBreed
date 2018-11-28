@@ -100,13 +100,16 @@ namespace OpenBreed.Editor.VM.Project
             Root.DialogProvider.ShowMessage("Creating new project is not implemented yet.", "Feature not implemented");
         }
 
-        public bool TryOpenLevel()
+        public bool TryOpenABTALevel()
         {
             if (Root.CurrentDatabase == null)
                 Root.OpenABTADatabase();
 
-            string resourcesDir = Path.Combine(ProgramTools.AppDir, "Resources", "ABTA", "Maps");
+            return TryOpenLevelDef();
+        }
 
+        public bool TryOpenLevelDef()
+        {
             var openFileDialog = Root.DialogProvider.OpenFileDialog();
             openFileDialog.Title = "Open Map project file...";
             openFileDialog.Filter = "OpenABEd project files (*.xml)|*.xml|All Files (*.*)|*.*";
@@ -128,6 +131,14 @@ namespace OpenBreed.Editor.VM.Project
             }
 
             return false;
+        }
+
+        public bool TryOpenABHCLevel()
+        {
+            if (Root.CurrentDatabase == null)
+                Root.OpenABHCDatabase();
+
+            return TryOpenLevelDef();
         }
 
         #endregion Public Methods

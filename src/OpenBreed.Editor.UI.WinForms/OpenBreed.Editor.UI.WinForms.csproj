@@ -49,6 +49,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\EditorOptionsABHC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\EditorOptionsABHC.Designer.cs">
+      <DependentUpon>EditorOptionsABHC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\EditorOptionsABTA.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -247,6 +253,9 @@
     <Content Include="Resources\InsertTilesLine.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\EditorOptionsABHC.resx">
+      <DependentUpon>EditorOptionsABHC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\EditorOptionsABTA.resx">
       <DependentUpon>EditorOptionsABTA.cs</DependentUpon>
     </EmbeddedResource>

@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Layout\LayoutCfg.cs" />
+    <Compile Include="Options\ABHC\ABHCCfg.cs" />
     <Compile Include="Options\ABTA\ABTACfg.cs" />
     <Compile Include="Options\OptionsCfg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,7 +96,6 @@
     <Compile Include="SettingsMan.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Options\ABHC\" />
     <Folder Include="Options\ABSE\" />
   </ItemGroup>
   <ItemGroup>

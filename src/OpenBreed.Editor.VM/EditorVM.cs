@@ -165,6 +165,11 @@ namespace OpenBreed.Editor.VM
         {
             Settings.Store();
         }
+        public void OpenABHCDatabase()
+        {
+            string abtaDBPath = Path.Combine(ProgramTools.AppDir, GameDatabaseDef.DEFAULT_ABHC_DB_PATH);
+            OpenDatabase(abtaDBPath);
+        }
 
         public void OpenABTADatabase()
         {

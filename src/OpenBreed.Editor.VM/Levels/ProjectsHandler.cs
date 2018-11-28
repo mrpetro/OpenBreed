@@ -41,14 +41,5 @@ namespace OpenBreed.Editor.VM.Levels
 
             return levelDefs;
         }
-
-        public void Load(BaseSource source)
-        {
-        }
-
-        public void Save()
-        {
-
-        }
     }
 }
