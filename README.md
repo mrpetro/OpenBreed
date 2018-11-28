@@ -18,12 +18,16 @@ Create fully functional map editor for AB games with parallel thinking about ope
 
 ## Current editor functionality
 
-ABTA (PC):
+**ABTA:**
  - Possibility to view maps with their original color palettes, tiles and properties
  - Possibility to view tile sets associated with maps
  - Possibility to view sprite sets associated with maps
- - Level password generator (works for Amiga platform too)
-  
+ - Level password generator (works for PC and Amiga platforms)
+
+**ABHC:**
+ - Possibility to view maps with their original color palettes, tiles and properties
+ - Possibility to view tile sets associated with maps
+ 
  ## TODO
  
  TBD
