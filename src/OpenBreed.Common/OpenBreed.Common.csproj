@@ -92,6 +92,7 @@
     <Compile Include="Sprites\SpriteSetModel.cs" />
     <Compile Include="Tiles\Builders\TileBuilder.cs" />
     <Compile Include="Tiles\Builders\TileSetBuilder.cs" />
+    <Compile Include="Tiles\Readers\ACBM\ACBMTileSetReader.cs" />
     <Compile Include="Tiles\Readers\BLK\BLKReader.cs" />
     <Compile Include="Tiles\TileModel.cs" />
     <Compile Include="Tiles\TileSetModel.cs" />
@@ -99,6 +100,34 @@
     <Compile Include="Writers\BigEndianBinaryWriter.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\ABHC\GameDatabase.ABHC.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ABHC\Maps\L05.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ABHC\Maps\L07.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ABHC\Maps\L06.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ABHC\Maps\L03.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ABHC\Maps\L08.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ABHC\Maps\L04.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ABHC\Maps\L02.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ABHC\Maps\L01.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\ABTALevelSetDef.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
