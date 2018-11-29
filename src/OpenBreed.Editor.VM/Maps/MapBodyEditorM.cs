@@ -160,7 +160,8 @@ namespace OpenBreed.Editor.VM.Maps
         public void SetScale(float scale)
         {
             var newTransf = Transformation.Clone();
-            newTransf.Scale(scale, scale);
+            var newScale = scale / newTransf.Elements[0];
+            newTransf.Scale(newScale, newScale);
             Transformation = newTransf;
         }
 
@@ -174,7 +175,8 @@ namespace OpenBreed.Editor.VM.Maps
             PointF[] t1Points = new PointF[1] { location };
             invMatrix.TransformPoints(t1Points);
 
-            newTransf.Scale(scale, scale);
+            var toScale = scale / newTransf.Elements[0];
+            newTransf.Scale(toScale, toScale);
 
             invMatrix = newTransf.Clone();
             invMatrix.Invert();

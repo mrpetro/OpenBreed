@@ -9,21 +9,24 @@ namespace OpenBreed.Editor.VM.Sources
 {
     public class DirectoryFileSource : BaseSource
     {
-        private string m_DirectoryPath;
 
-        public string DirectoryPath { get { return m_DirectoryPath; } }
+        #region Private Fields
+
+        private readonly string _directoryPath;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public DirectoryFileSource(SourcesHandler manager, DirectoryFileSourceDef sourceDef) :
             base(manager, sourceDef)
         {
-            m_DirectoryPath = manager.Editor.Settings.ExpandVariables(sourceDef.DirectoryPath);
+            _directoryPath = manager.Editor.Settings.ExpandVariables(sourceDef.DirectoryPath);
         }
 
-        protected override Stream Open()
-        {
-            string filePath = Path.Combine(DirectoryPath, Name);
-            return File.Open(filePath, FileMode.Open, FileAccess.ReadWrite);
-        }
+        #endregion Public Constructors
+
+        #region Protected Methods
 
         protected override void Close()
         {
@@ -31,5 +34,14 @@ namespace OpenBreed.Editor.VM.Sources
 
             base.Close();
         }
+
+        protected override Stream Open()
+        {
+            string filePath = Path.Combine(_directoryPath, Name);
+            return File.Open(filePath, FileMode.Open, FileAccess.ReadWrite);
+        }
+
+        #endregion Protected Methods
+
     }
 }

@@ -36,7 +36,9 @@
             this.OptionsABTA = new OpenBreed.Editor.UI.WinForms.Controls.EditorOptionsABTA();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.OptionsABHC = new OpenBreed.Editor.UI.WinForms.Controls.EditorOptionsABHC();
             this.Tabs.SuspendLayout();
+            this.TabABHC.SuspendLayout();
             this.TabABTA.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,6 +78,7 @@
             // 
             // TabABHC
             // 
+            this.TabABHC.Controls.Add(this.OptionsABHC);
             this.TabABHC.Location = new System.Drawing.Point(4, 22);
             this.TabABHC.Name = "TabABHC";
             this.TabABHC.Size = new System.Drawing.Size(555, 175);
@@ -124,6 +127,14 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
+            // OptionsABHC
+            // 
+            this.OptionsABHC.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.OptionsABHC.Location = new System.Drawing.Point(0, 0);
+            this.OptionsABHC.Name = "OptionsABHC";
+            this.OptionsABHC.Size = new System.Drawing.Size(555, 175);
+            this.OptionsABHC.TabIndex = 0;
+            // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -136,6 +147,7 @@
             this.Name = "OptionsForm";
             this.Text = "Editor options";
             this.Tabs.ResumeLayout(false);
+            this.TabABHC.ResumeLayout(false);
             this.TabABTA.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -151,5 +163,6 @@
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;
         private Controls.EditorOptionsABTA OptionsABTA;
+        private Controls.EditorOptionsABHC OptionsABHC;
     }
 }

@@ -10,26 +10,38 @@ namespace OpenBreed.Editor.VM.Sources
 {
     public class EPFArchiveFileSource : BaseSource
     {
-        private readonly EPFArchive m_Archive;
-        private readonly EPFArchiveEntry m_Entry;
+        #region Private Fields
+
+        private readonly EPFArchive _archive;
+        private readonly EPFArchiveEntry _entry;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public EPFArchiveFileSource(SourcesHandler manager, EPFArchiveFileSourceDef sourceDef) :
             base(manager, sourceDef)
         {
-            m_Archive = manager.GetArchive(manager.Editor.Settings.ExpandVariables(sourceDef.ArchivePath));
-            m_Entry = m_Archive.FindEntry(sourceDef.Name);
+            _archive = manager.GetArchive(manager.Editor.Settings.ExpandVariables(sourceDef.ArchivePath));
+            _entry = _archive.FindEntry(sourceDef.Name);
+        }
+
+        #endregion Public Constructors
+
+        #region Protected Methods
+
+        protected override void Close()
+        {
+            _entry.Dispose();
+
+            base.Close();
         }
 
         protected override Stream Open()
         {
-            return m_Entry.Open();
+            return _entry.Open();
         }
 
-        protected override void Close()
-        {
-            m_Entry.Dispose();
-
-            base.Close();
-        }
+        #endregion Protected Methods
     }
 }

@@ -17,6 +17,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls
         public EditorOptionsABTA()
         {
             InitializeComponent();
+
+            btnSelectGameFolder.Click += btnSelectGameFolder_Click;
+            btnSelectGameRunFile.Click += btnSelectGameRunFile_Click;
         }
 
         private void SelectGameFolder()

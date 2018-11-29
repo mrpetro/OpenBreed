@@ -229,6 +229,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
         public void CloseProject()
         {
+            MainForm.VM.Project.TryClose();
             UnsetLevelEditState(MainForm.VM.Project);
             _projectView.DeinitViews();
         }

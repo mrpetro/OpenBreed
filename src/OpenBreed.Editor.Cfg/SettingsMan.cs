@@ -13,13 +13,11 @@ namespace OpenBreed.Editor.Cfg
     public class SettingsMan
     {
         private const string DEFAULT_CFG_PATH = @"Resources\DefaultSettings.xml";
-        private const string CFG_PATH = @"Settings.xml";
+        private const string CFG_FILE_NAME = @"Settings.xml";
 
         private Dictionary<string, object> m_Variables = new Dictionary<string,object>();
 
-        private SettingsCfg m_Cfg;
-
-        public SettingsCfg Cfg { get { return m_Cfg; } }
+        public SettingsCfg Cfg { get; private set; }
 
         public SettingsMan()
         {
@@ -71,16 +69,16 @@ namespace OpenBreed.Editor.Cfg
         {
             try
             {
-                string cfgPath = Path.Combine(ProgramTools.AppDataDir, CFG_PATH);
+                string cfgPath = Path.Combine(ProgramTools.AppProductDataDir, CFG_FILE_NAME);
 
                 if (File.Exists(cfgPath))
                 {
-                    m_Cfg = Tools.RestoreFromXml<SettingsCfg>(cfgPath);
+                    Cfg = Tools.RestoreFromXml<SettingsCfg>(cfgPath);
                     LogMan.Instance.LogSuccess("Settings configuration restored.");
                 }
                 else
                 {
-                    m_Cfg = GetDefault();
+                    Cfg = GetDefault();
                     LogMan.Instance.LogSuccess("No settings file yet. Default Settings configuration restored.");
                 }
 
@@ -96,10 +94,10 @@ namespace OpenBreed.Editor.Cfg
         {
             try
             {
-                string cfgPath = Path.Combine(ProgramTools.AppDataDir, CFG_PATH);
-                Tools.StoreAsXml<SettingsCfg>(cfgPath,m_Cfg, true);
+                string cfgPath = Path.Combine(ProgramTools.AppProductDataDir, CFG_FILE_NAME);
+                Tools.StoreAsXml<SettingsCfg>(cfgPath, Cfg, true);
 
-                LogMan.Instance.LogSuccess("Settings configuration storred.");
+                LogMan.Instance.LogSuccess("Settings configuration stored.");
             }
             catch (Exception ex)
             {

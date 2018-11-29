@@ -72,14 +72,16 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
 
         private void SetNoSpritesState()
         {
-
+            this.Visible = false;
+            numSpriteNo.Minimum = -1;
+            numSpriteNo.Maximum = -1;
         }
 
         private void SetSpritesState()
         {
+            this.Visible = true;
             numSpriteNo.Minimum = 0;
             numSpriteNo.Maximum = _vm.Items.Count - 1;
-            numSpriteNo.Value = 0;
         }
 
         void UpdateItems()

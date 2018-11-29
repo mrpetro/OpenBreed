@@ -145,8 +145,11 @@ namespace OpenBreed.Editor.VM.Project
 
         #region Internal Methods
 
-        internal bool TryClose()
+        public bool TryClose()
         {
+
+
+            Root.Map.TryClose();
             return true;
         }
 

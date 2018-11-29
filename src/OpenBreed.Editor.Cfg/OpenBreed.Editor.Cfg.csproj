@@ -87,6 +87,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Shared\SharedAssemblyInfo.cs">
+      <Link>SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Layout\LayoutCfg.cs" />
     <Compile Include="Options\ABHC\ABHCCfg.cs" />
     <Compile Include="Options\ABTA\ABTACfg.cs" />

@@ -15,5 +15,13 @@ namespace OpenBreed.Editor.UI.WinForms.Helpers
             dialog.SelectedPath = initFolderPath;
             dialog.ShowNewFolderButton = false;
         }
+
+        public static void PrepareToSelectABHCGameFolder(FolderBrowserDialog dialog, string initFolderPath)
+        {
+            dialog.Reset();
+            dialog.Description = "Select Alien Breed: Horror Continues game folder...";
+            dialog.SelectedPath = initFolderPath;
+            dialog.ShowNewFolderButton = false;
+        }
     }
 }

@@ -11,6 +11,7 @@ using OpenABEd;
 using System.IO;
 using OpenBreed.Editor.VM.Project;
 using OpenBreed.Editor.VM.Maps.Tools;
+using OpenBreed.Common;
 
 namespace OpenBreed.Editor.UI.WinForms.Views
 {
@@ -28,6 +29,8 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
     public partial class ProjectView : DockPanel
     {
+        private const string LAYOUT_CFG_FILE_NAME = "Layout.cfg";
+
         #region Private Fields
 
         private DeserializeDockContent _deserializeDockContent;
@@ -106,7 +109,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         public void RestoreLayout()
         {
-            string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "OpenAEdGUI.cfg");
+            string configFile = Path.Combine(ProgramTools.AppProductDataDir, LAYOUT_CFG_FILE_NAME);
 
             if (File.Exists(configFile))
                 LoadFromXml(configFile, _deserializeDockContent);
@@ -121,7 +124,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         public void StoreLayout()
         {
-            string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "OpenAEdGUI.cfg");
+            string configFile = Path.Combine(ProgramTools.AppProductDataDir, LAYOUT_CFG_FILE_NAME);
             if (_saveLayout)
                 SaveAsXml(configFile);
             else if (File.Exists(configFile))

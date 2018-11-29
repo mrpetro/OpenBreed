@@ -46,19 +46,11 @@ namespace OpenBreed.Editor.VM.Maps.Tools
             currentScale *= scaleFactor;
 
             if (currentScale < 0.125f)
-            {
-                //view.SetScale(0.125f);
-                return;
-            }
+                currentScale = 0.125f;
             else if (currentScale > 8.0f)
-            {
-                //view.SetScale(8.0f);
-                return;
-            }
-            else
-            {
-                _vm.ZoomViewTo(e.Location, scaleFactor);
-            }
+                currentScale = 8.0f;
+
+            _vm.ZoomViewTo(e.Location, currentScale);
         }
     }
 }

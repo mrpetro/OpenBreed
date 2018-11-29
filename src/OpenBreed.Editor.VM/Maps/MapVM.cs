@@ -7,6 +7,7 @@ using OpenBreed.Editor.VM.Palettes;
 using OpenBreed.Editor.VM.Project;
 using OpenBreed.Editor.VM.Sources;
 using System;
+using System.IO;
 using System.Linq;
 
 namespace OpenBreed.Editor.VM.Maps
@@ -70,7 +71,6 @@ namespace OpenBreed.Editor.VM.Maps
 
         private string _title;
 
-        private MapModel m_CurrentMap = null;
         private bool m_IsModified;
 
         #endregion Private Fields
@@ -138,22 +138,10 @@ namespace OpenBreed.Editor.VM.Maps
             }
         }
 
-        //    set
-        //    {
-        //        if (m_CurrentMap != value)
-        //        {
-        //            m_CurrentMap = value;
-        //            Update(CurrentMap);
-        public bool IsOpened { get { return m_CurrentMap != null; } }
+        public bool IsOpened { get { return Source != null; } }
 
         public MapPropertiesVM Properties { get; private set; }
 
-        //public MapModel CurrentMap
-        //{
-        //    get
-        //    {
-        //        return m_CurrentMap;
-        //    }
         public EditorVM Root { get; private set; }
 
         public BaseSource Source
@@ -173,6 +161,20 @@ namespace OpenBreed.Editor.VM.Maps
         #endregion Public Properties
 
         #region Public Methods
+
+        public void TryClose()
+        {
+            Close();
+        }
+
+        internal void Close()
+        {
+            if (Source == null)
+                throw new InvalidOperationException("There is not map loaded.");
+
+            Source.Dispose();
+            Source = null;
+        }
 
         public void Save()
         {
@@ -194,6 +196,31 @@ namespace OpenBreed.Editor.VM.Maps
         internal void ConnectEvents()
         {
             Body.ConnectEvents();
+        }
+
+        public bool TryLoad()
+        {
+            var openFileDialog = Root.DialogProvider.OpenFileDialog();
+            openFileDialog.Title = "Open Alien Breed original map file...";
+            openFileDialog.Filter = "ABTA map files (*.MAP)|*.MAP|ABSE & ABHC map files (*MA)|*MA|All Files (*.*)|*.*";
+            openFileDialog.Multiselect = false;
+            var answer = openFileDialog.Show();
+
+            if (answer == DialogAnswer.OK)
+            {
+                string filePath = openFileDialog.FileName;
+
+                var sourceDef = new DirectoryFileSourceDef();
+                sourceDef.DirectoryPath = Path.GetDirectoryName(filePath);
+                sourceDef.Name = Path.GetFileName(filePath);
+                sourceDef.Type = "ABTAMAP";
+
+                Load(sourceDef);
+
+                return true;
+            }
+
+            return false;
         }
 
         internal void Load(SourceDef sourceDef)

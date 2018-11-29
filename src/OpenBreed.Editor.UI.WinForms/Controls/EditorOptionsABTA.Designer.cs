@@ -40,8 +40,8 @@
             // 
             // tbxGameRunFilePath
             // 
-            this.tbxGameRunFilePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbxGameRunFilePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbxGameRunFilePath.Location = new System.Drawing.Point(121, 31);
             this.tbxGameRunFilePath.Name = "tbxGameRunFilePath";
             this.tbxGameRunFilePath.ReadOnly = true;
@@ -56,7 +56,6 @@
             this.btnSelectGameRunFile.TabIndex = 2;
             this.btnSelectGameRunFile.Text = "Select game run file";
             this.btnSelectGameRunFile.UseVisualStyleBackColor = true;
-            this.btnSelectGameRunFile.Click += new System.EventHandler(this.btnSelectGameRunFile_Click);
             // 
             // btnSelectGameFolder
             // 
@@ -66,12 +65,11 @@
             this.btnSelectGameFolder.TabIndex = 3;
             this.btnSelectGameFolder.Text = "Select game folder";
             this.btnSelectGameFolder.UseVisualStyleBackColor = true;
-            this.btnSelectGameFolder.Click += new System.EventHandler(this.btnSelectGameFolder_Click);
             // 
             // tbxGameFolderPath
             // 
-            this.tbxGameFolderPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbxGameFolderPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbxGameFolderPath.Location = new System.Drawing.Point(121, 5);
             this.tbxGameFolderPath.Name = "tbxGameFolderPath";
             this.tbxGameFolderPath.ReadOnly = true;

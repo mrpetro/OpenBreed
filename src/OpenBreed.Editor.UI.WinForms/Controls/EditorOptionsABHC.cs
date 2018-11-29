@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OpenBreed.Editor.UI.WinForms.Helpers;
+using OpenBreed.Editor.Cfg.Options.ABHC;
+using OpenBreed.Common;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls
 {
@@ -15,6 +18,33 @@ namespace OpenBreed.Editor.UI.WinForms.Controls
         public EditorOptionsABHC()
         {
             InitializeComponent();
+
+            btnSelectGameFolder.Click += btnSelectGameFolder_Click;
+        }
+
+        private void SelectGameFolder()
+        {
+            FolderBrowserDialogHelper.PrepareToSelectABHCGameFolder(FolderBrowserDialog, tbxGameFolderPath.Text);
+
+            DialogResult result = FolderBrowserDialog.ShowDialog(this);
+
+            if (result == System.Windows.Forms.DialogResult.OK)
+                tbxGameFolderPath.Text = FolderBrowserDialog.SelectedPath;
+        }
+
+        public void UpdateCfgWithCtrl(ABHCCfg cfg)
+        {
+            cfg.GameFolderPath = tbxGameFolderPath.Text;
+        }
+
+        public void UpdateCtrlWithCfg(ABHCCfg cfg)
+        {
+            tbxGameFolderPath.Text = cfg.GameFolderPath;
+        }
+
+        private void btnSelectGameFolder_Click(object sender, EventArgs e)
+        {
+            Tools.TryAction(SelectGameFolder);
         }
     }
 }
