@@ -34,6 +34,25 @@ namespace OpenBreed.Common
 
         #region Public properties
 
+        protected static string GetAttributeValue<TAttr>(Assembly assembly, Func<TAttr, string> resolveFunc, string defaultResult = null) where TAttr : Attribute
+        {
+            object[] attributes = assembly.GetCustomAttributes(typeof(TAttr), false);
+            if (attributes.Length > 0)
+                return resolveFunc((TAttr)attributes[0]);
+            else
+                return defaultResult;
+        }
+
+        /// <summary>
+        /// Get application product name
+        /// </summary>
+        public static string AppProductName { get { return GetAttributeValue<AssemblyProductAttribute>(Assembly.GetEntryAssembly(), a => a.Product); } }
+
+        /// <summary>
+        /// Gets the product data directory
+        /// </summary>
+        public static string AppProductDataDir { get { return Path.Combine(AppDataDir, AppProductName); } }
+
         /// <summary>
         /// Gets the application data directory
         /// </summary>

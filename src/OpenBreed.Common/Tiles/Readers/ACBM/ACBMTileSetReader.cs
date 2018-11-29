@@ -64,7 +64,7 @@ namespace OpenBreed.Common.Tiles.Readers.ACBM
 
                 for (int i = 0; i < _bitPlanesNo; i++)
                 {
-                    byte[] rawData = binReader.ReadBytes(32);
+                    byte[] rawData = binReader.ReadBytes(bytesPerTile);
                     rawData = rawData.Reverse().ToArray();
 
                     if (rawData.Length == 0)
