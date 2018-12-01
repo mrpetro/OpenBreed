@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Editor.VM.Database.Sources;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace OpenBreed.Editor.VM.Sources
@@ -8,8 +9,10 @@ namespace OpenBreed.Editor.VM.Sources
     {
         #region Private Fields
 
-        private readonly ISourceFormat m_Format;
-        private readonly SourcesHandler m_Manager;
+        private readonly ISourceFormat _format;
+        private readonly SourcesHandler _manager;
+        private readonly Dictionary<string, object> _parameters;
+
         private Stream m_Stream;
 
         #endregion Private Fields
@@ -24,8 +27,9 @@ namespace OpenBreed.Editor.VM.Sources
             if (sourceDef == null)
                 throw new ArgumentNullException("SourceDef");
 
-            m_Manager = manager;
-            m_Format = manager.GetFormatMan(sourceDef.Type);
+            _manager = manager;
+            _format = manager.GetFormatMan(sourceDef.Type);
+            _parameters = manager.GetParameters(sourceDef.Parameters);
             Name = sourceDef.Name;
         }
 
@@ -50,6 +54,16 @@ namespace OpenBreed.Editor.VM.Sources
 
         #region Public Methods
 
+
+        public T GetParameter<T>(string name)
+        {
+            object found;
+            if (_parameters.TryGetValue(name, out found))
+                return (T)found;
+            else
+                return default(T);
+        }
+
         public void Dispose()
         {
             if (m_Stream != null)
@@ -60,12 +74,12 @@ namespace OpenBreed.Editor.VM.Sources
 
         public object Load()
         {
-            return m_Format.Load(this);
+            return _format.Load(this);
         }
 
         public void Save(object model)
         {
-            m_Format.Save(this, model);
+            _format.Save(this, model);
         }
 
         #endregion Public Methods
@@ -74,7 +88,7 @@ namespace OpenBreed.Editor.VM.Sources
 
         protected virtual void Close()
         {
-            m_Manager.ReleaseSource(this);
+            _manager.ReleaseSource(this);
         }
 
         protected abstract Stream Open();

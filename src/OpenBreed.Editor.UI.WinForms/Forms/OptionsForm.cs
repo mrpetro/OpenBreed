@@ -25,12 +25,14 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
             OptionsABTA.UpdateCtrlWithCfg(m_Settings.Cfg.Options.ABTA);
             OptionsABHC.UpdateCtrlWithCfg(m_Settings.Cfg.Options.ABHC);
+            OptionsABSE.UpdateCtrlWithCfg(m_Settings.Cfg.Options.ABSE);
         }
 
         public void UpdateSettings()
         {
             OptionsABTA.UpdateCfgWithCtrl(m_Settings.Cfg.Options.ABTA);
             OptionsABHC.UpdateCfgWithCtrl(m_Settings.Cfg.Options.ABHC);
+            OptionsABSE.UpdateCfgWithCtrl(m_Settings.Cfg.Options.ABSE);
         }
     }
 }

@@ -9,5 +9,9 @@
 			<GameFolderPath></GameFolderPath>
 			<GameRunFilePath></GameRunFilePath>
 		</ABTA>
+    <ABSE>
+      <GameFolderPath></GameFolderPath>
+      <GameRunFilePath></GameRunFilePath>
+    </ABSE>
 	</Options>
 </SettingsCfg>

@@ -15,6 +15,7 @@ namespace OpenBreed.Editor.VM.Database
     [Serializable]
     public class GameDatabaseDef
     {
+        public const string DEFAULT_ABSE_DB_PATH = @"Resources\ABSE\GameDatabase.ABSE.xml";
         public const string DEFAULT_ABHC_DB_PATH = @"Resources\ABHC\GameDatabase.ABHC.xml";
         public const string DEFAULT_ABTA_DB_PATH = @"Resources\ABTA\GameDatabase.ABTA.EPF.xml";
 

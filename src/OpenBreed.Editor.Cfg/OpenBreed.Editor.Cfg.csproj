@@ -92,15 +92,14 @@
     </Compile>
     <Compile Include="Layout\LayoutCfg.cs" />
     <Compile Include="Options\ABHC\ABHCCfg.cs" />
+    <Compile Include="Options\ABSE\ABSECfg.cs" />
     <Compile Include="Options\ABTA\ABTACfg.cs" />
     <Compile Include="Options\OptionsCfg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingsCfg.cs" />
     <Compile Include="SettingsMan.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Options\ABSE\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Resources\DefaultSettings.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

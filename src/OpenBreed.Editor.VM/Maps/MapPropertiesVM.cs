@@ -156,9 +156,9 @@ namespace OpenBreed.Editor.VM.Maps
             IFFP = map.Properties.IFFP;
             ALTP = map.Properties.ALTP;
             ALTM = map.Properties.ALTM;
-            CCCI = map.Properties.CCCI.ToArray();
-            CCIN = map.Properties.CCIN.ToArray();
-            CSIN = map.Properties.CSIN.ToArray();
+            CCCI = map.Properties.CCCI?.ToArray();
+            CCIN = map.Properties.CCIN?.ToArray();
+            CSIN = map.Properties.CSIN?.ToArray();
         }
 
         #endregion Internal Methods

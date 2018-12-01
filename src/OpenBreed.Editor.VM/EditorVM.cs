@@ -165,16 +165,23 @@ namespace OpenBreed.Editor.VM
         {
             Settings.Store();
         }
+
+        public void OpenABSEDatabase()
+        {
+            string dbPath = Path.Combine(ProgramTools.AppDir, GameDatabaseDef.DEFAULT_ABSE_DB_PATH);
+            OpenDatabase(dbPath);
+        }
+
         public void OpenABHCDatabase()
         {
-            string abtaDBPath = Path.Combine(ProgramTools.AppDir, GameDatabaseDef.DEFAULT_ABHC_DB_PATH);
-            OpenDatabase(abtaDBPath);
+            string dbPath = Path.Combine(ProgramTools.AppDir, GameDatabaseDef.DEFAULT_ABHC_DB_PATH);
+            OpenDatabase(dbPath);
         }
 
         public void OpenABTADatabase()
         {
-            string abtaDBPath = Path.Combine(ProgramTools.AppDir, GameDatabaseDef.DEFAULT_ABTA_DB_PATH);
-            OpenDatabase(abtaDBPath);
+            string dbPath = Path.Combine(ProgramTools.AppDir, GameDatabaseDef.DEFAULT_ABTA_DB_PATH);
+            OpenDatabase(dbPath);
         }
 
         public void OpenDatabase(string filePath)

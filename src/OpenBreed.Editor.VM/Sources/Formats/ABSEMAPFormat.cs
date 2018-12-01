@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OpenBreed.Editor.VM.Maps;
+﻿using OpenBreed.Common.Maps;
 using OpenBreed.Common.Maps.Builders;
-using System.IO;
 using OpenBreed.Common.Maps.Readers.MAP;
 using OpenBreed.Common.Maps.Writers.MAP;
-using OpenBreed.Editor.VM.Sources;
-using OpenBreed.Common.Maps;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Sources.Formats
 {
-    public class ABTAMAPFormat : ISourceFormat
+    class ABSEMAPFormat : ISourceFormat
     {
-        public ABTAMAPFormat()
+        public ABSEMAPFormat()
         {
         }
 
@@ -24,7 +23,7 @@ namespace OpenBreed.Editor.VM.Sources.Formats
             source.Stream.Seek(0, SeekOrigin.Begin);
 
             var mapBuilder = MapBuilder.NewMapModel();
-            MAPReader mapReader = new MAPReader(mapBuilder, MAPFormat.ABTA);
+            MAPReader mapReader = new MAPReader(mapBuilder, MAPFormat.ABSE);
             return mapReader.Read(source.Stream);
         }
 

@@ -58,6 +58,12 @@
     <Compile Include="Controls\EditorOptionsABHC.Designer.cs">
       <DependentUpon>EditorOptionsABHC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\EditorOptionsABSE.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\EditorOptionsABSE.Designer.cs">
+      <DependentUpon>EditorOptionsABSE.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\EditorOptionsABTA.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -258,6 +264,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Controls\EditorOptionsABHC.resx">
       <DependentUpon>EditorOptionsABHC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\EditorOptionsABSE.resx">
+      <DependentUpon>EditorOptionsABSE.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\EditorOptionsABTA.resx">
       <DependentUpon>EditorOptionsABTA.cs</DependentUpon>

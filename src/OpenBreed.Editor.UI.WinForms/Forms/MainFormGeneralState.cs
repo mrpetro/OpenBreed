@@ -20,6 +20,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         public readonly MainForm MainForm;
 
         internal ToolStripMenuItem NewLevelToolStripMenuItem = null;
+        internal ToolStripMenuItem OpenABSELevelToolStripMenuItem = null;
         internal ToolStripMenuItem OpenABHCLevelToolStripMenuItem = null;
         internal ToolStripMenuItem OpenABTALevelToolStripMenuItem = null;
         internal ToolStripMenuItem ExitToolStripMenuItem = null;
@@ -39,6 +40,8 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
             NewLevelToolStripMenuItem = new ToolStripMenuItem("New Level");
             NewLevelToolStripMenuItem.Click += (s, a) => MainForm.VM.Project.TryNewLevel();
+            OpenABSELevelToolStripMenuItem = new ToolStripMenuItem("Open ABSE Level...");
+            OpenABSELevelToolStripMenuItem.Click += (s, a) => MainForm.VM.Project.TryOpenABSELevel();
             OpenABHCLevelToolStripMenuItem = new ToolStripMenuItem("Open ABHC Level...");
             OpenABHCLevelToolStripMenuItem.Click += (s, a) => MainForm.VM.Project.TryOpenABHCLevel();
             OpenABTALevelToolStripMenuItem = new ToolStripMenuItem("Open ABTA Level...");
@@ -48,6 +51,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             ExitToolStripMenuItem.Click += (s, a) => MainForm.Close();
 
             MainForm.FileToolStripMenuItem.DropDownItems.Add(NewLevelToolStripMenuItem);
+            MainForm.FileToolStripMenuItem.DropDownItems.Add(OpenABSELevelToolStripMenuItem);
             MainForm.FileToolStripMenuItem.DropDownItems.Add(OpenABHCLevelToolStripMenuItem);
             MainForm.FileToolStripMenuItem.DropDownItems.Add(OpenABTALevelToolStripMenuItem);
             MainForm.FileToolStripMenuItem.DropDownItems.Add(ExitToolStripMenuItem);

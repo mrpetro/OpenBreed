@@ -1,6 +1,4 @@
-﻿using OpenBreed.Common.Tiles.Builders;
-using OpenBreed.Common.Tiles.Readers.ACBM;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,23 +7,26 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Sources.Formats
 {
-    public class ACBMTileSetFormat : ISourceFormat
+    public class ACBMImageFormat : ISourceFormat
     {
-        public ACBMTileSetFormat()
+        public ACBMImageFormat()
         {
         }
 
         public object Load(BaseSource source)
         {
-            int tileSize = source.GetParameter<int>("TILE_SIZE");
+            int width = source.GetParameter<int>("WIDTH");
+            int height = source.GetParameter<int>("HEIGHT");
             int bitPlanesNo = source.GetParameter<int>("BIT_PLANES_NO");
 
             //Remember to set source stream to begining
-            source.Stream.Seek(0, SeekOrigin.Begin);
+            //source.Stream.Seek(0, SeekOrigin.Begin);
 
-            var tileSetBuilder = TileSetBuilder.NewTileSet();
-            var reader = new ACBMTileSetReader(tileSetBuilder, tileSize, bitPlanesNo);
-            return reader.Read(source.Stream);
+            //var tileSetBuilder = TileSetBuilder.NewTileSet();
+            //var reader = new ACBMTileSetReader(tileSetBuilder, tileSize, bitPlanesNo);
+            //return reader.Read(source.Stream);
+
+            return null;
         }
 
         public void Save(BaseSource source, object model)

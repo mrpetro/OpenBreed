@@ -75,6 +75,7 @@
     <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="CameraModel.cs" />
     <Compile Include="Database\GameDatabaseDef.cs" />
+    <Compile Include="Database\Sources\SourceParameterDef.cs" />
     <Compile Include="EditorVM.cs" />
     <Compile Include="IDialogProvider.cs" />
     <Compile Include="IFolderBrowserQuery.cs" />
@@ -124,13 +125,17 @@
     <Compile Include="Sources\BaseSource.cs" />
     <Compile Include="Sources\DirectoryFileSource.cs" />
     <Compile Include="Sources\EPFArchiveFileSource.cs" />
+    <Compile Include="Sources\Formats\ABHCMAPFormat.cs" />
+    <Compile Include="Sources\Formats\ABSEMAPFormat.cs" />
     <Compile Include="Sources\Formats\ABTABLKFormat.cs" />
     <Compile Include="Sources\Formats\ABTAMAPFormat.cs" />
     <Compile Include="Sources\Formats\ABTASPRFormat.cs" />
+    <Compile Include="Sources\Formats\ACBMImageFormat.cs" />
     <Compile Include="Sources\Formats\ACBMTileSetFormat.cs" />
     <Compile Include="Sources\Formats\LevelXMLFormat.cs" />
     <Compile Include="Sources\Formats\PropertySetXMLFormat.cs" />
     <Compile Include="Sources\ISourceFormat.cs" />
+    <Compile Include="Sources\SourceParameter.cs" />
     <Compile Include="Sources\SourcesHandler.cs" />
     <Compile Include="Sprites\SpriteSetSelectorVM.cs" />
     <Compile Include="Sprites\SpriteSetVM.cs" />

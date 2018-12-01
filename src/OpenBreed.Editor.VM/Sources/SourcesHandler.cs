@@ -8,6 +8,8 @@ using OpenBreed.Editor.VM.Database.Resources;
 using OpenBreed.Editor.VM.Sources.Formats;
 using EPF;
 using OpenBreed.Common.Logging;
+using System.ComponentModel;
+using System.Globalization;
 
 namespace OpenBreed.Editor.VM.Sources
 {
@@ -30,13 +32,36 @@ namespace OpenBreed.Editor.VM.Sources
             m_Editor = editor;
 
             m_OpenedArchives = new Dictionary<string, EPFArchive>();
-
-            m_Formats.Add("ABTAMAP", new ABTAMAPFormat());
+            m_Formats.Add("ABSE_MAP", new ABSEMAPFormat());
+            m_Formats.Add("ABHC_MAP", new ABHCMAPFormat());
+            m_Formats.Add("ABTA_MAP", new ABTAMAPFormat());
             m_Formats.Add("ABTABLK", new ABTABLKFormat());
             m_Formats.Add("ABTASPR", new ABTASPRFormat());
             m_Formats.Add("ACBM_TILE_SET", new ACBMTileSetFormat());
             m_Formats.Add("LevelXML", new LevelXMLFormat());
             m_Formats.Add("PropertySetXML", new PropertySetXMLFormat());
+        }
+
+        internal Dictionary<string, object> GetParameters(List<SourceParameterDef> parameterDefs)
+        {
+            var parameters = new Dictionary<string, object>();
+
+            foreach (var parameterDef in parameterDefs)
+            {
+                if (string.IsNullOrWhiteSpace(parameterDef.Name) ||
+                    string.IsNullOrWhiteSpace(parameterDef.Type))
+                    continue;
+
+                if (parameters.ContainsKey(parameterDef.Name))
+                    continue;
+
+                var type = Type.GetType(parameterDef.Type);
+                var tc = TypeDescriptor.GetConverter(type);
+                var value = tc.ConvertFromString(null, CultureInfo.InvariantCulture, parameterDef.Value);
+                parameters.Add(parameterDef.Name, value);
+            }
+
+            return parameters;
         }
 
         internal EPFArchive GetArchive(string archivePath)

@@ -33,11 +33,13 @@
             this.TabABSE = new System.Windows.Forms.TabPage();
             this.TabABHC = new System.Windows.Forms.TabPage();
             this.TabABTA = new System.Windows.Forms.TabPage();
-            this.OptionsABTA = new OpenBreed.Editor.UI.WinForms.Controls.EditorOptionsABTA();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.OptionsABHC = new OpenBreed.Editor.UI.WinForms.Controls.EditorOptionsABHC();
+            this.OptionsABTA = new OpenBreed.Editor.UI.WinForms.Controls.EditorOptionsABTA();
+            this.OptionsABSE = new OpenBreed.Editor.UI.WinForms.Controls.EditorOptionsABSE();
             this.Tabs.SuspendLayout();
+            this.TabABSE.SuspendLayout();
             this.TabABHC.SuspendLayout();
             this.TabABTA.SuspendLayout();
             this.SuspendLayout();
@@ -69,6 +71,7 @@
             // 
             // TabABSE
             // 
+            this.TabABSE.Controls.Add(this.OptionsABSE);
             this.TabABSE.Location = new System.Drawing.Point(4, 22);
             this.TabABSE.Name = "TabABSE";
             this.TabABSE.Size = new System.Drawing.Size(555, 175);
@@ -96,14 +99,6 @@
             this.TabABTA.TabIndex = 1;
             this.TabABTA.Text = "AB: Tower Assault";
             this.TabABTA.UseVisualStyleBackColor = true;
-            // 
-            // OptionsABTA
-            // 
-            this.OptionsABTA.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.OptionsABTA.Location = new System.Drawing.Point(3, 3);
-            this.OptionsABTA.Name = "OptionsABTA";
-            this.OptionsABTA.Size = new System.Drawing.Size(549, 169);
-            this.OptionsABTA.TabIndex = 0;
             // 
             // btnOk
             // 
@@ -135,6 +130,22 @@
             this.OptionsABHC.Size = new System.Drawing.Size(555, 175);
             this.OptionsABHC.TabIndex = 0;
             // 
+            // OptionsABTA
+            // 
+            this.OptionsABTA.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.OptionsABTA.Location = new System.Drawing.Point(3, 3);
+            this.OptionsABTA.Name = "OptionsABTA";
+            this.OptionsABTA.Size = new System.Drawing.Size(549, 169);
+            this.OptionsABTA.TabIndex = 0;
+            // 
+            // OptionsABSE
+            // 
+            this.OptionsABSE.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.OptionsABSE.Location = new System.Drawing.Point(0, 0);
+            this.OptionsABSE.Name = "OptionsABSE";
+            this.OptionsABSE.Size = new System.Drawing.Size(555, 175);
+            this.OptionsABSE.TabIndex = 0;
+            // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -147,6 +158,7 @@
             this.Name = "OptionsForm";
             this.Text = "Editor options";
             this.Tabs.ResumeLayout(false);
+            this.TabABSE.ResumeLayout(false);
             this.TabABHC.ResumeLayout(false);
             this.TabABTA.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -164,5 +176,6 @@
         private System.Windows.Forms.Button btnCancel;
         private Controls.EditorOptionsABTA OptionsABTA;
         private Controls.EditorOptionsABHC OptionsABHC;
+        private Controls.EditorOptionsABSE OptionsABSE;
     }
 }

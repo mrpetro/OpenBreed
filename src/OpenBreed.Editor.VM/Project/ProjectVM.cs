@@ -133,6 +133,14 @@ namespace OpenBreed.Editor.VM.Project
             return false;
         }
 
+        public bool TryOpenABSELevel()
+        {
+            if (Root.CurrentDatabase == null)
+                Root.OpenABSEDatabase();
+
+            return TryOpenLevelDef();
+        }
+
         public bool TryOpenABHCLevel()
         {
             if (Root.CurrentDatabase == null)
