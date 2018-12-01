@@ -19,6 +19,28 @@ namespace OpenBreed.Common.Maps.Readers.MAP
             _mainReader = mainReader;
         }
 
+        public PaletteModel ReadEx(BigEndianBinaryReader binReader)
+        {
+            UInt32 uIntSize = binReader.ReadUInt32();
+
+            PaletteBuilder paletteBuilder = PaletteBuilder.NewPaletteModel();
+            int colorsNo = (Int32)uIntSize / 8;
+            paletteBuilder.CreateColors();
+
+            for (int i = 0; i < colorsNo; i++)
+            {
+                byte[] colorData = binReader.ReadBytes(8);
+                paletteBuilder.SetColor(i, Color.FromArgb(255, colorData[0], colorData[2], colorData[4]));
+            }
+
+            for (int i = 0; i < colorsNo; i++)
+            {
+                paletteBuilder.SetColor(i, Color.FromArgb(255, i, i, i));
+            }
+
+            return paletteBuilder.Build();
+        }
+
         public PaletteModel Read(BigEndianBinaryReader binReader)
         {
             UInt32 uIntSize = binReader.ReadUInt32();

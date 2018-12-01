@@ -1,155 +1,63 @@
 <?xml version="1.0"?>
-<GameDatabaseDef Name="ABTA" >
+<GameDatabaseDef Name="ABSE" >
   <SourceDefs>
-    <EPFArchiveFileSourceDef Name="SPR1A.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="SPR1B.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="SPR3A.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="SPR3B.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="SPR4A.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="SPR4B.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="SPR5A.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="SPR5B.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="SPR6A.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="SPR6B.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="SPR7A.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="SPR7B.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="SPR8A.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="SPR8B.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="SPRDA.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="SPRDB.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="HERO1.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="ALIEN_A.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="ALIEN_B.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="ALIEN_C.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="ALIEN_E.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="ALIEN_F.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="ALIEN_G.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="ALIEN_H.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="ALIEN_I.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="ALIEN_J.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="ALIEN_K.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="ALIEN_X.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-	<EPFArchiveFileSourceDef Name="RESIDENT.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="LEVEL1.BLK" Type="ABTABLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="LEVEL3.BLK" Type="ABTABLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="LEVEL4.BLK" Type="ABTABLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="LEVEL5.BLK" Type="ABTABLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="LEVEL6.BLK" Type="ABTABLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="LEVEL7.BLK" Type="ABTABLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="LEVEL8.BLK" Type="ABTABLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="LEVELD.BLK" Type="ABTABLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.01" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.02" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.03" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.04" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.05" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.06" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.07" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.08" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.09" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.10" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.11" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.12" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.13" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.14" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.15" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.16" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.17" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.18" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.19" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.20" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.21" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.22" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.23" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.24" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.25" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.26" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.27" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.28" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.29" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.30" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.31" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.32" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.33" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.34" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.35" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.36" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.37" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.38" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.39" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.40" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.41" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.42" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.43" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.44" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.45" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.46" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.47" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.48" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.49" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.50" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.51" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.52" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.53" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.54" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <EPFArchiveFileSourceDef Name="MAP.55" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-    <DirectoryFileSourceDef Name="Level1PropertySetDef.xml" Type="PropertySetXML" DirectoryPath="%App.ResourcesFolder%" />
+    <DirectoryFileSourceDef Name="L0MA" Type="ABSE_MAP" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
+    <DirectoryFileSourceDef Name="L1MA" Type="ABSE_MAP" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
+    <DirectoryFileSourceDef Name="L2MA" Type="ABSE_MAP" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
+    <DirectoryFileSourceDef Name="L3MA" Type="ABSE_MAP" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
+    <DirectoryFileSourceDef Name="L4MA" Type="ABSE_MAP" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
+    <DirectoryFileSourceDef Name="L5MA" Type="ABSE_MAP" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
+    <DirectoryFileSourceDef Name="L6MA" Type="ABSE_MAP" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
+    <DirectoryFileSourceDef Name="L7MA" Type="ABSE_MAP" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
+    <DirectoryFileSourceDef Name="L8MA" Type="ABSE_MAP" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
+    <DirectoryFileSourceDef Name="L9MA" Type="ABSE_MAP" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
+    <DirectoryFileSourceDef Name="LAMA" Type="ABSE_MAP" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
+    <DirectoryFileSourceDef Name="LBMA" Type="ABSE_MAP" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
+    <DirectoryFileSourceDef Name="LABM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
+      <Parameters>
+        <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+        <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+      </Parameters>
+    </DirectoryFileSourceDef>     
+    <DirectoryFileSourceDef Name="LBBM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
+      <Parameters>
+        <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+        <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+      </Parameters>
+    </DirectoryFileSourceDef>
+    
+    <DirectoryFileSourceDef Name="LCBM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
+      <Parameters>
+        <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+        <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+      </Parameters>
+    </DirectoryFileSourceDef>
+    <DirectoryFileSourceDef Name="LDBM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
+      <Parameters>
+        <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+        <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+      </Parameters>
+    </DirectoryFileSourceDef>
+    <DirectoryFileSourceDef Name="LEBM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
+      <Parameters>
+        <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+        <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+      </Parameters>
+    </DirectoryFileSourceDef>
+    <DirectoryFileSourceDef Name="LFBM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
+      <Parameters>
+        <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+        <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+      </Parameters>
+    </DirectoryFileSourceDef>
+    <DirectoryFileSourceDef Name="LP01" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
+      <Parameters>
+        <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+        <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+      </Parameters>
+    </DirectoryFileSourceDef>
+    <DirectoryFileSourceDef Name="Level1PropertySetDef.xml" Type="PropertySetXML" DirectoryPath="%App.ResourcesFolder%" />   
     <DirectoryFileSourceDef Name="DefaultPropertySetDef.xml" Type="PropertySetXML" DirectoryPath="%App.ResourcesFolder%" />
-    <DirectoryFileSourceDef Name="L01_Crash_Landing_Site.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L02_Civilian_Zone_1.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L03_Civilian_Zone_2.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L04_Civilian_Zone_3.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L05_Civilian_Zone_4.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L06_Outdoor_Sector_2.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L07_Stores_Sector_1.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L08_Stores_Sector_2.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L09_Stores_Sector_3.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L10_Stores_Sector_4.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L11_Outdoor_Sector_3.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L12_Military_Sector_1.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L13_Military_Sector_2.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L14_Military_Sector_3.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L15_Military_Sector_4.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L16_Security_Zone_1.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L17_Security_Zone_2.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L18_Security_Zone_3.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L19_Security_Zone_4.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L20_Colony_Ground_Sector_3.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L21_Science_Sector_1.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L22_Science_Sector_2.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L23_Science_Sector_3.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L24_Science_Sector_4.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L25_Colony_Ground_Sector_4.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L26_Engineering_Sector_1.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L27_Engineering_Sector_2.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L28_Engineering_Sector_3.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L29_Engineering_Sector_4.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L30_Corridor_Zone_1.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L31_Corridor_Zone_2.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L32_Corridor_Zone_3.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L33_Corridor_Zone_4.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L34_Corridor_Zone_5.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L35_Corridor_Zone_6.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L36_Corridor_Zone_7.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L37_Corridor_Zone_8.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L38_Corridor_Zone_9.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L39_Corridor_Zone_10.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L40_Corridor_Zone_11.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L41_Corridor_Zone_12.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L42_Corridor_Zone_13.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L43_Corridor_Zone_14.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L44_Corridor_Zone_15.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L45_Corridor_Zone_16.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L46_Corridor_Zone_17.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L47_Main_Tower_1.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L48_Main_Tower_2.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L49_Main_Tower_3.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L50_Main_Tower_4.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L51_Main_Tower_5.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L52_Main_Tower_6.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L53_Main_Tower_7.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L54_Misson_One.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
-    <DirectoryFileSourceDef Name="L55_Outer_Colony_Sector_5.xml" Type="LevelXML" DirectoryPath="%App.ResourcesFolder%\ABTA\Maps" />
   </SourceDefs>
   <LevelDefs>
     <LevelDef Id="1" Name="CRASH LANDING SITE" >

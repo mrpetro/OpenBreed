@@ -6,14 +6,23 @@ using System.IO;
 
 namespace OpenBreed.Common.Maps.Readers.MAP
 {
+    public enum MAPFormat
+    {
+        ABSE,
+        ABHC,
+        ABTA
+    }
+
     public class MAPReader : IMapModelReader, IDisposable
     {
+        public readonly MAPFormat Format;
 
         #region Public Constructors
 
-        public MAPReader(MapBuilder builder)
+        public MAPReader(MapBuilder builder, MAPFormat format)
         {
             MapBuilder = builder;
+            Format = format;
             PropertiesBuilder = MapPropertiesBuilder.NewPropertiesModel();
             MissionBuilder = MapMissionBuilder.NewMissionModel();
             BodyBuilder = MapBodyBuilder.NewBodyModel();
@@ -76,6 +85,8 @@ namespace OpenBreed.Common.Maps.Readers.MAP
                     PropertiesBuilder.AddPalette(ReadColorBlock(binReader, "CMAP"));
                 else if (string_result == "ALCM")
                     PropertiesBuilder.AddPalette(ReadColorBlock(binReader, "ALCM"));
+                else if (string_result == "IFFC")
+                    PropertiesBuilder.AddPalette(ReadColorBlockEx(binReader, "IFFC"));
                 else if (string_result == "CCCI")
                     PropertiesBuilder.CCCI = ReadBytesBlock(binReader);
                 else if (string_result == "CCIN")
@@ -117,7 +128,8 @@ namespace OpenBreed.Common.Maps.Readers.MAP
                 else if (string_result == "BODY")
                     ReadBody(binReader);
                 else
-                    throw new Exception(string_result + ": Unknown block!");
+                    ReadStringBlock(binReader);
+                //throw new Exception(string_result + ": Unknown block!");
             }
 
             MapBuilder.SetProperties(PropertiesBuilder.Build());
@@ -167,13 +179,23 @@ namespace OpenBreed.Common.Maps.Readers.MAP
             propertyLayerBuilder.SetSize(sizeX, sizeY);
 
             BodyBuilder.SetSize(sizeX, sizeY);
-            //BodyBuilder.CreateCells(sizeX, sizeY);
 
             for (int i = 0; i < tilesNo; i++)
             {
                 UInt16 data = binReader.ReadUInt16();
-                int propId = (UInt16)(data << 10) >> 10;
-                int gfxId = data >> 6;
+                int gfxId;
+                int propId;
+
+                if (Format == MAPFormat.ABSE)
+                {
+                    gfxId = (UInt16)(data << 7) >> 7;
+                    propId = data >> 9;
+                }
+                else
+                {
+                    propId = (UInt16)(data << 10) >> 10;
+                    gfxId = data >> 6;
+                }
 
                 gfxLayerBuilder.SetCell(i, new TileRef(0, gfxId));
                 propertyLayerBuilder.SetCell(i, propId);
@@ -192,6 +214,13 @@ namespace OpenBreed.Common.Maps.Readers.MAP
         private PaletteModel ReadColorBlock(BigEndianBinaryReader binReader, string name)
         {
             PaletteModel result = PaletteReader.Read(binReader);
+            result.Name = name;
+            return result;
+        }
+
+        private PaletteModel ReadColorBlockEx(BigEndianBinaryReader binReader, string name)
+        {
+            PaletteModel result = PaletteReader.ReadEx(binReader);
             result.Name = name;
             return result;
         }
