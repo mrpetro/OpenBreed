@@ -47,10 +47,20 @@
     <Compile Include="Configs\BaseCfg.cs" />
     <Compile Include="Configs\IConfig.cs" />
     <Compile Include="Configs\IConfigCtrl.cs" />
+    <Compile Include="Database\GameDatabaseDef.cs" />
+    <Compile Include="Database\LevelDef.cs" />
+    <Compile Include="Database\Resources\ResourceDef.cs" />
+    <Compile Include="Database\Resources\ResourceLevelDef.cs" />
+    <Compile Include="Database\Sources\DirectoryFileSourceDef.cs" />
+    <Compile Include="Database\Sources\EPFArchiveFileSourceDef.cs" />
+    <Compile Include="Database\Sources\SourceDef.cs" />
+    <Compile Include="Database\Sources\SourceParameterDef.cs" />
     <Compile Include="Drawing\BitmapHelper.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="FileMan.cs" />
     <Compile Include="Helpers\MathHelper.cs" />
+    <Compile Include="Images\Builders\ImageBuilder.cs" />
+    <Compile Include="Images\Readers\ACBM\ACBMImageReader.cs" />
     <Compile Include="Logging\LogFile.cs" />
     <Compile Include="Logging\LogMan.cs" />
     <Compile Include="Logging\LogType.cs" />
@@ -100,7 +110,7 @@
     <Compile Include="Writers\BigEndianBinaryWriter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\ABHC\GameDatabase.ABHC.xml">
+    <Content Include="Defaults\GameDatabase.ABHC.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -155,7 +165,7 @@
     <Content Include="Resources\ABHC\Maps\L1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\ABSE\GameDatabase.ABSE.xml">
+    <Content Include="Defaults\GameDatabase.ABSE.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -174,7 +184,7 @@
     <Content Include="Resources\ABTALevelSetDef.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\ABTA\GameDatabase.ABTA.EPF.xml">
+    <Content Include="Defaults\GameDatabase.ABTA.EPF.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -347,7 +357,6 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\DefaultProject.xml" />
     <Content Include="Resources\DefaultPropertySetDef.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -365,5 +374,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

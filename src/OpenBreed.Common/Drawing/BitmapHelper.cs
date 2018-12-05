@@ -37,12 +37,16 @@ namespace OpenBreed.Common.Drawing
             return bmp;
         }
 
-        public static void SetPaletteColors(Bitmap bitmap, Color[] newColors)
+        public static void SetPaletteColors(Image image, Color[] newColors)
         {
-            ColorPalette palette = bitmap.Palette;
-            for (int colorIndex = 0; colorIndex < palette.Entries.Length; colorIndex++)
+            ColorPalette palette = image.Palette;
+            for (int colorIndex = 0; colorIndex < newColors.Length; colorIndex++)
                 palette.Entries[colorIndex] = newColors[colorIndex];
-            bitmap.Palette = palette;
+
+            for (int colorIndex = newColors.Length; colorIndex < palette.Entries.Length; colorIndex++)
+                palette.Entries[colorIndex] = Color.Black;
+
+            image.Palette = palette;
         }
 
 

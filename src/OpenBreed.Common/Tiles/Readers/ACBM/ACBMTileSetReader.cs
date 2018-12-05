@@ -1,7 +1,9 @@
-﻿using OpenBreed.Common.Tiles.Builders;
+﻿using OpenBreed.Common.Images.Builders;
+using OpenBreed.Common.Tiles.Builders;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;

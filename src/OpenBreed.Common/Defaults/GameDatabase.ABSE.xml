@@ -50,10 +50,18 @@
         <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
       </Parameters>
     </DirectoryFileSourceDef>
-    <DirectoryFileSourceDef Name="LP01" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
+    <DirectoryFileSourceDef Name="LP01" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
       <Parameters>
-        <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-        <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+        <Parameter Name="WIDTH" Type="System.Int32" >640</Parameter>
+        <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+        <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >4</Parameter>
+      </Parameters>
+    </DirectoryFileSourceDef>
+    <DirectoryFileSourceDef Name="LP01B" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
+      <Parameters>
+        <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+        <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+        <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
       </Parameters>
     </DirectoryFileSourceDef>
     <DirectoryFileSourceDef Name="Level1PropertySetDef.xml" Type="PropertySetXML" DirectoryPath="%App.ResourcesFolder%" />   
