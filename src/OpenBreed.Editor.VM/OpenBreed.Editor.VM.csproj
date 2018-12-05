@@ -76,6 +76,7 @@
     <Compile Include="CameraModel.cs" />
     <Compile Include="Database\DatabaseViewerVM.cs" />
     <Compile Include="EditorVM.cs" />
+    <Compile Include="EditorVMHelper.cs" />
     <Compile Include="IDialogProvider.cs" />
     <Compile Include="IFolderBrowserQuery.cs" />
     <Compile Include="Images\ImageViewerVM.cs" />
@@ -108,12 +109,11 @@
     <Compile Include="Palettes\PaletteEditorVM.cs" />
     <Compile Include="Palettes\PalettesVM.cs" />
     <Compile Include="Palettes\PaletteVM.cs" />
-    <Compile Include="Project\ProjectVM.cs" />
+    <Compile Include="Database\DatabaseVM.cs" />
     <Compile Include="Props\PropSelectorVM.cs" />
     <Compile Include="Props\PropSetVM.cs" />
     <Compile Include="Props\PropSetsVM.cs" />
     <Compile Include="Props\PropVM.cs" />
-    <Compile Include="Database\GameDatabase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sources\BaseSource.cs" />
     <Compile Include="Sources\DirectoryFileSource.cs" />

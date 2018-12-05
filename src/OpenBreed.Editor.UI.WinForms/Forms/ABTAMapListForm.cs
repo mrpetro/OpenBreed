@@ -31,7 +31,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         private void UpdateLevelList(LevelDef initLevelDef)
         {
 
-            var sourceDefs = m_Model.CurrentDatabase.GetAllSourcesOfType("LevelXML");
+            var sourceDefs = m_Model.Database.GetAllSourcesOfType("LevelXML");
 
             List<LevelDef> levelDefs = new List<LevelDef>();
 

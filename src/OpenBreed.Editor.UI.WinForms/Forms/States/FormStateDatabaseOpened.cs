@@ -48,9 +48,9 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             _projectView.Dock = DockStyle.Fill;
 
             FileCloseDatabaseToolStripMenuItem = new ToolStripMenuItem("Close database");
-            FileCloseDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.Project.TryCloseDatabase();
+            FileCloseDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.TryCloseDatabase();
             FileOpenDatabaseToolStripMenuItem = new ToolStripMenuItem("Open Database...");
-            FileOpenDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.Project.TryOpenDatabase();
+            FileOpenDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.TryOpenDatabase();
             ExitToolStripMenuItem = new ToolStripMenuItem("Exit");
             ExitToolStripMenuItem.Click += (s, a) => MainForm.Close();
             ViewMapBodyMenuItem = new ToolStripMenuItem("Map body");
@@ -97,7 +97,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
 
         internal override void Setup()
         {
-            if (MainForm.VM.CurrentDatabase == null)
+            if (MainForm.VM.Database == null)
                 throw new InvalidOperationException("No current database!");
 
             //Setup the File menu
@@ -123,12 +123,12 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewImagesMenuItem);
             MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewToolsMenuItem);
 
-            MainForm.Text = $"{MainForm.APP_NAME} - {MainForm.VM.Project.Name}";
+            MainForm.Text = $"{MainForm.APP_NAME} - {MainForm.VM.Database.Name}";
 
             MainForm.SuspendLayout();
             MainForm.Controls.Add(_projectView);
             MainForm.Controls.SetChildIndex(_projectView, 0);
-            _projectView.Initialize(MainForm.VM.Project);
+            _projectView.Initialize(MainForm.VM.Database);
             MainForm.ResumeLayout();
 
             //_projectView.ActiveContentChanged += new EventHandler(ProjectView_ActiveContentChanged);

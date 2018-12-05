@@ -14,7 +14,7 @@ using OpenBreed.Common;
 using OpenBreed.Editor.VM.Database;
 using OpenBreed.Common.Database.Sources;
 
-namespace OpenBreed.Editor.VM.Project
+namespace OpenBreed.Editor.VM.Database
 {
     public enum ProjectState
     {
@@ -24,19 +24,20 @@ namespace OpenBreed.Editor.VM.Project
         Closing
     }
 
-    public class ProjectVM : BaseViewModel
+    public class DatabaseVM : BaseViewModel
     {
 
         #region Private Fields
 
         private LevelDef _currentLevel;
+        private GameDatabaseDef _databaseDef;
         private ProjectState _state;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ProjectVM(EditorVM root)
+        private DatabaseVM(EditorVM root)
         {
             Root = root;
         }
@@ -51,8 +52,11 @@ namespace OpenBreed.Editor.VM.Project
             set { SetProperty(ref _currentLevel, value); }
         }
 
+        public string FilePath { get; private set; }
         public bool IsLevelOpened { get { return CurrentLevel != null; } }
 
+        public List<LevelDef> LevelDefs { get { return _databaseDef.LevelDefs; } }
+        public string Name { get; set; }
         public EditorVM Root { get; private set; }
 
         public ProjectState State
@@ -61,11 +65,34 @@ namespace OpenBreed.Editor.VM.Project
             set { SetProperty(ref _state, value); }
         }
 
-        public string Name { get; set; }
-
         #endregion Public Properties
 
         #region Public Methods
+
+        public List<SourceDef> GetAllSourcesOfType(string type)
+        {
+            return _databaseDef.SourceDefs.FindAll(item => item.Type == type);
+        }
+
+        public LevelDef GetLevelDef(int id)
+        {
+            var levelDef = _databaseDef.LevelDefs.FirstOrDefault(item => item.Id == id);
+
+            if (levelDef == null)
+                throw new InvalidOperationException("Level(" + id + ") not found!");
+
+            return levelDef;
+        }
+
+        public SourceDef GetSourceDef(string sourceRef)
+        {
+            var sourceDef = _databaseDef.SourceDefs.FirstOrDefault(item => item.Name == sourceRef);
+
+            if (sourceDef == null)
+                throw new InvalidOperationException("Source " + sourceRef + " not found!");
+
+            return sourceDef;
+        }
 
         public void Load(SourceDef sourceDef)
         {
@@ -89,11 +116,19 @@ namespace OpenBreed.Editor.VM.Project
             if (levelDef.PropertySetResourceRef != null)
                 Root.PropSets.AddPropertySet(levelDef.PropertySetResourceRef);
 
-            var mapSourceDef = Root.CurrentDatabase.GetSourceDef(levelDef.MapResourceRef);
+            var mapSourceDef = GetSourceDef(levelDef.MapResourceRef);
             if (mapSourceDef != null)
                 Root.Map.Load(mapSourceDef);
 
             CurrentLevel = levelDef;
+        }
+
+        public bool TryClose()
+        {
+
+
+            Root.Map.TryClose();
+            return true;
         }
 
         public void TryNewLevel()
@@ -126,74 +161,20 @@ namespace OpenBreed.Editor.VM.Project
             return false;
         }
 
-        /// <summary>
-        /// This checks if database is opened already,
-        /// If it is then it asks of it can be closed
-        /// </summary>
-        /// <returns>True if no database was opened or if previous one was closed, false otherwise</returns>
-        private bool CheckCloseCurrentDatabase(string newDatabaseFilePath)
-        {
-            if (Root.CurrentDatabase != null)
-            {
-                if (OpenBreed.Common.Tools.GetNormalizedPath(newDatabaseFilePath) == OpenBreed.Common.Tools.GetNormalizedPath(Root.CurrentDatabase.FilePath))
-                {
-                    //Root.Logger.Warning("Database already opened.");
-                    return false;
-                }
-
-                var answer = Root.DialogProvider.ShowMessageWithQuestion($"Another database ({Root.CurrentDatabase}) is already opened.",
-                                                                "Close current database?",
-                                                                QuestionDialogButtons.OKCancel);
-                if (answer != DialogAnswer.OK)
-                    return false;
-
-                if (!TryCloseDatabase())
-                    return false;
-            }
-
-            return true;
-        }
-
-        public bool TryOpenDatabase()
-        {
-            var openFileDialog = Root.DialogProvider.OpenFileDialog();
-            openFileDialog.Title = "Select an Open Breed Editor Database file to open...";
-            openFileDialog.Filter = "Open Breed Editor Database files (*.xml)|*.xml|All Files (*.*)|*.*";
-            openFileDialog.InitialDirectory = GameDatabaseDef.DefaultDirectoryPath;
-
-            openFileDialog.Multiselect = false;
-            var answer = openFileDialog.Show();
-
-            if (answer != DialogAnswer.OK)
-                return false;
-
-            string databaseFilePath = openFileDialog.FileName;
-
-            if (!CheckCloseCurrentDatabase(databaseFilePath))
-                return false;
-
-            Root.OpenDatabase(databaseFilePath);
-            return true;
-        }
-
-        public bool TryCloseDatabase()
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion Public Methods
 
-        #region Internal Methods
+        #region Private Methods
 
-        public bool TryClose()
+
+        internal static DatabaseVM Create(EditorVM root, string filePath)
         {
+            var database = new DatabaseVM(root);
+            database._databaseDef = GameDatabaseDef.Load(filePath);
+            database.FilePath = filePath;
 
-
-            Root.Map.TryClose();
-            return true;
+            return database;
         }
 
-        #endregion Internal Methods
-
+        #endregion Private Methods
     }
 }

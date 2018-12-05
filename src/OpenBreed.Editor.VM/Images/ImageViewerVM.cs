@@ -59,7 +59,7 @@ namespace OpenBreed.Editor.VM.Images
 
         public void TryLoad(string imageSourceRef)
         {
-            var imageSourceDef = Root.CurrentDatabase.GetSourceDef(imageSourceRef);
+            var imageSourceDef = Root.Database.GetSourceDef(imageSourceRef);
             if (imageSourceDef == null)
                 throw new Exception("No ImageSourceDef definition found!");
 

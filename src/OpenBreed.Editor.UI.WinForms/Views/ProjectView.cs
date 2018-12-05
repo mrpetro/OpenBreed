@@ -9,9 +9,9 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using OpenABEd;
 using System.IO;
-using OpenBreed.Editor.VM.Project;
 using OpenBreed.Editor.VM.Maps.Tools;
 using OpenBreed.Common;
+using OpenBreed.Editor.VM.Database;
 
 namespace OpenBreed.Editor.UI.WinForms.Views
 {
@@ -35,7 +35,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         #region Private Fields
 
         private DeserializeDockContent _deserializeDockContent;
-        private ProjectVM _vm;
+        private DatabaseVM _vm;
 
         private bool _saveLayout = true;
         private MapBodyEditorView _mapBodyView = new MapBodyEditorView();
@@ -79,7 +79,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _toolsView.Close();
         }
 
-        public void Initialize(ProjectVM vm)
+        public void Initialize(DatabaseVM vm)
         {
             if (vm == null)
                 throw new ArgumentNullException(nameof(vm));

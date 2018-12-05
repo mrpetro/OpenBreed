@@ -79,7 +79,7 @@ namespace OpenBreed.Editor.VM.Props
                 LogMan.Instance.LogWarning("Property Set source not set. Getting default: DefaultPropertySetDef.xml");
             }
 
-            var propertySetSourceDef = Root.CurrentDatabase.GetSourceDef(propertySetRef);
+            var propertySetSourceDef = Root.Database.GetSourceDef(propertySetRef);
 
             if (propertySetSourceDef == null)
                 throw new Exception("No PropertySetSource definition found with name: " + propertySetRef);

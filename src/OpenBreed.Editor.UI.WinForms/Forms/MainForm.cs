@@ -86,7 +86,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         {
             switch (e.PropertyName)
             {
-                case nameof(VM.CurrentDatabase):
+                case nameof(VM.Database):
                     OnDatabaseChanged();
                     break;
                 default:
@@ -96,7 +96,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
         private void OnDatabaseChanged()
         {
-            if (VM.CurrentDatabase != null)
+            if (VM.Database != null)
                 State = DatabaseOpenedState;
             else
                 State = InitialState;

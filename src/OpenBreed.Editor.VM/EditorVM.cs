@@ -15,7 +15,6 @@ using OpenBreed.Editor.VM.Props;
 using OpenBreed.Editor.VM.Sprites;
 using OpenBreed.Editor.VM.Maps.Tools;
 using OpenBreed.Common.Palettes;
-using OpenBreed.Editor.VM.Project;
 using System.Diagnostics;
 using OpenBreed.Common;
 using OpenBreed.Common.Logging;
@@ -39,7 +38,7 @@ namespace OpenBreed.Editor.VM
 
         #region Private Fields
 
-        private GameDatabase _currentDatabase;
+        private DatabaseVM _database;
         private EditorState _state;
 
         #endregion Private Fields
@@ -52,7 +51,6 @@ namespace OpenBreed.Editor.VM
 
             Settings = new SettingsMan();
             ToolsMan = new ToolsMan();
-            Project = new ProjectVM(this);
             TileSetSelector = new TileSetSelectorVM(this);
             Palettes = new PalettesVM(this);
 
@@ -76,21 +74,21 @@ namespace OpenBreed.Editor.VM
 
         #region Public Properties
 
-        public GameDatabase CurrentDatabase
+        public DatabaseVM Database
         {
-            get { return _currentDatabase; }
-            set { SetProperty(ref _currentDatabase, value); }
+            get { return _database; }
+            set { SetProperty(ref _database, value); }
         }
 
         public IDialogProvider DialogProvider { get; private set; }
+
+        public ImageViewerVM ImageViewer { get; private set; }
 
         public MapVM Map { get; private set; }
 
         public MapBodyEditorVM MapBodyViewer { get; private set; }
 
         public PalettesVM Palettes { get; private set; }
-
-        public ProjectVM Project { get; private set; }
 
         public PropSetsVM PropSets { get; private set; }
 
@@ -109,10 +107,13 @@ namespace OpenBreed.Editor.VM
             get { return _state; }
             set { SetProperty(ref _state, value); }
         }
+
         public BindingList<TileSetVM> TileSets { get; private set; }
+
         public TileSetSelectorVM TileSetSelector { get; private set; }
+
         public TileSetViewerVM TileSetViewer { get; private set; }
-        public ImageViewerVM ImageViewer { get; private set; }
+
         public ToolsMan ToolsMan { get; private set; }
 
         #endregion Public Properties
@@ -121,7 +122,7 @@ namespace OpenBreed.Editor.VM
 
         public void AddSpriteSet(string spriteSetRef)
         {
-            var spriteSetSourceDef = CurrentDatabase.GetSourceDef(spriteSetRef);
+            var spriteSetSourceDef = Database.GetSourceDef(spriteSetRef);
             if (spriteSetSourceDef == null)
                 throw new Exception("No SpriteSetSource definition found!");
 
@@ -135,7 +136,7 @@ namespace OpenBreed.Editor.VM
 
         public void AddTileSet(string tileSetRef)
         {
-            var tileSetSourceDef = CurrentDatabase.GetSourceDef(tileSetRef);
+            var tileSetSourceDef = Database.GetSourceDef(tileSetRef);
             if (tileSetSourceDef == null)
                 throw new Exception("No TileSetSource definition found with name: " + tileSetRef);
 
@@ -147,37 +148,9 @@ namespace OpenBreed.Editor.VM
             TileSets.Add(TileSetVM.Create(this, source));
         }
 
-        public void CloseDatabase()
-        {
-            if (CurrentDatabase == null)
-            {
-                LogMan.Instance.LogWarning("No database currently opened.");
-                return;
-            }
-
-            Sources.CloseAll();
-
-            CurrentDatabase = null;
-        }
-
         public void Dispose()
         {
             Settings.Store();
-        }
-
-        public void OpenDatabase(string filePath)
-        {
-            if (CurrentDatabase != null)
-            {
-                if (OpenBreed.Common.Tools.GetNormalizedPath(filePath) == OpenBreed.Common.Tools.GetNormalizedPath(CurrentDatabase.FilePath))
-                {
-                    LogMan.Instance.LogWarning("Database already opened.");
-                    return;
-                }
-            }
-
-            var databaseDef = GameDatabaseDef.Load(filePath);
-            CurrentDatabase = new GameDatabase(databaseDef, filePath);
         }
 
         public void Run()
@@ -197,22 +170,20 @@ namespace OpenBreed.Editor.VM
             throw new NotImplementedException();
         }
 
-        public bool TryExit()
+        public bool TryCloseDatabase()
         {
-            if (CurrentDatabase != null)
-            {
-                if (Project.IsLevelOpened)
-                {
-                    if (!Project.TryClose())
-                        return false;
-                }
-
-                CloseDatabase();
-            }
-
-            return true;
+            return EditorVMHelper.TryCloseDatabase(this);
         }
 
+        public bool TryExit()
+        {
+            return EditorVMHelper.TryExit(this);
+        }
+
+        public void TryOpenDatabase()
+        {
+            EditorVMHelper.TryOpenDatabase(this);
+        }
         public void TryRunABTAGame()
         {
             Tools.TryAction(RunABTAGame);

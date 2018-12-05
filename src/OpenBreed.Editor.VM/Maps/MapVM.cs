@@ -4,7 +4,6 @@ using OpenBreed.Common.Maps;
 using OpenBreed.Common.Palettes;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Palettes;
-using OpenBreed.Editor.VM.Project;
 using OpenBreed.Editor.VM.Sources;
 using System;
 using System.IO;
@@ -90,7 +89,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         public void Set(string mapSourceRef)
         {
-            var mapSourceDef = Root.CurrentDatabase.GetSourceDef(mapSourceRef);
+            var mapSourceDef = Root.Database.GetSourceDef(mapSourceRef);
             if (mapSourceDef == null)
                 throw new Exception("No MapSource definition found!");
 

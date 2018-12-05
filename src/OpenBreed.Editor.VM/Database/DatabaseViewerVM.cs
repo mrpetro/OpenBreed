@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database
 {
-    class DatabaseViewerVM
+    public class DatabaseViewerVM
     {
     }
 }
