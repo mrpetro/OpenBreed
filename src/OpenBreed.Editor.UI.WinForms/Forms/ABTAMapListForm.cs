@@ -8,10 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using OpenBreed.Editor.UI.WinForms.Views;
 using OpenBreed.Editor.VM;
-using OpenBreed.Editor.VM.Levels.Readers.XML;
-using OpenBreed.Editor.VM.Levels;
 using System.IO;
 using OpenBreed.Common;
+using OpenBreed.Common.Database.Sources;
 
 namespace OpenBreed.Editor.UI.WinForms.Forms
 {

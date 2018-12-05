@@ -40,6 +40,14 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
             SetupWithColor(_vm.CurrentColor);
         }
 
+        void UpdateItems()
+        {
+            //if (_vm.Items.Count == 0)
+            //    SetNoSpritesState();
+            //else
+            //    SetSpritesState();
+        }
+
         private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)

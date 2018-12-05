@@ -8,6 +8,7 @@ namespace OpenBreed.Editor.VM
 {
     public interface IOpenFileQuery
     {
+        string InitialDirectory { get; set; }
         string Title { get; set; }
         string Filter { get; set; }
         bool Multiselect { get; set; }

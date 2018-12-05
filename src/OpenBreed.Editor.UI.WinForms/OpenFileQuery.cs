@@ -12,6 +12,12 @@ namespace OpenBreed.Editor.UI.WinForms
     {
         private System.Windows.Forms.OpenFileDialog _dialog = new System.Windows.Forms.OpenFileDialog();
 
+        public string InitialDirectory
+        {
+            get { return _dialog.InitialDirectory; }
+            set { _dialog.InitialDirectory = value; }
+        }
+
         public string Filter
         {
             get { return _dialog.Filter; }

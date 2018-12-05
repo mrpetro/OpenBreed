@@ -1,25 +1,28 @@
-﻿using OpenBreed.Editor.VM;
-using OpenBreed.Editor.VM.Maps;
-using OpenBreed.Editor.VM.Maps.Tools;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing.Drawing2D;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
+using OpenBreed.Editor.VM.Images;
 
 namespace OpenBreed.Editor.UI.WinForms.Views
 {
-    public partial class MapBodyEditorView : DockContent, IToolController
+    public partial class ImagesView : DockContent
     {
         #region Private Fields
 
-        private MapBodyEditorVM _vm;
+        private ImageViewerVM _vm;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public MapBodyEditorView()
+        public ImagesView()
         {
             InitializeComponent();
         }
@@ -28,13 +31,15 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         #region Public Methods
 
-        public void Initialize(MapBodyEditorVM vm)
+        public void Initialize(ImageViewerVM vm)
         {
             _vm = vm;
 
-            MapBodyViewer.Initialize(_vm);
+            ImageViewer.Initialize(_vm);
 
             _vm.PropertyChanged += _vm_PropertyChanged;
+
+            _vm.TryLoad("LP01B");
         }
 
         #endregion Public Methods
@@ -45,8 +50,11 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         {
             switch (e.PropertyName)
             {
-                case nameof(_vm.Title):
-                    TabText = _vm.Title;
+                case nameof(_vm.Image):
+                    if (_vm.Image == null)
+                        return;
+                    Width = _vm.Image.Width;
+                    Height = _vm.Image.Height;
                     break;
                 default:
                     break;

@@ -18,7 +18,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Map
     {
         #region Private Fields
 
-        private MapBodyEditorM _vm;
+        private MapBodyEditorVM _vm;
 
         #endregion Private Fields
 
@@ -35,7 +35,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Map
 
         #region Public Methods
 
-        public void Initialize(MapBodyEditorM vm)
+        public void Initialize(MapBodyEditorVM vm)
         {
             _vm = vm;
 

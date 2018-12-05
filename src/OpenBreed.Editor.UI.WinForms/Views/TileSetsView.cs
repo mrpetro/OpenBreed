@@ -10,7 +10,6 @@ using OpenBreed.Editor.VM.Tiles;
 using OpenBreed.Editor.VM;
 using OpenBreed.Editor.VM.Palettes;
 using WeifenLuo.WinFormsUI.Docking;
-using OpenBreed.Editor.VM.Levels;
 using OpenBreed.Editor.UI.WinForms;
 
 namespace OpenBreed.Editor.UI.WinForms.Views

@@ -10,10 +10,8 @@ using System.Drawing;
 using OpenBreed.Common.Maps.Readers.MAP;
 using OpenBreed.Common.Maps.Builders;
 using OpenBreed.Editor.VM.Database;
-using OpenBreed.Editor.VM.Levels;
 using OpenBreed.Editor.VM.Sources;
 using OpenBreed.Editor.VM.Props;
-using OpenBreed.Editor.VM.Database.Sources;
 using OpenBreed.Editor.VM.Sprites;
 using OpenBreed.Editor.VM.Maps.Tools;
 using OpenBreed.Common.Palettes;
@@ -24,6 +22,8 @@ using OpenBreed.Common.Logging;
 using OpenBreed.Editor.Cfg;
 using System.ComponentModel;
 using OpenBreed.Editor.VM.Base;
+using OpenBreed.Editor.VM.Images;
+using OpenBreed.Common.Database.Sources;
 
 namespace OpenBreed.Editor.VM
 {
@@ -65,10 +65,10 @@ namespace OpenBreed.Editor.VM
             TileSetViewer = new TileSetViewerVM(this);
             SpriteSetViewer = new SpriteSetSelectorVM(this);
             SpriteViewer = new SpriteViewerVM(this);
+            ImageViewer = new ImageViewerVM(this);
             PropSets = new PropSetsVM(this);
-            Projects = new ProjectsHandler(this);
             Map = new MapVM(this);
-            MapBodyViewer = new MapBodyEditorM(this);
+            MapBodyViewer = new MapBodyEditorVM(this);
             Sources = new SourcesHandler(this);
         }
 
@@ -86,13 +86,11 @@ namespace OpenBreed.Editor.VM
 
         public MapVM Map { get; private set; }
 
-        public MapBodyEditorM MapBodyViewer { get; private set; }
+        public MapBodyEditorVM MapBodyViewer { get; private set; }
 
         public PalettesVM Palettes { get; private set; }
 
         public ProjectVM Project { get; private set; }
-
-        public ProjectsHandler Projects { get; set; }
 
         public PropSetsVM PropSets { get; private set; }
 
@@ -114,6 +112,7 @@ namespace OpenBreed.Editor.VM
         public BindingList<TileSetVM> TileSets { get; private set; }
         public TileSetSelectorVM TileSetSelector { get; private set; }
         public TileSetViewerVM TileSetViewer { get; private set; }
+        public ImageViewerVM ImageViewer { get; private set; }
         public ToolsMan ToolsMan { get; private set; }
 
         #endregion Public Properties
@@ -164,24 +163,6 @@ namespace OpenBreed.Editor.VM
         public void Dispose()
         {
             Settings.Store();
-        }
-
-        public void OpenABSEDatabase()
-        {
-            string dbPath = Path.Combine(ProgramTools.AppDir, GameDatabaseDef.DEFAULT_ABSE_DB_PATH);
-            OpenDatabase(dbPath);
-        }
-
-        public void OpenABHCDatabase()
-        {
-            string dbPath = Path.Combine(ProgramTools.AppDir, GameDatabaseDef.DEFAULT_ABHC_DB_PATH);
-            OpenDatabase(dbPath);
-        }
-
-        public void OpenABTADatabase()
-        {
-            string dbPath = Path.Combine(ProgramTools.AppDir, GameDatabaseDef.DEFAULT_ABTA_DB_PATH);
-            OpenDatabase(dbPath);
         }
 
         public void OpenDatabase(string filePath)

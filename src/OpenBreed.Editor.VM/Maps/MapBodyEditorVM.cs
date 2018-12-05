@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Maps
 {
-    public class MapBodyEditorM : BaseViewModel
+    public class MapBodyEditorVM : BaseViewModel
     {
         #region Private Fields
 
@@ -21,7 +21,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Constructors
 
-        public MapBodyEditorM(EditorVM root)
+        public MapBodyEditorVM(EditorVM root)
         {
             Root = root;
 

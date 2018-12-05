@@ -23,6 +23,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         TileSet,
         SpriteSets,
         PropertySet,
+        Images,
         Tools
     }
 
@@ -43,6 +44,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         private PropSetsView _propSetsView = new PropSetsView();
         private SpriteSetsView _spriteSetsView = new SpriteSetsView();
         private TileSetsView _tileSetView = new TileSetsView();
+        private ImagesView _imagesView = new ImagesView();
         private ToolsView _toolsView = new ToolsView();
 
         #endregion Private Fields
@@ -84,12 +86,6 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
             _vm = vm;
 
-            _vm.Root.ToolsMan.ToolActivated += ToolsMan_ToolActivated;
-
-            RestoreLayout();
-        }
-        public void InitViews()
-        {
             _toolsView.Initialize(_vm.Root.ToolsMan);
             _tileSetView.Initialize(_vm.Root);
             _spriteSetsView.Initialize(_vm.Root);
@@ -97,7 +93,14 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _mapPalettesView.Initialize(_vm.Root.Palettes);
             _mapPropertiesView.Initialize(_vm.Root.Map.Properties);
             _mapBodyView.Initialize(_vm.Root.MapBodyViewer);
+            _imagesView.Initialize(_vm.Root.ImageViewer);
 
+            _vm.Root.ToolsMan.ToolActivated += ToolsMan_ToolActivated;
+
+            RestoreLayout();
+        }
+        public void InitViews()
+        {
             _tileSetView.Show(this, DockState.DockLeft);
             _spriteSetsView.Show(this, DockState.DockLeft);
             _propSetsView.Show(this, DockState.DockLeft);
@@ -151,6 +154,8 @@ namespace OpenBreed.Editor.UI.WinForms.Views
                     return _spriteSetsView;
                 case ProjectViewType.PropertySet:
                     return _propSetsView;
+                case ProjectViewType.Images:
+                    return _imagesView;
                 case ProjectViewType.Tools:
                     return _toolsView;
                 default:

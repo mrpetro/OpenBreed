@@ -4,14 +4,11 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using OpenBreed.Editor.VM.Database;
-using OpenBreed.Editor.VM.Levels;
 using OpenBreed.Editor.VM.Tiles;
 using OpenBreed.Editor.VM.Sprites;
 using OpenBreed.Editor.VM.Maps;
-using OpenBreed.Editor.VM.Database.Resources;
-using OpenBreed.Editor.VM.Database.Sources;
 using OpenBreed.Editor.VM.Props;
-using OpenBreed.Editor.VM.Levels.Readers.XML;
+using OpenBreed.Common.Database.Sources;
 
 namespace OpenBreed.Editor.VM
 {

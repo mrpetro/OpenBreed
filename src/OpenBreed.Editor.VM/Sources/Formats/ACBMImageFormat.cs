@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OpenBreed.Common.Images.Builders;
+using OpenBreed.Common.Images.Readers.ACBM;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,18 +22,16 @@ namespace OpenBreed.Editor.VM.Sources.Formats
             int bitPlanesNo = source.GetParameter<int>("BIT_PLANES_NO");
 
             //Remember to set source stream to begining
-            //source.Stream.Seek(0, SeekOrigin.Begin);
+            source.Stream.Seek(0, SeekOrigin.Begin);
 
-            //var tileSetBuilder = TileSetBuilder.NewTileSet();
-            //var reader = new ACBMTileSetReader(tileSetBuilder, tileSize, bitPlanesNo);
-            //return reader.Read(source.Stream);
-
-            return null;
+            var imageBuilder = ImageBuilder.NewImage();
+            var reader = new ACBMImageReader(imageBuilder, width, height, bitPlanesNo, true);
+            return reader.Read(source.Stream);
         }
 
         public void Save(BaseSource source, object model)
         {
-            throw new NotImplementedException("ACBM Write");
+            throw new NotImplementedException("ACBMImage Write");
         }
     }
 }

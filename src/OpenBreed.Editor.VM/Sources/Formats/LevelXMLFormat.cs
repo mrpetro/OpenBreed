@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using OpenBreed.Editor.VM.Levels.Readers.XML;
 using OpenBreed.Common;
+using OpenBreed.Common.Database.Sources;
 
 namespace OpenBreed.Editor.VM.Sources.Formats
 {

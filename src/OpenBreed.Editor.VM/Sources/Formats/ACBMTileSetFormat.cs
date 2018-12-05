@@ -30,7 +30,7 @@ namespace OpenBreed.Editor.VM.Sources.Formats
 
         public void Save(BaseSource source, object model)
         {
-            throw new NotImplementedException("ACBM Write");
+            throw new NotImplementedException("ACBMTileSet Write");
         }
     }
 }

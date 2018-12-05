@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using OpenBreed.Editor.VM.Database.Sources;
 using OpenBreed.Common.Props;
 using System.ComponentModel;
 using OpenBreed.Editor.VM.Base;

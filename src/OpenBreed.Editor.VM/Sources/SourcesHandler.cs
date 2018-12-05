@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using OpenBreed.Editor.VM.Database.Sources;
 using System.IO;
-using OpenBreed.Editor.VM.Database.Resources;
 using OpenBreed.Editor.VM.Sources.Formats;
 using EPF;
 using OpenBreed.Common.Logging;
 using System.ComponentModel;
 using System.Globalization;
+using OpenBreed.Common.Database.Sources;
 
 namespace OpenBreed.Editor.VM.Sources
 {
@@ -38,6 +37,7 @@ namespace OpenBreed.Editor.VM.Sources
             m_Formats.Add("ABTABLK", new ABTABLKFormat());
             m_Formats.Add("ABTASPR", new ABTASPRFormat());
             m_Formats.Add("ACBM_TILE_SET", new ACBMTileSetFormat());
+            m_Formats.Add("ACBM_IMAGE", new ACBMImageFormat());
             m_Formats.Add("LevelXML", new LevelXMLFormat());
             m_Formats.Add("PropertySetXML", new PropertySetXMLFormat());
         }

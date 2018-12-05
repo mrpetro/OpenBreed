@@ -10,18 +10,33 @@ using System.Windows.Forms;
 using OpenBreed.Editor.VM;
 
 using OpenBreed.Common;
+using OpenBreed.Editor.UI.WinForms.Forms.States;
 
 namespace OpenBreed.Editor.UI.WinForms.Forms
 {
     public partial class MainForm : Form
     {
+        private FormStateDatabaseOpened DatabaseOpenedState;
+        private FormStateInitial InitialState;
 
         #region Public Fields
 
         public const string APP_NAME = "Open Breed Map Editor";
 
-        public readonly MainFormGeneralState GeneralState;
-        public readonly MainFormLevelState LevelState;
+        private FormState _state;
+
+        internal FormState State
+        {
+            get { return _state; }
+            set
+            {
+                if (_state != null)
+                    _state.Cleanup();
+
+                _state = value;
+                _state.Setup();
+            }
+        }
 
         #endregion Public Fields
 
@@ -33,10 +48,12 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         {
             InitializeComponent();
 
+            DatabaseOpenedState = new FormStateDatabaseOpened(this);
+            InitialState = new FormStateInitial(this);
+
             FormClosing += new FormClosingEventHandler(MainForm_FormClosing);
 
-            GeneralState = new MainFormGeneralState(this);
-            LevelState = new MainFormLevelState(this);
+            State = new FormStateInitial(this);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -62,27 +79,27 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
             VM = vm;
 
-            VM.Project.PropertyChanged += Project_PropertyChanged;
+            VM.PropertyChanged += VM_PropertyChanged;
         }
 
-        private void Project_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void VM_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
-                case nameof(VM.Project.CurrentLevel):
-                    ProjectOpened();
+                case nameof(VM.CurrentDatabase):
+                    OnDatabaseChanged();
                     break;
                 default:
                     break;
             }
         }
 
-        private void ProjectOpened()
+        private void OnDatabaseChanged()
         {
-            if(VM.Project.CurrentLevel != null)
-                LevelState.SetMapEditState(VM.Project);
-            //else
-
+            if (VM.CurrentDatabase != null)
+                State = DatabaseOpenedState;
+            else
+                State = InitialState;
         }
 
         #endregion Public Methods

@@ -1,4 +1,4 @@
-﻿using OpenBreed.Editor.VM.Database.Sources;
+﻿using OpenBreed.Common.Database.Sources;
 using System;
 using System.Collections.Generic;
 using System.IO;

@@ -70,6 +70,12 @@
     <Compile Include="Controls\EditorOptionsABTA.Designer.cs">
       <DependentUpon>EditorOptionsABTA.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Images\ImageViewerCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Images\ImageViewerCtrl.Designer.cs">
+      <DependentUpon>ImageViewerCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Map\MapBodyEditorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -162,14 +168,15 @@
     <Compile Include="Forms\ABTAPasswordGeneratorForm.Designer.cs">
       <DependentUpon>ABTAPasswordGeneratorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\States\FormStateDatabaseOpened.cs" />
+    <Compile Include="Forms\FormState.cs" />
+    <Compile Include="Forms\States\FormStateInitial.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MainFormGeneralState.cs" />
-    <Compile Include="Forms\MainFormLevelState.cs" />
     <Compile Include="Forms\OptionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,6 +195,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SaveFileQuery.cs" />
+    <Compile Include="Views\ImagesView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ImagesView.Designer.cs">
+      <DependentUpon>ImagesView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\LogConsoleView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -271,6 +284,9 @@
     <EmbeddedResource Include="Controls\EditorOptionsABTA.resx">
       <DependentUpon>EditorOptionsABTA.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Images\ImageViewerCtrl.resx">
+      <DependentUpon>ImageViewerCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Map\MapPropertiesCtrl.resx">
       <DependentUpon>MapPropertiesCtrl.cs</DependentUpon>
     </EmbeddedResource>
@@ -321,6 +337,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MapPropertiesCtrl.resx">
       <DependentUpon>MapPropertiesCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ImagesView.resx">
+      <DependentUpon>ImagesView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\LogConsoleView.resx">
       <DependentUpon>LogConsoleView.cs</DependentUpon>

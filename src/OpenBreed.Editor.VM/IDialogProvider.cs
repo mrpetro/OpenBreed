@@ -34,6 +34,7 @@ namespace OpenBreed.Editor.VM
         IOpenFileQuery OpenFileDialog();
         ISaveFileQuery SaveFileDialog();
 
+        DialogAnswer ShowMessageWithQuestion(string text, string caption, QuestionDialogButtons buttons);
         DialogAnswer ShowReplaceFileQuestion(string title, string caption);
 
         #endregion Public Methods

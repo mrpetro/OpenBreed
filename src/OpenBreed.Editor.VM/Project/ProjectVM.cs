@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using OpenBreed.Editor.VM.Levels;
-using OpenBreed.Editor.VM.Levels.Readers.XML;
 using OpenBreed.Editor.VM;
 using OpenBreed.Editor.VM.Sources;
-using OpenBreed.Editor.VM.Database.Sources;
 using OpenBreed.Editor.VM.Tiles;
 using OpenBreed.Editor.VM.Maps;
 using OpenBreed.Editor.VM.Props;
@@ -14,6 +11,8 @@ using OpenBreed.Editor.VM.Maps.Tools;
 using OpenBreed.Editor.VM.Base;
 using System.IO;
 using OpenBreed.Common;
+using OpenBreed.Editor.VM.Database;
+using OpenBreed.Common.Database.Sources;
 
 namespace OpenBreed.Editor.VM.Project
 {
@@ -62,6 +61,8 @@ namespace OpenBreed.Editor.VM.Project
             set { SetProperty(ref _state, value); }
         }
 
+        public string Name { get; set; }
+
         #endregion Public Properties
 
         #region Public Methods
@@ -100,14 +101,6 @@ namespace OpenBreed.Editor.VM.Project
             Root.DialogProvider.ShowMessage("Creating new project is not implemented yet.", "Feature not implemented");
         }
 
-        public bool TryOpenABTALevel()
-        {
-            if (Root.CurrentDatabase == null)
-                Root.OpenABTADatabase();
-
-            return TryOpenLevelDef();
-        }
-
         public bool TryOpenLevelDef()
         {
             var openFileDialog = Root.DialogProvider.OpenFileDialog();
@@ -133,20 +126,59 @@ namespace OpenBreed.Editor.VM.Project
             return false;
         }
 
-        public bool TryOpenABSELevel()
+        /// <summary>
+        /// This checks if database is opened already,
+        /// If it is then it asks of it can be closed
+        /// </summary>
+        /// <returns>True if no database was opened or if previous one was closed, false otherwise</returns>
+        private bool CheckCloseCurrentDatabase(string newDatabaseFilePath)
         {
-            if (Root.CurrentDatabase == null)
-                Root.OpenABSEDatabase();
+            if (Root.CurrentDatabase != null)
+            {
+                if (OpenBreed.Common.Tools.GetNormalizedPath(newDatabaseFilePath) == OpenBreed.Common.Tools.GetNormalizedPath(Root.CurrentDatabase.FilePath))
+                {
+                    //Root.Logger.Warning("Database already opened.");
+                    return false;
+                }
 
-            return TryOpenLevelDef();
+                var answer = Root.DialogProvider.ShowMessageWithQuestion($"Another database ({Root.CurrentDatabase}) is already opened.",
+                                                                "Close current database?",
+                                                                QuestionDialogButtons.OKCancel);
+                if (answer != DialogAnswer.OK)
+                    return false;
+
+                if (!TryCloseDatabase())
+                    return false;
+            }
+
+            return true;
         }
 
-        public bool TryOpenABHCLevel()
+        public bool TryOpenDatabase()
         {
-            if (Root.CurrentDatabase == null)
-                Root.OpenABHCDatabase();
+            var openFileDialog = Root.DialogProvider.OpenFileDialog();
+            openFileDialog.Title = "Select an Open Breed Editor Database file to open...";
+            openFileDialog.Filter = "Open Breed Editor Database files (*.xml)|*.xml|All Files (*.*)|*.*";
+            openFileDialog.InitialDirectory = GameDatabaseDef.DefaultDirectoryPath;
 
-            return TryOpenLevelDef();
+            openFileDialog.Multiselect = false;
+            var answer = openFileDialog.Show();
+
+            if (answer != DialogAnswer.OK)
+                return false;
+
+            string databaseFilePath = openFileDialog.FileName;
+
+            if (!CheckCloseCurrentDatabase(databaseFilePath))
+                return false;
+
+            Root.OpenDatabase(databaseFilePath);
+            return true;
+        }
+
+        public bool TryCloseDatabase()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion Public Methods

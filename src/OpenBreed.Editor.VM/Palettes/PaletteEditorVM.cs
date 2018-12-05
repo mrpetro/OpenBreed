@@ -47,7 +47,8 @@ namespace OpenBreed.Editor.VM.Palettes
 
         public Color CurrentColor
         {
-            get { return CurrentPalette.Colors[CurrentColorIndex]; }
+            get { return CurrentColorIndex == -1 ? Color.Empty : CurrentPalette.Colors[CurrentColorIndex]; }
+
             set
             {
                 if (CurrentPalette.Colors[CurrentColorIndex] == value)

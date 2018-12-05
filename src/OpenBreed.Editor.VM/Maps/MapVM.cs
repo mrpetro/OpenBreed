@@ -1,8 +1,8 @@
 ﻿using OpenBreed.Common.Commands;
+using OpenBreed.Common.Database.Sources;
 using OpenBreed.Common.Maps;
 using OpenBreed.Common.Palettes;
 using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM.Database.Sources;
 using OpenBreed.Editor.VM.Palettes;
 using OpenBreed.Editor.VM.Project;
 using OpenBreed.Editor.VM.Sources;

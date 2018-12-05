@@ -10,11 +10,11 @@ namespace OpenBreed.Editor.VM.Maps.Tools
 {
     public class ScrollTool : LevelTool
     {
-        private readonly MapBodyEditorM _vm = null;
+        private readonly MapBodyEditorVM _vm = null;
 
         private Point m_LastPos;
 
-        public ScrollTool(MapBodyEditorM vm, IToolController controller) :
+        public ScrollTool(MapBodyEditorVM vm, IToolController controller) :
             base("ScrollTool", controller)
         {
             if (vm == null)
