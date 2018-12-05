@@ -35,14 +35,14 @@ namespace OpenBreed.Editor.VM.Database
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Private Constructors
 
         private DatabaseVM(EditorVM root)
         {
             Root = root;
         }
 
-        #endregion Public Constructors
+        #endregion Private Constructors
 
         #region Public Properties
 
@@ -163,8 +163,7 @@ namespace OpenBreed.Editor.VM.Database
 
         #endregion Public Methods
 
-        #region Private Methods
-
+        #region Internal Methods
 
         internal static DatabaseVM Create(EditorVM root, string filePath)
         {
@@ -175,6 +174,7 @@ namespace OpenBreed.Editor.VM.Database
             return database;
         }
 
-        #endregion Private Methods
+        #endregion Internal Methods
+
     }
 }
