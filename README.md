@@ -41,3 +41,8 @@ For ABTA -
 
 <TODO>
 
+ ## Development status
+ Currently this repository goes trough very heavy refactoring, so declared functionality may be missing or not working at all
+  
+
+
