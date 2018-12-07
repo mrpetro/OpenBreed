@@ -28,9 +28,8 @@ Create fully functional map editor for AB games with parallel thinking about ope
  - Possibility to view maps with their original color palettes, tiles and properties
  - Possibility to view tile sets associated with maps
  
- ## TODO
- 
- TBD
+ ## Development status
+ Currently this repository goes trough very heavy refactoring, so declared functionality may be missing or not working at all
   
   
  
