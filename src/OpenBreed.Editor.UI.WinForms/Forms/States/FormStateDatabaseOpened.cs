@@ -29,6 +29,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
         internal ToolStripMenuItem ViewSpriteSetsMenuItem = null;
         internal ToolStripMenuItem ViewTileSetMenuItem = null;
         internal ToolStripMenuItem ViewToolsMenuItem = null;
+        internal ToolStripMenuItem ViewDatabaseMenuItem = null;
 
         #endregion Internal Fields
 
@@ -69,6 +70,8 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             ViewImagesMenuItem.Click += (s, a) => _projectView.ShowView(ProjectViewType.Images);
             ViewToolsMenuItem = new ToolStripMenuItem("Tools");
             ViewToolsMenuItem.Click += (s, a) => _projectView.ShowView(ProjectViewType.Tools);
+            ViewDatabaseMenuItem = new ToolStripMenuItem("Database items");
+            ViewDatabaseMenuItem.Click += (s, a) => _projectView.ShowDatabase();
         }
 
         #endregion Internal Constructors
@@ -93,6 +96,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewPropertySetMenuItem);
             MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewImagesMenuItem);
             MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewToolsMenuItem);
+            MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewDatabaseMenuItem);
         }
 
         internal override void Setup()
@@ -122,6 +126,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewPropertySetMenuItem);
             MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewImagesMenuItem);
             MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewToolsMenuItem);
+            MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewDatabaseMenuItem);
 
             MainForm.Text = $"{MainForm.APP_NAME} - {MainForm.VM.Database.Name}";
 

@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.Database.Sources;
+﻿using OpenBreed.Common.Database.Items.Sources;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Sources;
 using System;
@@ -51,6 +51,9 @@ namespace OpenBreed.Editor.VM.Images
 
         public void Draw(Graphics gfx, float x, float y, int factor)
         {
+            if (Image == null)
+                return;
+
             int width = Image.Width * factor;
             int height = Image.Height * factor;
 

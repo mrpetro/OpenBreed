@@ -73,8 +73,19 @@
       <Link>SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Base\BaseViewModel.cs" />
+    <Compile Include="Base\BindingListExtensions.cs" />
     <Compile Include="CameraModel.cs" />
+    <Compile Include="Database\DatabaseTableSelectorVM.cs" />
     <Compile Include="Database\DatabaseViewerVM.cs" />
+    <Compile Include="Database\Items\DatabaseImageItemVM.cs" />
+    <Compile Include="Database\Items\DatabaseItemVM.cs" />
+    <Compile Include="Database\DatabaseTableViewerVM.cs" />
+    <Compile Include="Database\Items\DatabaseLevelItemVM.cs" />
+    <Compile Include="Database\Items\DatabaseSourceItemVM.cs" />
+    <Compile Include="Database\Items\DatabaseTableVM.cs" />
+    <Compile Include="Database\Tables\DatabaseImageTableVM.cs" />
+    <Compile Include="Database\Tables\DatabaseLevelTableVM.cs" />
+    <Compile Include="Database\Tables\DatabaseSourceTableVM.cs" />
     <Compile Include="EditorVM.cs" />
     <Compile Include="EditorVMHelper.cs" />
     <Compile Include="IDialogProvider.cs" />

@@ -8,7 +8,7 @@ using EPF;
 using OpenBreed.Common.Logging;
 using System.ComponentModel;
 using System.Globalization;
-using OpenBreed.Common.Database.Sources;
+using OpenBreed.Common.Database.Items.Sources;
 
 namespace OpenBreed.Editor.VM.Sources
 {

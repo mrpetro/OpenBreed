@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using OpenBreed.Common;
-using OpenBreed.Common.Database.Sources;
+using OpenBreed.Common.Database.Items.Levels;
 
 namespace OpenBreed.Editor.VM.Sources.Formats
 {

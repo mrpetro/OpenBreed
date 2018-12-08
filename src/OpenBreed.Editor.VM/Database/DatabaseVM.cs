@@ -12,7 +12,17 @@ using OpenBreed.Editor.VM.Base;
 using System.IO;
 using OpenBreed.Common;
 using OpenBreed.Editor.VM.Database;
-using OpenBreed.Common.Database.Sources;
+using OpenBreed.Editor.VM.Database.Items;
+using OpenBreed.Common.Database;
+using System.ComponentModel;
+using OpenBreed.Common.Database.Items.Sources;
+using OpenBreed.Common.Database.Tables.Sources;
+using OpenBreed.Common.Database.Items.Levels;
+using OpenBreed.Common.Database.Items.Images;
+using OpenBreed.Common.Database.Tables;
+using OpenBreed.Common.Database.Tables.Images;
+using OpenBreed.Editor.VM.Database.Tables;
+using OpenBreed.Common.Database.Tables.Levels;
 
 namespace OpenBreed.Editor.VM.Database
 {
@@ -30,14 +40,15 @@ namespace OpenBreed.Editor.VM.Database
         #region Private Fields
 
         private LevelDef _currentLevel;
-        private GameDatabaseDef _databaseDef;
+        private DatabaseDef _databaseDef;
+
         private ProjectState _state;
 
         #endregion Private Fields
 
         #region Private Constructors
 
-        private DatabaseVM(EditorVM root)
+        internal DatabaseVM(EditorVM root)
         {
             Root = root;
         }
@@ -55,8 +66,9 @@ namespace OpenBreed.Editor.VM.Database
         public string FilePath { get; private set; }
         public bool IsLevelOpened { get { return CurrentLevel != null; } }
 
-        public List<LevelDef> LevelDefs { get { return _databaseDef.LevelDefs; } }
         public string Name { get; set; }
+
+
         public EditorVM Root { get; private set; }
 
         public ProjectState State
@@ -71,7 +83,7 @@ namespace OpenBreed.Editor.VM.Database
 
         public List<SourceDef> GetAllSourcesOfType(string type)
         {
-            return _databaseDef.SourceDefs.FindAll(item => item.Type == type);
+            return _databaseDef.Tables.OfType<DatabaseSourceTableDef>().FirstOrDefault().Items.FindAll(item => item.Type == type);
         }
 
         public LevelDef GetLevelDef(int id)
@@ -86,7 +98,7 @@ namespace OpenBreed.Editor.VM.Database
 
         public SourceDef GetSourceDef(string sourceRef)
         {
-            var sourceDef = _databaseDef.SourceDefs.FirstOrDefault(item => item.Name == sourceRef);
+            var sourceDef = _databaseDef.Tables.OfType<DatabaseSourceTableDef>().FirstOrDefault().Items.FirstOrDefault(item => item.Name == sourceRef);
 
             if (sourceDef == null)
                 throw new InvalidOperationException("Source " + sourceRef + " not found!");
@@ -165,13 +177,47 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Internal Methods
 
-        internal static DatabaseVM Create(EditorVM root, string filePath)
+        internal DatabaseTableVM CreateTable(DatabaseTableDef tableDef)
         {
-            var database = new DatabaseVM(root);
-            database._databaseDef = GameDatabaseDef.Load(filePath);
-            database.FilePath = filePath;
+            if (tableDef is DatabaseImageTableDef)
+                return new DatabaseImageTableVM(this);
+            else if (tableDef is DatabaseLevelTableDef)
+                return new DatabaseLevelTableVM(this);
+            else if (tableDef is DatabaseSourceTableDef)
+                return new DatabaseSourceTableVM(this);
+            else
+                throw new NotImplementedException(tableDef.ToString());
+        }
 
-            return database;
+        internal DatabaseItemVM CreateItem(DatabaseItemDef itemDef)
+        {
+            if (itemDef is ImageDef)
+                return new DatabaseImageItemVM(this);
+            else if (itemDef is LevelDef)
+                return new DatabaseLevelItemVM(this);
+            else if (itemDef is SourceDef)
+                return new DatabaseSourceItemVM(this);
+            if (itemDef is DatabaseTableDef)
+                return CreateTable((DatabaseTableDef)itemDef);
+
+            else
+                throw new NotImplementedException(itemDef.ToString());
+        }
+
+        internal IEnumerable<DatabaseTableVM> GetTables()
+        {
+            foreach (var tableDef in _databaseDef.Tables)
+            {
+                var tableVM = CreateTable(tableDef);
+                tableVM.Load(tableDef);
+                yield return tableVM;
+            }
+        }
+
+        internal void Load(string filePath )
+        {
+            _databaseDef = Tools.RestoreFromXml<DatabaseDef>(filePath);
+            FilePath = filePath;
         }
 
         #endregion Internal Methods

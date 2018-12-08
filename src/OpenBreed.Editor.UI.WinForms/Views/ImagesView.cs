@@ -39,7 +39,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
             _vm.PropertyChanged += _vm_PropertyChanged;
 
-            _vm.TryLoad("LP01B");
+            //_vm.TryLoad("LP01B");
         }
 
         #endregion Public Methods

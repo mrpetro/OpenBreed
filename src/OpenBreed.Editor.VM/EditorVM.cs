@@ -22,7 +22,6 @@ using OpenBreed.Editor.Cfg;
 using System.ComponentModel;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Images;
-using OpenBreed.Common.Database.Sources;
 
 namespace OpenBreed.Editor.VM
 {
@@ -60,6 +59,7 @@ namespace OpenBreed.Editor.VM
             TileSets = new BindingList<TileSetVM>();
             TileSets.ListChanged += (s, e) => OnPropertyChanged(nameof(TileSets));
 
+            DatabaseViewer = new DatabaseViewerVM(this);
             TileSetViewer = new TileSetViewerVM(this);
             SpriteSetViewer = new SpriteSetSelectorVM(this);
             SpriteViewer = new SpriteViewerVM(this);
@@ -79,6 +79,8 @@ namespace OpenBreed.Editor.VM
             get { return _database; }
             set { SetProperty(ref _database, value); }
         }
+
+        public DatabaseViewerVM DatabaseViewer { get; private set; }
 
         public IDialogProvider DialogProvider { get; private set; }
 
@@ -148,11 +150,20 @@ namespace OpenBreed.Editor.VM
             TileSets.Add(TileSetVM.Create(this, source));
         }
 
+        public DatabaseVM CreateDatabase()
+        {
+            return new DatabaseVM(this);
+        }
+
         public void Dispose()
         {
             Settings.Store();
         }
 
+        public void Initialize()
+        {
+            DatabaseViewer.Connect();
+        }
         public void Run()
         {
             try
@@ -192,10 +203,6 @@ namespace OpenBreed.Editor.VM
         #endregion Public Methods
 
         #region Private Methods
-
-        private void Initialize()
-        {
-        }
 
         private void RunABTAGame()
         {

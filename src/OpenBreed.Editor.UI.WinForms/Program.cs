@@ -27,6 +27,7 @@ namespace OpenBreed.Editor.UI.WinForms
 
             using (var editor = new EditorVM(dialogProvider))
             {
+                editor.Initialize();
                 editor.Run();
                 InitUI(editor);
             }

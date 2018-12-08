@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using OpenBreed.Common.Database.Sources;
+using OpenBreed.Common.Database.Items.Sources;
 
 namespace OpenBreed.Editor.VM.Sources
 {

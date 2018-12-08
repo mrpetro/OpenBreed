@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using EPF;
-using OpenBreed.Common.Database.Sources;
+using OpenBreed.Common.Database.Items.Sources;
 
 namespace OpenBreed.Editor.VM.Sources
 {

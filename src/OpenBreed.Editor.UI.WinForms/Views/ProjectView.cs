@@ -46,6 +46,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         private TileSetsView _tileSetView = new TileSetsView();
         private ImagesView _imagesView = new ImagesView();
         private ToolsView _toolsView = new ToolsView();
+        private DatabaseView _databaseView = new DatabaseView();
 
         #endregion Private Fields
 
@@ -94,6 +95,8 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _mapPropertiesView.Initialize(_vm.Root.Map.Properties);
             _mapBodyView.Initialize(_vm.Root.MapBodyViewer);
             _imagesView.Initialize(_vm.Root.ImageViewer);
+            _imagesView.Initialize(_vm.Root.ImageViewer);
+            _databaseView.Initialize(_vm.Root.DatabaseViewer);
 
             _vm.Root.ToolsMan.ToolActivated += ToolsMan_ToolActivated;
 
@@ -116,6 +119,11 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
             if (File.Exists(configFile))
                 LoadFromXml(configFile, _deserializeDockContent);
+        }
+
+        public void ShowDatabase()
+        {
+            _databaseView.Show(this, DockState.DockLeft);
         }
 
         public void ShowView(ProjectViewType type)

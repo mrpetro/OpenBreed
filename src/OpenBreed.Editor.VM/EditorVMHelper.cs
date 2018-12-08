@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Database.Sources;
+using OpenBreed.Common.Database;
 using OpenBreed.Editor.VM.Database;
 using System;
 using System.Collections.Generic;
@@ -69,7 +69,7 @@ namespace OpenBreed.Editor.VM
             var openFileDialog = editor.DialogProvider.OpenFileDialog();
             openFileDialog.Title = "Select an Open Breed Editor Database file to open...";
             openFileDialog.Filter = "Open Breed Editor Database files (*.xml)|*.xml|All Files (*.*)|*.*";
-            openFileDialog.InitialDirectory = GameDatabaseDef.DefaultDirectoryPath;
+            openFileDialog.InitialDirectory = DatabaseDef.DefaultDirectoryPath;
 
             openFileDialog.Multiselect = false;
             var answer = openFileDialog.Show();
@@ -82,7 +82,10 @@ namespace OpenBreed.Editor.VM
             if (!CheckCloseCurrentDatabase(editor, databaseFilePath))
                 return false;
 
-            editor.Database = DatabaseVM.Create(editor, databaseFilePath);
+            var database = editor.CreateDatabase();
+            database.Load(databaseFilePath);
+            editor.Database = database;
+
             return true;
         }
 
