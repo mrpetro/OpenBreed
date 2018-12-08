@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<GameDatabaseDef Name="ABHC" >
+<DatabaseDef Name="ABHC" >
   <SourceDefs>
     <DirectoryFileSourceDef Name="L1MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
     <DirectoryFileSourceDef Name="L2MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
@@ -76,4 +76,4 @@
 
     <DirectoryFileSourceDef Name="DefaultPropertySetDef.xml" Type="PropertySetXML" DirectoryPath="%App.ResourcesFolder%" />
   </SourceDefs>
-</GameDatabaseDef>
+</DatabaseDef>

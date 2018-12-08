@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<GameDatabaseDef Name="ABTA" >
+<DatabaseDef Name="ABTA" >
   <SourceDefs>
     <EPFArchiveFileSourceDef Name="SPR1A.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
     <EPFArchiveFileSourceDef Name="SPR1B.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
@@ -1224,4 +1224,4 @@
       </SpriteSetResourceRefs>
     </ResourceLevelDef>
   </ResourceDefs>
-</GameDatabaseDef>
+</DatabaseDef>

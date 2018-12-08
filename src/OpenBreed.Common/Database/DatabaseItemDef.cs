@@ -5,17 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace OpenBreed.Common.Database.Sources
+namespace OpenBreed.Common.Database
 {
-    public class SourceParameterDef
+    public class DatabaseItemDef
     {
         [XmlAttribute]
         public string Name { get; set; }
 
         [XmlAttribute]
-        public string Type { get; set; }
+        public string Description { get; set; }
 
-        [XmlText]
-        public string Value { get; set; }
+        public override string ToString()
+        {
+            return $"DbTableItem '{Name}'";
+        }
     }
 }

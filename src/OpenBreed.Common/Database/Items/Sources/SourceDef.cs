@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace OpenBreed.Common.Database.Sources
+namespace OpenBreed.Common.Database.Items.Sources
 {
     [Serializable]
-    public class SourceDef
+    public class SourceDef : DatabaseItemDef
     {
         #region Public Fields
 
@@ -18,9 +18,6 @@ namespace OpenBreed.Common.Database.Sources
 
         #region Public Properties
 
-        [XmlAttribute]
-        public string Name { get; set; }
- 
         [XmlAttribute]
         public string Type { get; set; }
 

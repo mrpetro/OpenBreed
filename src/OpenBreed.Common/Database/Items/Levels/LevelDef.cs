@@ -4,15 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace OpenBreed.Common.Database.Sources
+namespace OpenBreed.Common.Database.Items.Levels
 {
     [Serializable]
-    public class LevelDef
+    public class LevelDef : DatabaseItemDef
     {
         [XmlAttribute]
         public int Id { get; set; }
-        [XmlAttribute]
-        public string Name { get; set; }
 
         public string MapResourceRef { get; set; }
         public string TileSetResourceRef { get; set; }
@@ -20,10 +18,5 @@ namespace OpenBreed.Common.Database.Sources
         [XmlArray("SpriteSetResourceRefs"),
         XmlArrayItem("SpriteSetResourceRef", typeof(string))]
         public List<string> SpriteSetResourceRefs { get; set; }
-
-        public override string ToString()
-        {
-            return Id.ToString() + ". " + Name;
-        }
     }
 }
