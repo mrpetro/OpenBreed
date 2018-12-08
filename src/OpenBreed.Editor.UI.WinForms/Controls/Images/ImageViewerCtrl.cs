@@ -28,10 +28,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Images
         {
             _vm = vm;
 
-            //_vm.Root.ToolsMan.ClearTools();
-            //_vm.Root.ToolsMan.AddPassiveTool(new ScrollTool(_vm, this));
-            //_vm.Root.ToolsMan.AddPassiveTool(new ZoomTool(_vm, this));
-
             _vm.PropertyChanged += _vm_PropertyChanged;
 
             UpdateViewState();
@@ -59,11 +55,14 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Images
 
         private void SetNoImageState()
         {
+            Invalidate();
         }
 
         private void SetImageState()
         {
-
+            Width = _vm.Image.Width;
+            Height = _vm.Image.Height;
+            Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)

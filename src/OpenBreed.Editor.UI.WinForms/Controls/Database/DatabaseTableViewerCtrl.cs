@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenBreed.Editor.VM.Database;
+using OpenBreed.Editor.VM.Database.Items;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Database
 {
@@ -27,6 +28,8 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
             DGV.AutoSize = true;
             DGV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DGV.RowHeadersVisible = false;
+
+            DGV.CellContentClick += DGV_CellContentClick;
         }
 
         public void Initialize(DatabaseTableViewerVM vm)
@@ -43,6 +46,19 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
             buttonColumn.Name = "Data";
             buttonColumn.Text = "Open";
             DGV.Columns.Add(buttonColumn);
+        }
+
+        private void DGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
+                e.RowIndex >= 0)
+            {
+                var item = senderGrid.Rows[e.RowIndex].DataBoundItem as DatabaseItemVM ?? throw new InvalidOperationException();
+
+                item.Open();
+            }
         }
     }
 }

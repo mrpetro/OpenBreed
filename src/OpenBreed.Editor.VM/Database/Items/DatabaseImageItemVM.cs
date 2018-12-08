@@ -10,15 +10,23 @@ namespace OpenBreed.Editor.VM.Database.Items
 {
     public class DatabaseImageItemVM : DatabaseItemVM
     {
+        private ImageDef _model;
+
         public DatabaseImageItemVM(DatabaseVM owner) : base(owner)
         {
         }
 
         public override void Load(DatabaseItemDef itemDef)
         {
-            var imageDef = itemDef as ImageDef ?? throw new InvalidOperationException($"Expected {nameof(ImageDef)}");
+            _model = itemDef as ImageDef ?? throw new InvalidOperationException($"Expected {nameof(ImageDef)}");
 
             base.Load(itemDef);
+        }
+
+        public override void Open()
+        {
+            Owner.Root.ImageViewer.TryLoad(_model.SourceRef);
+            Owner.OpenedItem = this;
         }
     }
 }

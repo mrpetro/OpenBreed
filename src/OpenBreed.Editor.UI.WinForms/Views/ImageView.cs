@@ -12,7 +12,7 @@ using OpenBreed.Editor.VM.Images;
 
 namespace OpenBreed.Editor.UI.WinForms.Views
 {
-    public partial class ImagesView : DockContent
+    public partial class ImageView : DockContent
     {
         #region Private Fields
 
@@ -22,7 +22,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         #region Public Constructors
 
-        public ImagesView()
+        public ImageView()
         {
             InitializeComponent();
         }
@@ -38,8 +38,6 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             ImageViewer.Initialize(_vm);
 
             _vm.PropertyChanged += _vm_PropertyChanged;
-
-            //_vm.TryLoad("LP01B");
         }
 
         #endregion Public Methods

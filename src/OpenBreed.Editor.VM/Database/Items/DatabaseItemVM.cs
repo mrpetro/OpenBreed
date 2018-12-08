@@ -40,6 +40,11 @@ namespace OpenBreed.Editor.VM.Database.Items
             Description = itemDef.Description;
         }
 
+        public virtual void Open()
+        {
+
+        }
+
         #endregion Public Methods
 
     }

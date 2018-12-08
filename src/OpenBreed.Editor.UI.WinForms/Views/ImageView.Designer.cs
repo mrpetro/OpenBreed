@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Editor.UI.WinForms.Views
 {
-    partial class ImagesView
+    partial class ImageView
     {
         /// <summary> 
         /// Required designer variable.

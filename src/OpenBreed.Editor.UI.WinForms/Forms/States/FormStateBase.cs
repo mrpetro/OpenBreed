@@ -1,10 +1,11 @@
-﻿using System;
+﻿using OpenBreed.Editor.UI.WinForms.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Editor.UI.WinForms.Forms
+namespace OpenBreed.Editor.UI.WinForms.Forms.States
 {
     internal abstract class FormState
     {

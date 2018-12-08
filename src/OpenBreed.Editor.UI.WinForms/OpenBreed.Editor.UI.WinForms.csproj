@@ -187,7 +187,7 @@
       <DependentUpon>ABTAPasswordGeneratorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\States\FormStateDatabaseOpened.cs" />
-    <Compile Include="Forms\FormState.cs" />
+    <Compile Include="Forms\States\FormStateBase.cs" />
     <Compile Include="Forms\States\FormStateInitial.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -219,11 +219,11 @@
     <Compile Include="Views\DatabaseView.Designer.cs">
       <DependentUpon>DatabaseView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ImagesView.cs">
+    <Compile Include="Views\ImageView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ImagesView.Designer.cs">
-      <DependentUpon>ImagesView.cs</DependentUpon>
+    <Compile Include="Views\ImageView.Designer.cs">
+      <DependentUpon>ImageView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\LogConsoleView.cs">
       <SubType>Form</SubType>
@@ -374,8 +374,8 @@
     <EmbeddedResource Include="Views\DatabaseView.resx">
       <DependentUpon>DatabaseView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ImagesView.resx">
-      <DependentUpon>ImagesView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\ImageView.resx">
+      <DependentUpon>ImageView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\LogConsoleView.resx">
       <DependentUpon>LogConsoleView.cs</DependentUpon>

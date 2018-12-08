@@ -60,6 +60,18 @@ namespace OpenBreed.Editor.VM.Images
             gfx.DrawImage(Image, (int)x, (int)y, width, height);
         }
 
+        public void TryClose()
+        {
+            if (Source != null)
+            {
+                Source.Dispose();
+                Source = null;
+
+                Image.Dispose();
+                Image = null;
+            }
+        }
+
         public void TryLoad(string imageSourceRef)
         {
             var imageSourceDef = Root.Database.GetSourceDef(imageSourceRef);
@@ -81,7 +93,10 @@ namespace OpenBreed.Editor.VM.Images
         internal void Load(SourceDef sourceDef)
         {
             if (Source != null)
-                throw new InvalidOperationException("Other map already loaded!");
+            {
+                Source.Dispose();
+                Source = null;
+            }
 
             var source = Root.Sources.GetSource(sourceDef);
 

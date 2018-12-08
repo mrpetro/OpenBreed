@@ -17,6 +17,8 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         public DatabaseView()
         {
             InitializeComponent();
+
+            HideOnClose = true;
         }
 
         public void Initialize(DatabaseViewerVM vm)

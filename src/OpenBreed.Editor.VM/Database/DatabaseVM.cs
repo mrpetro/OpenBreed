@@ -39,6 +39,7 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Private Fields
 
+        private DatabaseItemVM _openedItem;
         private LevelDef _currentLevel;
         private DatabaseDef _databaseDef;
 
@@ -75,6 +76,12 @@ namespace OpenBreed.Editor.VM.Database
         {
             get { return _state; }
             set { SetProperty(ref _state, value); }
+        }
+
+        public DatabaseItemVM OpenedItem
+        {
+            get { return _openedItem; }
+            set { SetProperty(ref _openedItem, value); }
         }
 
         #endregion Public Properties
@@ -137,8 +144,6 @@ namespace OpenBreed.Editor.VM.Database
 
         public bool TryClose()
         {
-
-
             Root.Map.TryClose();
             return true;
         }

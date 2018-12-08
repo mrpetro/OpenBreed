@@ -24,7 +24,8 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         SpriteSets,
         PropertySet,
         Images,
-        Tools
+        Tools,
+        DatabaseViewer
     }
 
 
@@ -38,14 +39,14 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         private DatabaseVM _vm;
 
         private bool _saveLayout = true;
-        private MapBodyEditorView _mapBodyView = new MapBodyEditorView();
-        private MapPalettesView _mapPalettesView = new MapPalettesView();
-        private MapPropertiesView _mapPropertiesView = new MapPropertiesView();
-        private PropSetsView _propSetsView = new PropSetsView();
-        private SpriteSetsView _spriteSetsView = new SpriteSetsView();
-        private TileSetsView _tileSetView = new TileSetsView();
-        private ImagesView _imagesView = new ImagesView();
-        private ToolsView _toolsView = new ToolsView();
+        //private MapBodyEditorView _mapBodyView = new MapBodyEditorView();
+        //private MapPalettesView _mapPalettesView = new MapPalettesView();
+        //private MapPropertiesView _mapPropertiesView = new MapPropertiesView();
+        //private PropSetsView _propSetsView = new PropSetsView();
+        //private SpriteSetsView _spriteSetsView = new SpriteSetsView();
+        //private TileSetsView _tileSetView = new TileSetsView();
+        private ImageView _imagesView = new ImageView();
+        //private ToolsView _toolsView = new ToolsView();
         private DatabaseView _databaseView = new DatabaseView();
 
         #endregion Private Fields
@@ -63,21 +64,21 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         #region Public Methods
 
-        public void CloseView(ProjectViewType type)
-        {
-            var view = GetView(type);
-            view.Close();
-        }
+        //public void CloseView(ProjectViewType type)
+        //{
+        //    var view = GetView(type);
+        //    view.Close();
+        //}
 
         public void DeinitViews()
         {
-            _mapBodyView.Close();
-            _mapPropertiesView.Close();
-            _mapPalettesView.Close();
-            _propSetsView.Close();
-            _tileSetView.Close();
-            _spriteSetsView.Close();
-            _toolsView.Close();
+            //_mapBodyView.Close();
+            //_mapPropertiesView.Close();
+            //_mapPalettesView.Close();
+            //_propSetsView.Close();
+            //_tileSetView.Close();
+            //_spriteSetsView.Close();
+            //_toolsView.Close();
         }
 
         public void Initialize(DatabaseVM vm)
@@ -87,30 +88,29 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
             _vm = vm;
 
-            _toolsView.Initialize(_vm.Root.ToolsMan);
-            _tileSetView.Initialize(_vm.Root);
-            _spriteSetsView.Initialize(_vm.Root);
-            _propSetsView.Initialize(_vm.Root.PropSets);
-            _mapPalettesView.Initialize(_vm.Root.Palettes);
-            _mapPropertiesView.Initialize(_vm.Root.Map.Properties);
-            _mapBodyView.Initialize(_vm.Root.MapBodyViewer);
-            _imagesView.Initialize(_vm.Root.ImageViewer);
+            //_toolsView.Initialize(_vm.Root.ToolsMan);
+            //_tileSetView.Initialize(_vm.Root);
+            //_spriteSetsView.Initialize(_vm.Root);
+            //_propSetsView.Initialize(_vm.Root.PropSets);
+            //_mapPalettesView.Initialize(_vm.Root.Palettes);
+            //_mapPropertiesView.Initialize(_vm.Root.Map.Properties);
+            //_mapBodyView.Initialize(_vm.Root.MapBodyViewer);
             _imagesView.Initialize(_vm.Root.ImageViewer);
             _databaseView.Initialize(_vm.Root.DatabaseViewer);
 
-            _vm.Root.ToolsMan.ToolActivated += ToolsMan_ToolActivated;
+            //_vm.Root.ToolsMan.ToolActivated += ToolsMan_ToolActivated;
 
             RestoreLayout();
         }
         public void InitViews()
         {
-            _tileSetView.Show(this, DockState.DockLeft);
-            _spriteSetsView.Show(this, DockState.DockLeft);
-            _propSetsView.Show(this, DockState.DockLeft);
-            _mapPalettesView.Show(this, DockState.DockLeft);
-            _mapPropertiesView.Show(this, DockState.DockLeft);
-            _mapBodyView.Show(this, DockState.Document);
-            _toolsView.Show(this, DockState.DockTop);
+            //_tileSetView.Show(this, DockState.DockLeft);
+            //_spriteSetsView.Show(this, DockState.DockLeft);
+            //_propSetsView.Show(this, DockState.DockLeft);
+            //_mapPalettesView.Show(this, DockState.DockLeft);
+            //_mapPropertiesView.Show(this, DockState.DockLeft);
+            //_mapBodyView.Show(this, DockState.Document);
+            //_toolsView.Show(this, DockState.DockTop);
         }
 
         public void RestoreLayout()
@@ -121,17 +121,22 @@ namespace OpenBreed.Editor.UI.WinForms.Views
                 LoadFromXml(configFile, _deserializeDockContent);
         }
 
-        public void ShowDatabase()
+        public void ShowDatabaseView()
         {
             _databaseView.Show(this, DockState.DockLeft);
         }
 
-        public void ShowView(ProjectViewType type)
+        public void ShowImageView()
         {
-            var view = GetView(type);
-
-            view.Show();
+            _imagesView.Show(this, DockState.Document);
         }
+
+        //public void ShowView(ProjectViewType type)
+        //{
+        //    var view = GetView(type);
+
+        //    view.Show();
+        //}
 
         public void StoreLayout()
         {
@@ -146,30 +151,30 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         #region Protected Methods
 
-        protected DockContent GetView(ProjectViewType viewType)
-        {
-            switch (viewType)
-            {
-                case ProjectViewType.MapBody:
-                    return _mapBodyView;
-                case ProjectViewType.MapProperties:
-                    return _mapPropertiesView;
-                case ProjectViewType.MapPalettes:
-                    return _mapPalettesView;
-                case ProjectViewType.TileSet:
-                    return _tileSetView;
-                case ProjectViewType.SpriteSets:
-                    return _spriteSetsView;
-                case ProjectViewType.PropertySet:
-                    return _propSetsView;
-                case ProjectViewType.Images:
-                    return _imagesView;
-                case ProjectViewType.Tools:
-                    return _toolsView;
-                default:
-                    throw new InvalidOperationException("Unknown ProjectViewType: " + viewType);
-            }
-        }
+        //protected DockContent GetView(ProjectViewType viewType)
+        //{
+        //    switch (viewType)
+        //    {
+        //        case ProjectViewType.MapBody:
+        //            return _mapBodyView;
+        //        case ProjectViewType.MapProperties:
+        //            return _mapPropertiesView;
+        //        case ProjectViewType.MapPalettes:
+        //            return _mapPalettesView;
+        //        case ProjectViewType.TileSet:
+        //            return _tileSetView;
+        //        case ProjectViewType.SpriteSets:
+        //            return _spriteSetsView;
+        //        case ProjectViewType.PropertySet:
+        //            return _propSetsView;
+        //        case ProjectViewType.Images:
+        //            return _imagesView;
+        //        case ProjectViewType.Tools:
+        //            return _toolsView;
+        //        default:
+        //            throw new InvalidOperationException("Unknown ProjectViewType: " + viewType);
+        //    }
+        //}
 
         #endregion Protected Methods
 
@@ -191,13 +196,13 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             return null;
         }
 
-        void ToolsMan_ToolActivated(object sender, ToolActivatedEventArgs e)
-        {
-            if (e.ToolName == "InsertPropertyTool")
-                ShowView(ProjectViewType.PropertySet);
-            else if (e.ToolName == "InsertTileTool")
-                ShowView(ProjectViewType.TileSet);
-        }
+        //void ToolsMan_ToolActivated(object sender, ToolActivatedEventArgs e)
+        //{
+        //    if (e.ToolName == "InsertPropertyTool")
+        //        ShowView(ProjectViewType.PropertySet);
+        //    else if (e.ToolName == "InsertTileTool")
+        //        ShowView(ProjectViewType.TileSet);
+        //}
 
         #endregion Private Methods
     }
