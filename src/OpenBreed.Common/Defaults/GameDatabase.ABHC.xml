@@ -1,79 +1,119 @@
 <?xml version="1.0"?>
 <DatabaseDef Name="ABHC" >
-  <SourceDefs>
-    <DirectoryFileSourceDef Name="L1MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-    <DirectoryFileSourceDef Name="L2MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-    <DirectoryFileSourceDef Name="L3MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-    <DirectoryFileSourceDef Name="L4MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-    <DirectoryFileSourceDef Name="L5MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-    <DirectoryFileSourceDef Name="L6MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-    <DirectoryFileSourceDef Name="L7MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-    <DirectoryFileSourceDef Name="L8MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-    <DirectoryFileSourceDef Name="L9MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-    <DirectoryFileSourceDef Name="LAMA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-    <DirectoryFileSourceDef Name="LBMA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-    <DirectoryFileSourceDef Name="LCMA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-    <DirectoryFileSourceDef Name="LDMA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-    <DirectoryFileSourceDef Name="LEMA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-    <DirectoryFileSourceDef Name="MMA1" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-    <DirectoryFileSourceDef Name="MMA2" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-    <DirectoryFileSourceDef Name="MMA3" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-    <DirectoryFileSourceDef Name="L1BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-      <Parameters>
-        <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-        <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-      </Parameters>
-    </DirectoryFileSourceDef>  
-    <DirectoryFileSourceDef Name="L2BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-      <Parameters>
-        <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-        <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-      </Parameters>
-    </DirectoryFileSourceDef>
-    <DirectoryFileSourceDef Name="L3BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-      <Parameters>
-        <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-        <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-      </Parameters>
-    </DirectoryFileSourceDef>
-    <DirectoryFileSourceDef Name="L4BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-      <Parameters>
-        <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-        <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-      </Parameters>
-    </DirectoryFileSourceDef>
-    <DirectoryFileSourceDef Name="L5BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-      <Parameters>
-        <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-        <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-      </Parameters>
-    </DirectoryFileSourceDef>
-    <DirectoryFileSourceDef Name="L6BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-      <Parameters>
-        <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-        <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-      </Parameters>
-    </DirectoryFileSourceDef>
-    <DirectoryFileSourceDef Name="L7BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-      <Parameters>
-        <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-        <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-      </Parameters>
-    </DirectoryFileSourceDef>
-    <DirectoryFileSourceDef Name="L8BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-      <Parameters>
-        <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-        <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-      </Parameters>
-    </DirectoryFileSourceDef>
-    <DirectoryFileSourceDef Name="L9BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-      <Parameters>
-        <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-        <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-      </Parameters>
-    </DirectoryFileSourceDef> 
-    <DirectoryFileSourceDef Name="Level1PropertySetDef.xml" Type="PropertySetXML" DirectoryPath="%App.ResourcesFolder%" />   
+  <Tables>
+    <Sources>
+      <Items>
+        <DirectoryFileSourceDef Name="L1MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L2MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L3MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L4MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L5MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L6MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L7MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L8MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L9MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="LAMA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="LBMA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="LCMA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="LDMA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="LEMA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="MMA1" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="MMA2" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="MMA3" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L1BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L2BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L3BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L4BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L5BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L6BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L7BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L8BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L9BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L1LP" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >8</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L2LP" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >8</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L6LP" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >8</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="LALP" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >8</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="Level1PropertySetDef.xml" Type="PropertySetXML" DirectoryPath="%App.ResourcesFolder%" />
 
-    <DirectoryFileSourceDef Name="DefaultPropertySetDef.xml" Type="PropertySetXML" DirectoryPath="%App.ResourcesFolder%" />
-  </SourceDefs>
+        <DirectoryFileSourceDef Name="DefaultPropertySetDef.xml" Type="PropertySetXML" DirectoryPath="%App.ResourcesFolder%" />
+      </Items>
+    </Sources>
+    <Images>
+      <Items>
+        <Image Name="L1LP" Description="Level 1 picture" SourceRef="L1LP" />
+        <Image Name="L2LP" Description="Level 2 picture" SourceRef="L2LP" />
+        <Image Name="L6LP" Description="Level 6 picture" SourceRef="L6LP" />
+        <Image Name="LALP" Description="Level A picture" SourceRef="LALP" />
+      </Items>
+    </Images>
+  </Tables>
 </DatabaseDef>

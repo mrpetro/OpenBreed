@@ -66,26 +66,62 @@
             <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
           </Parameters>
         </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="LP02" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="LP03" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="LP04" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="LP05" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="LP06" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="LP07" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
         <DirectoryFileSourceDef Name="Level1PropertySetDef.xml" Type="PropertySetXML" DirectoryPath="%App.ResourcesFolder%" />
         <DirectoryFileSourceDef Name="DefaultPropertySetDef.xml" Type="PropertySetXML" DirectoryPath="%App.ResourcesFolder%" />
       </Items>
     </Sources>
     <Images>
       <Items>
-        <Image Name="LP01" Description="Alien Breed II: Horror Continues teaser" SourceRef="LP01" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >640</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >4</Parameter>
-          </Parameters>
-        </Image>
-        <Image Name="LP01B" Description="Superfrog teaser" SourceRef="LP01B" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-          </Parameters>
-        </Image>
+        <Image Name="LP01" Description="Alien Breed II: Horror Continues teaser" SourceRef="LP01" />
+        <Image Name="LP01B" Description="Superfrog teaser title" SourceRef="LP01B" />
+        <Image Name="LP02" Description="Superfrog teaser screenshot 1" SourceRef="LP02" />
+        <Image Name="LP03" Description="Superfrog teaser screenshot 2" SourceRef="LP03" />
+        <Image Name="LP04" Description="Superfrog teaser screenshot 3" SourceRef="LP04" />
+        <Image Name="LP05" Description="Superfrog teaser screenshot 4" SourceRef="LP05" />
+        <Image Name="LP06" Description="Superfrog teaser screenshot 5" SourceRef="LP06" />
+        <Image Name="LP07" Description="Superfrog teaser screenshot 6" SourceRef="LP07" />
       </Items>
     </Images>
     <Levels>

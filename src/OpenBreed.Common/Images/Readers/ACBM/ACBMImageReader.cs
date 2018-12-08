@@ -86,7 +86,7 @@ namespace OpenBreed.Common.Images.Readers.ACBM
                     for (int i = 0; i < colorsNo; i++)
                         colors[i] = From16Bit(binReader.ReadUInt16());
                 }
-                if (_bitPlanesNo == 6)
+                else if (_bitPlanesNo == 6)
                 {
                     colorsNo = 64; // Extra Half Byte (EHB)
                     colors = new Color[colorsNo];
@@ -97,6 +97,14 @@ namespace OpenBreed.Common.Images.Readers.ACBM
                     for (int i = 32; i < 64; i++)
                         colors[i] = Color.FromArgb(255, colors[i - 32].R / 2,  colors[i - 32].G / 2,  colors[i - 32].B / 2);
                 }
+                else if (_bitPlanesNo == 8)
+                {
+                    colorsNo = 256;
+                    colors = new Color[colorsNo];
+
+                    for (int i = 0; i < 256; i++)
+                        colors[i] = From32Bit(binReader.ReadUInt32());
+                }
                 else
                     throw new NotImplementedException($"Not supported bit planes no: {_bitPlanesNo}");
 
@@ -106,6 +114,14 @@ namespace OpenBreed.Common.Images.Readers.ACBM
             //Start building new tile
             Builder.SetData(imageData);
             return Builder.Build();
+        }
+
+        public static Color From32Bit(UInt32 value)
+        {
+            byte g = (byte)(((value & 0x000000FF) ));
+            byte b = (byte)(((value & 0x0000FFFF) >> 8));
+            byte r = (byte)(((value & 0x00FFFFFF) >> 16));
+            return Color.FromArgb(255, r, g, b);
         }
 
         public static Color From16Bit(UInt16 value)
