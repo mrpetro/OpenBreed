@@ -57,6 +57,7 @@
             <Parameter Name="WIDTH" Type="System.Int32" >640</Parameter>
             <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
             <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >4</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
           </Parameters>
         </DirectoryFileSourceDef>
         <DirectoryFileSourceDef Name="LP01B" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
@@ -64,6 +65,7 @@
             <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
             <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
             <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
           </Parameters>
         </DirectoryFileSourceDef>
         <DirectoryFileSourceDef Name="LP02" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
@@ -71,6 +73,7 @@
             <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
             <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
             <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
           </Parameters>
         </DirectoryFileSourceDef>
         <DirectoryFileSourceDef Name="LP03" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
@@ -78,6 +81,7 @@
             <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
             <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
             <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
           </Parameters>
         </DirectoryFileSourceDef>
         <DirectoryFileSourceDef Name="LP04" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
@@ -85,6 +89,7 @@
             <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
             <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
             <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
           </Parameters>
         </DirectoryFileSourceDef>
         <DirectoryFileSourceDef Name="LP05" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
@@ -92,6 +97,7 @@
             <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
             <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
             <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
           </Parameters>
         </DirectoryFileSourceDef>
         <DirectoryFileSourceDef Name="LP06" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
@@ -99,6 +105,7 @@
             <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
             <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
             <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
           </Parameters>
         </DirectoryFileSourceDef>
         <DirectoryFileSourceDef Name="LP07" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
@@ -106,6 +113,55 @@
             <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
             <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
             <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L0AN" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >144</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L1AN" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >144</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L2AN" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >144</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L3AN" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >144</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L4AN" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >144</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L5AN" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >144</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
           </Parameters>
         </DirectoryFileSourceDef>
         <DirectoryFileSourceDef Name="Level1PropertySetDef.xml" Type="PropertySetXML" DirectoryPath="%App.ResourcesFolder%" />
@@ -122,6 +178,12 @@
         <Image Name="LP05" Description="Superfrog teaser screenshot 4" SourceRef="LP05" />
         <Image Name="LP06" Description="Superfrog teaser screenshot 5" SourceRef="LP06" />
         <Image Name="LP07" Description="Superfrog teaser screenshot 6" SourceRef="LP07" />
+        <Image Name="L0AN" Description="Level 0 animations" SourceRef="L0AN" />
+        <Image Name="L1AN" Description="Level 1 animations" SourceRef="L1AN" />
+        <Image Name="L2AN" Description="Level 2 animations" SourceRef="L2AN" />
+        <Image Name="L3AN" Description="Level 3 animations" SourceRef="L3AN" />
+        <Image Name="L4AN" Description="Level 4 animations" SourceRef="L4AN" />
+        <Image Name="L5AN" Description="Level 5 animations" SourceRef="L5AN" />
       </Items>
     </Images>
     <Levels>

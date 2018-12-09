@@ -15,23 +15,31 @@ namespace OpenBreed.Common.Images.Readers.ACBM
 {
     public class ACBMImageReader
     {
+        public enum ACBMPaletteMode
+        {
+            NONE,
+            PALETTE_16BIT,
+            PALETTE_32BIT
+        }
+
+
         #region Public Fields
 
         private int _bitPlanesNo;
         private int _width;
         private int _height;
-        private bool _readPalette;
+        private ACBMPaletteMode _paletteMode;
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public ACBMImageReader(ImageBuilder builder, int width, int height, int bitPlanesNo, bool readPalette)
+        public ACBMImageReader(ImageBuilder builder, int width, int height, int bitPlanesNo, ACBMPaletteMode paletteMode)
         {
             Builder = builder;
             _width = width;
             _height = height;
-            _readPalette = readPalette;
+            _paletteMode = paletteMode;
 
             _bitPlanesNo = bitPlanesNo;
         }
@@ -73,18 +81,26 @@ namespace OpenBreed.Common.Images.Readers.ACBM
 
             imageData = imageData.Reverse().ToArray();
 
-            if (_readPalette)
+            if (_paletteMode != ACBMPaletteMode.NONE)
             {
                 var colorsNo = 0;
                 Color[] colors;
 
-                if (_bitPlanesNo < 6)
+                if (_bitPlanesNo < 6 || _bitPlanesNo > 6)
                 {
                     colorsNo = (int)Math.Pow(2, _bitPlanesNo);
                     colors = new Color[colorsNo];
 
-                    for (int i = 0; i < colorsNo; i++)
-                        colors[i] = From16Bit(binReader.ReadUInt16());
+                    if (_paletteMode == ACBMPaletteMode.PALETTE_16BIT)
+                    {
+                        for (int i = 0; i < colorsNo; i++)
+                            colors[i] = From16Bit(binReader.ReadUInt16());
+                    }
+                    else if (_paletteMode == ACBMPaletteMode.PALETTE_32BIT)
+                    {
+                        for (int i = 0; i < colorsNo; i++)
+                            colors[i] = From32Bit(binReader.ReadUInt32());
+                    }
                 }
                 else if (_bitPlanesNo == 6)
                 {
@@ -95,18 +111,33 @@ namespace OpenBreed.Common.Images.Readers.ACBM
                         colors[i] = From16Bit(binReader.ReadUInt16());
 
                     for (int i = 32; i < 64; i++)
-                        colors[i] = Color.FromArgb(255, colors[i - 32].R / 2,  colors[i - 32].G / 2,  colors[i - 32].B / 2);
+                        colors[i] = Color.FromArgb(255, colors[i - 32].R / 2, colors[i - 32].G / 2, colors[i - 32].B / 2);
                 }
-                else if (_bitPlanesNo == 8)
+                else if (_bitPlanesNo > 6)
                 {
-                    colorsNo = 256;
+                    colorsNo = (int)Math.Pow(2, _bitPlanesNo);
                     colors = new Color[colorsNo];
 
-                    for (int i = 0; i < 256; i++)
+                    for (int i = 0; i < colorsNo; i++)
                         colors[i] = From32Bit(binReader.ReadUInt32());
+
                 }
                 else
                     throw new NotImplementedException($"Not supported bit planes no: {_bitPlanesNo}");
+
+                Builder.SetPalette(colors);
+            }
+            else
+            {
+                var colors = new Color[256];
+
+                for (int i = 0; i < 256; i++)
+                {
+                    if(i % 2 == 0)
+                        colors[i] = Color.FromArgb(255, i, i, i);
+                    else
+                        colors[i] = Color.FromArgb(255, 255 - i, 255 - i, 255 - i);
+                }
 
                 Builder.SetPalette(colors);
             }
@@ -118,8 +149,8 @@ namespace OpenBreed.Common.Images.Readers.ACBM
 
         public static Color From32Bit(UInt32 value)
         {
-            byte g = (byte)(((value & 0x000000FF) ));
-            byte b = (byte)(((value & 0x0000FFFF) >> 8));
+            byte b = (byte)(((value & 0x000000FF) ));
+            byte g = (byte)(((value & 0x0000FFFF) >> 8));
             byte r = (byte)(((value & 0x00FFFFFF) >> 16));
             return Color.FromArgb(255, r, g, b);
         }

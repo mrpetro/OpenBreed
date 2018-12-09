@@ -79,6 +79,7 @@
             <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
             <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
             <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >8</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >32BIT</Parameter>
           </Parameters>
         </DirectoryFileSourceDef>
         <DirectoryFileSourceDef Name="L2LP" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
@@ -86,6 +87,7 @@
             <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
             <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
             <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >8</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >32BIT</Parameter>
           </Parameters>
         </DirectoryFileSourceDef>
         <DirectoryFileSourceDef Name="L6LP" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
@@ -93,6 +95,7 @@
             <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
             <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
             <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >8</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >32BIT</Parameter>
           </Parameters>
         </DirectoryFileSourceDef>
         <DirectoryFileSourceDef Name="LALP" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
@@ -100,6 +103,215 @@
             <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
             <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
             <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >8</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >32BIT</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="CHAD" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >640</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >2</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="CHAR" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >8</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >32BIT</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="ENDA" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >480</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >7</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="ENDP" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >7</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >32BIT</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="ETXT" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >1024</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >1</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="HPIC" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >288</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >32BIT</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="IPIC" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >640</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >7</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >32BIT</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="HSP1" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >160</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >4</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="HSP2" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >160</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >4</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="HSP3" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >160</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >4</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="HSP4" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >160</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >4</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L1BO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L2BO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L3BO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L4BO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L5BO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L6BO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L7BO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L8BO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="L9BO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="LABO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="LBBO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="LCBO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="LDBO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="LEBO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </DirectoryFileSourceDef>
+        <DirectoryFileSourceDef Name="MPIC" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
           </Parameters>
         </DirectoryFileSourceDef>
         <DirectoryFileSourceDef Name="Level1PropertySetDef.xml" Type="PropertySetXML" DirectoryPath="%App.ResourcesFolder%" />
@@ -109,6 +321,32 @@
     </Sources>
     <Images>
       <Items>
+        <Image Name="CHAD" Description="Characters statistics screens" SourceRef="CHAD" />
+        <Image Name="CHAR" Description="Characters selection screen" SourceRef="CHAR" />
+        <Image Name="ENDA" Description="End animation frames" SourceRef="ENDA" />
+        <Image Name="ENDP" Description="End picture" SourceRef="ENDP" />
+        <Image Name="HPIC" Description="Highscore picture" SourceRef="HPIC" />
+        <Image Name="IPIC" Description="Intro picture" SourceRef="IPIC" />
+        <Image Name="MPIC" Description="Menu picture" SourceRef="MPIC" />
+        <Image Name="ETXT" Description="End text screen" SourceRef="ETXT" />
+        <Image Name="HSP1" Description="Character 1 sprites" SourceRef="HSP1" />
+        <Image Name="HSP2" Description="Character 2 sprites" SourceRef="HSP2" />
+        <Image Name="HSP3" Description="Character 3 sprites" SourceRef="HSP3" />
+        <Image Name="HSP4" Description="Character 4 sprites" SourceRef="HSP4" />
+        <Image Name="L1BO" Description="Level 1 sprites" SourceRef="L1BO" />
+        <Image Name="L2BO" Description="Level 2 sprites" SourceRef="L2BO" />
+        <Image Name="L3BO" Description="Level 3 sprites" SourceRef="L3BO" />
+        <Image Name="L4BO" Description="Level 4 sprites" SourceRef="L4BO" />
+        <Image Name="L5BO" Description="Level 5 sprites" SourceRef="L5BO" />
+        <Image Name="L6BO" Description="Level 6 sprites" SourceRef="L6BO" />
+        <Image Name="L7BO" Description="Level 7 sprites" SourceRef="L7BO" />
+        <Image Name="L8BO" Description="Level 8 sprites" SourceRef="L8BO" />
+        <Image Name="L9BO" Description="Level 9 sprites" SourceRef="L9BO" />
+        <Image Name="LABO" Description="Level A sprites" SourceRef="LABO" />
+        <Image Name="LBBO" Description="Level B sprites" SourceRef="LBBO" />
+        <Image Name="LCBO" Description="Level C sprites" SourceRef="LCBO" />
+        <Image Name="LDBO" Description="Level D sprites" SourceRef="LDBO" />
+        <Image Name="LEBO" Description="Level E sprites" SourceRef="LEBO" />
         <Image Name="L1LP" Description="Level 1 picture" SourceRef="L1LP" />
         <Image Name="L2LP" Description="Level 2 picture" SourceRef="L2LP" />
         <Image Name="L6LP" Description="Level 6 picture" SourceRef="L6LP" />
