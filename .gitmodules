@@ -1,0 +1,3 @@
+[submodule "OpenBreed.Common"]
+	path = OpenBreed.Common
+	url = https://github.com/mrpetro/OpenBreed.Common.git
