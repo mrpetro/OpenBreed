@@ -64,6 +64,7 @@ namespace OpenBreed.Editor.VM
             SpriteSetViewer = new SpriteSetSelectorVM(this);
             SpriteViewer = new SpriteViewerVM(this);
             ImageViewer = new ImageViewerVM(this);
+            LevelEditor = new LevelEditorVM(this);
             PropSets = new PropSetsVM(this);
             Map = new MapVM(this);
             MapBodyViewer = new MapBodyEditorVM(this);
@@ -85,6 +86,8 @@ namespace OpenBreed.Editor.VM
         public IDialogProvider DialogProvider { get; private set; }
 
         public ImageViewerVM ImageViewer { get; private set; }
+
+        public LevelEditorVM LevelEditor { get; private set; }
 
         public MapVM Map { get; private set; }
 

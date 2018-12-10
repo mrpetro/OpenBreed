@@ -83,6 +83,8 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
                 return;
             else if (databaseItemVM is DatabaseImageItemVM)
                 _projectView.ShowImageView();
+            else if (databaseItemVM is DatabaseLevelItemVM)
+                _projectView.ShowLevelView();
             else
                 throw new NotImplementedException();
         }

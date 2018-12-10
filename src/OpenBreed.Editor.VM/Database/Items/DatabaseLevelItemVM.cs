@@ -10,15 +10,23 @@ namespace OpenBreed.Editor.VM.Database.Items
 {
     public class DatabaseLevelItemVM : DatabaseItemVM
     {
+        private LevelDef _model;
+
         public DatabaseLevelItemVM(DatabaseVM owner) : base(owner)
         {
         }
 
         public override void Load(DatabaseItemDef itemDef)
         {
-            var levelDef = itemDef as LevelDef ?? throw new InvalidOperationException($"Expected {nameof(LevelDef)}");
+            _model = itemDef as LevelDef ?? throw new InvalidOperationException($"Expected {nameof(LevelDef)}");
 
             base.Load(itemDef);     
+        }
+
+        public override void Open()
+        {
+            Owner.Root.LevelEditor.TryLoad(_model);
+            Owner.OpenedItem = this;
         }
     }
 }

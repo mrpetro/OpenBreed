@@ -27,6 +27,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
             DGV.AutoGenerateColumns = true;
             DGV.AutoSize = true;
             DGV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            DGV.AllowUserToResizeRows = false;
             DGV.RowHeadersVisible = false;
 
             DGV.CellContentClick += DGV_CellContentClick;

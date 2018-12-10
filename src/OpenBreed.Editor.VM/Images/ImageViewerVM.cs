@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Database.Items.Sources;
+﻿using OpenBreed.Common.Database.Items.Images;
+using OpenBreed.Common.Database.Items.Sources;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Sources;
 using System;
@@ -72,16 +73,16 @@ namespace OpenBreed.Editor.VM.Images
             }
         }
 
-        public void TryLoad(string imageSourceRef)
+        public void TryLoad(ImageDef imageDef)
         {
-            var imageSourceDef = Root.Database.GetSourceDef(imageSourceRef);
+            var imageSourceDef = Root.Database.GetSourceDef(imageDef.SourceRef);
             if (imageSourceDef == null)
                 throw new Exception("No ImageSourceDef definition found!");
 
             var source = Root.Sources.GetSource(imageSourceDef);
 
             if (source == null)
-                throw new Exception("Image source error: " + imageSourceRef);
+                throw new Exception("Image source error: " + imageDef.SourceRef);
 
             Load(imageSourceDef);
         }

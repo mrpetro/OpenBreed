@@ -102,6 +102,7 @@
     <Compile Include="Maps\Helpers\PropertyInsertOperation.cs" />
     <Compile Include="Maps\Helpers\TileInsertOperation.cs" />
     <Compile Include="Maps\Helpers\TilesInserter.cs" />
+    <Compile Include="Maps\LevelEditorVM.cs" />
     <Compile Include="Maps\Layers\MapBodyBaseLayerVM.cs" />
     <Compile Include="Maps\Layers\MapBodyGfxLayerVM.cs" />
     <Compile Include="Maps\Layers\MapBodyPropertyLayerVM.cs" />

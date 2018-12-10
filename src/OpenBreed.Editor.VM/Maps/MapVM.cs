@@ -225,7 +225,10 @@ namespace OpenBreed.Editor.VM.Maps
         internal void Load(SourceDef sourceDef)
         {
             if (Source != null)
-                throw new InvalidOperationException("Other map already loaded!");
+            {
+                Source.Dispose();
+                Source = null;
+            }
 
             var source = Root.Sources.GetSource(sourceDef);
 

@@ -39,12 +39,12 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         private DatabaseVM _vm;
 
         private bool _saveLayout = true;
-        //private MapBodyEditorView _mapBodyView = new MapBodyEditorView();
+        private MapBodyEditorView _mapBodyView = new MapBodyEditorView();
         //private MapPalettesView _mapPalettesView = new MapPalettesView();
         //private MapPropertiesView _mapPropertiesView = new MapPropertiesView();
-        //private PropSetsView _propSetsView = new PropSetsView();
+        private PropSetsView _propSetsView = new PropSetsView();
         //private SpriteSetsView _spriteSetsView = new SpriteSetsView();
-        //private TileSetsView _tileSetView = new TileSetsView();
+        private TileSetsView _tileSetView = new TileSetsView();
         private ImageView _imagesView = new ImageView();
         //private ToolsView _toolsView = new ToolsView();
         private DatabaseView _databaseView = new DatabaseView();
@@ -72,7 +72,6 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         public void DeinitViews()
         {
-            //_mapBodyView.Close();
             //_mapPropertiesView.Close();
             //_mapPalettesView.Close();
             //_propSetsView.Close();
@@ -89,12 +88,12 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _vm = vm;
 
             //_toolsView.Initialize(_vm.Root.ToolsMan);
-            //_tileSetView.Initialize(_vm.Root);
+            _tileSetView.Initialize(_vm.Root);
             //_spriteSetsView.Initialize(_vm.Root);
-            //_propSetsView.Initialize(_vm.Root.PropSets);
+            _propSetsView.Initialize(_vm.Root.PropSets);
             //_mapPalettesView.Initialize(_vm.Root.Palettes);
             //_mapPropertiesView.Initialize(_vm.Root.Map.Properties);
-            //_mapBodyView.Initialize(_vm.Root.MapBodyViewer);
+            _mapBodyView.Initialize(_vm.Root.MapBodyViewer);
             _imagesView.Initialize(_vm.Root.ImageViewer);
             _databaseView.Initialize(_vm.Root.DatabaseViewer);
 
@@ -129,6 +128,14 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         public void ShowImageView()
         {
             _imagesView.Show(this, DockState.Document);
+        }
+
+        internal void ShowLevelView()
+        {
+            _tileSetView.Show(this, DockState.DockLeft);
+            _propSetsView.Show(this, DockState.DockLeft);
+            _mapBodyView.Show(this, DockState.Document);
+
         }
 
         //public void ShowView(ProjectViewType type)

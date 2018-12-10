@@ -52,6 +52,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Map
         {
             switch (e.PropertyName)
             {
+                case nameof(_vm.CurrentMapBody):
                 case nameof(_vm.Transformation):
                     Invalidate();
                     break;
