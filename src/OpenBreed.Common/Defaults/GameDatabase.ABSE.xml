@@ -188,7 +188,7 @@
     </Images>
     <Levels>
       <Items>
-        <Level Id="1" Name="L0" >
+        <Level Id="0" Name="L0" >
           <MapResourceRef>L0MA</MapResourceRef>
           <TileSetResourceRef>LABM</TileSetResourceRef>
           <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
@@ -202,14 +202,14 @@
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
-        <Level Id="1" Name="L2" >
+        <Level Id="2" Name="L2" >
           <MapResourceRef>L2MA</MapResourceRef>
           <TileSetResourceRef>LFBM</TileSetResourceRef>
           <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
-        <Level Id="1" Name="L3" >
+        <Level Id="3" Name="L3" >
           <MapResourceRef>L3MA</MapResourceRef>
           <TileSetResourceRef>LBBM</TileSetResourceRef>
           <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
