@@ -16,9 +16,16 @@ MAP reader for ABTA (it will probably for for all three titles since this format
 SPR(spriteset) reader for ABTA
 BLK(tileset) reader for ABTA
 
+## What is in current development
+
+* Readers for various resources from all three games
+* Developing of OpenBreed.Editor - at least to state of reading & viewing most of games resources.
+* Design & creation of game databases - these will be useful when developing OpenBreed engine. 
+* Some refactoring in OpenBreed.Common & Editor
+
 ## What's to do
 
-For starters, write some missing readers for the resources from first two titles (ABSE and ABHC) and put them in OpenBreed.Common repository.
+* TBD
 
 ## Associated repositories
 * **OpenBreed.Common** - which should contain information and implementation of various data formats existing in all three games.
