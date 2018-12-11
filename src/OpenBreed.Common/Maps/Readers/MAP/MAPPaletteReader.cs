@@ -21,6 +21,8 @@ namespace OpenBreed.Common.Maps.Readers.MAP
 
         public PaletteModel ReadEx(BigEndianBinaryReader binReader)
         {
+            //TODO: For ABSE, it appears that palettes are missing in map files.
+
             UInt32 uIntSize = binReader.ReadUInt32();
 
             PaletteBuilder paletteBuilder = PaletteBuilder.NewPaletteModel();
@@ -33,9 +35,13 @@ namespace OpenBreed.Common.Maps.Readers.MAP
                 paletteBuilder.SetColor(i, Color.FromArgb(255, colorData[0], colorData[2], colorData[4]));
             }
 
-            for (int i = 0; i < colorsNo; i++)
+            //NOTE: Temporary solution Read default grayscale palette for better visibility of shapes.
+            for (int i = 0; i < 256; i++)
             {
-                paletteBuilder.SetColor(i, Color.FromArgb(255, i, i, i));
+                if (i % 2 == 0)
+                    paletteBuilder.SetColor(i, Color.FromArgb(255, i, i, i));
+                else
+                    paletteBuilder.SetColor(i, Color.FromArgb(255, 255 - i, 255 - i, 255 - i));
             }
 
             return paletteBuilder.Build();

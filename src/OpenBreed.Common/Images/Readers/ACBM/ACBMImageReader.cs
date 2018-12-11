@@ -129,6 +129,7 @@ namespace OpenBreed.Common.Images.Readers.ACBM
             }
             else
             {
+                //Read default grayscale palette for better visibility of shapes
                 var colors = new Color[256];
 
                 for (int i = 0; i < 256; i++)

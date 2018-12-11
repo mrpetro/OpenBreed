@@ -48,6 +48,7 @@
     <Compile Include="Configs\IConfig.cs" />
     <Compile Include="Configs\IConfigCtrl.cs" />
     <Compile Include="Database\DatabaseItemDef.cs" />
+    <Compile Include="Database\Items\Sprites\SpriteSetDef.cs" />
     <Compile Include="Database\Tables\Images\DatabaseImageTableDef.cs" />
     <Compile Include="Database\Tables\Levels\DatabaseLevelTableDef.cs" />
     <Compile Include="Database\Tables\Sources\DatabaseSourceTableDef.cs" />
@@ -101,6 +102,20 @@
     <Compile Include="Readers\BigEndianBinaryReader.cs" />
     <Compile Include="Sound\PCMPlayer.cs" />
     <Compile Include="Sound\WaveMemoryStream.cs" />
+    <Compile Include="Sources\BaseSource.cs" />
+    <Compile Include="Sources\DirectoryFileSource.cs" />
+    <Compile Include="Sources\EPFArchiveFileSource.cs" />
+    <Compile Include="Sources\Formats\ABHCMAPFormat.cs" />
+    <Compile Include="Sources\Formats\ABSEMAPFormat.cs" />
+    <Compile Include="Sources\Formats\ABTABLKFormat.cs" />
+    <Compile Include="Sources\Formats\ABTAMAPFormat.cs" />
+    <Compile Include="Sources\Formats\ABTASPRFormat.cs" />
+    <Compile Include="Sources\Formats\ACBMImageFormat.cs" />
+    <Compile Include="Sources\Formats\ACBMTileSetFormat.cs" />
+    <Compile Include="Sources\Formats\PropertySetXMLFormat.cs" />
+    <Compile Include="Sources\ISourceFormat.cs" />
+    <Compile Include="Sources\SourceParameter.cs" />
+    <Compile Include="Sources\SourcesHandler.cs" />
     <Compile Include="Sprites\Builders\SpriteBuilder.cs" />
     <Compile Include="Sprites\Builders\SpriteSetBuilder.cs" />
     <Compile Include="Sprites\Readers\SPRReader.cs" />
@@ -380,6 +395,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Database\Items\Tiles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\EPFArchive\src\EPFArchive\EPFArchive.csproj">
+      <Project>{52249c4e-eaf8-45ce-a757-aaa3c3c125d4}</Project>
+      <Name>EPFArchive</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
