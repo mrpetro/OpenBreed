@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Data;
 using OpenBreed.Editor.VM.Props;
-using OpenBreed.Editor.VM.Sources;
+using OpenBreed.Common.Sources;
 using OpenBreed.Common.Props;
 using System.ComponentModel;
 using OpenBreed.Editor.VM.Base;

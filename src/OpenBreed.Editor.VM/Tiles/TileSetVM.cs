@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Common.Tiles;
 using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM.Sources;
+using OpenBreed.Common.Sources;
 using OpenBreed.Editor.VM.Tiles.Helpers;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -2,7 +2,7 @@
 using OpenBreed.Common.Database.Items.Levels;
 using OpenBreed.Common.Database.Items.Sources;
 using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM.Sources;
+using OpenBreed.Common.Sources;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

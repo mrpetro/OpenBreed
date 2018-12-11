@@ -52,12 +52,6 @@ namespace OpenBreed.Editor.VM
         {
             if (editor.Database != null)
             {
-                if (editor.Database.IsLevelOpened)
-                {
-                    if (!editor.Database.TryClose())
-                        return false;
-                }
-
                 if (!editor.TryCloseDatabase())
                     return false;
             }

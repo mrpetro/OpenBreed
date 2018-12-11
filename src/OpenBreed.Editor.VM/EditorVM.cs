@@ -10,7 +10,6 @@ using System.Drawing;
 using OpenBreed.Common.Maps.Readers.MAP;
 using OpenBreed.Common.Maps.Builders;
 using OpenBreed.Editor.VM.Database;
-using OpenBreed.Editor.VM.Sources;
 using OpenBreed.Editor.VM.Props;
 using OpenBreed.Editor.VM.Sprites;
 using OpenBreed.Editor.VM.Maps.Tools;
@@ -22,6 +21,8 @@ using OpenBreed.Editor.Cfg;
 using System.ComponentModel;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Images;
+using OpenBreed.Common.Sources.Formats;
+using OpenBreed.Common.Sources;
 
 namespace OpenBreed.Editor.VM
 {
@@ -68,7 +69,17 @@ namespace OpenBreed.Editor.VM
             PropSets = new PropSetsVM(this);
             Map = new MapVM(this);
             MapBodyViewer = new MapBodyEditorVM(this);
-            Sources = new SourcesHandler(this);
+            Sources = new SourcesHandler();
+            Sources.ExpandVariables = Settings.ExpandVariables;
+
+            Sources.RegisterFormat("ABSE_MAP", new ABSEMAPFormat());
+            Sources.RegisterFormat("ABHC_MAP", new ABHCMAPFormat());
+            Sources.RegisterFormat("ABTA_MAP", new ABTAMAPFormat());
+            Sources.RegisterFormat("ABTABLK", new ABTABLKFormat());
+            Sources.RegisterFormat("ABTASPR", new ABTASPRFormat());
+            Sources.RegisterFormat("ACBM_TILE_SET", new ACBMTileSetFormat());
+            Sources.RegisterFormat("ACBM_IMAGE", new ACBMImageFormat());
+            Sources.RegisterFormat("PropertySetXML", new PropertySetXMLFormat());
         }
 
         #endregion Public Constructors

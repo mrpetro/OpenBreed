@@ -4,7 +4,7 @@ using OpenBreed.Common.Maps;
 using OpenBreed.Common.Palettes;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Palettes;
-using OpenBreed.Editor.VM.Sources;
+using OpenBreed.Common.Sources;
 using System;
 using System.IO;
 using System.Linq;

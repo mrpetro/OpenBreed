@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database.Items
 {
-    public class DatabaseItemVM
+    public abstract class DatabaseItemVM
     {
         #region Public Fields
 

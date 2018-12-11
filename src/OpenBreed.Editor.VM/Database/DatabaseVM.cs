@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OpenBreed.Editor.VM;
-using OpenBreed.Editor.VM.Sources;
+using OpenBreed.Common.Sources;
 using OpenBreed.Editor.VM.Tiles;
 using OpenBreed.Editor.VM.Maps;
 using OpenBreed.Editor.VM.Props;
@@ -39,36 +39,33 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Private Fields
 
-        private DatabaseItemVM _openedItem;
-        private LevelDef _currentLevel;
         private DatabaseDef _databaseDef;
-
+        private DatabaseItemVM _openedItem;
         private ProjectState _state;
 
         #endregion Private Fields
 
-        #region Private Constructors
+        #region Internal Constructors
 
         internal DatabaseVM(EditorVM root)
         {
             Root = root;
         }
 
-        #endregion Private Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
 
-        public LevelDef CurrentLevel
-        {
-            get { return _currentLevel; }
-            set { SetProperty(ref _currentLevel, value); }
-        }
-
         public string FilePath { get; private set; }
-        public bool IsLevelOpened { get { return CurrentLevel != null; } }
 
         public string Name { get; set; }
 
+
+        public DatabaseItemVM OpenedItem
+        {
+            get { return _openedItem; }
+            set { SetProperty(ref _openedItem, value); }
+        }
 
         public EditorVM Root { get; private set; }
 
@@ -76,12 +73,6 @@ namespace OpenBreed.Editor.VM.Database
         {
             get { return _state; }
             set { SetProperty(ref _state, value); }
-        }
-
-        public DatabaseItemVM OpenedItem
-        {
-            get { return _openedItem; }
-            set { SetProperty(ref _openedItem, value); }
         }
 
         #endregion Public Properties
@@ -113,86 +104,9 @@ namespace OpenBreed.Editor.VM.Database
             return sourceDef;
         }
 
-        public void Load(SourceDef sourceDef)
-        {
-            var source = Root.Sources.GetSource(sourceDef);
-
-            var levelDef = source.Load() as LevelDef;
-
-            Root.TileSets.Clear();
-            Root.AddTileSet(levelDef.TileSetResourceRef);
-
-            Root.TileSetSelector.CurrentItem = Root.TileSets.FirstOrDefault();
-
-            Root.SpriteSets.Clear();
-            foreach (var spriteSetSourceRef in levelDef.SpriteSetResourceRefs)
-                Root.AddSpriteSet(spriteSetSourceRef);
-
-            Root.SpriteSetViewer.CurrentItem = Root.SpriteSets.FirstOrDefault();
-            if (Root.SpriteSetViewer.CurrentItem != null)
-                Root.SpriteViewer.CurrentItem = Root.SpriteSetViewer.CurrentItem.Items.FirstOrDefault();
-
-            if (levelDef.PropertySetResourceRef != null)
-                Root.PropSets.AddPropertySet(levelDef.PropertySetResourceRef);
-
-            var mapSourceDef = GetSourceDef(levelDef.MapResourceRef);
-            if (mapSourceDef != null)
-                Root.Map.Load(mapSourceDef);
-
-            CurrentLevel = levelDef;
-        }
-
-        public bool TryClose()
-        {
-            Root.Map.TryClose();
-            return true;
-        }
-
-        public void TryNewLevel()
-        {
-            Root.DialogProvider.ShowMessage("Creating new project is not implemented yet.", "Feature not implemented");
-        }
-
-        public bool TryOpenLevelDef()
-        {
-            var openFileDialog = Root.DialogProvider.OpenFileDialog();
-            openFileDialog.Title = "Open Map project file...";
-            openFileDialog.Filter = "OpenABEd project files (*.xml)|*.xml|All Files (*.*)|*.*";
-            openFileDialog.Multiselect = false;
-            var answer = openFileDialog.Show();
-
-            if (answer == DialogAnswer.OK)
-            {
-                string filePath = openFileDialog.FileName;
-
-                var sourceDef = new DirectoryFileSourceDef();
-                sourceDef.DirectoryPath = Path.GetDirectoryName(filePath);
-                sourceDef.Name = Path.GetFileName(filePath);
-                sourceDef.Type = "LevelXML";
-
-                Load(sourceDef);
-
-                return true;
-            }
-
-            return false;
-        }
-
         #endregion Public Methods
 
         #region Internal Methods
-
-        internal DatabaseTableVM CreateTable(DatabaseTableDef tableDef)
-        {
-            if (tableDef is DatabaseImageTableDef)
-                return new DatabaseImageTableVM(this);
-            else if (tableDef is DatabaseLevelTableDef)
-                return new DatabaseLevelTableVM(this);
-            else if (tableDef is DatabaseSourceTableDef)
-                return new DatabaseSourceTableVM(this);
-            else
-                throw new NotImplementedException(tableDef.ToString());
-        }
 
         internal DatabaseItemVM CreateItem(DatabaseItemDef itemDef)
         {
@@ -207,6 +121,18 @@ namespace OpenBreed.Editor.VM.Database
 
             else
                 throw new NotImplementedException(itemDef.ToString());
+        }
+
+        internal DatabaseTableVM CreateTable(DatabaseTableDef tableDef)
+        {
+            if (tableDef is DatabaseImageTableDef)
+                return new DatabaseImageTableVM(this);
+            else if (tableDef is DatabaseLevelTableDef)
+                return new DatabaseLevelTableVM(this);
+            else if (tableDef is DatabaseSourceTableDef)
+                return new DatabaseSourceTableVM(this);
+            else
+                throw new NotImplementedException(tableDef.ToString());
         }
 
         internal IEnumerable<DatabaseTableVM> GetTables()
