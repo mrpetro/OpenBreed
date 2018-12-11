@@ -12,11 +12,11 @@ ABTA PC port uses exactly same resources as Amiga version but the container is E
 
 ## What is ready
 
-MAP reader for ABTA (it will probably for for all three titles since this format didn't changed that much)
-SPR(spriteset) reader for ABTA
-BLK(tileset) reader for ABTA
-ACBM tileSet reader for ABHC and ABSE
-ACBM image reader for some images from ABHC and ABSE
+* MAP reader for ABTA (it will probably for for all three titles since this format didn't changed that much)
+* SPR(spriteset) reader for ABTA
+* BLK(tileset) reader for ABTA
+* ACBM tileSet reader for ABHC and ABSE
+* ACBM image reader for some images from ABHC and ABSE
 
 ## What is in current development
 
