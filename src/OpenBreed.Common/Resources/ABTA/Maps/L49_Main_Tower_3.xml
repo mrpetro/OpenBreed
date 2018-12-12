@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<LevelDef Id="49" Name="MAIN TOWER LEVEL 3" >
-  <MapResourceRef>MAP.49</MapResourceRef>
-  <TileSetResourceRef>LEVEL8.BLK</TileSetResourceRef>
-  <SpriteSetResourceRefs>
-    <SpriteSetResourceRef>SPR8A.SPR</SpriteSetResourceRef>
-    <SpriteSetResourceRef>SPR8B.SPR</SpriteSetResourceRef>
-  </SpriteSetResourceRefs>
-</LevelDef>

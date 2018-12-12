@@ -10,11 +10,17 @@ namespace OpenBreed.Common.Props.Builders
 {
     public class PropertySetBuilder
     {
+        internal string Name;
         internal List<PropertyModel> Properties;
 
         public PropertySetBuilder()
         {
             Properties = new List<PropertyModel>();
+        }
+
+        public void SetName(string name)
+        {
+            Name = name;
         }
 
         public PropertySetBuilder AddProperty(PropertyModel property)

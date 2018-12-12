@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<LevelDef Id="44" Name="CORRIDOR 15" >
-  <MapResourceRef>MAP.44</MapResourceRef>
-  <TileSetResourceRef>LEVEL7.BLK</TileSetResourceRef>
-  <SpriteSetResourceRefs>
-    <SpriteSetResourceRef>SPR7A.SPR</SpriteSetResourceRef>
-    <SpriteSetResourceRef>SPR7B.SPR</SpriteSetResourceRef>
-  </SpriteSetResourceRefs>
-</LevelDef>

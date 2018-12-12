@@ -51,6 +51,7 @@
     <Compile Include="Database\Items\Sprites\SpriteSetDef.cs" />
     <Compile Include="Database\Tables\Images\DatabaseImageTableDef.cs" />
     <Compile Include="Database\Tables\Levels\DatabaseLevelTableDef.cs" />
+    <Compile Include="Database\Tables\Props\DatabasePropertySetTableDef.cs" />
     <Compile Include="Database\Tables\Sources\DatabaseSourceTableDef.cs" />
     <Compile Include="Database\Tables\DatabaseTableDef.cs" />
     <Compile Include="Database\DatabaseDef.cs" />
@@ -96,8 +97,8 @@
     <Compile Include="Props\Builders\PropertySetBuilder.cs" />
     <Compile Include="Props\PropertyModel.cs" />
     <Compile Include="Props\PropertySetModel.cs" />
-    <Compile Include="Props\Readers\XML\PropertyDef.cs" />
-    <Compile Include="Props\Readers\XML\PropertySetDef.cs" />
+    <Compile Include="Database\Items\Props\PropertyDef.cs" />
+    <Compile Include="Database\Items\Props\PropertySetDef.cs" />
     <Compile Include="Props\Readers\XML\PropertySetDefReader.cs" />
     <Compile Include="Readers\BigEndianBinaryReader.cs" />
     <Compile Include="Sound\PCMPlayer.cs" />
@@ -112,7 +113,6 @@
     <Compile Include="Sources\Formats\ABTASPRFormat.cs" />
     <Compile Include="Sources\Formats\ACBMImageFormat.cs" />
     <Compile Include="Sources\Formats\ACBMTileSetFormat.cs" />
-    <Compile Include="Sources\Formats\PropertySetXMLFormat.cs" />
     <Compile Include="Sources\ISourceFormat.cs" />
     <Compile Include="Sources\SourceParameter.cs" />
     <Compile Include="Sources\SourcesHandler.cs" />
@@ -202,176 +202,8 @@
     <Content Include="Resources\ABSE\Maps\L1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\ABTALevelSetDef.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Defaults\GameDatabase.ABTA.EPF.xml">
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L01_Crash_Landing_Site.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L02_Civilian_Zone_1.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L03_Civilian_Zone_2.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L04_Civilian_Zone_3.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L05_Civilian_Zone_4.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L06_Outdoor_Sector_2.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L07_Stores_Sector_1.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L08_Stores_Sector_2.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L09_Stores_Sector_3.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L10_Stores_Sector_4.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L11_Outdoor_Sector_3.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L12_Military_Sector_1.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L13_Military_Sector_2.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L14_Military_Sector_3.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L15_Military_Sector_4.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L16_Security_Zone_1.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L17_Security_Zone_2.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L18_Security_Zone_3.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L19_Security_Zone_4.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L20_Colony_Ground_Sector_3.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L21_Science_Sector_1.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L22_Science_Sector_2.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L23_Science_Sector_3.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L24_Science_Sector_4.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L25_Colony_Ground_Sector_4.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L26_Engineering_Sector_1.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L27_Engineering_Sector_2.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L28_Engineering_Sector_3.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L29_Engineering_Sector_4.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L30_Corridor_Zone_1.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L31_Corridor_Zone_2.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L32_Corridor_Zone_3.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L33_Corridor_Zone_4.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L34_Corridor_Zone_5.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L35_Corridor_Zone_6.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L36_Corridor_Zone_7.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L37_Corridor_Zone_8.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L38_Corridor_Zone_9.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L39_Corridor_Zone_10.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L40_Corridor_Zone_11.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L41_Corridor_Zone_12.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L42_Corridor_Zone_13.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L43_Corridor_Zone_14.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L44_Corridor_Zone_15.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L45_Corridor_Zone_16.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L46_Corridor_Zone_17.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L47_Main_Tower_1.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L48_Main_Tower_2.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L49_Main_Tower_3.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L50_Main_Tower_4.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L51_Main_Tower_5.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L52_Main_Tower_6.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L53_Main_Tower_7.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L54_Misson_One.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\ABTA\Maps\L55_Outer_Colony_Sector_5.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\ABTA\Projects\ABTA-Campaign.Project.xml">
@@ -382,14 +214,6 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\GameDatabase.Files.ABTA.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\GameDatabaseDef.ABTA.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Level1PropertySetDef.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -397,6 +221,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Database\Items\Tiles\" />
+    <Folder Include="Database\Tables\Tiles\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\EPFArchive\src\EPFArchive\EPFArchive.csproj">

@@ -6,17 +6,12 @@ using System.Xml.Serialization;
 using System.IO;
 using OpenBreed.Common.Logging;
 
-namespace OpenBreed.Common.Props.Readers.XML
+namespace OpenBreed.Common.Database.Items.Props
 {
     [Serializable]
-    public class PropertySetDef
+    public class PropertySetDef : DatabaseItemDef
     {
         private const string DEFAULT_PATH = @"Resources\DefaultPropertySetDef.xml";
-
-        [XmlAttribute]
-        public string Name { get; set; }
-
-
 
         public List<PropertyDef> PropertyDefs { get; set; }
 

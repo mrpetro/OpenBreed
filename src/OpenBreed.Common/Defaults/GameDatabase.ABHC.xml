@@ -314,9 +314,6 @@
             <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
           </Parameters>
         </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="Level1PropertySetDef.xml" Type="PropertySetXML" DirectoryPath="%App.ResourcesFolder%" />
-
-        <DirectoryFileSourceDef Name="DefaultPropertySetDef.xml" Type="PropertySetXML" DirectoryPath="%App.ResourcesFolder%" />
       </Items>
     </Sources>
     <Images>
@@ -358,123 +355,648 @@
         <Level Id="1" Name="L1" >
           <MapResourceRef>L1MA</MapResourceRef>
           <TileSetResourceRef>L1BM</TileSetResourceRef>
-          <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
+          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="2" Name="L2" >
           <MapResourceRef>L2MA</MapResourceRef>
           <TileSetResourceRef>L2BM</TileSetResourceRef>
-          <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
+          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="3" Name="L3" >
           <MapResourceRef>L3MA</MapResourceRef>
           <TileSetResourceRef>L3BM</TileSetResourceRef>
-          <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
+          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="4" Name="L4" >
           <MapResourceRef>L4MA</MapResourceRef>
           <TileSetResourceRef>L4BM</TileSetResourceRef>
-          <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
+          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="5" Name="L5" >
           <MapResourceRef>L5MA</MapResourceRef>
           <TileSetResourceRef>L5BM</TileSetResourceRef>
-          <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
+          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="6" Name="L6" >
           <MapResourceRef>L6MA</MapResourceRef>
           <TileSetResourceRef>L6BM</TileSetResourceRef>
-          <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
+          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="7" Name="L7" >
           <MapResourceRef>L7MA</MapResourceRef>
           <TileSetResourceRef>L6BM</TileSetResourceRef>
-          <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
+          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="8" Name="L8" >
           <MapResourceRef>L8MA</MapResourceRef>
           <TileSetResourceRef>L6BM</TileSetResourceRef>
-          <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
+          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="9" Name="L9" >
           <MapResourceRef>L9MA</MapResourceRef>
           <TileSetResourceRef>L6BM</TileSetResourceRef>
-          <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
+          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="10" Name="LA" >
           <MapResourceRef>LAMA</MapResourceRef>
           <TileSetResourceRef>L7BM</TileSetResourceRef>
-          <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
+          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="11" Name="LB" >
           <MapResourceRef>LBMA</MapResourceRef>
           <TileSetResourceRef>L7BM</TileSetResourceRef>
-          <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
+          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="12" Name="LC" >
           <MapResourceRef>LCMA</MapResourceRef>
           <TileSetResourceRef>L8BM</TileSetResourceRef>
-          <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
+          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="13" Name="LD" >
           <MapResourceRef>LDMA</MapResourceRef>
           <TileSetResourceRef>L7BM</TileSetResourceRef>
-          <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
+          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="14" Name="LE" >
           <MapResourceRef>LEMA</MapResourceRef>
           <TileSetResourceRef>L9BM</TileSetResourceRef>
-          <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
+          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="15" Name="LMMA1" >
           <MapResourceRef>MMA1</MapResourceRef>
           <TileSetResourceRef>L1BM</TileSetResourceRef>
-          <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
+          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="16" Name="LMMA2" >
           <MapResourceRef>MMA2</MapResourceRef>
           <TileSetResourceRef>L5BM</TileSetResourceRef>
-          <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
+          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="17" Name="LMMA3" >
           <MapResourceRef>MMA3</MapResourceRef>
           <TileSetResourceRef>L7BM</TileSetResourceRef>
-          <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
+          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
       </Items>
     </Levels>
+
+    <PropertySets>
+      <Items>
+        <PropertySet Name="Level1PropertySetDef.xml">
+          <PropertyDefs>
+            <PropertyDef Id="0" Visibility="false" Name="Air" >
+              <Description>No collision, no action</Description>
+              <Color>#7F000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="1" Visibility="true" Name="Heavy turret">
+              <Description>Left up corner of turrent, insta-kill when when player collides</Description>
+              <Color>#50FFFF00</Color>
+            </PropertyDef>
+            <PropertyDef Id="2" Visibility="true" Name="Lizard">
+              <Description>Almost harmless, killed when collides with player (which takes very little damage)</Description>
+              <Color>#50FFFF00</Color>
+            </PropertyDef>
+            <PropertyDef Id="3" Visibility="true" Name="Unknown 3">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="4" Visibility="true" Name="Animated sprite">
+              <Description>Left up corner of sprite</Description>
+              <Color>#50AAAAAA</Color>
+            </PropertyDef>
+            <PropertyDef Id="5" Visibility="true" Name="Unknown 5">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="6" Visibility="true" Name="Unknown 6">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="7" Visibility="true" Name="Unknown 7">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="8" Visibility="true" Name="Unknown 8">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="9" Visibility="true" Name="Unknown 9">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="10" Visibility="true" Name="Unknown 10">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="11" Visibility="true" Name="Unknown 11">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="12" Visibility="true" Name="Unknown 12">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="13" Visibility="true" Name="Unknown 13">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="14" Visibility="true" Name="Working generator">
+              <Description>Top left corner of working generator animation</Description>
+              <Color>#2030FFFF</Color>
+            </PropertyDef>
+            <PropertyDef Id="15" Visibility="true" Name="Unknown 15">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="16" Visibility="true" Name="Down left obstacle (for all)">
+              <Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
+              <Color>#20FF0000</Color>
+            </PropertyDef>
+            <PropertyDef Id="17" Visibility="true" Name="Top left obstacle (for all)">
+              <Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
+              <Color>#20FF0000</Color>
+            </PropertyDef>
+            <PropertyDef Id="18" Visibility="true" Name="Up right obstacle (for all)">
+              <Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
+              <Color>#20FF0000</Color>
+            </PropertyDef>
+            <PropertyDef Id="19" Visibility="true" Name="Down right obstacle (for all)">
+              <Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
+              <Color>#20FF0000</Color>
+            </PropertyDef>
+            <PropertyDef Id="20" Visibility="true" Name="Unknown 20">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="21" Visibility="true" Name="Unknown 21">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="22" Visibility="true" Name="Smart card 1">
+              <Description>This will show message from smart card 1</Description>
+              <Color>#800000FF</Color>
+            </PropertyDef>
+            <PropertyDef Id="23" Visibility="true" Name="Smart card 2">
+              <Description>This will show message from smart card 2</Description>
+              <Color>#800000FF</Color>
+            </PropertyDef>
+            <PropertyDef Id="24" Visibility="true" Name="Smart card 3">
+              <Description>This will show message from smart card 3</Description>
+              <Color>#800000FF</Color>
+            </PropertyDef>
+            <PropertyDef Id="25" Visibility="true" Name="Unknown 25">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="26" Visibility="true" Name="Unknown 26">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="27" Visibility="true" Name="Unknown 27">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="28" Visibility="true" Name="Special door 1">
+              <Description>Door opened with special key card 1</Description>
+              <Color>#2030FF00</Color>
+            </PropertyDef>
+            <PropertyDef Id="29" Visibility="true" Name="Special door 2">
+              <Description>Door opened with special key card 2</Description>
+              <Color>#2030FF00</Color>
+            </PropertyDef>
+            <PropertyDef Id="30" Visibility="true" Name="Unknown 30">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="31" Visibility="true" Name="Local teleport (start)">
+              <Description>Teleports player from this location</Description>
+              <Color>#200FF000</Color>
+            </PropertyDef>
+            <PropertyDef Id="32" Visibility="true" Name="Unknown 32">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="33" Visibility="true" Name="Special key card 1">
+              <Description>key card opening special door 1</Description>
+              <Color>#503000FF</Color>
+            </PropertyDef>
+            <PropertyDef Id="34" Visibility="true" Name="Special key card 2">
+              <Description>key card opening special door 2</Description>
+              <Color>#503000FF</Color>
+            </PropertyDef>
+            <PropertyDef Id="35" Visibility="true" Name="Unknown 35">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="36" Visibility="true" Name="Local teleport (end)">
+              <Description>Teleports player to this location, the one that is furthest</Description>
+              <Color>#20FF00FF</Color>
+            </PropertyDef>
+            <PropertyDef Id="37" Visibility="true" Name="Exit 1">
+              <Description>Collision, Finishes level</Description>
+              <Color>#500FF000</Color>
+            </PropertyDef>
+            <PropertyDef Id="38" Visibility="true" Name="Exit 2">
+              <Description>Collision, Finishes level</Description>
+              <Color>#500FF000</Color>
+            </PropertyDef>
+            <PropertyDef Id="39" Visibility="true" Name="Unknown 39">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="40" Visibility="true" Name="Unknown 40">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="41" Visibility="true" Name="Unknown 41">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="42" Visibility="true" Name="Unknown 42">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="43" Visibility="true" Name="Unknown 43">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="44" Visibility="true" Name="Unknown 44">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="45" Visibility="true" Name="Entrance 1">
+              <Description>No collision, spawns player here</Description>
+              <Color>#7FFF00FF</Color>
+            </PropertyDef>
+            <PropertyDef Id="46" Visibility="true" Name="Entrance 2">
+              <Description>No collision, spawns player here</Description>
+              <Color>#7FFF00FF</Color>
+            </PropertyDef>
+            <PropertyDef Id="47" Visibility="true" Name="Land mine">
+              <Description>Explodes on stepping by player</Description>
+              <Color>#50FFFF00</Color>
+            </PropertyDef>
+            <PropertyDef Id="48" Visibility="true" Name="Unknown 48">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="49" Visibility="true" Name="Unknown 49">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="50" Visibility="true" Name="Unknown 50">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="51" Visibility="true" Name="Unknown 51">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="52" Visibility="true" Name="Unknown 52">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="53" Visibility="true" Name="Unknown 53">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="54" Visibility="true" Name="Exit 3">
+              <Description>Collision, Finishes level</Description>
+              <Color>#500FF000</Color>
+            </PropertyDef>
+            <PropertyDef Id="55" Visibility="true" Name="Item">
+              <Description>Pickable item</Description>
+              <Color>#500000FF</Color>
+            </PropertyDef>
+            <PropertyDef Id="56" Visibility="true" Name="Entrance 3">
+              <Description>No collision, spawns player here</Description>
+              <Color>#7FFF00FF</Color>
+            </PropertyDef>
+            <PropertyDef Id="57" Visibility="true" Name="Obstacle(for enemies only)">
+              <Description>Player can walk trough it, movable enemies can't</Description>
+              <Color>#20FF00FF</Color>
+            </PropertyDef>
+            <PropertyDef Id="58" Visibility="true" Name="Generator (activate switch)">
+              <Description>Activates generator when player stomps on it</Description>
+              <Color>#2030FFFF</Color>
+            </PropertyDef>
+            <PropertyDef Id="59" Visibility="true" Name="Unknown 59">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="60" Visibility="true" Name="Obstacle(except projectiles)">
+              <Description>Collision, but weapon projectile can penetrate</Description>
+              <Color>#32F00000</Color>
+            </PropertyDef>
+            <PropertyDef Id="61" Visibility="true" Name="Unknown 61">
+              <Description>Unknown action</Description>
+              <Color>#C0000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="62" Visibility="true" Name="Door">
+              <Description>Door with normal key card required</Description>
+              <Color>#320FF000</Color>
+            </PropertyDef>
+            <PropertyDef Id="63" Visibility="true" Name="Obstacle(for all)">
+              <Description>Collision, nothing can penetrate</Description>
+              <Color>#50F00000</Color>
+            </PropertyDef>
+          </PropertyDefs>
+        </PropertySet>
+        <PropertySet Name="DefaultPropertySetDef.xml">
+          <PropertyDefs>
+            <PropertyDef Id="0" Visibility="false" Name="Air" >
+              <Description>No collision, no action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="1" Visibility="true" Name="Monster (Type 1)">
+              <Description>Start position of monster type 1</Description>
+              <Color>#A0FF0000</Color>
+            </PropertyDef>
+            <PropertyDef Id="2" Visibility="true" Name="Monster (Type 2)">
+              <Description>Start position of monster type 2</Description>
+              <Color>#A0FF0000</Color>
+            </PropertyDef>
+            <PropertyDef Id="3" Visibility="true" Name="Monster (Type 3)">
+              <Description>Start position of monster type 3</Description>
+              <Color>#A0FF0000</Color>
+            </PropertyDef>
+            <PropertyDef Id="4" Visibility="true" Name="Monster (Type 4)">
+              <Description>Start position of monster type 4</Description>
+              <Color>#A0FF0000</Color>
+            </PropertyDef>
+            <PropertyDef Id="5" Visibility="true" Name="Unknown 5">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="6" Visibility="true" Name="Unknown 6">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="7" Visibility="true" Name="One way gate (Up)">
+              <Description>Gate that allows player to pass it only in up direction, other way insta-kills player</Description>
+              <Color>#80FFFF00</Color>
+            </PropertyDef>
+            <PropertyDef Id="8" Visibility="true" Name="One way gate (Down)">
+              <Description>Gate that allows player to pass it only in down direction, other way insta-kills player</Description>
+              <Color>#80FFFF00</Color>
+            </PropertyDef>
+            <PropertyDef Id="9" Visibility="true" Name="Unknown 9">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="10" Visibility="true" Name="Unknown 10">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="11" Visibility="true" Name="Unknown 11">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="12" Visibility="true" Name="One way gate (Right)">
+              <Description>Gate that allows player to pass it only in right direction, other way insta-kills player</Description>
+              <Color>#80FFFF00</Color>
+            </PropertyDef>
+            <PropertyDef Id="13" Visibility="true" Name="One way gate (Left)">
+              <Description>Gate that allows player to pass it only in left direction, other way insta-kills player</Description>
+              <Color>#80FFFF00</Color>
+            </PropertyDef>
+            <PropertyDef Id="14" Visibility="true" Name="Directed gun (Right)">
+              <Description>Gun directed to right, deals great damage to player</Description>
+              <Color>#A0FF0000</Color>
+            </PropertyDef>
+            <PropertyDef Id="15" Visibility="true" Name="Directed gun (Up)">
+              <Description>Gun directed to up, deals great damage to player</Description>
+              <Color>#A0FF0000</Color>
+            </PropertyDef>
+            <PropertyDef Id="16" Visibility="true" Name="Down left obstacle (for all)">
+              <Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
+              <Color>#20FFFF00</Color>
+            </PropertyDef>
+            <PropertyDef Id="17" Visibility="true" Name="Top left obstacle (for all)">
+              <Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
+              <Color>#20FFFF00</Color>
+            </PropertyDef>
+            <PropertyDef Id="18" Visibility="true" Name="Up right obstacle (for all)">
+              <Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
+              <Color>#20FFFF00</Color>
+            </PropertyDef>
+            <PropertyDef Id="19" Visibility="true" Name="Down right obstacle (for all)">
+              <Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
+              <Color>#20FFFF00</Color>
+            </PropertyDef>
+            <PropertyDef Id="20" Visibility="true" Name="Unknown 20">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="21" Visibility="true" Name="Unknown 21">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="22" Visibility="true" Name="Smart card 1">
+              <Description>This will show note message from smart card 1</Description>
+              <Color>#800000FF</Color>
+            </PropertyDef>
+            <PropertyDef Id="23" Visibility="true" Name="Smart card 2">
+              <Description>This will show note message from smart card 2</Description>
+              <Color>#800000FF</Color>
+            </PropertyDef>
+            <PropertyDef Id="24" Visibility="true" Name="Smart card 3">
+              <Description>This will show note message from smart card 3</Description>
+              <Color>#800000FF</Color>
+            </PropertyDef>
+            <PropertyDef Id="25" Visibility="true" Name="Unknown 25">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="26" Visibility="true" Name="Unknown 26">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="27" Visibility="true" Name="Unknown 27">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="28" Visibility="true" Name="Unknown 28">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="29" Visibility="true" Name="Unknown 29">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="30" Visibility="true" Name="Unknown 30">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="31" Visibility="true" Name="Local teleport (start)">
+              <Description>Teleports player from this location</Description>
+              <Color>#200FF000</Color>
+            </PropertyDef>
+            <PropertyDef Id="32" Visibility="true" Name="Monster spawner">
+              <Description>Creates a hole where monsters are comming from</Description>
+              <Color>#F0FF0000</Color>
+            </PropertyDef>
+            <PropertyDef Id="33" Visibility="true" Name="Unknown 33">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="34" Visibility="true" Name="Unknown 34">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="35" Visibility="true" Name="Unknown 35">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="36" Visibility="true" Name="Local teleport (end)">
+              <Description>Teleports player to this location, the one that is furthest</Description>
+              <Color>#40FF00FF</Color>
+            </PropertyDef>
+            <PropertyDef Id="37" Visibility="true" Name="Exit 1">
+              <Description>Collision, Finishes level</Description>
+              <Color>#500FF000</Color>
+            </PropertyDef>
+            <PropertyDef Id="38" Visibility="true" Name="Exit 2">
+              <Description>Collision, Finishes level</Description>
+              <Color>#500FF000</Color>
+            </PropertyDef>
+            <PropertyDef Id="39" Visibility="true" Name="Unknown 39">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="40" Visibility="true" Name="Unknown 40">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="41" Visibility="true" Name="Unknown 41">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="42" Visibility="true" Name="Unknown 42">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="43" Visibility="true" Name="Unknown 43">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="44" Visibility="true" Name="Unknown 44">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="45" Visibility="true" Name="Entrance 1">
+              <Description>No collision, spawns player here</Description>
+              <Color>#7FFF00FF</Color>
+            </PropertyDef>
+            <PropertyDef Id="46" Visibility="true" Name="Entrance 2">
+              <Description>No collision, spawns player here</Description>
+              <Color>#7FFF00FF</Color>
+            </PropertyDef>
+            <PropertyDef Id="47" Visibility="true" Name="Unknown 47">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="48" Visibility="true" Name="Unknown 48">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="49" Visibility="true" Name="Radioactive area">
+              <Description>Radioactive area that hurts player if standing on it</Description>
+              <Color>#4FFF7F00</Color>
+            </PropertyDef>
+            <PropertyDef Id="50" Visibility="true" Name="Wall turrent (Up)">
+              <Description>Wall turret facing up</Description>
+              <Color>#A0FF0000</Color>
+            </PropertyDef>
+            <PropertyDef Id="51" Visibility="true" Name="Wall turrent (Right)">
+              <Description>Wall turret facing right</Description>
+              <Color>#A0FF0000</Color>
+            </PropertyDef>
+            <PropertyDef Id="52" Visibility="true" Name="Wall turrent (Down)">
+              <Description>Wall turret facing down</Description>
+              <Color>#A0FF0000</Color>
+            </PropertyDef>
+            <PropertyDef Id="53" Visibility="true" Name="Wall turrent (Left)">
+              <Description>Wall turret facing left</Description>
+              <Color>#A0FF0000</Color>
+            </PropertyDef>
+            <PropertyDef Id="54" Visibility="true" Name="Exit 3">
+              <Description>Collision, Finishes level</Description>
+              <Color>#500FF000</Color>
+            </PropertyDef>
+            <PropertyDef Id="55" Visibility="true" Name="Item">
+              <Description>Pickable item</Description>
+              <Color>#500000FF</Color>
+            </PropertyDef>
+            <PropertyDef Id="56" Visibility="true" Name="Entrance 3">
+              <Description>No collision, spawns player here</Description>
+              <Color>#7FFF00FF</Color>
+            </PropertyDef>
+            <PropertyDef Id="57" Visibility="true" Name="Obstacle(for enemies only)">
+              <Description>Player can walk trough it, movable enemies can't</Description>
+              <Color>#20FF00FF</Color>
+            </PropertyDef>
+            <PropertyDef Id="58" Visibility="true" Name="Unknown 58">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="59" Visibility="true" Name="Unknown 59">
+              <Description>Unknown action</Description>
+              <Color>#00000000</Color>
+            </PropertyDef>
+            <PropertyDef Id="60" Visibility="true" Name="Obstacle(except projectiles)">
+              <Description>Collision, but weapon projectile can penetrate</Description>
+              <Color>#32FFFF00</Color>
+            </PropertyDef>
+            <PropertyDef Id="61" Visibility="true" Name="Intex terminal">
+              <Description>Terminal that player may use</Description>
+              <Color>#7F0000FF</Color>
+            </PropertyDef>
+            <PropertyDef Id="62" Visibility="true" Name="Door">
+              <Description>Door with no color card required</Description>
+              <Color>#320FF000</Color>
+            </PropertyDef>
+            <PropertyDef Id="63" Visibility="true" Name="Obstacle(for all)">
+              <Description>Collision, nothing can penetrate</Description>
+              <Color>#50FFFF00</Color>
+            </PropertyDef>
+          </PropertyDefs>
+        </PropertySet>
+      </Items>
+    </PropertySets>
   </Tables>
 </DatabaseDef>

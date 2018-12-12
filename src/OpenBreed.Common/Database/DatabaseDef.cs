@@ -13,6 +13,7 @@ using OpenBreed.Common.Database.Items.Images;
 using OpenBreed.Common.Database.Items.Levels;
 using OpenBreed.Common.Database.Tables.Images;
 using OpenBreed.Common.Database.Tables.Levels;
+using OpenBreed.Common.Database.Tables.Props;
 
 namespace OpenBreed.Common.Database
 {
@@ -27,6 +28,7 @@ namespace OpenBreed.Common.Database
         [XmlArray("Tables"),
         XmlArrayItem("Sources", typeof(DatabaseSourceTableDef)),
         XmlArrayItem("Levels", typeof(DatabaseLevelTableDef)),
+        XmlArrayItem("PropertySets", typeof(DatabasePropertySetTableDef)),
         XmlArrayItem("Images", typeof(DatabaseImageTableDef))]
         public readonly List<DatabaseTableDef> Tables = new List<DatabaseTableDef>();
 
@@ -38,19 +40,6 @@ namespace OpenBreed.Common.Database
         {
             get { return Path.Combine(ProgramTools.AppDir, DEFAULT_DATABASE_DIR_NAME); }
         }
-
-        //public List<ImageDef> ImageDefs { get; set; }
-
-        public List<LevelDef> LevelDefs { get; set; }
-
-        //[XmlArray("ResourceDefs"),
-        //XmlArrayItem("ResourceLevelDef", typeof(ResourceLevelDef))]
-        //public List<ResourceDef> ResourceDefs { get; set; }
-
-        //[XmlArray("SourceDefs"),
-        //XmlArrayItem("DirectoryFileSourceDef", typeof(DirectoryFileSourceDef)),
-        //XmlArrayItem("EPFArchiveFileSourceDef", typeof(EPFArchiveFileSourceDef))]
-        //public List<SourceDef> SourceDefs { get; set; }
 
         #endregion Public Properties
 

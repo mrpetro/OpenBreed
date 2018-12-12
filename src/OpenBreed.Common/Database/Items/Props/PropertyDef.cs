@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace OpenBreed.Common.Props.Readers.XML
+namespace OpenBreed.Common.Database.Items.Props
 {
     [Serializable]
     public class PropertyDef

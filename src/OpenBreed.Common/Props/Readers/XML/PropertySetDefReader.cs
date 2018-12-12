@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using OpenBreed.Common.Props.Builders;
+using OpenBreed.Common.Database.Items.Props;
 
 namespace OpenBreed.Common.Props.Readers.XML
 {
@@ -19,6 +20,8 @@ namespace OpenBreed.Common.Props.Readers.XML
         public PropertySetModel Read(PropertySetDef propertySetDef)
         {
             PropertyBuilder propertyBuilder = PropertyBuilder.NewProperty();
+
+            propertyBuilder.SetName(propertySetDef.Name);
 
             foreach (var propertyDef in propertySetDef.PropertyDefs)
             {

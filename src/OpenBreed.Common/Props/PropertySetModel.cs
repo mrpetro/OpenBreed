@@ -22,12 +22,15 @@ namespace OpenBreed.Common.Props
     {
         private static PropertySetModel m_NullTileSet = null;
 
+        public string Name { get; private set; }
+
         public List<PropertyModel> Properties { get; set; }
 
         public event PropertyValueChangedEventHandler PropertyValueChanged;
 
         public PropertySetModel(PropertySetBuilder builder)
         {
+            Name = builder.Name;
             Properties = builder.Properties;
 
             foreach (var property in Properties)

@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<LevelDef Id="8" Name="STORES LEVEL 2" >
-  <MapResourceRef>MAP.08</MapResourceRef>
-  <TileSetResourceRef>LEVELD.BLK</TileSetResourceRef>
-  <SpriteSetResourceRefs>
-    <SpriteSetResourceRef>SPRDA.SPR</SpriteSetResourceRef>
-    <SpriteSetResourceRef>SPRDB.SPR</SpriteSetResourceRef>
-  </SpriteSetResourceRefs>
-</LevelDef>
