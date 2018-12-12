@@ -23,6 +23,8 @@ using OpenBreed.Common.Database.Tables;
 using OpenBreed.Common.Database.Tables.Images;
 using OpenBreed.Editor.VM.Database.Tables;
 using OpenBreed.Common.Database.Tables.Levels;
+using OpenBreed.Common.Database.Tables.Props;
+using OpenBreed.Common.Database.Items.Props;
 
 namespace OpenBreed.Editor.VM.Database
 {
@@ -84,14 +86,14 @@ namespace OpenBreed.Editor.VM.Database
             return _databaseDef.Tables.OfType<DatabaseSourceTableDef>().FirstOrDefault().Items.FindAll(item => item.Type == type);
         }
 
-        public LevelDef GetLevelDef(int id)
+        public PropertySetDef GetPropertySetDef(string propertySetName)
         {
-            var levelDef = _databaseDef.LevelDefs.FirstOrDefault(item => item.Id == id);
+            var propertySetDef = _databaseDef.Tables.OfType<DatabasePropertySetTableDef>().FirstOrDefault().Items.FirstOrDefault(item => item.Name == propertySetName);
 
-            if (levelDef == null)
-                throw new InvalidOperationException("Level(" + id + ") not found!");
+            if (propertySetDef == null)
+                throw new InvalidOperationException("Property set '" + propertySetName + "' not found!");
 
-            return levelDef;
+            return propertySetDef;
         }
 
         public SourceDef GetSourceDef(string sourceRef)
@@ -116,6 +118,8 @@ namespace OpenBreed.Editor.VM.Database
                 return new DatabaseLevelItemVM(this);
             else if (itemDef is SourceDef)
                 return new DatabaseSourceItemVM(this);
+            else if (itemDef is PropertySetDef)
+                return new DatabasePropertySetItemVM(this);
             if (itemDef is DatabaseTableDef)
                 return CreateTable((DatabaseTableDef)itemDef);
 
@@ -129,6 +133,8 @@ namespace OpenBreed.Editor.VM.Database
                 return new DatabaseImageTableVM(this);
             else if (tableDef is DatabaseLevelTableDef)
                 return new DatabaseLevelTableVM(this);
+            else if (tableDef is DatabasePropertySetTableDef)
+                return new DatabasePropertySetTableVM(this);
             else if (tableDef is DatabaseSourceTableDef)
                 return new DatabaseSourceTableVM(this);
             else

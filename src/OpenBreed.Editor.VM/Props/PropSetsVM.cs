@@ -7,6 +7,8 @@ using System.ComponentModel;
 using OpenBreed.Editor.VM.Base;
 using System.Drawing;
 using OpenBreed.Common.Logging;
+using OpenBreed.Common.Props.Readers.XML;
+using OpenBreed.Common.Props.Builders;
 
 namespace OpenBreed.Editor.VM.Props
 {
@@ -71,25 +73,23 @@ namespace OpenBreed.Editor.VM.Props
 
         #region Public Methods
 
-        public void AddPropertySet(string propertySetRef)
+        public void AddPropertySet(string propertySetName)
         {
-            if (string.IsNullOrWhiteSpace(propertySetRef))
+            if (string.IsNullOrWhiteSpace(propertySetName))
             {
-                propertySetRef = "DefaultPropertySetDef.xml";
+                propertySetName = "DefaultPropertySetDef.xml";
                 LogMan.Instance.LogWarning("Property Set source not set. Getting default: DefaultPropertySetDef.xml");
             }
 
-            var propertySetSourceDef = Root.Database.GetSourceDef(propertySetRef);
+            var propertySetDef = Root.Database.GetPropertySetDef(propertySetName);
 
-            if (propertySetSourceDef == null)
-                throw new Exception("No PropertySetSource definition found with name: " + propertySetRef);
+            if (propertySetDef == null)
+                throw new Exception("No PropertySetSource definition found with name: " + propertySetName);
 
-            var source = Root.Sources.GetSource(propertySetSourceDef);
+            var reader = new PropertySetDefReader(new PropertySetBuilder());
+            var propertySetModel = reader.Read(propertySetDef);
 
-            if (source == null)
-                throw new Exception("PropertySet source error: " + propertySetSourceDef);
-
-            Items.Add(PropSetVM.Create(this, source));
+            Items.Add(PropSetVM.Create(this, propertySetModel));
 
             CurrentItem = Items.LastOrDefault();
         }

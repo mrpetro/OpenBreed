@@ -81,10 +81,12 @@
     <Compile Include="Database\Items\DatabaseItemVM.cs" />
     <Compile Include="Database\DatabaseTableViewerVM.cs" />
     <Compile Include="Database\Items\DatabaseLevelItemVM.cs" />
+    <Compile Include="Database\Items\DatabasePropertySetItemVM.cs" />
     <Compile Include="Database\Items\DatabaseSourceItemVM.cs" />
     <Compile Include="Database\Items\DatabaseTableVM.cs" />
     <Compile Include="Database\Tables\DatabaseImageTableVM.cs" />
     <Compile Include="Database\Tables\DatabaseLevelTableVM.cs" />
+    <Compile Include="Database\Tables\DatabasePropertySetTableVM.cs" />
     <Compile Include="Database\Tables\DatabaseSourceTableVM.cs" />
     <Compile Include="EditorVM.cs" />
     <Compile Include="EditorVMHelper.cs" />

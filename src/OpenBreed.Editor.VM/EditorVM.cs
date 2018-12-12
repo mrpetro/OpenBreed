@@ -79,7 +79,6 @@ namespace OpenBreed.Editor.VM
             Sources.RegisterFormat("ABTASPR", new ABTASPRFormat());
             Sources.RegisterFormat("ACBM_TILE_SET", new ACBMTileSetFormat());
             Sources.RegisterFormat("ACBM_IMAGE", new ACBMImageFormat());
-            Sources.RegisterFormat("PropertySetXML", new PropertySetXMLFormat());
         }
 
         #endregion Public Constructors

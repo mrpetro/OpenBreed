@@ -46,8 +46,6 @@ namespace OpenBreed.Editor.VM.Props
 
         public PropSetsVM Owner { get; private set; }
 
-        public BaseSource Source { get; private set; }
-
         #endregion Public Properties
 
         #region Public Methods
@@ -82,13 +80,10 @@ namespace OpenBreed.Editor.VM.Props
 
         #region Internal Methods
 
-        internal static PropSetVM Create(PropSetsVM owner, BaseSource source)
+        internal static PropSetVM Create(PropSetsVM owner, PropertySetModel model)
         {
-            var model = source.Load() as PropertySetModel;
-
             var newPropertySet = new PropSetVM(owner);
-            newPropertySet.Source = source;
-            newPropertySet.Name = source.Name;
+            newPropertySet.Name = model.Name;
 
             foreach (var propertyModel in model.Properties)
                 newPropertySet.Items.Add(PropVM.Create(propertyModel));

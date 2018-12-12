@@ -51,8 +51,8 @@ namespace OpenBreed.Editor.VM.Images
             if (Root.SpriteSetViewer.CurrentItem != null)
                 Root.SpriteViewer.CurrentItem = Root.SpriteSetViewer.CurrentItem.Items.FirstOrDefault();
 
-            if (levelDef.PropertySetResourceRef != null)
-                Root.PropSets.AddPropertySet(levelDef.PropertySetResourceRef);
+            if (levelDef.PropertySetRef != null)
+                Root.PropSets.AddPropertySet(levelDef.PropertySetRef);
 
             var mapSourceDef = Root.Database.GetSourceDef(levelDef.MapResourceRef);
             if (mapSourceDef != null)
