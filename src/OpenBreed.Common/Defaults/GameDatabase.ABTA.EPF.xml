@@ -106,7 +106,7 @@
         <Level Id="1" Name="CRASH LANDING SITE" >
           <MapResourceRef>MAP.01</MapResourceRef>
           <TileSetResourceRef>LEVEL1.BLK</TileSetResourceRef>
-          <PropertySetRef>Level1PropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Level1.xml</PropertySetRef>
           <SpriteSetResourceRefs>
             <SpriteSetResourceRef>SPR1A.SPR</SpriteSetResourceRef>
             <SpriteSetResourceRef>SPR1B.SPR</SpriteSetResourceRef>
@@ -115,7 +115,7 @@
         <Level Id="2" Name="CIVILIAN ZONE 1" >
           <MapResourceRef>MAP.02</MapResourceRef>
           <TileSetResourceRef>LEVEL4.BLK</TileSetResourceRef>
-          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetResourceRefs>
             <SpriteSetResourceRef>SPR4A.SPR</SpriteSetResourceRef>
             <SpriteSetResourceRef>SPR4B.SPR</SpriteSetResourceRef>
@@ -148,7 +148,7 @@
         <Level Id="6" Name="OUTDOOR SECTOR 2" >
           <MapResourceRef>MAP.06</MapResourceRef>
           <TileSetResourceRef>LEVEL1.BLK</TileSetResourceRef>
-          <PropertySetRef>Level1PropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Level1.xml</PropertySetRef>
           <SpriteSetResourceRefs>
             <SpriteSetResourceRef>SPR1A.SPR</SpriteSetResourceRef>
             <SpriteSetResourceRef>SPR1B.SPR</SpriteSetResourceRef>
@@ -203,7 +203,7 @@
         <Level Id="11" Name="OUTDOOR SECTOR 3" >
           <MapResourceRef>MAP.11</MapResourceRef>
           <TileSetResourceRef>LEVEL1.BLK</TileSetResourceRef>
-          <PropertySetRef>Level1PropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Level1.xml</PropertySetRef>
           <SpriteSetResourceRefs>
             <SpriteSetResourceRef>SPR1A.SPR</SpriteSetResourceRef>
             <SpriteSetResourceRef>SPR1B.SPR</SpriteSetResourceRef>
@@ -306,7 +306,7 @@
         <Level Id="20" Name="COLONY GROUND SECTOR 3" >
           <MapResourceRef>MAP.20</MapResourceRef>
           <TileSetResourceRef>LEVEL1.BLK</TileSetResourceRef>
-          <PropertySetRef>Level1PropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Level1.xml</PropertySetRef>
           <SpriteSetResourceRefs>
             <SpriteSetResourceRef>SPR1A.SPR</SpriteSetResourceRef>
             <SpriteSetResourceRef>SPR1B.SPR</SpriteSetResourceRef>
@@ -361,7 +361,7 @@
         <Level Id="25" Name="COLONY GROUND SECTOR 4" >
           <MapResourceRef>MAP.25</MapResourceRef>
           <TileSetResourceRef>LEVEL1.BLK</TileSetResourceRef>
-          <PropertySetRef>Level1PropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Level1.xml</PropertySetRef>
           <SpriteSetResourceRefs>
             <SpriteSetResourceRef>SPR1A.SPR</SpriteSetResourceRef>
             <SpriteSetResourceRef>SPR1B.SPR</SpriteSetResourceRef>
@@ -626,7 +626,7 @@
         <Level Id="55" Name="OUTER COLONY SECTOR 5" >
           <MapResourceRef>MAP.55</MapResourceRef>
           <TileSetResourceRef>LEVEL1.BLK</TileSetResourceRef>
-          <PropertySetRef>Level1PropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Level1.xml</PropertySetRef>
           <SpriteSetResourceRefs>
             <SpriteSetResourceRef>SPR1A.SPR</SpriteSetResourceRef>
             <SpriteSetResourceRef>SPR1B.SPR</SpriteSetResourceRef>
@@ -636,7 +636,7 @@
     </Levels>
     <PropertySets>
       <Items>
-        <PropertySet Name="Level1PropertySetDef.xml">
+        <PropertySet Name="Props.Level1">
           <PropertyDefs>
             <PropertyDef Id="0" Visibility="false" Name="Air" >
               <Description>No collision, no action</Description>
@@ -896,7 +896,7 @@
             </PropertyDef>
           </PropertyDefs>
         </PropertySet>
-        <PropertySet Name="DefaultPropertySetDef.xml">
+        <PropertySet Name="Props.Default">
           <PropertyDefs>
             <PropertyDef Id="0" Visibility="false" Name="Air" >
               <Description>No collision, no action</Description>
@@ -1265,7 +1265,7 @@
     <ResourceLevelDef Id="1" Name="CRASH LANDING SITE" >
       <MapResourceRef>MAP.01</MapResourceRef>
       <TileSetResourceRef>LEVEL1.BLK</TileSetResourceRef>
-      <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
+      <PropertySetRef>Props.Default</PropertySetRef>
       <SpriteSetResourceRefs>
         <SpriteSetResourceRef>SPR1A.SPR</SpriteSetResourceRef>
         <SpriteSetResourceRef>SPR1B.SPR</SpriteSetResourceRef>
@@ -1274,7 +1274,7 @@
     <ResourceLevelDef Id="2" Name="CIVILIAN ZONE 1" >
       <MapResourceRef>MAP.02</MapResourceRef>
       <TileSetResourceRef>LEVEL4.BLK</TileSetResourceRef>
-      <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
+      <PropertySetRef>Props.Default</PropertySetRef>
       <SpriteSetResourceRefs>
         <SpriteSetResourceRef>SPR4A.SPR</SpriteSetResourceRef>
         <SpriteSetResourceRef>SPR4B.SPR</SpriteSetResourceRef>

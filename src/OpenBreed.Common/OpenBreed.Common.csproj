@@ -93,13 +93,8 @@
     <Compile Include="Palettes\PalettesModel.cs" />
     <Compile Include="ProgramTools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Props\Builders\PropertyBuilder.cs" />
-    <Compile Include="Props\Builders\PropertySetBuilder.cs" />
-    <Compile Include="Props\PropertyModel.cs" />
-    <Compile Include="Props\PropertySetModel.cs" />
     <Compile Include="Database\Items\Props\PropertyDef.cs" />
     <Compile Include="Database\Items\Props\PropertySetDef.cs" />
-    <Compile Include="Props\Readers\XML\PropertySetDefReader.cs" />
     <Compile Include="Readers\BigEndianBinaryReader.cs" />
     <Compile Include="Sound\PCMPlayer.cs" />
     <Compile Include="Sound\WaveMemoryStream.cs" />
@@ -222,6 +217,7 @@
   <ItemGroup>
     <Folder Include="Database\Items\Tiles\" />
     <Folder Include="Database\Tables\Tiles\" />
+    <Folder Include="Props\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\EPFArchive\src\EPFArchive\EPFArchive.csproj">

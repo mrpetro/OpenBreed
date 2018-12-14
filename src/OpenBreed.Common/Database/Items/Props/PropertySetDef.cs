@@ -11,25 +11,11 @@ namespace OpenBreed.Common.Database.Items.Props
     [Serializable]
     public class PropertySetDef : DatabaseItemDef
     {
-        private const string DEFAULT_PATH = @"Resources\DefaultPropertySetDef.xml";
+        #region Public Properties
 
-        public List<PropertyDef> PropertyDefs { get; set; }
+        public List<PropertyDef> PropertyDefs { get; } = new List<PropertyDef>();
 
-        public static PropertySetDef LoadDefault()
-        {
-            try
-            {
-                string defaultPath = Path.Combine(ProgramTools.AppDir, DEFAULT_PATH);
-                PropertySetDef propertySetDef = Tools.RestoreFromXml<PropertySetDef>(defaultPath);
-                LogMan.Instance.LogSuccess("Default Database loaded successful from " + defaultPath);
-                return propertySetDef;
-            }
-            catch (Exception ex)
-            {
-                LogMan.Instance.LogError("Unable to load default PropertySet. Reason: " + ex.Message);
-            }
+        #endregion Public Properties
 
-            return null;
-        }
     }
 }

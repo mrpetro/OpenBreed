@@ -355,119 +355,119 @@
         <Level Id="1" Name="L1" >
           <MapResourceRef>L1MA</MapResourceRef>
           <TileSetResourceRef>L1BM</TileSetResourceRef>
-          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="2" Name="L2" >
           <MapResourceRef>L2MA</MapResourceRef>
           <TileSetResourceRef>L2BM</TileSetResourceRef>
-          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="3" Name="L3" >
           <MapResourceRef>L3MA</MapResourceRef>
           <TileSetResourceRef>L3BM</TileSetResourceRef>
-          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="4" Name="L4" >
           <MapResourceRef>L4MA</MapResourceRef>
           <TileSetResourceRef>L4BM</TileSetResourceRef>
-          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="5" Name="L5" >
           <MapResourceRef>L5MA</MapResourceRef>
           <TileSetResourceRef>L5BM</TileSetResourceRef>
-          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="6" Name="L6" >
           <MapResourceRef>L6MA</MapResourceRef>
           <TileSetResourceRef>L6BM</TileSetResourceRef>
-          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="7" Name="L7" >
           <MapResourceRef>L7MA</MapResourceRef>
           <TileSetResourceRef>L6BM</TileSetResourceRef>
-          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="8" Name="L8" >
           <MapResourceRef>L8MA</MapResourceRef>
           <TileSetResourceRef>L6BM</TileSetResourceRef>
-          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="9" Name="L9" >
           <MapResourceRef>L9MA</MapResourceRef>
           <TileSetResourceRef>L6BM</TileSetResourceRef>
-          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="10" Name="LA" >
           <MapResourceRef>LAMA</MapResourceRef>
           <TileSetResourceRef>L7BM</TileSetResourceRef>
-          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="11" Name="LB" >
           <MapResourceRef>LBMA</MapResourceRef>
           <TileSetResourceRef>L7BM</TileSetResourceRef>
-          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="12" Name="LC" >
           <MapResourceRef>LCMA</MapResourceRef>
           <TileSetResourceRef>L8BM</TileSetResourceRef>
-          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="13" Name="LD" >
           <MapResourceRef>LDMA</MapResourceRef>
           <TileSetResourceRef>L7BM</TileSetResourceRef>
-          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="14" Name="LE" >
           <MapResourceRef>LEMA</MapResourceRef>
           <TileSetResourceRef>L9BM</TileSetResourceRef>
-          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="15" Name="LMMA1" >
           <MapResourceRef>MMA1</MapResourceRef>
           <TileSetResourceRef>L1BM</TileSetResourceRef>
-          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="16" Name="LMMA2" >
           <MapResourceRef>MMA2</MapResourceRef>
           <TileSetResourceRef>L5BM</TileSetResourceRef>
-          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
         <Level Id="17" Name="LMMA3" >
           <MapResourceRef>MMA3</MapResourceRef>
           <TileSetResourceRef>L7BM</TileSetResourceRef>
-          <PropertySetRef>DefaultPropertySetDef.xml</PropertySetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetResourceRefs>
           </SpriteSetResourceRefs>
         </Level>
@@ -476,7 +476,7 @@
 
     <PropertySets>
       <Items>
-        <PropertySet Name="Level1PropertySetDef.xml">
+        <PropertySet Name="Props.Level1">
           <PropertyDefs>
             <PropertyDef Id="0" Visibility="false" Name="Air" >
               <Description>No collision, no action</Description>
@@ -736,7 +736,7 @@
             </PropertyDef>
           </PropertyDefs>
         </PropertySet>
-        <PropertySet Name="DefaultPropertySetDef.xml">
+        <PropertySet Name="Props.Default">
           <PropertyDefs>
             <PropertyDef Id="0" Visibility="false" Name="Air" >
               <Description>No collision, no action</Description>
