@@ -38,6 +38,7 @@ namespace OpenBreed.Editor.VM
 
         #region Private Fields
 
+        private PropSetVM _propSet;
         private DatabaseVM _database;
         private EditorState _state;
 
@@ -60,13 +61,15 @@ namespace OpenBreed.Editor.VM
             TileSets = new BindingList<TileSetVM>();
             TileSets.ListChanged += (s, e) => OnPropertyChanged(nameof(TileSets));
 
+            PropSelector = new PropSelectorVM(this);
+            PropSetEditor = new PropSetEditorVM(this);
             DatabaseViewer = new DatabaseViewerVM(this);
             TileSetViewer = new TileSetViewerVM(this);
             SpriteSetViewer = new SpriteSetSelectorVM(this);
             SpriteViewer = new SpriteViewerVM(this);
             ImageViewer = new ImageViewerVM(this);
             LevelEditor = new LevelEditorVM(this);
-            PropSets = new PropSetsVM(this);
+            PropSet = new PropSetVM(this);
             Map = new MapVM(this);
             MapBodyViewer = new MapBodyEditorVM(this);
             Sources = new SourcesHandler();
@@ -91,13 +94,16 @@ namespace OpenBreed.Editor.VM
             set { SetProperty(ref _database, value); }
         }
 
-        public DatabaseViewerVM DatabaseViewer { get; private set; }
+        public PropSelectorVM PropSelector { get; }
+        public PropSetEditorVM PropSetEditor { get; }
 
-        public IDialogProvider DialogProvider { get; private set; }
+        public DatabaseViewerVM DatabaseViewer { get; }
 
-        public ImageViewerVM ImageViewer { get; private set; }
+        public IDialogProvider DialogProvider { get; }
 
-        public LevelEditorVM LevelEditor { get; private set; }
+        public ImageViewerVM ImageViewer { get; }
+
+        public LevelEditorVM LevelEditor { get; }
 
         public MapVM Map { get; private set; }
 
@@ -105,7 +111,11 @@ namespace OpenBreed.Editor.VM
 
         public PalettesVM Palettes { get; private set; }
 
-        public PropSetsVM PropSets { get; private set; }
+        public PropSetVM PropSet
+        {
+            get { return _propSet; }
+            set { SetProperty(ref _propSet, value); }
+        }
 
         public SettingsMan Settings { get; private set; }
 
@@ -135,6 +145,17 @@ namespace OpenBreed.Editor.VM
 
         #region Public Methods
 
+        public void LoadPropSet(string propSetName)
+        {
+            var propSetDef = Database.GetPropertySetDef(propSetName);
+            if (propSetDef == null)
+                throw new Exception($"No PropSet definition with name '{propSetName}' found!");
+
+            var propSet = CreatePropSet();
+            propSet.Load(propSetDef);
+            PropSet = propSet;
+        }
+
         public void AddSpriteSet(string spriteSetRef)
         {
             var spriteSetSourceDef = Database.GetSourceDef(spriteSetRef);
@@ -163,6 +184,11 @@ namespace OpenBreed.Editor.VM
             TileSets.Add(TileSetVM.Create(this, source));
         }
 
+        public PropSetVM CreatePropSet()
+        {
+            return new PropSetVM(this);
+        }
+
         public DatabaseVM CreateDatabase()
         {
             return new DatabaseVM(this);
@@ -175,6 +201,8 @@ namespace OpenBreed.Editor.VM
 
         public void Initialize()
         {
+            PropSelector.Connect();
+            PropSetEditor.Connect();
             DatabaseViewer.Connect();
         }
         public void Run()

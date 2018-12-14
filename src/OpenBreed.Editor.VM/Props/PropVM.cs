@@ -1,5 +1,4 @@
-﻿using OpenBreed.Common.Props;
-using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Editor.VM.Base;
 using OpenBreed.Common.Sources;
 using System;
 using System.Collections.Generic;
@@ -7,11 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Common.Database.Items.Props;
 
 namespace OpenBreed.Editor.VM.Props
 {
     public class PropVM : BaseViewModel
     {
+
         #region Private Fields
 
         private string _description;
@@ -21,6 +22,15 @@ namespace OpenBreed.Editor.VM.Props
         private Image _presentation;
 
         #endregion Private Fields
+
+        #region Public Constructors
+
+        public PropVM(PropSetVM owner)
+        {
+            Owner = owner;
+        }
+
+        #endregion Public Constructors
 
         #region Public Properties
 
@@ -42,6 +52,7 @@ namespace OpenBreed.Editor.VM.Props
             set { SetProperty(ref _name, value); }
         }
 
+        public PropSetVM Owner { get; }
         public Image Presentation
         {
             get { return _presentation; }
@@ -54,17 +65,21 @@ namespace OpenBreed.Editor.VM.Props
             set { SetProperty(ref _isVisible, value); }
         }
 
-        internal static PropVM Create(PropertyModel propertyModel)
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public void Load(PropertyDef propDef)
         {
-            var newProperty = new PropVM();
-            newProperty.Name = propertyModel.Name;
-            newProperty.Id = propertyModel.Id;
-            newProperty.Visibility = propertyModel.Visibility;
-            newProperty.Description = propertyModel.Description;
-            newProperty.Presentation = propertyModel.Presentation;
-            return newProperty;
+            Name = propDef.Name;
+            Id = propDef.Id;
+            Visibility = propDef.Visibility;
+            Description = propDef.Description;
+
+            PropVMHelper.SetPresentation(this, propDef.ImagePath, System.Drawing.ColorTranslator.FromHtml(propDef.Color));
         }
 
-        #endregion Public Properties
+        #endregion Public Methods
+
     }
 }

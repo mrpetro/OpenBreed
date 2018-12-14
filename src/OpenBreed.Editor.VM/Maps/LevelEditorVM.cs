@@ -52,7 +52,7 @@ namespace OpenBreed.Editor.VM.Images
                 Root.SpriteViewer.CurrentItem = Root.SpriteSetViewer.CurrentItem.Items.FirstOrDefault();
 
             if (levelDef.PropertySetRef != null)
-                Root.PropSets.AddPropertySet(levelDef.PropertySetRef);
+                Root.LoadPropSet(levelDef.PropertySetRef);
 
             var mapSourceDef = Root.Database.GetSourceDef(levelDef.MapResourceRef);
             if (mapSourceDef != null)

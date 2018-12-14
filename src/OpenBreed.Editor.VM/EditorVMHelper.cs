@@ -58,6 +58,7 @@ namespace OpenBreed.Editor.VM
 
             return true;
         }
+
         internal static bool TryOpenDatabase(EditorVM editor)
         {
             var openFileDialog = editor.DialogProvider.OpenFileDialog();

@@ -119,7 +119,7 @@ namespace OpenBreed.Editor.VM.Database
             else if (itemDef is SourceDef)
                 return new DatabaseSourceItemVM(this);
             else if (itemDef is PropertySetDef)
-                return new DatabasePropertySetItemVM(this);
+                return new DatabasePropSetItemVM(this);
             if (itemDef is DatabaseTableDef)
                 return CreateTable((DatabaseTableDef)itemDef);
 

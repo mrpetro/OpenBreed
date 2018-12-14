@@ -51,7 +51,7 @@ namespace OpenBreed.Editor.VM.Maps.Layers
                 {
                     var propertyId = GetCell(xIndex, yIndex);
 
-                    Body.Map.Root.PropSets.DrawProperty(gfx, propertyId, xIndex * tileSize, yIndex * tileSize, tileSize);
+                    Body.Map.Root.PropSet.DrawProperty(gfx, propertyId, xIndex * tileSize, yIndex * tileSize, tileSize);
                 }
             }
         }

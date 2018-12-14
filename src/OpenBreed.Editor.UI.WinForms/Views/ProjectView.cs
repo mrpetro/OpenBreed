@@ -42,7 +42,8 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         private MapBodyEditorView _mapBodyView = new MapBodyEditorView();
         //private MapPalettesView _mapPalettesView = new MapPalettesView();
         //private MapPropertiesView _mapPropertiesView = new MapPropertiesView();
-        private PropSetsView _propSetsView = new PropSetsView();
+        private PropSelectorView _propSetView = new PropSelectorView();
+        private PropSetEditorView _propSetEditorView = new PropSetEditorView();
         //private SpriteSetsView _spriteSetsView = new SpriteSetsView();
         private TileSetsView _tileSetView = new TileSetsView();
         private ImageView _imagesView = new ImageView();
@@ -90,7 +91,8 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             //_toolsView.Initialize(_vm.Root.ToolsMan);
             _tileSetView.Initialize(_vm.Root);
             //_spriteSetsView.Initialize(_vm.Root);
-            _propSetsView.Initialize(_vm.Root.PropSets);
+            _propSetView.Initialize(_vm.Root.PropSelector);
+            _propSetEditorView.Initialize(_vm.Root.PropSetEditor);
             //_mapPalettesView.Initialize(_vm.Root.Palettes);
             //_mapPropertiesView.Initialize(_vm.Root.Map.Properties);
             _mapBodyView.Initialize(_vm.Root.MapBodyViewer);
@@ -130,10 +132,15 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _imagesView.Show(this, DockState.Document);
         }
 
+        public void ShowPropSetEditorView()
+        {
+            _propSetEditorView.Show(this, DockState.Document);
+        }
+
         internal void ShowLevelView()
         {
             _tileSetView.Show(this, DockState.DockLeft);
-            _propSetsView.Show(this, DockState.DockLeft);
+            _propSetView.Show(this, DockState.DockLeft);
             _mapBodyView.Show(this, DockState.Document);
 
         }

@@ -81,7 +81,7 @@
     <Compile Include="Database\Items\DatabaseItemVM.cs" />
     <Compile Include="Database\DatabaseTableViewerVM.cs" />
     <Compile Include="Database\Items\DatabaseLevelItemVM.cs" />
-    <Compile Include="Database\Items\DatabasePropertySetItemVM.cs" />
+    <Compile Include="Database\Items\DatabasePropSetItemVM.cs" />
     <Compile Include="Database\Items\DatabaseSourceItemVM.cs" />
     <Compile Include="Database\Items\DatabaseTableVM.cs" />
     <Compile Include="Database\Tables\DatabaseImageTableVM.cs" />
@@ -124,11 +124,12 @@
     <Compile Include="Palettes\PalettesVM.cs" />
     <Compile Include="Palettes\PaletteVM.cs" />
     <Compile Include="Database\DatabaseVM.cs" />
+    <Compile Include="Props\PropSetEditorVM.cs" />
     <Compile Include="Props\PropSelectorVM.cs" />
     <Compile Include="Props\PropSetVM.cs" />
-    <Compile Include="Props\PropSetsVM.cs" />
     <Compile Include="Props\PropVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Props\PropVMHelper.cs" />
     <Compile Include="Sprites\SpriteSetSelectorVM.cs" />
     <Compile Include="Sprites\SpriteSetVM.cs" />
     <Compile Include="Sprites\SpriteViewerVM.cs" />

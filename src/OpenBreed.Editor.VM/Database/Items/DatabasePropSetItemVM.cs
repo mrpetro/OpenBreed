@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database.Items
 {
-    public class DatabasePropertySetItemVM : DatabaseItemVM
+    public class DatabasePropSetItemVM : DatabaseItemVM
     {
         private PropertySetDef _model;
 
-        public DatabasePropertySetItemVM(DatabaseVM owner) : base(owner)
+        public DatabasePropSetItemVM(DatabaseVM owner) : base(owner)
         {
         }
 
@@ -22,6 +22,12 @@ namespace OpenBreed.Editor.VM.Database.Items
             _model = itemDef as PropertySetDef ?? throw new InvalidOperationException($"Expected {nameof(PropertySetDef)}");
 
             base.Load(itemDef);
+        }
+
+        public override void Open()
+        {
+            Owner.Root.PropSetEditor.TryLoad(_model);
+            Owner.OpenedItem = this;
         }
     }
 }

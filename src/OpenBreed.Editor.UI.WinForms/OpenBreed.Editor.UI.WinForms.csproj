@@ -130,17 +130,17 @@
     <Compile Include="Controls\Palettes\PalettesCtrl.Designer.cs">
       <DependentUpon>PalettesCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Props\PropSetEditorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Props\PropSetEditorCtrl.Designer.cs">
+      <DependentUpon>PropSetEditorCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Props\PropSelectorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\Props\PropSelectorCtrl.Designer.cs">
       <DependentUpon>PropSelectorCtrl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Props\PropSetsCtrl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Props\PropSetsCtrl.Designer.cs">
-      <DependentUpon>PropSetsCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Sprites\SpriteSetSelectorCtrl.cs">
       <SubType>UserControl</SubType>
@@ -256,11 +256,17 @@
     <Compile Include="Views\PropertiesView.Designer.cs">
       <DependentUpon>PropertiesView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\PropSetsView.cs">
+    <Compile Include="Views\PropSetEditorView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\PropSetsView.Designer.cs">
-      <DependentUpon>PropSetsView.cs</DependentUpon>
+    <Compile Include="Views\PropSetEditorView.Designer.cs">
+      <DependentUpon>PropSetEditorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PropSelectorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PropSelectorView.Designer.cs">
+      <DependentUpon>PropSelectorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\SpriteSetsView.cs">
       <SubType>Form</SubType>
@@ -329,11 +335,11 @@
     <EmbeddedResource Include="Controls\Palettes\PalettesCtrl.resx">
       <DependentUpon>PalettesCtrl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Props\PropSetEditorCtrl.resx">
+      <DependentUpon>PropSetEditorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Props\PropSelectorCtrl.resx">
       <DependentUpon>PropSelectorCtrl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Props\PropSetsCtrl.resx">
-      <DependentUpon>PropSetsCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Sprites\SpriteSetSelectorCtrl.resx">
       <DependentUpon>SpriteSetSelectorCtrl.cs</DependentUpon>
@@ -386,8 +392,11 @@
     <EmbeddedResource Include="Views\PropertiesView.resx">
       <DependentUpon>PropertiesView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\PropSetsView.resx">
-      <DependentUpon>PropSetsView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\PropSetEditorView.resx">
+      <DependentUpon>PropSetEditorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PropSelectorView.resx">
+      <DependentUpon>PropSelectorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\SpriteSetsView.resx">
       <DependentUpon>SpriteSetsView.cs</DependentUpon>

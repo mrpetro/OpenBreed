@@ -7,27 +7,28 @@ using System.Drawing.Imaging;
 using System.Data;
 using OpenBreed.Editor.VM.Props;
 using OpenBreed.Common.Sources;
-using OpenBreed.Common.Props;
 using System.ComponentModel;
 using OpenBreed.Editor.VM.Base;
+using OpenBreed.Common.Logging;
+using OpenBreed.Common.Database.Items.Props;
 
 namespace OpenBreed.Editor.VM.Props
 {
     public class PropSetVM : BaseViewModel
     {
+
         #region Private Fields
 
         private const int PROP_SIZE = 32;
         private string _name;
-        private PropertySetModel m_CurrentPropertySet = PropertySetModel.NullTileSet;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PropSetVM(PropSetsVM owner)
+        public PropSetVM(EditorVM root)
         {
-            Owner = owner;
+            Root = root;
             Items = new BindingList<PropVM>();
         }
 
@@ -44,11 +45,16 @@ namespace OpenBreed.Editor.VM.Props
         }
 
 
-        public PropSetsVM Owner { get; private set; }
+        public EditorVM Root { get; }
 
         #endregion Public Properties
 
         #region Public Methods
+
+        public PropVM CreateProp(PropertyDef propDef)
+        {
+            return new PropVM(this);
+        }
 
         public void DrawProperty(Graphics gfx, int id, float x, float y, int tileSize)
         {
@@ -80,15 +86,16 @@ namespace OpenBreed.Editor.VM.Props
 
         #region Internal Methods
 
-        internal static PropSetVM Create(PropSetsVM owner, PropertySetModel model)
+        internal void Load(PropertySetDef propSetDef)
         {
-            var newPropertySet = new PropSetVM(owner);
-            newPropertySet.Name = model.Name;
+            Name = propSetDef.Name;
 
-            foreach (var propertyModel in model.Properties)
-                newPropertySet.Items.Add(PropVM.Create(propertyModel));
-
-            return newPropertySet;
+            foreach (var propDef in propSetDef.PropertyDefs)
+            {
+                var newProp = CreateProp(propDef);
+                newProp.Load(propDef);
+                Items.Add(newProp);
+            }
         }
 
         #endregion Internal Methods

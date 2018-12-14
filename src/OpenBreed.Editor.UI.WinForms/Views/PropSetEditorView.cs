@@ -9,31 +9,45 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using System.Drawing.Imaging;
 using OpenBreed.Editor.VM.Props;
-using OpenBreed.Common.Props;
+using OpenBreed.Editor.VM;
 
 namespace OpenBreed.Editor.UI.WinForms.Views
 {
-    public partial class PropSetsView : DockContent
+    public partial class PropSetEditorView : DockContent
     {
-        private PropSetsVM _vm;
 
-        public PropSetsView()
+        #region Private Fields
+
+        private PropSetEditorVM _vm;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public PropSetEditorView()
         {
             InitializeComponent();
 
         }
 
-        public void Initialize(PropSetsVM vm)
+        #endregion Public Constructors
+
+        #region Public Methods
+
+        public void Initialize(PropSetEditorVM vm)
         {
             _vm = vm;
 
-            PropSets.Initialize(vm);
-            PropSelector.Initialize(vm.PropSelector);
+            PropSetEditor.Initialize(_vm);
 
             _vm.PropertyChanged += _vm_PropertyChanged;
 
             TabText = _vm.Title;
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -46,5 +60,8 @@ namespace OpenBreed.Editor.UI.WinForms.Views
                     break;
             }
         }
+
+        #endregion Private Methods
+
     }
 }
