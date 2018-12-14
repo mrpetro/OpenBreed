@@ -86,6 +86,16 @@ namespace OpenBreed.Editor.VM.Database
             return _databaseDef.Tables.OfType<DatabaseSourceTableDef>().FirstOrDefault().Items.FindAll(item => item.Type == type);
         }
 
+        public LevelDef GetLevelDef(string levelName)
+        {
+            var levelDef = _databaseDef.Tables.OfType<DatabaseLevelTableDef>().FirstOrDefault().Items.FirstOrDefault(item => item.Name == levelName);
+
+            if (levelDef == null)
+                throw new InvalidOperationException("Level '" + levelName + "' not found!");
+
+            return levelDef;
+        }
+
         public PropertySetDef GetPropertySetDef(string propertySetName)
         {
             var propertySetDef = _databaseDef.Tables.OfType<DatabasePropertySetTableDef>().FirstOrDefault().Items.FirstOrDefault(item => item.Name == propertySetName);

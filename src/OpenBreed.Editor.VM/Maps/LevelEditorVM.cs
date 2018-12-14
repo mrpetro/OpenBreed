@@ -36,29 +36,6 @@ namespace OpenBreed.Editor.VM.Images
 
         }
 
-        public void TryLoad(LevelDef levelDef)
-        {
-            Root.TileSets.Clear();
-            Root.AddTileSet(levelDef.TileSetResourceRef);
-
-            Root.TileSetSelector.CurrentItem = Root.TileSets.FirstOrDefault();
-
-            Root.SpriteSets.Clear();
-            foreach (var spriteSetSourceRef in levelDef.SpriteSetResourceRefs)
-                Root.AddSpriteSet(spriteSetSourceRef);
-
-            Root.SpriteSetViewer.CurrentItem = Root.SpriteSets.FirstOrDefault();
-            if (Root.SpriteSetViewer.CurrentItem != null)
-                Root.SpriteViewer.CurrentItem = Root.SpriteSetViewer.CurrentItem.Items.FirstOrDefault();
-
-            if (levelDef.PropertySetRef != null)
-                Root.LoadPropSet(levelDef.PropertySetRef);
-
-            var mapSourceDef = Root.Database.GetSourceDef(levelDef.MapResourceRef);
-            if (mapSourceDef != null)
-                Root.Map.Load(mapSourceDef);
-        }
-
         #endregion Public Methods
 
 

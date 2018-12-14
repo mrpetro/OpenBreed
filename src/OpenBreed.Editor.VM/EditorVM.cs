@@ -23,6 +23,8 @@ using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Images;
 using OpenBreed.Common.Sources.Formats;
 using OpenBreed.Common.Sources;
+using OpenBreed.Common.Database.Items.Props;
+using OpenBreed.Common.Database.Items.Levels;
 
 namespace OpenBreed.Editor.VM
 {
@@ -69,7 +71,6 @@ namespace OpenBreed.Editor.VM
             SpriteViewer = new SpriteViewerVM(this);
             ImageViewer = new ImageViewerVM(this);
             LevelEditor = new LevelEditorVM(this);
-            PropSet = new PropSetVM(this);
             Map = new MapVM(this);
             MapBodyViewer = new MapBodyEditorVM(this);
             Sources = new SourcesHandler();
@@ -145,12 +146,43 @@ namespace OpenBreed.Editor.VM
 
         #region Public Methods
 
-        public void LoadPropSet(string propSetName)
-        {
-            var propSetDef = Database.GetPropertySetDef(propSetName);
-            if (propSetDef == null)
-                throw new Exception($"No PropSet definition with name '{propSetName}' found!");
 
+        public void LoadLevel(LevelDef levelDef)
+        {
+            TileSets.Clear();
+            AddTileSet(levelDef.TileSetResourceRef);
+
+            TileSetSelector.CurrentItem = TileSets.FirstOrDefault();
+
+            SpriteSets.Clear();
+
+            foreach (var spriteSetSourceRef in levelDef.SpriteSetResourceRefs)
+                AddSpriteSet(spriteSetSourceRef);
+
+            SpriteSetViewer.CurrentItem = SpriteSets.FirstOrDefault();
+            if (SpriteSetViewer.CurrentItem != null)
+                SpriteViewer.CurrentItem = SpriteSetViewer.CurrentItem.Items.FirstOrDefault();
+
+            if (levelDef.PropertySetRef != null)
+            {
+                var propSetDef = Database.GetPropertySetDef(levelDef.PropertySetRef);
+                if (propSetDef == null)
+                    throw new Exception($"No Prop set definition with name '{levelDef.PropertySetRef}' found!");
+
+                LoadPropSet(propSetDef);
+            }
+
+            var mapSourceDef = Database.GetSourceDef(levelDef.MapResourceRef);
+            if (mapSourceDef != null)
+            {
+                var map = CreateMap();
+                map.Load(mapSourceDef);
+                Map = map;
+            }
+        }
+
+        public void LoadPropSet(PropertySetDef propSetDef)
+        {
             var propSet = CreatePropSet();
             propSet.Load(propSetDef);
             PropSet = propSet;
@@ -182,6 +214,11 @@ namespace OpenBreed.Editor.VM
                 throw new Exception("TileSet source error: " + tileSetRef);
 
             TileSets.Add(TileSetVM.Create(this, source));
+        }
+
+        public MapVM CreateMap()
+        {
+            return new MapVM(this);
         }
 
         public PropSetVM CreatePropSet()

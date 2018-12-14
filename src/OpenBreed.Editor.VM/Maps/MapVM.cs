@@ -197,31 +197,6 @@ namespace OpenBreed.Editor.VM.Maps
             Body.ConnectEvents();
         }
 
-        public bool TryLoad()
-        {
-            var openFileDialog = Root.DialogProvider.OpenFileDialog();
-            openFileDialog.Title = "Open Alien Breed original map file...";
-            openFileDialog.Filter = "ABTA map files (*.MAP)|*.MAP|ABSE & ABHC map files (*MA)|*MA|All Files (*.*)|*.*";
-            openFileDialog.Multiselect = false;
-            var answer = openFileDialog.Show();
-
-            if (answer == DialogAnswer.OK)
-            {
-                string filePath = openFileDialog.FileName;
-
-                var sourceDef = new DirectoryFileSourceDef();
-                sourceDef.DirectoryPath = Path.GetDirectoryName(filePath);
-                sourceDef.Name = Path.GetFileName(filePath);
-                sourceDef.Type = "ABTAMAP";
-
-                Load(sourceDef);
-
-                return true;
-            }
-
-            return false;
-        }
-
         internal void Load(SourceDef sourceDef)
         {
             if (Source != null)
