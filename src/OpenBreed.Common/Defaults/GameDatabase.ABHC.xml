@@ -3,473 +3,581 @@
   <Tables>
     <Sources>
       <Items>
-        <DirectoryFileSourceDef Name="L1MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L2MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L3MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L4MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L5MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L6MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L7MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L8MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L9MA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="LAMA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="LBMA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="LCMA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="LDMA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="LEMA" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="MMA1" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="MMA2" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="MMA3" Type="ABHC_MAP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L1BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="L2BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="L3BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="L4BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="L5BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="L6BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="L7BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="L8BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="L9BM" Type="ACBM_TILE_SET" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="L1LP" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >8</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >32BIT</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="L2LP" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >8</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >32BIT</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="L6LP" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >8</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >32BIT</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="LALP" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >8</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >32BIT</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="CHAD" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+        <DirectoryFileSourceDef Name="L1MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L2MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L3MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L4MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L5MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L6MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L7MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L8MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L9MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="LAMA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="LBMA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="LCMA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="LDMA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="LEMA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="MMA1" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="MMA2" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="MMA3" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L1BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L2BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L3BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L4BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L5BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L6BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L7BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L8BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L9BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L1LP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L2LP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L6LP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="LALP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="CHAD" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="CHAR" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="ENDA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="ENDP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="ETXT" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="HPIC" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="IPIC" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="HSP1" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="HSP2" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="HSP3" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="HSP4" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L1BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L2BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L3BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L4BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L5BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L6BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L7BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L8BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="L9BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="LABO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="LBBO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="LCBO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="LDBO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="LEBO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="MPIC" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+      </Items>
+    </Sources>
+    <Images>
+      <Items>
+        <Image Name="CHAD" Description="Characters statistics screens" >
+          <SourceRef>CHAD</SourceRef>
+          <Format>ACBM_IMAGE</Format>
           <Parameters>
             <Parameter Name="WIDTH" Type="System.Int32" >640</Parameter>
             <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
             <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >2</Parameter>
             <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
           </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="CHAR" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+        </Image>
+        <Image Name="CHAR" Description="Characters selection screen" >
+          <SourceRef>CHAR</SourceRef>
+          <Format>ACBM_IMAGE</Format>
           <Parameters>
             <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
             <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
             <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >8</Parameter>
             <Parameter Name="PALETTE_MODE" Type="System.String" >32BIT</Parameter>
           </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="ENDA" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+        </Image>
+        <Image Name="ENDA" Description="End animation frames" >
+          <SourceRef>ENDA</SourceRef>
+          <Format>ACBM_IMAGE</Format>
           <Parameters>
             <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
             <Parameter Name="HEIGHT" Type="System.Int32" >480</Parameter>
             <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >7</Parameter>
             <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
           </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="ENDP" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+        </Image>
+        <Image Name="ENDP" Description="End picture" >
+          <SourceRef>ENDP</SourceRef>
+          <Format>ACBM_IMAGE</Format>
           <Parameters>
             <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
             <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
             <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >7</Parameter>
             <Parameter Name="PALETTE_MODE" Type="System.String" >32BIT</Parameter>
           </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="ETXT" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >1024</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >1</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="HPIC" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+        </Image>
+        <Image Name="HPIC" Description="Highscore picture" >
+          <SourceRef>HPIC</SourceRef>
+          <Format>ACBM_IMAGE</Format>
           <Parameters>
             <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
             <Parameter Name="HEIGHT" Type="System.Int32" >288</Parameter>
             <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
             <Parameter Name="PALETTE_MODE" Type="System.String" >32BIT</Parameter>
           </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="IPIC" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+        </Image>
+        <Image Name="IPIC" Description="Intro picture" >
+          <SourceRef>IPIC</SourceRef>
+          <Format>ACBM_IMAGE</Format>
           <Parameters>
             <Parameter Name="WIDTH" Type="System.Int32" >640</Parameter>
             <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
             <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >7</Parameter>
             <Parameter Name="PALETTE_MODE" Type="System.String" >32BIT</Parameter>
           </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="HSP1" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >160</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >4</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="HSP2" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >160</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >4</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="HSP3" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >160</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >4</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="HSP4" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >160</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >4</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="L1BO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="L2BO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="L3BO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="L4BO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="L5BO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="L6BO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="L7BO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="L8BO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="L9BO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="LABO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="LBBO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="LCBO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="LDBO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="LEBO" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
-        </DirectoryFileSourceDef>
-        <DirectoryFileSourceDef Name="MPIC" Type="ACBM_IMAGE" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" >
+        </Image>
+        <Image Name="MPIC" Description="Menu picture" >
+          <SourceRef>MPIC</SourceRef>
+          <Format>ACBM_IMAGE</Format>
           <Parameters>
             <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
             <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
             <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
             <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
           </Parameters>
-        </DirectoryFileSourceDef>
-      </Items>
-    </Sources>
-    <Images>
-      <Items>
-        <Image Name="CHAD" Description="Characters statistics screens" SourceRef="CHAD" />
-        <Image Name="CHAR" Description="Characters selection screen" SourceRef="CHAR" />
-        <Image Name="ENDA" Description="End animation frames" SourceRef="ENDA" />
-        <Image Name="ENDP" Description="End picture" SourceRef="ENDP" />
-        <Image Name="HPIC" Description="Highscore picture" SourceRef="HPIC" />
-        <Image Name="IPIC" Description="Intro picture" SourceRef="IPIC" />
-        <Image Name="MPIC" Description="Menu picture" SourceRef="MPIC" />
-        <Image Name="ETXT" Description="End text screen" SourceRef="ETXT" />
-        <Image Name="HSP1" Description="Character 1 sprites" SourceRef="HSP1" />
-        <Image Name="HSP2" Description="Character 2 sprites" SourceRef="HSP2" />
-        <Image Name="HSP3" Description="Character 3 sprites" SourceRef="HSP3" />
-        <Image Name="HSP4" Description="Character 4 sprites" SourceRef="HSP4" />
-        <Image Name="L1BO" Description="Level 1 sprites" SourceRef="L1BO" />
-        <Image Name="L2BO" Description="Level 2 sprites" SourceRef="L2BO" />
-        <Image Name="L3BO" Description="Level 3 sprites" SourceRef="L3BO" />
-        <Image Name="L4BO" Description="Level 4 sprites" SourceRef="L4BO" />
-        <Image Name="L5BO" Description="Level 5 sprites" SourceRef="L5BO" />
-        <Image Name="L6BO" Description="Level 6 sprites" SourceRef="L6BO" />
-        <Image Name="L7BO" Description="Level 7 sprites" SourceRef="L7BO" />
-        <Image Name="L8BO" Description="Level 8 sprites" SourceRef="L8BO" />
-        <Image Name="L9BO" Description="Level 9 sprites" SourceRef="L9BO" />
-        <Image Name="LABO" Description="Level A sprites" SourceRef="LABO" />
-        <Image Name="LBBO" Description="Level B sprites" SourceRef="LBBO" />
-        <Image Name="LCBO" Description="Level C sprites" SourceRef="LCBO" />
-        <Image Name="LDBO" Description="Level D sprites" SourceRef="LDBO" />
-        <Image Name="LEBO" Description="Level E sprites" SourceRef="LEBO" />
-        <Image Name="L1LP" Description="Level 1 picture" SourceRef="L1LP" />
-        <Image Name="L2LP" Description="Level 2 picture" SourceRef="L2LP" />
-        <Image Name="L6LP" Description="Level 6 picture" SourceRef="L6LP" />
-        <Image Name="LALP" Description="Level A picture" SourceRef="LALP" />
+        </Image>
+        <Image Name="ETXT" Description="End text screen" >
+          <SourceRef>ETXT</SourceRef>
+          <Format>ACBM_IMAGE</Format>
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >1024</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >1</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </Image>
+        <Image Name="HSP1" Description="Character 1 sprites" >
+          <SourceRef>HSP1</SourceRef>
+          <Format>ACBM_IMAGE</Format>
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >160</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >4</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </Image>
+        <Image Name="HSP2" Description="Character 2 sprites" >
+          <SourceRef>HSP2</SourceRef>
+          <Format>ACBM_IMAGE</Format>
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >160</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >4</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </Image>
+        <Image Name="HSP3" Description="Character 3 sprites" >
+          <SourceRef>HSP3</SourceRef>
+          <Format>ACBM_IMAGE</Format>
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >160</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >4</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </Image>
+        <Image Name="HSP4" Description="Character 4 sprites" >
+          <SourceRef>HSP4</SourceRef>
+          <Format>ACBM_IMAGE</Format>
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >160</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >4</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </Image>
+        <Image Name="L1BO" Description="Level 1 sprites" >
+          <SourceRef>L1BO</SourceRef>
+          <Format>ACBM_IMAGE</Format>
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </Image>
+        <Image Name="L2BO" Description="Level 2 sprites" >
+          <SourceRef>L2BO</SourceRef>
+          <Format>ACBM_IMAGE</Format>
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </Image>
+        <Image Name="L3BO" Description="Level 3 sprites" >
+          <SourceRef>L3BO</SourceRef>
+          <Format>ACBM_IMAGE</Format>
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </Image>
+        <Image Name="L4BO" Description="Level 4 sprites" >
+          <SourceRef>L4BO</SourceRef>
+          <Format>ACBM_IMAGE</Format>
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </Image>
+        <Image Name="L5BO" Description="Level 5 sprites" >
+          <SourceRef>L5BO</SourceRef>
+          <Format>ACBM_IMAGE</Format>
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </Image>
+        <Image Name="L6BO" Description="Level 6 sprites" >
+          <SourceRef>L6BO</SourceRef>
+          <Format>ACBM_IMAGE</Format>
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </Image>
+        <Image Name="L7BO" Description="Level 7 sprites" >
+          <SourceRef>L7BO</SourceRef>
+          <Format>ACBM_IMAGE</Format>
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </Image>
+        <Image Name="L8BO" Description="Level 8 sprites" >
+          <SourceRef>L8BO</SourceRef>
+          <Format>ACBM_IMAGE</Format>
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </Image>
+        <Image Name="L9BO" Description="Level 9 sprites" >
+          <SourceRef>L9BO</SourceRef>
+          <Format>ACBM_IMAGE</Format>
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </Image>
+        <Image Name="LABO" Description="Level A sprites" >
+          <SourceRef>LABO</SourceRef>
+          <Format>ACBM_IMAGE</Format>
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </Image>
+        <Image Name="LBBO" Description="Level B sprites" >
+          <SourceRef>LBBO</SourceRef>
+          <Format>ACBM_IMAGE</Format>
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </Image>
+        <Image Name="LCBO" Description="Level C sprites" >
+          <SourceRef>LCBO</SourceRef>
+          <Format>ACBM_IMAGE</Format>
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </Image>
+        <Image Name="LDBO" Description="Level D sprites" >
+          <SourceRef>LDBO</SourceRef>
+          <Format>ACBM_IMAGE</Format>
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </Image>
+        <Image Name="LEBO" Description="Level E sprites" >
+          <SourceRef>LEBO</SourceRef>
+          <Format>ACBM_IMAGE</Format>
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >512</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+          </Parameters>
+        </Image>
+        <Image Name="L1LP" Description="Level 1 picture" >
+          <SourceRef>L1LP</SourceRef>
+          <Format>ACBM_IMAGE</Format>
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >8</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >32BIT</Parameter>
+          </Parameters>
+        </Image>
+        <Image Name="L2LP" Description="Level 2 picture" >
+          <SourceRef>L2LP</SourceRef>
+          <Format>ACBM_IMAGE</Format>
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >8</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >32BIT</Parameter>
+          </Parameters>
+        </Image>
+        <Image Name="L6LP" Description="Level 6 picture" >
+          <SourceRef>L6LP</SourceRef>
+          <Format>ACBM_IMAGE</Format>
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >8</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >32BIT</Parameter>
+          </Parameters>
+        </Image>
+        <Image Name="LALP" Description="Level A picture" >
+          <SourceRef>LALP</SourceRef>
+          <Format>ACBM_IMAGE</Format>
+          <Parameters>
+            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >8</Parameter>
+            <Parameter Name="PALETTE_MODE" Type="System.String" >32BIT</Parameter>
+          </Parameters>
+        </Image>
       </Items>
     </Images>
+    <TileSets>
+      <Items>
+        <TileSet Name="TileSets.L1" >
+          <SourceRef>L1BM</SourceRef>
+          <Format>ACBM_TILE_SET</Format>
+          <Parameters>
+            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+          </Parameters>
+        </TileSet>
+        <TileSet Name="TileSets.L2" >
+          <SourceRef>L2BM</SourceRef>
+          <Format>ACBM_TILE_SET</Format>
+          <Parameters>
+            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+          </Parameters>
+        </TileSet>
+        <TileSet Name="TileSets.L3" >
+          <SourceRef>L3BM</SourceRef>
+          <Format>ACBM_TILE_SET</Format>
+          <Parameters>
+            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+          </Parameters>
+        </TileSet>
+        <TileSet Name="TileSets.L4" >
+          <SourceRef>L4BM</SourceRef>
+          <Format>ACBM_TILE_SET</Format>
+          <Parameters>
+            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+          </Parameters>
+        </TileSet>
+        <TileSet Name="TileSets.L5" >
+          <SourceRef>L5BM</SourceRef>
+          <Format>ACBM_TILE_SET</Format>
+          <Parameters>
+            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+          </Parameters>
+        </TileSet>
+        <TileSet Name="TileSets.L6" >
+          <SourceRef>L6BM</SourceRef>
+          <Format>ACBM_TILE_SET</Format>
+          <Parameters>
+            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+          </Parameters>
+        </TileSet>
+        <TileSet Name="TileSets.L7" >
+          <SourceRef>L7BM</SourceRef>
+          <Format>ACBM_TILE_SET</Format>
+          <Parameters>
+            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+          </Parameters>
+        </TileSet>
+        <TileSet Name="TileSets.L8" >
+          <SourceRef>L8BM</SourceRef>
+          <Format>ACBM_TILE_SET</Format>
+          <Parameters>
+            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+          </Parameters>
+        </TileSet>
+        <TileSet Name="TileSets.L9" >
+          <SourceRef>L9BM</SourceRef>
+          <Format>ACBM_TILE_SET</Format>
+          <Parameters>
+            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+          </Parameters>
+        </TileSet>
+      </Items>
+    </TileSets>
     <Levels>
       <Items>
         <Level Id="1" Name="L1" >
-          <MapResourceRef>L1MA</MapResourceRef>
-          <TileSetResourceRef>L1BM</TileSetResourceRef>
+          <SourceRef>L1MA</SourceRef>
+          <Format>ABHC_MAP</Format>
+          <TileSetRef>TileSets.L1</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
-          <SpriteSetResourceRefs>
-          </SpriteSetResourceRefs>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
         </Level>
         <Level Id="2" Name="L2" >
-          <MapResourceRef>L2MA</MapResourceRef>
-          <TileSetResourceRef>L2BM</TileSetResourceRef>
+          <SourceRef>L2MA</SourceRef>
+          <Format>ABHC_MAP</Format>
+          <TileSetRef>TileSets.L2</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
-          <SpriteSetResourceRefs>
-          </SpriteSetResourceRefs>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
         </Level>
         <Level Id="3" Name="L3" >
-          <MapResourceRef>L3MA</MapResourceRef>
-          <TileSetResourceRef>L3BM</TileSetResourceRef>
+          <SourceRef>L3MA</SourceRef>
+          <Format>ABHC_MAP</Format>
+          <TileSetRef>TileSets.L3</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
-          <SpriteSetResourceRefs>
-          </SpriteSetResourceRefs>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
         </Level>
         <Level Id="4" Name="L4" >
-          <MapResourceRef>L4MA</MapResourceRef>
-          <TileSetResourceRef>L4BM</TileSetResourceRef>
+          <SourceRef>L4MA</SourceRef>
+          <Format>ABHC_MAP</Format>
+          <TileSetRef>TileSets.L4</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
-          <SpriteSetResourceRefs>
-          </SpriteSetResourceRefs>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
         </Level>
         <Level Id="5" Name="L5" >
-          <MapResourceRef>L5MA</MapResourceRef>
-          <TileSetResourceRef>L5BM</TileSetResourceRef>
+          <SourceRef>L5MA</SourceRef>
+          <Format>ABHC_MAP</Format>
+          <TileSetRef>TileSets.L5</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
-          <SpriteSetResourceRefs>
-          </SpriteSetResourceRefs>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
         </Level>
         <Level Id="6" Name="L6" >
-          <MapResourceRef>L6MA</MapResourceRef>
-          <TileSetResourceRef>L6BM</TileSetResourceRef>
+          <SourceRef>L6MA</SourceRef>
+          <Format>ABHC_MAP</Format>
+          <TileSetRef>TileSets.L6</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
-          <SpriteSetResourceRefs>
-          </SpriteSetResourceRefs>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
         </Level>
         <Level Id="7" Name="L7" >
-          <MapResourceRef>L7MA</MapResourceRef>
-          <TileSetResourceRef>L6BM</TileSetResourceRef>
+          <SourceRef>L7MA</SourceRef>
+          <Format>ABHC_MAP</Format>
+          <TileSetRef>TileSets.L6</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
-          <SpriteSetResourceRefs>
-          </SpriteSetResourceRefs>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
         </Level>
         <Level Id="8" Name="L8" >
-          <MapResourceRef>L8MA</MapResourceRef>
-          <TileSetResourceRef>L6BM</TileSetResourceRef>
+          <SourceRef>L8MA</SourceRef>
+          <Format>ABHC_MAP</Format>
+          <TileSetRef>TileSets.L6</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
-          <SpriteSetResourceRefs>
-          </SpriteSetResourceRefs>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
         </Level>
         <Level Id="9" Name="L9" >
-          <MapResourceRef>L9MA</MapResourceRef>
-          <TileSetResourceRef>L6BM</TileSetResourceRef>
+          <SourceRef>L9MA</SourceRef>
+          <Format>ABHC_MAP</Format>
+          <TileSetRef>TileSets.L6</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
-          <SpriteSetResourceRefs>
-          </SpriteSetResourceRefs>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
         </Level>
         <Level Id="10" Name="LA" >
-          <MapResourceRef>LAMA</MapResourceRef>
-          <TileSetResourceRef>L7BM</TileSetResourceRef>
+          <SourceRef>LAMA</SourceRef>
+          <Format>ABHC_MAP</Format>
+          <TileSetRef>TileSets.L7</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
-          <SpriteSetResourceRefs>
-          </SpriteSetResourceRefs>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
         </Level>
         <Level Id="11" Name="LB" >
-          <MapResourceRef>LBMA</MapResourceRef>
-          <TileSetResourceRef>L7BM</TileSetResourceRef>
+          <SourceRef>LBMA</SourceRef>
+          <Format>ABHC_MAP</Format>
+          <TileSetRef>TileSets.L7</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
-          <SpriteSetResourceRefs>
-          </SpriteSetResourceRefs>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
         </Level>
         <Level Id="12" Name="LC" >
-          <MapResourceRef>LCMA</MapResourceRef>
-          <TileSetResourceRef>L8BM</TileSetResourceRef>
+          <SourceRef>LCMA</SourceRef>
+          <Format>ABHC_MAP</Format>
+          <TileSetRef>TileSets.L8</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
-          <SpriteSetResourceRefs>
-          </SpriteSetResourceRefs>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
         </Level>
         <Level Id="13" Name="LD" >
-          <MapResourceRef>LDMA</MapResourceRef>
-          <TileSetResourceRef>L7BM</TileSetResourceRef>
+          <SourceRef>LDMA</SourceRef>
+          <Format>ABHC_MAP</Format>
+          <TileSetRef>TileSets.L7</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
-          <SpriteSetResourceRefs>
-          </SpriteSetResourceRefs>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
         </Level>
         <Level Id="14" Name="LE" >
-          <MapResourceRef>LEMA</MapResourceRef>
-          <TileSetResourceRef>L9BM</TileSetResourceRef>
+          <SourceRef>LEMA</SourceRef>
+          <Format>ABHC_MAP</Format>
+          <TileSetRef>TileSets.L9</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
-          <SpriteSetResourceRefs>
-          </SpriteSetResourceRefs>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
         </Level>
         <Level Id="15" Name="LMMA1" >
-          <MapResourceRef>MMA1</MapResourceRef>
-          <TileSetResourceRef>L1BM</TileSetResourceRef>
+          <SourceRef>MMA1</SourceRef>
+          <Format>ABHC_MAP</Format>
+          <TileSetRef>TileSets.L1</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
-          <SpriteSetResourceRefs>
-          </SpriteSetResourceRefs>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
         </Level>
         <Level Id="16" Name="LMMA2" >
-          <MapResourceRef>MMA2</MapResourceRef>
-          <TileSetResourceRef>L5BM</TileSetResourceRef>
+          <SourceRef>MMA2</SourceRef>
+          <Format>ABHC_MAP</Format>
+          <TileSetRef>TileSets.L5</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
-          <SpriteSetResourceRefs>
-          </SpriteSetResourceRefs>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
         </Level>
         <Level Id="17" Name="LMMA3" >
-          <MapResourceRef>MMA3</MapResourceRef>
-          <TileSetResourceRef>L7BM</TileSetResourceRef>
+          <SourceRef>MMA3</SourceRef>
+          <Format>ABHC_MAP</Format>
+          <TileSetRef>TileSets.L7</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
-          <SpriteSetResourceRefs>
-          </SpriteSetResourceRefs>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
         </Level>
       </Items>
     </Levels>

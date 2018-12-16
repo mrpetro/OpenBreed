@@ -15,9 +15,9 @@ namespace OpenBreed.Common.Database.Resources
         public string MapResourceRef { get; set; }
         public string TileSetResourceRef { get; set; }
         public string PropertySetResourceRef { get; set; }
-        [XmlArray("SpriteSetResourceRefs"),
-        XmlArrayItem("SpriteSetResourceRef", typeof(string))]
-        public List<string> SpriteSetResourceRefs { get; set; }
+        [XmlArray("SpriteSetRefs"),
+        XmlArrayItem("SpriteSetRef", typeof(string))]
+        public List<string> SpriteSetRefs { get; set; }
 
 
         public static ResourceLevelDef CreateDefault()
@@ -26,7 +26,7 @@ namespace OpenBreed.Common.Database.Resources
             resourceLevelDef.MapResourceRef = "%DEFAULT%";
             resourceLevelDef.TileSetResourceRef = "%DEFAULT%";
             resourceLevelDef.PropertySetResourceRef = "%DEFAULT%";
-            resourceLevelDef.SpriteSetResourceRefs = new List<string>(new string[] { "%DEFAULT%" });
+            resourceLevelDef.SpriteSetRefs = new List<string>(new string[] { "%DEFAULT%" });
             return resourceLevelDef;
         }
     }

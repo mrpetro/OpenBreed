@@ -98,28 +98,6 @@ namespace OpenBreed.Common.Sources
             return archive;
         }
 
-        internal Dictionary<string, object> GetParameters(List<SourceParameterDef> parameterDefs)
-        {
-            var parameters = new Dictionary<string, object>();
-
-            foreach (var parameterDef in parameterDefs)
-            {
-                if (string.IsNullOrWhiteSpace(parameterDef.Name) ||
-                    string.IsNullOrWhiteSpace(parameterDef.Type))
-                    continue;
-
-                if (parameters.ContainsKey(parameterDef.Name))
-                    continue;
-
-                var type = Type.GetType(parameterDef.Type);
-                var tc = TypeDescriptor.GetConverter(type);
-                var value = tc.ConvertFromString(null, CultureInfo.InvariantCulture, parameterDef.Value);
-                parameters.Add(parameterDef.Name, value);
-            }
-
-            return parameters;
-        }
-
         internal void ReleaseSource(BaseSource source)
         {
             _openedSources.Remove(source.Name);

@@ -11,7 +11,6 @@ namespace OpenBreed.Common.Sources
         #region Private Fields
 
         private readonly SourceMan _manager;
-        private readonly Dictionary<string, object> _parameters;
 
         private Stream m_Stream;
 
@@ -28,8 +27,6 @@ namespace OpenBreed.Common.Sources
                 throw new ArgumentNullException("SourceDef");
 
             _manager = manager;
-
-            _parameters = manager.GetParameters(sourceDef.Parameters);
             Name = sourceDef.Name;
         }
 
@@ -54,16 +51,6 @@ namespace OpenBreed.Common.Sources
 
         #region Public Methods
 
-
-        public T GetParameter<T>(string name)
-        {
-            object found;
-            if (_parameters.TryGetValue(name, out found))
-                return (T)found;
-            else
-                return default(T);
-        }
-
         public void Dispose()
         {
             if (m_Stream != null)
@@ -72,9 +59,9 @@ namespace OpenBreed.Common.Sources
             }
         }
 
-        public object Load(IDataFormat format)
+        public object Load(IDataFormat format, Dictionary<string, object> parameters)
         {
-            return format.Load(this);
+            return format.Load(this, parameters);
         }
 
         public void Save(object model, IDataFormat format)

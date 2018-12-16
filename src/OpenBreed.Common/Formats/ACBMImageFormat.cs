@@ -16,12 +16,12 @@ namespace OpenBreed.Common.Formats
         {
         }
 
-        public object Load(BaseSource source)
+        public object Load(BaseSource source, Dictionary<string, object> parameters = null)
         {
-            int width = source.GetParameter<int>("WIDTH");
-            int height = source.GetParameter<int>("HEIGHT");
-            int bitPlanesNo = source.GetParameter<int>("BIT_PLANES_NO");
-            var paletteStr = source.GetParameter<string>("PALETTE_MODE");
+            var width = (int)parameters["WIDTH"];
+            var height = (int)parameters["HEIGHT"];
+            var bitPlanesNo = (int)parameters["BIT_PLANES_NO"];
+            var paletteStr = (string)parameters["PALETTE_MODE"];
 
             ACBMImageReader.ACBMPaletteMode paletteMode;
 

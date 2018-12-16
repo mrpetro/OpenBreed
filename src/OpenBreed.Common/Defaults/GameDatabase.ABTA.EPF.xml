@@ -3,634 +3,845 @@
   <Tables>
     <Sources>
       <Items>
-        <EPFArchiveFileSourceDef Name="SPR1A.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR1B.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR3A.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR3B.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR4A.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR4B.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR5A.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR5B.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR6A.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR6B.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR7A.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR7B.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR8A.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR8B.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPRDA.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPRDB.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="HERO1.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN_A.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN_B.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN_C.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN_E.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN_F.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN_G.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN_H.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN_I.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN_J.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN_K.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN_X.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="RESIDENT.SPR" Type="ABTASPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="LEVEL1.BLK" Type="ABTABLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="LEVEL3.BLK" Type="ABTABLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="LEVEL4.BLK" Type="ABTABLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="LEVEL5.BLK" Type="ABTABLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="LEVEL6.BLK" Type="ABTABLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="LEVEL7.BLK" Type="ABTABLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="LEVEL8.BLK" Type="ABTABLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="LEVELD.BLK" Type="ABTABLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.01" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.02" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.03" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.04" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.05" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.06" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.07" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.08" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.09" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.10" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.11" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.12" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.13" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.14" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.15" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.16" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.17" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.18" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.19" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.20" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.21" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.22" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.23" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.24" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.25" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.26" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.27" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.28" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.29" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.30" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.31" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.32" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.33" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.34" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.35" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.36" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.37" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.38" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.39" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.40" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.41" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.42" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.43" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.44" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.45" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.46" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.47" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.48" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.49" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.50" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.51" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.52" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.53" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.54" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.55" Type="ABTA_MAP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPR1A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPR1B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPR3A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPR3B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPR4A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPR4B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPR5A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPR5B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPR6A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPR6B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPR7A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPR7B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPR8A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPR8B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPRDA.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPRDB.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="HERO1.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="ALIEN_A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="ALIEN_B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="ALIEN_C.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="ALIEN_E.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="ALIEN_F.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="ALIEN_G.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="ALIEN_H.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="ALIEN_I.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="ALIEN_J.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="ALIEN_K.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="ALIEN_X.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="RESIDENT.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="LEVEL1.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="LEVEL3.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="LEVEL4.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="LEVEL5.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="LEVEL6.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="LEVEL7.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="LEVEL8.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="LEVELD.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.01" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.02" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.03" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.04" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.05" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.06" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.07" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.08" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.09" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.10" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.11" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.12" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.13" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.14" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.15" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.16" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.17" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.18" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.19" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.20" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.21" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.22" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.23" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.24" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.25" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.26" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.27" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.28" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.29" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.30" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.31" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.32" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.33" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.34" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.35" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.36" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.37" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.38" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.39" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.40" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.41" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.42" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.43" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.44" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.45" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.46" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.47" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.48" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.49" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.50" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.51" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.52" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.53" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.54" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MAP.55" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
       </Items>
     </Sources>
     <Images>
       <Items>
       </Items>
     </Images>
+    <SpriteSets>
+      <Items>
+        <SpriteSet Name="SpriteSets.SPR1A" >
+          <SourceRef>SPR1A.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.SPR1B" >
+          <SourceRef>SPR1B.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.SPR3A" >
+          <SourceRef>SPR3A.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.SPR3B" >
+          <SourceRef>SPR3B.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.SPR4A" >
+          <SourceRef>SPR4A.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.SPR4B" >
+          <SourceRef>SPR4B.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.SPR5A" >
+          <SourceRef>SPR5A.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.SPR5B" >
+          <SourceRef>SPR5B.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.SPR6A" >
+          <SourceRef>SPR6A.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.SPR6B" >
+          <SourceRef>SPR6B.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.SPR7A" >
+          <SourceRef>SPR7A.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.SPR7B" >
+          <SourceRef>SPR7B.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.SPR8A" >
+          <SourceRef>SPR8A.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.SPR8B" >
+          <SourceRef>SPR8B.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.SPRDA" >
+          <SourceRef>SPRDA.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.SPRDB" >
+          <SourceRef>SPRDB.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.HERO1" >
+          <SourceRef>HERO1.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.RESIDENT" >
+          <SourceRef>RESIDENT.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.ALIEN_A" >
+          <SourceRef>ALIEN_A.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.ALIEN_B" >
+          <SourceRef>ALIEN_B.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.ALIEN_C" >
+          <SourceRef>ALIEN_C.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.ALIEN_E" >
+          <SourceRef>ALIEN_E.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.ALIEN_F" >
+          <SourceRef>ALIEN_F.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.ALIEN_G" >
+          <SourceRef>ALIEN_G.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.ALIEN_H" >
+          <SourceRef>ALIEN_H.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.ALIEN_I" >
+          <SourceRef>ALIEN_I.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.ALIEN_J" >
+          <SourceRef>ALIEN_J.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.ALIEN_K" >
+          <SourceRef>ALIEN_K.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+        <SpriteSet Name="SpriteSets.ALIEN_X" >
+          <SourceRef>ALIEN_X.SPR</SourceRef>
+          <Format>ABTASPR</Format>
+        </SpriteSet>
+      </Items>
+    </SpriteSets>
+    <TileSets>
+      <Items>
+        <TileSet Name="TileSets.L1" >
+          <SourceRef>LEVEL1.BLK</SourceRef>
+          <Format>ABTABLK</Format>
+        </TileSet>
+        <TileSet Name="TileSets.L3" >
+          <SourceRef>LEVEL3.BLK</SourceRef>
+          <Format>ABTABLK</Format>
+        </TileSet>
+        <TileSet Name="TileSets.L4" >
+          <SourceRef>LEVEL4.BLK</SourceRef>
+          <Format>ABTABLK</Format>
+        </TileSet>
+        <TileSet Name="TileSets.L5" >
+          <SourceRef>LEVEL5.BLK</SourceRef>
+          <Format>ABTABLK</Format>
+        </TileSet>
+        <TileSet Name="TileSets.L6" >
+          <SourceRef>LEVEL6.BLK</SourceRef>
+          <Format>ABTABLK</Format>
+        </TileSet>
+        <TileSet Name="TileSets.L7" >
+          <SourceRef>LEVEL7.BLK</SourceRef>
+          <Format>ABTABLK</Format>
+        </TileSet>
+        <TileSet Name="TileSets.L8" >
+          <SourceRef>LEVEL8.BLK</SourceRef>
+          <Format>ABTABLK</Format>
+        </TileSet>
+        <TileSet Name="TileSets.LD" >
+          <SourceRef>LEVELD.BLK</SourceRef>
+          <Format>ABTABLK</Format>
+        </TileSet>
+      </Items>
+    </TileSets>
     <Levels>
       <Items>
         <Level Id="1" Name="CRASH LANDING SITE" >
-          <MapResourceRef>MAP.01</MapResourceRef>
-          <TileSetResourceRef>LEVEL1.BLK</TileSetResourceRef>
-          <PropertySetRef>Props.Level1.xml</PropertySetRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR1A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR1B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.01</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L1</TileSetRef>
+          <PropertySetRef>Props.Level1</PropertySetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="2" Name="CIVILIAN ZONE 1" >
-          <MapResourceRef>MAP.02</MapResourceRef>
-          <TileSetResourceRef>LEVEL4.BLK</TileSetResourceRef>
+          <SourceRef>MAP.02</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L4</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR4A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR4B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="3" Name="CIVILIAN ZONE 2" >
-          <MapResourceRef>MAP.03</MapResourceRef>
-          <TileSetResourceRef>LEVEL4.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR4A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR4B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.03</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L4</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="4" Name="CIVILIAN ZONE 3" >
-          <MapResourceRef>MAP.04</MapResourceRef>
-          <TileSetResourceRef>LEVEL4.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR4A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR4B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.04</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L4</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="5" Name="CIVILIAN ZONE 4" >
-          <MapResourceRef>MAP.05</MapResourceRef>
-          <TileSetResourceRef>LEVEL4.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR4A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR4B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.05</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L4</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="6" Name="OUTDOOR SECTOR 2" >
-          <MapResourceRef>MAP.06</MapResourceRef>
-          <TileSetResourceRef>LEVEL1.BLK</TileSetResourceRef>
-          <PropertySetRef>Props.Level1.xml</PropertySetRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR1A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR1B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.06</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L1</TileSetRef>
+          <PropertySetRef>Props.Level1</PropertySetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="7" Name="STORES LEVEL 1" >
-          <MapResourceRef>MAP.07</MapResourceRef>
-          <TileSetResourceRef>LEVELD.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPRDA.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPRDB.SPR</SpriteSetResourceRef>
+          <SourceRef>MAP.07</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.LD</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
 
-            <SpriteSetResourceRef>ALIEN_A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_B.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_C.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_E.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_F.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_G.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_H.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_I.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_J.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_K.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_X.SPR</SpriteSetResourceRef>
+            <SpriteSetRef>SpriteSets.ALIEN_A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_B</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_C</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_E</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_F</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_G</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_H</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_I</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_J</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
 
 
-          </SpriteSetResourceRefs>
+          </SpriteSetRefs>
         </Level>
         <Level Id="8" Name="STORES LEVEL 2" >
-          <MapResourceRef>MAP.08</MapResourceRef>
-          <TileSetResourceRef>LEVELD.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPRDA.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPRDB.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.08</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.LD</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="9" Name="STORES SECTOR 3" >
-          <MapResourceRef>MAP.09</MapResourceRef>
-          <TileSetResourceRef>LEVELD.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPRDA.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPRDB.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.09</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.LD</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="10" Name="STORES SECTOR 4" >
-          <MapResourceRef>MAP.10</MapResourceRef>
-          <TileSetResourceRef>LEVELD.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPRDA.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPRDB.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.10</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.LD</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="11" Name="OUTDOOR SECTOR 3" >
-          <MapResourceRef>MAP.11</MapResourceRef>
-          <TileSetResourceRef>LEVEL1.BLK</TileSetResourceRef>
-          <PropertySetRef>Props.Level1.xml</PropertySetRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR1A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR1B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.11</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L1</TileSetRef>
+          <PropertySetRef>Props.Level1</PropertySetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="12" Name="MILITARY SECTOR 1" >
-          <MapResourceRef>MAP.12</MapResourceRef>
-          <TileSetResourceRef>LEVEL7.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR7A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR7B.SPR</SpriteSetResourceRef>
+          <SourceRef>MAP.12</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L7</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
 
-            <SpriteSetResourceRef>ALIEN_A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_B.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_C.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_E.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_F.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_G.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_H.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_I.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_J.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_K.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_X.SPR</SpriteSetResourceRef>
+            <SpriteSetRef>SpriteSets.ALIEN_A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_B</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_C</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_E</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_F</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_G</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_H</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_I</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_J</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
 
 
-          </SpriteSetResourceRefs>
+          </SpriteSetRefs>
         </Level>
         <Level Id="13" Name="MILITARY SECTOR 2" >
-          <MapResourceRef>MAP.13</MapResourceRef>
-          <TileSetResourceRef>LEVEL7.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR7A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR7B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.13</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L7</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="14" Name="MILITARY SECTOR 3" >
-          <MapResourceRef>MAP.14</MapResourceRef>
-          <TileSetResourceRef>LEVEL7.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR7A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR7B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.14</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L7</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="15" Name="MILITARY SECTOR 4" >
-          <MapResourceRef>MAP.15</MapResourceRef>
-          <TileSetResourceRef>LEVEL7.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR7A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR7B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.15</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L7</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="16" Name="SECURITY ZONE 1" >
-          <MapResourceRef>MAP.16</MapResourceRef>
-          <TileSetResourceRef>LEVEL5.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR5A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR5B.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>RESIDENT.SPR</SpriteSetResourceRef>
+          <SourceRef>MAP.16</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L5</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR5B</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.RESIDENT</SpriteSetRef>
 
-            <SpriteSetResourceRef>ALIEN_A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_B.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_C.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_E.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_F.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_G.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_H.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_I.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_J.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_K.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_X.SPR</SpriteSetResourceRef>
+            <SpriteSetRef>SpriteSets.ALIEN_A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_B</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_C</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_E</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_F</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_G</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_H</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_I</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_J</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
 
 
 
-          </SpriteSetResourceRefs>
+          </SpriteSetRefs>
         </Level>
         <Level Id="17" Name="SECURITY ZONE 2" >
-          <MapResourceRef>MAP.17</MapResourceRef>
-          <TileSetResourceRef>LEVEL5.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR5A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR5B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.17</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L5</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR5B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="18" Name="SECURITY ZONE 3" >
-          <MapResourceRef>MAP.18</MapResourceRef>
-          <TileSetResourceRef>LEVEL5.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR5A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR5B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.18</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L5</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR5B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="19" Name="SECURITY ZONE 4" >
-          <MapResourceRef>MAP.19</MapResourceRef>
-          <TileSetResourceRef>LEVEL5.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR5A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR5B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.19</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L5</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR5B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="20" Name="COLONY GROUND SECTOR 3" >
-          <MapResourceRef>MAP.20</MapResourceRef>
-          <TileSetResourceRef>LEVEL1.BLK</TileSetResourceRef>
-          <PropertySetRef>Props.Level1.xml</PropertySetRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR1A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR1B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.20</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L1</TileSetRef>
+          <PropertySetRef>Props.Level1</PropertySetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="21" Name="SCIENCE SECTOR 1" >
-          <MapResourceRef>MAP.21</MapResourceRef>
-          <TileSetResourceRef>LEVEL6.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR6A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR6B.SPR</SpriteSetResourceRef>
+          <SourceRef>MAP.21</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L6</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
 
-            <SpriteSetResourceRef>ALIEN_A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_B.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_C.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_E.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_F.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_G.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_H.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_I.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_J.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_K.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_X.SPR</SpriteSetResourceRef>
+            <SpriteSetRef>SpriteSets.ALIEN_A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_B</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_C</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_E</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_F</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_G</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_H</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_I</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_J</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
 
 
-          </SpriteSetResourceRefs>
+          </SpriteSetRefs>
         </Level>
         <Level Id="22" Name="SCIENCE SECTOR 2" >
-          <MapResourceRef>MAP.22</MapResourceRef>
-          <TileSetResourceRef>LEVEL6.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR6A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR6B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.22</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L6</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="23" Name="SCIENCE SECTOR 3" >
-          <MapResourceRef>MAP.23</MapResourceRef>
-          <TileSetResourceRef>LEVEL6.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR6A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR6B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.23</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L6</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="24" Name="SCIENCE SECTOR 4" >
-          <MapResourceRef>MAP.24</MapResourceRef>
-          <TileSetResourceRef>LEVEL6.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR6A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR6B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.24</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L6</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="25" Name="COLONY GROUND SECTOR 4" >
-          <MapResourceRef>MAP.25</MapResourceRef>
-          <TileSetResourceRef>LEVEL1.BLK</TileSetResourceRef>
-          <PropertySetRef>Props.Level1.xml</PropertySetRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR1A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR1B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.25</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L1</TileSetRef>
+          <PropertySetRef>Props.Level1</PropertySetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="26" Name="ENGINEERING SECTOR 1" >
-          <MapResourceRef>MAP.26</MapResourceRef>
-          <TileSetResourceRef>LEVEL3.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR3A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR3B.SPR</SpriteSetResourceRef>
+          <SourceRef>MAP.26</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L3</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
 
 
-            <SpriteSetResourceRef>ALIEN_A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_B.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_C.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_E.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_F.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_G.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_H.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_I.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_J.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_K.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_X.SPR</SpriteSetResourceRef>
+            <SpriteSetRef>SpriteSets.ALIEN_A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_B</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_C</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_E</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_F</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_G</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_H</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_I</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_J</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
 
-          </SpriteSetResourceRefs>
+          </SpriteSetRefs>
         </Level>
         <Level Id="27" Name="ENGINEERING SECTOR 2" >
-          <MapResourceRef>MAP.27</MapResourceRef>
-          <TileSetResourceRef>LEVEL3.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR3A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR3B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.27</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L3</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="28" Name="ENGINEERING SECTOR 3" >
-          <MapResourceRef>MAP.28</MapResourceRef>
-          <TileSetResourceRef>LEVEL3.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR3A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR3B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.28</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L3</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="29" Name="ENGINEERING SECTOR 4" >
-          <MapResourceRef>MAP.29</MapResourceRef>
-          <TileSetResourceRef>LEVEL3.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR3A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR3B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.29</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L3</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="30" Name="CORRIDOR ZONE 1" >
-          <MapResourceRef>MAP.30</MapResourceRef>
-          <TileSetResourceRef>LEVEL4.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR4A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR4B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.30</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L4</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="31" Name="CORRIDOR 2" >
-          <MapResourceRef>MAP.31</MapResourceRef>
-          <TileSetResourceRef>LEVEL4.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR4A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR4B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.31</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L4</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="32" Name="CORRIDOR 3" >
-          <MapResourceRef>MAP.32</MapResourceRef>
-          <TileSetResourceRef>LEVELD.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPRDA.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPRDB.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.32</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.LD</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="33" Name="CORRIDOR 4" >
-          <MapResourceRef>MAP.33</MapResourceRef>
-          <TileSetResourceRef>LEVEL3.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR3A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR3B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.33</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L3</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="34" Name="CORRIDOR 5" >
-          <MapResourceRef>MAP.34</MapResourceRef>
-          <TileSetResourceRef>LEVELD.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPRDA.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPRDB.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.34</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.LD</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="35" Name="CORRIDOR ZONE 6" >
-          <MapResourceRef>MAP.35</MapResourceRef>
-          <TileSetResourceRef>LEVELD.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPRDA.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPRDB.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.35</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.LD</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="36" Name="CORRIDOR ZONE 7" >
-          <MapResourceRef>MAP.36</MapResourceRef>
-          <TileSetResourceRef>LEVEL4.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR4A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR4B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.36</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L4</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="37" Name="CORRIDOR ZONE 8" >
-          <MapResourceRef>MAP.37</MapResourceRef>
-          <TileSetResourceRef>LEVELD.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPRDA.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPRDB.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.37</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.LD</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="38" Name="CORRIDOR ZONE 9" >
-          <MapResourceRef>MAP.38</MapResourceRef>
-          <TileSetResourceRef>LEVELD.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPRDA.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPRDB.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.38</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.LD</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="39" Name="CORRIDOR ZONE 10" >
-          <MapResourceRef>MAP.39</MapResourceRef>
-          <TileSetResourceRef>LEVEL3.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR3A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR3B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.39</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L3</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="40" Name="CORRIDOR ZONE 11" >
-          <MapResourceRef>MAP.40</MapResourceRef>
-          <TileSetResourceRef>LEVEL4.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR4A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR4B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.40</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L4</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="41" Name="CORRIDOR ZONE 12" >
-          <MapResourceRef>MAP.41</MapResourceRef>
-          <TileSetResourceRef>LEVEL3.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR3A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR3B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.41</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L3</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="42" Name="CORRIDOR ZONE 13" >
-          <MapResourceRef>MAP.42</MapResourceRef>
-          <TileSetResourceRef>LEVEL3.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR3A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR3B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.42</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L3</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="43" Name="CORRIDOR ZONE 14" >
-          <MapResourceRef>MAP.43</MapResourceRef>
-          <TileSetResourceRef>LEVEL7.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR7A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR7B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.43</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L7</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="44" Name="CORRIDOR 15" >
-          <MapResourceRef>MAP.44</MapResourceRef>
-          <TileSetResourceRef>LEVEL7.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR7A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR7B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.44</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L7</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="45" Name="CORRIDOR 16" >
-          <MapResourceRef>MAP.45</MapResourceRef>
-          <TileSetResourceRef>LEVEL3.BLK</TileSetResourceRef>
+          <SourceRef>MAP.45</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L3</TileSetRef>
         </Level>
         <Level Id="46" Name="CORRIDOR 17" >
-          <MapResourceRef>MAP.46</MapResourceRef>
-          <TileSetResourceRef>LEVEL3.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR3A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR3B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.46</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L3</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="47" Name="MAIN TOWER LEVEL 1" >
-          <MapResourceRef>MAP.47</MapResourceRef>
-          <TileSetResourceRef>LEVEL8.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR8A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR8B.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>HERO1.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_B.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_C.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_E.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_F.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_G.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_H.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_I.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_J.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_K.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>ALIEN_X.SPR</SpriteSetResourceRef>
+          <SourceRef>MAP.47</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L8</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_B</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_C</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_E</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_F</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_G</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_H</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_I</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_J</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
 
 
-          </SpriteSetResourceRefs>
+          </SpriteSetRefs>
         </Level>
         <Level Id="48" Name="MAIN TOWER LEVEL 2" >
-          <MapResourceRef>MAP.48</MapResourceRef>
-          <TileSetResourceRef>LEVEL8.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR8A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR8B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.48</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L8</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="49" Name="MAIN TOWER LEVEL 3" >
-          <MapResourceRef>MAP.49</MapResourceRef>
-          <TileSetResourceRef>LEVEL8.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR8A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR8B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.49</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L8</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="50" Name="MAIN TOWER LEVEL 4" >
-          <MapResourceRef>MAP.50</MapResourceRef>
-          <TileSetResourceRef>LEVEL8.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR8A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR8B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.50</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L8</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="51" Name="MAIN TOWER LEVEL 5" >
-          <MapResourceRef>MAP.51</MapResourceRef>
-          <TileSetResourceRef>LEVEL8.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR8A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR8B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.51</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L8</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="52" Name="TOWER LEVEL 6" >
-          <MapResourceRef>MAP.52</MapResourceRef>
-          <TileSetResourceRef>LEVEL8.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR8A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR8B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.52</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L8</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="53" Name="TOWER LEVEL 7" >
-          <MapResourceRef>MAP.53</MapResourceRef>
-          <TileSetResourceRef>LEVEL8.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR8A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR8B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.53</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L8</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="54" Name="Mission One(\?\?\?)" >
-          <MapResourceRef>MAP.54</MapResourceRef>
-          <TileSetResourceRef>LEVEL6.BLK</TileSetResourceRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR6A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR6B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.54</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L6</TileSetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
         <Level Id="55" Name="OUTER COLONY SECTOR 5" >
-          <MapResourceRef>MAP.55</MapResourceRef>
-          <TileSetResourceRef>LEVEL1.BLK</TileSetResourceRef>
-          <PropertySetRef>Props.Level1.xml</PropertySetRef>
-          <SpriteSetResourceRefs>
-            <SpriteSetResourceRef>SPR1A.SPR</SpriteSetResourceRef>
-            <SpriteSetResourceRef>SPR1B.SPR</SpriteSetResourceRef>
-          </SpriteSetResourceRefs>
+          <SourceRef>MAP.55</SourceRef>
+          <Format>ABTA_MAP</Format>
+          <TileSetRef>TileSets.L1</TileSetRef>
+          <PropertySetRef>Props.Level1</PropertySetRef>
+          <SpriteSetRefs>
+            <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
+          </SpriteSetRefs>
         </Level>
       </Items>
     </Levels>
@@ -1263,442 +1474,442 @@
     <ResourceDef Type="Picture" Name="T17LOGO.LBM" />
     <ResourceDef Type="Picture" Name="TITLEBAC.LBM" />
     <ResourceLevelDef Id="1" Name="CRASH LANDING SITE" >
-      <MapResourceRef>MAP.01</MapResourceRef>
-      <TileSetResourceRef>LEVEL1.BLK</TileSetResourceRef>
+      <SourceRef>MAP.01</SourceRef>
+      <TileSetRef>TileSets.L1</TileSetRef>
       <PropertySetRef>Props.Default</PropertySetRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR1A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR1B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="2" Name="CIVILIAN ZONE 1" >
-      <MapResourceRef>MAP.02</MapResourceRef>
-      <TileSetResourceRef>LEVEL4.BLK</TileSetResourceRef>
+      <SourceRef>MAP.02</SourceRef>
+      <TileSetRef>TileSets.L4</TileSetRef>
       <PropertySetRef>Props.Default</PropertySetRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR4A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR4B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="3" Name="CIVILIAN ZONE 2" >
-      <MapResourceRef>MAP.03</MapResourceRef>
-      <TileSetResourceRef>LEVEL4.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR4A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR4B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.03</SourceRef>
+      <TileSetRef>TileSets.L4</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="4" Name="CIVILIAN ZONE 3" >
-      <MapResourceRef>MAP.04</MapResourceRef>
-      <TileSetResourceRef>LEVEL4.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR4A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR4B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.04</SourceRef>
+      <TileSetRef>TileSets.L4</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="5" Name="CIVILIAN ZONE 4" >
-      <MapResourceRef>MAP.05</MapResourceRef>
-      <TileSetResourceRef>LEVEL4.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR4A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR4B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.05</SourceRef>
+      <TileSetRef>TileSets.L4</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="6" Name="OUTDOOR SECTOR 2" >
-      <MapResourceRef>MAP.06</MapResourceRef>
-      <TileSetResourceRef>LEVEL1.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR1A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR1B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.06</SourceRef>
+      <TileSetRef>TileSets.L1</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="7" Name="STORES LEVEL 1" >
-      <MapResourceRef>MAP.07</MapResourceRef>
-      <TileSetResourceRef>LEVELD.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPRDA.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPRDB.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.07</SourceRef>
+      <TileSetRef>TileSets.LD</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="8" Name="STORES LEVEL 2" >
-      <MapResourceRef>MAP.08</MapResourceRef>
-      <TileSetResourceRef>LEVELD.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPRDA.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPRDB.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.08</SourceRef>
+      <TileSetRef>TileSets.LD</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="9" Name="STORES SECTOR 3" >
-      <MapResourceRef>MAP.09</MapResourceRef>
-      <TileSetResourceRef>LEVELD.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPRDA.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPRDB.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.09</SourceRef>
+      <TileSetRef>TileSets.LD</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="10" Name="STORES SECTOR 4" >
-      <MapResourceRef>MAP.10</MapResourceRef>
-      <TileSetResourceRef>LEVELD.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPRDA.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPRDB.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.10</SourceRef>
+      <TileSetRef>TileSets.LD</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="11" Name="OUTDOOR SECTOR 3" >
-      <MapResourceRef>MAP.11</MapResourceRef>
-      <TileSetResourceRef>LEVEL1.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR1A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR1B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.11</SourceRef>
+      <TileSetRef>TileSets.L1</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="12" Name="MILITARY SECTOR 1" >
-      <MapResourceRef>MAP.12</MapResourceRef>
-      <TileSetResourceRef>LEVEL7.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR7A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR7B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.12</SourceRef>
+      <TileSetRef>TileSets.L7</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="13" Name="MILITARY SECTOR 2" >
-      <MapResourceRef>MAP.13</MapResourceRef>
-      <TileSetResourceRef>LEVEL7.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR7A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR7B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.13</SourceRef>
+      <TileSetRef>TileSets.L7</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="14" Name="MILITARY SECTOR 3" >
-      <MapResourceRef>MAP.14</MapResourceRef>
-      <TileSetResourceRef>LEVEL7.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR7A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR7B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.14</SourceRef>
+      <TileSetRef>TileSets.L7</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="15" Name="MILITARY SECTOR 4" >
-      <MapResourceRef>MAP.15</MapResourceRef>
-      <TileSetResourceRef>LEVEL7.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR7A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR7B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.15</SourceRef>
+      <TileSetRef>TileSets.L7</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="16" Name="SECURITY ZONE 1" >
-      <MapResourceRef>MAP.16</MapResourceRef>
-      <TileSetResourceRef>LEVEL5.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR5A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR5B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.16</SourceRef>
+      <TileSetRef>TileSets.L5</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR5B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="17" Name="SECURITY ZONE 2" >
-      <MapResourceRef>MAP.17</MapResourceRef>
-      <TileSetResourceRef>LEVEL5.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR5A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR5B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.17</SourceRef>
+      <TileSetRef>TileSets.L5</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR5B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="18" Name="SECURITY ZONE 3" >
-      <MapResourceRef>MAP.18</MapResourceRef>
-      <TileSetResourceRef>LEVEL5.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR5A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR5B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.18</SourceRef>
+      <TileSetRef>TileSets.L5</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR5B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="19" Name="SECURITY ZONE 4" >
-      <MapResourceRef>MAP.19</MapResourceRef>
-      <TileSetResourceRef>LEVEL5.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR5A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR5B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.19</SourceRef>
+      <TileSetRef>TileSets.L5</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR5B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="20" Name="COLONY GROUND SECTOR 3" >
-      <MapResourceRef>MAP.20</MapResourceRef>
-      <TileSetResourceRef>LEVEL1.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR1A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR1B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.20</SourceRef>
+      <TileSetRef>TileSets.L1</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="21" Name="SCIENCE SECTOR 1" >
-      <MapResourceRef>MAP.21</MapResourceRef>
-      <TileSetResourceRef>LEVEL6.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR6A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR6B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.21</SourceRef>
+      <TileSetRef>TileSets.L6</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="22" Name="SCIENCE SECTOR 2" >
-      <MapResourceRef>MAP.22</MapResourceRef>
-      <TileSetResourceRef>LEVEL6.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR6A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR6B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.22</SourceRef>
+      <TileSetRef>TileSets.L6</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="23" Name="SCIENCE SECTOR 3" >
-      <MapResourceRef>MAP.23</MapResourceRef>
-      <TileSetResourceRef>LEVEL6.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR6A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR6B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.23</SourceRef>
+      <TileSetRef>TileSets.L6</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="24" Name="SCIENCE SECTOR 4" >
-      <MapResourceRef>MAP.24</MapResourceRef>
-      <TileSetResourceRef>LEVEL6.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR6A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR6B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.24</SourceRef>
+      <TileSetRef>TileSets.L6</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="25" Name="COLONY GROUND SECTOR 4" >
-      <MapResourceRef>MAP.25</MapResourceRef>
-      <TileSetResourceRef>LEVEL1.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR1A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR1B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.25</SourceRef>
+      <TileSetRef>TileSets.L1</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="26" Name="ENGINEERING SECTOR 1" >
-      <MapResourceRef>MAP.26</MapResourceRef>
-      <TileSetResourceRef>LEVEL3.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR3A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR3B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.26</SourceRef>
+      <TileSetRef>TileSets.L3</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="27" Name="ENGINEERING SECTOR 2" >
-      <MapResourceRef>MAP.27</MapResourceRef>
-      <TileSetResourceRef>LEVEL3.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR3A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR3B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.27</SourceRef>
+      <TileSetRef>TileSets.L3</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="28" Name="ENGINEERING SECTOR 3" >
-      <MapResourceRef>MAP.28</MapResourceRef>
-      <TileSetResourceRef>LEVEL3.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR3A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR3B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.28</SourceRef>
+      <TileSetRef>TileSets.L3</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="29" Name="ENGINEERING SECTOR 4" >
-      <MapResourceRef>MAP.29</MapResourceRef>
-      <TileSetResourceRef>LEVEL3.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR3A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR3B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.29</SourceRef>
+      <TileSetRef>TileSets.L3</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="30" Name="CORRIDOR ZONE 1" >
-      <MapResourceRef>MAP.30</MapResourceRef>
-      <TileSetResourceRef>LEVEL4.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR4A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR4B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.30</SourceRef>
+      <TileSetRef>TileSets.L4</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="31" Name="CORRIDOR 2" >
-      <MapResourceRef>MAP.31</MapResourceRef>
-      <TileSetResourceRef>LEVEL4.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR4A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR4B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.31</SourceRef>
+      <TileSetRef>TileSets.L4</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="32" Name="CORRIDOR 3" >
-      <MapResourceRef>MAP.32</MapResourceRef>
-      <TileSetResourceRef>LEVELD.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPRDA.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPRDB.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.32</SourceRef>
+      <TileSetRef>TileSets.LD</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="33" Name="CORRIDOR 4" >
-      <MapResourceRef>MAP.33</MapResourceRef>
-      <TileSetResourceRef>LEVEL3.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR3A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR3B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.33</SourceRef>
+      <TileSetRef>TileSets.L3</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="34" Name="CORRIDOR 5" >
-      <MapResourceRef>MAP.34</MapResourceRef>
-      <TileSetResourceRef>LEVELD.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPRDA.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPRDB.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.34</SourceRef>
+      <TileSetRef>TileSets.LD</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="35" Name="CORRIDOR ZONE 6" >
-      <MapResourceRef>MAP.35</MapResourceRef>
-      <TileSetResourceRef>LEVELD.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPRDA.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPRDB.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.35</SourceRef>
+      <TileSetRef>TileSets.LD</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="36" Name="CORRIDOR ZONE 7" >
-      <MapResourceRef>MAP.36</MapResourceRef>
-      <TileSetResourceRef>LEVEL4.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR4A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR4B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.36</SourceRef>
+      <TileSetRef>TileSets.L4</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="37" Name="CORRIDOR ZONE 8" >
-      <MapResourceRef>MAP.37</MapResourceRef>
-      <TileSetResourceRef>LEVELD.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPRDA.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPRDB.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.37</SourceRef>
+      <TileSetRef>TileSets.LD</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="38" Name="CORRIDOR ZONE 9" >
-      <MapResourceRef>MAP.38</MapResourceRef>
-      <TileSetResourceRef>LEVELD.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPRDA.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPRDB.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.38</SourceRef>
+      <TileSetRef>TileSets.LD</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="39" Name="CORRIDOR ZONE 10" >
-      <MapResourceRef>MAP.39</MapResourceRef>
-      <TileSetResourceRef>LEVEL3.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR3A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR3B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.39</SourceRef>
+      <TileSetRef>TileSets.L3</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="40" Name="CORRIDOR ZONE 11" >
-      <MapResourceRef>MAP.40</MapResourceRef>
-      <TileSetResourceRef>LEVEL4.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR4A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR4B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.40</SourceRef>
+      <TileSetRef>TileSets.L4</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="41" Name="CORRIDOR ZONE 12" >
-      <MapResourceRef>MAP.41</MapResourceRef>
-      <TileSetResourceRef>LEVEL3.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR3A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR3B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.41</SourceRef>
+      <TileSetRef>TileSets.L3</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="42" Name="CORRIDOR ZONE 13" >
-      <MapResourceRef>MAP.42</MapResourceRef>
-      <TileSetResourceRef>LEVEL3.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR3A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR3B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.42</SourceRef>
+      <TileSetRef>TileSets.L3</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="43" Name="CORRIDOR ZONE 14" >
-      <MapResourceRef>MAP.43</MapResourceRef>
-      <TileSetResourceRef>LEVEL7.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR7A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR7B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.43</SourceRef>
+      <TileSetRef>TileSets.L7</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="44" Name="CORRIDOR 15" >
-      <MapResourceRef>MAP.44</MapResourceRef>
-      <TileSetResourceRef>LEVEL7.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR7A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR7B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.44</SourceRef>
+      <TileSetRef>TileSets.L7</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="45" Name="CORRIDOR 16" >
-      <MapResourceRef>MAP.45</MapResourceRef>
-      <TileSetResourceRef>LEVEL3.BLK</TileSetResourceRef>
+      <SourceRef>MAP.45</SourceRef>
+      <TileSetRef>TileSets.L3</TileSetRef>
     </ResourceLevelDef>
     <ResourceLevelDef Id="46" Name="CORRIDOR 17" >
-      <MapResourceRef>MAP.46</MapResourceRef>
-      <TileSetResourceRef>LEVEL3.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR3A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR3B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.46</SourceRef>
+      <TileSetRef>TileSets.L3</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="47" Name="MAIN TOWER LEVEL 1" >
-      <MapResourceRef>MAP.47</MapResourceRef>
-      <TileSetResourceRef>LEVEL8.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR8A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR8B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.47</SourceRef>
+      <TileSetRef>TileSets.L8</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="48" Name="MAIN TOWER LEVEL 2" >
-      <MapResourceRef>MAP.48</MapResourceRef>
-      <TileSetResourceRef>LEVEL8.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR8A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR8B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.48</SourceRef>
+      <TileSetRef>TileSets.L8</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="49" Name="MAIN TOWER LEVEL 3" >
-      <MapResourceRef>MAP.49</MapResourceRef>
-      <TileSetResourceRef>LEVEL8.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR8A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR8B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.49</SourceRef>
+      <TileSetRef>TileSets.L8</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="50" Name="MAIN TOWER LEVEL 4" >
-      <MapResourceRef>MAP.50</MapResourceRef>
-      <TileSetResourceRef>LEVEL8.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR8A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR8B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.50</SourceRef>
+      <TileSetRef>TileSets.L8</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="51" Name="MAIN TOWER LEVEL 5" >
-      <MapResourceRef>MAP.51</MapResourceRef>
-      <TileSetResourceRef>LEVEL8.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR8A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR8B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.51</SourceRef>
+      <TileSetRef>TileSets.L8</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="52" Name="TOWER LEVEL 6" >
-      <MapResourceRef>MAP.52</MapResourceRef>
-      <TileSetResourceRef>LEVEL8.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR8A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR8B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.52</SourceRef>
+      <TileSetRef>TileSets.L8</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="53" Name="TOWER LEVEL 7" >
-      <MapResourceRef>MAP.53</MapResourceRef>
-      <TileSetResourceRef>LEVEL8.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR8A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR8B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.53</SourceRef>
+      <TileSetRef>TileSets.L8</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="54" Name="Mission One(\?\?\?)" >
-      <MapResourceRef>MAP.54</MapResourceRef>
-      <TileSetResourceRef>LEVEL6.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR6A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR6B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.54</SourceRef>
+      <TileSetRef>TileSets.L6</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="55" Name="OUTER COLONY SECTOR 5" >
-      <MapResourceRef>MAP.55</MapResourceRef>
-      <TileSetResourceRef>LEVEL1.BLK</TileSetResourceRef>
-      <SpriteSetResourceRefs>
-        <SpriteSetResourceRef>SPR1A.SPR</SpriteSetResourceRef>
-        <SpriteSetResourceRef>SPR1B.SPR</SpriteSetResourceRef>
-      </SpriteSetResourceRefs>
+      <SourceRef>MAP.55</SourceRef>
+      <TileSetRef>TileSets.L1</TileSetRef>
+      <SpriteSetRefs>
+        <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
+        <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
+      </SpriteSetRefs>
     </ResourceLevelDef>
   </ResourceDefs>
 </DatabaseDef>

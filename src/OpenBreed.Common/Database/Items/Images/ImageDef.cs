@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenBreed.Common.Database.Items.Sources;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,9 @@ namespace OpenBreed.Common.Database.Items.Images
     [Serializable]
     public class ImageDef : DatabaseItemDef
     {
-        [XmlAttribute]
         public string SourceRef { get; set; }
+        public string Format { get; set; }
+        [XmlArrayItem(ElementName = "Parameter")]
+        public readonly List<SourceParameterDef> Parameters = new List<SourceParameterDef>();
     }
 }

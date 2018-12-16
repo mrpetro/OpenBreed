@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <LevelDef Id="1" Name="L1" >
-  <MapResourceRef>LAMA</MapResourceRef>
-  <TileSetResourceRef>L7BM</TileSetResourceRef>
+  <SourceRef>LAMA</SourceRef>
+  <TileSetRef>L7BM</TileSetRef>
   <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
-  <SpriteSetResourceRefs>
-  </SpriteSetResourceRefs>
+  <SpriteSetRefs>
+  </SpriteSetRefs>
 </LevelDef>

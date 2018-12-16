@@ -18,7 +18,7 @@ namespace OpenBreed.Common.Formats
         {
         }
 
-        public object Load(BaseSource source)
+        public object Load(BaseSource source, Dictionary<string, object> parameters = null)
         {
             //Remember to set source stream to begining
             source.Stream.Seek(0, SeekOrigin.Begin);
