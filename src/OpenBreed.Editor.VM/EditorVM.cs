@@ -25,6 +25,8 @@ using OpenBreed.Common.Formats;
 using OpenBreed.Common.Sources;
 using OpenBreed.Common.Database.Items.Props;
 using OpenBreed.Common.Database.Items.Levels;
+using OpenBreed.Common.Database.Items.Tiles;
+using OpenBreed.Common.Database.Items.Sprites;
 
 namespace OpenBreed.Editor.VM
 {
@@ -152,16 +154,30 @@ namespace OpenBreed.Editor.VM
         public void LoadLevel(LevelDef levelDef)
         {
             TileSets.Clear();
-            AddTileSet(levelDef.TileSetResourceRef);
-
-            TileSetSelector.CurrentItem = TileSets.FirstOrDefault();
-
             SpriteSets.Clear();
 
-            foreach (var spriteSetSourceRef in levelDef.SpriteSetResourceRefs)
-                AddSpriteSet(spriteSetSourceRef);
+            if (levelDef.TileSetRef != null)
+            {
+                var tileSetDef = Database.GetTileSetDef(levelDef.TileSetRef);
+                if (tileSetDef == null)
+                    throw new Exception($"No Tile set definition with name '{levelDef.TileSetRef}' found!");
+
+                AddTileSet(tileSetDef);
+                TileSetSelector.CurrentItem = TileSets.FirstOrDefault();
+            }
+
+
+            foreach (var spriteSetSourceRef in levelDef.SpriteSetRefs)
+            {
+                var spriteSetDef = Database.GetSpriteSetDef(spriteSetSourceRef);
+                if (spriteSetDef == null)
+                    throw new Exception($"No Sprite set definition with name '{spriteSetSourceRef}' found!");
+
+                AddSpriteSet(spriteSetDef);
+            }
 
             SpriteSetViewer.CurrentItem = SpriteSets.FirstOrDefault();
+
             if (SpriteSetViewer.CurrentItem != null)
                 SpriteViewer.CurrentItem = SpriteSetViewer.CurrentItem.Items.FirstOrDefault();
 
@@ -174,13 +190,9 @@ namespace OpenBreed.Editor.VM
                 LoadPropSet(propSetDef);
             }
 
-            var mapSourceDef = Database.GetSourceDef(levelDef.MapResourceRef);
-            if (mapSourceDef != null)
-            {
-                var map = CreateMap();
-                map.Load(mapSourceDef);
-                Map = map;
-            }
+            var map = CreateMap();
+            map.Load(levelDef);
+            Map = map;
         }
 
         public void LoadPropSet(PropertySetDef propSetDef)
@@ -191,29 +203,17 @@ namespace OpenBreed.Editor.VM
         }
 
 
-        public void AddSpriteSet(string spriteSetRef)
+        public void AddSpriteSet(SpriteSetDef spriteSetDef)
         {
-            var sourceDef = Database.GetSourceDef(spriteSetRef);
-            if (sourceDef == null)
-                throw new Exception("No Source definition found!");
-
             var newSpriteSet = CreateSpriteSet();
-
-            newSpriteSet.Load(sourceDef);
-
+            newSpriteSet.Load(spriteSetDef);
             SpriteSets.Add(newSpriteSet);
         }
 
-        public void AddTileSet(string tileSetRef)
+        public void AddTileSet(TileSetDef tileSetDef)
         {
-            var sourceDef = Database.GetSourceDef(tileSetRef);
-            if (sourceDef == null)
-                throw new Exception("No Source definition found with name: " + tileSetRef);
-
             var newTileSet = CreateTileSet();
-
-            newTileSet.Load(sourceDef);
-
+            newTileSet.Load(tileSetDef);
             TileSets.Add(newTileSet);
         }
 

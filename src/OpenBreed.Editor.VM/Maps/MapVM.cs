@@ -8,6 +8,7 @@ using OpenBreed.Common.Sources;
 using System;
 using System.IO;
 using System.Linq;
+using OpenBreed.Common.Database.Items.Levels;
 
 namespace OpenBreed.Editor.VM.Maps
 {
@@ -85,20 +86,6 @@ namespace OpenBreed.Editor.VM.Maps
             m_Commands = new CommandMan();
 
             PropertyChanged += MapVM_PropertyChanged;
-        }
-
-        public void Set(string mapSourceRef)
-        {
-            var mapSourceDef = Root.Database.GetSourceDef(mapSourceRef);
-            if (mapSourceDef == null)
-                throw new Exception("No MapSource definition found!");
-
-            var source = Root.SourceMan.GetSource(mapSourceDef);
-
-            if (source == null)
-                throw new Exception("Map source error: " + mapSourceRef);
-
-            Load(mapSourceDef);
         }
 
         #endregion Public Constructors
@@ -197,27 +184,29 @@ namespace OpenBreed.Editor.VM.Maps
             Body.ConnectEvents();
         }
 
-        internal void Load(SourceDef sourceDef)
+        internal void Load(LevelDef levelDef)
         {
-            if (Source != null)
-            {
-                Source.Dispose();
-                Source = null;
-            }
+            var sourceDef = Root.Database.GetSourceDef(levelDef.SourceRef);
+            if (sourceDef == null)
+                throw new Exception("No Source definition found with name: " + levelDef.SourceRef);
+
+            var format = Root.FormatMan.GetFormatMan(levelDef.Format);
+            if (format == null)
+                throw new Exception($"Unknown format {levelDef.Format}");
 
             var source = Root.SourceMan.GetSource(sourceDef);
+            if (source == null)
+                throw new Exception("TileSet source error: " + sourceDef);
 
-            var format = Root.FormatMan.GetFormatMan(sourceDef.Type);
-            if (format == null)
-                throw new Exception($"Unknown format {sourceDef.Type}");
+            var parameters = Root.FormatMan.GetParameters(levelDef.Parameters);
 
-            var map = source.Load(format) as MapModel;
+            var model = source.Load(format, parameters) as MapModel;
             Source = source;
 
-            Properties.Load(map);
-            Body.Load(map);
+            Properties.Load(model);
+            Body.Load(model);
 
-            Root.Palettes.Restore(map.Properties.Palettes);
+            Root.Palettes.Restore(model.Properties.Palettes);
             Root.Palettes.CurrentItem = Root.Palettes.Items.FirstOrDefault();
             Root.MapBodyViewer.CurrentMapBody = Body;
         }

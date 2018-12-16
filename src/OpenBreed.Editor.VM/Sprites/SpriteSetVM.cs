@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using OpenBreed.Common.Database.Items.Sources;
 using System;
+using OpenBreed.Common.Database.Items.Sprites;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
@@ -103,17 +104,23 @@ namespace OpenBreed.Editor.VM.Sprites
             }
         }
 
-        internal void Load(SourceDef sourceDef)
+        internal void Load(SpriteSetDef spriteSetDef)
         {
-            var format = Root.FormatMan.GetFormatMan(sourceDef.Type);
+            var sourceDef = Root.Database.GetSourceDef(spriteSetDef.SourceRef);
+            if (sourceDef == null)
+                throw new Exception("No Source definition found with name: " + spriteSetDef.SourceRef);
+
+            var format = Root.FormatMan.GetFormatMan(spriteSetDef.Format);
             if (format == null)
-                throw new Exception($"Unknown format {sourceDef.Type}");
+                throw new Exception($"Unknown format {spriteSetDef.Format}");
 
             var source = Root.SourceMan.GetSource(sourceDef);
             if (source == null)
                 throw new Exception("SpriteSet source error: " + sourceDef);
 
-            var model = source.Load(format) as SpriteSetModel;
+            var parameters = Root.FormatMan.GetParameters(spriteSetDef.Parameters);
+
+            var model = source.Load(format, parameters) as SpriteSetModel;
 
             Source = source;
 

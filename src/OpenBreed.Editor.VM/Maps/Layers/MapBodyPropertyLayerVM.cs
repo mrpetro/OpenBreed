@@ -43,6 +43,9 @@ namespace OpenBreed.Editor.VM.Maps.Layers
 
         public override void DrawView(Graphics gfx, Rectangle rectangle)
         {
+            if (Body.Map.Root.PropSet == null)
+                return;
+
             int tileSize = 16;
 
             for (int xIndex = rectangle.Left; xIndex <= rectangle.Right; xIndex++)

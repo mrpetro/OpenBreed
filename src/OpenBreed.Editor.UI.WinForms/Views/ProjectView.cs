@@ -145,6 +145,16 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         }
 
+        internal void ShowSpriteSetEditorView()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void ShowTileSetEditorView()
+        {
+            throw new NotImplementedException();
+        }
+
         //public void ShowView(ProjectViewType type)
         //{
         //    var view = GetView(type);

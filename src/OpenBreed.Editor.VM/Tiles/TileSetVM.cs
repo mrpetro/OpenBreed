@@ -12,6 +12,7 @@ using System.Linq;
 using OpenBreed.Common.Drawing;
 using OpenBreed.Common.Database.Items.Sources;
 using System;
+using OpenBreed.Common.Database.Items.Tiles;
 
 namespace OpenBreed.Editor.VM.Tiles
 {
@@ -80,17 +81,23 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #region Public Methods
 
-        internal void Load(SourceDef sourceDef)
+        internal void Load(TileSetDef tileSetDef)
         {
-            var format = Root.FormatMan.GetFormatMan(sourceDef.Type);
+            var sourceDef = Root.Database.GetSourceDef(tileSetDef.SourceRef);
+            if (sourceDef == null)
+                throw new Exception("No Source definition found with name: " + tileSetDef.SourceRef);
+
+            var format = Root.FormatMan.GetFormatMan(tileSetDef.Format);
             if (format == null)
-                throw new Exception($"Unknown format {sourceDef.Type}");
+                throw new Exception($"Unknown format {tileSetDef.Format}");
 
             var source = Root.SourceMan.GetSource(sourceDef);
             if (source == null)
                 throw new Exception("TileSet source error: " + sourceDef);
 
-            var model = source.Load(format) as TileSetModel;
+            var parameters = Root.FormatMan.GetParameters(tileSetDef.Parameters);
+
+            var model = source.Load(format, parameters) as TileSetModel;
 
             Source = source;
             Name = source.Name;

@@ -25,6 +25,10 @@ using OpenBreed.Editor.VM.Database.Tables;
 using OpenBreed.Common.Database.Tables.Levels;
 using OpenBreed.Common.Database.Tables.Props;
 using OpenBreed.Common.Database.Items.Props;
+using OpenBreed.Common.Database.Items.Tiles;
+using OpenBreed.Common.Database.Tables.Tiles;
+using OpenBreed.Common.Database.Items.Sprites;
+using OpenBreed.Common.Database.Tables.Sprites;
 
 namespace OpenBreed.Editor.VM.Database
 {
@@ -81,11 +85,6 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Public Methods
 
-        public List<SourceDef> GetAllSourcesOfType(string type)
-        {
-            return _databaseDef.Tables.OfType<DatabaseSourceTableDef>().FirstOrDefault().Items.FindAll(item => item.Type == type);
-        }
-
         public LevelDef GetLevelDef(string levelName)
         {
             var levelDef = _databaseDef.Tables.OfType<DatabaseLevelTableDef>().FirstOrDefault().Items.FirstOrDefault(item => item.Name == levelName);
@@ -104,6 +103,26 @@ namespace OpenBreed.Editor.VM.Database
                 throw new InvalidOperationException("Property set '" + propertySetName + "' not found!");
 
             return propertySetDef;
+        }
+
+        public TileSetDef GetTileSetDef(string tileSetName)
+        {
+            var tileSetDef = _databaseDef.Tables.OfType<DatabaseTileSetTableDef>().FirstOrDefault().Items.FirstOrDefault(item => item.Name == tileSetName);
+
+            if (tileSetDef == null)
+                throw new InvalidOperationException("Tile set '" + tileSetName + "' not found!");
+
+            return tileSetDef;
+        }
+
+        public SpriteSetDef GetSpriteSetDef(string spriteSetName)
+        {
+            var spriteSetDef = _databaseDef.Tables.OfType<DatabaseSpriteSetTableDef>().FirstOrDefault().Items.FirstOrDefault(item => item.Name == spriteSetName);
+
+            if (spriteSetDef == null)
+                throw new InvalidOperationException("Sprite set '" + spriteSetName + "' not found!");
+
+            return spriteSetDef;
         }
 
         public SourceDef GetSourceDef(string sourceRef)
@@ -130,9 +149,12 @@ namespace OpenBreed.Editor.VM.Database
                 return new DatabaseSourceItemVM(this);
             else if (itemDef is PropertySetDef)
                 return new DatabasePropSetItemVM(this);
+            else if (itemDef is TileSetDef)
+                return new DatabaseTileSetItemVM(this);
+            else if (itemDef is SpriteSetDef)
+                return new DatabaseSpriteSetItemVM(this);
             if (itemDef is DatabaseTableDef)
                 return CreateTable((DatabaseTableDef)itemDef);
-
             else
                 throw new NotImplementedException(itemDef.ToString());
         }
@@ -147,6 +169,10 @@ namespace OpenBreed.Editor.VM.Database
                 return new DatabasePropertySetTableVM(this);
             else if (tableDef is DatabaseSourceTableDef)
                 return new DatabaseSourceTableVM(this);
+            else if (tableDef is DatabaseTileSetTableDef)
+                return new DatabaseTileSetTableVM(this);
+            else if (tableDef is DatabaseSpriteSetTableDef)
+                return new DatabaseSpriteSetTableVM(this);
             else
                 throw new NotImplementedException(tableDef.ToString());
         }

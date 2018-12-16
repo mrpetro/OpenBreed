@@ -87,6 +87,10 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
                 _projectView.ShowLevelView();
             else if (databaseItemVM is DatabasePropSetItemVM)
                 _projectView.ShowPropSetEditorView();
+            else if (databaseItemVM is DatabaseTileSetItemVM)
+                _projectView.ShowTileSetEditorView();
+            else if (databaseItemVM is DatabaseSpriteSetItemVM)
+                _projectView.ShowSpriteSetEditorView();
             else
                 throw new NotImplementedException();
         }

@@ -75,37 +75,30 @@ namespace OpenBreed.Editor.VM.Images
 
         public void TryLoad(ImageDef imageDef)
         {
-            var imageSourceDef = Root.Database.GetSourceDef(imageDef.SourceRef);
-            if (imageSourceDef == null)
-                throw new Exception("No ImageSourceDef definition found!");
-
-            var source = Root.SourceMan.GetSource(imageSourceDef);
-
-            if (source == null)
-                throw new Exception("Image source error: " + imageDef.SourceRef);
-
-            Load(imageSourceDef);
+            Load(imageDef);
         }
 
         #endregion Public Methods
 
         #region Internal Methods
 
-        internal void Load(SourceDef sourceDef)
+        internal void Load(ImageDef imageDef)
         {
-            if (Source != null)
-            {
-                Source.Dispose();
-                Source = null;
-            }
+            var sourceDef = Root.Database.GetSourceDef(imageDef.SourceRef);
+            if (sourceDef == null)
+                throw new Exception("No Source definition found with name: " + imageDef.SourceRef);
+
+            var format = Root.FormatMan.GetFormatMan(imageDef.Format);
+            if (format == null)
+                throw new Exception($"Unknown format {imageDef.Format}");
 
             var source = Root.SourceMan.GetSource(sourceDef);
+            if (source == null)
+                throw new Exception("Image source error: " + sourceDef);
 
-            var format = Root.FormatMan.GetFormatMan(sourceDef.Type);
-            if (format == null)
-                throw new Exception($"Unknown format {sourceDef.Type}");
+            var parameters = Root.FormatMan.GetParameters(imageDef.Parameters);
 
-            Image = source.Load(format) as Image;
+            Image = source.Load(format, parameters) as Image;
             Source = source;
         }
 
