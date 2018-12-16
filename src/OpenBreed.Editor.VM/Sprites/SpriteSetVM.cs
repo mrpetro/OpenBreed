@@ -5,6 +5,8 @@ using OpenBreed.Editor.VM.Palettes;
 using OpenBreed.Common.Sources;
 using System.ComponentModel;
 using System.Linq;
+using OpenBreed.Common.Database.Items.Sources;
+using System;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
@@ -60,26 +62,9 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Public Methods
 
-        public static SpriteSetVM Create(EditorVM root, BaseSource source)
-        {
-            var model = source.Load() as SpriteSetModel;
-
-            var newSpriteSet = new SpriteSetVM(root);
-            newSpriteSet.Source = source;
-
-            foreach (var sprite in model.Sprites)
-                newSpriteSet.Items.Add(SpriteVM.Create(sprite));
-
-            return newSpriteSet;
-        }
-
         #endregion Public Methods
 
         #region Private Methods
-
-        private void CreateSprites()
-        {
-        }
 
         private void Palette_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -116,6 +101,24 @@ namespace OpenBreed.Editor.VM.Sprites
                 default:
                     break;
             }
+        }
+
+        internal void Load(SourceDef sourceDef)
+        {
+            var format = Root.FormatMan.GetFormatMan(sourceDef.Type);
+            if (format == null)
+                throw new Exception($"Unknown format {sourceDef.Type}");
+
+            var source = Root.SourceMan.GetSource(sourceDef);
+            if (source == null)
+                throw new Exception("SpriteSet source error: " + sourceDef);
+
+            var model = source.Load(format) as SpriteSetModel;
+
+            Source = source;
+
+            foreach (var sprite in model.Sprites)
+                Items.Add(SpriteVM.Create(sprite));
         }
 
         #endregion Private Methods

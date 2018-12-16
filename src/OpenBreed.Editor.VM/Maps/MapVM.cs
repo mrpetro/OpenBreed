@@ -93,7 +93,7 @@ namespace OpenBreed.Editor.VM.Maps
             if (mapSourceDef == null)
                 throw new Exception("No MapSource definition found!");
 
-            var source = Root.Sources.GetSource(mapSourceDef);
+            var source = Root.SourceMan.GetSource(mapSourceDef);
 
             if (source == null)
                 throw new Exception("Map source error: " + mapSourceRef);
@@ -205,9 +205,13 @@ namespace OpenBreed.Editor.VM.Maps
                 Source = null;
             }
 
-            var source = Root.Sources.GetSource(sourceDef);
+            var source = Root.SourceMan.GetSource(sourceDef);
 
-            var map = source.Load() as MapModel;
+            var format = Root.FormatMan.GetFormatMan(sourceDef.Type);
+            if (format == null)
+                throw new Exception($"Unknown format {sourceDef.Type}");
+
+            var map = source.Load(format) as MapModel;
             Source = source;
 
             Properties.Load(map);

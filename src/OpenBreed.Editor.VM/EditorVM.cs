@@ -21,7 +21,7 @@ using OpenBreed.Editor.Cfg;
 using System.ComponentModel;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Images;
-using OpenBreed.Common.Sources.Formats;
+using OpenBreed.Common.Formats;
 using OpenBreed.Common.Sources;
 using OpenBreed.Common.Database.Items.Props;
 using OpenBreed.Common.Database.Items.Levels;
@@ -73,16 +73,17 @@ namespace OpenBreed.Editor.VM
             LevelEditor = new LevelEditorVM(this);
             Map = new MapVM(this);
             MapBodyViewer = new MapBodyEditorVM(this);
-            Sources = new SourcesHandler();
-            Sources.ExpandVariables = Settings.ExpandVariables;
+            FormatMan = new DataFormatMan();
+            SourceMan = new SourceMan();
+            SourceMan.ExpandVariables = Settings.ExpandVariables;
 
-            Sources.RegisterFormat("ABSE_MAP", new ABSEMAPFormat());
-            Sources.RegisterFormat("ABHC_MAP", new ABHCMAPFormat());
-            Sources.RegisterFormat("ABTA_MAP", new ABTAMAPFormat());
-            Sources.RegisterFormat("ABTABLK", new ABTABLKFormat());
-            Sources.RegisterFormat("ABTASPR", new ABTASPRFormat());
-            Sources.RegisterFormat("ACBM_TILE_SET", new ACBMTileSetFormat());
-            Sources.RegisterFormat("ACBM_IMAGE", new ACBMImageFormat());
+            FormatMan.RegisterFormat("ABSE_MAP", new ABSEMAPFormat());
+            FormatMan.RegisterFormat("ABHC_MAP", new ABHCMAPFormat());
+            FormatMan.RegisterFormat("ABTA_MAP", new ABTAMAPFormat());
+            FormatMan.RegisterFormat("ABTABLK", new ABTABLKFormat());
+            FormatMan.RegisterFormat("ABTASPR", new ABTASPRFormat());
+            FormatMan.RegisterFormat("ACBM_TILE_SET", new ACBMTileSetFormat());
+            FormatMan.RegisterFormat("ACBM_IMAGE", new ACBMImageFormat());
         }
 
         #endregion Public Constructors
@@ -120,7 +121,8 @@ namespace OpenBreed.Editor.VM
 
         public SettingsMan Settings { get; private set; }
 
-        public SourcesHandler Sources { get; set; }
+        public DataFormatMan FormatMan { get; }
+        public SourceMan SourceMan { get; }
 
         public BindingList<SpriteSetVM> SpriteSets { get; private set; }
 
@@ -188,37 +190,46 @@ namespace OpenBreed.Editor.VM
             PropSet = propSet;
         }
 
+
         public void AddSpriteSet(string spriteSetRef)
         {
-            var spriteSetSourceDef = Database.GetSourceDef(spriteSetRef);
-            if (spriteSetSourceDef == null)
-                throw new Exception("No SpriteSetSource definition found!");
+            var sourceDef = Database.GetSourceDef(spriteSetRef);
+            if (sourceDef == null)
+                throw new Exception("No Source definition found!");
 
-            var source = Sources.GetSource(spriteSetSourceDef);
+            var newSpriteSet = CreateSpriteSet();
 
-            if (source == null)
-                throw new Exception("SpriteSet source error: " + spriteSetRef);
+            newSpriteSet.Load(sourceDef);
 
-            SpriteSets.Add(SpriteSetVM.Create(this, source));
+            SpriteSets.Add(newSpriteSet);
         }
 
         public void AddTileSet(string tileSetRef)
         {
-            var tileSetSourceDef = Database.GetSourceDef(tileSetRef);
-            if (tileSetSourceDef == null)
-                throw new Exception("No TileSetSource definition found with name: " + tileSetRef);
+            var sourceDef = Database.GetSourceDef(tileSetRef);
+            if (sourceDef == null)
+                throw new Exception("No Source definition found with name: " + tileSetRef);
 
-            var source = Sources.GetSource(tileSetSourceDef);
+            var newTileSet = CreateTileSet();
 
-            if (source == null)
-                throw new Exception("TileSet source error: " + tileSetRef);
+            newTileSet.Load(sourceDef);
 
-            TileSets.Add(TileSetVM.Create(this, source));
+            TileSets.Add(newTileSet);
         }
 
         public MapVM CreateMap()
         {
             return new MapVM(this);
+        }
+
+        public SpriteSetVM CreateSpriteSet()
+        {
+            return new SpriteSetVM(this);
+        }
+
+        public TileSetVM CreateTileSet()
+        {
+            return new TileSetVM(this);
         }
 
         public PropSetVM CreatePropSet()

@@ -10,6 +10,8 @@ using System.Runtime.InteropServices;
 using OpenBreed.Editor.VM.Palettes;
 using System.Linq;
 using OpenBreed.Common.Drawing;
+using OpenBreed.Common.Database.Items.Sources;
+using System;
 
 namespace OpenBreed.Editor.VM.Tiles
 {
@@ -78,18 +80,23 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #region Public Methods
 
-        public static TileSetVM Create(EditorVM root, BaseSource source)
+        internal void Load(SourceDef sourceDef)
         {
-            var model = source.Load() as TileSetModel;
+            var format = Root.FormatMan.GetFormatMan(sourceDef.Type);
+            if (format == null)
+                throw new Exception($"Unknown format {sourceDef.Type}");
 
-            var newTileSet = new TileSetVM(root);
-            newTileSet.Source = source;
-            newTileSet.Name = source.Name;
-            newTileSet.TileSize = model.TileSize;
-            newTileSet.Bitmap = newTileSet.ToBitmap(model.Tiles);
-            newTileSet.SetupTiles();
+            var source = Root.SourceMan.GetSource(sourceDef);
+            if (source == null)
+                throw new Exception("TileSet source error: " + sourceDef);
 
-            return newTileSet;
+            var model = source.Load(format) as TileSetModel;
+
+            Source = source;
+            Name = source.Name;
+            TileSize = model.TileSize;
+            Bitmap = ToBitmap(model.Tiles);
+            SetupTiles();
         }
 
         public void Dispose()
