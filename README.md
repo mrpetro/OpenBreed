@@ -12,7 +12,12 @@ For ABSE & ABHC - LXMA files (like L1MA, LAMA, L3MA)
 
 For ABTA - \*.MAP files
 
-These files contains tile map layout, each one with property(like spawn point of monster, walls, keys, etc...). It also contains two palette sets for usage with right input tile set. There are some other data that purpose is questionable. maps file format is shared between all three AB titles. But... ABTA contains one additional MISS(Mission?) data block which describes message texts, entrances/exists from map, monster speeds, strengths and some other unknown data.
+These files contains tile map layout, each one with property(like spawn point of monster, walls, keys, etc...). There are some other data that purpose is questionable.
+
+Maps file format is shared between all three AB titles. But there are some differences:
+- ABTA and ABHC map formats will also contains two palette set blocks (CMAP & ALCM) for usage with specific tile sets and sprites.
+- ABSE map format doesn't seem to contain any palette data. This data is hardcoded in ABSE amiga executable (PARTF file).
+- ABTA \*.MAP format contains one additional MISS(Mission?) data block which describes message texts, entrances/exists from map, monster speeds, strengths and some other unknown data.
 
 
 ### Tile set files
