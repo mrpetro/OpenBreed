@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.Database.Items.Sources;
+using OpenBreed.Common.Formats;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,8 +10,7 @@ namespace OpenBreed.Common.Sources
     {
         #region Private Fields
 
-        private readonly ISourceFormat _format;
-        private readonly SourcesHandler _manager;
+        private readonly SourceMan _manager;
         private readonly Dictionary<string, object> _parameters;
 
         private Stream m_Stream;
@@ -19,7 +19,7 @@ namespace OpenBreed.Common.Sources
 
         #region Protected Constructors
 
-        protected BaseSource(SourcesHandler manager, SourceDef sourceDef)
+        protected BaseSource(SourceMan manager, SourceDef sourceDef)
         {
             if (manager == null)
                 throw new ArgumentNullException("Manager");
@@ -28,7 +28,7 @@ namespace OpenBreed.Common.Sources
                 throw new ArgumentNullException("SourceDef");
 
             _manager = manager;
-            _format = manager.GetFormatMan(sourceDef.Type);
+
             _parameters = manager.GetParameters(sourceDef.Parameters);
             Name = sourceDef.Name;
         }
@@ -72,14 +72,14 @@ namespace OpenBreed.Common.Sources
             }
         }
 
-        public object Load()
+        public object Load(IDataFormat format)
         {
-            return _format.Load(this);
+            return format.Load(this);
         }
 
-        public void Save(object model)
+        public void Save(object model, IDataFormat format)
         {
-            _format.Save(this, model);
+            format.Save(this, model);
         }
 
         #endregion Public Methods

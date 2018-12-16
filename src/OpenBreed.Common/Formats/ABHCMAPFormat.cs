@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using OpenBreed.Common.Maps;
 using OpenBreed.Common.Maps.Builders;
-using System.IO;
 using OpenBreed.Common.Maps.Readers.MAP;
 using OpenBreed.Common.Maps.Writers.MAP;
-using OpenBreed.Common.Maps;
+using OpenBreed.Common.Sources;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Sources.Formats
+namespace OpenBreed.Common.Formats
 {
-    public class ABTAMAPFormat : ISourceFormat
+    public class ABHCMAPFormat : IDataFormat
     {
-        public ABTAMAPFormat()
+        public ABHCMAPFormat()
         {
         }
 
@@ -22,7 +24,7 @@ namespace OpenBreed.Common.Sources.Formats
             source.Stream.Seek(0, SeekOrigin.Begin);
 
             var mapBuilder = MapBuilder.NewMapModel();
-            MAPReader mapReader = new MAPReader(mapBuilder, MAPFormat.ABTA);
+            MAPReader mapReader = new MAPReader(mapBuilder, MAPFormat.ABHC);
             return mapReader.Read(source.Stream);
         }
 

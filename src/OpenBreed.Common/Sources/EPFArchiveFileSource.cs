@@ -19,7 +19,7 @@ namespace OpenBreed.Common.Sources
 
         #region Public Constructors
 
-        public EPFArchiveFileSource(SourcesHandler manager, EPFArchiveFileSourceDef sourceDef) :
+        public EPFArchiveFileSource(SourceMan manager, EPFArchiveFileSourceDef sourceDef) :
             base(manager, sourceDef)
         {
             _archive = manager.GetArchive(manager.ExpandVariables(sourceDef.ArchivePath));

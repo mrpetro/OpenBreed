@@ -5,10 +5,11 @@ using System.Text;
 using System.IO;
 using OpenBreed.Common.Sprites.Builders;
 using OpenBreed.Common.Sprites.Readers.SPR;
+using OpenBreed.Common.Sources;
 
-namespace OpenBreed.Common.Sources.Formats
+namespace OpenBreed.Common.Formats
 {
-    public class ABTASPRFormat : ISourceFormat
+    public class ABTASPRFormat : IDataFormat
     {
         public ABTASPRFormat()
         {

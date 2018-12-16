@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using OpenBreed.Common.Sources.Formats;
+using OpenBreed.Common.Formats;
 using EPF;
 using OpenBreed.Common.Logging;
 using System.ComponentModel;
@@ -14,7 +14,7 @@ namespace OpenBreed.Common.Sources
 {
     public delegate string ExpandVariablesDelegate(string text);
 
-    public class SourcesHandler
+    public class SourceMan
     {
         #region Public Fields
 
@@ -24,7 +24,6 @@ namespace OpenBreed.Common.Sources
 
         #region Private Fields
 
-        private readonly Dictionary<string, ISourceFormat> _formats = new Dictionary<string, ISourceFormat>();
         private readonly  Dictionary<string, BaseSource> _openedSources = new Dictionary<string, BaseSource> ();
         private Dictionary<string, EPFArchive> _openedArchives = new Dictionary<string, EPFArchive>();
 
@@ -32,15 +31,7 @@ namespace OpenBreed.Common.Sources
 
         #region Public Constructors
 
-        public void RegisterFormat(string formatAlias, ISourceFormat format)
-        {
-            if (_formats.ContainsKey(formatAlias))
-                throw new InvalidOperationException($"Format alias '{formatAlias}' already registered.");
-
-            _formats.Add(formatAlias, format);
-        }
-
-        public SourcesHandler()
+        public SourceMan()
         {
             ExpandVariables = ExpandVariablesDefault;      
         }
@@ -107,15 +98,6 @@ namespace OpenBreed.Common.Sources
             return archive;
         }
 
-        internal ISourceFormat GetFormatMan(string formatType)
-        {
-            ISourceFormat sourceMan = null;
-            if (_formats.TryGetValue(formatType, out sourceMan))
-                return sourceMan;
-            else
-                throw new InvalidOperationException("Unknown format: " + formatType);
-        }
-
         internal Dictionary<string, object> GetParameters(List<SourceParameterDef> parameterDefs)
         {
             var parameters = new Dictionary<string, object>();
@@ -154,26 +136,6 @@ namespace OpenBreed.Common.Sources
 
         #endregion Private Methods
 
-        //public object Load(SourceDef sourceDef)
-        //{
-        //    try
-        //    {
-        //        //Check if same source is already opened
-        //        BaseSource source = null;
-        //        if(m_OpenedSources.TryGetValue(sourceDef.Name, out source))
-        //            return source.Load();
 
-        //        source = Create(sourceDef);
-        //        var model = source.Load();
-        //        m_OpenedSources.Add(source.Name, source);
-        //        return model;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        LogMan.Instance.LogError(string.Format("Loading file '{0}' from '{1}' failed. Reason: {1}", sourceDef.Name, sourceDef, ex.Message));
-        //    }
-
-        //    return null;
-        //}
     }
 }

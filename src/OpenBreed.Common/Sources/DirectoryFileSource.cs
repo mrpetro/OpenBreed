@@ -18,7 +18,7 @@ namespace OpenBreed.Common.Sources
 
         #region Public Constructors
 
-        public DirectoryFileSource(SourcesHandler manager, DirectoryFileSourceDef sourceDef) :
+        public DirectoryFileSource(SourceMan manager, DirectoryFileSourceDef sourceDef) :
             base(manager, sourceDef)
         {
             _directoryPath = manager.ExpandVariables(sourceDef.DirectoryPath);

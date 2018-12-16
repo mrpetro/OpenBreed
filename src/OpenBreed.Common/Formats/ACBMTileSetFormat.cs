@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Tiles.Builders;
+﻿using OpenBreed.Common.Sources;
+using OpenBreed.Common.Tiles.Builders;
 using OpenBreed.Common.Tiles.Readers.ACBM;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Sources.Formats
+namespace OpenBreed.Common.Formats
 {
-    public class ACBMTileSetFormat : ISourceFormat
+    public class ACBMTileSetFormat : IDataFormat
     {
         public ACBMTileSetFormat()
         {

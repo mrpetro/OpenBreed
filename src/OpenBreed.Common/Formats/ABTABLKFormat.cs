@@ -5,10 +5,11 @@ using System.Text;
 using System.IO;
 using OpenBreed.Common.Readers.BLK;
 using OpenBreed.Common.Tiles.Builders;
+using OpenBreed.Common.Sources;
 
-namespace OpenBreed.Common.Sources.Formats
+namespace OpenBreed.Common.Formats
 {
-    public class ABTABLKFormat : ISourceFormat
+    public class ABTABLKFormat : IDataFormat
     {
         public ABTABLKFormat()
         {

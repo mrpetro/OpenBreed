@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common.Images.Builders;
 using OpenBreed.Common.Images.Readers.ACBM;
+using OpenBreed.Common.Sources;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Sources.Formats
+namespace OpenBreed.Common.Formats
 {
-    public class ACBMImageFormat : ISourceFormat
+    public class ACBMImageFormat : IDataFormat
     {
         public ACBMImageFormat()
         {

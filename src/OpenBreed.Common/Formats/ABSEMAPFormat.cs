@@ -2,6 +2,7 @@
 using OpenBreed.Common.Maps.Builders;
 using OpenBreed.Common.Maps.Readers.MAP;
 using OpenBreed.Common.Maps.Writers.MAP;
+using OpenBreed.Common.Sources;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,9 +10,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Sources.Formats
+namespace OpenBreed.Common.Formats
 {
-    public class ABSEMAPFormat : ISourceFormat
+    public class ABSEMAPFormat : IDataFormat
     {
         public ABSEMAPFormat()
         {
