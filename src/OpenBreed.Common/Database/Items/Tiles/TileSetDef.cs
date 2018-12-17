@@ -12,10 +12,6 @@ namespace OpenBreed.Common.Database.Items.Tiles
     public class TileSetDef : DatabaseItemDef
     {
         public string SourceRef { get; set; }
-        public string Format { get; set; }
-
-        [XmlArrayItem(ElementName = "Parameter")]
-        public readonly List<SourceParameterDef> Parameters = new List<SourceParameterDef>();
-
+        public FormatDef Format { get; set; }
     }
 }

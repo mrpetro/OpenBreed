@@ -1,4 +1,6 @@
-﻿using OpenBreed.Common.Database.Items.Sources;
+﻿using OpenBreed.Common.Database;
+using OpenBreed.Common.Database.Items.Sources;
+using OpenBreed.Common.Sources;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +13,24 @@ namespace OpenBreed.Common.Formats
 {
     public class DataFormatMan
     {
+        #region Private Fields
+
         private readonly Dictionary<string, IDataFormat> _formats = new Dictionary<string, IDataFormat>();
+
+        #endregion Private Fields
+
+        #region Public Methods
+
+        public object Load(BaseSource source, FormatDef formatDef)
+        {
+            var format = GetFormat(formatDef.Name);
+            if (format == null)
+                throw new Exception($"Unknown format {formatDef.Name}");
+
+            var parameters = GetParameters(formatDef.Parameters);
+
+            return source.Load(format, parameters);
+        }
 
         public void RegisterFormat(string formatAlias, IDataFormat format)
         {
@@ -21,7 +40,20 @@ namespace OpenBreed.Common.Formats
             _formats.Add(formatAlias, format);
         }
 
-        public Dictionary<string, object> GetParameters(List<SourceParameterDef> parameterDefs)
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private IDataFormat GetFormat(string formatType)
+        {
+            IDataFormat sourceMan = null;
+            if (_formats.TryGetValue(formatType, out sourceMan))
+                return sourceMan;
+            else
+                throw new InvalidOperationException("Unknown format: " + formatType);
+        }
+
+        private Dictionary<string, object> GetParameters(List<FormatParameterDef> parameterDefs)
         {
             var parameters = new Dictionary<string, object>();
 
@@ -43,13 +75,6 @@ namespace OpenBreed.Common.Formats
             return parameters;
         }
 
-        public IDataFormat GetFormatMan(string formatType)
-        {
-            IDataFormat sourceMan = null;
-            if (_formats.TryGetValue(formatType, out sourceMan))
-                return sourceMan;
-            else
-                throw new InvalidOperationException("Unknown format: " + formatType);
-        }
+        #endregion Private Methods
     }
 }

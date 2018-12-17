@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace OpenBreed.Common.Database.Items.Sources
+namespace OpenBreed.Common.Database
 {
-    public class SourceParameterDef
+    public class FormatParameterDef
     {
         [XmlAttribute]
         public string Name { get; set; }

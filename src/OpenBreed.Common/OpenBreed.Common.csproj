@@ -48,6 +48,7 @@
     <Compile Include="Configs\IConfig.cs" />
     <Compile Include="Configs\IConfigCtrl.cs" />
     <Compile Include="Database\DatabaseItemDef.cs" />
+    <Compile Include="Database\FormatDef.cs" />
     <Compile Include="Database\Items\Sprites\SpriteSetDef.cs" />
     <Compile Include="Database\Items\Tiles\TileSetDef.cs" />
     <Compile Include="Database\Tables\Images\DatabaseImageTableDef.cs" />
@@ -63,7 +64,7 @@
     <Compile Include="Database\Items\Sources\DirectoryFileSourceDef.cs" />
     <Compile Include="Database\Items\Sources\EPFArchiveFileSourceDef.cs" />
     <Compile Include="Database\Items\Sources\SourceDef.cs" />
-    <Compile Include="Database\Items\Sources\SourceParameterDef.cs" />
+    <Compile Include="Database\FormatParameterDef.cs" />
     <Compile Include="Database\Tables\Sprites\DatabaseSpriteSetTableDef.cs" />
     <Compile Include="Database\Tables\Tiles\DatabaseTileSetTableDef.cs" />
     <Compile Include="Drawing\BitmapHelper.cs" />

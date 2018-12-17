@@ -11,9 +11,6 @@ namespace OpenBreed.Common.Database.Items.Sprites
     public class SpriteSetDef : DatabaseItemDef
     {
         public string SourceRef { get; set; }
-        public string Format { get; set; }
-
-        [XmlArrayItem(ElementName = "Parameter")]
-        public readonly List<SourceParameterDef> Parameters = new List<SourceParameterDef>();
+        public FormatDef Format { get; set; }
     }
 }

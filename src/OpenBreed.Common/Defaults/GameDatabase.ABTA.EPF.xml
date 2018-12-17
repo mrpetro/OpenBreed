@@ -105,119 +105,119 @@
       <Items>
         <SpriteSet Name="SpriteSets.SPR1A" >
           <SourceRef>SPR1A.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR1B" >
           <SourceRef>SPR1B.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR3A" >
           <SourceRef>SPR3A.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR3B" >
           <SourceRef>SPR3B.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR4A" >
           <SourceRef>SPR4A.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR4B" >
           <SourceRef>SPR4B.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR5A" >
           <SourceRef>SPR5A.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR5B" >
           <SourceRef>SPR5B.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR6A" >
           <SourceRef>SPR6A.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR6B" >
           <SourceRef>SPR6B.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR7A" >
           <SourceRef>SPR7A.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR7B" >
           <SourceRef>SPR7B.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR8A" >
           <SourceRef>SPR8A.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR8B" >
           <SourceRef>SPR8B.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPRDA" >
           <SourceRef>SPRDA.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPRDB" >
           <SourceRef>SPRDB.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.HERO1" >
           <SourceRef>HERO1.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.RESIDENT" >
           <SourceRef>RESIDENT.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.ALIEN_A" >
           <SourceRef>ALIEN_A.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.ALIEN_B" >
           <SourceRef>ALIEN_B.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.ALIEN_C" >
           <SourceRef>ALIEN_C.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.ALIEN_E" >
           <SourceRef>ALIEN_E.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.ALIEN_F" >
           <SourceRef>ALIEN_F.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.ALIEN_G" >
           <SourceRef>ALIEN_G.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.ALIEN_H" >
           <SourceRef>ALIEN_H.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.ALIEN_I" >
           <SourceRef>ALIEN_I.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.ALIEN_J" >
           <SourceRef>ALIEN_J.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.ALIEN_K" >
           <SourceRef>ALIEN_K.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.ALIEN_X" >
           <SourceRef>ALIEN_X.SPR</SourceRef>
-          <Format>ABTASPR</Format>
+          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
       </Items>
     </SpriteSets>
@@ -225,35 +225,35 @@
       <Items>
         <TileSet Name="TileSets.L1" >
           <SourceRef>LEVEL1.BLK</SourceRef>
-          <Format>ABTABLK</Format>
+          <Format Name="ABTABLK" ></Format>
         </TileSet>
         <TileSet Name="TileSets.L3" >
           <SourceRef>LEVEL3.BLK</SourceRef>
-          <Format>ABTABLK</Format>
+          <Format Name="ABTABLK" ></Format>
         </TileSet>
         <TileSet Name="TileSets.L4" >
           <SourceRef>LEVEL4.BLK</SourceRef>
-          <Format>ABTABLK</Format>
+          <Format Name="ABTABLK" ></Format>
         </TileSet>
         <TileSet Name="TileSets.L5" >
           <SourceRef>LEVEL5.BLK</SourceRef>
-          <Format>ABTABLK</Format>
+          <Format Name="ABTABLK" ></Format>
         </TileSet>
         <TileSet Name="TileSets.L6" >
           <SourceRef>LEVEL6.BLK</SourceRef>
-          <Format>ABTABLK</Format>
+          <Format Name="ABTABLK" ></Format>
         </TileSet>
         <TileSet Name="TileSets.L7" >
           <SourceRef>LEVEL7.BLK</SourceRef>
-          <Format>ABTABLK</Format>
+          <Format Name="ABTABLK" ></Format>
         </TileSet>
         <TileSet Name="TileSets.L8" >
           <SourceRef>LEVEL8.BLK</SourceRef>
-          <Format>ABTABLK</Format>
+          <Format Name="ABTABLK" ></Format>
         </TileSet>
         <TileSet Name="TileSets.LD" >
           <SourceRef>LEVELD.BLK</SourceRef>
-          <Format>ABTABLK</Format>
+          <Format Name="ABTABLK" ></Format>
         </TileSet>
       </Items>
     </TileSets>
@@ -261,7 +261,7 @@
       <Items>
         <Level Id="1" Name="CRASH LANDING SITE" >
           <SourceRef>MAP.01</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L1</TileSetRef>
           <PropertySetRef>Props.Level1</PropertySetRef>
           <SpriteSetRefs>
@@ -271,7 +271,7 @@
         </Level>
         <Level Id="2" Name="CIVILIAN ZONE 1" >
           <SourceRef>MAP.02</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L4</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetRefs>
@@ -281,7 +281,7 @@
         </Level>
         <Level Id="3" Name="CIVILIAN ZONE 2" >
           <SourceRef>MAP.03</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L4</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
@@ -290,7 +290,7 @@
         </Level>
         <Level Id="4" Name="CIVILIAN ZONE 3" >
           <SourceRef>MAP.04</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L4</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
@@ -299,7 +299,7 @@
         </Level>
         <Level Id="5" Name="CIVILIAN ZONE 4" >
           <SourceRef>MAP.05</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L4</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
@@ -308,7 +308,7 @@
         </Level>
         <Level Id="6" Name="OUTDOOR SECTOR 2" >
           <SourceRef>MAP.06</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L1</TileSetRef>
           <PropertySetRef>Props.Level1</PropertySetRef>
           <SpriteSetRefs>
@@ -318,7 +318,7 @@
         </Level>
         <Level Id="7" Name="STORES LEVEL 1" >
           <SourceRef>MAP.07</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -341,7 +341,7 @@
         </Level>
         <Level Id="8" Name="STORES LEVEL 2" >
           <SourceRef>MAP.08</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -350,7 +350,7 @@
         </Level>
         <Level Id="9" Name="STORES SECTOR 3" >
           <SourceRef>MAP.09</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -359,7 +359,7 @@
         </Level>
         <Level Id="10" Name="STORES SECTOR 4" >
           <SourceRef>MAP.10</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -368,7 +368,7 @@
         </Level>
         <Level Id="11" Name="OUTDOOR SECTOR 3" >
           <SourceRef>MAP.11</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L1</TileSetRef>
           <PropertySetRef>Props.Level1</PropertySetRef>
           <SpriteSetRefs>
@@ -378,7 +378,7 @@
         </Level>
         <Level Id="12" Name="MILITARY SECTOR 1" >
           <SourceRef>MAP.12</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L7</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
@@ -401,7 +401,7 @@
         </Level>
         <Level Id="13" Name="MILITARY SECTOR 2" >
           <SourceRef>MAP.13</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L7</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
@@ -410,7 +410,7 @@
         </Level>
         <Level Id="14" Name="MILITARY SECTOR 3" >
           <SourceRef>MAP.14</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L7</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
@@ -419,7 +419,7 @@
         </Level>
         <Level Id="15" Name="MILITARY SECTOR 4" >
           <SourceRef>MAP.15</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L7</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
@@ -428,7 +428,7 @@
         </Level>
         <Level Id="16" Name="SECURITY ZONE 1" >
           <SourceRef>MAP.16</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L5</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
@@ -453,7 +453,7 @@
         </Level>
         <Level Id="17" Name="SECURITY ZONE 2" >
           <SourceRef>MAP.17</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L5</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
@@ -462,7 +462,7 @@
         </Level>
         <Level Id="18" Name="SECURITY ZONE 3" >
           <SourceRef>MAP.18</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L5</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
@@ -471,7 +471,7 @@
         </Level>
         <Level Id="19" Name="SECURITY ZONE 4" >
           <SourceRef>MAP.19</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L5</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
@@ -480,7 +480,7 @@
         </Level>
         <Level Id="20" Name="COLONY GROUND SECTOR 3" >
           <SourceRef>MAP.20</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L1</TileSetRef>
           <PropertySetRef>Props.Level1</PropertySetRef>
           <SpriteSetRefs>
@@ -490,7 +490,7 @@
         </Level>
         <Level Id="21" Name="SCIENCE SECTOR 1" >
           <SourceRef>MAP.21</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L6</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
@@ -513,7 +513,7 @@
         </Level>
         <Level Id="22" Name="SCIENCE SECTOR 2" >
           <SourceRef>MAP.22</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L6</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
@@ -522,7 +522,7 @@
         </Level>
         <Level Id="23" Name="SCIENCE SECTOR 3" >
           <SourceRef>MAP.23</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L6</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
@@ -531,7 +531,7 @@
         </Level>
         <Level Id="24" Name="SCIENCE SECTOR 4" >
           <SourceRef>MAP.24</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L6</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
@@ -540,7 +540,7 @@
         </Level>
         <Level Id="25" Name="COLONY GROUND SECTOR 4" >
           <SourceRef>MAP.25</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L1</TileSetRef>
           <PropertySetRef>Props.Level1</PropertySetRef>
           <SpriteSetRefs>
@@ -550,7 +550,7 @@
         </Level>
         <Level Id="26" Name="ENGINEERING SECTOR 1" >
           <SourceRef>MAP.26</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
@@ -573,7 +573,7 @@
         </Level>
         <Level Id="27" Name="ENGINEERING SECTOR 2" >
           <SourceRef>MAP.27</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
@@ -582,7 +582,7 @@
         </Level>
         <Level Id="28" Name="ENGINEERING SECTOR 3" >
           <SourceRef>MAP.28</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
@@ -591,7 +591,7 @@
         </Level>
         <Level Id="29" Name="ENGINEERING SECTOR 4" >
           <SourceRef>MAP.29</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
@@ -600,7 +600,7 @@
         </Level>
         <Level Id="30" Name="CORRIDOR ZONE 1" >
           <SourceRef>MAP.30</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L4</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
@@ -609,7 +609,7 @@
         </Level>
         <Level Id="31" Name="CORRIDOR 2" >
           <SourceRef>MAP.31</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L4</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
@@ -618,7 +618,7 @@
         </Level>
         <Level Id="32" Name="CORRIDOR 3" >
           <SourceRef>MAP.32</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -627,7 +627,7 @@
         </Level>
         <Level Id="33" Name="CORRIDOR 4" >
           <SourceRef>MAP.33</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
@@ -636,7 +636,7 @@
         </Level>
         <Level Id="34" Name="CORRIDOR 5" >
           <SourceRef>MAP.34</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -645,7 +645,7 @@
         </Level>
         <Level Id="35" Name="CORRIDOR ZONE 6" >
           <SourceRef>MAP.35</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -654,7 +654,7 @@
         </Level>
         <Level Id="36" Name="CORRIDOR ZONE 7" >
           <SourceRef>MAP.36</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L4</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
@@ -663,7 +663,7 @@
         </Level>
         <Level Id="37" Name="CORRIDOR ZONE 8" >
           <SourceRef>MAP.37</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -672,7 +672,7 @@
         </Level>
         <Level Id="38" Name="CORRIDOR ZONE 9" >
           <SourceRef>MAP.38</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -681,7 +681,7 @@
         </Level>
         <Level Id="39" Name="CORRIDOR ZONE 10" >
           <SourceRef>MAP.39</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
@@ -690,7 +690,7 @@
         </Level>
         <Level Id="40" Name="CORRIDOR ZONE 11" >
           <SourceRef>MAP.40</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L4</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
@@ -699,7 +699,7 @@
         </Level>
         <Level Id="41" Name="CORRIDOR ZONE 12" >
           <SourceRef>MAP.41</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
@@ -708,7 +708,7 @@
         </Level>
         <Level Id="42" Name="CORRIDOR ZONE 13" >
           <SourceRef>MAP.42</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
@@ -717,7 +717,7 @@
         </Level>
         <Level Id="43" Name="CORRIDOR ZONE 14" >
           <SourceRef>MAP.43</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L7</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
@@ -726,7 +726,7 @@
         </Level>
         <Level Id="44" Name="CORRIDOR 15" >
           <SourceRef>MAP.44</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L7</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
@@ -735,12 +735,12 @@
         </Level>
         <Level Id="45" Name="CORRIDOR 16" >
           <SourceRef>MAP.45</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L3</TileSetRef>
         </Level>
         <Level Id="46" Name="CORRIDOR 17" >
           <SourceRef>MAP.46</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
@@ -749,7 +749,7 @@
         </Level>
         <Level Id="47" Name="MAIN TOWER LEVEL 1" >
           <SourceRef>MAP.47</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L8</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
@@ -772,7 +772,7 @@
         </Level>
         <Level Id="48" Name="MAIN TOWER LEVEL 2" >
           <SourceRef>MAP.48</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L8</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
@@ -781,7 +781,7 @@
         </Level>
         <Level Id="49" Name="MAIN TOWER LEVEL 3" >
           <SourceRef>MAP.49</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L8</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
@@ -790,7 +790,7 @@
         </Level>
         <Level Id="50" Name="MAIN TOWER LEVEL 4" >
           <SourceRef>MAP.50</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L8</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
@@ -799,7 +799,7 @@
         </Level>
         <Level Id="51" Name="MAIN TOWER LEVEL 5" >
           <SourceRef>MAP.51</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L8</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
@@ -808,7 +808,7 @@
         </Level>
         <Level Id="52" Name="TOWER LEVEL 6" >
           <SourceRef>MAP.52</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L8</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
@@ -817,7 +817,7 @@
         </Level>
         <Level Id="53" Name="TOWER LEVEL 7" >
           <SourceRef>MAP.53</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L8</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
@@ -826,7 +826,7 @@
         </Level>
         <Level Id="54" Name="Mission One(\?\?\?)" >
           <SourceRef>MAP.54</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L6</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
@@ -835,7 +835,7 @@
         </Level>
         <Level Id="55" Name="OUTER COLONY SECTOR 5" >
           <SourceRef>MAP.55</SourceRef>
-          <Format>ABTA_MAP</Format>
+          <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L1</TileSetRef>
           <PropertySetRef>Props.Level1</PropertySetRef>
           <SpriteSetRefs>

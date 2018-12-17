@@ -41,143 +41,157 @@
       <Items>
         <Image Name="LP01" Description="Alien Breed II: Horror Continues teaser" >
           <SourceRef>LP01</SourceRef>
-          <Format>ACBM_IMAGE</Format>
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >640</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >4</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
-          </Parameters>
+          <Format Name="ACBM_IMAGE" >
+            <Parameters>
+              <Parameter Name="WIDTH" Type="System.Int32" >640</Parameter>
+              <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >4</Parameter>
+              <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
+            </Parameters>
+          </Format>
         </Image>
         <Image Name="LP01B" Description="Superfrog teaser title" >
           <SourceRef>LP01B</SourceRef>
-          <Format>ACBM_IMAGE</Format>
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
-          </Parameters>
+          <Format Name="ACBM_IMAGE" >
+            <Parameters>
+              <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+              <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >6</Parameter>
+              <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
+            </Parameters>
+          </Format>
         </Image>
         <Image Name="LP02" Description="Superfrog teaser screenshot 1" >
           <SourceRef>LP02</SourceRef>
-          <Format>ACBM_IMAGE</Format>
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
-          </Parameters>
+          <Format Name="ACBM_IMAGE" >
+            <Parameters>
+              <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+              <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+              <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
+            </Parameters>
+          </Format>
         </Image>
         <Image Name="LP03" Description="Superfrog teaser screenshot 2" >
           <SourceRef>LP03</SourceRef>
-          <Format>ACBM_IMAGE</Format>
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
-          </Parameters>
+          <Format Name="ACBM_IMAGE" >
+            <Parameters>
+              <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+              <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+              <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
+            </Parameters>
+          </Format>
         </Image>
         <Image Name="LP04" Description="Superfrog teaser screenshot 3" >
           <SourceRef>LP04</SourceRef>
-          <Format>ACBM_IMAGE</Format>
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
-          </Parameters>
+          <Format Name="ACBM_IMAGE" >
+            <Parameters>
+              <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+              <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+              <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
+            </Parameters>  
+          </Format>
         </Image>
         <Image Name="LP05" Description="Superfrog teaser screenshot 4" >
           <SourceRef>LP05</SourceRef>
-          <Format>ACBM_IMAGE</Format>
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
-          </Parameters>
+          <Format Name="ACBM_IMAGE" >
+            <Parameters>
+              <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+              <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+              <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
+            </Parameters>     
+          </Format>
         </Image>
         <Image Name="LP06" Description="Superfrog teaser screenshot 5" >
           <SourceRef>LP06</SourceRef>
-          <Format>ACBM_IMAGE</Format>
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
-          </Parameters>
+          <Format Name="ACBM_IMAGE" >
+            <Parameters>
+              <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+              <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+              <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
+            </Parameters>      
+          </Format>
         </Image>
         <Image Name="LP07" Description="Superfrog teaser screenshot 6" >
           <SourceRef>LP07</SourceRef>
-          <Format>ACBM_IMAGE</Format>
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
-          </Parameters>
+          <Format Name="ACBM_IMAGE" >
+            <Parameters>
+              <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+              <Parameter Name="HEIGHT" Type="System.Int32" >256</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+              <Parameter Name="PALETTE_MODE" Type="System.String" >16BIT</Parameter>
+            </Parameters>  
+          </Format>
         </Image>
         <Image Name="L0AN" Description="Level 0 animations" >
           <SourceRef>L0AN</SourceRef>
-          <Format>ACBM_IMAGE</Format>
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >144</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
+          <Format Name="ACBM_IMAGE" >
+            <Parameters>
+              <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+              <Parameter Name="HEIGHT" Type="System.Int32" >144</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+              <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+            </Parameters>
+          </Format>
         </Image>
         <Image Name="L1AN" Description="Level 1 animations" >
           <SourceRef>L1AN</SourceRef>
-          <Format>ACBM_IMAGE</Format>
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >144</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
+          <Format Name="ACBM_IMAGE" >
+            <Parameters>
+              <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+              <Parameter Name="HEIGHT" Type="System.Int32" >144</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+              <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+            </Parameters>        
+          </Format>
         </Image>
         <Image Name="L2AN" Description="Level 2 animations" >
           <SourceRef>L2AN</SourceRef>
-          <Format>ACBM_IMAGE</Format>
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >144</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
+          <Format Name="ACBM_IMAGE" >
+            <Parameters>
+              <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+              <Parameter Name="HEIGHT" Type="System.Int32" >144</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+              <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+            </Parameters>     
+          </Format>
         </Image>
         <Image Name="L3AN" Description="Level 3 animations" >
           <SourceRef>L3AN</SourceRef>
-          <Format>ACBM_IMAGE</Format>
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >144</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
+          <Format Name="ACBM_IMAGE" >
+            <Parameters>
+              <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+              <Parameter Name="HEIGHT" Type="System.Int32" >144</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+              <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+            </Parameters>       
+          </Format>
         </Image>
         <Image Name="L4AN" Description="Level 4 animations" >
           <SourceRef>L4AN</SourceRef>
-          <Format>ACBM_IMAGE</Format>
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >144</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
+          <Format Name="ACBM_IMAGE" >
+            <Parameters>
+              <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+              <Parameter Name="HEIGHT" Type="System.Int32" >144</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+              <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+            </Parameters>      
+          </Format>
         </Image>
         <Image Name="L5AN" Description="Level 5 animations" >
           <SourceRef>L5AN</SourceRef>
-          <Format>ACBM_IMAGE</Format>
-          <Parameters>
-            <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
-            <Parameter Name="HEIGHT" Type="System.Int32" >144</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
-            <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
-          </Parameters>
+          <Format Name="ACBM_IMAGE" >
+            <Parameters>
+              <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
+              <Parameter Name="HEIGHT" Type="System.Int32" >144</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+              <Parameter Name="PALETTE_MODE" Type="System.String" >NONE</Parameter>
+            </Parameters>        
+          </Format>
         </Image>
       </Items>
     </Images>
@@ -185,59 +199,77 @@
       <Items>
         <TileSet Name="TileSets.LA" >
           <SourceRef>LABM</SourceRef>
-          <Format>ACBM_TILE_SET</Format>
-          <Parameters>
-            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
-          </Parameters>
+          <Format Name="ACBM_TILE_SET" >
+            <Parameters>
+              <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+            </Parameters>
+          </Format>
         </TileSet>
         <TileSet Name="TileSets.LB" >
           <SourceRef>LBBM</SourceRef>
-          <Format>ACBM_TILE_SET</Format>
-          <Parameters>
-            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
-          </Parameters>
+          <Format Name="ACBM_TILE_SET" >
+            <Parameters>
+              <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+            </Parameters>
+          </Format>
         </TileSet>
         <TileSet Name="TileSets.LC" >
           <SourceRef>LCBM</SourceRef>
-          <Format>ACBM_TILE_SET</Format>
-          <Parameters>
-            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
-          </Parameters>
+          <Format Name="ACBM_TILE_SET" >
+            <Parameters>
+              <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+            </Parameters>
+          </Format>
         </TileSet>
         <TileSet Name="TileSets.LD" >
           <SourceRef>LDBM</SourceRef>
-          <Format>ACBM_TILE_SET</Format>
+          <Format Name="ACBM_TILE_SET" >
           <Parameters>
             <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
             <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
           </Parameters>
+          </Format>
         </TileSet>
         <TileSet Name="TileSets.LE" >
           <SourceRef>LEBM</SourceRef>
-          <Format>ACBM_TILE_SET</Format>
-          <Parameters>
-            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
-          </Parameters>
+          <Format Name="ACBM_TILE_SET" >
+            <Parameters>
+              <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+            </Parameters>
+          </Format>
         </TileSet>
         <TileSet Name="TileSets.LF" >
           <SourceRef>LFBM</SourceRef>
-          <Format>ACBM_TILE_SET</Format>
-          <Parameters>
-            <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
-            <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
-          </Parameters>
+          <Format Name="ACBM_TILE_SET" >
+            <Parameters>
+              <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32" >5</Parameter>
+            </Parameters>
+          </Format>
         </TileSet>
       </Items>
     </TileSets>
+    <Palettes>
+      <Items>
+        <Palette Name="Palettes.L0" >
+          <SourceRef>PARTF</SourceRef>
+          <Format Name="PALETTE_32_BIT" >
+            <Parameters>
+              <Parameter Name="DATA_START" Type="System.Int32" >22958</Parameter>
+            </Parameters>
+          </Format>
+        </Palette>
+      </Items>
+    </Palettes>
     <Levels>
       <Items>
         <Level Id="0" Name="L0" >
           <SourceRef>L0MA</SourceRef>
-          <Format>ABSE_MAP</Format>
+          <Format Name="ABSE_MAP" ></Format>
           <TileSetRef>TileSets.LA</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetRefs>
@@ -245,7 +277,7 @@
         </Level>
         <Level Id="1" Name="L1" >
           <SourceRef>L1MA</SourceRef>
-          <Format>ABSE_MAP</Format>
+          <Format Name="ABSE_MAP" ></Format>
           <TileSetRef>TileSets.LE</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetRefs>
@@ -253,7 +285,7 @@
         </Level>
         <Level Id="2" Name="L2" >
           <SourceRef>L2MA</SourceRef>
-          <Format>ABSE_MAP</Format>
+          <Format Name="ABSE_MAP" ></Format>
           <TileSetRef>TileSets.LF</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetRefs>
@@ -261,7 +293,7 @@
         </Level>
         <Level Id="3" Name="L3" >
           <SourceRef>L3MA</SourceRef>
-          <Format>ABSE_MAP</Format>
+          <Format Name="ABSE_MAP" ></Format>
           <TileSetRef>TileSets.LB</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetRefs>

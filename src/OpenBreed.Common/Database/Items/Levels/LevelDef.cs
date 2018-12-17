@@ -14,10 +14,7 @@ namespace OpenBreed.Common.Database.Items.Levels
         public int Id { get; set; }
 
         public string SourceRef { get; set; }
-        public string Format { get; set; }
-        [XmlArrayItem(ElementName = "Parameter")]
-        public readonly List<SourceParameterDef> Parameters = new List<SourceParameterDef>();
-
+        public FormatDef Format { get; set; }
 
         public string TileSetRef { get; set; }
         public string PropertySetRef { get; set; }
