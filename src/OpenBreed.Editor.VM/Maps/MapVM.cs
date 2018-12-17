@@ -190,17 +190,11 @@ namespace OpenBreed.Editor.VM.Maps
             if (sourceDef == null)
                 throw new Exception("No Source definition found with name: " + levelDef.SourceRef);
 
-            var format = Root.FormatMan.GetFormatMan(levelDef.Format);
-            if (format == null)
-                throw new Exception($"Unknown format {levelDef.Format}");
-
             var source = Root.SourceMan.GetSource(sourceDef);
             if (source == null)
                 throw new Exception("TileSet source error: " + sourceDef);
 
-            var parameters = Root.FormatMan.GetParameters(levelDef.Parameters);
-
-            var model = source.Load(format, parameters) as MapModel;
+            var model = Root.FormatMan.Load(source, levelDef.Format) as MapModel;
             Source = source;
 
             Properties.Load(model);

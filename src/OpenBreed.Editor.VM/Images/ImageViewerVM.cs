@@ -88,17 +88,11 @@ namespace OpenBreed.Editor.VM.Images
             if (sourceDef == null)
                 throw new Exception("No Source definition found with name: " + imageDef.SourceRef);
 
-            var format = Root.FormatMan.GetFormatMan(imageDef.Format);
-            if (format == null)
-                throw new Exception($"Unknown format {imageDef.Format}");
-
             var source = Root.SourceMan.GetSource(sourceDef);
             if (source == null)
                 throw new Exception("Image source error: " + sourceDef);
 
-            var parameters = Root.FormatMan.GetParameters(imageDef.Parameters);
-
-            Image = source.Load(format, parameters) as Image;
+            Image = Root.FormatMan.Load(source, imageDef.Format) as Image;
             Source = source;
         }
 

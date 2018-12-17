@@ -87,17 +87,11 @@ namespace OpenBreed.Editor.VM.Tiles
             if (sourceDef == null)
                 throw new Exception("No Source definition found with name: " + tileSetDef.SourceRef);
 
-            var format = Root.FormatMan.GetFormatMan(tileSetDef.Format);
-            if (format == null)
-                throw new Exception($"Unknown format {tileSetDef.Format}");
-
             var source = Root.SourceMan.GetSource(sourceDef);
             if (source == null)
                 throw new Exception("TileSet source error: " + sourceDef);
 
-            var parameters = Root.FormatMan.GetParameters(tileSetDef.Parameters);
-
-            var model = source.Load(format, parameters) as TileSetModel;
+            var model = Root.FormatMan.Load(source, tileSetDef.Format) as TileSetModel;
 
             Source = source;
             Name = source.Name;

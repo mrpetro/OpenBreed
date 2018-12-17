@@ -110,18 +110,11 @@ namespace OpenBreed.Editor.VM.Sprites
             if (sourceDef == null)
                 throw new Exception("No Source definition found with name: " + spriteSetDef.SourceRef);
 
-            var format = Root.FormatMan.GetFormatMan(spriteSetDef.Format);
-            if (format == null)
-                throw new Exception($"Unknown format {spriteSetDef.Format}");
-
             var source = Root.SourceMan.GetSource(sourceDef);
             if (source == null)
                 throw new Exception("SpriteSet source error: " + sourceDef);
 
-            var parameters = Root.FormatMan.GetParameters(spriteSetDef.Parameters);
-
-            var model = source.Load(format, parameters) as SpriteSetModel;
-
+            var model = Root.FormatMan.Load(source, spriteSetDef.Format) as SpriteSetModel;
             Source = source;
 
             foreach (var sprite in model.Sprites)
