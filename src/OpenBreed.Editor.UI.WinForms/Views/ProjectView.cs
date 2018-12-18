@@ -150,6 +150,11 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             throw new NotImplementedException();
         }
 
+        internal void ShowPaletteEditorView()
+        {
+            throw new NotImplementedException();
+        }
+
         internal void ShowTileSetEditorView()
         {
             throw new NotImplementedException();

@@ -200,8 +200,12 @@ namespace OpenBreed.Editor.VM.Maps
             Properties.Load(model);
             Body.Load(model);
 
-            Root.Palettes.Restore(model.Properties.Palettes);
-            Root.Palettes.CurrentItem = Root.Palettes.Items.FirstOrDefault();
+            if (!levelDef.PaletteRefs.Any())
+            {
+                Root.PaletteViewer.Restore(model.Properties.Palettes);
+                Root.PaletteViewer.CurrentItem = Root.PaletteViewer.Items.FirstOrDefault();
+            }
+
             Root.MapBodyViewer.CurrentMapBody = Body;
         }
 

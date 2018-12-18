@@ -29,6 +29,8 @@ using OpenBreed.Common.Database.Items.Tiles;
 using OpenBreed.Common.Database.Tables.Tiles;
 using OpenBreed.Common.Database.Items.Sprites;
 using OpenBreed.Common.Database.Tables.Sprites;
+using OpenBreed.Common.Database.Items.Palettes;
+using OpenBreed.Common.Database.Tables.Palettes;
 
 namespace OpenBreed.Editor.VM.Database
 {
@@ -84,6 +86,16 @@ namespace OpenBreed.Editor.VM.Database
         #endregion Public Properties
 
         #region Public Methods
+
+        public PaletteDef GetPaletteDef(string paletteName)
+        {
+            var paletteDef = _databaseDef.Tables.OfType<DatabasePaletteTableDef>().FirstOrDefault().Items.FirstOrDefault(item => item.Name == paletteName);
+
+            if (paletteDef == null)
+                throw new InvalidOperationException("Palette '" + paletteName + "' not found!");
+
+            return paletteDef;
+        }
 
         public LevelDef GetLevelDef(string levelName)
         {
@@ -153,7 +165,9 @@ namespace OpenBreed.Editor.VM.Database
                 return new DatabaseTileSetItemVM(this);
             else if (itemDef is SpriteSetDef)
                 return new DatabaseSpriteSetItemVM(this);
-            if (itemDef is DatabaseTableDef)
+            else if (itemDef is PaletteDef)
+                return new DatabasePaletteItemVM(this);
+            else if (itemDef is DatabaseTableDef)
                 return CreateTable((DatabaseTableDef)itemDef);
             else
                 throw new NotImplementedException(itemDef.ToString());
@@ -173,6 +187,8 @@ namespace OpenBreed.Editor.VM.Database
                 return new DatabaseTileSetTableVM(this);
             else if (tableDef is DatabaseSpriteSetTableDef)
                 return new DatabaseSpriteSetTableVM(this);
+            else if (tableDef is DatabasePaletteTableDef)
+                return new DatabasePaletteTableVM(this);
             else
                 throw new NotImplementedException(tableDef.ToString());
         }

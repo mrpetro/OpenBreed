@@ -68,7 +68,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
             foreach (var palette in palettes)
             {
-                var paletteVM = new PaletteVM();
+                var paletteVM = new PaletteVM(Root);
                 paletteVM.Restore(palette);
                 Items.Add(paletteVM);
             }

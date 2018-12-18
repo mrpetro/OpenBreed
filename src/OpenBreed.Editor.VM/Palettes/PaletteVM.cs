@@ -7,11 +7,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Common.Database.Items.Palettes;
 
 namespace OpenBreed.Editor.VM.Palettes
 {
     public class PaletteVM : BaseViewModel
     {
+        public EditorVM Root { get; }
 
         #region Private Fields
 
@@ -21,11 +23,33 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Public Constructors
 
-        public PaletteVM()
+        public PaletteVM(EditorVM root)
         {
+            Root = root;
+
             Colors = new BindingList<Color>();
             Colors.ListChanged += (s, a) => OnPropertyChanged(nameof(Colors));
         }
+
+        internal void Load(PaletteDef paletteDef)
+        {
+            var sourceDef = Root.Database.GetSourceDef(paletteDef.SourceRef);
+            if (sourceDef == null)
+                throw new Exception("No Source definition found with name: " + paletteDef.SourceRef);
+
+            var source = Root.SourceMan.GetSource(sourceDef);
+            if (source == null)
+                throw new Exception("SpriteSet source error: " + sourceDef);
+
+            var model = Root.FormatMan.Load(source, paletteDef.Format) as PaletteModel;
+            Restore(model);
+
+            //NOTE: quick hack to get the result
+            Root.PaletteViewer.Restore(new List<PaletteModel>() { model });
+
+            Name = paletteDef.Name;
+        }
+
 
         #endregion Public Constructors
 

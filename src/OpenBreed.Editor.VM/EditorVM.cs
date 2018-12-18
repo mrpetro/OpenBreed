@@ -27,6 +27,7 @@ using OpenBreed.Common.Database.Items.Props;
 using OpenBreed.Common.Database.Items.Levels;
 using OpenBreed.Common.Database.Items.Tiles;
 using OpenBreed.Common.Database.Items.Sprites;
+using OpenBreed.Common.Database.Items.Palettes;
 
 namespace OpenBreed.Editor.VM
 {
@@ -57,7 +58,6 @@ namespace OpenBreed.Editor.VM
             Settings = new SettingsMan();
             ToolsMan = new ToolsMan();
             TileSetSelector = new TileSetSelectorVM(this);
-            Palettes = new PalettesVM(this);
 
             SpriteSets = new BindingList<SpriteSetVM>();
             SpriteSets.ListChanged += (s, e) => OnPropertyChanged(nameof(SpriteSets));
@@ -65,12 +65,16 @@ namespace OpenBreed.Editor.VM
             TileSets = new BindingList<TileSetVM>();
             TileSets.ListChanged += (s, e) => OnPropertyChanged(nameof(TileSets));
 
+            Palettes = new BindingList<PaletteVM>();
+            Palettes.ListChanged += (s, e) => OnPropertyChanged(nameof(Palettes));
+
             PropSelector = new PropSelectorVM(this);
             PropSetEditor = new PropSetEditorVM(this);
             DatabaseViewer = new DatabaseViewerVM(this);
             TileSetViewer = new TileSetViewerVM(this);
             SpriteSetViewer = new SpriteSetSelectorVM(this);
             SpriteViewer = new SpriteViewerVM(this);
+            PaletteViewer = new PalettesVM(this);
             ImageViewer = new ImageViewerVM(this);
             LevelEditor = new LevelEditorVM(this);
             Map = new MapVM(this);
@@ -86,6 +90,7 @@ namespace OpenBreed.Editor.VM
             FormatMan.RegisterFormat("ABTASPR", new ABTASPRFormat());
             FormatMan.RegisterFormat("ACBM_TILE_SET", new ACBMTileSetFormat());
             FormatMan.RegisterFormat("ACBM_IMAGE", new ACBMImageFormat());
+            FormatMan.RegisterFormat("PALETTE", new PaletteFormat());
         }
 
         #endregion Public Constructors
@@ -113,7 +118,7 @@ namespace OpenBreed.Editor.VM
 
         public MapBodyEditorVM MapBodyViewer { get; private set; }
 
-        public PalettesVM Palettes { get; private set; }
+        public PalettesVM PaletteViewer { get; private set; }
 
         public PropSetVM PropSet
         {
@@ -127,6 +132,8 @@ namespace OpenBreed.Editor.VM
         public SourceMan SourceMan { get; }
 
         public BindingList<SpriteSetVM> SpriteSets { get; private set; }
+
+        public BindingList<PaletteVM> Palettes { get; private set; }
 
         public SpriteSetSelectorVM SpriteSetViewer { get; set; }
 
@@ -155,6 +162,7 @@ namespace OpenBreed.Editor.VM
         {
             TileSets.Clear();
             SpriteSets.Clear();
+            Palettes.Clear();
 
             if (levelDef.TileSetRef != null)
             {
@@ -167,11 +175,11 @@ namespace OpenBreed.Editor.VM
             }
 
 
-            foreach (var spriteSetSourceRef in levelDef.SpriteSetRefs)
+            foreach (var spriteSetRef in levelDef.SpriteSetRefs)
             {
-                var spriteSetDef = Database.GetSpriteSetDef(spriteSetSourceRef);
+                var spriteSetDef = Database.GetSpriteSetDef(spriteSetRef);
                 if (spriteSetDef == null)
-                    throw new Exception($"No Sprite set definition with name '{spriteSetSourceRef}' found!");
+                    throw new Exception($"No Sprite set definition with name '{spriteSetRef}' found!");
 
                 AddSpriteSet(spriteSetDef);
             }
@@ -190,6 +198,17 @@ namespace OpenBreed.Editor.VM
                 LoadPropSet(propSetDef);
             }
 
+            foreach (var paletteRef in levelDef.PaletteRefs)
+            {
+                var paletteDef = Database.GetPaletteDef(paletteRef);
+                if (paletteDef == null)
+                    throw new Exception($"No Palette definition with name '{paletteRef}' found!");
+
+                AddPalette(paletteDef);
+
+                PaletteViewer.CurrentItem = PaletteViewer.Items.FirstOrDefault();
+            }
+
             var map = CreateMap();
             map.Load(levelDef);
             Map = map;
@@ -202,6 +221,12 @@ namespace OpenBreed.Editor.VM
             PropSet = propSet;
         }
 
+        public void AddPalette(PaletteDef paletteDef)
+        {
+            var newPalette = CreatePalette();
+            newPalette.Load(paletteDef);
+            Palettes.Add(newPalette);
+        }
 
         public void AddSpriteSet(SpriteSetDef spriteSetDef)
         {
@@ -230,6 +255,11 @@ namespace OpenBreed.Editor.VM
         public TileSetVM CreateTileSet()
         {
             return new TileSetVM(this);
+        }
+
+        public PaletteVM CreatePalette()
+        {
+            return new PaletteVM(this);
         }
 
         public PropSetVM CreatePropSet()

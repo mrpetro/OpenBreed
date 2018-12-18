@@ -91,6 +91,8 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
                 _projectView.ShowTileSetEditorView();
             else if (databaseItemVM is DatabaseSpriteSetItemVM)
                 _projectView.ShowSpriteSetEditorView();
+            else if (databaseItemVM is DatabasePaletteItemVM)
+                _projectView.ShowPaletteEditorView();
             else
                 throw new NotImplementedException();
         }
