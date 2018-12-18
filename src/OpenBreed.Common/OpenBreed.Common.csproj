@@ -49,10 +49,12 @@
     <Compile Include="Configs\IConfigCtrl.cs" />
     <Compile Include="Database\DatabaseItemDef.cs" />
     <Compile Include="Database\FormatDef.cs" />
+    <Compile Include="Database\Items\Palettes\PaletteDef.cs" />
     <Compile Include="Database\Items\Sprites\SpriteSetDef.cs" />
     <Compile Include="Database\Items\Tiles\TileSetDef.cs" />
     <Compile Include="Database\Tables\Images\DatabaseImageTableDef.cs" />
     <Compile Include="Database\Tables\Levels\DatabaseLevelTableDef.cs" />
+    <Compile Include="Database\Tables\Palettes\DatabasePaletteTableDef.cs" />
     <Compile Include="Database\Tables\Props\DatabasePropertySetTableDef.cs" />
     <Compile Include="Database\Tables\Sources\DatabaseSourceTableDef.cs" />
     <Compile Include="Database\Tables\DatabaseTableDef.cs" />
@@ -71,6 +73,7 @@
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="FileMan.cs" />
     <Compile Include="Formats\DataFormatMan.cs" />
+    <Compile Include="Formats\PaletteFormat.cs" />
     <Compile Include="Helpers\MathHelper.cs" />
     <Compile Include="Images\Builders\ImageBuilder.cs" />
     <Compile Include="Images\Readers\ACBM\ACBMImageReader.cs" />
@@ -96,6 +99,7 @@
     <Compile Include="Maps\MapPropertiesModel.cs" />
     <Compile Include="Palettes\PaletteModel.cs" />
     <Compile Include="Palettes\PalettesModel.cs" />
+    <Compile Include="Palettes\Readers\PaletteReader.cs" />
     <Compile Include="ProgramTools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Database\Items\Props\PropertyDef.cs" />

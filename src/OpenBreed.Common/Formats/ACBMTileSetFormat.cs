@@ -18,8 +18,8 @@ namespace OpenBreed.Common.Formats
 
         public object Load(BaseSource source, Dictionary<string, object> parameters = null)
         {
-            int tileSize = (int)parameters["TILE_SIZE"];
-            int bitPlanesNo = (int)parameters["BIT_PLANES_NO"];
+            var tileSize = (int)parameters["TILE_SIZE"];
+            var bitPlanesNo = (int)parameters["BIT_PLANES_NO"];
 
             //Remember to set source stream to begining
             source.Stream.Seek(0, SeekOrigin.Begin);

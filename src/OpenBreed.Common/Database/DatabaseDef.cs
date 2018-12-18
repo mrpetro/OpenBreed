@@ -16,6 +16,7 @@ using OpenBreed.Common.Database.Tables.Levels;
 using OpenBreed.Common.Database.Tables.Props;
 using OpenBreed.Common.Database.Tables.Tiles;
 using OpenBreed.Common.Database.Tables.Sprites;
+using OpenBreed.Common.Database.Tables.Palettes;
 
 namespace OpenBreed.Common.Database
 {
@@ -30,6 +31,7 @@ namespace OpenBreed.Common.Database
         [XmlArray("Tables"),
         XmlArrayItem("Sources", typeof(DatabaseSourceTableDef)),
         XmlArrayItem("Levels", typeof(DatabaseLevelTableDef)),
+        XmlArrayItem("Palettes", typeof(DatabasePaletteTableDef)),
         XmlArrayItem("PropertySets", typeof(DatabasePropertySetTableDef)),
         XmlArrayItem("TileSets", typeof(DatabaseTileSetTableDef)),
         XmlArrayItem("SpriteSets", typeof(DatabaseSpriteSetTableDef)),

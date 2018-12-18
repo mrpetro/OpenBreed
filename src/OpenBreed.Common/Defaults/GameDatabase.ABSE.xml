@@ -35,6 +35,7 @@
         <DirectoryFileSourceDef Name="L3AN" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
         <DirectoryFileSourceDef Name="L4AN" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
         <DirectoryFileSourceDef Name="L5AN" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
+        <DirectoryFileSourceDef Name="PARTF" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
       </Items>
     </Sources>
     <Images>
@@ -255,11 +256,103 @@
     </TileSets>
     <Palettes>
       <Items>
-        <Palette Name="Palettes.L0" >
+        <Palette Name="Palettes.LA" >
           <SourceRef>PARTF</SourceRef>
-          <Format Name="PALETTE_32_BIT" >
+          <Format Name="PALETTE" >
             <Parameters>
-              <Parameter Name="DATA_START" Type="System.Int32" >22958</Parameter>
+              <Parameter Name="MODE" Type="System.String" >16BIT</Parameter>
+              <Parameter Name="COLORS_NO" Type="System.Int32" >32</Parameter>
+              <Parameter Name="DATA_START" Type="System.Int32" >141656</Parameter>
+            </Parameters>
+          </Format>
+        </Palette>
+        <Palette Name="Palettes.LE" >
+          <SourceRef>PARTF</SourceRef>
+          <Format Name="PALETTE" >
+            <Parameters>
+              <Parameter Name="MODE" Type="System.String" >16BIT</Parameter>
+              <Parameter Name="COLORS_NO" Type="System.Int32" >32</Parameter>
+              <Parameter Name="DATA_START" Type="System.Int32" >141720</Parameter>
+            </Parameters>
+          </Format>
+        </Palette>
+        <Palette Name="Palettes.LF" >
+          <SourceRef>PARTF</SourceRef>
+          <Format Name="PALETTE" >
+            <Parameters>
+              <Parameter Name="MODE" Type="System.String" >16BIT</Parameter>
+              <Parameter Name="COLORS_NO" Type="System.Int32" >32</Parameter>
+              <Parameter Name="DATA_START" Type="System.Int32" >141784</Parameter>
+            </Parameters>
+          </Format>
+        </Palette>
+        <Palette Name="Palettes.LC" >
+          <SourceRef>PARTF</SourceRef>
+          <Format Name="PALETTE" >
+            <Parameters>
+              <Parameter Name="MODE" Type="System.String" >16BIT</Parameter>
+              <Parameter Name="COLORS_NO" Type="System.Int32" >32</Parameter>
+              <Parameter Name="DATA_START" Type="System.Int32" >141848</Parameter>
+            </Parameters>
+          </Format>
+        </Palette>
+        <Palette Name="Palettes.LB" >
+          <SourceRef>PARTF</SourceRef>
+          <Format Name="PALETTE" >
+            <Parameters>
+              <Parameter Name="MODE" Type="System.String" >16BIT</Parameter>
+              <Parameter Name="COLORS_NO" Type="System.Int32" >32</Parameter>
+              <Parameter Name="DATA_START" Type="System.Int32" >141912</Parameter>
+            </Parameters>
+          </Format>
+        </Palette>
+        <Palette Name="Palettes.LD" >
+          <SourceRef>PARTF</SourceRef>
+          <Format Name="PALETTE" >
+            <Parameters>
+              <Parameter Name="MODE" Type="System.String" >16BIT</Parameter>
+              <Parameter Name="COLORS_NO" Type="System.Int32" >32</Parameter>
+              <Parameter Name="DATA_START" Type="System.Int32" >141976</Parameter>
+            </Parameters>
+          </Format>
+        </Palette>
+        <Palette Name="Palettes.LE" >
+          <SourceRef>PARTF</SourceRef>
+          <Format Name="PALETTE" >
+            <Parameters>
+              <Parameter Name="MODE" Type="System.String" >16BIT</Parameter>
+              <Parameter Name="COLORS_NO" Type="System.Int32" >32</Parameter>
+              <Parameter Name="DATA_START" Type="System.Int32" >142040</Parameter>
+            </Parameters>
+          </Format>
+        </Palette>
+        <Palette Name="Palettes.L7" >
+          <SourceRef>PARTF</SourceRef>
+          <Format Name="PALETTE" >
+            <Parameters>
+              <Parameter Name="MODE" Type="System.String" >16BIT</Parameter>
+              <Parameter Name="COLORS_NO" Type="System.Int32" >32</Parameter>
+              <Parameter Name="DATA_START" Type="System.Int32" >142104</Parameter>
+            </Parameters>
+          </Format>
+        </Palette>
+        <Palette Name="Palettes.L8" >
+          <SourceRef>PARTF</SourceRef>
+          <Format Name="PALETTE" >
+            <Parameters>
+              <Parameter Name="MODE" Type="System.String" >16BIT</Parameter>
+              <Parameter Name="COLORS_NO" Type="System.Int32" >32</Parameter>
+              <Parameter Name="DATA_START" Type="System.Int32" >142168</Parameter>
+            </Parameters>
+          </Format>
+        </Palette>
+        <Palette Name="Palettes.L9" >
+          <SourceRef>PARTF</SourceRef>
+          <Format Name="PALETTE" >
+            <Parameters>
+              <Parameter Name="MODE" Type="System.String" >16BIT</Parameter>
+              <Parameter Name="COLORS_NO" Type="System.Int32" >32</Parameter>
+              <Parameter Name="DATA_START" Type="System.Int32" >142232</Parameter>
             </Parameters>
           </Format>
         </Palette>
@@ -274,6 +367,9 @@
           <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetRefs>
           </SpriteSetRefs>
+          <PaletteRefs>
+            <PaletteRef>Palettes.LA</PaletteRef>
+          </PaletteRefs>
         </Level>
         <Level Id="1" Name="L1" >
           <SourceRef>L1MA</SourceRef>
@@ -282,6 +378,9 @@
           <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetRefs>
           </SpriteSetRefs>
+          <PaletteRefs>
+            <PaletteRef>Palettes.LE</PaletteRef>
+          </PaletteRefs>
         </Level>
         <Level Id="2" Name="L2" >
           <SourceRef>L2MA</SourceRef>
@@ -290,14 +389,108 @@
           <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetRefs>
           </SpriteSetRefs>
+          <PaletteRefs>
+            <PaletteRef>Palettes.LF</PaletteRef>
+          </PaletteRefs>
         </Level>
         <Level Id="3" Name="L3" >
           <SourceRef>L3MA</SourceRef>
+          <Format Name="ABSE_MAP" ></Format>
+          <TileSetRef>TileSets.LC</TileSetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
+          <PaletteRefs>
+            <PaletteRef>Palettes.LC</PaletteRef>
+          </PaletteRefs>
+        </Level>
+        <Level Id="4" Name="L4" >
+          <SourceRef>L4MA</SourceRef>
           <Format Name="ABSE_MAP" ></Format>
           <TileSetRef>TileSets.LB</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
           <SpriteSetRefs>
           </SpriteSetRefs>
+          <PaletteRefs>
+            <PaletteRef>Palettes.LB</PaletteRef>
+          </PaletteRefs>
+        </Level>
+        <Level Id="5" Name="L5" >
+          <SourceRef>L5MA</SourceRef>
+          <Format Name="ABSE_MAP" ></Format>
+          <TileSetRef>TileSets.LB</TileSetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
+          <PaletteRefs>
+            <PaletteRef>Palettes.LB</PaletteRef>
+          </PaletteRefs>
+        </Level>
+        <Level Id="6" Name="L6" >
+          <SourceRef>L6MA</SourceRef>
+          <Format Name="ABSE_MAP" ></Format>
+          <TileSetRef>TileSets.LC</TileSetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
+          <PaletteRefs>
+            <PaletteRef>Palettes.LC</PaletteRef>
+          </PaletteRefs>
+        </Level>
+        <Level Id="7" Name="L7" >
+          <SourceRef>L7MA</SourceRef>
+          <Format Name="ABSE_MAP" ></Format>
+          <TileSetRef>TileSets.LD</TileSetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
+          <PaletteRefs>
+            <PaletteRef>Palettes.LD</PaletteRef>
+          </PaletteRefs>
+        </Level>
+        <Level Id="8" Name="L8" >
+          <SourceRef>L8MA</SourceRef>
+          <Format Name="ABSE_MAP" ></Format>
+          <TileSetRef>TileSets.LD</TileSetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
+          <PaletteRefs>
+            <PaletteRef>Palettes.LD</PaletteRef>
+          </PaletteRefs>
+        </Level>
+        <Level Id="9" Name="L9" >
+          <SourceRef>L9MA</SourceRef>
+          <Format Name="ABSE_MAP" ></Format>
+          <TileSetRef>TileSets.LD</TileSetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
+          <PaletteRefs>
+            <PaletteRef>Palettes.LD</PaletteRef>
+          </PaletteRefs>
+        </Level>
+        <Level Id="10" Name="LA" >
+          <SourceRef>LAMA</SourceRef>
+          <Format Name="ABSE_MAP" ></Format>
+          <TileSetRef>TileSets.LE</TileSetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
+          <PaletteRefs>
+            <PaletteRef>Palettes.LE</PaletteRef>
+          </PaletteRefs>
+        </Level>
+        <Level Id="11" Name="LB" >
+          <SourceRef>LBMA</SourceRef>
+          <Format Name="ABSE_MAP" ></Format>
+          <TileSetRef>TileSets.LE</TileSetRef>
+          <PropertySetRef>Props.Default</PropertySetRef>
+          <SpriteSetRefs>
+          </SpriteSetRefs>
+          <PaletteRefs>
+            <PaletteRef>Palettes.LE</PaletteRef>
+          </PaletteRefs>
         </Level>
       </Items>
     </Levels>

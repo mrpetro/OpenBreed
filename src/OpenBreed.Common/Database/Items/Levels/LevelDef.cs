@@ -18,8 +18,14 @@ namespace OpenBreed.Common.Database.Items.Levels
 
         public string TileSetRef { get; set; }
         public string PropertySetRef { get; set; }
+
         [XmlArray("SpriteSetRefs"),
         XmlArrayItem("SpriteSetRef", typeof(string))]
-        public List<string> SpriteSetRefs { get; set; }
+        public List<string> SpriteSetRefs { get; } = new List<string>();
+
+        [XmlArray("PaletteRefs"),
+        XmlArrayItem("PaletteRef", typeof(string))]
+        public List<string> PaletteRefs { get; } = new List<string>();
+
     }
 }
