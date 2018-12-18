@@ -30,8 +30,8 @@ Create fully functional map editor for AB games with parallel thinking about ope
  - Possibility to view some images used in game with original palette
  
 **ABSE**
- - Possibility to view some of maps (currently without original palette)
- - Possibility to view tile sets associated with maps (currently without original palette)
+ - Possibility to view maps with their color palettes tiles and properties
+ - Possibility to view tile sets associated with maps
  - Possibility to view some images used in game with original palette
  
  ## Development status
