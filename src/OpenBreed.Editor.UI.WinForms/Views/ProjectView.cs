@@ -40,7 +40,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         private bool _saveLayout = true;
         private MapBodyEditorView _mapBodyView = new MapBodyEditorView();
-        //private MapPalettesView _mapPalettesView = new MapPalettesView();
+        private MapPalettesView _mapPalettesView = new MapPalettesView();
         //private MapPropertiesView _mapPropertiesView = new MapPropertiesView();
         private PropSelectorView _propSetView = new PropSelectorView();
         private PropSetEditorView _propSetEditorView = new PropSetEditorView();
@@ -93,7 +93,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             //_spriteSetsView.Initialize(_vm.Root);
             _propSetView.Initialize(_vm.Root.PropSelector);
             _propSetEditorView.Initialize(_vm.Root.PropSetEditor);
-            //_mapPalettesView.Initialize(_vm.Root.Palettes);
+            _mapPalettesView.Initialize(_vm.Root.PaletteViewer);
             //_mapPropertiesView.Initialize(_vm.Root.Map.Properties);
             _mapBodyView.Initialize(_vm.Root.MapBodyViewer);
             _imagesView.Initialize(_vm.Root.ImageViewer);
@@ -141,6 +141,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         {
             _tileSetView.Show(this, DockState.DockLeft);
             _propSetView.Show(this, DockState.DockLeft);
+            _mapPalettesView.Show(this, DockState.DockLeft);
             _mapBodyView.Show(this, DockState.Document);
 
         }
