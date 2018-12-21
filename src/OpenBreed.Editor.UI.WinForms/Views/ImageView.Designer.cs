@@ -39,13 +39,14 @@
             this.ImageViewer.Size = new System.Drawing.Size(284, 261);
             this.ImageViewer.TabIndex = 0;
             // 
-            // ImagesView
+            // ImageView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.ImageViewer);
-            this.Name = "ImagesView";
+            this.HideOnClose = true;
+            this.Name = "ImageView";
             this.ResumeLayout(false);
 
         }

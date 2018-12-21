@@ -103,7 +103,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
 
         internal override void Cleanup()
         {
-            MainForm.VM.Database.PropertyChanged -= Database_PropertyChanged;
+            _projectView.HideAllViews();
 
             //Setup the File menu
             MainForm.FileToolStripMenuItem.DropDownItems.Clear();

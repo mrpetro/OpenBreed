@@ -77,11 +77,18 @@ namespace OpenBreed.Editor.VM.Database
 
         public EditorVM Root { get; private set; }
 
+        internal void Save()
+        {
+            throw new NotImplementedException();
+        }
+
         public ProjectState State
         {
             get { return _state; }
             set { SetProperty(ref _state, value); }
         }
+
+        public bool IsModified { get; internal set; }
 
         #endregion Public Properties
 

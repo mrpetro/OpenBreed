@@ -29,7 +29,7 @@ namespace OpenBreed.Editor.VM
                     return false;
                 }
 
-                var answer = editor.DialogProvider.ShowMessageWithQuestion($"Another database ({editor.Database.Name}) is already opened.",
+                var answer = editor.DialogProvider.ShowMessageWithQuestion($"Another database ({editor.Database.Name}) is already opened. Do you want to close it?",
                                                                 "Close current database?",
                                                                 QuestionDialogButtons.OKCancel);
                 if (answer != DialogAnswer.OK)
@@ -44,7 +44,22 @@ namespace OpenBreed.Editor.VM
 
         internal static bool TryCloseDatabase(EditorVM editor)
         {
-            editor.DialogProvider.ShowMessage("Closing database is not implemented yet.", "Feature not implemented");
+            if (editor.Database == null)
+                throw new InvalidOperationException("Expected opened database");
+
+            if (editor.Database.IsModified)
+            {
+                var answer = editor.DialogProvider.ShowMessageWithQuestion("Current database has been modified. Do you want to save it before closing?",
+                                                                           "Save database before closing?", QuestionDialogButtons.YesNoCancel);
+
+                if (answer == DialogAnswer.Cancel)
+                    return false;
+                else if(answer == DialogAnswer.Yes)
+                    editor.Database.Save();
+            }
+
+            editor.Database = null;
+
             return true;
         }
 
@@ -52,8 +67,16 @@ namespace OpenBreed.Editor.VM
         {
             if (editor.Database != null)
             {
-                if (!editor.TryCloseDatabase())
-                    return false;
+                if (editor.Database.IsModified)
+                {
+                    var answer = editor.DialogProvider.ShowMessageWithQuestion("Current database has been modified. Do you want to save it before exiting?",
+                                                                               "Save database before exiting?", QuestionDialogButtons.YesNoCancel);
+
+                    if (answer == DialogAnswer.Cancel)
+                        return false;
+                    else if (answer == DialogAnswer.Yes)
+                        editor.Database.Save();
+                }
             }
 
             return true;
@@ -82,6 +105,11 @@ namespace OpenBreed.Editor.VM
             editor.Database = database;
 
             return true;
+        }
+
+        internal static bool TrySaveDatabase(EditorVM editor)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion Internal Methods

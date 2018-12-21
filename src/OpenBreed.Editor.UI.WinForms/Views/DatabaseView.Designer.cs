@@ -45,6 +45,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(585, 329);
             this.Controls.Add(this.DatabaseViewer);
+            this.HideOnClose = true;
             this.Name = "DatabaseView";
             this.Text = "Database";
             this.ResumeLayout(false);

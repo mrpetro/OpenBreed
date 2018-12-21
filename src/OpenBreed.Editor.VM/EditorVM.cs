@@ -310,6 +310,11 @@ namespace OpenBreed.Editor.VM
             return EditorVMHelper.TryExit(this);
         }
 
+        internal bool TrySaveDatabase()
+        {
+            return EditorVMHelper.TrySaveDatabase(this);
+        }
+
         public void TryOpenDatabase()
         {
             EditorVMHelper.TryOpenDatabase(this);
