@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenBreed.Editor.VM.Images;
 using System.Drawing.Drawing2D;
-using OpenBreed.Editor.VM.Maps.Tools;
+using OpenBreed.Editor.VM.Levels.Tools;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Images
 {

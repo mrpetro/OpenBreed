@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Editor.VM.Base;
+using OpenBreed.Editor.VM.Levels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

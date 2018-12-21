@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using OpenABEd;
 using System.IO;
-using OpenBreed.Editor.VM.Maps.Tools;
+using OpenBreed.Editor.VM.Levels.Tools;
 using OpenBreed.Common;
 using OpenBreed.Editor.VM.Database;
 
@@ -40,13 +40,13 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         private DeserializeDockContent _deserializeDockContent;
         private ImageView _imagesView = new ImageView();
-        private MapBodyEditorView _levelBodyView = new MapBodyEditorView();
-        private MapPalettesView _levelPalettesView = new MapPalettesView();
+        private LevelBodyEditorView _levelBodyView = new LevelBodyEditorView();
+        private LevelPalettesView _levelPalettesView = new LevelPalettesView();
         //private MapPropertiesView _mapPropertiesView = new MapPropertiesView();
-        private PropSelectorView _levelPropSetView = new PropSelectorView();
+        private LevelPropSelectorView _levelPropSetView = new LevelPropSelectorView();
 
         //private SpriteSetsView _spriteSetsView = new SpriteSetsView();
-        private TileSetsView _levelTileSetsView = new TileSetsView();
+        private LevelTileSelectorView _levelTileSetsView = new LevelTileSelectorView();
 
         private PropSetEditorView _propSetEditorView = new PropSetEditorView();
         private bool _saveLayout = true;
@@ -174,7 +174,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         public void ShowLevelBodyView()
         {
             if (_levelBodyView == null)
-                _levelBodyView = new MapBodyEditorView();
+                _levelBodyView = new LevelBodyEditorView();
 
             _levelBodyView.Initialize(_vm.Root.MapBodyViewer);
             _levelBodyView.Show(this, DockState.Document);
@@ -183,7 +183,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         public void ShowLevelPalettesView()
         {
             if (_levelPalettesView == null)
-                _levelPalettesView = new MapPalettesView();
+                _levelPalettesView = new LevelPalettesView();
 
             _levelPalettesView.Initialize(_vm.Root.PaletteViewer);
             _levelPalettesView.Show(this, DockState.DockLeft);
@@ -192,16 +192,16 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         public void ShowLevelPropSetView()
         {
             if (_levelPropSetView == null)
-                _levelPropSetView = new PropSelectorView();
+                _levelPropSetView = new LevelPropSelectorView();
 
-            _levelPropSetView.Initialize(_vm.Root.PropSelector);
+            _levelPropSetView.Initialize(_vm.Root.LevelPropSelector);
             _levelPropSetView.Show(this, DockState.DockLeft);
         }
 
         public void ShowLevelTileSetsView()
         {
             if (_levelTileSetsView == null)
-                _levelTileSetsView = new TileSetsView();
+                _levelTileSetsView = new LevelTileSelectorView();
 
             _levelTileSetsView.Initialize(_vm.Root);
             _levelTileSetsView.Show(this, DockState.DockLeft);

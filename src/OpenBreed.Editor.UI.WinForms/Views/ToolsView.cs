@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
-using OpenBreed.Editor.VM.Maps.Tools;
+using OpenBreed.Editor.VM.Levels.Tools;
 
 namespace OpenABEd
 {

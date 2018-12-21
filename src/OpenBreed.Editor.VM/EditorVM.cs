@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using OpenBreed.Editor.VM.Palettes;
-using OpenBreed.Editor.VM.Maps;
+using OpenBreed.Editor.VM.Levels;
 using OpenBreed.Editor.VM.Tiles;
 using System.Drawing;
 using OpenBreed.Common.Maps.Readers.MAP;
@@ -12,7 +12,7 @@ using OpenBreed.Common.Maps.Builders;
 using OpenBreed.Editor.VM.Database;
 using OpenBreed.Editor.VM.Props;
 using OpenBreed.Editor.VM.Sprites;
-using OpenBreed.Editor.VM.Maps.Tools;
+using OpenBreed.Editor.VM.Levels.Tools;
 using OpenBreed.Common.Palettes;
 using System.Diagnostics;
 using OpenBreed.Common;
@@ -68,7 +68,7 @@ namespace OpenBreed.Editor.VM
             Palettes = new BindingList<PaletteVM>();
             Palettes.ListChanged += (s, e) => OnPropertyChanged(nameof(Palettes));
 
-            PropSelector = new PropSelectorVM(this);
+            LevelPropSelector = new LevelPropSelectorVM(this);
             PropSetEditor = new PropSetEditorVM(this);
             DatabaseViewer = new DatabaseViewerVM(this);
             TileSetViewer = new TileSetViewerVM(this);
@@ -77,8 +77,8 @@ namespace OpenBreed.Editor.VM
             PaletteViewer = new PalettesVM(this);
             ImageViewer = new ImageViewerVM(this);
             LevelEditor = new LevelEditorVM(this);
-            Map = new MapVM(this);
-            MapBodyViewer = new MapBodyEditorVM(this);
+            Level = new LevelVM(this);
+            MapBodyViewer = new LevelBodyEditorVM(this);
             FormatMan = new DataFormatMan();
             SourceMan = new SourceMan();
             SourceMan.ExpandVariables = Settings.ExpandVariables;
@@ -103,7 +103,7 @@ namespace OpenBreed.Editor.VM
             set { SetProperty(ref _database, value); }
         }
 
-        public PropSelectorVM PropSelector { get; }
+        public LevelPropSelectorVM LevelPropSelector { get; }
         public PropSetEditorVM PropSetEditor { get; }
 
         public DatabaseViewerVM DatabaseViewer { get; }
@@ -114,9 +114,9 @@ namespace OpenBreed.Editor.VM
 
         public LevelEditorVM LevelEditor { get; }
 
-        public MapVM Map { get; private set; }
+        public LevelVM Level { get; private set; }
 
-        public MapBodyEditorVM MapBodyViewer { get; private set; }
+        public LevelBodyEditorVM MapBodyViewer { get; private set; }
 
         public PalettesVM PaletteViewer { get; private set; }
 
@@ -211,7 +211,7 @@ namespace OpenBreed.Editor.VM
 
             var map = CreateMap();
             map.Load(levelDef);
-            Map = map;
+            Level = map;
         }
 
         public void LoadPropSet(PropertySetDef propSetDef)
@@ -242,9 +242,9 @@ namespace OpenBreed.Editor.VM
             TileSets.Add(newTileSet);
         }
 
-        public MapVM CreateMap()
+        public LevelVM CreateMap()
         {
-            return new MapVM(this);
+            return new LevelVM(this);
         }
 
         public SpriteSetVM CreateSpriteSet()
@@ -279,7 +279,7 @@ namespace OpenBreed.Editor.VM
 
         public void Initialize()
         {
-            PropSelector.Connect();
+            LevelPropSelector.Connect();
             PropSetEditor.Connect();
             DatabaseViewer.Connect();
         }

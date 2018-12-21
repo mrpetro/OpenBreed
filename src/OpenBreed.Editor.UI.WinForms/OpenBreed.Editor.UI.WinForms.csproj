@@ -94,17 +94,17 @@
     <Compile Include="Controls\Images\ImageViewerCtrl.Designer.cs">
       <DependentUpon>ImageViewerCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Map\MapBodyEditorCtrl.cs">
+    <Compile Include="Controls\Levels\LevelBodyEditorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Map\MapBodyEditorCtrl.Designer.cs">
-      <DependentUpon>MapBodyEditorCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Levels\LevelBodyEditorCtrl.Designer.cs">
+      <DependentUpon>LevelBodyEditorCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Map\MapPropertiesCtrl.cs">
+    <Compile Include="Controls\Levels\LevelSettingsCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Map\MapPropertiesCtrl.Designer.cs">
-      <DependentUpon>MapPropertiesCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Levels\LevelSettingsCtrl.Designer.cs">
+      <DependentUpon>LevelSettingsCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Palettes\ColorEditorCtrl.cs">
       <SubType>UserControl</SubType>
@@ -124,11 +124,11 @@
     <Compile Include="Controls\Palettes\PaletteEditorCtrl.Designer.cs">
       <DependentUpon>PaletteEditorCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Palettes\PalettesCtrl.cs">
+    <Compile Include="Controls\Levels\LevelPalettesCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Palettes\PalettesCtrl.Designer.cs">
-      <DependentUpon>PalettesCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Levels\LevelPalettesCtrl.Designer.cs">
+      <DependentUpon>LevelPalettesCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Props\PropSetEditorCtrl.cs">
       <SubType>UserControl</SubType>
@@ -136,11 +136,11 @@
     <Compile Include="Controls\Props\PropSetEditorCtrl.Designer.cs">
       <DependentUpon>PropSetEditorCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Props\PropSelectorCtrl.cs">
+    <Compile Include="Controls\Levels\LevelPropSelectorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Props\PropSelectorCtrl.Designer.cs">
-      <DependentUpon>PropSelectorCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Levels\LevelPropSelectorCtrl.Designer.cs">
+      <DependentUpon>LevelPropSelectorCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Sprites\SpriteSetSelectorCtrl.cs">
       <SubType>UserControl</SubType>
@@ -160,11 +160,11 @@
     <Compile Include="Controls\Tiles\TileSetPaletteSelectorCtrl.Designer.cs">
       <DependentUpon>TileSetPaletteSelectorCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Tiles\TileSetSelectorCtrl.cs">
+    <Compile Include="Controls\Levels\LevelTileSelectorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Tiles\TileSetSelectorCtrl.Designer.cs">
-      <DependentUpon>TileSetSelectorCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Levels\LevelTileSelectorCtrl.Designer.cs">
+      <DependentUpon>LevelTileSelectorCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Tiles\TileSetViewerCtrl.cs">
       <SubType>UserControl</SubType>
@@ -225,23 +225,23 @@
     <Compile Include="Views\LogConsoleView.Designer.cs">
       <DependentUpon>LogConsoleView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\MapBodyEditorView.cs">
+    <Compile Include="Views\LevelBodyEditorView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\MapBodyEditorView.Designer.cs">
-      <DependentUpon>MapBodyEditorView.cs</DependentUpon>
+    <Compile Include="Views\LevelBodyEditorView.Designer.cs">
+      <DependentUpon>LevelBodyEditorView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\MapPalettesView.cs">
+    <Compile Include="Views\LevelPalettesView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\MapPalettesView.Designer.cs">
-      <DependentUpon>MapPalettesView.cs</DependentUpon>
+    <Compile Include="Views\LevelPalettesView.Designer.cs">
+      <DependentUpon>LevelPalettesView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\MapPropertiesView.cs">
+    <Compile Include="Views\LevelSettingsView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\MapPropertiesView.Designer.cs">
-      <DependentUpon>MapPropertiesView.cs</DependentUpon>
+    <Compile Include="Views\LevelSettingsView.Designer.cs">
+      <DependentUpon>LevelSettingsView.cs</DependentUpon>
     </Compile>
     <Compile Include="OpenFileQuery.cs" />
     <Compile Include="Views\ProjectView.cs">
@@ -262,11 +262,11 @@
     <Compile Include="Views\PropSetEditorView.Designer.cs">
       <DependentUpon>PropSetEditorView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\PropSelectorView.cs">
+    <Compile Include="Views\LevelPropSelectorView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\PropSelectorView.Designer.cs">
-      <DependentUpon>PropSelectorView.cs</DependentUpon>
+    <Compile Include="Views\LevelPropSelectorView.Designer.cs">
+      <DependentUpon>LevelPropSelectorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\SpriteSetsView.cs">
       <SubType>Form</SubType>
@@ -280,11 +280,11 @@
     <Compile Include="Views\TemplateSetView.Designer.cs">
       <DependentUpon>TemplateSetView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\TileSetsView.cs">
+    <Compile Include="Views\LevelTileSelectorView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\TileSetsView.Designer.cs">
-      <DependentUpon>TileSetsView.cs</DependentUpon>
+    <Compile Include="Views\LevelTileSelectorView.Designer.cs">
+      <DependentUpon>LevelTileSelectorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ToolsView.cs">
       <SubType>Form</SubType>
@@ -320,8 +320,8 @@
     <EmbeddedResource Include="Controls\Images\ImageViewerCtrl.resx">
       <DependentUpon>ImageViewerCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Map\MapPropertiesCtrl.resx">
-      <DependentUpon>MapPropertiesCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Levels\LevelSettingsCtrl.resx">
+      <DependentUpon>LevelSettingsCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Palettes\ColorEditorCtrl.resx">
       <DependentUpon>ColorEditorCtrl.cs</DependentUpon>
@@ -332,14 +332,14 @@
     <EmbeddedResource Include="Controls\Palettes\PaletteEditorCtrl.resx">
       <DependentUpon>PaletteEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Palettes\PalettesCtrl.resx">
-      <DependentUpon>PalettesCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Levels\LevelPalettesCtrl.resx">
+      <DependentUpon>LevelPalettesCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Props\PropSetEditorCtrl.resx">
       <DependentUpon>PropSetEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Props\PropSelectorCtrl.resx">
-      <DependentUpon>PropSelectorCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Levels\LevelPropSelectorCtrl.resx">
+      <DependentUpon>LevelPropSelectorCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Sprites\SpriteSetSelectorCtrl.resx">
       <DependentUpon>SpriteSetSelectorCtrl.cs</DependentUpon>
@@ -350,8 +350,8 @@
     <EmbeddedResource Include="Controls\Tiles\TileSetPaletteSelectorCtrl.resx">
       <DependentUpon>TileSetPaletteSelectorCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Tiles\TileSetSelectorCtrl.resx">
-      <DependentUpon>TileSetSelectorCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Levels\LevelTileSelectorCtrl.resx">
+      <DependentUpon>LevelTileSelectorCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Tiles\TileSetViewerCtrl.resx">
       <DependentUpon>TileSetViewerCtrl.cs</DependentUpon>
@@ -377,14 +377,14 @@
     <EmbeddedResource Include="Views\LogConsoleView.resx">
       <DependentUpon>LogConsoleView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\MapBodyEditorView.resx">
-      <DependentUpon>MapBodyEditorView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\LevelBodyEditorView.resx">
+      <DependentUpon>LevelBodyEditorView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\MapPalettesView.resx">
-      <DependentUpon>MapPalettesView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\LevelPalettesView.resx">
+      <DependentUpon>LevelPalettesView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\MapPropertiesView.resx">
-      <DependentUpon>MapPropertiesView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\LevelSettingsView.resx">
+      <DependentUpon>LevelSettingsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ProjectView.resx">
       <DependentUpon>ProjectView.cs</DependentUpon>
@@ -395,14 +395,14 @@
     <EmbeddedResource Include="Views\PropSetEditorView.resx">
       <DependentUpon>PropSetEditorView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\PropSelectorView.resx">
-      <DependentUpon>PropSelectorView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\LevelPropSelectorView.resx">
+      <DependentUpon>LevelPropSelectorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\SpriteSetsView.resx">
       <DependentUpon>SpriteSetsView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\TileSetsView.resx">
-      <DependentUpon>TileSetsView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\LevelTileSelectorView.resx">
+      <DependentUpon>LevelTileSelectorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ToolsView.resx">
       <DependentUpon>ToolsView.cs</DependentUpon>
