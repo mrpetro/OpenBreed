@@ -126,7 +126,7 @@ namespace OpenBreed.Editor.VM.Tiles
 
         private void UpdateCurrentIndex()
         {
-            CurrentIndex = Parent.Root.LevelEditor.CurrentLevel.TileSets.IndexOf(CurrentItem);
+            CurrentIndex = Parent.CurrentLevel.TileSets.IndexOf(CurrentItem);
         }
 
         private void UpdateCurrentItem()
@@ -134,7 +134,7 @@ namespace OpenBreed.Editor.VM.Tiles
             if (CurrentIndex == -1)
                 CurrentItem = null;
             else
-                CurrentItem = Parent.Root.LevelEditor.CurrentLevel.TileSets[CurrentIndex];
+                CurrentItem = Parent.CurrentLevel.TileSets[CurrentIndex];
         }
 
         #endregion Private Methods

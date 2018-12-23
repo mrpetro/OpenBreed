@@ -71,7 +71,7 @@ namespace OpenBreed.Editor.VM.Props
 
         internal void Connect()
         {
-            Root.PropertyChanged += Root_PropertyChanged;
+
         }
 
         internal void TryLoad(PropertySetDef propSetDef)
@@ -83,20 +83,5 @@ namespace OpenBreed.Editor.VM.Props
 
         #endregion Internal Methods
 
-        #region Private Methods
-
-        private void Root_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(Root.LevelEditor.CurrentLevel.PropSet):
-                    CurrentPropSet = Root.LevelEditor.CurrentLevel.PropSet;
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        #endregion Private Methods
     }
 }

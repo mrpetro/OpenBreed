@@ -154,12 +154,6 @@
     <Compile Include="Controls\Sprites\SpriteViewerCtrl.Designer.cs">
       <DependentUpon>SpriteViewerCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Tiles\TileSetPaletteSelectorCtrl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Tiles\TileSetPaletteSelectorCtrl.Designer.cs">
-      <DependentUpon>TileSetPaletteSelectorCtrl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Levels\LevelTileSelectorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -346,9 +340,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Sprites\SpriteViewerCtrl.resx">
       <DependentUpon>SpriteViewerCtrl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Tiles\TileSetPaletteSelectorCtrl.resx">
-      <DependentUpon>TileSetPaletteSelectorCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Levels\LevelTileSelectorCtrl.resx">
       <DependentUpon>LevelTileSelectorCtrl.cs</DependentUpon>

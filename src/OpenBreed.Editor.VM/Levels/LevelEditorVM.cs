@@ -29,6 +29,7 @@ namespace OpenBreed.Editor.VM.Levels
             Root = root;
 
             BodyEditor = new LevelBodyEditorVM(this);
+            //TileSetSelector = new LevelTileSetSelectorVM(this);
             TileSelector = new LevelTileSelectorVM(this);
             PropSelector = new LevelPropSelectorVM(this);
             SpriteSetViewer = new SpriteSetSelectorVM(this);
@@ -48,6 +49,7 @@ namespace OpenBreed.Editor.VM.Levels
         }
 
         public EditorVM Root { get; }
+        //public LevelTileSetSelectorVM TileSetSelector { get; }
         public LevelTileSelectorVM TileSelector { get; }
         public LevelPropSelectorVM PropSelector { get; }
         public LevelPaletteSelectorVM PaletteSelector { get; }

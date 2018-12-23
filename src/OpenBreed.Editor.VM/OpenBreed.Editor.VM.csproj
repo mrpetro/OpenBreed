@@ -117,6 +117,7 @@
     <Compile Include="Levels\LevelBodyEditorVM.cs" />
     <Compile Include="Levels\LevelBodyVM.cs" />
     <Compile Include="Levels\LevelPropertiesVM.cs" />
+    <Compile Include="Levels\LevelTileSetSelectorVM.cs" />
     <Compile Include="Levels\LevelVM.cs" />
     <Compile Include="Levels\LevelVMHelper.cs" />
     <Compile Include="Levels\Tools\IEditorTool.cs" />
@@ -143,7 +144,6 @@
     <Compile Include="Tiles\Helpers\SelectionRectangle.cs" />
     <Compile Include="Tiles\Helpers\TileSelectTool.cs" />
     <Compile Include="Tiles\Helpers\TilesSelector.cs" />
-    <Compile Include="Tiles\TileSetPaletteSelectorVM.cs" />
     <Compile Include="Tiles\TileSetViewerVM.cs" />
     <Compile Include="Levels\LevelTileSelectorVM.cs" />
     <Compile Include="Tiles\TileSetVM.cs" />

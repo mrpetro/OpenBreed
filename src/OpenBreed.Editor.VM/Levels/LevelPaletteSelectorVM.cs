@@ -10,6 +10,7 @@ namespace OpenBreed.Editor.VM.Levels
 {
     public class LevelPaletteSelectorVM : BaseViewModel
     {
+
         #region Private Fields
 
         private int _currentIndex = -1;
@@ -19,8 +20,6 @@ namespace OpenBreed.Editor.VM.Levels
 
         #region Public Constructors
 
-        public PaletteEditorVM Editor { get; }
-
         public LevelPaletteSelectorVM(LevelEditorVM parent)
         {
             Parent = parent;
@@ -28,21 +27,6 @@ namespace OpenBreed.Editor.VM.Levels
             Editor = new PaletteEditorVM(this);
 
             PropertyChanged += LevelPaletteSelectorVM_PropertyChanged;
-        }
-
-        private void LevelPaletteSelectorVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(CurrentIndex):
-                    UpdateCurrentItem();
-                    break;
-                case nameof(CurrentItem):
-                    UpdateCurrentIndex();
-                    break;
-                default:
-                    break;
-            }
         }
 
         #endregion Public Constructors
@@ -61,13 +45,30 @@ namespace OpenBreed.Editor.VM.Levels
             set { SetProperty(ref _currentItem, value); }
         }
 
+        public PaletteEditorVM Editor { get; }
         public LevelEditorVM Parent { get; }
 
         #endregion Public Properties
 
+        #region Private Methods
+
+        private void LevelPaletteSelectorVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(CurrentIndex):
+                    UpdateCurrentItem();
+                    break;
+                case nameof(CurrentItem):
+                    UpdateCurrentIndex();
+                    break;
+                default:
+                    break;
+            }
+        }
         private void UpdateCurrentIndex()
         {
-            CurrentIndex = Parent.Root.LevelEditor.CurrentLevel.Palettes.IndexOf(CurrentItem);
+            CurrentIndex = Parent.CurrentLevel.Palettes.IndexOf(CurrentItem);
         }
 
         private void UpdateCurrentItem()
@@ -75,8 +76,10 @@ namespace OpenBreed.Editor.VM.Levels
             if (CurrentIndex == -1)
                 CurrentItem = null;
             else
-                CurrentItem = Parent.Root.LevelEditor.CurrentLevel.Palettes[CurrentIndex];
+                CurrentItem = Parent.CurrentLevel.Palettes[CurrentIndex];
         }
+
+        #endregion Private Methods
 
     }
 }
