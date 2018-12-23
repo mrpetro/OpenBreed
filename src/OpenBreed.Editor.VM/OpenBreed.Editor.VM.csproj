@@ -144,6 +144,7 @@
     <Compile Include="Tiles\Helpers\SelectionRectangle.cs" />
     <Compile Include="Tiles\Helpers\TileSelectTool.cs" />
     <Compile Include="Tiles\Helpers\TilesSelector.cs" />
+    <Compile Include="Tiles\TileSetEditorVM.cs" />
     <Compile Include="Tiles\TileSetViewerVM.cs" />
     <Compile Include="Levels\LevelTileSelectorVM.cs" />
     <Compile Include="Tiles\TileSetVM.cs" />

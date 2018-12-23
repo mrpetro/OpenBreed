@@ -56,9 +56,10 @@ namespace OpenBreed.Editor.VM
 
             Settings = new SettingsMan();
             ToolsMan = new ToolsMan();
+
+            TileSetEditor = new TileSetEditorVM(this);
             PropSetEditor = new PropSetEditorVM(this);
             DatabaseViewer = new DatabaseViewerVM(this);
-            TileSetViewer = new TileSetViewerVM(this);
             SpriteViewer = new SpriteViewerVM(this);
             ImageViewer = new ImageViewerVM(this);
             LevelEditor = new LevelEditorVM(this);
@@ -102,7 +103,7 @@ namespace OpenBreed.Editor.VM
         public SourceMan SourceMan { get; }
 
         public SpriteViewerVM SpriteViewer { get; }
-        public TileSetViewerVM TileSetViewer { get; }
+        public TileSetEditorVM TileSetEditor { get; }
 
         public EditorState State
         {
@@ -153,7 +154,6 @@ namespace OpenBreed.Editor.VM
 
         public void Initialize()
         {
-            TileSetViewer.Connect();
             PropSetEditor.Connect();
             DatabaseViewer.Connect();
             LevelEditor.Connect();

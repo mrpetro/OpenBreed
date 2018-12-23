@@ -49,6 +49,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         private LevelTileSelectorView _levelTileSelectorView = new LevelTileSelectorView();
 
         private PropSetEditorView _propSetEditorView = new PropSetEditorView();
+        private TileSetEditorView _tileSetEditorView = new TileSetEditorView();
         private bool _saveLayout = true;
         private DatabaseVM _vm;
 
@@ -122,10 +123,28 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _levelTileSelectorView = null;
         }
 
+        public void CloseTileSetEditorView()
+        {
+            if (_tileSetEditorView == null)
+                return;
+            _tileSetEditorView.Close();
+            _tileSetEditorView = null;
+        }
+
+        public void ClosePropSetEditorView()
+        {
+            if (_propSetEditorView == null)
+                return;
+            _propSetEditorView.Close();
+            _propSetEditorView = null;
+        }
+
         public void HideAllViews()
         {
             CloseDatabaseView();
             CloseImagesView();
+            ClosePropSetEditorView();
+            CloseTileSetEditorView();
             CloseLevelTileSelectorView();
             CloseLevelPropSelectorView();
             CloseLevelPalettesView();
@@ -215,6 +234,16 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _propSetEditorView.Initialize(_vm.Root.PropSetEditor);
             _propSetEditorView.Show(this, DockState.Document);
         }
+
+        public void ShowTileSetEditorView()
+        {
+            if (_tileSetEditorView == null)
+                _tileSetEditorView = new TileSetEditorView();
+
+            _tileSetEditorView.Initialize(_vm.Root.TileSetEditor);
+            _tileSetEditorView.Show(this, DockState.Document);
+        }
+
         public void StoreLayout()
         {
             string configFile = Path.Combine(ProgramTools.AppProductDataDir, LAYOUT_CFG_FILE_NAME);
@@ -242,10 +271,6 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         }
 
         internal void ShowSpriteSetEditorView()
-        {
-            throw new NotImplementedException();
-        }
-        internal void ShowTileSetEditorView()
         {
             throw new NotImplementedException();
         }

@@ -26,6 +26,8 @@ namespace OpenBreed.Editor.VM.Tiles
         {
             Parent = parent;
 
+            TileSetViewer = new TileSetViewerVM();
+
             PropertyChanged += LevelTileSelectorVM_PropertyChanged;
         }
 
@@ -47,6 +49,8 @@ namespace OpenBreed.Editor.VM.Tiles
 
         public LevelEditorVM Parent { get; }
 
+        public TileSetViewerVM TileSetViewer { get; }
+
         public string Title
         {
             get { return _title; }
@@ -59,6 +63,7 @@ namespace OpenBreed.Editor.VM.Tiles
 
         internal void Connect()
         {
+            //Parent.Root.LevelEditor.TileSelector.PropertyChanged += TileSelector_PropertyChanged;
         }
 
         internal void DrawTile(Graphics gfx, TileRef tileRef, float x, float y, int tileSize)
@@ -103,6 +108,7 @@ namespace OpenBreed.Editor.VM.Tiles
                     break;
                 case nameof(CurrentItem):
                     UpdateCurrentIndex();
+                    TileSetViewer.CurrentTileSet = CurrentItem;
                     break;
                 default:
                     break;

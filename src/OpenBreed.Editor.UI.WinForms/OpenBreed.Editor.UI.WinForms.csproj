@@ -160,6 +160,12 @@
     <Compile Include="Controls\Levels\LevelTileSelectorCtrl.Designer.cs">
       <DependentUpon>LevelTileSelectorCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Tiles\TileSetEditorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Tiles\TileSetEditorCtrl.Designer.cs">
+      <DependentUpon>TileSetEditorCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Tiles\TileSetViewerCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -249,6 +255,12 @@
     </Compile>
     <Compile Include="Views\PropertiesView.Designer.cs">
       <DependentUpon>PropertiesView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TileSetEditorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TileSetEditorView.Designer.cs">
+      <DependentUpon>TileSetEditorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\PropSetEditorView.cs">
       <SubType>Form</SubType>
@@ -344,6 +356,9 @@
     <EmbeddedResource Include="Controls\Levels\LevelTileSelectorCtrl.resx">
       <DependentUpon>LevelTileSelectorCtrl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Tiles\TileSetEditorCtrl.resx">
+      <DependentUpon>TileSetEditorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Tiles\TileSetViewerCtrl.resx">
       <DependentUpon>TileSetViewerCtrl.cs</DependentUpon>
     </EmbeddedResource>
@@ -382,6 +397,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PropertiesView.resx">
       <DependentUpon>PropertiesView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TileSetEditorView.resx">
+      <DependentUpon>TileSetEditorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PropSetEditorView.resx">
       <DependentUpon>PropSetEditorView.cs</DependentUpon>

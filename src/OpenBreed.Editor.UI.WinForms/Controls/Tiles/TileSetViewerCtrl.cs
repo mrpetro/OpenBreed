@@ -35,16 +35,27 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Tiles
 
             _vm.PropertyChanged += _vm_PropertyChanged;
 
-            UpdateSize();
+            UpdateViewState();
         }
 
-        private void UpdateSize()
+        private void SetNoTileSetState()
         {
-            if (_vm.CurrentTileSet == null)
-                return;
+            Invalidate();
+        }
 
+        private void SetTileSetState()
+        {
             Width = _vm.CurrentTileSet.Bitmap.Width;
             Height = _vm.CurrentTileSet.Bitmap.Height;
+            Invalidate();
+        }
+
+        private void UpdateViewState()
+        {
+            if (_vm.CurrentTileSet == null)
+                SetNoTileSetState();
+            else
+                SetTileSetState();
         }
 
         private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -52,7 +63,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Tiles
             switch (e.PropertyName)
             {
                 case nameof(_vm.CurrentTileSet):
-                    UpdateSize();
+                    UpdateViewState();
                     break;
                 default:
                     break;

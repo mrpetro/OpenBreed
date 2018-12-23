@@ -1,39 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using OpenBreed.Editor.VM.Tiles;
-using OpenBreed.Editor.VM;
-using OpenBreed.Editor.VM.Palettes;
 using WeifenLuo.WinFormsUI.Docking;
-using OpenBreed.Editor.UI.WinForms;
+using System.Drawing.Imaging;
+using OpenBreed.Editor.VM.Props;
+using OpenBreed.Editor.VM;
+using OpenBreed.Editor.VM.Tiles;
 
 namespace OpenBreed.Editor.UI.WinForms.Views
 {
-    public partial class LevelTileSelectorView : DockContent, IToolController
+    public partial class TileSetEditorView : DockContent
     {
-        private LevelTileSelectorVM _vm;
 
-        public LevelTileSelectorView()
+        #region Private Fields
+
+        private TileSetEditorVM _vm;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public TileSetEditorView()
         {
             InitializeComponent();
+
         }
 
-        public void Initialize(LevelTileSelectorVM vm)
+        #endregion Public Constructors
+
+        #region Public Methods
+
+        public void Initialize(TileSetEditorVM vm)
         {
             _vm = vm;
 
-            TileSets.Initialize(_vm);
-            TileSelector.Initialize(_vm.TileSetViewer);
+            TileSetEditor.Initialize(_vm);
 
             _vm.PropertyChanged += _vm_PropertyChanged;
 
             TabText = _vm.Title;
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -46,5 +61,8 @@ namespace OpenBreed.Editor.UI.WinForms.Views
                     break;
             }
         }
+
+        #endregion Private Methods
+
     }
 }

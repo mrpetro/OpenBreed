@@ -36,39 +36,26 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #region Public Constructors
 
-        public TileSetViewerVM(EditorVM root)
+        public TileSetViewerVM()
         {
-            Root = root;
-
             SelectedIndexes = new List<int>();
             SelectionRectangle = new SelectionRectangle();
             SelectMode = SelectModeEnum.Nothing;
             MultiSelect = false;
+
+            PropertyChanged += TileSetViewerVM_PropertyChanged;
         }
 
-        public void Connect()
+        private void TileSetViewerVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Root.LevelEditor.TileSelector.PropertyChanged += TileSelector_PropertyChanged;
-        }
-
-        private void TileSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            var tileSelector = sender as LevelTileSelectorVM;
-
             switch (e.PropertyName)
             {
-                case nameof(tileSelector.CurrentItem):
-                    UpdateWithTileSet(tileSelector.CurrentItem);
+                case nameof(CurrentTileSet):
+                    SelectedIndexes.Clear();
                     break;
                 default:
                     break;
             }
-        }
-
-        private void UpdateWithTileSet(TileSetVM tileSet)
-        {
-            CurrentTileSet = tileSet;
-            SelectedIndexes.Clear();
         }
 
         #endregion Public Constructors
@@ -83,9 +70,9 @@ namespace OpenBreed.Editor.VM.Tiles
 
         public bool IsEmpty { get { return SelectedIndexes.Count == 0; } }
         public bool MultiSelect { get; set; }
-        public EditorVM Root { get; private set; }
-        public List<int> SelectedIndexes { get; private set; }
-        public SelectionRectangle SelectionRectangle { get; private set; }
+        public EditorVM Root { get; }
+        public List<int> SelectedIndexes { get; }
+        public SelectionRectangle SelectionRectangle { get; }
         public SelectModeEnum SelectMode { get; private set; }
 
         #endregion Public Properties

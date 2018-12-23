@@ -27,9 +27,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         public override void Open()
         {
-            throw new NotImplementedException();
-
-            //Owner.Root.TileSetEditor.TryLoad(_model);
+            Owner.Root.TileSetEditor.TryLoad(_model);
             Owner.OpenedItem = this;
         }
     }
