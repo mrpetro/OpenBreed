@@ -45,7 +45,7 @@ namespace OpenBreed.Editor.VM.Palettes
             Restore(model);
 
             //NOTE: quick hack to get the result
-            Root.PaletteViewer.Restore(new List<PaletteModel>() { model });
+            Root.LevelEditor.CurrentLevel.Restore(new List<PaletteModel>() { model });
 
             Name = paletteDef.Name;
         }

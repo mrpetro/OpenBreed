@@ -89,8 +89,8 @@ namespace OpenBreed.Editor.VM.Props
         {
             switch (e.PropertyName)
             {
-                case nameof(Root.PropSet):
-                    CurrentPropSet = Root.PropSet;
+                case nameof(Root.LevelEditor.CurrentLevel.PropSet):
+                    CurrentPropSet = Root.LevelEditor.CurrentLevel.PropSet;
                     break;
                 default:
                     break;

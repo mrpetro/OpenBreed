@@ -16,7 +16,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
 
         #region Private Fields
 
-        private TileSetSelectorVM _vm;
+        private LevelTileSelectorVM _vm;
 
         #endregion Private Fields
 
@@ -31,7 +31,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
 
         #region Public Methods
 
-        public void Initialize(TileSetSelectorVM vm)
+        public void Initialize(LevelTileSelectorVM vm)
         {
             _vm = vm;
 
@@ -41,7 +41,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
                                          false, 
                                          DataSourceUpdateMode.OnPropertyChanged);
 
-            cbxTileSets.DataSource = _vm.Root.TileSets;
+            cbxTileSets.DataSource = _vm.Parent.Root.LevelEditor.CurrentLevel.TileSets;
             cbxTileSets.DisplayMember = "Name";
         }
 

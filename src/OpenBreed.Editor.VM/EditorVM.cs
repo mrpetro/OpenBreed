@@ -43,7 +43,6 @@ namespace OpenBreed.Editor.VM
 
         #region Private Fields
 
-        private PropSetVM _propSet;
         private DatabaseVM _database;
         private EditorState _state;
 
@@ -57,28 +56,12 @@ namespace OpenBreed.Editor.VM
 
             Settings = new SettingsMan();
             ToolsMan = new ToolsMan();
-            TileSetSelector = new TileSetSelectorVM(this);
-
-            SpriteSets = new BindingList<SpriteSetVM>();
-            SpriteSets.ListChanged += (s, e) => OnPropertyChanged(nameof(SpriteSets));
-
-            TileSets = new BindingList<TileSetVM>();
-            TileSets.ListChanged += (s, e) => OnPropertyChanged(nameof(TileSets));
-
-            Palettes = new BindingList<PaletteVM>();
-            Palettes.ListChanged += (s, e) => OnPropertyChanged(nameof(Palettes));
-
-            LevelPropSelector = new LevelPropSelectorVM(this);
             PropSetEditor = new PropSetEditorVM(this);
             DatabaseViewer = new DatabaseViewerVM(this);
             TileSetViewer = new TileSetViewerVM(this);
-            SpriteSetViewer = new SpriteSetSelectorVM(this);
             SpriteViewer = new SpriteViewerVM(this);
-            PaletteViewer = new PalettesVM(this);
             ImageViewer = new ImageViewerVM(this);
             LevelEditor = new LevelEditorVM(this);
-            Level = new LevelVM(this);
-            MapBodyViewer = new LevelBodyEditorVM(this);
             FormatMan = new DataFormatMan();
             SourceMan = new SourceMan();
             SourceMan.ExpandVariables = Settings.ExpandVariables;
@@ -103,7 +86,6 @@ namespace OpenBreed.Editor.VM
             set { SetProperty(ref _database, value); }
         }
 
-        public LevelPropSelectorVM LevelPropSelector { get; }
         public PropSetEditorVM PropSetEditor { get; }
 
         public DatabaseViewerVM DatabaseViewer { get; }
@@ -114,30 +96,13 @@ namespace OpenBreed.Editor.VM
 
         public LevelEditorVM LevelEditor { get; }
 
-        public LevelVM Level { get; private set; }
-
-        public LevelBodyEditorVM MapBodyViewer { get; private set; }
-
-        public PalettesVM PaletteViewer { get; private set; }
-
-        public PropSetVM PropSet
-        {
-            get { return _propSet; }
-            set { SetProperty(ref _propSet, value); }
-        }
-
         public SettingsMan Settings { get; private set; }
 
         public DataFormatMan FormatMan { get; }
         public SourceMan SourceMan { get; }
 
-        public BindingList<SpriteSetVM> SpriteSets { get; private set; }
-
-        public BindingList<PaletteVM> Palettes { get; private set; }
-
-        public SpriteSetSelectorVM SpriteSetViewer { get; set; }
-
-        public SpriteViewerVM SpriteViewer { get; set; }
+        public SpriteViewerVM SpriteViewer { get; }
+        public TileSetViewerVM TileSetViewer { get; }
 
         public EditorState State
         {
@@ -145,104 +110,13 @@ namespace OpenBreed.Editor.VM
             set { SetProperty(ref _state, value); }
         }
 
-        public BindingList<TileSetVM> TileSets { get; private set; }
-
-        public TileSetSelectorVM TileSetSelector { get; private set; }
-
-        public TileSetViewerVM TileSetViewer { get; private set; }
-
-        public ToolsMan ToolsMan { get; private set; }
+        public ToolsMan ToolsMan { get; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-
-        public void LoadLevel(LevelDef levelDef)
-        {
-            TileSets.Clear();
-            SpriteSets.Clear();
-            Palettes.Clear();
-
-            if (levelDef.TileSetRef != null)
-            {
-                var tileSetDef = Database.GetTileSetDef(levelDef.TileSetRef);
-                if (tileSetDef == null)
-                    throw new Exception($"No Tile set definition with name '{levelDef.TileSetRef}' found!");
-
-                AddTileSet(tileSetDef);
-                TileSetSelector.CurrentItem = TileSets.FirstOrDefault();
-            }
-
-
-            foreach (var spriteSetRef in levelDef.SpriteSetRefs)
-            {
-                var spriteSetDef = Database.GetSpriteSetDef(spriteSetRef);
-                if (spriteSetDef == null)
-                    throw new Exception($"No Sprite set definition with name '{spriteSetRef}' found!");
-
-                AddSpriteSet(spriteSetDef);
-            }
-
-            SpriteSetViewer.CurrentItem = SpriteSets.FirstOrDefault();
-
-            if (SpriteSetViewer.CurrentItem != null)
-                SpriteViewer.CurrentItem = SpriteSetViewer.CurrentItem.Items.FirstOrDefault();
-
-            if (levelDef.PropertySetRef != null)
-            {
-                var propSetDef = Database.GetPropertySetDef(levelDef.PropertySetRef);
-                if (propSetDef == null)
-                    throw new Exception($"No Prop set definition with name '{levelDef.PropertySetRef}' found!");
-
-                LoadPropSet(propSetDef);
-            }
-
-            foreach (var paletteRef in levelDef.PaletteRefs)
-            {
-                var paletteDef = Database.GetPaletteDef(paletteRef);
-                if (paletteDef == null)
-                    throw new Exception($"No Palette definition with name '{paletteRef}' found!");
-
-                AddPalette(paletteDef);
-
-                PaletteViewer.CurrentItem = PaletteViewer.Items.FirstOrDefault();
-            }
-
-            var map = CreateMap();
-            map.Load(levelDef);
-            Level = map;
-        }
-
-        public void LoadPropSet(PropertySetDef propSetDef)
-        {
-            var propSet = CreatePropSet();
-            propSet.Load(propSetDef);
-            PropSet = propSet;
-        }
-
-        public void AddPalette(PaletteDef paletteDef)
-        {
-            var newPalette = CreatePalette();
-            newPalette.Load(paletteDef);
-            Palettes.Add(newPalette);
-        }
-
-        public void AddSpriteSet(SpriteSetDef spriteSetDef)
-        {
-            var newSpriteSet = CreateSpriteSet();
-            newSpriteSet.Load(spriteSetDef);
-            SpriteSets.Add(newSpriteSet);
-        }
-
-        public void AddTileSet(TileSetDef tileSetDef)
-        {
-            var newTileSet = CreateTileSet();
-            newTileSet.Load(tileSetDef);
-            TileSets.Add(newTileSet);
-        }
-
-        public LevelVM CreateMap()
+        public LevelVM CreateLevel()
         {
             return new LevelVM(this);
         }
@@ -279,9 +153,11 @@ namespace OpenBreed.Editor.VM
 
         public void Initialize()
         {
-            LevelPropSelector.Connect();
+            TileSetViewer.Connect();
             PropSetEditor.Connect();
             DatabaseViewer.Connect();
+            LevelEditor.Connect();
+            SpriteViewer.Connect();
         }
         public void Run()
         {

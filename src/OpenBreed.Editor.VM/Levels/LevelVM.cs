@@ -9,6 +9,15 @@ using System;
 using System.IO;
 using System.Linq;
 using OpenBreed.Common.Database.Items.Levels;
+using System.ComponentModel;
+using OpenBreed.Editor.VM.Tiles;
+using OpenBreed.Common.Database.Items.Tiles;
+using OpenBreed.Editor.VM.Props;
+using OpenBreed.Common.Database.Items.Props;
+using OpenBreed.Common.Database.Items.Palettes;
+using System.Collections.Generic;
+using OpenBreed.Editor.VM.Sprites;
+using OpenBreed.Common.Database.Items.Sprites;
 
 namespace OpenBreed.Editor.VM.Levels
 {
@@ -20,6 +29,7 @@ namespace OpenBreed.Editor.VM.Levels
         private readonly CommandMan m_Commands;
 
         private bool _isModified;
+        private PropSetVM _propSet;
         private BaseSource _source = null;
         private string _title;
 
@@ -33,6 +43,15 @@ namespace OpenBreed.Editor.VM.Levels
             Body = new LevelBodyVM(this);
             Properties = new LevelPropertiesVM(this);
 
+            Palettes = new BindingList<PaletteVM>();
+            Palettes.ListChanged += (s, e) => OnPropertyChanged(nameof(Palettes));
+
+            TileSets = new BindingList<TileSetVM>();
+            TileSets.ListChanged += (s, e) => OnPropertyChanged(nameof(TileSets));
+
+            SpriteSets = new BindingList<SpriteSetVM>();
+            SpriteSets.ListChanged += (s, e) => OnPropertyChanged(nameof(SpriteSets));
+
             m_Commands = new CommandMan();
 
             PropertyChanged += MapVM_PropertyChanged;
@@ -42,7 +61,7 @@ namespace OpenBreed.Editor.VM.Levels
 
         #region Public Properties
 
-        public LevelBodyVM Body { get; private set; }
+        public LevelBodyVM Body { get; }
 
         public CommandMan Commands { get { return m_Commands; } }
 
@@ -56,6 +75,12 @@ namespace OpenBreed.Editor.VM.Levels
 
         public LevelPropertiesVM Properties { get; }
 
+        public PropSetVM PropSet
+        {
+            get { return _propSet; }
+            set { SetProperty(ref _propSet, value); }
+        }
+
         public EditorVM Root { get; }
 
         public BaseSource Source
@@ -63,6 +88,11 @@ namespace OpenBreed.Editor.VM.Levels
             get { return _source; }
             set { SetProperty(ref _source, value); }
         }
+
+        public BindingList<PaletteVM> Palettes { get; }
+        public BindingList<TileSetVM> TileSets { get; }
+        public BindingList<SpriteSetVM> SpriteSets { get; }
+
 
         public int TileSize { get { return 16; } }
 
@@ -76,6 +106,33 @@ namespace OpenBreed.Editor.VM.Levels
 
         #region Public Methods
 
+        public void AddTileSet(TileSetDef tileSetDef)
+        {
+            var newTileSet = Root.CreateTileSet();
+            newTileSet.Load(tileSetDef);
+            TileSets.Add(newTileSet);
+        }
+
+        public void AddPalette(PaletteDef paletteDef)
+        {
+            var newPalette = Root.CreatePalette();
+            newPalette.Load(paletteDef);
+            Palettes.Add(newPalette);
+        }
+
+        public void AddSpriteSet(SpriteSetDef spriteSetDef)
+        {
+            var newSpriteSet = Root.CreateSpriteSet();
+            newSpriteSet.Load(spriteSetDef);
+            SpriteSets.Add(newSpriteSet);
+        }
+
+        public void LoadPropSet(PropertySetDef propSetDef)
+        {
+            var propSet = Root.CreatePropSet();
+            propSet.Load(propSetDef);
+            PropSet = propSet;
+        }
         public void Save()
         {
             //OnSaving(new EventArgs());
@@ -111,6 +168,22 @@ namespace OpenBreed.Editor.VM.Levels
             Body.ConnectEvents();
         }
 
+        public void Restore(List<PaletteModel> palettes)
+        {
+            Palettes.RaiseListChangedEvents = false;
+            Palettes.Clear();
+
+            foreach (var palette in palettes)
+            {
+                var paletteVM = new PaletteVM(Root);
+                paletteVM.Restore(palette);
+                Palettes.Add(paletteVM);
+            }
+
+            Palettes.RaiseListChangedEvents = true;
+            Palettes.ResetBindings();
+        }
+
         internal void Load(LevelDef levelDef)
         {
             var sourceDef = Root.Database.GetSourceDef(levelDef.SourceRef);
@@ -124,16 +197,52 @@ namespace OpenBreed.Editor.VM.Levels
             var model = Root.FormatMan.Load(source, levelDef.Format) as MapModel;
             Source = source;
 
+            if (levelDef.TileSetRef != null)
+            {
+                var tileSetDef = Root.Database.GetTileSetDef(levelDef.TileSetRef);
+                if (tileSetDef == null)
+                    throw new Exception($"No Tile set definition with name '{levelDef.TileSetRef}' found!");
+
+                AddTileSet(tileSetDef);
+            }
+
+            if (levelDef.PropertySetRef != null)
+            {
+                var propSetDef = Root.Database.GetPropSetDef(levelDef.PropertySetRef);
+                if (propSetDef == null)
+                    throw new Exception($"No Prop set definition with name '{levelDef.PropertySetRef}' found!");
+
+                LoadPropSet(propSetDef);
+            }
+
+            foreach (var spriteSetRef in levelDef.SpriteSetRefs)
+            {
+                var spriteSetDef = Root.Database.GetSpriteSetDef(spriteSetRef);
+                if (spriteSetDef == null)
+                    throw new Exception($"No Sprite set definition with name '{spriteSetRef}' found!");
+
+                AddSpriteSet(spriteSetDef);
+            }
+
+            foreach (var paletteRef in levelDef.PaletteRefs)
+            {
+                var paletteDef = Root.Database.GetPaletteDef(paletteRef);
+                if (paletteDef == null)
+                    throw new Exception($"No Palette definition with name '{paletteRef}' found!");
+
+                AddPalette(paletteDef);
+            }
+
             Properties.Load(model);
             Body.Load(model);
 
             if (!levelDef.PaletteRefs.Any())
             {
-                Root.PaletteViewer.Restore(model.Properties.Palettes);
-                Root.PaletteViewer.CurrentItem = Root.PaletteViewer.Items.FirstOrDefault();
+                Restore(model.Properties.Palettes);
+                Root.LevelEditor.PaletteSelector.CurrentItem = Palettes.FirstOrDefault();
             }
 
-            Root.MapBodyViewer.CurrentMapBody = Body;
+            Root.LevelEditor.BodyEditor.CurrentMapBody = Body;
         }
 
         #endregion Internal Methods

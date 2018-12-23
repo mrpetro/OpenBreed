@@ -43,7 +43,7 @@ namespace OpenBreed.Editor.VM.Levels.Layers
 
         public override void DrawView(Graphics gfx, Rectangle rectangle)
         {
-            if (Body.Map.Root.PropSet == null)
+            if (Body.Map.Root.LevelEditor.CurrentLevel.PropSet == null)
                 return;
 
             int tileSize = 16;
@@ -54,7 +54,7 @@ namespace OpenBreed.Editor.VM.Levels.Layers
                 {
                     var propertyId = GetCell(xIndex, yIndex);
 
-                    Body.Map.Root.PropSet.DrawProperty(gfx, propertyId, xIndex * tileSize, yIndex * tileSize, tileSize);
+                    Body.Map.Root.LevelEditor.CurrentLevel.PropSet.DrawProperty(gfx, propertyId, xIndex * tileSize, yIndex * tileSize, tileSize);
                 }
             }
         }

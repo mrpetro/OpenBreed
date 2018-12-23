@@ -36,7 +36,7 @@ namespace OpenBreed.Editor.VM.Tiles
             Items.ListChanged += (s, e) => OnPropertyChanged(nameof(Items));
 
             PropertyChanged += TileSetVM_PropertyChanged;
-            Root.PaletteViewer.PropertyChanged += Palettes_PropertyChanged;
+            Root.LevelEditor.PaletteSelector.PropertyChanged += Palettes_PropertyChanged;
         }
 
         #endregion Public Constructors
@@ -276,8 +276,8 @@ namespace OpenBreed.Editor.VM.Tiles
         {
             switch (e.PropertyName)
             {
-                case nameof(Root.PaletteViewer.CurrentItem):
-                    Palette = Root.PaletteViewer.CurrentItem;
+                case nameof(Root.LevelEditor.PaletteSelector.CurrentItem):
+                    Palette = Root.LevelEditor.PaletteSelector.CurrentItem;
                     break;
                 default:
                     break;

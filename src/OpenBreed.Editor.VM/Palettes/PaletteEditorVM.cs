@@ -22,7 +22,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Public Constructors
 
-        public PaletteEditorVM(PalettesVM palettes)
+        public PaletteEditorVM(LevelPaletteSelectorVM palettes)
         {
             Palettes = palettes;
 
@@ -72,7 +72,7 @@ namespace OpenBreed.Editor.VM.Palettes
             set { SetProperty(ref _currentPalette, value); }
         }
 
-        public PalettesVM Palettes { get; private set; }
+        public LevelPaletteSelectorVM Palettes { get; private set; }
 
         #endregion Public Properties
     }

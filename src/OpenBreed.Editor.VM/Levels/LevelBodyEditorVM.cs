@@ -21,9 +21,9 @@ namespace OpenBreed.Editor.VM.Levels
 
         #region Public Constructors
 
-        public LevelBodyEditorVM(EditorVM root)
+        public LevelBodyEditorVM(LevelEditorVM parent)
         {
-            Root = root;
+            Parent = parent;
 
             PropertyChanged += MapBodyViewerVM_PropertyChanged;
 
@@ -52,7 +52,7 @@ namespace OpenBreed.Editor.VM.Levels
             set { SetProperty(ref _currentMapBody, value); }
         }
 
-        public EditorVM Root { get; private set; }
+        public LevelEditorVM Parent { get; }
 
         public string Title
         {

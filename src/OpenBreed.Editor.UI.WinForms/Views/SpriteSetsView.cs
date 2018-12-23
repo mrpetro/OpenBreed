@@ -27,7 +27,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         {
             _vm = vm;
 
-            SpriteSets.Initialize(vm.SpriteSetViewer);
+            SpriteSets.Initialize(vm.LevelEditor.SpriteSetViewer);
             SpriteViewer.Initialize(vm.SpriteViewer);
 
             _vm.PropertyChanged += _vm_PropertyChanged;

@@ -11,9 +11,10 @@ namespace OpenBreed.Editor.VM.Levels
 {
     public class LevelPropSelectorVM : BaseViewModel
     {
+
         #region Private Fields
 
-        private PropSetVM _currentPropSet;
+        private PropSetVM _currentItem;
 
         private string _title;
 
@@ -21,9 +22,9 @@ namespace OpenBreed.Editor.VM.Levels
 
         #region Public Constructors
 
-        public LevelPropSelectorVM(EditorVM root)
+        public LevelPropSelectorVM(LevelEditorVM parent)
         {
-            Root = root;
+            Parent = parent;
 
             PropertyChanged += This_PropertyChanged;
         }
@@ -32,13 +33,13 @@ namespace OpenBreed.Editor.VM.Levels
 
         #region Public Properties
 
-        public PropSetVM CurrentPropSet
+        public PropSetVM CurrentItem
         {
-            get { return _currentPropSet; }
-            set { SetProperty(ref _currentPropSet, value); }
+            get { return _currentItem; }
+            set { SetProperty(ref _currentItem, value); }
         }
 
-        public EditorVM Root { get; }
+        public LevelEditorVM Parent { get; }
         public int SelectedIndex { get; private set; }
 
         public string Title
@@ -53,7 +54,7 @@ namespace OpenBreed.Editor.VM.Levels
 
         internal void Connect()
         {
-            Root.PropertyChanged += Root_PropertyChanged;
+            Parent.Root.PropertyChanged += Root_PropertyChanged;
         }
 
         #endregion Internal Methods
@@ -64,8 +65,8 @@ namespace OpenBreed.Editor.VM.Levels
         {
             switch (e.PropertyName)
             {
-                case nameof(Root.PropSet):
-                    CurrentPropSet = Root.PropSet;
+                case nameof(Parent.Root.LevelEditor.CurrentLevel.PropSet):
+                    CurrentItem = Parent.Root.LevelEditor.CurrentLevel.PropSet;
                     break;
                 default:
                     break;
@@ -75,9 +76,9 @@ namespace OpenBreed.Editor.VM.Levels
         {
             switch (e.PropertyName)
             {
-                case nameof(CurrentPropSet):
-                    if (CurrentPropSet != null)
-                        Title = CurrentPropSet.Name;
+                case nameof(CurrentItem):
+                    if (CurrentItem != null)
+                        Title = CurrentItem.Name;
                     else
                         Title = "No property set";
 
@@ -89,5 +90,6 @@ namespace OpenBreed.Editor.VM.Levels
         }
 
         #endregion Private Methods
+
     }
 }

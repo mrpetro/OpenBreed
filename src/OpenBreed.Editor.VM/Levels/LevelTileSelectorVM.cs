@@ -5,10 +5,11 @@ using System.ComponentModel;
 using System.Linq;
 using OpenBreed.Common.Maps;
 using System.Drawing;
+using OpenBreed.Editor.VM.Levels;
 
 namespace OpenBreed.Editor.VM.Tiles
 {
-    public class TileSetSelectorVM : BaseViewModel
+    public class LevelTileSelectorVM : BaseViewModel
     {
 
         #region Private Fields
@@ -21,11 +22,11 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #region Public Constructors
 
-        public TileSetSelectorVM(EditorVM root)
+        public LevelTileSelectorVM(LevelEditorVM parent)
         {
-            Root = root;
+            Parent = parent;
 
-            PropertyChanged += TileSetSelectorVM_PropertyChanged;
+            PropertyChanged += LevelTileSelectorVM_PropertyChanged;
         }
 
         #endregion Public Constructors
@@ -44,7 +45,7 @@ namespace OpenBreed.Editor.VM.Tiles
             set { SetProperty(ref _currentItem, value); }
         }
 
-        public EditorVM Root { get; private set; }
+        public LevelEditorVM Parent { get; }
 
         public string Title
         {
@@ -56,10 +57,14 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #region Internal Methods
 
+        internal void Connect()
+        {
+        }
+
         internal void DrawTile(Graphics gfx, TileRef tileRef, float x, float y, int tileSize)
         {
-            if (tileRef.TileSetId < Root.TileSets.Count)
-                Root.TileSets[tileRef.TileSetId].DrawTile(gfx, tileRef.TileId, x, y, tileSize);
+            if (tileRef.TileSetId < Parent.Root.LevelEditor.CurrentLevel.TileSets.Count)
+                Parent.Root.LevelEditor.CurrentLevel.TileSets[tileRef.TileSetId].DrawTile(gfx, tileRef.TileId, x, y, tileSize);
             else
                 DrawDefaultTile(gfx, tileRef, x, y, tileSize);
         }
@@ -89,7 +94,7 @@ namespace OpenBreed.Editor.VM.Tiles
             gfx.DrawString(string.Format("{0,2:D2}", tileRef.TileId % 100), font, brush, x + 2, y + 7);
         }
 
-        private void TileSetSelectorVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void LevelTileSelectorVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
@@ -121,7 +126,7 @@ namespace OpenBreed.Editor.VM.Tiles
 
         private void UpdateCurrentIndex()
         {
-            CurrentIndex = Root.TileSets.IndexOf(CurrentItem);
+            CurrentIndex = Parent.Root.LevelEditor.CurrentLevel.TileSets.IndexOf(CurrentItem);
         }
 
         private void UpdateCurrentItem()
@@ -129,9 +134,10 @@ namespace OpenBreed.Editor.VM.Tiles
             if (CurrentIndex == -1)
                 CurrentItem = null;
             else
-                CurrentItem = Root.TileSets[CurrentIndex];
+                CurrentItem = Parent.Root.LevelEditor.CurrentLevel.TileSets[CurrentIndex];
         }
 
         #endregion Private Methods
+
     }
 }

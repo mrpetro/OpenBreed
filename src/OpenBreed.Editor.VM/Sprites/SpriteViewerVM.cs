@@ -29,7 +29,11 @@ namespace OpenBreed.Editor.VM.Sprites
             Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
 
             PropertyChanged += SpriteViewerVM_PropertyChanged;
-            Root.SpriteSetViewer.PropertyChanged += SpriteSetSelector_PropertyChanged;
+        }
+
+        public void Connect()
+        {
+            Root.LevelEditor.SpriteSetViewer.PropertyChanged += SpriteSetSelector_PropertyChanged;
         }
 
         #endregion Public Constructors
@@ -109,7 +113,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         private void UpdateCurrentIndex()
         {
-            if (Root.SpriteSetViewer.CurrentItem == null)
+            if (Root.LevelEditor.SpriteSetViewer.CurrentItem == null)
                 CurrentIndex = -1;
             else
                 CurrentIndex = Items.IndexOf(CurrentItem);

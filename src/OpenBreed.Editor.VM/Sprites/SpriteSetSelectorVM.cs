@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Editor.VM.Base;
+using OpenBreed.Editor.VM.Levels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,9 +22,9 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Public Constructors
 
-        public SpriteSetSelectorVM(EditorVM root)
+        public SpriteSetSelectorVM(LevelEditorVM parent)
         {
-            Root = root;
+            Parent = parent;
 
             PropertyChanged += SpriteSetViewerVM_PropertyChanged;
         }
@@ -44,7 +45,7 @@ namespace OpenBreed.Editor.VM.Sprites
             set { SetProperty(ref _currentItem, value); }
         }
 
-        public EditorVM Root { get; private set; }
+        public LevelEditorVM Parent { get; private set; }
 
         #endregion Public Properties
 
@@ -67,7 +68,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         private void UpdateCurrentIndex()
         {
-            CurrentIndex = Root.SpriteSets.IndexOf(CurrentItem);
+            CurrentIndex = Parent.CurrentLevel.SpriteSets.IndexOf(CurrentItem);
         }
 
         private void UpdateCurrentItem()
@@ -75,7 +76,7 @@ namespace OpenBreed.Editor.VM.Sprites
             if (CurrentIndex == -1)
                 CurrentItem = null;
             else
-                CurrentItem = Root.SpriteSets[CurrentIndex];
+                CurrentItem = Parent.CurrentLevel.SpriteSets[CurrentIndex];
         }
 
         #endregion Private Methods

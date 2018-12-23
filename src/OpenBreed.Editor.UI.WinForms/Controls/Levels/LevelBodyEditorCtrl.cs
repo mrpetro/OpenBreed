@@ -39,9 +39,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
         {
             _vm = vm;
 
-            _vm.Root.ToolsMan.ClearTools();
-            _vm.Root.ToolsMan.AddPassiveTool(new ScrollTool(_vm, this));
-            _vm.Root.ToolsMan.AddPassiveTool(new ZoomTool(_vm, this));
+            _vm.Parent.Root.ToolsMan.ClearTools();
+            _vm.Parent.Root.ToolsMan.AddPassiveTool(new ScrollTool(_vm, this));
+            _vm.Parent.Root.ToolsMan.AddPassiveTool(new ZoomTool(_vm, this));
 
             _vm.PropertyChanged += _vm_PropertyChanged;
 

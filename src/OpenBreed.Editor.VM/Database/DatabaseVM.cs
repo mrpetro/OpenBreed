@@ -114,7 +114,7 @@ namespace OpenBreed.Editor.VM.Database
             return levelDef;
         }
 
-        public PropertySetDef GetPropertySetDef(string propertySetName)
+        public PropertySetDef GetPropSetDef(string propertySetName)
         {
             var propertySetDef = _databaseDef.Tables.OfType<DatabasePropertySetTableDef>().FirstOrDefault().Items.FirstOrDefault(item => item.Name == propertySetName);
 

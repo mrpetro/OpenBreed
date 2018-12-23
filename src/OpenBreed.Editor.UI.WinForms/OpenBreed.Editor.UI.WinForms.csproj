@@ -124,11 +124,11 @@
     <Compile Include="Controls\Palettes\PaletteEditorCtrl.Designer.cs">
       <DependentUpon>PaletteEditorCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Levels\LevelPalettesCtrl.cs">
+    <Compile Include="Controls\Levels\LevelPaletteSelectorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Levels\LevelPalettesCtrl.Designer.cs">
-      <DependentUpon>LevelPalettesCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Levels\LevelPaletteSelectorCtrl.Designer.cs">
+      <DependentUpon>LevelPaletteSelectorCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Props\PropSetEditorCtrl.cs">
       <SubType>UserControl</SubType>
@@ -332,8 +332,8 @@
     <EmbeddedResource Include="Controls\Palettes\PaletteEditorCtrl.resx">
       <DependentUpon>PaletteEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Levels\LevelPalettesCtrl.resx">
-      <DependentUpon>LevelPalettesCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Levels\LevelPaletteSelectorCtrl.resx">
+      <DependentUpon>LevelPaletteSelectorCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Props\PropSetEditorCtrl.resx">
       <DependentUpon>PropSetEditorCtrl.cs</DependentUpon>

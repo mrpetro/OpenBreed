@@ -40,13 +40,13 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         private DeserializeDockContent _deserializeDockContent;
         private ImageView _imagesView = new ImageView();
-        private LevelBodyEditorView _levelBodyView = new LevelBodyEditorView();
+        private LevelBodyEditorView _levelBodyEditorView = new LevelBodyEditorView();
         private LevelPalettesView _levelPalettesView = new LevelPalettesView();
         //private MapPropertiesView _mapPropertiesView = new MapPropertiesView();
-        private LevelPropSelectorView _levelPropSetView = new LevelPropSelectorView();
+        private LevelPropSelectorView _levelPropSelectorView = new LevelPropSelectorView();
 
         //private SpriteSetsView _spriteSetsView = new SpriteSetsView();
-        private LevelTileSelectorView _levelTileSetsView = new LevelTileSelectorView();
+        private LevelTileSelectorView _levelTileSelectorView = new LevelTileSelectorView();
 
         private PropSetEditorView _propSetEditorView = new PropSetEditorView();
         private bool _saveLayout = true;
@@ -91,10 +91,10 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         public void CloseLevelBodyView()
         {
-            if (_levelBodyView == null)
+            if (_levelBodyEditorView == null)
                 return;
-            _levelBodyView.Close();
-            _levelBodyView = null;
+            _levelBodyEditorView.Close();
+            _levelBodyEditorView = null;
         }
 
         public void CloseLevelPalettesView()
@@ -106,28 +106,28 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _levelPalettesView = null;
         }
 
-        public void CloseLevelPropSetView()
+        public void CloseLevelPropSelectorView()
         {
-            if (_levelPropSetView == null)
+            if (_levelPropSelectorView == null)
                 return;
-            _levelPropSetView.Close();
-            _levelPropSetView = null;
+            _levelPropSelectorView.Close();
+            _levelPropSelectorView = null;
         }
 
-        public void CloseLevelTileSetsView()
+        public void CloseLevelTileSelectorView()
         {
-            if (_levelTileSetsView == null)
+            if (_levelTileSelectorView == null)
                 return;
-            _levelTileSetsView.Close();
-            _levelTileSetsView = null;
+            _levelTileSelectorView.Close();
+            _levelTileSelectorView = null;
         }
 
         public void HideAllViews()
         {
             CloseDatabaseView();
             CloseImagesView();
-            CloseLevelTileSetsView();
-            CloseLevelPropSetView();
+            CloseLevelTileSelectorView();
+            CloseLevelPropSelectorView();
             CloseLevelPalettesView();
             CloseLevelBodyView();
         }
@@ -171,13 +171,13 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _imagesView.Show(this, DockState.Document);
         }
 
-        public void ShowLevelBodyView()
+        public void ShowLevelBodyEditorView()
         {
-            if (_levelBodyView == null)
-                _levelBodyView = new LevelBodyEditorView();
+            if (_levelBodyEditorView == null)
+                _levelBodyEditorView = new LevelBodyEditorView();
 
-            _levelBodyView.Initialize(_vm.Root.MapBodyViewer);
-            _levelBodyView.Show(this, DockState.Document);
+            _levelBodyEditorView.Initialize(_vm.Root.LevelEditor.BodyEditor);
+            _levelBodyEditorView.Show(this, DockState.Document);
         }
 
         public void ShowLevelPalettesView()
@@ -185,26 +185,26 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             if (_levelPalettesView == null)
                 _levelPalettesView = new LevelPalettesView();
 
-            _levelPalettesView.Initialize(_vm.Root.PaletteViewer);
+            _levelPalettesView.Initialize(_vm.Root.LevelEditor.PaletteSelector);
             _levelPalettesView.Show(this, DockState.DockLeft);
         }
 
-        public void ShowLevelPropSetView()
+        public void ShowLevelPropSelectorView()
         {
-            if (_levelPropSetView == null)
-                _levelPropSetView = new LevelPropSelectorView();
+            if (_levelPropSelectorView == null)
+                _levelPropSelectorView = new LevelPropSelectorView();
 
-            _levelPropSetView.Initialize(_vm.Root.LevelPropSelector);
-            _levelPropSetView.Show(this, DockState.DockLeft);
+            _levelPropSelectorView.Initialize(_vm.Root.LevelEditor.PropSelector);
+            _levelPropSelectorView.Show(this, DockState.DockLeft);
         }
 
-        public void ShowLevelTileSetsView()
+        public void ShowLevelTileSelectorView()
         {
-            if (_levelTileSetsView == null)
-                _levelTileSetsView = new LevelTileSelectorView();
+            if (_levelTileSelectorView == null)
+                _levelTileSelectorView = new LevelTileSelectorView();
 
-            _levelTileSetsView.Initialize(_vm.Root);
-            _levelTileSetsView.Show(this, DockState.DockLeft);
+            _levelTileSelectorView.Initialize(_vm.Root.LevelEditor.TileSelector);
+            _levelTileSelectorView.Show(this, DockState.DockLeft);
         }
 
         public void ShowPropSetEditorView()
@@ -230,10 +230,10 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         internal void ShowLevelView()
         {
-            ShowLevelTileSetsView();
-            ShowLevelPropSetView();
+            ShowLevelTileSelectorView();
+            ShowLevelPropSelectorView();
             ShowLevelPalettesView();
-            ShowLevelBodyView();
+            ShowLevelBodyEditorView();
         }
 
         internal void ShowPaletteEditorView()

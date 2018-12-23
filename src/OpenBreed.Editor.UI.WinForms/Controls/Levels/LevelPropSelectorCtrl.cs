@@ -40,7 +40,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
             DataGridView.CurrentCellDirtyStateChanged += new EventHandler(DataGridView_CurrentCellDirtyStateChanged);
             DataGridView.SelectionChanged += new EventHandler(DataGridView_SelectionChanged);
 
-            Update(_vm.CurrentPropSet);
+            Update(_vm.CurrentItem);
         }
 
         #endregion Public Methods
@@ -51,8 +51,8 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
         {
             switch (e.PropertyName)
             {
-                case nameof(_vm.CurrentPropSet):
-                    Update(_vm.CurrentPropSet);
+                case nameof(_vm.CurrentItem):
+                    Update(_vm.CurrentItem);
                     break;
                 default:
                     break;
@@ -158,7 +158,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
             descriptionColumn.ReadOnly = true;
             DataGridView.Columns.Add(descriptionColumn);
 
-            DataGridView.DataSource = _vm.CurrentPropSet.Items;
+            DataGridView.DataSource = _vm.CurrentItem.Items;
             //DataGridView.DataSource = m_Model.Data;
         }
 

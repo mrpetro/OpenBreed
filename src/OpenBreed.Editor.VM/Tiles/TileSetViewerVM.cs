@@ -44,18 +44,21 @@ namespace OpenBreed.Editor.VM.Tiles
             SelectionRectangle = new SelectionRectangle();
             SelectMode = SelectModeEnum.Nothing;
             MultiSelect = false;
-
-            Root.TileSetSelector.PropertyChanged += TileSetSelector_PropertyChanged;
         }
 
-        private void TileSetSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        public void Connect()
         {
-            var tileSetSelector = sender as TileSetSelectorVM;
+            Root.LevelEditor.TileSelector.PropertyChanged += TileSelector_PropertyChanged;
+        }
+
+        private void TileSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var tileSelector = sender as LevelTileSelectorVM;
 
             switch (e.PropertyName)
             {
-                case nameof(tileSetSelector.CurrentItem):
-                    UpdateWithTileSet(tileSetSelector.CurrentItem);
+                case nameof(tileSelector.CurrentItem):
+                    UpdateWithTileSet(tileSelector.CurrentItem);
                     break;
                 default:
                     break;

@@ -14,17 +14,17 @@ using OpenBreed.Editor.VM.Levels;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
 {
-    public partial class PalettesCtrl : UserControl
+    public partial class LevelPaletteSelectorCtrl : UserControl
     {
         #region Private Fields
 
-        private PalettesVM _vm;
+        private LevelPaletteSelectorVM _vm;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PalettesCtrl()
+        public LevelPaletteSelectorCtrl()
         {
             InitializeComponent();
         }
@@ -33,12 +33,12 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
 
         #region Public Methods
 
-        public void Initialize(PalettesVM vm)
+        public void Initialize(LevelPaletteSelectorVM vm)
         {
             _vm = vm;
 
             cbxPalettes.DataBindings.Clear();
-            cbxPalettes.DataSource = _vm.Items;
+            cbxPalettes.DataSource = _vm.Parent.Root.LevelEditor.CurrentLevel.Palettes;
             cbxPalettes.DisplayMember = "Name";
 
             cbxPalettes.DataBindings.Add("SelectedIndex", _vm, nameof(_vm.CurrentIndex), false, DataSourceUpdateMode.OnPropertyChanged);

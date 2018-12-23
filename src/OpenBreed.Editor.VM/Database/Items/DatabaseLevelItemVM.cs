@@ -25,7 +25,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         public override void Open()
         {
-            Owner.Root.LoadLevel(_model);
+            Owner.Root.LevelEditor.Load(_model);
             Owner.OpenedItem = this;
         }
     }

@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
 {
-    partial class PalettesCtrl
+    partial class LevelPaletteSelectorCtrl
     {
         /// <summary> 
         /// Required designer variable.

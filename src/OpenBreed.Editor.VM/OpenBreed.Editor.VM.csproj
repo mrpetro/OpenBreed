@@ -127,7 +127,7 @@
     <Compile Include="Levels\Tools\ToolsMan.cs" />
     <Compile Include="Levels\Tools\ZoomTool.cs" />
     <Compile Include="Palettes\PaletteEditorVM.cs" />
-    <Compile Include="Levels\LevelPalettesVM.cs" />
+    <Compile Include="Levels\LevelPaletteSelectorVM.cs" />
     <Compile Include="Palettes\PaletteVM.cs" />
     <Compile Include="Database\DatabaseVM.cs" />
     <Compile Include="Props\PropSetEditorVM.cs" />
@@ -145,7 +145,7 @@
     <Compile Include="Tiles\Helpers\TilesSelector.cs" />
     <Compile Include="Tiles\TileSetPaletteSelectorVM.cs" />
     <Compile Include="Tiles\TileSetViewerVM.cs" />
-    <Compile Include="Tiles\TileSetSelectorVM.cs" />
+    <Compile Include="Levels\LevelTileSelectorVM.cs" />
     <Compile Include="Tiles\TileSetVM.cs" />
     <Compile Include="Tiles\TileVM.cs" />
     <Compile Include="Tiles\Tools\TileSelectTool.cs" />
