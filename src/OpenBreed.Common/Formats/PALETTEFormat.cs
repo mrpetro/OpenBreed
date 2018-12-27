@@ -28,7 +28,7 @@ namespace OpenBreed.Common.Formats
                     throw new InvalidOperationException(paletteModeStr);
             }
         }
-        public object Load(BaseSource source, Dictionary<string, object> parameters = null)
+        public object Load(SourceBase source, Dictionary<string, object> parameters = null)
         {
             var modeStr = (string)parameters["MODE"];
             var colorsNo = (int)parameters["COLORS_NO"];
@@ -44,7 +44,7 @@ namespace OpenBreed.Common.Formats
             return paletteReader.Read(source.Stream);
         }
 
-        public void Save(BaseSource source, object model)
+        public void Save(SourceBase source, object model)
         {
             throw new NotImplementedException();
         }

@@ -47,6 +47,9 @@
     <Compile Include="Configs\BaseCfg.cs" />
     <Compile Include="Configs\IConfig.cs" />
     <Compile Include="Configs\IConfigCtrl.cs" />
+    <Compile Include="Maps\LevelModel.cs" />
+    <Compile Include="Props\PropSetModel.cs" />
+    <Compile Include="XmlUnitOfWork.cs" />
     <Compile Include="Database\DatabaseItemDef.cs" />
     <Compile Include="Database\FormatDef.cs" />
     <Compile Include="Database\Items\Palettes\PaletteDef.cs" />
@@ -70,13 +73,17 @@
     <Compile Include="Database\Tables\Sprites\DatabaseSpriteSetTableDef.cs" />
     <Compile Include="Database\Tables\Tiles\DatabaseTileSetTableDef.cs" />
     <Compile Include="Drawing\BitmapHelper.cs" />
+    <Compile Include="EntityBase.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="FileMan.cs" />
     <Compile Include="Formats\DataFormatMan.cs" />
     <Compile Include="Formats\PaletteFormat.cs" />
     <Compile Include="Helpers\MathHelper.cs" />
+    <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="IDatabaseFactory.cs" />
     <Compile Include="Images\Builders\ImageBuilder.cs" />
     <Compile Include="Images\Readers\ACBM\ACBMImageReader.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="Logging\LogFile.cs" />
     <Compile Include="Logging\LogMan.cs" />
     <Compile Include="Logging\LogType.cs" />
@@ -107,7 +114,11 @@
     <Compile Include="Readers\BigEndianBinaryReader.cs" />
     <Compile Include="Sound\PCMPlayer.cs" />
     <Compile Include="Sound\WaveMemoryStream.cs" />
-    <Compile Include="Sources\BaseSource.cs" />
+    <Compile Include="Database\Items\Sources\IDirectoryFileSourceDef.cs" />
+    <Compile Include="Database\Items\Sources\IEPFArchiveSourceDef.cs" />
+    <Compile Include="Database\Items\Sources\ISourceDef.cs" />
+    <Compile Include="Sources\ISourcesFactory.cs" />
+    <Compile Include="Sources\SourceBase.cs" />
     <Compile Include="Sources\DirectoryFileSource.cs" />
     <Compile Include="Sources\EPFArchiveFileSource.cs" />
     <Compile Include="Formats\ABHCMAPFormat.cs" />
@@ -118,8 +129,7 @@
     <Compile Include="Formats\ACBMImageFormat.cs" />
     <Compile Include="Formats\ACBMTileSetFormat.cs" />
     <Compile Include="Formats\IDataFormat.cs" />
-    <Compile Include="Sources\SourceParameter.cs" />
-    <Compile Include="Sources\SourceMan.cs" />
+    <Compile Include="Sources\SourcesRepository.cs" />
     <Compile Include="Sprites\Builders\SpriteBuilder.cs" />
     <Compile Include="Sprites\Builders\SpriteSetBuilder.cs" />
     <Compile Include="Sprites\Readers\SPRReader.cs" />
@@ -133,6 +143,8 @@
     <Compile Include="Tiles\TileSetModel.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="Writers\BigEndianBinaryWriter.cs" />
+    <Compile Include="XmlDatabase.cs" />
+    <Compile Include="XmlDatabaseFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Defaults\GameDatabase.ABHC.xml">
@@ -223,9 +235,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Props\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\..\EPFArchive\src\EPFArchive\EPFArchive.csproj">
       <Project>{52249c4e-eaf8-45ce-a757-aaa3c3c125d4}</Project>

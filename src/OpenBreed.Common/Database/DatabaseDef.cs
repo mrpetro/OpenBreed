@@ -56,6 +56,11 @@ namespace OpenBreed.Common.Database
             return Tools.RestoreFromXml<DatabaseDef>(filePath);
         }
 
+        public void Save(string xmlFilePath)
+        {
+            Tools.StoreAsXml<DatabaseDef>(xmlFilePath, this);
+        }
+
         #endregion Public Methods
 
     }

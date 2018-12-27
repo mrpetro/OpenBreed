@@ -16,7 +16,7 @@ namespace OpenBreed.Common.Formats
         {
         }
 
-        public object Load(BaseSource source, Dictionary<string, object> parameters = null)
+        public object Load(SourceBase source, Dictionary<string, object> parameters = null)
         {
             var tileSize = (int)parameters["TILE_SIZE"];
             var bitPlanesNo = (int)parameters["BIT_PLANES_NO"];
@@ -29,7 +29,7 @@ namespace OpenBreed.Common.Formats
             return reader.Read(source.Stream);
         }
 
-        public void Save(BaseSource source, object model)
+        public void Save(SourceBase source, object model)
         {
             throw new NotImplementedException("ACBMTileSet Write");
         }

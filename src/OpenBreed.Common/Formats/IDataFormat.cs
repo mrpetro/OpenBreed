@@ -8,7 +8,7 @@ namespace OpenBreed.Common.Formats
 {
     public interface IDataFormat
     {
-        object Load(BaseSource sourceModel, Dictionary<string, object> parameters);
-        void Save(BaseSource sourceModel, object model);
+        object Load(SourceBase sourceModel, Dictionary<string, object> parameters);
+        void Save(SourceBase sourceModel, object model);
     }
 }

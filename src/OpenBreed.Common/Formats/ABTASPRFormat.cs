@@ -15,7 +15,7 @@ namespace OpenBreed.Common.Formats
         {
         }
 
-        public object Load(BaseSource source, Dictionary<string, object> parameters = null)
+        public object Load(SourceBase source, Dictionary<string, object> parameters = null)
         {
             //Remember to set source stream to begining
             source.Stream.Seek(0, SeekOrigin.Begin);
@@ -26,7 +26,7 @@ namespace OpenBreed.Common.Formats
             return sprReader.Read(source.Stream);
         }
 
-        public void Save(BaseSource source, object model)
+        public void Save(SourceBase source, object model)
         {
             throw new NotImplementedException("ABTASPR Write");
         }

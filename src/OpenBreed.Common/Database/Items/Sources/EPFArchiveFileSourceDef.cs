@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 namespace OpenBreed.Common.Database.Items.Sources
 {
     [Serializable]
-    public class EPFArchiveFileSourceDef : SourceDef
+    public class EPFArchiveFileSourceDef : SourceDef//, IEPFArchiveSourceDef
     {
         [XmlAttribute]
         public string ArchivePath { get; set; }

@@ -8,40 +8,63 @@ using OpenBreed.Common.Database.Items.Sources;
 
 namespace OpenBreed.Common.Sources
 {
-    public class EPFArchiveFileSource : BaseSource
+    public class EPFArchiveFileSource : SourceBase
     {
+
         #region Private Fields
 
-        private readonly EPFArchive _archive;
-        private readonly EPFArchiveEntry _entry;
+        private EPFArchiveEntry _entry;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public EPFArchiveFileSource(SourceMan manager, EPFArchiveFileSourceDef sourceDef) :
-            base(manager, sourceDef)
+        public EPFArchiveFileSource(SourcesRepository manager, string archivePath, string name) :
+            base(manager, name)
         {
-            _archive = manager.GetArchive(manager.ExpandVariables(sourceDef.ArchivePath));
-            _entry = _archive.FindEntry(sourceDef.Name);
+            ArchivePath = archivePath;
         }
 
         #endregion Public Constructors
+
+        #region Public Properties
+
+        public string ArchivePath { get; }
+
+        #endregion Public Properties
 
         #region Protected Methods
 
         protected override void Close()
         {
+            if (_entry == null)
+                throw new InvalidOperationException($"Entry {Name} not opened.");
+
             _entry.Dispose();
 
             base.Close();
         }
 
-        protected override Stream Open()
+        protected override Stream CreateStream()
         {
+            InitEntry();
+
             return _entry.Open();
         }
 
         #endregion Protected Methods
+
+        #region Private Methods
+
+        private void InitEntry()
+        {
+            if (_entry != null)
+                throw new InvalidOperationException($"Entry {Name} already initialized.");
+
+            var archive = _manager.GetArchive(SourcesRepository.ExpandVariables(ArchivePath));
+            _entry = archive.FindEntry(Name);
+        }
+
+        #endregion Private Methods
     }
 }

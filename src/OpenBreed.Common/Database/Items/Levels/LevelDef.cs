@@ -10,9 +10,6 @@ namespace OpenBreed.Common.Database.Items.Levels
     [Serializable]
     public class LevelDef : DatabaseItemDef
     {
-        [XmlAttribute]
-        public int Id { get; set; }
-
         public string SourceRef { get; set; }
         public FormatDef Format { get; set; }
 

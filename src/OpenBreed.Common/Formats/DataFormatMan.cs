@@ -21,7 +21,7 @@ namespace OpenBreed.Common.Formats
 
         #region Public Methods
 
-        public object Load(BaseSource source, FormatDef formatDef)
+        public object Load(SourceBase source, FormatDef formatDef)
         {
             var format = GetFormat(formatDef.Name);
             if (format == null)

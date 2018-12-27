@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 namespace OpenBreed.Common.Database.Items.Sources
 {
     [Serializable]
-    public class DirectoryFileSourceDef : SourceDef
+    public class DirectoryFileSourceDef : SourceDef//, IDirectoryFileSourceDef
     {
         [XmlAttribute]
         public string DirectoryPath { get; set; }

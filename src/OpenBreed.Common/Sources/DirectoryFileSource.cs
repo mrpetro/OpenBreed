@@ -7,21 +7,21 @@ using OpenBreed.Common.Database.Items.Sources;
 
 namespace OpenBreed.Common.Sources
 {
-    public class DirectoryFileSource : BaseSource
+    public class DirectoryFileSource : SourceBase
     {
 
         #region Private Fields
 
-        private readonly string _directoryPath;
+        public string DirectoryPath { get; }
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DirectoryFileSource(SourceMan manager, DirectoryFileSourceDef sourceDef) :
-            base(manager, sourceDef)
+        public DirectoryFileSource(SourcesRepository manager, string directoryPath, string name) :
+            base(manager, name)
         {
-            _directoryPath = manager.ExpandVariables(sourceDef.DirectoryPath);
+            DirectoryPath = directoryPath;
         }
 
         #endregion Public Constructors
@@ -35,9 +35,9 @@ namespace OpenBreed.Common.Sources
             base.Close();
         }
 
-        protected override Stream Open()
+        protected override Stream CreateStream()
         {
-            string filePath = Path.Combine(_directoryPath, Name);
+            string filePath = Path.Combine(SourcesRepository.ExpandVariables(DirectoryPath), Name);
             return File.Open(filePath, FileMode.Open, FileAccess.ReadWrite);
         }
 

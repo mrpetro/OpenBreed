@@ -6,44 +6,40 @@ using System.IO;
 
 namespace OpenBreed.Common.Sources
 {
-    public abstract class BaseSource : IDisposable
+    public abstract class SourceBase : EntityBase, IDisposable
     {
+
         #region Private Fields
 
-        private readonly SourceMan _manager;
+        protected readonly SourcesRepository _manager;
 
-        private Stream m_Stream;
+        private Stream _stream;
 
         #endregion Private Fields
 
         #region Protected Constructors
 
-        protected BaseSource(SourceMan manager, SourceDef sourceDef)
+        protected SourceBase(SourcesRepository manager, string name)
         {
             if (manager == null)
                 throw new ArgumentNullException("Manager");
 
-            if (sourceDef == null)
-                throw new ArgumentNullException("SourceDef");
-
             _manager = manager;
-            Name = sourceDef.Name;
+            Name = name;
         }
 
         #endregion Protected Constructors
 
         #region Public Properties
 
-        public string Name { get; private set; }
-
         public Stream Stream
         {
             get
             {
-                if (m_Stream == null)
-                    m_Stream = Open();
+                if (_stream == null)
+                    _stream = Open();
 
-                return m_Stream;
+                return _stream;
             }
         }
 
@@ -53,7 +49,7 @@ namespace OpenBreed.Common.Sources
 
         public void Dispose()
         {
-            if (m_Stream != null)
+            if (_stream != null)
             {
                 Close();
             }
@@ -62,6 +58,12 @@ namespace OpenBreed.Common.Sources
         public object Load(IDataFormat format, Dictionary<string, object> parameters)
         {
             return format.Load(this, parameters);
+        }
+
+        public virtual Stream Open()
+        {
+            _manager.LockSource(this);
+            return CreateStream();
         }
 
         public void Save(object model, IDataFormat format)
@@ -77,9 +79,9 @@ namespace OpenBreed.Common.Sources
         {
             _manager.ReleaseSource(this);
         }
-
-        protected abstract Stream Open();
+        protected abstract Stream CreateStream();
 
         #endregion Protected Methods
+
     }
 }

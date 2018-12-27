@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Sources
 {
-    public class SourceParameter
+    public interface ISourcesFactory
     {
-        public string Name { get; set; }
-        public Type Type { get; set; }
-        public object Value { get; set; }
+        //DirectoryFileSource CreateDirectoryFileSource()
     }
 }
