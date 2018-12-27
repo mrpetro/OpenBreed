@@ -44,10 +44,8 @@ namespace OpenBreed.Editor.VM.Database
 
     public class DatabaseVM : BaseViewModel
     {
-
         #region Private Fields
 
-        private DatabaseDef _databaseDef;
         private DatabaseItemVM _openedItem;
         private ProjectState _state;
 
@@ -55,9 +53,10 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Internal Constructors
 
-        internal DatabaseVM(EditorVM root)
+        internal DatabaseVM(EditorVM root, IUnitOfWork unitOfWork)
         {
             Root = root;
+            UnitOfWork = unitOfWork;
         }
 
         #endregion Internal Constructors
@@ -65,10 +64,8 @@ namespace OpenBreed.Editor.VM.Database
         #region Public Properties
 
         public string FilePath { get; private set; }
-
+        public bool IsModified { get; internal set; }
         public string Name { get; set; }
-
-
         public DatabaseItemVM OpenedItem
         {
             get { return _openedItem; }
@@ -76,82 +73,46 @@ namespace OpenBreed.Editor.VM.Database
         }
 
         public EditorVM Root { get; private set; }
-
-        internal void Save()
-        {
-            throw new NotImplementedException();
-        }
-
         public ProjectState State
         {
             get { return _state; }
             set { SetProperty(ref _state, value); }
         }
 
-        public bool IsModified { get; internal set; }
-
         #endregion Public Properties
+
+        #region Internal Properties
+
+        internal IUnitOfWork UnitOfWork { get; }
+
+        #endregion Internal Properties
 
         #region Public Methods
 
-        public PaletteDef GetPaletteDef(string paletteName)
-        {
-            var paletteDef = _databaseDef.Tables.OfType<DatabasePaletteTableDef>().FirstOrDefault().Items.FirstOrDefault(item => item.Name == paletteName);
-
-            if (paletteDef == null)
-                throw new InvalidOperationException("Palette '" + paletteName + "' not found!");
-
-            return paletteDef;
-        }
-
         public LevelDef GetLevelDef(string levelName)
         {
-            var levelDef = _databaseDef.Tables.OfType<DatabaseLevelTableDef>().FirstOrDefault().Items.FirstOrDefault(item => item.Name == levelName);
+            return UnitOfWork.GetLevelDef(levelName);
 
-            if (levelDef == null)
-                throw new InvalidOperationException("Level '" + levelName + "' not found!");
+        }
 
-            return levelDef;
+        public PaletteDef GetPaletteDef(string paletteName)
+        {
+            return UnitOfWork.GetPaletteDef(paletteName);
         }
 
         public PropertySetDef GetPropSetDef(string propertySetName)
         {
-            var propertySetDef = _databaseDef.Tables.OfType<DatabasePropertySetTableDef>().FirstOrDefault().Items.FirstOrDefault(item => item.Name == propertySetName);
-
-            if (propertySetDef == null)
-                throw new InvalidOperationException("Property set '" + propertySetName + "' not found!");
-
-            return propertySetDef;
-        }
-
-        public TileSetDef GetTileSetDef(string tileSetName)
-        {
-            var tileSetDef = _databaseDef.Tables.OfType<DatabaseTileSetTableDef>().FirstOrDefault().Items.FirstOrDefault(item => item.Name == tileSetName);
-
-            if (tileSetDef == null)
-                throw new InvalidOperationException("Tile set '" + tileSetName + "' not found!");
-
-            return tileSetDef;
+            return UnitOfWork.GetPropSetDef(propertySetName);
         }
 
         public SpriteSetDef GetSpriteSetDef(string spriteSetName)
         {
-            var spriteSetDef = _databaseDef.Tables.OfType<DatabaseSpriteSetTableDef>().FirstOrDefault().Items.FirstOrDefault(item => item.Name == spriteSetName);
-
-            if (spriteSetDef == null)
-                throw new InvalidOperationException("Sprite set '" + spriteSetName + "' not found!");
-
-            return spriteSetDef;
+            return UnitOfWork.GetSpriteSetDef(spriteSetName);
         }
 
-        public SourceDef GetSourceDef(string sourceRef)
+        public TileSetDef GetTileSetDef(string tileSetName)
         {
-            var sourceDef = _databaseDef.Tables.OfType<DatabaseSourceTableDef>().FirstOrDefault().Items.FirstOrDefault(item => item.Name == sourceRef);
-
-            if (sourceDef == null)
-                throw new InvalidOperationException("Source " + sourceRef + " not found!");
-
-            return sourceDef;
+            return UnitOfWork.GetTileSetDef(tileSetName);
         }
 
         #endregion Public Methods
@@ -202,7 +163,7 @@ namespace OpenBreed.Editor.VM.Database
 
         internal IEnumerable<DatabaseTableVM> GetTables()
         {
-            foreach (var tableDef in _databaseDef.Tables)
+            foreach (var tableDef in UnitOfWork.GetTables())
             {
                 var tableVM = CreateTable(tableDef);
                 tableVM.Load(tableDef);
@@ -210,13 +171,11 @@ namespace OpenBreed.Editor.VM.Database
             }
         }
 
-        internal void Load(string filePath )
+        internal void Save()
         {
-            _databaseDef = Tools.RestoreFromXml<DatabaseDef>(filePath);
-            FilePath = filePath;
+            throw new NotImplementedException();
         }
 
         #endregion Internal Methods
-
     }
 }

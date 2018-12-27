@@ -15,7 +15,7 @@ namespace OpenBreed.Editor.VM.Levels
 
         }
 
-        internal static void SaveAs(LevelVM map, BaseSource newSource)
+        internal static void SaveAs(LevelVM map, SourceBase newSource)
         {
 
         }

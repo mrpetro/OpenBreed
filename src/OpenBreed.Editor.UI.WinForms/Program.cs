@@ -9,6 +9,7 @@ using OpenABEdCfg;
 using OpenBreed.Editor.VM;
 using OpenBreed.Editor.UI.WinForms;
 using OpenBreed.Editor.UI.WinForms.Forms;
+using OpenBreed.Common;
 
 namespace OpenBreed.Editor.UI.WinForms
 {
@@ -21,20 +22,10 @@ namespace OpenBreed.Editor.UI.WinForms
         [STAThread]
         static void Main()
         {
-            var dialogProvider = new DialogProvider();
-            //dialogProvider.Register(
-            //dialogProvider.ShowDialog("", 
-
-            using (var editor = new EditorVM(dialogProvider))
+            using (var editor = new EditorVM(new DialogProvider()))
             {
-                editor.Initialize();
                 editor.Run();
-                InitUI(editor);
             }
-
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new MainForm());
 
             //for (int i = 1; i <= 4; i++)
             //{
@@ -53,16 +44,6 @@ namespace OpenBreed.Editor.UI.WinForms
             //    pcmPlayer.PlaySync();
 
             //}
-        }
-
-        private static void InitUI(EditorVM editor)
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
-            var mainForm = new MainForm();
-            mainForm.Initialize(editor);
-            Application.Run(mainForm);
         }
     }
 }

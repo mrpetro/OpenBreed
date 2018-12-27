@@ -17,7 +17,7 @@ namespace OpenBreed.Editor.VM.Images
         #region Private Fields
 
         private Image _image;
-        private BaseSource _source;
+        private SourceBase _source;
 
         #endregion Private Fields
 
@@ -40,7 +40,7 @@ namespace OpenBreed.Editor.VM.Images
 
         public EditorVM Root { get; private set; }
 
-        public BaseSource Source
+        public SourceBase Source
         {
             get { return _source; }
             set { SetProperty(ref _source, value); }
@@ -84,13 +84,9 @@ namespace OpenBreed.Editor.VM.Images
 
         internal void Load(ImageDef imageDef)
         {
-            var sourceDef = Root.Database.GetSourceDef(imageDef.SourceRef);
-            if (sourceDef == null)
-                throw new Exception("No Source definition found with name: " + imageDef.SourceRef);
-
-            var source = Root.SourceMan.GetSource(sourceDef);
+            var source = Root.UnitOfWork.GetRepository<SourceBase>().GetByName(imageDef.SourceRef);
             if (source == null)
-                throw new Exception("Image source error: " + sourceDef);
+                throw new Exception("Image source error: " + imageDef.SourceRef);
 
             Image = Root.FormatMan.Load(source, imageDef.Format) as Image;
             Source = source;

@@ -64,8 +64,7 @@ namespace OpenBreed.Editor.VM
             ImageViewer = new ImageViewerVM(this);
             LevelEditor = new LevelEditorVM(this);
             FormatMan = new DataFormatMan();
-            SourceMan = new SourceMan();
-            SourceMan.ExpandVariables = Settings.ExpandVariables;
+            SourcesRepository.ExpandVariables = Settings.ExpandVariables;
 
             FormatMan.RegisterFormat("ABSE_MAP", new ABSEMAPFormat());
             FormatMan.RegisterFormat("ABHC_MAP", new ABHCMAPFormat());
@@ -87,31 +86,24 @@ namespace OpenBreed.Editor.VM
             set { SetProperty(ref _database, value); }
         }
 
-        public PropSetEditorVM PropSetEditor { get; }
-
         public DatabaseViewerVM DatabaseViewer { get; }
-
         public IDialogProvider DialogProvider { get; }
-
-        public ImageViewerVM ImageViewer { get; }
-
-        public LevelEditorVM LevelEditor { get; }
-
-        public SettingsMan Settings { get; private set; }
-
         public DataFormatMan FormatMan { get; }
-        public SourceMan SourceMan { get; }
-
+        public ImageViewerVM ImageViewer { get; }
+        public LevelEditorVM LevelEditor { get; }
+        public PropSetEditorVM PropSetEditor { get; }
+        public SettingsMan Settings { get; private set; }
+        //public SourceMan SourceMan { get; }
         public SpriteViewerVM SpriteViewer { get; }
-        public TileSetEditorVM TileSetEditor { get; }
-
         public EditorState State
         {
             get { return _state; }
             set { SetProperty(ref _state, value); }
         }
 
+        public TileSetEditorVM TileSetEditor { get; }
         public ToolsMan ToolsMan { get; }
+        public IUnitOfWork UnitOfWork { get; internal set; }
 
         #endregion Public Properties
 
@@ -120,16 +112,6 @@ namespace OpenBreed.Editor.VM
         public LevelVM CreateLevel()
         {
             return new LevelVM(this);
-        }
-
-        public SpriteSetVM CreateSpriteSet()
-        {
-            return new SpriteSetVM(this);
-        }
-
-        public TileSetVM CreateTileSet()
-        {
-            return new TileSetVM(this);
         }
 
         public PaletteVM CreatePalette()
@@ -142,9 +124,14 @@ namespace OpenBreed.Editor.VM
             return new PropSetVM(this);
         }
 
-        public DatabaseVM CreateDatabase()
+        public SpriteSetVM CreateSpriteSet()
         {
-            return new DatabaseVM(this);
+            return new SpriteSetVM(this);
+        }
+
+        public TileSetVM CreateTileSet()
+        {
+            return new TileSetVM(this);
         }
 
         public void Dispose()
@@ -152,22 +139,23 @@ namespace OpenBreed.Editor.VM
             Settings.Store();
         }
 
-        public void Initialize()
+        public DatabaseVM OpenXmlDatabase(string xmlFilePath)
         {
-            PropSetEditor.Connect();
-            DatabaseViewer.Connect();
-            LevelEditor.Connect();
-            SpriteViewer.Connect();
+            var xmlDatabase = new XmlDatabase(xmlFilePath, DatabaseMode.Read);
+            UnitOfWork = new XmlUnitOfWork(xmlDatabase);
+
+            return new DatabaseVM(this, UnitOfWork);
         }
         public void Run()
         {
             try
             {
-                Settings.Restore();
+                Initialize();
+                DialogProvider.ShowEditorView(this);
             }
             catch (Exception ex)
             {
-                DialogProvider.ShowMessage("Critical exception: " + ex, "Critial exception");
+                DialogProvider.ShowMessage("Critical exception: " + ex, "Open Breed Editor critial exception");
             }
         }
 
@@ -186,15 +174,11 @@ namespace OpenBreed.Editor.VM
             return EditorVMHelper.TryExit(this);
         }
 
-        internal bool TrySaveDatabase()
-        {
-            return EditorVMHelper.TrySaveDatabase(this);
-        }
-
         public void TryOpenDatabase()
         {
             EditorVMHelper.TryOpenDatabase(this);
         }
+
         public void TryRunABTAGame()
         {
             Tools.TryAction(RunABTAGame);
@@ -202,8 +186,26 @@ namespace OpenBreed.Editor.VM
 
         #endregion Public Methods
 
+        #region Internal Methods
+
+        internal bool TrySaveDatabase()
+        {
+            return EditorVMHelper.TrySaveDatabase(this);
+        }
+
+        #endregion Internal Methods
+
         #region Private Methods
 
+        private void Initialize()
+        {
+            PropSetEditor.Connect();
+            DatabaseViewer.Connect();
+            LevelEditor.Connect();
+            SpriteViewer.Connect();
+
+            Settings.Restore();
+        }
         private void RunABTAGame()
         {
             Process proc = new Process();

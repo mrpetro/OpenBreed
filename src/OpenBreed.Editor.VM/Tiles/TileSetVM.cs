@@ -69,7 +69,7 @@ namespace OpenBreed.Editor.VM.Tiles
         }
 
         public EditorVM Root { get; private set; }
-        public BaseSource Source { get; private set; }
+        public SourceBase Source { get; private set; }
 
         public int TileSize { get; private set; }
 
@@ -83,13 +83,9 @@ namespace OpenBreed.Editor.VM.Tiles
 
         internal void Load(TileSetDef tileSetDef)
         {
-            var sourceDef = Root.Database.GetSourceDef(tileSetDef.SourceRef);
-            if (sourceDef == null)
-                throw new Exception("No Source definition found with name: " + tileSetDef.SourceRef);
-
-            var source = Root.SourceMan.GetSource(sourceDef);
+            var source = Root.UnitOfWork.GetRepository<SourceBase>().GetByName(tileSetDef.SourceRef);
             if (source == null)
-                throw new Exception("TileSet source error: " + sourceDef);
+                throw new Exception("TileSet source error: " + tileSetDef.SourceRef);
 
             var model = Root.FormatMan.Load(source, tileSetDef.Format) as TileSetModel;
 

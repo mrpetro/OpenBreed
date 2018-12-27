@@ -80,7 +80,10 @@ namespace OpenBreed.Editor.VM.Database
 
         private void UpdateWithNoItems()
         {
-            Items.Clear();
+            Items.UpdateAfter(() =>
+            {
+                Items.Clear();
+            });
         }
 
         #endregion Private Methods

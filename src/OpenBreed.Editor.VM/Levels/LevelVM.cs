@@ -30,7 +30,7 @@ namespace OpenBreed.Editor.VM.Levels
 
         private bool _isModified;
         private PropSetVM _propSet;
-        private BaseSource _source = null;
+        private SourceBase _source = null;
         private string _title;
 
         #endregion Private Fields
@@ -83,7 +83,7 @@ namespace OpenBreed.Editor.VM.Levels
 
         public EditorVM Root { get; }
 
-        public BaseSource Source
+        public SourceBase Source
         {
             get { return _source; }
             set { SetProperty(ref _source, value); }
@@ -139,7 +139,7 @@ namespace OpenBreed.Editor.VM.Levels
             //Source.Save(CurrentMap);
         }
 
-        public void SaveAs(BaseSource newSource)
+        public void SaveAs(SourceBase newSource)
         {
             //OnSaving(new EventArgs());
             //Source = newSource;
@@ -186,13 +186,9 @@ namespace OpenBreed.Editor.VM.Levels
 
         internal void Load(LevelDef levelDef)
         {
-            var sourceDef = Root.Database.GetSourceDef(levelDef.SourceRef);
-            if (sourceDef == null)
-                throw new Exception("No Source definition found with name: " + levelDef.SourceRef);
-
-            var source = Root.SourceMan.GetSource(sourceDef);
+            var source = Root.UnitOfWork.GetRepository<SourceBase>().GetByName(levelDef.SourceRef);
             if (source == null)
-                throw new Exception("TileSet source error: " + sourceDef);
+                throw new Exception("TileSet source error: " + levelDef.SourceRef);
 
             var model = Root.FormatMan.Load(source, levelDef.Format) as MapModel;
             Source = source;

@@ -59,6 +59,7 @@ namespace OpenBreed.Editor.VM
             }
 
             editor.Database = null;
+            editor.UnitOfWork = null;
 
             return true;
         }
@@ -100,9 +101,7 @@ namespace OpenBreed.Editor.VM
             if (!CheckCloseCurrentDatabase(editor, databaseFilePath))
                 return false;
 
-            var database = editor.CreateDatabase();
-            database.Load(databaseFilePath);
-            editor.Database = database;
+            editor.Database = editor.OpenXmlDatabase(databaseFilePath);
 
             return true;
         }

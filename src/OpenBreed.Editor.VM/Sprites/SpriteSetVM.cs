@@ -57,7 +57,7 @@ namespace OpenBreed.Editor.VM.Sprites
             }
         }
 
-        public BaseSource Source { get; private set; }
+        public SourceBase Source { get; private set; }
 
         #endregion Public Properties
 
@@ -106,13 +106,9 @@ namespace OpenBreed.Editor.VM.Sprites
 
         internal void Load(SpriteSetDef spriteSetDef)
         {
-            var sourceDef = Root.Database.GetSourceDef(spriteSetDef.SourceRef);
-            if (sourceDef == null)
-                throw new Exception("No Source definition found with name: " + spriteSetDef.SourceRef);
-
-            var source = Root.SourceMan.GetSource(sourceDef);
+            var source = Root.UnitOfWork.GetRepository<SourceBase>().GetByName(spriteSetDef.SourceRef);
             if (source == null)
-                throw new Exception("SpriteSet source error: " + sourceDef);
+                throw new Exception("SpriteSet source error: " + spriteSetDef.SourceRef);
 
             var model = Root.FormatMan.Load(source, spriteSetDef.Format) as SpriteSetModel;
             Source = source;

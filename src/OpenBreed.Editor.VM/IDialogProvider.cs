@@ -30,6 +30,8 @@ namespace OpenBreed.Editor.VM
 
         void ShowMessage(string text, string caption);
 
+        void ShowEditorView(EditorVM editor);
+
         IFolderBrowserQuery FolderBrowserDialog();
         IOpenFileQuery OpenFileDialog();
         ISaveFileQuery SaveFileDialog();

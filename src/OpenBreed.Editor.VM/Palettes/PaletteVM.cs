@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Database.Items.Palettes;
+using OpenBreed.Common.Sources;
 
 namespace OpenBreed.Editor.VM.Palettes
 {
@@ -33,13 +34,9 @@ namespace OpenBreed.Editor.VM.Palettes
 
         internal void Load(PaletteDef paletteDef)
         {
-            var sourceDef = Root.Database.GetSourceDef(paletteDef.SourceRef);
-            if (sourceDef == null)
-                throw new Exception("No Source definition found with name: " + paletteDef.SourceRef);
-
-            var source = Root.SourceMan.GetSource(sourceDef);
+            var source = Root.UnitOfWork.GetRepository<SourceBase>().GetByName(paletteDef.SourceRef);
             if (source == null)
-                throw new Exception("SpriteSet source error: " + sourceDef);
+                throw new Exception("Palette source error: " + paletteDef.SourceRef);
 
             var model = Root.FormatMan.Load(source, paletteDef.Format) as PaletteModel;
             Restore(model);

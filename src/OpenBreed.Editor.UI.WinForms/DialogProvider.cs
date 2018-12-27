@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.UI.WinForms.Views;
+﻿using OpenBreed.Editor.UI.WinForms.Forms;
+using OpenBreed.Editor.UI.WinForms.Views;
 using OpenBreed.Editor.VM;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ namespace OpenBreed.Editor.UI.WinForms
 {
     public class DialogProvider : IDialogProvider
     {
+        private MainForm _mainForm;
+
         private MessageBoxButtons ToMessageBoxButtons(QuestionDialogButtons buttons)
         {
             switch (buttons)
@@ -85,6 +88,16 @@ namespace OpenBreed.Editor.UI.WinForms
         public ISaveFileQuery SaveFileDialog()
         {
             return new SaveFileQuery();
+        }
+
+        public void ShowEditorView(EditorVM editor)
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
+            _mainForm = new MainForm();
+            _mainForm.Initialize(editor);
+            Application.Run(_mainForm);
         }
     }
 }
