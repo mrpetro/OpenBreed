@@ -80,10 +80,10 @@ namespace OpenBreed.Editor.VM.Tiles
 
         }
 
-        internal void TryLoad(TileSetDef tileSetDef)
+        internal void TryLoad(string name)
         {
             var tileSet = Root.CreateTileSet();
-            tileSet.Load(tileSetDef);
+            tileSet.Load(name);
             CurrentTileSet = tileSet;
         }
 

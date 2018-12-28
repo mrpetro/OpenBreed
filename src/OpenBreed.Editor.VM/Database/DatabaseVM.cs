@@ -89,32 +89,6 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Public Methods
 
-        public LevelDef GetLevelDef(string levelName)
-        {
-            return UnitOfWork.GetLevelDef(levelName);
-
-        }
-
-        public PaletteDef GetPaletteDef(string paletteName)
-        {
-            return UnitOfWork.GetPaletteDef(paletteName);
-        }
-
-        public PropertySetDef GetPropSetDef(string propertySetName)
-        {
-            return UnitOfWork.GetPropSetDef(propertySetName);
-        }
-
-        public SpriteSetDef GetSpriteSetDef(string spriteSetName)
-        {
-            return UnitOfWork.GetSpriteSetDef(spriteSetName);
-        }
-
-        public TileSetDef GetTileSetDef(string tileSetName)
-        {
-            return UnitOfWork.GetTileSetDef(tileSetName);
-        }
-
         #endregion Public Methods
 
         #region Internal Methods

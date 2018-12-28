@@ -123,7 +123,7 @@ namespace OpenBreed.Editor.VM.Tiles
                     if (CurrentItem == null)
                         Title = "Tile sets - <no current tile set>";
                     else
-                        Title = "Tile sets - " + CurrentItem.Source.Name;
+                        Title = "Tile sets - " + CurrentItem.Name;
                     break;
                 default:
                     break;

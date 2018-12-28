@@ -106,10 +106,10 @@ namespace OpenBreed.Editor.VM.Levels
 
         #region Public Methods
 
-        public void AddTileSet(TileSetDef tileSetDef)
+        public void AddTileSet(string name)
         {
             var newTileSet = Root.CreateTileSet();
-            newTileSet.Load(tileSetDef);
+            newTileSet.Load(name);
             TileSets.Add(newTileSet);
         }
 
@@ -194,17 +194,11 @@ namespace OpenBreed.Editor.VM.Levels
             Source = source;
 
             if (levelDef.TileSetRef != null)
-            {
-                var tileSetDef = Root.Database.GetTileSetDef(levelDef.TileSetRef);
-                if (tileSetDef == null)
-                    throw new Exception($"No Tile set definition with name '{levelDef.TileSetRef}' found!");
-
-                AddTileSet(tileSetDef);
-            }
+                AddTileSet(levelDef.TileSetRef);
 
             if (levelDef.PropertySetRef != null)
             {
-                var propSetDef = Root.Database.GetPropSetDef(levelDef.PropertySetRef);
+                var propSetDef = Root.UnitOfWork.GetPropSetDef(levelDef.PropertySetRef);
                 if (propSetDef == null)
                     throw new Exception($"No Prop set definition with name '{levelDef.PropertySetRef}' found!");
 
@@ -213,7 +207,7 @@ namespace OpenBreed.Editor.VM.Levels
 
             foreach (var spriteSetRef in levelDef.SpriteSetRefs)
             {
-                var spriteSetDef = Root.Database.GetSpriteSetDef(spriteSetRef);
+                var spriteSetDef = Root.UnitOfWork.GetSpriteSetDef(spriteSetRef);
                 if (spriteSetDef == null)
                     throw new Exception($"No Sprite set definition with name '{spriteSetRef}' found!");
 
@@ -222,7 +216,7 @@ namespace OpenBreed.Editor.VM.Levels
 
             foreach (var paletteRef in levelDef.PaletteRefs)
             {
-                var paletteDef = Root.Database.GetPaletteDef(paletteRef);
+                var paletteDef = Root.UnitOfWork.GetPaletteDef(paletteRef);
                 if (paletteDef == null)
                     throw new Exception($"No Palette definition with name '{paletteRef}' found!");
 
