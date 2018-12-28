@@ -13,6 +13,7 @@ using OpenBreed.Common.Database.Tables.Sources;
 using OpenBreed.Common.Database.Tables.Sprites;
 using OpenBreed.Common.Database.Tables.Tiles;
 using OpenBreed.Common.Sources;
+using OpenBreed.Common.Tiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,8 +43,8 @@ namespace OpenBreed.Common
 
         private void RegisterRepos()
         {
-            RegisterRepository(new SourcesRepository(_context));
-            //RegisterRepository(new SourcesRepository(_context));
+            RegisterRepository(new SourcesRepository(this, _context));
+            RegisterRepository(new TileSetsRepository(this, _context));
         }
 
         #endregion Public Constructors

@@ -12,10 +12,21 @@ namespace OpenBreed.Common
 
     public interface IRepository<T> : IRepository where T : EntityBase
     {
+        #region Public Properties
+
+        IUnitOfWork UnitOfWork { get; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        void Add(T entity);
+
         T GetById(Int64 id);
         T GetByName(string name);
-        void Add(T entity);
         void Remove(T entity);
         void Update(T entity);
+
+        #endregion Public Methods
     }
 }

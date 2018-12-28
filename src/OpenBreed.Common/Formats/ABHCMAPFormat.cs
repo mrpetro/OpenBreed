@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Formats
 {
-    public class ABHCMAPFormat : IDataFormat
+    public class ABHCMAPFormat : IDataFormatType
     {
         public ABHCMAPFormat()
         {

@@ -9,9 +9,13 @@ namespace OpenBreed.Common.Sources
     public abstract class SourceBase : EntityBase, IDisposable
     {
 
-        #region Private Fields
+        #region Protected Fields
 
-        protected readonly SourcesRepository _manager;
+        protected readonly SourcesRepository _repository;
+
+        #endregion Protected Fields
+
+        #region Private Fields
 
         private Stream _stream;
 
@@ -24,7 +28,7 @@ namespace OpenBreed.Common.Sources
             if (manager == null)
                 throw new ArgumentNullException("Manager");
 
-            _manager = manager;
+            _repository = manager;
             Name = name;
         }
 
@@ -55,18 +59,18 @@ namespace OpenBreed.Common.Sources
             }
         }
 
-        public object Load(IDataFormat format, Dictionary<string, object> parameters)
+        public object Load(IDataFormatType format, Dictionary<string, object> parameters)
         {
             return format.Load(this, parameters);
         }
 
         public virtual Stream Open()
         {
-            _manager.LockSource(this);
+            _repository.LockSource(this);
             return CreateStream();
         }
 
-        public void Save(object model, IDataFormat format)
+        public void Save(object model, IDataFormatType format)
         {
             format.Save(this, model);
         }
@@ -77,7 +81,7 @@ namespace OpenBreed.Common.Sources
 
         protected virtual void Close()
         {
-            _manager.ReleaseSource(this);
+            _repository.ReleaseSource(this);
         }
         protected abstract Stream CreateStream();
 

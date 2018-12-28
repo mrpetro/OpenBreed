@@ -6,7 +6,7 @@ using System.Text;
 
 namespace OpenBreed.Common.Formats
 {
-    public interface IDataFormat
+    public interface IDataFormatType
     {
         object Load(SourceBase sourceModel, Dictionary<string, object> parameters);
         void Save(SourceBase sourceModel, object model);

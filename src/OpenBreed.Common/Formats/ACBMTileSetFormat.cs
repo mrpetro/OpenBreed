@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Formats
 {
-    public class ACBMTileSetFormat : IDataFormat
+    public class ACBMTileSetFormat : IDataFormatType
     {
         public ACBMTileSetFormat()
         {

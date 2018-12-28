@@ -9,7 +9,7 @@ using OpenBreed.Common.Sources;
 
 namespace OpenBreed.Common.Formats
 {
-    public class ABTABLKFormat : IDataFormat
+    public class ABTABLKFormat : IDataFormatType
     {
         public ABTABLKFormat()
         {

@@ -17,20 +17,20 @@ namespace OpenBreed.Common.Sources
 
     public class SourcesRepository : IRepository<SourceBase>
     {
-        private readonly DatabaseSourceTableDef _table;
-        private XmlDatabase _context;
-
         #region Private Fields
 
         private readonly Dictionary<string, SourceBase> _openedSources = new Dictionary<string, SourceBase>();
+        private readonly DatabaseSourceTableDef _table;
+        private XmlDatabase _context;
         private Dictionary<string, EPFArchive> _openedArchives = new Dictionary<string, EPFArchive>();
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public SourcesRepository(XmlDatabase context)
+        public SourcesRepository(IUnitOfWork unitOfWork, XmlDatabase context)
         {
+            UnitOfWork = unitOfWork;
             _context = context;
 
             _table = _context.GetSourcesTable();
@@ -41,19 +41,45 @@ namespace OpenBreed.Common.Sources
         #region Public Properties
 
         public static ExpandVariablesDelegate ExpandVariables { get; set; }
+        public IUnitOfWork UnitOfWork { get; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        internal void LockSource(SourceBase source)
+        public void Add(SourceBase entity)
         {
-            _openedSources.Add(source.Name, source);
+            throw new NotImplementedException();
         }
 
-        internal void ReleaseSource(SourceBase source)
+        public SourceBase GetById(long id)
         {
-            _openedSources.Remove(source.Name);
+            throw new NotImplementedException();
+        }
+
+        public SourceBase GetByName(string name)
+        {
+            SourceBase source = null;
+            if (_openedSources.TryGetValue(name, out source))
+                return source;
+
+            var sourceDef = _table.Items.FirstOrDefault(item => item.Name == name);
+            if (sourceDef == null)
+                throw new Exception("No Source definition found with name: " + name);
+
+            source = CreateSource(sourceDef);
+
+            return source;
+        }
+
+        public void Remove(SourceBase entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(SourceBase entity)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion Public Methods
@@ -83,6 +109,16 @@ namespace OpenBreed.Common.Sources
             return archive;
         }
 
+        internal void LockSource(SourceBase source)
+        {
+            _openedSources.Add(source.Name, source);
+        }
+
+        internal void ReleaseSource(SourceBase source)
+        {
+            _openedSources.Remove(source.Name);
+        }
+
         #endregion Internal Methods
 
         #region Private Methods
@@ -107,42 +143,6 @@ namespace OpenBreed.Common.Sources
                 throw new NotImplementedException("Unknown sourceDef");
         }
 
-        public SourceBase GetById(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public SourceBase GetByName(string name)
-        {
-            SourceBase source = null;
-            if (_openedSources.TryGetValue(name, out source))
-                return source;
-
-            var sourceDef = _table.Items.FirstOrDefault(item => item.Name == name);
-            if (sourceDef == null)
-                throw new Exception("No Source definition found with name: " + name);
-
-            source = CreateSource(sourceDef);
-
-            return source;
-        }
-
-        public void Add(SourceBase entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(SourceBase entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(SourceBase entity)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion Private Methods
-
     }
 }

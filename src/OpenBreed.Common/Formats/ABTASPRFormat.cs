@@ -9,7 +9,7 @@ using OpenBreed.Common.Sources;
 
 namespace OpenBreed.Common.Formats
 {
-    public class ABTASPRFormat : IDataFormat
+    public class ABTASPRFormat : IDataFormatType
     {
         public ABTASPRFormat()
         {

@@ -11,7 +11,7 @@ using OpenBreed.Common.Sources;
 
 namespace OpenBreed.Common.Formats
 {
-    public class ABTAMAPFormat : IDataFormat
+    public class ABTAMAPFormat : IDataFormatType
     {
         public ABTAMAPFormat()
         {

@@ -15,11 +15,23 @@ namespace OpenBreed.Common.Formats
     {
         #region Private Fields
 
-        private readonly Dictionary<string, IDataFormat> _formats = new Dictionary<string, IDataFormat>();
+        private readonly Dictionary<string, IDataFormatType> _formats = new Dictionary<string, IDataFormatType>();
 
         #endregion Private Fields
 
         #region Public Methods
+
+
+        public DataFormat Create(SourceBase source, FormatDef formatDef)
+        {
+            var format = GetFormat(formatDef.Name);
+            if (format == null)
+                throw new Exception($"Unknown format {formatDef.Name}");
+
+            var parameters = GetParameters(formatDef.Parameters);
+
+            return new DataFormat(format, source, parameters);
+        }
 
         public object Load(SourceBase source, FormatDef formatDef)
         {
@@ -32,7 +44,7 @@ namespace OpenBreed.Common.Formats
             return source.Load(format, parameters);
         }
 
-        public void RegisterFormat(string formatAlias, IDataFormat format)
+        public void RegisterFormat(string formatAlias, IDataFormatType format)
         {
             if (_formats.ContainsKey(formatAlias))
                 throw new InvalidOperationException($"Format alias '{formatAlias}' already registered.");
@@ -44,9 +56,9 @@ namespace OpenBreed.Common.Formats
 
         #region Private Methods
 
-        private IDataFormat GetFormat(string formatType)
+        private IDataFormatType GetFormat(string formatType)
         {
-            IDataFormat sourceMan = null;
+            IDataFormatType sourceMan = null;
             if (_formats.TryGetValue(formatType, out sourceMan))
                 return sourceMan;
             else

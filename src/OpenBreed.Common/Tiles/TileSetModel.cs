@@ -8,7 +8,7 @@ namespace OpenBreed.Common.Tiles
         Indexed8bpp
     }
 
-    public class TileSetModel
+    public class TileSetModel : EntityBase
     {
         #region Public Constructors
 

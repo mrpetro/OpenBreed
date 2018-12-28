@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Formats
 {
-    public class ABSEMAPFormat : IDataFormat
+    public class ABSEMAPFormat : IDataFormatType
     {
         public ABSEMAPFormat()
         {

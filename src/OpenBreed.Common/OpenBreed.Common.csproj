@@ -47,8 +47,11 @@
     <Compile Include="Configs\BaseCfg.cs" />
     <Compile Include="Configs\IConfig.cs" />
     <Compile Include="Configs\IConfigCtrl.cs" />
+    <Compile Include="Formats\DataFormat.cs" />
     <Compile Include="Maps\LevelModel.cs" />
     <Compile Include="Props\PropSetModel.cs" />
+    <Compile Include="Tiles\TileSetEntity.cs" />
+    <Compile Include="Tiles\TileSetsRepository.cs" />
     <Compile Include="XmlUnitOfWork.cs" />
     <Compile Include="Database\DatabaseItemDef.cs" />
     <Compile Include="Database\FormatDef.cs" />
@@ -128,7 +131,7 @@
     <Compile Include="Formats\ABTASPRFormat.cs" />
     <Compile Include="Formats\ACBMImageFormat.cs" />
     <Compile Include="Formats\ACBMTileSetFormat.cs" />
-    <Compile Include="Formats\IDataFormat.cs" />
+    <Compile Include="Formats\IDataFormatType.cs" />
     <Compile Include="Sources\SourcesRepository.cs" />
     <Compile Include="Sprites\Builders\SpriteBuilder.cs" />
     <Compile Include="Sprites\Builders\SpriteSetBuilder.cs" />

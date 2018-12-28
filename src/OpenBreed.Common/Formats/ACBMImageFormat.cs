@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Formats
 {
-    public class ACBMImageFormat : IDataFormat
+    public class ACBMImageFormat : IDataFormatType
     {
         public ACBMImageFormat()
         {

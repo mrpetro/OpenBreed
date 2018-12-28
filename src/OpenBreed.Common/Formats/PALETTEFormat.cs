@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Formats
 {
-    public class PaletteFormat : IDataFormat
+    public class PaletteFormat : IDataFormatType
     {
         public PaletteFormat()
         {
