@@ -6,12 +6,11 @@ using System.IO;
 
 namespace OpenBreed.Common.Sources
 {
-    public abstract class SourceBase : EntityBase, IDisposable
+    public abstract class SourceBase : IEntity, IDisposable
     {
-
         #region Protected Fields
 
-        protected readonly SourcesRepository _repository;
+        protected readonly DataSourceProvider _repository;
 
         #endregion Protected Fields
 
@@ -23,7 +22,7 @@ namespace OpenBreed.Common.Sources
 
         #region Protected Constructors
 
-        protected SourceBase(SourcesRepository manager, string name)
+        protected SourceBase(DataSourceProvider manager, string name)
         {
             if (manager == null)
                 throw new ArgumentNullException("Manager");
@@ -36,6 +35,8 @@ namespace OpenBreed.Common.Sources
 
         #region Public Properties
 
+        public long Id { get; }
+        public string Name { get; }
         public Stream Stream
         {
             get
@@ -59,7 +60,7 @@ namespace OpenBreed.Common.Sources
             }
         }
 
-        public object Load(IDataFormatType format, Dictionary<string, object> parameters)
+        public object Load(IDataFormatType format, List<FormatParameter> parameters)
         {
             return format.Load(this, parameters);
         }

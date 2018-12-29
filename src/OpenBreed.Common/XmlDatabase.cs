@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common.Database;
 using OpenBreed.Common.Database.Items.Sources;
+using OpenBreed.Common.Database.Tables.Images;
 using OpenBreed.Common.Database.Tables.Palettes;
 using OpenBreed.Common.Database.Tables.Props;
 using OpenBreed.Common.Database.Tables.Sources;
@@ -35,24 +36,12 @@ namespace OpenBreed.Common
                 Data = new DatabaseDef();
             else
                 Data = DatabaseDef.Load(XmlFilePath);
-
-            FormatMan = new DataFormatMan();
-
-            FormatMan.RegisterFormat("ABSE_MAP", new ABSEMAPFormat());
-            FormatMan.RegisterFormat("ABHC_MAP", new ABHCMAPFormat());
-            FormatMan.RegisterFormat("ABTA_MAP", new ABTAMAPFormat());
-            FormatMan.RegisterFormat("ABTABLK", new ABTABLKFormat());
-            FormatMan.RegisterFormat("ABTASPR", new ABTASPRFormat());
-            FormatMan.RegisterFormat("ACBM_TILE_SET", new ACBMTileSetFormat());
-            FormatMan.RegisterFormat("ACBM_IMAGE", new ACBMImageFormat());
-            FormatMan.RegisterFormat("PALETTE", new PaletteFormat());
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public DataFormatMan FormatMan { get; }
         public DatabaseMode Mode { get; }
         public string XmlFilePath { get; }
 
@@ -74,6 +63,17 @@ namespace OpenBreed.Common
         #endregion Public Methods
 
         #region Internal Methods
+
+        internal DatabaseImageTableDef GetImagesTable()
+        {
+            var table = Data.Tables.OfType<DatabaseImageTableDef>().FirstOrDefault();
+            if (table == null)
+            {
+                table = new DatabaseImageTableDef();
+                Data.Tables.Add(table);
+            }
+            return table;
+        }
 
         internal DatabasePaletteTableDef GePaletteTable()
         {

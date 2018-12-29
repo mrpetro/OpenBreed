@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenBreed.Common.Props;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Xml.Serialization;
 namespace OpenBreed.Common.Database.Items.Props
 {
     [Serializable]
-    public class PropertyDef
+    public class PropertyDef : IPropertyEntity
     {
         [XmlAttribute]
         public int Id { get; set; }

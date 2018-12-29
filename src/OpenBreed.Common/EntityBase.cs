@@ -7,10 +7,9 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Common
 {
-    public abstract class EntityBase
+    public interface IEntity
     {
-       public long Id { get; }
-
-       public virtual string Name { get; protected set; }
+       long Id { get; }
+       string Name { get; }
     }
 }

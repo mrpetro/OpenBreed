@@ -28,11 +28,11 @@ namespace OpenBreed.Common.Formats
                     throw new InvalidOperationException(paletteModeStr);
             }
         }
-        public object Load(SourceBase source, Dictionary<string, object> parameters = null)
+        public object Load(SourceBase source, List<FormatParameter> parameters)
         {
-            var modeStr = (string)parameters["MODE"];
-            var colorsNo = (int)parameters["COLORS_NO"];
-            var dataStart = (int)parameters["DATA_START"];
+            var modeStr = (string)parameters.FirstOrDefault(item => item.Name == "MODE").Value;
+            var colorsNo = (int)parameters.FirstOrDefault(item => item.Name == "COLORS_NO").Value;
+            var dataStart = (int)parameters.FirstOrDefault(item => item.Name == "DATA_START").Value;
 
             var paletteMode = ToPaletteMode(modeStr);
 

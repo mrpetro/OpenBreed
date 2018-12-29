@@ -22,26 +22,26 @@ namespace OpenBreed.Common.Formats
         #region Public Methods
 
 
-        public DataFormat Create(SourceBase source, FormatDef formatDef)
+        public DataFormat Create(SourceBase source, IFormatEntity format)
         {
-            var format = GetFormat(formatDef.Name);
-            if (format == null)
-                throw new Exception($"Unknown format {formatDef.Name}");
+            var formatType = GetFormatType(format.Name);
+            if (formatType == null)
+                throw new Exception($"Unknown format {format.Name}");
 
-            var parameters = GetParameters(formatDef.Parameters);
+            var parameters = format.Parameters;
 
-            return new DataFormat(format, source, parameters);
+            return new DataFormat(formatType, source, parameters);
         }
 
-        public object Load(SourceBase source, FormatDef formatDef)
+        public object Load(SourceBase source, IFormatEntity format)
         {
-            var format = GetFormat(formatDef.Name);
-            if (format == null)
-                throw new Exception($"Unknown format {formatDef.Name}");
+            var formatType = GetFormatType(format.Name);
+            if (formatType == null)
+                throw new Exception($"Unknown format {format.Name}");
 
-            var parameters = GetParameters(formatDef.Parameters);
+            var parameters = format.Parameters;
 
-            return source.Load(format, parameters);
+            return source.Load(formatType, parameters);
         }
 
         public void RegisterFormat(string formatAlias, IDataFormatType format)
@@ -56,35 +56,13 @@ namespace OpenBreed.Common.Formats
 
         #region Private Methods
 
-        private IDataFormatType GetFormat(string formatType)
+        private IDataFormatType GetFormatType(string formatType)
         {
             IDataFormatType sourceMan = null;
             if (_formats.TryGetValue(formatType, out sourceMan))
                 return sourceMan;
             else
                 throw new InvalidOperationException("Unknown format: " + formatType);
-        }
-
-        private Dictionary<string, object> GetParameters(List<FormatParameterDef> parameterDefs)
-        {
-            var parameters = new Dictionary<string, object>();
-
-            foreach (var parameterDef in parameterDefs)
-            {
-                if (string.IsNullOrWhiteSpace(parameterDef.Name) ||
-                    string.IsNullOrWhiteSpace(parameterDef.Type))
-                    continue;
-
-                if (parameters.ContainsKey(parameterDef.Name))
-                    continue;
-
-                var type = Type.GetType(parameterDef.Type);
-                var tc = TypeDescriptor.GetConverter(type);
-                var value = tc.ConvertFromString(null, CultureInfo.InvariantCulture, parameterDef.Value);
-                parameters.Add(parameterDef.Name, value);
-            }
-
-            return parameters;
         }
 
         #endregion Private Methods

@@ -1,39 +1,28 @@
-﻿using System;
+﻿using EPF;
+using OpenBreed.Common.Sources;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.IO;
-using OpenBreed.Common.Formats;
-using EPF;
-using OpenBreed.Common.Logging;
-using System.ComponentModel;
-using System.Globalization;
-using OpenBreed.Common.Database.Items.Sources;
-using OpenBreed.Common.Database.Tables.Sources;
+using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Sources
+namespace OpenBreed.Common
 {
-    public delegate string ExpandVariablesDelegate(string text);
-
-    public class SourcesRepository : IRepository<SourceBase>
+    public class DataSourceProvider
     {
         #region Private Fields
 
         private readonly Dictionary<string, SourceBase> _openedSources = new Dictionary<string, SourceBase>();
-        private readonly DatabaseSourceTableDef _table;
-        private XmlDatabase _context;
         private Dictionary<string, EPFArchive> _openedArchives = new Dictionary<string, EPFArchive>();
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public SourcesRepository(IUnitOfWork unitOfWork, XmlDatabase context)
+        public DataSourceProvider(IUnitOfWork unitOfWork)
         {
             UnitOfWork = unitOfWork;
-            _context = context;
-
-            _table = _context.GetSourcesTable();
         }
 
         #endregion Public Constructors
@@ -47,39 +36,19 @@ namespace OpenBreed.Common.Sources
 
         #region Public Methods
 
-        public void Add(SourceBase entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public SourceBase GetById(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public SourceBase GetByName(string name)
+        public SourceBase GetAsset(string name)
         {
             SourceBase source = null;
             if (_openedSources.TryGetValue(name, out source))
                 return source;
 
-            var sourceDef = _table.Items.FirstOrDefault(item => item.Name == name);
-            if (sourceDef == null)
-                throw new Exception("No Source definition found with name: " + name);
+            var sourceEntity = UnitOfWork.GetRepository<ISourceEntity>().GetByName(name);
+            if (sourceEntity == null)
+                throw new Exception($"Source error: {name}" );
 
-            source = CreateSource(sourceDef);
+            source = CreateAsset(sourceEntity);
 
             return source;
-        }
-
-        public void Remove(SourceBase entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(SourceBase entity)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion Public Methods
@@ -123,22 +92,22 @@ namespace OpenBreed.Common.Sources
 
         #region Private Methods
 
-        private SourceBase CreateDirectoryFileSource(DirectoryFileSourceDef sourceDef)
+        private SourceBase CreateDirectoryFileSource(IDirectoryFileSourceEntity source)
         {
-            return new DirectoryFileSource(this, sourceDef.DirectoryPath, sourceDef.Name);
+            return new DirectoryFileSource(this, source.DirectoryPath, source.Name);
         }
 
-        private SourceBase CreateEPFArchiveSource(EPFArchiveFileSourceDef sourceDef)
+        private SourceBase CreateEPFArchiveSource(IEPFArchiveSourceEntity source)
         {
-            return new EPFArchiveFileSource(this, sourceDef.ArchivePath, sourceDef.Name);
+            return new EPFArchiveFileSource(this, source.ArchivePath, source.Name);
         }
 
-        private SourceBase CreateSource(SourceDef sourceDef)
+        private SourceBase CreateAsset(ISourceEntity source)
         {
-            if (sourceDef is DirectoryFileSourceDef)
-                return CreateDirectoryFileSource((DirectoryFileSourceDef)sourceDef);
-            else if (sourceDef is EPFArchiveFileSourceDef)
-                return CreateEPFArchiveSource((EPFArchiveFileSourceDef)sourceDef);
+            if (source is IDirectoryFileSourceEntity)
+                return CreateDirectoryFileSource((IDirectoryFileSourceEntity)source);
+            else if (source is IEPFArchiveSourceEntity)
+                return CreateEPFArchiveSource((IEPFArchiveSourceEntity)source);
             else
                 throw new NotImplementedException("Unknown sourceDef");
         }

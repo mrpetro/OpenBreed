@@ -19,7 +19,7 @@ namespace OpenBreed.Common.Sources
 
         #region Public Constructors
 
-        public EPFArchiveFileSource(SourcesRepository manager, string archivePath, string name) :
+        public EPFArchiveFileSource(DataSourceProvider manager, string archivePath, string name) :
             base(manager, name)
         {
             ArchivePath = archivePath;
@@ -61,7 +61,7 @@ namespace OpenBreed.Common.Sources
             if (_entry != null)
                 throw new InvalidOperationException($"Entry {Name} already initialized.");
 
-            var archive = _repository.GetArchive(SourcesRepository.ExpandVariables(ArchivePath));
+            var archive = _repository.GetArchive(DataSourceProvider.ExpandVariables(ArchivePath));
             _entry = archive.FindEntry(Name);
         }
 

@@ -17,13 +17,10 @@ namespace OpenBreed.Common
 {
     public interface IUnitOfWork
     {
-        IRepository<T> GetRepository<T>() where T : EntityBase;
+        IRepository<T> GetRepository<T>() where T : IEntity;
         void Save();
         LevelDef GetLevelDef(string levelName);
         PaletteDef GetPaletteDef(string paletteName);
-        PropertySetDef GetPropSetDef(string propertySetName);
-        SpriteSetDef GetSpriteSetDef(string spriteSetName);
-        TileSetDef GetTileSetDef(string tileSetName);
         IEnumerable<DatabaseTableDef> GetTables();
     }
 }

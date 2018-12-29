@@ -12,7 +12,10 @@ using OpenBreed.Common.Database.Tables.Props;
 using OpenBreed.Common.Database.Tables.Sources;
 using OpenBreed.Common.Database.Tables.Sprites;
 using OpenBreed.Common.Database.Tables.Tiles;
+using OpenBreed.Common.Images;
+using OpenBreed.Common.Props;
 using OpenBreed.Common.Sources;
+using OpenBreed.Common.Sprites;
 using OpenBreed.Common.Tiles;
 using System;
 using System.Collections.Generic;
@@ -43,8 +46,11 @@ namespace OpenBreed.Common
 
         private void RegisterRepos()
         {
-            RegisterRepository(new SourcesRepository(this, _context));
-            RegisterRepository(new TileSetsRepository(this, _context));
+            RegisterRepository(new XmlSourcesRepository(this, _context));
+            RegisterRepository(new XmlTileSetsRepository(this, _context));
+            RegisterRepository(new XmlSpriteSetsRepository(this, _context));
+            RegisterRepository(new XmlPropSetsRepository(this, _context));
+            RegisterRepository(new XmlImagesRepository(this, _context));
         }
 
         #endregion Public Constructors
@@ -55,12 +61,12 @@ namespace OpenBreed.Common
 
         #region Public Methods
 
-        protected void RegisterRepository<T>(IRepository<T> repository) where T : EntityBase
+        protected void RegisterRepository<T>(IRepository<T> repository) where T : IEntity
         {
             _repositories.Add(typeof(T), repository);
         }
 
-        public IRepository<T> GetRepository<T>() where T : EntityBase
+        public IRepository<T> GetRepository<T>() where T : IEntity
         {
             IRepository foundRepo;
 
@@ -93,36 +99,6 @@ namespace OpenBreed.Common
                 throw new InvalidOperationException("Palette '" + paletteName + "' not found!");
 
             return paletteDef;
-        }
-
-        public PropertySetDef GetPropSetDef(string propertySetName)
-        {
-            var propertySetDef = _context.Data.Tables.OfType<DatabasePropertySetTableDef>().FirstOrDefault().Items.FirstOrDefault(item => item.Name == propertySetName);
-
-            if (propertySetDef == null)
-                throw new InvalidOperationException("Property set '" + propertySetName + "' not found!");
-
-            return propertySetDef;
-        }
-
-        public SpriteSetDef GetSpriteSetDef(string spriteSetName)
-        {
-            var spriteSetDef = _context.Data.Tables.OfType<DatabaseSpriteSetTableDef>().FirstOrDefault().Items.FirstOrDefault(item => item.Name == spriteSetName);
-
-            if (spriteSetDef == null)
-                throw new InvalidOperationException("Sprite set '" + spriteSetName + "' not found!");
-
-            return spriteSetDef;
-        }
-
-        public TileSetDef GetTileSetDef(string tileSetName)
-        {
-            var tileSetDef = _context.Data.Tables.OfType<DatabaseTileSetTableDef>().FirstOrDefault().Items.FirstOrDefault(item => item.Name == tileSetName);
-
-            if (tileSetDef == null)
-                throw new InvalidOperationException("Tile set '" + tileSetName + "' not found!");
-
-            return tileSetDef;
         }
 
         public IEnumerable<DatabaseTableDef> GetTables()

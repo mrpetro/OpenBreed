@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Tiles
 {
-    public class TileSetsRepository : IRepository<TileSetEntity>
+    public class XmlTileSetsRepository : IRepository<ITileSetEntity>
     {
 
         #region Private Fields
@@ -21,7 +21,7 @@ namespace OpenBreed.Common.Tiles
 
         #region Public Constructors
 
-        public TileSetsRepository(IUnitOfWork unitOfWork, XmlDatabase context)
+        public XmlTileSetsRepository(IUnitOfWork unitOfWork, XmlDatabase context)
         {
             UnitOfWork = unitOfWork;
             _context = context;
@@ -39,37 +39,31 @@ namespace OpenBreed.Common.Tiles
 
         #region Public Methods
 
-        public void Add(TileSetEntity entity)
+        public void Add(ITileSetEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public TileSetEntity GetById(long id)
+        public ITileSetEntity GetById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public TileSetEntity GetByName(string name)
+        public ITileSetEntity GetByName(string name)
         {
             var tileSetDef = _table.Items.FirstOrDefault(item => item.Name == name);
             if (tileSetDef == null)
                 throw new Exception("No Source definition found with name: " + name);
 
-            var source = UnitOfWork.GetRepository<SourceBase>().GetByName(tileSetDef.SourceRef);
-            if (source == null)
-                throw new Exception("TileSet source error: " + tileSetDef.SourceRef);
-
-            var dataFormat = _context.FormatMan.Create(source, tileSetDef.Format);
-
-            return new TileSetEntity(this, tileSetDef.Name, dataFormat);
+            return tileSetDef;
         }
 
-        public void Remove(TileSetEntity entity)
+        public void Remove(ITileSetEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(TileSetEntity entity)
+        public void Update(ITileSetEntity entity)
         {
             throw new NotImplementedException();
         }

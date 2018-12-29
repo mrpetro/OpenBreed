@@ -11,8 +11,8 @@ namespace OpenBreed.Common.Formats
     {
         private IDataFormatType _type;
         private SourceBase _dataSource;
-        private Dictionary<string, object> _parameters;
-        public DataFormat(IDataFormatType type, SourceBase dataSource, Dictionary<string, object> parameters)
+        private List<FormatParameter> _parameters;
+        public DataFormat(IDataFormatType type, SourceBase dataSource, List<FormatParameter> parameters)
         {
             _type = type;
             _dataSource = dataSource;

@@ -10,7 +10,7 @@ namespace OpenBreed.Common
     {
     }
 
-    public interface IRepository<T> : IRepository where T : EntityBase
+    public interface IRepository<T> : IRepository where T : IEntity
     {
         #region Public Properties
 

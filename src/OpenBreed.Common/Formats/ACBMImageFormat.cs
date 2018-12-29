@@ -31,12 +31,12 @@ namespace OpenBreed.Common.Formats
             }
         }
 
-        public object Load(SourceBase source, Dictionary<string, object> parameters = null)
+        public object Load(SourceBase source, List<FormatParameter> parameters)
         {
-            var width = (int)parameters["WIDTH"];
-            var height = (int)parameters["HEIGHT"];
-            var bitPlanesNo = (int)parameters["BIT_PLANES_NO"];
-            var paletteStr = (string)parameters["PALETTE_MODE"];
+            var width = (int)parameters.FirstOrDefault(item=> item.Name == "WIDTH").Value;
+            var height = (int)parameters.FirstOrDefault(item => item.Name == "HEIGHT").Value;
+            var bitPlanesNo = (int)parameters.FirstOrDefault(item => item.Name == "BIT_PLANES_NO").Value;
+            var paletteStr = (string)parameters.FirstOrDefault(item => item.Name == "PALETTE_MODE").Value;
 
             var paletteMode = ToACBMPaletteMode(paletteStr);
 

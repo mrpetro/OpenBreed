@@ -18,7 +18,7 @@ namespace OpenBreed.Common.Sources
 
         #region Public Constructors
 
-        public DirectoryFileSource(SourcesRepository manager, string directoryPath, string name) :
+        public DirectoryFileSource(DataSourceProvider manager, string directoryPath, string name) :
             base(manager, name)
         {
             DirectoryPath = directoryPath;
@@ -37,7 +37,7 @@ namespace OpenBreed.Common.Sources
 
         protected override Stream CreateStream()
         {
-            string filePath = Path.Combine(SourcesRepository.ExpandVariables(DirectoryPath), Name);
+            string filePath = Path.Combine(DataSourceProvider.ExpandVariables(DirectoryPath), Name);
             return File.Open(filePath, FileMode.Open, FileAccess.ReadWrite);
         }
 
