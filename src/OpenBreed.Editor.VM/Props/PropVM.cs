@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Database.Items.Props;
+using OpenBreed.Common.Props;
 
 namespace OpenBreed.Editor.VM.Props
 {
@@ -69,14 +70,14 @@ namespace OpenBreed.Editor.VM.Props
 
         #region Public Methods
 
-        public void Load(PropertyDef propDef)
+        public void Load(IPropertyEntity property)
         {
-            Name = propDef.Name;
-            Id = propDef.Id;
-            Visibility = propDef.Visibility;
-            Description = propDef.Description;
+            Name = property.Name;
+            Id = property.Id;
+            Visibility = property.Visibility;
+            Description = property.Description;
 
-            PropVMHelper.SetPresentation(this, propDef.ImagePath, System.Drawing.ColorTranslator.FromHtml(propDef.Color));
+            PropVMHelper.SetPresentation(this, property.ImagePath, System.Drawing.ColorTranslator.FromHtml(property.Color));
         }
 
         #endregion Public Methods

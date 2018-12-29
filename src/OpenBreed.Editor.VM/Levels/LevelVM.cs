@@ -120,17 +120,17 @@ namespace OpenBreed.Editor.VM.Levels
             Palettes.Add(newPalette);
         }
 
-        public void AddSpriteSet(SpriteSetDef spriteSetDef)
+        public void AddSpriteSet(string name)
         {
             var newSpriteSet = Root.CreateSpriteSet();
-            newSpriteSet.Load(spriteSetDef);
+            newSpriteSet.Load(name);
             SpriteSets.Add(newSpriteSet);
         }
 
-        public void LoadPropSet(PropertySetDef propSetDef)
+        public void LoadPropSet(string name)
         {
             var propSet = Root.CreatePropSet();
-            propSet.Load(propSetDef);
+            propSet.Load(name);
             PropSet = propSet;
         }
         public void Save()
@@ -186,33 +186,21 @@ namespace OpenBreed.Editor.VM.Levels
 
         internal void Load(LevelDef levelDef)
         {
-            var source = Root.UnitOfWork.GetRepository<SourceBase>().GetByName(levelDef.SourceRef);
-            if (source == null)
-                throw new Exception("TileSet source error: " + levelDef.SourceRef);
+            var asset = Root.DataProvider.AssetsProvider.GetAsset(levelDef.SourceRef);
+            if (asset == null)
+                throw new Exception("Level source error: " + levelDef.SourceRef);
 
-            var model = Root.FormatMan.Load(source, levelDef.Format) as MapModel;
-            Source = source;
+            var model = Root.DataProvider.FormatMan.Load(asset, levelDef.Format) as MapModel;
+            Source = asset;
 
             if (levelDef.TileSetRef != null)
                 AddTileSet(levelDef.TileSetRef);
 
             if (levelDef.PropertySetRef != null)
-            {
-                var propSetDef = Root.UnitOfWork.GetPropSetDef(levelDef.PropertySetRef);
-                if (propSetDef == null)
-                    throw new Exception($"No Prop set definition with name '{levelDef.PropertySetRef}' found!");
-
-                LoadPropSet(propSetDef);
-            }
+                LoadPropSet(levelDef.PropertySetRef);
 
             foreach (var spriteSetRef in levelDef.SpriteSetRefs)
-            {
-                var spriteSetDef = Root.UnitOfWork.GetSpriteSetDef(spriteSetRef);
-                if (spriteSetDef == null)
-                    throw new Exception($"No Sprite set definition with name '{spriteSetRef}' found!");
-
-                AddSpriteSet(spriteSetDef);
-            }
+                AddSpriteSet(spriteSetRef);
 
             foreach (var paletteRef in levelDef.PaletteRefs)
             {

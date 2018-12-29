@@ -34,11 +34,14 @@ namespace OpenBreed.Editor.VM.Palettes
 
         internal void Load(PaletteDef paletteDef)
         {
-            var source = Root.UnitOfWork.GetRepository<SourceBase>().GetByName(paletteDef.SourceRef);
-            if (source == null)
+            //TODO: replace this
+            //var asset = Root.DataProvider.GetPalette(paletteDef.Name);
+            var asset = Root.DataProvider.AssetsProvider.GetAsset(paletteDef.SourceRef);
+            if (asset == null)
                 throw new Exception("Palette source error: " + paletteDef.SourceRef);
 
-            var model = Root.FormatMan.Load(source, paletteDef.Format) as PaletteModel;
+            var model = Root.DataProvider.FormatMan.Load(asset, paletteDef.Format) as PaletteModel;
+
             Restore(model);
 
             //NOTE: quick hack to get the result

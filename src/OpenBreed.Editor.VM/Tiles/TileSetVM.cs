@@ -13,6 +13,7 @@ using OpenBreed.Common.Drawing;
 using OpenBreed.Common.Database.Items.Sources;
 using System;
 using OpenBreed.Common.Database.Items.Tiles;
+using OpenBreed.Common.Formats;
 
 namespace OpenBreed.Editor.VM.Tiles
 {
@@ -82,13 +83,9 @@ namespace OpenBreed.Editor.VM.Tiles
 
         internal void Load(string name)
         {
-            var tileSetEntity = Root.UnitOfWork.GetRepository<TileSetEntity>().GetByName(name);
-            if (tileSetEntity == null)
-                throw new Exception("TileSet error: " + name);
+            var model = Root.DataProvider.GetTileSet(name);
 
-            var model = tileSetEntity.GetModel();
-
-            Name = tileSetEntity.Name;
+            //Name = tileSetEntity.Name;
             TileSize = model.TileSize;
             Bitmap = ToBitmap(model.Tiles);
             SetupTiles();

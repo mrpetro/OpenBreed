@@ -63,17 +63,7 @@ namespace OpenBreed.Editor.VM
             SpriteViewer = new SpriteViewerVM(this);
             ImageViewer = new ImageViewerVM(this);
             LevelEditor = new LevelEditorVM(this);
-            FormatMan = new DataFormatMan();
-            SourcesRepository.ExpandVariables = Settings.ExpandVariables;
-
-            FormatMan.RegisterFormat("ABSE_MAP", new ABSEMAPFormat());
-            FormatMan.RegisterFormat("ABHC_MAP", new ABHCMAPFormat());
-            FormatMan.RegisterFormat("ABTA_MAP", new ABTAMAPFormat());
-            FormatMan.RegisterFormat("ABTABLK", new ABTABLKFormat());
-            FormatMan.RegisterFormat("ABTASPR", new ABTASPRFormat());
-            FormatMan.RegisterFormat("ACBM_TILE_SET", new ACBMTileSetFormat());
-            FormatMan.RegisterFormat("ACBM_IMAGE", new ACBMImageFormat());
-            FormatMan.RegisterFormat("PALETTE", new PaletteFormat());
+            DataSourceProvider.ExpandVariables = Settings.ExpandVariables;
         }
 
         #endregion Public Constructors
@@ -88,12 +78,13 @@ namespace OpenBreed.Editor.VM
 
         public DatabaseViewerVM DatabaseViewer { get; }
         public IDialogProvider DialogProvider { get; }
-        public DataFormatMan FormatMan { get; }
+        public DataProvider DataProvider { get; private set; }
         public ImageViewerVM ImageViewer { get; }
         public LevelEditorVM LevelEditor { get; }
         public PropSetEditorVM PropSetEditor { get; }
         public SettingsMan Settings { get; private set; }
         //public SourceMan SourceMan { get; }
+
         public SpriteViewerVM SpriteViewer { get; }
         public EditorState State
         {
@@ -104,6 +95,7 @@ namespace OpenBreed.Editor.VM
         public TileSetEditorVM TileSetEditor { get; }
         public ToolsMan ToolsMan { get; }
         public IUnitOfWork UnitOfWork { get; internal set; }
+
 
         #endregion Public Properties
 
@@ -143,6 +135,7 @@ namespace OpenBreed.Editor.VM
         {
             var xmlDatabase = new XmlDatabase(xmlFilePath, DatabaseMode.Read);
             UnitOfWork = new XmlUnitOfWork(xmlDatabase);
+            DataProvider = new DataProvider(UnitOfWork);
 
             return new DatabaseVM(this, UnitOfWork);
         }

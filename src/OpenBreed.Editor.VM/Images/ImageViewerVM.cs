@@ -73,23 +73,18 @@ namespace OpenBreed.Editor.VM.Images
             }
         }
 
-        public void TryLoad(ImageDef imageDef)
+        public void TryLoad(string name)
         {
-            Load(imageDef);
+            Load(name);
         }
 
         #endregion Public Methods
 
         #region Internal Methods
 
-        internal void Load(ImageDef imageDef)
+        internal void Load(string name)
         {
-            var source = Root.UnitOfWork.GetRepository<SourceBase>().GetByName(imageDef.SourceRef);
-            if (source == null)
-                throw new Exception("Image source error: " + imageDef.SourceRef);
-
-            Image = Root.FormatMan.Load(source, imageDef.Format) as Image;
-            Source = source;
+            Image = Root.DataProvider.GetImage(name);
         }
 
         #endregion Internal Methods

@@ -26,7 +26,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         public override void Open()
         {
-            Owner.Root.PropSetEditor.TryLoad(_model);
+            Owner.Root.PropSetEditor.TryLoad(_model.Name);
             Owner.OpenedItem = this;
         }
     }

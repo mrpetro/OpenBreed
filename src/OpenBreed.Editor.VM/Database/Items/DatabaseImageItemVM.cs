@@ -25,7 +25,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         public override void Open()
         {
-            Owner.Root.ImageViewer.TryLoad(_model);
+            Owner.Root.ImageViewer.TryLoad(_model.Name);
             Owner.OpenedItem = this;
         }
     }

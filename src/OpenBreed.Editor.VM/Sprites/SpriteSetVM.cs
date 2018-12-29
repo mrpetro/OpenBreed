@@ -39,7 +39,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         public BindingList<SpriteVM> Items { get; private set; }
 
-        public string Name { get { return Source.Name; } }
+        public string Name { get { return null; } }
 
         public PaletteVM Palette
         {
@@ -56,8 +56,6 @@ namespace OpenBreed.Editor.VM.Sprites
                 }
             }
         }
-
-        public SourceBase Source { get; private set; }
 
         #endregion Public Properties
 
@@ -104,14 +102,9 @@ namespace OpenBreed.Editor.VM.Sprites
             }
         }
 
-        internal void Load(SpriteSetDef spriteSetDef)
+        internal void Load(string name)
         {
-            var source = Root.UnitOfWork.GetRepository<SourceBase>().GetByName(spriteSetDef.SourceRef);
-            if (source == null)
-                throw new Exception("SpriteSet source error: " + spriteSetDef.SourceRef);
-
-            var model = Root.FormatMan.Load(source, spriteSetDef.Format) as SpriteSetModel;
-            Source = source;
+            var model = Root.DataProvider.GetSpriteSet(name);
 
             foreach (var sprite in model.Sprites)
                 Items.Add(SpriteVM.Create(sprite));

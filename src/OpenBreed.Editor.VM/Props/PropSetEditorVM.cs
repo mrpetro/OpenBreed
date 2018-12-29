@@ -74,10 +74,10 @@ namespace OpenBreed.Editor.VM.Props
 
         }
 
-        internal void TryLoad(PropertySetDef propSetDef)
+        internal void TryLoad(string name)
         {
             var propSet = Root.CreatePropSet();
-            propSet.Load(propSetDef);
+            propSet.Load(name);
             CurrentPropSet = propSet;
         }
 

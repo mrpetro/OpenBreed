@@ -11,6 +11,7 @@ using System.ComponentModel;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Common.Logging;
 using OpenBreed.Common.Database.Items.Props;
+using OpenBreed.Common.Props;
 
 namespace OpenBreed.Editor.VM.Props
 {
@@ -51,7 +52,7 @@ namespace OpenBreed.Editor.VM.Props
 
         #region Public Methods
 
-        public PropVM CreateProp(PropertyDef propDef)
+        public PropVM CreateProp(IPropertyEntity propDef)
         {
             return new PropVM(this);
         }
@@ -86,14 +87,16 @@ namespace OpenBreed.Editor.VM.Props
 
         #region Internal Methods
 
-        internal void Load(PropertySetDef propSetDef)
+        internal void Load(string name)
         {
-            Name = propSetDef.Name;
+            Name = name;
 
-            foreach (var propDef in propSetDef.PropertyDefs)
+            var model = Root.DataProvider.GetPropSet(name);
+
+            foreach (var property in model.Items)
             {
-                var newProp = CreateProp(propDef);
-                newProp.Load(propDef);
+                var newProp = CreateProp(property);
+                newProp.Load(property);
                 Items.Add(newProp);
             }
         }
