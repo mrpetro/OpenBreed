@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common.Database;
 using OpenBreed.Common.Database.Items.Sources;
 using OpenBreed.Common.Database.Tables.Images;
+using OpenBreed.Common.Database.Tables.Levels;
 using OpenBreed.Common.Database.Tables.Palettes;
 using OpenBreed.Common.Database.Tables.Props;
 using OpenBreed.Common.Database.Tables.Sources;
@@ -25,6 +26,7 @@ namespace OpenBreed.Common
 
     public class XmlDatabase
     {
+
         #region Public Constructors
 
         public XmlDatabase(string xmlFilePath, DatabaseMode mode)
@@ -43,6 +45,7 @@ namespace OpenBreed.Common
         #region Public Properties
 
         public DatabaseMode Mode { get; }
+
         public string XmlFilePath { get; }
 
         #endregion Public Properties
@@ -64,7 +67,7 @@ namespace OpenBreed.Common
 
         #region Internal Methods
 
-        internal DatabaseImageTableDef GetImagesTable()
+        internal DatabaseImageTableDef GetImageTable()
         {
             var table = Data.Tables.OfType<DatabaseImageTableDef>().FirstOrDefault();
             if (table == null)
@@ -75,7 +78,17 @@ namespace OpenBreed.Common
             return table;
         }
 
-        internal DatabasePaletteTableDef GePaletteTable()
+        internal DatabaseLevelTableDef GetLevelTable()
+        {
+            var table = Data.Tables.OfType<DatabaseLevelTableDef>().FirstOrDefault();
+            if (table == null)
+            {
+                table = new DatabaseLevelTableDef();
+                Data.Tables.Add(table);
+            }
+            return table;
+        }
+        internal DatabasePaletteTableDef GetPaletteTable()
         {
             var table = Data.Tables.OfType<DatabasePaletteTableDef>().FirstOrDefault();
             if (table == null)
@@ -131,5 +144,6 @@ namespace OpenBreed.Common
         }
 
         #endregion Internal Methods
+
     }
 }

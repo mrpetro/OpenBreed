@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.Database.Tables.Images;
+using OpenBreed.Common.Database.Tables.Palettes;
 using OpenBreed.Common.Database.Tables.Sprites;
 using OpenBreed.Common.Database.Tables.Tiles;
 using OpenBreed.Common.Sources;
@@ -8,25 +9,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Images
+namespace OpenBreed.Common.Palettes
 {
-    public class XmlImagesRepository : IRepository<IImageEntity>
+    public class XmlPalettesRepository : IRepository<IPaletteEntity>
     {
+
         #region Private Fields
 
-        private readonly DatabaseImageTableDef _table;
+        private readonly DatabasePaletteTableDef _table;
+
         private XmlDatabase _context;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public XmlImagesRepository(IUnitOfWork unitOfWork, XmlDatabase context)
+        public XmlPalettesRepository(IUnitOfWork unitOfWork, XmlDatabase context)
         {
             UnitOfWork = unitOfWork;
             _context = context;
 
-            _table = _context.GetImageTable();
+            _table = _context.GetPaletteTable();
         }
 
         #endregion Public Constructors
@@ -40,31 +43,31 @@ namespace OpenBreed.Common.Images
 
         #region Public Methods
 
-        public void Add(IImageEntity entity)
+        public void Add(IPaletteEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public IImageEntity GetById(long id)
+        public IPaletteEntity GetById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public IImageEntity GetByName(string name)
+        public IPaletteEntity GetByName(string name)
         {
-            var spriteSetDef = _table.Items.FirstOrDefault(item => item.Name == name);
-            if (spriteSetDef == null)
-                throw new Exception("No Image definition found with name: " + name);
+            var paletteDef = _table.Items.FirstOrDefault(item => item.Name == name);
+            if (paletteDef == null)
+                throw new Exception("No Palette definition found with name: " + name);
 
-            return spriteSetDef;
+            return paletteDef;
         }
 
-        public void Remove(IImageEntity entity)
+        public void Remove(IPaletteEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(IImageEntity entity)
+        public void Update(IPaletteEntity entity)
         {
             throw new NotImplementedException();
         }

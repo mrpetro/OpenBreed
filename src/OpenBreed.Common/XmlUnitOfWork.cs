@@ -13,6 +13,7 @@ using OpenBreed.Common.Database.Tables.Sources;
 using OpenBreed.Common.Database.Tables.Sprites;
 using OpenBreed.Common.Database.Tables.Tiles;
 using OpenBreed.Common.Images;
+using OpenBreed.Common.Palettes;
 using OpenBreed.Common.Props;
 using OpenBreed.Common.Sources;
 using OpenBreed.Common.Sprites;
@@ -27,9 +28,9 @@ namespace OpenBreed.Common
 {
     public class XmlUnitOfWork : IUnitOfWork
     {
-        private readonly XmlDatabase _context;
-
         #region Private Fields
+
+        private readonly XmlDatabase _context;
 
         private readonly Dictionary<Type, IRepository> _repositories = new Dictionary<Type, IRepository>();
 
@@ -44,27 +45,15 @@ namespace OpenBreed.Common
             RegisterRepos();
         }
 
-        private void RegisterRepos()
-        {
-            RegisterRepository(new XmlSourcesRepository(this, _context));
-            RegisterRepository(new XmlTileSetsRepository(this, _context));
-            RegisterRepository(new XmlSpriteSetsRepository(this, _context));
-            RegisterRepository(new XmlPropSetsRepository(this, _context));
-            RegisterRepository(new XmlImagesRepository(this, _context));
-        }
-
         #endregion Public Constructors
 
         #region Public Properties
 
+        public IEnumerable<IRepository> Repositories { get { return _repositories.Values; } }
+
         #endregion Public Properties
 
         #region Public Methods
-
-        protected void RegisterRepository<T>(IRepository<T> repository) where T : IEntity
-        {
-            _repositories.Add(typeof(T), repository);
-        }
 
         public IRepository<T> GetRepository<T>() where T : IEntity
         {
@@ -81,32 +70,30 @@ namespace OpenBreed.Common
             _context.Save();
         }
 
-        public LevelDef GetLevelDef(string levelName)
-        {
-            var levelDef = _context.Data.Tables.OfType<DatabaseLevelTableDef>().FirstOrDefault().Items.FirstOrDefault(item => item.Name == levelName);
-
-            if (levelDef == null)
-                throw new InvalidOperationException("Level '" + levelName + "' not found!");
-
-            return levelDef;
-        }
-
-        public PaletteDef GetPaletteDef(string paletteName)
-        {
-            var paletteDef = _context.Data.Tables.OfType<DatabasePaletteTableDef>().FirstOrDefault().Items.FirstOrDefault(item => item.Name == paletteName);
-
-            if (paletteDef == null)
-                throw new InvalidOperationException("Palette '" + paletteName + "' not found!");
-
-            return paletteDef;
-        }
-
-        public IEnumerable<DatabaseTableDef> GetTables()
-        {
-            return _context.Data.Tables;
-        }
-
         #endregion Public Methods
 
+        #region Protected Methods
+
+        protected void RegisterRepository<T>(IRepository<T> repository) where T : IEntity
+        {
+            _repositories.Add(typeof(T), repository);
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
+
+        private void RegisterRepos()
+        {
+            RegisterRepository(new XmlSourcesRepository(this, _context));
+            RegisterRepository(new XmlTileSetsRepository(this, _context));
+            RegisterRepository(new XmlSpriteSetsRepository(this, _context));
+            RegisterRepository(new XmlPropSetsRepository(this, _context));
+            RegisterRepository(new XmlImagesRepository(this, _context));
+            RegisterRepository(new XmlPalettesRepository(this, _context));
+            RegisterRepository(new XmlLevelsRepository(this, _context));
+        }
+
+        #endregion Private Methods
     }
 }

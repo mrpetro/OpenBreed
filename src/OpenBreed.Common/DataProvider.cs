@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common.Formats;
 using OpenBreed.Common.Images;
+using OpenBreed.Common.Maps;
 using OpenBreed.Common.Palettes;
 using OpenBreed.Common.Props;
 using OpenBreed.Common.Sources;
@@ -101,6 +102,41 @@ namespace OpenBreed.Common
             var asset = AssetsProvider.GetAsset(tileSetEntity.SourceRef);
 
             return FormatMan.Load(asset, tileSetEntity.Format) as TileSetModel;
+        }
+
+        public LevelModel GetLevel(string name)
+        {
+            var levelEntity = _unitOfWork.GetRepository<ILevelEntity>().GetByName(name);
+            if (levelEntity == null)
+                throw new Exception("Level error: " + name);
+
+            var asset = AssetsProvider.GetAsset(levelEntity.SourceRef);
+
+            var level = new LevelModel();
+            level.Map = FormatMan.Load(asset, levelEntity.Format) as MapModel;
+
+
+            if (levelEntity.TileSetRef != null)
+                level.TileSets.Add(GetTileSet(levelEntity.TileSetRef));
+
+            if (levelEntity.PropertySetRef != null)
+                level.PropSet = GetPropSet(levelEntity.PropertySetRef);
+
+            foreach (var spriteSetRef in levelEntity.SpriteSetRefs)
+                level.SpriteSets.Add(GetSpriteSet(spriteSetRef));
+
+            if (levelEntity.PaletteRefs.Any())
+            {
+                foreach (var paletteRef in levelEntity.PaletteRefs)
+                    level.Palettes.Add(GetPalette(paletteRef));
+            }
+            else
+            {
+                foreach (var palette in level.Map.Properties.Palettes)
+                    level.Palettes.Add(palette);
+            }
+
+            return level;
         }
 
         #endregion Public Methods

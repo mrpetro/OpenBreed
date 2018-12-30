@@ -17,7 +17,6 @@ namespace OpenBreed.Common.Sources
 
     public class XmlSourcesRepository : IRepository<ISourceEntity>
     {
-
         #region Private Fields
 
         private readonly DatabaseSourceTableDef _table;
@@ -39,6 +38,7 @@ namespace OpenBreed.Common.Sources
 
         #region Public Properties
 
+        public IEnumerable<IEntity> Entries { get { return _table.Items; } }
         public IUnitOfWork UnitOfWork { get; }
 
         #endregion Public Properties

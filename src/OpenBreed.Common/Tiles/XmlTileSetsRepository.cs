@@ -10,11 +10,9 @@ namespace OpenBreed.Common.Tiles
 {
     public class XmlTileSetsRepository : IRepository<ITileSetEntity>
     {
-
         #region Private Fields
 
         private readonly DatabaseTileSetTableDef _table;
-
         private XmlDatabase _context;
 
         #endregion Private Fields
@@ -33,6 +31,7 @@ namespace OpenBreed.Common.Tiles
 
         #region Public Properties
 
+        public IEnumerable<IEntity> Entries { get { return _table.Items; } }
         public IUnitOfWork UnitOfWork { get; }
 
         #endregion Public Properties
@@ -53,7 +52,7 @@ namespace OpenBreed.Common.Tiles
         {
             var tileSetDef = _table.Items.FirstOrDefault(item => item.Name == name);
             if (tileSetDef == null)
-                throw new Exception("No Source definition found with name: " + name);
+                throw new Exception("No TileSet definition found with name: " + name);
 
             return tileSetDef;
         }
@@ -69,5 +68,6 @@ namespace OpenBreed.Common.Tiles
         }
 
         #endregion Public Methods
+
     }
 }

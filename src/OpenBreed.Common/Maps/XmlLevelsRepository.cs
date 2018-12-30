@@ -1,6 +1,6 @@
-﻿using OpenBreed.Common.Database.Tables.Images;
-using OpenBreed.Common.Database.Tables.Sprites;
+﻿using OpenBreed.Common.Database.Tables.Levels;
 using OpenBreed.Common.Database.Tables.Tiles;
+using OpenBreed.Common.Maps;
 using OpenBreed.Common.Sources;
 using System;
 using System.Collections.Generic;
@@ -8,68 +8,70 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Images
+namespace OpenBreed.Common.Tiles
 {
-    public class XmlImagesRepository : IRepository<IImageEntity>
+    public class XmlLevelsRepository : IRepository<ILevelEntity>
     {
+
         #region Private Fields
 
-        private readonly DatabaseImageTableDef _table;
+        private readonly DatabaseLevelTableDef _table;
+
         private XmlDatabase _context;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public XmlImagesRepository(IUnitOfWork unitOfWork, XmlDatabase context)
+        public XmlLevelsRepository(IUnitOfWork unitOfWork, XmlDatabase context)
         {
             UnitOfWork = unitOfWork;
             _context = context;
 
-            _table = _context.GetImageTable();
+            _table = _context.GetLevelTable();
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public IEnumerable<IEntity> Entries { get { return _table.Items; } }
         public IUnitOfWork UnitOfWork { get; }
+
+        public IEnumerable<IEntity> Entries { get { return _table.Items; } }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void Add(IImageEntity entity)
+        public void Add(ILevelEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public IImageEntity GetById(long id)
+        public ILevelEntity GetById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public IImageEntity GetByName(string name)
+        public ILevelEntity GetByName(string name)
         {
-            var spriteSetDef = _table.Items.FirstOrDefault(item => item.Name == name);
-            if (spriteSetDef == null)
-                throw new Exception("No Image definition found with name: " + name);
+            var levelDef = _table.Items.FirstOrDefault(item => item.Name == name);
+            if (levelDef == null)
+                throw new Exception("No Level definition found with name: " + name);
 
-            return spriteSetDef;
+            return levelDef;
         }
 
-        public void Remove(IImageEntity entity)
+        public void Remove(ILevelEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(IImageEntity entity)
+        public void Update(ILevelEntity entity)
         {
             throw new NotImplementedException();
         }
 
         #endregion Public Methods
-
     }
 }

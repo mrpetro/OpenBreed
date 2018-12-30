@@ -14,7 +14,6 @@ namespace OpenBreed.Common.Sprites
         #region Private Fields
 
         private readonly DatabaseSpriteSetTableDef _table;
-
         private XmlDatabase _context;
 
         #endregion Private Fields
@@ -33,6 +32,7 @@ namespace OpenBreed.Common.Sprites
 
         #region Public Properties
 
+        public IEnumerable<IEntity> Entries { get { return _table.Items; } }
         public IUnitOfWork UnitOfWork { get; }
 
         #endregion Public Properties
@@ -69,5 +69,6 @@ namespace OpenBreed.Common.Sprites
         }
 
         #endregion Public Methods
+
     }
 }

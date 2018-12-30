@@ -19,8 +19,6 @@ namespace OpenBreed.Common
     {
         IRepository<T> GetRepository<T>() where T : IEntity;
         void Save();
-        LevelDef GetLevelDef(string levelName);
-        PaletteDef GetPaletteDef(string paletteName);
-        IEnumerable<DatabaseTableDef> GetTables();
+        IEnumerable<IRepository> Repositories{ get; }
     }
 }

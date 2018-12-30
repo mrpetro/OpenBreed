@@ -12,8 +12,10 @@ namespace OpenBreed.Common
 
     public interface IRepository<T> : IRepository where T : IEntity
     {
+
         #region Public Properties
 
+        IEnumerable<IEntity> Entries { get; }
         IUnitOfWork UnitOfWork { get; }
 
         #endregion Public Properties

@@ -9,11 +9,9 @@ namespace OpenBreed.Common.Props
 {
     public class XmlPropSetsRepository : IRepository<IPropSetEntity>
     {
-
         #region Private Fields
 
         private readonly DatabasePropertySetTableDef _table;
-
         private XmlDatabase _context;
 
         #endregion Private Fields
@@ -32,6 +30,7 @@ namespace OpenBreed.Common.Props
 
         #region Public Properties
 
+        public IEnumerable<IEntity> Entries { get { return _table.Items; } }
         public IUnitOfWork UnitOfWork { get; }
 
         #endregion Public Properties

@@ -54,8 +54,11 @@
     <Compile Include="Formats\IFormatEntity.cs" />
     <Compile Include="Images\IImageEntity.cs" />
     <Compile Include="Images\XmlImagesRepository.cs" />
+    <Compile Include="Maps\ILevelEntity.cs" />
     <Compile Include="Maps\LevelModel.cs" />
+    <Compile Include="Maps\XmlLevelsRepository.cs" />
     <Compile Include="Palettes\IPaletteEntity.cs" />
+    <Compile Include="Palettes\XmlPalettesRepository.cs" />
     <Compile Include="Props\IPropertyEntity.cs" />
     <Compile Include="Props\IPropSetEntity.cs" />
     <Compile Include="Props\PropSetModel.cs" />
