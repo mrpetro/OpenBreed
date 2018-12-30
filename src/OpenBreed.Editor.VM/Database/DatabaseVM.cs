@@ -31,6 +31,12 @@ using OpenBreed.Common.Database.Items.Sprites;
 using OpenBreed.Common.Database.Tables.Sprites;
 using OpenBreed.Common.Database.Items.Palettes;
 using OpenBreed.Common.Database.Tables.Palettes;
+using OpenBreed.Common.Images;
+using OpenBreed.Common.Maps;
+using OpenBreed.Common.Props;
+using OpenBreed.Common.Tiles;
+using OpenBreed.Common.Sprites;
+using OpenBreed.Common.Palettes;
 
 namespace OpenBreed.Editor.VM.Database
 {
@@ -93,54 +99,52 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Internal Methods
 
-        internal DatabaseItemVM CreateItem(DatabaseItemDef itemDef)
+        internal DatabaseItemVM CreateItem(IEntity entity)
         {
-            if (itemDef is ImageDef)
+            if (entity is IImageEntity)
                 return new DatabaseImageItemVM(this);
-            else if (itemDef is LevelDef)
+            else if (entity is ILevelEntity)
                 return new DatabaseLevelItemVM(this);
-            else if (itemDef is SourceDef)
+            else if (entity is ISourceEntity)
                 return new DatabaseSourceItemVM(this);
-            else if (itemDef is PropertySetDef)
+            else if (entity is IPropSetEntity)
                 return new DatabasePropSetItemVM(this);
-            else if (itemDef is TileSetDef)
+            else if (entity is ITileSetEntity)
                 return new DatabaseTileSetItemVM(this);
-            else if (itemDef is SpriteSetDef)
+            else if (entity is ISpriteSetEntity)
                 return new DatabaseSpriteSetItemVM(this);
-            else if (itemDef is PaletteDef)
+            else if (entity is IPaletteEntity)
                 return new DatabasePaletteItemVM(this);
-            else if (itemDef is DatabaseTableDef)
-                return CreateTable((DatabaseTableDef)itemDef);
             else
-                throw new NotImplementedException(itemDef.ToString());
+                throw new NotImplementedException(entity.ToString());
         }
 
-        internal DatabaseTableVM CreateTable(DatabaseTableDef tableDef)
+        internal DatabaseTableVM CreateTable(IRepository repository)
         {
-            if (tableDef is DatabaseImageTableDef)
+            if (repository is IRepository<IImageEntity>)
                 return new DatabaseImageTableVM(this);
-            else if (tableDef is DatabaseLevelTableDef)
+            else if (repository is IRepository<ILevelEntity>)
                 return new DatabaseLevelTableVM(this);
-            else if (tableDef is DatabasePropertySetTableDef)
+            else if (repository is IRepository<IPropSetEntity>)
                 return new DatabasePropertySetTableVM(this);
-            else if (tableDef is DatabaseSourceTableDef)
+            else if (repository is IRepository<ISourceEntity>)
                 return new DatabaseSourceTableVM(this);
-            else if (tableDef is DatabaseTileSetTableDef)
+            else if (repository is IRepository<ITileSetEntity>)
                 return new DatabaseTileSetTableVM(this);
-            else if (tableDef is DatabaseSpriteSetTableDef)
+            else if (repository is IRepository<ISpriteSetEntity>)
                 return new DatabaseSpriteSetTableVM(this);
-            else if (tableDef is DatabasePaletteTableDef)
+            else if (repository is IRepository<IPaletteEntity>)
                 return new DatabasePaletteTableVM(this);
             else
-                throw new NotImplementedException(tableDef.ToString());
+                throw new NotImplementedException(repository.ToString());
         }
 
         internal IEnumerable<DatabaseTableVM> GetTables()
         {
-            foreach (var tableDef in UnitOfWork.GetTables())
+            foreach (var repository in UnitOfWork.Repositories)
             {
-                var tableVM = CreateTable(tableDef);
-                tableVM.Load(tableDef);
+                var tableVM = CreateTable(repository);
+                tableVM.Load(repository);
                 yield return tableVM;
             }
         }

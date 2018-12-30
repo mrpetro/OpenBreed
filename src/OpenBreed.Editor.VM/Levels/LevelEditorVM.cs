@@ -74,10 +74,10 @@ namespace OpenBreed.Editor.VM.Levels
             PropSelector.Connect();
         }
 
-        public void Load(LevelDef levelDef)
+        public void Load(string name)
         {
             CurrentLevel = Root.CreateLevel();
-            CurrentLevel.Load(levelDef);
+            CurrentLevel.Load(name);
 
             TileSelector.CurrentItem = CurrentLevel.TileSets.FirstOrDefault();
             PropSelector.CurrentItem = CurrentLevel.PropSet;

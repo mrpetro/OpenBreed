@@ -1,5 +1,7 @@
-﻿using OpenBreed.Common.Database;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Database;
 using OpenBreed.Common.Database.Tables.Images;
+using OpenBreed.Common.Images;
 using OpenBreed.Editor.VM.Database.Items;
 using System;
 using System.Collections.Generic;
@@ -14,7 +16,7 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         #region Private Fields
 
-        private DatabaseImageTableDef _model;
+        private IRepository<IImageEntity> _repository;
 
         #endregion Private Fields
 
@@ -36,19 +38,17 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         public override IEnumerable<DatabaseItemVM> GetItems()
         {
-            foreach (var itemDef in _model.Items)
+            foreach (var entry in _repository.Entries)
             {
-                var itemVM = Owner.CreateItem(itemDef);
-                itemVM.Load(itemDef);
+                var itemVM = Owner.CreateItem(entry);
+                itemVM.Load(entry);
                 yield return itemVM;
             }
         }
 
-        public override void Load(DatabaseItemDef itemDef)
+        public override void Load(IRepository repository)
         {
-            _model = itemDef as DatabaseImageTableDef ?? throw new InvalidOperationException($"Expected {nameof(DatabaseImageTableDef)}");
-
-            base.Load(itemDef);
+            _repository = repository as IRepository<IImageEntity> ?? throw new InvalidOperationException($"Expected {nameof(IRepository<IImageEntity>)}");
         }
 
         #endregion Public Methods

@@ -3,30 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Common;
 using OpenBreed.Common.Database;
 using OpenBreed.Common.Database.Items.Images;
+using OpenBreed.Common.Images;
 
 namespace OpenBreed.Editor.VM.Database.Items
 {
     public class DatabaseImageItemVM : DatabaseItemVM
     {
-        private ImageDef _model;
+        #region Private Fields
+
+        private IImageEntity _entry;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public DatabaseImageItemVM(DatabaseVM owner) : base(owner)
         {
         }
 
-        public override void Load(DatabaseItemDef itemDef)
-        {
-            _model = itemDef as ImageDef ?? throw new InvalidOperationException($"Expected {nameof(ImageDef)}");
+        #endregion Public Constructors
 
-            base.Load(itemDef);
+        #region Public Methods
+
+        public override void Load(IEntity entry)
+        {
+            _entry = entry as IImageEntity ?? throw new InvalidOperationException($"Expected {nameof(IImageEntity)}");
+
+            base.Load(entry);
         }
 
         public override void Open()
         {
-            Owner.Root.ImageViewer.TryLoad(_model.Name);
+            Owner.Root.ImageViewer.TryLoad(_entry.Name);
             Owner.OpenedItem = this;
         }
+
+        #endregion Public Methods
     }
 }

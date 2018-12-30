@@ -32,22 +32,14 @@ namespace OpenBreed.Editor.VM.Palettes
             Colors.ListChanged += (s, a) => OnPropertyChanged(nameof(Colors));
         }
 
-        internal void Load(PaletteDef paletteDef)
+        internal void Load(string name)
         {
-            //TODO: replace this
-            //var asset = Root.DataProvider.GetPalette(paletteDef.Name);
-            var asset = Root.DataProvider.AssetsProvider.GetAsset(paletteDef.SourceRef);
-            if (asset == null)
-                throw new Exception("Palette source error: " + paletteDef.SourceRef);
-
-            var model = Root.DataProvider.FormatMan.Load(asset, paletteDef.Format) as PaletteModel;
+            var model = Root.DataProvider.GetPalette(name);
 
             Restore(model);
 
             //NOTE: quick hack to get the result
             Root.LevelEditor.CurrentLevel.Restore(new List<PaletteModel>() { model });
-
-            Name = paletteDef.Name;
         }
 
 

@@ -17,6 +17,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         public EditorVM Root { get; private set; }
         private PaletteVM _palette;
+        private SpriteSetModel spriteSet;
 
         #endregion Private Fields
 
@@ -27,6 +28,21 @@ namespace OpenBreed.Editor.VM.Sprites
             Root = root;
 
             Items = new BindingList<SpriteVM>();
+            Items.ListChanged += (s, e) => OnPropertyChanged(nameof(Items));
+            Root.LevelEditor.PaletteSelector.PropertyChanged += Palettes_PropertyChanged;
+
+            PropertyChanged += SpriteSetVM_PropertyChanged;
+        }
+
+        public SpriteSetVM(EditorVM root, SpriteSetModel model)
+        {
+            Root = root;
+
+            Items = new BindingList<SpriteVM>();
+
+            foreach (var sprite in model.Sprites)
+                Items.Add(SpriteVM.Create(sprite));
+
             Items.ListChanged += (s, e) => OnPropertyChanged(nameof(Items));
             Root.LevelEditor.PaletteSelector.PropertyChanged += Palettes_PropertyChanged;
 

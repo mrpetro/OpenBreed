@@ -28,6 +28,9 @@ using OpenBreed.Common.Database.Items.Levels;
 using OpenBreed.Common.Database.Items.Tiles;
 using OpenBreed.Common.Database.Items.Sprites;
 using OpenBreed.Common.Database.Items.Palettes;
+using OpenBreed.Common.Tiles;
+using OpenBreed.Common.Sprites;
+using OpenBreed.Common.Props;
 
 namespace OpenBreed.Editor.VM
 {
@@ -106,9 +109,24 @@ namespace OpenBreed.Editor.VM
             return new LevelVM(this);
         }
 
+        internal TileSetVM CreateTileSet(TileSetModel tileSet)
+        {
+            return new TileSetVM(this, tileSet);
+        }
+
+        internal SpriteSetVM CreateSpiteSet(SpriteSetModel spriteSet)
+        {
+            return new SpriteSetVM(this, spriteSet);
+        }
+
         public PaletteVM CreatePalette()
         {
             return new PaletteVM(this);
+        }
+
+        internal PropSetVM CreatePropSet(IPropSetEntity propSet)
+        {
+            return new PropSetVM(this, propSet);
         }
 
         public PropSetVM CreatePropSet()
@@ -139,6 +157,7 @@ namespace OpenBreed.Editor.VM
 
             return new DatabaseVM(this, UnitOfWork);
         }
+
         public void Run()
         {
             try

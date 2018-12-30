@@ -22,6 +22,7 @@ namespace OpenBreed.Editor.VM.Props
 
         private const int PROP_SIZE = 32;
         private string _name;
+        private IPropSetEntity propSet;
 
         #endregion Private Fields
 
@@ -31,6 +32,19 @@ namespace OpenBreed.Editor.VM.Props
         {
             Root = root;
             Items = new BindingList<PropVM>();
+        }
+
+        public PropSetVM(EditorVM root, IPropSetEntity model)
+        {
+            Root = root;
+            Items = new BindingList<PropVM>();
+
+            foreach (var property in model.Items)
+            {
+                var newProp = CreateProp(property);
+                newProp.Load(property);
+                Items.Add(newProp);
+            }
         }
 
         #endregion Public Constructors

@@ -18,6 +18,9 @@ using OpenBreed.Common.Database.Items.Palettes;
 using System.Collections.Generic;
 using OpenBreed.Editor.VM.Sprites;
 using OpenBreed.Common.Database.Items.Sprites;
+using OpenBreed.Common.Tiles;
+using OpenBreed.Common.Sprites;
+using OpenBreed.Common.Props;
 
 namespace OpenBreed.Editor.VM.Levels
 {
@@ -106,6 +109,16 @@ namespace OpenBreed.Editor.VM.Levels
 
         #region Public Methods
 
+        public void AddTileSet(TileSetModel tileSet)
+        {
+            TileSets.Add(Root.CreateTileSet(tileSet));
+        }
+
+        public void AddSpriteSet(SpriteSetModel spriteSet)
+        {
+            SpriteSets.Add(Root.CreateSpiteSet(spriteSet));
+        }
+
         public void AddTileSet(string name)
         {
             var newTileSet = Root.CreateTileSet();
@@ -113,10 +126,10 @@ namespace OpenBreed.Editor.VM.Levels
             TileSets.Add(newTileSet);
         }
 
-        public void AddPalette(PaletteDef paletteDef)
+        public void AddPalette(string name)
         {
             var newPalette = Root.CreatePalette();
-            newPalette.Load(paletteDef);
+            newPalette.Load(name);
             Palettes.Add(newPalette);
         }
 
@@ -133,6 +146,12 @@ namespace OpenBreed.Editor.VM.Levels
             propSet.Load(name);
             PropSet = propSet;
         }
+
+        public void LoadPropSet(IPropSetEntity propSet)
+        {
+            PropSet = Root.CreatePropSet(propSet);
+        }
+
         public void Save()
         {
             //OnSaving(new EventArgs());
@@ -184,6 +203,27 @@ namespace OpenBreed.Editor.VM.Levels
             Palettes.ResetBindings();
         }
 
+        internal void Load(string name)
+        {
+            var model = Root.DataProvider.GetLevel(name);
+
+            foreach (var spriteSet in model.SpriteSets)
+                AddSpriteSet(spriteSet);
+
+            foreach (var tileSet in model.TileSets)
+                AddTileSet(tileSet);
+
+            if(model.PropSet != null)
+                LoadPropSet(model.PropSet);
+
+            Properties.Load(model.Map);
+            Body.Load(model.Map);
+            Restore(model.Palettes);
+            Root.LevelEditor.PaletteSelector.CurrentItem = Palettes.FirstOrDefault();
+            Root.LevelEditor.BodyEditor.CurrentMapBody = Body;
+        }
+
+
         internal void Load(LevelDef levelDef)
         {
             var asset = Root.DataProvider.AssetsProvider.GetAsset(levelDef.SourceRef);
@@ -203,13 +243,7 @@ namespace OpenBreed.Editor.VM.Levels
                 AddSpriteSet(spriteSetRef);
 
             foreach (var paletteRef in levelDef.PaletteRefs)
-            {
-                var paletteDef = Root.UnitOfWork.GetPaletteDef(paletteRef);
-                if (paletteDef == null)
-                    throw new Exception($"No Palette definition with name '{paletteRef}' found!");
-
-                AddPalette(paletteDef);
-            }
+                AddPalette(paletteRef);
 
             Properties.Load(model);
             Body.Load(model);

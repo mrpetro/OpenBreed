@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Database;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,10 +35,10 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Methods
 
-        public virtual void Load(DatabaseItemDef itemDef)
+        public virtual void Load(IEntity entry)
         {
-            Name = itemDef.Name;
-            Description = itemDef.Description;
+            Name = entry.Name;
+            //Description = itemDef.Description;
         }
 
         public virtual void Open()

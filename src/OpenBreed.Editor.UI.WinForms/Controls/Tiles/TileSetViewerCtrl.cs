@@ -118,6 +118,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Tiles
             if (_vm == null)
                 return;
 
+            if (_vm.CurrentTileSet == null)
+                return;
+
             _vm.CurrentTileSet.Draw(e.Graphics);
             _vm.DrawSelection(e.Graphics);
 

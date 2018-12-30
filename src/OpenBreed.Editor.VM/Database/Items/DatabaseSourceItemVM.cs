@@ -1,5 +1,7 @@
-﻿using OpenBreed.Common.Database;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Database;
 using OpenBreed.Common.Database.Items.Sources;
+using OpenBreed.Common.Sources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +12,29 @@ namespace OpenBreed.Editor.VM.Database.Items
 {
     public class DatabaseSourceItemVM : DatabaseItemVM
     {
+        #region Private Fields
+
+        private ISourceEntity _entry;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
         public DatabaseSourceItemVM(DatabaseVM owner) : base(owner)
         {
         }
 
-        public override void Load(DatabaseItemDef itemDef)
-        {
-            var sourceDef = itemDef as SourceDef ?? throw new InvalidOperationException($"Expected {nameof(SourceDef)}");
+        #endregion Public Constructors
 
-            base.Load(itemDef);
+        #region Public Methods
+
+        public override void Load(IEntity entry)
+        {
+            _entry = entry as ISourceEntity ?? throw new InvalidOperationException($"Expected {nameof(ISourceEntity)}");
+
+            base.Load(entry);
         }
+
+        #endregion Public Methods
     }
 }

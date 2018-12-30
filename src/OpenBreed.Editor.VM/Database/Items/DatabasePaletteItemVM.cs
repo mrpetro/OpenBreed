@@ -1,8 +1,10 @@
-﻿using OpenBreed.Common.Database;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Database;
 using OpenBreed.Common.Database.Items.Palettes;
 using OpenBreed.Common.Database.Items.Props;
 using OpenBreed.Common.Database.Items.Sources;
 using OpenBreed.Common.Database.Items.Sprites;
+using OpenBreed.Common.Palettes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,17 +15,28 @@ namespace OpenBreed.Editor.VM.Database.Items
 {
     public class DatabasePaletteItemVM : DatabaseItemVM
     {
-        private PaletteDef _model;
+
+        #region Private Fields
+
+        private IPaletteEntity _entry;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public DatabasePaletteItemVM(DatabaseVM owner) : base(owner)
         {
         }
 
-        public override void Load(DatabaseItemDef itemDef)
-        {
-            _model = itemDef as PaletteDef ?? throw new InvalidOperationException($"Expected {nameof(PaletteDef)}");
+        #endregion Public Constructors
 
-            base.Load(itemDef);
+        #region Public Methods
+
+        public override void Load(IEntity entry)
+        {
+            _entry = entry as IPaletteEntity ?? throw new InvalidOperationException($"Expected {nameof(IPaletteEntity)}");
+
+            base.Load(entry);
         }
 
         public override void Open()
@@ -33,5 +46,8 @@ namespace OpenBreed.Editor.VM.Database.Items
             //Owner.Root.PropSetEditor.TryLoad(_model);
             Owner.OpenedItem = this;
         }
+
+        #endregion Public Methods
+
     }
 }

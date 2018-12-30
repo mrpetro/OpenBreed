@@ -1,7 +1,9 @@
-﻿using OpenBreed.Common.Database;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Database;
 using OpenBreed.Common.Database.Tables.Props;
 using OpenBreed.Common.Database.Tables.Sprites;
 using OpenBreed.Common.Database.Tables.Tiles;
+using OpenBreed.Common.Sprites;
 using OpenBreed.Editor.VM.Database.Items;
 using System;
 using System.Collections.Generic;
@@ -15,7 +17,7 @@ namespace OpenBreed.Editor.VM.Database.Tables
     {
         #region Private Fields
 
-        private DatabaseSpriteSetTableDef _model;
+        private IRepository<ISpriteSetEntity> _repository;
 
         #endregion Private Fields
 
@@ -37,19 +39,17 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         public override IEnumerable<DatabaseItemVM> GetItems()
         {
-            foreach (var itemDef in _model.Items)
+            foreach (var entry in _repository.Entries)
             {
-                var itemVM = Owner.CreateItem(itemDef);
-                itemVM.Load(itemDef);
+                var itemVM = Owner.CreateItem(entry);
+                itemVM.Load(entry);
                 yield return itemVM;
             }
         }
 
-        public override void Load(DatabaseItemDef itemDef)
+        public override void Load(IRepository repository)
         {
-            _model = itemDef as DatabaseSpriteSetTableDef ?? throw new InvalidOperationException($"Expected {nameof(DatabaseSpriteSetTableDef)}");
-
-            base.Load(itemDef);
+            _repository = repository as IRepository<ISpriteSetEntity> ?? throw new InvalidOperationException($"Expected {nameof(IRepository<ISpriteSetEntity>)}");
         }
 
         #endregion Public Methods

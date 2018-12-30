@@ -40,6 +40,24 @@ namespace OpenBreed.Editor.VM.Tiles
             Root.LevelEditor.PaletteSelector.PropertyChanged += Palettes_PropertyChanged;
         }
 
+        public TileSetVM(EditorVM root, TileSetModel model)
+        {
+            Root = root;
+
+            Items = new BindingList<TileVM>();
+
+            TileSize = model.TileSize;
+            Bitmap = ToBitmap(model.Tiles);
+            SetupTiles();
+
+            Items.ListChanged += (s, e) => OnPropertyChanged(nameof(Items));
+
+            PropertyChanged += TileSetVM_PropertyChanged;
+            Root.LevelEditor.PaletteSelector.PropertyChanged += Palettes_PropertyChanged;
+
+        }
+
+
         #endregion Public Constructors
 
         #region Public Properties
