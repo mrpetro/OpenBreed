@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Common.Database.Items.Props;
 using OpenBreed.Common.Props;
 
 namespace OpenBreed.Editor.VM.Props

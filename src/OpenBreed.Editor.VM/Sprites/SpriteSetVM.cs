@@ -5,9 +5,7 @@ using OpenBreed.Editor.VM.Palettes;
 using OpenBreed.Common.Sources;
 using System.ComponentModel;
 using System.Linq;
-using OpenBreed.Common.Database.Items.Sources;
 using System;
-using OpenBreed.Common.Database.Items.Sprites;
 
 namespace OpenBreed.Editor.VM.Sprites
 {

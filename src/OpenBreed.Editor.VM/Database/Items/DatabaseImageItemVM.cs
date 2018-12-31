@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common;
-using OpenBreed.Common.Database;
-using OpenBreed.Common.Database.Items.Images;
+using OpenBreed.Common.XmlDatabase;
+using OpenBreed.Common.XmlDatabase.Items.Images;
 using OpenBreed.Common.Images;
 
 namespace OpenBreed.Editor.VM.Database.Items

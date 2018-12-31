@@ -10,7 +10,6 @@ using OpenBreed.Common.Sources;
 using System.ComponentModel;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Common.Logging;
-using OpenBreed.Common.Database.Items.Props;
 using OpenBreed.Common.Props;
 
 namespace OpenBreed.Editor.VM.Props

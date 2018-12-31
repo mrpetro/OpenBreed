@@ -1,6 +1,4 @@
-﻿using OpenBreed.Common.Database.Items.Images;
-using OpenBreed.Common.Database.Items.Sources;
-using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Editor.VM.Base;
 using OpenBreed.Common.Sources;
 using System;
 using System.Collections.Generic;

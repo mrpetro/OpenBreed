@@ -10,9 +10,7 @@ using System.Runtime.InteropServices;
 using OpenBreed.Editor.VM.Palettes;
 using System.Linq;
 using OpenBreed.Common.Drawing;
-using OpenBreed.Common.Database.Items.Sources;
 using System;
-using OpenBreed.Common.Database.Items.Tiles;
 using OpenBreed.Common.Formats;
 
 namespace OpenBreed.Editor.VM.Tiles

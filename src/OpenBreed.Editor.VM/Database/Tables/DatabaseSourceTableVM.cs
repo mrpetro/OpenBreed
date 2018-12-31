@@ -1,6 +1,4 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Database;
-using OpenBreed.Common.Database.Tables.Sources;
 using OpenBreed.Common.Sources;
 using OpenBreed.Editor.VM.Database.Items;
 using System;

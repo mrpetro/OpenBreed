@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Database;
+using OpenBreed.Common.XmlDatabase;
 using OpenBreed.Editor.VM.Database;
 using System;
 using System.Collections.Generic;

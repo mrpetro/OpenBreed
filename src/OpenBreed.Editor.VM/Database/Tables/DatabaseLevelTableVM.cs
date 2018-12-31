@@ -1,6 +1,4 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Database;
-using OpenBreed.Common.Database.Tables.Levels;
 using OpenBreed.Common.Maps;
 using OpenBreed.Editor.VM.Database.Items;
 using System;

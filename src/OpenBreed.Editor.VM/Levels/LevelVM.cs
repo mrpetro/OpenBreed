@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Common.Commands;
-using OpenBreed.Common.Database.Items.Sources;
 using OpenBreed.Common.Maps;
 using OpenBreed.Common.Palettes;
 using OpenBreed.Editor.VM.Base;
@@ -8,16 +7,11 @@ using OpenBreed.Common.Sources;
 using System;
 using System.IO;
 using System.Linq;
-using OpenBreed.Common.Database.Items.Levels;
 using System.ComponentModel;
 using OpenBreed.Editor.VM.Tiles;
-using OpenBreed.Common.Database.Items.Tiles;
 using OpenBreed.Editor.VM.Props;
-using OpenBreed.Common.Database.Items.Props;
-using OpenBreed.Common.Database.Items.Palettes;
 using System.Collections.Generic;
 using OpenBreed.Editor.VM.Sprites;
-using OpenBreed.Common.Database.Items.Sprites;
 using OpenBreed.Common.Tiles;
 using OpenBreed.Common.Sprites;
 using OpenBreed.Common.Props;
@@ -224,38 +218,38 @@ namespace OpenBreed.Editor.VM.Levels
         }
 
 
-        internal void Load(LevelDef levelDef)
-        {
-            var asset = Root.DataProvider.AssetsProvider.GetAsset(levelDef.SourceRef);
-            if (asset == null)
-                throw new Exception("Level source error: " + levelDef.SourceRef);
+        //internal void Load(LevelDef levelDef)
+        //{
+        //    var asset = Root.DataProvider.AssetsProvider.GetAsset(levelDef.SourceRef);
+        //    if (asset == null)
+        //        throw new Exception("Level source error: " + levelDef.SourceRef);
 
-            var model = Root.DataProvider.FormatMan.Load(asset, levelDef.Format) as MapModel;
-            Source = asset;
+        //    var model = Root.DataProvider.FormatMan.Load(asset, levelDef.Format) as MapModel;
+        //    Source = asset;
 
-            if (levelDef.TileSetRef != null)
-                AddTileSet(levelDef.TileSetRef);
+        //    if (levelDef.TileSetRef != null)
+        //        AddTileSet(levelDef.TileSetRef);
 
-            if (levelDef.PropertySetRef != null)
-                LoadPropSet(levelDef.PropertySetRef);
+        //    if (levelDef.PropertySetRef != null)
+        //        LoadPropSet(levelDef.PropertySetRef);
 
-            foreach (var spriteSetRef in levelDef.SpriteSetRefs)
-                AddSpriteSet(spriteSetRef);
+        //    foreach (var spriteSetRef in levelDef.SpriteSetRefs)
+        //        AddSpriteSet(spriteSetRef);
 
-            foreach (var paletteRef in levelDef.PaletteRefs)
-                AddPalette(paletteRef);
+        //    foreach (var paletteRef in levelDef.PaletteRefs)
+        //        AddPalette(paletteRef);
 
-            Properties.Load(model);
-            Body.Load(model);
+        //    Properties.Load(model);
+        //    Body.Load(model);
 
-            if (!levelDef.PaletteRefs.Any())
-            {
-                Restore(model.Properties.Palettes);
-                Root.LevelEditor.PaletteSelector.CurrentItem = Palettes.FirstOrDefault();
-            }
+        //    if (!levelDef.PaletteRefs.Any())
+        //    {
+        //        Restore(model.Properties.Palettes);
+        //        Root.LevelEditor.PaletteSelector.CurrentItem = Palettes.FirstOrDefault();
+        //    }
 
-            Root.LevelEditor.BodyEditor.CurrentMapBody = Body;
-        }
+        //    Root.LevelEditor.BodyEditor.CurrentMapBody = Body;
+        //}
 
         #endregion Internal Methods
 

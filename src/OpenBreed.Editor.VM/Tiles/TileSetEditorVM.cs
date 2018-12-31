@@ -1,6 +1,4 @@
-﻿using OpenBreed.Common.Database.Items.Props;
-using OpenBreed.Common.Database.Items.Tiles;
-using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Tiles;
 using System;
 using System.Collections.Generic;

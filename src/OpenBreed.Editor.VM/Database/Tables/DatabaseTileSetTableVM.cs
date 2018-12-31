@@ -1,7 +1,4 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Database;
-using OpenBreed.Common.Database.Tables.Props;
-using OpenBreed.Common.Database.Tables.Tiles;
 using OpenBreed.Common.Tiles;
 using OpenBreed.Editor.VM.Database.Items;
 using System;

@@ -23,14 +23,10 @@ using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Images;
 using OpenBreed.Common.Formats;
 using OpenBreed.Common.Sources;
-using OpenBreed.Common.Database.Items.Props;
-using OpenBreed.Common.Database.Items.Levels;
-using OpenBreed.Common.Database.Items.Tiles;
-using OpenBreed.Common.Database.Items.Sprites;
-using OpenBreed.Common.Database.Items.Palettes;
 using OpenBreed.Common.Tiles;
 using OpenBreed.Common.Sprites;
 using OpenBreed.Common.Props;
+using OpenBreed.Common.XmlDatabase;
 
 namespace OpenBreed.Editor.VM
 {

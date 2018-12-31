@@ -1,8 +1,8 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Database;
-using OpenBreed.Common.Database.Items.Props;
-using OpenBreed.Common.Database.Items.Sources;
-using OpenBreed.Common.Database.Items.Sprites;
+using OpenBreed.Common.XmlDatabase;
+using OpenBreed.Common.XmlDatabase.Items.Props;
+using OpenBreed.Common.XmlDatabase.Items.Sources;
+using OpenBreed.Common.XmlDatabase.Items.Sprites;
 using OpenBreed.Common.Sprites;
 using System;
 using System.Collections.Generic;
