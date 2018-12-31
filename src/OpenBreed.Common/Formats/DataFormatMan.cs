@@ -1,6 +1,4 @@
-﻿using OpenBreed.Common.Database;
-using OpenBreed.Common.Database.Items.Sources;
-using OpenBreed.Common.Sources;
+﻿using OpenBreed.Common.Sources;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

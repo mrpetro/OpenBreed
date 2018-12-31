@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common
 {
+    public delegate string ExpandVariablesDelegate(string text);
+
     public class DataSourceProvider
     {
         #region Private Fields
