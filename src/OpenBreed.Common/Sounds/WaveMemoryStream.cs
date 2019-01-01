@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace OpenBreed.Common.Sound
+namespace OpenBreed.Common.Sounds
 {
     public class WaveMemoryStream : Stream
     {
@@ -16,7 +16,7 @@ namespace OpenBreed.Common.Sound
 
         private MemoryStream _waveStream;
 
-        public WaveMemoryStream(byte[] sampleData, int audioSampleRate, ushort audioBitsPerSample, ushort audioChannels)
+        public WaveMemoryStream(byte[] sampleData, int audioSampleRate, int audioBitsPerSample, int audioChannels)
         {
             _waveStream = new MemoryStream();
             WriteHeader(_waveStream, sampleData.Length, audioSampleRate, audioBitsPerSample, audioChannels);
@@ -24,7 +24,7 @@ namespace OpenBreed.Common.Sound
             _waveStream.Position = 0;
         }
 
-        public void WriteHeader(Stream stream, int length, int audioSampleRate, ushort audioBitsPerSample, ushort audioChannels)
+        public void WriteHeader(Stream stream, int length, int audioSampleRate, int audioBitsPerSample, int audioChannels)
         {
             BinaryWriter bw = new BinaryWriter(stream);
 

@@ -5,11 +5,19 @@ using System.Text;
 using System.Media;
 using System.IO;
 
-namespace OpenBreed.Common.Sound
+namespace OpenBreed.Common.Sounds
 {
     public class PCMPlayer
     {
-        private SoundPlayer m_SoundPlayer = null;
+        private readonly SoundPlayer _soundPlayer;
+
+        public PCMPlayer(byte[] pcmSampleBytes, int samplingRate, int bitsPerSample, int channels)
+        {
+            using (WaveMemoryStream waveStream = new WaveMemoryStream(pcmSampleBytes, samplingRate, bitsPerSample, channels))
+            {
+                _soundPlayer = new SoundPlayer(waveStream);
+            }
+        }
 
         public PCMPlayer(string pcmFilePath, int samplingRate, ushort bitsPerSample, ushort channels)
         {
@@ -21,19 +29,19 @@ namespace OpenBreed.Common.Sound
                 pcmSampleBytes = br.ReadBytes((int)numBytes);
                 using (WaveMemoryStream waveStream = new WaveMemoryStream(pcmSampleBytes, samplingRate, bitsPerSample, channels))
                 {
-                    m_SoundPlayer = new SoundPlayer(waveStream);
+                    _soundPlayer = new SoundPlayer(waveStream);
                 }
             }
         }
 
         public void Play()
         {
-            m_SoundPlayer.Play();
+            _soundPlayer.Play();
         }
 
         public void PlaySync()
         {
-            m_SoundPlayer.PlaySync();
+            _soundPlayer.PlaySync();
         }
     }
 }

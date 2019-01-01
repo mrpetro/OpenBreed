@@ -110,6 +110,17 @@ namespace OpenBreed.Common.XmlDatabase
             return table;
         }
 
+        internal DatabaseSoundTableDef GetSoundTable()
+        {
+            var table = Data.Tables.OfType<DatabaseSoundTableDef>().FirstOrDefault();
+            if (table == null)
+            {
+                table = new DatabaseSoundTableDef();
+                Data.Tables.Add(table);
+            }
+            return table;
+        }
+
         internal DatabaseSourceTableDef GetSourcesTable()
         {
             var table = Data.Tables.OfType<DatabaseSourceTableDef>().FirstOrDefault();

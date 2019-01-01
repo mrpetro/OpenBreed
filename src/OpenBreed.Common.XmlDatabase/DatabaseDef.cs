@@ -34,6 +34,7 @@ namespace OpenBreed.Common.XmlDatabase
         XmlArrayItem("PropertySets", typeof(DatabasePropertySetTableDef)),
         XmlArrayItem("TileSets", typeof(DatabaseTileSetTableDef)),
         XmlArrayItem("SpriteSets", typeof(DatabaseSpriteSetTableDef)),
+        XmlArrayItem("Sounds", typeof(DatabaseSoundTableDef)),
         XmlArrayItem("Images", typeof(DatabaseImageTableDef))]
         public readonly List<DatabaseTableDef> Tables = new List<DatabaseTableDef>();
 

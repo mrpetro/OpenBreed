@@ -3,6 +3,7 @@ using OpenBreed.Common.Images;
 using OpenBreed.Common.Maps;
 using OpenBreed.Common.Palettes;
 using OpenBreed.Common.Props;
+using OpenBreed.Common.Sounds;
 using OpenBreed.Common.Sources;
 using OpenBreed.Common.Sprites;
 using OpenBreed.Common.Tiles;
@@ -66,6 +67,17 @@ namespace OpenBreed.Common
             var asset = AssetsProvider.GetAsset(paletteEntity.SourceRef);
 
             return FormatMan.Load(asset, paletteEntity.Format) as PaletteModel;
+        }
+
+        public SoundModel GetSound(string name)
+        {
+            var entity = _unitOfWork.GetRepository<ISoundEntity>().GetByName(name);
+            if (entity == null)
+                throw new Exception("Sound error: " + name);
+
+            var asset = AssetsProvider.GetAsset(entity.SourceRef);
+
+            return FormatMan.Load(asset, entity.Format) as SoundModel;
         }
 
         public IPropSetEntity GetPropSet(string name)
@@ -153,6 +165,7 @@ namespace OpenBreed.Common
             FormatMan.RegisterFormat("ACBM_TILE_SET", new ACBMTileSetFormat());
             FormatMan.RegisterFormat("ACBM_IMAGE", new ACBMImageFormat());
             FormatMan.RegisterFormat("PALETTE", new PaletteFormat());
+            FormatMan.RegisterFormat("PCM_SOUND", new PCMSoundFormat());
         }
 
         #endregion Private Methods

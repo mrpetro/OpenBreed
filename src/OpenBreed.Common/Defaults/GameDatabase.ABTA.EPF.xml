@@ -95,12 +95,97 @@
         <EPFArchiveFileSourceDef Name="MAP.53" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
         <EPFArchiveFileSourceDef Name="MAP.54" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
         <EPFArchiveFileSourceDef Name="MAP.55" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="ALIEN1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="ALIEN2" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="ALIEN3" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="ALIEN4" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="AMMO" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="BACKING1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="BACKING2" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="BACKING3" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="BACKING4" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="CACOON1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="COMPUTER" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="COUNTDWN" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="CREDITS" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="CURSOR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="DIE" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="DOOR1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="EAT1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="EXPLOS" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="FLAMEOFF" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="FLAMEON" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="GENERATE" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="GRENADE" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="GRUNT1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="HATCH1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="HEALTH" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="KEYS" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="LAZER1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="LAZER2" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="LAZER3" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="LAZER4" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="LIZARD" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MGUN" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MINETICK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="MISSILE" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="NULLSAMP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="ONEWAY" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="OUTAMMO" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SELECT" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SIREN" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH01" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH02" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH03" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH04" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH05" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH06" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH07" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH08" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH08" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH09" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH10" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH11" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH12" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH13" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH14" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH15" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH16" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH17" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH18" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH19" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH20" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH21" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH22" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH23" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH24" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH25" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH26" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPEECH27" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SPLAT1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="SWITCH" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="TELE" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="TURRET1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="TURRET2" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileSourceDef Name="XTRALIFE" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
       </Items>
     </Sources>
     <Images>
       <Items>
       </Items>
     </Images>
+    <Sounds>
+      <Items>
+        <Sound Name="Sounds.ALIEN1" >
+          <SourceRef>ALIEN1</SourceRef>
+          <Format Name="PCM_SOUND" ></Format>
+        </Sound>
+        <Sound Name="Sounds.ALIEN2" >
+          <SourceRef>ALIEN2</SourceRef>
+          <Format Name="PCM_SOUND" ></Format>
+        </Sound>
+      </Items>
+    </Sounds>
     <SpriteSets>
       <Items>
         <SpriteSet Name="SpriteSets.SPR1A" >
