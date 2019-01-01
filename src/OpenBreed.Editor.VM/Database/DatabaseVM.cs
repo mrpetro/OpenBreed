@@ -37,6 +37,7 @@ using OpenBreed.Common.Props;
 using OpenBreed.Common.Tiles;
 using OpenBreed.Common.Sprites;
 using OpenBreed.Common.Palettes;
+using OpenBreed.Common.Sounds;
 
 namespace OpenBreed.Editor.VM.Database
 {
@@ -103,6 +104,8 @@ namespace OpenBreed.Editor.VM.Database
         {
             if (entity is IImageEntity)
                 return new DatabaseImageItemVM(this);
+            else if (entity is ISoundEntity)
+                return new DatabaseSoundItemVM(this);
             else if (entity is ILevelEntity)
                 return new DatabaseLevelItemVM(this);
             else if (entity is ISourceEntity)
@@ -123,6 +126,8 @@ namespace OpenBreed.Editor.VM.Database
         {
             if (repository is IRepository<IImageEntity>)
                 return new DatabaseImageTableVM(this);
+            if (repository is IRepository<ISoundEntity>)
+                return new DatabaseSoundTableVM(this);
             else if (repository is IRepository<ILevelEntity>)
                 return new DatabaseLevelTableVM(this);
             else if (repository is IRepository<IPropSetEntity>)

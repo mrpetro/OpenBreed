@@ -93,6 +93,8 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
                 _projectView.ShowSpriteSetEditorView();
             else if (databaseItemVM is DatabasePaletteItemVM)
                 _projectView.ShowPaletteEditorView();
+            else if (databaseItemVM is DatabaseSoundItemVM)
+                _projectView.ShowSoundEditorView();
             else
                 throw new NotImplementedException();
         }

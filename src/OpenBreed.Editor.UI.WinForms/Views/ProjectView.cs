@@ -39,7 +39,8 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         private DatabaseView _databaseView = new DatabaseView();
 
         private DeserializeDockContent _deserializeDockContent;
-        private ImageView _imagesView = new ImageView();
+        private ImageView _imagesViewerView = new ImageView();
+        private SoundEditorView _soundEditorView = new SoundEditorView();
         private LevelBodyEditorView _levelBodyEditorView = new LevelBodyEditorView();
         private LevelPalettesView _levelPalettesView = new LevelPalettesView();
         //private MapPropertiesView _mapPropertiesView = new MapPropertiesView();
@@ -82,12 +83,20 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _databaseView = null;
         }
 
+        public void CloseSoundEditorView()
+        {
+            if (_soundEditorView == null)
+                return;
+            _soundEditorView.Close();
+            _soundEditorView = null;
+        }
+
         public void CloseImagesView()
         {
-            if (_imagesView == null)
+            if (_imagesViewerView == null)
                 return;
-            _imagesView.Close();
-            _imagesView = null;
+            _imagesViewerView.Close();
+            _imagesViewerView = null;
         }
 
         public void CloseLevelBodyView()
@@ -149,6 +158,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             CloseLevelPropSelectorView();
             CloseLevelPalettesView();
             CloseLevelBodyView();
+            CloseSoundEditorView();
         }
 
         public void Initialize(DatabaseVM vm)
@@ -172,6 +182,16 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             if (File.Exists(configFile))
                 LoadFromXml(configFile, _deserializeDockContent);
         }
+
+        internal void ShowSoundEditorView()
+        {
+            if (_soundEditorView == null)
+                _soundEditorView = new SoundEditorView();
+
+            _soundEditorView.Initialize(_vm.Root.SoundEditor);
+            _soundEditorView.Show(this, DockState.Document);
+        }
+
         public void ShowDatabaseView()
         {
             if (_databaseView == null)
@@ -183,11 +203,11 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         public void ShowImageView()
         {
-            if (_imagesView == null)
-                _imagesView = new ImageView();
+            if (_imagesViewerView == null)
+                _imagesViewerView = new ImageView();
 
-            _imagesView.Initialize(_vm.Root.ImageViewer);
-            _imagesView.Show(this, DockState.Document);
+            _imagesViewerView.Initialize(_vm.Root.ImageViewer);
+            _imagesViewerView.Show(this, DockState.Document);
         }
 
         public void ShowLevelBodyEditorView()

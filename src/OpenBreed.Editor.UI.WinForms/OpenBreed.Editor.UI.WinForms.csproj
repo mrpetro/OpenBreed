@@ -142,6 +142,12 @@
     <Compile Include="Controls\Levels\LevelPropSelectorCtrl.Designer.cs">
       <DependentUpon>LevelPropSelectorCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Sounds\SoundEditorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Sounds\SoundEditorCtrl.Designer.cs">
+      <DependentUpon>SoundEditorCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Sprites\SpriteSetSelectorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -212,6 +218,12 @@
     </Compile>
     <Compile Include="Views\DatabaseView.Designer.cs">
       <DependentUpon>DatabaseView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SoundEditorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SoundEditorView.Designer.cs">
+      <DependentUpon>SoundEditorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ImageView.cs">
       <SubType>Form</SubType>
@@ -347,6 +359,9 @@
     <EmbeddedResource Include="Controls\Levels\LevelPropSelectorCtrl.resx">
       <DependentUpon>LevelPropSelectorCtrl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Sounds\SoundEditorCtrl.resx">
+      <DependentUpon>SoundEditorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Sprites\SpriteSetSelectorCtrl.resx">
       <DependentUpon>SpriteSetSelectorCtrl.cs</DependentUpon>
     </EmbeddedResource>
@@ -376,6 +391,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\DatabaseView.resx">
       <DependentUpon>DatabaseView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SoundEditorView.resx">
+      <DependentUpon>SoundEditorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ImageView.resx">
       <DependentUpon>ImageView.cs</DependentUpon>

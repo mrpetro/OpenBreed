@@ -27,6 +27,8 @@ using OpenBreed.Common.Tiles;
 using OpenBreed.Common.Sprites;
 using OpenBreed.Common.Props;
 using OpenBreed.Common.XmlDatabase;
+using OpenBreed.Common.Sounds;
+using OpenBreed.Editor.VM.Sounds;
 
 namespace OpenBreed.Editor.VM
 {
@@ -61,6 +63,7 @@ namespace OpenBreed.Editor.VM
             DatabaseViewer = new DatabaseViewerVM(this);
             SpriteViewer = new SpriteViewerVM(this);
             ImageViewer = new ImageViewerVM(this);
+            SoundEditor = new SoundEditorVM(this);
             LevelEditor = new LevelEditorVM(this);
             DataSourceProvider.ExpandVariables = Settings.ExpandVariables;
         }
@@ -79,6 +82,7 @@ namespace OpenBreed.Editor.VM
         public IDialogProvider DialogProvider { get; }
         public DataProvider DataProvider { get; private set; }
         public ImageViewerVM ImageViewer { get; }
+        public SoundEditorVM SoundEditor { get; }
         public LevelEditorVM LevelEditor { get; }
         public PropSetEditorVM PropSetEditor { get; }
         public SettingsMan Settings { get; private set; }
@@ -103,6 +107,19 @@ namespace OpenBreed.Editor.VM
         public LevelVM CreateLevel()
         {
             return new LevelVM(this);
+        }
+
+        internal SoundVM CreateSound()
+        {
+            return new SoundVM();
+        }
+
+        private void UpdateSound(SoundVM source, SoundModel target)
+        {
+            target.BitsPerSample = source.BitsPerSample;
+            target.Channels = source.Channels;
+            target.SampleRate = source.SampleRate;
+            target.Data = source.Data;
         }
 
         internal TileSetVM CreateTileSet(TileSetModel tileSet)

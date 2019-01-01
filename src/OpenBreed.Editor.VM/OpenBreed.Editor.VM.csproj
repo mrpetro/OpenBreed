@@ -82,6 +82,7 @@
     <Compile Include="Database\DatabaseTableViewerVM.cs" />
     <Compile Include="Database\Items\DatabaseLevelItemVM.cs" />
     <Compile Include="Database\Items\DatabasePaletteItemVM.cs" />
+    <Compile Include="Database\Items\DatabaseSoundItemVM.cs" />
     <Compile Include="Database\Items\DatabaseSpriteSetItemVM.cs" />
     <Compile Include="Database\Items\DatabaseTileSetItemVM.cs" />
     <Compile Include="Database\Items\DatabasePropSetItemVM.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Database\Tables\DatabaseImageTableVM.cs" />
     <Compile Include="Database\Tables\DatabaseLevelTableVM.cs" />
     <Compile Include="Database\Tables\DatabasePaletteTableVM.cs" />
+    <Compile Include="Database\Tables\DatabaseSoundTableVM.cs" />
     <Compile Include="Database\Tables\DatabaseSpriteSetTableVM.cs" />
     <Compile Include="Database\Tables\DatabaseTileSetTableVM.cs" />
     <Compile Include="Database\Tables\DatabasePropertySetTableVM.cs" />
@@ -137,6 +139,8 @@
     <Compile Include="Props\PropVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Props\PropVMHelper.cs" />
+    <Compile Include="Sounds\SoundEditorVM.cs" />
+    <Compile Include="Sounds\SoundVM.cs" />
     <Compile Include="Sprites\SpriteSetSelectorVM.cs" />
     <Compile Include="Sprites\SpriteSetVM.cs" />
     <Compile Include="Sprites\SpriteViewerVM.cs" />
