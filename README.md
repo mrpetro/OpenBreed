@@ -22,6 +22,7 @@ Create fully functional map editor for AB games with parallel thinking about ope
  - Possibility to view maps with their original color palettes, tiles and properties
  - Possibility to view tile sets associated with maps
  - Possibility to view sprite sets associated with maps
+ - Possibility to play game sounds
  - Level password generator (works for PC and Amiga platforms)
 
 **ABHC:**
