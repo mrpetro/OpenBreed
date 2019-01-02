@@ -205,9 +205,18 @@ namespace OpenBreed.Editor.VM.Levels
 
             Properties.Load(model.Map);
             Body.Load(model.Map);
+
+            Root.LevelEditor.PaletteSelector.PropertyChanged += PaletteSelector_PropertyChanged;
+
             Restore(model.Palettes);
             Root.LevelEditor.PaletteSelector.CurrentItem = Palettes.FirstOrDefault();
             Root.LevelEditor.BodyEditor.CurrentMapBody = Body;
+        }
+
+        private void PaletteSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            foreach (var tileSet in TileSets)
+                tileSet.Palette = Root.LevelEditor.PaletteSelector.CurrentItem;
         }
 
 
