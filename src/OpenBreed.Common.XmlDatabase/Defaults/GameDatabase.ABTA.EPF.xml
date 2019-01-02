@@ -142,7 +142,6 @@
         <EPFArchiveFileSourceDef Name="SPEECH06" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
         <EPFArchiveFileSourceDef Name="SPEECH07" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
         <EPFArchiveFileSourceDef Name="SPEECH08" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH08" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
         <EPFArchiveFileSourceDef Name="SPEECH09" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
         <EPFArchiveFileSourceDef Name="SPEECH10" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
         <EPFArchiveFileSourceDef Name="SPEECH11" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
@@ -178,11 +177,723 @@
       <Items>
         <Sound Name="Sounds.ALIEN1" >
           <SourceRef>ALIEN1</SourceRef>
-          <Format Name="PCM_SOUND" ></Format>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
         </Sound>
         <Sound Name="Sounds.ALIEN2" >
           <SourceRef>ALIEN2</SourceRef>
-          <Format Name="PCM_SOUND" ></Format>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.ALIEN3" >
+          <SourceRef>ALIEN3</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.ALIEN4" >
+          <SourceRef>ALIEN4</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.AMMO" >
+          <SourceRef>AMMO</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.BACKING1" >
+          <SourceRef>BACKING1</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.BACKING2" >
+          <SourceRef>BACKING2</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.BACKING3" >
+          <SourceRef>BACKING3</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.BACKING4" >
+          <SourceRef>BACKING4</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.CACOON1" >
+          <SourceRef>CACOON1</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.COMPUTER" >
+          <SourceRef>COMPUTER</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.COUNTDWN" >
+          <SourceRef>COUNTDWN</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.CREDITS" >
+          <SourceRef>CREDITS</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.CURSOR" >
+          <SourceRef>CURSOR</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.DIE" >
+          <SourceRef>DIE</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.DOOR1" >
+          <SourceRef>DOOR1</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.EAT1" >
+          <SourceRef>EAT1</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.EXPLOS" >
+          <SourceRef>EXPLOS</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.FLAMEOFF" >
+          <SourceRef>FLAMEOFF</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.FLAMEON" >
+          <SourceRef>FLAMEON</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.GENERATE" >
+          <SourceRef>GENERATE</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.GRENADE" >
+          <SourceRef>GRENADE</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.GRUNT1" >
+          <SourceRef>GRUNT1</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.HATCH1" >
+          <SourceRef>HATCH1</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.HEALTH" >
+          <SourceRef>HEALTH</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.KEYS" >
+          <SourceRef>KEYS</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.LAZER1" >
+          <SourceRef>LAZER1</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.LAZER2" >
+          <SourceRef>LAZER2</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.LAZER3" >
+          <SourceRef>LAZER3</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.LAZER4" >
+          <SourceRef>LAZER4</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.LIZARD" >
+          <SourceRef>LIZARD</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.MGUN" >
+          <SourceRef>MGUN</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.MINETICK" >
+          <SourceRef>MINETICK</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.MISSILE" >
+          <SourceRef>MISSILE</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.NULLSAMP" >
+          <SourceRef>NULLSAMP</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.ONEWAY" >
+          <SourceRef>ONEWAY</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.OUTAMMO" >
+          <SourceRef>OUTAMMO</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SELECT" >
+          <SourceRef>SELECT</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SIREN" >
+          <SourceRef>SIREN</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH01" >
+          <SourceRef>SPEECH01</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH02" >
+          <SourceRef>SPEECH02</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH03" >
+          <SourceRef>SPEECH03</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH04" >
+          <SourceRef>SPEECH04</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH05" >
+          <SourceRef>SPEECH05</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH06" >
+          <SourceRef>SPEECH06</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH07" >
+          <SourceRef>SPEECH07</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH08" >
+          <SourceRef>SPEECH08</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH09" >
+          <SourceRef>SPEECH09</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH10" >
+          <SourceRef>SPEECH10</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH11" >
+          <SourceRef>SPEECH11</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH12" >
+          <SourceRef>SPEECH12</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH13" >
+          <SourceRef>SPEECH13</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH14" >
+          <SourceRef>SPEECH14</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH15" >
+          <SourceRef>SPEECH15</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH16" >
+          <SourceRef>SPEECH16</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH17" >
+          <SourceRef>SPEECH17</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH18" >
+          <SourceRef>SPEECH18</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH19" >
+          <SourceRef>SPEECH19</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH20" >
+          <SourceRef>SPEECH20</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH21" >
+          <SourceRef>SPEECH21</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH22" >
+          <SourceRef>SPEECH22</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH23" >
+          <SourceRef>SPEECH23</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH24" >
+          <SourceRef>SPEECH24</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH25" >
+          <SourceRef>SPEECH25</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH26" >
+          <SourceRef>SPEECH26</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPEECH27" >
+          <SourceRef>SPEECH27</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SPLAT1" >
+          <SourceRef>SPLAT1</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.SWITCH" >
+          <SourceRef>SWITCH</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.TELE" >
+          <SourceRef>TELE</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.TURRET1" >
+          <SourceRef>TURRET1</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.TURRET2" >
+          <SourceRef>TURRET2</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
+        </Sound>
+        <Sound Name="Sounds.XTRALIFE" >
+          <SourceRef>XTRALIFE</SourceRef>
+          <Format Name="PCM_SOUND" >
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+            </Parameters>
+          </Format>
         </Sound>
       </Items>
     </Sounds>

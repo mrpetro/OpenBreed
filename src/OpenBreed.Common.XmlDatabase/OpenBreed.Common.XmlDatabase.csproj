@@ -5,6 +5,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Defaults\GameDatabase.ABHC.xml" />
+    <None Remove="Defaults\GameDatabase.ABSE.xml" />
+    <None Remove="Defaults\GameDatabase.ABTA.EPF.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Defaults\GameDatabase.ABHC.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Defaults\GameDatabase.ABSE.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Defaults\GameDatabase.ABTA.EPF.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\OpenBreed.Common\OpenBreed.Common.csproj" />
   </ItemGroup>
 
