@@ -98,6 +98,8 @@
     <Compile Include="Database\Tables\DatabaseSourceTableVM.cs" />
     <Compile Include="EditorVM.cs" />
     <Compile Include="EditorVMHelper.cs" />
+    <Compile Include="EntryEditorVM.cs" />
+    <Compile Include="EntryEditorBaseVM.cs" />
     <Compile Include="IDialogProvider.cs" />
     <Compile Include="IFolderBrowserQuery.cs" />
     <Compile Include="Images\ImageViewerVM.cs" />

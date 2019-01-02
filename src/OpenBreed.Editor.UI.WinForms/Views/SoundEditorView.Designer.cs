@@ -28,31 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SoundEditor = new OpenBreed.Editor.UI.WinForms.Controls.Sounds.SoundEditorCtrl();
+            this.EntryEditor = new OpenBreed.Editor.UI.WinForms.Controls.EntryEditorCtrl();
             this.SuspendLayout();
             // 
-            // SoundEditor
+            // EntryEditor
             // 
-            this.SoundEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SoundEditor.Location = new System.Drawing.Point(0, 0);
-            this.SoundEditor.Name = "SoundEditor";
-            this.SoundEditor.Size = new System.Drawing.Size(284, 261);
-            this.SoundEditor.TabIndex = 0;
+            this.EntryEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.EntryEditor.Location = new System.Drawing.Point(0, 0);
+            this.EntryEditor.MinimumSize = new System.Drawing.Size(232, 147);
+            this.EntryEditor.Name = "EntryEditor";
+            this.EntryEditor.Size = new System.Drawing.Size(415, 368);
+            this.EntryEditor.TabIndex = 1;
             // 
-            // ImageView
+            // SoundEditorView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.SoundEditor);
+            this.ClientSize = new System.Drawing.Size(415, 368);
+            this.Controls.Add(this.EntryEditor);
             this.HideOnClose = true;
-            this.Name = "ImageView";
+            this.Name = "SoundEditorView";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private Controls.Sounds.SoundEditorCtrl SoundEditor;
+        private Controls.EntryEditorCtrl EntryEditor;
     }
 }

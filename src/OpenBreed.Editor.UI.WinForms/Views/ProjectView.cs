@@ -183,6 +183,8 @@ namespace OpenBreed.Editor.UI.WinForms.Views
                 LoadFromXml(configFile, _deserializeDockContent);
         }
 
+
+
         internal void ShowSoundEditorView()
         {
             if (_soundEditorView == null)

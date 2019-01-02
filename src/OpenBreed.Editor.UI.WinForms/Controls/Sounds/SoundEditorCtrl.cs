@@ -8,10 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenBreed.Editor.VM.Sounds;
+using OpenBreed.Editor.VM;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Sounds
 {
-    public partial class SoundEditorCtrl : UserControl
+    public partial class SoundEditorCtrl : EntryEditorInnerCtrl
     {
         private SoundEditorVM _vm;
 
@@ -22,9 +23,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sounds
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
         }
 
-        public void Initialize(SoundEditorVM vm)
+        public override void Initialize(EntryEditorVM vm)
         {
-            _vm = vm;
+            _vm = vm as SoundEditorVM ?? throw new InvalidOperationException(nameof(vm));
 
             _vm.PropertyChanged += _vm_PropertyChanged;
 
@@ -35,7 +36,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sounds
         {
             switch (e.PropertyName)
             {
-                case nameof(_vm.EditableSound):
+                case nameof(_vm.Editable):
                     UpdateViewState();
                     break;
                 default:
@@ -45,7 +46,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sounds
 
         private void UpdateViewState()
         {
-            if (_vm.EditableSound == null)
+            if (_vm.Editable == null)
                 SetNoEditableState();
             else
                 SetEditableState();
