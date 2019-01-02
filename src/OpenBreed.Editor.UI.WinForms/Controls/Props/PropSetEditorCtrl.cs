@@ -8,10 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenBreed.Editor.VM.Props;
+using OpenBreed.Editor.VM;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Props
 {
-    public partial class PropSetEditorCtrl : UserControl
+    public partial class PropSetEditorCtrl : EntryEditorInnerCtrl
     {
         #region Private Fields
 
@@ -30,16 +31,15 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Props
 
         #region Public Methods
 
-        public void Initialize(PropSetEditorVM vm)
+        public override void Initialize(EntryEditorVM vm)
         {
-            _vm = vm;
-
+            _vm = vm as PropSetEditorVM ?? throw new InvalidOperationException(nameof(vm));
             _vm.PropertyChanged += _vm_PropertyChanged;
 
             DataGridView.CurrentCellDirtyStateChanged += new EventHandler(DataGridView_CurrentCellDirtyStateChanged);
             DataGridView.SelectionChanged += new EventHandler(DataGridView_SelectionChanged);
 
-            Update(_vm.CurrentPropSet);
+            Update(_vm.Editable);
         }
 
         #endregion Public Methods
@@ -50,8 +50,8 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Props
         {
             switch (e.PropertyName)
             {
-                case nameof(_vm.CurrentPropSet):
-                    Update(_vm.CurrentPropSet);
+                case nameof(_vm.Editable):
+                    Update(_vm.Editable);
                     break;
                 default:
                     break;
@@ -157,7 +157,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Props
             descriptionColumn.ReadOnly = true;
             DataGridView.Columns.Add(descriptionColumn);
 
-            DataGridView.DataSource = _vm.CurrentPropSet.Items;
+            DataGridView.DataSource = _vm.Editable.Items;
             //DataGridView.DataSource = m_Model.Data;
         }
 

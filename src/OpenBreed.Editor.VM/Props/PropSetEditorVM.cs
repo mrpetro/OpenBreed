@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Common.Props;
+using OpenBreed.Editor.VM.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,61 +9,23 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Props
 {
-    public class PropSetEditorVM : BaseViewModel
+    public class PropSetEditorVM : EntryEditorBaseVM<IPropSetEntity, PropSetVM>
     {
-
-        #region Private Fields
-
-        private PropSetVM _currentPropSet;
-        private string _title;
-
-        #endregion Private Fields
 
         #region Public Constructors
 
-        public PropSetEditorVM(EditorVM root)
+        public PropSetEditorVM(EditorVM root) : base(root)
         {
-            Root = root;
-
             PropertyChanged += This_PropertyChanged;
-        }
-
-        private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(CurrentPropSet):
-                    if (CurrentPropSet != null)
-                        Title = CurrentPropSet.Name;
-                    else
-                        Title = "No property set";
-
-                    SelectedIndex = 0;
-                    break;
-                default:
-                    break;
-            }
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public PropSetVM CurrentPropSet
-        {
-            get { return _currentPropSet; }
-            set { SetProperty(ref _currentPropSet, value); }
-        }
-
-        public EditorVM Root { get; }
+        public override string EditorName { get { return "Property Set Editor"; } }
 
         public int SelectedIndex { get; private set; }
-
-        public string Title
-        {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
-        }
 
         #endregion Public Properties
 
@@ -73,14 +36,46 @@ namespace OpenBreed.Editor.VM.Props
 
         }
 
-        internal void TryLoad(string name)
-        {
-            var propSet = Root.CreatePropSet();
-            propSet.Load(name);
-            CurrentPropSet = propSet;
-        }
-
         #endregion Internal Methods
 
+        #region Protected Methods
+
+        protected override IPropSetEntity GetModel(string name)
+        {
+            return Root.DataProvider.GetPropSet(name);
+        }
+
+        protected override void UpdateModel(PropSetVM source, IPropSetEntity target)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void UpdateVM(IPropSetEntity source, PropSetVM target)
+        {
+            foreach (var property in source.Items)
+            {
+                var newProp = target.CreateProp(property);
+                newProp.Load(property);
+                target.Items.Add(newProp);
+            }
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
+
+        private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(Editable):
+                    SelectedIndex = 0;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        #endregion Private Methods
     }
 }

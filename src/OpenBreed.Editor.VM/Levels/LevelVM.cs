@@ -113,13 +113,6 @@ namespace OpenBreed.Editor.VM.Levels
             SpriteSets.Add(Root.CreateSpiteSet(spriteSet));
         }
 
-        public void AddTileSet(string name)
-        {
-            var newTileSet = Root.CreateTileSet();
-            newTileSet.Load(name);
-            TileSets.Add(newTileSet);
-        }
-
         public void AddPalette(string name)
         {
             var newPalette = Root.CreatePalette();
@@ -136,7 +129,7 @@ namespace OpenBreed.Editor.VM.Levels
 
         public void LoadPropSet(string name)
         {
-            var propSet = Root.CreatePropSet();
+            var propSet = new PropSetVM();
             propSet.Load(name);
             PropSet = propSet;
         }

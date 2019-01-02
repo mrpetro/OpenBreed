@@ -13,8 +13,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls
 {
     public partial class EntryEditorInnerCtrl : UserControl
     {
-        private EntryEditorVM _vm;
-
         public EntryEditorInnerCtrl()
         {
             InitializeComponent();

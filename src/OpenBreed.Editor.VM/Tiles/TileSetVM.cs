@@ -22,45 +22,39 @@ namespace OpenBreed.Editor.VM.Tiles
 
         private string _name;
         private PaletteVM _palette;
+        private int _tileSize;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TileSetVM(EditorVM root)
+        public TileSetVM()
         {
-            Root = root;
-
             Items = new BindingList<TileVM>();
             Items.ListChanged += (s, e) => OnPropertyChanged(nameof(Items));
 
             PropertyChanged += TileSetVM_PropertyChanged;
-            Root.LevelEditor.PaletteSelector.PropertyChanged += Palettes_PropertyChanged;
         }
 
-        public TileSetVM(EditorVM root, TileSetModel model)
+        public TileSetVM(TileSetModel model)
         {
-            Root = root;
-
             Items = new BindingList<TileVM>();
 
             TileSize = model.TileSize;
             Bitmap = ToBitmap(model.Tiles);
-            SetupTiles();
+            RebuildTiles();
 
             Items.ListChanged += (s, e) => OnPropertyChanged(nameof(Items));
 
             PropertyChanged += TileSetVM_PropertyChanged;
-            Root.LevelEditor.PaletteSelector.PropertyChanged += Palettes_PropertyChanged;
-
         }
-
 
         #endregion Public Constructors
 
         #region Public Properties
 
         public Bitmap Bitmap { get; private set; }
+
         public BindingList<TileVM> Items { get; private set; }
 
         public string Name
@@ -85,9 +79,11 @@ namespace OpenBreed.Editor.VM.Tiles
             }
         }
 
-        public EditorVM Root { get; private set; }
-
-        public int TileSize { get; private set; }
+        public int TileSize
+        {
+            get { return _tileSize; }
+            set { SetProperty(ref _tileSize, value); }
+        }
 
         public int TilesNoX { get; private set; }
 
@@ -96,16 +92,6 @@ namespace OpenBreed.Editor.VM.Tiles
         #endregion Public Properties
 
         #region Public Methods
-
-        internal void Load(string name)
-        {
-            var model = Root.DataProvider.GetTileSet(name);
-
-            //Name = tileSetEntity.Name;
-            TileSize = model.TileSize;
-            Bitmap = ToBitmap(model.Tiles);
-            SetupTiles();
-        }
 
         public void Dispose()
         {
@@ -190,7 +176,7 @@ namespace OpenBreed.Editor.VM.Tiles
         public void LoadDefaultTiles()
         {
             CreateDefaultBitmap();
-            SetupTiles();
+            RebuildTiles();
         }
 
         public void LoadFromBLK()
@@ -226,6 +212,16 @@ namespace OpenBreed.Editor.VM.Tiles
         }
 
         #endregion Public Methods
+
+        #region Internal Methods
+
+        internal void SetupTiles(List<TileModel> tiles)
+        {
+            Bitmap = ToBitmap(tiles);
+            RebuildTiles();
+        }
+
+        #endregion Internal Methods
 
         #region Private Methods
 
@@ -279,19 +275,7 @@ namespace OpenBreed.Editor.VM.Tiles
             }
         }
 
-        private void Palettes_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(Root.LevelEditor.PaletteSelector.CurrentItem):
-                    Palette = Root.LevelEditor.PaletteSelector.CurrentItem;
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void SetupTiles()
+        private void RebuildTiles()
         {
             Items.Clear();
 

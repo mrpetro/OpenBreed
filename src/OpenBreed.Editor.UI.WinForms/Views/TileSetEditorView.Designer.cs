@@ -28,32 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TileSetEditor = new OpenBreed.Editor.UI.WinForms.Controls.Tiles.TileSetEditorCtrl();
+            this.EntryEditor = new OpenBreed.Editor.UI.WinForms.Controls.EntryEditorCtrl();
             this.SuspendLayout();
             // 
-            // TileSetEditor
+            // EntryEditor
             // 
-            this.TileSetEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TileSetEditor.Location = new System.Drawing.Point(0, 0);
-            this.TileSetEditor.Name = "TileSetEditor";
-            this.TileSetEditor.Size = new System.Drawing.Size(802, 410);
-            this.TileSetEditor.TabIndex = 1;
+            this.EntryEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.EntryEditor.InnerCtrl = null;
+            this.EntryEditor.Location = new System.Drawing.Point(0, 0);
+            this.EntryEditor.MinimumSize = new System.Drawing.Size(232, 147);
+            this.EntryEditor.Name = "EntryEditor";
+            this.EntryEditor.Size = new System.Drawing.Size(802, 410);
+            this.EntryEditor.TabIndex = 0;
             // 
-            // TileSetView
+            // TileSetEditorView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(802, 410);
-            this.Controls.Add(this.TileSetEditor);
+            this.Controls.Add(this.EntryEditor);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.HideOnClose = true;
-            this.Name = "TileSetView";
+            this.Name = "TileSetEditorView";
             this.Text = "Properties";
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private Controls.Tiles.TileSetEditorCtrl TileSetEditor;
+
+        private Controls.EntryEditorCtrl EntryEditor;
     }
 }

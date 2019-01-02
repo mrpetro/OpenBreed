@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenBreed.Editor.VM.Tiles;
 using OpenBreed.Editor.VM.Tiles.Helpers;
+using OpenBreed.Editor.VM;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Tiles
 {
-    public partial class TileSetEditorCtrl : UserControl
+    public partial class TileSetEditorCtrl : EntryEditorInnerCtrl
     {
         private TileSetEditorVM _vm;
 
@@ -21,9 +22,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Tiles
             InitializeComponent();
         }
 
-        public void Initialize(TileSetEditorVM vm)
+        public override void Initialize(EntryEditorVM vm)
         {
-            _vm = vm;
+            _vm = vm as TileSetEditorVM ?? throw new InvalidOperationException(nameof(vm));
 
             TileSetViewer.Initialize(_vm.TileSetViewer);
         }

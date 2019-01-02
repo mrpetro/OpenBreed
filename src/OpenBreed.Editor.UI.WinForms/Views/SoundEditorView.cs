@@ -17,6 +17,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 {
     public partial class SoundEditorView : DockContent
     {
+
         #region Private Fields
 
         private EntryEditorVM _vm;
@@ -49,14 +50,6 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         #region Private Methods
 
-        private void OnEditableNameChanged()
-        {
-            if (_vm.EditableName == null)
-                Text = $"{_vm.EditorName} - no entry to edit";
-            else
-                Text = $"{_vm.EditorName} - {_vm.EditableName}";
-        }
-
         private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
@@ -67,6 +60,14 @@ namespace OpenBreed.Editor.UI.WinForms.Views
                 default:
                     break;
             }
+        }
+
+        private void OnEditableNameChanged()
+        {
+            if (_vm.EditableName == null)
+                Text = $"{_vm.EditorName} - no entry to edit";
+            else
+                Text = $"{_vm.EditorName} - {_vm.EditableName}";
         }
 
         #endregion Private Methods

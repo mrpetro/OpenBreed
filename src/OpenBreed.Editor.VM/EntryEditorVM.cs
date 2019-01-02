@@ -34,7 +34,7 @@ namespace OpenBreed.Editor.VM
         }
 
         public abstract string EditorName { get; }
-        public EditorVM Root { get; private set; }
+        public EditorVM Root { get; }
 
         #endregion Public Properties
 

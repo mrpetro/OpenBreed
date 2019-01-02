@@ -27,9 +27,8 @@ namespace OpenBreed.Editor.VM.Props
 
         #region Public Constructors
 
-        public PropSetVM(EditorVM root)
+        public PropSetVM()
         {
-            Root = root;
             Items = new BindingList<PropVM>();
         }
 

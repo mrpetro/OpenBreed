@@ -124,7 +124,7 @@ namespace OpenBreed.Editor.VM
 
         internal TileSetVM CreateTileSet(TileSetModel tileSet)
         {
-            return new TileSetVM(this, tileSet);
+            return new TileSetVM(tileSet);
         }
 
         internal SpriteSetVM CreateSpiteSet(SpriteSetModel spriteSet)
@@ -142,19 +142,9 @@ namespace OpenBreed.Editor.VM
             return new PropSetVM(this, propSet);
         }
 
-        public PropSetVM CreatePropSet()
-        {
-            return new PropSetVM(this);
-        }
-
         public SpriteSetVM CreateSpriteSet()
         {
             return new SpriteSetVM(this);
-        }
-
-        public TileSetVM CreateTileSet()
-        {
-            return new TileSetVM(this);
         }
 
         public void Dispose()

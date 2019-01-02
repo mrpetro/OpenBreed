@@ -44,8 +44,9 @@ namespace OpenBreed.Editor.VM
 
             _edited = model;
 
-            Editable = new VM();
-            UpdateVM(model, Editable);
+            var vm = new VM();
+            UpdateVM(model, vm);
+            Editable = vm;
             Editable.PropertyChanged += Editable_PropertyChanged;
         }
 

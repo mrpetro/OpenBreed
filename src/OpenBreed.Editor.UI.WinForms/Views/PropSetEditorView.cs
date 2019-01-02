@@ -10,15 +10,15 @@ using WeifenLuo.WinFormsUI.Docking;
 using System.Drawing.Imaging;
 using OpenBreed.Editor.VM.Props;
 using OpenBreed.Editor.VM;
+using OpenBreed.Editor.UI.WinForms.Controls.Props;
 
 namespace OpenBreed.Editor.UI.WinForms.Views
 {
     public partial class PropSetEditorView : DockContent
     {
-
         #region Private Fields
 
-        private PropSetEditorVM _vm;
+        private EntryEditorVM _vm;
 
         #endregion Private Fields
 
@@ -28,21 +28,20 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         {
             InitializeComponent();
 
+            EntryEditor.InnerCtrl = new PropSetEditorCtrl();
         }
 
         #endregion Public Constructors
 
         #region Public Methods
 
-        public void Initialize(PropSetEditorVM vm)
+        public void Initialize(EntryEditorVM vm)
         {
-            _vm = vm;
-
-            PropSetEditor.Initialize(_vm);
-
+            _vm = vm ?? throw new ArgumentNullException(nameof(vm));
             _vm.PropertyChanged += _vm_PropertyChanged;
 
-            TabText = _vm.Title;
+            EntryEditor.Initialize(_vm);
+            OnEditableNameChanged();
         }
 
         #endregion Public Methods
@@ -53,12 +52,20 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         {
             switch (e.PropertyName)
             {
-                case nameof(_vm.Title):
-                    TabText = _vm.Title;
+                case nameof(_vm.EditableName):
+                    OnEditableNameChanged();
                     break;
                 default:
                     break;
             }
+        }
+
+        private void OnEditableNameChanged()
+        {
+            if (_vm.EditableName == null)
+                Text = $"{_vm.EditorName} - no entry to edit";
+            else
+                Text = $"{_vm.EditorName} - {_vm.EditableName}";
         }
 
         #endregion Private Methods

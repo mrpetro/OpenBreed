@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Common.Tiles;
+using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Tiles;
 using System;
 using System.Collections.Generic;
@@ -9,83 +10,62 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Tiles
 {
-    public class TileSetEditorVM : BaseViewModel
+    public class TileSetEditorVM : EntryEditorBaseVM<TileSetModel, TileSetVM>
     {
-
-        #region Private Fields
-
-        private TileSetVM _currentTile;
-        private string _title;
-
-        #endregion Private Fields
-
         #region Public Constructors
 
-        public TileSetViewerVM TileSetViewer { get; }
-
-        public TileSetEditorVM(EditorVM root)
+        public TileSetEditorVM(EditorVM root) : base(root)
         {
-            Root = root;
-
             TileSetViewer = new TileSetViewerVM();
 
             PropertyChanged += This_PropertyChanged;
-        }
-
-        private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(CurrentTileSet):
-                    if (CurrentTileSet != null)
-                        Title = CurrentTileSet.Name;
-                    else
-                        Title = "No tile set";
-
-                    TileSetViewer.CurrentTileSet = CurrentTileSet;
-                    break;
-                default:
-                    break;
-            }
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public TileSetVM CurrentTileSet
-        {
-            get { return _currentTile; }
-            set { SetProperty(ref _currentTile, value); }
-        }
-
-        public EditorVM Root { get; }
-
+        public override string EditorName { get { return "Tile Set Editor"; } }
         public int SelectedIndex { get; private set; }
-
-        public string Title
-        {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
-        }
+        public TileSetViewerVM TileSetViewer { get; }
 
         #endregion Public Properties
 
-        #region Internal Methods
+        #region Protected Methods
 
-        internal void Connect()
+        protected override TileSetModel GetModel(string name)
         {
-
+            return Root.DataProvider.GetTileSet(name);
         }
 
-        internal void TryLoad(string name)
+        protected override void UpdateModel(TileSetVM source, TileSetModel target)
         {
-            var tileSet = Root.CreateTileSet();
-            tileSet.Load(name);
-            CurrentTileSet = tileSet;
+            throw new NotImplementedException();
         }
 
-        #endregion Internal Methods
+        protected override void UpdateVM(TileSetModel source, TileSetVM target)
+        {
+            //Name = tileSetEntity.Name;
+            target.TileSize = source.TileSize;
+            target.SetupTiles(source.Tiles);
+        }
 
+        #endregion Protected Methods
+
+        #region Private Methods
+
+        private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(Editable):
+                    TileSetViewer.CurrentTileSet = Editable;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        #endregion Private Methods
     }
 }
