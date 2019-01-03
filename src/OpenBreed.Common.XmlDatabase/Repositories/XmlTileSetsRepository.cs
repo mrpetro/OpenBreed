@@ -6,11 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Tiles;
 using OpenBreed.Common.XmlDatabase.Tables.Tiles;
+using OpenBreed.Common.XmlDatabase.Items.Tiles;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
     public class XmlTileSetsRepository : IRepository<ITileSetEntity>
     {
+
         #region Private Fields
 
         private readonly DatabaseTileSetTableDef _table;
@@ -56,6 +58,36 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 throw new Exception("No TileSet definition found with name: " + name);
 
             return tileSetDef;
+        }
+
+        public ITileSetEntity GetNextTo(ITileSetEntity entry)
+        {
+            var index = _table.Items.IndexOf((TileSetDef)entry);
+
+            if (index < 0)
+                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+
+            index++;
+
+            if (index < _table.Items.Count)
+                return _table.Items[index];
+            else
+                return null;
+        }
+
+        public ITileSetEntity GetPrevTo(ITileSetEntity entry)
+        {
+            var index = _table.Items.IndexOf((TileSetDef)entry);
+
+            if (index < 0)
+                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+
+            index--;
+
+            if (index >= 0)
+                return _table.Items[index];
+            else
+                return null;
         }
 
         public void Remove(ITileSetEntity entity)

@@ -8,27 +8,30 @@ namespace OpenBreed.Common
 {
     public interface IRepository
     {
-    }
-
-    public interface IRepository<T> : IRepository where T : IEntity
-    {
-
         #region Public Properties
 
         IEnumerable<IEntity> Entries { get; }
         IUnitOfWork UnitOfWork { get; }
 
         #endregion Public Properties
+    }
+
+    public interface IRepository<T> : IRepository where T : IEntity
+    {
 
         #region Public Methods
 
-        void Add(T entity);
+        void Add(T entry);
+        T GetById(long id);
 
-        T GetById(Int64 id);
         T GetByName(string name);
-        void Remove(T entity);
-        void Update(T entity);
+
+        T GetNextTo(T entry);
+        T GetPrevTo(T entry);
+        void Remove(T entry);
+        void Update(T entry);
 
         #endregion Public Methods
+
     }
 }

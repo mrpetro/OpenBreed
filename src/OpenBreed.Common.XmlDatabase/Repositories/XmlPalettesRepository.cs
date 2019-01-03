@@ -9,12 +9,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Palettes;
+using OpenBreed.Common.XmlDatabase.Items.Palettes;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
     public class XmlPalettesRepository : IRepository<IPaletteEntity>
     {
-
         #region Private Fields
 
         private readonly DatabasePaletteTableDef _table;
@@ -38,6 +38,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
         #region Public Properties
 
         public IEnumerable<IEntity> Entries { get { return _table.Items; } }
+
         public IUnitOfWork UnitOfWork { get; }
 
         #endregion Public Properties
@@ -61,6 +62,36 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 throw new Exception("No Palette definition found with name: " + name);
 
             return paletteDef;
+        }
+
+        public IPaletteEntity GetNextTo(IPaletteEntity entry)
+        {
+            var index = _table.Items.IndexOf((PaletteDef)entry);
+
+            if (index < 0)
+                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+
+            index++;
+
+            if (index < _table.Items.Count)
+                return _table.Items[index];
+            else
+                return null;
+        }
+
+        public IPaletteEntity GetPrevTo(IPaletteEntity entry)
+        {
+            var index = _table.Items.IndexOf((PaletteDef)entry);
+
+            if (index < 0)
+                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+
+            index--;
+
+            if (index >= 0)
+                return _table.Items[index];
+            else
+                return null;
         }
 
         public void Remove(IPaletteEntity entity)

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Sprites;
 using OpenBreed.Common.XmlDatabase.Tables.Sprites;
+using OpenBreed.Common.XmlDatabase.Items.Sprites;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
@@ -14,6 +15,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
         #region Private Fields
 
         private readonly DatabaseSpriteSetTableDef _table;
+
         private XmlDatabase _context;
 
         #endregion Private Fields
@@ -33,6 +35,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
         #region Public Properties
 
         public IEnumerable<IEntity> Entries { get { return _table.Items; } }
+
         public IUnitOfWork UnitOfWork { get; }
 
         #endregion Public Properties
@@ -56,6 +59,36 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 throw new Exception("No Source definition found with name: " + name);
 
             return spriteSetDef;
+        }
+
+        public ISpriteSetEntity GetNextTo(ISpriteSetEntity entry)
+        {
+            var index = _table.Items.IndexOf((SpriteSetDef)entry);
+
+            if (index < 0)
+                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+
+            index++;
+
+            if (index < _table.Items.Count)
+                return _table.Items[index];
+            else
+                return null;
+        }
+
+        public ISpriteSetEntity GetPrevTo(ISpriteSetEntity entry)
+        {
+            var index = _table.Items.IndexOf((SpriteSetDef)entry);
+
+            if (index < 0)
+                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+
+            index--;
+
+            if (index >= 0)
+                return _table.Items[index];
+            else
+                return null;
         }
 
         public void Remove(ISpriteSetEntity entity)

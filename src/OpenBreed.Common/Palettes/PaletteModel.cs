@@ -11,12 +11,29 @@ namespace OpenBreed.Common.Palettes
 {
     public class PaletteModel
     {
-        private static PaletteModel m_NullPalette = null;
+        #region Private Fields
 
+        private static PaletteModel m_NullPalette = null;
         private Color[] m_Data = null;
 
-        public string Name { get; set; }
-        public Color[] Data { get { return m_Data; } }
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public PaletteModel(PaletteBuilder builder)
+        {
+            Name = builder.Name;
+            m_Data = builder.Colors;
+        }
+
+        public PaletteModel()
+        {
+            LoadFromDefault();
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
 
         public static PaletteModel NullPalette
         {
@@ -32,12 +49,7 @@ namespace OpenBreed.Common.Palettes
             }
         }
 
-        public void LoadFromDefault()
-        {
-            m_Data = DefaultPalette();
-            Name = "Default";
-        }
-
+        public Color[] Data { get { return m_Data; } }
         public int Length
         {
             get
@@ -45,6 +57,17 @@ namespace OpenBreed.Common.Palettes
                 return Data.Length;
             }
         }
+
+        public string Name { get; set; }
+
+        /// <summary>
+        ///  Gets or sets an object that provides additional data about the palette.
+        /// </summary>
+        public object Tag { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Indexers
 
         public Color this[int index]
         {
@@ -65,30 +88,30 @@ namespace OpenBreed.Common.Palettes
             }
         }
 
-        public PaletteModel(PaletteBuilder builder)
-        {
-            Name = builder.Name;
-            m_Data = builder.Colors;
-        }
+        #endregion Public Indexers
 
-        public PaletteModel()
-        {
-            LoadFromDefault();
-        }
+        #region Public Methods
 
         public static Color[] DefaultPalette()
         {
             Color[] colors = new Color[256];
 
             for (int colorIndex = 0; colorIndex < colors.Length; colorIndex++)
-                colors[colorIndex] = Color.FromArgb(colorIndex,colorIndex,colorIndex);
+                colors[colorIndex] = Color.FromArgb(colorIndex, colorIndex, colorIndex);
 
             return colors;
         }
 
+        public void LoadFromDefault()
+        {
+            m_Data = DefaultPalette();
+            Name = "Default";
+        }
         public override string ToString()
         {
             return Name;
         }
+
+        #endregion Public Methods
     }
 }

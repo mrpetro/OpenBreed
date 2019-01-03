@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common.Maps;
 using OpenBreed.Common.Sources;
+using OpenBreed.Common.XmlDatabase.Items.Levels;
 using OpenBreed.Common.XmlDatabase.Tables.Levels;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,36 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 {
     public class XmlLevelsRepository : IRepository<ILevelEntity>
     {
+
+        public ILevelEntity GetNextTo(ILevelEntity entry)
+        {
+            var index = _table.Items.IndexOf((LevelDef)entry);
+
+            if (index < 0)
+                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+
+            index++;
+
+            if (index < _table.Items.Count)
+                return _table.Items[index];
+            else
+                return null;
+        }
+
+        public ILevelEntity GetPrevTo(ILevelEntity entry)
+        {
+            var index = _table.Items.IndexOf((LevelDef)entry);
+
+            if (index < 0)
+                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+
+            index--;
+
+            if (index >= 0)
+                return _table.Items[index];
+            else
+                return null;
+        }
 
         #region Private Fields
 

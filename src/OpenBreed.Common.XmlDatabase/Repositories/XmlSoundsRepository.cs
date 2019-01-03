@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 using OpenBreed.Common.Images;
 using OpenBreed.Common.XmlDatabase.Tables.Images;
 using OpenBreed.Common.Sounds;
+using OpenBreed.Common.XmlDatabase.Items.Sounds;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
     public class XmlSoundsRepository : IRepository<ISoundEntity>
     {
+
         #region Private Fields
 
         private readonly DatabaseSoundTableDef _table;
@@ -58,6 +60,37 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
             return entry;
         }
+
+        public ISoundEntity GetNextTo(ISoundEntity entry)
+        {
+            var index = _table.Items.IndexOf((SoundDef)entry);
+
+            if (index < 0)
+                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+
+            index++;
+
+            if (index < _table.Items.Count)
+                return _table.Items[index];
+            else
+                return null;
+        }
+
+        public ISoundEntity GetPrevTo(ISoundEntity entry)
+        {
+            var index = _table.Items.IndexOf((SoundDef)entry);
+
+            if (index < 0)
+                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+
+            index--;
+
+            if (index >= 0)
+                return _table.Items[index];
+            else
+                return null;
+        }
+
 
         public void Remove(ISoundEntity entity)
         {

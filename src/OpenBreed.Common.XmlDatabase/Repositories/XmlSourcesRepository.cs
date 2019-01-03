@@ -62,6 +62,16 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             return sourceDef;
         }
 
+        public ISourceEntity GetNextTo(ISourceEntity entry)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ISourceEntity GetPrevTo(ISourceEntity entry)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Remove(ISourceEntity entity)
         {
             throw new NotImplementedException();

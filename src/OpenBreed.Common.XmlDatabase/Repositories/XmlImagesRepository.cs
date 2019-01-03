@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Images;
 using OpenBreed.Common.XmlDatabase.Tables.Images;
+using OpenBreed.Common.XmlDatabase.Items.Images;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
@@ -14,6 +15,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
         #region Private Fields
 
         private readonly DatabaseImageTableDef _table;
+
         private XmlDatabase _context;
 
         #endregion Private Fields
@@ -33,6 +35,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
         #region Public Properties
 
         public IEnumerable<IEntity> Entries { get { return _table.Items; } }
+
         public IUnitOfWork UnitOfWork { get; }
 
         #endregion Public Properties
@@ -58,6 +61,35 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             return spriteSetDef;
         }
 
+        public IImageEntity GetNextTo(IImageEntity entry)
+        {
+            var index = _table.Items.IndexOf((ImageDef)entry);
+
+            if (index < 0)
+                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+
+            index++;
+
+            if (index < _table.Items.Count)
+                return _table.Items[index];
+            else
+                return null;
+        }
+
+        public IImageEntity GetPrevTo(IImageEntity entry)
+        {
+            var index = _table.Items.IndexOf((ImageDef)entry);
+
+            if (index < 0)
+                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+
+            index--;
+
+            if (index >= 0)
+                return _table.Items[index];
+            else
+                return null;
+        }
         public void Remove(IImageEntity entity)
         {
             throw new NotImplementedException();

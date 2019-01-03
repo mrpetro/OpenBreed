@@ -10,6 +10,7 @@ namespace OpenBreed.Common.Tiles
 
     public class TileSetModel
     {
+
         #region Public Constructors
 
         public TileSetModel(TileSetBuilder builder)
@@ -23,9 +24,14 @@ namespace OpenBreed.Common.Tiles
 
         #region Public Properties
 
+        public TilePixelFormat PixelFormat { get; private set; }
+
+        /// <summary>
+        ///  Gets or sets an object that provides additional data about the tile.
+        /// </summary>
+        public object Tag { get; set; }
         public List<TileModel> Tiles { get; private set; }
         public int TileSize { get; private set; }
-        public TilePixelFormat PixelFormat { get; private set; }
 
         #endregion Public Properties
     }
