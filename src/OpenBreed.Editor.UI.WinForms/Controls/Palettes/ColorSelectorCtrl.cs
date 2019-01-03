@@ -41,7 +41,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
                 case nameof(_vm.CurrentColorIndex):
                     Invalidate();
                     break;
-                case nameof(_vm.CurrentPalette):
+                case nameof(_vm.Editable):
                     Invalidate();
                     break;
                 case nameof(_vm.CurrentColor):
@@ -88,7 +88,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 
         private void DrawPaletteGrid(Graphics gfx)
         {
-            int colorsNo = _vm.CurrentPalette.Colors.Count;
+            int colorsNo = _vm.Editable.Colors.Count;
             int xMax = m_ColorsInRow;
             int yMax = colorsNo / xMax;
             int btnSize = m_ColorsBtnSize;
@@ -102,7 +102,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
                     if (colorNo >= colorsNo)
                         return;
 
-                    Color color = _vm.CurrentPalette.Colors[colorNo];
+                    Color color = _vm.Editable.Colors[colorNo];
                     DrawColor(color, gfx, i * btnSize, j * btnSize, btnSize, btnSize);
                 }
             }
@@ -141,7 +141,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 
                 int newSelectedColorIndex = GetPaletteIndex(pos.X, pos.Y);
 
-                if (newSelectedColorIndex >= _vm.CurrentPalette.Colors.Count)
+                if (newSelectedColorIndex >= _vm.Editable.Colors.Count)
                     return;
 
                 _vm.CurrentColorIndex = newSelectedColorIndex;

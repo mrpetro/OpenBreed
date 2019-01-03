@@ -70,6 +70,7 @@ namespace OpenBreed.Editor.VM.Levels
 
         public bool IsOpened { get { return Source != null; } }
 
+        public BindingList<PaletteVM> Palettes { get; }
         public LevelPropertiesVM Properties { get; }
 
         public PropSetVM PropSet
@@ -85,12 +86,8 @@ namespace OpenBreed.Editor.VM.Levels
             get { return _source; }
             set { SetProperty(ref _source, value); }
         }
-
-        public BindingList<PaletteVM> Palettes { get; }
-        public BindingList<TileSetVM> TileSets { get; }
         public BindingList<SpriteSetVM> SpriteSets { get; }
-
-
+        public BindingList<TileSetVM> TileSets { get; }
         public int TileSize { get { return 16; } }
 
         public string Title
@@ -103,21 +100,9 @@ namespace OpenBreed.Editor.VM.Levels
 
         #region Public Methods
 
-        public void AddTileSet(TileSetModel tileSet)
-        {
-            TileSets.Add(Root.CreateTileSet(tileSet));
-        }
-
         public void AddSpriteSet(SpriteSetModel spriteSet)
         {
             SpriteSets.Add(Root.CreateSpiteSet(spriteSet));
-        }
-
-        public void AddPalette(string name)
-        {
-            var newPalette = Root.CreatePalette();
-            newPalette.Load(name);
-            Palettes.Add(newPalette);
         }
 
         public void AddSpriteSet(string name)
@@ -127,16 +112,30 @@ namespace OpenBreed.Editor.VM.Levels
             SpriteSets.Add(newSpriteSet);
         }
 
-        public void LoadPropSet(string name)
+        public void AddTileSet(TileSetModel tileSet)
         {
-            var propSet = new PropSetVM();
-            propSet.Load(name);
-            PropSet = propSet;
+            TileSets.Add(Root.CreateTileSet(tileSet));
         }
 
         public void LoadPropSet(IPropSetEntity propSet)
         {
             PropSet = Root.CreatePropSet(propSet);
+        }
+
+        public void Restore(List<PaletteModel> palettes)
+        {
+            Palettes.RaiseListChangedEvents = false;
+            Palettes.Clear();
+
+            foreach (var palette in palettes)
+            {
+                var paletteVM = new PaletteVM();
+                paletteVM.Restore(palette);
+                Palettes.Add(paletteVM);
+            }
+
+            Palettes.RaiseListChangedEvents = true;
+            Palettes.ResetBindings();
         }
 
         public void Save()
@@ -173,23 +172,6 @@ namespace OpenBreed.Editor.VM.Levels
         {
             Body.ConnectEvents();
         }
-
-        public void Restore(List<PaletteModel> palettes)
-        {
-            Palettes.RaiseListChangedEvents = false;
-            Palettes.Clear();
-
-            foreach (var palette in palettes)
-            {
-                var paletteVM = new PaletteVM(Root);
-                paletteVM.Restore(palette);
-                Palettes.Add(paletteVM);
-            }
-
-            Palettes.RaiseListChangedEvents = true;
-            Palettes.ResetBindings();
-        }
-
         internal void Load(string name)
         {
             var model = Root.DataProvider.GetLevel(name);
@@ -213,10 +195,49 @@ namespace OpenBreed.Editor.VM.Levels
             Root.LevelEditor.BodyEditor.CurrentMapBody = Body;
         }
 
+        #endregion Internal Methods
+
+        #region Private Methods
+
+        private void MapVM_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(Source):
+                    UpdateTitle();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        //    Root.LevelEditor.BodyEditor.CurrentMapBody = Body;
+        //}
+        private string MarkNameIfModified()
+        {
+            if (IsModified)
+                return Source.Name + "*";
+            else
+                return Source.Name;
+        }
+
         private void PaletteSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            foreach (var tileSet in TileSets)
-                tileSet.Palette = Root.LevelEditor.PaletteSelector.CurrentItem;
+            var paletteSelector = sender as LevelPaletteSelectorVM;
+
+            switch (e.PropertyName)
+            {
+                case nameof(paletteSelector.CurrentItem):
+                    Root.PaletteEditor.Editable = paletteSelector.CurrentItem;
+                    Root.PaletteEditor.CurrentColorIndex = 0;
+
+                    foreach (var tileSet in TileSets)
+                        tileSet.Palette = paletteSelector.CurrentItem;
+
+                    break;
+                default:
+                    break;
+            }
         }
 
 
@@ -249,33 +270,6 @@ namespace OpenBreed.Editor.VM.Levels
         //        Restore(model.Properties.Palettes);
         //        Root.LevelEditor.PaletteSelector.CurrentItem = Palettes.FirstOrDefault();
         //    }
-
-        //    Root.LevelEditor.BodyEditor.CurrentMapBody = Body;
-        //}
-
-        #endregion Internal Methods
-
-        #region Private Methods
-
-        private void MapVM_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(Source):
-                    UpdateTitle();
-                    break;
-                default:
-                    break;
-            }
-        }
-        private string MarkNameIfModified()
-        {
-            if (IsModified)
-                return Source.Name + "*";
-            else
-                return Source.Name;
-        }
-
         private void UpdateTitle()
         {
             if (Source == null)

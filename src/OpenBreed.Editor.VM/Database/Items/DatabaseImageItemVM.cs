@@ -37,7 +37,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         public override void Open()
         {
-            Owner.Root.ImageViewer.TryLoad(_entry.Name);
+            Owner.Root.ImageViewer.OpenEntry(_entry.Name);
             Owner.OpenedItem = this;
         }
 

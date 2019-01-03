@@ -39,7 +39,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         public override void Open()
         {
-            Owner.Root.TileSetEditor.TryLoad(_entry.Name);
+            Owner.Root.TileSetEditor.OpenEntry(_entry.Name);
             Owner.OpenedItem = this;
         }
 

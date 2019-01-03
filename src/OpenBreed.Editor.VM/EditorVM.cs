@@ -60,9 +60,10 @@ namespace OpenBreed.Editor.VM
 
             TileSetEditor = new TileSetEditorVM(this);
             PropSetEditor = new PropSetEditorVM(this);
+            PaletteEditor = new PaletteEditorVM(this);
             DatabaseViewer = new DatabaseViewerVM(this);
             SpriteViewer = new SpriteViewerVM(this);
-            ImageViewer = new ImageViewerVM(this);
+            ImageViewer = new ImageEditorVM(this);
             SoundEditor = new SoundEditorVM(this);
             LevelEditor = new LevelEditorVM(this);
             DataSourceProvider.ExpandVariables = Settings.ExpandVariables;
@@ -81,9 +82,10 @@ namespace OpenBreed.Editor.VM
         public DatabaseViewerVM DatabaseViewer { get; }
         public IDialogProvider DialogProvider { get; }
         public DataProvider DataProvider { get; private set; }
-        public ImageViewerVM ImageViewer { get; }
+        public ImageEditorVM ImageViewer { get; }
         public SoundEditorVM SoundEditor { get; }
         public LevelEditorVM LevelEditor { get; }
+        public PaletteEditorVM PaletteEditor { get; }
         public PropSetEditorVM PropSetEditor { get; }
         public SettingsMan Settings { get; private set; }
         //public SourceMan SourceMan { get; }
@@ -132,9 +134,10 @@ namespace OpenBreed.Editor.VM
             return new SpriteSetVM(this, spriteSet);
         }
 
-        public PaletteVM CreatePalette()
+        public PaletteVM CreatePalette(PaletteModel palette)
         {
-            return new PaletteVM(this);
+            var paletteVM = new PaletteVM();
+            return paletteVM;
         }
 
         internal PropSetVM CreatePropSet(IPropSetEntity propSet)

@@ -24,8 +24,6 @@ namespace OpenBreed.Editor.VM.Levels
         {
             Parent = parent;
 
-            Editor = new PaletteEditorVM(this);
-
             PropertyChanged += LevelPaletteSelectorVM_PropertyChanged;
         }
 
@@ -45,7 +43,6 @@ namespace OpenBreed.Editor.VM.Levels
             set { SetProperty(ref _currentItem, value); }
         }
 
-        public PaletteEditorVM Editor { get; }
         public LevelEditorVM Parent { get; }
 
         #endregion Public Properties

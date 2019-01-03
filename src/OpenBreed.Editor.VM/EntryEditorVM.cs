@@ -49,7 +49,11 @@ namespace OpenBreed.Editor.VM
 
         #region Internal Methods
 
-        public abstract void Load(string name);
+        public abstract void OpenEntry(string name);
+
+        public abstract void OpenNextEntry();
+
+        public abstract void OpenPreviousEntry();
 
         #endregion Internal Methods
 

@@ -39,7 +39,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         private DatabaseView _databaseView = new DatabaseView();
 
         private DeserializeDockContent _deserializeDockContent;
-        private ImageView _imagesViewerView = new ImageView();
+        private ImageEditorView _imagesViewerView = new ImageEditorView();
         private SoundEditorView _soundEditorView = new SoundEditorView();
         private LevelBodyEditorView _levelBodyEditorView = new LevelBodyEditorView();
         private LevelPalettesView _levelPalettesView = new LevelPalettesView();
@@ -48,7 +48,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         //private SpriteSetsView _spriteSetsView = new SpriteSetsView();
         private LevelTileSelectorView _levelTileSelectorView = new LevelTileSelectorView();
-
+        private PaletteEditorView _paletteEditorView = new PaletteEditorView();
         private PropSetEditorView _propSetEditorView = new PropSetEditorView();
         private TileSetEditorView _tileSetEditorView = new TileSetEditorView();
         private bool _saveLayout = true;
@@ -148,12 +148,21 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _propSetEditorView = null;
         }
 
+        public void ClosePaletteEditorView()
+        {
+            if (_paletteEditorView == null)
+                return;
+            _paletteEditorView.Close();
+            _paletteEditorView = null;
+        }
+
         public void HideAllViews()
         {
             CloseDatabaseView();
             CloseImagesView();
             ClosePropSetEditorView();
             CloseTileSetEditorView();
+            ClosePaletteEditorView();
             CloseLevelTileSelectorView();
             CloseLevelPropSelectorView();
             CloseLevelPalettesView();
@@ -206,7 +215,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         public void ShowImageView()
         {
             if (_imagesViewerView == null)
-                _imagesViewerView = new ImageView();
+                _imagesViewerView = new ImageEditorView();
 
             _imagesViewerView.Initialize(_vm.Root.ImageViewer);
             _imagesViewerView.Show(this, DockState.Document);
@@ -248,6 +257,15 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _levelTileSelectorView.Show(this, DockState.DockLeft);
         }
 
+        internal void ShowPaletteEditorView()
+        {
+            if (_paletteEditorView == null)
+                _paletteEditorView = new PaletteEditorView();
+
+            _paletteEditorView.Initialize(_vm.Root.PaletteEditor);
+            _paletteEditorView.Show(this, DockState.Document);
+        }
+
         public void ShowPropSetEditorView()
         {
             if(_propSetEditorView == null)
@@ -285,11 +303,6 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             ShowLevelPropSelectorView();
             ShowLevelPalettesView();
             ShowLevelBodyEditorView();
-        }
-
-        internal void ShowPaletteEditorView()
-        {
-            throw new NotImplementedException();
         }
 
         internal void ShowSpriteSetEditorView()

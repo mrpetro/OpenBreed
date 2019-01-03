@@ -38,7 +38,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         public override void Open()
         {
-            Owner.Root.PropSetEditor.TryLoad(_entry.Name);
+            Owner.Root.PropSetEditor.OpenEntry(_entry.Name);
             Owner.OpenedItem = this;
         }
 

@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Common;
+using OpenBreed.Editor.VM.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,16 +51,21 @@ namespace OpenBreed.Editor.VM
             Editable.PropertyChanged += Editable_PropertyChanged;
         }
 
-        public void TryLoad(string name)
-        {
-            Load(name);
-        }
-
         #endregion Public Methods
 
         #region Internal Methods
 
-        public override void Load(string name)
+        public override void OpenNextEntry()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void OpenPreviousEntry()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void OpenEntry(string name)
         {
             var model = GetModel(name);
             EditModel(model);

@@ -100,11 +100,11 @@
     <Compile Include="Controls\EntryEditorInnerCtrl.Designer.cs">
       <DependentUpon>EntryEditorInnerCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Images\ImageViewerCtrl.cs">
+    <Compile Include="Controls\Images\ImageEditorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Images\ImageViewerCtrl.Designer.cs">
-      <DependentUpon>ImageViewerCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Images\ImageEditorCtrl.Designer.cs">
+      <DependentUpon>ImageEditorCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Levels\LevelBodyEditorCtrl.cs">
       <SubType>UserControl</SubType>
@@ -231,17 +231,23 @@
     <Compile Include="Views\DatabaseView.Designer.cs">
       <DependentUpon>DatabaseView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\PaletteEditorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PaletteEditorView.Designer.cs">
+      <DependentUpon>PaletteEditorView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\SoundEditorView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\SoundEditorView.Designer.cs">
       <DependentUpon>SoundEditorView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ImageView.cs">
+    <Compile Include="Views\ImageEditorView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ImageView.Designer.cs">
-      <DependentUpon>ImageView.cs</DependentUpon>
+    <Compile Include="Views\ImageEditorView.Designer.cs">
+      <DependentUpon>ImageEditorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\LogConsoleView.cs">
       <SubType>Form</SubType>
@@ -350,8 +356,11 @@
     <EmbeddedResource Include="Controls\EntryEditorCtrl.resx">
       <DependentUpon>EntryEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Images\ImageViewerCtrl.resx">
-      <DependentUpon>ImageViewerCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\EntryEditorInnerCtrl.resx">
+      <DependentUpon>EntryEditorInnerCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Images\ImageEditorCtrl.resx">
+      <DependentUpon>ImageEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Levels\LevelSettingsCtrl.resx">
       <DependentUpon>LevelSettingsCtrl.cs</DependentUpon>
@@ -407,11 +416,14 @@
     <EmbeddedResource Include="Views\DatabaseView.resx">
       <DependentUpon>DatabaseView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\PaletteEditorView.resx">
+      <DependentUpon>PaletteEditorView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\SoundEditorView.resx">
       <DependentUpon>SoundEditorView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ImageView.resx">
-      <DependentUpon>ImageView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\ImageEditorView.resx">
+      <DependentUpon>ImageEditorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\LogConsoleView.resx">
       <DependentUpon>LogConsoleView.cs</DependentUpon>

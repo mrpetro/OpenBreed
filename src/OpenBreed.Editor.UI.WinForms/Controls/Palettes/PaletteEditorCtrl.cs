@@ -8,10 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenBreed.Editor.VM.Palettes;
+using OpenBreed.Editor.VM;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 {
-    public partial class PaletteEditorCtrl : UserControl
+    public partial class PaletteEditorCtrl : EntryEditorInnerCtrl
     {
         private PaletteEditorVM _vm;
 
@@ -20,9 +21,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
             InitializeComponent();
         }
 
-        public void Initialize(PaletteEditorVM vm)
+        public override void Initialize(EntryEditorVM vm)
         {
-            _vm = vm;
+            _vm = vm as PaletteEditorVM ?? throw new InvalidOperationException(nameof(vm));
 
             ColorEditor.Initialize(_vm);
             ColorSelector.Initialize(_vm);

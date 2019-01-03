@@ -10,24 +10,24 @@ using System.Windows.Forms;
 using OpenBreed.Editor.VM.Images;
 using System.Drawing.Drawing2D;
 using OpenBreed.Editor.VM.Levels.Tools;
+using OpenBreed.Editor.VM;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Images
 {
-    public partial class ImageViewerCtrl : UserControl
+    public partial class ImageEditorCtrl : EntryEditorInnerCtrl
     {
-        private ImageViewerVM _vm;
+        private ImageEditorVM _vm;
 
-        public ImageViewerCtrl()
+        public ImageEditorCtrl()
         {
             InitializeComponent();
 
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
         }
 
-        public void Initialize(ImageViewerVM vm)
+        public override void Initialize(EntryEditorVM vm)
         {
-            _vm = vm;
-
+            _vm = vm as ImageEditorVM ?? throw new InvalidOperationException(nameof(vm));
             _vm.PropertyChanged += _vm_PropertyChanged;
 
             UpdateViewState();
@@ -37,7 +37,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Images
         {
             switch (e.PropertyName)
             {
-                case nameof(_vm.Image):
+                case nameof(_vm.Editable):
                     UpdateViewState();
                     break;
                 default:
@@ -47,7 +47,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Images
 
         private void UpdateViewState()
         {
-            if (_vm.Image == null)
+            if (_vm.Editable == null)
                 SetNoImageState();
             else
                 SetImageState();
@@ -60,8 +60,8 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Images
 
         private void SetImageState()
         {
-            Width = _vm.Image.Width;
-            Height = _vm.Image.Height;
+            Width = _vm.Editable.Width;
+            Height = _vm.Editable.Height;
             Invalidate();
         }
 

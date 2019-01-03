@@ -35,7 +35,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         public override void Open()
         {
-            Owner.Root.SoundEditor.TryLoad(_entry.Name);
+            Owner.Root.SoundEditor.OpenEntry(_entry.Name);
             Owner.OpenedItem = this;
         }
 

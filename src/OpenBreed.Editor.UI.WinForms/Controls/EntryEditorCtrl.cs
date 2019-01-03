@@ -55,6 +55,10 @@ namespace OpenBreed.Editor.UI.WinForms.Controls
         public void Initialize(EntryEditorVM vm)
         {
             _vm = vm ?? throw new ArgumentNullException(nameof(vm));
+
+            btnNext.Click += (s, a) => _vm.OpenNextEntry();
+            btnPrevious.Click += (s, a) => _vm.OpenPreviousEntry();
+
             _vm.PropertyChanged += _vm_PropertyChanged;
             InnerCtrl.Initialize(_vm);
             //UpdateViewState();

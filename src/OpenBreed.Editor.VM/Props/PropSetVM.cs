@@ -21,7 +21,6 @@ namespace OpenBreed.Editor.VM.Props
 
         private const int PROP_SIZE = 32;
         private string _name;
-        private IPropSetEntity propSet;
 
         #endregion Private Fields
 

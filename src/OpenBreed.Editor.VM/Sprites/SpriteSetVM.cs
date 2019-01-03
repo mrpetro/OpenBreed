@@ -15,7 +15,6 @@ namespace OpenBreed.Editor.VM.Sprites
 
         public EditorVM Root { get; private set; }
         private PaletteVM _palette;
-        private SpriteSetModel spriteSet;
 
         #endregion Private Fields
 

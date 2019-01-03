@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Images
 {
-    partial class ImageViewerCtrl
+    partial class ImageEditorCtrl
     {
         /// <summary> 
         /// Required designer variable.

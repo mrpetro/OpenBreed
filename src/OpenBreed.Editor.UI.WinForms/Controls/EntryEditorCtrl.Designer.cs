@@ -32,7 +32,6 @@
             this.btnRevert = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrevious = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
             this.Split = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.Split)).BeginInit();
             this.Split.Panel2.SuspendLayout();
@@ -77,15 +76,6 @@
             this.btnPrevious.Text = "<";
             this.btnPrevious.UseVisualStyleBackColor = true;
             // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(119, 3);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(52, 23);
-            this.btnDelete.TabIndex = 4;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            // 
             // Split
             // 
             this.Split.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -98,7 +88,6 @@
             // Split.Panel2
             // 
             this.Split.Panel2.Controls.Add(this.btnStore);
-            this.Split.Panel2.Controls.Add(this.btnDelete);
             this.Split.Panel2.Controls.Add(this.btnRevert);
             this.Split.Panel2.Controls.Add(this.btnPrevious);
             this.Split.Panel2.Controls.Add(this.btnNext);
@@ -127,7 +116,6 @@
         private System.Windows.Forms.Button btnRevert;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPrevious;
-        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.SplitContainer Split;
     }
 }

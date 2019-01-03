@@ -41,9 +41,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         public override void Open()
         {
-            throw new NotImplementedException();
-
-            //Owner.Root.PropSetEditor.TryLoad(_model);
+            Owner.Root.PaletteEditor.OpenEntry(_entry.Name);
             Owner.OpenedItem = this;
         }
 

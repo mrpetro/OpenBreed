@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Common.Palettes;
+using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Levels;
 using System;
 using System.Collections.Generic;
@@ -10,36 +11,19 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Palettes
 {
-    public class PaletteEditorVM : BaseViewModel
+    public class PaletteEditorVM : EntryEditorBaseVM<PaletteModel, PaletteVM>
     {
         #region Private Fields
 
         private Color _currentColor = Color.Empty;
         private int _currentColorIndex = -1;
-        private PaletteVM _currentPalette = null;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PaletteEditorVM(LevelPaletteSelectorVM palettes)
+        public PaletteEditorVM(EditorVM root) : base(root)
         {
-            Palettes = palettes;
-
-            Palettes.PropertyChanged += Palettes_PropertyChanged;
-        }
-
-        private void Palettes_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(Palettes.CurrentItem):
-                    CurrentPalette = Palettes.CurrentItem;
-                    CurrentColorIndex = 0;
-                    break;
-                default:
-                    break;
-            }
         }
 
         #endregion Public Constructors
@@ -48,14 +32,14 @@ namespace OpenBreed.Editor.VM.Palettes
 
         public Color CurrentColor
         {
-            get { return CurrentColorIndex == -1 ? Color.Empty : CurrentPalette.Colors[CurrentColorIndex]; }
+            get { return CurrentColorIndex == -1 ? Color.Empty : Editable.Colors[CurrentColorIndex]; }
 
             set
             {
-                if (CurrentPalette.Colors[CurrentColorIndex] == value)
+                if (Editable.Colors[CurrentColorIndex] == value)
                     return;
 
-                CurrentPalette.Colors[CurrentColorIndex] = value;
+                Editable.Colors[CurrentColorIndex] = value;
                 OnPropertyChanged(nameof(CurrentColor));
             }
         }
@@ -66,14 +50,26 @@ namespace OpenBreed.Editor.VM.Palettes
             set { SetProperty(ref _currentColorIndex, value); }
         }
 
-        public PaletteVM CurrentPalette
-        {
-            get { return _currentPalette; }
-            set { SetProperty(ref _currentPalette, value); }
-        }
-
         public LevelPaletteSelectorVM Palettes { get; private set; }
 
+        public override string EditorName { get { return "Palette Editor"; } }
+
+        protected override PaletteModel GetModel(string name)
+        {
+            return Root.DataProvider.GetPalette(name);
+        }
+
+        protected override void UpdateModel(PaletteVM source, PaletteModel target)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void UpdateVM(PaletteModel source, PaletteVM target)
+        {
+            target.Restore(source);
+        }
+
         #endregion Public Properties
+
     }
 }

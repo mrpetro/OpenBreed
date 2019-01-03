@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Editor.UI.WinForms.Views
 {
-    partial class ImageView
+    partial class ImageEditorView
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,31 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ImageViewer = new OpenBreed.Editor.UI.WinForms.Controls.Images.ImageViewerCtrl();
+            this.EntryEditor = new OpenBreed.Editor.UI.WinForms.Controls.EntryEditorCtrl();
             this.SuspendLayout();
             // 
-            // ImageViewer
+            // EntryEditor
             // 
-            this.ImageViewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ImageViewer.Location = new System.Drawing.Point(0, 0);
-            this.ImageViewer.Name = "ImageViewer";
-            this.ImageViewer.Size = new System.Drawing.Size(284, 261);
-            this.ImageViewer.TabIndex = 0;
+            this.EntryEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.EntryEditor.InnerCtrl = null;
+            this.EntryEditor.Location = new System.Drawing.Point(0, 0);
+            this.EntryEditor.MinimumSize = new System.Drawing.Size(232, 147);
+            this.EntryEditor.Name = "EntryEditor";
+            this.EntryEditor.Size = new System.Drawing.Size(284, 261);
+            this.EntryEditor.TabIndex = 0;
             // 
-            // ImageView
+            // ImageEditorView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.ImageViewer);
+            this.Controls.Add(this.EntryEditor);
             this.HideOnClose = true;
-            this.Name = "ImageView";
+            this.Name = "ImageEditorView";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private Controls.Images.ImageViewerCtrl ImageViewer;
+        private Controls.EntryEditorCtrl EntryEditor;
     }
 }

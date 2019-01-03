@@ -13,8 +13,6 @@ namespace OpenBreed.Editor.VM.Palettes
 {
     public class PaletteVM : BaseViewModel
     {
-        public EditorVM Root { get; }
-
         #region Private Fields
 
         private string _name;
@@ -23,24 +21,11 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Public Constructors
 
-        public PaletteVM(EditorVM root)
+        public PaletteVM()
         {
-            Root = root;
-
             Colors = new BindingList<Color>();
             Colors.ListChanged += (s, a) => OnPropertyChanged(nameof(Colors));
         }
-
-        internal void Load(string name)
-        {
-            var model = Root.DataProvider.GetPalette(name);
-
-            Restore(model);
-
-            //NOTE: quick hack to get the result
-            Root.LevelEditor.CurrentLevel.Restore(new List<PaletteModel>() { model });
-        }
-
 
         #endregion Public Constructors
 
