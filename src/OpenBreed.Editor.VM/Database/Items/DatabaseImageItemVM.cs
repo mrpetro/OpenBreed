@@ -10,7 +10,7 @@ using OpenBreed.Common.Images;
 
 namespace OpenBreed.Editor.VM.Database.Items
 {
-    public class DatabaseImageItemVM : DatabaseItemVM
+    public class DatabaseImageItemVM : DatabaseEntryVM
     {
         #region Private Fields
 
@@ -20,7 +20,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Constructors
 
-        public DatabaseImageItemVM(DatabaseVM owner) : base(owner)
+        public DatabaseImageItemVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
         {
         }
 
@@ -37,7 +37,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         public override void Open()
         {
-            Owner.Root.ImageViewer.OpenEntry(_entry.Name);
+            Editor.OpenEntry(_entry.Name);
             Owner.OpenedItem = this;
         }
 

@@ -77,7 +77,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             ViewDatabaseMenuItem.Click += (s, a) => _projectView.ShowDatabaseView();
         }
 
-        private void OnOpenedItemChanged(DatabaseItemVM databaseItemVM)
+        private void OnOpenedItemChanged(DatabaseEntryVM databaseItemVM)
         {
             if (databaseItemVM == null)
                 return;

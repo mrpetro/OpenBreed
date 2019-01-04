@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database.Items
 {
-    public class DatabasePropSetItemVM : DatabaseItemVM
+    public class DatabasePropSetItemVM : DatabaseEntryVM
     {
         #region Private Fields
 
@@ -21,7 +21,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Constructors
 
-        public DatabasePropSetItemVM(DatabaseVM owner) : base(owner)
+        public DatabasePropSetItemVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
         {
         }
 
@@ -38,7 +38,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         public override void Open()
         {
-            Owner.Root.PropSetEditor.OpenEntry(_entry.Name);
+            Editor.OpenEntry(_entry.Name);
             Owner.OpenedItem = this;
         }
 

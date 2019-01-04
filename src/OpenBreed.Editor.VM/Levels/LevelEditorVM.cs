@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Editor.VM.Tiles;
 using OpenBreed.Editor.VM.Sprites;
+using OpenBreed.Common;
 
 namespace OpenBreed.Editor.VM.Levels
 {

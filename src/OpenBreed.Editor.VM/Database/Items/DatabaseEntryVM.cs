@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database.Items
 {
-    public abstract class DatabaseItemVM
+    public abstract class DatabaseEntryVM
     {
+
         #region Public Fields
 
         public readonly DatabaseVM Owner;
@@ -18,9 +19,10 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Constructors
 
-        public DatabaseItemVM(DatabaseVM owner)
+        public DatabaseEntryVM(DatabaseVM owner, EntryEditorVM editor)
         {
             Owner = owner;
+            Editor = editor;
         }
 
         #endregion Public Constructors
@@ -28,8 +30,8 @@ namespace OpenBreed.Editor.VM.Database.Items
         #region Public Properties
 
         public virtual string Name { get; private set; }
-
         public string Description { get; private set; }
+        public EntryEditorVM Editor { get; }
 
         #endregion Public Properties
 

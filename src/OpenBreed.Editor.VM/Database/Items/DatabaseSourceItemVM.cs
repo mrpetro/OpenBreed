@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database.Items
 {
-    public class DatabaseSourceItemVM : DatabaseItemVM
+    public class DatabaseSourceItemVM : DatabaseEntryVM
     {
         #region Private Fields
 
@@ -20,7 +20,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Constructors
 
-        public DatabaseSourceItemVM(DatabaseVM owner) : base(owner)
+        public DatabaseSourceItemVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
         {
         }
 

@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Database.Items;
+using OpenBreed.Editor.VM.Database.Tables;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,7 +25,7 @@ namespace OpenBreed.Editor.VM.Database
         {
             Parent = parent;
 
-            Items = new BindingList<DatabaseItemVM>();
+            Items = new BindingList<DatabaseEntryVM>();
             Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
         }
 
@@ -32,7 +33,7 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Public Properties
 
-        public BindingList<DatabaseItemVM> Items { get; private set; }
+        public BindingList<DatabaseEntryVM> Items { get; private set; }
 
         #endregion Public Properties
 

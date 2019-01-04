@@ -10,7 +10,7 @@ using OpenBreed.Common.Maps;
 
 namespace OpenBreed.Editor.VM.Database.Items
 {
-    public class DatabaseLevelItemVM : DatabaseItemVM
+    public class DatabaseLevelItemVM : DatabaseEntryVM
     {
         #region Private Fields
 
@@ -20,7 +20,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Constructors
 
-        public DatabaseLevelItemVM(DatabaseVM owner) : base(owner)
+        public DatabaseLevelItemVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
         {
         }
 

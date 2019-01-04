@@ -217,7 +217,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             if (_imagesViewerView == null)
                 _imagesViewerView = new ImageEditorView();
 
-            _imagesViewerView.Initialize(_vm.Root.ImageViewer);
+            _imagesViewerView.Initialize(_vm.Root.ImageEditor);
             _imagesViewerView.Show(this, DockState.Document);
         }
 

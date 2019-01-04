@@ -63,7 +63,7 @@ namespace OpenBreed.Editor.VM
             PaletteEditor = new PaletteEditorVM(this);
             DatabaseViewer = new DatabaseViewerVM(this);
             SpriteViewer = new SpriteViewerVM(this);
-            ImageViewer = new ImageEditorVM(this);
+            ImageEditor = new ImageEditorVM(this);
             SoundEditor = new SoundEditorVM(this);
             LevelEditor = new LevelEditorVM(this);
             DataSourceProvider.ExpandVariables = Settings.ExpandVariables;
@@ -82,7 +82,7 @@ namespace OpenBreed.Editor.VM
         public DatabaseViewerVM DatabaseViewer { get; }
         public IDialogProvider DialogProvider { get; }
         public DataProvider DataProvider { get; private set; }
-        public ImageEditorVM ImageViewer { get; }
+        public ImageEditorVM ImageEditor { get; }
         public SoundEditorVM SoundEditor { get; }
         public LevelEditorVM LevelEditor { get; }
         public PaletteEditorVM PaletteEditor { get; }

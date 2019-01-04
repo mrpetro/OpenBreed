@@ -53,7 +53,7 @@ namespace OpenBreed.Editor.VM.Database
     {
         #region Private Fields
 
-        private DatabaseItemVM _openedItem;
+        private DatabaseEntryVM _openedItem;
         private ProjectState _state;
 
         #endregion Private Fields
@@ -73,7 +73,7 @@ namespace OpenBreed.Editor.VM.Database
         public string FilePath { get; private set; }
         public bool IsModified { get; internal set; }
         public string Name { get; set; }
-        public DatabaseItemVM OpenedItem
+        public DatabaseEntryVM OpenedItem
         {
             get { return _openedItem; }
             set { SetProperty(ref _openedItem, value); }
@@ -100,24 +100,24 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Internal Methods
 
-        internal DatabaseItemVM CreateItem(IEntry entry)
+        internal DatabaseEntryVM CreateItem(IEntry entry)
         {
             if (entry is IImageEntry)
-                return new DatabaseImageItemVM(this);
+                return new DatabaseImageItemVM(this, Root.ImageEditor);
             else if (entry is ISoundEntry)
-                return new DatabaseSoundItemVM(this);
+                return new DatabaseSoundItemVM(this, Root.SoundEditor);
             else if (entry is ILevelEntry)
-                return new DatabaseLevelItemVM(this);
+                return new DatabaseLevelItemVM(this, null);
             else if (entry is ISourceEntry)
-                return new DatabaseSourceItemVM(this);
+                return new DatabaseSourceItemVM(this, null);
             else if (entry is IPropSetEntry)
-                return new DatabasePropSetItemVM(this);
+                return new DatabasePropSetItemVM(this, Root.PropSetEditor);
             else if (entry is ITileSetEntry)
-                return new DatabaseTileSetItemVM(this);
+                return new DatabaseTileSetItemVM(this, Root.TileSetEditor);
             else if (entry is ISpriteSetEntry)
-                return new DatabaseSpriteSetItemVM(this);
+                return new DatabaseSpriteSetItemVM(this, null);
             else if (entry is IPaletteEntry)
-                return new DatabasePaletteItemVM(this);
+                return new DatabasePaletteItemVM(this, Root.PaletteEditor);
             else
                 throw new NotImplementedException(entry.ToString());
         }

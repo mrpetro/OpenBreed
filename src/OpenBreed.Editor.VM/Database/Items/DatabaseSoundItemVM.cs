@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database.Items
 {
-    public class DatabaseSoundItemVM : DatabaseItemVM
+    public class DatabaseSoundItemVM : DatabaseEntryVM
     {
         #region Private Fields
 
@@ -18,7 +18,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Constructors
 
-        public DatabaseSoundItemVM(DatabaseVM owner) : base(owner)
+        public DatabaseSoundItemVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
         {
         }
 
@@ -35,7 +35,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         public override void Open()
         {
-            Owner.Root.SoundEditor.OpenEntry(_entry.Name);
+            Editor.OpenEntry(_entry.Name);
             Owner.OpenedItem = this;
         }
 

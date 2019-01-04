@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using OpenBreed.Common;
 using OpenBreed.Common.XmlDatabase;
 using OpenBreed.Common.XmlDatabase.Tables;
+using OpenBreed.Editor.VM.Database.Items;
 
-namespace OpenBreed.Editor.VM.Database.Items
+namespace OpenBreed.Editor.VM.Database.Tables
 {
     public abstract class DatabaseTableVM
     {
@@ -30,7 +31,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Methods
 
-        public abstract IEnumerable<DatabaseItemVM> GetItems();
+        public abstract IEnumerable<DatabaseEntryVM> GetItems();
 
         public abstract void Load(IRepository repository);
 

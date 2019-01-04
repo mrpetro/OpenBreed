@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database.Items
 {
-    public class DatabaseSpriteSetItemVM : DatabaseItemVM
+    public class DatabaseSpriteSetItemVM : DatabaseEntryVM
     {
         #region Private Fields
 
@@ -22,7 +22,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Constructors
 
-        public DatabaseSpriteSetItemVM(DatabaseVM owner) : base(owner)
+        public DatabaseSpriteSetItemVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
         {
         }
 

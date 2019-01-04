@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Database.Items;
+using OpenBreed.Editor.VM.Database.Tables;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

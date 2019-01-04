@@ -77,7 +77,7 @@
     <Compile Include="Database\DatabaseTableSelectorVM.cs" />
     <Compile Include="Database\DatabaseViewerVM.cs" />
     <Compile Include="Database\Items\DatabaseImageItemVM.cs" />
-    <Compile Include="Database\Items\DatabaseItemVM.cs" />
+    <Compile Include="Database\Items\DatabaseEntryVM.cs" />
     <Compile Include="Database\DatabaseTableViewerVM.cs" />
     <Compile Include="Database\Items\DatabaseLevelItemVM.cs" />
     <Compile Include="Database\Items\DatabasePaletteItemVM.cs" />
@@ -86,7 +86,7 @@
     <Compile Include="Database\Items\DatabaseTileSetItemVM.cs" />
     <Compile Include="Database\Items\DatabasePropSetItemVM.cs" />
     <Compile Include="Database\Items\DatabaseSourceItemVM.cs" />
-    <Compile Include="Database\Items\DatabaseTableVM.cs" />
+    <Compile Include="Database\Tables\DatabaseTableVM.cs" />
     <Compile Include="Database\Tables\DatabaseImageTableVM.cs" />
     <Compile Include="Database\Tables\DatabaseLevelTableVM.cs" />
     <Compile Include="Database\Tables\DatabasePaletteTableVM.cs" />
