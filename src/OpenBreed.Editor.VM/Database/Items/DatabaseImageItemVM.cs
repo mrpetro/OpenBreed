@@ -14,7 +14,7 @@ namespace OpenBreed.Editor.VM.Database.Items
     {
         #region Private Fields
 
-        private IImageEntity _entry;
+        private IImageEntry _entry;
 
         #endregion Private Fields
 
@@ -28,9 +28,9 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Methods
 
-        public override void Load(IEntity entry)
+        public override void Load(IEntry entry)
         {
-            _entry = entry as IImageEntity ?? throw new InvalidOperationException($"Expected {nameof(IImageEntity)}");
+            _entry = entry as IImageEntry ?? throw new InvalidOperationException($"Expected {nameof(IImageEntry)}");
 
             base.Load(entry);
         }

@@ -16,7 +16,7 @@ namespace OpenBreed.Editor.VM.Database.Items
     {
         #region Private Fields
 
-        private ITileSetEntity _entry;
+        private ITileSetEntry _entry;
 
         #endregion Private Fields
 
@@ -30,9 +30,9 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Methods
 
-        public override void Load(IEntity entry)
+        public override void Load(IEntry entry)
         {
-            _entry = entry as ITileSetEntity ?? throw new InvalidOperationException($"Expected {nameof(ITileSetEntity)}");
+            _entry = entry as ITileSetEntry ?? throw new InvalidOperationException($"Expected {nameof(ITileSetEntry)}");
 
             base.Load(entry);
         }

@@ -13,7 +13,7 @@ namespace OpenBreed.Editor.VM.Database.Tables
     {
         #region Private Fields
 
-        private IRepository<ILevelEntity> _repository;
+        private IRepository<ILevelEntry> _repository;
 
         #endregion Private Fields
 
@@ -45,7 +45,7 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         public override void Load(IRepository repository)
         {
-            _repository = repository as IRepository<ILevelEntity> ?? throw new InvalidOperationException($"Expected {nameof(IRepository<ILevelEntity>)}");
+            _repository = repository as IRepository<ILevelEntry> ?? throw new InvalidOperationException($"Expected {nameof(IRepository<ILevelEntry>)}");
         }
 
         #endregion Public Methods

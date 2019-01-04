@@ -117,7 +117,7 @@ namespace OpenBreed.Editor.VM.Levels
             TileSets.Add(Root.CreateTileSet(tileSet));
         }
 
-        public void LoadPropSet(IPropSetEntity propSet)
+        public void LoadPropSet(IPropSetEntry propSet)
         {
             PropSet = Root.CreatePropSet(propSet);
         }

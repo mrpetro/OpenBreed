@@ -100,45 +100,45 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Internal Methods
 
-        internal DatabaseItemVM CreateItem(IEntity entity)
+        internal DatabaseItemVM CreateItem(IEntry entry)
         {
-            if (entity is IImageEntity)
+            if (entry is IImageEntry)
                 return new DatabaseImageItemVM(this);
-            else if (entity is ISoundEntity)
+            else if (entry is ISoundEntry)
                 return new DatabaseSoundItemVM(this);
-            else if (entity is ILevelEntity)
+            else if (entry is ILevelEntry)
                 return new DatabaseLevelItemVM(this);
-            else if (entity is ISourceEntity)
+            else if (entry is ISourceEntry)
                 return new DatabaseSourceItemVM(this);
-            else if (entity is IPropSetEntity)
+            else if (entry is IPropSetEntry)
                 return new DatabasePropSetItemVM(this);
-            else if (entity is ITileSetEntity)
+            else if (entry is ITileSetEntry)
                 return new DatabaseTileSetItemVM(this);
-            else if (entity is ISpriteSetEntity)
+            else if (entry is ISpriteSetEntry)
                 return new DatabaseSpriteSetItemVM(this);
-            else if (entity is IPaletteEntity)
+            else if (entry is IPaletteEntry)
                 return new DatabasePaletteItemVM(this);
             else
-                throw new NotImplementedException(entity.ToString());
+                throw new NotImplementedException(entry.ToString());
         }
 
         internal DatabaseTableVM CreateTable(IRepository repository)
         {
-            if (repository is IRepository<IImageEntity>)
+            if (repository is IRepository<IImageEntry>)
                 return new DatabaseImageTableVM(this);
-            if (repository is IRepository<ISoundEntity>)
+            if (repository is IRepository<ISoundEntry>)
                 return new DatabaseSoundTableVM(this);
-            else if (repository is IRepository<ILevelEntity>)
+            else if (repository is IRepository<ILevelEntry>)
                 return new DatabaseLevelTableVM(this);
-            else if (repository is IRepository<IPropSetEntity>)
+            else if (repository is IRepository<IPropSetEntry>)
                 return new DatabasePropertySetTableVM(this);
-            else if (repository is IRepository<ISourceEntity>)
+            else if (repository is IRepository<ISourceEntry>)
                 return new DatabaseSourceTableVM(this);
-            else if (repository is IRepository<ITileSetEntity>)
+            else if (repository is IRepository<ITileSetEntry>)
                 return new DatabaseTileSetTableVM(this);
-            else if (repository is IRepository<ISpriteSetEntity>)
+            else if (repository is IRepository<ISpriteSetEntry>)
                 return new DatabaseSpriteSetTableVM(this);
-            else if (repository is IRepository<IPaletteEntity>)
+            else if (repository is IRepository<IPaletteEntry>)
                 return new DatabasePaletteTableVM(this);
             else
                 throw new NotImplementedException(repository.ToString());

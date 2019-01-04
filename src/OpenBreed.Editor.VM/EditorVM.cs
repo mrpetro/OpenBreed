@@ -140,7 +140,7 @@ namespace OpenBreed.Editor.VM
             return paletteVM;
         }
 
-        internal PropSetVM CreatePropSet(IPropSetEntity propSet)
+        internal PropSetVM CreatePropSet(IPropSetEntry propSet)
         {
             return new PropSetVM(this, propSet);
         }

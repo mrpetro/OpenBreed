@@ -31,7 +31,7 @@ namespace OpenBreed.Editor.VM.Props
             Items = new BindingList<PropVM>();
         }
 
-        public PropSetVM(EditorVM root, IPropSetEntity model)
+        public PropSetVM(EditorVM root, IPropSetEntry model)
         {
             Root = root;
             Items = new BindingList<PropVM>();
@@ -63,7 +63,7 @@ namespace OpenBreed.Editor.VM.Props
 
         #region Public Methods
 
-        public PropVM CreateProp(IPropertyEntity propDef)
+        public PropVM CreateProp(IPropertyEntry propDef)
         {
             return new PropVM(this);
         }

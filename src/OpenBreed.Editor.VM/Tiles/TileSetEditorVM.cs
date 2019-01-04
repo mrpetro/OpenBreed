@@ -45,7 +45,6 @@ namespace OpenBreed.Editor.VM.Tiles
 
         protected override void UpdateVM(TileSetModel source, TileSetVM target)
         {
-            //Name = tileSetEntity.Name;
             target.TileSize = source.TileSize;
             target.SetupTiles(source.Tiles);
         }

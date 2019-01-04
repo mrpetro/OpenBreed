@@ -9,7 +9,7 @@ namespace OpenBreed.Editor.VM.Levels
 {
     internal static class LevelVMHelper
     {
-        internal static void Load(LevelVM map, ISourceEntity sourceDef)
+        internal static void Load(LevelVM map, ISourceEntry sourceDef)
         {
 
         }

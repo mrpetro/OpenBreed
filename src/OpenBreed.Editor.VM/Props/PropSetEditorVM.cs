@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Props
 {
-    public class PropSetEditorVM : EntryEditorBaseVM<IPropSetEntity, PropSetVM>
+    public class PropSetEditorVM : EntryEditorBaseVM<IPropSetEntry, PropSetVM>
     {
 
         #region Public Constructors
@@ -40,17 +40,17 @@ namespace OpenBreed.Editor.VM.Props
 
         #region Protected Methods
 
-        protected override IPropSetEntity GetModel(string name)
+        protected override IPropSetEntry GetModel(string name)
         {
             return Root.DataProvider.GetPropSet(name);
         }
 
-        protected override void UpdateModel(PropSetVM source, IPropSetEntity target)
+        protected override void UpdateModel(PropSetVM source, IPropSetEntry target)
         {
             throw new NotImplementedException();
         }
 
-        protected override void UpdateVM(IPropSetEntity source, PropSetVM target)
+        protected override void UpdateVM(IPropSetEntry source, PropSetVM target)
         {
             foreach (var property in source.Items)
             {

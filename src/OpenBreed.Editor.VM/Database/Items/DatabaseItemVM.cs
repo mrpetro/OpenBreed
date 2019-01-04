@@ -35,7 +35,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Methods
 
-        public virtual void Load(IEntity entry)
+        public virtual void Load(IEntry entry)
         {
             Name = entry.Name;
             //Description = itemDef.Description;

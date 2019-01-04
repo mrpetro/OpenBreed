@@ -69,7 +69,7 @@ namespace OpenBreed.Editor.VM.Props
 
         #region Public Methods
 
-        public void Load(IPropertyEntity property)
+        public void Load(IPropertyEntry property)
         {
             Name = property.Name;
             Id = property.Id;
