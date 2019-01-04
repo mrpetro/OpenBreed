@@ -10,7 +10,7 @@ using OpenBreed.Common.Props;
 namespace OpenBreed.Common.XmlDatabase.Items.Props
 {
     [Serializable]
-    public class PropertySetDef : DatabaseItemDef, IPropSetEntity
+    public class PropertySetDef : DatabaseItemDef, IPropSetEntry
     {
 
         #region Public Properties
@@ -18,11 +18,11 @@ namespace OpenBreed.Common.XmlDatabase.Items.Props
         public long Id { get; set; }
 
         [XmlIgnore]
-        public List<IPropertyEntity> Items
+        public List<IPropertyEntry> Items
         {
             get
             {
-                return PropertyDefs.OfType<IPropertyEntity>().ToList();
+                return PropertyDefs.OfType<IPropertyEntry>().ToList();
             }
         }
 

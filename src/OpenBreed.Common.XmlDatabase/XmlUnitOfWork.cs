@@ -56,7 +56,7 @@ namespace OpenBreed.Common.XmlDatabase
 
         #region Public Methods
 
-        public IRepository<T> GetRepository<T>() where T : IEntity
+        public IRepository<T> GetRepository<T>() where T : IEntry
         {
             IRepository foundRepo;
 
@@ -75,7 +75,7 @@ namespace OpenBreed.Common.XmlDatabase
 
         #region Protected Methods
 
-        protected void RegisterRepository<T>(IRepository<T> repository) where T : IEntity
+        protected void RegisterRepository<T>(IRepository<T> repository) where T : IEntry
         {
             _repositories.Add(typeof(T), repository);
         }

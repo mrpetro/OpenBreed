@@ -10,7 +10,7 @@ using OpenBreed.Common.XmlDatabase.Items.Sprites;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
-    public class XmlSpriteSetsRepository : IRepository<ISpriteSetEntity>
+    public class XmlSpriteSetsRepository : IRepository<ISpriteSetEntry>
     {
         #region Private Fields
 
@@ -34,7 +34,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Properties
 
-        public IEnumerable<IEntity> Entries { get { return _table.Items; } }
+        public IEnumerable<IEntry> Entries { get { return _table.Items; } }
 
         public IUnitOfWork UnitOfWork { get; }
 
@@ -42,17 +42,17 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Methods
 
-        public void Add(ISpriteSetEntity entity)
+        public void Add(ISpriteSetEntry entity)
         {
             throw new NotImplementedException();
         }
 
-        public ISpriteSetEntity GetById(long id)
+        public ISpriteSetEntry GetById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public ISpriteSetEntity GetByName(string name)
+        public ISpriteSetEntry GetByName(string name)
         {
             var spriteSetDef = _table.Items.FirstOrDefault(item => item.Name == name);
             if (spriteSetDef == null)
@@ -61,7 +61,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             return spriteSetDef;
         }
 
-        public ISpriteSetEntity GetNextTo(ISpriteSetEntity entry)
+        public ISpriteSetEntry GetNextTo(ISpriteSetEntry entry)
         {
             var index = _table.Items.IndexOf((SpriteSetDef)entry);
 
@@ -76,7 +76,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return null;
         }
 
-        public ISpriteSetEntity GetPrevTo(ISpriteSetEntity entry)
+        public ISpriteSetEntry GetPrevTo(ISpriteSetEntry entry)
         {
             var index = _table.Items.IndexOf((SpriteSetDef)entry);
 
@@ -91,12 +91,12 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return null;
         }
 
-        public void Remove(ISpriteSetEntity entity)
+        public void Remove(ISpriteSetEntry entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(ISpriteSetEntity entity)
+        public void Update(ISpriteSetEntry entity)
         {
             throw new NotImplementedException();
         }

@@ -10,12 +10,12 @@ using System.Xml.Serialization;
 namespace OpenBreed.Common.XmlDatabase.Items.Levels
 {
     [Serializable]
-    public class LevelDef : DatabaseItemDef, ILevelEntity
+    public class LevelDef : DatabaseItemDef, ILevelEntry
     {
         #region Public Properties
 
         [XmlIgnore]
-        public IFormatEntity Format { get; set; }
+        public IFormatEntry Format { get; set; }
 
         [XmlElement("Format")]
         public FormatDef FormatDef

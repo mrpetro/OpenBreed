@@ -13,7 +13,7 @@ using OpenBreed.Common.XmlDatabase.Tables.Sources;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
-    public class XmlSourcesRepository : IRepository<ISourceEntity>
+    public class XmlSourcesRepository : IRepository<ISourceEntry>
     {
         #region Private Fields
 
@@ -36,24 +36,24 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Properties
 
-        public IEnumerable<IEntity> Entries { get { return _table.Items; } }
+        public IEnumerable<IEntry> Entries { get { return _table.Items; } }
         public IUnitOfWork UnitOfWork { get; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void Add(ISourceEntity entity)
+        public void Add(ISourceEntry entity)
         {
             throw new NotImplementedException();
         }
 
-        public ISourceEntity GetById(long id)
+        public ISourceEntry GetById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public ISourceEntity GetByName(string name)
+        public ISourceEntry GetByName(string name)
         {
             var sourceDef = _table.Items.FirstOrDefault(item => item.Name == name);
             if (sourceDef == null)
@@ -62,22 +62,22 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             return sourceDef;
         }
 
-        public ISourceEntity GetNextTo(ISourceEntity entry)
+        public ISourceEntry GetNextTo(ISourceEntry entry)
         {
             throw new NotImplementedException();
         }
 
-        public ISourceEntity GetPrevTo(ISourceEntity entry)
+        public ISourceEntry GetPrevTo(ISourceEntry entry)
         {
             throw new NotImplementedException();
         }
 
-        public void Remove(ISourceEntity entity)
+        public void Remove(ISourceEntry entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(ISourceEntity entity)
+        public void Update(ISourceEntry entity)
         {
             throw new NotImplementedException();
         }

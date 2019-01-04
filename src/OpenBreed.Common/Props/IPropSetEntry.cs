@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Sources
+namespace OpenBreed.Common.Props
 {
-    public interface ISourceEntity : IEntity
+    public interface IPropSetEntry : IEntry
     {
+        List<IPropertyEntry> Items { get; }
     }
 }

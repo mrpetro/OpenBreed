@@ -20,7 +20,7 @@ namespace OpenBreed.Common.Formats
         #region Public Methods
 
 
-        public DataFormat Create(SourceBase source, IFormatEntity format)
+        public DataFormat Create(SourceBase source, IFormatEntry format)
         {
             var formatType = GetFormatType(format.Name);
             if (formatType == null)
@@ -31,7 +31,7 @@ namespace OpenBreed.Common.Formats
             return new DataFormat(formatType, source, parameters);
         }
 
-        public object Load(SourceBase source, IFormatEntity format)
+        public object Load(SourceBase source, IFormatEntry format)
         {
             var formatType = GetFormatType(format.Name);
             if (formatType == null)

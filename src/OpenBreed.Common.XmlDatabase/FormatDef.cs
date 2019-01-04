@@ -11,7 +11,7 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Common.XmlDatabase
 {
-    public class FormatDef : IFormatEntity
+    public class FormatDef : IFormatEntry
     {
         #region Public Fields
 

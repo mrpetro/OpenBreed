@@ -49,44 +49,44 @@ namespace OpenBreed.Common
 
         public Image GetImage(string name)
         {
-            var imageEntity = _unitOfWork.GetRepository<IImageEntity>().GetByName(name);
-            if (imageEntity == null)
+            var entry = _unitOfWork.GetRepository<IImageEntry>().GetByName(name);
+            if (entry == null)
                 throw new Exception("Image error: " + name);
 
-            var asset = AssetsProvider.GetAsset(imageEntity.SourceRef);
+            var asset = AssetsProvider.GetAsset(entry.SourceRef);
 
-            return FormatMan.Load(asset, imageEntity.Format) as Image;
+            return FormatMan.Load(asset, entry.Format) as Image;
         }
 
         public PaletteModel GetPalette(string name)
         {
-            var paletteEntity = _unitOfWork.GetRepository<IPaletteEntity>().GetByName(name);
-            if (paletteEntity == null)
+            var entry = _unitOfWork.GetRepository<IPaletteEntry>().GetByName(name);
+            if (entry == null)
                 throw new Exception("Palette error: " + name);
 
-            var asset = AssetsProvider.GetAsset(paletteEntity.SourceRef);
+            var asset = AssetsProvider.GetAsset(entry.SourceRef);
 
-            return FormatMan.Load(asset, paletteEntity.Format) as PaletteModel;
+            return FormatMan.Load(asset, entry.Format) as PaletteModel;
         }
 
         public SoundModel GetSound(string name)
         {
-            var entity = _unitOfWork.GetRepository<ISoundEntity>().GetByName(name);
-            if (entity == null)
+            var entry = _unitOfWork.GetRepository<ISoundEntry>().GetByName(name);
+            if (entry == null)
                 throw new Exception("Sound error: " + name);
 
-            var asset = AssetsProvider.GetAsset(entity.SourceRef);
+            var asset = AssetsProvider.GetAsset(entry.SourceRef);
 
-            return FormatMan.Load(asset, entity.Format) as SoundModel;
+            return FormatMan.Load(asset, entry.Format) as SoundModel;
         }
 
-        public IPropSetEntity GetPropSet(string name)
+        public IPropSetEntry GetPropSet(string name)
         {
-            var propSetEntity = _unitOfWork.GetRepository<IPropSetEntity>().GetByName(name);
-            if (propSetEntity == null)
+            var entry = _unitOfWork.GetRepository<IPropSetEntry>().GetByName(name);
+            if (entry == null)
                 throw new Exception("PropSet error: " + name);
 
-            return propSetEntity;
+            return entry;
         }
 
         public SourceBase GetSource(string name)
@@ -96,50 +96,50 @@ namespace OpenBreed.Common
 
         public SpriteSetModel GetSpriteSet(string name)
         {
-            var spriteSetEntity = _unitOfWork.GetRepository<ISpriteSetEntity>().GetByName(name);
-            if (spriteSetEntity == null)
+            var entry = _unitOfWork.GetRepository<ISpriteSetEntry>().GetByName(name);
+            if (entry == null)
                 throw new Exception("SpriteSet error: " + name);
 
-            var asset = AssetsProvider.GetAsset(spriteSetEntity.SourceRef);
+            var asset = AssetsProvider.GetAsset(entry.SourceRef);
 
-            return FormatMan.Load(asset, spriteSetEntity.Format) as SpriteSetModel;
+            return FormatMan.Load(asset, entry.Format) as SpriteSetModel;
         }
 
         public TileSetModel GetTileSet(string name)
         {
-            var tileSetEntity = _unitOfWork.GetRepository<ITileSetEntity>().GetByName(name);
-            if (tileSetEntity == null)
+            var entry = _unitOfWork.GetRepository<ITileSetEntry>().GetByName(name);
+            if (entry == null)
                 throw new Exception("TileSet error: " + name);
 
-            var asset = AssetsProvider.GetAsset(tileSetEntity.SourceRef);
+            var asset = AssetsProvider.GetAsset(entry.SourceRef);
 
-            return FormatMan.Load(asset, tileSetEntity.Format) as TileSetModel;
+            return FormatMan.Load(asset, entry.Format) as TileSetModel;
         }
 
         public LevelModel GetLevel(string name)
         {
-            var levelEntity = _unitOfWork.GetRepository<ILevelEntity>().GetByName(name);
-            if (levelEntity == null)
+            var entry = _unitOfWork.GetRepository<ILevelEntry>().GetByName(name);
+            if (entry == null)
                 throw new Exception("Level error: " + name);
 
-            var asset = AssetsProvider.GetAsset(levelEntity.SourceRef);
+            var asset = AssetsProvider.GetAsset(entry.SourceRef);
 
             var level = new LevelModel();
-            level.Map = FormatMan.Load(asset, levelEntity.Format) as MapModel;
+            level.Map = FormatMan.Load(asset, entry.Format) as MapModel;
 
 
-            if (levelEntity.TileSetRef != null)
-                level.TileSets.Add(GetTileSet(levelEntity.TileSetRef));
+            if (entry.TileSetRef != null)
+                level.TileSets.Add(GetTileSet(entry.TileSetRef));
 
-            if (levelEntity.PropertySetRef != null)
-                level.PropSet = GetPropSet(levelEntity.PropertySetRef);
+            if (entry.PropertySetRef != null)
+                level.PropSet = GetPropSet(entry.PropertySetRef);
 
-            foreach (var spriteSetRef in levelEntity.SpriteSetRefs)
+            foreach (var spriteSetRef in entry.SpriteSetRefs)
                 level.SpriteSets.Add(GetSpriteSet(spriteSetRef));
 
-            if (levelEntity.PaletteRefs.Any())
+            if (entry.PaletteRefs.Any())
             {
-                foreach (var paletteRef in levelEntity.PaletteRefs)
+                foreach (var paletteRef in entry.PaletteRefs)
                     level.Palettes.Add(GetPalette(paletteRef));
             }
             else

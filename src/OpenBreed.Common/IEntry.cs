@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Common
 {
-    public interface IEntity
+    public interface IEntry
     {
        long Id { get; }
        string Name { get; }

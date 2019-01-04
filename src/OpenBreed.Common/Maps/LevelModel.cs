@@ -17,7 +17,7 @@ namespace OpenBreed.Common
 
         public MapModel Map { get; internal set; }
         public List<PaletteModel> Palettes { get; } = new List<PaletteModel>();
-        public IPropSetEntity PropSet { get; internal set; }
+        public IPropSetEntry PropSet { get; internal set; }
         public List<TileSetModel> TileSets { get; } = new List<TileSetModel>();
         public List<SpriteSetModel> SpriteSets { get; } = new List<SpriteSetModel>();
         #endregion Public Properties

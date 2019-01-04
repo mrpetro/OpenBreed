@@ -11,7 +11,7 @@ using OpenBreed.Common.XmlDatabase.Items.Sounds;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
-    public class XmlSoundsRepository : IRepository<ISoundEntity>
+    public class XmlSoundsRepository : IRepository<ISoundEntry>
     {
 
         #region Private Fields
@@ -35,24 +35,24 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Properties
 
-        public IEnumerable<IEntity> Entries { get { return _table.Items; } }
+        public IEnumerable<IEntry> Entries { get { return _table.Items; } }
         public IUnitOfWork UnitOfWork { get; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void Add(ISoundEntity entity)
+        public void Add(ISoundEntry entity)
         {
             throw new NotImplementedException();
         }
 
-        public ISoundEntity GetById(long id)
+        public ISoundEntry GetById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public ISoundEntity GetByName(string name)
+        public ISoundEntry GetByName(string name)
         {
             var entry = _table.Items.FirstOrDefault(item => item.Name == name);
             if (entry == null)
@@ -61,7 +61,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             return entry;
         }
 
-        public ISoundEntity GetNextTo(ISoundEntity entry)
+        public ISoundEntry GetNextTo(ISoundEntry entry)
         {
             var index = _table.Items.IndexOf((SoundDef)entry);
 
@@ -76,7 +76,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return null;
         }
 
-        public ISoundEntity GetPrevTo(ISoundEntity entry)
+        public ISoundEntry GetPrevTo(ISoundEntry entry)
         {
             var index = _table.Items.IndexOf((SoundDef)entry);
 
@@ -92,12 +92,12 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
         }
 
 
-        public void Remove(ISoundEntity entity)
+        public void Remove(ISoundEntry entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(ISoundEntity entity)
+        public void Update(ISoundEntry entity)
         {
             throw new NotImplementedException();
         }

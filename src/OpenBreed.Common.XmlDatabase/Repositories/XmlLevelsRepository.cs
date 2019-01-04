@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
-    public class XmlLevelsRepository : IRepository<ILevelEntity>
+    public class XmlLevelsRepository : IRepository<ILevelEntry>
     {
 
-        public ILevelEntity GetNextTo(ILevelEntity entry)
+        public ILevelEntry GetNextTo(ILevelEntry entry)
         {
             var index = _table.Items.IndexOf((LevelDef)entry);
 
@@ -28,7 +28,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return null;
         }
 
-        public ILevelEntity GetPrevTo(ILevelEntity entry)
+        public ILevelEntry GetPrevTo(ILevelEntry entry)
         {
             var index = _table.Items.IndexOf((LevelDef)entry);
 
@@ -67,23 +67,23 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public IUnitOfWork UnitOfWork { get; }
 
-        public IEnumerable<IEntity> Entries { get { return _table.Items; } }
+        public IEnumerable<IEntry> Entries { get { return _table.Items; } }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void Add(ILevelEntity entity)
+        public void Add(ILevelEntry entity)
         {
             throw new NotImplementedException();
         }
 
-        public ILevelEntity GetById(long id)
+        public ILevelEntry GetById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public ILevelEntity GetByName(string name)
+        public ILevelEntry GetByName(string name)
         {
             var levelDef = _table.Items.FirstOrDefault(item => item.Name == name);
             if (levelDef == null)
@@ -92,12 +92,12 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             return levelDef;
         }
 
-        public void Remove(ILevelEntity entity)
+        public void Remove(ILevelEntry entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(ILevelEntity entity)
+        public void Update(ILevelEntry entity)
         {
             throw new NotImplementedException();
         }

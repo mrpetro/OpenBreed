@@ -44,11 +44,11 @@ namespace OpenBreed.Common
             if (_openedSources.TryGetValue(name, out source))
                 return source;
 
-            var sourceEntity = UnitOfWork.GetRepository<ISourceEntity>().GetByName(name);
-            if (sourceEntity == null)
+            var entry = UnitOfWork.GetRepository<ISourceEntry>().GetByName(name);
+            if (entry == null)
                 throw new Exception($"Source error: {name}" );
 
-            source = CreateAsset(sourceEntity);
+            source = CreateAsset(entry);
 
             return source;
         }
@@ -94,22 +94,22 @@ namespace OpenBreed.Common
 
         #region Private Methods
 
-        private SourceBase CreateDirectoryFileSource(IDirectoryFileSourceEntity source)
+        private SourceBase CreateDirectoryFileSource(IDirectoryFileSourceEntry source)
         {
             return new DirectoryFileSource(this, source.DirectoryPath, source.Name);
         }
 
-        private SourceBase CreateEPFArchiveSource(IEPFArchiveSourceEntity source)
+        private SourceBase CreateEPFArchiveSource(IEPFArchiveSourceEntry source)
         {
             return new EPFArchiveFileSource(this, source.ArchivePath, source.Name);
         }
 
-        private SourceBase CreateAsset(ISourceEntity source)
+        private SourceBase CreateAsset(ISourceEntry source)
         {
-            if (source is IDirectoryFileSourceEntity)
-                return CreateDirectoryFileSource((IDirectoryFileSourceEntity)source);
-            else if (source is IEPFArchiveSourceEntity)
-                return CreateEPFArchiveSource((IEPFArchiveSourceEntity)source);
+            if (source is IDirectoryFileSourceEntry)
+                return CreateDirectoryFileSource((IDirectoryFileSourceEntry)source);
+            else if (source is IEPFArchiveSourceEntry)
+                return CreateEPFArchiveSource((IEPFArchiveSourceEntry)source);
             else
                 throw new NotImplementedException("Unknown sourceDef");
         }

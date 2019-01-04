@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Props
 {
-    public interface IPropertyEntity
+    public interface IPropertyEntry
     {
         #region Public Properties
 

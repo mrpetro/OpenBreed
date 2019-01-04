@@ -5,7 +5,7 @@ using System.IO;
 
 namespace OpenBreed.Common.Sources
 {
-    public abstract class SourceBase : IEntity, IDisposable
+    public abstract class SourceBase : IEntry, IDisposable
     {
         #region Protected Fields
 

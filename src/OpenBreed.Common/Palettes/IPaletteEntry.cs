@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Sounds
+namespace OpenBreed.Common.Palettes
 {
-    public interface ISoundEntity : IEntity
+    public interface IPaletteEntry : IEntry
     {
         string SourceRef { get; }
-        IFormatEntity Format { get; }
+        IFormatEntry Format { get; }
     }
 }

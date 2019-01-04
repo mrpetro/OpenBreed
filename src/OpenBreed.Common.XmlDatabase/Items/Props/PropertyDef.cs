@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace OpenBreed.Common.XmlDatabase.Items.Props
 {
     [Serializable]
-    public class PropertyDef : IPropertyEntity
+    public class PropertyDef : IPropertyEntry
     {
         [XmlAttribute]
         public int Id { get; set; }

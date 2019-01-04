@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Maps
 {
-    public interface ILevelEntity : IEntity
+    public interface ILevelEntry : IEntry
     {
         string SourceRef { get; }
-        IFormatEntity Format { get; }
+        IFormatEntry Format { get; }
 
         string TileSetRef { get; }
         string PropertySetRef { get; }

@@ -11,12 +11,12 @@ using System.Xml.Serialization;
 namespace OpenBreed.Common.XmlDatabase.Items.Images
 {
     [Serializable]
-    public class ImageDef : DatabaseItemDef, IImageEntity
+    public class ImageDef : DatabaseItemDef, IImageEntry
     {
         #region Public Properties
 
         [XmlIgnore]
-        public IFormatEntity Format { get; set; }
+        public IFormatEntry Format { get; set; }
 
         [XmlElement("Format")]
         public FormatDef FormatDef

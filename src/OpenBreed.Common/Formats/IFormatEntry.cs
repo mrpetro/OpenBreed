@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Formats
 {
-    public interface IFormatEntity
+    public interface IFormatEntry
     {
         string Name { get; }
         List<FormatParameter> Parameters { get; }

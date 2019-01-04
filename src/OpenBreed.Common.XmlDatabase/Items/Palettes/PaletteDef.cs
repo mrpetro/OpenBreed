@@ -9,12 +9,12 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Common.XmlDatabase.Items.Palettes
 {
-    public class PaletteDef : DatabaseItemDef, IPaletteEntity
+    public class PaletteDef : DatabaseItemDef, IPaletteEntry
     {
         #region Public Properties
 
         [XmlIgnore]
-        public IFormatEntity Format { get; set; }
+        public IFormatEntry Format { get; set; }
 
         [XmlElement("Format")]
         public FormatDef FormatDef

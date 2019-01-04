@@ -13,7 +13,7 @@ using OpenBreed.Common.XmlDatabase.Items.Palettes;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
-    public class XmlPalettesRepository : IRepository<IPaletteEntity>
+    public class XmlPalettesRepository : IRepository<IPaletteEntry>
     {
         #region Private Fields
 
@@ -37,7 +37,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Properties
 
-        public IEnumerable<IEntity> Entries { get { return _table.Items; } }
+        public IEnumerable<IEntry> Entries { get { return _table.Items; } }
 
         public IUnitOfWork UnitOfWork { get; }
 
@@ -45,17 +45,17 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Methods
 
-        public void Add(IPaletteEntity entity)
+        public void Add(IPaletteEntry entity)
         {
             throw new NotImplementedException();
         }
 
-        public IPaletteEntity GetById(long id)
+        public IPaletteEntry GetById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public IPaletteEntity GetByName(string name)
+        public IPaletteEntry GetByName(string name)
         {
             var paletteDef = _table.Items.FirstOrDefault(item => item.Name == name);
             if (paletteDef == null)
@@ -64,7 +64,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             return paletteDef;
         }
 
-        public IPaletteEntity GetNextTo(IPaletteEntity entry)
+        public IPaletteEntry GetNextTo(IPaletteEntry entry)
         {
             var index = _table.Items.IndexOf((PaletteDef)entry);
 
@@ -79,7 +79,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return null;
         }
 
-        public IPaletteEntity GetPrevTo(IPaletteEntity entry)
+        public IPaletteEntry GetPrevTo(IPaletteEntry entry)
         {
             var index = _table.Items.IndexOf((PaletteDef)entry);
 
@@ -94,12 +94,12 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return null;
         }
 
-        public void Remove(IPaletteEntity entity)
+        public void Remove(IPaletteEntry entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(IPaletteEntity entity)
+        public void Update(IPaletteEntry entity)
         {
             throw new NotImplementedException();
         }

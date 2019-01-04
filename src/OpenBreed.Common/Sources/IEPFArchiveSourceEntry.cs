@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Props
+namespace OpenBreed.Common.Sources
 {
-    public interface IPropSetEntity : IEntity
+    public interface IEPFArchiveSourceEntry : ISourceEntry
     {
-        List<IPropertyEntity> Items { get; }
+        string ArchivePath { get; }
     }
 }

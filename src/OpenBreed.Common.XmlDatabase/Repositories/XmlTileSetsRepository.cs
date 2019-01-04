@@ -10,7 +10,7 @@ using OpenBreed.Common.XmlDatabase.Items.Tiles;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
-    public class XmlTileSetsRepository : IRepository<ITileSetEntity>
+    public class XmlTileSetsRepository : IRepository<ITileSetEntry>
     {
 
         #region Private Fields
@@ -34,24 +34,24 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Properties
 
-        public IEnumerable<IEntity> Entries { get { return _table.Items; } }
+        public IEnumerable<IEntry> Entries { get { return _table.Items; } }
         public IUnitOfWork UnitOfWork { get; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void Add(ITileSetEntity entity)
+        public void Add(ITileSetEntry entity)
         {
             throw new NotImplementedException();
         }
 
-        public ITileSetEntity GetById(long id)
+        public ITileSetEntry GetById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public ITileSetEntity GetByName(string name)
+        public ITileSetEntry GetByName(string name)
         {
             var tileSetDef = _table.Items.FirstOrDefault(item => item.Name == name);
             if (tileSetDef == null)
@@ -60,7 +60,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             return tileSetDef;
         }
 
-        public ITileSetEntity GetNextTo(ITileSetEntity entry)
+        public ITileSetEntry GetNextTo(ITileSetEntry entry)
         {
             var index = _table.Items.IndexOf((TileSetDef)entry);
 
@@ -75,7 +75,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return null;
         }
 
-        public ITileSetEntity GetPrevTo(ITileSetEntity entry)
+        public ITileSetEntry GetPrevTo(ITileSetEntry entry)
         {
             var index = _table.Items.IndexOf((TileSetDef)entry);
 
@@ -90,12 +90,12 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return null;
         }
 
-        public void Remove(ITileSetEntity entity)
+        public void Remove(ITileSetEntry entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(ITileSetEntity entity)
+        public void Update(ITileSetEntry entity)
         {
             throw new NotImplementedException();
         }

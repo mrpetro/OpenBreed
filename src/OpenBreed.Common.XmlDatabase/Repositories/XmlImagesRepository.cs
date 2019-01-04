@@ -10,7 +10,7 @@ using OpenBreed.Common.XmlDatabase.Items.Images;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
-    public class XmlImagesRepository : IRepository<IImageEntity>
+    public class XmlImagesRepository : IRepository<IImageEntry>
     {
         #region Private Fields
 
@@ -34,7 +34,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Properties
 
-        public IEnumerable<IEntity> Entries { get { return _table.Items; } }
+        public IEnumerable<IEntry> Entries { get { return _table.Items; } }
 
         public IUnitOfWork UnitOfWork { get; }
 
@@ -42,17 +42,17 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Methods
 
-        public void Add(IImageEntity entity)
+        public void Add(IImageEntry entity)
         {
             throw new NotImplementedException();
         }
 
-        public IImageEntity GetById(long id)
+        public IImageEntry GetById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public IImageEntity GetByName(string name)
+        public IImageEntry GetByName(string name)
         {
             var spriteSetDef = _table.Items.FirstOrDefault(item => item.Name == name);
             if (spriteSetDef == null)
@@ -61,7 +61,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             return spriteSetDef;
         }
 
-        public IImageEntity GetNextTo(IImageEntity entry)
+        public IImageEntry GetNextTo(IImageEntry entry)
         {
             var index = _table.Items.IndexOf((ImageDef)entry);
 
@@ -76,7 +76,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return null;
         }
 
-        public IImageEntity GetPrevTo(IImageEntity entry)
+        public IImageEntry GetPrevTo(IImageEntry entry)
         {
             var index = _table.Items.IndexOf((ImageDef)entry);
 
@@ -90,12 +90,12 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             else
                 return null;
         }
-        public void Remove(IImageEntity entity)
+        public void Remove(IImageEntry entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(IImageEntity entity)
+        public void Update(IImageEntry entity)
         {
             throw new NotImplementedException();
         }

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Sources
 {
-    public interface IEPFArchiveSourceEntity : ISourceEntity
+    public interface IDirectoryFileSourceEntry : ISourceEntry
     {
-        string ArchivePath { get; }
+        string DirectoryPath { get; }
     }
 }

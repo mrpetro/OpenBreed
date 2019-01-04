@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace OpenBreed.Common.XmlDatabase.Items.Sources
 {
     [Serializable]
-    public class SourceDef : DatabaseItemDef, ISourceEntity
+    public class SourceDef : DatabaseItemDef, ISourceEntry
     {
         #region Public Properties
 

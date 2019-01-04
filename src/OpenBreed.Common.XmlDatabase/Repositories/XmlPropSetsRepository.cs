@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
-    public class XmlPropSetsRepository : IRepository<IPropSetEntity>
+    public class XmlPropSetsRepository : IRepository<IPropSetEntry>
     {
 
         #region Private Fields
@@ -34,7 +34,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Properties
 
-        public IEnumerable<IEntity> Entries { get { return _table.Items; } }
+        public IEnumerable<IEntry> Entries { get { return _table.Items; } }
 
         public IUnitOfWork UnitOfWork { get; }
 
@@ -42,17 +42,17 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Methods
 
-        public void Add(IPropSetEntity entity)
+        public void Add(IPropSetEntry entity)
         {
             throw new NotImplementedException();
         }
 
-        public IPropSetEntity GetById(long id)
+        public IPropSetEntry GetById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public IPropSetEntity GetByName(string name)
+        public IPropSetEntry GetByName(string name)
         {
             var propSetDef = _table.Items.FirstOrDefault(item => item.Name == name);
             if (propSetDef == null)
@@ -61,7 +61,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             return propSetDef;
         }
 
-        public IPropSetEntity GetNextTo(IPropSetEntity entry)
+        public IPropSetEntry GetNextTo(IPropSetEntry entry)
         {
             var index = _table.Items.IndexOf((PropertySetDef)entry);
 
@@ -76,7 +76,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return null;
         }
 
-        public IPropSetEntity GetPrevTo(IPropSetEntity entry)
+        public IPropSetEntry GetPrevTo(IPropSetEntry entry)
         {
             var index = _table.Items.IndexOf((PropertySetDef)entry);
 
@@ -90,12 +90,12 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             else
                 return null;
         }
-        public void Remove(IPropSetEntity entity)
+        public void Remove(IPropSetEntry entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(IPropSetEntity entity)
+        public void Update(IPropSetEntry entity)
         {
             throw new NotImplementedException();
         }

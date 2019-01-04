@@ -10,12 +10,12 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Common.XmlDatabase.Items.Sprites
 {
-    public class SpriteSetDef : DatabaseItemDef, ISpriteSetEntity
+    public class SpriteSetDef : DatabaseItemDef, ISpriteSetEntry
     {
         #region Public Properties
 
         [XmlIgnore]
-        public IFormatEntity Format { get; set; }
+        public IFormatEntry Format { get; set; }
 
         [XmlElement("Format")]
         public FormatDef FormatDef

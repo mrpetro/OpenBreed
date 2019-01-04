@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Tiles
+namespace OpenBreed.Common.Images
 {
-    public interface ITileSetEntity : IEntity
+    public interface IImageEntry : IEntry
     {
         string SourceRef { get; }
-        IFormatEntity Format { get; }
+        IFormatEntry Format { get; }
     }
 }
