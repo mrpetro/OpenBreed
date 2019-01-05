@@ -1,8 +1,10 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.XmlDatabase;
+using OpenBreed.Common.XmlDatabase.Items.Palettes;
 using OpenBreed.Common.XmlDatabase.Items.Props;
 using OpenBreed.Common.XmlDatabase.Items.Sources;
-using OpenBreed.Common.Props;
+using OpenBreed.Common.XmlDatabase.Items.Sprites;
+using OpenBreed.Common.Palettes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,17 +13,18 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database.Items
 {
-    public class DatabasePropSetItemVM : DatabaseEntryVM
+    public class DbPaletteEntryVM : DbEntryVM
     {
+
         #region Private Fields
 
-        private IPropSetEntry _entry;
+        private IPaletteEntry _entry;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DatabasePropSetItemVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
+        public DbPaletteEntryVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
         {
         }
 
@@ -31,7 +34,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         public override void Load(IEntry entry)
         {
-            _entry = entry as IPropSetEntry ?? throw new InvalidOperationException($"Expected {nameof(IPropSetEntry)}");
+            _entry = entry as IPaletteEntry ?? throw new InvalidOperationException($"Expected {nameof(IPaletteEntry)}");
 
             base.Load(entry);
         }
@@ -43,5 +46,6 @@ namespace OpenBreed.Editor.VM.Database.Items
         }
 
         #endregion Public Methods
+
     }
 }

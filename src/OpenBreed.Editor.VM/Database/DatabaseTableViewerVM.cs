@@ -15,17 +15,17 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Public Fields
 
-        public readonly DatabaseViewerVM Parent;
+        public readonly DbTablesEditorVM Parent;
 
         #endregion Public Fields
 
         #region Internal Constructors
 
-        internal DatabaseTableViewerVM(DatabaseViewerVM parent)
+        internal DatabaseTableViewerVM(DbTablesEditorVM parent)
         {
             Parent = parent;
 
-            Items = new BindingList<DatabaseEntryVM>();
+            Items = new BindingList<DbEntryVM>();
             Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
         }
 
@@ -33,7 +33,7 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Public Properties
 
-        public BindingList<DatabaseEntryVM> Items { get; private set; }
+        public BindingList<DbEntryVM> Items { get; private set; }
 
         #endregion Public Properties
 

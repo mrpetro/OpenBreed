@@ -12,14 +12,14 @@ using OpenBreed.Editor.VM.Database;
 
 namespace OpenBreed.Editor.UI.WinForms.Views
 {
-    public partial class DatabaseView : DockContent
+    public partial class DbTablesEditorView : DockContent
     {
-        public DatabaseView()
+        public DbTablesEditorView()
         {
             InitializeComponent();
         }
 
-        public void Initialize(DatabaseViewerVM vm)
+        public void Initialize(DbTablesEditorVM vm)
         {
             DatabaseViewer.Initialize(vm);
         }

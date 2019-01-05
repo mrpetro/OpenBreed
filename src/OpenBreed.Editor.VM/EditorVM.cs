@@ -61,7 +61,7 @@ namespace OpenBreed.Editor.VM
             TileSetEditor = new TileSetEditorVM(this);
             PropSetEditor = new PropSetEditorVM(this);
             PaletteEditor = new PaletteEditorVM(this);
-            DatabaseViewer = new DatabaseViewerVM(this);
+            DbTablesEditor = new DbTablesEditorVM(this);
             SpriteViewer = new SpriteViewerVM(this);
             ImageEditor = new ImageEditorVM(this);
             SoundEditor = new SoundEditorVM(this);
@@ -79,7 +79,7 @@ namespace OpenBreed.Editor.VM
             set { SetProperty(ref _database, value); }
         }
 
-        public DatabaseViewerVM DatabaseViewer { get; }
+        public DbTablesEditorVM DbTablesEditor { get; }
         public IDialogProvider DialogProvider { get; }
         public DataProvider DataProvider { get; private set; }
         public ImageEditorVM ImageEditor { get; }
@@ -218,7 +218,7 @@ namespace OpenBreed.Editor.VM
         private void Initialize()
         {
             PropSetEditor.Connect();
-            DatabaseViewer.Connect();
+            DbTablesEditor.Connect();
             LevelEditor.Connect();
             SpriteViewer.Connect();
 

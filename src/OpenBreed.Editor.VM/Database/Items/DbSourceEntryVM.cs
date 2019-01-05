@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Sounds;
+using OpenBreed.Common.XmlDatabase;
+using OpenBreed.Common.XmlDatabase.Items.Sources;
+using OpenBreed.Common.Sources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,17 +10,17 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database.Items
 {
-    public class DatabaseSoundItemVM : DatabaseEntryVM
+    public class DbSourceEntryVM : DbEntryVM
     {
         #region Private Fields
 
-        private ISoundEntry _entry;
+        private ISourceEntry _entry;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DatabaseSoundItemVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
+        public DbSourceEntryVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
         {
         }
 
@@ -28,15 +30,9 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         public override void Load(IEntry entry)
         {
-            _entry = entry as ISoundEntry ?? throw new InvalidOperationException($"Expected {nameof(ISoundEntry)}");
+            _entry = entry as ISourceEntry ?? throw new InvalidOperationException($"Expected {nameof(ISourceEntry)}");
 
             base.Load(entry);
-        }
-
-        public override void Open()
-        {
-            Editor.OpenEntry(_entry.Name);
-            Owner.OpenedItem = this;
         }
 
         #endregion Public Methods

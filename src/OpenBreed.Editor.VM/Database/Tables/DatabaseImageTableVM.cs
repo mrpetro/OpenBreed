@@ -34,7 +34,7 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         #region Public Methods
 
-        public override IEnumerable<DatabaseEntryVM> GetItems()
+        public override IEnumerable<DbEntryVM> GetItems()
         {
             foreach (var entry in _repository.Entries)
             {

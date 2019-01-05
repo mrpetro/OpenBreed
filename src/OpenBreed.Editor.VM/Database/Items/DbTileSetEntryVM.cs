@@ -2,8 +2,8 @@
 using OpenBreed.Common.XmlDatabase;
 using OpenBreed.Common.XmlDatabase.Items.Props;
 using OpenBreed.Common.XmlDatabase.Items.Sources;
-using OpenBreed.Common.XmlDatabase.Items.Sprites;
-using OpenBreed.Common.Sprites;
+using OpenBreed.Common.XmlDatabase.Items.Tiles;
+using OpenBreed.Common.Tiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,17 +12,17 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database.Items
 {
-    public class DatabaseSpriteSetItemVM : DatabaseEntryVM
+    public class DbTileSetEntryVM : DbEntryVM
     {
         #region Private Fields
 
-        private ISpriteSetEntry _entry;
+        private ITileSetEntry _entry;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DatabaseSpriteSetItemVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
+        public DbTileSetEntryVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
         {
         }
 
@@ -32,16 +32,14 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         public override void Load(IEntry entry)
         {
-            _entry = entry as ISpriteSetEntry ?? throw new InvalidOperationException($"Expected {nameof(ISpriteSetEntry)}");
+            _entry = entry as ITileSetEntry ?? throw new InvalidOperationException($"Expected {nameof(ITileSetEntry)}");
 
             base.Load(entry);
         }
 
         public override void Open()
         {
-            throw new NotImplementedException();
-
-            //Owner.Root.PropSetEditor.TryLoad(_model);
+            Editor.OpenEntry(_entry.Name);
             Owner.OpenedItem = this;
         }
 

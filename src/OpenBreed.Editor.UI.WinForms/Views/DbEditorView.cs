@@ -29,14 +29,14 @@ namespace OpenBreed.Editor.UI.WinForms.Views
     }
 
 
-    public partial class ProjectView : DockPanel
+    public partial class DbEditorView : DockPanel
     {
         #region Private Fields
 
         private const string LAYOUT_CFG_FILE_NAME = "Layout.cfg";
 
         //private ToolsView _toolsView = new ToolsView();
-        private DatabaseView _databaseView = new DatabaseView();
+        private DbTablesEditorView _databaseView = new DbTablesEditorView();
 
         private DeserializeDockContent _deserializeDockContent;
         private ImageEditorView _imagesViewerView = new ImageEditorView();
@@ -58,7 +58,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         #region Public Constructors
 
-        public ProjectView()
+        public DbEditorView()
         {
             InitializeComponent();
 
@@ -206,9 +206,9 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         public void ShowDatabaseView()
         {
             if (_databaseView == null)
-                _databaseView = new DatabaseView();
+                _databaseView = new DbTablesEditorView();
 
-            _databaseView.Initialize(_vm.Root.DatabaseViewer);
+            _databaseView.Initialize(_vm.Root.DbTablesEditor);
             _databaseView.Show(this, DockState.DockLeft);
         }
 

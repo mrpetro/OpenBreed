@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database
 {
-    public class DatabaseViewerVM : BaseViewModel
+    public class DbTablesEditorVM : BaseViewModel
     {
 
         #region Public Fields
@@ -19,7 +19,7 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Internal Constructors
 
-        internal DatabaseViewerVM(EditorVM root)
+        internal DbTablesEditorVM(EditorVM root)
         {
             Root = root;
 

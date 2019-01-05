@@ -225,11 +225,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SaveFileQuery.cs" />
-    <Compile Include="Views\DatabaseView.cs">
+    <Compile Include="Views\DbTablesEditorView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\DatabaseView.Designer.cs">
-      <DependentUpon>DatabaseView.cs</DependentUpon>
+    <Compile Include="Views\DbTablesEditorView.Designer.cs">
+      <DependentUpon>DbTablesEditorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\PaletteEditorView.cs">
       <SubType>Form</SubType>
@@ -274,11 +274,11 @@
       <DependentUpon>LevelSettingsView.cs</DependentUpon>
     </Compile>
     <Compile Include="OpenFileQuery.cs" />
-    <Compile Include="Views\ProjectView.cs">
+    <Compile Include="Views\DbEditorView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Views\ProjectView.Designer.cs">
-      <DependentUpon>ProjectView.cs</DependentUpon>
+    <Compile Include="Views\DbEditorView.Designer.cs">
+      <DependentUpon>DbEditorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\PropertiesView.cs">
       <SubType>Form</SubType>
@@ -413,8 +413,8 @@
     <EmbeddedResource Include="MapPropertiesCtrl.resx">
       <DependentUpon>MapPropertiesCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\DatabaseView.resx">
-      <DependentUpon>DatabaseView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\DbTablesEditorView.resx">
+      <DependentUpon>DbTablesEditorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PaletteEditorView.resx">
       <DependentUpon>PaletteEditorView.cs</DependentUpon>
@@ -437,8 +437,8 @@
     <EmbeddedResource Include="Views\LevelSettingsView.resx">
       <DependentUpon>LevelSettingsView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ProjectView.resx">
-      <DependentUpon>ProjectView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\DbEditorView.resx">
+      <DependentUpon>DbEditorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PropertiesView.resx">
       <DependentUpon>PropertiesView.cs</DependentUpon>

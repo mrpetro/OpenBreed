@@ -15,7 +15,7 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Public Fields
 
-        public readonly DatabaseViewerVM Parent;
+        public readonly DbTablesEditorVM Parent;
 
         #endregion Public Fields
 
@@ -28,7 +28,7 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Internal Constructors
 
-        internal DatabaseTableSelectorVM(DatabaseViewerVM parent)
+        internal DatabaseTableSelectorVM(DbTablesEditorVM parent)
         {
             Parent = parent;
 

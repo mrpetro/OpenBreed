@@ -38,7 +38,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
 
         #region Private Fields
 
-        private ProjectView _projectView;
+        private DbEditorView _dbEditorView;
 
         #endregion Private Fields
 
@@ -48,8 +48,8 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
         {
             FileSeparator = new ToolStripSeparator();
 
-            _projectView = new ProjectView();
-            _projectView.Dock = DockStyle.Fill;
+            _dbEditorView = new DbEditorView();
+            _dbEditorView.Dock = DockStyle.Fill;
 
             FileCloseDatabaseToolStripMenuItem = new ToolStripMenuItem("Close database");
             FileCloseDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.TryCloseDatabase();
@@ -74,27 +74,27 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             //ViewToolsMenuItem = new ToolStripMenuItem("Tools");
             //ViewToolsMenuItem.Click += (s, a) => _projectView.ShowView(ProjectViewType.Tools);
             ViewDatabaseMenuItem = new ToolStripMenuItem("Database items");
-            ViewDatabaseMenuItem.Click += (s, a) => _projectView.ShowDatabaseView();
+            ViewDatabaseMenuItem.Click += (s, a) => _dbEditorView.ShowDatabaseView();
         }
 
-        private void OnOpenedItemChanged(DatabaseEntryVM databaseItemVM)
+        private void OnOpenedItemChanged(DbEntryVM databaseItemVM)
         {
             if (databaseItemVM == null)
                 return;
-            else if (databaseItemVM is DatabaseImageItemVM)
-                _projectView.ShowImageView();
-            else if (databaseItemVM is DatabaseLevelItemVM)
-                _projectView.ShowLevelView();
-            else if (databaseItemVM is DatabasePropSetItemVM)
-                _projectView.ShowPropSetEditorView();
-            else if (databaseItemVM is DatabaseTileSetItemVM)
-                _projectView.ShowTileSetEditorView();
-            else if (databaseItemVM is DatabaseSpriteSetItemVM)
-                _projectView.ShowSpriteSetEditorView();
-            else if (databaseItemVM is DatabasePaletteItemVM)
-                _projectView.ShowPaletteEditorView();
-            else if (databaseItemVM is DatabaseSoundItemVM)
-                _projectView.ShowSoundEditorView();
+            else if (databaseItemVM is DbImageEntryVM)
+                _dbEditorView.ShowImageView();
+            else if (databaseItemVM is DbLevelEntryVM)
+                _dbEditorView.ShowLevelView();
+            else if (databaseItemVM is DbPropSetEntryVM)
+                _dbEditorView.ShowPropSetEditorView();
+            else if (databaseItemVM is DbTileSetEntryVM)
+                _dbEditorView.ShowTileSetEditorView();
+            else if (databaseItemVM is DbSpriteSetEntryVM)
+                _dbEditorView.ShowSpriteSetEditorView();
+            else if (databaseItemVM is DbPaletteEntryVM)
+                _dbEditorView.ShowPaletteEditorView();
+            else if (databaseItemVM is DbSoundEntryVM)
+                _dbEditorView.ShowSoundEditorView();
             else
                 throw new NotImplementedException();
         }
@@ -105,7 +105,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
 
         internal override void Cleanup()
         {
-            _projectView.HideAllViews();
+            _dbEditorView.HideAllViews();
 
             //Setup the File menu
             MainForm.FileToolStripMenuItem.DropDownItems.Clear();
@@ -160,14 +160,14 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             MainForm.Text = $"{MainForm.APP_NAME} - {MainForm.VM.Database.Name}";
 
             MainForm.SuspendLayout();
-            MainForm.Controls.Add(_projectView);
-            MainForm.Controls.SetChildIndex(_projectView, 0);
-            _projectView.Initialize(MainForm.VM.Database);
+            MainForm.Controls.Add(_dbEditorView);
+            MainForm.Controls.SetChildIndex(_dbEditorView, 0);
+            _dbEditorView.Initialize(MainForm.VM.Database);
             MainForm.ResumeLayout();
 
             //_projectView.ActiveContentChanged += new EventHandler(ProjectView_ActiveContentChanged);
 
-            _projectView.ShowDatabaseView();
+            _dbEditorView.ShowDatabaseView();
 
         }
 

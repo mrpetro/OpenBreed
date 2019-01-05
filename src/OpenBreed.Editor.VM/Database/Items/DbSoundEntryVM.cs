@@ -1,26 +1,24 @@
-﻿using System;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Sounds;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Common;
-using OpenBreed.Common.XmlDatabase;
-using OpenBreed.Common.XmlDatabase.Items.Levels;
-using OpenBreed.Common.Maps;
 
 namespace OpenBreed.Editor.VM.Database.Items
 {
-    public class DatabaseLevelItemVM : DatabaseEntryVM
+    public class DbSoundEntryVM : DbEntryVM
     {
         #region Private Fields
 
-        private ILevelEntry _entry;
+        private ISoundEntry _entry;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DatabaseLevelItemVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
+        public DbSoundEntryVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
         {
         }
 
@@ -30,14 +28,14 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         public override void Load(IEntry entry)
         {
-            _entry = entry as ILevelEntry ?? throw new InvalidOperationException($"Expected {nameof(ILevelEntry)}");
+            _entry = entry as ISoundEntry ?? throw new InvalidOperationException($"Expected {nameof(ISoundEntry)}");
 
-            base.Load(entry);     
+            base.Load(entry);
         }
 
         public override void Open()
         {
-            Owner.Root.LevelEditor.Load(_entry.Name);
+            Editor.OpenEntry(_entry.Name);
             Owner.OpenedItem = this;
         }
 

@@ -1,26 +1,27 @@
-﻿using System;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.XmlDatabase;
+using OpenBreed.Common.XmlDatabase.Items.Props;
+using OpenBreed.Common.XmlDatabase.Items.Sources;
+using OpenBreed.Common.Props;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Common;
-using OpenBreed.Common.XmlDatabase;
-using OpenBreed.Common.XmlDatabase.Items.Images;
-using OpenBreed.Common.Images;
 
 namespace OpenBreed.Editor.VM.Database.Items
 {
-    public class DatabaseImageItemVM : DatabaseEntryVM
+    public class DbPropSetEntryVM : DbEntryVM
     {
         #region Private Fields
 
-        private IImageEntry _entry;
+        private IPropSetEntry _entry;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DatabaseImageItemVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
+        public DbPropSetEntryVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
         {
         }
 
@@ -30,7 +31,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         public override void Load(IEntry entry)
         {
-            _entry = entry as IImageEntry ?? throw new InvalidOperationException($"Expected {nameof(IImageEntry)}");
+            _entry = entry as IPropSetEntry ?? throw new InvalidOperationException($"Expected {nameof(IPropSetEntry)}");
 
             base.Load(entry);
         }
