@@ -36,14 +36,14 @@ namespace OpenBreed.Editor.UI.WinForms.Controls
             {
                 //Remove previous control if it was already added
                 if (_innerCtrl != null)
-                    Split.Panel1.Controls.Remove(_innerCtrl);
+                    Split.Panel2.Controls.Remove(_innerCtrl);
 
                 _innerCtrl = value;
 
                 if (_innerCtrl != null)
                 {
                     _innerCtrl.Dock = DockStyle.Fill;
-                    Split.Panel1.Controls.Add(_innerCtrl);
+                    Split.Panel2.Controls.Add(_innerCtrl);
                 }
             }
         }
@@ -56,6 +56,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls
         {
             _vm = vm ?? throw new ArgumentNullException(nameof(vm));
 
+            btnStore.Click += (s, a) => _vm.OnStore();
             btnNext.Click += (s, a) => _vm.OpenNextEntry();
             btnPrevious.Click += (s, a) => _vm.OpenPreviousEntry();
 
@@ -70,7 +71,12 @@ namespace OpenBreed.Editor.UI.WinForms.Controls
 
         private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            //throw new NotImplementedException();
+            switch (e.PropertyName)
+            {
+                //case nameof(_vm.Editable)
+                default:
+                    break;
+            }
         }
 
         #endregion Private Methods

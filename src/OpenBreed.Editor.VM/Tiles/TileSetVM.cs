@@ -15,12 +15,11 @@ using OpenBreed.Common.Formats;
 
 namespace OpenBreed.Editor.VM.Tiles
 {
-    public class TileSetVM : BaseViewModel
+    public class TileSetVM : EditableEntryVM
     {
 
         #region Private Fields
 
-        private string _name;
         private PaletteVM _palette;
         private int _tileSize;
 
@@ -56,12 +55,6 @@ namespace OpenBreed.Editor.VM.Tiles
         public Bitmap Bitmap { get; private set; }
 
         public BindingList<TileVM> Items { get; private set; }
-
-        public string Name
-        {
-            get { return _name; }
-            set { SetProperty(ref _name, value); }
-        }
 
         public PaletteVM Palette
         {

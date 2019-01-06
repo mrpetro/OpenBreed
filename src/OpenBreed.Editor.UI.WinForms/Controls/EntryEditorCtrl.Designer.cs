@@ -33,14 +33,16 @@
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrevious = new System.Windows.Forms.Button();
             this.Split = new System.Windows.Forms.SplitContainer();
+            this.tbxName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.Split)).BeginInit();
-            this.Split.Panel2.SuspendLayout();
+            this.Split.Panel1.SuspendLayout();
             this.Split.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnStore
             // 
-            this.btnStore.Location = new System.Drawing.Point(3, 3);
+            this.btnStore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStore.Location = new System.Drawing.Point(113, 3);
             this.btnStore.Name = "btnStore";
             this.btnStore.Size = new System.Drawing.Size(52, 23);
             this.btnStore.TabIndex = 0;
@@ -49,7 +51,8 @@
             // 
             // btnRevert
             // 
-            this.btnRevert.Location = new System.Drawing.Point(61, 3);
+            this.btnRevert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRevert.Location = new System.Drawing.Point(171, 3);
             this.btnRevert.Name = "btnRevert";
             this.btnRevert.Size = new System.Drawing.Size(52, 23);
             this.btnRevert.TabIndex = 1;
@@ -59,7 +62,7 @@
             // btnNext
             // 
             this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNext.Location = new System.Drawing.Point(206, 3);
+            this.btnNext.Location = new System.Drawing.Point(294, 3);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(23, 23);
             this.btnNext.TabIndex = 2;
@@ -69,7 +72,7 @@
             // btnPrevious
             // 
             this.btnPrevious.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrevious.Location = new System.Drawing.Point(177, 3);
+            this.btnPrevious.Location = new System.Drawing.Point(265, 3);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(23, 23);
             this.btnPrevious.TabIndex = 3;
@@ -79,31 +82,42 @@
             // Split
             // 
             this.Split.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Split.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.Split.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.Split.IsSplitterFixed = true;
             this.Split.Location = new System.Drawing.Point(0, 0);
             this.Split.Name = "Split";
             this.Split.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // Split.Panel2
+            // Split.Panel1
             // 
-            this.Split.Panel2.Controls.Add(this.btnStore);
-            this.Split.Panel2.Controls.Add(this.btnRevert);
-            this.Split.Panel2.Controls.Add(this.btnPrevious);
-            this.Split.Panel2.Controls.Add(this.btnNext);
-            this.Split.Size = new System.Drawing.Size(232, 147);
-            this.Split.SplitterDistance = 113;
+            this.Split.Panel1.Controls.Add(this.tbxName);
+            this.Split.Panel1.Controls.Add(this.btnStore);
+            this.Split.Panel1.Controls.Add(this.btnPrevious);
+            this.Split.Panel1.Controls.Add(this.btnRevert);
+            this.Split.Panel1.Controls.Add(this.btnNext);
+            this.Split.Size = new System.Drawing.Size(320, 240);
+            this.Split.SplitterDistance = 31;
             this.Split.TabIndex = 5;
+            // 
+            // tbxName
+            // 
+            this.tbxName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbxName.Location = new System.Drawing.Point(3, 5);
+            this.tbxName.Name = "tbxName";
+            this.tbxName.Size = new System.Drawing.Size(104, 20);
+            this.tbxName.TabIndex = 4;
             // 
             // EntryEditorCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.Split);
-            this.MinimumSize = new System.Drawing.Size(232, 147);
+            this.MinimumSize = new System.Drawing.Size(320, 240);
             this.Name = "EntryEditorCtrl";
-            this.Size = new System.Drawing.Size(232, 147);
-            this.Split.Panel2.ResumeLayout(false);
+            this.Size = new System.Drawing.Size(320, 240);
+            this.Split.Panel1.ResumeLayout(false);
+            this.Split.Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Split)).EndInit();
             this.Split.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -117,5 +131,6 @@
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPrevious;
         private System.Windows.Forms.SplitContainer Split;
+        private System.Windows.Forms.TextBox tbxName;
     }
 }

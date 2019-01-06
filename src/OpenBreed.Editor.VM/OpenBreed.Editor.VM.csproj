@@ -73,7 +73,6 @@
     </Compile>
     <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="Base\BindingListExtensions.cs" />
-    <Compile Include="CameraModel.cs" />
     <Compile Include="Database\DbTableSelectorVM.cs" />
     <Compile Include="Database\DbTableSelectorConnector.cs" />
     <Compile Include="Database\DbEditorVM.cs" />
@@ -104,6 +103,7 @@
     <Compile Include="EditorVMHelper.cs" />
     <Compile Include="EntryEditorVM.cs" />
     <Compile Include="EntryEditorBaseVM.cs" />
+    <Compile Include="EditableEntryVM.cs" />
     <Compile Include="IDialogProvider.cs" />
     <Compile Include="IFolderBrowserQuery.cs" />
     <Compile Include="Images\ImageEditorVM.cs" />

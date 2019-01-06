@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM
 {
-    public abstract class EntryEditorBaseVM<M,VM> : EntryEditorVM where VM : BaseViewModel, new()
+    public abstract class EntryEditorBaseVM<E,VM> : EntryEditorVM where VM : BaseViewModel, new() where E : IEntry
     {
         #region Private Fields
 
         private VM _editable;
-        private M _edited;
+        private E _edited;
+        private IRepository<E> _repository;
 
         #endregion Private Fields
 
@@ -37,7 +38,7 @@ namespace OpenBreed.Editor.VM
 
         #region Public Methods
 
-        public void EditModel(M model)
+        public void EditModel(E model)
         {
             //Unsubscribe to previous edited item changes
             if (Editable != null)
@@ -65,9 +66,20 @@ namespace OpenBreed.Editor.VM
             throw new NotImplementedException();
         }
 
+        public override void OnStore()
+        {
+            UpdateEntry(_editable, _edited);
+
+            //if (EditMode)
+            //    _repo.Update(_edited);
+            //else
+            //    _repo.Add(_edited);
+            //Done();
+        }
+
         public override void OpenEntry(string name)
         {
-            var model = GetModel(name);
+            var model = GetEntry(name);
             EditModel(model);
             EditableName = name;
         }
@@ -76,9 +88,13 @@ namespace OpenBreed.Editor.VM
 
         #region Protected Methods
 
-        protected abstract M GetModel(string name);
-        protected abstract void UpdateModel(VM source, M target);
-        protected abstract void UpdateVM(M source, VM target);
+        protected E GetEntry(string name)
+        {
+            return Root.UnitOfWork.GetRepository<E>().GetByName(name);
+        }
+
+        protected abstract void UpdateEntry(VM source, E target);
+        protected abstract void UpdateVM(E source, VM target);
 
         #endregion Protected Methods
 

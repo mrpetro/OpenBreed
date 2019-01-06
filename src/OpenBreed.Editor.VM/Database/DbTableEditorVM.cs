@@ -17,7 +17,7 @@ namespace OpenBreed.Editor.VM.Database
         internal DbTableEditorVM()
         {
 
-            Items = new BindingList<DbEntryVM>();
+            Items = new BindingList<Items.DbEntryVM>();
             Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
         }
 
@@ -25,7 +25,7 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Public Properties
 
-        public BindingList<DbEntryVM> Items { get; private set; }
+        public BindingList<Items.DbEntryVM> Items { get; private set; }
 
         #endregion Public Properties
 

@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Sounds
 {
-    public class SoundVM : BaseViewModel
+    public class SoundVM : EditableEntryVM
     {
 
         #region Private Fields
 
-        private string _name;
         private int _bitsPerSample;
         private int _sampleRate;
         private int _channels;
@@ -30,12 +29,6 @@ namespace OpenBreed.Editor.VM.Sounds
         #endregion Public Constructors
 
         #region Public Properties
-
-        public string Name
-        {
-            get { return _name; }
-            set { SetProperty(ref _name, value); }
-        }
 
         public int BitsPerSample
         {

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Palettes
 {
-    public class PaletteEditorVM : EntryEditorBaseVM<PaletteModel, PaletteVM>
+    public class PaletteEditorVM : EntryEditorBaseVM<IPaletteEntry, PaletteVM>
     {
         #region Private Fields
 
@@ -54,19 +54,15 @@ namespace OpenBreed.Editor.VM.Palettes
 
         public override string EditorName { get { return "Palette Editor"; } }
 
-        protected override PaletteModel GetModel(string name)
-        {
-            return Root.DataProvider.GetPalette(name);
-        }
-
-        protected override void UpdateModel(PaletteVM source, PaletteModel target)
+        protected override void UpdateEntry(PaletteVM source, IPaletteEntry target)
         {
             throw new NotImplementedException();
         }
 
-        protected override void UpdateVM(PaletteModel source, PaletteVM target)
+        protected override void UpdateVM(IPaletteEntry source, PaletteVM target)
         {
-            target.Restore(source);
+            var model = Root.DataProvider.GetPalette(source.Name);
+            target.Restore(model);
         }
 
         #endregion Public Properties

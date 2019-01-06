@@ -10,14 +10,8 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Palettes
 {
-    public class PaletteVM : BaseViewModel
+    public class PaletteVM : EditableEntryVM
     {
-        #region Private Fields
-
-        private string _name;
-
-        #endregion Private Fields
-
         #region Public Constructors
 
         public PaletteVM()
@@ -32,24 +26,18 @@ namespace OpenBreed.Editor.VM.Palettes
 
         public BindingList<Color> Colors { get; private set; }
 
-        public string Name
-        {
-            get { return _name; }
-            set { SetProperty(ref _name, value); }
-        }
-
         #endregion Public Properties
 
         #region Public Methods
 
-        public void Restore(PaletteModel palette)
+        public void Restore(PaletteModel model)
         {
-            _name = palette.Name;
+            Name = model.Name;
 
             Colors.RaiseListChangedEvents = false;
             Colors.Clear();
 
-            foreach (var color in palette.Data)
+            foreach (var color in model.Data)
                 Colors.Add(color);
 
             Colors.RaiseListChangedEvents = true;

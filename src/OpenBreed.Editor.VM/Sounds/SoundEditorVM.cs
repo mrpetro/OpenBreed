@@ -10,7 +10,7 @@ using OpenBreed.Editor.VM.Sounds;
 
 namespace OpenBreed.Editor.VM.Sounds
 {
-    public class SoundEditorVM : EntryEditorBaseVM<SoundModel, SoundVM>
+    public class SoundEditorVM : EntryEditorBaseVM<ISoundEntry, SoundVM>
     {
         #region Public Constructors
 
@@ -41,25 +41,24 @@ namespace OpenBreed.Editor.VM.Sounds
             pcmPlayer.PlaySync();
         }
 
-        protected override SoundModel GetModel(string name)
+        protected override void UpdateEntry(SoundVM source, ISoundEntry target)
         {
-            return Root.DataProvider.GetSound(name);
+            var model = Root.DataProvider.GetSound(target.Name);
+
+            model.BitsPerSample = source.BitsPerSample;
+            model.Channels = source.Channels;
+            model.SampleRate = source.SampleRate;
+            model.Data = source.Data;
         }
 
-        protected override void UpdateModel(SoundVM source, SoundModel target)
+        protected override void UpdateVM(ISoundEntry source, SoundVM target)
         {
-            target.BitsPerSample = source.BitsPerSample;
-            target.Channels = source.Channels;
-            target.SampleRate = source.SampleRate;
-            target.Data = source.Data;
-        }
+            var model = Root.DataProvider.GetSound(source.Name);
 
-        protected override void UpdateVM(SoundModel source, SoundVM target)
-        {
-            target.BitsPerSample = source.BitsPerSample;
-            target.Channels = source.Channels;
-            target.SampleRate = source.SampleRate;
-            target.Data = source.Data;
+            target.BitsPerSample = model.BitsPerSample;
+            target.Channels = model.Channels;
+            target.SampleRate = model.SampleRate;
+            target.Data = model.Data;
         }
 
         #endregion Private Methods

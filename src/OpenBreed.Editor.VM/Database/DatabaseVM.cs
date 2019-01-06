@@ -53,7 +53,7 @@ namespace OpenBreed.Editor.VM.Database
     {
         #region Private Fields
 
-        private DbEntryVM _openedItem;
+        private Items.DbEntryVM _openedItem;
         private ProjectState _state;
 
         #endregion Private Fields

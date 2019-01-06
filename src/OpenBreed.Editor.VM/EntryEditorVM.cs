@@ -9,10 +9,10 @@ namespace OpenBreed.Editor.VM
 {
     public abstract class EntryEditorVM : BaseViewModel
     {
-
         #region Private Fields
 
         private string _editableName;
+        private bool _EditMode;
 
         #endregion Private Fields
 
@@ -33,6 +33,11 @@ namespace OpenBreed.Editor.VM
             set { SetProperty(ref _editableName, value); }
         }
 
+        public bool EditMode
+        {
+            get { return _EditMode; }
+            set { SetProperty(ref _EditMode, value); }
+        }
         public abstract string EditorName { get; }
         public EditorVM Root { get; }
 
@@ -40,14 +45,7 @@ namespace OpenBreed.Editor.VM
 
         #region Public Methods
 
-        public void TryClose()
-        {
-
-        }
-
-        #endregion Public Methods
-
-        #region Internal Methods
+        public abstract void OnStore();
 
         public abstract void OpenEntry(string name);
 
@@ -55,7 +53,11 @@ namespace OpenBreed.Editor.VM
 
         public abstract void OpenPreviousEntry();
 
-        #endregion Internal Methods
+        public void TryClose()
+        {
 
+        }
+
+        #endregion Public Methods
     }
 }

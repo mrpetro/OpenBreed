@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Images
 {
-    public class ImageVM : BaseViewModel
+    public class ImageVM : EditableEntryVM
     {
         #region Private Fields
 

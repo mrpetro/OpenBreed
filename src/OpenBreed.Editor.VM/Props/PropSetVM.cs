@@ -14,13 +14,12 @@ using OpenBreed.Common.Props;
 
 namespace OpenBreed.Editor.VM.Props
 {
-    public class PropSetVM : BaseViewModel
+    public class PropSetVM : EditableEntryVM
     {
 
         #region Private Fields
 
         private const int PROP_SIZE = 32;
-        private string _name;
 
         #endregion Private Fields
 
@@ -49,13 +48,6 @@ namespace OpenBreed.Editor.VM.Props
         #region Public Properties
 
         public BindingList<PropVM> Items { get; private set; }
-
-        public string Name
-        {
-            get { return _name; }
-            set { SetProperty(ref _name, value); }
-        }
-
 
         public EditorVM Root { get; }
 

@@ -35,19 +35,16 @@ namespace OpenBreed.Editor.VM.Props
 
         #region Protected Methods
 
-        protected override IPropSetEntry GetModel(string name)
-        {
-            return Root.DataProvider.GetPropSet(name);
-        }
-
-        protected override void UpdateModel(PropSetVM source, IPropSetEntry target)
+        protected override void UpdateEntry(PropSetVM source, IPropSetEntry target)
         {
             throw new NotImplementedException();
         }
 
         protected override void UpdateVM(IPropSetEntry source, PropSetVM target)
         {
-            foreach (var property in source.Items)
+            var model = Root.DataProvider.GetPropSet(source.Name);
+
+            foreach (var property in model.Items)
             {
                 var newProp = target.CreateProp(property);
                 newProp.Load(property);

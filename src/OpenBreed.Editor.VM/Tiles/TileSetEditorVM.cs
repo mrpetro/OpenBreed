@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Tiles
 {
-    public class TileSetEditorVM : EntryEditorBaseVM<TileSetModel, TileSetVM>
+    public class TileSetEditorVM : EntryEditorBaseVM<ITileSetEntry, TileSetVM>
     {
         #region Public Constructors
 
@@ -33,20 +33,17 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #region Protected Methods
 
-        protected override TileSetModel GetModel(string name)
-        {
-            return Root.DataProvider.GetTileSet(name);
-        }
-
-        protected override void UpdateModel(TileSetVM source, TileSetModel target)
+        protected override void UpdateEntry(TileSetVM source, ITileSetEntry target)
         {
             throw new NotImplementedException();
         }
 
-        protected override void UpdateVM(TileSetModel source, TileSetVM target)
+        protected override void UpdateVM(ITileSetEntry source, TileSetVM target)
         {
-            target.TileSize = source.TileSize;
-            target.SetupTiles(source.Tiles);
+            var model = Root.DataProvider.GetTileSet(source.Name);
+
+            target.TileSize = model.TileSize;
+            target.SetupTiles(model.Tiles);
         }
 
         #endregion Protected Methods

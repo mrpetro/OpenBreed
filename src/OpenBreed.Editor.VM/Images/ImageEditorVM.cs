@@ -9,7 +9,7 @@ using OpenBreed.Common.Images;
 
 namespace OpenBreed.Editor.VM.Images
 {
-    public class ImageEditorVM : EntryEditorBaseVM<Image, ImageVM>
+    public class ImageEditorVM : EntryEditorBaseVM<IImageEntry, ImageVM>
     {
         #region Public Constructors
 
@@ -39,19 +39,14 @@ namespace OpenBreed.Editor.VM.Images
             gfx.DrawImage(Editable.Image, (int)x, (int)y, width, height);
         }
 
-        protected override Image GetModel(string name)
-        {
-            return Root.DataProvider.GetImage(name);
-        }
-
-        protected override void UpdateModel(ImageVM source, Image target)
+        protected override void UpdateEntry(ImageVM source, IImageEntry target)
         {
             throw new NotImplementedException();
         }
 
-        protected override void UpdateVM(Image source, ImageVM target)
+        protected override void UpdateVM(IImageEntry source, ImageVM target)
         {
-            target.Image = source;
+            target.Image = Root.DataProvider.GetImage(source.Name);
         }
 
         #endregion Public Methods

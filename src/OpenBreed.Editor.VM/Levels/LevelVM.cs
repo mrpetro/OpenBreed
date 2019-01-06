@@ -18,7 +18,7 @@ using OpenBreed.Common.Props;
 
 namespace OpenBreed.Editor.VM.Levels
 {
-    public class LevelVM : BaseViewModel
+    public class LevelVM : EditableEntryVM
     {
 
         #region Private Fields

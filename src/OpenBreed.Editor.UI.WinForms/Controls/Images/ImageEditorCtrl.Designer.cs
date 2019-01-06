@@ -30,11 +30,12 @@
         {
             this.SuspendLayout();
             // 
-            // ImageViewerCtrl
+            // ImageEditorCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "ImageViewerCtrl";
+            this.Name = "ImageEditorCtrl";
+            this.Size = new System.Drawing.Size(313, 252);
             this.ResumeLayout(false);
 
         }
