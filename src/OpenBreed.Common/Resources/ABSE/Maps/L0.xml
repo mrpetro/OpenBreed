@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<LevelDef Id="1" Name="L0" >
-  <AssetRef>L0MA</AssetRef>
-  <TileSetRef>LABM</TileSetRef>
-  <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
-  <SpriteSetRefs>
-  </SpriteSetRefs>
-</LevelDef>

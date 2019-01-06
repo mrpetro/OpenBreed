@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<LevelDef Id="1" Name="L1" >
-  <AssetRef>L1MA</AssetRef>
-  <TileSetRef>L1BM</TileSetRef>
-  <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
-  <SpriteSetRefs>
-  </SpriteSetRefs>
-</LevelDef>
