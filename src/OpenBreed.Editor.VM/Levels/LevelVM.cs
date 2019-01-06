@@ -3,7 +3,7 @@ using OpenBreed.Common.Maps;
 using OpenBreed.Common.Palettes;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Palettes;
-using OpenBreed.Common.Sources;
+using OpenBreed.Common.Assets;
 using System;
 using System.IO;
 using System.Linq;
@@ -27,7 +27,7 @@ namespace OpenBreed.Editor.VM.Levels
 
         private bool _isModified;
         private PropSetVM _propSet;
-        private SourceBase _source = null;
+        private AssetBase _source = null;
         private string _title;
 
         #endregion Private Fields
@@ -81,7 +81,7 @@ namespace OpenBreed.Editor.VM.Levels
 
         public EditorVM Root { get; }
 
-        public SourceBase Source
+        public AssetBase Source
         {
             get { return _source; }
             set { SetProperty(ref _source, value); }
@@ -144,7 +144,7 @@ namespace OpenBreed.Editor.VM.Levels
             //Source.Save(CurrentMap);
         }
 
-        public void SaveAs(SourceBase newSource)
+        public void SaveAs(AssetBase newSource)
         {
             //OnSaving(new EventArgs());
             //Source = newSource;
@@ -243,9 +243,9 @@ namespace OpenBreed.Editor.VM.Levels
 
         //internal void Load(LevelDef levelDef)
         //{
-        //    var asset = Root.DataProvider.AssetsProvider.GetAsset(levelDef.SourceRef);
+        //    var asset = Root.DataProvider.AssetsProvider.GetAsset(levelDef.AssetRef);
         //    if (asset == null)
-        //        throw new Exception("Level source error: " + levelDef.SourceRef);
+        //        throw new Exception("Level source error: " + levelDef.AssetRef);
 
         //    var model = Root.DataProvider.FormatMan.Load(asset, levelDef.Format) as MapModel;
         //    Source = asset;

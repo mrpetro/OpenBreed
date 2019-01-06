@@ -10,14 +10,8 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database
 {
-    public class DatabaseTableSelectorVM : BaseViewModel
+    public class DbTableSelectorVM : BaseViewModel
     {
-
-        #region Public Fields
-
-        public readonly DbTablesEditorVM Parent;
-
-        #endregion Public Fields
 
         #region Private Fields
 
@@ -28,10 +22,8 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Internal Constructors
 
-        internal DatabaseTableSelectorVM(DbTablesEditorVM parent)
+        internal DbTableSelectorVM()
         {
-            Parent = parent;
-
             Items = new BindingList<DatabaseTableVM>();
             Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
 
@@ -58,38 +50,7 @@ namespace OpenBreed.Editor.VM.Database
 
         #endregion Public Properties
 
-        #region Public Methods
-
-        public void Connect()
-        {
-            Parent.Root.PropertyChanged += Root_PropertyChanged;
-        }
-
-        #endregion Public Methods
-
         #region Private Methods
-
-        private void OnDatabaseChanged(DatabaseVM database)
-        {
-            if (Parent.Root.Database != null)
-                UpdateWithDatabaseItems(database);
-            else
-                UpdateWithNoItems();
-        }
-
-        private void Root_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            var editor = sender as EditorVM;
-
-            switch (e.PropertyName)
-            {
-                case nameof(editor.Database):
-                    OnDatabaseChanged(editor.Database);
-                    break;
-                default:
-                    break;
-            }
-        }
 
         private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -123,23 +84,6 @@ namespace OpenBreed.Editor.VM.Database
                 CurrentItem = null;
             else
                 CurrentItem = Items[CurrentIndex];
-        }
-
-
-        private void UpdateWithDatabaseItems(DatabaseVM database)
-        {
-            Items.UpdateAfter(() =>
-            {
-                Items.Clear();
-                foreach (var item in database.GetTables())
-                {
-                    Items.Add(item);
-                }
-            });
-        }
-        private void UpdateWithNoItems()
-        {
-            Items.Clear();
         }
 
         #endregion Private Methods

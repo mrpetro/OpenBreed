@@ -1,4 +1,6 @@
 ﻿using OpenBreed.Editor.VM.Base;
+using OpenBreed.Editor.VM.Database.Items;
+using OpenBreed.Editor.VM.Database.Tables;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,29 +10,25 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database
 {
-    public class DbTablesEditorVM : BaseViewModel
+    public class DbTableEditorVM : BaseViewModel
     {
-
-        #region Public Fields
-
-        #endregion Public Fields
-
         #region Internal Constructors
 
-        internal DbTablesEditorVM()
+        internal DbTableEditorVM()
         {
-            DbTableSelector = new DbTableSelectorVM();
-            DbTableViewer = new DbTableEditorVM();
+
+            Items = new BindingList<DbEntryVM>();
+            Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
         }
 
         #endregion Internal Constructors
 
         #region Public Properties
 
-        public DbTableSelectorVM DbTableSelector { get; private set; }
-        public DbTableEditorVM DbTableViewer { get; private set; }
+        public BindingList<DbEntryVM> Items { get; private set; }
 
         #endregion Public Properties
+
 
     }
 }

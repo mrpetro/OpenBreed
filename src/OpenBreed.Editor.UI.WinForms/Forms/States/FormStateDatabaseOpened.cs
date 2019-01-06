@@ -52,9 +52,9 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             _dbEditorView.Dock = DockStyle.Fill;
 
             FileCloseDatabaseToolStripMenuItem = new ToolStripMenuItem("Close database");
-            FileCloseDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.TryCloseDatabase();
+            FileCloseDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.DbEditor.TryCloseDatabase();
             FileOpenDatabaseToolStripMenuItem = new ToolStripMenuItem("Open Database...");
-            FileOpenDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.TryOpenDatabase();
+            FileOpenDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.DbEditor.TryOpenDatabase();
             ExitToolStripMenuItem = new ToolStripMenuItem("Exit");
             ExitToolStripMenuItem.Click += (s, a) => MainForm.Close();
             //ViewMapBodyMenuItem = new ToolStripMenuItem("Map body");
@@ -128,10 +128,10 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
 
         internal override void Setup()
         {
-            if (MainForm.VM.Database == null)
+            if (MainForm.VM.DbEditor.CurrentDb == null)
                 throw new InvalidOperationException("No current database!");
 
-            MainForm.VM.Database.PropertyChanged += Database_PropertyChanged;
+            MainForm.VM.DbEditor.CurrentDb.PropertyChanged += Database_PropertyChanged;
 
             //Setup the File menu
             MainForm.FileToolStripMenuItem.DropDownItems.Add(FileOpenDatabaseToolStripMenuItem);
@@ -157,12 +157,12 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             //MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewToolsMenuItem);
             MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewDatabaseMenuItem);
 
-            MainForm.Text = $"{MainForm.APP_NAME} - {MainForm.VM.Database.Name}";
+            MainForm.Text = $"{MainForm.APP_NAME} - {MainForm.VM.DbEditor.CurrentDb.Name}";
 
             MainForm.SuspendLayout();
             MainForm.Controls.Add(_dbEditorView);
             MainForm.Controls.SetChildIndex(_dbEditorView, 0);
-            _dbEditorView.Initialize(MainForm.VM.Database);
+            _dbEditorView.Initialize(MainForm.VM.DbEditor);
             MainForm.ResumeLayout();
 
             //_projectView.ActiveContentChanged += new EventHandler(ProjectView_ActiveContentChanged);

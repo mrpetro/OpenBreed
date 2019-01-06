@@ -13,7 +13,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
 {
     public partial class DatabaseTableSelectorCtrl : UserControl
     {
-        private DatabaseTableSelectorVM _vm;
+        private DbTableSelectorVM _vm;
 
         public DatabaseTableSelectorCtrl()
         {
@@ -22,7 +22,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
             cbxTables.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
-        internal void Initialize(DatabaseTableSelectorVM vm)
+        internal void Initialize(DbTableSelectorVM vm)
         {
             _vm = vm;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OpenBreed.Editor.VM;
-using OpenBreed.Common.Sources;
+using OpenBreed.Common.Assets;
 using OpenBreed.Editor.VM.Tiles;
 using OpenBreed.Editor.VM.Levels;
 using OpenBreed.Editor.VM.Props;
@@ -108,8 +108,8 @@ namespace OpenBreed.Editor.VM.Database
                 return new DbSoundEntryVM(this, Root.SoundEditor);
             else if (entry is ILevelEntry)
                 return new DbLevelEntryVM(this, null);
-            else if (entry is ISourceEntry)
-                return new DbSourceEntryVM(this, null);
+            else if (entry is IAssetEntry)
+                return new DbAssetEntryVM(this, null);
             else if (entry is IPropSetEntry)
                 return new DbPropSetEntryVM(this, Root.PropSetEditor);
             else if (entry is ITileSetEntry)
@@ -132,8 +132,8 @@ namespace OpenBreed.Editor.VM.Database
                 return new DatabaseLevelTableVM(this);
             else if (repository is IRepository<IPropSetEntry>)
                 return new DatabasePropertySetTableVM(this);
-            else if (repository is IRepository<ISourceEntry>)
-                return new DatabaseSourceTableVM(this);
+            else if (repository is IRepository<IAssetEntry>)
+                return new DatabaseAssetTableVM(this);
             else if (repository is IRepository<ITileSetEntry>)
                 return new DatabaseTileSetTableVM(this);
             else if (repository is IRepository<ISpriteSetEntry>)

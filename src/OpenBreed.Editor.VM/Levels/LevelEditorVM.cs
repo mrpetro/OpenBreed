@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Editor.VM.Base;
-using OpenBreed.Common.Sources;
+
 using System;
 using System.Collections.Generic;
 using System.Drawing;

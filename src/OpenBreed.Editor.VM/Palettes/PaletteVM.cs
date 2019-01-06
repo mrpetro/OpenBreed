@@ -7,7 +7,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Common.Sources;
 
 namespace OpenBreed.Editor.VM.Palettes
 {

@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Sources;
+using OpenBreed.Common.Assets;
 using OpenBreed.Editor.VM.Database.Items;
 using System;
 using System.Collections.Generic;
@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database.Tables
 {
-    public class DatabaseSourceTableVM : DatabaseTableVM
+    public class DatabaseAssetTableVM : DatabaseTableVM
     {
 
         #region Private Fields
 
-        private IRepository<ISourceEntry> _repository;
+        private IRepository<IAssetEntry> _repository;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DatabaseSourceTableVM(DatabaseVM owner) : base(owner)
+        public DatabaseAssetTableVM(DatabaseVM owner) : base(owner)
         {
         }
 
@@ -28,7 +28,7 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         #region Public Properties
 
-        public override string Name { get { return "Sources"; } }
+        public override string Name { get { return "Assets"; } }
 
         #endregion Public Properties
 
@@ -46,7 +46,7 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         public override void Load(IRepository repository)
         {
-            _repository = repository as IRepository<ISourceEntry> ?? throw new InvalidOperationException($"Expected {nameof(IRepository<ISourceEntry>)}");
+            _repository = repository as IRepository<IAssetEntry> ?? throw new InvalidOperationException($"Expected {nameof(IRepository<IAssetEntry>)}");
         }
 
         #endregion Public Methods

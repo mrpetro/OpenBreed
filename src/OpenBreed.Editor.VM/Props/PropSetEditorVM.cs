@@ -31,11 +31,6 @@ namespace OpenBreed.Editor.VM.Props
 
         #region Internal Methods
 
-        internal void Connect()
-        {
-
-        }
-
         #endregion Internal Methods
 
         #region Protected Methods

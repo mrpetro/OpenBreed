@@ -52,7 +52,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         private PropSetEditorView _propSetEditorView = new PropSetEditorView();
         private TileSetEditorView _tileSetEditorView = new TileSetEditorView();
         private bool _saveLayout = true;
-        private DatabaseVM _vm;
+        private DbEditorVM _vm;
 
         #endregion Private Fields
 
@@ -170,7 +170,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             CloseSoundEditorView();
         }
 
-        public void Initialize(DatabaseVM vm)
+        public void Initialize(DbEditorVM vm)
         {
             if (vm == null)
                 throw new ArgumentNullException(nameof(vm));
@@ -208,7 +208,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             if (_databaseView == null)
                 _databaseView = new DbTablesEditorView();
 
-            _databaseView.Initialize(_vm.Root.DbTablesEditor);
+            _databaseView.Initialize(_vm.DbTablesEditor);
             _databaseView.Show(this, DockState.DockLeft);
         }
 

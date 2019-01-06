@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.XmlDatabase;
 using OpenBreed.Common.XmlDatabase.Items.Sources;
-using OpenBreed.Common.Sources;
+using OpenBreed.Common.Assets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,17 +10,17 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database.Items
 {
-    public class DbSourceEntryVM : DbEntryVM
+    public class DbAssetEntryVM : DbEntryVM
     {
         #region Private Fields
 
-        private ISourceEntry _entry;
+        private IAssetEntry _entry;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DbSourceEntryVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
+        public DbAssetEntryVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
         {
         }
 
@@ -30,7 +30,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         public override void Load(IEntry entry)
         {
-            _entry = entry as ISourceEntry ?? throw new InvalidOperationException($"Expected {nameof(ISourceEntry)}");
+            _entry = entry as IAssetEntry ?? throw new InvalidOperationException($"Expected {nameof(IAssetEntry)}");
 
             base.Load(entry);
         }

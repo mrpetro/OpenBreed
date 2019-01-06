@@ -34,8 +34,8 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
         {
             _vm = vm;
 
-            TableSelector.Initialize(_vm.TableSelector);
-            TableViewer.Initialize(_vm.TableViewer);
+            TableSelector.Initialize(_vm.DbTableSelector);
+            TableViewer.Initialize(_vm.DbTableViewer);
         }
 
         #endregion Public Methods

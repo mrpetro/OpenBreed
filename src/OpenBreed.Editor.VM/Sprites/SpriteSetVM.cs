@@ -2,7 +2,6 @@
 using OpenBreed.Common.Sprites;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Palettes;
-using OpenBreed.Common.Sources;
 using System.ComponentModel;
 using System.Linq;
 using System;

@@ -1,16 +1,20 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Common.XmlDatabase;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Database.Items;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database
 {
-    class DbEditorVM : BaseViewModel
+    public class DbEditorVM : BaseViewModel
     {
+
+        public DbTablesEditorVM DbTablesEditor { get; }
 
         #region Private Fields
 
@@ -19,15 +23,16 @@ namespace OpenBreed.Editor.VM.Database
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
-        internal DbEditorVM(EditorVM root, IUnitOfWork unitOfWork)
+        public DbEditorVM(EditorVM root)
         {
             Root = root;
-            UnitOfWork = unitOfWork;
+
+            DbTablesEditor = new DbTablesEditorVM();
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Properties
 
@@ -52,11 +57,37 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Internal Properties
 
-        internal IUnitOfWork UnitOfWork { get; }
-
         #endregion Internal Properties
 
-        #region Internal Methods
+        #region Public Methods
+
+        public DatabaseVM OpenXmlDatabase(string xmlFilePath)
+        {
+            var xmlDatabase = new XmlDatabase(xmlFilePath, DatabaseMode.Read);
+            Root.UnitOfWork = new XmlUnitOfWork(xmlDatabase);
+            Root.DataProvider = new DataProvider(Root.UnitOfWork);
+
+            return new DatabaseVM(this.Root, Root.UnitOfWork);
+        }
+
+        public void SaveDatabase(string filePath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool TryCloseDatabase()
+        {
+            return DbEditorVMHelper.TryCloseDatabase(this);
+        }
+
+
+
+        public void TryOpenDatabase()
+        {
+            DbEditorVMHelper.TryOpenDatabase(this);
+        }
+
+        #endregion Public Methods
 
         //internal DbEntryVM CreateItem(IEntry entry)
         //{
@@ -111,6 +142,8 @@ namespace OpenBreed.Editor.VM.Database
         //        yield return tableVM;
         //    }
         //}
+
+        #region Internal Methods
 
         internal void Save()
         {

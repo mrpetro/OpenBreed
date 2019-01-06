@@ -16,7 +16,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
     {
         #region Private Fields
 
-        private DatabaseTableViewerVM _vm;
+        private DbTableEditorVM _vm;
 
         #endregion Private Fields
 
@@ -33,7 +33,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
             DGV.CellContentClick += DGV_CellContentClick;
         }
 
-        public void Initialize(DatabaseTableViewerVM vm)
+        public void Initialize(DbTableEditorVM vm)
         {
             _vm = vm;
 

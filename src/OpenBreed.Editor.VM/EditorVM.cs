@@ -22,7 +22,6 @@ using System.ComponentModel;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Images;
 using OpenBreed.Common.Formats;
-using OpenBreed.Common.Sources;
 using OpenBreed.Common.Tiles;
 using OpenBreed.Common.Sprites;
 using OpenBreed.Common.Props;
@@ -44,7 +43,6 @@ namespace OpenBreed.Editor.VM
 
         #region Private Fields
 
-        private DatabaseVM _database;
         private EditorState _state;
 
         #endregion Private Fields
@@ -58,35 +56,31 @@ namespace OpenBreed.Editor.VM
             Settings = new SettingsMan();
             ToolsMan = new ToolsMan();
 
+            DbEditor = new DbEditorVM(this);
             TileSetEditor = new TileSetEditorVM(this);
             PropSetEditor = new PropSetEditorVM(this);
             PaletteEditor = new PaletteEditorVM(this);
-            DbTablesEditor = new DbTablesEditorVM(this);
             SpriteViewer = new SpriteViewerVM(this);
             ImageEditor = new ImageEditorVM(this);
             SoundEditor = new SoundEditorVM(this);
             LevelEditor = new LevelEditorVM(this);
-            DataSourceProvider.ExpandVariables = Settings.ExpandVariables;
+            AssetsDataProvider.ExpandVariables = Settings.ExpandVariables;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public DatabaseVM Database
-        {
-            get { return _database; }
-            set { SetProperty(ref _database, value); }
-        }
+        public DbEditorVM DbEditor { get; }
 
-        public DbTablesEditorVM DbTablesEditor { get; }
         public IDialogProvider DialogProvider { get; }
-        public DataProvider DataProvider { get; private set; }
+        public DataProvider DataProvider { get; set; }
         public ImageEditorVM ImageEditor { get; }
         public SoundEditorVM SoundEditor { get; }
         public LevelEditorVM LevelEditor { get; }
         public PaletteEditorVM PaletteEditor { get; }
         public PropSetEditorVM PropSetEditor { get; }
+        public TileSetEditorVM TileSetEditor { get; }
         public SettingsMan Settings { get; private set; }
         //public SourceMan SourceMan { get; }
 
@@ -97,7 +91,6 @@ namespace OpenBreed.Editor.VM
             set { SetProperty(ref _state, value); }
         }
 
-        public TileSetEditorVM TileSetEditor { get; }
         public ToolsMan ToolsMan { get; }
         public IUnitOfWork UnitOfWork { get; internal set; }
 
@@ -111,19 +104,6 @@ namespace OpenBreed.Editor.VM
             return new LevelVM(this);
         }
 
-        internal SoundVM CreateSound()
-        {
-            return new SoundVM();
-        }
-
-        private void UpdateSound(SoundVM source, SoundModel target)
-        {
-            target.BitsPerSample = source.BitsPerSample;
-            target.Channels = source.Channels;
-            target.SampleRate = source.SampleRate;
-            target.Data = source.Data;
-        }
-
         internal TileSetVM CreateTileSet(TileSetModel tileSet)
         {
             return new TileSetVM(tileSet);
@@ -132,12 +112,6 @@ namespace OpenBreed.Editor.VM
         internal SpriteSetVM CreateSpiteSet(SpriteSetModel spriteSet)
         {
             return new SpriteSetVM(this, spriteSet);
-        }
-
-        public PaletteVM CreatePalette(PaletteModel palette)
-        {
-            var paletteVM = new PaletteVM();
-            return paletteVM;
         }
 
         internal PropSetVM CreatePropSet(IPropSetEntry propSet)
@@ -155,15 +129,6 @@ namespace OpenBreed.Editor.VM
             Settings.Store();
         }
 
-        public DatabaseVM OpenXmlDatabase(string xmlFilePath)
-        {
-            var xmlDatabase = new XmlDatabase(xmlFilePath, DatabaseMode.Read);
-            UnitOfWork = new XmlUnitOfWork(xmlDatabase);
-            DataProvider = new DataProvider(UnitOfWork);
-
-            return new DatabaseVM(this, UnitOfWork);
-        }
-
         public void Run()
         {
             try
@@ -177,24 +142,9 @@ namespace OpenBreed.Editor.VM
             }
         }
 
-        public void SaveDatabase(string filePath)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool TryCloseDatabase()
-        {
-            return EditorVMHelper.TryCloseDatabase(this);
-        }
-
         public bool TryExit()
         {
             return EditorVMHelper.TryExit(this);
-        }
-
-        public void TryOpenDatabase()
-        {
-            EditorVMHelper.TryOpenDatabase(this);
         }
 
         public void TryRunABTAGame()
@@ -217,8 +167,11 @@ namespace OpenBreed.Editor.VM
 
         private void Initialize()
         {
-            PropSetEditor.Connect();
-            DbTablesEditor.Connect();
+            var dbTableSelectorConnector = new DbTableSelectorConnector(DbEditor.DbTablesEditor.DbTableSelector);
+            dbTableSelectorConnector.ConnectTo(DbEditor);
+            var dbTableEditorConnector = new DbTableEditorConnector(DbEditor.DbTablesEditor.DbTableViewer);
+            dbTableEditorConnector.ConnectTo(DbEditor.DbTablesEditor.DbTableSelector);
+
             LevelEditor.Connect();
             SpriteViewer.Connect();
 

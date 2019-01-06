@@ -4,7 +4,6 @@ using OpenBreed.Common.Maps;
 using OpenBreed.Common.Palettes;
 using OpenBreed.Common.Props;
 using OpenBreed.Common.Sounds;
-using OpenBreed.Common.Sources;
 using OpenBreed.Common.Sprites;
 using OpenBreed.Common.Tiles;
 using OpenBreed.Editor.VM.Database.Items;

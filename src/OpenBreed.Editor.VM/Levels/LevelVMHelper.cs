@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.Sources;
+﻿using OpenBreed.Common.Assets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +9,12 @@ namespace OpenBreed.Editor.VM.Levels
 {
     internal static class LevelVMHelper
     {
-        internal static void Load(LevelVM map, ISourceEntry sourceDef)
+        internal static void Load(LevelVM map, IAssetEntry sourceDef)
         {
 
         }
 
-        internal static void SaveAs(LevelVM map, SourceBase newSource)
+        internal static void SaveAs(LevelVM map, AssetBase newSource)
         {
 
         }

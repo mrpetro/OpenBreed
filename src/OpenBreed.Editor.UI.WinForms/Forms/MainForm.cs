@@ -79,14 +79,14 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
             VM = vm;
 
-            VM.PropertyChanged += VM_PropertyChanged;
+            VM.DbEditor.PropertyChanged += VM_PropertyChanged;
         }
 
         private void VM_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
-                case nameof(VM.Database):
+                case nameof(VM.DbEditor.CurrentDb):
                     OnDatabaseChanged();
                     break;
                 default:
@@ -96,7 +96,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
         private void OnDatabaseChanged()
         {
-            if (VM.Database != null)
+            if (VM.DbEditor.CurrentDb != null)
                 State = DatabaseOpenedState;
             else
                 State = InitialState;
