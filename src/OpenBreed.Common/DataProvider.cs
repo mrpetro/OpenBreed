@@ -4,7 +4,7 @@ using OpenBreed.Common.Maps;
 using OpenBreed.Common.Palettes;
 using OpenBreed.Common.Props;
 using OpenBreed.Common.Sounds;
-using OpenBreed.Common.Sources;
+using OpenBreed.Common.Assets;
 using OpenBreed.Common.Sprites;
 using OpenBreed.Common.Tiles;
 using System;
@@ -18,7 +18,7 @@ namespace OpenBreed.Common
 {
     public class DataProvider
     {
-        public DataSourceProvider AssetsProvider { get; }
+        public AssetsDataProvider AssetsProvider { get; }
 
         #region Private Fields
 
@@ -32,7 +32,7 @@ namespace OpenBreed.Common
         {
             _unitOfWork = unitOfWork;
 
-            AssetsProvider = new DataSourceProvider(_unitOfWork);
+            AssetsProvider = new AssetsDataProvider(_unitOfWork);
 
             Initialize();
         }
@@ -53,7 +53,7 @@ namespace OpenBreed.Common
             if (entry == null)
                 throw new Exception("Image error: " + name);
 
-            var asset = AssetsProvider.GetAsset(entry.SourceRef);
+            var asset = AssetsProvider.GetAsset(entry.AssetRef);
 
             return FormatMan.Load(asset, entry.Format) as Image;
         }
@@ -64,7 +64,7 @@ namespace OpenBreed.Common
             if (entry == null)
                 throw new Exception("Palette error: " + name);
 
-            var asset = AssetsProvider.GetAsset(entry.SourceRef);
+            var asset = AssetsProvider.GetAsset(entry.AssetRef);
 
             return FormatMan.Load(asset, entry.Format) as PaletteModel;
         }
@@ -75,7 +75,7 @@ namespace OpenBreed.Common
             if (entry == null)
                 throw new Exception("Sound error: " + name);
 
-            var asset = AssetsProvider.GetAsset(entry.SourceRef);
+            var asset = AssetsProvider.GetAsset(entry.AssetRef);
 
             return FormatMan.Load(asset, entry.Format) as SoundModel;
         }
@@ -89,7 +89,7 @@ namespace OpenBreed.Common
             return entry;
         }
 
-        public SourceBase GetSource(string name)
+        public AssetBase GetSource(string name)
         {
             return null;
         }
@@ -100,7 +100,7 @@ namespace OpenBreed.Common
             if (entry == null)
                 throw new Exception("SpriteSet error: " + name);
 
-            var asset = AssetsProvider.GetAsset(entry.SourceRef);
+            var asset = AssetsProvider.GetAsset(entry.AssetRef);
 
             return FormatMan.Load(asset, entry.Format) as SpriteSetModel;
         }
@@ -111,7 +111,7 @@ namespace OpenBreed.Common
             if (entry == null)
                 throw new Exception("TileSet error: " + name);
 
-            var asset = AssetsProvider.GetAsset(entry.SourceRef);
+            var asset = AssetsProvider.GetAsset(entry.AssetRef);
 
             return FormatMan.Load(asset, entry.Format) as TileSetModel;
         }
@@ -122,7 +122,7 @@ namespace OpenBreed.Common
             if (entry == null)
                 throw new Exception("Level error: " + name);
 
-            var asset = AssetsProvider.GetAsset(entry.SourceRef);
+            var asset = AssetsProvider.GetAsset(entry.AssetRef);
 
             var level = new LevelModel();
             level.Map = FormatMan.Load(asset, entry.Format) as MapModel;

@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.Sources;
+﻿using OpenBreed.Common.Assets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ namespace OpenBreed.Common.Formats
 {
     public interface IDataFormatType
     {
-        object Load(SourceBase sourceModel, List<FormatParameter> parameters);
-        void Save(SourceBase sourceModel, object model);
+        object Load(AssetBase asset, List<FormatParameter> parameters);
+        void Save(AssetBase asset, object model);
     }
 }

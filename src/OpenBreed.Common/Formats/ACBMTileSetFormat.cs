@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.Sources;
+﻿using OpenBreed.Common.Assets;
 using OpenBreed.Common.Tiles.Builders;
 using OpenBreed.Common.Tiles.Readers.ACBM;
 using System;
@@ -16,20 +16,20 @@ namespace OpenBreed.Common.Formats
         {
         }
 
-        public object Load(SourceBase source, List<FormatParameter> parameters)
+        public object Load(AssetBase asset, List<FormatParameter> parameters)
         {
             var tileSize = (int)parameters.FirstOrDefault(item => item.Name =="TILE_SIZE").Value;
             var bitPlanesNo = (int)parameters.FirstOrDefault(item => item.Name == "BIT_PLANES_NO").Value; 
 
             //Remember to set source stream to begining
-            source.Stream.Seek(0, SeekOrigin.Begin);
+            asset.Stream.Seek(0, SeekOrigin.Begin);
 
             var tileSetBuilder = TileSetBuilder.NewTileSet();
             var reader = new ACBMTileSetReader(tileSetBuilder, tileSize, bitPlanesNo);
-            return reader.Read(source.Stream);
+            return reader.Read(asset.Stream);
         }
 
-        public void Save(SourceBase source, object model)
+        public void Save(AssetBase source, object model)
         {
             throw new NotImplementedException("ACBMTileSet Write");
         }

@@ -33,7 +33,7 @@ namespace OpenBreed.Common.XmlDatabase.Items.Images
         }
 
         public long Id { get; set; }
-        public string SourceRef { get; set; }
+        public string AssetRef { get; set; }
 
         #endregion Public Properties
     }

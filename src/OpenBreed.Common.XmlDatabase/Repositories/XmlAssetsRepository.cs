@@ -8,28 +8,28 @@ using EPF;
 using OpenBreed.Common.Logging;
 using System.ComponentModel;
 using System.Globalization;
-using OpenBreed.Common.Sources;
+using OpenBreed.Common.Assets;
 using OpenBreed.Common.XmlDatabase.Tables.Sources;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
-    public class XmlSourcesRepository : IRepository<ISourceEntry>
+    public class XmlAssetsRepository : IRepository<IAssetEntry>
     {
         #region Private Fields
 
-        private readonly DatabaseSourceTableDef _table;
+        private readonly DatabaseAssetTableDef _table;
         private XmlDatabase _context;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public XmlSourcesRepository(IUnitOfWork unitOfWork, XmlDatabase context)
+        public XmlAssetsRepository(IUnitOfWork unitOfWork, XmlDatabase context)
         {
             UnitOfWork = unitOfWork;
             _context = context;
 
-            _table = _context.GetSourcesTable();
+            _table = _context.GetAssetsTable();
         }
 
         #endregion Public Constructors
@@ -43,41 +43,41 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Methods
 
-        public void Add(ISourceEntry entity)
+        public void Add(IAssetEntry entity)
         {
             throw new NotImplementedException();
         }
 
-        public ISourceEntry GetById(long id)
+        public IAssetEntry GetById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public ISourceEntry GetByName(string name)
+        public IAssetEntry GetByName(string name)
         {
-            var sourceDef = _table.Items.FirstOrDefault(item => item.Name == name);
-            if (sourceDef == null)
-                throw new Exception("No Source definition found with name: " + name);
+            var assetDef = _table.Items.FirstOrDefault(item => item.Name == name);
+            if (assetDef == null)
+                throw new Exception("No Asset definition found with name: " + name);
 
-            return sourceDef;
+            return assetDef;
         }
 
-        public ISourceEntry GetNextTo(ISourceEntry entry)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ISourceEntry GetPrevTo(ISourceEntry entry)
+        public IAssetEntry GetNextTo(IAssetEntry entry)
         {
             throw new NotImplementedException();
         }
 
-        public void Remove(ISourceEntry entity)
+        public IAssetEntry GetPrevTo(IAssetEntry entry)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(ISourceEntry entity)
+        public void Remove(IAssetEntry entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(IAssetEntry entity)
         {
             throw new NotImplementedException();
         }

@@ -9,7 +9,7 @@ namespace OpenBreed.Common.Tiles
 {
     public interface ITileSetEntry : IEntry
     {
-        string SourceRef { get; }
+        string AssetRef { get; }
         IFormatEntry Format { get; }
     }
 }

@@ -8,7 +8,7 @@ using OpenBreed.Common.XmlDatabase.Tables.Sources;
 using OpenBreed.Common.XmlDatabase.Tables.Sprites;
 using OpenBreed.Common.XmlDatabase.Tables.Tiles;
 using OpenBreed.Common.Formats;
-using OpenBreed.Common.Sources;
+using OpenBreed.Common.Assets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -121,12 +121,12 @@ namespace OpenBreed.Common.XmlDatabase
             return table;
         }
 
-        internal DatabaseSourceTableDef GetSourcesTable()
+        internal DatabaseAssetTableDef GetAssetsTable()
         {
-            var table = Data.Tables.OfType<DatabaseSourceTableDef>().FirstOrDefault();
+            var table = Data.Tables.OfType<DatabaseAssetTableDef>().FirstOrDefault();
             if (table == null)
             {
-                table = new DatabaseSourceTableDef();
+                table = new DatabaseAssetTableDef();
                 Data.Tables.Add(table);
             }
             return table;

@@ -1,70 +1,70 @@
 <?xml version="1.0"?>
 <DatabaseDef Name="ABHC" >
   <Tables>
-    <Sources>
+    <Assets>
       <Items>
-        <DirectoryFileSourceDef Name="L1MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L2MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L3MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L4MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L5MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L6MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L7MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L8MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L9MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="LAMA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="LBMA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="LCMA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="LDMA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="LEMA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="MMA1" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="MMA2" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="MMA3" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L1BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L2BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L3BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L4BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L5BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L6BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L7BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L8BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L9BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L1LP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L2LP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L6LP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="LALP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="CHAD" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="CHAR" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="ENDA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="ENDP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="ETXT" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="HPIC" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="IPIC" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="HSP1" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="HSP2" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="HSP3" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="HSP4" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L1BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L2BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L3BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L4BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L5BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L6BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L7BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L8BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="L9BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="LABO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="LBBO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="LCBO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="LDBO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="LEBO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileSourceDef Name="MPIC" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L1MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L2MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L3MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L4MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L5MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L6MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L7MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L8MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L9MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="LAMA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="LBMA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="LCMA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="LDMA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="LEMA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="MMA1" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="MMA2" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="MMA3" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L1BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L2BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L3BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L4BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L5BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L6BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L7BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L8BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L9BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L1LP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L2LP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L6LP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="LALP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="CHAD" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="CHAR" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="ENDA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="ENDP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="ETXT" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="HPIC" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="IPIC" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="HSP1" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="HSP2" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="HSP3" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="HSP4" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L1BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L2BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L3BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L4BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L5BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L6BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L7BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L8BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="L9BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="LABO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="LBBO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="LCBO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="LDBO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="LEBO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <DirectoryFileAsset Name="MPIC" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
       </Items>
-    </Sources>
+    </Assets>
     <Images>
       <Items>
         <Image Name="CHAD" Description="Characters statistics screens" >
-          <SourceRef>CHAD</SourceRef>
+          <AssetRef>CHAD</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >640</Parameter>
@@ -75,7 +75,7 @@
           </Format>
         </Image>
         <Image Name="CHAR" Description="Characters selection screen" >
-          <SourceRef>CHAR</SourceRef>
+          <AssetRef>CHAR</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -86,7 +86,7 @@
           </Format>
         </Image>
         <Image Name="ENDA" Description="End animation frames" >
-          <SourceRef>ENDA</SourceRef>
+          <AssetRef>ENDA</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -97,7 +97,7 @@
           </Format>
         </Image>
         <Image Name="ENDP" Description="End picture" >
-          <SourceRef>ENDP</SourceRef>
+          <AssetRef>ENDP</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -108,7 +108,7 @@
           </Format>
         </Image>
         <Image Name="HPIC" Description="Highscore picture" >
-          <SourceRef>HPIC</SourceRef>
+          <AssetRef>HPIC</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -119,7 +119,7 @@
           </Format>
         </Image>
         <Image Name="IPIC" Description="Intro picture" >
-          <SourceRef>IPIC</SourceRef>
+          <AssetRef>IPIC</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >640</Parameter>
@@ -130,7 +130,7 @@
           </Format>
         </Image>
         <Image Name="MPIC" Description="Menu picture" >
-          <SourceRef>MPIC</SourceRef>
+          <AssetRef>MPIC</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -141,7 +141,7 @@
           </Format>
         </Image>
         <Image Name="ETXT" Description="End text screen" >
-          <SourceRef>ETXT</SourceRef>
+          <AssetRef>ETXT</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -152,7 +152,7 @@
           </Format>
         </Image>
         <Image Name="HSP1" Description="Character 1 sprites" >
-          <SourceRef>HSP1</SourceRef>
+          <AssetRef>HSP1</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -163,7 +163,7 @@
           </Format>
         </Image>
         <Image Name="HSP2" Description="Character 2 sprites" >
-          <SourceRef>HSP2</SourceRef>
+          <AssetRef>HSP2</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -174,7 +174,7 @@
           </Format>
         </Image>
         <Image Name="HSP3" Description="Character 3 sprites" >
-          <SourceRef>HSP3</SourceRef>
+          <AssetRef>HSP3</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -185,7 +185,7 @@
           </Format>
         </Image>
         <Image Name="HSP4" Description="Character 4 sprites" >
-          <SourceRef>HSP4</SourceRef>
+          <AssetRef>HSP4</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -196,7 +196,7 @@
           </Format>
         </Image>
         <Image Name="L1BO" Description="Level 1 sprites" >
-          <SourceRef>L1BO</SourceRef>
+          <AssetRef>L1BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -207,7 +207,7 @@
           </Format>
         </Image>
         <Image Name="L2BO" Description="Level 2 sprites" >
-          <SourceRef>L2BO</SourceRef>
+          <AssetRef>L2BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -218,7 +218,7 @@
           </Format>
         </Image>
         <Image Name="L3BO" Description="Level 3 sprites" >
-          <SourceRef>L3BO</SourceRef>
+          <AssetRef>L3BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -229,7 +229,7 @@
           </Format>
         </Image>
         <Image Name="L4BO" Description="Level 4 sprites" >
-          <SourceRef>L4BO</SourceRef>
+          <AssetRef>L4BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -240,7 +240,7 @@
           </Format>
         </Image>
         <Image Name="L5BO" Description="Level 5 sprites" >
-          <SourceRef>L5BO</SourceRef>
+          <AssetRef>L5BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -251,7 +251,7 @@
           </Format>
         </Image>
         <Image Name="L6BO" Description="Level 6 sprites" >
-          <SourceRef>L6BO</SourceRef>
+          <AssetRef>L6BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -262,7 +262,7 @@
           </Format>
         </Image>
         <Image Name="L7BO" Description="Level 7 sprites" >
-          <SourceRef>L7BO</SourceRef>
+          <AssetRef>L7BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -273,7 +273,7 @@
           </Format>
         </Image>
         <Image Name="L8BO" Description="Level 8 sprites" >
-          <SourceRef>L8BO</SourceRef>
+          <AssetRef>L8BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -284,7 +284,7 @@
           </Format>
         </Image>
         <Image Name="L9BO" Description="Level 9 sprites" >
-          <SourceRef>L9BO</SourceRef>
+          <AssetRef>L9BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -295,7 +295,7 @@
           </Format>
         </Image>
         <Image Name="LABO" Description="Level A sprites" >
-          <SourceRef>LABO</SourceRef>
+          <AssetRef>LABO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -306,7 +306,7 @@
           </Format>
         </Image>
         <Image Name="LBBO" Description="Level B sprites" >
-          <SourceRef>LBBO</SourceRef>
+          <AssetRef>LBBO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -317,7 +317,7 @@
           </Format>
         </Image>
         <Image Name="LCBO" Description="Level C sprites" >
-          <SourceRef>LCBO</SourceRef>
+          <AssetRef>LCBO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -328,7 +328,7 @@
           </Format>
         </Image>
         <Image Name="LDBO" Description="Level D sprites" >
-          <SourceRef>LDBO</SourceRef>
+          <AssetRef>LDBO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -339,7 +339,7 @@
           </Format>
         </Image>
         <Image Name="LEBO" Description="Level E sprites" >
-          <SourceRef>LEBO</SourceRef>
+          <AssetRef>LEBO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -350,7 +350,7 @@
           </Format>
         </Image>
         <Image Name="L1LP" Description="Level 1 picture" >
-          <SourceRef>L1LP</SourceRef>
+          <AssetRef>L1LP</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -361,7 +361,7 @@
           </Format>
         </Image>
         <Image Name="L2LP" Description="Level 2 picture" >
-          <SourceRef>L2LP</SourceRef>
+          <AssetRef>L2LP</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -372,7 +372,7 @@
           </Format>
         </Image>
         <Image Name="L6LP" Description="Level 6 picture" >
-          <SourceRef>L6LP</SourceRef>
+          <AssetRef>L6LP</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -383,7 +383,7 @@
           </Format>
         </Image>
         <Image Name="LALP" Description="Level A picture" >
-          <SourceRef>LALP</SourceRef>
+          <AssetRef>LALP</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32" >320</Parameter>
@@ -398,7 +398,7 @@
     <TileSets>
       <Items>
         <TileSet Name="TileSets.L1" >
-          <SourceRef>L1BM</SourceRef>
+          <AssetRef>L1BM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
@@ -407,7 +407,7 @@
           </Format>
         </TileSet>
         <TileSet Name="TileSets.L2" >
-          <SourceRef>L2BM</SourceRef>
+          <AssetRef>L2BM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
@@ -416,7 +416,7 @@
           </Format>
         </TileSet>
         <TileSet Name="TileSets.L3" >
-          <SourceRef>L3BM</SourceRef>
+          <AssetRef>L3BM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
@@ -425,7 +425,7 @@
           </Format>
         </TileSet>
         <TileSet Name="TileSets.L4" >
-          <SourceRef>L4BM</SourceRef>
+          <AssetRef>L4BM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
@@ -434,7 +434,7 @@
           </Format>
         </TileSet>
         <TileSet Name="TileSets.L5" >
-          <SourceRef>L5BM</SourceRef>
+          <AssetRef>L5BM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
@@ -443,7 +443,7 @@
           </Format>
         </TileSet>
         <TileSet Name="TileSets.L6" >
-          <SourceRef>L6BM</SourceRef>
+          <AssetRef>L6BM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
@@ -452,7 +452,7 @@
           </Format>
         </TileSet>
         <TileSet Name="TileSets.L7" >
-          <SourceRef>L7BM</SourceRef>
+          <AssetRef>L7BM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
@@ -461,7 +461,7 @@
           </Format>
         </TileSet>
         <TileSet Name="TileSets.L8" >
-          <SourceRef>L8BM</SourceRef>
+          <AssetRef>L8BM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
@@ -470,7 +470,7 @@
           </Format>
         </TileSet>
         <TileSet Name="TileSets.L9" >
-          <SourceRef>L9BM</SourceRef>
+          <AssetRef>L9BM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32" >16</Parameter>
@@ -483,7 +483,7 @@
     <Levels>
       <Items>
         <Level Id="1" Name="L1" >
-          <SourceRef>L1MA</SourceRef>
+          <AssetRef>L1MA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L1</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
@@ -491,7 +491,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="2" Name="L2" >
-          <SourceRef>L2MA</SourceRef>
+          <AssetRef>L2MA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L2</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
@@ -499,7 +499,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="3" Name="L3" >
-          <SourceRef>L3MA</SourceRef>
+          <AssetRef>L3MA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L3</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
@@ -507,7 +507,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="4" Name="L4" >
-          <SourceRef>L4MA</SourceRef>
+          <AssetRef>L4MA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L4</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
@@ -515,7 +515,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="5" Name="L5" >
-          <SourceRef>L5MA</SourceRef>
+          <AssetRef>L5MA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L5</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
@@ -523,7 +523,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="6" Name="L6" >
-          <SourceRef>L6MA</SourceRef>
+          <AssetRef>L6MA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L6</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
@@ -531,7 +531,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="7" Name="L7" >
-          <SourceRef>L7MA</SourceRef>
+          <AssetRef>L7MA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L6</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
@@ -539,7 +539,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="8" Name="L8" >
-          <SourceRef>L8MA</SourceRef>
+          <AssetRef>L8MA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L6</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
@@ -547,7 +547,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="9" Name="L9" >
-          <SourceRef>L9MA</SourceRef>
+          <AssetRef>L9MA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L6</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
@@ -555,7 +555,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="10" Name="LA" >
-          <SourceRef>LAMA</SourceRef>
+          <AssetRef>LAMA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L7</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
@@ -563,7 +563,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="11" Name="LB" >
-          <SourceRef>LBMA</SourceRef>
+          <AssetRef>LBMA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L7</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
@@ -571,7 +571,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="12" Name="LC" >
-          <SourceRef>LCMA</SourceRef>
+          <AssetRef>LCMA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L8</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
@@ -579,7 +579,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="13" Name="LD" >
-          <SourceRef>LDMA</SourceRef>
+          <AssetRef>LDMA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L7</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
@@ -587,7 +587,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="14" Name="LE" >
-          <SourceRef>LEMA</SourceRef>
+          <AssetRef>LEMA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L9</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
@@ -595,7 +595,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="15" Name="LMMA1" >
-          <SourceRef>MMA1</SourceRef>
+          <AssetRef>MMA1</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L1</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
@@ -603,7 +603,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="16" Name="LMMA2" >
-          <SourceRef>MMA2</SourceRef>
+          <AssetRef>MMA2</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L5</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
@@ -611,7 +611,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="17" Name="LMMA3" >
-          <SourceRef>MMA3</SourceRef>
+          <AssetRef>MMA3</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L7</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>

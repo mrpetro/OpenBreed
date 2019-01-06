@@ -15,7 +15,6 @@ using OpenBreed.Common.XmlDatabase.Tables.Tiles;
 using OpenBreed.Common.Images;
 using OpenBreed.Common.Palettes;
 using OpenBreed.Common.Props;
-using OpenBreed.Common.Sources;
 using OpenBreed.Common.Sprites;
 using OpenBreed.Common.Tiles;
 using System;
@@ -86,7 +85,7 @@ namespace OpenBreed.Common.XmlDatabase
 
         private void RegisterRepos()
         {
-            RegisterRepository(new XmlSourcesRepository(this, _context));
+            RegisterRepository(new XmlAssetsRepository(this, _context));
             RegisterRepository(new XmlTileSetsRepository(this, _context));
             RegisterRepository(new XmlSpriteSetsRepository(this, _context));
             RegisterRepository(new XmlPropSetsRepository(this, _context));

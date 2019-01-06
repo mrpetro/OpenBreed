@@ -9,7 +9,7 @@ namespace OpenBreed.Common.Palettes
 {
     public interface IPaletteEntry : IEntry
     {
-        string SourceRef { get; }
+        string AssetRef { get; }
         IFormatEntry Format { get; }
     }
 }

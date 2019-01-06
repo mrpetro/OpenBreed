@@ -8,11 +8,11 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Common.XmlDatabase.Tables.Sources
 {
-    public class DatabaseSourceTableDef : DatabaseTableDef
+    public class DatabaseAssetTableDef : DatabaseTableDef
     {
         [XmlArray("Items"),
-        XmlArrayItem("DirectoryFileSourceDef", typeof(DirectoryFileSourceDef)),
-        XmlArrayItem("EPFArchiveFileSourceDef", typeof(EPFArchiveFileSourceDef))]
-        public readonly List<SourceDef> Items = new List<SourceDef>();
+        XmlArrayItem("DirectoryFileAsset", typeof(DirectoryFileAssetDef)),
+        XmlArrayItem("EPFArchiveFileAsset", typeof(EPFArchiveFileAssetDef))]
+        public readonly List<AssetDef> Items = new List<AssetDef>();
     }
 }

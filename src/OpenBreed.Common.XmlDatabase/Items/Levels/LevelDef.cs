@@ -37,7 +37,7 @@ namespace OpenBreed.Common.XmlDatabase.Items.Levels
         public List<string> PaletteRefs { get; } = new List<string>();
 
         public string PropertySetRef { get; set; }
-        public string SourceRef { get; set; }
+        public string AssetRef { get; set; }
 
         [XmlArray("SpriteSetRefs"),
         XmlArrayItem("SpriteSetRef", typeof(string))]

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace OpenBreed.Common.Sources
+namespace OpenBreed.Common.Assets
 {
-    public class DirectoryFileSource : SourceBase
+    public class DirectoryFileAsset : AssetBase
     {
 
         #region Private Fields
@@ -17,7 +17,7 @@ namespace OpenBreed.Common.Sources
 
         #region Public Constructors
 
-        public DirectoryFileSource(DataSourceProvider manager, string directoryPath, string name) :
+        public DirectoryFileAsset(AssetsDataProvider manager, string directoryPath, string name) :
             base(manager, name)
         {
             DirectoryPath = directoryPath;
@@ -36,7 +36,7 @@ namespace OpenBreed.Common.Sources
 
         protected override Stream CreateStream()
         {
-            string filePath = Path.Combine(DataSourceProvider.ExpandVariables(DirectoryPath), Name);
+            string filePath = Path.Combine(AssetsDataProvider.ExpandVariables(DirectoryPath), Name);
             return File.Open(filePath, FileMode.Open, FileAccess.ReadWrite);
         }
 

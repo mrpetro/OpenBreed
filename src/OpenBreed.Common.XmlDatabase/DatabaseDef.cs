@@ -28,7 +28,7 @@ namespace OpenBreed.Common.XmlDatabase
         public const string DEFAULT_DATABASE_DIR_NAME = "Defaults";
 
         [XmlArray("Tables"),
-        XmlArrayItem("Sources", typeof(DatabaseSourceTableDef)),
+        XmlArrayItem("Assets", typeof(DatabaseAssetTableDef)),
         XmlArrayItem("Levels", typeof(DatabaseLevelTableDef)),
         XmlArrayItem("Palettes", typeof(DatabasePaletteTableDef)),
         XmlArrayItem("PropertySets", typeof(DatabasePropertySetTableDef)),

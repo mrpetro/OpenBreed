@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Sources
+namespace OpenBreed.Common.Assets
 {
-    public interface ISourcesFactory
+    public interface IDirectoryFileAssetEntry : IAssetEntry
     {
-        //DirectoryFileSource CreateDirectoryFileSource()
+        string DirectoryPath { get; }
     }
 }

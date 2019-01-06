@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Common.Palettes.Builders;
 using OpenBreed.Common.Palettes.Readers;
-using OpenBreed.Common.Sources;
+using OpenBreed.Common.Assets;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,7 +28,7 @@ namespace OpenBreed.Common.Formats
                     throw new InvalidOperationException(paletteModeStr);
             }
         }
-        public object Load(SourceBase source, List<FormatParameter> parameters)
+        public object Load(AssetBase asset, List<FormatParameter> parameters)
         {
             var modeStr = (string)parameters.FirstOrDefault(item => item.Name == "MODE").Value;
             var colorsNo = (int)parameters.FirstOrDefault(item => item.Name == "COLORS_NO").Value;
@@ -37,14 +37,14 @@ namespace OpenBreed.Common.Formats
             var paletteMode = ToPaletteMode(modeStr);
 
             //Remember to set source stream to begining
-            source.Stream.Seek(dataStart, SeekOrigin.Begin);
+            asset.Stream.Seek(dataStart, SeekOrigin.Begin);
 
             var paletteBuilder = PaletteBuilder.NewPaletteModel();
             var paletteReader = new PaletteReader(paletteBuilder, paletteMode, colorsNo);
-            return paletteReader.Read(source.Stream);
+            return paletteReader.Read(asset.Stream);
         }
 
-        public void Save(SourceBase source, object model)
+        public void Save(AssetBase asset, object model)
         {
             throw new NotImplementedException();
         }

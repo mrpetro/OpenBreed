@@ -9,7 +9,7 @@ namespace OpenBreed.Common.Sounds
 {
     public interface ISoundEntry : IEntry
     {
-        string SourceRef { get; }
+        string AssetRef { get; }
         IFormatEntry Format { get; }
     }
 }

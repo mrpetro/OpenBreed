@@ -3,13 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace OpenBreed.Common.Sources
+namespace OpenBreed.Common.Assets
 {
-    public abstract class SourceBase : IEntry, IDisposable
+    public abstract class AssetBase : IEntry, IDisposable
     {
         #region Protected Fields
 
-        protected readonly DataSourceProvider _repository;
+        protected readonly AssetsDataProvider _repository;
 
         #endregion Protected Fields
 
@@ -21,7 +21,7 @@ namespace OpenBreed.Common.Sources
 
         #region Protected Constructors
 
-        protected SourceBase(DataSourceProvider manager, string name)
+        protected AssetBase(AssetsDataProvider manager, string name)
         {
             if (manager == null)
                 throw new ArgumentNullException("Manager");

@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.Sources;
+﻿using OpenBreed.Common.Assets;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +20,7 @@ namespace OpenBreed.Common.Formats
         #region Public Methods
 
 
-        public DataFormat Create(SourceBase source, IFormatEntry format)
+        public DataFormat Create(AssetBase asset, IFormatEntry format)
         {
             var formatType = GetFormatType(format.Name);
             if (formatType == null)
@@ -28,10 +28,10 @@ namespace OpenBreed.Common.Formats
 
             var parameters = format.Parameters;
 
-            return new DataFormat(formatType, source, parameters);
+            return new DataFormat(formatType, asset, parameters);
         }
 
-        public object Load(SourceBase source, IFormatEntry format)
+        public object Load(AssetBase asset, IFormatEntry format)
         {
             var formatType = GetFormatType(format.Name);
             if (formatType == null)
@@ -39,7 +39,7 @@ namespace OpenBreed.Common.Formats
 
             var parameters = format.Parameters;
 
-            return source.Load(formatType, parameters);
+            return asset.Load(formatType, parameters);
         }
 
         public void RegisterFormat(string formatAlias, IDataFormatType format)

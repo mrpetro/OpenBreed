@@ -7,7 +7,7 @@ using System.IO;
 using OpenBreed.Common.Maps.Readers.MAP;
 using OpenBreed.Common.Maps.Writers.MAP;
 using OpenBreed.Common.Maps;
-using OpenBreed.Common.Sources;
+using OpenBreed.Common.Assets;
 
 namespace OpenBreed.Common.Formats
 {
@@ -17,25 +17,25 @@ namespace OpenBreed.Common.Formats
         {
         }
 
-        public object Load(SourceBase source, List<FormatParameter> parameters)
+        public object Load(AssetBase asset, List<FormatParameter> parameters)
         {
             //Remember to set source stream to begining
-            source.Stream.Seek(0, SeekOrigin.Begin);
+            asset.Stream.Seek(0, SeekOrigin.Begin);
 
             var mapBuilder = MapBuilder.NewMapModel();
             MAPReader mapReader = new MAPReader(mapBuilder, MAPFormat.ABTA);
-            return mapReader.Read(source.Stream);
+            return mapReader.Read(asset.Stream);
         }
 
-        public void Save(SourceBase source, object model)
+        public void Save(AssetBase asset, object model)
         {
-            if (source.Stream == null)
-                throw new InvalidOperationException("Source stream not opened.");
+            if (asset.Stream == null)
+                throw new InvalidOperationException("Asset stream not opened.");
 
             //Remember to clear the stream before writing
-            source.Stream.SetLength(0);
+            asset.Stream.SetLength(0);
 
-            MAPWriter mapWriter = new MAPWriter(source.Stream);
+            MAPWriter mapWriter = new MAPWriter(asset.Stream);
             mapWriter.Write((MapModel)model);
         }
     }

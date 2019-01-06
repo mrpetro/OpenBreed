@@ -2,7 +2,6 @@
 using OpenBreed.Common.XmlDatabase.Tables.Palettes;
 using OpenBreed.Common.XmlDatabase.Tables.Sprites;
 using OpenBreed.Common.XmlDatabase.Tables.Tiles;
-using OpenBreed.Common.Sources;
 using System;
 using System.Collections.Generic;
 using System.Linq;

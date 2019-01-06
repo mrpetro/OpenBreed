@@ -5,9 +5,9 @@ using System.Text;
 using System.IO;
 using EPF;
 
-namespace OpenBreed.Common.Sources
+namespace OpenBreed.Common.Assets
 {
-    public class EPFArchiveFileSource : SourceBase
+    public class EPFArchiveFileAsset : AssetBase
     {
 
         #region Private Fields
@@ -18,7 +18,7 @@ namespace OpenBreed.Common.Sources
 
         #region Public Constructors
 
-        public EPFArchiveFileSource(DataSourceProvider manager, string archivePath, string name) :
+        public EPFArchiveFileAsset(AssetsDataProvider manager, string archivePath, string name) :
             base(manager, name)
         {
             ArchivePath = archivePath;
@@ -60,7 +60,7 @@ namespace OpenBreed.Common.Sources
             if (_entry != null)
                 throw new InvalidOperationException($"Entry {Name} already initialized.");
 
-            var archive = _repository.GetArchive(DataSourceProvider.ExpandVariables(ArchivePath));
+            var archive = _repository.GetArchive(AssetsDataProvider.ExpandVariables(ArchivePath));
             _entry = archive.FindEntry(Name);
         }
 

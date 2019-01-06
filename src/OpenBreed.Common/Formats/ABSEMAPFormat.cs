@@ -2,7 +2,7 @@
 using OpenBreed.Common.Maps.Builders;
 using OpenBreed.Common.Maps.Readers.MAP;
 using OpenBreed.Common.Maps.Writers.MAP;
-using OpenBreed.Common.Sources;
+using OpenBreed.Common.Assets;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,7 +18,7 @@ namespace OpenBreed.Common.Formats
         {
         }
 
-        public object Load(SourceBase source, List<FormatParameter> parameters)
+        public object Load(AssetBase source, List<FormatParameter> parameters)
         {
             //Remember to set source stream to begining
             source.Stream.Seek(0, SeekOrigin.Begin);
@@ -28,7 +28,7 @@ namespace OpenBreed.Common.Formats
             return mapReader.Read(source.Stream);
         }
 
-        public void Save(SourceBase source, object model)
+        public void Save(AssetBase source, object model)
         {
             if (source.Stream == null)
                 throw new InvalidOperationException("Source stream not opened.");

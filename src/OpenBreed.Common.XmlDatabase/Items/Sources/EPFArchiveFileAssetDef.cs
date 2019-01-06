@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.Sources;
+﻿using OpenBreed.Common.Assets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +8,9 @@ using System.Xml.Serialization;
 namespace OpenBreed.Common.XmlDatabase.Items.Sources
 {
     [Serializable]
-    public class SourceDef : DatabaseItemDef, ISourceEntry
+    public class EPFArchiveFileAssetDef : AssetDef, IEPFArchiveAssetEntry
     {
-        #region Public Properties
-
-        public long Id { get; set; }
-
-        #endregion Public Properties
+        [XmlAttribute]
+        public string ArchivePath { get; set; }
     }
 }

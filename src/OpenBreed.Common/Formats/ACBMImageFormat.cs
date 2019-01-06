@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Common.Images.Builders;
 using OpenBreed.Common.Images.Readers.ACBM;
-using OpenBreed.Common.Sources;
+using OpenBreed.Common.Assets;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -31,7 +31,7 @@ namespace OpenBreed.Common.Formats
             }
         }
 
-        public object Load(SourceBase source, List<FormatParameter> parameters)
+        public object Load(AssetBase source, List<FormatParameter> parameters)
         {
             var width = (int)parameters.FirstOrDefault(item=> item.Name == "WIDTH").Value;
             var height = (int)parameters.FirstOrDefault(item => item.Name == "HEIGHT").Value;
@@ -48,7 +48,7 @@ namespace OpenBreed.Common.Formats
             return reader.Read(source.Stream);
         }
 
-        public void Save(SourceBase source, object model)
+        public void Save(AssetBase source, object model)
         {
             throw new NotImplementedException("ACBMImage Write");
         }

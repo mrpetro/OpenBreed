@@ -1,5 +1,5 @@
 ﻿using EPF;
-using OpenBreed.Common.Sources;
+using OpenBreed.Common.Assets;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,18 +11,18 @@ namespace OpenBreed.Common
 {
     public delegate string ExpandVariablesDelegate(string text);
 
-    public class DataSourceProvider
+    public class AssetsDataProvider
     {
         #region Private Fields
 
-        private readonly Dictionary<string, SourceBase> _openedSources = new Dictionary<string, SourceBase>();
+        private readonly Dictionary<string, AssetBase> _openedAssets = new Dictionary<string, AssetBase>();
         private Dictionary<string, EPFArchive> _openedArchives = new Dictionary<string, EPFArchive>();
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DataSourceProvider(IUnitOfWork unitOfWork)
+        public AssetsDataProvider(IUnitOfWork unitOfWork)
         {
             UnitOfWork = unitOfWork;
         }
@@ -38,19 +38,19 @@ namespace OpenBreed.Common
 
         #region Public Methods
 
-        public SourceBase GetAsset(string name)
+        public AssetBase GetAsset(string name)
         {
-            SourceBase source = null;
-            if (_openedSources.TryGetValue(name, out source))
-                return source;
+            AssetBase asset = null;
+            if (_openedAssets.TryGetValue(name, out asset))
+                return asset;
 
-            var entry = UnitOfWork.GetRepository<ISourceEntry>().GetByName(name);
+            var entry = UnitOfWork.GetRepository<IAssetEntry>().GetByName(name);
             if (entry == null)
-                throw new Exception($"Source error: {name}" );
+                throw new Exception($"Asset error: {name}" );
 
-            source = CreateAsset(entry);
+            asset = CreateAsset(entry);
 
-            return source;
+            return asset;
         }
 
         #endregion Public Methods
@@ -80,36 +80,36 @@ namespace OpenBreed.Common
             return archive;
         }
 
-        internal void LockSource(SourceBase source)
+        internal void LockSource(AssetBase source)
         {
-            _openedSources.Add(source.Name, source);
+            _openedAssets.Add(source.Name, source);
         }
 
-        internal void ReleaseSource(SourceBase source)
+        internal void ReleaseSource(AssetBase source)
         {
-            _openedSources.Remove(source.Name);
+            _openedAssets.Remove(source.Name);
         }
 
         #endregion Internal Methods
 
         #region Private Methods
 
-        private SourceBase CreateDirectoryFileSource(IDirectoryFileSourceEntry source)
+        private AssetBase CreateDirectoryFileAsset(IDirectoryFileAssetEntry asset)
         {
-            return new DirectoryFileSource(this, source.DirectoryPath, source.Name);
+            return new DirectoryFileAsset(this, asset.DirectoryPath, asset.Name);
         }
 
-        private SourceBase CreateEPFArchiveSource(IEPFArchiveSourceEntry source)
+        private AssetBase CreateEPFArchiveAsset(IEPFArchiveAssetEntry asset)
         {
-            return new EPFArchiveFileSource(this, source.ArchivePath, source.Name);
+            return new EPFArchiveFileAsset(this, asset.ArchivePath, asset.Name);
         }
 
-        private SourceBase CreateAsset(ISourceEntry source)
+        private AssetBase CreateAsset(IAssetEntry asset)
         {
-            if (source is IDirectoryFileSourceEntry)
-                return CreateDirectoryFileSource((IDirectoryFileSourceEntry)source);
-            else if (source is IEPFArchiveSourceEntry)
-                return CreateEPFArchiveSource((IEPFArchiveSourceEntry)source);
+            if (asset is IDirectoryFileAssetEntry)
+                return CreateDirectoryFileAsset((IDirectoryFileAssetEntry)asset);
+            else if (asset is IEPFArchiveAssetEntry)
+                return CreateEPFArchiveAsset((IEPFArchiveAssetEntry)asset);
             else
                 throw new NotImplementedException("Unknown sourceDef");
         }

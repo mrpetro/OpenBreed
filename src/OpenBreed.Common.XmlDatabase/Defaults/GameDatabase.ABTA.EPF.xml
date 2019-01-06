@@ -1,174 +1,174 @@
 <?xml version="1.0"?>
 <DatabaseDef Name="ABTA" >
   <Tables>
-    <Sources>
+    <Assets>
       <Items>
-        <EPFArchiveFileSourceDef Name="SPR1A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR1B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR3A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR3B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR4A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR4B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR5A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR5B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR6A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR6B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR7A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR7B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR8A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPR8B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPRDA.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPRDB.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="HERO1.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN_A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN_B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN_C.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN_E.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN_F.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN_G.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN_H.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN_I.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN_J.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN_K.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN_X.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="RESIDENT.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="LEVEL1.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="LEVEL3.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="LEVEL4.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="LEVEL5.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="LEVEL6.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="LEVEL7.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="LEVEL8.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="LEVELD.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.01" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.02" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.03" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.04" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.05" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.06" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.07" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.08" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.09" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.10" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.11" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.12" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.13" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.14" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.15" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.16" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.17" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.18" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.19" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.20" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.21" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.22" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.23" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.24" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.25" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.26" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.27" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.28" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.29" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.30" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.31" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.32" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.33" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.34" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.35" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.36" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.37" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.38" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.39" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.40" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.41" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.42" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.43" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.44" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.45" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.46" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.47" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.48" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.49" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.50" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.51" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.52" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.53" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.54" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MAP.55" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN2" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN3" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ALIEN4" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="AMMO" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="BACKING1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="BACKING2" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="BACKING3" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="BACKING4" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="CACOON1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="COMPUTER" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="COUNTDWN" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="CREDITS" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="CURSOR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="DIE" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="DOOR1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="EAT1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="EXPLOS" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="FLAMEOFF" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="FLAMEON" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="GENERATE" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="GRENADE" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="GRUNT1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="HATCH1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="HEALTH" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="KEYS" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="LAZER1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="LAZER2" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="LAZER3" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="LAZER4" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="LIZARD" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MGUN" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MINETICK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="MISSILE" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="NULLSAMP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="ONEWAY" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="OUTAMMO" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SELECT" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SIREN" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH01" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH02" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH03" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH04" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH05" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH06" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH07" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH08" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH09" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH10" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH11" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH12" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH13" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH14" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH15" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH16" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH17" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH18" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH19" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH20" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH21" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH22" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH23" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH24" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH25" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH26" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPEECH27" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SPLAT1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="SWITCH" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="TELE" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="TURRET1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="TURRET2" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
-        <EPFArchiveFileSourceDef Name="XTRALIFE" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPR1A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPR1B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPR3A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPR3B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPR4A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPR4B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPR5A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPR5B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPR6A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPR6B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPR7A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPR7B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPR8A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPR8B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPRDA.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPRDB.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="HERO1.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="ALIEN_A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="ALIEN_B.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="ALIEN_C.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="ALIEN_E.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="ALIEN_F.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="ALIEN_G.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="ALIEN_H.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="ALIEN_I.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="ALIEN_J.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="ALIEN_K.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="ALIEN_X.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="RESIDENT.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="LEVEL1.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="LEVEL3.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="LEVEL4.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="LEVEL5.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="LEVEL6.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="LEVEL7.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="LEVEL8.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="LEVELD.BLK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.01" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.02" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.03" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.04" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.05" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.06" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.07" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.08" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.09" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.10" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.11" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.12" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.13" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.14" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.15" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.16" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.17" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.18" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.19" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.20" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.21" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.22" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.23" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.24" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.25" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.26" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.27" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.28" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.29" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.30" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.31" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.32" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.33" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.34" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.35" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.36" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.37" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.38" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.39" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.40" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.41" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.42" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.43" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.44" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.45" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.46" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.47" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.48" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.49" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.50" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.51" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.52" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.53" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.54" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MAP.55" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="ALIEN1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="ALIEN2" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="ALIEN3" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="ALIEN4" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="AMMO" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="BACKING1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="BACKING2" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="BACKING3" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="BACKING4" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="CACOON1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="COMPUTER" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="COUNTDWN" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="CREDITS" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="CURSOR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="DIE" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="DOOR1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="EAT1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="EXPLOS" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="FLAMEOFF" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="FLAMEON" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="GENERATE" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="GRENADE" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="GRUNT1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="HATCH1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="HEALTH" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="KEYS" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="LAZER1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="LAZER2" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="LAZER3" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="LAZER4" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="LIZARD" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MGUN" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MINETICK" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="MISSILE" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="NULLSAMP" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="ONEWAY" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="OUTAMMO" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SELECT" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SIREN" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH01" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH02" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH03" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH04" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH05" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH06" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH07" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH08" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH09" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH10" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH11" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH12" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH13" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH14" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH15" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH16" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH17" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH18" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH19" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH20" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH21" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH22" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH23" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH24" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH25" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH26" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPEECH27" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SPLAT1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="SWITCH" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="TELE" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="TURRET1" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="TURRET2" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+        <EPFArchiveFileAsset Name="XTRALIFE" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
       </Items>
-    </Sources>
+    </Assets>
     <Images>
       <Items>
       </Items>
@@ -176,7 +176,7 @@
     <Sounds>
       <Items>
         <Sound Name="Sounds.ALIEN1" >
-          <SourceRef>ALIEN1</SourceRef>
+          <AssetRef>ALIEN1</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -186,7 +186,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.ALIEN2" >
-          <SourceRef>ALIEN2</SourceRef>
+          <AssetRef>ALIEN2</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -196,7 +196,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.ALIEN3" >
-          <SourceRef>ALIEN3</SourceRef>
+          <AssetRef>ALIEN3</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -206,7 +206,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.ALIEN4" >
-          <SourceRef>ALIEN4</SourceRef>
+          <AssetRef>ALIEN4</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -216,7 +216,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.AMMO" >
-          <SourceRef>AMMO</SourceRef>
+          <AssetRef>AMMO</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -226,7 +226,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.BACKING1" >
-          <SourceRef>BACKING1</SourceRef>
+          <AssetRef>BACKING1</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -236,7 +236,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.BACKING2" >
-          <SourceRef>BACKING2</SourceRef>
+          <AssetRef>BACKING2</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -246,7 +246,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.BACKING3" >
-          <SourceRef>BACKING3</SourceRef>
+          <AssetRef>BACKING3</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -256,7 +256,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.BACKING4" >
-          <SourceRef>BACKING4</SourceRef>
+          <AssetRef>BACKING4</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -266,7 +266,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.CACOON1" >
-          <SourceRef>CACOON1</SourceRef>
+          <AssetRef>CACOON1</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -276,7 +276,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.COMPUTER" >
-          <SourceRef>COMPUTER</SourceRef>
+          <AssetRef>COMPUTER</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -286,7 +286,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.COUNTDWN" >
-          <SourceRef>COUNTDWN</SourceRef>
+          <AssetRef>COUNTDWN</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -296,7 +296,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.CREDITS" >
-          <SourceRef>CREDITS</SourceRef>
+          <AssetRef>CREDITS</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -306,7 +306,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.CURSOR" >
-          <SourceRef>CURSOR</SourceRef>
+          <AssetRef>CURSOR</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -316,7 +316,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.DIE" >
-          <SourceRef>DIE</SourceRef>
+          <AssetRef>DIE</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -326,7 +326,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.DOOR1" >
-          <SourceRef>DOOR1</SourceRef>
+          <AssetRef>DOOR1</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -336,7 +336,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.EAT1" >
-          <SourceRef>EAT1</SourceRef>
+          <AssetRef>EAT1</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -346,7 +346,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.EXPLOS" >
-          <SourceRef>EXPLOS</SourceRef>
+          <AssetRef>EXPLOS</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -356,7 +356,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.FLAMEOFF" >
-          <SourceRef>FLAMEOFF</SourceRef>
+          <AssetRef>FLAMEOFF</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -366,7 +366,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.FLAMEON" >
-          <SourceRef>FLAMEON</SourceRef>
+          <AssetRef>FLAMEON</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -376,7 +376,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.GENERATE" >
-          <SourceRef>GENERATE</SourceRef>
+          <AssetRef>GENERATE</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -386,7 +386,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.GRENADE" >
-          <SourceRef>GRENADE</SourceRef>
+          <AssetRef>GRENADE</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -396,7 +396,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.GRUNT1" >
-          <SourceRef>GRUNT1</SourceRef>
+          <AssetRef>GRUNT1</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -406,7 +406,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.HATCH1" >
-          <SourceRef>HATCH1</SourceRef>
+          <AssetRef>HATCH1</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -416,7 +416,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.HEALTH" >
-          <SourceRef>HEALTH</SourceRef>
+          <AssetRef>HEALTH</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -426,7 +426,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.KEYS" >
-          <SourceRef>KEYS</SourceRef>
+          <AssetRef>KEYS</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -436,7 +436,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.LAZER1" >
-          <SourceRef>LAZER1</SourceRef>
+          <AssetRef>LAZER1</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -446,7 +446,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.LAZER2" >
-          <SourceRef>LAZER2</SourceRef>
+          <AssetRef>LAZER2</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -456,7 +456,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.LAZER3" >
-          <SourceRef>LAZER3</SourceRef>
+          <AssetRef>LAZER3</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -466,7 +466,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.LAZER4" >
-          <SourceRef>LAZER4</SourceRef>
+          <AssetRef>LAZER4</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -476,7 +476,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.LIZARD" >
-          <SourceRef>LIZARD</SourceRef>
+          <AssetRef>LIZARD</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -486,7 +486,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.MGUN" >
-          <SourceRef>MGUN</SourceRef>
+          <AssetRef>MGUN</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -496,7 +496,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.MINETICK" >
-          <SourceRef>MINETICK</SourceRef>
+          <AssetRef>MINETICK</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -506,7 +506,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.MISSILE" >
-          <SourceRef>MISSILE</SourceRef>
+          <AssetRef>MISSILE</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -516,7 +516,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.NULLSAMP" >
-          <SourceRef>NULLSAMP</SourceRef>
+          <AssetRef>NULLSAMP</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -526,7 +526,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.ONEWAY" >
-          <SourceRef>ONEWAY</SourceRef>
+          <AssetRef>ONEWAY</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -536,7 +536,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.OUTAMMO" >
-          <SourceRef>OUTAMMO</SourceRef>
+          <AssetRef>OUTAMMO</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -546,7 +546,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SELECT" >
-          <SourceRef>SELECT</SourceRef>
+          <AssetRef>SELECT</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -556,7 +556,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SIREN" >
-          <SourceRef>SIREN</SourceRef>
+          <AssetRef>SIREN</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -566,7 +566,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH01" >
-          <SourceRef>SPEECH01</SourceRef>
+          <AssetRef>SPEECH01</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -576,7 +576,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH02" >
-          <SourceRef>SPEECH02</SourceRef>
+          <AssetRef>SPEECH02</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -586,7 +586,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH03" >
-          <SourceRef>SPEECH03</SourceRef>
+          <AssetRef>SPEECH03</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -596,7 +596,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH04" >
-          <SourceRef>SPEECH04</SourceRef>
+          <AssetRef>SPEECH04</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -606,7 +606,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH05" >
-          <SourceRef>SPEECH05</SourceRef>
+          <AssetRef>SPEECH05</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -616,7 +616,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH06" >
-          <SourceRef>SPEECH06</SourceRef>
+          <AssetRef>SPEECH06</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -626,7 +626,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH07" >
-          <SourceRef>SPEECH07</SourceRef>
+          <AssetRef>SPEECH07</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -636,7 +636,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH08" >
-          <SourceRef>SPEECH08</SourceRef>
+          <AssetRef>SPEECH08</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -646,7 +646,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH09" >
-          <SourceRef>SPEECH09</SourceRef>
+          <AssetRef>SPEECH09</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -656,7 +656,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH10" >
-          <SourceRef>SPEECH10</SourceRef>
+          <AssetRef>SPEECH10</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -666,7 +666,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH11" >
-          <SourceRef>SPEECH11</SourceRef>
+          <AssetRef>SPEECH11</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -676,7 +676,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH12" >
-          <SourceRef>SPEECH12</SourceRef>
+          <AssetRef>SPEECH12</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -686,7 +686,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH13" >
-          <SourceRef>SPEECH13</SourceRef>
+          <AssetRef>SPEECH13</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -696,7 +696,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH14" >
-          <SourceRef>SPEECH14</SourceRef>
+          <AssetRef>SPEECH14</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -706,7 +706,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH15" >
-          <SourceRef>SPEECH15</SourceRef>
+          <AssetRef>SPEECH15</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -716,7 +716,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH16" >
-          <SourceRef>SPEECH16</SourceRef>
+          <AssetRef>SPEECH16</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -726,7 +726,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH17" >
-          <SourceRef>SPEECH17</SourceRef>
+          <AssetRef>SPEECH17</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -736,7 +736,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH18" >
-          <SourceRef>SPEECH18</SourceRef>
+          <AssetRef>SPEECH18</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -746,7 +746,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH19" >
-          <SourceRef>SPEECH19</SourceRef>
+          <AssetRef>SPEECH19</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -756,7 +756,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH20" >
-          <SourceRef>SPEECH20</SourceRef>
+          <AssetRef>SPEECH20</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -766,7 +766,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH21" >
-          <SourceRef>SPEECH21</SourceRef>
+          <AssetRef>SPEECH21</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -776,7 +776,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH22" >
-          <SourceRef>SPEECH22</SourceRef>
+          <AssetRef>SPEECH22</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -786,7 +786,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH23" >
-          <SourceRef>SPEECH23</SourceRef>
+          <AssetRef>SPEECH23</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -796,7 +796,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH24" >
-          <SourceRef>SPEECH24</SourceRef>
+          <AssetRef>SPEECH24</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -806,7 +806,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH25" >
-          <SourceRef>SPEECH25</SourceRef>
+          <AssetRef>SPEECH25</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -816,7 +816,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH26" >
-          <SourceRef>SPEECH26</SourceRef>
+          <AssetRef>SPEECH26</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -826,7 +826,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPEECH27" >
-          <SourceRef>SPEECH27</SourceRef>
+          <AssetRef>SPEECH27</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
@@ -836,7 +836,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SPLAT1" >
-          <SourceRef>SPLAT1</SourceRef>
+          <AssetRef>SPLAT1</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -846,7 +846,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.SWITCH" >
-          <SourceRef>SWITCH</SourceRef>
+          <AssetRef>SWITCH</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -856,7 +856,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.TELE" >
-          <SourceRef>TELE</SourceRef>
+          <AssetRef>TELE</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -866,7 +866,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.TURRET1" >
-          <SourceRef>TURRET1</SourceRef>
+          <AssetRef>TURRET1</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -876,7 +876,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.TURRET2" >
-          <SourceRef>TURRET2</SourceRef>
+          <AssetRef>TURRET2</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -886,7 +886,7 @@
           </Format>
         </Sound>
         <Sound Name="Sounds.XTRALIFE" >
-          <SourceRef>XTRALIFE</SourceRef>
+          <AssetRef>XTRALIFE</AssetRef>
           <Format Name="PCM_SOUND" >
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
@@ -900,119 +900,119 @@
     <SpriteSets>
       <Items>
         <SpriteSet Name="SpriteSets.SPR1A" >
-          <SourceRef>SPR1A.SPR</SourceRef>
+          <AssetRef>SPR1A.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR1B" >
-          <SourceRef>SPR1B.SPR</SourceRef>
+          <AssetRef>SPR1B.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR3A" >
-          <SourceRef>SPR3A.SPR</SourceRef>
+          <AssetRef>SPR3A.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR3B" >
-          <SourceRef>SPR3B.SPR</SourceRef>
+          <AssetRef>SPR3B.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR4A" >
-          <SourceRef>SPR4A.SPR</SourceRef>
+          <AssetRef>SPR4A.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR4B" >
-          <SourceRef>SPR4B.SPR</SourceRef>
+          <AssetRef>SPR4B.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR5A" >
-          <SourceRef>SPR5A.SPR</SourceRef>
+          <AssetRef>SPR5A.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR5B" >
-          <SourceRef>SPR5B.SPR</SourceRef>
+          <AssetRef>SPR5B.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR6A" >
-          <SourceRef>SPR6A.SPR</SourceRef>
+          <AssetRef>SPR6A.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR6B" >
-          <SourceRef>SPR6B.SPR</SourceRef>
+          <AssetRef>SPR6B.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR7A" >
-          <SourceRef>SPR7A.SPR</SourceRef>
+          <AssetRef>SPR7A.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR7B" >
-          <SourceRef>SPR7B.SPR</SourceRef>
+          <AssetRef>SPR7B.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR8A" >
-          <SourceRef>SPR8A.SPR</SourceRef>
+          <AssetRef>SPR8A.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPR8B" >
-          <SourceRef>SPR8B.SPR</SourceRef>
+          <AssetRef>SPR8B.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPRDA" >
-          <SourceRef>SPRDA.SPR</SourceRef>
+          <AssetRef>SPRDA.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.SPRDB" >
-          <SourceRef>SPRDB.SPR</SourceRef>
+          <AssetRef>SPRDB.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.HERO1" >
-          <SourceRef>HERO1.SPR</SourceRef>
+          <AssetRef>HERO1.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.RESIDENT" >
-          <SourceRef>RESIDENT.SPR</SourceRef>
+          <AssetRef>RESIDENT.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.ALIEN_A" >
-          <SourceRef>ALIEN_A.SPR</SourceRef>
+          <AssetRef>ALIEN_A.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.ALIEN_B" >
-          <SourceRef>ALIEN_B.SPR</SourceRef>
+          <AssetRef>ALIEN_B.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.ALIEN_C" >
-          <SourceRef>ALIEN_C.SPR</SourceRef>
+          <AssetRef>ALIEN_C.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.ALIEN_E" >
-          <SourceRef>ALIEN_E.SPR</SourceRef>
+          <AssetRef>ALIEN_E.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.ALIEN_F" >
-          <SourceRef>ALIEN_F.SPR</SourceRef>
+          <AssetRef>ALIEN_F.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.ALIEN_G" >
-          <SourceRef>ALIEN_G.SPR</SourceRef>
+          <AssetRef>ALIEN_G.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.ALIEN_H" >
-          <SourceRef>ALIEN_H.SPR</SourceRef>
+          <AssetRef>ALIEN_H.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.ALIEN_I" >
-          <SourceRef>ALIEN_I.SPR</SourceRef>
+          <AssetRef>ALIEN_I.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.ALIEN_J" >
-          <SourceRef>ALIEN_J.SPR</SourceRef>
+          <AssetRef>ALIEN_J.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.ALIEN_K" >
-          <SourceRef>ALIEN_K.SPR</SourceRef>
+          <AssetRef>ALIEN_K.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
         <SpriteSet Name="SpriteSets.ALIEN_X" >
-          <SourceRef>ALIEN_X.SPR</SourceRef>
+          <AssetRef>ALIEN_X.SPR</AssetRef>
           <Format Name="ABTASPR" ></Format>
         </SpriteSet>
       </Items>
@@ -1020,35 +1020,35 @@
     <TileSets>
       <Items>
         <TileSet Name="TileSets.L1" >
-          <SourceRef>LEVEL1.BLK</SourceRef>
+          <AssetRef>LEVEL1.BLK</AssetRef>
           <Format Name="ABTABLK" ></Format>
         </TileSet>
         <TileSet Name="TileSets.L3" >
-          <SourceRef>LEVEL3.BLK</SourceRef>
+          <AssetRef>LEVEL3.BLK</AssetRef>
           <Format Name="ABTABLK" ></Format>
         </TileSet>
         <TileSet Name="TileSets.L4" >
-          <SourceRef>LEVEL4.BLK</SourceRef>
+          <AssetRef>LEVEL4.BLK</AssetRef>
           <Format Name="ABTABLK" ></Format>
         </TileSet>
         <TileSet Name="TileSets.L5" >
-          <SourceRef>LEVEL5.BLK</SourceRef>
+          <AssetRef>LEVEL5.BLK</AssetRef>
           <Format Name="ABTABLK" ></Format>
         </TileSet>
         <TileSet Name="TileSets.L6" >
-          <SourceRef>LEVEL6.BLK</SourceRef>
+          <AssetRef>LEVEL6.BLK</AssetRef>
           <Format Name="ABTABLK" ></Format>
         </TileSet>
         <TileSet Name="TileSets.L7" >
-          <SourceRef>LEVEL7.BLK</SourceRef>
+          <AssetRef>LEVEL7.BLK</AssetRef>
           <Format Name="ABTABLK" ></Format>
         </TileSet>
         <TileSet Name="TileSets.L8" >
-          <SourceRef>LEVEL8.BLK</SourceRef>
+          <AssetRef>LEVEL8.BLK</AssetRef>
           <Format Name="ABTABLK" ></Format>
         </TileSet>
         <TileSet Name="TileSets.LD" >
-          <SourceRef>LEVELD.BLK</SourceRef>
+          <AssetRef>LEVELD.BLK</AssetRef>
           <Format Name="ABTABLK" ></Format>
         </TileSet>
       </Items>
@@ -1056,7 +1056,7 @@
     <Levels>
       <Items>
         <Level Id="1" Name="CRASH LANDING SITE" >
-          <SourceRef>MAP.01</SourceRef>
+          <AssetRef>MAP.01</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L1</TileSetRef>
           <PropertySetRef>Props.Level1</PropertySetRef>
@@ -1066,7 +1066,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="2" Name="CIVILIAN ZONE 1" >
-          <SourceRef>MAP.02</SourceRef>
+          <AssetRef>MAP.02</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L4</TileSetRef>
           <PropertySetRef>Props.Default</PropertySetRef>
@@ -1076,7 +1076,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="3" Name="CIVILIAN ZONE 2" >
-          <SourceRef>MAP.03</SourceRef>
+          <AssetRef>MAP.03</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L4</TileSetRef>
           <SpriteSetRefs>
@@ -1085,7 +1085,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="4" Name="CIVILIAN ZONE 3" >
-          <SourceRef>MAP.04</SourceRef>
+          <AssetRef>MAP.04</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L4</TileSetRef>
           <SpriteSetRefs>
@@ -1094,7 +1094,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="5" Name="CIVILIAN ZONE 4" >
-          <SourceRef>MAP.05</SourceRef>
+          <AssetRef>MAP.05</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L4</TileSetRef>
           <SpriteSetRefs>
@@ -1103,7 +1103,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="6" Name="OUTDOOR SECTOR 2" >
-          <SourceRef>MAP.06</SourceRef>
+          <AssetRef>MAP.06</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L1</TileSetRef>
           <PropertySetRef>Props.Level1</PropertySetRef>
@@ -1113,7 +1113,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="7" Name="STORES LEVEL 1" >
-          <SourceRef>MAP.07</SourceRef>
+          <AssetRef>MAP.07</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
@@ -1136,7 +1136,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="8" Name="STORES LEVEL 2" >
-          <SourceRef>MAP.08</SourceRef>
+          <AssetRef>MAP.08</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
@@ -1145,7 +1145,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="9" Name="STORES SECTOR 3" >
-          <SourceRef>MAP.09</SourceRef>
+          <AssetRef>MAP.09</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
@@ -1154,7 +1154,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="10" Name="STORES SECTOR 4" >
-          <SourceRef>MAP.10</SourceRef>
+          <AssetRef>MAP.10</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
@@ -1163,7 +1163,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="11" Name="OUTDOOR SECTOR 3" >
-          <SourceRef>MAP.11</SourceRef>
+          <AssetRef>MAP.11</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L1</TileSetRef>
           <PropertySetRef>Props.Level1</PropertySetRef>
@@ -1173,7 +1173,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="12" Name="MILITARY SECTOR 1" >
-          <SourceRef>MAP.12</SourceRef>
+          <AssetRef>MAP.12</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L7</TileSetRef>
           <SpriteSetRefs>
@@ -1196,7 +1196,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="13" Name="MILITARY SECTOR 2" >
-          <SourceRef>MAP.13</SourceRef>
+          <AssetRef>MAP.13</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L7</TileSetRef>
           <SpriteSetRefs>
@@ -1205,7 +1205,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="14" Name="MILITARY SECTOR 3" >
-          <SourceRef>MAP.14</SourceRef>
+          <AssetRef>MAP.14</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L7</TileSetRef>
           <SpriteSetRefs>
@@ -1214,7 +1214,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="15" Name="MILITARY SECTOR 4" >
-          <SourceRef>MAP.15</SourceRef>
+          <AssetRef>MAP.15</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L7</TileSetRef>
           <SpriteSetRefs>
@@ -1223,7 +1223,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="16" Name="SECURITY ZONE 1" >
-          <SourceRef>MAP.16</SourceRef>
+          <AssetRef>MAP.16</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L5</TileSetRef>
           <SpriteSetRefs>
@@ -1248,7 +1248,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="17" Name="SECURITY ZONE 2" >
-          <SourceRef>MAP.17</SourceRef>
+          <AssetRef>MAP.17</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L5</TileSetRef>
           <SpriteSetRefs>
@@ -1257,7 +1257,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="18" Name="SECURITY ZONE 3" >
-          <SourceRef>MAP.18</SourceRef>
+          <AssetRef>MAP.18</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L5</TileSetRef>
           <SpriteSetRefs>
@@ -1266,7 +1266,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="19" Name="SECURITY ZONE 4" >
-          <SourceRef>MAP.19</SourceRef>
+          <AssetRef>MAP.19</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L5</TileSetRef>
           <SpriteSetRefs>
@@ -1275,7 +1275,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="20" Name="COLONY GROUND SECTOR 3" >
-          <SourceRef>MAP.20</SourceRef>
+          <AssetRef>MAP.20</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L1</TileSetRef>
           <PropertySetRef>Props.Level1</PropertySetRef>
@@ -1285,7 +1285,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="21" Name="SCIENCE SECTOR 1" >
-          <SourceRef>MAP.21</SourceRef>
+          <AssetRef>MAP.21</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L6</TileSetRef>
           <SpriteSetRefs>
@@ -1308,7 +1308,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="22" Name="SCIENCE SECTOR 2" >
-          <SourceRef>MAP.22</SourceRef>
+          <AssetRef>MAP.22</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L6</TileSetRef>
           <SpriteSetRefs>
@@ -1317,7 +1317,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="23" Name="SCIENCE SECTOR 3" >
-          <SourceRef>MAP.23</SourceRef>
+          <AssetRef>MAP.23</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L6</TileSetRef>
           <SpriteSetRefs>
@@ -1326,7 +1326,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="24" Name="SCIENCE SECTOR 4" >
-          <SourceRef>MAP.24</SourceRef>
+          <AssetRef>MAP.24</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L6</TileSetRef>
           <SpriteSetRefs>
@@ -1335,7 +1335,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="25" Name="COLONY GROUND SECTOR 4" >
-          <SourceRef>MAP.25</SourceRef>
+          <AssetRef>MAP.25</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L1</TileSetRef>
           <PropertySetRef>Props.Level1</PropertySetRef>
@@ -1345,7 +1345,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="26" Name="ENGINEERING SECTOR 1" >
-          <SourceRef>MAP.26</SourceRef>
+          <AssetRef>MAP.26</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
@@ -1368,7 +1368,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="27" Name="ENGINEERING SECTOR 2" >
-          <SourceRef>MAP.27</SourceRef>
+          <AssetRef>MAP.27</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
@@ -1377,7 +1377,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="28" Name="ENGINEERING SECTOR 3" >
-          <SourceRef>MAP.28</SourceRef>
+          <AssetRef>MAP.28</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
@@ -1386,7 +1386,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="29" Name="ENGINEERING SECTOR 4" >
-          <SourceRef>MAP.29</SourceRef>
+          <AssetRef>MAP.29</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
@@ -1395,7 +1395,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="30" Name="CORRIDOR ZONE 1" >
-          <SourceRef>MAP.30</SourceRef>
+          <AssetRef>MAP.30</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L4</TileSetRef>
           <SpriteSetRefs>
@@ -1404,7 +1404,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="31" Name="CORRIDOR 2" >
-          <SourceRef>MAP.31</SourceRef>
+          <AssetRef>MAP.31</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L4</TileSetRef>
           <SpriteSetRefs>
@@ -1413,7 +1413,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="32" Name="CORRIDOR 3" >
-          <SourceRef>MAP.32</SourceRef>
+          <AssetRef>MAP.32</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
@@ -1422,7 +1422,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="33" Name="CORRIDOR 4" >
-          <SourceRef>MAP.33</SourceRef>
+          <AssetRef>MAP.33</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
@@ -1431,7 +1431,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="34" Name="CORRIDOR 5" >
-          <SourceRef>MAP.34</SourceRef>
+          <AssetRef>MAP.34</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
@@ -1440,7 +1440,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="35" Name="CORRIDOR ZONE 6" >
-          <SourceRef>MAP.35</SourceRef>
+          <AssetRef>MAP.35</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
@@ -1449,7 +1449,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="36" Name="CORRIDOR ZONE 7" >
-          <SourceRef>MAP.36</SourceRef>
+          <AssetRef>MAP.36</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L4</TileSetRef>
           <SpriteSetRefs>
@@ -1458,7 +1458,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="37" Name="CORRIDOR ZONE 8" >
-          <SourceRef>MAP.37</SourceRef>
+          <AssetRef>MAP.37</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
@@ -1467,7 +1467,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="38" Name="CORRIDOR ZONE 9" >
-          <SourceRef>MAP.38</SourceRef>
+          <AssetRef>MAP.38</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
@@ -1476,7 +1476,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="39" Name="CORRIDOR ZONE 10" >
-          <SourceRef>MAP.39</SourceRef>
+          <AssetRef>MAP.39</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
@@ -1485,7 +1485,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="40" Name="CORRIDOR ZONE 11" >
-          <SourceRef>MAP.40</SourceRef>
+          <AssetRef>MAP.40</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L4</TileSetRef>
           <SpriteSetRefs>
@@ -1494,7 +1494,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="41" Name="CORRIDOR ZONE 12" >
-          <SourceRef>MAP.41</SourceRef>
+          <AssetRef>MAP.41</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
@@ -1503,7 +1503,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="42" Name="CORRIDOR ZONE 13" >
-          <SourceRef>MAP.42</SourceRef>
+          <AssetRef>MAP.42</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
@@ -1512,7 +1512,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="43" Name="CORRIDOR ZONE 14" >
-          <SourceRef>MAP.43</SourceRef>
+          <AssetRef>MAP.43</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L7</TileSetRef>
           <SpriteSetRefs>
@@ -1521,7 +1521,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="44" Name="CORRIDOR 15" >
-          <SourceRef>MAP.44</SourceRef>
+          <AssetRef>MAP.44</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L7</TileSetRef>
           <SpriteSetRefs>
@@ -1530,12 +1530,12 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="45" Name="CORRIDOR 16" >
-          <SourceRef>MAP.45</SourceRef>
+          <AssetRef>MAP.45</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L3</TileSetRef>
         </Level>
         <Level Id="46" Name="CORRIDOR 17" >
-          <SourceRef>MAP.46</SourceRef>
+          <AssetRef>MAP.46</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
@@ -1544,7 +1544,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="47" Name="MAIN TOWER LEVEL 1" >
-          <SourceRef>MAP.47</SourceRef>
+          <AssetRef>MAP.47</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L8</TileSetRef>
           <SpriteSetRefs>
@@ -1567,7 +1567,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="48" Name="MAIN TOWER LEVEL 2" >
-          <SourceRef>MAP.48</SourceRef>
+          <AssetRef>MAP.48</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L8</TileSetRef>
           <SpriteSetRefs>
@@ -1576,7 +1576,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="49" Name="MAIN TOWER LEVEL 3" >
-          <SourceRef>MAP.49</SourceRef>
+          <AssetRef>MAP.49</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L8</TileSetRef>
           <SpriteSetRefs>
@@ -1585,7 +1585,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="50" Name="MAIN TOWER LEVEL 4" >
-          <SourceRef>MAP.50</SourceRef>
+          <AssetRef>MAP.50</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L8</TileSetRef>
           <SpriteSetRefs>
@@ -1594,7 +1594,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="51" Name="MAIN TOWER LEVEL 5" >
-          <SourceRef>MAP.51</SourceRef>
+          <AssetRef>MAP.51</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L8</TileSetRef>
           <SpriteSetRefs>
@@ -1603,7 +1603,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="52" Name="TOWER LEVEL 6" >
-          <SourceRef>MAP.52</SourceRef>
+          <AssetRef>MAP.52</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L8</TileSetRef>
           <SpriteSetRefs>
@@ -1612,7 +1612,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="53" Name="TOWER LEVEL 7" >
-          <SourceRef>MAP.53</SourceRef>
+          <AssetRef>MAP.53</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L8</TileSetRef>
           <SpriteSetRefs>
@@ -1621,7 +1621,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="54" Name="Mission One(\?\?\?)" >
-          <SourceRef>MAP.54</SourceRef>
+          <AssetRef>MAP.54</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L6</TileSetRef>
           <SpriteSetRefs>
@@ -1630,7 +1630,7 @@
           </SpriteSetRefs>
         </Level>
         <Level Id="55" Name="OUTER COLONY SECTOR 5" >
-          <SourceRef>MAP.55</SourceRef>
+          <AssetRef>MAP.55</AssetRef>
           <Format Name="ABTA_MAP" ></Format>
           <TileSetRef>TileSets.L1</TileSetRef>
           <PropertySetRef>Props.Level1</PropertySetRef>
@@ -2270,7 +2270,7 @@
     <ResourceDef Type="Picture" Name="T17LOGO.LBM" />
     <ResourceDef Type="Picture" Name="TITLEBAC.LBM" />
     <ResourceLevelDef Id="1" Name="CRASH LANDING SITE" >
-      <SourceRef>MAP.01</SourceRef>
+      <AssetRef>MAP.01</AssetRef>
       <TileSetRef>TileSets.L1</TileSetRef>
       <PropertySetRef>Props.Default</PropertySetRef>
       <SpriteSetRefs>
@@ -2279,7 +2279,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="2" Name="CIVILIAN ZONE 1" >
-      <SourceRef>MAP.02</SourceRef>
+      <AssetRef>MAP.02</AssetRef>
       <TileSetRef>TileSets.L4</TileSetRef>
       <PropertySetRef>Props.Default</PropertySetRef>
       <SpriteSetRefs>
@@ -2288,7 +2288,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="3" Name="CIVILIAN ZONE 2" >
-      <SourceRef>MAP.03</SourceRef>
+      <AssetRef>MAP.03</AssetRef>
       <TileSetRef>TileSets.L4</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
@@ -2296,7 +2296,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="4" Name="CIVILIAN ZONE 3" >
-      <SourceRef>MAP.04</SourceRef>
+      <AssetRef>MAP.04</AssetRef>
       <TileSetRef>TileSets.L4</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
@@ -2304,7 +2304,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="5" Name="CIVILIAN ZONE 4" >
-      <SourceRef>MAP.05</SourceRef>
+      <AssetRef>MAP.05</AssetRef>
       <TileSetRef>TileSets.L4</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
@@ -2312,7 +2312,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="6" Name="OUTDOOR SECTOR 2" >
-      <SourceRef>MAP.06</SourceRef>
+      <AssetRef>MAP.06</AssetRef>
       <TileSetRef>TileSets.L1</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
@@ -2320,7 +2320,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="7" Name="STORES LEVEL 1" >
-      <SourceRef>MAP.07</SourceRef>
+      <AssetRef>MAP.07</AssetRef>
       <TileSetRef>TileSets.LD</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -2328,7 +2328,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="8" Name="STORES LEVEL 2" >
-      <SourceRef>MAP.08</SourceRef>
+      <AssetRef>MAP.08</AssetRef>
       <TileSetRef>TileSets.LD</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -2336,7 +2336,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="9" Name="STORES SECTOR 3" >
-      <SourceRef>MAP.09</SourceRef>
+      <AssetRef>MAP.09</AssetRef>
       <TileSetRef>TileSets.LD</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -2344,7 +2344,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="10" Name="STORES SECTOR 4" >
-      <SourceRef>MAP.10</SourceRef>
+      <AssetRef>MAP.10</AssetRef>
       <TileSetRef>TileSets.LD</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -2352,7 +2352,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="11" Name="OUTDOOR SECTOR 3" >
-      <SourceRef>MAP.11</SourceRef>
+      <AssetRef>MAP.11</AssetRef>
       <TileSetRef>TileSets.L1</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
@@ -2360,7 +2360,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="12" Name="MILITARY SECTOR 1" >
-      <SourceRef>MAP.12</SourceRef>
+      <AssetRef>MAP.12</AssetRef>
       <TileSetRef>TileSets.L7</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
@@ -2368,7 +2368,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="13" Name="MILITARY SECTOR 2" >
-      <SourceRef>MAP.13</SourceRef>
+      <AssetRef>MAP.13</AssetRef>
       <TileSetRef>TileSets.L7</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
@@ -2376,7 +2376,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="14" Name="MILITARY SECTOR 3" >
-      <SourceRef>MAP.14</SourceRef>
+      <AssetRef>MAP.14</AssetRef>
       <TileSetRef>TileSets.L7</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
@@ -2384,7 +2384,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="15" Name="MILITARY SECTOR 4" >
-      <SourceRef>MAP.15</SourceRef>
+      <AssetRef>MAP.15</AssetRef>
       <TileSetRef>TileSets.L7</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
@@ -2392,7 +2392,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="16" Name="SECURITY ZONE 1" >
-      <SourceRef>MAP.16</SourceRef>
+      <AssetRef>MAP.16</AssetRef>
       <TileSetRef>TileSets.L5</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
@@ -2400,7 +2400,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="17" Name="SECURITY ZONE 2" >
-      <SourceRef>MAP.17</SourceRef>
+      <AssetRef>MAP.17</AssetRef>
       <TileSetRef>TileSets.L5</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
@@ -2408,7 +2408,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="18" Name="SECURITY ZONE 3" >
-      <SourceRef>MAP.18</SourceRef>
+      <AssetRef>MAP.18</AssetRef>
       <TileSetRef>TileSets.L5</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
@@ -2416,7 +2416,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="19" Name="SECURITY ZONE 4" >
-      <SourceRef>MAP.19</SourceRef>
+      <AssetRef>MAP.19</AssetRef>
       <TileSetRef>TileSets.L5</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
@@ -2424,7 +2424,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="20" Name="COLONY GROUND SECTOR 3" >
-      <SourceRef>MAP.20</SourceRef>
+      <AssetRef>MAP.20</AssetRef>
       <TileSetRef>TileSets.L1</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
@@ -2432,7 +2432,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="21" Name="SCIENCE SECTOR 1" >
-      <SourceRef>MAP.21</SourceRef>
+      <AssetRef>MAP.21</AssetRef>
       <TileSetRef>TileSets.L6</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
@@ -2440,7 +2440,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="22" Name="SCIENCE SECTOR 2" >
-      <SourceRef>MAP.22</SourceRef>
+      <AssetRef>MAP.22</AssetRef>
       <TileSetRef>TileSets.L6</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
@@ -2448,7 +2448,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="23" Name="SCIENCE SECTOR 3" >
-      <SourceRef>MAP.23</SourceRef>
+      <AssetRef>MAP.23</AssetRef>
       <TileSetRef>TileSets.L6</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
@@ -2456,7 +2456,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="24" Name="SCIENCE SECTOR 4" >
-      <SourceRef>MAP.24</SourceRef>
+      <AssetRef>MAP.24</AssetRef>
       <TileSetRef>TileSets.L6</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
@@ -2464,7 +2464,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="25" Name="COLONY GROUND SECTOR 4" >
-      <SourceRef>MAP.25</SourceRef>
+      <AssetRef>MAP.25</AssetRef>
       <TileSetRef>TileSets.L1</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
@@ -2472,7 +2472,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="26" Name="ENGINEERING SECTOR 1" >
-      <SourceRef>MAP.26</SourceRef>
+      <AssetRef>MAP.26</AssetRef>
       <TileSetRef>TileSets.L3</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
@@ -2480,7 +2480,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="27" Name="ENGINEERING SECTOR 2" >
-      <SourceRef>MAP.27</SourceRef>
+      <AssetRef>MAP.27</AssetRef>
       <TileSetRef>TileSets.L3</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
@@ -2488,7 +2488,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="28" Name="ENGINEERING SECTOR 3" >
-      <SourceRef>MAP.28</SourceRef>
+      <AssetRef>MAP.28</AssetRef>
       <TileSetRef>TileSets.L3</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
@@ -2496,7 +2496,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="29" Name="ENGINEERING SECTOR 4" >
-      <SourceRef>MAP.29</SourceRef>
+      <AssetRef>MAP.29</AssetRef>
       <TileSetRef>TileSets.L3</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
@@ -2504,7 +2504,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="30" Name="CORRIDOR ZONE 1" >
-      <SourceRef>MAP.30</SourceRef>
+      <AssetRef>MAP.30</AssetRef>
       <TileSetRef>TileSets.L4</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
@@ -2512,7 +2512,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="31" Name="CORRIDOR 2" >
-      <SourceRef>MAP.31</SourceRef>
+      <AssetRef>MAP.31</AssetRef>
       <TileSetRef>TileSets.L4</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
@@ -2520,7 +2520,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="32" Name="CORRIDOR 3" >
-      <SourceRef>MAP.32</SourceRef>
+      <AssetRef>MAP.32</AssetRef>
       <TileSetRef>TileSets.LD</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -2528,7 +2528,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="33" Name="CORRIDOR 4" >
-      <SourceRef>MAP.33</SourceRef>
+      <AssetRef>MAP.33</AssetRef>
       <TileSetRef>TileSets.L3</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
@@ -2536,7 +2536,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="34" Name="CORRIDOR 5" >
-      <SourceRef>MAP.34</SourceRef>
+      <AssetRef>MAP.34</AssetRef>
       <TileSetRef>TileSets.LD</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -2544,7 +2544,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="35" Name="CORRIDOR ZONE 6" >
-      <SourceRef>MAP.35</SourceRef>
+      <AssetRef>MAP.35</AssetRef>
       <TileSetRef>TileSets.LD</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -2552,7 +2552,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="36" Name="CORRIDOR ZONE 7" >
-      <SourceRef>MAP.36</SourceRef>
+      <AssetRef>MAP.36</AssetRef>
       <TileSetRef>TileSets.L4</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
@@ -2560,7 +2560,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="37" Name="CORRIDOR ZONE 8" >
-      <SourceRef>MAP.37</SourceRef>
+      <AssetRef>MAP.37</AssetRef>
       <TileSetRef>TileSets.LD</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -2568,7 +2568,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="38" Name="CORRIDOR ZONE 9" >
-      <SourceRef>MAP.38</SourceRef>
+      <AssetRef>MAP.38</AssetRef>
       <TileSetRef>TileSets.LD</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -2576,7 +2576,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="39" Name="CORRIDOR ZONE 10" >
-      <SourceRef>MAP.39</SourceRef>
+      <AssetRef>MAP.39</AssetRef>
       <TileSetRef>TileSets.L3</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
@@ -2584,7 +2584,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="40" Name="CORRIDOR ZONE 11" >
-      <SourceRef>MAP.40</SourceRef>
+      <AssetRef>MAP.40</AssetRef>
       <TileSetRef>TileSets.L4</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
@@ -2592,7 +2592,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="41" Name="CORRIDOR ZONE 12" >
-      <SourceRef>MAP.41</SourceRef>
+      <AssetRef>MAP.41</AssetRef>
       <TileSetRef>TileSets.L3</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
@@ -2600,7 +2600,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="42" Name="CORRIDOR ZONE 13" >
-      <SourceRef>MAP.42</SourceRef>
+      <AssetRef>MAP.42</AssetRef>
       <TileSetRef>TileSets.L3</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
@@ -2608,7 +2608,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="43" Name="CORRIDOR ZONE 14" >
-      <SourceRef>MAP.43</SourceRef>
+      <AssetRef>MAP.43</AssetRef>
       <TileSetRef>TileSets.L7</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
@@ -2616,7 +2616,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="44" Name="CORRIDOR 15" >
-      <SourceRef>MAP.44</SourceRef>
+      <AssetRef>MAP.44</AssetRef>
       <TileSetRef>TileSets.L7</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
@@ -2624,11 +2624,11 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="45" Name="CORRIDOR 16" >
-      <SourceRef>MAP.45</SourceRef>
+      <AssetRef>MAP.45</AssetRef>
       <TileSetRef>TileSets.L3</TileSetRef>
     </ResourceLevelDef>
     <ResourceLevelDef Id="46" Name="CORRIDOR 17" >
-      <SourceRef>MAP.46</SourceRef>
+      <AssetRef>MAP.46</AssetRef>
       <TileSetRef>TileSets.L3</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
@@ -2636,7 +2636,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="47" Name="MAIN TOWER LEVEL 1" >
-      <SourceRef>MAP.47</SourceRef>
+      <AssetRef>MAP.47</AssetRef>
       <TileSetRef>TileSets.L8</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
@@ -2644,7 +2644,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="48" Name="MAIN TOWER LEVEL 2" >
-      <SourceRef>MAP.48</SourceRef>
+      <AssetRef>MAP.48</AssetRef>
       <TileSetRef>TileSets.L8</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
@@ -2652,7 +2652,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="49" Name="MAIN TOWER LEVEL 3" >
-      <SourceRef>MAP.49</SourceRef>
+      <AssetRef>MAP.49</AssetRef>
       <TileSetRef>TileSets.L8</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
@@ -2660,7 +2660,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="50" Name="MAIN TOWER LEVEL 4" >
-      <SourceRef>MAP.50</SourceRef>
+      <AssetRef>MAP.50</AssetRef>
       <TileSetRef>TileSets.L8</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
@@ -2668,7 +2668,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="51" Name="MAIN TOWER LEVEL 5" >
-      <SourceRef>MAP.51</SourceRef>
+      <AssetRef>MAP.51</AssetRef>
       <TileSetRef>TileSets.L8</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
@@ -2676,7 +2676,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="52" Name="TOWER LEVEL 6" >
-      <SourceRef>MAP.52</SourceRef>
+      <AssetRef>MAP.52</AssetRef>
       <TileSetRef>TileSets.L8</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
@@ -2684,7 +2684,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="53" Name="TOWER LEVEL 7" >
-      <SourceRef>MAP.53</SourceRef>
+      <AssetRef>MAP.53</AssetRef>
       <TileSetRef>TileSets.L8</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
@@ -2692,7 +2692,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="54" Name="Mission One(\?\?\?)" >
-      <SourceRef>MAP.54</SourceRef>
+      <AssetRef>MAP.54</AssetRef>
       <TileSetRef>TileSets.L6</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
@@ -2700,7 +2700,7 @@
       </SpriteSetRefs>
     </ResourceLevelDef>
     <ResourceLevelDef Id="55" Name="OUTER COLONY SECTOR 5" >
-      <SourceRef>MAP.55</SourceRef>
+      <AssetRef>MAP.55</AssetRef>
       <TileSetRef>TileSets.L1</TileSetRef>
       <SpriteSetRefs>
         <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>

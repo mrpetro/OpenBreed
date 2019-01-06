@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <LevelDef Id="1" Name="L1" >
-  <SourceRef>L8MA</SourceRef>
+  <AssetRef>L8MA</AssetRef>
   <TileSetRef>L6BM</TileSetRef>
   <PropertySetResourceRef>DefaultPropertySetDef.xml</PropertySetResourceRef>
   <SpriteSetRefs>
