@@ -13,6 +13,8 @@ namespace OpenBreed.Editor.VM.Database
 {
     public class DbEditorVM : BaseViewModel
     {
+        
+        private IDatabase _edited;
 
         public DbTablesEditorVM DbTablesEditor { get; }
 
@@ -61,18 +63,33 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Public Methods
 
-        public DatabaseVM OpenXmlDatabase(string xmlFilePath)
+        public IDatabase OpenXmlDatabase(string xmlFilePath)
         {
-            var xmlDatabase = new XmlDatabase(xmlFilePath, DatabaseMode.Read);
-            Root.UnitOfWork = new XmlUnitOfWork(xmlDatabase);
-            Root.DataProvider = new DataProvider(Root.UnitOfWork);
-
-            return new DatabaseVM(this.Root, Root.UnitOfWork);
+            return new XmlDatabase(xmlFilePath, DatabaseMode.Read);
         }
 
-        public void SaveDatabase(string filePath)
+        public void EditModel(IDatabase model)
         {
-            throw new NotImplementedException();
+            //Unsubscribe to previous edited item changes
+            if (CurrentDb != null)
+                CurrentDb.PropertyChanged -= CurrentDb_PropertyChanged;
+
+            _edited = model;
+
+            var vm = new DatabaseVM(this.Root, model);
+            UpdateVM(model, vm);
+            CurrentDb = vm;
+            CurrentDb.PropertyChanged += CurrentDb_PropertyChanged;
+        }
+
+        private void CurrentDb_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+
+        }
+
+        private void UpdateVM(IDatabase source, DatabaseVM target)
+        {
+            target.Name = source.Name;
         }
 
         public bool TryCloseDatabase()
@@ -80,11 +97,14 @@ namespace OpenBreed.Editor.VM.Database
             return DbEditorVMHelper.TryCloseDatabase(this);
         }
 
-
-
         public void TryOpenDatabase()
         {
             DbEditorVMHelper.TryOpenDatabase(this);
+        }
+
+        public void TrySaveDatabase()
+        {
+            DbEditorVMHelper.TrySaveDatabase(this);
         }
 
         #endregion Public Methods

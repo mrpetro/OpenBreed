@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Editor.VM.Base;
+using OpenBreed.Editor.VM.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,8 +80,8 @@ namespace OpenBreed.Editor.VM
 
         public override void OpenEntry(string name)
         {
-            var model = GetEntry(name);
-            EditModel(model);
+            var entry = GetEntry(name);
+            EditModel(entry);
             EditableName = name;
         }
 
@@ -90,7 +91,7 @@ namespace OpenBreed.Editor.VM
 
         protected E GetEntry(string name)
         {
-            return Root.UnitOfWork.GetRepository<E>().GetByName(name);
+            return Root.DbEditor.CurrentDb.UnitOfWork.GetRepository<E>().GetByName(name);
         }
 
         protected abstract void UpdateEntry(VM source, E target);

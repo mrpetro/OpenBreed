@@ -1,4 +1,6 @@
-﻿using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Common;
+using OpenBreed.Editor.VM.Base;
+using OpenBreed.Editor.VM.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,8 @@ namespace OpenBreed.Editor.VM
     public abstract class EntryEditorVM : BaseViewModel
     {
         #region Private Fields
+
+        internal DataProvider DataProvider { get { return ServiceLocator.Instance.GetService<DataProvider>(); } }
 
         private string _editableName;
         private bool _EditMode;

@@ -20,7 +20,7 @@ namespace OpenBreed.Editor.VM.Database
         internal DbTablesEditorVM()
         {
             DbTableSelector = new DbTableSelectorVM();
-            DbTableViewer = new DbTableEditorVM();
+            DbTableEditor = new DbTableEditorVM();
         }
 
         #endregion Internal Constructors
@@ -28,7 +28,7 @@ namespace OpenBreed.Editor.VM.Database
         #region Public Properties
 
         public DbTableSelectorVM DbTableSelector { get; private set; }
-        public DbTableEditorVM DbTableViewer { get; private set; }
+        public DbTableEditorVM DbTableEditor { get; private set; }
 
         #endregion Public Properties
 

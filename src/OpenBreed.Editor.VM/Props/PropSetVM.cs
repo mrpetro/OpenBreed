@@ -88,23 +88,6 @@ namespace OpenBreed.Editor.VM.Props
 
         #endregion Public Methods
 
-        #region Internal Methods
-
-        internal void Load(string name)
-        {
-            Name = name;
-
-            var model = Root.DataProvider.GetPropSet(name);
-
-            foreach (var property in model.Items)
-            {
-                var newProp = CreateProp(property);
-                newProp.Load(property);
-                Items.Add(newProp);
-            }
-        }
-
-        #endregion Internal Methods
 
     }
 }

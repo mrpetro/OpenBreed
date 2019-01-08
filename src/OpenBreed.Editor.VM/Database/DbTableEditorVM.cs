@@ -27,6 +27,11 @@ namespace OpenBreed.Editor.VM.Database
 
         public BindingList<Items.DbEntryVM> Items { get; private set; }
 
+        public void OpenEntity(DbEntryVM item)
+        {
+            item.Open();
+        }
+
         #endregion Public Properties
 
 

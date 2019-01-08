@@ -49,10 +49,12 @@ namespace OpenBreed.Editor.VM.Database
         Closing
     }
 
-    public class DatabaseVM : BaseViewModel
+    public class DatabaseVM : BaseViewModel, IDisposable
     {
+
         #region Private Fields
 
+        private string _name;
         private Items.DbEntryVM _openedItem;
         private ProjectState _state;
 
@@ -60,19 +62,26 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Internal Constructors
 
-        internal DatabaseVM(EditorVM root, IUnitOfWork unitOfWork)
+        internal DatabaseVM(EditorVM root, IDatabase database)
         {
             Root = root;
-            UnitOfWork = unitOfWork;
+
+            UnitOfWork = ServiceLocator.Instance.RegisterService<IUnitOfWork>(database.CreateUnitOfWork());
+            DataProvider = ServiceLocator.Instance.RegisterService<DataProvider>(new DataProvider(UnitOfWork));
         }
 
         #endregion Internal Constructors
 
         #region Public Properties
 
-        public string FilePath { get; private set; }
+        public DataProvider DataProvider { get; }
         public bool IsModified { get; internal set; }
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return _name; }
+            set { SetProperty(ref _name, value); }
+        }
+
         public DbEntryVM OpenedItem
         {
             get { return _openedItem; }
@@ -86,17 +95,15 @@ namespace OpenBreed.Editor.VM.Database
             set { SetProperty(ref _state, value); }
         }
 
+        public IUnitOfWork UnitOfWork { get; }
+
+        public void Dispose()
+        {
+            ServiceLocator.Instance.UnregisterService<DataProvider>();
+            ServiceLocator.Instance.UnregisterService<IUnitOfWork>();
+        }
+
         #endregion Public Properties
-
-        #region Internal Properties
-
-        internal IUnitOfWork UnitOfWork { get; }
-
-        #endregion Internal Properties
-
-        #region Public Methods
-
-        #endregion Public Methods
 
         #region Internal Methods
 
@@ -160,5 +167,6 @@ namespace OpenBreed.Editor.VM.Database
         }
 
         #endregion Internal Methods
+
     }
 }

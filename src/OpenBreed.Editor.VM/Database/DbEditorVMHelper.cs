@@ -19,7 +19,7 @@ namespace OpenBreed.Editor.VM.Database
         {
             if (dbEditor.CurrentDb != null)
             {
-                if (Tools.GetNormalizedPath(newDatabaseFilePath) == Tools.GetNormalizedPath(dbEditor.CurrentDb.FilePath))
+                if (Tools.GetNormalizedPath(newDatabaseFilePath) == Tools.GetNormalizedPath(dbEditor.CurrentDb.Name))
                 {
                     //Root.Logger.Warning("Database already opened.");
                     return false;
@@ -41,7 +41,7 @@ namespace OpenBreed.Editor.VM.Database
         internal static bool TryCloseDatabase(DbEditorVM dbEditor)
         {
             if (dbEditor.CurrentDb == null)
-                throw new InvalidOperationException("Expected opened database");
+                throw new InvalidOperationException("Expected current database");
 
             if (dbEditor.CurrentDb.IsModified)
             {
@@ -51,12 +51,21 @@ namespace OpenBreed.Editor.VM.Database
                 if (answer == DialogAnswer.Cancel)
                     return false;
                 else if (answer == DialogAnswer.Yes)
-                    dbEditor.CurrentDb.Save();
+                    dbEditor.CurrentDb.UnitOfWork.Save();
             }
 
+            dbEditor.CurrentDb.Dispose();
             dbEditor.CurrentDb = null;
-            dbEditor.Root.UnitOfWork = null;
 
+            return true;
+        }
+
+        internal static bool TrySaveDatabase(DbEditorVM dbEditor)
+        {
+            if (dbEditor.CurrentDb == null)
+                throw new InvalidOperationException("Expected current database");
+
+            dbEditor.CurrentDb.UnitOfWork.Save();
             return true;
         }
 
@@ -78,8 +87,8 @@ namespace OpenBreed.Editor.VM.Database
             if (!CheckCloseCurrentDatabase(dbEditor, databaseFilePath))
                 return false;
 
-            dbEditor.CurrentDb = dbEditor.OpenXmlDatabase(databaseFilePath);
-
+            var model = dbEditor.OpenXmlDatabase(databaseFilePath);
+            dbEditor.EditModel(model);
             return true;
         }
 

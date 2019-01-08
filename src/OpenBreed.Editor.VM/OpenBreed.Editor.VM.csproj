@@ -111,6 +111,7 @@
     <Compile Include="IOpenFileQuery.cs" />
     <Compile Include="ISaveFileQuery.cs" />
     <Compile Include="IToolController.cs" />
+    <Compile Include="ServiceLocator.cs" />
     <Compile Include="VMConnectorBase.cs" />
     <Compile Include="Levels\Commands\CmdPropertiesInsert.cs" />
     <Compile Include="Levels\Commands\CmdResize.cs" />

@@ -42,7 +42,7 @@ namespace OpenBreed.Editor.VM.Props
 
         protected override void UpdateVM(IPropSetEntry source, PropSetVM target)
         {
-            var model = Root.DataProvider.GetPropSet(source.Name);
+            var model = DataProvider.GetPropSet(source.Name);
 
             foreach (var property in model.Items)
             {

@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common.Tiles;
 using OpenBreed.Editor.VM.Base;
+using OpenBreed.Editor.VM.Database;
 using OpenBreed.Editor.VM.Tiles;
 using System;
 using System.Collections.Generic;
@@ -40,7 +41,7 @@ namespace OpenBreed.Editor.VM.Tiles
 
         protected override void UpdateVM(ITileSetEntry source, TileSetVM target)
         {
-            var model = Root.DataProvider.GetTileSet(source.Name);
+            var model = DataProvider.GetTileSet(source.Name);
 
             target.TileSize = model.TileSize;
             target.SetupTiles(model.Tiles);

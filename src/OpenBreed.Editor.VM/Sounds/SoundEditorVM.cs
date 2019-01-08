@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Sounds;
 using OpenBreed.Editor.VM.Sounds;
+using OpenBreed.Editor.VM.Database;
 
 namespace OpenBreed.Editor.VM.Sounds
 {
@@ -43,7 +44,7 @@ namespace OpenBreed.Editor.VM.Sounds
 
         protected override void UpdateEntry(SoundVM source, ISoundEntry target)
         {
-            var model = Root.DataProvider.GetSound(target.Name);
+            var model = DataProvider.GetSound(target.Name);
 
             model.BitsPerSample = source.BitsPerSample;
             model.Channels = source.Channels;
@@ -53,7 +54,7 @@ namespace OpenBreed.Editor.VM.Sounds
 
         protected override void UpdateVM(ISoundEntry source, SoundVM target)
         {
-            var model = Root.DataProvider.GetSound(source.Name);
+            var model = DataProvider.GetSound(source.Name);
 
             target.BitsPerSample = model.BitsPerSample;
             target.Channels = model.Channels;

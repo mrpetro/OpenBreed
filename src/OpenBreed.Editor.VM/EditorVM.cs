@@ -49,9 +49,11 @@ namespace OpenBreed.Editor.VM
 
         #region Public Constructors
 
-        public EditorVM(IDialogProvider dialogProvider)
+        public EditorVM()
         {
-            DialogProvider = dialogProvider;
+            ServiceLocator.Instance.RegisterService<EditorVM>(this);
+
+            DialogProvider = ServiceLocator.Instance.GetService<IDialogProvider>();
 
             Settings = new SettingsMan();
             ToolsMan = new ToolsMan();
@@ -74,7 +76,6 @@ namespace OpenBreed.Editor.VM
         public DbEditorVM DbEditor { get; }
 
         public IDialogProvider DialogProvider { get; }
-        public DataProvider DataProvider { get; set; }
         public ImageEditorVM ImageEditor { get; }
         public SoundEditorVM SoundEditor { get; }
         public LevelEditorVM LevelEditor { get; }
@@ -92,8 +93,6 @@ namespace OpenBreed.Editor.VM
         }
 
         public ToolsMan ToolsMan { get; }
-        public IUnitOfWork UnitOfWork { get; internal set; }
-
 
         #endregion Public Properties
 
@@ -169,7 +168,7 @@ namespace OpenBreed.Editor.VM
         {
             var dbTableSelectorConnector = new DbTableSelectorConnector(DbEditor.DbTablesEditor.DbTableSelector);
             dbTableSelectorConnector.ConnectTo(DbEditor);
-            var dbTableEditorConnector = new DbTableEditorConnector(DbEditor.DbTablesEditor.DbTableViewer);
+            var dbTableEditorConnector = new DbTableEditorConnector(DbEditor.DbTablesEditor.DbTableEditor);
             dbTableEditorConnector.ConnectTo(DbEditor.DbTablesEditor.DbTableSelector);
 
             LevelEditor.Connect();

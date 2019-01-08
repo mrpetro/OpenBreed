@@ -22,7 +22,9 @@ namespace OpenBreed.Editor.UI.WinForms
         [STAThread]
         static void Main()
         {
-            using (var editor = new EditorVM(new DialogProvider()))
+            ServiceLocator.Instance.RegisterService<IDialogProvider>(new DialogProvider());
+
+            using (var editor = new EditorVM())
             {
                 editor.Run();
             }

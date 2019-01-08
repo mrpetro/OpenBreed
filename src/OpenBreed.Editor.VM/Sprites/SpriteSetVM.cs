@@ -116,7 +116,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         internal void Load(string name)
         {
-            var model = Root.DataProvider.GetSpriteSet(name);
+            var model = Root.DbEditor.CurrentDb.DataProvider.GetSpriteSet(name);
 
             foreach (var sprite in model.Sprites)
                 Items.Add(SpriteVM.Create(sprite));

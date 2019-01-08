@@ -20,6 +20,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
         internal ToolStripMenuItem ExitToolStripMenuItem = null;
         internal ToolStripMenuItem FileCloseDatabaseToolStripMenuItem = null;
         internal ToolStripMenuItem FileOpenDatabaseToolStripMenuItem = null;
+        internal ToolStripMenuItem FileSaveDatabaseToolStripMenuItem = null;
         internal ToolStripSeparator FileSeparator = null;
 
         //View menu
@@ -55,6 +56,8 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             FileCloseDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.DbEditor.TryCloseDatabase();
             FileOpenDatabaseToolStripMenuItem = new ToolStripMenuItem("Open Database...");
             FileOpenDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.DbEditor.TryOpenDatabase();
+            FileSaveDatabaseToolStripMenuItem = new ToolStripMenuItem("Save Database");
+            FileSaveDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.DbEditor.TrySaveDatabase();
             ExitToolStripMenuItem = new ToolStripMenuItem("Exit");
             ExitToolStripMenuItem.Click += (s, a) => MainForm.Close();
             //ViewMapBodyMenuItem = new ToolStripMenuItem("Map body");
@@ -135,6 +138,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
 
             //Setup the File menu
             MainForm.FileToolStripMenuItem.DropDownItems.Add(FileOpenDatabaseToolStripMenuItem);
+            MainForm.FileToolStripMenuItem.DropDownItems.Add(FileSaveDatabaseToolStripMenuItem);
             MainForm.FileToolStripMenuItem.DropDownItems.Add(FileCloseDatabaseToolStripMenuItem);
             MainForm.FileToolStripMenuItem.DropDownItems.Add(FileSeparator);
             MainForm.FileToolStripMenuItem.DropDownItems.Add(ExitToolStripMenuItem);

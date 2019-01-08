@@ -15,6 +15,7 @@ using OpenBreed.Editor.VM.Sprites;
 using OpenBreed.Common.Tiles;
 using OpenBreed.Common.Sprites;
 using OpenBreed.Common.Props;
+using OpenBreed.Common;
 
 namespace OpenBreed.Editor.VM.Levels
 {
@@ -174,7 +175,7 @@ namespace OpenBreed.Editor.VM.Levels
         }
         internal void Load(string name)
         {
-            var model = Root.DataProvider.GetLevel(name);
+            var model = ServiceLocator.Instance.GetService<DataProvider>().GetLevel(name);
 
             foreach (var spriteSet in model.SpriteSets)
                 AddSpriteSet(spriteSet);

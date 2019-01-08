@@ -58,7 +58,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
             {
                 var item = senderGrid.Rows[e.RowIndex].DataBoundItem as DbEntryVM ?? throw new InvalidOperationException();
 
-                item.Open();
+                _vm.OpenEntity(item);
             }
         }
     }
