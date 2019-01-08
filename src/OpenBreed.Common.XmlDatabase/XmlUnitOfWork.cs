@@ -26,7 +26,7 @@ using OpenBreed.Common.XmlDatabase.Repositories;
 
 namespace OpenBreed.Common.XmlDatabase
 {
-    public class XmlUnitOfWork : IUnitOfWork
+    internal class XmlUnitOfWork : IUnitOfWork
     {
         #region Private Fields
 
@@ -38,7 +38,7 @@ namespace OpenBreed.Common.XmlDatabase
 
         #region Public Constructors
 
-        public XmlUnitOfWork(XmlDatabase context)
+        internal XmlUnitOfWork(XmlDatabase context)
         {
             _context = context;
 

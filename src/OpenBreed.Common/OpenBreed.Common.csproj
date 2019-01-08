@@ -53,6 +53,7 @@
     <Compile Include="Formats\FormatParameter.cs" />
     <Compile Include="Formats\IFormatEntry.cs" />
     <Compile Include="Formats\PCMSoundFormat.cs" />
+    <Compile Include="IDatabase.cs" />
     <Compile Include="Images\IImageEntry.cs" />
     <Compile Include="Maps\ILevelEntry.cs" />
     <Compile Include="Maps\LevelModel.cs" />

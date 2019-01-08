@@ -17,14 +17,9 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.XmlDatabase
 {
-    public enum DatabaseMode
-    {
-        Create,
-        Read,
-        Update
-    }
 
-    public class XmlDatabase
+
+    public class XmlDatabase : IDatabase
     {
 
         #region Public Constructors
@@ -46,6 +41,8 @@ namespace OpenBreed.Common.XmlDatabase
 
         public DatabaseMode Mode { get; }
 
+        public string Name { get { return XmlFilePath; } }
+
         public string XmlFilePath { get; }
 
         #endregion Public Properties
@@ -58,6 +55,10 @@ namespace OpenBreed.Common.XmlDatabase
 
         #region Public Methods
 
+        public IUnitOfWork CreateUnitOfWork()
+        {
+            return new XmlUnitOfWork(this);
+        }
         public void Save()
         {
             Data.Save(XmlFilePath);
@@ -66,6 +67,17 @@ namespace OpenBreed.Common.XmlDatabase
         #endregion Public Methods
 
         #region Internal Methods
+
+        internal DatabaseAssetTableDef GetAssetsTable()
+        {
+            var table = Data.Tables.OfType<DatabaseAssetTableDef>().FirstOrDefault();
+            if (table == null)
+            {
+                table = new DatabaseAssetTableDef();
+                Data.Tables.Add(table);
+            }
+            return table;
+        }
 
         internal DatabaseImageTableDef GetImageTable()
         {
@@ -120,18 +132,6 @@ namespace OpenBreed.Common.XmlDatabase
             }
             return table;
         }
-
-        internal DatabaseAssetTableDef GetAssetsTable()
-        {
-            var table = Data.Tables.OfType<DatabaseAssetTableDef>().FirstOrDefault();
-            if (table == null)
-            {
-                table = new DatabaseAssetTableDef();
-                Data.Tables.Add(table);
-            }
-            return table;
-        }
-
         internal DatabaseSpriteSetTableDef GetSpriteSetTable()
         {
             var table = Data.Tables.OfType<DatabaseSpriteSetTableDef>().FirstOrDefault();
