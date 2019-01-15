@@ -32,8 +32,6 @@ namespace OpenBreed.Editor.VM.Palettes
 
         public void Restore(PaletteModel model)
         {
-            Name = model.Name;
-
             Colors.RaiseListChangedEvents = false;
             Colors.Clear();
 

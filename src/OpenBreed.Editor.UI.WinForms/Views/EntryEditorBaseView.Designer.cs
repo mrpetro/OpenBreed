@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Editor.UI.WinForms.Views
 {
-    partial class TileSetEditorView
+    partial class EntryEditorBaseView
     {
         /// <summary>
         /// Required designer variable.
@@ -38,25 +38,23 @@
             this.EntryEditor.Location = new System.Drawing.Point(0, 0);
             this.EntryEditor.MinimumSize = new System.Drawing.Size(232, 147);
             this.EntryEditor.Name = "EntryEditor";
-            this.EntryEditor.Size = new System.Drawing.Size(802, 410);
-            this.EntryEditor.TabIndex = 0;
+            this.EntryEditor.Size = new System.Drawing.Size(800, 450);
+            this.EntryEditor.TabIndex = 2;
             // 
-            // TileSetEditorView
+            // EntryEditorView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(802, 410);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.EntryEditor);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.HideOnClose = true;
-            this.Name = "TileSetEditorView";
-            this.Text = "Properties";
+            this.Name = "EntryEditorView";
+            this.Text = "EntryEditorView";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private Controls.EntryEditorCtrl EntryEditor;
+        protected Controls.EntryEditorCtrl EntryEditor;
     }
 }

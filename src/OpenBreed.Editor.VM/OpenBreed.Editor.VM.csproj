@@ -71,8 +71,11 @@
     <Compile Include="..\Shared\SharedAssemblyInfo.cs">
       <Link>SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Assets\AssetEditorVM.cs" />
+    <Compile Include="Assets\AssetVM.cs" />
     <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="Base\BindingListExtensions.cs" />
+    <Compile Include="Base\Command.cs" />
     <Compile Include="Database\DbTableSelectorVM.cs" />
     <Compile Include="Database\DbTableSelectorConnector.cs" />
     <Compile Include="Database\DbEditorVM.cs" />
@@ -101,6 +104,7 @@
     <Compile Include="Database\Tables\DatabaseAssetTableVM.cs" />
     <Compile Include="EditorVM.cs" />
     <Compile Include="EditorVMHelper.cs" />
+    <Compile Include="EntryEditorFactory.cs" />
     <Compile Include="EntryEditorVM.cs" />
     <Compile Include="EntryEditorBaseVM.cs" />
     <Compile Include="EditableEntryVM.cs" />
@@ -112,6 +116,7 @@
     <Compile Include="ISaveFileQuery.cs" />
     <Compile Include="IToolController.cs" />
     <Compile Include="ServiceLocator.cs" />
+    <Compile Include="ViewFinder.cs" />
     <Compile Include="VMConnectorBase.cs" />
     <Compile Include="Levels\Commands\CmdPropertiesInsert.cs" />
     <Compile Include="Levels\Commands\CmdResize.cs" />

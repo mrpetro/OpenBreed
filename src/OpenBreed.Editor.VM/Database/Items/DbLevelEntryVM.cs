@@ -20,7 +20,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Constructors
 
-        public DbLevelEntryVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
+        public DbLevelEntryVM(DatabaseVM owner) : base(owner)
         {
         }
 
@@ -33,12 +33,6 @@ namespace OpenBreed.Editor.VM.Database.Items
             _entry = entry as ILevelEntry ?? throw new InvalidOperationException($"Expected {nameof(ILevelEntry)}");
 
             base.Load(entry);     
-        }
-
-        public override void Open()
-        {
-            Owner.Root.LevelEditor.Load(_entry.Name);
-            Owner.OpenedItem = this;
         }
 
         #endregion Public Methods

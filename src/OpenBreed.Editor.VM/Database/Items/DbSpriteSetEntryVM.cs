@@ -22,7 +22,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Constructors
 
-        public DbSpriteSetEntryVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
+        public DbSpriteSetEntryVM(DatabaseVM owner) : base(owner)
         {
         }
 
@@ -35,14 +35,6 @@ namespace OpenBreed.Editor.VM.Database.Items
             _entry = entry as ISpriteSetEntry ?? throw new InvalidOperationException($"Expected {nameof(ISpriteSetEntry)}");
 
             base.Load(entry);
-        }
-
-        public override void Open()
-        {
-            throw new NotImplementedException();
-
-            //Owner.Root.PropSetEditor.TryLoad(_model);
-            Owner.OpenedItem = this;
         }
 
         #endregion Public Methods

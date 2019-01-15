@@ -20,7 +20,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Constructors
 
-        public DbImageEntryVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
+        public DbImageEntryVM(DatabaseVM owner) : base(owner)
         {
         }
 
@@ -35,12 +35,6 @@ namespace OpenBreed.Editor.VM.Database.Items
             Description = _entry.Description;
 
             base.Load(entry);
-        }
-
-        public override void Open()
-        {
-            Editor.OpenEntry(_entry.Name);
-            Owner.OpenedItem = this;
         }
 
         #endregion Public Methods

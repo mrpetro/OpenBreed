@@ -25,7 +25,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
             Items = new BindingList<SpriteVM>();
             Items.ListChanged += (s, e) => OnPropertyChanged(nameof(Items));
-            Root.LevelEditor.PaletteSelector.PropertyChanged += Palettes_PropertyChanged;
+            //Root.LevelEditor.PaletteSelector.PropertyChanged += Palettes_PropertyChanged;
 
             PropertyChanged += SpriteSetVM_PropertyChanged;
         }
@@ -40,7 +40,7 @@ namespace OpenBreed.Editor.VM.Sprites
                 Items.Add(SpriteVM.Create(sprite));
 
             Items.ListChanged += (s, e) => OnPropertyChanged(nameof(Items));
-            Root.LevelEditor.PaletteSelector.PropertyChanged += Palettes_PropertyChanged;
+            //Root.LevelEditor.PaletteSelector.PropertyChanged += Palettes_PropertyChanged;
 
             PropertyChanged += SpriteSetVM_PropertyChanged;
         }
@@ -81,9 +81,9 @@ namespace OpenBreed.Editor.VM.Sprites
         {
             switch (e.PropertyName)
             {
-                case nameof(Palette.Colors):
-                    Palette = Root.LevelEditor.PaletteSelector.CurrentItem;
-                    break;
+                //case nameof(Palette.Colors):
+                //    Palette = Root.LevelEditor.PaletteSelector.CurrentItem;
+                //    break;
                 default:
                     break;
             }
@@ -93,9 +93,9 @@ namespace OpenBreed.Editor.VM.Sprites
         {
             switch (e.PropertyName)
             {
-                case nameof(Root.LevelEditor.PaletteSelector.CurrentItem):
-                    Palette = Root.LevelEditor.PaletteSelector.CurrentItem;
-                    break;
+                //case nameof(Root.LevelEditor.PaletteSelector.CurrentItem):
+                //    Palette = Root.LevelEditor.PaletteSelector.CurrentItem;
+                //    break;
                 default:
                     break;
             }

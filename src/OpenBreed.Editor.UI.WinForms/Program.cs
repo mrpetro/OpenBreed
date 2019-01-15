@@ -10,6 +10,7 @@ using OpenBreed.Editor.VM;
 using OpenBreed.Editor.UI.WinForms;
 using OpenBreed.Editor.UI.WinForms.Forms;
 using OpenBreed.Common;
+using OpenBreed.Editor.VM.Database;
 
 namespace OpenBreed.Editor.UI.WinForms
 {

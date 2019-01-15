@@ -24,7 +24,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Constructors
 
-        public DbPaletteEntryVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
+        public DbPaletteEntryVM(DatabaseVM owner) : base(owner)
         {
         }
 
@@ -37,12 +37,6 @@ namespace OpenBreed.Editor.VM.Database.Items
             _entry = entry as IPaletteEntry ?? throw new InvalidOperationException($"Expected {nameof(IPaletteEntry)}");
 
             base.Load(entry);
-        }
-
-        public override void Open()
-        {
-            Editor.OpenEntry(_entry.Name);
-            Owner.OpenedItem = this;
         }
 
         #endregion Public Methods

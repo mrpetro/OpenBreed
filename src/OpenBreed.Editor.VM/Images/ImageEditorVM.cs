@@ -13,7 +13,7 @@ namespace OpenBreed.Editor.VM.Images
     {
         #region Public Constructors
 
-        public ImageEditorVM(EditorVM root) : base(root)
+        public ImageEditorVM()
         {
         }
 
@@ -47,6 +47,7 @@ namespace OpenBreed.Editor.VM.Images
         protected override void UpdateVM(IImageEntry source, ImageVM target)
         {
             target.Image = DataProvider.GetImage(source.Name);
+            target.Name = source.Name;
         }
 
         #endregion Public Methods

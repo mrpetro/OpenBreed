@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using OpenBreed.Editor.VM.Database;
+using OpenBreed.Editor.VM.Database.Items;
+using System.Linq;
 
 namespace OpenBreed.Editor.VM
 {
@@ -29,6 +31,8 @@ namespace OpenBreed.Editor.VM
         #region Public Methods
 
         void ShowMessage(string text, string caption);
+
+        void OpenDbEntryEditor<T>(DbEditorVM editor) where T : DbEntryVM;
 
         void ShowEditorView(EditorVM editor);
 

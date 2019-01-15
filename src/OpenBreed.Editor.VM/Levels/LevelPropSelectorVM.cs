@@ -54,7 +54,7 @@ namespace OpenBreed.Editor.VM.Levels
 
         internal void Connect()
         {
-            Parent.Root.PropertyChanged += Root_PropertyChanged;
+            //Parent.Root.PropertyChanged += Root_PropertyChanged;
         }
 
         #endregion Internal Methods

@@ -21,10 +21,9 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Constructors
 
-        public DbEntryVM(DatabaseVM owner, EntryEditorVM editor)
+        public DbEntryVM(DatabaseVM owner)
         {
             Owner = owner;
-            Editor = editor;
         }
 
         #endregion Public Constructors
@@ -39,8 +38,6 @@ namespace OpenBreed.Editor.VM.Database.Items
             set { SetProperty(ref _description, value); }
         }
 
-        public EntryEditorVM Editor { get; }
-
         #endregion Public Properties
 
         #region Public Methods
@@ -48,11 +45,6 @@ namespace OpenBreed.Editor.VM.Database.Items
         public virtual void Load(IEntry entry)
         {
             Name = entry.Name;
-        }
-
-        public virtual void Open()
-        {
-
         }
 
         #endregion Public Methods

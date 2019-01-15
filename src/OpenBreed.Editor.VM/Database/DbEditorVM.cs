@@ -1,7 +1,14 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.XmlDatabase;
+using OpenBreed.Editor.VM.Assets;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Database.Items;
+using OpenBreed.Editor.VM.Images;
+using OpenBreed.Editor.VM.Levels;
+using OpenBreed.Editor.VM.Palettes;
+using OpenBreed.Editor.VM.Props;
+using OpenBreed.Editor.VM.Sounds;
+using OpenBreed.Editor.VM.Tiles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,14 +20,13 @@ namespace OpenBreed.Editor.VM.Database
 {
     public class DbEditorVM : BaseViewModel
     {
-        
-        private IDatabase _edited;
-
-        public DbTablesEditorVM DbTablesEditor { get; }
 
         #region Private Fields
 
+        private readonly EntryEditorFactory _entryEditorFactory = new EntryEditorFactory();
         private DatabaseVM _currentDb;
+        private IDatabase _edited;
+
         private ProjectState _state;
 
         #endregion Private Fields
@@ -32,11 +38,24 @@ namespace OpenBreed.Editor.VM.Database
             Root = root;
 
             DbTablesEditor = new DbTablesEditorVM();
+
+            _entryEditorFactory.Register<DbTileSetEntryVM, TileSetEditorVM>();
+            _entryEditorFactory.Register<DbPropSetEntryVM, PropSetEditorVM>();
+            _entryEditorFactory.Register<DbPaletteEntryVM, PaletteEditorVM>();
+            _entryEditorFactory.Register<DbImageEntryVM, ImageEditorVM>();
+            _entryEditorFactory.Register<DbSoundEntryVM, SoundEditorVM>();
+            _entryEditorFactory.Register<DbLevelEntryVM, LevelEditorVM>();
+            _entryEditorFactory.Register<DbAssetEntryVM, AssetEditorVM>();
+
+            DbEntryEditors = new BindingList<EntryEditorVM>();
+            DbEntryEditors.ListChanged += (s, a) => OnPropertyChanged(nameof(DbEntryEditors));
+
         }
 
         #endregion Public Constructors
 
         #region Public Properties
+
 
         public DatabaseVM CurrentDb
         {
@@ -44,9 +63,18 @@ namespace OpenBreed.Editor.VM.Database
             set { SetProperty(ref _currentDb, value); }
         }
 
+        public DbTablesEditorVM DbTablesEditor { get; }
+
+        public Action<EntryEditorVM> EditorOpeningAction { get; set; }
+
+        public BindingList<EntryEditorVM> DbEntryEditors { get; }
+
         public string FilePath { get; private set; }
+
         public bool IsModified { get; internal set; }
+
         public string Name { get; set; }
+
         public EditorVM Root { get; private set; }
 
         public ProjectState State
@@ -57,16 +85,7 @@ namespace OpenBreed.Editor.VM.Database
 
         #endregion Public Properties
 
-        #region Internal Properties
-
-        #endregion Internal Properties
-
         #region Public Methods
-
-        public IDatabase OpenXmlDatabase(string xmlFilePath)
-        {
-            return new XmlDatabase(xmlFilePath, DatabaseMode.Read);
-        }
 
         public void EditModel(IDatabase model)
         {
@@ -82,16 +101,28 @@ namespace OpenBreed.Editor.VM.Database
             CurrentDb.PropertyChanged += CurrentDb_PropertyChanged;
         }
 
-        private void CurrentDb_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        public EntryEditorVM OpenEditor(Type entryType)
         {
+            var editor = _entryEditorFactory.CreateEditor(entryType);
+            DbEntryEditors.Add(editor);
 
+            if(EditorOpeningAction != null)
+                EditorOpeningAction(editor);
+
+            editor.CloseAction = () => OnEditorClose(editor);
+
+            return editor;
         }
 
-        private void UpdateVM(IDatabase source, DatabaseVM target)
+        private void OnEditorClose(EntryEditorVM editor)
         {
-            target.Name = source.Name;
+            DbEntryEditors.Remove(editor);
         }
 
+        public IDatabase OpenXmlDatabase(string xmlFilePath)
+        {
+            return new XmlDatabase(xmlFilePath, DatabaseMode.Read);
+        }
         public bool TryCloseDatabase()
         {
             return DbEditorVMHelper.TryCloseDatabase(this);
@@ -108,6 +139,29 @@ namespace OpenBreed.Editor.VM.Database
         }
 
         #endregion Public Methods
+
+        #region Internal Methods
+
+        internal void Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion Internal Methods
+
+        #region Private Methods
+
+        private void CurrentDb_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+
+        }
+
+        private void UpdateVM(IDatabase source, DatabaseVM target)
+        {
+            target.Name = source.Name;
+        }
+
+        #endregion Private Methods
 
         //internal DbEntryVM CreateItem(IEntry entry)
         //{
@@ -162,15 +216,5 @@ namespace OpenBreed.Editor.VM.Database
         //        yield return tableVM;
         //    }
         //}
-
-        #region Internal Methods
-
-        internal void Save()
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion Internal Methods
-
     }
 }

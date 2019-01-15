@@ -30,9 +30,8 @@ namespace OpenBreed.Editor.VM.Props
             Items = new BindingList<PropVM>();
         }
 
-        public PropSetVM(EditorVM root, IPropSetEntry model)
+        public PropSetVM(IPropSetEntry model)
         {
-            Root = root;
             Items = new BindingList<PropVM>();
 
             foreach (var property in model.Items)
@@ -48,8 +47,6 @@ namespace OpenBreed.Editor.VM.Props
         #region Public Properties
 
         public BindingList<PropVM> Items { get; private set; }
-
-        public EditorVM Root { get; }
 
         #endregion Public Properties
 

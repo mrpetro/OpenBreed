@@ -22,7 +22,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Constructors
 
-        public DbTileSetEntryVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
+        public DbTileSetEntryVM(DatabaseVM owner) : base(owner)
         {
         }
 
@@ -37,11 +37,6 @@ namespace OpenBreed.Editor.VM.Database.Items
             base.Load(entry);
         }
 
-        public override void Open()
-        {
-            Editor.OpenEntry(_entry.Name);
-            Owner.OpenedItem = this;
-        }
 
         #endregion Public Methods
     }

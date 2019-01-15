@@ -1,133 +1,133 @@
-﻿using OpenBreed.Common;
-using OpenBreed.Editor.VM.Base;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//using OpenBreed.Common;
+//using OpenBreed.Editor.VM.Base;
+//using System;
+//using System.Collections.Generic;
+//using System.ComponentModel;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
-namespace OpenBreed.Editor.VM.Sprites
-{
-    public class SpriteViewerVM : BaseViewModel
-    {
+//namespace OpenBreed.Editor.VM.Sprites
+//{
+//    public class SpriteViewerVM : BaseViewModel
+//    {
 
-        #region Private Fields
+//        #region Private Fields
 
-        private int _currentIndex = -1;
-        private SpriteVM _currentItem = null;
+//        private int _currentIndex = -1;
+//        private SpriteVM _currentItem = null;
 
-        #endregion Private Fields
+//        #endregion Private Fields
 
-        #region Public Constructors
+//        #region Public Constructors
 
-        public SpriteViewerVM(EditorVM root)
-        {
-            Root = root;
+//        public SpriteViewerVM(EditorVM root)
+//        {
+//            Root = root;
 
-            Items = new BindingList<SpriteVM>();
-            Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
+//            Items = new BindingList<SpriteVM>();
+//            Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
 
-            PropertyChanged += SpriteViewerVM_PropertyChanged;
-        }
+//            PropertyChanged += SpriteViewerVM_PropertyChanged;
+//        }
 
-        public void Connect()
-        {
-            Root.LevelEditor.SpriteSetViewer.PropertyChanged += SpriteSetSelector_PropertyChanged;
-        }
+//        public void Connect()
+//        {
+//            Root.LevelEditor.SpriteSetViewer.PropertyChanged += SpriteSetSelector_PropertyChanged;
+//        }
 
-        #endregion Public Constructors
+//        #endregion Public Constructors
 
-        #region Public Properties
+//        #region Public Properties
 
-        public int CurrentIndex
-        {
-            get { return _currentIndex; }
-            set { SetProperty(ref _currentIndex, value); }
-        }
+//        public int CurrentIndex
+//        {
+//            get { return _currentIndex; }
+//            set { SetProperty(ref _currentIndex, value); }
+//        }
 
-        public SpriteVM CurrentItem
-        {
-            get { return _currentItem; }
-            set { SetProperty(ref _currentItem, value); }
-        }
+//        public SpriteVM CurrentItem
+//        {
+//            get { return _currentItem; }
+//            set { SetProperty(ref _currentItem, value); }
+//        }
 
-        public BindingList<SpriteVM> Items { get; private set; }
+//        public BindingList<SpriteVM> Items { get; private set; }
 
-        public EditorVM Root { get; private set; }
+//        public EditorVM Root { get; private set; }
 
-        #endregion Public Properties
+//        #endregion Public Properties
 
-        #region Private Methods
+//        #region Private Methods
 
-        private void SpriteSetSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            var spriteSetSelector = sender as SpriteSetSelectorVM;
+//        private void SpriteSetSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
+//        {
+//            var spriteSetSelector = sender as SpriteSetSelectorVM;
 
-            switch (e.PropertyName)
-            {
-                case nameof(spriteSetSelector.CurrentItem):
-                    UpdateWithSpriteSet(spriteSetSelector.CurrentItem);
-                    break;
-                default:
-                    break;
-            }
-        }
+//            switch (e.PropertyName)
+//            {
+//                case nameof(spriteSetSelector.CurrentItem):
+//                    UpdateWithSpriteSet(spriteSetSelector.CurrentItem);
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
 
-        private void UpdateWithSpriteSet(SpriteSetVM spriteSet)
-        {
-            try
-            {
-                Items.RaiseListChangedEvents = false;
-                Items.Clear();
+//        private void UpdateWithSpriteSet(SpriteSetVM spriteSet)
+//        {
+//            try
+//            {
+//                Items.RaiseListChangedEvents = false;
+//                Items.Clear();
 
-                if (spriteSet == null)
-                    return;
+//                if (spriteSet == null)
+//                    return;
 
-                spriteSet.Items.ForEach(item => Items.Add(item));
-            }
-            finally
-            {
-                Items.RaiseListChangedEvents = true;
-                Items.ResetBindings();
-            }
-        }
+//                spriteSet.Items.ForEach(item => Items.Add(item));
+//            }
+//            finally
+//            {
+//                Items.RaiseListChangedEvents = true;
+//                Items.ResetBindings();
+//            }
+//        }
 
-        private void SpriteViewerVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(CurrentIndex):
-                    UpdateCurrentItem();
-                    break;
-                case nameof(CurrentItem):
-                    UpdateCurrentIndex();
-                    break;
-                case nameof(Items):
-                    CurrentItem = Items.FirstOrDefault();
-                    break;
-                default:
-                    break;
-            }
-        }
+//        private void SpriteViewerVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
+//        {
+//            switch (e.PropertyName)
+//            {
+//                case nameof(CurrentIndex):
+//                    UpdateCurrentItem();
+//                    break;
+//                case nameof(CurrentItem):
+//                    UpdateCurrentIndex();
+//                    break;
+//                case nameof(Items):
+//                    CurrentItem = Items.FirstOrDefault();
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
 
-        private void UpdateCurrentIndex()
-        {
-            if (Root.LevelEditor.SpriteSetViewer.CurrentItem == null)
-                CurrentIndex = -1;
-            else
-                CurrentIndex = Items.IndexOf(CurrentItem);
-        }
+//        private void UpdateCurrentIndex()
+//        {
+//            if (Root.LevelEditor.SpriteSetViewer.CurrentItem == null)
+//                CurrentIndex = -1;
+//            else
+//                CurrentIndex = Items.IndexOf(CurrentItem);
+//        }
 
-        private void UpdateCurrentItem()
-        {
-            if (CurrentIndex == -1)
-                CurrentItem = null;
-            else
-                CurrentItem = Items[CurrentIndex];
-        }
+//        private void UpdateCurrentItem()
+//        {
+//            if (CurrentIndex == -1)
+//                CurrentItem = null;
+//            else
+//                CurrentItem = Items[CurrentIndex];
+//        }
 
-        #endregion Private Methods
+//        #endregion Private Methods
 
-    }
-}
+//    }
+//}

@@ -52,6 +52,12 @@
     <Compile Include="..\Shared\SharedAssemblyInfo.cs">
       <Link>SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Controls\Assets\AssetEditorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Assets\AssetEditorCtrl.Designer.cs">
+      <DependentUpon>AssetEditorCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Database\DatabaseTableSelectorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -112,6 +118,12 @@
     <Compile Include="Controls\Levels\LevelBodyEditorCtrl.Designer.cs">
       <DependentUpon>LevelBodyEditorCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Levels\LevelEditorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Levels\LevelEditorCtrl.Designer.cs">
+      <DependentUpon>LevelEditorCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Levels\LevelSettingsCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -166,9 +178,7 @@
     <Compile Include="Controls\Sprites\SpriteSetSelectorCtrl.Designer.cs">
       <DependentUpon>SpriteSetSelectorCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Sprites\SpriteViewerCtrl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Controls\Sprites\SpriteViewerCtrl.cs" />
     <Compile Include="Controls\Sprites\SpriteViewerCtrl.Designer.cs">
       <DependentUpon>SpriteViewerCtrl.cs</DependentUpon>
     </Compile>
@@ -231,24 +241,16 @@
     <Compile Include="Views\DbTablesEditorView.Designer.cs">
       <DependentUpon>DbTablesEditorView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\PaletteEditorView.cs">
+    <Compile Include="Views\EntryEditorView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\PaletteEditorView.Designer.cs">
-      <DependentUpon>PaletteEditorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SoundEditorView.cs">
+    <Compile Include="Views\EntryEditorBaseView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\SoundEditorView.Designer.cs">
-      <DependentUpon>SoundEditorView.cs</DependentUpon>
+    <Compile Include="Views\EntryEditorBaseView.Designer.cs">
+      <DependentUpon>EntryEditorBaseView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ImageEditorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\ImageEditorView.Designer.cs">
-      <DependentUpon>ImageEditorView.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Views\ViewFactory.cs" />
     <Compile Include="Views\LogConsoleView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -286,27 +288,13 @@
     <Compile Include="Views\PropertiesView.Designer.cs">
       <DependentUpon>PropertiesView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\TileSetEditorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\TileSetEditorView.Designer.cs">
-      <DependentUpon>TileSetEditorView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PropSetEditorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\PropSetEditorView.Designer.cs">
-      <DependentUpon>PropSetEditorView.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\LevelPropSelectorView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\LevelPropSelectorView.Designer.cs">
       <DependentUpon>LevelPropSelectorView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\SpriteSetsView.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Views\SpriteSetsView.cs" />
     <Compile Include="Views\SpriteSetsView.Designer.cs">
       <DependentUpon>SpriteSetsView.cs</DependentUpon>
     </Compile>
@@ -362,6 +350,9 @@
     <EmbeddedResource Include="Controls\Images\ImageEditorCtrl.resx">
       <DependentUpon>ImageEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Levels\LevelEditorCtrl.resx">
+      <DependentUpon>LevelEditorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Levels\LevelSettingsCtrl.resx">
       <DependentUpon>LevelSettingsCtrl.cs</DependentUpon>
     </EmbeddedResource>
@@ -416,14 +407,8 @@
     <EmbeddedResource Include="Views\DbTablesEditorView.resx">
       <DependentUpon>DbTablesEditorView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\PaletteEditorView.resx">
-      <DependentUpon>PaletteEditorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\SoundEditorView.resx">
-      <DependentUpon>SoundEditorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\ImageEditorView.resx">
-      <DependentUpon>ImageEditorView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\EntryEditorBaseView.resx">
+      <DependentUpon>EntryEditorBaseView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\LogConsoleView.resx">
       <DependentUpon>LogConsoleView.cs</DependentUpon>
@@ -442,12 +427,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PropertiesView.resx">
       <DependentUpon>PropertiesView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\TileSetEditorView.resx">
-      <DependentUpon>TileSetEditorView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\PropSetEditorView.resx">
-      <DependentUpon>PropSetEditorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\LevelPropSelectorView.resx">
       <DependentUpon>LevelPropSelectorView.cs</DependentUpon>

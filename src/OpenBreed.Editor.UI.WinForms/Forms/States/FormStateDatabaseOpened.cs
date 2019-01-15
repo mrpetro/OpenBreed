@@ -24,15 +24,6 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
         internal ToolStripSeparator FileSeparator = null;
 
         //View menu
-        //internal ToolStripMenuItem ViewImagesMenuItem = null;
-        //internal ToolStripMenuItem ViewMapBodyMenuItem = null;
-
-        //internal ToolStripMenuItem ViewMapPalettesMenuItem = null;
-        //internal ToolStripMenuItem ViewMapPropertiesMenuItem = null;
-        //internal ToolStripMenuItem ViewPropertySetMenuItem = null;
-        //internal ToolStripMenuItem ViewSpriteSetsMenuItem = null;
-        //internal ToolStripMenuItem ViewTileSetMenuItem = null;
-        //internal ToolStripMenuItem ViewToolsMenuItem = null;
         internal ToolStripMenuItem ViewDatabaseMenuItem = null;
 
         #endregion Internal Fields
@@ -84,20 +75,10 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
         {
             if (databaseItemVM == null)
                 return;
-            else if (databaseItemVM is DbImageEntryVM)
-                _dbEditorView.ShowImageView();
             else if (databaseItemVM is DbLevelEntryVM)
                 _dbEditorView.ShowLevelView();
-            else if (databaseItemVM is DbPropSetEntryVM)
-                _dbEditorView.ShowPropSetEditorView();
-            else if (databaseItemVM is DbTileSetEntryVM)
-                _dbEditorView.ShowTileSetEditorView();
             else if (databaseItemVM is DbSpriteSetEntryVM)
                 _dbEditorView.ShowSpriteSetEditorView();
-            else if (databaseItemVM is DbPaletteEntryVM)
-                _dbEditorView.ShowPaletteEditorView();
-            else if (databaseItemVM is DbSoundEntryVM)
-                _dbEditorView.ShowSoundEditorView();
             else
                 throw new NotImplementedException();
         }
@@ -118,14 +99,6 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             MainForm.ViewToolStripMenuItem.Enabled = false;
 
             //Setup the View menu
-            //MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewMapBodyMenuItem);
-            //MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewMapPropertiesMenuItem);
-            //MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewMapPalettesMenuItem);
-            //MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewTileSetMenuItem);
-            //MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewSpriteSetsMenuItem);
-            //MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewPropertySetMenuItem);
-            //MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewImagesMenuItem);
-            //MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewToolsMenuItem);
             MainForm.ViewToolStripMenuItem.DropDownItems.Remove(ViewDatabaseMenuItem);
         }
 
@@ -133,8 +106,6 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
         {
             if (MainForm.VM.DbEditor.CurrentDb == null)
                 throw new InvalidOperationException("No current database!");
-
-            MainForm.VM.DbEditor.CurrentDb.PropertyChanged += Database_PropertyChanged;
 
             //Setup the File menu
             MainForm.FileToolStripMenuItem.DropDownItems.Add(FileOpenDatabaseToolStripMenuItem);
@@ -151,14 +122,6 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             MainForm.ViewToolStripMenuItem.Enabled = true;
             MainForm.ViewToolStripMenuItem.Visible = true;
 
-            //MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewMapBodyMenuItem);
-            //MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewMapPropertiesMenuItem);
-            //MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewMapPalettesMenuItem);
-            //MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewTileSetMenuItem);
-            //MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewSpriteSetsMenuItem);
-            //MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewPropertySetMenuItem);
-            //MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewImagesMenuItem);
-            //MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewToolsMenuItem);
             MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewDatabaseMenuItem);
 
             MainForm.Text = $"{MainForm.APP_NAME} - {MainForm.VM.DbEditor.CurrentDb.Name}";
@@ -173,20 +136,6 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
 
             _dbEditorView.ShowDatabaseView();
 
-        }
-
-        private void Database_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            var database = sender as DatabaseVM;
-
-            switch (e.PropertyName)
-            {
-                case nameof(database.OpenedItem):
-                    OnOpenedItemChanged(database.OpenedItem);
-                    break;
-                default:
-                    break;
-            }
         }
 
     #endregion Internal Methods

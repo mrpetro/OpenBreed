@@ -56,9 +56,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
-                var item = senderGrid.Rows[e.RowIndex].DataBoundItem as DbEntryVM ?? throw new InvalidOperationException();
+                _vm.CurrentItem = senderGrid.Rows[e.RowIndex].DataBoundItem as DbEntryVM ?? throw new InvalidOperationException();
 
-                _vm.OpenEntity(item);
+                _vm.OpenEntity(_vm.CurrentItem);
             }
         }
     }

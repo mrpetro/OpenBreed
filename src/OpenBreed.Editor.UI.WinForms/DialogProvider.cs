@@ -1,6 +1,8 @@
 ﻿using OpenBreed.Editor.UI.WinForms.Forms;
 using OpenBreed.Editor.UI.WinForms.Views;
 using OpenBreed.Editor.VM;
+using OpenBreed.Editor.VM.Database;
+using OpenBreed.Editor.VM.Database.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -88,6 +90,11 @@ namespace OpenBreed.Editor.UI.WinForms
         public ISaveFileQuery SaveFileDialog()
         {
             return new SaveFileQuery();
+        }
+
+        public void OpenDbEntryEditor<T>(DbEditorVM editor) where T : DbEntryVM
+        {
+            var entryEditor = editor.OpenEditor(typeof(T));
         }
 
         public void ShowEditorView(EditorVM editor)

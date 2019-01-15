@@ -41,7 +41,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
                                          false, 
                                          DataSourceUpdateMode.OnPropertyChanged);
 
-            cbxTileSets.DataSource = _vm.Parent.Root.LevelEditor.CurrentLevel.TileSets;
+            //cbxTileSets.DataSource = _vm.Parent.Root.LevelEditor.CurrentLevel.TileSets;
             cbxTileSets.DisplayMember = "Name";
         }
 

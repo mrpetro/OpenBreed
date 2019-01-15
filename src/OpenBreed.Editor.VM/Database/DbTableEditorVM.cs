@@ -12,6 +12,11 @@ namespace OpenBreed.Editor.VM.Database
 {
     public class DbTableEditorVM : BaseViewModel
     {
+        //public MyIcommand CancelCommand { get; private set; }
+
+
+        private DbEntryVM _currentItem;
+
         #region Internal Constructors
 
         internal DbTableEditorVM()
@@ -25,11 +30,20 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Public Properties
 
-        public BindingList<Items.DbEntryVM> Items { get; private set; }
+        public BindingList<DbEntryVM> Items { get; }
+
+        public DbEntryVM CurrentItem
+        {
+            get { return _currentItem; }
+            set { SetProperty(ref _currentItem, value); }
+        }
 
         public void OpenEntity(DbEntryVM item)
         {
-            item.Open();
+            var editor = ServiceLocator.Instance.GetService<EditorVM>().DbEditor.OpenEditor(item.GetType());
+            editor.OpenEntry(item.Name);
+
+            //item.Open();
         }
 
         #endregion Public Properties

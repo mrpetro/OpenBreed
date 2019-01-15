@@ -29,7 +29,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _vm = vm;
 
             Palettes.Initialize(vm);
-            PaletteEditor.Initialize(vm.Parent.Root.PaletteEditor);
+            //PaletteEditor.Initialize(vm.Parent.Root.PaletteEditor);
         }
 
     }

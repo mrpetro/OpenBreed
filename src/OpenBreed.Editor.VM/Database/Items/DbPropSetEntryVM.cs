@@ -21,7 +21,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Constructors
 
-        public DbPropSetEntryVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
+        public DbPropSetEntryVM(DatabaseVM owner) : base(owner)
         {
         }
 
@@ -34,12 +34,6 @@ namespace OpenBreed.Editor.VM.Database.Items
             _entry = entry as IPropSetEntry ?? throw new InvalidOperationException($"Expected {nameof(IPropSetEntry)}");
 
             base.Load(entry);
-        }
-
-        public override void Open()
-        {
-            Editor.OpenEntry(_entry.Name);
-            Owner.OpenedItem = this;
         }
 
         #endregion Public Methods

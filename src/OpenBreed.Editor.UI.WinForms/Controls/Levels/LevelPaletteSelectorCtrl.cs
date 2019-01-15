@@ -38,7 +38,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
             _vm = vm;
 
             cbxPalettes.DataBindings.Clear();
-            cbxPalettes.DataSource = _vm.Parent.Root.LevelEditor.CurrentLevel.Palettes;
+            //cbxPalettes.DataSource = _vm.Parent.Root.LevelEditor.CurrentLevel.Palettes;
             cbxPalettes.DisplayMember = "Name";
 
             cbxPalettes.DataBindings.Add("SelectedIndex", _vm, nameof(_vm.CurrentIndex), false, DataSourceUpdateMode.OnPropertyChanged);

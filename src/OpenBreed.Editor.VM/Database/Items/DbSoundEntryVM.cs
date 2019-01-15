@@ -18,7 +18,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Constructors
 
-        public DbSoundEntryVM(DatabaseVM owner, EntryEditorVM editor) : base(owner, editor)
+        public DbSoundEntryVM(DatabaseVM owner) : base(owner)
         {
         }
 
@@ -31,12 +31,6 @@ namespace OpenBreed.Editor.VM.Database.Items
             _entry = entry as ISoundEntry ?? throw new InvalidOperationException($"Expected {nameof(ISoundEntry)}");
 
             base.Load(entry);
-        }
-
-        public override void Open()
-        {
-            Editor.OpenEntry(_entry.Name);
-            Owner.OpenedItem = this;
         }
 
         #endregion Public Methods

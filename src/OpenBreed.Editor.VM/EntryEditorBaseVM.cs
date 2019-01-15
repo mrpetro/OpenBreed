@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM
 {
-    public abstract class EntryEditorBaseVM<E,VM> : EntryEditorVM where VM : BaseViewModel, new() where E : IEntry
+    public abstract class EntryEditorBaseVM<E,VM> : EntryEditorVM where VM : EditableEntryVM, new() where E : IEntry
     {
+
         #region Private Fields
 
         private VM _editable;
@@ -18,14 +19,6 @@ namespace OpenBreed.Editor.VM
         private IRepository<E> _repository;
 
         #endregion Private Fields
-
-        #region Public Constructors
-
-        public EntryEditorBaseVM(EditorVM root) : base(root)
-        {
-        }
-
-        #endregion Public Constructors
 
         #region Public Properties
 
@@ -51,20 +44,7 @@ namespace OpenBreed.Editor.VM
             UpdateVM(model, vm);
             Editable = vm;
             Editable.PropertyChanged += Editable_PropertyChanged;
-        }
-
-        #endregion Public Methods
-
-        #region Internal Methods
-
-        public override void OpenNextEntry()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void OpenPreviousEntry()
-        {
-            throw new NotImplementedException();
+            UpdateTitle();
         }
 
         public override void OnStore()
@@ -82,19 +62,29 @@ namespace OpenBreed.Editor.VM
         {
             var entry = GetEntry(name);
             EditModel(entry);
-            EditableName = name;
         }
 
-        #endregion Internal Methods
+        public override void OpenNextEntry()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void OpenPreviousEntry()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion Public Methods
 
         #region Protected Methods
 
         protected E GetEntry(string name)
         {
-            return Root.DbEditor.CurrentDb.UnitOfWork.GetRepository<E>().GetByName(name);
+            return ServiceLocator.Instance.GetService<IUnitOfWork>().GetRepository<E>().GetByName(name);
         }
 
         protected abstract void UpdateEntry(VM source, E target);
+
         protected abstract void UpdateVM(E source, VM target);
 
         #endregion Protected Methods
@@ -106,7 +96,14 @@ namespace OpenBreed.Editor.VM
             //throw new NotImplementedException();
         }
 
-        #endregion Private Methods
+        private void UpdateTitle()
+        {
+            if (Editable == null)
+                Title = $"{EditorName} - no entry to edit";
+            else
+                Title = $"{EditorName} - {Editable.Name}";
+        }
 
+        #endregion Private Methods
     }
 }

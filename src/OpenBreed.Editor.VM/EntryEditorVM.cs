@@ -15,26 +15,19 @@ namespace OpenBreed.Editor.VM
 
         internal DataProvider DataProvider { get { return ServiceLocator.Instance.GetService<DataProvider>(); } }
 
-        private string _editableName;
+        public Action CloseAction { get; set; }
+
+        private string _title;
         private bool _EditMode;
 
         #endregion Private Fields
 
-        #region Public Constructors
-
-        public EntryEditorVM(EditorVM root)
-        {
-            Root = root;
-        }
-
-        #endregion Public Constructors
-
         #region Public Properties
 
-        public string EditableName
+        public string Title
         {
-            get { return _editableName; }
-            set { SetProperty(ref _editableName, value); }
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
         }
 
         public bool EditMode
@@ -43,7 +36,6 @@ namespace OpenBreed.Editor.VM
             set { SetProperty(ref _EditMode, value); }
         }
         public abstract string EditorName { get; }
-        public EditorVM Root { get; }
 
         #endregion Public Properties
 
@@ -57,9 +49,12 @@ namespace OpenBreed.Editor.VM
 
         public abstract void OpenPreviousEntry();
 
-        public void TryClose()
+        public bool TryClose()
         {
+            if (CloseAction != null)
+                CloseAction();
 
+            return true;
         }
 
         #endregion Public Methods

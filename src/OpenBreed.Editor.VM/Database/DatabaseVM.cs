@@ -55,7 +55,6 @@ namespace OpenBreed.Editor.VM.Database
         #region Private Fields
 
         private string _name;
-        private Items.DbEntryVM _openedItem;
         private ProjectState _state;
 
         #endregion Private Fields
@@ -82,12 +81,6 @@ namespace OpenBreed.Editor.VM.Database
             set { SetProperty(ref _name, value); }
         }
 
-        public DbEntryVM OpenedItem
-        {
-            get { return _openedItem; }
-            set { SetProperty(ref _openedItem, value); }
-        }
-
         public EditorVM Root { get; private set; }
         public ProjectState State
         {
@@ -110,21 +103,21 @@ namespace OpenBreed.Editor.VM.Database
         internal DbEntryVM CreateItem(IEntry entry)
         {
             if (entry is IImageEntry)
-                return new DbImageEntryVM(this, Root.ImageEditor);
+                return new DbImageEntryVM(this);
             else if (entry is ISoundEntry)
-                return new DbSoundEntryVM(this, Root.SoundEditor);
+                return new DbSoundEntryVM(this);
             else if (entry is ILevelEntry)
-                return new DbLevelEntryVM(this, null);
+                return new DbLevelEntryVM(this);
             else if (entry is IAssetEntry)
-                return new DbAssetEntryVM(this, null);
+                return new DbAssetEntryVM(this);
             else if (entry is IPropSetEntry)
-                return new DbPropSetEntryVM(this, Root.PropSetEditor);
+                return new DbPropSetEntryVM(this);
             else if (entry is ITileSetEntry)
-                return new DbTileSetEntryVM(this, Root.TileSetEditor);
+                return new DbTileSetEntryVM(this);
             else if (entry is ISpriteSetEntry)
-                return new DbSpriteSetEntryVM(this, null);
+                return new DbSpriteSetEntryVM(this);
             else if (entry is IPaletteEntry)
-                return new DbPaletteEntryVM(this, Root.PaletteEditor);
+                return new DbPaletteEntryVM(this);
             else
                 throw new NotImplementedException(entry.ToString());
         }

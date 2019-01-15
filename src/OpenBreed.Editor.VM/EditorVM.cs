@@ -28,6 +28,7 @@ using OpenBreed.Common.Props;
 using OpenBreed.Common.XmlDatabase;
 using OpenBreed.Common.Sounds;
 using OpenBreed.Editor.VM.Sounds;
+using OpenBreed.Editor.VM.Database.Items;
 
 namespace OpenBreed.Editor.VM
 {
@@ -40,8 +41,8 @@ namespace OpenBreed.Editor.VM
 
     public class EditorVM : BaseViewModel, IDisposable
     {
-
         #region Private Fields
+
 
         private EditorState _state;
 
@@ -53,19 +54,17 @@ namespace OpenBreed.Editor.VM
         {
             ServiceLocator.Instance.RegisterService<EditorVM>(this);
 
+
             DialogProvider = ServiceLocator.Instance.GetService<IDialogProvider>();
+
 
             Settings = new SettingsMan();
             ToolsMan = new ToolsMan();
 
+
             DbEditor = new DbEditorVM(this);
-            TileSetEditor = new TileSetEditorVM(this);
-            PropSetEditor = new PropSetEditorVM(this);
-            PaletteEditor = new PaletteEditorVM(this);
-            SpriteViewer = new SpriteViewerVM(this);
-            ImageEditor = new ImageEditorVM(this);
-            SoundEditor = new SoundEditorVM(this);
-            LevelEditor = new LevelEditorVM(this);
+            //PaletteEditor = new PaletteEditorVM();
+            //SpriteViewer = new SpriteViewerVM(this);
             AssetsDataProvider.ExpandVariables = Settings.ExpandVariables;
         }
 
@@ -76,16 +75,14 @@ namespace OpenBreed.Editor.VM
         public DbEditorVM DbEditor { get; }
 
         public IDialogProvider DialogProvider { get; }
-        public ImageEditorVM ImageEditor { get; }
-        public SoundEditorVM SoundEditor { get; }
-        public LevelEditorVM LevelEditor { get; }
-        public PaletteEditorVM PaletteEditor { get; }
-        public PropSetEditorVM PropSetEditor { get; }
-        public TileSetEditorVM TileSetEditor { get; }
-        public SettingsMan Settings { get; private set; }
-        //public SourceMan SourceMan { get; }
 
-        public SpriteViewerVM SpriteViewer { get; }
+        public PaletteEditorVM PaletteEditor { get; }
+
+        public SettingsMan Settings { get; private set; }
+
+        //public SpriteViewerVM SpriteViewer { get; }
+
+        //public SourceMan SourceMan { get; }
         public EditorState State
         {
             get { return _state; }
@@ -98,35 +95,11 @@ namespace OpenBreed.Editor.VM
 
         #region Public Methods
 
-        public LevelVM CreateLevel()
-        {
-            return new LevelVM(this);
-        }
-
-        internal TileSetVM CreateTileSet(TileSetModel tileSet)
-        {
-            return new TileSetVM(tileSet);
-        }
-
-        internal SpriteSetVM CreateSpiteSet(SpriteSetModel spriteSet)
-        {
-            return new SpriteSetVM(this, spriteSet);
-        }
-
-        internal PropSetVM CreatePropSet(IPropSetEntry propSet)
-        {
-            return new PropSetVM(this, propSet);
-        }
-
-        public SpriteSetVM CreateSpriteSet()
-        {
-            return new SpriteSetVM(this);
-        }
-
         public void Dispose()
         {
             Settings.Store();
         }
+
 
         public void Run()
         {
@@ -155,6 +128,20 @@ namespace OpenBreed.Editor.VM
 
         #region Internal Methods
 
+        internal PropSetVM CreatePropSet(IPropSetEntry propSet)
+        {
+            return new PropSetVM(propSet);
+        }
+
+        internal SpriteSetVM CreateSpiteSet(SpriteSetModel spriteSet)
+        {
+            return new SpriteSetVM(this, spriteSet);
+        }
+
+        internal TileSetVM CreateTileSet(TileSetModel tileSet)
+        {
+            return new TileSetVM(tileSet);
+        }
         internal bool TrySaveDatabase()
         {
             return EditorVMHelper.TrySaveDatabase(this);
@@ -171,8 +158,8 @@ namespace OpenBreed.Editor.VM
             var dbTableEditorConnector = new DbTableEditorConnector(DbEditor.DbTablesEditor.DbTableEditor);
             dbTableEditorConnector.ConnectTo(DbEditor.DbTablesEditor.DbTableSelector);
 
-            LevelEditor.Connect();
-            SpriteViewer.Connect();
+            //LevelEditor.Connect();
+            //SpriteViewer.Connect();
 
             Settings.Restore();
         }

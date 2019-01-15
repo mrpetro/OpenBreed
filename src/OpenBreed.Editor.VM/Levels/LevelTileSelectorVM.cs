@@ -61,17 +61,14 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #region Internal Methods
 
-        internal void Connect()
-        {
-            //Parent.Root.LevelEditor.TileSelector.PropertyChanged += TileSelector_PropertyChanged;
-        }
-
         internal void DrawTile(Graphics gfx, TileRef tileRef, float x, float y, int tileSize)
         {
-            if (tileRef.TileSetId < Parent.Root.LevelEditor.CurrentLevel.TileSets.Count)
-                Parent.Root.LevelEditor.CurrentLevel.TileSets[tileRef.TileSetId].DrawTile(gfx, tileRef.TileId, x, y, tileSize);
-            else
-                DrawDefaultTile(gfx, tileRef, x, y, tileSize);
+            return;
+
+            //if (tileRef.TileSetId < Parent.Root.LevelEditor.CurrentLevel.TileSets.Count)
+            //    Parent.Root.LevelEditor.CurrentLevel.TileSets[tileRef.TileSetId].DrawTile(gfx, tileRef.TileId, x, y, tileSize);
+            //else
+            //    DrawDefaultTile(gfx, tileRef, x, y, tileSize);
         }
 
         #endregion Internal Methods

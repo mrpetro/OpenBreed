@@ -12,6 +12,21 @@ using System.IO;
 using OpenBreed.Editor.VM.Levels.Tools;
 using OpenBreed.Common;
 using OpenBreed.Editor.VM.Database;
+using OpenBreed.Editor.VM;
+using OpenBreed.Editor.VM.Sounds;
+using OpenBreed.Editor.VM.Images;
+using OpenBreed.Editor.VM.Palettes;
+using OpenBreed.Editor.VM.Tiles;
+using OpenBreed.Editor.VM.Props;
+using OpenBreed.Editor.UI.WinForms.Controls.Sounds;
+using OpenBreed.Editor.UI.WinForms.Controls.Tiles;
+using OpenBreed.Editor.UI.WinForms.Controls.Images;
+using OpenBreed.Editor.UI.WinForms.Controls.Props;
+using OpenBreed.Editor.UI.WinForms.Controls.Palettes;
+using OpenBreed.Editor.UI.WinForms.Controls.Levels;
+using OpenBreed.Editor.VM.Levels;
+using OpenBreed.Editor.VM.Assets;
+using OpenBreed.Editor.UI.WinForms.Controls.Assets;
 
 namespace OpenBreed.Editor.UI.WinForms.Views
 {
@@ -31,6 +46,8 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
     public partial class DbEditorView : DockPanel
     {
+        private ViewFactory _viewFactory = new ViewFactory();
+
         #region Private Fields
 
         private const string LAYOUT_CFG_FILE_NAME = "Layout.cfg";
@@ -39,8 +56,6 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         private DbTablesEditorView _databaseView = new DbTablesEditorView();
 
         private DeserializeDockContent _deserializeDockContent;
-        private ImageEditorView _imagesViewerView = new ImageEditorView();
-        private SoundEditorView _soundEditorView = new SoundEditorView();
         private LevelBodyEditorView _levelBodyEditorView = new LevelBodyEditorView();
         private LevelPalettesView _levelPalettesView = new LevelPalettesView();
         //private MapPropertiesView _mapPropertiesView = new MapPropertiesView();
@@ -48,9 +63,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         //private SpriteSetsView _spriteSetsView = new SpriteSetsView();
         private LevelTileSelectorView _levelTileSelectorView = new LevelTileSelectorView();
-        private PaletteEditorView _paletteEditorView = new PaletteEditorView();
-        private PropSetEditorView _propSetEditorView = new PropSetEditorView();
-        private TileSetEditorView _tileSetEditorView = new TileSetEditorView();
+
         private bool _saveLayout = true;
         private DbEditorVM _vm;
 
@@ -63,15 +76,17 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             InitializeComponent();
 
             _deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
+
+            _viewFactory.Register<SoundEditorVM, EntryEditorView<SoundEditorCtrl>>();
+            _viewFactory.Register<TileSetEditorVM, EntryEditorView<TileSetEditorCtrl>>();
+            _viewFactory.Register<PropSetEditorVM, EntryEditorView<PropSetEditorCtrl>>();
+            _viewFactory.Register<ImageEditorVM, EntryEditorView<ImageEditorCtrl>>();
+            _viewFactory.Register<PaletteEditorVM, EntryEditorView<PaletteEditorCtrl>>();
+            _viewFactory.Register<LevelEditorVM, EntryEditorView<LevelEditorCtrl>>();
+            _viewFactory.Register<AssetEditorVM, EntryEditorView<AssetEditorCtrl>>();
         }
 
         #endregion Public Constructors
-
-        //public void CloseView(ProjectViewType type)
-        //{
-        //    var view = GetView(type);
-        //    view.Close();
-        //}
 
         #region Public Methods
 
@@ -81,22 +96,6 @@ namespace OpenBreed.Editor.UI.WinForms.Views
                 return;
             _databaseView.Close();
             _databaseView = null;
-        }
-
-        public void CloseSoundEditorView()
-        {
-            if (_soundEditorView == null)
-                return;
-            _soundEditorView.Close();
-            _soundEditorView = null;
-        }
-
-        public void CloseImagesView()
-        {
-            if (_imagesViewerView == null)
-                return;
-            _imagesViewerView.Close();
-            _imagesViewerView = null;
         }
 
         public void CloseLevelBodyView()
@@ -132,42 +131,13 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _levelTileSelectorView = null;
         }
 
-        public void CloseTileSetEditorView()
-        {
-            if (_tileSetEditorView == null)
-                return;
-            _tileSetEditorView.Close();
-            _tileSetEditorView = null;
-        }
-
-        public void ClosePropSetEditorView()
-        {
-            if (_propSetEditorView == null)
-                return;
-            _propSetEditorView.Close();
-            _propSetEditorView = null;
-        }
-
-        public void ClosePaletteEditorView()
-        {
-            if (_paletteEditorView == null)
-                return;
-            _paletteEditorView.Close();
-            _paletteEditorView = null;
-        }
-
         public void HideAllViews()
         {
             CloseDatabaseView();
-            CloseImagesView();
-            ClosePropSetEditorView();
-            CloseTileSetEditorView();
-            ClosePaletteEditorView();
             CloseLevelTileSelectorView();
             CloseLevelPropSelectorView();
             CloseLevelPalettesView();
             CloseLevelBodyView();
-            CloseSoundEditorView();
         }
 
         public void Initialize(DbEditorVM vm)
@@ -177,9 +147,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
             _vm = vm;
 
-            //_mapPropertiesView.Initialize(_vm.Root.Map.Properties);
-
-            //_vm.Root.ToolsMan.ToolActivated += ToolsMan_ToolActivated;
+            _vm.EditorOpeningAction = (editor) => OnEntryEditorOpening(editor);
 
             RestoreLayout();
         }
@@ -192,17 +160,6 @@ namespace OpenBreed.Editor.UI.WinForms.Views
                 LoadFromXml(configFile, _deserializeDockContent);
         }
 
-
-
-        internal void ShowSoundEditorView()
-        {
-            if (_soundEditorView == null)
-                _soundEditorView = new SoundEditorView();
-
-            _soundEditorView.Initialize(_vm.Root.SoundEditor);
-            _soundEditorView.Show(this, DockState.Document);
-        }
-
         public void ShowDatabaseView()
         {
             if (_databaseView == null)
@@ -212,77 +169,41 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _databaseView.Show(this, DockState.DockLeft);
         }
 
-        public void ShowImageView()
-        {
-            if (_imagesViewerView == null)
-                _imagesViewerView = new ImageEditorView();
+        //public void ShowLevelBodyEditorView()
+        //{
+        //    if (_levelBodyEditorView == null)
+        //        _levelBodyEditorView = new LevelBodyEditorView();
 
-            _imagesViewerView.Initialize(_vm.Root.ImageEditor);
-            _imagesViewerView.Show(this, DockState.Document);
-        }
+        //    _levelBodyEditorView.Initialize(_vm.Root.LevelEditor.BodyEditor);
+        //    _levelBodyEditorView.Show(this, DockState.Document);
+        //}
 
-        public void ShowLevelBodyEditorView()
-        {
-            if (_levelBodyEditorView == null)
-                _levelBodyEditorView = new LevelBodyEditorView();
+        //public void ShowLevelPalettesView()
+        //{
+        //    if (_levelPalettesView == null)
+        //        _levelPalettesView = new LevelPalettesView();
 
-            _levelBodyEditorView.Initialize(_vm.Root.LevelEditor.BodyEditor);
-            _levelBodyEditorView.Show(this, DockState.Document);
-        }
+        //    _levelPalettesView.Initialize(_vm.Root.LevelEditor.PaletteSelector);
+        //    _levelPalettesView.Show(this, DockState.DockLeft);
+        //}
 
-        public void ShowLevelPalettesView()
-        {
-            if (_levelPalettesView == null)
-                _levelPalettesView = new LevelPalettesView();
+        //public void ShowLevelPropSelectorView()
+        //{
+        //    if (_levelPropSelectorView == null)
+        //        _levelPropSelectorView = new LevelPropSelectorView();
 
-            _levelPalettesView.Initialize(_vm.Root.LevelEditor.PaletteSelector);
-            _levelPalettesView.Show(this, DockState.DockLeft);
-        }
+        //    _levelPropSelectorView.Initialize(_vm.Root.LevelEditor.PropSelector);
+        //    _levelPropSelectorView.Show(this, DockState.DockLeft);
+        //}
 
-        public void ShowLevelPropSelectorView()
-        {
-            if (_levelPropSelectorView == null)
-                _levelPropSelectorView = new LevelPropSelectorView();
+        //public void ShowLevelTileSelectorView()
+        //{
+        //    if (_levelTileSelectorView == null)
+        //        _levelTileSelectorView = new LevelTileSelectorView();
 
-            _levelPropSelectorView.Initialize(_vm.Root.LevelEditor.PropSelector);
-            _levelPropSelectorView.Show(this, DockState.DockLeft);
-        }
-
-        public void ShowLevelTileSelectorView()
-        {
-            if (_levelTileSelectorView == null)
-                _levelTileSelectorView = new LevelTileSelectorView();
-
-            _levelTileSelectorView.Initialize(_vm.Root.LevelEditor.TileSelector);
-            _levelTileSelectorView.Show(this, DockState.DockLeft);
-        }
-
-        internal void ShowPaletteEditorView()
-        {
-            if (_paletteEditorView == null)
-                _paletteEditorView = new PaletteEditorView();
-
-            _paletteEditorView.Initialize(_vm.Root.PaletteEditor);
-            _paletteEditorView.Show(this, DockState.Document);
-        }
-
-        public void ShowPropSetEditorView()
-        {
-            if(_propSetEditorView == null)
-                _propSetEditorView = new PropSetEditorView();
-
-            _propSetEditorView.Initialize(_vm.Root.PropSetEditor);
-            _propSetEditorView.Show(this, DockState.Document);
-        }
-
-        public void ShowTileSetEditorView()
-        {
-            if (_tileSetEditorView == null)
-                _tileSetEditorView = new TileSetEditorView();
-
-            _tileSetEditorView.Initialize(_vm.Root.TileSetEditor);
-            _tileSetEditorView.Show(this, DockState.Document);
-        }
+        //    _levelTileSelectorView.Initialize(_vm.Root.LevelEditor.TileSelector);
+        //    _levelTileSelectorView.Show(this, DockState.DockLeft);
+        //}
 
         public void StoreLayout()
         {
@@ -299,10 +220,10 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         internal void ShowLevelView()
         {
-            ShowLevelTileSelectorView();
-            ShowLevelPropSelectorView();
-            ShowLevelPalettesView();
-            ShowLevelBodyEditorView();
+            //ShowLevelTileSelectorView();
+            //ShowLevelPropSelectorView();
+            //ShowLevelPalettesView();
+            //ShowLevelBodyEditorView();
         }
 
         internal void ShowSpriteSetEditorView()
@@ -311,37 +232,6 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         }
 
         #endregion Internal Methods
-
-        //public void ShowView(ProjectViewType type)
-        //{
-        //    var view = GetView(type);
-
-        //    view.Show();
-        //}
-        //protected DockContent GetView(ProjectViewType viewType)
-        //{
-        //    switch (viewType)
-        //    {
-        //        case ProjectViewType.MapBody:
-        //            return _mapBodyView;
-        //        case ProjectViewType.MapProperties:
-        //            return _mapPropertiesView;
-        //        case ProjectViewType.MapPalettes:
-        //            return _mapPalettesView;
-        //        case ProjectViewType.TileSet:
-        //            return _tileSetView;
-        //        case ProjectViewType.SpriteSets:
-        //            return _spriteSetsView;
-        //        case ProjectViewType.PropertySet:
-        //            return _propSetsView;
-        //        case ProjectViewType.Images:
-        //            return _imagesView;
-        //        case ProjectViewType.Tools:
-        //            return _toolsView;
-        //        default:
-        //            throw new InvalidOperationException("Unknown ProjectViewType: " + viewType);
-        //    }
-        //}
 
         #region Private Methods
 
@@ -359,6 +249,13 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             //    return m_taskList;
             //else
             return null;
+        }
+
+        private void OnEntryEditorOpening(EntryEditorVM editor)
+        {
+            var editorView = _viewFactory.CreateView(editor.GetType());
+            editorView.Initialize(editor);
+            editorView.Show(this, DockState.Document);
         }
 
         #endregion Private Methods

@@ -14,7 +14,7 @@ namespace OpenBreed.Editor.VM.Props
 
         #region Public Constructors
 
-        public PropSetEditorVM(EditorVM root) : base(root)
+        public PropSetEditorVM()
         {
             PropertyChanged += This_PropertyChanged;
         }
@@ -43,6 +43,7 @@ namespace OpenBreed.Editor.VM.Props
         protected override void UpdateVM(IPropSetEntry source, PropSetVM target)
         {
             var model = DataProvider.GetPropSet(source.Name);
+            target.Name = source.Name;
 
             foreach (var property in model.Items)
             {

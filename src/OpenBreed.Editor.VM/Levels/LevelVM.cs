@@ -35,9 +35,8 @@ namespace OpenBreed.Editor.VM.Levels
 
         #region Public Constructors
 
-        public LevelVM(EditorVM root)
+        public LevelVM()
         {
-            Root = root;
             Body = new LevelBodyVM(this);
             Properties = new LevelPropertiesVM(this);
 
@@ -80,8 +79,6 @@ namespace OpenBreed.Editor.VM.Levels
             set { SetProperty(ref _propSet, value); }
         }
 
-        public EditorVM Root { get; }
-
         public AssetBase Source
         {
             get { return _source; }
@@ -101,27 +98,27 @@ namespace OpenBreed.Editor.VM.Levels
 
         #region Public Methods
 
-        public void AddSpriteSet(SpriteSetModel spriteSet)
-        {
-            SpriteSets.Add(Root.CreateSpiteSet(spriteSet));
-        }
+        //public void AddSpriteSet(SpriteSetModel spriteSet)
+        //{
+        //    SpriteSets.Add(Root.CreateSpiteSet(spriteSet));
+        //}
 
-        public void AddSpriteSet(string name)
-        {
-            var newSpriteSet = Root.CreateSpriteSet();
-            newSpriteSet.Load(name);
-            SpriteSets.Add(newSpriteSet);
-        }
+        //public void AddSpriteSet(string name)
+        //{
+        //    var newSpriteSet = Root.CreateSpriteSet();
+        //    newSpriteSet.Load(name);
+        //    SpriteSets.Add(newSpriteSet);
+        //}
 
-        public void AddTileSet(TileSetModel tileSet)
-        {
-            TileSets.Add(Root.CreateTileSet(tileSet));
-        }
+        //public void AddTileSet(TileSetModel tileSet)
+        //{
+        //    TileSets.Add(Root.CreateTileSet(tileSet));
+        //}
 
-        public void LoadPropSet(IPropSetEntry propSet)
-        {
-            PropSet = Root.CreatePropSet(propSet);
-        }
+        //public void LoadPropSet(IPropSetEntry propSet)
+        //{
+        //    PropSet = Root.CreatePropSet(propSet);
+        //}
 
         public void Restore(List<PaletteModel> palettes)
         {
@@ -173,28 +170,28 @@ namespace OpenBreed.Editor.VM.Levels
         {
             Body.ConnectEvents();
         }
-        internal void Load(string name)
-        {
-            var model = ServiceLocator.Instance.GetService<DataProvider>().GetLevel(name);
+        //internal void Load(string name)
+        //{
+        //    var model = ServiceLocator.Instance.GetService<DataProvider>().GetLevel(name);
 
-            foreach (var spriteSet in model.SpriteSets)
-                AddSpriteSet(spriteSet);
+        //    foreach (var spriteSet in model.SpriteSets)
+        //        AddSpriteSet(spriteSet);
 
-            foreach (var tileSet in model.TileSets)
-                AddTileSet(tileSet);
+        //    foreach (var tileSet in model.TileSets)
+        //        AddTileSet(tileSet);
 
-            if(model.PropSet != null)
-                LoadPropSet(model.PropSet);
+        //    if(model.PropSet != null)
+        //        LoadPropSet(model.PropSet);
 
-            Properties.Load(model.Map);
-            Body.Load(model.Map);
+        //    Properties.Load(model.Map);
+        //    Body.Load(model.Map);
 
-            Root.LevelEditor.PaletteSelector.PropertyChanged += PaletteSelector_PropertyChanged;
+        //    Root.LevelEditor.PaletteSelector.PropertyChanged += PaletteSelector_PropertyChanged;
 
-            Restore(model.Palettes);
-            Root.LevelEditor.PaletteSelector.CurrentItem = Palettes.FirstOrDefault();
-            Root.LevelEditor.BodyEditor.CurrentMapBody = Body;
-        }
+        //    Restore(model.Palettes);
+        //    Root.LevelEditor.PaletteSelector.CurrentItem = Palettes.FirstOrDefault();
+        //    Root.LevelEditor.BodyEditor.CurrentMapBody = Body;
+        //}
 
         #endregion Internal Methods
 
@@ -222,24 +219,24 @@ namespace OpenBreed.Editor.VM.Levels
                 return Source.Name;
         }
 
-        private void PaletteSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            var paletteSelector = sender as LevelPaletteSelectorVM;
+        //private void PaletteSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        //{
+        //    var paletteSelector = sender as LevelPaletteSelectorVM;
 
-            switch (e.PropertyName)
-            {
-                case nameof(paletteSelector.CurrentItem):
-                    Root.PaletteEditor.Editable = paletteSelector.CurrentItem;
-                    Root.PaletteEditor.CurrentColorIndex = 0;
+        //    switch (e.PropertyName)
+        //    {
+        //        case nameof(paletteSelector.CurrentItem):
+        //            Root.PaletteEditor.Editable = paletteSelector.CurrentItem;
+        //            Root.PaletteEditor.CurrentColorIndex = 0;
 
-                    foreach (var tileSet in TileSets)
-                        tileSet.Palette = paletteSelector.CurrentItem;
+        //            foreach (var tileSet in TileSets)
+        //                tileSet.Palette = paletteSelector.CurrentItem;
 
-                    break;
-                default:
-                    break;
-            }
-        }
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //}
 
 
         //internal void Load(LevelDef levelDef)

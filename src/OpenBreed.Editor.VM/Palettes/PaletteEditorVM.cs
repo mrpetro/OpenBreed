@@ -22,7 +22,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Public Constructors
 
-        public PaletteEditorVM(EditorVM root) : base(root)
+        public PaletteEditorVM()
         {
         }
 
@@ -62,7 +62,15 @@ namespace OpenBreed.Editor.VM.Palettes
         protected override void UpdateVM(IPaletteEntry source, PaletteVM target)
         {
             var model = DataProvider.GetPalette(source.Name);
-            target.Restore(model);
+            target.Name = source.Name;
+
+            target.Colors.UpdateAfter(() => 
+            {
+                target.Colors.Clear();
+
+                foreach (var color in model.Data)
+                    target.Colors.Add(color);
+            }); 
         }
 
         #endregion Public Properties

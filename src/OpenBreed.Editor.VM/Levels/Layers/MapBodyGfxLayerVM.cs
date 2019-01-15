@@ -51,7 +51,7 @@ namespace OpenBreed.Editor.VM.Levels.Layers
                 {
                     var tileRef = GetCell(xIndex, yIndex);
 
-                    Body.Map.Root.LevelEditor.TileSelector.DrawTile(gfx, tileRef, xIndex * tileSize, yIndex * tileSize, tileSize);
+                    //Body.Map.Root.LevelEditor.TileSelector.DrawTile(gfx, tileRef, xIndex * tileSize, yIndex * tileSize, tileSize);
                     //Body.Map.Editor.PropertySet.DrawProperty(gfx, tile.PropertyId, xIndex * tileSize, yIndex * tileSize, tileSize);
                 }
             }
