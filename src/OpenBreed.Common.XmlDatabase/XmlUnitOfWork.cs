@@ -28,6 +28,7 @@ namespace OpenBreed.Common.XmlDatabase
 {
     internal class XmlUnitOfWork : IUnitOfWork
     {
+
         #region Private Fields
 
         private readonly XmlDatabase _context;
@@ -36,7 +37,7 @@ namespace OpenBreed.Common.XmlDatabase
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
         internal XmlUnitOfWork(XmlDatabase context)
         {
@@ -45,9 +46,11 @@ namespace OpenBreed.Common.XmlDatabase
             RegisterRepos();
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
+
+        public string Name { get { return _context.Name; } }
 
         public IEnumerable<IRepository> Repositories { get { return _repositories.Values; } }
 
@@ -96,5 +99,6 @@ namespace OpenBreed.Common.XmlDatabase
         }
 
         #endregion Private Methods
+
     }
 }
