@@ -76,6 +76,7 @@
     <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="Base\BindingListExtensions.cs" />
     <Compile Include="Base\Command.cs" />
+    <Compile Include="Database\DbTableEditorExVM.cs" />
     <Compile Include="Database\DbTableSelectorVM.cs" />
     <Compile Include="Database\DbTableSelectorConnector.cs" />
     <Compile Include="Database\DbEditorVM.cs" />
@@ -93,7 +94,7 @@
     <Compile Include="Database\Items\DbTileSetEntryVM.cs" />
     <Compile Include="Database\Items\DbPropSetEntryVM.cs" />
     <Compile Include="Database\Items\DbAssetEntryVM.cs" />
-    <Compile Include="Database\Tables\DatabaseTableVM.cs" />
+    <Compile Include="Database\Tables\DbTableVM.cs" />
     <Compile Include="Database\Tables\DatabaseImageTableVM.cs" />
     <Compile Include="Database\Tables\DatabaseLevelTableVM.cs" />
     <Compile Include="Database\Tables\DatabasePaletteTableVM.cs" />

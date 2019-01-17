@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Database
 {
-    partial class DatabaseTableSelectorCtrl
+    partial class DbTableEditorCtrl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,30 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cbxTables = new System.Windows.Forms.ComboBox();
+            this.DGV = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
             this.SuspendLayout();
             // 
-            // cbxTables
+            // DGV
             // 
-            this.cbxTables.FormattingEnabled = true;
-            this.cbxTables.Location = new System.Drawing.Point(3, 3);
-            this.cbxTables.Name = "cbxTables";
-            this.cbxTables.Size = new System.Drawing.Size(173, 21);
-            this.cbxTables.TabIndex = 1;
+            this.DGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DGV.Location = new System.Drawing.Point(0, 0);
+            this.DGV.Name = "DGV";
+            this.DGV.Size = new System.Drawing.Size(557, 266);
+            this.DGV.TabIndex = 0;
             // 
-            // DatabaseTableManagerCtrl
+            // DbTableEditorCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.cbxTables);
-            this.Name = "DatabaseTableManagerCtrl";
-            this.Size = new System.Drawing.Size(313, 28);
+            this.Controls.Add(this.DGV);
+            this.Name = "DbTableEditorCtrl";
+            this.Size = new System.Drawing.Size(557, 266);
+            ((System.ComponentModel.ISupportInitialize)(this.DGV)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cbxTables;
+        private System.Windows.Forms.DataGridView DGV;
     }
 }

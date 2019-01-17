@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Database;
+using OpenBreed.Editor.VM.Database.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,8 @@ namespace OpenBreed.Editor.VM
 
         internal DataProvider DataProvider { get { return ServiceLocator.Instance.GetService<DataProvider>(); } }
 
-        public Action CloseAction { get; set; }
+        public Action ClosingAction { get; set; }
+        public Action ClosedAction { get; set; }
 
         private string _title;
         private bool _EditMode;
@@ -35,6 +37,7 @@ namespace OpenBreed.Editor.VM
             get { return _EditMode; }
             set { SetProperty(ref _EditMode, value); }
         }
+
         public abstract string EditorName { get; }
 
         #endregion Public Properties
@@ -49,10 +52,9 @@ namespace OpenBreed.Editor.VM
 
         public abstract void OpenPreviousEntry();
 
-        public bool TryClose()
+        public bool Close()
         {
-            if (CloseAction != null)
-                CloseAction();
+            ClosingAction?.Invoke();
 
             return true;
         }

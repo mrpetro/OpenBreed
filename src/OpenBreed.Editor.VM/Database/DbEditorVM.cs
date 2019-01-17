@@ -20,32 +20,21 @@ namespace OpenBreed.Editor.VM.Database
 {
     public class DbEditorVM : BaseViewModel
     {
-
         #region Private Fields
 
-        private readonly EntryEditorFactory _entryEditorFactory = new EntryEditorFactory();
-        private DatabaseVM _currentDb;
-        private IDatabase _edited;
-
-        private ProjectState _state;
+        private DatabaseVM _editable;
+        private IUnitOfWork _edited;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DbEditorVM(EditorVM root)
+        public DbEditorVM()
         {
-            Root = root;
-
             DbTablesEditor = new DbTablesEditorVM();
 
-            _entryEditorFactory.Register<DbTileSetEntryVM, TileSetEditorVM>();
-            _entryEditorFactory.Register<DbPropSetEntryVM, PropSetEditorVM>();
-            _entryEditorFactory.Register<DbPaletteEntryVM, PaletteEditorVM>();
-            _entryEditorFactory.Register<DbImageEntryVM, ImageEditorVM>();
-            _entryEditorFactory.Register<DbSoundEntryVM, SoundEditorVM>();
-            _entryEditorFactory.Register<DbLevelEntryVM, LevelEditorVM>();
-            _entryEditorFactory.Register<DbAssetEntryVM, AssetEditorVM>();
+
+
 
             DbEntryEditors = new BindingList<EntryEditorVM>();
             DbEntryEditors.ListChanged += (s, a) => OnPropertyChanged(nameof(DbEntryEditors));
@@ -56,81 +45,58 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Public Properties
 
-
-        public DatabaseVM CurrentDb
-        {
-            get { return _currentDb; }
-            set { SetProperty(ref _currentDb, value); }
-        }
+        public BindingList<EntryEditorVM> DbEntryEditors { get; }
 
         public DbTablesEditorVM DbTablesEditor { get; }
 
-        public Action<EntryEditorVM> EditorOpeningAction { get; set; }
-
-        public BindingList<EntryEditorVM> DbEntryEditors { get; }
-
-        public string FilePath { get; private set; }
+        public DatabaseVM Editable
+        {
+            get { return _editable; }
+            set { SetProperty(ref _editable, value); }
+        }
+        public Action<EntryEditorVM> EntryEditorOpeningAction { get; set; }
 
         public bool IsModified { get; internal set; }
-
-        public string Name { get; set; }
-
-        public EditorVM Root { get; private set; }
-
-        public ProjectState State
-        {
-            get { return _state; }
-            set { SetProperty(ref _state, value); }
-        }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void EditModel(IDatabase model)
+        public void EditModel(IUnitOfWork model)
         {
             //Unsubscribe to previous edited item changes
-            if (CurrentDb != null)
-                CurrentDb.PropertyChanged -= CurrentDb_PropertyChanged;
+            if (Editable != null)
+                Editable.PropertyChanged -= CurrentDb_PropertyChanged;
 
             _edited = model;
 
-            var vm = new DatabaseVM(this.Root, model);
+            ServiceLocator.Instance.RegisterService<IUnitOfWork>(model);
+            ServiceLocator.Instance.RegisterService<DataProvider>(new DataProvider(model));
+
+            var vm = new DatabaseVM();
             UpdateVM(model, vm);
-            CurrentDb = vm;
-            CurrentDb.PropertyChanged += CurrentDb_PropertyChanged;
+            Editable = vm;
+            Editable.PropertyChanged += CurrentDb_PropertyChanged;
+
+
         }
 
-        public EntryEditorVM OpenEditor(Type entryType)
-        {
-            var editor = _entryEditorFactory.CreateEditor(entryType);
-            DbEntryEditors.Add(editor);
-
-            if(EditorOpeningAction != null)
-                EditorOpeningAction(editor);
-
-            editor.CloseAction = () => OnEditorClose(editor);
-
-            return editor;
-        }
-
-        private void OnEditorClose(EntryEditorVM editor)
-        {
-            DbEntryEditors.Remove(editor);
-        }
-
-        public IDatabase OpenXmlDatabase(string xmlFilePath)
-        {
-            return new XmlDatabase(xmlFilePath, DatabaseMode.Read);
-        }
         public bool TryCloseDatabase()
         {
-            return DbEditorVMHelper.TryCloseDatabase(this);
+            if (DbEditorVMHelper.TryCloseDatabase(this))
+            {
+                _edited = null;
+                ServiceLocator.Instance.UnregisterService<DataProvider>();
+                ServiceLocator.Instance.UnregisterService<IUnitOfWork>();
+                return true;
+            }
+            else
+                return false;
         }
 
-        public void TryOpenDatabase()
+        public void TryOpenXmlDatabase()
         {
-            DbEditorVMHelper.TryOpenDatabase(this);
+            DbEditorVMHelper.TryOpenXmlDatabase(this);
         }
 
         public void TrySaveDatabase()
@@ -142,9 +108,25 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Internal Methods
 
+        internal void OpenEntryEditor(DbEntryVM entry)
+        {
+            //Check if entry editor is already opened. If yes then focus on this entry editor.
+            //var openedDbEntryEditor = DbEntryEditors.FirstOrDefault(item => item.)
+
+            var entryType = entry.GetType();
+            var editor = ServiceLocator.Instance.GetService<EntryEditorFactory>().CreateEditor(entryType);
+            DbEntryEditors.Add(editor);
+
+            EntryEditorOpeningAction?.Invoke(editor);
+
+            editor.ClosedAction = () => OnEntryEditorClosed(editor);
+
+            editor.OpenEntry(entry.Name);
+        }
+
         internal void Save()
         {
-            throw new NotImplementedException();
+            _editable.Save();
         }
 
         #endregion Internal Methods
@@ -156,65 +138,25 @@ namespace OpenBreed.Editor.VM.Database
 
         }
 
-        private void UpdateVM(IDatabase source, DatabaseVM target)
+        private void OnEntryEditorClosed(EntryEditorVM editor)
+        {
+            DbEntryEditors.Remove(editor);
+        }
+
+        private void UpdateVM(IUnitOfWork source, DatabaseVM target)
         {
             target.Name = source.Name;
         }
 
+        public void CloseAllEditors()
+        {
+            var toClose = DbEntryEditors.ToArray();
+
+            foreach (var entryEditor in toClose)
+                entryEditor.Close();
+        }
+
         #endregion Private Methods
 
-        //internal DbEntryVM CreateItem(IEntry entry)
-        //{
-        //    if (entry is IImageEntry)
-        //        return new DbImageEntryVM(this, Root.ImageEditor);
-        //    else if (entry is ISoundEntry)
-        //        return new DbSoundEntryVM(this, Root.SoundEditor);
-        //    else if (entry is ILevelEntry)
-        //        return new DbLevelEntryVM(this, null);
-        //    else if (entry is ISourceEntry)
-        //        return new DbSourceEntryVM(this, null);
-        //    else if (entry is IPropSetEntry)
-        //        return new DbPropSetEntryVM(this, Root.PropSetEditor);
-        //    else if (entry is ITileSetEntry)
-        //        return new DbTileSetEntryVM(this, Root.TileSetEditor);
-        //    else if (entry is ISpriteSetEntry)
-        //        return new DbSpriteSetEntryVM(this, null);
-        //    else if (entry is IPaletteEntry)
-        //        return new DbPaletteEntryVM(this, Root.PaletteEditor);
-        //    else
-        //        throw new NotImplementedException(entry.ToString());
-        //}
-
-        //internal DatabaseTableVM CreateTable(IRepository repository)
-        //{
-        //    if (repository is IRepository<IImageEntry>)
-        //        return new DatabaseImageTableVM(this);
-        //    if (repository is IRepository<ISoundEntry>)
-        //        return new DatabaseSoundTableVM(this);
-        //    else if (repository is IRepository<ILevelEntry>)
-        //        return new DatabaseLevelTableVM(this);
-        //    else if (repository is IRepository<IPropSetEntry>)
-        //        return new DatabasePropertySetTableVM(this);
-        //    else if (repository is IRepository<ISourceEntry>)
-        //        return new DatabaseSourceTableVM(this);
-        //    else if (repository is IRepository<ITileSetEntry>)
-        //        return new DatabaseTileSetTableVM(this);
-        //    else if (repository is IRepository<ISpriteSetEntry>)
-        //        return new DatabaseSpriteSetTableVM(this);
-        //    else if (repository is IRepository<IPaletteEntry>)
-        //        return new DatabasePaletteTableVM(this);
-        //    else
-        //        throw new NotImplementedException(repository.ToString());
-        //}
-
-        //internal IEnumerable<DatabaseTableVM> GetTables()
-        //{
-        //    foreach (var repository in UnitOfWork.Repositories)
-        //    {
-        //        var tableVM = CreateTable(repository);
-        //        tableVM.Load(repository);
-        //        yield return tableVM;
-        //    }
-        //}
     }
 }

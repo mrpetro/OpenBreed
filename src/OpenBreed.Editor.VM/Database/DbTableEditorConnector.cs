@@ -44,7 +44,7 @@ namespace OpenBreed.Editor.VM.Database
             }
         }
 
-        private void OnCurrentTableChanged(DatabaseTableVM currentTable)
+        private void OnCurrentTableChanged(DbTableVM currentTable)
         {
             if (currentTable != null)
                 UpdateWithCurrentTableItems(currentTable);
@@ -52,7 +52,7 @@ namespace OpenBreed.Editor.VM.Database
                 UpdateWithNoItems();
         }
 
-        private void UpdateWithCurrentTableItems(DatabaseTableVM currentTable)
+        private void UpdateWithCurrentTableItems(DbTableVM currentTable)
         {
             Source.Items.UpdateAfter(() =>
             {

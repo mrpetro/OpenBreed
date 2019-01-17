@@ -29,6 +29,7 @@ using OpenBreed.Common.XmlDatabase;
 using OpenBreed.Common.Sounds;
 using OpenBreed.Editor.VM.Sounds;
 using OpenBreed.Editor.VM.Database.Items;
+using OpenBreed.Editor.VM.Assets;
 
 namespace OpenBreed.Editor.VM
 {
@@ -54,6 +55,16 @@ namespace OpenBreed.Editor.VM
         {
             ServiceLocator.Instance.RegisterService<EditorVM>(this);
 
+            var entryEditorFactory = new EntryEditorFactory();
+            entryEditorFactory.Register<DbTileSetEntryVM, TileSetEditorVM>();
+            entryEditorFactory.Register<DbPropSetEntryVM, PropSetEditorVM>();
+            entryEditorFactory.Register<DbPaletteEntryVM, PaletteEditorVM>();
+            entryEditorFactory.Register<DbImageEntryVM, ImageEditorVM>();
+            entryEditorFactory.Register<DbSoundEntryVM, SoundEditorVM>();
+            entryEditorFactory.Register<DbLevelEntryVM, LevelEditorVM>();
+            entryEditorFactory.Register<DbAssetEntryVM, AssetEditorVM>();
+            ServiceLocator.Instance.RegisterService<EntryEditorFactory>(entryEditorFactory);
+
 
             DialogProvider = ServiceLocator.Instance.GetService<IDialogProvider>();
 
@@ -62,7 +73,7 @@ namespace OpenBreed.Editor.VM
             ToolsMan = new ToolsMan();
 
 
-            DbEditor = new DbEditorVM(this);
+            DbEditor = new DbEditorVM();
             //PaletteEditor = new PaletteEditorVM();
             //SpriteViewer = new SpriteViewerVM(this);
             AssetsDataProvider.ExpandVariables = Settings.ExpandVariables;

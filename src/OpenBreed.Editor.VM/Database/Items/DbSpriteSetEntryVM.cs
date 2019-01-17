@@ -22,7 +22,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Constructors
 
-        public DbSpriteSetEntryVM(DatabaseVM owner) : base(owner)
+        public DbSpriteSetEntryVM()
         {
         }
 

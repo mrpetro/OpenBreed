@@ -21,7 +21,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Constructors
 
-        public DbPropSetEntryVM(DatabaseVM owner) : base(owner)
+        public DbPropSetEntryVM()
         {
         }
 

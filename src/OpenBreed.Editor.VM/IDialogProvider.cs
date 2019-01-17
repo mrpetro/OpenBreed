@@ -32,8 +32,6 @@ namespace OpenBreed.Editor.VM
 
         void ShowMessage(string text, string caption);
 
-        void OpenDbEntryEditor<T>(DbEditorVM editor) where T : DbEntryVM;
-
         void ShowEditorView(EditorVM editor);
 
         IFolderBrowserQuery FolderBrowserDialog();

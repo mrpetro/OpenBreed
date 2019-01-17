@@ -35,8 +35,8 @@ namespace OpenBreed.Editor.VM.Database
 
             switch (e.PropertyName)
             {
-                case nameof(dbEditor.CurrentDb):
-                    OnDatabaseChanged(dbEditor.CurrentDb);
+                case nameof(dbEditor.Editable):
+                    OnDatabaseChanged(dbEditor.Editable);
                     break;
                 default:
                     break;

@@ -133,6 +133,8 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         public void HideAllViews()
         {
+            _vm.CloseAllEditors();
+
             CloseDatabaseView();
             CloseLevelTileSelectorView();
             CloseLevelPropSelectorView();
@@ -147,7 +149,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
             _vm = vm;
 
-            _vm.EditorOpeningAction = (editor) => OnEntryEditorOpening(editor);
+            _vm.EntryEditorOpeningAction = (editor) => OnEntryEditorOpening(editor);
 
             RestoreLayout();
         }

@@ -24,7 +24,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Constructors
 
-        public DbPaletteEntryVM(DatabaseVM owner) : base(owner)
+        public DbPaletteEntryVM()
         {
         }
 

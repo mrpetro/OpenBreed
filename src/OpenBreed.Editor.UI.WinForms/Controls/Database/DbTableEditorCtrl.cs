@@ -12,7 +12,7 @@ using OpenBreed.Editor.VM.Database.Items;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Database
 {
-    public partial class DatabaseTableViewerCtrl : UserControl
+    public partial class DbTableEditorCtrl : UserControl
     {
         #region Private Fields
 
@@ -20,7 +20,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
 
         #endregion Private Fields
 
-        public DatabaseTableViewerCtrl()
+        public DbTableEditorCtrl()
         {
             InitializeComponent();
 
@@ -56,9 +56,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
-                _vm.CurrentItem = senderGrid.Rows[e.RowIndex].DataBoundItem as DbEntryVM ?? throw new InvalidOperationException();
+                var item = senderGrid.Rows[e.RowIndex].DataBoundItem as DbEntryVM ?? throw new InvalidOperationException();
 
-                _vm.OpenEntity(_vm.CurrentItem);
+                _vm.OpenEntity(item);
             }
         }
     }

@@ -16,9 +16,9 @@ namespace OpenBreed.Editor.VM
 
         internal static bool TryExit(EditorVM editor)
         {
-            if (editor.DbEditor.CurrentDb != null)
+            if (editor.DbEditor.Editable != null)
             {
-                if (editor.DbEditor.CurrentDb.IsModified)
+                if (editor.DbEditor.Editable.IsModified)
                 {
                     var answer = editor.DialogProvider.ShowMessageWithQuestion("Current database has been modified. Do you want to save it before exiting?",
                                                                                "Save database before exiting?", QuestionDialogButtons.YesNoCancel);
@@ -26,7 +26,7 @@ namespace OpenBreed.Editor.VM
                     if (answer == DialogAnswer.Cancel)
                         return false;
                     else if (answer == DialogAnswer.Yes)
-                        editor.DbEditor.CurrentDb.Save();
+                        editor.DbEditor.Editable.Save();
                 }
             }
 

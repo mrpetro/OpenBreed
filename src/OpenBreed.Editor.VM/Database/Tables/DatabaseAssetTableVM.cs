@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database.Tables
 {
-    public class DatabaseAssetTableVM : DatabaseTableVM
+    public class DatabaseAssetTableVM : DbTableVM
     {
 
         #region Private Fields

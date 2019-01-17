@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Database
 {
-    partial class DatabaseViewerCtrl
+    partial class DbTablesEditorCtrl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TableSelector = new OpenBreed.Editor.UI.WinForms.Controls.Database.DatabaseTableSelectorCtrl();
-            this.TableViewer = new OpenBreed.Editor.UI.WinForms.Controls.Database.DatabaseTableViewerCtrl();
+            this.TableSelector = new OpenBreed.Editor.UI.WinForms.Controls.Database.DbTableSelectorCtrl();
+            this.TableEditor = new OpenBreed.Editor.UI.WinForms.Controls.Database.DbTableEditorCtrl();
             this.SuspendLayout();
             // 
             // TableSelector
@@ -40,21 +40,21 @@
             this.TableSelector.Size = new System.Drawing.Size(665, 28);
             this.TableSelector.TabIndex = 0;
             // 
-            // TableViewer
+            // TableEditor
             // 
-            this.TableViewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TableViewer.Location = new System.Drawing.Point(0, 28);
-            this.TableViewer.Name = "TableViewer";
-            this.TableViewer.Size = new System.Drawing.Size(665, 341);
-            this.TableViewer.TabIndex = 1;
+            this.TableEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TableEditor.Location = new System.Drawing.Point(0, 28);
+            this.TableEditor.Name = "TableEditor";
+            this.TableEditor.Size = new System.Drawing.Size(665, 341);
+            this.TableEditor.TabIndex = 1;
             // 
-            // DatabaseViewerCtrl
+            // DbTablesEditorCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.TableViewer);
+            this.Controls.Add(this.TableEditor);
             this.Controls.Add(this.TableSelector);
-            this.Name = "DatabaseViewerCtrl";
+            this.Name = "DbTablesEditorCtrl";
             this.Size = new System.Drawing.Size(665, 369);
             this.ResumeLayout(false);
 
@@ -62,7 +62,7 @@
 
         #endregion
 
-        private DatabaseTableSelectorCtrl TableSelector;
-        private DatabaseTableViewerCtrl TableViewer;
+        private DbTableSelectorCtrl TableSelector;
+        private DbTableEditorCtrl TableEditor;
     }
 }

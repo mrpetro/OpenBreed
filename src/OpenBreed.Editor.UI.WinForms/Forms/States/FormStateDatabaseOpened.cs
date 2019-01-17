@@ -46,7 +46,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             FileCloseDatabaseToolStripMenuItem = new ToolStripMenuItem("Close database");
             FileCloseDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.DbEditor.TryCloseDatabase();
             FileOpenDatabaseToolStripMenuItem = new ToolStripMenuItem("Open Database...");
-            FileOpenDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.DbEditor.TryOpenDatabase();
+            FileOpenDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.DbEditor.TryOpenXmlDatabase();
             FileSaveDatabaseToolStripMenuItem = new ToolStripMenuItem("Save Database");
             FileSaveDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.DbEditor.TrySaveDatabase();
             ExitToolStripMenuItem = new ToolStripMenuItem("Exit");
@@ -104,7 +104,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
 
         internal override void Setup()
         {
-            if (MainForm.VM.DbEditor.CurrentDb == null)
+            if (MainForm.VM.DbEditor.Editable == null)
                 throw new InvalidOperationException("No current database!");
 
             //Setup the File menu
@@ -124,7 +124,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
 
             MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewDatabaseMenuItem);
 
-            MainForm.Text = $"{MainForm.APP_NAME} - {MainForm.VM.DbEditor.CurrentDb.Name}";
+            MainForm.Text = $"{MainForm.APP_NAME} - {MainForm.VM.DbEditor.Editable.Name}";
 
             MainForm.SuspendLayout();
             MainForm.Controls.Add(_dbEditorView);

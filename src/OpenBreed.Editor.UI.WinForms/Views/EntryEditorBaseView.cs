@@ -37,6 +37,8 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         {
             VM = vm ?? throw new ArgumentNullException(nameof(vm));
 
+            VM.ClosingAction = () => this.InvokeIfRequired(() => base.Close());
+
             DataBindings.Add(nameof(Text), VM, nameof(VM.Title), false, DataSourceUpdateMode.OnPropertyChanged);
 
             VM.PropertyChanged += VM_PropertyChanged;
@@ -52,8 +54,16 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         {
             base.OnFormClosing(e);
 
-            if (e.CloseReason == CloseReason.UserClosing)
-                e.Cancel = !VM.TryClose();
+            //VM.ClosingAction();
+            //if (e.CloseReason == CloseReason.UserClosing)
+            //    e.Cancel = !VM.Close();
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            base.OnFormClosed(e);
+
+            VM.ClosedAction();
         }
 
         #endregion Protected Methods

@@ -5,6 +5,7 @@ using OpenBreed.Editor.VM.Palettes;
 using System.ComponentModel;
 using System.Linq;
 using System;
+using OpenBreed.Common;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
@@ -116,7 +117,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         internal void Load(string name)
         {
-            var model = Root.DbEditor.CurrentDb.DataProvider.GetSpriteSet(name);
+            var model = ServiceLocator.Instance.GetService<DataProvider>().GetSpriteSet(name);
 
             foreach (var sprite in model.Sprites)
                 Items.Add(SpriteVM.Create(sprite));

@@ -16,7 +16,7 @@ namespace OpenBreed.Editor.VM.Database
         #region Private Fields
 
         private int _currentIndex = -1;
-        private DatabaseTableVM _currentTable = null;
+        private DbTableVM _currentTable = null;
 
         #endregion Private Fields
 
@@ -24,7 +24,7 @@ namespace OpenBreed.Editor.VM.Database
 
         internal DbTableSelectorVM()
         {
-            Items = new BindingList<DatabaseTableVM>();
+            Items = new BindingList<DbTableVM>();
             Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
 
             PropertyChanged += This_PropertyChanged;
@@ -40,13 +40,13 @@ namespace OpenBreed.Editor.VM.Database
             set { SetProperty(ref _currentIndex, value); }
         }
 
-        public DatabaseTableVM CurrentItem
+        public DbTableVM CurrentItem
         {
             get { return _currentTable; }
             set { SetProperty(ref _currentTable, value); }
         }
 
-        public BindingList<DatabaseTableVM> Items { get; private set; }
+        public BindingList<DbTableVM> Items { get; private set; }
 
         #endregion Public Properties
 

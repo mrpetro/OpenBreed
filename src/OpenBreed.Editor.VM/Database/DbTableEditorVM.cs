@@ -14,14 +14,19 @@ namespace OpenBreed.Editor.VM.Database
     {
         //public MyIcommand CancelCommand { get; private set; }
 
+        #region Private Fields
 
         private DbEntryVM _currentItem;
+        private DbTableVM _editable;
+        //private IRepository<M> _edited;
+        private string _title;
+
+        #endregion Private Fields
 
         #region Internal Constructors
 
         internal DbTableEditorVM()
         {
-
             Items = new BindingList<Items.DbEntryVM>();
             Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
         }
@@ -30,24 +35,95 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Public Properties
 
-        public BindingList<DbEntryVM> Items { get; }
-
         public DbEntryVM CurrentItem
         {
             get { return _currentItem; }
             set { SetProperty(ref _currentItem, value); }
         }
 
-        public void OpenEntity(DbEntryVM item)
+        public DbTableVM Editable
         {
-            var editor = ServiceLocator.Instance.GetService<EditorVM>().DbEditor.OpenEditor(item.GetType());
-            editor.OpenEntry(item.Name);
+            get { return _editable; }
+            set { SetProperty(ref _editable, value); }
+        }
 
-            //item.Open();
+        public string EditorName { get { return "Table Editor"; } }
+
+        public BindingList<DbEntryVM> Items { get; }
+
+        public string Title
+        {
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
         }
 
         #endregion Public Properties
 
+        #region Public Methods
 
+        //public void EditModel(IRepository<M> model)
+        //{
+        //    //Unsubscribe to previous edited item changes
+        //    if (Editable != null)
+        //        Editable.PropertyChanged -= Editable_PropertyChanged;
+
+        //    _edited = model;
+
+        //    var vm = new DbTable();
+        //    UpdateVM(model, vm);
+        //    Editable = vm;
+        //    Editable.PropertyChanged += Editable_PropertyChanged;
+        //    UpdateTitle();
+        //}
+
+        //public void OnStore()
+        //{
+        //    UpdateEntry(_editable, _edited);
+
+        //    //if (EditMode)
+        //    //    _repo.Update(_edited);
+        //    //else
+        //    //    _repo.Add(_edited);
+        //    //Done();
+        //}
+
+        public void OpenEntity(DbEntryVM item)
+        {
+            ServiceLocator.Instance.GetService<EditorVM>().DbEditor.OpenEntryEditor(item);
+        }
+
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        //protected void UpdateEntry(DbTableVM source, IRepository<M> target)
+        //{
+
+        //}
+
+        //protected void UpdateVM(IRepository<M> source, DbTableVM target)
+        //{
+        //    //target.Name
+
+
+        //}
+
+        #endregion Protected Methods
+
+        #region Private Methods
+
+        private void Editable_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+        private void UpdateTitle()
+        {
+            if (Editable == null)
+                Title = $"{EditorName} - no entry to edit";
+            else
+                Title = $"{EditorName} - {Editable.Name}";
+        }
+
+        #endregion Private Methods
     }
 }

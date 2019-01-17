@@ -11,11 +11,11 @@ using OpenBreed.Editor.VM.Database;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Database
 {
-    public partial class DatabaseTableSelectorCtrl : UserControl
+    public partial class DbTableSelectorCtrl : UserControl
     {
         private DbTableSelectorVM _vm;
 
-        public DatabaseTableSelectorCtrl()
+        public DbTableSelectorCtrl()
         {
             InitializeComponent();
 

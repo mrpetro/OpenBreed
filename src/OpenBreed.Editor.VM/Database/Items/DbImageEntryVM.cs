@@ -20,7 +20,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Constructors
 
-        public DbImageEntryVM(DatabaseVM owner) : base(owner)
+        public DbImageEntryVM()
         {
         }
 

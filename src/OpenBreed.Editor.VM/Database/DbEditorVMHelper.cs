@@ -17,21 +17,21 @@ namespace OpenBreed.Editor.VM.Database
         /// <returns>True if no database was opened or if previous one was closed, false otherwise</returns>
         internal static bool CheckCloseCurrentDatabase(DbEditorVM dbEditor, string newDatabaseFilePath)
         {
-            if (dbEditor.CurrentDb != null)
+            if (dbEditor.Editable != null)
             {
-                if (Tools.GetNormalizedPath(newDatabaseFilePath) == Tools.GetNormalizedPath(dbEditor.CurrentDb.Name))
+                if (Tools.GetNormalizedPath(newDatabaseFilePath) == Tools.GetNormalizedPath(dbEditor.Editable.Name))
                 {
                     //Root.Logger.Warning("Database already opened.");
                     return false;
                 }
 
-                var answer = dbEditor.Root.DialogProvider.ShowMessageWithQuestion($"Another database ({dbEditor.CurrentDb.Name}) is already opened. Do you want to close it?",
+                var answer = ServiceLocator.Instance.GetService<IDialogProvider>().ShowMessageWithQuestion($"Another database ({dbEditor.Editable.Name}) is already opened. Do you want to close it?",
                                                                 "Close current database?",
                                                                 QuestionDialogButtons.OKCancel);
                 if (answer != DialogAnswer.OK)
                     return false;
 
-                if (!dbEditor.Root.DbEditor.TryCloseDatabase())
+                if (!dbEditor.TryCloseDatabase())
                     return false;
             }
 
@@ -40,43 +40,43 @@ namespace OpenBreed.Editor.VM.Database
 
         internal static bool TryCloseDatabase(DbEditorVM dbEditor)
         {
-            if (dbEditor.CurrentDb == null)
+            if (dbEditor.Editable == null)
                 throw new InvalidOperationException("Expected current database");
 
-            if (dbEditor.CurrentDb.IsModified)
+            if (dbEditor.Editable.IsModified)
             {
-                var answer = dbEditor.Root.DialogProvider.ShowMessageWithQuestion("Current database has been modified. Do you want to save it before closing?",
+                var answer = ServiceLocator.Instance.GetService<IDialogProvider>().ShowMessageWithQuestion("Current database has been modified. Do you want to save it before closing?",
                                                                            "Save database before closing?", QuestionDialogButtons.YesNoCancel);
 
                 if (answer == DialogAnswer.Cancel)
                     return false;
                 else if (answer == DialogAnswer.Yes)
-                    dbEditor.CurrentDb.UnitOfWork.Save();
+                    dbEditor.Save();
             }
 
-            dbEditor.CurrentDb.Dispose();
-            dbEditor.CurrentDb = null;
+            dbEditor.Editable.Dispose();
+            dbEditor.Editable = null;
 
             return true;
         }
 
         internal static bool TrySaveDatabase(DbEditorVM dbEditor)
         {
-            if (dbEditor.CurrentDb == null)
+            if (dbEditor.Editable == null)
                 throw new InvalidOperationException("Expected current database");
 
-            dbEditor.CurrentDb.UnitOfWork.Save();
+            dbEditor.Save();
             return true;
         }
 
-        internal static bool TryOpenDatabase(DbEditorVM dbEditor)
+        internal static bool TryOpenXmlDatabase(DbEditorVM dbEditor)
         {
-            var openFileDialog = dbEditor.Root.DialogProvider.OpenFileDialog();
+            var openFileDialog = ServiceLocator.Instance.GetService<IDialogProvider>().OpenFileDialog();
             openFileDialog.Title = "Select an Open Breed Editor Database file to open...";
             openFileDialog.Filter = "Open Breed Editor Database files (*.xml)|*.xml|All Files (*.*)|*.*";
             openFileDialog.InitialDirectory = DatabaseDef.DefaultDirectoryPath;
-
             openFileDialog.Multiselect = false;
+
             var answer = openFileDialog.Show();
 
             if (answer != DialogAnswer.OK)
@@ -87,8 +87,8 @@ namespace OpenBreed.Editor.VM.Database
             if (!CheckCloseCurrentDatabase(dbEditor, databaseFilePath))
                 return false;
 
-            var model = dbEditor.OpenXmlDatabase(databaseFilePath);
-            dbEditor.EditModel(model);
+            var unitOfWork = XmlDatabase.Open(databaseFilePath).CreateUnitOfWork();
+            dbEditor.EditModel(unitOfWork);
             return true;
         }
 

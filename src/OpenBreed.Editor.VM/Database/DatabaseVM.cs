@@ -61,19 +61,14 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Internal Constructors
 
-        internal DatabaseVM(EditorVM root, IDatabase database)
+        internal DatabaseVM()
         {
-            Root = root;
-
-            UnitOfWork = ServiceLocator.Instance.RegisterService<IUnitOfWork>(database.CreateUnitOfWork());
-            DataProvider = ServiceLocator.Instance.RegisterService<DataProvider>(new DataProvider(UnitOfWork));
         }
 
         #endregion Internal Constructors
 
         #region Public Properties
 
-        public DataProvider DataProvider { get; }
         public bool IsModified { get; internal set; }
         public string Name
         {
@@ -81,19 +76,14 @@ namespace OpenBreed.Editor.VM.Database
             set { SetProperty(ref _name, value); }
         }
 
-        public EditorVM Root { get; private set; }
         public ProjectState State
         {
             get { return _state; }
             set { SetProperty(ref _state, value); }
         }
 
-        public IUnitOfWork UnitOfWork { get; }
-
         public void Dispose()
         {
-            ServiceLocator.Instance.UnregisterService<DataProvider>();
-            ServiceLocator.Instance.UnregisterService<IUnitOfWork>();
         }
 
         #endregion Public Properties
@@ -103,26 +93,26 @@ namespace OpenBreed.Editor.VM.Database
         internal DbEntryVM CreateItem(IEntry entry)
         {
             if (entry is IImageEntry)
-                return new DbImageEntryVM(this);
+                return new DbImageEntryVM();
             else if (entry is ISoundEntry)
-                return new DbSoundEntryVM(this);
+                return new DbSoundEntryVM();
             else if (entry is ILevelEntry)
-                return new DbLevelEntryVM(this);
+                return new DbLevelEntryVM();
             else if (entry is IAssetEntry)
-                return new DbAssetEntryVM(this);
+                return new DbAssetEntryVM();
             else if (entry is IPropSetEntry)
-                return new DbPropSetEntryVM(this);
+                return new DbPropSetEntryVM();
             else if (entry is ITileSetEntry)
-                return new DbTileSetEntryVM(this);
+                return new DbTileSetEntryVM();
             else if (entry is ISpriteSetEntry)
-                return new DbSpriteSetEntryVM(this);
+                return new DbSpriteSetEntryVM();
             else if (entry is IPaletteEntry)
-                return new DbPaletteEntryVM(this);
+                return new DbPaletteEntryVM();
             else
                 throw new NotImplementedException(entry.ToString());
         }
 
-        internal DatabaseTableVM CreateTable(IRepository repository)
+        internal DbTableVM CreateTable(IRepository repository)
         {
             if (repository is IRepository<IImageEntry>)
                 return new DatabaseImageTableVM(this);
@@ -144,9 +134,11 @@ namespace OpenBreed.Editor.VM.Database
                 throw new NotImplementedException(repository.ToString());
         }
 
-        internal IEnumerable<DatabaseTableVM> GetTables()
+        internal IEnumerable<DbTableVM> GetTables()
         {
-            foreach (var repository in UnitOfWork.Repositories)
+            var unitOfWork = ServiceLocator.Instance.GetService<IUnitOfWork>();
+
+            foreach (var repository in unitOfWork.Repositories)
             {
                 var tableVM = CreateTable(repository);
                 tableVM.Load(repository);

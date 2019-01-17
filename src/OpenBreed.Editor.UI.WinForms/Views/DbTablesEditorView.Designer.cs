@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.DatabaseViewer = new OpenBreed.Editor.UI.WinForms.Controls.Database.DatabaseViewerCtrl();
+            this.DatabaseViewer = new OpenBreed.Editor.UI.WinForms.Controls.Database.DbTablesEditorCtrl();
             this.SuspendLayout();
             // 
             // DatabaseViewer
@@ -54,6 +54,6 @@
 
         #endregion
 
-        private Controls.Database.DatabaseViewerCtrl DatabaseViewer;
+        private Controls.Database.DbTablesEditorCtrl DatabaseViewer;
     }
 }

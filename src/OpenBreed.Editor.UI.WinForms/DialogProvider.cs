@@ -92,11 +92,6 @@ namespace OpenBreed.Editor.UI.WinForms
             return new SaveFileQuery();
         }
 
-        public void OpenDbEntryEditor<T>(DbEditorVM editor) where T : DbEntryVM
-        {
-            var entryEditor = editor.OpenEditor(typeof(T));
-        }
-
         public void ShowEditorView(EditorVM editor)
         {
             Application.EnableVisualStyles();

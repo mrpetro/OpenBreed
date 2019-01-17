@@ -11,7 +11,7 @@ using OpenBreed.Editor.VM.Database;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Database
 {
-    public partial class DatabaseViewerCtrl : UserControl
+    public partial class DbTablesEditorCtrl : UserControl
     {
         #region Private Fields
 
@@ -21,7 +21,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
 
         #region Public Constructors
 
-        public DatabaseViewerCtrl()
+        public DbTablesEditorCtrl()
         {
             InitializeComponent();
         }
@@ -35,7 +35,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
             _vm = vm;
 
             TableSelector.Initialize(_vm.DbTableSelector);
-            TableViewer.Initialize(_vm.DbTableEditor);
+            TableEditor.Initialize(_vm.DbTableEditor);
         }
 
         #endregion Public Methods

@@ -18,7 +18,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Constructors
 
-        public DbSoundEntryVM(DatabaseVM owner) : base(owner)
+        public DbSoundEntryVM()
         {
         }
 

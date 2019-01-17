@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 using OpenBreed.Common;
 using OpenBreed.Common.XmlDatabase;
 using OpenBreed.Common.XmlDatabase.Tables;
+using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Database.Items;
 
 namespace OpenBreed.Editor.VM.Database.Tables
 {
-    public abstract class DatabaseTableVM
+    public abstract class DbTableVM : BaseViewModel
     {
-
         #region Public Constructors
 
-        public DatabaseTableVM(DatabaseVM owner)
+        public DbTableVM(DatabaseVM owner)
         {
             Owner = owner;
         }

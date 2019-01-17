@@ -15,15 +15,12 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Fields
 
-        public readonly DatabaseVM Owner;
-
         #endregion Public Fields
 
         #region Public Constructors
 
-        public DbEntryVM(DatabaseVM owner)
+        public DbEntryVM()
         {
-            Owner = owner;
         }
 
         #endregion Public Constructors
