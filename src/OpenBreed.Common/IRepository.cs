@@ -18,6 +18,7 @@ namespace OpenBreed.Common
 
     public interface IRepository<T> : IRepository where T : IEntry
     {
+
         #region Public Methods
 
         void Add(T entry);

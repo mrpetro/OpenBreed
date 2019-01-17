@@ -24,12 +24,7 @@ namespace OpenBreed.Common.XmlDatabase
 
         #region Public Constructors
 
-        public static XmlDatabase Open(string xmlFilePath)
-        {
-            return new XmlDatabase(xmlFilePath, DatabaseMode.Read);
-        }
-
-        private XmlDatabase(string xmlFilePath, DatabaseMode mode)
+        public XmlDatabase(string xmlFilePath, DatabaseMode mode)
         {
             XmlFilePath = xmlFilePath;
             Mode = mode;
