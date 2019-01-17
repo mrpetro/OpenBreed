@@ -9,6 +9,7 @@ namespace OpenBreed.Common
 {
     public interface IUnitOfWork
     {
+        string Name { get; }
         IRepository<T> GetRepository<T>() where T : IEntry;
         void Save();
         IEnumerable<IRepository> Repositories{ get; }
