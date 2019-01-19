@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenBreed.Editor.VM.Database;
 using OpenBreed.Editor.VM.Database.Items;
+using OpenBreed.Editor.VM.Database.Tables;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Database
 {
@@ -30,14 +31,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
             DGV.AllowUserToResizeRows = false;
             DGV.RowHeadersVisible = false;
 
-            DGV.CellContentClick += DGV_CellContentClick;
-        }
-
-        public void Initialize(DbTableEditorVM vm)
-        {
-            _vm = vm;
-
-            DGV.DataSource = vm.Items;
             // Initialize and add a text box column.
             var buttonColumn = new DataGridViewButtonColumn();
             buttonColumn.HeaderText = "Data";
@@ -47,6 +40,38 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
             buttonColumn.Name = "Data";
             buttonColumn.Text = "Open";
             DGV.Columns.Add(buttonColumn);
+
+
+            DGV.CellContentClick += DGV_CellContentClick;
+        }
+
+        public void Initialize(DbTableEditorVM vm)
+        {
+            _vm = vm;
+
+            _vm.PropertyChanged += _vm_PropertyChanged;
+
+            OnEditableChanged(_vm.Editable);
+        }
+
+        private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(_vm.Editable):
+                    OnEditableChanged(_vm.Editable);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void OnEditableChanged(DbTableVM dbTable)
+        {
+            if (dbTable == null)
+                DGV.DataSource = null;
+            else
+                DGV.DataSource = dbTable.Entries;
         }
 
         private void DGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -58,7 +83,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
             {
                 var item = senderGrid.Rows[e.RowIndex].DataBoundItem as DbEntryVM ?? throw new InvalidOperationException();
 
-                _vm.OpenEntity(item);
+                _vm.EditEntity(item.Name);
             }
         }
     }

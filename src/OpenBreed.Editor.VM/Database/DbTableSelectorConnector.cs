@@ -56,7 +56,7 @@ namespace OpenBreed.Editor.VM.Database
             Source.Items.UpdateAfter(() =>
             {
                 Source.Items.Clear();
-                foreach (var item in db.GetTables())
+                foreach (var item in db.GetTableNames())
                     Source.Items.Add(item);
             });
         }

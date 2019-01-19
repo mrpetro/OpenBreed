@@ -20,7 +20,7 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         #region Public Constructors
 
-        public DatabaseImageTableVM(DatabaseVM owner) : base(owner)
+        public DatabaseImageTableVM()
         {
         }
 
@@ -33,16 +33,6 @@ namespace OpenBreed.Editor.VM.Database.Tables
         #endregion Public Properties
 
         #region Public Methods
-
-        public override IEnumerable<Items.DbEntryVM> GetItems()
-        {
-            foreach (var entry in _repository.Entries)
-            {
-                var itemVM = Owner.CreateItem(entry);
-                itemVM.Load(entry);
-                yield return itemVM;
-            }
-        }
 
         public override void Load(IRepository repository)
         {

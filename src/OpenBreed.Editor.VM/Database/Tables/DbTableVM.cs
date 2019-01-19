@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,16 +14,19 @@ namespace OpenBreed.Editor.VM.Database.Tables
 {
     public abstract class DbTableVM : BaseViewModel
     {
-        #region Public Constructors
+        #region Protected Constructors
 
-        public DbTableVM(DatabaseVM owner)
+        protected DbTableVM()
         {
-            Owner = owner;
+            Entries = new BindingList<Items.DbEntryVM>();
+            Entries.ListChanged += (s, a) => OnPropertyChanged(nameof(Entries));
         }
 
-        #endregion Public Constructors
+        #endregion Protected Constructors
 
         #region Public Properties
+
+        public BindingList<DbEntryVM> Entries { get; }
 
         public abstract string Name { get; }
         public DatabaseVM Owner { get; }
@@ -31,7 +35,7 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         #region Public Methods
 
-        public abstract IEnumerable<Items.DbEntryVM> GetItems();
+        //public abstract IEnumerable<Items.DbEntryVM> GetItems();
 
         public abstract void Load(IRepository repository);
 

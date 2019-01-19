@@ -14,6 +14,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         public EntryEditorView()
         {
             EntryEditor.InnerCtrl = new T();
+
         }
 
         #endregion Public Constructors

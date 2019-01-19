@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Assets;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Assets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace OpenBreed.Editor.VM.Assets
     {
         #region Public Constructors
 
-        public AssetEditorVM()
+        public AssetEditorVM(IRepository repository) : base(repository)
         {
         }
 

@@ -150,6 +150,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _vm = vm;
 
             _vm.EntryEditorOpeningAction = (editor) => OnEntryEditorOpening(editor);
+            //_vm.EntryEditorActivateAction = (editor) => OnEntryEditorActivate(editor);
 
             RestoreLayout();
         }
@@ -251,6 +252,13 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             //    return m_taskList;
             //else
             return null;
+        }
+
+        private void OnEntryEditorActivate(EntryEditorVM editor)
+        {
+            var editorView = _viewFactory.CreateView(editor.GetType());
+            editorView.Initialize(editor);
+            editorView.Show(this, DockState.Document);
         }
 
         private void OnEntryEditorOpening(EntryEditorVM editor)

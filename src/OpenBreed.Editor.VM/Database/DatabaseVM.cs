@@ -90,60 +90,12 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Internal Methods
 
-        internal DbEntryVM CreateItem(IEntry entry)
-        {
-            if (entry is IImageEntry)
-                return new DbImageEntryVM();
-            else if (entry is ISoundEntry)
-                return new DbSoundEntryVM();
-            else if (entry is ILevelEntry)
-                return new DbLevelEntryVM();
-            else if (entry is IAssetEntry)
-                return new DbAssetEntryVM();
-            else if (entry is IPropSetEntry)
-                return new DbPropSetEntryVM();
-            else if (entry is ITileSetEntry)
-                return new DbTileSetEntryVM();
-            else if (entry is ISpriteSetEntry)
-                return new DbSpriteSetEntryVM();
-            else if (entry is IPaletteEntry)
-                return new DbPaletteEntryVM();
-            else
-                throw new NotImplementedException(entry.ToString());
-        }
-
-        internal DbTableVM CreateTable(IRepository repository)
-        {
-            if (repository is IRepository<IImageEntry>)
-                return new DatabaseImageTableVM(this);
-            if (repository is IRepository<ISoundEntry>)
-                return new DatabaseSoundTableVM(this);
-            else if (repository is IRepository<ILevelEntry>)
-                return new DatabaseLevelTableVM(this);
-            else if (repository is IRepository<IPropSetEntry>)
-                return new DatabasePropertySetTableVM(this);
-            else if (repository is IRepository<IAssetEntry>)
-                return new DatabaseAssetTableVM(this);
-            else if (repository is IRepository<ITileSetEntry>)
-                return new DatabaseTileSetTableVM(this);
-            else if (repository is IRepository<ISpriteSetEntry>)
-                return new DatabaseSpriteSetTableVM(this);
-            else if (repository is IRepository<IPaletteEntry>)
-                return new DatabasePaletteTableVM(this);
-            else
-                throw new NotImplementedException(repository.ToString());
-        }
-
-        internal IEnumerable<DbTableVM> GetTables()
+        internal IEnumerable<string> GetTableNames()
         {
             var unitOfWork = ServiceLocator.Instance.GetService<IUnitOfWork>();
 
             foreach (var repository in unitOfWork.Repositories)
-            {
-                var tableVM = CreateTable(repository);
-                tableVM.Load(repository);
-                yield return tableVM;
-            }
+                yield return repository.Name;
         }
 
         internal void Save()

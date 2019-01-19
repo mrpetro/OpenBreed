@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Common;
+using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Database.Items;
 using OpenBreed.Editor.VM.Database.Tables;
 using System;
@@ -18,7 +19,7 @@ namespace OpenBreed.Editor.VM.Database
 
         private DbEntryVM _currentItem;
         private DbTableVM _editable;
-        //private IRepository<M> _edited;
+        private IRepository _edited;
         private string _title;
 
         #endregion Private Fields
@@ -27,29 +28,14 @@ namespace OpenBreed.Editor.VM.Database
 
         internal DbTableEditorVM()
         {
-            Items = new BindingList<Items.DbEntryVM>();
-            Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
+            //Items = new BindingList<Items.DbEntryVM>();
+            //Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
         }
 
         #endregion Internal Constructors
 
-        #region Public Properties
+        //public BindingList<DbEntryVM> Items { get; }
 
-        public DbEntryVM CurrentItem
-        {
-            get { return _currentItem; }
-            set { SetProperty(ref _currentItem, value); }
-        }
-
-        public DbTableVM Editable
-        {
-            get { return _editable; }
-            set { SetProperty(ref _editable, value); }
-        }
-
-        public string EditorName { get { return "Table Editor"; } }
-
-        public BindingList<DbEntryVM> Items { get; }
 
         public string Title
         {
@@ -57,24 +43,63 @@ namespace OpenBreed.Editor.VM.Database
             set { SetProperty(ref _title, value); }
         }
 
+        public DbEntryVM CurrentItem
+        {
+            get { return _currentItem; }
+            set { SetProperty(ref _currentItem, value); }
+        }
+
+        #region Public Properties
+
+        public DbTableVM Editable
+        {
+            get { return _editable; }
+            set { SetProperty(ref _editable, value); }
+        }
+
         #endregion Public Properties
 
         #region Public Methods
 
-        //public void EditModel(IRepository<M> model)
-        //{
-        //    //Unsubscribe to previous edited item changes
-        //    if (Editable != null)
-        //        Editable.PropertyChanged -= Editable_PropertyChanged;
+        public void SetNoModel()
+        {
+            if (Editable != null)
+                Editable.PropertyChanged -= Editable_PropertyChanged;
 
-        //    _edited = model;
+            _edited = null;
+            Editable = null;
 
-        //    var vm = new DbTable();
-        //    UpdateVM(model, vm);
-        //    Editable = vm;
-        //    Editable.PropertyChanged += Editable_PropertyChanged;
-        //    UpdateTitle();
-        //}
+            UpdateTitle();
+        }
+
+        public void SetModel(string modelName)
+        {
+            var repository = ServiceLocator.Instance.GetService<IUnitOfWork>().GetRepository(modelName);
+
+            if (repository == null)
+                throw new InvalidOperationException($"Repository with name '{modelName}' not found.");
+
+            EditModel(repository);
+        }
+
+        public void EditModel(IRepository model)
+        {
+            //Unsubscribe to previous edited item changes
+            if (Editable != null)
+                Editable.PropertyChanged -= Editable_PropertyChanged;
+
+            _edited = model;
+
+            var vm = ServiceLocator.Instance.GetService<DbTableFactory>().CreateTable(_edited);
+            UpdateVM(model, vm);
+            Editable = vm;
+            Editable.PropertyChanged += Editable_PropertyChanged;
+            UpdateTitle();
+        }
+
+        public string EditorName { get { return "Table Editor"; } }
+
+        public Action<string, string> EditEntryAction { get; set; }
 
         //public void OnStore()
         //{
@@ -87,26 +112,37 @@ namespace OpenBreed.Editor.VM.Database
         //    //Done();
         //}
 
-        public void OpenEntity(DbEntryVM item)
+        public void EditEntity(string entryName)
         {
-            ServiceLocator.Instance.GetService<EditorVM>().DbEditor.OpenEntryEditor(item);
+
+            //Check if entry editor is already opened. If yes then focus on this entry editor.
+            //var openedDbEntryEditor = DbEntryEditors.FirstOrDefault(item => item.)
+            var dbEditor = ServiceLocator.Instance.GetService<EditorVM>().DbEditor;
+
+            dbEditor.OpenEntryEditor(_edited, entryName);
         }
 
         #endregion Public Methods
 
         #region Protected Methods
 
-        //protected void UpdateEntry(DbTableVM source, IRepository<M> target)
-        //{
+        protected void UpdateEntry(DbTableVM source, IRepository target)
+        {
 
-        //}
+        }
 
-        //protected void UpdateVM(IRepository<M> source, DbTableVM target)
-        //{
-        //    //target.Name
+        protected void UpdateVM(IRepository source, DbTableVM target)
+        {
+            var dbEntryFactory = ServiceLocator.Instance.GetService<DbEntryFactory>();
 
-
-        //}
+            //target.Name
+            foreach (var entry in _edited.Entries)
+            {
+                var dbEntry = dbEntryFactory.Create(entry);
+                dbEntry.Load(entry);
+                target.Entries.Add(dbEntry);
+            }
+        }
 
         #endregion Protected Methods
 

@@ -32,6 +32,16 @@ namespace OpenBreed.Editor.VM
 
         #region Public Methods
 
+        public EntryEditorBaseVM()
+        {
+            _repository = ServiceLocator.Instance.GetService<IUnitOfWork>().GetRepository<E>();
+        }
+
+        protected EntryEditorBaseVM(IRepository repository)
+        {
+            _repository = (IRepository<E>)repository;
+        }
+
         public void EditModel(E model)
         {
             //Unsubscribe to previous edited item changes
@@ -58,7 +68,7 @@ namespace OpenBreed.Editor.VM
             //Done();
         }
 
-        public override void OpenEntry(string name)
+        public override void EditEntry(string name)
         {
             var entry = GetEntry(name);
             EditModel(entry);
@@ -80,7 +90,7 @@ namespace OpenBreed.Editor.VM
 
         protected E GetEntry(string name)
         {
-            return ServiceLocator.Instance.GetService<IUnitOfWork>().GetRepository<E>().GetByName(name);
+            return _repository.GetByName(name);
         }
 
         protected abstract void UpdateEntry(VM source, E target);

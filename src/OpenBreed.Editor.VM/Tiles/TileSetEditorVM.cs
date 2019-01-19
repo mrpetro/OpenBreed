@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Tiles;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Tiles;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Database;
 using OpenBreed.Editor.VM.Tiles;
@@ -15,7 +16,7 @@ namespace OpenBreed.Editor.VM.Tiles
     {
         #region Public Constructors
 
-        public TileSetEditorVM()
+        public TileSetEditorVM(IRepository repository) : base(repository)
         {
             TileSetViewer = new TileSetViewerVM();
 

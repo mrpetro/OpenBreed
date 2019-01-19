@@ -19,7 +19,7 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         #region Public Constructors
 
-        public DatabaseSpriteSetTableVM(DatabaseVM owner) : base(owner)
+        public DatabaseSpriteSetTableVM()
         {
         }
 
@@ -33,15 +33,6 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         #region Public Methods
 
-        public override IEnumerable<Items.DbEntryVM> GetItems()
-        {
-            foreach (var entry in _repository.Entries)
-            {
-                var itemVM = Owner.CreateItem(entry);
-                itemVM.Load(entry);
-                yield return itemVM;
-            }
-        }
 
         public override void Load(IRepository repository)
         {

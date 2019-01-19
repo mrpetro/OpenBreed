@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Props;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Props;
 using OpenBreed.Editor.VM.Base;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace OpenBreed.Editor.VM.Props
 
         #region Public Constructors
 
-        public PropSetEditorVM()
+        public PropSetEditorVM(IRepository repository) : base(repository)
         {
             PropertyChanged += This_PropertyChanged;
         }

@@ -37,6 +37,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         {
             VM = vm ?? throw new ArgumentNullException(nameof(vm));
 
+            VM.ActivatingAction = () => this.InvokeIfRequired(() => base.Activate());
             VM.ClosingAction = () => this.InvokeIfRequired(() => base.Close());
 
             DataBindings.Add(nameof(Text), VM, nameof(VM.Title), false, DataSourceUpdateMode.OnPropertyChanged);

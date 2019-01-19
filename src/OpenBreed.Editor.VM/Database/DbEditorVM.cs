@@ -20,10 +20,13 @@ namespace OpenBreed.Editor.VM.Database
 {
     public class DbEditorVM : BaseViewModel
     {
+
         #region Private Fields
 
+        private readonly Dictionary<string, EntryEditorVM> _openedEntryEditors = new Dictionary<string, EntryEditorVM>();
         private DatabaseVM _editable;
         private IUnitOfWork _edited;
+        private EntryEditorVM _activeEntryEditor;
 
         #endregion Private Fields
 
@@ -32,20 +35,11 @@ namespace OpenBreed.Editor.VM.Database
         public DbEditorVM()
         {
             DbTablesEditor = new DbTablesEditorVM();
-
-
-
-
-            DbEntryEditors = new BindingList<EntryEditorVM>();
-            DbEntryEditors.ListChanged += (s, a) => OnPropertyChanged(nameof(DbEntryEditors));
-
         }
 
         #endregion Public Constructors
 
         #region Public Properties
-
-        public BindingList<EntryEditorVM> DbEntryEditors { get; }
 
         public DbTablesEditorVM DbTablesEditor { get; }
 
@@ -54,6 +48,7 @@ namespace OpenBreed.Editor.VM.Database
             get { return _editable; }
             set { SetProperty(ref _editable, value); }
         }
+
         public Action<EntryEditorVM> EntryEditorOpeningAction { get; set; }
 
         public bool IsModified { get; internal set; }
@@ -61,6 +56,14 @@ namespace OpenBreed.Editor.VM.Database
         #endregion Public Properties
 
         #region Public Methods
+
+        public void CloseAllEditors()
+        {
+            var toClose = _openedEntryEditors.Values.ToArray();
+
+            foreach (var entryEditor in toClose)
+                entryEditor.Close();
+        }
 
         public void EditModel(IUnitOfWork model)
         {
@@ -108,20 +111,21 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Internal Methods
 
-        internal void OpenEntryEditor(DbEntryVM entry)
+        internal void OpenEntryEditor(IRepository repository, string entryName)
         {
-            //Check if entry editor is already opened. If yes then focus on this entry editor.
-            //var openedDbEntryEditor = DbEntryEditors.FirstOrDefault(item => item.)
+            string entryEditorKey = $"{repository.Name}#{entryName}";
 
-            var entryType = entry.GetType();
-            var editor = ServiceLocator.Instance.GetService<EntryEditorFactory>().CreateEditor(entryType);
-            DbEntryEditors.Add(editor);
-
-            EntryEditorOpeningAction?.Invoke(editor);
-
-            editor.ClosedAction = () => OnEntryEditorClosed(editor);
-
-            editor.OpenEntry(entry.Name);
+            EntryEditorVM entryEditor = null;
+            if (!_openedEntryEditors.TryGetValue(entryEditorKey, out entryEditor))
+            {
+                entryEditor = ServiceLocator.Instance.GetService<DbEntryEditorFactory>().CreateEditor(repository);
+                _openedEntryEditors.Add(entryEditorKey, entryEditor);
+                entryEditor.ClosedAction = () => OnEntryEditorClosed(entryEditor);
+                EntryEditorOpeningAction?.Invoke(entryEditor);
+                entryEditor.EditEntry(entryName);
+            }
+            else
+                entryEditor.Activate();
         }
 
         internal void Save()
@@ -133,6 +137,10 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Private Methods
 
+        private void AddNewEntryEditor()
+        {
+
+        }
         private void CurrentDb_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
 
@@ -140,20 +148,14 @@ namespace OpenBreed.Editor.VM.Database
 
         private void OnEntryEditorClosed(EntryEditorVM editor)
         {
-            DbEntryEditors.Remove(editor);
+            //TODO: This can be done better
+            var foundItem = _openedEntryEditors.FirstOrDefault(item => item.Value == editor);       
+            _openedEntryEditors.Remove(foundItem.Key);
         }
 
         private void UpdateVM(IUnitOfWork source, DatabaseVM target)
         {
             target.Name = source.Name;
-        }
-
-        public void CloseAllEditors()
-        {
-            var toClose = DbEntryEditors.ToArray();
-
-            foreach (var entryEditor in toClose)
-                entryEditor.Close();
         }
 
         #endregion Private Methods

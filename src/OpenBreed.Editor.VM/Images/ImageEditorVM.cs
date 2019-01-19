@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Images;
+using OpenBreed.Common;
 
 namespace OpenBreed.Editor.VM.Images
 {
@@ -13,7 +14,7 @@ namespace OpenBreed.Editor.VM.Images
     {
         #region Public Constructors
 
-        public ImageEditorVM()
+        public ImageEditorVM(IRepository repository) : base(repository)
         {
         }
 

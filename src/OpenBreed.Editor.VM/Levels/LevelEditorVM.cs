@@ -24,7 +24,7 @@ namespace OpenBreed.Editor.VM.Levels
 
         #region Public Constructors
 
-        public LevelEditorVM()
+        public LevelEditorVM(IRepository repository) : base(repository)
         {
             BodyEditor = new LevelBodyEditorVM(this);
             //TileSetSelector = new LevelTileSetSelectorVM(this);

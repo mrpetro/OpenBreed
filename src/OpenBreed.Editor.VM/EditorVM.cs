@@ -30,6 +30,9 @@ using OpenBreed.Common.Sounds;
 using OpenBreed.Editor.VM.Sounds;
 using OpenBreed.Editor.VM.Database.Items;
 using OpenBreed.Editor.VM.Assets;
+using OpenBreed.Common.Images;
+using OpenBreed.Common.Maps;
+using OpenBreed.Common.Assets;
 
 namespace OpenBreed.Editor.VM
 {
@@ -55,15 +58,18 @@ namespace OpenBreed.Editor.VM
         {
             ServiceLocator.Instance.RegisterService<EditorVM>(this);
 
-            var entryEditorFactory = new EntryEditorFactory();
-            entryEditorFactory.Register<DbTileSetEntryVM, TileSetEditorVM>();
-            entryEditorFactory.Register<DbPropSetEntryVM, PropSetEditorVM>();
-            entryEditorFactory.Register<DbPaletteEntryVM, PaletteEditorVM>();
-            entryEditorFactory.Register<DbImageEntryVM, ImageEditorVM>();
-            entryEditorFactory.Register<DbSoundEntryVM, SoundEditorVM>();
-            entryEditorFactory.Register<DbLevelEntryVM, LevelEditorVM>();
-            entryEditorFactory.Register<DbAssetEntryVM, AssetEditorVM>();
-            ServiceLocator.Instance.RegisterService<EntryEditorFactory>(entryEditorFactory);
+            var entryEditorFactory = new DbEntryEditorFactory();
+            entryEditorFactory.Register<IRepository<ITileSetEntry>, TileSetEditorVM>();
+            entryEditorFactory.Register<IRepository<IPropSetEntry>, PropSetEditorVM>();
+            entryEditorFactory.Register<IRepository<IPaletteEntry>, PaletteEditorVM>();
+            entryEditorFactory.Register<IRepository<IImageEntry>, ImageEditorVM>();
+            entryEditorFactory.Register<IRepository<ISoundEntry>, SoundEditorVM>();
+            entryEditorFactory.Register<IRepository<ILevelEntry>, LevelEditorVM>();
+            entryEditorFactory.Register<IRepository<IAssetEntry>, AssetEditorVM>();
+            ServiceLocator.Instance.RegisterService<DbEntryEditorFactory>(entryEditorFactory);
+
+            ServiceLocator.Instance.RegisterService<DbTableFactory>(new DbTableFactory());
+            ServiceLocator.Instance.RegisterService<DbEntryFactory>(new DbEntryFactory());
 
 
             DialogProvider = ServiceLocator.Instance.GetService<IDialogProvider>();

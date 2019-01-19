@@ -14,24 +14,17 @@ namespace OpenBreed.Editor.VM
     {
         #region Private Fields
 
-        internal DataProvider DataProvider { get { return ServiceLocator.Instance.GetService<DataProvider>(); } }
-
-        public Action ClosingAction { get; set; }
-        public Action ClosedAction { get; set; }
-
-        private string _title;
         private bool _EditMode;
+        private string _title;
 
         #endregion Private Fields
 
         #region Public Properties
 
-        public string Title
-        {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
-        }
+        public Action ActivatingAction { get; set; }
 
+        public Action ClosedAction { get; set; }
+        public Action ClosingAction { get; set; }
         public bool EditMode
         {
             get { return _EditMode; }
@@ -39,18 +32,26 @@ namespace OpenBreed.Editor.VM
         }
 
         public abstract string EditorName { get; }
+        public string Title
+        {
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
+        }
 
         #endregion Public Properties
 
+        #region Internal Properties
+
+        internal DataProvider DataProvider { get { return ServiceLocator.Instance.GetService<DataProvider>(); } }
+
+        #endregion Internal Properties
+
         #region Public Methods
 
-        public abstract void OnStore();
-
-        public abstract void OpenEntry(string name);
-
-        public abstract void OpenNextEntry();
-
-        public abstract void OpenPreviousEntry();
+        public void Activate()
+        {
+            ActivatingAction?.Invoke();
+        }
 
         public bool Close()
         {
@@ -58,6 +59,13 @@ namespace OpenBreed.Editor.VM
 
             return true;
         }
+
+        public abstract void EditEntry(string name);
+
+        public abstract void OnStore();
+        public abstract void OpenNextEntry();
+
+        public abstract void OpenPreviousEntry();
 
         #endregion Public Methods
     }

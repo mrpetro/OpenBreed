@@ -26,7 +26,7 @@ namespace OpenBreed.Editor.VM
     {
         private Dictionary<Type, IViewCreator> _creators = new Dictionary<Type, IViewCreator>();
 
-        public void Register<VM,V>() where VM : EntryEditorVM, new() where V: EntryEditorBaseView, new()
+        public void Register<VM,V>() where VM : EntryEditorVM where V: EntryEditorBaseView, new()
         {
             var entryType = typeof(VM);
 

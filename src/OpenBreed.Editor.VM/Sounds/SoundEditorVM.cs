@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using OpenBreed.Common.Sounds;
 using OpenBreed.Editor.VM.Sounds;
 using OpenBreed.Editor.VM.Database;
+using OpenBreed.Common;
 
 namespace OpenBreed.Editor.VM.Sounds
 {
@@ -15,7 +16,7 @@ namespace OpenBreed.Editor.VM.Sounds
     {
         #region Public Constructors
 
-        public SoundEditorVM() 
+        public SoundEditorVM(IRepository repository) : base(repository)
         {
         }
 

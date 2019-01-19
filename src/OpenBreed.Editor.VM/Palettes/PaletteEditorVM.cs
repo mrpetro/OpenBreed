@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Palettes;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Palettes;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Levels;
 using System;
@@ -22,7 +23,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Public Constructors
 
-        public PaletteEditorVM()
+        public PaletteEditorVM(IRepository repository) : base(repository)
         {
         }
 

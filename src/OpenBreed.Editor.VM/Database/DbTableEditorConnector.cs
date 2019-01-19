@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Common;
+using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Database.Tables;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,22 @@ namespace OpenBreed.Editor.VM.Database
 
         public DbTableEditorConnector(DbTableEditorVM source) : base(source)
         {
+            source.EditEntryAction = OnEditEntry;
+        }
+
+        private void OnEditEntry(string tableName, string entryName)
+        {
+            var repository = ServiceLocator.Instance.GetService<IUnitOfWork>().GetRepository(tableName);
+
+            if (repository == null)
+                throw new InvalidOperationException($"Repository with name '{tableName}' not found");
+
+            var entry = repository.Find(entryName);
+
+            if (entry == null)
+                throw new InvalidOperationException($"Entry with name '{tableName}' not found in repository '{repository.Name}'");
+
+            //ServiceLocator.Instance.GetService<EditorVM>().DbEditor.OpenEntryEditor(entry);
         }
 
         #endregion Public Constructors
@@ -37,37 +54,19 @@ namespace OpenBreed.Editor.VM.Database
             switch (e.PropertyName)
             {
                 case nameof(tableSelector.CurrentItem):
-                    OnCurrentTableChanged(tableSelector.CurrentItem);
+                    OnRepositoryChanged(tableSelector.CurrentItem);
                     break;
                 default:
                     break;
             }
         }
 
-        private void OnCurrentTableChanged(DbTableVM currentTable)
+        private void OnRepositoryChanged(string repoName)
         {
-            if (currentTable != null)
-                UpdateWithCurrentTableItems(currentTable);
+            if (repoName != null)
+                Source.SetModel(repoName);
             else
-                UpdateWithNoItems();
-        }
-
-        private void UpdateWithCurrentTableItems(DbTableVM currentTable)
-        {
-            Source.Items.UpdateAfter(() =>
-            {
-                Source.Items.Clear();
-                foreach (var item in currentTable.GetItems())
-                    Source.Items.Add(item);
-            });
-        }
-
-        private void UpdateWithNoItems()
-        {
-            Source.Items.UpdateAfter(() =>
-            {
-                Source.Items.Clear();
-            });
+                Source.SetNoModel();
         }
 
         #endregion Private Methods
