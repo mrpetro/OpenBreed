@@ -40,6 +40,8 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public IUnitOfWork UnitOfWork { get; }
 
+        public string Name { get { return "Palettes"; } }
+
         #endregion Public Properties
 
         #region Public Methods
@@ -52,6 +54,11 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
         public IPaletteEntry GetById(long id)
         {
             throw new NotImplementedException();
+        }
+
+        public IEntry Find(string name)
+        {
+            return _table.Items.FirstOrDefault(item => item.Name == name);
         }
 
         public IPaletteEntry GetByName(string name)

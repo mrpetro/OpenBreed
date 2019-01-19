@@ -68,6 +68,11 @@ namespace OpenBreed.Common.XmlDatabase
             return (IRepository<T>)foundRepo;
         }
 
+        public IRepository GetRepository(string name)
+        {
+            return _repositories.Values.FirstOrDefault(item => item.Name == name);
+        }
+
         public void Save()
         {
             _context.Save();

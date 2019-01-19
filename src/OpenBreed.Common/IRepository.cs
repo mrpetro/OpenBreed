@@ -12,6 +12,9 @@ namespace OpenBreed.Common
 
         IEnumerable<IEntry> Entries { get; }
         IUnitOfWork UnitOfWork { get; }
+        string Name { get; }
+
+        IEntry Find(string name);
 
         #endregion Public Properties
     }

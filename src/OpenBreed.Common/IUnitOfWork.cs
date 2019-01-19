@@ -11,6 +11,8 @@ namespace OpenBreed.Common
     {
         string Name { get; }
         IRepository<T> GetRepository<T>() where T : IEntry;
+        IRepository GetRepository(string name);
+
         void Save();
         IEnumerable<IRepository> Repositories{ get; }
     }

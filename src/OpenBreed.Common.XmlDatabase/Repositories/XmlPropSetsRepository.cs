@@ -34,6 +34,8 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Properties
 
+        public string Name { get { return "Prop sets"; } }
+
         public IEnumerable<IEntry> Entries { get { return _table.Items; } }
 
         public IUnitOfWork UnitOfWork { get; }
@@ -50,6 +52,11 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
         public IPropSetEntry GetById(long id)
         {
             throw new NotImplementedException();
+        }
+
+        public IEntry Find(string name)
+        {
+            return _table.Items.FirstOrDefault(item => item.Name == name);
         }
 
         public IPropSetEntry GetByName(string name)

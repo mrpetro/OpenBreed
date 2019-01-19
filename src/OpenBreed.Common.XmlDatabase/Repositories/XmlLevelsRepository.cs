@@ -12,6 +12,62 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
     public class XmlLevelsRepository : IRepository<ILevelEntry>
     {
 
+        #region Private Fields
+
+        private readonly DatabaseLevelTableDef _table;
+
+        private XmlDatabase _context;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public XmlLevelsRepository(IUnitOfWork unitOfWork, XmlDatabase context)
+        {
+            UnitOfWork = unitOfWork;
+            _context = context;
+
+            _table = _context.GetLevelTable();
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public string Name { get { return "Levels"; } }
+
+        public IEnumerable<IEntry> Entries { get { return _table.Items; } }
+
+        public IUnitOfWork UnitOfWork { get; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public void Add(ILevelEntry entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ILevelEntry GetById(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEntry Find(string name)
+        {
+            return _table.Items.FirstOrDefault(item => item.Name == name);
+        }
+
+        public ILevelEntry GetByName(string name)
+        {
+            var levelDef = _table.Items.FirstOrDefault(item => item.Name == name);
+            if (levelDef == null)
+                throw new Exception("No Level definition found with name: " + name);
+
+            return levelDef;
+        }
+
         public ILevelEntry GetNextTo(ILevelEntry entry)
         {
             var index = _table.Items.IndexOf((LevelDef)entry);
@@ -41,56 +97,6 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             else
                 return null;
         }
-
-        #region Private Fields
-
-        private readonly DatabaseLevelTableDef _table;
-
-        private XmlDatabase _context;
-
-        #endregion Private Fields
-
-        #region Public Constructors
-
-        public XmlLevelsRepository(IUnitOfWork unitOfWork, XmlDatabase context)
-        {
-            UnitOfWork = unitOfWork;
-            _context = context;
-
-            _table = _context.GetLevelTable();
-        }
-
-        #endregion Public Constructors
-
-        #region Public Properties
-
-        public IUnitOfWork UnitOfWork { get; }
-
-        public IEnumerable<IEntry> Entries { get { return _table.Items; } }
-
-        #endregion Public Properties
-
-        #region Public Methods
-
-        public void Add(ILevelEntry entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ILevelEntry GetById(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ILevelEntry GetByName(string name)
-        {
-            var levelDef = _table.Items.FirstOrDefault(item => item.Name == name);
-            if (levelDef == null)
-                throw new Exception("No Level definition found with name: " + name);
-
-            return levelDef;
-        }
-
         public void Remove(ILevelEntry entity)
         {
             throw new NotImplementedException();
@@ -102,5 +108,6 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
         }
 
         #endregion Public Methods
+
     }
 }

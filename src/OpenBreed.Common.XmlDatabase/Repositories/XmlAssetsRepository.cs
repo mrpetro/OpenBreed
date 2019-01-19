@@ -36,6 +36,8 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Properties
 
+        public string Name { get { return "Assets"; } }
+
         public IEnumerable<IEntry> Entries { get { return _table.Items; } }
         public IUnitOfWork UnitOfWork { get; }
 
@@ -51,6 +53,11 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
         public IAssetEntry GetById(long id)
         {
             throw new NotImplementedException();
+        }
+
+        public IEntry Find(string name)
+        {
+            return _table.Items.FirstOrDefault(item => item.Name == name);
         }
 
         public IAssetEntry GetByName(string name)
