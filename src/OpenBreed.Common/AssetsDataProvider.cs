@@ -96,12 +96,12 @@ namespace OpenBreed.Common
 
         private AssetBase CreateDirectoryFileAsset(IDirectoryFileAssetEntry asset)
         {
-            return new DirectoryFileAsset(this, asset.DirectoryPath, asset.Name);
+            return new DirectoryFileAsset(this, asset.DirectoryPath, asset.FileName);
         }
 
         private AssetBase CreateEPFArchiveAsset(IEPFArchiveAssetEntry asset)
         {
-            return new EPFArchiveFileAsset(this, asset.ArchivePath, asset.Name);
+            return new EPFArchiveFileAsset(this, asset.ArchivePath, asset.EntryName);
         }
 
         private AssetBase CreateAsset(IAssetEntry asset)

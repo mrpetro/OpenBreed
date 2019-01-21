@@ -11,6 +11,9 @@ namespace OpenBreed.Common.XmlDatabase.Items.Sources
     public class EPFArchiveFileAssetDef : AssetDef, IEPFArchiveAssetEntry
     {
         [XmlAttribute]
+        public string EntryName { get; set; }
+
+        [XmlAttribute]
         public string ArchivePath { get; set; }
     }
 }

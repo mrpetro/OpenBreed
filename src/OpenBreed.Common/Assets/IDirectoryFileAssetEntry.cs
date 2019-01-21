@@ -9,5 +9,6 @@ namespace OpenBreed.Common.Assets
     public interface IDirectoryFileAssetEntry : IAssetEntry
     {
         string DirectoryPath { get; }
+        string FileName { get; set; }
     }
 }

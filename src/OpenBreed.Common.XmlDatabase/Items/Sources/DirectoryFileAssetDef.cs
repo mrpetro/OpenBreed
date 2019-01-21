@@ -11,6 +11,9 @@ namespace OpenBreed.Common.XmlDatabase.Items.Sources
     public class DirectoryFileAssetDef : AssetDef, IDirectoryFileAssetEntry
     {
         [XmlAttribute]
+        public string FileName { get; set; }
+
+        [XmlAttribute]
         public string DirectoryPath { get; set; }
     }
 }

@@ -9,5 +9,6 @@ namespace OpenBreed.Common.Assets
     public interface IEPFArchiveAssetEntry : IAssetEntry
     {
         string ArchivePath { get; }
+        string EntryName { get; set; }
     }
 }
