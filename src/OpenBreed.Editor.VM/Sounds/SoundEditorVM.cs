@@ -56,11 +56,12 @@ namespace OpenBreed.Editor.VM.Sounds
         protected override void UpdateVM(ISoundEntry source, SoundVM target)
         {
             var model = DataProvider.GetSound(source.Name);
-            target.Name = source.Name;
             target.BitsPerSample = model.BitsPerSample;
             target.Channels = model.Channels;
             target.SampleRate = model.SampleRate;
             target.Data = model.Data;
+
+            base.UpdateVM(source, target);
         }
 
         #endregion Private Methods

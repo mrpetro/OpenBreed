@@ -48,7 +48,8 @@ namespace OpenBreed.Editor.VM.Images
         protected override void UpdateVM(IImageEntry source, ImageVM target)
         {
             target.Image = DataProvider.GetImage(source.Name);
-            target.Name = source.Name;
+
+            base.UpdateVM(source, target);
         }
 
         #endregion Public Methods

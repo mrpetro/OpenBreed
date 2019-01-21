@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Assets;
+using OpenBreed.Common.XmlDatabase.Items.Sources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,16 @@ namespace OpenBreed.Editor.VM.Assets
 
         #region Public Methods
 
+        protected override AssetVM CreateVM(IAssetEntry entry)
+        {
+            if (entry is IDirectoryFileAssetEntry)
+                return new DirectoryFileAssetVM();
+            else if (entry is IEPFArchiveAssetEntry)
+                return new EPFArchiveFileAssetVM();
+            else
+                throw new NotImplementedException();
+        }
+
         protected override void UpdateEntry(AssetVM source, IAssetEntry target)
         {
             throw new NotImplementedException();
@@ -34,8 +45,9 @@ namespace OpenBreed.Editor.VM.Assets
 
         protected override void UpdateVM(IAssetEntry source, AssetVM target)
         {
-            var model = DataProvider.AssetsProvider.GetAsset(source.Name);
-            target.Name = source.Name;
+            target.Load(source);
+
+            base.UpdateVM(source, target);
         }
 
         #endregion Public Methods

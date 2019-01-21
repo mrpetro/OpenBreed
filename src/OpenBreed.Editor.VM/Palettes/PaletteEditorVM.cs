@@ -63,7 +63,6 @@ namespace OpenBreed.Editor.VM.Palettes
         protected override void UpdateVM(IPaletteEntry source, PaletteVM target)
         {
             var model = DataProvider.GetPalette(source.Name);
-            target.Name = source.Name;
 
             target.Colors.UpdateAfter(() => 
             {
@@ -72,6 +71,8 @@ namespace OpenBreed.Editor.VM.Palettes
                 foreach (var color in model.Data)
                     target.Colors.Add(color);
             }); 
+
+            base.UpdateVM(source, target);
         }
 
         #endregion Public Properties

@@ -4,14 +4,16 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Common.Assets;
 
 namespace OpenBreed.Editor.VM.Assets
 {
     public class AssetVM : EditableEntryVM
     {
+
         #region Private Fields
 
-        private string _source;
+        private string name;
 
         #endregion Private Fields
 
@@ -23,15 +25,14 @@ namespace OpenBreed.Editor.VM.Assets
 
         #endregion Public Constructors
 
-        #region Public Properties
+        #region Internal Methods
 
-        public string Source
+        internal virtual void Load(IAssetEntry source)
         {
-            get { return _source; }
-            set { SetProperty(ref _source, value); }
+            Name = source.Name;
         }
 
-        #endregion Public Properties
+        #endregion Internal Methods
 
     }
 }

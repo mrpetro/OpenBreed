@@ -73,6 +73,8 @@
     </Compile>
     <Compile Include="Assets\AssetEditorVM.cs" />
     <Compile Include="Assets\AssetVM.cs" />
+    <Compile Include="Assets\DirectoryFileAssetVM.cs" />
+    <Compile Include="Assets\EPFArchiveFileAssetVM.cs" />
     <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="Base\BindingListExtensions.cs" />
     <Compile Include="Base\Command.cs" />

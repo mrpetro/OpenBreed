@@ -85,7 +85,6 @@ namespace OpenBreed.Editor.VM.Levels
         protected override void UpdateVM(ILevelEntry source, LevelVM target)
         {
             var model = DataProvider.GetLevel(source.Name);
-            target.Name = source.Name;
 
             //foreach (var spriteSet in model.SpriteSets)
             //    target.AddSpriteSet(spriteSet);
@@ -105,6 +104,8 @@ namespace OpenBreed.Editor.VM.Levels
 
             //PaletteSelector.CurrentItem = target.Palettes.FirstOrDefault();
             //BodyEditor.CurrentMapBody = target.Body;
+
+            base.UpdateVM(source, target);
         }
 
         #endregion Internal Methods

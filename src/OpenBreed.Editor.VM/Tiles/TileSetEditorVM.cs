@@ -43,9 +43,10 @@ namespace OpenBreed.Editor.VM.Tiles
         protected override void UpdateVM(ITileSetEntry source, TileSetVM target)
         {
             var model = DataProvider.GetTileSet(source.Name);
-            target.Name = source.Name;
             target.TileSize = model.TileSize;
             target.SetupTiles(model.Tiles);
+
+            base.UpdateVM(source, target);
         }
 
         #endregion Protected Methods

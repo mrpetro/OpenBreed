@@ -14,24 +14,34 @@ namespace OpenBreed.Editor.VM
 
         #region Private Fields
 
-        private string _editableName;
         private VM _editable;
-
+        private string _editableName;
+        private E _edited;
         private E _next;
         private E _previous;
-
-        private E _edited;
         private IRepository<E> _repository;
 
         #endregion Private Fields
 
-        #region Public Properties
+        #region Public Constructors
 
-        public override string EditableName
+        public EntryEditorBaseVM()
         {
-            get { return _editableName; }
-            set { SetProperty(ref _editableName, value); }
+            _repository = ServiceLocator.Instance.GetService<IUnitOfWork>().GetRepository<E>();
         }
+
+        #endregion Public Constructors
+
+        #region Protected Constructors
+
+        protected EntryEditorBaseVM(IRepository repository)
+        {
+            _repository = (IRepository<E>)repository;
+        }
+
+        #endregion Protected Constructors
+
+        #region Public Properties
 
         public VM Editable
         {
@@ -39,18 +49,20 @@ namespace OpenBreed.Editor.VM
             set { SetProperty(ref _editable, value); }
         }
 
+        public override string EditableName
+        {
+            get { return _editableName; }
+            set { SetProperty(ref _editableName, value); }
+        }
+
         #endregion Public Properties
 
         #region Public Methods
 
-        public EntryEditorBaseVM()
+        public override void EditEntry(string name)
         {
-            _repository = ServiceLocator.Instance.GetService<IUnitOfWork>().GetRepository<E>();
-        }
-
-        protected EntryEditorBaseVM(IRepository repository)
-        {
-            _repository = (IRepository<E>)repository;
+            var entry = _repository.GetByName(name);
+            EditModel(entry);
         }
 
         public void EditModel(E model)
@@ -63,28 +75,12 @@ namespace OpenBreed.Editor.VM
             _next = _repository.GetNextTo(_edited);
             _previous = _repository.GetPreviousTo(_edited);
 
-            var vm = new VM();
+            var vm = CreateVM(_edited);
+
             UpdateVM(model, vm);
             Editable = vm;
             Editable.PropertyChanged += Editable_PropertyChanged;
             Update();
-        }
-
-        public override void Store()
-        {
-            UpdateEntry(_editable, _edited);
-
-            //if (EditMode)
-            //    _repo.Update(_edited);
-            //else
-            //    _repo.Add(_edited);
-            //Done();
-        }
-
-        public override void EditEntry(string name)
-        {
-            var entry = _repository.GetByName(name);
-            EditModel(entry);
         }
 
         public override void EditNextEntry()
@@ -103,13 +99,33 @@ namespace OpenBreed.Editor.VM
             EditModel(_previous);
         }
 
+        public override void Store()
+        {
+            UpdateEntry(_editable, _edited);
+
+            //if (EditMode)
+            //    _repo.Update(_edited);
+            //else
+            //    _repo.Add(_edited);
+            //Done();
+        }
+
         #endregion Public Methods
 
         #region Protected Methods
 
-        protected abstract void UpdateEntry(VM source, E target);
+        protected virtual VM CreateVM(E model)
+        {
+            return new VM();
+        }
+        protected virtual void UpdateEntry(VM source, E target)
+        {
+        }
 
-        protected abstract void UpdateVM(E source, VM target);
+        protected virtual void UpdateVM(E source, VM target)
+        {
+            target.Name = source.Name;
+        }
 
         #endregion Protected Methods
 
@@ -138,5 +154,6 @@ namespace OpenBreed.Editor.VM
         }
 
         #endregion Private Methods
+
     }
 }

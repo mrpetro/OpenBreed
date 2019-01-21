@@ -44,7 +44,6 @@ namespace OpenBreed.Editor.VM.Props
         protected override void UpdateVM(IPropSetEntry source, PropSetVM target)
         {
             var model = DataProvider.GetPropSet(source.Name);
-            target.Name = source.Name;
 
             foreach (var property in model.Items)
             {
@@ -52,6 +51,8 @@ namespace OpenBreed.Editor.VM.Props
                 newProp.Load(property);
                 target.Items.Add(newProp);
             }
+
+            base.UpdateVM(source, target);
         }
 
         #endregion Protected Methods
