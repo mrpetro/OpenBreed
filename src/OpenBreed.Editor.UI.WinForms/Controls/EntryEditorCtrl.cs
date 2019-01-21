@@ -56,9 +56,13 @@ namespace OpenBreed.Editor.UI.WinForms.Controls
         {
             _vm = vm ?? throw new ArgumentNullException(nameof(vm));
 
-            btnStore.Click += (s, a) => _vm.OnStore();
-            btnNext.Click += (s, a) => _vm.OpenNextEntry();
-            btnPrevious.Click += (s, a) => _vm.OpenPreviousEntry();
+            tbxName.DataBindings.Add(nameof(tbxName.Text), _vm, nameof(_vm.EditableName), false, DataSourceUpdateMode.OnPropertyChanged);
+            btnNext.DataBindings.Add(nameof(btnNext.Enabled), _vm, nameof(_vm.NextAvailable), false, DataSourceUpdateMode.OnPropertyChanged);
+            btnPrevious.DataBindings.Add(nameof(btnPrevious.Enabled), _vm, nameof(_vm.PreviousAvailable), false, DataSourceUpdateMode.OnPropertyChanged);
+
+            btnStore.Click += (s, a) => _vm.Store();
+            btnNext.Click += (s, a) => _vm.EditNextEntry();
+            btnPrevious.Click += (s, a) => _vm.EditPreviousEntry();
 
             _vm.PropertyChanged += _vm_PropertyChanged;
             InnerCtrl.Initialize(_vm);

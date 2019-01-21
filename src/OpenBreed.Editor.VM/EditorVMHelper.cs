@@ -26,7 +26,7 @@ namespace OpenBreed.Editor.VM
                     if (answer == DialogAnswer.Cancel)
                         return false;
                     else if (answer == DialogAnswer.Yes)
-                        editor.DbEditor.Editable.Save();
+                        editor.DbEditor.Save();
                 }
             }
 

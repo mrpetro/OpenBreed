@@ -14,13 +14,24 @@ namespace OpenBreed.Editor.VM
 
         #region Private Fields
 
+        private string _editableName;
         private VM _editable;
+
+        private E _next;
+        private E _previous;
+
         private E _edited;
         private IRepository<E> _repository;
 
         #endregion Private Fields
 
         #region Public Properties
+
+        public override string EditableName
+        {
+            get { return _editableName; }
+            set { SetProperty(ref _editableName, value); }
+        }
 
         public VM Editable
         {
@@ -49,15 +60,17 @@ namespace OpenBreed.Editor.VM
                 Editable.PropertyChanged -= Editable_PropertyChanged;
 
             _edited = model;
+            _next = _repository.GetNextTo(_edited);
+            _previous = _repository.GetPreviousTo(_edited);
 
             var vm = new VM();
             UpdateVM(model, vm);
             Editable = vm;
             Editable.PropertyChanged += Editable_PropertyChanged;
-            UpdateTitle();
+            Update();
         }
 
-        public override void OnStore()
+        public override void Store()
         {
             UpdateEntry(_editable, _edited);
 
@@ -70,28 +83,29 @@ namespace OpenBreed.Editor.VM
 
         public override void EditEntry(string name)
         {
-            var entry = GetEntry(name);
+            var entry = _repository.GetByName(name);
             EditModel(entry);
         }
 
-        public override void OpenNextEntry()
+        public override void EditNextEntry()
         {
-            throw new NotImplementedException();
+            if (_next == null)
+                throw new InvalidOperationException("No next entry available");
+
+            EditModel(_next);
         }
 
-        public override void OpenPreviousEntry()
+        public override void EditPreviousEntry()
         {
-            throw new NotImplementedException();
+            if (_previous == null)
+                throw new InvalidOperationException("No previous entry available");
+
+            EditModel(_previous);
         }
 
         #endregion Public Methods
 
         #region Protected Methods
-
-        protected E GetEntry(string name)
-        {
-            return _repository.GetByName(name);
-        }
 
         protected abstract void UpdateEntry(VM source, E target);
 
@@ -106,12 +120,21 @@ namespace OpenBreed.Editor.VM
             //throw new NotImplementedException();
         }
 
-        private void UpdateTitle()
+        private void Update()
         {
             if (Editable == null)
+            {
                 Title = $"{EditorName} - no entry to edit";
+                EditableName = null;
+            }
             else
+            {
                 Title = $"{EditorName} - {Editable.Name}";
+                EditableName = Editable.Name;
+            }
+
+            NextAvailable = _next != null;
+            PreviousAvailable = _previous != null;
         }
 
         #endregion Private Methods

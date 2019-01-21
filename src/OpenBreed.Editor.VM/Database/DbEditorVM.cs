@@ -130,17 +130,13 @@ namespace OpenBreed.Editor.VM.Database
 
         internal void Save()
         {
-            _editable.Save();
+            _edited.Save();
         }
 
         #endregion Internal Methods
 
         #region Private Methods
 
-        private void AddNewEntryEditor()
-        {
-
-        }
         private void CurrentDb_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
 

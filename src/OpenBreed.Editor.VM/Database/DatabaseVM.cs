@@ -98,11 +98,6 @@ namespace OpenBreed.Editor.VM.Database
                 yield return repository.Name;
         }
 
-        internal void Save()
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion Internal Methods
 
     }
