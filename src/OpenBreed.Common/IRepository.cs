@@ -29,7 +29,7 @@ namespace OpenBreed.Common
         T GetByName(string name);
 
         T GetNextTo(T entry);
-        T GetPrevTo(T entry);
+        T GetPreviousTo(T entry);
         void Remove(T entry);
         void Update(T entry);
 

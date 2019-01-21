@@ -7,17 +7,28 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Common.XmlDatabase
 {
-    public class DatabaseItemDef
+    public class DatabaseItemDef : IEntry
     {
-        [XmlAttribute]
-        public string Name { get; set; }
+        #region Public Properties
 
         [XmlAttribute]
         public string Description { get; set; }
+
+        [XmlAttribute]
+        public long Id { get; set; }
+
+        [XmlAttribute]
+        public string Name { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
 
         public override string ToString()
         {
             return $"DbTableItem '{Name}'";
         }
+
+        #endregion Public Methods
     }
 }

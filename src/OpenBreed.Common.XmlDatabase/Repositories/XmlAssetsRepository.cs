@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Globalization;
 using OpenBreed.Common.Assets;
 using OpenBreed.Common.XmlDatabase.Tables.Sources;
+using OpenBreed.Common.XmlDatabase.Items.Sources;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
@@ -71,12 +72,30 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public IAssetEntry GetNextTo(IAssetEntry entry)
         {
-            throw new NotImplementedException();
+            var index = _table.Items.IndexOf((AssetDef)entry);
+            if (index < 0)
+                throw new InvalidOperationException($"{entry} not found in repository");
+
+            index++;
+
+            if (index > _table.Items.Count - 1)
+                return null;
+            else
+                return _table.Items[index];
         }
 
-        public IAssetEntry GetPrevTo(IAssetEntry entry)
+        public IAssetEntry GetPreviousTo(IAssetEntry entry)
         {
-            throw new NotImplementedException();
+            var index = _table.Items.IndexOf((AssetDef)entry);
+            if (index < 0)
+                throw new InvalidOperationException($"{entry} not found in repository");
+
+            index--;
+
+            if (index < 0)
+                return null;
+            else
+                return _table.Items[index];
         }
 
         public void Remove(IAssetEntry entity)

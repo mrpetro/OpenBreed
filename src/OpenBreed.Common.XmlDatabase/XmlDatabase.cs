@@ -66,7 +66,7 @@ namespace OpenBreed.Common.XmlDatabase
         }
         public void Save()
         {
-            Data.Save(XmlFilePath);
+            Data.Save($"{XmlFilePath.Replace(".xml","_out.xml")}");
         }
 
         #endregion Public Methods

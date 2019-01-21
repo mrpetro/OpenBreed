@@ -63,7 +63,7 @@
     </Assets>
     <Images>
       <Items>
-        <Image Name="CHAD" Description="Characters statistics screens" >
+        <Image Name="Images.CHAD" Description="Characters statistics screens" >
           <AssetRef>CHAD</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -74,7 +74,7 @@
             </Parameters>       
           </Format>
         </Image>
-        <Image Name="CHAR" Description="Characters selection screen" >
+        <Image Name="Images.CHAR" Description="Characters selection screen" >
           <AssetRef>CHAR</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -85,7 +85,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="ENDA" Description="End animation frames" >
+        <Image Name="Images.ENDA" Description="End animation frames" >
           <AssetRef>ENDA</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -96,7 +96,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="ENDP" Description="End picture" >
+        <Image Name="Images.ENDP" Description="End picture" >
           <AssetRef>ENDP</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -107,7 +107,7 @@
             </Parameters>    
           </Format>
         </Image>
-        <Image Name="HPIC" Description="Highscore picture" >
+        <Image Name="Images.HPIC" Description="Highscore picture" >
           <AssetRef>HPIC</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -118,7 +118,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="IPIC" Description="Intro picture" >
+        <Image Name="Images.IPIC" Description="Intro picture" >
           <AssetRef>IPIC</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -129,7 +129,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="MPIC" Description="Menu picture" >
+        <Image Name="Images.MPIC" Description="Menu picture" >
           <AssetRef>MPIC</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -140,7 +140,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="ETXT" Description="End text screen" >
+        <Image Name="Images.ETXT" Description="End text screen" >
           <AssetRef>ETXT</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -151,7 +151,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="HSP1" Description="Character 1 sprites" >
+        <Image Name="Images.HSP1" Description="Character 1 sprites" >
           <AssetRef>HSP1</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -162,7 +162,7 @@
             </Parameters>    
           </Format>
         </Image>
-        <Image Name="HSP2" Description="Character 2 sprites" >
+        <Image Name="Images.HSP2" Description="Character 2 sprites" >
           <AssetRef>HSP2</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -173,7 +173,7 @@
             </Parameters>   
           </Format>
         </Image>
-        <Image Name="HSP3" Description="Character 3 sprites" >
+        <Image Name="Images.HSP3" Description="Character 3 sprites" >
           <AssetRef>HSP3</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -184,7 +184,7 @@
             </Parameters>  
           </Format>
         </Image>
-        <Image Name="HSP4" Description="Character 4 sprites" >
+        <Image Name="Images.HSP4" Description="Character 4 sprites" >
           <AssetRef>HSP4</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -195,7 +195,7 @@
             </Parameters>      
           </Format>
         </Image>
-        <Image Name="L1BO" Description="Level 1 sprites" >
+        <Image Name="Images.L1BO" Description="Level 1 sprites" >
           <AssetRef>L1BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -206,7 +206,7 @@
             </Parameters>     
           </Format>
         </Image>
-        <Image Name="L2BO" Description="Level 2 sprites" >
+        <Image Name="Images.L2BO" Description="Level 2 sprites" >
           <AssetRef>L2BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -217,7 +217,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="L3BO" Description="Level 3 sprites" >
+        <Image Name="Images.L3BO" Description="Level 3 sprites" >
           <AssetRef>L3BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -228,7 +228,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="L4BO" Description="Level 4 sprites" >
+        <Image Name="Images.L4BO" Description="Level 4 sprites" >
           <AssetRef>L4BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -239,7 +239,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="L5BO" Description="Level 5 sprites" >
+        <Image Name="Images.L5BO" Description="Level 5 sprites" >
           <AssetRef>L5BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -250,7 +250,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="L6BO" Description="Level 6 sprites" >
+        <Image Name="Images.L6BO" Description="Level 6 sprites" >
           <AssetRef>L6BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -261,7 +261,7 @@
             </Parameters>       
           </Format>
         </Image>
-        <Image Name="L7BO" Description="Level 7 sprites" >
+        <Image Name="Images.L7BO" Description="Level 7 sprites" >
           <AssetRef>L7BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -272,7 +272,7 @@
             </Parameters> 
           </Format>
         </Image>
-        <Image Name="L8BO" Description="Level 8 sprites" >
+        <Image Name="Images.L8BO" Description="Level 8 sprites" >
           <AssetRef>L8BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -283,7 +283,7 @@
             </Parameters>   
           </Format>
         </Image>
-        <Image Name="L9BO" Description="Level 9 sprites" >
+        <Image Name="Images.L9BO" Description="Level 9 sprites" >
           <AssetRef>L9BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -294,7 +294,7 @@
             </Parameters> 
           </Format>
         </Image>
-        <Image Name="LABO" Description="Level A sprites" >
+        <Image Name="Images.LABO" Description="Level A sprites" >
           <AssetRef>LABO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -305,7 +305,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="LBBO" Description="Level B sprites" >
+        <Image Name="Images.LBBO" Description="Level B sprites" >
           <AssetRef>LBBO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -316,7 +316,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="LCBO" Description="Level C sprites" >
+        <Image Name="Images.LCBO" Description="Level C sprites" >
           <AssetRef>LCBO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -327,7 +327,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="LDBO" Description="Level D sprites" >
+        <Image Name="Images.LDBO" Description="Level D sprites" >
           <AssetRef>LDBO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -338,7 +338,7 @@
             </Parameters>    
           </Format>
         </Image>
-        <Image Name="LEBO" Description="Level E sprites" >
+        <Image Name="Images.LEBO" Description="Level E sprites" >
           <AssetRef>LEBO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -349,7 +349,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="L1LP" Description="Level 1 picture" >
+        <Image Name="Images.L1LP" Description="Level 1 picture" >
           <AssetRef>L1LP</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -360,7 +360,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="L2LP" Description="Level 2 picture" >
+        <Image Name="Images.L2LP" Description="Level 2 picture" >
           <AssetRef>L2LP</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -371,7 +371,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="L6LP" Description="Level 6 picture" >
+        <Image Name="Images.L6LP" Description="Level 6 picture" >
           <AssetRef>L6LP</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -382,7 +382,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="LALP" Description="Level A picture" >
+        <Image Name="Images.LALP" Description="Level A picture" >
           <AssetRef>LALP</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>

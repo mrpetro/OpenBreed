@@ -31,7 +31,6 @@ namespace OpenBreed.Common.XmlDatabase.Items.Levels
             }
         }
 
-        public long Id { get; set; }
         [XmlArray("PaletteRefs"),
         XmlArrayItem("PaletteRef", typeof(string))]
         public List<string> PaletteRefs { get; } = new List<string>();

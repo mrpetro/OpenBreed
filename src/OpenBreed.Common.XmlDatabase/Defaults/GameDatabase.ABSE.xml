@@ -40,7 +40,7 @@
     </Assets>
     <Images>
       <Items>
-        <Image Name="LP01" Description="Alien Breed II: Horror Continues teaser" >
+        <Image Name="Images.LP01" Description="Alien Breed II: Horror Continues teaser" >
           <AssetRef>LP01</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -51,7 +51,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="LP01B" Description="Superfrog teaser title" >
+        <Image Name="Images.LP01B" Description="Superfrog teaser title" >
           <AssetRef>LP01B</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -62,7 +62,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="LP02" Description="Superfrog teaser screenshot 1" >
+        <Image Name="Images.LP02" Description="Superfrog teaser screenshot 1" >
           <AssetRef>LP02</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -73,7 +73,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="LP03" Description="Superfrog teaser screenshot 2" >
+        <Image Name="Images.LP03" Description="Superfrog teaser screenshot 2" >
           <AssetRef>LP03</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -84,7 +84,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="LP04" Description="Superfrog teaser screenshot 3" >
+        <Image Name="Images.LP04" Description="Superfrog teaser screenshot 3" >
           <AssetRef>LP04</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -95,7 +95,7 @@
             </Parameters>  
           </Format>
         </Image>
-        <Image Name="LP05" Description="Superfrog teaser screenshot 4" >
+        <Image Name="Images.LP05" Description="Superfrog teaser screenshot 4" >
           <AssetRef>LP05</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -106,7 +106,7 @@
             </Parameters>     
           </Format>
         </Image>
-        <Image Name="LP06" Description="Superfrog teaser screenshot 5" >
+        <Image Name="Images.LP06" Description="Superfrog teaser screenshot 5" >
           <AssetRef>LP06</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -117,7 +117,7 @@
             </Parameters>      
           </Format>
         </Image>
-        <Image Name="LP07" Description="Superfrog teaser screenshot 6" >
+        <Image Name="Images.LP07" Description="Superfrog teaser screenshot 6" >
           <AssetRef>LP07</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -128,7 +128,7 @@
             </Parameters>  
           </Format>
         </Image>
-        <Image Name="L0AN" Description="Level 0 animations" >
+        <Image Name="Images.L0AN" Description="Level 0 animations" >
           <AssetRef>L0AN</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -139,7 +139,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="L1AN" Description="Level 1 animations" >
+        <Image Name="Images.L1AN" Description="Level 1 animations" >
           <AssetRef>L1AN</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -150,7 +150,7 @@
             </Parameters>        
           </Format>
         </Image>
-        <Image Name="L2AN" Description="Level 2 animations" >
+        <Image Name="Images.L2AN" Description="Level 2 animations" >
           <AssetRef>L2AN</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -161,7 +161,7 @@
             </Parameters>     
           </Format>
         </Image>
-        <Image Name="L3AN" Description="Level 3 animations" >
+        <Image Name="Images.L3AN" Description="Level 3 animations" >
           <AssetRef>L3AN</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -172,7 +172,7 @@
             </Parameters>       
           </Format>
         </Image>
-        <Image Name="L4AN" Description="Level 4 animations" >
+        <Image Name="Images.L4AN" Description="Level 4 animations" >
           <AssetRef>L4AN</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -183,7 +183,7 @@
             </Parameters>      
           </Format>
         </Image>
-        <Image Name="L5AN" Description="Level 5 animations" >
+        <Image Name="Images.L5AN" Description="Level 5 animations" >
           <AssetRef>L5AN</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>

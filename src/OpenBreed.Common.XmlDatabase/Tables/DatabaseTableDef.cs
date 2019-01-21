@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Common.XmlDatabase.Tables
 {
-    public class DatabaseTableDef : DatabaseItemDef
+    public class DatabaseTableDef
     {
         #region Public Methods
 

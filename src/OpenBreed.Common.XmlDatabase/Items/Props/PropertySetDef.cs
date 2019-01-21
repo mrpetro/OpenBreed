@@ -15,8 +15,6 @@ namespace OpenBreed.Common.XmlDatabase.Items.Props
 
         #region Public Properties
 
-        public long Id { get; set; }
-
         [XmlIgnore]
         public List<IPropertyEntry> Items
         {
@@ -31,5 +29,6 @@ namespace OpenBreed.Common.XmlDatabase.Items.Props
         public List<PropertyDef> PropertyDefs { get; } = new List<PropertyDef>();
 
         #endregion Public Properties
+
     }
 }

@@ -31,7 +31,6 @@ namespace OpenBreed.Common.XmlDatabase.Items.Tiles
             }
         }
 
-        public long Id { get; set; }
         public string AssetRef { get; set; }
 
         #endregion Public Properties

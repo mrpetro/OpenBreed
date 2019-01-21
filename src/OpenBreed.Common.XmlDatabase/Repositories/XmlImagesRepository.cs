@@ -82,7 +82,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return null;
         }
 
-        public IImageEntry GetPrevTo(IImageEntry entry)
+        public IImageEntry GetPreviousTo(IImageEntry entry)
         {
             var index = _table.Items.IndexOf((ImageDef)entry);
 

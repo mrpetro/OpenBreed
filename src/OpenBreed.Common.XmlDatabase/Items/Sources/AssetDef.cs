@@ -12,8 +12,6 @@ namespace OpenBreed.Common.XmlDatabase.Items.Sources
     {
         #region Public Properties
 
-        public long Id { get; set; }
-
         #endregion Public Properties
     }
 }

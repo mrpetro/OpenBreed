@@ -85,7 +85,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return null;
         }
 
-        public IPaletteEntry GetPrevTo(IPaletteEntry entry)
+        public IPaletteEntry GetPreviousTo(IPaletteEntry entry)
         {
             var index = _table.Items.IndexOf((PaletteDef)entry);
 

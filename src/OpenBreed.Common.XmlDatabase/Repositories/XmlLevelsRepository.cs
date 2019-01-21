@@ -83,7 +83,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return null;
         }
 
-        public ILevelEntry GetPrevTo(ILevelEntry entry)
+        public ILevelEntry GetPreviousTo(ILevelEntry entry)
         {
             var index = _table.Items.IndexOf((LevelDef)entry);
 

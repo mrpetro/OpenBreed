@@ -11,7 +11,10 @@ namespace OpenBreed.Common.XmlDatabase.Items.Palettes
 {
     public class PaletteDef : DatabaseItemDef, IPaletteEntry
     {
+
         #region Public Properties
+
+        public string AssetRef { get; set; }
 
         [XmlIgnore]
         public IFormatEntry Format { get; set; }
@@ -29,9 +32,6 @@ namespace OpenBreed.Common.XmlDatabase.Items.Palettes
                 Format = value;
             }
         }
-
-        public long Id { get; set; }
-        public string AssetRef { get; set; }
 
         #endregion Public Properties
     }
