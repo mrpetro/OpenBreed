@@ -58,11 +58,11 @@
     <Compile Include="Controls\Assets\AssetEditorCtrl.Designer.cs">
       <DependentUpon>AssetEditorCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Assets\DirectoryFileAssetCtrl.cs">
+    <Compile Include="Controls\Assets\FileAssetCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Assets\DirectoryFileAssetCtrl.Designer.cs">
-      <DependentUpon>DirectoryFileAssetCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Assets\FileAssetCtrl.Designer.cs">
+      <DependentUpon>FileAssetCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Assets\EpfArchiveAssetCtrl.cs">
       <SubType>UserControl</SubType>
@@ -339,8 +339,8 @@
     <EmbeddedResource Include="Controls\Assets\AssetEditorCtrl.resx">
       <DependentUpon>AssetEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Assets\DirectoryFileAssetCtrl.resx">
-      <DependentUpon>DirectoryFileAssetCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Assets\FileAssetCtrl.resx">
+      <DependentUpon>FileAssetCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Assets\EpfArchiveAssetCtrl.resx">
       <DependentUpon>EpfArchiveAssetCtrl.cs</DependentUpon>

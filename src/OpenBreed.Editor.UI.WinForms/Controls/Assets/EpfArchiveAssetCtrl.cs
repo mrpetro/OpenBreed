@@ -33,6 +33,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Assets
         public void Initialize(EPFArchiveFileAssetVM vm)
         {
             _vm = vm;
+
+            tbxEpfArchivePath.DataBindings.Add(nameof(tbxEpfArchivePath.Text), _vm, nameof(_vm.ArchivePath), false, DataSourceUpdateMode.OnPropertyChanged);
+            cbxEntryName.DataBindings.Add(nameof(cbxEntryName.Text), _vm, nameof(_vm.EntryName), false, DataSourceUpdateMode.OnPropertyChanged);
         }
 
         #endregion Public Methods

@@ -30,8 +30,8 @@ namespace OpenBreed.Editor.VM.Assets
 
         protected override AssetVM CreateVM(IAssetEntry entry)
         {
-            if (entry is IDirectoryFileAssetEntry)
-                return new DirectoryFileAssetVM();
+            if (entry is IFileAssetEntry)
+                return new FileAssetVM();
             else if (entry is IEPFArchiveAssetEntry)
                 return new EPFArchiveFileAssetVM();
             else

@@ -11,17 +11,17 @@ using OpenBreed.Editor.VM.Assets;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Assets
 {
-    public partial class DirectoryFileAssetCtrl : UserControl
+    public partial class FileAssetCtrl : UserControl
     {
         #region Private Fields
 
-        private DirectoryFileAssetVM _vm;
+        private FileAssetVM _vm;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DirectoryFileAssetCtrl()
+        public FileAssetCtrl()
         {
             InitializeComponent();
         }
@@ -30,9 +30,11 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Assets
 
         #region Public Methods
 
-        public void Initialize(DirectoryFileAssetVM vm)
+        public void Initialize(FileAssetVM vm)
         {
             _vm = vm;
+
+            tbxFilePath.DataBindings.Add(nameof(tbxFilePath.Text), _vm, nameof(_vm.FilePath), false, DataSourceUpdateMode.OnPropertyChanged); 
         }
 
         #endregion Public Methods

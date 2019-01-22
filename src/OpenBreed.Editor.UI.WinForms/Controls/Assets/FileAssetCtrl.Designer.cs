@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Assets
 {
-    partial class DirectoryFileAssetCtrl
+    partial class FileAssetCtrl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tbxDirectoryFilePath = new System.Windows.Forms.TextBox();
+            this.tbxFilePath = new System.Windows.Forms.TextBox();
             this.btnFileBrowser = new System.Windows.Forms.Button();
             this.grpFilePath = new System.Windows.Forms.GroupBox();
             this.lblFilePath = new System.Windows.Forms.Label();
             this.grpFilePath.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tbxDirectoryFilePath
+            // tbxFilePath
             // 
-            this.tbxDirectoryFilePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbxFilePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbxDirectoryFilePath.Location = new System.Drawing.Point(62, 19);
-            this.tbxDirectoryFilePath.Name = "tbxDirectoryFilePath";
-            this.tbxDirectoryFilePath.Size = new System.Drawing.Size(281, 20);
-            this.tbxDirectoryFilePath.TabIndex = 3;
+            this.tbxFilePath.Location = new System.Drawing.Point(62, 19);
+            this.tbxFilePath.Name = "tbxFilePath";
+            this.tbxFilePath.Size = new System.Drawing.Size(281, 20);
+            this.tbxFilePath.TabIndex = 3;
             // 
             // btnFileBrowser
             // 
@@ -57,7 +57,7 @@
             // grpFilePath
             // 
             this.grpFilePath.Controls.Add(this.lblFilePath);
-            this.grpFilePath.Controls.Add(this.tbxDirectoryFilePath);
+            this.grpFilePath.Controls.Add(this.tbxFilePath);
             this.grpFilePath.Controls.Add(this.btnFileBrowser);
             this.grpFilePath.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpFilePath.Location = new System.Drawing.Point(0, 0);
@@ -76,12 +76,12 @@
             this.lblFilePath.TabIndex = 4;
             this.lblFilePath.Text = "File path:";
             // 
-            // DirectoryFileAssetCtrl
+            // FileAssetCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.grpFilePath);
-            this.Name = "DirectoryFileAssetCtrl";
+            this.Name = "FileAssetCtrl";
             this.Size = new System.Drawing.Size(381, 46);
             this.grpFilePath.ResumeLayout(false);
             this.grpFilePath.PerformLayout();
@@ -91,7 +91,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox tbxDirectoryFilePath;
+        private System.Windows.Forms.TextBox tbxFilePath;
         private System.Windows.Forms.Button btnFileBrowser;
         private System.Windows.Forms.GroupBox grpFilePath;
         private System.Windows.Forms.Label lblFilePath;

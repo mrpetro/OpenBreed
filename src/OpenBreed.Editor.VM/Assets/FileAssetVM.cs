@@ -8,27 +8,20 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Assets
 {
-    public class DirectoryFileAssetVM : AssetVM
+    public class FileAssetVM : AssetVM
     {
         #region Private Fields
 
-        private string _directoryPath;
-        private string _fileName;
+        private string _filePath;
 
         #endregion Private Fields
 
         #region Public Properties
 
-        public string DirectoryPath
+        public string FilePath
         {
-            get { return _directoryPath; }
-            set { SetProperty(ref _directoryPath, value); }
-        }
-
-        public string FileName
-        {
-            get { return _fileName; }
-            set { SetProperty(ref _fileName, value); }
+            get { return _filePath; }
+            set { SetProperty(ref _filePath, value); }
         }
 
         #endregion Public Properties
@@ -38,17 +31,16 @@ namespace OpenBreed.Editor.VM.Assets
         internal override void Load(IAssetEntry source)
         {
             base.Load(source);
-            Load((IDirectoryFileAssetEntry)source);
+            Load((IFileAssetEntry)source);
         }
 
         #endregion Internal Methods
 
         #region Private Methods
 
-        private void Load(IDirectoryFileAssetEntry source)
+        private void Load(IFileAssetEntry source)
         {
-            DirectoryPath = source.DirectoryPath;
-            FileName = source.FileName;
+            FilePath = source.FilePath;
         }
 
         #endregion Private Methods
