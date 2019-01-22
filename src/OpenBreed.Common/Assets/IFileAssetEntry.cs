@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Assets
 {
-    public interface IDirectoryFileAssetEntry : IAssetEntry
+    public interface IFileAssetEntry : IAssetEntry
     {
-        string DirectoryPath { get; }
-        string FileName { get; set; }
+        string FilePath { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace OpenBreed.Common.Assets
 
         #region Public Constructors
 
-        public EPFArchiveFileAsset(AssetsDataProvider manager, string archivePath, string name) :
+        public EPFArchiveFileAsset(AssetsDataProvider manager, string name, string archivePath, string entryName) :
             base(manager, name)
         {
             ArchivePath = archivePath;
@@ -29,6 +29,7 @@ namespace OpenBreed.Common.Assets
         #region Public Properties
 
         public string ArchivePath { get; }
+        public string EntryName { get; }
 
         #endregion Public Properties
 
@@ -58,10 +59,10 @@ namespace OpenBreed.Common.Assets
         private void InitEntry()
         {
             if (_entry != null)
-                throw new InvalidOperationException($"Entry {Name} already initialized.");
+                throw new InvalidOperationException($"Entry {EntryName} already initialized.");
 
             var archive = _repository.GetArchive(AssetsDataProvider.ExpandVariables(ArchivePath));
-            _entry = archive.FindEntry(Name);
+            _entry = archive.FindEntry(EntryName);
         }
 
         #endregion Private Methods

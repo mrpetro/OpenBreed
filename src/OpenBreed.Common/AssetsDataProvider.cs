@@ -94,20 +94,20 @@ namespace OpenBreed.Common
 
         #region Private Methods
 
-        private AssetBase CreateDirectoryFileAsset(IDirectoryFileAssetEntry asset)
+        private AssetBase CreateFileAsset(IFileAssetEntry asset)
         {
-            return new DirectoryFileAsset(this, asset.DirectoryPath, asset.FileName);
+            return new FileAsset(this, asset.Name, asset.FilePath);
         }
 
         private AssetBase CreateEPFArchiveAsset(IEPFArchiveAssetEntry asset)
         {
-            return new EPFArchiveFileAsset(this, asset.ArchivePath, asset.EntryName);
+            return new EPFArchiveFileAsset(this, asset.Name, asset.ArchivePath, asset.EntryName);
         }
 
         private AssetBase CreateAsset(IAssetEntry asset)
         {
-            if (asset is IDirectoryFileAssetEntry)
-                return CreateDirectoryFileAsset((IDirectoryFileAssetEntry)asset);
+            if (asset is IFileAssetEntry)
+                return CreateFileAsset((IFileAssetEntry)asset);
             else if (asset is IEPFArchiveAssetEntry)
                 return CreateEPFArchiveAsset((IEPFArchiveAssetEntry)asset);
             else

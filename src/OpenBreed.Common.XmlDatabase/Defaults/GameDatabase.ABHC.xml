@@ -3,62 +3,62 @@
   <Tables>
     <Assets>
       <Items>
-        <DirectoryFileAsset Name="Assets.L1MA" FileName="L1MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L2MA" FileName="L2MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L3MA" FileName="L3MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L4MA" FileName="L4MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L5MA" FileName="L5MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L6MA" FileName="L6MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L7MA" FileName="L7MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L8MA" FileName="L8MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L9MA" FileName="L9MA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LAMA" FileName="LAMA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LBMA" FileName="LBMA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LCMA" FileName="LCMA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LDMA" FileName="LDMA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LEMA" FileName="LEMA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.MMA1" FileName="MMA1" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.MMA2" FileName="MMA2" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.MMA3" FileName="MMA3" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L1BM" FileName="L1BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L2BM" FileName="L2BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L3BM" FileName="L3BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L4BM" FileName="L4BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L5BM" FileName="L5BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L6BM" FileName="L6BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L7BM" FileName="L7BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L8BM" FileName="L8BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L9BM" FileName="L9BM" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L1LP" FileName="L1LP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L2LP" FileName="L2LP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L6LP" FileName="L6LP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LALP" FileName="LALP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.CHAD" FileName="CHAD" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.CHAR" FileName="CHAR" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.ENDA" FileName="ENDA" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.ENDP" FileName="ENDP" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.ETXT" FileName="ETXT" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.HPIC" FileName="HPIC" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.IPIC" FileName="IPIC" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.HSP1" FileName="HSP1" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.HSP2" FileName="HSP2" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.HSP3" FileName="HSP3" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.HSP4" FileName="HSP4" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L1BO" FileName="L1BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L2BO" FileName="L2BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L3BO" FileName="L3BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L4BO" FileName="L4BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L5BO" FileName="L5BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L6BO" FileName="L6BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L7BO" FileName="L7BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L8BO" FileName="L8BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L9BO" FileName="L9BO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LABO" FileName="LABO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LBBO" FileName="LBBO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LCBO" FileName="LCBO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LDBO" FileName="LDBO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LEBO" FileName="LEBO" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.MPIC" FileName="MPIC" DirectoryPath="%Cfg.Options.ABHC.GameFolderPath%" />
+        <FileAsset Name="Assets.L1MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L1MA" />
+        <FileAsset Name="Assets.L2MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L2MA" />
+        <FileAsset Name="Assets.L3MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L3MA" />
+        <FileAsset Name="Assets.L4MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L4MA" />
+        <FileAsset Name="Assets.L5MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L5MA" />
+        <FileAsset Name="Assets.L6MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L6MA" />
+        <FileAsset Name="Assets.L7MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L7MA" />
+        <FileAsset Name="Assets.L8MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L8MA" />
+        <FileAsset Name="Assets.L9MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L9MA" />
+        <FileAsset Name="Assets.LAMA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LAMA" />
+        <FileAsset Name="Assets.LBMA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LBMA" />
+        <FileAsset Name="Assets.LCMA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LCMA" />
+        <FileAsset Name="Assets.LDMA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LDMA" />
+        <FileAsset Name="Assets.LEMA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LEMA" />
+        <FileAsset Name="Assets.MMA1" FilePath="%Cfg.Options.ABHC.GameFolderPath%\MMA1" />
+        <FileAsset Name="Assets.MMA2" FilePath="%Cfg.Options.ABHC.GameFolderPath%\MMA2" />
+        <FileAsset Name="Assets.MMA3" FilePath="%Cfg.Options.ABHC.GameFolderPath%\MMA3" />
+        <FileAsset Name="Assets.L1BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L1BM" />
+        <FileAsset Name="Assets.L2BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L2BM" />
+        <FileAsset Name="Assets.L3BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L3BM" />
+        <FileAsset Name="Assets.L4BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L4BM" />
+        <FileAsset Name="Assets.L5BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L5BM" />
+        <FileAsset Name="Assets.L6BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L6BM" />
+        <FileAsset Name="Assets.L7BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L7BM" />
+        <FileAsset Name="Assets.L8BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L8BM" />
+        <FileAsset Name="Assets.L9BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L9BM" />
+        <FileAsset Name="Assets.L1LP" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L1LP" />
+        <FileAsset Name="Assets.L2LP" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L2LP" />
+        <FileAsset Name="Assets.L6LP" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L6LP" />
+        <FileAsset Name="Assets.LALP" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LALP" />
+        <FileAsset Name="Assets.CHAD" FilePath="%Cfg.Options.ABHC.GameFolderPath%\CHAD" />
+        <FileAsset Name="Assets.CHAR" FilePath="%Cfg.Options.ABHC.GameFolderPath%\CHAR" />
+        <FileAsset Name="Assets.ENDA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\ENDA" />
+        <FileAsset Name="Assets.ENDP" FilePath="%Cfg.Options.ABHC.GameFolderPath%\ENDP" />
+        <FileAsset Name="Assets.ETXT" FilePath="%Cfg.Options.ABHC.GameFolderPath%\ETXT" />
+        <FileAsset Name="Assets.HPIC" FilePath="%Cfg.Options.ABHC.GameFolderPath%\HPIC" />
+        <FileAsset Name="Assets.IPIC" FilePath="%Cfg.Options.ABHC.GameFolderPath%\IPIC" />
+        <FileAsset Name="Assets.HSP1" FilePath="%Cfg.Options.ABHC.GameFolderPath%\HSP1" />
+        <FileAsset Name="Assets.HSP2" FilePath="%Cfg.Options.ABHC.GameFolderPath%\HSP2" />
+        <FileAsset Name="Assets.HSP3" FilePath="%Cfg.Options.ABHC.GameFolderPath%\HSP3" />
+        <FileAsset Name="Assets.HSP4" FilePath="%Cfg.Options.ABHC.GameFolderPath%\HSP4" />
+        <FileAsset Name="Assets.L1BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L1BO" />
+        <FileAsset Name="Assets.L2BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L2BO" />
+        <FileAsset Name="Assets.L3BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L3BO" />
+        <FileAsset Name="Assets.L4BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L4BO" />
+        <FileAsset Name="Assets.L5BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L5BO" />
+        <FileAsset Name="Assets.L6BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L6BO" />
+        <FileAsset Name="Assets.L7BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L7BO" />
+        <FileAsset Name="Assets.L8BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L8BO" />
+        <FileAsset Name="Assets.L9BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L9BO" />
+        <FileAsset Name="Assets.LABO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LABO" />
+        <FileAsset Name="Assets.LBBO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LBBO" />
+        <FileAsset Name="Assets.LCBO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LCBO" />
+        <FileAsset Name="Assets.LDBO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LDBO" />
+        <FileAsset Name="Assets.LEBO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LEBO" />
+        <FileAsset Name="Assets.MPIC" FilePath="%Cfg.Options.ABHC.GameFolderPath%\MPIC" />
       </Items>
     </Assets>
     <Images>

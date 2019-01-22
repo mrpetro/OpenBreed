@@ -3,39 +3,39 @@
   <Tables>
     <Assets>
       <Items>
-        <DirectoryFileAsset Name="Assets.L0MA" FileName="L0MA" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L1MA" FileName="L1MA" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L2MA" FileName="L2MA" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L3MA" FileName="L3MA" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L4MA" FileName="L4MA" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L5MA" FileName="L5MA" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L6MA" FileName="L6MA" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L7MA" FileName="L7MA" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L8MA" FileName="L8MA" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L9MA" FileName="L9MA" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LAMA" FileName="LAMA" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LBMA" FileName="LBMA" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LABM" FileName="LABM" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LBBM" FileName="LBBM" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LCBM" FileName="LCBM" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LDBM" FileName="LDBM" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LEBM" FileName="LEBM" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LFBM" FileName="LFBM" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LP01" FileName="LP01" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LP01B" FileName="LP01B" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LP02" FileName="LP02" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LP03" FileName="LP03" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LP04" FileName="LP04" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LP05" FileName="LP05" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LP06" FileName="LP06" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.LP07" FileName="LP07" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L0AN" FileName="L0AN" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L1AN" FileName="L1AN" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L2AN" FileName="L2AN" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L3AN" FileName="L3AN" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L4AN" FileName="L4AN" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.L5AN" FileName="L5AN" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
-        <DirectoryFileAsset Name="Assets.PARTF" FileName="PARTF" DirectoryPath="%Cfg.Options.ABSE.GameFolderPath%" />
+        <FileAsset Name="Assets.L0MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L0MA" />
+        <FileAsset Name="Assets.L1MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L1MA" />
+        <FileAsset Name="Assets.L2MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L2MA" />
+        <FileAsset Name="Assets.L3MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L3MA" />
+        <FileAsset Name="Assets.L4MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L4MA" />
+        <FileAsset Name="Assets.L5MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L5MA" />
+        <FileAsset Name="Assets.L6MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L6MA" />
+        <FileAsset Name="Assets.L7MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L7MA" />
+        <FileAsset Name="Assets.L8MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L8MA" />
+        <FileAsset Name="Assets.L9MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L9MA" />
+        <FileAsset Name="Assets.LAMA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LAMA" />
+        <FileAsset Name="Assets.LBMA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LBMA" />
+        <FileAsset Name="Assets.LABM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LABM" />
+        <FileAsset Name="Assets.LBBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LBBM" />
+        <FileAsset Name="Assets.LCBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LCBM" />
+        <FileAsset Name="Assets.LDBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LDBM" />
+        <FileAsset Name="Assets.LEBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LEBM" />
+        <FileAsset Name="Assets.LFBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LFBM" />
+        <FileAsset Name="Assets.LP01" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP01" />
+        <FileAsset Name="Assets.LP01B" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP01B" />
+        <FileAsset Name="Assets.LP02" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP02" />
+        <FileAsset Name="Assets.LP03" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP03" />
+        <FileAsset Name="Assets.LP04" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP04" />
+        <FileAsset Name="Assets.LP05" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP05" />
+        <FileAsset Name="Assets.LP06" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP06" />
+        <FileAsset Name="Assets.LP07" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP07" />
+        <FileAsset Name="Assets.L0AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L0AN" />
+        <FileAsset Name="Assets.L1AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L1AN" />
+        <FileAsset Name="Assets.L2AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L2AN" />
+        <FileAsset Name="Assets.L3AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L3AN" />
+        <FileAsset Name="Assets.L4AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L4AN" />
+        <FileAsset Name="Assets.L5AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L5AN" />
+        <FileAsset Name="Assets.PARTF" FilePath="%Cfg.Options.ABSE.GameFolderPath%\PARTF" />
       </Items>
     </Assets>
     <Images>

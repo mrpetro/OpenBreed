@@ -8,10 +8,10 @@ using System.Xml.Serialization;
 namespace OpenBreed.Common.XmlDatabase.Items.Sources
 {
     [Serializable]
-    public class DirectoryFileAssetDef : AssetDef, IDirectoryFileAssetEntry
+    public class FileAssetDef : AssetDef, IFileAssetEntry
     {
         [XmlAttribute]
-        public string FileName { get; set; }
+        public string FilePath { get; set; }
 
         [XmlAttribute]
         public string DirectoryPath { get; set; }

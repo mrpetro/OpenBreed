@@ -6,21 +6,21 @@ using System.IO;
 
 namespace OpenBreed.Common.Assets
 {
-    public class DirectoryFileAsset : AssetBase
+    public class FileAsset : AssetBase
     {
 
         #region Private Fields
 
-        public string DirectoryPath { get; }
+        public string FilePath { get; }
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DirectoryFileAsset(AssetsDataProvider manager, string directoryPath, string name) :
+        public FileAsset(AssetsDataProvider manager, string name, string filePath) :
             base(manager, name)
         {
-            DirectoryPath = directoryPath;
+            FilePath = filePath;
         }
 
         #endregion Public Constructors
@@ -36,7 +36,7 @@ namespace OpenBreed.Common.Assets
 
         protected override Stream CreateStream()
         {
-            string filePath = Path.Combine(AssetsDataProvider.ExpandVariables(DirectoryPath), Name);
+            string filePath = AssetsDataProvider.ExpandVariables(FilePath);
             return File.Open(filePath, FileMode.Open, FileAccess.ReadWrite);
         }
 

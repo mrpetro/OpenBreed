@@ -105,12 +105,12 @@
     <Compile Include="Readers\BigEndianBinaryReader.cs" />
     <Compile Include="Sounds\PCMPlayer.cs" />
     <Compile Include="Sounds\WaveMemoryStream.cs" />
-    <Compile Include="Assets\IDirectoryFileAssetEntry.cs" />
+    <Compile Include="Assets\IFileAssetEntry.cs" />
     <Compile Include="Assets\IEPFArchiveAssetEntry.cs" />
     <Compile Include="Assets\IAssetEntry.cs" />
     <Compile Include="Assets\IAssetsFactory.cs" />
     <Compile Include="Assets\AssetBase.cs" />
-    <Compile Include="Assets\DirectoryFileAsset.cs" />
+    <Compile Include="Assets\FileAsset.cs" />
     <Compile Include="Assets\EPFArchiveFileAsset.cs" />
     <Compile Include="Formats\ABHCMAPFormat.cs" />
     <Compile Include="Formats\ABSEMAPFormat.cs" />
