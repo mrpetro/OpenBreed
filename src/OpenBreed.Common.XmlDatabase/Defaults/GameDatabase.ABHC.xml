@@ -3,67 +3,67 @@
   <Tables>
     <Assets>
       <Items>
-        <FileAsset Name="Assets.L1MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L1MA" />
-        <FileAsset Name="Assets.L2MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L2MA" />
-        <FileAsset Name="Assets.L3MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L3MA" />
-        <FileAsset Name="Assets.L4MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L4MA" />
-        <FileAsset Name="Assets.L5MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L5MA" />
-        <FileAsset Name="Assets.L6MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L6MA" />
-        <FileAsset Name="Assets.L7MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L7MA" />
-        <FileAsset Name="Assets.L8MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L8MA" />
-        <FileAsset Name="Assets.L9MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L9MA" />
-        <FileAsset Name="Assets.LAMA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LAMA" />
-        <FileAsset Name="Assets.LBMA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LBMA" />
-        <FileAsset Name="Assets.LCMA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LCMA" />
-        <FileAsset Name="Assets.LDMA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LDMA" />
-        <FileAsset Name="Assets.LEMA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LEMA" />
-        <FileAsset Name="Assets.MMA1" FilePath="%Cfg.Options.ABHC.GameFolderPath%\MMA1" />
-        <FileAsset Name="Assets.MMA2" FilePath="%Cfg.Options.ABHC.GameFolderPath%\MMA2" />
-        <FileAsset Name="Assets.MMA3" FilePath="%Cfg.Options.ABHC.GameFolderPath%\MMA3" />
-        <FileAsset Name="Assets.L1BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L1BM" />
-        <FileAsset Name="Assets.L2BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L2BM" />
-        <FileAsset Name="Assets.L3BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L3BM" />
-        <FileAsset Name="Assets.L4BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L4BM" />
-        <FileAsset Name="Assets.L5BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L5BM" />
-        <FileAsset Name="Assets.L6BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L6BM" />
-        <FileAsset Name="Assets.L7BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L7BM" />
-        <FileAsset Name="Assets.L8BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L8BM" />
-        <FileAsset Name="Assets.L9BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L9BM" />
-        <FileAsset Name="Assets.L1LP" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L1LP" />
-        <FileAsset Name="Assets.L2LP" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L2LP" />
-        <FileAsset Name="Assets.L6LP" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L6LP" />
-        <FileAsset Name="Assets.LALP" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LALP" />
-        <FileAsset Name="Assets.CHAD" FilePath="%Cfg.Options.ABHC.GameFolderPath%\CHAD" />
-        <FileAsset Name="Assets.CHAR" FilePath="%Cfg.Options.ABHC.GameFolderPath%\CHAR" />
-        <FileAsset Name="Assets.ENDA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\ENDA" />
-        <FileAsset Name="Assets.ENDP" FilePath="%Cfg.Options.ABHC.GameFolderPath%\ENDP" />
-        <FileAsset Name="Assets.ETXT" FilePath="%Cfg.Options.ABHC.GameFolderPath%\ETXT" />
-        <FileAsset Name="Assets.HPIC" FilePath="%Cfg.Options.ABHC.GameFolderPath%\HPIC" />
-        <FileAsset Name="Assets.IPIC" FilePath="%Cfg.Options.ABHC.GameFolderPath%\IPIC" />
-        <FileAsset Name="Assets.HSP1" FilePath="%Cfg.Options.ABHC.GameFolderPath%\HSP1" />
-        <FileAsset Name="Assets.HSP2" FilePath="%Cfg.Options.ABHC.GameFolderPath%\HSP2" />
-        <FileAsset Name="Assets.HSP3" FilePath="%Cfg.Options.ABHC.GameFolderPath%\HSP3" />
-        <FileAsset Name="Assets.HSP4" FilePath="%Cfg.Options.ABHC.GameFolderPath%\HSP4" />
-        <FileAsset Name="Assets.L1BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L1BO" />
-        <FileAsset Name="Assets.L2BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L2BO" />
-        <FileAsset Name="Assets.L3BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L3BO" />
-        <FileAsset Name="Assets.L4BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L4BO" />
-        <FileAsset Name="Assets.L5BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L5BO" />
-        <FileAsset Name="Assets.L6BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L6BO" />
-        <FileAsset Name="Assets.L7BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L7BO" />
-        <FileAsset Name="Assets.L8BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L8BO" />
-        <FileAsset Name="Assets.L9BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L9BO" />
-        <FileAsset Name="Assets.LABO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LABO" />
-        <FileAsset Name="Assets.LBBO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LBBO" />
-        <FileAsset Name="Assets.LCBO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LCBO" />
-        <FileAsset Name="Assets.LDBO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LDBO" />
-        <FileAsset Name="Assets.LEBO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LEBO" />
-        <FileAsset Name="Assets.MPIC" FilePath="%Cfg.Options.ABHC.GameFolderPath%\MPIC" />
+        <FileAsset Id="Assets.L1MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L1MA" />
+        <FileAsset Id="Assets.L2MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L2MA" />
+        <FileAsset Id="Assets.L3MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L3MA" />
+        <FileAsset Id="Assets.L4MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L4MA" />
+        <FileAsset Id="Assets.L5MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L5MA" />
+        <FileAsset Id="Assets.L6MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L6MA" />
+        <FileAsset Id="Assets.L7MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L7MA" />
+        <FileAsset Id="Assets.L8MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L8MA" />
+        <FileAsset Id="Assets.L9MA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L9MA" />
+        <FileAsset Id="Assets.LAMA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LAMA" />
+        <FileAsset Id="Assets.LBMA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LBMA" />
+        <FileAsset Id="Assets.LCMA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LCMA" />
+        <FileAsset Id="Assets.LDMA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LDMA" />
+        <FileAsset Id="Assets.LEMA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LEMA" />
+        <FileAsset Id="Assets.MMA1" FilePath="%Cfg.Options.ABHC.GameFolderPath%\MMA1" />
+        <FileAsset Id="Assets.MMA2" FilePath="%Cfg.Options.ABHC.GameFolderPath%\MMA2" />
+        <FileAsset Id="Assets.MMA3" FilePath="%Cfg.Options.ABHC.GameFolderPath%\MMA3" />
+        <FileAsset Id="Assets.L1BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L1BM" />
+        <FileAsset Id="Assets.L2BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L2BM" />
+        <FileAsset Id="Assets.L3BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L3BM" />
+        <FileAsset Id="Assets.L4BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L4BM" />
+        <FileAsset Id="Assets.L5BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L5BM" />
+        <FileAsset Id="Assets.L6BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L6BM" />
+        <FileAsset Id="Assets.L7BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L7BM" />
+        <FileAsset Id="Assets.L8BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L8BM" />
+        <FileAsset Id="Assets.L9BM" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L9BM" />
+        <FileAsset Id="Assets.L1LP" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L1LP" />
+        <FileAsset Id="Assets.L2LP" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L2LP" />
+        <FileAsset Id="Assets.L6LP" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L6LP" />
+        <FileAsset Id="Assets.LALP" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LALP" />
+        <FileAsset Id="Assets.CHAD" FilePath="%Cfg.Options.ABHC.GameFolderPath%\CHAD" />
+        <FileAsset Id="Assets.CHAR" FilePath="%Cfg.Options.ABHC.GameFolderPath%\CHAR" />
+        <FileAsset Id="Assets.ENDA" FilePath="%Cfg.Options.ABHC.GameFolderPath%\ENDA" />
+        <FileAsset Id="Assets.ENDP" FilePath="%Cfg.Options.ABHC.GameFolderPath%\ENDP" />
+        <FileAsset Id="Assets.ETXT" FilePath="%Cfg.Options.ABHC.GameFolderPath%\ETXT" />
+        <FileAsset Id="Assets.HPIC" FilePath="%Cfg.Options.ABHC.GameFolderPath%\HPIC" />
+        <FileAsset Id="Assets.IPIC" FilePath="%Cfg.Options.ABHC.GameFolderPath%\IPIC" />
+        <FileAsset Id="Assets.HSP1" FilePath="%Cfg.Options.ABHC.GameFolderPath%\HSP1" />
+        <FileAsset Id="Assets.HSP2" FilePath="%Cfg.Options.ABHC.GameFolderPath%\HSP2" />
+        <FileAsset Id="Assets.HSP3" FilePath="%Cfg.Options.ABHC.GameFolderPath%\HSP3" />
+        <FileAsset Id="Assets.HSP4" FilePath="%Cfg.Options.ABHC.GameFolderPath%\HSP4" />
+        <FileAsset Id="Assets.L1BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L1BO" />
+        <FileAsset Id="Assets.L2BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L2BO" />
+        <FileAsset Id="Assets.L3BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L3BO" />
+        <FileAsset Id="Assets.L4BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L4BO" />
+        <FileAsset Id="Assets.L5BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L5BO" />
+        <FileAsset Id="Assets.L6BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L6BO" />
+        <FileAsset Id="Assets.L7BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L7BO" />
+        <FileAsset Id="Assets.L8BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L8BO" />
+        <FileAsset Id="Assets.L9BO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\L9BO" />
+        <FileAsset Id="Assets.LABO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LABO" />
+        <FileAsset Id="Assets.LBBO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LBBO" />
+        <FileAsset Id="Assets.LCBO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LCBO" />
+        <FileAsset Id="Assets.LDBO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LDBO" />
+        <FileAsset Id="Assets.LEBO" FilePath="%Cfg.Options.ABHC.GameFolderPath%\LEBO" />
+        <FileAsset Id="Assets.MPIC" FilePath="%Cfg.Options.ABHC.GameFolderPath%\MPIC" />
       </Items>
     </Assets>
     <Images>
       <Items>
-        <Image Name="Images.CHAD" Description="Characters statistics screens" >
+        <Image Id="Images.CHAD" Description="Characters statistics screens" >
           <AssetRef>Assets.CHAD</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -74,7 +74,7 @@
             </Parameters>       
           </Format>
         </Image>
-        <Image Name="Images.CHAR" Description="Characters selection screen" >
+        <Image Id="Images.CHAR" Description="Characters selection screen" >
           <AssetRef>Assets.CHAR</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -85,7 +85,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="Images.ENDA" Description="End animation frames" >
+        <Image Id="Images.ENDA" Description="End animation frames" >
           <AssetRef>Assets.ENDA</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -96,7 +96,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="Images.ENDP" Description="End picture" >
+        <Image Id="Images.ENDP" Description="End picture" >
           <AssetRef>Assets.ENDP</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -107,7 +107,7 @@
             </Parameters>    
           </Format>
         </Image>
-        <Image Name="Images.HPIC" Description="Highscore picture" >
+        <Image Id="Images.HPIC" Description="Highscore picture" >
           <AssetRef>Assets.HPIC</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -118,7 +118,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="Images.IPIC" Description="Intro picture" >
+        <Image Id="Images.IPIC" Description="Intro picture" >
           <AssetRef>Assets.IPIC</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -129,7 +129,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="Images.MPIC" Description="Menu picture" >
+        <Image Id="Images.MPIC" Description="Menu picture" >
           <AssetRef>Assets.MPIC</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -140,7 +140,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="Images.ETXT" Description="End text screen" >
+        <Image Id="Images.ETXT" Description="End text screen" >
           <AssetRef>Assets.ETXT</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -151,7 +151,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="Images.HSP1" Description="Character 1 sprites" >
+        <Image Id="Images.HSP1" Description="Character 1 sprites" >
           <AssetRef>Assets.HSP1</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -162,7 +162,7 @@
             </Parameters>    
           </Format>
         </Image>
-        <Image Name="Images.HSP2" Description="Character 2 sprites" >
+        <Image Id="Images.HSP2" Description="Character 2 sprites" >
           <AssetRef>Assets.HSP2</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -173,7 +173,7 @@
             </Parameters>   
           </Format>
         </Image>
-        <Image Name="Images.HSP3" Description="Character 3 sprites" >
+        <Image Id="Images.HSP3" Description="Character 3 sprites" >
           <AssetRef>Assets.HSP3</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -184,7 +184,7 @@
             </Parameters>  
           </Format>
         </Image>
-        <Image Name="Images.HSP4" Description="Character 4 sprites" >
+        <Image Id="Images.HSP4" Description="Character 4 sprites" >
           <AssetRef>Assets.HSP4</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -195,7 +195,7 @@
             </Parameters>      
           </Format>
         </Image>
-        <Image Name="Images.L1BO" Description="Level 1 sprites" >
+        <Image Id="Images.L1BO" Description="Level 1 sprites" >
           <AssetRef>Assets.L1BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -206,7 +206,7 @@
             </Parameters>     
           </Format>
         </Image>
-        <Image Name="Images.L2BO" Description="Level 2 sprites" >
+        <Image Id="Images.L2BO" Description="Level 2 sprites" >
           <AssetRef>Assets.L2BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -217,7 +217,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="Images.L3BO" Description="Level 3 sprites" >
+        <Image Id="Images.L3BO" Description="Level 3 sprites" >
           <AssetRef>Assets.L3BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -228,7 +228,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="Images.L4BO" Description="Level 4 sprites" >
+        <Image Id="Images.L4BO" Description="Level 4 sprites" >
           <AssetRef>Assets.L4BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -239,7 +239,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="Images.L5BO" Description="Level 5 sprites" >
+        <Image Id="Images.L5BO" Description="Level 5 sprites" >
           <AssetRef>Assets.L5BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -250,7 +250,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="Images.L6BO" Description="Level 6 sprites" >
+        <Image Id="Images.L6BO" Description="Level 6 sprites" >
           <AssetRef>Assets.L6BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -261,7 +261,7 @@
             </Parameters>       
           </Format>
         </Image>
-        <Image Name="Images.L7BO" Description="Level 7 sprites" >
+        <Image Id="Images.L7BO" Description="Level 7 sprites" >
           <AssetRef>Assets.L7BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -272,7 +272,7 @@
             </Parameters> 
           </Format>
         </Image>
-        <Image Name="Images.L8BO" Description="Level 8 sprites" >
+        <Image Id="Images.L8BO" Description="Level 8 sprites" >
           <AssetRef>Assets.L8BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -283,7 +283,7 @@
             </Parameters>   
           </Format>
         </Image>
-        <Image Name="Images.L9BO" Description="Level 9 sprites" >
+        <Image Id="Images.L9BO" Description="Level 9 sprites" >
           <AssetRef>Assets.L9BO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -294,7 +294,7 @@
             </Parameters> 
           </Format>
         </Image>
-        <Image Name="Images.LABO" Description="Level A sprites" >
+        <Image Id="Images.LABO" Description="Level A sprites" >
           <AssetRef>Assets.LABO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -305,7 +305,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="Images.LBBO" Description="Level B sprites" >
+        <Image Id="Images.LBBO" Description="Level B sprites" >
           <AssetRef>Assets.LBBO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -316,7 +316,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="Images.LCBO" Description="Level C sprites" >
+        <Image Id="Images.LCBO" Description="Level C sprites" >
           <AssetRef>Assets.LCBO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -327,7 +327,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="Images.LDBO" Description="Level D sprites" >
+        <Image Id="Images.LDBO" Description="Level D sprites" >
           <AssetRef>Assets.LDBO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -338,7 +338,7 @@
             </Parameters>    
           </Format>
         </Image>
-        <Image Name="Images.LEBO" Description="Level E sprites" >
+        <Image Id="Images.LEBO" Description="Level E sprites" >
           <AssetRef>Assets.LEBO</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -349,7 +349,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="Images.L1LP" Description="Level 1 picture" >
+        <Image Id="Images.L1LP" Description="Level 1 picture" >
           <AssetRef>Assets.L1LP</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -360,7 +360,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="Images.L2LP" Description="Level 2 picture" >
+        <Image Id="Images.L2LP" Description="Level 2 picture" >
           <AssetRef>Assets.L2LP</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -371,7 +371,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="Images.L6LP" Description="Level 6 picture" >
+        <Image Id="Images.L6LP" Description="Level 6 picture" >
           <AssetRef>Assets.L6LP</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -382,7 +382,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="Images.LALP" Description="Level A picture" >
+        <Image Id="Images.LALP" Description="Level A picture" >
           <AssetRef>Assets.LALP</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -397,7 +397,7 @@
     </Images>
     <TileSets>
       <Items>
-        <TileSet Name="TileSets.L1" >
+        <TileSet Id="TileSets.L1" >
           <AssetRef>Assets.L1BM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
             <Parameters>
@@ -406,7 +406,7 @@
             </Parameters>
           </Format>
         </TileSet>
-        <TileSet Name="TileSets.L2" >
+        <TileSet Id="TileSets.L2" >
           <AssetRef>Assets.L2BM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
             <Parameters>
@@ -415,7 +415,7 @@
             </Parameters>   
           </Format>
         </TileSet>
-        <TileSet Name="TileSets.L3" >
+        <TileSet Id="TileSets.L3" >
           <AssetRef>Assets.L3BM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
             <Parameters>
@@ -424,7 +424,7 @@
             </Parameters>
           </Format>
         </TileSet>
-        <TileSet Name="TileSets.L4" >
+        <TileSet Id="TileSets.L4" >
           <AssetRef>Assets.L4BM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
             <Parameters>
@@ -433,7 +433,7 @@
             </Parameters>       
           </Format>
         </TileSet>
-        <TileSet Name="TileSets.L5" >
+        <TileSet Id="TileSets.L5" >
           <AssetRef>Assets.L5BM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
             <Parameters>
@@ -442,7 +442,7 @@
             </Parameters>     
           </Format>
         </TileSet>
-        <TileSet Name="TileSets.L6" >
+        <TileSet Id="TileSets.L6" >
           <AssetRef>Assets.L6BM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
             <Parameters>
@@ -451,7 +451,7 @@
             </Parameters>
           </Format>
         </TileSet>
-        <TileSet Name="TileSets.L7" >
+        <TileSet Id="TileSets.L7" >
           <AssetRef>Assets.L7BM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
             <Parameters>
@@ -460,7 +460,7 @@
             </Parameters>        
           </Format>
         </TileSet>
-        <TileSet Name="TileSets.L8" >
+        <TileSet Id="TileSets.L8" >
           <AssetRef>Assets.L8BM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
             <Parameters>
@@ -469,7 +469,7 @@
             </Parameters>   
           </Format>
         </TileSet>
-        <TileSet Name="TileSets.L9" >
+        <TileSet Id="TileSets.L9" >
           <AssetRef>Assets.L9BM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
             <Parameters>
@@ -482,7 +482,7 @@
     </TileSets>
     <Levels>
       <Items>
-        <Level Id="1" Name="L1" >
+        <Level Id="L1" >
           <AssetRef>Assets.L1MA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L1</TileSetRef>
@@ -490,7 +490,7 @@
           <SpriteSetRefs>
           </SpriteSetRefs>
         </Level>
-        <Level Id="2" Name="L2" >
+        <Level Id="L2" >
           <AssetRef>Assets.L2MA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L2</TileSetRef>
@@ -498,7 +498,7 @@
           <SpriteSetRefs>
           </SpriteSetRefs>
         </Level>
-        <Level Id="3" Name="L3" >
+        <Level Id="L3" >
           <AssetRef>Assets.L3MA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L3</TileSetRef>
@@ -506,7 +506,7 @@
           <SpriteSetRefs>
           </SpriteSetRefs>
         </Level>
-        <Level Id="4" Name="L4" >
+        <Level Id="L4" >
           <AssetRef>Assets.L4MA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L4</TileSetRef>
@@ -514,7 +514,7 @@
           <SpriteSetRefs>
           </SpriteSetRefs>
         </Level>
-        <Level Id="5" Name="L5" >
+        <Level Id="L5" >
           <AssetRef>Assets.L5MA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L5</TileSetRef>
@@ -522,7 +522,7 @@
           <SpriteSetRefs>
           </SpriteSetRefs>
         </Level>
-        <Level Id="6" Name="L6" >
+        <Level Id="L6" >
           <AssetRef>Assets.L6MA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L6</TileSetRef>
@@ -530,7 +530,7 @@
           <SpriteSetRefs>
           </SpriteSetRefs>
         </Level>
-        <Level Id="7" Name="L7" >
+        <Level Id="L7" >
           <AssetRef>Assets.L7MA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L6</TileSetRef>
@@ -538,7 +538,7 @@
           <SpriteSetRefs>
           </SpriteSetRefs>
         </Level>
-        <Level Id="8" Name="L8" >
+        <Level Id="L8" >
           <AssetRef>Assets.L8MA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L6</TileSetRef>
@@ -546,7 +546,7 @@
           <SpriteSetRefs>
           </SpriteSetRefs>
         </Level>
-        <Level Id="9" Name="L9" >
+        <Level Id="L9" >
           <AssetRef>Assets.L9MA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L6</TileSetRef>
@@ -554,7 +554,7 @@
           <SpriteSetRefs>
           </SpriteSetRefs>
         </Level>
-        <Level Id="10" Name="LA" >
+        <Level Id="LA" >
           <AssetRef>Assets.LAMA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L7</TileSetRef>
@@ -562,7 +562,7 @@
           <SpriteSetRefs>
           </SpriteSetRefs>
         </Level>
-        <Level Id="11" Name="LB" >
+        <Level Id="LB" >
           <AssetRef>Assets.LBMA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L7</TileSetRef>
@@ -570,7 +570,7 @@
           <SpriteSetRefs>
           </SpriteSetRefs>
         </Level>
-        <Level Id="12" Name="LC" >
+        <Level Id="LC" >
           <AssetRef>Assets.LCMA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L8</TileSetRef>
@@ -578,7 +578,7 @@
           <SpriteSetRefs>
           </SpriteSetRefs>
         </Level>
-        <Level Id="13" Name="LD" >
+        <Level Id="LD" >
           <AssetRef>Assets.LDMA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L7</TileSetRef>
@@ -586,7 +586,7 @@
           <SpriteSetRefs>
           </SpriteSetRefs>
         </Level>
-        <Level Id="14" Name="LE" >
+        <Level Id="LE" >
           <AssetRef>Assets.LEMA</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L9</TileSetRef>
@@ -594,7 +594,7 @@
           <SpriteSetRefs>
           </SpriteSetRefs>
         </Level>
-        <Level Id="15" Name="LMMA1" >
+        <Level Id="LMMA1" >
           <AssetRef>Assets.MMA1</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L1</TileSetRef>
@@ -602,7 +602,7 @@
           <SpriteSetRefs>
           </SpriteSetRefs>
         </Level>
-        <Level Id="16" Name="LMMA2" >
+        <Level Id="LMMA2" >
           <AssetRef>Assets.MMA2</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L5</TileSetRef>
@@ -610,7 +610,7 @@
           <SpriteSetRefs>
           </SpriteSetRefs>
         </Level>
-        <Level Id="17" Name="LMMA3" >
+        <Level Id="LMMA3" >
           <AssetRef>Assets.MMA3</AssetRef>
           <Format Name="ABHC_MAP" ></Format>
           <TileSetRef>TileSets.L7</TileSetRef>
@@ -623,7 +623,7 @@
 
     <PropertySets>
       <Items>
-        <PropertySet Name="Props.Level1">
+        <PropertySet Id="Props.Level1">
           <PropertyDefs>
             <PropertyDef Id="0" Visibility="false" Name="Air" >
               <Description>No collision, no action</Description>
@@ -883,7 +883,7 @@
             </PropertyDef>
           </PropertyDefs>
         </PropertySet>
-        <PropertySet Name="Props.Default">
+        <PropertySet Id="Props.Default">
           <PropertyDefs>
             <PropertyDef Id="0" Visibility="false" Name="Air" >
               <Description>No collision, no action</Description>

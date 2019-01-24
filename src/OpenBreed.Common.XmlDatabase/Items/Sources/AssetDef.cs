@@ -8,10 +8,8 @@ using System.Xml.Serialization;
 namespace OpenBreed.Common.XmlDatabase.Items.Sources
 {
     [Serializable]
-    public class AssetDef : DatabaseItemDef, IAssetEntry
+    public abstract class AssetDef : DatabaseItemDef, IAssetEntry
     {
-        #region Public Properties
 
-        #endregion Public Properties
     }
 }

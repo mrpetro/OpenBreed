@@ -15,5 +15,15 @@ namespace OpenBreed.Common.XmlDatabase.Items.Sources
 
         [XmlAttribute]
         public string ArchivePath { get; set; }
+
+        public override IEntry Copy()
+        {
+            return new EPFArchiveFileAssetDef()
+            {
+                Id = this.Id,
+                EntryName = this.EntryName,
+                ArchivePath = this.ArchivePath
+            };
+        }
     }
 }

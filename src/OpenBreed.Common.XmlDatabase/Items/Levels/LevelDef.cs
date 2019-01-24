@@ -44,6 +44,11 @@ namespace OpenBreed.Common.XmlDatabase.Items.Levels
 
         public string TileSetRef { get; set; }
 
+        public override IEntry Copy()
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion Public Properties
 
     }

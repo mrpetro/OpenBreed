@@ -30,6 +30,11 @@ namespace OpenBreed.Common.XmlDatabase.Items.Sounds
 
         public string AssetRef { get; set; }
 
+        public override IEntry Copy()
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion Public Properties
     }
 }

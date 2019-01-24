@@ -3,44 +3,44 @@
   <Tables>
     <Assets>
       <Items>
-        <FileAsset Name="Assets.L0MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L0MA" />
-        <FileAsset Name="Assets.L1MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L1MA" />
-        <FileAsset Name="Assets.L2MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L2MA" />
-        <FileAsset Name="Assets.L3MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L3MA" />
-        <FileAsset Name="Assets.L4MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L4MA" />
-        <FileAsset Name="Assets.L5MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L5MA" />
-        <FileAsset Name="Assets.L6MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L6MA" />
-        <FileAsset Name="Assets.L7MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L7MA" />
-        <FileAsset Name="Assets.L8MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L8MA" />
-        <FileAsset Name="Assets.L9MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L9MA" />
-        <FileAsset Name="Assets.LAMA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LAMA" />
-        <FileAsset Name="Assets.LBMA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LBMA" />
-        <FileAsset Name="Assets.LABM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LABM" />
-        <FileAsset Name="Assets.LBBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LBBM" />
-        <FileAsset Name="Assets.LCBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LCBM" />
-        <FileAsset Name="Assets.LDBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LDBM" />
-        <FileAsset Name="Assets.LEBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LEBM" />
-        <FileAsset Name="Assets.LFBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LFBM" />
-        <FileAsset Name="Assets.LP01" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP01" />
-        <FileAsset Name="Assets.LP01B" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP01B" />
-        <FileAsset Name="Assets.LP02" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP02" />
-        <FileAsset Name="Assets.LP03" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP03" />
-        <FileAsset Name="Assets.LP04" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP04" />
-        <FileAsset Name="Assets.LP05" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP05" />
-        <FileAsset Name="Assets.LP06" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP06" />
-        <FileAsset Name="Assets.LP07" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP07" />
-        <FileAsset Name="Assets.L0AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L0AN" />
-        <FileAsset Name="Assets.L1AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L1AN" />
-        <FileAsset Name="Assets.L2AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L2AN" />
-        <FileAsset Name="Assets.L3AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L3AN" />
-        <FileAsset Name="Assets.L4AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L4AN" />
-        <FileAsset Name="Assets.L5AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L5AN" />
-        <FileAsset Name="Assets.PARTF" FilePath="%Cfg.Options.ABSE.GameFolderPath%\PARTF" />
+        <FileAsset Id="Assets.L0MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L0MA" />
+        <FileAsset Id="Assets.L1MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L1MA" />
+        <FileAsset Id="Assets.L2MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L2MA" />
+        <FileAsset Id="Assets.L3MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L3MA" />
+        <FileAsset Id="Assets.L4MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L4MA" />
+        <FileAsset Id="Assets.L5MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L5MA" />
+        <FileAsset Id="Assets.L6MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L6MA" />
+        <FileAsset Id="Assets.L7MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L7MA" />
+        <FileAsset Id="Assets.L8MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L8MA" />
+        <FileAsset Id="Assets.L9MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L9MA" />
+        <FileAsset Id="Assets.LAMA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LAMA" />
+        <FileAsset Id="Assets.LBMA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LBMA" />
+        <FileAsset Id="Assets.LABM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LABM" />
+        <FileAsset Id="Assets.LBBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LBBM" />
+        <FileAsset Id="Assets.LCBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LCBM" />
+        <FileAsset Id="Assets.LDBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LDBM" />
+        <FileAsset Id="Assets.LEBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LEBM" />
+        <FileAsset Id="Assets.LFBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LFBM" />
+        <FileAsset Id="Assets.LP01" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP01" />
+        <FileAsset Id="Assets.LP01B" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP01B" />
+        <FileAsset Id="Assets.LP02" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP02" />
+        <FileAsset Id="Assets.LP03" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP03" />
+        <FileAsset Id="Assets.LP04" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP04" />
+        <FileAsset Id="Assets.LP05" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP05" />
+        <FileAsset Id="Assets.LP06" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP06" />
+        <FileAsset Id="Assets.LP07" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP07" />
+        <FileAsset Id="Assets.L0AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L0AN" />
+        <FileAsset Id="Assets.L1AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L1AN" />
+        <FileAsset Id="Assets.L2AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L2AN" />
+        <FileAsset Id="Assets.L3AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L3AN" />
+        <FileAsset Id="Assets.L4AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L4AN" />
+        <FileAsset Id="Assets.L5AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L5AN" />
+        <FileAsset Id="Assets.PARTF" FilePath="%Cfg.Options.ABSE.GameFolderPath%\PARTF" />
       </Items>
     </Assets>
     <Images>
       <Items>
-        <Image Name="Images.LP01" Description="Alien Breed II: Horror Continues teaser" >
+        <Image Id="Images.LP01" Description="Alien Breed II: Horror Continues teaser" >
           <AssetRef>Assets.LP01</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -51,7 +51,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="Images.LP01B" Description="Superfrog teaser title" >
+        <Image Id="Images.LP01B" Description="Superfrog teaser title" >
           <AssetRef>Assets.LP01B</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -62,7 +62,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="Images.LP02" Description="Superfrog teaser screenshot 1" >
+        <Image Id="Images.LP02" Description="Superfrog teaser screenshot 1" >
           <AssetRef>Assets.LP02</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -73,7 +73,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="Images.LP03" Description="Superfrog teaser screenshot 2" >
+        <Image Id="Images.LP03" Description="Superfrog teaser screenshot 2" >
           <AssetRef>Assets.LP03</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -84,7 +84,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="Images.LP04" Description="Superfrog teaser screenshot 3" >
+        <Image Id="Images.LP04" Description="Superfrog teaser screenshot 3" >
           <AssetRef>Assets.LP04</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -95,7 +95,7 @@
             </Parameters>  
           </Format>
         </Image>
-        <Image Name="Images.LP05" Description="Superfrog teaser screenshot 4" >
+        <Image Id="Images.LP05" Description="Superfrog teaser screenshot 4" >
           <AssetRef>Assets.LP05</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -106,7 +106,7 @@
             </Parameters>     
           </Format>
         </Image>
-        <Image Name="Images.LP06" Description="Superfrog teaser screenshot 5" >
+        <Image Id="Images.LP06" Description="Superfrog teaser screenshot 5" >
           <AssetRef>Assets.LP06</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -117,7 +117,7 @@
             </Parameters>      
           </Format>
         </Image>
-        <Image Name="Images.LP07" Description="Superfrog teaser screenshot 6" >
+        <Image Id="Images.LP07" Description="Superfrog teaser screenshot 6" >
           <AssetRef>Assets.LP07</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -128,7 +128,7 @@
             </Parameters>  
           </Format>
         </Image>
-        <Image Name="Images.L0AN" Description="Level 0 animations" >
+        <Image Id="Images.L0AN" Description="Level 0 animations" >
           <AssetRef>Assets.L0AN</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -139,7 +139,7 @@
             </Parameters>
           </Format>
         </Image>
-        <Image Name="Images.L1AN" Description="Level 1 animations" >
+        <Image Id="Images.L1AN" Description="Level 1 animations" >
           <AssetRef>Assets.L1AN</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -150,7 +150,7 @@
             </Parameters>        
           </Format>
         </Image>
-        <Image Name="Images.L2AN" Description="Level 2 animations" >
+        <Image Id="Images.L2AN" Description="Level 2 animations" >
           <AssetRef>Assets.L2AN</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -161,7 +161,7 @@
             </Parameters>     
           </Format>
         </Image>
-        <Image Name="Images.L3AN" Description="Level 3 animations" >
+        <Image Id="Images.L3AN" Description="Level 3 animations" >
           <AssetRef>Assets.L3AN</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -172,7 +172,7 @@
             </Parameters>       
           </Format>
         </Image>
-        <Image Name="Images.L4AN" Description="Level 4 animations" >
+        <Image Id="Images.L4AN" Description="Level 4 animations" >
           <AssetRef>Assets.L4AN</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -183,7 +183,7 @@
             </Parameters>      
           </Format>
         </Image>
-        <Image Name="Images.L5AN" Description="Level 5 animations" >
+        <Image Id="Images.L5AN" Description="Level 5 animations" >
           <AssetRef>Assets.L5AN</AssetRef>
           <Format Name="ACBM_IMAGE" >
             <Parameters>
@@ -198,7 +198,7 @@
     </Images>
     <TileSets>
       <Items>
-        <TileSet Name="TileSets.LA" >
+        <TileSet Id="TileSets.LA" >
           <AssetRef>Assets.LABM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
             <Parameters>
@@ -207,7 +207,7 @@
             </Parameters>
           </Format>
         </TileSet>
-        <TileSet Name="TileSets.LB" >
+        <TileSet Id="TileSets.LB" >
           <AssetRef>Assets.LBBM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
             <Parameters>
@@ -216,7 +216,7 @@
             </Parameters>
           </Format>
         </TileSet>
-        <TileSet Name="TileSets.LC" >
+        <TileSet Id="TileSets.LC" >
           <AssetRef>Assets.LCBM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
             <Parameters>
@@ -225,7 +225,7 @@
             </Parameters>
           </Format>
         </TileSet>
-        <TileSet Name="TileSets.LD" >
+        <TileSet Id="TileSets.LD" >
           <AssetRef>Assets.LDBM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
           <Parameters>
@@ -234,7 +234,7 @@
           </Parameters>
           </Format>
         </TileSet>
-        <TileSet Name="TileSets.LE" >
+        <TileSet Id="TileSets.LE" >
           <AssetRef>Assets.LEBM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
             <Parameters>
@@ -243,7 +243,7 @@
             </Parameters>
           </Format>
         </TileSet>
-        <TileSet Name="TileSets.LF" >
+        <TileSet Id="TileSets.LF" >
           <AssetRef>Assets.LFBM</AssetRef>
           <Format Name="ACBM_TILE_SET" >
             <Parameters>
@@ -256,7 +256,7 @@
     </TileSets>
     <Palettes>
       <Items>
-        <Palette Name="Palettes.LA" >
+        <Palette Id="Palettes.LA" >
           <AssetRef>Assets.PARTF</AssetRef>
           <Format Name="PALETTE" >
             <Parameters>
@@ -266,7 +266,7 @@
             </Parameters>
           </Format>
         </Palette>
-        <Palette Name="Palettes.LE" >
+        <Palette Id="Palettes.LE" >
           <AssetRef>Assets.PARTF</AssetRef>
           <Format Name="PALETTE" >
             <Parameters>
@@ -276,7 +276,7 @@
             </Parameters>
           </Format>
         </Palette>
-        <Palette Name="Palettes.LF" >
+        <Palette Id="Palettes.LF" >
           <AssetRef>Assets.PARTF</AssetRef>
           <Format Name="PALETTE" >
             <Parameters>
@@ -286,7 +286,7 @@
             </Parameters>
           </Format>
         </Palette>
-        <Palette Name="Palettes.LC" >
+        <Palette Id="Palettes.LC" >
           <AssetRef>Assets.PARTF</AssetRef>
           <Format Name="PALETTE" >
             <Parameters>
@@ -296,7 +296,7 @@
             </Parameters>
           </Format>
         </Palette>
-        <Palette Name="Palettes.LB" >
+        <Palette Id="Palettes.LB" >
           <AssetRef>Assets.PARTF</AssetRef>
           <Format Name="PALETTE" >
             <Parameters>
@@ -306,7 +306,7 @@
             </Parameters>
           </Format>
         </Palette>
-        <Palette Name="Palettes.LD" >
+        <Palette Id="Palettes.LD" >
           <AssetRef>Assets.PARTF</AssetRef>
           <Format Name="PALETTE" >
             <Parameters>
@@ -316,7 +316,7 @@
             </Parameters>
           </Format>
         </Palette>
-        <Palette Name="Palettes.LE" >
+        <Palette Id="Palettes.LE" >
           <AssetRef>Assets.PARTF</AssetRef>
           <Format Name="PALETTE" >
             <Parameters>
@@ -326,7 +326,7 @@
             </Parameters>
           </Format>
         </Palette>
-        <Palette Name="Palettes.L7" >
+        <Palette Id="Palettes.L7" >
           <AssetRef>Assets.PARTF</AssetRef>
           <Format Name="PALETTE" >
             <Parameters>
@@ -336,7 +336,7 @@
             </Parameters>
           </Format>
         </Palette>
-        <Palette Name="Palettes.L8" >
+        <Palette Id="Palettes.L8" >
           <AssetRef>Assets.PARTF</AssetRef>
           <Format Name="PALETTE" >
             <Parameters>
@@ -346,7 +346,7 @@
             </Parameters>
           </Format>
         </Palette>
-        <Palette Name="Palettes.L9" >
+        <Palette Id="Palettes.L9" >
           <AssetRef>Assets.PARTF</AssetRef>
           <Format Name="PALETTE" >
             <Parameters>
@@ -360,7 +360,7 @@
     </Palettes>
     <Levels>
       <Items>
-        <Level Id="0" Name="L0" >
+        <Level Id="L0" >
           <AssetRef>Assets.L0MA</AssetRef>
           <Format Name="ABSE_MAP" ></Format>
           <TileSetRef>TileSets.LA</TileSetRef>
@@ -371,7 +371,7 @@
             <PaletteRef>Palettes.LA</PaletteRef>
           </PaletteRefs>
         </Level>
-        <Level Id="1" Name="L1" >
+        <Level Id="L1" >
           <AssetRef>Assets.L1MA</AssetRef>
           <Format Name="ABSE_MAP" ></Format>
           <TileSetRef>TileSets.LE</TileSetRef>
@@ -382,7 +382,7 @@
             <PaletteRef>Palettes.LE</PaletteRef>
           </PaletteRefs>
         </Level>
-        <Level Id="2" Name="L2" >
+        <Level Id="L2" >
           <AssetRef>Assets.L2MA</AssetRef>
           <Format Name="ABSE_MAP" ></Format>
           <TileSetRef>TileSets.LF</TileSetRef>
@@ -393,7 +393,7 @@
             <PaletteRef>Palettes.LF</PaletteRef>
           </PaletteRefs>
         </Level>
-        <Level Id="3" Name="L3" >
+        <Level Id="L3" >
           <AssetRef>Assets.L3MA</AssetRef>
           <Format Name="ABSE_MAP" ></Format>
           <TileSetRef>TileSets.LC</TileSetRef>
@@ -404,7 +404,7 @@
             <PaletteRef>Palettes.LC</PaletteRef>
           </PaletteRefs>
         </Level>
-        <Level Id="4" Name="L4" >
+        <Level Id="L4" >
           <AssetRef>Assets.L4MA</AssetRef>
           <Format Name="ABSE_MAP" ></Format>
           <TileSetRef>TileSets.LB</TileSetRef>
@@ -415,7 +415,7 @@
             <PaletteRef>Palettes.LB</PaletteRef>
           </PaletteRefs>
         </Level>
-        <Level Id="5" Name="L5" >
+        <Level Id="L5" >
           <AssetRef>Assets.L5MA</AssetRef>
           <Format Name="ABSE_MAP" ></Format>
           <TileSetRef>TileSets.LB</TileSetRef>
@@ -426,7 +426,7 @@
             <PaletteRef>Palettes.LB</PaletteRef>
           </PaletteRefs>
         </Level>
-        <Level Id="6" Name="L6" >
+        <Level Id="L6" >
           <AssetRef>Assets.L6MA</AssetRef>
           <Format Name="ABSE_MAP" ></Format>
           <TileSetRef>TileSets.LC</TileSetRef>
@@ -437,7 +437,7 @@
             <PaletteRef>Palettes.LC</PaletteRef>
           </PaletteRefs>
         </Level>
-        <Level Id="7" Name="L7" >
+        <Level Id="L7" >
           <AssetRef>Assets.L7MA</AssetRef>
           <Format Name="ABSE_MAP" ></Format>
           <TileSetRef>TileSets.LD</TileSetRef>
@@ -448,7 +448,7 @@
             <PaletteRef>Palettes.LD</PaletteRef>
           </PaletteRefs>
         </Level>
-        <Level Id="8" Name="L8" >
+        <Level Id="L8" >
           <AssetRef>Assets.L8MA</AssetRef>
           <Format Name="ABSE_MAP" ></Format>
           <TileSetRef>TileSets.LD</TileSetRef>
@@ -459,7 +459,7 @@
             <PaletteRef>Palettes.LD</PaletteRef>
           </PaletteRefs>
         </Level>
-        <Level Id="9" Name="L9" >
+        <Level Id="L9" >
           <AssetRef>Assets.L9MA</AssetRef>
           <Format Name="ABSE_MAP" ></Format>
           <TileSetRef>TileSets.LD</TileSetRef>
@@ -470,7 +470,7 @@
             <PaletteRef>Palettes.LD</PaletteRef>
           </PaletteRefs>
         </Level>
-        <Level Id="10" Name="LA" >
+        <Level Id="LA" >
           <AssetRef>Assets.LAMA</AssetRef>
           <Format Name="ABSE_MAP" ></Format>
           <TileSetRef>TileSets.LE</TileSetRef>
@@ -481,7 +481,7 @@
             <PaletteRef>Palettes.LE</PaletteRef>
           </PaletteRefs>
         </Level>
-        <Level Id="11" Name="LB" >
+        <Level Id="LB" >
           <AssetRef>Assets.LBMA</AssetRef>
           <Format Name="ABSE_MAP" ></Format>
           <TileSetRef>TileSets.LE</TileSetRef>
@@ -496,7 +496,7 @@
     </Levels>
     <PropertySets>
       <Items>
-        <PropertySet Name="Props.Default">
+        <PropertySet Id="Props.Default">
           <PropertyDefs>
             <PropertyDef Id="0" Visibility="false" Name="Air" >
               <Description>No collision, no action</Description>

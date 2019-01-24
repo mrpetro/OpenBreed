@@ -49,21 +49,16 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             throw new NotImplementedException();
         }
 
-        public IPropSetEntry GetById(long id)
+        public IEntry Find(string id)
         {
-            throw new NotImplementedException();
+            return _table.Items.FirstOrDefault(item => item.Id == id);
         }
 
-        public IEntry Find(string name)
+        public IPropSetEntry GetById(string id)
         {
-            return _table.Items.FirstOrDefault(item => item.Name == name);
-        }
-
-        public IPropSetEntry GetByName(string name)
-        {
-            var propSetDef = _table.Items.FirstOrDefault(item => item.Name == name);
+            var propSetDef = _table.Items.FirstOrDefault(item => item.Id == id);
             if (propSetDef == null)
-                throw new Exception("No Source definition found with name: " + name);
+                throw new Exception("No Source definition found with Id: " + id);
 
             return propSetDef;
         }
@@ -73,7 +68,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             var index = _table.Items.IndexOf((PropertySetDef)entry);
 
             if (index < 0)
-                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+                throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
 
             index++;
 
@@ -88,7 +83,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             var index = _table.Items.IndexOf((PropertySetDef)entry);
 
             if (index < 0)
-                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+                throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
 
             index--;
 
@@ -97,14 +92,18 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             else
                 return null;
         }
-        public void Remove(IPropSetEntry entity)
+        public void Remove(IPropSetEntry entry)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(IPropSetEntry entity)
+        public void Update(IPropSetEntry entry)
         {
-            throw new NotImplementedException();
+            var index = _table.Items.IndexOf((PropertySetDef)entry);
+            if (index < 0)
+                throw new InvalidOperationException($"{entry} not found in repository");
+
+            _table.Items[index] = (PropertySetDef)entry;
         }
 
         #endregion Public Methods

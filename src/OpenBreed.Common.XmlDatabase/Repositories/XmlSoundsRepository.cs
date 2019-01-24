@@ -48,21 +48,16 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             throw new NotImplementedException();
         }
 
-        public ISoundEntry GetById(long id)
+        public IEntry Find(string id)
         {
-            throw new NotImplementedException();
+            return _table.Items.FirstOrDefault(item => item.Id == id);
         }
 
-        public IEntry Find(string name)
+        public ISoundEntry GetById(string id)
         {
-            return _table.Items.FirstOrDefault(item => item.Name == name);
-        }
-
-        public ISoundEntry GetByName(string name)
-        {
-            var entry = _table.Items.FirstOrDefault(item => item.Name == name);
+            var entry = _table.Items.FirstOrDefault(item => item.Id == id);
             if (entry == null)
-                throw new Exception("No Sound entry found with name: " + name);
+                throw new Exception("No Sound entry found with Id: " + id);
 
             return entry;
         }
@@ -72,7 +67,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             var index = _table.Items.IndexOf((SoundDef)entry);
 
             if (index < 0)
-                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+                throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
 
             index++;
 
@@ -87,7 +82,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             var index = _table.Items.IndexOf((SoundDef)entry);
 
             if (index < 0)
-                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+                throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
 
             index--;
 
@@ -98,14 +93,18 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
         }
 
 
-        public void Remove(ISoundEntry entity)
+        public void Remove(ISoundEntry entry)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(ISoundEntry entity)
+        public void Update(ISoundEntry entry)
         {
-            throw new NotImplementedException();
+            var index = _table.Items.IndexOf((SoundDef)entry);
+            if (index < 0)
+                throw new InvalidOperationException($"{entry} not found in repository");
+
+            _table.Items[index] = (SoundDef)entry;
         }
 
         #endregion Public Methods

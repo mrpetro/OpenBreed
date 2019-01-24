@@ -49,21 +49,16 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             throw new NotImplementedException();
         }
 
-        public ILevelEntry GetById(long id)
+        public IEntry Find(string id)
         {
-            throw new NotImplementedException();
+            return _table.Items.FirstOrDefault(item => item.Id == id);
         }
 
-        public IEntry Find(string name)
+        public ILevelEntry GetById(string id)
         {
-            return _table.Items.FirstOrDefault(item => item.Name == name);
-        }
-
-        public ILevelEntry GetByName(string name)
-        {
-            var levelDef = _table.Items.FirstOrDefault(item => item.Name == name);
+            var levelDef = _table.Items.FirstOrDefault(item => item.Id == id);
             if (levelDef == null)
-                throw new Exception("No Level definition found with name: " + name);
+                throw new Exception("No Level definition found with Id: " + id);
 
             return levelDef;
         }
@@ -73,7 +68,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             var index = _table.Items.IndexOf((LevelDef)entry);
 
             if (index < 0)
-                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+                throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
 
             index++;
 
@@ -88,7 +83,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             var index = _table.Items.IndexOf((LevelDef)entry);
 
             if (index < 0)
-                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+                throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
 
             index--;
 
@@ -97,14 +92,18 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             else
                 return null;
         }
-        public void Remove(ILevelEntry entity)
+        public void Remove(ILevelEntry entry)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(ILevelEntry entity)
+        public void Update(ILevelEntry entry)
         {
-            throw new NotImplementedException();
+            var index = _table.Items.IndexOf((LevelDef)entry);
+            if (index < 0)
+                throw new InvalidOperationException($"{entry} not found in repository");
+
+            _table.Items[index] = (LevelDef)entry;
         }
 
         #endregion Public Methods

@@ -49,21 +49,16 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             throw new NotImplementedException();
         }
 
-        public ISpriteSetEntry GetById(long id)
+        public IEntry Find(string id)
         {
-            throw new NotImplementedException();
+            return _table.Items.FirstOrDefault(item => item.Id == id);
         }
 
-        public IEntry Find(string name)
+        public ISpriteSetEntry GetById(string id)
         {
-            return _table.Items.FirstOrDefault(item => item.Name == name);
-        }
-
-        public ISpriteSetEntry GetByName(string name)
-        {
-            var spriteSetDef = _table.Items.FirstOrDefault(item => item.Name == name);
+            var spriteSetDef = _table.Items.FirstOrDefault(item => item.Id == id);
             if (spriteSetDef == null)
-                throw new Exception("No Source definition found with name: " + name);
+                throw new Exception("No Source definition found with Id: " + id);
 
             return spriteSetDef;
         }
@@ -73,7 +68,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             var index = _table.Items.IndexOf((SpriteSetDef)entry);
 
             if (index < 0)
-                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+                throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
 
             index++;
 
@@ -88,7 +83,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             var index = _table.Items.IndexOf((SpriteSetDef)entry);
 
             if (index < 0)
-                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+                throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
 
             index--;
 
@@ -98,14 +93,18 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return null;
         }
 
-        public void Remove(ISpriteSetEntry entity)
+        public void Remove(ISpriteSetEntry entry)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(ISpriteSetEntry entity)
+        public void Update(ISpriteSetEntry entry)
         {
-            throw new NotImplementedException();
+            var index = _table.Items.IndexOf((SpriteSetDef)entry);
+            if (index < 0)
+                throw new InvalidOperationException($"{entry} not found in repository");
+
+            _table.Items[index] = (SpriteSetDef)entry;
         }
 
         #endregion Public Methods

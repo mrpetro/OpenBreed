@@ -51,21 +51,16 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             throw new NotImplementedException();
         }
 
-        public IAssetEntry GetById(long id)
+        public IEntry Find(string id)
         {
-            throw new NotImplementedException();
+            return _table.Items.FirstOrDefault(item => item.Id == id);
         }
 
-        public IEntry Find(string name)
+        public IAssetEntry GetById(string id)
         {
-            return _table.Items.FirstOrDefault(item => item.Name == name);
-        }
-
-        public IAssetEntry GetByName(string name)
-        {
-            var assetDef = _table.Items.FirstOrDefault(item => item.Name == name);
+            var assetDef = _table.Items.FirstOrDefault(item => item.Id == id);
             if (assetDef == null)
-                throw new Exception("No Asset definition found with name: " + name);
+                throw new Exception("No Asset definition found with Id: " + id);
 
             return assetDef;
         }
@@ -98,14 +93,18 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return _table.Items[index];
         }
 
-        public void Remove(IAssetEntry entity)
+        public void Remove(IAssetEntry entry)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(IAssetEntry entity)
+        public void Update(IAssetEntry entry)
         {
-            throw new NotImplementedException();
+            var index = _table.Items.IndexOf((AssetDef)entry);
+            if (index < 0)
+                throw new InvalidOperationException($"{entry} not found in repository");
+
+            _table.Items[index] = (AssetDef)entry;
         }
 
         #endregion Public Methods

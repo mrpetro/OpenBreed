@@ -33,6 +33,11 @@ namespace OpenBreed.Common.XmlDatabase.Items.Sprites
 
         public string AssetRef { get; set; }
 
+        public override IEntry Copy()
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion Public Properties
     }
 }

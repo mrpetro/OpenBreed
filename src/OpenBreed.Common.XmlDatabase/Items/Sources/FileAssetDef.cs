@@ -13,7 +13,13 @@ namespace OpenBreed.Common.XmlDatabase.Items.Sources
         [XmlAttribute]
         public string FilePath { get; set; }
 
-        [XmlAttribute]
-        public string DirectoryPath { get; set; }
+        public override IEntry Copy()
+        {
+            return new FileAssetDef()
+            {
+                Id = this.Id,
+                FilePath = this.FilePath
+            };
+        }
     }
 }

@@ -51,21 +51,16 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             throw new NotImplementedException();
         }
 
-        public IPaletteEntry GetById(long id)
+        public IEntry Find(string id)
         {
-            throw new NotImplementedException();
+            return _table.Items.FirstOrDefault(item => item.Id == id);
         }
 
-        public IEntry Find(string name)
+        public IPaletteEntry GetById(string id)
         {
-            return _table.Items.FirstOrDefault(item => item.Name == name);
-        }
-
-        public IPaletteEntry GetByName(string name)
-        {
-            var paletteDef = _table.Items.FirstOrDefault(item => item.Name == name);
+            var paletteDef = _table.Items.FirstOrDefault(item => item.Id == id);
             if (paletteDef == null)
-                throw new Exception("No Palette definition found with name: " + name);
+                throw new Exception("No Palette definition found with Id: " + id);
 
             return paletteDef;
         }
@@ -75,7 +70,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             var index = _table.Items.IndexOf((PaletteDef)entry);
 
             if (index < 0)
-                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+                throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
 
             index++;
 
@@ -90,7 +85,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             var index = _table.Items.IndexOf((PaletteDef)entry);
 
             if (index < 0)
-                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+                throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
 
             index--;
 
@@ -100,14 +95,18 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return null;
         }
 
-        public void Remove(IPaletteEntry entity)
+        public void Remove(IPaletteEntry entry)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(IPaletteEntry entity)
+        public void Update(IPaletteEntry entry)
         {
-            throw new NotImplementedException();
+            var index = _table.Items.IndexOf((PaletteDef)entry);
+            if (index < 0)
+                throw new InvalidOperationException($"{entry} not found in repository");
+
+            _table.Items[index] = (PaletteDef)entry;
         }
 
         #endregion Public Methods

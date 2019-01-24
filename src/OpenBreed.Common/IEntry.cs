@@ -9,11 +9,19 @@ namespace OpenBreed.Common
 {
     public interface IEntry
     {
+
         #region Public Properties
 
-        long Id { get; }
-       string Name { get; }
+        string Id { get; set; }
+
+        string Description { get; set; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        IEntry Copy();
+
+        #endregion Public Methods
     }
 }

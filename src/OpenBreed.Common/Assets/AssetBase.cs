@@ -5,7 +5,7 @@ using System.IO;
 
 namespace OpenBreed.Common.Assets
 {
-    public abstract class AssetBase : IEntry, IDisposable
+    public abstract class AssetBase : IDisposable
     {
         #region Protected Fields
 
@@ -34,8 +34,8 @@ namespace OpenBreed.Common.Assets
 
         #region Public Properties
 
-        public long Id { get; }
         public string Name { get; }
+
         public Stream Stream
         {
             get

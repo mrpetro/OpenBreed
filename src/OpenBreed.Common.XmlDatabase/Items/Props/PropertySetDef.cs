@@ -28,6 +28,11 @@ namespace OpenBreed.Common.XmlDatabase.Items.Props
         [XmlArrayItem("PropertyDef")]
         public List<PropertyDef> PropertyDefs { get; } = new List<PropertyDef>();
 
+        public override IEntry Copy()
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion Public Properties
 
     }

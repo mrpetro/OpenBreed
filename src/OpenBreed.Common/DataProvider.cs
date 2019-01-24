@@ -49,7 +49,7 @@ namespace OpenBreed.Common
 
         public Image GetImage(string name)
         {
-            var entry = _unitOfWork.GetRepository<IImageEntry>().GetByName(name);
+            var entry = _unitOfWork.GetRepository<IImageEntry>().GetById(name);
             if (entry == null)
                 throw new Exception("Image error: " + name);
 
@@ -60,7 +60,7 @@ namespace OpenBreed.Common
 
         public PaletteModel GetPalette(string name)
         {
-            var entry = _unitOfWork.GetRepository<IPaletteEntry>().GetByName(name);
+            var entry = _unitOfWork.GetRepository<IPaletteEntry>().GetById(name);
             if (entry == null)
                 throw new Exception("Palette error: " + name);
 
@@ -71,7 +71,7 @@ namespace OpenBreed.Common
 
         public SoundModel GetSound(string name)
         {
-            var entry = _unitOfWork.GetRepository<ISoundEntry>().GetByName(name);
+            var entry = _unitOfWork.GetRepository<ISoundEntry>().GetById(name);
             if (entry == null)
                 throw new Exception("Sound error: " + name);
 
@@ -82,7 +82,7 @@ namespace OpenBreed.Common
 
         public IPropSetEntry GetPropSet(string name)
         {
-            var entry = _unitOfWork.GetRepository<IPropSetEntry>().GetByName(name);
+            var entry = _unitOfWork.GetRepository<IPropSetEntry>().GetById(name);
             if (entry == null)
                 throw new Exception("PropSet error: " + name);
 
@@ -96,7 +96,7 @@ namespace OpenBreed.Common
 
         public SpriteSetModel GetSpriteSet(string name)
         {
-            var entry = _unitOfWork.GetRepository<ISpriteSetEntry>().GetByName(name);
+            var entry = _unitOfWork.GetRepository<ISpriteSetEntry>().GetById(name);
             if (entry == null)
                 throw new Exception("SpriteSet error: " + name);
 
@@ -107,7 +107,7 @@ namespace OpenBreed.Common
 
         public TileSetModel GetTileSet(string name)
         {
-            var entry = _unitOfWork.GetRepository<ITileSetEntry>().GetByName(name);
+            var entry = _unitOfWork.GetRepository<ITileSetEntry>().GetById(name);
             if (entry == null)
                 throw new Exception("TileSet error: " + name);
 
@@ -118,7 +118,7 @@ namespace OpenBreed.Common
 
         public LevelModel GetLevel(string name)
         {
-            var entry = _unitOfWork.GetRepository<ILevelEntry>().GetByName(name);
+            var entry = _unitOfWork.GetRepository<ILevelEntry>().GetById(name);
             if (entry == null)
                 throw new Exception("Level error: " + name);
 

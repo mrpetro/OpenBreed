@@ -48,21 +48,16 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             throw new NotImplementedException();
         }
 
-        public ITileSetEntry GetById(long id)
+        public IEntry Find(string id)
         {
-            throw new NotImplementedException();
+            return _table.Items.FirstOrDefault(item => item.Id == id);
         }
 
-        public IEntry Find(string name)
+        public ITileSetEntry GetById(string id)
         {
-            return _table.Items.FirstOrDefault(item => item.Name == name);
-        }
-
-        public ITileSetEntry GetByName(string name)
-        {
-            var tileSetDef = _table.Items.FirstOrDefault(item => item.Name == name);
+            var tileSetDef = _table.Items.FirstOrDefault(item => item.Id == id);
             if (tileSetDef == null)
-                throw new Exception("No TileSet definition found with name: " + name);
+                throw new Exception("No TileSet definition found with Id: " + id);
 
             return tileSetDef;
         }
@@ -72,7 +67,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             var index = _table.Items.IndexOf((TileSetDef)entry);
 
             if (index < 0)
-                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+                throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
 
             index++;
 
@@ -87,7 +82,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             var index = _table.Items.IndexOf((TileSetDef)entry);
 
             if (index < 0)
-                throw new InvalidOperationException($"Entry {entry.Name} index not found in repository.");
+                throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
 
             index--;
 
@@ -97,14 +92,18 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return null;
         }
 
-        public void Remove(ITileSetEntry entity)
+        public void Remove(ITileSetEntry entry)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(ITileSetEntry entity)
+        public void Update(ITileSetEntry entry)
         {
-            throw new NotImplementedException();
+            var index = _table.Items.IndexOf((TileSetDef)entry);
+            if (index < 0)
+                throw new InvalidOperationException($"{entry} not found in repository");
+
+            _table.Items[index] = (TileSetDef)entry;
         }
 
         #endregion Public Methods

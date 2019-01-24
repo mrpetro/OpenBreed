@@ -24,9 +24,8 @@ namespace OpenBreed.Common
         #region Public Methods
 
         void Add(T entry);
-        T GetById(long id);
 
-        T GetByName(string name);
+        T GetById(string id);
 
         T GetNextTo(T entry);
         T GetPreviousTo(T entry);

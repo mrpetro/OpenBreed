@@ -22,6 +22,7 @@ namespace OpenBreed.Common.Assets
             base(manager, name)
         {
             ArchivePath = archivePath;
+            EntryName = entryName;
         }
 
         #endregion Public Constructors

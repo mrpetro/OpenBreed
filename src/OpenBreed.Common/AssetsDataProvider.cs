@@ -44,7 +44,7 @@ namespace OpenBreed.Common
             if (_openedAssets.TryGetValue(name, out asset))
                 return asset;
 
-            var entry = UnitOfWork.GetRepository<IAssetEntry>().GetByName(name);
+            var entry = UnitOfWork.GetRepository<IAssetEntry>().GetById(name);
             if (entry == null)
                 throw new Exception($"Asset error: {name}" );
 
@@ -96,12 +96,12 @@ namespace OpenBreed.Common
 
         private AssetBase CreateFileAsset(IFileAssetEntry asset)
         {
-            return new FileAsset(this, asset.Name, asset.FilePath);
+            return new FileAsset(this, asset.Id, asset.FilePath);
         }
 
         private AssetBase CreateEPFArchiveAsset(IEPFArchiveAssetEntry asset)
         {
-            return new EPFArchiveFileAsset(this, asset.Name, asset.ArchivePath, asset.EntryName);
+            return new EPFArchiveFileAsset(this, asset.Id, asset.ArchivePath, asset.EntryName);
         }
 
         private AssetBase CreateAsset(IAssetEntry asset)

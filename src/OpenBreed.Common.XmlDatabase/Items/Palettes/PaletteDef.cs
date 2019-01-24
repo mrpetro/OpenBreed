@@ -33,6 +33,11 @@ namespace OpenBreed.Common.XmlDatabase.Items.Palettes
             }
         }
 
+        public override IEntry Copy()
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion Public Properties
     }
 }

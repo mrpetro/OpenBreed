@@ -34,6 +34,11 @@ namespace OpenBreed.Common.XmlDatabase.Items.Images
 
         public string AssetRef { get; set; }
 
+        public override IEntry Copy()
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion Public Properties
     }
 }
