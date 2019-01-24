@@ -40,13 +40,11 @@ namespace OpenBreed.Editor.VM.Assets
 
         protected override void UpdateEntry(AssetVM source, IAssetEntry target)
         {
-            throw new NotImplementedException();
+            base.UpdateEntry(source, target);
         }
 
         protected override void UpdateVM(IAssetEntry source, AssetVM target)
         {
-            target.Load(source);
-
             base.UpdateVM(source, target);
         }
 

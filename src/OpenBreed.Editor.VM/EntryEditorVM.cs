@@ -15,9 +15,12 @@ namespace OpenBreed.Editor.VM
 
         #region Private Fields
 
-        private bool _EditMode;
+        protected EditableEntryVM _editable;
+        private bool _commitEnabled;
+        private bool _editMode;
         private bool _nextAvailable;
         private bool _previousAvailable;
+        private bool _revertEnabled;
         private string _title;
 
         #endregion Private Fields
@@ -25,15 +28,19 @@ namespace OpenBreed.Editor.VM
         #region Public Properties
 
         public Action ActivatingAction { get; set; }
-
         public Action ClosedAction { get; set; }
+        public Action<string> CommitedAction { get; set; }
         public Action ClosingAction { get; set; }
-        public abstract string EditableName { get; set; }
+        public bool CommitEnabled
+        {
+            get { return _commitEnabled; }
+            protected set { SetProperty(ref _commitEnabled, value); }
+        }
 
         public bool EditMode
         {
-            get { return _EditMode; }
-            set { SetProperty(ref _EditMode, value); }
+            get { return _editMode; }
+            set { SetProperty(ref _editMode, value); }
         }
 
         public abstract string EditorName { get; }
@@ -48,6 +55,18 @@ namespace OpenBreed.Editor.VM
         {
             get { return _previousAvailable; }
             protected set { SetProperty(ref _previousAvailable, value); }
+        }
+
+        public EditableEntryVM Editable
+        {
+            get { return _editable; }
+            set { SetProperty(ref _editable, value); }
+        }
+
+        public bool RevertEnabled
+        {
+            get { return _revertEnabled; }
+            protected set { SetProperty(ref _revertEnabled, value); }
         }
 
         public string Title
@@ -78,11 +97,12 @@ namespace OpenBreed.Editor.VM
             return true;
         }
 
+        public abstract void Commit();
+        public abstract void Revert();
+
         public abstract void EditEntry(string name);
         public abstract void EditNextEntry();
         public abstract void EditPreviousEntry();
-
-        public abstract void Store();
 
         #endregion Public Methods
     }

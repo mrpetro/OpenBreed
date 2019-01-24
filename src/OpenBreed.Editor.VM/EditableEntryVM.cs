@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Common;
+using OpenBreed.Editor.VM.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,16 +12,35 @@ namespace OpenBreed.Editor.VM
     {
         #region Private Fields
 
-        private string _name;
+        private string _id;
+        private string _description;
 
         #endregion Private Fields
 
         #region Public Properties
 
-        public string Name
+        public string Id
         {
-            get { return _name; }
-            set { SetProperty(ref _name, value); }
+            get { return _id; }
+            set { SetProperty(ref _id, value); }
+        }
+
+        public string Description
+        {
+            get { return _description; }
+            set { SetProperty(ref _description, value); }
+        }
+
+        internal virtual void FromEntry(IEntry entry)
+        {
+            Id = entry.Id;
+            Description = entry.Description;
+        }
+
+        internal virtual void ToEntry(IEntry entry)
+        {
+            entry.Id = Id;
+            entry.Description = Description;
         }
 
         #endregion Public Properties

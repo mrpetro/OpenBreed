@@ -45,7 +45,9 @@ namespace OpenBreed.Editor.VM.Sounds
 
         protected override void UpdateEntry(SoundVM source, ISoundEntry target)
         {
-            var model = DataProvider.GetSound(target.Name);
+            base.UpdateEntry(source, target);
+
+            var model = DataProvider.GetSound(target.Id);
 
             model.BitsPerSample = source.BitsPerSample;
             model.Channels = source.Channels;
@@ -55,7 +57,7 @@ namespace OpenBreed.Editor.VM.Sounds
 
         protected override void UpdateVM(ISoundEntry source, SoundVM target)
         {
-            var model = DataProvider.GetSound(source.Name);
+            var model = DataProvider.GetSound(source.Id);
             target.BitsPerSample = model.BitsPerSample;
             target.Channels = model.Channels;
             target.SampleRate = model.SampleRate;

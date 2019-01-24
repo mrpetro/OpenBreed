@@ -42,12 +42,12 @@ namespace OpenBreed.Editor.VM.Images
 
         protected override void UpdateEntry(ImageVM source, IImageEntry target)
         {
-            throw new NotImplementedException();
+            base.UpdateEntry(source, target);
         }
 
         protected override void UpdateVM(IImageEntry source, ImageVM target)
         {
-            target.Image = DataProvider.GetImage(source.Name);
+            target.Image = DataProvider.GetImage(source.Id);
 
             base.UpdateVM(source, target);
         }

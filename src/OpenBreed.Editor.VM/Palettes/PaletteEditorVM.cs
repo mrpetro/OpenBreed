@@ -14,6 +14,7 @@ namespace OpenBreed.Editor.VM.Palettes
 {
     public class PaletteEditorVM : EntryEditorBaseVM<IPaletteEntry, PaletteVM>
     {
+
         #region Private Fields
 
         private Color _currentColor = Color.Empty;
@@ -51,18 +52,21 @@ namespace OpenBreed.Editor.VM.Palettes
             set { SetProperty(ref _currentColorIndex, value); }
         }
 
+        public override string EditorName { get { return "Palette Editor"; } }
         public LevelPaletteSelectorVM Palettes { get; private set; }
 
-        public override string EditorName { get { return "Palette Editor"; } }
+        #endregion Public Properties
+
+        #region Protected Methods
 
         protected override void UpdateEntry(PaletteVM source, IPaletteEntry target)
         {
-            throw new NotImplementedException();
+            base.UpdateEntry(source, target);
         }
 
         protected override void UpdateVM(IPaletteEntry source, PaletteVM target)
         {
-            var model = DataProvider.GetPalette(source.Name);
+            var model = DataProvider.GetPalette(source.Id);
 
             target.Colors.UpdateAfter(() => 
             {
@@ -75,7 +79,7 @@ namespace OpenBreed.Editor.VM.Palettes
             base.UpdateVM(source, target);
         }
 
-        #endregion Public Properties
+        #endregion Protected Methods
 
     }
 }

@@ -32,8 +32,6 @@ namespace OpenBreed.Editor.VM.Database.Items
         {
             _entry = entry as IImageEntry ?? throw new InvalidOperationException($"Expected {nameof(IImageEntry)}");
 
-            Description = _entry.Description;
-
             base.Load(entry);
         }
 

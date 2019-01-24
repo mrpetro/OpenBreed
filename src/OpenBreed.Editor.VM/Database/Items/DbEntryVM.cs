@@ -27,7 +27,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         #region Public Properties
 
-        public virtual string Name { get; private set; }
+        public virtual string Id { get; private set; }
 
         public string Description
         {
@@ -41,7 +41,8 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         public virtual void Load(IEntry entry)
         {
-            Name = entry.Name;
+            Id = entry.Id;
+            Description = entry.Description;
         }
 
         #endregion Public Methods

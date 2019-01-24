@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Assets;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Assets;
 using OpenBreed.Common.XmlDatabase.Items.Sources;
 using System;
 using System.Collections.Generic;
@@ -36,20 +37,32 @@ namespace OpenBreed.Editor.VM.Assets
 
         #region Internal Methods
 
-        internal override void Load(IAssetEntry source)
+        internal override void FromEntry(IEntry entry)
         {
-            base.Load(source);
-            Load((EPFArchiveFileAssetDef)source);
+            base.FromEntry(entry);
+            FromEntry((IEPFArchiveAssetEntry)entry);
+        }
+
+        internal override void ToEntry(IEntry entry)
+        {
+            base.ToEntry(entry);
+            ToEntry((IEPFArchiveAssetEntry)entry);
         }
 
         #endregion Internal Methods
 
         #region Private Methods
 
-        private void Load(EPFArchiveFileAssetDef source)
+        private void FromEntry(IEPFArchiveAssetEntry entry)
         {
-            ArchivePath = source.ArchivePath;
-            EntryName = source.EntryName;
+            ArchivePath = entry.ArchivePath;
+            EntryName = entry.EntryName;
+        }
+
+        private void ToEntry(IEPFArchiveAssetEntry entry)
+        {
+            entry.ArchivePath = ArchivePath;
+            entry.EntryName = EntryName;
         }
 
         #endregion Private Methods

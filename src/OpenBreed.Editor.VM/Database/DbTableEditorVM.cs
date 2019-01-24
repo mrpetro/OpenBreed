@@ -119,7 +119,15 @@ namespace OpenBreed.Editor.VM.Database
             //var openedDbEntryEditor = DbEntryEditors.FirstOrDefault(item => item.)
             var dbEditor = ServiceLocator.Instance.GetService<EditorVM>().DbEditor;
 
-            dbEditor.OpenEntryEditor(_edited, entryName);
+            var entryEditor = dbEditor.OpenEntryEditor(_edited, entryName);
+            entryEditor.CommitedAction = OnEntryCommited;
+        }
+
+        private void OnEntryCommited(string entryId)
+        {
+            var entryVM = _editable.Entries.FirstOrDefault(item => item.Id == entryId);
+            var entry = _edited.Entries.FirstOrDefault(item => item.Id == entryId);
+            entryVM.Load(entry);
         }
 
         #endregion Public Methods
@@ -135,13 +143,17 @@ namespace OpenBreed.Editor.VM.Database
         {
             var dbEntryFactory = ServiceLocator.Instance.GetService<DbEntryFactory>();
 
-            //target.Name
-            foreach (var entry in _edited.Entries)
+            target.Entries.UpdateAfter(() =>
             {
-                var dbEntry = dbEntryFactory.Create(entry);
-                dbEntry.Load(entry);
-                target.Entries.Add(dbEntry);
-            }
+                target.Entries.Clear();
+
+                foreach (var entry in _edited.Entries)
+                {
+                    var dbEntry = dbEntryFactory.Create(entry);
+                    dbEntry.Load(entry);
+                    target.Entries.Add(dbEntry);
+                }
+            });
         }
 
         #endregion Protected Methods

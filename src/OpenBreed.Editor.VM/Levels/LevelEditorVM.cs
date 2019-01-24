@@ -16,6 +16,7 @@ namespace OpenBreed.Editor.VM.Levels
 {
     public class LevelEditorVM : EntryEditorBaseVM<ILevelEntry, LevelVM>
     {
+
         #region Private Fields
 
         private LevelVM _level;
@@ -46,18 +47,13 @@ namespace OpenBreed.Editor.VM.Levels
             set { SetProperty(ref _level, value); }
         }
 
-        public LevelTileSelectorVM TileSelector { get; }
-        public LevelPropSelectorVM PropSelector { get; }
-        public LevelPaletteSelectorVM PaletteSelector { get; }
-        public SpriteSetSelectorVM SpriteSetViewer { get; set; }
-
         public override string EditorName { get { return "Level Editor"; } }
+        public LevelPaletteSelectorVM PaletteSelector { get; }
+        public LevelPropSelectorVM PropSelector { get; }
+        public SpriteSetSelectorVM SpriteSetViewer { get; set; }
+        public LevelTileSelectorVM TileSelector { get; }
 
         #endregion Public Properties
-
-        #region Public Methods
-
-        #endregion Public Methods
 
         #region Internal Methods
 
@@ -65,6 +61,8 @@ namespace OpenBreed.Editor.VM.Levels
         {
             PropSelector.Connect();
         }
+
+        #endregion Internal Methods
 
         //public void Load(string name)
         //{
@@ -77,14 +75,16 @@ namespace OpenBreed.Editor.VM.Levels
         //    PaletteSelector.CurrentItem = CurrentLevel.Palettes.FirstOrDefault();
         //}
 
+        #region Protected Methods
+
         protected override void UpdateEntry(LevelVM source, ILevelEntry target)
         {
-            throw new NotImplementedException();
+            base.UpdateEntry(source, target);
         }
 
         protected override void UpdateVM(ILevelEntry source, LevelVM target)
         {
-            var model = DataProvider.GetLevel(source.Name);
+            var model = DataProvider.GetLevel(source.Id);
 
             //foreach (var spriteSet in model.SpriteSets)
             //    target.AddSpriteSet(spriteSet);
@@ -108,7 +108,7 @@ namespace OpenBreed.Editor.VM.Levels
             base.UpdateVM(source, target);
         }
 
-        #endregion Internal Methods
+        #endregion Protected Methods
 
         //private void PaletteSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
         //{

@@ -78,7 +78,7 @@ namespace OpenBreed.Editor.VM.Levels
             {
                 case nameof(CurrentItem):
                     if (CurrentItem != null)
-                        Title = CurrentItem.Name;
+                        Title = CurrentItem.Id;
                     else
                         Title = "No property set";
 

@@ -30,20 +30,16 @@ namespace OpenBreed.Editor.VM.Props
 
         #endregion Public Properties
 
-        #region Internal Methods
-
-        #endregion Internal Methods
-
         #region Protected Methods
 
         protected override void UpdateEntry(PropSetVM source, IPropSetEntry target)
         {
-            throw new NotImplementedException();
+            base.UpdateEntry(source, target);
         }
 
         protected override void UpdateVM(IPropSetEntry source, PropSetVM target)
         {
-            var model = DataProvider.GetPropSet(source.Name);
+            var model = DataProvider.GetPropSet(source.Id);
 
             foreach (var property in model.Items)
             {
@@ -72,5 +68,6 @@ namespace OpenBreed.Editor.VM.Props
         }
 
         #endregion Private Methods
+
     }
 }

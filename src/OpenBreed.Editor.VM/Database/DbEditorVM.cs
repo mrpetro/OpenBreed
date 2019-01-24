@@ -111,7 +111,7 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Internal Methods
 
-        internal void OpenEntryEditor(IRepository repository, string entryName)
+        internal EntryEditorVM OpenEntryEditor(IRepository repository, string entryName)
         {
             string entryEditorKey = $"{repository.Name}#{entryName}";
 
@@ -126,6 +126,8 @@ namespace OpenBreed.Editor.VM.Database
             }
             else
                 entryEditor.Activate();
+
+            return entryEditor;
         }
 
         internal void Save()

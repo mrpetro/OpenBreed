@@ -14,6 +14,7 @@ namespace OpenBreed.Editor.VM.Tiles
 {
     public class TileSetEditorVM : EntryEditorBaseVM<ITileSetEntry, TileSetVM>
     {
+
         #region Public Constructors
 
         public TileSetEditorVM(IRepository repository) : base(repository)
@@ -37,12 +38,12 @@ namespace OpenBreed.Editor.VM.Tiles
 
         protected override void UpdateEntry(TileSetVM source, ITileSetEntry target)
         {
-            throw new NotImplementedException();
+            base.UpdateEntry(source, target);
         }
 
         protected override void UpdateVM(ITileSetEntry source, TileSetVM target)
         {
-            var model = DataProvider.GetTileSet(source.Name);
+            var model = DataProvider.GetTileSet(source.Id);
             target.TileSize = model.TileSize;
             target.SetupTiles(model.Tiles);
 
@@ -66,5 +67,6 @@ namespace OpenBreed.Editor.VM.Tiles
         }
 
         #endregion Private Methods
+
     }
 }

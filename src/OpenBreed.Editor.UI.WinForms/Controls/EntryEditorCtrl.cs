@@ -56,28 +56,50 @@ namespace OpenBreed.Editor.UI.WinForms.Controls
         {
             _vm = vm ?? throw new ArgumentNullException(nameof(vm));
 
-            tbxName.DataBindings.Add(nameof(tbxName.Text), _vm, nameof(_vm.EditableName), false, DataSourceUpdateMode.OnPropertyChanged);
+            InnerCtrl.Initialize(_vm);
+
             btnNext.DataBindings.Add(nameof(btnNext.Enabled), _vm, nameof(_vm.NextAvailable), false, DataSourceUpdateMode.OnPropertyChanged);
             btnPrevious.DataBindings.Add(nameof(btnPrevious.Enabled), _vm, nameof(_vm.PreviousAvailable), false, DataSourceUpdateMode.OnPropertyChanged);
+            btnCommit.DataBindings.Add(nameof(btnCommit.Enabled), _vm, nameof(_vm.CommitEnabled), false, DataSourceUpdateMode.OnPropertyChanged);
+            btnRevert.DataBindings.Add(nameof(btnRevert.Enabled), _vm, nameof(_vm.RevertEnabled), false, DataSourceUpdateMode.OnPropertyChanged);
 
-            btnStore.Click += (s, a) => _vm.Store();
+            btnCommit.Click += (s, a) => _vm.Commit();
+            btnRevert.Click += (s, a) => _vm.Revert();
             btnNext.Click += (s, a) => _vm.EditNextEntry();
             btnPrevious.Click += (s, a) => _vm.EditPreviousEntry();
 
             _vm.PropertyChanged += _vm_PropertyChanged;
-            InnerCtrl.Initialize(_vm);
-            //UpdateViewState();
+
+            OnEditableChanged(_vm.Editable);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
+        private void OnEditableChanged(EditableEntryVM entry)
+        {
+            tbxName.DataBindings.Clear();
+            tbxDescription.DataBindings.Clear();
+            if (entry == null)
+            {
+                tbxName.Text = null;
+                tbxDescription.Text = null;
+            }
+            else
+            {
+                tbxName.DataBindings.Add(nameof(tbxName.Text), entry, nameof(entry.Id), false, DataSourceUpdateMode.OnPropertyChanged);
+                tbxDescription.DataBindings.Add(nameof(tbxDescription.Text), entry, nameof(entry.Description), false, DataSourceUpdateMode.OnPropertyChanged);
+            }
+        }
+
         private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
-                //case nameof(_vm.Editable)
+                case nameof(_vm.Editable):
+                    OnEditableChanged(_vm.Editable);
+                    break;
                 default:
                     break;
             }
@@ -85,16 +107,5 @@ namespace OpenBreed.Editor.UI.WinForms.Controls
 
         #endregion Private Methods
 
-        //private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        //{
-        //    switch (e.PropertyName)
-        //    {
-        //        case nameof(_vm.Editable):
-        //            UpdateViewState();
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
     }
 }
