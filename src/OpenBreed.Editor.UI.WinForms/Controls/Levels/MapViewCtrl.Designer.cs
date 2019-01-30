@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
 {
-    partial class LevelEditorCtrl
+    partial class MapViewCtrl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,30 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.BodyEditorCtrl = new OpenBreed.Editor.UI.WinForms.Controls.Levels.LevelBodyEditorCtrl();
             this.SuspendLayout();
             // 
-            // BodyEditorCtrl
-            // 
-            this.BodyEditorCtrl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BodyEditorCtrl.Location = new System.Drawing.Point(0, 0);
-            this.BodyEditorCtrl.Name = "BodyEditorCtrl";
-            this.BodyEditorCtrl.Size = new System.Drawing.Size(471, 370);
-            this.BodyEditorCtrl.TabIndex = 0;
-            // 
-            // LevelEditorCtrl
+            // MapViewCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.BodyEditorCtrl);
-            this.Name = "LevelEditorCtrl";
-            this.Size = new System.Drawing.Size(471, 370);
+            this.Name = "MapViewCtrl";
+            this.Size = new System.Drawing.Size(394, 320);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private LevelBodyEditorCtrl BodyEditorCtrl;
     }
 }

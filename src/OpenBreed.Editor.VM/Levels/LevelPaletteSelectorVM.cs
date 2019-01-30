@@ -65,7 +65,7 @@ namespace OpenBreed.Editor.VM.Levels
         }
         private void UpdateCurrentIndex()
         {
-            CurrentIndex = Parent.CurrentLevel.Palettes.IndexOf(CurrentItem);
+            CurrentIndex = Parent.Editable.Palettes.IndexOf(CurrentItem);
         }
 
         private void UpdateCurrentItem()
@@ -73,7 +73,7 @@ namespace OpenBreed.Editor.VM.Levels
             if (CurrentIndex == -1)
                 CurrentItem = null;
             else
-                CurrentItem = Parent.CurrentLevel.Palettes[CurrentIndex];
+                CurrentItem = Parent.Editable.Palettes[CurrentIndex];
         }
 
         #endregion Private Methods

@@ -29,7 +29,6 @@ namespace OpenBreed.Editor.VM.Database.Tables
         public BindingList<DbEntryVM> Entries { get; }
 
         public abstract string Name { get; }
-        public DatabaseVM Owner { get; }
 
         #endregion Public Properties
 

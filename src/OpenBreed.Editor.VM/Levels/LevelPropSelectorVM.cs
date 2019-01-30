@@ -65,8 +65,8 @@ namespace OpenBreed.Editor.VM.Levels
         {
             switch (e.PropertyName)
             {
-                case nameof(Parent.CurrentLevel.PropSet):
-                    CurrentItem = Parent.CurrentLevel.PropSet;
+                case nameof(Parent.Editable.PropSet):
+                    CurrentItem = Parent.Editable.PropSet;
                     break;
                 default:
                     break;

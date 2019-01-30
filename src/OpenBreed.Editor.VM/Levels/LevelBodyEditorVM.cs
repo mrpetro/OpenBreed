@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Editor.VM.Base;
+using OpenBreed.Editor.VM.Renderer;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,6 +14,8 @@ namespace OpenBreed.Editor.VM.Levels
     {
         #region Private Fields
 
+        public RenderTarget RenderTarget { get; }
+        private BodyRenderer _renderer;
         private LevelBodyVM _currentMapBody;
         private Matrix _transformation;
         private string _title;
@@ -27,6 +30,8 @@ namespace OpenBreed.Editor.VM.Levels
 
             PropertyChanged += MapBodyViewerVM_PropertyChanged;
 
+            RenderTarget = new RenderTarget(1, 1);
+            _renderer = new BodyRenderer(RenderTarget);
             Transformation = new Matrix();
         }
 
@@ -66,6 +71,11 @@ namespace OpenBreed.Editor.VM.Levels
             set { SetProperty(ref _transformation, value); }
         }
 
+        public void Resize(int width, int height)
+        {
+            RenderTarget.Resize(width, height);
+        }
+
         public float ZoomScale { get { return Transformation.Elements[0]; } }
 
         #endregion Public Properties
@@ -84,33 +94,14 @@ namespace OpenBreed.Editor.VM.Levels
 
         public void DrawView(Graphics gfx)
         {
-            gfx.Transform = Transformation;
-            RectangleF viewRect = gfx.ClipBounds;
+            RenderTarget.Gfx.Transform = Transformation;
 
-            int tileSize = CurrentMapBody.Map.TileSize;
-            int xFrom = CurrentMapBody.GetMapIndexX(viewRect.Left);
-            int xTo = CurrentMapBody.GetMapIndexX(viewRect.Right);
-            int yFrom = CurrentMapBody.GetMapIndexY(viewRect.Top);
-            int yTo = CurrentMapBody.GetMapIndexY(viewRect.Bottom);
+            if (CurrentMapBody == null)
+                return;
 
-            var visibleLayers = CurrentMapBody.Layers.Where(item => item.IsVisible);
+            _renderer.Render(CurrentMapBody);
 
-            foreach (var layer in visibleLayers)
-                layer.DrawView(gfx, Rectangle.FromLTRB(xFrom, yTo, xTo, yFrom));
-
-
-            //for (int xIndex = xFrom; xIndex <= xTo; xIndex++)
-            //{
-            //    for (int yIndex = yFrom; yIndex <= yTo; yIndex++)
-            //    {
-            //        var tile = GetCell(xIndex, yIndex);
-
-            //        Map.Editor.TileSets.CurrentItem.DrawTile(gfx, tile.GfxId, xIndex * tileSize, yIndex * tileSize, tileSize);
-            //        PropertySet.DrawProperty(gfx, tile.PropertyId, xIndex * tileSize, yIndex * tileSize, tileSize);
-            //    }
-            //}
-
-            //PropertyInserter.DrawInsertion(gfx, tileSize);
+            RenderTarget.Flush(gfx);
         }
 
         public void FitViewToBody(float width, float height)

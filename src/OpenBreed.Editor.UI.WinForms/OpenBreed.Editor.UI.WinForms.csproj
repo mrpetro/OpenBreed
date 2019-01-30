@@ -34,6 +34,12 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="OpenTK, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\OpenTK.3.0.1\lib\net20\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.GLControl, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\OpenTK.GLControl.3.0.1\lib\net20\OpenTK.GLControl.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -142,6 +148,12 @@
     <Compile Include="Controls\Levels\LevelSettingsCtrl.Designer.cs">
       <DependentUpon>LevelSettingsCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Levels\MapViewCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Levels\MapViewCtrl.Designer.cs">
+      <DependentUpon>MapViewCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Palettes\ColorEditorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -194,9 +206,7 @@
     <Compile Include="Controls\Sprites\SpriteViewerCtrl.Designer.cs">
       <DependentUpon>SpriteViewerCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Levels\LevelTileSelectorCtrl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Controls\Levels\LevelTileSelectorCtrl.cs" />
     <Compile Include="Controls\Levels\LevelTileSelectorCtrl.Designer.cs">
       <DependentUpon>LevelTileSelectorCtrl.cs</DependentUpon>
     </Compile>
@@ -219,6 +229,12 @@
     </Compile>
     <Compile Include="Forms\ABTAPasswordGeneratorForm.Designer.cs">
       <DependentUpon>ABTAPasswordGeneratorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\GLTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GLTestForm.Designer.cs">
+      <DependentUpon>GLTestForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\States\FormStateDatabaseOpened.cs" />
     <Compile Include="Forms\States\FormStateBase.cs" />
@@ -317,9 +333,7 @@
     <Compile Include="Views\TemplateSetView.Designer.cs">
       <DependentUpon>TemplateSetView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\LevelTileSelectorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Views\LevelTileSelectorView.cs" />
     <Compile Include="Views\LevelTileSelectorView.Designer.cs">
       <DependentUpon>LevelTileSelectorView.cs</DependentUpon>
     </Compile>
@@ -378,6 +392,9 @@
     <EmbeddedResource Include="Controls\Levels\LevelSettingsCtrl.resx">
       <DependentUpon>LevelSettingsCtrl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Levels\MapViewCtrl.resx">
+      <DependentUpon>MapViewCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Palettes\ColorEditorCtrl.resx">
       <DependentUpon>ColorEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
@@ -416,6 +433,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ABTAPasswordGeneratorForm.resx">
       <DependentUpon>ABTAPasswordGeneratorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GLTestForm.resx">
+      <DependentUpon>GLTestForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -489,6 +509,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

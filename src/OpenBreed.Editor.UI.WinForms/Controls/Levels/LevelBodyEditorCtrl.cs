@@ -11,6 +11,7 @@ using OpenBreed.Editor.VM.Levels;
 using OpenBreed.Editor.VM.Levels.Tools;
 using OpenBreed.Editor.VM;
 using System.Drawing.Drawing2D;
+using OpenBreed.Editor.VM.Renderer;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
 {
@@ -18,6 +19,8 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
     {
         #region Private Fields
 
+        private ScrollTool _scrollTool;
+        private ZoomTool _zoomTool;
         private LevelBodyEditorVM _vm;
 
         #endregion Private Fields
@@ -39,12 +42,15 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
         {
             _vm = vm;
 
-            //_vm.Parent.Root.ToolsMan.ClearTools();
-            //_vm.Parent.Root.ToolsMan.AddPassiveTool(new ScrollTool(_vm, this));
-            //_vm.Parent.Root.ToolsMan.AddPassiveTool(new ZoomTool(_vm, this));
+            _scrollTool = new ScrollTool(_vm, this);
+            _scrollTool.Activate();
+            _zoomTool = new ZoomTool(_vm, this);
+            _zoomTool.Activate();
+
+            Resize += (s,a) => _vm.Resize(this.ClientSize.Width, this.ClientSize.Height);
 
             _vm.PropertyChanged += _vm_PropertyChanged;
-
+            
             UpdateViewState();
         }
 
@@ -69,12 +75,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
         {
             if (_vm == null)
                 return;
-
-            e.Graphics.PixelOffsetMode = PixelOffsetMode.Half;
-            e.Graphics.CompositingQuality = CompositingQuality.AssumeLinear;
-            e.Graphics.CompositingMode = CompositingMode.SourceOver;
-            e.Graphics.SmoothingMode = SmoothingMode.None;
-            e.Graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
 
             _vm.DrawView(e.Graphics);
 

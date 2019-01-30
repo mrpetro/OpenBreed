@@ -30,18 +30,6 @@ namespace OpenBreed.Editor.VM.Props
             Items = new BindingList<PropVM>();
         }
 
-        public PropSetVM(IPropSetEntry model)
-        {
-            Items = new BindingList<PropVM>();
-
-            foreach (var property in model.Items)
-            {
-                var newProp = CreateProp(property);
-                newProp.Load(property);
-                Items.Add(newProp);
-            }
-        }
-
         #endregion Public Constructors
 
         #region Public Properties

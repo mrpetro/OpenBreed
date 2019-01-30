@@ -24,9 +24,8 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
         public override void Initialize(EntryEditorVM vm)
         {
             _vm = vm as LevelEditorVM ?? throw new InvalidOperationException(nameof(vm));
-            //_vm.PropertyChanged += _vm_PropertyChanged;
 
-            //UpdateViewState();
+            BodyEditorCtrl.Initialize(_vm.BodyEditor);
         }
     }
 }

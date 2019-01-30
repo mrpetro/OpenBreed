@@ -43,9 +43,6 @@ namespace OpenBreed.Editor.VM.Levels
             Palettes = new BindingList<PaletteVM>();
             Palettes.ListChanged += (s, e) => OnPropertyChanged(nameof(Palettes));
 
-            TileSets = new BindingList<TileSetVM>();
-            TileSets.ListChanged += (s, e) => OnPropertyChanged(nameof(TileSets));
-
             SpriteSets = new BindingList<SpriteSetVM>();
             SpriteSets.ListChanged += (s, e) => OnPropertyChanged(nameof(SpriteSets));
 
@@ -85,7 +82,6 @@ namespace OpenBreed.Editor.VM.Levels
             set { SetProperty(ref _source, value); }
         }
         public BindingList<SpriteSetVM> SpriteSets { get; }
-        public BindingList<TileSetVM> TileSets { get; }
         public int TileSize { get { return 16; } }
 
         public string Title
@@ -108,11 +104,6 @@ namespace OpenBreed.Editor.VM.Levels
         //    var newSpriteSet = Root.CreateSpriteSet();
         //    newSpriteSet.Load(name);
         //    SpriteSets.Add(newSpriteSet);
-        //}
-
-        //public void AddTileSet(TileSetModel tileSet)
-        //{
-        //    TileSets.Add(Root.CreateTileSet(tileSet));
         //}
 
         //public void LoadPropSet(IPropSetEntry propSet)
@@ -170,28 +161,6 @@ namespace OpenBreed.Editor.VM.Levels
         {
             Body.ConnectEvents();
         }
-        //internal void Load(string name)
-        //{
-        //    var model = ServiceLocator.Instance.GetService<DataProvider>().GetLevel(name);
-
-        //    foreach (var spriteSet in model.SpriteSets)
-        //        AddSpriteSet(spriteSet);
-
-        //    foreach (var tileSet in model.TileSets)
-        //        AddTileSet(tileSet);
-
-        //    if(model.PropSet != null)
-        //        LoadPropSet(model.PropSet);
-
-        //    Properties.Load(model.Map);
-        //    Body.Load(model.Map);
-
-        //    Root.LevelEditor.PaletteSelector.PropertyChanged += PaletteSelector_PropertyChanged;
-
-        //    Restore(model.Palettes);
-        //    Root.LevelEditor.PaletteSelector.CurrentItem = Palettes.FirstOrDefault();
-        //    Root.LevelEditor.BodyEditor.CurrentMapBody = Body;
-        //}
 
         #endregion Internal Methods
 
@@ -219,55 +188,6 @@ namespace OpenBreed.Editor.VM.Levels
                 return Source.Name;
         }
 
-        //private void PaletteSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        //{
-        //    var paletteSelector = sender as LevelPaletteSelectorVM;
-
-        //    switch (e.PropertyName)
-        //    {
-        //        case nameof(paletteSelector.CurrentItem):
-        //            Root.PaletteEditor.Editable = paletteSelector.CurrentItem;
-        //            Root.PaletteEditor.CurrentColorIndex = 0;
-
-        //            foreach (var tileSet in TileSets)
-        //                tileSet.Palette = paletteSelector.CurrentItem;
-
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
-
-
-        //internal void Load(LevelDef levelDef)
-        //{
-        //    var asset = Root.DataProvider.AssetsProvider.GetAsset(levelDef.AssetRef);
-        //    if (asset == null)
-        //        throw new Exception("Level source error: " + levelDef.AssetRef);
-
-        //    var model = Root.DataProvider.FormatMan.Load(asset, levelDef.Format) as MapModel;
-        //    Source = asset;
-
-        //    if (levelDef.TileSetRef != null)
-        //        AddTileSet(levelDef.TileSetRef);
-
-        //    if (levelDef.PropertySetRef != null)
-        //        LoadPropSet(levelDef.PropertySetRef);
-
-        //    foreach (var spriteSetRef in levelDef.SpriteSetRefs)
-        //        AddSpriteSet(spriteSetRef);
-
-        //    foreach (var paletteRef in levelDef.PaletteRefs)
-        //        AddPalette(paletteRef);
-
-        //    Properties.Load(model);
-        //    Body.Load(model);
-
-        //    if (!levelDef.PaletteRefs.Any())
-        //    {
-        //        Restore(model.Properties.Palettes);
-        //        Root.LevelEditor.PaletteSelector.CurrentItem = Palettes.FirstOrDefault();
-        //    }
         private void UpdateTitle()
         {
             if (Source == null)

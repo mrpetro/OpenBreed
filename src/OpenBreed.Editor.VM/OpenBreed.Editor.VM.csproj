@@ -78,6 +78,7 @@
     <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="Base\BindingListExtensions.cs" />
     <Compile Include="Base\Command.cs" />
+    <Compile Include="Database\DbTableEditorBaseVM.cs" />
     <Compile Include="Database\DbTableSelectorVM.cs" />
     <Compile Include="Database\DbTableSelectorConnector.cs" />
     <Compile Include="Database\DbEditorVM.cs" />
@@ -118,6 +119,13 @@
     <Compile Include="IOpenFileQuery.cs" />
     <Compile Include="ISaveFileQuery.cs" />
     <Compile Include="IToolController.cs" />
+    <Compile Include="Renderer\BodyRenderer.cs" />
+    <Compile Include="Renderer\IRenderable.cs" />
+    <Compile Include="Renderer\IRenderer.cs" />
+    <Compile Include="Renderer\LayerRenderer.cs" />
+    <Compile Include="Renderer\RenderTarget.cs" />
+    <Compile Include="Renderer\RendererBase.cs" />
+    <Compile Include="Renderer\TileRenderer.cs" />
     <Compile Include="ServiceLocator.cs" />
     <Compile Include="ViewFinder.cs" />
     <Compile Include="VMConnectorBase.cs" />

@@ -28,7 +28,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
             _vm.PropertyChanged += _vm_PropertyChanged;
 
             cbxSpriteSets.DataBindings.Add(nameof(cbxSpriteSets.SelectedIndex), _vm, nameof(_vm.CurrentIndex), false, DataSourceUpdateMode.OnPropertyChanged);
-            cbxSpriteSets.DataSource = _vm.Parent.CurrentLevel.SpriteSets;
+            cbxSpriteSets.DataSource = _vm.Parent.Editable.SpriteSets;
             cbxSpriteSets.DisplayMember = "Name";
 
             UpdateSpriteSets();
@@ -48,7 +48,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
 
         void UpdateSpriteSets()
         {
-            if (_vm.Parent.CurrentLevel.SpriteSets.Count == 0)
+            if (_vm.Parent.Editable.SpriteSets.Count == 0)
                 SetNoSpriteSetsState();
             else
                 SetSpriteSetsState();

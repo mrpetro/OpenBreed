@@ -9,7 +9,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace OpenBreed.Editor.UI.WinForms.Views
 {
-    public partial class LevelBodyEditorView : DockContent, IToolController
+    public partial class LevelBodyEditorView : DockContent
     {
         #region Private Fields
 

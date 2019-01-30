@@ -35,19 +35,6 @@ namespace OpenBreed.Editor.VM.Tiles
             PropertyChanged += TileSetVM_PropertyChanged;
         }
 
-        public TileSetVM(TileSetModel model)
-        {
-            Items = new BindingList<TileVM>();
-
-            TileSize = model.TileSize;
-            Bitmap = ToBitmap(model.Tiles);
-            RebuildTiles();
-
-            Items.ListChanged += (s, e) => OnPropertyChanged(nameof(Items));
-
-            PropertyChanged += TileSetVM_PropertyChanged;
-        }
-
         #endregion Public Constructors
 
         #region Public Properties

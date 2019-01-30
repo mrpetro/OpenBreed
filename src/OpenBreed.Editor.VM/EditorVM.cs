@@ -56,6 +56,8 @@ namespace OpenBreed.Editor.VM
 
         public EditorVM()
         {
+            ServiceLocator.Instance.RegisterService<ToolsMan>(new ToolsMan());
+
             ServiceLocator.Instance.RegisterService<EditorVM>(this);
 
             var entryEditorFactory = new DbEntryEditorFactory();
@@ -76,8 +78,6 @@ namespace OpenBreed.Editor.VM
 
 
             Settings = new SettingsMan();
-            ToolsMan = new ToolsMan();
-
 
             DbEditor = new DbEditorVM();
             //PaletteEditor = new PaletteEditorVM();
@@ -105,8 +105,6 @@ namespace OpenBreed.Editor.VM
             get { return _state; }
             set { SetProperty(ref _state, value); }
         }
-
-        public ToolsMan ToolsMan { get; }
 
         #endregion Public Properties
 
@@ -145,20 +143,11 @@ namespace OpenBreed.Editor.VM
 
         #region Internal Methods
 
-        internal PropSetVM CreatePropSet(IPropSetEntry propSet)
-        {
-            return new PropSetVM(propSet);
-        }
-
         internal SpriteSetVM CreateSpiteSet(SpriteSetModel spriteSet)
         {
             return new SpriteSetVM(this, spriteSet);
         }
 
-        internal TileSetVM CreateTileSet(TileSetModel tileSet)
-        {
-            return new TileSetVM(tileSet);
-        }
         internal bool TrySaveDatabase()
         {
             return EditorVMHelper.TrySaveDatabase(this);

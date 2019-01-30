@@ -68,7 +68,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         private void UpdateCurrentIndex()
         {
-            CurrentIndex = Parent.CurrentLevel.SpriteSets.IndexOf(CurrentItem);
+            CurrentIndex = Parent.Editable.SpriteSets.IndexOf(CurrentItem);
         }
 
         private void UpdateCurrentItem()
@@ -76,7 +76,7 @@ namespace OpenBreed.Editor.VM.Sprites
             if (CurrentIndex == -1)
                 CurrentItem = null;
             else
-                CurrentItem = Parent.CurrentLevel.SpriteSets[CurrentIndex];
+                CurrentItem = Parent.Editable.SpriteSets[CurrentIndex];
         }
 
         #endregion Private Methods

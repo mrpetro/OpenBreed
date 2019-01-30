@@ -16,23 +16,45 @@ namespace OpenBreed.Editor.VM.Levels
 {
     public class LevelEditorVM : EntryEditorBaseVM<ILevelEntry, LevelVM>
     {
-
-        #region Private Fields
-
-        private LevelVM _level;
-
-        #endregion Private Fields
-
         #region Public Constructors
 
         public LevelEditorVM(IRepository repository) : base(repository)
         {
             BodyEditor = new LevelBodyEditorVM(this);
             //TileSetSelector = new LevelTileSetSelectorVM(this);
-            TileSelector = new LevelTileSelectorVM(this);
+            //TileSelector = new LevelTileSelectorVM(this);
             PropSelector = new LevelPropSelectorVM(this);
-            SpriteSetViewer = new SpriteSetSelectorVM(this);
             PaletteSelector = new LevelPaletteSelectorVM(this);
+
+            PropertyChanged += LevelEditorVM_PropertyChanged;
+
+            PaletteSelector.PropertyChanged += PaletteSelector_PropertyChanged;
+        }
+
+        private void PaletteSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(PaletteSelector.CurrentItem):
+                    foreach (var tileSet in BodyEditor.CurrentMapBody.TileSets)
+                        tileSet.Palette = PaletteSelector.CurrentItem;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void LevelEditorVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(Editable):
+                    BodyEditor.CurrentMapBody = Editable.Body;
+                    PaletteSelector.CurrentItem = Editable.Palettes.FirstOrDefault();
+                    break;
+                default:
+                    break;
+            }
         }
 
         #endregion Public Constructors
@@ -41,17 +63,10 @@ namespace OpenBreed.Editor.VM.Levels
 
         public LevelBodyEditorVM BodyEditor { get; }
 
-        public LevelVM CurrentLevel
-        {
-            get { return _level ; }
-            set { SetProperty(ref _level, value); }
-        }
-
         public override string EditorName { get { return "Level Editor"; } }
         public LevelPaletteSelectorVM PaletteSelector { get; }
         public LevelPropSelectorVM PropSelector { get; }
-        public SpriteSetSelectorVM SpriteSetViewer { get; set; }
-        public LevelTileSelectorVM TileSelector { get; }
+        //public LevelTileSelectorVM TileSelector { get; }
 
         #endregion Public Properties
 
@@ -89,21 +104,18 @@ namespace OpenBreed.Editor.VM.Levels
             //foreach (var spriteSet in model.SpriteSets)
             //    target.AddSpriteSet(spriteSet);
 
-            //foreach (var tileSet in model.TileSets)
-            //    target.AddTileSet(tileSet);
+            foreach (var tileSet in model.TileSets)
+                target.Body.AddTileSet(tileSet);
 
-            //if (model.PropSet != null)
-            //    target.LoadPropSet(model.PropSet);
+            if (model.PropSet != null)
+                target.Body.SetPropSet(model.PropSet);
 
             target.Properties.Load(model.Map);
             target.Body.Load(model.Map);
 
             //PaletteSelector.PropertyChanged += PaletteSelector_PropertyChanged;
 
-            //target.Restore(model.Palettes);
-
-            //PaletteSelector.CurrentItem = target.Palettes.FirstOrDefault();
-            //BodyEditor.CurrentMapBody = target.Body;
+            target.Restore(model.Palettes);
 
             base.UpdateVM(source, target);
         }

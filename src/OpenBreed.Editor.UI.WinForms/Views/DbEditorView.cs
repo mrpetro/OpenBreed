@@ -62,7 +62,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         private LevelPropSelectorView _levelPropSelectorView = new LevelPropSelectorView();
 
         //private SpriteSetsView _spriteSetsView = new SpriteSetsView();
-        private LevelTileSelectorView _levelTileSelectorView = new LevelTileSelectorView();
+        //private LevelTileSelectorView _levelTileSelectorView = new LevelTileSelectorView();
 
         private bool _saveLayout = true;
         private DbEditorVM _vm;
@@ -125,10 +125,10 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         public void CloseLevelTileSelectorView()
         {
-            if (_levelTileSelectorView == null)
-                return;
-            _levelTileSelectorView.Close();
-            _levelTileSelectorView = null;
+            //if (_levelTileSelectorView == null)
+            //    return;
+            //_levelTileSelectorView.Close();
+            //_levelTileSelectorView = null;
         }
 
         public void HideAllViews()

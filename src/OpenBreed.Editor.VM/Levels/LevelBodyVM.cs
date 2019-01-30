@@ -9,17 +9,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using OpenBreed.Editor.VM.Levels.Layers;
+using OpenBreed.Common.Tiles;
+using OpenBreed.Editor.VM.Tiles;
+using OpenBreed.Common.Props;
 
 namespace OpenBreed.Editor.VM.Levels
 {
     public class LevelBodyVM : BaseViewModel
     {
-
-        #region Public Fields
-
-        public BindingList<MapBodyBaseLayerVM> Layers;
-
-        #endregion Public Fields
 
         #region Private Fields
 
@@ -33,6 +30,7 @@ namespace OpenBreed.Editor.VM.Levels
         {
             Map = map;
 
+            TileSets = new BindingList<TileSetVM>();
             Layers = new BindingList<MapBodyBaseLayerVM>();
 
             //TilesInserter = new TilesInserter(this, Map.Project.Root.TileSets.CurrentItem.Selector);
@@ -44,19 +42,23 @@ namespace OpenBreed.Editor.VM.Levels
 
         #region Public Properties
 
+        public BindingList<MapBodyBaseLayerVM> Layers { get; }
         public LevelVM Map { get; private set; }
         public float MaxCoordX { get; private set; }
         public float MaxCoordY { get; private set; }
-        //public PropertyInserter PropertyInserter { get; private set; }
+
         public Size Size
         {
             get { return _size; }
             set { SetProperty(ref _size, value); }
         }
 
-        //public TilesInserter TilesInserter { get; private set; }
+        public PropSetVM PropSet { get; private set; }
+        public BindingList<TileSetVM> TileSets { get; }
 
         #endregion Public Properties
+
+        //public TilesInserter TilesInserter { get; private set; }
 
         #region Public Methods
 
@@ -101,12 +103,25 @@ namespace OpenBreed.Editor.VM.Levels
             //Map.Commands.ExecuteCommand(new CmdResize(this, mapResizeOperation));
         }
 
-
         public void SetTileGfx(int x, int y, int gfxId)
         {
             //CurrentMapBody.SetTileGfx(x, y, gfxId);
 
             Map.IsModified = true;
+        }
+
+        internal void SetPropSet(IPropSetEntry propSet)
+        {
+            var propSetVM = new PropSetVM();
+
+            foreach (var property in propSet.Items)
+            {
+                var newProp = propSetVM.CreateProp(property);
+                newProp.Load(property);
+                propSetVM.Items.Add(newProp);
+            }
+
+            PropSet = propSetVM;
         }
 
         public void SetTileProperty(int x, int y, int propertyId)
@@ -119,6 +134,14 @@ namespace OpenBreed.Editor.VM.Levels
         #endregion Public Methods
 
         #region Internal Methods
+
+        internal void AddTileSet(TileSetModel tileSet)
+        {
+            var tileSetVM = new TileSetVM();
+            tileSetVM.TileSize = tileSet.TileSize;
+            tileSetVM.SetupTiles(tileSet.Tiles);
+            TileSets.Add(tileSetVM);
+        }
 
         internal void ConnectEvents()
         {

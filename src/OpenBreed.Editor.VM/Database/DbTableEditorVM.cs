@@ -79,10 +79,10 @@ namespace OpenBreed.Editor.VM.Database
             if (repository == null)
                 throw new InvalidOperationException($"Repository with name '{modelName}' not found.");
 
-            EditModel(repository);
+            EditRepository(repository);
         }
 
-        public void EditModel(IRepository model)
+        public void EditRepository(IRepository model)
         {
             //Unsubscribe to previous edited item changes
             if (Editable != null)

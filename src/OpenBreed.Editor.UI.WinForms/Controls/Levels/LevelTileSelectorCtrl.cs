@@ -1,51 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using OpenBreed.Editor.VM.Tiles;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.ComponentModel;
+//using System.Drawing;
+//using System.Data;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
+//using System.Windows.Forms;
+//using OpenBreed.Editor.VM.Tiles;
 
-namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
-{
-    public partial class LevelTileSelectorCtrl : UserControl
-    {
+//namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
+//{
+//    public partial class LevelTileSelectorCtrl : UserControl
+//    {
 
-        #region Private Fields
+//        #region Private Fields
 
-        private LevelTileSelectorVM _vm;
+//        private LevelTileSelectorVM _vm;
 
-        #endregion Private Fields
+//        #endregion Private Fields
 
-        #region Public Constructors
+//        #region Public Constructors
 
-        public LevelTileSelectorCtrl()
-        {
-            InitializeComponent();
-        }
+//        public LevelTileSelectorCtrl()
+//        {
+//            InitializeComponent();
+//        }
 
-        #endregion Public Constructors
+//        #endregion Public Constructors
 
-        #region Public Methods
+//        #region Public Methods
 
-        public void Initialize(LevelTileSelectorVM vm)
-        {
-            _vm = vm;
+//        public void Initialize(LevelTileSelectorVM vm)
+//        {
+//            _vm = vm;
 
-            cbxTileSets.DataBindings.Clear();
-            cbxTileSets.DataBindings.Add(nameof(cbxTileSets.SelectedIndex),
-                                         _vm, nameof(_vm.CurrentIndex),
-                                         false, 
-                                         DataSourceUpdateMode.OnPropertyChanged);
+//            cbxTileSets.DataBindings.Clear();
+//            cbxTileSets.DataBindings.Add(nameof(cbxTileSets.SelectedIndex),
+//                                         _vm, nameof(_vm.CurrentIndex),
+//                                         false, 
+//                                         DataSourceUpdateMode.OnPropertyChanged);
 
-            //cbxTileSets.DataSource = _vm.Parent.Root.LevelEditor.CurrentLevel.TileSets;
-            cbxTileSets.DisplayMember = "Name";
-        }
+//            //cbxTileSets.DataSource = _vm.Parent.Root.LevelEditor.CurrentLevel.TileSets;
+//            cbxTileSets.DisplayMember = "Name";
+//        }
 
-        #endregion Public Methods
+//        #endregion Public Methods
 
-    }
-}
+//    }
+//}
