@@ -27,7 +27,13 @@ ABTA PC port uses exactly same resources as Amiga version but the container is E
 
 ## What's to do
 
-* TBD
+Those three games have common problem related with resources. Most of graphic/sound/sprite/tiles are stored as asset files delivered with game executables. But... there are still alot of data which is "hardcoded" in executables.
+Examples:
+* There is sound file with all game sounds available for ABHC game. But the sound file does not seem to have start and length of each sound sample in that file. It means that the information must be somewhere in the executable
+* There are files with sprites for both ABHC and ABSE games. But those file are just plain bitmap pictures with "gallery" of sprites. There are no positions and sizes of sprites in same file. It also means that this information must be hardcoded in executables.
+* Each map file has number of cells representing map layout. Each cell consists from two numbers. First one is graphical tile number which is used for displaying map graphics. Second number is code of "action" that is assigned to that cell. Examples are spawn position of monster or player, level exit, obstacle, door, etc... Each game executable know exactly what action needs to be executed for particular cell code (and those actions are also hardcoded, doh...). Some codes are obvious to deduct, other not.
+
+So the goal is to trace or rebuild data hardcoded in game executables and store it in dedicated databases, so future game engine could pickup this information along with usual game assets. And that is why OpenBreed.Editor is being developed first.
 
 ## Associated repositories
 * **OpenBreed.Common** - which should contain information and implementation of various data formats existing in all three games.
@@ -44,6 +50,7 @@ Platform: .NET 4.6.1 for now
 
 DevEnv: MSVS 2017 (Community or compatible)
 
-Libraries: CS-SLD for graphics probably
+Libraries:
+OpenTK has been choosen for handling graphics, inputs and sounds. Visit https://opentk.net for more information.
 
 
