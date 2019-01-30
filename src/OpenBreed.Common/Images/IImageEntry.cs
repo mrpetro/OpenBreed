@@ -10,7 +10,6 @@ namespace OpenBreed.Common.Images
     public interface IImageEntry : IEntry
     {
         string AssetRef { get; }
-        string Description { get; }
         IFormatEntry Format { get; }
     }
 }
