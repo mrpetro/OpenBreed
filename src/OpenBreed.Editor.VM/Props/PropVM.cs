@@ -72,10 +72,10 @@ namespace OpenBreed.Editor.VM.Props
         {
             Name = property.Name;
             Id = property.Id;
-            Visibility = property.Visibility;
+            Visibility = property.Presentation.Visibility;
             Description = property.Description;
 
-            PropVMHelper.SetPresentation(this, property.ImagePath, System.Drawing.ColorTranslator.FromHtml(property.Color));
+            PropVMHelper.SetPresentation(this, property.Presentation);
         }
 
         #endregion Public Methods

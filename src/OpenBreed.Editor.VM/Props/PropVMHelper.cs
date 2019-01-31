@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenBreed.Common.Props;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -64,20 +65,17 @@ namespace OpenBreed.Editor.VM.Props
             return false;
         }
 
-        public static void SetPresentation(PropVM prop, string imagePath, Color color)
+        public static void SetPresentation(PropVM prop, IPropertyPresentation presentation)
         {
             Image image;
             string message;
 
-            if(!TryLoadImage(imagePath, out image, out message))
-            {
-                SetPresentationDefault(prop, color);
-                return;
-            }
+            prop.Visibility = presentation.Visibility;
 
-            prop.Presentation = image;
+            if (!TryLoadImage(presentation.Image, out image, out message))
+                SetPresentationDefault(prop, System.Drawing.ColorTranslator.FromHtml(presentation.Color));
+            else
+                prop.Presentation = image;
         }
-
-
     }
 }
