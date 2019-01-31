@@ -10,12 +10,12 @@ namespace OpenBreed.Common.Props
     {
         #region Public Properties
 
-        string Color { get; }
         string Description { get; }
         int Id { get; }
-        string ImagePath { get; }
         string Name { get; }
-        bool Visibility { get; }
+
+        IPropertyPresentation Presentation { get; }
+        IPropertyTriggers Triggers { get; }
 
         #endregion Public Properties
     }

@@ -10,17 +10,51 @@ namespace OpenBreed.Common.XmlDatabase.Items.Props
     [Serializable]
     public class PropertyDef : IPropertyEntry
     {
+
+        #region Public Properties
+
+        public string Description { get; set; }
+
         [XmlAttribute]
         public int Id { get; set; }
         [XmlAttribute]
         public string Name { get; set; }
-        [XmlAttribute]
-        public bool Visibility { get; set; }
 
-        public string Description { get; set; }
+        [XmlIgnore]
+        public IPropertyPresentation Presentation { get; set; }
 
-        public string Color { get; set; }
+        [XmlIgnore]
+        public IPropertyTriggers Triggers { get; set; }
 
-        public string ImagePath { get; set; }
+        [XmlElement("Presentation")]
+        public PropertyPresentationDef XmlPresentation
+        {
+            get
+            {
+                return (PropertyPresentationDef)Presentation;
+            }
+
+            set
+            {
+                Presentation = value;
+            }
+        }
+
+        [XmlElement("Triggers")]
+        public PropertyTriggersDef XmlTriggers
+        {
+            get
+            {
+                return (PropertyTriggersDef)Triggers;
+            }
+
+            set
+            {
+                Triggers = value;
+            }
+        }
+
+        #endregion Public Properties
+
     }
 }

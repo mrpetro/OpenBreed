@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<DatabaseDef Name="ABTA" >
+<DatabaseDef>
   <Tables>
     <Assets>
       <Items>
@@ -170,956 +170,1048 @@
       </Items>
     </Assets>
     <Images>
-      <Items>
-      </Items>
+      <Items />
     </Images>
     <Sounds>
       <Items>
-        <Sound Id="Sounds.ALIEN1" >
+        <Sound Id="Sounds.ALIEN1">
+          <Format Name="PCM_SOUND">
+            <Parameters>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
+            </Parameters>
+          </Format>
           <AssetRef>Assets.ALIEN1</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.ALIEN2">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.ALIEN2" >
           <AssetRef>Assets.ALIEN2</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.ALIEN3">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.ALIEN3" >
           <AssetRef>Assets.ALIEN3</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.ALIEN4">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.ALIEN4" >
           <AssetRef>Assets.ALIEN4</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.AMMO">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.AMMO" >
           <AssetRef>Assets.AMMO</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.BACKING1">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.BACKING1" >
           <AssetRef>Assets.BACKING1</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.BACKING2">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.BACKING2" >
           <AssetRef>Assets.BACKING2</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.BACKING3">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.BACKING3" >
           <AssetRef>Assets.BACKING3</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.BACKING4">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.BACKING4" >
           <AssetRef>Assets.BACKING4</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.CACOON1">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.CACOON1" >
           <AssetRef>Assets.CACOON1</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.COMPUTER">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.COMPUTER" >
           <AssetRef>Assets.COMPUTER</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.COUNTDWN">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.COUNTDWN" >
           <AssetRef>Assets.COUNTDWN</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.CREDITS">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.CREDITS" >
           <AssetRef>Assets.CREDITS</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.CURSOR">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.CURSOR" >
           <AssetRef>Assets.CURSOR</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.DIE">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.DIE" >
           <AssetRef>Assets.DIE</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.DOOR1">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.DOOR1" >
           <AssetRef>Assets.DOOR1</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.EAT1">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.EAT1" >
           <AssetRef>Assets.EAT1</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.EXPLOS">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.EXPLOS" >
           <AssetRef>Assets.EXPLOS</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.FLAMEOFF">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.FLAMEOFF" >
           <AssetRef>Assets.FLAMEOFF</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.FLAMEON">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.FLAMEON" >
           <AssetRef>Assets.FLAMEON</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.GENERATE">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.GENERATE" >
           <AssetRef>Assets.GENERATE</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.GRENADE">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.GRENADE" >
           <AssetRef>Assets.GRENADE</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.GRUNT1">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.GRUNT1" >
           <AssetRef>Assets.GRUNT1</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.HATCH1">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.HATCH1" >
           <AssetRef>Assets.HATCH1</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.HEALTH">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.HEALTH" >
           <AssetRef>Assets.HEALTH</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.KEYS">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.KEYS" >
           <AssetRef>Assets.KEYS</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.LAZER1">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.LAZER1" >
           <AssetRef>Assets.LAZER1</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.LAZER2">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.LAZER2" >
           <AssetRef>Assets.LAZER2</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.LAZER3">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.LAZER3" >
           <AssetRef>Assets.LAZER3</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.LAZER4">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.LAZER4" >
           <AssetRef>Assets.LAZER4</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.LIZARD">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.LIZARD" >
           <AssetRef>Assets.LIZARD</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.MGUN">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.MGUN" >
           <AssetRef>Assets.MGUN</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.MINETICK">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.MINETICK" >
           <AssetRef>Assets.MINETICK</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.MISSILE">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.MISSILE" >
           <AssetRef>Assets.MISSILE</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.NULLSAMP">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.NULLSAMP" >
           <AssetRef>Assets.NULLSAMP</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.ONEWAY">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.ONEWAY" >
           <AssetRef>Assets.ONEWAY</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.OUTAMMO">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.OUTAMMO" >
           <AssetRef>Assets.OUTAMMO</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SELECT">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SELECT" >
           <AssetRef>Assets.SELECT</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SIREN">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SIREN" >
           <AssetRef>Assets.SIREN</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH01">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH01" >
           <AssetRef>Assets.SPEECH01</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH02">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH02" >
           <AssetRef>Assets.SPEECH02</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH03">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH03" >
           <AssetRef>Assets.SPEECH03</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH04">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH04" >
           <AssetRef>Assets.SPEECH04</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH05">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH05" >
           <AssetRef>Assets.SPEECH05</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH06">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH06" >
           <AssetRef>Assets.SPEECH06</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH07">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH07" >
           <AssetRef>Assets.SPEECH07</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH08">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH08" >
           <AssetRef>Assets.SPEECH08</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH09">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH09" >
           <AssetRef>Assets.SPEECH09</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH10">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH10" >
           <AssetRef>Assets.SPEECH10</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH11">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH11" >
           <AssetRef>Assets.SPEECH11</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH12">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH12" >
           <AssetRef>Assets.SPEECH12</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH13">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH13" >
           <AssetRef>Assets.SPEECH13</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH14">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH14" >
           <AssetRef>Assets.SPEECH14</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH15">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH15" >
           <AssetRef>Assets.SPEECH15</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH16">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH16" >
           <AssetRef>Assets.SPEECH16</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH17">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH17" >
           <AssetRef>Assets.SPEECH17</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH18">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH18" >
           <AssetRef>Assets.SPEECH18</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH19">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH19" >
           <AssetRef>Assets.SPEECH19</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH20">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH20" >
           <AssetRef>Assets.SPEECH20</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH21">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH21" >
           <AssetRef>Assets.SPEECH21</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH22">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH22" >
           <AssetRef>Assets.SPEECH22</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH23">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH23" >
           <AssetRef>Assets.SPEECH23</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH24">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH24" >
           <AssetRef>Assets.SPEECH24</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH25">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH25" >
           <AssetRef>Assets.SPEECH25</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH26">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH26" >
           <AssetRef>Assets.SPEECH26</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPEECH27">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPEECH27" >
           <AssetRef>Assets.SPEECH27</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SPLAT1">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >9600</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SPLAT1" >
           <AssetRef>Assets.SPLAT1</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.SWITCH">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.SWITCH" >
           <AssetRef>Assets.SWITCH</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.TELE">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.TELE" >
           <AssetRef>Assets.TELE</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.TURRET1">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.TURRET1" >
           <AssetRef>Assets.TURRET1</AssetRef>
-          <Format Name="PCM_SOUND" >
+        </Sound>
+        <Sound Id="Sounds.TURRET2">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
-        </Sound>
-        <Sound Id="Sounds.TURRET2" >
           <AssetRef>Assets.TURRET2</AssetRef>
-          <Format Name="PCM_SOUND" >
-            <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
-            </Parameters>
-          </Format>
         </Sound>
-        <Sound Id="Sounds.XTRALIFE" >
-          <AssetRef>Assets.XTRALIFE</AssetRef>
-          <Format Name="PCM_SOUND" >
+        <Sound Id="Sounds.XTRALIFE">
+          <Format Name="PCM_SOUND">
             <Parameters>
-              <Parameter Name="SAMPLE_RATE" Type="System.Int32" >11025</Parameter>
-              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32" >8</Parameter>
-              <Parameter Name="CHANNELS" Type="System.Int32" >1</Parameter>
+              <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
+              <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
+              <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
           </Format>
+          <AssetRef>Assets.XTRALIFE</AssetRef>
         </Sound>
       </Items>
     </Sounds>
     <SpriteSets>
       <Items>
-        <SpriteSet Id="SpriteSets.SPR1A" >
+        <SpriteSet Id="SpriteSets.SPR1A">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.SPR1A.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.SPR1B" >
+        <SpriteSet Id="SpriteSets.SPR1B">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.SPR1B.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.SPR3A" >
+        <SpriteSet Id="SpriteSets.SPR3A">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.SPR3A.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.SPR3B" >
+        <SpriteSet Id="SpriteSets.SPR3B">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.SPR3B.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.SPR4A" >
+        <SpriteSet Id="SpriteSets.SPR4A">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.SPR4A.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.SPR4B" >
+        <SpriteSet Id="SpriteSets.SPR4B">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.SPR4B.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.SPR5A" >
+        <SpriteSet Id="SpriteSets.SPR5A">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.SPR5A.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.SPR5B" >
+        <SpriteSet Id="SpriteSets.SPR5B">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.SPR5B.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.SPR6A" >
+        <SpriteSet Id="SpriteSets.SPR6A">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.SPR6A.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.SPR6B" >
+        <SpriteSet Id="SpriteSets.SPR6B">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.SPR6B.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.SPR7A" >
+        <SpriteSet Id="SpriteSets.SPR7A">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.SPR7A.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.SPR7B" >
+        <SpriteSet Id="SpriteSets.SPR7B">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.SPR7B.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.SPR8A" >
+        <SpriteSet Id="SpriteSets.SPR8A">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.SPR8A.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.SPR8B" >
+        <SpriteSet Id="SpriteSets.SPR8B">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.SPR8B.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.SPRDA" >
+        <SpriteSet Id="SpriteSets.SPRDA">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.SPRDA.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.SPRDB" >
+        <SpriteSet Id="SpriteSets.SPRDB">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.SPRDB.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.HERO1" >
+        <SpriteSet Id="SpriteSets.HERO1">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.HERO1.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.RESIDENT" >
+        <SpriteSet Id="SpriteSets.RESIDENT">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.RESIDENT.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.ALIEN_A" >
+        <SpriteSet Id="SpriteSets.ALIEN_A">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.ALIEN_A.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.ALIEN_B" >
+        <SpriteSet Id="SpriteSets.ALIEN_B">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.ALIEN_B.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.ALIEN_C" >
+        <SpriteSet Id="SpriteSets.ALIEN_C">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.ALIEN_C.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.ALIEN_E" >
+        <SpriteSet Id="SpriteSets.ALIEN_E">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.ALIEN_E.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.ALIEN_F" >
+        <SpriteSet Id="SpriteSets.ALIEN_F">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.ALIEN_F.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.ALIEN_G" >
+        <SpriteSet Id="SpriteSets.ALIEN_G">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.ALIEN_G.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.ALIEN_H" >
+        <SpriteSet Id="SpriteSets.ALIEN_H">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.ALIEN_H.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.ALIEN_I" >
+        <SpriteSet Id="SpriteSets.ALIEN_I">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.ALIEN_I.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.ALIEN_J" >
+        <SpriteSet Id="SpriteSets.ALIEN_J">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.ALIEN_J.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.ALIEN_K" >
+        <SpriteSet Id="SpriteSets.ALIEN_K">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.ALIEN_K.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
-        <SpriteSet Id="SpriteSets.ALIEN_X" >
+        <SpriteSet Id="SpriteSets.ALIEN_X">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.ALIEN_X.SPR</AssetRef>
-          <Format Name="ABTASPR" ></Format>
         </SpriteSet>
       </Items>
     </SpriteSets>
     <TileSets>
       <Items>
-        <TileSet Id="TileSets.L1" >
+        <TileSet Id="TileSets.L1">
+          <Format Name="ABTABLK">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.LEVEL1.BLK</AssetRef>
-          <Format Name="ABTABLK" ></Format>
         </TileSet>
-        <TileSet Id="TileSets.L3" >
+        <TileSet Id="TileSets.L3">
+          <Format Name="ABTABLK">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.LEVEL3.BLK</AssetRef>
-          <Format Name="ABTABLK" ></Format>
         </TileSet>
-        <TileSet Id="TileSets.L4" >
+        <TileSet Id="TileSets.L4">
+          <Format Name="ABTABLK">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.LEVEL4.BLK</AssetRef>
-          <Format Name="ABTABLK" ></Format>
         </TileSet>
-        <TileSet Id="TileSets.L5" >
+        <TileSet Id="TileSets.L5">
+          <Format Name="ABTABLK">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.LEVEL5.BLK</AssetRef>
-          <Format Name="ABTABLK" ></Format>
         </TileSet>
-        <TileSet Id="TileSets.L6" >
+        <TileSet Id="TileSets.L6">
+          <Format Name="ABTABLK">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.LEVEL6.BLK</AssetRef>
-          <Format Name="ABTABLK" ></Format>
         </TileSet>
-        <TileSet Id="TileSets.L7" >
+        <TileSet Id="TileSets.L7">
+          <Format Name="ABTABLK">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.LEVEL7.BLK</AssetRef>
-          <Format Name="ABTABLK" ></Format>
         </TileSet>
-        <TileSet Id="TileSets.L8" >
+        <TileSet Id="TileSets.L8">
+          <Format Name="ABTABLK">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.LEVEL8.BLK</AssetRef>
-          <Format Name="ABTABLK" ></Format>
         </TileSet>
-        <TileSet Id="TileSets.LD" >
+        <TileSet Id="TileSets.LD">
+          <Format Name="ABTABLK">
+            <Parameters />
+          </Format>
           <AssetRef>Assets.LEVELD.BLK</AssetRef>
-          <Format Name="ABTABLK" ></Format>
         </TileSet>
       </Items>
     </TileSets>
     <Levels>
       <Items>
-        <Level Id="CRASH LANDING SITE" >
+        <Level Id="CRASH LANDING SITE">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
+          <PropertySetRef>Props.Level1</PropertySetRef>
           <AssetRef>Assets.MAP.01</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L1</TileSetRef>
-          <PropertySetRef>Props.Level1</PropertySetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L1</TileSetRef>
         </Level>
-        <Level Id="CIVILIAN ZONE 1" >
-          <AssetRef>Assets.MAP.02</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L4</TileSetRef>
+        <Level Id="CIVILIAN ZONE 1">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <PropertySetRef>Props.Default</PropertySetRef>
+          <AssetRef>Assets.MAP.02</AssetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L4</TileSetRef>
         </Level>
-        <Level Id="CIVILIAN ZONE 2" >
+        <Level Id="CIVILIAN ZONE 2">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.03</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L4</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L4</TileSetRef>
         </Level>
-        <Level Id="CIVILIAN ZONE 3" >
+        <Level Id="CIVILIAN ZONE 3">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.04</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L4</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L4</TileSetRef>
         </Level>
-        <Level Id="CIVILIAN ZONE 4" >
+        <Level Id="CIVILIAN ZONE 4">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.05</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L4</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L4</TileSetRef>
         </Level>
-        <Level Id="OUTDOOR SECTOR 2" >
+        <Level Id="OUTDOOR SECTOR 2">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
+          <PropertySetRef>Props.Level1</PropertySetRef>
           <AssetRef>Assets.MAP.06</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L1</TileSetRef>
-          <PropertySetRef>Props.Level1</PropertySetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L1</TileSetRef>
         </Level>
-        <Level Id="STORES LEVEL 1" >
+        <Level Id="STORES LEVEL 1">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.07</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
-
             <SpriteSetRef>SpriteSets.ALIEN_A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_B</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_C</SpriteSetRef>
@@ -1131,55 +1223,67 @@
             <SpriteSetRef>SpriteSets.ALIEN_J</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
-
-
           </SpriteSetRefs>
+          <TileSetRef>TileSets.LD</TileSetRef>
         </Level>
-        <Level Id="STORES LEVEL 2" >
+        <Level Id="STORES LEVEL 2">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.08</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.LD</TileSetRef>
         </Level>
-        <Level Id="STORES SECTOR 3" >
+        <Level Id="STORES SECTOR 3">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.09</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.LD</TileSetRef>
         </Level>
-        <Level Id="STORES SECTOR 4" >
+        <Level Id="STORES SECTOR 4">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.10</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.LD</TileSetRef>
         </Level>
-        <Level Id="OUTDOOR SECTOR 3" >
-          <AssetRef>Assets.MAP.11</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L1</TileSetRef>
+        <Level Id="OUTDOOR SECTOR 3">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <PropertySetRef>Props.Level1</PropertySetRef>
+          <AssetRef>Assets.MAP.11</AssetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L1</TileSetRef>
         </Level>
-        <Level Id="MILITARY SECTOR 1" >
+        <Level Id="MILITARY SECTOR 1">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.12</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L7</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
-
             <SpriteSetRef>SpriteSets.ALIEN_A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_B</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_C</SpriteSetRef>
@@ -1191,46 +1295,55 @@
             <SpriteSetRef>SpriteSets.ALIEN_J</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
-
-
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L7</TileSetRef>
         </Level>
-        <Level Id="MILITARY SECTOR 2" >
+        <Level Id="MILITARY SECTOR 2">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.13</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L7</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L7</TileSetRef>
         </Level>
-        <Level Id="MILITARY SECTOR 3" >
+        <Level Id="MILITARY SECTOR 3">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.14</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L7</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L7</TileSetRef>
         </Level>
-        <Level Id="MILITARY SECTOR 4" >
+        <Level Id="MILITARY SECTOR 4">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.15</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L7</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L7</TileSetRef>
         </Level>
-        <Level Id="SECURITY ZONE 1" >
+        <Level Id="SECURITY ZONE 1">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.16</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L5</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR5B</SpriteSetRef>
             <SpriteSetRef>SpriteSets.RESIDENT</SpriteSetRef>
-
             <SpriteSetRef>SpriteSets.ALIEN_A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_B</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_C</SpriteSetRef>
@@ -1242,56 +1355,67 @@
             <SpriteSetRef>SpriteSets.ALIEN_J</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
-
-
-
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L5</TileSetRef>
         </Level>
-        <Level Id="SECURITY ZONE 2" >
+        <Level Id="SECURITY ZONE 2">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.17</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L5</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR5B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L5</TileSetRef>
         </Level>
-        <Level Id="SECURITY ZONE 3" >
+        <Level Id="SECURITY ZONE 3">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.18</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L5</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR5B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L5</TileSetRef>
         </Level>
-        <Level Id="SECURITY ZONE 4" >
+        <Level Id="SECURITY ZONE 4">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.19</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L5</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR5B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L5</TileSetRef>
         </Level>
-        <Level Id="COLONY GROUND SECTOR 3" >
+        <Level Id="COLONY GROUND SECTOR 3">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
+          <PropertySetRef>Props.Level1</PropertySetRef>
           <AssetRef>Assets.MAP.20</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L1</TileSetRef>
-          <PropertySetRef>Props.Level1</PropertySetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L1</TileSetRef>
         </Level>
-        <Level Id="SCIENCE SECTOR 1" >
+        <Level Id="SCIENCE SECTOR 1">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.21</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L6</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
-
             <SpriteSetRef>SpriteSets.ALIEN_A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_B</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_C</SpriteSetRef>
@@ -1303,56 +1427,67 @@
             <SpriteSetRef>SpriteSets.ALIEN_J</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
-
-
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L6</TileSetRef>
         </Level>
-        <Level Id="SCIENCE SECTOR 2" >
+        <Level Id="SCIENCE SECTOR 2">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.22</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L6</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L6</TileSetRef>
         </Level>
-        <Level Id="SCIENCE SECTOR 3" >
+        <Level Id="SCIENCE SECTOR 3">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.23</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L6</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L6</TileSetRef>
         </Level>
-        <Level Id="SCIENCE SECTOR 4" >
+        <Level Id="SCIENCE SECTOR 4">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.24</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L6</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L6</TileSetRef>
         </Level>
-        <Level Id="COLONY GROUND SECTOR 4" >
-          <AssetRef>Assets.MAP.25</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L1</TileSetRef>
+        <Level Id="COLONY GROUND SECTOR 4">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <PropertySetRef>Props.Level1</PropertySetRef>
+          <AssetRef>Assets.MAP.25</AssetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L1</TileSetRef>
         </Level>
-        <Level Id="ENGINEERING SECTOR 1" >
+        <Level Id="ENGINEERING SECTOR 1">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.26</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
-
-
             <SpriteSetRef>SpriteSets.ALIEN_A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_B</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_C</SpriteSetRef>
@@ -1364,189 +1499,252 @@
             <SpriteSetRef>SpriteSets.ALIEN_J</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
-
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L3</TileSetRef>
         </Level>
-        <Level Id="ENGINEERING SECTOR 2" >
+        <Level Id="ENGINEERING SECTOR 2">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.27</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L3</TileSetRef>
         </Level>
-        <Level Id="ENGINEERING SECTOR 3" >
+        <Level Id="ENGINEERING SECTOR 3">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.28</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L3</TileSetRef>
         </Level>
-        <Level Id="ENGINEERING SECTOR 4" >
+        <Level Id="ENGINEERING SECTOR 4">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.29</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L3</TileSetRef>
         </Level>
-        <Level Id="CORRIDOR ZONE 1" >
+        <Level Id="CORRIDOR ZONE 1">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.30</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L4</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L4</TileSetRef>
         </Level>
-        <Level Id="CORRIDOR 2" >
+        <Level Id="CORRIDOR 2">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.31</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L4</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L4</TileSetRef>
         </Level>
-        <Level Id="CORRIDOR 3" >
+        <Level Id="CORRIDOR 3">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.32</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.LD</TileSetRef>
         </Level>
-        <Level Id="CORRIDOR 4" >
+        <Level Id="CORRIDOR 4">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.33</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L3</TileSetRef>
         </Level>
-        <Level Id="CORRIDOR 5" >
+        <Level Id="CORRIDOR 5">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.34</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.LD</TileSetRef>
         </Level>
-        <Level Id="CORRIDOR ZONE 6" >
+        <Level Id="CORRIDOR ZONE 6">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.35</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.LD</TileSetRef>
         </Level>
-        <Level Id="CORRIDOR ZONE 7" >
+        <Level Id="CORRIDOR ZONE 7">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.36</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L4</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L4</TileSetRef>
         </Level>
-        <Level Id="CORRIDOR ZONE 8" >
+        <Level Id="CORRIDOR ZONE 8">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.37</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.LD</TileSetRef>
         </Level>
-        <Level Id="CORRIDOR ZONE 9" >
+        <Level Id="CORRIDOR ZONE 9">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.38</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.LD</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.LD</TileSetRef>
         </Level>
-        <Level Id="CORRIDOR ZONE 10" >
+        <Level Id="CORRIDOR ZONE 10">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.39</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L3</TileSetRef>
         </Level>
-        <Level Id="CORRIDOR ZONE 11" >
+        <Level Id="CORRIDOR ZONE 11">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.40</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L4</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L4</TileSetRef>
         </Level>
-        <Level Id="CORRIDOR ZONE 12" >
+        <Level Id="CORRIDOR ZONE 12">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.41</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L3</TileSetRef>
         </Level>
-        <Level Id="CORRIDOR ZONE 13" >
+        <Level Id="CORRIDOR ZONE 13">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.42</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L3</TileSetRef>
         </Level>
-        <Level Id="CORRIDOR ZONE 14" >
+        <Level Id="CORRIDOR ZONE 14">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.43</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L7</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L7</TileSetRef>
         </Level>
-        <Level Id="CORRIDOR 15" >
+        <Level Id="CORRIDOR 15">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.44</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L7</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L7</TileSetRef>
         </Level>
-        <Level Id="CORRIDOR 16" >
+        <Level Id="CORRIDOR 16">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.45</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
+          <SpriteSetRefs />
           <TileSetRef>TileSets.L3</TileSetRef>
         </Level>
-        <Level Id="CORRIDOR 17" >
+        <Level Id="CORRIDOR 17">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.46</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L3</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L3</TileSetRef>
         </Level>
-        <Level Id="MAIN TOWER LEVEL 1" >
+        <Level Id="MAIN TOWER LEVEL 1">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.47</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L8</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
@@ -1562,82 +1760,105 @@
             <SpriteSetRef>SpriteSets.ALIEN_J</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_K</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_X</SpriteSetRef>
-
-
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L8</TileSetRef>
         </Level>
-        <Level Id="MAIN TOWER LEVEL 2" >
+        <Level Id="MAIN TOWER LEVEL 2">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.48</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L8</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L8</TileSetRef>
         </Level>
-        <Level Id="MAIN TOWER LEVEL 3" >
+        <Level Id="MAIN TOWER LEVEL 3">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.49</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L8</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L8</TileSetRef>
         </Level>
-        <Level Id="MAIN TOWER LEVEL 4" >
+        <Level Id="MAIN TOWER LEVEL 4">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.50</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L8</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L8</TileSetRef>
         </Level>
-        <Level Id="MAIN TOWER LEVEL 5" >
+        <Level Id="MAIN TOWER LEVEL 5">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.51</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L8</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L8</TileSetRef>
         </Level>
-        <Level Id="TOWER LEVEL 6" >
+        <Level Id="TOWER LEVEL 6">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.52</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L8</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L8</TileSetRef>
         </Level>
-        <Level Id="TOWER LEVEL 7" >
+        <Level Id="TOWER LEVEL 7">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.53</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L8</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L8</TileSetRef>
         </Level>
-        <Level Id="Mission One(\?\?\?)" >
+        <Level Id="Mission One(\?\?\?)">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <AssetRef>Assets.MAP.54</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L6</TileSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L6</TileSetRef>
         </Level>
-        <Level Id="OUTER COLONY SECTOR 5" >
-          <AssetRef>Assets.MAP.55</AssetRef>
-          <Format Name="ABTA_MAP" ></Format>
-          <TileSetRef>TileSets.L1</TileSetRef>
+        <Level Id="OUTER COLONY SECTOR 5">
+          <Format Name="ABTA_MAP">
+            <Parameters />
+          </Format>
+          <PaletteRefs />
           <PropertySetRef>Props.Level1</PropertySetRef>
+          <AssetRef>Assets.MAP.55</AssetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
           </SpriteSetRefs>
+          <TileSetRef>TileSets.L1</TileSetRef>
         </Level>
       </Items>
     </Levels>
@@ -1645,1067 +1866,1168 @@
       <Items>
         <PropertySet Id="Props.Level1">
           <PropertyDefs>
-            <PropertyDef Id="0" Visibility="false" Name="Air" >
-              <Description>No collision, no action</Description>
+            <PropertyDef Id="0" Name="Air" Visibility="false">
               <Color>#7F000000</Color>
+              <Description>No collision, no action</Description>
+              <Presentation>
+                <Color>#7F000000</Color>
+                <Visibility>false</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="1" Visibility="true" Name="Heavy turret">
+            <PropertyDef Id="1" Name="Heavy turret" Visibility="true">
+              <Color>#50FFFF00</Color>
               <Description>Left up corner of turrent, insta-kill when when player collides</Description>
-              <Color>#50FFFF00</Color>
+              <Presentation>
+                <Color>#50FFFF00</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="2" Visibility="true" Name="Lizard">
+            <PropertyDef Id="2" Name="Lizard" Visibility="true">
+              <Color>#50FFFF00</Color>
               <Description>Almost harmless, killed when collides with player (which takes very little damage)</Description>
-              <Color>#50FFFF00</Color>
+              <Presentation>
+                <Color>#50FFFF00</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="3" Visibility="true" Name="Unknown 3">
-              <Description>Unknown action</Description>
+            <PropertyDef Id="3" Name="Unknown 3" Visibility="true">
               <Color>#C0000000</Color>
+              <Description>Unknown action</Description>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="4" Visibility="true" Name="Animated sprite">
-              <Description>Left up corner of sprite</Description>
+            <PropertyDef Id="4" Name="Animated sprite" Visibility="true">
               <Color>#50AAAAAA</Color>
+              <Description>Left up corner of sprite</Description>
+              <Presentation>
+                <Color>#50AAAAAA</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="5" Visibility="true" Name="Unknown 5">
-              <Description>Unknown action</Description>
+            <PropertyDef Id="5" Name="Unknown 5" Visibility="true">
               <Color>#C0000000</Color>
-            </PropertyDef>
-            <PropertyDef Id="6" Visibility="true" Name="Unknown 6">
               <Description>Unknown action</Description>
-              <Color>#C0000000</Color>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="7" Visibility="true" Name="Unknown 7">
+            <PropertyDef Id="6" Name="Unknown 6" Visibility="true">
+              <Color>#C0000000</Color>
               <Description>Unknown action</Description>
-              <Color>#C0000000</Color>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="8" Visibility="true" Name="Unknown 8">
+            <PropertyDef Id="7" Name="Unknown 7" Visibility="true">
+              <Color>#C0000000</Color>
               <Description>Unknown action</Description>
-              <Color>#C0000000</Color>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="9" Visibility="true" Name="Unknown 9">
+            <PropertyDef Id="8" Name="Unknown 8" Visibility="true">
+              <Color>#C0000000</Color>
               <Description>Unknown action</Description>
-              <Color>#C0000000</Color>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="10" Visibility="true" Name="Unknown 10">
+            <PropertyDef Id="9" Name="Unknown 9" Visibility="true">
+              <Color>#C0000000</Color>
               <Description>Unknown action</Description>
-              <Color>#C0000000</Color>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="11" Visibility="true" Name="Unknown 11">
+            <PropertyDef Id="10" Name="Unknown 10" Visibility="true">
+              <Color>#C0000000</Color>
               <Description>Unknown action</Description>
-              <Color>#C0000000</Color>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="12" Visibility="true" Name="Unknown 12">
+            <PropertyDef Id="11" Name="Unknown 11" Visibility="true">
+              <Color>#C0000000</Color>
               <Description>Unknown action</Description>
-              <Color>#C0000000</Color>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="13" Visibility="true" Name="Unknown 13">
+            <PropertyDef Id="12" Name="Unknown 12" Visibility="true">
+              <Color>#C0000000</Color>
               <Description>Unknown action</Description>
-              <Color>#C0000000</Color>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="14" Visibility="true" Name="Working generator">
+            <PropertyDef Id="13" Name="Unknown 13" Visibility="true">
+              <Color>#C0000000</Color>
+              <Description>Unknown action</Description>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
+            </PropertyDef>
+            <PropertyDef Id="14" Name="Working generator" Visibility="true">
+              <Color>#2030FFFF</Color>
               <Description>Top left corner of working generator animation</Description>
-              <Color>#2030FFFF</Color>
+              <Presentation>
+                <Color>#2030FFFF</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="15" Visibility="true" Name="Unknown 15">
-              <Description>Unknown action</Description>
+            <PropertyDef Id="15" Name="Unknown 15" Visibility="true">
               <Color>#C0000000</Color>
+              <Description>Unknown action</Description>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="16" Visibility="true" Name="Down left obstacle (for all)">
+            <PropertyDef Id="16" Name="Down left obstacle (for all)" Visibility="true">
+              <Color>#20FF0000</Color>
               <Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
-              <Color>#20FF0000</Color>
+              <Presentation>
+                <Color>#20FF0000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="17" Visibility="true" Name="Top left obstacle (for all)">
+            <PropertyDef Id="17" Name="Top left obstacle (for all)" Visibility="true">
+              <Color>#20FF0000</Color>
               <Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
-              <Color>#20FF0000</Color>
+              <Presentation>
+                <Color>#20FF0000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="18" Visibility="true" Name="Up right obstacle (for all)">
+            <PropertyDef Id="18" Name="Up right obstacle (for all)" Visibility="true">
+              <Color>#20FF0000</Color>
               <Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
-              <Color>#20FF0000</Color>
+              <Presentation>
+                <Color>#20FF0000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="19" Visibility="true" Name="Down right obstacle (for all)">
+            <PropertyDef Id="19" Name="Down right obstacle (for all)" Visibility="true">
+              <Color>#20FF0000</Color>
               <Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
-              <Color>#20FF0000</Color>
+              <Presentation>
+                <Color>#20FF0000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="20" Visibility="true" Name="Unknown 20">
-              <Description>Unknown action</Description>
+            <PropertyDef Id="20" Name="Unknown 20" Visibility="true">
               <Color>#C0000000</Color>
-            </PropertyDef>
-            <PropertyDef Id="21" Visibility="true" Name="Unknown 21">
               <Description>Unknown action</Description>
-              <Color>#C0000000</Color>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="22" Visibility="true" Name="Smart card 1">
+            <PropertyDef Id="21" Name="Unknown 21" Visibility="true">
+              <Color>#C0000000</Color>
+              <Description>Unknown action</Description>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
+            </PropertyDef>
+            <PropertyDef Id="22" Name="Smart card 1" Visibility="true">
+              <Color>#800000FF</Color>
               <Description>This will show message from smart card 1</Description>
-              <Color>#800000FF</Color>
+              <Presentation>
+                <Color>#800000FF</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="23" Visibility="true" Name="Smart card 2">
+            <PropertyDef Id="23" Name="Smart card 2" Visibility="true">
+              <Color>#800000FF</Color>
               <Description>This will show message from smart card 2</Description>
-              <Color>#800000FF</Color>
+              <Presentation>
+                <Color>#800000FF</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="24" Visibility="true" Name="Smart card 3">
+            <PropertyDef Id="24" Name="Smart card 3" Visibility="true">
+              <Color>#800000FF</Color>
               <Description>This will show message from smart card 3</Description>
-              <Color>#800000FF</Color>
+              <Presentation>
+                <Color>#800000FF</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="25" Visibility="true" Name="Unknown 25">
-              <Description>Unknown action</Description>
+            <PropertyDef Id="25" Name="Unknown 25" Visibility="true">
               <Color>#C0000000</Color>
-            </PropertyDef>
-            <PropertyDef Id="26" Visibility="true" Name="Unknown 26">
               <Description>Unknown action</Description>
-              <Color>#C0000000</Color>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="27" Visibility="true" Name="Unknown 27">
+            <PropertyDef Id="26" Name="Unknown 26" Visibility="true">
+              <Color>#C0000000</Color>
               <Description>Unknown action</Description>
-              <Color>#C0000000</Color>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="28" Visibility="true" Name="Special door 1">
+            <PropertyDef Id="27" Name="Unknown 27" Visibility="true">
+              <Color>#C0000000</Color>
+              <Description>Unknown action</Description>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
+            </PropertyDef>
+            <PropertyDef Id="28" Name="Special door 1" Visibility="true">
+              <Color>#2030FF00</Color>
               <Description>Door opened with special key card 1</Description>
-              <Color>#2030FF00</Color>
+              <Presentation>
+                <Color>#2030FF00</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="29" Visibility="true" Name="Special door 2">
+            <PropertyDef Id="29" Name="Special door 2" Visibility="true">
+              <Color>#2030FF00</Color>
               <Description>Door opened with special key card 2</Description>
-              <Color>#2030FF00</Color>
+              <Presentation>
+                <Color>#2030FF00</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="30" Visibility="true" Name="Unknown 30">
-              <Description>Unknown action</Description>
+            <PropertyDef Id="30" Name="Unknown 30" Visibility="true">
               <Color>#C0000000</Color>
+              <Description>Unknown action</Description>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="31" Visibility="true" Name="Local teleport (start)">
-              <Description>Teleports player from this location</Description>
+            <PropertyDef Id="31" Name="Local teleport (start)" Visibility="true">
               <Color>#200FF000</Color>
+              <Description>Teleports player from this location</Description>
+              <Presentation>
+                <Color>#200FF000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="32" Visibility="true" Name="Unknown 32">
-              <Description>Unknown action</Description>
+            <PropertyDef Id="32" Name="Unknown 32" Visibility="true">
               <Color>#C0000000</Color>
+              <Description>Unknown action</Description>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="33" Visibility="true" Name="Special key card 1">
+            <PropertyDef Id="33" Name="Special key card 1" Visibility="true">
+              <Color>#503000FF</Color>
               <Description>key card opening special door 1</Description>
-              <Color>#503000FF</Color>
+              <Presentation>
+                <Color>#503000FF</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="34" Visibility="true" Name="Special key card 2">
+            <PropertyDef Id="34" Name="Special key card 2" Visibility="true">
+              <Color>#503000FF</Color>
               <Description>key card opening special door 2</Description>
-              <Color>#503000FF</Color>
+              <Presentation>
+                <Color>#503000FF</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="35" Visibility="true" Name="Unknown 35">
-              <Description>Unknown action</Description>
+            <PropertyDef Id="35" Name="Unknown 35" Visibility="true">
               <Color>#C0000000</Color>
+              <Description>Unknown action</Description>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="36" Visibility="true" Name="Local teleport (end)">
+            <PropertyDef Id="36" Name="Local teleport (end)" Visibility="true">
+              <Color>#20FF00FF</Color>
               <Description>Teleports player to this location, the one that is furthest</Description>
-              <Color>#20FF00FF</Color>
+              <Presentation>
+                <Color>#20FF00FF</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="37" Visibility="true" Name="Exit 1">
-              <Description>Collision, Finishes level</Description>
+            <PropertyDef Id="37" Name="Exit 1" Visibility="true">
               <Color>#500FF000</Color>
-            </PropertyDef>
-            <PropertyDef Id="38" Visibility="true" Name="Exit 2">
               <Description>Collision, Finishes level</Description>
+              <Presentation>
+                <Color>#500FF000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
+            </PropertyDef>
+            <PropertyDef Id="38" Name="Exit 2" Visibility="true">
               <Color>#500FF000</Color>
+              <Description>Collision, Finishes level</Description>
+              <Presentation>
+                <Color>#500FF000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="39" Visibility="true" Name="Unknown 39">
-              <Description>Unknown action</Description>
+            <PropertyDef Id="39" Name="Unknown 39" Visibility="true">
               <Color>#C0000000</Color>
-            </PropertyDef>
-            <PropertyDef Id="40" Visibility="true" Name="Unknown 40">
               <Description>Unknown action</Description>
-              <Color>#C0000000</Color>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="41" Visibility="true" Name="Unknown 41">
+            <PropertyDef Id="40" Name="Unknown 40" Visibility="true">
+              <Color>#C0000000</Color>
               <Description>Unknown action</Description>
-              <Color>#C0000000</Color>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="42" Visibility="true" Name="Unknown 42">
+            <PropertyDef Id="41" Name="Unknown 41" Visibility="true">
+              <Color>#C0000000</Color>
               <Description>Unknown action</Description>
-              <Color>#C0000000</Color>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="43" Visibility="true" Name="Unknown 43">
+            <PropertyDef Id="42" Name="Unknown 42" Visibility="true">
+              <Color>#C0000000</Color>
               <Description>Unknown action</Description>
-              <Color>#C0000000</Color>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="44" Visibility="true" Name="Unknown 44">
+            <PropertyDef Id="43" Name="Unknown 43" Visibility="true">
+              <Color>#C0000000</Color>
               <Description>Unknown action</Description>
-              <Color>#C0000000</Color>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="45" Visibility="true" Name="Entrance 1">
-              <Description>No collision, spawns player here</Description>
+            <PropertyDef Id="44" Name="Unknown 44" Visibility="true">
+              <Color>#C0000000</Color>
+              <Description>Unknown action</Description>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
+            </PropertyDef>
+            <PropertyDef Id="45" Name="Entrance 1" Visibility="true">
               <Color>#7FFF00FF</Color>
-            </PropertyDef>
-            <PropertyDef Id="46" Visibility="true" Name="Entrance 2">
               <Description>No collision, spawns player here</Description>
-              <Color>#7FFF00FF</Color>
+              <Presentation>
+                <Color>#7FFF00FF</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="47" Visibility="true" Name="Land mine">
-              <Description>Explodes on stepping by player</Description>
+            <PropertyDef Id="46" Name="Entrance 2" Visibility="true">
+              <Color>#7FFF00FF</Color>
+              <Description>No collision, spawns player here</Description>
+              <Presentation>
+                <Color>#7FFF00FF</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
+            </PropertyDef>
+            <PropertyDef Id="47" Name="Land mine" Visibility="true">
               <Color>#50FFFF00</Color>
+              <Description>Explodes on stepping by player</Description>
+              <Presentation>
+                <Color>#50FFFF00</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="48" Visibility="true" Name="Unknown 48">
-              <Description>Unknown action</Description>
+            <PropertyDef Id="48" Name="Unknown 48" Visibility="true">
               <Color>#C0000000</Color>
-            </PropertyDef>
-            <PropertyDef Id="49" Visibility="true" Name="Unknown 49">
               <Description>Unknown action</Description>
-              <Color>#C0000000</Color>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="50" Visibility="true" Name="Unknown 50">
+            <PropertyDef Id="49" Name="Unknown 49" Visibility="true">
+              <Color>#C0000000</Color>
               <Description>Unknown action</Description>
-              <Color>#C0000000</Color>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="51" Visibility="true" Name="Unknown 51">
+            <PropertyDef Id="50" Name="Unknown 50" Visibility="true">
+              <Color>#C0000000</Color>
               <Description>Unknown action</Description>
-              <Color>#C0000000</Color>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="52" Visibility="true" Name="Unknown 52">
+            <PropertyDef Id="51" Name="Unknown 51" Visibility="true">
+              <Color>#C0000000</Color>
               <Description>Unknown action</Description>
-              <Color>#C0000000</Color>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="53" Visibility="true" Name="Unknown 53">
+            <PropertyDef Id="52" Name="Unknown 52" Visibility="true">
+              <Color>#C0000000</Color>
               <Description>Unknown action</Description>
-              <Color>#C0000000</Color>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="54" Visibility="true" Name="Exit 3">
-              <Description>Collision, Finishes level</Description>
+            <PropertyDef Id="53" Name="Unknown 53" Visibility="true">
+              <Color>#C0000000</Color>
+              <Description>Unknown action</Description>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
+            </PropertyDef>
+            <PropertyDef Id="54" Name="Exit 3" Visibility="true">
               <Color>#500FF000</Color>
+              <Description>Collision, Finishes level</Description>
+              <Presentation>
+                <Color>#500FF000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="55" Visibility="true" Name="Item">
-              <Description>Pickable item</Description>
+            <PropertyDef Id="55" Name="Item" Visibility="true">
               <Color>#500000FF</Color>
+              <Description>Pickable item</Description>
+              <Presentation>
+                <Color>#500000FF</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="56" Visibility="true" Name="Entrance 3">
-              <Description>No collision, spawns player here</Description>
+            <PropertyDef Id="56" Name="Entrance 3" Visibility="true">
               <Color>#7FFF00FF</Color>
+              <Description>No collision, spawns player here</Description>
+              <Presentation>
+                <Color>#7FFF00FF</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="57" Visibility="true" Name="Obstacle(for enemies only)">
-              <Description>Player can walk trough it, movable enemies can't</Description>
+            <PropertyDef Id="57" Name="Obstacle(for enemies only)" Visibility="true">
               <Color>#20FF00FF</Color>
+              <Description>Player can walk trough it, movable enemies can't</Description>
+              <Presentation>
+                <Color>#20FF00FF</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="58" Visibility="true" Name="Generator (activate switch)">
-              <Description>Activates generator when player stomps on it</Description>
+            <PropertyDef Id="58" Name="Generator (activate switch)" Visibility="true">
               <Color>#2030FFFF</Color>
+              <Description>Activates generator when player stomps on it</Description>
+              <Presentation>
+                <Color>#2030FFFF</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="59" Visibility="true" Name="Unknown 59">
-              <Description>Unknown action</Description>
+            <PropertyDef Id="59" Name="Unknown 59" Visibility="true">
               <Color>#C0000000</Color>
+              <Description>Unknown action</Description>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="60" Visibility="true" Name="Obstacle(except projectiles)">
-              <Description>Collision, but weapon projectile can penetrate</Description>
+            <PropertyDef Id="60" Name="Obstacle(except projectiles)" Visibility="true">
               <Color>#32F00000</Color>
+              <Description>Collision, but weapon projectile can penetrate</Description>
+              <Presentation>
+                <Color>#32F00000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="61" Visibility="true" Name="Unknown 61">
-              <Description>Unknown action</Description>
+            <PropertyDef Id="61" Name="Unknown 61" Visibility="true">
               <Color>#C0000000</Color>
+              <Description>Unknown action</Description>
+              <Presentation>
+                <Color>#C0000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="62" Visibility="true" Name="Door">
-              <Description>Door with normal key card required</Description>
+            <PropertyDef Id="62" Name="Door" Visibility="true">
               <Color>#320FF000</Color>
+              <Description>Door with normal key card required</Description>
+              <Presentation>
+                <Color>#320FF000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="63" Visibility="true" Name="Obstacle(for all)">
-              <Description>Collision, nothing can penetrate</Description>
+            <PropertyDef Id="63" Name="Obstacle(for all)" Visibility="true">
               <Color>#50F00000</Color>
+              <Description>Collision, nothing can penetrate</Description>
+              <Presentation>
+                <Color>#50F00000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
           </PropertyDefs>
         </PropertySet>
         <PropertySet Id="Props.Default">
           <PropertyDefs>
-            <PropertyDef Id="0" Visibility="false" Name="Air" >
+            <PropertyDef Id="0" Name="Air" Visibility="false">
+              <Color>#00000000</Color>
               <Description>No collision, no action</Description>
-              <Color>#00000000</Color>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>false</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="1" Visibility="true" Name="Monster (Type 1)">
+            <PropertyDef Id="1" Name="Monster (Type 1)" Visibility="true">
+              <Color>#A0FF0000</Color>
               <Description>Start position of monster type 1</Description>
-              <Color>#A0FF0000</Color>
+              <Presentation>
+                <Color>#A0FF0000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="2" Visibility="true" Name="Monster (Type 2)">
+            <PropertyDef Id="2" Name="Monster (Type 2)" Visibility="true">
+              <Color>#A0FF0000</Color>
               <Description>Start position of monster type 2</Description>
-              <Color>#A0FF0000</Color>
+              <Presentation>
+                <Color>#A0FF0000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="3" Visibility="true" Name="Monster (Type 3)">
+            <PropertyDef Id="3" Name="Monster (Type 3)" Visibility="true">
+              <Color>#A0FF0000</Color>
               <Description>Start position of monster type 3</Description>
-              <Color>#A0FF0000</Color>
+              <Presentation>
+                <Color>#A0FF0000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="4" Visibility="true" Name="Monster (Type 4)">
+            <PropertyDef Id="4" Name="Monster (Type 4)" Visibility="true">
+              <Color>#A0FF0000</Color>
               <Description>Start position of monster type 4</Description>
-              <Color>#A0FF0000</Color>
+              <Presentation>
+                <Color>#A0FF0000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="5" Visibility="true" Name="Unknown 5">
-              <Description>Unknown action</Description>
+            <PropertyDef Id="5" Name="Unknown 5" Visibility="true">
               <Color>#00000000</Color>
-            </PropertyDef>
-            <PropertyDef Id="6" Visibility="true" Name="Unknown 6">
               <Description>Unknown action</Description>
-              <Color>#00000000</Color>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="7" Visibility="true" Name="One way gate (Up)">
+            <PropertyDef Id="6" Name="Unknown 6" Visibility="true">
+              <Color>#00000000</Color>
+              <Description>Unknown action</Description>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
+            </PropertyDef>
+            <PropertyDef Id="7" Name="One way gate (Up)" Visibility="true">
+              <Color>#80FFFF00</Color>
               <Description>Gate that allows player to pass it only in up direction, other way insta-kills player</Description>
-              <Color>#80FFFF00</Color>
+              <Presentation>
+                <Color>#80FFFF00</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="8" Visibility="true" Name="One way gate (Down)">
+            <PropertyDef Id="8" Name="One way gate (Down)" Visibility="true">
+              <Color>#80FFFF00</Color>
               <Description>Gate that allows player to pass it only in down direction, other way insta-kills player</Description>
+              <Presentation>
+                <Color>#80FFFF00</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
+            </PropertyDef>
+            <PropertyDef Id="9" Name="Unknown 9" Visibility="true">
+              <Color>#00000000</Color>
+              <Description>Unknown action</Description>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
+            </PropertyDef>
+            <PropertyDef Id="10" Name="Unknown 10" Visibility="true">
+              <Color>#00000000</Color>
+              <Description>Unknown action</Description>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
+            </PropertyDef>
+            <PropertyDef Id="11" Name="Unknown 11" Visibility="true">
+              <Color>#00000000</Color>
+              <Description>Unknown action</Description>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
+            </PropertyDef>
+            <PropertyDef Id="12" Name="One way gate (Right)" Visibility="true">
               <Color>#80FFFF00</Color>
-            </PropertyDef>
-            <PropertyDef Id="9" Visibility="true" Name="Unknown 9">
-              <Description>Unknown action</Description>
-              <Color>#00000000</Color>
-            </PropertyDef>
-            <PropertyDef Id="10" Visibility="true" Name="Unknown 10">
-              <Description>Unknown action</Description>
-              <Color>#00000000</Color>
-            </PropertyDef>
-            <PropertyDef Id="11" Visibility="true" Name="Unknown 11">
-              <Description>Unknown action</Description>
-              <Color>#00000000</Color>
-            </PropertyDef>
-            <PropertyDef Id="12" Visibility="true" Name="One way gate (Right)">
               <Description>Gate that allows player to pass it only in right direction, other way insta-kills player</Description>
-              <Color>#80FFFF00</Color>
+              <Presentation>
+                <Color>#80FFFF00</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="13" Visibility="true" Name="One way gate (Left)">
+            <PropertyDef Id="13" Name="One way gate (Left)" Visibility="true">
+              <Color>#80FFFF00</Color>
               <Description>Gate that allows player to pass it only in left direction, other way insta-kills player</Description>
-              <Color>#80FFFF00</Color>
+              <Presentation>
+                <Color>#80FFFF00</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="14" Visibility="true" Name="Directed gun (Right)">
+            <PropertyDef Id="14" Name="Directed gun (Right)" Visibility="true">
+              <Color>#A0FF0000</Color>
               <Description>Gun directed to right, deals great damage to player</Description>
-              <Color>#A0FF0000</Color>
+              <Presentation>
+                <Color>#A0FF0000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="15" Visibility="true" Name="Directed gun (Up)">
+            <PropertyDef Id="15" Name="Directed gun (Up)" Visibility="true">
+              <Color>#A0FF0000</Color>
               <Description>Gun directed to up, deals great damage to player</Description>
-              <Color>#A0FF0000</Color>
+              <Presentation>
+                <Color>#A0FF0000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="16" Visibility="true" Name="Down left obstacle (for all)">
+            <PropertyDef Id="16" Name="Down left obstacle (for all)" Visibility="true">
+              <Color>#20FFFF00</Color>
               <Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
-              <Color>#20FFFF00</Color>
+              <Presentation>
+                <Color>#20FFFF00</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="17" Visibility="true" Name="Top left obstacle (for all)">
+            <PropertyDef Id="17" Name="Top left obstacle (for all)" Visibility="true">
+              <Color>#20FFFF00</Color>
               <Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
-              <Color>#20FFFF00</Color>
+              <Presentation>
+                <Color>#20FFFF00</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="18" Visibility="true" Name="Up right obstacle (for all)">
+            <PropertyDef Id="18" Name="Up right obstacle (for all)" Visibility="true">
+              <Color>#20FFFF00</Color>
               <Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
-              <Color>#20FFFF00</Color>
+              <Presentation>
+                <Color>#20FFFF00</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="19" Visibility="true" Name="Down right obstacle (for all)">
+            <PropertyDef Id="19" Name="Down right obstacle (for all)" Visibility="true">
+              <Color>#20FFFF00</Color>
               <Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
-              <Color>#20FFFF00</Color>
+              <Presentation>
+                <Color>#20FFFF00</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="20" Visibility="true" Name="Unknown 20">
-              <Description>Unknown action</Description>
+            <PropertyDef Id="20" Name="Unknown 20" Visibility="true">
               <Color>#00000000</Color>
-            </PropertyDef>
-            <PropertyDef Id="21" Visibility="true" Name="Unknown 21">
               <Description>Unknown action</Description>
-              <Color>#00000000</Color>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="22" Visibility="true" Name="Smart card 1">
+            <PropertyDef Id="21" Name="Unknown 21" Visibility="true">
+              <Color>#00000000</Color>
+              <Description>Unknown action</Description>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
+            </PropertyDef>
+            <PropertyDef Id="22" Name="Smart card 1" Visibility="true">
+              <Color>#800000FF</Color>
               <Description>This will show note message from smart card 1</Description>
-              <Color>#800000FF</Color>
+              <Presentation>
+                <Color>#800000FF</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="23" Visibility="true" Name="Smart card 2">
+            <PropertyDef Id="23" Name="Smart card 2" Visibility="true">
+              <Color>#800000FF</Color>
               <Description>This will show note message from smart card 2</Description>
-              <Color>#800000FF</Color>
+              <Presentation>
+                <Color>#800000FF</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="24" Visibility="true" Name="Smart card 3">
+            <PropertyDef Id="24" Name="Smart card 3" Visibility="true">
+              <Color>#800000FF</Color>
               <Description>This will show note message from smart card 3</Description>
-              <Color>#800000FF</Color>
+              <Presentation>
+                <Color>#800000FF</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="25" Visibility="true" Name="Unknown 25">
-              <Description>Unknown action</Description>
+            <PropertyDef Id="25" Name="Unknown 25" Visibility="true">
               <Color>#00000000</Color>
-            </PropertyDef>
-            <PropertyDef Id="26" Visibility="true" Name="Unknown 26">
               <Description>Unknown action</Description>
-              <Color>#00000000</Color>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="27" Visibility="true" Name="Unknown 27">
+            <PropertyDef Id="26" Name="Unknown 26" Visibility="true">
+              <Color>#00000000</Color>
               <Description>Unknown action</Description>
-              <Color>#00000000</Color>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="28" Visibility="true" Name="Unknown 28">
+            <PropertyDef Id="27" Name="Unknown 27" Visibility="true">
+              <Color>#00000000</Color>
               <Description>Unknown action</Description>
-              <Color>#00000000</Color>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="29" Visibility="true" Name="Unknown 29">
+            <PropertyDef Id="28" Name="Unknown 28" Visibility="true">
+              <Color>#00000000</Color>
               <Description>Unknown action</Description>
-              <Color>#00000000</Color>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="30" Visibility="true" Name="Unknown 30">
+            <PropertyDef Id="29" Name="Unknown 29" Visibility="true">
+              <Color>#00000000</Color>
               <Description>Unknown action</Description>
-              <Color>#00000000</Color>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="31" Visibility="true" Name="Local teleport (start)">
-              <Description>Teleports player from this location</Description>
+            <PropertyDef Id="30" Name="Unknown 30" Visibility="true">
+              <Color>#00000000</Color>
+              <Description>Unknown action</Description>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
+            </PropertyDef>
+            <PropertyDef Id="31" Name="Local teleport (start)" Visibility="true">
               <Color>#200FF000</Color>
+              <Description>Teleports player from this location</Description>
+              <Presentation>
+                <Color>#200FF000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="32" Visibility="true" Name="Monster spawner">
-              <Description>Creates a hole where monsters are comming from</Description>
+            <PropertyDef Id="32" Name="Monster spawner" Visibility="true">
               <Color>#F0FF0000</Color>
+              <Description>Creates a hole where monsters are comming from</Description>
+              <Presentation>
+                <Color>#F0FF0000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="33" Visibility="true" Name="Unknown 33">
-              <Description>Unknown action</Description>
+            <PropertyDef Id="33" Name="Unknown 33" Visibility="true">
               <Color>#00000000</Color>
-            </PropertyDef>
-            <PropertyDef Id="34" Visibility="true" Name="Unknown 34">
               <Description>Unknown action</Description>
-              <Color>#00000000</Color>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="35" Visibility="true" Name="Unknown 35">
+            <PropertyDef Id="34" Name="Unknown 34" Visibility="true">
+              <Color>#00000000</Color>
               <Description>Unknown action</Description>
-              <Color>#00000000</Color>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="36" Visibility="true" Name="Local teleport (end)">
-              <Description>Teleports player to this location, the one that is furthest</Description>
+            <PropertyDef Id="35" Name="Unknown 35" Visibility="true">
+              <Color>#00000000</Color>
+              <Description>Unknown action</Description>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
+            </PropertyDef>
+            <PropertyDef Id="36" Name="Local teleport (end)" Visibility="true">
               <Color>#40FF00FF</Color>
+              <Description>Teleports player to this location, the one that is furthest</Description>
+              <Presentation>
+                <Color>#40FF00FF</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="37" Visibility="true" Name="Exit 1">
-              <Description>Collision, Finishes level</Description>
+            <PropertyDef Id="37" Name="Exit 1" Visibility="true">
               <Color>#500FF000</Color>
-            </PropertyDef>
-            <PropertyDef Id="38" Visibility="true" Name="Exit 2">
               <Description>Collision, Finishes level</Description>
+              <Presentation>
+                <Color>#500FF000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
+            </PropertyDef>
+            <PropertyDef Id="38" Name="Exit 2" Visibility="true">
               <Color>#500FF000</Color>
+              <Description>Collision, Finishes level</Description>
+              <Presentation>
+                <Color>#500FF000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="39" Visibility="true" Name="Unknown 39">
-              <Description>Unknown action</Description>
+            <PropertyDef Id="39" Name="Unknown 39" Visibility="true">
               <Color>#00000000</Color>
-            </PropertyDef>
-            <PropertyDef Id="40" Visibility="true" Name="Unknown 40">
               <Description>Unknown action</Description>
-              <Color>#00000000</Color>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="41" Visibility="true" Name="Unknown 41">
+            <PropertyDef Id="40" Name="Unknown 40" Visibility="true">
+              <Color>#00000000</Color>
               <Description>Unknown action</Description>
-              <Color>#00000000</Color>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="42" Visibility="true" Name="Unknown 42">
+            <PropertyDef Id="41" Name="Unknown 41" Visibility="true">
+              <Color>#00000000</Color>
               <Description>Unknown action</Description>
-              <Color>#00000000</Color>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="43" Visibility="true" Name="Unknown 43">
+            <PropertyDef Id="42" Name="Unknown 42" Visibility="true">
+              <Color>#00000000</Color>
               <Description>Unknown action</Description>
-              <Color>#00000000</Color>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="44" Visibility="true" Name="Unknown 44">
+            <PropertyDef Id="43" Name="Unknown 43" Visibility="true">
+              <Color>#00000000</Color>
               <Description>Unknown action</Description>
-              <Color>#00000000</Color>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="45" Visibility="true" Name="Entrance 1">
-              <Description>No collision, spawns player here</Description>
+            <PropertyDef Id="44" Name="Unknown 44" Visibility="true">
+              <Color>#00000000</Color>
+              <Description>Unknown action</Description>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
+            </PropertyDef>
+            <PropertyDef Id="45" Name="Entrance 1" Visibility="true">
               <Color>#7FFF00FF</Color>
-            </PropertyDef>
-            <PropertyDef Id="46" Visibility="true" Name="Entrance 2">
               <Description>No collision, spawns player here</Description>
+              <Presentation>
+                <Color>#7FFF00FF</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
+            </PropertyDef>
+            <PropertyDef Id="46" Name="Entrance 2" Visibility="true">
               <Color>#7FFF00FF</Color>
+              <Description>No collision, spawns player here</Description>
+              <Presentation>
+                <Color>#7FFF00FF</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="47" Visibility="true" Name="Unknown 47">
-              <Description>Unknown action</Description>
+            <PropertyDef Id="47" Name="Unknown 47" Visibility="true">
               <Color>#00000000</Color>
-            </PropertyDef>
-            <PropertyDef Id="48" Visibility="true" Name="Unknown 48">
               <Description>Unknown action</Description>
-              <Color>#00000000</Color>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="49" Visibility="true" Name="Radioactive area">
-              <Description>Radioactive area that hurts player if standing on it</Description>
+            <PropertyDef Id="48" Name="Unknown 48" Visibility="true">
+              <Color>#00000000</Color>
+              <Description>Unknown action</Description>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
+            </PropertyDef>
+            <PropertyDef Id="49" Name="Radioactive area" Visibility="true">
               <Color>#4FFF7F00</Color>
+              <Description>Radioactive area that hurts player if standing on it</Description>
+              <Presentation>
+                <Color>#4FFF7F00</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="50" Visibility="true" Name="Wall turrent (Up)">
+            <PropertyDef Id="50" Name="Wall turrent (Up)" Visibility="true">
+              <Color>#A0FF0000</Color>
               <Description>Wall turret facing up</Description>
-              <Color>#A0FF0000</Color>
+              <Presentation>
+                <Color>#A0FF0000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="51" Visibility="true" Name="Wall turrent (Right)">
+            <PropertyDef Id="51" Name="Wall turrent (Right)" Visibility="true">
+              <Color>#A0FF0000</Color>
               <Description>Wall turret facing right</Description>
-              <Color>#A0FF0000</Color>
+              <Presentation>
+                <Color>#A0FF0000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="52" Visibility="true" Name="Wall turrent (Down)">
+            <PropertyDef Id="52" Name="Wall turrent (Down)" Visibility="true">
+              <Color>#A0FF0000</Color>
               <Description>Wall turret facing down</Description>
-              <Color>#A0FF0000</Color>
+              <Presentation>
+                <Color>#A0FF0000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="53" Visibility="true" Name="Wall turrent (Left)">
+            <PropertyDef Id="53" Name="Wall turrent (Left)" Visibility="true">
+              <Color>#A0FF0000</Color>
               <Description>Wall turret facing left</Description>
-              <Color>#A0FF0000</Color>
+              <Presentation>
+                <Color>#A0FF0000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="54" Visibility="true" Name="Exit 3">
-              <Description>Collision, Finishes level</Description>
+            <PropertyDef Id="54" Name="Exit 3" Visibility="true">
               <Color>#500FF000</Color>
+              <Description>Collision, Finishes level</Description>
+              <Presentation>
+                <Color>#500FF000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="55" Visibility="true" Name="Item">
-              <Description>Pickable item</Description>
+            <PropertyDef Id="55" Name="Item" Visibility="true">
               <Color>#500000FF</Color>
+              <Description>Pickable item</Description>
+              <Presentation>
+                <Color>#500000FF</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="56" Visibility="true" Name="Entrance 3">
-              <Description>No collision, spawns player here</Description>
+            <PropertyDef Id="56" Name="Entrance 3" Visibility="true">
               <Color>#7FFF00FF</Color>
+              <Description>No collision, spawns player here</Description>
+              <Presentation>
+                <Color>#7FFF00FF</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="57" Visibility="true" Name="Obstacle(for enemies only)">
-              <Description>Player can walk trough it, movable enemies can't</Description>
+            <PropertyDef Id="57" Name="Obstacle(for enemies only)" Visibility="true">
               <Color>#20FF00FF</Color>
+              <Description>Player can walk trough it, movable enemies can't</Description>
+              <Presentation>
+                <Color>#20FF00FF</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="58" Visibility="true" Name="Unknown 58">
-              <Description>Unknown action</Description>
+            <PropertyDef Id="58" Name="Unknown 58" Visibility="true">
               <Color>#00000000</Color>
-            </PropertyDef>
-            <PropertyDef Id="59" Visibility="true" Name="Unknown 59">
               <Description>Unknown action</Description>
-              <Color>#00000000</Color>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="60" Visibility="true" Name="Obstacle(except projectiles)">
-              <Description>Collision, but weapon projectile can penetrate</Description>
+            <PropertyDef Id="59" Name="Unknown 59" Visibility="true">
+              <Color>#00000000</Color>
+              <Description>Unknown action</Description>
+              <Presentation>
+                <Color>#00000000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
+            </PropertyDef>
+            <PropertyDef Id="60" Name="Obstacle(except projectiles)" Visibility="true">
               <Color>#32FFFF00</Color>
+              <Description>Collision, but weapon projectile can penetrate</Description>
+              <Presentation>
+                <Color>#32FFFF00</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="61" Visibility="true" Name="Intex terminal">
-              <Description>Terminal that player may use</Description>
+            <PropertyDef Id="61" Name="Intex terminal" Visibility="true">
               <Color>#7F0000FF</Color>
+              <Description>Terminal that player may use</Description>
+              <Presentation>
+                <Color>#7F0000FF</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="62" Visibility="true" Name="Door">
-              <Description>Door with no color card required</Description>
+            <PropertyDef Id="62" Name="Door" Visibility="true">
               <Color>#320FF000</Color>
+              <Description>Door with no color card required</Description>
+              <Presentation>
+                <Color>#320FF000</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
-            <PropertyDef Id="63" Visibility="true" Name="Obstacle(for all)">
-              <Description>Collision, nothing can penetrate</Description>
+            <PropertyDef Id="63" Name="Obstacle(for all)" Visibility="true">
               <Color>#50FFFF00</Color>
+              <Description>Collision, nothing can penetrate</Description>
+              <Presentation>
+                <Color>#50FFFF00</Color>
+                <Visibility>true</Visibility>
+              </Presentation>
+              <Triggers />
             </PropertyDef>
           </PropertyDefs>
         </PropertySet>
       </Items>
     </PropertySets>
+    <Palettes>
+      <Items />
+    </Palettes>
   </Tables>
-  <ResourceDefs> 
-    <ResourceDef Type="Music" Name="TITLE.AMF" />
-    <ResourceDef Type="Sound" Name="ALIEN1" />
-    <ResourceDef Type="Sound" Name="ALIEN2" />
-    <ResourceDef Type="Sound" Name="ALIEN3" />
-    <ResourceDef Type="Sound" Name="ALIEN4" />
-    <ResourceDef Type="Sound" Name="AMMO" />
-    <ResourceDef Type="Sound" Name="BACKING1" />
-    <ResourceDef Type="Sound" Name="BACKING2" />
-    <ResourceDef Type="Sound" Name="BACKING3" />
-    <ResourceDef Type="Sound" Name="BACKING4" />
-    <ResourceDef Type="Sound" Name="CACOON1" />
-    <ResourceDef Type="Sound" Name="COMPUTER" />
-    <ResourceDef Type="Sound" Name="COUNTDWN" />
-    <ResourceDef Type="Sound" Name="CREDITS" />
-    <ResourceDef Type="Sound" Name="CURSOR" />
-    <ResourceDef Type="Sound" Name="DIE" />
-    <ResourceDef Type="Sound" Name="DOOR1" />
-    <ResourceDef Type="Sound" Name="EAT1" />
-    <ResourceDef Type="Sound" Name="EXPLOS" />
-    <ResourceDef Type="Sound" Name="FLAMEOFF" />
-    <ResourceDef Type="Sound" Name="FLAMEON" />
-    <ResourceDef Type="Sound" Name="GENERATE" />
-    <ResourceDef Type="Sound" Name="GRENADE" />
-    <ResourceDef Type="Sound" Name="GRUNT1" />
-    <ResourceDef Type="Sound" Name="HATCH1" />
-    <ResourceDef Type="Sound" Name="HEALTH" />
-    <ResourceDef Type="Sound" Name="KEYS" />
-    <ResourceDef Type="Sound" Name="LAZER1" />
-    <ResourceDef Type="Sound" Name="LAZER2" />
-    <ResourceDef Type="Sound" Name="LAZER3" />
-    <ResourceDef Type="Sound" Name="LAZER4" />
-    <ResourceDef Type="Sound" Name="LIZARD" />
-    <ResourceDef Type="Sound" Name="MGUN" />
-    <ResourceDef Type="Sound" Name="MINETICK" />
-    <ResourceDef Type="Sound" Name="MISSILE" />
-    <ResourceDef Type="Sound" Name="NULLSAMP" />
-    <ResourceDef Type="Sound" Name="ONEWAY" />
-    <ResourceDef Type="Sound" Name="OUTAMMO" />
-    <ResourceDef Type="Sound" Name="SELECT" />
-    <ResourceDef Type="Sound" Name="SIREN" />
-    <ResourceDef Type="Sound" Name="SPEECH01" />
-    <ResourceDef Type="Sound" Name="SPEECH02" />
-    <ResourceDef Type="Sound" Name="SPEECH03" />
-    <ResourceDef Type="Sound" Name="SPEECH04" />
-    <ResourceDef Type="Sound" Name="SPEECH05" />
-    <ResourceDef Type="Sound" Name="SPEECH06" />
-    <ResourceDef Type="Sound" Name="SPEECH07" />
-    <ResourceDef Type="Sound" Name="SPEECH08" />
-    <ResourceDef Type="Sound" Name="SPEECH08" />
-    <ResourceDef Type="Sound" Name="SPEECH09" />
-    <ResourceDef Type="Sound" Name="SPEECH10" />
-    <ResourceDef Type="Sound" Name="SPEECH11" />
-    <ResourceDef Type="Sound" Name="SPEECH12" />
-    <ResourceDef Type="Sound" Name="SPEECH13" />
-    <ResourceDef Type="Sound" Name="SPEECH14" />
-    <ResourceDef Type="Sound" Name="SPEECH15" />
-    <ResourceDef Type="Sound" Name="SPEECH16" />
-    <ResourceDef Type="Sound" Name="SPEECH17" />
-    <ResourceDef Type="Sound" Name="SPEECH18" />
-    <ResourceDef Type="Sound" Name="SPEECH19" />
-    <ResourceDef Type="Sound" Name="SPEECH20" />
-    <ResourceDef Type="Sound" Name="SPEECH21" />
-    <ResourceDef Type="Sound" Name="SPEECH22" />
-    <ResourceDef Type="Sound" Name="SPEECH23" />
-    <ResourceDef Type="Sound" Name="SPEECH24" />
-    <ResourceDef Type="Sound" Name="SPEECH25" />
-    <ResourceDef Type="Sound" Name="SPEECH26" />
-    <ResourceDef Type="Sound" Name="SPEECH27" />
-    <ResourceDef Type="Sound" Name="SPLAT1" />
-    <ResourceDef Type="Sound" Name="SWITCH" />
-    <ResourceDef Type="Sound" Name="TELE" />
-    <ResourceDef Type="Sound" Name="TURRET1" />
-    <ResourceDef Type="Sound" Name="TURRET2" />
-    <ResourceDef Type="Sound" Name="XTRALIFE" />
-    <ResourceDef Type="Sprite" Name="ALIEN_A.SPR" />
-    <ResourceDef Type="Sprite" Name="ALIEN_B.SPR" />
-    <ResourceDef Type="Sprite" Name="ALIEN_C.SPR" />
-    <ResourceDef Type="Sprite" Name="ALIEN_E.SPR" />
-    <ResourceDef Type="Sprite" Name="ALIEN_F.SPR" />
-    <ResourceDef Type="Sprite" Name="ALIEN_G.SPR" />
-    <ResourceDef Type="Sprite" Name="ALIEN_H.SPR" />
-    <ResourceDef Type="Sprite" Name="ALIEN_I.SPR" />
-    <ResourceDef Type="Sprite" Name="ALIEN_J.SPR" />
-    <ResourceDef Type="Sprite" Name="ALIEN_K.SPR" />
-    <ResourceDef Type="Sprite" Name="ALIEN_X.SPR" />
-    <ResourceDef Type="Sprite" Name="COMP1.SPR" />
-    <ResourceDef Type="Sprite" Name="COMP2.SPR" />
-    <ResourceDef Type="Sprite" Name="COMP3.SPR" />
-    <ResourceDef Type="Sprite" Name="COMPFONT.SPR" />
-    <ResourceDef Type="Sprite" Name="HERO1.SPR" />
-    <ResourceDef Type="Sprite" Name="HERO2.SPR" />
-    <ResourceDef Type="Sprite" Name="RESIDENT.SPR" />
-    <ResourceDef Type="Sprite" Name="STATUS.SPR" />
-    <ResourceDef Type="Sprite" Name="TORCH.SPR" />
-    <ResourceDef Type="Picture" Name="COMPUTER.LBM" />
-    <ResourceDef Type="Picture" Name="EPSLOGO1.LBM" />
-    <ResourceDef Type="Picture" Name="EPSLOGO2.LBM" />
-    <ResourceDef Type="Picture" Name="IPC.LBM" />
-    <ResourceDef Type="Picture" Name="OUTRO.LBM" />
-    <ResourceDef Type="Picture" Name="SMARTPIC.LBM" />
-    <ResourceDef Type="Picture" Name="T17LOGO.LBM" />
-    <ResourceDef Type="Picture" Name="TITLEBAC.LBM" />
-    <ResourceLevelDef Id="1" Name="CRASH LANDING SITE" >
-      <AssetRef>Assets.MAP.01</AssetRef>
-      <TileSetRef>TileSets.L1</TileSetRef>
-      <PropertySetRef>Props.Default</PropertySetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="2" Name="CIVILIAN ZONE 1" >
-      <AssetRef>Assets.MAP.02</AssetRef>
-      <TileSetRef>TileSets.L4</TileSetRef>
-      <PropertySetRef>Props.Default</PropertySetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="3" Name="CIVILIAN ZONE 2" >
-      <AssetRef>Assets.MAP.03</AssetRef>
-      <TileSetRef>TileSets.L4</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="4" Name="CIVILIAN ZONE 3" >
-      <AssetRef>Assets.MAP.04</AssetRef>
-      <TileSetRef>TileSets.L4</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="5" Name="CIVILIAN ZONE 4" >
-      <AssetRef>Assets.MAP.05</AssetRef>
-      <TileSetRef>TileSets.L4</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="6" Name="OUTDOOR SECTOR 2" >
-      <AssetRef>Assets.MAP.06</AssetRef>
-      <TileSetRef>TileSets.L1</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="7" Name="STORES LEVEL 1" >
-      <AssetRef>Assets.MAP.07</AssetRef>
-      <TileSetRef>TileSets.LD</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="8" Name="STORES LEVEL 2" >
-      <AssetRef>Assets.MAP.08</AssetRef>
-      <TileSetRef>TileSets.LD</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="9" Name="STORES SECTOR 3" >
-      <AssetRef>Assets.MAP.09</AssetRef>
-      <TileSetRef>TileSets.LD</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="10" Name="STORES SECTOR 4" >
-      <AssetRef>Assets.MAP.10</AssetRef>
-      <TileSetRef>TileSets.LD</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="11" Name="OUTDOOR SECTOR 3" >
-      <AssetRef>Assets.MAP.11</AssetRef>
-      <TileSetRef>TileSets.L1</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="12" Name="MILITARY SECTOR 1" >
-      <AssetRef>Assets.MAP.12</AssetRef>
-      <TileSetRef>TileSets.L7</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="13" Name="MILITARY SECTOR 2" >
-      <AssetRef>Assets.MAP.13</AssetRef>
-      <TileSetRef>TileSets.L7</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="14" Name="MILITARY SECTOR 3" >
-      <AssetRef>Assets.MAP.14</AssetRef>
-      <TileSetRef>TileSets.L7</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="15" Name="MILITARY SECTOR 4" >
-      <AssetRef>Assets.MAP.15</AssetRef>
-      <TileSetRef>TileSets.L7</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="16" Name="SECURITY ZONE 1" >
-      <AssetRef>Assets.MAP.16</AssetRef>
-      <TileSetRef>TileSets.L5</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR5B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="17" Name="SECURITY ZONE 2" >
-      <AssetRef>Assets.MAP.17</AssetRef>
-      <TileSetRef>TileSets.L5</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR5B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="18" Name="SECURITY ZONE 3" >
-      <AssetRef>Assets.MAP.18</AssetRef>
-      <TileSetRef>TileSets.L5</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR5B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="19" Name="SECURITY ZONE 4" >
-      <AssetRef>Assets.MAP.19</AssetRef>
-      <TileSetRef>TileSets.L5</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR5B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="20" Name="COLONY GROUND SECTOR 3" >
-      <AssetRef>Assets.MAP.20</AssetRef>
-      <TileSetRef>TileSets.L1</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="21" Name="SCIENCE SECTOR 1" >
-      <AssetRef>Assets.MAP.21</AssetRef>
-      <TileSetRef>TileSets.L6</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="22" Name="SCIENCE SECTOR 2" >
-      <AssetRef>Assets.MAP.22</AssetRef>
-      <TileSetRef>TileSets.L6</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="23" Name="SCIENCE SECTOR 3" >
-      <AssetRef>Assets.MAP.23</AssetRef>
-      <TileSetRef>TileSets.L6</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="24" Name="SCIENCE SECTOR 4" >
-      <AssetRef>Assets.MAP.24</AssetRef>
-      <TileSetRef>TileSets.L6</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="25" Name="COLONY GROUND SECTOR 4" >
-      <AssetRef>Assets.MAP.25</AssetRef>
-      <TileSetRef>TileSets.L1</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="26" Name="ENGINEERING SECTOR 1" >
-      <AssetRef>Assets.MAP.26</AssetRef>
-      <TileSetRef>TileSets.L3</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="27" Name="ENGINEERING SECTOR 2" >
-      <AssetRef>Assets.MAP.27</AssetRef>
-      <TileSetRef>TileSets.L3</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="28" Name="ENGINEERING SECTOR 3" >
-      <AssetRef>Assets.MAP.28</AssetRef>
-      <TileSetRef>TileSets.L3</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="29" Name="ENGINEERING SECTOR 4" >
-      <AssetRef>Assets.MAP.29</AssetRef>
-      <TileSetRef>TileSets.L3</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="30" Name="CORRIDOR ZONE 1" >
-      <AssetRef>Assets.MAP.30</AssetRef>
-      <TileSetRef>TileSets.L4</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="31" Name="CORRIDOR 2" >
-      <AssetRef>Assets.MAP.31</AssetRef>
-      <TileSetRef>TileSets.L4</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="32" Name="CORRIDOR 3" >
-      <AssetRef>Assets.MAP.32</AssetRef>
-      <TileSetRef>TileSets.LD</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="33" Name="CORRIDOR 4" >
-      <AssetRef>Assets.MAP.33</AssetRef>
-      <TileSetRef>TileSets.L3</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="34" Name="CORRIDOR 5" >
-      <AssetRef>Assets.MAP.34</AssetRef>
-      <TileSetRef>TileSets.LD</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="35" Name="CORRIDOR ZONE 6" >
-      <AssetRef>Assets.MAP.35</AssetRef>
-      <TileSetRef>TileSets.LD</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="36" Name="CORRIDOR ZONE 7" >
-      <AssetRef>Assets.MAP.36</AssetRef>
-      <TileSetRef>TileSets.L4</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="37" Name="CORRIDOR ZONE 8" >
-      <AssetRef>Assets.MAP.37</AssetRef>
-      <TileSetRef>TileSets.LD</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="38" Name="CORRIDOR ZONE 9" >
-      <AssetRef>Assets.MAP.38</AssetRef>
-      <TileSetRef>TileSets.LD</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="39" Name="CORRIDOR ZONE 10" >
-      <AssetRef>Assets.MAP.39</AssetRef>
-      <TileSetRef>TileSets.L3</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="40" Name="CORRIDOR ZONE 11" >
-      <AssetRef>Assets.MAP.40</AssetRef>
-      <TileSetRef>TileSets.L4</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="41" Name="CORRIDOR ZONE 12" >
-      <AssetRef>Assets.MAP.41</AssetRef>
-      <TileSetRef>TileSets.L3</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="42" Name="CORRIDOR ZONE 13" >
-      <AssetRef>Assets.MAP.42</AssetRef>
-      <TileSetRef>TileSets.L3</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="43" Name="CORRIDOR ZONE 14" >
-      <AssetRef>Assets.MAP.43</AssetRef>
-      <TileSetRef>TileSets.L7</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="44" Name="CORRIDOR 15" >
-      <AssetRef>Assets.MAP.44</AssetRef>
-      <TileSetRef>TileSets.L7</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="45" Name="CORRIDOR 16" >
-      <AssetRef>Assets.MAP.45</AssetRef>
-      <TileSetRef>TileSets.L3</TileSetRef>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="46" Name="CORRIDOR 17" >
-      <AssetRef>Assets.MAP.46</AssetRef>
-      <TileSetRef>TileSets.L3</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="47" Name="MAIN TOWER LEVEL 1" >
-      <AssetRef>Assets.MAP.47</AssetRef>
-      <TileSetRef>TileSets.L8</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="48" Name="MAIN TOWER LEVEL 2" >
-      <AssetRef>Assets.MAP.48</AssetRef>
-      <TileSetRef>TileSets.L8</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="49" Name="MAIN TOWER LEVEL 3" >
-      <AssetRef>Assets.MAP.49</AssetRef>
-      <TileSetRef>TileSets.L8</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="50" Name="MAIN TOWER LEVEL 4" >
-      <AssetRef>Assets.MAP.50</AssetRef>
-      <TileSetRef>TileSets.L8</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="51" Name="MAIN TOWER LEVEL 5" >
-      <AssetRef>Assets.MAP.51</AssetRef>
-      <TileSetRef>TileSets.L8</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="52" Name="TOWER LEVEL 6" >
-      <AssetRef>Assets.MAP.52</AssetRef>
-      <TileSetRef>TileSets.L8</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="53" Name="TOWER LEVEL 7" >
-      <AssetRef>Assets.MAP.53</AssetRef>
-      <TileSetRef>TileSets.L8</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="54" Name="Mission One(\?\?\?)" >
-      <AssetRef>Assets.MAP.54</AssetRef>
-      <TileSetRef>TileSets.L6</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-    <ResourceLevelDef Id="55" Name="OUTER COLONY SECTOR 5" >
-      <AssetRef>Assets.MAP.55</AssetRef>
-      <TileSetRef>TileSets.L1</TileSetRef>
-      <SpriteSetRefs>
-        <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
-        <SpriteSetRef>SpriteSets.SPR1B</SpriteSetRef>
-      </SpriteSetRefs>
-    </ResourceLevelDef>
-  </ResourceDefs>
 </DatabaseDef>

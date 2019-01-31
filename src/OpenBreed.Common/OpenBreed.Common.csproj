@@ -59,6 +59,8 @@
     <Compile Include="Maps\LevelModel.cs" />
     <Compile Include="Palettes\IPaletteEntry.cs" />
     <Compile Include="Props\IPropertyEntry.cs" />
+    <Compile Include="Props\IPropertyPresentation.cs" />
+    <Compile Include="Props\IPropertyTriggers.cs" />
     <Compile Include="Props\IPropSetEntry.cs" />
     <Compile Include="Props\PropSetModel.cs" />
     <Compile Include="Sounds\ISoundEntry.cs" />
