@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common.Maps;
-using OpenBreed.Common.XmlDatabase.Items.Levels;
+using OpenBreed.Common.XmlDatabase.Items.Maps;
 using OpenBreed.Common.XmlDatabase.Tables.Levels;
 using System;
 using System.Collections.Generic;
@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
-    public class XmlLevelsRepository : IRepository<ILevelEntry>
+    public class XmlMapsRepository : IRepository<IMapEntry>
     {
 
         #region Private Fields
 
-        private readonly DatabaseLevelTableDef _table;
+        private readonly DatabaseMapTableDef _table;
 
         private XmlDatabase _context;
 
@@ -22,19 +22,19 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Constructors
 
-        public XmlLevelsRepository(IUnitOfWork unitOfWork, XmlDatabase context)
+        public XmlMapsRepository(IUnitOfWork unitOfWork, XmlDatabase context)
         {
             UnitOfWork = unitOfWork;
             _context = context;
 
-            _table = _context.GetLevelTable();
+            _table = _context.GetMapsTable();
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public string Name { get { return "Levels"; } }
+        public string Name { get { return "Maps"; } }
 
         public IEnumerable<IEntry> Entries { get { return _table.Items; } }
 
@@ -44,7 +44,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Methods
 
-        public void Add(ILevelEntry entity)
+        public void Add(IMapEntry entity)
         {
             throw new NotImplementedException();
         }
@@ -54,7 +54,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             return _table.Items.FirstOrDefault(item => item.Id == id);
         }
 
-        public ILevelEntry GetById(string id)
+        public IMapEntry GetById(string id)
         {
             var levelDef = _table.Items.FirstOrDefault(item => item.Id == id);
             if (levelDef == null)
@@ -63,9 +63,9 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             return levelDef;
         }
 
-        public ILevelEntry GetNextTo(ILevelEntry entry)
+        public IMapEntry GetNextTo(IMapEntry entry)
         {
-            var index = _table.Items.IndexOf((LevelDef)entry);
+            var index = _table.Items.IndexOf((MapDef)entry);
 
             if (index < 0)
                 throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
@@ -78,9 +78,9 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return null;
         }
 
-        public ILevelEntry GetPreviousTo(ILevelEntry entry)
+        public IMapEntry GetPreviousTo(IMapEntry entry)
         {
-            var index = _table.Items.IndexOf((LevelDef)entry);
+            var index = _table.Items.IndexOf((MapDef)entry);
 
             if (index < 0)
                 throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
@@ -92,18 +92,18 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             else
                 return null;
         }
-        public void Remove(ILevelEntry entry)
+        public void Remove(IMapEntry entry)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(ILevelEntry entry)
+        public void Update(IMapEntry entry)
         {
-            var index = _table.Items.IndexOf((LevelDef)entry);
+            var index = _table.Items.IndexOf((MapDef)entry);
             if (index < 0)
                 throw new InvalidOperationException($"{entry} not found in repository");
 
-            _table.Items[index] = (LevelDef)entry;
+            _table.Items[index] = (MapDef)entry;
         }
 
         #endregion Public Methods

@@ -480,9 +480,9 @@
         </TileSet>
       </Items>
     </TileSets>
-    <Levels>
+    <Maps>
       <Items>
-        <Level Id="L1">
+        <Map Id="L1">
           <Format Name="ABHC_MAP">
             <Parameters />
           </Format>
@@ -491,8 +491,8 @@
           <AssetRef>Assets.L1MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L1</TileSetRef>
-        </Level>
-        <Level Id="L2">
+        </Map>
+        <Map Id="L2">
           <Format Name="ABHC_MAP">
             <Parameters />
           </Format>
@@ -501,8 +501,8 @@
           <AssetRef>Assets.L2MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L2</TileSetRef>
-        </Level>
-        <Level Id="L3">
+        </Map>
+        <Map Id="L3">
           <Format Name="ABHC_MAP">
             <Parameters />
           </Format>
@@ -511,8 +511,8 @@
           <AssetRef>Assets.L3MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L3</TileSetRef>
-        </Level>
-        <Level Id="L4">
+        </Map>
+        <Map Id="L4">
           <Format Name="ABHC_MAP">
             <Parameters />
           </Format>
@@ -521,8 +521,8 @@
           <AssetRef>Assets.L4MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L4</TileSetRef>
-        </Level>
-        <Level Id="L5">
+        </Map>
+        <Map Id="L5">
           <Format Name="ABHC_MAP">
             <Parameters />
           </Format>
@@ -531,8 +531,8 @@
           <AssetRef>Assets.L5MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L5</TileSetRef>
-        </Level>
-        <Level Id="L6">
+        </Map>
+        <Map Id="L6">
           <Format Name="ABHC_MAP">
             <Parameters />
           </Format>
@@ -541,8 +541,8 @@
           <AssetRef>Assets.L6MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L6</TileSetRef>
-        </Level>
-        <Level Id="L7">
+        </Map>
+        <Map Id="L7">
           <Format Name="ABHC_MAP">
             <Parameters />
           </Format>
@@ -551,8 +551,8 @@
           <AssetRef>Assets.L7MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L6</TileSetRef>
-        </Level>
-        <Level Id="L8">
+        </Map>
+        <Map Id="L8">
           <Format Name="ABHC_MAP">
             <Parameters />
           </Format>
@@ -561,8 +561,8 @@
           <AssetRef>Assets.L8MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L6</TileSetRef>
-        </Level>
-        <Level Id="L9">
+        </Map>
+        <Map Id="L9">
           <Format Name="ABHC_MAP">
             <Parameters />
           </Format>
@@ -571,8 +571,8 @@
           <AssetRef>Assets.L9MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L6</TileSetRef>
-        </Level>
-        <Level Id="LA">
+        </Map>
+        <Map Id="LA">
           <Format Name="ABHC_MAP">
             <Parameters />
           </Format>
@@ -581,8 +581,8 @@
           <AssetRef>Assets.LAMA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L7</TileSetRef>
-        </Level>
-        <Level Id="LB">
+        </Map>
+        <Map Id="LB">
           <Format Name="ABHC_MAP">
             <Parameters />
           </Format>
@@ -591,8 +591,8 @@
           <AssetRef>Assets.LBMA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L7</TileSetRef>
-        </Level>
-        <Level Id="LC">
+        </Map>
+        <Map Id="LC">
           <Format Name="ABHC_MAP">
             <Parameters />
           </Format>
@@ -601,8 +601,8 @@
           <AssetRef>Assets.LCMA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L8</TileSetRef>
-        </Level>
-        <Level Id="LD">
+        </Map>
+        <Map Id="LD">
           <Format Name="ABHC_MAP">
             <Parameters />
           </Format>
@@ -611,8 +611,8 @@
           <AssetRef>Assets.LDMA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L7</TileSetRef>
-        </Level>
-        <Level Id="LE">
+        </Map>
+        <Map Id="LE">
           <Format Name="ABHC_MAP">
             <Parameters />
           </Format>
@@ -621,8 +621,8 @@
           <AssetRef>Assets.LEMA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L9</TileSetRef>
-        </Level>
-        <Level Id="LMMA1">
+        </Map>
+        <Map Id="LMMA1">
           <Format Name="ABHC_MAP">
             <Parameters />
           </Format>
@@ -631,8 +631,8 @@
           <AssetRef>Assets.MMA1</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L1</TileSetRef>
-        </Level>
-        <Level Id="LMMA2">
+        </Map>
+        <Map Id="LMMA2">
           <Format Name="ABHC_MAP">
             <Parameters />
           </Format>
@@ -641,8 +641,8 @@
           <AssetRef>Assets.MMA2</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L5</TileSetRef>
-        </Level>
-        <Level Id="LMMA3">
+        </Map>
+        <Map Id="LMMA3">
           <Format Name="ABHC_MAP">
             <Parameters />
           </Format>
@@ -651,9 +651,9 @@
           <AssetRef>Assets.MMA3</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L7</TileSetRef>
-        </Level>
+        </Map>
       </Items>
-    </Levels>
+    </Maps>
     <PropertySets>
       <Items>
         <PropertySet Id="Props.Level1">

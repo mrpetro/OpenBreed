@@ -100,7 +100,7 @@ namespace OpenBreed.Common.Logging
             if (string.IsNullOrEmpty(outDir))
                 throw new InvalidOperationException("Log Folder Dorectory is not set!");
 
-            outName += "-" + Tools.TimeNowForFilename() + ".log";
+            outName += "-" + Other.TimeNowForFilename() + ".log";
             var path = Path.GetFullPath(outDir + "\\" + outName);
             FileMan.Instance.CreateEmptyFile(path);
             return path;

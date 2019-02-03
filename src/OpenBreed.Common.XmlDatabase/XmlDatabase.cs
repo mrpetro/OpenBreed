@@ -95,12 +95,12 @@ namespace OpenBreed.Common.XmlDatabase
             return table;
         }
 
-        internal DatabaseLevelTableDef GetLevelTable()
+        internal DatabaseMapTableDef GetMapsTable()
         {
-            var table = Data.Tables.OfType<DatabaseLevelTableDef>().FirstOrDefault();
+            var table = Data.Tables.OfType<DatabaseMapTableDef>().FirstOrDefault();
             if (table == null)
             {
-                table = new DatabaseLevelTableDef();
+                table = new DatabaseMapTableDef();
                 Data.Tables.Add(table);
             }
             return table;

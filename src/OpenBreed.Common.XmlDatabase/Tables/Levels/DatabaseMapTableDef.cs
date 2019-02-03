@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.XmlDatabase.Items.Levels;
+﻿using OpenBreed.Common.XmlDatabase.Items.Maps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +8,10 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Common.XmlDatabase.Tables.Levels
 {
-    public class DatabaseLevelTableDef : DatabaseTableDef
+    public class DatabaseMapTableDef : DatabaseTableDef
     {
         [XmlArray("Items"),
-        XmlArrayItem("Level", typeof(LevelDef))]
-        public readonly List<LevelDef> Items = new List<LevelDef>();
+        XmlArrayItem("Map", typeof(MapDef))]
+        public readonly List<MapDef> Items = new List<MapDef>();
     }
 }

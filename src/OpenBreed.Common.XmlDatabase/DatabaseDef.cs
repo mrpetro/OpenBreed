@@ -9,7 +9,7 @@ using OpenBreed.Common.XmlDatabase.Resources;
 using OpenBreed.Common.XmlDatabase.Tables.Sources;
 using OpenBreed.Common.XmlDatabase.Tables;
 using OpenBreed.Common.XmlDatabase.Items.Images;
-using OpenBreed.Common.XmlDatabase.Items.Levels;
+using OpenBreed.Common.XmlDatabase.Items.Maps;
 using OpenBreed.Common.XmlDatabase.Tables.Images;
 using OpenBreed.Common.XmlDatabase.Tables.Levels;
 using OpenBreed.Common.XmlDatabase.Tables.Props;
@@ -29,7 +29,7 @@ namespace OpenBreed.Common.XmlDatabase
 
         [XmlArray("Tables"),
         XmlArrayItem("Assets", typeof(DatabaseAssetTableDef)),
-        XmlArrayItem("Levels", typeof(DatabaseLevelTableDef)),
+        XmlArrayItem("Maps", typeof(DatabaseMapTableDef)),
         XmlArrayItem("Palettes", typeof(DatabasePaletteTableDef)),
         XmlArrayItem("PropertySets", typeof(DatabasePropertySetTableDef)),
         XmlArrayItem("TileSets", typeof(DatabaseTileSetTableDef)),
@@ -53,12 +53,12 @@ namespace OpenBreed.Common.XmlDatabase
 
         public static DatabaseDef Load(string filePath)
         {
-            return Tools.RestoreFromXml<DatabaseDef>(filePath);
+            return Other.RestoreFromXml<DatabaseDef>(filePath);
         }
 
         public void Save(string xmlFilePath)
         {
-            Tools.StoreAsXml<DatabaseDef>(xmlFilePath, this);
+            Other.StoreAsXml<DatabaseDef>(xmlFilePath, this);
         }
 
         #endregion Public Methods

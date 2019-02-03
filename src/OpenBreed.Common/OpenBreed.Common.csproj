@@ -53,9 +53,10 @@
     <Compile Include="Formats\FormatParameter.cs" />
     <Compile Include="Formats\IFormatEntry.cs" />
     <Compile Include="Formats\PCMSoundFormat.cs" />
+    <Compile Include="Helpers\IOHelper.cs" />
     <Compile Include="IDatabase.cs" />
     <Compile Include="Images\IImageEntry.cs" />
-    <Compile Include="Maps\ILevelEntry.cs" />
+    <Compile Include="Maps\IMapEntry.cs" />
     <Compile Include="Maps\LevelModel.cs" />
     <Compile Include="Palettes\IPaletteEntry.cs" />
     <Compile Include="Props\IPropertyEntry.cs" />
@@ -133,7 +134,7 @@
     <Compile Include="Tiles\Readers\BLK\BLKReader.cs" />
     <Compile Include="Tiles\TileModel.cs" />
     <Compile Include="Tiles\TileSetModel.cs" />
-    <Compile Include="Tools.cs" />
+    <Compile Include="Other.cs" />
     <Compile Include="Writers\BigEndianBinaryWriter.cs" />
   </ItemGroup>
   <ItemGroup>

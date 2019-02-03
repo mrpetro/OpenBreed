@@ -358,9 +358,9 @@
         </Palette>
       </Items>
     </Palettes>
-    <Levels>
+    <Maps>
       <Items>
-        <Level Id="L0">
+        <Map Id="L0">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
@@ -371,8 +371,8 @@
           <AssetRef>Assets.L0MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LA</TileSetRef>
-        </Level>
-        <Level Id="L1">
+        </Map>
+        <Map Id="L1">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
@@ -383,8 +383,8 @@
           <AssetRef>Assets.L1MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LE</TileSetRef>
-        </Level>
-        <Level Id="L2">
+        </Map>
+        <Map Id="L2">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
@@ -395,8 +395,8 @@
           <AssetRef>Assets.L2MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LF</TileSetRef>
-        </Level>
-        <Level Id="L3">
+        </Map>
+        <Map Id="L3">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
@@ -407,8 +407,8 @@
           <AssetRef>Assets.L3MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LC</TileSetRef>
-        </Level>
-        <Level Id="L4">
+        </Map>
+        <Map Id="L4">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
@@ -419,8 +419,8 @@
           <AssetRef>Assets.L4MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LB</TileSetRef>
-        </Level>
-        <Level Id="L5">
+        </Map>
+        <Map Id="L5">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
@@ -431,8 +431,8 @@
           <AssetRef>Assets.L5MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LB</TileSetRef>
-        </Level>
-        <Level Id="L6">
+        </Map>
+        <Map Id="L6">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
@@ -443,8 +443,8 @@
           <AssetRef>Assets.L6MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LC</TileSetRef>
-        </Level>
-        <Level Id="L7">
+        </Map>
+        <Map Id="L7">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
@@ -455,8 +455,8 @@
           <AssetRef>Assets.L7MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LD</TileSetRef>
-        </Level>
-        <Level Id="L8">
+        </Map>
+        <Map Id="L8">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
@@ -467,8 +467,8 @@
           <AssetRef>Assets.L8MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LD</TileSetRef>
-        </Level>
-        <Level Id="L9">
+        </Map>
+        <Map Id="L9">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
@@ -479,8 +479,8 @@
           <AssetRef>Assets.L9MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LD</TileSetRef>
-        </Level>
-        <Level Id="LA">
+        </Map>
+        <Map Id="LA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
@@ -491,8 +491,8 @@
           <AssetRef>Assets.LAMA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LE</TileSetRef>
-        </Level>
-        <Level Id="LB">
+        </Map>
+        <Map Id="LB">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
@@ -503,9 +503,9 @@
           <AssetRef>Assets.LBMA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LE</TileSetRef>
-        </Level>
+        </Map>
       </Items>
-    </Levels>
+    </Maps>
     <PropertySets>
       <Items>
         <PropertySet Id="Props.Default">

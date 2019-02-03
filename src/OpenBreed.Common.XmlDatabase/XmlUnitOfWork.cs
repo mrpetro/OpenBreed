@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common.XmlDatabase;
-using OpenBreed.Common.XmlDatabase.Items.Levels;
+using OpenBreed.Common.XmlDatabase.Items.Maps;
 using OpenBreed.Common.XmlDatabase.Items.Palettes;
 using OpenBreed.Common.XmlDatabase.Items.Props;
 using OpenBreed.Common.XmlDatabase.Items.Sources;
@@ -99,7 +99,7 @@ namespace OpenBreed.Common.XmlDatabase
             RegisterRepository(new XmlPropSetsRepository(this, _context));
             RegisterRepository(new XmlImagesRepository(this, _context));
             RegisterRepository(new XmlPalettesRepository(this, _context));
-            RegisterRepository(new XmlLevelsRepository(this, _context));
+            RegisterRepository(new XmlMapsRepository(this, _context));
             RegisterRepository(new XmlSoundsRepository(this, _context));
         }
 

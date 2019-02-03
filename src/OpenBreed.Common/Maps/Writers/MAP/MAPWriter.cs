@@ -187,7 +187,7 @@ namespace OpenBreed.Common.Maps.Writers.MAP
 
         private void WriteString(string value)
         {
-            var newValue = OpenBreed.Common.Tools.ConvertLineBreaksCRLFToLF(value);
+            var newValue = Other.ConvertLineBreaksCRLFToLF(value);
             _binWriter.Write(Encoding.ASCII.GetBytes(newValue));
         }
 
@@ -207,7 +207,7 @@ namespace OpenBreed.Common.Maps.Writers.MAP
         /// <param name="text">Text to write in to block</param>
         private void WriteTextBlock(string name, string text)
         {
-            text = OpenBreed.Common.Tools.ConvertLineBreaksCRLFToLF(text) + "\0";
+            text = Other.ConvertLineBreaksCRLFToLF(text) + "\0";
             //Insure division by 2 of block length
             text = text.PadRight(text.Length + text.Length % 2, '\0');
 

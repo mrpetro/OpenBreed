@@ -1,5 +1,6 @@
 ﻿using EPF;
 using OpenBreed.Common.Assets;
+using OpenBreed.Common.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -67,7 +68,7 @@ namespace OpenBreed.Common
 
         internal EPFArchive GetArchive(string archivePath)
         {
-            string normalizedPath = OpenBreed.Common.Tools.GetNormalizedPath(archivePath);
+            string normalizedPath = IOHelper.GetNormalizedPath(archivePath);
 
             EPFArchive archive = null;
             if (!_openedArchives.TryGetValue(normalizedPath, out archive))

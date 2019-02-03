@@ -151,7 +151,7 @@ namespace OpenBreed.Common.Maps.Readers.MAP
         {
             byte[] tvByteArray = binReader.ReadBytes((int)size);
             System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();
-            return Tools.ConvertLineBreaksLFToCRLF(enc.GetString(tvByteArray));
+            return Other.ConvertLineBreaksLFToCRLF(enc.GetString(tvByteArray));
         }
 
         #endregion Internal Methods

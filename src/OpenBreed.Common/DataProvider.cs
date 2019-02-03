@@ -118,7 +118,7 @@ namespace OpenBreed.Common
 
         public LevelModel GetLevel(string name)
         {
-            var entry = _unitOfWork.GetRepository<ILevelEntry>().GetById(name);
+            var entry = _unitOfWork.GetRepository<IMapEntry>().GetById(name);
             if (entry == null)
                 throw new Exception("Level error: " + name);
 

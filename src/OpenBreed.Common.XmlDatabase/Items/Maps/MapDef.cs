@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace OpenBreed.Common.XmlDatabase.Items.Levels
+namespace OpenBreed.Common.XmlDatabase.Items.Maps
 {
     [Serializable]
-    public class LevelDef : DatabaseItemDef, ILevelEntry
+    public class MapDef : DatabaseItemDef, IMapEntry
     {
         #region Public Properties
 

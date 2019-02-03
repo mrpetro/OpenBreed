@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Maps
 {
-    public interface ILevelEntry : IEntry
+    public interface IMapEntry : IEntry
     {
         string AssetRef { get; }
         IFormatEntry Format { get; }

@@ -9,7 +9,7 @@ using OpenBreed.Common.Logging;
 
 namespace OpenBreed.Common
 {
-    public static class Tools
+    public static class Other
     {
 
         /// <summary>
@@ -51,13 +51,6 @@ namespace OpenBreed.Common
 
         //    return ret;
         //}
-
-        public static string GetNormalizedPath(string path)
-        {
-            return Path.GetFullPath(new Uri(path).LocalPath)
-                       .TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
-                       .ToUpperInvariant();
-        }
 
 
 
