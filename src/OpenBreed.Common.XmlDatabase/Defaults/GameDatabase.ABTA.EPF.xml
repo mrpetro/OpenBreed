@@ -1159,6 +1159,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
+          <PropertySetRef>Props.Level1</PropertySetRef>
           <AssetRef>Assets.MAP.03</AssetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
@@ -1171,6 +1172,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
+          <PropertySetRef>Props.Level1</PropertySetRef>
           <AssetRef>Assets.MAP.04</AssetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
@@ -1183,6 +1185,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
+          <PropertySetRef>Props.Level1</PropertySetRef>
           <AssetRef>Assets.MAP.05</AssetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
@@ -1208,6 +1211,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
+          <PropertySetRef>Props.Level1</PropertySetRef>
           <AssetRef>Assets.MAP.07</AssetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -1231,6 +1235,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
+          <PropertySetRef>Props.Level1</PropertySetRef>
           <AssetRef>Assets.MAP.08</AssetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -1243,6 +1248,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
+          <PropertySetRef>Props.Level1</PropertySetRef>
           <AssetRef>Assets.MAP.09</AssetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -1255,6 +1261,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
+          <PropertySetRef>Props.Level1</PropertySetRef>
           <AssetRef>Assets.MAP.10</AssetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -1280,6 +1287,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
+          <PropertySetRef>Props.Level1</PropertySetRef>
           <AssetRef>Assets.MAP.12</AssetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
@@ -1303,6 +1311,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
+          <PropertySetRef>Props.Level1</PropertySetRef>
           <AssetRef>Assets.MAP.13</AssetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
@@ -1315,6 +1324,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
+          <PropertySetRef>Props.Level1</PropertySetRef>
           <AssetRef>Assets.MAP.14</AssetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
@@ -1327,6 +1337,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
+          <PropertySetRef>Props.Level1</PropertySetRef>
           <AssetRef>Assets.MAP.15</AssetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
@@ -1339,6 +1350,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
+          <PropertySetRef>Props.Level1</PropertySetRef>
           <AssetRef>Assets.MAP.16</AssetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
@@ -1363,6 +1375,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
+          <PropertySetRef>Props.Level1</PropertySetRef>
           <AssetRef>Assets.MAP.17</AssetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
@@ -1375,6 +1388,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
+          <PropertySetRef>Props.Level1</PropertySetRef>
           <AssetRef>Assets.MAP.18</AssetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
@@ -1387,6 +1401,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
+          <PropertySetRef>Props.Level1</PropertySetRef>
           <AssetRef>Assets.MAP.19</AssetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>

@@ -859,7 +859,6 @@
               <Triggers />
             </PropertyDef>
             <PropertyDef Id="25" Name="Unknown 25" >
-              <Color>#C0000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
                 <Color>#C0000000</Color>
@@ -868,7 +867,6 @@
               <Triggers />
             </PropertyDef>
             <PropertyDef Id="26" Name="Unknown 26" >
-              <Color>#C0000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
                 <Color>#C0000000</Color>
@@ -877,7 +875,6 @@
               <Triggers />
             </PropertyDef>
             <PropertyDef Id="27" Name="Unknown 27" >
-              <Color>#C0000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
                 <Color>#C0000000</Color>
@@ -886,7 +883,6 @@
               <Triggers />
             </PropertyDef>
             <PropertyDef Id="28" Name="Special door 1" >
-              <Color>#2030FF00</Color>
               <Description>Door opened with special key card 1</Description>
               <Presentation>
                 <Color>#2030FF00</Color>
@@ -895,7 +891,6 @@
               <Triggers />
             </PropertyDef>
             <PropertyDef Id="29" Name="Special door 2" >
-              <Color>#2030FF00</Color>
               <Description>Door opened with special key card 2</Description>
               <Presentation>
                 <Color>#2030FF00</Color>
@@ -904,7 +899,6 @@
               <Triggers />
             </PropertyDef>
             <PropertyDef Id="30" Name="Unknown 30" >
-              <Color>#C0000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
                 <Color>#C0000000</Color>
