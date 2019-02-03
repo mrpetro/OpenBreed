@@ -1,6 +1,6 @@
-﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
+﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
 {
-    partial class MapEditorViewCtrl
+    partial class MapViewExCtrl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,8 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // MapViewCtrl
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Name = "MapViewCtrl";
+            this.Size = new System.Drawing.Size(394, 320);
+            this.ResumeLayout(false);
+
         }
 
         #endregion

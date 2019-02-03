@@ -12,7 +12,7 @@ using OpenBreed.Editor.UI.WinForms.Views;
 using OpenBreed.Editor.VM.Palettes;
 using OpenBreed.Editor.VM.Levels;
 
-namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
+namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
 {
     public partial class MapEditorPalettesToolCtrl : UserControl
     {

@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace OpenBreed.Editor.VM
 {
-    public interface IToolController
+    public interface IToolView
     {
         event KeyEventHandler KeyDown;
         event KeyEventHandler KeyUp;

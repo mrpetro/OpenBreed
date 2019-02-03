@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenBreed.Editor.VM.Images;
 using System.Drawing.Drawing2D;
-using OpenBreed.Editor.VM.Levels.Tools;
 using OpenBreed.Editor.VM;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Images

@@ -12,7 +12,7 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Graphics;
 using OpenTK;
 
-namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
+namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
 {
     public partial class MapViewExCtrl : UserControl
     {

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenBreed.Editor.VM.Levels;
 
-namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
+namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
 {
     public partial class LevelSettingsCtrl : UserControl
     {

@@ -77,7 +77,7 @@
             this.tbxNOT1 = new OpenBreed.Common.UI.WinForms.Controls.TextBoxEx();
             this.tbxLCTX = new OpenBreed.Common.UI.WinForms.Controls.TextBoxEx();
             this.tbxMTXT = new OpenBreed.Common.UI.WinForms.Controls.TextBoxEx();
-            this.PropertiesCtrl = new OpenBreed.Editor.UI.WinForms.Controls.Levels.LevelSettingsCtrl();
+            this.PropertiesCtrl = new OpenBreed.Editor.UI.WinForms.Controls.Maps.LevelSettingsCtrl();
             this.panel1 = new System.Windows.Forms.Panel();
             this.Tabs.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
@@ -661,6 +661,6 @@
         private System.Windows.Forms.GroupBox grpMTXT;
         private OpenBreed.Common.UI.WinForms.Controls.TextBoxEx tbxMTXT;
         private System.Windows.Forms.Panel panel1;
-        private Controls.Levels.LevelSettingsCtrl PropertiesCtrl;
+        private Controls.Maps.LevelSettingsCtrl PropertiesCtrl;
     }
 }

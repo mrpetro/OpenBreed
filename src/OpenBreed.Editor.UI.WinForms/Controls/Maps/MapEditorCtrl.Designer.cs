@@ -1,4 +1,4 @@
-﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
+﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
 {
     partial class MapEditorCtrl
     {
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.MapView = new OpenBreed.Editor.UI.WinForms.Controls.Levels.MapEditorViewCtrl();
+            this.MapView = new OpenBreed.Editor.UI.WinForms.Controls.Maps.MapEditorViewCtrl();
             this.ToolTabs = new System.Windows.Forms.TabControl();
             this.TabTiles = new System.Windows.Forms.TabPage();
             this.TabActions = new System.Windows.Forms.TabPage();

@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Common.Helpers;
 using OpenBreed.Common.XmlDatabase;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace OpenBreed.Editor.VM.Database
         {
             if (dbEditor.Editable != null)
             {
-                if (Tools.GetNormalizedPath(newDatabaseFilePath) == Tools.GetNormalizedPath(dbEditor.Editable.Name))
+                if (IOHelper.GetNormalizedPath(newDatabaseFilePath) == IOHelper.GetNormalizedPath(dbEditor.Editable.Name))
                 {
                     //Root.Logger.Warning("Database already opened.");
                     return false;

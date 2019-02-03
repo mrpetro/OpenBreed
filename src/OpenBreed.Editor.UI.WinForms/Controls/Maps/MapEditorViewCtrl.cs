@@ -8,14 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenBreed.Editor.VM.Levels;
-using OpenBreed.Editor.VM.Levels.Tools;
+using OpenBreed.Editor.VM.Tools;
 using OpenBreed.Editor.VM;
 using System.Drawing.Drawing2D;
 using OpenBreed.Editor.VM.Renderer;
 
-namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
+namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
 {
-    public partial class MapEditorViewCtrl : UserControl, IToolController
+    public partial class MapEditorViewCtrl : UserControl, IToolView
     {
         #region Private Fields
 

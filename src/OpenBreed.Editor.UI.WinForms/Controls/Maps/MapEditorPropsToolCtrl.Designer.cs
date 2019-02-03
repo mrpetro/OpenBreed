@@ -1,6 +1,6 @@
-﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
+﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
 {
-    partial class MapViewExCtrl
+    partial class MapEditorPropsToolCtrl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,18 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.DataGridView = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // MapViewCtrl
+            // DataGridView
+            // 
+            this.DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DataGridView.Location = new System.Drawing.Point(0, 0);
+            this.DataGridView.Name = "DataGridView";
+            this.DataGridView.Size = new System.Drawing.Size(541, 360);
+            this.DataGridView.TabIndex = 0;
+            // 
+            // PropSelectorCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "MapViewCtrl";
-            this.Size = new System.Drawing.Size(394, 320);
+            this.Controls.Add(this.DataGridView);
+            this.Name = "PropSelectorCtrl";
+            this.Size = new System.Drawing.Size(541, 360);
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridView DataGridView;
     }
 }

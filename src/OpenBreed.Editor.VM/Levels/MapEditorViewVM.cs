@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Editor.VM.Base;
+using OpenBreed.Editor.VM.Tools;
 using OpenBreed.Editor.VM.Renderer;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Levels
 {
-    public class MapEditorViewVM : BaseViewModel
+    public class MapEditorViewVM : BaseViewModel, IScrollableVM, IZoomableVM
     {
         #region Private Fields
 

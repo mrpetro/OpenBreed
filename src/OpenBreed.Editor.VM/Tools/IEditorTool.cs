@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace OpenBreed.Editor.VM.Levels.Tools
+namespace OpenBreed.Editor.VM.Tools
 {
     public interface IEditorTool
     {
@@ -11,7 +11,5 @@ namespace OpenBreed.Editor.VM.Levels.Tools
 
         void Activate();
         void Deactivate();
-
-        void Register(ToolsMan toolsMan);
     }
 }

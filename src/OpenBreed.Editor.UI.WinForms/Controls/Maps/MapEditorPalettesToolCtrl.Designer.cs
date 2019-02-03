@@ -1,4 +1,4 @@
-﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
+﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
 {
     partial class MapEditorPalettesToolCtrl
     {

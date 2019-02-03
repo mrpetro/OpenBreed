@@ -24,8 +24,8 @@ namespace OpenBreed.Editor.VM
                 return new DatabaseImageTableVM();
             if (repository is IRepository<ISoundEntry>)
                 return new DatabaseSoundTableVM();
-            else if (repository is IRepository<ILevelEntry>)
-                return new DatabaseLevelTableVM();
+            else if (repository is IRepository<IMapEntry>)
+                return new DatabaseMapTableVM();
             else if (repository is IRepository<IPropSetEntry>)
                 return new DatabasePropertySetTableVM();
             else if (repository is IRepository<IAssetEntry>)

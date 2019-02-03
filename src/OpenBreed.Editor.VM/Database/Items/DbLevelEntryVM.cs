@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common;
 using OpenBreed.Common.XmlDatabase;
-using OpenBreed.Common.XmlDatabase.Items.Levels;
+using OpenBreed.Common.XmlDatabase.Items.Maps;
 using OpenBreed.Common.Maps;
 
 namespace OpenBreed.Editor.VM.Database.Items
@@ -14,7 +14,7 @@ namespace OpenBreed.Editor.VM.Database.Items
     {
         #region Private Fields
 
-        private ILevelEntry _entry;
+        private IMapEntry _entry;
 
         #endregion Private Fields
 
@@ -30,7 +30,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         public override void Load(IEntry entry)
         {
-            _entry = entry as ILevelEntry ?? throw new InvalidOperationException($"Expected {nameof(ILevelEntry)}");
+            _entry = entry as IMapEntry ?? throw new InvalidOperationException($"Expected {nameof(IMapEntry)}");
 
             base.Load(entry);     
         }

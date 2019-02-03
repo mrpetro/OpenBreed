@@ -26,7 +26,7 @@ namespace OpenBreed.Editor.Cfg
         private SettingsCfg GetDefault()
         {
             string defaultCfgPath = Path.Combine(ProgramTools.AppDir, DEFAULT_CFG_PATH);
-            return Tools.RestoreFromXml<SettingsCfg>(defaultCfgPath);
+            return Other.RestoreFromXml<SettingsCfg>(defaultCfgPath);
         }
 
         private void RegisterVariables()
@@ -73,7 +73,7 @@ namespace OpenBreed.Editor.Cfg
 
                 if (File.Exists(cfgPath))
                 {
-                    Cfg = Tools.RestoreFromXml<SettingsCfg>(cfgPath);
+                    Cfg = Other.RestoreFromXml<SettingsCfg>(cfgPath);
                     LogMan.Instance.LogSuccess("Settings configuration restored.");
                 }
                 else
@@ -95,7 +95,7 @@ namespace OpenBreed.Editor.Cfg
             try
             {
                 string cfgPath = Path.Combine(ProgramTools.AppProductDataDir, CFG_FILE_NAME);
-                Tools.StoreAsXml<SettingsCfg>(cfgPath, Cfg, true);
+                Other.StoreAsXml<SettingsCfg>(cfgPath, Cfg, true);
 
                 LogMan.Instance.LogSuccess("Settings configuration stored.");
             }

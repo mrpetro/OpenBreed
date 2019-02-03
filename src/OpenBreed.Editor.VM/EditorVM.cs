@@ -12,7 +12,6 @@ using OpenBreed.Common.Maps.Builders;
 using OpenBreed.Editor.VM.Database;
 using OpenBreed.Editor.VM.Props;
 using OpenBreed.Editor.VM.Sprites;
-using OpenBreed.Editor.VM.Levels.Tools;
 using OpenBreed.Common.Palettes;
 using System.Diagnostics;
 using OpenBreed.Common;
@@ -56,8 +55,6 @@ namespace OpenBreed.Editor.VM
 
         public EditorVM()
         {
-            ServiceLocator.Instance.RegisterService<ToolsMan>(new ToolsMan());
-
             ServiceLocator.Instance.RegisterService<EditorVM>(this);
 
             var entryEditorFactory = new DbEntryEditorFactory();
@@ -66,7 +63,7 @@ namespace OpenBreed.Editor.VM
             entryEditorFactory.Register<IRepository<IPaletteEntry>, PaletteEditorVM>();
             entryEditorFactory.Register<IRepository<IImageEntry>, ImageEditorVM>();
             entryEditorFactory.Register<IRepository<ISoundEntry>, SoundEditorVM>();
-            entryEditorFactory.Register<IRepository<ILevelEntry>, MapEditorVM>();
+            entryEditorFactory.Register<IRepository<IMapEntry>, MapEditorVM>();
             entryEditorFactory.Register<IRepository<IAssetEntry>, AssetEditorVM>();
             ServiceLocator.Instance.RegisterService<DbEntryEditorFactory>(entryEditorFactory);
 
@@ -136,7 +133,7 @@ namespace OpenBreed.Editor.VM
 
         public void TryRunABTAGame()
         {
-            Tools.TryAction(RunABTAGame);
+            Other.TryAction(RunABTAGame);
         }
 
         #endregion Public Methods

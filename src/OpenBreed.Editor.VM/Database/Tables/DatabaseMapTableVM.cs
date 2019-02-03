@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database.Tables
 {
-    public class DatabaseLevelTableVM : DbTableVM
+    public class DatabaseMapTableVM : DbTableVM
     {
         #region Private Fields
 
-        private IRepository<ILevelEntry> _repository;
+        private IRepository<IMapEntry> _repository;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DatabaseLevelTableVM()
+        public DatabaseMapTableVM()
         {
         }
 
@@ -27,7 +27,7 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         #region Public Properties
 
-        public override string Name { get { return "Levels"; } }
+        public override string Name { get { return "Maps"; } }
 
         #endregion Public Properties
 
@@ -35,7 +35,7 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         public override void Load(IRepository repository)
         {
-            _repository = repository as IRepository<ILevelEntry> ?? throw new InvalidOperationException($"Expected {nameof(IRepository<ILevelEntry>)}");
+            _repository = repository as IRepository<IMapEntry> ?? throw new InvalidOperationException($"Expected {nameof(IRepository<IMapEntry>)}");
         }
 
         #endregion Public Methods

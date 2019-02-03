@@ -26,7 +26,7 @@ namespace OpenBreed.Editor.VM.Database
                 return new DbImageEntryVM();
             else if (entry is ISoundEntry)
                 return new DbSoundEntryVM();
-            else if (entry is ILevelEntry)
+            else if (entry is IMapEntry)
                 return new DbLevelEntryVM();
             else if (entry is IAssetEntry)
                 return new DbAssetEntryVM();

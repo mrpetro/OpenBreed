@@ -108,7 +108,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
         private void ABTAGamePasswordsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Tools.TryAction(OpenABTAPasswordGenerator);
+            Other.TryAction(OpenABTAPasswordGenerator);
         }
 
         private void ABTAGameRunToolStripMenuItem_Click(object sender, EventArgs e)
@@ -153,7 +153,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
         private void OptionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Tools.TryAction(OpenOptionsForm);
+            Other.TryAction(OpenOptionsForm);
         }
 
         private void ShowLogConsoleToolStripMenuItem_CheckedChanged(object sender, EventArgs e)

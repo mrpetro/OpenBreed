@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Editor.VM;
 using OpenBreed.Editor.VM.Levels;
-using OpenBreed.Editor.VM.Levels.Tools;
 using System;
 using System.ComponentModel;
 using System.Drawing.Drawing2D;

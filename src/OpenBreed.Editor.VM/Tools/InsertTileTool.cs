@@ -6,7 +6,7 @@
 //using OpenBreed.Editor.VM.Tools;
 //using System.Windows.Forms;
 
-//namespace OpenBreed.Editor.UI.WinForms.Presentations.Maps.Tools
+//namespace OpenBreed.Editor.VM.Tools
 //{
 //    public class InsertTileTool : LevelTool
 //    {

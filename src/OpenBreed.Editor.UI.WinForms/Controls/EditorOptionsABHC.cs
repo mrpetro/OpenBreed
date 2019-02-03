@@ -44,7 +44,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls
 
         private void btnSelectGameFolder_Click(object sender, EventArgs e)
         {
-            Tools.TryAction(SelectGameFolder);
+            Other.TryAction(SelectGameFolder);
         }
     }
 }

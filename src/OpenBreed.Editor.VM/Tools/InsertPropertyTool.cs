@@ -6,7 +6,7 @@
 //using System.Text;
 //using System.Windows.Forms;
 
-//namespace OpenBreed.Editor.VM.Levels.Tools
+//namespace OpenBreed.Editor.VM.Tools
 //{
 //    public class InsertPropertyTool : LevelTool
 //    {

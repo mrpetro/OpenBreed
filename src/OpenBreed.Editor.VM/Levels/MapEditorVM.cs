@@ -14,7 +14,7 @@ using System.ComponentModel;
 
 namespace OpenBreed.Editor.VM.Levels
 {
-    public class MapEditorVM : EntryEditorBaseVM<ILevelEntry, LevelVM>
+    public class MapEditorVM : EntryEditorBaseVM<IMapEntry, LevelVM>
     {
         #region Public Constructors
 
@@ -92,12 +92,12 @@ namespace OpenBreed.Editor.VM.Levels
 
         #region Protected Methods
 
-        protected override void UpdateEntry(LevelVM source, ILevelEntry target)
+        protected override void UpdateEntry(LevelVM source, IMapEntry target)
         {
             base.UpdateEntry(source, target);
         }
 
-        protected override void UpdateVM(ILevelEntry source, LevelVM target)
+        protected override void UpdateVM(IMapEntry source, LevelVM target)
         {
             var model = DataProvider.GetLevel(source.Id);
 

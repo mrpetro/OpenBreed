@@ -6,14 +6,14 @@ using System.Windows.Forms;
 using OpenBreed.Editor.VM.Levels;
 using System.Drawing;
 
-namespace OpenBreed.Editor.VM.Levels.Tools
+namespace OpenBreed.Editor.VM.Tools
 {
-    public class ZoomTool : LevelTool
+    public class ZoomTool : VMTool
     {
-        private readonly MapEditorViewVM _vm = null;
+        private readonly IZoomableVM _vm = null;
 
-        public ZoomTool(MapEditorViewVM vm, IToolController controller) :
-            base("ZoomTool", controller)
+        public ZoomTool(IZoomableVM vm, IToolView view) :
+            base("ZoomTool", view)
         {
             if (vm == null)
                 throw new ArgumentNullException(nameof(vm));
@@ -23,17 +23,17 @@ namespace OpenBreed.Editor.VM.Levels.Tools
 
         public override void Activate()
         {
-            Controller.MouseWheel += new MouseEventHandler(Controller_MouseWheel);
+            View.MouseWheel += View_MouseWheel;
         }
 
         public override void Deactivate()
         {
-            Controller.MouseWheel -= new MouseEventHandler(Controller_MouseWheel);
+            View.MouseWheel -= View_MouseWheel;
         }
 
-        void Controller_MouseWheel(object sender, MouseEventArgs e)
+        void View_MouseWheel(object sender, MouseEventArgs e)
         {
-            IToolController view = (IToolController)sender;
+            IToolView view = (IToolView)sender;
 
             float currentScale = _vm.ZoomScale;
             float scaleFactor = 1.0f;
