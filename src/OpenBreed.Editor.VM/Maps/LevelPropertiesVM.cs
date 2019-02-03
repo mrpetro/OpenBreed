@@ -3,7 +3,7 @@ using OpenBreed.Editor.VM.Base;
 using System;
 using System.Linq;
 
-namespace OpenBreed.Editor.VM.Levels
+namespace OpenBreed.Editor.VM.Maps
 {
     public class LevelPropertiesVM : BaseViewModel
     {

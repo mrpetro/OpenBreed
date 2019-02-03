@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Editor.VM.Levels.Layers
+namespace OpenBreed.Editor.VM.Maps.Layers
 {
     public abstract class MapBodyBaseLayerVM : BaseViewModel
     {

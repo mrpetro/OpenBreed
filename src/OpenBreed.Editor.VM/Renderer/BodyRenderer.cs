@@ -1,4 +1,4 @@
-﻿using OpenBreed.Editor.VM.Levels;
+﻿using OpenBreed.Editor.VM.Maps;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

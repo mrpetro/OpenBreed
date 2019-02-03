@@ -23,7 +23,7 @@ using OpenBreed.Editor.UI.WinForms.Controls.Images;
 using OpenBreed.Editor.UI.WinForms.Controls.Props;
 using OpenBreed.Editor.UI.WinForms.Controls.Palettes;
 using OpenBreed.Editor.UI.WinForms.Controls.Maps;
-using OpenBreed.Editor.VM.Levels;
+using OpenBreed.Editor.VM.Maps;
 using OpenBreed.Editor.VM.Assets;
 using OpenBreed.Editor.UI.WinForms.Controls.Assets;
 

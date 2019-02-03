@@ -75,7 +75,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
         {
             if (databaseItemVM == null)
                 return;
-            else if (databaseItemVM is DbLevelEntryVM)
+            else if (databaseItemVM is DbMapEntryVM)
                 _dbEditorView.ShowLevelView();
             else if (databaseItemVM is DbSpriteSetEntryVM)
                 _dbEditorView.ShowSpriteSetEditorView();

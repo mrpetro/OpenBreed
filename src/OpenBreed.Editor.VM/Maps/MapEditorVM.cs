@@ -12,7 +12,7 @@ using OpenBreed.Common;
 using OpenBreed.Common.Maps;
 using System.ComponentModel;
 
-namespace OpenBreed.Editor.VM.Levels
+namespace OpenBreed.Editor.VM.Maps
 {
     public class MapEditorVM : EntryEditorBaseVM<IMapEntry, LevelVM>
     {

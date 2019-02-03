@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 
-namespace OpenBreed.Editor.VM.Levels.Helpers
+namespace OpenBreed.Editor.VM.Maps.Helpers
 {
     public class TileInsertOperation
     {

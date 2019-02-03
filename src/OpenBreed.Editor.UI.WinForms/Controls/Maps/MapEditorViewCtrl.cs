@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using OpenBreed.Editor.VM.Levels;
+using OpenBreed.Editor.VM.Maps;
 using OpenBreed.Editor.VM.Tools;
 using OpenBreed.Editor.VM;
 using System.Drawing.Drawing2D;

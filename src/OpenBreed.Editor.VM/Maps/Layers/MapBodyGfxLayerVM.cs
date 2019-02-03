@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Editor.VM.Levels.Layers
+namespace OpenBreed.Editor.VM.Maps.Layers
 {
-    public class MapBodyPropertyLayerVM : MapBodyBaseLayerVM
+    public class MapBodyGfxLayerVM : MapBodyBaseLayerVM
     {
-        private int[] _cells;
+        private TileRef[] _cells;
 
         #region Private Fields
 
@@ -18,21 +18,21 @@ namespace OpenBreed.Editor.VM.Levels.Layers
 
         #region Public Constructors
 
-        internal MapBodyPropertyLayerVM(LevelBodyVM body) : base(body)
+        internal MapBodyGfxLayerVM(LevelBodyVM body) : base(body)
         {
-            _cells = new int[body.Size.Width * body.Size.Height];
+            _cells = new TileRef[body.Size.Width * body.Size.Height];
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public void SetCell(int x, int y, int value)
+        public void SetCell(int x, int y, TileRef value)
         {
             _cells[y * Body.Size.Width + x] = value;
         }
 
-        public int GetCell(int x, int y)
+        public TileRef GetCell(int x, int y)
         {
             return _cells[y * Body.Size.Width + x];
         }
@@ -43,31 +43,28 @@ namespace OpenBreed.Editor.VM.Levels.Layers
 
         public override void DrawView(Graphics gfx, Rectangle rectangle)
         {
-            return;
-            //if (Body.Map.Root.LevelEditor.CurrentLevel.PropSet == null)
-            //    return;
-
             int tileSize = 16;
 
             for (int xIndex = rectangle.Left; xIndex <= rectangle.Right; xIndex++)
             {
                 for (int yIndex = rectangle.Bottom; yIndex <= rectangle.Top; yIndex++)
                 {
-                    var propertyId = GetCell(xIndex, yIndex);
+                    var tileRef = GetCell(xIndex, yIndex);
 
-                    //Body.Map.Root.LevelEditor.CurrentLevel.PropSet.DrawProperty(gfx, propertyId, xIndex * tileSize, yIndex * tileSize, tileSize);
+                    //Body.Map.Root.LevelEditor.TileSelector.DrawTile(gfx, tileRef, xIndex * tileSize, yIndex * tileSize, tileSize);
+                    //Body.Map.Editor.PropertySet.DrawProperty(gfx, tile.PropertyId, xIndex * tileSize, yIndex * tileSize, tileSize);
                 }
             }
         }
 
         public override void Restore(IMapBodyLayerModel layerModel)
         {
-            var propertyLayerModel = layerModel as MapBodyLayerModel<int>;
+            var gfxLayerModel = layerModel as MapBodyLayerModel<TileRef>;
 
-            if (propertyLayerModel == null)
+            if (gfxLayerModel == null)
                 throw new ArgumentException(nameof(layerModel));
 
-            _cells = propertyLayerModel.Cells.ToArray();
+            _cells = gfxLayerModel.Cells.ToArray();
         }
 
         #endregion Internal Methods

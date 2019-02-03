@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Drawing;
 using OpenBreed.Editor.VM.Palettes;
 
-namespace OpenBreed.Editor.VM.Levels
+namespace OpenBreed.Editor.VM.Maps
 {
     public class MapEditorPalettesToolVM : BaseViewModel
     {

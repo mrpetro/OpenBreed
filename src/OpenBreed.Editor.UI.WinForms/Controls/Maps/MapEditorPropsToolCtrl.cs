@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenBreed.Editor.VM.Props;
-using OpenBreed.Editor.VM.Levels;
+using OpenBreed.Editor.VM.Maps;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
 {

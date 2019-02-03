@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using OpenBreed.Editor.VM.Palettes;
-using OpenBreed.Editor.VM.Levels;
+using OpenBreed.Editor.VM.Maps;
 using OpenBreed.Editor.VM.Tiles;
 using System.Drawing;
 using OpenBreed.Common.Maps.Readers.MAP;

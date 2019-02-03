@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Common.Maps;
 using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM.Levels.Helpers;
+using OpenBreed.Editor.VM.Maps.Helpers;
 using OpenBreed.Editor.VM.Props;
 using System;
 using System.Drawing;
@@ -8,12 +8,12 @@ using System.Drawing.Drawing2D;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using OpenBreed.Editor.VM.Levels.Layers;
+using OpenBreed.Editor.VM.Maps.Layers;
 using OpenBreed.Common.Tiles;
 using OpenBreed.Editor.VM.Tiles;
 using OpenBreed.Common.Props;
 
-namespace OpenBreed.Editor.VM.Levels
+namespace OpenBreed.Editor.VM.Maps
 {
     public class LevelBodyVM : BaseViewModel
     {

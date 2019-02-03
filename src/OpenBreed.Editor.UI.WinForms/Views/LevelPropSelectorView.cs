@@ -10,7 +10,7 @@ using WeifenLuo.WinFormsUI.Docking;
 using System.Drawing.Imaging;
 using OpenBreed.Editor.VM.Props;
 using OpenBreed.Editor.VM;
-using OpenBreed.Editor.VM.Levels;
+using OpenBreed.Editor.VM.Maps;
 
 namespace OpenBreed.Editor.UI.WinForms.Views
 {

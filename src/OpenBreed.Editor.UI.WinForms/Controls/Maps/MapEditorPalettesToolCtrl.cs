@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using OpenBreed.Common.Palettes;
 using OpenBreed.Editor.UI.WinForms.Views;
 using OpenBreed.Editor.VM.Palettes;
-using OpenBreed.Editor.VM.Levels;
+using OpenBreed.Editor.VM.Maps;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
 {

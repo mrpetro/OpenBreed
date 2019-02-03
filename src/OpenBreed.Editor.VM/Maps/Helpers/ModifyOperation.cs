@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace OpenBreed.Editor.VM.Levels.Helpers
+namespace OpenBreed.Editor.VM.Maps.Helpers
 {
     class ModifyOperation
     {

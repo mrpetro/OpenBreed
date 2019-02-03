@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Editor.VM.Levels
+namespace OpenBreed.Editor.VM.Maps
 {
     public class MapEditorViewVM : BaseViewModel, IScrollableVM, IZoomableVM
     {

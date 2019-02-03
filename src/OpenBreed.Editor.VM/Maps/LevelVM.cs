@@ -17,7 +17,7 @@ using OpenBreed.Common.Sprites;
 using OpenBreed.Common.Props;
 using OpenBreed.Common;
 
-namespace OpenBreed.Editor.VM.Levels
+namespace OpenBreed.Editor.VM.Maps
 {
     public class LevelVM : EditableEntryVM
     {

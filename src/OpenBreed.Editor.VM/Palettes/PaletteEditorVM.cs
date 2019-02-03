@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Palettes;
 using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM.Levels;
+using OpenBreed.Editor.VM.Maps;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

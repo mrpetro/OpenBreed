@@ -5,7 +5,7 @@ using System.Text;
 using OpenBreed.Editor.VM;
 using OpenBreed.Common.Assets;
 using OpenBreed.Editor.VM.Tiles;
-using OpenBreed.Editor.VM.Levels;
+using OpenBreed.Editor.VM.Maps;
 using OpenBreed.Editor.VM.Props;
 using OpenBreed.Editor.VM.Tools;
 using OpenBreed.Editor.VM.Base;
