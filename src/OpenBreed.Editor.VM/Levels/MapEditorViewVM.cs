@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Levels
 {
-    public class LevelBodyEditorVM : BaseViewModel
+    public class MapEditorViewVM : BaseViewModel
     {
         #region Private Fields
 
@@ -24,7 +24,7 @@ namespace OpenBreed.Editor.VM.Levels
 
         #region Public Constructors
 
-        public LevelBodyEditorVM(LevelEditorVM parent)
+        public MapEditorViewVM(MapEditorVM parent)
         {
             Parent = parent;
 
@@ -40,7 +40,7 @@ namespace OpenBreed.Editor.VM.Levels
             switch (e.PropertyName)
             {
                 case nameof(CurrentMapBody):
-                    Title = "Map body - " + CurrentMapBody.Map.Title;
+                    Title = "Map body - " + CurrentMapBody.Owner.Title;
                     break;
                 default:
                     break;
@@ -57,7 +57,7 @@ namespace OpenBreed.Editor.VM.Levels
             set { SetProperty(ref _currentMapBody, value); }
         }
 
-        public LevelEditorVM Parent { get; }
+        public MapEditorVM Parent { get; }
 
         public string Title
         {

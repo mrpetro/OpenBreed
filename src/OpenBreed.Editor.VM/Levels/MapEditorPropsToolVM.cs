@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Levels
 {
-    public class LevelPropSelectorVM : BaseViewModel
+    public class MapEditorPropsToolVM : BaseViewModel
     {
 
         #region Private Fields
@@ -22,7 +22,7 @@ namespace OpenBreed.Editor.VM.Levels
 
         #region Public Constructors
 
-        public LevelPropSelectorVM(LevelEditorVM parent)
+        public MapEditorPropsToolVM(MapEditorVM parent)
         {
             Parent = parent;
 
@@ -39,7 +39,7 @@ namespace OpenBreed.Editor.VM.Levels
             set { SetProperty(ref _currentItem, value); }
         }
 
-        public LevelEditorVM Parent { get; }
+        public MapEditorVM Parent { get; }
         public int SelectedIndex { get; private set; }
 
         public string Title

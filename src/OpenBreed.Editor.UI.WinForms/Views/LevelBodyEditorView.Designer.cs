@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.MapBodyViewer = new OpenBreed.Editor.UI.WinForms.Controls.Levels.LevelBodyEditorCtrl();
+            this.MapBodyViewer = new OpenBreed.Editor.UI.WinForms.Controls.Levels.MapEditorViewCtrl();
             this.SuspendLayout();
             // 
             // MapBodyViewer
@@ -55,6 +55,6 @@
 
         #endregion
 
-        private Controls.Levels.LevelBodyEditorCtrl MapBodyViewer;
+        private Controls.Levels.MapEditorViewCtrl MapBodyViewer;
     }
 }

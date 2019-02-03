@@ -13,7 +13,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
     {
         #region Private Fields
 
-        private LevelBodyEditorVM _vm;
+        private MapEditorViewVM _vm;
 
         #endregion Private Fields
 
@@ -28,7 +28,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         #region Public Methods
 
-        public void Initialize(LevelBodyEditorVM vm)
+        public void Initialize(MapEditorViewVM vm)
         {
             _vm = vm;
 

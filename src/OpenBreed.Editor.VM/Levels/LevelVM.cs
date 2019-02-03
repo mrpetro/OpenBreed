@@ -37,6 +37,7 @@ namespace OpenBreed.Editor.VM.Levels
 
         public LevelVM()
         {
+            TileSets = new BindingList<TileSetVM>();
             Body = new LevelBodyVM(this);
             Properties = new LevelPropertiesVM(this);
 
@@ -82,6 +83,12 @@ namespace OpenBreed.Editor.VM.Levels
             set { SetProperty(ref _source, value); }
         }
         public BindingList<SpriteSetVM> SpriteSets { get; }
+        //public void AddSpriteSet(SpriteSetModel spriteSet)
+        //{
+        //    SpriteSets.Add(Root.CreateSpiteSet(spriteSet));
+        //}
+        public BindingList<TileSetVM> TileSets { get; }
+
         public int TileSize { get { return 16; } }
 
         public string Title
@@ -91,13 +98,6 @@ namespace OpenBreed.Editor.VM.Levels
         }
 
         #endregion Public Properties
-
-        #region Public Methods
-
-        //public void AddSpriteSet(SpriteSetModel spriteSet)
-        //{
-        //    SpriteSets.Add(Root.CreateSpiteSet(spriteSet));
-        //}
 
         //public void AddSpriteSet(string name)
         //{
@@ -110,6 +110,8 @@ namespace OpenBreed.Editor.VM.Levels
         //{
         //    PropSet = Root.CreatePropSet(propSet);
         //}
+
+        #region Public Methods
 
         public void Restore(List<PaletteModel> palettes)
         {
@@ -149,6 +151,13 @@ namespace OpenBreed.Editor.VM.Levels
 
         #region Internal Methods
 
+        internal void AddTileSet(TileSetModel tileSet)
+        {
+            var tileSetVM = new TileSetVM();
+            tileSetVM.TileSize = tileSet.TileSize;
+            tileSetVM.SetupTiles(tileSet.Tiles);
+            TileSets.Add(tileSetVM);
+        }
         internal void Close()
         {
             if (Source == null)

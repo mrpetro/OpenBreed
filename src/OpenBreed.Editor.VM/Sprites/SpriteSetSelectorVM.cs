@@ -22,7 +22,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Public Constructors
 
-        public SpriteSetSelectorVM(LevelEditorVM parent)
+        public SpriteSetSelectorVM(MapEditorVM parent)
         {
             Parent = parent;
 
@@ -45,7 +45,7 @@ namespace OpenBreed.Editor.VM.Sprites
             set { SetProperty(ref _currentItem, value); }
         }
 
-        public LevelEditorVM Parent { get; private set; }
+        public MapEditorVM Parent { get; private set; }
 
         #endregion Public Properties
 

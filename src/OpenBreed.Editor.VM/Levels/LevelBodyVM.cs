@@ -26,11 +26,11 @@ namespace OpenBreed.Editor.VM.Levels
 
         #region Public Constructors
 
-        public LevelBodyVM(LevelVM map)
+        public LevelBodyVM(LevelVM owner)
         {
-            Map = map;
+            Owner = owner;
 
-            TileSets = new BindingList<TileSetVM>();
+
             Layers = new BindingList<MapBodyBaseLayerVM>();
 
             //TilesInserter = new TilesInserter(this, Map.Project.Root.TileSets.CurrentItem.Selector);
@@ -43,18 +43,16 @@ namespace OpenBreed.Editor.VM.Levels
         #region Public Properties
 
         public BindingList<MapBodyBaseLayerVM> Layers { get; }
-        public LevelVM Map { get; private set; }
         public float MaxCoordX { get; private set; }
         public float MaxCoordY { get; private set; }
+        public LevelVM Owner { get; }
+        public PropSetVM PropSet { get; private set; }
 
         public Size Size
         {
             get { return _size; }
             set { SetProperty(ref _size, value); }
         }
-
-        public PropSetVM PropSet { get; private set; }
-        public BindingList<TileSetVM> TileSets { get; }
 
         #endregion Public Properties
 
@@ -64,7 +62,7 @@ namespace OpenBreed.Editor.VM.Levels
 
         public int GetMapIndexX(float xCoord)
         {
-            int xIndex = (int)(xCoord / Map.TileSize);
+            int xIndex = (int)(xCoord / Owner.TileSize);
 
             if (xIndex < 0)
                 xIndex = 0;
@@ -76,7 +74,7 @@ namespace OpenBreed.Editor.VM.Levels
 
         public int GetMapIndexY(float yCoord)
         {
-            int yIndex = (int)(yCoord / Map.TileSize);
+            int yIndex = (int)(yCoord / Owner.TileSize);
 
             if (yIndex < 0)
                 yIndex = 0;
@@ -107,41 +105,19 @@ namespace OpenBreed.Editor.VM.Levels
         {
             //CurrentMapBody.SetTileGfx(x, y, gfxId);
 
-            Map.IsModified = true;
-        }
-
-        internal void SetPropSet(IPropSetEntry propSet)
-        {
-            var propSetVM = new PropSetVM();
-
-            foreach (var property in propSet.Items)
-            {
-                var newProp = propSetVM.CreateProp(property);
-                newProp.Load(property);
-                propSetVM.Items.Add(newProp);
-            }
-
-            PropSet = propSetVM;
+            Owner.IsModified = true;
         }
 
         public void SetTileProperty(int x, int y, int propertyId)
         {
             //CurrentMapBody.SetTileProperty(x, y, propertyId);
 
-            Map.IsModified = true;
+            Owner.IsModified = true;
         }
 
         #endregion Public Methods
 
         #region Internal Methods
-
-        internal void AddTileSet(TileSetModel tileSet)
-        {
-            var tileSetVM = new TileSetVM();
-            tileSetVM.TileSize = tileSet.TileSize;
-            tileSetVM.SetupTiles(tileSet.Tiles);
-            TileSets.Add(tileSetVM);
-        }
 
         internal void ConnectEvents()
         {
@@ -149,7 +125,7 @@ namespace OpenBreed.Editor.VM.Levels
 
         internal Point GetIndexCoords(Point point)
         {
-            return new Point(point.X / Map.TileSize, point.Y / Map.TileSize);
+            return new Point(point.X / Owner.TileSize, point.Y / Owner.TileSize);
         }
 
         internal void Load(MapModel map)
@@ -164,8 +140,22 @@ namespace OpenBreed.Editor.VM.Levels
             Layers.RaiseListChangedEvents = true;
             Layers.ResetBindings();
 
-            MaxCoordX = Size.Width * Map.TileSize;
-            MaxCoordY = Size.Height * Map.TileSize;
+            MaxCoordX = Size.Width * Owner.TileSize;
+            MaxCoordY = Size.Height * Owner.TileSize;
+        }
+
+        internal void SetPropSet(IPropSetEntry propSet)
+        {
+            var propSetVM = new PropSetVM();
+
+            foreach (var property in propSet.Items)
+            {
+                var newProp = propSetVM.CreateProp(property);
+                newProp.Load(property);
+                propSetVM.Items.Add(newProp);
+            }
+
+            PropSet = propSetVM;
         }
 
         #endregion Internal Methods

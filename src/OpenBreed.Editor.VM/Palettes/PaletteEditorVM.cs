@@ -53,7 +53,7 @@ namespace OpenBreed.Editor.VM.Palettes
         }
 
         public override string EditorName { get { return "Palette Editor"; } }
-        public LevelPaletteSelectorVM Palettes { get; private set; }
+        public MapEditorPalettesToolVM Palettes { get; private set; }
 
         #endregion Public Properties
 

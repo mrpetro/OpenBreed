@@ -57,15 +57,14 @@ namespace OpenBreed.Editor.VM.Renderer
 
         private void Render(MapBodyGfxLayerVM renderable)
         {
+            var tileSets = renderable.Body.Owner.TileSets;
             RectangleF viewRect = Target.Gfx.ClipBounds;
 
-            int tileSize = renderable.Body.Map.TileSize;
+            int tileSize = renderable.Body.Owner.TileSize;
             int xFrom = renderable.Body.GetMapIndexX(viewRect.Left);
             int xTo = renderable.Body.GetMapIndexX(viewRect.Right);
             int yFrom = renderable.Body.GetMapIndexY(viewRect.Top);
             int yTo = renderable.Body.GetMapIndexY(viewRect.Bottom);
-
-            var tileSets = renderable.Body.TileSets;
 
             for (int xIndex = xFrom; xIndex <= xTo; xIndex++)
             {
@@ -113,7 +112,7 @@ namespace OpenBreed.Editor.VM.Renderer
         {
             RectangleF viewRect = Target.Gfx.ClipBounds;
 
-            int tileSize = renderable.Body.Map.TileSize;
+            int tileSize = renderable.Body.Owner.TileSize;
             int xFrom = renderable.Body.GetMapIndexX(viewRect.Left);
             int xTo = renderable.Body.GetMapIndexX(viewRect.Right);
             int yFrom = renderable.Body.GetMapIndexY(viewRect.Top);

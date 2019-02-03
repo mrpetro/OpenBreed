@@ -14,17 +14,17 @@ using OpenBreed.Editor.VM.Levels;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
 {
-    public partial class LevelPaletteSelectorCtrl : UserControl
+    public partial class MapEditorPalettesToolCtrl : UserControl
     {
         #region Private Fields
 
-        private LevelPaletteSelectorVM _vm;
+        private MapEditorPalettesToolVM _vm;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public LevelPaletteSelectorCtrl()
+        public MapEditorPalettesToolCtrl()
         {
             InitializeComponent();
         }
@@ -33,7 +33,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
 
         #region Public Methods
 
-        public void Initialize(LevelPaletteSelectorVM vm)
+        public void Initialize(MapEditorPalettesToolVM vm)
         {
             _vm = vm;
 

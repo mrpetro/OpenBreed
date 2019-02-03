@@ -14,17 +14,17 @@ using System.ComponentModel;
 
 namespace OpenBreed.Editor.VM.Levels
 {
-    public class LevelEditorVM : EntryEditorBaseVM<ILevelEntry, LevelVM>
+    public class MapEditorVM : EntryEditorBaseVM<ILevelEntry, LevelVM>
     {
         #region Public Constructors
 
-        public LevelEditorVM(IRepository repository) : base(repository)
+        public MapEditorVM(IRepository repository) : base(repository)
         {
-            BodyEditor = new LevelBodyEditorVM(this);
+            MapView = new MapEditorViewVM(this);
             //TileSetSelector = new LevelTileSetSelectorVM(this);
             //TileSelector = new LevelTileSelectorVM(this);
-            PropSelector = new LevelPropSelectorVM(this);
-            PaletteSelector = new LevelPaletteSelectorVM(this);
+            PropSelector = new MapEditorPropsToolVM(this);
+            PaletteSelector = new MapEditorPalettesToolVM(this);
 
             PropertyChanged += LevelEditorVM_PropertyChanged;
 
@@ -36,7 +36,7 @@ namespace OpenBreed.Editor.VM.Levels
             switch (e.PropertyName)
             {
                 case nameof(PaletteSelector.CurrentItem):
-                    foreach (var tileSet in BodyEditor.CurrentMapBody.TileSets)
+                    foreach (var tileSet in Editable.TileSets)
                         tileSet.Palette = PaletteSelector.CurrentItem;
                     break;
                 default:
@@ -49,7 +49,7 @@ namespace OpenBreed.Editor.VM.Levels
             switch (e.PropertyName)
             {
                 case nameof(Editable):
-                    BodyEditor.CurrentMapBody = Editable.Body;
+                    MapView.CurrentMapBody = Editable.Body;
                     PaletteSelector.CurrentItem = Editable.Palettes.FirstOrDefault();
                     break;
                 default:
@@ -61,11 +61,11 @@ namespace OpenBreed.Editor.VM.Levels
 
         #region Public Properties
 
-        public LevelBodyEditorVM BodyEditor { get; }
+        public MapEditorViewVM MapView { get; }
 
         public override string EditorName { get { return "Level Editor"; } }
-        public LevelPaletteSelectorVM PaletteSelector { get; }
-        public LevelPropSelectorVM PropSelector { get; }
+        public MapEditorPalettesToolVM PaletteSelector { get; }
+        public MapEditorPropsToolVM PropSelector { get; }
         //public LevelTileSelectorVM TileSelector { get; }
 
         #endregion Public Properties
@@ -105,7 +105,7 @@ namespace OpenBreed.Editor.VM.Levels
             //    target.AddSpriteSet(spriteSet);
 
             foreach (var tileSet in model.TileSets)
-                target.Body.AddTileSet(tileSet);
+                target.AddTileSet(tileSet);
 
             if (model.PropSet != null)
                 target.Body.SetPropSet(model.PropSet);

@@ -12,20 +12,20 @@ using OpenBreed.Editor.VM.Levels;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
 {
-    public partial class LevelEditorCtrl : EntryEditorInnerCtrl
+    public partial class MapEditorCtrl : EntryEditorInnerCtrl
     {
-        private LevelEditorVM _vm;
+        private MapEditorVM _vm;
 
-        public LevelEditorCtrl()
+        public MapEditorCtrl()
         {
             InitializeComponent();
         }
 
         public override void Initialize(EntryEditorVM vm)
         {
-            _vm = vm as LevelEditorVM ?? throw new InvalidOperationException(nameof(vm));
+            _vm = vm as MapEditorVM ?? throw new InvalidOperationException(nameof(vm));
 
-            BodyEditorCtrl.Initialize(_vm.BodyEditor);
+            MapView.Initialize(_vm.MapView);
         }
     }
 }

@@ -10,9 +10,9 @@ namespace OpenBreed.Editor.VM.Levels.Tools
 {
     public class ZoomTool : LevelTool
     {
-        private readonly LevelBodyEditorVM _vm = null;
+        private readonly MapEditorViewVM _vm = null;
 
-        public ZoomTool(LevelBodyEditorVM vm, IToolController controller) :
+        public ZoomTool(MapEditorViewVM vm, IToolController controller) :
             base("ZoomTool", controller)
         {
             if (vm == null)

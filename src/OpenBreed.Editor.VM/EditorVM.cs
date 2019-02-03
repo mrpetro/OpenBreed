@@ -66,7 +66,7 @@ namespace OpenBreed.Editor.VM
             entryEditorFactory.Register<IRepository<IPaletteEntry>, PaletteEditorVM>();
             entryEditorFactory.Register<IRepository<IImageEntry>, ImageEditorVM>();
             entryEditorFactory.Register<IRepository<ISoundEntry>, SoundEditorVM>();
-            entryEditorFactory.Register<IRepository<ILevelEntry>, LevelEditorVM>();
+            entryEditorFactory.Register<IRepository<ILevelEntry>, MapEditorVM>();
             entryEditorFactory.Register<IRepository<IAssetEntry>, AssetEditorVM>();
             ServiceLocator.Instance.RegisterService<DbEntryEditorFactory>(entryEditorFactory);
 

@@ -14,7 +14,7 @@ using OpenTK;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
 {
-    public partial class MapViewCtrl : UserControl
+    public partial class MapViewExCtrl : UserControl
     {
         int mx = 0;
         int my = 0;
@@ -35,7 +35,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
 
         #region Public Constructors
 
-        public MapViewCtrl()
+        public MapViewExCtrl()
         {
             InitializeComponent();
 

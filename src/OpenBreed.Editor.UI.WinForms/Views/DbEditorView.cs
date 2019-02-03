@@ -82,7 +82,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _viewFactory.Register<PropSetEditorVM, EntryEditorView<PropSetEditorCtrl>>();
             _viewFactory.Register<ImageEditorVM, EntryEditorView<ImageEditorCtrl>>();
             _viewFactory.Register<PaletteEditorVM, EntryEditorView<PaletteEditorCtrl>>();
-            _viewFactory.Register<LevelEditorVM, EntryEditorView<LevelEditorCtrl>>();
+            _viewFactory.Register<MapEditorVM, EntryEditorView<MapEditorCtrl>>();
             _viewFactory.Register<AssetEditorVM, EntryEditorView<AssetEditorCtrl>>();
         }
 

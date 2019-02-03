@@ -17,14 +17,14 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 {
     public partial class LevelPalettesView : DockContent
     {
-        private LevelPaletteSelectorVM _vm;
+        private MapEditorPalettesToolVM _vm;
 
         public LevelPalettesView()
         {
             InitializeComponent();
         }
 
-        public void Initialize(LevelPaletteSelectorVM vm)
+        public void Initialize(MapEditorPalettesToolVM vm)
         {
             _vm = vm;
 

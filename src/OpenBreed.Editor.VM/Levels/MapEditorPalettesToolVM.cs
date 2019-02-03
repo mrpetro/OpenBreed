@@ -8,7 +8,7 @@ using OpenBreed.Editor.VM.Palettes;
 
 namespace OpenBreed.Editor.VM.Levels
 {
-    public class LevelPaletteSelectorVM : BaseViewModel
+    public class MapEditorPalettesToolVM : BaseViewModel
     {
 
         #region Private Fields
@@ -20,7 +20,7 @@ namespace OpenBreed.Editor.VM.Levels
 
         #region Public Constructors
 
-        public LevelPaletteSelectorVM(LevelEditorVM parent)
+        public MapEditorPalettesToolVM(MapEditorVM parent)
         {
             Parent = parent;
 
@@ -43,7 +43,7 @@ namespace OpenBreed.Editor.VM.Levels
             set { SetProperty(ref _currentItem, value); }
         }
 
-        public LevelEditorVM Parent { get; }
+        public MapEditorVM Parent { get; }
 
         #endregion Public Properties
 

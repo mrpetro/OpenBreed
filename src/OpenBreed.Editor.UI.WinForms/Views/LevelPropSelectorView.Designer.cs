@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.PropSelector = new OpenBreed.Editor.UI.WinForms.Controls.Levels.LevelPropSelectorCtrl();
+            this.PropSelector = new OpenBreed.Editor.UI.WinForms.Controls.Levels.MapEditorPropsToolCtrl();
             this.SuspendLayout();
             // 
             // PropSelector
@@ -54,6 +54,6 @@
         }
 
         #endregion
-        private OpenBreed.Editor.UI.WinForms.Controls.Levels.LevelPropSelectorCtrl PropSelector;
+        private OpenBreed.Editor.UI.WinForms.Controls.Levels.MapEditorPropsToolCtrl PropSelector;
     }
 }

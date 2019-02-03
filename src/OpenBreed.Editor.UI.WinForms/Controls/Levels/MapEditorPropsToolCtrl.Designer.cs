@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
 {
-    partial class LevelEditorCtrl
+    partial class MapEditorPropsToolCtrl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,30 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.BodyEditorCtrl = new OpenBreed.Editor.UI.WinForms.Controls.Levels.LevelBodyEditorCtrl();
+            this.DataGridView = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // BodyEditorCtrl
+            // DataGridView
             // 
-            this.BodyEditorCtrl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BodyEditorCtrl.Location = new System.Drawing.Point(0, 0);
-            this.BodyEditorCtrl.Name = "BodyEditorCtrl";
-            this.BodyEditorCtrl.Size = new System.Drawing.Size(471, 370);
-            this.BodyEditorCtrl.TabIndex = 0;
+            this.DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DataGridView.Location = new System.Drawing.Point(0, 0);
+            this.DataGridView.Name = "DataGridView";
+            this.DataGridView.Size = new System.Drawing.Size(541, 360);
+            this.DataGridView.TabIndex = 0;
             // 
-            // LevelEditorCtrl
+            // PropSelectorCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.BodyEditorCtrl);
-            this.Name = "LevelEditorCtrl";
-            this.Size = new System.Drawing.Size(471, 370);
+            this.Controls.Add(this.DataGridView);
+            this.Name = "PropSelectorCtrl";
+            this.Size = new System.Drawing.Size(541, 360);
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private LevelBodyEditorCtrl BodyEditorCtrl;
+        private System.Windows.Forms.DataGridView DataGridView;
     }
 }

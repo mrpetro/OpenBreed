@@ -15,19 +15,19 @@ using OpenBreed.Editor.VM.Renderer;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
 {
-    public partial class LevelBodyEditorCtrl : UserControl, IToolController
+    public partial class MapEditorViewCtrl : UserControl, IToolController
     {
         #region Private Fields
 
         private ScrollTool _scrollTool;
         private ZoomTool _zoomTool;
-        private LevelBodyEditorVM _vm;
+        private MapEditorViewVM _vm;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public LevelBodyEditorCtrl()
+        public MapEditorViewCtrl()
         {
             InitializeComponent();
 
@@ -38,7 +38,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Levels
 
         #region Public Methods
 
-        public void Initialize(LevelBodyEditorVM vm)
+        public void Initialize(MapEditorViewVM vm)
         {
             _vm = vm;
 

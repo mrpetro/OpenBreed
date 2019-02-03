@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.MapView = new OpenBreed.Editor.UI.WinForms.Controls.Levels.MapViewCtrl();
+            this.MapView = new OpenBreed.Editor.UI.WinForms.Controls.Levels.MapViewExCtrl();
             this.tbxCoords = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
@@ -65,7 +65,7 @@
 
         #endregion
 
-        private Controls.Levels.MapViewCtrl MapView;
+        private Controls.Levels.MapViewExCtrl MapView;
         private System.Windows.Forms.TextBox tbxCoords;
     }
 }

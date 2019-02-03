@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.PaletteEditor = new OpenBreed.Editor.UI.WinForms.Controls.Palettes.PaletteEditorCtrl();
-            this.Palettes = new OpenBreed.Editor.UI.WinForms.Controls.Levels.LevelPaletteSelectorCtrl();
+            this.Palettes = new OpenBreed.Editor.UI.WinForms.Controls.Levels.MapEditorPalettesToolCtrl();
             this.SuspendLayout();
             // 
             // PaletteEditor
@@ -71,7 +71,7 @@
 
         #endregion
 
-        private Controls.Levels.LevelPaletteSelectorCtrl Palettes;
+        private Controls.Levels.MapEditorPalettesToolCtrl Palettes;
         private Controls.Palettes.PaletteEditorCtrl PaletteEditor;
     }
 }
