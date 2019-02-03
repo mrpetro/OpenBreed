@@ -4,6 +4,9 @@ Open source reimplementation of classic Alien Breed 2D games:
  - *Alien Breed II: Horror continues* - (ABHC)
  - *Alien Breed: Tower Assault* - (ABTA)
  
+## Project wiki
+[Over here](https://github.com/mrpetro/OpenBreed/wiki)
+ 
 ## Obtaining game resources
  
 Best way to obtain resources for ABSE is to get them from Amiga port. This would require some decrunching of ATN! files.
