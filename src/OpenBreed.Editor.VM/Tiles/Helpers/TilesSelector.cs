@@ -7,13 +7,6 @@
 
 //namespace OpenBreed.Editor.VM.Tiles.Helpers
 //{
-//    public enum SelectModeEnum
-//    {
-//        Nothing,
-//        Select,
-//        Deselect
-//    }
-
 //    public class TilesSelector
 //    {
 

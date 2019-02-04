@@ -26,6 +26,10 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
             _vm = vm as MapEditorVM ?? throw new InvalidOperationException(nameof(vm));
 
             MapView.Initialize(_vm.MapView);
+
+            TilesTool.Initialize(_vm.TilesTool);
+            ActionsTool.Initialize(_vm.ActionsTool);
+ 
         }
     }
 }

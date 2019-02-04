@@ -19,7 +19,7 @@ using OpenBreed.Common;
 
 namespace OpenBreed.Editor.VM.Maps
 {
-    public class LevelVM : EditableEntryVM
+    public class MapVM : EditableEntryVM
     {
 
         #region Private Fields
@@ -35,7 +35,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Constructors
 
-        public LevelVM()
+        public MapVM()
         {
             TileSets = new BindingList<TileSetVM>();
             Body = new LevelBodyVM(this);

@@ -26,7 +26,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Constructors
 
-        public LevelBodyVM(LevelVM owner)
+        public LevelBodyVM(MapVM owner)
         {
             Owner = owner;
 
@@ -45,7 +45,7 @@ namespace OpenBreed.Editor.VM.Maps
         public BindingList<MapBodyBaseLayerVM> Layers { get; }
         public float MaxCoordX { get; private set; }
         public float MaxCoordY { get; private set; }
-        public LevelVM Owner { get; }
+        public MapVM Owner { get; }
         public PropSetVM PropSet { get; private set; }
 
         public Size Size

@@ -14,8 +14,9 @@ using System.ComponentModel;
 
 namespace OpenBreed.Editor.VM.Maps
 {
-    public class MapEditorVM : EntryEditorBaseVM<IMapEntry, LevelVM>
+    public class MapEditorVM : EntryEditorBaseVM<IMapEntry, MapVM>
     {
+
         #region Public Constructors
 
         public MapEditorVM(IRepository repository) : base(repository)
@@ -23,50 +24,27 @@ namespace OpenBreed.Editor.VM.Maps
             MapView = new MapEditorViewVM(this);
             //TileSetSelector = new LevelTileSetSelectorVM(this);
             //TileSelector = new LevelTileSelectorVM(this);
-            PropSelector = new MapEditorPropsToolVM(this);
+            TilesTool = new MapEditorTilesToolVM(this);
+            ActionsTool = new MapEditorActionsToolVM(this);
             PaletteSelector = new MapEditorPalettesToolVM(this);
 
-            PropertyChanged += LevelEditorVM_PropertyChanged;
+            PropertyChanged += This_PropertyChanged;
 
             PaletteSelector.PropertyChanged += PaletteSelector_PropertyChanged;
-        }
 
-        private void PaletteSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(PaletteSelector.CurrentItem):
-                    foreach (var tileSet in Editable.TileSets)
-                        tileSet.Palette = PaletteSelector.CurrentItem;
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void LevelEditorVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(Editable):
-                    MapView.CurrentMapBody = Editable.Body;
-                    PaletteSelector.CurrentItem = Editable.Palettes.FirstOrDefault();
-                    break;
-                default:
-                    break;
-            }
+            //TODO: This is probably bad place for VM connection method
+            Connect();
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public MapEditorViewVM MapView { get; }
-
         public override string EditorName { get { return "Level Editor"; } }
+        public MapEditorViewVM MapView { get; }
         public MapEditorPalettesToolVM PaletteSelector { get; }
-        public MapEditorPropsToolVM PropSelector { get; }
-        //public LevelTileSelectorVM TileSelector { get; }
+        public MapEditorActionsToolVM ActionsTool { get; }
+        public MapEditorTilesToolVM TilesTool { get; }
 
         #endregion Public Properties
 
@@ -74,30 +52,25 @@ namespace OpenBreed.Editor.VM.Maps
 
         internal void Connect()
         {
-            PropSelector.Connect();
+            ActionsTool.Connect();
+            TilesTool.Connect();
         }
 
         #endregion Internal Methods
 
-        //public void Load(string name)
-        //{
-        //    CurrentLevel = Root.CreateLevel();
-        //    //CurrentLevel.Load(name);
+        #region Protected Methods
+
+        protected override void UpdateEntry(MapVM source, IMapEntry target)
+        {
+            base.UpdateEntry(source, target);
+        }
 
         //    TileSelector.CurrentItem = CurrentLevel.TileSets.FirstOrDefault();
         //    PropSelector.CurrentItem = CurrentLevel.PropSet;
         //    SpriteSetViewer.CurrentItem = CurrentLevel.SpriteSets.FirstOrDefault();
         //    PaletteSelector.CurrentItem = CurrentLevel.Palettes.FirstOrDefault();
         //}
-
-        #region Protected Methods
-
-        protected override void UpdateEntry(LevelVM source, IMapEntry target)
-        {
-            base.UpdateEntry(source, target);
-        }
-
-        protected override void UpdateVM(IMapEntry source, LevelVM target)
+        protected override void UpdateVM(IMapEntry source, MapVM target)
         {
             var model = DataProvider.GetLevel(source.Id);
 
@@ -122,6 +95,41 @@ namespace OpenBreed.Editor.VM.Maps
 
         #endregion Protected Methods
 
+        #region Private Methods
+
+        private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(Editable):
+                    MapView.CurrentMapBody = Editable.Body;
+                    PaletteSelector.CurrentItem = Editable.Palettes.FirstOrDefault();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void PaletteSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(PaletteSelector.CurrentItem):
+                    foreach (var tileSet in Editable.TileSets)
+                        tileSet.Palette = PaletteSelector.CurrentItem;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        #endregion Private Methods
+
+        //public LevelTileSelectorVM TileSelector { get; }
+        //public void Load(string name)
+        //{
+        //    CurrentLevel = Root.CreateLevel();
+        //    //CurrentLevel.Load(name);
         //private void PaletteSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
         //{
         //    var paletteSelector = sender as LevelPaletteSelectorVM;

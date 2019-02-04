@@ -12,17 +12,17 @@ using OpenBreed.Editor.VM.Maps;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
 {
-    public partial class MapEditorPropsToolCtrl : UserControl
+    public partial class MapEditorActionsToolCtrl : UserControl
     {
         #region Private Fields
 
-        private MapEditorPropsToolVM _vm;
+        private MapEditorActionsToolVM _vm;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public MapEditorPropsToolCtrl()
+        public MapEditorActionsToolCtrl()
         {
             InitializeComponent();
         }
@@ -31,7 +31,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
 
         #region Public Methods
 
-        public void Initialize(MapEditorPropsToolVM vm)
+        public void Initialize(MapEditorActionsToolVM vm)
         {
             _vm = vm;
 

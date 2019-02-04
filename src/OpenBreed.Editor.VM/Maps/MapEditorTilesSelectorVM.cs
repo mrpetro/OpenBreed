@@ -1,17 +1,20 @@
-﻿using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM.Common;
+﻿using OpenBreed.Common.Tiles;
+using OpenBreed.Editor.VM.Base;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OpenBreed.Common.Maps;
+using System.Drawing;
+using OpenBreed.Editor.VM.Maps;
+using System.Collections.Generic;
+using OpenBreed.Editor.VM.Common;
+using OpenBreed.Editor.VM.Tiles;
 
-namespace OpenBreed.Editor.VM.Tiles
+namespace OpenBreed.Editor.VM.Maps
 {
-    public class TileSetViewerVM : BaseViewModel
+    public class MapEditorTilesSelectorVM : BaseViewModel
     {
+
         #region Public Fields
 
         public Point CenterCoord;
@@ -30,14 +33,20 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #region Public Constructors
 
-        public TileSetViewerVM()
+        public MapEditorTilesSelectorVM(MapEditorTilesToolVM parent)
         {
+            Parent = parent;
+
             SelectedIndexes = new List<int>();
             SelectionRectangle = new SelectionRectangle();
             SelectMode = SelectModeEnum.Nothing;
             MultiSelect = false;
 
             PropertyChanged += TileSetViewerVM_PropertyChanged;
+        }
+
+        internal void Connect()
+        {
         }
 
         #endregion Public Constructors
@@ -51,9 +60,8 @@ namespace OpenBreed.Editor.VM.Tiles
         }
 
         public bool IsEmpty { get { return SelectedIndexes.Count == 0; } }
-
         public bool MultiSelect { get; set; }
-
+        public MapEditorTilesToolVM Parent { get; }
         public EditorVM Root { get; }
 
         public List<int> SelectedIndexes { get; }
@@ -199,5 +207,6 @@ namespace OpenBreed.Editor.VM.Tiles
         }
 
         #endregion Private Methods
+
     }
 }

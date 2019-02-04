@@ -78,6 +78,7 @@
     <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="Base\BindingListExtensions.cs" />
     <Compile Include="Base\Command.cs" />
+    <Compile Include="Common\SelectModeEnum.cs" />
     <Compile Include="Database\DbTableEditorBaseVM.cs" />
     <Compile Include="Database\DbTableSelectorVM.cs" />
     <Compile Include="Database\DbTableSelectorConnector.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="IOpenFileQuery.cs" />
     <Compile Include="ISaveFileQuery.cs" />
     <Compile Include="IToolView.cs" />
+    <Compile Include="Maps\MapEditorTilesToolVM.cs" />
     <Compile Include="Tools\IScrollableVM.cs" />
     <Compile Include="Tools\IZoomableVM.cs" />
     <Compile Include="Renderer\BodyRenderer.cs" />
@@ -146,8 +148,8 @@
     <Compile Include="Maps\MapEditorViewVM.cs" />
     <Compile Include="Maps\LevelBodyVM.cs" />
     <Compile Include="Maps\LevelPropertiesVM.cs" />
-    <Compile Include="Maps\MapEditorTilesToolVM.cs" />
-    <Compile Include="Maps\LevelVM.cs" />
+    <Compile Include="Maps\MapEditorTileSetSelectorVM.cs" />
+    <Compile Include="Maps\MapVM.cs" />
     <Compile Include="Maps\LevelVMHelper.cs" />
     <Compile Include="Tools\IEditorTool.cs" />
     <Compile Include="Tools\InsertPropertyTool.cs" />
@@ -160,7 +162,7 @@
     <Compile Include="Palettes\PaletteVM.cs" />
     <Compile Include="Database\DatabaseVM.cs" />
     <Compile Include="Props\PropSetEditorVM.cs" />
-    <Compile Include="Maps\MapEditorPropsToolVM.cs" />
+    <Compile Include="Maps\MapEditorActionsToolVM.cs" />
     <Compile Include="Props\PropSetVM.cs" />
     <Compile Include="Props\PropVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -171,12 +173,12 @@
     <Compile Include="Sprites\SpriteSetVM.cs" />
     <Compile Include="Sprites\SpriteViewerVM.cs" />
     <Compile Include="Sprites\SpriteVM.cs" />
-    <Compile Include="Tiles\Helpers\SelectionRectangle.cs" />
+    <Compile Include="Common\SelectionRectangle.cs" />
     <Compile Include="Tiles\Helpers\TileSelectTool.cs" />
     <Compile Include="Tiles\Helpers\TilesSelector.cs" />
     <Compile Include="Tiles\TileSetEditorVM.cs" />
     <Compile Include="Tiles\TileSetViewerVM.cs" />
-    <Compile Include="Maps\LevelTileSelectorVM.cs" />
+    <Compile Include="Maps\MapEditorTilesSelectorVM.cs" />
     <Compile Include="Tiles\TileSetVM.cs" />
     <Compile Include="Tiles\TileVM.cs" />
     <Compile Include="Tiles\Tools\TileSelectTool.cs" />

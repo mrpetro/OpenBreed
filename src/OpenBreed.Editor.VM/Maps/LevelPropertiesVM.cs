@@ -30,7 +30,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Constructors
 
-        public LevelPropertiesVM(LevelVM map)
+        public LevelPropertiesVM(MapVM map)
         {
             if (map == null)
                 throw new ArgumentNullException(nameof(map));
@@ -44,7 +44,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Properties
 
-        public LevelVM Map { get; private set; }
+        public MapVM Map { get; private set; }
         public byte[] Header { get; set; }
 
         public string ALTM

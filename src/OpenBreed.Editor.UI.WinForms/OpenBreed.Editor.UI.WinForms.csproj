@@ -130,6 +130,12 @@
     <Compile Include="Controls\Images\ImageEditorCtrl.Designer.cs">
       <DependentUpon>ImageEditorCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Maps\MapEditorTilesToolCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Maps\MapEditorTilesToolCtrl.Designer.cs">
+      <DependentUpon>MapEditorTilesToolCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Maps\MapEditorViewCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -153,6 +159,12 @@
     </Compile>
     <Compile Include="Controls\Maps\MapViewExCtrl.Designer.cs">
       <DependentUpon>MapViewExCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Maps\MapEditorTilesSelectorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Maps\MapEditorTilesSelectorCtrl.Designer.cs">
+      <DependentUpon>MapEditorTilesSelectorCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Palettes\ColorEditorCtrl.cs">
       <SubType>UserControl</SubType>
@@ -184,11 +196,11 @@
     <Compile Include="Controls\Props\PropSetEditorCtrl.Designer.cs">
       <DependentUpon>PropSetEditorCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Maps\MapEditorPropsToolCtrl.cs">
+    <Compile Include="Controls\Maps\MapEditorActionsToolCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Maps\MapEditorPropsToolCtrl.Designer.cs">
-      <DependentUpon>MapEditorPropsToolCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Maps\MapEditorActionsToolCtrl.Designer.cs">
+      <DependentUpon>MapEditorActionsToolCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Sounds\SoundEditorCtrl.cs">
       <SubType>UserControl</SubType>
@@ -206,11 +218,11 @@
     <Compile Include="Controls\Sprites\SpriteViewerCtrl.Designer.cs">
       <DependentUpon>SpriteViewerCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Maps\MapEditorTilesToolCtrl.cs">
+    <Compile Include="Controls\Maps\MapEditorTileSetSelectorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Maps\MapEditorTilesToolCtrl.Designer.cs">
-      <DependentUpon>MapEditorTilesToolCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Maps\MapEditorTileSetSelectorCtrl.Designer.cs">
+      <DependentUpon>MapEditorTileSetSelectorCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Tiles\TileSetEditorCtrl.cs">
       <SubType>UserControl</SubType>
@@ -388,8 +400,14 @@
     <EmbeddedResource Include="Controls\Maps\LevelSettingsCtrl.resx">
       <DependentUpon>LevelSettingsCtrl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Maps\MapEditorTilesToolCtrl.resx">
+      <DependentUpon>MapEditorTilesToolCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Maps\MapViewExCtrl.resx">
       <DependentUpon>MapViewExCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Maps\MapEditorTilesSelectorCtrl.resx">
+      <DependentUpon>MapEditorTilesSelectorCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Palettes\ColorEditorCtrl.resx">
       <DependentUpon>ColorEditorCtrl.cs</DependentUpon>
@@ -406,8 +424,8 @@
     <EmbeddedResource Include="Controls\Props\PropSetEditorCtrl.resx">
       <DependentUpon>PropSetEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Maps\MapEditorPropsToolCtrl.resx">
-      <DependentUpon>MapEditorPropsToolCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Maps\MapEditorActionsToolCtrl.resx">
+      <DependentUpon>MapEditorActionsToolCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Sounds\SoundEditorCtrl.resx">
       <DependentUpon>SoundEditorCtrl.cs</DependentUpon>
@@ -418,8 +436,8 @@
     <EmbeddedResource Include="Controls\Sprites\SpriteViewerCtrl.resx">
       <DependentUpon>SpriteViewerCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Maps\MapEditorTilesToolCtrl.resx">
-      <DependentUpon>MapEditorTilesToolCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Maps\MapEditorTileSetSelectorCtrl.resx">
+      <DependentUpon>MapEditorTileSetSelectorCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Tiles\TileSetEditorCtrl.resx">
       <DependentUpon>TileSetEditorCtrl.cs</DependentUpon>

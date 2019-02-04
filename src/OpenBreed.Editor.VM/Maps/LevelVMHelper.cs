@@ -9,17 +9,17 @@ namespace OpenBreed.Editor.VM.Maps
 {
     internal static class LevelVMHelper
     {
-        internal static void Load(LevelVM map, IAssetEntry sourceDef)
+        internal static void Load(MapVM map, IAssetEntry sourceDef)
         {
 
         }
 
-        internal static void SaveAs(LevelVM map, AssetBase newSource)
+        internal static void SaveAs(MapVM map, AssetBase newSource)
         {
 
         }
 
-        internal static void Save(LevelVM map)
+        internal static void Save(MapVM map)
         {
 
         }

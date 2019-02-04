@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 
-namespace OpenBreed.Editor.VM.Tiles.Helpers
+namespace OpenBreed.Editor.VM.Common
 {
     public class SelectionRectangle
     {

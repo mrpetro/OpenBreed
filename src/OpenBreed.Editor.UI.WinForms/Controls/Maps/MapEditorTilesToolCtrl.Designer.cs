@@ -28,63 +28,59 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnAddTileSet = new System.Windows.Forms.Button();
-            this.btnRemoveTileSet = new System.Windows.Forms.Button();
-            this.cbxTileSets = new System.Windows.Forms.ComboBox();
+            this.LayoutTable = new System.Windows.Forms.TableLayoutPanel();
+            this.TileSetSelector = new OpenBreed.Editor.UI.WinForms.Controls.Maps.MapEditorTileSetSelectorCtrl();
+            this.TilesSelector = new OpenBreed.Editor.UI.WinForms.Controls.Maps.MapEditorTilesSelectorCtrl();
+            this.LayoutTable.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnAddTileSet
+            // LayoutTable
             // 
-            this.btnAddTileSet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddTileSet.Font = new System.Drawing.Font("Wide Latin", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddTileSet.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.btnAddTileSet.Location = new System.Drawing.Point(740, 4);
-            this.btnAddTileSet.Name = "btnAddTileSet";
-            this.btnAddTileSet.Size = new System.Drawing.Size(21, 21);
-            this.btnAddTileSet.TabIndex = 11;
-            this.btnAddTileSet.Text = "+";
-            this.btnAddTileSet.UseVisualStyleBackColor = true;
+            this.LayoutTable.ColumnCount = 1;
+            this.LayoutTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.LayoutTable.Controls.Add(this.TileSetSelector, 0, 0);
+            this.LayoutTable.Controls.Add(this.TilesSelector, 0, 1);
+            this.LayoutTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LayoutTable.Location = new System.Drawing.Point(0, 0);
+            this.LayoutTable.Name = "LayoutTable";
+            this.LayoutTable.RowCount = 2;
+            this.LayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
+            this.LayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.LayoutTable.Size = new System.Drawing.Size(544, 393);
+            this.LayoutTable.TabIndex = 0;
             // 
-            // btnRemoveTileSet
+            // TileSetSelector
             // 
-            this.btnRemoveTileSet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRemoveTileSet.Font = new System.Drawing.Font("Wide Latin", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemoveTileSet.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnRemoveTileSet.Location = new System.Drawing.Point(767, 4);
-            this.btnRemoveTileSet.Name = "btnRemoveTileSet";
-            this.btnRemoveTileSet.Size = new System.Drawing.Size(21, 21);
-            this.btnRemoveTileSet.TabIndex = 10;
-            this.btnRemoveTileSet.Text = "-";
-            this.btnRemoveTileSet.UseVisualStyleBackColor = true;
+            this.TileSetSelector.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TileSetSelector.Location = new System.Drawing.Point(3, 3);
+            this.TileSetSelector.Name = "TileSetSelector";
+            this.TileSetSelector.Size = new System.Drawing.Size(538, 28);
+            this.TileSetSelector.TabIndex = 0;
             // 
-            // cbxTileSets
+            // TilesSelector
             // 
-            this.cbxTileSets.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbxTileSets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxTileSets.FormattingEnabled = true;
-            this.cbxTileSets.Location = new System.Drawing.Point(3, 4);
-            this.cbxTileSets.Name = "cbxTileSets";
-            this.cbxTileSets.Size = new System.Drawing.Size(731, 21);
-            this.cbxTileSets.TabIndex = 9;
+            this.TilesSelector.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TilesSelector.Location = new System.Drawing.Point(3, 37);
+            this.TilesSelector.Name = "TilesSelector";
+            this.TilesSelector.Size = new System.Drawing.Size(538, 353);
+            this.TilesSelector.TabIndex = 1;
             // 
-            // TileSetsCtrl
+            // MapEditorTilesToolCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnAddTileSet);
-            this.Controls.Add(this.btnRemoveTileSet);
-            this.Controls.Add(this.cbxTileSets);
-            this.Name = "TileSetsCtrl";
-            this.Size = new System.Drawing.Size(791, 28);
+            this.Controls.Add(this.LayoutTable);
+            this.Name = "MapEditorTilesToolCtrl";
+            this.Size = new System.Drawing.Size(544, 393);
+            this.LayoutTable.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button btnAddTileSet;
-        private System.Windows.Forms.Button btnRemoveTileSet;
-        private System.Windows.Forms.ComboBox cbxTileSets;
+        private System.Windows.Forms.TableLayoutPanel LayoutTable;
+        private MapEditorTileSetSelectorCtrl TileSetSelector;
+        private MapEditorTilesSelectorCtrl TilesSelector;
     }
 }

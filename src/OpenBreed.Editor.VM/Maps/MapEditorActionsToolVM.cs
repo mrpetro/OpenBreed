@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Maps
 {
-    public class MapEditorPropsToolVM : BaseViewModel
+    public class MapEditorActionsToolVM : BaseViewModel
     {
 
         #region Private Fields
@@ -22,7 +22,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Constructors
 
-        public MapEditorPropsToolVM(MapEditorVM parent)
+        public MapEditorActionsToolVM(MapEditorVM parent)
         {
             Parent = parent;
 
@@ -54,19 +54,21 @@ namespace OpenBreed.Editor.VM.Maps
 
         internal void Connect()
         {
-            //Parent.Root.PropertyChanged += Root_PropertyChanged;
+            Parent.PropertyChanged += MapEditor_PropertyChanged;
         }
 
         #endregion Internal Methods
 
         #region Private Methods
 
-        private void Root_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void MapEditor_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            var mapEditor = sender as MapEditorVM;
+
             switch (e.PropertyName)
             {
-                case nameof(Parent.Editable.PropSet):
-                    CurrentItem = Parent.Editable.PropSet;
+                case nameof(mapEditor.Editable.PropSet):
+                    CurrentItem = mapEditor.Editable.PropSet;
                     break;
                 default:
                     break;
@@ -77,11 +79,6 @@ namespace OpenBreed.Editor.VM.Maps
             switch (e.PropertyName)
             {
                 case nameof(CurrentItem):
-                    if (CurrentItem != null)
-                        Title = CurrentItem.Id;
-                    else
-                        Title = "No property set";
-
                     SelectedIndex = 0;
                     break;
                 default:
