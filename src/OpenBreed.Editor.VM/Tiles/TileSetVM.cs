@@ -152,6 +152,13 @@ namespace OpenBreed.Editor.VM.Tiles
             return tileIdList;
         }
 
+        internal void FromModel(TileSetModel tileSet)
+        {
+            Id = tileSet.Tag as string;
+            TileSize = tileSet.TileSize;
+            SetupTiles(tileSet.Tiles);
+        }
+
         public void LoadDefaultTiles()
         {
             CreateDefaultBitmap();

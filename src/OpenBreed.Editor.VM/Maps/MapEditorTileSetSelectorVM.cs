@@ -59,41 +59,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #endregion Public Properties
 
-        #region Internal Methods
-
-        internal void Connect()
-        {
-            Parent.Parent.PropertyChanged += MapEditor_PropertyChanged;
-        }
-
-        #endregion Internal Methods
-
         #region Private Methods
-
-        private void MapEditor_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            var mapEditor = sender as MapEditorVM;
-
-            switch (e.PropertyName)
-            {
-                case nameof(mapEditor.Editable):
-                    OnEditableChanged(mapEditor.Editable);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void OnEditableChanged(MapVM editable)
-        {
-            TileSets.UpdateAfter(() =>
-            {
-                if (editable == null)
-                    TileSets.Clear();
-                else
-                    editable.TileSets.ForEach(item => TileSets.Add(item));
-            });
-        }
 
         private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {

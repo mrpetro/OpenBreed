@@ -41,12 +41,7 @@ namespace OpenBreed.Editor.VM.Props
         {
             var model = DataProvider.GetPropSet(source.Id);
 
-            foreach (var property in model.Items)
-            {
-                var newProp = target.CreateProp(property);
-                newProp.Load(property);
-                target.Items.Add(newProp);
-            }
+            target.FromModel(model);
 
             base.UpdateVM(source, target);
         }

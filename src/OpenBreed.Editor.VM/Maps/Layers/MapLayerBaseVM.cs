@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Maps.Layers
 {
-    public abstract class MapBodyBaseLayerVM : BaseViewModel
+    public abstract class MapLayerBaseVM : BaseViewModel
     {
         #region Public Fields
 
@@ -26,10 +26,10 @@ namespace OpenBreed.Editor.VM.Maps.Layers
 
         #region Internal Constructors
 
-        internal MapBodyBaseLayerVM(LevelBodyVM body)
+        internal MapLayerBaseVM(MapLayoutVM layout)
         {
-            Body = body;
-            Size = body.Size;
+            Layout = layout;
+            Size = layout.Size;
             _isVisible = true;
         }
 
@@ -37,7 +37,7 @@ namespace OpenBreed.Editor.VM.Maps.Layers
 
         #region Public Properties
 
-        public LevelBodyVM Body { get; private set; }
+        public MapLayoutVM Layout { get; }
 
         public bool IsVisible
         {
@@ -56,7 +56,7 @@ namespace OpenBreed.Editor.VM.Maps.Layers
         #region Public Methods
 
 
-        public abstract void Restore(IMapBodyLayerModel layerModel);
+        public abstract void Restore(IMapLayerModel layerModel);
         public abstract void DrawView(Graphics gfx, Rectangle rectangle);
 
         #endregion Public Methods

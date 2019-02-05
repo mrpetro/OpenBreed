@@ -15,7 +15,7 @@ using OpenBreed.Common.Props;
 
 namespace OpenBreed.Editor.VM.Maps
 {
-    public class LevelBodyVM : BaseViewModel
+    public class MapLayoutVM : BaseViewModel
     {
 
         #region Private Fields
@@ -26,12 +26,10 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Constructors
 
-        public LevelBodyVM(MapVM owner)
+        public MapLayoutVM(MapVM owner)
         {
             Owner = owner;
-
-
-            Layers = new BindingList<MapBodyBaseLayerVM>();
+            Layers = new BindingList<MapLayerBaseVM>();
 
             //TilesInserter = new TilesInserter(this, Map.Project.Root.TileSets.CurrentItem.Selector);
             //PropertyInserter = new PropertyInserter(this, Map.Root.PropSets.Selector);
@@ -42,11 +40,10 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Properties
 
-        public BindingList<MapBodyBaseLayerVM> Layers { get; }
+        public BindingList<MapLayerBaseVM> Layers { get; }
         public float MaxCoordX { get; private set; }
         public float MaxCoordY { get; private set; }
         public MapVM Owner { get; }
-        public PropSetVM PropSet { get; private set; }
 
         public Size Size
         {
@@ -128,48 +125,34 @@ namespace OpenBreed.Editor.VM.Maps
             return new Point(point.X / Owner.TileSize, point.Y / Owner.TileSize);
         }
 
-        internal void Load(MapModel map)
+        internal void FromModel(MapLayoutModel layout)
         {
-            var body = map.Body;
-            Size = body.Size;
+            Size = layout.Size;
 
-            Layers.RaiseListChangedEvents = false;
-            Layers.Clear();
-            foreach (var layer in body.Layers)
-                AppendLayer(layer);
-            Layers.RaiseListChangedEvents = true;
-            Layers.ResetBindings();
+            Layers.UpdateAfter(() => 
+            {
+                Layers.Clear();
+
+                foreach (var layer in layout.Layers)
+                    AppendLayer(layer);
+            });
 
             MaxCoordX = Size.Width * Owner.TileSize;
             MaxCoordY = Size.Height * Owner.TileSize;
-        }
-
-        internal void SetPropSet(IPropSetEntry propSet)
-        {
-            var propSetVM = new PropSetVM();
-
-            foreach (var property in propSet.Items)
-            {
-                var newProp = propSetVM.CreateProp(property);
-                newProp.Load(property);
-                propSetVM.Items.Add(newProp);
-            }
-
-            PropSet = propSetVM;
         }
 
         #endregion Internal Methods
 
         #region Private Methods
 
-        private void AppendLayer(IMapBodyLayerModel layer)
+        private void AppendLayer(IMapLayerModel layer)
         {
-            MapBodyBaseLayerVM newLayerVM = null;
+            MapLayerBaseVM newLayerVM = null;
 
             if (layer.Name == "GFX")
-                newLayerVM = new MapBodyGfxLayerVM(this);
+                newLayerVM = new MapLayerGfxVM(this);
             else if (layer.Name == "PROP")
-                newLayerVM = new MapBodyPropertyLayerVM(this);
+                newLayerVM = new MapLayerActionVM(this);
 
             newLayerVM.Restore(layer);
             Layers.Add(newLayerVM);

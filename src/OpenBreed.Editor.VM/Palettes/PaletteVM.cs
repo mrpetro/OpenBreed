@@ -12,6 +12,7 @@ namespace OpenBreed.Editor.VM.Palettes
 {
     public class PaletteVM : EditableEntryVM
     {
+
         #region Public Constructors
 
         public PaletteVM()
@@ -24,22 +25,21 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Public Properties
 
-        public BindingList<Color> Colors { get; private set; }
+        public BindingList<Color> Colors { get; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void Restore(PaletteModel model)
+        public void FromModel(PaletteModel model)
         {
-            Colors.RaiseListChangedEvents = false;
-            Colors.Clear();
+            Colors.UpdateAfter(() =>
+            {
+                Colors.Clear();
 
-            foreach (var color in model.Data)
-                Colors.Add(color);
-
-            Colors.RaiseListChangedEvents = true;
-            Colors.ResetBindings();
+                foreach (var color in model.Data)
+                    Colors.Add(color);
+            });
         }
 
         #endregion Public Methods

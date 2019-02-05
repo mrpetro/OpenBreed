@@ -28,13 +28,14 @@ namespace OpenBreed.Editor.VM.Props
         public PropSetVM()
         {
             Items = new BindingList<PropVM>();
+            Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public BindingList<PropVM> Items { get; private set; }
+        public BindingList<PropVM> Items { get; }
 
         #endregion Public Properties
 
@@ -69,6 +70,21 @@ namespace OpenBreed.Editor.VM.Props
 
             gfx.DrawImage(image, x, y, tileSize, tileSize);
 
+        }
+
+        internal void FromModel(IPropSetEntry propSet)
+        {
+            Items.UpdateAfter(() =>
+            {
+                Items.Clear();
+
+                foreach (var property in propSet.Items)
+                {
+                    var newProp = CreateProp(property);
+                    newProp.FromModel(property);
+                    Items.Add(newProp);
+                }
+            });
         }
 
         #endregion Public Methods

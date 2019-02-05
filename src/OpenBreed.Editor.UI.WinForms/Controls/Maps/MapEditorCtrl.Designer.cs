@@ -58,7 +58,7 @@
             this.MapView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MapView.Location = new System.Drawing.Point(0, 0);
             this.MapView.Name = "MapView";
-            this.MapView.Size = new System.Drawing.Size(467, 456);
+            this.MapView.Size = new System.Drawing.Size(437, 456);
             this.MapView.TabIndex = 0;
             // 
             // ToolTabs
@@ -70,7 +70,7 @@
             this.ToolTabs.Location = new System.Drawing.Point(3, 16);
             this.ToolTabs.Name = "ToolTabs";
             this.ToolTabs.SelectedIndex = 0;
-            this.ToolTabs.Size = new System.Drawing.Size(327, 304);
+            this.ToolTabs.Size = new System.Drawing.Size(357, 304);
             this.ToolTabs.TabIndex = 1;
             // 
             // TabTiles
@@ -79,7 +79,7 @@
             this.TabTiles.Location = new System.Drawing.Point(4, 22);
             this.TabTiles.Name = "TabTiles";
             this.TabTiles.Padding = new System.Windows.Forms.Padding(3);
-            this.TabTiles.Size = new System.Drawing.Size(319, 278);
+            this.TabTiles.Size = new System.Drawing.Size(349, 278);
             this.TabTiles.TabIndex = 0;
             this.TabTiles.Text = "Tiles";
             this.TabTiles.UseVisualStyleBackColor = true;
@@ -89,7 +89,7 @@
             this.TilesTool.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TilesTool.Location = new System.Drawing.Point(3, 3);
             this.TilesTool.Name = "TilesTool";
-            this.TilesTool.Size = new System.Drawing.Size(313, 272);
+            this.TilesTool.Size = new System.Drawing.Size(343, 272);
             this.TilesTool.TabIndex = 0;
             // 
             // TabActions
@@ -136,9 +136,9 @@
             // MainSplit.Panel2
             // 
             this.MainSplit.Panel2.Controls.Add(this.SideSplit);
-            this.MainSplit.Panel2MinSize = 330;
+            this.MainSplit.Panel2MinSize = 350;
             this.MainSplit.Size = new System.Drawing.Size(812, 460);
-            this.MainSplit.SplitterDistance = 471;
+            this.MainSplit.SplitterDistance = 441;
             this.MainSplit.TabIndex = 2;
             // 
             // SideSplit
@@ -156,7 +156,7 @@
             // SideSplit.Panel2
             // 
             this.SideSplit.Panel2.Controls.Add(this.GrpTools);
-            this.SideSplit.Size = new System.Drawing.Size(333, 456);
+            this.SideSplit.Size = new System.Drawing.Size(363, 456);
             this.SideSplit.SplitterDistance = 129;
             this.SideSplit.TabIndex = 2;
             // 
@@ -165,7 +165,7 @@
             this.GrpLayers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GrpLayers.Location = new System.Drawing.Point(0, 0);
             this.GrpLayers.Name = "GrpLayers";
-            this.GrpLayers.Size = new System.Drawing.Size(333, 129);
+            this.GrpLayers.Size = new System.Drawing.Size(363, 129);
             this.GrpLayers.TabIndex = 0;
             this.GrpLayers.TabStop = false;
             this.GrpLayers.Text = "Layers";
@@ -176,7 +176,7 @@
             this.GrpTools.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GrpTools.Location = new System.Drawing.Point(0, 0);
             this.GrpTools.Name = "GrpTools";
-            this.GrpTools.Size = new System.Drawing.Size(333, 323);
+            this.GrpTools.Size = new System.Drawing.Size(363, 323);
             this.GrpTools.TabIndex = 2;
             this.GrpTools.TabStop = false;
             this.GrpTools.Text = "Tools";

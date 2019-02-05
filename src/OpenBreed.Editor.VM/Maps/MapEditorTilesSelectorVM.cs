@@ -45,10 +45,6 @@ namespace OpenBreed.Editor.VM.Maps
             PropertyChanged += TileSetViewerVM_PropertyChanged;
         }
 
-        internal void Connect()
-        {
-        }
-
         #endregion Public Constructors
 
         #region Public Properties

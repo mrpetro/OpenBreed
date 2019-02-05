@@ -17,7 +17,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         public RenderTarget RenderTarget { get; }
         private BodyRenderer _renderer;
-        private LevelBodyVM _currentMapBody;
+        private MapLayoutVM _currentMapBody;
         private Matrix _transformation;
         private string _title;
 
@@ -52,7 +52,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Properties
 
-        public LevelBodyVM CurrentMapBody
+        public MapLayoutVM CurrentMapBody
         {
             get { return _currentMapBody; }
             set { SetProperty(ref _currentMapBody, value); }

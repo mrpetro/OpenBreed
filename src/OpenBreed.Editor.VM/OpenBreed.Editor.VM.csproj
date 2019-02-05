@@ -142,11 +142,11 @@
     <Compile Include="Maps\Helpers\TileInsertOperation.cs" />
     <Compile Include="Maps\Helpers\TilesInserter.cs" />
     <Compile Include="Maps\MapEditorVM.cs" />
-    <Compile Include="Maps\Layers\MapBodyBaseLayerVM.cs" />
-    <Compile Include="Maps\Layers\MapBodyGfxLayerVM.cs" />
-    <Compile Include="Maps\Layers\MapBodyPropertyLayerVM.cs" />
+    <Compile Include="Maps\Layers\MapLayerBaseVM.cs" />
+    <Compile Include="Maps\Layers\MapLayerGfxVM.cs" />
+    <Compile Include="Maps\Layers\MapLayerActionVM.cs" />
     <Compile Include="Maps\MapEditorViewVM.cs" />
-    <Compile Include="Maps\LevelBodyVM.cs" />
+    <Compile Include="Maps\MapLayoutVM.cs" />
     <Compile Include="Maps\LevelPropertiesVM.cs" />
     <Compile Include="Maps\MapEditorTileSetSelectorVM.cs" />
     <Compile Include="Maps\MapVM.cs" />

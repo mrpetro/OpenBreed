@@ -38,7 +38,7 @@ namespace OpenBreed.Editor.VM.Maps
         public MapVM()
         {
             TileSets = new BindingList<TileSetVM>();
-            Body = new LevelBodyVM(this);
+            Layout = new MapLayoutVM(this);
             Properties = new LevelPropertiesVM(this);
 
             Palettes = new BindingList<PaletteVM>();
@@ -56,8 +56,6 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Properties
 
-        public LevelBodyVM Body { get; }
-
         public CommandMan Commands { get { return m_Commands; } }
 
         public bool IsModified
@@ -67,6 +65,8 @@ namespace OpenBreed.Editor.VM.Maps
         }
 
         public bool IsOpened { get { return Source != null; } }
+        public MapLayoutVM Layout { get; }
+
 
         public BindingList<PaletteVM> Palettes { get; }
         public LevelPropertiesVM Properties { get; }
@@ -83,10 +83,6 @@ namespace OpenBreed.Editor.VM.Maps
             set { SetProperty(ref _source, value); }
         }
         public BindingList<SpriteSetVM> SpriteSets { get; }
-        //public void AddSpriteSet(SpriteSetModel spriteSet)
-        //{
-        //    SpriteSets.Add(Root.CreateSpiteSet(spriteSet));
-        //}
         public BindingList<TileSetVM> TileSets { get; }
 
         public int TileSize { get { return 16; } }
@@ -97,36 +93,61 @@ namespace OpenBreed.Editor.VM.Maps
             set { SetProperty(ref _title, value); }
         }
 
+        internal override void FromEntry(IEntry entry)
+        {
+            base.FromEntry(entry);
+
+            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
+
+            var model = dataProvider.GetMap(entry.Id);
+
+            SetTileSets(model.TileSets);
+
+            //foreach (var spriteSet in model.SpriteSets)
+            //    AddSpriteSet(spriteSet);
+
+            if (model.PropSet != null)
+                SetPropSet(model.PropSet);
+
+            Properties.Load(model);
+
+            Layout.FromModel(model.Layout);
+
+            SetPalettes(model.Palettes);
+        }
+
         #endregion Public Properties
-
-        //public void AddSpriteSet(string name)
-        //{
-        //    var newSpriteSet = Root.CreateSpriteSet();
-        //    newSpriteSet.Load(name);
-        //    SpriteSets.Add(newSpriteSet);
-        //}
-
-        //public void LoadPropSet(IPropSetEntry propSet)
-        //{
-        //    PropSet = Root.CreatePropSet(propSet);
-        //}
 
         #region Public Methods
 
-        public void Restore(List<PaletteModel> palettes)
+        public void SetTileSets(List<TileSetModel> tileSets)
         {
-            Palettes.RaiseListChangedEvents = false;
-            Palettes.Clear();
-
-            foreach (var palette in palettes)
+            TileSets.UpdateAfter(() =>
             {
-                var paletteVM = new PaletteVM();
-                paletteVM.Restore(palette);
-                Palettes.Add(paletteVM);
-            }
+                TileSets.Clear();
 
-            Palettes.RaiseListChangedEvents = true;
-            Palettes.ResetBindings();
+                foreach (var tileSet in tileSets)
+                {
+                    var tileSetVM = new TileSetVM();
+                    tileSetVM.FromModel(tileSet);
+                    TileSets.Add(tileSetVM);
+                }
+            });
+        }
+
+        public void SetPalettes(List<PaletteModel> palettes)
+        {
+            Palettes.UpdateAfter(() =>
+            {
+                Palettes.Clear();
+
+                foreach (var palette in palettes)
+                {
+                    var paletteVM = new PaletteVM();
+                    paletteVM.FromModel(palette);
+                    Palettes.Add(paletteVM);
+                }
+            });
         }
 
         public void Save()
@@ -151,13 +172,6 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Internal Methods
 
-        internal void AddTileSet(TileSetModel tileSet)
-        {
-            var tileSetVM = new TileSetVM();
-            tileSetVM.TileSize = tileSet.TileSize;
-            tileSetVM.SetupTiles(tileSet.Tiles);
-            TileSets.Add(tileSetVM);
-        }
         internal void Close()
         {
             if (Source == null)
@@ -166,9 +180,19 @@ namespace OpenBreed.Editor.VM.Maps
             Source.Dispose();
             Source = null;
         }
+
         internal void ConnectEvents()
         {
-            Body.ConnectEvents();
+            Layout.ConnectEvents();
+        }
+
+        internal void SetPropSet(IPropSetEntry propSet)
+        {
+            var propSetVM = new PropSetVM();
+
+            propSetVM.FromModel(propSet);
+
+            PropSet = propSetVM;
         }
 
         #endregion Internal Methods

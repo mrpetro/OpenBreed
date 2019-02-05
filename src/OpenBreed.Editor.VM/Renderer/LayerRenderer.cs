@@ -11,18 +11,18 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Renderer
 {
-    public class LayerRenderer : RendererBase<MapBodyBaseLayerVM>
+    public class LayerRenderer : RendererBase<MapLayerBaseVM>
     {
         public LayerRenderer(RenderTarget target) : base(target)
         {
         }
 
-        public override void Render(MapBodyBaseLayerVM renderable)
+        public override void Render(MapLayerBaseVM renderable)
         {
-            if (renderable is MapBodyGfxLayerVM)
-                Render((MapBodyGfxLayerVM)renderable);
-            else if (renderable is MapBodyPropertyLayerVM)
-                Render((MapBodyPropertyLayerVM)renderable);
+            if (renderable is MapLayerGfxVM)
+                Render((MapLayerGfxVM)renderable);
+            else if (renderable is MapLayerActionVM)
+                Render((MapLayerActionVM)renderable);
         }
 
         private void RenderTile(TileSetVM tileSet , int tileId, float x, float y, int tileSize)
@@ -55,16 +55,16 @@ namespace OpenBreed.Editor.VM.Renderer
             Target.Gfx.DrawString(string.Format("{0,2:D2}", tileRef.TileId % 100), font, brush, x + 2, y + 7);
         }
 
-        private void Render(MapBodyGfxLayerVM renderable)
+        private void Render(MapLayerGfxVM renderable)
         {
-            var tileSets = renderable.Body.Owner.TileSets;
+            var tileSets = renderable.Layout.Owner.TileSets;
             RectangleF viewRect = Target.Gfx.ClipBounds;
 
-            int tileSize = renderable.Body.Owner.TileSize;
-            int xFrom = renderable.Body.GetMapIndexX(viewRect.Left);
-            int xTo = renderable.Body.GetMapIndexX(viewRect.Right);
-            int yFrom = renderable.Body.GetMapIndexY(viewRect.Top);
-            int yTo = renderable.Body.GetMapIndexY(viewRect.Bottom);
+            int tileSize = renderable.Layout.Owner.TileSize;
+            int xFrom = renderable.Layout.GetMapIndexX(viewRect.Left);
+            int xTo = renderable.Layout.GetMapIndexX(viewRect.Right);
+            int yFrom = renderable.Layout.GetMapIndexY(viewRect.Top);
+            int yTo = renderable.Layout.GetMapIndexY(viewRect.Bottom);
 
             for (int xIndex = xFrom; xIndex <= xTo; xIndex++)
             {
@@ -108,17 +108,17 @@ namespace OpenBreed.Editor.VM.Renderer
 
         }
 
-        private void Render(MapBodyPropertyLayerVM renderable)
+        private void Render(MapLayerActionVM renderable)
         {
             RectangleF viewRect = Target.Gfx.ClipBounds;
 
-            int tileSize = renderable.Body.Owner.TileSize;
-            int xFrom = renderable.Body.GetMapIndexX(viewRect.Left);
-            int xTo = renderable.Body.GetMapIndexX(viewRect.Right);
-            int yFrom = renderable.Body.GetMapIndexY(viewRect.Top);
-            int yTo = renderable.Body.GetMapIndexY(viewRect.Bottom);
+            int tileSize = renderable.Layout.Owner.TileSize;
+            int xFrom = renderable.Layout.GetMapIndexX(viewRect.Left);
+            int xTo = renderable.Layout.GetMapIndexX(viewRect.Right);
+            int yFrom = renderable.Layout.GetMapIndexY(viewRect.Top);
+            int yTo = renderable.Layout.GetMapIndexY(viewRect.Bottom);
 
-            var propSet = renderable.Body.PropSet;
+            var propSet = renderable.Layout.Owner.PropSet;
 
             if (propSet == null)
                 return;

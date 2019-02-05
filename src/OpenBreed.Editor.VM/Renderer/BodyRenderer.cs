@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Renderer
 {
-    public class BodyRenderer : RendererBase<LevelBodyVM>
+    public class BodyRenderer : RendererBase<MapLayoutVM>
     {
         #region Private Fields
 
@@ -28,7 +28,7 @@ namespace OpenBreed.Editor.VM.Renderer
 
         #region Public Methods
 
-        public override void Render(LevelBodyVM renderable)
+        public override void Render(MapLayoutVM renderable)
         {
             var visibleLayers = renderable.Layers.Where(item => item.IsVisible);
 

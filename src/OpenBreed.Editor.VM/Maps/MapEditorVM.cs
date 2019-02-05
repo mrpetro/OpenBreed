@@ -70,28 +70,12 @@ namespace OpenBreed.Editor.VM.Maps
         //    SpriteSetViewer.CurrentItem = CurrentLevel.SpriteSets.FirstOrDefault();
         //    PaletteSelector.CurrentItem = CurrentLevel.Palettes.FirstOrDefault();
         //}
-        protected override void UpdateVM(IMapEntry source, MapVM target)
-        {
-            var model = DataProvider.GetLevel(source.Id);
+        //protected override void UpdateVM(IMapEntry source, MapVM target)
+        //{
+        //    target.FromEntry(source);
 
-            //foreach (var spriteSet in model.SpriteSets)
-            //    target.AddSpriteSet(spriteSet);
-
-            foreach (var tileSet in model.TileSets)
-                target.AddTileSet(tileSet);
-
-            if (model.PropSet != null)
-                target.Body.SetPropSet(model.PropSet);
-
-            target.Properties.Load(model.Map);
-            target.Body.Load(model.Map);
-
-            //PaletteSelector.PropertyChanged += PaletteSelector_PropertyChanged;
-
-            target.Restore(model.Palettes);
-
-            base.UpdateVM(source, target);
-        }
+        //    base.UpdateVM(source, target);
+        //}
 
         #endregion Protected Methods
 
@@ -102,7 +86,7 @@ namespace OpenBreed.Editor.VM.Maps
             switch (e.PropertyName)
             {
                 case nameof(Editable):
-                    MapView.CurrentMapBody = Editable.Body;
+                    MapView.CurrentMapBody = Editable.Layout;
                     PaletteSelector.CurrentItem = Editable.Palettes.FirstOrDefault();
                     break;
                 default:
