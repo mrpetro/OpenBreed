@@ -27,9 +27,10 @@ namespace OpenBreed.Common.Tiles
         public TilePixelFormat PixelFormat { get; private set; }
 
         /// <summary>
-        ///  Gets or sets an object that provides additional data about the tile.
+        ///  Gets or sets an object that provides additional data context.
         /// </summary>
         public object Tag { get; set; }
+
         public List<TileModel> Tiles { get; private set; }
         public int TileSize { get; private set; }
 

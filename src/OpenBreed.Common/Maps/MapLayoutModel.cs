@@ -8,13 +8,13 @@ using OpenBreed.Common.Maps.Builders;
 
 namespace OpenBreed.Common.Maps
 {
-    public class MapBodyModel
+    public class MapLayoutModel
     {
-        private IMapBodyLayerModel[] _layers;
+        private IMapLayerModel[] _layers;
 
         #region Internal Constructors
 
-        internal MapBodyModel(MapBodyBuilder builder)
+        internal MapLayoutModel(MapBodyBuilder builder)
         {
             Layers = builder.Layers.ToArray();
             Size = builder.Size;
@@ -25,7 +25,7 @@ namespace OpenBreed.Common.Maps
 
         #region Public Properties
 
-        public IMapBodyLayerModel[] Layers
+        public IMapLayerModel[] Layers
         {
             get { return _layers; }
             private set
@@ -37,9 +37,6 @@ namespace OpenBreed.Common.Maps
             }
         }
 
-        //public MapCellModel[,] Cells { get; private set; }
-
-        public MapModel Owner { get; internal set; }
         public Size Size { get; private set; }
 
         #endregion Public Properties

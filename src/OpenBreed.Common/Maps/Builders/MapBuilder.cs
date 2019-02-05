@@ -9,7 +9,7 @@ namespace OpenBreed.Common.Maps.Builders
     {
         internal MapPropertiesModel Properties = null;
         internal MapMissionModel Mission = null;
-        internal MapBodyModel Body = null;
+        internal MapLayoutModel Body = null;
 
         public static MapBuilder NewMapModel()
         {
@@ -22,7 +22,7 @@ namespace OpenBreed.Common.Maps.Builders
             return this;
         }
 
-        public MapBuilder SetBody(MapBodyModel body)
+        public MapBuilder SetBody(MapLayoutModel body)
         {
             Body = body;
             return this;

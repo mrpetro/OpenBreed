@@ -8,78 +8,45 @@ using OpenBreed.Common.Maps.Builders;
 using OpenBreed.Common.Maps.Readers.MAP;
 
 using OpenBreed.Common.Tiles;
+using OpenBreed.Common.Props;
+using OpenBreed.Common.Sprites;
 
 namespace OpenBreed.Common.Maps
 {
-    public delegate void TileSetChangedEventHandler(object sender, TileSetChangedEventArgs e);
-
-    public class TileSetChangedEventArgs : EventArgs
+    public class MapModel
     {
-        public TileSetModel TileSet { get; set; }
 
-        public TileSetChangedEventArgs(TileSetModel tileSet)
-        {
-            TileSet = tileSet;
-        }
-    }
-
-    public delegate void PaletteChangedEventHandler(object sender, PaletteChangedEventArgs e);
-
-    public class PaletteChangedEventArgs : EventArgs
-    {
-        public PaletteModel Palette { get; set; }
-
-        public PaletteChangedEventArgs(PaletteModel palette)
-        {
-            Palette = palette;
-        }
-    }
-
-    public class MapModel : IDisposable
-    {
-        private MapPropertiesModel _properties;
-        private MapMissionModel _mission;
-        private MapBodyModel _body;
-
-        public MapPropertiesModel Properties
-        {
-            get { return _properties; }
-            private set
-            {
-                _properties = value;
-                _properties.Owner = this;
-            }
-        }
-
-        public MapMissionModel Mission
-        {
-            get { return _mission; }
-            private set
-            {
-                _mission = value;
-                _mission.Owner = this;
-            }
-        }
-
-        public MapBodyModel Body
-        {
-            get { return _body; }
-            private set
-            {
-                _body = value;
-                _body.Owner = this;
-            }
-        }
+        #region Internal Constructors
 
         internal MapModel(MapBuilder builder)
         {
             Properties = builder.Properties;
             Mission = builder.Mission;
-            Body = builder.Body;
+            Layout = builder.Body;
         }
 
-        public void Dispose()
-        {
-        }
+        #endregion Internal Constructors
+
+        #region Public Properties
+
+        public MapLayoutModel Layout { get; }
+
+        public MapMissionModel Mission { get; }
+
+        public List<PaletteModel> Palettes { get; } = new List<PaletteModel>();
+
+        public MapPropertiesModel Properties { get; }
+
+        public IPropSetEntry PropSet { get; internal set; }
+
+        public List<SpriteSetModel> SpriteSets { get; } = new List<SpriteSetModel>();
+
+        /// <summary>
+        ///  Gets or sets an object that provides additional data context.
+        /// </summary>
+        public object Tag { get; set; }
+        public List<TileSetModel> TileSets { get; } = new List<TileSetModel>();
+
+        #endregion Public Properties
     }
 }

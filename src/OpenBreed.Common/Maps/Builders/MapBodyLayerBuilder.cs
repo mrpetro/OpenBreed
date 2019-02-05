@@ -24,9 +24,9 @@ namespace OpenBreed.Common.Maps.Builders
             return new MapBodyLayerBuilder<T>();
         }
 
-        public MapBodyLayerModel<T> Build()
+        public MapLayerModel<T> Build()
         {
-            return new MapBodyLayerModel<T>(this);
+            return new MapLayerModel<T>(this);
         }
 
         public MapBodyLayerBuilder<T> SetCell(int index, T value)

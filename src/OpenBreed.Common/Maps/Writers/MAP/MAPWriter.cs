@@ -63,20 +63,20 @@ namespace OpenBreed.Common.Maps.Writers.MAP
 
             WriteMission(map.Mission);
 
-            WriteBody(map.Body);
+            WriteBody(map.Layout);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void WriteBody(MapBodyModel body)
+        private void WriteBody(MapLayoutModel body)
         {
             _binWriter.Write(Encoding.ASCII.GetBytes("BODY"));
             _binWriter.Write((UInt32)(body.Size.Width * body.Size.Height * 2));
 
-            var bodyGfxLayer = body.Layers.FirstOrDefault(item => item.Name == "GFX") as MapBodyLayerModel<int>;
-            var bodyPropLayer = body.Layers.FirstOrDefault(item => item.Name == "PROP") as MapBodyLayerModel<int>;
+            var bodyGfxLayer = body.Layers.FirstOrDefault(item => item.Name == "GFX") as MapLayerModel<int>;
+            var bodyPropLayer = body.Layers.FirstOrDefault(item => item.Name == "PROP") as MapLayerModel<int>;
 
             if (bodyGfxLayer == null)
                 throw new Exception("Layer 'GFX' missing or has incorrect data type.");

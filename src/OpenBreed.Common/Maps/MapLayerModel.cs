@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Maps
 {
-    public interface IMapBodyLayerModel
+    public interface IMapLayerModel
     {
 
         #region Public Properties
@@ -16,7 +16,7 @@ namespace OpenBreed.Common.Maps
         Type DataType { get; }
         string Name { get; }
 
-        MapBodyModel Owner { get; set; }
+        MapLayoutModel Owner { get; set; }
         Size Size { get; }
 
         #endregion Public Properties
@@ -42,12 +42,12 @@ namespace OpenBreed.Common.Maps
 
         #endregion Public Properties
     }
-    public class MapBodyLayerModel<T> : IMapBodyLayerModel
+    public class MapLayerModel<T> : IMapLayerModel
     {
 
         #region Public Constructors
 
-        public MapBodyLayerModel(MapBodyLayerBuilder<T> builder)
+        public MapLayerModel(MapBodyLayerBuilder<T> builder)
         {
             Name = builder.Name;
             Size = builder.Size;
@@ -68,7 +68,7 @@ namespace OpenBreed.Common.Maps
 
         public Type DataType { get { return typeof(T); } }
         public string Name { get; private set; }
-        public MapBodyModel Owner { get; set; }
+        public MapLayoutModel Owner { get; set; }
         public Size Size { get; private set; }
 
         #endregion Public Properties

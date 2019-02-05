@@ -55,100 +55,104 @@ namespace OpenBreed.Common
 
             var asset = AssetsProvider.GetAsset(entry.AssetRef);
 
-            return FormatMan.Load(asset, entry.Format) as Image;
+            var image = FormatMan.Load(asset, entry.Format) as Image;
+            image.Tag = name;
+            return image;
         }
 
-        public PaletteModel GetPalette(string name)
+        public PaletteModel GetPalette(string id)
         {
-            var entry = _unitOfWork.GetRepository<IPaletteEntry>().GetById(name);
+            var entry = _unitOfWork.GetRepository<IPaletteEntry>().GetById(id);
             if (entry == null)
-                throw new Exception("Palette error: " + name);
+                throw new Exception("Palette error: " + id);
 
             var asset = AssetsProvider.GetAsset(entry.AssetRef);
 
-            return FormatMan.Load(asset, entry.Format) as PaletteModel;
+            var palette = FormatMan.Load(asset, entry.Format) as PaletteModel;
+            palette.Tag = id;
+            return palette;
         }
 
-        public SoundModel GetSound(string name)
+        public SoundModel GetSound(string id)
         {
-            var entry = _unitOfWork.GetRepository<ISoundEntry>().GetById(name);
+            var entry = _unitOfWork.GetRepository<ISoundEntry>().GetById(id);
             if (entry == null)
-                throw new Exception("Sound error: " + name);
+                throw new Exception("Sound error: " + id);
 
             var asset = AssetsProvider.GetAsset(entry.AssetRef);
 
-            return FormatMan.Load(asset, entry.Format) as SoundModel;
+            var sound = FormatMan.Load(asset, entry.Format) as SoundModel;
+            sound.Tag = id;
+            return sound;
         }
 
-        public IPropSetEntry GetPropSet(string name)
+        public IPropSetEntry GetPropSet(string id)
         {
-            var entry = _unitOfWork.GetRepository<IPropSetEntry>().GetById(name);
+            var entry = _unitOfWork.GetRepository<IPropSetEntry>().GetById(id);
             if (entry == null)
-                throw new Exception("PropSet error: " + name);
+                throw new Exception("PropSet error: " + id);
 
             return entry;
         }
 
-        public AssetBase GetSource(string name)
+        public SpriteSetModel GetSpriteSet(string id)
         {
-            return null;
-        }
-
-        public SpriteSetModel GetSpriteSet(string name)
-        {
-            var entry = _unitOfWork.GetRepository<ISpriteSetEntry>().GetById(name);
+            var entry = _unitOfWork.GetRepository<ISpriteSetEntry>().GetById(id);
             if (entry == null)
-                throw new Exception("SpriteSet error: " + name);
+                throw new Exception("SpriteSet error: " + id);
 
             var asset = AssetsProvider.GetAsset(entry.AssetRef);
 
-            return FormatMan.Load(asset, entry.Format) as SpriteSetModel;
+            var spriteSet = FormatMan.Load(asset, entry.Format) as SpriteSetModel;
+            spriteSet.Tag = id;
+            return spriteSet;
         }
 
-        public TileSetModel GetTileSet(string name)
+        public TileSetModel GetTileSet(string id)
         {
-            var entry = _unitOfWork.GetRepository<ITileSetEntry>().GetById(name);
+            var entry = _unitOfWork.GetRepository<ITileSetEntry>().GetById(id);
             if (entry == null)
-                throw new Exception("TileSet error: " + name);
+                throw new Exception("TileSet error: " + id);
 
             var asset = AssetsProvider.GetAsset(entry.AssetRef);
 
-            return FormatMan.Load(asset, entry.Format) as TileSetModel;
+            var tileSet = FormatMan.Load(asset, entry.Format) as TileSetModel;
+            tileSet.Tag = id;
+            return tileSet;
         }
 
-        public LevelModel GetLevel(string name)
+        public MapModel GetMap(string id)
         {
-            var entry = _unitOfWork.GetRepository<IMapEntry>().GetById(name);
+            var entry = _unitOfWork.GetRepository<IMapEntry>().GetById(id);
             if (entry == null)
-                throw new Exception("Level error: " + name);
+                throw new Exception("Level error: " + id);
 
             var asset = AssetsProvider.GetAsset(entry.AssetRef);
 
-            var level = new LevelModel();
-            level.Map = FormatMan.Load(asset, entry.Format) as MapModel;
-
+            var map = FormatMan.Load(asset, entry.Format) as MapModel;
 
             if (entry.TileSetRef != null)
-                level.TileSets.Add(GetTileSet(entry.TileSetRef));
+                map.TileSets.Add(GetTileSet(entry.TileSetRef));
 
             if (entry.PropertySetRef != null)
-                level.PropSet = GetPropSet(entry.PropertySetRef);
+                map.PropSet = GetPropSet(entry.PropertySetRef);
 
             foreach (var spriteSetRef in entry.SpriteSetRefs)
-                level.SpriteSets.Add(GetSpriteSet(spriteSetRef));
+                map.SpriteSets.Add(GetSpriteSet(spriteSetRef));
 
             if (entry.PaletteRefs.Any())
             {
                 foreach (var paletteRef in entry.PaletteRefs)
-                    level.Palettes.Add(GetPalette(paletteRef));
+                    map.Palettes.Add(GetPalette(paletteRef));
             }
             else
             {
-                foreach (var palette in level.Map.Properties.Palettes)
-                    level.Palettes.Add(palette);
+                foreach (var palette in map.Properties.Palettes)
+                    map.Palettes.Add(palette);
             }
 
-            return level;
+            map.Tag = id;
+            return map;
         }
 
         #endregion Public Methods

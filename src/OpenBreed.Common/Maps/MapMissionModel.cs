@@ -61,7 +61,6 @@ namespace OpenBreed.Common.Maps
         public string NOT1 { get; set; }
         public string NOT2 { get; set; }
         public string NOT3 { get; set; }
-        public MapModel Owner { get; internal set; }
         public int TIME { get; set; }
         public int UNKN1 { get; set; }
         public int UNKN16 { get; set; }

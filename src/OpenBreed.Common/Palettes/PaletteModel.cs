@@ -11,6 +11,7 @@ namespace OpenBreed.Common.Palettes
 {
     public class PaletteModel
     {
+
         #region Private Fields
 
         private static PaletteModel m_NullPalette = null;
@@ -61,7 +62,7 @@ namespace OpenBreed.Common.Palettes
         public string Name { get; set; }
 
         /// <summary>
-        ///  Gets or sets an object that provides additional data about the palette.
+        ///  Gets or sets an object that provides additional data context.
         /// </summary>
         public object Tag { get; set; }
 
@@ -113,5 +114,6 @@ namespace OpenBreed.Common.Palettes
         }
 
         #endregion Public Methods
+
     }
 }

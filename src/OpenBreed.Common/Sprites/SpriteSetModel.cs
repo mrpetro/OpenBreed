@@ -8,11 +8,25 @@ namespace OpenBreed.Common.Sprites
 {
     public class SpriteSetModel
     {
-        public List<SpriteModel> Sprites { get; set; }
+
+        #region Public Constructors
 
         public SpriteSetModel(SpriteSetBuilder builder)
         {
             Sprites = builder.Sprites;
         }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public List<SpriteModel> Sprites { get; set; }
+
+        /// <summary>
+        ///  Gets or sets an object that provides additional data context.
+        /// </summary>
+        public object Tag { get; set; }
+
+        #endregion Public Properties
     }
 }

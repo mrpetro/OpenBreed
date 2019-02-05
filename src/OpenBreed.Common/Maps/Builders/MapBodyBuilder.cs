@@ -8,7 +8,7 @@ namespace OpenBreed.Common.Maps.Builders
 {
     public class MapBodyBuilder
     {
-        internal List<IMapBodyLayerModel> Layers = new List<IMapBodyLayerModel>();
+        internal List<IMapLayerModel> Layers = new List<IMapLayerModel>();
         //internal MapCellModel[,] Cells = null;
         internal Size Size;
 
@@ -17,9 +17,9 @@ namespace OpenBreed.Common.Maps.Builders
             return new MapBodyBuilder();
         }
 
-        public MapBodyModel Build()
+        public MapLayoutModel Build()
         {
-            return new MapBodyModel(this);
+            return new MapLayoutModel(this);
         }
 
         public MapBodyBuilder SetSize(int sizeX, int sizeY)
@@ -74,7 +74,7 @@ namespace OpenBreed.Common.Maps.Builders
         //    return this;
         //}
 
-        internal void AddLayer(IMapBodyLayerModel mapBodyLayerModel)
+        internal void AddLayer(IMapLayerModel mapBodyLayerModel)
         {
             Layers.Add(mapBodyLayerModel);
         }

@@ -57,7 +57,6 @@
     <Compile Include="IDatabase.cs" />
     <Compile Include="Images\IImageEntry.cs" />
     <Compile Include="Maps\IMapEntry.cs" />
-    <Compile Include="Maps\LevelModel.cs" />
     <Compile Include="Palettes\IPaletteEntry.cs" />
     <Compile Include="Props\IPropertyEntry.cs" />
     <Compile Include="Props\IPropertyPresentation.cs" />
@@ -88,7 +87,7 @@
     <Compile Include="Maps\Builders\MapBuilder.cs" />
     <Compile Include="Maps\Builders\MapMissionBuilder.cs" />
     <Compile Include="Maps\Builders\MapPropertiesBuilder.cs" />
-    <Compile Include="Maps\MapBodyLayerModel.cs" />
+    <Compile Include="Maps\MapLayerModel.cs" />
     <Compile Include="Maps\Readers\IMapModelReader.cs" />
     <Compile Include="Maps\Readers\MAP\MAPPaletteReader.cs" />
     <Compile Include="Maps\Readers\MAP\MAPReader.cs" />
@@ -96,7 +95,7 @@
     <Compile Include="Maps\Writers\IMapModelWriter.cs" />
     <Compile Include="Maps\Writers\MAP\MAPWriter.cs" />
     <Compile Include="Palettes\Builders\PaletteBuilder.cs" />
-    <Compile Include="Maps\MapBodyModel.cs" />
+    <Compile Include="Maps\MapLayoutModel.cs" />
     <Compile Include="Maps\MapMissionModel.cs" />
     <Compile Include="Maps\MapModel.cs" />
     <Compile Include="Maps\MapPropertiesModel.cs" />

@@ -46,7 +46,6 @@ namespace OpenBreed.Common.Maps
         public byte[] CSIN { get; set; }
         public byte[] Header { get; set; }
         public string IFFP { get; set; }
-        public MapModel Owner { get; internal set; }
         public List<PaletteModel> Palettes { get; set; }
         public int XBLK { get; set; }
         public int XOFA { get; set; }

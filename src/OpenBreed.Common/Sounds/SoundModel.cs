@@ -8,9 +8,19 @@ namespace OpenBreed.Common.Sounds
 {
     public class SoundModel
     {
-        public int SampleRate { get; set; }
+
+        #region Public Properties
+
         public int BitsPerSample { get; set; }
         public int Channels { get; set; }
         public byte[] Data { get; set; }
+        public int SampleRate { get; set; }
+
+        /// <summary>
+        ///  Gets or sets an object that provides additional data context.
+        /// </summary>
+        public object Tag { get; set; }
+
+        #endregion Public Properties
     }
 }
