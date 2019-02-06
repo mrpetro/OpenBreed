@@ -10,11 +10,11 @@ using OpenBreed.Common.Assets;
 using System.ComponentModel;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Common.Logging;
-using OpenBreed.Common.Props;
+using OpenBreed.Common.Actions;
 
 namespace OpenBreed.Editor.VM.Props
 {
-    public class PropSetVM : EditableEntryVM
+    public class ActionSetVM : EditableEntryVM
     {
 
         #region Private Fields
@@ -25,7 +25,7 @@ namespace OpenBreed.Editor.VM.Props
 
         #region Public Constructors
 
-        public PropSetVM()
+        public ActionSetVM()
         {
             Items = new BindingList<PropVM>();
             Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
@@ -41,7 +41,7 @@ namespace OpenBreed.Editor.VM.Props
 
         #region Public Methods
 
-        public PropVM CreateProp(IPropertyEntry propDef)
+        public PropVM CreateProp(IActionEntry propDef)
         {
             return new PropVM(this);
         }
@@ -72,7 +72,7 @@ namespace OpenBreed.Editor.VM.Props
 
         }
 
-        internal void FromModel(IPropSetEntry propSet)
+        internal void FromModel(IActionSetEntry propSet)
         {
             Items.UpdateAfter(() =>
             {

@@ -3,7 +3,7 @@ using OpenBreed.Common.Assets;
 using OpenBreed.Common.Images;
 using OpenBreed.Common.Maps;
 using OpenBreed.Common.Palettes;
-using OpenBreed.Common.Props;
+using OpenBreed.Common.Actions;
 using OpenBreed.Common.Sounds;
 using OpenBreed.Common.Sprites;
 using OpenBreed.Common.Tiles;
@@ -26,8 +26,8 @@ namespace OpenBreed.Editor.VM
                 return new DatabaseSoundTableVM();
             else if (repository is IRepository<IMapEntry>)
                 return new DatabaseMapTableVM();
-            else if (repository is IRepository<IPropSetEntry>)
-                return new DatabasePropertySetTableVM();
+            else if (repository is IRepository<IActionSetEntry>)
+                return new DatabaseActionSetTableVM();
             else if (repository is IRepository<IAssetEntry>)
                 return new DatabaseAssetTableVM();
             else if (repository is IRepository<ITileSetEntry>)

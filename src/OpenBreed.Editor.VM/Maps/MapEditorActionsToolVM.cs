@@ -14,7 +14,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Private Fields
 
-        private PropSetVM _currentItem;
+        private ActionSetVM _currentItem;
 
         private string _title;
 
@@ -33,7 +33,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Properties
 
-        public PropSetVM CurrentItem
+        public ActionSetVM CurrentItem
         {
             get { return _currentItem; }
             set { SetProperty(ref _currentItem, value); }

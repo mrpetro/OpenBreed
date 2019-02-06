@@ -10,19 +10,19 @@ using System.Windows.Forms;
 using OpenBreed.Editor.VM.Props;
 using OpenBreed.Editor.VM;
 
-namespace OpenBreed.Editor.UI.WinForms.Controls.Props
+namespace OpenBreed.Editor.UI.WinForms.Controls.Actions
 {
-    public partial class PropSetEditorCtrl : EntryEditorInnerCtrl
+    public partial class ActionSetEditorCtrl : EntryEditorInnerCtrl
     {
         #region Private Fields
 
-        private PropSetEditorVM _vm;
+        private ActionSetEditorVM _vm;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PropSetEditorCtrl()
+        public ActionSetEditorCtrl()
         {
             InitializeComponent();
         }
@@ -33,11 +33,11 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Props
 
         public override void Initialize(EntryEditorVM vm)
         {
-            _vm = vm as PropSetEditorVM ?? throw new InvalidOperationException(nameof(vm));
+            _vm = vm as ActionSetEditorVM ?? throw new InvalidOperationException(nameof(vm));
             _vm.PropertyChanged += _vm_PropertyChanged;
 
-            DataGridView.CurrentCellDirtyStateChanged += new EventHandler(DataGridView_CurrentCellDirtyStateChanged);
-            DataGridView.SelectionChanged += new EventHandler(DataGridView_SelectionChanged);
+            DGV.CurrentCellDirtyStateChanged += new EventHandler(DataGridView_CurrentCellDirtyStateChanged);
+            DGV.SelectionChanged += new EventHandler(DataGridView_SelectionChanged);
 
             Update(_vm.Editable);
         }
@@ -60,18 +60,18 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Props
 
         void DataGridView_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
-            if (DataGridView.IsCurrentCellDirty)
+            if (DGV.IsCurrentCellDirty)
             {
-                DataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
+                DGV.CommitEdit(DataGridViewDataErrorContexts.Commit);
             }
         }
 
         void DataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            var selectedRows = DataGridView.SelectedRows;
+            var selectedRows = DGV.SelectedRows;
             if (selectedRows.Count > 0)
             {
-                var d = DataGridView.Columns;
+                var d = DGV.Columns;
 
                 int propertyId = (int)selectedRows[0].Cells["Id"].Value;
                 //_vm.Selector.SetSelection(propertyId);
@@ -80,28 +80,28 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Props
 
         private void SetNoPropertySetState()
         {
-            DataGridView.DataSource = null;
-            DataGridView.Columns.Clear();
+            DGV.DataSource = null;
+            DGV.Columns.Clear();
         }
 
-        private void SetPropertySetState(PropSetVM propertySet)
+        private void SetPropertySetState(ActionSetVM propertySet)
         {
             SetupDataGridView();
         }
 
         private void SetupDataGridView()
         {
-            DataGridView.DataSource = null;
+            DGV.DataSource = null;
 
-             DataGridView.Columns.Clear();
-            DataGridView.RowHeadersVisible = false;
-            DataGridView.AllowUserToAddRows = false;
-            DataGridView.AllowUserToDeleteRows = false;
-            DataGridView.AllowUserToResizeRows = false;
-            DataGridView.MultiSelect = false;
-            DataGridView.AutoGenerateColumns = false;
-            DataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DataGridView.RowTemplate.Height = 32;
+             DGV.Columns.Clear();
+            DGV.RowHeadersVisible = false;
+            DGV.AllowUserToAddRows = false;
+            DGV.AllowUserToDeleteRows = false;
+            DGV.AllowUserToResizeRows = false;
+            DGV.MultiSelect = false;
+            DGV.AutoGenerateColumns = false;
+            DGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DGV.RowTemplate.Height = 32;
 
             DataGridViewCheckBoxColumn visibilityColumn = new DataGridViewCheckBoxColumn();
             visibilityColumn.HeaderText = "Visibility";
@@ -111,7 +111,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Props
             //visibilityColumn.DataPropertyName = m_Model.Data.Columns[0].ColumnName;
             visibilityColumn.MinimumWidth = 50;
             visibilityColumn.Width = 50;
-            DataGridView.Columns.Add(visibilityColumn);
+            DGV.Columns.Add(visibilityColumn);
 
             DataGridViewImageColumn presentationColumn = new DataGridViewImageColumn();
             presentationColumn.HeaderText = "Presentation";
@@ -124,7 +124,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Props
             presentationColumn.ReadOnly = true;
             presentationColumn.MinimumWidth = 80;
             presentationColumn.Width = 80;
-            DataGridView.Columns.Add(presentationColumn);
+            DGV.Columns.Add(presentationColumn);
 
             DataGridViewTextBoxColumn idColumn = new DataGridViewTextBoxColumn();
             idColumn.HeaderText = "Id";
@@ -135,7 +135,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Props
             idColumn.MinimumWidth = 40;
             idColumn.Width = 40;
             idColumn.ReadOnly = true;
-            DataGridView.Columns.Add(idColumn);
+            DGV.Columns.Add(idColumn);
 
             //DataGridViewTextBoxColumn binaryColumn = new DataGridViewTextBoxColumn();
             //binaryColumn.HeaderText = "Binary";
@@ -155,13 +155,13 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Props
             descriptionColumn.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             descriptionColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             descriptionColumn.ReadOnly = true;
-            DataGridView.Columns.Add(descriptionColumn);
+            DGV.Columns.Add(descriptionColumn);
 
-            DataGridView.DataSource = _vm.Editable.Items;
+            DGV.DataSource = _vm.Editable.Items;
             //DataGridView.DataSource = m_Model.Data;
         }
 
-        void Update(PropSetVM propertySet)
+        void Update(ActionSetVM propertySet)
         {
             if (propertySet == null)
                 SetNoPropertySetState();

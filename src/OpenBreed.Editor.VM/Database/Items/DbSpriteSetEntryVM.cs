@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.XmlDatabase;
-using OpenBreed.Common.XmlDatabase.Items.Props;
+using OpenBreed.Common.XmlDatabase.Items.Actions;
 using OpenBreed.Common.XmlDatabase.Items.Sources;
 using OpenBreed.Common.XmlDatabase.Items.Sprites;
 using OpenBreed.Common.Sprites;

@@ -3,7 +3,7 @@ using OpenBreed.Common.Assets;
 using OpenBreed.Common.Images;
 using OpenBreed.Common.Maps;
 using OpenBreed.Common.Palettes;
-using OpenBreed.Common.Props;
+using OpenBreed.Common.Actions;
 using OpenBreed.Common.Sounds;
 using OpenBreed.Common.Sprites;
 using OpenBreed.Common.Tiles;
@@ -30,8 +30,8 @@ namespace OpenBreed.Editor.VM.Database
                 return new DbMapEntryVM();
             else if (entry is IAssetEntry)
                 return new DbAssetEntryVM();
-            else if (entry is IPropSetEntry)
-                return new DbPropSetEntryVM();
+            else if (entry is IActionSetEntry)
+                return new DbActionSetEntryVM();
             else if (entry is ITileSetEntry)
                 return new DbTileSetEntryVM();
             else if (entry is ISpriteSetEntry)

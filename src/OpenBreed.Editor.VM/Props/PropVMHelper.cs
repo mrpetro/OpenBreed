@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.Props;
+﻿using OpenBreed.Common.Actions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -65,7 +65,7 @@ namespace OpenBreed.Editor.VM.Props
             return false;
         }
 
-        public static void SetPresentation(PropVM prop, IPropertyPresentation presentation)
+        public static void SetPresentation(PropVM prop, IActionPresentation presentation)
         {
             Image image;
             string message;

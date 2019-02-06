@@ -190,11 +190,11 @@
     <Compile Include="Controls\Maps\MapEditorPalettesToolCtrl.Designer.cs">
       <DependentUpon>MapEditorPalettesToolCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Props\PropSetEditorCtrl.cs">
+    <Compile Include="Controls\Actions\ActionSetEditorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Props\PropSetEditorCtrl.Designer.cs">
-      <DependentUpon>PropSetEditorCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Actions\ActionSetEditorCtrl.Designer.cs">
+      <DependentUpon>ActionSetEditorCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Maps\MapEditorActionsToolCtrl.cs">
       <SubType>UserControl</SubType>
@@ -421,8 +421,8 @@
     <EmbeddedResource Include="Controls\Maps\MapEditorPalettesToolCtrl.resx">
       <DependentUpon>MapEditorPalettesToolCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Props\PropSetEditorCtrl.resx">
-      <DependentUpon>PropSetEditorCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Actions\ActionSetEditorCtrl.resx">
+      <DependentUpon>ActionSetEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Maps\MapEditorActionsToolCtrl.resx">
       <DependentUpon>MapEditorActionsToolCtrl.cs</DependentUpon>

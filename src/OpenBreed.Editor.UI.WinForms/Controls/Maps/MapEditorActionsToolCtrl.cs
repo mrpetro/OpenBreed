@@ -37,8 +37,8 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
 
             _vm.PropertyChanged += _vm_PropertyChanged;
 
-            DataGridView.CurrentCellDirtyStateChanged += new EventHandler(DataGridView_CurrentCellDirtyStateChanged);
-            DataGridView.SelectionChanged += new EventHandler(DataGridView_SelectionChanged);
+            DataGridView.CurrentCellDirtyStateChanged += DataGridView_CurrentCellDirtyStateChanged;
+            DataGridView.SelectionChanged += DataGridView_SelectionChanged;
 
             Update(_vm.CurrentItem);
         }
@@ -85,7 +85,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
             DataGridView.Columns.Clear();
         }
 
-        private void SetPropertySetState(PropSetVM propertySet)
+        private void SetPropertySetState(ActionSetVM propertySet)
         {
             SetupDataGridView();
         }
@@ -162,7 +162,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
             //DataGridView.DataSource = m_Model.Data;
         }
 
-        void Update(PropSetVM propertySet)
+        void Update(ActionSetVM propertySet)
         {
             if (propertySet == null)
                 SetNoPropertySetState();

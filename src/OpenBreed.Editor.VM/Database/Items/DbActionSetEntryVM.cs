@@ -1,8 +1,8 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.XmlDatabase;
-using OpenBreed.Common.XmlDatabase.Items.Props;
+using OpenBreed.Common.XmlDatabase.Items.Actions;
 using OpenBreed.Common.XmlDatabase.Items.Sources;
-using OpenBreed.Common.Props;
+using OpenBreed.Common.Actions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,17 +11,17 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database.Items
 {
-    public class DbPropSetEntryVM : DbEntryVM
+    public class DbActionSetEntryVM : DbEntryVM
     {
         #region Private Fields
 
-        private IPropSetEntry _entry;
+        private IActionSetEntry _entry;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DbPropSetEntryVM()
+        public DbActionSetEntryVM()
         {
         }
 
@@ -31,7 +31,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         public override void Load(IEntry entry)
         {
-            _entry = entry as IPropSetEntry ?? throw new InvalidOperationException($"Expected {nameof(IPropSetEntry)}");
+            _entry = entry as IActionSetEntry ?? throw new InvalidOperationException($"Expected {nameof(IActionSetEntry)}");
 
             base.Load(entry);
         }

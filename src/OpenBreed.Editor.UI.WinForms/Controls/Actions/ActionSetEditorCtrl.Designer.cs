@@ -1,6 +1,6 @@
-﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Props
+﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Actions
 {
-    partial class PropSetEditorCtrl
+    partial class ActionSetEditorCtrl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,33 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.DataGridView = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).BeginInit();
+            this.DGV = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
             this.SuspendLayout();
             // 
-            // DataGridView
+            // DGV
             // 
-            this.DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DataGridView.Location = new System.Drawing.Point(0, 0);
-            this.DataGridView.Name = "DataGridView";
-            this.DataGridView.Size = new System.Drawing.Size(541, 360);
-            this.DataGridView.TabIndex = 0;
+            this.DGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DGV.Location = new System.Drawing.Point(0, 0);
+            this.DGV.Name = "DGV";
+            this.DGV.Size = new System.Drawing.Size(541, 360);
+            this.DGV.TabIndex = 0;
             // 
-            // PropSelectorCtrl
+            // ActionSetEditorCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.DataGridView);
-            this.Name = "PropSelectorCtrl";
+            this.Controls.Add(this.DGV);
+            this.Name = "ActionSetEditorCtrl";
             this.Size = new System.Drawing.Size(541, 360);
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView DataGridView;
+        private System.Windows.Forms.DataGridView DGV;
     }
 }

@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Common.Props;
+using OpenBreed.Common.Actions;
 
 namespace OpenBreed.Editor.VM.Props
 {
@@ -24,7 +24,7 @@ namespace OpenBreed.Editor.VM.Props
 
         #region Public Constructors
 
-        public PropVM(PropSetVM owner)
+        public PropVM(ActionSetVM owner)
         {
             Owner = owner;
         }
@@ -51,7 +51,7 @@ namespace OpenBreed.Editor.VM.Props
             set { SetProperty(ref _name, value); }
         }
 
-        public PropSetVM Owner { get; }
+        public ActionSetVM Owner { get; }
         public Image Presentation
         {
             get { return _presentation; }
@@ -68,7 +68,7 @@ namespace OpenBreed.Editor.VM.Props
 
         #region Public Methods
 
-        public void FromModel(IPropertyEntry property)
+        public void FromModel(IActionEntry property)
         {
             Name = property.Name;
             Id = property.Id;

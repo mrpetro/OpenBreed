@@ -95,7 +95,7 @@
     <Compile Include="Database\Items\DbSoundEntryVM.cs" />
     <Compile Include="Database\Items\DbSpriteSetEntryVM.cs" />
     <Compile Include="Database\Items\DbTileSetEntryVM.cs" />
-    <Compile Include="Database\Items\DbPropSetEntryVM.cs" />
+    <Compile Include="Database\Items\DbActionSetEntryVM.cs" />
     <Compile Include="Database\Items\DbAssetEntryVM.cs" />
     <Compile Include="Database\Tables\DbTableVM.cs" />
     <Compile Include="Database\Tables\DatabaseImageTableVM.cs" />
@@ -104,7 +104,7 @@
     <Compile Include="Database\Tables\DatabaseSoundTableVM.cs" />
     <Compile Include="Database\Tables\DatabaseSpriteSetTableVM.cs" />
     <Compile Include="Database\Tables\DatabaseTileSetTableVM.cs" />
-    <Compile Include="Database\Tables\DatabasePropertySetTableVM.cs" />
+    <Compile Include="Database\Tables\DatabaseActionSetTableVM.cs" />
     <Compile Include="Database\Tables\DatabaseAssetTableVM.cs" />
     <Compile Include="DbTableFactory.cs" />
     <Compile Include="EditorVM.cs" />
@@ -161,9 +161,9 @@
     <Compile Include="Maps\MapEditorPalettesToolVM.cs" />
     <Compile Include="Palettes\PaletteVM.cs" />
     <Compile Include="Database\DatabaseVM.cs" />
-    <Compile Include="Props\PropSetEditorVM.cs" />
+    <Compile Include="Props\ActionSetEditorVM.cs" />
     <Compile Include="Maps\MapEditorActionsToolVM.cs" />
-    <Compile Include="Props\PropSetVM.cs" />
+    <Compile Include="Props\ActionSetVM.cs" />
     <Compile Include="Props\PropVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Props\PropVMHelper.cs" />

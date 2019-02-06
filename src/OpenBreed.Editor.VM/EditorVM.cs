@@ -23,7 +23,7 @@ using OpenBreed.Editor.VM.Images;
 using OpenBreed.Common.Formats;
 using OpenBreed.Common.Tiles;
 using OpenBreed.Common.Sprites;
-using OpenBreed.Common.Props;
+using OpenBreed.Common.Actions;
 using OpenBreed.Common.XmlDatabase;
 using OpenBreed.Common.Sounds;
 using OpenBreed.Editor.VM.Sounds;
@@ -59,7 +59,7 @@ namespace OpenBreed.Editor.VM
 
             var entryEditorFactory = new DbEntryEditorFactory();
             entryEditorFactory.Register<IRepository<ITileSetEntry>, TileSetEditorVM>();
-            entryEditorFactory.Register<IRepository<IPropSetEntry>, PropSetEditorVM>();
+            entryEditorFactory.Register<IRepository<IActionSetEntry>, ActionSetEditorVM>();
             entryEditorFactory.Register<IRepository<IPaletteEntry>, PaletteEditorVM>();
             entryEditorFactory.Register<IRepository<IImageEntry>, ImageEditorVM>();
             entryEditorFactory.Register<IRepository<ISoundEntry>, SoundEditorVM>();

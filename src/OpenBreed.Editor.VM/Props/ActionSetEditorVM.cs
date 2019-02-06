@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Props;
+using OpenBreed.Common.Actions;
 using OpenBreed.Editor.VM.Base;
 using System;
 using System.Collections.Generic;
@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Props
 {
-    public class PropSetEditorVM : EntryEditorBaseVM<IPropSetEntry, PropSetVM>
+    public class ActionSetEditorVM : EntryEditorBaseVM<IActionSetEntry, ActionSetVM>
     {
 
         #region Public Constructors
 
-        public PropSetEditorVM(IRepository repository) : base(repository)
+        public ActionSetEditorVM(IRepository repository) : base(repository)
         {
             PropertyChanged += This_PropertyChanged;
         }
@@ -24,7 +24,7 @@ namespace OpenBreed.Editor.VM.Props
 
         #region Public Properties
 
-        public override string EditorName { get { return "Property Set Editor"; } }
+        public override string EditorName { get { return "Action Set Editor"; } }
 
         public int SelectedIndex { get; private set; }
 
@@ -32,14 +32,14 @@ namespace OpenBreed.Editor.VM.Props
 
         #region Protected Methods
 
-        protected override void UpdateEntry(PropSetVM source, IPropSetEntry target)
+        protected override void UpdateEntry(ActionSetVM source, IActionSetEntry target)
         {
             base.UpdateEntry(source, target);
         }
 
-        protected override void UpdateVM(IPropSetEntry source, PropSetVM target)
+        protected override void UpdateVM(IActionSetEntry source, ActionSetVM target)
         {
-            var model = DataProvider.GetPropSet(source.Id);
+            var model = DataProvider.GetActionSet(source.Id);
 
             target.FromModel(model);
 

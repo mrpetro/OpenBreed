@@ -11,7 +11,7 @@ using System.Linq;
 using OpenBreed.Editor.VM.Maps.Layers;
 using OpenBreed.Common.Tiles;
 using OpenBreed.Editor.VM.Tiles;
-using OpenBreed.Common.Props;
+using OpenBreed.Common.Actions;
 
 namespace OpenBreed.Editor.VM.Maps
 {

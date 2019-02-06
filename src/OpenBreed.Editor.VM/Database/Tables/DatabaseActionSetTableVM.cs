@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Props;
+using OpenBreed.Common.Actions;
 using OpenBreed.Editor.VM.Database.Items;
 using System;
 using System.Collections.Generic;
@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database.Tables
 {
-    public class DatabasePropertySetTableVM : DbTableVM
+    public class DatabaseActionSetTableVM : DbTableVM
     {
         #region Private Fields
 
-        private IRepository<IPropSetEntry> _repository;
+        private IRepository<IActionSetEntry> _repository;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DatabasePropertySetTableVM()
+        public DatabaseActionSetTableVM()
         {
         }
 
@@ -27,7 +27,7 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         #region Public Properties
 
-        public override string Name { get { return "Property sets"; } }
+        public override string Name { get { return "Action sets"; } }
 
         #endregion Public Properties
 
@@ -35,7 +35,7 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         public override void Load(IRepository repository)
         {
-            _repository = repository as IRepository<IPropSetEntry> ?? throw new InvalidOperationException($"Expected {nameof(IRepository<IPropSetEntry>)}");
+            _repository = repository as IRepository<IActionSetEntry> ?? throw new InvalidOperationException($"Expected {nameof(IRepository<IActionSetEntry>)}");
         }
 
         #endregion Public Methods

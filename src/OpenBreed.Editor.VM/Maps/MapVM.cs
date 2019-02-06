@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using OpenBreed.Editor.VM.Sprites;
 using OpenBreed.Common.Tiles;
 using OpenBreed.Common.Sprites;
-using OpenBreed.Common.Props;
+using OpenBreed.Common.Actions;
 using OpenBreed.Common;
 
 namespace OpenBreed.Editor.VM.Maps
@@ -27,7 +27,7 @@ namespace OpenBreed.Editor.VM.Maps
         private readonly CommandMan m_Commands;
 
         private bool _isModified;
-        private PropSetVM _propSet;
+        private ActionSetVM _propSet;
         private AssetBase _source = null;
         private string _title;
 
@@ -71,7 +71,7 @@ namespace OpenBreed.Editor.VM.Maps
         public BindingList<PaletteVM> Palettes { get; }
         public LevelPropertiesVM Properties { get; }
 
-        public PropSetVM PropSet
+        public ActionSetVM PropSet
         {
             get { return _propSet; }
             set { SetProperty(ref _propSet, value); }
@@ -186,9 +186,9 @@ namespace OpenBreed.Editor.VM.Maps
             Layout.ConnectEvents();
         }
 
-        internal void SetPropSet(IPropSetEntry propSet)
+        internal void SetPropSet(IActionSetEntry propSet)
         {
-            var propSetVM = new PropSetVM();
+            var propSetVM = new ActionSetVM();
 
             propSetVM.FromModel(propSet);
 

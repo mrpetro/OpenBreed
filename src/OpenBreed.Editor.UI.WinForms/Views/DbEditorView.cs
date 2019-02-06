@@ -20,7 +20,7 @@ using OpenBreed.Editor.VM.Props;
 using OpenBreed.Editor.UI.WinForms.Controls.Sounds;
 using OpenBreed.Editor.UI.WinForms.Controls.Tiles;
 using OpenBreed.Editor.UI.WinForms.Controls.Images;
-using OpenBreed.Editor.UI.WinForms.Controls.Props;
+using OpenBreed.Editor.UI.WinForms.Controls.Actions;
 using OpenBreed.Editor.UI.WinForms.Controls.Palettes;
 using OpenBreed.Editor.UI.WinForms.Controls.Maps;
 using OpenBreed.Editor.VM.Maps;
@@ -78,7 +78,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
             _viewFactory.Register<SoundEditorVM, EntryEditorView<SoundEditorCtrl>>();
             _viewFactory.Register<TileSetEditorVM, EntryEditorView<TileSetEditorCtrl>>();
-            _viewFactory.Register<PropSetEditorVM, EntryEditorView<PropSetEditorCtrl>>();
+            _viewFactory.Register<ActionSetEditorVM, EntryEditorView<ActionSetEditorCtrl>>();
             _viewFactory.Register<ImageEditorVM, EntryEditorView<ImageEditorCtrl>>();
             _viewFactory.Register<PaletteEditorVM, EntryEditorView<PaletteEditorCtrl>>();
             _viewFactory.Register<MapEditorVM, EntryEditorView<MapEditorCtrl>>();

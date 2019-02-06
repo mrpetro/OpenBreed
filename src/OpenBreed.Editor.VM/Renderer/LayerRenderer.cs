@@ -82,7 +82,7 @@ namespace OpenBreed.Editor.VM.Renderer
             }
         }
 
-        private void DrawProperty(PropSetVM propSet, int id, float x, float y, int tileSize)
+        private void DrawProperty(ActionSetVM propSet, int id, float x, float y, int tileSize)
         {
             if (id >= propSet.Items.Count)
                 return;
