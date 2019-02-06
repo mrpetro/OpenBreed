@@ -37,6 +37,11 @@ namespace OpenBreed.Common.XmlDatabase.Items.Actions
             throw new NotImplementedException();
         }
 
+        public IActionEntry NewItem()
+        {
+            return new ActionDef();
+        }
+
         #endregion Public Methods
 
     }

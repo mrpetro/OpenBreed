@@ -10,9 +10,9 @@ namespace OpenBreed.Common.Actions
     {
         #region Public Properties
 
-        string Color { get; }
-        string Image { get; }
-        bool Visibility { get; }
+        string Color { get; set; }
+        string Image { get; set; }
+        bool Visibility { get; set; }
 
         #endregion Public Properties
     }

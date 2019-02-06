@@ -10,7 +10,6 @@ namespace OpenBreed.Common.XmlDatabase.Items.Actions
     [Serializable]
     public class ActionDef : IActionEntry
     {
-
         #region Public Properties
 
         public string Description { get; set; }
@@ -21,10 +20,10 @@ namespace OpenBreed.Common.XmlDatabase.Items.Actions
         public string Name { get; set; }
 
         [XmlIgnore]
-        public IActionPresentation Presentation { get; set; }
+        public IActionPresentation Presentation { get; private set; } = new ActionPresentationDef();
 
         [XmlIgnore]
-        public IActionTriggers Triggers { get; set; }
+        public IActionTriggers Triggers { get; private set; } = new ActionTriggersDef();
 
         [XmlElement("Presentation")]
         public ActionPresentationDef XmlPresentation

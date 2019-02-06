@@ -135,7 +135,7 @@ namespace OpenBreed.Common
                 map.TileSets.Add(GetTileSet(entry.TileSetRef));
 
             if (entry.ActionSetRef != null)
-                map.PropSet = GetActionSet(entry.ActionSetRef);
+                map.ActionSet = GetActionSet(entry.ActionSetRef);
 
             foreach (var spriteSetRef in entry.SpriteSetRefs)
                 map.SpriteSets.Add(GetSpriteSet(spriteSetRef));

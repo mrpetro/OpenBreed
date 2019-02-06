@@ -37,7 +37,7 @@ namespace OpenBreed.Common.Maps
 
         public MapPropertiesModel Properties { get; }
 
-        public IActionSetEntry PropSet { get; internal set; }
+        public IActionSetEntry ActionSet { get; internal set; }
 
         public List<SpriteSetModel> SpriteSets { get; } = new List<SpriteSetModel>();
 

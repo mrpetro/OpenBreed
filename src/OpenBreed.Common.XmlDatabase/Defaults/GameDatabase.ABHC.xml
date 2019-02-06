@@ -487,7 +487,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
-          <ActionSetRef>Actions.Default</ActionSetRef>
+          <ActionSetRef>Actions.Level1</ActionSetRef>
           <AssetRef>Assets.L1MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L1</TileSetRef>
@@ -497,7 +497,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
-          <ActionSetRef>Actions.Default</ActionSetRef>
+          <ActionSetRef>Actions.Level1</ActionSetRef>
           <AssetRef>Assets.L2MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L2</TileSetRef>
@@ -507,7 +507,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
-          <ActionSetRef>Actions.Default</ActionSetRef>
+          <ActionSetRef>Actions.Level1</ActionSetRef>
           <AssetRef>Assets.L3MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L3</TileSetRef>
@@ -517,7 +517,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
-          <ActionSetRef>Actions.Default</ActionSetRef>
+          <ActionSetRef>Actions.Level1</ActionSetRef>
           <AssetRef>Assets.L4MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L4</TileSetRef>
@@ -527,7 +527,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
-          <ActionSetRef>Actions.Default</ActionSetRef>
+          <ActionSetRef>Actions.Level1</ActionSetRef>
           <AssetRef>Assets.L5MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L5</TileSetRef>
@@ -537,7 +537,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
-          <ActionSetRef>Actions.Default</ActionSetRef>
+          <ActionSetRef>Actions.Level1</ActionSetRef>
           <AssetRef>Assets.L6MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L6</TileSetRef>
@@ -547,7 +547,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
-          <ActionSetRef>Actions.Default</ActionSetRef>
+          <ActionSetRef>Actions.Level1</ActionSetRef>
           <AssetRef>Assets.L7MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L6</TileSetRef>
@@ -557,7 +557,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
-          <ActionSetRef>Actions.Default</ActionSetRef>
+          <ActionSetRef>Actions.Level1</ActionSetRef>
           <AssetRef>Assets.L8MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L6</TileSetRef>
@@ -567,7 +567,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
-          <ActionSetRef>Actions.Default</ActionSetRef>
+          <ActionSetRef>Actions.Level1</ActionSetRef>
           <AssetRef>Assets.L9MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L6</TileSetRef>
@@ -577,7 +577,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
-          <ActionSetRef>Actions.Default</ActionSetRef>
+          <ActionSetRef>Actions.Level1</ActionSetRef>
           <AssetRef>Assets.LAMA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L7</TileSetRef>
@@ -587,7 +587,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
-          <ActionSetRef>Actions.Default</ActionSetRef>
+          <ActionSetRef>Actions.Level1</ActionSetRef>
           <AssetRef>Assets.LBMA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L7</TileSetRef>
@@ -597,7 +597,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
-          <ActionSetRef>Actions.Default</ActionSetRef>
+          <ActionSetRef>Actions.Level1</ActionSetRef>
           <AssetRef>Assets.LCMA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L8</TileSetRef>
@@ -607,7 +607,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
-          <ActionSetRef>Actions.Default</ActionSetRef>
+          <ActionSetRef>Actions.Level1</ActionSetRef>
           <AssetRef>Assets.LDMA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L7</TileSetRef>
@@ -617,7 +617,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
-          <ActionSetRef>Actions.Default</ActionSetRef>
+          <ActionSetRef>Actions.Level1</ActionSetRef>
           <AssetRef>Assets.LEMA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L9</TileSetRef>
@@ -627,7 +627,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
-          <ActionSetRef>Actions.Default</ActionSetRef>
+          <ActionSetRef>Actions.Level1</ActionSetRef>
           <AssetRef>Assets.MMA1</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L1</TileSetRef>
@@ -637,7 +637,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
-          <ActionSetRef>Actions.Default</ActionSetRef>
+          <ActionSetRef>Actions.Level1</ActionSetRef>
           <AssetRef>Assets.MMA2</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L5</TileSetRef>
@@ -647,7 +647,7 @@
             <Parameters />
           </Format>
           <PaletteRefs />
-          <ActionSetRef>Actions.Default</ActionSetRef>
+          <ActionSetRef>Actions.Level1</ActionSetRef>
           <AssetRef>Assets.MMA3</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L7</TileSetRef>

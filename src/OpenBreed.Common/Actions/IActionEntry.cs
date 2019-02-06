@@ -10,9 +10,9 @@ namespace OpenBreed.Common.Actions
     {
         #region Public Properties
 
-        string Description { get; }
-        int Id { get; }
-        string Name { get; }
+        string Description { get; set; }
+        int Id { get; set; }
+        string Name { get; set; }
 
         IActionPresentation Presentation { get; }
         IActionTriggers Triggers { get; }
