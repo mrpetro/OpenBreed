@@ -10,7 +10,7 @@ using System.Drawing;
 using OpenBreed.Common.Maps.Readers.MAP;
 using OpenBreed.Common.Maps.Builders;
 using OpenBreed.Editor.VM.Database;
-using OpenBreed.Editor.VM.Props;
+using OpenBreed.Editor.VM.Actions;
 using OpenBreed.Editor.VM.Sprites;
 using OpenBreed.Common.Palettes;
 using System.Diagnostics;

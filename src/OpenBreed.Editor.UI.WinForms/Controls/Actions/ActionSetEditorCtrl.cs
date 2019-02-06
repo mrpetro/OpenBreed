@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using OpenBreed.Editor.VM.Props;
+using OpenBreed.Editor.VM.Actions;
 using OpenBreed.Editor.VM;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Actions
@@ -114,16 +114,16 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Actions
             DGV.Columns.Add(visibilityColumn);
 
             DataGridViewImageColumn presentationColumn = new DataGridViewImageColumn();
-            presentationColumn.HeaderText = "Presentation";
-            presentationColumn.Name = "Presentation";
-            presentationColumn.DataPropertyName = "Presentation";
+            presentationColumn.HeaderText = "Icon";
+            presentationColumn.Name = "Icon";
+            presentationColumn.DataPropertyName = "Icon";
             //presentationColumn.Name = m_Model.Data.Columns[1].ColumnName;
             //presentationColumn.DataPropertyName = m_Model.Data.Columns[1].ColumnName;
             presentationColumn.ImageLayout = DataGridViewImageCellLayout.Normal;
             presentationColumn.DefaultCellStyle.BackColor = Color.Gray;
             presentationColumn.ReadOnly = true;
-            presentationColumn.MinimumWidth = 80;
-            presentationColumn.Width = 80;
+            presentationColumn.MinimumWidth = 50;
+            presentationColumn.Width = 50;
             DGV.Columns.Add(presentationColumn);
 
             DataGridViewTextBoxColumn idColumn = new DataGridViewTextBoxColumn();

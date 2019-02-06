@@ -6,7 +6,7 @@ using OpenBreed.Editor.VM.Database.Items;
 using OpenBreed.Editor.VM.Images;
 using OpenBreed.Editor.VM.Maps;
 using OpenBreed.Editor.VM.Palettes;
-using OpenBreed.Editor.VM.Props;
+using OpenBreed.Editor.VM.Actions;
 using OpenBreed.Editor.VM.Sounds;
 using OpenBreed.Editor.VM.Tiles;
 using System;

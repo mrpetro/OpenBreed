@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Common.Maps;
 using OpenBreed.Editor.VM.Maps.Layers;
-using OpenBreed.Editor.VM.Props;
+using OpenBreed.Editor.VM.Actions;
 using OpenBreed.Editor.VM.Tiles;
 using System;
 using System.Collections.Generic;
@@ -92,7 +92,7 @@ namespace OpenBreed.Editor.VM.Renderer
             if (!propertyData.Visibility)
                 return;
 
-            var image = propertyData.Presentation;
+            var image = propertyData.Icon;
 
             var opqPen = new Pen(Color.FromArgb(128, 255, 255, 255), 10);
             var otranspen = new Pen(Color.FromArgb(128, 255, 255, 255), 10);

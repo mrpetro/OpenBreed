@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Editor.VM.Props
+namespace OpenBreed.Editor.VM.Actions
 {
     public class ActionSetEditorVM : EntryEditorBaseVM<IActionSetEntry, ActionSetVM>
     {
@@ -35,15 +35,6 @@ namespace OpenBreed.Editor.VM.Props
         protected override void UpdateEntry(ActionSetVM source, IActionSetEntry target)
         {
             base.UpdateEntry(source, target);
-        }
-
-        protected override void UpdateVM(IActionSetEntry source, ActionSetVM target)
-        {
-            var model = DataProvider.GetActionSet(source.Id);
-
-            target.FromModel(model);
-
-            base.UpdateVM(source, target);
         }
 
         #endregion Protected Methods

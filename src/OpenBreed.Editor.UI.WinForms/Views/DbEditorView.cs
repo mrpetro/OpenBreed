@@ -16,7 +16,7 @@ using OpenBreed.Editor.VM.Sounds;
 using OpenBreed.Editor.VM.Images;
 using OpenBreed.Editor.VM.Palettes;
 using OpenBreed.Editor.VM.Tiles;
-using OpenBreed.Editor.VM.Props;
+using OpenBreed.Editor.VM.Actions;
 using OpenBreed.Editor.UI.WinForms.Controls.Sounds;
 using OpenBreed.Editor.UI.WinForms.Controls.Tiles;
 using OpenBreed.Editor.UI.WinForms.Controls.Images;

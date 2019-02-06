@@ -9,7 +9,7 @@ using System.IO;
 using System.Linq;
 using System.ComponentModel;
 using OpenBreed.Editor.VM.Tiles;
-using OpenBreed.Editor.VM.Props;
+using OpenBreed.Editor.VM.Actions;
 using System.Collections.Generic;
 using OpenBreed.Editor.VM.Sprites;
 using OpenBreed.Common.Tiles;
@@ -106,8 +106,8 @@ namespace OpenBreed.Editor.VM.Maps
             //foreach (var spriteSet in model.SpriteSets)
             //    AddSpriteSet(spriteSet);
 
-            if (model.PropSet != null)
-                SetPropSet(model.PropSet);
+            if (model.ActionSet != null)
+                SetActionSet(model.ActionSet);
 
             Properties.Load(model);
 
@@ -186,11 +186,11 @@ namespace OpenBreed.Editor.VM.Maps
             Layout.ConnectEvents();
         }
 
-        internal void SetPropSet(IActionSetEntry propSet)
+        internal void SetActionSet(IActionSetEntry propSet)
         {
             var propSetVM = new ActionSetVM();
 
-            propSetVM.FromModel(propSet);
+            propSetVM.FromEntry(propSet);
 
             PropSet = propSetVM;
         }

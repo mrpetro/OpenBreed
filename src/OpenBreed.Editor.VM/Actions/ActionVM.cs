@@ -7,24 +7,25 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Actions;
 
-namespace OpenBreed.Editor.VM.Props
+namespace OpenBreed.Editor.VM.Actions
 {
-    public class PropVM : BaseViewModel
+    public class ActionVM : BaseViewModel
     {
 
         #region Private Fields
 
+        private Color _color;
         private string _description;
         private int _id;
+        private Image _icon;
         private bool _isVisible;
         private string _name;
-        private Image _presentation;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PropVM(ActionSetVM owner)
+        public ActionVM(ActionSetVM owner)
         {
             Owner = owner;
         }
@@ -32,6 +33,12 @@ namespace OpenBreed.Editor.VM.Props
         #endregion Public Constructors
 
         #region Public Properties
+
+        internal Color Color
+        {
+            get { return _color; }
+            set { SetProperty(ref _color, value); }
+        }
 
         public string Description
         {
@@ -45,6 +52,12 @@ namespace OpenBreed.Editor.VM.Props
             set { SetProperty(ref _id, value); }
         }
 
+        public Image Icon
+        {
+            get { return _icon; }
+            set { SetProperty(ref _icon, value); }
+        }
+
         public string Name
         {
             get { return _name; }
@@ -52,11 +65,6 @@ namespace OpenBreed.Editor.VM.Props
         }
 
         public ActionSetVM Owner { get; }
-        public Image Presentation
-        {
-            get { return _presentation; }
-            set { SetProperty(ref _presentation, value); }
-        }
 
         public bool Visibility
         {
@@ -68,14 +76,22 @@ namespace OpenBreed.Editor.VM.Props
 
         #region Public Methods
 
-        public void FromModel(IActionEntry property)
+        public void FromModel(IActionEntry action)
         {
-            Name = property.Name;
-            Id = property.Id;
-            Visibility = property.Presentation.Visibility;
-            Description = property.Description;
+            Name = action.Name;
+            Id = action.Id;
+            Description = action.Description;
 
-            PropVMHelper.SetPresentation(this, property.Presentation);
+            ActionVMHelper.FromModel(this, action.Presentation);
+        }
+
+        public void ToModel(IActionEntry action)
+        {
+            action.Name = Name;
+            action.Id = Id;
+            action.Description = Description;
+
+            ActionVMHelper.ToModel(this, action.Presentation);
         }
 
         #endregion Public Methods

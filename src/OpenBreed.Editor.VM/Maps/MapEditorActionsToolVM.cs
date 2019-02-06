@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM.Props;
+using OpenBreed.Editor.VM.Actions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

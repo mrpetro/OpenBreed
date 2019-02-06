@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Common.Maps;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Maps.Helpers;
-using OpenBreed.Editor.VM.Props;
+using OpenBreed.Editor.VM.Actions;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;

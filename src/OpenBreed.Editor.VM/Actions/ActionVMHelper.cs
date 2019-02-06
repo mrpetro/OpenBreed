@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Editor.VM.Props
+namespace OpenBreed.Editor.VM.Actions
 {
-    public static class PropVMHelper
+    public static class ActionVMHelper
     {
-        public static void SetPresentationDefault(PropVM prop,  Color color)
+        public static void SetPresentationDefault(ActionVM prop,  Color color)
         {
             Bitmap bitmap = new Bitmap(32, 32, PixelFormat.Format32bppArgb);
 
@@ -38,7 +38,7 @@ namespace OpenBreed.Editor.VM.Props
                 gfx.DrawString(string.Format("{0,2:D2}", prop.Id), font, brush, 1, 3);
             }
 
-            prop.Presentation = bitmap;
+            prop.Icon = bitmap;
         }
 
         public static bool TryLoadImage(string imagePath, out Image image, out string message)
@@ -65,17 +65,24 @@ namespace OpenBreed.Editor.VM.Props
             return false;
         }
 
-        public static void SetPresentation(PropVM prop, IActionPresentation presentation)
+        public static void ToModel(ActionVM vm, IActionPresentation model)
+        {
+            model.Visibility = vm.Visibility;
+            model.Color = ColorTranslator.ToHtml(vm.Color);
+        }
+
+        public static void FromModel(ActionVM vm, IActionPresentation model)
         {
             Image image;
             string message;
 
-            prop.Visibility = presentation.Visibility;
+            vm.Visibility = model.Visibility;
+            vm.Color = ColorTranslator.FromHtml(model.Color);
 
-            if (!TryLoadImage(presentation.Image, out image, out message))
-                SetPresentationDefault(prop, System.Drawing.ColorTranslator.FromHtml(presentation.Color));
+            if (!TryLoadImage(model.Image, out image, out message))
+                SetPresentationDefault(vm, vm.Color);
             else
-                prop.Presentation = image;
+                vm.Icon = image;
         }
     }
 }
