@@ -8,7 +8,7 @@ using OpenBreed.Common.Maps.Builders;
 using OpenBreed.Common.Maps.Readers.MAP;
 
 using OpenBreed.Common.Tiles;
-using OpenBreed.Common.Props;
+using OpenBreed.Common.Actions;
 using OpenBreed.Common.Sprites;
 
 namespace OpenBreed.Common.Maps
@@ -37,7 +37,7 @@ namespace OpenBreed.Common.Maps
 
         public MapPropertiesModel Properties { get; }
 
-        public IPropSetEntry PropSet { get; internal set; }
+        public IActionSetEntry PropSet { get; internal set; }
 
         public List<SpriteSetModel> SpriteSets { get; } = new List<SpriteSetModel>();
 

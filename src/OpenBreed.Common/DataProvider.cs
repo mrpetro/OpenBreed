@@ -2,7 +2,7 @@
 using OpenBreed.Common.Images;
 using OpenBreed.Common.Maps;
 using OpenBreed.Common.Palettes;
-using OpenBreed.Common.Props;
+using OpenBreed.Common.Actions;
 using OpenBreed.Common.Sounds;
 using OpenBreed.Common.Assets;
 using OpenBreed.Common.Sprites;
@@ -86,9 +86,9 @@ namespace OpenBreed.Common
             return sound;
         }
 
-        public IPropSetEntry GetPropSet(string id)
+        public IActionSetEntry GetActionSet(string id)
         {
-            var entry = _unitOfWork.GetRepository<IPropSetEntry>().GetById(id);
+            var entry = _unitOfWork.GetRepository<IActionSetEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("PropSet error: " + id);
 
@@ -134,8 +134,8 @@ namespace OpenBreed.Common
             if (entry.TileSetRef != null)
                 map.TileSets.Add(GetTileSet(entry.TileSetRef));
 
-            if (entry.PropertySetRef != null)
-                map.PropSet = GetPropSet(entry.PropertySetRef);
+            if (entry.ActionSetRef != null)
+                map.PropSet = GetActionSet(entry.ActionSetRef);
 
             foreach (var spriteSetRef in entry.SpriteSetRefs)
                 map.SpriteSets.Add(GetSpriteSet(spriteSetRef));

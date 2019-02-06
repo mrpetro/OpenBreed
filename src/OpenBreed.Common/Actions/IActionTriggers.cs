@@ -4,13 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Props
+namespace OpenBreed.Common.Actions
 {
-    public interface IPropertyTriggers
+    public interface IActionTriggers
     {
-        string OnLoad { get; set; }
-        string OnDestroy { get; set; }
+        #region Public Properties
+
         string OnCollisionEnter { get; set; }
         string OnCollisionLeave { get; set; }
+        string OnDestroy { get; set; }
+        string OnLoad { get; set; }
+
+        #endregion Public Properties
     }
 }

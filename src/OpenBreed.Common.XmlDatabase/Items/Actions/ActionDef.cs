@@ -1,14 +1,14 @@
-﻿using OpenBreed.Common.Props;
+﻿using OpenBreed.Common.Actions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace OpenBreed.Common.XmlDatabase.Items.Props
+namespace OpenBreed.Common.XmlDatabase.Items.Actions
 {
     [Serializable]
-    public class PropertyDef : IPropertyEntry
+    public class ActionDef : IActionEntry
     {
 
         #region Public Properties
@@ -21,17 +21,17 @@ namespace OpenBreed.Common.XmlDatabase.Items.Props
         public string Name { get; set; }
 
         [XmlIgnore]
-        public IPropertyPresentation Presentation { get; set; }
+        public IActionPresentation Presentation { get; set; }
 
         [XmlIgnore]
-        public IPropertyTriggers Triggers { get; set; }
+        public IActionTriggers Triggers { get; set; }
 
         [XmlElement("Presentation")]
-        public PropertyPresentationDef XmlPresentation
+        public ActionPresentationDef XmlPresentation
         {
             get
             {
-                return (PropertyPresentationDef)Presentation;
+                return (ActionPresentationDef)Presentation;
             }
 
             set
@@ -41,11 +41,11 @@ namespace OpenBreed.Common.XmlDatabase.Items.Props
         }
 
         [XmlElement("Triggers")]
-        public PropertyTriggersDef XmlTriggers
+        public ActionTriggersDef XmlTriggers
         {
             get
             {
-                return (PropertyTriggersDef)Triggers;
+                return (ActionTriggersDef)Triggers;
             }
 
             set

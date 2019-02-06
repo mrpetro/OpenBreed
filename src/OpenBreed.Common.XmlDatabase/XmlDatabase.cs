@@ -1,9 +1,9 @@
 ﻿using OpenBreed.Common.XmlDatabase;
 using OpenBreed.Common.XmlDatabase.Items.Sources;
 using OpenBreed.Common.XmlDatabase.Tables.Images;
-using OpenBreed.Common.XmlDatabase.Tables.Levels;
+using OpenBreed.Common.XmlDatabase.Tables.Maps;
 using OpenBreed.Common.XmlDatabase.Tables.Palettes;
-using OpenBreed.Common.XmlDatabase.Tables.Props;
+using OpenBreed.Common.XmlDatabase.Tables.Actions;
 using OpenBreed.Common.XmlDatabase.Tables.Sources;
 using OpenBreed.Common.XmlDatabase.Tables.Sprites;
 using OpenBreed.Common.XmlDatabase.Tables.Tiles;
@@ -116,12 +116,12 @@ namespace OpenBreed.Common.XmlDatabase
             return table;
         }
 
-        internal DatabasePropertySetTableDef GetPropSetTable()
+        internal DatabaseActionSetTableDef GetActionSetTable()
         {
-            var table = Data.Tables.OfType<DatabasePropertySetTableDef>().FirstOrDefault();
+            var table = Data.Tables.OfType<DatabaseActionSetTableDef>().FirstOrDefault();
             if (table == null)
             {
-                table = new DatabasePropertySetTableDef();
+                table = new DatabaseActionSetTableDef();
                 Data.Tables.Add(table);
             }
             return table;

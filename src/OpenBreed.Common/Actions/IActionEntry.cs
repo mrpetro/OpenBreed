@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Props
+namespace OpenBreed.Common.Actions
 {
-    public interface IPropertyEntry
+    public interface IActionEntry
     {
         #region Public Properties
 
@@ -14,8 +14,8 @@ namespace OpenBreed.Common.Props
         int Id { get; }
         string Name { get; }
 
-        IPropertyPresentation Presentation { get; }
-        IPropertyTriggers Triggers { get; }
+        IActionPresentation Presentation { get; }
+        IActionTriggers Triggers { get; }
 
         #endregion Public Properties
     }

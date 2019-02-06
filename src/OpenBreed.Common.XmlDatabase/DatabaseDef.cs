@@ -11,8 +11,8 @@ using OpenBreed.Common.XmlDatabase.Tables;
 using OpenBreed.Common.XmlDatabase.Items.Images;
 using OpenBreed.Common.XmlDatabase.Items.Maps;
 using OpenBreed.Common.XmlDatabase.Tables.Images;
-using OpenBreed.Common.XmlDatabase.Tables.Levels;
-using OpenBreed.Common.XmlDatabase.Tables.Props;
+using OpenBreed.Common.XmlDatabase.Tables.Maps;
+using OpenBreed.Common.XmlDatabase.Tables.Actions;
 using OpenBreed.Common.XmlDatabase.Tables.Tiles;
 using OpenBreed.Common.XmlDatabase.Tables.Sprites;
 using OpenBreed.Common.XmlDatabase.Tables.Palettes;
@@ -31,7 +31,7 @@ namespace OpenBreed.Common.XmlDatabase
         XmlArrayItem("Assets", typeof(DatabaseAssetTableDef)),
         XmlArrayItem("Maps", typeof(DatabaseMapTableDef)),
         XmlArrayItem("Palettes", typeof(DatabasePaletteTableDef)),
-        XmlArrayItem("PropertySets", typeof(DatabasePropertySetTableDef)),
+        XmlArrayItem("ActionSets", typeof(DatabaseActionSetTableDef)),
         XmlArrayItem("TileSets", typeof(DatabaseTileSetTableDef)),
         XmlArrayItem("SpriteSets", typeof(DatabaseSpriteSetTableDef)),
         XmlArrayItem("Sounds", typeof(DatabaseSoundTableDef)),

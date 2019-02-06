@@ -58,11 +58,11 @@
     <Compile Include="Images\IImageEntry.cs" />
     <Compile Include="Maps\IMapEntry.cs" />
     <Compile Include="Palettes\IPaletteEntry.cs" />
-    <Compile Include="Props\IPropertyEntry.cs" />
-    <Compile Include="Props\IPropertyPresentation.cs" />
-    <Compile Include="Props\IPropertyTriggers.cs" />
-    <Compile Include="Props\IPropSetEntry.cs" />
-    <Compile Include="Props\PropSetModel.cs" />
+    <Compile Include="Actions\IActionEntry.cs" />
+    <Compile Include="Actions\IActionPresentation.cs" />
+    <Compile Include="Actions\IActionTriggers.cs" />
+    <Compile Include="Actions\IActionSetEntry.cs" />
+    <Compile Include="Actions\ActionSetModel.cs" />
     <Compile Include="Sounds\ISoundEntry.cs" />
     <Compile Include="Sounds\SoundModel.cs" />
     <Compile Include="Sprites\ISpriteSetEntry.cs" />

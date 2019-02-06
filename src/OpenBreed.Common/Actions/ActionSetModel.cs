@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Props
+namespace OpenBreed.Common.Actions
 {
-    public class PropSetModel
+    public class ActionSetModel
     {
     }
 }

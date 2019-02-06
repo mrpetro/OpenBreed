@@ -13,7 +13,7 @@ namespace OpenBreed.Common.Maps
         IFormatEntry Format { get; }
 
         string TileSetRef { get; }
-        string PropertySetRef { get; }
+        string ActionSetRef { get; }
 
         List<string> SpriteSetRefs { get; }
         List<string> PaletteRefs { get; }

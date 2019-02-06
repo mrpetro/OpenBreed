@@ -367,7 +367,7 @@
           <PaletteRefs>
             <PaletteRef>Palettes.LA</PaletteRef>
           </PaletteRefs>
-          <PropertySetRef>Props.Default</PropertySetRef>
+          <ActionSetRef>Actions.Default</ActionSetRef>
           <AssetRef>Assets.L0MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LA</TileSetRef>
@@ -379,7 +379,7 @@
           <PaletteRefs>
             <PaletteRef>Palettes.LE</PaletteRef>
           </PaletteRefs>
-          <PropertySetRef>Props.Default</PropertySetRef>
+          <ActionSetRef>Actions.Default</ActionSetRef>
           <AssetRef>Assets.L1MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LE</TileSetRef>
@@ -391,7 +391,7 @@
           <PaletteRefs>
             <PaletteRef>Palettes.LF</PaletteRef>
           </PaletteRefs>
-          <PropertySetRef>Props.Default</PropertySetRef>
+          <ActionSetRef>Actions.Default</ActionSetRef>
           <AssetRef>Assets.L2MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LF</TileSetRef>
@@ -403,7 +403,7 @@
           <PaletteRefs>
             <PaletteRef>Palettes.LC</PaletteRef>
           </PaletteRefs>
-          <PropertySetRef>Props.Default</PropertySetRef>
+          <ActionSetRef>Actions.Default</ActionSetRef>
           <AssetRef>Assets.L3MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LC</TileSetRef>
@@ -415,7 +415,7 @@
           <PaletteRefs>
             <PaletteRef>Palettes.LB</PaletteRef>
           </PaletteRefs>
-          <PropertySetRef>Props.Default</PropertySetRef>
+          <ActionSetRef>Actions.Default</ActionSetRef>
           <AssetRef>Assets.L4MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LB</TileSetRef>
@@ -427,7 +427,7 @@
           <PaletteRefs>
             <PaletteRef>Palettes.LB</PaletteRef>
           </PaletteRefs>
-          <PropertySetRef>Props.Default</PropertySetRef>
+          <ActionSetRef>Actions.Default</ActionSetRef>
           <AssetRef>Assets.L5MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LB</TileSetRef>
@@ -439,7 +439,7 @@
           <PaletteRefs>
             <PaletteRef>Palettes.LC</PaletteRef>
           </PaletteRefs>
-          <PropertySetRef>Props.Default</PropertySetRef>
+          <ActionSetRef>Actions.Default</ActionSetRef>
           <AssetRef>Assets.L6MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LC</TileSetRef>
@@ -451,7 +451,7 @@
           <PaletteRefs>
             <PaletteRef>Palettes.LD</PaletteRef>
           </PaletteRefs>
-          <PropertySetRef>Props.Default</PropertySetRef>
+          <ActionSetRef>Actions.Default</ActionSetRef>
           <AssetRef>Assets.L7MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LD</TileSetRef>
@@ -463,7 +463,7 @@
           <PaletteRefs>
             <PaletteRef>Palettes.LD</PaletteRef>
           </PaletteRefs>
-          <PropertySetRef>Props.Default</PropertySetRef>
+          <ActionSetRef>Actions.Default</ActionSetRef>
           <AssetRef>Assets.L8MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LD</TileSetRef>
@@ -475,7 +475,7 @@
           <PaletteRefs>
             <PaletteRef>Palettes.LD</PaletteRef>
           </PaletteRefs>
-          <PropertySetRef>Props.Default</PropertySetRef>
+          <ActionSetRef>Actions.Default</ActionSetRef>
           <AssetRef>Assets.L9MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LD</TileSetRef>
@@ -487,7 +487,7 @@
           <PaletteRefs>
             <PaletteRef>Palettes.LE</PaletteRef>
           </PaletteRefs>
-          <PropertySetRef>Props.Default</PropertySetRef>
+          <ActionSetRef>Actions.Default</ActionSetRef>
           <AssetRef>Assets.LAMA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LE</TileSetRef>
@@ -499,18 +499,18 @@
           <PaletteRefs>
             <PaletteRef>Palettes.LE</PaletteRef>
           </PaletteRefs>
-          <PropertySetRef>Props.Default</PropertySetRef>
+          <ActionSetRef>Actions.Default</ActionSetRef>
           <AssetRef>Assets.LBMA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LE</TileSetRef>
         </Map>
       </Items>
     </Maps>
-    <PropertySets>
+    <ActionSets>
       <Items>
-        <PropertySet Id="Props.Default">
-          <PropertyDefs>
-            <PropertyDef Id="0" Name="Air" Visibility="false">
+        <ActionSet Id="Actions.Default">
+          <Actions>
+            <Action Id="0" Name="Air" Visibility="false">
               <Color>#00000000</Color>
               <Description>No collision, no action</Description>
               <Presentation>
@@ -518,8 +518,8 @@
                 <Visibility>false</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="1" Name="Monster (Type 1)" Visibility="true">
+            </Action>
+            <Action Id="1" Name="Monster (Type 1)" Visibility="true">
               <Color>#A0FF0000</Color>
               <Description>Start position of monster type 1</Description>
               <Presentation>
@@ -527,8 +527,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="2" Name="Monster (Type 2)" Visibility="true">
+            </Action>
+            <Action Id="2" Name="Monster (Type 2)" Visibility="true">
               <Color>#A0FF0000</Color>
               <Description>Start position of monster type 2</Description>
               <Presentation>
@@ -536,8 +536,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="3" Name="Monster (Type 3)" Visibility="true">
+            </Action>
+            <Action Id="3" Name="Monster (Type 3)" Visibility="true">
               <Color>#A0FF0000</Color>
               <Description>Start position of monster type 3</Description>
               <Presentation>
@@ -545,8 +545,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="4" Name="Monster (Type 4)" Visibility="true">
+            </Action>
+            <Action Id="4" Name="Monster (Type 4)" Visibility="true">
               <Color>#A0FF0000</Color>
               <Description>Start position of monster type 4</Description>
               <Presentation>
@@ -554,8 +554,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="5" Name="Unknown 5" Visibility="true">
+            </Action>
+            <Action Id="5" Name="Unknown 5" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -563,8 +563,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="6" Name="Unknown 6" Visibility="true">
+            </Action>
+            <Action Id="6" Name="Unknown 6" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -572,8 +572,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="7" Name="One way gate (Up)" Visibility="true">
+            </Action>
+            <Action Id="7" Name="One way gate (Up)" Visibility="true">
               <Color>#80FFFF00</Color>
               <Description>Gate that allows player to pass it only in up direction, other way insta-kills player</Description>
               <Presentation>
@@ -581,8 +581,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="8" Name="One way gate (Down)" Visibility="true">
+            </Action>
+            <Action Id="8" Name="One way gate (Down)" Visibility="true">
               <Color>#80FFFF00</Color>
               <Description>Gate that allows player to pass it only in down direction, other way insta-kills player</Description>
               <Presentation>
@@ -590,8 +590,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="9" Name="Unknown 9" Visibility="true">
+            </Action>
+            <Action Id="9" Name="Unknown 9" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -599,8 +599,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="10" Name="Unknown 10" Visibility="true">
+            </Action>
+            <Action Id="10" Name="Unknown 10" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -608,8 +608,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="11" Name="Unknown 11" Visibility="true">
+            </Action>
+            <Action Id="11" Name="Unknown 11" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -617,8 +617,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="12" Name="One way gate (Right)" Visibility="true">
+            </Action>
+            <Action Id="12" Name="One way gate (Right)" Visibility="true">
               <Color>#80FFFF00</Color>
               <Description>Gate that allows player to pass it only in right direction, other way insta-kills player</Description>
               <Presentation>
@@ -626,8 +626,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="13" Name="One way gate (Left)" Visibility="true">
+            </Action>
+            <Action Id="13" Name="One way gate (Left)" Visibility="true">
               <Color>#80FFFF00</Color>
               <Description>Gate that allows player to pass it only in left direction, other way insta-kills player</Description>
               <Presentation>
@@ -635,8 +635,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="14" Name="Directed gun (Right)" Visibility="true">
+            </Action>
+            <Action Id="14" Name="Directed gun (Right)" Visibility="true">
               <Color>#A0FF0000</Color>
               <Description>Gun directed to right, deals great damage to player</Description>
               <Presentation>
@@ -644,8 +644,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="15" Name="Directed gun (Up)" Visibility="true">
+            </Action>
+            <Action Id="15" Name="Directed gun (Up)" Visibility="true">
               <Color>#A0FF0000</Color>
               <Description>Gun directed to up, deals great damage to player</Description>
               <Presentation>
@@ -653,8 +653,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="16" Name="Down left obstacle (for all)" Visibility="true">
+            </Action>
+            <Action Id="16" Name="Down left obstacle (for all)" Visibility="true">
               <Color>#20FFFF00</Color>
               <Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
               <Presentation>
@@ -662,8 +662,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="17" Name="Top left obstacle (for all)" Visibility="true">
+            </Action>
+            <Action Id="17" Name="Top left obstacle (for all)" Visibility="true">
               <Color>#20FFFF00</Color>
               <Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
               <Presentation>
@@ -671,8 +671,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="18" Name="Up right obstacle (for all)" Visibility="true">
+            </Action>
+            <Action Id="18" Name="Up right obstacle (for all)" Visibility="true">
               <Color>#20FFFF00</Color>
               <Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
               <Presentation>
@@ -680,8 +680,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="19" Name="Down right obstacle (for all)" Visibility="true">
+            </Action>
+            <Action Id="19" Name="Down right obstacle (for all)" Visibility="true">
               <Color>#20FFFF00</Color>
               <Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
               <Presentation>
@@ -689,8 +689,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="20" Name="Unknown 20" Visibility="true">
+            </Action>
+            <Action Id="20" Name="Unknown 20" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -698,8 +698,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="21" Name="Unknown 21" Visibility="true">
+            </Action>
+            <Action Id="21" Name="Unknown 21" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -707,8 +707,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="22" Name="Smart card 1" Visibility="true">
+            </Action>
+            <Action Id="22" Name="Smart card 1" Visibility="true">
               <Color>#800000FF</Color>
               <Description>This will show note message from smart card 1</Description>
               <Presentation>
@@ -716,8 +716,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="23" Name="Smart card 2" Visibility="true">
+            </Action>
+            <Action Id="23" Name="Smart card 2" Visibility="true">
               <Color>#800000FF</Color>
               <Description>This will show note message from smart card 2</Description>
               <Presentation>
@@ -725,8 +725,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="24" Name="Smart card 3" Visibility="true">
+            </Action>
+            <Action Id="24" Name="Smart card 3" Visibility="true">
               <Color>#800000FF</Color>
               <Description>This will show note message from smart card 3</Description>
               <Presentation>
@@ -734,8 +734,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="25" Name="Unknown 25" Visibility="true">
+            </Action>
+            <Action Id="25" Name="Unknown 25" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -743,8 +743,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="26" Name="Unknown 26" Visibility="true">
+            </Action>
+            <Action Id="26" Name="Unknown 26" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -752,8 +752,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="27" Name="Unknown 27" Visibility="true">
+            </Action>
+            <Action Id="27" Name="Unknown 27" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -761,8 +761,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="28" Name="Unknown 28" Visibility="true">
+            </Action>
+            <Action Id="28" Name="Unknown 28" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -770,8 +770,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="29" Name="Unknown 29" Visibility="true">
+            </Action>
+            <Action Id="29" Name="Unknown 29" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -779,8 +779,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="30" Name="Unknown 30" Visibility="true">
+            </Action>
+            <Action Id="30" Name="Unknown 30" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -788,8 +788,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="31" Name="Local teleport (start)" Visibility="true">
+            </Action>
+            <Action Id="31" Name="Local teleport (start)" Visibility="true">
               <Color>#200FF000</Color>
               <Description>Teleports player from this location</Description>
               <Presentation>
@@ -797,8 +797,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="32" Name="Monster spawner" Visibility="true">
+            </Action>
+            <Action Id="32" Name="Monster spawner" Visibility="true">
               <Color>#F0FF0000</Color>
               <Description>Creates a hole where monsters are comming from</Description>
               <Presentation>
@@ -806,8 +806,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="33" Name="Unknown 33" Visibility="true">
+            </Action>
+            <Action Id="33" Name="Unknown 33" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -815,8 +815,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="34" Name="Unknown 34" Visibility="true">
+            </Action>
+            <Action Id="34" Name="Unknown 34" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -824,8 +824,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="35" Name="Unknown 35" Visibility="true">
+            </Action>
+            <Action Id="35" Name="Unknown 35" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -833,8 +833,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="36" Name="Local teleport (end)" Visibility="true">
+            </Action>
+            <Action Id="36" Name="Local teleport (end)" Visibility="true">
               <Color>#40FF00FF</Color>
               <Description>Teleports player to this location, the one that is furthest</Description>
               <Presentation>
@@ -842,8 +842,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="37" Name="Exit 1" Visibility="true">
+            </Action>
+            <Action Id="37" Name="Exit 1" Visibility="true">
               <Color>#500FF000</Color>
               <Description>Collision, Finishes level</Description>
               <Presentation>
@@ -851,8 +851,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="38" Name="Exit 2" Visibility="true">
+            </Action>
+            <Action Id="38" Name="Exit 2" Visibility="true">
               <Color>#500FF000</Color>
               <Description>Collision, Finishes level</Description>
               <Presentation>
@@ -860,8 +860,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="39" Name="Unknown 39" Visibility="true">
+            </Action>
+            <Action Id="39" Name="Unknown 39" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -869,8 +869,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="40" Name="Unknown 40" Visibility="true">
+            </Action>
+            <Action Id="40" Name="Unknown 40" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -878,8 +878,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="41" Name="Unknown 41" Visibility="true">
+            </Action>
+            <Action Id="41" Name="Unknown 41" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -887,8 +887,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="42" Name="Unknown 42" Visibility="true">
+            </Action>
+            <Action Id="42" Name="Unknown 42" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -896,8 +896,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="43" Name="Unknown 43" Visibility="true">
+            </Action>
+            <Action Id="43" Name="Unknown 43" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -905,8 +905,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="44" Name="Unknown 44" Visibility="true">
+            </Action>
+            <Action Id="44" Name="Unknown 44" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -914,8 +914,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="45" Name="Entrance 1" Visibility="true">
+            </Action>
+            <Action Id="45" Name="Entrance 1" Visibility="true">
               <Color>#7FFF00FF</Color>
               <Description>No collision, spawns player here</Description>
               <Presentation>
@@ -923,8 +923,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="46" Name="Entrance 2" Visibility="true">
+            </Action>
+            <Action Id="46" Name="Entrance 2" Visibility="true">
               <Color>#7FFF00FF</Color>
               <Description>No collision, spawns player here</Description>
               <Presentation>
@@ -932,8 +932,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="47" Name="Unknown 47" Visibility="true">
+            </Action>
+            <Action Id="47" Name="Unknown 47" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -941,8 +941,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="48" Name="Unknown 48" Visibility="true">
+            </Action>
+            <Action Id="48" Name="Unknown 48" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -950,8 +950,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="49" Name="Radioactive area" Visibility="true">
+            </Action>
+            <Action Id="49" Name="Radioactive area" Visibility="true">
               <Color>#4FFF7F00</Color>
               <Description>Radioactive area that hurts player if standing on it</Description>
               <Presentation>
@@ -959,8 +959,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="50" Name="Wall turrent (Up)" Visibility="true">
+            </Action>
+            <Action Id="50" Name="Wall turrent (Up)" Visibility="true">
               <Color>#A0FF0000</Color>
               <Description>Wall turret facing up</Description>
               <Presentation>
@@ -968,8 +968,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="51" Name="Wall turrent (Right)" Visibility="true">
+            </Action>
+            <Action Id="51" Name="Wall turrent (Right)" Visibility="true">
               <Color>#A0FF0000</Color>
               <Description>Wall turret facing right</Description>
               <Presentation>
@@ -977,8 +977,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="52" Name="Wall turrent (Down)" Visibility="true">
+            </Action>
+            <Action Id="52" Name="Wall turrent (Down)" Visibility="true">
               <Color>#A0FF0000</Color>
               <Description>Wall turret facing down</Description>
               <Presentation>
@@ -986,8 +986,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="53" Name="Wall turrent (Left)" Visibility="true">
+            </Action>
+            <Action Id="53" Name="Wall turrent (Left)" Visibility="true">
               <Color>#A0FF0000</Color>
               <Description>Wall turret facing left</Description>
               <Presentation>
@@ -995,8 +995,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="54" Name="Exit 3" Visibility="true">
+            </Action>
+            <Action Id="54" Name="Exit 3" Visibility="true">
               <Color>#500FF000</Color>
               <Description>Collision, Finishes level</Description>
               <Presentation>
@@ -1004,8 +1004,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="55" Name="Item" Visibility="true">
+            </Action>
+            <Action Id="55" Name="Item" Visibility="true">
               <Color>#500000FF</Color>
               <Description>Pickable item</Description>
               <Presentation>
@@ -1013,8 +1013,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="56" Name="Entrance 3" Visibility="true">
+            </Action>
+            <Action Id="56" Name="Entrance 3" Visibility="true">
               <Color>#7FFF00FF</Color>
               <Description>No collision, spawns player here</Description>
               <Presentation>
@@ -1022,8 +1022,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="57" Name="Obstacle(for enemies only)" Visibility="true">
+            </Action>
+            <Action Id="57" Name="Obstacle(for enemies only)" Visibility="true">
               <Color>#20FF00FF</Color>
               <Description>Player can walk trough it, movable enemies can't</Description>
               <Presentation>
@@ -1031,8 +1031,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="58" Name="Unknown 58" Visibility="true">
+            </Action>
+            <Action Id="58" Name="Unknown 58" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1040,8 +1040,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="59" Name="Unknown 59" Visibility="true">
+            </Action>
+            <Action Id="59" Name="Unknown 59" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1049,8 +1049,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="60" Name="Obstacle(except projectiles)" Visibility="true">
+            </Action>
+            <Action Id="60" Name="Obstacle(except projectiles)" Visibility="true">
               <Color>#32FFFF00</Color>
               <Description>Collision, but weapon projectile can penetrate</Description>
               <Presentation>
@@ -1058,8 +1058,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="61" Name="Intex terminal" Visibility="true">
+            </Action>
+            <Action Id="61" Name="Intex terminal" Visibility="true">
               <Color>#7F0000FF</Color>
               <Description>Terminal that player may use</Description>
               <Presentation>
@@ -1067,8 +1067,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="62" Name="Door" Visibility="true">
+            </Action>
+            <Action Id="62" Name="Door" Visibility="true">
               <Color>#320FF000</Color>
               <Description>Door with no color card required</Description>
               <Presentation>
@@ -1076,8 +1076,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="63" Name="Unknown 63" Visibility="true">
+            </Action>
+            <Action Id="63" Name="Unknown 63" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1085,8 +1085,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="64" Name="Unknown 64" Visibility="true">
+            </Action>
+            <Action Id="64" Name="Unknown 64" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1094,8 +1094,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="65" Name="Unknown 65" Visibility="true">
+            </Action>
+            <Action Id="65" Name="Unknown 65" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1103,8 +1103,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="66" Name="Unknown 66" Visibility="true">
+            </Action>
+            <Action Id="66" Name="Unknown 66" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1112,8 +1112,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="67" Name="Unknown 67" Visibility="true">
+            </Action>
+            <Action Id="67" Name="Unknown 67" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1121,8 +1121,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="68" Name="Unknown 68" Visibility="true">
+            </Action>
+            <Action Id="68" Name="Unknown 68" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1130,8 +1130,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="69" Name="Unknown 69" Visibility="true">
+            </Action>
+            <Action Id="69" Name="Unknown 69" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1139,8 +1139,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="70" Name="Unknown 70" Visibility="true">
+            </Action>
+            <Action Id="70" Name="Unknown 70" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1148,8 +1148,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="71" Name="Unknown 71" Visibility="true">
+            </Action>
+            <Action Id="71" Name="Unknown 71" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1157,8 +1157,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="72" Name="Unknown 72" Visibility="true">
+            </Action>
+            <Action Id="72" Name="Unknown 72" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1166,8 +1166,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="73" Name="Unknown 73" Visibility="true">
+            </Action>
+            <Action Id="73" Name="Unknown 73" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1175,8 +1175,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="74" Name="Unknown 74" Visibility="true">
+            </Action>
+            <Action Id="74" Name="Unknown 74" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1184,8 +1184,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="75" Name="Unknown 75" Visibility="true">
+            </Action>
+            <Action Id="75" Name="Unknown 75" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1193,8 +1193,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="76" Name="Unknown 76" Visibility="true">
+            </Action>
+            <Action Id="76" Name="Unknown 76" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1202,8 +1202,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="77" Name="Unknown 77" Visibility="true">
+            </Action>
+            <Action Id="77" Name="Unknown 77" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1211,8 +1211,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="78" Name="Unknown 78" Visibility="true">
+            </Action>
+            <Action Id="78" Name="Unknown 78" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1220,8 +1220,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="79" Name="Unknown 79" Visibility="true">
+            </Action>
+            <Action Id="79" Name="Unknown 79" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1229,8 +1229,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="80" Name="Unknown 80" Visibility="true">
+            </Action>
+            <Action Id="80" Name="Unknown 80" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1238,8 +1238,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="81" Name="Unknown 81" Visibility="true">
+            </Action>
+            <Action Id="81" Name="Unknown 81" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1247,8 +1247,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="82" Name="Unknown 82" Visibility="true">
+            </Action>
+            <Action Id="82" Name="Unknown 82" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1256,8 +1256,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="83" Name="Unknown 83" Visibility="true">
+            </Action>
+            <Action Id="83" Name="Unknown 83" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1265,8 +1265,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="84" Name="Unknown 84" Visibility="true">
+            </Action>
+            <Action Id="84" Name="Unknown 84" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1274,8 +1274,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="85" Name="Unknown 85" Visibility="true">
+            </Action>
+            <Action Id="85" Name="Unknown 85" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1283,8 +1283,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="86" Name="Unknown 86" Visibility="true">
+            </Action>
+            <Action Id="86" Name="Unknown 86" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1292,8 +1292,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="87" Name="Unknown 87" Visibility="true">
+            </Action>
+            <Action Id="87" Name="Unknown 87" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1301,8 +1301,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="88" Name="Unknown 88" Visibility="true">
+            </Action>
+            <Action Id="88" Name="Unknown 88" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1310,8 +1310,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="89" Name="Unknown 89" Visibility="true">
+            </Action>
+            <Action Id="89" Name="Unknown 89" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1319,8 +1319,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="90" Name="Unknown 90" Visibility="true">
+            </Action>
+            <Action Id="90" Name="Unknown 90" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1328,8 +1328,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="91" Name="Unknown 91" Visibility="true">
+            </Action>
+            <Action Id="91" Name="Unknown 91" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1337,8 +1337,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="92" Name="Unknown 92" Visibility="true">
+            </Action>
+            <Action Id="92" Name="Unknown 92" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1346,8 +1346,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="93" Name="Unknown 93" Visibility="true">
+            </Action>
+            <Action Id="93" Name="Unknown 93" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1355,8 +1355,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="94" Name="Unknown 94" Visibility="true">
+            </Action>
+            <Action Id="94" Name="Unknown 94" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1364,8 +1364,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="95" Name="Unknown 95" Visibility="true">
+            </Action>
+            <Action Id="95" Name="Unknown 95" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1373,8 +1373,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="96" Name="Unknown 96" Visibility="true">
+            </Action>
+            <Action Id="96" Name="Unknown 96" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1382,8 +1382,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="97" Name="Unknown 97" Visibility="true">
+            </Action>
+            <Action Id="97" Name="Unknown 97" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1391,8 +1391,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="98" Name="Unknown 98" Visibility="true">
+            </Action>
+            <Action Id="98" Name="Unknown 98" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1400,8 +1400,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="99" Name="Unknown 99" Visibility="true">
+            </Action>
+            <Action Id="99" Name="Unknown 99" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1409,8 +1409,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="100" Name="Unknown 100" Visibility="true">
+            </Action>
+            <Action Id="100" Name="Unknown 100" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1418,8 +1418,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="101" Name="Unknown 101" Visibility="true">
+            </Action>
+            <Action Id="101" Name="Unknown 101" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1427,8 +1427,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="102" Name="Unknown 102" Visibility="true">
+            </Action>
+            <Action Id="102" Name="Unknown 102" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1436,8 +1436,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="103" Name="Unknown 103" Visibility="true">
+            </Action>
+            <Action Id="103" Name="Unknown 103" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1445,8 +1445,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="104" Name="Unknown 104" Visibility="true">
+            </Action>
+            <Action Id="104" Name="Unknown 104" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1454,8 +1454,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="105" Name="Unknown 105" Visibility="true">
+            </Action>
+            <Action Id="105" Name="Unknown 105" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1463,8 +1463,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="106" Name="Unknown 106" Visibility="true">
+            </Action>
+            <Action Id="106" Name="Unknown 106" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1472,8 +1472,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="107" Name="Unknown 107" Visibility="true">
+            </Action>
+            <Action Id="107" Name="Unknown 107" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1481,8 +1481,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="108" Name="Unknown 108" Visibility="true">
+            </Action>
+            <Action Id="108" Name="Unknown 108" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1490,8 +1490,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="109" Name="Unknown 109" Visibility="true">
+            </Action>
+            <Action Id="109" Name="Unknown 109" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1499,8 +1499,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="110" Name="Unknown 110" Visibility="true">
+            </Action>
+            <Action Id="110" Name="Unknown 110" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1508,8 +1508,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="111" Name="Unknown 111" Visibility="true">
+            </Action>
+            <Action Id="111" Name="Unknown 111" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1517,8 +1517,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="112" Name="Unknown 112" Visibility="true">
+            </Action>
+            <Action Id="112" Name="Unknown 112" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1526,8 +1526,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="113" Name="Unknown 113" Visibility="true">
+            </Action>
+            <Action Id="113" Name="Unknown 113" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1535,8 +1535,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="114" Name="Unknown 114" Visibility="true">
+            </Action>
+            <Action Id="114" Name="Unknown 114" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1544,8 +1544,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="115" Name="Unknown 115" Visibility="true">
+            </Action>
+            <Action Id="115" Name="Unknown 115" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1553,8 +1553,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="116" Name="Unknown 116" Visibility="true">
+            </Action>
+            <Action Id="116" Name="Unknown 116" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1562,8 +1562,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="117" Name="Unknown 117" Visibility="true">
+            </Action>
+            <Action Id="117" Name="Unknown 117" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1571,8 +1571,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="118" Name="Unknown 118" Visibility="true">
+            </Action>
+            <Action Id="118" Name="Unknown 118" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1580,8 +1580,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="119" Name="Unknown 119" Visibility="true">
+            </Action>
+            <Action Id="119" Name="Unknown 119" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1589,8 +1589,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="120" Name="Unknown 120" Visibility="true">
+            </Action>
+            <Action Id="120" Name="Unknown 120" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1598,8 +1598,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="121" Name="Unknown 121" Visibility="true">
+            </Action>
+            <Action Id="121" Name="Unknown 121" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1607,8 +1607,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="122" Name="Unknown 122" Visibility="true">
+            </Action>
+            <Action Id="122" Name="Unknown 122" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1616,8 +1616,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="123" Name="Unknown 123" Visibility="true">
+            </Action>
+            <Action Id="123" Name="Unknown 123" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1625,8 +1625,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="124" Name="Unknown 124" Visibility="true">
+            </Action>
+            <Action Id="124" Name="Unknown 124" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1634,8 +1634,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="125" Name="Unknown 125" Visibility="true">
+            </Action>
+            <Action Id="125" Name="Unknown 125" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1643,8 +1643,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="126" Name="Unknown 126" Visibility="true">
+            </Action>
+            <Action Id="126" Name="Unknown 126" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1652,8 +1652,8 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-            <PropertyDef Id="127" Name="Unknown 127" Visibility="true">
+            </Action>
+            <Action Id="127" Name="Unknown 127" Visibility="true">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1661,11 +1661,11 @@
                 <Visibility>true</Visibility>
               </Presentation>
               <Triggers />
-            </PropertyDef>
-          </PropertyDefs>
-        </PropertySet>
+            </Action>
+          </Actions>
+        </ActionSet>
       </Items>
-    </PropertySets>
+    </ActionSets>
     <SpriteSets>
       <Items />
     </SpriteSets>

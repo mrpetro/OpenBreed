@@ -35,7 +35,9 @@ namespace OpenBreed.Common.XmlDatabase.Items.Maps
         XmlArrayItem("PaletteRef", typeof(string))]
         public List<string> PaletteRefs { get; } = new List<string>();
 
-        public string PropertySetRef { get; set; }
+        [XmlElement("ActionSetRef")]
+        public string ActionSetRef { get; set; }
+
         public string AssetRef { get; set; }
 
         [XmlArray("SpriteSetRefs"),

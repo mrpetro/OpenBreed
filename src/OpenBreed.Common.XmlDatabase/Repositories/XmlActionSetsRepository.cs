@@ -1,6 +1,6 @@
-﻿using OpenBreed.Common.Props;
-using OpenBreed.Common.XmlDatabase.Items.Props;
-using OpenBreed.Common.XmlDatabase.Tables.Props;
+﻿using OpenBreed.Common.Actions;
+using OpenBreed.Common.XmlDatabase.Items.Actions;
+using OpenBreed.Common.XmlDatabase.Tables.Actions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
-    public class XmlPropSetsRepository : IRepository<IPropSetEntry>
+    public class XmlActionSetsRepository : IRepository<IActionSetEntry>
     {
 
         #region Private Fields
 
-        private readonly DatabasePropertySetTableDef _table;
+        private readonly DatabaseActionSetTableDef _table;
 
         private XmlDatabase _context;
 
@@ -22,19 +22,19 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Constructors
 
-        public XmlPropSetsRepository(IUnitOfWork unitOfWork, XmlDatabase context)
+        public XmlActionSetsRepository(IUnitOfWork unitOfWork, XmlDatabase context)
         {
             UnitOfWork = unitOfWork;
             _context = context;
 
-            _table = _context.GetPropSetTable();
+            _table = _context.GetActionSetTable();
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public string Name { get { return "Prop sets"; } }
+        public string Name { get { return "Action sets"; } }
 
         public IEnumerable<IEntry> Entries { get { return _table.Items; } }
 
@@ -44,7 +44,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Methods
 
-        public void Add(IPropSetEntry entity)
+        public void Add(IActionSetEntry entity)
         {
             throw new NotImplementedException();
         }
@@ -54,7 +54,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             return _table.Items.FirstOrDefault(item => item.Id == id);
         }
 
-        public IPropSetEntry GetById(string id)
+        public IActionSetEntry GetById(string id)
         {
             var propSetDef = _table.Items.FirstOrDefault(item => item.Id == id);
             if (propSetDef == null)
@@ -63,9 +63,9 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             return propSetDef;
         }
 
-        public IPropSetEntry GetNextTo(IPropSetEntry entry)
+        public IActionSetEntry GetNextTo(IActionSetEntry entry)
         {
-            var index = _table.Items.IndexOf((PropertySetDef)entry);
+            var index = _table.Items.IndexOf((ActionSetDef)entry);
 
             if (index < 0)
                 throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
@@ -78,9 +78,9 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return null;
         }
 
-        public IPropSetEntry GetPreviousTo(IPropSetEntry entry)
+        public IActionSetEntry GetPreviousTo(IActionSetEntry entry)
         {
-            var index = _table.Items.IndexOf((PropertySetDef)entry);
+            var index = _table.Items.IndexOf((ActionSetDef)entry);
 
             if (index < 0)
                 throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
@@ -92,18 +92,18 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             else
                 return null;
         }
-        public void Remove(IPropSetEntry entry)
+        public void Remove(IActionSetEntry entry)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(IPropSetEntry entry)
+        public void Update(IActionSetEntry entry)
         {
-            var index = _table.Items.IndexOf((PropertySetDef)entry);
+            var index = _table.Items.IndexOf((ActionSetDef)entry);
             if (index < 0)
                 throw new InvalidOperationException($"{entry} not found in repository");
 
-            _table.Items[index] = (PropertySetDef)entry;
+            _table.Items[index] = (ActionSetDef)entry;
         }
 
         #endregion Public Methods

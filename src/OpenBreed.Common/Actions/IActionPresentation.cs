@@ -4,12 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Props
+namespace OpenBreed.Common.Actions
 {
-    public interface IPropertyPresentation
+    public interface IActionPresentation
     {
-        bool Visibility { get; }
+        #region Public Properties
+
         string Color { get; }
         string Image { get; }
+        bool Visibility { get; }
+
+        #endregion Public Properties
     }
 }

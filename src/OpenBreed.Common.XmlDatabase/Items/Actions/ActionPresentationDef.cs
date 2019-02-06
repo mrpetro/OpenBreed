@@ -1,13 +1,14 @@
-﻿using OpenBreed.Common.Props;
+﻿using OpenBreed.Common.Actions;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace OpenBreed.Common.XmlDatabase.Items.Props
+namespace OpenBreed.Common.XmlDatabase.Items.Actions
 {
-    public class PropertyPresentationDef : IPropertyPresentation
+    public class ActionPresentationDef : IActionPresentation
     {
+
         #region Public Properties
 
         [XmlElement("Color")]
@@ -18,5 +19,6 @@ namespace OpenBreed.Common.XmlDatabase.Items.Props
         public bool Visibility { get; set; }
 
         #endregion Public Properties
+
     }
 }
