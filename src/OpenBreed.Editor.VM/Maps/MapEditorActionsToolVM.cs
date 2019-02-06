@@ -50,14 +50,14 @@ namespace OpenBreed.Editor.VM.Maps
 
         #endregion Public Properties
 
-        #region Internal Methods
+        #region Public Methods
 
-        internal void Connect()
+        public void Connect()
         {
             Parent.PropertyChanged += MapEditor_PropertyChanged;
         }
 
-        #endregion Internal Methods
+        #endregion Public Methods
 
         #region Private Methods
 
@@ -67,13 +67,22 @@ namespace OpenBreed.Editor.VM.Maps
 
             switch (e.PropertyName)
             {
-                case nameof(mapEditor.Editable.PropSet):
-                    CurrentItem = mapEditor.Editable.PropSet;
+                case nameof(mapEditor.Editable):
+                    OnCurrentMapChanged(mapEditor.Editable);
                     break;
                 default:
                     break;
             }
         }
+
+        private void OnCurrentMapChanged(MapVM map)
+        {
+            if (map == null)
+                CurrentItem = null;
+            else
+                CurrentItem = map.PropSet;
+        }
+
         private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
@@ -87,6 +96,5 @@ namespace OpenBreed.Editor.VM.Maps
         }
 
         #endregion Private Methods
-
     }
 }
