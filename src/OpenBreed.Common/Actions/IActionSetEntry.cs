@@ -11,7 +11,7 @@ namespace OpenBreed.Common.Actions
 
         #region Public Properties
 
-        List<IActionEntry> Items { get; }
+        List<IActionEntry> Actions { get; }
 
         #endregion Public Properties
 

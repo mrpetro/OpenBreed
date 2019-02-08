@@ -12,19 +12,36 @@ namespace OpenBreed.Common.XmlDatabase.Items.Actions
     [Serializable]
     public class ActionSetDef : DatabaseItemDef, IActionSetEntry
     {
+        private List<IActionEntry> _actions = null;
+        private List<ActionDef> _xmlActions = new List<ActionDef>();
 
         #region Public Properties
 
-        [XmlArray("Actions")]
-        [XmlArrayItem("Action")]
-        public List<ActionDef> Actions { get; } = new List<ActionDef>();
-
         [XmlIgnore]
-        public List<IActionEntry> Items
+        public List<IActionEntry> Actions
         {
             get
             {
-                return Actions.OfType<IActionEntry>().ToList();
+                if (_actions == null)
+                {
+                    _actions = _xmlActions.Cast<IActionEntry>().ToList();
+                    _xmlActions = null;
+                }
+
+                return _actions;
+            }
+        }
+
+        [XmlArray("Actions")]
+        [XmlArrayItem("Action")]
+        public List<ActionDef> XmlActions
+        {
+            get
+            {
+                if (_actions != null)
+                    _xmlActions = _actions.Cast<ActionDef>().ToList();
+
+                return _xmlActions;
             }
         }
 
