@@ -25,6 +25,28 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Actions
         public ActionSetEditorCtrl()
         {
             InitializeComponent();
+
+            DGV.CurrentCellDirtyStateChanged += DGV_CurrentCellDirtyStateChanged;
+            DGV.CellContentClick += DGV_CellContentClick;
+        }
+
+        private void DGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var cell = DGV.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+            var action = cell.OwningRow.DataBoundItem as ActionVM;
+
+            if (cell.OwningColumn.DataPropertyName == "Icon")
+            {
+                using (var colorDialog = new ColorDialog())
+                {
+                    colorDialog.Color = action.Color;
+
+                    var result = colorDialog.ShowDialog();
+                    if (result == DialogResult.OK)
+                        action.Color = colorDialog.Color;
+                } 
+            }
         }
 
         #endregion Public Constructors
@@ -35,9 +57,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Actions
         {
             _vm = vm as ActionSetEditorVM ?? throw new InvalidOperationException(nameof(vm));
             _vm.PropertyChanged += _vm_PropertyChanged;
-
-            DGV.CurrentCellDirtyStateChanged += new EventHandler(DataGridView_CurrentCellDirtyStateChanged);
-            DGV.SelectionChanged += new EventHandler(DataGridView_SelectionChanged);
 
             Update(_vm.Editable);
         }
@@ -58,24 +77,10 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Actions
             }
         }
 
-        void DataGridView_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        void DGV_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
-            if (DGV.IsCurrentCellDirty)
-            {
+            if (DGV.CurrentCell is DataGridViewCheckBoxCell && DGV.IsCurrentCellDirty)
                 DGV.CommitEdit(DataGridViewDataErrorContexts.Commit);
-            }
-        }
-
-        void DataGridView_SelectionChanged(object sender, EventArgs e)
-        {
-            var selectedRows = DGV.SelectedRows;
-            if (selectedRows.Count > 0)
-            {
-                var d = DGV.Columns;
-
-                int propertyId = (int)selectedRows[0].Cells["Id"].Value;
-                //_vm.Selector.SetSelection(propertyId);
-            }
         }
 
         private void SetNoPropertySetState()
@@ -107,34 +112,31 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Actions
             visibilityColumn.HeaderText = "Visibility";
             visibilityColumn.Name = "Visibility";
             visibilityColumn.DataPropertyName = "Visibility";
-            //visibilityColumn.Name = m_Model.Data.Columns[0].ColumnName;
-            //visibilityColumn.DataPropertyName = m_Model.Data.Columns[0].ColumnName;
             visibilityColumn.MinimumWidth = 50;
             visibilityColumn.Width = 50;
+            visibilityColumn.Resizable = DataGridViewTriState.False;
             DGV.Columns.Add(visibilityColumn);
 
             DataGridViewImageColumn presentationColumn = new DataGridViewImageColumn();
             presentationColumn.HeaderText = "Icon";
             presentationColumn.Name = "Icon";
             presentationColumn.DataPropertyName = "Icon";
-            //presentationColumn.Name = m_Model.Data.Columns[1].ColumnName;
-            //presentationColumn.DataPropertyName = m_Model.Data.Columns[1].ColumnName;
             presentationColumn.ImageLayout = DataGridViewImageCellLayout.Normal;
             presentationColumn.DefaultCellStyle.BackColor = Color.Gray;
             presentationColumn.ReadOnly = true;
             presentationColumn.MinimumWidth = 50;
             presentationColumn.Width = 50;
+            presentationColumn.Resizable = DataGridViewTriState.False;
             DGV.Columns.Add(presentationColumn);
 
             DataGridViewTextBoxColumn idColumn = new DataGridViewTextBoxColumn();
             idColumn.HeaderText = "Id";
             idColumn.Name = "Id";
             idColumn.DataPropertyName = "Id";
-            //idColumn.Name = m_Model.Data.Columns[2].ColumnName;
-            //idColumn.DataPropertyName = m_Model.Data.Columns[2].ColumnName;
             idColumn.MinimumWidth = 40;
             idColumn.Width = 40;
             idColumn.ReadOnly = true;
+            idColumn.Resizable = DataGridViewTriState.False;
             DGV.Columns.Add(idColumn);
 
             //DataGridViewTextBoxColumn binaryColumn = new DataGridViewTextBoxColumn();
@@ -150,11 +152,10 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Actions
             descriptionColumn.HeaderText = "Description";
             descriptionColumn.Name = "Description";
             descriptionColumn.DataPropertyName = "Description";
-            //descriptionColumn.Name = m_Model.Data.Columns[4].ColumnName;
-            //descriptionColumn.DataPropertyName = m_Model.Data.Columns[4].ColumnName;
             descriptionColumn.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             descriptionColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            descriptionColumn.ReadOnly = true;
+            descriptionColumn.ReadOnly = false;
+            descriptionColumn.Resizable = DataGridViewTriState.False;
             DGV.Columns.Add(descriptionColumn);
 
             DGV.DataSource = _vm.Editable.Items;

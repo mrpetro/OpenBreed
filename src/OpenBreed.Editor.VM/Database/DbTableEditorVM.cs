@@ -127,7 +127,9 @@ namespace OpenBreed.Editor.VM.Database
         {
             var entryVM = _editable.Entries.FirstOrDefault(item => item.Id == entryId);
             var entry = _edited.Entries.FirstOrDefault(item => item.Id == entryId);
-            entryVM.Load(entry);
+
+            if (entryVM != null && entry != null)
+                entryVM.Load(entry);
         }
 
         #endregion Public Methods

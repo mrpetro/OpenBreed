@@ -11,7 +11,33 @@ namespace OpenBreed.Editor.VM.Actions
 {
     public static class ActionVMHelper
     {
-        public static void SetPresentationDefault(ActionVM prop,  Color color)
+        #region Public Methods
+
+        public static string ColorToHex(Color c)
+        {
+            return "#" + c.A.ToString("X2") + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
+        }
+
+        public static void FromModel(ActionVM vm, IActionPresentation model)
+        {
+            Image image;
+            string message;
+
+            vm.Visibility = model.Visibility;
+            vm.Color = HexToColor(model.Color);
+
+            if (!TryLoadImage(model.Image, out image, out message))
+                SetPresentationDefault(vm, vm.Color);
+            else
+                vm.Icon = image;
+        }
+
+        public static Color HexToColor(string hex)
+        {
+            return ColorTranslator.FromHtml(hex);
+        }
+
+        public static void SetPresentationDefault(ActionVM prop, Color color)
         {
             Bitmap bitmap = new Bitmap(32, 32, PixelFormat.Format32bppArgb);
 
@@ -41,6 +67,12 @@ namespace OpenBreed.Editor.VM.Actions
             prop.Icon = bitmap;
         }
 
+        public static void ToModel(ActionVM vm, IActionPresentation model)
+        {
+            model.Visibility = vm.Visibility;
+            model.Color = ColorToHex(vm.Color);
+        }
+
         public static bool TryLoadImage(string imagePath, out Image image, out string message)
         {
             try
@@ -65,24 +97,6 @@ namespace OpenBreed.Editor.VM.Actions
             return false;
         }
 
-        public static void ToModel(ActionVM vm, IActionPresentation model)
-        {
-            model.Visibility = vm.Visibility;
-            model.Color = ColorTranslator.ToHtml(vm.Color);
-        }
-
-        public static void FromModel(ActionVM vm, IActionPresentation model)
-        {
-            Image image;
-            string message;
-
-            vm.Visibility = model.Visibility;
-            vm.Color = ColorTranslator.FromHtml(model.Color);
-
-            if (!TryLoadImage(model.Image, out image, out message))
-                SetPresentationDefault(vm, vm.Color);
-            else
-                vm.Icon = image;
-        }
+        #endregion Public Methods
     }
 }

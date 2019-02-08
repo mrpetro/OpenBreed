@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Actions;
+using System.ComponentModel;
 
 namespace OpenBreed.Editor.VM.Actions
 {
@@ -28,13 +29,27 @@ namespace OpenBreed.Editor.VM.Actions
         public ActionVM(ActionSetVM owner)
         {
             Owner = owner;
+
+            PropertyChanged += ActionVM_PropertyChanged;
+        }
+
+        private void ActionVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(Color):
+                    ActionVMHelper.SetPresentationDefault(this, Color);
+                    break;
+                default:
+                    break;
+            }
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        internal Color Color
+        public Color Color
         {
             get { return _color; }
             set { SetProperty(ref _color, value); }

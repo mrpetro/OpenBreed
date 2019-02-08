@@ -95,13 +95,13 @@ namespace OpenBreed.Editor.VM.Actions
 
         private void ToEntry(IActionSetEntry entry)
         {
-            entry.Items.Clear();
+            entry.Actions.Clear();
 
             foreach (var item in Items)
             {
                 var newAction = entry.NewItem();
                 item.ToModel(newAction);
-                entry.Items.Add(newAction);
+                entry.Actions.Add(newAction);
             }
         }
 
@@ -111,7 +111,7 @@ namespace OpenBreed.Editor.VM.Actions
             {
                 Items.Clear();
 
-                foreach (var item in entry.Items)
+                foreach (var item in entry.Actions)
                 {
                     var newAction = NewItem();
                     newAction.FromModel(item);

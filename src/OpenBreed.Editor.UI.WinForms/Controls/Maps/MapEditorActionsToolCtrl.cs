@@ -108,34 +108,31 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
             visibilityColumn.HeaderText = "Visibility";
             visibilityColumn.Name = "Visibility";
             visibilityColumn.DataPropertyName = "Visibility";
-            //visibilityColumn.Name = m_Model.Data.Columns[0].ColumnName;
-            //visibilityColumn.DataPropertyName = m_Model.Data.Columns[0].ColumnName;
             visibilityColumn.MinimumWidth = 50;
             visibilityColumn.Width = 50;
+            visibilityColumn.Resizable = DataGridViewTriState.False;
             DataGridView.Columns.Add(visibilityColumn);
 
             DataGridViewImageColumn presentationColumn = new DataGridViewImageColumn();
             presentationColumn.HeaderText = "Icon";
             presentationColumn.Name = "Icon";
             presentationColumn.DataPropertyName = "Icon";
-            //presentationColumn.Name = m_Model.Data.Columns[1].ColumnName;
-            //presentationColumn.DataPropertyName = m_Model.Data.Columns[1].ColumnName;
             presentationColumn.ImageLayout = DataGridViewImageCellLayout.Normal;
             presentationColumn.DefaultCellStyle.BackColor = Color.Gray;
             presentationColumn.ReadOnly = true;
             presentationColumn.MinimumWidth = 50;
             presentationColumn.Width = 50;
+            presentationColumn.Resizable = DataGridViewTriState.False;
             DataGridView.Columns.Add(presentationColumn);
 
             DataGridViewTextBoxColumn idColumn = new DataGridViewTextBoxColumn();
             idColumn.HeaderText = "Id";
             idColumn.Name = "Id";
             idColumn.DataPropertyName = "Id";
-            //idColumn.Name = m_Model.Data.Columns[2].ColumnName;
-            //idColumn.DataPropertyName = m_Model.Data.Columns[2].ColumnName;
             idColumn.MinimumWidth = 40;
             idColumn.Width = 40;
             idColumn.ReadOnly = true;
+            idColumn.Resizable = DataGridViewTriState.False;
             DataGridView.Columns.Add(idColumn);
 
             //DataGridViewTextBoxColumn binaryColumn = new DataGridViewTextBoxColumn();
@@ -156,6 +153,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
             descriptionColumn.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             descriptionColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             descriptionColumn.ReadOnly = true;
+            descriptionColumn.Resizable = DataGridViewTriState.False;
             DataGridView.Columns.Add(descriptionColumn);
 
             DataGridView.DataSource = _vm.CurrentItem.Items;
