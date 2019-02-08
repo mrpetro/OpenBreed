@@ -22,12 +22,7 @@ namespace OpenBreed.Common.XmlDatabase
     public class XmlDatabase : IDatabase
     {
 
-        #region Public Constructors
-
-        public static XmlDatabase Open(string xmlFilePath)
-        {
-            return new XmlDatabase(xmlFilePath, DatabaseMode.Read);
-        }
+        #region Private Constructors
 
         private XmlDatabase(string xmlFilePath, DatabaseMode mode)
         {
@@ -40,7 +35,7 @@ namespace OpenBreed.Common.XmlDatabase
                 Data = DatabaseDef.Load(XmlFilePath);
         }
 
-        #endregion Public Constructors
+        #endregion Private Constructors
 
         #region Public Properties
 
@@ -60,18 +55,35 @@ namespace OpenBreed.Common.XmlDatabase
 
         #region Public Methods
 
+        public static XmlDatabase Open(string xmlFilePath)
+        {
+            return new XmlDatabase(xmlFilePath, DatabaseMode.Read);
+        }
         public IUnitOfWork CreateUnitOfWork()
         {
             return new XmlUnitOfWork(this);
         }
+
         public void Save()
         {
-            Data.Save($"{XmlFilePath.Replace(".xml","_out.xml")}");
+            Data.Save(XmlFilePath);
+            //Data.Save($"{XmlFilePath.Replace(".xml","_out.xml")}");
         }
 
         #endregion Public Methods
 
         #region Internal Methods
+
+        internal DatabaseActionSetTableDef GetActionSetTable()
+        {
+            var table = Data.Tables.OfType<DatabaseActionSetTableDef>().FirstOrDefault();
+            if (table == null)
+            {
+                table = new DatabaseActionSetTableDef();
+                Data.Tables.Add(table);
+            }
+            return table;
+        }
 
         internal DatabaseAssetTableDef GetAssetsTable()
         {
@@ -115,18 +127,6 @@ namespace OpenBreed.Common.XmlDatabase
             }
             return table;
         }
-
-        internal DatabaseActionSetTableDef GetActionSetTable()
-        {
-            var table = Data.Tables.OfType<DatabaseActionSetTableDef>().FirstOrDefault();
-            if (table == null)
-            {
-                table = new DatabaseActionSetTableDef();
-                Data.Tables.Add(table);
-            }
-            return table;
-        }
-
         internal DatabaseSoundTableDef GetSoundTable()
         {
             var table = Data.Tables.OfType<DatabaseSoundTableDef>().FirstOrDefault();
