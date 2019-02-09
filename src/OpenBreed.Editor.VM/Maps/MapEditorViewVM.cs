@@ -13,13 +13,13 @@ namespace OpenBreed.Editor.VM.Maps
 {
     public class MapEditorViewVM : BaseViewModel, IScrollableVM, IZoomableVM
     {
+
         #region Private Fields
 
-        public RenderTarget RenderTarget { get; }
-        private BodyRenderer _renderer;
         private MapLayoutVM _currentMapBody;
-        private Matrix _transformation;
+        private BodyRenderer _renderer;
         private string _title;
+        private Matrix _transformation;
 
         #endregion Private Fields
 
@@ -36,18 +36,6 @@ namespace OpenBreed.Editor.VM.Maps
             Transformation = new Matrix();
         }
 
-        private void MapBodyViewerVM_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(CurrentMapBody):
-                    Title = "Map body - " + CurrentMapBody.Owner.Title;
-                    break;
-                default:
-                    break;
-            }
-        }
-
         #endregion Public Constructors
 
         #region Public Properties
@@ -59,7 +47,8 @@ namespace OpenBreed.Editor.VM.Maps
         }
 
         public MapEditorVM Parent { get; }
-
+        public Action RefreshAction { get; set; }
+        public RenderTarget RenderTarget { get; }
         public string Title
         {
             get { return _title; }
@@ -70,11 +59,6 @@ namespace OpenBreed.Editor.VM.Maps
         {
             get { return _transformation; }
             set { SetProperty(ref _transformation, value); }
-        }
-
-        public void Resize(int width, int height)
-        {
-            RenderTarget.Resize(width, height);
         }
 
         public float ZoomScale { get { return Transformation.Elements[0]; } }
@@ -141,6 +125,16 @@ namespace OpenBreed.Editor.VM.Maps
             return clipPoints[0];
         }
 
+        public void Refresh()
+        {
+            RefreshAction?.Invoke();
+        }
+
+        public void Resize(int width, int height)
+        {
+            RenderTarget.Resize(width, height);
+        }
+
         public void ScrollViewBy(int deltaX, int deltaY)
         {
             var newTransf = Transformation.Clone();
@@ -184,5 +178,21 @@ namespace OpenBreed.Editor.VM.Maps
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private void MapBodyViewerVM_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(CurrentMapBody):
+                    Title = "Map body - " + CurrentMapBody.Owner.Title;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        #endregion Private Methods
     }
 }

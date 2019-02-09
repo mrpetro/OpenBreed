@@ -27,7 +27,7 @@ namespace OpenBreed.Editor.VM.Maps
         private readonly CommandMan m_Commands;
 
         private bool _isModified;
-        private ActionSetVM _propSet;
+        private ActionSetVM _actionSet;
         private AssetBase _source = null;
         private string _title;
 
@@ -37,9 +37,11 @@ namespace OpenBreed.Editor.VM.Maps
 
         public MapVM()
         {
-            TileSets = new BindingList<TileSetVM>();
             Layout = new MapLayoutVM(this);
             Properties = new LevelPropertiesVM(this);
+
+            TileSets = new BindingList<TileSetVM>();
+            TileSets.ListChanged += (s, e) => OnPropertyChanged(nameof(TileSets));
 
             Palettes = new BindingList<PaletteVM>();
             Palettes.ListChanged += (s, e) => OnPropertyChanged(nameof(Palettes));
@@ -71,10 +73,10 @@ namespace OpenBreed.Editor.VM.Maps
         public BindingList<PaletteVM> Palettes { get; }
         public LevelPropertiesVM Properties { get; }
 
-        public ActionSetVM PropSet
+        public ActionSetVM ActionSet
         {
-            get { return _propSet; }
-            set { SetProperty(ref _propSet, value); }
+            get { return _actionSet; }
+            set { SetProperty(ref _actionSet, value); }
         }
 
         public AssetBase Source
@@ -192,7 +194,7 @@ namespace OpenBreed.Editor.VM.Maps
 
             propSetVM.FromEntry(propSet);
 
-            PropSet = propSetVM;
+            ActionSet = propSetVM;
         }
 
         #endregion Internal Methods

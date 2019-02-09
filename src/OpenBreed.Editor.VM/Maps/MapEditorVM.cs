@@ -52,8 +52,24 @@ namespace OpenBreed.Editor.VM.Maps
 
         internal void Connect()
         {
+            ActionsTool.PropertyChanged += ActionsTool_PropertyChanged;
+
             ActionsTool.Connect();
             TilesTool.Connect();
+        }
+
+        private void ActionsTool_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var actionTool = sender as MapEditorActionsToolVM;
+
+            switch (e.PropertyName)
+            {
+                case nameof(actionTool.Items):
+                    MapView.Refresh();
+                    break;
+                default:
+                    break;
+            }
         }
 
         #endregion Internal Methods

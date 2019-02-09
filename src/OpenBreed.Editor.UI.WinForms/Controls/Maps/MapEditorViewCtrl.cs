@@ -40,7 +40,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
 
         public void Initialize(MapEditorViewVM vm)
         {
-            _vm = vm;
+            _vm = vm ?? throw new ArgumentNullException(nameof(MapEditorViewVM));
+
+            _vm.RefreshAction = this.Invalidate;
 
             _scrollTool = new ScrollTool(_vm, this);
             _scrollTool.Activate();

@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Common;
 
 namespace OpenBreed.Editor.VM.Maps
 {
@@ -13,8 +14,6 @@ namespace OpenBreed.Editor.VM.Maps
     {
 
         #region Private Fields
-
-        private ActionSetVM _currentItem;
 
         private string _title;
 
@@ -26,18 +25,15 @@ namespace OpenBreed.Editor.VM.Maps
         {
             Parent = parent;
 
-            PropertyChanged += This_PropertyChanged;
+            Items = new BindingList<ActionVM>();
+            Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public ActionSetVM CurrentItem
-        {
-            get { return _currentItem; }
-            set { SetProperty(ref _currentItem, value); }
-        }
+        public BindingList<ActionVM> Items { get; }
 
         public MapEditorVM Parent { get; }
         public int SelectedIndex { get; private set; }
@@ -77,24 +73,22 @@ namespace OpenBreed.Editor.VM.Maps
 
         private void OnCurrentMapChanged(MapVM map)
         {
-            if (map == null)
-                CurrentItem = null;
-            else
-                CurrentItem = map.PropSet;
-        }
-
-        private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
+            Items.UpdateAfter(() =>
             {
-                case nameof(CurrentItem):
-                    SelectedIndex = 0;
-                    break;
-                default:
-                    break;
-            }
+                Items.Clear();
+                SelectedIndex = -1;
+
+                if (map == null)
+                    return;
+
+                if(map.ActionSet == null)
+                    return;
+
+                map.ActionSet.Items.ForEach(item => Items.Add(item));
+            });
         }
 
         #endregion Private Methods
+
     }
 }

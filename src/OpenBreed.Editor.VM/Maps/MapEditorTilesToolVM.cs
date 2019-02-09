@@ -59,6 +59,10 @@ namespace OpenBreed.Editor.VM.Maps
             }
         }
 
+        /// <summary>
+        /// This method will update this tool tile sets with map tile sets
+        /// </summary>
+        /// <param name="map">Map that has changed</param>
         private void OnCurrentMapChanged(MapVM map)
         {
             TileSetSelector.TileSets.UpdateAfter(() =>

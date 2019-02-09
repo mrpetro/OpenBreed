@@ -35,74 +35,34 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
         {
             _vm = vm;
 
-            _vm.PropertyChanged += _vm_PropertyChanged;
+            DGV.CurrentCellDirtyStateChanged += DGV_CurrentCellDirtyStateChanged;
 
-            DataGridView.CurrentCellDirtyStateChanged += DataGridView_CurrentCellDirtyStateChanged;
-            DataGridView.SelectionChanged += DataGridView_SelectionChanged;
-
-            Update(_vm.CurrentItem);
+            SetupDataGridView(_vm);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        void DGV_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
-            switch (e.PropertyName)
-            {
-                case nameof(_vm.CurrentItem):
-                    Update(_vm.CurrentItem);
-                    break;
-                default:
-                    break;
-            }
+            if (DGV.CurrentCell is DataGridViewCheckBoxCell && DGV.IsCurrentCellDirty)
+                DGV.CommitEdit(DataGridViewDataErrorContexts.Commit);
         }
 
-        void DataGridView_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        private void SetupDataGridView(MapEditorActionsToolVM vm)
         {
-            if (DataGridView.IsCurrentCellDirty)
-            {
-                DataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
-            }
-        }
+            DGV.DataSource = null;
 
-        void DataGridView_SelectionChanged(object sender, EventArgs e)
-        {
-            var selectedRows = DataGridView.SelectedRows;
-            if (selectedRows.Count > 0)
-            {
-                var d = DataGridView.Columns;
-
-                int propertyId = (int)selectedRows[0].Cells["Id"].Value;
-                //_vm.Selector.SetSelection(propertyId);
-            }
-        }
-
-        private void SetNoPropertySetState()
-        {
-            DataGridView.DataSource = null;
-            DataGridView.Columns.Clear();
-        }
-
-        private void SetPropertySetState(ActionSetVM propertySet)
-        {
-            SetupDataGridView();
-        }
-
-        private void SetupDataGridView()
-        {
-            DataGridView.DataSource = null;
-
-            DataGridView.Columns.Clear();
-            DataGridView.RowHeadersVisible = false;
-            DataGridView.AllowUserToAddRows = false;
-            DataGridView.AllowUserToDeleteRows = false;
-            DataGridView.AllowUserToResizeRows = false;
-            DataGridView.MultiSelect = false;
-            DataGridView.AutoGenerateColumns = false;
-            DataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DataGridView.RowTemplate.Height = 32;
+            DGV.Columns.Clear();
+            DGV.RowHeadersVisible = false;
+            DGV.AllowUserToAddRows = false;
+            DGV.AllowUserToDeleteRows = false;
+            DGV.AllowUserToResizeRows = false;
+            DGV.MultiSelect = false;
+            DGV.AutoGenerateColumns = false;
+            DGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DGV.RowTemplate.Height = 32;
 
             DataGridViewCheckBoxColumn visibilityColumn = new DataGridViewCheckBoxColumn();
             visibilityColumn.HeaderText = "Visibility";
@@ -111,7 +71,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
             visibilityColumn.MinimumWidth = 50;
             visibilityColumn.Width = 50;
             visibilityColumn.Resizable = DataGridViewTriState.False;
-            DataGridView.Columns.Add(visibilityColumn);
+            DGV.Columns.Add(visibilityColumn);
 
             DataGridViewImageColumn presentationColumn = new DataGridViewImageColumn();
             presentationColumn.HeaderText = "Icon";
@@ -123,7 +83,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
             presentationColumn.MinimumWidth = 50;
             presentationColumn.Width = 50;
             presentationColumn.Resizable = DataGridViewTriState.False;
-            DataGridView.Columns.Add(presentationColumn);
+            DGV.Columns.Add(presentationColumn);
 
             DataGridViewTextBoxColumn idColumn = new DataGridViewTextBoxColumn();
             idColumn.HeaderText = "Id";
@@ -133,39 +93,19 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
             idColumn.Width = 40;
             idColumn.ReadOnly = true;
             idColumn.Resizable = DataGridViewTriState.False;
-            DataGridView.Columns.Add(idColumn);
-
-            //DataGridViewTextBoxColumn binaryColumn = new DataGridViewTextBoxColumn();
-            //binaryColumn.HeaderText = "Binary";
-            //binaryColumn.Name = m_Model.Data.Columns[3].ColumnName;
-            //binaryColumn.DataPropertyName = m_Model.Data.Columns[3].ColumnName;
-            //binaryColumn.MinimumWidth = 80;
-            //binaryColumn.Width = 80;
-            //binaryColumn.ReadOnly = true;
-            //DataGridView.Columns.Add(binaryColumn);
+            DGV.Columns.Add(idColumn);
 
             DataGridViewTextBoxColumn descriptionColumn = new DataGridViewTextBoxColumn();
             descriptionColumn.HeaderText = "Description";
             descriptionColumn.Name = "Description";
             descriptionColumn.DataPropertyName = "Description";
-            //descriptionColumn.Name = m_Model.Data.Columns[4].ColumnName;
-            //descriptionColumn.DataPropertyName = m_Model.Data.Columns[4].ColumnName;
             descriptionColumn.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             descriptionColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             descriptionColumn.ReadOnly = true;
             descriptionColumn.Resizable = DataGridViewTriState.False;
-            DataGridView.Columns.Add(descriptionColumn);
+            DGV.Columns.Add(descriptionColumn);
 
-            DataGridView.DataSource = _vm.CurrentItem.Items;
-            //DataGridView.DataSource = m_Model.Data;
-        }
-
-        void Update(ActionSetVM propertySet)
-        {
-            if (propertySet == null)
-                SetNoPropertySetState();
-            else
-                SetPropertySetState(propertySet);
+            DGV.DataSource = vm.Items;
         }
 
         #endregion Private Methods

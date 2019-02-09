@@ -118,7 +118,7 @@ namespace OpenBreed.Editor.VM.Renderer
             int yFrom = renderable.Layout.GetMapIndexY(viewRect.Top);
             int yTo = renderable.Layout.GetMapIndexY(viewRect.Bottom);
 
-            var propSet = renderable.Layout.Owner.PropSet;
+            var propSet = renderable.Layout.Owner.ActionSet;
 
             if (propSet == null)
                 return;
