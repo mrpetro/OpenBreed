@@ -120,6 +120,8 @@
     <Compile Include="IOpenFileQuery.cs" />
     <Compile Include="ISaveFileQuery.cs" />
     <Compile Include="IToolView.cs" />
+    <Compile Include="Maps\MapEditorActionsManVM.cs" />
+    <Compile Include="Maps\MapEditorActionsSelectorVM.cs" />
     <Compile Include="Maps\MapEditorTilesToolVM.cs" />
     <Compile Include="Tools\IScrollableVM.cs" />
     <Compile Include="Tools\IZoomableVM.cs" />

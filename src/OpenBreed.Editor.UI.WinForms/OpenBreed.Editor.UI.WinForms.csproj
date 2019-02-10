@@ -130,6 +130,18 @@
     <Compile Include="Controls\Images\ImageEditorCtrl.Designer.cs">
       <DependentUpon>ImageEditorCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Maps\MapEditorActionsManCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Maps\MapEditorActionsManCtrl.Designer.cs">
+      <DependentUpon>MapEditorActionsManCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Maps\MapEditorActionsToolCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Maps\MapEditorActionsToolCtrl.Designer.cs">
+      <DependentUpon>MapEditorActionsToolCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Maps\MapEditorTilesToolCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -196,11 +208,11 @@
     <Compile Include="Controls\Actions\ActionSetEditorCtrl.Designer.cs">
       <DependentUpon>ActionSetEditorCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Maps\MapEditorActionsToolCtrl.cs">
+    <Compile Include="Controls\Maps\MapEditorActionsSelectorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Maps\MapEditorActionsToolCtrl.Designer.cs">
-      <DependentUpon>MapEditorActionsToolCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Maps\MapEditorActionsSelectorCtrl.Designer.cs">
+      <DependentUpon>MapEditorActionsSelectorCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Sounds\SoundEditorCtrl.cs">
       <SubType>UserControl</SubType>
@@ -331,12 +343,6 @@
     <Compile Include="Views\PropertiesView.Designer.cs">
       <DependentUpon>PropertiesView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\LevelPropSelectorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\LevelPropSelectorView.Designer.cs">
-      <DependentUpon>LevelPropSelectorView.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\SpriteSetsView.cs" />
     <Compile Include="Views\SpriteSetsView.Designer.cs">
       <DependentUpon>SpriteSetsView.cs</DependentUpon>
@@ -394,6 +400,12 @@
     <EmbeddedResource Include="Controls\Images\ImageEditorCtrl.resx">
       <DependentUpon>ImageEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Maps\MapEditorActionsManCtrl.resx">
+      <DependentUpon>MapEditorActionsManCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Maps\MapEditorActionsToolCtrl.resx">
+      <DependentUpon>MapEditorActionsToolCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Maps\MapEditorCtrl.resx">
       <DependentUpon>MapEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
@@ -424,8 +436,8 @@
     <EmbeddedResource Include="Controls\Actions\ActionSetEditorCtrl.resx">
       <DependentUpon>ActionSetEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Maps\MapEditorActionsToolCtrl.resx">
-      <DependentUpon>MapEditorActionsToolCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Maps\MapEditorActionsSelectorCtrl.resx">
+      <DependentUpon>MapEditorActionsSelectorCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Sounds\SoundEditorCtrl.resx">
       <DependentUpon>SoundEditorCtrl.cs</DependentUpon>
@@ -483,9 +495,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PropertiesView.resx">
       <DependentUpon>PropertiesView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\LevelPropSelectorView.resx">
-      <DependentUpon>LevelPropSelectorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\SpriteSetsView.resx">
       <DependentUpon>SpriteSetsView.cs</DependentUpon>

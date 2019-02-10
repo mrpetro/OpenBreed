@@ -52,19 +52,19 @@ namespace OpenBreed.Editor.VM.Maps
 
         internal void Connect()
         {
-            ActionsTool.PropertyChanged += ActionsTool_PropertyChanged;
+            ActionsTool.ActionsSelector.PropertyChanged += ActionsSelector_PropertyChanged;
 
             ActionsTool.Connect();
             TilesTool.Connect();
         }
 
-        private void ActionsTool_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void ActionsSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            var actionTool = sender as MapEditorActionsToolVM;
+            var actionSelector = sender as MapEditorActionsSelectorVM;
 
             switch (e.PropertyName)
             {
-                case nameof(actionTool.Items):
+                case nameof(actionSelector.Items):
                     MapView.Refresh();
                     break;
                 default:

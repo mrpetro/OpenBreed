@@ -58,7 +58,6 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         private LevelBodyEditorView _levelBodyEditorView = new LevelBodyEditorView();
         private LevelPalettesView _levelPalettesView = new LevelPalettesView();
         //private MapPropertiesView _mapPropertiesView = new MapPropertiesView();
-        private LevelPropSelectorView _levelPropSelectorView = new LevelPropSelectorView();
 
         //private SpriteSetsView _spriteSetsView = new SpriteSetsView();
         //private LevelTileSelectorView _levelTileSelectorView = new LevelTileSelectorView();
@@ -114,14 +113,6 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _levelPalettesView = null;
         }
 
-        public void CloseLevelPropSelectorView()
-        {
-            if (_levelPropSelectorView == null)
-                return;
-            _levelPropSelectorView.Close();
-            _levelPropSelectorView = null;
-        }
-
         public void CloseLevelTileSelectorView()
         {
             //if (_levelTileSelectorView == null)
@@ -136,7 +127,6 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
             CloseDatabaseView();
             CloseLevelTileSelectorView();
-            CloseLevelPropSelectorView();
             CloseLevelPalettesView();
             CloseLevelBodyView();
         }

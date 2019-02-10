@@ -10,26 +10,33 @@ using OpenBreed.Common;
 
 namespace OpenBreed.Editor.VM.Maps
 {
-    public class MapEditorActionsToolVM : BaseViewModel
+    public class MapEditorActionsManVM : BaseViewModel
     {
+
+        #region Private Fields
+
+        private string _actionSetId;
+
+        #endregion Private Fields
 
         #region Public Constructors
 
-        public MapEditorActionsToolVM(MapEditorVM parent)
+        public MapEditorActionsManVM(MapEditorActionsToolVM parent)
         {
             Parent = parent;
-
-            ActionsMan = new MapEditorActionsManVM(this);
-            ActionsSelector = new MapEditorActionsSelectorVM(this);
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public MapEditorActionsManVM ActionsMan { get; }
-        public MapEditorActionsSelectorVM ActionsSelector { get; }
-        public MapEditorVM Parent { get; }
+        public MapEditorActionsToolVM Parent { get; }
+
+        public string ActionSetId
+        {
+            get { return _actionSetId; }
+            set { SetProperty(ref _actionSetId, value); }
+        }
 
         #endregion Public Properties
 
@@ -38,6 +45,11 @@ namespace OpenBreed.Editor.VM.Maps
         public void Connect()
         {
             Parent.PropertyChanged += MapEditor_PropertyChanged;
+        }
+
+        public void SelectActionSetId()
+        {
+
         }
 
         #endregion Public Methods
@@ -60,40 +72,18 @@ namespace OpenBreed.Editor.VM.Maps
 
         private void OnCurrentMapChanged(MapVM map)
         {
-            UpdateActionsMan(map);
-            UpdateActionsSelector(map);
-        }
-
-        private void UpdateActionsMan(MapVM map)
-        {
-            ActionsMan.ActionSetId = null;
+            ActionSetId = null;
 
             if (map == null)
                 return;
 
-            if (map.ActionSet == null)
+            if(map.ActionSet == null)
                 return;
 
-            ActionsMan.ActionSetId = map.ActionSet.Id;
-        }
-
-        private void UpdateActionsSelector(MapVM map)
-        {
-            ActionsSelector.Items.UpdateAfter(() =>
-            {
-                ActionsSelector.Items.Clear();
-                ActionsSelector.SelectedIndex = -1;
-
-                if (map == null)
-                    return;
-
-                if (map.ActionSet == null)
-                    return;
-
-                map.ActionSet.Items.ForEach(item => ActionsSelector.Items.Add(item));
-            });
+            ActionSetId = map.ActionSet.Id;
         }
 
         #endregion Private Methods
+
     }
 }
