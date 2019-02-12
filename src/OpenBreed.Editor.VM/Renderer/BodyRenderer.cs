@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Editor.VM.Maps;
+using OpenBreed.Editor.VM.Maps.Layers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,15 +14,20 @@ namespace OpenBreed.Editor.VM.Renderer
     {
         #region Private Fields
 
-        private LayerRenderer _layerRenderer;
+        private MapEditorVM _editor;
+        private Dictionary<Type, RendererBase<MapLayerBaseVM>> _layerRenderers;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public BodyRenderer(RenderTarget target) : base(target)
+        public BodyRenderer(MapEditorVM editor, RenderTarget target) : base(target)
         {
-            _layerRenderer = new LayerRenderer(target);
+            _editor = editor;
+
+            _layerRenderers = new Dictionary<Type, RendererBase<MapLayerBaseVM>>();
+            _layerRenderers.Add(typeof(MapLayerGfxVM), new LayerGfxRenderer(target));
+            _layerRenderers.Add(typeof(MapLayerActionVM), new LayerActionRenderer(_editor.ActionsTool, target));
         }
 
         #endregion Public Constructors
@@ -33,9 +39,10 @@ namespace OpenBreed.Editor.VM.Renderer
             var visibleLayers = renderable.Layers.Where(item => item.IsVisible);
 
             foreach (var layer in visibleLayers)
-                _layerRenderer.Render(layer);
+                _layerRenderers[layer.GetType()].Render(layer);
         }
 
         #endregion Public Methods
+
     }
 }

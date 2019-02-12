@@ -7,11 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common;
+using OpenBreed.Common.Actions;
 
 namespace OpenBreed.Editor.VM.Maps
 {
     public class MapEditorActionsToolVM : BaseViewModel
     {
+        #region Private Fields
+
+        private ActionSetVM _actionSet;
+
+        #endregion Private Fields
 
         #region Public Constructors
 
@@ -26,6 +32,12 @@ namespace OpenBreed.Editor.VM.Maps
         #endregion Public Constructors
 
         #region Public Properties
+
+        public ActionSetVM ActionSet
+        {
+            get { return _actionSet; }
+            set { SetProperty(ref _actionSet, value); }
+        }
 
         public MapEditorActionsManVM ActionsMan { get; }
         public MapEditorActionsSelectorVM ActionsSelector { get; }
@@ -60,40 +72,13 @@ namespace OpenBreed.Editor.VM.Maps
 
         private void OnCurrentMapChanged(MapVM map)
         {
-            UpdateActionsMan(map);
-            UpdateActionsSelector(map);
-        }
-
-        private void UpdateActionsMan(MapVM map)
-        {
-            ActionsMan.ActionSetId = null;
-
             if (map == null)
-                return;
-
-            if (map.ActionSet == null)
-                return;
-
-            ActionsMan.ActionSetId = map.ActionSet.Id;
-        }
-
-        private void UpdateActionsSelector(MapVM map)
-        {
-            ActionsSelector.Items.UpdateAfter(() =>
-            {
-                ActionsSelector.Items.Clear();
-                ActionsSelector.SelectedIndex = -1;
-
-                if (map == null)
-                    return;
-
-                if (map.ActionSet == null)
-                    return;
-
-                map.ActionSet.Items.ForEach(item => ActionsSelector.Items.Add(item));
-            });
+                ActionSet = null;
+            if (map != null)
+                ActionSet = map.ActionSet;
         }
 
         #endregion Private Methods
+
     }
 }

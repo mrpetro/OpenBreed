@@ -76,6 +76,12 @@
     <Compile Include="Controls\Assets\EpfArchiveAssetCtrl.Designer.cs">
       <DependentUpon>EpfArchiveAssetCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Common\RefIdSelectorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Common\RefIdSelectorCtrl.Designer.cs">
+      <DependentUpon>RefIdSelectorCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Database\DbTableSelectorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -256,6 +262,12 @@
     <Compile Include="Forms\ABTAPasswordGeneratorForm.Designer.cs">
       <DependentUpon>ABTAPasswordGeneratorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Common\RefIdSelectorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Common\RefIdSelectorForm.Designer.cs">
+      <DependentUpon>RefIdSelectorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\GLTestForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -373,6 +385,9 @@
     <EmbeddedResource Include="Controls\Assets\EpfArchiveAssetCtrl.resx">
       <DependentUpon>EpfArchiveAssetCtrl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Common\RefIdSelectorCtrl.resx">
+      <DependentUpon>RefIdSelectorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Database\DbTableSelectorCtrl.resx">
       <DependentUpon>DbTableSelectorCtrl.cs</DependentUpon>
     </EmbeddedResource>
@@ -459,6 +474,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ABTAPasswordGeneratorForm.resx">
       <DependentUpon>ABTAPasswordGeneratorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Common\RefIdSelectorForm.resx">
+      <DependentUpon>RefIdSelectorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GLTestForm.resx">
       <DependentUpon>GLTestForm.cs</DependentUpon>

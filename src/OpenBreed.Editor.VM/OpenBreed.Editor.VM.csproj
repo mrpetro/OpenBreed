@@ -78,6 +78,7 @@
     <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="Base\BindingListExtensions.cs" />
     <Compile Include="Base\Command.cs" />
+    <Compile Include="Common\RefSelectorVM.cs" />
     <Compile Include="Common\SelectModeEnum.cs" />
     <Compile Include="Database\DbTableEditorBaseVM.cs" />
     <Compile Include="Database\DbTableSelectorVM.cs" />
@@ -123,12 +124,13 @@
     <Compile Include="Maps\MapEditorActionsManVM.cs" />
     <Compile Include="Maps\MapEditorActionsSelectorVM.cs" />
     <Compile Include="Maps\MapEditorTilesToolVM.cs" />
+    <Compile Include="Renderer\LayerActionRenderer.cs" />
+    <Compile Include="Renderer\LayerGfxRenderer.cs" />
     <Compile Include="Tools\IScrollableVM.cs" />
     <Compile Include="Tools\IZoomableVM.cs" />
     <Compile Include="Renderer\BodyRenderer.cs" />
     <Compile Include="Renderer\IRenderable.cs" />
     <Compile Include="Renderer\IRenderer.cs" />
-    <Compile Include="Renderer\LayerRenderer.cs" />
     <Compile Include="Renderer\RenderTarget.cs" />
     <Compile Include="Renderer\RendererBase.cs" />
     <Compile Include="Renderer\TileRenderer.cs" />

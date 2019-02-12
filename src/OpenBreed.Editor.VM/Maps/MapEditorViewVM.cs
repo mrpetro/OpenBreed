@@ -16,7 +16,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Private Fields
 
-        private MapLayoutVM _currentMapBody;
+        private MapLayoutVM _layout;
         private BodyRenderer _renderer;
         private string _title;
         private Matrix _transformation;
@@ -32,7 +32,7 @@ namespace OpenBreed.Editor.VM.Maps
             PropertyChanged += MapBodyViewerVM_PropertyChanged;
 
             RenderTarget = new RenderTarget(1, 1);
-            _renderer = new BodyRenderer(RenderTarget);
+            _renderer = new BodyRenderer(Parent, RenderTarget);
             Transformation = new Matrix();
         }
 
@@ -40,10 +40,10 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Properties
 
-        public MapLayoutVM CurrentMapBody
+        public MapLayoutVM Layout
         {
-            get { return _currentMapBody; }
-            set { SetProperty(ref _currentMapBody, value); }
+            get { return _layout; }
+            set { SetProperty(ref _layout, value); }
         }
 
         public MapEditorVM Parent { get; }
@@ -81,24 +81,24 @@ namespace OpenBreed.Editor.VM.Maps
         {
             RenderTarget.Gfx.Transform = Transformation;
 
-            if (CurrentMapBody == null)
+            if (Layout == null)
                 return;
 
-            _renderer.Render(CurrentMapBody);
+            _renderer.Render(Layout);
 
             RenderTarget.Flush(gfx);
         }
 
         public void FitViewToBody(float width, float height)
         {
-            float scaleW = width / CurrentMapBody.MaxCoordX;
-            float scaleH = height / CurrentMapBody.MaxCoordY;
+            float scaleW = width / Layout.MaxCoordX;
+            float scaleH = height / Layout.MaxCoordY;
             float scale = Math.Min(scaleW, scaleH);
 
             if (scale == 0.0f)
                 scale = 1.0f;
 
-            CenterView(CurrentMapBody.MaxCoordX / 2, CurrentMapBody.MaxCoordY / 2, width, height, scale);
+            CenterView(Layout.MaxCoordX / 2, Layout.MaxCoordY / 2, width, height, scale);
         }
 
         public Point GetWorldCoords(Point viewCoords)
@@ -185,8 +185,8 @@ namespace OpenBreed.Editor.VM.Maps
         {
             switch (e.PropertyName)
             {
-                case nameof(CurrentMapBody):
-                    Title = "Map body - " + CurrentMapBody.Owner.Title;
+                case nameof(Layout):
+                    Title = "Map body - " + Layout.Owner.Title;
                     break;
                 default:
                     break;
@@ -194,5 +194,6 @@ namespace OpenBreed.Editor.VM.Maps
         }
 
         #endregion Private Methods
+
     }
 }

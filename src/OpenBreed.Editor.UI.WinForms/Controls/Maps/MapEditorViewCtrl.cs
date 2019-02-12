@@ -60,7 +60,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
         {
             switch (e.PropertyName)
             {
-                case nameof(_vm.CurrentMapBody):
+                case nameof(_vm.Layout):
                 case nameof(_vm.Transformation):
                     Invalidate();
                     break;
@@ -99,7 +99,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
 
         private void UpdateViewState()
         {
-            if (_vm.CurrentMapBody == null)
+            if (_vm.Layout == null)
                 SetNoMapState();
             else
                 SetMapState();

@@ -21,12 +21,11 @@ namespace OpenBreed.Editor.VM.Maps
 
         public MapEditorVM(IRepository repository) : base(repository)
         {
-            MapView = new MapEditorViewVM(this);
-            //TileSetSelector = new LevelTileSetSelectorVM(this);
-            //TileSelector = new LevelTileSelectorVM(this);
             TilesTool = new MapEditorTilesToolVM(this);
             ActionsTool = new MapEditorActionsToolVM(this);
             PaletteSelector = new MapEditorPalettesToolVM(this);
+
+            MapView = new MapEditorViewVM(this);
 
             PropertyChanged += This_PropertyChanged;
 
@@ -102,7 +101,7 @@ namespace OpenBreed.Editor.VM.Maps
             switch (e.PropertyName)
             {
                 case nameof(Editable):
-                    MapView.CurrentMapBody = Editable.Layout;
+                    MapView.Layout = Editable.Layout;
                     PaletteSelector.CurrentItem = Editable.Palettes.FirstOrDefault();
                     break;
                 default:
