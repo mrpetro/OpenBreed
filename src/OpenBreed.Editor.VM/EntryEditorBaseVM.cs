@@ -149,6 +149,8 @@ namespace OpenBreed.Editor.VM
             Editable = vm;
             Editable.PropertyChanged += Editable_PropertyChanged;
             Update();
+
+            CommitEnabled = false;
         }
 
         private void Update()
