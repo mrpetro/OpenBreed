@@ -31,8 +31,24 @@ namespace OpenBreed.Editor.VM.Maps
 
             PaletteSelector.PropertyChanged += PaletteSelector_PropertyChanged;
 
+            ActionsTool.PropertyChanged += ActionsTool_PropertyChanged;
+
+
             //TODO: This is probably bad place for VM connection method
             Connect();
+        }
+
+        private void ActionsTool_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(ActionsTool.ActionSet):
+                    if(Editable != null)
+                        Editable.ActionSet = ActionsTool.ActionSet;
+                    break;
+                default:
+                    break;
+            }
         }
 
         #endregion Public Constructors
@@ -51,11 +67,26 @@ namespace OpenBreed.Editor.VM.Maps
 
         internal void Connect()
         {
-            ActionsTool.ActionsSelector.PropertyChanged += ActionsSelector_PropertyChanged;
+            //ActionsTool.PropertyChanged += ActionsTool_PropertyChanged;
 
-            ActionsTool.Connect();
+           //ActionsTool.ActionsSelector.PropertyChanged += ActionsSelector_PropertyChanged;
+
             TilesTool.Connect();
         }
+
+        //private void ActionsTool_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        //{
+        //    var actionTools = sender as MapEditorActionsToolVM;
+
+        //    switch (e.PropertyName)
+        //    {
+        //        case nameof(actionTools.ActionSet):
+        //            Editable.ActionSet = actionTools.ActionSet;
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //}
 
         private void ActionsSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -78,6 +109,15 @@ namespace OpenBreed.Editor.VM.Maps
         protected override void UpdateEntry(MapVM source, IMapEntry target)
         {
             base.UpdateEntry(source, target);
+        }
+
+        protected override void UpdateVM(IMapEntry source, MapVM target)
+        {
+
+
+            base.UpdateVM(source, target);
+
+            ActionsTool.ActionSet = target.ActionSet;
         }
 
         //    TileSelector.CurrentItem = CurrentLevel.TileSets.FirstOrDefault();

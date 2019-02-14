@@ -58,11 +58,7 @@ namespace OpenBreed.Editor.VM.Maps
 
             ActionSetId = refSelector.SelectedEntryId;
 
-            var repository = ServiceLocator.Instance.GetService<IUnitOfWork>().GetRepository<IActionSetEntry>();
-            var entry = repository.GetById(ActionSetId);
-            var actionSetVM = new ActionSetVM();
-            actionSetVM.FromEntry(entry);
-            Parent.ActionSet = actionSetVM;
+            Parent.Load(ActionSetId);
         }
 
         #endregion Public Methods

@@ -31,13 +31,5 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         #endregion Public Properties
 
-        #region Public Methods
-
-        public override void Load(IRepository repository)
-        {
-            _repository = repository as IRepository<IMapEntry> ?? throw new InvalidOperationException($"Expected {nameof(IRepository<IMapEntry>)}");
-        }
-
-        #endregion Public Methods
     }
 }

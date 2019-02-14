@@ -34,10 +34,6 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         #region Public Methods
 
-        //public abstract IEnumerable<Items.DbEntryVM> GetItems();
-
-        public abstract void Load(IRepository repository);
-
         #endregion Public Methods
 
     }

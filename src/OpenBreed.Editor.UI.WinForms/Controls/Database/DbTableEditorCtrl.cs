@@ -29,6 +29,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
             DGV.AutoSize = true;
             DGV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DGV.AllowUserToResizeRows = false;
+            DGV.AllowUserToAddRows = false;
             DGV.RowHeadersVisible = false;
 
             // Initialize and add a text box column.
@@ -48,6 +49,10 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
         public void Initialize(DbTableEditorVM vm)
         {
             _vm = vm;
+
+            btnNew.Click += (s,a) => MessageBox.Show("Not implemented yet.");
+            btnClone.Click += (s, a) => MessageBox.Show("Not implemented yet.");
+            btnRemove.Click += (s, a) => MessageBox.Show("Not implemented yet.");
 
             _vm.PropertyChanged += _vm_PropertyChanged;
 

@@ -12,6 +12,11 @@ namespace OpenBreed.Editor.VM.Maps
 {
     public class MapEditorActionsSelectorVM : BaseViewModel
     {
+        #region Private Fields
+
+        private int _selectedIndex;
+
+        #endregion Private Fields
 
         #region Public Constructors
 
@@ -33,7 +38,11 @@ namespace OpenBreed.Editor.VM.Maps
 
         public MapEditorActionsToolVM Parent { get; }
 
-        public int SelectedIndex { get; set; }
+        public int SelectedIndex
+        {
+            get { return _selectedIndex; }
+            set { SetProperty(ref _selectedIndex, value); }
+        }
 
         #endregion Public Properties
 
@@ -66,5 +75,6 @@ namespace OpenBreed.Editor.VM.Maps
         }
 
         #endregion Private Methods
+
     }
 }

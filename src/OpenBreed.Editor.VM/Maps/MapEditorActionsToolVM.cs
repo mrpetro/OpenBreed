@@ -45,37 +45,21 @@ namespace OpenBreed.Editor.VM.Maps
 
         #endregion Public Properties
 
-        #region Public Methods
-
-        public void Connect()
-        {
-            Parent.PropertyChanged += MapEditor_PropertyChanged;
-        }
-
-        #endregion Public Methods
-
         #region Private Methods
 
-        private void MapEditor_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        internal void Load(string actionSetEntryId)
         {
-            var mapEditor = sender as MapEditorVM;
-
-            switch (e.PropertyName)
-            {
-                case nameof(mapEditor.Editable):
-                    OnCurrentMapChanged(mapEditor.Editable);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void OnCurrentMapChanged(MapVM map)
-        {
-            if (map == null)
+            if (actionSetEntryId == null)
                 ActionSet = null;
-            if (map != null)
-                ActionSet = map.ActionSet;
+            else
+            {
+                var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
+                var actionSet = dataProvider.GetActionSet(actionSetEntryId);
+
+                var actionSetVM = new ActionSetVM();
+                actionSetVM.FromEntry(actionSet);
+                ActionSet = actionSetVM;
+            }
         }
 
         #endregion Private Methods

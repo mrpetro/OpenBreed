@@ -118,6 +118,15 @@ namespace OpenBreed.Editor.VM.Maps
             SetPalettes(model.Palettes);
         }
 
+        internal override void ToEntry(IEntry entry)
+        {
+            base.ToEntry(entry);
+
+            var mapEntry = entry as IMapEntry;
+
+            mapEntry.ActionSetRef = ActionSet != null ? ActionSet.Id : null;
+        }
+
         #endregion Public Properties
 
         #region Public Methods
