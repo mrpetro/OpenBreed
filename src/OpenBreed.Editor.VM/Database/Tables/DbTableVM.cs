@@ -8,7 +8,7 @@ using OpenBreed.Common;
 using OpenBreed.Common.XmlDatabase;
 using OpenBreed.Common.XmlDatabase.Tables;
 using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM.Database.Items;
+using OpenBreed.Editor.VM.Database.Entries;
 
 namespace OpenBreed.Editor.VM.Database.Tables
 {
@@ -18,7 +18,7 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         protected DbTableVM()
         {
-            Entries = new BindingList<Items.DbEntryVM>();
+            Entries = new BindingList<Entries.DbEntryVM>();
             Entries.ListChanged += (s, a) => OnPropertyChanged(nameof(Entries));
         }
 

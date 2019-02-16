@@ -7,7 +7,7 @@ using OpenBreed.Common.Actions;
 using OpenBreed.Common.Sounds;
 using OpenBreed.Common.Sprites;
 using OpenBreed.Common.Tiles;
-using OpenBreed.Editor.VM.Database.Items;
+using OpenBreed.Editor.VM.Database.Entries;
 using System;
 using System.Collections.Generic;
 using System.Linq;

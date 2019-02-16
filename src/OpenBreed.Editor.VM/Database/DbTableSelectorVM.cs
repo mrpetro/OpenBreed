@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM.Database.Items;
+using OpenBreed.Editor.VM.Database.Entries;
 using OpenBreed.Editor.VM.Database.Tables;
 using System;
 using System.Collections.Generic;
@@ -62,7 +62,7 @@ namespace OpenBreed.Editor.VM.Database
                 case nameof(CurrentItem):
                     UpdateCurrentIndex();
                     break;
-                case nameof(Database.Items):
+                case nameof(Items):
                     CurrentItem = Items.FirstOrDefault();
                     break;
                 default:

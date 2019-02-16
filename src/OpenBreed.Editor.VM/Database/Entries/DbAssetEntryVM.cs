@@ -1,30 +1,26 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.XmlDatabase;
-using OpenBreed.Common.XmlDatabase.Items.Palettes;
-using OpenBreed.Common.XmlDatabase.Items.Actions;
 using OpenBreed.Common.XmlDatabase.Items.Sources;
-using OpenBreed.Common.XmlDatabase.Items.Sprites;
-using OpenBreed.Common.Palettes;
+using OpenBreed.Common.Assets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Editor.VM.Database.Items
+namespace OpenBreed.Editor.VM.Database.Entries
 {
-    public class DbPaletteEntryVM : DbEntryVM
+    public class DbAssetEntryVM : DbEntryVM
     {
-
         #region Private Fields
 
-        private IPaletteEntry _entry;
+        private IAssetEntry _entry;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DbPaletteEntryVM()
+        public DbAssetEntryVM()
         {
         }
 
@@ -34,12 +30,11 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         public override void Load(IEntry entry)
         {
-            _entry = entry as IPaletteEntry ?? throw new InvalidOperationException($"Expected {nameof(IPaletteEntry)}");
+            _entry = entry as IAssetEntry ?? throw new InvalidOperationException($"Expected {nameof(IAssetEntry)}");
 
             base.Load(entry);
         }
 
         #endregion Public Methods
-
     }
 }

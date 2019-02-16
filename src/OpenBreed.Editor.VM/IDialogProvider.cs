@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Editor.VM.Database;
-using OpenBreed.Editor.VM.Database.Items;
+using OpenBreed.Editor.VM.Database.Entries;
 using System.Linq;
 
 namespace OpenBreed.Editor.VM

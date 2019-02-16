@@ -2,7 +2,7 @@
 using OpenBreed.Editor.UI.WinForms.Forms.States;
 using OpenBreed.Editor.UI.WinForms.Views;
 using OpenBreed.Editor.VM.Database;
-using OpenBreed.Editor.VM.Database.Items;
+using OpenBreed.Editor.VM.Database.Entries;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -27,7 +27,7 @@ using OpenBreed.Common.Actions;
 using OpenBreed.Common.XmlDatabase;
 using OpenBreed.Common.Sounds;
 using OpenBreed.Editor.VM.Sounds;
-using OpenBreed.Editor.VM.Database.Items;
+using OpenBreed.Editor.VM.Database.Entries;
 using OpenBreed.Editor.VM.Assets;
 using OpenBreed.Common.Images;
 using OpenBreed.Common.Maps;

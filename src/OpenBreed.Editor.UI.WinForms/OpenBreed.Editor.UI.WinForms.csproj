@@ -82,6 +82,12 @@
     <Compile Include="Controls\Common\RefIdSelectorCtrl.Designer.cs">
       <DependentUpon>RefIdSelectorCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Database\DbTableNewEntryCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Database\DbTableNewEntryCtrl.Designer.cs">
+      <DependentUpon>DbTableNewEntryCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Database\DbTableSelectorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>

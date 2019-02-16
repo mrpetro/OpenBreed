@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenBreed.Editor.VM.Database;
-using OpenBreed.Editor.VM.Database.Items;
+using OpenBreed.Editor.VM.Database.Entries;
 using OpenBreed.Editor.VM.Database.Tables;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Database

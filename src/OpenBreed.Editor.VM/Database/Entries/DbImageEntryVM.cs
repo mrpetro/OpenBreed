@@ -8,7 +8,7 @@ using OpenBreed.Common.XmlDatabase;
 using OpenBreed.Common.XmlDatabase.Items.Images;
 using OpenBreed.Common.Images;
 
-namespace OpenBreed.Editor.VM.Database.Items
+namespace OpenBreed.Editor.VM.Database.Entries
 {
     public class DbImageEntryVM : DbEntryVM
     {

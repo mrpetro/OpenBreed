@@ -12,7 +12,7 @@ using OpenBreed.Editor.VM.Base;
 using System.IO;
 using OpenBreed.Common;
 using OpenBreed.Editor.VM.Database;
-using OpenBreed.Editor.VM.Database.Items;
+using OpenBreed.Editor.VM.Database.Entries;
 using OpenBreed.Common.XmlDatabase;
 using System.ComponentModel;
 using OpenBreed.Common.XmlDatabase.Items.Sources;

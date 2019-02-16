@@ -8,7 +8,7 @@ using OpenBreed.Common.XmlDatabase;
 using OpenBreed.Common.XmlDatabase.Items.Maps;
 using OpenBreed.Common.Maps;
 
-namespace OpenBreed.Editor.VM.Database.Items
+namespace OpenBreed.Editor.VM.Database.Entries
 {
     public class DbMapEntryVM : DbEntryVM
     {

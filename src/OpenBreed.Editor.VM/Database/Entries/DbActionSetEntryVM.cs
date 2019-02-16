@@ -1,26 +1,27 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.XmlDatabase;
+using OpenBreed.Common.XmlDatabase.Items.Actions;
 using OpenBreed.Common.XmlDatabase.Items.Sources;
-using OpenBreed.Common.Assets;
+using OpenBreed.Common.Actions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Editor.VM.Database.Items
+namespace OpenBreed.Editor.VM.Database.Entries
 {
-    public class DbAssetEntryVM : DbEntryVM
+    public class DbActionSetEntryVM : DbEntryVM
     {
         #region Private Fields
 
-        private IAssetEntry _entry;
+        private IActionSetEntry _entry;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DbAssetEntryVM()
+        public DbActionSetEntryVM()
         {
         }
 
@@ -30,7 +31,7 @@ namespace OpenBreed.Editor.VM.Database.Items
 
         public override void Load(IEntry entry)
         {
-            _entry = entry as IAssetEntry ?? throw new InvalidOperationException($"Expected {nameof(IAssetEntry)}");
+            _entry = entry as IActionSetEntry ?? throw new InvalidOperationException($"Expected {nameof(IActionSetEntry)}");
 
             base.Load(entry);
         }
