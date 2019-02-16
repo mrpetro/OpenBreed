@@ -15,6 +15,7 @@ namespace OpenBreed.Common
         string Name { get; }
 
         IEntry Find(string name);
+        IEntry New(string newId);
 
         #endregion Public Properties
     }

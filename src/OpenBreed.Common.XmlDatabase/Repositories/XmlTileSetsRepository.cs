@@ -34,9 +34,8 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Properties
 
-        public string Name { get { return "Tile sets"; } }
-
         public IEnumerable<IEntry> Entries { get { return _table.Items; } }
+        public string Name { get { return "Tile sets"; } }
         public IUnitOfWork UnitOfWork { get; }
 
         #endregion Public Properties
@@ -90,6 +89,17 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return _table.Items[index];
             else
                 return null;
+        }
+
+        public IEntry New(string newId)
+        {
+            if (Find(newId) != null)
+                throw new Exception($"Entry with Id '{newId}' already exist.");
+
+            var newEntry = new TileSetDef();
+            newEntry.Id = newId;
+            _table.Items.Add(newEntry);
+            return newEntry;
         }
 
         public void Remove(ITileSetEntry entry)

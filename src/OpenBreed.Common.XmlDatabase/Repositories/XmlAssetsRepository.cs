@@ -46,6 +46,17 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Methods
 
+        public IEntry New(string newId)
+        {
+            if (Find(newId) != null)
+                throw new Exception($"Entry with Id '{newId}' already exist.");
+
+            var newEntry = new FileAssetDef();
+            newEntry.Id = newId;
+            _table.Items.Add(newEntry);
+            return newEntry;
+        }
+
         public void Add(IAssetEntry entity)
         {
             throw new NotImplementedException();
