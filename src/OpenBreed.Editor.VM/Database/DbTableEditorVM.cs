@@ -13,6 +13,8 @@ namespace OpenBreed.Editor.VM.Database
 {
     public class DbTableEditorVM : BaseViewModel
     {
+        private DbTableNewEntryCreatorVM _newEntryCreator;
+
         //public MyIcommand CancelCommand { get; private set; }
 
         #region Private Fields
@@ -37,11 +39,7 @@ namespace OpenBreed.Editor.VM.Database
         //public BindingList<DbEntryVM> Items { get; }
 
 
-        public string Title
-        {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
-        }
+        #region Public Properties
 
         public DbEntryVM CurrentItem
         {
@@ -49,37 +47,67 @@ namespace OpenBreed.Editor.VM.Database
             set { SetProperty(ref _currentItem, value); }
         }
 
-        #region Public Properties
-
         public DbTableVM Editable
         {
             get { return _editable; }
             set { SetProperty(ref _editable, value); }
         }
 
+        public Action<string, string> EditEntryAction { get; set; }
+
+        public string EditorName { get { return "Table Editor"; } }
+
+        public Action<DbTableNewEntryCreatorVM> OpenNewEntryCreatorAction { get; set; }
+
+        public string Title
+        {
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
+        }
+
         #endregion Public Properties
 
         #region Public Methods
 
-        public void SetNoModel()
+
+        private string GetUniqueId()
         {
-            if (Editable != null)
-                Editable.PropertyChanged -= Editable_PropertyChanged;
+            string uniqueId = $"{Editable.Name}.{DateTime.Now.Ticks}";
 
-            _edited = null;
-            Editable = null;
-
-            UpdateTitle();
+            return uniqueId;
         }
 
-        public void SetModel(string modelName)
+        public void OpenNewEntryCreator()
         {
-            var repository = ServiceLocator.Instance.GetService<IUnitOfWork>().GetRepository(modelName);
+            _newEntryCreator = new DbTableNewEntryCreatorVM();
+            _newEntryCreator.CreateAction = OnNewEntryCreate;
+            _newEntryCreator.NewId = GetUniqueId();
+            OpenNewEntryCreatorAction?.Invoke(_newEntryCreator);
+        }
 
-            if (repository == null)
-                throw new InvalidOperationException($"Repository with name '{modelName}' not found.");
+        private void OnNewEntryCreate()
+        {
+            var newEntryId = _newEntryCreator.NewId;
+            _newEntryCreator.Close();
 
-            EditRepository(repository);
+            var entry = _edited.New(newEntryId);
+
+            var dbEntryFactory = ServiceLocator.Instance.GetService<DbEntryFactory>();
+            var dbEntry = dbEntryFactory.Create(entry);
+            dbEntry.Load(entry);
+            Editable.Entries.Add(dbEntry);
+            EditEntry(newEntryId);
+        }
+
+        public void EditEntry(string entryId)
+        {
+
+            //Check if entry editor is already opened. If yes then focus on this entry editor.
+            //var openedDbEntryEditor = DbEntryEditors.FirstOrDefault(item => item.)
+            var dbEditor = ServiceLocator.Instance.GetService<EditorVM>().DbEditor;
+
+            var entryEditor = dbEditor.OpenEntryEditor(_edited, entryId);
+            entryEditor.CommitedAction = OnEntryCommited;
         }
 
         public void EditRepository(IRepository model)
@@ -95,44 +123,40 @@ namespace OpenBreed.Editor.VM.Database
             Editable = vm;
             Editable.PropertyChanged += Editable_PropertyChanged;
             UpdateTitle();
+
+            if (_newEntryCreator != null)
+            {
+                _newEntryCreator.Close();
+                _newEntryCreator = null;
+            }
         }
 
-        public string EditorName { get { return "Table Editor"; } }
+        public void SetModel(string modelName)
+        {
+            var repository = ServiceLocator.Instance.GetService<IUnitOfWork>().GetRepository(modelName);
 
-        public Action<string, string> EditEntryAction { get; set; }
+            if (repository == null)
+                throw new InvalidOperationException($"Repository with name '{modelName}' not found.");
+
+            EditRepository(repository);
+        }
+
+        public void SetNoModel()
+        {
+            if (Editable != null)
+                Editable.PropertyChanged -= Editable_PropertyChanged;
+
+            _edited = null;
+            Editable = null;
+
+            UpdateTitle();
+        }
+
+        #endregion Public Methods
 
         //public void OnStore()
         //{
         //    UpdateEntry(_editable, _edited);
-
-        //    //if (EditMode)
-        //    //    _repo.Update(_edited);
-        //    //else
-        //    //    _repo.Add(_edited);
-        //    //Done();
-        //}
-
-        public void EditEntity(string entryName)
-        {
-
-            //Check if entry editor is already opened. If yes then focus on this entry editor.
-            //var openedDbEntryEditor = DbEntryEditors.FirstOrDefault(item => item.)
-            var dbEditor = ServiceLocator.Instance.GetService<EditorVM>().DbEditor;
-
-            var entryEditor = dbEditor.OpenEntryEditor(_edited, entryName);
-            entryEditor.CommitedAction = OnEntryCommited;
-        }
-
-        private void OnEntryCommited(string entryId)
-        {
-            var entryVM = _editable.Entries.FirstOrDefault(item => item.Id == entryId);
-            var entry = _edited.Entries.FirstOrDefault(item => item.Id == entryId);
-
-            if (entryVM != null && entry != null)
-                entryVM.Load(entry);
-        }
-
-        #endregion Public Methods
 
         #region Protected Methods
 
@@ -166,6 +190,21 @@ namespace OpenBreed.Editor.VM.Database
         {
             //throw new NotImplementedException();
         }
+
+        //    //if (EditMode)
+        //    //    _repo.Update(_edited);
+        //    //else
+        //    //    _repo.Add(_edited);
+        //    //Done();
+        //}
+        private void OnEntryCommited(string entryId)
+        {
+            var entryVM = _editable.Entries.FirstOrDefault(item => item.Id == entryId);
+            var entry = _edited.Entries.FirstOrDefault(item => item.Id == entryId);
+
+            if (entryVM != null && entry != null)
+                entryVM.Load(entry);
+        }
         private void UpdateTitle()
         {
             if (Editable == null)
@@ -175,5 +214,6 @@ namespace OpenBreed.Editor.VM.Database
         }
 
         #endregion Private Methods
+
     }
 }

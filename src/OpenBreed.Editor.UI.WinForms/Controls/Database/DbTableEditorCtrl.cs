@@ -15,11 +15,16 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
 {
     public partial class DbTableEditorCtrl : UserControl
     {
+
         #region Private Fields
+
+        private DbTableNewEntryCreatorCtrl _newEntryCreatorCtrl;
 
         private DbTableEditorVM _vm;
 
         #endregion Private Fields
+
+        #region Public Constructors
 
         public DbTableEditorCtrl()
         {
@@ -27,37 +32,32 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
 
             DGV.AutoGenerateColumns = true;
             DGV.AutoSize = true;
+            DGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DGV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DGV.AllowUserToResizeRows = false;
             DGV.AllowUserToAddRows = false;
             DGV.RowHeadersVisible = false;
 
-            // Initialize and add a text box column.
-            var buttonColumn = new DataGridViewButtonColumn();
-            buttonColumn.HeaderText = "Data";
-            buttonColumn.UseColumnTextForButtonValue = true;
-            buttonColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            buttonColumn.Width = 60;
-            buttonColumn.Name = "Data";
-            buttonColumn.Text = "Open";
-            DGV.Columns.Add(buttonColumn);
-
-
-            DGV.CellContentClick += DGV_CellContentClick;
+            DGV.MouseClick += DGV_MouseClick;
         }
+
+        #endregion Public Constructors
+
+        #region Public Methods
 
         public void Initialize(DbTableEditorVM vm)
         {
             _vm = vm;
 
-            btnNew.Click += (s,a) => MessageBox.Show("Not implemented yet.");
-            btnClone.Click += (s, a) => MessageBox.Show("Not implemented yet.");
-            btnRemove.Click += (s, a) => MessageBox.Show("Not implemented yet.");
-
             _vm.PropertyChanged += _vm_PropertyChanged;
+            _vm.OpenNewEntryCreatorAction = OnOpenNewEntryCreator;
 
             OnEditableChanged(_vm.Editable);
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -71,6 +71,43 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
             }
         }
 
+        private void AddNewEntryCtrl(DbTableNewEntryCreatorVM vm)
+        {
+            _newEntryCreatorCtrl = new DbTableNewEntryCreatorCtrl();
+            _newEntryCreatorCtrl.Dock = DockStyle.Bottom;
+            this.Controls.Add(_newEntryCreatorCtrl);
+            _newEntryCreatorCtrl.Initialize(vm);
+        }
+
+        private void DGV_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                var menu = new ContextMenu();
+                menu.MenuItems.Add(new MenuItem("New", (s,a) => _vm.OpenNewEntryCreator()));
+
+                int rowUnderMouse = DGV.HitTest(e.X, e.Y).RowIndex;
+
+                if (rowUnderMouse >= 0)
+                {
+                    var item = DGV.Rows[rowUnderMouse].DataBoundItem as DbEntryVM ?? throw new InvalidOperationException();
+
+                    if (DGV.SelectedRows.Count < 2)
+                    {
+                        DGV.CurrentCell = DGV.Rows[rowUnderMouse].Cells[0];
+                        if (DGV.SelectedRows.Count == 0)
+                            DGV.CurrentRow.Selected = true;
+
+                        menu.MenuItems.Add(new MenuItem("Edit", (s, a) => _vm.EditEntry(item.Id)));
+                    }
+
+                    menu.MenuItems.Add(new MenuItem("Clone", (s, a) => MessageBox.Show("Not implemented yet.")));
+                    menu.MenuItems.Add(new MenuItem("Delete", (s, a) => MessageBox.Show("Not implemented yet.")));
+                }
+
+                menu.Show(DGV, new Point(e.X, e.Y));
+            }
+        }
         private void OnEditableChanged(DbTableVM dbTable)
         {
             if (dbTable == null)
@@ -79,17 +116,30 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
                 DGV.DataSource = dbTable.Entries;
         }
 
-        private void DGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void OnNewEntryCancel()
         {
-            var senderGrid = (DataGridView)sender;
-
-            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
-                e.RowIndex >= 0)
-            {
-                var item = senderGrid.Rows[e.RowIndex].DataBoundItem as DbEntryVM ?? throw new InvalidOperationException();
-
-                _vm.EditEntity(item.Id);
-            }
+            RemoveNewEntryCtrl();
         }
+
+        private void OnOpenNewEntryCreator(DbTableNewEntryCreatorVM vm)
+        {
+            if (_newEntryCreatorCtrl != null)
+                RemoveNewEntryCtrl();
+
+            vm.CloseAction = OnNewEntryCancel;
+
+            AddNewEntryCtrl(vm);
+        }
+
+        private void RemoveNewEntryCtrl()
+        {
+            if (_newEntryCreatorCtrl == null)
+                throw new InvalidOperationException();
+
+            this.Controls.Remove(_newEntryCreatorCtrl);
+            _newEntryCreatorCtrl = null;
+        }
+
+        #endregion Private Methods
     }
 }

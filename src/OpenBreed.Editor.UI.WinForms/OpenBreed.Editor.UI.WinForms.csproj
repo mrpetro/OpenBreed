@@ -82,11 +82,11 @@
     <Compile Include="Controls\Common\RefIdSelectorCtrl.Designer.cs">
       <DependentUpon>RefIdSelectorCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Database\DbTableNewEntryCtrl.cs">
+    <Compile Include="Controls\Database\DbTableNewEntryCreatorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Database\DbTableNewEntryCtrl.Designer.cs">
-      <DependentUpon>DbTableNewEntryCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Database\DbTableNewEntryCreatorCtrl.Designer.cs">
+      <DependentUpon>DbTableNewEntryCreatorCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Database\DbTableSelectorCtrl.cs">
       <SubType>UserControl</SubType>
@@ -393,6 +393,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Common\RefIdSelectorCtrl.resx">
       <DependentUpon>RefIdSelectorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Database\DbTableNewEntryCreatorCtrl.resx">
+      <DependentUpon>DbTableNewEntryCreatorCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Database\DbTableSelectorCtrl.resx">
       <DependentUpon>DbTableSelectorCtrl.cs</DependentUpon>
