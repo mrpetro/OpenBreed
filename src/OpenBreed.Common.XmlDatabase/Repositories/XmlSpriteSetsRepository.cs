@@ -10,50 +10,33 @@ using OpenBreed.Common.XmlDatabase.Items.Sprites;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
-    public class XmlSpriteSetsRepository : IRepository<ISpriteSetEntry>
+    public class XmlSpriteSetsRepository : XmlRepositoryBase, IRepository<ISpriteSetEntry>
     {
+
         #region Private Fields
 
         private readonly DatabaseSpriteSetTableDef _table;
-
-        private XmlDatabase _context;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public XmlSpriteSetsRepository(IUnitOfWork unitOfWork, XmlDatabase context)
+        public XmlSpriteSetsRepository(XmlDatabase context) : base(context)
         {
-            UnitOfWork = unitOfWork;
-            _context = context;
-
-            _table = _context.GetSpriteSetTable();
+            _table = context.GetSpriteSetTable();
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public string Name { get { return "Sprite sets"; } }
-
         public IEnumerable<IEntry> Entries { get { return _table.Items; } }
-
-        public IUnitOfWork UnitOfWork { get; }
+        public IEnumerable<Type> EntryTypes { get { yield return typeof(XmlSpriteSetEntry); } }
+        public string Name { get { return "Sprite sets"; } }
 
         #endregion Public Properties
 
         #region Public Methods
-
-        public IEntry New(string newId)
-        {
-            if (Find(newId) != null)
-                throw new Exception($"Entry with Id '{newId}' already exist.");
-
-            var newEntry = new SpriteSetDef();
-            newEntry.Id = newId;
-            _table.Items.Add(newEntry);
-            return newEntry;
-        }
 
         public void Add(ISpriteSetEntry entity)
         {
@@ -76,7 +59,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public ISpriteSetEntry GetNextTo(ISpriteSetEntry entry)
         {
-            var index = _table.Items.IndexOf((SpriteSetDef)entry);
+            var index = _table.Items.IndexOf((XmlSpriteSetEntry)entry);
 
             if (index < 0)
                 throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
@@ -91,7 +74,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public ISpriteSetEntry GetPreviousTo(ISpriteSetEntry entry)
         {
-            var index = _table.Items.IndexOf((SpriteSetDef)entry);
+            var index = _table.Items.IndexOf((XmlSpriteSetEntry)entry);
 
             if (index < 0)
                 throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
@@ -104,6 +87,16 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return null;
         }
 
+        public IEntry New(string newId, Type entryType = null)
+        {
+            if (Find(newId) != null)
+                throw new Exception($"Entry with Id '{newId}' already exist.");
+
+            var newEntry = new XmlSpriteSetEntry();
+            newEntry.Id = newId;
+            _table.Items.Add(newEntry);
+            return newEntry;
+        }
         public void Remove(ISpriteSetEntry entry)
         {
             throw new NotImplementedException();
@@ -111,11 +104,11 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public void Update(ISpriteSetEntry entry)
         {
-            var index = _table.Items.IndexOf((SpriteSetDef)entry);
+            var index = _table.Items.IndexOf((XmlSpriteSetEntry)entry);
             if (index < 0)
                 throw new InvalidOperationException($"{entry} not found in repository");
 
-            _table.Items[index] = (SpriteSetDef)entry;
+            _table.Items[index] = (XmlSpriteSetEntry)entry;
         }
 
         #endregion Public Methods

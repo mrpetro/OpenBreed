@@ -8,21 +8,17 @@ using System.Xml.Serialization;
 namespace OpenBreed.Common.XmlDatabase.Items.Sources
 {
     [Serializable]
-    public class EPFArchiveFileAssetDef : AssetDef, IEPFArchiveAssetEntry
+    public class XmlFileAssetEntry : XmlAssetEntry, IFileAssetEntry
     {
         [XmlAttribute]
-        public string EntryName { get; set; }
-
-        [XmlAttribute]
-        public string ArchivePath { get; set; }
+        public string FilePath { get; set; }
 
         public override IEntry Copy()
         {
-            return new EPFArchiveFileAssetDef()
+            return new XmlFileAssetEntry()
             {
                 Id = this.Id,
-                EntryName = this.EntryName,
-                ArchivePath = this.ArchivePath
+                FilePath = this.FilePath
             };
         }
     }

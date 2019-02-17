@@ -93,14 +93,14 @@ namespace OpenBreed.Common.XmlDatabase
 
         private void RegisterRepos()
         {
-            RegisterRepository(new XmlAssetsRepository(this, _context));
-            RegisterRepository(new XmlTileSetsRepository(this, _context));
-            RegisterRepository(new XmlSpriteSetsRepository(this, _context));
-            RegisterRepository(new XmlActionSetsRepository(this, _context));
-            RegisterRepository(new XmlImagesRepository(this, _context));
-            RegisterRepository(new XmlPalettesRepository(this, _context));
-            RegisterRepository(new XmlMapsRepository(this, _context));
-            RegisterRepository(new XmlSoundsRepository(this, _context));
+            RegisterRepository(new XmlAssetsRepository(_context));
+            RegisterRepository(new XmlTileSetsRepository(_context));
+            RegisterRepository(new XmlSpriteSetsRepository(_context));
+            RegisterRepository(new XmlActionSetsRepository(_context));
+            RegisterRepository(new XmlImagesRepository(_context));
+            RegisterRepository(new XmlPalettesRepository( _context));
+            RegisterRepository(new XmlMapsRepository(_context));
+            RegisterRepository(new XmlSoundsRepository(_context));
         }
 
         #endregion Private Methods

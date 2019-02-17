@@ -11,7 +11,7 @@ namespace OpenBreed.Common.XmlDatabase.Tables.Palettes
     public class DatabasePaletteTableDef : DatabaseTableDef
     {
         [XmlArray("Items"),
-        XmlArrayItem("Palette", typeof(PaletteDef))]
-        public readonly List<PaletteDef> Items = new List<PaletteDef>();
+        XmlArrayItem("Palette", typeof(XmlPaletteEntry))]
+        public readonly List<XmlPaletteEntry> Items = new List<XmlPaletteEntry>();
     }
 }

@@ -9,50 +9,33 @@ using OpenBreed.Common.XmlDatabase.Items.Images;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
-    public class XmlImagesRepository : IRepository<IImageEntry>
+    public class XmlImagesRepository : XmlRepositoryBase, IRepository<IImageEntry>
     {
+
         #region Private Fields
 
         private readonly DatabaseImageTableDef _table;
-
-        private XmlDatabase _context;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public XmlImagesRepository(IUnitOfWork unitOfWork, XmlDatabase context)
+        public XmlImagesRepository(XmlDatabase context) : base(context)
         {
-            UnitOfWork = unitOfWork;
-            _context = context;
-
-            _table = _context.GetImageTable();
+            _table = context.GetImageTable();
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public string Name { get { return "Images"; } }
-
         public IEnumerable<IEntry> Entries { get { return _table.Items; } }
-
-        public IUnitOfWork UnitOfWork { get; }
+        public IEnumerable<Type> EntryTypes { get { yield return typeof(XmlImageEntry); } }
+        public string Name { get { return "Images"; } }
 
         #endregion Public Properties
 
         #region Public Methods
-
-        public IEntry New(string newId)
-        {
-            if (Find(newId) != null)
-                throw new Exception($"Entry with Id '{newId}' already exist.");
-
-            var newEntry = new ImageDef();
-            newEntry.Id = newId;
-            _table.Items.Add(newEntry);
-            return newEntry;
-        }
 
         public void Add(IImageEntry entity)
         {
@@ -75,7 +58,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public IImageEntry GetNextTo(IImageEntry entry)
         {
-            var index = _table.Items.IndexOf((ImageDef)entry);
+            var index = _table.Items.IndexOf((XmlImageEntry)entry);
 
             if (index < 0)
                 throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
@@ -90,7 +73,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public IImageEntry GetPreviousTo(IImageEntry entry)
         {
-            var index = _table.Items.IndexOf((ImageDef)entry);
+            var index = _table.Items.IndexOf((XmlImageEntry)entry);
 
             if (index < 0)
                 throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
@@ -102,6 +85,17 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             else
                 return null;
         }
+
+        public IEntry New(string newId, Type entryType = null)
+        {
+            if (Find(newId) != null)
+                throw new Exception($"Entry with Id '{newId}' already exist.");
+
+            var newEntry = new XmlImageEntry();
+            newEntry.Id = newId;
+            _table.Items.Add(newEntry);
+            return newEntry;
+        }
         public void Remove(IImageEntry entry)
         {
             throw new NotImplementedException();
@@ -109,11 +103,11 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public void Update(IImageEntry entry)
         {
-            var index = _table.Items.IndexOf((ImageDef)entry);
+            var index = _table.Items.IndexOf((XmlImageEntry)entry);
             if (index < 0)
                 throw new InvalidOperationException($"{entry} not found in repository");
 
-            _table.Items[index] = (ImageDef)entry;
+            _table.Items[index] = (XmlImageEntry)entry;
         }
 
         #endregion Public Methods

@@ -11,7 +11,7 @@ namespace OpenBreed.Common.XmlDatabase.Tables.Images
     public class DatabaseSoundTableDef : DatabaseTableDef
     {
         [XmlArray("Items"),
-        XmlArrayItem("Sound", typeof(SoundDef))]
-        public readonly List<SoundDef> Items = new List<SoundDef>();
+        XmlArrayItem("Sound", typeof(XmlSoundEntry))]
+        public readonly List<XmlSoundEntry> Items = new List<XmlSoundEntry>();
     }
 }

@@ -14,48 +14,43 @@ using OpenBreed.Common.XmlDatabase.Items.Sources;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
-    public class XmlAssetsRepository : IRepository<IAssetEntry>
+    public class XmlAssetsRepository : XmlRepositoryBase, IRepository<IAssetEntry>
     {
+
         #region Private Fields
 
         private readonly DatabaseAssetTableDef _table;
-        private XmlDatabase _context;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public XmlAssetsRepository(IUnitOfWork unitOfWork, XmlDatabase context)
+        public XmlAssetsRepository(XmlDatabase context) : base(context)
         {
-            UnitOfWork = unitOfWork;
-            _context = context;
+            _table = context.GetAssetsTable();
 
-            _table = _context.GetAssetsTable();
+
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
+        public IEnumerable<IEntry> Entries { get { return _table.Items; } }
         public string Name { get { return "Assets"; } }
 
-        public IEnumerable<IEntry> Entries { get { return _table.Items; } }
-        public IUnitOfWork UnitOfWork { get; }
+        public IEnumerable<Type> EntryTypes
+        {
+            get
+            {
+                yield return typeof(XmlFileAssetEntry);
+                yield return typeof(XmlEPFArchiveFileAssetEntry);
+            }
+        }
 
         #endregion Public Properties
 
         #region Public Methods
-
-        public IEntry New(string newId)
-        {
-            if (Find(newId) != null)
-                throw new Exception($"Entry with Id '{newId}' already exist.");
-
-            var newEntry = new FileAssetDef();
-            newEntry.Id = newId;
-            _table.Items.Add(newEntry);
-            return newEntry;
-        }
 
         public void Add(IAssetEntry entity)
         {
@@ -78,7 +73,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public IAssetEntry GetNextTo(IAssetEntry entry)
         {
-            var index = _table.Items.IndexOf((AssetDef)entry);
+            var index = _table.Items.IndexOf((XmlAssetEntry)entry);
             if (index < 0)
                 throw new InvalidOperationException($"{entry} not found in repository");
 
@@ -92,7 +87,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public IAssetEntry GetPreviousTo(IAssetEntry entry)
         {
-            var index = _table.Items.IndexOf((AssetDef)entry);
+            var index = _table.Items.IndexOf((XmlAssetEntry)entry);
             if (index < 0)
                 throw new InvalidOperationException($"{entry} not found in repository");
 
@@ -104,6 +99,16 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return _table.Items[index];
         }
 
+        public IEntry New(string newId, Type entryType = null)
+        {
+            if (Find(newId) != null)
+                throw new Exception($"Entry with Id '{newId}' already exist.");
+
+            var newEntry = new XmlFileAssetEntry();
+            newEntry.Id = newId;
+            _table.Items.Add(newEntry);
+            return newEntry;
+        }
         public void Remove(IAssetEntry entry)
         {
             throw new NotImplementedException();
@@ -111,11 +116,11 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public void Update(IAssetEntry entry)
         {
-            var index = _table.Items.IndexOf((AssetDef)entry);
+            var index = _table.Items.IndexOf((XmlAssetEntry)entry);
             if (index < 0)
                 throw new InvalidOperationException($"{entry} not found in repository");
 
-            _table.Items[index] = (AssetDef)entry;
+            _table.Items[index] = (XmlAssetEntry)entry;
         }
 
         #endregion Public Methods

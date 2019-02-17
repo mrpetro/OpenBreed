@@ -11,7 +11,7 @@ namespace OpenBreed.Common.XmlDatabase.Tables.Maps
     public class DatabaseMapTableDef : DatabaseTableDef
     {
         [XmlArray("Items"),
-        XmlArrayItem("Map", typeof(MapDef))]
-        public readonly List<MapDef> Items = new List<MapDef>();
+        XmlArrayItem("Map", typeof(XmlMapEntry))]
+        public readonly List<XmlMapEntry> Items = new List<XmlMapEntry>();
     }
 }

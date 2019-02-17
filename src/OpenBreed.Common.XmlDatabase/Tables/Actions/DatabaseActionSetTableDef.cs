@@ -11,7 +11,7 @@ namespace OpenBreed.Common.XmlDatabase.Tables.Actions
     public class DatabaseActionSetTableDef : DatabaseTableDef
     {
         [XmlArray("Items"),
-        XmlArrayItem("ActionSet", typeof(ActionSetDef))]
-        public readonly List<ActionSetDef> Items = new List<ActionSetDef>();
+        XmlArrayItem("ActionSet", typeof(XmlActionSetEntry))]
+        public readonly List<XmlActionSetEntry> Items = new List<XmlActionSetEntry>();
     }
 }

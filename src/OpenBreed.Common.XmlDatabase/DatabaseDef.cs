@@ -20,6 +20,7 @@ using OpenBreed.Common.XmlDatabase.Tables.Palettes;
 namespace OpenBreed.Common.XmlDatabase
 {
     [Serializable]
+    [XmlRoot("Database")]
     public class DatabaseDef
     {
 

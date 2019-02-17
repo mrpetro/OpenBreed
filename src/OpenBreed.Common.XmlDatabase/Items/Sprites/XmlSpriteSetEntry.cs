@@ -1,5 +1,6 @@
-﻿using OpenBreed.Common.Formats;
-using OpenBreed.Common.Palettes;
+﻿using OpenBreed.Common.XmlDatabase.Items.Sources;
+using OpenBreed.Common.Formats;
+using OpenBreed.Common.Sprites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace OpenBreed.Common.XmlDatabase.Items.Palettes
+namespace OpenBreed.Common.XmlDatabase.Items.Sprites
 {
-    public class PaletteDef : DatabaseItemDef, IPaletteEntry
+    public class XmlSpriteSetEntry : XmlDbEntry, ISpriteSetEntry
     {
-
         #region Public Properties
-
-        public string AssetRef { get; set; }
 
         [XmlIgnore]
         public IFormatEntry Format { get; set; }
@@ -32,6 +30,8 @@ namespace OpenBreed.Common.XmlDatabase.Items.Palettes
                 Format = value;
             }
         }
+
+        public string AssetRef { get; set; }
 
         public override IEntry Copy()
         {

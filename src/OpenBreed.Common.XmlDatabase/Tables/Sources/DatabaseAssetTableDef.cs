@@ -11,8 +11,8 @@ namespace OpenBreed.Common.XmlDatabase.Tables.Sources
     public class DatabaseAssetTableDef : DatabaseTableDef
     {
         [XmlArray("Items"),
-        XmlArrayItem("FileAsset", typeof(FileAssetDef)),
-        XmlArrayItem("EPFArchiveFileAsset", typeof(EPFArchiveFileAssetDef))]
-        public readonly List<AssetDef> Items = new List<AssetDef>();
+        XmlArrayItem("FileAsset", typeof(XmlFileAssetEntry)),
+        XmlArrayItem("EPFArchiveFileAsset", typeof(XmlEPFArchiveFileAssetEntry))]
+        public readonly List<XmlAssetEntry> Items = new List<XmlAssetEntry>();
     }
 }

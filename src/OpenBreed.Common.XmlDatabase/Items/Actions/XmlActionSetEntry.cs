@@ -10,7 +10,7 @@ using OpenBreed.Common.Actions;
 namespace OpenBreed.Common.XmlDatabase.Items.Actions
 {
     [Serializable]
-    public class ActionSetDef : DatabaseItemDef, IActionSetEntry
+    public class XmlActionSetEntry : XmlDbEntry, IActionSetEntry
     {
         private List<IActionEntry> _actions = null;
         private List<ActionDef> _xmlActions = new List<ActionDef>();

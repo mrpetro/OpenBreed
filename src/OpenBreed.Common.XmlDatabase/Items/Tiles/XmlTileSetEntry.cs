@@ -1,6 +1,5 @@
-﻿using OpenBreed.Common.XmlDatabase.Items.Sources;
-using OpenBreed.Common.Formats;
-using OpenBreed.Common.Images;
+﻿using OpenBreed.Common.Formats;
+using OpenBreed.Common.Tiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace OpenBreed.Common.XmlDatabase.Items.Images
+namespace OpenBreed.Common.XmlDatabase.Items.Tiles
 {
     [Serializable]
-    public class ImageDef : DatabaseItemDef, IImageEntry
+    public class XmlTileSetEntry : XmlDbEntry, ITileSetEntry
     {
         #region Public Properties
 

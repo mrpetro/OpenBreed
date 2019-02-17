@@ -1,16 +1,13 @@
-﻿using OpenBreed.Common.XmlDatabase.Items.Sources;
-using OpenBreed.Common.Formats;
-using OpenBreed.Common.Sprites;
+﻿using OpenBreed.Common.Formats;
+using OpenBreed.Common.Sounds;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace OpenBreed.Common.XmlDatabase.Items.Sprites
+namespace OpenBreed.Common.XmlDatabase.Items.Sounds
 {
-    public class SpriteSetDef : DatabaseItemDef, ISpriteSetEntry
+    public class XmlSoundEntry : XmlDbEntry, ISoundEntry
     {
         #region Public Properties
 

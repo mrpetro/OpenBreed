@@ -10,49 +10,33 @@ using OpenBreed.Common.XmlDatabase.Items.Sounds;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
-    public class XmlSoundsRepository : IRepository<ISoundEntry>
+    public class XmlSoundsRepository : XmlRepositoryBase, IRepository<ISoundEntry>
     {
 
         #region Private Fields
 
         private readonly DatabaseSoundTableDef _table;
-        private XmlDatabase _context;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public XmlSoundsRepository(IUnitOfWork unitOfWork, XmlDatabase context)
+        public XmlSoundsRepository(XmlDatabase context) : base(context)
         {
-            UnitOfWork = unitOfWork;
-            _context = context;
-
-            _table = _context.GetSoundTable();
+            _table = context.GetSoundTable();
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public string Name { get { return "Sounds"; } }
-
         public IEnumerable<IEntry> Entries { get { return _table.Items; } }
-        public IUnitOfWork UnitOfWork { get; }
+        public IEnumerable<Type> EntryTypes { get { yield return typeof(XmlSoundEntry); } }
+        public string Name { get { return "Sounds"; } }
 
         #endregion Public Properties
 
         #region Public Methods
-
-        public IEntry New(string newId)
-        {
-            if (Find(newId) != null)
-                throw new Exception($"Entry with Id '{newId}' already exist.");
-
-            var newEntry = new SoundDef();
-            newEntry.Id = newId;
-            _table.Items.Add(newEntry);
-            return newEntry;
-        }
 
         public void Add(ISoundEntry entity)
         {
@@ -75,7 +59,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public ISoundEntry GetNextTo(ISoundEntry entry)
         {
-            var index = _table.Items.IndexOf((SoundDef)entry);
+            var index = _table.Items.IndexOf((XmlSoundEntry)entry);
 
             if (index < 0)
                 throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
@@ -90,7 +74,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public ISoundEntry GetPreviousTo(ISoundEntry entry)
         {
-            var index = _table.Items.IndexOf((SoundDef)entry);
+            var index = _table.Items.IndexOf((XmlSoundEntry)entry);
 
             if (index < 0)
                 throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
@@ -103,7 +87,16 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return null;
         }
 
+        public IEntry New(string newId, Type entryType = null)
+        {
+            if (Find(newId) != null)
+                throw new Exception($"Entry with Id '{newId}' already exist.");
 
+            var newEntry = new XmlSoundEntry();
+            newEntry.Id = newId;
+            _table.Items.Add(newEntry);
+            return newEntry;
+        }
         public void Remove(ISoundEntry entry)
         {
             throw new NotImplementedException();
@@ -111,11 +104,11 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public void Update(ISoundEntry entry)
         {
-            var index = _table.Items.IndexOf((SoundDef)entry);
+            var index = _table.Items.IndexOf((XmlSoundEntry)entry);
             if (index < 0)
                 throw new InvalidOperationException($"{entry} not found in repository");
 
-            _table.Items[index] = (SoundDef)entry;
+            _table.Items[index] = (XmlSoundEntry)entry;
         }
 
         #endregion Public Methods

@@ -11,7 +11,7 @@ namespace OpenBreed.Common.XmlDatabase.Tables.Images
     public class DatabaseImageTableDef : DatabaseTableDef
     {
         [XmlArray("Items"),
-        XmlArrayItem("Image", typeof(ImageDef))]
-        public readonly List<ImageDef> Items = new List<ImageDef>();
+        XmlArrayItem("Image", typeof(XmlImageEntry))]
+        public readonly List<XmlImageEntry> Items = new List<XmlImageEntry>();
     }
 }

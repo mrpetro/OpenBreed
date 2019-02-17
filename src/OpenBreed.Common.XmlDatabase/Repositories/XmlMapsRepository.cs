@@ -9,51 +9,33 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
-    public class XmlMapsRepository : IRepository<IMapEntry>
+    public class XmlMapsRepository : XmlRepositoryBase, IRepository<IMapEntry>
     {
 
         #region Private Fields
 
         private readonly DatabaseMapTableDef _table;
 
-        private XmlDatabase _context;
-
         #endregion Private Fields
 
         #region Public Constructors
 
-        public XmlMapsRepository(IUnitOfWork unitOfWork, XmlDatabase context)
+        public XmlMapsRepository(XmlDatabase context) : base(context)
         {
-            UnitOfWork = unitOfWork;
-            _context = context;
-
-            _table = _context.GetMapsTable();
+            _table = context.GetMapsTable();
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
+        public IEnumerable<IEntry> Entries { get { return _table.Items; } }
         public string Name { get { return "Maps"; } }
 
-        public IEnumerable<IEntry> Entries { get { return _table.Items; } }
-
-        public IUnitOfWork UnitOfWork { get; }
-
+        public IEnumerable<Type> EntryTypes { get { yield return typeof(XmlMapEntry); } }
         #endregion Public Properties
 
         #region Public Methods
-
-        public IEntry New(string newId)
-        {
-            if (Find(newId) != null)
-                throw new Exception($"Entry with Id '{newId}' already exist.");
-
-            var newEntry = new MapDef();
-            newEntry.Id = newId;
-            _table.Items.Add(newEntry);
-            return newEntry;
-        }
 
         public void Add(IMapEntry entity)
         {
@@ -76,7 +58,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public IMapEntry GetNextTo(IMapEntry entry)
         {
-            var index = _table.Items.IndexOf((MapDef)entry);
+            var index = _table.Items.IndexOf((XmlMapEntry)entry);
 
             if (index < 0)
                 throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
@@ -91,7 +73,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public IMapEntry GetPreviousTo(IMapEntry entry)
         {
-            var index = _table.Items.IndexOf((MapDef)entry);
+            var index = _table.Items.IndexOf((XmlMapEntry)entry);
 
             if (index < 0)
                 throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
@@ -103,6 +85,17 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             else
                 return null;
         }
+
+        public IEntry New(string newId, Type entryType = null)
+        {
+            if (Find(newId) != null)
+                throw new Exception($"Entry with Id '{newId}' already exist.");
+
+            var newEntry = new XmlMapEntry();
+            newEntry.Id = newId;
+            _table.Items.Add(newEntry);
+            return newEntry;
+        }
         public void Remove(IMapEntry entry)
         {
             throw new NotImplementedException();
@@ -110,11 +103,11 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public void Update(IMapEntry entry)
         {
-            var index = _table.Items.IndexOf((MapDef)entry);
+            var index = _table.Items.IndexOf((XmlMapEntry)entry);
             if (index < 0)
                 throw new InvalidOperationException($"{entry} not found in repository");
 
-            _table.Items[index] = (MapDef)entry;
+            _table.Items[index] = (XmlMapEntry)entry;
         }
 
         #endregion Public Methods

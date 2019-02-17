@@ -9,51 +9,33 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
-    public class XmlActionSetsRepository : IRepository<IActionSetEntry>
+    public class XmlActionSetsRepository : XmlRepositoryBase, IRepository<IActionSetEntry>
     {
 
         #region Private Fields
 
         private readonly DatabaseActionSetTableDef _table;
 
-        private XmlDatabase _context;
-
         #endregion Private Fields
 
         #region Public Constructors
 
-        public XmlActionSetsRepository(IUnitOfWork unitOfWork, XmlDatabase context)
+        public XmlActionSetsRepository(XmlDatabase context) : base(context)
         {
-            UnitOfWork = unitOfWork;
-            _context = context;
-
-            _table = _context.GetActionSetTable();
+            _table = context.GetActionSetTable();
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public string Name { get { return "Action sets"; } }
-
         public IEnumerable<IEntry> Entries { get { return _table.Items; } }
-
-        public IUnitOfWork UnitOfWork { get; }
+        public IEnumerable<Type> EntryTypes { get { yield return typeof(XmlActionSetEntry); } }
+        public string Name { get { return "Action sets"; } }
 
         #endregion Public Properties
 
         #region Public Methods
-
-        public IEntry New(string newId)
-        {
-            if (Find(newId) != null)
-                throw new Exception($"Entry with Id '{newId}' already exist.");
-
-            var newEntry = new ActionSetDef();
-            newEntry.Id = newId;
-            _table.Items.Add(newEntry);
-            return newEntry;
-        }
 
         public void Add(IActionSetEntry entity)
         {
@@ -76,7 +58,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public IActionSetEntry GetNextTo(IActionSetEntry entry)
         {
-            var index = _table.Items.IndexOf((ActionSetDef)entry);
+            var index = _table.Items.IndexOf((XmlActionSetEntry)entry);
 
             if (index < 0)
                 throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
@@ -91,7 +73,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public IActionSetEntry GetPreviousTo(IActionSetEntry entry)
         {
-            var index = _table.Items.IndexOf((ActionSetDef)entry);
+            var index = _table.Items.IndexOf((XmlActionSetEntry)entry);
 
             if (index < 0)
                 throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
@@ -103,6 +85,17 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             else
                 return null;
         }
+
+        public IEntry New(string newId, Type entryType = null)
+        {
+            if (Find(newId) != null)
+                throw new Exception($"Entry with Id '{newId}' already exist.");
+
+            var newEntry = new XmlActionSetEntry();
+            newEntry.Id = newId;
+            _table.Items.Add(newEntry);
+            return newEntry;
+        }
         public void Remove(IActionSetEntry entry)
         {
             throw new NotImplementedException();
@@ -110,11 +103,11 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public void Update(IActionSetEntry entry)
         {
-            var index = _table.Items.IndexOf((ActionSetDef)entry);
+            var index = _table.Items.IndexOf((XmlActionSetEntry)entry);
             if (index < 0)
                 throw new InvalidOperationException($"{entry} not found in repository");
 
-            _table.Items[index] = (ActionSetDef)entry;
+            _table.Items[index] = (XmlActionSetEntry)entry;
         }
 
         #endregion Public Methods

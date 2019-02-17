@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace OpenBreed.Common.XmlDatabase.Items.Sources
 {
     [Serializable]
-    public abstract class AssetDef : DatabaseItemDef, IAssetEntry
+    public abstract class XmlAssetEntry : XmlDbEntry, IAssetEntry
     {
 
     }

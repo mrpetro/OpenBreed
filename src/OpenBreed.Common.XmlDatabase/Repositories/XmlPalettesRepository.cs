@@ -12,24 +12,20 @@ using OpenBreed.Common.XmlDatabase.Items.Palettes;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
-    public class XmlPalettesRepository : IRepository<IPaletteEntry>
+    public class XmlPalettesRepository : XmlRepositoryBase, IRepository<IPaletteEntry>
     {
+
         #region Private Fields
 
         private readonly DatabasePaletteTableDef _table;
-
-        private XmlDatabase _context;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public XmlPalettesRepository(IUnitOfWork unitOfWork, XmlDatabase context)
+        public XmlPalettesRepository(XmlDatabase context) : base(context)
         {
-            UnitOfWork = unitOfWork;
-            _context = context;
-
-            _table = _context.GetPaletteTable();
+            _table = context.GetPaletteTable();
         }
 
         #endregion Public Constructors
@@ -37,25 +33,12 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
         #region Public Properties
 
         public IEnumerable<IEntry> Entries { get { return _table.Items; } }
-
-        public IUnitOfWork UnitOfWork { get; }
-
+        public IEnumerable<Type> EntryTypes { get { yield return typeof(XmlPaletteEntry); } }
         public string Name { get { return "Palettes"; } }
 
         #endregion Public Properties
 
         #region Public Methods
-
-        public IEntry New(string newId)
-        {
-            if (Find(newId) != null)
-                throw new Exception($"Entry with Id '{newId}' already exist.");
-
-            var newEntry = new PaletteDef();
-            newEntry.Id = newId;
-            _table.Items.Add(newEntry);
-            return newEntry;
-        }
 
         public void Add(IPaletteEntry entity)
         {
@@ -78,7 +61,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public IPaletteEntry GetNextTo(IPaletteEntry entry)
         {
-            var index = _table.Items.IndexOf((PaletteDef)entry);
+            var index = _table.Items.IndexOf((XmlPaletteEntry)entry);
 
             if (index < 0)
                 throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
@@ -93,7 +76,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public IPaletteEntry GetPreviousTo(IPaletteEntry entry)
         {
-            var index = _table.Items.IndexOf((PaletteDef)entry);
+            var index = _table.Items.IndexOf((XmlPaletteEntry)entry);
 
             if (index < 0)
                 throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
@@ -106,6 +89,16 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return null;
         }
 
+        public IEntry New(string newId, Type entryType = null)
+        {
+            if (Find(newId) != null)
+                throw new Exception($"Entry with Id '{newId}' already exist.");
+
+            var newEntry = new XmlPaletteEntry();
+            newEntry.Id = newId;
+            _table.Items.Add(newEntry);
+            return newEntry;
+        }
         public void Remove(IPaletteEntry entry)
         {
             throw new NotImplementedException();
@@ -113,11 +106,11 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public void Update(IPaletteEntry entry)
         {
-            var index = _table.Items.IndexOf((PaletteDef)entry);
+            var index = _table.Items.IndexOf((XmlPaletteEntry)entry);
             if (index < 0)
                 throw new InvalidOperationException($"{entry} not found in repository");
 
-            _table.Items[index] = (PaletteDef)entry;
+            _table.Items[index] = (XmlPaletteEntry)entry;
         }
 
         #endregion Public Methods

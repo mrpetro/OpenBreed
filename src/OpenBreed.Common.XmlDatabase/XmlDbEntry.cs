@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Common.XmlDatabase
 {
-    public abstract class DatabaseItemDef : IEntry
+    public abstract class XmlDbEntry : IEntry
     {
         #region Public Properties
 

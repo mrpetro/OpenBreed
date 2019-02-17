@@ -10,24 +10,20 @@ using OpenBreed.Common.XmlDatabase.Items.Tiles;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
-    public class XmlTileSetsRepository : IRepository<ITileSetEntry>
+    public class XmlTileSetsRepository : XmlRepositoryBase, IRepository<ITileSetEntry>
     {
 
         #region Private Fields
 
         private readonly DatabaseTileSetTableDef _table;
-        private XmlDatabase _context;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public XmlTileSetsRepository(IUnitOfWork unitOfWork, XmlDatabase context)
+        public XmlTileSetsRepository(XmlDatabase context) : base(context)
         {
-            UnitOfWork = unitOfWork;
-            _context = context;
-
-            _table = _context.GetTileSetTable();
+            _table = context.GetTileSetTable();
         }
 
         #endregion Public Constructors
@@ -35,8 +31,8 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
         #region Public Properties
 
         public IEnumerable<IEntry> Entries { get { return _table.Items; } }
+        public IEnumerable<Type> EntryTypes { get { yield return typeof(XmlTileSetEntry); } }
         public string Name { get { return "Tile sets"; } }
-        public IUnitOfWork UnitOfWork { get; }
 
         #endregion Public Properties
 
@@ -63,7 +59,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public ITileSetEntry GetNextTo(ITileSetEntry entry)
         {
-            var index = _table.Items.IndexOf((TileSetDef)entry);
+            var index = _table.Items.IndexOf((XmlTileSetEntry)entry);
 
             if (index < 0)
                 throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
@@ -78,7 +74,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public ITileSetEntry GetPreviousTo(ITileSetEntry entry)
         {
-            var index = _table.Items.IndexOf((TileSetDef)entry);
+            var index = _table.Items.IndexOf((XmlTileSetEntry)entry);
 
             if (index < 0)
                 throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
@@ -91,12 +87,12 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return null;
         }
 
-        public IEntry New(string newId)
+        public IEntry New(string newId, Type entryType = null)
         {
             if (Find(newId) != null)
                 throw new Exception($"Entry with Id '{newId}' already exist.");
 
-            var newEntry = new TileSetDef();
+            var newEntry = new XmlTileSetEntry();
             newEntry.Id = newId;
             _table.Items.Add(newEntry);
             return newEntry;
@@ -109,11 +105,11 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public void Update(ITileSetEntry entry)
         {
-            var index = _table.Items.IndexOf((TileSetDef)entry);
+            var index = _table.Items.IndexOf((XmlTileSetEntry)entry);
             if (index < 0)
                 throw new InvalidOperationException($"{entry} not found in repository");
 
-            _table.Items[index] = (TileSetDef)entry;
+            _table.Items[index] = (XmlTileSetEntry)entry;
         }
 
         #endregion Public Methods

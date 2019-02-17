@@ -1,13 +1,17 @@
-﻿using OpenBreed.Common.Formats;
-using OpenBreed.Common.Sounds;
+﻿using OpenBreed.Common.XmlDatabase.Items.Sources;
+using OpenBreed.Common.Formats;
+using OpenBreed.Common.Images;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace OpenBreed.Common.XmlDatabase.Items.Sounds
+namespace OpenBreed.Common.XmlDatabase.Items.Images
 {
-    public class SoundDef : DatabaseItemDef, ISoundEntry
+    [Serializable]
+    public class XmlImageEntry : XmlDbEntry, IImageEntry
     {
         #region Public Properties
 

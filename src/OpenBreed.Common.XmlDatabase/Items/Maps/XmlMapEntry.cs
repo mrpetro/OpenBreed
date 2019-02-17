@@ -10,7 +10,7 @@ using System.Xml.Serialization;
 namespace OpenBreed.Common.XmlDatabase.Items.Maps
 {
     [Serializable]
-    public class MapDef : DatabaseItemDef, IMapEntry
+    public class XmlMapEntry : XmlDbEntry, IMapEntry
     {
         #region Public Properties
 
