@@ -75,7 +75,7 @@ namespace OpenBreed.Editor.VM.Database
             var openFileDialog = ServiceLocator.Instance.GetService<IDialogProvider>().OpenFileDialog();
             openFileDialog.Title = "Select an Open Breed Editor Database file to open...";
             openFileDialog.Filter = "Open Breed Editor Database files (*.xml)|*.xml|All Files (*.*)|*.*";
-            openFileDialog.InitialDirectory = DatabaseDef.DefaultDirectoryPath;
+            openFileDialog.InitialDirectory = XmlDatabase.DefaultDirectoryPath;
             openFileDialog.Multiselect = false;
 
             var answer = openFileDialog.Show();
@@ -88,7 +88,7 @@ namespace OpenBreed.Editor.VM.Database
             if (!CheckCloseCurrentDatabase(dbEditor, databaseFilePath))
                 return false;
 
-            var unitOfWork = XmlDatabase.Open(databaseFilePath).CreateUnitOfWork();
+            var unitOfWork = XmlDatabaseMan.Open(databaseFilePath).CreateUnitOfWork();
             dbEditor.EditModel(unitOfWork);
             return true;
         }

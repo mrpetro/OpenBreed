@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Editor.VM.Base;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace OpenBreed.Editor.VM.Database
         #region Private Fields
 
         private bool _createEnabled;
+        private EntryTypeVM _entryType;
         private string _newId;
 
         #endregion Private Fields
@@ -21,6 +23,8 @@ namespace OpenBreed.Editor.VM.Database
 
         internal DbTableNewEntryCreatorVM()
         {
+            EntryTypes = new BindingList<EntryTypeVM>();
+
             PropertyChanged += This_PropertyChanged;
         }
 
@@ -30,12 +34,22 @@ namespace OpenBreed.Editor.VM.Database
 
         public Action CloseAction { get; set; }
 
+        public Func<string, bool> ValidateNewIdFunc { get; set; }
+
         public Action CreateAction { get; set; }
 
         public bool CreateEnabled
         {
             get { return _createEnabled; }
             set { SetProperty(ref _createEnabled, value); }
+        }
+
+        public BindingList<EntryTypeVM> EntryTypes { get; }
+
+        public EntryTypeVM EntryType
+        {
+            get { return _entryType; }
+            set { SetProperty(ref _entryType, value); }
         }
 
         public string NewId
@@ -76,9 +90,10 @@ namespace OpenBreed.Editor.VM.Database
 
         private bool ValidateNewId()
         {
-            return !string.IsNullOrWhiteSpace(NewId);
+            return ValidateNewIdFunc.Invoke(NewId);
         }
 
         #endregion Private Methods
+
     }
 }

@@ -116,9 +116,10 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
                 DGV.DataSource = dbTable.Entries;
         }
 
-        private void OnNewEntryCancel()
+        private void OnCloseNewEntryCreator()
         {
-            RemoveNewEntryCtrl();
+            if (_newEntryCreatorCtrl != null)
+                RemoveNewEntryCtrl();
         }
 
         private void OnOpenNewEntryCreator(DbTableNewEntryCreatorVM vm)
@@ -126,7 +127,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
             if (_newEntryCreatorCtrl != null)
                 RemoveNewEntryCtrl();
 
-            vm.CloseAction = OnNewEntryCancel;
+            vm.CloseAction = OnCloseNewEntryCreator;
 
             AddNewEntryCtrl(vm);
         }

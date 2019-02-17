@@ -34,12 +34,15 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
         {
             _vm = vm ?? throw new ArgumentNullException(nameof(DbTableNewEntryCreatorVM));
 
-            tbxId.DataBindings.Add(nameof(tbxId.Text), _vm, nameof(_vm.NewId), false, DataSourceUpdateMode.OnPropertyChanged);
+            tbxEntryId.DataBindings.Add(nameof(tbxEntryId.Text), _vm, nameof(_vm.NewId), false, DataSourceUpdateMode.OnPropertyChanged);
+            cbxEntryType.DataSource = _vm.EntryTypes;
+            cbxEntryType.DisplayMember = "Name";
+            cbxEntryType.DataBindings.Add(nameof(cbxEntryType.SelectedItem), _vm, nameof(_vm.EntryType), false, DataSourceUpdateMode.OnPropertyChanged);
             btnCreate.DataBindings.Add(nameof(btnCreate.Enabled), _vm, nameof(_vm.CreateEnabled), false, DataSourceUpdateMode.OnPropertyChanged);
             btnCreate.Click += (s, a) => _vm.Create();
             btnCancel.Click += (s, a) => _vm.Close();
 
-            tbxId.Focus();
+            tbxEntryId.Focus();
         }
 
         #endregion Public Methods

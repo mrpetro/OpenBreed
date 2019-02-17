@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.XmlDatabase;
-using OpenBreed.Common.XmlDatabase.Items.Sources;
+using OpenBreed.Common.XmlDatabase.Items.Assets;
 using OpenBreed.Common.Assets;
 using System;
 using System.Collections.Generic;

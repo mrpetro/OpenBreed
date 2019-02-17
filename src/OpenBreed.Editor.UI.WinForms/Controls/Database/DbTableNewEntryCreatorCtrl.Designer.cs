@@ -30,7 +30,8 @@
         {
             this.btnCreate = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.tbxId = new System.Windows.Forms.TextBox();
+            this.tbxEntryId = new System.Windows.Forms.TextBox();
+            this.cbxEntryType = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnCreate
@@ -53,20 +54,31 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // tbxId
+            // tbxEntryId
             // 
-            this.tbxId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbxEntryId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbxId.Location = new System.Drawing.Point(3, 4);
-            this.tbxId.Name = "tbxId";
-            this.tbxId.Size = new System.Drawing.Size(243, 20);
-            this.tbxId.TabIndex = 3;
+            this.tbxEntryId.Location = new System.Drawing.Point(3, 4);
+            this.tbxEntryId.Name = "tbxEntryId";
+            this.tbxEntryId.Size = new System.Drawing.Size(145, 20);
+            this.tbxEntryId.TabIndex = 3;
+            // 
+            // cbxEntryType
+            // 
+            this.cbxEntryType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxEntryType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxEntryType.FormattingEnabled = true;
+            this.cbxEntryType.Location = new System.Drawing.Point(154, 4);
+            this.cbxEntryType.Name = "cbxEntryType";
+            this.cbxEntryType.Size = new System.Drawing.Size(92, 21);
+            this.cbxEntryType.TabIndex = 4;
             // 
             // DbTableNewEntryCreatorCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tbxId);
+            this.Controls.Add(this.cbxEntryType);
+            this.Controls.Add(this.tbxEntryId);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnCreate);
             this.Name = "DbTableNewEntryCreatorCtrl";
@@ -80,6 +92,7 @@
 
         private System.Windows.Forms.Button btnCreate;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.TextBox tbxId;
+        private System.Windows.Forms.TextBox tbxEntryId;
+        private System.Windows.Forms.ComboBox cbxEntryType;
     }
 }

@@ -99,6 +99,7 @@
     <Compile Include="Database\Entries\DbTileSetEntryVM.cs" />
     <Compile Include="Database\Entries\DbActionSetEntryVM.cs" />
     <Compile Include="Database\Entries\DbAssetEntryVM.cs" />
+    <Compile Include="Database\EntryTypeVM.cs" />
     <Compile Include="Database\Tables\DbTableVM.cs" />
     <Compile Include="Database\Tables\DatabaseImageTableVM.cs" />
     <Compile Include="Database\Tables\DatabaseMapTableVM.cs" />

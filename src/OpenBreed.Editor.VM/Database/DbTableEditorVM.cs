@@ -15,8 +15,6 @@ namespace OpenBreed.Editor.VM.Database
     {
         private DbTableNewEntryCreatorVM _newEntryCreator;
 
-        //public MyIcommand CancelCommand { get; private set; }
-
         #region Private Fields
 
         private DbEntryVM _currentItem;
@@ -30,13 +28,10 @@ namespace OpenBreed.Editor.VM.Database
 
         internal DbTableEditorVM()
         {
-            //Items = new BindingList<Items.DbEntryVM>();
-            //Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
         }
 
         #endregion Internal Constructors
 
-        //public BindingList<DbEntryVM> Items { get; }
 
 
         #region Public Properties
@@ -81,16 +76,36 @@ namespace OpenBreed.Editor.VM.Database
         {
             _newEntryCreator = new DbTableNewEntryCreatorVM();
             _newEntryCreator.CreateAction = OnNewEntryCreate;
+            _newEntryCreator.ValidateNewIdFunc = OnValidateNewId;
+
+            _edited.EntryTypes.ForEach(item => _newEntryCreator.EntryTypes.Add(new EntryTypeVM(item)));
+
+            _newEntryCreator.EntryType = _newEntryCreator.EntryTypes.FirstOrDefault();
             _newEntryCreator.NewId = GetUniqueId();
             OpenNewEntryCreatorAction?.Invoke(_newEntryCreator);
+        }
+
+        /// <summary>
+        /// This validation function will check if entry id is unique in repository and its not empty
+        /// </summary>
+        /// <param name="id">Id to validate</param>
+        /// <returns>true if given id is valid, false otherwise</returns>
+        private bool OnValidateNewId(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+                return false;
+
+            return !_edited.Entries.Any(item => item.Id == id);
         }
 
         private void OnNewEntryCreate()
         {
             var newEntryId = _newEntryCreator.NewId;
+            var newEntryType = _newEntryCreator.EntryType.Type;
+
             _newEntryCreator.Close();
 
-            var entry = _edited.New(newEntryId);
+            var entry = _edited.New(newEntryId, newEntryType);
 
             var dbEntryFactory = ServiceLocator.Instance.GetService<DbEntryFactory>();
             var dbEntry = dbEntryFactory.Create(entry);
