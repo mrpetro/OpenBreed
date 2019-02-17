@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace OpenBreed.Common.XmlDatabase.Items.Sources
+namespace OpenBreed.Common.XmlDatabase.Items.Assets
 {
     [Serializable]
     public abstract class XmlAssetEntry : XmlDbEntry, IAssetEntry

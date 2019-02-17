@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.XmlDatabase.Items.Sources;
+﻿using OpenBreed.Common.XmlDatabase.Items.Assets;
 using OpenBreed.Common.Formats;
 using OpenBreed.Common.Sprites;
 using System;
@@ -7,9 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using System.ComponentModel;
 
 namespace OpenBreed.Common.XmlDatabase.Items.Sprites
 {
+    [Serializable]
+    [Description("Sprite set"), Category("Appearance")]
     public class XmlSpriteSetEntry : XmlDbEntry, ISpriteSetEntry
     {
         #region Public Properties
@@ -18,11 +21,11 @@ namespace OpenBreed.Common.XmlDatabase.Items.Sprites
         public IFormatEntry Format { get; set; }
 
         [XmlElement("Format")]
-        public FormatDef FormatDef
+        public XmlFormatEntry FormatDef
         {
             get
             {
-                return (FormatDef)Format;
+                return (XmlFormatEntry)Format;
             }
 
             set

@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.XmlDatabase.Items.Sources;
+﻿using OpenBreed.Common.XmlDatabase.Items.Assets;
 using OpenBreed.Common.Formats;
 using OpenBreed.Common.Images;
 using System;
@@ -7,10 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using System.ComponentModel;
 
 namespace OpenBreed.Common.XmlDatabase.Items.Images
 {
     [Serializable]
+    [Description("Image"), Category("Appearance")]
     public class XmlImageEntry : XmlDbEntry, IImageEntry
     {
         #region Public Properties
@@ -19,11 +21,11 @@ namespace OpenBreed.Common.XmlDatabase.Items.Images
         public IFormatEntry Format { get; set; }
 
         [XmlElement("Format")]
-        public FormatDef FormatDef
+        public XmlFormatEntry FormatDef
         {
             get
             {
-                return (FormatDef)Format;
+                return (XmlFormatEntry)Format;
             }
 
             set

@@ -21,7 +21,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Constructors
 
-        public XmlSoundsRepository(XmlDatabase context) : base(context)
+        public XmlSoundsRepository(XmlDatabaseMan context) : base(context)
         {
             _table = context.GetSoundTable();
         }
@@ -92,7 +92,11 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             if (Find(newId) != null)
                 throw new Exception($"Entry with Id '{newId}' already exist.");
 
-            var newEntry = new XmlSoundEntry();
+            if (entryType == null)
+                entryType = EntryTypes.FirstOrDefault();
+
+            var newEntry = Create(entryType) as XmlSoundEntry;
+
             newEntry.Id = newId;
             _table.Items.Add(newEntry);
             return newEntry;

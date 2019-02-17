@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Common.XmlDatabase
 {
-    public class FormatParameterDef
+    public class XmlFormatParameter
     {
         [XmlAttribute]
         public string Name { get; set; }

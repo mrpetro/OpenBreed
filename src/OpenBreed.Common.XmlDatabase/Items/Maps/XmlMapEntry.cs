@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.XmlDatabase.Items.Sources;
+﻿using OpenBreed.Common.XmlDatabase.Items.Assets;
 using OpenBreed.Common.Formats;
 using OpenBreed.Common.Maps;
 using System;
@@ -6,10 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
+using System.ComponentModel;
 
 namespace OpenBreed.Common.XmlDatabase.Items.Maps
 {
     [Serializable]
+    [Description("Map"), Category("Appearance")]
     public class XmlMapEntry : XmlDbEntry, IMapEntry
     {
         #region Public Properties
@@ -18,11 +20,11 @@ namespace OpenBreed.Common.XmlDatabase.Items.Maps
         public IFormatEntry Format { get; set; }
 
         [XmlElement("Format")]
-        public FormatDef FormatDef
+        public XmlFormatEntry FormatDef
         {
             get
             {
-                return (FormatDef)Format;
+                return (XmlFormatEntry)Format;
             }
 
             set

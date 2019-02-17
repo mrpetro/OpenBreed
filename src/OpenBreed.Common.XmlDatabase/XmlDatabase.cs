@@ -1,165 +1,68 @@
-﻿using OpenBreed.Common.XmlDatabase;
-using OpenBreed.Common.XmlDatabase.Items.Sources;
-using OpenBreed.Common.XmlDatabase.Tables.Images;
-using OpenBreed.Common.XmlDatabase.Tables.Maps;
-using OpenBreed.Common.XmlDatabase.Tables.Palettes;
-using OpenBreed.Common.XmlDatabase.Tables.Actions;
-using OpenBreed.Common.XmlDatabase.Tables.Sources;
-using OpenBreed.Common.XmlDatabase.Tables.Sprites;
-using OpenBreed.Common.XmlDatabase.Tables.Tiles;
-using OpenBreed.Common.Formats;
-using OpenBreed.Common.Assets;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using System.Xml.Serialization;
+using OpenBreed.Common;
+using OpenBreed.Common.XmlDatabase.Resources;
+using OpenBreed.Common.XmlDatabase.Tables.Sources;
+using OpenBreed.Common.XmlDatabase.Tables;
+using OpenBreed.Common.XmlDatabase.Items.Images;
+using OpenBreed.Common.XmlDatabase.Items.Maps;
+using OpenBreed.Common.XmlDatabase.Tables.Images;
+using OpenBreed.Common.XmlDatabase.Tables.Maps;
+using OpenBreed.Common.XmlDatabase.Tables.Actions;
+using OpenBreed.Common.XmlDatabase.Tables.Tiles;
+using OpenBreed.Common.XmlDatabase.Tables.Sprites;
+using OpenBreed.Common.XmlDatabase.Tables.Palettes;
 
 namespace OpenBreed.Common.XmlDatabase
 {
-
-
-    public class XmlDatabase : IDatabase
+    [Serializable]
+    [XmlRoot("Database")]
+    public class XmlDatabase
     {
 
-        #region Private Constructors
+        #region Public Fields
 
-        private XmlDatabase(string xmlFilePath, DatabaseMode mode)
-        {
-            XmlFilePath = xmlFilePath;
-            Mode = mode;
+        public const string DEFAULT_DATABASE_DIR_NAME = "Defaults";
 
-            if (Mode == DatabaseMode.Create)
-                Data = new DatabaseDef();
-            else
-                Data = DatabaseDef.Load(XmlFilePath);
-        }
+        [XmlArray("Tables"),
+        XmlArrayItem("Assets", typeof(DatabaseAssetTableDef)),
+        XmlArrayItem("Maps", typeof(DatabaseMapTableDef)),
+        XmlArrayItem("Palettes", typeof(DatabasePaletteTableDef)),
+        XmlArrayItem("ActionSets", typeof(DatabaseActionSetTableDef)),
+        XmlArrayItem("TileSets", typeof(DatabaseTileSetTableDef)),
+        XmlArrayItem("SpriteSets", typeof(DatabaseSpriteSetTableDef)),
+        XmlArrayItem("Sounds", typeof(DatabaseSoundTableDef)),
+        XmlArrayItem("Images", typeof(DatabaseImageTableDef))]
+        public readonly List<DatabaseTableDef> Tables = new List<DatabaseTableDef>();
 
-        #endregion Private Constructors
+        #endregion Public Fields
 
         #region Public Properties
 
-        public DatabaseMode Mode { get; }
-
-        public string Name { get { return XmlFilePath; } }
-
-        public string XmlFilePath { get; }
+        public static string DefaultDirectoryPath
+        {
+            get { return Path.Combine(ProgramTools.AppDir, DEFAULT_DATABASE_DIR_NAME); }
+        }
 
         #endregion Public Properties
 
-        #region Internal Properties
-
-        internal DatabaseDef Data { get; }
-
-        #endregion Internal Properties
-
         #region Public Methods
 
-        public static XmlDatabase Open(string xmlFilePath)
+        public static XmlDatabase Load(string filePath)
         {
-            return new XmlDatabase(xmlFilePath, DatabaseMode.Read);
-        }
-        public IUnitOfWork CreateUnitOfWork()
-        {
-            return new XmlUnitOfWork(this);
+            return Other.RestoreFromXml<XmlDatabase>(filePath);
         }
 
-        public void Save()
+        public void Save(string xmlFilePath)
         {
-            Data.Save(XmlFilePath);
-            //Data.Save($"{XmlFilePath.Replace(".xml","_out.xml")}");
+            Other.StoreAsXml<XmlDatabase>(xmlFilePath, this);
         }
 
         #endregion Public Methods
-
-        #region Internal Methods
-
-        internal DatabaseActionSetTableDef GetActionSetTable()
-        {
-            var table = Data.Tables.OfType<DatabaseActionSetTableDef>().FirstOrDefault();
-            if (table == null)
-            {
-                table = new DatabaseActionSetTableDef();
-                Data.Tables.Add(table);
-            }
-            return table;
-        }
-
-        internal DatabaseAssetTableDef GetAssetsTable()
-        {
-            var table = Data.Tables.OfType<DatabaseAssetTableDef>().FirstOrDefault();
-            if (table == null)
-            {
-                table = new DatabaseAssetTableDef();
-                Data.Tables.Add(table);
-            }
-            return table;
-        }
-
-        internal DatabaseImageTableDef GetImageTable()
-        {
-            var table = Data.Tables.OfType<DatabaseImageTableDef>().FirstOrDefault();
-            if (table == null)
-            {
-                table = new DatabaseImageTableDef();
-                Data.Tables.Add(table);
-            }
-            return table;
-        }
-
-        internal DatabaseMapTableDef GetMapsTable()
-        {
-            var table = Data.Tables.OfType<DatabaseMapTableDef>().FirstOrDefault();
-            if (table == null)
-            {
-                table = new DatabaseMapTableDef();
-                Data.Tables.Add(table);
-            }
-            return table;
-        }
-        internal DatabasePaletteTableDef GetPaletteTable()
-        {
-            var table = Data.Tables.OfType<DatabasePaletteTableDef>().FirstOrDefault();
-            if (table == null)
-            {
-                table = new DatabasePaletteTableDef();
-                Data.Tables.Add(table);
-            }
-            return table;
-        }
-        internal DatabaseSoundTableDef GetSoundTable()
-        {
-            var table = Data.Tables.OfType<DatabaseSoundTableDef>().FirstOrDefault();
-            if (table == null)
-            {
-                table = new DatabaseSoundTableDef();
-                Data.Tables.Add(table);
-            }
-            return table;
-        }
-        internal DatabaseSpriteSetTableDef GetSpriteSetTable()
-        {
-            var table = Data.Tables.OfType<DatabaseSpriteSetTableDef>().FirstOrDefault();
-            if (table == null)
-            {
-                table = new DatabaseSpriteSetTableDef();
-                Data.Tables.Add(table);
-            }
-            return table;
-        }
-
-        internal DatabaseTileSetTableDef GetTileSetTable()
-        {
-            var table = Data.Tables.OfType<DatabaseTileSetTableDef>().FirstOrDefault();
-            if (table == null)
-            {
-                table = new DatabaseTileSetTableDef();
-                Data.Tables.Add(table);
-            }
-            return table;
-        }
-
-        #endregion Internal Methods
 
     }
 }

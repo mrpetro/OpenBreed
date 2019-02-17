@@ -21,7 +21,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Constructors
 
-        public XmlTileSetsRepository(XmlDatabase context) : base(context)
+        public XmlTileSetsRepository(XmlDatabaseMan context) : base(context)
         {
             _table = context.GetTileSetTable();
         }
@@ -92,7 +92,11 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             if (Find(newId) != null)
                 throw new Exception($"Entry with Id '{newId}' already exist.");
 
-            var newEntry = new XmlTileSetEntry();
+            if (entryType == null)
+                entryType = EntryTypes.FirstOrDefault();
+
+            var newEntry = Create(entryType) as XmlTileSetEntry;
+
             newEntry.Id = newId;
             _table.Items.Add(newEntry);
             return newEntry;

@@ -20,7 +20,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Constructors
 
-        public XmlMapsRepository(XmlDatabase context) : base(context)
+        public XmlMapsRepository(XmlDatabaseMan context) : base(context)
         {
             _table = context.GetMapsTable();
         }
@@ -91,7 +91,11 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             if (Find(newId) != null)
                 throw new Exception($"Entry with Id '{newId}' already exist.");
 
-            var newEntry = new XmlMapEntry();
+            if (entryType == null)
+                entryType = EntryTypes.FirstOrDefault();
+
+            var newEntry = Create(entryType) as XmlMapEntry;
+
             newEntry.Id = newId;
             _table.Items.Add(newEntry);
             return newEntry;

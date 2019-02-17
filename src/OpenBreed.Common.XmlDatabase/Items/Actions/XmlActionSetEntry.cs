@@ -6,10 +6,12 @@ using System.Xml.Serialization;
 using System.IO;
 using OpenBreed.Common.Logging;
 using OpenBreed.Common.Actions;
+using System.ComponentModel;
 
 namespace OpenBreed.Common.XmlDatabase.Items.Actions
 {
     [Serializable]
+    [Description("Action set"), Category("Appearance")]
     public class XmlActionSetEntry : XmlDbEntry, IActionSetEntry
     {
         private List<IActionEntry> _actions = null;

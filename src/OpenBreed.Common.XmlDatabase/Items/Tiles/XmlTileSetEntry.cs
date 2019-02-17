@@ -2,6 +2,7 @@
 using OpenBreed.Common.Tiles;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using System.Xml.Serialization;
 namespace OpenBreed.Common.XmlDatabase.Items.Tiles
 {
     [Serializable]
+    [Description("Tile set"), Category("Appearance")]
     public class XmlTileSetEntry : XmlDbEntry, ITileSetEntry
     {
         #region Public Properties
@@ -18,11 +20,11 @@ namespace OpenBreed.Common.XmlDatabase.Items.Tiles
         public IFormatEntry Format { get; set; }
 
         [XmlElement("Format")]
-        public FormatDef FormatDef
+        public XmlFormatEntry FormatDef
         {
             get
             {
-                return (FormatDef)Format;
+                return (XmlFormatEntry)Format;
             }
 
             set

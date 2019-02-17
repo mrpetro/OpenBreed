@@ -2,11 +2,14 @@
 using OpenBreed.Common.Sounds;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Xml.Serialization;
 
 namespace OpenBreed.Common.XmlDatabase.Items.Sounds
 {
+    [Serializable]
+    [Description("Sound"), Category("Appearance")]
     public class XmlSoundEntry : XmlDbEntry, ISoundEntry
     {
         #region Public Properties
@@ -15,11 +18,11 @@ namespace OpenBreed.Common.XmlDatabase.Items.Sounds
         public IFormatEntry Format { get; set; }
 
         [XmlElement("Format")]
-        public FormatDef FormatDef
+        public XmlFormatEntry FormatDef
         {
             get
             {
-                return (FormatDef)Format;
+                return (XmlFormatEntry)Format;
             }
 
             set

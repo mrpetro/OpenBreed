@@ -6,20 +6,30 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 {
     public class XmlRepositoryBase
     {
+
         #region Protected Fields
 
-        protected XmlDatabase context;
+        protected XmlDatabaseMan context;
 
         #endregion Protected Fields
 
         #region Protected Constructors
 
-        protected XmlRepositoryBase(XmlDatabase context)
+        protected XmlRepositoryBase(XmlDatabaseMan context)
         {
             this.context = context;
         }
 
         #endregion Protected Constructors
+
+        #region Protected Methods
+
+        protected IEntry Create(Type type)
+        {
+            return Activator.CreateInstance(type) as IEntry;
+        }
+
+        #endregion Protected Methods
 
     }
 }

@@ -10,7 +10,7 @@ using System.ComponentModel;
 using System.Globalization;
 using OpenBreed.Common.Assets;
 using OpenBreed.Common.XmlDatabase.Tables.Sources;
-using OpenBreed.Common.XmlDatabase.Items.Sources;
+using OpenBreed.Common.XmlDatabase.Items.Assets;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
@@ -25,7 +25,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Constructors
 
-        public XmlAssetsRepository(XmlDatabase context) : base(context)
+        public XmlAssetsRepository(XmlDatabaseMan context) : base(context)
         {
             _table = context.GetAssetsTable();
 
@@ -104,7 +104,11 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             if (Find(newId) != null)
                 throw new Exception($"Entry with Id '{newId}' already exist.");
 
-            var newEntry = new XmlFileAssetEntry();
+            if (entryType == null)
+                entryType = EntryTypes.FirstOrDefault();
+
+            var newEntry = Create(entryType) as XmlAssetEntry;
+
             newEntry.Id = newId;
             _table.Items.Add(newEntry);
             return newEntry;

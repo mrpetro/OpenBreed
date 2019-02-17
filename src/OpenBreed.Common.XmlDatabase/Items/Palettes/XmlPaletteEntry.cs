@@ -2,6 +2,7 @@
 using OpenBreed.Common.Palettes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,8 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Common.XmlDatabase.Items.Palettes
 {
+    [Serializable]
+    [Description("Palette"), Category("Appearance")]
     public class XmlPaletteEntry : XmlDbEntry, IPaletteEntry
     {
 
@@ -20,11 +23,11 @@ namespace OpenBreed.Common.XmlDatabase.Items.Palettes
         public IFormatEntry Format { get; set; }
 
         [XmlElement("Format")]
-        public FormatDef FormatDef
+        public XmlFormatEntry FormatDef
         {
             get
             {
-                return (FormatDef)Format;
+                return (XmlFormatEntry)Format;
             }
 
             set

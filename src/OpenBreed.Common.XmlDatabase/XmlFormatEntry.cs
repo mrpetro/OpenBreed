@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.XmlDatabase.Items.Sources;
+﻿using OpenBreed.Common.XmlDatabase.Items.Assets;
 using OpenBreed.Common.Formats;
 using System;
 using System.Collections.Generic;
@@ -11,17 +11,17 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Common.XmlDatabase
 {
-    public class FormatDef : IFormatEntry
+    public class XmlFormatEntry : IFormatEntry
     {
         #region Public Fields
 
         [XmlArray("Parameters")]
         [XmlArrayItem(ElementName = "Parameter")]
-        public List<FormatParameterDef> ParameterDefs { get; set; }
+        public List<XmlFormatParameter> ParameterDefs { get; set; }
 
-        private List<FormatParameterDef> FromParameters()
+        private List<XmlFormatParameter> FromParameters()
         {
-            var parameterDefs = new List<FormatParameterDef>();
+            var parameterDefs = new List<XmlFormatParameter>();
 
             foreach (var parameter in Parameters)
             {
@@ -32,7 +32,7 @@ namespace OpenBreed.Common.XmlDatabase
                 if (parameterDefs.Any(item => item.Name == parameter.Name))
                     continue;
 
-                var parameterDef = new FormatParameterDef() { Name = parameter.Name,
+                var parameterDef = new XmlFormatParameter() { Name = parameter.Name,
                                                               Type = parameter.Type.ToString(),
                                                               Value =parameter.Value.ToString() };
                 parameterDefs.Add(parameterDef);

@@ -2,7 +2,7 @@
 using OpenBreed.Common.XmlDatabase.Items.Maps;
 using OpenBreed.Common.XmlDatabase.Items.Palettes;
 using OpenBreed.Common.XmlDatabase.Items.Actions;
-using OpenBreed.Common.XmlDatabase.Items.Sources;
+using OpenBreed.Common.XmlDatabase.Items.Assets;
 using OpenBreed.Common.XmlDatabase.Items.Sprites;
 using OpenBreed.Common.XmlDatabase.Items.Tiles;
 using OpenBreed.Common.XmlDatabase.Tables;
@@ -31,7 +31,7 @@ namespace OpenBreed.Common.XmlDatabase
 
         #region Private Fields
 
-        private readonly XmlDatabase _context;
+        private readonly XmlDatabaseMan _context;
 
         private readonly Dictionary<Type, IRepository> _repositories = new Dictionary<Type, IRepository>();
 
@@ -39,7 +39,7 @@ namespace OpenBreed.Common.XmlDatabase
 
         #region Internal Constructors
 
-        internal XmlUnitOfWork(XmlDatabase context)
+        internal XmlUnitOfWork(XmlDatabaseMan context)
         {
             _context = context;
 

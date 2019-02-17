@@ -34,6 +34,15 @@ namespace OpenBreed.Common
 
         #region Public properties
 
+        public static string GetAttributeValue<TAttr>(Type type, Func<TAttr, string> resolveFunc, string defaultResult = null) where TAttr : Attribute
+        {
+            object[] attributes = type.GetCustomAttributes(typeof(TAttr), false);
+            if (attributes.Length > 0)
+                return resolveFunc((TAttr)attributes[0]);
+            else
+                return defaultResult;
+        }
+
         protected static string GetAttributeValue<TAttr>(Assembly assembly, Func<TAttr, string> resolveFunc, string defaultResult = null) where TAttr : Attribute
         {
             object[] attributes = assembly.GetCustomAttributes(typeof(TAttr), false);
