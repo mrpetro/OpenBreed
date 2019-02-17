@@ -76,6 +76,24 @@
     <Compile Include="Controls\Assets\EpfArchiveAssetCtrl.Designer.cs">
       <DependentUpon>EpfArchiveAssetCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Common\AssetFormatCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Common\AssetFormatCtrl.Designer.cs">
+      <DependentUpon>AssetFormatCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Common\DbEntryAssetRefCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Common\DbEntryAssetRefCtrl.Designer.cs">
+      <DependentUpon>DbEntryAssetRefCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Common\EntryRefCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Common\EntryRefCtrl.Designer.cs">
+      <DependentUpon>EntryRefCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Common\RefIdSelectorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -141,6 +159,12 @@
     </Compile>
     <Compile Include="Controls\Images\ImageEditorCtrl.Designer.cs">
       <DependentUpon>ImageEditorCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Images\ImageViewCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Images\ImageViewCtrl.Designer.cs">
+      <DependentUpon>ImageViewCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Maps\MapEditorActionsManCtrl.cs">
       <SubType>UserControl</SubType>
@@ -391,6 +415,15 @@
     <EmbeddedResource Include="Controls\Assets\EpfArchiveAssetCtrl.resx">
       <DependentUpon>EpfArchiveAssetCtrl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Common\AssetFormatCtrl.resx">
+      <DependentUpon>AssetFormatCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Common\DbEntryAssetRefCtrl.resx">
+      <DependentUpon>DbEntryAssetRefCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Common\EntryRefCtrl.resx">
+      <DependentUpon>EntryRefCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Common\RefIdSelectorCtrl.resx">
       <DependentUpon>RefIdSelectorCtrl.cs</DependentUpon>
     </EmbeddedResource>
@@ -423,6 +456,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Images\ImageEditorCtrl.resx">
       <DependentUpon>ImageEditorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Images\ImageViewCtrl.resx">
+      <DependentUpon>ImageViewCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Maps\MapEditorActionsManCtrl.resx">
       <DependentUpon>MapEditorActionsManCtrl.cs</DependentUpon>
