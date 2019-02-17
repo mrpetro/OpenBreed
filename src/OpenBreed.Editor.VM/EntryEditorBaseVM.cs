@@ -82,9 +82,9 @@ namespace OpenBreed.Editor.VM
             ServiceLocator.Instance.GetService<IDialogProvider>().ShowMessage("Function not implemented yet.", "Not implemented");
         }
 
-        public override void EditEntry(string name)
+        public override void EditEntry(string id)
         {
-            var entry = _repository.GetById(name);
+            var entry = _repository.GetById(id);
             EditEntry(entry);
             EditMode = true;
         }
