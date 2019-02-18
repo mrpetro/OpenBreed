@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Common
 {
-    partial class RefIdSelectorCtrl
+    partial class EntryRefIdSelectorCtrl
     {
         /// <summary> 
         /// Required designer variable.

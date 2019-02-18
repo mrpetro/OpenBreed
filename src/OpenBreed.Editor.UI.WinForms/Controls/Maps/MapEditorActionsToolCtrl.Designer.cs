@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.LayoutTable = new System.Windows.Forms.TableLayoutPanel();
-            this.ActionsMan = new OpenBreed.Editor.UI.WinForms.Controls.Maps.MapEditorActionsManCtrl();
+            this.EntryRef = new OpenBreed.Editor.UI.WinForms.Controls.Common.EntryRefCtrl();
             this.ActionsSelector = new OpenBreed.Editor.UI.WinForms.Controls.Maps.MapEditorActionsSelectorCtrl();
             this.LayoutTable.SuspendLayout();
             this.SuspendLayout();
@@ -39,7 +39,7 @@
             this.LayoutTable.ColumnCount = 1;
             this.LayoutTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.LayoutTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.LayoutTable.Controls.Add(this.ActionsMan, 0, 0);
+            this.LayoutTable.Controls.Add(this.EntryRef, 0, 0);
             this.LayoutTable.Controls.Add(this.ActionsSelector, 0, 1);
             this.LayoutTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LayoutTable.Location = new System.Drawing.Point(0, 0);
@@ -50,13 +50,13 @@
             this.LayoutTable.Size = new System.Drawing.Size(633, 315);
             this.LayoutTable.TabIndex = 0;
             // 
-            // ActionsMan
+            // EntryRef
             // 
-            this.ActionsMan.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ActionsMan.Location = new System.Drawing.Point(3, 3);
-            this.ActionsMan.Name = "ActionsMan";
-            this.ActionsMan.Size = new System.Drawing.Size(627, 28);
-            this.ActionsMan.TabIndex = 0;
+            this.EntryRef.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.EntryRef.Location = new System.Drawing.Point(3, 3);
+            this.EntryRef.Name = "EntryRef";
+            this.EntryRef.Size = new System.Drawing.Size(627, 28);
+            this.EntryRef.TabIndex = 0;
             // 
             // ActionsSelector
             // 
@@ -81,7 +81,7 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel LayoutTable;
-        private MapEditorActionsManCtrl ActionsMan;
+        private Common.EntryRefCtrl EntryRef;
         private MapEditorActionsSelectorCtrl ActionsSelector;
     }
 }

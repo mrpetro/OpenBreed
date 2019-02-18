@@ -39,6 +39,16 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
             DGV.RowHeadersVisible = false;
 
             DGV.MouseClick += DGV_MouseClick;
+            DGV.CellMouseDoubleClick += DGV_CellMouseDoubleClick;
+        }
+
+        private void DGV_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                var item = DGV.Rows[e.RowIndex].DataBoundItem as DbEntryVM ?? throw new InvalidOperationException();
+                _vm.EditEntry(item.Id);
+            }
         }
 
         #endregion Public Constructors

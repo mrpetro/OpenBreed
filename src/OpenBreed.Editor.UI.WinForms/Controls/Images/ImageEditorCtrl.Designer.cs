@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.Split = new System.Windows.Forms.SplitContainer();
+            this.DataSource = new OpenBreed.Editor.UI.WinForms.Controls.Images.ImageDataSourceCtrl();
             this.ImageView = new OpenBreed.Editor.UI.WinForms.Controls.Images.ImageViewCtrl();
-            this.AssetRef = new OpenBreed.Editor.UI.WinForms.Controls.Common.DbEntryAssetRefCtrl();
             ((System.ComponentModel.ISupportInitialize)(this.Split)).BeginInit();
             this.Split.Panel1.SuspendLayout();
             this.Split.Panel2.SuspendLayout();
@@ -39,37 +39,39 @@
             // 
             // Split
             // 
+            this.Split.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Split.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Split.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.Split.Location = new System.Drawing.Point(0, 0);
             this.Split.Name = "Split";
-            this.Split.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // Split.Panel1
             // 
-            this.Split.Panel1.Controls.Add(this.AssetRef);
+            this.Split.Panel1.Controls.Add(this.ImageView);
             // 
             // Split.Panel2
             // 
-            this.Split.Panel2.Controls.Add(this.ImageView);
-            this.Split.Size = new System.Drawing.Size(415, 294);
-            this.Split.SplitterDistance = 121;
+            this.Split.Panel2.Controls.Add(this.DataSource);
+            this.Split.Panel2MinSize = 350;
+            this.Split.Size = new System.Drawing.Size(783, 382);
+            this.Split.SplitterDistance = 429;
             this.Split.TabIndex = 0;
+            // 
+            // DataSource
+            // 
+            this.DataSource.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DataSource.Location = new System.Drawing.Point(0, 0);
+            this.DataSource.Name = "DataSource";
+            this.DataSource.Size = new System.Drawing.Size(346, 378);
+            this.DataSource.TabIndex = 0;
             // 
             // ImageView
             // 
             this.ImageView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ImageView.Location = new System.Drawing.Point(0, 0);
             this.ImageView.Name = "ImageView";
-            this.ImageView.Size = new System.Drawing.Size(415, 169);
+            this.ImageView.Size = new System.Drawing.Size(425, 378);
             this.ImageView.TabIndex = 0;
-            // 
-            // AssetRef
-            // 
-            this.AssetRef.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AssetRef.Location = new System.Drawing.Point(0, 0);
-            this.AssetRef.Name = "AssetRef";
-            this.AssetRef.Size = new System.Drawing.Size(415, 121);
-            this.AssetRef.TabIndex = 0;
             // 
             // ImageEditorCtrl
             // 
@@ -77,7 +79,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.Split);
             this.Name = "ImageEditorCtrl";
-            this.Size = new System.Drawing.Size(415, 294);
+            this.Size = new System.Drawing.Size(783, 382);
             this.Split.Panel1.ResumeLayout(false);
             this.Split.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Split)).EndInit();
@@ -90,6 +92,6 @@
 
         private System.Windows.Forms.SplitContainer Split;
         private ImageViewCtrl ImageView;
-        private Common.DbEntryAssetRefCtrl AssetRef;
+        private Images.ImageDataSourceCtrl DataSource;
     }
 }

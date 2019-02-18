@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Ctrl = new OpenBreed.Editor.UI.WinForms.Controls.Common.RefIdSelectorCtrl();
+            this.Ctrl = new OpenBreed.Editor.UI.WinForms.Controls.Common.EntryRefIdSelectorCtrl();
             this.SuspendLayout();
             // 
             // Ctrl
@@ -54,6 +54,6 @@
 
         #endregion
 
-        private Controls.Common.RefIdSelectorCtrl Ctrl;
+        private Controls.Common.EntryRefIdSelectorCtrl Ctrl;
     }
 }

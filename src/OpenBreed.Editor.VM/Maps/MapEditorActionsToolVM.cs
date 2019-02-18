@@ -8,11 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common;
 using OpenBreed.Common.Actions;
+using OpenBreed.Editor.VM.Common;
 
 namespace OpenBreed.Editor.VM.Maps
 {
     public class MapEditorActionsToolVM : BaseViewModel
     {
+
         #region Private Fields
 
         private ActionSetVM _actionSet;
@@ -25,13 +27,19 @@ namespace OpenBreed.Editor.VM.Maps
         {
             Parent = parent;
 
-            ActionsMan = new MapEditorActionsManVM(this);
+            ActionEntryRef = new EntryRefVM(typeof(IActionSetEntry));
             ActionsSelector = new MapEditorActionsSelectorVM(this);
+
+            ActionEntryRef.PropertyChanged += ActionEntryRef_PropertyChanged;
+
+            PropertyChanged += This_PropertyChanged;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
+
+        public EntryRefVM ActionEntryRef { get; }
 
         public ActionSetVM ActionSet
         {
@@ -39,13 +47,13 @@ namespace OpenBreed.Editor.VM.Maps
             set { SetProperty(ref _actionSet, value); }
         }
 
-        public MapEditorActionsManVM ActionsMan { get; }
         public MapEditorActionsSelectorVM ActionsSelector { get; }
+
         public MapEditorVM Parent { get; }
 
         #endregion Public Properties
 
-        #region Private Methods
+        #region Internal Methods
 
         internal void Load(string actionSetEntryId)
         {
@@ -62,7 +70,34 @@ namespace OpenBreed.Editor.VM.Maps
             }
         }
 
-        #endregion Private Methods
+        #endregion Internal Methods
 
+        #region Private Methods
+
+        private void ActionEntryRef_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(ActionEntryRef.RefId):
+                    Load(ActionEntryRef.RefId);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(ActionSet):
+                    ActionEntryRef.RefId = (ActionSet == null) ? null : ActionSet.Id;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        #endregion Private Methods
     }
 }

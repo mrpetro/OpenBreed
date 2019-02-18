@@ -7,23 +7,28 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Images;
 using OpenBreed.Common;
+using System.ComponentModel;
 
 namespace OpenBreed.Editor.VM.Images
 {
     public class ImageEditorVM : EntryEditorBaseVM<IImageEntry, ImageVM>
     {
+
         #region Public Constructors
 
         public ImageEditorVM(IRepository repository) : base(repository)
         {
-        }
+            DataSource = new ImageDataSourceVM();
 
-        public override string EditorName { get { return "Image Editor"; } }
+            PropertyChanged += This_PropertyChanged;
+        }
 
         #endregion Public Constructors
 
         #region Public Properties
 
+        public ImageDataSourceVM DataSource { get; }
+        public override string EditorName { get { return "Image Editor"; } }
 
         #endregion Public Properties
 
@@ -34,11 +39,18 @@ namespace OpenBreed.Editor.VM.Images
             if (Editable == null)
                 return;
 
+            if (Editable.Image == null)
+                return;
+
             int width = Editable.Width * factor;
             int height = Editable.Height * factor;
 
             gfx.DrawImage(Editable.Image, (int)x, (int)y, width, height);
         }
+
+        #endregion Public Methods
+
+        #region Protected Methods
 
         protected override void UpdateEntry(ImageVM source, IImageEntry target)
         {
@@ -47,16 +59,28 @@ namespace OpenBreed.Editor.VM.Images
 
         protected override void UpdateVM(IImageEntry source, ImageVM target)
         {
-            target.Image = DataProvider.GetImage(source.Id);
+            target.AssetRef = source.AssetRef;
+
+            if(source.AssetRef != null)
+                target.Image = DataProvider.GetImage(source.Id);
 
             base.UpdateVM(source, target);
         }
 
-        #endregion Public Methods
+        private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(Editable):
+                    DataSource.AssetEntryRef.RefId = (Editable.AssetRef == null) ? null : Editable.AssetRef;
+                    break;
+                default:
+                    break;
+            }
+        }
 
-        #region Internal Methods
 
-        #endregion Internal Methods
+        #endregion Protected Methods
 
     }
 }

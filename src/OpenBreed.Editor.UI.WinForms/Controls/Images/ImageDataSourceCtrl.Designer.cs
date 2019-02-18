@@ -1,6 +1,6 @@
-﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Common
+﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Images
 {
-    partial class DbEntryAssetRefCtrl
+    partial class ImageDataSourceCtrl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,23 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.AssetRef = new OpenBreed.Editor.UI.WinForms.Controls.Common.EntryRefCtrl();
             this.grpAssetEntryRef = new System.Windows.Forms.GroupBox();
             this.grpFormat = new System.Windows.Forms.GroupBox();
+            this.AssetEntryRef = new OpenBreed.Editor.UI.WinForms.Controls.Common.EntryRefCtrl();
             this.grpAssetEntryRef.SuspendLayout();
             this.SuspendLayout();
             // 
-            // AssetRef
-            // 
-            this.AssetRef.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AssetRef.Location = new System.Drawing.Point(3, 16);
-            this.AssetRef.Name = "AssetRef";
-            this.AssetRef.Size = new System.Drawing.Size(527, 24);
-            this.AssetRef.TabIndex = 0;
-            // 
             // grpAssetEntryRef
             // 
-            this.grpAssetEntryRef.Controls.Add(this.AssetRef);
+            this.grpAssetEntryRef.Controls.Add(this.AssetEntryRef);
             this.grpAssetEntryRef.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpAssetEntryRef.Location = new System.Drawing.Point(0, 0);
             this.grpAssetEntryRef.Name = "grpAssetEntryRef";
@@ -63,6 +55,14 @@
             this.grpFormat.TabStop = false;
             this.grpFormat.Text = "Format";
             // 
+            // AssetEntryRef
+            // 
+            this.AssetEntryRef.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AssetEntryRef.Location = new System.Drawing.Point(3, 16);
+            this.AssetEntryRef.Name = "AssetEntryRef";
+            this.AssetEntryRef.Size = new System.Drawing.Size(527, 24);
+            this.AssetEntryRef.TabIndex = 0;
+            // 
             // DbEntryAssetRefCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -78,7 +78,7 @@
 
         #endregion
 
-        private EntryRefCtrl AssetRef;
+        private Common.EntryRefCtrl AssetEntryRef;
         private System.Windows.Forms.GroupBox grpAssetEntryRef;
         private System.Windows.Forms.GroupBox grpFormat;
     }

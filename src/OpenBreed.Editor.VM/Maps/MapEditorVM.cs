@@ -67,26 +67,10 @@ namespace OpenBreed.Editor.VM.Maps
 
         internal void Connect()
         {
-            //ActionsTool.PropertyChanged += ActionsTool_PropertyChanged;
-
-           //ActionsTool.ActionsSelector.PropertyChanged += ActionsSelector_PropertyChanged;
+           ActionsTool.ActionsSelector.PropertyChanged += ActionsSelector_PropertyChanged;
 
             TilesTool.Connect();
         }
-
-        //private void ActionsTool_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        //{
-        //    var actionTools = sender as MapEditorActionsToolVM;
-
-        //    switch (e.PropertyName)
-        //    {
-        //        case nameof(actionTools.ActionSet):
-        //            Editable.ActionSet = actionTools.ActionSet;
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
 
         private void ActionsSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -143,6 +127,7 @@ namespace OpenBreed.Editor.VM.Maps
                 case nameof(Editable):
                     MapView.Layout = Editable.Layout;
                     PaletteSelector.CurrentItem = Editable.Palettes.FirstOrDefault();
+                    Editable.ActionSet = ActionsTool.ActionSet;
                     break;
                 default:
                     break;

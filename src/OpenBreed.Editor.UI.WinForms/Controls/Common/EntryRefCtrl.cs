@@ -17,7 +17,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Common
     {
         #region Private Fields
 
-        private MapEditorActionsManVM _vm;
+        private EntryRefVM _vm;
 
         #endregion Private Fields
 
@@ -32,16 +32,16 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Common
 
         #region Public Methods
 
-        public void Initialize(MapEditorActionsManVM vm)
+        public void Initialize(EntryRefVM vm)
         {
-            _vm = vm;
+            _vm = vm ?? throw new ArgumentNullException(nameof(EntryRefVM));
 
-            tbxEntryId.DataBindings.Add(nameof(tbxEntryId.Text), _vm, nameof(_vm.ActionSetId), false, DataSourceUpdateMode.OnPropertyChanged);
+            tbxEntryId.DataBindings.Add(nameof(tbxEntryId.Text), _vm, nameof(_vm.RefId), false, DataSourceUpdateMode.OnPropertyChanged);
             btnEntryIdSelect.Click += (s,a) => _vm.SelectActionSetId();
             _vm.OpenRefIdSelectorAction = OnOpenRefIdSelector;
         }
 
-        private void OnOpenRefIdSelector(RefSelectorVM vm)
+        private void OnOpenRefIdSelector(EntryRefSelectorVM vm)
         {
             using (var form = new RefIdSelectorForm())
             {

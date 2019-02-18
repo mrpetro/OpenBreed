@@ -82,11 +82,11 @@
     <Compile Include="Controls\Common\AssetFormatCtrl.Designer.cs">
       <DependentUpon>AssetFormatCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Common\DbEntryAssetRefCtrl.cs">
+    <Compile Include="Controls\Images\ImageDataSourceCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Common\DbEntryAssetRefCtrl.Designer.cs">
-      <DependentUpon>DbEntryAssetRefCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Images\ImageDataSourceCtrl.Designer.cs">
+      <DependentUpon>ImageDataSourceCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Common\EntryRefCtrl.cs">
       <SubType>UserControl</SubType>
@@ -94,11 +94,11 @@
     <Compile Include="Controls\Common\EntryRefCtrl.Designer.cs">
       <DependentUpon>EntryRefCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Common\RefIdSelectorCtrl.cs">
+    <Compile Include="Controls\Common\EntryRefIdSelectorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Common\RefIdSelectorCtrl.Designer.cs">
-      <DependentUpon>RefIdSelectorCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Common\EntryRefIdSelectorCtrl.Designer.cs">
+      <DependentUpon>EntryRefIdSelectorCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Database\DbTableNewEntryCreatorCtrl.cs">
       <SubType>UserControl</SubType>
@@ -165,12 +165,6 @@
     </Compile>
     <Compile Include="Controls\Images\ImageViewCtrl.Designer.cs">
       <DependentUpon>ImageViewCtrl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Maps\MapEditorActionsManCtrl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Maps\MapEditorActionsManCtrl.Designer.cs">
-      <DependentUpon>MapEditorActionsManCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Maps\MapEditorActionsToolCtrl.cs">
       <SubType>UserControl</SubType>
@@ -418,14 +412,14 @@
     <EmbeddedResource Include="Controls\Common\AssetFormatCtrl.resx">
       <DependentUpon>AssetFormatCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Common\DbEntryAssetRefCtrl.resx">
-      <DependentUpon>DbEntryAssetRefCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Images\ImageDataSourceCtrl.resx">
+      <DependentUpon>ImageDataSourceCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Common\EntryRefCtrl.resx">
       <DependentUpon>EntryRefCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Common\RefIdSelectorCtrl.resx">
-      <DependentUpon>RefIdSelectorCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Common\EntryRefIdSelectorCtrl.resx">
+      <DependentUpon>EntryRefIdSelectorCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Database\DbTableNewEntryCreatorCtrl.resx">
       <DependentUpon>DbTableNewEntryCreatorCtrl.cs</DependentUpon>
@@ -459,9 +453,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Images\ImageViewCtrl.resx">
       <DependentUpon>ImageViewCtrl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Maps\MapEditorActionsManCtrl.resx">
-      <DependentUpon>MapEditorActionsManCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Maps\MapEditorActionsToolCtrl.resx">
       <DependentUpon>MapEditorActionsToolCtrl.cs</DependentUpon>

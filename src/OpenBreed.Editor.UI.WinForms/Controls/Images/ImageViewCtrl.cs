@@ -67,6 +67,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Images
 
         protected override void OnPaint(PaintEventArgs e)
         {
+            if (_vm == null)
+                return;
+
             e.Graphics.PixelOffsetMode = PixelOffsetMode.Half;
             e.Graphics.CompositingQuality = CompositingQuality.AssumeLinear;
             e.Graphics.CompositingMode = CompositingMode.SourceOver;

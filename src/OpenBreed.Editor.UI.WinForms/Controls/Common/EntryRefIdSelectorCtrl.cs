@@ -11,16 +11,16 @@ using OpenBreed.Editor.VM.Common;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Common
 {
-    public partial class RefIdSelectorCtrl : UserControl
+    public partial class EntryRefIdSelectorCtrl : UserControl
     {
-        private RefSelectorVM _vm;
+        private EntryRefSelectorVM _vm;
 
-        public RefIdSelectorCtrl()
+        public EntryRefIdSelectorCtrl()
         {
             InitializeComponent();
         }
 
-        public void Initialize(RefSelectorVM vm)
+        public void Initialize(EntryRefSelectorVM vm)
         {
             _vm = vm;
 

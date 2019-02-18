@@ -9,9 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Common
 {
-
-
-    public class RefSelectorVM : BaseViewModel
+    public class EntryRefSelectorVM : BaseViewModel
     {
         #region Private Fields
 
@@ -20,11 +18,18 @@ namespace OpenBreed.Editor.VM.Common
 
         #endregion Private Fields
 
-        public BindingList<string> Items { get; protected set; }
+        public BindingList<string> Items { get; }
 
-        protected RefSelectorVM()
+        public EntryRefSelectorVM(Type type)
         {
             Items = new BindingList<string>();
+
+            var repository = ServiceLocator.Instance.GetService<IUnitOfWork>().GetRepository(type);
+
+            Items.UpdateAfter(() =>
+            {
+                repository.Entries.ForEach(item => Items.Add(item.Id));
+            });
         }
 
         #region Public Properties
@@ -47,18 +52,5 @@ namespace OpenBreed.Editor.VM.Common
         }
 
         #endregion Public Properties
-    }
-
-    public class RefSelectorVM<T> : RefSelectorVM where T : IEntry
-    {
-        public RefSelectorVM()
-        {
-            var repository = ServiceLocator.Instance.GetService<IUnitOfWork>().GetRepository<T>();
-
-            Items.UpdateAfter(() =>
-            {
-                repository.Entries.ForEach(item => Items.Add(item.Id));
-            });
-        }
     }
 }
