@@ -53,6 +53,9 @@ namespace OpenBreed.Common
             if (entry == null)
                 throw new Exception("Image error: " + name);
 
+            if (entry.AssetRef == null)
+                return null;
+
             var asset = AssetsProvider.GetAsset(entry.AssetRef);
 
             var image = FormatMan.Load(asset, entry.Format) as Image;
@@ -66,6 +69,9 @@ namespace OpenBreed.Common
             if (entry == null)
                 throw new Exception("Palette error: " + id);
 
+            if (entry.AssetRef == null)
+                return null;
+
             var asset = AssetsProvider.GetAsset(entry.AssetRef);
 
             var palette = FormatMan.Load(asset, entry.Format) as PaletteModel;
@@ -78,6 +84,9 @@ namespace OpenBreed.Common
             var entry = _unitOfWork.GetRepository<ISoundEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("Sound error: " + id);
+
+            if (entry.AssetRef == null)
+                return null;
 
             var asset = AssetsProvider.GetAsset(entry.AssetRef);
 
@@ -101,6 +110,9 @@ namespace OpenBreed.Common
             if (entry == null)
                 throw new Exception("SpriteSet error: " + id);
 
+            if (entry.AssetRef == null)
+                return null;
+
             var asset = AssetsProvider.GetAsset(entry.AssetRef);
 
             var spriteSet = FormatMan.Load(asset, entry.Format) as SpriteSetModel;
@@ -114,6 +126,9 @@ namespace OpenBreed.Common
             if (entry == null)
                 throw new Exception("TileSet error: " + id);
 
+            if (entry.AssetRef == null)
+                return null;
+
             var asset = AssetsProvider.GetAsset(entry.AssetRef);
 
             var tileSet = FormatMan.Load(asset, entry.Format) as TileSetModel;
@@ -126,6 +141,9 @@ namespace OpenBreed.Common
             var entry = _unitOfWork.GetRepository<IMapEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("Level error: " + id);
+
+            if (entry.AssetRef == null)
+                return null;
 
             var asset = AssetsProvider.GetAsset(entry.AssetRef);
 

@@ -60,17 +60,22 @@ namespace OpenBreed.Common.XmlDatabase
 
         public IRepository<T> GetRepository<T>() where T : IEntry
         {
-            IRepository foundRepo;
-
-            if (!_repositories.TryGetValue(typeof(T), out foundRepo))
-                throw new Exception($"Repository of type {typeof(T)} not found.");
-
-            return (IRepository<T>)foundRepo;
+            return (IRepository<T>)GetRepository(typeof(T));
         }
 
         public IRepository GetRepository(string name)
         {
             return _repositories.Values.FirstOrDefault(item => item.Name == name);
+        }
+
+        public IRepository GetRepository(Type type)
+        {
+            IRepository foundRepo;
+
+            if (!_repositories.TryGetValue(type, out foundRepo))
+                throw new Exception($"Repository of type {type} not found.");
+
+            return foundRepo;
         }
 
         public void Save()
