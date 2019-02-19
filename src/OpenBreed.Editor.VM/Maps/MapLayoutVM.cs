@@ -30,10 +30,6 @@ namespace OpenBreed.Editor.VM.Maps
         {
             Owner = owner;
             Layers = new BindingList<MapLayerBaseVM>();
-
-            //TilesInserter = new TilesInserter(this, Map.Project.Root.TileSets.CurrentItem.Selector);
-            //PropertyInserter = new PropertyInserter(this, Map.Root.PropSets.Selector);
-
         }
 
         #endregion Public Constructors
@@ -52,8 +48,6 @@ namespace OpenBreed.Editor.VM.Maps
         }
 
         #endregion Public Properties
-
-        //public TilesInserter TilesInserter { get; private set; }
 
         #region Public Methods
 
@@ -118,11 +112,6 @@ namespace OpenBreed.Editor.VM.Maps
 
         internal void ConnectEvents()
         {
-        }
-
-        internal Point GetIndexCoords(Point point)
-        {
-            return new Point(point.X / Owner.TileSize, point.Y / Owner.TileSize);
         }
 
         internal void FromModel(MapLayoutModel layout)

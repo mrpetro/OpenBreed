@@ -17,7 +17,6 @@ namespace OpenBreed.Editor.VM.Maps
         #region Private Fields
 
         private MapLayoutVM _layout;
-        private BodyRenderer _renderer;
         private string _title;
         private Matrix _transformation;
 
@@ -29,17 +28,22 @@ namespace OpenBreed.Editor.VM.Maps
         {
             Parent = parent;
 
-            PropertyChanged += MapBodyViewerVM_PropertyChanged;
-
-            RenderTarget = new RenderTarget(1, 1);
-            _renderer = new BodyRenderer(Parent, RenderTarget);
             Transformation = new Matrix();
+            Cursor = new MapViewCursorVM();
+
+            Cursor.CalculateWorldCoordsFunc = GetWorldSnapCoords;
+            Cursor.CalculateWorldIndexCoordsFunc = GetIndexCoords;
+
+            Cursor.PropertyChanged += Cursor_PropertyChanged;
+
+            PropertyChanged += MapBodyViewerVM_PropertyChanged;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
+        public MapViewCursorVM Cursor { get; }
         public MapLayoutVM Layout
         {
             get { return _layout; }
@@ -47,8 +51,9 @@ namespace OpenBreed.Editor.VM.Maps
         }
 
         public MapEditorVM Parent { get; }
+
         public Action RefreshAction { get; set; }
-        public RenderTarget RenderTarget { get; }
+
         public string Title
         {
             get { return _title; }
@@ -77,18 +82,6 @@ namespace OpenBreed.Editor.VM.Maps
             Transformation = newTransf;
         }
 
-        public void DrawView(Graphics gfx)
-        {
-            RenderTarget.Gfx.Transform = Transformation;
-
-            if (Layout == null)
-                return;
-
-            _renderer.Render(Layout);
-
-            RenderTarget.Flush(gfx);
-        }
-
         public void FitViewToBody(float width, float height)
         {
             float scaleW = width / Layout.MaxCoordX;
@@ -99,6 +92,18 @@ namespace OpenBreed.Editor.VM.Maps
                 scale = 1.0f;
 
             CenterView(Layout.MaxCoordX / 2, Layout.MaxCoordY / 2, width, height, scale);
+        }
+
+        public Point GetIndexCoords(Point point)
+        {
+            return new Point((point.X / 16) * 16, (point.Y / 16) * 16);
+        }
+
+        public Point GetWorldSnapCoords(Point point)
+        {
+            var worldCoords = GetWorldCoords(point);
+
+            return new Point((worldCoords.X /  16) * 16, (worldCoords.Y / 16) * 16);
         }
 
         public Point GetWorldCoords(Point viewCoords)
@@ -128,11 +133,6 @@ namespace OpenBreed.Editor.VM.Maps
         public void Refresh()
         {
             RefreshAction?.Invoke();
-        }
-
-        public void Resize(int width, int height)
-        {
-            RenderTarget.Resize(width, height);
         }
 
         public void ScrollViewBy(int deltaX, int deltaY)
@@ -181,6 +181,21 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Private Methods
 
+        private Point CalculateWorldPosition(Point viewPosition)
+        {
+            var inverted = Transformation.Clone();
+            //inverted.Invert();
+
+            var list = new Point[] { viewPosition };
+
+            inverted.TransformPoints(list);
+            return list[0];
+        }
+
+        private void Cursor_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Refresh();
+        }
         private void MapBodyViewerVM_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)

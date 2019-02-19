@@ -178,6 +178,9 @@
     <Compile Include="Controls\Maps\MapEditorTilesToolCtrl.Designer.cs">
       <DependentUpon>MapEditorTilesToolCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Maps\MapEditorToolsTab.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\Maps\MapEditorViewCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>

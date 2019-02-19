@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Renderer
 {
-    public class BodyRenderer : RendererBase<MapLayoutVM>
+    public class LayoutRenderer : RendererBase<MapLayoutVM>
     {
         #region Private Fields
 
@@ -21,7 +21,7 @@ namespace OpenBreed.Editor.VM.Renderer
 
         #region Public Constructors
 
-        public BodyRenderer(MapEditorVM editor, RenderTarget target) : base(target)
+        public LayoutRenderer(MapEditorVM editor, RenderTarget target) : base(target)
         {
             _editor = editor;
 

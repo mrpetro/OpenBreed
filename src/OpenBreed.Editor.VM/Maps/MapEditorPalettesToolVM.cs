@@ -8,7 +8,7 @@ using OpenBreed.Editor.VM.Palettes;
 
 namespace OpenBreed.Editor.VM.Maps
 {
-    public class MapEditorPalettesToolVM : BaseViewModel
+    public class MapEditorPalettesToolVM : MapEditorToolVM
     {
 
         #region Private Fields

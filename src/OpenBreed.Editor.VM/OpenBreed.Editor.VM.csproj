@@ -127,11 +127,16 @@
     <Compile Include="IToolView.cs" />
     <Compile Include="Maps\MapEditorActionsSelectorVM.cs" />
     <Compile Include="Maps\MapEditorTilesToolVM.cs" />
+    <Compile Include="Maps\MapEditorToolsVM.cs" />
+    <Compile Include="Maps\MapEditorToolVM.cs" />
+    <Compile Include="Maps\MapViewCursorVM.cs" />
     <Compile Include="Renderer\LayerActionRenderer.cs" />
     <Compile Include="Renderer\LayerGfxRenderer.cs" />
+    <Compile Include="Renderer\ViewCursorRenderer.cs" />
+    <Compile Include="Renderer\ViewRenderer.cs" />
     <Compile Include="Tools\IScrollableVM.cs" />
     <Compile Include="Tools\IZoomableVM.cs" />
-    <Compile Include="Renderer\BodyRenderer.cs" />
+    <Compile Include="Renderer\LayoutRenderer.cs" />
     <Compile Include="Renderer\IRenderable.cs" />
     <Compile Include="Renderer\IRenderer.cs" />
     <Compile Include="Renderer\RenderTarget.cs" />
@@ -157,7 +162,6 @@
     <Compile Include="Maps\LevelPropertiesVM.cs" />
     <Compile Include="Maps\MapEditorTileSetSelectorVM.cs" />
     <Compile Include="Maps\MapVM.cs" />
-    <Compile Include="Maps\LevelVMHelper.cs" />
     <Compile Include="Tools\IEditorTool.cs" />
     <Compile Include="Tools\InsertPropertyTool.cs" />
     <Compile Include="Tools\InsertTileTool.cs" />

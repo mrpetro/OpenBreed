@@ -21,45 +21,36 @@ namespace OpenBreed.Editor.VM.Maps
 
         public MapEditorVM(IRepository repository) : base(repository)
         {
+            Tools = new MapEditorToolsVM();
+
             TilesTool = new MapEditorTilesToolVM(this);
             ActionsTool = new MapEditorActionsToolVM(this);
-            PaletteSelector = new MapEditorPalettesToolVM(this);
+            PalettesTool = new MapEditorPalettesToolVM(this);
 
             MapView = new MapEditorViewVM(this);
 
             PropertyChanged += This_PropertyChanged;
 
-            PaletteSelector.PropertyChanged += PaletteSelector_PropertyChanged;
+            PalettesTool.PropertyChanged += PaletteSelector_PropertyChanged;
 
             ActionsTool.PropertyChanged += ActionsTool_PropertyChanged;
 
+            InitializeTools();
 
             //TODO: This is probably bad place for VM connection method
             Connect();
-        }
-
-        private void ActionsTool_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(ActionsTool.ActionSet):
-                    if(Editable != null)
-                        Editable.ActionSet = ActionsTool.ActionSet;
-                    break;
-                default:
-                    break;
-            }
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
+        public MapEditorActionsToolVM ActionsTool { get; }
         public override string EditorName { get { return "Level Editor"; } }
         public MapEditorViewVM MapView { get; }
-        public MapEditorPalettesToolVM PaletteSelector { get; }
-        public MapEditorActionsToolVM ActionsTool { get; }
+        public MapEditorPalettesToolVM PalettesTool { get; }
         public MapEditorTilesToolVM TilesTool { get; }
+        public MapEditorToolsVM Tools { get; }
 
         #endregion Public Properties
 
@@ -67,10 +58,30 @@ namespace OpenBreed.Editor.VM.Maps
 
         internal void Connect()
         {
-           ActionsTool.ActionsSelector.PropertyChanged += ActionsSelector_PropertyChanged;
+            ActionsTool.ActionsSelector.PropertyChanged += ActionsSelector_PropertyChanged;
 
             TilesTool.Connect();
         }
+
+        #endregion Internal Methods
+
+        #region Protected Methods
+
+        protected override void UpdateEntry(MapVM source, IMapEntry target)
+        {
+            base.UpdateEntry(source, target);
+        }
+
+        protected override void UpdateVM(IMapEntry source, MapVM target)
+        {
+            base.UpdateVM(source, target);
+
+            ActionsTool.ActionSet = target.ActionSet;
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
 
         private void ActionsSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -86,23 +97,65 @@ namespace OpenBreed.Editor.VM.Maps
             }
         }
 
-        #endregion Internal Methods
-
-        #region Protected Methods
-
-        protected override void UpdateEntry(MapVM source, IMapEntry target)
+        private void ActionsTool_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            base.UpdateEntry(source, target);
+            switch (e.PropertyName)
+            {
+                case nameof(ActionsTool.ActionSet):
+                    if (Editable != null)
+                        Editable.ActionSet = ActionsTool.ActionSet;
+                    break;
+                default:
+                    break;
+            }
         }
 
-        protected override void UpdateVM(IMapEntry source, MapVM target)
+        private void InitializeTool(MapEditorToolVM tool)
         {
 
-
-            base.UpdateVM(source, target);
-
-            ActionsTool.ActionSet = target.ActionSet;
         }
+
+        private void InitializeTools()
+        {
+            Tools.Items.UpdateAfter(() =>
+            {
+                Tools.Items.Add(new MapEditorTilesToolVM(this));
+                Tools.Items.Add(new MapEditorActionsToolVM(this));
+                Tools.Items.Add(new MapEditorPalettesToolVM(this));
+            });
+
+            Tools.CurrentTool = Tools.Items.FirstOrDefault();
+        }
+        private void PaletteSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(PalettesTool.CurrentItem):
+                    foreach (var tileSet in Editable.TileSets)
+                        tileSet.Palette = PalettesTool.CurrentItem;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        //    base.UpdateVM(source, target);
+        //}
+        private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(Editable):
+                    MapView.Layout = Editable.Layout;
+                    PalettesTool.CurrentItem = Editable.Palettes.FirstOrDefault();
+                    Editable.ActionSet = ActionsTool.ActionSet;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        #endregion Private Methods
 
         //    TileSelector.CurrentItem = CurrentLevel.TileSets.FirstOrDefault();
         //    PropSelector.CurrentItem = CurrentLevel.PropSet;
@@ -112,43 +165,6 @@ namespace OpenBreed.Editor.VM.Maps
         //protected override void UpdateVM(IMapEntry source, MapVM target)
         //{
         //    target.FromEntry(source);
-
-        //    base.UpdateVM(source, target);
-        //}
-
-        #endregion Protected Methods
-
-        #region Private Methods
-
-        private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(Editable):
-                    MapView.Layout = Editable.Layout;
-                    PaletteSelector.CurrentItem = Editable.Palettes.FirstOrDefault();
-                    Editable.ActionSet = ActionsTool.ActionSet;
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void PaletteSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(PaletteSelector.CurrentItem):
-                    foreach (var tileSet in Editable.TileSets)
-                        tileSet.Palette = PaletteSelector.CurrentItem;
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        #endregion Private Methods
-
         //public LevelTileSelectorVM TileSelector { get; }
         //public void Load(string name)
         //{

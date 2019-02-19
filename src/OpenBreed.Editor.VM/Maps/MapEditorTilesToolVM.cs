@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Maps
 {
-    public class MapEditorTilesToolVM : BaseViewModel
+    public class MapEditorTilesToolVM : MapEditorToolVM
     {
 
         #region Public Constructors

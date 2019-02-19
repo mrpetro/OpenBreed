@@ -19,6 +19,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
     {
         #region Private Fields
 
+        private ViewRenderer _renderer;
+        private RenderTarget _renderTarget;
+
         private ScrollTool _scrollTool;
         private ZoomTool _zoomTool;
         private MapEditorViewVM _vm;
@@ -42,6 +45,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
         {
             _vm = vm ?? throw new ArgumentNullException(nameof(MapEditorViewVM));
 
+            _renderTarget = new RenderTarget(1, 1);
+            _renderer = new ViewRenderer(_vm.Parent, _renderTarget);
+
             _vm.RefreshAction = this.Invalidate;
 
             _scrollTool = new ScrollTool(_vm, this);
@@ -49,11 +55,13 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
             _zoomTool = new ZoomTool(_vm, this);
             _zoomTool.Activate();
 
-            Resize += (s,a) => _vm.Resize(this.ClientSize.Width, this.ClientSize.Height);
+            MouseHover += (s,a) => { _vm.Cursor.Visible = true; };
+            MouseLeave += (s, a) => { _vm.Cursor.Visible = false; };
+            MouseMove += (s, a) => { _vm.Cursor.ViewCoords = a.Location; };
+
+            Resize += (s,a) => _renderTarget.Resize(this.ClientSize.Width, this.ClientSize.Height);
 
             _vm.PropertyChanged += _vm_PropertyChanged;
-            
-            UpdateViewState();
         }
 
         private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -72,39 +80,18 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
         #endregion Public Methods
 
         #region Protected Methods
-
+         
         protected override void OnPaint(PaintEventArgs e)
         {
             if (_vm == null)
                 return;
 
-            _vm.DrawView(e.Graphics);
+            _renderer.Render(_vm);
+            _renderTarget.Flush(e.Graphics);
 
             base.OnPaint(e);
         }
 
         #endregion Protected Methods
-
-        #region Private Methods
-
-        private void SetMapState()
-        {
-            _vm.FitViewToBody(ClientRectangle.Width, ClientRectangle.Height);
-        }
-
-        private void SetNoMapState()
-        {
-            Invalidate();
-        }
-
-        private void UpdateViewState()
-        {
-            if (_vm.Layout == null)
-                SetNoMapState();
-            else
-                SetMapState();
-        }
-
-        #endregion Private Methods
     }
 }

@@ -16,6 +16,7 @@ using OpenBreed.Common.Tiles;
 using OpenBreed.Common.Sprites;
 using OpenBreed.Common.Actions;
 using OpenBreed.Common;
+using System.Drawing;
 
 namespace OpenBreed.Editor.VM.Maps
 {
@@ -116,6 +117,13 @@ namespace OpenBreed.Editor.VM.Maps
             Layout.FromModel(model.Layout);
 
             SetPalettes(model.Palettes);
+        }
+
+
+
+        public Point GetIndexCoords(Point point)
+        {
+            return new Point(point.X / TileSize, point.Y / TileSize);
         }
 
         internal override void ToEntry(IEntry entry)

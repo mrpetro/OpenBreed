@@ -12,7 +12,7 @@ using OpenBreed.Editor.VM.Common;
 
 namespace OpenBreed.Editor.VM.Maps
 {
-    public class MapEditorActionsToolVM : BaseViewModel
+    public class MapEditorActionsToolVM : MapEditorToolVM
     {
 
         #region Private Fields
