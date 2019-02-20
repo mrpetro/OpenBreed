@@ -125,6 +125,8 @@ namespace OpenBreed.Editor.VM.Maps
             });
 
             Tools.CurrentTool = Tools.Items.FirstOrDefault();
+
+            MapView.Cursor.UpdateAction = Tools.OnCursorUpdate;
         }
         private void PaletteSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {

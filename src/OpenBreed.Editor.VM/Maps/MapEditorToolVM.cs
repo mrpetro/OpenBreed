@@ -27,5 +27,8 @@ namespace OpenBreed.Editor.VM.Maps
         //    else if (SelectMode == SelectModeEnum.Deselect)
         //        gfx.DrawRectangle(deselectPen, SelectionRectangle.GetRectangle(CurrentTileSet.TileSize));
         //}
+        internal virtual void OnCursor(MapViewCursorVM cursor)
+        {
+        }
     }
 }

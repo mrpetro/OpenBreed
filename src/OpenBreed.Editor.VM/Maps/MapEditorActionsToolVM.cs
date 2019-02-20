@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using OpenBreed.Common;
 using OpenBreed.Common.Actions;
 using OpenBreed.Editor.VM.Common;
+using OpenBreed.Editor.VM.Maps.Layers;
 
 namespace OpenBreed.Editor.VM.Maps
 {
@@ -72,6 +73,23 @@ namespace OpenBreed.Editor.VM.Maps
 
         #endregion Internal Methods
 
+        #region Protected Methods
+
+        internal override void OnCursor(MapViewCursorVM cursor)
+        {
+            if (cursor.Action == CursorActions.Down && cursor.Buttons.HasFlag(CursorButtons.Left))
+            {
+                var actionLayer = Parent.Editable.Layout.Layers.OfType<MapLayerActionVM>().FirstOrDefault();
+
+                var actionCode = ActionsSelector.SelectedIndex;
+
+                actionLayer.SetCell(cursor.WorldIndexCoords.X, cursor.WorldIndexCoords.Y, actionCode);
+
+            }
+        }
+
+        #endregion Protected Methods
+
         #region Private Methods
 
         private void ActionEntryRef_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -99,5 +117,6 @@ namespace OpenBreed.Editor.VM.Maps
         }
 
         #endregion Private Methods
+
     }
 }

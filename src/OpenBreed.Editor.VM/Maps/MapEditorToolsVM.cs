@@ -25,6 +25,8 @@ namespace OpenBreed.Editor.VM.Maps
             Items = new BindingList<MapEditorToolVM>();
 
             PropertyChanged += This_PropertyChanged;
+
+            
         }
 
         #endregion Public Constructors
@@ -80,6 +82,11 @@ namespace OpenBreed.Editor.VM.Maps
                 CurrentToolIndex = -1;
             else
                 CurrentToolIndex = Items.IndexOf(CurrentTool);
+        }
+
+        internal void OnCursorUpdate(MapViewCursorVM cursor)
+        {
+            CurrentTool.OnCursor(cursor);
         }
 
         #endregion Private Methods

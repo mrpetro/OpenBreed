@@ -41,6 +41,20 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
 
         #region Public Methods
 
+        private CursorButtons ToCursorButtons(MouseButtons buttons)
+        {
+            var cursorButtons = CursorButtons.None;
+
+            if (buttons.HasFlag(MouseButtons.Left))
+                cursorButtons |= CursorButtons.Left;
+            if (buttons.HasFlag(MouseButtons.Right))
+                cursorButtons |= CursorButtons.Right;
+            if (buttons.HasFlag(MouseButtons.Middle))
+                cursorButtons |= CursorButtons.Middle;
+
+            return cursorButtons;
+        }
+
         public void Initialize(MapEditorViewVM vm)
         {
             _vm = vm ?? throw new ArgumentNullException(nameof(MapEditorViewVM));
@@ -55,9 +69,11 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
             _zoomTool = new ZoomTool(_vm, this);
             _zoomTool.Activate();
 
-            MouseHover += (s,a) => { _vm.Cursor.Visible = true; };
-            MouseLeave += (s, a) => { _vm.Cursor.Visible = false; };
-            MouseMove += (s, a) => { _vm.Cursor.ViewCoords = a.Location; };
+            MouseHover += (s, a) => _vm.Cursor.Hover();
+            MouseLeave += (s, a) => vm.Cursor.Leave();
+            MouseMove += (s, a) => vm.Cursor.Move(ToCursorButtons(a.Button), a.Location);
+            MouseUp += (s, a) => vm.Cursor.Up(ToCursorButtons(a.Button), a.Location);
+            MouseDown += (s, a) => vm.Cursor.Down(ToCursorButtons(a.Button), a.Location);
 
             Resize += (s,a) => _renderTarget.Resize(this.ClientSize.Width, this.ClientSize.Height);
 

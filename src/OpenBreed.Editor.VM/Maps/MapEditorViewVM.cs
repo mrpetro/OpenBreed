@@ -96,7 +96,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         public Point GetIndexCoords(Point point)
         {
-            return new Point((point.X / 16) * 16, (point.Y / 16) * 16);
+            return new Point(point.X / 16, point.Y / 16);
         }
 
         public Point GetWorldSnapCoords(Point point)
