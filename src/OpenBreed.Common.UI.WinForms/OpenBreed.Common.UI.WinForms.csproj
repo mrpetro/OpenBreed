@@ -51,6 +51,9 @@
     <Compile Include="Controls\BaseCtrl.Designer.cs">
       <DependentUpon>BaseCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DataGridViewEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\IConfigCtrl.cs" />
     <Compile Include="Controls\LogConsoleCtrl.cs">
       <SubType>UserControl</SubType>
