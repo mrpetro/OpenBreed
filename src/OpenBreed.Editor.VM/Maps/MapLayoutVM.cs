@@ -12,6 +12,7 @@ using OpenBreed.Editor.VM.Maps.Layers;
 using OpenBreed.Common.Tiles;
 using OpenBreed.Editor.VM.Tiles;
 using OpenBreed.Common.Actions;
+using OpenBreed.Common.Maps.Builders;
 
 namespace OpenBreed.Editor.VM.Maps
 {
@@ -114,6 +115,27 @@ namespace OpenBreed.Editor.VM.Maps
 
         internal void ConnectEvents()
         {
+        }
+
+        internal void ToModel(MapLayoutModel layout)
+        {
+            //var layoutBuilder = new MapLayoutBuilder();
+            //layoutBuilder.SetSize(Size.Width, Size.Height);
+
+            //var gfxLayerBuilder = new MapLayoutLayerBuilder<int>();
+            //gfxLayerBuilder.SetSize(Size.Width, Size.Height);
+
+            //var modelGfx = layout.Layers.FirstOrDefault(item => item.Name == "GFX");
+
+
+
+            //var vmGfx = Layers.OfType<MapLayerGfxVM>().FirstOrDefault();
+            //var modelAL = layout.Layers.FirstOrDefault(item => item.Name == "PROP");
+            //var vmAL = Layers.OfType<MapLayerActionVM>().FirstOrDefault();
+
+            //var 
+
+
         }
 
         internal void FromModel(MapLayoutModel layout)

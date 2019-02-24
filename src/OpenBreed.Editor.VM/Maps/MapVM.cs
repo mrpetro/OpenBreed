@@ -26,6 +26,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Private Fields
 
+        private MapModel _model;
         private ActionSetVM _actionSet;
         private bool _isModified;
         private AssetBase _source = null;
@@ -173,21 +174,47 @@ namespace OpenBreed.Editor.VM.Maps
 
             var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
 
-            var model = dataProvider.Maps.GetMap(entry.Id);
+            var mapEntry = entry as IMapEntry;
 
-            SetTileSets(model.TileSets);
+            if (mapEntry.TileSetRef != null)
+            {
+                var tileSet = dataProvider.TileSets.GetTileSet(mapEntry.TileSetRef);
+                SetTileSets(new List<TileSetModel>( new TileSetModel[] { tileSet }));
+            }
 
-            //foreach (var spriteSet in model.SpriteSets)
-            //    AddSpriteSet(spriteSet);
+            if (mapEntry.ActionSetRef != null)
+            {
+                var actionSet = dataProvider.ActionSets.GetActionSet(mapEntry.ActionSetRef);
+                if (actionSet != null)
+                    SetActionSet(actionSet);
+            }
 
-            if (model.ActionSet != null)
-                SetActionSet(model.ActionSet);
+            foreach (var spriteSetRef in mapEntry.SpriteSetRefs)
+            {
+                var spriteSet = dataProvider.SpriteSets.GetSpriteSet(spriteSetRef);
+                //AddSpriteSet(spriteSet);
+            }
 
-            Properties.Load(model);
+            _model = dataProvider.Maps.Load(entry.Id);
 
-            Layout.FromModel(model.Layout);
+            Properties.Load(_model);
 
-            SetPalettes(model.Palettes);
+            Layout.FromModel(_model.Layout);
+
+            var palettes = new List<PaletteModel>();
+
+            if (mapEntry.PaletteRefs.Any())
+            {
+                foreach (var paletteRef in mapEntry.PaletteRefs)
+                    palettes.Add(dataProvider.Palettes.GetPalette(paletteRef));
+            }
+            else
+            {
+                foreach (var palette in _model.Properties.Palettes)
+                    palettes.Add(palette);
+            }
+
+            SetPalettes(palettes);
         }
         internal void SetActionSet(IActionSetEntry propSet)
         {
@@ -201,6 +228,8 @@ namespace OpenBreed.Editor.VM.Maps
         internal override void ToEntry(IEntry entry)
         {
             base.ToEntry(entry);
+
+            Layout.ToModel(_model.Layout);
 
             var mapEntry = entry as IMapEntry;
 

@@ -42,6 +42,20 @@ namespace OpenBreed.Editor.VM.Maps.Layers
             _cells = gfxLayerModel.Cells.ToArray();
         }
 
+        public void Store(IMapLayerModel layerModel)
+        {
+            var gfxLayerModel = layerModel as MapLayerModel<TileRef>;
+
+            if (gfxLayerModel == null)
+                throw new ArgumentException(nameof(layerModel));
+
+            //MapLayoutLayerBuilder<int> builder
+
+
+
+            _cells = gfxLayerModel.Cells.ToArray();
+        }
+
         public void SetCell(int x, int y, TileRef value)
         {
             if (_cells[y * Layout.Size.Width + x] == value)
