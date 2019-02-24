@@ -47,7 +47,7 @@ namespace OpenBreed.Common.Maps
 
         #region Public Constructors
 
-        public MapLayerModel(MapBodyLayerBuilder<T> builder)
+        public MapLayerModel(MapLayoutLayerBuilder<T> builder)
         {
             Name = builder.Name;
             Size = builder.Size;

@@ -14,7 +14,7 @@ namespace OpenBreed.Common.Maps
 
         #region Internal Constructors
 
-        internal MapLayoutModel(MapBodyBuilder builder)
+        internal MapLayoutModel(MapLayoutBuilder builder)
         {
             Layers = builder.Layers.ToArray();
             Size = builder.Size;

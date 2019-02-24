@@ -89,8 +89,8 @@
     <Compile Include="Logging\LogFile.cs" />
     <Compile Include="Logging\LogMan.cs" />
     <Compile Include="Logging\LogType.cs" />
-    <Compile Include="Maps\Builders\MapBodyBuilder.cs" />
-    <Compile Include="Maps\Builders\MapBodyLayerBuilder.cs" />
+    <Compile Include="Maps\Builders\MapLayoutBuilder.cs" />
+    <Compile Include="Maps\Builders\MapLayoutLayerBuilder.cs" />
     <Compile Include="Maps\Builders\MapBuilder.cs" />
     <Compile Include="Maps\Builders\MapMissionBuilder.cs" />
     <Compile Include="Maps\Builders\MapPropertiesBuilder.cs" />

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Maps.Builders
 {
-    public class MapBodyLayerBuilder<T>
+    public class MapLayoutLayerBuilder<T>
     {
         #region Internal Fields
 
@@ -19,9 +19,9 @@ namespace OpenBreed.Common.Maps.Builders
 
         #region Public Methods
 
-        public static MapBodyLayerBuilder<T> NewMapBodyLayerModel()
+        public static MapLayoutLayerBuilder<T> NewMapLayoutLayerModel()
         {
-            return new MapBodyLayerBuilder<T>();
+            return new MapLayoutLayerBuilder<T>();
         }
 
         public MapLayerModel<T> Build()
@@ -29,21 +29,21 @@ namespace OpenBreed.Common.Maps.Builders
             return new MapLayerModel<T>(this);
         }
 
-        public MapBodyLayerBuilder<T> SetCell(int index, T value)
+        public MapLayoutLayerBuilder<T> SetCell(int index, T value)
         {
             Cells[index] = value;
 
             return this;
         }
 
-        public MapBodyLayerBuilder<T> SetName(string name)
+        public MapLayoutLayerBuilder<T> SetName(string name)
         {
             Name = name;
 
             return this;
         }
 
-        public MapBodyLayerBuilder<T> SetSize(int sizeX, int sizeY)
+        public MapLayoutLayerBuilder<T> SetSize(int sizeX, int sizeY)
         {
             Size = new Size(sizeX, sizeY);
             Cells = new T[sizeX * sizeY];

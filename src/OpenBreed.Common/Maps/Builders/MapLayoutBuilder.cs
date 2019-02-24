@@ -6,15 +6,14 @@ using System.Text;
 
 namespace OpenBreed.Common.Maps.Builders
 {
-    public class MapBodyBuilder
+    public class MapLayoutBuilder
     {
         internal List<IMapLayerModel> Layers = new List<IMapLayerModel>();
-        //internal MapCellModel[,] Cells = null;
         internal Size Size;
 
-        public static MapBodyBuilder NewBodyModel()
+        public static MapLayoutBuilder NewLayoutModel()
         {
-            return new MapBodyBuilder();
+            return new MapLayoutBuilder();
         }
 
         public MapLayoutModel Build()
@@ -22,7 +21,7 @@ namespace OpenBreed.Common.Maps.Builders
             return new MapLayoutModel(this);
         }
 
-        public MapBodyBuilder SetSize(int sizeX, int sizeY)
+        public MapLayoutBuilder SetSize(int sizeX, int sizeY)
         {
             Size = new Size(sizeX, sizeY);
 
@@ -74,7 +73,7 @@ namespace OpenBreed.Common.Maps.Builders
         //    return this;
         //}
 
-        internal void AddLayer(IMapLayerModel mapBodyLayerModel)
+        public void AddLayer(IMapLayerModel mapBodyLayerModel)
         {
             Layers.Add(mapBodyLayerModel);
         }

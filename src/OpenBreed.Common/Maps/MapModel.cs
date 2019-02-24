@@ -37,15 +37,10 @@ namespace OpenBreed.Common.Maps
 
         public MapPropertiesModel Properties { get; }
 
-        public IActionSetEntry ActionSet { get; internal set; }
-
-        public List<SpriteSetModel> SpriteSets { get; } = new List<SpriteSetModel>();
-
         /// <summary>
         ///  Gets or sets an object that provides additional data context.
         /// </summary>
         public object Tag { get; set; }
-        public List<TileSetModel> TileSets { get; } = new List<TileSetModel>();
 
         #endregion Public Properties
     }

@@ -25,7 +25,7 @@ namespace OpenBreed.Common.Maps.Readers.MAP
             Format = format;
             PropertiesBuilder = MapPropertiesBuilder.NewPropertiesModel();
             MissionBuilder = MapMissionBuilder.NewMissionModel();
-            BodyBuilder = MapBodyBuilder.NewBodyModel();
+            LayoutBuilder = MapLayoutBuilder.NewLayoutModel();
 
             PaletteReader = new MAPPaletteReader(this);
         }
@@ -34,7 +34,7 @@ namespace OpenBreed.Common.Maps.Readers.MAP
 
         #region Internal Properties
 
-        internal MapBodyBuilder BodyBuilder { get; private set; }
+        internal MapLayoutBuilder LayoutBuilder { get; private set; }
         internal MapBuilder MapBuilder { get; private set; }
         internal MapMissionBuilder MissionBuilder { get; private set; }
         internal MAPPaletteReader PaletteReader { get; private set; }
@@ -134,7 +134,7 @@ namespace OpenBreed.Common.Maps.Readers.MAP
 
             MapBuilder.SetProperties(PropertiesBuilder.Build());
             MapBuilder.SetMission(MissionBuilder.Build());
-            MapBuilder.SetBody(BodyBuilder.Build());
+            MapBuilder.SetBody(LayoutBuilder.Build());
 
             return MapBuilder.Build();
         }
@@ -170,15 +170,15 @@ namespace OpenBreed.Common.Maps.Readers.MAP
             if (tilesNo != expectedTilesNo)
                 throw new Exception("Incorrect number of tiles in body (" + tilesNo + "). Expected: " + expectedTilesNo);
 
-            var gfxLayerBuilder = MapBodyLayerBuilder<TileRef>.NewMapBodyLayerModel();
-            var propertyLayerBuilder = MapBodyLayerBuilder<int>.NewMapBodyLayerModel();
+            var gfxLayerBuilder = MapLayoutLayerBuilder<TileRef>.NewMapLayoutLayerModel();
+            var propertyLayerBuilder = MapLayoutLayerBuilder<int>.NewMapLayoutLayerModel();
 
             gfxLayerBuilder.SetName("GFX");
             gfxLayerBuilder.SetSize(sizeX, sizeY);
             propertyLayerBuilder.SetName("PROP");
             propertyLayerBuilder.SetSize(sizeX, sizeY);
 
-            BodyBuilder.SetSize(sizeX, sizeY);
+            LayoutBuilder.SetSize(sizeX, sizeY);
 
             for (int i = 0; i < tilesNo; i++)
             {
@@ -201,8 +201,8 @@ namespace OpenBreed.Common.Maps.Readers.MAP
                 propertyLayerBuilder.SetCell(i, propId);
             }
 
-            BodyBuilder.AddLayer(gfxLayerBuilder.Build());
-            BodyBuilder.AddLayer(propertyLayerBuilder.Build());
+            LayoutBuilder.AddLayer(gfxLayerBuilder.Build());
+            LayoutBuilder.AddLayer(propertyLayerBuilder.Build());
         }
 
         private byte[] ReadBytesBlock(BigEndianBinaryReader binReader)
