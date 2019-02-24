@@ -17,6 +17,7 @@ using OpenBreed.Common.Sprites;
 using OpenBreed.Common.Actions;
 using OpenBreed.Common;
 using System.Drawing;
+using OpenBreed.Common.Data;
 
 namespace OpenBreed.Editor.VM.Maps
 {
@@ -25,10 +26,8 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Private Fields
 
-        private readonly CommandMan m_Commands;
-
-        private bool _isModified;
         private ActionSetVM _actionSet;
+        private bool _isModified;
         private AssetBase _source = null;
         private string _title;
 
@@ -50,16 +49,20 @@ namespace OpenBreed.Editor.VM.Maps
             SpriteSets = new BindingList<SpriteSetVM>();
             SpriteSets.ListChanged += (s, e) => OnPropertyChanged(nameof(SpriteSets));
 
-            m_Commands = new CommandMan();
-
             PropertyChanged += MapVM_PropertyChanged;
+
+            Layout.PropertyChanged += (s, e) => OnPropertyChanged(nameof(Layout));
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public CommandMan Commands { get { return m_Commands; } }
+        public ActionSetVM ActionSet
+        {
+            get { return _actionSet; }
+            set { SetProperty(ref _actionSet, value); }
+        }
 
         public bool IsModified
         {
@@ -68,18 +71,11 @@ namespace OpenBreed.Editor.VM.Maps
         }
 
         public bool IsOpened { get { return Source != null; } }
-        public MapLayoutVM Layout { get; }
 
+        public MapLayoutVM Layout { get; }
 
         public BindingList<PaletteVM> Palettes { get; }
         public LevelPropertiesVM Properties { get; }
-
-        public ActionSetVM ActionSet
-        {
-            get { return _actionSet; }
-            set { SetProperty(ref _actionSet, value); }
-        }
-
         public AssetBase Source
         {
             get { return _source; }
@@ -96,62 +92,26 @@ namespace OpenBreed.Editor.VM.Maps
             set { SetProperty(ref _title, value); }
         }
 
-        internal override void FromEntry(IEntry entry)
-        {
-            base.FromEntry(entry);
+        #endregion Public Properties
 
-            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
-
-            var model = dataProvider.GetMap(entry.Id);
-
-            SetTileSets(model.TileSets);
-
-            //foreach (var spriteSet in model.SpriteSets)
-            //    AddSpriteSet(spriteSet);
-
-            if (model.ActionSet != null)
-                SetActionSet(model.ActionSet);
-
-            Properties.Load(model);
-
-            Layout.FromModel(model.Layout);
-
-            SetPalettes(model.Palettes);
-        }
-
-
+        #region Public Methods
 
         public Point GetIndexCoords(Point point)
         {
             return new Point(point.X / TileSize, point.Y / TileSize);
         }
 
-        internal override void ToEntry(IEntry entry)
+        public void Save()
         {
-            base.ToEntry(entry);
-
-            var mapEntry = entry as IMapEntry;
-
-            mapEntry.ActionSetRef = ActionSet != null ? ActionSet.Id : null;
+            //OnSaving(new EventArgs());
+            //Source.Save(CurrentMap);
         }
 
-        #endregion Public Properties
-
-        #region Public Methods
-
-        public void SetTileSets(List<TileSetModel> tileSets)
+        public void SaveAs(AssetBase newSource)
         {
-            TileSets.UpdateAfter(() =>
-            {
-                TileSets.Clear();
-
-                foreach (var tileSet in tileSets)
-                {
-                    var tileSetVM = new TileSetVM();
-                    tileSetVM.FromModel(tileSet);
-                    TileSets.Add(tileSetVM);
-                }
-            });
+            //OnSaving(new EventArgs());
+            //Source = newSource;
+            //Source.Save(CurrentMap);
         }
 
         public void SetPalettes(List<PaletteModel> palettes)
@@ -169,17 +129,19 @@ namespace OpenBreed.Editor.VM.Maps
             });
         }
 
-        public void Save()
+        public void SetTileSets(List<TileSetModel> tileSets)
         {
-            //OnSaving(new EventArgs());
-            //Source.Save(CurrentMap);
-        }
+            TileSets.UpdateAfter(() =>
+            {
+                TileSets.Clear();
 
-        public void SaveAs(AssetBase newSource)
-        {
-            //OnSaving(new EventArgs());
-            //Source = newSource;
-            //Source.Save(CurrentMap);
+                foreach (var tileSet in tileSets)
+                {
+                    var tileSetVM = new TileSetVM();
+                    tileSetVM.FromModel(tileSet);
+                    TileSets.Add(tileSetVM);
+                }
+            });
         }
 
         public void TryClose()
@@ -205,6 +167,28 @@ namespace OpenBreed.Editor.VM.Maps
             Layout.ConnectEvents();
         }
 
+        internal override void FromEntry(IEntry entry)
+        {
+            base.FromEntry(entry);
+
+            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
+
+            var model = dataProvider.Maps.GetMap(entry.Id);
+
+            SetTileSets(model.TileSets);
+
+            //foreach (var spriteSet in model.SpriteSets)
+            //    AddSpriteSet(spriteSet);
+
+            if (model.ActionSet != null)
+                SetActionSet(model.ActionSet);
+
+            Properties.Load(model);
+
+            Layout.FromModel(model.Layout);
+
+            SetPalettes(model.Palettes);
+        }
         internal void SetActionSet(IActionSetEntry propSet)
         {
             var propSetVM = new ActionSetVM();
@@ -212,6 +196,15 @@ namespace OpenBreed.Editor.VM.Maps
             propSetVM.FromEntry(propSet);
 
             ActionSet = propSetVM;
+        }
+
+        internal override void ToEntry(IEntry entry)
+        {
+            base.ToEntry(entry);
+
+            var mapEntry = entry as IMapEntry;
+
+            mapEntry.ActionSetRef = ActionSet != null ? ActionSet.Id : null;
         }
 
         #endregion Internal Methods

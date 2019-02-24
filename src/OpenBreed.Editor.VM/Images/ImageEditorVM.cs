@@ -62,7 +62,7 @@ namespace OpenBreed.Editor.VM.Images
             target.AssetRef = source.AssetRef;
 
             if(source.AssetRef != null)
-                target.Image = DataProvider.GetImage(source.Id);
+                target.Image = DataProvider.Images.GetImage(source.Id);
 
             base.UpdateVM(source, target);
         }

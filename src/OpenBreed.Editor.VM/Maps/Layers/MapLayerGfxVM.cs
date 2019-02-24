@@ -10,51 +10,26 @@ namespace OpenBreed.Editor.VM.Maps.Layers
 {
     public class MapLayerGfxVM : MapLayerBaseVM
     {
-        private TileRef[] _cells;
-
         #region Private Fields
+
+        private TileRef[] _cells;
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
         internal MapLayerGfxVM(MapLayoutVM layout) : base(layout)
         {
             _cells = new TileRef[layout.Size.Width * layout.Size.Height];
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
-        #region Public Properties
-
-        public void SetCell(int x, int y, TileRef value)
-        {
-            _cells[y * Layout.Size.Width + x] = value;
-        }
+        #region Public Methods
 
         public TileRef GetCell(int x, int y)
         {
             return _cells[y * Layout.Size.Width + x];
-        }
-
-        #endregion Public Properties
-
-        #region Internal Methods
-
-        public override void DrawView(Graphics gfx, Rectangle rectangle)
-        {
-            int tileSize = 16;
-
-            for (int xIndex = rectangle.Left; xIndex <= rectangle.Right; xIndex++)
-            {
-                for (int yIndex = rectangle.Bottom; yIndex <= rectangle.Top; yIndex++)
-                {
-                    var tileRef = GetCell(xIndex, yIndex);
-
-                    //Body.Map.Root.LevelEditor.TileSelector.DrawTile(gfx, tileRef, xIndex * tileSize, yIndex * tileSize, tileSize);
-                    //Body.Map.Editor.PropertySet.DrawProperty(gfx, tile.PropertyId, xIndex * tileSize, yIndex * tileSize, tileSize);
-                }
-            }
         }
 
         public override void Restore(IMapLayerModel layerModel)
@@ -67,7 +42,15 @@ namespace OpenBreed.Editor.VM.Maps.Layers
             _cells = gfxLayerModel.Cells.ToArray();
         }
 
-        #endregion Internal Methods
+        public void SetCell(int x, int y, TileRef value)
+        {
+            if (_cells[y * Layout.Size.Width + x] == value)
+                return;
 
+            _cells[y * Layout.Size.Width + x] = value;
+            Layout.Owner.IsModified = true;
+        }
+
+        #endregion Public Methods
     }
 }

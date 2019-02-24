@@ -11,11 +11,6 @@ namespace OpenBreed.Editor.VM.Maps.Layers
 {
     public abstract class MapLayerBaseVM : BaseViewModel
     {
-        #region Public Fields
-
-        public readonly Size Size;
-
-        #endregion Public Fields
 
         #region Private Fields
 
@@ -37,13 +32,13 @@ namespace OpenBreed.Editor.VM.Maps.Layers
 
         #region Public Properties
 
-        public MapLayoutVM Layout { get; }
-
         public bool IsVisible
         {
             get { return _isVisible; }
             set { SetProperty(ref _isVisible, value); }
         }
+
+        public MapLayoutVM Layout { get; }
 
         public string Name
         {
@@ -51,16 +46,15 @@ namespace OpenBreed.Editor.VM.Maps.Layers
             set { SetProperty(ref _name, value); }
         }
 
+        public Size Size { get; }
+
         #endregion Public Properties
 
         #region Public Methods
 
-
         public abstract void Restore(IMapLayerModel layerModel);
-        public abstract void DrawView(Graphics gfx, Rectangle rectangle);
 
         #endregion Public Methods
-
 
     }
 }

@@ -10,6 +10,7 @@ using OpenBreed.Common;
 using OpenBreed.Common.Actions;
 using OpenBreed.Editor.VM.Common;
 using OpenBreed.Editor.VM.Maps.Layers;
+using OpenBreed.Common.Data;
 
 namespace OpenBreed.Editor.VM.Maps
 {
@@ -63,7 +64,7 @@ namespace OpenBreed.Editor.VM.Maps
             else
             {
                 var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
-                var actionSet = dataProvider.GetActionSet(actionSetEntryId);
+                var actionSet = dataProvider.ActionSets.GetActionSet(actionSetEntryId);
 
                 var actionSetVM = new ActionSetVM();
                 actionSetVM.FromEntry(actionSet);

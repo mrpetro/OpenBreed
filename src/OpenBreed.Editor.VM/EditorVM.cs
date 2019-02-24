@@ -32,6 +32,7 @@ using OpenBreed.Editor.VM.Assets;
 using OpenBreed.Common.Images;
 using OpenBreed.Common.Maps;
 using OpenBreed.Common.Assets;
+using OpenBreed.Common.Data;
 
 namespace OpenBreed.Editor.VM
 {

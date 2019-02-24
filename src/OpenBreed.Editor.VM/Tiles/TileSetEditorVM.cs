@@ -43,7 +43,7 @@ namespace OpenBreed.Editor.VM.Tiles
 
         protected override void UpdateVM(ITileSetEntry source, TileSetVM target)
         {
-            var model = DataProvider.GetTileSet(source.Id);
+            var model = DataProvider.TileSets.GetTileSet(source.Id);
 
             if (model != null)
             {

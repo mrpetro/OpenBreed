@@ -66,7 +66,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
         protected override void UpdateVM(IPaletteEntry source, PaletteVM target)
         {
-            var model = DataProvider.GetPalette(source.Id);
+            var model = DataProvider.Palettes.GetPalette(source.Id);
 
             target.Colors.UpdateAfter(() => 
             {

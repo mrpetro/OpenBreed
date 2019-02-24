@@ -27,25 +27,6 @@ namespace OpenBreed.Editor.VM.Maps.Layers
 
         #region Public Methods
 
-        public override void DrawView(Graphics gfx, Rectangle rectangle)
-        {
-            return;
-            //if (Body.Map.Root.LevelEditor.CurrentLevel.PropSet == null)
-            //    return;
-
-            int tileSize = 16;
-
-            for (int xIndex = rectangle.Left; xIndex <= rectangle.Right; xIndex++)
-            {
-                for (int yIndex = rectangle.Bottom; yIndex <= rectangle.Top; yIndex++)
-                {
-                    var propertyId = GetCell(xIndex, yIndex);
-
-                    //Body.Map.Root.LevelEditor.CurrentLevel.PropSet.DrawProperty(gfx, propertyId, xIndex * tileSize, yIndex * tileSize, tileSize);
-                }
-            }
-        }
-
         public int GetCell(int x, int y)
         {
             return _cells[y * Layout.Size.Width + x];
@@ -63,7 +44,11 @@ namespace OpenBreed.Editor.VM.Maps.Layers
 
         public void SetCell(int x, int y, int value)
         {
+            if (_cells[y * Layout.Size.Width + x] == value)
+                return;
+
             _cells[y * Layout.Size.Width + x] = value;
+            Layout.Owner.IsModified = true;
         }
 
         #endregion Public Methods

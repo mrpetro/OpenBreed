@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System;
 using OpenBreed.Common;
+using OpenBreed.Common.Data;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
@@ -117,7 +118,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         internal void Load(string name)
         {
-            var model = ServiceLocator.Instance.GetService<DataProvider>().GetSpriteSet(name);
+            var model = ServiceLocator.Instance.GetService<DataProvider>().SpriteSets.GetSpriteSet(name);
 
             foreach (var sprite in model.Sprites)
                 Items.Add(SpriteVM.Create(sprite));

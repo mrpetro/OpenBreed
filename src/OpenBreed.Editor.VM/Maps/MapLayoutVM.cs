@@ -29,7 +29,9 @@ namespace OpenBreed.Editor.VM.Maps
         public MapLayoutVM(MapVM owner)
         {
             Owner = owner;
+
             Layers = new BindingList<MapLayerBaseVM>();
+            Layers.ListChanged += (s, e) => OnPropertyChanged(nameof(Layers));
         }
 
         #endregion Public Constructors
