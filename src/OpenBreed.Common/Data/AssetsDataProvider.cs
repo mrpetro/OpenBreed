@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common
+namespace OpenBreed.Common.Data
 {
     public delegate string ExpandVariablesDelegate(string text);
 
@@ -23,9 +23,9 @@ namespace OpenBreed.Common
 
         #region Public Constructors
 
-        public AssetsDataProvider(IUnitOfWork unitOfWork)
+        public AssetsDataProvider(DataProvider dataProvider)
         {
-            UnitOfWork = unitOfWork;
+            DataProvider = dataProvider;
         }
 
         #endregion Public Constructors
@@ -33,7 +33,7 @@ namespace OpenBreed.Common
         #region Public Properties
 
         public static ExpandVariablesDelegate ExpandVariables { get; set; }
-        public IUnitOfWork UnitOfWork { get; }
+        public DataProvider DataProvider { get; }
 
         #endregion Public Properties
 
@@ -45,7 +45,7 @@ namespace OpenBreed.Common
             if (_openedAssets.TryGetValue(name, out asset))
                 return asset;
 
-            var entry = UnitOfWork.GetRepository<IAssetEntry>().GetById(name);
+            var entry = DataProvider.UnitOfWork.GetRepository<IAssetEntry>().GetById(name);
             if (entry == null)
                 throw new Exception($"Asset error: {name}" );
 

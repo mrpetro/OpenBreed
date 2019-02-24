@@ -47,8 +47,14 @@
     <Compile Include="Configs\BaseCfg.cs" />
     <Compile Include="Configs\IConfig.cs" />
     <Compile Include="Configs\IConfigCtrl.cs" />
-    <Compile Include="DataProvider.cs" />
-    <Compile Include="AssetsDataProvider.cs" />
+    <Compile Include="Data\ActionSetsDataProvider.cs" />
+    <Compile Include="Data\DataProvider.cs" />
+    <Compile Include="Data\AssetsDataProvider.cs" />
+    <Compile Include="Data\ImagesDataProvider.cs" />
+    <Compile Include="Data\PalettesDataProvider.cs" />
+    <Compile Include="Data\SoundsDataProvider.cs" />
+    <Compile Include="Data\SpriteSetsDataProvider.cs" />
+    <Compile Include="Data\TileSetsDataProvider.cs" />
     <Compile Include="Formats\DataFormat.cs" />
     <Compile Include="Formats\FormatParameter.cs" />
     <Compile Include="Formats\IFormatEntry.cs" />
@@ -56,6 +62,7 @@
     <Compile Include="Helpers\IOHelper.cs" />
     <Compile Include="IDatabase.cs" />
     <Compile Include="Images\IImageEntry.cs" />
+    <Compile Include="Data\MapsDataProvider.cs" />
     <Compile Include="Maps\IMapEntry.cs" />
     <Compile Include="Palettes\IPaletteEntry.cs" />
     <Compile Include="Actions\IActionEntry.cs" />

@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Formats;
+﻿using OpenBreed.Common.Data;
+using OpenBreed.Common.Formats;
 using System;
 using System.Collections.Generic;
 using System.IO;
