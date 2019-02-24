@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.DGV = new System.Windows.Forms.DataGridView();
+            this.DGV = new OpenBreed.Common.UI.WinForms.Controls.DataGridViewEx();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,6 +55,6 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView DGV;
+        private OpenBreed.Common.UI.WinForms.Controls.DataGridViewEx DGV;
     }
 }

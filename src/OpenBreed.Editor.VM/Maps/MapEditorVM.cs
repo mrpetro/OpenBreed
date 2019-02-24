@@ -119,9 +119,9 @@ namespace OpenBreed.Editor.VM.Maps
         {
             Tools.Items.UpdateAfter(() =>
             {
-                Tools.Items.Add(new MapEditorTilesToolVM(this));
-                Tools.Items.Add(new MapEditorActionsToolVM(this));
-                Tools.Items.Add(new MapEditorPalettesToolVM(this));
+                Tools.Items.Add(TilesTool);
+                Tools.Items.Add(ActionsTool);
+                Tools.Items.Add(PalettesTool);
             });
 
             Tools.CurrentTool = Tools.Items.FirstOrDefault();

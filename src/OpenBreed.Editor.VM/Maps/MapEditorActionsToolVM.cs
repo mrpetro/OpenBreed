@@ -77,7 +77,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         internal override void OnCursor(MapViewCursorVM cursor)
         {
-            if (cursor.Action == CursorActions.Down && cursor.Buttons.HasFlag(CursorButtons.Left))
+            if ((cursor.Action == CursorActions.Move || cursor.Action == CursorActions.Down) && cursor.Buttons.HasFlag(CursorButtons.Left))
             {
                 var actionLayer = Parent.Editable.Layout.Layers.OfType<MapLayerActionVM>().FirstOrDefault();
 

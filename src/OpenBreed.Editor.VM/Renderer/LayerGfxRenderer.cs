@@ -12,6 +12,7 @@ namespace OpenBreed.Editor.VM.Renderer
 {
     public class LayerGfxRenderer : RendererBase<MapLayerBaseVM>
     {
+
         #region Public Constructors
 
         public LayerGfxRenderer(RenderTarget target) : base(target)
@@ -26,6 +27,40 @@ namespace OpenBreed.Editor.VM.Renderer
         {
             Render((MapLayerGfxVM)renderable);
         }
+
+        public void RenderDefaultTile(TileRef tileRef, float x, float y, int tileSize)
+        {
+            Font font = new Font("Arial", 5);
+
+            var rectangle = new Rectangle((int)x, (int)y, tileSize, tileSize);
+
+            Color c = Color.Black;
+            Pen tileColor = new Pen(c);
+            Brush brush = new SolidBrush(c);
+
+            Target.Gfx.FillRectangle(brush, rectangle);
+
+            c = Color.White;
+            tileColor = new Pen(c);
+            brush = new SolidBrush(c);
+
+            Target.Gfx.DrawRectangle(tileColor, rectangle);
+            Target.Gfx.DrawString(string.Format("{0,2:D2}", tileRef.TileId / 100), font, brush, x + 2, y + 1);
+            Target.Gfx.DrawString(string.Format("{0,2:D2}", tileRef.TileId % 100), font, brush, x + 2, y + 7);
+        }
+
+        public void RenderTile(TileSetVM tileSet, int tileId, float x, float y, int tileSize)
+        {
+            if (tileId >= tileSet.Items.Count)
+                return;
+
+            var tileRect = tileSet.Items[tileId].Rectangle;
+            Target.Gfx.DrawImage(tileSet.Bitmap, (int)x, (int)y, tileRect, GraphicsUnit.Pixel);
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private void Render(MapLayerGfxVM renderable)
         {
@@ -52,40 +87,6 @@ namespace OpenBreed.Editor.VM.Renderer
                         RenderDefaultTile(tileRef, x, y, tileSize);
                 }
             }
-        }
-
-        #endregion Public Methods
-
-        #region Private Methods
-
-        private void RenderDefaultTile(TileRef tileRef, float x, float y, int tileSize)
-        {
-            Font font = new Font("Arial", 5);
-
-            var rectangle = new Rectangle((int)x, (int)y, tileSize, tileSize);
-
-            Color c = Color.Black;
-            Pen tileColor = new Pen(c);
-            Brush brush = new SolidBrush(c);
-
-            Target.Gfx.FillRectangle(brush, rectangle);
-
-            c = Color.White;
-            tileColor = new Pen(c);
-            brush = new SolidBrush(c);
-
-            Target.Gfx.DrawRectangle(tileColor, rectangle);
-            Target.Gfx.DrawString(string.Format("{0,2:D2}", tileRef.TileId / 100), font, brush, x + 2, y + 1);
-            Target.Gfx.DrawString(string.Format("{0,2:D2}", tileRef.TileId % 100), font, brush, x + 2, y + 7);
-        }
-
-        private void RenderTile(TileSetVM tileSet, int tileId, float x, float y, int tileSize)
-        {
-            if (tileId >= tileSet.Items.Count)
-                return;
-
-            var tileRect = tileSet.Items[tileId].Rectangle;
-            Target.Gfx.DrawImage(tileSet.Bitmap, (int)x, (int)y, tileRect, GraphicsUnit.Pixel);
         }
 
         #endregion Private Methods

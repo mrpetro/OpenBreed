@@ -1,48 +1,59 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Drawing;
-//using OpenBreed.Editor.VM.Levels.Helpers;
-//using OpenBreed.Common.Commands;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Drawing;
+using OpenBreed.Common.Commands;
 
-//namespace OpenBreed.Editor.VM.Levels.Commands
-//{
-//    public class CmdTilesInsert : ICommand
-//    {
-//        private readonly TilesInserter m_Inserter;
-//        private readonly List<TileInsertOperation> m_Operations;
+namespace OpenBreed.Editor.VM.Maps.Commands
+{
+    public class CmdTilesInsert : ICommand
+    {
+        #region Public Constructors
 
-//        public CmdTilesInsert(TilesInserter inserter, List<TileInsertOperation> operations)
-//        {
-//            m_Inserter = inserter;
-//            m_Operations = operations;
-//        }
+        public CmdTilesInsert(MapEditorTilesToolVM inserter, List<MapEditorTileInsertOperation> operations)
+        {
+            Inserter = inserter;
+            Operations = operations;
+        }
 
-//        public void Execute()
-//        {
-//            for (int i = 0; i < m_Operations.Count; i++)
-//            {
-//                Point tileCoords = m_Operations[i].IndexCoords;
-//                int tileId = m_Operations[i].TileIdAfter;
+        #endregion Public Constructors
 
-//                m_Inserter.Model.SetTileGfx(tileCoords.X, tileCoords.Y, tileId);
-//            }
+        #region Internal Properties
 
-//            m_Inserter.Model.Update();
-//        }
+        internal MapEditorTilesToolVM Inserter { get; }
+        internal List<MapEditorTileInsertOperation> Operations { get; }
 
-//        public void UnExecute()
-//        {
-//            for (int i = 0; i < m_Operations.Count; i++)
-//            {
-//                Point tileCoords = m_Operations[i].IndexCoords;
-//                int tileId = m_Operations[i].TileIdBefore;
+        #endregion Internal Properties
 
-//                m_Inserter.Model.SetTileGfx(tileCoords.X, tileCoords.Y, tileId);
-//            }
+        #region Public Methods
 
-//            m_Inserter.Model.Update();
-//        }
-//    }
-//}
+        public void Execute()
+        {
+            for (int i = 0; i < Operations.Count; i++)
+            {
+                Point tileCoords = Operations[i].IndexCoords;
+                int tileId = Operations[i].TileIdAfter;
+
+                Inserter.Layer.SetCell(tileCoords.X, tileCoords.Y, new OpenBreed.Common.Maps.TileRef(0, tileId));
+            }
+
+            //Inserter.Model.Update();
+        }
+
+        public void UnExecute()
+        {
+            for (int i = 0; i < Operations.Count; i++)
+            {
+                Point tileCoords = Operations[i].IndexCoords;
+                int tileId = Operations[i].TileIdBefore;
+
+                Inserter.Layer.SetCell(tileCoords.X, tileCoords.Y, new OpenBreed.Common.Maps.TileRef(0, tileId));
+            }
+
+            //Inserter.Model.Update();
+        }
+
+        #endregion Public Methods
+    }
+}

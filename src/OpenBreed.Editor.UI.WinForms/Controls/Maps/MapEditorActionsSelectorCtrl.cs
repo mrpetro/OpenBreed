@@ -14,6 +14,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
 {
     public partial class MapEditorActionsSelectorCtrl : UserControl
     {
+
         #region Private Fields
 
         private MapEditorActionsSelectorVM _vm;
@@ -36,7 +37,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
             _vm = vm;
 
             DGV.CurrentCellDirtyStateChanged += DGV_CurrentCellDirtyStateChanged;
-
+            DGV.DataBindings.Add(nameof(DGV.CurrentRowIndex), _vm, nameof(_vm.SelectedIndex), false, DataSourceUpdateMode.OnPropertyChanged);
             SetupDataGridView(_vm);
         }
 
@@ -109,5 +110,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
         }
 
         #endregion Private Methods
+
     }
 }

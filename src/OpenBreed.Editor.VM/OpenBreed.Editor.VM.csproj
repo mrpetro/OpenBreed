@@ -130,8 +130,11 @@
     <Compile Include="Maps\MapEditorToolsVM.cs" />
     <Compile Include="Maps\MapEditorToolVM.cs" />
     <Compile Include="Maps\MapViewCursorVM.cs" />
+    <Compile Include="Maps\MapEditorTilesInserter.cs" />
+    <Compile Include="Maps\MapEditorTileInsertOperation.cs" />
     <Compile Include="Renderer\LayerActionRenderer.cs" />
     <Compile Include="Renderer\LayerGfxRenderer.cs" />
+    <Compile Include="Renderer\TilesToolRenderer.cs" />
     <Compile Include="Renderer\ViewCursorRenderer.cs" />
     <Compile Include="Renderer\ViewRenderer.cs" />
     <Compile Include="Tools\IScrollableVM.cs" />

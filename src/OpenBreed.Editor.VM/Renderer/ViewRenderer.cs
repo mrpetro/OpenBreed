@@ -15,6 +15,7 @@ namespace OpenBreed.Editor.VM.Renderer
 
         private ViewCursorRenderer _cursorRenderer;
         private LayoutRenderer _layoutRenderer;
+        private TilesToolRenderer _tilesToolRenderer;
 
         #endregion Private Fields
 
@@ -26,6 +27,7 @@ namespace OpenBreed.Editor.VM.Renderer
 
             _layoutRenderer = new LayoutRenderer(editor, target);
             _cursorRenderer = new ViewCursorRenderer(editor, target);
+            _tilesToolRenderer = new TilesToolRenderer(editor, target);
         }
 
         public override void Render(MapEditorViewVM renderable)
@@ -37,7 +39,12 @@ namespace OpenBreed.Editor.VM.Renderer
 
             _layoutRenderer.Render(renderable.Layout);
 
-            if(renderable.Cursor.Visible)
+
+            _editor.TilesTool.DrawBuffer(Target.Gfx, 16);
+
+            _tilesToolRenderer.Render(_editor.TilesTool);
+
+            if (renderable.Cursor.Visible)
                 _cursorRenderer.Render(renderable.Cursor);
         }
 
