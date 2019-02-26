@@ -1,111 +1,111 @@
-﻿using OpenBreed.Common.Maps.Builders;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//using OpenBreed.Common.Maps.Builders;
+//using System;
+//using System.Collections.Generic;
+//using System.Drawing;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Maps
-{
-    public interface IMapLayerModel
-    {
+//namespace OpenBreed.Common.Maps
+//{
+//    public interface IMapLayerModel
+//    {
 
-        #region Public Properties
+//        #region Public Properties
 
-        Type DataType { get; }
-        string Name { get; }
+//        Type DataType { get; }
+//        string Name { get; }
 
-        MapLayoutModel Owner { get; set; }
-        Size Size { get; }
+//        MapLayoutModel Owner { get; set; }
+//        Size Size { get; }
 
-        #endregion Public Properties
-    }
+//        #endregion Public Properties
+//    }
 
-    public struct CellPos
-    {
+//    public struct CellPos
+//    {
 
-        #region Public Constructors
+//        #region Public Constructors
 
-        public CellPos(int x, int y)
-        {
-            X = x;
-            Y = y;
-        }
+//        public CellPos(int x, int y)
+//        {
+//            X = x;
+//            Y = y;
+//        }
 
-        #endregion Public Constructors
+//        #endregion Public Constructors
 
-        #region Public Properties
+//        #region Public Properties
 
-        public int X { get; private set; }
-        public int Y { get; private set; }
+//        public int X { get; private set; }
+//        public int Y { get; private set; }
 
-        #endregion Public Properties
-    }
-    public class MapLayerModel<T> : IMapLayerModel
-    {
+//        #endregion Public Properties
+//    }
+//    public class MapLayerModel<T> : IMapLayerModel
+//    {
 
-        #region Public Constructors
+//        #region Public Constructors
 
-        public MapLayerModel(MapLayoutLayerBuilder<T> builder)
-        {
-            Name = builder.Name;
-            Size = builder.Size;
-            Cells = builder.Cells;
-        }
+//        public MapLayerModel(MapLayoutLayerBuilder<T> builder)
+//        {
+//            Name = builder.Name;
+//            Size = builder.Size;
+//            Cells = builder.Cells;
+//        }
 
-        #endregion Public Constructors
+//        #endregion Public Constructors
 
-        #region Public Events
+//        #region Public Events
 
-        public event Action<CellPos> CellValueChanged;
+//        public event Action<CellPos> CellValueChanged;
 
-        #endregion Public Events
+//        #endregion Public Events
 
-        #region Public Properties
+//        #region Public Properties
 
-        public T[] Cells { get; private set; }
+//        public T[] Cells { get; private set; }
 
-        public Type DataType { get { return typeof(T); } }
-        public string Name { get; private set; }
-        public MapLayoutModel Owner { get; set; }
-        public Size Size { get; private set; }
+//        public Type DataType { get { return typeof(T); } }
+//        public string Name { get; private set; }
+//        public MapLayoutModel Owner { get; set; }
+//        public Size Size { get; private set; }
 
-        #endregion Public Properties
+//        #endregion Public Properties
 
-        #region Public Indexers
+//        #region Public Indexers
 
-        public T this[CellPos pos]
-        {
-            get
-            {
-                return Cells[GetCellIndex(pos)];
-            }
+//        public T this[CellPos pos]
+//        {
+//            get
+//            {
+//                return Cells[GetCellIndex(pos)];
+//            }
 
-            set
-            {
-                int cellIndex = GetCellIndex(pos);
+//            set
+//            {
+//                int cellIndex = GetCellIndex(pos);
 
-                if (EqualityComparer<T>.Default.Equals(Cells[cellIndex], value))
-                    return;
+//                if (EqualityComparer<T>.Default.Equals(Cells[cellIndex], value))
+//                    return;
 
-                Cells[cellIndex] = value;
+//                Cells[cellIndex] = value;
 
-                if (CellValueChanged != null)
-                    CellValueChanged(pos);
-            }
-        }
+//                if (CellValueChanged != null)
+//                    CellValueChanged(pos);
+//            }
+//        }
 
-        #endregion Public Indexers
+//        #endregion Public Indexers
 
-        #region Internal Methods
+//        #region Internal Methods
 
-        internal int GetCellIndex(CellPos pos)
-        {
-            return pos.Y * Size.Width + pos.X;
-        }
+//        internal int GetCellIndex(CellPos pos)
+//        {
+//            return pos.Y * Size.Width + pos.X;
+//        }
 
-        #endregion Internal Methods
+//        #endregion Internal Methods
 
-    }
-}
+//    }
+//}

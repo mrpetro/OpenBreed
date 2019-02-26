@@ -3,6 +3,7 @@ using OpenBreed.Common.Palettes;
 using OpenBreed.Common.Readers;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace OpenBreed.Common.Maps.Readers.MAP
 {
@@ -15,7 +16,11 @@ namespace OpenBreed.Common.Maps.Readers.MAP
 
     public class MAPReader : IMapModelReader, IDisposable
     {
+        #region Public Fields
+
         public readonly MAPFormat Format;
+
+        #endregion Public Fields
 
         #region Public Constructors
 
@@ -23,10 +28,7 @@ namespace OpenBreed.Common.Maps.Readers.MAP
         {
             MapBuilder = builder;
             Format = format;
-            PropertiesBuilder = MapPropertiesBuilder.NewPropertiesModel();
             MissionBuilder = MapMissionBuilder.NewMissionModel();
-            LayoutBuilder = MapLayoutBuilder.NewLayoutModel();
-
             PaletteReader = new MAPPaletteReader(this);
         }
 
@@ -34,11 +36,9 @@ namespace OpenBreed.Common.Maps.Readers.MAP
 
         #region Internal Properties
 
-        internal MapLayoutBuilder LayoutBuilder { get; private set; }
         internal MapBuilder MapBuilder { get; private set; }
         internal MapMissionBuilder MissionBuilder { get; private set; }
         internal MAPPaletteReader PaletteReader { get; private set; }
-        internal MapPropertiesBuilder PropertiesBuilder { get; private set; }
 
         #endregion Internal Properties
 
@@ -48,51 +48,64 @@ namespace OpenBreed.Common.Maps.Readers.MAP
         {
         }
 
+        private void ReadBlock(BigEndianBinaryReader binReader)
+        {
+            string blockName = ReadString(binReader, 4);
+
+            switch (blockName)
+            {
+                default:
+                    break;
+            }
+        }
+
         public MapModel Read(Stream stream)
         {
             //We dont want to close the stream here so reader is not being used inside of 'using' statement
             BigEndianBinaryReader binReader = new BigEndianBinaryReader(stream);
 
-            PropertiesBuilder.Header = ReadHeader(binReader);
+            ReadHeader(binReader);
+
+            int unknownBlocks = 0;
 
             while (!IsEOF(binReader))
             {
                 string string_result = ReadString(binReader, 4);
 
                 if (string_result == "XBLK")
-                    PropertiesBuilder.XBLK = (int)ReadUInt32Block(binReader);
+                    ReadUInt32Block("XBLK", binReader);
                 else if (string_result == "YBLK")
-                    PropertiesBuilder.YBLK = (int)ReadUInt32Block(binReader);
+                    ReadUInt32Block("YBLK", binReader);
                 else if (string_result == "XOFC")
-                    PropertiesBuilder.XOFC = (int)ReadUInt32Block(binReader);
+                    ReadUInt32Block("XOFC", binReader);
                 else if (string_result == "YOFC")
-                    PropertiesBuilder.YOFC = (int)ReadUInt32Block(binReader);
+                    ReadUInt32Block("YOFC", binReader);
                 else if (string_result == "XOFM")
-                    PropertiesBuilder.XOFM = (int)ReadUInt32Block(binReader);
+                    ReadUInt32Block("XOFM", binReader);
                 else if (string_result == "YOFM")
-                    PropertiesBuilder.YOFM = (int)ReadUInt32Block(binReader);
+                    ReadUInt32Block("YOFM", binReader);
                 else if (string_result == "XOFA")
-                    PropertiesBuilder.XOFA = (int)ReadUInt32Block(binReader);
+                    ReadUInt32Block("XOFA", binReader);
                 else if (string_result == "YOFA")
-                    PropertiesBuilder.YOFA = (int)ReadUInt32Block(binReader);
+                    ReadUInt32Block("YOFA", binReader);
                 else if (string_result == "IFFP")
-                    PropertiesBuilder.IFFP = ReadStringBlock(binReader);
+                    ReadStringBlock("IFFP", binReader);
                 else if (string_result == "ALTM")
-                    PropertiesBuilder.ALTM = ReadStringBlock(binReader);
+                    ReadStringBlock("ALTM", binReader);
                 else if (string_result == "ALTP")
-                    PropertiesBuilder.ALTP = ReadStringBlock(binReader);
+                    ReadStringBlock("ALTP", binReader);
                 else if (string_result == "CMAP")
-                    PropertiesBuilder.AddPalette(ReadColorBlock(binReader, "CMAP"));
+                    ReadPaletteBlock("CMAP", binReader);
                 else if (string_result == "ALCM")
-                    PropertiesBuilder.AddPalette(ReadColorBlock(binReader, "ALCM"));
+                    ReadPaletteBlock("ALCM", binReader);
                 else if (string_result == "IFFC")
-                    PropertiesBuilder.AddPalette(ReadColorBlockEx(binReader, "IFFC"));
+                    ReadBytesBlock("IFFC", binReader);
                 else if (string_result == "CCCI")
-                    PropertiesBuilder.CCCI = ReadBytesBlock(binReader);
+                    ReadBytesBlock("CCCI", binReader);
                 else if (string_result == "CCIN")
-                    PropertiesBuilder.CCIN = ReadBytesBlock(binReader);
+                    ReadBytesBlock("CCIN", binReader);
                 else if (string_result == "CSIN")
-                    PropertiesBuilder.CSIN = ReadBytesBlock(binReader);
+                    ReadBytesBlock("CSIN", binReader);
                 else if (string_result == "MISS")
                     ReadMission(binReader);
                 else if (string_result == "MTXT")
@@ -126,15 +139,13 @@ namespace OpenBreed.Common.Maps.Readers.MAP
                     MissionBuilder.NOT3 = ReadString(binReader, uint_size);
                 }
                 else if (string_result == "BODY")
-                    ReadBody(binReader);
+                    ReadBodyBlock(binReader);
                 else
-                    ReadStringBlock(binReader);
+                    ReadBytesBlock("UKWN", binReader);
                 //throw new Exception(string_result + ": Unknown block!");
             }
 
-            MapBuilder.SetProperties(PropertiesBuilder.Build());
             MapBuilder.SetMission(MissionBuilder.Build());
-            MapBuilder.SetBody(LayoutBuilder.Build());
 
             return MapBuilder.Build();
         }
@@ -158,64 +169,56 @@ namespace OpenBreed.Common.Maps.Readers.MAP
 
         #region Private Methods
 
-        private void ReadBody(BigEndianBinaryReader binReader)
+        private void ReadBodyBlock(BigEndianBinaryReader binReader)
         {
-            int sizeX = PropertiesBuilder.XBLK;
-            int sizeY = PropertiesBuilder.YBLK;
+            int sizeX = (int)MapBuilder.Blocks.OfType<MapUInt32DataBlock>().FirstOrDefault(item => item.Name == "XBLK").Value;
+            int sizeY = (int)MapBuilder.Blocks.OfType<MapUInt32DataBlock>().FirstOrDefault(item => item.Name == "YBLK").Value;
 
             //Check how many tile can be read from file and how many are expected based on map sizes
-            UInt32 tilesNo = binReader.ReadUInt32() / 2;
+            var tilesNo = (int)(binReader.ReadUInt32() / 2);
             int expectedTilesNo = sizeX * sizeY;
 
             if (tilesNo != expectedTilesNo)
                 throw new Exception("Incorrect number of tiles in body (" + tilesNo + "). Expected: " + expectedTilesNo);
 
-            var gfxLayerBuilder = MapLayoutLayerBuilder<TileRef>.NewMapLayoutLayerModel();
-            var propertyLayerBuilder = MapLayoutLayerBuilder<int>.NewMapLayoutLayerModel();
-
-            gfxLayerBuilder.SetName("GFX");
-            gfxLayerBuilder.SetSize(sizeX, sizeY);
-            propertyLayerBuilder.SetName("PROP");
-            propertyLayerBuilder.SetSize(sizeX, sizeY);
-
-            LayoutBuilder.SetSize(sizeX, sizeY);
+            var bodyBlock = new MapBodyDataBlock(tilesNo);
 
             for (int i = 0; i < tilesNo; i++)
             {
                 UInt16 data = binReader.ReadUInt16();
                 int gfxId;
-                int propId;
+                int actionId;
 
                 if (Format == MAPFormat.ABSE)
                 {
                     gfxId = (UInt16)(data << 7) >> 7;
-                    propId = data >> 9;
+                    actionId = data >> 9;
                 }
                 else
                 {
-                    propId = (UInt16)(data << 10) >> 10;
+                    actionId = (UInt16)(data << 10) >> 10;
                     gfxId = data >> 6;
                 }
 
-                gfxLayerBuilder.SetCell(i, new TileRef(0, gfxId));
-                propertyLayerBuilder.SetCell(i, propId);
+                bodyBlock.Cells[i].GfxId = gfxId;
+                bodyBlock.Cells[i].ActionId = actionId;
             }
 
-            LayoutBuilder.AddLayer(gfxLayerBuilder.Build());
-            LayoutBuilder.AddLayer(propertyLayerBuilder.Build());
+            MapBuilder.AddBlock(bodyBlock);
         }
 
-        private byte[] ReadBytesBlock(BigEndianBinaryReader binReader)
+        private void ReadBytesBlock(string name, BigEndianBinaryReader binReader)
         {
             UInt32 size = binReader.ReadUInt32();
-            return binReader.ReadBytes((int)size);
+            var value = binReader.ReadBytes((int)size);
+            MapBuilder.AddBlock(new MapUnknownDataBlock(name, value));
         }
 
-        private PaletteModel ReadColorBlock(BigEndianBinaryReader binReader, string name)
+        private void ReadPaletteBlock(string name, BigEndianBinaryReader binReader)
         {
-            PaletteModel result = PaletteReader.Read(binReader);
-            result.Name = name;
-            return result;
+            var value = PaletteReader.Read(binReader);
+            value.Name = name;
+            MapBuilder.AddBlock(new MapPaletteDataBlock(name, value));
         }
 
         private PaletteModel ReadColorBlockEx(BigEndianBinaryReader binReader, string name)
@@ -225,10 +228,11 @@ namespace OpenBreed.Common.Maps.Readers.MAP
             return result;
         }
 
-        private byte[] ReadHeader(BigEndianBinaryReader binReader)
+        private void ReadHeader(BigEndianBinaryReader binReader)
         {
             //Read file header. This should contain editor name
-            return binReader.ReadBytes(12);
+            var header = binReader.ReadBytes(12);
+            MapBuilder.SetHeader(header);
         }
 
         private void ReadMission(BigEndianBinaryReader binReader)
@@ -262,20 +266,22 @@ namespace OpenBreed.Common.Maps.Readers.MAP
             MissionBuilder.UNKN22 = binReader.ReadUInt16();
         }
 
-        private string ReadStringBlock(BigEndianBinaryReader binReader)
+        private void ReadStringBlock(string name, BigEndianBinaryReader binReader)
         {
             UInt32 size = binReader.ReadUInt32();
-            return ReadString(binReader, size);
+            var value = ReadString(binReader, size);
+            MapBuilder.AddBlock(new MapStringDataBlock(name, value));
         }
 
-        private UInt32 ReadUInt32Block(BigEndianBinaryReader binReader)
+        private void ReadUInt32Block(string name, BigEndianBinaryReader binReader)
         {
             UInt32 size = binReader.ReadUInt32();
 
             if (size != 4)
                 throw new Exception("Incorrect size for UInt32");
 
-            return binReader.ReadUInt32();
+            var value = binReader.ReadUInt32();
+            MapBuilder.AddBlock(new MapUInt32DataBlock(name, value));
         }
 
         #endregion Private Methods

@@ -41,60 +41,47 @@ namespace OpenBreed.Common.Maps.Writers.MAP
         {
             WriteHeader(map);
 
-            WriteUInt32Block("XBLK", (UInt32)map.Properties.XBLK);
-            WriteUInt32Block("YBLK", (UInt32)map.Properties.YBLK);
-            WriteUInt32Block("XOFC", (UInt32)map.Properties.XOFC);
-            WriteUInt32Block("YOFC", (UInt32)map.Properties.YOFC);
-            WriteUInt32Block("XOFM", (UInt32)map.Properties.XOFM);
-            WriteUInt32Block("YOFM", (UInt32)map.Properties.YOFM);
-            WriteUInt32Block("XOFA", (UInt32)map.Properties.XOFA);
-            WriteUInt32Block("YOFA", (UInt32)map.Properties.YOFA);
 
-            WriteStringBlock("IFFP", map.Properties.IFFP);
-            WriteStringBlock("ALTM", map.Properties.ALTM);
-            WriteStringBlock("ALTP", map.Properties.ALTP);
+            //WriteUInt32Block("XBLK", (UInt32)map.Properties.XBLK);
+            //WriteUInt32Block("YBLK", (UInt32)map.Properties.YBLK);
+            //WriteUInt32Block("XOFC", (UInt32)map.Properties.XOFC);
+            //WriteUInt32Block("YOFC", (UInt32)map.Properties.YOFC);
+            //WriteUInt32Block("XOFM", (UInt32)map.Properties.XOFM);
+            //WriteUInt32Block("YOFM", (UInt32)map.Properties.YOFM);
+            //WriteUInt32Block("XOFA", (UInt32)map.Properties.XOFA);
+            //WriteUInt32Block("YOFA", (UInt32)map.Properties.YOFA);
 
-            WritePaletteBlock("CMAP", map.Properties.Palettes.FirstOrDefault(item => item.Name == "CMAP"));
-            WritePaletteBlock("ALCM", map.Properties.Palettes.FirstOrDefault(item => item.Name == "ALCM"));
+            //WriteStringBlock("IFFP", map.Properties.IFFP);
+            //WriteStringBlock("ALTM", map.Properties.ALTM);
+            //WriteStringBlock("ALTP", map.Properties.ALTP);
 
-            WriteBytesBlock("CCCI", map.Properties.CCCI);
-            WriteBytesBlock("CCIN", map.Properties.CCIN);
-            WriteBytesBlock("CSIN", map.Properties.CSIN);
+            //WritePaletteBlock("CMAP", map.Properties.Palettes.FirstOrDefault(item => item.Name == "CMAP"));
+            //WritePaletteBlock("ALCM", map.Properties.Palettes.FirstOrDefault(item => item.Name == "ALCM"));
+
+            //WriteBytesBlock("CCCI", map.Properties.CCCI);
+            //WriteBytesBlock("CCIN", map.Properties.CCIN);
+            //WriteBytesBlock("CSIN", map.Properties.CSIN);
 
             WriteMission(map.Mission);
 
-            WriteBody(map.Layout);
+            //WriteBody(map.Layout);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void WriteBody(MapLayoutModel body)
+        private void WriteBody(MapBodyDataBlock bodyBlock)
         {
             _binWriter.Write(Encoding.ASCII.GetBytes("BODY"));
-            _binWriter.Write((UInt32)(body.Size.Width * body.Size.Height * 2));
+            _binWriter.Write((UInt32)(bodyBlock.Length * 2));
 
-            var bodyGfxLayer = body.Layers.FirstOrDefault(item => item.Name == "GFX") as MapLayerModel<int>;
-            var bodyPropLayer = body.Layers.FirstOrDefault(item => item.Name == "PROP") as MapLayerModel<int>;
-
-            if (bodyGfxLayer == null)
-                throw new Exception("Layer 'GFX' missing or has incorrect data type.");
-
-            if (bodyPropLayer == null)
-                throw new Exception("Layer 'PROP' missing or has incorrect data type.");
-
-            for (int indexY = 0; indexY < body.Size.Height; indexY++)
+            for (int i = 0; i < bodyBlock.Length; i++)
             {
-                for (int indexX = 0; indexX < body.Size.Width; indexX++)
-                {
-                    var gfxId = bodyGfxLayer[new CellPos(indexX, indexY)];
-                    var propId = bodyPropLayer[new CellPos(indexX, indexY)];
-
-                    //var tile = body.GetCell(indexX, indexY);
-                    var value = (UInt16)((gfxId << 6) | (propId << 10) >> 10);
-                    _binWriter.Write(value);
-                }
+                var gfxId = bodyBlock.Cells[i].GfxId;
+                var actionId = bodyBlock.Cells[i].ActionId;
+                var value = (UInt16)((gfxId << 6) | (actionId << 10) >> 10);
+                _binWriter.Write(value);
             }
         }
 
@@ -107,12 +94,12 @@ namespace OpenBreed.Common.Maps.Writers.MAP
 
         private void WriteHeader(MapModel map)
         {
-            if (map.Properties.Header.Length != 12)
+            if (map.Header.Length != 12)
                 LogMan.Instance.LogWarning("Header has wrong size (not 12 bytes). Adjusted.");
 
             byte[] validHeader = new byte[12];
 
-            Array.Copy(map.Properties.Header, validHeader, map.Properties.Header.Length > 12 ? 12 : map.Properties.Header.Length);
+            Array.Copy(map.Header, validHeader, map.Header.Length > 12 ? 12 : map.Header.Length);
 
             //Write file header. This should contain editor name
             _binWriter.Write(validHeader);

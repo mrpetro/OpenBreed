@@ -15,27 +15,28 @@ namespace OpenBreed.Common.Maps
 {
     public class MapModel
     {
+        public byte[] Header { get; }
+
+        public List<IMapDataBlock> Blocks { get; }
 
         #region Internal Constructors
 
         internal MapModel(MapBuilder builder)
         {
-            Properties = builder.Properties;
+            Header = builder.Header;
             Mission = builder.Mission;
-            Layout = builder.Body;
+            Blocks = builder.Blocks;
         }
 
         #endregion Internal Constructors
 
         #region Public Properties
 
-        public MapLayoutModel Layout { get; }
+        //public MapLayoutModel Layout { get; }
+
+
 
         public MapMissionModel Mission { get; }
-
-        public List<PaletteModel> Palettes { get; } = new List<PaletteModel>();
-
-        public MapPropertiesModel Properties { get; }
 
         /// <summary>
         ///  Gets or sets an object that provides additional data context.

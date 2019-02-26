@@ -7,24 +7,30 @@ namespace OpenBreed.Common.Maps.Builders
 {
     public class MapBuilder
     {
-        internal MapPropertiesModel Properties = null;
+        #region Internal Fields
+
+        internal List<IMapDataBlock> Blocks = new List<IMapDataBlock>();
+        internal byte[] Header;
         internal MapMissionModel Mission = null;
-        internal MapLayoutModel Body = null;
+
+        #endregion Internal Fields
+
+        #region Public Methods
 
         public static MapBuilder NewMapModel()
         {
             return new MapBuilder();
         }
 
-        public MapBuilder SetProperties(MapPropertiesModel properties)
+        public MapModel Build()
         {
-            Properties = properties;
-            return this;
+            return new MapModel(this);
         }
 
-        public MapBuilder SetBody(MapLayoutModel body)
+        public MapBuilder SetHeader(byte[] header)
         {
-            Body = body;
+            Header = header;
+
             return this;
         }
 
@@ -34,9 +40,15 @@ namespace OpenBreed.Common.Maps.Builders
             return this;
         }
 
-        public MapModel Build()
+        #endregion Public Methods
+
+        #region Internal Methods
+
+        internal void AddBlock(IMapDataBlock dataBlock)
         {
-            return new MapModel(this);
+            Blocks.Add(dataBlock);
         }
+
+        #endregion Internal Methods
     }
 }
