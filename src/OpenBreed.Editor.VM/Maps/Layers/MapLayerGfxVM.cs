@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Maps;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Maps;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -32,28 +33,18 @@ namespace OpenBreed.Editor.VM.Maps.Layers
             return _cells[y * Layout.Size.Width + x];
         }
 
-        public override void Restore(IMapLayerModel layerModel)
+        public void Restore(MapBodyDataBlock bodyBlock)
         {
-            var gfxLayerModel = layerModel as MapLayerModel<TileRef>;
+            _cells = new TileRef[bodyBlock.Length];
 
-            if (gfxLayerModel == null)
-                throw new ArgumentException(nameof(layerModel));
-
-            _cells = gfxLayerModel.Cells.ToArray();
+            for (int i = 0; i < _cells.Length; i++)
+                _cells[i] = new TileRef(0, bodyBlock.Cells[i].GfxId);
         }
 
-        public void Store(IMapLayerModel layerModel)
+        public void Store(MapBodyDataBlock bodyBlock)
         {
-            var gfxLayerModel = layerModel as MapLayerModel<TileRef>;
-
-            if (gfxLayerModel == null)
-                throw new ArgumentException(nameof(layerModel));
-
-            //MapLayoutLayerBuilder<int> builder
-
-
-
-            _cells = gfxLayerModel.Cells.ToArray();
+            for (int i = 0; i < _cells.Length; i++)
+                bodyBlock.Cells[i].GfxId = _cells[i].TileId;
         }
 
         public void SetCell(int x, int y, TileRef value)

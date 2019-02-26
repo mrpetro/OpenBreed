@@ -13,6 +13,7 @@ using OpenBreed.Common.Tiles;
 using OpenBreed.Editor.VM.Tiles;
 using OpenBreed.Common.Actions;
 using OpenBreed.Common.Maps.Builders;
+using OpenBreed.Common;
 
 namespace OpenBreed.Editor.VM.Maps
 {
@@ -117,37 +118,26 @@ namespace OpenBreed.Editor.VM.Maps
         {
         }
 
-        internal void ToModel(MapLayoutModel layout)
+        internal void FromMap(MapModel mapModel)
         {
-            //var layoutBuilder = new MapLayoutBuilder();
-            //layoutBuilder.SetSize(Size.Width, Size.Height);
-
-            //var gfxLayerBuilder = new MapLayoutLayerBuilder<int>();
-            //gfxLayerBuilder.SetSize(Size.Width, Size.Height);
-
-            //var modelGfx = layout.Layers.FirstOrDefault(item => item.Name == "GFX");
+            int sizeX = (int)mapModel.Blocks.OfType<MapUInt32DataBlock>().FirstOrDefault(item => item.Name == "XBLK").Value;
+            int sizeY = (int)mapModel.Blocks.OfType<MapUInt32DataBlock>().FirstOrDefault(item => item.Name == "YBLK").Value;
 
 
+            Size = new Size(sizeX, sizeY);
 
-            //var vmGfx = Layers.OfType<MapLayerGfxVM>().FirstOrDefault();
-            //var modelAL = layout.Layers.FirstOrDefault(item => item.Name == "PROP");
-            //var vmAL = Layers.OfType<MapLayerActionVM>().FirstOrDefault();
+            var bodyBlock = mapModel.Blocks.OfType<MapBodyDataBlock>().FirstOrDefault();
 
-            //var 
-
-
-        }
-
-        internal void FromModel(MapLayoutModel layout)
-        {
-            Size = layout.Size;
-
-            Layers.UpdateAfter(() => 
+            Layers.UpdateAfter(() =>
             {
                 Layers.Clear();
 
-                foreach (var layer in layout.Layers)
-                    AppendLayer(layer);
+                var gfxLayerVM = new MapLayerGfxVM(this);
+                gfxLayerVM.Restore(bodyBlock);
+                Layers.Add(gfxLayerVM);
+                var actionLayerVM = new MapLayerActionVM(this);
+                actionLayerVM.Restore(bodyBlock);
+                Layers.Add(actionLayerVM);
             });
 
             MaxCoordX = Size.Width * Owner.TileSize;
@@ -156,22 +146,6 @@ namespace OpenBreed.Editor.VM.Maps
 
         #endregion Internal Methods
 
-        #region Private Methods
-
-        private void AppendLayer(IMapLayerModel layer)
-        {
-            MapLayerBaseVM newLayerVM = null;
-
-            if (layer.Name == "GFX")
-                newLayerVM = new MapLayerGfxVM(this);
-            else if (layer.Name == "PROP")
-                newLayerVM = new MapLayerActionVM(this);
-
-            newLayerVM.Restore(layer);
-            Layers.Add(newLayerVM);
-        }
-
-        #endregion Private Methods
 
     }
 }

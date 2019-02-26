@@ -50,11 +50,6 @@ namespace OpenBreed.Editor.VM.Maps.Layers
 
         #endregion Public Properties
 
-        #region Public Methods
-
-        public abstract void Restore(IMapLayerModel layerModel);
-
-        #endregion Public Methods
 
     }
 }

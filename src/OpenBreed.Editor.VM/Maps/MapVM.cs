@@ -199,7 +199,7 @@ namespace OpenBreed.Editor.VM.Maps
 
             Properties.Load(_model);
 
-            Layout.FromModel(_model.Layout);
+            Layout.FromMap(_model);
 
             var palettes = new List<PaletteModel>();
 
@@ -209,10 +209,7 @@ namespace OpenBreed.Editor.VM.Maps
                     palettes.Add(dataProvider.Palettes.GetPalette(paletteRef));
             }
             else
-            {
-                foreach (var palette in _model.Properties.Palettes)
-                    palettes.Add(palette);
-            }
+                palettes = _model.Blocks.OfType<MapPaletteDataBlock>().Select(item => item.Value).ToList();
 
             SetPalettes(palettes);
         }
@@ -229,7 +226,7 @@ namespace OpenBreed.Editor.VM.Maps
         {
             base.ToEntry(entry);
 
-            Layout.ToModel(_model.Layout);
+            //Layout.ToModel(_model.Layout);
 
             var mapEntry = entry as IMapEntry;
 

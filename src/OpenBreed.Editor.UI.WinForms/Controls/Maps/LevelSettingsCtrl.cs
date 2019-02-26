@@ -26,7 +26,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
 
         public void Initialize(LevelPropertiesVM vm)
         {
-            _vm = vm;
+            _vm = vm; 
 
             tbxXBLK.DataBindings.Add("Text", _vm, nameof(_vm.XBLK), false, DataSourceUpdateMode.OnPropertyChanged);
             tbxYBLK.DataBindings.Add("Text", _vm, nameof(_vm.YBLK), false, DataSourceUpdateMode.OnPropertyChanged);

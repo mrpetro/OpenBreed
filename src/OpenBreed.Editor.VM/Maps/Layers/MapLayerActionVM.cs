@@ -32,14 +32,12 @@ namespace OpenBreed.Editor.VM.Maps.Layers
             return _cells[y * Layout.Size.Width + x];
         }
 
-        public override void Restore(IMapLayerModel layerModel)
+        public void Restore(MapBodyDataBlock bodyBlock)
         {
-            var propertyLayerModel = layerModel as MapLayerModel<int>;
+            _cells = new int[bodyBlock.Length];
 
-            if (propertyLayerModel == null)
-                throw new ArgumentException(nameof(layerModel));
-
-            _cells = propertyLayerModel.Cells.ToArray();
+            for (int i = 0; i < _cells.Length; i++)
+                _cells[i] = bodyBlock.Cells[i].ActionId;
         }
 
         public void SetCell(int x, int y, int value)

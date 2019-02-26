@@ -143,22 +143,22 @@ namespace OpenBreed.Editor.VM.Maps
 
         internal void Load(MapModel map)
         {
-            XBLK = map.Properties.XBLK;
-            YBLK = map.Properties.YBLK;
-            XOFC = map.Properties.XOFC;
-            YOFC = map.Properties.YOFC;
-            XOFM = map.Properties.XOFM;
-            YOFM = map.Properties.YOFM;
-            XOFA = map.Properties.XOFA;
-            YOFA = map.Properties.YOFA;
-            XOFC = map.Properties.XOFC;
-            YOFC = map.Properties.YOFC;
-            IFFP = map.Properties.IFFP;
-            ALTP = map.Properties.ALTP;
-            ALTM = map.Properties.ALTM;
-            CCCI = map.Properties.CCCI?.ToArray();
-            CCIN = map.Properties.CCIN?.ToArray();
-            CSIN = map.Properties.CSIN?.ToArray();
+            //XBLK = map.Properties.XBLK;
+            //YBLK = map.Properties.YBLK;
+            //XOFC = map.Properties.XOFC;
+            //YOFC = map.Properties.YOFC;
+            //XOFM = map.Properties.XOFM;
+            //YOFM = map.Properties.YOFM;
+            //XOFA = map.Properties.XOFA;
+            //YOFA = map.Properties.YOFA;
+            //XOFC = map.Properties.XOFC;
+            //YOFC = map.Properties.YOFC;
+            //IFFP = map.Properties.IFFP;
+            //ALTP = map.Properties.ALTP;
+            //ALTM = map.Properties.ALTM;
+            //CCCI = map.Properties.CCCI?.ToArray();
+            //CCIN = map.Properties.CCIN?.ToArray();
+            //CSIN = map.Properties.CSIN?.ToArray();
         }
 
         #endregion Internal Methods
