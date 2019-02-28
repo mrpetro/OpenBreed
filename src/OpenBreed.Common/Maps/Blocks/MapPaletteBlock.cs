@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Maps.Blocks
 {
-    public class MapPaletteDataBlock : IMapDataBlock
+    public class MapPaletteBlock : IMapDataBlock
     {
 
         #region Public Constructors
 
-        public MapPaletteDataBlock(string name, ColorData[] value = null)
+        public MapPaletteBlock(string name, ColorData[] value = null)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Value = value;

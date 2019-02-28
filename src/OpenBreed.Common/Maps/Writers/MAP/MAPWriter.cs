@@ -72,7 +72,7 @@ namespace OpenBreed.Common.Maps.Writers.MAP
 
         #region Private Methods
 
-        private void WriteBody(MapBodyDataBlock bodyBlock)
+        private void WriteBody(MapBodyBlock bodyBlock)
         {
             _binWriter.Write(Encoding.ASCII.GetBytes("BODY"));
             _binWriter.Write((UInt32)(bodyBlock.Length * 2));
@@ -106,7 +106,7 @@ namespace OpenBreed.Common.Maps.Writers.MAP
             _binWriter.Write(validHeader);
         }
 
-        private void WriteMission(MapMissionDataBlock mission)
+        private void WriteMission(MapMissionBlock mission)
         {
             WriteMissionBlock(mission);
 
@@ -130,7 +130,7 @@ namespace OpenBreed.Common.Maps.Writers.MAP
         /// This writes a MAP file mission block.
         /// </summary>
         /// <param name="mission"></param>
-        private void WriteMissionBlock(MapMissionDataBlock mission)
+        private void WriteMissionBlock(MapMissionBlock mission)
         {
             _binWriter.Write(Encoding.ASCII.GetBytes("MISS"));
             //For some reason this block has to have length overlapping with start of next block

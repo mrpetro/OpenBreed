@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Maps.Blocks
 {
-    public class MapUnknownDataBlock : IMapDataBlock
+    public class MapUInt32Block : IMapDataBlock
     {
 
         #region Public Constructors
 
-        public MapUnknownDataBlock(string name, byte[] value = null)
+        public MapUInt32Block(string name, UInt32 value = 0)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Value = value;
@@ -22,7 +22,7 @@ namespace OpenBreed.Common.Maps.Blocks
         #region Public Properties
 
         public string Name { get; }
-        public byte[] Value { get; set; }
+        public UInt32 Value { get; set; }
 
         #endregion Public Properties
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Maps.Blocks
 {
-    public class MapBodyDataBlock : IMapDataBlock
+    public class MapBodyBlock : IMapDataBlock
     {
 
         #region Public Fields
@@ -17,7 +17,7 @@ namespace OpenBreed.Common.Maps.Blocks
 
         #region Public Constructors
 
-        public MapBodyDataBlock(int length)
+        public MapBodyBlock(int length)
         {
             Cells = new MapCell[length];
         }

@@ -164,8 +164,8 @@ namespace OpenBreed.Common.Maps.Readers.MAP
         }
         private void ReadBodyBlock(BigEndianBinaryReader binReader)
         {
-            int sizeX = (int)MapBuilder.Blocks.OfType<MapUInt32DataBlock>().FirstOrDefault(item => item.Name == "XBLK").Value;
-            int sizeY = (int)MapBuilder.Blocks.OfType<MapUInt32DataBlock>().FirstOrDefault(item => item.Name == "YBLK").Value;
+            int sizeX = (int)MapBuilder.Blocks.OfType<MapUInt32Block>().FirstOrDefault(item => item.Name == "XBLK").Value;
+            int sizeY = (int)MapBuilder.Blocks.OfType<MapUInt32Block>().FirstOrDefault(item => item.Name == "YBLK").Value;
 
             //Check how many tile can be read from file and how many are expected based on map sizes
             var tilesNo = (int)(binReader.ReadUInt32() / 2);
@@ -174,7 +174,7 @@ namespace OpenBreed.Common.Maps.Readers.MAP
             if (tilesNo != expectedTilesNo)
                 throw new Exception("Incorrect number of tiles in body (" + tilesNo + "). Expected: " + expectedTilesNo);
 
-            var bodyBlock = new MapBodyDataBlock(tilesNo);
+            var bodyBlock = new MapBodyBlock(tilesNo);
 
             for (int i = 0; i < tilesNo; i++)
             {
@@ -204,7 +204,7 @@ namespace OpenBreed.Common.Maps.Readers.MAP
         {
             UInt32 size = binReader.ReadUInt32();
             var value = binReader.ReadBytes((int)size);
-            MapBuilder.AddBlock(new MapUnknownDataBlock(name, value));
+            MapBuilder.AddBlock(new MapUnknownBlock(name, value));
         }
 
         private void ReadHeader(BigEndianBinaryReader binReader)
@@ -216,7 +216,7 @@ namespace OpenBreed.Common.Maps.Readers.MAP
 
         private void ReadMissionBlock(string name, BigEndianBinaryReader binReader)
         {
-            var missionBlock = new MapMissionDataBlock(name);
+            var missionBlock = new MapMissionBlock(name);
 
             UInt32 uint_size = binReader.ReadUInt32();
 
@@ -253,24 +253,24 @@ namespace OpenBreed.Common.Maps.Readers.MAP
         {
             var uIntSize = binReader.ReadUInt32();
             int colorsNo = (Int32)uIntSize / 3;
-            var value = new MapPaletteDataBlock.ColorData[colorsNo];
+            var value = new MapPaletteBlock.ColorData[colorsNo];
 
             for (int i = 0; i < colorsNo; i++)
             {
                 var colorBytes = binReader.ReadBytes(3);
-                value[i] = new MapPaletteDataBlock.ColorData(colorBytes[0], colorBytes[1], colorBytes[2]);
+                value[i] = new MapPaletteBlock.ColorData(colorBytes[0], colorBytes[1], colorBytes[2]);
             }
 
             for (int i = 64; i < colorsNo; i++)
-                value[i] = new MapPaletteDataBlock.ColorData((byte)i, (byte)i, (byte)i);
+                value[i] = new MapPaletteBlock.ColorData((byte)i, (byte)i, (byte)i);
 
-            MapBuilder.AddBlock(new MapPaletteDataBlock(name, value));
+            MapBuilder.AddBlock(new MapPaletteBlock(name, value));
         }
         private void ReadStringBlock(string name, BigEndianBinaryReader binReader)
         {
             UInt32 size = binReader.ReadUInt32();
             var value = ReadString(binReader, size);
-            MapBuilder.AddBlock(new MapStringDataBlock(name, value));
+            MapBuilder.AddBlock(new MapStringBlock(name, value));
         }
 
         private void ReadTextBlock(string name, BigEndianBinaryReader binReader)
@@ -279,7 +279,7 @@ namespace OpenBreed.Common.Maps.Readers.MAP
             //NOTE: For some reason there is 4 bytes reading offset when MISS block or text blocks are used in ABTA map files.
             size -= 4;
             var text = ReadString(binReader, size);
-            MapBuilder.AddBlock(new MapTextDataBlock(name, text));
+            MapBuilder.AddBlock(new MapTextBlock(name, text));
         }
 
         private void ReadUInt32Block(string name, BigEndianBinaryReader binReader)
@@ -290,7 +290,7 @@ namespace OpenBreed.Common.Maps.Readers.MAP
                 throw new Exception("Incorrect size for UInt32");
 
             var value = binReader.ReadUInt32();
-            MapBuilder.AddBlock(new MapUInt32DataBlock(name, value));
+            MapBuilder.AddBlock(new MapUInt32Block(name, value));
         }
 
         #endregion Private Methods

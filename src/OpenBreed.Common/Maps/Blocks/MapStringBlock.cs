@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Maps.Blocks
 {
-    public class MapStringDataBlock : IMapDataBlock
+    public class MapStringBlock : IMapDataBlock
     {
 
         #region Public Constructors
 
-        public MapStringDataBlock(string name, string value = null)
+        public MapStringBlock(string name, string value = null)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Value = value;
