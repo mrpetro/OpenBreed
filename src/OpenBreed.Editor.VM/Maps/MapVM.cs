@@ -212,7 +212,7 @@ namespace OpenBreed.Editor.VM.Maps
             }
             else
             {
-                foreach (var paletteBlock in _model.Blocks.OfType<MapPaletteDataBlock>())
+                foreach (var paletteBlock in _model.Blocks.OfType<MapPaletteBlock>())
                 {
                     var paletteBuilder = PaletteBuilder.NewPaletteModel();
                     paletteBuilder.SetName(paletteBlock.Name);

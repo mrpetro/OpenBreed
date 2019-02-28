@@ -121,13 +121,13 @@ namespace OpenBreed.Editor.VM.Maps
 
         internal void FromMap(MapModel mapModel)
         {
-            int sizeX = (int)mapModel.Blocks.OfType<MapUInt32DataBlock>().FirstOrDefault(item => item.Name == "XBLK").Value;
-            int sizeY = (int)mapModel.Blocks.OfType<MapUInt32DataBlock>().FirstOrDefault(item => item.Name == "YBLK").Value;
+            int sizeX = (int)mapModel.Blocks.OfType<MapUInt32Block>().FirstOrDefault(item => item.Name == "XBLK").Value;
+            int sizeY = (int)mapModel.Blocks.OfType<MapUInt32Block>().FirstOrDefault(item => item.Name == "YBLK").Value;
 
 
             Size = new Size(sizeX, sizeY);
 
-            var bodyBlock = mapModel.Blocks.OfType<MapBodyDataBlock>().FirstOrDefault();
+            var bodyBlock = mapModel.Blocks.OfType<MapBodyBlock>().FirstOrDefault();
 
             Layers.UpdateAfter(() =>
             {

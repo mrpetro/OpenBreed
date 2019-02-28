@@ -34,7 +34,7 @@ namespace OpenBreed.Editor.VM.Maps.Layers
             return _cells[y * Layout.Size.Width + x];
         }
 
-        public void Restore(MapBodyDataBlock bodyBlock)
+        public void Restore(MapBodyBlock bodyBlock)
         {
             _cells = new TileRef[bodyBlock.Length];
 
@@ -42,7 +42,7 @@ namespace OpenBreed.Editor.VM.Maps.Layers
                 _cells[i] = new TileRef(0, bodyBlock.Cells[i].GfxId);
         }
 
-        public void Store(MapBodyDataBlock bodyBlock)
+        public void Store(MapBodyBlock bodyBlock)
         {
             for (int i = 0; i < _cells.Length; i++)
                 bodyBlock.Cells[i].GfxId = _cells[i].TileId;

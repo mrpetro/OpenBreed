@@ -33,7 +33,7 @@ namespace OpenBreed.Editor.VM.Maps.Layers
             return _cells[y * Layout.Size.Width + x];
         }
 
-        public void Restore(MapBodyDataBlock bodyBlock)
+        public void Restore(MapBodyBlock bodyBlock)
         {
             _cells = new int[bodyBlock.Length];
 
