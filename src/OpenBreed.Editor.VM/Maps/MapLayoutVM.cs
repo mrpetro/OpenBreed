@@ -14,6 +14,7 @@ using OpenBreed.Editor.VM.Tiles;
 using OpenBreed.Common.Actions;
 using OpenBreed.Common.Maps.Builders;
 using OpenBreed.Common;
+using OpenBreed.Common.Maps.Blocks;
 
 namespace OpenBreed.Editor.VM.Maps
 {

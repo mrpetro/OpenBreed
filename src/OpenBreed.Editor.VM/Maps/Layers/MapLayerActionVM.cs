@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.Maps;
+using OpenBreed.Common.Maps.Blocks;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

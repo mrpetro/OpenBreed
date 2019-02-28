@@ -18,6 +18,8 @@ using OpenBreed.Common.Actions;
 using OpenBreed.Common;
 using System.Drawing;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Palettes.Builders;
+using OpenBreed.Common.Maps.Blocks;
 
 namespace OpenBreed.Editor.VM.Maps
 {
@@ -209,7 +211,21 @@ namespace OpenBreed.Editor.VM.Maps
                     palettes.Add(dataProvider.Palettes.GetPalette(paletteRef));
             }
             else
-                palettes = _model.Blocks.OfType<MapPaletteDataBlock>().Select(item => item.Value).ToList();
+            {
+                foreach (var paletteBlock in _model.Blocks.OfType<MapPaletteDataBlock>())
+                {
+                    var paletteBuilder = PaletteBuilder.NewPaletteModel();
+                    paletteBuilder.SetName(paletteBlock.Name);
+                    paletteBuilder.CreateColors();
+                    for (int i = 0; i < paletteBlock.Value.Length; i++)
+                    {
+                        var colorData = paletteBlock.Value[i];
+                        paletteBuilder.SetColor(i, Color.FromArgb(255, colorData.R, colorData.G, colorData.B));
+                    }
+
+                    palettes.Add(paletteBuilder.Build());
+                }
+            }
 
             SetPalettes(palettes);
         }
