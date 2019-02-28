@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Maps
+namespace OpenBreed.Common.Maps.Blocks
 {
     public class MapBodyDataBlock : IMapDataBlock
     {

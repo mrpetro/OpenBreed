@@ -6,6 +6,7 @@ using System.IO;
 using OpenBreed.Common.Palettes;
 using OpenBreed.Common.Writers;
 using OpenBreed.Common.Logging;
+using OpenBreed.Common.Maps.Blocks;
 
 namespace OpenBreed.Common.Maps.Writers.MAP
 {
@@ -62,7 +63,7 @@ namespace OpenBreed.Common.Maps.Writers.MAP
             //WriteBytesBlock("CCIN", map.Properties.CCIN);
             //WriteBytesBlock("CSIN", map.Properties.CSIN);
 
-            WriteMission(map.Mission);
+            //WriteMission(map.Mission);
 
             //WriteBody(map.Layout);
         }
@@ -105,7 +106,7 @@ namespace OpenBreed.Common.Maps.Writers.MAP
             _binWriter.Write(validHeader);
         }
 
-        private void WriteMission(MapMissionModel mission)
+        private void WriteMission(MapMissionDataBlock mission)
         {
             WriteMissionBlock(mission);
 
@@ -129,7 +130,7 @@ namespace OpenBreed.Common.Maps.Writers.MAP
         /// This writes a MAP file mission block.
         /// </summary>
         /// <param name="mission"></param>
-        private void WriteMissionBlock(MapMissionModel mission)
+        private void WriteMissionBlock(MapMissionDataBlock mission)
         {
             _binWriter.Write(Encoding.ASCII.GetBytes("MISS"));
             //For some reason this block has to have length overlapping with start of next block

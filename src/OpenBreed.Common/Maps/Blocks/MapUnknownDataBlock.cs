@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Maps
+namespace OpenBreed.Common.Maps.Blocks
 {
     public class MapUnknownDataBlock : IMapDataBlock
     {
@@ -21,7 +21,6 @@ namespace OpenBreed.Common.Maps
 
         #region Public Properties
 
-        public int Length { get { return Value.Length; } }
         public string Name { get; }
         public byte[] Value { get; set; }
 

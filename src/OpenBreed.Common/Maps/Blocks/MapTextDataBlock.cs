@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Maps
+namespace OpenBreed.Common.Maps.Blocks
 {
-    public class MapUInt32DataBlock : IMapDataBlock
+    public class MapTextDataBlock : IMapDataBlock
     {
 
         #region Public Constructors
 
-        public MapUInt32DataBlock(string name, UInt32 value = 0)
+        public MapTextDataBlock(string name, string value = null)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Value = value;
@@ -21,9 +21,8 @@ namespace OpenBreed.Common.Maps
 
         #region Public Properties
 
-        public int Length { get { return sizeof(int); } }
         public string Name { get; }
-        public UInt32 Value { get; set; }
+        public string Value { get; set; }
 
         #endregion Public Properties
 

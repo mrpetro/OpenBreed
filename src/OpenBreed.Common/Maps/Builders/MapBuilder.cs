@@ -11,7 +11,6 @@ namespace OpenBreed.Common.Maps.Builders
 
         internal List<IMapDataBlock> Blocks = new List<IMapDataBlock>();
         internal byte[] Header;
-        internal MapMissionModel Mission = null;
 
         #endregion Internal Fields
 
@@ -31,12 +30,6 @@ namespace OpenBreed.Common.Maps.Builders
         {
             Header = header;
 
-            return this;
-        }
-
-        public MapBuilder SetMission(MapMissionModel mission)
-        {
-            Mission = mission;
             return this;
         }
 

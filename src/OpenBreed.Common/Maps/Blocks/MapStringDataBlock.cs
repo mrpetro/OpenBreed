@@ -1,18 +1,17 @@
-﻿using OpenBreed.Common.Palettes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Maps
+namespace OpenBreed.Common.Maps.Blocks
 {
-    public class MapPaletteDataBlock : IMapDataBlock
+    public class MapStringDataBlock : IMapDataBlock
     {
 
         #region Public Constructors
 
-        public MapPaletteDataBlock(string name, PaletteModel value = null)
+        public MapStringDataBlock(string name, string value = null)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Value = value;
@@ -22,9 +21,8 @@ namespace OpenBreed.Common.Maps
 
         #region Public Properties
 
-        public int Length { get { return Value.Length; } }
         public string Name { get; }
-        public PaletteModel Value { get; set; }
+        public string Value { get; set; }
 
         #endregion Public Properties
 

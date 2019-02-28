@@ -2,49 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using OpenBreed.Common.Maps.Builders;
+using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Maps
+namespace OpenBreed.Common.Maps.Blocks
 {
-    public class MapMissionModel
+    public class MapMissionDataBlock : IMapDataBlock
     {
+
         #region Public Constructors
 
-        public MapMissionModel(MapMissionBuilder builder)
+        public MapMissionDataBlock(string name)
         {
-            UNKN1 = builder.UNKN1;
-            UNKN2 = builder.UNKN2;
-            UNKN3 = builder.UNKN3;
-            UNKN4 = builder.UNKN4;
-            TIME = builder.TIME;
-            UNKN6 = builder.UNKN6;
-            UNKN7 = builder.UNKN7;
-            UNKN8 = builder.UNKN8;
-            EXC1 = builder.EXC1;
-            EXC2 = builder.EXC2;
-            EXC3 = builder.EXC3;
-            EXC4 = builder.EXC4;
-            M1TY = builder.M1TY;
-            M1HE = builder.M1HE;
-            M1SP = builder.M1SP;
-            UNKN16 = builder.UNKN16;
-            UNKN17 = builder.UNKN17;
-            M2TY = builder.M2TY;
-            M2HE = builder.M2HE;
-            M2SP = builder.M2SP;
-            UNKN21 = builder.UNKN21;
-            UNKN22 = builder.UNKN22;
-
-            MTXT = builder.MTXT;
-            LCTX = builder.LCTX;
-            NOT1 = builder.NOT1;
-            NOT2 = builder.NOT2;
-            NOT3 = builder.NOT3;
+            Name = name ?? throw new ArgumentNullException(nameof(name));
         }
 
         #endregion Public Constructors
 
         #region Public Properties
+
+        public string Name { get; }
 
         public int EXC1 { get; set; }
         public int EXC2 { get; set; }
@@ -75,5 +51,15 @@ namespace OpenBreed.Common.Maps
         public int UNKN8 { get; set; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public override string ToString()
+        {
+            return $"{Name}";
+        }
+
+        #endregion Public Methods
+
     }
 }

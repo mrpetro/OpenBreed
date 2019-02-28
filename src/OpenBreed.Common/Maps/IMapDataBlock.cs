@@ -9,7 +9,5 @@ namespace OpenBreed.Common.Maps
     public interface IMapDataBlock
     {
         string Name { get; }
-        int Length { get; }
-
     }
 }

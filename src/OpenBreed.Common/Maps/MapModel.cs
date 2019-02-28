@@ -24,19 +24,12 @@ namespace OpenBreed.Common.Maps
         internal MapModel(MapBuilder builder)
         {
             Header = builder.Header;
-            Mission = builder.Mission;
             Blocks = builder.Blocks;
         }
 
         #endregion Internal Constructors
 
         #region Public Properties
-
-        //public MapLayoutModel Layout { get; }
-
-
-
-        public MapMissionModel Mission { get; }
 
         /// <summary>
         ///  Gets or sets an object that provides additional data context.
