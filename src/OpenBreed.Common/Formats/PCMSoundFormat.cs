@@ -35,7 +35,7 @@ namespace OpenBreed.Common.Formats
             return sound;
         }
 
-        public void Save(AssetBase asset, object model)
+        public void Save(AssetBase asset, object model, List<FormatParameter> parameters)
         {
             throw new NotImplementedException();
         }

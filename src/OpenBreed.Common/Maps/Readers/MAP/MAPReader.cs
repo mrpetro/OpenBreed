@@ -261,9 +261,6 @@ namespace OpenBreed.Common.Maps.Readers.MAP
                 value[i] = new MapPaletteBlock.ColorData(colorBytes[0], colorBytes[1], colorBytes[2]);
             }
 
-            for (int i = 64; i < colorsNo; i++)
-                value[i] = new MapPaletteBlock.ColorData((byte)i, (byte)i, (byte)i);
-
             MapBuilder.AddBlock(new MapPaletteBlock(name, value));
         }
         private void ReadStringBlock(string name, BigEndianBinaryReader binReader)

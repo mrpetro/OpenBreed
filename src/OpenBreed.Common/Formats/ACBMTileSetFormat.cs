@@ -29,7 +29,7 @@ namespace OpenBreed.Common.Formats
             return reader.Read(asset.Stream);
         }
 
-        public void Save(AssetBase source, object model)
+        public void Save(AssetBase source, object model, List<FormatParameter> parameters)
         {
             throw new NotImplementedException("ACBMTileSet Write");
         }

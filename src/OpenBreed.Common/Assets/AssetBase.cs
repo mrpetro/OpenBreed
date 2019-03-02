@@ -71,9 +71,9 @@ namespace OpenBreed.Common.Assets
             return CreateStream();
         }
 
-        public void Save(object model, IDataFormatType format)
+        public void Save(object model, IDataFormatType format, List<FormatParameter> parameters)
         {
-            format.Save(this, model);
+            format.Save(this, model, parameters);
         }
 
         #endregion Public Methods

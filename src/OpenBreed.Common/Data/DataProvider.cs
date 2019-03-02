@@ -54,6 +54,13 @@ namespace OpenBreed.Common.Data
             FormatMan.RegisterFormat("PCM_SOUND", new PCMSoundFormat());
         }
 
+        public void Save()
+        {
+            Maps.Save();
+
+            UnitOfWork.Save();
+        }
+
         #endregion Private Methods
     }
 }

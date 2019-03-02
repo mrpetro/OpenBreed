@@ -28,8 +28,6 @@ namespace OpenBreed.Common.Maps.Blocks
 
         public MapCell[] Cells { get; }
 
-        public int Length { get { return Cells.Length; } }
-
         public string Name { get { return NAME; } }
 
         #endregion Public Properties

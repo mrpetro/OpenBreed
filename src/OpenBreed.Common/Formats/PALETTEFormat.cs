@@ -44,7 +44,7 @@ namespace OpenBreed.Common.Formats
             return paletteReader.Read(asset.Stream);
         }
 
-        public void Save(AssetBase asset, object model)
+        public void Save(AssetBase asset, object model, List<FormatParameter> parameters)
         {
             throw new NotImplementedException();
         }

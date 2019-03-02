@@ -48,7 +48,7 @@ namespace OpenBreed.Common.Formats
             return reader.Read(source.Stream);
         }
 
-        public void Save(AssetBase source, object model)
+        public void Save(AssetBase source, object model, List<FormatParameter> parameters)
         {
             throw new NotImplementedException("ACBMImage Write");
         }

@@ -7,6 +7,7 @@ using OpenBreed.Common.Palettes;
 using OpenBreed.Common.Writers;
 using OpenBreed.Common.Logging;
 using OpenBreed.Common.Maps.Blocks;
+using OpenBreed.Common.Maps.Readers.MAP;
 
 namespace OpenBreed.Common.Maps.Writers.MAP
 {
@@ -18,12 +19,17 @@ namespace OpenBreed.Common.Maps.Writers.MAP
 
         #endregion Private Fields
 
+        public readonly MAPFormat Format;
+
+
         #region Public Constructors
 
-        public MAPWriter(Stream stream)
+        public MAPWriter(Stream stream, MAPFormat format)
         {
             if (stream == null)
                 throw new ArgumentNullException(nameof(stream));
+
+            Format = format;
 
             //Don't call Dispode of this Writer for stream to stay opened
             _binWriter = new BigEndianBinaryWriter(stream);
@@ -43,54 +49,89 @@ namespace OpenBreed.Common.Maps.Writers.MAP
             WriteHeader(map);
 
 
-            //WriteUInt32Block("XBLK", (UInt32)map.Properties.XBLK);
-            //WriteUInt32Block("YBLK", (UInt32)map.Properties.YBLK);
-            //WriteUInt32Block("XOFC", (UInt32)map.Properties.XOFC);
-            //WriteUInt32Block("YOFC", (UInt32)map.Properties.YOFC);
-            //WriteUInt32Block("XOFM", (UInt32)map.Properties.XOFM);
-            //WriteUInt32Block("YOFM", (UInt32)map.Properties.YOFM);
-            //WriteUInt32Block("XOFA", (UInt32)map.Properties.XOFA);
-            //WriteUInt32Block("YOFA", (UInt32)map.Properties.YOFA);
+            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == "XBLK"));
+            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == "YBLK"));
+            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == "XOFC"));
+            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == "YOFC"));
+            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == "XOFM"));
+            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == "YOFM"));
+            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == "XOFA"));
+            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == "YOFA"));
 
-            //WriteStringBlock("IFFP", map.Properties.IFFP);
-            //WriteStringBlock("ALTM", map.Properties.ALTM);
-            //WriteStringBlock("ALTP", map.Properties.ALTP);
+            WriteStringBlock(map.Blocks.OfType<MapStringBlock>().First(item => item.Name == "IFFP"));
+            WriteStringBlock(map.Blocks.OfType<MapStringBlock>().First(item => item.Name == "ALTM"));
+            WriteStringBlock(map.Blocks.OfType<MapStringBlock>().First(item => item.Name == "ALTP"));
 
-            //WritePaletteBlock("CMAP", map.Properties.Palettes.FirstOrDefault(item => item.Name == "CMAP"));
-            //WritePaletteBlock("ALCM", map.Properties.Palettes.FirstOrDefault(item => item.Name == "ALCM"));
+            WritePaletteBlock(map.Blocks.OfType<MapPaletteBlock>().First(item => item.Name == "CMAP"));
+            WritePaletteBlock(map.Blocks.OfType<MapPaletteBlock>().First(item => item.Name == "ALCM"));
 
-            //WriteBytesBlock("CCCI", map.Properties.CCCI);
-            //WriteBytesBlock("CCIN", map.Properties.CCIN);
-            //WriteBytesBlock("CSIN", map.Properties.CSIN);
+            WriteBytesBlock(map.Blocks.OfType<MapUnknownBlock>().First(item => item.Name == "CCCI"));
+            WriteBytesBlock(map.Blocks.OfType<MapUnknownBlock>().First(item => item.Name == "CCIN"));
+            WriteBytesBlock(map.Blocks.OfType<MapUnknownBlock>().First(item => item.Name == "CSIN"));
 
-            //WriteMission(map.Mission);
+            var missionBlock = map.Blocks.OfType<MapMissionBlock>().FirstOrDefault();
+            if (missionBlock != null)
+                WriteMissionBlock(missionBlock);
 
-            //WriteBody(map.Layout);
+            var mtxtBlock = map.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == "MTXT");
+            if (mtxtBlock != null)
+                WriteTextBlock(mtxtBlock);
+
+            var lctxBlock = map.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == "LCTX");
+            if (lctxBlock != null)
+                WriteTextBlock(lctxBlock);
+
+            var not1Block = map.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == "NOT1");
+            if (not1Block != null)
+                WriteTextBlock(not1Block);
+
+            var not2Block = map.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == "NOT2");
+            if (not2Block != null)
+                WriteTextBlock(not2Block);
+
+            var not3Block = map.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == "NOT3");
+            if (not3Block != null)
+                WriteTextBlock(not3Block);
+
+            WriteBodyBlock(map.Blocks.OfType<MapBodyBlock>().First(item => item.Name == "BODY"));
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void WriteBody(MapBodyBlock bodyBlock)
+        private void WriteBodyBlock(MapBodyBlock block)
         {
-            _binWriter.Write(Encoding.ASCII.GetBytes("BODY"));
-            _binWriter.Write((UInt32)(bodyBlock.Length * 2));
+            _binWriter.Write(Encoding.ASCII.GetBytes(block.Name));
+            _binWriter.Write((UInt32)(block.Cells.Length * 2));
 
-            for (int i = 0; i < bodyBlock.Length; i++)
+            if (Format == MAPFormat.ABSE)
             {
-                var gfxId = bodyBlock.Cells[i].GfxId;
-                var actionId = bodyBlock.Cells[i].ActionId;
-                var value = (UInt16)((gfxId << 6) | (actionId << 10) >> 10);
-                _binWriter.Write(value);
+                for (int i = 0; i < block.Cells.Length; i++)
+                {
+                    var gfxId = block.Cells[i].GfxId;
+                    var actionId = block.Cells[i].ActionId;
+                    var value = (UInt16)((gfxId << 9) | (actionId << 7) >> 7);
+                    _binWriter.Write(value);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < block.Cells.Length; i++)
+                {
+                    var gfxId = block.Cells[i].GfxId;
+                    var actionId = block.Cells[i].ActionId;
+                    var value = (UInt16)((gfxId << 6) | (actionId << 10) >> 10);
+                    _binWriter.Write(value);
+                }
             }
         }
 
-        private void WriteBytesBlock(string blockName, byte[] value)
+        private void WriteBytesBlock(MapUnknownBlock block)
         {
-            _binWriter.Write(Encoding.ASCII.GetBytes(blockName));
-            _binWriter.Write((UInt32)value.Length);
-            _binWriter.Write(value);
+            _binWriter.Write(Encoding.ASCII.GetBytes(block.Name));
+            _binWriter.Write((UInt32)block.Value.Length);
+            _binWriter.Write(block.Value);
         }
 
         private void WriteHeader(MapModel map)
@@ -106,70 +147,46 @@ namespace OpenBreed.Common.Maps.Writers.MAP
             _binWriter.Write(validHeader);
         }
 
-        private void WriteMission(MapMissionBlock mission)
+        private void WriteMissionBlock(MapMissionBlock block)
         {
-            WriteMissionBlock(mission);
-
-            if (!string.IsNullOrEmpty(mission.MTXT))
-                WriteTextBlock("MTXT", mission.MTXT);
-
-            if (!string.IsNullOrEmpty(mission.LCTX))
-                WriteTextBlock("LCTX", mission.LCTX);
-
-            if (!string.IsNullOrEmpty(mission.NOT1))
-                WriteTextBlock("NOT1", mission.NOT1);
-
-            if (!string.IsNullOrEmpty(mission.NOT2))
-                WriteTextBlock("NOT2", mission.NOT2);
-
-            if (!string.IsNullOrEmpty(mission.NOT3))
-                WriteTextBlock("NOT3", mission.NOT3);
-        }
-
-        /// <summary>
-        /// This writes a MAP file mission block.
-        /// </summary>
-        /// <param name="mission"></param>
-        private void WriteMissionBlock(MapMissionBlock mission)
-        {
-            _binWriter.Write(Encoding.ASCII.GetBytes("MISS"));
+            _binWriter.Write(Encoding.ASCII.GetBytes(block.Name));
             //For some reason this block has to have length overlapping with start of next block
             _binWriter.Write((UInt32)48);
 
-            _binWriter.Write((UInt16)mission.UNKN1);
-            _binWriter.Write((UInt16)mission.UNKN2);
-            _binWriter.Write((UInt16)mission.UNKN3);
-            _binWriter.Write((UInt16)mission.UNKN4);
-            _binWriter.Write((UInt16)mission.TIME);
-            _binWriter.Write((UInt16)mission.UNKN6);
-            _binWriter.Write((UInt16)mission.UNKN7);
-            _binWriter.Write((UInt16)mission.UNKN8);
-            _binWriter.Write((UInt16)mission.EXC1);
-            _binWriter.Write((UInt16)mission.EXC2);
-            _binWriter.Write((UInt16)mission.EXC3);
-            _binWriter.Write((UInt16)mission.EXC4);
-            _binWriter.Write((UInt16)mission.M1TY);
-            _binWriter.Write((UInt16)mission.M1HE);
-            _binWriter.Write((UInt16)mission.M1SP);
-            _binWriter.Write((UInt16)mission.UNKN16);
-            _binWriter.Write((UInt16)mission.UNKN17);
-            _binWriter.Write((UInt16)mission.M2TY);
-            _binWriter.Write((UInt16)mission.M2HE);
-            _binWriter.Write((UInt16)mission.M2SP);
-            _binWriter.Write((UInt16)mission.UNKN21);
-            _binWriter.Write((UInt16)mission.UNKN22);
+            _binWriter.Write((UInt16)block.UNKN1);
+            _binWriter.Write((UInt16)block.UNKN2);
+            _binWriter.Write((UInt16)block.UNKN3);
+            _binWriter.Write((UInt16)block.UNKN4);
+            _binWriter.Write((UInt16)block.TIME);
+            _binWriter.Write((UInt16)block.UNKN6);
+            _binWriter.Write((UInt16)block.UNKN7);
+            _binWriter.Write((UInt16)block.UNKN8);
+            _binWriter.Write((UInt16)block.EXC1);
+            _binWriter.Write((UInt16)block.EXC2);
+            _binWriter.Write((UInt16)block.EXC3);
+            _binWriter.Write((UInt16)block.EXC4);
+            _binWriter.Write((UInt16)block.M1TY);
+            _binWriter.Write((UInt16)block.M1HE);
+            _binWriter.Write((UInt16)block.M1SP);
+            _binWriter.Write((UInt16)block.UNKN16);
+            _binWriter.Write((UInt16)block.UNKN17);
+            _binWriter.Write((UInt16)block.M2TY);
+            _binWriter.Write((UInt16)block.M2HE);
+            _binWriter.Write((UInt16)block.M2SP);
+            _binWriter.Write((UInt16)block.UNKN21);
+            _binWriter.Write((UInt16)block.UNKN22);
         }
 
-        private void WritePaletteBlock(string blockName, PaletteModel palette)
+        private void WritePaletteBlock(MapPaletteBlock block)
         {
-            _binWriter.Write(Encoding.ASCII.GetBytes(blockName));
-            _binWriter.Write((UInt32)(palette.Length * 3));
+            _binWriter.Write(Encoding.ASCII.GetBytes(block.Name));
+            _binWriter.Write((UInt32)(block.Value.Length * 3));
 
-            foreach (var color in palette.Data)
+            foreach (var color in block.Value)
             {
-                _binWriter.Write((byte)color.R);
-                _binWriter.Write((byte)color.G);
-                _binWriter.Write((byte)color.B);
+                _binWriter.Write(color.R);
+                _binWriter.Write(color.G);
+                _binWriter.Write(color.B);
             }
         }
 
@@ -179,11 +196,11 @@ namespace OpenBreed.Common.Maps.Writers.MAP
             _binWriter.Write(Encoding.ASCII.GetBytes(newValue));
         }
 
-        private void WriteStringBlock(string blockName, string value)
+        private void WriteStringBlock(MapStringBlock block)
         {
-            _binWriter.Write(Encoding.ASCII.GetBytes(blockName));
+            _binWriter.Write(Encoding.ASCII.GetBytes(block.Name));
 
-            var bytes = Encoding.ASCII.GetBytes(value);
+            var bytes = Encoding.ASCII.GetBytes(block.Value);
             _binWriter.Write((UInt32)bytes.Length);
             _binWriter.Write(bytes);
         }
@@ -193,23 +210,25 @@ namespace OpenBreed.Common.Maps.Writers.MAP
         /// </summary>
         /// <param name="name"></param>
         /// <param name="text">Text to write in to block</param>
-        private void WriteTextBlock(string name, string text)
+        private void WriteTextBlock(MapTextBlock block)
         {
+            var text = block.Value;
+
             text = Other.ConvertLineBreaksCRLFToLF(text) + "\0";
             //Insure division by 2 of block length
             text = text.PadRight(text.Length + text.Length % 2, '\0');
 
-            _binWriter.Write(Encoding.ASCII.GetBytes(name));
+            _binWriter.Write(Encoding.ASCII.GetBytes(block.Name));
             //For some reason each text block has to have length overlapping with start of next block
             _binWriter.Write((UInt32)(text.Length + 4));
             _binWriter.Write(Encoding.ASCII.GetBytes(text));
         }
 
-        private void WriteUInt32Block(string blockName, UInt32 value)
+        private void WriteUInt32Block(MapUInt32Block block)
         {
-            _binWriter.Write(Encoding.ASCII.GetBytes(blockName));
+            _binWriter.Write(Encoding.ASCII.GetBytes(block.Name));
             _binWriter.Write((UInt32)4);
-            _binWriter.Write(value);
+            _binWriter.Write(block.Value);
         }
 
         #endregion Private Methods

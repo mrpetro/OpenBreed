@@ -9,6 +9,6 @@ namespace OpenBreed.Common.Formats
     public interface IDataFormatType
     {
         object Load(AssetBase asset, List<FormatParameter> parameters);
-        void Save(AssetBase asset, object model);
+        void Save(AssetBase asset, object model, List<FormatParameter> parameters);
     }
 }

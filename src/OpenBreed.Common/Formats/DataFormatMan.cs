@@ -26,9 +26,7 @@ namespace OpenBreed.Common.Formats
             if (formatType == null)
                 throw new Exception($"Unknown format {format.Name}");
 
-            var parameters = format.Parameters;
-
-            return new DataFormat(formatType, asset, parameters);
+            return new DataFormat(formatType, asset, format.Parameters);
         }
 
         public object Load(AssetBase asset, IFormatEntry format)
@@ -37,9 +35,16 @@ namespace OpenBreed.Common.Formats
             if (formatType == null)
                 throw new Exception($"Unknown format {format.Name}");
 
-            var parameters = format.Parameters;
+            return asset.Load(formatType, format.Parameters);
+        }
 
-            return asset.Load(formatType, parameters);
+        public void Save(AssetBase asset, object data, IFormatEntry format)
+        {
+            var formatType = GetFormatType(format.Name);
+            if (formatType == null)
+                throw new Exception($"Unknown format {format.Name}");
+
+            asset.Save(data, formatType, format.Parameters);
         }
 
         public void RegisterFormat(string formatAlias, IDataFormatType format)

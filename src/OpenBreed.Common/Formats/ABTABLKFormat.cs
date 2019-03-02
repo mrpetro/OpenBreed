@@ -25,7 +25,7 @@ namespace OpenBreed.Common.Formats
             return blkReader.Read(asset.Stream);
         }
 
-        public void Save(AssetBase source, object model)
+        public void Save(AssetBase source, object model, List<FormatParameter> parameters)
         {
             throw new NotImplementedException("ABTABLK Write");
         }

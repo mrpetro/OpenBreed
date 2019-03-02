@@ -1,21 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using OpenBreed.Common.Assets;
+using OpenBreed.Common.Maps;
 using OpenBreed.Common.Maps.Builders;
-using System.IO;
 using OpenBreed.Common.Maps.Readers.MAP;
 using OpenBreed.Common.Maps.Writers.MAP;
-using OpenBreed.Common.Maps;
-using OpenBreed.Common.Assets;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace OpenBreed.Common.Formats
 {
     public class ABTAMAPFormat : IDataFormatType
     {
+        #region Public Constructors
+
         public ABTAMAPFormat()
         {
         }
+
+        #endregion Public Constructors
+
+        #region Public Methods
 
         public object Load(AssetBase asset, List<FormatParameter> parameters)
         {
@@ -27,7 +31,7 @@ namespace OpenBreed.Common.Formats
             return mapReader.Read(asset.Stream);
         }
 
-        public void Save(AssetBase asset, object model)
+        public void Save(AssetBase asset, object model, List<FormatParameter> parameters)
         {
             if (asset.Stream == null)
                 throw new InvalidOperationException("Asset stream not opened.");
@@ -35,8 +39,10 @@ namespace OpenBreed.Common.Formats
             //Remember to clear the stream before writing
             asset.Stream.SetLength(0);
 
-            MAPWriter mapWriter = new MAPWriter(asset.Stream);
+            MAPWriter mapWriter = new MAPWriter(asset.Stream, MAPFormat.ABTA);
             mapWriter.Write((MapModel)model);
         }
+
+        #endregion Public Methods
     }
 }
