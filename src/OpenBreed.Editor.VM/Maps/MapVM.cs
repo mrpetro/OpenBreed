@@ -73,8 +73,6 @@ namespace OpenBreed.Editor.VM.Maps
             internal set { SetProperty(ref _isModified, value); }
         }
 
-        public bool IsOpened { get { return Source != null; } }
-
         public MapLayoutVM Layout { get; }
 
         public BindingList<PaletteVM> Palettes { get; }
@@ -102,19 +100,6 @@ namespace OpenBreed.Editor.VM.Maps
         public Point GetIndexCoords(Point point)
         {
             return new Point(point.X / TileSize, point.Y / TileSize);
-        }
-
-        public void Save()
-        {
-            //OnSaving(new EventArgs());
-            //Source.Save(CurrentMap);
-        }
-
-        public void SaveAs(AssetBase newSource)
-        {
-            //OnSaving(new EventArgs());
-            //Source = newSource;
-            //Source.Save(CurrentMap);
         }
 
         public void SetPalettes(List<PaletteModel> palettes)
@@ -147,23 +132,9 @@ namespace OpenBreed.Editor.VM.Maps
             });
         }
 
-        public void TryClose()
-        {
-            Close();
-        }
-
         #endregion Public Methods
 
         #region Internal Methods
-
-        internal void Close()
-        {
-            if (Source == null)
-                throw new InvalidOperationException("There is not map loaded.");
-
-            Source.Dispose();
-            Source = null;
-        }
 
         internal void ConnectEvents()
         {
@@ -197,7 +168,7 @@ namespace OpenBreed.Editor.VM.Maps
                 //AddSpriteSet(spriteSet);
             }
 
-            _model = dataProvider.Maps.Load(entry.Id);
+            _model = dataProvider.Maps.GetMap(entry.Id);
 
             Properties.Load(_model);
 
@@ -242,7 +213,7 @@ namespace OpenBreed.Editor.VM.Maps
         {
             base.ToEntry(entry);
 
-            //Layout.ToModel(_model.Layout);
+            Layout.ToMap(_model);
 
             var mapEntry = entry as IMapEntry;
 

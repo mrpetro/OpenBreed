@@ -28,6 +28,16 @@ namespace OpenBreed.Editor.VM.Maps.Layers
 
         #region Public Methods
 
+        /// <summary>
+        /// Get Layer cell using single index
+        /// </summary>
+        /// <param name="index">Index of cell from list</param>
+        /// <returns>Action id</returns>
+        public int GetCell(int index)
+        {
+            return _cells[index];
+        }
+
         public int GetCell(int x, int y)
         {
             return _cells[y * Layout.Size.Width + x];
@@ -35,7 +45,7 @@ namespace OpenBreed.Editor.VM.Maps.Layers
 
         public void Restore(MapBodyBlock bodyBlock)
         {
-            _cells = new int[bodyBlock.Length];
+            _cells = new int[bodyBlock.Cells.Length];
 
             for (int i = 0; i < _cells.Length; i++)
                 _cells[i] = bodyBlock.Cells[i].ActionId;

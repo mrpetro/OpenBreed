@@ -119,6 +119,27 @@ namespace OpenBreed.Editor.VM.Maps
         {
         }
 
+        internal void ToMap(MapModel mapModel)
+        {
+            var xblk = mapModel.Blocks.OfType<MapUInt32Block>().FirstOrDefault(item => item.Name == "XBLK");
+            var yblk = mapModel.Blocks.OfType<MapUInt32Block>().FirstOrDefault(item => item.Name == "YBLK");
+            xblk.Value = (UInt32)Size.Width;
+            yblk.Value = (UInt32)Size.Height;
+
+            var bodyBlock = mapModel.Blocks.OfType<MapBodyBlock>().FirstOrDefault(item => item.Name == "BODY");
+
+            var gfxLayer = Layers.OfType<MapLayerGfxVM>().FirstOrDefault();
+            var actionLayer = Layers.OfType<MapLayerActionVM>().FirstOrDefault();
+
+            for (int i = 0; i < bodyBlock.Cells.Length; i++)
+            {
+                var cell = bodyBlock.Cells[i];
+                cell.ActionId = actionLayer.GetCell(i);
+                cell.GfxId = gfxLayer.GetCell(i).TileId;
+                bodyBlock.Cells[i] = cell;
+            }
+        }
+
         internal void FromMap(MapModel mapModel)
         {
             int sizeX = (int)mapModel.Blocks.OfType<MapUInt32Block>().FirstOrDefault(item => item.Name == "XBLK").Value;
@@ -127,7 +148,7 @@ namespace OpenBreed.Editor.VM.Maps
 
             Size = new Size(sizeX, sizeY);
 
-            var bodyBlock = mapModel.Blocks.OfType<MapBodyBlock>().FirstOrDefault();
+            var bodyBlock = mapModel.Blocks.OfType<MapBodyBlock>().FirstOrDefault(item => item.Name == "BODY");
 
             Layers.UpdateAfter(() =>
             {

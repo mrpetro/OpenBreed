@@ -133,7 +133,8 @@ namespace OpenBreed.Editor.VM.Database
 
         internal void Save()
         {
-            _edited.Save();
+            ServiceLocator.Instance.GetService<DataProvider>().Save();
+            //_edited.Save();
         }
 
         #endregion Internal Methods
