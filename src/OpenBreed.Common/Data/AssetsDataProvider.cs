@@ -14,6 +14,7 @@ namespace OpenBreed.Common.Data
 
     public class AssetsDataProvider
     {
+
         #region Private Fields
 
         private readonly Dictionary<string, AssetBase> _openedAssets = new Dictionary<string, AssetBase>();
@@ -33,6 +34,7 @@ namespace OpenBreed.Common.Data
         #region Public Properties
 
         public static ExpandVariablesDelegate ExpandVariables { get; set; }
+
         public DataProvider DataProvider { get; }
 
         #endregion Public Properties
@@ -47,7 +49,7 @@ namespace OpenBreed.Common.Data
 
             var entry = DataProvider.UnitOfWork.GetRepository<IAssetEntry>().GetById(name);
             if (entry == null)
-                throw new Exception($"Asset error: {name}" );
+                throw new Exception($"Asset error: {name}");
 
             asset = CreateAsset(entry);
 
@@ -60,6 +62,8 @@ namespace OpenBreed.Common.Data
 
         internal void CloseAll()
         {
+            Save();
+
             foreach (var openedArchive in _openedArchives)
                 openedArchive.Value.Dispose();
 
@@ -74,7 +78,7 @@ namespace OpenBreed.Common.Data
             if (!_openedArchives.TryGetValue(normalizedPath, out archive))
             {
                 File.Copy(normalizedPath, normalizedPath + ".bkp", true);
-                archive = EPFArchive.ToExtract(File.Open(normalizedPath, FileMode.Open), true);
+                archive = EPFArchive.ToUpdate(File.Open(normalizedPath, FileMode.Open), true);
                 _openedArchives.Add(normalizedPath, archive);
             }
 
@@ -91,19 +95,18 @@ namespace OpenBreed.Common.Data
             _openedAssets.Remove(source.Name);
         }
 
+        internal void Save()
+        {
+            foreach (var openedArchive in _openedArchives)
+            {
+                //if (openedArchive.Value.IsModified)
+                    openedArchive.Value.Save();
+            }
+        }
+
         #endregion Internal Methods
 
         #region Private Methods
-
-        private AssetBase CreateFileAsset(IFileAssetEntry asset)
-        {
-            return new FileAsset(this, asset.Id, asset.FilePath);
-        }
-
-        private AssetBase CreateEPFArchiveAsset(IEPFArchiveAssetEntry asset)
-        {
-            return new EPFArchiveFileAsset(this, asset.Id, asset.ArchivePath, asset.EntryName);
-        }
 
         private AssetBase CreateAsset(IAssetEntry asset)
         {
@@ -113,6 +116,16 @@ namespace OpenBreed.Common.Data
                 return CreateEPFArchiveAsset((IEPFArchiveAssetEntry)asset);
             else
                 throw new NotImplementedException("Unknown sourceDef");
+        }
+
+        private AssetBase CreateEPFArchiveAsset(IEPFArchiveAssetEntry asset)
+        {
+            return new EPFArchiveFileAsset(this, asset.Id, asset.ArchivePath, asset.EntryName);
+        }
+
+        private AssetBase CreateFileAsset(IFileAssetEntry asset)
+        {
+            return new FileAsset(this, asset.Id, asset.FilePath);
         }
 
         #endregion Private Methods

@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OpenBreed.Common.UI.WinForms")]
-[assembly: AssemblyDescription("Open Breed Common UI for WinForms")]
+[assembly: AssemblyTitle("OpenBreed.Common.XmlDatabase")]
+[assembly: AssemblyDescription("")]
 //[assembly: AssemblyConfiguration("")]
 //[assembly: AssemblyCompany("")]
-//[assembly: AssemblyProduct("OpenBreed.Common.UI.WinForms")]
-//[assembly: AssemblyCopyright("Copyright ©  2018")]
+//[assembly: AssemblyProduct("OpenBreed.Common.XmlDatabase")]
+//[assembly: AssemblyCopyright("Copyright ©  2019")]
 //[assembly: AssemblyTrademark("")]
 //[assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("9827deda-205f-465e-b8df-e0e3ff9cd8d1")]
+[assembly: Guid("c4095745-e19c-4de9-b2e4-37e55fa0d225")]
 
 // Version information for an assembly consists of the following four values:
 //

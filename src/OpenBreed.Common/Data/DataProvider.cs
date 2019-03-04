@@ -58,6 +58,8 @@ namespace OpenBreed.Common.Data
         {
             Maps.Save();
 
+            Assets.Save();
+
             UnitOfWork.Save();
         }
 

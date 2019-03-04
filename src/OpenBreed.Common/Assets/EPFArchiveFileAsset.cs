@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using EPF;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Formats;
 
 namespace OpenBreed.Common.Assets
 {
