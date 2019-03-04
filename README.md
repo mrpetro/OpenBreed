@@ -19,21 +19,24 @@ Create fully functional map editor for AB games with parallel thinking about ope
 ## Current editor functionality
 
 **ABTA:**
- - Possibility to view maps with their original color palettes, tiles and properties
- - Possibility to view tile sets associated with maps
- - Possibility to view sprite sets associated with maps
- - Possibility to play game sounds
+ - Viewing maps with their original color palettes, tiles and properties
+ - Maps edition and storage back to EPF archive (unstable)
+ - Viewing tile sets associated with maps
+ - Viewing sprite sets associated with maps (reverted)
+ - Playing game sounds
  - Level password generator (works for PC and Amiga platforms)
 
 **ABHC:**
- - Possibility to view maps with their original color palettes, tiles and properties
- - Possibility to view tile sets associated with maps
- - Possibility to view some images used in game with original palette
+ - Viewing maps with their original color palettes, tiles and properties
+ - Edition and sorage of maps
+ - Viewing tile sets associated with maps
+ - Viewing some images used in game with original palette
  
 **ABSE**
- - Possibility to view maps with their color palettes tiles and properties
- - Possibility to view tile sets associated with maps
- - Possibility to view some images used in game with original palette
+ - Viewing maps with their color palettes tiles and properties
+ - Edition and sorage of maps
+ - Viewing tile sets associated with maps
+ - Viewing some images used in game with original palette
  
  ## Development status
  Currently this repository goes trough very heavy refactoring, so declared functionality may be missing or not working at all
