@@ -101,7 +101,8 @@ namespace ToolsABTA
         "52.TOWER LEVEL 6          ",
         "53.TOWER LEVEL 7          ",
         "54.Mission One(???)       ",
-        "55.OUTER COLONY SECTOR 5  "};
+        "55.OUTER COLONY SECTOR 5  ",
+        "56.CUSTOM 1"};
 
         private static readonly char[] CHARACTERS = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'P', 'S' };
 

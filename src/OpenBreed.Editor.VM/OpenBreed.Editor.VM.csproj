@@ -203,7 +203,7 @@
       <Name>EPFArchive</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common.XmlDatabase\OpenBreed.Common.XmlDatabase.csproj">
-      <Project>{1363AEA4-E80C-416D-B3AD-883B24E58A30}</Project>
+      <Project>{c4095745-e19c-4de9-b2e4-37e55fa0d225}</Project>
       <Name>OpenBreed.Common.XmlDatabase</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
