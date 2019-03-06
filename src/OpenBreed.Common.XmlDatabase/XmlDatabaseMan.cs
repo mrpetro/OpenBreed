@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Common.XmlDatabase.Tables.Datas;
 
 namespace OpenBreed.Common.XmlDatabase
 {
@@ -107,6 +108,17 @@ namespace OpenBreed.Common.XmlDatabase
             return table;
         }
 
+        internal DatabaseDataTableDef GetDatasTable()
+        {
+            var table = Data.Tables.OfType<DatabaseDataTableDef>().FirstOrDefault();
+            if (table == null)
+            {
+                table = new DatabaseDataTableDef();
+                Data.Tables.Add(table);
+            }
+            return table;
+        }
+
         internal DatabaseMapTableDef GetMapsTable()
         {
             var table = Data.Tables.OfType<DatabaseMapTableDef>().FirstOrDefault();
@@ -117,6 +129,7 @@ namespace OpenBreed.Common.XmlDatabase
             }
             return table;
         }
+
         internal DatabasePaletteTableDef GetPaletteTable()
         {
             var table = Data.Tables.OfType<DatabasePaletteTableDef>().FirstOrDefault();

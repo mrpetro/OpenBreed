@@ -61,6 +61,112 @@
         <FileAsset Id="Assets.MPIC" FilePath="%Cfg.Options.ABHC.GameFolderPath%\MPIC" />
       </Items>
     </Assets>
+    <Datas>
+      <Items>
+        <Data Id="Datas.MAP.L1MA">
+          <AssetRef>Assets.L1MA</AssetRef>
+          <Format Name="ABHC_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.L2MA">
+          <AssetRef>Assets.L2MA</AssetRef>
+          <Format Name="ABHC_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.L3MA">
+          <AssetRef>Assets.L3MA</AssetRef>
+          <Format Name="ABHC_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.L4MA">
+          <AssetRef>Assets.L4MA</AssetRef>
+          <Format Name="ABHC_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.L5MA">
+          <AssetRef>Assets.L5MA</AssetRef>
+          <Format Name="ABHC_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.L6MA">
+          <AssetRef>Assets.L6MA</AssetRef>
+          <Format Name="ABHC_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.L7MA">
+          <AssetRef>Assets.L7MA</AssetRef>
+          <Format Name="ABHC_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.L8MA">
+          <AssetRef>Assets.L8MA</AssetRef>
+          <Format Name="ABHC_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.L9MA">
+          <AssetRef>Assets.L9MA</AssetRef>
+          <Format Name="ABHC_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.LAMA">
+          <AssetRef>Assets.LAMA</AssetRef>
+          <Format Name="ABHC_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.LBMA">
+          <AssetRef>Assets.LBMA</AssetRef>
+          <Format Name="ABHC_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.LCMA">
+          <AssetRef>Assets.LCMA</AssetRef>
+          <Format Name="ABHC_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.LDMA">
+          <AssetRef>Assets.LDMA</AssetRef>
+          <Format Name="ABHC_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.LE">
+          <AssetRef>Assets.LEMA</AssetRef>
+          <Format Name="ABHC_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.MMA1">
+          <AssetRef>Assets.MMA1</AssetRef>
+          <Format Name="ABHC_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.MMA2">
+          <AssetRef>Assets.MMA2</AssetRef>
+          <Format Name="ABHC_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.MMA3">
+          <AssetRef>Assets.MMA3</AssetRef>
+          <Format Name="ABHC_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+      </Items>
+    </Datas>
     <Images>
       <Items>
         <Image Description="Characters statistics screens" Id="Images.CHAD">
@@ -483,172 +589,121 @@
     <Maps>
       <Items>
         <Map Id="L1">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.L1MA</DataRef>
           <PaletteRefs />
           <ActionSetRef>Actions.Level1</ActionSetRef>
-          <AssetRef>Assets.L1MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L1</TileSetRef>
         </Map>
         <Map Id="L2">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.L2MA</DataRef>
           <PaletteRefs />
           <ActionSetRef>Actions.Level1</ActionSetRef>
-          <AssetRef>Assets.L2MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L2</TileSetRef>
         </Map>
         <Map Id="L3">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.L3MA</DataRef>
           <PaletteRefs />
           <ActionSetRef>Actions.Level1</ActionSetRef>
-          <AssetRef>Assets.L3MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L3</TileSetRef>
         </Map>
         <Map Id="L4">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.L4MA</DataRef>
           <PaletteRefs />
           <ActionSetRef>Actions.Level1</ActionSetRef>
-          <AssetRef>Assets.L4MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L4</TileSetRef>
         </Map>
         <Map Id="L5">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.L5MA</DataRef>
           <PaletteRefs />
           <ActionSetRef>Actions.Level1</ActionSetRef>
-          <AssetRef>Assets.L5MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L5</TileSetRef>
         </Map>
         <Map Id="L6">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.L6MA</DataRef>
           <PaletteRefs />
           <ActionSetRef>Actions.Level1</ActionSetRef>
-          <AssetRef>Assets.L6MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L6</TileSetRef>
         </Map>
         <Map Id="L7">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.L7MA</DataRef>
           <PaletteRefs />
           <ActionSetRef>Actions.Level1</ActionSetRef>
-          <AssetRef>Assets.L7MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L6</TileSetRef>
         </Map>
         <Map Id="L8">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.L8MA</DataRef>
           <PaletteRefs />
           <ActionSetRef>Actions.Level1</ActionSetRef>
-          <AssetRef>Assets.L8MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L6</TileSetRef>
         </Map>
         <Map Id="L9">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.L9MA</DataRef>
           <PaletteRefs />
           <ActionSetRef>Actions.Level1</ActionSetRef>
-          <AssetRef>Assets.L9MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L6</TileSetRef>
         </Map>
         <Map Id="LA">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.LAMA</DataRef>
           <PaletteRefs />
           <ActionSetRef>Actions.Level1</ActionSetRef>
-          <AssetRef>Assets.LAMA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L7</TileSetRef>
         </Map>
         <Map Id="LB">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.LBMA</DataRef>
           <PaletteRefs />
           <ActionSetRef>Actions.Level1</ActionSetRef>
-          <AssetRef>Assets.LBMA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L7</TileSetRef>
         </Map>
         <Map Id="LC">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.LCMA</DataRef>
           <PaletteRefs />
           <ActionSetRef>Actions.Level1</ActionSetRef>
-          <AssetRef>Assets.LCMA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L8</TileSetRef>
         </Map>
         <Map Id="LD">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.LDMA</DataRef>
           <PaletteRefs />
           <ActionSetRef>Actions.Level1</ActionSetRef>
-          <AssetRef>Assets.LDMA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L7</TileSetRef>
         </Map>
         <Map Id="LE">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.LEMA</DataRef>
           <PaletteRefs />
           <ActionSetRef>Actions.Level1</ActionSetRef>
-          <AssetRef>Assets.LEMA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L9</TileSetRef>
         </Map>
         <Map Id="LMMA1">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.MMA1</DataRef>
           <PaletteRefs />
           <ActionSetRef>Actions.Level1</ActionSetRef>
-          <AssetRef>Assets.MMA1</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L1</TileSetRef>
         </Map>
         <Map Id="LMMA2">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.MMA2</DataRef>
           <PaletteRefs />
           <ActionSetRef>Actions.Level1</ActionSetRef>
-          <AssetRef>Assets.MMA2</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L5</TileSetRef>
         </Map>
         <Map Id="LMMA3">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.MMA3</DataRef>
           <PaletteRefs />
           <ActionSetRef>Actions.Level1</ActionSetRef>
-          <AssetRef>Assets.MMA3</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L7</TileSetRef>
         </Map>

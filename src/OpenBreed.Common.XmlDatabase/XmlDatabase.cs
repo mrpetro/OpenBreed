@@ -16,6 +16,7 @@ using OpenBreed.Common.XmlDatabase.Tables.Actions;
 using OpenBreed.Common.XmlDatabase.Tables.Tiles;
 using OpenBreed.Common.XmlDatabase.Tables.Sprites;
 using OpenBreed.Common.XmlDatabase.Tables.Palettes;
+using OpenBreed.Common.XmlDatabase.Tables.Datas;
 
 namespace OpenBreed.Common.XmlDatabase
 {
@@ -30,6 +31,7 @@ namespace OpenBreed.Common.XmlDatabase
 
         [XmlArray("Tables"),
         XmlArrayItem("Assets", typeof(DatabaseAssetTableDef)),
+        XmlArrayItem("Datas", typeof(DatabaseDataTableDef)),
         XmlArrayItem("Maps", typeof(DatabaseMapTableDef)),
         XmlArrayItem("Palettes", typeof(DatabasePaletteTableDef)),
         XmlArrayItem("ActionSets", typeof(DatabaseActionSetTableDef)),

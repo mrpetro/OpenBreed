@@ -38,6 +38,82 @@
         <FileAsset Id="Assets.PARTF" FilePath="%Cfg.Options.ABSE.GameFolderPath%\PARTF" />
       </Items>
     </Assets>
+    <Datas>
+      <Items>
+        <Data Id="Datas.MAP.L0MA">
+          <AssetRef>Assets.L0MA</AssetRef>
+          <Format Name="ABSE_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.L1MA">
+          <AssetRef>Assets.L1MA</AssetRef>
+          <Format Name="ABSE_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.L2MA">
+          <AssetRef>Assets.L2MA</AssetRef>
+          <Format Name="ABSE_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.L3MA">
+          <AssetRef>Assets.L3MA</AssetRef>
+          <Format Name="ABSE_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.L4MA">
+          <AssetRef>Assets.L4MA</AssetRef>
+          <Format Name="ABSE_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.L5MA">
+          <AssetRef>Assets.L5MA</AssetRef>
+          <Format Name="ABSE_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.L6MA">
+          <AssetRef>Assets.L6MA</AssetRef>
+          <Format Name="ABSE_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.L7MA">
+          <AssetRef>Assets.L7MA</AssetRef>
+          <Format Name="ABSE_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.L8MA">
+          <AssetRef>Assets.L8MA</AssetRef>
+          <Format Name="ABSE_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.L9MA">
+          <AssetRef>Assets.L9MA</AssetRef>
+          <Format Name="ABSE_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.LAMA">
+          <AssetRef>Assets.LAMA</AssetRef>
+          <Format Name="ABSE_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+        <Data Id="Datas.MAP.LBMA">
+          <AssetRef>Assets.LBMA</AssetRef>
+          <Format Name="ABSE_MAP">
+            <Parameters />
+          </Format>
+        </Data>
+      </Items>
+    </Datas>
     <Images>
       <Items>
         <Image Description="Alien Breed II: Horror Continues teaser" Id="Images.LP01">
@@ -361,146 +437,110 @@
     <Maps>
       <Items>
         <Map Id="L0">
-          <Format Name="ABSE_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.L0MA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LA</PaletteRef>
           </PaletteRefs>
           <ActionSetRef>Actions.Default</ActionSetRef>
-          <AssetRef>Assets.L0MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LA</TileSetRef>
         </Map>
         <Map Id="L1">
-          <Format Name="ABSE_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.L1MA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LE</PaletteRef>
           </PaletteRefs>
           <ActionSetRef>Actions.Default</ActionSetRef>
-          <AssetRef>Assets.L1MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LE</TileSetRef>
         </Map>
         <Map Id="L2">
-          <Format Name="ABSE_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.L2MA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LF</PaletteRef>
           </PaletteRefs>
           <ActionSetRef>Actions.Default</ActionSetRef>
-          <AssetRef>Assets.L2MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LF</TileSetRef>
         </Map>
         <Map Id="L3">
-          <Format Name="ABSE_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.L3MA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LC</PaletteRef>
           </PaletteRefs>
           <ActionSetRef>Actions.Default</ActionSetRef>
-          <AssetRef>Assets.L3MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LC</TileSetRef>
         </Map>
         <Map Id="L4">
-          <Format Name="ABSE_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.L4MA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LB</PaletteRef>
           </PaletteRefs>
           <ActionSetRef>Actions.Default</ActionSetRef>
-          <AssetRef>Assets.L4MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LB</TileSetRef>
         </Map>
         <Map Id="L5">
-          <Format Name="ABSE_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.L5MA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LB</PaletteRef>
           </PaletteRefs>
           <ActionSetRef>Actions.Default</ActionSetRef>
-          <AssetRef>Assets.L5MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LB</TileSetRef>
         </Map>
         <Map Id="L6">
-          <Format Name="ABSE_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.L6MA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LC</PaletteRef>
           </PaletteRefs>
           <ActionSetRef>Actions.Default</ActionSetRef>
-          <AssetRef>Assets.L6MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LC</TileSetRef>
         </Map>
         <Map Id="L7">
-          <Format Name="ABSE_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.L7MA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LD</PaletteRef>
           </PaletteRefs>
           <ActionSetRef>Actions.Default</ActionSetRef>
-          <AssetRef>Assets.L7MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LD</TileSetRef>
         </Map>
         <Map Id="L8">
-          <Format Name="ABSE_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.L8MA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LD</PaletteRef>
           </PaletteRefs>
           <ActionSetRef>Actions.Default</ActionSetRef>
-          <AssetRef>Assets.L8MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LD</TileSetRef>
         </Map>
         <Map Id="L9">
-          <Format Name="ABSE_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.L9MA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LD</PaletteRef>
           </PaletteRefs>
           <ActionSetRef>Actions.Default</ActionSetRef>
-          <AssetRef>Assets.L9MA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LD</TileSetRef>
         </Map>
         <Map Id="LA">
-          <Format Name="ABSE_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.LAMA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LE</PaletteRef>
           </PaletteRefs>
           <ActionSetRef>Actions.Default</ActionSetRef>
-          <AssetRef>Assets.LAMA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LE</TileSetRef>
         </Map>
         <Map Id="LB">
-          <Format Name="ABSE_MAP">
-            <Parameters />
-          </Format>
+          <DataRef>Datas.MAP.LBMA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LE</PaletteRef>
           </PaletteRefs>
           <ActionSetRef>Actions.Default</ActionSetRef>
-          <AssetRef>Assets.LBMA</AssetRef>
           <SpriteSetRefs />
           <TileSetRef>TileSets.LE</TileSetRef>
         </Map>

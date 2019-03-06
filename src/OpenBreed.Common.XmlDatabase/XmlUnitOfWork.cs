@@ -99,6 +99,7 @@ namespace OpenBreed.Common.XmlDatabase
         private void RegisterRepos()
         {
             RegisterRepository(new XmlAssetsRepository(_context));
+            RegisterRepository(new XmlDatasRepository(_context));
             RegisterRepository(new XmlTileSetsRepository(_context));
             RegisterRepository(new XmlSpriteSetsRepository(_context));
             RegisterRepository(new XmlActionSetsRepository(_context));

@@ -9,8 +9,7 @@ namespace OpenBreed.Common.Maps
 {
     public interface IMapEntry : IEntry
     {
-        string AssetRef { get; }
-        IFormatEntry Format { get; }
+        string DataRef { get; }
 
         string TileSetRef { get; }
         string ActionSetRef { get; set; }

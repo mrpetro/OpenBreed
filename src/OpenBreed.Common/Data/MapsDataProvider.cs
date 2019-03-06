@@ -27,46 +27,17 @@ namespace OpenBreed.Common.Data
 
         #endregion Public Properties
 
-        internal void Save()
-        {
-            foreach (var item in _models)
-            {
-                var entryId = item.Key;
-                var data = item.Value;
-
-                var entry = Provider.UnitOfWork.GetRepository<IMapEntry>().GetById(item.Key);
-                if (entry == null)
-                    throw new Exception($"Map error: {item.Key}");
-
-                if (entry.AssetRef == null)
-                    throw new InvalidOperationException("Missing Asset reference");
-
-                var asset = Provider.Assets.GetAsset(entry.AssetRef);
-                Provider.FormatMan.Save(asset, item.Value, entry.Format);
-            }
-        }
-
         public MapModel GetMap(string id)
         {
-            MapModel map;
-
-            if (_models.TryGetValue(id, out map))
-                return map;
 
             var entry = Provider.UnitOfWork.GetRepository<IMapEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("Map error: " + id);
 
-            if (entry.AssetRef == null)
+            if (entry.DataRef == null)
                 return null;
 
-            var asset = Provider.Assets.GetAsset(entry.AssetRef);
-            map = Provider.FormatMan.Load(asset, entry.Format) as MapModel;
-            map.Tag = id;
-
-            _models.Add(id, map);
-
-            return map;
+            return Provider.Datas.GetData(entry.DataRef) as MapModel;
         }
 
     }

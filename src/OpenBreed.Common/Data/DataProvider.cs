@@ -18,6 +18,7 @@ namespace OpenBreed.Common.Data
             Sounds = new SoundsDataProvider(this);
             Images = new ImagesDataProvider(this);
             Palettes = new PalettesDataProvider(this);
+            Datas = new Data2DataProvider(this);
 
             Initialize();
         }
@@ -35,6 +36,7 @@ namespace OpenBreed.Common.Data
         public SoundsDataProvider Sounds { get; }
         public SpriteSetsDataProvider SpriteSets { get; }
         public TileSetsDataProvider TileSets { get; }
+        public Data2DataProvider Datas { get; }
         public IUnitOfWork UnitOfWork { get; }
 
         #endregion Public Properties
@@ -56,12 +58,15 @@ namespace OpenBreed.Common.Data
 
         public void Save()
         {
-            Maps.Save();
+            Datas.Save();
 
             Assets.Save();
 
             UnitOfWork.Save();
         }
+
+
+
 
         #endregion Private Methods
     }

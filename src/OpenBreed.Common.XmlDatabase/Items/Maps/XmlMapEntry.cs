@@ -16,22 +16,8 @@ namespace OpenBreed.Common.XmlDatabase.Items.Maps
     {
         #region Public Properties
 
-        [XmlIgnore]
-        public IFormatEntry Format { get; set; }
-
-        [XmlElement("Format")]
-        public XmlFormatEntry FormatDef
-        {
-            get
-            {
-                return (XmlFormatEntry)Format;
-            }
-
-            set
-            {
-                Format = value;
-            }
-        }
+        [XmlElement("DataRef")]
+        public string DataRef { get; set; }
 
         [XmlArray("PaletteRefs"),
         XmlArrayItem("PaletteRef", typeof(string))]
@@ -40,12 +26,11 @@ namespace OpenBreed.Common.XmlDatabase.Items.Maps
         [XmlElement("ActionSetRef")]
         public string ActionSetRef { get; set; }
 
-        public string AssetRef { get; set; }
-
         [XmlArray("SpriteSetRefs"),
         XmlArrayItem("SpriteSetRef", typeof(string))]
         public List<string> SpriteSetRefs { get; } = new List<string>();
 
+        [XmlElement("TileSetRef")]
         public string TileSetRef { get; set; }
 
         public override IEntry Copy()
