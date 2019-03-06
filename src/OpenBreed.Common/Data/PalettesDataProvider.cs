@@ -31,14 +31,10 @@ namespace OpenBreed.Common.Data
             if (entry == null)
                 throw new Exception("Palette error: " + id);
 
-            if (entry.AssetRef == null)
+            if (entry.DataRef == null)
                 return null;
 
-            var asset = Provider.Assets.GetAsset(entry.AssetRef);
-
-            var palette = Provider.FormatMan.Load(asset, entry.Format) as PaletteModel;
-            palette.Tag = id;
-            return palette;
+            return Provider.Datas.GetData(entry.DataRef) as PaletteModel;
         }
     }
 }

@@ -165,11 +165,7 @@
             <Parameters />
           </Format>
         </Data>
-      </Items>
-    </Datas>
-    <Images>
-      <Items>
-        <Image Description="Characters statistics screens" Id="Images.CHAD">
+        <Data Id="Datas.Images.CHAD">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">640</Parameter>
@@ -179,8 +175,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.CHAD</AssetRef>
-        </Image>
-        <Image Description="Characters selection screen" Id="Images.CHAR">
+        </Data>
+        <Data Id="Datas.Images.CHAR">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -190,8 +186,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.CHAR</AssetRef>
-        </Image>
-        <Image Description="End animation frames" Id="Images.ENDA">
+        </Data>
+        <Data Id="Datas.Images.ENDA">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -201,8 +197,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.ENDA</AssetRef>
-        </Image>
-        <Image Description="End picture" Id="Images.ENDP">
+        </Data>
+        <Data Id="Datas.Images.ENDP">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -212,8 +208,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.ENDP</AssetRef>
-        </Image>
-        <Image Description="Highscore picture" Id="Images.HPIC">
+        </Data>
+        <Data Id="Datas.Images.HPIC">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -223,8 +219,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.HPIC</AssetRef>
-        </Image>
-        <Image Description="Intro picture" Id="Images.IPIC">
+        </Data>
+        <Data Id="Datas.Images.IPIC">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">640</Parameter>
@@ -234,8 +230,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.IPIC</AssetRef>
-        </Image>
-        <Image Description="Menu picture" Id="Images.MPIC">
+        </Data>
+        <Data Id="Datas.Images.MPIC">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -245,8 +241,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.MPIC</AssetRef>
-        </Image>
-        <Image Description="End text screen" Id="Images.ETXT">
+        </Data>
+        <Data Id="Datas.Images.ETXT">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -256,8 +252,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.ETXT</AssetRef>
-        </Image>
-        <Image Description="Character 1 sprites" Id="Images.HSP1">
+        </Data>
+        <Data Id="Datas.Images.HSP1">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -267,8 +263,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.HSP1</AssetRef>
-        </Image>
-        <Image Description="Character 2 sprites" Id="Images.HSP2">
+        </Data>
+        <Data Id="Datas.Images.HSP2">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -278,8 +274,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.HSP2</AssetRef>
-        </Image>
-        <Image Description="Character 3 sprites" Id="Images.HSP3">
+        </Data>
+        <Data Id="Datas.Images.HSP3">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -289,8 +285,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.HSP3</AssetRef>
-        </Image>
-        <Image Description="Character 4 sprites" Id="Images.HSP4">
+        </Data>
+        <Data Id="Datas.Images.HSP4">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -300,8 +296,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.HSP4</AssetRef>
-        </Image>
-        <Image Description="Level 1 sprites" Id="Images.L1BO">
+        </Data>
+        <Data Id="Datas.Images.L1BO">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -311,8 +307,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.L1BO</AssetRef>
-        </Image>
-        <Image Description="Level 2 sprites" Id="Images.L2BO">
+        </Data>
+        <Data Id="Datas.Images.L2BO">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -322,8 +318,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.L2BO</AssetRef>
-        </Image>
-        <Image Description="Level 3 sprites" Id="Images.L3BO">
+        </Data>
+        <Data Id="Datas.Images.L3BO">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -333,8 +329,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.L3BO</AssetRef>
-        </Image>
-        <Image Description="Level 4 sprites" Id="Images.L4BO">
+        </Data>
+        <Data Id="Datas.Images.L4BO">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -344,8 +340,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.L4BO</AssetRef>
-        </Image>
-        <Image Description="Level 5 sprites" Id="Images.L5BO">
+        </Data>
+        <Data Id="Datas.Images.L5BO">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -355,8 +351,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.L5BO</AssetRef>
-        </Image>
-        <Image Description="Level 6 sprites" Id="Images.L6BO">
+        </Data>
+        <Data Id="Datas.Images.L6BO">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -366,8 +362,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.L6BO</AssetRef>
-        </Image>
-        <Image Description="Level 7 sprites" Id="Images.L7BO">
+        </Data>
+        <Data Id="Datas.Images.L7BO">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -377,8 +373,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.L7BO</AssetRef>
-        </Image>
-        <Image Description="Level 8 sprites" Id="Images.L8BO">
+        </Data>
+        <Data Id="Datas.Images.L8BO">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -388,8 +384,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.L8BO</AssetRef>
-        </Image>
-        <Image Description="Level 9 sprites" Id="Images.L9BO">
+        </Data>
+        <Data Id="Datas.Images.L9BO">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -399,8 +395,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.L9BO</AssetRef>
-        </Image>
-        <Image Description="Level A sprites" Id="Images.LABO">
+        </Data>
+        <Data Id="Datas.Images.LABO">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -410,8 +406,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.LABO</AssetRef>
-        </Image>
-        <Image Description="Level B sprites" Id="Images.LBBO">
+        </Data>
+        <Data Id="Datas.Images.LBBO">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -421,8 +417,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.LBBO</AssetRef>
-        </Image>
-        <Image Description="Level C sprites" Id="Images.LCBO">
+        </Data>
+        <Data Id="Datas.Images.LCBO">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -432,8 +428,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.LCBO</AssetRef>
-        </Image>
-        <Image Description="Level D sprites" Id="Images.LDBO">
+        </Data>
+        <Data Id="Datas.Images.LDBO">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -443,8 +439,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.LDBO</AssetRef>
-        </Image>
-        <Image Description="Level E sprites" Id="Images.LEBO">
+        </Data>
+        <Data Id="Datas.Images.LEBO">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -454,8 +450,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.LEBO</AssetRef>
-        </Image>
-        <Image Description="Level 1 picture" Id="Images.L1LP">
+        </Data>
+        <Data Id="Datas.Images.L1LP">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -465,8 +461,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.L1LP</AssetRef>
-        </Image>
-        <Image Description="Level 2 picture" Id="Images.L2LP">
+        </Data>
+        <Data Id="Datas.Images.L2LP">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -476,8 +472,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.L2LP</AssetRef>
-        </Image>
-        <Image Description="Level 6 picture" Id="Images.L6LP">
+        </Data>
+        <Data Id="Datas.Images.L6LP">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -487,8 +483,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.L6LP</AssetRef>
-        </Image>
-        <Image Description="Level A picture" Id="Images.LALP">
+        </Data>
+        <Data Id="Datas.Images.LALP">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -498,6 +494,100 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.LALP</AssetRef>
+        </Data>
+      </Items>
+    </Datas>
+    <Images>
+      <Items>
+        <Image Description="Characters statistics screens" Id="Images.CHAD">
+          <DataRef>Datas.Images.CHAD</DataRef>
+        </Image>
+        <Image Description="Characters selection screen" Id="Images.CHAR">
+          <DataRef>Datas.Images.CHAR</DataRef>
+        </Image>
+        <Image Description="End animation frames" Id="Images.ENDA">
+          <DataRef>Datas.Images.ENDA</DataRef>
+        </Image>
+        <Image Description="End picture" Id="Images.ENDP">
+          <DataRef>Datas.Images.ENDP</DataRef>
+        </Image>
+        <Image Description="Highscore picture" Id="Images.HPIC">
+          <DataRef>Datas.Images.HPIC</DataRef>
+        </Image>
+        <Image Description="Intro picture" Id="Images.IPIC">
+          <DataRef>Datas.Images.IPIC</DataRef>
+        </Image>
+        <Image Description="Menu picture" Id="Images.MPIC">
+          <DataRef>Datas.Images.MPIC</DataRef>
+        </Image>
+        <Image Description="End text screen" Id="Images.ETXT">
+          <DataRef>Datas.Images.ETXT</DataRef>
+        </Image>
+        <Image Description="Character 1 sprites" Id="Images.HSP1">
+          <DataRef>Datas.Images.HSP1</DataRef>
+        </Image>
+        <Image Description="Character 2 sprites" Id="Images.HSP2">
+          <DataRef>Datas.Images.HSP2</DataRef>
+        </Image>
+        <Image Description="Character 3 sprites" Id="Images.HSP3">
+          <DataRef>Datas.Images.HSP3</DataRef>
+        </Image>
+        <Image Description="Character 4 sprites" Id="Images.HSP4">
+          <DataRef>Datas.Images.HSP4</DataRef>
+        </Image>
+        <Image Description="Level 1 sprites" Id="Images.L1BO">
+          <DataRef>Datas.Images.L1BO</DataRef>
+        </Image>
+        <Image Description="Level 2 sprites" Id="Images.L2BO">
+          <DataRef>Datas.Images.L2BO</DataRef>
+        </Image>
+        <Image Description="Level 3 sprites" Id="Images.L3BO">
+          <DataRef>Datas.Images.L3BO</DataRef>
+        </Image>
+        <Image Description="Level 4 sprites" Id="Images.L4BO">
+          <DataRef>Datas.Images.L4BO</DataRef>
+        </Image>
+        <Image Description="Level 5 sprites" Id="Images.L5BO">
+          <DataRef>Datas.Images.L5BO</DataRef>
+        </Image>
+        <Image Description="Level 6 sprites" Id="Images.L6BO">
+          <DataRef>Datas.Images.L6BO</DataRef>
+        </Image>
+        <Image Description="Level 7 sprites" Id="Images.L7BO">
+          <DataRef>Datas.Images.L7BO</DataRef>
+        </Image>
+        <Image Description="Level 8 sprites" Id="Images.L8BO">
+          <DataRef>Datas.Images.L8BO</DataRef>
+        </Image>
+        <Image Description="Level 9 sprites" Id="Images.L9BO">
+          <DataRef>Datas.Images.L9BO</DataRef>
+        </Image>
+        <Image Description="Level A sprites" Id="Images.LABO">
+          <DataRef>Datas.Images.LABO</DataRef>
+        </Image>
+        <Image Description="Level B sprites" Id="Images.LBBO">
+          <DataRef>Datas.Images.LBBO</DataRef>
+        </Image>
+        <Image Description="Level C sprites" Id="Images.LCBO">
+          <DataRef>Datas.Images.LCBO</DataRef>
+        </Image>
+        <Image Description="Level D sprites" Id="Images.LDBO">
+          <DataRef>Datas.Images.LDBO</DataRef>
+        </Image>
+        <Image Description="Level E sprites" Id="Images.LEBO">
+          <DataRef>Datas.Images.LEBO</DataRef>
+        </Image>
+        <Image Description="Level 1 picture" Id="Images.L1LP">
+          <DataRef>Datas.Images.L1LP</DataRef>
+        </Image>
+        <Image Description="Level 2 picture" Id="Images.L2LP">
+          <DataRef>Datas.Images.L2LP</DataRef>
+        </Image>
+        <Image Description="Level 6 picture" Id="Images.L6LP">
+          <DataRef>Datas.Images.L6LP</DataRef>
+        </Image>
+        <Image Description="Level A picture" Id="Images.LALP">
+          <DataRef>Datas.Images.LALP</DataRef>
         </Image>
       </Items>
     </Images>

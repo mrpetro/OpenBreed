@@ -17,24 +17,8 @@ namespace OpenBreed.Common.XmlDatabase.Items.Palettes
 
         #region Public Properties
 
-        public string AssetRef { get; set; }
-
-        [XmlIgnore]
-        public IFormatEntry Format { get; set; }
-
-        [XmlElement("Format")]
-        public XmlFormatEntry FormatDef
-        {
-            get
-            {
-                return (XmlFormatEntry)Format;
-            }
-
-            set
-            {
-                Format = value;
-            }
-        }
+        [XmlElement("DataRef")]
+        public string DataRef { get; set; }
 
         public override IEntry Copy()
         {

@@ -25,20 +25,16 @@ namespace OpenBreed.Common.Data
 
         #endregion Public Properties
 
-        public Image GetImage(string name)
+        public Image GetImage(string id)
         {
-            var entry = Provider.UnitOfWork.GetRepository<IImageEntry>().GetById(name);
+            var entry = Provider.UnitOfWork.GetRepository<IImageEntry>().GetById(id);
             if (entry == null)
-                throw new Exception("Image error: " + name);
+                throw new Exception("Image error: " + id);
 
-            if (entry.AssetRef == null)
+            if (entry.DataRef == null)
                 return null;
 
-            var asset = Provider.Assets.GetAsset(entry.AssetRef);
-
-            var image = Provider.FormatMan.Load(asset, entry.Format) as Image;
-            image.Tag = name;
-            return image;
+            return Provider.Datas.GetData(entry.DataRef) as Image;
         }
 
     }
