@@ -548,15 +548,8 @@
             <Parameters />
           </Format>
           <AssetRef>Assets.LEVELD.BLK</AssetRef>
-        </Data> 
-      </Items>
-    </Datas>
-    <Images>
-      <Items />
-    </Images>
-    <Sounds>
-      <Items>
-        <Sound Id="Sounds.ALIEN1">
+        </Data>
+        <Data Id="Datas.Sounds.ALIEN1">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -565,8 +558,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.ALIEN1</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.ALIEN2">
+        </Data>
+        <Data Id="Datas.Sounds.ALIEN2">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -575,8 +568,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.ALIEN2</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.ALIEN3">
+        </Data>
+        <Data Id="Datas.Sounds.ALIEN3">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -585,8 +578,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.ALIEN3</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.ALIEN4">
+        </Data>
+        <Data Id="Datas.Sounds.ALIEN4">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -595,8 +588,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.ALIEN4</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.AMMO">
+        </Data>
+        <Data Id="Datas.Sounds.AMMO">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -605,8 +598,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.AMMO</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.BACKING1">
+        </Data>
+        <Data Id="Datas.Sounds.BACKING1">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -615,8 +608,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.BACKING1</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.BACKING2">
+        </Data>
+        <Data Id="Datas.Sounds.BACKING2">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -625,8 +618,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.BACKING2</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.BACKING3">
+        </Data>
+        <Data Id="Datas.Sounds.BACKING3">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -635,8 +628,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.BACKING3</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.BACKING4">
+        </Data>
+        <Data Id="Datas.Sounds.BACKING4">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -645,8 +638,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.BACKING4</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.CACOON1">
+        </Data>
+        <Data Id="Datas.Sounds.CACOON1">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -655,8 +648,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.CACOON1</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.COMPUTER">
+        </Data>
+        <Data Id="Datas.Sounds.COMPUTER">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -665,8 +658,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.COMPUTER</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.COUNTDWN">
+        </Data>
+        <Data Id="Datas.Sounds.COUNTDWN">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -675,8 +668,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.COUNTDWN</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.CREDITS">
+        </Data>
+        <Data Id="Datas.Sounds.CREDITS">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -685,8 +678,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.CREDITS</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.CURSOR">
+        </Data>
+        <Data Id="Datas.Sounds.CURSOR">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -695,8 +688,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.CURSOR</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.DIE">
+        </Data>
+        <Data Id="Datas.Sounds.DIE">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -705,8 +698,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.DIE</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.DOOR1">
+        </Data>
+        <Data Id="Datas.Sounds.DOOR1">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -715,8 +708,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.DOOR1</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.EAT1">
+        </Data>
+        <Data Id="Datas.Sounds.EAT1">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -725,8 +718,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.EAT1</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.EXPLOS">
+        </Data>
+        <Data Id="Datas.Sounds.EXPLOS">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -735,8 +728,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.EXPLOS</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.FLAMEOFF">
+        </Data>
+        <Data Id="Datas.Sounds.FLAMEOFF">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -745,8 +738,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.FLAMEOFF</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.FLAMEON">
+        </Data>
+        <Data Id="Datas.Sounds.FLAMEON">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -755,8 +748,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.FLAMEON</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.GENERATE">
+        </Data>
+        <Data Id="Datas.Sounds.GENERATE">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -765,8 +758,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.GENERATE</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.GRENADE">
+        </Data>
+        <Data Id="Datas.Sounds.GRENADE">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -775,8 +768,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.GRENADE</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.GRUNT1">
+        </Data>
+        <Data Id="Datas.Sounds.GRUNT1">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -785,8 +778,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.GRUNT1</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.HATCH1">
+        </Data>
+        <Data Id="Datas.Sounds.HATCH1">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -795,8 +788,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.HATCH1</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.HEALTH">
+        </Data>
+        <Data Id="Datas.Sounds.HEALTH">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -805,8 +798,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.HEALTH</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.KEYS">
+        </Data>
+        <Data Id="Datas.Sounds.KEYS">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -815,8 +808,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.KEYS</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.LAZER1">
+        </Data>
+        <Data Id="Datas.Sounds.LAZER1">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -825,8 +818,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.LAZER1</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.LAZER2">
+        </Data>
+        <Data Id="Datas.Sounds.LAZER2">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -835,8 +828,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.LAZER2</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.LAZER3">
+        </Data>
+        <Data Id="Datas.Sounds.LAZER3">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -845,8 +838,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.LAZER3</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.LAZER4">
+        </Data>
+        <Data Id="Datas.Sounds.LAZER4">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -855,8 +848,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.LAZER4</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.LIZARD">
+        </Data>
+        <Data Id="Datas.Sounds.LIZARD">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -865,8 +858,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.LIZARD</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.MGUN">
+        </Data>
+        <Data Id="Datas.Sounds.MGUN">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -875,8 +868,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.MGUN</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.MINETICK">
+        </Data>
+        <Data Id="Datas.Sounds.MINETICK">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -885,8 +878,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.MINETICK</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.MISSILE">
+        </Data>
+        <Data Id="Datas.Sounds.MISSILE">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -895,8 +888,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.MISSILE</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.NULLSAMP">
+        </Data>
+        <Data Id="Datas.Sounds.NULLSAMP">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -905,8 +898,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.NULLSAMP</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.ONEWAY">
+        </Data>
+        <Data Id="Datas.Sounds.ONEWAY">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -915,8 +908,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.ONEWAY</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.OUTAMMO">
+        </Data>
+        <Data Id="Datas.Sounds.OUTAMMO">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -925,8 +918,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.OUTAMMO</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SELECT">
+        </Data>
+        <Data Id="Datas.Sounds.SELECT">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -935,8 +928,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SELECT</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SIREN">
+        </Data>
+        <Data Id="Datas.Sounds.SIREN">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -945,8 +938,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SIREN</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH01">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH01">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -955,8 +948,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH01</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH02">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH02">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -965,8 +958,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH02</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH03">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH03">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -975,8 +968,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH03</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH04">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH04">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -985,8 +978,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH04</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH05">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH05">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -995,8 +988,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH05</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH06">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH06">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -1005,8 +998,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH06</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH07">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH07">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -1015,8 +1008,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH07</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH08">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH08">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -1025,8 +1018,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH08</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH09">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH09">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -1035,8 +1028,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH09</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH10">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH10">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -1045,8 +1038,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH10</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH11">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH11">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -1055,8 +1048,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH11</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH12">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH12">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -1065,8 +1058,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH12</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH13">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH13">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -1075,8 +1068,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH13</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH14">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH14">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -1085,8 +1078,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH14</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH15">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH15">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -1095,8 +1088,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH15</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH16">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH16">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -1105,8 +1098,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH16</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH17">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH17">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -1115,8 +1108,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH17</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH18">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH18">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -1125,8 +1118,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH18</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH19">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH19">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -1135,8 +1128,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH19</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH20">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH20">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -1145,8 +1138,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH20</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH21">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH21">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -1155,8 +1148,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH21</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH22">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH22">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -1165,8 +1158,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH22</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH23">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH23">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -1175,8 +1168,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH23</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH24">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH24">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -1185,8 +1178,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH24</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH25">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH25">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -1195,8 +1188,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH25</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH26">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH26">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -1205,8 +1198,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH26</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPEECH27">
+        </Data>
+        <Data Id="Datas.Sounds.SPEECH27">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
@@ -1215,8 +1208,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPEECH27</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SPLAT1">
+        </Data>
+        <Data Id="Datas.Sounds.SPLAT1">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -1225,8 +1218,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SPLAT1</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.SWITCH">
+        </Data>
+        <Data Id="Datas.Sounds.SWITCH">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -1235,8 +1228,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.SWITCH</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.TELE">
+        </Data>
+        <Data Id="Datas.Sounds.TELE">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -1245,8 +1238,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.TELE</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.TURRET1">
+        </Data>
+        <Data Id="Datas.Sounds.TURRET1">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -1255,8 +1248,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.TURRET1</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.TURRET2">
+        </Data>
+        <Data Id="Datas.Sounds.TURRET2">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -1265,8 +1258,8 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.TURRET2</AssetRef>
-        </Sound>
-        <Sound Id="Sounds.XTRALIFE">
+        </Data>
+        <Data Id="Datas.Sounds.XTRALIFE">
           <Format Name="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
@@ -1275,6 +1268,229 @@
             </Parameters>
           </Format>
           <AssetRef>Assets.XTRALIFE</AssetRef>
+        </Data>
+      </Items>
+    </Datas>
+    <Images>
+      <Items />
+    </Images>
+    <Sounds>
+      <Items>
+        <Sound Id="Sounds.ALIEN1">
+          <DataRef>Datas.Sounds.ALIEN1</DataRef>
+        </Sound>
+        <Sound Id="Sounds.ALIEN2">
+          <DataRef>Datas.Sounds.ALIEN2</DataRef>
+        </Sound>
+        <Sound Id="Sounds.ALIEN3">
+          <DataRef>Datas.Sounds.ALIEN3</DataRef>
+        </Sound>
+        <Sound Id="Sounds.ALIEN4">
+          <DataRef>Datas.Sounds.ALIEN4</DataRef>
+        </Sound>
+        <Sound Id="Sounds.AMMO">
+          <DataRef>Datas.Sounds.AMMO</DataRef>
+        </Sound>
+        <Sound Id="Sounds.BACKING1">
+          <DataRef>Datas.Sounds.BACKING1</DataRef>
+        </Sound>
+        <Sound Id="Sounds.BACKING2">
+          <DataRef>Datas.Sounds.BACKING2</DataRef>
+        </Sound>
+        <Sound Id="Sounds.BACKING3">
+          <DataRef>Datas.Sounds.BACKING3</DataRef>
+        </Sound>
+        <Sound Id="Sounds.BACKING4">
+          <DataRef>Datas.Sounds.BACKING4</DataRef>
+        </Sound>
+        <Sound Id="Sounds.CACOON1">
+          <DataRef>Datas.Sounds.CACOON1</DataRef>
+        </Sound>
+        <Sound Id="Sounds.COMPUTER">
+          <DataRef>Datas.Sounds.COMPUTER</DataRef>
+        </Sound>
+        <Sound Id="Sounds.COUNTDWN">
+          <DataRef>Datas.Sounds.COUNTDWN</DataRef>
+        </Sound>
+        <Sound Id="Sounds.CREDITS">
+          <DataRef>Datas.Sounds.CREDITS</DataRef>
+        </Sound>
+        <Sound Id="Sounds.CURSOR">
+          <DataRef>Datas.Sounds.CURSOR</DataRef>
+        </Sound>
+        <Sound Id="Sounds.DIE">
+          <DataRef>Datas.Sounds.DIE</DataRef>
+        </Sound>
+        <Sound Id="Sounds.DOOR1">
+          <DataRef>Datas.Sounds.DOOR1</DataRef>
+        </Sound>
+        <Sound Id="Sounds.EAT1">
+          <DataRef>Datas.Sounds.EAT1</DataRef>
+        </Sound>
+        <Sound Id="Sounds.EXPLOS">
+          <DataRef>Datas.Sounds.EXPLOS</DataRef>
+        </Sound>
+        <Sound Id="Sounds.FLAMEOFF">
+          <DataRef>Datas.Sounds.FLAMEOFF</DataRef>
+        </Sound>
+        <Sound Id="Sounds.FLAMEON">
+          <DataRef>Datas.Sounds.FLAMEON</DataRef>
+        </Sound>
+        <Sound Id="Sounds.GENERATE">
+          <DataRef>Datas.Sounds.GENERATE</DataRef>
+        </Sound>
+        <Sound Id="Sounds.GRENADE">
+          <DataRef>Datas.Sounds.GRENADE</DataRef>
+        </Sound>
+        <Sound Id="Sounds.GRUNT1">
+          <DataRef>Datas.Sounds.GRUNT1</DataRef>
+        </Sound>
+        <Sound Id="Sounds.HATCH1">
+          <DataRef>Datas.Sounds.HATCH1</DataRef>
+        </Sound>
+        <Sound Id="Sounds.HEALTH">
+          <DataRef>Datas.Sounds.HEALTH</DataRef>
+        </Sound>
+        <Sound Id="Sounds.KEYS">
+          <DataRef>Datas.Sounds.KEYS</DataRef>
+        </Sound>
+        <Sound Id="Sounds.LAZER1">
+          <DataRef>Datas.Sounds.LAZER1</DataRef>
+        </Sound>
+        <Sound Id="Sounds.LAZER2">
+          <DataRef>Datas.Sounds.LAZER2</DataRef>
+        </Sound>
+        <Sound Id="Sounds.LAZER3">
+          <DataRef>Datas.Sounds.LAZER3</DataRef>
+        </Sound>
+        <Sound Id="Sounds.LAZER4">
+          <DataRef>Datas.Sounds.LAZER4</DataRef>
+        </Sound>
+        <Sound Id="Sounds.LIZARD">
+          <DataRef>Datas.Sounds.LIZARD</DataRef>
+        </Sound>
+        <Sound Id="Sounds.MGUN">
+          <DataRef>Datas.Sounds.MGUN</DataRef>
+        </Sound>
+        <Sound Id="Sounds.MINETICK">
+          <DataRef>Datas.Sounds.MINETICK</DataRef>
+        </Sound>
+        <Sound Id="Sounds.MISSILE">
+          <DataRef>Datas.Sounds.MISSILE</DataRef>
+        </Sound>
+        <Sound Id="Sounds.NULLSAMP">
+          <DataRef>Datas.Sounds.NULLSAMP</DataRef>
+        </Sound>
+        <Sound Id="Sounds.ONEWAY">
+          <DataRef>Datas.Sounds.ONEWAY</DataRef>
+        </Sound>
+        <Sound Id="Sounds.OUTAMMO">
+          <DataRef>Datas.Sounds.OUTAMMO</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SELECT">
+          <DataRef>Datas.Sounds.SELECT</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SIREN">
+          <DataRef>Datas.Sounds.SIREN</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH01">
+          <DataRef>Datas.Sounds.SPEECH01</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH02">
+          <DataRef>Datas.Sounds.SPEECH02</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH03">
+          <DataRef>Datas.Sounds.SPEECH03</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH04">
+          <DataRef>Datas.Sounds.SPEECH04</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH05">
+          <DataRef>Datas.Sounds.SPEECH05</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH06">
+          <DataRef>Datas.Sounds.SPEECH06</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH07">
+          <DataRef>Datas.Sounds.SPEECH07</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH08">
+          <DataRef>Datas.Sounds.SPEECH08</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH09">
+          <DataRef>Datas.Sounds.SPEECH09</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH10">
+          <DataRef>Datas.Sounds.SPEECH10</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH11">
+          <DataRef>Datas.Sounds.SPEECH11</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH12">
+          <DataRef>Datas.Sounds.SPEECH12</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH13">
+          <DataRef>Datas.Sounds.SPEECH13</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH14">
+          <DataRef>Datas.Sounds.SPEECH14</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH15">
+          <DataRef>Datas.Sounds.SPEECH15</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH16">
+          <DataRef>Datas.Sounds.SPEECH16</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH17">
+          <DataRef>Datas.Sounds.SPEECH17</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH18">
+          <DataRef>Datas.Sounds.SPEECH18</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH19">
+          <DataRef>Datas.Sounds.SPEECH19</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH20">
+          <DataRef>Datas.Sounds.SPEECH20</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH21">
+          <DataRef>Datas.Sounds.SPEECH21</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH22">
+          <DataRef>Datas.Sounds.SPEECH22</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH23">
+          <DataRef>Datas.Sounds.SPEECH23</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH24">
+          <DataRef>Datas.Sounds.SPEECH24</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH25">
+          <DataRef>Datas.Sounds.SPEECH25</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH26">
+          <DataRef>Datas.Sounds.SPEECH26</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPEECH27">
+          <DataRef>Datas.Sounds.SPEECH27</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SPLAT1">
+          <DataRef>Datas.Sounds.SPLAT1</DataRef>
+        </Sound>
+        <Sound Id="Sounds.SWITCH">
+          <DataRef>Datas.Sounds.SWITCH</DataRef>
+        </Sound>
+        <Sound Id="Sounds.TELE">
+          <DataRef>Datas.Sounds.TELE</DataRef>
+        </Sound>
+        <Sound Id="Sounds.TURRET1">
+          <DataRef>Datas.Sounds.TURRET1</DataRef>
+        </Sound>
+        <Sound Id="Sounds.TURRET2">
+          <DataRef>Datas.Sounds.TURRET2</DataRef>
+        </Sound>
+        <Sound Id="Sounds.XTRALIFE">
+          <DataRef>Datas.Sounds.XTRALIFE</DataRef>
         </Sound>
       </Items>
     </Sounds>

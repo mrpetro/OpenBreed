@@ -30,14 +30,10 @@ namespace OpenBreed.Common.Data
             if (entry == null)
                 throw new Exception("Sound error: " + id);
 
-            if (entry.AssetRef == null)
+            if (entry.DataRef == null)
                 return null;
 
-            var asset = Provider.Assets.GetAsset(entry.AssetRef);
-
-            var sound = Provider.FormatMan.Load(asset, entry.Format) as SoundModel;
-            sound.Tag = id;
-            return sound;
+            return Provider.Datas.GetData(entry.DataRef) as SoundModel;
         }
 
     }
