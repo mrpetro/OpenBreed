@@ -59,9 +59,9 @@ namespace OpenBreed.Editor.VM.Images
 
         protected override void UpdateVM(IImageEntry source, ImageVM target)
         {
-            target.AssetRef = source.AssetRef;
+            target.AssetRef = source.DataRef;
 
-            if(source.AssetRef != null)
+            if(source.DataRef != null)
                 target.Image = DataProvider.Images.GetImage(source.Id);
 
             base.UpdateVM(source, target);

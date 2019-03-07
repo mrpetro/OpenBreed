@@ -31,7 +31,7 @@ namespace OpenBreed.Editor.VM.Database.Entries
         public override void Load(IEntry entry)
         {
             var imageEntry = entry as IImageEntry ?? throw new InvalidOperationException($"Expected {nameof(IImageEntry)}");
-            AssetId = imageEntry.AssetRef;
+            AssetId = imageEntry.DataRef;
 
             base.Load(entry);
         }
