@@ -501,6 +501,54 @@
             <Parameters />
           </Format>
         </Data>
+        <Data Id="Datas.TileSets.LEVEL1.BLK">
+          <Format Name="ABTABLK">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.LEVEL1.BLK</AssetRef>
+        </Data>
+        <Data Id="Datas.TileSets.LEVEL3.BLK">
+          <Format Name="ABTABLK">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.LEVEL3.BLK</AssetRef>
+        </Data>
+        <Data Id="Datas.TileSets.LEVEL4.BLK">
+          <Format Name="ABTABLK">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.LEVEL4.BLK</AssetRef>
+        </Data>
+        <Data Id="Datas.TileSets.LEVEL5.BLK">
+          <Format Name="ABTABLK">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.LEVEL5.BLK</AssetRef>
+        </Data>
+        <Data Id="Datas.TileSets.LEVEL6.BLK">
+          <Format Name="ABTABLK">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.LEVEL6.BLK</AssetRef>
+        </Data>
+        <Data Id="Datas.TileSets.LEVEL7.BLK">
+          <Format Name="ABTABLK">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.LEVEL7.BLK</AssetRef>
+        </Data>
+        <Data Id="Datas.TileSets.LEVEL8.BLK">
+          <Format Name="ABTABLK">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.LEVEL8.BLK</AssetRef>
+        </Data>
+        <Data Id="Datas.TileSets.LEVELD.BLK">
+          <Format Name="ABTABLK">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.LEVELD.BLK</AssetRef>
+        </Data> 
       </Items>
     </Datas>
     <Images>
@@ -1411,52 +1459,28 @@
     <TileSets>
       <Items>
         <TileSet Id="TileSets.L1">
-          <Format Name="ABTABLK">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.LEVEL1.BLK</AssetRef>
+          <DataRef>Datas.TileSets.LEVEL1.BLK</DataRef>
         </TileSet>
         <TileSet Id="TileSets.L3">
-          <Format Name="ABTABLK">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.LEVEL3.BLK</AssetRef>
+          <DataRef>Datas.TileSets.LEVEL3.BLK</DataRef>
         </TileSet>
         <TileSet Id="TileSets.L4">
-          <Format Name="ABTABLK">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.LEVEL4.BLK</AssetRef>
+          <DataRef>Datas.TileSets.LEVEL4.BLK</DataRef>
         </TileSet>
         <TileSet Id="TileSets.L5">
-          <Format Name="ABTABLK">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.LEVEL5.BLK</AssetRef>
+          <DataRef>Datas.TileSets.LEVEL5.BLK</DataRef>
         </TileSet>
         <TileSet Id="TileSets.L6">
-          <Format Name="ABTABLK">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.LEVEL6.BLK</AssetRef>
+          <DataRef>Datas.TileSets.LEVEL6.BLK</DataRef>
         </TileSet>
         <TileSet Id="TileSets.L7">
-          <Format Name="ABTABLK">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.LEVEL7.BLK</AssetRef>
+          <DataRef>Datas.TileSets.LEVEL7.BLK</DataRef>
         </TileSet>
         <TileSet Id="TileSets.L8">
-          <Format Name="ABTABLK">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.LEVEL8.BLK</AssetRef>
+          <DataRef>Datas.TileSets.LEVEL8.BLK</DataRef>
         </TileSet>
         <TileSet Id="TileSets.LD">
-          <Format Name="ABTABLK">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.LEVELD.BLK</AssetRef>
+          <DataRef>Datas.TileSets.LEVELD.BLK</DataRef>
         </TileSet>
       </Items>
     </TileSets>

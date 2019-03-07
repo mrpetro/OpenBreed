@@ -33,14 +33,10 @@ namespace OpenBreed.Common.Data
             if (entry == null)
                 throw new Exception("TileSet error: " + id);
 
-            if (entry.AssetRef == null)
+            if (entry.DataRef == null)
                 return null;
 
-            var asset = Provider.Assets.GetAsset(entry.AssetRef);
-
-            var tileSet = Provider.FormatMan.Load(asset, entry.Format) as TileSetModel;
-            tileSet.Tag = id;
-            return tileSet;
+            return Provider.Datas.GetData(entry.DataRef) as TileSetModel;
         }
 
         #endregion Public Methods

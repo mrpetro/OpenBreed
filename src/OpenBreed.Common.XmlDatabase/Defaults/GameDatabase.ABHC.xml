@@ -495,6 +495,87 @@
           </Format>
           <AssetRef>Assets.LALP</AssetRef>
         </Data>
+        <Data Id="Datas.TileSets.L1BM">
+          <Format Name="ACBM_TILE_SET">
+            <Parameters>
+              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
+            </Parameters>
+          </Format>
+          <AssetRef>Assets.L1BM</AssetRef>
+        </Data>
+        <Data Id="Datas.TileSets.L2BM">
+          <Format Name="ACBM_TILE_SET">
+            <Parameters>
+              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
+            </Parameters>
+          </Format>
+          <AssetRef>Assets.L2BM</AssetRef>
+        </Data>
+        <Data Id="Datas.TileSets.L3BM">
+          <Format Name="ACBM_TILE_SET">
+            <Parameters>
+              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
+            </Parameters>
+          </Format>
+          <AssetRef>Assets.L3BM</AssetRef>
+        </Data>
+        <Data Id="Datas.TileSets.L4BM">
+          <Format Name="ACBM_TILE_SET">
+            <Parameters>
+              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
+            </Parameters>
+          </Format>
+          <AssetRef>Assets.L4BM</AssetRef>
+        </Data>
+        <Data Id="Datas.TileSets.L5BM">
+          <Format Name="ACBM_TILE_SET">
+            <Parameters>
+              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
+            </Parameters>
+          </Format>
+          <AssetRef>Assets.L5BM</AssetRef>
+        </Data>
+        <Data Id="Datas.TileSets.L6BM">
+          <Format Name="ACBM_TILE_SET">
+            <Parameters>
+              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
+            </Parameters>
+          </Format>
+          <AssetRef>Assets.L6BM</AssetRef>
+        </Data>
+        <Data Id="Datas.TileSets.L7BM">
+          <Format Name="ACBM_TILE_SET">
+            <Parameters>
+              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
+            </Parameters>
+          </Format>
+          <AssetRef>Assets.L7BM</AssetRef>
+        </Data>
+        <Data Id="Datas.TileSets.L8BM">
+          <Format Name="ACBM_TILE_SET">
+            <Parameters>
+              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
+            </Parameters>
+          </Format>
+          <AssetRef>Assets.L8BM</AssetRef>
+        </Data>
+        <Data Id="Datas.TileSets.L9BM">
+          <Format Name="ACBM_TILE_SET">
+            <Parameters>
+              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
+            </Parameters>
+          </Format>
+          <AssetRef>Assets.L9BM</AssetRef>
+        </Data>  
       </Items>
     </Datas>
     <Images>
@@ -594,85 +675,31 @@
     <TileSets>
       <Items>
         <TileSet Id="TileSets.L1">
-          <Format Name="ACBM_TILE_SET">
-            <Parameters>
-              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
-            </Parameters>
-          </Format>
-          <AssetRef>Assets.L1BM</AssetRef>
+          <DataRef>Datas.TileSets.L1BM</DataRef>
         </TileSet>
         <TileSet Id="TileSets.L2">
-          <Format Name="ACBM_TILE_SET">
-            <Parameters>
-              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
-            </Parameters>
-          </Format>
-          <AssetRef>Assets.L2BM</AssetRef>
+          <DataRef>Datas.TileSets.L2BM</DataRef>
         </TileSet>
         <TileSet Id="TileSets.L3">
-          <Format Name="ACBM_TILE_SET">
-            <Parameters>
-              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
-            </Parameters>
-          </Format>
-          <AssetRef>Assets.L3BM</AssetRef>
+          <DataRef>Datas.TileSets.L3BM</DataRef>
         </TileSet>
         <TileSet Id="TileSets.L4">
-          <Format Name="ACBM_TILE_SET">
-            <Parameters>
-              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
-            </Parameters>
-          </Format>
-          <AssetRef>Assets.L4BM</AssetRef>
+          <DataRef>Datas.TileSets.L4BM</DataRef>
         </TileSet>
         <TileSet Id="TileSets.L5">
-          <Format Name="ACBM_TILE_SET">
-            <Parameters>
-              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
-            </Parameters>
-          </Format>
-          <AssetRef>Assets.L5BM</AssetRef>
+          <DataRef>Datas.TileSets.L5BM</DataRef>
         </TileSet>
         <TileSet Id="TileSets.L6">
-          <Format Name="ACBM_TILE_SET">
-            <Parameters>
-              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
-            </Parameters>
-          </Format>
-          <AssetRef>Assets.L6BM</AssetRef>
+          <DataRef>Datas.TileSets.L6BM</DataRef>
         </TileSet>
         <TileSet Id="TileSets.L7">
-          <Format Name="ACBM_TILE_SET">
-            <Parameters>
-              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
-            </Parameters>
-          </Format>
-          <AssetRef>Assets.L7BM</AssetRef>
+          <DataRef>Datas.TileSets.L7BM</DataRef>
         </TileSet>
         <TileSet Id="TileSets.L8">
-          <Format Name="ACBM_TILE_SET">
-            <Parameters>
-              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
-            </Parameters>
-          </Format>
-          <AssetRef>Assets.L8BM</AssetRef>
+          <DataRef>Datas.TileSets.L8BM</DataRef>
         </TileSet>
         <TileSet Id="TileSets.L9">
-          <Format Name="ACBM_TILE_SET">
-            <Parameters>
-              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
-            </Parameters>
-          </Format>
-          <AssetRef>Assets.L9BM</AssetRef>
+          <DataRef>Datas.TileSets.L9BM</DataRef>
         </TileSet>
       </Items>
     </TileSets>
