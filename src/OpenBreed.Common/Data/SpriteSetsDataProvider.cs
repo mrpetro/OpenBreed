@@ -33,14 +33,10 @@ namespace OpenBreed.Common.Data
             if (entry == null)
                 throw new Exception("SpriteSet error: " + id);
 
-            if (entry.AssetRef == null)
+            if (entry.DataRef == null)
                 return null;
 
-            var asset = Provider.Assets.GetAsset(entry.AssetRef);
-
-            var spriteSet = Provider.FormatMan.Load(asset, entry.Format) as SpriteSetModel;
-            spriteSet.Tag = id;
-            return spriteSet;
+            return Provider.Datas.GetData(entry.DataRef) as SpriteSetModel;
         }
 
         #endregion Public Methods

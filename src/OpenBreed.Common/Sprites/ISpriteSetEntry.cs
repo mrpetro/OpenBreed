@@ -9,7 +9,6 @@ namespace OpenBreed.Common.Sprites
 {
     public interface ISpriteSetEntry : IEntry
     {
-        string AssetRef { get; }
-        IFormatEntry Format { get; }
+        string DataRef { get; }
     }
 }

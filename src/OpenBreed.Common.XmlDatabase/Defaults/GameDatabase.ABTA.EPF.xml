@@ -1269,6 +1269,180 @@
           </Format>
           <AssetRef>Assets.XTRALIFE</AssetRef>
         </Data>
+        <Data Id="Datas.SpriteSets.SPR1A">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.SPR1A.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.SPR1B">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.SPR1B.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.SPR3A">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.SPR3A.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.SPR3B">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.SPR3B.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.SPR4A">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.SPR4A.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.SPR4B">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.SPR4B.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.SPR5A">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.SPR5A.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.SPR5B">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.SPR5B.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.SPR6A">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.SPR6A.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.SPR6B">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.SPR6B.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.SPR7A">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.SPR7A.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.SPR7B">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.SPR7B.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.SPR8A">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.SPR8A.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.SPR8B">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.SPR8B.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.SPRDA">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.SPRDA.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.SPRDB">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.SPRDB.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.HERO1">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.HERO1.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.RESIDENT">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.RESIDENT.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.ALIEN_A">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.ALIEN_A.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.ALIEN_B">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.ALIEN_B.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.ALIEN_C">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.ALIEN_C.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.ALIEN_E">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.ALIEN_E.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.ALIEN_F">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.ALIEN_F.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.ALIEN_G">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.ALIEN_G.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.ALIEN_H">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.ALIEN_H.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.ALIEN_I">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.ALIEN_I.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.ALIEN_J">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.ALIEN_J.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.ALIEN_K">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.ALIEN_K.SPR</AssetRef>
+        </Data>
+        <Data Id="Datas.SpriteSets.ALIEN_X">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+          <AssetRef>Assets.ALIEN_X.SPR</AssetRef>
+        </Data>
       </Items>
     </Datas>
     <Images>
@@ -1497,178 +1671,91 @@
     <SpriteSets>
       <Items>
         <SpriteSet Id="SpriteSets.SPR1A">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.SPR1A.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.SPR1A.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.SPR1B">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.SPR1B.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.SPR1B.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.SPR3A">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.SPR3A.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.SPR3A.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.SPR3B">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.SPR3B.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.SPR3B.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.SPR4A">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.SPR4A.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.SPR4A.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.SPR4B">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.SPR4B.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.SPR4B.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.SPR5A">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.SPR5A.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.SPR5A.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.SPR5B">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.SPR5B.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.SPR5B.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.SPR6A">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.SPR6A.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.SPR6A.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.SPR6B">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.SPR6B.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.SPR6B.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.SPR7A">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.SPR7A.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.SPR7A.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.SPR7B">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.SPR7B.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.SPR7B.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.SPR8A">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.SPR8A.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.SPR8A.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.SPR8B">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.SPR8B.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.SPR8B.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.SPRDA">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.SPRDA.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.SPRDA.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.SPRDB">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.SPRDB.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.SPRDB.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.HERO1">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.HERO1.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.HERO1.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.RESIDENT">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.RESIDENT.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.RESIDENT.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.ALIEN_A">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.ALIEN_A.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.ALIEN_A.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.ALIEN_B">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.ALIEN_B.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.ALIEN_B.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.ALIEN_C">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.ALIEN_C.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.ALIEN_C.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.ALIEN_E">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.ALIEN_E.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.ALIEN_E.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.ALIEN_F">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.ALIEN_F.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.ALIEN_F.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.ALIEN_G">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.ALIEN_G.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.ALIEN_G.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.ALIEN_H">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.ALIEN_H.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.ALIEN_H.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.ALIEN_I">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.ALIEN_I.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.ALIEN_I.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.ALIEN_J">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.ALIEN_J.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.ALIEN_J.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.ALIEN_K">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.ALIEN_K.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.ALIEN_K.SPR</DataRef>
         </SpriteSet>
         <SpriteSet Id="SpriteSets.ALIEN_X">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-          <AssetRef>Assets.ALIEN_X.SPR</AssetRef>
+          <DataRef>Datas.SpriteSets.ALIEN_X.SPR</DataRef>
         </SpriteSet>
       </Items>
     </SpriteSets>
