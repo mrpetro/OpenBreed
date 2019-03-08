@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Sounds;
+using OpenBreed.Common.Actions;
 using OpenBreed.Editor.VM.Database.Entries;
 using System;
 using System.Collections.Generic;
@@ -9,18 +9,17 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database.Tables
 {
-    public class DatabaseSoundTableVM : DbTableVM
+    public class DbActionSetTableVM : DbTableVM
     {
-
         #region Private Fields
 
-        private IRepository<ISoundEntry> _repository;
+        private IRepository<IActionSetEntry> _repository;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DatabaseSoundTableVM()
+        public DbActionSetTableVM()
         {
         }
 
@@ -28,7 +27,7 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         #region Public Properties
 
-        public override string Name { get { return "Sounds"; } }
+        public override string Name { get { return "Action sets"; } }
 
         #endregion Public Properties
 

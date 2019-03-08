@@ -33,6 +33,7 @@ using OpenBreed.Common.Images;
 using OpenBreed.Common.Maps;
 using OpenBreed.Common.Assets;
 using OpenBreed.Common.Data;
+using OpenBreed.Editor.VM.Logging;
 
 namespace OpenBreed.Editor.VM
 {
@@ -45,8 +46,8 @@ namespace OpenBreed.Editor.VM
 
     public class EditorVM : BaseViewModel, IDisposable
     {
-        #region Private Fields
 
+        #region Private Fields
 
         private EditorState _state;
 
@@ -56,6 +57,8 @@ namespace OpenBreed.Editor.VM
 
         public EditorVM()
         {
+            Logger = new LoggerVM();
+
             ServiceLocator.Instance.RegisterService<EditorVM>(this);
 
             var entryEditorFactory = new DbEntryEditorFactory();
@@ -88,14 +91,11 @@ namespace OpenBreed.Editor.VM
         #region Public Properties
 
         public DbEditorVM DbEditor { get; }
-
         public IDialogProvider DialogProvider { get; }
-
+        public LoggerVM Logger { get; }
         public PaletteEditorVM PaletteEditor { get; }
-
         public SettingsMan Settings { get; private set; }
-
-        //public SpriteViewerVM SpriteViewer { get; }
+        public Action<LoggerVM> ShowLoggerAction { get; set; }
 
         //public SourceMan SourceMan { get; }
         public EditorState State
@@ -108,11 +108,11 @@ namespace OpenBreed.Editor.VM
 
         #region Public Methods
 
+        //public SpriteViewerVM SpriteViewer { get; }
         public void Dispose()
         {
             Settings.Store();
         }
-
 
         public void Run()
         {
@@ -125,6 +125,11 @@ namespace OpenBreed.Editor.VM
             {
                 DialogProvider.ShowMessage("Critical exception: " + ex, "Open Breed Editor critial exception");
             }
+        }
+
+        public void ShowLogger()
+        {
+            ShowLoggerAction?.Invoke(Logger);
         }
 
         public bool TryExit()

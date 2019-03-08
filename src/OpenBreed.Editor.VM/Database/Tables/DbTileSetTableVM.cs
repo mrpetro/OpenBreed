@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Maps;
+using OpenBreed.Common.Tiles;
 using OpenBreed.Editor.VM.Database.Entries;
 using System;
 using System.Collections.Generic;
@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database.Tables
 {
-    public class DatabaseMapTableVM : DbTableVM
+    public class DbTileSetTableVM : DbTableVM
     {
         #region Private Fields
 
-        private IRepository<IMapEntry> _repository;
+        private IRepository<ITileSetEntry> _repository;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DatabaseMapTableVM()
+        public DbTileSetTableVM()
         {
         }
 
@@ -27,7 +27,7 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         #region Public Properties
 
-        public override string Name { get { return "Maps"; } }
+        public override string Name { get { return "Tile sets"; } }
 
         #endregion Public Properties
 

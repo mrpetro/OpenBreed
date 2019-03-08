@@ -21,21 +21,21 @@ namespace OpenBreed.Editor.VM
         public DbTableVM CreateTable(IRepository repository)
         {
             if (repository is IRepository<IImageEntry>)
-                return new DatabaseImageTableVM();
+                return new DbImageTableVM();
             if (repository is IRepository<ISoundEntry>)
-                return new DatabaseSoundTableVM();
+                return new DbSoundTableVM();
             else if (repository is IRepository<IMapEntry>)
-                return new DatabaseMapTableVM();
+                return new DbMapTableVM();
             else if (repository is IRepository<IActionSetEntry>)
-                return new DatabaseActionSetTableVM();
+                return new DbActionSetTableVM();
             else if (repository is IRepository<IAssetEntry>)
-                return new DatabaseAssetTableVM();
+                return new DbAssetTableVM();
             else if (repository is IRepository<ITileSetEntry>)
-                return new DatabaseTileSetTableVM();
+                return new DbTileSetTableVM();
             else if (repository is IRepository<ISpriteSetEntry>)
-                return new DatabaseSpriteSetTableVM();
+                return new DbSpriteSetTableVM();
             else if (repository is IRepository<IPaletteEntry>)
-                return new DatabasePaletteTableVM();
+                return new DbPaletteTableVM();
             else
                 throw new NotImplementedException(repository.ToString());
         }

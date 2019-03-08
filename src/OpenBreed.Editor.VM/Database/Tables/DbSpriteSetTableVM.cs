@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Assets;
+using OpenBreed.Common.Sprites;
 using OpenBreed.Editor.VM.Database.Entries;
 using System;
 using System.Collections.Generic;
@@ -9,18 +9,17 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database.Tables
 {
-    public class DatabaseAssetTableVM : DbTableVM
+    public class DbSpriteSetTableVM : DbTableVM
     {
-
         #region Private Fields
 
-        private IRepository<IAssetEntry> _repository;
+        private IRepository<ISpriteSetEntry> _repository;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DatabaseAssetTableVM()
+        public DbSpriteSetTableVM()
         {
         }
 
@@ -28,10 +27,9 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         #region Public Properties
 
-        public override string Name { get { return "Assets"; } }
+        public override string Name { get { return "Sprite sets"; } }
 
         #endregion Public Properties
-
 
     }
 }

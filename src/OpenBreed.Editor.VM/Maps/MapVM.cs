@@ -176,27 +176,8 @@ namespace OpenBreed.Editor.VM.Maps
 
             var palettes = new List<PaletteModel>();
 
-            if (mapEntry.PaletteRefs.Any())
-            {
-                foreach (var paletteRef in mapEntry.PaletteRefs)
-                    palettes.Add(dataProvider.Palettes.GetPalette(paletteRef));
-            }
-            else
-            {
-                foreach (var paletteBlock in _model.Blocks.OfType<MapPaletteBlock>())
-                {
-                    var paletteBuilder = PaletteBuilder.NewPaletteModel();
-                    paletteBuilder.SetName(paletteBlock.Name);
-                    paletteBuilder.CreateColors();
-                    for (int i = 0; i < paletteBlock.Value.Length; i++)
-                    {
-                        var colorData = paletteBlock.Value[i];
-                        paletteBuilder.SetColor(i, Color.FromArgb(255, colorData.R, colorData.G, colorData.B));
-                    }
-
-                    palettes.Add(paletteBuilder.Build());
-                }
-            }
+            foreach (var paletteRef in mapEntry.PaletteRefs)
+                palettes.Add(dataProvider.Palettes.GetPalette(paletteRef));
 
             SetPalettes(palettes);
         }

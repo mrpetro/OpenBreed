@@ -166,6 +166,12 @@
     <Compile Include="Controls\Images\ImageViewCtrl.Designer.cs">
       <DependentUpon>ImageViewCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Logging\LoggerCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Logging\LoggerCtrl.Designer.cs">
+      <DependentUpon>LoggerCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Maps\MapEditorActionsToolCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -344,6 +350,12 @@
     <Compile Include="Views\EntryEditorBaseView.Designer.cs">
       <DependentUpon>EntryEditorBaseView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\LoggerView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\LoggerView.Designer.cs">
+      <DependentUpon>LoggerView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\ViewFactory.cs" />
     <Compile Include="Views\LogConsoleView.cs">
       <SubType>Form</SubType>
@@ -457,6 +469,9 @@
     <EmbeddedResource Include="Controls\Images\ImageViewCtrl.resx">
       <DependentUpon>ImageViewCtrl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Logging\LoggerCtrl.resx">
+      <DependentUpon>LoggerCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Maps\MapEditorActionsToolCtrl.resx">
       <DependentUpon>MapEditorActionsToolCtrl.cs</DependentUpon>
     </EmbeddedResource>
@@ -549,6 +564,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\DbEditorView.resx">
       <DependentUpon>DbEditorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\LoggerView.resx">
+      <DependentUpon>LoggerView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PropertiesView.resx">
       <DependentUpon>PropertiesView.cs</DependentUpon>
