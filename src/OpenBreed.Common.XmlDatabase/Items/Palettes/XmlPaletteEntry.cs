@@ -17,8 +17,23 @@ namespace OpenBreed.Common.XmlDatabase.Items.Palettes
 
         #region Public Properties
 
-        [XmlElement("DataRef")]
-        public string DataRef { get; set; }
+        [XmlIgnore]
+        public IPaletteData Data { get; set; }
+
+        [XmlElement("FromMAP", Type = typeof(XmlPaletteDataFromMap)),
+        XmlElement("FromBinary", Type = typeof(XmlPaletteDataFromBinary))]
+        public XmlPaletteData XmlData
+        {
+            get
+            {
+                return (XmlPaletteData)Data;
+            }
+
+            set
+            {
+                Data = value;
+            }
+        }
 
         public override IEntry Copy()
         {

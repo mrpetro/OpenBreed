@@ -10,6 +10,7 @@ namespace OpenBreed.Common.Logging
     /// </summary>
     public enum LogType
     {
+        Critical,
         Error,
         Warning,
         Info,

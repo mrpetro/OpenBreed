@@ -137,7 +137,7 @@ namespace OpenBreed.Common.Maps.Writers.MAP
         private void WriteHeader(MapModel map)
         {
             if (map.Header.Length != 12)
-                LogMan.Instance.LogWarning("Header has wrong size (not 12 bytes). Adjusted.");
+                LogMan.Instance.Warning("Header has wrong size (not 12 bytes). Adjusted.");
 
             byte[] validHeader = new byte[12];
 

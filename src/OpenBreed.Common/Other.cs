@@ -27,7 +27,7 @@ namespace OpenBreed.Common
             }
             catch (Exception ex)
             {
-                LogMan.Instance.LogError(ex);
+                LogMan.Instance.Error(ex);
                 return false;
             }
         }
@@ -69,7 +69,7 @@ namespace OpenBreed.Common
             }
             catch (Exception ex)
             {
-                LogMan.Instance.LogError(ex);
+                LogMan.Instance.Error(ex);
                 return false;
             }
         }

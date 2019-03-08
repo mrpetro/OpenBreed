@@ -171,331 +171,331 @@
     </Assets>
     <Datas>
       <Items>
-        <Data Id="Datas.MAP.01">
+        <Data Id="Datas.Maps.MAP.01">
           <AssetRef>Assets.MAP.01</AssetRef>        
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.02">
+        <Data Id="Datas.Maps.MAP.02">
           <AssetRef>Assets.MAP.02</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.03">
+        <Data Id="Datas.Maps.MAP.03">
           <AssetRef>Assets.MAP.03</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.04">
+        <Data Id="Datas.Maps.MAP.04">
           <AssetRef>Assets.MAP.04</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.05">
+        <Data Id="Datas.Maps.MAP.05">
           <AssetRef>Assets.MAP.05</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.06">
+        <Data Id="Datas.Maps.MAP.06">
           <AssetRef>Assets.MAP.06</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.07">
+        <Data Id="Datas.Maps.MAP.07">
           <AssetRef>Assets.MAP.07</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.08">
+        <Data Id="Datas.Maps.MAP.08">
           <AssetRef>Assets.MAP.08</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.09">
+        <Data Id="Datas.Maps.MAP.09">
           <AssetRef>Assets.MAP.09</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.10">
+        <Data Id="Datas.Maps.MAP.10">
           <AssetRef>Assets.MAP.10</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.11">
+        <Data Id="Datas.Maps.MAP.11">
           <AssetRef>Assets.MAP.11</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.12">
+        <Data Id="Datas.Maps.MAP.12">
           <AssetRef>Assets.MAP.12</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.13">
+        <Data Id="Datas.Maps.MAP.13">
           <AssetRef>Assets.MAP.13</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.14">
+        <Data Id="Datas.Maps.MAP.14">
           <AssetRef>Assets.MAP.14</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.15">
+        <Data Id="Datas.Maps.MAP.15">
           <AssetRef>Assets.MAP.15</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.16">
+        <Data Id="Datas.Maps.MAP.16">
           <AssetRef>Assets.MAP.16</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.17">
+        <Data Id="Datas.Maps.MAP.17">
           <AssetRef>Assets.MAP.17</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.18">
+        <Data Id="Datas.Maps.MAP.18">
           <AssetRef>Assets.MAP.18</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.19">
+        <Data Id="Datas.Maps.MAP.19">
           <AssetRef>Assets.MAP.19</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.20">
+        <Data Id="Datas.Maps.MAP.20">
           <AssetRef>Assets.MAP.20</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.21">
+        <Data Id="Datas.Maps.MAP.21">
           <AssetRef>Assets.MAP.21</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.22">
+        <Data Id="Datas.Maps.MAP.22">
           <AssetRef>Assets.MAP.22</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.23">
+        <Data Id="Datas.Maps.MAP.23">
           <AssetRef>Assets.MAP.23</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.24">
+        <Data Id="Datas.Maps.MAP.24">
           <AssetRef>Assets.MAP.24</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.25">
+        <Data Id="Datas.Maps.MAP.25">
           <AssetRef>Assets.MAP.25</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.26">
+        <Data Id="Datas.Maps.MAP.26">
           <AssetRef>Assets.MAP.26</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.27">
+        <Data Id="Datas.Maps.MAP.27">
           <AssetRef>Assets.MAP.27</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.28">
+        <Data Id="Datas.Maps.MAP.28">
           <AssetRef>Assets.MAP.28</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.29">
+        <Data Id="Datas.Maps.MAP.29">
           <AssetRef>Assets.MAP.29</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.30">
+        <Data Id="Datas.Maps.MAP.30">
           <AssetRef>Assets.MAP.30</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.31">
+        <Data Id="Datas.Maps.MAP.31">
           <AssetRef>Assets.MAP.31</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.32">
+        <Data Id="Datas.Maps.MAP.32">
           <AssetRef>Assets.MAP.32</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.33">
+        <Data Id="Datas.Maps.MAP.33">
           <AssetRef>Assets.MAP.33</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.34">
+        <Data Id="Datas.Maps.MAP.34">
           <AssetRef>Assets.MAP.34</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.35">
+        <Data Id="Datas.Maps.MAP.35">
           <AssetRef>Assets.MAP.35</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.36">
+        <Data Id="Datas.Maps.MAP.36">
           <AssetRef>Assets.MAP.36</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.37">
+        <Data Id="Datas.Maps.MAP.37">
           <AssetRef>Assets.MAP.37</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.38">
+        <Data Id="Datas.Maps.MAP.38">
           <AssetRef>Assets.MAP.38</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.39">
+        <Data Id="Datas.Maps.MAP.39">
           <AssetRef>Assets.MAP.39</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.40">
+        <Data Id="Datas.Maps.MAP.40">
           <AssetRef>Assets.MAP.40</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.41">
+        <Data Id="Datas.Maps.MAP.41">
           <AssetRef>Assets.MAP.41</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.42">
+        <Data Id="Datas.Maps.MAP.42">
           <AssetRef>Assets.MAP.42</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.43">
+        <Data Id="Datas.Maps.MAP.43">
           <AssetRef>Assets.MAP.43</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.44">
+        <Data Id="Datas.Maps.MAP.44">
           <AssetRef>Assets.MAP.44</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.45">
+        <Data Id="Datas.Maps.MAP.45">
           <AssetRef>Assets.MAP.45</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.46">
+        <Data Id="Datas.Maps.MAP.46">
           <AssetRef>Assets.MAP.46</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.47">
+        <Data Id="Datas.Maps.MAP.47">
           <AssetRef>Assets.MAP.47</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.48">
+        <Data Id="Datas.Maps.MAP.48">
           <AssetRef>Assets.MAP.48</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.49">
+        <Data Id="Datas.Maps.MAP.49">
           <AssetRef>Assets.MAP.49</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.50">
+        <Data Id="Datas.Maps.MAP.50">
           <AssetRef>Assets.MAP.50</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.51">
+        <Data Id="Datas.Maps.MAP.51">
           <AssetRef>Assets.MAP.51</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.52">
+        <Data Id="Datas.Maps.MAP.52">
           <AssetRef>Assets.MAP.52</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.53">
+        <Data Id="Datas.Maps.MAP.53">
           <AssetRef>Assets.MAP.53</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.54">
+        <Data Id="Datas.Maps.MAP.54">
           <AssetRef>Assets.MAP.54</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
           </Format>
         </Data>
-        <Data Id="Datas.MAP.55">
+        <Data Id="Datas.Maps.MAP.55">
           <AssetRef>Assets.MAP.55</AssetRef>
           <Format Name="ABTA_MAP">
             <Parameters />
@@ -1269,175 +1269,175 @@
           </Format>
           <AssetRef>Assets.XTRALIFE</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.SPR1A">
+        <Data Id="Datas.SpriteSets.SPR1A.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.SPR1A.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.SPR1B">
+        <Data Id="Datas.SpriteSets.SPR1B.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.SPR1B.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.SPR3A">
+        <Data Id="Datas.SpriteSets.SPR3A.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.SPR3A.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.SPR3B">
+        <Data Id="Datas.SpriteSets.SPR3B.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.SPR3B.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.SPR4A">
+        <Data Id="Datas.SpriteSets.SPR4A.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.SPR4A.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.SPR4B">
+        <Data Id="Datas.SpriteSets.SPR4B.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.SPR4B.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.SPR5A">
+        <Data Id="Datas.SpriteSets.SPR5A.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.SPR5A.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.SPR5B">
+        <Data Id="Datas.SpriteSets.SPR5B.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.SPR5B.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.SPR6A">
+        <Data Id="Datas.SpriteSets.SPR6A.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.SPR6A.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.SPR6B">
+        <Data Id="Datas.SpriteSets.SPR6B.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.SPR6B.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.SPR7A">
+        <Data Id="Datas.SpriteSets.SPR7A.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.SPR7A.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.SPR7B">
+        <Data Id="Datas.SpriteSets.SPR7B.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.SPR7B.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.SPR8A">
+        <Data Id="Datas.SpriteSets.SPR8A.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.SPR8A.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.SPR8B">
+        <Data Id="Datas.SpriteSets.SPR8B.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.SPR8B.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.SPRDA">
+        <Data Id="Datas.SpriteSets.SPRDA.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.SPRDA.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.SPRDB">
+        <Data Id="Datas.SpriteSets.SPRDB.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.SPRDB.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.HERO1">
+        <Data Id="Datas.SpriteSets.HERO1.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.HERO1.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.RESIDENT">
+        <Data Id="Datas.SpriteSets.RESIDENT.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.RESIDENT.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.ALIEN_A">
+        <Data Id="Datas.SpriteSets.ALIEN_A.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.ALIEN_A.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.ALIEN_B">
+        <Data Id="Datas.SpriteSets.ALIEN_B.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.ALIEN_B.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.ALIEN_C">
+        <Data Id="Datas.SpriteSets.ALIEN_C.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.ALIEN_C.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.ALIEN_E">
+        <Data Id="Datas.SpriteSets.ALIEN_E.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.ALIEN_E.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.ALIEN_F">
+        <Data Id="Datas.SpriteSets.ALIEN_F.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.ALIEN_F.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.ALIEN_G">
+        <Data Id="Datas.SpriteSets.ALIEN_G.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.ALIEN_G.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.ALIEN_H">
+        <Data Id="Datas.SpriteSets.ALIEN_H.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.ALIEN_H.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.ALIEN_I">
+        <Data Id="Datas.SpriteSets.ALIEN_I.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.ALIEN_I.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.ALIEN_J">
+        <Data Id="Datas.SpriteSets.ALIEN_J.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.ALIEN_J.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.ALIEN_K">
+        <Data Id="Datas.SpriteSets.ALIEN_K.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
           <AssetRef>Assets.ALIEN_K.SPR</AssetRef>
         </Data>
-        <Data Id="Datas.SpriteSets.ALIEN_X">
+        <Data Id="Datas.SpriteSets.ALIEN_X.SPR">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
@@ -1790,8 +1790,11 @@
     <Maps>
       <Items>
         <Map Id="CRASH LANDING SITE">
-          <DataRef>Datas.MAP.01</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.01</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.01.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.01.ALCM</PaletteRef>
+          </PaletteRefs>
           <ActionSetRef>Actions.Level1</ActionSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
@@ -1800,8 +1803,11 @@
           <TileSetRef>TileSets.L1</TileSetRef>
         </Map>
         <Map Id="CIVILIAN ZONE 1">
-          <DataRef>Datas.MAP.02</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.02</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+          </PaletteRefs>
           <ActionSetRef>Actions.Default</ActionSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
@@ -1810,8 +1816,11 @@
           <TileSetRef>TileSets.L4</TileSetRef>
         </Map>
         <Map Id="CIVILIAN ZONE 2">
-          <DataRef>Datas.MAP.03</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.03</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.03.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.03.ALCM</PaletteRef>
+          </PaletteRefs>
           <ActionSetRef>Actions.Level1</ActionSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
@@ -1820,8 +1829,11 @@
           <TileSetRef>TileSets.L4</TileSetRef>
         </Map>
         <Map Id="CIVILIAN ZONE 3">
-          <DataRef>Datas.MAP.03</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.04</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.04.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.04.ALCM</PaletteRef>
+          </PaletteRefs>
           <ActionSetRef>Actions.Level1</ActionSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
@@ -1830,8 +1842,11 @@
           <TileSetRef>TileSets.L4</TileSetRef>
         </Map>
         <Map Id="CIVILIAN ZONE 4">
-          <DataRef>Datas.MAP.05</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.05</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.05.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.05.ALCM</PaletteRef>
+          </PaletteRefs>
           <ActionSetRef>Actions.Level1</ActionSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
@@ -1840,8 +1855,11 @@
           <TileSetRef>TileSets.L4</TileSetRef>
         </Map>
         <Map Id="OUTDOOR SECTOR 2">
-          <DataRef>Datas.MAP.06</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.06</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.06.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.06.ALCM</PaletteRef>
+          </PaletteRefs>
           <ActionSetRef>Actions.Level1</ActionSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
@@ -1850,8 +1868,11 @@
           <TileSetRef>TileSets.L1</TileSetRef>
         </Map>
         <Map Id="STORES LEVEL 1">
-          <DataRef>Datas.MAP.07</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.07</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.07.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.07.ALCM</PaletteRef>
+          </PaletteRefs>
           <ActionSetRef>Actions.Level1</ActionSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -1871,8 +1892,11 @@
           <TileSetRef>TileSets.LD</TileSetRef>
         </Map>
         <Map Id="STORES LEVEL 2">
-          <DataRef>Datas.MAP.08</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.08</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.08.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.08.ALCM</PaletteRef>
+          </PaletteRefs>
           <ActionSetRef>Actions.Level1</ActionSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -1881,8 +1905,11 @@
           <TileSetRef>TileSets.LD</TileSetRef>
         </Map>
         <Map Id="STORES SECTOR 3">
-          <DataRef>Datas.MAP.09</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.09</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.09.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.09.ALCM</PaletteRef>
+          </PaletteRefs>
           <ActionSetRef>Actions.Level1</ActionSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -1891,8 +1918,11 @@
           <TileSetRef>TileSets.LD</TileSetRef>
         </Map>
         <Map Id="STORES SECTOR 4">
-          <DataRef>Datas.MAP.10</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.10</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.10.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.10.ALCM</PaletteRef>
+          </PaletteRefs>
           <ActionSetRef>Actions.Level1</ActionSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
@@ -1901,8 +1931,11 @@
           <TileSetRef>TileSets.LD</TileSetRef>
         </Map>
         <Map Id="OUTDOOR SECTOR 3">
-          <DataRef>Datas.MAP.11</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.11</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.11.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.11.ALCM</PaletteRef>
+          </PaletteRefs>
           <ActionSetRef>Actions.Level1</ActionSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
@@ -1911,8 +1944,11 @@
           <TileSetRef>TileSets.L1</TileSetRef>
         </Map>
         <Map Id="MILITARY SECTOR 1">
-          <DataRef>Datas.MAP.12</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.12</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.12.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.12.ALCM</PaletteRef>
+          </PaletteRefs>
           <ActionSetRef>Actions.Level1</ActionSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
@@ -1932,8 +1968,11 @@
           <TileSetRef>TileSets.L7</TileSetRef>
         </Map>
         <Map Id="MILITARY SECTOR 2">
-          <DataRef>Datas.MAP.13</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.13</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.13.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.13.ALCM</PaletteRef>
+          </PaletteRefs>
           <ActionSetRef>Actions.Level1</ActionSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
@@ -1942,8 +1981,11 @@
           <TileSetRef>TileSets.L7</TileSetRef>
         </Map>
         <Map Id="MILITARY SECTOR 3">
-          <DataRef>Datas.MAP.14</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.14</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.14.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.14.ALCM</PaletteRef>
+          </PaletteRefs>
           <ActionSetRef>Actions.Level1</ActionSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
@@ -1952,8 +1994,11 @@
           <TileSetRef>TileSets.L7</TileSetRef>
         </Map>
         <Map Id="MILITARY SECTOR 4">
-          <DataRef>Datas.MAP.15</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.15</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.15.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.15.ALCM</PaletteRef>
+          </PaletteRefs>
           <ActionSetRef>Actions.Level1</ActionSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
@@ -1962,8 +2007,11 @@
           <TileSetRef>TileSets.L7</TileSetRef>
         </Map>
         <Map Id="SECURITY ZONE 1">
-          <DataRef>Datas.MAP.16</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.16</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.16.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.16.ALCM</PaletteRef>
+          </PaletteRefs>
           <ActionSetRef>Actions.Level1</ActionSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
@@ -1984,8 +2032,11 @@
           <TileSetRef>TileSets.L5</TileSetRef>
         </Map>
         <Map Id="SECURITY ZONE 2">
-          <DataRef>Datas.MAP.17</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.17</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.17.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.17.ALCM</PaletteRef>
+          </PaletteRefs>
           <ActionSetRef>Actions.Level1</ActionSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
@@ -1994,8 +2045,11 @@
           <TileSetRef>TileSets.L5</TileSetRef>
         </Map>
         <Map Id="SECURITY ZONE 3">
-          <DataRef>Datas.MAP.18</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.18</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.18.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.18.ALCM</PaletteRef>
+          </PaletteRefs>
           <ActionSetRef>Actions.Level1</ActionSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
@@ -2004,8 +2058,11 @@
           <TileSetRef>TileSets.L5</TileSetRef>
         </Map>
         <Map Id="SECURITY ZONE 4">
-          <DataRef>Datas.MAP.19</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.19</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.19.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.19.ALCM</PaletteRef>
+          </PaletteRefs>
           <ActionSetRef>Actions.Level1</ActionSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR5A</SpriteSetRef>
@@ -2014,8 +2071,11 @@
           <TileSetRef>TileSets.L5</TileSetRef>
         </Map>
         <Map Id="COLONY GROUND SECTOR 3">
-          <DataRef>Datas.MAP.20</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.20</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.20.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.20.ALCM</PaletteRef>
+          </PaletteRefs>
           <ActionSetRef>Actions.Level1</ActionSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
@@ -2024,8 +2084,11 @@
           <TileSetRef>TileSets.L1</TileSetRef>
         </Map>
         <Map Id="SCIENCE SECTOR 1">
-          <DataRef>Datas.MAP.21</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.21</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.21.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.21.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
@@ -2044,8 +2107,11 @@
           <TileSetRef>TileSets.L6</TileSetRef>
         </Map>
         <Map Id="SCIENCE SECTOR 2">
-          <DataRef>Datas.MAP.22</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.22</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.22.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.22.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
@@ -2053,8 +2119,11 @@
           <TileSetRef>TileSets.L6</TileSetRef>
         </Map>
         <Map Id="SCIENCE SECTOR 3">
-          <DataRef>Datas.MAP.23</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.23</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.23.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.23.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
@@ -2062,8 +2131,11 @@
           <TileSetRef>TileSets.L6</TileSetRef>
         </Map>
         <Map Id="SCIENCE SECTOR 4">
-          <DataRef>Datas.MAP.24</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.24</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.24.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.24.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
@@ -2071,8 +2143,11 @@
           <TileSetRef>TileSets.L6</TileSetRef>
         </Map>
         <Map Id="COLONY GROUND SECTOR 4">
-          <DataRef>Datas.MAP.25</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.25</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.25.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.25.ALCM</PaletteRef>
+          </PaletteRefs>
           <ActionSetRef>Actions.Level1</ActionSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
@@ -2081,8 +2156,11 @@
           <TileSetRef>TileSets.L1</TileSetRef>
         </Map>
         <Map Id="ENGINEERING SECTOR 1">
-          <DataRef>Datas.MAP.26</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.26</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.26.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.26.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
@@ -2101,8 +2179,11 @@
           <TileSetRef>TileSets.L3</TileSetRef>
         </Map>
         <Map Id="ENGINEERING SECTOR 2">
-          <DataRef>Datas.MAP.27</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.27</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.27.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.27.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
@@ -2110,8 +2191,11 @@
           <TileSetRef>TileSets.L3</TileSetRef>
         </Map>
         <Map Id="ENGINEERING SECTOR 3">
-          <DataRef>Datas.MAP.28</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.28</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.28.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.28.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
@@ -2119,8 +2203,11 @@
           <TileSetRef>TileSets.L3</TileSetRef>
         </Map>
         <Map Id="ENGINEERING SECTOR 4">
-          <DataRef>Datas.MAP.29</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.29</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.29.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.29.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
@@ -2128,8 +2215,11 @@
           <TileSetRef>TileSets.L3</TileSetRef>
         </Map>
         <Map Id="CORRIDOR ZONE 1">
-          <DataRef>Datas.MAP.30</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.30</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.30.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.30.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
@@ -2137,8 +2227,11 @@
           <TileSetRef>TileSets.L4</TileSetRef>
         </Map>
         <Map Id="CORRIDOR 2">
-          <DataRef>Datas.MAP.31</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.31</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.31.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.31.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
@@ -2146,8 +2239,11 @@
           <TileSetRef>TileSets.L4</TileSetRef>
         </Map>
         <Map Id="CORRIDOR 3">
-          <DataRef>Datas.MAP.32</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.32</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.32.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.32.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
@@ -2155,8 +2251,11 @@
           <TileSetRef>TileSets.LD</TileSetRef>
         </Map>
         <Map Id="CORRIDOR 4">
-          <DataRef>Datas.MAP.33</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.33</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.33.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.33.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
@@ -2164,8 +2263,11 @@
           <TileSetRef>TileSets.L3</TileSetRef>
         </Map>
         <Map Id="CORRIDOR 5">
-          <DataRef>Datas.MAP.34</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.34</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.34.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.34.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
@@ -2173,8 +2275,11 @@
           <TileSetRef>TileSets.LD</TileSetRef>
         </Map>
         <Map Id="CORRIDOR ZONE 6">
-          <DataRef>Datas.MAP.35</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.35</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.35.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.35.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
@@ -2182,8 +2287,11 @@
           <TileSetRef>TileSets.LD</TileSetRef>
         </Map>
         <Map Id="CORRIDOR ZONE 7">
-          <DataRef>Datas.MAP.36</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.36</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.36.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.36.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
@@ -2191,8 +2299,11 @@
           <TileSetRef>TileSets.L4</TileSetRef>
         </Map>
         <Map Id="CORRIDOR ZONE 8">
-          <DataRef>Datas.MAP.37</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.37</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.37.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.37.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
@@ -2200,8 +2311,11 @@
           <TileSetRef>TileSets.LD</TileSetRef>
         </Map>
         <Map Id="CORRIDOR ZONE 9">
-          <DataRef>Datas.MAP.38</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.38</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.38.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.38.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPRDA</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPRDB</SpriteSetRef>
@@ -2209,8 +2323,11 @@
           <TileSetRef>TileSets.LD</TileSetRef>
         </Map>
         <Map Id="CORRIDOR ZONE 10">
-          <DataRef>Datas.MAP.39</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.39</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.39.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.39.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
@@ -2218,8 +2335,11 @@
           <TileSetRef>TileSets.L3</TileSetRef>
         </Map>
         <Map Id="CORRIDOR ZONE 11">
-          <DataRef>Datas.MAP.40</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.40</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.40.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.40.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR4A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR4B</SpriteSetRef>
@@ -2227,8 +2347,11 @@
           <TileSetRef>TileSets.L4</TileSetRef>
         </Map>
         <Map Id="CORRIDOR ZONE 12">
-          <DataRef>Datas.MAP.41</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.41</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.41.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.41.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
@@ -2236,8 +2359,11 @@
           <TileSetRef>TileSets.L3</TileSetRef>
         </Map>
         <Map Id="CORRIDOR ZONE 13">
-          <DataRef>Datas.MAP.42</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.42</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.42.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.42.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
@@ -2245,8 +2371,11 @@
           <TileSetRef>TileSets.L3</TileSetRef>
         </Map>
         <Map Id="CORRIDOR ZONE 14">
-          <DataRef>Datas.MAP.43</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.43</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.43.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.43.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
@@ -2254,8 +2383,11 @@
           <TileSetRef>TileSets.L7</TileSetRef>
         </Map>
         <Map Id="CORRIDOR 15">
-          <DataRef>Datas.MAP.44</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.44</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.44.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.44.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR7A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR7B</SpriteSetRef>
@@ -2263,14 +2395,20 @@
           <TileSetRef>TileSets.L7</TileSetRef>
         </Map>
         <Map Id="CORRIDOR 16">
-          <DataRef>Datas.MAP.45</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.45</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.45.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.45.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs />
           <TileSetRef>TileSets.L3</TileSetRef>
         </Map>
         <Map Id="CORRIDOR 17">
-          <DataRef>Datas.MAP.46</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.46</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.46.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.46.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR3A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR3B</SpriteSetRef>
@@ -2278,8 +2416,11 @@
           <TileSetRef>TileSets.L3</TileSetRef>
         </Map>
         <Map Id="MAIN TOWER LEVEL 1">
-          <DataRef>Datas.MAP.47</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.47</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.47.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.47.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
@@ -2299,8 +2440,11 @@
           <TileSetRef>TileSets.L8</TileSetRef>
         </Map>
         <Map Id="MAIN TOWER LEVEL 2">
-          <DataRef>Datas.MAP.48</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.48</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.48.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.48.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
@@ -2308,8 +2452,11 @@
           <TileSetRef>TileSets.L8</TileSetRef>
         </Map>
         <Map Id="MAIN TOWER LEVEL 3">
-          <DataRef>Datas.MAP.49</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.49</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.49.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.49.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
@@ -2317,8 +2464,11 @@
           <TileSetRef>TileSets.L8</TileSetRef>
         </Map>
         <Map Id="MAIN TOWER LEVEL 4">
-          <DataRef>Datas.MAP.50</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.50</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.50.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.50.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
@@ -2326,8 +2476,11 @@
           <TileSetRef>TileSets.L8</TileSetRef>
         </Map>
         <Map Id="MAIN TOWER LEVEL 5">
-          <DataRef>Datas.MAP.51</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.51</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.51.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.51.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
@@ -2335,8 +2488,11 @@
           <TileSetRef>TileSets.L8</TileSetRef>
         </Map>
         <Map Id="TOWER LEVEL 6">
-          <DataRef>Datas.MAP.52</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.52</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.52.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.52.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
@@ -2344,8 +2500,11 @@
           <TileSetRef>TileSets.L8</TileSetRef>
         </Map>
         <Map Id="TOWER LEVEL 7">
-          <DataRef>Datas.MAP.53</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.53</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.53.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.53.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
@@ -2353,8 +2512,11 @@
           <TileSetRef>TileSets.L8</TileSetRef>
         </Map>
         <Map Id="Mission One(\?\?\?)">
-          <DataRef>Datas.MAP.54</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.54</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.54.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.54.ALCM</PaletteRef>
+          </PaletteRefs>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR6A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR6B</SpriteSetRef>
@@ -2362,8 +2524,11 @@
           <TileSetRef>TileSets.L6</TileSetRef>
         </Map>
         <Map Id="OUTER COLONY SECTOR 5">
-          <DataRef>Datas.MAP.55</DataRef>
-          <PaletteRefs />
+          <DataRef>Datas.Maps.MAP.55</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.55.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.55.ALCM</PaletteRef>
+          </PaletteRefs>
           <ActionSetRef>Actions.Level1</ActionSetRef>
           <SpriteSetRefs>
             <SpriteSetRef>SpriteSets.SPR1A</SpriteSetRef>
@@ -3539,10 +3704,665 @@
     </ActionSets>
     <Palettes>
       <Items>
-        <Palette Id="Palettes.MAP1.CMAP">
-          <Data>
-            <FromMapPaletteBlock MapName="MAP.01" BlockName="CMAP" />
-          </Data>
+        <Palette Id="Palettes.MAP.01.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.01</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.01.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.01</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.02.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.02</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.02.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.02</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.03.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.03</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.03.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.03</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.04.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.04</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.04.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.04</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.05.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.05</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.05.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.05</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.06.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.06</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.06.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.06</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.07.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.07</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.07.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.07</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.08.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.08</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.08.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.08</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.09.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.09</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.09.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.09</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.10.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.10</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.10.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.10</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.11.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.11</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.11.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.11</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.12.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.12</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.12.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.12</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.13.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.13</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.13.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.13</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.14.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.14</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.14.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.14</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.15.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.15</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.15.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.15</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.16.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.16</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.16.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.16</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.17.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.17</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.17.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.17</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.18.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.18</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.18.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.18</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.19.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.19</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.19.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.19</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.20.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.20</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.20.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.20</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.21.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.21</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.21.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.21</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.22.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.22</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.22.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.22</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.23.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.23</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.23.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.23</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.24.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.24</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.24.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.24</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.25.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.25</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.25.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.25</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.26.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.26</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.26.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.26</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.27.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.27</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.27.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.27</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.28.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.28</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.28.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.28</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.29.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.29</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.29.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.29</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.30.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.30</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.30.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.30</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.31.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.31</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.31.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.31</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.32.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.32</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.32.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.32</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.33.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.33</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.33.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.33</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.34.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.34</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.34.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.34</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.35.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.35</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.35.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.35</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.36.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.36</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.36.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.36</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.37.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.37</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.37.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.37</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.38.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.38</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.38.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.38</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.39.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.39</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.39.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.39</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.40.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.40</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.40.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.40</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.41.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.41</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.41.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.41</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.42.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.42</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.42.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.42</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.43.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.43</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.43.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.43</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.44.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.44</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.44.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.44</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.45.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.45</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.45.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.45</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.46.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.46</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.46.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.46</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.47.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.47</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.47.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.47</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.48.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.48</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.48.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.48</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.49.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.49</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.49.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.49</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.50.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.50</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.50.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.50</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.51.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.51</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.51.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.51</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.52.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.52</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.52.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.52</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.53.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.53</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.53.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.53</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.54.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.54</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.54.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.54</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.55.CMAP">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.55</DataRef>
+            <BlockName>CMAP</BlockName>
+          </FromMAP>
+        </Palette>
+        <Palette Id="Palettes.MAP.55.ALCM">
+          <FromMAP>
+            <DataRef>Datas.Maps.MAP.55</DataRef>
+            <BlockName>ALCM</BlockName>
+          </FromMAP>
         </Palette>
       </Items>
     </Palettes>

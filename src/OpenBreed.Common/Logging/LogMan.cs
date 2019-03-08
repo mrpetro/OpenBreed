@@ -9,7 +9,7 @@ namespace OpenBreed.Common.Logging
     {
         #region Private members
 
-        private static readonly LogMan m_LogMan = new LogMan();
+        private static readonly LogMan _logMan = new LogMan();
 
         #endregion
 
@@ -42,7 +42,7 @@ namespace OpenBreed.Common.Logging
         /// </summary>
         public static LogMan Instance
         {
-            get { return m_LogMan; }
+            get { return _logMan; }
         }
 
         #endregion
@@ -79,86 +79,69 @@ namespace OpenBreed.Common.Logging
             var ev = MessageAdded;
             if (ev != null)
                 ev(LogType.Info, msg);
-            Console.WriteLine("Info: " + msg);
         }
 
         /// <summary>
         /// Log message as warning
         /// </summary>
         /// <param name="msg"></param>
-        public void LogWarning(string msg)
+        public void Warning(string msg)
         {
             var ev = MessageAdded;
             if (ev != null)
                 ev(LogType.Warning, msg);
-            Console.WriteLine("Warning: " + msg);
-        }
-
-        /// <summary>
-        /// Log message as warning
-        /// </summary>
-        /// <param name="ex"></param>
-        public void LogWarning(Exception ex)
-        {
-            LogWarning(ex.Message);
         }
 
         /// <summary>
         /// Log message as error
         /// </summary>
         /// <param name="ex"></param>
-        public void LogError(Exception ex)
+        public void Error(Exception ex)
         {
-            LogError(ex.Message);
+            Error(ex.Message);
         }
 
         /// <summary>
         /// Log message as error
         /// </summary>
         /// <param name="msg"></param>
-        public void LogError(string msg)
+        public void Error(string msg)
         {
             var ev = MessageAdded;
             if (ev != null)
                 ev(LogType.Error, msg);
-            Console.WriteLine("Error: " + msg);
         }
+
+        /// <summary>
+        /// Log message as critical
+        /// </summary>
+        /// <param name="ex"></param>
+        public void Critical(Exception ex)
+        {
+            Critical(ex.Message);
+        }
+
+        /// <summary>
+        /// Log message as critical
+        /// </summary>
+        /// <param name="msg"></param>
+        public void Critical(string msg)
+        {
+            var ev = MessageAdded;
+            if (ev != null)
+                ev(LogType.Critical, msg);
+        }
+
 
         /// <summary>
         /// Log message as success
         /// </summary>
         /// <param name="msg"></param>
-        public void LogSuccess(string msg)
+        public void Success(string msg)
         {
             var ev = MessageAdded;
             if (ev != null)
                 ev(LogType.Success, msg);
-            Console.WriteLine("OK: " + msg);
-        }
-
-        /// <summary>
-        /// Add msg to log file
-        /// </summary>
-        /// <param name="msg"></param>
-        public void LogLine(string msg)
-        {
-            if (!string.IsNullOrWhiteSpace(msg))
-            {
-                var ev = MessageAdded;
-                if (ev != null)
-                    ev(LogType.None, msg);
-            }
-                
-        }
-
-        /// <summary>
-        /// Add empty line to log file
-        /// </summary>
-        public void LogEmptyLine()
-        {
-            var ev = MessageAdded;
-            if (ev != null)
-                ev(LogType.None, "");
         }
 
         #endregion

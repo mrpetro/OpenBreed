@@ -77,6 +77,9 @@
     <Compile Include="Maps\Blocks\MapTextBlock.cs" />
     <Compile Include="Maps\Blocks\MapUnknownBlock.cs" />
     <Compile Include="Maps\Blocks\MapUInt32Block.cs" />
+    <Compile Include="Palettes\IPaletteData.cs" />
+    <Compile Include="Palettes\IPaletteDataFromBinary.cs" />
+    <Compile Include="Palettes\IPaletteDataFromMap.cs" />
     <Compile Include="Palettes\IPaletteEntry.cs" />
     <Compile Include="Actions\IActionEntry.cs" />
     <Compile Include="Actions\IActionPresentation.cs" />

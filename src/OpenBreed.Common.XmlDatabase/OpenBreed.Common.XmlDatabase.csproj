@@ -55,6 +55,9 @@
     <Compile Include="Items\Data\XmlDataEntry.cs" />
     <Compile Include="Items\Images\XmlImageEntry.cs" />
     <Compile Include="Items\Maps\XmlMapEntry.cs" />
+    <Compile Include="Items\Palettes\XmlPaletteData.cs" />
+    <Compile Include="Items\Palettes\XmlPaletteDataFromBinary.cs" />
+    <Compile Include="Items\Palettes\XmlPaletteDataFromMap.cs" />
     <Compile Include="Items\Palettes\XmlPaletteEntry.cs" />
     <Compile Include="Items\Sounds\XmlSoundEntry.cs" />
     <Compile Include="Items\Sprites\XmlSpriteSetEntry.cs" />
