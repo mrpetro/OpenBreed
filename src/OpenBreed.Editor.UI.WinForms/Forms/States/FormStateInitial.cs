@@ -14,6 +14,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
 
         internal ToolStripMenuItem ExitToolStripMenuItem = null;
         internal ToolStripMenuItem FileOpenDatabaseToolStripMenuItem = null;
+        internal ToolStripMenuItem ViewLoggerMenuItem = null;
 
         //internal ToolStripMenuItem NewLevelToolStripMenuItem = null;
         internal ToolStripSeparator FileSeparator = new ToolStripSeparator();
@@ -30,6 +31,10 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             FileOpenDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.DbEditor.TryOpenXmlDatabase();
             ExitToolStripMenuItem = new ToolStripMenuItem("Exit");
             ExitToolStripMenuItem.Click += (s, a) => MainForm.Close();
+
+            ViewLoggerMenuItem = new ToolStripMenuItem("Logs");
+            ViewLoggerMenuItem.Click += (s, a) => MainForm.VM.ShowLogger();
+
         }
 
         #endregion Internal Constructors

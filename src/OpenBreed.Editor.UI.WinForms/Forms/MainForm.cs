@@ -11,11 +11,16 @@ using OpenBreed.Editor.VM;
 
 using OpenBreed.Common;
 using OpenBreed.Editor.UI.WinForms.Forms.States;
+using OpenBreed.Editor.VM.Logging;
+using OpenBreed.Editor.UI.WinForms.Views;
 
 namespace OpenBreed.Editor.UI.WinForms.Forms
 {
     public partial class MainForm : Form
     {
+
+        internal ToolStripMenuItem ViewToggleLoggerToolStripMenuItem = new ToolStripMenuItem();
+
         private FormStateDatabaseOpened DatabaseOpenedState;
         private FormStateInitial InitialState;
 
@@ -54,6 +59,8 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             FormClosing += new FormClosingEventHandler(MainForm_FormClosing);
 
             State = new FormStateInitial(this);
+
+            ViewToolStripMenuItem.DropDownItems.Add(ViewToggleLoggerToolStripMenuItem);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -80,7 +87,22 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             VM = vm;
 
             VM.DbEditor.PropertyChanged += VM_PropertyChanged;
+
+            ViewToggleLoggerToolStripMenuItem.Click += (s, a) => VM.ShowLogger();
+            VM.ShowLoggerAction = OnShowLogger;
         }
+
+        private LoggerView _loggerView;
+
+        private void OnShowLogger(LoggerVM vm)
+        {
+            if (_loggerView == null)
+            {
+                _loggerView = new LoggerView();
+                _loggerView.Initialize(vm);
+            }
+        }
+
 
         private void VM_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {

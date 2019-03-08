@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Actions;
+using OpenBreed.Common.Maps;
 using OpenBreed.Editor.VM.Database.Entries;
 using System;
 using System.Collections.Generic;
@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database.Tables
 {
-    public class DatabaseActionSetTableVM : DbTableVM
+    public class DbMapTableVM : DbTableVM
     {
         #region Private Fields
 
-        private IRepository<IActionSetEntry> _repository;
+        private IRepository<IMapEntry> _repository;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DatabaseActionSetTableVM()
+        public DbMapTableVM()
         {
         }
 
@@ -27,7 +27,7 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         #region Public Properties
 
-        public override string Name { get { return "Action sets"; } }
+        public override string Name { get { return "Maps"; } }
 
         #endregion Public Properties
 

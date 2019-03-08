@@ -74,19 +74,19 @@ namespace OpenBreed.Editor.Cfg
                 if (File.Exists(cfgPath))
                 {
                     Cfg = Other.RestoreFromXml<SettingsCfg>(cfgPath);
-                    LogMan.Instance.LogSuccess("Settings configuration restored.");
+                    LogMan.Instance.Success("Settings configuration restored.");
                 }
                 else
                 {
                     Cfg = GetDefault();
-                    LogMan.Instance.LogSuccess("No settings file yet. Default Settings configuration restored.");
+                    LogMan.Instance.Success("No settings file yet. Default Settings configuration restored.");
                 }
 
                 RegisterVariables();
             }
             catch (Exception ex)
             {
-                LogMan.Instance.LogError("Unable to restore settings. Reason: " + ex.Message);
+                LogMan.Instance.Error("Unable to restore settings. Reason: " + ex.Message);
             }
         }
 
@@ -97,11 +97,11 @@ namespace OpenBreed.Editor.Cfg
                 string cfgPath = Path.Combine(ProgramTools.AppProductDataDir, CFG_FILE_NAME);
                 Other.StoreAsXml<SettingsCfg>(cfgPath, Cfg, true);
 
-                LogMan.Instance.LogSuccess("Settings configuration stored.");
+                LogMan.Instance.Success("Settings configuration stored.");
             }
             catch (Exception ex)
             {
-                LogMan.Instance.LogError("Unable to store settings. Reason: " + ex.Message);
+                LogMan.Instance.Error("Unable to store settings. Reason: " + ex.Message);
             }
         }
 
@@ -114,7 +114,7 @@ namespace OpenBreed.Editor.Cfg
                 return varValue.ToString();
             else
             {
-                LogMan.Instance.LogWarning("Unknown Cfg variable: " + varName);
+                LogMan.Instance.Warning("Unknown Cfg variable: " + varName);
                 return string.Empty;
             }
         }

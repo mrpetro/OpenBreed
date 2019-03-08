@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Images;
+using OpenBreed.Common.Assets;
 using OpenBreed.Editor.VM.Database.Entries;
 using System;
 using System.Collections.Generic;
@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database.Tables
 {
-    public class DatabaseImageTableVM : DbTableVM
+    public class DbAssetTableVM : DbTableVM
     {
 
         #region Private Fields
 
-        private IRepository<IImageEntry> _repository;
+        private IRepository<IAssetEntry> _repository;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DatabaseImageTableVM()
+        public DbAssetTableVM()
         {
         }
 
@@ -28,9 +28,10 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         #region Public Properties
 
-        public override string Name { get { return "Images"; } }
+        public override string Name { get { return "Assets"; } }
 
         #endregion Public Properties
+
 
     }
 }
