@@ -15,7 +15,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Private Fields
 
-        private readonly DatabaseSpriteSetTableDef _table;
+        private readonly XmlDbSpriteSetTableDef _table;
 
         #endregion Private Fields
 

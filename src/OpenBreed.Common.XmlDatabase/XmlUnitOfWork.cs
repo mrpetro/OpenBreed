@@ -9,7 +9,7 @@ using OpenBreed.Common.XmlDatabase.Tables;
 using OpenBreed.Common.XmlDatabase.Tables.Maps;
 using OpenBreed.Common.XmlDatabase.Tables.Palettes;
 using OpenBreed.Common.XmlDatabase.Tables.Actions;
-using OpenBreed.Common.XmlDatabase.Tables.Sources;
+using OpenBreed.Common.XmlDatabase.Tables.Assets;
 using OpenBreed.Common.XmlDatabase.Tables.Sprites;
 using OpenBreed.Common.XmlDatabase.Tables.Tiles;
 using OpenBreed.Common.Images;

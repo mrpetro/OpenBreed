@@ -3704,666 +3704,446 @@
     </ActionSets>
     <Palettes>
       <Items>
-        <Palette Id="Palettes.MAP.01.CMAP">
-          <FromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.01.CMAP">
             <DataRef>Datas.Maps.MAP.01</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.01.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.01.ALCM">
             <DataRef>Datas.Maps.MAP.01</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.02.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.02.CMAP">
             <DataRef>Datas.Maps.MAP.02</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.02.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.02.ALCM">
             <DataRef>Datas.Maps.MAP.02</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.03.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.03.CMAP">
             <DataRef>Datas.Maps.MAP.03</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.03.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.03.ALCM">
             <DataRef>Datas.Maps.MAP.03</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.04.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.04.CMAP">
             <DataRef>Datas.Maps.MAP.04</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.04.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.04.ALCM">
             <DataRef>Datas.Maps.MAP.04</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.05.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.05.CMAP">
             <DataRef>Datas.Maps.MAP.05</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.05.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.05.ALCM">
             <DataRef>Datas.Maps.MAP.05</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.06.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.06.CMAP">
             <DataRef>Datas.Maps.MAP.06</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.06.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.06.ALCM">
             <DataRef>Datas.Maps.MAP.06</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.07.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.07.CMAP">
             <DataRef>Datas.Maps.MAP.07</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.07.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.07.ALCM">
             <DataRef>Datas.Maps.MAP.07</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.08.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.08.CMAP">
             <DataRef>Datas.Maps.MAP.08</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.08.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.08.ALCM">
             <DataRef>Datas.Maps.MAP.08</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.09.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.09.CMAP">
             <DataRef>Datas.Maps.MAP.09</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.09.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.09.ALCM">
             <DataRef>Datas.Maps.MAP.09</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.10.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.10.CMAP">
             <DataRef>Datas.Maps.MAP.10</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.10.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.10.ALCM">
             <DataRef>Datas.Maps.MAP.10</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.11.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.11.CMAP">
             <DataRef>Datas.Maps.MAP.11</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.11.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.11.ALCM">
             <DataRef>Datas.Maps.MAP.11</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.12.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.12.CMAP">
             <DataRef>Datas.Maps.MAP.12</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.12.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.12.ALCM">
             <DataRef>Datas.Maps.MAP.12</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.13.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.13.CMAP">
             <DataRef>Datas.Maps.MAP.13</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.13.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.13.ALCM">
             <DataRef>Datas.Maps.MAP.13</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.14.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.14.CMAP">
             <DataRef>Datas.Maps.MAP.14</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.14.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.14.ALCM">
             <DataRef>Datas.Maps.MAP.14</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.15.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.15.CMAP">
             <DataRef>Datas.Maps.MAP.15</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.15.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.15.ALCM">
             <DataRef>Datas.Maps.MAP.15</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.16.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.16.CMAP">
             <DataRef>Datas.Maps.MAP.16</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.16.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.16.ALCM">
             <DataRef>Datas.Maps.MAP.16</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.17.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.17.CMAP">
             <DataRef>Datas.Maps.MAP.17</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.17.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.17.ALCM">
             <DataRef>Datas.Maps.MAP.17</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.18.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.18.CMAP">
             <DataRef>Datas.Maps.MAP.18</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.18.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.18.ALCM">
             <DataRef>Datas.Maps.MAP.18</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.19.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.19.CMAP">
             <DataRef>Datas.Maps.MAP.19</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.19.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.19.ALCM">
             <DataRef>Datas.Maps.MAP.19</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.20.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.20.CMAP">
             <DataRef>Datas.Maps.MAP.20</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.20.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.20.ALCM">
             <DataRef>Datas.Maps.MAP.20</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.21.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.21.CMAP">
             <DataRef>Datas.Maps.MAP.21</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.21.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.21.ALCM">
             <DataRef>Datas.Maps.MAP.21</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.22.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.22.CMAP">
             <DataRef>Datas.Maps.MAP.22</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.22.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.22.ALCM">
             <DataRef>Datas.Maps.MAP.22</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.23.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.23.CMAP">
             <DataRef>Datas.Maps.MAP.23</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.23.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.23.ALCM">
             <DataRef>Datas.Maps.MAP.23</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.24.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.24.CMAP">
             <DataRef>Datas.Maps.MAP.24</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.24.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.24.ALCM">
             <DataRef>Datas.Maps.MAP.24</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.25.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.25.CMAP">
             <DataRef>Datas.Maps.MAP.25</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.25.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.25.ALCM">
             <DataRef>Datas.Maps.MAP.25</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.26.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.26.CMAP">
             <DataRef>Datas.Maps.MAP.26</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.26.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.26.ALCM">
             <DataRef>Datas.Maps.MAP.26</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.27.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.27.CMAP">
             <DataRef>Datas.Maps.MAP.27</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.27.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.27.ALCM">
             <DataRef>Datas.Maps.MAP.27</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.28.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.28.CMAP">
             <DataRef>Datas.Maps.MAP.28</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.28.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.28.ALCM">
             <DataRef>Datas.Maps.MAP.28</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.29.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.29.CMAP">
             <DataRef>Datas.Maps.MAP.29</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.29.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.29.ALCM">
             <DataRef>Datas.Maps.MAP.29</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.30.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.30.CMAP">
             <DataRef>Datas.Maps.MAP.30</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.30.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.30.ALCM">
             <DataRef>Datas.Maps.MAP.30</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.31.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.31.CMAP">
             <DataRef>Datas.Maps.MAP.31</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.31.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.31.ALCM">
             <DataRef>Datas.Maps.MAP.31</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.32.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.32.CMAP">
             <DataRef>Datas.Maps.MAP.32</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.32.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.32.ALCM">
             <DataRef>Datas.Maps.MAP.32</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.33.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.33.CMAP">
             <DataRef>Datas.Maps.MAP.33</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.33.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.33.ALCM">
             <DataRef>Datas.Maps.MAP.33</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.34.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.34.CMAP">
             <DataRef>Datas.Maps.MAP.34</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.34.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.34.ALCM">
             <DataRef>Datas.Maps.MAP.34</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.35.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.35.CMAP">
             <DataRef>Datas.Maps.MAP.35</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.35.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.35.ALCM">
             <DataRef>Datas.Maps.MAP.35</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.36.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.36.CMAP">
             <DataRef>Datas.Maps.MAP.36</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.36.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.36.ALCM">
             <DataRef>Datas.Maps.MAP.36</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.37.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.37.CMAP">
             <DataRef>Datas.Maps.MAP.37</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.37.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.37.ALCM">
             <DataRef>Datas.Maps.MAP.37</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.38.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.38.CMAP">
             <DataRef>Datas.Maps.MAP.38</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.38.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.38.ALCM">
             <DataRef>Datas.Maps.MAP.38</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.39.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.39.CMAP">
             <DataRef>Datas.Maps.MAP.39</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.39.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.39.ALCM">
             <DataRef>Datas.Maps.MAP.39</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.40.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.40.CMAP">
             <DataRef>Datas.Maps.MAP.40</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.40.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.40.ALCM">
             <DataRef>Datas.Maps.MAP.40</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.41.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.41.CMAP">
             <DataRef>Datas.Maps.MAP.41</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.41.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.41.ALCM">
             <DataRef>Datas.Maps.MAP.41</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.42.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.42.CMAP">
             <DataRef>Datas.Maps.MAP.42</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.42.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.42.ALCM">
             <DataRef>Datas.Maps.MAP.42</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.43.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.43.CMAP">
             <DataRef>Datas.Maps.MAP.43</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.43.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.43.ALCM">
             <DataRef>Datas.Maps.MAP.43</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.44.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.44.CMAP">
             <DataRef>Datas.Maps.MAP.44</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.44.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.44.ALCM">
             <DataRef>Datas.Maps.MAP.44</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.45.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.45.CMAP">
             <DataRef>Datas.Maps.MAP.45</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.45.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.45.ALCM">
             <DataRef>Datas.Maps.MAP.45</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.46.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.46.CMAP">
             <DataRef>Datas.Maps.MAP.46</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.46.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.46.ALCM">
             <DataRef>Datas.Maps.MAP.46</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.47.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.47.CMAP">
             <DataRef>Datas.Maps.MAP.47</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.47.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.47.ALCM">
             <DataRef>Datas.Maps.MAP.47</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.48.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.48.CMAP">
             <DataRef>Datas.Maps.MAP.48</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.48.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.48.ALCM">
             <DataRef>Datas.Maps.MAP.48</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.49.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.49.CMAP">
             <DataRef>Datas.Maps.MAP.49</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.49.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.49.ALCM">
             <DataRef>Datas.Maps.MAP.49</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.50.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.50.CMAP">
             <DataRef>Datas.Maps.MAP.50</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.50.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.50.ALCM">
             <DataRef>Datas.Maps.MAP.50</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.51.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.51.CMAP">
             <DataRef>Datas.Maps.MAP.51</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.51.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.51.ALCM">
             <DataRef>Datas.Maps.MAP.51</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.52.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.52.CMAP">
             <DataRef>Datas.Maps.MAP.52</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.52.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.52.ALCM">
             <DataRef>Datas.Maps.MAP.52</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.53.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.53.CMAP">
             <DataRef>Datas.Maps.MAP.53</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.53.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.53.ALCM">
             <DataRef>Datas.Maps.MAP.53</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.54.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.54.CMAP">
             <DataRef>Datas.Maps.MAP.54</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.54.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.54.ALCM">
             <DataRef>Datas.Maps.MAP.54</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.55.CMAP">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.55.CMAP">
             <DataRef>Datas.Maps.MAP.55</DataRef>
             <BlockName>CMAP</BlockName>
-          </FromMAP>
-        </Palette>
-        <Palette Id="Palettes.MAP.55.ALCM">
-          <FromMAP>
+        </PaletteFromMAP>
+        <PaletteFromMAP Id="Palettes.MAP.55.ALCM">
             <DataRef>Datas.Maps.MAP.55</DataRef>
             <BlockName>ALCM</BlockName>
-          </FromMAP>
-        </Palette>
+        </PaletteFromMAP>
       </Items>
     </Palettes>
   </Tables>

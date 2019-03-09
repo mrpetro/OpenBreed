@@ -8,7 +8,7 @@ using OpenBreed.Common.Logging;
 using System.ComponentModel;
 using System.Globalization;
 using OpenBreed.Common.Assets;
-using OpenBreed.Common.XmlDatabase.Tables.Sources;
+using OpenBreed.Common.XmlDatabase.Tables.Assets;
 using OpenBreed.Common.XmlDatabase.Items.Assets;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
@@ -18,7 +18,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Private Fields
 
-        private readonly DatabaseAssetTableDef _table;
+        private readonly XmlDbAssetTableDef _table;
 
         #endregion Private Fields
 

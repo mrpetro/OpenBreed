@@ -11,34 +11,13 @@ using System.Xml.Serialization;
 namespace OpenBreed.Common.XmlDatabase.Items.Palettes
 {
     [Serializable]
-    [Description("Palette"), Category("Appearance")]
-    public class XmlPaletteEntry : XmlDbEntry, IPaletteEntry
-    {
 
+    public abstract class XmlPaletteEntry : XmlDbEntry, IPaletteEntry
+    {
         #region Public Properties
 
-        [XmlIgnore]
-        public IPaletteData Data { get; set; }
-
-        [XmlElement("FromMAP", Type = typeof(XmlPaletteDataFromMap)),
-        XmlElement("FromBinary", Type = typeof(XmlPaletteDataFromBinary))]
-        public XmlPaletteData XmlData
-        {
-            get
-            {
-                return (XmlPaletteData)Data;
-            }
-
-            set
-            {
-                Data = value;
-            }
-        }
-
-        public override IEntry Copy()
-        {
-            throw new NotImplementedException();
-        }
+        [XmlElement("DataRef")]
+        public string DataRef { get; set; }
 
         #endregion Public Properties
     }

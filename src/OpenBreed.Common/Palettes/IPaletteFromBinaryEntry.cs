@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Palettes
 {
-    public interface IPaletteDataFromBinary : IPaletteData
+    public interface IPaletteFromBinaryEntry : IPaletteEntry
     {
     }
 }

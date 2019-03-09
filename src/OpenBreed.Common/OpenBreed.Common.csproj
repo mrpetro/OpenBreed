@@ -77,9 +77,8 @@
     <Compile Include="Maps\Blocks\MapTextBlock.cs" />
     <Compile Include="Maps\Blocks\MapUnknownBlock.cs" />
     <Compile Include="Maps\Blocks\MapUInt32Block.cs" />
-    <Compile Include="Palettes\IPaletteData.cs" />
-    <Compile Include="Palettes\IPaletteDataFromBinary.cs" />
-    <Compile Include="Palettes\IPaletteDataFromMap.cs" />
+    <Compile Include="Palettes\IPaletteFromBinaryEntry.cs" />
+    <Compile Include="Palettes\IPaletteFromMapEntry.cs" />
     <Compile Include="Palettes\IPaletteEntry.cs" />
     <Compile Include="Actions\IActionEntry.cs" />
     <Compile Include="Actions\IActionPresentation.cs" />
@@ -116,7 +115,6 @@
     <Compile Include="Maps\MapLayoutModel.cs" />
     <Compile Include="Maps\MapModel.cs" />
     <Compile Include="Palettes\PaletteModel.cs" />
-    <Compile Include="Palettes\PalettesModel.cs" />
     <Compile Include="Palettes\Readers\PaletteReader.cs" />
     <Compile Include="ProgramTools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -151,16 +149,6 @@
     <Compile Include="Tiles\TileSetModel.cs" />
     <Compile Include="Other.cs" />
     <Compile Include="Writers\BigEndianBinaryWriter.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\DefaultPropertySetDef.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Level1PropertySetDef.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

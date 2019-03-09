@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Common.XmlDatabase.Tables.Images
 {
-    public class DatabaseImageTableDef : DatabaseTableDef
+    public class XmlDbImageTableDef : XmlDbTableDef
     {
         [XmlArray("Items"),
         XmlArrayItem("Image", typeof(XmlImageEntry))]

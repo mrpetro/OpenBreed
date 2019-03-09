@@ -8,10 +8,16 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Common.XmlDatabase.Tables.Palettes
 {
-    public class DatabasePaletteTableDef : DatabaseTableDef
+    public class XmlDbPaletteTableDef : XmlDbTableDef
     {
+        #region Public Fields
+
         [XmlArray("Items"),
-        XmlArrayItem("Palette", typeof(XmlPaletteEntry))]
+        XmlArrayItem("PaletteFromBinary", typeof(XmlPaletteFromBinaryEntry)),
+        XmlArrayItem("PaletteFromMAP", typeof(XmlPaletteFromMapEntry)),
+            ]
         public readonly List<XmlPaletteEntry> Items = new List<XmlPaletteEntry>();
+
+        #endregion Public Fields
     }
 }

@@ -492,56 +492,36 @@
     </TileSets>
     <Palettes>
       <Items>
-        <Palette Id="Palettes.LA">
-          <FromBinary>
-            <DataRef>Datas.Palette.LA</DataRef>
-          </FromBinary>      
-        </Palette>
-        <Palette Id="Palettes.LE">
-          <FromBinary>
+        <PaletteFromBinary Id="Palettes.LA">
+            <DataRef>Datas.Palette.LA</DataRef>  
+        </PaletteFromBinary>
+        <PaletteFromBinary Id="Palettes.LE">
             <DataRef>Datas.Palette.LE</DataRef>
-          </FromBinary>
-        </Palette>
-        <Palette Id="Palettes.LF">
-          <FromBinary>
+        </PaletteFromBinary>
+        <PaletteFromBinary Id="Palettes.LF">
             <DataRef>Datas.Palette.LF</DataRef>
-          </FromBinary>
-        </Palette>
-        <Palette Id="Palettes.LC">
-          <FromBinary>
+        </PaletteFromBinary>
+        <PaletteFromBinary Id="Palettes.LC">
             <DataRef>Datas.Palette.LC</DataRef>
-          </FromBinary>
-        </Palette>
-        <Palette Id="Palettes.LB">
-          <FromBinary>
+        </PaletteFromBinary>
+        <PaletteFromBinary Id="Palettes.LB">
             <DataRef>Datas.Palette.LB</DataRef>
-          </FromBinary>
-        </Palette>
-        <Palette Id="Palettes.LD">
-          <FromBinary>
+        </PaletteFromBinary>
+        <PaletteFromBinary Id="Palettes.LD">
             <DataRef>Datas.Palette.LD</DataRef>
-          </FromBinary>
-        </Palette>
-        <Palette Id="Palettes.LE">
-          <FromBinary>
+        </PaletteFromBinary>
+        <PaletteFromBinary Id="Palettes.LE">
             <DataRef>Datas.Palette.LE</DataRef>
-          </FromBinary>
-        </Palette>
-        <Palette Id="Palettes.L7">
-          <FromBinary>
+        </PaletteFromBinary>
+        <PaletteFromBinary Id="Palettes.L7">
             <DataRef>Datas.Palette.L7</DataRef>
-          </FromBinary>
-        </Palette>
-        <Palette Id="Palettes.L8">
-          <FromBinary>
+        </PaletteFromBinary>
+        <PaletteFromBinary Id="Palettes.L8">
             <DataRef>Datas.Palette.L8</DataRef>
-          </FromBinary>
-        </Palette>
-        <Palette Id="Palettes.L9">
-          <FromBinary>
+        </PaletteFromBinary>
+        <PaletteFromBinary Id="Palettes.L9">
             <DataRef>Datas.Palette.L9</DataRef>
-          </FromBinary>
-        </Palette>
+        </PaletteFromBinary>
       </Items>
     </Palettes>
     <Maps>

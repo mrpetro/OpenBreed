@@ -4,7 +4,7 @@ using OpenBreed.Common.XmlDatabase.Tables.Images;
 using OpenBreed.Common.XmlDatabase.Tables.Maps;
 using OpenBreed.Common.XmlDatabase.Tables.Palettes;
 using OpenBreed.Common.XmlDatabase.Tables.Actions;
-using OpenBreed.Common.XmlDatabase.Tables.Sources;
+using OpenBreed.Common.XmlDatabase.Tables.Assets;
 using OpenBreed.Common.XmlDatabase.Tables.Sprites;
 using OpenBreed.Common.XmlDatabase.Tables.Tiles;
 using OpenBreed.Common.Formats;
@@ -75,67 +75,67 @@ namespace OpenBreed.Common.XmlDatabase
 
         #region Internal Methods
 
-        internal DatabaseActionSetTableDef GetActionSetTable()
+        internal XmlDbActionSetTableDef GetActionSetTable()
         {
-            var table = Data.Tables.OfType<DatabaseActionSetTableDef>().FirstOrDefault();
+            var table = Data.Tables.OfType<XmlDbActionSetTableDef>().FirstOrDefault();
             if (table == null)
             {
-                table = new DatabaseActionSetTableDef();
+                table = new XmlDbActionSetTableDef();
                 Data.Tables.Add(table);
             }
             return table;
         }
 
-        internal DatabaseAssetTableDef GetAssetsTable()
+        internal XmlDbAssetTableDef GetAssetsTable()
         {
-            var table = Data.Tables.OfType<DatabaseAssetTableDef>().FirstOrDefault();
+            var table = Data.Tables.OfType<XmlDbAssetTableDef>().FirstOrDefault();
             if (table == null)
             {
-                table = new DatabaseAssetTableDef();
+                table = new XmlDbAssetTableDef();
                 Data.Tables.Add(table);
             }
             return table;
         }
 
-        internal DatabaseImageTableDef GetImageTable()
+        internal XmlDbImageTableDef GetImageTable()
         {
-            var table = Data.Tables.OfType<DatabaseImageTableDef>().FirstOrDefault();
+            var table = Data.Tables.OfType<XmlDbImageTableDef>().FirstOrDefault();
             if (table == null)
             {
-                table = new DatabaseImageTableDef();
+                table = new XmlDbImageTableDef();
                 Data.Tables.Add(table);
             }
             return table;
         }
 
-        internal DatabaseDataTableDef GetDatasTable()
+        internal XmlDbDataTableDef GetDatasTable()
         {
-            var table = Data.Tables.OfType<DatabaseDataTableDef>().FirstOrDefault();
+            var table = Data.Tables.OfType<XmlDbDataTableDef>().FirstOrDefault();
             if (table == null)
             {
-                table = new DatabaseDataTableDef();
+                table = new XmlDbDataTableDef();
                 Data.Tables.Add(table);
             }
             return table;
         }
 
-        internal DatabaseMapTableDef GetMapsTable()
+        internal XmlDbMapTableDef GetMapsTable()
         {
-            var table = Data.Tables.OfType<DatabaseMapTableDef>().FirstOrDefault();
+            var table = Data.Tables.OfType<XmlDbMapTableDef>().FirstOrDefault();
             if (table == null)
             {
-                table = new DatabaseMapTableDef();
+                table = new XmlDbMapTableDef();
                 Data.Tables.Add(table);
             }
             return table;
         }
 
-        internal DatabasePaletteTableDef GetPaletteTable()
+        internal XmlDbPaletteTableDef GetPaletteTable()
         {
-            var table = Data.Tables.OfType<DatabasePaletteTableDef>().FirstOrDefault();
+            var table = Data.Tables.OfType<XmlDbPaletteTableDef>().FirstOrDefault();
             if (table == null)
             {
-                table = new DatabasePaletteTableDef();
+                table = new XmlDbPaletteTableDef();
                 Data.Tables.Add(table);
             }
             return table;
@@ -150,23 +150,23 @@ namespace OpenBreed.Common.XmlDatabase
             }
             return table;
         }
-        internal DatabaseSpriteSetTableDef GetSpriteSetTable()
+        internal XmlDbSpriteSetTableDef GetSpriteSetTable()
         {
-            var table = Data.Tables.OfType<DatabaseSpriteSetTableDef>().FirstOrDefault();
+            var table = Data.Tables.OfType<XmlDbSpriteSetTableDef>().FirstOrDefault();
             if (table == null)
             {
-                table = new DatabaseSpriteSetTableDef();
+                table = new XmlDbSpriteSetTableDef();
                 Data.Tables.Add(table);
             }
             return table;
         }
 
-        internal DatabaseTileSetTableDef GetTileSetTable()
+        internal XmlDbTileSetTableDef GetTileSetTable()
         {
-            var table = Data.Tables.OfType<DatabaseTileSetTableDef>().FirstOrDefault();
+            var table = Data.Tables.OfType<XmlDbTileSetTableDef>().FirstOrDefault();
             if (table == null)
             {
-                table = new DatabaseTileSetTableDef();
+                table = new XmlDbTileSetTableDef();
                 Data.Tables.Add(table);
             }
             return table;

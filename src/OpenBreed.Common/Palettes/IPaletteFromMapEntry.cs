@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Palettes
 {
-    public interface IPaletteDataFromMap : IPaletteData
+    public interface IPaletteFromMapEntry : IPaletteEntry
     {
         string BlockName { get; }
     }

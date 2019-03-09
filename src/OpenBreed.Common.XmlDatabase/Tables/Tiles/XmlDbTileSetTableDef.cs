@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Common.XmlDatabase.Tables.Tiles
 {
-    public class DatabaseTileSetTableDef : DatabaseTableDef
+    public class XmlDbTileSetTableDef : XmlDbTableDef
     {
         [XmlArray("Items"),
         XmlArrayItem("TileSet", typeof(XmlTileSetEntry))]

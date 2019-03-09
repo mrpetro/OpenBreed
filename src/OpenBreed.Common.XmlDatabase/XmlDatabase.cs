@@ -6,7 +6,7 @@ using System.IO;
 using System.Xml.Serialization;
 using OpenBreed.Common;
 using OpenBreed.Common.XmlDatabase.Resources;
-using OpenBreed.Common.XmlDatabase.Tables.Sources;
+using OpenBreed.Common.XmlDatabase.Tables.Assets;
 using OpenBreed.Common.XmlDatabase.Tables;
 using OpenBreed.Common.XmlDatabase.Items.Images;
 using OpenBreed.Common.XmlDatabase.Items.Maps;
@@ -30,16 +30,16 @@ namespace OpenBreed.Common.XmlDatabase
         public const string DEFAULT_DATABASE_DIR_NAME = "Defaults";
 
         [XmlArray("Tables"),
-        XmlArrayItem("Assets", typeof(DatabaseAssetTableDef)),
-        XmlArrayItem("Datas", typeof(DatabaseDataTableDef)),
-        XmlArrayItem("Maps", typeof(DatabaseMapTableDef)),
-        XmlArrayItem("Palettes", typeof(DatabasePaletteTableDef)),
-        XmlArrayItem("ActionSets", typeof(DatabaseActionSetTableDef)),
-        XmlArrayItem("TileSets", typeof(DatabaseTileSetTableDef)),
-        XmlArrayItem("SpriteSets", typeof(DatabaseSpriteSetTableDef)),
+        XmlArrayItem("Assets", typeof(XmlDbAssetTableDef)),
+        XmlArrayItem("Datas", typeof(XmlDbDataTableDef)),
+        XmlArrayItem("Maps", typeof(XmlDbMapTableDef)),
+        XmlArrayItem("Palettes", typeof(XmlDbPaletteTableDef)),
+        XmlArrayItem("ActionSets", typeof(XmlDbActionSetTableDef)),
+        XmlArrayItem("TileSets", typeof(XmlDbTileSetTableDef)),
+        XmlArrayItem("SpriteSets", typeof(XmlDbSpriteSetTableDef)),
         XmlArrayItem("Sounds", typeof(DatabaseSoundTableDef)),
-        XmlArrayItem("Images", typeof(DatabaseImageTableDef))]
-        public readonly List<DatabaseTableDef> Tables = new List<DatabaseTableDef>();
+        XmlArrayItem("Images", typeof(XmlDbImageTableDef))]
+        public readonly List<XmlDbTableDef> Tables = new List<XmlDbTableDef>();
 
         #endregion Public Fields
 

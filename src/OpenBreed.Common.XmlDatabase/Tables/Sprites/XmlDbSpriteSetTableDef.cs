@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Common.XmlDatabase.Tables.Sprites
 {
-    public class DatabaseSpriteSetTableDef : DatabaseTableDef
+    public class XmlDbSpriteSetTableDef : XmlDbTableDef
     {
         [XmlArray("Items"),
         XmlArrayItem("SpriteSet", typeof(XmlSpriteSetEntry))]

@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Common.XmlDatabase.Tables.Actions
 {
-    public class DatabaseActionSetTableDef : DatabaseTableDef
+    public class XmlDbActionSetTableDef : XmlDbTableDef
     {
         [XmlArray("Items"),
         XmlArrayItem("ActionSet", typeof(XmlActionSetEntry))]

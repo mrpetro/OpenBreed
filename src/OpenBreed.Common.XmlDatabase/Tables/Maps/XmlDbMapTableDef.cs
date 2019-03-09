@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Common.XmlDatabase.Tables.Maps
 {
-    public class DatabaseMapTableDef : DatabaseTableDef
+    public class XmlDbMapTableDef : XmlDbTableDef
     {
         [XmlArray("Items"),
         XmlArrayItem("Map", typeof(XmlMapEntry))]

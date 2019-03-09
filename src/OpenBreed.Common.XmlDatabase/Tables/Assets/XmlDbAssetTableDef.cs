@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace OpenBreed.Common.XmlDatabase.Tables.Sources
+namespace OpenBreed.Common.XmlDatabase.Tables.Assets
 {
-    public class DatabaseAssetTableDef : DatabaseTableDef
+    public class XmlDbAssetTableDef : XmlDbTableDef
     {
         [XmlArray("Items"),
         XmlArrayItem("FileAsset", typeof(XmlFileAssetEntry)),

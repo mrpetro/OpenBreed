@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Common.XmlDatabase.Tables.Datas
 {
-    public class DatabaseDataTableDef : DatabaseTableDef
+    public class XmlDbDataTableDef : XmlDbTableDef
     {
         [XmlArray("Items"),
         XmlArrayItem("Data", typeof(XmlDataEntry))]

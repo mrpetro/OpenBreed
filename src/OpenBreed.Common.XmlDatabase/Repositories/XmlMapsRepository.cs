@@ -14,7 +14,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Private Fields
 
-        private readonly DatabaseMapTableDef _table;
+        private readonly XmlDbMapTableDef _table;
 
         #endregion Private Fields
 

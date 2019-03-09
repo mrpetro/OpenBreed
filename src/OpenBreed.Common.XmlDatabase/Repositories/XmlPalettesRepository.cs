@@ -17,7 +17,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Private Fields
 
-        private readonly DatabasePaletteTableDef _table;
+        private readonly XmlDbPaletteTableDef _table;
 
         #endregion Private Fields
 
@@ -33,7 +33,14 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
         #region Public Properties
 
         public IEnumerable<IEntry> Entries { get { return _table.Items; } }
-        public IEnumerable<Type> EntryTypes { get { yield return typeof(XmlPaletteEntry); } }
+        public IEnumerable<Type> EntryTypes
+        {
+            get
+            {
+                yield return typeof(XmlPaletteFromBinaryEntry);
+                yield return typeof(XmlPaletteFromMapEntry);
+            }
+        }
         public string Name { get { return "Palettes"; } }
 
         #endregion Public Properties

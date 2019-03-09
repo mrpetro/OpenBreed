@@ -43,7 +43,7 @@ namespace OpenBreed.Common.Data
             return paletteBuilder.Build();
         }
 
-        private PaletteModel GetDataImpl(IPaletteDataFromMap paletteData)
+        private PaletteModel GetModelImpl(IPaletteFromMapEntry paletteData)
         {
             var map = Provider.Datas.GetData(paletteData.DataRef) as MapModel;
 
@@ -58,21 +58,14 @@ namespace OpenBreed.Common.Data
             return Create(paletteBlock);
         }
 
-        private PaletteModel GetDataImpl(IPaletteDataFromBinary paletteData)
+        private PaletteModel GetModelImpl(IPaletteFromBinaryEntry paletteData)
         {
             return Provider.Datas.GetData(paletteData.DataRef) as PaletteModel;
         }
 
-        private PaletteModel GetData(dynamic paletteData)
+        private PaletteModel GetModel(dynamic paletteEntry)
         {
-            return GetDataImpl(paletteData);
-
-            //if (paletteData is IPaletteDataFromBinary)
-            //    return GetData((IPaletteDataFromBinary)paletteData);
-            //else if (paletteData is IPaletteDataFromMap)
-            //    return GetData((IPaletteDataFromMap)paletteData);
-            //else
-            //    throw new InvalidOperationException();
+            return GetModelImpl(paletteEntry);
         }
 
         public PaletteModel GetPalette(string id)
@@ -81,10 +74,7 @@ namespace OpenBreed.Common.Data
             if (entry == null)
                 throw new Exception("Palette error: " + id);
 
-            if (entry.Data == null)
-                return null;
-
-            return GetData(entry.Data);
+            return GetModel(entry);
         }
     }
 }
