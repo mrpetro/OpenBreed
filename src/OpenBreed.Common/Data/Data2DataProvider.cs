@@ -41,7 +41,15 @@ namespace OpenBreed.Common.Data
                     throw new InvalidOperationException("Missing Asset reference");
 
                 var asset = Provider.Assets.GetAsset(entry.AssetRef);
-                Provider.FormatMan.Save(asset, item.Value, entry.Format);
+
+                try
+                {
+                    Provider.FormatMan.Save(asset, item.Value, entry.Format);
+                }
+                catch (Exception)
+                {
+
+                }
             }
         }
 
