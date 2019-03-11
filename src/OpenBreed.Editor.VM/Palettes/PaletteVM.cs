@@ -7,11 +7,20 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Common;
 
 namespace OpenBreed.Editor.VM.Palettes
 {
     public class PaletteVM : EditableEntryVM
     {
+
+        #region Private Fields
+
+        private Color _currentColor = Color.Empty;
+        private int _currentColorIndex = -1;
+        private string _dataRef;
+
+        #endregion Private Fields
 
         #region Public Constructors
 
@@ -26,6 +35,31 @@ namespace OpenBreed.Editor.VM.Palettes
         #region Public Properties
 
         public BindingList<Color> Colors { get; }
+        public Color CurrentColor
+        {
+            get { return CurrentColorIndex == -1 ? Color.Empty : Colors[CurrentColorIndex]; }
+
+            set
+            {
+                if (Colors[CurrentColorIndex] == value)
+                    return;
+
+                Colors[CurrentColorIndex] = value;
+                OnPropertyChanged(nameof(CurrentColor));
+            }
+        }
+
+        public int CurrentColorIndex
+        {
+            get { return _currentColorIndex; }
+            set { SetProperty(ref _currentColorIndex, value); }
+        }
+
+        public string DataRef
+        {
+            get { return _dataRef; }
+            set { SetProperty(ref _dataRef, value); }
+        }
 
         #endregion Public Properties
 
@@ -43,6 +77,31 @@ namespace OpenBreed.Editor.VM.Palettes
         }
 
         #endregion Public Methods
+
+        #region Internal Methods
+
+        internal override void FromEntry(IEntry entry)
+        {
+            base.FromEntry(entry);
+            FromEntry((IPaletteEntry)entry);
+        }
+
+        internal virtual void FromEntry(IPaletteEntry entry)
+        {
+            DataRef = entry.DataRef;
+        }
+
+        internal override void ToEntry(IEntry entry)
+        {
+            base.ToEntry(entry);
+            ToEntry((IPaletteEntry)entry);
+        }
+        internal virtual void ToEntry(IPaletteEntry entry)
+        {
+            entry.DataRef = DataRef;
+        }
+
+        #endregion Internal Methods
 
     }
 }

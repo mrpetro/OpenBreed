@@ -14,7 +14,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 {
     public partial class ColorSelectorCtrl : UserControl
     {
-        private PaletteEditorVM _vm;
+        private PaletteVM _vm;
 
         private int m_ColorsInRow = 16;
         private int m_ColorsBtnSize = 16;
@@ -27,7 +27,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
         }
 
-        public void Initialize(PaletteEditorVM vm)
+        public void Initialize(PaletteVM vm)
         {
             _vm = vm;
 
@@ -39,9 +39,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
             switch (e.PropertyName)
             {
                 case nameof(_vm.CurrentColorIndex):
-                    Invalidate();
-                    break;
-                case nameof(_vm.Editable):
                     Invalidate();
                     break;
                 case nameof(_vm.CurrentColor):
@@ -88,7 +85,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 
         private void DrawPaletteGrid(Graphics gfx)
         {
-            int colorsNo = _vm.Editable.Colors.Count;
+            int colorsNo = _vm.Colors.Count;
             int xMax = m_ColorsInRow;
             int yMax = colorsNo / xMax;
             int btnSize = m_ColorsBtnSize;
@@ -102,7 +99,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
                     if (colorNo >= colorsNo)
                         return;
 
-                    Color color = _vm.Editable.Colors[colorNo];
+                    Color color = _vm.Colors[colorNo];
                     DrawColor(color, gfx, i * btnSize, j * btnSize, btnSize, btnSize);
                 }
             }
@@ -141,7 +138,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 
                 int newSelectedColorIndex = GetPaletteIndex(pos.X, pos.Y);
 
-                if (newSelectedColorIndex >= _vm.Editable.Colors.Count)
+                if (newSelectedColorIndex >= _vm.Colors.Count)
                     return;
 
                 _vm.CurrentColorIndex = newSelectedColorIndex;

@@ -16,7 +16,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
     {
         #region Private Fields
 
-        private PaletteEditorVM _vm;
+        private PaletteVM _vm;
 
         #endregion Private Fields
 
@@ -31,21 +31,13 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 
         #region Public Methods
 
-        public void Initialize(PaletteEditorVM vm)
+        public void Initialize(PaletteVM vm)
         {
             _vm = vm;
 
             _vm.PropertyChanged += _vm_PropertyChanged;
 
-            SetupWithColor(_vm.CurrentColor);
-        }
-
-        void UpdateItems()
-        {
-            //if (_vm.Items.Count == 0)
-            //    SetNoSpritesState();
-            //else
-            //    SetSpritesState();
+            SetupWithColor(_vm.CurrentColorIndex, _vm.CurrentColor);
         }
 
         private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -53,19 +45,20 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
             switch (e.PropertyName)
             {
                 case nameof(_vm.CurrentColorIndex):
-                    SetupWithColor(_vm.CurrentColor);
+                    SetupWithColor(_vm.CurrentColorIndex, _vm.CurrentColor);
                     break;
                 case nameof(_vm.CurrentColor):
-                    SetupWithColor(_vm.CurrentColor);
+                    SetupWithColor(_vm.CurrentColorIndex, _vm.CurrentColor);
                     break;
                 default:
                     break;
             }
         }
 
-        public void SetupWithColor(Color color)
+        public void SetupWithColor(int index, Color color)
         {
-            pnlColor.BackColor = color;
+            lblColor.BackColor = color;
+            lblColor.Text = index.ToString();
             sliderR.Value = color.R;
             dmR.Text = color.R.ToString();
             sliderG.Value = color.G;

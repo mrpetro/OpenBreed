@@ -16,7 +16,7 @@ using OpenBreed.Editor.VM.Database.Entries;
 using OpenBreed.Common.XmlDatabase;
 using System.ComponentModel;
 using OpenBreed.Common.XmlDatabase.Items.Assets;
-using OpenBreed.Common.XmlDatabase.Tables.Sources;
+using OpenBreed.Common.XmlDatabase.Tables.Assets;
 using OpenBreed.Common.XmlDatabase.Items.Maps;
 using OpenBreed.Common.XmlDatabase.Items.Images;
 using OpenBreed.Common.XmlDatabase.Tables;
