@@ -11,7 +11,7 @@ namespace OpenBreed.Common.Palettes
     {
         #region Public Properties
 
-        string DataRef { get; }
+        string DataRef { get; set; }
 
         #endregion Public Properties
     }

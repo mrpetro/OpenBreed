@@ -45,6 +45,9 @@ namespace OpenBreed.Common.Data
 
         private PaletteModel GetModelImpl(IPaletteFromMapEntry paletteData)
         {
+            if (paletteData.DataRef == null)
+                return null;
+
             var map = Provider.Datas.GetData(paletteData.DataRef) as MapModel;
 
             if (map == null)
@@ -60,6 +63,9 @@ namespace OpenBreed.Common.Data
 
         private PaletteModel GetModelImpl(IPaletteFromBinaryEntry paletteData)
         {
+            if (paletteData.DataRef == null)
+                return null;
+
             return Provider.Datas.GetData(paletteData.DataRef) as PaletteModel;
         }
 

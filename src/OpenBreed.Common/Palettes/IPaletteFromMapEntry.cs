@@ -8,6 +8,6 @@ namespace OpenBreed.Common.Palettes
 {
     public interface IPaletteFromMapEntry : IPaletteEntry
     {
-        string BlockName { get; }
+        string BlockName { get; set; }
     }
 }
