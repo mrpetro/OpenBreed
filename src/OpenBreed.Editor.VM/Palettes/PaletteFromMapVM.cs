@@ -1,5 +1,8 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Assets;
+using OpenBreed.Common.Data;
+using OpenBreed.Common.Maps;
+using OpenBreed.Common.Maps.Blocks;
 using OpenBreed.Common.Palettes;
 using OpenBreed.Common.XmlDatabase.Items.Assets;
 using System;
@@ -56,6 +59,16 @@ namespace OpenBreed.Editor.VM.Palettes
 
         private void ToEntry(IPaletteFromMapEntry source)
         {
+            var mapModel = ServiceLocator.Instance.GetService<DataProvider>().Datas.GetData(DataRef) as MapModel;
+
+            var paletteBlock = mapModel.Blocks.OfType<MapPaletteBlock>().FirstOrDefault(item => item.Name == BlockName);
+
+            for (int i = 0; i < paletteBlock.Value.Length; i++)
+            {
+                var color = Colors[i];
+                paletteBlock.Value[i] = new MapPaletteBlock.ColorData(color.R, color.G, color.B);
+            }
+
             source.DataRef = DataRef;
             source.BlockName = BlockName;
         }
