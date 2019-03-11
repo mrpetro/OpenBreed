@@ -229,6 +229,18 @@
     <Compile Include="Controls\Palettes\ColorSelectorCtrl.designer.cs">
       <DependentUpon>ColorSelectorCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Palettes\PaletteFromMapCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Palettes\PaletteFromMapCtrl.Designer.cs">
+      <DependentUpon>PaletteFromMapCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Palettes\PaletteFromBinaryCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Palettes\PaletteFromBinaryCtrl.Designer.cs">
+      <DependentUpon>PaletteFromBinaryCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Palettes\PaletteEditorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -495,6 +507,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Palettes\ColorSelectorCtrl.resx">
       <DependentUpon>ColorSelectorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Palettes\PaletteFromMapCtrl.resx">
+      <DependentUpon>PaletteFromMapCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Palettes\PaletteFromBinaryCtrl.resx">
+      <DependentUpon>PaletteFromBinaryCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Palettes\PaletteEditorCtrl.resx">
       <DependentUpon>PaletteEditorCtrl.cs</DependentUpon>

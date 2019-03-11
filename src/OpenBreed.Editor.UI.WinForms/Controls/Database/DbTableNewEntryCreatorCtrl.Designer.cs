@@ -37,7 +37,7 @@
             // btnCreate
             // 
             this.btnCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCreate.Location = new System.Drawing.Point(252, 4);
+            this.btnCreate.Location = new System.Drawing.Point(146, 3);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(55, 21);
             this.btnCreate.TabIndex = 1;
@@ -47,7 +47,7 @@
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(313, 4);
+            this.btnCancel.Location = new System.Drawing.Point(207, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(55, 21);
             this.btnCancel.TabIndex = 2;
@@ -58,19 +58,20 @@
             // 
             this.tbxEntryId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbxEntryId.Location = new System.Drawing.Point(3, 4);
+            this.tbxEntryId.Location = new System.Drawing.Point(3, 30);
             this.tbxEntryId.Name = "tbxEntryId";
-            this.tbxEntryId.Size = new System.Drawing.Size(145, 20);
+            this.tbxEntryId.Size = new System.Drawing.Size(259, 20);
             this.tbxEntryId.TabIndex = 3;
             // 
             // cbxEntryType
             // 
-            this.cbxEntryType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxEntryType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cbxEntryType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxEntryType.FormattingEnabled = true;
-            this.cbxEntryType.Location = new System.Drawing.Point(154, 4);
+            this.cbxEntryType.Location = new System.Drawing.Point(3, 3);
             this.cbxEntryType.Name = "cbxEntryType";
-            this.cbxEntryType.Size = new System.Drawing.Size(92, 21);
+            this.cbxEntryType.Size = new System.Drawing.Size(137, 21);
             this.cbxEntryType.TabIndex = 4;
             // 
             // DbTableNewEntryCreatorCtrl
@@ -82,7 +83,7 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnCreate);
             this.Name = "DbTableNewEntryCreatorCtrl";
-            this.Size = new System.Drawing.Size(371, 29);
+            this.Size = new System.Drawing.Size(265, 56);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -34,10 +34,10 @@
             this.dmR = new System.Windows.Forms.DomainUpDown();
             this.dmG = new System.Windows.Forms.DomainUpDown();
             this.dmB = new System.Windows.Forms.DomainUpDown();
-            this.pnlColor = new System.Windows.Forms.Panel();
             this.lblR = new System.Windows.Forms.Label();
             this.lblG = new System.Windows.Forms.Label();
             this.lblB = new System.Windows.Forms.Label();
+            this.lblColor = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.sliderR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderB)).BeginInit();
@@ -109,17 +109,6 @@
             this.dmB.TabIndex = 5;
             this.dmB.Text = "0";
             // 
-            // pnlColor
-            // 
-            this.pnlColor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlColor.Location = new System.Drawing.Point(0, 0);
-            this.pnlColor.Name = "pnlColor";
-            this.pnlColor.Size = new System.Drawing.Size(331, 16);
-            this.pnlColor.TabIndex = 6;
-            // 
             // lblR
             // 
             this.lblR.AutoSize = true;
@@ -147,21 +136,32 @@
             this.lblB.TabIndex = 9;
             this.lblB.Text = "B";
             // 
-            // ColorView
+            // lblColor
+            // 
+            this.lblColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblColor.Location = new System.Drawing.Point(3, 0);
+            this.lblColor.Name = "lblColor";
+            this.lblColor.Size = new System.Drawing.Size(325, 17);
+            this.lblColor.TabIndex = 0;
+            this.lblColor.Text = "#color_index#";
+            // 
+            // ColorEditorCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblColor);
             this.Controls.Add(this.lblB);
             this.Controls.Add(this.lblG);
             this.Controls.Add(this.lblR);
-            this.Controls.Add(this.pnlColor);
             this.Controls.Add(this.dmB);
             this.Controls.Add(this.dmG);
             this.Controls.Add(this.dmR);
             this.Controls.Add(this.sliderB);
             this.Controls.Add(this.sliderG);
             this.Controls.Add(this.sliderR);
-            this.Name = "ColorView";
+            this.Name = "ColorEditorCtrl";
             this.Size = new System.Drawing.Size(331, 100);
             ((System.ComponentModel.ISupportInitialize)(this.sliderR)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderG)).EndInit();
@@ -179,9 +179,9 @@
         private System.Windows.Forms.DomainUpDown dmR;
         private System.Windows.Forms.DomainUpDown dmG;
         private System.Windows.Forms.DomainUpDown dmB;
-        private System.Windows.Forms.Panel pnlColor;
         private System.Windows.Forms.Label lblR;
         private System.Windows.Forms.Label lblG;
         private System.Windows.Forms.Label lblB;
+        private System.Windows.Forms.Label lblColor;
     }
 }

@@ -15,13 +15,6 @@ namespace OpenBreed.Editor.VM.Palettes
     public class PaletteEditorVM : EntryEditorBaseVM<IPaletteEntry, PaletteVM>
     {
 
-        #region Private Fields
-
-        private Color _currentColor = Color.Empty;
-        private int _currentColorIndex = -1;
-
-        #endregion Private Fields
-
         #region Public Constructors
 
         public PaletteEditorVM(IRepository repository) : base(repository)
@@ -32,35 +25,33 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Public Properties
 
-        public Color CurrentColor
-        {
-            get { return CurrentColorIndex == -1 ? Color.Empty : Editable.Colors[CurrentColorIndex]; }
-
-            set
-            {
-                if (Editable.Colors[CurrentColorIndex] == value)
-                    return;
-
-                Editable.Colors[CurrentColorIndex] = value;
-                OnPropertyChanged(nameof(CurrentColor));
-            }
-        }
-
-        public int CurrentColorIndex
-        {
-            get { return _currentColorIndex; }
-            set { SetProperty(ref _currentColorIndex, value); }
-        }
-
         public override string EditorName { get { return "Palette Editor"; } }
+
         public MapEditorPalettesToolVM Palettes { get; private set; }
 
         #endregion Public Properties
 
         #region Protected Methods
 
+        protected override PaletteVM CreateVM(IPaletteEntry entry)
+        {
+            if (entry is IPaletteFromBinaryEntry)
+                return new PaletteFromBinaryVM();
+            else if (entry is IPaletteFromMapEntry)
+                return new PaletteFromMapVM();
+            else
+                throw new NotImplementedException();
+        }
+
         protected override void UpdateEntry(PaletteVM source, IPaletteEntry target)
         {
+            var model = DataProvider.Palettes.GetPalette(target.Id);
+
+            for (int i = 0; i < model.Length; i++)
+            {
+                model.Data[i] = source.Colors[i];
+            }
+
             base.UpdateEntry(source, target);
         }
 
@@ -74,7 +65,9 @@ namespace OpenBreed.Editor.VM.Palettes
 
                 foreach (var color in model.Data)
                     target.Colors.Add(color);
-            }); 
+            });
+
+            target.CurrentColorIndex = 0;
 
             base.UpdateVM(source, target);
         }
