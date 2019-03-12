@@ -53,7 +53,7 @@ namespace OpenBreed.Common.Logging
         /// Log debug message
         /// </summary>
         /// <param name="msg"></param>
-        public void LogDebug(string msg)
+        public void Debug(string msg)
         {
             var ev = MessageAdded;
             if (ev != null)
@@ -65,16 +65,16 @@ namespace OpenBreed.Common.Logging
         /// Log debug message
         /// </summary>
         /// <param name="msg"></param>
-        public void LogDebug(Exception ex)
+        public void Debug(Exception ex)
         {
-            LogDebug(ex.Message);
+            Debug(ex.Message);
         }
 
         /// <summary>
         /// Log message as info
         /// </summary>
         /// <param name="msg"></param>
-        public void LogInfo(string msg)
+        public void Info(string msg)
         {
             var ev = MessageAdded;
             if (ev != null)

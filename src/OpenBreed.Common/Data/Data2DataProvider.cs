@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.Data2;
+using OpenBreed.Common.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,9 +47,9 @@ namespace OpenBreed.Common.Data
                 {
                     Provider.FormatMan.Save(asset, item.Value, entry.Format);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
+                    LogMan.Instance.Error($"Problems saving asset {asset.Name}, Reason: {ex.Message}");
                 }
             }
         }
