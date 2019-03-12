@@ -126,6 +126,7 @@
     <Compile Include="ISaveFileQuery.cs" />
     <Compile Include="IToolView.cs" />
     <Compile Include="Logging\LoggerVM.cs" />
+    <Compile Include="Logging\LogItemVM.cs" />
     <Compile Include="Maps\MapEditorActionsSelectorVM.cs" />
     <Compile Include="Maps\MapEditorTilesToolVM.cs" />
     <Compile Include="Maps\MapEditorToolsVM.cs" />

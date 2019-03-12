@@ -43,7 +43,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.MainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.MessageLabelMainStatusStrip = new System.Windows.Forms.ToolStripStatusLabel();
-            this.MainMenuStrip.SuspendLayout();
+            this.EditorView = new OpenBreed.Editor.UI.WinForms.Views.DbEditorView();
             this.MainStatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -141,11 +141,20 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             this.MessageLabelMainStatusStrip.Name = "MessageLabelMainStatusStrip";
             this.MessageLabelMainStatusStrip.Size = new System.Drawing.Size(0, 17);
             // 
+            // EditorView
+            // 
+            this.EditorView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.EditorView.Location = new System.Drawing.Point(0, 24);
+            this.EditorView.Name = "EditorView";
+            this.EditorView.Size = new System.Drawing.Size(1041, 458);
+            this.EditorView.TabIndex = 4;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1041, 504);
+            this.Controls.Add(this.EditorView);
             this.Controls.Add(this.MainStatusStrip);
             this.Controls.Add(this.MainMenuStrip);
             this.IsMdiContainer = true;
@@ -175,6 +184,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         public System.Windows.Forms.ToolStripMenuItem FileToolStripMenuItem;
         internal System.Windows.Forms.OpenFileDialog OpenFileDialog;
         internal System.Windows.Forms.SaveFileDialog SaveFileDialog;
+        internal Views.DbEditorView EditorView;
     }
 }
 

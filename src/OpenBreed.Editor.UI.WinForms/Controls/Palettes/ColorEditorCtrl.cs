@@ -58,6 +58,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
         public void SetupWithColor(int index, Color color)
         {
             lblColor.BackColor = color;
+            lblColor.ForeColor = Color.FromArgb(color.ToArgb() ^ 0xffffff);
             lblColor.Text = index.ToString();
             sliderR.Value = color.R;
             dmR.Text = color.R.ToString();

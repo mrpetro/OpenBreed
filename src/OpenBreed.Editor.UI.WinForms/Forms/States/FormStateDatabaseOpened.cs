@@ -30,8 +30,6 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
 
         #region Private Fields
 
-        private DbEditorView _dbEditorView;
-
         #endregion Private Fields
 
         #region Internal Constructors
@@ -39,9 +37,6 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
         internal FormStateDatabaseOpened(MainForm mainForm) : base(mainForm)
         {
             FileSeparator = new ToolStripSeparator();
-
-            _dbEditorView = new DbEditorView();
-            _dbEditorView.Dock = DockStyle.Fill;
 
             FileCloseDatabaseToolStripMenuItem = new ToolStripMenuItem("Close database");
             FileCloseDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.DbEditor.TryCloseDatabase();
@@ -68,7 +63,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             //ViewToolsMenuItem = new ToolStripMenuItem("Tools");
             //ViewToolsMenuItem.Click += (s, a) => _projectView.ShowView(ProjectViewType.Tools);
             ViewDatabaseMenuItem = new ToolStripMenuItem("Database items");
-            ViewDatabaseMenuItem.Click += (s, a) => _dbEditorView.ShowDatabaseView();
+            ViewDatabaseMenuItem.Click += (s, a) => MainForm.EditorView.ShowDatabaseView();
         }
 
         private void OnOpenedItemChanged(DbEntryVM databaseItemVM)
@@ -76,9 +71,9 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             if (databaseItemVM == null)
                 return;
             else if (databaseItemVM is DbMapEntryVM)
-                _dbEditorView.ShowLevelView();
+                MainForm.EditorView.ShowLevelView();
             else if (databaseItemVM is DbSpriteSetEntryVM)
-                _dbEditorView.ShowSpriteSetEditorView();
+                MainForm.EditorView.ShowSpriteSetEditorView();
             else
                 throw new NotImplementedException();
         }
@@ -89,7 +84,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
 
         internal override void Cleanup()
         {
-            _dbEditorView.HideAllViews();
+            MainForm.EditorView.HideAllViews();
 
             //Setup the File menu
             MainForm.FileToolStripMenuItem.DropDownItems.Clear();
@@ -126,15 +121,9 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
 
             MainForm.Text = $"{MainForm.APP_NAME} - {MainForm.VM.DbEditor.Editable.Name}";
 
-            MainForm.SuspendLayout();
-            MainForm.Controls.Add(_dbEditorView);
-            MainForm.Controls.SetChildIndex(_dbEditorView, 0);
-            _dbEditorView.Initialize(MainForm.VM.DbEditor);
-            MainForm.ResumeLayout();
-
             //_projectView.ActiveContentChanged += new EventHandler(ProjectView_ActiveContentChanged);
 
-            _dbEditorView.ShowDatabaseView();
+            MainForm.EditorView.ShowDatabaseView();
 
         }
 

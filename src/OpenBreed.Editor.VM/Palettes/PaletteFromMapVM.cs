@@ -5,8 +5,10 @@ using OpenBreed.Common.Maps;
 using OpenBreed.Common.Maps.Blocks;
 using OpenBreed.Common.Palettes;
 using OpenBreed.Common.XmlDatabase.Items.Assets;
+using OpenBreed.Editor.VM.Base;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,15 +21,36 @@ namespace OpenBreed.Editor.VM.Palettes
         #region Private Fields
 
         private string _blockName;
+        private bool _editEnabled;
 
         #endregion Private Fields
 
+        #region Public Constructors
+
+        public PaletteFromMapVM()
+        {
+            BlockNames = new BindingList<string>();
+            BlockNames.ListChanged += (s, a) => OnPropertyChanged(nameof(BlockNames));
+
+            PropertyChanged += This_PropertyChanged;
+        }
+
+        #endregion Public Constructors
+
         #region Public Properties
+
+        public BindingList<string> BlockNames { get; }
 
         public string BlockName
         {
             get { return _blockName; }
             set { SetProperty(ref _blockName, value); }
+        }
+
+        public bool EditEnabled
+        {
+            get { return _editEnabled; }
+            set { SetProperty(ref _editEnabled, value); }
         }
 
         #endregion Public Properties
@@ -50,11 +73,59 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Private Methods
 
+        private void UpdatePaletteBlocksList(IPaletteFromMapEntry source)
+        {
+            BlockNames.UpdateAfter(() =>
+            {
+                BlockNames.Clear();
+
+                var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
+
+                var map = dataProvider.Datas.GetData(source.DataRef) as MapModel;
+
+                if (map == null)
+                    return;
+
+                foreach (var paletteBlock in map.Blocks.OfType<MapPaletteBlock>())
+                    BlockNames.Add(paletteBlock.Name);
+
+            });
+        }
+
         private void FromEntry(IPaletteFromMapEntry source)
         {
+            UpdatePaletteBlocksList(source);
+
+            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
+
+            var model = dataProvider.Palettes.GetPalette(source.Id);
+
+            if (model != null)
+            {
+                Colors.UpdateAfter(() =>
+                {
+                    for (int i = 0; i < model.Data.Length; i++)
+                        Colors[i] = model.Data[i];
+                });
+
+                CurrentColorIndex = 0;
+            }
+
             DataRef = source.DataRef;
             BlockName = source.BlockName;
+        }
 
+        private void This_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(BlockName):
+                case nameof(DataRef):
+                    EditEnabled = ValidateSettings();
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void ToEntry(IPaletteFromMapEntry source)
@@ -73,7 +144,17 @@ namespace OpenBreed.Editor.VM.Palettes
             source.BlockName = BlockName;
         }
 
-        #endregion Private Methods
+        private bool ValidateSettings()
+        {
+            if (string.IsNullOrWhiteSpace(DataRef))
+                return false;
 
+            if (string.IsNullOrWhiteSpace(BlockName))
+                return false;
+
+            return true;
+        }
+
+        #endregion Private Methods
     }
 }

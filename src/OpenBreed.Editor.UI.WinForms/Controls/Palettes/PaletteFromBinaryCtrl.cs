@@ -32,23 +32,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 
         #region Public Methods
 
-        //public void Initialize(PaletteFromBinaryVM vm)
-        //{
-        //    _vm = vm ?? throw new InvalidOperationException(nameof(vm));
-
-        //    ColorEditor.Initialize(_vm);
-        //    ColorSelector.Initialize(_vm);
-
-        //    //_vm.PropertyChanged += _vm_PropertyChanged;
-        //    //ColorSelector.ColorSelected += ColorSelector_ColorSelected;
-
-        //    //ColorSelector.Colors = _vm.CurrentPalette.Colors.ToArray();
-        //}
-
-
         public void Initialize(PaletteFromBinaryVM vm)
         {
-            _vm = vm ?? throw new InvalidOperationException(nameof(vm));
+            _vm = vm ?? throw new ArgumentNullException(nameof(vm));
 
             ColorEditor.Initialize(_vm);
             ColorSelector.Initialize(_vm);
