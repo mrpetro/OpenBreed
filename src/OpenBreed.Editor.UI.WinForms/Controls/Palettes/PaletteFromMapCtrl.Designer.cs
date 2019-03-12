@@ -64,6 +64,7 @@
             // 
             this.cbxMapBlockName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxMapBlockName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxMapBlockName.FormattingEnabled = true;
             this.cbxMapBlockName.Location = new System.Drawing.Point(98, 53);
             this.cbxMapBlockName.Name = "cbxMapBlockName";

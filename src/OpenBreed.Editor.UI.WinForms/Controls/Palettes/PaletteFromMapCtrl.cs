@@ -33,13 +33,20 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 
         public void Initialize(PaletteFromMapVM vm)
         {
-            _vm = vm ?? throw new InvalidOperationException(nameof(vm));
+            _vm = vm ?? throw new ArgumentNullException(nameof(vm));
 
             ColorEditor.Initialize(_vm);
             ColorSelector.Initialize(_vm);
 
             tbxMapDataRef.DataBindings.Add(nameof(tbxMapDataRef.Text), _vm, nameof(_vm.DataRef), false, DataSourceUpdateMode.OnPropertyChanged);
+
+            cbxMapBlockName.DataSource = _vm.BlockNames;
             cbxMapBlockName.DataBindings.Add(nameof(cbxMapBlockName.Text), _vm, nameof(_vm.BlockName), false, DataSourceUpdateMode.OnPropertyChanged);
+
+            ColorEditor.DataBindings.Add(nameof(ColorEditor.Enabled), _vm, nameof(_vm.EditEnabled), false, DataSourceUpdateMode.OnPropertyChanged);
+            ColorSelector.DataBindings.Add(nameof(ColorSelector.Enabled), _vm, nameof(_vm.EditEnabled), false, DataSourceUpdateMode.OnPropertyChanged);
+
+
         }
 
         #endregion Public Methods

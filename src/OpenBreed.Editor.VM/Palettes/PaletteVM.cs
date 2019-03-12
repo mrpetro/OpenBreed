@@ -27,7 +27,20 @@ namespace OpenBreed.Editor.VM.Palettes
         public PaletteVM()
         {
             Colors = new BindingList<Color>();
+            Initialize();
+
             Colors.ListChanged += (s, a) => OnPropertyChanged(nameof(Colors));
+        }
+
+        private void Initialize()
+        {
+            Colors.UpdateAfter(() =>
+            {
+                for (int i = 0; i < 256; i++)
+                    Colors.Add(Color.FromArgb(255, i, i, i));
+            });
+
+            CurrentColorIndex = 0;
         }
 
         #endregion Public Constructors
