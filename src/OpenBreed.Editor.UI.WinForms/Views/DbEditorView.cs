@@ -55,12 +55,6 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         private DbTablesEditorView _databaseView = new DbTablesEditorView();
 
         private DeserializeDockContent _deserializeDockContent;
-        private LevelBodyEditorView _levelBodyEditorView = new LevelBodyEditorView();
-        private LevelPalettesView _levelPalettesView = new LevelPalettesView();
-        //private MapPropertiesView _mapPropertiesView = new MapPropertiesView();
-
-        //private SpriteSetsView _spriteSetsView = new SpriteSetsView();
-        //private LevelTileSelectorView _levelTileSelectorView = new LevelTileSelectorView();
 
         private bool _saveLayout = true;
         private DbEditorVM _vm;
@@ -96,39 +90,11 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _databaseView = null;
         }
 
-        public void CloseLevelBodyView()
-        {
-            if (_levelBodyEditorView == null)
-                return;
-            _levelBodyEditorView.Close();
-            _levelBodyEditorView = null;
-        }
-
-        public void CloseLevelPalettesView()
-        {
-            if (_levelPalettesView == null)
-                return;
-
-            _levelPalettesView.Close();
-            _levelPalettesView = null;
-        }
-
-        public void CloseLevelTileSelectorView()
-        {
-            //if (_levelTileSelectorView == null)
-            //    return;
-            //_levelTileSelectorView.Close();
-            //_levelTileSelectorView = null;
-        }
-
         public void HideAllViews()
         {
             _vm.CloseAllEditors();
 
             CloseDatabaseView();
-            CloseLevelTileSelectorView();
-            CloseLevelPalettesView();
-            CloseLevelBodyView();
         }
 
         public void Initialize(DbEditorVM vm)

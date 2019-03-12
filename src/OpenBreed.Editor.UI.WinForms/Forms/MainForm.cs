@@ -13,39 +13,34 @@ using OpenBreed.Common;
 using OpenBreed.Editor.UI.WinForms.Forms.States;
 using OpenBreed.Editor.VM.Logging;
 using OpenBreed.Editor.UI.WinForms.Views;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace OpenBreed.Editor.UI.WinForms.Forms
 {
     public partial class MainForm : Form
     {
 
-        internal ToolStripMenuItem ViewToggleLoggerToolStripMenuItem = new ToolStripMenuItem();
-
-        private FormStateDatabaseOpened DatabaseOpenedState;
-        private FormStateInitial InitialState;
-
         #region Public Fields
 
         public const string APP_NAME = "Open Breed Map Editor";
 
-        private FormState _state;
-
-        internal FormState State
-        {
-            get { return _state; }
-            set
-            {
-                if (_state != null)
-                    _state.Cleanup();
-
-                _state = value;
-                _state.Setup();
-            }
-        }
-
         #endregion Public Fields
 
-        //private LogConsoleView m_LogConsoleView = null;
+        #region Internal Fields
+
+        internal ToolStripMenuItem ViewToggleLoggerToolStripMenuItem = new ToolStripMenuItem();
+
+        #endregion Internal Fields
+
+        #region Private Fields
+
+        private LogConsoleView _logConsoleView = null;
+        private LoggerView _loggerView;
+        private FormState _state;
+        private FormStateDatabaseOpened DatabaseOpenedState;
+        private FormStateInitial InitialState;
+
+        #endregion Private Fields
 
         #region Public Constructors
 
@@ -63,12 +58,6 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             ViewToolStripMenuItem.DropDownItems.Add(ViewToggleLoggerToolStripMenuItem);
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (!VM.TryExit())
-                e.Cancel = true;
-        }
-
         #endregion Public Constructors
 
         #region Public Properties
@@ -77,51 +66,35 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
         #endregion Public Properties
 
+        #region Internal Properties
+
+        internal FormState State
+        {
+            get { return _state; }
+            set
+            {
+                if (_state != null)
+                    _state.Cleanup();
+
+                _state = value;
+                _state.Setup();
+            }
+        }
+
+        #endregion Internal Properties
+
         #region Public Methods
 
         public void Initialize(EditorVM vm)
         {
-            if (vm == null)
-                throw new ArgumentNullException(nameof(vm));
+            VM = vm ?? throw new ArgumentNullException(nameof(vm));
 
-            VM = vm;
+            EditorView.Initialize(VM.DbEditor);
 
             VM.DbEditor.PropertyChanged += VM_PropertyChanged;
 
             ViewToggleLoggerToolStripMenuItem.Click += (s, a) => VM.ShowLogger();
             VM.ShowLoggerAction = OnShowLogger;
-        }
-
-        private LoggerView _loggerView;
-
-        private void OnShowLogger(LoggerVM vm)
-        {
-            if (_loggerView == null)
-            {
-                _loggerView = new LoggerView();
-                _loggerView.Initialize(vm);
-            }
-        }
-
-
-        private void VM_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(VM.DbEditor.Editable):
-                    OnDatabaseChanged();
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void OnDatabaseChanged()
-        {
-            if (VM.DbEditor.Editable != null)
-                State = DatabaseOpenedState;
-            else
-                State = InitialState;
         }
 
         #endregion Public Methods
@@ -146,10 +119,33 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
         private void InitLogConsole()
         {
-            //m_LogConsoleView = new LogConsoleView();
-            //m_LogConsoleView.VisibleChanged += (s, a) => ChangeCheckedState(LogConsoleShowToolStripMenuItem, s as Control);
-            //m_LogConsoleView.Show(DockPanel, DockState.Float);
+            _logConsoleView = new LogConsoleView();
+            _logConsoleView.VisibleChanged += (s, a) => ChangeCheckedState(LogConsoleShowToolStripMenuItem, s as Control);
+            _logConsoleView.Show(EditorView, DockState.Float);
         }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!VM.TryExit())
+                e.Cancel = true;
+        }
+        private void OnDatabaseChanged()
+        {
+            if (VM.DbEditor.Editable != null)
+                State = DatabaseOpenedState;
+            else
+                State = InitialState;
+        }
+
+        private void OnShowLogger(LoggerVM vm)
+        {
+            if (_loggerView == null)
+            {
+                _loggerView = new LoggerView();
+                _loggerView.Initialize(vm);
+            }
+        }
+
 
         private void OpenABTAPasswordGenerator()
         {
@@ -186,19 +182,30 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
         private void ToggleLogConsole(bool toogle)
         {
-            //if (toogle)
-            //{
-            //    if (m_LogConsoleView == null)
-            //        InitLogConsole();
-            //    else
-            //        m_LogConsoleView.Show(DockPanel);
-            //}
-            //else
-            //    m_LogConsoleView.Hide();
+            if (toogle)
+            {
+                if (_logConsoleView == null)
+                    InitLogConsole();
+                else
+                    _logConsoleView.Show(EditorView);
+            }
+            else
+                _logConsoleView.Hide();
+        }
+
+        private void VM_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(VM.DbEditor.Editable):
+                    OnDatabaseChanged();
+                    break;
+                default:
+                    break;
+            }
         }
 
         #endregion Private Methods
-
     }
 
 }
