@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Formats;
 
 namespace OpenBreed.Common.Assets
 {
@@ -18,8 +19,8 @@ namespace OpenBreed.Common.Assets
 
         #region Public Constructors
 
-        public FileAsset(AssetsDataProvider manager, string name, string filePath) :
-            base(manager, name)
+        public FileAsset(AssetsDataProvider manager, IDataFormatType format, string name, string filePath) :
+            base(manager, format, name)
         {
             FilePath = filePath;
         }

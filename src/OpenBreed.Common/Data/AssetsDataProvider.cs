@@ -120,12 +120,12 @@ namespace OpenBreed.Common.Data
 
         private AssetBase CreateEPFArchiveAsset(IEPFArchiveAssetEntry asset)
         {
-            return new EPFArchiveFileAsset(this, asset.Id, asset.ArchivePath, asset.EntryName);
+            return new EPFArchiveFileAsset(this, null, asset.Id, asset.ArchivePath, asset.EntryName);
         }
 
         private AssetBase CreateFileAsset(IFileAssetEntry asset)
         {
-            return new FileAsset(this, asset.Id, asset.FilePath);
+            return new FileAsset(this, null, asset.Id, asset.FilePath);
         }
 
         #endregion Private Methods

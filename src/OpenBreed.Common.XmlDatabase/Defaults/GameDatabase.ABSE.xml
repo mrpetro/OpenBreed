@@ -114,102 +114,62 @@
         </Data>
         <Data Id="Datas.Palette.LA">
           <AssetRef>Assets.PARTF</AssetRef>
-          <Format Name="PALETTE">
-            <Parameters>
-              <Parameter Name="MODE" Type="System.String">16BIT</Parameter>
-              <Parameter Name="COLORS_NO" Type="System.Int32">32</Parameter>
-              <Parameter Name="DATA_START" Type="System.Int32">141656</Parameter>
-            </Parameters>
+          <Format Name="BINARY">
+            <Parameters />
           </Format>
         </Data>
         <Data Id="Datas.Palette.LE">
           <AssetRef>Assets.PARTF</AssetRef>
-          <Format Name="PALETTE">
-            <Parameters>
-              <Parameter Name="MODE" Type="System.String">16BIT</Parameter>
-              <Parameter Name="COLORS_NO" Type="System.Int32">32</Parameter>
-              <Parameter Name="DATA_START" Type="System.Int32">141720</Parameter>
-            </Parameters>
+          <Format Name="BINARY">
+            <Parameters />
           </Format>
         </Data>
         <Data Id="Datas.Palette.LF">
           <AssetRef>Assets.PARTF</AssetRef>
-          <Format Name="PALETTE">
-            <Parameters>
-              <Parameter Name="MODE" Type="System.String">16BIT</Parameter>
-              <Parameter Name="COLORS_NO" Type="System.Int32">32</Parameter>
-              <Parameter Name="DATA_START" Type="System.Int32">141784</Parameter>
-            </Parameters>
+          <Format Name="BINARY">
+            <Parameters />
           </Format>
         </Data>
         <Data Id="Datas.Palette.LC">
           <AssetRef>Assets.PARTF</AssetRef>
-          <Format Name="PALETTE">
-            <Parameters>
-              <Parameter Name="MODE" Type="System.String">16BIT</Parameter>
-              <Parameter Name="COLORS_NO" Type="System.Int32">32</Parameter>
-              <Parameter Name="DATA_START" Type="System.Int32">141848</Parameter>
-            </Parameters>
+          <Format Name="BINARY">
+            <Parameters />
           </Format>
         </Data>
         <Data Id="Datas.Palette.LB">
           <AssetRef>Assets.PARTF</AssetRef>
-          <Format Name="PALETTE">
-            <Parameters>
-              <Parameter Name="MODE" Type="System.String">16BIT</Parameter>
-              <Parameter Name="COLORS_NO" Type="System.Int32">32</Parameter>
-              <Parameter Name="DATA_START" Type="System.Int32">141912</Parameter>
-            </Parameters>
+          <Format Name="BINARY">
+            <Parameters />
           </Format>
         </Data>
         <Data Id="Datas.Palette.LD">
           <AssetRef>Assets.PARTF</AssetRef>
-          <Format Name="PALETTE">
-            <Parameters>
-              <Parameter Name="MODE" Type="System.String">16BIT</Parameter>
-              <Parameter Name="COLORS_NO" Type="System.Int32">32</Parameter>
-              <Parameter Name="DATA_START" Type="System.Int32">141976</Parameter>
-            </Parameters>
+          <Format Name="BINARY">
+            <Parameters />
           </Format>
         </Data>
         <Data Id="Datas.Palette.LE">
           <AssetRef>Assets.PARTF</AssetRef>
-          <Format Name="PALETTE">
-            <Parameters>
-              <Parameter Name="MODE" Type="System.String">16BIT</Parameter>
-              <Parameter Name="COLORS_NO" Type="System.Int32">32</Parameter>
-              <Parameter Name="DATA_START" Type="System.Int32">142040</Parameter>
-            </Parameters>
+          <Format Name="BINARY">
+            <Parameters />
           </Format>
         </Data>
         <Data Id="Datas.Palette.L7">
           <AssetRef>Assets.PARTF</AssetRef>
-          <Format Name="PALETTE">
-            <Parameters>
-              <Parameter Name="MODE" Type="System.String">16BIT</Parameter>
-              <Parameter Name="COLORS_NO" Type="System.Int32">32</Parameter>
-              <Parameter Name="DATA_START" Type="System.Int32">142104</Parameter>
-            </Parameters>
+          <Format Name="BINARY">
+            <Parameters />
           </Format>
         </Data>
         <Data Id="Datas.Palette.L8">
           <AssetRef>Assets.PARTF</AssetRef>
-          <Format Name="PALETTE">
-            <Parameters>
-              <Parameter Name="MODE" Type="System.String">16BIT</Parameter>
-              <Parameter Name="COLORS_NO" Type="System.Int32">32</Parameter>
-              <Parameter Name="DATA_START" Type="System.Int32">142168</Parameter>
-            </Parameters>
+          <Format Name="BINARY">
+            <Parameters />
           </Format>
         </Data>
         <Data Id="Datas.Palette.L9">
           <AssetRef>Assets.PARTF</AssetRef>
-          <Format Name="PALETTE">
-            <Parameters>
-              <Parameter Name="MODE" Type="System.String">16BIT</Parameter>
-              <Parameter Name="COLORS_NO" Type="System.Int32">32</Parameter>
-              <Parameter Name="DATA_START" Type="System.Int32">142232</Parameter>
-            </Parameters>
+          <Format Name="BINARY">
+            <Parameters />
           </Format>
         </Data>
         <Data Id="Datas.Images.LP01">
@@ -493,34 +453,64 @@
     <Palettes>
       <Items>
         <PaletteFromBinary Id="Palettes.LA">
-            <DataRef>Datas.Palette.LA</DataRef>  
+          <DataRef>Datas.Palette.LA</DataRef>
+          <Mode>COLOR_16BIT</Mode>
+          <ColorsNo>32</ColorsNo>
+          <DataStart>141656</DataStart>
         </PaletteFromBinary>
         <PaletteFromBinary Id="Palettes.LE">
-            <DataRef>Datas.Palette.LE</DataRef>
+          <DataRef>Datas.Palette.LE</DataRef>
+          <Mode>COLOR_16BIT</Mode>
+          <ColorsNo>32</ColorsNo>
+          <DataStart>141720</DataStart>
         </PaletteFromBinary>
         <PaletteFromBinary Id="Palettes.LF">
-            <DataRef>Datas.Palette.LF</DataRef>
+          <DataRef>Datas.Palette.LF</DataRef>
+          <Mode>COLOR_16BIT</Mode>
+          <ColorsNo>32</ColorsNo>
+          <DataStart>141784</DataStart>
         </PaletteFromBinary>
         <PaletteFromBinary Id="Palettes.LC">
-            <DataRef>Datas.Palette.LC</DataRef>
+          <DataRef>Datas.Palette.LC</DataRef>
+          <Mode>COLOR_16BIT</Mode>
+          <ColorsNo>32</ColorsNo>
+          <DataStart>141848</DataStart>
         </PaletteFromBinary>
         <PaletteFromBinary Id="Palettes.LB">
-            <DataRef>Datas.Palette.LB</DataRef>
+          <DataRef>Datas.Palette.LB</DataRef>
+          <Mode>COLOR_16BIT</Mode>
+          <ColorsNo>32</ColorsNo>
+          <DataStart>141912</DataStart>
         </PaletteFromBinary>
         <PaletteFromBinary Id="Palettes.LD">
-            <DataRef>Datas.Palette.LD</DataRef>
+          <DataRef>Datas.Palette.LD</DataRef>
+          <Mode>COLOR_16BIT</Mode>
+          <ColorsNo>32</ColorsNo>
+          <DataStart>141976</DataStart>
         </PaletteFromBinary>
         <PaletteFromBinary Id="Palettes.LE">
-            <DataRef>Datas.Palette.LE</DataRef>
+          <DataRef>Datas.Palette.LE</DataRef>
+          <Mode>COLOR_16BIT</Mode>
+          <ColorsNo>32</ColorsNo>
+          <DataStart>142040</DataStart>
         </PaletteFromBinary>
         <PaletteFromBinary Id="Palettes.L7">
-            <DataRef>Datas.Palette.L7</DataRef>
+          <DataRef>Datas.Palette.L7</DataRef>
+          <Mode>COLOR_16BIT</Mode>
+          <ColorsNo>32</ColorsNo>
+          <DataStart>142104</DataStart>
         </PaletteFromBinary>
         <PaletteFromBinary Id="Palettes.L8">
-            <DataRef>Datas.Palette.L8</DataRef>
+          <DataRef>Datas.Palette.L8</DataRef>
+          <Mode>COLOR_16BIT</Mode>
+          <ColorsNo>32</ColorsNo>
+          <DataStart>142168</DataStart>
         </PaletteFromBinary>
         <PaletteFromBinary Id="Palettes.L9">
-            <DataRef>Datas.Palette.L9</DataRef>
+          <DataRef>Datas.Palette.L9</DataRef>
+          <Mode>COLOR_16BIT</Mode>
+          <ColorsNo>32</ColorsNo>
+          <DataStart>142232</DataStart>
         </PaletteFromBinary>
       </Items>
     </Palettes>

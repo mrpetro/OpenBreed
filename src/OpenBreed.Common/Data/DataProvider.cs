@@ -52,7 +52,7 @@ namespace OpenBreed.Common.Data
             FormatMan.RegisterFormat("ABTASPR", new ABTASPRFormat());
             FormatMan.RegisterFormat("ACBM_TILE_SET", new ACBMTileSetFormat());
             FormatMan.RegisterFormat("ACBM_IMAGE", new ACBMImageFormat());
-            FormatMan.RegisterFormat("PALETTE", new PaletteFormat());
+            FormatMan.RegisterFormat("BINARY", new BinaryFormat());
             FormatMan.RegisterFormat("PCM_SOUND", new PCMSoundFormat());
         }
 

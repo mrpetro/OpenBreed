@@ -10,25 +10,27 @@ namespace OpenBreed.Common.Assets
     {
         #region Protected Fields
 
-        protected readonly AssetsDataProvider _repository;
+        protected readonly AssetsDataProvider _manager;
 
         #endregion Protected Fields
 
         #region Private Fields
 
         private Stream _stream;
+        private IDataFormatType _format;
 
         #endregion Private Fields
 
         #region Protected Constructors
 
-        protected AssetBase(AssetsDataProvider manager, string name)
+        protected AssetBase(AssetsDataProvider manager, IDataFormatType format, string name)
         {
             if (manager == null)
                 throw new ArgumentNullException("Manager");
 
-            _repository = manager;
+            _manager = manager;
             Name = name;
+            _format = format;
         }
 
         #endregion Protected Constructors
@@ -67,7 +69,7 @@ namespace OpenBreed.Common.Assets
 
         public virtual Stream Open()
         {
-            _repository.LockSource(this);
+            _manager.LockSource(this);
             return CreateStream();
         }
 
@@ -82,7 +84,7 @@ namespace OpenBreed.Common.Assets
 
         protected virtual void Close()
         {
-            _repository.ReleaseSource(this);
+            _manager.ReleaseSource(this);
         }
         protected abstract Stream CreateStream();
 

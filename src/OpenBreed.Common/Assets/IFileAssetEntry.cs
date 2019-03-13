@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenBreed.Common.Formats;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,12 @@ namespace OpenBreed.Common.Assets
 {
     public interface IFileAssetEntry : IAssetEntry
     {
+        #region Public Properties
+
         string FilePath { get; set; }
+
+        IFormatEntry Format { get; }
+
+        #endregion Public Properties
     }
 }
