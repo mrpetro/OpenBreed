@@ -92,13 +92,13 @@ namespace OpenBreed.Editor.VM.Palettes
             });
         }
 
-        private void FromEntry(IPaletteFromMapEntry source)
+        private void FromEntry(IPaletteFromMapEntry entry)
         {
-            UpdatePaletteBlocksList(source);
+            UpdatePaletteBlocksList(entry);
 
             var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
 
-            var model = dataProvider.Palettes.GetPalette(source.Id);
+            var model = dataProvider.Palettes.GetPalette(entry.Id);
 
             if (model != null)
             {
@@ -111,8 +111,8 @@ namespace OpenBreed.Editor.VM.Palettes
                 CurrentColorIndex = 0;
             }
 
-            DataRef = source.DataRef;
-            BlockName = source.BlockName;
+            DataRef = entry.DataRef;
+            BlockName = entry.BlockName;
         }
 
         private void This_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

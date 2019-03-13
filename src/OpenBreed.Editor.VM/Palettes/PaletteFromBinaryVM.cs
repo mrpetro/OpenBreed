@@ -1,7 +1,9 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Assets;
+using OpenBreed.Common.Data;
 using OpenBreed.Common.Palettes;
 using OpenBreed.Common.XmlDatabase.Items.Assets;
+using OpenBreed.Editor.VM.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +44,21 @@ namespace OpenBreed.Editor.VM.Palettes
 
         private void FromEntry(IPaletteFromBinaryEntry entry)
         {
+            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
+
+            var model = dataProvider.Palettes.GetPalette(entry.Id);
+
+            if (model != null)
+            {
+                Colors.UpdateAfter(() =>
+                {
+                    for (int i = 0; i < model.Data.Length; i++)
+                        Colors[i] = model.Data[i];
+                });
+
+                CurrentColorIndex = 0;
+            }
+
             DataRef = entry.DataRef;
         }
 
