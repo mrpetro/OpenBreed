@@ -36,7 +36,7 @@ namespace OpenBreed.Common.Data
             if (entry.DataRef == null)
                 return null;
 
-            return Provider.Datas.GetData(entry.DataRef) as SpriteSetModel;
+            return Provider.GetData(entry.DataRef) as SpriteSetModel;
         }
 
         #endregion Public Methods

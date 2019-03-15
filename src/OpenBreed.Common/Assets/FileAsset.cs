@@ -19,8 +19,8 @@ namespace OpenBreed.Common.Assets
 
         #region Public Constructors
 
-        public FileAsset(AssetsDataProvider manager, IDataFormatType format, string name, string filePath) :
-            base(manager, format, name)
+        public FileAsset(AssetsDataProvider manager, string id, IDataFormatType formatType, List<FormatParameter> formatParameters, string filePath) :
+            base(manager, id, formatType, formatParameters)
         {
             FilePath = filePath;
         }

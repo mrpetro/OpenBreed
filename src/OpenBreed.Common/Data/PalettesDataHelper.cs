@@ -31,7 +31,7 @@ namespace OpenBreed.Common.Data
 
         public static PaletteModel FromMapModel(DataProvider provider, IPaletteFromMapEntry paletteData)
         {
-            var mapModel = provider.Datas.GetData(paletteData.DataRef) as MapModel;
+            var mapModel = provider.GetData(paletteData.DataRef) as MapModel;
 
             if (mapModel == null)
                 return null;
@@ -49,7 +49,7 @@ namespace OpenBreed.Common.Data
             if (paletteData.DataRef == null)
                 return null;
 
-            var binaryModel = provider.Datas.GetData(paletteData.DataRef) as BinaryModel;
+            var binaryModel = provider.GetData(paletteData.DataRef) as BinaryModel;
 
             if (binaryModel == null)
                 return null;

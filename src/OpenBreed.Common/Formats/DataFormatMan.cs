@@ -11,6 +11,7 @@ namespace OpenBreed.Common.Formats
 {
     public class DataFormatMan
     {
+
         #region Private Fields
 
         private readonly Dictionary<string, IDataFormatType> _formats = new Dictionary<string, IDataFormatType>();
@@ -19,7 +20,6 @@ namespace OpenBreed.Common.Formats
 
         #region Public Methods
 
-
         public DataFormat Create(AssetBase asset, IFormatEntry format)
         {
             var formatType = GetFormatType(format.Name);
@@ -27,24 +27,6 @@ namespace OpenBreed.Common.Formats
                 throw new Exception($"Unknown format {format.Name}");
 
             return new DataFormat(formatType, asset, format.Parameters);
-        }
-
-        public object Load(AssetBase asset, IFormatEntry format)
-        {
-            var formatType = GetFormatType(format.Name);
-            if (formatType == null)
-                throw new Exception($"Unknown format {format.Name}");
-
-            return asset.Load(formatType, format.Parameters);
-        }
-
-        public void Save(AssetBase asset, object data, IFormatEntry format)
-        {
-            var formatType = GetFormatType(format.Name);
-            if (formatType == null)
-                throw new Exception($"Unknown format {format.Name}");
-
-            asset.Save(data, formatType, format.Parameters);
         }
 
         public void RegisterFormat(string formatAlias, IDataFormatType format)
@@ -57,9 +39,9 @@ namespace OpenBreed.Common.Formats
 
         #endregion Public Methods
 
-        #region Private Methods
+        #region Internal Methods
 
-        private IDataFormatType GetFormatType(string formatType)
+        internal IDataFormatType GetFormatType(string formatType)
         {
             IDataFormatType sourceMan = null;
             if (_formats.TryGetValue(formatType, out sourceMan))
@@ -68,6 +50,7 @@ namespace OpenBreed.Common.Formats
                 throw new InvalidOperationException("Unknown format: " + formatType);
         }
 
-        #endregion Private Methods
+        #endregion Internal Methods
+
     }
 }

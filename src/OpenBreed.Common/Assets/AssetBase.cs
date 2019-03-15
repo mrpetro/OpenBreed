@@ -8,6 +8,7 @@ namespace OpenBreed.Common.Assets
 {
     public abstract class AssetBase : IDisposable
     {
+
         #region Protected Fields
 
         protected readonly AssetsDataProvider _manager;
@@ -16,28 +17,30 @@ namespace OpenBreed.Common.Assets
 
         #region Private Fields
 
+        private List<FormatParameter> _parameters;
+        private IDataFormatType _formatType;
         private Stream _stream;
-        private IDataFormatType _format;
 
         #endregion Private Fields
 
         #region Protected Constructors
 
-        protected AssetBase(AssetsDataProvider manager, IDataFormatType format, string name)
+        protected AssetBase(AssetsDataProvider manager, string id, IDataFormatType formatType, List<FormatParameter> parameters)
         {
             if (manager == null)
-                throw new ArgumentNullException("Manager");
+                throw new ArgumentNullException(nameof(manager));
 
             _manager = manager;
-            Name = name;
-            _format = format;
+            Id = id;
+            _formatType = formatType;
+            _parameters = parameters;
         }
 
         #endregion Protected Constructors
 
         #region Public Properties
 
-        public string Name { get; }
+        public string Id { get; }
 
         public Stream Stream
         {
@@ -62,9 +65,9 @@ namespace OpenBreed.Common.Assets
             }
         }
 
-        public object Load(IDataFormatType format, List<FormatParameter> parameters)
+        public object Load()
         {
-            return format.Load(this, parameters);
+            return _formatType.Load(this, _parameters);
         }
 
         public virtual Stream Open()
@@ -73,9 +76,9 @@ namespace OpenBreed.Common.Assets
             return CreateStream();
         }
 
-        public void Save(object model, IDataFormatType format, List<FormatParameter> parameters)
+        public void Save(object model)
         {
-            format.Save(this, model, parameters);
+            _formatType.Save(this, model, _parameters);
         }
 
         #endregion Public Methods

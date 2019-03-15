@@ -21,7 +21,7 @@ namespace OpenBreed.Common.Formats
 
         public object Load()
         {
-            return _asset.Load(_type, _parameters);
+            return _asset.Load();
         }
     }
 }

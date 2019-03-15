@@ -87,12 +87,12 @@ namespace OpenBreed.Common.Data
 
         internal void LockSource(AssetBase source)
         {
-            _openedAssets.Add(source.Name, source);
+            _openedAssets.Add(source.Id, source);
         }
 
         internal void ReleaseSource(AssetBase source)
         {
-            _openedAssets.Remove(source.Name);
+            _openedAssets.Remove(source.Id);
         }
 
         internal void Save()
@@ -120,12 +120,20 @@ namespace OpenBreed.Common.Data
 
         private AssetBase CreateEPFArchiveAsset(IEPFArchiveAssetEntry asset)
         {
-            return new EPFArchiveFileAsset(this, null, asset.Id, asset.ArchivePath, asset.EntryName);
+            var formatType = DataProvider.FormatMan.GetFormatType(asset.Format.Name);
+            if (formatType == null)
+                throw new Exception($"Unknown format {asset.Format.Name}");
+
+            return new EPFArchiveFileAsset(this, asset.Id, formatType, asset.Format.Parameters, asset.ArchivePath, asset.EntryName);
         }
 
         private AssetBase CreateFileAsset(IFileAssetEntry asset)
         {
-            return new FileAsset(this, null, asset.Id, asset.FilePath);
+            var formatType = DataProvider.FormatMan.GetFormatType(asset.Format.Name);
+            if (formatType == null)
+                throw new Exception($"Unknown format {asset.Format.Name}");
+
+            return new FileAsset(this, asset.Id, formatType, asset.Format.Parameters, asset.FilePath);
         }
 
         #endregion Private Methods

@@ -20,8 +20,8 @@ namespace OpenBreed.Common.Assets
 
         #region Public Constructors
 
-        public EPFArchiveFileAsset(AssetsDataProvider manager, IDataFormatType format, string name, string archivePath, string entryName) :
-            base(manager, format, name)
+        public EPFArchiveFileAsset(AssetsDataProvider manager, string id, IDataFormatType formatType, List<FormatParameter> formatParameters, string archivePath, string entryName) :
+            base(manager, id, formatType, formatParameters)
         {
             ArchivePath = archivePath;
             EntryName = entryName;
@@ -41,7 +41,7 @@ namespace OpenBreed.Common.Assets
         protected override void Close()
         {
             if (_entry == null)
-                throw new InvalidOperationException($"Entry {Name} not opened.");
+                throw new InvalidOperationException($"Entry {Id} not opened.");
 
             _entry.Dispose();
 
@@ -69,5 +69,6 @@ namespace OpenBreed.Common.Assets
         }
 
         #endregion Private Methods
+
     }
 }

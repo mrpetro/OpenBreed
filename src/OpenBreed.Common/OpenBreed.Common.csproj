@@ -53,7 +53,6 @@
     <Compile Include="Configs\IConfigCtrl.cs" />
     <Compile Include="Data2\IDataEntry.cs" />
     <Compile Include="Data\ActionSetsDataProvider.cs" />
-    <Compile Include="Data\Data2DataProvider.cs" />
     <Compile Include="Data\DataProvider.cs" />
     <Compile Include="Data\AssetsDataProvider.cs" />
     <Compile Include="Data\ImagesDataProvider.cs" />

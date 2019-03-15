@@ -3,176 +3,115 @@
   <Tables>
     <Assets>
       <Items>
-        <FileAsset Id="Assets.L0MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L0MA" />
-        <FileAsset Id="Assets.L1MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L1MA" />
-        <FileAsset Id="Assets.L2MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L2MA" />
-        <FileAsset Id="Assets.L3MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L3MA" />
-        <FileAsset Id="Assets.L4MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L4MA" />
-        <FileAsset Id="Assets.L5MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L5MA" />
-        <FileAsset Id="Assets.L6MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L6MA" />
-        <FileAsset Id="Assets.L7MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L7MA" />
-        <FileAsset Id="Assets.L8MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L8MA" />
-        <FileAsset Id="Assets.L9MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L9MA" />
-        <FileAsset Id="Assets.LAMA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LAMA" />
-        <FileAsset Id="Assets.LBMA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LBMA" />
-        <FileAsset Id="Assets.LABM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LABM" />
-        <FileAsset Id="Assets.LBBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LBBM" />
-        <FileAsset Id="Assets.LCBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LCBM" />
-        <FileAsset Id="Assets.LDBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LDBM" />
-        <FileAsset Id="Assets.LEBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LEBM" />
-        <FileAsset Id="Assets.LFBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LFBM" />
-        <FileAsset Id="Assets.LP01" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP01" />
-        <FileAsset Id="Assets.LP01B" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP01B" />
-        <FileAsset Id="Assets.LP02" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP02" />
-        <FileAsset Id="Assets.LP03" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP03" />
-        <FileAsset Id="Assets.LP04" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP04" />
-        <FileAsset Id="Assets.LP05" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP05" />
-        <FileAsset Id="Assets.LP06" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP06" />
-        <FileAsset Id="Assets.LP07" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP07" />
-        <FileAsset Id="Assets.L0AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L0AN" />
-        <FileAsset Id="Assets.L1AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L1AN" />
-        <FileAsset Id="Assets.L2AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L2AN" />
-        <FileAsset Id="Assets.L3AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L3AN" />
-        <FileAsset Id="Assets.L4AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L4AN" />
-        <FileAsset Id="Assets.L5AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L5AN" />
-        <FileAsset Id="Assets.PARTF" FilePath="%Cfg.Options.ABSE.GameFolderPath%\PARTF" />
-      </Items>
-    </Assets>
-    <Datas>
-      <Items>
-        <Data Id="Datas.MAP.L0MA">
-          <AssetRef>Assets.L0MA</AssetRef>
+        <FileAsset Id="Assets.L0MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L0MA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </Data>
-        <Data Id="Datas.MAP.L1MA">
-          <AssetRef>Assets.L1MA</AssetRef>
+        </FileAsset>
+        <FileAsset Id="Assets.L1MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L1MA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </Data>
-        <Data Id="Datas.MAP.L2MA">
-          <AssetRef>Assets.L2MA</AssetRef>
+        </FileAsset>
+        <FileAsset Id="Assets.L2MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L2MA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </Data>
-        <Data Id="Datas.MAP.L3MA">
-          <AssetRef>Assets.L3MA</AssetRef>
+        </FileAsset>
+        <FileAsset Id="Assets.L3MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L3MA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </Data>
-        <Data Id="Datas.MAP.L4MA">
-          <AssetRef>Assets.L4MA</AssetRef>
+        </FileAsset>
+        <FileAsset Id="Assets.L4MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L4MA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </Data>
-        <Data Id="Datas.MAP.L5MA">
-          <AssetRef>Assets.L5MA</AssetRef>
+        </FileAsset>
+        <FileAsset Id="Assets.L5MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L5MA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </Data>
-        <Data Id="Datas.MAP.L6MA">
-          <AssetRef>Assets.L6MA</AssetRef>
+        </FileAsset>
+        <FileAsset Id="Assets.L6MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L6MA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </Data>
-        <Data Id="Datas.MAP.L7MA">
-          <AssetRef>Assets.L7MA</AssetRef>
+        </FileAsset>
+        <FileAsset Id="Assets.L7MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L7MA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </Data>
-        <Data Id="Datas.MAP.L8MA">
-          <AssetRef>Assets.L8MA</AssetRef>
+        </FileAsset>
+        <FileAsset Id="Assets.L8MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L8MA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </Data>
-        <Data Id="Datas.MAP.L9MA">
-          <AssetRef>Assets.L9MA</AssetRef>
+        </FileAsset>
+        <FileAsset Id="Assets.L9MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L9MA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </Data>
-        <Data Id="Datas.MAP.LAMA">
-          <AssetRef>Assets.LAMA</AssetRef>
+        </FileAsset>
+        <FileAsset Id="Assets.LAMA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LAMA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </Data>
-        <Data Id="Datas.MAP.LBMA">
-          <AssetRef>Assets.LBMA</AssetRef>
+        </FileAsset>
+        <FileAsset Id="Assets.LBMA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LBMA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </Data>
-        <Data Id="Datas.Palette.LA">
-          <AssetRef>Assets.PARTF</AssetRef>
-          <Format Name="BINARY">
-            <Parameters />
+        </FileAsset>
+        <FileAsset Id="Assets.LABM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LABM">
+          <Format Name="ACBM_TILE_SET">
+            <Parameters>
+              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
+            </Parameters>
           </Format>
-        </Data>
-        <Data Id="Datas.Palette.LE">
-          <AssetRef>Assets.PARTF</AssetRef>
-          <Format Name="BINARY">
-            <Parameters />
+        </FileAsset>
+        <FileAsset Id="Assets.LBBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LBBM">
+          <Format Name="ACBM_TILE_SET">
+            <Parameters>
+              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
+            </Parameters>
           </Format>
-        </Data>
-        <Data Id="Datas.Palette.LF">
-          <AssetRef>Assets.PARTF</AssetRef>
-          <Format Name="BINARY">
-            <Parameters />
+        </FileAsset>
+        <FileAsset Id="Assets.LCBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LCBM">
+          <Format Name="ACBM_TILE_SET">
+            <Parameters>
+              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
+            </Parameters>
           </Format>
-        </Data>
-        <Data Id="Datas.Palette.LC">
-          <AssetRef>Assets.PARTF</AssetRef>
-          <Format Name="BINARY">
-            <Parameters />
+        </FileAsset>
+        <FileAsset Id="Assets.LDBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LDBM">
+          <Format Name="ACBM_TILE_SET">
+            <Parameters>
+              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
+            </Parameters>
           </Format>
-        </Data>
-        <Data Id="Datas.Palette.LB">
-          <AssetRef>Assets.PARTF</AssetRef>
-          <Format Name="BINARY">
-            <Parameters />
+        </FileAsset>
+        <FileAsset Id="Assets.LEBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LEBM">
+          <Format Name="ACBM_TILE_SET">
+            <Parameters>
+              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
+            </Parameters>
           </Format>
-        </Data>
-        <Data Id="Datas.Palette.LD">
-          <AssetRef>Assets.PARTF</AssetRef>
-          <Format Name="BINARY">
-            <Parameters />
+        </FileAsset>
+        <FileAsset Id="Assets.LFBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LFBM">
+          <Format Name="ACBM_TILE_SET">
+            <Parameters>
+              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
+              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
+            </Parameters>
           </Format>
-        </Data>
-        <Data Id="Datas.Palette.LE">
-          <AssetRef>Assets.PARTF</AssetRef>
-          <Format Name="BINARY">
-            <Parameters />
-          </Format>
-        </Data>
-        <Data Id="Datas.Palette.L7">
-          <AssetRef>Assets.PARTF</AssetRef>
-          <Format Name="BINARY">
-            <Parameters />
-          </Format>
-        </Data>
-        <Data Id="Datas.Palette.L8">
-          <AssetRef>Assets.PARTF</AssetRef>
-          <Format Name="BINARY">
-            <Parameters />
-          </Format>
-        </Data>
-        <Data Id="Datas.Palette.L9">
-          <AssetRef>Assets.PARTF</AssetRef>
-          <Format Name="BINARY">
-            <Parameters />
-          </Format>
-        </Data>
-        <Data Id="Datas.Images.LP01">
+        </FileAsset>
+        <FileAsset Id="Assets.LP01" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP01">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">640</Parameter>
@@ -181,9 +120,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
             </Parameters>
           </Format>
-          <AssetRef>Assets.LP01</AssetRef>
-        </Data>
-        <Data Id="Datas.Images.LP01B">
+        </FileAsset>
+        <FileAsset Id="Assets.LP01B" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP01B">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -191,10 +129,9 @@
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
             </Parameters>
-          </Format>
-          <AssetRef>Assets.LP01B</AssetRef>
-        </Data>
-        <Data Id="Datas.Images.LP02">
+          </Format> 
+        </FileAsset>
+        <FileAsset Id="Assets.LP02" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP02">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -203,9 +140,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
             </Parameters>
           </Format>
-          <AssetRef>Assets.LP02</AssetRef>
-        </Data>
-        <Data Id="Datas.Images.LP03">
+        </FileAsset>
+        <FileAsset Id="Assets.LP03" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP03">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -214,9 +150,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
             </Parameters>
           </Format>
-          <AssetRef>Assets.LP03</AssetRef>
-        </Data>
-        <Data Id="Datas.Images.LP04">
+        </FileAsset>
+        <FileAsset Id="Assets.LP04" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP04">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -225,9 +160,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
             </Parameters>
           </Format>
-          <AssetRef>Assets.LP04</AssetRef>
-        </Data>
-        <Data Id="Datas.Images.LP05">
+        </FileAsset>
+        <FileAsset Id="Assets.LP05" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP05">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -236,9 +170,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
             </Parameters>
           </Format>
-          <AssetRef>Assets.LP05</AssetRef>
-        </Data>
-        <Data Id="Datas.Images.LP06">
+        </FileAsset>
+        <FileAsset Id="Assets.LP06" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP06">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -247,9 +180,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
             </Parameters>
           </Format>
-          <AssetRef>Assets.LP06</AssetRef>
-        </Data>
-        <Data Id="Datas.Images.LP07">
+        </FileAsset>
+        <FileAsset Id="Assets.LP07" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP07">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -258,9 +190,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
             </Parameters>
           </Format>
-          <AssetRef>Assets.LP07</AssetRef>
-        </Data>
-        <Data Id="Datas.Images.L0AN">
+        </FileAsset>
+        <FileAsset Id="Assets.L0AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L0AN">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -269,9 +200,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
           </Format>
-          <AssetRef>Assets.L0AN</AssetRef>
-        </Data>
-        <Data Id="Datas.Images.L1AN">
+        </FileAsset>
+        <FileAsset Id="Assets.L1AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L1AN">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -280,9 +210,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
           </Format>
-          <AssetRef>Assets.L1AN</AssetRef>
-        </Data>
-        <Data Id="Datas.Images.L2AN">
+        </FileAsset>
+        <FileAsset Id="Assets.L2AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L2AN">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -291,9 +220,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
           </Format>
-          <AssetRef>Assets.L2AN</AssetRef>
-        </Data>
-        <Data Id="Datas.Images.L3AN">
+        </FileAsset>
+        <FileAsset Id="Assets.L3AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L3AN">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -302,9 +230,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
           </Format>
-          <AssetRef>Assets.L3AN</AssetRef>
-        </Data>
-        <Data Id="Datas.Images.L4AN">
+        </FileAsset>
+        <FileAsset Id="Assets.L4AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L4AN">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -313,9 +240,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
           </Format>
-          <AssetRef>Assets.L4AN</AssetRef>
-        </Data>
-        <Data Id="Datas.Images.L5AN">
+        </FileAsset>
+        <FileAsset Id="Assets.L5AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L5AN">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -324,190 +250,144 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
           </Format>
-          <AssetRef>Assets.L5AN</AssetRef>
-        </Data>
-        <Data Id="Datas.TileSets.LABM">
-          <Format Name="ACBM_TILE_SET">
-            <Parameters>
-              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
-            </Parameters>
+        </FileAsset>
+        <FileAsset Id="Assets.PARTF" FilePath="%Cfg.Options.ABSE.GameFolderPath%\PARTF">
+          <Format Name="BINARY">
+            <Parameters />
           </Format>
-          <AssetRef>Assets.LABM</AssetRef>
-        </Data>
-        <Data Id="Datas.TileSets.LBBM">
-          <Format Name="ACBM_TILE_SET">
-            <Parameters>
-              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
-            </Parameters>
-          </Format>
-          <AssetRef>Assets.LBBM</AssetRef>
-        </Data>
-        <Data Id="Datas.TileSets.LCBM">
-          <Format Name="ACBM_TILE_SET">
-            <Parameters>
-              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
-            </Parameters>
-          </Format>
-          <AssetRef>Assets.LCBM</AssetRef>
-        </Data>
-        <Data Id="Datas.TileSets.LDBM">
-          <Format Name="ACBM_TILE_SET">
-            <Parameters>
-              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
-            </Parameters>
-          </Format>
-          <AssetRef>Assets.LDBM</AssetRef>
-        </Data>
-        <Data Id="Datas.TileSets.LEBM">
-          <Format Name="ACBM_TILE_SET">
-            <Parameters>
-              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
-            </Parameters>
-          </Format>
-          <AssetRef>Assets.LEBM</AssetRef>
-        </Data>
-        <Data Id="Datas.TileSets.LFBM">
-          <Format Name="ACBM_TILE_SET">
-            <Parameters>
-              <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
-              <Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
-            </Parameters>
-          </Format>
-          <AssetRef>Assets.LFBM</AssetRef>
-        </Data>
+        </FileAsset>
+      </Items>
+    </Assets>
+    <Datas>
+      <Items>
       </Items>
     </Datas>
     <Images>
       <Items>
         <Image Description="Alien Breed II: Horror Continues teaser" Id="Images.LP01">
-          <DataRef>Datas.Images.LP01</DataRef>
+          <DataRef>Assets.LP01</DataRef>
         </Image>
         <Image Description="Superfrog teaser title" Id="Images.LP01B">
-          <DataRef>Datas.Images.LP01B</DataRef>
+          <DataRef>Assets.LP01B</DataRef>
         </Image>
         <Image Description="Superfrog teaser screenshot 1" Id="Images.LP02">
-          <DataRef>Datas.Images.LP02</DataRef>
+          <DataRef>Assets.LP02</DataRef>
         </Image>
         <Image Description="Superfrog teaser screenshot 2" Id="Images.LP03">
-          <DataRef>Datas.Images.LP03</DataRef>
+          <DataRef>Assets.LP03</DataRef>
         </Image>
         <Image Description="Superfrog teaser screenshot 3" Id="Images.LP04">
-          <DataRef>Datas.Images.LP04</DataRef>
+          <DataRef>Assets.LP04</DataRef>
         </Image>
         <Image Description="Superfrog teaser screenshot 4" Id="Images.LP05">
-          <DataRef>Datas.Images.LP05</DataRef>
+          <DataRef>Assets.LP05</DataRef>
         </Image>
         <Image Description="Superfrog teaser screenshot 5" Id="Images.LP06">
-          <DataRef>Datas.Images.LP06</DataRef>
+          <DataRef>Assets.LP06</DataRef>
         </Image>
         <Image Description="Superfrog teaser screenshot 6" Id="Images.LP07">
-          <DataRef>Datas.Images.LP07</DataRef>
+          <DataRef>Assets.LP07</DataRef>
         </Image>
         <Image Description="Level 0 animations" Id="Images.L0AN">
-          <DataRef>Datas.Images.L0AN</DataRef>
+          <DataRef>Assets.L0AN</DataRef>
         </Image>
         <Image Description="Level 1 animations" Id="Images.L1AN">
-          <DataRef>Datas.Images.L1AN</DataRef>
+          <DataRef>Assets.L1AN</DataRef>
         </Image>
         <Image Description="Level 2 animations" Id="Images.L2AN">
-          <DataRef>Datas.Images.L2AN</DataRef>
+          <DataRef>Assets.L2AN</DataRef>
         </Image>
         <Image Description="Level 3 animations" Id="Images.L3AN">
-          <DataRef>Datas.Images.L3AN</DataRef>
+          <DataRef>Assets.L3AN</DataRef>
         </Image>
         <Image Description="Level 4 animations" Id="Images.L4AN">
-          <DataRef>Datas.Images.L4AN</DataRef>
+          <DataRef>Assets.L4AN</DataRef>
         </Image>
         <Image Description="Level 5 animations" Id="Images.L5AN">
-          <DataRef>Datas.Images.L5AN</DataRef>
+          <DataRef>Assets.L5AN</DataRef>
         </Image>
       </Items>
     </Images>
     <TileSets>
       <Items>
         <TileSet Id="TileSets.LA">
-          <DataRef>Datas.TileSets.LABM</DataRef>
+          <DataRef>Assets.LABM</DataRef>
         </TileSet>
         <TileSet Id="TileSets.LB">
-          <DataRef>Datas.TileSets.LBBM</DataRef>
+          <DataRef>Assets.LBBM</DataRef>
         </TileSet>
         <TileSet Id="TileSets.LC">
-          <DataRef>Datas.TileSets.LCBM</DataRef>
+          <DataRef>Assets.LCBM</DataRef>
         </TileSet>
         <TileSet Id="TileSets.LD">
-          <DataRef>Datas.TileSets.LDBM</DataRef>
+          <DataRef>Assets.LDBM</DataRef>
         </TileSet>
         <TileSet Id="TileSets.LE">
-          <DataRef>Datas.TileSets.LEBM</DataRef>
+          <DataRef>Assets.LEBM</DataRef>
         </TileSet>
         <TileSet Id="TileSets.LF">
-          <DataRef>Datas.TileSets.LFBM</DataRef>
+          <DataRef>Assets.LFBM</DataRef>
         </TileSet>
       </Items>
     </TileSets>
     <Palettes>
       <Items>
         <PaletteFromBinary Id="Palettes.LA">
-          <DataRef>Datas.Palette.LA</DataRef>
+          <DataRef>Assets.PARTF</DataRef>
           <Mode>COLOR_16BIT</Mode>
           <ColorsNo>32</ColorsNo>
           <DataStart>141656</DataStart>
         </PaletteFromBinary>
         <PaletteFromBinary Id="Palettes.LE">
-          <DataRef>Datas.Palette.LE</DataRef>
+          <DataRef>Assets.PARTF</DataRef>
           <Mode>COLOR_16BIT</Mode>
           <ColorsNo>32</ColorsNo>
           <DataStart>141720</DataStart>
         </PaletteFromBinary>
         <PaletteFromBinary Id="Palettes.LF">
-          <DataRef>Datas.Palette.LF</DataRef>
+          <DataRef>Assets.PARTF</DataRef>
           <Mode>COLOR_16BIT</Mode>
           <ColorsNo>32</ColorsNo>
           <DataStart>141784</DataStart>
         </PaletteFromBinary>
         <PaletteFromBinary Id="Palettes.LC">
-          <DataRef>Datas.Palette.LC</DataRef>
+          <DataRef>Assets.PARTF</DataRef>
           <Mode>COLOR_16BIT</Mode>
           <ColorsNo>32</ColorsNo>
           <DataStart>141848</DataStart>
         </PaletteFromBinary>
         <PaletteFromBinary Id="Palettes.LB">
-          <DataRef>Datas.Palette.LB</DataRef>
+          <DataRef>Assets.PARTF</DataRef>
           <Mode>COLOR_16BIT</Mode>
           <ColorsNo>32</ColorsNo>
           <DataStart>141912</DataStart>
         </PaletteFromBinary>
         <PaletteFromBinary Id="Palettes.LD">
-          <DataRef>Datas.Palette.LD</DataRef>
+          <DataRef>Assets.PARTF</DataRef>
           <Mode>COLOR_16BIT</Mode>
           <ColorsNo>32</ColorsNo>
           <DataStart>141976</DataStart>
         </PaletteFromBinary>
         <PaletteFromBinary Id="Palettes.LE">
-          <DataRef>Datas.Palette.LE</DataRef>
+          <DataRef>Assets.PARTF</DataRef>
           <Mode>COLOR_16BIT</Mode>
           <ColorsNo>32</ColorsNo>
           <DataStart>142040</DataStart>
         </PaletteFromBinary>
         <PaletteFromBinary Id="Palettes.L7">
-          <DataRef>Datas.Palette.L7</DataRef>
+          <DataRef>Assets.PARTF</DataRef>
           <Mode>COLOR_16BIT</Mode>
           <ColorsNo>32</ColorsNo>
           <DataStart>142104</DataStart>
         </PaletteFromBinary>
         <PaletteFromBinary Id="Palettes.L8">
-          <DataRef>Datas.Palette.L8</DataRef>
+          <DataRef>Assets.PARTF</DataRef>
           <Mode>COLOR_16BIT</Mode>
           <ColorsNo>32</ColorsNo>
           <DataStart>142168</DataStart>
         </PaletteFromBinary>
         <PaletteFromBinary Id="Palettes.L9">
-          <DataRef>Datas.Palette.L9</DataRef>
+          <DataRef>Assets.PARTF</DataRef>
           <Mode>COLOR_16BIT</Mode>
           <ColorsNo>32</ColorsNo>
           <DataStart>142232</DataStart>
@@ -516,8 +396,8 @@
     </Palettes>
     <Maps>
       <Items>
-        <Map Id="L0">
-          <DataRef>Datas.MAP.L0MA</DataRef>
+        <Map Id="L0MA">
+          <DataRef>Assets.L0MA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LA</PaletteRef>
           </PaletteRefs>
@@ -525,8 +405,8 @@
           <SpriteSetRefs />
           <TileSetRef>TileSets.LA</TileSetRef>
         </Map>
-        <Map Id="L1">
-          <DataRef>Datas.MAP.L1MA</DataRef>
+        <Map Id="L1MA">
+          <DataRef>Assets.L1MA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LE</PaletteRef>
           </PaletteRefs>
@@ -534,8 +414,8 @@
           <SpriteSetRefs />
           <TileSetRef>TileSets.LE</TileSetRef>
         </Map>
-        <Map Id="L2">
-          <DataRef>Datas.MAP.L2MA</DataRef>
+        <Map Id="L2MA">
+          <DataRef>Assets.L2MA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LF</PaletteRef>
           </PaletteRefs>
@@ -543,8 +423,8 @@
           <SpriteSetRefs />
           <TileSetRef>TileSets.LF</TileSetRef>
         </Map>
-        <Map Id="L3">
-          <DataRef>Datas.MAP.L3MA</DataRef>
+        <Map Id="L3MA">
+          <DataRef>Assets.L3MA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LC</PaletteRef>
           </PaletteRefs>
@@ -552,8 +432,8 @@
           <SpriteSetRefs />
           <TileSetRef>TileSets.LC</TileSetRef>
         </Map>
-        <Map Id="L4">
-          <DataRef>Datas.MAP.L4MA</DataRef>
+        <Map Id="L4MA">
+          <DataRef>Assets.L4MA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LB</PaletteRef>
           </PaletteRefs>
@@ -561,8 +441,8 @@
           <SpriteSetRefs />
           <TileSetRef>TileSets.LB</TileSetRef>
         </Map>
-        <Map Id="L5">
-          <DataRef>Datas.MAP.L5MA</DataRef>
+        <Map Id="L5MA">
+          <DataRef>Assets.L5MA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LB</PaletteRef>
           </PaletteRefs>
@@ -570,8 +450,8 @@
           <SpriteSetRefs />
           <TileSetRef>TileSets.LB</TileSetRef>
         </Map>
-        <Map Id="L6">
-          <DataRef>Datas.MAP.L6MA</DataRef>
+        <Map Id="L6MA">
+          <DataRef>Assets.L6MA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LC</PaletteRef>
           </PaletteRefs>
@@ -579,8 +459,8 @@
           <SpriteSetRefs />
           <TileSetRef>TileSets.LC</TileSetRef>
         </Map>
-        <Map Id="L7">
-          <DataRef>Datas.MAP.L7MA</DataRef>
+        <Map Id="L7MA">
+          <DataRef>Assets.L7MA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LD</PaletteRef>
           </PaletteRefs>
@@ -588,8 +468,8 @@
           <SpriteSetRefs />
           <TileSetRef>TileSets.LD</TileSetRef>
         </Map>
-        <Map Id="L8">
-          <DataRef>Datas.MAP.L8MA</DataRef>
+        <Map Id="L8MA">
+          <DataRef>Assets.L8MA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LD</PaletteRef>
           </PaletteRefs>
@@ -597,8 +477,8 @@
           <SpriteSetRefs />
           <TileSetRef>TileSets.LD</TileSetRef>
         </Map>
-        <Map Id="L9">
-          <DataRef>Datas.MAP.L9MA</DataRef>
+        <Map Id="L9MA">
+          <DataRef>Assets.L9MA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LD</PaletteRef>
           </PaletteRefs>
@@ -606,8 +486,8 @@
           <SpriteSetRefs />
           <TileSetRef>TileSets.LD</TileSetRef>
         </Map>
-        <Map Id="LA">
-          <DataRef>Datas.MAP.LAMA</DataRef>
+        <Map Id="LAMA">
+          <DataRef>Assets.LAMA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LE</PaletteRef>
           </PaletteRefs>
@@ -615,8 +495,8 @@
           <SpriteSetRefs />
           <TileSetRef>TileSets.LE</TileSetRef>
         </Map>
-        <Map Id="LB">
-          <DataRef>Datas.MAP.LBMA</DataRef>
+        <Map Id="LBMA">
+          <DataRef>Assets.LBMA</DataRef>
           <PaletteRefs>
             <PaletteRef>Palettes.LE</PaletteRef>
           </PaletteRefs>

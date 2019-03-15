@@ -1,9 +1,18 @@
 ﻿using OpenBreed.Common.Formats;
+using OpenBreed.Common.Logging;
+using System;
+using System.Collections.Generic;
 
 namespace OpenBreed.Common.Data
 {
     public class DataProvider
     {
+        #region Private Fields
+
+        private Dictionary<string, object> _models = new Dictionary<string, object>();
+
+        #endregion Private Fields
+
         #region Public Constructors
 
         public DataProvider(IUnitOfWork unitOfWork)
@@ -18,7 +27,6 @@ namespace OpenBreed.Common.Data
             Sounds = new SoundsDataProvider(this);
             Images = new ImagesDataProvider(this);
             Palettes = new PalettesDataProvider(this);
-            Datas = new Data2DataProvider(this);
 
             Initialize();
         }
@@ -36,10 +44,36 @@ namespace OpenBreed.Common.Data
         public SoundsDataProvider Sounds { get; }
         public SpriteSetsDataProvider SpriteSets { get; }
         public TileSetsDataProvider TileSets { get; }
-        public Data2DataProvider Datas { get; }
         public IUnitOfWork UnitOfWork { get; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public object GetData(string id)
+        {
+            object data;
+
+            if (_models.TryGetValue(id, out data))
+                return data;
+
+            var asset = Assets.GetAsset(id);
+            data = asset.Load();
+            _models.Add(id, data);
+
+            return data;
+        }
+
+        public void Save()
+        {
+            SaveEx();
+
+            Assets.Save();
+
+            UnitOfWork.Save();
+        }
+
+        #endregion Public Methods
 
         #region Private Methods
 
@@ -55,18 +89,25 @@ namespace OpenBreed.Common.Data
             FormatMan.RegisterFormat("BINARY", new BinaryFormat());
             FormatMan.RegisterFormat("PCM_SOUND", new PCMSoundFormat());
         }
-
-        public void Save()
+        private void SaveEx()
         {
-            Datas.Save();
+            foreach (var item in _models)
+            {
+                var entryId = item.Key;
+                var data = item.Value;
 
-            Assets.Save();
+                var asset = Assets.GetAsset(entryId);
 
-            UnitOfWork.Save();
+                try
+                {
+                    asset.Save(data);
+                }
+                catch (Exception ex)
+                {
+                    LogMan.Instance.Error($"Problems saving asset {asset.Id}, Reason: {ex.Message}");
+                }
+            }
         }
-
-
-
 
         #endregion Private Methods
     }
