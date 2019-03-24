@@ -4,6 +4,7 @@ using OpenBreed.Common.Data;
 using OpenBreed.Common.Maps;
 using OpenBreed.Common.Maps.Blocks;
 using OpenBreed.Common.Palettes;
+using OpenBreed.Common.Texts;
 using OpenBreed.Common.XmlDatabase.Items.Assets;
 using OpenBreed.Editor.VM.Base;
 using System;
@@ -13,9 +14,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Editor.VM.Palettes
+namespace OpenBreed.Editor.VM.Texts
 {
-    public class PaletteFromMapVM : PaletteVM
+    public class TextFromMapVM : TextVM
     {
 
         #region Private Fields
@@ -27,7 +28,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Public Constructors
 
-        public PaletteFromMapVM()
+        public TextFromMapVM()
         {
             BlockNames = new BindingList<string>();
             BlockNames.ListChanged += (s, a) => OnPropertyChanged(nameof(BlockNames));
@@ -60,20 +61,20 @@ namespace OpenBreed.Editor.VM.Palettes
         internal override void FromEntry(IEntry entry)
         {
             base.FromEntry(entry);
-            FromEntry((IPaletteFromMapEntry)entry);
+            FromEntry((ITextFromMapEntry)entry);
         }
 
         internal override void ToEntry(IEntry entry)
         {
             base.ToEntry(entry);
-            ToEntry((IPaletteFromMapEntry)entry);
+            ToEntry((ITextFromMapEntry)entry);
         }
 
         #endregion Internal Methods
 
         #region Private Methods
 
-        private void UpdatePaletteBlocksList(IPaletteFromMapEntry source)
+        private void UpdateTextBlocksList(ITextFromMapEntry source)
         {
             BlockNames.UpdateAfter(() =>
             {
@@ -86,30 +87,22 @@ namespace OpenBreed.Editor.VM.Palettes
                 if (map == null)
                     return;
 
-                foreach (var paletteBlock in map.Blocks.OfType<MapPaletteBlock>())
-                    BlockNames.Add(paletteBlock.Name);
+                foreach (var textBlock in map.Blocks.OfType<MapTextBlock>())
+                    BlockNames.Add(textBlock.Name);
 
             });
         }
 
-        private void FromEntry(IPaletteFromMapEntry entry)
+        private void FromEntry(ITextFromMapEntry entry)
         {
-            UpdatePaletteBlocksList(entry);
+            UpdateTextBlocksList(entry);
 
             var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
 
-            var model = dataProvider.Palettes.GetPalette(entry.Id);
+            var model = dataProvider.Texts.GetText(entry.Id);
 
             if (model != null)
-            {
-                Colors.UpdateAfter(() =>
-                {
-                    for (int i = 0; i < model.Data.Length; i++)
-                        Colors[i] = model.Data[i];
-                });
-
-                CurrentColorIndex = 0;
-            }
+                Text = model.Text;
 
             DataRef = entry.DataRef;
             BlockName = entry.BlockName;
@@ -128,17 +121,13 @@ namespace OpenBreed.Editor.VM.Palettes
             }
         }
 
-        private void ToEntry(IPaletteFromMapEntry source)
+        private void ToEntry(ITextFromMapEntry source)
         {
             var mapModel = ServiceLocator.Instance.GetService<DataProvider>().GetData(DataRef) as MapModel;
 
-            var paletteBlock = mapModel.Blocks.OfType<MapPaletteBlock>().FirstOrDefault(item => item.Name == BlockName);
+            var textBlock = mapModel.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == BlockName);
 
-            for (int i = 0; i < paletteBlock.Value.Length; i++)
-            {
-                var color = Colors[i];
-                paletteBlock.Value[i] = new MapPaletteBlock.ColorData(color.R, color.G, color.B);
-            }
+            textBlock.Value = Text;
 
             source.DataRef = DataRef;
             source.BlockName = BlockName;

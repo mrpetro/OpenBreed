@@ -1,6 +1,7 @@
-﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
+﻿
+namespace OpenBreed.Editor.UI.WinForms.Controls.Texts
 {
-    partial class PaletteFromMapCtrl
+    partial class TextFromMapCtrl
     {
         /// <summary> 
         /// Required designer variable.
@@ -34,11 +35,10 @@
             this.grpPaletteFromMapSelection = new System.Windows.Forms.GroupBox();
             this.lblMapBlockName = new System.Windows.Forms.Label();
             this.lblMapDataRef = new System.Windows.Forms.Label();
-            this.ColorSelector = new OpenBreed.Editor.UI.WinForms.Controls.Palettes.ColorSelectorCtrl();
-            this.ColorEditor = new OpenBreed.Editor.UI.WinForms.Controls.Palettes.ColorEditorCtrl();
-            this.grpPalette = new System.Windows.Forms.GroupBox();
+            this.grpText = new System.Windows.Forms.GroupBox();
+            this.tbxText = new System.Windows.Forms.TextBox();
             this.grpPaletteFromMapSelection.SuspendLayout();
-            this.grpPalette.SuspendLayout();
+            this.grpText.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnDataRefBrowser
@@ -104,45 +104,38 @@
             this.lblMapDataRef.TabIndex = 3;
             this.lblMapDataRef.Text = "Map reference:";
             // 
-            // ColorSelector
+            // grpText
             // 
-            this.ColorSelector.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ColorSelector.Location = new System.Drawing.Point(3, 116);
-            this.ColorSelector.Name = "ColorSelector";
-            this.ColorSelector.Size = new System.Drawing.Size(634, 279);
-            this.ColorSelector.TabIndex = 13;
+            this.grpText.Controls.Add(this.tbxText);
+            this.grpText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpText.Location = new System.Drawing.Point(0, 82);
+            this.grpText.Name = "grpText";
+            this.grpText.Size = new System.Drawing.Size(640, 398);
+            this.grpText.TabIndex = 15;
+            this.grpText.TabStop = false;
+            this.grpText.Text = "Text";
             // 
-            // ColorEditor
+            // tbxText
             // 
-            this.ColorEditor.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ColorEditor.Location = new System.Drawing.Point(3, 16);
-            this.ColorEditor.Name = "ColorEditor";
-            this.ColorEditor.Size = new System.Drawing.Size(634, 100);
-            this.ColorEditor.TabIndex = 14;
+            this.tbxText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbxText.Location = new System.Drawing.Point(3, 16);
+            this.tbxText.Multiline = true;
+            this.tbxText.Name = "tbxText";
+            this.tbxText.Size = new System.Drawing.Size(634, 379);
+            this.tbxText.TabIndex = 14;
             // 
-            // grpPalette
-            // 
-            this.grpPalette.Controls.Add(this.ColorSelector);
-            this.grpPalette.Controls.Add(this.ColorEditor);
-            this.grpPalette.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpPalette.Location = new System.Drawing.Point(0, 82);
-            this.grpPalette.Name = "grpPalette";
-            this.grpPalette.Size = new System.Drawing.Size(640, 398);
-            this.grpPalette.TabIndex = 15;
-            this.grpPalette.TabStop = false;
-            this.grpPalette.Text = "Palette";
-            // 
-            // PaletteFromMapCtrl
+            // TextFromMapCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.grpPalette);
+            this.Controls.Add(this.grpText);
             this.Controls.Add(this.grpPaletteFromMapSelection);
-            this.Name = "PaletteFromMapCtrl";
+            this.Name = "TextFromMapCtrl";
             this.Size = new System.Drawing.Size(640, 480);
             this.grpPaletteFromMapSelection.ResumeLayout(false);
             this.grpPaletteFromMapSelection.PerformLayout();
-            this.grpPalette.ResumeLayout(false);
+            this.grpText.ResumeLayout(false);
+            this.grpText.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -155,8 +148,7 @@
         private System.Windows.Forms.GroupBox grpPaletteFromMapSelection;
         private System.Windows.Forms.Label lblMapBlockName;
         private System.Windows.Forms.Label lblMapDataRef;
-        private ColorSelectorCtrl ColorSelector;
-        private ColorEditorCtrl ColorEditor;
-        private System.Windows.Forms.GroupBox grpPalette;
+        private System.Windows.Forms.GroupBox grpText;
+        private System.Windows.Forms.TextBox tbxText;
     }
 }

@@ -12,7 +12,7 @@ namespace OpenBreed.Editor.VM.Renderer
     {
         #region Private Fields
 
-        private MapEditorVM _editor;
+        private readonly MapEditorVM _editor;
 
         #endregion Private Fields
 

@@ -34,6 +34,8 @@ using OpenBreed.Common.Maps;
 using OpenBreed.Common.Assets;
 using OpenBreed.Common.Data;
 using OpenBreed.Editor.VM.Logging;
+using OpenBreed.Common.Texts;
+using OpenBreed.Editor.VM.Texts;
 
 namespace OpenBreed.Editor.VM
 {
@@ -65,6 +67,7 @@ namespace OpenBreed.Editor.VM
             entryEditorFactory.Register<IRepository<ITileSetEntry>, TileSetEditorVM>();
             entryEditorFactory.Register<IRepository<IActionSetEntry>, ActionSetEditorVM>();
             entryEditorFactory.Register<IRepository<IPaletteEntry>, PaletteEditorVM>();
+            entryEditorFactory.Register<IRepository<ITextEntry>, TextEditorVM>();
             entryEditorFactory.Register<IRepository<IImageEntry>, ImageEditorVM>();
             entryEditorFactory.Register<IRepository<ISoundEntry>, SoundEditorVM>();
             entryEditorFactory.Register<IRepository<IMapEntry>, MapEditorVM>();

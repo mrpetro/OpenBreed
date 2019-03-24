@@ -2,6 +2,7 @@
 using OpenBreed.Common.Assets;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Palettes;
+using OpenBreed.Common.Texts;
 using OpenBreed.Common.XmlDatabase.Items.Assets;
 using OpenBreed.Editor.VM.Base;
 using System;
@@ -10,9 +11,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Editor.VM.Palettes
+namespace OpenBreed.Editor.VM.Texts
 {
-    public class PaletteFromBinaryVM : PaletteVM
+    public class TextEmbeddedVM : TextVM
     {
 
         #region Private Fields
@@ -26,43 +27,35 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Internal Methods
 
-        internal override void FromEntry(IPaletteEntry entry)
+        internal override void FromEntry(ITextEntry entry)
         {
             base.FromEntry(entry);
-            FromEntry((IPaletteFromBinaryEntry)entry);
+            FromEntry((ITextEmbeddedEntry)entry);
         }
 
-        internal override void ToEntry(IPaletteEntry entry)
+        internal override void ToEntry(ITextEntry entry)
         {
             base.ToEntry(entry);
-            ToEntry((IPaletteFromBinaryEntry)entry);
+            ToEntry((ITextFromMapEntry)entry);
         }
 
         #endregion Internal Methods
 
         #region Private Methods
 
-        private void FromEntry(IPaletteFromBinaryEntry entry)
+        private void FromEntry(ITextEmbeddedEntry entry)
         {
             var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
 
-            var model = dataProvider.Palettes.GetPalette(entry.Id);
+            var model = dataProvider.Texts.GetText(entry.Id);
 
             if (model != null)
-            {
-                Colors.UpdateAfter(() =>
-                {
-                    for (int i = 0; i < model.Data.Length; i++)
-                        Colors[i] = model.Data[i];
-                });
-
-                CurrentColorIndex = 0;
-            }
+                Text = model.Text;
 
             DataRef = entry.DataRef;
         }
 
-        private void ToEntry(IPaletteFromBinaryEntry entry)
+        private void ToEntry(ITextEmbeddedEntry entry)
         {
             entry.DataRef = DataRef;
         }

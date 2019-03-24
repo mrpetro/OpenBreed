@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Common.Texts;
 
 namespace OpenBreed.Editor.VM.Database
 {
@@ -38,6 +39,8 @@ namespace OpenBreed.Editor.VM.Database
                 return new DbSpriteSetEntryVM();
             else if (entry is IPaletteEntry)
                 return new DbPaletteEntryVM();
+            else if (entry is ITextEntry)
+                return new DbTextEntryVM();
             else
                 throw new NotImplementedException(entry.ToString());
         }

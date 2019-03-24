@@ -26,6 +26,8 @@ using OpenBreed.Editor.UI.WinForms.Controls.Maps;
 using OpenBreed.Editor.VM.Maps;
 using OpenBreed.Editor.VM.Assets;
 using OpenBreed.Editor.UI.WinForms.Controls.Assets;
+using OpenBreed.Editor.VM.Texts;
+using OpenBreed.Editor.UI.WinForms.Controls.Texts;
 
 namespace OpenBreed.Editor.UI.WinForms.Views
 {
@@ -74,6 +76,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _viewFactory.Register<ActionSetEditorVM, EntryEditorView<ActionSetEditorCtrl>>();
             _viewFactory.Register<ImageEditorVM, EntryEditorView<ImageEditorCtrl>>();
             _viewFactory.Register<PaletteEditorVM, EntryEditorView<PaletteEditorCtrl>>();
+            _viewFactory.Register<TextEditorVM, EntryEditorView<TextEditorCtrl>>();
             _viewFactory.Register<MapEditorVM, EntryEditorView<MapEditorCtrl>>();
             _viewFactory.Register<AssetEditorVM, EntryEditorView<AssetEditorCtrl>>();
         }
@@ -99,10 +102,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         public void Initialize(DbEditorVM vm)
         {
-            if (vm == null)
-                throw new ArgumentNullException(nameof(vm));
-
-            _vm = vm;
+            _vm = vm ?? throw new ArgumentNullException(nameof(vm));
 
             _vm.EntryEditorOpeningAction = (editor) => OnEntryEditorOpening(editor);
             //_vm.EntryEditorActivateAction = (editor) => OnEntryEditorActivate(editor);

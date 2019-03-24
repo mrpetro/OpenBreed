@@ -287,6 +287,24 @@
     <Compile Include="Controls\Maps\MapEditorTileSetSelectorCtrl.Designer.cs">
       <DependentUpon>MapEditorTileSetSelectorCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Texts\TextEmbeddedCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Texts\TextEmbeddedCtrl.Designer.cs">
+      <DependentUpon>TextEmbeddedCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Texts\TextFromMapCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Texts\TextFromMapCtrl.Designer.cs">
+      <DependentUpon>TextFromMapCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Texts\TextEditorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Texts\TextEditorCtrl.Designer.cs">
+      <DependentUpon>TextEditorCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Tiles\TileSetEditorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -537,6 +555,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Maps\MapEditorTileSetSelectorCtrl.resx">
       <DependentUpon>MapEditorTileSetSelectorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Texts\TextEmbeddedCtrl.resx">
+      <DependentUpon>TextEmbeddedCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Texts\TextFromMapCtrl.resx">
+      <DependentUpon>TextFromMapCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Texts\TextEditorCtrl.resx">
+      <DependentUpon>TextEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Tiles\TileSetEditorCtrl.resx">
       <DependentUpon>TileSetEditorCtrl.cs</DependentUpon>

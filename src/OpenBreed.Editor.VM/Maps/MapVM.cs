@@ -222,9 +222,9 @@ namespace OpenBreed.Editor.VM.Maps
         private string MarkNameIfModified()
         {
             if (IsModified)
-                return Source.Name + "*";
+                return Source.Id + "*";
             else
-                return Source.Name;
+                return Source.Id;
         }
 
         private void UpdateTitle()
