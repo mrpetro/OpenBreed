@@ -14,7 +14,7 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         #region Private Fields
 
-        private IRepository<ISoundEntry> _repository;
+        private readonly IRepository<ISoundEntry> _repository;
 
         #endregion Private Fields
 

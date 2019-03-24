@@ -45,13 +45,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbxBinaryDataRef.Location = new System.Drawing.Point(90, 19);
             this.tbxBinaryDataRef.Name = "tbxBinaryDataRef";
-            this.tbxBinaryDataRef.Size = new System.Drawing.Size(319, 20);
+            this.tbxBinaryDataRef.Size = new System.Drawing.Size(512, 20);
             this.tbxBinaryDataRef.TabIndex = 3;
             // 
             // btnDataRefBrowser
             // 
             this.btnDataRefBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDataRefBrowser.Location = new System.Drawing.Point(415, 19);
+            this.btnDataRefBrowser.Location = new System.Drawing.Point(608, 19);
             this.btnDataRefBrowser.Name = "btnDataRefBrowser";
             this.btnDataRefBrowser.Size = new System.Drawing.Size(26, 20);
             this.btnDataRefBrowser.TabIndex = 2;
@@ -66,7 +66,7 @@
             this.grpSourceData.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpSourceData.Location = new System.Drawing.Point(0, 0);
             this.grpSourceData.Name = "grpSourceData";
-            this.grpSourceData.Size = new System.Drawing.Size(447, 47);
+            this.grpSourceData.Size = new System.Drawing.Size(640, 47);
             this.grpSourceData.TabIndex = 4;
             this.grpSourceData.TabStop = false;
             this.grpSourceData.Text = "Source data";
@@ -87,7 +87,7 @@
             this.grpPalette.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpPalette.Location = new System.Drawing.Point(0, 47);
             this.grpPalette.Name = "grpPalette";
-            this.grpPalette.Size = new System.Drawing.Size(447, 381);
+            this.grpPalette.Size = new System.Drawing.Size(640, 433);
             this.grpPalette.TabIndex = 16;
             this.grpPalette.TabStop = false;
             this.grpPalette.Text = "Palette";
@@ -97,7 +97,7 @@
             this.ColorSelector.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ColorSelector.Location = new System.Drawing.Point(3, 116);
             this.ColorSelector.Name = "ColorSelector";
-            this.ColorSelector.Size = new System.Drawing.Size(441, 262);
+            this.ColorSelector.Size = new System.Drawing.Size(634, 314);
             this.ColorSelector.TabIndex = 13;
             // 
             // ColorEditor
@@ -105,7 +105,7 @@
             this.ColorEditor.Dock = System.Windows.Forms.DockStyle.Top;
             this.ColorEditor.Location = new System.Drawing.Point(3, 16);
             this.ColorEditor.Name = "ColorEditor";
-            this.ColorEditor.Size = new System.Drawing.Size(441, 100);
+            this.ColorEditor.Size = new System.Drawing.Size(634, 100);
             this.ColorEditor.TabIndex = 14;
             // 
             // PaletteFromBinaryCtrl
@@ -115,7 +115,7 @@
             this.Controls.Add(this.grpPalette);
             this.Controls.Add(this.grpSourceData);
             this.Name = "PaletteFromBinaryCtrl";
-            this.Size = new System.Drawing.Size(447, 428);
+            this.Size = new System.Drawing.Size(640, 480);
             this.grpSourceData.ResumeLayout(false);
             this.grpSourceData.PerformLayout();
             this.grpPalette.ResumeLayout(false);

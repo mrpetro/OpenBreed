@@ -8,7 +8,7 @@ namespace OpenBreed.Editor.VM.Common
 
         #region Private Fields
 
-        private Type _entryType;
+        private readonly Type _entryType;
         private string _refId;
 
         #endregion Private Fields

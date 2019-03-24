@@ -16,7 +16,7 @@ namespace OpenBreed.Editor.VM.Renderer
     {
         #region Private Fields
 
-        private MapEditorActionsToolVM _actionsTool;
+        private readonly MapEditorActionsToolVM _actionsTool;
 
         #endregion Private Fields
 

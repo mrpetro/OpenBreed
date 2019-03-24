@@ -11,10 +11,10 @@ namespace OpenBreed.Editor.VM.Renderer
     public class TilesToolRenderer : RendererBase<MapEditorTilesToolVM>
     {
 
-        private MapEditorVM _editor;
+        private readonly MapEditorVM _editor;
 
-        private ViewCursorRenderer _cursorRenderer;
-        private LayoutRenderer _layoutRenderer;
+        private readonly ViewCursorRenderer _cursorRenderer;
+        private readonly LayoutRenderer _layoutRenderer;
 
 
         public TilesToolRenderer(MapEditorVM editor, RenderTarget target) : base(target)

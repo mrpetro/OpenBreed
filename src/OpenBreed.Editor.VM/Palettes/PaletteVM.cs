@@ -101,7 +101,6 @@ namespace OpenBreed.Editor.VM.Palettes
 
         internal virtual void FromEntry(IPaletteEntry entry)
         {
-            DataRef = entry.DataRef;
         }
 
         internal override void ToEntry(IEntry entry)
@@ -111,7 +110,6 @@ namespace OpenBreed.Editor.VM.Palettes
         }
         internal virtual void ToEntry(IPaletteEntry entry)
         {
-            entry.DataRef = DataRef;
         }
 
         #endregion Internal Methods

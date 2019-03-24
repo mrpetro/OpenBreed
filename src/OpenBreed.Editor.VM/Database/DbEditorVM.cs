@@ -27,7 +27,7 @@ namespace OpenBreed.Editor.VM.Database
         private readonly Dictionary<string, EntryEditorVM> _openedEntryEditors = new Dictionary<string, EntryEditorVM>();
         private DatabaseVM _editable;
         private IUnitOfWork _edited;
-        private EntryEditorVM _activeEntryEditor;
+        private readonly EntryEditorVM _activeEntryEditor;
 
         #endregion Private Fields
 
