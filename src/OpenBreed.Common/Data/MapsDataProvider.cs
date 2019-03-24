@@ -9,9 +9,6 @@ namespace OpenBreed.Common.Data
 {
     public class MapsDataProvider
     {
-        private Dictionary<string, MapModel> _models = new Dictionary<string, MapModel>();
-
-
         #region Public Constructors
 
         public MapsDataProvider(DataProvider provider)

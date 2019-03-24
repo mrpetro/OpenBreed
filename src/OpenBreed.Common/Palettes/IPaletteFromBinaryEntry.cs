@@ -14,8 +14,13 @@ namespace OpenBreed.Common.Palettes
 
     public interface IPaletteFromBinaryEntry : IPaletteEntry
     {
-        PaletteMode Mode { get; set; }
+        #region Public Properties
+
         int ColorsNo { get; set; }
+        string DataRef { get; set; }
         int DataStart { get; set; }
+        PaletteMode Mode { get; set; }
+
+        #endregion Public Properties
     }
 }

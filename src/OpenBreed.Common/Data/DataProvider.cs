@@ -27,6 +27,7 @@ namespace OpenBreed.Common.Data
             Sounds = new SoundsDataProvider(this);
             Images = new ImagesDataProvider(this);
             Palettes = new PalettesDataProvider(this);
+            Texts = new TextsDataProvider(this);
 
             Initialize();
         }
@@ -41,6 +42,7 @@ namespace OpenBreed.Common.Data
         public ImagesDataProvider Images { get; }
         public MapsDataProvider Maps { get; }
         public PalettesDataProvider Palettes { get; }
+        public TextsDataProvider Texts { get; }
         public SoundsDataProvider Sounds { get; }
         public SpriteSetsDataProvider SpriteSets { get; }
         public TileSetsDataProvider TileSets { get; }

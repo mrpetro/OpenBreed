@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Common.XmlDatabase.Tables.Datas;
+using OpenBreed.Common.XmlDatabase.Tables.Texts;
 
 namespace OpenBreed.Common.XmlDatabase
 {
@@ -108,23 +108,23 @@ namespace OpenBreed.Common.XmlDatabase
             return table;
         }
 
-        internal XmlDbDataTableDef GetDatasTable()
-        {
-            var table = Data.Tables.OfType<XmlDbDataTableDef>().FirstOrDefault();
-            if (table == null)
-            {
-                table = new XmlDbDataTableDef();
-                Data.Tables.Add(table);
-            }
-            return table;
-        }
-
         internal XmlDbMapTableDef GetMapsTable()
         {
             var table = Data.Tables.OfType<XmlDbMapTableDef>().FirstOrDefault();
             if (table == null)
             {
                 table = new XmlDbMapTableDef();
+                Data.Tables.Add(table);
+            }
+            return table;
+        }
+
+        internal XmlDbTextTableDef GetTextTable()
+        {
+            var table = Data.Tables.OfType<XmlDbTextTableDef>().FirstOrDefault();
+            if (table == null)
+            {
+                table = new XmlDbTextTableDef();
                 Data.Tables.Add(table);
             }
             return table;
@@ -140,6 +140,7 @@ namespace OpenBreed.Common.XmlDatabase
             }
             return table;
         }
+
         internal DatabaseSoundTableDef GetSoundTable()
         {
             var table = Data.Tables.OfType<DatabaseSoundTableDef>().FirstOrDefault();

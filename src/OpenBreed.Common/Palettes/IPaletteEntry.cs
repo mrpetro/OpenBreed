@@ -9,10 +9,5 @@ namespace OpenBreed.Common.Palettes
 {
     public interface IPaletteEntry : IEntry
     {
-        #region Public Properties
-
-        string DataRef { get; set; }
-
-        #endregion Public Properties
     }
 }

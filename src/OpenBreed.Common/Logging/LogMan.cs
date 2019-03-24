@@ -55,9 +55,7 @@ namespace OpenBreed.Common.Logging
         /// <param name="msg"></param>
         public void Debug(string msg)
         {
-            var ev = MessageAdded;
-            if (ev != null)
-                ev(LogType.Debug, msg);
+            MessageAdded?.Invoke(LogType.Debug, msg);
             Console.WriteLine("Debug: " + msg);
         }
 
@@ -76,9 +74,7 @@ namespace OpenBreed.Common.Logging
         /// <param name="msg"></param>
         public void Info(string msg)
         {
-            var ev = MessageAdded;
-            if (ev != null)
-                ev(LogType.Info, msg);
+            MessageAdded?.Invoke(LogType.Info, msg);
         }
 
         /// <summary>
@@ -87,9 +83,7 @@ namespace OpenBreed.Common.Logging
         /// <param name="msg"></param>
         public void Warning(string msg)
         {
-            var ev = MessageAdded;
-            if (ev != null)
-                ev(LogType.Warning, msg);
+            MessageAdded?.Invoke(LogType.Warning, msg);
         }
 
         /// <summary>
@@ -107,9 +101,7 @@ namespace OpenBreed.Common.Logging
         /// <param name="msg"></param>
         public void Error(string msg)
         {
-            var ev = MessageAdded;
-            if (ev != null)
-                ev(LogType.Error, msg);
+            MessageAdded?.Invoke(LogType.Error, msg);
         }
 
         /// <summary>
@@ -127,9 +119,7 @@ namespace OpenBreed.Common.Logging
         /// <param name="msg"></param>
         public void Critical(string msg)
         {
-            var ev = MessageAdded;
-            if (ev != null)
-                ev(LogType.Critical, msg);
+            MessageAdded?.Invoke(LogType.Critical, msg);
         }
 
 
@@ -139,9 +129,7 @@ namespace OpenBreed.Common.Logging
         /// <param name="msg"></param>
         public void Success(string msg)
         {
-            var ev = MessageAdded;
-            if (ev != null)
-                ev(LogType.Success, msg);
+            MessageAdded?.Invoke(LogType.Success, msg);
         }
 
         #endregion

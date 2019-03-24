@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.Palettes;
+using OpenBreed.Common.Texts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,25 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace OpenBreed.Common.XmlDatabase.Items.Palettes
+namespace OpenBreed.Common.XmlDatabase.Items.Texts
 {
     [Serializable]
-    [Description("Palette from binary"), Category("Appearance")]
-    public class XmlPaletteFromBinaryEntry : XmlPaletteEntry, IPaletteFromBinaryEntry
+    [Description("Text embedded"), Category("Appearance")]
+    public class XmlTextEmbeddedEntry : XmlTextEntry, ITextEmbeddedEntry
     {
         #region Public Properties
 
-        [XmlElement("DataRef")]
-        public string DataRef { get; set; }
-
-        [XmlElement("ColorsNo")]
-        public int ColorsNo { get; set; }
-
-        [XmlElement("DataStart")]
-        public int DataStart { get; set; }
-
-        [XmlElement("Mode")]
-        public PaletteMode Mode { get; set; }
+        [XmlElement("Text")]
+        public string Text { get; set; }
 
         #endregion Public Properties
 
@@ -33,7 +25,7 @@ namespace OpenBreed.Common.XmlDatabase.Items.Palettes
 
         public override IEntry Copy()
         {
-            return new XmlPaletteFromBinaryEntry()
+            return new XmlTextEmbeddedEntry()
             {
                 Id = this.Id,
                 Description = this.Description,

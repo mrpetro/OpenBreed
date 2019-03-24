@@ -5,14 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Data2
+namespace OpenBreed.Common.Texts
 {
-    public interface IDataEntry : IEntry
+    public interface ITextEntry : IEntry
     {
         #region Public Properties
 
-        string AssetRef { get; }
-        IFormatEntry Format { get; }
+        string DataRef { get; set; }
 
         #endregion Public Properties
     }

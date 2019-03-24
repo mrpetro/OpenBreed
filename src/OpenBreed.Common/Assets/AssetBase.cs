@@ -17,7 +17,7 @@ namespace OpenBreed.Common.Assets
 
         #region Private Fields
 
-        private List<FormatParameter> _parameters;
+        private readonly List<FormatParameter> _parameters;
         private IDataFormatType _formatType;
         private Stream _stream;
 
@@ -27,10 +27,8 @@ namespace OpenBreed.Common.Assets
 
         protected AssetBase(AssetsDataProvider manager, string id, IDataFormatType formatType, List<FormatParameter> parameters)
         {
-            if (manager == null)
-                throw new ArgumentNullException(nameof(manager));
+            _manager = manager ?? throw new ArgumentNullException(nameof(manager));
 
-            _manager = manager;
             Id = id;
             _formatType = formatType;
             _parameters = parameters;

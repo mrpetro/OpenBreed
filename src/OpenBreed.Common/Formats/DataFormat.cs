@@ -9,9 +9,16 @@ namespace OpenBreed.Common.Formats
 {
     public class DataFormat
     {
-        private IDataFormatType _type;
+        #region Private Fields
+
+        private readonly List<FormatParameter> _parameters;
+        private readonly IDataFormatType _type;
         private AssetBase _asset;
-        private List<FormatParameter> _parameters;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
         public DataFormat(IDataFormatType type, AssetBase asset, List<FormatParameter> parameters)
         {
             _type = type;
@@ -19,9 +26,15 @@ namespace OpenBreed.Common.Formats
             _parameters = parameters;
         }
 
+        #endregion Public Constructors
+
+        #region Public Methods
+
         public object Load()
         {
             return _asset.Load();
         }
+
+        #endregion Public Methods
     }
 }

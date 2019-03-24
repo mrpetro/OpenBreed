@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.Palettes;
+using OpenBreed.Common.Texts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,21 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace OpenBreed.Common.XmlDatabase.Items.Palettes
+namespace OpenBreed.Common.XmlDatabase.Items.Texts
 {
     [Serializable]
-    [Description("Palette from MAP"), Category("Appearance")]
-    public class XmlPaletteFromMapEntry : XmlPaletteEntry, IPaletteFromMapEntry
+    [Description("Text from MAP"), Category("Appearance")]
+    public class XmlTextFromMapEntry : XmlTextEntry, ITextFromMapEntry
     {
-        [XmlElement("DataRef")]
-        public string DataRef { get; set; }
-
         [XmlElement("BlockName")]
         public string BlockName { get; set; }
 
         public override IEntry Copy()
         {
-            return new XmlPaletteFromMapEntry()
+            return new XmlTextFromMapEntry()
             {
                 Id = this.Id,
                 Description = this.Description,

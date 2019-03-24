@@ -1,6 +1,6 @@
-﻿using OpenBreed.Common.Data2;
-using OpenBreed.Common.XmlDatabase.Items.Data;
-using OpenBreed.Common.XmlDatabase.Tables.Datas;
+﻿using OpenBreed.Common.Texts;
+using OpenBreed.Common.XmlDatabase.Items.Texts;
+using OpenBreed.Common.XmlDatabase.Tables.Texts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,20 +9,20 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
-    public class XmlDatasRepository : XmlRepositoryBase, IRepository<IDataEntry>
+    public class XmlTextsRepository : XmlRepositoryBase, IRepository<ITextEntry>
     {
 
         #region Private Fields
 
-        private readonly XmlDbDataTableDef _table;
+        private readonly XmlDbTextTableDef _table;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public XmlDatasRepository(XmlDatabaseMan context) : base(context)
+        public XmlTextsRepository(XmlDatabaseMan context) : base(context)
         {
-            _table = context.GetDatasTable();
+            _table = context.GetTextTable();
         }
 
         #endregion Public Constructors
@@ -30,14 +30,21 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
         #region Public Properties
 
         public IEnumerable<IEntry> Entries { get { return _table.Items; } }
-        public string Name { get { return "Datas"; } }
+        public IEnumerable<Type> EntryTypes
+        {
+            get
+            {
+                yield return typeof(XmlTextEmbeddedEntry);
+                yield return typeof(XmlTextFromMapEntry);
+            }
+        }
+        public string Name { get { return "Texts"; } }
 
-        public IEnumerable<Type> EntryTypes { get { yield return typeof(XmlDataEntry); } }
         #endregion Public Properties
 
         #region Public Methods
 
-        public void Add(IDataEntry entity)
+        public void Add(ITextEntry entity)
         {
             throw new NotImplementedException();
         }
@@ -47,18 +54,18 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             return _table.Items.FirstOrDefault(item => item.Id == id);
         }
 
-        public IDataEntry GetById(string id)
+        public ITextEntry GetById(string id)
         {
-            var levelDef = _table.Items.FirstOrDefault(item => item.Id == id);
-            if (levelDef == null)
-                throw new Exception("No Data definition found with Id: " + id);
+            var entryDef = _table.Items.FirstOrDefault(item => item.Id == id);
+            if (entryDef == null)
+                throw new Exception("No Text definition found with Id: " + id);
 
-            return levelDef;
+            return entryDef;
         }
 
-        public IDataEntry GetNextTo(IDataEntry entry)
+        public ITextEntry GetNextTo(ITextEntry entry)
         {
-            var index = _table.Items.IndexOf((XmlDataEntry)entry);
+            var index = _table.Items.IndexOf((XmlTextEntry)entry);
 
             if (index < 0)
                 throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
@@ -71,9 +78,9 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return null;
         }
 
-        public IDataEntry GetPreviousTo(IDataEntry entry)
+        public ITextEntry GetPreviousTo(ITextEntry entry)
         {
-            var index = _table.Items.IndexOf((XmlDataEntry)entry);
+            var index = _table.Items.IndexOf((XmlTextEntry)entry);
 
             if (index < 0)
                 throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
@@ -94,25 +101,24 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             if (entryType == null)
                 entryType = EntryTypes.FirstOrDefault();
 
-            var newEntry = Create(entryType) as XmlDataEntry;
+            var newEntry = Create(entryType) as XmlTextEntry;
 
             newEntry.Id = newId;
             _table.Items.Add(newEntry);
             return newEntry;
         }
-
-        public void Remove(IDataEntry entry)
+        public void Remove(ITextEntry entry)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(IDataEntry entry)
+        public void Update(ITextEntry entry)
         {
-            var index = _table.Items.IndexOf((XmlDataEntry)entry);
+            var index = _table.Items.IndexOf((XmlTextEntry)entry);
             if (index < 0)
                 throw new InvalidOperationException($"{entry} not found in repository");
 
-            _table.Items[index] = (XmlDataEntry)entry;
+            _table.Items[index] = (XmlTextEntry)entry;
         }
 
         #endregion Public Methods

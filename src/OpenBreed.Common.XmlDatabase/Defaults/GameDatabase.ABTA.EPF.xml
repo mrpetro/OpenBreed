@@ -1113,10 +1113,6 @@
         </EPFArchiveFileAsset>
       </Items>
     </Assets>
-    <Datas>
-      <Items>
-      </Items>
-    </Datas>
     <Images>
       <Items />
     </Images>
@@ -3818,5 +3814,25 @@
         </PaletteFromMAP>
       </Items>
     </Palettes>
+    <Texts>
+      <Items>
+        <TextFromMAP Id="Texts.MAP.01.MTXT">
+          <DataRef>Assets.MAP.01</DataRef>
+          <BlockName>MTXT</BlockName>
+        </TextFromMAP>
+        <TextFromMAP Id="Texts.MAP.01.NOT1">
+          <DataRef>Assets.MAP.01</DataRef>
+          <BlockName>NOT1</BlockName>
+        </TextFromMAP>
+        <TextFromMAP Id="Texts.MAP.01.NOT2">
+          <DataRef>Assets.MAP.01</DataRef>
+          <BlockName>NOT2</BlockName>
+        </TextFromMAP>
+        <TextFromMAP Id="Texts.MAP.01.NOT3">
+          <DataRef>Assets.MAP.01</DataRef>
+          <BlockName>NOT3</BlockName>
+        </TextFromMAP>
+      </Items>
+    </Texts>
   </Tables>
 </Database>
