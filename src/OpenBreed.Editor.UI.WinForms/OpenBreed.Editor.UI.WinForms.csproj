@@ -277,15 +277,23 @@
     <Compile Include="Controls\Sprites\SpriteSetSelectorCtrl.Designer.cs">
       <DependentUpon>SpriteSetSelectorCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Sprites\SpriteViewerCtrl.cs" />
-    <Compile Include="Controls\Sprites\SpriteViewerCtrl.Designer.cs">
-      <DependentUpon>SpriteViewerCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Sprites\SpriteSetViewerCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Sprites\SpriteSetViewerCtrl.Designer.cs">
+      <DependentUpon>SpriteSetViewerCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Maps\MapEditorTileSetSelectorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\Maps\MapEditorTileSetSelectorCtrl.Designer.cs">
       <DependentUpon>MapEditorTileSetSelectorCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Sprites\SpriteSetEditorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Sprites\SpriteSetEditorCtrl.Designer.cs">
+      <DependentUpon>SpriteSetEditorCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Texts\TextEmbeddedCtrl.cs">
       <SubType>UserControl</SubType>
@@ -550,11 +558,14 @@
     <EmbeddedResource Include="Controls\Sprites\SpriteSetSelectorCtrl.resx">
       <DependentUpon>SpriteSetSelectorCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Sprites\SpriteViewerCtrl.resx">
-      <DependentUpon>SpriteViewerCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Sprites\SpriteSetViewerCtrl.resx">
+      <DependentUpon>SpriteSetViewerCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Maps\MapEditorTileSetSelectorCtrl.resx">
       <DependentUpon>MapEditorTileSetSelectorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Sprites\SpriteSetEditorCtrl.resx">
+      <DependentUpon>SpriteSetEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Texts\TextEmbeddedCtrl.resx">
       <DependentUpon>TextEmbeddedCtrl.cs</DependentUpon>
