@@ -1,49 +1,29 @@
-﻿using OpenBreed.Common.Drawing;
+﻿using OpenBreed.Common.Data;
+using OpenBreed.Common.Drawing;
 using OpenBreed.Common.Sprites;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Palettes;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System;
-using OpenBreed.Common;
-using OpenBreed.Common.Data;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
-    public class SpriteSetVM : BaseViewModel
+    public class SpriteSetVM : EditableEntryVM
     {
         #region Private Fields
 
-        public EditorVM Root { get; private set; }
         private PaletteVM _palette;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public SpriteSetVM(EditorVM root)
+        public SpriteSetVM()
         {
-            Root = root;
-
             Items = new BindingList<SpriteVM>();
             Items.ListChanged += (s, e) => OnPropertyChanged(nameof(Items));
-            //Root.LevelEditor.PaletteSelector.PropertyChanged += Palettes_PropertyChanged;
-
-            PropertyChanged += SpriteSetVM_PropertyChanged;
-        }
-
-        public SpriteSetVM(EditorVM root, SpriteSetModel model)
-        {
-            Root = root;
-
-            Items = new BindingList<SpriteVM>();
-
-            foreach (var sprite in model.Sprites)
-                Items.Add(SpriteVM.Create(sprite));
-
-            Items.ListChanged += (s, e) => OnPropertyChanged(nameof(Items));
-            //Root.LevelEditor.PaletteSelector.PropertyChanged += Palettes_PropertyChanged;
-
             PropertyChanged += SpriteSetVM_PropertyChanged;
         }
 
@@ -52,7 +32,6 @@ namespace OpenBreed.Editor.VM.Sprites
         #region Public Properties
 
         public BindingList<SpriteVM> Items { get; private set; }
-
         public string Name { get { return null; } }
 
         public PaletteVM Palette
@@ -73,9 +52,15 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #endregion Public Properties
 
-        #region Public Methods
+        #region Internal Methods
 
-        #endregion Public Methods
+        internal void SetupSprites(List<SpriteModel> sprites)
+        {
+            foreach (var sprite in sprites)
+                Items.Add(SpriteVM.Create(sprite));
+        }
+
+        #endregion Internal Methods
 
         #region Private Methods
 
@@ -111,17 +96,10 @@ namespace OpenBreed.Editor.VM.Sprites
                     foreach (var item in Items)
                         BitmapHelper.SetPaletteColors(item.Bitmap, Palette.Colors.ToArray());
                     break;
+
                 default:
                     break;
             }
-        }
-
-        internal void Load(string name)
-        {
-            var model = ServiceLocator.Instance.GetService<DataProvider>().SpriteSets.GetSpriteSet(name);
-
-            foreach (var sprite in model.Sprites)
-                Items.Add(SpriteVM.Create(sprite));
         }
 
         #endregion Private Methods

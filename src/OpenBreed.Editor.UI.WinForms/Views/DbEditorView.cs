@@ -28,6 +28,8 @@ using OpenBreed.Editor.VM.Assets;
 using OpenBreed.Editor.UI.WinForms.Controls.Assets;
 using OpenBreed.Editor.VM.Texts;
 using OpenBreed.Editor.UI.WinForms.Controls.Texts;
+using OpenBreed.Editor.VM.Sprites;
+using OpenBreed.Editor.UI.WinForms.Controls.Sprites;
 
 namespace OpenBreed.Editor.UI.WinForms.Views
 {
@@ -73,6 +75,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
             _viewFactory.Register<SoundEditorVM, EntryEditorView<SoundEditorCtrl>>();
             _viewFactory.Register<TileSetEditorVM, EntryEditorView<TileSetEditorCtrl>>();
+            _viewFactory.Register<SpriteSetEditorVM, EntryEditorView<SpriteSetEditorCtrl>>();
             _viewFactory.Register<ActionSetEditorVM, EntryEditorView<ActionSetEditorCtrl>>();
             _viewFactory.Register<ImageEditorVM, EntryEditorView<ImageEditorCtrl>>();
             _viewFactory.Register<PaletteEditorVM, EntryEditorView<PaletteEditorCtrl>>();

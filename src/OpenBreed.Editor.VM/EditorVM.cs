@@ -65,6 +65,7 @@ namespace OpenBreed.Editor.VM
 
             var entryEditorFactory = new DbEntryEditorFactory();
             entryEditorFactory.Register<IRepository<ITileSetEntry>, TileSetEditorVM>();
+            entryEditorFactory.Register<IRepository<ISpriteSetEntry>, SpriteSetEditorVM>();
             entryEditorFactory.Register<IRepository<IActionSetEntry>, ActionSetEditorVM>();
             entryEditorFactory.Register<IRepository<IPaletteEntry>, PaletteEditorVM>();
             entryEditorFactory.Register<IRepository<ITextEntry>, TextEditorVM>();
@@ -148,11 +149,6 @@ namespace OpenBreed.Editor.VM
         #endregion Public Methods
 
         #region Internal Methods
-
-        internal SpriteSetVM CreateSpiteSet(SpriteSetModel spriteSet)
-        {
-            return new SpriteSetVM(this, spriteSet);
-        }
 
         internal bool TrySaveDatabase()
         {
