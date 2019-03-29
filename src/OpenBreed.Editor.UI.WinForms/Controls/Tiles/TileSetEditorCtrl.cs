@@ -25,6 +25,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Tiles
         {
             _vm = vm as TileSetEditorVM ?? throw new InvalidOperationException(nameof(vm));
 
+            cbxPalettes.DataSource = _vm.PaletteIds;
+            cbxPalettes.DataBindings.Add(nameof(cbxPalettes.SelectedItem), _vm, nameof(_vm.CurrentPaletteId), false, DataSourceUpdateMode.OnPropertyChanged);
+
             TileSetViewer.Initialize(_vm.TileSetViewer);
         }
 

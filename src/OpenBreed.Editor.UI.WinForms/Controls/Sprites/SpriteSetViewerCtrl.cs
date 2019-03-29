@@ -13,6 +13,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
 {
     public partial class SpriteSetViewerCtrl : UserControl
     {
+
         #region Private Fields
 
         private SpriteSetViewerVM _vm;
@@ -29,7 +30,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
         }
 
         #endregion Public Constructors
-
 
         #region Public Methods
 
@@ -97,5 +97,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
         }
 
         #endregion Private Methods
+
     }
 }

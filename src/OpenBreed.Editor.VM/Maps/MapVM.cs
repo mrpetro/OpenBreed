@@ -46,7 +46,7 @@ namespace OpenBreed.Editor.VM.Maps
             TileSets = new BindingList<TileSetVM>();
             TileSets.ListChanged += (s, e) => OnPropertyChanged(nameof(TileSets));
 
-            Palettes = new BindingList<PaletteVM>();
+            Palettes = new BindingList<PaletteModel>();
             Palettes.ListChanged += (s, e) => OnPropertyChanged(nameof(Palettes));
 
             SpriteSets = new BindingList<SpriteSetVM>();
@@ -75,7 +75,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         public MapLayoutVM Layout { get; }
 
-        public BindingList<PaletteVM> Palettes { get; }
+        public BindingList<PaletteModel> Palettes { get; }
         public LevelPropertiesVM Properties { get; }
         public AssetBase Source
         {
@@ -107,13 +107,7 @@ namespace OpenBreed.Editor.VM.Maps
             Palettes.UpdateAfter(() =>
             {
                 Palettes.Clear();
-
-                foreach (var palette in palettes)
-                {
-                    var paletteVM = new PaletteVM();
-                    paletteVM.FromModel(palette);
-                    Palettes.Add(paletteVM);
-                }
+                palettes.ForEach(palette => Palettes.Add(palette));
             });
         }
 

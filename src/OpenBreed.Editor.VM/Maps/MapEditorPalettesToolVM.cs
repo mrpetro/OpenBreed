@@ -14,7 +14,7 @@ namespace OpenBreed.Editor.VM.Maps
         #region Private Fields
 
         private int _currentIndex = -1;
-        private PaletteVM _currentItem = null;
+        private PaletteModel _currentItem = null;
 
         #endregion Private Fields
 
@@ -37,7 +37,7 @@ namespace OpenBreed.Editor.VM.Maps
             set { SetProperty(ref _currentIndex, value); }
         }
 
-        public PaletteVM CurrentItem
+        public PaletteModel CurrentItem
         {
             get { return _currentItem; }
             set { SetProperty(ref _currentItem, value); }

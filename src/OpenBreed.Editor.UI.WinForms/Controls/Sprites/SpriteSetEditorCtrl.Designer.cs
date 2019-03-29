@@ -29,37 +29,73 @@
         private void InitializeComponent()
         {
             this.SpriteSetViewer = new OpenBreed.Editor.UI.WinForms.Controls.Sprites.SpriteSetViewerCtrl();
+            this.grpTools = new System.Windows.Forms.GroupBox();
             this.btnImport = new System.Windows.Forms.Button();
+            this.lblPalettes = new System.Windows.Forms.Label();
+            this.cbxPalettes = new System.Windows.Forms.ComboBox();
+            this.grpTools.SuspendLayout();
             this.SuspendLayout();
             // 
             // SpriteSetViewer
             // 
-            this.SpriteSetViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.SpriteSetViewer.Location = new System.Drawing.Point(3, 32);
+            this.SpriteSetViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SpriteSetViewer.Location = new System.Drawing.Point(0, 49);
             this.SpriteSetViewer.Name = "SpriteSetViewer";
-            this.SpriteSetViewer.Size = new System.Drawing.Size(575, 481);
+            this.SpriteSetViewer.Size = new System.Drawing.Size(581, 464);
             this.SpriteSetViewer.TabIndex = 0;
+            // 
+            // grpTools
+            // 
+            this.grpTools.Controls.Add(this.btnImport);
+            this.grpTools.Controls.Add(this.lblPalettes);
+            this.grpTools.Controls.Add(this.cbxPalettes);
+            this.grpTools.Dock = System.Windows.Forms.DockStyle.Top;
+            this.grpTools.Location = new System.Drawing.Point(0, 0);
+            this.grpTools.Name = "grpTools";
+            this.grpTools.Size = new System.Drawing.Size(581, 49);
+            this.grpTools.TabIndex = 5;
+            this.grpTools.TabStop = false;
+            this.grpTools.Text = "Tools";
             // 
             // btnImport
             // 
-            this.btnImport.Location = new System.Drawing.Point(3, 3);
+            this.btnImport.Location = new System.Drawing.Point(6, 20);
             this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(60, 23);
+            this.btnImport.Size = new System.Drawing.Size(60, 21);
             this.btnImport.TabIndex = 1;
             this.btnImport.Text = "Import...";
             this.btnImport.UseVisualStyleBackColor = true;
-            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            // 
+            // lblPalettes
+            // 
+            this.lblPalettes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPalettes.AutoSize = true;
+            this.lblPalettes.Location = new System.Drawing.Point(330, 23);
+            this.lblPalettes.Name = "lblPalettes";
+            this.lblPalettes.Size = new System.Drawing.Size(90, 13);
+            this.lblPalettes.TabIndex = 3;
+            this.lblPalettes.Text = "Example palettes:";
+            // 
+            // cbxPalettes
+            // 
+            this.cbxPalettes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxPalettes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxPalettes.FormattingEnabled = true;
+            this.cbxPalettes.Location = new System.Drawing.Point(426, 20);
+            this.cbxPalettes.Name = "cbxPalettes";
+            this.cbxPalettes.Size = new System.Drawing.Size(149, 21);
+            this.cbxPalettes.TabIndex = 2;
             // 
             // SpriteSetEditorCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnImport);
             this.Controls.Add(this.SpriteSetViewer);
+            this.Controls.Add(this.grpTools);
             this.Name = "SpriteSetEditorCtrl";
             this.Size = new System.Drawing.Size(581, 513);
+            this.grpTools.ResumeLayout(false);
+            this.grpTools.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -67,6 +103,9 @@
         #endregion
 
         private SpriteSetViewerCtrl SpriteSetViewer;
+        private System.Windows.Forms.GroupBox grpTools;
         private System.Windows.Forms.Button btnImport;
+        private System.Windows.Forms.Label lblPalettes;
+        private System.Windows.Forms.ComboBox cbxPalettes;
     }
 }

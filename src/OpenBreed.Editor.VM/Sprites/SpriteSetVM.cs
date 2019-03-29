@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common.Data;
 using OpenBreed.Common.Drawing;
+using OpenBreed.Common.Palettes;
 using OpenBreed.Common.Sprites;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Palettes;
@@ -14,7 +15,7 @@ namespace OpenBreed.Editor.VM.Sprites
     {
         #region Private Fields
 
-        private PaletteVM _palette;
+        private PaletteModel _palette;
 
         #endregion Private Fields
 
@@ -34,20 +35,10 @@ namespace OpenBreed.Editor.VM.Sprites
         public BindingList<SpriteVM> Items { get; private set; }
         public string Name { get { return null; } }
 
-        public PaletteVM Palette
+        public PaletteModel Palette
         {
             get { return _palette; }
-            set
-            {
-                var prevPalette = _palette;
-                if (SetProperty(ref _palette, value))
-                {
-                    if (prevPalette != null)
-                        prevPalette.PropertyChanged -= Palette_PropertyChanged;
-
-                    _palette.PropertyChanged += Palette_PropertyChanged;
-                }
-            }
+            set { SetProperty(ref _palette, value); }
         }
 
         #endregion Public Properties
@@ -64,37 +55,13 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Private Methods
 
-        private void Palette_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                //case nameof(Palette.Colors):
-                //    Palette = Root.LevelEditor.PaletteSelector.CurrentItem;
-                //    break;
-                default:
-                    break;
-            }
-        }
-
-        private void Palettes_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                //case nameof(Root.LevelEditor.PaletteSelector.CurrentItem):
-                //    Palette = Root.LevelEditor.PaletteSelector.CurrentItem;
-                //    break;
-                default:
-                    break;
-            }
-        }
-
         private void SpriteSetVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
                 case nameof(Palette):
                     foreach (var item in Items)
-                        BitmapHelper.SetPaletteColors(item.Bitmap, Palette.Colors.ToArray());
+                        BitmapHelper.SetPaletteColors(item.Bitmap, Palette.Data);
                     break;
 
                 default:
