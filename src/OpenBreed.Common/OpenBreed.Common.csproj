@@ -55,6 +55,7 @@
     <Compile Include="Data\DataProvider.cs" />
     <Compile Include="Data\AssetsDataProvider.cs" />
     <Compile Include="Data\ImagesDataProvider.cs" />
+    <Compile Include="Data\TileSetsDataHelper.cs" />
     <Compile Include="Data\TextsDataHelper.cs" />
     <Compile Include="Data\PalettesDataHelper.cs" />
     <Compile Include="Data\PalettesDataProvider.cs" />
@@ -94,6 +95,8 @@
     <Compile Include="Texts\ITextEmbeddedEntry.cs" />
     <Compile Include="Texts\ITextFromMapEntry.cs" />
     <Compile Include="Texts\TextModel.cs" />
+    <Compile Include="Tiles\ITileSetFromImageEntry.cs" />
+    <Compile Include="Tiles\ITileSetFromBlkEntry.cs" />
     <Compile Include="Tiles\ITileSetEntry.cs" />
     <Compile Include="Drawing\BitmapHelper.cs" />
     <Compile Include="IEntry.cs" />

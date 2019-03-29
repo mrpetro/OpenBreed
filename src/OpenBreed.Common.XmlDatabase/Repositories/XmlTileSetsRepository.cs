@@ -31,7 +31,15 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
         #region Public Properties
 
         public IEnumerable<IEntry> Entries { get { return _table.Items; } }
-        public IEnumerable<Type> EntryTypes { get { yield return typeof(XmlTileSetEntry); } }
+        public IEnumerable<Type> EntryTypes
+        {
+            get
+            {
+                yield return typeof(XmlTileSetFromBlkEntry);
+                yield return typeof(XmlTileSetFromImageEntry);
+            }
+        }
+
         public string Name { get { return "Tile sets"; } }
 
         #endregion Public Properties

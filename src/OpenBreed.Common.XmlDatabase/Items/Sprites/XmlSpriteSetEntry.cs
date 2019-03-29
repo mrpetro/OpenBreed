@@ -20,6 +20,10 @@ namespace OpenBreed.Common.XmlDatabase.Items.Sprites
         [XmlElement("DataRef")]
         public string DataRef { get; set; }
 
+        [XmlArray("PaletteRefs"),
+        XmlArrayItem("PaletteRef", typeof(string))]
+        public List<string> PaletteRefs { get; } = new List<string>();
+
         public override IEntry Copy()
         {
             throw new NotImplementedException();

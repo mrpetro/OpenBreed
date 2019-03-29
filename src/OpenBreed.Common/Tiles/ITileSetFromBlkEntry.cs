@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Tiles
 {
-    public interface ITileSetEntry : IEntry
+    public interface ITileSetFromBlkEntry : ITileSetEntry
     {
-        List<string> PaletteRefs { get; }
+        string DataRef { get; }
     }
 }

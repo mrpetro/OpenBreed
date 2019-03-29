@@ -306,24 +306,42 @@
     </Images>
     <TileSets>
       <Items>
-        <TileSet Id="TileSets.LA">
+        <TileSetFromBLK Id="TileSets.LA">
           <DataRef>Assets.LABM</DataRef>
-        </TileSet>
-        <TileSet Id="TileSets.LB">
+          <PaletteRefs>
+            <PaletteRef>Palettes.LA</PaletteRef>
+          </PaletteRefs>
+        </TileSetFromBLK>
+        <TileSetFromBLK Id="TileSets.LB">
           <DataRef>Assets.LBBM</DataRef>
-        </TileSet>
-        <TileSet Id="TileSets.LC">
+          <PaletteRefs>
+            <PaletteRef>Palettes.LB</PaletteRef>
+          </PaletteRefs>
+        </TileSetFromBLK>
+        <TileSetFromBLK Id="TileSets.LC">
           <DataRef>Assets.LCBM</DataRef>
-        </TileSet>
-        <TileSet Id="TileSets.LD">
+          <PaletteRefs>
+            <PaletteRef>Palettes.LC</PaletteRef>
+          </PaletteRefs>
+        </TileSetFromBLK>
+        <TileSetFromBLK Id="TileSets.LD">
           <DataRef>Assets.LDBM</DataRef>
-        </TileSet>
-        <TileSet Id="TileSets.LE">
+          <PaletteRefs>
+            <PaletteRef>Palettes.LD</PaletteRef>
+          </PaletteRefs>
+        </TileSetFromBLK>
+        <TileSetFromBLK Id="TileSets.LE">
           <DataRef>Assets.LEBM</DataRef>
-        </TileSet>
-        <TileSet Id="TileSets.LF">
+          <PaletteRefs>
+            <PaletteRef>Palettes.LE</PaletteRef>
+          </PaletteRefs>
+        </TileSetFromBLK>
+        <TileSetFromBLK Id="TileSets.LF">
           <DataRef>Assets.LFBM</DataRef>
-        </TileSet>
+          <PaletteRefs>
+            <PaletteRef>Palettes.LF</PaletteRef>
+          </PaletteRefs>
+        </TileSetFromBLK>
       </Items>
     </TileSets>
     <Palettes>

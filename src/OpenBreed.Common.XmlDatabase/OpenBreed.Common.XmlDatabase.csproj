@@ -63,6 +63,8 @@
     <Compile Include="Items\Texts\XmlTextEmbeddedEntry.cs" />
     <Compile Include="Items\Texts\XmlTextFromMapEntry.cs" />
     <Compile Include="Items\Tiles\XmlTileSetEntry.cs" />
+    <Compile Include="Items\Tiles\XmlTileSetFromImageEntry.cs" />
+    <Compile Include="Items\Tiles\XmlTileSetFromBlkEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\XmlActionSetsRepository.cs" />
     <Compile Include="Repositories\XmlAssetsRepository.cs" />

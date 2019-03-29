@@ -41,6 +41,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 yield return typeof(XmlPaletteFromMapEntry);
             }
         }
+
         public string Name { get { return "Palettes"; } }
 
         #endregion Public Properties

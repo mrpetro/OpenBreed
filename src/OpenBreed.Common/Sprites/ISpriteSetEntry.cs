@@ -10,5 +10,7 @@ namespace OpenBreed.Common.Sprites
     public interface ISpriteSetEntry : IEntry
     {
         string DataRef { get; }
+
+        List<string> PaletteRefs { get; }
     }
 }

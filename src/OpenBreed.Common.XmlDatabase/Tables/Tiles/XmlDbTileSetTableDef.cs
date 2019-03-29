@@ -11,7 +11,8 @@ namespace OpenBreed.Common.XmlDatabase.Tables.Tiles
     public class XmlDbTileSetTableDef : XmlDbTableDef
     {
         [XmlArray("Items"),
-        XmlArrayItem("TileSet", typeof(XmlTileSetEntry))]
+        XmlArrayItem("TileSetFromBLK", typeof(XmlTileSetFromBlkEntry)),
+        XmlArrayItem("TileSetFromImage", typeof(XmlTileSetFromImageEntry))]
         public readonly List<XmlTileSetEntry> Items = new List<XmlTileSetEntry>();
     }
 }

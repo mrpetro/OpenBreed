@@ -1,29 +1,15 @@
-﻿using OpenBreed.Common.Formats;
-using OpenBreed.Common.Tiles;
+﻿using OpenBreed.Common.Tiles;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace OpenBreed.Common.XmlDatabase.Items.Tiles
 {
     [Serializable]
-    [Description("Tile set"), Category("Appearance")]
-    public class XmlTileSetEntry : XmlDbEntry, ITileSetEntry
+    public abstract class XmlTileSetEntry : XmlDbEntry, ITileSetEntry
     {
-        #region Public Properties
-
-        [XmlElement("DataRef")]
-        public string DataRef { get; set; }
-
-        public override IEntry Copy()
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion Public Properties
+        [XmlArray("PaletteRefs"),
+        XmlArrayItem("PaletteRef", typeof(string))]
+        public List<string> PaletteRefs { get; } = new List<string>();
     }
 }

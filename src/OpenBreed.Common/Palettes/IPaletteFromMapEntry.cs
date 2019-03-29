@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Palettes
 {
+    /// <summary>
+    /// Palette entry interface where source palette comes from MapModel palette blocks
+    /// </summary>
     public interface IPaletteFromMapEntry : IPaletteEntry
     {
         #region Public Properties

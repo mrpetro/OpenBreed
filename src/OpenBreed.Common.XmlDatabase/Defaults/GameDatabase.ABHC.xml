@@ -549,33 +549,69 @@
     </Images>
     <TileSets>
       <Items>
-        <TileSet Id="TileSets.L1">
+        <TileSetFromBLK Id="TileSets.L1">
           <DataRef>Assets.L1BM</DataRef>
-        </TileSet>
-        <TileSet Id="TileSets.L2">
+          <PaletteRefs>
+            <PaletteRef>Palettes.L1MA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.L1MA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </TileSetFromBLK>
+        <TileSetFromBLK Id="TileSets.L2">
           <DataRef>Assets.L2BM</DataRef>
-        </TileSet>
-        <TileSet Id="TileSets.L3">
+          <PaletteRefs>
+            <PaletteRef>Palettes.L2MA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.L2MA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </TileSetFromBLK>
+        <TileSetFromBLK Id="TileSets.L3">
           <DataRef>Assets.L3BM</DataRef>
-        </TileSet>
-        <TileSet Id="TileSets.L4">
+          <PaletteRefs>
+            <PaletteRef>Palettes.L3MA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.L3MA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </TileSetFromBLK>
+        <TileSetFromBLK Id="TileSets.L4">
           <DataRef>Assets.L4BM</DataRef>
-        </TileSet>
-        <TileSet Id="TileSets.L5">
+          <PaletteRefs>
+            <PaletteRef>Palettes.L4MA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.L4MA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </TileSetFromBLK>
+        <TileSetFromBLK Id="TileSets.L5">
           <DataRef>Assets.L5BM</DataRef>
-        </TileSet>
-        <TileSet Id="TileSets.L6">
+          <PaletteRefs>
+            <PaletteRef>Palettes.L5MA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.L5MA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </TileSetFromBLK>
+        <TileSetFromBLK Id="TileSets.L6">
           <DataRef>Assets.L6BM</DataRef>
-        </TileSet>
-        <TileSet Id="TileSets.L7">
+          <PaletteRefs>
+            <PaletteRef>Palettes.L6MA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.L6MA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </TileSetFromBLK>
+        <TileSetFromBLK Id="TileSets.L7">
           <DataRef>Assets.L7BM</DataRef>
-        </TileSet>
-        <TileSet Id="TileSets.L8">
+          <PaletteRefs>
+            <PaletteRef>Palettes.LAMA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.LAMA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </TileSetFromBLK>
+        <TileSetFromBLK Id="TileSets.L8">
           <DataRef>Assets.L8BM</DataRef>
-        </TileSet>
-        <TileSet Id="TileSets.L9">
+          <PaletteRefs>
+            <PaletteRef>Palettes.LCMA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.LCMA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </TileSetFromBLK>
+        <TileSetFromBLK Id="TileSets.L9">
           <DataRef>Assets.L9BM</DataRef>
-        </TileSet>
+          <PaletteRefs>
+            <PaletteRef>Palettes.LEMA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.LEMA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </TileSetFromBLK>
       </Items>
     </TileSets>
     <Maps>
@@ -756,7 +792,7 @@
       <Items>
         <ActionSet Id="Actions.Level1">
           <Actions>
-            <Action Id="0" Name="Air" >
+            <Action Id="0" Name="Air">
               <Description>No collision, no action</Description>
               <Presentation>
                 <Color>#7F000000</Color>
@@ -764,7 +800,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="1" Name="Heavy turret" >
+            <Action Id="1" Name="Heavy turret">
               <Description>Left up corner of turrent, insta-kill when when player collides</Description>
               <Presentation>
                 <Color>#50FFFF00</Color>
@@ -772,7 +808,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="2" Name="Lizard" >
+            <Action Id="2" Name="Lizard">
               <Description>Almost harmless, killed when collides with player (which takes very little damage)</Description>
               <Presentation>
                 <Color>#50FFFF00</Color>
@@ -780,7 +816,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="3" Name="Unknown 3" >
+            <Action Id="3" Name="Unknown 3">
               <Description>Unknown action</Description>
               <Presentation>
                 <Color>#C0000000</Color>
@@ -788,7 +824,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="4" Name="Animated sprite" >
+            <Action Id="4" Name="Animated sprite">
               <Description>Left up corner of sprite</Description>
               <Presentation>
                 <Color>#50AAAAAA</Color>
@@ -796,7 +832,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="5" Name="Unknown 5" >
+            <Action Id="5" Name="Unknown 5">
               <Description>Unknown action</Description>
               <Presentation>
                 <Color>#C0000000</Color>
@@ -804,7 +840,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="6" Name="Unknown 6" >
+            <Action Id="6" Name="Unknown 6">
               <Description>Unknown action</Description>
               <Presentation>
                 <Color>#C0000000</Color>
@@ -812,7 +848,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="7" Name="Unknown 7" >
+            <Action Id="7" Name="Unknown 7">
               <Description>Unknown action</Description>
               <Presentation>
                 <Color>#C0000000</Color>
@@ -820,7 +856,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="8" Name="Unknown 8" >
+            <Action Id="8" Name="Unknown 8">
               <Description>Unknown action</Description>
               <Presentation>
                 <Color>#C0000000</Color>
@@ -828,7 +864,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="9" Name="Unknown 9" >
+            <Action Id="9" Name="Unknown 9">
               <Description>Unknown action</Description>
               <Presentation>
                 <Color>#C0000000</Color>
@@ -836,7 +872,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="10" Name="Unknown 10" >
+            <Action Id="10" Name="Unknown 10">
               <Description>Unknown action</Description>
               <Presentation>
                 <Color>#C0000000</Color>
@@ -844,7 +880,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="11" Name="Unknown 11" >
+            <Action Id="11" Name="Unknown 11">
               <Description>Unknown action</Description>
               <Presentation>
                 <Color>#C0000000</Color>
@@ -852,7 +888,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="12" Name="Unknown 12" >
+            <Action Id="12" Name="Unknown 12">
               <Description>Unknown action</Description>
               <Presentation>
                 <Color>#C0000000</Color>
@@ -860,7 +896,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="13" Name="Unknown 13" >
+            <Action Id="13" Name="Unknown 13">
               <Description>Unknown action</Description>
               <Presentation>
                 <Color>#C0000000</Color>
@@ -868,7 +904,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="14" Name="Working generator" >
+            <Action Id="14" Name="Working generator">
               <Description>Top left corner of working generator animation</Description>
               <Presentation>
                 <Color>#2030FFFF</Color>
@@ -876,7 +912,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="15" Name="Unknown 15" >
+            <Action Id="15" Name="Unknown 15">
               <Description>Unknown action</Description>
               <Presentation>
                 <Color>#C0000000</Color>
@@ -884,7 +920,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="16" Name="Down left obstacle (for all)" >
+            <Action Id="16" Name="Down left obstacle (for all)">
               <Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
               <Presentation>
                 <Color>#20FF0000</Color>
@@ -892,7 +928,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="17" Name="Top left obstacle (for all)" >
+            <Action Id="17" Name="Top left obstacle (for all)">
               <Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
               <Presentation>
                 <Color>#20FF0000</Color>
@@ -900,7 +936,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="18" Name="Up right obstacle (for all)" >
+            <Action Id="18" Name="Up right obstacle (for all)">
               <Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
               <Presentation>
                 <Color>#20FF0000</Color>
@@ -908,7 +944,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="19" Name="Down right obstacle (for all)" >
+            <Action Id="19" Name="Down right obstacle (for all)">
               <Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
               <Presentation>
                 <Color>#20FF0000</Color>
@@ -916,7 +952,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="20" Name="Unknown 20" >
+            <Action Id="20" Name="Unknown 20">
               <Description>Unknown action</Description>
               <Presentation>
                 <Color>#C0000000</Color>
@@ -924,7 +960,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="21" Name="Unknown 21" >
+            <Action Id="21" Name="Unknown 21">
               <Description>Unknown action</Description>
               <Presentation>
                 <Color>#C0000000</Color>
@@ -932,7 +968,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="22" Name="Smart card 1" >
+            <Action Id="22" Name="Smart card 1">
               <Description>This will show message from smart card 1</Description>
               <Presentation>
                 <Color>#800000FF</Color>
@@ -940,7 +976,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="23" Name="Smart card 2" >
+            <Action Id="23" Name="Smart card 2">
               <Description>This will show message from smart card 2</Description>
               <Presentation>
                 <Color>#800000FF</Color>
@@ -948,7 +984,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="24" Name="Smart card 3" >
+            <Action Id="24" Name="Smart card 3">
               <Description>This will show message from smart card 3</Description>
               <Presentation>
                 <Color>#800000FF</Color>
@@ -956,7 +992,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="25" Name="Unknown 25" >
+            <Action Id="25" Name="Unknown 25">
               <Description>Unknown action</Description>
               <Presentation>
                 <Color>#C0000000</Color>
@@ -964,7 +1000,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="26" Name="Unknown 26" >
+            <Action Id="26" Name="Unknown 26">
               <Description>Unknown action</Description>
               <Presentation>
                 <Color>#C0000000</Color>
@@ -972,7 +1008,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="27" Name="Unknown 27" >
+            <Action Id="27" Name="Unknown 27">
               <Description>Unknown action</Description>
               <Presentation>
                 <Color>#C0000000</Color>
@@ -980,7 +1016,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="28" Name="Special door 1" >
+            <Action Id="28" Name="Special door 1">
               <Description>Door opened with special key card 1</Description>
               <Presentation>
                 <Color>#2030FF00</Color>
@@ -988,7 +1024,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="29" Name="Special door 2" >
+            <Action Id="29" Name="Special door 2">
               <Description>Door opened with special key card 2</Description>
               <Presentation>
                 <Color>#2030FF00</Color>
@@ -996,7 +1032,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="30" Name="Unknown 30" >
+            <Action Id="30" Name="Unknown 30">
               <Description>Unknown action</Description>
               <Presentation>
                 <Color>#C0000000</Color>
@@ -1004,7 +1040,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="31" Name="Local teleport (start)" >
+            <Action Id="31" Name="Local teleport (start)">
               <Color>#200FF000</Color>
               <Description>Teleports player from this location</Description>
               <Presentation>
@@ -1013,7 +1049,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="32" Name="Unknown 32" >
+            <Action Id="32" Name="Unknown 32">
               <Color>#C0000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1022,7 +1058,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="33" Name="Special key card 1" >
+            <Action Id="33" Name="Special key card 1">
               <Color>#503000FF</Color>
               <Description>key card opening special door 1</Description>
               <Presentation>
@@ -1031,7 +1067,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="34" Name="Special key card 2" >
+            <Action Id="34" Name="Special key card 2">
               <Color>#503000FF</Color>
               <Description>key card opening special door 2</Description>
               <Presentation>
@@ -1040,7 +1076,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="35" Name="Unknown 35" >
+            <Action Id="35" Name="Unknown 35">
               <Color>#C0000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1049,7 +1085,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="36" Name="Local teleport (end)" >
+            <Action Id="36" Name="Local teleport (end)">
               <Color>#20FF00FF</Color>
               <Description>Teleports player to this location, the one that is furthest</Description>
               <Presentation>
@@ -1058,7 +1094,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="37" Name="Exit 1" >
+            <Action Id="37" Name="Exit 1">
               <Color>#500FF000</Color>
               <Description>Collision, Finishes level</Description>
               <Presentation>
@@ -1067,7 +1103,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="38" Name="Exit 2" >
+            <Action Id="38" Name="Exit 2">
               <Color>#500FF000</Color>
               <Description>Collision, Finishes level</Description>
               <Presentation>
@@ -1076,7 +1112,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="39" Name="Unknown 39" >
+            <Action Id="39" Name="Unknown 39">
               <Color>#C0000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1085,7 +1121,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="40" Name="Unknown 40" >
+            <Action Id="40" Name="Unknown 40">
               <Color>#C0000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1094,7 +1130,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="41" Name="Unknown 41" >
+            <Action Id="41" Name="Unknown 41">
               <Color>#C0000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1103,7 +1139,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="42" Name="Unknown 42" >
+            <Action Id="42" Name="Unknown 42">
               <Color>#C0000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1112,7 +1148,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="43" Name="Unknown 43" >
+            <Action Id="43" Name="Unknown 43">
               <Color>#C0000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1121,7 +1157,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="44" Name="Unknown 44" >
+            <Action Id="44" Name="Unknown 44">
               <Color>#C0000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1130,7 +1166,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="45" Name="Entrance 1" >
+            <Action Id="45" Name="Entrance 1">
               <Color>#7FFF00FF</Color>
               <Description>No collision, spawns player here</Description>
               <Presentation>
@@ -1139,7 +1175,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="46" Name="Entrance 2" >
+            <Action Id="46" Name="Entrance 2">
               <Color>#7FFF00FF</Color>
               <Description>No collision, spawns player here</Description>
               <Presentation>
@@ -1148,7 +1184,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="47" Name="Land mine" >
+            <Action Id="47" Name="Land mine">
               <Color>#50FFFF00</Color>
               <Description>Explodes on stepping by player</Description>
               <Presentation>
@@ -1157,7 +1193,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="48" Name="Unknown 48" >
+            <Action Id="48" Name="Unknown 48">
               <Color>#C0000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1166,7 +1202,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="49" Name="Unknown 49" >
+            <Action Id="49" Name="Unknown 49">
               <Color>#C0000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1175,7 +1211,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="50" Name="Unknown 50" >
+            <Action Id="50" Name="Unknown 50">
               <Color>#C0000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1184,7 +1220,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="51" Name="Unknown 51" >
+            <Action Id="51" Name="Unknown 51">
               <Color>#C0000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1193,7 +1229,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="52" Name="Unknown 52" >
+            <Action Id="52" Name="Unknown 52">
               <Color>#C0000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1202,7 +1238,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="53" Name="Unknown 53" >
+            <Action Id="53" Name="Unknown 53">
               <Color>#C0000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1211,7 +1247,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="54" Name="Exit 3" >
+            <Action Id="54" Name="Exit 3">
               <Color>#500FF000</Color>
               <Description>Collision, Finishes level</Description>
               <Presentation>
@@ -1220,7 +1256,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="55" Name="Item" >
+            <Action Id="55" Name="Item">
               <Color>#500000FF</Color>
               <Description>Pickable item</Description>
               <Presentation>
@@ -1229,7 +1265,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="56" Name="Entrance 3" >
+            <Action Id="56" Name="Entrance 3">
               <Color>#7FFF00FF</Color>
               <Description>No collision, spawns player here</Description>
               <Presentation>
@@ -1238,7 +1274,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="57" Name="Obstacle(for enemies only)" >
+            <Action Id="57" Name="Obstacle(for enemies only)">
               <Color>#20FF00FF</Color>
               <Description>Player can walk trough it, movable enemies can't</Description>
               <Presentation>
@@ -1247,7 +1283,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="58" Name="Generator (activate switch)" >
+            <Action Id="58" Name="Generator (activate switch)">
               <Color>#2030FFFF</Color>
               <Description>Activates generator when player stomps on it</Description>
               <Presentation>
@@ -1256,7 +1292,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="59" Name="Unknown 59" >
+            <Action Id="59" Name="Unknown 59">
               <Color>#C0000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1265,7 +1301,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="60" Name="Obstacle(except projectiles)" >
+            <Action Id="60" Name="Obstacle(except projectiles)">
               <Color>#32F00000</Color>
               <Description>Collision, but weapon projectile can penetrate</Description>
               <Presentation>
@@ -1274,7 +1310,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="61" Name="Unknown 61" >
+            <Action Id="61" Name="Unknown 61">
               <Color>#C0000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1283,7 +1319,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="62" Name="Door" >
+            <Action Id="62" Name="Door">
               <Color>#320FF000</Color>
               <Description>Door with normal key card required</Description>
               <Presentation>
@@ -1292,7 +1328,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="63" Name="Obstacle(for all)" >
+            <Action Id="63" Name="Obstacle(for all)">
               <Color>#50F00000</Color>
               <Description>Collision, nothing can penetrate</Description>
               <Presentation>
@@ -1305,7 +1341,7 @@
         </ActionSet>
         <ActionSet Id="Actions.Default">
           <Actions>
-            <Action Id="0" Name="Air" >
+            <Action Id="0" Name="Air">
               <Color>#00000000</Color>
               <Description>No collision, no action</Description>
               <Presentation>
@@ -1314,7 +1350,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="1" Name="Monster (Type 1)" >
+            <Action Id="1" Name="Monster (Type 1)">
               <Color>#A0FF0000</Color>
               <Description>Start position of monster type 1</Description>
               <Presentation>
@@ -1323,7 +1359,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="2" Name="Monster (Type 2)" >
+            <Action Id="2" Name="Monster (Type 2)">
               <Color>#A0FF0000</Color>
               <Description>Start position of monster type 2</Description>
               <Presentation>
@@ -1332,7 +1368,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="3" Name="Monster (Type 3)" >
+            <Action Id="3" Name="Monster (Type 3)">
               <Color>#A0FF0000</Color>
               <Description>Start position of monster type 3</Description>
               <Presentation>
@@ -1341,7 +1377,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="4" Name="Monster (Type 4)" >
+            <Action Id="4" Name="Monster (Type 4)">
               <Color>#A0FF0000</Color>
               <Description>Start position of monster type 4</Description>
               <Presentation>
@@ -1350,7 +1386,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="5" Name="Unknown 5" >
+            <Action Id="5" Name="Unknown 5">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1359,7 +1395,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="6" Name="Unknown 6" >
+            <Action Id="6" Name="Unknown 6">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1368,7 +1404,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="7" Name="One way gate (Up)" >
+            <Action Id="7" Name="One way gate (Up)">
               <Color>#80FFFF00</Color>
               <Description>Gate that allows player to pass it only in up direction, other way insta-kills player</Description>
               <Presentation>
@@ -1377,7 +1413,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="8" Name="One way gate (Down)" >
+            <Action Id="8" Name="One way gate (Down)">
               <Color>#80FFFF00</Color>
               <Description>Gate that allows player to pass it only in down direction, other way insta-kills player</Description>
               <Presentation>
@@ -1386,7 +1422,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="9" Name="Unknown 9" >
+            <Action Id="9" Name="Unknown 9">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1395,7 +1431,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="10" Name="Unknown 10" >
+            <Action Id="10" Name="Unknown 10">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1404,7 +1440,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="11" Name="Unknown 11" >
+            <Action Id="11" Name="Unknown 11">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1413,7 +1449,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="12" Name="One way gate (Right)" >
+            <Action Id="12" Name="One way gate (Right)">
               <Color>#80FFFF00</Color>
               <Description>Gate that allows player to pass it only in right direction, other way insta-kills player</Description>
               <Presentation>
@@ -1422,7 +1458,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="13" Name="One way gate (Left)" >
+            <Action Id="13" Name="One way gate (Left)">
               <Color>#80FFFF00</Color>
               <Description>Gate that allows player to pass it only in left direction, other way insta-kills player</Description>
               <Presentation>
@@ -1431,7 +1467,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="14" Name="Directed gun (Right)" >
+            <Action Id="14" Name="Directed gun (Right)">
               <Color>#A0FF0000</Color>
               <Description>Gun directed to right, deals great damage to player</Description>
               <Presentation>
@@ -1440,7 +1476,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="15" Name="Directed gun (Up)" >
+            <Action Id="15" Name="Directed gun (Up)">
               <Color>#A0FF0000</Color>
               <Description>Gun directed to up, deals great damage to player</Description>
               <Presentation>
@@ -1449,7 +1485,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="16" Name="Down left obstacle (for all)" >
+            <Action Id="16" Name="Down left obstacle (for all)">
               <Color>#20FFFF00</Color>
               <Description>Slightly pushes actor up direction when comming from right, weapons can't penetrate</Description>
               <Presentation>
@@ -1458,7 +1494,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="17" Name="Top left obstacle (for all)" >
+            <Action Id="17" Name="Top left obstacle (for all)">
               <Color>#20FFFF00</Color>
               <Description>Slightly pushes actor down direction when comming from right, weapons can't penetrate</Description>
               <Presentation>
@@ -1467,7 +1503,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="18" Name="Up right obstacle (for all)" >
+            <Action Id="18" Name="Up right obstacle (for all)">
               <Color>#20FFFF00</Color>
               <Description>Slightly pushes actor in down direction when comming from left, weapons can't penetrate</Description>
               <Presentation>
@@ -1476,7 +1512,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="19" Name="Down right obstacle (for all)" >
+            <Action Id="19" Name="Down right obstacle (for all)">
               <Color>#20FFFF00</Color>
               <Description>Slightly pushes actor in up direction when comming from left, weapons can't penetrate</Description>
               <Presentation>
@@ -1485,7 +1521,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="20" Name="Unknown 20" >
+            <Action Id="20" Name="Unknown 20">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1494,7 +1530,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="21" Name="Unknown 21" >
+            <Action Id="21" Name="Unknown 21">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1503,7 +1539,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="22" Name="Smart card 1" >
+            <Action Id="22" Name="Smart card 1">
               <Color>#800000FF</Color>
               <Description>This will show note message from smart card 1</Description>
               <Presentation>
@@ -1512,7 +1548,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="23" Name="Smart card 2" >
+            <Action Id="23" Name="Smart card 2">
               <Color>#800000FF</Color>
               <Description>This will show note message from smart card 2</Description>
               <Presentation>
@@ -1521,7 +1557,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="24" Name="Smart card 3" >
+            <Action Id="24" Name="Smart card 3">
               <Color>#800000FF</Color>
               <Description>This will show note message from smart card 3</Description>
               <Presentation>
@@ -1530,7 +1566,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="25" Name="Unknown 25" >
+            <Action Id="25" Name="Unknown 25">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1539,7 +1575,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="26" Name="Unknown 26" >
+            <Action Id="26" Name="Unknown 26">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1548,7 +1584,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="27" Name="Unknown 27" >
+            <Action Id="27" Name="Unknown 27">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1557,7 +1593,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="28" Name="Unknown 28" >
+            <Action Id="28" Name="Unknown 28">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1566,7 +1602,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="29" Name="Unknown 29" >
+            <Action Id="29" Name="Unknown 29">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1575,7 +1611,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="30" Name="Unknown 30" >
+            <Action Id="30" Name="Unknown 30">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1584,7 +1620,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="31" Name="Local teleport (start)" >
+            <Action Id="31" Name="Local teleport (start)">
               <Color>#200FF000</Color>
               <Description>Teleports player from this location</Description>
               <Presentation>
@@ -1593,7 +1629,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="32" Name="Monster spawner" >
+            <Action Id="32" Name="Monster spawner">
               <Color>#F0FF0000</Color>
               <Description>Creates a hole where monsters are comming from</Description>
               <Presentation>
@@ -1602,7 +1638,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="33" Name="Unknown 33" >
+            <Action Id="33" Name="Unknown 33">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1611,7 +1647,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="34" Name="Unknown 34" >
+            <Action Id="34" Name="Unknown 34">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1620,7 +1656,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="35" Name="Unknown 35" >
+            <Action Id="35" Name="Unknown 35">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1629,7 +1665,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="36" Name="Local teleport (end)" >
+            <Action Id="36" Name="Local teleport (end)">
               <Color>#40FF00FF</Color>
               <Description>Teleports player to this location, the one that is furthest</Description>
               <Presentation>
@@ -1638,7 +1674,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="37" Name="Exit 1" >
+            <Action Id="37" Name="Exit 1">
               <Color>#500FF000</Color>
               <Description>Collision, Finishes level</Description>
               <Presentation>
@@ -1647,7 +1683,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="38" Name="Exit 2" >
+            <Action Id="38" Name="Exit 2">
               <Color>#500FF000</Color>
               <Description>Collision, Finishes level</Description>
               <Presentation>
@@ -1656,7 +1692,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="39" Name="Unknown 39" >
+            <Action Id="39" Name="Unknown 39">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1665,7 +1701,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="40" Name="Unknown 40" >
+            <Action Id="40" Name="Unknown 40">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1674,7 +1710,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="41" Name="Unknown 41" >
+            <Action Id="41" Name="Unknown 41">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1683,7 +1719,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="42" Name="Unknown 42" >
+            <Action Id="42" Name="Unknown 42">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1692,7 +1728,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="43" Name="Unknown 43" >
+            <Action Id="43" Name="Unknown 43">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1701,7 +1737,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="44" Name="Unknown 44" >
+            <Action Id="44" Name="Unknown 44">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1710,7 +1746,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="45" Name="Entrance 1" >
+            <Action Id="45" Name="Entrance 1">
               <Color>#7FFF00FF</Color>
               <Description>No collision, spawns player here</Description>
               <Presentation>
@@ -1719,7 +1755,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="46" Name="Entrance 2" >
+            <Action Id="46" Name="Entrance 2">
               <Color>#7FFF00FF</Color>
               <Description>No collision, spawns player here</Description>
               <Presentation>
@@ -1728,7 +1764,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="47" Name="Unknown 47" >
+            <Action Id="47" Name="Unknown 47">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1737,7 +1773,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="48" Name="Unknown 48" >
+            <Action Id="48" Name="Unknown 48">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1746,7 +1782,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="49" Name="Radioactive area" >
+            <Action Id="49" Name="Radioactive area">
               <Color>#4FFF7F00</Color>
               <Description>Radioactive area that hurts player if standing on it</Description>
               <Presentation>
@@ -1755,7 +1791,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="50" Name="Wall turrent (Up)" >
+            <Action Id="50" Name="Wall turrent (Up)">
               <Color>#A0FF0000</Color>
               <Description>Wall turret facing up</Description>
               <Presentation>
@@ -1764,7 +1800,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="51" Name="Wall turrent (Right)" >
+            <Action Id="51" Name="Wall turrent (Right)">
               <Color>#A0FF0000</Color>
               <Description>Wall turret facing right</Description>
               <Presentation>
@@ -1773,7 +1809,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="52" Name="Wall turrent (Down)" >
+            <Action Id="52" Name="Wall turrent (Down)">
               <Color>#A0FF0000</Color>
               <Description>Wall turret facing down</Description>
               <Presentation>
@@ -1782,7 +1818,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="53" Name="Wall turrent (Left)" >
+            <Action Id="53" Name="Wall turrent (Left)">
               <Color>#A0FF0000</Color>
               <Description>Wall turret facing left</Description>
               <Presentation>
@@ -1791,7 +1827,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="54" Name="Exit 3" >
+            <Action Id="54" Name="Exit 3">
               <Color>#500FF000</Color>
               <Description>Collision, Finishes level</Description>
               <Presentation>
@@ -1800,7 +1836,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="55" Name="Item" >
+            <Action Id="55" Name="Item">
               <Color>#500000FF</Color>
               <Description>Pickable item</Description>
               <Presentation>
@@ -1809,7 +1845,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="56" Name="Entrance 3" >
+            <Action Id="56" Name="Entrance 3">
               <Color>#7FFF00FF</Color>
               <Description>No collision, spawns player here</Description>
               <Presentation>
@@ -1818,7 +1854,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="57" Name="Obstacle(for enemies only)" >
+            <Action Id="57" Name="Obstacle(for enemies only)">
               <Color>#20FF00FF</Color>
               <Description>Player can walk trough it, movable enemies can't</Description>
               <Presentation>
@@ -1827,7 +1863,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="58" Name="Unknown 58" >
+            <Action Id="58" Name="Unknown 58">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1836,7 +1872,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="59" Name="Unknown 59" >
+            <Action Id="59" Name="Unknown 59">
               <Color>#00000000</Color>
               <Description>Unknown action</Description>
               <Presentation>
@@ -1845,7 +1881,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="60" Name="Obstacle(except projectiles)" >
+            <Action Id="60" Name="Obstacle(except projectiles)">
               <Color>#32FFFF00</Color>
               <Description>Collision, but weapon projectile can penetrate</Description>
               <Presentation>
@@ -1854,7 +1890,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="61" Name="Intex terminal" >
+            <Action Id="61" Name="Intex terminal">
               <Color>#7F0000FF</Color>
               <Description>Terminal that player may use</Description>
               <Presentation>
@@ -1863,7 +1899,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="62" Name="Door" >
+            <Action Id="62" Name="Door">
               <Color>#320FF000</Color>
               <Description>Door with no color card required</Description>
               <Presentation>
@@ -1872,7 +1908,7 @@
               </Presentation>
               <Triggers />
             </Action>
-            <Action Id="63" Name="Obstacle(for all)" >
+            <Action Id="63" Name="Obstacle(for all)">
               <Description>Collision, nothing can penetrate</Description>
               <Presentation>
                 <Visibility>false</Visibility>
@@ -1889,140 +1925,140 @@
     <Palettes>
       <Items>
         <PaletteFromMAP Id="Palettes.L1MA.CMAP">
-            <DataRef>Assets.L1MA</DataRef>
-            <BlockName>CMAP</BlockName>
+          <DataRef>Assets.L1MA</DataRef>
+          <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.L1MA.ALCM">
-            <DataRef>Assets.L1MA</DataRef>
-            <BlockName>ALCM</BlockName>
+          <DataRef>Assets.L1MA</DataRef>
+          <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.L2MA.CMAP">
-            <DataRef>Assets.L2MA</DataRef>
-            <BlockName>CMAP</BlockName>
+          <DataRef>Assets.L2MA</DataRef>
+          <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.L2MA.ALCM">
-            <DataRef>Assets.L2MA</DataRef>
-            <BlockName>ALCM</BlockName>
+          <DataRef>Assets.L2MA</DataRef>
+          <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.L3MA.CMAP">
-            <DataRef>Assets.L3MA</DataRef>
-            <BlockName>CMAP</BlockName>
+          <DataRef>Assets.L3MA</DataRef>
+          <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.L3MA.ALCM">
-            <DataRef>Assets.L3MA</DataRef>
-            <BlockName>ALCM</BlockName>
+          <DataRef>Assets.L3MA</DataRef>
+          <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.L4MA.CMAP">
-            <DataRef>Assets.L4MA</DataRef>
-            <BlockName>CMAP</BlockName>
+          <DataRef>Assets.L4MA</DataRef>
+          <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.L4MA.ALCM">
-            <DataRef>Assets.L4MA</DataRef>
-            <BlockName>ALCM</BlockName>
+          <DataRef>Assets.L4MA</DataRef>
+          <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.L5MA.CMAP">
-            <DataRef>Assets.L5MA</DataRef>
-            <BlockName>CMAP</BlockName>
+          <DataRef>Assets.L5MA</DataRef>
+          <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.L5MA.ALCM">
-            <DataRef>Assets.L5MA</DataRef>
-            <BlockName>ALCM</BlockName>
+          <DataRef>Assets.L5MA</DataRef>
+          <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.L6MA.CMAP">
-            <DataRef>Assets.L6MA</DataRef>
-            <BlockName>CMAP</BlockName>
+          <DataRef>Assets.L6MA</DataRef>
+          <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.L6MA.ALCM">
-            <DataRef>Assets.L6MA</DataRef>
-            <BlockName>ALCM</BlockName>
+          <DataRef>Assets.L6MA</DataRef>
+          <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.L7MA.CMAP">
-            <DataRef>Assets.L7MA</DataRef>
-            <BlockName>CMAP</BlockName>
+          <DataRef>Assets.L7MA</DataRef>
+          <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.L7MA.ALCM">
-            <DataRef>Assets.L7MA</DataRef>
-            <BlockName>ALCM</BlockName>
+          <DataRef>Assets.L7MA</DataRef>
+          <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.L8MA.CMAP">
-            <DataRef>Assets.L8MA</DataRef>
-            <BlockName>CMAP</BlockName>
+          <DataRef>Assets.L8MA</DataRef>
+          <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.L8MA.ALCM">
-            <DataRef>Assets.L8MA</DataRef>
-            <BlockName>ALCM</BlockName>
+          <DataRef>Assets.L8MA</DataRef>
+          <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.L9MA.CMAP">
-            <DataRef>Assets.L9MA</DataRef>
-            <BlockName>CMAP</BlockName>
+          <DataRef>Assets.L9MA</DataRef>
+          <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.L9MA.ALCM">
-            <DataRef>Assets.L9MA</DataRef>
-            <BlockName>ALCM</BlockName>
+          <DataRef>Assets.L9MA</DataRef>
+          <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.LAMA.CMAP">
-            <DataRef>Assets.LAMA</DataRef>
-            <BlockName>CMAP</BlockName>
+          <DataRef>Assets.LAMA</DataRef>
+          <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.LAMA.ALCM">
-            <DataRef>Assets.LAMA</DataRef>
-            <BlockName>ALCM</BlockName>
-        </PaletteFromMAP>    
+          <DataRef>Assets.LAMA</DataRef>
+          <BlockName>ALCM</BlockName>
+        </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.LBMA.CMAP">
-            <DataRef>Assets.LBMA</DataRef>
-            <BlockName>CMAP</BlockName>
+          <DataRef>Assets.LBMA</DataRef>
+          <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.LBMA.ALCM">
-            <DataRef>Assets.LBMA</DataRef>
-            <BlockName>ALCM</BlockName>
+          <DataRef>Assets.LBMA</DataRef>
+          <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.LCMA.CMAP">
-            <DataRef>Assets.LCMA</DataRef>
-            <BlockName>CMAP</BlockName>
+          <DataRef>Assets.LCMA</DataRef>
+          <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.LCMA.ALCM">
-            <DataRef>Assets.LCMA</DataRef>
-            <BlockName>ALCM</BlockName>
+          <DataRef>Assets.LCMA</DataRef>
+          <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.LDMA.CMAP">
-            <DataRef>Assets.LDMA</DataRef>
-            <BlockName>CMAP</BlockName>
+          <DataRef>Assets.LDMA</DataRef>
+          <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.LDMA.ALCM">
-            <DataRef>Assets.LDMA</DataRef>
-            <BlockName>ALCM</BlockName>
+          <DataRef>Assets.LDMA</DataRef>
+          <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.LEMA.CMAP">
-            <DataRef>Assets.LEMA</DataRef>
-            <BlockName>CMAP</BlockName>
+          <DataRef>Assets.LEMA</DataRef>
+          <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.LEMA.ALCM">
-            <DataRef>Assets.LEMA</DataRef>
-            <BlockName>ALCM</BlockName>
+          <DataRef>Assets.LEMA</DataRef>
+          <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MMA1.CMAP">
-            <DataRef>Assets.MMA1</DataRef>
-            <BlockName>CMAP</BlockName>
+          <DataRef>Assets.MMA1</DataRef>
+          <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MMA1.ALCM">
-            <DataRef>Assets.MMA1</DataRef>
-            <BlockName>ALCM</BlockName>
+          <DataRef>Assets.MMA1</DataRef>
+          <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MMA2.CMAP">
-            <DataRef>Assets.MMA2</DataRef>
-            <BlockName>CMAP</BlockName>
+          <DataRef>Assets.MMA2</DataRef>
+          <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MMA2.ALCM">
-            <DataRef>Assets.MMA2</DataRef>
-            <BlockName>ALCM</BlockName>
+          <DataRef>Assets.MMA2</DataRef>
+          <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MMA3.CMAP">
-            <DataRef>Assets.MMA3</DataRef>
-            <BlockName>CMAP</BlockName>
+          <DataRef>Assets.MMA3</DataRef>
+          <BlockName>CMAP</BlockName>
         </PaletteFromMAP>
         <PaletteFromMAP Id="Palettes.MMA3.ALCM">
-            <DataRef>Assets.MMA3</DataRef>
-            <BlockName>ALCM</BlockName>
+          <DataRef>Assets.MMA3</DataRef>
+          <BlockName>ALCM</BlockName>
         </PaletteFromMAP>
       </Items>
     </Palettes>

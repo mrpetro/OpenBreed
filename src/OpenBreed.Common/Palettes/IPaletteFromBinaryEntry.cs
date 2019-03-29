@@ -12,6 +12,9 @@ namespace OpenBreed.Common.Palettes
         COLOR_32BIT
     }
 
+    /// <summary>
+    /// Palette entry interface where source palette comes from binary data
+    /// </summary>
     public interface IPaletteFromBinaryEntry : IPaletteEntry
     {
         #region Public Properties

@@ -29,19 +29,19 @@ namespace OpenBreed.Common.Data
         #endregion Public Properties
 
 
-        private PaletteModel GetModelImpl(IPaletteFromMapEntry paletteData)
+        private PaletteModel GetModelImpl(IPaletteFromMapEntry entry)
         {
-            return PalettesDataHelper.FromMapModel(Provider, paletteData);
+            return PalettesDataHelper.FromMapModel(Provider, entry);
         }
 
-        private PaletteModel GetModelImpl(IPaletteFromBinaryEntry paletteData)
+        private PaletteModel GetModelImpl(IPaletteFromBinaryEntry entry)
         {
-            return PalettesDataHelper.FromBinary(Provider, paletteData);
+            return PalettesDataHelper.FromBinary(Provider, entry);
         }
 
-        private PaletteModel GetModel(dynamic paletteEntry)
+        private PaletteModel GetModel(dynamic entry)
         {
-            return GetModelImpl(paletteEntry);
+            return GetModelImpl(entry);
         }
 
         public PaletteModel GetPalette(string id)

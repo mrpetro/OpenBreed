@@ -27,16 +27,28 @@ namespace OpenBreed.Common.Data
 
         #region Public Methods
 
+        private TileSetModel GetModelImpl(ITileSetFromBlkEntry entry)
+        {
+            return TileSetsDataHelper.FromBlkModel(Provider, entry);
+        }
+
+        private TileSetModel GetModelImpl(ITileSetFromImageEntry entry)
+        {
+            return TileSetsDataHelper.FromImageModel(Provider, entry);
+        }
+
+        private TileSetModel GetModel(dynamic entry)
+        {
+            return GetModelImpl(entry);
+        }
+
         public TileSetModel GetTileSet(string id)
         {
             var entry = Provider.UnitOfWork.GetRepository<ITileSetEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("TileSet error: " + id);
 
-            if (entry.DataRef == null)
-                return null;
-
-            return Provider.GetData(entry.DataRef) as TileSetModel;
+            return GetModel(entry);
         }
 
         #endregion Public Methods
