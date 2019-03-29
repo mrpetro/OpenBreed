@@ -26,6 +26,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
         {
             _vm = vm as SpriteSetEditorVM ?? throw new InvalidOperationException(nameof(vm));
 
+            cbxPalettes.DataSource = _vm.PaletteIds;
+            cbxPalettes.DataBindings.Add(nameof(cbxPalettes.SelectedItem), _vm, nameof(_vm.CurrentPaletteId), false, DataSourceUpdateMode.OnPropertyChanged);
+
             SpriteSetViewer.Initialize(_vm.SpriteSetViewer);
         }
 

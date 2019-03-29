@@ -432,10 +432,6 @@
     <Compile Include="Views\PropertiesView.Designer.cs">
       <DependentUpon>PropertiesView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\SpriteSetsView.cs" />
-    <Compile Include="Views\SpriteSetsView.Designer.cs">
-      <DependentUpon>SpriteSetsView.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\TemplateSetView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -626,9 +622,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PropertiesView.resx">
       <DependentUpon>PropertiesView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\SpriteSetsView.resx">
-      <DependentUpon>SpriteSetsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\LevelTileSelectorView.resx">
       <DependentUpon>LevelTileSelectorView.cs</DependentUpon>

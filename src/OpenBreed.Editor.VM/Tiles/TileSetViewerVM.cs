@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Tiles
 {
@@ -37,7 +35,8 @@ namespace OpenBreed.Editor.VM.Tiles
             SelectMode = SelectModeEnum.Nothing;
             MultiSelect = false;
 
-            PropertyChanged += TileSetViewerVM_PropertyChanged;
+
+            PropertyChanged += This_PropertyChanged;
         }
 
         #endregion Public Constructors
@@ -186,13 +185,14 @@ namespace OpenBreed.Editor.VM.Tiles
             CenterCoord = CurrentTileSet.GetSnapCoords(new Point((MinCoord.X + MaxCoord.X) / 2, (MinCoord.Y + MaxCoord.Y) / 2));
         }
 
-        private void TileSetViewerVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
                 case nameof(CurrentTileSet):
                     SelectedIndexes.Clear();
                     break;
+
                 default:
                     break;
             }

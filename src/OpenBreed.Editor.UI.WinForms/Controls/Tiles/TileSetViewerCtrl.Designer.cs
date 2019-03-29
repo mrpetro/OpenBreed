@@ -30,12 +30,12 @@
         {
             this.SuspendLayout();
             // 
-            // TileSelectorCtrl
+            // TileSetViewerCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "TileSelectorCtrl";
-            this.Size = new System.Drawing.Size(555, 513);
+            this.Name = "TileSetViewerCtrl";
+            this.Size = new System.Drawing.Size(509, 473);
             this.ResumeLayout(false);
 
         }

@@ -11,6 +11,7 @@ using System.Linq;
 using OpenBreed.Common.Drawing;
 using System;
 using OpenBreed.Common.Formats;
+using OpenBreed.Common.Palettes;
 
 namespace OpenBreed.Editor.VM.Tiles
 {
@@ -19,7 +20,7 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #region Private Fields
 
-        private PaletteVM _palette;
+        private PaletteModel _palette;
         private int _tileSize;
 
         #endregion Private Fields
@@ -42,20 +43,10 @@ namespace OpenBreed.Editor.VM.Tiles
 
         public BindingList<TileVM> Items { get; private set; }
 
-        public PaletteVM Palette
+        public PaletteModel Palette
         {
             get { return _palette; }
-            set
-            {
-                var prevPalette = _palette;
-                if (SetProperty(ref _palette, value))
-                {
-                    if (prevPalette != null)
-                        prevPalette.PropertyChanged -= Palette_PropertyChanged;
-
-                    _palette.PropertyChanged += Palette_PropertyChanged;
-                }
-            }
+            set { SetProperty(ref _palette, value); }
         }
 
         public int TileSize
@@ -165,10 +156,6 @@ namespace OpenBreed.Editor.VM.Tiles
             RebuildTiles();
         }
 
-        public void LoadFromBLK()
-        {
-        }
-
         public Bitmap ToBitmap(List<TileModel> tiles)
         {
             int bmpWidth = 320;
@@ -249,18 +236,6 @@ namespace OpenBreed.Editor.VM.Tiles
             }
         }
 
-        private void Palette_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(Palette.Colors):
-                    BitmapHelper.SetPaletteColors(Bitmap, Palette.Colors.ToArray());
-                    break;
-                default:
-                    break;
-            }
-        }
-
         private void RebuildTiles()
         {
             Items.Clear();
@@ -281,7 +256,7 @@ namespace OpenBreed.Editor.VM.Tiles
             switch (e.PropertyName)
             {
                 case nameof(Palette):
-                    BitmapHelper.SetPaletteColors(Bitmap, Palette.Colors.ToArray());
+                    BitmapHelper.SetPaletteColors(Bitmap, Palette.Data);
                     break;
 
                 default:
