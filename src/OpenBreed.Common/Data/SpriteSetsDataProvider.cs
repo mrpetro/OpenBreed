@@ -1,15 +1,10 @@
 ﻿using OpenBreed.Common.Sprites;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Data
 {
     public class SpriteSetsDataProvider
     {
-
         #region Public Constructors
 
         public SpriteSetsDataProvider(DataProvider provider)
@@ -33,13 +28,28 @@ namespace OpenBreed.Common.Data
             if (entry == null)
                 throw new Exception("SpriteSet error: " + id);
 
-            if (entry.DataRef == null)
-                return null;
-
-            return Provider.GetData(entry.DataRef) as SpriteSetModel;
+            return GetModel(entry);
         }
 
         #endregion Public Methods
 
+        #region Private Methods
+
+        private SpriteSetModel GetModel(dynamic entry)
+        {
+            return GetModelImpl(entry);
+        }
+
+        private SpriteSetModel GetModelImpl(ISpriteSetFromSprEntry entry)
+        {
+            return SpriteSetsDataHelper.FromSprModel(Provider, entry);
+        }
+
+        private SpriteSetModel GetModelImpl(ISpriteSetFromImageEntry entry)
+        {
+            return SpriteSetsDataHelper.FromImageModel(Provider, entry);
+        }
+
+        #endregion Private Methods
     }
 }

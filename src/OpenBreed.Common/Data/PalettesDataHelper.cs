@@ -29,14 +29,14 @@ namespace OpenBreed.Common.Data
             return paletteBuilder.Build();
         }
 
-        public static PaletteModel FromMapModel(DataProvider provider, IPaletteFromMapEntry paletteData)
+        public static PaletteModel FromMapModel(DataProvider provider, IPaletteFromMapEntry entry)
         {
-            var mapModel = provider.GetData(paletteData.DataRef) as MapModel;
+            var mapModel = provider.GetData(entry.DataRef) as MapModel;
 
             if (mapModel == null)
                 return null;
 
-            var paletteBlock = mapModel.Blocks.OfType<MapPaletteBlock>().FirstOrDefault(item => item.Name == paletteData.BlockName);
+            var paletteBlock = mapModel.Blocks.OfType<MapPaletteBlock>().FirstOrDefault(item => item.Name == entry.BlockName);
 
             if (paletteBlock == null)
                 return null;
@@ -44,21 +44,21 @@ namespace OpenBreed.Common.Data
             return Create(paletteBlock);
         }
 
-        public static PaletteModel FromBinary(DataProvider provider, IPaletteFromBinaryEntry paletteData)
+        public static PaletteModel FromBinary(DataProvider provider, IPaletteFromBinaryEntry entry)
         {
-            if (paletteData.DataRef == null)
+            if (entry.DataRef == null)
                 return null;
 
-            var binaryModel = provider.GetData(paletteData.DataRef) as BinaryModel;
+            var binaryModel = provider.GetData(entry.DataRef) as BinaryModel;
 
             if (binaryModel == null)
                 return null;
 
             //Remember to set source stream to begining
-            binaryModel.Stream.Seek(paletteData.DataStart, SeekOrigin.Begin);
+            binaryModel.Stream.Seek(entry.DataStart, SeekOrigin.Begin);
 
             var paletteBuilder = PaletteBuilder.NewPaletteModel();
-            var paletteReader = new PaletteReader(paletteBuilder, ToPaletteMode(paletteData.Mode), paletteData.ColorsNo);
+            var paletteReader = new PaletteReader(paletteBuilder, ToPaletteMode(entry.Mode), entry.ColorsNo);
             return paletteReader.Read(binaryModel.Stream);
         }
 

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Sprites
 {
-    public interface ISpriteSetEntry : IEntry
+    public interface ISpriteSetFromImageEntry : ISpriteSetEntry
     {
-        List<string> PaletteRefs { get; }
+        string DataRef { get; }
     }
 }

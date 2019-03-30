@@ -11,7 +11,8 @@ namespace OpenBreed.Common.XmlDatabase.Tables.Sprites
     public class XmlDbSpriteSetTableDef : XmlDbTableDef
     {
         [XmlArray("Items"),
-        XmlArrayItem("SpriteSet", typeof(XmlSpriteSetEntry))]
+        XmlArrayItem("SpriteSetFromSPR", typeof(XmlSpriteSetFromSprEntry)),
+        XmlArrayItem("SpriteSetFromImage", typeof(XmlSpriteSetFromImageEntry))]
         public readonly List<XmlSpriteSetEntry> Items = new List<XmlSpriteSetEntry>();
     }
 }

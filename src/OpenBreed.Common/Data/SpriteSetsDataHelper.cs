@@ -3,7 +3,7 @@ using OpenBreed.Common.Maps.Blocks;
 using OpenBreed.Common.Palettes;
 using OpenBreed.Common.Palettes.Builders;
 using OpenBreed.Common.Palettes.Readers;
-using OpenBreed.Common.Tiles;
+using OpenBreed.Common.Sprites;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -14,14 +14,14 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Data
 {
-    internal class TileSetsDataHelper
+    internal class SpriteSetsDataHelper
     {
-        public static TileSetModel FromBlkModel(DataProvider provider, ITileSetFromBlkEntry entry)
+        public static SpriteSetModel FromSprModel(DataProvider provider, ISpriteSetFromSprEntry entry)
         {
-            return provider.GetData(entry.DataRef) as TileSetModel;
+            return provider.GetData(entry.DataRef) as SpriteSetModel;
         }
 
-        public static TileSetModel FromImageModel(DataProvider provider, ITileSetFromImageEntry entry)
+        public static SpriteSetModel FromImageModel(DataProvider provider, ISpriteSetFromImageEntry entry)
         {
             return null;
         }

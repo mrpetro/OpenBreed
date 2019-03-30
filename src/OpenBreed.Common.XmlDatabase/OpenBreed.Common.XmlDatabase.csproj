@@ -59,6 +59,8 @@
     <Compile Include="Items\Palettes\XmlPaletteEntry.cs" />
     <Compile Include="Items\Sounds\XmlSoundEntry.cs" />
     <Compile Include="Items\Sprites\XmlSpriteSetEntry.cs" />
+    <Compile Include="Items\Sprites\XmlSpriteSetFromSprEntry.cs" />
+    <Compile Include="Items\Sprites\XmlSpriteSetFromImageEntry.cs" />
     <Compile Include="Items\Texts\XmlTextEntry.cs" />
     <Compile Include="Items\Texts\XmlTextEmbeddedEntry.cs" />
     <Compile Include="Items\Texts\XmlTextFromMapEntry.cs" />
@@ -105,6 +107,7 @@
     </Content>
     <Content Include="Defaults\GameDatabase.ABTA.EPF.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>

@@ -55,6 +55,7 @@
     <Compile Include="Data\DataProvider.cs" />
     <Compile Include="Data\AssetsDataProvider.cs" />
     <Compile Include="Data\ImagesDataProvider.cs" />
+    <Compile Include="Data\SpriteSetsDataHelper.cs" />
     <Compile Include="Data\TileSetsDataHelper.cs" />
     <Compile Include="Data\TextsDataHelper.cs" />
     <Compile Include="Data\PalettesDataHelper.cs" />
@@ -91,6 +92,8 @@
     <Compile Include="Sounds\ISoundEntry.cs" />
     <Compile Include="Sounds\SoundModel.cs" />
     <Compile Include="Sprites\ISpriteSetEntry.cs" />
+    <Compile Include="Sprites\ISpriteSetFromImageEntry.cs" />
+    <Compile Include="Sprites\ISpriteSetFromSprEntry.cs" />
     <Compile Include="Texts\ITextEntry.cs" />
     <Compile Include="Texts\ITextEmbeddedEntry.cs" />
     <Compile Include="Texts\ITextFromMapEntry.cs" />

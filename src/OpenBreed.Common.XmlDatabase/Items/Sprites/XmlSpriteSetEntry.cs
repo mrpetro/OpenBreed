@@ -12,13 +12,9 @@ using System.ComponentModel;
 namespace OpenBreed.Common.XmlDatabase.Items.Sprites
 {
     [Serializable]
-    [Description("Sprite set"), Category("Appearance")]
-    public class XmlSpriteSetEntry : XmlDbEntry, ISpriteSetEntry
+    public abstract class XmlSpriteSetEntry : XmlDbEntry, ISpriteSetEntry
     {
         #region Public Properties
-
-        [XmlElement("DataRef")]
-        public string DataRef { get; set; }
 
         [XmlArray("PaletteRefs"),
         XmlArrayItem("PaletteRef", typeof(string))]
