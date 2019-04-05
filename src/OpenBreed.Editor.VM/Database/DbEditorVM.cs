@@ -112,9 +112,9 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Internal Methods
 
-        internal EntryEditorVM OpenEntryEditor(IRepository repository, string entryName)
+        internal EntryEditorVM OpenEntryEditor(IRepository repository, string entryId)
         {
-            string entryEditorKey = $"{repository.Name}#{entryName}";
+            string entryEditorKey = $"{repository.Name}#{entryId}";
 
             EntryEditorVM entryEditor = null;
             if (!_openedEntryEditors.TryGetValue(entryEditorKey, out entryEditor))
@@ -122,8 +122,8 @@ namespace OpenBreed.Editor.VM.Database
                 entryEditor = ServiceLocator.Instance.GetService<DbEntryEditorFactory>().CreateEditor(repository);
                 _openedEntryEditors.Add(entryEditorKey, entryEditor);
                 entryEditor.ClosedAction = () => OnEntryEditorClosed(entryEditor);
+                entryEditor.EditEntry(entryId);
                 EntryEditorOpeningAction?.Invoke(entryEditor);
-                entryEditor.EditEntry(entryName);
             }
             else
                 entryEditor.Activate();

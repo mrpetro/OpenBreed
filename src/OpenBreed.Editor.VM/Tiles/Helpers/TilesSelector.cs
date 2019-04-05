@@ -1,152 +1,190 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Drawing;
-//using OpenBreed.Editor.VM.Tiles;
+﻿using OpenBreed.Editor.VM.Common;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
 
-//namespace OpenBreed.Editor.VM.Tiles.Helpers
-//{
-//    public class TilesSelector
-//    {
+namespace OpenBreed.Editor.VM.Tiles.Helpers
+{
+    public class TilesSelector
+    {
+        internal TileSetViewerVM Viewer;
 
-//        private SelectionRectangle m_SelectionRectangle = null;
-//        private Point m_MinCoord;
-//        private Point m_MaxCoord;
-//        private Point m_CenterCoord;
-//        private List<int> m_Selected = null;
-//        private SelectModeEnum m_SelectMode;
+        #region Public Fields
 
-//        public SelectionRectangle SelectionRectangle { get { return m_SelectionRectangle; } }
-//        public Point MinCoord { get { return m_MinCoord; } }
-//        public Point MaxCoord { get { return m_MaxCoord; } }
-//        public Point CenterCoord { get { return m_CenterCoord; } }
-//        public bool MultiSelect { get; set; }
-//        public List<int> Selected { get { return m_Selected; } }
-//        public SelectModeEnum Mode { get { return m_SelectMode; } }
-//        public TileSetVM VM { get; private set; }
-//        public bool IsEmpty { get { return m_Selected.Count == 0; } }
+        public Point CenterCoord;
 
-//        public TilesSelector(TileSetVM vm)
-//        {
-//            VM = vm;
+        public Point MaxCoord;
 
-//            m_Selected = new List<int>();
-//            m_SelectionRectangle = new SelectionRectangle();
-//            m_SelectMode = SelectModeEnum.Nothing;
-//            MultiSelect = false;
-//        }
+        public Point MinCoord;
 
-//        internal Point GetIndexCoords(Point point)
-//        {
-//            return VM.GetIndexCoords(point);
-//        }
+        #endregion Public Fields
 
-//        public void AddSelection(List<int> tileIdList)
-//        {
-//            foreach (int tileId in tileIdList)
-//                AddSelection(tileId);
-//        }
+        #region Public Constructors
 
-//        public void AddSelection(int tileId)
-//        {
-//            if (!m_Selected.Contains(tileId))
-//                m_Selected.Add(tileId);
-//        }
+        public TilesSelector(TileSetViewerVM viewer)
+        {
+            Viewer = viewer;
 
-//        public void RemoveSelection(List<int> tileIdList)
-//        {
-//            foreach (int tileId in tileIdList)
-//                RemoveSelection(tileId);
-//        }
+            SelectedIndexes = new List<int>();
+            SelectionRectangle = new SelectionRectangle();
+            SelectMode = SelectModeEnum.Nothing;
+            MultiSelect = false;
+        }
 
-//        public void RemoveSelection(int tileId)
-//        {
-//            m_Selected.Remove(tileId);
-//        }
+        #endregion Public Constructors
 
-//        public void ClearSelection()
-//        {
-//            m_Selected.Clear();
-//        }
+        #region Public Properties
 
-//        private void CalculateSelectionCenter()
-//        {
-//            Rectangle rectangle = VM.Items[m_Selected[0]].Rectangle;
+        public bool IsEmpty { get { return SelectedIndexes.Count == 0; } }
 
-//            m_MinCoord.X = rectangle.Left;
-//            m_MaxCoord.X = rectangle.Right;
-//            m_MinCoord.Y = rectangle.Bottom;
-//            m_MaxCoord.Y = rectangle.Top;
+        public bool MultiSelect { get; set; }
 
-//            for (int i = 1; i < m_Selected.Count; i++)
-//            {
-//                rectangle = VM.Items[m_Selected[i]].Rectangle;
+        public EditorVM Root { get; }
 
-//                m_MinCoord.X = Math.Min(m_MinCoord.X, rectangle.Left);
-//                m_MaxCoord.X = Math.Max(m_MaxCoord.X, rectangle.Right);
-//                m_MinCoord.Y = Math.Min(m_MinCoord.Y, rectangle.Bottom);
-//                m_MaxCoord.Y = Math.Max(m_MaxCoord.Y, rectangle.Top);
-//            }
+        public List<int> SelectedIndexes { get; }
 
-//            m_CenterCoord = VM.GetSnapCoords(new Point((m_MinCoord.X + m_MaxCoord.X) / 2, (m_MinCoord.Y + m_MaxCoord.Y) / 2));
-//        }
+        public SelectionRectangle SelectionRectangle { get; }
 
-//        public void DrawSelection(Graphics gfx)
-//        {
-//            Pen selectedPen = new Pen(Color.LightGreen);
-//            Pen selectPen = new Pen(Color.LightBlue);
-//            Pen deselectPen = new Pen(Color.Red);
+        public SelectModeEnum SelectMode { get; private set; }
 
-//            for (int index = 0; index < Selected.Count; index++)
-//            {
-//                Rectangle rectangle = VM.Items[m_Selected[index]].Rectangle;
-//                gfx.DrawRectangle(selectedPen, rectangle);
-//            }
+        #endregion Public Properties
 
-//            if (Mode == SelectModeEnum.Select)
-//                gfx.DrawRectangle(selectPen, SelectionRectangle.GetRectangle(VM.TileSize));
-//            else if (Mode == SelectModeEnum.Deselect)
-//                gfx.DrawRectangle(deselectPen, SelectionRectangle.GetRectangle(VM.TileSize));
-//        }
+        #region Public Methods
 
-//        public void StartSelection(SelectModeEnum selectMode, Point point)
-//        {
-//            m_SelectMode = selectMode;
-//            SelectionRectangle.SetStart(GetIndexCoords(point));
+        public void AddSelection(List<int> tileIdList)
+        {
+            foreach (int tileId in tileIdList)
+                AddSelection(tileId);
+        }
 
-//            if (!MultiSelect && selectMode == SelectModeEnum.Select)
-//                ClearSelection();
-//        }
+        public void AddSelection(int tileId)
+        {
+            if (!SelectedIndexes.Contains(tileId))
+                SelectedIndexes.Add(tileId);
+        }
 
-//        public void UpdateSelection(Point point)
-//        {
-//            SelectionRectangle.Update(GetIndexCoords(point));
-//        }
+        public void ClearSelection()
+        {
+            SelectedIndexes.Clear();
+        }
 
-//        public void FinishSelection(Point point)
-//        {
-//            SelectionRectangle.SetFinish(GetIndexCoords(point));
+        public void DrawSelection(Graphics gfx)
+        {
+            Pen selectedPen = new Pen(Color.LightGreen);
+            Pen selectPen = new Pen(Color.LightBlue);
+            Pen deselectPen = new Pen(Color.Red);
 
-//            Rectangle selectionRectangle = SelectionRectangle.GetRectangle(VM.TileSize);
-//            List<int> selectionList = VM.GetTileIdList(selectionRectangle);
+            for (int index = 0; index < SelectedIndexes.Count; index++)
+            {
+                Rectangle rectangle = Viewer.Items[SelectedIndexes[index]].Rectangle;
+                gfx.DrawRectangle(selectedPen, rectangle);
+            }
 
-//            if (Mode == SelectModeEnum.Select)
-//            {
-//                if (!MultiSelect)
-//                    ClearSelection();
+            if (SelectMode == SelectModeEnum.Select)
+                gfx.DrawRectangle(selectPen, SelectionRectangle.GetRectangle(Viewer.TileSize));
+            else if (SelectMode == SelectModeEnum.Deselect)
+                gfx.DrawRectangle(deselectPen, SelectionRectangle.GetRectangle(Viewer.TileSize));
+        }
 
-//                AddSelection(selectionList);
-//            }
-//            else if (Mode == SelectModeEnum.Deselect)
-//            {
-//                RemoveSelection(selectionList);
-//            }
+        public void FinishSelection(Point point)
+        {
+            SelectionRectangle.SetFinish(GetIndexCoords(point));
 
-//            if (!IsEmpty)
-//                CalculateSelectionCenter();
+            Rectangle selectionRectangle = SelectionRectangle.GetRectangle(Viewer.TileSize);
+            List<int> selectionList = Viewer.GetTileIdList(selectionRectangle);
 
-//            m_SelectMode = SelectModeEnum.Nothing;
-//        }
-//    }
-//}
+            if (SelectMode == SelectModeEnum.Select)
+            {
+                if (!MultiSelect)
+                    ClearSelection();
+
+                AddSelection(selectionList);
+            }
+            else if (SelectMode == SelectModeEnum.Deselect)
+            {
+                RemoveSelection(selectionList);
+            }
+
+            if (!IsEmpty)
+                CalculateSelectionCenter();
+
+            SelectMode = SelectModeEnum.Nothing;
+        }
+
+        public void RemoveSelection(List<int> tileIdList)
+        {
+            foreach (int tileId in tileIdList)
+                RemoveSelection(tileId);
+        }
+
+        public void RemoveSelection(int tileId)
+        {
+            SelectedIndexes.Remove(tileId);
+        }
+
+        public void StartSelection(SelectModeEnum selectMode, Point point)
+        {
+            SelectMode = selectMode;
+            SelectionRectangle.SetStart(GetIndexCoords(point));
+
+            if (!MultiSelect && selectMode == SelectModeEnum.Select)
+                ClearSelection();
+        }
+
+        public void UpdateSelection(Point point)
+        {
+            SelectionRectangle.Update(GetIndexCoords(point));
+        }
+
+        #endregion Public Methods
+
+        #region Internal Methods
+
+        internal Point GetIndexCoords(Point point)
+        {
+            return Viewer.GetIndexCoords(point);
+        }
+
+        #endregion Internal Methods
+
+        #region Private Methods
+
+        private void CalculateSelectionCenter()
+        {
+            Rectangle rectangle = Viewer.Items[SelectedIndexes[0]].Rectangle;
+
+            MinCoord.X = rectangle.Left;
+            MaxCoord.X = rectangle.Right;
+            MinCoord.Y = rectangle.Bottom;
+            MaxCoord.Y = rectangle.Top;
+
+            for (int i = 1; i < SelectedIndexes.Count; i++)
+            {
+                rectangle = Viewer.Items[SelectedIndexes[i]].Rectangle;
+
+                MinCoord.X = Math.Min(MinCoord.X, rectangle.Left);
+                MaxCoord.X = Math.Max(MaxCoord.X, rectangle.Right);
+                MinCoord.Y = Math.Min(MinCoord.Y, rectangle.Bottom);
+                MaxCoord.Y = Math.Max(MaxCoord.Y, rectangle.Top);
+            }
+
+            CenterCoord = Viewer.GetSnapCoords(new Point((MinCoord.X + MaxCoord.X) / 2, (MinCoord.Y + MaxCoord.Y) / 2));
+        }
+
+        private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(Viewer.Items):
+                    SelectedIndexes.Clear();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        #endregion Private Methods
+    }
+}

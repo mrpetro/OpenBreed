@@ -11,18 +11,18 @@ using OpenBreed.Common.Sprites;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
 {
-    public partial class SpriteSetViewerCtrl : UserControl
+    public partial class SpriteSetFromSprCtrl : UserControl
     {
 
         #region Private Fields
 
-        private SpriteSetViewerVM _vm;
+        private SpriteSetFromSprVM _vm;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public SpriteSetViewerCtrl()
+        public SpriteSetFromSprCtrl()
         {
             InitializeComponent();
 
@@ -33,9 +33,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
 
         #region Public Methods
 
-        public void Initialize(SpriteSetViewerVM vm)
+        public void Initialize(SpriteSetFromSprVM vm)
         {
-            _vm = vm;
+            _vm = vm ?? throw new InvalidOperationException(nameof(vm));
 
             numSpriteNo.DataBindings.Clear();
             numSpriteNo.DataBindings.Add(nameof(numSpriteNo.Value), _vm, nameof(_vm.CurrentIndex), false, DataSourceUpdateMode.OnPropertyChanged);
@@ -54,9 +54,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
         {
             switch (e.PropertyName)
             {
-                case nameof(_vm.CurrentSpriteSet):
-                    UpdateItems();
-                    break;
                 case (nameof(_vm.CurrentItem)):
                     pnlSprite.Invalidate();
                     break;
@@ -82,15 +79,12 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
         {
             this.Visible = true;
             numSpriteNo.Minimum = 0;
-            numSpriteNo.Maximum = _vm.CurrentSpriteSet.Items.Count - 1;
+            numSpriteNo.Maximum = _vm.Items.Count - 1;
         }
 
         void UpdateItems()
         {
-            if (_vm.CurrentSpriteSet == null)
-                SetNoSpriteSetState();
-            else
-                SetSpriteSetState();
+            SetSpriteSetState();
 
             Invalidate();
             pnlSprite.Invalidate();

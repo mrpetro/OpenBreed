@@ -25,7 +25,7 @@ namespace OpenBreed.Editor.VM.Sprites
         {
             Items = new BindingList<SpriteVM>();
             Items.ListChanged += (s, e) => OnPropertyChanged(nameof(Items));
-            PropertyChanged += SpriteSetVM_PropertyChanged;
+            PropertyChanged += This_PropertyChanged;
         }
 
         #endregion Public Constructors
@@ -33,7 +33,12 @@ namespace OpenBreed.Editor.VM.Sprites
         #region Public Properties
 
         public BindingList<SpriteVM> Items { get; private set; }
-        public string Name { get { return null; } }
+
+
+        internal virtual void FromModel(SpriteSetModel spriteSet)
+        {
+
+        }
 
         public PaletteModel Palette
         {
@@ -47,15 +52,20 @@ namespace OpenBreed.Editor.VM.Sprites
 
         internal void SetupSprites(List<SpriteModel> sprites)
         {
-            foreach (var sprite in sprites)
-                Items.Add(SpriteVM.Create(sprite));
+            Items.UpdateAfter(() =>
+            {
+                Items.Clear();
+
+                foreach (var sprite in sprites)
+                    Items.Add(SpriteVM.Create(sprite));
+            });
         }
 
         #endregion Internal Methods
 
         #region Private Methods
 
-        private void SpriteSetVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {

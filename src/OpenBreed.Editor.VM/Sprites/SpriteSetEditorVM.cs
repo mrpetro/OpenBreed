@@ -2,6 +2,7 @@
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Sprites;
 using OpenBreed.Editor.VM.Base;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -21,7 +22,6 @@ namespace OpenBreed.Editor.VM.Sprites
         public SpriteSetEditorVM(IRepository repository) : base(repository)
         {
             PaletteIds = new BindingList<string>();
-            SpriteSetViewer = new SpriteSetViewerVM();
             PropertyChanged += This_PropertyChanged;
         }
 
@@ -38,7 +38,7 @@ namespace OpenBreed.Editor.VM.Sprites
         public override string EditorName { get { return "Sprite Set Editor"; } }
         public BindingList<string> PaletteIds { get; }
         public int SelectedIndex { get; private set; }
-        public SpriteSetViewerVM SpriteSetViewer { get; }
+        //public SpriteSetFromSprVM SpriteSetViewer { get; }
 
         #endregion Public Properties
 
@@ -61,6 +61,16 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Protected Methods
 
+        protected override SpriteSetVM CreateVM(ISpriteSetEntry entry)
+        {
+            if (entry is ISpriteSetFromSprEntry)
+                return new SpriteSetFromSprVM();
+            else if (entry is ISpriteSetFromImageEntry)
+                return new SpriteSetFromImageVM();
+            else
+                throw new NotImplementedException();
+        }
+
         protected override void UpdateEntry(SpriteSetVM source, ISpriteSetEntry target)
         {
             base.UpdateEntry(source, target);
@@ -71,7 +81,7 @@ namespace OpenBreed.Editor.VM.Sprites
             var model = DataProvider.SpriteSets.GetSpriteSet(source.Id);
 
             if (model != null)
-                target.SetupSprites(model.Sprites);
+                target.FromModel(model);
 
             SetupPaletteIds(source.PaletteRefs, target);
             base.UpdateVM(source, target);
@@ -86,6 +96,9 @@ namespace OpenBreed.Editor.VM.Sprites
             if (target == null)
                 return;
 
+            if (paletteId == null)
+                return;
+
             target.Palette = ServiceLocator.Instance.GetService<DataProvider>().Palettes.GetPalette(paletteId);
         }
 
@@ -95,10 +108,6 @@ namespace OpenBreed.Editor.VM.Sprites
             {
                 case nameof(CurrentPaletteId):
                     SwitchPalette(CurrentPaletteId, Editable);
-                    break;
-
-                case nameof(Editable):
-                    SpriteSetViewer.CurrentSpriteSet = Editable;
                     break;
 
                 default:

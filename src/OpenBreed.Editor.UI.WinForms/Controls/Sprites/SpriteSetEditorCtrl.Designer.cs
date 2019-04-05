@@ -28,21 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SpriteSetViewer = new OpenBreed.Editor.UI.WinForms.Controls.Sprites.SpriteSetViewerCtrl();
             this.grpTools = new System.Windows.Forms.GroupBox();
             this.btnImport = new System.Windows.Forms.Button();
             this.lblPalettes = new System.Windows.Forms.Label();
             this.cbxPalettes = new System.Windows.Forms.ComboBox();
+            this.Panel = new System.Windows.Forms.Panel();
             this.grpTools.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // SpriteSetViewer
-            // 
-            this.SpriteSetViewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SpriteSetViewer.Location = new System.Drawing.Point(0, 49);
-            this.SpriteSetViewer.Name = "SpriteSetViewer";
-            this.SpriteSetViewer.Size = new System.Drawing.Size(581, 464);
-            this.SpriteSetViewer.TabIndex = 0;
             // 
             // grpTools
             // 
@@ -86,11 +78,19 @@
             this.cbxPalettes.Size = new System.Drawing.Size(149, 21);
             this.cbxPalettes.TabIndex = 2;
             // 
+            // Panel
+            // 
+            this.Panel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Panel.Location = new System.Drawing.Point(0, 49);
+            this.Panel.Name = "Panel";
+            this.Panel.Size = new System.Drawing.Size(581, 464);
+            this.Panel.TabIndex = 6;
+            // 
             // SpriteSetEditorCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.SpriteSetViewer);
+            this.Controls.Add(this.Panel);
             this.Controls.Add(this.grpTools);
             this.Name = "SpriteSetEditorCtrl";
             this.Size = new System.Drawing.Size(581, 513);
@@ -101,11 +101,10 @@
         }
 
         #endregion
-
-        private SpriteSetViewerCtrl SpriteSetViewer;
         private System.Windows.Forms.GroupBox grpTools;
         private System.Windows.Forms.Button btnImport;
         private System.Windows.Forms.Label lblPalettes;
         private System.Windows.Forms.ComboBox cbxPalettes;
+        private System.Windows.Forms.Panel Panel;
     }
 }

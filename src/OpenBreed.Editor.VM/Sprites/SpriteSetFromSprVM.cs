@@ -1,23 +1,23 @@
-﻿using OpenBreed.Common;
+﻿using OpenBreed.Common.Palettes;
+using OpenBreed.Common.Sprites;
 using OpenBreed.Editor.VM.Base;
 using System.ComponentModel;
 using System.Linq;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
-    public class SpriteSetViewerVM : BaseViewModel
+    public class SpriteSetFromSprVM : SpriteSetVM
     {
         #region Private Fields
 
         private int _currentIndex = -1;
         private SpriteVM _currentItem;
-        private SpriteSetVM _currentSpriteSet;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public SpriteSetViewerVM()
+        public SpriteSetFromSprVM()
         {
             PropertyChanged += This_PropertyChanged;
         }
@@ -38,33 +38,22 @@ namespace OpenBreed.Editor.VM.Sprites
             set { SetProperty(ref _currentItem, value); }
         }
 
-        public SpriteSetVM CurrentSpriteSet
-        {
-            get { return _currentSpriteSet; }
-            set { SetProperty(ref _currentSpriteSet, value); }
-        }
-
-        public EditorVM Root { get; private set; }
-
         #endregion Public Properties
 
-        #region Public Methods
-
-        public void Connect()
-        {
-        }
-
-        #endregion Public Methods
-
         #region Private Methods
+
+
+        internal override void FromModel(SpriteSetModel spriteSet)
+        {
+            SetupSprites(spriteSet.Sprites);
+
+            CurrentItem = Items.FirstOrDefault();
+        }
 
         private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
-                case nameof(CurrentSpriteSet):
-                    UpdateCurrentItem();
-                    break;
                 case nameof(CurrentIndex):
                     UpdateCurrentItem();
                     break;
@@ -72,6 +61,7 @@ namespace OpenBreed.Editor.VM.Sprites
                 case nameof(CurrentItem):
                     UpdateCurrentIndex();
                     break;
+
                 default:
                     break;
             }
@@ -82,7 +72,7 @@ namespace OpenBreed.Editor.VM.Sprites
             if (CurrentItem == null)
                 CurrentIndex = -1;
             else
-                CurrentIndex = CurrentSpriteSet.Items.IndexOf(CurrentItem);
+                CurrentIndex = Items.IndexOf(CurrentItem);
         }
 
         private void UpdateCurrentItem()
@@ -90,7 +80,7 @@ namespace OpenBreed.Editor.VM.Sprites
             if (CurrentIndex == -1)
                 CurrentItem = null;
             else
-                CurrentItem = CurrentSpriteSet.Items[CurrentIndex];
+                CurrentItem = Items[CurrentIndex];
         }
 
         #endregion Private Methods

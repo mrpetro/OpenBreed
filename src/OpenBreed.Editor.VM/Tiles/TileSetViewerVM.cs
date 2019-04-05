@@ -1,28 +1,30 @@
-﻿using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM.Common;
-using System;
+﻿using OpenBreed.Common.Drawing;
+using OpenBreed.Common.Palettes;
+using OpenBreed.Common.Tiles;
+using OpenBreed.Editor.VM.Base;
+using OpenBreed.Editor.VM.Tiles.Helpers;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
+using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 
 namespace OpenBreed.Editor.VM.Tiles
 {
-    public class TileSetViewerVM : BaseViewModel
+    public class TileSetViewerVM : EditableEntryVM
     {
         #region Public Fields
 
         public Point CenterCoord;
-
         public Point MaxCoord;
-
         public Point MinCoord;
 
         #endregion Public Fields
 
         #region Private Fields
 
-        private TileSetVM _currentTileSet;
+        private Bitmap _bitmap;
+        private PaletteModel _palette;
 
         #endregion Private Fields
 
@@ -30,11 +32,12 @@ namespace OpenBreed.Editor.VM.Tiles
 
         public TileSetViewerVM()
         {
-            SelectedIndexes = new List<int>();
-            SelectionRectangle = new SelectionRectangle();
-            SelectMode = SelectModeEnum.Nothing;
-            MultiSelect = false;
+            Selector = new TilesSelector(this);
 
+            Items = new BindingList<TileVM>();
+            Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
+
+            Bitmap = new Bitmap(1, 1, PixelFormat.Format8bppIndexed);
 
             PropertyChanged += This_PropertyChanged;
         }
@@ -43,154 +46,222 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #region Public Properties
 
-        public TileSetVM CurrentTileSet
+        public Bitmap Bitmap
         {
-            get { return _currentTileSet; }
-            set { SetProperty(ref _currentTileSet, value); }
+            get { return _bitmap; }
+            set { SetProperty(ref _bitmap, value); }
         }
 
-        public bool IsEmpty { get { return SelectedIndexes.Count == 0; } }
+        public BindingList<TileVM> Items { get; }
 
-        public bool MultiSelect { get; set; }
+        public PaletteModel Palette
+        {
+            get { return _palette; }
+            set { SetProperty(ref _palette, value); }
+        }
 
-        public EditorVM Root { get; }
+        public TilesSelector Selector { get; }
 
-        public List<int> SelectedIndexes { get; }
-
-        public SelectionRectangle SelectionRectangle { get; }
-
-        public SelectModeEnum SelectMode { get; private set; }
+        public int TileSize { get; set; }
+        public int TilesNoX { get; private set; }
+        public int TilesNoY { get; private set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void AddSelection(List<int> tileIdList)
+        public void Draw(Graphics gfx)
         {
-            foreach (int tileId in tileIdList)
-                AddSelection(tileId);
-        }
+            int xMax = TilesNoX;
+            int yMax = TilesNoY;
 
-        public void AddSelection(int tileId)
-        {
-            if (!SelectedIndexes.Contains(tileId))
-                SelectedIndexes.Add(tileId);
-        }
-
-        public void ClearSelection()
-        {
-            SelectedIndexes.Clear();
-        }
-
-        public void DrawSelection(Graphics gfx)
-        {
-            Pen selectedPen = new Pen(Color.LightGreen);
-            Pen selectPen = new Pen(Color.LightBlue);
-            Pen deselectPen = new Pen(Color.Red);
-
-            for (int index = 0; index < SelectedIndexes.Count; index++)
+            for (int j = 0; j < yMax; j++)
             {
-                Rectangle rectangle = CurrentTileSet.Items[SelectedIndexes[index]].Rectangle;
-                gfx.DrawRectangle(selectedPen, rectangle);
+                for (int i = 0; i < xMax; i++)
+                {
+                    int gfxId = i + xMax * j;
+                    DrawTile(gfx, gfxId, i * TileSize, j * TileSize, TileSize);
+                }
+            }
+        }
+
+        public void DrawTile(Graphics gfx, int tileId, float x, float y, int tileSize)
+        {
+            if (tileId >= Items.Count)
+                return;
+
+            var tileRect = Items[tileId].Rectangle;
+            gfx.DrawImage(Bitmap, (int)x, (int)y, tileRect, GraphicsUnit.Pixel);
+        }
+
+        public Point GetIndexCoords(Point point)
+        {
+            return new Point(point.X / TileSize, point.Y / TileSize);
+        }
+
+        public Point GetSnapCoords(Point point)
+        {
+            int x = point.X / TileSize;
+            int y = point.Y / TileSize;
+
+            return new Point(x * TileSize, y * TileSize);
+        }
+
+        public List<int> GetTileIdList(Rectangle rectangle)
+        {
+            int left = rectangle.Left;
+            int right = rectangle.Right;
+            int top = rectangle.Top;
+            int bottom = rectangle.Bottom;
+
+            if (left < 0)
+                left = 0;
+
+            if (right > Bitmap.Width)
+                right = Bitmap.Width;
+
+            if (top < 0)
+                top = 0;
+
+            if (bottom > Bitmap.Height)
+                bottom = Bitmap.Height;
+
+            rectangle = new Rectangle(left, top, right - left, bottom - top);
+
+            List<int> tileIdList = new List<int>();
+            int xFrom = rectangle.Left / TileSize;
+            int xTo = rectangle.Right / TileSize;
+            int yFrom = rectangle.Top / TileSize;
+            int yTo = rectangle.Bottom / TileSize;
+
+            for (int xIndex = xFrom; xIndex < xTo; xIndex++)
+            {
+                for (int yIndex = yFrom; yIndex < yTo; yIndex++)
+                {
+                    int gfxId = xIndex + TilesNoX * yIndex;
+                    tileIdList.Add(gfxId);
+                }
             }
 
-            if (SelectMode == SelectModeEnum.Select)
-                gfx.DrawRectangle(selectPen, SelectionRectangle.GetRectangle(CurrentTileSet.TileSize));
-            else if (SelectMode == SelectModeEnum.Deselect)
-                gfx.DrawRectangle(deselectPen, SelectionRectangle.GetRectangle(CurrentTileSet.TileSize));
+            return tileIdList;
         }
 
-        public void FinishSelection(Point point)
+        public void LoadDefaultTiles()
         {
-            SelectionRectangle.SetFinish(GetIndexCoords(point));
+            CreateDefaultBitmap();
+            RebuildTiles();
+        }
 
-            Rectangle selectionRectangle = SelectionRectangle.GetRectangle(CurrentTileSet.TileSize);
-            List<int> selectionList = CurrentTileSet.GetTileIdList(selectionRectangle);
+        public Bitmap ToBitmap(List<TileModel> tiles)
+        {
+            int bmpWidth = 320;
+            TilesNoX = bmpWidth / TileSize;
+            TilesNoY = tiles.Count / TilesNoX;
+            int bmpHeight = TilesNoY * TileSize;
+            Bitmap bitmap = new Bitmap(bmpWidth, bmpHeight, PixelFormat.Format8bppIndexed);
 
-            if (SelectMode == SelectModeEnum.Select)
+            for (int j = 0; j < TilesNoY; j++)
             {
-                if (!MultiSelect)
-                    ClearSelection();
+                for (int i = 0; i < TilesNoX; i++)
+                {
+                    //Create a BitmapData and Lock all pixels to be written
+                    BitmapData bmpData = bitmap.LockBits(new Rectangle(i * TileSize, j * TileSize, TileSize, TileSize),
+                                                         ImageLockMode.WriteOnly, bitmap.PixelFormat);
 
-                AddSelection(selectionList);
+                    //Copy the data from the byte array into BitmapData.Scan0
+                    for (int k = 0; k < TileSize; k++)
+                        Marshal.Copy(tiles[i + j * TilesNoX].Data, k * TileSize, bmpData.Scan0 + k * bmpData.Stride, TileSize);
+
+                    //Unlock the pixels
+                    bitmap.UnlockBits(bmpData);
+                }
             }
-            else if (SelectMode == SelectModeEnum.Deselect)
-            {
-                RemoveSelection(selectionList);
-            }
 
-            if (!IsEmpty)
-                CalculateSelectionCenter();
-
-            SelectMode = SelectModeEnum.Nothing;
-        }
-
-        public void RemoveSelection(List<int> tileIdList)
-        {
-            foreach (int tileId in tileIdList)
-                RemoveSelection(tileId);
-        }
-
-        public void RemoveSelection(int tileId)
-        {
-            SelectedIndexes.Remove(tileId);
-        }
-
-        public void StartSelection(SelectModeEnum selectMode, Point point)
-        {
-            SelectMode = selectMode;
-            SelectionRectangle.SetStart(GetIndexCoords(point));
-
-            if (!MultiSelect && selectMode == SelectModeEnum.Select)
-                ClearSelection();
-        }
-
-        public void UpdateSelection(Point point)
-        {
-            SelectionRectangle.Update(GetIndexCoords(point));
+            return bitmap;
         }
 
         #endregion Public Methods
 
         #region Internal Methods
 
-        internal Point GetIndexCoords(Point point)
+        internal void FromModel(TileSetModel tileSet)
         {
-            return CurrentTileSet.GetIndexCoords(point);
+            TileSize = tileSet.TileSize;
+            SetupTiles(tileSet.Tiles);
+        }
+
+        internal void SetupTiles(List<TileModel> tiles)
+        {
+            Bitmap = ToBitmap(tiles);
+            RebuildTiles();
         }
 
         #endregion Internal Methods
 
         #region Private Methods
 
-        private void CalculateSelectionCenter()
+        private void CreateDefaultBitmap()
         {
-            Rectangle rectangle = CurrentTileSet.Items[SelectedIndexes[0]].Rectangle;
+            Bitmap = new Bitmap(320, 768, PixelFormat.Format32bppArgb);
 
-            MinCoord.X = rectangle.Left;
-            MaxCoord.X = rectangle.Right;
-            MinCoord.Y = rectangle.Bottom;
-            MaxCoord.Y = rectangle.Top;
+            TileSize = 16;
+            TilesNoX = Bitmap.Width / TileSize;
+            TilesNoY = Bitmap.Height / TileSize;
 
-            for (int i = 1; i < SelectedIndexes.Count; i++)
+            using (Graphics gfx = Graphics.FromImage(Bitmap))
             {
-                rectangle = CurrentTileSet.Items[SelectedIndexes[i]].Rectangle;
+                Font font = new Font("Arial", 5);
 
-                MinCoord.X = Math.Min(MinCoord.X, rectangle.Left);
-                MaxCoord.X = Math.Max(MaxCoord.X, rectangle.Right);
-                MinCoord.Y = Math.Min(MinCoord.Y, rectangle.Bottom);
-                MaxCoord.Y = Math.Max(MaxCoord.Y, rectangle.Top);
+                for (int j = 0; j < TilesNoY; j++)
+                {
+                    for (int i = 0; i < TilesNoX; i++)
+                    {
+                        int tileId = i + j * TilesNoX;
+
+                        var rectangle = new Rectangle(i * TileSize, j * TileSize, TileSize - 1, TileSize - 1);
+
+                        Color c = Color.Black;
+                        Pen tileColor = new Pen(c);
+                        Brush brush = new SolidBrush(c);
+
+                        gfx.FillRectangle(brush, rectangle);
+
+                        c = Color.White;
+                        tileColor = new Pen(c);
+                        brush = new SolidBrush(c);
+
+                        gfx.DrawRectangle(tileColor, rectangle);
+                        gfx.DrawString(string.Format("{0,2:D2}", tileId / 100), font, brush, i * TileSize + 2, j * TileSize + 1);
+                        gfx.DrawString(string.Format("{0,2:D2}", tileId % 100), font, brush, i * TileSize + 2, j * TileSize + 7);
+                    }
+                }
             }
+        }
 
-            CenterCoord = CurrentTileSet.GetSnapCoords(new Point((MinCoord.X + MaxCoord.X) / 2, (MinCoord.Y + MaxCoord.Y) / 2));
+        private void RebuildTiles()
+        {
+            Items.UpdateAfter(() =>
+            {
+                Items.Clear();
+
+                var tilesCount = TilesNoX * TilesNoY;
+
+                for (int tileId = 0; tileId < tilesCount; tileId++)
+                {
+                    int tileIndexX = tileId % TilesNoX;
+                    int tileIndexY = tileId / TilesNoX;
+                    var rectangle = new Rectangle(tileIndexX * TileSize, tileIndexY * TileSize, TileSize, TileSize);
+                    Items.Add(new TileVM(tileId, rectangle));
+                }
+            });
         }
 
         private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
-                case nameof(CurrentTileSet):
-                    SelectedIndexes.Clear();
+                case nameof(Palette):
+                    BitmapHelper.SetPaletteColors(Bitmap, Palette.Data);
                     break;
 
                 default:

@@ -45,58 +45,48 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Tiles
 
         private void SetTileSetState()
         {
-            Width = _vm.CurrentTileSet.Bitmap.Width;
-            Height = _vm.CurrentTileSet.Bitmap.Height;
+            Width = _vm.Bitmap.Width;
+            Height = _vm.Bitmap.Height;
             Invalidate();
         }
 
         private void UpdateViewState()
         {
-            if (_vm.CurrentTileSet == null)
-                SetNoTileSetState();
-            else
-                SetTileSetState();
+            SetTileSetState();
         }
 
         private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            switch (e.PropertyName)
-            {
-                case nameof(_vm.CurrentTileSet):
-                    UpdateViewState();
-                    break;
-                default:
-                    break;
-            }
+            UpdateViewState();
         }
 
         private void TileSelectorCtrl_MouseMove(object sender, MouseEventArgs e)
         {
-            if (_vm.SelectMode != SelectModeEnum.Nothing)
+            if (_vm.Selector.SelectMode != SelectModeEnum.Nothing)
             {
-                _vm.UpdateSelection(e.Location);
+                _vm.Selector.UpdateSelection(e.Location);
                 Invalidate();
             }
         }
 
         private void TileSelectorCtrl_MouseUp(object sender, MouseEventArgs e)
         {
-            if (_vm.SelectMode == SelectModeEnum.Nothing)
+            if (_vm.Selector.SelectMode == SelectModeEnum.Nothing)
                 return;
 
-            _vm.FinishSelection(e.Location);
+            _vm.Selector.FinishSelection(e.Location);
             Invalidate();
         }
 
         private void TileSelectorCtrl_MouseDown(object sender, MouseEventArgs e)
         {
-            if (_vm.SelectMode != SelectModeEnum.Nothing)
+            if (_vm.Selector.SelectMode != SelectModeEnum.Nothing)
                 return;
 
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
-                _vm.StartSelection(SelectModeEnum.Select, e.Location);
+                _vm.Selector.StartSelection(SelectModeEnum.Select, e.Location);
             else if (e.Button == System.Windows.Forms.MouseButtons.Right)
-                _vm.StartSelection(SelectModeEnum.Deselect, e.Location);
+                _vm.Selector.StartSelection(SelectModeEnum.Deselect, e.Location);
 
             Invalidate();
         }
@@ -104,25 +94,19 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Tiles
         private void TileSelectorCtrl_KeyUp(object sender, KeyEventArgs e)
         {
             if (!e.Control)
-                _vm.MultiSelect = false;
+                _vm.Selector.MultiSelect = false;
         }
 
         private void TileSelectorCtrl_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control)
-                _vm.MultiSelect = true;
+                _vm.Selector.MultiSelect = true;
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (_vm == null)
-                return;
-
-            if (_vm.CurrentTileSet == null)
-                return;
-
-            _vm.CurrentTileSet.Draw(e.Graphics);
-            _vm.DrawSelection(e.Graphics);
+            _vm.Draw(e.Graphics);
+            _vm.Selector.DrawSelection(e.Graphics);
 
             Pen selectedPen = new Pen(Color.LightGreen);
             Pen selectPen = new Pen(Color.LightBlue);

@@ -247,7 +247,7 @@ namespace OpenBreed.Editor.VM.Tiles
                 int tileIndexX = tileId % TilesNoX;
                 int tileIndexY = tileId / TilesNoX;
                 var rectangle = new Rectangle(tileIndexX * TileSize, tileIndexY * TileSize, TileSize, TileSize);
-                Items.Add(new TileVM(this, tileId, rectangle));
+                Items.Add(new TileVM(tileId, rectangle));
             }
         }
 

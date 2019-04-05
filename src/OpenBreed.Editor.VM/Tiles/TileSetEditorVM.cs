@@ -2,18 +2,18 @@
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Tiles;
 using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM.Palettes;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
 namespace OpenBreed.Editor.VM.Tiles
 {
-    public class TileSetEditorVM : EntryEditorBaseVM<ITileSetEntry, TileSetVM>
+    public class TileSetEditorVM : EntryEditorBaseVM<ITileSetEntry, TileSetViewerVM>
     {
         #region Private Fields
 
-        private string _currentPaletteId;
+        private string _currentPaletteId = null;
+        private int _currentPaletteIndex = -1;
 
         #endregion Private Fields
 
@@ -22,7 +22,7 @@ namespace OpenBreed.Editor.VM.Tiles
         public TileSetEditorVM(IRepository repository) : base(repository)
         {
             PaletteIds = new BindingList<string>();
-            TileSetViewer = new TileSetViewerVM();
+            Editable = new TileSetViewerVM();
             PropertyChanged += This_PropertyChanged;
         }
 
@@ -36,17 +36,21 @@ namespace OpenBreed.Editor.VM.Tiles
             set { SetProperty(ref _currentPaletteId, value); }
         }
 
+        public int CurrentPaletteIndex
+        {
+            get { return _currentPaletteIndex; }
+            set { SetProperty(ref _currentPaletteIndex, value); }
+        }
+
         public override string EditorName { get { return "Tile Set Editor"; } }
 
         public BindingList<string> PaletteIds { get; }
-
-        public TileSetViewerVM TileSetViewer { get; }
 
         #endregion Public Properties
 
         #region Internal Methods
 
-        internal void SetupPaletteIds(List<string> paletteRefs, TileSetVM target)
+        internal void SetupPaletteIds(List<string> paletteRefs)
         {
             PaletteIds.UpdateAfter(() =>
             {
@@ -56,29 +60,31 @@ namespace OpenBreed.Editor.VM.Tiles
 
             CurrentPaletteId = PaletteIds.FirstOrDefault();
 
-            SwitchPalette(CurrentPaletteId, target);
+            SwitchPalette(CurrentPaletteId);
         }
 
         #endregion Internal Methods
 
         #region Protected Methods
 
-        protected override void UpdateEntry(TileSetVM source, ITileSetEntry target)
+        protected override TileSetViewerVM CreateVM(ITileSetEntry model)
+        {
+            return Editable;
+        }
+
+        protected override void UpdateEntry(TileSetViewerVM source, ITileSetEntry target)
         {
             base.UpdateEntry(source, target);
         }
 
-        protected override void UpdateVM(ITileSetEntry source, TileSetVM target)
+        protected override void UpdateVM(ITileSetEntry source, TileSetViewerVM target)
         {
             var model = DataProvider.TileSets.GetTileSet(source.Id);
 
             if (model != null)
-            {
-                target.TileSize = model.TileSize;
-                target.SetupTiles(model.Tiles);
-            }
+                target.FromModel(model);
 
-            SetupPaletteIds(source.PaletteRefs, target);
+            SetupPaletteIds(source.PaletteRefs);
             base.UpdateVM(source, target);
         }
 
@@ -86,12 +92,9 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #region Private Methods
 
-        private void SwitchPalette(string paletteId, TileSetVM target)
+        private void SwitchPalette(string paletteId)
         {
-            if (target == null)
-                return;
-
-            target.Palette = ServiceLocator.Instance.GetService<DataProvider>().Palettes.GetPalette(paletteId);
+            Editable.Palette = ServiceLocator.Instance.GetService<DataProvider>().Palettes.GetPalette(paletteId);
         }
 
         private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -99,16 +102,30 @@ namespace OpenBreed.Editor.VM.Tiles
             switch (e.PropertyName)
             {
                 case nameof(CurrentPaletteId):
-                    SwitchPalette(CurrentPaletteId, Editable);
+                    UpdateCurrentPaletteIndex();
+                    SwitchPalette(CurrentPaletteId);
                     break;
 
-                case nameof(Editable):
-                    TileSetViewer.CurrentTileSet = Editable;
+                case nameof(CurrentPaletteIndex):
+                    UpdateCurrentItem();
                     break;
 
                 default:
                     break;
             }
+        }
+
+        private void UpdateCurrentItem()
+        {
+            if (CurrentPaletteIndex == -1)
+                CurrentPaletteId = null;
+            else
+                CurrentPaletteId = PaletteIds[CurrentPaletteIndex];
+        }
+
+        private void UpdateCurrentPaletteIndex()
+        {
+            CurrentPaletteIndex = PaletteIds.IndexOf(CurrentPaletteId);
         }
 
         #endregion Private Methods

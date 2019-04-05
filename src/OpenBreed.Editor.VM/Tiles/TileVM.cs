@@ -9,9 +9,8 @@ namespace OpenBreed.Editor.VM.Tiles
 
         #region Public Constructors
 
-        public TileVM(TileSetVM owner, int index, Rectangle rectangle)
+        public TileVM(int index, Rectangle rectangle)
         {
-            Owner = owner;
             Index = index;
             Rectangle = rectangle;
         }
@@ -21,7 +20,6 @@ namespace OpenBreed.Editor.VM.Tiles
         #region Public Properties
 
         public int Index { get; private set; }
-        public TileSetVM Owner { get; private set; }
         public Rectangle Rectangle { get; private set; }
 
         internal static TileVM Create(TileModel tile)

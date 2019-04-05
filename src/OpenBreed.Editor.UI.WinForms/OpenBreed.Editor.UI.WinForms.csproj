@@ -271,17 +271,17 @@
     <Compile Include="Controls\Sounds\SoundEditorCtrl.Designer.cs">
       <DependentUpon>SoundEditorCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Sprites\SpriteSetSelectorCtrl.cs">
+    <Compile Include="Controls\Sprites\SpriteSetFromImageCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Sprites\SpriteSetSelectorCtrl.Designer.cs">
-      <DependentUpon>SpriteSetSelectorCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Sprites\SpriteSetFromImageCtrl.Designer.cs">
+      <DependentUpon>SpriteSetFromImageCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Sprites\SpriteSetViewerCtrl.cs">
+    <Compile Include="Controls\Sprites\SpriteSetFromSprCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Sprites\SpriteSetViewerCtrl.Designer.cs">
-      <DependentUpon>SpriteSetViewerCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Sprites\SpriteSetFromSprCtrl.Designer.cs">
+      <DependentUpon>SpriteSetFromSprCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Maps\MapEditorTileSetSelectorCtrl.cs">
       <SubType>UserControl</SubType>
@@ -551,11 +551,11 @@
     <EmbeddedResource Include="Controls\Sounds\SoundEditorCtrl.resx">
       <DependentUpon>SoundEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Sprites\SpriteSetSelectorCtrl.resx">
-      <DependentUpon>SpriteSetSelectorCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Sprites\SpriteSetFromImageCtrl.resx">
+      <DependentUpon>SpriteSetFromImageCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Sprites\SpriteSetViewerCtrl.resx">
-      <DependentUpon>SpriteSetViewerCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Sprites\SpriteSetFromSprCtrl.resx">
+      <DependentUpon>SpriteSetFromSprCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Maps\MapEditorTileSetSelectorCtrl.resx">
       <DependentUpon>MapEditorTileSetSelectorCtrl.cs</DependentUpon>
