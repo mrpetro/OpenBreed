@@ -16,6 +16,19 @@ namespace OpenBreed.Common.XmlDatabase.Items.Sprites
         [XmlElement("DataRef")]
         public string DataRef { get; set; }
 
+        [XmlArray("Sprites")]
+        [XmlArrayItem(ElementName = "SpriteCoords")]
+        public List<XmlSpriteCoords> XmlSprites { get; set; }
+
+        [XmlIgnore]
+        public List<ISpriteCoords> Sprites
+        {
+            get
+            {
+                return XmlSprites.Cast<ISpriteCoords>().ToList();
+            }
+        }
+
         public override IEntry Copy()
         {
             return new XmlSpriteSetFromImageEntry()

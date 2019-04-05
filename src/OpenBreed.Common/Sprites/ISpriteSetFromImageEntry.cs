@@ -10,5 +10,7 @@ namespace OpenBreed.Common.Sprites
     public interface ISpriteSetFromImageEntry : ISpriteSetEntry
     {
         string DataRef { get; }
+
+        List<ISpriteCoords> Sprites { get; }
     }
 }

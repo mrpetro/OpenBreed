@@ -58,6 +58,7 @@
     <Compile Include="Items\Palettes\XmlPaletteFromMapEntry.cs" />
     <Compile Include="Items\Palettes\XmlPaletteEntry.cs" />
     <Compile Include="Items\Sounds\XmlSoundEntry.cs" />
+    <Compile Include="Items\Sprites\XmlSpriteCoords.cs" />
     <Compile Include="Items\Sprites\XmlSpriteSetEntry.cs" />
     <Compile Include="Items\Sprites\XmlSpriteSetFromSprEntry.cs" />
     <Compile Include="Items\Sprites\XmlSpriteSetFromImageEntry.cs" />

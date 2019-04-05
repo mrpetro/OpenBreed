@@ -1920,7 +1920,376 @@
       </Items>
     </ActionSets>
     <SpriteSets>
-      <Items />
+      <Items>
+        <SpriteSetFromImage Id="SpriteSets.HSP1">
+          <DataRef>Assets.HSP1</DataRef>
+          <Sprites>
+            <SpriteCoords X="0" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="0" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="0" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="0" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="0" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="256" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="32" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="32" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="32" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="32" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="32" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="288" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="64" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="64" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="64" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="64" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="64" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="256" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="96" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="96" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="96" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="96" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="96" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="288" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="128" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="128" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="128" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="128" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="128" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="256" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="160" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="160" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="160" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="160" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="160" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="288" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="192" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="192" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="192" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="192" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="192" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="256" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="224" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="224" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="224" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="224" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="224" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="288" Y="96" Width="32" Height="32" />
+          </Sprites>
+          <PaletteRefs>
+            <PaletteRef>Palettes.L1MA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.L1MA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </SpriteSetFromImage>
+        <SpriteSetFromImage Id="SpriteSets.HSP2">
+          <DataRef>Assets.HSP2</DataRef>
+          <Sprites>
+            <SpriteCoords X="0" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="0" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="0" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="0" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="0" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="256" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="32" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="32" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="32" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="32" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="32" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="288" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="64" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="64" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="64" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="64" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="64" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="256" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="96" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="96" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="96" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="96" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="96" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="288" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="128" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="128" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="128" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="128" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="128" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="256" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="160" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="160" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="160" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="160" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="160" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="288" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="192" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="192" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="192" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="192" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="192" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="256" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="224" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="224" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="224" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="224" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="224" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="288" Y="96" Width="32" Height="32" />
+          </Sprites>
+          <PaletteRefs>
+            <PaletteRef>Palettes.L1MA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.L1MA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </SpriteSetFromImage>
+        <SpriteSetFromImage Id="SpriteSets.HSP3">
+          <DataRef>Assets.HSP3</DataRef>
+          <Sprites>
+            <SpriteCoords X="0" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="0" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="0" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="0" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="0" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="256" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="32" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="32" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="32" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="32" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="32" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="288" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="64" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="64" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="64" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="64" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="64" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="256" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="96" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="96" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="96" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="96" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="96" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="288" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="128" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="128" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="128" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="128" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="128" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="256" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="160" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="160" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="160" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="160" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="160" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="288" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="192" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="192" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="192" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="192" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="192" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="256" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="224" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="224" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="224" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="224" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="224" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="288" Y="96" Width="32" Height="32" />
+          </Sprites>
+          <PaletteRefs>
+            <PaletteRef>Palettes.L1MA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.L1MA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </SpriteSetFromImage>
+        <SpriteSetFromImage Id="SpriteSets.HSP4">
+          <DataRef>Assets.HSP4</DataRef>
+          <Sprites>
+            <SpriteCoords X="0" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="0" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="0" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="0" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="0" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="256" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="32" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="32" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="32" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="32" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="32" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="288" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="64" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="64" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="64" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="64" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="64" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="256" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="96" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="96" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="96" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="96" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="96" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="288" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="128" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="128" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="128" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="128" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="128" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="256" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="160" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="160" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="160" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="160" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="160" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="288" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="192" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="192" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="192" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="192" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="192" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="256" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="224" Y="0" Width="32" Height="32" />
+            <SpriteCoords X="224" Y="32" Width="32" Height="32" />
+            <SpriteCoords X="224" Y="64" Width="32" Height="32" />
+            <SpriteCoords X="224" Y="96" Width="32" Height="32" />
+            <SpriteCoords X="224" Y="128" Width="32" Height="32" />
+            <SpriteCoords X="288" Y="96" Width="32" Height="32" />
+          </Sprites>
+          <PaletteRefs>
+            <PaletteRef>Palettes.L1MA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.L1MA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </SpriteSetFromImage>
+        <SpriteSetFromImage Id="SpriteSets.L1BO">
+          <DataRef>Assets.L1BO</DataRef>
+          <Sprites>
+            <SpriteCoords X="0" Y="0" Width="320" Height="512" />
+          </Sprites>
+          <PaletteRefs>
+            <PaletteRef>Palettes.L1MA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.L1MA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </SpriteSetFromImage>
+        <SpriteSetFromImage Id="SpriteSets.L2BO">
+          <DataRef>Assets.L2BO</DataRef>
+          <Sprites>
+            <SpriteCoords X="0" Y="0" Width="320" Height="512" />
+          </Sprites>
+          <PaletteRefs>
+            <PaletteRef>Palettes.L2MA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.L2MA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </SpriteSetFromImage>
+        <SpriteSetFromImage Id="SpriteSets.L3BO">
+          <DataRef>Assets.L3BO</DataRef>
+          <Sprites>
+            <SpriteCoords X="0" Y="0" Width="320" Height="512" />
+          </Sprites>
+          <PaletteRefs>
+            <PaletteRef>Palettes.L3MA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.L3MA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </SpriteSetFromImage>
+        <SpriteSetFromImage Id="SpriteSets.L4BO">
+          <DataRef>Assets.L4BO</DataRef>
+          <Sprites>
+            <SpriteCoords X="0" Y="0" Width="320" Height="512" />
+          </Sprites>
+          <PaletteRefs>
+            <PaletteRef>Palettes.L4MA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.L4MA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </SpriteSetFromImage>
+        <SpriteSetFromImage Id="SpriteSets.L5BO">
+          <DataRef>Assets.L5BO</DataRef>
+          <Sprites>
+            <SpriteCoords X="0" Y="0" Width="320" Height="512" />
+          </Sprites>
+          <PaletteRefs>
+            <PaletteRef>Palettes.L5MA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.L5MA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </SpriteSetFromImage>
+        <SpriteSetFromImage Id="SpriteSets.L6BO">
+          <DataRef>Assets.L6BO</DataRef>
+          <Sprites>
+            <SpriteCoords X="0" Y="0" Width="320" Height="512" />
+          </Sprites>
+          <PaletteRefs>
+            <PaletteRef>Palettes.L6MA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.L6MA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </SpriteSetFromImage>
+        <SpriteSetFromImage Id="SpriteSets.L7BO">
+          <DataRef>Assets.L7BO</DataRef>
+          <Sprites>
+            <SpriteCoords X="0" Y="0" Width="320" Height="512" />
+          </Sprites>
+          <PaletteRefs>
+            <PaletteRef>Palettes.L7MA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.L7MA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </SpriteSetFromImage>
+        <SpriteSetFromImage Id="SpriteSets.L8BO">
+          <DataRef>Assets.L8BO</DataRef>
+          <Sprites>
+            <SpriteCoords X="0" Y="0" Width="320" Height="512" />
+          </Sprites>
+          <PaletteRefs>
+            <PaletteRef>Palettes.L8MA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.L8MA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </SpriteSetFromImage>
+        <SpriteSetFromImage Id="SpriteSets.L9BO">
+          <DataRef>Assets.L9BO</DataRef>
+          <Sprites>
+            <SpriteCoords X="0" Y="0" Width="320" Height="512" />
+          </Sprites>
+          <PaletteRefs>
+            <PaletteRef>Palettes.L9MA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.L9MA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </SpriteSetFromImage>
+        <SpriteSetFromImage Id="SpriteSets.LABO">
+          <DataRef>Assets.LABO</DataRef>
+          <Sprites>
+            <SpriteCoords X="0" Y="0" Width="320" Height="512" />
+          </Sprites>
+          <PaletteRefs>
+            <PaletteRef>Palettes.LAMA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.LAMA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </SpriteSetFromImage>
+        <SpriteSetFromImage Id="SpriteSets.LBBO">
+          <DataRef>Assets.LBBO</DataRef>
+          <Sprites>
+            <SpriteCoords X="0" Y="0" Width="320" Height="512" />
+          </Sprites>
+          <PaletteRefs>
+            <PaletteRef>Palettes.LBMA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.LBMA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </SpriteSetFromImage>
+        <SpriteSetFromImage Id="SpriteSets.LCBO">
+          <DataRef>Assets.LCBO</DataRef>
+          <Sprites>
+            <SpriteCoords X="0" Y="0" Width="320" Height="512" />
+          </Sprites>
+          <PaletteRefs>
+            <PaletteRef>Palettes.LCMA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.LCMA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </SpriteSetFromImage>
+        <SpriteSetFromImage Id="SpriteSets.LDBO">
+          <DataRef>Assets.LDBO</DataRef>
+          <Sprites>
+            <SpriteCoords X="0" Y="0" Width="320" Height="512" />
+          </Sprites>
+          <PaletteRefs>
+            <PaletteRef>Palettes.LDMA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.LDMA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </SpriteSetFromImage>
+        <SpriteSetFromImage Id="SpriteSets.LEBO">
+          <DataRef>Assets.LEBO</DataRef>
+          <Sprites>
+            <SpriteCoords X="0" Y="0" Width="320" Height="512" />
+          </Sprites>
+          <PaletteRefs>
+            <PaletteRef>Palettes.LEMA.CMAP</PaletteRef>
+            <PaletteRef>Palettes.LEMA.ALCM</PaletteRef>
+          </PaletteRefs>
+        </SpriteSetFromImage>
+      </Items>
     </SpriteSets>
     <Palettes>
       <Items>

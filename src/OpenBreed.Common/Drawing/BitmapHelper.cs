@@ -12,10 +12,31 @@ namespace OpenBreed.Common.Drawing
     {
         public static byte[] ToBytes(Bitmap bmp, Rectangle rectangle)
         {
-            byte[] bytes = new byte[rectangle.Width * rectangle.Height];
-            BitmapData bmpData = bmp.LockBits(rectangle, ImageLockMode.ReadOnly, PixelFormat.Format8bppIndexed);
-            Marshal.Copy(bmpData.Scan0, bytes, 0, bytes.Length);
+            var bmpData = bmp.LockBits(rectangle, ImageLockMode.ReadOnly, PixelFormat.Format8bppIndexed);
+            // create byte array to copy pixel values
+            var bytes = new byte[rectangle.Width * rectangle.Height];
+            var iptr = bmpData.Scan0;
+
+            // Copy data from pointer to array
+            // Not working for negative Stride see. http://stackoverflow.com/a/10360753/1498252
+            //Marshal.Copy(Iptr, Pixels, 0, Pixels.Length);
+            // Solution for positive and negative Stride:
+            for (int y = 0; y < rectangle.Height; y++)
+            {
+                // This is the important part.  Stride will likely be 16 bytes.
+                // Image is 5px wide x 3 bytes per pixel = 15 bytes per line
+                // Stride is rounded up to the nearest multiple of 4 to keep sensible memory alignment
+                int ptrOffset = y * bmpData.Stride;
+
+                int lineBytes = bmpData.Width * 1; // 6 bytes
+                int bufferOffset = y * lineBytes;
+
+                Marshal.Copy(IntPtr.Add(iptr, ptrOffset), bytes, bufferOffset, lineBytes);
+            }
+
             bmp.UnlockBits(bmpData);
+
+
             return bytes;
         }
 

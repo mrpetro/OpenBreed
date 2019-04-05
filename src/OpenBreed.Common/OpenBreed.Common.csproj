@@ -91,6 +91,7 @@
     <Compile Include="Actions\ActionSetModel.cs" />
     <Compile Include="Sounds\ISoundEntry.cs" />
     <Compile Include="Sounds\SoundModel.cs" />
+    <Compile Include="Sprites\ISpriteCoords.cs" />
     <Compile Include="Sprites\ISpriteSetEntry.cs" />
     <Compile Include="Sprites\ISpriteSetFromImageEntry.cs" />
     <Compile Include="Sprites\ISpriteSetFromSprEntry.cs" />
