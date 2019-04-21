@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace OpenBreed.Game.Common
 {
-    public class ComponentSystem<T> : IComponentSystem where T : IEntityComponent
+    public class WorldSystem<T> : IWorldSystem where T : IEntityComponent
     {
         #region Private Fields
 
@@ -17,7 +17,7 @@ namespace OpenBreed.Game.Common
 
         #region Protected Constructors
 
-        protected ComponentSystem()
+        protected WorldSystem()
         {
             Components = new ReadOnlyCollection<T>(components);
         }
@@ -40,6 +40,16 @@ namespace OpenBreed.Game.Common
         public void AddComponent(IEntityComponent component)
         {
             AddComponent((T)component);
+        }
+
+        public void Deinitialize(World world)
+        {
+
+        }
+
+        public void Initialize(World world)
+        {
+
         }
 
         public void RemoveComponent(IEntityComponent component)

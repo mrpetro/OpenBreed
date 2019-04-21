@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Game.Common;
-using OpenBreed.Game.Entities.Components;
+using OpenBreed.Game.Rendering.Components;
+using OpenBreed.Game.Rendering.Helpers;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System;
@@ -7,7 +8,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Game.Rendering
 {
-    public class RenderSystem : ComponentSystem<IRenderComponent>
+    public class RenderSystem : WorldSystem<IRenderComponent>
     {
         public int MAX_TILES_COUNT = 1024 * 1024;
 

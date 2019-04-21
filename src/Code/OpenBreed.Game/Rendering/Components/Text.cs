@@ -1,14 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using OpenBreed.Game.Common;
+using OpenBreed.Game.Entities.Components;
+using OpenBreed.Game.Rendering.Helpers;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
-namespace OpenBreed.Game.Rendering
+namespace OpenBreed.Game.Rendering.Components
 {
-    public class Text
+
+    public class Text : IRenderComponent
     {
         #region Private Fields
 
         private const string Characters = @"qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789µ§½!""#¤%&/()=?^*@£€${[]}\~¨'-_.:,;<>|°©®±¥";
+
+        public Type SystemType => throw new NotImplementedException();
+
+        public void Deinitialize(IWorldSystem system)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Draw(Viewport viewport)
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion Private Fields
 
@@ -39,6 +56,11 @@ namespace OpenBreed.Game.Rendering
                 }
                 return charMap;
             }
+        }
+
+        public void Initialize(IWorldSystem system)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion Public Methods

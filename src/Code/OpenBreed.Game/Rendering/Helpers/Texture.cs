@@ -2,7 +2,7 @@
 using System;
 using System.Drawing;
 
-namespace OpenBreed.Game.Rendering
+namespace OpenBreed.Game.Rendering.Helpers
 {
     public class Texture : IDisposable
     {

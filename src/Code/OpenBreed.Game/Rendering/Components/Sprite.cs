@@ -1,9 +1,10 @@
 ﻿using OpenBreed.Game.Common;
 using OpenBreed.Game.Entities;
 using OpenBreed.Game.Entities.Components;
+using OpenBreed.Game.Rendering.Helpers;
 using System;
 
-namespace OpenBreed.Game.Rendering
+namespace OpenBreed.Game.Rendering.Components
 {
     internal class Sprite : IRenderComponent
     {
@@ -31,7 +32,7 @@ namespace OpenBreed.Game.Rendering
 
         #region Public Methods
 
-        public void Deinitialize(IComponentSystem system)
+        public void Deinitialize(IWorldSystem system)
         {
             throw new System.NotImplementedException();
         }
@@ -46,7 +47,7 @@ namespace OpenBreed.Game.Rendering
             //GL.End();
         }
 
-        public void Initialize(IComponentSystem system)
+        public void Initialize(IWorldSystem system)
         {
             throw new System.NotImplementedException();
         }

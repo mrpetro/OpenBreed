@@ -1,7 +1,7 @@
 ﻿using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
-namespace OpenBreed.Game.Rendering
+namespace OpenBreed.Game.Rendering.Helpers
 {
     public class Camera
     {

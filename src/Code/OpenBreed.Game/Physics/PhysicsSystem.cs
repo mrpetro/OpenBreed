@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Game.Common;
 using OpenBreed.Game.Entities.Components;
+using OpenBreed.Game.Physics.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Game.Physics
 {
-    public class PhysicsSystem : ComponentSystem<IBodyComponent>
+    public class PhysicsSystem : WorldSystem<IBodyComponent>
     {
     }
 }

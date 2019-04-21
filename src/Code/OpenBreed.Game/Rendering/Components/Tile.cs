@@ -1,12 +1,13 @@
 ﻿using OpenBreed.Game.Common;
 using OpenBreed.Game.Entities;
 using OpenBreed.Game.Entities.Components;
+using OpenBreed.Game.Rendering.Helpers;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System;
 
-namespace OpenBreed.Game.Rendering
+namespace OpenBreed.Game.Rendering.Components
 {
     public class Tile : IRenderComponent
     {
@@ -55,7 +56,7 @@ namespace OpenBreed.Game.Rendering
 
         #region Public Methods
 
-        public void Deinitialize(IComponentSystem system)
+        public void Deinitialize(IWorldSystem system)
         {
             throw new NotImplementedException();
         }
@@ -72,7 +73,7 @@ namespace OpenBreed.Game.Rendering
             GL.PopMatrix();
         }
 
-        public void Initialize(IComponentSystem system)
+        public void Initialize(IWorldSystem system)
         {
             //throw new NotImplementedException();
         }

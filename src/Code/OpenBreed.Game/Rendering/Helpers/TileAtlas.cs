@@ -2,7 +2,7 @@
 using OpenTK;
 using OpenTK.Graphics;
 
-namespace OpenBreed.Game.Rendering
+namespace OpenBreed.Game.Rendering.Helpers
 {
     public class TileAtlas
     {

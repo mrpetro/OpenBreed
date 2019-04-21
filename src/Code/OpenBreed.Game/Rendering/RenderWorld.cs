@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Game.Rendering
 {
-    public interface IRenderer
+    public class RenderWorld
     {
-        void Render(Viewport viewport);
     }
 }

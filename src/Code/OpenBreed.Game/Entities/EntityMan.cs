@@ -11,7 +11,7 @@ namespace OpenBreed.Game.Entities
         #region Private Fields
 
         private readonly Dictionary<Guid, IEntity> entities = new Dictionary<Guid, IEntity>();
-        private readonly List<IComponentSystem> systems = new List<IComponentSystem>();
+        private readonly List<IWorldSystem> systems = new List<IWorldSystem>();
 
         #endregion Private Fields
 
@@ -27,7 +27,7 @@ namespace OpenBreed.Game.Entities
                 throw new InvalidOperationException($"Entity with Guid '{guid}' not found.");
         }
 
-        public void RegisterSystem(IComponentSystem system)
+        public void RegisterSystem(IWorldSystem system)
         {
             systems.Add(system);
         }

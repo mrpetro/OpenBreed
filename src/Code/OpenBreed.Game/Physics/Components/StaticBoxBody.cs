@@ -2,7 +2,7 @@
 using OpenBreed.Game.Entities.Components;
 using System;
 
-namespace OpenBreed.Game.Physics
+namespace OpenBreed.Game.Physics.Components
 {
     public class StaticBoxBody : IBodyComponent
     {
@@ -24,12 +24,12 @@ namespace OpenBreed.Game.Physics
 
         #region Public Methods
 
-        public void Deinitialize(IComponentSystem system)
+        public void Deinitialize(IWorldSystem system)
         {
             throw new System.NotImplementedException();
         }
 
-        public void Initialize(IComponentSystem system)
+        public void Initialize(IWorldSystem system)
         {
             throw new System.NotImplementedException();
         }

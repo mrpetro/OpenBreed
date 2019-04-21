@@ -2,7 +2,7 @@
 using OpenTK.Graphics;
 using System.Drawing;
 
-namespace OpenBreed.Game.Rendering
+namespace OpenBreed.Game.Rendering.Helpers
 {
     public struct Vertex
     {

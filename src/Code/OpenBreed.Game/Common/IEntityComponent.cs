@@ -13,9 +13,9 @@ namespace OpenBreed.Game.Entities.Components
 
         #region Public Methods
 
-        void Deinitialize(IComponentSystem system);
+        void Deinitialize(IWorldSystem system);
 
-        void Initialize(IComponentSystem system);
+        void Initialize(IWorldSystem system);
 
         #endregion Public Methods
     }

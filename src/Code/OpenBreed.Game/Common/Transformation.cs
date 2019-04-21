@@ -31,12 +31,12 @@ namespace OpenBreed.Game.Common
 
         #region Public Methods
 
-        public void Deinitialize(IComponentSystem system)
+        public void Deinitialize(IWorldSystem system)
         {
             throw new NotImplementedException();
         }
 
-        public void Initialize(IComponentSystem system)
+        public void Initialize(IWorldSystem system)
         {
             throw new NotImplementedException();
         }

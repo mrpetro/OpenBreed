@@ -1,7 +1,8 @@
 ﻿using OpenBreed.Game.Common;
 using OpenBreed.Game.Entities.Builders;
 using OpenBreed.Game.Physics;
-using OpenBreed.Game.Rendering;
+using OpenBreed.Game.Physics.Components;
+using OpenBreed.Game.Rendering.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
