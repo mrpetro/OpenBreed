@@ -1,6 +1,7 @@
 ﻿using OpenTK;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace OpenBreed.Game.States
 {
@@ -43,6 +44,11 @@ namespace OpenBreed.Game.States
             activeGameState.EnterState();
         }
 
+        public void OnLoad()
+        {
+            activeGameState.OnLoad();
+        }
+
         public void OnRenderFrame(FrameEventArgs e)
         {
             activeGameState.OnRenderFrame(e);
@@ -64,7 +70,12 @@ namespace OpenBreed.Game.States
             state.OnRegister(this);
         }
 
+        internal void OnResize(Rectangle clientRectangle)
+        {
+            activeGameState.OnResize(clientRectangle);
+        }
 
-#endregion Public Methods
+
+        #endregion Public Methods
     }
 }

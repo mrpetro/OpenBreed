@@ -62,12 +62,49 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ComponentSystem.cs" />
+    <Compile Include="Common\IComponentSystem.cs" />
+    <Compile Include="Common\Transformation.cs" />
+    <Compile Include="Core.cs" />
+    <Compile Include="Entities\Components\ITransformComponent.cs" />
+    <Compile Include="Physics\PhysicsSystem.cs" />
+    <Compile Include="Rendering\RenderTools.cs" />
+    <Compile Include="Rendering\Sprite.cs" />
+    <Compile Include="Entities\WorldBlock.cs" />
+    <Compile Include="Entities\Components\IBodyComponent.cs" />
+    <Compile Include="Entities\Components\IControlComponent.cs" />
+    <Compile Include="Entities\Components\IEntityComponent.cs" />
+    <Compile Include="Entities\Components\IRenderComponent.cs" />
+    <Compile Include="Entities\Components\ISoundComponent.cs" />
+    <Compile Include="Entities\WorldCreature.cs" />
+    <Compile Include="Entities\IEntityBuilder.cs" />
+    <Compile Include="Entities\Builders\WorldBlockBuilder.cs" />
+    <Compile Include="Entities\Builders\WorldEntityBuilder.cs" />
+    <Compile Include="Entities\Builders\WorldCreatureBuilder.cs" />
+    <Compile Include="Entities\EntityBase.cs" />
+    <Compile Include="Entities\EntityCreator.cs" />
+    <Compile Include="Entities\EntityMan.cs" />
+    <Compile Include="Entities\IEntity.cs" />
+    <Compile Include="Entities\WorldEntity.cs" />
+    <Compile Include="Physics\StaticBoxBody.cs" />
+    <Compile Include="Rendering\MapRenderer.cs" />
+    <Compile Include="Rendering\TileAtlas.cs" />
+    <Compile Include="Rendering\Text.cs" />
+    <Compile Include="Rendering\Tile.cs" />
+    <Compile Include="Rendering\Vertex.cs" />
+    <Compile Include="Rendering\IRenderer.cs" />
+    <Compile Include="Rendering\Texture.cs" />
+    <Compile Include="Rendering\TextureMan.cs" />
     <Compile Include="States\BaseState.cs" />
     <Compile Include="States\GameState.cs" />
     <Compile Include="States\StateMan.cs" />
     <Compile Include="States\MenuState.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rendering\Camera.cs" />
+    <Compile Include="Rendering\Viewport.cs" />
+    <Compile Include="World.cs" />
+    <Compile Include="Rendering\RenderSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -85,6 +122,30 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\TexTest32bit.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\TexTest24bit.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\TexTest4bitIndexed.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\TexTest8bitIndexed.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Sounds\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\TileAtlasTest32bit.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

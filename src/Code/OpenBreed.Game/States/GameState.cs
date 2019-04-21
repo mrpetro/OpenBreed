@@ -1,6 +1,12 @@
-﻿using OpenTK;
+﻿using OpenBreed.Game.Entities;
+using OpenBreed.Game.Physics;
+using OpenBreed.Game.Rendering;
+using OpenTK;
+using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace OpenBreed.Game.States
 {
@@ -9,46 +15,165 @@ namespace OpenBreed.Game.States
         #region Public Fields
 
         public const string Id = "GAME";
+        public Texture TestTexture;
+        public World World;
 
         #endregion Public Fields
 
+        #region Private Fields
+
+        private int px;
+        private int py;
+        private Viewport viewportLeft;
+        private Viewport viewportRight;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public GameState()
+        {
+            TextureMan = new TextureMan();
+            EntityMan = new EntityMan();
+            RenderSystem = new RenderSystem();
+            PhysicsSystem = new PhysicsSystem();
+            EntityMan.RegisterSystem(RenderSystem);
+            EntityMan.RegisterSystem(PhysicsSystem);
+
+            World = new World(this);
+
+            Camera1 = new Camera(Vector2.Zero, 0.0f, 0.01f);
+            Camera2 = new Camera(Vector2.Zero, 0.0f, 0.01f);
+
+            viewportLeft = new Viewport(50, 50, 540, 380);
+            viewportLeft.View = Camera1;
+
+            viewportRight = new Viewport(50, 50, 540, 380);
+            viewportRight.View = Camera2;
+
+            RenderSystem.AddViewport(viewportLeft);
+            RenderSystem.AddViewport(viewportRight);
+        }
+
+        #endregion Public Constructors
+
         #region Public Properties
 
+        public Camera Camera1 { get; }
+        public Camera Camera2 { get; }
+        public EntityMan EntityMan { get; }
         public override string Name { get { return Id; } }
+        public PhysicsSystem PhysicsSystem { get; }
+        public RenderSystem RenderSystem { get; }
+        public TextureMan TextureMan { get; }
 
         #endregion Public Properties
 
         #region Public Methods
 
+        public override void OnLoad()
+        {
+            base.OnLoad();
+
+            //GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+            //GL.PatchParameter(PatchParameterInt.PatchVertices, 3);
+
+            TestTexture = TextureMan.Load(@"Content\TexTest32bit.bmp");
+
+            World.Initialize();
+
+
+            //TestTexture = TextureMan.Load(@"Content\TexTest24bit.bmp");
+            //TestTexture = TextureMan.Load(@"Content\TexTest8bitIndexed.bmp");
+            //TestTexture = TextureMan.Load(@"Content\TexTest4bitIndexed.bmp");
+
+            //GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.One);                  // Select The Type Of Blending
+
+            //GL.Enable(EnableCap.StencilTest);
+            GL.ClearStencil(0x0);
+            GL.StencilMask(0xFFFFFFFF);
+            GL.ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+            //GL.Enable(EnableCap.Blend);
+            //GL.BlendFunc(BlendingFactor.SrcAlpha,BlendingFactor.OneMinusSrcAlpha);
+            GL.Enable(EnableCap.DepthTest);
+        }
+
         public override void OnRenderFrame(FrameEventArgs e)
         {
             base.OnRenderFrame(e);
 
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
-            Matrix4 modelview = Matrix4.LookAt(Vector3.Zero, Vector3.UnitZ, Vector3.UnitY);
+            GL.PushMatrix();
+
+            GL.Color4(1.0f, 1.0f, 1.0f, 1.0f);
+            //GL.Enable(EnableCap.Texture2D);
+            //GL.BindTexture(TextureTarget.Texture2D, TestTexture.Id);
+
+            RenderSystem.OnRenderFrame(e);
+            //GL.Disable(EnableCap.Texture2D);
+
+            GL.PopMatrix();
+        }
+
+        public override void OnResize(Rectangle clientRectangle)
+        {
+            base.OnResize(clientRectangle);
+
+            GL.LoadIdentity();
+            GL.Viewport(0, 0, clientRectangle.Width, clientRectangle.Height);
             GL.MatrixMode(MatrixMode.Modelview);
-            GL.LoadMatrix(ref modelview);
+            GL.LoadIdentity();
 
-            GL.Begin(PrimitiveType.Triangles);
+            GL.Ortho(0, clientRectangle.Width, 0, clientRectangle.Height, 0, 1); // Origin in lower-left corner
 
-            GL.Color3(1.0f, 1.0f, 0.0f); GL.Vertex3(-1.0f, -1.0f, 4.0f);
-            GL.Color3(1.0f, 0.0f, 0.0f); GL.Vertex3(1.0f, -1.0f, 4.0f);
-            GL.Color3(0.2f, 0.9f, 1.0f); GL.Vertex3(0.0f, 1.0f, 4.0f);
+            viewportLeft.X = clientRectangle.X + 25;
+            viewportLeft.Y = clientRectangle.Y + 25;
+            viewportLeft.Width = clientRectangle.Width / 2 - 50;
+            viewportLeft.Height = clientRectangle.Height - 50;
 
-            GL.End();
+            viewportRight.X = clientRectangle.X + 25 + clientRectangle.Width / 2;
+            viewportRight.Y = clientRectangle.Y + 25;
+            viewportRight.Width = clientRectangle.Width / 2 - 50;
+            viewportRight.Height = clientRectangle.Height - 50;
         }
 
         public override void OnUpdate(FrameEventArgs e)
         {
             base.OnUpdate(e);
+
+            //View.Update();
         }
 
         public override void ProcessInputs(FrameEventArgs e)
         {
-            var state = Keyboard.GetState();
-            if (state.IsKeyDown(Key.Escape))
+            var keyState = Keyboard.GetState();
+            if (keyState.IsKeyDown(Key.Escape))
                 ChangeState(MenuState.Id);
+
+            var mouseState = Mouse.GetState();
+
+            int dx = mouseState.X - px;
+            int dy = mouseState.Y - py;
+
+            var z = 1 + ((float)mouseState.Scroll.Y) / 20.0f;
+
+            if (z == 0)
+                z = 1.0f;
+
+            if (mouseState.IsButtonDown(MouseButton.Left))
+            {
+                Camera1.Zoom = z;
+                Camera1.Position = Vector2.Add(Camera1.Position, new Vector2(dx, -dy));
+            }
+            else if (mouseState.IsButtonDown(MouseButton.Right))
+            {
+                Camera2.Zoom = z;
+                Camera2.Position = Vector2.Add(Camera2.Position, new Vector2(dx, -dy));
+            }
+
+            px = mouseState.X;
+            py = mouseState.Y;
         }
 
         #endregion Public Methods

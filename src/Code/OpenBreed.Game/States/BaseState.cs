@@ -1,12 +1,11 @@
 ﻿using System;
+using System.Drawing;
 using OpenTK;
 
 namespace OpenBreed.Game.States
 {
     public abstract class BaseState
     {
-
-
         #region Public Properties
 
         public StateMan StateMan { get; private set; }
@@ -15,6 +14,14 @@ namespace OpenBreed.Game.States
         #endregion Public Properties
 
         #region Public Methods
+
+        public virtual void OnLoad()
+        {
+        }
+
+        public virtual void OnResize(Rectangle clientRectangle)
+        {
+        }
 
         public virtual void OnRenderFrame(FrameEventArgs e)
         {

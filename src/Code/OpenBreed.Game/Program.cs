@@ -8,18 +8,21 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using OpenTK.Graphics;
 using OpenBreed.Game.States;
+using OpenBreed.Game.Rendering;
+using System.Drawing;
 
 namespace OpenBreed.Game
 {
     public class Program : GameWindow
     {
+        private Font font;
+
         public StateMan StateMan { get; }
 
         public Program()
-            : base(800, 600, GraphicsMode.Default, "OpenBreed")
+            : base(800, 600, new GraphicsMode(new ColorFormat(8, 8, 8, 8), 24, 8), "OpenBreed")
         {
             StateMan = new StateMan(this);
-
             StateMan.RegisterState(new GameState());
             StateMan.RegisterState(new MenuState());
             StateMan.ChangeState(GameState.Id);
@@ -38,19 +41,16 @@ namespace OpenBreed.Game
         {
             base.OnLoad(e);
 
-            GL.ClearColor(0.1f, 0.2f, 0.5f, 0.0f);
-            GL.Enable(EnableCap.DepthTest);
+            font = new Font("Arial", 12);
+
+            StateMan.OnLoad();
         }
 
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
 
-            GL.Viewport(ClientRectangle.X, ClientRectangle.Y, ClientRectangle.Width, ClientRectangle.Height);
-
-            Matrix4 projection = Matrix4.CreatePerspectiveFieldOfView((float)Math.PI / 4, Width / (float)Height, 1.0f, 64.0f);
-            GL.MatrixMode(MatrixMode.Projection);
-            GL.LoadMatrix(ref projection);
+            StateMan.OnResize(ClientRectangle);
         }
 
         protected override void OnUpdateFrame(FrameEventArgs e)
@@ -63,7 +63,7 @@ namespace OpenBreed.Game
 
         protected override void OnRenderFrame(FrameEventArgs e)
         {
-            base.OnRenderFrame(e);
+            Title = $"(Vsync: {VSync}) FPS: {1f / e.Time:0}";
 
             StateMan.OnRenderFrame(e);
 
