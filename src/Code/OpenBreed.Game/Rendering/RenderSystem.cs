@@ -114,23 +114,13 @@ namespace OpenBreed.Game.Rendering
 
         private void DrawTiles(Viewport viewport)
         {
-            var transf = viewport.View.GetTransform();
-            var pointLB = new Vector3(viewport.Left, viewport.Bottom, 0.0f);
-            var pointRT = new Vector3(viewport.Right, viewport.Top, 0.0f);
+            float left, bottom, right, top;
+            viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
 
-            var tLB = Matrix4.CreateTranslation(pointLB);
-            var tRT = Matrix4.CreateTranslation(pointRT);
-
-            tLB = Matrix4.Mult(tLB, transf);
-            tRT = Matrix4.Mult(tRT, transf);
-
-            pointLB = tLB.ExtractTranslation();
-            pointRT = tRT.ExtractTranslation();
-
-            int leftIndex = (int)pointLB.X / 16;
-            int bottomIndex = (int)pointLB.Y / 16;
-            int rightIndex = (int)pointRT.X / 16 + 1;
-            int topIndex = (int)pointRT.Y / 16 + 1;
+            int leftIndex = (int)left / 16;
+            int bottomIndex = (int)bottom / 16;
+            int rightIndex = (int)right / 16 + 1;
+            int topIndex = (int)top / 16 + 1;
 
             leftIndex = MathHelper.Clamp(leftIndex, 0, TileMapHeight);
             rightIndex = MathHelper.Clamp(rightIndex, 0, TileMapHeight);

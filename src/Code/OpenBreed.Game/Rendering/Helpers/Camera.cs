@@ -1,18 +1,27 @@
-﻿using OpenTK;
+﻿using OpenBreed.Game.Entities;
+using OpenBreed.Game.Entities.Builders;
+using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
 namespace OpenBreed.Game.Rendering.Helpers
 {
-    public class Camera
+    public class Camera : WorldEntity
     {
         #region Public Constructors
 
-        public Camera(Vector2 position, float rotation, float zoom)
+        public Camera(WorldCameraBuilder builder) : base(builder)
         {
-            Position = position;
-            Rotation = rotation;
-            Zoom = zoom;
+            Position = builder.position;
+            Rotation = builder.rotation;
+            Zoom = builder.zoom;
         }
+
+        //public Camera(Vector2 position, float rotation, float zoom)
+        //{
+        //    Position = position;
+        //    Rotation = rotation;
+        //    Zoom = zoom;
+        //}
 
         #endregion Public Constructors
 

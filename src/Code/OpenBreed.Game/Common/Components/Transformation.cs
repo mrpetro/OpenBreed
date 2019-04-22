@@ -2,7 +2,7 @@
 using OpenTK;
 using System;
 
-namespace OpenBreed.Game.Common
+namespace OpenBreed.Game.Common.Components
 {
     public class Transformation : ITransformComponent
     {

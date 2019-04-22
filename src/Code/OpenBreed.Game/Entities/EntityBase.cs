@@ -26,12 +26,6 @@ namespace OpenBreed.Game.Entities
         public Guid Guid { get; }
         public GameState Core { get; }
 
-        public virtual void Initialize()
-        {
-            for (int i = 0; i < Components.Count; i++)
-                Core.EntityMan.InitializeComponent(Components[i]);
-        }
-
         #endregion Public Properties
     }
 }

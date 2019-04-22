@@ -64,15 +64,16 @@
   <ItemGroup>
     <Compile Include="Common\WorldSystem.cs" />
     <Compile Include="Common\IWorldSystem.cs" />
-    <Compile Include="Common\Transformation.cs" />
+    <Compile Include="Common\Components\Transformation.cs" />
     <Compile Include="Core.cs" />
+    <Compile Include="Entities\Builders\WorldCameraBuilder.cs" />
     <Compile Include="Entities\Components\ITransformComponent.cs" />
+    <Compile Include="Entities\IWorldEntity.cs" />
     <Compile Include="Physics\PhysicsSystem.cs" />
     <Compile Include="Rendering\Helpers\RenderTools.cs" />
-    <Compile Include="Rendering\RenderWorld.cs" />
     <Compile Include="Rendering\Components\Sprite.cs" />
     <Compile Include="Entities\WorldBlock.cs" />
-    <Compile Include="Physics\Components\IBodyComponent.cs" />
+    <Compile Include="Physics\Components\IPhysicsComponent.cs" />
     <Compile Include="Entities\Components\IControlComponent.cs" />
     <Compile Include="Common\IEntityComponent.cs" />
     <Compile Include="Rendering\Components\IRenderComponent.cs" />

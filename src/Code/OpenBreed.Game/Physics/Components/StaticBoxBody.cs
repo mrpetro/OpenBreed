@@ -4,7 +4,7 @@ using System;
 
 namespace OpenBreed.Game.Physics.Components
 {
-    public class StaticBoxBody : IBodyComponent
+    public class StaticBoxBody : IPhysicsComponent
     {
         #region Public Constructors
 

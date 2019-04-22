@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Game.Entities;
+using OpenBreed.Game.Entities.Builders;
 using OpenBreed.Game.Physics;
 using OpenBreed.Game.Rendering;
 using OpenBreed.Game.Rendering.Helpers;
@@ -32,28 +33,36 @@ namespace OpenBreed.Game.States
 
         #region Public Constructors
 
+
+
         public GameState()
         {
             TextureMan = new TextureMan();
             EntityMan = new EntityMan();
-            RenderSystem = new RenderSystem();
-            PhysicsSystem = new PhysicsSystem();
-            EntityMan.RegisterSystem(RenderSystem);
-            EntityMan.RegisterSystem(PhysicsSystem);
 
             World = new World(this);
 
-            Camera1 = new Camera(Vector2.Zero, 0.0f, 0.01f);
-            Camera2 = new Camera(Vector2.Zero, 0.0f, 0.01f);
+            var cameraBuilder = new WorldCameraBuilder(this);
+
+            cameraBuilder.SetPosition(new Vector2(16, 32));
+            cameraBuilder.SetRotation(0.0f);
+            cameraBuilder.SetZoom(1);
+            Camera1 = (Camera)cameraBuilder.Build();
+
+            cameraBuilder.SetPosition(new Vector2(0, 0));
+            cameraBuilder.SetRotation(0.0f);
+            cameraBuilder.SetZoom(1);
+            Camera2 = (Camera)cameraBuilder.Build();
+
 
             viewportLeft = new Viewport(50, 50, 540, 380);
-            viewportLeft.View = Camera1;
+            viewportLeft.Camera = Camera1;
 
             viewportRight = new Viewport(50, 50, 540, 380);
-            viewportRight.View = Camera2;
+            viewportRight.Camera = Camera2;
 
-            RenderSystem.AddViewport(viewportLeft);
-            RenderSystem.AddViewport(viewportRight);
+            World.RenderSystem.AddViewport(viewportLeft);
+            World.RenderSystem.AddViewport(viewportRight);
         }
 
         #endregion Public Constructors
@@ -64,8 +73,6 @@ namespace OpenBreed.Game.States
         public Camera Camera2 { get; }
         public EntityMan EntityMan { get; }
         public override string Name { get { return Id; } }
-        public PhysicsSystem PhysicsSystem { get; }
-        public RenderSystem RenderSystem { get; }
         public TextureMan TextureMan { get; }
 
         #endregion Public Properties
@@ -111,7 +118,7 @@ namespace OpenBreed.Game.States
             //GL.Enable(EnableCap.Texture2D);
             //GL.BindTexture(TextureTarget.Texture2D, TestTexture.Id);
 
-            RenderSystem.OnRenderFrame(e);
+            World.OnRenderFrame(e);
             //GL.Disable(EnableCap.Texture2D);
 
             GL.PopMatrix();

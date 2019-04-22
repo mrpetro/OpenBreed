@@ -1,8 +1,5 @@
-﻿using OpenBreed.Game.Common;
-using OpenBreed.Game.Entities.Components;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace OpenBreed.Game.Entities
 {
@@ -11,7 +8,6 @@ namespace OpenBreed.Game.Entities
         #region Private Fields
 
         private readonly Dictionary<Guid, IEntity> entities = new Dictionary<Guid, IEntity>();
-        private readonly List<IWorldSystem> systems = new List<IWorldSystem>();
 
         #endregion Private Fields
 
@@ -27,11 +23,6 @@ namespace OpenBreed.Game.Entities
                 throw new InvalidOperationException($"Entity with Guid '{guid}' not found.");
         }
 
-        public void RegisterSystem(IWorldSystem system)
-        {
-            systems.Add(system);
-        }
-
         #endregion Public Methods
 
         #region Internal Methods
@@ -39,8 +30,6 @@ namespace OpenBreed.Game.Entities
         internal void AddEntity(EntityBase entity)
         {
             entities.Add(entity.Guid, entity);
-
-            entity.Initialize();
         }
 
         internal Guid GetGuid()
@@ -49,19 +38,5 @@ namespace OpenBreed.Game.Entities
         }
 
         #endregion Internal Methods
-
-        #region Private Methods
-
-        internal void InitializeComponent(IEntityComponent component)
-        {
-            var foundSystem = systems.FirstOrDefault(item => item.GetType() == component.SystemType);
-
-            if (foundSystem == null)
-                throw new InvalidOperationException($"System {component.SystemType} not registered.");
-
-            foundSystem.AddComponent(component);
-        }
-
-        #endregion Private Methods
     }
 }

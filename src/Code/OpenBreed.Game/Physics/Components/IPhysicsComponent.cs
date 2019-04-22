@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Game.Physics.Components
 {
-    public interface IBodyComponent : IEntityComponent
+    public interface IPhysicsComponent : IEntityComponent
     {
 
     }

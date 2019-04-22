@@ -13,11 +13,5 @@ namespace OpenBreed.Game.Entities
         Guid Guid { get; }
 
         #endregion Public Properties
-
-        #region Public Methods
-
-        void Initialize();
-
-        #endregion Public Methods
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Game.Physics
 {
-    public class PhysicsSystem : WorldSystem<IBodyComponent>
+    public class PhysicsSystem : WorldSystem<IPhysicsComponent>
     {
     }
 }

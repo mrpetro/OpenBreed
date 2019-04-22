@@ -1,11 +1,14 @@
 ﻿using OpenBreed.Game.Common;
 using OpenBreed.Game.Entities;
 using OpenBreed.Game.Entities.Builders;
+using OpenBreed.Game.Physics;
 using OpenBreed.Game.Rendering;
 using OpenBreed.Game.Rendering.Helpers;
 using OpenBreed.Game.States;
+using OpenTK;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace OpenBreed.Game
@@ -14,17 +17,50 @@ namespace OpenBreed.Game
     {
         #region Private Fields
 
+        private readonly List<IWorldEntity> entities = new List<IWorldEntity>();
         private readonly List<IWorldSystem> systems = new List<IWorldSystem>();
-        private readonly List<IWorldSystem> toAdd = new List<IWorldSystem>();
-        private readonly List<IWorldSystem> toRemove = new List<IWorldSystem>();
+        private readonly List<IWorldEntity> toAdd = new List<IWorldEntity>();
+        private readonly List<IWorldEntity> toRemove = new List<IWorldEntity>();
+
+        internal void RegisterEntity(WorldEntity entity)
+        {
+            foreach (var component in entity.Components)
+            {
+                var foundSystem = systems.FirstOrDefault(item => item.GetType() == component.SystemType);
+
+                if (foundSystem == null)
+                    throw new InvalidOperationException($"System {component.SystemType} not registered.");
+
+                foundSystem.AddComponent(component);
+            }
+        }
+
+        internal void UnregisterEntity(WorldEntity entity)
+        {
+            foreach (var component in entity.Components)
+            {
+                var foundSystem = systems.FirstOrDefault(item => item.GetType() == component.SystemType);
+
+                if (foundSystem == null)
+                    throw new InvalidOperationException($"System {component.SystemType} not registered.");
+
+                foundSystem.RemoveComponent(component);
+            }
+        }
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public World(GameState gameState)
+        public World(GameState core)
         {
-            GameState = gameState;
+            Core = core;
+            Entities = new ReadOnlyCollection<IWorldEntity>(entities);
+
+            RenderSystem = new RenderSystem();
+            PhysicsSystem = new PhysicsSystem();
+            systems.Add(RenderSystem);
+            systems.Add(PhysicsSystem);
 
             GenerateMap();
         }
@@ -33,47 +69,54 @@ namespace OpenBreed.Game
 
         #region Public Properties
 
-        public List<WorldEntity> Entities { get; } = new List<WorldEntity>();
+        public GameState Core { get; }
+        public ReadOnlyCollection<IWorldEntity> Entities { get; }
 
-        public GameState GameState { get; }
-
-        public List<IWorldSystem> Systems { get; }
+        public PhysicsSystem PhysicsSystem { get; }
+        public RenderSystem RenderSystem { get; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public virtual void AddSystem(IWorldSystem system)
+        public void AddEntity(WorldEntity entity)
         {
-            toAdd.Add(system);
+            toAdd.Add(entity);
         }
 
         public void Initialize()
         {
-            for (int i = 0; i < Entities.Count; i++)
-            {
-                Entities[i].Initialize();
-            }
+            Cleanup();
         }
 
-        public virtual void RemoveSystem(IWorldSystem system)
+        public void OnRenderFrame(FrameEventArgs e)
         {
-            toRemove.Add(system);
+            RenderSystem.OnRenderFrame(e);
+        }
+
+        public void RemoveEntity(WorldEntity entity)
+        {
+            toRemove.Add(entity);
         }
 
         #endregion Public Methods
 
         #region Protected Methods
 
+        protected virtual void AddSystem(IWorldSystem system)
+        {
+            systems.Add(system);
+        }
+
         protected virtual void Cleanup()
         {
             if (toRemove.Any())
             {
-                //Process worlds to remove
+                //Process entities to remove
                 for (int i = 0; i < toRemove.Count; i++)
                 {
-                    toRemove[i].Deinitialize(this);
-                    systems.Remove(toRemove[i]);
+                    toRemove[i].LeaveWorld();
+                    entities.Remove(toRemove[i]);
                 }
 
                 toRemove.Clear();
@@ -81,15 +124,20 @@ namespace OpenBreed.Game
 
             if (toAdd.Any())
             {
-                //Process worlds to add
+                //Process entities to add
                 for (int i = 0; i < toAdd.Count; i++)
                 {
-                    systems.Add(toAdd[i]);
-                    toAdd[i].Initialize(this);
+                    entities.Add(toAdd[i]);
+                    toAdd[i].EnterWorld(this);
                 }
 
                 toAdd.Clear();
             }
+        }
+
+        protected virtual void RemoveSystem(IWorldSystem system)
+        {
+            systems.Add(system);
         }
 
         #endregion Protected Methods
@@ -98,15 +146,14 @@ namespace OpenBreed.Game
 
         private void GenerateMap()
         {
-            var tileTex = GameState.TextureMan.Load(@"Content\TileAtlasTest32bit.bmp");
+            var tileTex = Core.TextureMan.Load(@"Content\TileAtlasTest32bit.bmp");
 
             var tileAtlas = new TileAtlas(tileTex, 16, 4, 4);
 
             int width = 64;
             int height = 64;
 
-            var blockBuilder = new WorldBlockBuilder(GameState);
-            blockBuilder.SetWorld(this);
+            var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas);
 
             var rnd = new Random();
@@ -117,7 +164,7 @@ namespace OpenBreed.Game
                 {
                     blockBuilder.SetIndices(x, y);
                     blockBuilder.SetTileId(rnd.Next() % 16);
-                    Entities.Add((WorldBlock)blockBuilder.Build());
+                    AddEntity((WorldBlock)blockBuilder.Build());
                 }
             }
         }

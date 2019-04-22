@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Game.Common;
+using OpenBreed.Game.Common.Components;
 using OpenBreed.Game.Entities.Builders;
 using OpenBreed.Game.Physics;
 using OpenBreed.Game.Physics.Components;
