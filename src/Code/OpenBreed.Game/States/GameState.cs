@@ -1,12 +1,11 @@
 ﻿using OpenBreed.Game.Entities;
 using OpenBreed.Game.Entities.Builders;
-using OpenBreed.Game.Physics;
 using OpenBreed.Game.Rendering;
 using OpenBreed.Game.Rendering.Helpers;
 using OpenTK;
-using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -24,6 +23,7 @@ namespace OpenBreed.Game.States
 
         #region Private Fields
 
+        private readonly List<Viewport> viewports = new List<Viewport>();
         private int px;
         private int py;
         private Viewport viewportLeft;
@@ -32,8 +32,6 @@ namespace OpenBreed.Game.States
         #endregion Private Fields
 
         #region Public Constructors
-
-
 
         public GameState()
         {
@@ -44,16 +42,17 @@ namespace OpenBreed.Game.States
 
             var cameraBuilder = new WorldCameraBuilder(this);
 
-            cameraBuilder.SetPosition(new Vector2(16, 32));
+            cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
             Camera1 = (Camera)cameraBuilder.Build();
+            World.AddEntity(Camera1);
 
             cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
             Camera2 = (Camera)cameraBuilder.Build();
-
+            World.AddEntity(Camera2);
 
             viewportLeft = new Viewport(50, 50, 540, 380);
             viewportLeft.Camera = Camera1;
@@ -61,8 +60,8 @@ namespace OpenBreed.Game.States
             viewportRight = new Viewport(50, 50, 540, 380);
             viewportRight.Camera = Camera2;
 
-            World.RenderSystem.AddViewport(viewportLeft);
-            World.RenderSystem.AddViewport(viewportRight);
+            AddViewport(viewportLeft);
+            AddViewport(viewportRight);
         }
 
         #endregion Public Constructors
@@ -79,6 +78,14 @@ namespace OpenBreed.Game.States
 
         #region Public Methods
 
+        public void AddViewport(Viewport viewport)
+        {
+            if (viewports.Contains(viewport))
+                throw new InvalidOperationException("Viewport already added.");
+
+            viewports.Add(viewport);
+        }
+
         public override void OnLoad()
         {
             base.OnLoad();
@@ -89,7 +96,6 @@ namespace OpenBreed.Game.States
             TestTexture = TextureMan.Load(@"Content\TexTest32bit.bmp");
 
             World.Initialize();
-
 
             //TestTexture = TextureMan.Load(@"Content\TexTest24bit.bmp");
             //TestTexture = TextureMan.Load(@"Content\TexTest8bitIndexed.bmp");
@@ -114,12 +120,8 @@ namespace OpenBreed.Game.States
 
             GL.PushMatrix();
 
-            GL.Color4(1.0f, 1.0f, 1.0f, 1.0f);
-            //GL.Enable(EnableCap.Texture2D);
-            //GL.BindTexture(TextureTarget.Texture2D, TestTexture.Id);
-
-            World.OnRenderFrame(e);
-            //GL.Disable(EnableCap.Texture2D);
+            for (int i = 0; i < viewports.Count; i++)
+                viewports[i].Draw();
 
             GL.PopMatrix();
         }
@@ -150,7 +152,7 @@ namespace OpenBreed.Game.States
         {
             base.OnUpdate(e);
 
-            //View.Update();
+            World.Update(e.Time);
         }
 
         public override void ProcessInputs(FrameEventArgs e)
@@ -182,6 +184,11 @@ namespace OpenBreed.Game.States
 
             px = mouseState.X;
             py = mouseState.Y;
+        }
+
+        public void RemoveViewport(Viewport viewport)
+        {
+            viewports.Remove(viewport);
         }
 
         #endregion Public Methods

@@ -12,6 +12,8 @@ namespace OpenBreed.Game.Common
 
         void Initialize(World world);
 
+        void Update(double dt);
+
         void RemoveComponent(IEntityComponent component);
 
         #endregion Public Methods

@@ -9,6 +9,7 @@ namespace OpenBreed.Game.Rendering.Helpers
     /// </summary>
     public class Viewport
     {
+
         #region Public Fields
 
         /// <summary>
@@ -19,7 +20,7 @@ namespace OpenBreed.Game.Rendering.Helpers
         /// <summary>
         /// This will clip any graphics that is outside of viewport box
         /// </summary>
-        public const bool CLIPPING = true;
+        public const bool CLIPPING = false;
 
         #endregion Public Fields
 
@@ -38,27 +39,6 @@ namespace OpenBreed.Game.Rendering.Helpers
             Y = y;
             Width = width;
             Height = height;
-        }
-
-        public void GetVisibleRectangle(out float left, out float bottom, out float right, out float top)
-        {
-            var transf = Camera.GetTransform();
-            var pointLB = new Vector3(Left, Bottom, 0.0f);
-            var pointRT = new Vector3(Right, Top, 0.0f);
-
-            var tLB = Matrix4.CreateTranslation(pointLB);
-            var tRT = Matrix4.CreateTranslation(pointRT);
-
-            tLB = Matrix4.Mult(tLB, transf);
-            tRT = Matrix4.Mult(tRT, transf);
-
-            pointLB = tLB.ExtractTranslation();
-            pointRT = tRT.ExtractTranslation();
-
-            left = pointLB.X;
-            bottom = pointLB.Y;
-            right = pointRT.X;
-            top = pointRT.Y;
         }
 
         #endregion Public Constructors
@@ -115,10 +95,9 @@ namespace OpenBreed.Game.Rendering.Helpers
         #region Public Methods
 
         /// <summary>
-        /// This will perform drawing of render system that is given in the argumnet
+        /// This will perform drawing of render system from world that current camera is looking at
         /// </summary>
-        /// <param name="system">Render system to draw</param>
-        public void Draw(RenderSystem system)
+        public void Draw()
         {
             if (CLIPPING)
             {
@@ -143,11 +122,14 @@ namespace OpenBreed.Game.Rendering.Helpers
                 GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Keep);
             }
 
+            //var transform = Matrix4.Identity;
+            //transform.Invert();
+
             var transform = Camera.GetTransform();
             transform.Invert();
             GL.MultMatrix(ref transform);
 
-            system.Draw(this);
+            Camera.CurrentWorld.RenderSystem.Draw(this);
 
             if (CLIPPING)
             {
@@ -169,6 +151,27 @@ namespace OpenBreed.Game.Rendering.Helpers
             }
         }
 
+        public void GetVisibleRectangle(out float left, out float bottom, out float right, out float top)
+        {
+            var transf = Camera.GetTransform();
+            var pointLB = new Vector3(Left, Bottom, 0.0f);
+            var pointRT = new Vector3(Right, Top, 0.0f);
+
+            var tLB = Matrix4.CreateTranslation(pointLB);
+            var tRT = Matrix4.CreateTranslation(pointRT);
+
+            tLB = Matrix4.Mult(tLB, transf);
+            tRT = Matrix4.Mult(tRT, transf);
+
+            pointLB = tLB.ExtractTranslation();
+            pointRT = tRT.ExtractTranslation();
+
+            left = pointLB.X;
+            bottom = pointLB.Y;
+            right = pointRT.X;
+            top = pointRT.Y;
+        }
+
         public void OnResize(Rectangle clientRectangle)
         {
         }
@@ -178,5 +181,6 @@ namespace OpenBreed.Game.Rendering.Helpers
         }
 
         #endregion Public Methods
+
     }
 }

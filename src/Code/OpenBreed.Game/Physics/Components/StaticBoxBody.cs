@@ -31,7 +31,7 @@ namespace OpenBreed.Game.Physics.Components
 
         public void Initialize(IWorldSystem system)
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
         }
 
         #endregion Public Methods

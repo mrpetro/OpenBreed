@@ -10,25 +10,20 @@ namespace OpenBreed.Game.Rendering
 {
     public class RenderSystem : WorldSystem<IRenderComponent>
     {
+        #region Public Fields
+
         public int MAX_TILES_COUNT = 1024 * 1024;
+
+        #endregion Public Fields
 
         #region Private Fields
 
-        private Tile[] tiles;
         private List<Sprite> sprites;
-
-        private List<Viewport> viewports = new List<Viewport>();
+        private Tile[] tiles;
 
         #endregion Private Fields
 
         #region Public Constructors
-
-        private void InitializeTilesMap(int width, int height)
-        {
-            TileMapHeight = width;
-            TileMapWidth = height;
-            tiles = new Tile[width * height];
-        }
 
         public RenderSystem()
         {
@@ -40,8 +35,9 @@ namespace OpenBreed.Game.Rendering
 
         #region Public Properties
 
-        public int TileMapWidth { get; private set; }
         public int TileMapHeight { get; private set; }
+
+        public int TileMapWidth { get; private set; }
 
         #endregion Public Properties
 
@@ -57,33 +53,12 @@ namespace OpenBreed.Game.Rendering
                 base.AddComponent(component);
         }
 
-        public void AddViewport(Viewport viewport)
-        {
-            if (viewports.Contains(viewport))
-                throw new InvalidOperationException("Viewport already added.");
-
-            viewports.Add(viewport);
-        }
-
         public void Draw(Viewport viewport)
         {
             DrawTiles(viewport);
 
             foreach (var component in Components)
                 component.Draw(viewport);
-        }
-
-        public void OnRenderFrame(FrameEventArgs e)
-        {
-            foreach (var viewport in viewports)
-                viewport.Draw(this);
-
-            Cleanup();
-        }
-
-        public void RemoveViewport(Viewport viewport)
-        {
-            viewports.Remove(viewport);
         }
 
         #endregion Public Methods
@@ -94,8 +69,6 @@ namespace OpenBreed.Game.Rendering
         {
             sprites.Add(sprite);
         }
-
-
 
         private void AddTile(Tile tile)
         {
@@ -139,6 +112,13 @@ namespace OpenBreed.Game.Rendering
             }
 
             GL.Disable(EnableCap.Texture2D);
+        }
+
+        private void InitializeTilesMap(int width, int height)
+        {
+            TileMapHeight = width;
+            TileMapWidth = height;
+            tiles = new Tile[width * height];
         }
 
         #endregion Private Methods

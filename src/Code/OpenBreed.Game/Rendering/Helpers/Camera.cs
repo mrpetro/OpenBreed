@@ -16,12 +16,7 @@ namespace OpenBreed.Game.Rendering.Helpers
             Zoom = builder.zoom;
         }
 
-        //public Camera(Vector2 position, float rotation, float zoom)
-        //{
-        //    Position = position;
-        //    Rotation = rotation;
-        //    Zoom = zoom;
-        //}
+
 
         #endregion Public Constructors
 

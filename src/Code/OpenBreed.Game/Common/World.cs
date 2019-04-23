@@ -89,11 +89,6 @@ namespace OpenBreed.Game
             Cleanup();
         }
 
-        public void OnRenderFrame(FrameEventArgs e)
-        {
-            RenderSystem.OnRenderFrame(e);
-        }
-
         public void RemoveEntity(WorldEntity entity)
         {
             toRemove.Add(entity);
@@ -167,6 +162,12 @@ namespace OpenBreed.Game
                     AddEntity((WorldBlock)blockBuilder.Build());
                 }
             }
+        }
+
+        public void Update(double dt)
+        {
+            for (int i = 0; i < systems.Count; i++)
+                systems[i].Update(dt);
         }
 
         #endregion Private Methods

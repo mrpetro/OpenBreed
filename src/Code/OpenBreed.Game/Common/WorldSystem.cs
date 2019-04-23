@@ -52,6 +52,11 @@ namespace OpenBreed.Game.Common
 
         }
 
+        public virtual void Update(double dt)
+        {
+            Cleanup();
+        }
+
         public void RemoveComponent(IEntityComponent component)
         {
             RemoveComponent((T)component);
