@@ -122,22 +122,24 @@ namespace OpenBreed.Game.Rendering.Helpers
                 GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Keep);
             }
 
-            //var transform = Matrix4.Identity;
-            //transform.Invert();
+            GL.PushMatrix();
 
             var transform = Camera.GetTransform();
-            transform.Invert();
+            //transform.Invert();
             GL.MultMatrix(ref transform);
 
+            GL.Translate(X, Y, 0.0f);
+
             Camera.CurrentWorld.RenderSystem.Draw(this);
+
+            GL.Translate(-X, -Y, 0.0f);
 
             if (CLIPPING)
             {
                 GL.Disable(EnableCap.StencilTest);
             }
 
-            transform.Invert();
-            GL.MultMatrix(ref transform);
+            GL.PopMatrix();
 
             if (BORDER)
             {
@@ -154,8 +156,9 @@ namespace OpenBreed.Game.Rendering.Helpers
         public void GetVisibleRectangle(out float left, out float bottom, out float right, out float top)
         {
             var transf = Camera.GetTransform();
-            var pointLB = new Vector3(Left, Bottom, 0.0f);
-            var pointRT = new Vector3(Right, Top, 0.0f);
+            transf.Invert();
+            var pointLB = new Vector3(0, 0, 0.0f);
+            var pointRT = new Vector3(Width, Height, 0.0f);
 
             var tLB = Matrix4.CreateTranslation(pointLB);
             var tRT = Matrix4.CreateTranslation(pointRT);

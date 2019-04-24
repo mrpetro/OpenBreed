@@ -42,13 +42,13 @@ namespace OpenBreed.Game.States
 
             var cameraBuilder = new WorldCameraBuilder(this);
 
-            cameraBuilder.SetPosition(new Vector2(0, 0));
+            cameraBuilder.SetPosition(new Vector2(32, 32));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
             Camera1 = (Camera)cameraBuilder.Build();
             World.AddEntity(Camera1);
 
-            cameraBuilder.SetPosition(new Vector2(0, 0));
+            cameraBuilder.SetPosition(new Vector2(16, 16));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
             Camera2 = (Camera)cameraBuilder.Build();
