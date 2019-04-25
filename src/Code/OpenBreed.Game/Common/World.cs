@@ -153,15 +153,31 @@ namespace OpenBreed.Game
 
             var rnd = new Random();
 
-            for (int y = 0; y < height; y++)
-            {
-                for (int x = 0; x < width; x++)
-                {
-                    blockBuilder.SetIndices(x, y);
-                    blockBuilder.SetTileId(rnd.Next() % 16);
-                    AddEntity((WorldBlock)blockBuilder.Build());
-                }
-            }
+            blockBuilder.SetIndices(0, 0);
+            blockBuilder.SetTileId(0);
+            AddEntity((WorldBlock)blockBuilder.Build());
+
+            blockBuilder.SetIndices(4, 0);
+            blockBuilder.SetTileId(1);
+            AddEntity((WorldBlock)blockBuilder.Build());
+
+            blockBuilder.SetIndices(4, 4);
+            blockBuilder.SetTileId(2);
+            AddEntity((WorldBlock)blockBuilder.Build());
+
+            blockBuilder.SetIndices(0, 4);
+            blockBuilder.SetTileId(3);
+            AddEntity((WorldBlock)blockBuilder.Build());
+
+            //for (int y = 0; y < height; y++)
+            //{
+            //    for (int x = 0; x < width; x++)
+            //    {
+            //        blockBuilder.SetIndices(x, y);
+            //        blockBuilder.SetTileId(rnd.Next() % 16);
+            //        AddEntity((WorldBlock)blockBuilder.Build());
+            //    }
+            //}
         }
 
         public void Update(double dt)

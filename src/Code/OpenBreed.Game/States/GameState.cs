@@ -42,13 +42,13 @@ namespace OpenBreed.Game.States
 
             var cameraBuilder = new WorldCameraBuilder(this);
 
-            cameraBuilder.SetPosition(new Vector2(32, 32));
+            cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
             Camera1 = (Camera)cameraBuilder.Build();
             World.AddEntity(Camera1);
 
-            cameraBuilder.SetPosition(new Vector2(16, 16));
+            cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
             Camera2 = (Camera)cameraBuilder.Build();
@@ -174,12 +174,14 @@ namespace OpenBreed.Game.States
             if (mouseState.IsButtonDown(MouseButton.Left))
             {
                 Camera1.Zoom = z;
-                Camera1.Position = Vector2.Add(Camera1.Position, new Vector2(dx, -dy));
+                Camera1.Position = Vector2.Subtract(Camera1.Position, new Vector2(dx, -dy));
+
+                Console.WriteLine($"{Camera1.Position.X} {Camera1.Position.Y}");
             }
             else if (mouseState.IsButtonDown(MouseButton.Right))
             {
                 Camera2.Zoom = z;
-                Camera2.Position = Vector2.Add(Camera2.Position, new Vector2(dx, -dy));
+                Camera2.Position = Vector2.Subtract(Camera2.Position, new Vector2(dx, -dy));
             }
 
             px = mouseState.X;

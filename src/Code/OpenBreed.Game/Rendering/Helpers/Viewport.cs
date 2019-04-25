@@ -99,6 +99,8 @@ namespace OpenBreed.Game.Rendering.Helpers
         /// </summary>
         public void Draw()
         {
+            GL.Translate(X, Y, 0.0f);
+
             if (CLIPPING)
             {
                 //Clear stencil buffer before drawing in it
@@ -112,45 +114,35 @@ namespace OpenBreed.Game.Rendering.Helpers
                 GL.Color3(0.0f, 0.0f, 0.0f);
 
                 GL.Begin(PrimitiveType.Polygon);                            // Use A Quad For Each Character
-                GL.Vertex3(Left, Top, 0.0);
-                GL.Vertex3(Left, Bottom, 0.0);
-                GL.Vertex3(Right, Bottom, 0.0);
-                GL.Vertex3(Right, Top, 0.0);
+                GL.Vertex3(0,     Height, 0.0);
+                GL.Vertex3(0,     0,      0.0);
+                GL.Vertex3(Width, 0,      0.0);
+                GL.Vertex3(Width, Height, 0.0);
                 GL.End();
 
                 GL.StencilFunc(StencilFunction.Equal, 0x1, 0x1);
                 GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Keep);
             }
 
-            GL.PushMatrix();
-
-            var transform = Camera.GetTransform();
-            //transform.Invert();
-            GL.MultMatrix(ref transform);
-
-            GL.Translate(X, Y, 0.0f);
-
-            Camera.CurrentWorld.RenderSystem.Draw(this);
-
-            GL.Translate(-X, -Y, 0.0f);
+            Camera.RenderTo(this);
 
             if (CLIPPING)
             {
                 GL.Disable(EnableCap.StencilTest);
             }
 
-            GL.PopMatrix();
-
             if (BORDER)
             {
                 GL.Color4(1.0f, 0.0f, 0.0f, 1.0f);
                 GL.Begin(PrimitiveType.LineLoop);
-                GL.Vertex3(Left, Top, 0.0);
-                GL.Vertex3(Left, Bottom, 0.0);
-                GL.Vertex3(Right, Bottom, 0.0);
-                GL.Vertex3(Right, Top, 0.0);
+                GL.Vertex3(0,     Height, 0.0);
+                GL.Vertex3(0,     0,      0.0);
+                GL.Vertex3(Width, 0,      0.0);
+                GL.Vertex3(Width, Height, 0.0);
                 GL.End();
             }
+
+            GL.Translate(-X, -Y, 0.0f);
         }
 
         public void GetVisibleRectangle(out float left, out float bottom, out float right, out float top)

@@ -53,6 +53,10 @@ namespace OpenBreed.Game.Rendering
                 base.AddComponent(component);
         }
 
+        /// <summary>
+        ///This will draw render system objects into given viewport
+        /// </summary>
+        /// <param name="viewport">Target viewport to draw render system objects</param>
         public void Draw(Viewport viewport)
         {
             DrawTiles(viewport);
@@ -107,7 +111,9 @@ namespace OpenBreed.Game.Rendering
                 for (int i = leftIndex; i < rightIndex; i++)
                 {
                     var tile = tiles[i + TileMapHeight * j];
-                    tile.Draw(viewport);
+
+                    if(tile != null)
+                        tile.Draw(viewport);
                 }
             }
 
