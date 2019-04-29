@@ -1,24 +1,41 @@
 ﻿using OpenBreed.Game.Common;
+using OpenBreed.Game.Common.Components;
 using OpenBreed.Game.Entities;
-using OpenBreed.Game.Entities.Components;
 using OpenBreed.Game.Rendering.Helpers;
 using System;
+using OpenTK.Graphics.OpenGL;
 
 namespace OpenBreed.Game.Rendering.Components
 {
     internal class Sprite : IRenderComponent
     {
+        public static uint[] indices = {
+                                            0,1,2,
+                                            0,2,3
+                                       };
+
+        private int vbo;
+        private int ibo;
+
         #region Private Fields
 
-        private ITransformComponent transform;
+        private Transformation transform;
+        private SpriteAtlas spriteAtlas;
+        private int spriteId;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public Sprite(ITransformComponent transform)
+        public Sprite(SpriteAtlas spriteAtlas, int spriteId, Transformation transform)
         {
+            this.spriteAtlas = spriteAtlas;
+            this.spriteId = spriteId;
             this.transform = transform;
+
+            var vertices = spriteAtlas.GetVertices(spriteId);
+
+            RenderTools.Create(vertices, indices, out vbo, out ibo);
         }
 
         #endregion Public Constructors
@@ -39,17 +56,19 @@ namespace OpenBreed.Game.Rendering.Components
 
         public void Draw(Viewport viewport)
         {
-            //GL.Begin(PrimitiveType.Quads);
-            //GL.Color3(1.0f, 1.0f, 0.0f); GL.Vertex3(entity.Item1.X, triangle.Item1.Y, 0.0f);
-            //GL.Color3(1.0f, 0.0f, 0.0f); GL.Vertex3(triangle.Item2.X, triangle.Item2.Y, 0.0f);
-            //GL.Color3(0.2f, 0.9f, 1.0f); GL.Vertex3(triangle.Item3.X, triangle.Item3.Y, 0.0f);
-            //GL.Color3(0.2f, 0.9f, 1.0f); GL.Vertex3(triangle.Item3.X, triangle.Item3.Y, 0.0f);
-            //GL.End();
+            GL.PushMatrix();
+
+            GL.BindTexture(TextureTarget.Texture2D, spriteAtlas.Texture.Id);
+
+            GL.MultMatrix(ref transform.Value);
+            RenderTools.Draw(viewport, vbo, ibo, 6);
+
+            GL.PopMatrix();
         }
 
         public void Initialize(IWorldSystem system)
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
         }
 
         #endregion Public Methods

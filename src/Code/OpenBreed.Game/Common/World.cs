@@ -1,11 +1,11 @@
 ﻿using OpenBreed.Game.Common;
+using OpenBreed.Game.Common.Components;
 using OpenBreed.Game.Entities;
 using OpenBreed.Game.Entities.Builders;
 using OpenBreed.Game.Physics;
 using OpenBreed.Game.Rendering;
 using OpenBreed.Game.Rendering.Helpers;
 using OpenBreed.Game.States;
-using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,32 +21,6 @@ namespace OpenBreed.Game
         private readonly List<IWorldSystem> systems = new List<IWorldSystem>();
         private readonly List<IWorldEntity> toAdd = new List<IWorldEntity>();
         private readonly List<IWorldEntity> toRemove = new List<IWorldEntity>();
-
-        internal void RegisterEntity(WorldEntity entity)
-        {
-            foreach (var component in entity.Components)
-            {
-                var foundSystem = systems.FirstOrDefault(item => item.GetType() == component.SystemType);
-
-                if (foundSystem == null)
-                    throw new InvalidOperationException($"System {component.SystemType} not registered.");
-
-                foundSystem.AddComponent(component);
-            }
-        }
-
-        internal void UnregisterEntity(WorldEntity entity)
-        {
-            foreach (var component in entity.Components)
-            {
-                var foundSystem = systems.FirstOrDefault(item => item.GetType() == component.SystemType);
-
-                if (foundSystem == null)
-                    throw new InvalidOperationException($"System {component.SystemType} not registered.");
-
-                foundSystem.RemoveComponent(component);
-            }
-        }
 
         #endregion Private Fields
 
@@ -70,9 +44,11 @@ namespace OpenBreed.Game
         #region Public Properties
 
         public GameState Core { get; }
+
         public ReadOnlyCollection<IWorldEntity> Entities { get; }
 
         public PhysicsSystem PhysicsSystem { get; }
+
         public RenderSystem RenderSystem { get; }
 
         #endregion Public Properties
@@ -94,7 +70,36 @@ namespace OpenBreed.Game
             toRemove.Add(entity);
         }
 
+        public void Update(double dt)
+        {
+            for (int i = 0; i < systems.Count; i++)
+                systems[i].Update(dt);
+        }
+
         #endregion Public Methods
+
+        #region Internal Methods
+
+        internal void RegisterEntity(WorldEntity entity)
+        {
+            for (int i = 0; i < entity.Components.Count; i++)
+                AddComponent(entity.Components[i]);
+        }
+
+        internal void UnregisterEntity(WorldEntity entity)
+        {
+            foreach (var component in entity.Components)
+            {
+                var foundSystem = systems.FirstOrDefault(item => item.GetType() == component.SystemType);
+
+                if (foundSystem == null)
+                    throw new InvalidOperationException($"System {component.SystemType} not registered.");
+
+                foundSystem.RemoveComponent(component);
+            }
+        }
+
+        #endregion Internal Methods
 
         #region Protected Methods
 
@@ -139,17 +144,40 @@ namespace OpenBreed.Game
 
         #region Private Methods
 
+        private void AddComponent(IEntityComponent component)
+        {
+            if (component.SystemType == null)
+                return;
+
+            var foundSystem = systems.FirstOrDefault(item => item.GetType() == component.SystemType);
+
+            if (foundSystem == null)
+                throw new InvalidOperationException($"System {component.SystemType} not registered.");
+
+            foundSystem.AddComponent(component);
+        }
+
         private void GenerateMap()
         {
             var tileTex = Core.TextureMan.Load(@"Content\TileAtlasTest32bit.bmp");
 
+            var spriteTex = Core.TextureMan.Load(@"Content\ArrowSpriteSet.png");
+
             var tileAtlas = new TileAtlas(tileTex, 16, 4, 4);
+            var spriteAtlas = new SpriteAtlas(spriteTex, 32, 8, 1);
 
             int width = 64;
             int height = 64;
 
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas);
+
+
+            var actorBuilder = new WorldActorBuilder(Core);
+            actorBuilder.SetSpriteAtlas(spriteAtlas);
+            actorBuilder.SetPosition(new OpenTK.Vector2(20, 20));
+            actorBuilder.SetSpriteId(0);
+            AddEntity((WorldActor)actorBuilder.Build());
 
             var rnd = new Random();
 
@@ -178,12 +206,6 @@ namespace OpenBreed.Game
             //        AddEntity((WorldBlock)blockBuilder.Build());
             //    }
             //}
-        }
-
-        public void Update(double dt)
-        {
-            for (int i = 0; i < systems.Count; i++)
-                systems[i].Update(dt);
         }
 
         #endregion Private Methods

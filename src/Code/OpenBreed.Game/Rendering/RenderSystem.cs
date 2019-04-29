@@ -61,8 +61,10 @@ namespace OpenBreed.Game.Rendering
         {
             DrawTiles(viewport);
 
-            foreach (var component in Components)
-                component.Draw(viewport);
+            DrawSprites(viewport);
+
+            //foreach (var component in Components)
+            //    component.Draw(viewport);
         }
 
         #endregion Public Methods
@@ -87,6 +89,29 @@ namespace OpenBreed.Game.Rendering
                 throw new InvalidOperationException($"Tile Y coordinate exceeds tile map height size.");
 
             tiles[tileId] = tile;
+        }
+
+        private void DrawSprites(Viewport viewport)
+        {
+            float left, bottom, right, top;
+            viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
+
+            GL.Color4(1.0f, 1.0f, 1.0f, 1.0f);
+            GL.Enable(EnableCap.Blend);
+            GL.Enable(EnableCap.AlphaTest);
+            GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusSrcAlpha);
+            GL.AlphaFunc(AlphaFunction.Greater, 0.0f);
+            GL.Enable(EnableCap.Texture2D);
+
+            for (int i = 0; i < sprites.Count; i++)
+            {
+                var sprite = sprites[i];
+                sprite.Draw(viewport);
+            }
+
+            GL.Disable(EnableCap.Texture2D);
+            GL.Disable(EnableCap.AlphaTest);
+            GL.Disable(EnableCap.Blend);
         }
 
         private void DrawTiles(Viewport viewport)

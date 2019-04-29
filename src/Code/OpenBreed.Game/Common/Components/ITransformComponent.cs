@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Game.Entities.Components
+namespace OpenBreed.Game.Common.Components
 {
     public interface ITransformComponent : IEntityComponent
     {

@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Game.Common;
 using System;
 
-namespace OpenBreed.Game.Entities.Components
+namespace OpenBreed.Game.Common.Components
 {
     public interface IEntityComponent
     {

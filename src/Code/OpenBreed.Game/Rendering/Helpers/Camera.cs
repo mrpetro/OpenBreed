@@ -1,4 +1,5 @@
 ﻿using System;
+using OpenBreed.Game.Common.Components;
 using OpenBreed.Game.Entities;
 using OpenBreed.Game.Entities.Builders;
 using OpenTK;
@@ -14,14 +15,19 @@ namespace OpenBreed.Game.Rendering.Helpers
     {
         #region Public Constructors
 
+        public Transformation Transform { get; }
+
         public Camera(WorldCameraBuilder builder) : base(builder)
         {
             Position = builder.position;
             Rotation = builder.rotation;
             Zoom = builder.zoom;
+
+            Transform = new Transformation(builder.position,
+                                               builder.rotation,
+                                               builder.zoom);
+            Components.Add(Transform);
         }
-
-
 
         #endregion Public Constructors
 

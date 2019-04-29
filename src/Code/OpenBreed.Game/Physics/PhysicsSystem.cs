@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Game.Common;
-using OpenBreed.Game.Entities.Components;
 using OpenBreed.Game.Physics.Components;
 using System;
 using System.Collections.Generic;

@@ -4,25 +4,25 @@ using OpenTK.Graphics;
 
 namespace OpenBreed.Game.Rendering.Helpers
 {
-    public class TileAtlas
+    public class SpriteAtlas
     {
         #region Private Fields
 
-        private readonly Vector2[] tileCoords;
+        private readonly Vector2[] spriteCoords;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TileAtlas(Texture texture, int tileSize, int tileColumns, int tileRows)
+        public SpriteAtlas(Texture texture, int spriteSize, int spriteColumns, int spriteRows)
         {
             this.Texture = texture;
 
-            TileSize = tileSize;
+            SpriteSize = spriteSize;
 
-            tileCoords = new Vector2[tileRows * tileColumns];
+            spriteCoords = new Vector2[spriteRows * spriteColumns];
 
-            BuildCoords(tileRows, tileColumns);
+            BuildCoords(spriteRows, spriteColumns);
         }
 
         #endregion Public Constructors
@@ -30,31 +30,31 @@ namespace OpenBreed.Game.Rendering.Helpers
         #region Public Properties
 
         public Texture Texture { get; }
-        public int TileSize { get; }
+        public int SpriteSize { get; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public Vector2 GetCoords(int tileId)
+        public Vector2 GetCoords(int spriteId)
         {
-            return tileCoords[tileId];
+            return spriteCoords[spriteId];
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void BuildCoords(int tileRows, int tileColumns)
+        private void BuildCoords(int spriteRows, int spriteColumns)
         {
-            for (int y = 0; y < tileRows; y++)
+            for (int y = 0; y < spriteRows; y++)
             {
-                for (int x = 0; x < tileColumns; x++)
+                for (int x = 0; x < spriteColumns; x++)
                 {
                     var coord = new Vector2(x, y);
-                    coord = Vector2.Multiply(coord, TileSize);
+                    coord = Vector2.Multiply(coord, SpriteSize);
                     coord = Vector2.Divide( coord, new Vector2(Texture.Width, Texture.Height));
-                    tileCoords[x + y * tileRows] = coord;
+                    spriteCoords[x + y * spriteRows] = coord;
                 }
             }
         }
@@ -63,17 +63,17 @@ namespace OpenBreed.Game.Rendering.Helpers
 
         internal Vertex[] GetVertices(int tileId)
         {
-            var uvSize = new Vector2(TileSize, TileSize);
+            var uvSize = new Vector2(SpriteSize, SpriteSize);
             uvSize = Vector2.Divide(uvSize, new Vector2(Texture.Width, Texture.Height));
 
-            var uvLD = tileCoords[tileId];
+            var uvLD = spriteCoords[tileId];
             var uvRT = Vector2.Add(uvLD, uvSize);
 
             Vertex[] vertices = {
                                 new Vertex(new Vector2(0,   0),              new Vector2(uvLD.X, uvRT.Y), Color4.White),
-                                new Vertex(new Vector2(TileSize,  0),        new Vector2(uvRT.X, uvRT.Y), Color4.White),
-                                new Vertex(new Vector2(TileSize,  TileSize), new Vector2(uvRT.X, uvLD.Y), Color4.White),
-                                new Vertex(new Vector2(0,   TileSize),       new Vector2(uvLD.X, uvLD.Y), Color4.White),
+                                new Vertex(new Vector2(SpriteSize,  0),        new Vector2(uvRT.X, uvRT.Y), Color4.White),
+                                new Vertex(new Vector2(SpriteSize,  SpriteSize), new Vector2(uvRT.X, uvLD.Y), Color4.White),
+                                new Vertex(new Vector2(0,   SpriteSize),       new Vector2(uvLD.X, uvLD.Y), Color4.White),
                             };
 
             return vertices;

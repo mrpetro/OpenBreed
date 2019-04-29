@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Game.Common;
 using OpenBreed.Game.Common.Components;
 using OpenBreed.Game.Entities;
-using OpenBreed.Game.Entities.Components;
 using OpenBreed.Game.Rendering.Helpers;
 using OpenTK;
 using OpenTK.Graphics;

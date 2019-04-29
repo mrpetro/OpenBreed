@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Game.Common;
-using OpenBreed.Game.Entities.Components;
+using OpenBreed.Game.Common.Components;
 using System;
 
 namespace OpenBreed.Game.Physics.Components

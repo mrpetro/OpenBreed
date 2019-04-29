@@ -1,7 +1,8 @@
-﻿using System;
+﻿using OpenBreed.Game.Entities;
+using System;
 using System.Collections.Generic;
 
-namespace OpenBreed.Game.Entities
+namespace OpenBreed.Game
 {
     public class EntityMan
     {
