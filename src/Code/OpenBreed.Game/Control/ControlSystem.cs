@@ -10,5 +10,9 @@ namespace OpenBreed.Game.Control
 {
     public class ControlSystem : WorldSystem<IControlComponent>
     {
+        internal void ProcessInputs(double dt)
+        {
+            //throw new NotImplementedException();
+        }
     }
 }

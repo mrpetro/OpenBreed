@@ -157,6 +157,8 @@ namespace OpenBreed.Game.States
 
         public override void ProcessInputs(FrameEventArgs e)
         {
+            World.ProcessInputs(e.Time);
+
             var keyState = Keyboard.GetState();
             if (keyState.IsKeyDown(Key.Escape))
                 ChangeState(MenuState.Id);

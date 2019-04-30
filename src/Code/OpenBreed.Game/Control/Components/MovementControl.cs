@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Game.Common;
+using OpenBreed.Game.Common.Components;
 using OpenBreed.Game.Entities;
 
 namespace OpenBreed.Game.Control.Components
@@ -18,6 +19,8 @@ namespace OpenBreed.Game.Control.Components
 
     public class MovementControl : IControlComponent
     {
+        private Transformation transformation;
+
         public Type SystemType { get { return typeof(ControlSystem); } }
 
         public void Move(MovementDirection direction)
@@ -32,7 +35,8 @@ namespace OpenBreed.Game.Control.Components
 
         public void Initialize(IEntity entity)
         {
-            //throw new NotImplementedException();
+            transformation = entity.Components.OfType<Transformation>().First();
+
         }
     }
 }

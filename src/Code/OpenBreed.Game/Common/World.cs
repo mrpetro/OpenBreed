@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Game.Common;
 using OpenBreed.Game.Common.Components;
+using OpenBreed.Game.Control;
 using OpenBreed.Game.Entities;
 using OpenBreed.Game.Entities.Builders;
 using OpenBreed.Game.Physics;
@@ -34,8 +35,10 @@ namespace OpenBreed.Game
 
             RenderSystem = new RenderSystem();
             PhysicsSystem = new PhysicsSystem();
+            ControlSystem = new ControlSystem();
             systems.Add(RenderSystem);
             systems.Add(PhysicsSystem);
+            systems.Add(ControlSystem);
 
             GenerateMap();
         }
@@ -49,7 +52,7 @@ namespace OpenBreed.Game
         public ReadOnlyCollection<IWorldEntity> Entities { get; }
 
         public PhysicsSystem PhysicsSystem { get; }
-
+        public ControlSystem ControlSystem { get; }
         public RenderSystem RenderSystem { get; }
 
         #endregion Public Properties
@@ -81,6 +84,11 @@ namespace OpenBreed.Game
         {
             for (int i = 0; i < systems.Count; i++)
                 systems[i].Update(dt);
+        }
+
+        public void ProcessInputs(double dt)
+        {
+            ControlSystem.ProcessInputs(dt);
         }
 
         #endregion Public Methods
