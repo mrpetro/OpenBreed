@@ -73,6 +73,8 @@
     <Compile Include="Common\WorldSystem.cs" />
     <Compile Include="Common\IWorldSystem.cs" />
     <Compile Include="Common\Components\Transformation.cs" />
+    <Compile Include="Control\Components\MovementControl.cs" />
+    <Compile Include="Control\ControlSystem.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="Entities\Builders\WorldCameraBuilder.cs" />
     <Compile Include="Common\Components\ITransformComponent.cs" />

@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Game.Common;
+using OpenBreed.Game.Entities;
 using OpenBreed.Game.Rendering.Helpers;
 using System;
 using System.Collections.Generic;
@@ -7,16 +8,23 @@ using System.Linq;
 
 namespace OpenBreed.Game.Rendering.Components
 {
-
     public class Text : IRenderComponent
     {
         #region Private Fields
 
         private const string Characters = @"qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789µ§½!""#¤%&/()=?^*@£€${[]}\~¨'-_.:,;<>|°©®±¥";
 
+        #endregion Private Fields
+
+        #region Public Properties
+
         public Type SystemType => throw new NotImplementedException();
 
-        public void Deinitialize(IWorldSystem system)
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public void Deinitialize(IEntity entity)
         {
             throw new NotImplementedException();
         }
@@ -25,10 +33,6 @@ namespace OpenBreed.Game.Rendering.Components
         {
             throw new NotImplementedException();
         }
-
-        #endregion Private Fields
-
-        #region Public Methods
 
         public Bitmap GenerateCharacters(int fontSize, string fontName, out Size charSize)
         {
@@ -57,7 +61,7 @@ namespace OpenBreed.Game.Rendering.Components
             }
         }
 
-        public void Initialize(IWorldSystem system)
+        public void Initialize(IEntity entity)
         {
             throw new NotImplementedException();
         }

@@ -9,6 +9,6 @@ namespace OpenBreed.Game.Control.Components
 {
     public interface IControlComponent : IEntityComponent
     {
-        Type SystemType { get; }
+
     }
 }

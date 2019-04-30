@@ -42,12 +42,12 @@ namespace OpenBreed.Game.Common
             AddComponent((T)component);
         }
 
-        public void Deinitialize(World world)
+        public virtual void Deinitialize(World world)
         {
 
         }
 
-        public void Initialize(World world)
+        public virtual void Initialize(World world)
         {
 
         }
@@ -77,10 +77,7 @@ namespace OpenBreed.Game.Common
             {
                 //Process components to remove
                 for (int i = 0; i < toRemove.Count; i++)
-                {
-                    toRemove[i].Deinitialize(this);
                     components.Remove(toRemove[i]);
-                }
 
                 toRemove.Clear();
             }
@@ -89,10 +86,7 @@ namespace OpenBreed.Game.Common
             {
                 //Process components to add
                 for (int i = 0; i < toAdd.Count; i++)
-                {
                     components.Add(toAdd[i]);
-                    toAdd[i].Initialize(this);
-                }
 
                 toAdd.Clear();
             }

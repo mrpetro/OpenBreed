@@ -56,7 +56,7 @@ namespace OpenBreed.Game.Rendering.Components
 
         #region Public Methods
 
-        public void Deinitialize(IWorldSystem system)
+        public void Deinitialize(IEntity entity)
         {
             throw new NotImplementedException();
         }
@@ -73,7 +73,7 @@ namespace OpenBreed.Game.Rendering.Components
             GL.PopMatrix();
         }
 
-        public void Initialize(IWorldSystem system)
+        public void Initialize(IEntity entity)
         {
             //throw new NotImplementedException();
         }

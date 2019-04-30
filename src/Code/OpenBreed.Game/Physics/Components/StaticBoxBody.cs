@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Game.Common;
 using OpenBreed.Game.Common.Components;
+using OpenBreed.Game.Entities;
 using System;
 
 namespace OpenBreed.Game.Physics.Components
@@ -24,12 +25,12 @@ namespace OpenBreed.Game.Physics.Components
 
         #region Public Methods
 
-        public void Deinitialize(IWorldSystem system)
+        public void Deinitialize(IEntity entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public void Initialize(IWorldSystem system)
+        public void Initialize(IEntity entity)
         {
             //throw new System.NotImplementedException();
         }

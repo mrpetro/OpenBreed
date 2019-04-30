@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Game.Common;
+using OpenBreed.Game.Entities;
 using System;
 
 namespace OpenBreed.Game.Common.Components
@@ -13,9 +14,9 @@ namespace OpenBreed.Game.Common.Components
 
         #region Public Methods
 
-        void Deinitialize(IWorldSystem system);
+        void Deinitialize(IEntity entity);
 
-        void Initialize(IWorldSystem system);
+        void Initialize(IEntity entity);
 
         #endregion Public Methods
     }

@@ -84,6 +84,8 @@ namespace OpenBreed.Game
         {
             for (int i = 0; i < entity.Components.Count; i++)
                 AddComponent(entity.Components[i]);
+
+            entity.Initialize();
         }
 
         internal void UnregisterEntity(WorldEntity entity)
@@ -97,6 +99,8 @@ namespace OpenBreed.Game
 
                 foundSystem.RemoveComponent(component);
             }
+
+            entity.Deinitialize();
         }
 
         #endregion Internal Methods
@@ -176,7 +180,7 @@ namespace OpenBreed.Game
             var actorBuilder = new WorldActorBuilder(Core);
             actorBuilder.SetSpriteAtlas(spriteAtlas);
             actorBuilder.SetPosition(new OpenTK.Vector2(20, 20));
-            actorBuilder.SetSpriteId(0);
+            actorBuilder.SetSpriteId(7);
             AddEntity((WorldActor)actorBuilder.Build());
 
             var rnd = new Random();

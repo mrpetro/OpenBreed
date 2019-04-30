@@ -39,6 +39,18 @@ namespace OpenBreed.Game.Entities
             CurrentWorld = null;
         }
 
+        internal void Initialize()
+        {
+            for (int i = 0 ; i < Components.Count; i++)
+                Components[i].Initialize(this);
+        }
+
+        internal void Deinitialize()
+        {
+            for (int i = 0; i < Components.Count; i++)
+                Components[i].Deinitialize(this);
+        }
+
         #endregion Public Methods
     }
 }

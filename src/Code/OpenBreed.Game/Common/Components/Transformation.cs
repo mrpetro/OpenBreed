@@ -1,4 +1,5 @@
-﻿using OpenTK;
+﻿using OpenBreed.Game.Entities;
+using OpenTK;
 using System;
 
 namespace OpenBreed.Game.Common.Components
@@ -54,14 +55,12 @@ namespace OpenBreed.Game.Common.Components
 
         #region Public Methods
 
-        public void Deinitialize(IWorldSystem system)
+        public void Deinitialize(IEntity entity)
         {
-            throw new NotImplementedException();
         }
 
-        public void Initialize(IWorldSystem system)
+        public void Initialize(IEntity entity)
         {
-            throw new NotImplementedException();
         }
 
         #endregion Public Methods
