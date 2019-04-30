@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Game.Entities.Builders;
-using System;
 
 namespace OpenBreed.Game.Entities
 {
@@ -23,34 +22,38 @@ namespace OpenBreed.Game.Entities
 
         public virtual void EnterWorld(World world)
         {
-            if (CurrentWorld != null)
-                throw new InvalidOperationException("This entity can't exist in more than one world.");
-
-            world.RegisterEntity(this);
-            CurrentWorld = world;
+            world.AddEntity(this);
         }
 
         public virtual void LeaveWorld()
         {
-            if (CurrentWorld == null)
-                throw new InvalidOperationException("This entity doesn't exist in any world.");
-
-            CurrentWorld.UnregisterEntity(this);
-            CurrentWorld = null;
-        }
-
-        internal void Initialize()
-        {
-            for (int i = 0 ; i < Components.Count; i++)
-                Components[i].Initialize(this);
-        }
-
-        internal void Deinitialize()
-        {
-            for (int i = 0; i < Components.Count; i++)
-                Components[i].Deinitialize(this);
+            CurrentWorld.RemoveEntity(this);
         }
 
         #endregion Public Methods
+
+        #region Internal Methods
+
+        internal void Deinitialize()
+        {
+            //Deinitialize all entity components
+            for (int i = 0; i < Components.Count; i++)
+                Components[i].Deinitialize(this);
+
+            //Forget the world in which entity was
+            CurrentWorld = null;
+        }
+
+        internal void Initialize(World world)
+        {
+            //Remember in what world entity is
+            CurrentWorld = world;
+
+            //Initialize all entity components
+            for (int i = 0; i < Components.Count; i++)
+                Components[i].Initialize(this);
+        }
+
+        #endregion Internal Methods
     }
 }

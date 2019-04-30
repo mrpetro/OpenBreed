@@ -15,6 +15,7 @@ namespace OpenBreed.Game
 {
     public class World
     {
+
         #region Private Fields
 
         private readonly List<IWorldEntity> entities = new List<IWorldEntity>();
@@ -57,6 +58,9 @@ namespace OpenBreed.Game
 
         public void AddEntity(WorldEntity entity)
         {
+            if (entity.CurrentWorld != null)
+                throw new InvalidOperationException("Entity can't exist in more than one world.");
+
             toAdd.Add(entity);
         }
 
@@ -67,6 +71,9 @@ namespace OpenBreed.Game
 
         public void RemoveEntity(WorldEntity entity)
         {
+            if (entity.CurrentWorld == null)
+                throw new InvalidOperationException("Entity doesn't exist in any world.");
+
             toRemove.Add(entity);
         }
 
@@ -82,25 +89,24 @@ namespace OpenBreed.Game
 
         internal void RegisterEntity(WorldEntity entity)
         {
+            //Add all entity components to world systems
             for (int i = 0; i < entity.Components.Count; i++)
                 AddComponent(entity.Components[i]);
 
-            entity.Initialize();
+            //Initialize the entity and add it to entities list
+            entity.Initialize(this);
+            entities.Add(entity);
         }
 
         internal void UnregisterEntity(WorldEntity entity)
         {
-            foreach (var component in entity.Components)
-            {
-                var foundSystem = systems.FirstOrDefault(item => item.GetType() == component.SystemType);
+            //Remove all entity components from world systems
+            for (int i = 0; i < entity.Components.Count; i++)
+                RemoveComponent(entity.Components[i]);
 
-                if (foundSystem == null)
-                    throw new InvalidOperationException($"System {component.SystemType} not registered.");
-
-                foundSystem.RemoveComponent(component);
-            }
-
+            //Deinitialize the entity and remove it from entities list
             entity.Deinitialize();
+            entities.Remove(entity);
         }
 
         #endregion Internal Methods
@@ -118,10 +124,7 @@ namespace OpenBreed.Game
             {
                 //Process entities to remove
                 for (int i = 0; i < toRemove.Count; i++)
-                {
-                    toRemove[i].LeaveWorld();
-                    entities.Remove(toRemove[i]);
-                }
+                    UnregisterEntity((WorldEntity)toRemove[i]);
 
                 toRemove.Clear();
             }
@@ -130,10 +133,7 @@ namespace OpenBreed.Game
             {
                 //Process entities to add
                 for (int i = 0; i < toAdd.Count; i++)
-                {
-                    entities.Add(toAdd[i]);
-                    toAdd[i].EnterWorld(this);
-                }
+                    RegisterEntity((WorldEntity)toAdd[i]);
 
                 toAdd.Clear();
             }
@@ -176,7 +176,6 @@ namespace OpenBreed.Game
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas);
 
-
             var actorBuilder = new WorldActorBuilder(Core);
             actorBuilder.SetSpriteAtlas(spriteAtlas);
             actorBuilder.SetPosition(new OpenTK.Vector2(20, 20));
@@ -210,6 +209,16 @@ namespace OpenBreed.Game
             //        AddEntity((WorldBlock)blockBuilder.Build());
             //    }
             //}
+        }
+
+        private void RemoveComponent(IEntityComponent component)
+        {
+            var foundSystem = systems.FirstOrDefault(item => item.GetType() == component.SystemType);
+
+            if (foundSystem == null)
+                throw new InvalidOperationException($"System {component.SystemType} not registered.");
+
+            foundSystem.RemoveComponent(component);
         }
 
         #endregion Private Methods
