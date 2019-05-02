@@ -20,7 +20,7 @@ namespace OpenBreed.Game.Rendering.Helpers
         /// <summary>
         /// This will clip any graphics that is outside of viewport box
         /// </summary>
-        public const bool CLIPPING = false;
+        public const bool CLIPPING = true;
 
         #endregion Public Fields
 

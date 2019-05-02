@@ -1,18 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
 using OpenTK;
 using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL;
 
 namespace OpenBreed.Game.Rendering.Helpers
 {
     public class SpriteAtlas
     {
+        public static uint[] indices = {
+                                            0,1,2,
+                                            0,2,3
+                                       };
+
         #region Private Fields
+
+        private int ibo;
 
         private readonly Vector2[] spriteCoords;
 
         #endregion Private Fields
 
         #region Public Constructors
+
+        private void InitializeIndices()
+        {
+        }
 
         public SpriteAtlas(Texture texture, int spriteSize, int spriteColumns, int spriteRows)
         {
@@ -21,6 +34,7 @@ namespace OpenBreed.Game.Rendering.Helpers
             SpriteSize = spriteSize;
 
             spriteCoords = new Vector2[spriteRows * spriteColumns];
+            vboList = new List<int>();
 
             BuildCoords(spriteRows, spriteColumns);
         }
@@ -31,6 +45,8 @@ namespace OpenBreed.Game.Rendering.Helpers
 
         public Texture Texture { get; }
         public int SpriteSize { get; }
+
+        private List<int> vboList;
 
         #endregion Public Properties
 
@@ -54,12 +70,32 @@ namespace OpenBreed.Game.Rendering.Helpers
                     var coord = new Vector2(x, y);
                     coord = Vector2.Multiply(coord, SpriteSize);
                     coord = Vector2.Divide( coord, new Vector2(Texture.Width, Texture.Height));
-                    spriteCoords[x + y * spriteRows] = coord;
+
+                    var spriteId = x + y * spriteRows;
+
+                    spriteCoords[spriteId] = coord;
+
+                    AddSprite(spriteId);
                 }
             }
         }
 
+        public void Draw(Viewport viewport, int spriteId)
+        {
+            GL.BindTexture(TextureTarget.Texture2D, Texture.Id);
+            RenderTools.Draw(viewport, vboList[spriteId], ibo, 6);
+        }
 
+        public void AddSprite(int spriteId)
+        {
+            var vertices = GetVertices(spriteId);
+
+            int vbo;
+
+            RenderTools.Create(vertices, indices, out vbo, out ibo);
+
+            vboList.Add(vbo);
+        }
 
         internal Vertex[] GetVertices(int tileId)
         {

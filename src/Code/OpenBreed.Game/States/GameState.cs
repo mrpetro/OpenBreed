@@ -42,7 +42,7 @@ namespace OpenBreed.Game.States
 
             var cameraBuilder = new WorldCameraBuilder(this);
 
-            cameraBuilder.SetPosition(new Vector2(64, 64));
+            cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
             Camera1 = (Camera)cameraBuilder.Build();
@@ -62,6 +62,10 @@ namespace OpenBreed.Game.States
 
             AddViewport(viewportLeft);
             AddViewport(viewportRight);
+
+            Console.WriteLine("LMB + Move = Left camera control");
+            Console.WriteLine("RMB + Move = Right camera control");
+            Console.WriteLine("Keyboard arrows  = Control arrow actor");
         }
 
         #endregion Public Constructors
@@ -177,8 +181,6 @@ namespace OpenBreed.Game.States
             {
                 Camera1.Zoom = z;
                 Camera1.Position = Vector2.Subtract(Camera1.Position, new Vector2(dx, -dy));
-
-                Console.WriteLine($"{Camera1.Position.X} {Camera1.Position.Y}");
             }
             else if (mouseState.IsButtonDown(MouseButton.Right))
             {

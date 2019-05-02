@@ -28,21 +28,19 @@ namespace OpenBreed.Game.Animation.Components
             if (direction.Data.X > 0 && direction.Data.Y == 0)
                 sprite.ImageId = 0;
             else if (direction.Data.X > 0 && direction.Data.Y > 0)
-                sprite.ImageId = 1;
+                sprite.ImageId = 7;
             else if (direction.Data.X == 0 && direction.Data.Y > 0)
-                sprite.ImageId = 2;
+                sprite.ImageId = 6;
             else if (direction.Data.X < 0 && direction.Data.Y > 0)
-                sprite.ImageId = 3;
+                sprite.ImageId = 5;
             else if (direction.Data.X < 0 && direction.Data.Y == 0)
                 sprite.ImageId = 4;
             else if (direction.Data.X < 0 && direction.Data.Y < 0)
-                sprite.ImageId = 5;
+                sprite.ImageId = 3;
             else if (direction.Data.X == 0 && direction.Data.Y < 0)
-                sprite.ImageId = 6;
+                sprite.ImageId = 2;
             else if (direction.Data.X > 0 && direction.Data.Y < 0)
-                sprite.ImageId = 7;
-
-            Console.WriteLine(sprite.ImageId);
+                sprite.ImageId = 1;
         }
 
         public void Deinitialize(IEntity entity)

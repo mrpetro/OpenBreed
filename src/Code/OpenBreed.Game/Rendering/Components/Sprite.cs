@@ -11,20 +11,20 @@ namespace OpenBreed.Game.Rendering.Components
     {
         #region Public Fields
 
-        public static uint[] indices = {
-                                            0,1,2,
-                                            0,2,3
-                                       };
+        //public static uint[] indices = {
+        //                                    0,1,2,
+        //                                    0,2,3
+        //                               };
 
         #endregion Public Fields
 
         #region Private Fields
 
-        private int ibo;
+        //private int ibo;
         private SpriteAtlas spriteAtlas;
-        private int spriteId;
+        //private int spriteId;
         private Transformation transformation;
-        private int vbo;
+        //private int vbo;
 
         #endregion Private Fields
 
@@ -33,11 +33,13 @@ namespace OpenBreed.Game.Rendering.Components
         public Sprite(SpriteAtlas spriteAtlas)
         {
             this.spriteAtlas = spriteAtlas;
-            this.spriteId = 0;
+            //this.spriteId = 0;
 
-            var vertices = spriteAtlas.GetVertices(spriteId);
+            //var vertices = spriteAtlas.GetVertices(spriteId);
 
-            RenderTools.Create(vertices, indices, out vbo, out ibo);
+
+
+            //RenderTools.Create(vertices, indices, out vbo, out ibo);
         }
 
         #endregion Public Constructors
@@ -59,10 +61,10 @@ namespace OpenBreed.Game.Rendering.Components
         {
             GL.PushMatrix();
 
-            GL.BindTexture(TextureTarget.Texture2D, spriteAtlas.Texture.Id);
-
             GL.MultMatrix(ref transformation.Value);
-            RenderTools.Draw(viewport, vbo, ibo, 6);
+
+            spriteAtlas.Draw(viewport, ImageId);
+            //RenderTools.Draw(viewport, vbo, ibo, 6);
 
             GL.PopMatrix();
         }
