@@ -1,25 +1,17 @@
 ﻿using OpenBreed.Game.Common.Components;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace OpenBreed.Game.Common
 {
-    public class WorldSystem<T> : IWorldSystem where T : IEntityComponent
+    public abstract class WorldSystem<T> : IWorldSystem where T : IEntityComponent
     {
-        #region Private Fields
-
-        private readonly List<T> components = new List<T>();
-        private readonly List<T> toAdd = new List<T>();
-        private readonly List<T> toRemove = new List<T>();
-
-        #endregion Private Fields
+        //private readonly List<T> components = new List<T>();
 
         #region Protected Constructors
 
         protected WorldSystem()
         {
-            Components = new ReadOnlyCollection<T>(components);
+            //Components = new ReadOnlyCollection<T>(components);
         }
 
         #endregion Protected Constructors
@@ -32,11 +24,6 @@ namespace OpenBreed.Game.Common
 
         #region Public Methods
 
-        public virtual void AddComponent(T component)
-        {
-            toAdd.Add(component);
-        }
-
         public void AddComponent(IEntityComponent component)
         {
             AddComponent((T)component);
@@ -44,17 +31,10 @@ namespace OpenBreed.Game.Common
 
         public virtual void Deinitialize(World world)
         {
-
         }
 
         public virtual void Initialize(World world)
         {
-
-        }
-
-        public virtual void Update(double dt)
-        {
-            Cleanup();
         }
 
         public void RemoveComponent(IEntityComponent component)
@@ -62,35 +42,17 @@ namespace OpenBreed.Game.Common
             RemoveComponent((T)component);
         }
 
-        public virtual void RemoveComponent(T component)
+        public virtual void Update(float dt)
         {
-            toRemove.Add(component);
         }
 
         #endregion Public Methods
 
         #region Protected Methods
 
-        protected virtual void Cleanup()
-        {
-            if (toRemove.Any())
-            {
-                //Process components to remove
-                for (int i = 0; i < toRemove.Count; i++)
-                    components.Remove(toRemove[i]);
+        protected abstract void AddComponent(T component);
 
-                toRemove.Clear();
-            }
-
-            if (toAdd.Any())
-            {
-                //Process components to add
-                for (int i = 0; i < toAdd.Count; i++)
-                    components.Add(toAdd[i]);
-
-                toAdd.Clear();
-            }
-        }
+        protected abstract void RemoveComponent(T component);
 
         #endregion Protected Methods
     }

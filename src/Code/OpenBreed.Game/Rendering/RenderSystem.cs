@@ -43,16 +43,6 @@ namespace OpenBreed.Game.Rendering
 
         #region Public Methods
 
-        public override void AddComponent(IRenderComponent component)
-        {
-            if (component is Tile)
-                AddTile((Tile)component);
-            else if (component is Sprite)
-                AddSprite((Sprite)component);
-            else
-                base.AddComponent(component);
-        }
-
         /// <summary>
         ///This will draw render system objects into given viewport
         /// </summary>
@@ -68,6 +58,25 @@ namespace OpenBreed.Game.Rendering
         }
 
         #endregion Public Methods
+
+        #region Protected Methods
+
+        protected override void AddComponent(IRenderComponent component)
+        {
+            if (component is Tile)
+                AddTile((Tile)component);
+            else if (component is Sprite)
+                AddSprite((Sprite)component);
+            else
+                throw new NotImplementedException($"{component}");
+        }
+
+        protected override void RemoveComponent(IRenderComponent component)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion Protected Methods
 
         #region Private Methods
 
@@ -137,7 +146,7 @@ namespace OpenBreed.Game.Rendering
                 {
                     var tile = tiles[i + TileMapHeight * j];
 
-                    if(tile != null)
+                    if (tile != null)
                         tile.Draw(viewport);
                 }
             }

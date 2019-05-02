@@ -152,7 +152,7 @@ namespace OpenBreed.Game.States
         {
             base.OnUpdate(e);
 
-            World.Update(e.Time);
+            World.Update((float)e.Time);
         }
 
         public override void ProcessInputs(FrameEventArgs e)

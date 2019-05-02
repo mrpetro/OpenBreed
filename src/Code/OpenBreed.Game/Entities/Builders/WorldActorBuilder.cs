@@ -1,4 +1,6 @@
-﻿using OpenBreed.Game.Rendering.Helpers;
+﻿using System;
+using OpenBreed.Game.Control.Components;
+using OpenBreed.Game.Rendering.Helpers;
 using OpenBreed.Game.States;
 using OpenTK;
 
@@ -9,8 +11,9 @@ namespace OpenBreed.Game.Entities.Builders
         #region Internal Fields
 
         internal Vector2 position;
+        internal Vector2 direction;
         internal SpriteAtlas spriteAtlas;
-        internal int spriteId;
+        internal IControlComponent controller;
 
         #endregion Internal Fields
 
@@ -29,10 +32,6 @@ namespace OpenBreed.Game.Entities.Builders
             return new WorldActor(this);
         }
 
-        public void SetSpriteId(int spriteId)
-        {
-            this.spriteId = spriteId;
-        }
         public void SetSpriteAtlas(SpriteAtlas spriteAtlas)
         {
             this.spriteAtlas = spriteAtlas;
@@ -41,6 +40,16 @@ namespace OpenBreed.Game.Entities.Builders
         public void SetPosition(Vector2 position)
         {
             this.position = position;
+        }
+
+        public void SetDirection(Vector2 direction)
+        {
+            this.direction = direction;
+        }
+
+        internal void SetController(IControlComponent controller)
+        {
+            this.controller = controller;
         }
 
         #endregion Public Methods

@@ -47,7 +47,7 @@ namespace OpenBreed.Game.Common.Components
 
         #region Public Properties
 
-        public Matrix4 Matrix { get { return Value; } }
+        public Matrix4 Matrix { get { return Value; } set { Value = value; } }
 
         public Type SystemType { get { return null; } }
 

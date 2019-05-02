@@ -1,8 +1,10 @@
-﻿using OpenBreed.Game.Common;
+﻿using OpenBreed.Game.Animation;
+using OpenBreed.Game.Common;
 using OpenBreed.Game.Common.Components;
 using OpenBreed.Game.Control;
 using OpenBreed.Game.Entities;
 using OpenBreed.Game.Entities.Builders;
+using OpenBreed.Game.Movement;
 using OpenBreed.Game.Physics;
 using OpenBreed.Game.Rendering;
 using OpenBreed.Game.Rendering.Helpers;
@@ -33,12 +35,17 @@ namespace OpenBreed.Game
             Core = core;
             Entities = new ReadOnlyCollection<IWorldEntity>(entities);
 
-            RenderSystem = new RenderSystem();
-            PhysicsSystem = new PhysicsSystem();
             ControlSystem = new ControlSystem();
-            systems.Add(RenderSystem);
-            systems.Add(PhysicsSystem);
+            MovementSystem = new MovementSystem();
+            PhysicsSystem = new PhysicsSystem();
+            AnimationSystem = new AnimationSystem();
+            RenderSystem = new RenderSystem();
+
             systems.Add(ControlSystem);
+            systems.Add(MovementSystem);
+            systems.Add(PhysicsSystem);
+            systems.Add(AnimationSystem);
+            systems.Add(RenderSystem);
 
             GenerateMap();
         }
@@ -53,6 +60,8 @@ namespace OpenBreed.Game
 
         public PhysicsSystem PhysicsSystem { get; }
         public ControlSystem ControlSystem { get; }
+        public MovementSystem MovementSystem { get; }
+        public AnimationSystem AnimationSystem { get; }
         public RenderSystem RenderSystem { get; }
 
         #endregion Public Properties
@@ -80,10 +89,13 @@ namespace OpenBreed.Game
             toRemove.Add(entity);
         }
 
-        public void Update(double dt)
+        public void Update(float dt)
         {
-            for (int i = 0; i < systems.Count; i++)
-                systems[i].Update(dt);
+            MovementSystem.Update(dt);
+
+            PhysicsSystem.Update(dt);
+
+            AnimationSystem.Animate(dt);
         }
 
         public void ProcessInputs(double dt)
@@ -97,13 +109,13 @@ namespace OpenBreed.Game
 
         internal void RegisterEntity(WorldEntity entity)
         {
-            //Add all entity components to world systems
-            for (int i = 0; i < entity.Components.Count; i++)
-                AddComponent(entity.Components[i]);
-
             //Initialize the entity and add it to entities list
             entity.Initialize(this);
             entities.Add(entity);
+
+            //Add all entity components to world systems
+            for (int i = 0; i < entity.Components.Count; i++)
+                AddComponent(entity.Components[i]);
         }
 
         internal void UnregisterEntity(WorldEntity entity)
@@ -187,7 +199,9 @@ namespace OpenBreed.Game
             var actorBuilder = new WorldActorBuilder(Core);
             actorBuilder.SetSpriteAtlas(spriteAtlas);
             actorBuilder.SetPosition(new OpenTK.Vector2(20, 20));
-            actorBuilder.SetSpriteId(7);
+            actorBuilder.SetDirection(new OpenTK.Vector2(1, 0));
+
+            actorBuilder.SetController(new Control.Components.MovementController());
             AddEntity((WorldActor)actorBuilder.Build());
 
             var rnd = new Random();
@@ -207,16 +221,6 @@ namespace OpenBreed.Game
             blockBuilder.SetIndices(0, 4);
             blockBuilder.SetTileId(3);
             AddEntity((WorldBlock)blockBuilder.Build());
-
-            //for (int y = 0; y < height; y++)
-            //{
-            //    for (int x = 0; x < width; x++)
-            //    {
-            //        blockBuilder.SetIndices(x, y);
-            //        blockBuilder.SetTileId(rnd.Next() % 16);
-            //        AddEntity((WorldBlock)blockBuilder.Build());
-            //    }
-            //}
         }
 
         private void RemoveComponent(IEntityComponent component)
@@ -230,5 +234,6 @@ namespace OpenBreed.Game
         }
 
         #endregion Private Methods
+
     }
 }

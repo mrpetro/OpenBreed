@@ -6,6 +6,7 @@ using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System;
+using System.Linq;
 
 namespace OpenBreed.Game.Rendering.Components
 {
@@ -19,17 +20,16 @@ namespace OpenBreed.Game.Rendering.Components
         private int vbo;
         private int ibo;
 
-        private readonly Transformation transformation;
+        private Transformation transformation;
         private TileAtlas tileAtlas;
         private int tileId;
 
         #region Public Constructors
 
-        public Tile(TileAtlas tileAtlas, int tileId, Transformation transformation)
+        public Tile(TileAtlas tileAtlas, int tileId)
         {
             this.tileAtlas = tileAtlas;
             this.tileId = tileId;
-            this.transformation = transformation;
 
             var vertices = tileAtlas.GetVertices(tileId);
 
@@ -75,7 +75,7 @@ namespace OpenBreed.Game.Rendering.Components
 
         public void Initialize(IEntity entity)
         {
-            //throw new NotImplementedException();
+            transformation = entity.Components.OfType<Transformation>().First();
         }
 
         #endregion Public Methods

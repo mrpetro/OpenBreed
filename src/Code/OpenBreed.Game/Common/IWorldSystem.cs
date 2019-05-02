@@ -12,7 +12,7 @@ namespace OpenBreed.Game.Common
 
         void Initialize(World world);
 
-        void Update(double dt);
+        void Update(float dt);
 
         void RemoveComponent(IEntityComponent component);
 

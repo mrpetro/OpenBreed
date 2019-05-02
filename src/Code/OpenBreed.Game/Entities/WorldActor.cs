@@ -1,5 +1,8 @@
-﻿using OpenBreed.Game.Common.Components;
+﻿using OpenBreed.Game.Animation.Components;
+using OpenBreed.Game.Common.Components;
+using OpenBreed.Game.Control.Components;
 using OpenBreed.Game.Entities.Builders;
+using OpenBreed.Game.Movement.Components;
 using OpenBreed.Game.Rendering.Components;
 using OpenTK;
 using System;
@@ -19,8 +22,16 @@ namespace OpenBreed.Game.Entities
             position = builder.position;
 
             var transform = new Transformation(builder.position);
+            var direction = new Direction(builder.direction);
             Components.Add(transform);
-            Components.Add(new Sprite(builder.spriteAtlas, builder.spriteId, transform));
+            Components.Add(direction);
+            Components.Add(new Sprite(builder.spriteAtlas));
+            Components.Add(new CreatureMovement());
+            Components.Add(new CreatureAnimator());
+
+            if (builder.controller != null)
+                Components.Add(builder.controller);
+
         }
     }
 }
