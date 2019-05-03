@@ -1,31 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using OpenTK;
+﻿using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
+using System.Collections.Generic;
 
 namespace OpenBreed.Game.Rendering.Helpers
 {
     public class SpriteAtlas
     {
+        #region Public Fields
+
         public static uint[] indices = {
                                             0,1,2,
                                             0,2,3
                                        };
 
+        #endregion Public Fields
+
         #region Private Fields
 
         private int ibo;
 
-        private readonly Vector2[] spriteCoords;
+        private List<int> vboList;
 
         #endregion Private Fields
 
         #region Public Constructors
-
-        private void InitializeIndices()
-        {
-        }
 
         public SpriteAtlas(Texture texture, int spriteSize, int spriteColumns, int spriteRows)
         {
@@ -33,9 +32,9 @@ namespace OpenBreed.Game.Rendering.Helpers
 
             SpriteSize = spriteSize;
 
-            spriteCoords = new Vector2[spriteRows * spriteColumns];
             vboList = new List<int>();
 
+            RenderTools.CreateIndicesArray(indices, out ibo);
             BuildCoords(spriteRows, spriteColumns);
         }
 
@@ -43,42 +42,17 @@ namespace OpenBreed.Game.Rendering.Helpers
 
         #region Public Properties
 
-        public Texture Texture { get; }
         public int SpriteSize { get; }
-
-        private List<int> vboList;
 
         #endregion Public Properties
 
+        #region Internal Properties
+
+        internal Texture Texture { get; }
+
+        #endregion Internal Properties
+
         #region Public Methods
-
-        public Vector2 GetCoords(int spriteId)
-        {
-            return spriteCoords[spriteId];
-        }
-
-        #endregion Public Methods
-
-        #region Private Methods
-
-        private void BuildCoords(int spriteRows, int spriteColumns)
-        {
-            for (int y = 0; y < spriteRows; y++)
-            {
-                for (int x = 0; x < spriteColumns; x++)
-                {
-                    var coord = new Vector2(x, y);
-                    coord = Vector2.Multiply(coord, SpriteSize);
-                    coord = Vector2.Divide( coord, new Vector2(Texture.Width, Texture.Height));
-
-                    var spriteId = x + y * spriteRows;
-
-                    spriteCoords[spriteId] = coord;
-
-                    AddSprite(spriteId);
-                }
-            }
-        }
 
         public void Draw(Viewport viewport, int spriteId)
         {
@@ -86,23 +60,16 @@ namespace OpenBreed.Game.Rendering.Helpers
             RenderTools.Draw(viewport, vboList[spriteId], ibo, 6);
         }
 
-        public void AddSprite(int spriteId)
-        {
-            var vertices = GetVertices(spriteId);
+        #endregion Public Methods
 
-            int vbo;
+        #region Internal Methods
 
-            RenderTools.Create(vertices, indices, out vbo, out ibo);
-
-            vboList.Add(vbo);
-        }
-
-        internal Vertex[] GetVertices(int tileId)
+        internal Vertex[] CreateVertices(Vector2 spriteCoord)
         {
             var uvSize = new Vector2(SpriteSize, SpriteSize);
             uvSize = Vector2.Divide(uvSize, new Vector2(Texture.Width, Texture.Height));
 
-            var uvLD = spriteCoords[tileId];
+            var uvLD = spriteCoord;
             var uvRT = Vector2.Add(uvLD, uvSize);
 
             Vertex[] vertices = {
@@ -113,6 +80,33 @@ namespace OpenBreed.Game.Rendering.Helpers
                             };
 
             return vertices;
+        }
+
+        #endregion Internal Methods
+
+        #region Private Methods
+
+        private void InitializeIndices()
+        {
+        }
+
+        private void BuildCoords(int spriteRows, int spriteColumns)
+        {
+            for (int y = 0; y < spriteRows; y++)
+            {
+                for (int x = 0; x < spriteColumns; x++)
+                {
+                    var coord = new Vector2(x, y);
+                    coord = Vector2.Multiply(coord, SpriteSize);
+                    coord = Vector2.Divide(coord, new Vector2(Texture.Width, Texture.Height));
+
+                    var vertices = CreateVertices(coord);
+
+                    int vbo;
+                    RenderTools.CreateVertexArray(vertices, out vbo);
+                    vboList.Add(vbo);
+                }
+            }
         }
 
         #endregion Private Methods

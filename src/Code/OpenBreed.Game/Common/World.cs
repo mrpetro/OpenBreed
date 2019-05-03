@@ -18,13 +18,12 @@ namespace OpenBreed.Game
 {
     public class World
     {
-
         #region Private Fields
 
         private readonly List<IWorldEntity> entities = new List<IWorldEntity>();
-        private readonly List<IWorldSystem> systems = new List<IWorldSystem>();
         private readonly List<IWorldEntity> toAdd = new List<IWorldEntity>();
         private readonly List<IWorldEntity> toRemove = new List<IWorldEntity>();
+        private readonly List<IWorldSystem> systems = new List<IWorldSystem>();
 
         #endregion Private Fields
 
@@ -37,7 +36,7 @@ namespace OpenBreed.Game
 
             ControlSystem = new ControlSystem();
             MovementSystem = new MovementSystem();
-            PhysicsSystem = new PhysicsSystem();
+            PhysicsSystem = new PhysicsSystem(64, 64);
             AnimationSystem = new AnimationSystem();
             RenderSystem = new RenderSystem();
 
@@ -68,6 +67,12 @@ namespace OpenBreed.Game
 
         #region Public Methods
 
+        /// <summary>
+        /// Method will add given entity to this world.
+        /// Entity will not be added immediately but at the end of each world update.
+        /// An exception will be thrown if given entity already exists in world
+        /// </summary>
+        /// <param name="entity">Entity to be added to this world</param>
         public void AddEntity(WorldEntity entity)
         {
             if (entity.CurrentWorld != null)
@@ -76,17 +81,23 @@ namespace OpenBreed.Game
             toAdd.Add(entity);
         }
 
+        /// <summary>
+        /// Method will remove given entity from this world.
+        /// Entity will not be removed immediately but at the end of each world update.
+        /// An exception will be thrown if given entity does not exist in this world.
+        /// </summary>
+        /// <param name="entity">Entity to be removed from this world</param>
+        public void RemoveEntity(WorldEntity entity)
+        {
+            if (entity.CurrentWorld != this)
+                throw new InvalidOperationException("Entity doesn't exist in this world");
+
+            toRemove.Add(entity);
+        }
+
         public void Initialize()
         {
             Cleanup();
-        }
-
-        public void RemoveEntity(WorldEntity entity)
-        {
-            if (entity.CurrentWorld == null)
-                throw new InvalidOperationException("Entity doesn't exist in any world.");
-
-            toRemove.Add(entity);
         }
 
         public void Update(float dt)
@@ -96,6 +107,8 @@ namespace OpenBreed.Game
             PhysicsSystem.Update(dt);
 
             AnimationSystem.Animate(dt);
+
+            Cleanup();
         }
 
         public void ProcessInputs(double dt)
@@ -138,7 +151,12 @@ namespace OpenBreed.Game
             systems.Add(system);
         }
 
-        protected virtual void Cleanup()
+        protected virtual void RemoveSystem(IWorldSystem system)
+        {
+            systems.Add(system);
+        }
+
+        protected void Cleanup()
         {
             if (toRemove.Any())
             {
@@ -159,11 +177,6 @@ namespace OpenBreed.Game
             }
         }
 
-        protected virtual void RemoveSystem(IWorldSystem system)
-        {
-            systems.Add(system);
-        }
-
         #endregion Protected Methods
 
         #region Private Methods
@@ -179,6 +192,16 @@ namespace OpenBreed.Game
                 throw new InvalidOperationException($"System {component.SystemType} not registered.");
 
             foundSystem.AddComponent(component);
+        }
+
+        private void RemoveComponent(IEntityComponent component)
+        {
+            var foundSystem = systems.FirstOrDefault(item => item.GetType() == component.SystemType);
+
+            if (foundSystem == null)
+                throw new InvalidOperationException($"System {component.SystemType} not registered.");
+
+            foundSystem.RemoveComponent(component);
         }
 
         private void GenerateMap()
@@ -223,17 +246,6 @@ namespace OpenBreed.Game
             AddEntity((WorldBlock)blockBuilder.Build());
         }
 
-        private void RemoveComponent(IEntityComponent component)
-        {
-            var foundSystem = systems.FirstOrDefault(item => item.GetType() == component.SystemType);
-
-            if (foundSystem == null)
-                throw new InvalidOperationException($"System {component.SystemType} not registered.");
-
-            foundSystem.RemoveComponent(component);
-        }
-
         #endregion Private Methods
-
     }
 }

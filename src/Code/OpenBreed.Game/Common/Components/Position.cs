@@ -8,16 +8,24 @@ namespace OpenBreed.Game.Common.Components
     {
         #region Public Constructors
 
-        public Position(Vector2 data)
+        public float X { get; set; }
+        public float Y { get; set; }
+
+        public Position(Vector2 value)
         {
-            Data = data;
+            X = value.X;
+            Y = value.Y;
+        }
+
+        public Position(float x, float y)
+        {
+            X = x;
+            Y = y;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
-
-        public Vector2 Data { get; set; }
 
         public Type SystemType { get { return null; } }
 

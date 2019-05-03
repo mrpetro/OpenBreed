@@ -29,11 +29,11 @@ namespace OpenBreed.Game.Common
             AddComponent((T)component);
         }
 
-        public virtual void Deinitialize(World world)
+        public virtual void Initialize(World world)
         {
         }
 
-        public virtual void Initialize(World world)
+        public virtual void Deinitialize(World world)
         {
         }
 

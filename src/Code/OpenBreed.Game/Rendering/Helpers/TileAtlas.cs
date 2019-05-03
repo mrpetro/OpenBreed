@@ -1,14 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 using OpenTK;
 using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL;
 
 namespace OpenBreed.Game.Rendering.Helpers
 {
     public class TileAtlas
     {
-        #region Private Fields
+        private static uint[] indices = {
+                                            0,1,2,
+                                            0,2,3
+                                       };
 
-        private readonly Vector2[] tileCoords;
+        private int ibo;
+
+        private List<int> vboList;
+
+
+        #region Private Fields
 
         #endregion Private Fields
 
@@ -20,8 +30,9 @@ namespace OpenBreed.Game.Rendering.Helpers
 
             TileSize = tileSize;
 
-            tileCoords = new Vector2[tileRows * tileColumns];
+            vboList = new List<int>();
 
+            RenderTools.CreateIndicesArray(indices, out ibo);
             BuildCoords(tileRows, tileColumns);
         }
 
@@ -36,14 +47,15 @@ namespace OpenBreed.Game.Rendering.Helpers
 
         #region Public Methods
 
-        public Vector2 GetCoords(int tileId)
-        {
-            return tileCoords[tileId];
-        }
-
         #endregion Public Methods
 
         #region Private Methods
+
+        public void Draw(Viewport viewport, int tileId)
+        {
+            GL.BindTexture(TextureTarget.Texture2D, Texture.Id);
+            RenderTools.Draw(viewport, vboList[tileId], ibo, 6);
+        }
 
         private void BuildCoords(int tileRows, int tileColumns)
         {
@@ -54,19 +66,23 @@ namespace OpenBreed.Game.Rendering.Helpers
                     var coord = new Vector2(x, y);
                     coord = Vector2.Multiply(coord, TileSize);
                     coord = Vector2.Divide( coord, new Vector2(Texture.Width, Texture.Height));
-                    tileCoords[x + y * tileRows] = coord;
+
+                    var vertices = CreateVertices(coord);
+
+                    int vbo;
+                    RenderTools.CreateVertexArray(vertices, out vbo);
+                    vboList.Add(vbo);
                 }
             }
         }
 
 
-
-        internal Vertex[] GetVertices(int tileId)
+        internal Vertex[] CreateVertices(Vector2 coord)
         {
             var uvSize = new Vector2(TileSize, TileSize);
             uvSize = Vector2.Divide(uvSize, new Vector2(Texture.Width, Texture.Height));
 
-            var uvLD = tileCoords[tileId];
+            var uvLD = coord;
             var uvRT = Vector2.Add(uvLD, uvSize);
 
             Vertex[] vertices = {

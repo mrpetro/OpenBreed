@@ -1,9 +1,6 @@
-﻿using OpenBreed.Game.Common;
-using OpenBreed.Game.Common.Components;
+﻿using OpenBreed.Game.Common.Components;
 using OpenBreed.Game.Entities;
 using OpenBreed.Game.Rendering.Helpers;
-using OpenTK;
-using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Linq;
@@ -12,49 +9,38 @@ namespace OpenBreed.Game.Rendering.Components
 {
     public class Tile : IRenderComponent
     {
-        public static uint[] indices = {
-                                            0,1,2,
-                                            0,2,3
-                                       };
+        #region Private Fields
 
-        private int vbo;
-        private int ibo;
+        private Position position;
+        private TileAtlas atlas;
 
-        private Transformation transformation;
-        private TileAtlas tileAtlas;
-        private int tileId;
+        #endregion Private Fields
 
         #region Public Constructors
 
-        public Tile(TileAtlas tileAtlas, int tileId)
+        public Tile(TileAtlas atlas, int tileId)
         {
-            this.tileAtlas = tileAtlas;
-            this.tileId = tileId;
-
-            var vertices = tileAtlas.GetVertices(tileId);
-
-            RenderTools.Create(vertices, indices, out vbo, out ibo);
+            this.atlas = atlas;
+            TileId = tileId;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
+        public int TileId { get; set; }
+
         public Type SystemType { get { return typeof(RenderSystem); } }
-
-        public void GetMapIndices(out int x, out int y)
-        {
-            var pos = transformation.Value.ExtractTranslation();
-            x = (int)pos.X / tileAtlas.TileSize;
-            y = (int)pos.Y / tileAtlas.TileSize;
-        }
-
-        //public int X { get { return (int)position.Transformation.M41 / tileAtlas.TileSize; } }
-        //public int Y { get { return (int)position.Transformation.M42 / tileAtlas.TileSize; } }
 
         #endregion Public Properties
 
         #region Public Methods
+
+        public void GetMapIndices(out int x, out int y)
+        {
+            x = (int)position.X / atlas.TileSize;
+            y = (int)position.Y / atlas.TileSize;
+        }
 
         public void Deinitialize(IEntity entity)
         {
@@ -65,17 +51,15 @@ namespace OpenBreed.Game.Rendering.Components
         {
             GL.PushMatrix();
 
-            GL.BindTexture(TextureTarget.Texture2D, tileAtlas.Texture.Id);
-
-            GL.MultMatrix(ref transformation.Value);
-            RenderTools.Draw(viewport, vbo, ibo, 6);
+            GL.Translate(position.X, position.Y, 0.0f);
+            atlas.Draw(viewport, TileId);
 
             GL.PopMatrix();
         }
 
         public void Initialize(IEntity entity)
         {
-            transformation = entity.Components.OfType<Transformation>().First();
+            position = entity.Components.OfType<Position>().First();
         }
 
         #endregion Public Methods

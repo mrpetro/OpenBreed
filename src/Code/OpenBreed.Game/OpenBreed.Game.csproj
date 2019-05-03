@@ -88,6 +88,9 @@
     <Compile Include="Movement\Components\IMovementComponent.cs" />
     <Compile Include="Movement\Components\CreatureMovement.cs" />
     <Compile Include="Movement\MovementSystem.cs" />
+    <Compile Include="Physics\Components\IDynamicBody.cs" />
+    <Compile Include="Physics\Components\IStaticBody.cs" />
+    <Compile Include="Physics\Helpers\Aabb.cs" />
     <Compile Include="Physics\PhysicsSystem.cs" />
     <Compile Include="Rendering\Helpers\RenderTools.cs" />
     <Compile Include="Rendering\Components\Sprite.cs" />
@@ -106,7 +109,7 @@
     <Compile Include="EntityMan.cs" />
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\WorldEntity.cs" />
-    <Compile Include="Physics\Components\StaticBoxBody.cs" />
+    <Compile Include="Physics\Components\GridBoxBody.cs" />
     <Compile Include="Rendering\Helpers\TileAtlas.cs" />
     <Compile Include="Rendering\Components\Text.cs" />
     <Compile Include="Rendering\Components\Tile.cs" />

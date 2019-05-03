@@ -1,28 +1,33 @@
 ﻿using OpenBreed.Game.Common.Components;
 using OpenBreed.Game.Entities;
+using OpenBreed.Game.Physics.Helpers;
 using System;
 using System.Linq;
 
 namespace OpenBreed.Game.Physics.Components
 {
-    public class StaticBoxBody : IPhysicsComponent
+    public class GridBoxBody : IStaticBody
     {
+
         #region Private Fields
 
-        private int size = 16;
-        private Transformation transformation;
+        private float size;
+        private Position position;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public StaticBoxBody()
+        public GridBoxBody(float size)
         {
+            this.size = size;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
+
+        public Aabb Aabb { get; private set; }
 
         public Type SystemType { get { return typeof(PhysicsSystem); } }
 
@@ -35,18 +40,26 @@ namespace OpenBreed.Game.Physics.Components
             throw new System.NotImplementedException();
         }
 
-        public void GetMapIndices(out int x, out int y)
+        public void GetGridIndices(out int x, out int y)
         {
-            var pos = transformation.Value.ExtractTranslation();
-            x = (int)pos.X / size;
-            y = (int)pos.Y / size;
+            x = (int)(position.X / size);
+            y = (int)(position.Y / size);
         }
 
         public void Initialize(IEntity entity)
         {
-            transformation = entity.Components.OfType<Transformation>().First();
+            position = entity.Components.OfType<Position>().First();
+
+            Aabb = new Aabb
+            {
+                Left = position.X,
+                Bottom = position.Y,
+                Right = position.X + size,
+                Top = position.Y + size,
+            };
         }
 
         #endregion Public Methods
+
     }
 }

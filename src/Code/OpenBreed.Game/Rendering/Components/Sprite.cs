@@ -9,44 +9,25 @@ namespace OpenBreed.Game.Rendering.Components
 {
     internal class Sprite : IRenderComponent
     {
-        #region Public Fields
-
-        //public static uint[] indices = {
-        //                                    0,1,2,
-        //                                    0,2,3
-        //                               };
-
-        #endregion Public Fields
-
         #region Private Fields
 
-        //private int ibo;
-        private SpriteAtlas spriteAtlas;
-        //private int spriteId;
-        private Transformation transformation;
-        //private int vbo;
+        private SpriteAtlas atlas;
+        private Position position;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public Sprite(SpriteAtlas spriteAtlas)
+        public Sprite(SpriteAtlas atlas)
         {
-            this.spriteAtlas = spriteAtlas;
-            //this.spriteId = 0;
-
-            //var vertices = spriteAtlas.GetVertices(spriteId);
-
-
-
-            //RenderTools.Create(vertices, indices, out vbo, out ibo);
+            this.atlas = atlas;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public int ImageId { get; set; }
+        public int SpriteId { get; set; }
         public Type SystemType { get { return typeof(RenderSystem); } }
 
         #endregion Public Properties
@@ -55,23 +36,22 @@ namespace OpenBreed.Game.Rendering.Components
 
         public void Deinitialize(IEntity entity)
         {
+            throw new NotImplementedException();
         }
 
         public void Draw(Viewport viewport)
         {
             GL.PushMatrix();
 
-            GL.MultMatrix(ref transformation.Value);
-
-            spriteAtlas.Draw(viewport, ImageId);
-            //RenderTools.Draw(viewport, vbo, ibo, 6);
+            GL.Translate(position.X, position.Y, 0.0f);
+            atlas.Draw(viewport, SpriteId);
 
             GL.PopMatrix();
         }
 
         public void Initialize(IEntity entity)
         {
-            transformation = entity.Components.OfType<Transformation>().First();
+            position = entity.Components.OfType<Position>().First();
         }
 
         #endregion Public Methods

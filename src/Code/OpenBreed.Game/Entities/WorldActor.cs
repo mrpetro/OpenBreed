@@ -19,11 +19,11 @@ namespace OpenBreed.Game.Entities
 
         public WorldActor(WorldActorBuilder builder) : base(builder)
         {
-            position = builder.position;
+            this.position = builder.position;
 
-            var transform = new Transformation(builder.position);
+            var position = new Position(builder.position);
             var direction = new Direction(builder.direction);
-            Components.Add(transform);
+            Components.Add(position);
             Components.Add(direction);
             Components.Add(new Sprite(builder.spriteAtlas));
             Components.Add(new CreatureMovement());

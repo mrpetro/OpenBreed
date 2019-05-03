@@ -22,9 +22,9 @@ namespace OpenBreed.Game.Entities
             X = builder.x;
             Y = builder.y;
 
-            var transform = new Transformation(X * 16, Y * 16);
-            Components.Add(transform);
-            Components.Add(new StaticBoxBody());
+            var position = new Position(X * 16, Y * 16);
+            Components.Add(position);
+            Components.Add(new GridBoxBody(16));
             Components.Add(new Tile(builder.tileAtlas, builder.tileId));
         }
     }

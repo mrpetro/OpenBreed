@@ -10,6 +10,41 @@ namespace OpenBreed.Game.Rendering.Helpers
 {
     public static class RenderTools
     {
+
+        public static void CreateIndicesArray(uint[] indices, out int ibo)
+        {
+            ibo = GL.GenBuffer();
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, ibo);
+            GL.BufferData<uint>(BufferTarget.ElementArrayBuffer, sizeof(uint) * indices.Length, indices, BufferUsageHint.StaticDraw);
+
+#if DEBUG
+            int bufferSize;
+            //Validate that the buffer is the correct size
+            GL.GetBufferParameter(BufferTarget.ElementArrayBuffer, BufferParameterName.BufferSize, out bufferSize);
+            if (sizeof(uint) * indices.Length != bufferSize)
+                throw new ApplicationException("Indices array not uploaded correctly");
+#endif
+            // Clear the buffer Binding
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
+        }
+
+        public static void CreateVertexArray(Vertex[] vertices, out int vbo)
+        {
+            vbo = GL.GenBuffer();
+            GL.BindBuffer(BufferTarget.ArrayBuffer, vbo);
+            GL.BufferData<Vertex>(BufferTarget.ArrayBuffer, Vertex.SizeInBytes * vertices.Length, vertices, BufferUsageHint.StaticDraw);
+
+#if DEBUG
+            int bufferSize;
+            //Validate that the buffer is the correct size
+            GL.GetBufferParameter(BufferTarget.ArrayBuffer, BufferParameterName.BufferSize, out bufferSize);
+            if (Vertex.SizeInBytes * vertices.Length != bufferSize)
+                throw new ApplicationException("Vertex array not uploaded correctly");
+#endif
+            // Clear the buffer Binding
+            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
+        }
+
         public static void Create(Vertex[] vertices, uint[] indices, out int vbo, out int ibo)
         {
             vbo = GL.GenBuffer();

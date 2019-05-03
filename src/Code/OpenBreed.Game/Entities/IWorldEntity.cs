@@ -1,5 +1,8 @@
 ﻿namespace OpenBreed.Game.Entities
 {
+    /// <summary>
+    /// Interface of entity that can exist inside World object
+    /// </summary>
     public interface IWorldEntity : IEntity
     {
         #region Public Properties

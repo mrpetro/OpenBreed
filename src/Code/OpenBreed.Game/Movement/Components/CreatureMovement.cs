@@ -16,12 +16,12 @@ namespace OpenBreed.Game.Movement.Components
 
     public class CreatureMovement : IMovementComponent
     {
+        #region Private Fields
+
         private int x;
         private int y;
 
-        #region Private Fields
-
-        private Transformation transformation;
+        private Position position;
         private Direction direction;
 
         #endregion Private Fields
@@ -49,10 +49,9 @@ namespace OpenBreed.Game.Movement.Components
 
         public void Initialize(IEntity entity)
         {
-            transformation = entity.Components.OfType<Transformation>().First();
+            position = entity.Components.OfType<Position>().First();
             direction = entity.Components.OfType<Direction>().First();
         }
-
 
         public void Move(MovementDirection direction)
         {
@@ -61,17 +60,38 @@ namespace OpenBreed.Game.Movement.Components
                 case MovementDirection.Right:
                     x = 1;
                     break;
+
                 case MovementDirection.Up:
                     y = 1;
                     break;
+
                 case MovementDirection.Left:
                     x = -1;
                     break;
+
                 case MovementDirection.Down:
                     y = -1;
                     break;
             }
         }
+
+        public void Update(float dt)
+        {
+            var step = new Vector2(dt * x * 64.0f, dt * y * 64.0f);
+
+            direction.X = x;
+            direction.Y = y;
+
+            position.X += step.X;
+            position.Y += step.Y;
+
+            x = 0;
+            y = 0;
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private float AngleBetween(Vector2 a, Vector2 b)
         {
@@ -90,23 +110,6 @@ namespace OpenBreed.Game.Movement.Components
             return (float)(angleB - angleA);
         }
 
-        public void Update(float dt)
-        {
-            var velocityMatrix = Matrix4.CreateTranslation(dt * x * 64.0f,
-                                                           dt * y * 64.0f, 
-                                                           0.0f);
-
-            direction.Data = new Vector2(x, y);
-
-            //var angle = AngleBetween(Vector2.UnitX, new Vector2(x, y));
-            //var orientationMatrix = Matrix4.CreateRotationZ(angle);
-            //transformation.Matrix = Matrix4.Mult(orientationMatrix, transformation.Matrix);
-            transformation.Matrix = Matrix4.Mult(transformation.Matrix, velocityMatrix);
-
-            x = 0;
-            y = 0;
-        }
-
-        #endregion Public Methods
+        #endregion Private Methods
     }
 }

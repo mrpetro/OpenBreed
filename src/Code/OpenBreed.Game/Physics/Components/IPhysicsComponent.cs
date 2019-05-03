@@ -1,14 +1,14 @@
 ﻿using OpenBreed.Game.Common.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OpenBreed.Game.Physics.Helpers;
 
 namespace OpenBreed.Game.Physics.Components
 {
     public interface IPhysicsComponent : IEntityComponent
     {
+        #region Public Properties
 
+        Aabb Aabb { get; }
+
+        #endregion Public Properties
     }
 }

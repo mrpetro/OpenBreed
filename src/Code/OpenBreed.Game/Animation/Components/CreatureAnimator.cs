@@ -25,22 +25,22 @@ namespace OpenBreed.Game.Animation.Components
 
         public void Animate(float dt)
         {
-            if (direction.Data.X > 0 && direction.Data.Y == 0)
-                sprite.ImageId = 0;
-            else if (direction.Data.X > 0 && direction.Data.Y > 0)
-                sprite.ImageId = 7;
-            else if (direction.Data.X == 0 && direction.Data.Y > 0)
-                sprite.ImageId = 6;
-            else if (direction.Data.X < 0 && direction.Data.Y > 0)
-                sprite.ImageId = 5;
-            else if (direction.Data.X < 0 && direction.Data.Y == 0)
-                sprite.ImageId = 4;
-            else if (direction.Data.X < 0 && direction.Data.Y < 0)
-                sprite.ImageId = 3;
-            else if (direction.Data.X == 0 && direction.Data.Y < 0)
-                sprite.ImageId = 2;
-            else if (direction.Data.X > 0 && direction.Data.Y < 0)
-                sprite.ImageId = 1;
+            if (direction.X > 0 && direction.Y == 0)
+                sprite.SpriteId = 0;
+            else if (direction.X > 0 && direction.Y > 0)
+                sprite.SpriteId = 7;
+            else if (direction.X == 0 && direction.Y > 0)
+                sprite.SpriteId = 6;
+            else if (direction.X < 0 && direction.Y > 0)
+                sprite.SpriteId = 5;
+            else if (direction.X < 0 && direction.Y == 0)
+                sprite.SpriteId = 4;
+            else if (direction.X < 0 && direction.Y < 0)
+                sprite.SpriteId = 3;
+            else if (direction.X == 0 && direction.Y < 0)
+                sprite.SpriteId = 2;
+            else if (direction.X > 0 && direction.Y < 0)
+                sprite.SpriteId = 1;
         }
 
         public void Deinitialize(IEntity entity)

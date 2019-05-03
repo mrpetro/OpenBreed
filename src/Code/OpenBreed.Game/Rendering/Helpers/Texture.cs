@@ -151,8 +151,8 @@ namespace OpenBreed.Game.Rendering.Helpers
             var glPixelFormat = ToGlPixelFormat(supportedPixelFormat);
 
             GL.TexImage2D(TextureTarget.Texture2D, 0, glPixelFormat, bitmap.Width, bitmap.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, bitmapData.Scan0);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)All.Linear);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)All.Linear);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)All.Nearest);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)All.Nearest);
 
             //Release from memory
             bitmap.UnlockBits(bitmapData);

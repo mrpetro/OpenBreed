@@ -8,13 +8,13 @@ namespace OpenBreed.Game.Common
 
         void AddComponent(IEntityComponent component);
 
+        void RemoveComponent(IEntityComponent component);
+
         void Deinitialize(World world);
 
         void Initialize(World world);
 
         void Update(float dt);
-
-        void RemoveComponent(IEntityComponent component);
 
         #endregion Public Methods
     }

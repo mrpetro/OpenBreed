@@ -10,11 +10,13 @@ using OpenTK.Graphics;
 using OpenBreed.Game.States;
 using OpenBreed.Game.Rendering;
 using System.Drawing;
+using System.Reflection;
 
 namespace OpenBreed.Game
 {
     public class Program : GameWindow
     {
+        private string appVersion;
         private Font font;
 
         public StateMan StateMan { get; }
@@ -22,6 +24,8 @@ namespace OpenBreed.Game
         public Program()
             : base(800, 600, new GraphicsMode(new ColorFormat(8, 8, 8, 8), 24, 8), "OpenBreed")
         {
+            appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
             StateMan = new StateMan(this);
             StateMan.RegisterState(new GameState());
             StateMan.RegisterState(new MenuState());
@@ -63,7 +67,7 @@ namespace OpenBreed.Game
 
         protected override void OnRenderFrame(FrameEventArgs e)
         {
-            Title = $"(Vsync: {VSync}) FPS: {1f / e.Time:0}";
+            Title = $"Open Breed (Version: {appVersion} Vsync: {VSync} FPS: {1f / e.Time:0})";
 
             StateMan.OnRenderFrame(e);
 
