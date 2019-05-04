@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace OpenBreed.Game.Rendering.Components
 {
+    /// <summary>
+    /// Class of axis-aligned tile graphics with same height and width
+    /// </summary>
     public class Tile : IRenderComponent
     {
         #region Private Fields
@@ -18,19 +21,27 @@ namespace OpenBreed.Game.Rendering.Components
 
         #region Public Constructors
 
-        public Tile(TileAtlas atlas, int tileId)
+        public Tile(TileAtlas atlas, int imageId)
         {
             this.atlas = atlas;
-            TileId = tileId;
+            ImageId = imageId;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public int TileId { get; set; }
+        /// <summary>
+        /// Id of tile image from the atlas
+        /// </summary>
+        public int ImageId { get; set; }
 
         public Type SystemType { get { return typeof(RenderSystem); } }
+
+        /// <summary>
+        /// Width and height of this tile
+        /// </summary>
+        public float Size { get { return atlas.TileSize; } }
 
         #endregion Public Properties
 
@@ -42,24 +53,36 @@ namespace OpenBreed.Game.Rendering.Components
             y = (int)position.Y / atlas.TileSize;
         }
 
-        public void Deinitialize(IEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Draw this tile to given viewport
+        /// </summary>
+        /// <param name="viewport">Viewport which this tile will be rendered to</param>
         public void Draw(Viewport viewport)
         {
             GL.PushMatrix();
 
             GL.Translate(position.X, position.Y, 0.0f);
-            atlas.Draw(viewport, TileId);
+            atlas.Draw(viewport, ImageId);
 
             GL.PopMatrix();
         }
 
+        /// <summary>
+        /// Initialize this component
+        /// </summary>
+        /// <param name="entity">Entity which this component belongs to</param>
         public void Initialize(IEntity entity)
         {
             position = entity.Components.OfType<Position>().First();
+        }
+
+        /// <summary>
+        /// Deinitialize this component
+        /// </summary>
+        /// <param name="entity">Entity which this component belongs to</param>
+        public void Deinitialize(IEntity entity)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion Public Methods

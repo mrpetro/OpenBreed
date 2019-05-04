@@ -38,7 +38,7 @@ namespace OpenBreed.Game
             MovementSystem = new MovementSystem();
             PhysicsSystem = new PhysicsSystem(64, 64);
             AnimationSystem = new AnimationSystem();
-            RenderSystem = new RenderSystem();
+            RenderSystem = new RenderSystem(64, 64);
 
             systems.Add(ControlSystem);
             systems.Add(MovementSystem);
@@ -97,6 +97,7 @@ namespace OpenBreed.Game
 
         public void Initialize()
         {
+            InitializeWorlds();
             Cleanup();
         }
 
@@ -180,6 +181,18 @@ namespace OpenBreed.Game
         #endregion Protected Methods
 
         #region Private Methods
+
+        private void InitializeWorlds()
+        {
+            for (int i = 0; i < systems.Count; i++)
+                systems[i].Initialize(this);
+        }
+
+        private void DeinitializeWorlds()
+        {
+            for (int i = 0; i < systems.Count; i++)
+                systems[i].Deinitialize(this);
+        }
 
         private void AddComponent(IEntityComponent component)
         {

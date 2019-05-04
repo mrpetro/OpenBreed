@@ -1,47 +1,57 @@
 ﻿using OpenBreed.Game.Common.Components;
-using System.Collections.ObjectModel;
 
 namespace OpenBreed.Game.Common
 {
     public abstract class WorldSystem<T> : IWorldSystem where T : IEntityComponent
     {
-        //private readonly List<T> components = new List<T>();
-
         #region Protected Constructors
 
         protected WorldSystem()
         {
-            //Components = new ReadOnlyCollection<T>(components);
         }
 
         #endregion Protected Constructors
 
-        #region Protected Properties
-
-        protected ReadOnlyCollection<T> Components { get; }
-
-        #endregion Protected Properties
-
         #region Public Methods
 
+        /// <summary>
+        /// Initialize the system when world is created
+        /// </summary>
+        /// <param name="world">World that this system is initialized on</param>
+        public virtual void Initialize(World world)
+        {
+        }
+
+        /// <summary>
+        /// Deinitialize the system when world is destroyed
+        /// </summary>
+        /// <param name="world">World that this system is part of</param>
+        public virtual void Deinitialize(World world)
+        {
+        }
+
+        /// <summary>
+        /// Add the component to this system when entity is added to it's world
+        /// </summary>
+        /// <param name="component">Component to add</param>
         public void AddComponent(IEntityComponent component)
         {
             AddComponent((T)component);
         }
 
-        public virtual void Initialize(World world)
-        {
-        }
-
-        public virtual void Deinitialize(World world)
-        {
-        }
-
+        /// <summary>
+        /// Remove the component from this system when entity is being removed from it's world
+        /// </summary>
+        /// <param name="component">Component to remove</param>
         public void RemoveComponent(IEntityComponent component)
         {
             RemoveComponent((T)component);
         }
 
+        /// <summary>
+        /// Update this system with given time step
+        /// </summary>
+        /// <param name="dt">Time step</param>
         public virtual void Update(float dt)
         {
         }

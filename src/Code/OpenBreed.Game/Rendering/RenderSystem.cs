@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Game.Rendering
 {
+    /// <summary>
+    /// System class that is specialized in rendering
+    /// </summary>
     public class RenderSystem : WorldSystem<IRenderComponent>
     {
         #region Public Fields
@@ -25,9 +28,9 @@ namespace OpenBreed.Game.Rendering
 
         #region Public Constructors
 
-        public RenderSystem()
+        public RenderSystem(int width, int height)
         {
-            InitializeTilesMap(64, 64);
+            InitializeTilesMap(width, height);
             sprites = new List<Sprite>();
         }
 
@@ -52,9 +55,6 @@ namespace OpenBreed.Game.Rendering
             DrawTiles(viewport);
 
             DrawSprites(viewport);
-
-            //foreach (var component in Components)
-            //    component.Draw(viewport);
         }
 
         #endregion Public Methods
