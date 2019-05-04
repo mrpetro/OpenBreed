@@ -73,8 +73,10 @@
     <Compile Include="Animation\AnimationSystem.cs" />
     <Compile Include="Animation\Components\CreatureAnimator.cs" />
     <Compile Include="Animation\Components\IAnimationComponent.cs" />
+    <Compile Include="Common\Components\IShapeComponent.cs" />
     <Compile Include="Common\Components\Position.cs" />
     <Compile Include="Common\Components\Direction.cs" />
+    <Compile Include="Common\Components\Shapes\AxisAlignedBox.cs" />
     <Compile Include="Common\WorldSystem.cs" />
     <Compile Include="Common\IWorldSystem.cs" />
     <Compile Include="Common\Components\Transformation.cs" />
@@ -88,9 +90,10 @@
     <Compile Include="Movement\Components\IMovementComponent.cs" />
     <Compile Include="Movement\Components\CreatureMovement.cs" />
     <Compile Include="Movement\MovementSystem.cs" />
+    <Compile Include="Physics\Components\DynamicBody.cs" />
     <Compile Include="Physics\Components\IDynamicBody.cs" />
     <Compile Include="Physics\Components\IStaticBody.cs" />
-    <Compile Include="Physics\Helpers\Aabb.cs" />
+    <Compile Include="Physics\Helpers\AabbXComparer.cs" />
     <Compile Include="Physics\PhysicsSystem.cs" />
     <Compile Include="Rendering\Helpers\RenderTools.cs" />
     <Compile Include="Rendering\Components\Sprite.cs" />

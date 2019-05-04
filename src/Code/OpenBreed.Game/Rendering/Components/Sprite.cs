@@ -1,6 +1,8 @@
 ﻿using OpenBreed.Game.Common.Components;
 using OpenBreed.Game.Entities;
+using OpenBreed.Game.Physics.Components;
 using OpenBreed.Game.Rendering.Helpers;
+using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Linq;
@@ -16,6 +18,11 @@ namespace OpenBreed.Game.Rendering.Components
 
         private SpriteAtlas atlas;
         private Position position;
+
+        /// <summary>
+        /// For DEBUG Purpose
+        /// </summary>
+        private DynamicBody body;
 
         #endregion Private Fields
 
@@ -47,6 +54,29 @@ namespace OpenBreed.Game.Rendering.Components
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
         public void Draw(Viewport viewport)
         {
+            if(body.Collides)
+                GL.Color4(Color4.Red);
+            else
+                GL.Color4(Color4.Green);
+
+            RenderTools.DrawBox(body.Aabb);
+
+            if (body.Boxes != null)
+            {
+
+                GL.Color4(Color4.Yellow);
+
+                foreach (var item in body.Boxes)
+                {
+                    RenderTools.DrawRectangle(item.Item1 * 16.0f,
+                                              item.Item2 * 16.0f,
+                                              item.Item1 * 16.0f + 16.0f,
+                                              item.Item2 * 16.0f + 16.0f);
+                }
+            }
+
+            GL.Color4(Color4.White);
+
             GL.PushMatrix();
 
             GL.Translate(position.X, position.Y, 0.0f);
@@ -62,6 +92,7 @@ namespace OpenBreed.Game.Rendering.Components
         public void Initialize(IEntity entity)
         {
             position = entity.Components.OfType<Position>().First();
+            body = entity.Components.OfType<DynamicBody>().First();
         }
 
         /// <summary>

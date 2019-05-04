@@ -1,8 +1,10 @@
 ﻿using OpenBreed.Game.Animation.Components;
 using OpenBreed.Game.Common.Components;
+using OpenBreed.Game.Common.Components.Shapes;
 using OpenBreed.Game.Control.Components;
 using OpenBreed.Game.Entities.Builders;
 using OpenBreed.Game.Movement.Components;
+using OpenBreed.Game.Physics.Components;
 using OpenBreed.Game.Rendering.Components;
 using OpenTK;
 using System;
@@ -28,6 +30,8 @@ namespace OpenBreed.Game.Entities
             Components.Add(new Sprite(builder.spriteAtlas));
             Components.Add(new CreatureMovement());
             Components.Add(new CreatureAnimator());
+            Components.Add(new AxisAlignedBox(32, 32));
+            Components.Add(new DynamicBody());
 
             if (builder.controller != null)
                 Components.Add(builder.controller);

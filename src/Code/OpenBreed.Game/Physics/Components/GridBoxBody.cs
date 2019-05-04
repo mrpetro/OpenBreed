@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Game.Common.Components;
 using OpenBreed.Game.Entities;
 using OpenBreed.Game.Physics.Helpers;
+using OpenTK;
 using System;
 using System.Linq;
 
@@ -27,7 +28,7 @@ namespace OpenBreed.Game.Physics.Components
 
         #region Public Properties
 
-        public Aabb Aabb { get; private set; }
+        public Box2 Aabb { get; private set; }
 
         public Type SystemType { get { return typeof(PhysicsSystem); } }
 
@@ -50,13 +51,18 @@ namespace OpenBreed.Game.Physics.Components
         {
             position = entity.Components.OfType<Position>().First();
 
-            Aabb = new Aabb
+            Aabb = new Box2
             {
                 Left = position.X,
                 Bottom = position.Y,
                 Right = position.X + size,
                 Top = position.Y + size,
             };
+        }
+
+        public void Resolve(IPhysicsComponent other)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion Public Methods

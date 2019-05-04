@@ -2,6 +2,9 @@
 
 namespace OpenBreed.Game.Common
 {
+    /// <summary>
+    /// Interface to system which is part of some world
+    /// </summary>
     public interface IWorldSystem
     {
         #region Public Methods

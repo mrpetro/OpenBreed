@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Game.Physics.Components;
 using OpenTK;
+using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 
 namespace OpenBreed.Game.Rendering.Helpers
@@ -43,6 +45,26 @@ namespace OpenBreed.Game.Rendering.Helpers
 #endif
             // Clear the buffer Binding
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
+        }
+
+        public static void DrawRectangle(float left, float bottom, float right, float top)
+        {
+            GL.Begin(PrimitiveType.LineLoop);
+            GL.Vertex3(left, top, 0.0);
+            GL.Vertex3(left, bottom, 0.0);
+            GL.Vertex3(right, bottom, 0.0);
+            GL.Vertex3(right, top, 0.0);
+            GL.End();
+        }
+
+        public static void DrawBox(Box2 box)
+        {
+            GL.Begin(PrimitiveType.LineLoop);
+            GL.Vertex3(box.Left, box.Top, 0.0);
+            GL.Vertex3(box.Left, box.Bottom, 0.0);
+            GL.Vertex3(box.Right, box.Bottom, 0.0);
+            GL.Vertex3(box.Right, box.Top, 0.0);
+            GL.End();
         }
 
         public static void Create(Vertex[] vertices, uint[] indices, out int vbo, out int ibo)

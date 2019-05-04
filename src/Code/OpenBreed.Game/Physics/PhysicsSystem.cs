@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Game.Common;
 using OpenBreed.Game.Physics.Components;
+using OpenBreed.Game.Physics.Helpers;
 using System;
 using System.Collections.Generic;
 
@@ -9,7 +10,8 @@ namespace OpenBreed.Game.Physics
     {
         #region Private Fields
 
-        private IStaticBody[] gridArray;
+        private static readonly AabbXComparer comparer = new AabbXComparer();
+        private List<IStaticBody>[] gridArray;
         private List<IDynamicBody> dynamicBodies;
 
         #endregion Private Fields
@@ -36,6 +38,124 @@ namespace OpenBreed.Game.Physics
 
         #endregion Public Properties
 
+        #region Public Methods
+
+        private void BruteForce(float dt)
+        {
+            List<IDynamicBody> activeList = new List<IDynamicBody>();
+
+            for (int i = 0; i < dynamicBodies.Count; i++)
+            {
+                //for (int e = i; e < dynamicBodies.Count; e++)
+                //{
+                //    if (CheckBoundingBoxForOverlap(i, e))
+                //        DetectNarrowPhase(i, e);
+                //}
+
+                QueryStaticMatrix(dynamicBodies[i]);
+            }
+        }
+
+        private void QueryStaticMatrix(IDynamicBody collider)
+        {
+            collider.Collides = false;
+            collider.Boxes = new List<Tuple<int, int>>();
+
+            int xMod = (int)collider.Aabb.Right % 16;
+            int yMod = (int)collider.Aabb.Top % 16;
+
+            int leftIndex = (int)collider.Aabb.Left >> 4;
+            int rightIndex = (int)collider.Aabb.Right >> 4;
+            int bottomIndex = (int)collider.Aabb.Bottom >> 4;
+            int topIndex = (int)collider.Aabb.Top >> 4;
+
+            if (xMod > 0)
+                rightIndex++;
+
+            if (yMod > 0)
+                topIndex++;
+
+
+            if (leftIndex < 0)
+                leftIndex = 0;
+
+            if (bottomIndex < 0)
+                bottomIndex = 0;
+
+            if (rightIndex > GridWidth - 1)
+                rightIndex = GridWidth - 1;
+
+            if (topIndex > GridHeight - 1)
+                topIndex = GridHeight - 1;
+
+            //Collect all unique aabb boxes
+            var boxesSet = new HashSet<IStaticBody>();
+            for (int yIndex = bottomIndex; yIndex < topIndex; yIndex++)
+            {
+                for (int xIndex = leftIndex; xIndex < rightIndex; xIndex++)
+                {
+                    collider.Boxes.Add(new Tuple<int, int>(xIndex, yIndex));
+                    var collideres = gridArray[xIndex + GridWidth * yIndex];
+                    for (int boxIndex = 0; boxIndex < collideres.Count; boxIndex++)
+                    {
+                        boxesSet.Add(collideres[boxIndex]);
+                    }
+                }
+            }
+
+            if (boxesSet.Count == 0)
+                return;
+
+            //Iterate all collected aabb boxes for test
+            foreach (var item in boxesSet)
+            {
+                collider.Resolve(item);
+            }
+        }
+
+        public override void Update(float dt)
+        {
+            BruteForce(dt);
+        }
+
+        //public override void Update(float dt)
+        //{
+        //    dynamicBodies.Sort(Xcomparison);
+
+        //    List<IDynamicBody> activeList = new List<IDynamicBody>();
+        //    IDynamicBody next_collider = null;
+
+        //    for (int i = 0; i < dynamicBodies.Count - 1; i++)
+        //    {
+        //        //QueryStaticMatrix(m_Dynamics[i]);
+
+        //        next_collider = dynamicBodies[i + 1];
+        //        activeList.Add(dynamicBodies[i]);
+
+        //        foreach (var item in activeList)
+        //        {
+        //            if (next_collider.Aabb.Left < item.Aabb.Right)
+        //            {
+        //                if (next_collider.Aabb.Bottom <= item.Aabb.Top && next_collider.Aabb.Top > item.Aabb.Bottom)
+        //                {
+        //                    next_collider->CollideWith(item);
+        //                }
+
+        //                continue;
+        //                lst_iter++;
+        //            }
+        //            else
+        //            {
+        //                lst_iter = activeList.Remove(item);
+        //            }
+        //        }
+        //    }
+
+        //    //QueryStaticMatrix(m_Dynamics.back());
+        //}
+
+        #endregion Public Methods
+
         #region Protected Methods
 
         protected override void AddComponent(IPhysicsComponent component)
@@ -57,66 +177,14 @@ namespace OpenBreed.Game.Physics
 
         #region Private Methods
 
-        public override void Update(float dt)
+        private int Xcomparison(IDynamicBody x, IDynamicBody y)
         {
-
-
-            //sort(m_Dynamics.begin(), m_Dynamics.end(), CollisionSystem::AABBCompareX);
-
-
-            //List<IDynamicBody> activeList = new List<IDynamicBody>();
-            //IDynamicBody next_collider = null;
-
-            //for (int i = 0; i < dynamicBodies.Count - 1; i++)
-            //{
-            //    //QueryStaticMatrix(m_Dynamics[i]);
-
-            //    next_collider = dynamicBodies[i + 1];
-            //    activeList.Add(dynamicBodies[i]);
-
-            //    foreach (var item in activeList)
-            //    {
-            //        ICollisionComponent* curr_collider = *lst_iter;
-
-            //        if (next_collider->GetLeft() < curr_collider->GetRight())
-            //        {
-            //            if (next_collider->GetDown() <= curr_collider->GetUp() && next_collider->GetUp() > curr_collider->GetDown())
-            //            {
-            //                next_collider->CollideWith(curr_collider);
-            //            }
-
-            //            lst_iter++;
-            //        }
-            //        else
-            //        {
-            //            lst_iter = activeList.Remove(item);
-            //        }
-            //    }
-
-
-            //    list<ICollisionComponent*>::iterator lst_iter = activeList.begin();
-            //    while (lst_iter != activeList.end())
-            //    {
-            //        ICollisionComponent* curr_collider = *lst_iter;
-
-            //        if (next_collider->GetLeft() < curr_collider->GetRight())
-            //        {
-            //            if (next_collider->GetDown() <= curr_collider->GetUp() && next_collider->GetUp() > curr_collider->GetDown())
-            //            {
-            //                next_collider->CollideWith(curr_collider);
-            //            }
-
-            //            lst_iter++;
-            //        }
-            //        else
-            //        {
-            //            lst_iter = activeList.erase(lst_iter);
-            //        }
-            //    }
-            //}
-
-            //QueryStaticMatrix(m_Dynamics.back());
-
+            if (x.Aabb.Left < y.Aabb.Left)
+                return -1;
+            if (x.Aabb.Left == y.Aabb.Left)
+                return 0;
+            else
+                return 1;
         }
 
         private void AddStaticBody(IStaticBody body)
@@ -131,7 +199,7 @@ namespace OpenBreed.Game.Physics
             if (y >= GridHeight)
                 throw new InvalidOperationException($"Grid box body Y coordinate exceeds grid height size.");
 
-            gridArray[gridIndex] = body;
+            gridArray[gridIndex].Add(body);
         }
 
         private void AddDynamicBody(IDynamicBody body)
@@ -141,7 +209,10 @@ namespace OpenBreed.Game.Physics
 
         private void InitializeGrid()
         {
-            gridArray = new IStaticBody[GridWidth * GridHeight];
+            gridArray = new List<IStaticBody>[GridWidth * GridHeight];
+
+            for (int i = 0; i < gridArray.Length; i++)
+                gridArray[i] = new List<IStaticBody>();
         }
 
         #endregion Private Methods
