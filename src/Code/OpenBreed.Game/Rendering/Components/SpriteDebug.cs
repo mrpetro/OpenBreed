@@ -1,46 +1,35 @@
 ﻿using OpenBreed.Game.Common.Components;
-using OpenBreed.Game.Common.Components.Shapes;
 using OpenBreed.Game.Entities;
 using OpenBreed.Game.Physics.Components;
 using OpenBreed.Game.Rendering.Helpers;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace OpenBreed.Game.Rendering.Components
 {
-    /// <summary>
-    /// Axis-aligned sprite
-    /// Shared components:
-    ///  - axis-aligned box shape
-    ///  - position
-    /// </summary>
-    public class Sprite : ISprite
+    public class SpriteDebug : ISprite
     {
         #region Private Fields
 
-        private SpriteAtlas atlas;
         private Position position;
-        private AxisAlignedBox shape;
+        private DynamicBody body;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public Sprite(SpriteAtlas atlas)
+        public SpriteDebug()
         {
-            this.atlas = atlas;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
-
-        /// <summary>
-        /// Id of sprite image from the atlas
-        /// </summary>
-        public int ImageId { get; set; }
 
         public Type SystemType { get { return typeof(RenderSystem); } }
 
@@ -54,12 +43,21 @@ namespace OpenBreed.Game.Rendering.Components
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
         public void Draw(Viewport viewport)
         {
-            GL.PushMatrix();
+            if (body.Collides)
+                RenderTools.DrawBox(body.Aabb, Color4.Red);
+            else
+                RenderTools.DrawBox(body.Aabb, Color4.Green);
 
-            GL.Translate((int)position.X, (int)position.Y, 0.0f);
-            atlas.Draw(viewport, ImageId);
-
-            GL.PopMatrix();
+            if (body.Boxes != null)
+            {
+                foreach (var item in body.Boxes)
+                {
+                    RenderTools.DrawRectangle(item.Item1 * 16.0f,
+                                              item.Item2 * 16.0f,
+                                              item.Item1 * 16.0f + 16.0f,
+                                              item.Item2 * 16.0f + 16.0f);
+                }
+            }
         }
 
         /// <summary>
@@ -69,7 +67,7 @@ namespace OpenBreed.Game.Rendering.Components
         public void Initialize(IEntity entity)
         {
             position = entity.Components.OfType<Position>().First();
-            shape = entity.Components.OfType<AxisAlignedBox>().First();
+            body = entity.Components.OfType<DynamicBody>().First();
         }
 
         /// <summary>

@@ -58,6 +58,7 @@ namespace OpenBreed.Game.Rendering.Helpers
         {
             GL.BindTexture(TextureTarget.Texture2D, Texture.Id);
             RenderTools.Draw(viewport, vboList[spriteId], ibo, 6);
+            GL.BindTexture(TextureTarget.Texture2D, 0);
         }
 
         #endregion Public Methods

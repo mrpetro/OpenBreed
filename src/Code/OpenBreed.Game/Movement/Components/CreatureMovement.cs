@@ -85,8 +85,8 @@ namespace OpenBreed.Game.Movement.Components
             position.X += step.X;
             position.Y += step.Y;
 
-            position.X = (int)position.X;
-            position.Y = (int)position.Y;
+            position.X = position.X;
+            position.Y = position.Y;
 
             x = 0;
             y = 0;

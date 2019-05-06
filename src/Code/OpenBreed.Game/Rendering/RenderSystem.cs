@@ -21,7 +21,7 @@ namespace OpenBreed.Game.Rendering
 
         #region Private Fields
 
-        private List<Sprite> sprites;
+        private List<ISprite> sprites;
         private Tile[] tiles;
 
         #endregion Private Fields
@@ -31,7 +31,7 @@ namespace OpenBreed.Game.Rendering
         public RenderSystem(int width, int height)
         {
             InitializeTilesMap(width, height);
-            sprites = new List<Sprite>();
+            sprites = new List<ISprite>();
         }
 
         #endregion Public Constructors
@@ -65,8 +65,8 @@ namespace OpenBreed.Game.Rendering
         {
             if (component is Tile)
                 AddTile((Tile)component);
-            else if (component is Sprite)
-                AddSprite((Sprite)component);
+            else if (component is ISprite)
+                AddSprite((ISprite)component);
             else
                 throw new NotImplementedException($"{component}");
         }
@@ -80,7 +80,7 @@ namespace OpenBreed.Game.Rendering
 
         #region Private Methods
 
-        private void AddSprite(Sprite sprite)
+        private void AddSprite(ISprite sprite)
         {
             sprites.Add(sprite);
         }
@@ -105,7 +105,7 @@ namespace OpenBreed.Game.Rendering
             float left, bottom, right, top;
             viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
 
-            GL.Color4(1.0f, 1.0f, 1.0f, 1.0f);
+            //GL.Color4(1.0f, 1.0f, 1.0f, 1.0f);
             GL.Enable(EnableCap.Blend);
             GL.Enable(EnableCap.AlphaTest);
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusSrcAlpha);

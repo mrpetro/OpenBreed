@@ -50,20 +50,22 @@ namespace OpenBreed.Game.Rendering.Helpers
         public static void DrawRectangle(float left, float bottom, float right, float top)
         {
             GL.Begin(PrimitiveType.LineLoop);
-            GL.Vertex3(left, top, 0.0);
-            GL.Vertex3(left, bottom, 0.0);
-            GL.Vertex3(right, bottom, 0.0);
-            GL.Vertex3(right, top, 0.0);
+            GL.Color4(Color4.Blue);
+            GL.Vertex3(left, top, 0.0f);
+            GL.Vertex3(left, bottom, 0.0f);
+            GL.Vertex3(right, bottom, 0.0f);
+            GL.Vertex3(right, top, 0.0f);
             GL.End();
         }
 
-        public static void DrawBox(Box2 box)
+        public static void DrawBox(Box2 box, Color4 color)
         {
             GL.Begin(PrimitiveType.LineLoop);
-            GL.Vertex3(box.Left, box.Top, 0.0);
-            GL.Vertex3(box.Left, box.Bottom, 0.0);
-            GL.Vertex3(box.Right, box.Bottom, 0.0);
-            GL.Vertex3(box.Right, box.Top, 0.0);
+            GL.Color4(color);
+            GL.Vertex3(box.Left, box.Top, 0.0f);
+            GL.Vertex3(box.Left, box.Bottom, 0.0f);
+            GL.Vertex3(box.Right, box.Bottom, 0.0f);
+            GL.Vertex3(box.Right, box.Top, 0.0f);
             GL.End();
         }
 
@@ -108,7 +110,6 @@ namespace OpenBreed.Game.Rendering.Helpers
             GL.TexCoordPointer(2, TexCoordPointerType.Float, Vertex.SizeInBytes, Vector2.SizeInBytes);
             GL.ColorPointer(4, ColorPointerType.Float, Vertex.SizeInBytes, Vector2.SizeInBytes * 2);
 
-            //GL.DrawArrays(PrimitiveType.Triangles, 0, verticeCount);
             GL.DrawElements(PrimitiveType.Triangles, indicesCount, DrawElementsType.UnsignedInt, 0);
 
             GL.DisableClientState(ArrayCap.IndexArray);

@@ -55,6 +55,7 @@ namespace OpenBreed.Game.Rendering.Helpers
         {
             GL.BindTexture(TextureTarget.Texture2D, Texture.Id);
             RenderTools.Draw(viewport, vboList[tileId], ibo, 6);
+            GL.BindTexture(TextureTarget.Texture2D, 0);
         }
 
         private void BuildCoords(int tileRows, int tileColumns)

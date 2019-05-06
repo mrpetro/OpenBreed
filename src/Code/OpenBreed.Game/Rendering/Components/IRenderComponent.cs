@@ -16,7 +16,7 @@ namespace OpenBreed.Game.Rendering.Components
         /// <summary>
         /// Draw this component to given viewport
         /// </summary>
-        /// <param name="viewport">Viewport which this tile will be rendered to</param>
+        /// <param name="viewport">Viewport which this component will be rendered to</param>
         void Draw(Viewport viewport);
     }
 }

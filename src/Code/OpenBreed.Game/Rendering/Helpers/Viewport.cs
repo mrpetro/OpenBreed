@@ -133,8 +133,8 @@ namespace OpenBreed.Game.Rendering.Helpers
 
             if (BORDER)
             {
-                GL.Color4(1.0f, 0.0f, 0.0f, 1.0f);
                 GL.Begin(PrimitiveType.LineLoop);
+                GL.Color4(1.0f, 0.0f, 0.0f, 1.0f);
                 GL.Vertex3(0,     Height, 0.0);
                 GL.Vertex3(0,     0,      0.0);
                 GL.Vertex3(Width, 0,      0.0);
