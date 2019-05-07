@@ -162,6 +162,7 @@ namespace OpenBreed.Common.Maps.Readers.MAP
                      break;
             }
         }
+
         private void ReadBodyBlock(BigEndianBinaryReader binReader)
         {
             int sizeX = (int)MapBuilder.Blocks.OfType<MapUInt32Block>().FirstOrDefault(item => item.Name == "XBLK").Value;
@@ -172,7 +173,7 @@ namespace OpenBreed.Common.Maps.Readers.MAP
             int expectedTilesNo = sizeX * sizeY;
 
             if (tilesNo != expectedTilesNo)
-                throw new Exception("Incorrect number of tiles in body (" + tilesNo + "). Expected: " + expectedTilesNo);
+                throw new InvalidDataException("Incorrect number of tiles in body (" + tilesNo + "). Expected: " + expectedTilesNo);
 
             var bodyBlock = new MapBodyBlock(tilesNo);
 
@@ -263,6 +264,7 @@ namespace OpenBreed.Common.Maps.Readers.MAP
 
             MapBuilder.AddBlock(new MapPaletteBlock(name, value));
         }
+
         private void ReadStringBlock(string name, BigEndianBinaryReader binReader)
         {
             UInt32 size = binReader.ReadUInt32();
@@ -284,7 +286,7 @@ namespace OpenBreed.Common.Maps.Readers.MAP
             UInt32 size = binReader.ReadUInt32();
 
             if (size != 4)
-                throw new Exception("Incorrect size for UInt32");
+                throw new InvalidDataException("Incorrect size for UInt32");
 
             var value = binReader.ReadUInt32();
             MapBuilder.AddBlock(new MapUInt32Block(name, value));
