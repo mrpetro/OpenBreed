@@ -21,8 +21,9 @@ Create fully functional map editor for AB games with parallel thinking about ope
 **ABTA:**
  - Viewing maps with their original color palettes, tiles and properties
  - Maps edition and storage back to EPF archive (unstable)
- - Viewing tile sets associated with maps
- - Viewing sprite sets associated with maps (reverted)
+ - Viewing tile sets (\*.BLK entries) associated with maps
+ - Viewing sprite sets (\*.SPR entries) associated with maps (reverted)
+ - Viewing images (\*.LBM entries) from EPF archive 
  - Playing game sounds
  - Level password generator (works for PC and Amiga platforms)
 
