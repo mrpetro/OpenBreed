@@ -60,11 +60,6 @@ namespace OpenBreed.Game.Physics.Components
             };
         }
 
-        public void Resolve(IPhysicsComponent other)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion Public Methods
 
     }

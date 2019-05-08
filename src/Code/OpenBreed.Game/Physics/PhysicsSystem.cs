@@ -106,15 +106,27 @@ namespace OpenBreed.Game.Physics
             if (boxesSet.Count == 0)
                 return;
 
-            //Iterate all collected aabb boxes for test
+            //Iterate all collected static bodies for detail test
             foreach (var item in boxesSet)
             {
-                collider.Resolve(item);
+                collider.CollideVsStatic(item);
             }
+        }
+
+        private void CollideDynamicVsStatic(IDynamicBody dynamicBody, IStaticBody staticBody)
+        {
+        }
+
+        private void Integrate()
+        {
+            for (int i = 0; i < dynamicBodies.Count; i++)
+                dynamicBodies[i].IntegrateVerlet();
         }
 
         public override void Update(float dt)
         {
+            Integrate();
+
             BruteForce(dt);
         }
 

@@ -94,6 +94,7 @@
     <Compile Include="Physics\Components\IDynamicBody.cs" />
     <Compile Include="Physics\Components\IStaticBody.cs" />
     <Compile Include="Physics\Helpers\AabbXComparer.cs" />
+    <Compile Include="Physics\Helpers\Box2Extensions.cs" />
     <Compile Include="Physics\PhysicsSystem.cs" />
     <Compile Include="Rendering\Components\ISprite.cs" />
     <Compile Include="Rendering\Components\SpriteDebug.cs" />

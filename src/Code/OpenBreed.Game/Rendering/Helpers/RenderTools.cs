@@ -58,6 +58,15 @@ namespace OpenBreed.Game.Rendering.Helpers
             GL.End();
         }
 
+        public static void DrawLine(Vector2 p1, Vector2 p2, Color4 color)
+        {
+            GL.Begin(PrimitiveType.Lines);
+            GL.Color4(color);
+            GL.Vertex3(p1.X, p1.Y, 0.0f);
+            GL.Vertex3(p2.X, p2.Y, 0.0f);
+            GL.End();
+        }
+
         public static void DrawBox(Box2 box, Color4 color)
         {
             GL.Begin(PrimitiveType.LineLoop);

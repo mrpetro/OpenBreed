@@ -1,7 +1,9 @@
 ﻿using OpenBreed.Game.Common.Components;
 using OpenBreed.Game.Entities;
 using OpenBreed.Game.Physics.Components;
+using OpenBreed.Game.Physics.Helpers;
 using OpenBreed.Game.Rendering.Helpers;
+using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System;
@@ -44,7 +46,11 @@ namespace OpenBreed.Game.Rendering.Components
         public void Draw(Viewport viewport)
         {
             if (body.Collides)
+            {
                 RenderTools.DrawBox(body.Aabb, Color4.Red);
+
+                RenderTools.DrawLine(body.Aabb.GetCenter(), Vector2.Add(body.Aabb.GetCenter(), body.Projection * 10), Color4.Purple);
+            }
             else
                 RenderTools.DrawBox(body.Aabb, Color4.Green);
 

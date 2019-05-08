@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Game.Physics.Helpers;
+using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,28 @@ namespace OpenBreed.Game.Physics.Components
         /// DEBUG only
         /// </summary>
         bool Collides { get; set; }
+        /// <summary>
+        /// DEBUG only
+        /// </summary>
         List<Tuple<int, int>> Boxes { get; set; }
+        /// <summary>
+        /// DEBUG only
+        /// </summary>
+        Vector2 Projection { get; }
+
+        /// <summary>
+        /// Check/Report collision with static body
+        /// </summary>
+        /// <param name="staticBody">Static body to check and report collision</param>
+        void CollideVsStatic(IStaticBody staticBody);
+
+        /// <summary>
+        /// Check/Report collision with dynamic body
+        /// </summary>
+        /// <param name="dynamicBody">Dynamic body to check and report collision</param>
+        void CollideVsDynamic(IDynamicBody dynamicBody);
+
+
+        void IntegrateVerlet();
     }
 }
