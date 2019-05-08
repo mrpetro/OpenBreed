@@ -18,11 +18,12 @@ ABTA PC port uses exactly same resources as Amiga version but the container is E
 * MAP reader for ABTA (it will probably for for all three titles since this format didn't changed that much)
 * SPR(spriteset) reader for ABTA
 * BLK(tileset) reader for ABTA
+* LBM (IFF images) reader for ABTA
 * ACBM tileSet reader for ABHC and ABSE
 * ACBM image reader for some images from ABHC and ABSE
 
 ## What is in current development
-
+* Game engine in entity component system (ECS) architecture
 * Readers for various resources from all three games
 * Developing of OpenBreed.Editor - at least to state of reading & viewing most of games resources.
 * Design & creation of game databases - these will be useful when developing OpenBreed engine. 
