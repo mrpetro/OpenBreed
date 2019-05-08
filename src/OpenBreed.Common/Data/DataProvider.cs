@@ -88,7 +88,7 @@ namespace OpenBreed.Common.Data
             FormatMan.RegisterFormat("ABTASPR", new ABTASPRFormat());
             FormatMan.RegisterFormat("ACBM_TILE_SET", new ACBMTileSetFormat());
             FormatMan.RegisterFormat("ACBM_IMAGE", new ACBMImageFormat());
-            FormatMan.RegisterFormat("LBM_IMAGE", new LBMImageFormat());
+            FormatMan.RegisterFormat("IFF_IMAGE", new IFFImageFormat());
             FormatMan.RegisterFormat("BINARY", new BinaryFormat());
             FormatMan.RegisterFormat("PCM_SOUND", new PCMSoundFormat());
         }

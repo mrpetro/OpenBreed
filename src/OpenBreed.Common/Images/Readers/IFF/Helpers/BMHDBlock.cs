@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Images.Readers.LBM.Helpers
+namespace OpenBreed.Common.Images.Readers.IFF.Helpers
 {
-
-
+    /// <summary>
+    /// BMHD: Bitmap Header user in IFF image data
+    /// Implementation source: https://en.wikipedia.org/wiki/ILBM
+    /// </summary>
     public class BMHDBlock
     {
         public enum MaskEnum : byte

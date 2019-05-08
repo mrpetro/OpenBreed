@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Common.Images.Builders;
-using OpenBreed.Common.Images.Readers.LBM.Helpers;
+using OpenBreed.Common.Images.Readers.IFF.Helpers;
 using OpenBreed.Common.Readers;
-using OpenBreed.Common.Tiles.Builders;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,13 +9,27 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using static OpenBreed.Common.Images.Readers.LBM.Helpers.BMHDBlock;
+using static OpenBreed.Common.Images.Readers.IFF.Helpers.BMHDBlock;
 
-namespace OpenBreed.Common.Images.Readers.LBM
+namespace OpenBreed.Common.Images.Readers.IFF
 {
+    /// <summary>
+    /// Interchange File Format (IFF) image data reader class
+    /// Implementation source: https://en.wikipedia.org/wiki/Interchange_File_Format
+    /// Currently this implementation supports two image formats:
+    /// ILBM and PBM - Implementation source: https://en.wikipedia.org/wiki/ILBM
+    /// </summary>
     public class LBMImageReader
     {
+        #region Private Fields
+
+        private string formatId;
+
+        private BMHDBlock bmhdBlock;
+
+        private Color[] cmapBlock;
+
+        #endregion Private Fields
 
         #region Public Constructors
 
@@ -29,15 +42,44 @@ namespace OpenBreed.Common.Images.Readers.LBM
 
         #region Internal Properties
 
-        internal ImageBuilder Builder { get; private set; }
+        internal ImageBuilder Builder { get; }
 
         #endregion Internal Properties
 
         #region Public Methods
 
-        private string formatId;
-        private BMHDBlock bmhdBlock;
-        private Color[] cmapBlock;
+        /// <summary>
+        /// Read IFF data from stream and produce Image object
+        /// </summary>
+        /// <param name="stream">Stream to data containing IFF data</param>
+        /// <returns>Resulting image</returns>
+        public Image Read(Stream stream)
+        {
+            //We dont want to close the stream here so reader is not being used inside of 'using' statement
+            var binReader = new BigEndianBinaryReader(stream);
+
+            ReadHeader(binReader);
+
+            while (!IsEOF(binReader))
+                ReadBlock(binReader);
+
+            return Builder.Build();
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private string ReadString(BigEndianBinaryReader binReader, int size)
+        {
+            var data = binReader.ReadBytes(size);
+            return Encoding.ASCII.GetString(data);
+        }
+
+        private bool IsEOF(BigEndianBinaryReader binReader)
+        {
+            return binReader.BaseStream.Position == binReader.BaseStream.Length;
+        }
 
         private void ReadCMAPBlock(BigEndianBinaryReader binReader, int blockLength)
         {
@@ -48,7 +90,7 @@ namespace OpenBreed.Common.Images.Readers.LBM
             {
                 var colorBytes = binReader.ReadBytes(3);
                 cmapBlock[i] = Color.FromArgb(colorBytes[0],
-                                              colorBytes[1], 
+                                              colorBytes[1],
                                               colorBytes[2]);
             }
         }
@@ -71,12 +113,6 @@ namespace OpenBreed.Common.Images.Readers.LBM
             bmhdBlock.PageHeight = binReader.ReadInt16();
         }
 
-        internal string ReadString(BigEndianBinaryReader binReader, int size)
-        {
-            var data = binReader.ReadBytes(size);
-            return Encoding.ASCII.GetString(data);
-        }
-
         private void ReadBlock(BigEndianBinaryReader binReader)
         {
             string blockName = ReadString(binReader, 4);
@@ -87,12 +123,15 @@ namespace OpenBreed.Common.Images.Readers.LBM
                 case "BMHD":
                     ReadBMHDBlock(binReader, blockLength);
                     break;
+
                 case "CMAP":
                     ReadCMAPBlock(binReader, blockLength);
                     break;
+
                 case "BODY":
                     ReadBODYBlock(binReader, blockLength);
                     break;
+
                 default:
                     IgnoreUnknownBlock(binReader, blockLength);
                     break;
@@ -115,8 +154,7 @@ namespace OpenBreed.Common.Images.Readers.LBM
                 //scan planes
                 for (int i = 0; i < bmhdBlock.NumPlanes; i++)
                 {
-                    byte[] rawData = bytes.Take(bmhdBlock.Width / 8).ToArray();
-                    rawData = rawData.Reverse().ToArray();
+                    byte[] rawData = bytes.Take(bmhdBlock.Width / 8).Reverse().ToArray();
 
                     var bitArray = new BitArray(rawData);
                     for (int iPixel = 0; iPixel < bmhdBlock.Width; iPixel++)
@@ -145,8 +183,10 @@ namespace OpenBreed.Common.Images.Readers.LBM
             {
                 case CompressionEnum.Uncompressed:
                     return bytes;
+
                 case CompressionEnum.RLECompressed:
                     return RLEDecompress(bytes);
+
                 default:
                     throw new NotImplementedException($"Compression '{bmhdBlock.Compression}'");
             }
@@ -234,42 +274,6 @@ namespace OpenBreed.Common.Images.Readers.LBM
                 throw new InvalidDataException("Expected 'ILBM' or 'PBM ' format id");
         }
 
-        public Image Read(Stream stream)
-        {
-            //We dont want to close the stream here so reader is not being used inside of 'using' statement
-            var binReader = new BigEndianBinaryReader(stream);
-
-            ReadHeader(binReader);
-
-            while (!IsEOF(binReader))
-                ReadBlock(binReader);
-
-            return Builder.Build();
-        }
-
-        internal bool IsEOF(BigEndianBinaryReader binReader)
-        {
-            return binReader.BaseStream.Position == binReader.BaseStream.Length;
-        }
-
-        public static Color From32Bit(UInt32 value)
-        {
-            byte b = (byte)(((value & 0x000000FF) ));
-            byte g = (byte)(((value & 0x0000FFFF) >> 8));
-            byte r = (byte)(((value & 0x00FFFFFF) >> 16));
-            return Color.FromArgb(255, r, g, b);
-        }
-
-        public static Color From16Bit(UInt16 value)
-        {
-            byte r = (byte)(((value & 0x0FFF) >> 8) * 17);
-            byte g = (byte)(((value & 0x00FF) >> 4) * 17);
-            byte b = (byte)(((value & 0x000F)) * 17);
-            return Color.FromArgb(255, r, g, b);
-        }
-
-
-        #endregion Public Methods
-
+        #endregion Private Methods
     }
 }

@@ -7,13 +7,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Common.Images.Readers.LBM;
+using OpenBreed.Common.Images.Readers.IFF;
 
 namespace OpenBreed.Common.Formats
 {
-    public class LBMImageFormat : IDataFormatType
+    public class IFFImageFormat : IDataFormatType
     {
-        public LBMImageFormat()
+        public IFFImageFormat()
         {
         }
 

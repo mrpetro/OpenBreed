@@ -64,7 +64,7 @@
     <Compile Include="Data\SpriteSetsDataProvider.cs" />
     <Compile Include="Data\TextsDataProvider.cs" />
     <Compile Include="Data\TileSetsDataProvider.cs" />
-    <Compile Include="Formats\LBMImageFormat.cs" />
+    <Compile Include="Formats\IFFImageFormat.cs" />
     <Compile Include="Formats\DataFormat.cs" />
     <Compile Include="Formats\FormatParameter.cs" />
     <Compile Include="Formats\IFormatEntry.cs" />
@@ -73,8 +73,8 @@
     <Compile Include="IDatabase.cs" />
     <Compile Include="Images\IImageEntry.cs" />
     <Compile Include="Data\MapsDataProvider.cs" />
-    <Compile Include="Images\Readers\LBM\Helpers\BMHDBlock.cs" />
-    <Compile Include="Images\Readers\LBM\LBMImageReader.cs" />
+    <Compile Include="Images\Readers\IFF\Helpers\BMHDBlock.cs" />
+    <Compile Include="Images\Readers\IFF\IFFImageReader.cs" />
     <Compile Include="Maps\IMapDataBlock.cs" />
     <Compile Include="Maps\IMapEntry.cs" />
     <Compile Include="Maps\Blocks\MapBodyBlock.cs" />

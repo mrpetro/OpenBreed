@@ -1112,42 +1112,42 @@
           </Format>
         </EPFArchiveFileAsset>
         <EPFArchiveFileAsset Id="Assets.EPSLOGO1.LBM" EntryName="EPSLOGO1.LBM" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf">
-          <Format Name="LBM_IMAGE">
+          <Format Name="IFF_IMAGE">
             <Parameters/>
           </Format>
         </EPFArchiveFileAsset>
         <EPFArchiveFileAsset Id="Assets.EPSLOGO2.LBM" EntryName="EPSLOGO2.LBM" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf">
-          <Format Name="LBM_IMAGE">
+          <Format Name="IFF_IMAGE">
             <Parameters/>
           </Format>
         </EPFArchiveFileAsset>
         <EPFArchiveFileAsset Id="Assets.OUTRO.LBM" EntryName="OUTRO.LBM" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf">
-          <Format Name="LBM_IMAGE">
+          <Format Name="IFF_IMAGE">
             <Parameters/>
           </Format>
         </EPFArchiveFileAsset>
         <EPFArchiveFileAsset Id="Assets.T17LOGO.LBM" EntryName="T17LOGO.LBM" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf">
-          <Format Name="LBM_IMAGE">
+          <Format Name="IFF_IMAGE">
             <Parameters/>
           </Format>
         </EPFArchiveFileAsset>
         <EPFArchiveFileAsset Id="Assets.COMPUTER.LBM" EntryName="COMPUTER.LBM" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf">
-          <Format Name="LBM_IMAGE">
+          <Format Name="IFF_IMAGE">
             <Parameters/>
           </Format>
         </EPFArchiveFileAsset>
         <EPFArchiveFileAsset Id="Assets.IPC.LBM" EntryName="IPC.LBM" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf">
-          <Format Name="LBM_IMAGE">
+          <Format Name="IFF_IMAGE">
             <Parameters/>
           </Format>
         </EPFArchiveFileAsset>
         <EPFArchiveFileAsset Id="Assets.SMARTPIC.LBM" EntryName="SMARTPIC.LBM" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf">
-          <Format Name="LBM_IMAGE">
+          <Format Name="IFF_IMAGE">
             <Parameters/>
           </Format>
         </EPFArchiveFileAsset>
         <EPFArchiveFileAsset Id="Assets.TITLEBAC.LBM" EntryName="TITLEBAC.LBM" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf">
-          <Format Name="LBM_IMAGE">
+          <Format Name="IFF_IMAGE">
             <Parameters/>
           </Format>
         </EPFArchiveFileAsset>
