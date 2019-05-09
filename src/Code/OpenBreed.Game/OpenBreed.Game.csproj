@@ -74,6 +74,7 @@
     <Compile Include="Animation\Components\CreatureAnimator.cs" />
     <Compile Include="Animation\Components\IAnimationComponent.cs" />
     <Compile Include="Common\Components\IShapeComponent.cs" />
+    <Compile Include="Common\Components\DynamicPosition.cs" />
     <Compile Include="Common\Components\Position.cs" />
     <Compile Include="Common\Components\Direction.cs" />
     <Compile Include="Common\Components\Shapes\AxisAlignedBox.cs" />

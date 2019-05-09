@@ -23,7 +23,7 @@ namespace OpenBreed.Game.Entities
         {
             this.position = builder.position;
 
-            var position = new Position(builder.position);
+            var position = new DynamicPosition(builder.position);
             var direction = new Direction(builder.direction);
             Components.Add(position);
             Components.Add(direction);

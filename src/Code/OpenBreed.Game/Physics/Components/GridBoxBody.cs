@@ -43,8 +43,8 @@ namespace OpenBreed.Game.Physics.Components
 
         public void GetGridIndices(out int x, out int y)
         {
-            x = (int)(position.X / size);
-            y = (int)(position.Y / size);
+            x = (int)(position.Current.X / size);
+            y = (int)(position.Current.Y / size);
         }
 
         public void Initialize(IEntity entity)
@@ -53,10 +53,10 @@ namespace OpenBreed.Game.Physics.Components
 
             Aabb = new Box2
             {
-                Left = position.X,
-                Bottom = position.Y,
-                Right = position.X + size,
-                Top = position.Y + size,
+                Left = position.Current.X,
+                Bottom = position.Current.Y,
+                Right = position.Current.X + size,
+                Top = position.Current.Y + size,
             };
         }
 

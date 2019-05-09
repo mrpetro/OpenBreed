@@ -56,7 +56,7 @@ namespace OpenBreed.Game.Rendering.Components
         {
             GL.PushMatrix();
 
-            GL.Translate((int)position.X, (int)position.Y, 0.0f);
+            GL.Translate((int)position.Current.X, (int)position.Current.Y, 0.0f);
             atlas.Draw(viewport, ImageId);
 
             GL.PopMatrix();
