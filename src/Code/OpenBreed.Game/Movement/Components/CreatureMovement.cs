@@ -16,12 +16,15 @@ namespace OpenBreed.Game.Movement.Components
 
     public class CreatureMovement : IMovementComponent
     {
+        private float SPEED = 4.0f;
+        private float MAXSPEED = 16.0f;
+
+
         #region Private Fields
 
-        private int x;
-        private int y;
+        private Vector2 thrust;
 
-        private Position position;
+        private DynamicPosition position;
         private Direction direction;
 
         #endregion Private Fields
@@ -49,7 +52,7 @@ namespace OpenBreed.Game.Movement.Components
 
         public void Initialize(IEntity entity)
         {
-            position = entity.Components.OfType<Position>().First();
+            position = entity.Components.OfType<DynamicPosition>().First();
             direction = entity.Components.OfType<Direction>().First();
         }
 
@@ -58,38 +61,37 @@ namespace OpenBreed.Game.Movement.Components
             switch (direction)
             {
                 case MovementDirection.Right:
-                    x = 1;
+                    thrust.X += SPEED;
                     break;
 
                 case MovementDirection.Up:
-                    y = 1;
+                    thrust.Y += SPEED;
                     break;
 
                 case MovementDirection.Left:
-                    x = -1;
+                    thrust.X -= SPEED;
                     break;
 
                 case MovementDirection.Down:
-                    y = -1;
+                    thrust.Y -= SPEED;
                     break;
             }
         }
 
         public void Update(float dt)
         {
-            var step = new Vector2(dt * x * 64.0f, dt * y * 64.0f);
+            direction.Current = thrust;
 
-            direction.X = x;
-            direction.Y = y;
+            var newSpeed = position.Velocity;
+            newSpeed += thrust;// * dt;
 
-            position.X += step.X;
-            position.Y += step.Y;
+            newSpeed.X = MathHelper.Clamp(newSpeed.X, -MAXSPEED, MAXSPEED);
+            newSpeed.Y = MathHelper.Clamp(newSpeed.Y, -MAXSPEED, MAXSPEED);
 
-            position.X = position.X;
-            position.Y = position.Y;
+            position.Current = position.Old;
+            position.Current += newSpeed;
 
-            x = 0;
-            y = 0;
+            thrust = Vector2.Zero;
         }
 
         #endregion Public Methods

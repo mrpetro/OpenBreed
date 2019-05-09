@@ -4,39 +4,64 @@ using System;
 
 namespace OpenBreed.Game.Common.Components
 {
+    /// <summary>
+    /// Direction entity component class that can be used to store entity current direction information
+    /// Example: Actor is facing particular direction when standing
+    /// </summary>
     public class Direction : IEntityComponent
     {
         #region Public Constructors
 
+        /// <summary>
+        /// Constructor with passed initial direction value
+        /// </summary>
+        /// <param name="value">Initial value vector</param>
         public Direction(Vector2 value)
         {
-            X = value.X;
-            Y = value.Y;
+            Current = value;
         }
 
+        /// <summary>
+        /// Constructor with passed initial direction values
+        /// </summary>
+        /// <param name="x">Initial x value</param>
+        /// <param name="y">Initial y value</param>
         public Direction(float x, float y)
         {
-            X = x;
-            Y = y;
+            Current = new Vector2(x, y);
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public float X { get; set; }
-        public float Y { get; set; }
+        /// <summary>
+        /// Current direction value
+        /// </summary>
+        public Vector2 Current { get; set; }
+
+        /// <summary>
+        /// System type that this component is part of
+        /// </summary>
         public Type SystemType { get { return null; } }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void Deinitialize(IEntity entity)
+        /// <summary>
+        /// Initialize this component
+        /// </summary>
+        /// <param name="entity">Entity which this component belongs to</param>
+        public void Initialize(IEntity entity)
         {
         }
 
-        public void Initialize(IEntity entity)
+        /// <summary>
+        /// Deinitialize this component
+        /// </summary>
+        /// <param name="entity">Entity which this component belongs to</param>
+        public void Deinitialize(IEntity entity)
         {
         }
 

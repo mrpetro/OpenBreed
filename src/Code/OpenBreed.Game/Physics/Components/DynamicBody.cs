@@ -45,14 +45,13 @@ namespace OpenBreed.Game.Physics.Components
         #region Public Properties
 
         public IShapeComponent Shape { get; private set; }
-        public Position Position { get; private set; }
-        public Vector2 OldPosition { get; private set; }
+        public DynamicPosition Position { get; private set; }
 
         public Box2 Aabb
         {
             get
             {
-                return Shape.Aabb.Translated(new Vector2(Position.X, Position.Y));
+                return Shape.Aabb.Translated(Position.Current);
             }
         }
 
@@ -69,10 +68,8 @@ namespace OpenBreed.Game.Physics.Components
 
         public void Initialize(IEntity entity)
         {
-            Position = entity.Components.OfType<Position>().First();
+            Position = entity.Components.OfType<DynamicPosition>().First();
             Shape = entity.Components.OfType<IShapeComponent>().First();
-
-            OldPosition = new Vector2(Position.X, Position.Y);
         }
 
         public void CollideVsStatic(IStaticBody staticBody)
@@ -160,8 +157,8 @@ namespace OpenBreed.Game.Physics.Components
             var d = DRAG;
             var g = 0.0f;
 
-            var p = Position;
-            var o = OldPosition;
+            var p = Position.Current;
+            var o = Position.Old;
 
             float px, py;
 
@@ -171,7 +168,7 @@ namespace OpenBreed.Game.Physics.Components
             px = p.X;
             py = p.Y;
 
-            OldPosition = new Vector2(px, py);
+            Position.Old = new Vector2(px, py);
 
             //integrate	
             p.X += (d * px) - (d * ox);
@@ -180,8 +177,8 @@ namespace OpenBreed.Game.Physics.Components
 
         private void ReportVsStatic(Vector2 projection, Vector2 normal, IStaticBody staticBody)
         {
-            var p = Position;
-            var o = this.OldPosition;
+            var p = Position.Current;
+            var o = Position.Old;
 
             //calc velocity
             var vx = p.X - o.X;
@@ -217,12 +214,12 @@ namespace OpenBreed.Game.Physics.Components
 
             }
 
-            p.X += projection.X;//project object out of collision
-            p.Y += projection.Y;
 
-            o.X += projection.X + bx + fx;//apply bounce+friction impulses which alter velocity
-            o.Y += projection.Y + by + fy;
+            Position.Current += projection;
 
+            Position.Old += projection;
+            Position.Old += new Vector2(bx, by);
+            Position.Old += new Vector2(fx, fy);
         }
 
         public void CollideVsDynamic(IDynamicBody dynamicBody)

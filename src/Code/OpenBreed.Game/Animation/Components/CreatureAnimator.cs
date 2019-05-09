@@ -25,21 +25,23 @@ namespace OpenBreed.Game.Animation.Components
 
         public void Animate(float dt)
         {
-            if (direction.X > 0 && direction.Y == 0)
+            var dir = this.direction.Current;
+
+            if (dir.X > 0 && dir.Y == 0)
                 sprite.ImageId = 0;
-            else if (direction.X > 0 && direction.Y > 0)
+            else if (dir.X > 0 && dir.Y > 0)
                 sprite.ImageId = 7;
-            else if (direction.X == 0 && direction.Y > 0)
+            else if (dir.X == 0 && dir.Y > 0)
                 sprite.ImageId = 6;
-            else if (direction.X < 0 && direction.Y > 0)
+            else if (dir.X < 0 && dir.Y > 0)
                 sprite.ImageId = 5;
-            else if (direction.X < 0 && direction.Y == 0)
+            else if (dir.X < 0 && dir.Y == 0)
                 sprite.ImageId = 4;
-            else if (direction.X < 0 && direction.Y < 0)
+            else if (dir.X < 0 && dir.Y < 0)
                 sprite.ImageId = 3;
-            else if (direction.X == 0 && direction.Y < 0)
+            else if (dir.X == 0 && dir.Y < 0)
                 sprite.ImageId = 2;
-            else if (direction.X > 0 && direction.Y < 0)
+            else if (dir.X > 0 && dir.Y < 0)
                 sprite.ImageId = 1;
         }
 
