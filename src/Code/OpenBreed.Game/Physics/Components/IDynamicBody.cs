@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Game.Physics.Components
 {
+    /// <summary>
+    /// Physical body component interface which is used in entites that are moving in world coordinates
+    /// </summary>
     public interface IDynamicBody : IPhysicsComponent
     {
         /// <summary>

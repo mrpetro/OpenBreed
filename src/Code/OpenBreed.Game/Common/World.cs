@@ -16,9 +16,21 @@ using System.Linq;
 
 namespace OpenBreed.Game
 {
+    /// <summary>
+    /// World class which contains systems and entities
+    /// </summary>
     public class World
     {
         #region Private Fields
+
+        private static byte[] map = new byte[] {
+            3,3,3,3,3,3,3,3,3,3,
+            0,0,0,0,0,0,0,0,1,3,
+            0,0,0,0,0,0,0,0,1,3,
+            3,0,0,1,0,1,0,0,4,3,
+            3,0,0,2,2,2,0,0,2,3,
+            3,3,3,3,3,3,3,3,3,3
+        };
 
         private readonly List<IWorldEntity> entities = new List<IWorldEntity>();
         private readonly List<IWorldEntity> toAdd = new List<IWorldEntity>();
@@ -242,21 +254,22 @@ namespace OpenBreed.Game
 
             var rnd = new Random();
 
-            blockBuilder.SetIndices(0, 0);
-            blockBuilder.SetTileId(0);
-            AddEntity((WorldBlock)blockBuilder.Build());
+            var ymax = map.Length / 10;
 
-            blockBuilder.SetIndices(4, 0);
-            blockBuilder.SetTileId(1);
-            AddEntity((WorldBlock)blockBuilder.Build());
+            for (int x = 0; x < 10; x ++)
+            {
+                for (int y = 0; y < ymax; y++)
+                {
+                    var v = map[x + y * 10];
 
-            blockBuilder.SetIndices(4, 4);
-            blockBuilder.SetTileId(2);
-            AddEntity((WorldBlock)blockBuilder.Build());
-
-            blockBuilder.SetIndices(0, 4);
-            blockBuilder.SetTileId(3);
-            AddEntity((WorldBlock)blockBuilder.Build());
+                    if (v > 0)
+                    {
+                        blockBuilder.SetIndices(x + 5, y + 5);
+                        blockBuilder.SetTileId(v);
+                        AddEntity((WorldBlock)blockBuilder.Build());
+                    }
+                }
+            }
         }
 
         #endregion Private Methods
