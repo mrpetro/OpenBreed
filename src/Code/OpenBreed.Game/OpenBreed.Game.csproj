@@ -77,14 +77,14 @@
     <Compile Include="Common\Components\DynamicPosition.cs" />
     <Compile Include="Common\Components\Position.cs" />
     <Compile Include="Common\Components\Direction.cs" />
-    <Compile Include="Common\Components\Shapes\AxisAlignedBox.cs" />
+    <Compile Include="Common\Components\Shapes\AxisAlignedBoxShape.cs" />
     <Compile Include="Common\WorldSystem.cs" />
     <Compile Include="Common\IWorldSystem.cs" />
     <Compile Include="Common\Components\Transformation.cs" />
     <Compile Include="Control\Components\MovementController.cs" />
     <Compile Include="Control\ControlSystem.cs" />
     <Compile Include="Core.cs" />
-    <Compile Include="Entities\Builders\WorldCameraBuilder.cs" />
+    <Compile Include="Entities\Builders\CameraBuilder.cs" />
     <Compile Include="Common\Components\ITransformComponent.cs" />
     <Compile Include="Entities\IWorldEntity.cs" />
     <Compile Include="Entities\WorldActor.cs" />
@@ -107,6 +107,7 @@
     <Compile Include="Common\Components\IEntityComponent.cs" />
     <Compile Include="Rendering\Components\IRenderComponent.cs" />
     <Compile Include="Rendering\Helpers\SpriteAtlas.cs" />
+    <Compile Include="Scripting\LoadTest.cs" />
     <Compile Include="Sounds\Components\ISoundComponent.cs" />
     <Compile Include="Entities\IEntityBuilder.cs" />
     <Compile Include="Entities\Builders\WorldBlockBuilder.cs" />

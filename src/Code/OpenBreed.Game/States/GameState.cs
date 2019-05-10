@@ -13,15 +13,40 @@ namespace OpenBreed.Game.States
 {
     public class GameState : BaseState
     {
+        private static byte[] mapA = new byte[] {
+            3,3,3,3,3,3,3,3,3,3,
+            0,0,0,0,0,0,0,0,1,3,
+            0,0,0,0,0,0,0,0,1,3,
+            3,0,0,1,0,1,0,0,4,3,
+            3,0,0,2,2,2,0,0,2,3,
+            3,3,3,3,3,3,3,3,3,3
+        };
+
+        private static byte[] mapB = new byte[] {
+            3,3,0,0,0,3,3,3,3,3,
+            0,0,0,0,0,0,0,0,1,3,
+            7,0,0,0,0,0,0,0,1,3,
+            0,0,0,1,0,1,0,0,4,3,
+            0,0,0,2,2,2,0,0,2,3,
+            0,3,3,0,0,0,3,3,3,3
+        };
+
+
         #region Public Fields
 
         public const string Id = "GAME";
         public Texture TestTexture;
-        public World World;
+        public World WorldA;
+        public World WorldB;
 
         #endregion Public Fields
 
         #region Private Fields
+
+        private Texture tileTex;
+        private Texture spriteTex;
+        private TileAtlas tileAtlas;
+        private SpriteAtlas spriteAtlas;
 
         private readonly List<Viewport> viewports = new List<Viewport>();
         private int px;
@@ -38,21 +63,27 @@ namespace OpenBreed.Game.States
             TextureMan = new TextureMan();
             EntityMan = new EntityMan();
 
-            World = new World(this);
+            WorldA = new World(this);
+            WorldB = new World(this);
+            var cameraBuilder = new CameraBuilder(this);
 
-            var cameraBuilder = new WorldCameraBuilder(this);
+            //Resources
+            tileTex = TextureMan.Load(@"Content\TileAtlasTest32bit.bmp");
+            spriteTex = TextureMan.Load(@"Content\ArrowSpriteSet.png");
+            tileAtlas = new TileAtlas(tileTex, 16, 4, 4);
+            spriteAtlas = new SpriteAtlas(spriteTex, 32, 8, 1);
 
             cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
             Camera1 = (Camera)cameraBuilder.Build();
-            World.AddEntity(Camera1);
+            WorldA.AddEntity(Camera1);
 
-            cameraBuilder.SetPosition(new Vector2(0, 0));
+            cameraBuilder.SetPosition(new Vector2(64, 0));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
             Camera2 = (Camera)cameraBuilder.Build();
-            World.AddEntity(Camera2);
+            WorldB.AddEntity(Camera2);
 
             viewportLeft = new Viewport(50, 50, 540, 380);
             viewportLeft.Camera = Camera1;
@@ -90,6 +121,73 @@ namespace OpenBreed.Game.States
             viewports.Add(viewport);
         }
 
+        private void InitializeWorldA()
+        {
+            var blockBuilder = new WorldBlockBuilder(this);
+            blockBuilder.SetTileAtlas(tileAtlas);
+
+            var actorBuilder = new WorldActorBuilder(this);
+            actorBuilder.SetSpriteAtlas(spriteAtlas);
+            actorBuilder.SetPosition(new OpenTK.Vector2(20, 20));
+            actorBuilder.SetDirection(new OpenTK.Vector2(1, 0));
+
+            actorBuilder.SetController(new Control.Components.MovementController());
+            WorldA.AddEntity((WorldActor)actorBuilder.Build());
+
+            var rnd = new Random();
+
+            var ymax = mapA.Length / 10;
+
+            for (int x = 0; x < 10; x++)
+            {
+                for (int y = 0; y < ymax; y++)
+                {
+                    var v = mapA[x + y * 10];
+
+                    if (v > 0)
+                    {
+                        blockBuilder.SetIndices(x + 5, y + 5);
+                        blockBuilder.SetTileId(v);
+                        WorldA.AddEntity((WorldBlock)blockBuilder.Build());
+                    }
+                }
+            }
+        }
+
+        private void InitializeWorldB()
+        {
+            var blockBuilder = new WorldBlockBuilder(this);
+            blockBuilder.SetTileAtlas(tileAtlas);
+
+            var actorBuilder = new WorldActorBuilder(this);
+            actorBuilder.SetSpriteAtlas(spriteAtlas);
+            actorBuilder.SetPosition(new OpenTK.Vector2(50, 20));
+            actorBuilder.SetDirection(new OpenTK.Vector2(1, 0));
+
+            actorBuilder.SetController(new Control.Components.MovementController());
+            WorldB.AddEntity((WorldActor)actorBuilder.Build());
+
+            var rnd = new Random();
+
+            var ymax = mapB.Length / 10;
+
+            for (int x = 0; x < 10; x++)
+            {
+                for (int y = 0; y < ymax; y++)
+                {
+                    var v = mapB[x + y * 10];
+
+                    if (v > 0)
+                    {
+                        blockBuilder.SetIndices(x + 5, y + 5);
+                        blockBuilder.SetTileId(v);
+                        WorldB.AddEntity((WorldBlock)blockBuilder.Build());
+                    }
+                }
+            }
+        }
+
+
         public override void OnLoad()
         {
             base.OnLoad();
@@ -99,7 +197,12 @@ namespace OpenBreed.Game.States
 
             TestTexture = TextureMan.Load(@"Content\TexTest32bit.bmp");
 
-            World.Initialize();
+            WorldA.Initialize();
+            WorldB.Initialize();
+
+            InitializeWorldA();
+            InitializeWorldB();
+
 
             //TestTexture = TextureMan.Load(@"Content\TexTest24bit.bmp");
             //TestTexture = TextureMan.Load(@"Content\TexTest8bitIndexed.bmp");
@@ -156,12 +259,14 @@ namespace OpenBreed.Game.States
         {
             base.OnUpdate(e);
 
-            World.Update((float)e.Time);
+            WorldA.Update((float)e.Time);
+            WorldB.Update((float)e.Time);
         }
 
         public override void ProcessInputs(FrameEventArgs e)
         {
-            World.ProcessInputs(e.Time);
+            WorldA.ProcessInputs(e.Time);
+            WorldB.ProcessInputs(e.Time);
 
             var keyState = Keyboard.GetState();
             if (keyState.IsKeyDown(Key.Escape))

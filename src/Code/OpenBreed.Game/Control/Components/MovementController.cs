@@ -43,15 +43,17 @@ namespace OpenBreed.Game.Control.Components
 
         public void ProcessInputs(KeyboardState keyState)
         {
+            if (keyState[Key.Up])
+                movement.Move(MovementDirection.Up);
+            else if (keyState[Key.Down])
+                movement.Move(MovementDirection.Down);
+
             if (keyState[Key.Left])
                 movement.Move(MovementDirection.Left);
             else if (keyState[Key.Right])
                 movement.Move(MovementDirection.Right);
 
-            if (keyState[Key.Up])
-                movement.Move(MovementDirection.Up);
-            else if (keyState[Key.Down])
-                movement.Move(MovementDirection.Down);
+
         }
 
         #endregion Public Methods

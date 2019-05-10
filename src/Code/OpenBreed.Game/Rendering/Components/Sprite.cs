@@ -22,7 +22,7 @@ namespace OpenBreed.Game.Rendering.Components
 
         private SpriteAtlas atlas;
         private Position position;
-        private AxisAlignedBox shape;
+        private AxisAlignedBoxShape shape;
 
         #endregion Private Fields
 
@@ -69,7 +69,7 @@ namespace OpenBreed.Game.Rendering.Components
         public void Initialize(IEntity entity)
         {
             position = entity.Components.OfType<Position>().First();
-            shape = entity.Components.OfType<AxisAlignedBox>().First();
+            shape = entity.Components.OfType<AxisAlignedBoxShape>().First();
         }
 
         /// <summary>

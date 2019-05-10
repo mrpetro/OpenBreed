@@ -180,31 +180,23 @@ namespace OpenBreed.Game.Physics.Components
             var p = Position.Current;
             var o = Position.Old;
 
-            //calc velocity
-            var vx = p.X - o.X;
-            var vy = p.Y - o.Y;
-
             //find component of velocity parallel to collision normal
-            var dp = (vx * normal.X + vy * normal.Y);
-            var nx = dp * normal.X;//project velocity onto collision normal
-
-            var ny = dp * normal.Y;//nx,ny is normal velocity
-
-            var tx = vx - nx;//px,py is tangent velocity
-            var ty = vy - ny;
+            var dp = Vector2.Dot(Position.Velocity, normal);
+            var n = Vector2.Multiply(normal, dp);
+            var t = Vector2.Subtract(Position.Velocity, n); 
 
             //we only want to apply collision response forces if the object is travelling into, and not out of, the collision
             float b, bx, by, f, fx, fy;
             if (dp < 0)
             {
                 f = FRICTION;
-                fx = tx * f;
-                fy = ty * f;
+                fx = t.X * f;
+                fy = t.Y * f;
 
                 b = 1 + BOUNCE;//this bounce constant should be elsewhere, i.e inside the object/tile/etc..
 
-                bx = (nx * b);
-                by = (ny * b);
+                bx = (n.X * b);
+                by = (n.Y * b);
 
             }
             else

@@ -23,14 +23,7 @@ namespace OpenBreed.Game
     {
         #region Private Fields
 
-        private static byte[] map = new byte[] {
-            3,3,3,3,3,3,3,3,3,3,
-            0,0,0,0,0,0,0,0,1,3,
-            0,0,0,0,0,0,0,0,1,3,
-            3,0,0,1,0,1,0,0,4,3,
-            3,0,0,2,2,2,0,0,2,3,
-            3,3,3,3,3,3,3,3,3,3
-        };
+
 
         private readonly List<IWorldEntity> entities = new List<IWorldEntity>();
         private readonly List<IWorldEntity> toAdd = new List<IWorldEntity>();
@@ -57,8 +50,6 @@ namespace OpenBreed.Game
             systems.Add(PhysicsSystem);
             systems.Add(AnimationSystem);
             systems.Add(RenderSystem);
-
-            GenerateMap();
         }
 
         #endregion Public Constructors
@@ -109,7 +100,7 @@ namespace OpenBreed.Game
 
         public void Initialize()
         {
-            InitializeWorlds();
+            InitializeSystems();
             Cleanup();
         }
 
@@ -194,13 +185,13 @@ namespace OpenBreed.Game
 
         #region Private Methods
 
-        private void InitializeWorlds()
+        private void InitializeSystems()
         {
             for (int i = 0; i < systems.Count; i++)
                 systems[i].Initialize(this);
         }
 
-        private void DeinitializeWorlds()
+        private void DeinitializeSystems()
         {
             for (int i = 0; i < systems.Count; i++)
                 systems[i].Deinitialize(this);
@@ -227,49 +218,6 @@ namespace OpenBreed.Game
                 throw new InvalidOperationException($"System {component.SystemType} not registered.");
 
             foundSystem.RemoveComponent(component);
-        }
-
-        private void GenerateMap()
-        {
-            var tileTex = Core.TextureMan.Load(@"Content\TileAtlasTest32bit.bmp");
-
-            var spriteTex = Core.TextureMan.Load(@"Content\ArrowSpriteSet.png");
-
-            var tileAtlas = new TileAtlas(tileTex, 16, 4, 4);
-            var spriteAtlas = new SpriteAtlas(spriteTex, 32, 8, 1);
-
-            int width = 64;
-            int height = 64;
-
-            var blockBuilder = new WorldBlockBuilder(Core);
-            blockBuilder.SetTileAtlas(tileAtlas);
-
-            var actorBuilder = new WorldActorBuilder(Core);
-            actorBuilder.SetSpriteAtlas(spriteAtlas);
-            actorBuilder.SetPosition(new OpenTK.Vector2(20, 20));
-            actorBuilder.SetDirection(new OpenTK.Vector2(1, 0));
-
-            actorBuilder.SetController(new Control.Components.MovementController());
-            AddEntity((WorldActor)actorBuilder.Build());
-
-            var rnd = new Random();
-
-            var ymax = map.Length / 10;
-
-            for (int x = 0; x < 10; x ++)
-            {
-                for (int y = 0; y < ymax; y++)
-                {
-                    var v = map[x + y * 10];
-
-                    if (v > 0)
-                    {
-                        blockBuilder.SetIndices(x + 5, y + 5);
-                        blockBuilder.SetTileId(v);
-                        AddEntity((WorldBlock)blockBuilder.Build());
-                    }
-                }
-            }
         }
 
         #endregion Private Methods

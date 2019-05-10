@@ -4,7 +4,7 @@ using OpenTK;
 
 namespace OpenBreed.Game.Entities.Builders
 {
-    public class WorldCameraBuilder : WorldEntityBuilder
+    public class CameraBuilder : WorldEntityBuilder
     {
         #region Internal Fields
 
@@ -16,7 +16,7 @@ namespace OpenBreed.Game.Entities.Builders
 
         #region Public Constructors
 
-        public WorldCameraBuilder(GameState core) : base(core)
+        public CameraBuilder(GameState core) : base(core)
         {
         }
 

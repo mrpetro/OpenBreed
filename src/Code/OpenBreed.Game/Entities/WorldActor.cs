@@ -31,7 +31,7 @@ namespace OpenBreed.Game.Entities
             Components.Add(new SpriteDebug());
             Components.Add(new CreatureMovement());
             Components.Add(new CreatureAnimator());
-            Components.Add(new AxisAlignedBox(32, 32));
+            Components.Add(new AxisAlignedBoxShape(32, 32));
             Components.Add(new DynamicBody());
 
             if (builder.controller != null)

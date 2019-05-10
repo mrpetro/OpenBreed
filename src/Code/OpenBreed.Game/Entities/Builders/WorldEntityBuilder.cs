@@ -1,5 +1,7 @@
-﻿using OpenBreed.Game.States;
+﻿using OpenBreed.Game.Common.Components;
+using OpenBreed.Game.States;
 using System;
+using System.Collections.Generic;
 
 namespace OpenBreed.Game.Entities.Builders
 {

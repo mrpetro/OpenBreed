@@ -1,41 +1,29 @@
 ﻿using OpenBreed.Game.Entities;
-using OpenBreed.Game.Physics.Helpers;
 using OpenTK;
 using System;
 
 namespace OpenBreed.Game.Common.Components.Shapes
 {
     /// <summary>
-    /// Box which is always axis aligned (can't be oriented)
+    /// Box shape which is always axis aligned (can't be oriented)
     /// </summary>
-    public class AxisAlignedBox : IShapeComponent
+    public class AxisAlignedBoxShape : IShapeComponent
     {
         #region Public Constructors
 
-        public AxisAlignedBox(float width, float height)
+        public AxisAlignedBoxShape(float width, float height)
         {
             Width = width;
             Height = height;
-        }
 
-        public Box2 Aabb
-        {
-            get
-            {
-                return new Box2
-                {
-                    Left = 0,
-                    Bottom = 0,
-                    Right = Width,
-                    Top = Height,
-                };
-            }
+            Aabb = new Box2(0, Height, Width, 0);
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
+        public Box2 Aabb { get; }
         public float Width { get; }
         public float Height { get; }
 

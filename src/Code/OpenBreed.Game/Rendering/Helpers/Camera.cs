@@ -17,7 +17,7 @@ namespace OpenBreed.Game.Rendering.Helpers
 
         public Transformation Transform { get; }
 
-        public Camera(WorldCameraBuilder builder) : base(builder)
+        public Camera(CameraBuilder builder) : base(builder)
         {
             Position = builder.position;
             Rotation = builder.rotation;

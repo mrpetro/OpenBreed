@@ -11,6 +11,7 @@ using OpenBreed.Game.States;
 using OpenBreed.Game.Rendering;
 using System.Drawing;
 using System.Reflection;
+using OpenBreed.Game.Scripting;
 
 namespace OpenBreed.Game
 {
@@ -37,6 +38,10 @@ namespace OpenBreed.Game
         [STAThread]
         static void Main(string[] args)
         {
+            //var luaTest = new LoadTest();
+
+            //luaTest.Example();
+
             var program = new Program();
             program.Run(30.0);
         }
