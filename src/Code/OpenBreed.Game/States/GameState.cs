@@ -9,10 +9,8 @@ using OpenBreed.Game.Components;
 using OpenBreed.Game.Entities;
 using OpenBreed.Game.Entities.Builders;
 using OpenTK;
-using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 
 namespace OpenBreed.Game.States
@@ -67,6 +65,12 @@ namespace OpenBreed.Game.States
         {
             Core.AddViewport(viewportLeft);
             Core.AddViewport(viewportRight);
+        }
+
+        protected override void OnLeave()
+        {
+            Core.RemoveViewport(viewportLeft);
+            Core.RemoveViewport(viewportRight);
         }
 
         public GameState(ICore core)
@@ -130,42 +134,16 @@ namespace OpenBreed.Game.States
         {
             base.OnLoad();
 
-            WorldA.Initialize();
-            WorldB.Initialize();
+            Core.AddWorld(WorldA);
+            Core.AddWorld(WorldB);
 
             InitializeWorldA();
             InitializeWorldB();
-
-            //TestTexture = TextureMan.Load(@"Content\TexTest24bit.bmp");
-            //TestTexture = TextureMan.Load(@"Content\TexTest8bitIndexed.bmp");
-            //TestTexture = TextureMan.Load(@"Content\TexTest4bitIndexed.bmp");
-
-            //GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.One);                  // Select The Type Of Blending
-
-            //GL.Enable(EnableCap.StencilTest);
-            GL.ClearStencil(0x0);
-            GL.StencilMask(0xFFFFFFFF);
-            GL.ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-            //GL.Enable(EnableCap.Blend);
-            //GL.BlendFunc(BlendingFactor.SrcAlpha,BlendingFactor.OneMinusSrcAlpha);
-            GL.Enable(EnableCap.DepthTest);
-        }
-
-        public override void OnRenderFrame(FrameEventArgs e)
-        {
-
         }
 
         public override void OnResize(Rectangle clientRectangle)
         {
             base.OnResize(clientRectangle);
-
-            GL.LoadIdentity();
-            GL.Viewport(0, 0, clientRectangle.Width, clientRectangle.Height);
-            GL.MatrixMode(MatrixMode.Modelview);
-            GL.LoadIdentity();
-
-            GL.Ortho(0, clientRectangle.Width, 0, clientRectangle.Height, 0, 1); // Origin in lower-left corner
 
             viewportLeft.X = clientRectangle.X + 25;
             viewportLeft.Y = clientRectangle.Y + 25;
@@ -178,19 +156,8 @@ namespace OpenBreed.Game.States
             viewportRight.Height = clientRectangle.Height - 50;
         }
 
-        public override void OnUpdate(FrameEventArgs e)
-        {
-            base.OnUpdate(e);
-
-            WorldA.Update((float)e.Time);
-            WorldB.Update((float)e.Time);
-        }
-
         public override void ProcessInputs(FrameEventArgs e)
         {
-            WorldA.ProcessInputs((float)e.Time);
-            WorldB.ProcessInputs((float)e.Time);
-
             var keyState = Keyboard.GetState();
             if (keyState.IsKeyDown(Key.Escape))
                 ChangeState(MenuState.Id);

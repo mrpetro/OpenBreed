@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Common.Components;
+﻿using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Systems.Rendering.Helpers;
 
 namespace OpenBreed.Core.Systems.Rendering.Components

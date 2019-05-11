@@ -1,6 +1,6 @@
 ﻿using OpenTK;
 
-namespace OpenBreed.Core.Common.Components
+namespace OpenBreed.Core.Systems.Common.Components
 {
     /// <summary>
     /// Dynamic position entity component class that can be used to store entity current and old position information

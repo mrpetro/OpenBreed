@@ -25,6 +25,11 @@ namespace OpenBreed.Core
         IControlSystem CreateControlSystem();
 
         void AddViewport(IViewport viewport);
+        void RemoveViewport(IViewport viewport);
+
+
+        void AddWorld(World world);
+        void RemoveWorld(World world);
 
         #endregion Public Methods
     }

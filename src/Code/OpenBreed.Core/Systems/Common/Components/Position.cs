@@ -2,31 +2,31 @@
 using OpenTK;
 using System;
 
-namespace OpenBreed.Core.Common.Components
+namespace OpenBreed.Core.Systems.Common.Components
 {
     /// <summary>
-    /// Direction entity component class that can be used to store entity current direction information
-    /// Example: Actor is facing particular direction when standing
+    /// Position entity component class that can be used to store entity current position information
+    /// Example: Actor is standing somewhere in the world at current position
     /// </summary>
-    public class Direction : IEntityComponent
+    public class Position : IEntityComponent
     {
         #region Public Constructors
 
         /// <summary>
-        /// Constructor with passed initial direction value
+        /// Constructor with passed initial position value
         /// </summary>
         /// <param name="value">Initial value vector</param>
-        public Direction(Vector2 value)
+        public Position(Vector2 value)
         {
             Current = value;
         }
 
         /// <summary>
-        /// Constructor with passed initial direction values
+        /// Constructor with passed initial position values
         /// </summary>
         /// <param name="x">Initial x value</param>
         /// <param name="y">Initial y value</param>
-        public Direction(float x, float y)
+        public Position(float x, float y)
         {
             Current = new Vector2(x, y);
         }
@@ -36,7 +36,7 @@ namespace OpenBreed.Core.Common.Components
         #region Public Properties
 
         /// <summary>
-        /// Current direction value
+        /// Current position value
         /// </summary>
         public Vector2 Current { get; set; }
 

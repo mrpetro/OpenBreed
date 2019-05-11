@@ -6,16 +6,15 @@ using OpenBreed.Core.Systems.Control;
 using OpenBreed.Core.Systems.Movement;
 using OpenBreed.Core.Systems.Physics;
 using OpenBreed.Core.Systems.Rendering;
-using OpenBreed.Core.Systems.Rendering.Helpers;
 using OpenBreed.Core.Systems.Sound;
 using OpenBreed.Game.States;
 using OpenTK;
 using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
-using OpenTK.Graphics.OpenGL;
 
 namespace OpenBreed.Game
 {
@@ -24,6 +23,7 @@ namespace OpenBreed.Game
         #region Private Fields
 
         private readonly List<IViewport> viewports = new List<IViewport>();
+        private readonly List<World> worlds = new List<World>();
 
         private string appVersion;
         private Font font;
@@ -61,7 +61,7 @@ namespace OpenBreed.Game
         public void AddViewport(IViewport viewport)
         {
             if (viewports.Contains(viewport))
-                throw new InvalidOperationException("Viewport already added.");
+                throw new InvalidOperationException("World already added.");
 
             viewports.Add(viewport);
         }
@@ -69,6 +69,21 @@ namespace OpenBreed.Game
         public void RemoveViewport(IViewport viewport)
         {
             viewports.Remove(viewport);
+        }
+
+        public void AddWorld(World world)
+        {
+            if (worlds.Contains(world))
+                throw new InvalidOperationException("World already added.");
+
+            worlds.Add(world);
+
+            world.Initialize();
+        }
+
+        public void RemoveWorld(World world)
+        {
+            worlds.Remove(world);
         }
 
         public ISoundSystem CreateSoundSystem()
@@ -111,6 +126,16 @@ namespace OpenBreed.Game
 
             font = new Font("Arial", 12);
 
+            //GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.One);                  // Select The Type Of Blending
+
+            //GL.Enable(EnableCap.StencilTest);
+            GL.ClearStencil(0x0);
+            GL.StencilMask(0xFFFFFFFF);
+            GL.ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+            //GL.Enable(EnableCap.Blend);
+            //GL.BlendFunc(BlendingFactor.SrcAlpha,BlendingFactor.OneMinusSrcAlpha);
+            GL.Enable(EnableCap.DepthTest);
+
             StateMan.OnLoad();
         }
 
@@ -118,14 +143,37 @@ namespace OpenBreed.Game
         {
             base.OnResize(e);
 
+            GL.LoadIdentity();
+            GL.Viewport(0, 0, ClientRectangle.Width, ClientRectangle.Height);
+            GL.MatrixMode(MatrixMode.Modelview);
+            GL.LoadIdentity();
+
+            GL.Ortho(0, ClientRectangle.Width, 0, ClientRectangle.Height, 0, 1); // Origin in lower-left corner
+
             StateMan.OnResize(ClientRectangle);
+        }
+
+        protected void OnProcessInputs(float dt)
+        {
+            for (int i = 0; i < worlds.Count; i++)
+                worlds[i].ProcessInputs(dt);
+        }
+
+        protected void OnUpdate(float dt)
+        {
+            for (int i = 0; i < worlds.Count; i++)
+                worlds[i].Update(dt);
         }
 
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             base.OnUpdateFrame(e);
 
+            OnProcessInputs((float)e.Time);
+
             StateMan.ProcessInputs(e);
+
+            OnUpdate((float)e.Time);
             StateMan.OnUpdate(e);
         }
 

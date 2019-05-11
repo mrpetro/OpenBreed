@@ -73,11 +73,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\Components\IShapeComponent.cs" />
-    <Compile Include="Common\Components\DynamicPosition.cs" />
-    <Compile Include="Common\Components\Position.cs" />
-    <Compile Include="Common\Components\Direction.cs" />
-    <Compile Include="Common\Components\Shapes\AxisAlignedBoxShape.cs" />
+    <Compile Include="Systems\Common\Components\IShapeComponent.cs" />
+    <Compile Include="Systems\Common\Components\DynamicPosition.cs" />
+    <Compile Include="Systems\Common\Components\Position.cs" />
+    <Compile Include="Systems\Common\Components\Direction.cs" />
+    <Compile Include="Systems\Common\Components\Shapes\AxisAlignedBoxShape.cs" />
     <Compile Include="IViewport.cs" />
     <Compile Include="Systems\IAnimationSystem.cs" />
     <Compile Include="Systems\IControlSystem.cs" />
@@ -87,11 +87,11 @@
     <Compile Include="Systems\ISoundSystem.cs" />
     <Compile Include="Systems\WorldSystem.cs" />
     <Compile Include="Systems\IWorldSystem.cs" />
-    <Compile Include="Common\Components\Transformation.cs" />
-    <Compile Include="Common\Components\ITransformComponent.cs" />
+    <Compile Include="Systems\Common\Components\Transformation.cs" />
+    <Compile Include="Systems\Common\Components\ITransformComponent.cs" />
     <Compile Include="Entities\IWorldEntity.cs" />
     <Compile Include="ICore.cs" />
-    <Compile Include="Common\Components\IEntityComponent.cs" />
+    <Compile Include="Systems\Common\Components\IEntityComponent.cs" />
     <Compile Include="Scripting\LoadTest.cs" />
     <Compile Include="Entities\IEntityBuilder.cs" />
     <Compile Include="Entities\Builders\WorldEntityBuilder.cs" />

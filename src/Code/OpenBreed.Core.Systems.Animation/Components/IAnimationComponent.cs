@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Common.Components;
+﻿using OpenBreed.Core.Systems.Common.Components;
 
 namespace OpenBreed.Core.Systems.Animation.Components
 {

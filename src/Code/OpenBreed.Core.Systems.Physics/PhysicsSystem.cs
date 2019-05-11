@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Common;
+﻿using OpenBreed.Core.Systems.Common;
 using OpenBreed.Core.Systems.Physics.Components;
 using OpenBreed.Core.Systems.Physics.Helpers;
 using System;

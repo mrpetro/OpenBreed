@@ -4,7 +4,6 @@ using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
-using OpenBreed.Core.Common;
 
 namespace OpenBreed.Core.Systems.Rendering
 {

@@ -1,5 +1,5 @@
-﻿using OpenBreed.Core.Common.Components;
-using OpenBreed.Core.Common.Components.Shapes;
+﻿using OpenBreed.Core.Systems.Common.Components;
+using OpenBreed.Core.Systems.Common.Components.Shapes;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Systems.Physics.Components;
 using OpenBreed.Core.Systems.Rendering.Components;

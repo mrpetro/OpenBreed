@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Common.Components;
+﻿using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Systems.Movement;
 using OpenBreed.Core.Systems.Movement.Components;

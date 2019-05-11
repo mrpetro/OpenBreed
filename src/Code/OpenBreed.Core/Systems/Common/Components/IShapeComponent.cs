@@ -1,6 +1,6 @@
 ﻿using OpenTK;
 
-namespace OpenBreed.Core.Common.Components
+namespace OpenBreed.Core.Systems.Common.Components
 {
     /// <summary>
     /// Component interface of geometry shapes
