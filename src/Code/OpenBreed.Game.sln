@@ -3,9 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Game", "OpenBreed.Game\OpenBreed.Game.csproj", "{95BDF122-FAC8-4AC4-B9A8-B549D942E37D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core", "OpenBreed.Core\OpenBreed.Core.csproj", "{95BDF122-FAC8-4AC4-B9A8-B549D942E37D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Common", "..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj", "{9894E7F4-7C85-4173-9D05-F50CFD2E4163}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Systems.Rendering", "OpenBreed.Core.Systems.Rendering\OpenBreed.Core.Systems.Rendering.csproj", "{EA747476-89FE-462A-9BDC-DFC2E9A64EAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Game", "OpenBreed.Game\OpenBreed.Game.csproj", "{FB015343-45FD-4482-991D-90F21613E361}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Systems.Physics", "OpenBreed.Core.Systems.Physics\OpenBreed.Core.Systems.Physics.csproj", "{C9F84CE7-732C-4A31-89DC-B87E3D9685BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Systems.Control", "OpenBreed.Core.Systems.Control\OpenBreed.Core.Systems.Control.csproj", "{CF689601-0842-497F-A05F-B31431697B4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Systems.Animation", "OpenBreed.Core.Systems.Animation\OpenBreed.Core.Systems.Animation.csproj", "{657319C5-4BA7-4A81-B7D1-4527CEAE125C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Systems.Movement", "OpenBreed.Core.Systems.Movement\OpenBreed.Core.Systems.Movement.csproj", "{E004FAAA-6D4D-48B5-93D9-8E9E15DE5812}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Systems.Sound", "OpenBreed.Core.Systems.Sound\OpenBreed.Core.Systems.Sound.csproj", "{82AF3D57-A4F4-4339-859A-7E82942B96DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +34,34 @@ Global
 		{9894E7F4-7C85-4173-9D05-F50CFD2E4163}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9894E7F4-7C85-4173-9D05-F50CFD2E4163}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9894E7F4-7C85-4173-9D05-F50CFD2E4163}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA747476-89FE-462A-9BDC-DFC2E9A64EAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA747476-89FE-462A-9BDC-DFC2E9A64EAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA747476-89FE-462A-9BDC-DFC2E9A64EAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA747476-89FE-462A-9BDC-DFC2E9A64EAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB015343-45FD-4482-991D-90F21613E361}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB015343-45FD-4482-991D-90F21613E361}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB015343-45FD-4482-991D-90F21613E361}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB015343-45FD-4482-991D-90F21613E361}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9F84CE7-732C-4A31-89DC-B87E3D9685BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9F84CE7-732C-4A31-89DC-B87E3D9685BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9F84CE7-732C-4A31-89DC-B87E3D9685BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9F84CE7-732C-4A31-89DC-B87E3D9685BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF689601-0842-497F-A05F-B31431697B4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF689601-0842-497F-A05F-B31431697B4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF689601-0842-497F-A05F-B31431697B4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF689601-0842-497F-A05F-B31431697B4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{657319C5-4BA7-4A81-B7D1-4527CEAE125C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{657319C5-4BA7-4A81-B7D1-4527CEAE125C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{657319C5-4BA7-4A81-B7D1-4527CEAE125C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{657319C5-4BA7-4A81-B7D1-4527CEAE125C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E004FAAA-6D4D-48B5-93D9-8E9E15DE5812}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E004FAAA-6D4D-48B5-93D9-8E9E15DE5812}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E004FAAA-6D4D-48B5-93D9-8E9E15DE5812}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E004FAAA-6D4D-48B5-93D9-8E9E15DE5812}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82AF3D57-A4F4-4339-859A-7E82942B96DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82AF3D57-A4F4-4339-859A-7E82942B96DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82AF3D57-A4F4-4339-859A-7E82942B96DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82AF3D57-A4F4-4339-859A-7E82942B96DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

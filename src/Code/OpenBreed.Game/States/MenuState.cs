@@ -1,9 +1,6 @@
-﻿using OpenTK;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OpenBreed.Core;
+using OpenBreed.Core.States;
+using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 
@@ -17,8 +14,18 @@ namespace OpenBreed.Game.States
 
         #endregion Public Fields
 
+        #region Public Constructors
+
+        public MenuState(ICore core)
+        {
+            Core = core;
+        }
+
+        #endregion Public Constructors
+
         #region Public Properties
 
+        public ICore Core { get; }
         public override string Name { get { return Id; } }
 
         #endregion Public Properties
@@ -56,8 +63,8 @@ namespace OpenBreed.Game.States
             if (state.IsKeyDown(Key.Escape))
                 ChangeState(GameState.Id);
 
-            if(state.IsKeyDown(Key.X))
-                StateMan.Program.Exit();
+            if (state.IsKeyDown(Key.X))
+                StateMan.Core.Exit();
         }
 
         #endregion Public Methods

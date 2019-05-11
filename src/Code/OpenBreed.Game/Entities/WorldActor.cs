@@ -1,23 +1,23 @@
-﻿using OpenBreed.Game.Animation.Components;
-using OpenBreed.Game.Common.Components;
-using OpenBreed.Game.Common.Components.Shapes;
-using OpenBreed.Game.Control.Components;
+﻿using OpenBreed.Core.Common.Components;
+using OpenBreed.Core.Common.Components.Shapes;
+using OpenBreed.Core.Entities;
+using OpenBreed.Core.Systems.Physics.Components;
+using OpenBreed.Core.Systems.Rendering.Components;
+using OpenBreed.Game.Components;
 using OpenBreed.Game.Entities.Builders;
-using OpenBreed.Game.Movement.Components;
-using OpenBreed.Game.Physics.Components;
-using OpenBreed.Game.Rendering.Components;
 using OpenTK;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Game.Entities
 {
     public class WorldActor : WorldEntity
     {
-        Vector2 position;
+        #region Private Fields
+
+        private Vector2 position;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public WorldActor(WorldActorBuilder builder) : base(builder)
         {
@@ -36,7 +36,8 @@ namespace OpenBreed.Game.Entities
 
             if (builder.controller != null)
                 Components.Add(builder.controller);
-
         }
+
+        #endregion Public Constructors
     }
 }

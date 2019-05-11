@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{95BDF122-FAC8-4AC4-B9A8-B549D942E37D}</ProjectGuid>
+    <ProjectGuid>{FB015343-45FD-4482-991D-90F21613E361}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>OpenBreed.Game</RootNamespace>
     <AssemblyName>OpenBreed.Game</AssemblyName>
@@ -12,23 +12,6 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,14 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="KeraLua, Version=1.0.11.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\Packages\KeraLua.1.0.11\lib\net45\KeraLua.dll</HintPath>
-    </Reference>
-    <Reference Include="NLua, Version=1.4.17.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\Packages\NLua.1.4.17\lib\net45\NLua.dll</HintPath>
-    </Reference>
     <Reference Include="OpenTK, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Packages\OpenTK.3.0.1\lib\net20\OpenTK.dll</HintPath>
+      <HintPath>..\..\..\..\Packages\OpenTK.3.0.1\lib\net20\OpenTK.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -70,70 +47,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animation\AnimationSystem.cs" />
-    <Compile Include="Animation\Components\CreatureAnimator.cs" />
-    <Compile Include="Animation\Components\IAnimationComponent.cs" />
-    <Compile Include="Common\Components\IShapeComponent.cs" />
-    <Compile Include="Common\Components\DynamicPosition.cs" />
-    <Compile Include="Common\Components\Position.cs" />
-    <Compile Include="Common\Components\Direction.cs" />
-    <Compile Include="Common\Components\Shapes\AxisAlignedBoxShape.cs" />
-    <Compile Include="Common\WorldSystem.cs" />
-    <Compile Include="Common\IWorldSystem.cs" />
-    <Compile Include="Common\Components\Transformation.cs" />
-    <Compile Include="Control\Components\MovementController.cs" />
-    <Compile Include="Control\ControlSystem.cs" />
-    <Compile Include="Core.cs" />
-    <Compile Include="Entities\Builders\CameraBuilder.cs" />
-    <Compile Include="Common\Components\ITransformComponent.cs" />
-    <Compile Include="Entities\IWorldEntity.cs" />
-    <Compile Include="Entities\WorldActor.cs" />
-    <Compile Include="Movement\Components\IMovementComponent.cs" />
-    <Compile Include="Movement\Components\CreatureMovement.cs" />
-    <Compile Include="Movement\MovementSystem.cs" />
-    <Compile Include="Physics\Components\DynamicBody.cs" />
-    <Compile Include="Physics\Components\IDynamicBody.cs" />
-    <Compile Include="Physics\Components\IStaticBody.cs" />
-    <Compile Include="Physics\Helpers\AabbXComparer.cs" />
-    <Compile Include="Physics\Helpers\Box2Extensions.cs" />
-    <Compile Include="Physics\PhysicsSystem.cs" />
-    <Compile Include="Rendering\Components\ISprite.cs" />
-    <Compile Include="Rendering\Components\SpriteDebug.cs" />
-    <Compile Include="Rendering\Helpers\RenderTools.cs" />
-    <Compile Include="Rendering\Components\Sprite.cs" />
-    <Compile Include="Entities\WorldBlock.cs" />
-    <Compile Include="Physics\Components\IPhysicsComponent.cs" />
-    <Compile Include="Control\Components\IControlComponent.cs" />
-    <Compile Include="Common\Components\IEntityComponent.cs" />
-    <Compile Include="Rendering\Components\IRenderComponent.cs" />
-    <Compile Include="Rendering\Helpers\SpriteAtlas.cs" />
-    <Compile Include="Scripting\LoadTest.cs" />
-    <Compile Include="Sounds\Components\ISoundComponent.cs" />
-    <Compile Include="Entities\IEntityBuilder.cs" />
-    <Compile Include="Entities\Builders\WorldBlockBuilder.cs" />
-    <Compile Include="Entities\Builders\WorldEntityBuilder.cs" />
+    <Compile Include="Components\CreatureAnimator.cs" />
+    <Compile Include="Components\CreatureMovement.cs" />
+    <Compile Include="Components\CreatureController.cs" />
+    <Compile Include="Components\SpriteDebug.cs" />
     <Compile Include="Entities\Builders\WorldActorBuilder.cs" />
-    <Compile Include="Entities\EntityBase.cs" />
-    <Compile Include="EntityMan.cs" />
-    <Compile Include="Entities\IEntity.cs" />
-    <Compile Include="Entities\WorldEntity.cs" />
-    <Compile Include="Physics\Components\GridBoxBody.cs" />
-    <Compile Include="Rendering\Helpers\TileAtlas.cs" />
-    <Compile Include="Rendering\Components\Text.cs" />
-    <Compile Include="Rendering\Components\Tile.cs" />
-    <Compile Include="Rendering\Helpers\Vertex.cs" />
-    <Compile Include="Rendering\Helpers\Texture.cs" />
-    <Compile Include="Rendering\TextureMan.cs" />
-    <Compile Include="States\BaseState.cs" />
-    <Compile Include="States\GameState.cs" />
-    <Compile Include="States\StateMan.cs" />
-    <Compile Include="States\MenuState.cs" />
+    <Compile Include="Entities\Builders\WorldBlockBuilder.cs" />
+    <Compile Include="Entities\WorldActor.cs" />
+    <Compile Include="Entities\WorldBlock.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rendering\Helpers\Camera.cs" />
-    <Compile Include="Rendering\Helpers\Viewport.cs" />
-    <Compile Include="Common\World.cs" />
-    <Compile Include="Rendering\RenderSystem.cs" />
+    <Compile Include="States\GameState.cs" />
+    <Compile Include="States\MenuState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -141,19 +66,37 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
+    <ProjectReference Include="..\OpenBreed.Core.Systems.Animation\OpenBreed.Core.Systems.Animation.csproj">
+      <Project>{657319C5-4BA7-4A81-B7D1-4527CEAE125C}</Project>
+      <Name>OpenBreed.Core.Systems.Animation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Core.Systems.Control\OpenBreed.Core.Systems.Control.csproj">
+      <Project>{CF689601-0842-497F-A05F-B31431697B4E}</Project>
+      <Name>OpenBreed.Core.Systems.Control</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Core.Systems.Movement\OpenBreed.Core.Systems.Movement.csproj">
+      <Project>{E004FAAA-6D4D-48B5-93D9-8E9E15DE5812}</Project>
+      <Name>OpenBreed.Core.Systems.Movement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Core.Systems.Physics\OpenBreed.Core.Systems.Physics.csproj">
+      <Project>{C9F84CE7-732C-4A31-89DC-B87E3D9685BE}</Project>
+      <Name>OpenBreed.Core.Systems.Physics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Core.Systems.Rendering\OpenBreed.Core.Systems.Rendering.csproj">
+      <Project>{EA747476-89FE-462A-9BDC-DFC2E9A64EAD}</Project>
+      <Name>OpenBreed.Core.Systems.Rendering</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Core.Systems.Sound\OpenBreed.Core.Systems.Sound.csproj">
+      <Project>{82AF3D57-A4F4-4339-859A-7E82942B96DF}</Project>
+      <Name>OpenBreed.Core.Systems.Sound</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">
+      <Project>{95BDF122-FAC8-4AC4-B9A8-B549D942E37D}</Project>
+      <Name>OpenBreed.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\TexTest32bit.bmp">
+    <None Include="Content\ArrowSpriteSet.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -161,9 +104,18 @@
     <None Include="Content\TexTest24bit.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\TexTest32bit.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Content\TexTest4bitIndexed.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Content\TexTest8bitIndexed.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -173,17 +125,5 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Content\ArrowSpriteSet.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\..\..\..\Packages\KeraLua.1.0.11\build\net45\KeraLua.targets" Condition="Exists('..\..\..\..\Packages\KeraLua.1.0.11\build\net45\KeraLua.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\..\..\Packages\KeraLua.1.0.11\build\net45\KeraLua.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\Packages\KeraLua.1.0.11\build\net45\KeraLua.targets'))" />
-  </Target>
 </Project>

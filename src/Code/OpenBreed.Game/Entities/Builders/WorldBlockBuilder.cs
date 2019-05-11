@@ -1,24 +1,30 @@
-﻿using OpenBreed.Game.Rendering;
-using OpenBreed.Game.Rendering.Helpers;
-using OpenBreed.Game.States;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OpenBreed.Core;
+using OpenBreed.Core.Entities;
+using OpenBreed.Core.Entities.Builders;
+using OpenBreed.Core.Systems.Rendering.Helpers;
 
 namespace OpenBreed.Game.Entities.Builders
 {
     public class WorldBlockBuilder : WorldEntityBuilder
     {
+        #region Internal Fields
+
         internal int x;
         internal int y;
         internal TileAtlas tileAtlas;
         internal int tileId;
 
-        public WorldBlockBuilder(GameState core) : base(core)
+        #endregion Internal Fields
+
+        #region Public Constructors
+
+        public WorldBlockBuilder(ICore core) : base(core)
         {
         }
+
+        #endregion Public Constructors
+
+        #region Public Methods
 
         public void SetIndices(int x, int y)
         {
@@ -40,5 +46,7 @@ namespace OpenBreed.Game.Entities.Builders
         {
             return new WorldBlock(this);
         }
+
+        #endregion Public Methods
     }
 }

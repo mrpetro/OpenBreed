@@ -1,7 +1,13 @@
-﻿using OpenBreed.Game.Entities;
+﻿using OpenBreed.Core;
+using OpenBreed.Core.States;
+using OpenBreed.Core.Systems.Control;
+using OpenBreed.Core.Systems.Rendering;
+using OpenBreed.Core.Systems.Rendering.Entities;
+using OpenBreed.Core.Systems.Rendering.Entities.Builders;
+using OpenBreed.Core.Systems.Rendering.Helpers;
+using OpenBreed.Game.Components;
+using OpenBreed.Game.Entities;
 using OpenBreed.Game.Entities.Builders;
-using OpenBreed.Game.Rendering;
-using OpenBreed.Game.Rendering.Helpers;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
@@ -13,6 +19,18 @@ namespace OpenBreed.Game.States
 {
     public class GameState : BaseState
     {
+        #region Public Fields
+
+        public const string Id = "GAME";
+
+        public World WorldA;
+
+        public World WorldB;
+
+        #endregion Public Fields
+
+        #region Private Fields
+
         private static byte[] mapA = new byte[] {
             3,3,3,3,3,3,3,3,3,3,
             0,0,0,0,0,0,0,0,1,3,
@@ -32,23 +50,10 @@ namespace OpenBreed.Game.States
         };
 
 
-        #region Public Fields
-
-        public const string Id = "GAME";
-        public Texture TestTexture;
-        public World WorldA;
-        public World WorldB;
-
-        #endregion Public Fields
-
-        #region Private Fields
-
         private Texture tileTex;
         private Texture spriteTex;
         private TileAtlas tileAtlas;
         private SpriteAtlas spriteAtlas;
-
-        private readonly List<Viewport> viewports = new List<Viewport>();
         private int px;
         private int py;
         private Viewport viewportLeft;
@@ -58,14 +63,22 @@ namespace OpenBreed.Game.States
 
         #region Public Constructors
 
-        public GameState()
+        protected override void OnEnter()
         {
+            Core.AddViewport(viewportLeft);
+            Core.AddViewport(viewportRight);
+        }
+
+        public GameState(ICore core)
+        {
+            Core = core;
+
             TextureMan = new TextureMan();
             EntityMan = new EntityMan();
 
-            WorldA = new World(this);
-            WorldB = new World(this);
-            var cameraBuilder = new CameraBuilder(this);
+            WorldA = new World(Core);
+            WorldB = new World(Core);
+            var cameraBuilder = new CameraBuilder(Core);
 
             //Resources
             tileTex = TextureMan.Load(@"Content\TileAtlasTest32bit.bmp");
@@ -91,8 +104,7 @@ namespace OpenBreed.Game.States
             viewportRight = new Viewport(50, 50, 540, 380);
             viewportRight.Camera = Camera2;
 
-            AddViewport(viewportLeft);
-            AddViewport(viewportRight);
+
 
             Console.WriteLine("LMB + Move = Left camera control");
             Console.WriteLine("RMB + Move = Right camera control");
@@ -103,6 +115,7 @@ namespace OpenBreed.Game.States
 
         #region Public Properties
 
+        public ICore Core { get; }
         public Camera Camera1 { get; }
         public Camera Camera2 { get; }
         public EntityMan EntityMan { get; }
@@ -113,96 +126,15 @@ namespace OpenBreed.Game.States
 
         #region Public Methods
 
-        public void AddViewport(Viewport viewport)
-        {
-            if (viewports.Contains(viewport))
-                throw new InvalidOperationException("Viewport already added.");
-
-            viewports.Add(viewport);
-        }
-
-        private void InitializeWorldA()
-        {
-            var blockBuilder = new WorldBlockBuilder(this);
-            blockBuilder.SetTileAtlas(tileAtlas);
-
-            var actorBuilder = new WorldActorBuilder(this);
-            actorBuilder.SetSpriteAtlas(spriteAtlas);
-            actorBuilder.SetPosition(new OpenTK.Vector2(20, 20));
-            actorBuilder.SetDirection(new OpenTK.Vector2(1, 0));
-
-            actorBuilder.SetController(new Control.Components.MovementController());
-            WorldA.AddEntity((WorldActor)actorBuilder.Build());
-
-            var rnd = new Random();
-
-            var ymax = mapA.Length / 10;
-
-            for (int x = 0; x < 10; x++)
-            {
-                for (int y = 0; y < ymax; y++)
-                {
-                    var v = mapA[x + y * 10];
-
-                    if (v > 0)
-                    {
-                        blockBuilder.SetIndices(x + 5, y + 5);
-                        blockBuilder.SetTileId(v);
-                        WorldA.AddEntity((WorldBlock)blockBuilder.Build());
-                    }
-                }
-            }
-        }
-
-        private void InitializeWorldB()
-        {
-            var blockBuilder = new WorldBlockBuilder(this);
-            blockBuilder.SetTileAtlas(tileAtlas);
-
-            var actorBuilder = new WorldActorBuilder(this);
-            actorBuilder.SetSpriteAtlas(spriteAtlas);
-            actorBuilder.SetPosition(new OpenTK.Vector2(50, 20));
-            actorBuilder.SetDirection(new OpenTK.Vector2(1, 0));
-
-            actorBuilder.SetController(new Control.Components.MovementController());
-            WorldB.AddEntity((WorldActor)actorBuilder.Build());
-
-            var rnd = new Random();
-
-            var ymax = mapB.Length / 10;
-
-            for (int x = 0; x < 10; x++)
-            {
-                for (int y = 0; y < ymax; y++)
-                {
-                    var v = mapB[x + y * 10];
-
-                    if (v > 0)
-                    {
-                        blockBuilder.SetIndices(x + 5, y + 5);
-                        blockBuilder.SetTileId(v);
-                        WorldB.AddEntity((WorldBlock)blockBuilder.Build());
-                    }
-                }
-            }
-        }
-
-
         public override void OnLoad()
         {
             base.OnLoad();
-
-            //GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
-            //GL.PatchParameter(PatchParameterInt.PatchVertices, 3);
-
-            TestTexture = TextureMan.Load(@"Content\TexTest32bit.bmp");
 
             WorldA.Initialize();
             WorldB.Initialize();
 
             InitializeWorldA();
             InitializeWorldB();
-
 
             //TestTexture = TextureMan.Load(@"Content\TexTest24bit.bmp");
             //TestTexture = TextureMan.Load(@"Content\TexTest8bitIndexed.bmp");
@@ -221,16 +153,7 @@ namespace OpenBreed.Game.States
 
         public override void OnRenderFrame(FrameEventArgs e)
         {
-            base.OnRenderFrame(e);
 
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
-
-            GL.PushMatrix();
-
-            for (int i = 0; i < viewports.Count; i++)
-                viewports[i].Draw();
-
-            GL.PopMatrix();
         }
 
         public override void OnResize(Rectangle clientRectangle)
@@ -265,8 +188,8 @@ namespace OpenBreed.Game.States
 
         public override void ProcessInputs(FrameEventArgs e)
         {
-            WorldA.ProcessInputs(e.Time);
-            WorldB.ProcessInputs(e.Time);
+            WorldA.ProcessInputs((float)e.Time);
+            WorldB.ProcessInputs((float)e.Time);
 
             var keyState = Keyboard.GetState();
             if (keyState.IsKeyDown(Key.Escape))
@@ -297,11 +220,78 @@ namespace OpenBreed.Game.States
             py = mouseState.Y;
         }
 
-        public void RemoveViewport(Viewport viewport)
-        {
-            viewports.Remove(viewport);
-        }
+
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private void InitializeWorldA()
+        {
+            var blockBuilder = new WorldBlockBuilder(Core);
+            blockBuilder.SetTileAtlas(tileAtlas);
+
+            var actorBuilder = new WorldActorBuilder(Core);
+            actorBuilder.SetSpriteAtlas(spriteAtlas);
+            actorBuilder.SetPosition(new OpenTK.Vector2(20, 20));
+            actorBuilder.SetDirection(new OpenTK.Vector2(1, 0));
+
+            actorBuilder.SetController(new CreatureController());
+            WorldA.AddEntity((WorldActor)actorBuilder.Build());
+
+            var rnd = new Random();
+
+            var ymax = mapA.Length / 10;
+
+            for (int x = 0; x < 10; x++)
+            {
+                for (int y = 0; y < ymax; y++)
+                {
+                    var v = mapA[x + y * 10];
+
+                    if (v > 0)
+                    {
+                        blockBuilder.SetIndices(x + 5, y + 5);
+                        blockBuilder.SetTileId(v);
+                        WorldA.AddEntity((WorldBlock)blockBuilder.Build());
+                    }
+                }
+            }
+        }
+
+        private void InitializeWorldB()
+        {
+            var blockBuilder = new WorldBlockBuilder(Core);
+            blockBuilder.SetTileAtlas(tileAtlas);
+
+            var actorBuilder = new WorldActorBuilder(Core);
+            actorBuilder.SetSpriteAtlas(spriteAtlas);
+            actorBuilder.SetPosition(new OpenTK.Vector2(50, 20));
+            actorBuilder.SetDirection(new OpenTK.Vector2(1, 0));
+
+            actorBuilder.SetController(new CreatureController());
+            WorldB.AddEntity((WorldActor)actorBuilder.Build());
+
+            var rnd = new Random();
+
+            var ymax = mapB.Length / 10;
+
+            for (int x = 0; x < 10; x++)
+            {
+                for (int y = 0; y < ymax; y++)
+                {
+                    var v = mapB[x + y * 10];
+
+                    if (v > 0)
+                    {
+                        blockBuilder.SetIndices(x + 5, y + 5);
+                        blockBuilder.SetTileId(v);
+                        WorldB.AddEntity((WorldBlock)blockBuilder.Build());
+                    }
+                }
+            }
+        }
+
+        #endregion Private Methods
     }
 }

@@ -1,7 +1,8 @@
-﻿using System;
-using OpenBreed.Game.Control.Components;
-using OpenBreed.Game.Rendering.Helpers;
-using OpenBreed.Game.States;
+﻿using OpenBreed.Core;
+using OpenBreed.Core.Entities;
+using OpenBreed.Core.Entities.Builders;
+using OpenBreed.Core.Systems.Control;
+using OpenBreed.Core.Systems.Rendering.Helpers;
 using OpenTK;
 
 namespace OpenBreed.Game.Entities.Builders
@@ -19,7 +20,7 @@ namespace OpenBreed.Game.Entities.Builders
 
         #region Public Constructors
 
-        public WorldActorBuilder(GameState core) : base(core)
+        public WorldActorBuilder(ICore core) : base(core)
         {
         }
 
@@ -47,11 +48,15 @@ namespace OpenBreed.Game.Entities.Builders
             this.direction = direction;
         }
 
+        #endregion Public Methods
+
+        #region Internal Methods
+
         internal void SetController(IControlComponent controller)
         {
             this.controller = controller;
         }
 
-        #endregion Public Methods
+        #endregion Internal Methods
     }
 }
