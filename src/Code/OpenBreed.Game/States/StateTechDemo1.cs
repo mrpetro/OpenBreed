@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Systems.Control;
 using OpenBreed.Core.Systems.Rendering;
 using OpenBreed.Core.Systems.Rendering.Entities;
 using OpenBreed.Core.Systems.Rendering.Entities.Builders;
@@ -15,11 +14,11 @@ using System.Drawing;
 
 namespace OpenBreed.Game.States
 {
-    public class GameState : BaseState
+    public class StateTechDemo1 : BaseState
     {
         #region Public Fields
 
-        public const string Id = "GAME";
+        public const string Id = "TECH_DEMO_1";
 
         public World WorldA;
 
@@ -47,7 +46,6 @@ namespace OpenBreed.Game.States
             0,3,3,0,0,0,3,3,3,3
         };
 
-
         private Texture tileTex;
         private Texture spriteTex;
         private TileAtlas tileAtlas;
@@ -61,19 +59,7 @@ namespace OpenBreed.Game.States
 
         #region Public Constructors
 
-        protected override void OnEnter()
-        {
-            Core.AddViewport(viewportLeft);
-            Core.AddViewport(viewportRight);
-        }
-
-        protected override void OnLeave()
-        {
-            Core.RemoveViewport(viewportLeft);
-            Core.RemoveViewport(viewportRight);
-        }
-
-        public GameState(ICore core)
+        public StateTechDemo1(ICore core)
         {
             Core = core;
 
@@ -108,7 +94,11 @@ namespace OpenBreed.Game.States
             viewportRight = new Viewport(50, 50, 540, 380);
             viewportRight.Camera = Camera2;
 
+            Core.Worlds.Add(WorldA);
+            Core.Worlds.Add(WorldB);
 
+            InitializeWorldA();
+            InitializeWorldB();
 
             Console.WriteLine("LMB + Move = Left camera control");
             Console.WriteLine("RMB + Move = Right camera control");
@@ -120,26 +110,20 @@ namespace OpenBreed.Game.States
         #region Public Properties
 
         public ICore Core { get; }
+
         public Camera Camera1 { get; }
+
         public Camera Camera2 { get; }
+
         public EntityMan EntityMan { get; }
+
         public override string Name { get { return Id; } }
+
         public TextureMan TextureMan { get; }
 
         #endregion Public Properties
 
         #region Public Methods
-
-        public override void OnLoad()
-        {
-            base.OnLoad();
-
-            Core.AddWorld(WorldA);
-            Core.AddWorld(WorldB);
-
-            InitializeWorldA();
-            InitializeWorldB();
-        }
 
         public override void OnResize(Rectangle clientRectangle)
         {
@@ -187,9 +171,23 @@ namespace OpenBreed.Game.States
             py = mouseState.Y;
         }
 
-
-
         #endregion Public Methods
+
+        #region Protected Methods
+
+        protected override void OnEnter()
+        {
+            Core.Viewports.Add(viewportLeft);
+            Core.Viewports.Add(viewportRight);
+        }
+
+        protected override void OnLeave()
+        {
+            Core.Viewports.Remove(viewportLeft);
+            Core.Viewports.Remove(viewportRight);
+        }
+
+        #endregion Protected Methods
 
         #region Private Methods
 

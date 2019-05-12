@@ -15,10 +15,6 @@ namespace OpenBreed.Core.States
 
         #region Public Methods
 
-        public virtual void OnLoad()
-        {
-        }
-
         public virtual void OnResize(Rectangle clientRectangle)
         {
         }
@@ -67,7 +63,7 @@ namespace OpenBreed.Core.States
 
         protected void ChangeState(string stateId)
         {
-            StateMan.ChangeState(stateId);
+            StateMan.SetNextState(stateId);
         }
 
         internal void OnRegister(StateMan stateMan)

@@ -98,6 +98,10 @@ namespace OpenBreed.Core
             Cleanup();
         }
 
+        public void Deinitialize()
+        {
+        }
+
         public void Update(float dt)
         {
             MovementSystem.Update(dt);

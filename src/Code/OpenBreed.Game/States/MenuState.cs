@@ -61,7 +61,7 @@ namespace OpenBreed.Game.States
             var state = Keyboard.GetState();
 
             if (state.IsKeyDown(Key.Escape))
-                ChangeState(GameState.Id);
+                ChangeState(StateTechDemo1.Id);
 
             if (state.IsKeyDown(Key.X))
                 StateMan.Core.Exit();

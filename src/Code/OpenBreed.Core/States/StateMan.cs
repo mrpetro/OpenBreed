@@ -9,7 +9,8 @@ namespace OpenBreed.Core.States
     {
         #region Private Fields
 
-        private BaseState activeGameState = null;
+        private BaseState nextState = null;
+        private BaseState activeState = null;
         private Dictionary<string, BaseState> states = new Dictionary<string, BaseState>();
 
         #endregion Private Fields
@@ -31,37 +32,37 @@ namespace OpenBreed.Core.States
 
         #region Public Methods
 
-        public void ChangeState(string stateId)
+        public void SetNextState(string stateId)
         {
-            BaseState state;
-            if (!states.TryGetValue(stateId, out state))
+            if (!states.TryGetValue(stateId, out nextState))
                 throw new InvalidOperationException($"Unknown state id '{stateId}'");
-
-            if (activeGameState != null)
-                activeGameState.LeaveState();
-
-            activeGameState = state;
-            activeGameState.EnterState();
         }
 
-        public void OnLoad()
+        public void ChangeState()
         {
-            activeGameState.OnLoad();
+            if (activeState != null)
+                activeState.LeaveState();
+
+            activeState = nextState;
+            activeState.EnterState();
         }
 
         public void OnRenderFrame(FrameEventArgs e)
         {
-            activeGameState.OnRenderFrame(e);
+            activeState.OnRenderFrame(e);
         }
 
         public void OnUpdate(FrameEventArgs e)
         {
-            activeGameState.OnUpdate(e);
+            activeState.OnUpdate(e);
+
+            if (activeState != nextState)
+                ChangeState();
         }
 
         public void ProcessInputs(FrameEventArgs e)
         {
-            activeGameState.ProcessInputs(e);
+            activeState.ProcessInputs(e);
         }
 
         public void RegisterState(BaseState state)
@@ -72,7 +73,7 @@ namespace OpenBreed.Core.States
 
         public void OnResize(Rectangle clientRectangle)
         {
-            activeGameState.OnResize(clientRectangle);
+            activeState.OnResize(clientRectangle);
         }
 
 

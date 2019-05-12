@@ -11,6 +11,7 @@ using OpenBreed.Game.States;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
+using OpenTK.Input;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -21,9 +22,6 @@ namespace OpenBreed.Game
     public class Program : GameWindow, ICore
     {
         #region Private Fields
-
-        private readonly List<IViewport> viewports = new List<IViewport>();
-        private readonly List<World> worlds = new List<World>();
 
         private string appVersion;
         private Font font;
@@ -37,11 +35,15 @@ namespace OpenBreed.Game
         {
             appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-            EntityMan = new EntityMan();
-            StateMan = new StateMan(this);
-            StateMan.RegisterState(new GameState(this));
-            StateMan.RegisterState(new MenuState(this));
-            StateMan.ChangeState(GameState.Id);
+            Entities = new EntityMan();
+            Worlds = new WorldMan(this);
+            States = new StateMan(this);
+            Viewports = new ViewportMan(this);
+            States.RegisterState(new StateTechDemo1(this));
+            States.RegisterState(new StateTechDemo2(this));
+            //StateMan.RegisterState(new MenuState(this));
+            States.SetNextState(StateTechDemo1.Id);
+            States.ChangeState();
 
             VSync = VSyncMode.On;
         }
@@ -50,41 +52,14 @@ namespace OpenBreed.Game
 
         #region Public Properties
 
-        public EntityMan EntityMan { get; }
-
-        public StateMan StateMan { get; }
+        public EntityMan Entities { get; }
+        public WorldMan Worlds { get; }
+        public ViewportMan Viewports { get; }
+        public StateMan States { get; }
 
         #endregion Public Properties
 
         #region Public Methods
-
-        public void AddViewport(IViewport viewport)
-        {
-            if (viewports.Contains(viewport))
-                throw new InvalidOperationException("World already added.");
-
-            viewports.Add(viewport);
-        }
-
-        public void RemoveViewport(IViewport viewport)
-        {
-            viewports.Remove(viewport);
-        }
-
-        public void AddWorld(World world)
-        {
-            if (worlds.Contains(world))
-                throw new InvalidOperationException("World already added.");
-
-            worlds.Add(world);
-
-            world.Initialize();
-        }
-
-        public void RemoveWorld(World world)
-        {
-            worlds.Remove(world);
-        }
 
         public ISoundSystem CreateSoundSystem()
         {
@@ -135,8 +110,6 @@ namespace OpenBreed.Game
             //GL.Enable(EnableCap.Blend);
             //GL.BlendFunc(BlendingFactor.SrcAlpha,BlendingFactor.OneMinusSrcAlpha);
             GL.Enable(EnableCap.DepthTest);
-
-            StateMan.OnLoad();
         }
 
         protected override void OnResize(EventArgs e)
@@ -150,19 +123,24 @@ namespace OpenBreed.Game
 
             GL.Ortho(0, ClientRectangle.Width, 0, ClientRectangle.Height, 0, 1); // Origin in lower-left corner
 
-            StateMan.OnResize(ClientRectangle);
+            States.OnResize(ClientRectangle);
         }
 
         protected void OnProcessInputs(float dt)
         {
-            for (int i = 0; i < worlds.Count; i++)
-                worlds[i].ProcessInputs(dt);
+            var keyState = Keyboard.GetState();
+
+            if (keyState.IsKeyDown(Key.Number1))
+                States.SetNextState(StateTechDemo1.Id);
+            else if (keyState.IsKeyDown(Key.Number2))
+                States.SetNextState(StateTechDemo2.Id);
+
+            Worlds.ProcessInputs(dt);
         }
 
         protected void OnUpdate(float dt)
         {
-            for (int i = 0; i < worlds.Count; i++)
-                worlds[i].Update(dt);
+            Worlds.Update(dt);
         }
 
         protected override void OnUpdateFrame(FrameEventArgs e)
@@ -171,10 +149,13 @@ namespace OpenBreed.Game
 
             OnProcessInputs((float)e.Time);
 
-            StateMan.ProcessInputs(e);
+            States.ProcessInputs(e);
 
             OnUpdate((float)e.Time);
-            StateMan.OnUpdate(e);
+            States.OnUpdate(e);
+
+            Worlds.Cleanup();
+            Viewports.Cleanup();
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -187,8 +168,7 @@ namespace OpenBreed.Game
 
             GL.PushMatrix();
 
-            for (int i = 0; i < viewports.Count; i++)
-                viewports[i].Draw();
+            Viewports.Draw((float)e.Time);
 
             GL.PopMatrix();
 

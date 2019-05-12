@@ -7,8 +7,10 @@ namespace OpenBreed.Core
     {
         #region Public Properties
 
-        EntityMan EntityMan { get; }
-        StateMan StateMan { get; }
+        EntityMan Entities { get; }
+        ViewportMan Viewports { get; }
+        WorldMan Worlds { get; }
+        StateMan States { get; }
 
         #endregion Public Properties
 
@@ -23,13 +25,6 @@ namespace OpenBreed.Core
         IAnimationSystem CreateAnimationSystem();
         IPhysicsSystem CreatePhysicsSystem();
         IControlSystem CreateControlSystem();
-
-        void AddViewport(IViewport viewport);
-        void RemoveViewport(IViewport viewport);
-
-
-        void AddWorld(World world);
-        void RemoveWorld(World world);
 
         #endregion Public Methods
     }

@@ -12,9 +12,9 @@ namespace OpenBreed.Core.Entities
         {
             Core = core ?? throw new ArgumentNullException(nameof(core));
 
-            Guid = Core.EntityMan.GetGuid();
+            Guid = Core.Entities.GetGuid();
 
-            Core.EntityMan.AddEntity(this);
+            Core.Entities.AddEntity(this);
         }
 
         #endregion Protected Constructors
