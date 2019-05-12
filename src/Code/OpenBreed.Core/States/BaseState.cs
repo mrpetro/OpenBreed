@@ -47,13 +47,13 @@ namespace OpenBreed.Core.States
 
         internal void EnterState()
         {
-            Console.Write($"Entering state '{Name}'");
+            Console.WriteLine($"Entering state '{Name}'");
             OnEnter();
         }
 
         internal void LeaveState()
         {
-            Console.Write($"Leaving state '{Name}'");
+            Console.WriteLine($"Leaving state '{Name}'");
             OnLeave();
         }
 

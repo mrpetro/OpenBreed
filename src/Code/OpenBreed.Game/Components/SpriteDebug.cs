@@ -43,15 +43,6 @@ namespace OpenBreed.Game.Components
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
         public void Draw(Viewport viewport)
         {
-            if (body.Collides)
-            {
-                RenderTools.DrawBox(body.Aabb, Color4.Red);
-
-                RenderTools.DrawLine(body.Aabb.GetCenter(), Vector2.Add(body.Aabb.GetCenter(), body.Projection * 10), Color4.Purple);
-            }
-            else
-                RenderTools.DrawBox(body.Aabb, Color4.Green);
-
             if (body.Boxes != null)
             {
                 foreach (var item in body.Boxes)
@@ -62,6 +53,14 @@ namespace OpenBreed.Game.Components
                                               item.Item2 * 16.0f + 16.0f);
                 }
             }
+
+            if (body.Collides)
+            {
+                RenderTools.DrawBox(body.Aabb, Color4.Red);
+                RenderTools.DrawLine(body.Aabb.GetCenter(), Vector2.Add(body.Aabb.GetCenter(), body.Projection * 10), Color4.Purple);
+            }
+            else
+                RenderTools.DrawBox(body.Aabb, Color4.Green);
         }
 
         /// <summary>

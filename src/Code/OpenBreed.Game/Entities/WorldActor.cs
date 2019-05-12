@@ -27,8 +27,8 @@ namespace OpenBreed.Game.Entities
             var direction = new Direction(builder.direction);
             Components.Add(position);
             Components.Add(direction);
-            Components.Add(new Sprite(builder.spriteAtlas));
             Components.Add(new SpriteDebug());
+            Components.Add(new Sprite(builder.spriteAtlas));
             Components.Add(new CreatureMovement());
             Components.Add(new CreatureAnimator());
             Components.Add(new AxisAlignedBoxShape(32, 32));

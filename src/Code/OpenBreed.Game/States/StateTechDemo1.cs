@@ -99,10 +99,6 @@ namespace OpenBreed.Game.States
 
             InitializeWorldA();
             InitializeWorldB();
-
-            Console.WriteLine("LMB + Move = Left camera control");
-            Console.WriteLine("RMB + Move = Right camera control");
-            Console.WriteLine("Keyboard arrows  = Control arrow actor");
         }
 
         #endregion Public Constructors
@@ -134,7 +130,7 @@ namespace OpenBreed.Game.States
             viewportLeft.Width = clientRectangle.Width / 2 - 50;
             viewportLeft.Height = clientRectangle.Height - 50;
 
-            viewportRight.X = clientRectangle.X + 25 + clientRectangle.Width / 2;
+            viewportRight.X = clientRectangle.X + 25 + clientRectangle.Width / 4;
             viewportRight.Y = clientRectangle.Y + 25;
             viewportRight.Width = clientRectangle.Width / 2 - 50;
             viewportRight.Height = clientRectangle.Height - 50;
@@ -179,6 +175,10 @@ namespace OpenBreed.Game.States
         {
             Core.Viewports.Add(viewportLeft);
             Core.Viewports.Add(viewportRight);
+
+            Console.WriteLine("LMB + Move = Left camera control");
+            Console.WriteLine("RMB + Move = Right camera control");
+            Console.WriteLine("Keyboard arrows  = Control arrow actor");
         }
 
         protected override void OnLeave()
@@ -201,7 +201,8 @@ namespace OpenBreed.Game.States
             actorBuilder.SetPosition(new OpenTK.Vector2(20, 20));
             actorBuilder.SetDirection(new OpenTK.Vector2(1, 0));
 
-            actorBuilder.SetController(new CreatureController());
+            actorBuilder.SetController(new CreatureController(Key.W, Key.S, Key.A, Key.D));
+
             WorldA.AddEntity((WorldActor)actorBuilder.Build());
 
             var rnd = new Random();
@@ -234,7 +235,7 @@ namespace OpenBreed.Game.States
             actorBuilder.SetPosition(new OpenTK.Vector2(50, 20));
             actorBuilder.SetDirection(new OpenTK.Vector2(1, 0));
 
-            actorBuilder.SetController(new CreatureController());
+            actorBuilder.SetController(new CreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
             WorldB.AddEntity((WorldActor)actorBuilder.Build());
 
             var rnd = new Random();

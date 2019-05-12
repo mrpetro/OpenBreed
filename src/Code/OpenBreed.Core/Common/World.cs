@@ -1,6 +1,7 @@
-﻿using OpenBreed.Core.Systems.Common.Components;
-using OpenBreed.Core.Entities;
+﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.Systems;
+using OpenBreed.Core.Systems.Common.Components;
+using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,12 +14,20 @@ namespace OpenBreed.Core
     /// </summary>
     public class World
     {
+        #region Public Fields
+
+        public const float MAX_TILE_MULTIPLIER = 10.0f;
+
+        #endregion Public Fields
+
         #region Private Fields
 
         private readonly List<IWorldEntity> entities = new List<IWorldEntity>();
         private readonly List<IWorldEntity> toAdd = new List<IWorldEntity>();
         private readonly List<IWorldEntity> toRemove = new List<IWorldEntity>();
         private readonly List<IWorldSystem> systems = new List<IWorldSystem>();
+
+        private float timeMultiplier = 1.0f;
 
         #endregion Private Fields
 
@@ -48,6 +57,19 @@ namespace OpenBreed.Core
         #endregion Public Constructors
 
         #region Public Properties
+
+        public float TimeMultiplier
+        {
+            get
+            {
+                return timeMultiplier;
+            }
+
+            set
+            {
+                timeMultiplier = MathHelper.Clamp(value, 0, MAX_TILE_MULTIPLIER);
+            }
+        }
 
         public ICore Core { get; }
 
@@ -104,11 +126,11 @@ namespace OpenBreed.Core
 
         public void Update(float dt)
         {
-            MovementSystem.Update(dt);
+            MovementSystem.Update(dt * TimeMultiplier);
 
-            PhysicsSystem.Update(dt);
+            PhysicsSystem.Update(dt * TimeMultiplier);
 
-            AnimationSystem.Update(dt);
+            AnimationSystem.Update(dt * TimeMultiplier);
 
             Cleanup();
         }

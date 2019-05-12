@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Systems.Rendering.Entities;
 using OpenTK;
+using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System.Drawing;
 
@@ -10,7 +11,6 @@ namespace OpenBreed.Core.Systems.Rendering.Helpers
     /// </summary>
     public class Viewport : IViewport
     {
-
         #region Public Fields
 
         /// <summary>
@@ -22,6 +22,11 @@ namespace OpenBreed.Core.Systems.Rendering.Helpers
         /// This will clip any graphics that is outside of viewport box
         /// </summary>
         public const bool CLIPPING = true;
+
+        /// <summary>
+        /// This will draw border box of viewport
+        /// </summary>
+        public static readonly Color4 BACKGROUND_COLOR = Color4.Black;
 
         #endregion Public Fields
 
@@ -114,16 +119,18 @@ namespace OpenBreed.Core.Systems.Rendering.Helpers
                 //Draw rectangle shape which will clip anything inside viewport
                 GL.Color3(0.0f, 0.0f, 0.0f);
 
-                GL.Begin(PrimitiveType.Polygon);                            // Use A Quad For Each Character
-                GL.Vertex3(0,     Height, 0.0);
-                GL.Vertex3(0,     0,      0.0);
-                GL.Vertex3(Width, 0,      0.0);
+                GL.Begin(PrimitiveType.Polygon);
+                GL.Vertex3(0, Height, 0.0);
+                GL.Vertex3(0, 0, 0.0);
+                GL.Vertex3(Width, 0, 0.0);
                 GL.Vertex3(Width, Height, 0.0);
                 GL.End();
 
                 GL.StencilFunc(StencilFunction.Equal, 0x1, 0x1);
                 GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Keep);
             }
+
+            DrawBackground();
 
             Camera.RenderTo(this);
 
@@ -136,9 +143,9 @@ namespace OpenBreed.Core.Systems.Rendering.Helpers
             {
                 GL.Begin(PrimitiveType.LineLoop);
                 GL.Color4(1.0f, 0.0f, 0.0f, 1.0f);
-                GL.Vertex3(0,     Height, 0.0);
-                GL.Vertex3(0,     0,      0.0);
-                GL.Vertex3(Width, 0,      0.0);
+                GL.Vertex3(0, Height, 0.0);
+                GL.Vertex3(0, 0, 0.0);
+                GL.Vertex3(Width, 0, 0.0);
                 GL.Vertex3(Width, Height, 0.0);
                 GL.End();
             }
@@ -178,5 +185,20 @@ namespace OpenBreed.Core.Systems.Rendering.Helpers
 
         #endregion Public Methods
 
+        #region Private Methods
+
+        private void DrawBackground()
+        {
+            //Draw background for this viewport
+            GL.Color4(BACKGROUND_COLOR);
+            GL.Begin(PrimitiveType.Polygon);
+            GL.Vertex3(0, Height, 0.0);
+            GL.Vertex3(0, 0, 0.0);
+            GL.Vertex3(Width, 0, 0.0);
+            GL.Vertex3(Width, Height, 0.0);
+            GL.End();
+        }
+
+        #endregion Private Methods
     }
 }

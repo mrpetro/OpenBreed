@@ -17,14 +17,22 @@ namespace OpenBreed.Game.Components
 
         #region Public Constructors
 
-        public CreatureController()
+        public CreatureController(Key moveUpKey, Key moveDownKey, Key moveLeftKey, Key moveRightKey)
         {
+            MoveUpKey = moveUpKey;
+            MoveDownKey = moveDownKey;
+            MoveLeftKey = moveLeftKey;
+            MoveRightKey = moveRightKey;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
+        public Key MoveUpKey { get; set; }
+        public Key MoveDownKey { get; set; }
+        public Key MoveLeftKey { get; set; }
+        public Key MoveRightKey { get; set; }
         public Type SystemType { get { return typeof(ControlSystem); } }
 
         #endregion Public Properties
@@ -43,14 +51,14 @@ namespace OpenBreed.Game.Components
 
         public void ProcessInputs(KeyboardState keyState)
         {
-            if (keyState[Key.Up])
+            if (keyState[MoveUpKey])
                 movement.Move(MovementDirection.Up);
-            else if (keyState[Key.Down])
+            else if (keyState[MoveDownKey])
                 movement.Move(MovementDirection.Down);
 
-            if (keyState[Key.Left])
+            if (keyState[MoveLeftKey])
                 movement.Move(MovementDirection.Left);
-            else if (keyState[Key.Right])
+            else if (keyState[MoveRightKey])
                 movement.Move(MovementDirection.Right);
         }
 

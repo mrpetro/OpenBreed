@@ -99,10 +99,6 @@ namespace OpenBreed.Game.States
 
             InitializeWorldA();
             InitializeWorldB();
-
-            Console.WriteLine("LMB + Move = Left camera control");
-            Console.WriteLine("RMB + Move = Right camera control");
-            Console.WriteLine("Keyboard arrows  = Control arrow actor");
         }
 
         #endregion Public Constructors
@@ -179,6 +175,10 @@ namespace OpenBreed.Game.States
         {
             Core.Viewports.Add(viewportLeft);
             Core.Viewports.Add(viewportRight);
+
+            Console.WriteLine("LMB + Move = Left camera control");
+            Console.WriteLine("RMB + Move = Right camera control");
+            Console.WriteLine("Keyboard arrows  = Control arrow actor");
         }
 
         protected override void OnLeave()
@@ -201,7 +201,7 @@ namespace OpenBreed.Game.States
             actorBuilder.SetPosition(new OpenTK.Vector2(20, 20));
             actorBuilder.SetDirection(new OpenTK.Vector2(1, 0));
 
-            actorBuilder.SetController(new CreatureController());
+            actorBuilder.SetController(new CreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
             WorldA.AddEntity((WorldActor)actorBuilder.Build());
 
             var rnd = new Random();
@@ -234,7 +234,7 @@ namespace OpenBreed.Game.States
             actorBuilder.SetPosition(new OpenTK.Vector2(50, 20));
             actorBuilder.SetDirection(new OpenTK.Vector2(1, 0));
 
-            actorBuilder.SetController(new CreatureController());
+            actorBuilder.SetController(new CreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
             WorldB.AddEntity((WorldActor)actorBuilder.Build());
 
             var rnd = new Random();

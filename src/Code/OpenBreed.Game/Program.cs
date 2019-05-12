@@ -109,7 +109,9 @@ namespace OpenBreed.Game
             GL.ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
             //GL.Enable(EnableCap.Blend);
             //GL.BlendFunc(BlendingFactor.SrcAlpha,BlendingFactor.OneMinusSrcAlpha);
-            GL.Enable(EnableCap.DepthTest);
+
+            GL.DepthFunc(DepthFunction.Never);
+            //GL.Enable(EnableCap.DepthTest);
         }
 
         protected override void OnResize(EventArgs e)
