@@ -17,9 +17,9 @@ namespace OpenBreed.Core.Systems.Rendering.Helpers
 
         #region Public Properties
 
-        public int Height { get; private set; }
         public int Id { get; }
         public int Width { get; private set; }
+        public int Height { get; private set; }
 
         #endregion Public Properties
 

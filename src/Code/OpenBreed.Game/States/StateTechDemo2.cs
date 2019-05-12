@@ -64,7 +64,6 @@ namespace OpenBreed.Game.States
             Core = core;
 
             TextureMan = new TextureMan();
-            EntityMan = new EntityMan();
 
             WorldA = new World(Core);
             WorldB = new World(Core);
@@ -110,8 +109,6 @@ namespace OpenBreed.Game.States
         public Camera Camera1 { get; }
 
         public Camera Camera2 { get; }
-
-        public EntityMan EntityMan { get; }
 
         public override string Name { get { return Id; } }
 

@@ -13,7 +13,6 @@ using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
 
@@ -56,6 +55,8 @@ namespace OpenBreed.Game
         public WorldMan Worlds { get; }
         public ViewportMan Viewports { get; }
         public StateMan States { get; }
+
+        public Vector2 CursorPos { get; private set; }
 
         #endregion Public Properties
 
@@ -114,6 +115,17 @@ namespace OpenBreed.Game
             //GL.Enable(EnableCap.DepthTest);
         }
 
+        protected override void OnMouseMove(MouseMoveEventArgs e)
+        {
+            base.OnMouseMove(e);
+
+            //var pt = PointToClient(new Point(e.X, e.Y));
+            CursorPos = new Vector2(e.X, ClientRectangle.Height - e.Y);
+
+            //Console.WriteLine($"{ CursorPos.X}, {CursorPos.Y}");
+
+        }
+
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
@@ -160,6 +172,22 @@ namespace OpenBreed.Game
             Viewports.Cleanup();
         }
 
+        private void DrawCursor()
+        {
+            GL.PushMatrix();
+
+            GL.Translate(CursorPos.X, CursorPos.Y, 0.0f);
+
+            GL.Color3(1.0f, 0.0f, 0.0f);
+            GL.Begin(PrimitiveType.Triangles);
+            GL.Vertex3(0, -20, 0.0);
+            GL.Vertex3(0, 0, 0.0);
+            GL.Vertex3(10, -20, 0.0);
+            GL.End();
+
+            GL.PopMatrix();
+        }
+
         protected override void OnRenderFrame(FrameEventArgs e)
         {
             Title = $"Open Breed (Version: {appVersion} Vsync: {VSync} FPS: {1f / e.Time:0})";
@@ -171,6 +199,8 @@ namespace OpenBreed.Game
             GL.PushMatrix();
 
             Viewports.Draw((float)e.Time);
+
+            DrawCursor();
 
             GL.PopMatrix();
 

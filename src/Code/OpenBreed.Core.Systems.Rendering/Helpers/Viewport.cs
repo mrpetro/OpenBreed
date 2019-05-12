@@ -100,6 +100,23 @@ namespace OpenBreed.Core.Systems.Rendering.Helpers
 
         #region Public Methods
 
+        public bool TestScreenCoords(Vector2 point)
+        {
+            if (point.X < Left)
+                return false;
+
+            if (point.X > Right)
+                return false;
+
+            if (point.Y < Bottom)
+                return false;
+
+            if (point.Y > Top)
+                return false;
+
+            return true;
+        }
+
         /// <summary>
         /// This will perform drawing of render system from world that current camera is looking at
         /// </summary>

@@ -58,6 +58,9 @@ namespace OpenBreed.Core
 
         #region Public Properties
 
+        /// <summary>
+        /// Time "speed" control value, can't be negative but can be 0 (Basicaly stops time).
+        /// </summary>
         public float TimeMultiplier
         {
             get

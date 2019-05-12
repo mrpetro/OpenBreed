@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.States;
 using OpenBreed.Core.Systems;
+using OpenTK;
 
 namespace OpenBreed.Core
 {
@@ -11,6 +12,7 @@ namespace OpenBreed.Core
         ViewportMan Viewports { get; }
         WorldMan Worlds { get; }
         StateMan States { get; }
+        Vector2 CursorPos { get; }
 
         #endregion Public Properties
 

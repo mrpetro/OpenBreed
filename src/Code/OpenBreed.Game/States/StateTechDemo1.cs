@@ -64,7 +64,6 @@ namespace OpenBreed.Game.States
             Core = core;
 
             TextureMan = new TextureMan();
-            EntityMan = new EntityMan();
 
             WorldA = new World(Core);
             WorldB = new World(Core);
@@ -111,8 +110,6 @@ namespace OpenBreed.Game.States
 
         public Camera Camera2 { get; }
 
-        public EntityMan EntityMan { get; }
-
         public override string Name { get { return Id; } }
 
         public TextureMan TextureMan { get; }
@@ -130,7 +127,7 @@ namespace OpenBreed.Game.States
             viewportLeft.Width = clientRectangle.Width / 2 - 50;
             viewportLeft.Height = clientRectangle.Height - 50;
 
-            viewportRight.X = clientRectangle.X + 25 + clientRectangle.Width / 4;
+            viewportRight.X = clientRectangle.X + 25 + clientRectangle.Width / 2;
             viewportRight.Y = clientRectangle.Y + 25;
             viewportRight.Width = clientRectangle.Width / 2 - 50;
             viewportRight.Height = clientRectangle.Height - 50;
@@ -147,20 +144,36 @@ namespace OpenBreed.Game.States
             int dx = mouseState.X - px;
             int dy = mouseState.Y - py;
 
-            var z = 1 + ((float)mouseState.Scroll.Y) / 20.0f;
+            Viewport hoverViewport = null;
 
-            if (z == 0)
-                z = 1.0f;
+            if (viewportLeft.TestScreenCoords(Core.CursorPos))
+                hoverViewport = viewportLeft;
+            else if (viewportRight.TestScreenCoords(Core.CursorPos))
+                hoverViewport = viewportRight;
+            else
+                hoverViewport = null;
 
-            if (mouseState.IsButtonDown(MouseButton.Left))
+            //Console.WriteLine($"{ mouseState.X}, {mouseState.Y}");
+
+
+            if (hoverViewport != null)
             {
-                Camera1.Zoom = z;
-                Camera1.Position = Vector2.Subtract(Camera1.Position, new Vector2(dx, -dy));
-            }
-            else if (mouseState.IsButtonDown(MouseButton.Right))
-            {
-                Camera2.Zoom = z;
-                Camera2.Position = Vector2.Subtract(Camera2.Position, new Vector2(dx, -dy));
+
+                var z = 1 + ((float)mouseState.Scroll.Y) / 20.0f;
+
+                if (z == 0)
+                    z = 1.0f;
+
+                if (mouseState.IsButtonDown(MouseButton.Left))
+                {
+                    hoverViewport.Camera.Zoom = z;
+                    hoverViewport.Camera.Position = Vector2.Subtract(hoverViewport.Camera.Position, new Vector2(dx, -dy));
+                }
+                //else if (mouseState.IsButtonDown(MouseButton.Right))
+                //{
+                //    Camera2.Zoom = z;
+                //    Camera2.Position = Vector2.Subtract(Camera2.Position, new Vector2(dx, -dy));
+                //}
             }
 
             px = mouseState.X;
