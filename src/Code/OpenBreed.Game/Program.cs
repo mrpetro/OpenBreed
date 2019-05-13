@@ -57,6 +57,7 @@ namespace OpenBreed.Game
         public StateMan States { get; }
 
         public Vector2 CursorPos { get; private set; }
+        public Vector2 CursorDelta { get; private set; }
 
         #endregion Public Properties
 
@@ -115,17 +116,6 @@ namespace OpenBreed.Game
             //GL.Enable(EnableCap.DepthTest);
         }
 
-        protected override void OnMouseMove(MouseMoveEventArgs e)
-        {
-            base.OnMouseMove(e);
-
-            //var pt = PointToClient(new Point(e.X, e.Y));
-            CursorPos = new Vector2(e.X, ClientRectangle.Height - e.Y);
-
-            //Console.WriteLine($"{ CursorPos.X}, {CursorPos.Y}");
-
-        }
-
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
@@ -157,9 +147,21 @@ namespace OpenBreed.Game
             Worlds.Update(dt);
         }
 
+        private void UpdateCursor()
+        {
+            var mouseState = Mouse.GetCursorState();
+            var mousePoint = new Point(mouseState.X, mouseState.Y);
+            var clientPoint = PointToClient(mousePoint);
+            var newCursorPos = new Vector2(clientPoint.X, ClientRectangle.Height - clientPoint.Y);
+            CursorDelta = newCursorPos - CursorPos;
+            CursorPos = newCursorPos;
+        }
+
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             base.OnUpdateFrame(e);
+
+            UpdateCursor();
 
             OnProcessInputs((float)e.Time);
 

@@ -50,8 +50,6 @@ namespace OpenBreed.Game.States
         private Texture spriteTex;
         private TileAtlas tileAtlas;
         private SpriteAtlas spriteAtlas;
-        private int px;
-        private int py;
         private Viewport viewportLeft;
         private Viewport viewportRight;
 
@@ -141,9 +139,6 @@ namespace OpenBreed.Game.States
 
             var mouseState = Mouse.GetState();
 
-            int dx = mouseState.X - px;
-            int dy = mouseState.Y - py;
-
             Viewport hoverViewport = null;
 
             if (viewportLeft.TestScreenCoords(Core.CursorPos))
@@ -153,9 +148,6 @@ namespace OpenBreed.Game.States
             else
                 hoverViewport = null;
 
-            //Console.WriteLine($"{ mouseState.X}, {mouseState.Y}");
-
-
             if (hoverViewport != null)
             {
 
@@ -164,20 +156,17 @@ namespace OpenBreed.Game.States
                 if (z == 0)
                     z = 1.0f;
 
-                if (mouseState.IsButtonDown(MouseButton.Left))
+                if (mouseState.IsButtonDown(MouseButton.Right))
                 {
-                    hoverViewport.Camera.Zoom = z;
-                    hoverViewport.Camera.Position = Vector2.Subtract(hoverViewport.Camera.Position, new Vector2(dx, -dy));
-                }
-                //else if (mouseState.IsButtonDown(MouseButton.Right))
-                //{
-                //    Camera2.Zoom = z;
-                //    Camera2.Position = Vector2.Subtract(Camera2.Position, new Vector2(dx, -dy));
-                //}
-            }
+                    var transf = hoverViewport.Camera.GetTransform();
+                    transf.Invert();
 
-            px = mouseState.X;
-            py = mouseState.Y;
+                    var delta4 = Vector4.Transform(transf, new Vector4(Core.CursorDelta));
+                    var delta2 = new Vector2(-delta4.X, -delta4.Y);
+                    hoverViewport.Camera.Zoom = z;
+                    hoverViewport.Camera.Position += delta2;
+                }
+            }
         }
 
         #endregion Public Methods
