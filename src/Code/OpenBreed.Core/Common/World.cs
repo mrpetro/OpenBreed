@@ -38,12 +38,12 @@ namespace OpenBreed.Core
             Core = core;
             Entities = new ReadOnlyCollection<IWorldEntity>(entities);
 
-            SoundSystem = Core.CreateSoundSystem();
+            SoundSystem = Core.Sounds.CreateSoundSystem();
             ControlSystem = Core.CreateControlSystem();
             MovementSystem = Core.CreateMovementSystem();
-            PhysicsSystem = Core.CreatePhysicsSystem();
+            PhysicsSystem = Core.Physics.CreatePhysicsSystem(64, 64);
             AnimationSystem = Core.CreateAnimationSystem();
-            RenderSystem = Core.CreateRenderSystem();
+            RenderSystem = Core.Rendering.CreateRenderSystem(64,64);
 
             //systems.Add(SoundSystem);
 

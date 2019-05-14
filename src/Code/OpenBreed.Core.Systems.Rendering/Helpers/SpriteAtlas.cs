@@ -26,7 +26,7 @@ namespace OpenBreed.Core.Systems.Rendering.Helpers
 
         #region Public Constructors
 
-        public SpriteAtlas(Texture texture, int spriteSize, int spriteColumns, int spriteRows)
+        public SpriteAtlas(ITexture texture, int spriteSize, int spriteColumns, int spriteRows)
         {
             this.Texture = texture;
 
@@ -48,7 +48,7 @@ namespace OpenBreed.Core.Systems.Rendering.Helpers
 
         #region Internal Properties
 
-        internal Texture Texture { get; }
+        internal ITexture Texture { get; }
 
         #endregion Internal Properties
 

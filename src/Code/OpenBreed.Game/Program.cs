@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Modules;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Animation;
@@ -34,6 +35,10 @@ namespace OpenBreed.Game
         {
             appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
+            Rendering = new OpenGLModule(this);
+            Sounds = new OpenALModule(this);
+            Physics = new PhysicsModule(this);
+
             Entities = new EntityMan();
             Worlds = new WorldMan(this);
             States = new StateMan(this);
@@ -51,6 +56,9 @@ namespace OpenBreed.Game
 
         #region Public Properties
 
+        public IRenderModule Rendering { get; }
+        public ISoundModule Sounds { get; }
+        public IPhysicsModule Physics { get; }
         public EntityMan Entities { get; }
         public WorldMan Worlds { get; }
         public ViewportMan Viewports { get; }
@@ -62,11 +70,6 @@ namespace OpenBreed.Game
         #endregion Public Properties
 
         #region Public Methods
-
-        public ISoundSystem CreateSoundSystem()
-        {
-            return new SoundSystem();
-        }
 
         public IMovementSystem CreateMovementSystem()
         {
@@ -86,11 +89,6 @@ namespace OpenBreed.Game
         public IPhysicsSystem CreatePhysicsSystem()
         {
             return new PhysicsSystem(64, 64);
-        }
-
-        public IRenderSystem CreateRenderSystem()
-        {
-            return new RenderSystem(64, 64);
         }
 
         #endregion Public Methods

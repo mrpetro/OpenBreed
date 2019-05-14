@@ -9,24 +9,24 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Systems.Rendering
 {
-    public class TextureMan
+    internal class TextureMan
     {
         private Dictionary<string, Texture> textures = new Dictionary<string, Texture>();
 
-        public Texture Load(string filePath)
+        internal ITexture Load(string filePath)
         {
             if (filePath == null)
                 throw new ArgumentNullException(nameof(filePath));
 
             var fullPath = Path.GetFullPath(filePath);
 
-            if (!File.Exists(fullPath))
-                throw new InvalidOperationException($"File '{fullPath}' doesn't exist.");
-
             Texture texture = null;
 
             if (textures.TryGetValue(fullPath, out texture))
                 return texture;
+
+            if (!File.Exists(fullPath))
+                throw new InvalidOperationException($"File '{fullPath}' doesn't exist.");
 
             using (var bitmap = new Bitmap(fullPath))
             {

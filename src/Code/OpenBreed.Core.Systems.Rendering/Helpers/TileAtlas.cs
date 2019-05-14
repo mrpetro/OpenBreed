@@ -24,7 +24,7 @@ namespace OpenBreed.Core.Systems.Rendering.Helpers
 
         #region Public Constructors
 
-        public TileAtlas(Texture texture, int tileSize, int tileColumns, int tileRows)
+        public TileAtlas(ITexture texture, int tileSize, int tileColumns, int tileRows)
         {
             this.Texture = texture;
 
@@ -40,7 +40,7 @@ namespace OpenBreed.Core.Systems.Rendering.Helpers
 
         #region Public Properties
 
-        public Texture Texture { get; }
+        public ITexture Texture { get; }
         public int TileSize { get; }
 
         #endregion Public Properties

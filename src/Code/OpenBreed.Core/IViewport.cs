@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Core
 {
+    /// <summary>
+    /// Basic viewport interface
+    /// </summary>
     public interface IViewport
     {
+        /// <summary>
+        /// Draw viewport content to the screen
+        /// </summary>
         void Draw();
     }
 }

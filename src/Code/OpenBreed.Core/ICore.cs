@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.States;
+﻿using OpenBreed.Core.Modules;
+using OpenBreed.Core.States;
 using OpenBreed.Core.Systems;
 using OpenTK;
 
@@ -10,6 +11,21 @@ namespace OpenBreed.Core
     public interface ICore
     {
         #region Public Properties
+
+        /// <summary>
+        /// Reference to rendering core module
+        /// </summary>
+        IRenderModule Rendering { get; }
+
+        /// <summary>
+        /// Reference to sounds core module
+        /// </summary>
+        ISoundModule Sounds { get; }
+
+        /// <summary>
+        /// Reference to physics core module
+        /// </summary>
+        IPhysicsModule Physics { get; }
 
         /// <summary>
         /// Entities manager
@@ -46,18 +62,6 @@ namespace OpenBreed.Core
         #region Public Methods
 
         /// <summary>
-        /// Creates render system and return it
-        /// </summary>
-        /// <returns>Render system interface</returns>
-        IRenderSystem CreateRenderSystem();
-
-        /// <summary>
-        /// Creates sound system and return it
-        /// </summary>
-        /// <returns>Sound system interface</returns>
-        ISoundSystem CreateSoundSystem();
-
-        /// <summary>
         /// Creates movement system and return it
         /// </summary>
         /// <returns>Movement system interface</returns>
@@ -68,12 +72,6 @@ namespace OpenBreed.Core
         /// </summary>
         /// <returns>Animation system interface</returns>
         IAnimationSystem CreateAnimationSystem();
-
-        /// <summary>
-        /// Creates Physics system and return it
-        /// </summary>
-        /// <returns>Physics system interface</returns>
-        IPhysicsSystem CreatePhysicsSystem();
 
         /// <summary>
         /// Creates control system and return it

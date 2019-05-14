@@ -20,9 +20,7 @@ namespace OpenBreed.Game.States
 
         public const string Id = "TECH_DEMO_1";
 
-        public World WorldA;
-
-        public World WorldB;
+        public World World;
 
         #endregion Public Fields
 
@@ -46,12 +44,13 @@ namespace OpenBreed.Game.States
             0,3,3,0,0,0,3,3,3,3
         };
 
-        private Texture tileTex;
-        private Texture spriteTex;
+        private ITexture tileTex;
+        private ITexture spriteTex;
         private TileAtlas tileAtlas;
         private SpriteAtlas spriteAtlas;
-        private Viewport viewportLeft;
-        private Viewport viewportRight;
+        private Viewport viewportA;
+        private Viewport viewportB;
+        private Viewport viewportC;
 
         #endregion Private Fields
 
@@ -61,15 +60,13 @@ namespace OpenBreed.Game.States
         {
             Core = core;
 
-            TextureMan = new TextureMan();
+            World = new World(Core);
 
-            WorldA = new World(Core);
-            WorldB = new World(Core);
             var cameraBuilder = new CameraBuilder(Core);
 
             //Resources
-            tileTex = TextureMan.Load(@"Content\TileAtlasTest32bit.bmp");
-            spriteTex = TextureMan.Load(@"Content\ArrowSpriteSet.png");
+            tileTex = Core.Rendering.GetTexture(@"Content\TileAtlasTest32bit.bmp");
+            spriteTex = Core.Rendering.GetTexture(@"Content\ArrowSpriteSet.png");
             tileAtlas = new TileAtlas(tileTex, 16, 4, 4);
             spriteAtlas = new SpriteAtlas(spriteTex, 32, 8, 1);
 
@@ -77,25 +74,26 @@ namespace OpenBreed.Game.States
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
             Camera1 = (Camera)cameraBuilder.Build();
-            WorldA.AddEntity(Camera1);
+            World.AddEntity(Camera1);
 
             cameraBuilder.SetPosition(new Vector2(64, 0));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
             Camera2 = (Camera)cameraBuilder.Build();
-            WorldB.AddEntity(Camera2);
+            World.AddEntity(Camera2);
 
-            viewportLeft = new Viewport(50, 50, 540, 380);
-            viewportLeft.Camera = Camera1;
+            viewportA = new Viewport(50, 50, 540, 380);
+            viewportA.Camera = Camera1;
 
-            viewportRight = new Viewport(50, 50, 540, 380);
-            viewportRight.Camera = Camera2;
+            viewportB = new Viewport(50, 50, 540, 380);
+            viewportB.Camera = Camera2;
 
-            Core.Worlds.Add(WorldA);
-            Core.Worlds.Add(WorldB);
+            viewportC = new Viewport(50, 50, 540, 380);
+            viewportC.Camera = Camera2;
 
-            InitializeWorldA();
-            InitializeWorldB();
+            Core.Worlds.Add(World);
+
+            InitializeWorld();
         }
 
         #endregion Public Constructors
@@ -110,8 +108,6 @@ namespace OpenBreed.Game.States
 
         public override string Name { get { return Id; } }
 
-        public TextureMan TextureMan { get; }
-
         #endregion Public Properties
 
         #region Public Methods
@@ -120,15 +116,20 @@ namespace OpenBreed.Game.States
         {
             base.OnResize(clientRectangle);
 
-            viewportLeft.X = clientRectangle.X + 25;
-            viewportLeft.Y = clientRectangle.Y + 25;
-            viewportLeft.Width = clientRectangle.Width / 2 - 50;
-            viewportLeft.Height = clientRectangle.Height - 50;
+            viewportA.X = clientRectangle.X + 25;
+            viewportA.Y = clientRectangle.Y + 25;
+            viewportA.Width = clientRectangle.Width / 2 - 25;
+            viewportA.Height = clientRectangle.Height / 2 - 25;
 
-            viewportRight.X = clientRectangle.X + 25 + clientRectangle.Width / 2;
-            viewportRight.Y = clientRectangle.Y + 25;
-            viewportRight.Width = clientRectangle.Width / 2 - 50;
-            viewportRight.Height = clientRectangle.Height - 50;
+            viewportB.X = clientRectangle.X + 25 + clientRectangle.Width / 2;
+            viewportB.Y = clientRectangle.Y + 25;
+            viewportB.Width = clientRectangle.Width / 2 - 50;
+            viewportB.Height = clientRectangle.Height / 2 - 25;
+
+            viewportC.X = clientRectangle.X + 25;
+            viewportC.Y = clientRectangle.Y + 25 + clientRectangle.Height / 2;
+            viewportC.Width = clientRectangle.Width - 50;
+            viewportC.Height = clientRectangle.Height - clientRectangle.Height / 2 - 50 ;
         }
 
         public override void ProcessInputs(FrameEventArgs e)
@@ -141,10 +142,12 @@ namespace OpenBreed.Game.States
 
             Viewport hoverViewport = null;
 
-            if (viewportLeft.TestScreenCoords(Core.CursorPos))
-                hoverViewport = viewportLeft;
-            else if (viewportRight.TestScreenCoords(Core.CursorPos))
-                hoverViewport = viewportRight;
+            if (viewportA.TestScreenCoords(Core.CursorPos))
+                hoverViewport = viewportA;
+            else if (viewportB.TestScreenCoords(Core.CursorPos))
+                hoverViewport = viewportB;
+            else if (viewportC.TestScreenCoords(Core.CursorPos))
+                hoverViewport = viewportC;
             else
                 hoverViewport = null;
 
@@ -175,25 +178,30 @@ namespace OpenBreed.Game.States
 
         protected override void OnEnter()
         {
-            Core.Viewports.Add(viewportLeft);
-            Core.Viewports.Add(viewportRight);
+            Core.Viewports.Add(viewportA);
+            Core.Viewports.Add(viewportB);
+            Core.Viewports.Add(viewportC);
 
-            Console.WriteLine("LMB + Move = Left camera control");
-            Console.WriteLine("RMB + Move = Right camera control");
+            Console.Clear();
+            Console.WriteLine("---------- Viewports & Cameras --------");
+            Console.WriteLine("This demo shows three viewports with two cameras attached to them.");
+            Console.WriteLine("Constrols:");
+            Console.WriteLine("RMB + Move mouse cursor = Camera control over hovered viewport");
             Console.WriteLine("Keyboard arrows  = Control arrow actor");
         }
 
         protected override void OnLeave()
         {
-            Core.Viewports.Remove(viewportLeft);
-            Core.Viewports.Remove(viewportRight);
+            Core.Viewports.Remove(viewportA);
+            Core.Viewports.Remove(viewportB);
+            Core.Viewports.Remove(viewportC);
         }
 
         #endregion Protected Methods
 
         #region Private Methods
 
-        private void InitializeWorldA()
+        private void InitializeWorld()
         {
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas);
@@ -203,9 +211,9 @@ namespace OpenBreed.Game.States
             actorBuilder.SetPosition(new OpenTK.Vector2(20, 20));
             actorBuilder.SetDirection(new OpenTK.Vector2(1, 0));
 
-            actorBuilder.SetController(new CreatureController(Key.W, Key.S, Key.A, Key.D));
+            actorBuilder.SetController(new CreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
 
-            WorldA.AddEntity((WorldActor)actorBuilder.Build());
+            World.AddEntity((WorldActor)actorBuilder.Build());
 
             var rnd = new Random();
 
@@ -221,7 +229,7 @@ namespace OpenBreed.Game.States
                     {
                         blockBuilder.SetIndices(x + 5, y + 5);
                         blockBuilder.SetTileId(v);
-                        WorldA.AddEntity((WorldBlock)blockBuilder.Build());
+                        World.AddEntity((WorldBlock)blockBuilder.Build());
                     }
                 }
             }
@@ -238,7 +246,7 @@ namespace OpenBreed.Game.States
             actorBuilder.SetDirection(new OpenTK.Vector2(1, 0));
 
             actorBuilder.SetController(new CreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
-            WorldB.AddEntity((WorldActor)actorBuilder.Build());
+            World.AddEntity((WorldActor)actorBuilder.Build());
 
             var rnd = new Random();
 
@@ -254,7 +262,7 @@ namespace OpenBreed.Game.States
                     {
                         blockBuilder.SetIndices(x + 5, y + 5);
                         blockBuilder.SetTileId(v);
-                        WorldB.AddEntity((WorldBlock)blockBuilder.Build());
+                        World.AddEntity((WorldBlock)blockBuilder.Build());
                     }
                 }
             }

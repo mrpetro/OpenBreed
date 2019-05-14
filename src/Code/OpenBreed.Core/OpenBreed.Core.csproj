@@ -73,6 +73,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\ICoreModule.cs" />
+    <Compile Include="Modules\IPhysicsModule.cs" />
+    <Compile Include="Modules\IRenderModule.cs" />
+    <Compile Include="Modules\ISoundModule.cs" />
+    <Compile Include="ITexture.cs" />
     <Compile Include="Systems\Common\Components\IShapeComponent.cs" />
     <Compile Include="Systems\Common\Components\DynamicPosition.cs" />
     <Compile Include="Systems\Common\Components\Position.cs" />

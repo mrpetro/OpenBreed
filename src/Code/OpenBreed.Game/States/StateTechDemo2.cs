@@ -46,8 +46,8 @@ namespace OpenBreed.Game.States
             0,3,3,0,0,0,3,3,3,3
         };
 
-        private Texture tileTex;
-        private Texture spriteTex;
+        private ITexture tileTex;
+        private ITexture spriteTex;
         private TileAtlas tileAtlas;
         private SpriteAtlas spriteAtlas;
         private int px;
@@ -63,15 +63,13 @@ namespace OpenBreed.Game.States
         {
             Core = core;
 
-            TextureMan = new TextureMan();
-
             WorldA = new World(Core);
             WorldB = new World(Core);
             var cameraBuilder = new CameraBuilder(Core);
 
             //Resources
-            tileTex = TextureMan.Load(@"Content\TileAtlasTest32bit.bmp");
-            spriteTex = TextureMan.Load(@"Content\ArrowSpriteSet.png");
+            tileTex = Core.Rendering.GetTexture(@"Content\TileAtlasTest32bit.bmp");
+            spriteTex = Core.Rendering.GetTexture(@"Content\ArrowSpriteSet.png");
             tileAtlas = new TileAtlas(tileTex, 16, 4, 4);
             spriteAtlas = new SpriteAtlas(spriteTex, 32, 8, 1);
 
@@ -111,8 +109,6 @@ namespace OpenBreed.Game.States
         public Camera Camera2 { get; }
 
         public override string Name { get { return Id; } }
-
-        public TextureMan TextureMan { get; }
 
         #endregion Public Properties
 
@@ -173,8 +169,11 @@ namespace OpenBreed.Game.States
             Core.Viewports.Add(viewportLeft);
             Core.Viewports.Add(viewportRight);
 
-            Console.WriteLine("LMB + Move = Left camera control");
-            Console.WriteLine("RMB + Move = Right camera control");
+            Console.Clear();
+            Console.WriteLine("---------- Multi-world --------");
+            Console.WriteLine("This demo shows two separate worlds with three viewports");
+            Console.WriteLine("Constrols:");
+            Console.WriteLine("RMB + Move mouse cursor = Camera control over hovered viewport");
             Console.WriteLine("Keyboard arrows  = Control arrow actor");
         }
 

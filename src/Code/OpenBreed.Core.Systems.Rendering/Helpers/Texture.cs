@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace OpenBreed.Core.Systems.Rendering.Helpers
 {
-    public class Texture : IDisposable
+    public class Texture : ITexture, IDisposable
     {
         #region Private Constructors
 
