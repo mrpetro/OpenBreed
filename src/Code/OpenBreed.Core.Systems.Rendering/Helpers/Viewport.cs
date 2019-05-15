@@ -14,17 +14,17 @@ namespace OpenBreed.Core.Systems.Rendering.Helpers
         #region Public Fields
 
         /// <summary>
-        /// This will draw border box of viewport
+        ///  Flag to draw border box of viewport
         /// </summary>
         public const bool BORDER = true;
 
         /// <summary>
-        /// This will clip any graphics that is outside of viewport box
+        /// Flag to clip any graphics that is outside of viewport box
         /// </summary>
         public const bool CLIPPING = true;
 
         /// <summary>
-        /// This will draw border box of viewport
+        /// Viewport background color
         /// </summary>
         public static readonly Color4 BACKGROUND_COLOR = Color4.Black;
 
@@ -174,8 +174,8 @@ namespace OpenBreed.Core.Systems.Rendering.Helpers
         {
             var transf = Camera.GetTransform();
             transf.Invert();
-            var pointLB = new Vector3(0, 0, 0.0f);
-            var pointRT = new Vector3(Width, Height, 0.0f);
+            var pointLB = new Vector3(-Width / 2.0f, - Height / 2.0f, 0.0f);
+            var pointRT = new Vector3 (Width / 2.0f,   Height / 2.0f, 0.0f);
 
             var tLB = Matrix4.CreateTranslation(pointLB);
             var tRT = Matrix4.CreateTranslation(pointRT);

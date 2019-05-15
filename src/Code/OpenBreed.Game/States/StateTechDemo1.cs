@@ -76,7 +76,7 @@ namespace OpenBreed.Game.States
             Camera1 = (Camera)cameraBuilder.Build();
             World.AddEntity(Camera1);
 
-            cameraBuilder.SetPosition(new Vector2(64, 0));
+            cameraBuilder.SetPosition(new Vector2(64, 288));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
             Camera2 = (Camera)cameraBuilder.Build();
@@ -208,7 +208,7 @@ namespace OpenBreed.Game.States
 
             var actorBuilder = new WorldActorBuilder(Core);
             actorBuilder.SetSpriteAtlas(spriteAtlas);
-            actorBuilder.SetPosition(new OpenTK.Vector2(20, 20));
+            actorBuilder.SetPosition(new OpenTK.Vector2(64, 288));
             actorBuilder.SetDirection(new OpenTK.Vector2(1, 0));
 
             actorBuilder.SetController(new CreatureController(Key.Up, Key.Down, Key.Left, Key.Right));

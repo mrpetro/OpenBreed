@@ -67,6 +67,8 @@ namespace OpenBreed.Core.Systems.Rendering.Entities
         {
             GL.PushMatrix();
 
+            GL.Translate(viewport.Width / 2, viewport.Height / 2, 0.0f);
+
             var transform = GetTransform();
             GL.MultMatrix(ref transform);
 
