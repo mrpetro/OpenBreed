@@ -14,6 +14,9 @@ using System.Drawing;
 
 namespace OpenBreed.Game.States
 {
+    /// <summary>
+    /// Tech Demo Class: Viewports & Cameras
+    /// </summary>
     public class StateTechDemo1 : BaseState
     {
         #region Public Fields
@@ -60,39 +63,6 @@ namespace OpenBreed.Game.States
         {
             Core = core;
 
-            World = new World(Core);
-
-            var cameraBuilder = new CameraBuilder(Core);
-
-            //Resources
-            tileTex = Core.Rendering.GetTexture(@"Content\TileAtlasTest32bit.bmp");
-            spriteTex = Core.Rendering.GetTexture(@"Content\ArrowSpriteSet.png");
-            tileAtlas = new TileAtlas(tileTex, 16, 4, 4);
-            spriteAtlas = new SpriteAtlas(spriteTex, 32, 8, 1);
-
-            cameraBuilder.SetPosition(new Vector2(0, 0));
-            cameraBuilder.SetRotation(0.0f);
-            cameraBuilder.SetZoom(1);
-            Camera1 = (Camera)cameraBuilder.Build();
-            World.AddEntity(Camera1);
-
-            cameraBuilder.SetPosition(new Vector2(64, 288));
-            cameraBuilder.SetRotation(0.0f);
-            cameraBuilder.SetZoom(1);
-            Camera2 = (Camera)cameraBuilder.Build();
-            World.AddEntity(Camera2);
-
-            viewportA = new Viewport(50, 50, 540, 380);
-            viewportA.Camera = Camera1;
-
-            viewportB = new Viewport(50, 50, 540, 380);
-            viewportB.Camera = Camera2;
-
-            viewportC = new Viewport(50, 50, 540, 380);
-            viewportC.Camera = Camera2;
-
-            Core.Worlds.Add(World);
-
             InitializeWorld();
         }
 
@@ -102,9 +72,9 @@ namespace OpenBreed.Game.States
 
         public ICore Core { get; }
 
-        public Camera Camera1 { get; }
+        public Camera Camera1 { get; private set; }
 
-        public Camera Camera2 { get; }
+        public Camera Camera2 { get; private set; }
 
         public override string Name { get { return Id; } }
 
@@ -203,6 +173,39 @@ namespace OpenBreed.Game.States
 
         private void InitializeWorld()
         {
+            World = new World(Core);
+
+            var cameraBuilder = new CameraBuilder(Core);
+
+            //Resources
+            tileTex = Core.Rendering.GetTexture(@"Content\TileAtlasTest32bit.bmp");
+            spriteTex = Core.Rendering.GetTexture(@"Content\ArrowSpriteSet.png");
+            tileAtlas = new TileAtlas(tileTex, 16, 4, 4);
+            spriteAtlas = new SpriteAtlas(spriteTex, 32, 8, 1);
+
+            cameraBuilder.SetPosition(new Vector2(64, 64));
+            cameraBuilder.SetRotation(0.0f);
+            cameraBuilder.SetZoom(1);
+            Camera1 = (Camera)cameraBuilder.Build();
+            World.AddEntity(Camera1);
+
+            cameraBuilder.SetPosition(new Vector2(64, 288));
+            cameraBuilder.SetRotation(0.0f);
+            cameraBuilder.SetZoom(1);
+            Camera2 = (Camera)cameraBuilder.Build();
+            World.AddEntity(Camera2);
+
+            viewportA = new Viewport(50, 50, 540, 380);
+            viewportA.Camera = Camera1;
+
+            viewportB = new Viewport(50, 50, 540, 380);
+            viewportB.Camera = Camera2;
+
+            viewportC = new Viewport(50, 50, 540, 380);
+            viewportC.Camera = Camera2;
+
+            Core.Worlds.Add(World);
+
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas);
 

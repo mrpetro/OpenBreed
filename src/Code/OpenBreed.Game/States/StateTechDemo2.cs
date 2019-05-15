@@ -29,21 +29,25 @@ namespace OpenBreed.Game.States
         #region Private Fields
 
         private static byte[] mapA = new byte[] {
-            3,3,3,3,3,3,3,3,3,3,
-            0,0,0,0,0,0,0,0,1,3,
-            0,0,0,0,0,0,0,0,1,3,
-            3,0,0,1,0,1,0,0,4,3,
-            3,0,0,2,2,2,0,0,2,3,
-            3,3,3,3,3,3,3,3,3,3
+            0,0,8,8,8,8,8,8,0,0,
+            0,8,8,8,8,8,8,8,8,0,
+            8,8,0,0,0,0,0,0,8,8,
+            8,8,8,8,8,8,8,8,8,8,
+            8,8,8,8,8,8,8,8,8,8,
+            8,8,0,0,0,0,0,0,8,8,
+            8,8,0,0,0,0,0,0,8,8,
+            8,8,0,0,0,0,0,0,8,8
         };
 
         private static byte[] mapB = new byte[] {
-            3,3,0,0,0,3,3,3,3,3,
-            0,0,0,0,0,0,0,0,1,3,
-            7,0,0,0,0,0,0,0,1,3,
-            0,0,0,1,0,1,0,0,4,3,
-            0,0,0,2,2,2,0,0,2,3,
-            0,3,3,0,0,0,3,3,3,3
+            7,7,7,7,7,7,7,7,0,0,
+            7,7,0,0,0,0,0,7,7,7,
+            7,7,0,0,0,0,0,7,7,7,
+            7,7,7,7,7,7,7,7,7,0,
+            7,7,7,7,7,7,7,7,7,0,
+            7,7,0,0,0,0,0,7,7,7,
+            7,7,0,0,0,0,0,7,7,7,
+            7,7,7,7,7,7,7,7,0,0
         };
 
         private ITexture tileTex;
@@ -63,6 +67,14 @@ namespace OpenBreed.Game.States
         {
             Core = core;
 
+            InitializeAll();
+
+            InitializeWorldA();
+            InitializeWorldB();
+        }
+
+        private void InitializeAll()
+        {
             WorldA = new World(Core);
             WorldB = new World(Core);
             var cameraBuilder = new CameraBuilder(Core);
@@ -93,9 +105,6 @@ namespace OpenBreed.Game.States
 
             Core.Worlds.Add(WorldA);
             Core.Worlds.Add(WorldB);
-
-            InitializeWorldA();
-            InitializeWorldB();
         }
 
         #endregion Public Constructors
@@ -104,9 +113,9 @@ namespace OpenBreed.Game.States
 
         public ICore Core { get; }
 
-        public Camera Camera1 { get; }
+        public Camera Camera1 { get; private set; }
 
-        public Camera Camera2 { get; }
+        public Camera Camera2 { get; private set; }
 
         public override string Name { get { return Id; } }
 
@@ -171,7 +180,7 @@ namespace OpenBreed.Game.States
 
             Console.Clear();
             Console.WriteLine("---------- Multi-world --------");
-            Console.WriteLine("This demo shows two separate worlds with three viewports");
+            Console.WriteLine("This demo shows two separate worlds, one per viewport");
             Console.WriteLine("Constrols:");
             Console.WriteLine("RMB + Move mouse cursor = Camera control over hovered viewport");
             Console.WriteLine("Keyboard arrows  = Control arrow actor");
@@ -212,7 +221,7 @@ namespace OpenBreed.Game.States
 
                     if (v > 0)
                     {
-                        blockBuilder.SetIndices(x + 5, y + 5);
+                        blockBuilder.SetIndices(x + 5, 10 - y + 5);
                         blockBuilder.SetTileId(v);
                         WorldA.AddEntity((WorldBlock)blockBuilder.Build());
                     }
