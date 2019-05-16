@@ -49,8 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\IControlComponent.cs" />
-    <Compile Include="Components\IMovementController.cs" />
+    <Compile Include="Components\IMouseController.cs" />
+    <Compile Include="Components\IKeyboardController.cs" />
+    <Compile Include="Components\IControllerComponent.cs" />
     <Compile Include="ControlSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace OpenBreed.Game.Components
 {
-    public class CreatureController : IMovementController
+    public class AIController : IControllerComponent
     {
         #region Private Fields
 
@@ -17,12 +17,12 @@ namespace OpenBreed.Game.Components
 
         #region Public Constructors
 
-        public CreatureController(Key moveUpKey, Key moveDownKey, Key moveLeftKey, Key moveRightKey)
+        public AIController()
         {
-            MoveUpKey = moveUpKey;
-            MoveDownKey = moveDownKey;
-            MoveLeftKey = moveLeftKey;
-            MoveRightKey = moveRightKey;
+            //MoveUpKey = moveUpKey;
+            //MoveDownKey = moveDownKey;
+            //MoveLeftKey = moveLeftKey;
+            //MoveRightKey = moveRightKey;
         }
 
         #endregion Public Constructors

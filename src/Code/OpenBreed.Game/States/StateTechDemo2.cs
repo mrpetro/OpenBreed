@@ -1,6 +1,10 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.States;
+using OpenBreed.Core.Systems.Common.Components;
+using OpenBreed.Core.Systems.Common.Components.Shapes;
+using OpenBreed.Core.Systems.Physics.Components;
 using OpenBreed.Core.Systems.Rendering;
+using OpenBreed.Core.Systems.Rendering.Components;
 using OpenBreed.Core.Systems.Rendering.Entities;
 using OpenBreed.Core.Systems.Rendering.Entities.Builders;
 using OpenBreed.Core.Systems.Rendering.Helpers;
@@ -203,10 +207,15 @@ namespace OpenBreed.Game.States
 
             var actorBuilder = new WorldActorBuilder(Core);
             actorBuilder.SetSpriteAtlas(spriteAtlas);
-            actorBuilder.SetPosition(new OpenTK.Vector2(20, 20));
-            actorBuilder.SetDirection(new OpenTK.Vector2(1, 0));
+            actorBuilder.SetSprite(new Sprite(spriteAtlas));
+            actorBuilder.SetPosition(new DynamicPosition(20, 20));
+            actorBuilder.SetDirection(new Direction(1, 0));
+            actorBuilder.SetShape(new AxisAlignedBoxShape(32, 32));
+            actorBuilder.SetAnimator(new SpriteAnimator());
+            actorBuilder.SetMovement(new CreatureMovement());
+            actorBuilder.SetBody(new DynamicBody());
 
-            actorBuilder.SetController(new CreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
+            actorBuilder.SetController(new KeyboardController(Key.Up, Key.Down, Key.Left, Key.Right));
             WorldA.AddEntity((WorldActor)actorBuilder.Build());
 
             var rnd = new Random();
@@ -236,10 +245,15 @@ namespace OpenBreed.Game.States
 
             var actorBuilder = new WorldActorBuilder(Core);
             actorBuilder.SetSpriteAtlas(spriteAtlas);
-            actorBuilder.SetPosition(new OpenTK.Vector2(50, 20));
-            actorBuilder.SetDirection(new OpenTK.Vector2(1, 0));
+            actorBuilder.SetSprite(new Sprite(spriteAtlas));
+            actorBuilder.SetPosition(new DynamicPosition(50, 20));
+            actorBuilder.SetDirection(new Direction(1, 0));
+            actorBuilder.SetShape(new AxisAlignedBoxShape(32, 32));
+            actorBuilder.SetAnimator(new SpriteAnimator());
+            actorBuilder.SetMovement(new CreatureMovement());
+            actorBuilder.SetBody(new DynamicBody());
 
-            actorBuilder.SetController(new CreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
+            actorBuilder.SetController(new KeyboardController(Key.Up, Key.Down, Key.Left, Key.Right));
             WorldB.AddEntity((WorldActor)actorBuilder.Build());
 
             var rnd = new Random();

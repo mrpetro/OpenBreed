@@ -1,5 +1,5 @@
-﻿using OpenBreed.Core.Systems.Common.Components;
-using OpenBreed.Core.Entities;
+﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Systems.Physics.Components;
 using OpenBreed.Core.Systems.Physics.Helpers;
 using OpenBreed.Core.Systems.Rendering;
@@ -12,10 +12,14 @@ using System.Linq;
 
 namespace OpenBreed.Game.Components
 {
+    /// <summary>
+    /// Debug sprite component which can wrap up real sprite component in to it's debug version
+    /// </summary>
     public class SpriteDebug : ISprite
     {
         #region Private Fields
 
+        private ISprite sprite;
         private Position position;
         private DynamicBody body;
 
@@ -23,13 +27,32 @@ namespace OpenBreed.Game.Components
 
         #region Public Constructors
 
-        public SpriteDebug()
+        public SpriteDebug(ISprite sprite)
         {
+            if (sprite == null)
+                throw new ArgumentNullException(nameof(sprite));
+
+            this.sprite = sprite;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
+
+        /// <summary>
+        /// Id of sprite image from the atlas
+        /// </summary>
+        public int ImageId
+        {
+            get
+            {
+                return sprite.ImageId;
+            }
+            set
+            {
+                sprite.ImageId = value;
+            }
+        }
 
         public Type SystemType { get { return typeof(RenderSystem); } }
 
@@ -61,6 +84,8 @@ namespace OpenBreed.Game.Components
             }
             else
                 RenderTools.DrawBox(body.Aabb, Color4.Green);
+
+            sprite.Draw(viewport);
         }
 
         /// <summary>
@@ -71,6 +96,8 @@ namespace OpenBreed.Game.Components
         {
             position = entity.Components.OfType<Position>().First();
             body = entity.Components.OfType<DynamicBody>().First();
+
+            sprite.Initialize(entity);
         }
 
         /// <summary>

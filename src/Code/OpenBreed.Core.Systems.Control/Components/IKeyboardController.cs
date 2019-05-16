@@ -1,9 +1,10 @@
 ﻿using OpenBreed.Core.Systems.Common.Components;
+using OpenBreed.Core.Systems.Control.Components;
 using OpenTK.Input;
 
-namespace OpenBreed.Core.Systems.Control
+namespace OpenBreed.Core.Systems.Control.Components
 {
-    public interface IControlComponent : IEntityComponent
+    public interface IKeyboardController : IControllerComponent
     {
         #region Public Methods
 

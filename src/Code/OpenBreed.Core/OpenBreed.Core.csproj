@@ -73,6 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CoreTools.cs" />
     <Compile Include="Modules\ICoreModule.cs" />
     <Compile Include="Modules\IPhysicsModule.cs" />
     <Compile Include="Modules\IRenderModule.cs" />
