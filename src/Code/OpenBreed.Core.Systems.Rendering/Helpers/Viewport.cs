@@ -170,6 +170,20 @@ namespace OpenBreed.Core.Systems.Rendering.Helpers
             GL.Translate(-X, -Y, 0.0f);
         }
 
+        public Vector2 GetWorldCoords(Vector2 screenCoords)
+        {
+
+            var worldPos2 = new Vector2(screenCoords.X + Camera.Position.X - Width / 2 - X,  screenCoords.Y + Camera.Position.Y - Height / 2 - Y);
+
+
+            //var tLB = Matrix4.CreateTranslation(new Vector3(screenCoords));
+            //tLB = Matrix4.Mult(tLB, transf);
+
+            //var d = tLB.ExtractTranslation();
+
+            return worldPos2;
+        }
+
         public void GetVisibleRectangle(out float left, out float bottom, out float right, out float top)
         {
             var transf = Camera.GetTransform();

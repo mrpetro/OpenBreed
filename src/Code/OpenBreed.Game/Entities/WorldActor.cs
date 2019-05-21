@@ -1,6 +1,8 @@
 ﻿using OpenBreed.Core.Entities;
 using OpenBreed.Game.Components;
 using OpenBreed.Game.Entities.Builders;
+using OpenTK;
+using System.Linq;
 
 namespace OpenBreed.Game.Entities
 {
@@ -30,6 +32,13 @@ namespace OpenBreed.Game.Entities
 
             if (builder.controller != null)
                 Components.Add(builder.controller);
+        }
+
+        public void MoveTo(Vector2 position)
+        {
+            var aiController = Components.OfType<AIController>().FirstOrDefault();
+
+            aiController.SetWaypoint(position);
         }
 
         #endregion Internal Constructors

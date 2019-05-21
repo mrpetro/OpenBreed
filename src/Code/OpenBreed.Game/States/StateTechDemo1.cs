@@ -215,7 +215,7 @@ namespace OpenBreed.Game.States
 
             var actorBuilder = new WorldActorBuilder(Core);
             actorBuilder.SetSpriteAtlas(spriteAtlas);
-            actorBuilder.SetSprite(new SpriteDebug(new Sprite(spriteAtlas)));
+            actorBuilder.SetSprite(new CollisionDebug(new Sprite(spriteAtlas)));
             actorBuilder.SetPosition(new DynamicPosition(64, 288));
             actorBuilder.SetDirection(new Direction(1, 0));
             actorBuilder.SetShape(new AxisAlignedBoxShape(32, 32));

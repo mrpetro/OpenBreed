@@ -7,13 +7,9 @@ using System.Threading.Tasks;
 namespace OpenBreed.Core.Systems.Rendering.Components
 {
     /// <summary>
-    /// Sprite render component interface
+    /// Debug render component that can be used to visualize various data
     /// </summary>
-    public interface ISprite : IRenderComponent
+    public interface IDebug : IRenderComponent
     {
-        /// <summary>
-        /// Id of sprite image from the atlas
-        /// </summary>
-        int ImageId { get; set; }
     }
 }

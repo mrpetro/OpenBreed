@@ -14,6 +14,7 @@ namespace OpenBreed.Core.Systems.Control
 
         private List<IKeyboardController> keyboardControllers;
         private List<IMouseController> mouseControllers;
+        private List<IAutoController> autoControllers;
 
         #endregion Private Fields
 
@@ -23,6 +24,7 @@ namespace OpenBreed.Core.Systems.Control
         {
             keyboardControllers = new List<IKeyboardController>();
             mouseControllers = new List<IMouseController>();
+            autoControllers = new List<IAutoController>();
         }
 
         #endregion Public Constructors
@@ -35,10 +37,13 @@ namespace OpenBreed.Core.Systems.Control
             var mouseState = Mouse.GetCursorState();
 
             for (int i = 0; i < keyboardControllers.Count; i++)
-                keyboardControllers[i].ProcessInputs(keyState);
+                keyboardControllers[i].ProcessInputs(dt, keyState);
 
             for (int i = 0; i < mouseControllers.Count; i++)
-                mouseControllers[i].ProcessInputs(mouseState);
+                mouseControllers[i].ProcessInputs(dt, mouseState);
+
+            for (int i = 0; i < autoControllers.Count; i++)
+                autoControllers[i].Update(dt);
         }
 
         #endregion Internal Methods
@@ -51,6 +56,8 @@ namespace OpenBreed.Core.Systems.Control
                 AddKeyboardController((IKeyboardController)component);
             else if (component is IMouseController)
                 AddMouseController((IMouseController)component);
+            else if (component is IAutoController)
+                AddAutoController((IAutoController)component);
             else
                 throw new NotImplementedException($"{component}");
         }
@@ -72,6 +79,11 @@ namespace OpenBreed.Core.Systems.Control
         private void AddMouseController(IMouseController controller)
         {
             mouseControllers.Add(controller);
+        }
+
+        private void AddAutoController(IAutoController controller)
+        {
+            autoControllers.Add(controller);
         }
 
         #endregion Private Methods

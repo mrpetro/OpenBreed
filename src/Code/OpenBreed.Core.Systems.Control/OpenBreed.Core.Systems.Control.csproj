@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\IAutoController.cs" />
     <Compile Include="Components\IMouseController.cs" />
     <Compile Include="Components\IKeyboardController.cs" />
     <Compile Include="Components\IControllerComponent.cs" />

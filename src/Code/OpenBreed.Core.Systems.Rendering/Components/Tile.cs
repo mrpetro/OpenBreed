@@ -8,7 +8,7 @@ using System.Linq;
 namespace OpenBreed.Core.Systems.Rendering.Components
 {
     /// <summary>
-    /// Class of axis-aligned tile graphics with same height and width
+    /// Axis-aligned tile render component with same height and width
     /// </summary>
     public class Tile : IRenderComponent
     {

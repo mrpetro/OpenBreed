@@ -9,6 +9,7 @@ using OpenBreed.Core.Systems.Movement.Components;
 using OpenBreed.Core.Systems.Physics.Components;
 using OpenBreed.Core.Systems.Rendering.Components;
 using OpenBreed.Core.Systems.Rendering.Helpers;
+using OpenBreed.Game.Components;
 
 namespace OpenBreed.Game.Entities.Builders
 {
@@ -24,7 +25,7 @@ namespace OpenBreed.Game.Entities.Builders
         internal IRenderComponent sprite;
         internal SpriteAtlas spriteAtlas;
         internal IControllerComponent controller;
-        internal IMovementComponent movement;
+        internal CreatureMovement movement;
 
         #endregion Internal Fields
 
@@ -59,7 +60,7 @@ namespace OpenBreed.Game.Entities.Builders
             this.shape = shape;
         }
 
-        public void SetMovement(IMovementComponent movement)
+        public void SetMovement(CreatureMovement movement)
         {
             this.movement = movement;
         }

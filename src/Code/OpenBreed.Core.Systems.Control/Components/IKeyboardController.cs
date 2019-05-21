@@ -8,7 +8,7 @@ namespace OpenBreed.Core.Systems.Control.Components
     {
         #region Public Methods
 
-        void ProcessInputs(KeyboardState keyState);
+        void ProcessInputs(float dt, KeyboardState keyState);
 
         #endregion Public Methods
     }

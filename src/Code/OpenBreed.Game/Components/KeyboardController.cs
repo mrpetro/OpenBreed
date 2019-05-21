@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.Systems.Control;
 using OpenBreed.Core.Systems.Control.Components;
+using OpenTK;
 using OpenTK.Input;
 using System;
 using System.Linq;
@@ -49,17 +50,21 @@ namespace OpenBreed.Game.Components
             movement = entity.Components.OfType<CreatureMovement>().First();
         }
 
-        public void ProcessInputs(KeyboardState keyState)
+        public void ProcessInputs(float dt, KeyboardState keyState)
         {
-            if (keyState[MoveUpKey])
-                movement.Move(MovementDirection.Up);
-            else if (keyState[MoveDownKey])
-                movement.Move(MovementDirection.Down);
+            var direction = new Vector2(0, 0);
 
             if (keyState[MoveLeftKey])
-                movement.Move(MovementDirection.Left);
+                direction.X = -1;
             else if (keyState[MoveRightKey])
-                movement.Move(MovementDirection.Right);
+                direction.X = 1;
+
+            if (keyState[MoveUpKey])
+                direction.Y = 1;
+            else if (keyState[MoveDownKey])
+                direction.Y = -1;
+
+            movement.Move(direction);
         }
 
         #endregion Public Methods

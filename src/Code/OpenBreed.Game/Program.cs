@@ -47,7 +47,7 @@ namespace OpenBreed.Game
             States.RegisterState(new StateTechDemo2(this));
             States.RegisterState(new StateTechDemo3(this));
             //StateMan.RegisterState(new MenuState(this));
-            States.SetNextState(StateTechDemo1.Id);
+            States.SetNextState(StateTechDemo3.Id);
             States.ChangeState();
 
             VSync = VSyncMode.On;

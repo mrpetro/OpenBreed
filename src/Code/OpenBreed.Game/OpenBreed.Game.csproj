@@ -47,11 +47,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\MoveToCommand.cs" />
     <Compile Include="Components\AIController.cs" />
+    <Compile Include="Components\AIControllerDebug.cs" />
     <Compile Include="Components\SpriteAnimator.cs" />
     <Compile Include="Components\CreatureMovement.cs" />
     <Compile Include="Components\KeyboardController.cs" />
-    <Compile Include="Components\SpriteDebug.cs" />
+    <Compile Include="Components\CollisionDebug.cs" />
     <Compile Include="Entities\Builders\WorldActorBuilder.cs" />
     <Compile Include="Entities\Builders\WorldBlockBuilder.cs" />
     <Compile Include="Entities\WorldActor.cs" />

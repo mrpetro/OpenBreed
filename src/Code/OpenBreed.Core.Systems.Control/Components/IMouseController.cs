@@ -7,7 +7,7 @@ namespace OpenBreed.Core.Systems.Control.Components
     {
         #region Public Methods
 
-        void ProcessInputs(MouseState mouseState);
+        void ProcessInputs(float dt, MouseState mouseState);
 
         #endregion Public Methods
     }
