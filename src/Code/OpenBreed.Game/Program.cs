@@ -45,8 +45,9 @@ namespace OpenBreed.Game
             Viewports = new ViewportMan(this);
             States.RegisterState(new StateTechDemo1(this));
             States.RegisterState(new StateTechDemo2(this));
+            States.RegisterState(new StateTechDemo3(this));
             //StateMan.RegisterState(new MenuState(this));
-            States.SetNextState(StateTechDemo1.Id);
+            States.SetNextState(StateTechDemo3.Id);
             States.ChangeState();
 
             VSync = VSyncMode.On;
@@ -136,6 +137,8 @@ namespace OpenBreed.Game
                 States.SetNextState(StateTechDemo1.Id);
             else if (keyState.IsKeyDown(Key.Number2))
                 States.SetNextState(StateTechDemo2.Id);
+            else if (keyState.IsKeyDown(Key.Number3))
+                States.SetNextState(StateTechDemo3.Id);
 
             Worlds.ProcessInputs(dt);
         }

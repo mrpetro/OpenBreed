@@ -1,5 +1,5 @@
-﻿using OpenBreed.Core.Systems.Common.Components;
-using OpenBreed.Core.Entities;
+﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Systems.Movement;
 using OpenBreed.Core.Systems.Movement.Components;
 using OpenTK;
@@ -18,11 +18,10 @@ namespace OpenBreed.Game.Components
 
     public class CreatureMovement : IMovementComponent
     {
-        private float SPEED = 4.0f;
-        private float MAXSPEED = 16.0f;
-
-
         #region Private Fields
+
+        private float speedPercent = 1.0f;
+        private float MAXSPEED = 8.0f;
 
         private Vector2 thrust;
 
@@ -41,6 +40,21 @@ namespace OpenBreed.Game.Components
 
         #region Public Properties
 
+        public float SpeedPercent
+        {
+            get
+            {
+                return speedPercent;
+            }
+
+            set
+            {
+                speedPercent = MathHelper.Clamp(value, 0.0f, 1.0f);
+            }
+        }
+
+        public float Speed { get { return speedPercent * MAXSPEED; } }
+
         public Type SystemType { get { return typeof(MovementSystem); } }
 
         #endregion Public Properties
@@ -58,26 +72,12 @@ namespace OpenBreed.Game.Components
             direction = entity.Components.OfType<Direction>().First();
         }
 
-        public void Move(MovementDirection direction)
+        public void Move(Vector2 direction)
         {
-            switch (direction)
-            {
-                case MovementDirection.Right:
-                    thrust.X += SPEED;
-                    break;
-
-                case MovementDirection.Up:
-                    thrust.Y += SPEED;
-                    break;
-
-                case MovementDirection.Left:
-                    thrust.X -= SPEED;
-                    break;
-
-                case MovementDirection.Down:
-                    thrust.Y -= SPEED;
-                    break;
-            }
+            if (direction == Vector2.Zero)
+                thrust = Vector2.Zero;
+            else
+                thrust = direction.Normalized() * Speed;
         }
 
         public void Update(float dt)

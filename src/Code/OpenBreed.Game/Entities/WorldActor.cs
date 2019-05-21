@@ -1,43 +1,46 @@
-﻿using OpenBreed.Core.Systems.Common.Components;
-using OpenBreed.Core.Systems.Common.Components.Shapes;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Systems.Physics.Components;
-using OpenBreed.Core.Systems.Rendering.Components;
+﻿using OpenBreed.Core.Entities;
 using OpenBreed.Game.Components;
 using OpenBreed.Game.Entities.Builders;
 using OpenTK;
+using System.Linq;
 
 namespace OpenBreed.Game.Entities
 {
     public class WorldActor : WorldEntity
     {
-        #region Private Fields
+        #region Internal Constructors
 
-        private Vector2 position;
-
-        #endregion Private Fields
-
-        #region Public Constructors
-
-        public WorldActor(WorldActorBuilder builder) : base(builder)
+        internal WorldActor(WorldActorBuilder builder) : base(builder)
         {
-            this.position = builder.position;
+            Components.Add(builder.position);
+            Components.Add(builder.direction);
 
-            var position = new DynamicPosition(builder.position);
-            var direction = new Direction(builder.direction);
-            Components.Add(position);
-            Components.Add(direction);
-            Components.Add(new SpriteDebug());
-            Components.Add(new Sprite(builder.spriteAtlas));
-            Components.Add(new CreatureMovement());
-            Components.Add(new CreatureAnimator());
-            Components.Add(new AxisAlignedBoxShape(32, 32));
-            Components.Add(new DynamicBody());
+            if(builder.animator != null)
+                Components.Add(builder.animator);
+
+            if (builder.movement != null)
+                Components.Add(builder.movement);
+
+            if (builder.sprite != null)
+                Components.Add(builder.sprite);
+
+            if (builder.shape != null)
+                Components.Add(builder.shape);
+
+            if (builder.body != null)
+                Components.Add(builder.body);
 
             if (builder.controller != null)
                 Components.Add(builder.controller);
         }
 
-        #endregion Public Constructors
+        public void MoveTo(Vector2 position)
+        {
+            var aiController = Components.OfType<AIController>().FirstOrDefault();
+
+            aiController.SetWaypoint(position);
+        }
+
+        #endregion Internal Constructors
     }
 }

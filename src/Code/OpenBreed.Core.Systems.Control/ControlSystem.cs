@@ -8,11 +8,13 @@ namespace OpenBreed.Core.Systems.Control
     /// <summary>
     /// Control system should be used to control actions
     /// </summary>
-    public class ControlSystem : WorldSystem<IControlComponent>, IControlSystem
+    public class ControlSystem : WorldSystem<IControllerComponent>, IControlSystem
     {
         #region Private Fields
 
-        private List<IMovementController> controllers;
+        private List<IKeyboardController> keyboardControllers;
+        private List<IMouseController> mouseControllers;
+        private List<IAutoController> autoControllers;
 
         #endregion Private Fields
 
@@ -20,7 +22,9 @@ namespace OpenBreed.Core.Systems.Control
 
         public ControlSystem()
         {
-            controllers = new List<IMovementController>();
+            keyboardControllers = new List<IKeyboardController>();
+            mouseControllers = new List<IMouseController>();
+            autoControllers = new List<IAutoController>();
         }
 
         #endregion Public Constructors
@@ -30,26 +34,35 @@ namespace OpenBreed.Core.Systems.Control
         public override void Update(float dt)
         {
             var keyState = Keyboard.GetState();
+            var mouseState = Mouse.GetCursorState();
 
-            for (int i = 0; i < controllers.Count; i++)
-            {
-                controllers[i].ProcessInputs(keyState);
-            }
+            for (int i = 0; i < keyboardControllers.Count; i++)
+                keyboardControllers[i].ProcessInputs(dt, keyState);
+
+            for (int i = 0; i < mouseControllers.Count; i++)
+                mouseControllers[i].ProcessInputs(dt, mouseState);
+
+            for (int i = 0; i < autoControllers.Count; i++)
+                autoControllers[i].Update(dt);
         }
 
         #endregion Internal Methods
 
         #region Protected Methods
 
-        protected override void AddComponent(IControlComponent component)
+        protected override void AddComponent(IControllerComponent component)
         {
-            if (component is IMovementController)
-                AddMovementControl((IMovementController)component);
+            if (component is IKeyboardController)
+                AddKeyboardController((IKeyboardController)component);
+            else if (component is IMouseController)
+                AddMouseController((IMouseController)component);
+            else if (component is IAutoController)
+                AddAutoController((IAutoController)component);
             else
                 throw new NotImplementedException($"{component}");
         }
 
-        protected override void RemoveComponent(IControlComponent component)
+        protected override void RemoveComponent(IControllerComponent component)
         {
             throw new NotImplementedException();
         }
@@ -58,9 +71,19 @@ namespace OpenBreed.Core.Systems.Control
 
         #region Private Methods
 
-        private void AddMovementControl(IMovementController controller)
+        private void AddKeyboardController(IKeyboardController controller)
         {
-            controllers.Add(controller);
+            keyboardControllers.Add(controller);
+        }
+
+        private void AddMouseController(IMouseController controller)
+        {
+            mouseControllers.Add(controller);
+        }
+
+        private void AddAutoController(IAutoController controller)
+        {
+            autoControllers.Add(controller);
         }
 
         #endregion Private Methods

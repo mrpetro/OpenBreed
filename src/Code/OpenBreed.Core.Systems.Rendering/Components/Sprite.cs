@@ -9,7 +9,7 @@ using System.Linq;
 namespace OpenBreed.Core.Systems.Rendering.Components
 {
     /// <summary>
-    /// Axis-aligned sprite
+    /// Axis-aligned sprite render component
     /// Shared components:
     ///  - axis-aligned box shape
     ///  - position
@@ -54,7 +54,9 @@ namespace OpenBreed.Core.Systems.Rendering.Components
         {
             GL.PushMatrix();
 
+
             GL.Translate((int)position.Current.X, (int)position.Current.Y, 0.0f);
+            GL.Translate(- atlas.SpriteSize / 2, - atlas.SpriteSize / 2, 0.0f);
             atlas.Draw(viewport, ImageId);
 
             GL.PopMatrix();

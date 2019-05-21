@@ -8,12 +8,12 @@ using System.Linq;
 
 namespace OpenBreed.Game.Components
 {
-    public class CreatureAnimator : IAnimationComponent
+    public class SpriteAnimator : IAnimationComponent
     {
         #region Private Fields
 
         private Direction direction;
-        private Sprite sprite;
+        private ISprite sprite;
 
         #endregion Private Fields
 
@@ -55,7 +55,7 @@ namespace OpenBreed.Game.Components
         public void Initialize(IEntity entity)
         {
             direction = entity.Components.OfType<Direction>().First();
-            sprite = entity.Components.OfType<Sprite>().First();
+            sprite = entity.Components.OfType<ISprite>().First();
         }
 
         #endregion Public Methods

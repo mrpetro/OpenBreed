@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\IDebug.cs" />
     <Compile Include="Components\IRenderComponent.cs" />
     <Compile Include="Components\ISprite.cs" />
     <Compile Include="Components\Sprite.cs" />

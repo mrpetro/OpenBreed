@@ -16,7 +16,7 @@ namespace OpenBreed.Core.Systems.Common.Components.Shapes
             Width = width;
             Height = height;
 
-            Aabb = new Box2(0, Height, Width, 0);
+            Aabb = new Box2(- Width / 2, Height / 2, Width / 2, - Height / 2);
         }
 
         #endregion Public Constructors
