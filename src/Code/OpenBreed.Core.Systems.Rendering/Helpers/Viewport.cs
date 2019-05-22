@@ -118,7 +118,7 @@ namespace OpenBreed.Core.Systems.Rendering.Helpers
         }
 
         /// <summary>
-        /// This will perform drawing of render system from world that current camera is looking at
+        /// Perform draw of render system from world that current camera is looking at
         /// </summary>
         public void Draw()
         {
@@ -170,18 +170,26 @@ namespace OpenBreed.Core.Systems.Rendering.Helpers
             GL.Translate(-X, -Y, 0.0f);
         }
 
+        public Matrix4 GetTransform()
+        {
+            var transform = Matrix4.Identity;
+            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-X, -Y, 0));
+            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-Width / 2.0f, -Height / 2.0f, 1.0f));
+            return transform;
+        }
+
         public Vector2 GetWorldCoords(Vector2 screenCoords)
         {
+            var cameraT = Camera.GetTransform();
+            cameraT.Invert();
 
-            var worldPos2 = new Vector2(screenCoords.X + Camera.Position.X - Width / 2 - X,  screenCoords.Y + Camera.Position.Y - Height / 2 - Y);
+            var pointLB = new Vector3(-Width / 2.0f - X, -Height / 2.0f - Y, 0.0f);
+            pointLB = Vector3.Add(pointLB, new Vector3(screenCoords));
+            var tLB = Matrix4.CreateTranslation(pointLB);
+            tLB = Matrix4.Mult(tLB, cameraT);
+            pointLB = tLB.ExtractTranslation();
 
-
-            //var tLB = Matrix4.CreateTranslation(new Vector3(screenCoords));
-            //tLB = Matrix4.Mult(tLB, transf);
-
-            //var d = tLB.ExtractTranslation();
-
-            return worldPos2;
+            return new Vector2(pointLB.X, pointLB.Y);
         }
 
         public void GetVisibleRectangle(out float left, out float bottom, out float right, out float top)

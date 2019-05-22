@@ -150,27 +150,29 @@ namespace OpenBreed.Game.States
 
             var mouseState = Mouse.GetState();
 
-            int dx = mouseState.X - px;
-            int dy = mouseState.Y - py;
+            Viewport hoverViewport = null;
 
-            var z = 1 + ((float)mouseState.Scroll.Y) / 20.0f;
+            if (viewportLeft.TestScreenCoords(Core.CursorPos))
+                hoverViewport = viewportLeft;
+            else if (viewportRight.TestScreenCoords(Core.CursorPos))
+                hoverViewport = viewportRight;
+            else
+                hoverViewport = null;
 
-            if (z == 0)
-                z = 1.0f;
-
-            if (mouseState.IsButtonDown(MouseButton.Left))
+            if (hoverViewport != null)
             {
-                Camera1.Zoom = z;
-                Camera1.Position = Vector2.Subtract(Camera1.Position, new Vector2(dx, -dy));
-            }
-            else if (mouseState.IsButtonDown(MouseButton.Right))
-            {
-                Camera2.Zoom = z;
-                Camera2.Position = Vector2.Subtract(Camera2.Position, new Vector2(dx, -dy));
-            }
+                hoverViewport.Camera.Zoom = Tools.GetZoom(Core, hoverViewport.Camera.Zoom);
 
-            px = mouseState.X;
-            py = mouseState.Y;
+                if (mouseState.IsButtonDown(MouseButton.Middle))
+                {
+                    var transf = hoverViewport.Camera.GetTransform();
+                    transf.Invert();
+                    var delta4 = Vector4.Transform(transf, new Vector4(Core.CursorDelta));
+                    var delta2 = new Vector2(-delta4.X, -delta4.Y);
+
+                    hoverViewport.Camera.Position += delta2;
+                }
+            }
         }
 
         #endregion Public Methods

@@ -67,6 +67,8 @@ namespace OpenBreed.Game
 
         public Vector2 CursorPos { get; private set; }
         public Vector2 CursorDelta { get; private set; }
+        public float Wheel { get; private set; }
+        public float WheelDelta { get; private set; }
 
         #endregion Public Properties
 
@@ -154,8 +156,12 @@ namespace OpenBreed.Game
             var mousePoint = new Point(mouseState.X, mouseState.Y);
             var clientPoint = PointToClient(mousePoint);
             var newCursorPos = new Vector2(clientPoint.X, ClientRectangle.Height - clientPoint.Y);
+            var newWheel = mouseState.WheelPrecise;
+
             CursorDelta = newCursorPos - CursorPos;
             CursorPos = newCursorPos;
+            WheelDelta = newWheel - Wheel;
+            Wheel = newWheel;
         }
 
         protected override void OnUpdateFrame(FrameEventArgs e)

@@ -102,32 +102,21 @@ namespace OpenBreed.Game.States
 
             if (hoverViewport != null)
             {
+                hoverViewport.Camera.Zoom = Tools.GetZoom(Core, hoverViewport.Camera.Zoom);
 
-                var z = 1 + ((float)mouseState.Scroll.Y) / 20.0f;
-
-                if (z == 0)
-                    z = 1.0f;
-
-
-
-                if (mouseState.IsButtonDown(MouseButton.Right))
+                if (mouseState.IsButtonDown(MouseButton.Middle))
                 {
                     var transf = hoverViewport.Camera.GetTransform();
                     transf.Invert();
                     var delta4 = Vector4.Transform(transf, new Vector4(Core.CursorDelta));
                     var delta2 = new Vector2(-delta4.X, -delta4.Y);
-                    hoverViewport.Camera.Zoom = z;
+ 
                     hoverViewport.Camera.Position += delta2;
                 }
 
                 if (mouseState.IsButtonDown(MouseButton.Left))
                 {
                     var worldCoords = hoverViewport.GetWorldCoords(Core.CursorPos);
-
-                    //var transf = hoverViewport.Camera.GetTransform();
-                    //var worldPos4 = Vector4.Transform(transf, new Vector4(Core.CursorPos));
-                    //var worldPos2 = new Vector2(worldPos4.X, worldPos4.Y);
-
                     var moveToCommand = new MoveToCommand(actor, worldCoords);
                     moveToCommand.Execute();
                 }

@@ -64,6 +64,7 @@
     <Compile Include="States\StateTechDemo2.cs" />
     <Compile Include="States\StateTechDemo1.cs" />
     <Compile Include="States\MenuState.cs" />
+    <Compile Include="Tools.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

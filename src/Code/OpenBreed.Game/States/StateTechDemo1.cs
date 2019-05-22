@@ -108,6 +108,8 @@ namespace OpenBreed.Game.States
 
         public override void ProcessInputs(FrameEventArgs e)
         {
+
+
             var keyState = Keyboard.GetState();
             if (keyState.IsKeyDown(Key.Escape))
                 ChangeState(MenuState.Id);
@@ -127,20 +129,15 @@ namespace OpenBreed.Game.States
 
             if (hoverViewport != null)
             {
+                hoverViewport.Camera.Zoom = Tools.GetZoom(Core, hoverViewport.Camera.Zoom);
 
-                var z = 1 + ((float)mouseState.Scroll.Y) / 20.0f;
-
-                if (z == 0)
-                    z = 1.0f;
-
-                if (mouseState.IsButtonDown(MouseButton.Right))
+                if (mouseState.IsButtonDown(MouseButton.Middle))
                 {
                     var transf = hoverViewport.Camera.GetTransform();
                     transf.Invert();
-
                     var delta4 = Vector4.Transform(transf, new Vector4(Core.CursorDelta));
                     var delta2 = new Vector2(-delta4.X, -delta4.Y);
-                    hoverViewport.Camera.Zoom = z;
+
                     hoverViewport.Camera.Position += delta2;
                 }
             }
