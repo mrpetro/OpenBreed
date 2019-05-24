@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace OpenBreed.Game.Components
 {
-    public class AIController : IAutoController
+    public class AICreatureController : IAutoController
     {
         #region Private Fields
 
@@ -24,7 +24,7 @@ namespace OpenBreed.Game.Components
 
         #region Public Constructors
 
-        public AIController()
+        public AICreatureController()
         {
             Waypoints = new ReadOnlyCollection<Vector2>(waypoints);
         }

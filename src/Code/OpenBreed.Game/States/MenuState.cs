@@ -10,7 +10,7 @@ namespace OpenBreed.Game.States
     {
         #region Public Fields
 
-        public const string Id = "MENU";
+        public const string ID = "MENU";
 
         #endregion Public Fields
 
@@ -26,7 +26,7 @@ namespace OpenBreed.Game.States
         #region Public Properties
 
         public ICore Core { get; }
-        public override string Name { get { return Id; } }
+        public override string Id { get { return ID; } }
 
         #endregion Public Properties
 
@@ -51,9 +51,9 @@ namespace OpenBreed.Game.States
             GL.End();
         }
 
-        public override void OnUpdate(FrameEventArgs e)
+        public override string Update(float dt)
         {
-            base.OnUpdate(e);
+            return base.Update(dt);
         }
 
         public override void ProcessInputs(FrameEventArgs e)
@@ -61,7 +61,7 @@ namespace OpenBreed.Game.States
             var state = Keyboard.GetState();
 
             if (state.IsKeyDown(Key.Escape))
-                ChangeState(StateTechDemo1.Id);
+                ChangeState(StateTechDemo1.ID);
 
             if (state.IsKeyDown(Key.X))
                 StateMan.Core.Exit();

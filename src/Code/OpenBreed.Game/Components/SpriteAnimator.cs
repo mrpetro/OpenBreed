@@ -1,61 +1,105 @@
-﻿using OpenBreed.Core.Systems.Common.Components;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Systems.Animation;
-using OpenBreed.Core.Systems.Animation.Components;
+﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.Systems.Rendering.Components;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace OpenBreed.Game.Components
+namespace OpenBreed.Core.Systems.Animation.Components
 {
     public class SpriteAnimator : IAnimationComponent
     {
         #region Private Fields
 
-        private Direction direction;
         private ISprite sprite;
+        private readonly Dictionary<string, Animation<int>> animations = new Dictionary<string, Animation<int>>();
+
+        private Animation<int> currentAnimation;
+        private float currentPosition;
 
         #endregion Private Fields
 
+        #region Public Constructors
+
+        public SpriteAnimator(float speed = 1.0f, bool loop = false)
+        {
+            Speed = speed;
+            Loop = loop;
+        }
+
+        #endregion Public Constructors
+
         #region Public Properties
 
+        public bool Paused { get; set; }
+        public float Speed { get; set; }
+        public IEnumerable<string> AnimationNames { get { return animations.Keys; } }
         public Type SystemType { get { return typeof(AnimationSystem); } }
+
+        public bool Loop { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
+        public void Set(string animationName)
+        {
+            if (!animations.TryGetValue(animationName, out currentAnimation))
+                throw new InvalidOperationException($"Animation '{animationName}' doesn't exist.");
+        }
+
+        public void Play(string animationName = null, float startPosition = 0.0f)
+        {
+            if (animationName != null)
+                Set(animationName);
+
+            currentPosition = startPosition;
+            Paused = false;
+        }
+
+        public void Stop()
+        {
+            currentPosition = 0.0f;
+            Paused = true;
+        }
+
+        public void Pause()
+        {
+            Paused = true;
+        }
+
         public void Animate(float dt)
         {
-            var dir = this.direction.Current;
+            if (Paused)
+                return;
 
-            if (dir.X > 0 && dir.Y == 0)
-                sprite.ImageId = 0;
-            else if (dir.X > 0 && dir.Y > 0)
-                sprite.ImageId = 7;
-            else if (dir.X == 0 && dir.Y > 0)
-                sprite.ImageId = 6;
-            else if (dir.X < 0 && dir.Y > 0)
-                sprite.ImageId = 5;
-            else if (dir.X < 0 && dir.Y == 0)
-                sprite.ImageId = 4;
-            else if (dir.X < 0 && dir.Y < 0)
-                sprite.ImageId = 3;
-            else if (dir.X == 0 && dir.Y < 0)
-                sprite.ImageId = 2;
-            else if (dir.X > 0 && dir.Y < 0)
-                sprite.ImageId = 1;
+            currentPosition += Speed * dt;
+
+            if (currentPosition > currentAnimation.Length)
+            {
+                if (Loop)
+                    currentPosition = currentPosition - currentAnimation.Length;
+                else
+                {
+                    Stop();
+                    return;
+                }
+            }
+
+            sprite.ImageId = currentAnimation.GetFrame(currentPosition);
         }
 
         public void Deinitialize(IEntity entity)
         {
-            throw new NotImplementedException();
         }
 
         public void Initialize(IEntity entity)
         {
-            direction = entity.Components.OfType<Direction>().First();
             sprite = entity.Components.OfType<ISprite>().First();
+        }
+
+        public void AddAnimation(string animationName, Animation<int> animation)
+        {
+            animations.Add(animationName, animation);
         }
 
         #endregion Public Methods

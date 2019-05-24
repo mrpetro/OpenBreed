@@ -26,7 +26,7 @@ namespace OpenBreed.Core.Systems.Physics
         /// <returns>Physics system interface</returns>
         public IPhysicsSystem CreatePhysicsSystem(int gridWidth, int gridHeight)
         {
-            return new PhysicsSystem(gridWidth, gridHeight);
+            return new PhysicsSystem(Core, gridWidth, gridHeight);
         }
 
         #endregion Public Properties

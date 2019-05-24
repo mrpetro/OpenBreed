@@ -38,14 +38,19 @@ namespace OpenBreed.Core
         ViewportMan Viewports { get; }
 
         /// <summary>
+        /// Inputs manager
+        /// </summary>
+        InputsMan Inputs { get; }
+
+        /// <summary>
         /// Worlds manager
         /// </summary>
         WorldMan Worlds { get; }
 
         /// <summary>
-        /// States manager
+        /// States machine
         /// </summary>
-        StateMan States { get; }
+        StateMan StateMachine { get; }
 
         /// <summary>
         /// Gets cursor position in window coordinates

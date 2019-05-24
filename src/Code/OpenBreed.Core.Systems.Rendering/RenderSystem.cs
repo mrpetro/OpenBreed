@@ -30,7 +30,7 @@ namespace OpenBreed.Core.Systems.Rendering
 
         #region Public Constructors
 
-        public RenderSystem(int width, int height)
+        public RenderSystem(ICore core, int width, int height) : base(core)
         {
             InitializeTilesMap(width, height);
             sprites = new List<ISprite>();

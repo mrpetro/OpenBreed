@@ -15,7 +15,7 @@ namespace OpenBreed.Game.Components
 
         private ISprite sprite;
         private Position position;
-        private AIController controller;
+        private AICreatureController controller;
 
         #endregion Private Fields
 
@@ -77,7 +77,7 @@ namespace OpenBreed.Game.Components
         public void Initialize(IEntity entity)
         {
             position = entity.Components.OfType<Position>().First();
-            controller = entity.Components.OfType<AIController>().First();
+            controller = entity.Components.OfType<AICreatureController>().First();
             sprite.Initialize(entity);
         }
 

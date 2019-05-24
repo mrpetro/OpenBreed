@@ -36,7 +36,7 @@ namespace OpenBreed.Game.Entities
 
         public void MoveTo(Vector2 position)
         {
-            var aiController = Components.OfType<AIController>().FirstOrDefault();
+            var aiController = Components.OfType<AICreatureController>().FirstOrDefault();
 
             aiController.SetWaypoint(position);
         }

@@ -34,7 +34,7 @@ namespace OpenBreed.Core.Systems.Rendering
         /// <returns>Render system interface</returns>
         public IRenderSystem CreateRenderSystem(int gridWidth, int gridHeight)
         {
-            return new RenderSystem(gridWidth, gridHeight);
+            return new RenderSystem(Core, gridWidth, gridHeight);
         }
 
         /// <summary>

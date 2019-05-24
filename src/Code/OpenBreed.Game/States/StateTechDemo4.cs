@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.States;
+using OpenBreed.Core.Systems.Animation.Components;
 using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Systems.Common.Components.Shapes;
 using OpenBreed.Core.Systems.Physics.Components;
@@ -20,13 +21,13 @@ using System.Drawing;
 namespace OpenBreed.Game.States
 {
     /// <summary>
-    /// Tech Demo Class: Pathfinding
+    /// Tech Demo Class: Animation
     /// </summary>
-    public class StateTechDemo3 : BaseState
+    public class StateTechDemo4 : BaseState
     {
         #region Public Fields
 
-        public const string ID = "TECH_DEMO_3";
+        public const string ID = "TECH_DEMO_4";
 
         public World World;
 
@@ -54,7 +55,7 @@ namespace OpenBreed.Game.States
 
         #region Public Constructors
 
-        public StateTechDemo3(ICore core)
+        public StateTechDemo4(ICore core)
         {
             Core = core;
 
@@ -191,12 +192,29 @@ namespace OpenBreed.Game.States
             blockBuilder.SetTileAtlas(tileAtlas);
 
             var actorBuilder = new WorldActorBuilder(Core);
+
+            var animation = new Animation<int>();
+
+            animation.AddFrame(2, 2.0f);
+            animation.AddFrame(4, 2.0f);
+            animation.AddFrame(6, 2.0f);
+            animation.AddFrame(3, 2.0f);
+            animation.AddFrame(5, 2.0f);
+
+
+            var sprite = new AIControllerDebug(new Sprite(spriteAtlas));
+
+            var animator = new SpriteAnimator(4.0f, true);
+            animator.AddAnimation("TEST", animation);
+
+            animator.Play("TEST");
+
             actorBuilder.SetSpriteAtlas(spriteAtlas);
-            actorBuilder.SetSprite(new AIControllerDebug(new Sprite(spriteAtlas)));
+            actorBuilder.SetSprite(sprite);
             actorBuilder.SetPosition(new DynamicPosition(64, 288));
             actorBuilder.SetDirection(new Direction(1, 0));
             actorBuilder.SetShape(new AxisAlignedBoxShape(32, 32));
-            actorBuilder.SetAnimator(new CreatureAnimator());
+            actorBuilder.SetAnimator(animator);
             actorBuilder.SetMovement(new CreatureMovement());
             actorBuilder.SetBody(new DynamicBody());
 

@@ -30,7 +30,7 @@ namespace OpenBreed.Core.Systems.Sound
         /// <returns>Sound system interface</returns>
         public ISoundSystem CreateSoundSystem()
         {
-            return new SoundSystem();
+            return new SoundSystem(Core);
         }
     }
 }

@@ -8,14 +8,6 @@ using System.Linq;
 
 namespace OpenBreed.Game.Components
 {
-    public enum MovementDirection
-    {
-        Right,
-        Up,
-        Left,
-        Down
-    }
-
     public class CreatureMovement : IMovementComponent
     {
         #region Private Fields

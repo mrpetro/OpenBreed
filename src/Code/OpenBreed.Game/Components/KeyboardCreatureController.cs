@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace OpenBreed.Game.Components
 {
-    public class KeyboardController : IKeyboardController
+    public class KeyboardCreatureController : IKeyboardController
     {
         #region Private Fields
 
@@ -18,7 +18,7 @@ namespace OpenBreed.Game.Components
 
         #region Public Constructors
 
-        public KeyboardController(Key moveUpKey, Key moveDownKey, Key moveLeftKey, Key moveRightKey)
+        public KeyboardCreatureController(Key moveUpKey, Key moveDownKey, Key moveLeftKey, Key moveRightKey)
         {
             MoveUpKey = moveUpKey;
             MoveDownKey = moveDownKey;

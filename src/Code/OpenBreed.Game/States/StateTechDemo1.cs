@@ -25,7 +25,7 @@ namespace OpenBreed.Game.States
     {
         #region Public Fields
 
-        public const string Id = "TECH_DEMO_1";
+        public const string ID = "TECH_DEMO_1";
 
         public World World;
 
@@ -80,7 +80,7 @@ namespace OpenBreed.Game.States
 
         public Camera Camera2 { get; private set; }
 
-        public override string Name { get { return Id; } }
+        public override string Id { get { return ID; } }
 
         #endregion Public Properties
 
@@ -108,12 +108,7 @@ namespace OpenBreed.Game.States
 
         public override void ProcessInputs(FrameEventArgs e)
         {
-
-
             var keyState = Keyboard.GetState();
-            if (keyState.IsKeyDown(Key.Escape))
-                ChangeState(MenuState.Id);
-
             var mouseState = Mouse.GetState();
 
             Viewport hoverViewport = null;
@@ -149,6 +144,8 @@ namespace OpenBreed.Game.States
 
         protected override void OnEnter()
         {
+            Core.Inputs.KeyDown += Inputs_KeyDown;
+
             Core.Viewports.Add(viewportA);
             Core.Viewports.Add(viewportB);
             Core.Viewports.Add(viewportC);
@@ -161,11 +158,24 @@ namespace OpenBreed.Game.States
             Console.WriteLine("Keyboard arrows  = Control arrow actor");
         }
 
+        private void Inputs_KeyDown(object sender, KeyboardKeyEventArgs e)
+        {
+            var pressedKey = e.Key.ToString();
+
+            if (pressedKey.StartsWith("Number"))
+            {
+                pressedKey = pressedKey.Replace("Number", "");
+                Core.StateMachine.SetNextState($"TECH_DEMO_{pressedKey}");
+            }
+        }
+
         protected override void OnLeave()
         {
             Core.Viewports.Remove(viewportA);
             Core.Viewports.Remove(viewportB);
             Core.Viewports.Remove(viewportC);
+
+            Core.Inputs.KeyDown -= Inputs_KeyDown;
         }
 
         #endregion Protected Methods
@@ -216,12 +226,12 @@ namespace OpenBreed.Game.States
             actorBuilder.SetPosition(new DynamicPosition(64, 288));
             actorBuilder.SetDirection(new Direction(1, 0));
             actorBuilder.SetShape(new AxisAlignedBoxShape(32, 32));
-            actorBuilder.SetAnimator(new SpriteAnimator());
+            actorBuilder.SetAnimator(new CreatureAnimator());
             actorBuilder.SetMovement(new CreatureMovement());
             actorBuilder.SetBody(new DynamicBody());
 
 
-            actorBuilder.SetController(new KeyboardController(Key.Up, Key.Down, Key.Left, Key.Right));
+            actorBuilder.SetController(new KeyboardCreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
 
             World.AddEntity((WorldActor)actorBuilder.Build());
 
@@ -256,11 +266,11 @@ namespace OpenBreed.Game.States
             actorBuilder.SetPosition(new DynamicPosition(50, 20));
             actorBuilder.SetDirection(new Direction(1, 0));
             actorBuilder.SetShape(new AxisAlignedBoxShape(32, 32));
-            actorBuilder.SetAnimator(new SpriteAnimator());
+            actorBuilder.SetAnimator(new CreatureAnimator());
             actorBuilder.SetMovement(new CreatureMovement());
             actorBuilder.SetBody(new DynamicBody());
 
-            actorBuilder.SetController(new KeyboardController(Key.Up, Key.Down, Key.Left, Key.Right));
+            actorBuilder.SetController(new KeyboardCreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
             World.AddEntity((WorldActor)actorBuilder.Build());
 
             var rnd = new Random();
