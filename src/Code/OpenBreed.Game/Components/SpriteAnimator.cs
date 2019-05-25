@@ -72,6 +72,9 @@ namespace OpenBreed.Core.Systems.Animation.Components
             if (Paused)
                 return;
 
+            if (currentAnimation == null)
+                return;
+
             currentPosition += Speed * dt;
 
             if (currentPosition > currentAnimation.Length)

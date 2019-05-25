@@ -1,6 +1,8 @@
-﻿using OpenBreed.Core;
+﻿using System;
+using OpenBreed.Core;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Entities.Builders;
+using OpenBreed.Core.States;
 using OpenBreed.Core.Systems.Animation.Components;
 using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Systems.Control;
@@ -26,6 +28,7 @@ namespace OpenBreed.Game.Entities.Builders
         internal SpriteAtlas spriteAtlas;
         internal IControllerComponent controller;
         internal CreatureMovement movement;
+        internal StateMachine stateMachine;
 
         #endregion Internal Fields
 
@@ -93,6 +96,11 @@ namespace OpenBreed.Game.Entities.Builders
         public void SetSprite(IRenderComponent sprite)
         {
             this.sprite = sprite;
+        }
+
+        internal void SetStateMachine(StateMachine stateMachine)
+        {
+            this.stateMachine = stateMachine;
         }
 
         #endregion Public Methods

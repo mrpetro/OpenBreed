@@ -32,6 +32,9 @@ namespace OpenBreed.Game.Entities
 
             if (builder.controller != null)
                 Components.Add(builder.controller);
+
+            if(builder.stateMachine != null)
+                Components.Add(builder.stateMachine);
         }
 
         public void MoveTo(Vector2 position)

@@ -225,13 +225,18 @@ namespace OpenBreed.Game.States
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas);
 
+            var animator = ActorHelper.CreateAnimator();
+            var stateMachine = ActorHelper.CreateStateMachine();
+            stateMachine.SetInitialState("Standing_Right");
+
             var actorBuilder = new WorldActorBuilder(Core);
+            actorBuilder.SetStateMachine(stateMachine);
+            actorBuilder.SetAnimator(animator);
             actorBuilder.SetSpriteAtlas(spriteAtlas);
             actorBuilder.SetSprite(new Sprite(spriteAtlas));
             actorBuilder.SetPosition(new DynamicPosition(20, 20));
             actorBuilder.SetDirection(new Direction(1, 0));
             actorBuilder.SetShape(new AxisAlignedBoxShape(32, 32));
-            actorBuilder.SetAnimator(new CreatureAnimator());
             actorBuilder.SetMovement(new CreatureMovement());
             actorBuilder.SetBody(new DynamicBody());
 
@@ -260,16 +265,21 @@ namespace OpenBreed.Game.States
 
         private void InitializeWorldB()
         {
+            var animator = ActorHelper.CreateAnimator();
+            var stateMachine = ActorHelper.CreateStateMachine();
+            stateMachine.SetInitialState("Standing_Down");
+
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas);
 
             var actorBuilder = new WorldActorBuilder(Core);
+            actorBuilder.SetStateMachine(stateMachine);
+            actorBuilder.SetAnimator(animator);
             actorBuilder.SetSpriteAtlas(spriteAtlas);
             actorBuilder.SetSprite(new Sprite(spriteAtlas));
             actorBuilder.SetPosition(new DynamicPosition(50, 20));
             actorBuilder.SetDirection(new Direction(1, 0));
             actorBuilder.SetShape(new AxisAlignedBoxShape(32, 32));
-            actorBuilder.SetAnimator(new CreatureAnimator());
             actorBuilder.SetMovement(new CreatureMovement());
             actorBuilder.SetBody(new DynamicBody());
 

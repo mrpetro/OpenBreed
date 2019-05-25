@@ -1,4 +1,6 @@
-﻿namespace OpenBreed.Core.States
+﻿using OpenBreed.Core.Entities;
+
+namespace OpenBreed.Core.States
 {
     public interface IState
     {
@@ -10,11 +12,13 @@
 
         #region Public Methods
 
+        void Initialize(IEntity entity);
+
         void EnterState();
 
-        string Update(float dt);
-
         void LeaveState();
+
+        string Process(string actionName, object[] arguments);
 
         #endregion Public Methods
     }

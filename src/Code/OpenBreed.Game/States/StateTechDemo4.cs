@@ -11,6 +11,7 @@ using OpenBreed.Core.Systems.Rendering.Entities.Builders;
 using OpenBreed.Core.Systems.Rendering.Helpers;
 using OpenBreed.Game.Commands;
 using OpenBreed.Game.Components;
+using OpenBreed.Game.Components.States;
 using OpenBreed.Game.Entities;
 using OpenBreed.Game.Entities.Builders;
 using OpenTK;
@@ -114,13 +115,6 @@ namespace OpenBreed.Game.States
  
                     hoverViewport.Camera.Position += delta2;
                 }
-
-                if (mouseState.IsButtonDown(MouseButton.Left))
-                {
-                    var worldCoords = hoverViewport.GetWorldCoords(Core.CursorPos);
-                    var moveToCommand = new MoveToCommand(actor, worldCoords);
-                    moveToCommand.Execute();
-                }
              }
         }
 
@@ -193,32 +187,27 @@ namespace OpenBreed.Game.States
 
             var actorBuilder = new WorldActorBuilder(Core);
 
-            var animation = new Animation<int>();
-
-            animation.AddFrame(2, 2.0f);
-            animation.AddFrame(4, 2.0f);
-            animation.AddFrame(6, 2.0f);
-            animation.AddFrame(3, 2.0f);
-            animation.AddFrame(5, 2.0f);
 
 
-            var sprite = new AIControllerDebug(new Sprite(spriteAtlas));
+            var sprite = new Sprite(spriteAtlas);
 
-            var animator = new SpriteAnimator(4.0f, true);
-            animator.AddAnimation("TEST", animation);
-
-            animator.Play("TEST");
 
             actorBuilder.SetSpriteAtlas(spriteAtlas);
             actorBuilder.SetSprite(sprite);
+
+            var animator = ActorHelper.CreateAnimator();
+            var stateMachine = ActorHelper.CreateStateMachine();
+            stateMachine.SetInitialState("Standing_Right");
+
+            actorBuilder.SetStateMachine(stateMachine);
+            actorBuilder.SetAnimator(animator);
             actorBuilder.SetPosition(new DynamicPosition(64, 288));
             actorBuilder.SetDirection(new Direction(1, 0));
             actorBuilder.SetShape(new AxisAlignedBoxShape(32, 32));
-            actorBuilder.SetAnimator(animator);
             actorBuilder.SetMovement(new CreatureMovement());
             actorBuilder.SetBody(new DynamicBody());
 
-            actorBuilder.SetController(new AICreatureController());
+            actorBuilder.SetController(new KeyboardCreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
 
             actor = (WorldActor)actorBuilder.Build();
             World.AddEntity(actor);

@@ -64,12 +64,14 @@ namespace OpenBreed.Game.Components
             direction = entity.Components.OfType<Direction>().First();
         }
 
+        public void Stop()
+        {
+            thrust = Vector2.Zero;
+        }
+
         public void Move(Vector2 direction)
         {
-            if (direction == Vector2.Zero)
-                thrust = Vector2.Zero;
-            else
-                thrust = direction.Normalized() * Speed;
+            thrust = direction.Normalized() * Speed;
         }
 
         public void Update(float dt)
@@ -84,8 +86,6 @@ namespace OpenBreed.Game.Components
 
             position.Current = position.Old;
             position.Current += newSpeed;
-
-            thrust = Vector2.Zero;
         }
 
         #endregion Public Methods

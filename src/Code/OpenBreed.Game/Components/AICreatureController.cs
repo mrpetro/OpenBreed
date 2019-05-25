@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.States;
 using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Systems.Control;
 using OpenBreed.Core.Systems.Control.Components;
@@ -17,7 +18,7 @@ namespace OpenBreed.Game.Components
 
         private List<Vector2> waypoints = new List<Vector2>();
 
-        private CreatureMovement movement;
+        private StateMachine stateMachine;
         private DynamicPosition position;
 
         #endregion Private Fields
@@ -52,7 +53,7 @@ namespace OpenBreed.Game.Components
 
         public void Initialize(IEntity entity)
         {
-            movement = entity.Components.OfType<CreatureMovement>().First();
+            stateMachine = entity.Components.OfType<StateMachine>().First();
             position = entity.Components.OfType<DynamicPosition>().First();
         }
 
@@ -79,18 +80,22 @@ namespace OpenBreed.Game.Components
                     return;
                 }
 
-                movement.Move(MovementTools.SnapToCompass8Way(targetVector));
+                var direction = MovementTools.SnapToCompass8Way(targetVector);
+                stateMachine.Perform("Walk", direction);
             }
+            else
+                stateMachine.Perform("Stop");
+
         }
 
 
 
 
-    #endregion Public Methods
+        #endregion Public Methods
 
-    #region Private Methods
+        #region Private Methods
 
-    private Vector2 Snap(Vector2 position, float gridSize)
+        private Vector2 Snap(Vector2 position, float gridSize)
         {
             position = Vector2.Divide(position, gridSize);
             position.X = (int)position.X * gridSize + gridSize / 2.0f;

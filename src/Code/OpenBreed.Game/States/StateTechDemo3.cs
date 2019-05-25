@@ -187,16 +187,21 @@ namespace OpenBreed.Game.States
 
             Core.Worlds.Add(World);
 
+            var animator = ActorHelper.CreateAnimator();
+            var stateMachine = ActorHelper.CreateStateMachine();
+            stateMachine.SetInitialState("Standing_Right");
+
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas);
 
             var actorBuilder = new WorldActorBuilder(Core);
+            actorBuilder.SetStateMachine(stateMachine);
+            actorBuilder.SetAnimator(animator);
             actorBuilder.SetSpriteAtlas(spriteAtlas);
             actorBuilder.SetSprite(new AIControllerDebug(new Sprite(spriteAtlas)));
             actorBuilder.SetPosition(new DynamicPosition(64, 288));
             actorBuilder.SetDirection(new Direction(1, 0));
             actorBuilder.SetShape(new AxisAlignedBoxShape(32, 32));
-            actorBuilder.SetAnimator(new CreatureAnimator());
             actorBuilder.SetMovement(new CreatureMovement());
             actorBuilder.SetBody(new DynamicBody());
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using OpenBreed.Core.Entities;
 using OpenTK;
 
 namespace OpenBreed.Core.States
@@ -70,6 +71,16 @@ namespace OpenBreed.Core.States
         internal void OnRegister(StateMan stateMan)
         {
             StateMan = stateMan;
+        }
+
+        public void Initialize(IEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Process(string stateId, object[] arguments)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion Protected Methods
