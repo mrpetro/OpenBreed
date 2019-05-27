@@ -48,11 +48,14 @@
     <Compile Include="Components\IDebug.cs" />
     <Compile Include="Components\IRenderComponent.cs" />
     <Compile Include="Components\ISprite.cs" />
+    <Compile Include="Components\RenderCharacter.cs" />
+    <Compile Include="Components\RenderText.cs" />
     <Compile Include="Components\Sprite.cs" />
     <Compile Include="Components\Text.cs" />
     <Compile Include="Components\Tile.cs" />
     <Compile Include="Entities\Builders\CameraBuilder.cs" />
     <Compile Include="Entities\Camera.cs" />
+    <Compile Include="Helpers\FontAtlas.cs" />
     <Compile Include="Helpers\RenderTools.cs" />
     <Compile Include="Helpers\SpriteAtlas.cs" />
     <Compile Include="Helpers\Texture.cs" />

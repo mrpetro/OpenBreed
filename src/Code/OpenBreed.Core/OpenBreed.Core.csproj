@@ -76,6 +76,7 @@
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="CoreTools.cs" />
     <Compile Include="InputsMan.cs" />
+    <Compile Include="ITextureMan.cs" />
     <Compile Include="Modules\ICoreModule.cs" />
     <Compile Include="Modules\IPhysicsModule.cs" />
     <Compile Include="Modules\IRenderModule.cs" />

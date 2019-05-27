@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Modules;
 using System;
+using System.Drawing;
 
 namespace OpenBreed.Core.Systems.Rendering
 {
@@ -16,6 +17,8 @@ namespace OpenBreed.Core.Systems.Rendering
         public OpenGLModule(ICore core)
         {
             Core = core ?? throw new ArgumentNullException(nameof(core));
+
+            Textures = new TextureMan();
         }
 
         #endregion Public Constructors
@@ -23,6 +26,8 @@ namespace OpenBreed.Core.Systems.Rendering
         #region Public Properties
 
         public ICore Core { get; }
+
+        public ITextureMan Textures { get; }
 
         #endregion Public Properties
 
@@ -35,16 +40,6 @@ namespace OpenBreed.Core.Systems.Rendering
         public IRenderSystem CreateRenderSystem(int gridWidth, int gridHeight)
         {
             return new RenderSystem(Core, gridWidth, gridHeight);
-        }
-
-        /// <summary>
-        /// Get the texture given by image in the filePath
-        /// </summary>
-        /// <param name="filePath">File path to the image</param>
-        /// <returns>Texture interface</returns>
-        public ITexture GetTexture(string filePath)
-        {
-            return textureMan.Load(filePath);
         }
 
         #endregion Public Methods

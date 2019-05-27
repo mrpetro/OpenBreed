@@ -89,26 +89,5 @@ namespace OpenBreed.Game.Components
         }
 
         #endregion Public Methods
-
-        #region Private Methods
-
-        private float AngleBetween(Vector2 a, Vector2 b)
-        {
-            double angleA;
-            double angleB;
-            if (a.Y >= 0.0f)
-                angleA = Math.Atan2(a.Y, a.X);
-            else
-                angleA = 2 * Math.PI + Math.Atan2(a.Y, a.X);
-
-            if (b.Y >= 0.0f)
-                angleB = Math.Atan2(b.Y, b.X);
-            else
-                angleB = 2 * Math.PI + Math.Atan2(b.Y, b.X);
-
-            return (float)(angleB - angleA);
-        }
-
-        #endregion Private Methods
     }
 }

@@ -17,7 +17,7 @@ namespace OpenBreed.Core.Systems.Rendering.Components
 
         #region Public Properties
 
-        public Type SystemType => throw new NotImplementedException();
+        public Type SystemType { get { return typeof(RenderSystem); } }
 
         #endregion Public Properties
 

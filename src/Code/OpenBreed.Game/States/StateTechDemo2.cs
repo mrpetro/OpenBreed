@@ -87,8 +87,8 @@ namespace OpenBreed.Game.States
             var cameraBuilder = new CameraBuilder(Core);
 
             //Resources
-            tileTex = Core.Rendering.GetTexture(@"Content\TileAtlasTest32bit.bmp");
-            spriteTex = Core.Rendering.GetTexture(@"Content\ArrowSpriteSet.png");
+            tileTex = Core.Rendering.Textures.Load(@"Content\TileAtlasTest32bit.bmp");
+            spriteTex = Core.Rendering.Textures.Load(@"Content\ArrowSpriteSet.png");
             tileAtlas = new TileAtlas(tileTex, 16, 4, 4);
             spriteAtlas = new SpriteAtlas(spriteTex, 32, 8, 1);
 
@@ -148,9 +148,6 @@ namespace OpenBreed.Game.States
         public override void ProcessInputs(FrameEventArgs e)
         {
             var keyState = Keyboard.GetState();
-            if (keyState.IsKeyDown(Key.Escape))
-                ChangeState(MenuState.ID);
-
             var mouseState = Mouse.GetState();
 
             Viewport hoverViewport = null;
@@ -193,7 +190,8 @@ namespace OpenBreed.Game.States
             Console.WriteLine("---------- Multi-worlds --------");
             Console.WriteLine("This demo shows two separate worlds, one per viewport");
             Console.WriteLine("Constrols:");
-            Console.WriteLine("RMB + Move mouse cursor = Camera control over hovered viewport");
+            Console.WriteLine("MMB + Move mouse cursor over hovered viewport = Camera scroll control");
+            Console.WriteLine("Mouse wheel over hovered viewport = Camera zoom control");
             Console.WriteLine("Keyboard arrows  = Control arrow actor");
         }
 

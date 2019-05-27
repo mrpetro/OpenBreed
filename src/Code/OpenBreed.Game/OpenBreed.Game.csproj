@@ -52,12 +52,10 @@
     <Compile Include="Components\AIControllerDebug.cs" />
     <Compile Include="Components\KeyboardCreatureController.cs" />
     <Compile Include="Components\SpriteAnimator.cs" />
-    <Compile Include="Components\CreatureAnimator.cs" />
     <Compile Include="Components\CreatureMovement.cs" />
     <Compile Include="Components\CollisionDebug.cs" />
     <Compile Include="Components\States\WalkingState.cs" />
     <Compile Include="Components\States\StandingState.cs" />
-    <Compile Include="Components\States\StandingStateBuilder.cs" />
     <Compile Include="Entities\ActorHelper.cs" />
     <Compile Include="Entities\Builders\WorldActorBuilder.cs" />
     <Compile Include="Entities\Builders\WorldBlockBuilder.cs" />
@@ -69,7 +67,6 @@
     <Compile Include="States\StateTechDemo3.cs" />
     <Compile Include="States\StateTechDemo2.cs" />
     <Compile Include="States\StateTechDemo1.cs" />
-    <Compile Include="States\MenuState.cs" />
     <Compile Include="Tools.cs" />
   </ItemGroup>
   <ItemGroup>

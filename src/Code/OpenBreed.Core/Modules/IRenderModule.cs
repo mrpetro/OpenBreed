@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Systems;
+using System.Drawing;
 
 namespace OpenBreed.Core.Modules
 {
@@ -18,11 +19,9 @@ namespace OpenBreed.Core.Modules
         IRenderSystem CreateRenderSystem(int gridWidth, int gridHeight);
 
         /// <summary>
-        /// Get the texture given by image in the filePath
+        /// Textures manager
         /// </summary>
-        /// <param name="filePath">File path to the image</param>
-        /// <returns>Texture interface</returns>
-        ITexture GetTexture(string filePath);
+        ITextureMan Textures { get; }
 
         #endregion Public Methods
     }

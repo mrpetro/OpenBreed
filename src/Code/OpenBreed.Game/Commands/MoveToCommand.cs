@@ -1,4 +1,6 @@
 ﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Entities;
+using OpenBreed.Game.Components;
 using OpenBreed.Game.Entities;
 using OpenTK;
 using System;
@@ -11,18 +13,19 @@ namespace OpenBreed.Game.Commands
 {
     public class MoveToCommand : ICommand
     {
-        private WorldActor actor;
+        private AICreatureController controller;
         private Vector2 position;
 
-        public MoveToCommand(WorldActor actor, Vector2 position)
+        public MoveToCommand(IEntity actor, Vector2 position)
         {
-            this.actor = actor;
+            controller = actor.Components.OfType<AICreatureController>().FirstOrDefault();
+
             this.position = position;
         }
 
         public void Execute()
         {
-            actor.MoveTo(position);
+            controller.SetWaypoint(position);
         }
     }
 }

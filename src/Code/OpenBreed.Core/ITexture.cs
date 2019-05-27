@@ -1,9 +1,11 @@
-﻿namespace OpenBreed.Core
+﻿using System;
+
+namespace OpenBreed.Core
 {
     /// <summary>
     /// Basic texture interface
     /// </summary>
-    public interface ITexture
+    public interface ITexture : IDisposable
     {
         #region Public Properties
 

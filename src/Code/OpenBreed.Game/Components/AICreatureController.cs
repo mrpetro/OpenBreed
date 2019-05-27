@@ -19,7 +19,7 @@ namespace OpenBreed.Game.Components
         private List<Vector2> waypoints = new List<Vector2>();
 
         private StateMachine stateMachine;
-        private DynamicPosition position;
+        private Position position;
 
         #endregion Private Fields
 
@@ -54,7 +54,7 @@ namespace OpenBreed.Game.Components
         public void Initialize(IEntity entity)
         {
             stateMachine = entity.Components.OfType<StateMachine>().First();
-            position = entity.Components.OfType<DynamicPosition>().First();
+            position = entity.Components.OfType<Position>().First();
         }
 
         public void Update(float dt)
@@ -68,9 +68,9 @@ namespace OpenBreed.Game.Components
 
                 int compass = (((int)Math.Round(Math.Atan2(targetVector.Y, targetVector.X) / (2 * Math.PI / 8))) + 8) % 8;
 
-                Console.WriteLine($"Distance Left: {targetVector.Length}");
+                //Console.WriteLine($"Distance Left: {targetVector.Length}");
 
-                Console.WriteLine($"Move Dir: {targetVector}");
+                //Console.WriteLine($"Move Dir: {targetVector}");
 
                 if (distanceVec.Length < 16.0f)
                 {

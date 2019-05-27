@@ -90,9 +90,6 @@ namespace OpenBreed.Game.States
         public override void ProcessInputs(FrameEventArgs e)
         {
             var keyState = Keyboard.GetState();
-            if (keyState.IsKeyDown(Key.Escape))
-                ChangeState(MenuState.ID);
-
             var mouseState = Mouse.GetState();
 
             Viewport hoverViewport = null;
@@ -165,8 +162,8 @@ namespace OpenBreed.Game.States
             var cameraBuilder = new CameraBuilder(Core);
 
             //Resources
-            tileTex = Core.Rendering.GetTexture(@"Content\TileAtlasTest32bit.bmp");
-            spriteTex = Core.Rendering.GetTexture(@"Content\ArrowSpriteSet.png");
+            tileTex = Core.Rendering.Textures.Load(@"Content\TileAtlasTest32bit.bmp");
+            spriteTex = Core.Rendering.Textures.Load(@"Content\ArrowSpriteSet.png");
             tileAtlas = new TileAtlas(tileTex, 16, 4, 4);
             spriteAtlas = new SpriteAtlas(spriteTex, 32, 8, 1);
 

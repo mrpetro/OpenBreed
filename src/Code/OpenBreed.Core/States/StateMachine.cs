@@ -32,11 +32,6 @@ namespace OpenBreed.Core.States
             states.Add(state.Id, state);
         }
 
-        public void Deinitialize(IEntity entity)
-        {
-
-        }
-
         public void Initialize(IEntity entity)
         {
             foreach (var state in states)
@@ -46,8 +41,13 @@ namespace OpenBreed.Core.States
                 throw new InvalidOperationException($"Initial state already set to '{currentState.Id}'");
 
             currentState = states[initialStateId];
-            Console.WriteLine($"Entering state '{currentState.Id}'");
+            //Console.WriteLine($"Entering state '{currentState.Id}'");
             currentState.EnterState();
+        }
+
+        public void Deinitialize(IEntity entity)
+        {
+
         }
 
         #endregion Public Methods
@@ -56,10 +56,10 @@ namespace OpenBreed.Core.States
 
         private void ChangeState(string nextStateId)
         {
-            Console.WriteLine($"Leaving state '{currentState.Id}'");
+            //Console.WriteLine($"Leaving state '{currentState.Id}'");
             currentState.LeaveState();
             currentState = states[nextStateId];
-            Console.WriteLine($"Entering state '{currentState.Id}'");
+            //Console.WriteLine($"Entering state '{currentState.Id}'");
             currentState.EnterState();
         }
 
