@@ -1,14 +1,20 @@
 ﻿using OpenBreed.Core.Systems.Sound.Components;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Systems.Sound
 {
     public class SoundSystem : WorldSystem<ISoundComponent>, ISoundSystem
     {
+        #region Public Constructors
+
+        public SoundSystem(ICore core) : base(core)
+        {
+        }
+
+        #endregion Public Constructors
+
+        #region Protected Methods
+
         protected override void AddComponent(ISoundComponent component)
         {
             throw new NotImplementedException();
@@ -18,5 +24,7 @@ namespace OpenBreed.Core.Systems.Sound
         {
             throw new NotImplementedException();
         }
+
+        #endregion Protected Methods
     }
 }

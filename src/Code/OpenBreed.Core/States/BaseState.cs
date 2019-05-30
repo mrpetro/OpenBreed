@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Drawing;
+using OpenBreed.Core.Entities;
 using OpenTK;
 
 namespace OpenBreed.Core.States
 {
-    public abstract class BaseState
+    public abstract class BaseState : IState
     {
         #region Public Properties
 
         public StateMan StateMan { get; private set; }
-        public abstract string Name { get; }
+        public abstract string Id { get; }
 
         #endregion Public Properties
 
@@ -19,12 +20,10 @@ namespace OpenBreed.Core.States
         {
         }
 
-        public virtual void OnRenderFrame(FrameEventArgs e)
-        {
-        }
 
-        public virtual void OnUpdate(FrameEventArgs e)
+        public virtual string Update(float dt)
         {
+            return null;
         }
 
         public virtual void ProcessInputs(FrameEventArgs e)
@@ -45,15 +44,15 @@ namespace OpenBreed.Core.States
 
         }
 
-        internal void EnterState()
+        public void EnterState()
         {
-            Console.WriteLine($"Entering state '{Name}'");
+            Console.WriteLine($"Entering state '{Id}'");
             OnEnter();
         }
 
-        internal void LeaveState()
+        public void LeaveState()
         {
-            Console.WriteLine($"Leaving state '{Name}'");
+            Console.WriteLine($"Leaving state '{Id}'");
             OnLeave();
         }
 
@@ -69,6 +68,16 @@ namespace OpenBreed.Core.States
         internal void OnRegister(StateMan stateMan)
         {
             StateMan = stateMan;
+        }
+
+        public void Initialize(IEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Process(string stateId, object[] arguments)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion Protected Methods

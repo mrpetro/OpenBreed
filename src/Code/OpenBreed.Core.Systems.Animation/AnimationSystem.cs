@@ -14,7 +14,7 @@ namespace OpenBreed.Core.Systems.Animation
 
         #region Public Constructors
 
-        public AnimationSystem()
+        public AnimationSystem(ICore core) : base(core)
         {
             animators = new List<IAnimationComponent>();
         }

@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Entities.Builders;
-using OpenBreed.Core.Systems.Rendering.Helpers;
+using OpenBreed.Core.Modules.Rendering.Helpers;
 
 namespace OpenBreed.Game.Entities.Builders
 {

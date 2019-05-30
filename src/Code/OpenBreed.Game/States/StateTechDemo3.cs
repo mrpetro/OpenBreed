@@ -1,13 +1,14 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Systems.Common.Components.Shapes;
 using OpenBreed.Core.Systems.Physics.Components;
-using OpenBreed.Core.Systems.Rendering;
-using OpenBreed.Core.Systems.Rendering.Components;
-using OpenBreed.Core.Systems.Rendering.Entities;
-using OpenBreed.Core.Systems.Rendering.Entities.Builders;
-using OpenBreed.Core.Systems.Rendering.Helpers;
+using OpenBreed.Core.Modules.Rendering;
+using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Core.Modules.Rendering.Entities;
+using OpenBreed.Core.Modules.Rendering.Entities.Builders;
+using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Game.Commands;
 using OpenBreed.Game.Components;
 using OpenBreed.Game.Entities;
@@ -26,7 +27,7 @@ namespace OpenBreed.Game.States
     {
         #region Public Fields
 
-        public const string Id = "TECH_DEMO_3";
+        public const string ID = "TECH_DEMO_3";
 
         public World World;
 
@@ -69,7 +70,7 @@ namespace OpenBreed.Game.States
 
         public Camera Camera1 { get; private set; }
 
-        public override string Name { get { return Id; } }
+        public override string Id { get { return ID; } }
 
         #endregion Public Properties
 
@@ -88,9 +89,6 @@ namespace OpenBreed.Game.States
         public override void ProcessInputs(FrameEventArgs e)
         {
             var keyState = Keyboard.GetState();
-            if (keyState.IsKeyDown(Key.Escape))
-                ChangeState(MenuState.Id);
-
             var mouseState = Mouse.GetState();
 
             Viewport hoverViewport = null;
@@ -102,32 +100,21 @@ namespace OpenBreed.Game.States
 
             if (hoverViewport != null)
             {
+                hoverViewport.Camera.Zoom = Tools.GetZoom(Core, hoverViewport.Camera.Zoom);
 
-                var z = 1 + ((float)mouseState.Scroll.Y) / 20.0f;
-
-                if (z == 0)
-                    z = 1.0f;
-
-
-
-                if (mouseState.IsButtonDown(MouseButton.Right))
+                if (mouseState.IsButtonDown(MouseButton.Middle))
                 {
                     var transf = hoverViewport.Camera.GetTransform();
                     transf.Invert();
                     var delta4 = Vector4.Transform(transf, new Vector4(Core.CursorDelta));
                     var delta2 = new Vector2(-delta4.X, -delta4.Y);
-                    hoverViewport.Camera.Zoom = z;
+ 
                     hoverViewport.Camera.Position += delta2;
                 }
 
                 if (mouseState.IsButtonDown(MouseButton.Left))
                 {
                     var worldCoords = hoverViewport.GetWorldCoords(Core.CursorPos);
-
-                    //var transf = hoverViewport.Camera.GetTransform();
-                    //var worldPos4 = Vector4.Transform(transf, new Vector4(Core.CursorPos));
-                    //var worldPos2 = new Vector2(worldPos4.X, worldPos4.Y);
-
                     var moveToCommand = new MoveToCommand(actor, worldCoords);
                     moveToCommand.Execute();
                 }
@@ -138,8 +125,21 @@ namespace OpenBreed.Game.States
 
         #region Protected Methods
 
+        private void Inputs_KeyDown(object sender, KeyboardKeyEventArgs e)
+        {
+            var pressedKey = e.Key.ToString();
+
+            if (pressedKey.StartsWith("Number"))
+            {
+                pressedKey = pressedKey.Replace("Number", "");
+                Core.StateMachine.SetNextState($"TECH_DEMO_{pressedKey}");
+            }
+        }
+
         protected override void OnEnter()
         {
+            Core.Inputs.KeyDown += Inputs_KeyDown;
+
             Core.Viewports.Add(viewport);
 
             Console.Clear();
@@ -153,6 +153,8 @@ namespace OpenBreed.Game.States
         protected override void OnLeave()
         {
             Core.Viewports.Remove(viewport);
+
+            Core.Inputs.KeyDown -= Inputs_KeyDown;
         }
 
         #endregion Protected Methods
@@ -166,10 +168,10 @@ namespace OpenBreed.Game.States
             var cameraBuilder = new CameraBuilder(Core);
 
             //Resources
-            tileTex = Core.Rendering.GetTexture(@"Content\TileAtlasTest32bit.bmp");
-            spriteTex = Core.Rendering.GetTexture(@"Content\ArrowSpriteSet.png");
+            tileTex = Core.Rendering.Textures.Load(@"Content\TileAtlasTest32bit.bmp");
+            spriteTex = Core.Rendering.Textures.Load(@"Content\ArrowSpriteSet.png");
             tileAtlas = new TileAtlas(tileTex, 16, 4, 4);
-            spriteAtlas = new SpriteAtlas(spriteTex, 32, 8, 1);
+            spriteAtlas = new SpriteAtlas(spriteTex, 32, 32, 8, 1);
 
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
@@ -183,20 +185,25 @@ namespace OpenBreed.Game.States
 
             Core.Worlds.Add(World);
 
+            var animator = ActorHelper.CreateAnimator();
+            var stateMachine = ActorHelper.CreateStateMachine();
+            stateMachine.SetInitialState("Standing_Right");
+
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas);
 
             var actorBuilder = new WorldActorBuilder(Core);
+            actorBuilder.SetStateMachine(stateMachine);
+            actorBuilder.SetAnimator(animator);
             actorBuilder.SetSpriteAtlas(spriteAtlas);
-            actorBuilder.SetSprite(new AIControllerDebug(new Sprite(spriteAtlas)));
+            actorBuilder.SetSprite(new AIControllerDebug(Core.Rendering.CreateSprite(spriteAtlas)));
             actorBuilder.SetPosition(new DynamicPosition(64, 288));
             actorBuilder.SetDirection(new Direction(1, 0));
             actorBuilder.SetShape(new AxisAlignedBoxShape(32, 32));
-            actorBuilder.SetAnimator(new SpriteAnimator());
             actorBuilder.SetMovement(new CreatureMovement());
             actorBuilder.SetBody(new DynamicBody());
 
-            actorBuilder.SetController(new AIController());
+            actorBuilder.SetController(new AICreatureController());
 
             actor = (WorldActor)actorBuilder.Build();
             World.AddEntity(actor);

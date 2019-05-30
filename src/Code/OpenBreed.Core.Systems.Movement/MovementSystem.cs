@@ -13,7 +13,7 @@ namespace OpenBreed.Core.Systems.Movement
 
         #region Public Constructors
 
-        public MovementSystem()
+        public MovementSystem(ICore core) : base(core)
         {
             components = new List<IMovementComponent>();
         }

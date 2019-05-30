@@ -20,7 +20,7 @@ namespace OpenBreed.Core.Systems.Control
 
         #region Public Constructors
 
-        public ControlSystem()
+        public ControlSystem(ICore core) : base(core)
         {
             keyboardControllers = new List<IKeyboardController>();
             mouseControllers = new List<IMouseController>();

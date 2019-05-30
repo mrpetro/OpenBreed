@@ -32,11 +32,14 @@ namespace OpenBreed.Game.Entities
 
             if (builder.controller != null)
                 Components.Add(builder.controller);
+
+            if(builder.stateMachine != null)
+                Components.Add(builder.stateMachine);
         }
 
         public void MoveTo(Vector2 position)
         {
-            var aiController = Components.OfType<AIController>().FirstOrDefault();
+            var aiController = Components.OfType<AICreatureController>().FirstOrDefault();
 
             aiController.SetWaypoint(position);
         }

@@ -1,8 +1,9 @@
-﻿using OpenBreed.Core.Entities;
+﻿using OpenBreed.Core;
+using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Rendering;
+using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Systems.Common.Components;
-using OpenBreed.Core.Systems.Rendering;
-using OpenBreed.Core.Systems.Rendering.Components;
-using OpenBreed.Core.Systems.Rendering.Helpers;
 using OpenTK.Graphics;
 using System;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace OpenBreed.Game.Components
 
         private ISprite sprite;
         private Position position;
-        private AIController controller;
+        private AICreatureController controller;
 
         #endregion Private Fields
 
@@ -55,7 +56,7 @@ namespace OpenBreed.Game.Components
         /// Draw this sprite to given viewport
         /// </summary>
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
-        public void Draw(Viewport viewport)
+        public void Draw(IViewport viewport)
         {
             for (int i = 1; i < controller.Waypoints.Count; i++)
             {
@@ -77,7 +78,7 @@ namespace OpenBreed.Game.Components
         public void Initialize(IEntity entity)
         {
             position = entity.Components.OfType<Position>().First();
-            controller = entity.Components.OfType<AIController>().First();
+            controller = entity.Components.OfType<AICreatureController>().First();
             sprite.Initialize(entity);
         }
 

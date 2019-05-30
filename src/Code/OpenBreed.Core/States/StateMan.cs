@@ -47,14 +47,9 @@ namespace OpenBreed.Core.States
             activeState.EnterState();
         }
 
-        public void OnRenderFrame(FrameEventArgs e)
+        public void Update(float dt)
         {
-            activeState.OnRenderFrame(e);
-        }
-
-        public void OnUpdate(FrameEventArgs e)
-        {
-            activeState.OnUpdate(e);
+            activeState.Update(dt);
 
             if (activeState != nextState)
                 ChangeState();
@@ -67,7 +62,7 @@ namespace OpenBreed.Core.States
 
         public void RegisterState(BaseState state)
         {
-            states.Add(state.Name, state);
+            states.Add(state.Id, state);
             state.OnRegister(this);
         }
 

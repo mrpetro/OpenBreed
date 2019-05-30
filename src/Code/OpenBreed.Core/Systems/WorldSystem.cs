@@ -6,11 +6,21 @@ namespace OpenBreed.Core.Systems
     {
         #region Protected Constructors
 
-        protected WorldSystem()
+        protected WorldSystem(ICore core)
         {
+            Core = core;
         }
 
         #endregion Protected Constructors
+
+        #region Public Properties
+
+        /// <summary>
+        /// Reference to Core
+        /// </summary>
+        public ICore Core { get; }
+
+        #endregion Public Properties
 
         #region Public Methods
 

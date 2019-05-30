@@ -8,14 +8,6 @@ using System.Linq;
 
 namespace OpenBreed.Game.Components
 {
-    public enum MovementDirection
-    {
-        Right,
-        Up,
-        Left,
-        Down
-    }
-
     public class CreatureMovement : IMovementComponent
     {
         #region Private Fields
@@ -72,12 +64,14 @@ namespace OpenBreed.Game.Components
             direction = entity.Components.OfType<Direction>().First();
         }
 
+        public void Stop()
+        {
+            thrust = Vector2.Zero;
+        }
+
         public void Move(Vector2 direction)
         {
-            if (direction == Vector2.Zero)
-                thrust = Vector2.Zero;
-            else
-                thrust = direction.Normalized() * Speed;
+            thrust = direction.Normalized() * Speed;
         }
 
         public void Update(float dt)
@@ -92,31 +86,8 @@ namespace OpenBreed.Game.Components
 
             position.Current = position.Old;
             position.Current += newSpeed;
-
-            thrust = Vector2.Zero;
         }
 
         #endregion Public Methods
-
-        #region Private Methods
-
-        private float AngleBetween(Vector2 a, Vector2 b)
-        {
-            double angleA;
-            double angleB;
-            if (a.Y >= 0.0f)
-                angleA = Math.Atan2(a.Y, a.X);
-            else
-                angleA = 2 * Math.PI + Math.Atan2(a.Y, a.X);
-
-            if (b.Y >= 0.0f)
-                angleB = Math.Atan2(b.Y, b.X);
-            else
-                angleB = 2 * Math.PI + Math.Atan2(b.Y, b.X);
-
-            return (float)(angleB - angleA);
-        }
-
-        #endregion Private Methods
     }
 }

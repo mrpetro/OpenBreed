@@ -18,7 +18,7 @@ namespace OpenBreed.Core.Systems.Physics
 
         #region Public Constructors
 
-        public PhysicsSystem(int gridWidth, int gridHeight)
+        public PhysicsSystem(ICore core, int gridWidth, int gridHeight) : base(core)
         {
             GridWidth = gridWidth;
             GridHeight = gridHeight;

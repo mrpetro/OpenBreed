@@ -1,12 +1,14 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Modules;
+using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Animation;
 using OpenBreed.Core.Systems.Control;
 using OpenBreed.Core.Systems.Movement;
 using OpenBreed.Core.Systems.Physics;
-using OpenBreed.Core.Systems.Rendering;
+using OpenBreed.Core.Modules.Rendering;
+using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Systems.Sound;
 using OpenBreed.Game.States;
 using OpenTK;
@@ -24,7 +26,8 @@ namespace OpenBreed.Game
         #region Private Fields
 
         private string appVersion;
-        private Font font;
+
+        private FontAtlas fontAtlas;
 
         #endregion Private Fields
 
@@ -40,17 +43,37 @@ namespace OpenBreed.Game
             Physics = new PhysicsModule(this);
 
             Entities = new EntityMan();
+            Inputs = new InputsMan(this);
             Worlds = new WorldMan(this);
-            States = new StateMan(this);
+            StateMachine = new StateMan(this);
             Viewports = new ViewportMan(this);
-            States.RegisterState(new StateTechDemo1(this));
-            States.RegisterState(new StateTechDemo2(this));
-            States.RegisterState(new StateTechDemo3(this));
+            StateMachine.RegisterState(new StateTechDemo1(this));
+            StateMachine.RegisterState(new StateTechDemo2(this));
+            StateMachine.RegisterState(new StateTechDemo3(this));
+            StateMachine.RegisterState(new StateTechDemo4(this));
             //StateMan.RegisterState(new MenuState(this));
-            States.SetNextState(StateTechDemo3.Id);
-            States.ChangeState();
+            StateMachine.SetNextState(StateTechDemo4.ID);
+            StateMachine.ChangeState();
 
             VSync = VSyncMode.On;
+        }
+
+        protected override void OnKeyDown(KeyboardKeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+            Inputs.OnKeyDown(e);
+        }
+
+        protected override void OnKeyUp(KeyboardKeyEventArgs e)
+        {
+            base.OnKeyUp(e);
+            Inputs.OnKeyUp(e);
+        }
+
+        protected override void OnKeyPress(KeyPressEventArgs e)
+        {
+            base.OnKeyPress(e);
+            Inputs.OnKeyPress(e);
         }
 
         #endregion Public Constructors
@@ -61,12 +84,15 @@ namespace OpenBreed.Game
         public ISoundModule Sounds { get; }
         public IPhysicsModule Physics { get; }
         public EntityMan Entities { get; }
+        public InputsMan Inputs { get; }
         public WorldMan Worlds { get; }
         public ViewportMan Viewports { get; }
-        public StateMan States { get; }
+        public StateMan StateMachine { get; }
 
         public Vector2 CursorPos { get; private set; }
         public Vector2 CursorDelta { get; private set; }
+        public float Wheel { get; private set; }
+        public float WheelDelta { get; private set; }
 
         #endregion Public Properties
 
@@ -74,22 +100,22 @@ namespace OpenBreed.Game
 
         public IMovementSystem CreateMovementSystem()
         {
-            return new MovementSystem();
+            return new MovementSystem(this);
         }
 
         public IAnimationSystem CreateAnimationSystem()
         {
-            return new AnimationSystem();
+            return new AnimationSystem(this);
         }
 
         public IControlSystem CreateControlSystem()
         {
-            return new ControlSystem();
+            return new ControlSystem(this);
         }
 
         public IPhysicsSystem CreatePhysicsSystem()
         {
-            return new PhysicsSystem(64, 64);
+            return new PhysicsSystem(this, 64, 64);
         }
 
         #endregion Public Methods
@@ -100,7 +126,6 @@ namespace OpenBreed.Game
         {
             base.OnLoad(e);
 
-            font = new Font("Arial", 12);
 
             //GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.One);                  // Select The Type Of Blending
 
@@ -126,26 +151,7 @@ namespace OpenBreed.Game
 
             GL.Ortho(0, ClientRectangle.Width, 0, ClientRectangle.Height, 0, 1); // Origin in lower-left corner
 
-            States.OnResize(ClientRectangle);
-        }
-
-        protected void OnProcessInputs(float dt)
-        {
-            var keyState = Keyboard.GetState();
-
-            if (keyState.IsKeyDown(Key.Number1))
-                States.SetNextState(StateTechDemo1.Id);
-            else if (keyState.IsKeyDown(Key.Number2))
-                States.SetNextState(StateTechDemo2.Id);
-            else if (keyState.IsKeyDown(Key.Number3))
-                States.SetNextState(StateTechDemo3.Id);
-
-            Worlds.ProcessInputs(dt);
-        }
-
-        protected void OnUpdate(float dt)
-        {
-            Worlds.Update(dt);
+            StateMachine.OnResize(ClientRectangle);
         }
 
         private void UpdateCursor()
@@ -154,9 +160,15 @@ namespace OpenBreed.Game
             var mousePoint = new Point(mouseState.X, mouseState.Y);
             var clientPoint = PointToClient(mousePoint);
             var newCursorPos = new Vector2(clientPoint.X, ClientRectangle.Height - clientPoint.Y);
+            var newWheel = mouseState.WheelPrecise;
+
             CursorDelta = newCursorPos - CursorPos;
             CursorPos = newCursorPos;
+            WheelDelta = newWheel - Wheel;
+            Wheel = newWheel;
         }
+
+
 
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
@@ -164,12 +176,13 @@ namespace OpenBreed.Game
 
             UpdateCursor();
 
-            OnProcessInputs((float)e.Time);
+            Worlds.ProcessInputs((float)e.Time);
 
-            States.ProcessInputs(e);
+            StateMachine.ProcessInputs(e);
 
-            OnUpdate((float)e.Time);
-            States.OnUpdate(e);
+            Worlds.Update((float)e.Time);
+
+            StateMachine.Update((float)e.Time);
 
             Worlds.Cleanup();
             Viewports.Cleanup();

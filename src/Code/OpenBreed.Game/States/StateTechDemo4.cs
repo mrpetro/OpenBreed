@@ -1,0 +1,247 @@
+﻿using OpenBreed.Core;
+using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.States;
+using OpenBreed.Core.Systems.Animation.Components;
+using OpenBreed.Core.Systems.Common.Components;
+using OpenBreed.Core.Systems.Common.Components.Shapes;
+using OpenBreed.Core.Systems.Physics.Components;
+using OpenBreed.Core.Modules.Rendering;
+using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Core.Modules.Rendering.Entities;
+using OpenBreed.Core.Modules.Rendering.Entities.Builders;
+using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Game.Commands;
+using OpenBreed.Game.Components;
+using OpenBreed.Game.Components.States;
+using OpenBreed.Game.Entities;
+using OpenBreed.Game.Entities.Builders;
+using OpenTK;
+using OpenTK.Input;
+using System;
+using System.Drawing;
+
+namespace OpenBreed.Game.States
+{
+    /// <summary>
+    /// Tech Demo Class: Animation
+    /// </summary>
+    public class StateTechDemo4 : BaseState
+    {
+        #region Public Fields
+
+        public const string ID = "TECH_DEMO_4";
+
+        public World World;
+
+        #endregion Public Fields
+
+        #region Private Fields
+
+        private static byte[] mapA = new byte[] {
+            3,3,3,3,3,3,3,3,3,3,
+            0,0,0,0,0,0,0,0,1,3,
+            0,0,0,0,0,0,0,0,1,3,
+            3,0,0,1,0,1,0,0,4,3,
+            3,0,0,2,2,2,0,0,2,3,
+            3,3,3,3,3,3,3,3,3,3
+        };
+
+        private WorldActor actor;
+        private ITexture tileTex;
+        private ITexture spriteTex;
+        private TileAtlas tileAtlas;
+        private SpriteAtlas spriteAtlas;
+        private Viewport viewport;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public StateTechDemo4(ICore core)
+        {
+            Core = core;
+
+            InitializeWorld();
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public ICore Core { get; }
+
+        public Camera Camera1 { get; private set; }
+
+        public override string Id { get { return ID; } }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public override void OnResize(Rectangle clientRectangle)
+        {
+            base.OnResize(clientRectangle);
+
+            viewport.X = clientRectangle.X + 25;
+            viewport.Y = clientRectangle.Y + 25;
+            viewport.Width = clientRectangle.Width  - 50;
+            viewport.Height = clientRectangle.Height - 50;
+        }
+
+        public override void ProcessInputs(FrameEventArgs e)
+        {
+            var keyState = Keyboard.GetState();
+            var mouseState = Mouse.GetState();
+
+            Viewport hoverViewport = null;
+
+            if (viewport.TestScreenCoords(Core.CursorPos))
+                hoverViewport = viewport;
+            else
+                hoverViewport = null;
+
+            if (hoverViewport != null)
+            {
+                hoverViewport.Camera.Zoom = Tools.GetZoom(Core, hoverViewport.Camera.Zoom);
+
+                if (mouseState.IsButtonDown(MouseButton.Middle))
+                {
+                    var transf = hoverViewport.Camera.GetTransform();
+                    transf.Invert();
+                    var delta4 = Vector4.Transform(transf, new Vector4(Core.CursorDelta));
+                    var delta2 = new Vector2(-delta4.X, -delta4.Y);
+ 
+                    hoverViewport.Camera.Position += delta2;
+                }
+             }
+        }
+
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        private void Inputs_KeyDown(object sender, KeyboardKeyEventArgs e)
+        {
+            var pressedKey = e.Key.ToString();
+
+            if (pressedKey.StartsWith("Number"))
+            {
+                pressedKey = pressedKey.Replace("Number", "");
+                Core.StateMachine.SetNextState($"TECH_DEMO_{pressedKey}");
+            }
+        }
+
+        protected override void OnEnter()
+        {
+            Core.Inputs.KeyDown += Inputs_KeyDown;
+
+            Core.Viewports.Add(viewport);
+
+            Console.Clear();
+            Console.WriteLine("---------- Fonts & Texts --------");
+            Console.WriteLine("This demo shows three viewports with two cameras attached to them.");
+            Console.WriteLine("Constrols:");
+            Console.WriteLine("RMB + Move mouse cursor = Camera control over hovered viewport");
+            Console.WriteLine("Keyboard arrows  = Control arrow actor");
+        }
+
+        protected override void OnLeave()
+        {
+            Core.Viewports.Remove(viewport);
+
+            Core.Inputs.KeyDown -= Inputs_KeyDown;
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
+
+        private void InitializeWorld()
+        {
+            World = new World(Core);
+
+            var cameraBuilder = new CameraBuilder(Core);
+
+            //Resources
+            tileTex = Core.Rendering.Textures.Load(@"Content\TileAtlasTest32bit.bmp");
+            spriteTex = Core.Rendering.Textures.Load(@"Content\ArrowSpriteSet.png");
+            tileAtlas = new TileAtlas(tileTex, 16, 4, 4);
+            spriteAtlas = new SpriteAtlas(spriteTex, 32, 32, 8, 1);
+
+            cameraBuilder.SetPosition(new Vector2(64, 64));
+            cameraBuilder.SetRotation(0.0f);
+            cameraBuilder.SetZoom(1);
+            Camera1 = (Camera)cameraBuilder.Build();
+            World.AddEntity(Camera1);
+
+
+            viewport = new Viewport(50, 50, 540, 380);
+            viewport.Camera = Camera1;
+
+            Core.Worlds.Add(World);
+
+            var blockBuilder = new WorldBlockBuilder(Core);
+            blockBuilder.SetTileAtlas(tileAtlas);
+
+            var actorBuilder = new WorldActorBuilder(Core);
+
+            var textBuilder = new TextBuilder(Core);
+            textBuilder.SetPosition(new Position(40, 50));
+
+            var fontAtlas = new FontAtlas(Core.Rendering.Textures, "ALGERIAN", 50);
+
+
+            textBuilder.SetText(Core.Rendering.CreateText(fontAtlas, "Alice has a cat!"));
+
+            var sprite = Core.Rendering.CreateSprite(spriteAtlas);
+
+
+            actorBuilder.SetSpriteAtlas(spriteAtlas);
+            actorBuilder.SetSprite(sprite);
+
+            var animator = ActorHelper.CreateAnimator();
+            var stateMachine = ActorHelper.CreateStateMachine();
+            stateMachine.SetInitialState("Standing_Right");
+
+            actorBuilder.SetStateMachine(stateMachine);
+            actorBuilder.SetAnimator(animator);
+            actorBuilder.SetPosition(new DynamicPosition(64, 288));
+            actorBuilder.SetDirection(new Direction(1, 0));
+            actorBuilder.SetShape(new AxisAlignedBoxShape(32, 32));
+            actorBuilder.SetMovement(new CreatureMovement());
+            actorBuilder.SetBody(new DynamicBody());
+
+            
+
+            actorBuilder.SetController(new KeyboardCreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
+
+            actor = (WorldActor)actorBuilder.Build();
+
+            var text = (TextEntity)textBuilder.Build();
+
+            World.AddEntity(actor);
+            World.AddEntity(text);
+
+            var rnd = new Random();
+
+            var ymax = mapA.Length / 10;
+
+            for (int x = 0; x < 10; x++)
+            {
+                for (int y = 0; y < ymax; y++)
+                {
+                    var v = mapA[x + y * 10];
+
+                    if (v > 0)
+                    {
+                        blockBuilder.SetIndices(x + 5, y + 5);
+                        blockBuilder.SetTileId(v);
+                        World.AddEntity((WorldBlock)blockBuilder.Build());
+                    }
+                }
+            }
+        }
+
+        #endregion Private Methods
+    }
+}

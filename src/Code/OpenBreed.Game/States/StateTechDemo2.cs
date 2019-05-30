@@ -1,13 +1,12 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Core.Modules.Rendering.Entities;
+using OpenBreed.Core.Modules.Rendering.Entities.Builders;
+using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Systems.Common.Components.Shapes;
 using OpenBreed.Core.Systems.Physics.Components;
-using OpenBreed.Core.Systems.Rendering;
-using OpenBreed.Core.Systems.Rendering.Components;
-using OpenBreed.Core.Systems.Rendering.Entities;
-using OpenBreed.Core.Systems.Rendering.Entities.Builders;
-using OpenBreed.Core.Systems.Rendering.Helpers;
 using OpenBreed.Game.Components;
 using OpenBreed.Game.Entities;
 using OpenBreed.Game.Entities.Builders;
@@ -18,11 +17,14 @@ using System.Drawing;
 
 namespace OpenBreed.Game.States
 {
+    /// <summary>
+    /// Tech Demo Class: Multi-worlds
+    /// </summary>
     public class StateTechDemo2 : BaseState
     {
         #region Public Fields
 
-        public const string Id = "TECH_DEMO_2";
+        public const string ID = "TECH_DEMO_2";
 
         public World WorldA;
 
@@ -84,10 +86,10 @@ namespace OpenBreed.Game.States
             var cameraBuilder = new CameraBuilder(Core);
 
             //Resources
-            tileTex = Core.Rendering.GetTexture(@"Content\TileAtlasTest32bit.bmp");
-            spriteTex = Core.Rendering.GetTexture(@"Content\ArrowSpriteSet.png");
+            tileTex = Core.Rendering.Textures.Load(@"Content\TileAtlasTest32bit.bmp");
+            spriteTex = Core.Rendering.Textures.Load(@"Content\ArrowSpriteSet.png");
             tileAtlas = new TileAtlas(tileTex, 16, 4, 4);
-            spriteAtlas = new SpriteAtlas(spriteTex, 32, 8, 1);
+            spriteAtlas = new SpriteAtlas(spriteTex, 32, 32, 8, 1);
 
             cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);
@@ -121,7 +123,7 @@ namespace OpenBreed.Game.States
 
         public Camera Camera2 { get; private set; }
 
-        public override string Name { get { return Id; } }
+        public override string Id { get { return ID; } }
 
         #endregion Public Properties
 
@@ -145,32 +147,31 @@ namespace OpenBreed.Game.States
         public override void ProcessInputs(FrameEventArgs e)
         {
             var keyState = Keyboard.GetState();
-            if (keyState.IsKeyDown(Key.Escape))
-                ChangeState(MenuState.Id);
-
             var mouseState = Mouse.GetState();
 
-            int dx = mouseState.X - px;
-            int dy = mouseState.Y - py;
+            Viewport hoverViewport = null;
 
-            var z = 1 + ((float)mouseState.Scroll.Y) / 20.0f;
+            if (viewportLeft.TestScreenCoords(Core.CursorPos))
+                hoverViewport = viewportLeft;
+            else if (viewportRight.TestScreenCoords(Core.CursorPos))
+                hoverViewport = viewportRight;
+            else
+                hoverViewport = null;
 
-            if (z == 0)
-                z = 1.0f;
-
-            if (mouseState.IsButtonDown(MouseButton.Left))
+            if (hoverViewport != null)
             {
-                Camera1.Zoom = z;
-                Camera1.Position = Vector2.Subtract(Camera1.Position, new Vector2(dx, -dy));
-            }
-            else if (mouseState.IsButtonDown(MouseButton.Right))
-            {
-                Camera2.Zoom = z;
-                Camera2.Position = Vector2.Subtract(Camera2.Position, new Vector2(dx, -dy));
-            }
+                hoverViewport.Camera.Zoom = Tools.GetZoom(Core, hoverViewport.Camera.Zoom);
 
-            px = mouseState.X;
-            py = mouseState.Y;
+                if (mouseState.IsButtonDown(MouseButton.Middle))
+                {
+                    var transf = hoverViewport.Camera.GetTransform();
+                    transf.Invert();
+                    var delta4 = Vector4.Transform(transf, new Vector4(Core.CursorDelta));
+                    var delta2 = new Vector2(-delta4.X, -delta4.Y);
+
+                    hoverViewport.Camera.Position += delta2;
+                }
+            }
         }
 
         #endregion Public Methods
@@ -179,21 +180,37 @@ namespace OpenBreed.Game.States
 
         protected override void OnEnter()
         {
+            Core.Inputs.KeyDown += Inputs_KeyDown;
+
             Core.Viewports.Add(viewportLeft);
             Core.Viewports.Add(viewportRight);
 
             Console.Clear();
-            Console.WriteLine("---------- Multi-world --------");
+            Console.WriteLine("---------- Multi-worlds --------");
             Console.WriteLine("This demo shows two separate worlds, one per viewport");
             Console.WriteLine("Constrols:");
-            Console.WriteLine("RMB + Move mouse cursor = Camera control over hovered viewport");
+            Console.WriteLine("MMB + Move mouse cursor over hovered viewport = Camera scroll control");
+            Console.WriteLine("Mouse wheel over hovered viewport = Camera zoom control");
             Console.WriteLine("Keyboard arrows  = Control arrow actor");
+        }
+
+        private void Inputs_KeyDown(object sender, KeyboardKeyEventArgs e)
+        {
+            var pressedKey = e.Key.ToString();
+
+            if (pressedKey.StartsWith("Number"))
+            {
+                pressedKey = pressedKey.Replace("Number", "");
+                Core.StateMachine.SetNextState($"TECH_DEMO_{pressedKey}");
+            }
         }
 
         protected override void OnLeave()
         {
             Core.Viewports.Remove(viewportLeft);
             Core.Viewports.Remove(viewportRight);
+
+            Core.Inputs.KeyDown -= Inputs_KeyDown;
         }
 
         #endregion Protected Methods
@@ -205,17 +222,22 @@ namespace OpenBreed.Game.States
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas);
 
+            var animator = ActorHelper.CreateAnimator();
+            var stateMachine = ActorHelper.CreateStateMachine();
+            stateMachine.SetInitialState("Standing_Right");
+
             var actorBuilder = new WorldActorBuilder(Core);
+            actorBuilder.SetStateMachine(stateMachine);
+            actorBuilder.SetAnimator(animator);
             actorBuilder.SetSpriteAtlas(spriteAtlas);
-            actorBuilder.SetSprite(new Sprite(spriteAtlas));
+            actorBuilder.SetSprite(Core.Rendering.CreateSprite(spriteAtlas));
             actorBuilder.SetPosition(new DynamicPosition(20, 20));
             actorBuilder.SetDirection(new Direction(1, 0));
             actorBuilder.SetShape(new AxisAlignedBoxShape(32, 32));
-            actorBuilder.SetAnimator(new SpriteAnimator());
             actorBuilder.SetMovement(new CreatureMovement());
             actorBuilder.SetBody(new DynamicBody());
 
-            actorBuilder.SetController(new KeyboardController(Key.Up, Key.Down, Key.Left, Key.Right));
+            actorBuilder.SetController(new KeyboardCreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
             WorldA.AddEntity((WorldActor)actorBuilder.Build());
 
             var rnd = new Random();
@@ -240,20 +262,25 @@ namespace OpenBreed.Game.States
 
         private void InitializeWorldB()
         {
+            var animator = ActorHelper.CreateAnimator();
+            var stateMachine = ActorHelper.CreateStateMachine();
+            stateMachine.SetInitialState("Standing_Down");
+
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas);
 
             var actorBuilder = new WorldActorBuilder(Core);
+            actorBuilder.SetStateMachine(stateMachine);
+            actorBuilder.SetAnimator(animator);
             actorBuilder.SetSpriteAtlas(spriteAtlas);
-            actorBuilder.SetSprite(new Sprite(spriteAtlas));
+            actorBuilder.SetSprite(Core.Rendering.CreateSprite(spriteAtlas));
             actorBuilder.SetPosition(new DynamicPosition(50, 20));
             actorBuilder.SetDirection(new Direction(1, 0));
             actorBuilder.SetShape(new AxisAlignedBoxShape(32, 32));
-            actorBuilder.SetAnimator(new SpriteAnimator());
             actorBuilder.SetMovement(new CreatureMovement());
             actorBuilder.SetBody(new DynamicBody());
 
-            actorBuilder.SetController(new KeyboardController(Key.Up, Key.Down, Key.Left, Key.Right));
+            actorBuilder.SetController(new KeyboardCreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
             WorldB.AddEntity((WorldActor)actorBuilder.Build());
 
             var rnd = new Random();

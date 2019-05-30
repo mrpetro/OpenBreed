@@ -48,22 +48,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\MoveToCommand.cs" />
-    <Compile Include="Components\AIController.cs" />
+    <Compile Include="Components\AICreatureController.cs" />
     <Compile Include="Components\AIControllerDebug.cs" />
+    <Compile Include="Components\KeyboardCreatureController.cs" />
     <Compile Include="Components\SpriteAnimator.cs" />
     <Compile Include="Components\CreatureMovement.cs" />
-    <Compile Include="Components\KeyboardController.cs" />
     <Compile Include="Components\CollisionDebug.cs" />
+    <Compile Include="Components\States\WalkingState.cs" />
+    <Compile Include="Components\States\StandingState.cs" />
+    <Compile Include="Entities\ActorHelper.cs" />
+    <Compile Include="Entities\Builders\TextBuilder.cs" />
     <Compile Include="Entities\Builders\WorldActorBuilder.cs" />
     <Compile Include="Entities\Builders\WorldBlockBuilder.cs" />
+    <Compile Include="Entities\TextEntity.cs" />
     <Compile Include="Entities\WorldActor.cs" />
     <Compile Include="Entities\WorldBlock.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="States\StateTechDemo4.cs" />
     <Compile Include="States\StateTechDemo3.cs" />
     <Compile Include="States\StateTechDemo2.cs" />
     <Compile Include="States\StateTechDemo1.cs" />
-    <Compile Include="States\MenuState.cs" />
+    <Compile Include="Tools.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -71,6 +77,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OpenBreed.Core.Modules.Rendering.OpenGL\OpenBreed.Core.Modules.Rendering.OpenGL.csproj">
+      <Project>{EA747476-89FE-462A-9BDC-DFC2E9A64EAD}</Project>
+      <Name>OpenBreed.Core.Modules.Rendering.OpenGL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Core.Systems.Animation\OpenBreed.Core.Systems.Animation.csproj">
       <Project>{657319C5-4BA7-4A81-B7D1-4527CEAE125C}</Project>
       <Name>OpenBreed.Core.Systems.Animation</Name>
@@ -86,10 +96,6 @@
     <ProjectReference Include="..\OpenBreed.Core.Systems.Physics\OpenBreed.Core.Systems.Physics.csproj">
       <Project>{C9F84CE7-732C-4A31-89DC-B87E3D9685BE}</Project>
       <Name>OpenBreed.Core.Systems.Physics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Core.Systems.Rendering\OpenBreed.Core.Systems.Rendering.csproj">
-      <Project>{EA747476-89FE-462A-9BDC-DFC2E9A64EAD}</Project>
-      <Name>OpenBreed.Core.Systems.Rendering</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Core.Systems.Sound\OpenBreed.Core.Systems.Sound.csproj">
       <Project>{82AF3D57-A4F4-4339-859A-7E82942B96DF}</Project>

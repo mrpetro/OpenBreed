@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Modules;
+using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems;
 using OpenTK;
@@ -38,24 +39,39 @@ namespace OpenBreed.Core
         ViewportMan Viewports { get; }
 
         /// <summary>
+        /// Inputs manager
+        /// </summary>
+        InputsMan Inputs { get; }
+
+        /// <summary>
         /// Worlds manager
         /// </summary>
         WorldMan Worlds { get; }
 
         /// <summary>
-        /// States manager
+        /// States machine
         /// </summary>
-        StateMan States { get; }
+        StateMan StateMachine { get; }
 
         /// <summary>
-        /// Gets current cursor position in window coordinates
+        /// Gets cursor position in window coordinates
         /// </summary>
         Vector2 CursorPos { get; }
 
         /// <summary>
-        /// Gets cursor position delta (difference between current and previous)
+        /// Gets position delta (difference between current and previous)
         /// </summary>
         Vector2 CursorDelta { get; }
+
+        /// <summary>
+        /// Gets cursor wheel value
+        /// </summary>
+        float Wheel { get; }
+
+        /// <summary>
+        /// Gets wheel delta (difference between current and previous)
+        /// </summary>
+        float WheelDelta { get; }
 
         #endregion Public Properties
 
