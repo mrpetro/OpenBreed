@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Systems.Physics.Components;
-using OpenBreed.Core.Systems.Rendering.Components;
+using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Game.Entities.Builders;
 
 namespace OpenBreed.Game.Entities
@@ -18,7 +18,7 @@ namespace OpenBreed.Game.Entities
             var position = new Position(X * 16, Y * 16);
             Components.Add(position);
             Components.Add(new GridBoxBody(16));
-            Components.Add(new Tile(builder.tileAtlas, builder.tileId));
+            Components.Add(builder.Core.Rendering.CreateTile(builder.tileAtlas, builder.tileId));
         }
 
         #endregion Public Constructors

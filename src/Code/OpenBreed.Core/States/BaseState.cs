@@ -20,9 +20,6 @@ namespace OpenBreed.Core.States
         {
         }
 
-        public virtual void OnRenderFrame(FrameEventArgs e)
-        {
-        }
 
         public virtual string Update(float dt)
         {

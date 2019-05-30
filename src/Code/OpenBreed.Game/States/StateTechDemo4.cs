@@ -1,14 +1,15 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems.Animation.Components;
 using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Systems.Common.Components.Shapes;
 using OpenBreed.Core.Systems.Physics.Components;
-using OpenBreed.Core.Systems.Rendering;
-using OpenBreed.Core.Systems.Rendering.Components;
-using OpenBreed.Core.Systems.Rendering.Entities;
-using OpenBreed.Core.Systems.Rendering.Entities.Builders;
-using OpenBreed.Core.Systems.Rendering.Helpers;
+using OpenBreed.Core.Modules.Rendering;
+using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Core.Modules.Rendering.Entities;
+using OpenBreed.Core.Modules.Rendering.Entities.Builders;
+using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Game.Commands;
 using OpenBreed.Game.Components;
 using OpenBreed.Game.Components.States;
@@ -137,7 +138,7 @@ namespace OpenBreed.Game.States
             Core.Viewports.Add(viewport);
 
             Console.Clear();
-            Console.WriteLine("---------- Pathfinding --------");
+            Console.WriteLine("---------- Fonts & Texts --------");
             Console.WriteLine("This demo shows three viewports with two cameras attached to them.");
             Console.WriteLine("Constrols:");
             Console.WriteLine("RMB + Move mouse cursor = Camera control over hovered viewport");
@@ -165,7 +166,7 @@ namespace OpenBreed.Game.States
             tileTex = Core.Rendering.Textures.Load(@"Content\TileAtlasTest32bit.bmp");
             spriteTex = Core.Rendering.Textures.Load(@"Content\ArrowSpriteSet.png");
             tileAtlas = new TileAtlas(tileTex, 16, 4, 4);
-            spriteAtlas = new SpriteAtlas(spriteTex, 32, 8, 1);
+            spriteAtlas = new SpriteAtlas(spriteTex, 32, 32, 8, 1);
 
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
@@ -184,9 +185,15 @@ namespace OpenBreed.Game.States
 
             var actorBuilder = new WorldActorBuilder(Core);
 
+            var textBuilder = new TextBuilder(Core);
+            textBuilder.SetPosition(new Position(40, 50));
+
+            var fontAtlas = new FontAtlas(Core.Rendering.Textures, "ALGERIAN", 50);
 
 
-            var sprite = new Sprite(spriteAtlas);
+            textBuilder.SetText(Core.Rendering.CreateText(fontAtlas, "Alice has a cat!"));
+
+            var sprite = Core.Rendering.CreateSprite(spriteAtlas);
 
 
             actorBuilder.SetSpriteAtlas(spriteAtlas);
@@ -204,10 +211,16 @@ namespace OpenBreed.Game.States
             actorBuilder.SetMovement(new CreatureMovement());
             actorBuilder.SetBody(new DynamicBody());
 
+            
+
             actorBuilder.SetController(new KeyboardCreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
 
             actor = (WorldActor)actorBuilder.Build();
+
+            var text = (TextEntity)textBuilder.Build();
+
             World.AddEntity(actor);
+            World.AddEntity(text);
 
             var rnd = new Random();
 

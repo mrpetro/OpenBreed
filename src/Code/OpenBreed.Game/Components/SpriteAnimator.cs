@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.Systems.Rendering.Components;
+using OpenBreed.Core.Modules.Rendering.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;

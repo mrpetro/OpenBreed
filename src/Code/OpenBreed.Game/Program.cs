@@ -1,12 +1,14 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Modules;
+using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Animation;
 using OpenBreed.Core.Systems.Control;
 using OpenBreed.Core.Systems.Movement;
 using OpenBreed.Core.Systems.Physics;
-using OpenBreed.Core.Systems.Rendering;
+using OpenBreed.Core.Modules.Rendering;
+using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Systems.Sound;
 using OpenBreed.Game.States;
 using OpenTK;
@@ -24,7 +26,8 @@ namespace OpenBreed.Game
         #region Private Fields
 
         private string appVersion;
-        private Font font;
+
+        private FontAtlas fontAtlas;
 
         #endregion Private Fields
 
@@ -123,7 +126,6 @@ namespace OpenBreed.Game
         {
             base.OnLoad(e);
 
-            font = new Font("Arial", 12);
 
             //GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.One);                  // Select The Type Of Blending
 
@@ -165,6 +167,8 @@ namespace OpenBreed.Game
             WheelDelta = newWheel - Wheel;
             Wheel = newWheel;
         }
+
+
 
         protected override void OnUpdateFrame(FrameEventArgs e)
         {

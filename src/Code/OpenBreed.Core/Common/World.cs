@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Common.Components;
 using OpenTK;

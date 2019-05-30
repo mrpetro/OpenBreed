@@ -1,50 +1,45 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Rendering;
-using OpenBreed.Core.Modules.Rendering.Components;
+﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Systems.Common.Components;
-using OpenTK.Graphics;
+using OpenBreed.Core.Systems.Common.Components.Shapes;
+using OpenTK.Graphics.OpenGL;
 using System;
 using System.Linq;
 
-namespace OpenBreed.Game.Components
+namespace OpenBreed.Core.Modules.Rendering.Components
 {
-    public class AIControllerDebug : ISprite
+    /// <summary>
+    /// Axis-aligned sprite render component
+    /// Shared components:
+    ///  - axis-aligned box shape
+    ///  - position
+    /// </summary>
+    internal class Sprite : ISprite
     {
         #region Private Fields
 
-        private ISprite sprite;
+        private ISpriteAtlas atlas;
         private Position position;
-        private AICreatureController controller;
+        private AxisAlignedBoxShape shape;
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        public AIControllerDebug(ISprite sprite)
+        internal Sprite(ISpriteAtlas atlas, int imageId)
         {
-            this.sprite = sprite ?? throw new ArgumentNullException(nameof(sprite));
+            this.atlas = atlas;
+            this.ImageId = ImageId;
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
 
         /// <summary>
         /// Id of sprite image from the atlas
         /// </summary>
-        public int ImageId
-        {
-            get
-            {
-                return sprite.ImageId;
-            }
-            set
-            {
-                sprite.ImageId = value;
-            }
-        }
+        public int ImageId { get; set; }
 
         public Type SystemType { get { return typeof(RenderSystem); } }
 
@@ -58,17 +53,13 @@ namespace OpenBreed.Game.Components
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
         public void Draw(IViewport viewport)
         {
-            for (int i = 1; i < controller.Waypoints.Count; i++)
-            {
-                var wps = controller.Waypoints[i - 1];
-                var wpe = controller.Waypoints[i];
-                RenderTools.DrawLine(wps, wpe, Color4.Gold);
-            }
+            GL.PushMatrix();
 
-            if(controller.Waypoints.Count > 0)
-                RenderTools.DrawLine(position.Current, controller.Waypoints[0], Color4.Gold);
+            GL.Translate((int)position.Current.X, (int)position.Current.Y, 0.0f);
+            GL.Translate(-atlas.SpriteWidth / 2, -atlas.SpriteHeight / 2, 0.0f);
+            atlas.Draw(ImageId);
 
-            sprite.Draw(viewport);
+            GL.PopMatrix();
         }
 
         /// <summary>
@@ -78,8 +69,7 @@ namespace OpenBreed.Game.Components
         public void Initialize(IEntity entity)
         {
             position = entity.Components.OfType<Position>().First();
-            controller = entity.Components.OfType<AICreatureController>().First();
-            sprite.Initialize(entity);
+            shape = entity.Components.OfType<AxisAlignedBoxShape>().First();
         }
 
         /// <summary>

@@ -47,11 +47,6 @@ namespace OpenBreed.Core.States
             activeState.EnterState();
         }
 
-        public void OnRenderFrame(FrameEventArgs e)
-        {
-            activeState.OnRenderFrame(e);
-        }
-
         public void Update(float dt)
         {
             activeState.Update(dt);
