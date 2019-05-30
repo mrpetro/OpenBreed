@@ -21,12 +21,7 @@ namespace OpenBreed.Core.States
         }
 
 
-        public virtual string Update(float dt)
-        {
-            return null;
-        }
-
-        public virtual void ProcessInputs(FrameEventArgs e)
+        public virtual void Update(float dt)
         {
         }
 

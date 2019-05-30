@@ -86,7 +86,7 @@ namespace OpenBreed.Game.States
             viewport.Height = clientRectangle.Height - 50;
         }
 
-        public override void ProcessInputs(FrameEventArgs e)
+        public override void Update(float dt)
         {
             var keyState = Keyboard.GetState();
             var mouseState = Mouse.GetState();

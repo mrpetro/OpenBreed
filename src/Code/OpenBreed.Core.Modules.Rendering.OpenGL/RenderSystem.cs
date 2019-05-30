@@ -18,7 +18,11 @@ namespace OpenBreed.Core.Modules.Rendering
     {
         #region Public Fields
 
+        /// <summary>
+        /// Debug flag
+        /// </summary>
         public bool GridVisible = true;
+
         public int MAX_TILES_COUNT = 1024 * 1024;
 
         #endregion Public Fields

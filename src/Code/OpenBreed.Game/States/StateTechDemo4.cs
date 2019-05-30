@@ -31,8 +31,6 @@ namespace OpenBreed.Game.States
 
         public const string ID = "TECH_DEMO_4";
 
-        public World World;
-
         #endregion Public Fields
 
         #region Private Fields
@@ -51,7 +49,8 @@ namespace OpenBreed.Game.States
         private ITexture spriteTex;
         private TileAtlas tileAtlas;
         private SpriteAtlas spriteAtlas;
-        private Viewport viewport;
+        private Viewport gameViewport;
+        private Viewport hudViewport;
 
         #endregion Private Fields
 
@@ -62,6 +61,7 @@ namespace OpenBreed.Game.States
             Core = core;
 
             InitializeWorld();
+            InitializeHud();
         }
 
         #endregion Public Constructors
@@ -70,7 +70,8 @@ namespace OpenBreed.Game.States
 
         public ICore Core { get; }
 
-        public Camera Camera1 { get; private set; }
+        public Camera gameCamera { get; private set; }
+        public Camera hudCamera { get; private set; }
 
         public override string Id { get { return ID; } }
 
@@ -82,21 +83,26 @@ namespace OpenBreed.Game.States
         {
             base.OnResize(clientRectangle);
 
-            viewport.X = clientRectangle.X + 25;
-            viewport.Y = clientRectangle.Y + 25;
-            viewport.Width = clientRectangle.Width  - 50;
-            viewport.Height = clientRectangle.Height - 50;
+            gameViewport.X = clientRectangle.X + 25;
+            gameViewport.Y = clientRectangle.Y + 25;
+            gameViewport.Width = clientRectangle.Width  - 50;
+            gameViewport.Height = clientRectangle.Height - 50;
+
+            hudViewport.X = clientRectangle.X + 25;
+            hudViewport.Y = clientRectangle.Y + 25;
+            hudViewport.Width = clientRectangle.Width - 50;
+            hudViewport.Height = clientRectangle.Height - 50;
         }
 
-        public override void ProcessInputs(FrameEventArgs e)
+        public override void Update(float dt)
         {
             var keyState = Keyboard.GetState();
             var mouseState = Mouse.GetState();
 
             Viewport hoverViewport = null;
 
-            if (viewport.TestScreenCoords(Core.CursorPos))
-                hoverViewport = viewport;
+            if (gameViewport.TestScreenCoords(Core.CursorPos))
+                hoverViewport = gameViewport;
             else
                 hoverViewport = null;
 
@@ -135,7 +141,8 @@ namespace OpenBreed.Game.States
         {
             Core.Inputs.KeyDown += Inputs_KeyDown;
 
-            Core.Viewports.Add(viewport);
+            Core.Viewports.Add(gameViewport);
+            Core.Viewports.Add(hudViewport);
 
             Console.Clear();
             Console.WriteLine("---------- Fonts & Texts --------");
@@ -147,7 +154,8 @@ namespace OpenBreed.Game.States
 
         protected override void OnLeave()
         {
-            Core.Viewports.Remove(viewport);
+            Core.Viewports.Remove(hudViewport);
+            Core.Viewports.Remove(gameViewport);
 
             Core.Inputs.KeyDown -= Inputs_KeyDown;
         }
@@ -156,9 +164,39 @@ namespace OpenBreed.Game.States
 
         #region Private Methods
 
+        private void InitializeHud()
+        {
+            var hudWorld = new World(Core);
+
+            var cameraBuilder = new CameraBuilder(Core);
+
+            cameraBuilder.SetPosition(new Vector2(64, 64));
+            cameraBuilder.SetRotation(0.0f);
+            cameraBuilder.SetZoom(1);
+            hudCamera = (Camera)cameraBuilder.Build();
+            hudWorld.AddEntity(hudCamera);
+
+
+            hudViewport = new Viewport(50, 50, 540, 380);
+            hudViewport.Camera = hudCamera;
+
+
+            var textBuilder = new TextBuilder(Core);
+            textBuilder.SetPosition(new Position(40, 50));
+            var fontAtlas = new FontAtlas(Core.Rendering.Textures, "ALGERIAN", 50);
+            textBuilder.SetText(Core.Rendering.CreateText(fontAtlas, "Alice has a cat!"));
+
+
+            var text = (TextEntity)textBuilder.Build();
+            hudWorld.AddEntity(text);
+
+
+            Core.Worlds.Add(hudWorld);
+        }
+
         private void InitializeWorld()
         {
-            World = new World(Core);
+            var gameWorld = new World(Core);
 
             var cameraBuilder = new CameraBuilder(Core);
 
@@ -171,27 +209,18 @@ namespace OpenBreed.Game.States
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
-            Camera1 = (Camera)cameraBuilder.Build();
-            World.AddEntity(Camera1);
+            gameCamera = (Camera)cameraBuilder.Build();
+            gameWorld.AddEntity(gameCamera);
 
 
-            viewport = new Viewport(50, 50, 540, 380);
-            viewport.Camera = Camera1;
-
-            Core.Worlds.Add(World);
+            gameViewport = new Viewport(50, 50, 540, 380);
+            gameViewport.Camera = gameCamera;
 
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas);
 
             var actorBuilder = new WorldActorBuilder(Core);
 
-            var textBuilder = new TextBuilder(Core);
-            textBuilder.SetPosition(new Position(40, 50));
-
-            var fontAtlas = new FontAtlas(Core.Rendering.Textures, "ALGERIAN", 50);
-
-
-            textBuilder.SetText(Core.Rendering.CreateText(fontAtlas, "Alice has a cat!"));
 
             var sprite = Core.Rendering.CreateSprite(spriteAtlas);
 
@@ -216,11 +245,7 @@ namespace OpenBreed.Game.States
             actorBuilder.SetController(new KeyboardCreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
 
             actor = (WorldActor)actorBuilder.Build();
-
-            var text = (TextEntity)textBuilder.Build();
-
-            World.AddEntity(actor);
-            World.AddEntity(text);
+            gameWorld.AddEntity(actor);
 
             var rnd = new Random();
 
@@ -236,10 +261,12 @@ namespace OpenBreed.Game.States
                     {
                         blockBuilder.SetIndices(x + 5, y + 5);
                         blockBuilder.SetTileId(v);
-                        World.AddEntity((WorldBlock)blockBuilder.Build());
+                        gameWorld.AddEntity((WorldBlock)blockBuilder.Build());
                     }
                 }
             }
+
+            Core.Worlds.Add(gameWorld);
         }
 
         #endregion Private Methods

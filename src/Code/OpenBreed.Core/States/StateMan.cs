@@ -55,11 +55,6 @@ namespace OpenBreed.Core.States
                 ChangeState();
         }
 
-        public void ProcessInputs(FrameEventArgs e)
-        {
-            activeState.ProcessInputs(e);
-        }
-
         public void RegisterState(BaseState state)
         {
             states.Add(state.Id, state);

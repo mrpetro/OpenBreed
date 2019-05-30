@@ -58,19 +58,22 @@ namespace OpenBreed.Core
             toAdd.Add(world);
         }
 
-        public void ProcessInputs(float dt)
-        {
-            for (int i = 0; i < Items.Count; i++)
-                Items[i].ProcessInputs(dt);
-        }
-
         public void Update(float dt)
         {
+            Cleanup();
+
             for (int i = 0; i < Items.Count; i++)
                 Items[i].Update(dt);
         }
 
-        public void Cleanup()
+        #endregion Public Methods
+
+        #region Private Methods
+
+        /// <summary>
+        /// Add or remove any pending worlds
+        /// </summary>
+        private void Cleanup()
         {
             if (toRemove.Any())
             {
@@ -97,6 +100,6 @@ namespace OpenBreed.Core
             }
         }
 
-        #endregion Public Methods
+        #endregion Private Methods
     }
 }

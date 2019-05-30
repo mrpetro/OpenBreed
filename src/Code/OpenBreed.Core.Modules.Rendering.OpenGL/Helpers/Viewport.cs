@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenBreed.Core.Modules.Rendering.Entities;
+﻿using OpenBreed.Core.Modules.Rendering.Entities;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
@@ -12,25 +11,6 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
     /// </summary>
     public class Viewport : IViewport
     {
-        #region Public Fields
-
-        /// <summary>
-        ///  Flag to draw border box of viewport
-        /// </summary>
-        public const bool BORDER = true;
-
-        /// <summary>
-        /// Flag to clip any graphics that is outside of viewport box
-        /// </summary>
-        public const bool CLIPPING = true;
-
-        /// <summary>
-        /// Viewport background color
-        /// </summary>
-        public static readonly Color4 BACKGROUND_COLOR = Color4.Black;
-
-        #endregion Public Fields
-
         #region Public Constructors
 
         /// <summary>
@@ -46,11 +26,33 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             Y = y;
             Width = width;
             Height = height;
+
+            Clipping = true;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
+
+        /// <summary>
+        ///  Flag to draw border box of viewport
+        /// </summary>
+        public bool DrawBorder { get; set; }
+
+        /// <summary>
+        /// Flag to clip any graphics that is outside of viewport box
+        /// </summary>
+        public bool Clipping { get; set; }
+
+        /// <summary>
+        /// Viewport background color
+        /// </summary>
+        public Color4 BackgroundColor { get; set; }
+
+        /// <summary>
+        /// Draw viewport background if this flag is true
+        /// </summary>
+        public bool DrawBackgroud { get; set; }
 
         /// <summary>
         /// Bottom edge screen coordinate of this viewport
@@ -125,7 +127,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         {
             GL.Translate(X, Y, 0.0f);
 
-            if (CLIPPING)
+            if (Clipping)
             {
                 //Clear stencil buffer before drawing in it
                 GL.Clear(ClearBufferMask.StencilBufferBit);
@@ -148,16 +150,17 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
                 GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Keep);
             }
 
-            DrawBackground();
+            if (DrawBackgroud)
+                DrawBackground();
 
             Camera.RenderTo(this);
 
-            if (CLIPPING)
+            if (Clipping)
             {
                 GL.Disable(EnableCap.StencilTest);
             }
 
-            if (BORDER)
+            if (DrawBorder)
             {
                 GL.Begin(PrimitiveType.LineLoop);
                 GL.Color4(1.0f, 0.0f, 0.0f, 1.0f);
@@ -197,8 +200,8 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         {
             var transf = Camera.GetTransform();
             transf.Invert();
-            var pointLB = new Vector3(-Width / 2.0f, - Height / 2.0f, 0.0f);
-            var pointRT = new Vector3 (Width / 2.0f,   Height / 2.0f, 0.0f);
+            var pointLB = new Vector3(-Width / 2.0f, -Height / 2.0f, 0.0f);
+            var pointRT = new Vector3(Width / 2.0f, Height / 2.0f, 0.0f);
 
             var tLB = Matrix4.CreateTranslation(pointLB);
             var tRT = Matrix4.CreateTranslation(pointRT);
@@ -230,7 +233,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         private void DrawBackground()
         {
             //Draw background for this viewport
-            GL.Color4(BACKGROUND_COLOR);
+            GL.Color4(BackgroundColor);
             GL.Begin(PrimitiveType.Polygon);
             GL.Vertex3(0, Height, 0.0);
             GL.Vertex3(0, 0, 0.0);

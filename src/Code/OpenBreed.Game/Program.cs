@@ -176,15 +176,10 @@ namespace OpenBreed.Game
 
             UpdateCursor();
 
-            Worlds.ProcessInputs((float)e.Time);
-
-            StateMachine.ProcessInputs(e);
+            StateMachine.Update((float)e.Time);
 
             Worlds.Update((float)e.Time);
 
-            StateMachine.Update((float)e.Time);
-
-            Worlds.Cleanup();
             Viewports.Cleanup();
         }
 

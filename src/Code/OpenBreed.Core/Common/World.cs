@@ -130,6 +130,8 @@ namespace OpenBreed.Core
 
         public void Update(float dt)
         {
+            ControlSystem.Update(dt * TimeMultiplier);
+
             MovementSystem.Update(dt * TimeMultiplier);
 
             PhysicsSystem.Update(dt * TimeMultiplier);
@@ -137,11 +139,6 @@ namespace OpenBreed.Core
             AnimationSystem.Update(dt * TimeMultiplier);
 
             Cleanup();
-        }
-
-        public void ProcessInputs(float dt)
-        {
-            ControlSystem.Update(dt);
         }
 
         #endregion Public Methods
