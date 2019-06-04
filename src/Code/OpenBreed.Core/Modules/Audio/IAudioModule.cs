@@ -1,11 +1,12 @@
-﻿using OpenBreed.Core.Systems;
+﻿using OpenBreed.Core.Modules.Audio.Systems;
+using OpenBreed.Core.Systems;
 
-namespace OpenBreed.Core.Modules
+namespace OpenBreed.Core.Modules.Audio
 {
     /// <summary>
     /// Core module interface specialized in sounds and music related work
     /// </summary>
-    public interface ISoundModule : ICoreModule
+    public interface IAudioModule : ICoreModule
     {
         #region Public Methods
 
@@ -13,7 +14,7 @@ namespace OpenBreed.Core.Modules
         /// Creates sound system and return it
         /// </summary>
         /// <returns>Sound system interface</returns>
-        ISoundSystem CreateSoundSystem();
+        IAudioSystem CreateSoundSystem();
 
         #endregion Public Methods
     }

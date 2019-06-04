@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Systems.Anim
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Systems.Movement", "OpenBreed.Core.Systems.Movement\OpenBreed.Core.Systems.Movement.csproj", "{E004FAAA-6D4D-48B5-93D9-8E9E15DE5812}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Systems.Sound", "OpenBreed.Core.Systems.Sound\OpenBreed.Core.Systems.Sound.csproj", "{82AF3D57-A4F4-4339-859A-7E82942B96DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Modules.Audio.OpenAL", "OpenBreed.Core.Modules.Audio.OpenAL\OpenBreed.Core.Modules.Audio.OpenAL.csproj", "{82AF3D57-A4F4-4339-859A-7E82942B96DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

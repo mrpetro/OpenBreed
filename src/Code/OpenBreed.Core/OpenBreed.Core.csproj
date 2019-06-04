@@ -76,6 +76,7 @@
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="CoreTools.cs" />
     <Compile Include="InputsMan.cs" />
+    <Compile Include="Modules\Audio\Components\IAudioComponent.cs" />
     <Compile Include="Modules\Rendering\Components\ITile.cs" />
     <Compile Include="Modules\Rendering\Helpers\IFont.cs" />
     <Compile Include="Modules\Rendering\Helpers\ITileAtlas.cs" />
@@ -89,7 +90,7 @@
     <Compile Include="Modules\Rendering\Components\IText.cs" />
     <Compile Include="Modules\Rendering\Helpers\IViewportMan.cs" />
     <Compile Include="Modules\Rendering\IRenderModule.cs" />
-    <Compile Include="Modules\ISoundModule.cs" />
+    <Compile Include="Modules\Audio\IAudioModule.cs" />
     <Compile Include="Modules\Rendering\Helpers\ITexture.cs" />
     <Compile Include="States\IStateBuilder.cs" />
     <Compile Include="States\IState.cs" />
@@ -105,7 +106,7 @@
     <Compile Include="Systems\IMovementSystem.cs" />
     <Compile Include="Systems\IPhysicsSystem.cs" />
     <Compile Include="Modules\Rendering\Systems\IRenderSystem.cs" />
-    <Compile Include="Systems\ISoundSystem.cs" />
+    <Compile Include="Modules\Audio\Systems\IAudioSystem.cs" />
     <Compile Include="Systems\WorldSystem.cs" />
     <Compile Include="Systems\IWorldSystem.cs" />
     <Compile Include="Systems\Common\Components\Transformation.cs" />

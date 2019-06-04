@@ -1,9 +1,11 @@
-﻿using OpenBreed.Core.Systems.Sound.Components;
+﻿using OpenBreed.Core.Modules.Audio.Components;
+using OpenBreed.Core.Modules.Audio.Systems;
+using OpenBreed.Core.Systems;
 using System;
 
-namespace OpenBreed.Core.Systems.Sound
+namespace OpenBreed.Core.Modules.Audio
 {
-    public class SoundSystem : WorldSystem<ISoundComponent>, ISoundSystem
+    public class SoundSystem : WorldSystem<IAudioComponent>, IAudioSystem
     {
         #region Public Constructors
 
@@ -15,12 +17,12 @@ namespace OpenBreed.Core.Systems.Sound
 
         #region Protected Methods
 
-        protected override void AddComponent(ISoundComponent component)
+        protected override void AddComponent(IAudioComponent component)
         {
             throw new NotImplementedException();
         }
 
-        protected override void RemoveComponent(ISoundComponent component)
+        protected override void RemoveComponent(IAudioComponent component)
         {
             throw new NotImplementedException();
         }

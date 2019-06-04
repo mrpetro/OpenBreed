@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Modules;
+using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems;
@@ -7,8 +8,6 @@ using OpenBreed.Core.Systems.Animation;
 using OpenBreed.Core.Systems.Control;
 using OpenBreed.Core.Systems.Movement;
 using OpenBreed.Core.Systems.Physics;
-using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenBreed.Core.Systems.Sound;
 using OpenBreed.Game.States;
 using OpenTK;
 using OpenTK.Graphics;
@@ -25,8 +24,6 @@ namespace OpenBreed.Game
         #region Private Fields
 
         private string appVersion;
-
-        private FontAtlas fontAtlas;
 
         #endregion Private Fields
 
@@ -79,7 +76,7 @@ namespace OpenBreed.Game
         #region Public Properties
 
         public IRenderModule Rendering { get; }
-        public ISoundModule Sounds { get; }
+        public IAudioModule Sounds { get; }
         public IPhysicsModule Physics { get; }
         public EntityMan Entities { get; }
         public InputsMan Inputs { get; }

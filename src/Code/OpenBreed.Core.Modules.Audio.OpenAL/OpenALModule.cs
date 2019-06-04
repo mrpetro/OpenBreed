@@ -1,13 +1,15 @@
 ﻿using OpenBreed.Core.Modules;
+using OpenBreed.Core.Modules.Audio.Systems;
+using OpenBreed.Core.Systems;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Core.Systems.Sound
+namespace OpenBreed.Core.Modules.Audio
 {
-    public class OpenALModule : ISoundModule
+    public class OpenALModule : IAudioModule
     {
         #region Public Constructors
 
@@ -28,7 +30,7 @@ namespace OpenBreed.Core.Systems.Sound
         /// Creates sound system and return it
         /// </summary>
         /// <returns>Sound system interface</returns>
-        public ISoundSystem CreateSoundSystem()
+        public IAudioSystem CreateSoundSystem()
         {
             return new SoundSystem(Core);
         }
