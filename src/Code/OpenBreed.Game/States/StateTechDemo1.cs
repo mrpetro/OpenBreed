@@ -107,7 +107,7 @@ namespace OpenBreed.Game.States
             viewportC.Height = clientRectangle.Height - clientRectangle.Height / 2 - 50 ;
         }
 
-        public override void ProcessInputs(FrameEventArgs e)
+        public override void Update(float dt)
         {
             var keyState = Keyboard.GetState();
             var mouseState = Mouse.GetState();
@@ -147,9 +147,9 @@ namespace OpenBreed.Game.States
         {
             Core.Inputs.KeyDown += Inputs_KeyDown;
 
-            Core.Viewports.Add(viewportA);
-            Core.Viewports.Add(viewportB);
-            Core.Viewports.Add(viewportC);
+            Core.Rendering.Viewports.Add(viewportA);
+            Core.Rendering.Viewports.Add(viewportB);
+            Core.Rendering.Viewports.Add(viewportC);
 
             Console.Clear();
             Console.WriteLine("---------- Viewports & Cameras --------");
@@ -172,9 +172,9 @@ namespace OpenBreed.Game.States
 
         protected override void OnLeave()
         {
-            Core.Viewports.Remove(viewportA);
-            Core.Viewports.Remove(viewportB);
-            Core.Viewports.Remove(viewportC);
+            Core.Rendering.Viewports.Remove(viewportA);
+            Core.Rendering.Viewports.Remove(viewportB);
+            Core.Rendering.Viewports.Remove(viewportC);
 
             Core.Inputs.KeyDown -= Inputs_KeyDown;
         }

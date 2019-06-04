@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Rendering;
+using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Common.Components;
 using OpenTK;
@@ -130,6 +131,8 @@ namespace OpenBreed.Core
 
         public void Update(float dt)
         {
+            ControlSystem.Update(dt * TimeMultiplier);
+
             MovementSystem.Update(dt * TimeMultiplier);
 
             PhysicsSystem.Update(dt * TimeMultiplier);
@@ -137,11 +140,6 @@ namespace OpenBreed.Core
             AnimationSystem.Update(dt * TimeMultiplier);
 
             Cleanup();
-        }
-
-        public void ProcessInputs(float dt)
-        {
-            ControlSystem.Update(dt);
         }
 
         #endregion Public Methods

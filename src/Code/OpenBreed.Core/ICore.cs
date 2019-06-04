@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Rendering;
+using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems;
 using OpenTK;
@@ -32,11 +33,6 @@ namespace OpenBreed.Core
         /// Entities manager
         /// </summary>
         EntityMan Entities { get; }
-
-        /// <summary>
-        /// Viewports manager
-        /// </summary>
-        ViewportMan Viewports { get; }
 
         /// <summary>
         /// Inputs manager

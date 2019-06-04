@@ -86,7 +86,7 @@ namespace OpenBreed.Game.States
             viewport.Height = clientRectangle.Height - 50;
         }
 
-        public override void ProcessInputs(FrameEventArgs e)
+        public override void Update(float dt)
         {
             var keyState = Keyboard.GetState();
             var mouseState = Mouse.GetState();
@@ -140,7 +140,7 @@ namespace OpenBreed.Game.States
         {
             Core.Inputs.KeyDown += Inputs_KeyDown;
 
-            Core.Viewports.Add(viewport);
+            Core.Rendering.Viewports.Add(viewport);
 
             Console.Clear();
             Console.WriteLine("---------- Pathfinding --------");
@@ -152,7 +152,7 @@ namespace OpenBreed.Game.States
 
         protected override void OnLeave()
         {
-            Core.Viewports.Remove(viewport);
+            Core.Rendering.Viewports.Remove(viewport);
 
             Core.Inputs.KeyDown -= Inputs_KeyDown;
         }

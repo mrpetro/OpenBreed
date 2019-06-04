@@ -144,7 +144,7 @@ namespace OpenBreed.Game.States
             viewportRight.Height = clientRectangle.Height - 50;
         }
 
-        public override void ProcessInputs(FrameEventArgs e)
+        public override void Update(float dt)
         {
             var keyState = Keyboard.GetState();
             var mouseState = Mouse.GetState();
@@ -182,8 +182,8 @@ namespace OpenBreed.Game.States
         {
             Core.Inputs.KeyDown += Inputs_KeyDown;
 
-            Core.Viewports.Add(viewportLeft);
-            Core.Viewports.Add(viewportRight);
+            Core.Rendering.Viewports.Add(viewportLeft);
+            Core.Rendering.Viewports.Add(viewportRight);
 
             Console.Clear();
             Console.WriteLine("---------- Multi-worlds --------");
@@ -207,8 +207,8 @@ namespace OpenBreed.Game.States
 
         protected override void OnLeave()
         {
-            Core.Viewports.Remove(viewportLeft);
-            Core.Viewports.Remove(viewportRight);
+            Core.Rendering.Viewports.Remove(viewportLeft);
+            Core.Rendering.Viewports.Remove(viewportRight);
 
             Core.Inputs.KeyDown -= Inputs_KeyDown;
         }

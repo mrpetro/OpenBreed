@@ -1,9 +1,8 @@
-﻿using OpenBreed.Core.Modules;
-using OpenBreed.Core.Modules.Rendering;
-using OpenBreed.Core.Modules.Rendering.Components;
+﻿using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.Modules.Rendering.Systems;
+using OpenTK.Graphics.OpenGL;
 using System;
-using System.Drawing;
 
 namespace OpenBreed.Core.Modules.Rendering
 {
@@ -12,6 +11,7 @@ namespace OpenBreed.Core.Modules.Rendering
         #region Private Fields
 
         private TextureMan textureMan = new TextureMan();
+        private ViewportMan viewportMan = new ViewportMan();
 
         #endregion Private Fields
 
@@ -20,8 +20,6 @@ namespace OpenBreed.Core.Modules.Rendering
         public OpenGLModule(ICore core)
         {
             Core = core ?? throw new ArgumentNullException(nameof(core));
-
-            Textures = new TextureMan();
         }
 
         #endregion Public Constructors
@@ -30,7 +28,9 @@ namespace OpenBreed.Core.Modules.Rendering
 
         public ICore Core { get; }
 
-        public ITextureMan Textures { get; }
+        public ITextureMan Textures { get { return textureMan; } }
+
+        public IViewportMan Viewports { get { return viewportMan; } }
 
         #endregion Public Properties
 
@@ -60,6 +60,44 @@ namespace OpenBreed.Core.Modules.Rendering
             return new Tile(atlas, imageId);
         }
 
+        public void Draw(float dt)
+        {
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
+
+            GL.PushMatrix();
+
+            viewportMan.Draw(dt);
+
+            DrawCursor();
+
+            GL.PopMatrix();
+        }
+
+        public void Cleanup()
+        {
+            viewportMan.Cleanup();
+        }
+
         #endregion Public Methods
+
+        #region Private Methods
+
+        private void DrawCursor()
+        {
+            GL.PushMatrix();
+
+            GL.Translate(Core.CursorPos.X, Core.CursorPos.Y, 0.0f);
+
+            GL.Color3(1.0f, 0.0f, 0.0f);
+            GL.Begin(PrimitiveType.Triangles);
+            GL.Vertex3(0, -20, 0.0);
+            GL.Vertex3(0, 0, 0.0);
+            GL.Vertex3(10, -20, 0.0);
+            GL.End();
+
+            GL.PopMatrix();
+        }
+
+        #endregion Private Methods
     }
 }

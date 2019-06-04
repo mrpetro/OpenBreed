@@ -3,6 +3,7 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Systems.Physics.Components;
 using OpenBreed.Core.Systems.Physics.Helpers;
