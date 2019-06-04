@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems;
 using System.Drawing;
 
@@ -48,6 +49,14 @@ namespace OpenBreed.Core.Modules.Rendering
         /// Textures manager
         /// </summary>
         ITextureMan Textures { get; }
+
+        /// <summary>
+        /// Viewports manager
+        /// </summary>
+        IViewportMan Viewports { get; }
+
+        void Cleanup();
+        void Draw(float time);
 
         #endregion Public Methods
     }

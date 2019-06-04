@@ -141,8 +141,8 @@ namespace OpenBreed.Game.States
         {
             Core.Inputs.KeyDown += Inputs_KeyDown;
 
-            Core.Viewports.Add(gameViewport);
-            Core.Viewports.Add(hudViewport);
+            Core.Rendering.Viewports.Add(gameViewport);
+            Core.Rendering.Viewports.Add(hudViewport);
 
             Console.Clear();
             Console.WriteLine("---------- Fonts & Texts --------");
@@ -154,8 +154,8 @@ namespace OpenBreed.Game.States
 
         protected override void OnLeave()
         {
-            Core.Viewports.Remove(hudViewport);
-            Core.Viewports.Remove(gameViewport);
+            Core.Rendering.Viewports.Remove(hudViewport);
+            Core.Rendering.Viewports.Remove(gameViewport);
 
             Core.Inputs.KeyDown -= Inputs_KeyDown;
         }

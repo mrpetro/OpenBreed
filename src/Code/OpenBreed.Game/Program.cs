@@ -7,7 +7,6 @@ using OpenBreed.Core.Systems.Animation;
 using OpenBreed.Core.Systems.Control;
 using OpenBreed.Core.Systems.Movement;
 using OpenBreed.Core.Systems.Physics;
-using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Systems.Sound;
 using OpenBreed.Game.States;
@@ -46,7 +45,6 @@ namespace OpenBreed.Game
             Inputs = new InputsMan(this);
             Worlds = new WorldMan(this);
             StateMachine = new StateMan(this);
-            Viewports = new ViewportMan(this);
             StateMachine.RegisterState(new StateTechDemo1(this));
             StateMachine.RegisterState(new StateTechDemo2(this));
             StateMachine.RegisterState(new StateTechDemo3(this));
@@ -86,7 +84,6 @@ namespace OpenBreed.Game
         public EntityMan Entities { get; }
         public InputsMan Inputs { get; }
         public WorldMan Worlds { get; }
-        public ViewportMan Viewports { get; }
         public StateMan StateMachine { get; }
 
         public Vector2 CursorPos { get; private set; }
@@ -176,27 +173,11 @@ namespace OpenBreed.Game
 
             UpdateCursor();
 
+            Rendering.Cleanup();
+
             StateMachine.Update((float)e.Time);
 
             Worlds.Update((float)e.Time);
-
-            Viewports.Cleanup();
-        }
-
-        private void DrawCursor()
-        {
-            GL.PushMatrix();
-
-            GL.Translate(CursorPos.X, CursorPos.Y, 0.0f);
-
-            GL.Color3(1.0f, 0.0f, 0.0f);
-            GL.Begin(PrimitiveType.Triangles);
-            GL.Vertex3(0, -20, 0.0);
-            GL.Vertex3(0, 0, 0.0);
-            GL.Vertex3(10, -20, 0.0);
-            GL.End();
-
-            GL.PopMatrix();
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -205,15 +186,7 @@ namespace OpenBreed.Game
 
             base.OnRenderFrame(e);
 
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
-
-            GL.PushMatrix();
-
-            Viewports.Draw((float)e.Time);
-
-            DrawCursor();
-
-            GL.PopMatrix();
+            Rendering.Draw((float)e.Time);
 
             SwapBuffers();
         }

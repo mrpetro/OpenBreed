@@ -58,9 +58,10 @@
     <Compile Include="Helpers\TileAtlas.cs" />
     <Compile Include="Helpers\Vertex.cs" />
     <Compile Include="Helpers\Viewport.cs" />
+    <Compile Include="Helpers\ViewportMan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OpenGLModule.cs" />
-    <Compile Include="RenderSystem.cs" />
+    <Compile Include="Systems\RenderSystem.cs" />
     <Compile Include="Helpers\TextureMan.cs" />
   </ItemGroup>
   <ItemGroup>

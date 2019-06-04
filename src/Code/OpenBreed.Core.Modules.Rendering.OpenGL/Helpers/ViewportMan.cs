@@ -1,12 +1,11 @@
-﻿using OpenBreed.Core.Modules.Rendering.Helpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace OpenBreed.Core
+namespace OpenBreed.Core.Modules.Rendering.Helpers
 {
-    public class ViewportMan
+    public class ViewportMan : IViewportMan
     {
         #region Private Fields
 
@@ -18,10 +17,8 @@ namespace OpenBreed.Core
 
         #region Public Constructors
 
-        public ViewportMan(ICore core)
+        public ViewportMan()
         {
-            Core = core;
-
             Items = new ReadOnlyCollection<IViewport>(items);
         }
 
@@ -30,8 +27,6 @@ namespace OpenBreed.Core
         #region Public Properties
 
         public ReadOnlyCollection<IViewport> Items { get; }
-
-        public ICore Core { get; }
 
         #endregion Public Properties
 
@@ -59,13 +54,17 @@ namespace OpenBreed.Core
             toAdd.Add(viewport);
         }
 
-        public void Draw(float dt)
+        #endregion Public Methods
+
+        #region Internal Methods
+
+        internal void Draw(float dt)
         {
             for (int i = 0; i < items.Count; i++)
                 items[i].Draw();
         }
 
-        public void Cleanup()
+        internal void Cleanup()
         {
             if (toRemove.Any())
             {
@@ -90,6 +89,6 @@ namespace OpenBreed.Core
             }
         }
 
-        #endregion Public Methods
+        #endregion Internal Methods
     }
 }

@@ -140,7 +140,7 @@ namespace OpenBreed.Game.States
         {
             Core.Inputs.KeyDown += Inputs_KeyDown;
 
-            Core.Viewports.Add(viewport);
+            Core.Rendering.Viewports.Add(viewport);
 
             Console.Clear();
             Console.WriteLine("---------- Pathfinding --------");
@@ -152,7 +152,7 @@ namespace OpenBreed.Game.States
 
         protected override void OnLeave()
         {
-            Core.Viewports.Remove(viewport);
+            Core.Rendering.Viewports.Remove(viewport);
 
             Core.Inputs.KeyDown -= Inputs_KeyDown;
         }

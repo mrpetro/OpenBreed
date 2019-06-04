@@ -87,6 +87,7 @@
     <Compile Include="Modules\Rendering\Components\IRenderComponent.cs" />
     <Compile Include="Modules\Rendering\Components\ISprite.cs" />
     <Compile Include="Modules\Rendering\Components\IText.cs" />
+    <Compile Include="Modules\Rendering\Helpers\IViewportMan.cs" />
     <Compile Include="Modules\Rendering\IRenderModule.cs" />
     <Compile Include="Modules\ISoundModule.cs" />
     <Compile Include="Modules\Rendering\Helpers\ITexture.cs" />
@@ -103,7 +104,7 @@
     <Compile Include="Systems\IControlSystem.cs" />
     <Compile Include="Systems\IMovementSystem.cs" />
     <Compile Include="Systems\IPhysicsSystem.cs" />
-    <Compile Include="Modules\Rendering\IRenderSystem.cs" />
+    <Compile Include="Modules\Rendering\Systems\IRenderSystem.cs" />
     <Compile Include="Systems\ISoundSystem.cs" />
     <Compile Include="Systems\WorldSystem.cs" />
     <Compile Include="Systems\IWorldSystem.cs" />
@@ -123,7 +124,6 @@
     <Compile Include="States\StateMan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\World.cs" />
-    <Compile Include="ViewportMan.cs" />
     <Compile Include="WorldMan.cs" />
   </ItemGroup>
   <ItemGroup>
