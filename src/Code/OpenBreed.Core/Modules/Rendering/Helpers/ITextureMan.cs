@@ -11,35 +11,28 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         #region Public Methods
 
         /// <summary>
-        /// Get texture by it's name
+        /// Get texture by it's ID
         /// </summary>
-        /// <param name="name">Given name of texture</param>
+        /// <param name="name">Given ID of texture</param>
         /// <returns>Return ITexture object if found, false otherwise</returns>
-        ITexture GetByName(string name);
-
-        /// <summary>
-        /// Get texture object by it's ID
-        /// </summary>
-        /// <param name="id">Given ID of texture</param>
-        /// <returns>Return ITexture object if found, false otherwise</returns>
-        ITexture GetById(int id);
+        ITexture GetById(string name);
 
         /// <summary>
         /// Creates texture object from given bitmap and return it
         /// </summary>
         /// <param name="bitmap">Bitmap to create texture from</param>
-        /// <param name="name">Obligatory name of texture to create</param>
+        /// <param name="id">Obligatory ID of texture to create</param>
         /// <returns>ITexture object</returns>
-        ITexture Load(Bitmap bitmap, string name);
+        ITexture Load(Bitmap bitmap, string id);
 
         /// <summary>
         /// Creates texture object from image file path and return it
-        /// If Name parameter is not set, texture name will be set to file path
+        /// If id parameter is not set, texture id will be set to file path
         /// </summary>
-        /// <param name="bitmap">File path to image file</param>
-        /// <param name="name">Optional name of texture to create</param>
+        /// <param name="filePath">File path to image file</param>
+        /// <param name="id">Optional id of texture to create</param>
         /// <returns>ITexture object</returns>
-        ITexture Load(string filePath, string name = null);
+        ITexture Load(string filePath, string id = null);
 
         /// <summary>
         /// Unloads all textures

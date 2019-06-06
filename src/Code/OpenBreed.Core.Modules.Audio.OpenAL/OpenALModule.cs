@@ -1,16 +1,18 @@
-﻿using OpenBreed.Core.Modules;
+﻿using OpenBreed.Core.Modules.Audio.Components;
+using OpenBreed.Core.Modules.Audio.Helpers;
 using OpenBreed.Core.Modules.Audio.Systems;
-using OpenBreed.Core.Systems;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Modules.Audio
 {
     public class OpenALModule : IAudioModule
     {
+        #region Private Fields
+
+        private SoundMan soundMan = new SoundMan();
+
+        #endregion Private Fields
+
         #region Public Constructors
 
         public OpenALModule(ICore core)
@@ -24,7 +26,11 @@ namespace OpenBreed.Core.Modules.Audio
 
         public ICore Core { get; }
 
+        public ISoundMan Sounds { get { return soundMan; } }
+
         #endregion Public Properties
+
+        #region Public Methods
 
         /// <summary>
         /// Creates sound system and return it
@@ -34,5 +40,25 @@ namespace OpenBreed.Core.Modules.Audio
         {
             return new SoundSystem(Core);
         }
+
+        /// <summary>
+        /// Create local sound emiter that emits sound from specific position in owning world coordinates
+        /// </summary>
+        /// <returns>Local sound emiter</returns>
+        public ISoundEmiter CreateLocalSoundEmiter()
+        {
+            return new LocalSoundEmiter();
+        }
+
+        /// <summary>
+        /// Create global sound emiter that emits sound on entire world
+        /// </summary>
+        /// <returns>Global sound emiter</returns>
+        public ISoundEmiter CreateGlobalSoundEmiter()
+        {
+            return new GlobalSoundEmiter();
+        }
+
+        #endregion Public Methods
     }
 }

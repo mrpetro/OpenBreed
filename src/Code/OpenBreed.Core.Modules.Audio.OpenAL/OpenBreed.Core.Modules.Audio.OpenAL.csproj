@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\LocalSoundEmiter.cs" />
+    <Compile Include="Components\GlobalSoundEmiter.cs" />
+    <Compile Include="Helpers\SoundMan.cs" />
     <Compile Include="OpenALModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SoundSystem.cs" />
@@ -51,8 +54,6 @@
       <Name>OpenBreed.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Components\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

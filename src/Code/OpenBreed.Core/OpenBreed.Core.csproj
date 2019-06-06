@@ -77,6 +77,9 @@
     <Compile Include="CoreTools.cs" />
     <Compile Include="InputsMan.cs" />
     <Compile Include="Modules\Audio\Components\IAudioComponent.cs" />
+    <Compile Include="Modules\Audio\Components\ISoundEmiter.cs" />
+    <Compile Include="Modules\Audio\Helpers\ISound.cs" />
+    <Compile Include="Modules\Audio\Helpers\ISoundMan.cs" />
     <Compile Include="Modules\Rendering\Components\ITile.cs" />
     <Compile Include="Modules\Rendering\Helpers\IFont.cs" />
     <Compile Include="Modules\Rendering\Helpers\ITileAtlas.cs" />
