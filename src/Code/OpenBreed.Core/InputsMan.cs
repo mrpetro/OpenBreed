@@ -17,11 +17,17 @@ namespace OpenBreed.Core
 
         #region Public Events
 
+        public event EventHandler<MouseButtonEventArgs> MouseDown;
+
+        public event EventHandler<MouseButtonEventArgs> MouseUp;
+
         public event EventHandler<KeyboardKeyEventArgs> KeyDown;
 
         public event EventHandler<KeyboardKeyEventArgs> KeyUp;
 
         public event EventHandler<KeyPressEventArgs> KeyPress;
+
+        public event EventHandler<MouseMoveEventArgs> MouseMove;
 
         #endregion Public Events
 
@@ -48,6 +54,26 @@ namespace OpenBreed.Core
             KeyPress?.Invoke(this, e);
         }
 
+        public void OnMouseDown(MouseButtonEventArgs e)
+        {
+            MouseDown?.Invoke(this, e);
+        }
+
+        public void OnMouseUp(MouseButtonEventArgs e)
+        {
+            MouseUp?.Invoke(this, e);
+        }
+
+        public void OnMouseMove(MouseMoveEventArgs e)
+        {
+            MouseMove?.Invoke(this, e);
+        }
+
         #endregion Public Methods
+
+        #region Private Methods
+
+
+        #endregion Private Methods
     }
 }

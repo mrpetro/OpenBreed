@@ -1,4 +1,6 @@
 ﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Audio.Systems;
+using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems;
@@ -80,7 +82,7 @@ namespace OpenBreed.Core
 
         public ReadOnlyCollection<IWorldEntity> Entities { get; }
 
-        public ISoundSystem SoundSystem { get; }
+        public IAudioSystem SoundSystem { get; }
         public IPhysicsSystem PhysicsSystem { get; }
         public IControlSystem ControlSystem { get; }
         public IMovementSystem MovementSystem { get; }

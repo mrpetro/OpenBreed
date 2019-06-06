@@ -1,14 +1,13 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Modules;
+using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Animation;
 using OpenBreed.Core.Systems.Control;
 using OpenBreed.Core.Systems.Movement;
-using OpenBreed.Core.Systems.Physics;
-using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenBreed.Core.Systems.Sound;
+using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Game.States;
 using OpenTK;
 using OpenTK.Graphics;
@@ -25,8 +24,6 @@ namespace OpenBreed.Game
         #region Private Fields
 
         private string appVersion;
-
-        private FontAtlas fontAtlas;
 
         #endregion Private Fields
 
@@ -56,6 +53,24 @@ namespace OpenBreed.Game
             VSync = VSyncMode.On;
         }
 
+        protected override void OnMouseDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseDown(e);
+            Inputs.OnMouseDown(e);
+        }
+
+        protected override void OnMouseUp(MouseButtonEventArgs e)
+        {
+            base.OnMouseUp(e);
+            Inputs.OnMouseUp(e);
+        }
+
+        protected override void OnMouseMove(MouseMoveEventArgs e)
+        {
+            base.OnMouseMove(e);
+            Inputs.OnMouseMove(e);
+        }
+
         protected override void OnKeyDown(KeyboardKeyEventArgs e)
         {
             base.OnKeyDown(e);
@@ -79,7 +94,7 @@ namespace OpenBreed.Game
         #region Public Properties
 
         public IRenderModule Rendering { get; }
-        public ISoundModule Sounds { get; }
+        public IAudioModule Sounds { get; }
         public IPhysicsModule Physics { get; }
         public EntityMan Entities { get; }
         public InputsMan Inputs { get; }

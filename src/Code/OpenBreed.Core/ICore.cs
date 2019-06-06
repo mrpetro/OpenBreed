@@ -1,4 +1,6 @@
 ﻿using OpenBreed.Core.Modules;
+using OpenBreed.Core.Modules.Audio;
+using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
@@ -22,7 +24,7 @@ namespace OpenBreed.Core
         /// <summary>
         /// Reference to sounds core module
         /// </summary>
-        ISoundModule Sounds { get; }
+        IAudioModule Sounds { get; }
 
         /// <summary>
         /// Reference to physics core module

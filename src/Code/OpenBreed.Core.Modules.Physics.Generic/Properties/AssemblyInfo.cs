@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OpenBreed.Core.Modules.Rendering.OpenGL")]
+[assembly: AssemblyTitle("OpenBreed.Core.Modules.Physics.Generic")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("OpenBreed.Core.Modules.Rendering.OpenGL")]
+[assembly: AssemblyProduct("OpenBreed.Core.Modules.Physics.Generic")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ea747476-89fe-462a-9bdc-dfc2e9a64ead")]
+[assembly: Guid("c9f84ce7-732c-4a31-89dc-b87e3d9685be")]
 
 // Version information for an assembly consists of the following four values:
 //

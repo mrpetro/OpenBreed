@@ -77,6 +77,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OpenBreed.Core.Modules.Audio.OpenAL\OpenBreed.Core.Modules.Audio.OpenAL.csproj">
+      <Project>{82af3d57-a4f4-4339-859a-7e82942b96df}</Project>
+      <Name>OpenBreed.Core.Modules.Audio.OpenAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Core.Modules.Rendering.OpenGL\OpenBreed.Core.Modules.Rendering.OpenGL.csproj">
       <Project>{EA747476-89FE-462A-9BDC-DFC2E9A64EAD}</Project>
       <Name>OpenBreed.Core.Modules.Rendering.OpenGL</Name>
@@ -93,13 +97,9 @@
       <Project>{E004FAAA-6D4D-48B5-93D9-8E9E15DE5812}</Project>
       <Name>OpenBreed.Core.Systems.Movement</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Core.Systems.Physics\OpenBreed.Core.Systems.Physics.csproj">
+    <ProjectReference Include="..\OpenBreed.Core.Modules.Physics.Generic\OpenBreed.Core.Modules.Physics.Generic.csproj">
       <Project>{C9F84CE7-732C-4A31-89DC-B87E3D9685BE}</Project>
-      <Name>OpenBreed.Core.Systems.Physics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Core.Systems.Sound\OpenBreed.Core.Systems.Sound.csproj">
-      <Project>{82AF3D57-A4F4-4339-859A-7E82942B96DF}</Project>
-      <Name>OpenBreed.Core.Systems.Sound</Name>
+      <Name>OpenBreed.Core.Modules.Physics.Generic</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">
       <Project>{95BDF122-FAC8-4AC4-B9A8-B549D942E37D}</Project>

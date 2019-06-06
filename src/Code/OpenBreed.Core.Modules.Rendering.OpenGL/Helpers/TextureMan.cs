@@ -20,13 +20,13 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         #region Public Methods
 
         /// <summary>
-        /// Find ITexture object by it's name,
-        /// Return it if found, if not then create it from image under filePath
+        /// Creates texture object from image file path and return it
+        /// If id parameter is not set, texture ID will be set to file path
         /// </summary>
-        /// <param name="filePath">Image file path</param>
-        /// <param name="name">Name of texture object to return</param>
+        /// <param name="filePath">File path to image file</param>
+        /// <param name="id">Optional ID of texture to create</param>
         /// <returns>ITexture object</returns>
-        public ITexture Load(string filePath, string name = null)
+        public ITexture Load(string filePath, string id = null)
         {
             if (filePath == null)
                 throw new ArgumentNullException(nameof(filePath));
@@ -41,6 +41,9 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             return AddFrom(fullPath);
         }
 
+        /// <summary>
+        /// Unloads all textures
+        /// </summary>
         public void UnloadAll()
         {
             foreach (var texture in textures.Values)
@@ -49,37 +52,36 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             textures.Clear();
         }
 
-        public ITexture GetByName(string name)
+        /// <summary>
+        /// Get texture object by it's ID
+        /// </summary>
+        /// <param name="id">Given ID of texture</param>
+        /// <returns>Return ITexture object if found, false otherwise</returns>
+        public ITexture GetById(string id)
         {
             ITexture texture = null;
 
-            if (textures.TryGetValue(name, out texture))
+            if (textures.TryGetValue(id, out texture))
                 return texture;
             else
                 return null;
         }
 
-        public ITexture GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
-        /// Find ITexture object by it's name,
-        /// Return it if found, if not then create it from bitmap
+        /// Creates texture object from given bitmap and return it
         /// </summary>
         /// <param name="bitmap">Bitmap to create texture from</param>
-        /// <param name="name">Name of texture object to return</param>
+        /// <param name="id">Obligatory ID of texture to create</param>
         /// <returns>ITexture object</returns>
-        public ITexture Load(Bitmap bitmap, string name)
+        public ITexture Load(Bitmap bitmap, string id)
         {
             ITexture texture;
 
-            if (textures.TryGetValue(name, out texture))
+            if (textures.TryGetValue(id, out texture))
                 return texture;
 
             texture = Texture.CreateFromBitmap(bitmap);
-            textures.Add(name, texture);
+            textures.Add(id, texture);
             return texture;
         }
 

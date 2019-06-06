@@ -6,7 +6,7 @@ using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Systems.Common.Components.Shapes;
-using OpenBreed.Core.Systems.Physics.Components;
+using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Game.Components;
 using OpenBreed.Game.Entities;
 using OpenBreed.Game.Entities.Builders;
