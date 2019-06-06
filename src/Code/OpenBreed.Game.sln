@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Modules.Rend
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Game", "OpenBreed.Game\OpenBreed.Game.csproj", "{FB015343-45FD-4482-991D-90F21613E361}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Systems.Physics", "OpenBreed.Core.Systems.Physics\OpenBreed.Core.Systems.Physics.csproj", "{C9F84CE7-732C-4A31-89DC-B87E3D9685BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Modules.Physics.Generic", "OpenBreed.Core.Modules.Physics.Generic\OpenBreed.Core.Modules.Physics.Generic.csproj", "{C9F84CE7-732C-4A31-89DC-B87E3D9685BE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Systems.Control", "OpenBreed.Core.Systems.Control\OpenBreed.Core.Systems.Control.csproj", "{CF689601-0842-497F-A05F-B31431697B4E}"
 EndProject

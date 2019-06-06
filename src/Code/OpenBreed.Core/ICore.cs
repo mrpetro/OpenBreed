@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Audio;
+using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;

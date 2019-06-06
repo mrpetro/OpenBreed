@@ -1,7 +1,8 @@
 ﻿using OpenBreed.Core.Modules;
+using OpenBreed.Core.Systems;
 using System;
 
-namespace OpenBreed.Core.Systems.Physics
+namespace OpenBreed.Core.Modules.Physics
 {
     public class PhysicsModule : IPhysicsModule
     {

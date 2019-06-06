@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Core.Systems;
 
-namespace OpenBreed.Core.Modules
+namespace OpenBreed.Core.Modules.Physics
 {
     /// <summary>
     /// Core module interface specialized in physics simulation related work

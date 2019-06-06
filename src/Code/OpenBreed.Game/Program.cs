@@ -7,7 +7,7 @@ using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Animation;
 using OpenBreed.Core.Systems.Control;
 using OpenBreed.Core.Systems.Movement;
-using OpenBreed.Core.Systems.Physics;
+using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Game.States;
 using OpenTK;
 using OpenTK.Graphics;

@@ -9,7 +9,7 @@ using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Systems.Control;
 using OpenBreed.Core.Systems.Control.Components;
 using OpenBreed.Core.Systems.Movement.Components;
-using OpenBreed.Core.Systems.Physics.Components;
+using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Game.Components;
 
 namespace OpenBreed.Game.Entities.Builders

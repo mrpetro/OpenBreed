@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OpenBreed.Core.Modules.Audio")]
+[assembly: AssemblyTitle("OpenBreed.Core.Modules.Audio.OpenAL")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("OpenBreed.Core.Modules.Audio")]
+[assembly: AssemblyProduct("OpenBreed.Core.Modules.Audio.OpenAL")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

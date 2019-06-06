@@ -4,7 +4,7 @@ using OpenTK;
 using System;
 using System.Linq;
 
-namespace OpenBreed.Core.Systems.Physics.Components
+namespace OpenBreed.Core.Modules.Physics.Components
 {
     public class GridBoxBody : IStaticBody
     {

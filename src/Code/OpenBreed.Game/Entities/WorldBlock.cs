@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Systems.Physics.Components;
+using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Game.Entities.Builders;
 

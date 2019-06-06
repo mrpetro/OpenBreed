@@ -1,12 +1,12 @@
 ﻿using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Systems.Physics.Helpers;
+using OpenBreed.Core.Modules.Physics.Helpers;
 using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OpenBreed.Core.Systems.Physics.Components
+namespace OpenBreed.Core.Modules.Physics.Components
 {
     /// <summary>
     /// Dynamic body

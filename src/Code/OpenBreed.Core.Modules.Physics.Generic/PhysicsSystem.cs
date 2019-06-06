@@ -1,10 +1,11 @@
 ﻿using OpenBreed.Core.Systems.Common;
-using OpenBreed.Core.Systems.Physics.Components;
-using OpenBreed.Core.Systems.Physics.Helpers;
+using OpenBreed.Core.Modules.Physics.Components;
+using OpenBreed.Core.Modules.Physics.Helpers;
 using System;
 using System.Collections.Generic;
+using OpenBreed.Core.Systems;
 
-namespace OpenBreed.Core.Systems.Physics
+namespace OpenBreed.Core.Modules.Physics
 {
     public class PhysicsSystem : WorldSystem<IPhysicsComponent>, IPhysicsSystem
     {

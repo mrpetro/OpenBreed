@@ -1,6 +1,6 @@
 ﻿using OpenTK;
 
-namespace OpenBreed.Core.Systems.Physics.Helpers
+namespace OpenBreed.Core.Modules.Physics.Helpers
 {
     /// <summary>
     /// Extension methods for OpenTK.Box2 class

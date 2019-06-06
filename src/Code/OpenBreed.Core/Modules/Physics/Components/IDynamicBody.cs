@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace OpenBreed.Core.Systems.Physics.Components
+namespace OpenBreed.Core.Modules.Physics.Components
 {
     /// <summary>
     /// Physical body component interface which is used in entites that are moving in world coordinates

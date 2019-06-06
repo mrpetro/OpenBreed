@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C9F84CE7-732C-4A31-89DC-B87E3D9685BE}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>OpenBreed.Core.Systems.Physics</RootNamespace>
-    <AssemblyName>OpenBreed.Core.Systems.Physics</AssemblyName>
+    <RootNamespace>OpenBreed.Core.Modules.Physics</RootNamespace>
+    <AssemblyName>OpenBreed.Core.Modules.Physics</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -51,9 +51,6 @@
   <ItemGroup>
     <Compile Include="Components\DynamicBody.cs" />
     <Compile Include="Components\GridBoxBody.cs" />
-    <Compile Include="Components\IDynamicBody.cs" />
-    <Compile Include="Components\IPhysicsComponent.cs" />
-    <Compile Include="Components\IStaticBody.cs" />
     <Compile Include="Helpers\AabbXComparer.cs" />
     <Compile Include="Helpers\Box2Extensions.cs" />
     <Compile Include="PhysicsModule.cs" />

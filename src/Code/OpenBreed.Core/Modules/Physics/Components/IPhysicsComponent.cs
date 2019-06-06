@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Core.Systems.Common.Components;
 using OpenTK;
 
-namespace OpenBreed.Core.Systems.Physics.Components
+namespace OpenBreed.Core.Modules.Physics.Components
 {
     /// <summary>
     /// Component interface which is dedicated for physics system

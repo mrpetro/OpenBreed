@@ -1,7 +1,7 @@
-﻿using OpenBreed.Core.Systems.Physics.Components;
+﻿using OpenBreed.Core.Modules.Physics.Components;
 using System.Collections;
 
-namespace OpenBreed.Core.Systems.Physics.Helpers
+namespace OpenBreed.Core.Modules.Physics.Helpers
 {
     public class AabbXComparer : IComparer
     {
