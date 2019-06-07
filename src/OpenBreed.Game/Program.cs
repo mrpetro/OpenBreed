@@ -71,6 +71,12 @@ namespace OpenBreed.Game
             Inputs.OnMouseMove(e);
         }
 
+        protected override void OnMouseWheel(MouseWheelEventArgs e)
+        {
+            base.OnMouseWheel(e);
+            Inputs.OnMouseWheel(e);
+        }
+
         protected override void OnKeyDown(KeyboardKeyEventArgs e)
         {
             base.OnKeyDown(e);
@@ -100,11 +106,6 @@ namespace OpenBreed.Game
         public InputsMan Inputs { get; }
         public WorldMan Worlds { get; }
         public StateMan StateMachine { get; }
-
-        public Vector2 CursorPos { get; private set; }
-        public Vector2 CursorDelta { get; private set; }
-        public float Wheel { get; private set; }
-        public float WheelDelta { get; private set; }
 
         #endregion Public Properties
 
@@ -152,6 +153,16 @@ namespace OpenBreed.Game
             //GL.Enable(EnableCap.DepthTest);
         }
 
+        public Matrix4 ClientTransform
+        {
+            get
+            {
+                var transf = Matrix4.CreateScale(1.0f, -1.0f, 0.0f);
+                transf *= Matrix4.CreateTranslation(0.0f, ClientRectangle.Height, 0.0f);
+                return transf;
+            }
+        }
+
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
@@ -159,26 +170,29 @@ namespace OpenBreed.Game
             GL.LoadIdentity();
             GL.Viewport(0, 0, ClientRectangle.Width, ClientRectangle.Height);
             GL.MatrixMode(MatrixMode.Modelview);
-            GL.LoadIdentity();
+            //GL.LoadIdentity();
 
-            GL.Ortho(0, ClientRectangle.Width, 0, ClientRectangle.Height, 0, 1); // Origin in lower-left corner
+            var ortho = Matrix4.CreateOrthographicOffCenter(0.0f, ClientRectangle.Width, 0.0f, ClientRectangle.Height, 0.0f, 1.0f);
+
+            GL.LoadMatrix(ref ortho);
+            //GL.Ortho(0, ClientRectangle.Width, 0, ClientRectangle.Height, 0, 1); // Origin in lower-left corner
 
             StateMachine.OnResize(ClientRectangle);
         }
 
-        private void UpdateCursor()
-        {
-            var mouseState = Mouse.GetCursorState();
-            var mousePoint = new Point(mouseState.X, mouseState.Y);
-            var clientPoint = PointToClient(mousePoint);
-            var newCursorPos = new Vector2(clientPoint.X, ClientRectangle.Height - clientPoint.Y);
-            var newWheel = mouseState.WheelPrecise;
+        //private void UpdateCursor()
+        //{
+        //    var mouseState = Mouse.GetCursorState();
+        //    var mousePoint = new Point(mouseState.X, mouseState.Y);
+        //    var clientPoint = PointToClient(mousePoint);
+        //    var newCursorPos = new Vector2(clientPoint.X, ClientRectangle.Height - clientPoint.Y);
+        //    var newWheel = mouseState.WheelPrecise;
 
-            CursorDelta = newCursorPos - CursorPos;
-            CursorPos = newCursorPos;
-            WheelDelta = newWheel - Wheel;
-            Wheel = newWheel;
-        }
+        //    CursorDelta = newCursorPos - CursorPos;
+        //    CursorPos = newCursorPos;
+        //    WheelDelta = newWheel - Wheel;
+        //    Wheel = newWheel;
+        //}
 
 
 
@@ -186,7 +200,7 @@ namespace OpenBreed.Game
         {
             base.OnUpdateFrame(e);
 
-            UpdateCursor();
+            Inputs.Update();
 
             Rendering.Cleanup();
 

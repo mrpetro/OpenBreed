@@ -11,9 +11,9 @@ namespace OpenBreed.Game
         {
             float scaleFactor = 1.0f;
 
-            if (Math.Sign(core.WheelDelta) > 0)
+            if (Math.Sign(core.Inputs.WheelDelta) > 0)
                 scaleFactor = 1.25f;
-            else if (Math.Sign(core.WheelDelta) < 0)
+            else if (Math.Sign(core.Inputs.WheelDelta) < 0)
                 scaleFactor = 0.75f;
 
             zoom *= scaleFactor;

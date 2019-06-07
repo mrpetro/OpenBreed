@@ -92,7 +92,7 @@ namespace OpenBreed.Game.States
 
             Viewport hoverViewport = null;
 
-            if (viewport.TestScreenCoords(Core.CursorPos))
+            if (viewport.TestScreenCoords(Core.Inputs.CursorPos))
                 hoverViewport = viewport;
             else
                 hoverViewport = null;
@@ -105,7 +105,7 @@ namespace OpenBreed.Game.States
                 {
                     var transf = hoverViewport.Camera.GetTransform();
                     transf.Invert();
-                    var delta4 = Vector4.Transform(transf, new Vector4(Core.CursorDelta));
+                    var delta4 = Vector4.Transform(transf, new Vector4(Core.Inputs.CursorDelta));
                     var delta2 = new Vector2(-delta4.X, -delta4.Y);
  
                     hoverViewport.Camera.Position += delta2;
@@ -113,7 +113,7 @@ namespace OpenBreed.Game.States
 
                 if (mouseState.IsButtonDown(MouseButton.Left))
                 {
-                    var worldCoords = hoverViewport.GetWorldCoords(Core.CursorPos);
+                    var worldCoords = hoverViewport.GetWorldCoords(Core.Inputs.CursorPos);
                     var moveToCommand = new MoveToCommand(actor, worldCoords);
                     moveToCommand.Execute();
                 }

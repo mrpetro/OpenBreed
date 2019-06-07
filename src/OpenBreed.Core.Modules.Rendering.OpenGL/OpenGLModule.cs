@@ -86,7 +86,7 @@ namespace OpenBreed.Core.Modules.Rendering
         {
             GL.PushMatrix();
 
-            GL.Translate(Core.CursorPos.X, Core.CursorPos.Y, 0.0f);
+            GL.Translate(Core.Inputs.CursorPos.X, Core.Inputs.CursorPos.Y, 0.0f);
 
             GL.Color3(1.0f, 0.0f, 0.0f);
             GL.Begin(PrimitiveType.Triangles);

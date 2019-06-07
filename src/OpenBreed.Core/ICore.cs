@@ -52,24 +52,9 @@ namespace OpenBreed.Core
         StateMan StateMachine { get; }
 
         /// <summary>
-        /// Gets cursor position in window coordinates
+        /// Client display transformation matrix
         /// </summary>
-        Vector2 CursorPos { get; }
-
-        /// <summary>
-        /// Gets position delta (difference between current and previous)
-        /// </summary>
-        Vector2 CursorDelta { get; }
-
-        /// <summary>
-        /// Gets cursor wheel value
-        /// </summary>
-        float Wheel { get; }
-
-        /// <summary>
-        /// Gets wheel delta (difference between current and previous)
-        /// </summary>
-        float WheelDelta { get; }
+        Matrix4 ClientTransform { get; }
 
         #endregion Public Properties
 
