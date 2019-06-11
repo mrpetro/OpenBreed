@@ -10,6 +10,11 @@ namespace OpenBreed.Core.Entities
         {
         }
 
+        internal WorldEntity(ICore core) : base(core)
+        {
+
+        }
+
         #endregion Public Constructors
 
         #region Public Properties

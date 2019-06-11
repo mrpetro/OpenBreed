@@ -38,7 +38,7 @@ namespace OpenBreed.Game
             Sounds = new OpenALModule(this);
             Physics = new PhysicsModule(this);
 
-            Entities = new EntityMan();
+            Entities = new EntityMan(this);
             Inputs = new InputsMan(this);
             Worlds = new WorldMan(this);
             StateMachine = new StateMan(this);

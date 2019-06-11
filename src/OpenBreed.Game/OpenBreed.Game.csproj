@@ -57,12 +57,7 @@
     <Compile Include="Components\States\WalkingState.cs" />
     <Compile Include="Components\States\StandingState.cs" />
     <Compile Include="Entities\ActorHelper.cs" />
-    <Compile Include="Entities\Builders\TextBuilder.cs" />
-    <Compile Include="Entities\Builders\WorldActorBuilder.cs" />
     <Compile Include="Entities\Builders\WorldBlockBuilder.cs" />
-    <Compile Include="Entities\TextEntity.cs" />
-    <Compile Include="Entities\WorldActor.cs" />
-    <Compile Include="Entities\WorldBlock.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="States\StateTechDemo4.cs" />

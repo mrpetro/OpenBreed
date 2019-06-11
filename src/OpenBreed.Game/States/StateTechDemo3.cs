@@ -16,6 +16,7 @@ using OpenTK;
 using OpenTK.Input;
 using System;
 using System.Drawing;
+using OpenBreed.Core.Entities;
 
 namespace OpenBreed.Game.States
 {
@@ -43,7 +44,7 @@ namespace OpenBreed.Game.States
             3,3,3,3,3,3,3,3,3,3
         };
 
-        private WorldActor actor;
+        private IWorldEntity actor;
         private ITexture tileTex;
         private ITexture spriteTex;
         private TileAtlas tileAtlas;
@@ -191,20 +192,16 @@ namespace OpenBreed.Game.States
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas);
 
-            var actorBuilder = new WorldActorBuilder(Core);
-            actorBuilder.SetStateMachine(stateMachine);
-            actorBuilder.SetAnimator(animator);
-            actorBuilder.SetSpriteAtlas(spriteAtlas);
-            actorBuilder.SetSprite(new AIControllerDebug(Core.Rendering.CreateSprite(spriteAtlas)));
-            actorBuilder.SetPosition(new DynamicPosition(64, 288));
-            actorBuilder.SetDirection(new Direction(1, 0));
-            actorBuilder.SetShape(new AxisAlignedBoxShape(32, 32));
-            actorBuilder.SetMovement(new CreatureMovement());
-            actorBuilder.SetBody(new DynamicBody());
-
-            actorBuilder.SetController(new AICreatureController());
-
-            actor = (WorldActor)actorBuilder.Build();
+            actor = Core.Entities.Create();
+            actor.Components.Add(stateMachine);
+            actor.Components.Add(animator);
+            actor.Components.Add(new AIControllerDebug(Core.Rendering.CreateSprite(spriteAtlas)));
+            actor.Components.Add(new DynamicPosition(64, 288));
+            actor.Components.Add(new Direction(1, 0));
+            actor.Components.Add(new AxisAlignedBoxShape(32, 32));
+            actor.Components.Add(new CreatureMovement());
+            actor.Components.Add(new DynamicBody());
+            actor.Components.Add(new AICreatureController());
             World.AddEntity(actor);
 
             var rnd = new Random();
@@ -221,7 +218,7 @@ namespace OpenBreed.Game.States
                     {
                         blockBuilder.SetIndices(x + 5, y + 5);
                         blockBuilder.SetTileId(v);
-                        World.AddEntity((WorldBlock)blockBuilder.Build());
+                        World.AddEntity((WorldEntity)blockBuilder.Build());
                     }
                 }
             }

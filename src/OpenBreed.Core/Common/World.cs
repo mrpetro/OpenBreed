@@ -99,7 +99,7 @@ namespace OpenBreed.Core
         /// An exception will be thrown if given entity already exists in world
         /// </summary>
         /// <param name="entity">Entity to be added to this world</param>
-        public void AddEntity(WorldEntity entity)
+        public void AddEntity(IWorldEntity entity)
         {
             if (entity.CurrentWorld != null)
                 throw new InvalidOperationException("Entity can't exist in more than one world.");

@@ -6,6 +6,13 @@ namespace OpenBreed.Core
 {
     public class EntityMan
     {
+        public ICore Core { get; }
+
+        public EntityMan(ICore core)
+        {
+            Core = core;
+        }
+
         #region Private Fields
 
         private readonly Dictionary<Guid, IEntity> entities = new Dictionary<Guid, IEntity>();
@@ -36,6 +43,11 @@ namespace OpenBreed.Core
         internal Guid GetGuid()
         {
             return Guid.NewGuid();
+        }
+
+        public IWorldEntity Create()
+        {
+            return new WorldEntity(Core);
         }
 
         #endregion Internal Methods

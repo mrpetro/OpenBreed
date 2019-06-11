@@ -1,7 +1,9 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Entities.Builders;
+using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.Systems.Common.Components;
 
 namespace OpenBreed.Game.Entities.Builders
 {
@@ -44,7 +46,13 @@ namespace OpenBreed.Game.Entities.Builders
 
         public override IEntity Build()
         {
-            return new WorldBlock(this);
+            var entity = Core.Entities.Create();
+
+            entity.Components.Add(new Position(x * 16, y * 16));
+            entity.Components.Add(new GridBoxBody(16));
+            entity.Components.Add(Core.Rendering.CreateTile(tileAtlas, tileId));
+
+            return entity;
         }
 
         #endregion Public Methods
