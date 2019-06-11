@@ -33,14 +33,19 @@ namespace OpenBreed.Core.Entities
 
         #region Public Properties
 
-        public World CurrentWorld { get; private set; }
         public ReadOnlyCollection<IEntityComponent> Components { get; }
-        public Guid Guid { get; }
         public ICore Core { get; }
+        public World CurrentWorld { get; private set; }
+        public Guid Guid { get; }
 
         #endregion Public Properties
 
         #region Public Methods
+
+        public void Add(IEntityComponent component)
+        {
+            components.Add(component);
+        }
 
         public virtual void EnterWorld(World world)
         {
@@ -50,11 +55,6 @@ namespace OpenBreed.Core.Entities
         public virtual void LeaveWorld()
         {
             CurrentWorld.RemoveEntity(this);
-        }
-
-        public void Add(IEntityComponent component)
-        {
-            components.Add(component);
         }
 
         public bool Remove(IEntityComponent component)

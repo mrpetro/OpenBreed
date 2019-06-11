@@ -113,7 +113,7 @@ namespace OpenBreed.Core
         /// An exception will be thrown if given entity does not exist in this world.
         /// </summary>
         /// <param name="entity">Entity to be removed from this world</param>
-        public void RemoveEntity(Entity entity)
+        public void RemoveEntity(IEntity entity)
         {
             if (entity.CurrentWorld != this)
                 throw new InvalidOperationException("Entity doesn't exist in this world");

@@ -249,7 +249,7 @@ namespace OpenBreed.Game.States
                     {
                         blockBuilder.SetIndices(x + 5, y + 5);
                         blockBuilder.SetTileId(v);
-                        gameWorld.AddEntity((Entity)blockBuilder.Build());
+                        gameWorld.AddEntity(blockBuilder.Build());
                     }
                 }
             }
