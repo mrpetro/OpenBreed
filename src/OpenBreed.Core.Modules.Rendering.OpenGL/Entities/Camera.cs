@@ -12,11 +12,11 @@ namespace OpenBreed.Core.Modules.Rendering.Entities
     /// This class is an camera entity that is part of the world
     ///
     /// </summary>
-    public class Camera : WorldEntity
+    public class Camera : Entity
     {
         #region Public Constructors
 
-        public Camera(CameraBuilder builder) : base(builder)
+        public Camera(CameraBuilder builder) : base(builder.Core)
         {
             Position = builder.position;
             Rotation = builder.rotation;
@@ -25,7 +25,7 @@ namespace OpenBreed.Core.Modules.Rendering.Entities
             Transform = new Transformation(builder.position,
                                                builder.rotation,
                                                builder.zoom);
-            Components.Add(Transform);
+            Add(Transform);
         }
 
         #endregion Public Constructors

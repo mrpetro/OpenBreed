@@ -44,7 +44,7 @@ namespace OpenBreed.Game.States
             3,3,3,3,3,3,3,3,3,3
         };
 
-        private IWorldEntity actor;
+        private IEntity actor;
         private ITexture tileTex;
         private ITexture spriteTex;
         private TileAtlas tileAtlas;
@@ -193,15 +193,15 @@ namespace OpenBreed.Game.States
             blockBuilder.SetTileAtlas(tileAtlas);
 
             actor = Core.Entities.Create();
-            actor.Components.Add(stateMachine);
-            actor.Components.Add(animator);
-            actor.Components.Add(new AIControllerDebug(Core.Rendering.CreateSprite(spriteAtlas)));
-            actor.Components.Add(new DynamicPosition(64, 288));
-            actor.Components.Add(new Direction(1, 0));
-            actor.Components.Add(new AxisAlignedBoxShape(32, 32));
-            actor.Components.Add(new CreatureMovement());
-            actor.Components.Add(new DynamicBody());
-            actor.Components.Add(new AICreatureController());
+            actor.Add(stateMachine);
+            actor.Add(animator);
+            actor.Add(new AIControllerDebug(Core.Rendering.CreateSprite(spriteAtlas)));
+            actor.Add(new DynamicPosition(64, 288));
+            actor.Add(new Direction(1, 0));
+            actor.Add(new AxisAlignedBoxShape(32, 32));
+            actor.Add(new CreatureMovement());
+            actor.Add(new DynamicBody());
+            actor.Add(new AICreatureController());
             World.AddEntity(actor);
 
             var rnd = new Random();
@@ -218,7 +218,7 @@ namespace OpenBreed.Game.States
                     {
                         blockBuilder.SetIndices(x + 5, y + 5);
                         blockBuilder.SetTileId(v);
-                        World.AddEntity((WorldEntity)blockBuilder.Build());
+                        World.AddEntity((Entity)blockBuilder.Build());
                     }
                 }
             }

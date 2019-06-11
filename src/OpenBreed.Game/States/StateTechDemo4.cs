@@ -183,8 +183,8 @@ namespace OpenBreed.Game.States
             var fontAtlas = new FontAtlas(Core.Rendering.Textures, "ALGERIAN", 50);
 
             var textEntity = Core.Entities.Create();
-            textEntity.Components.Add(new Position(40, 50));
-            textEntity.Components.Add(Core.Rendering.CreateText(fontAtlas, "Alice has a cat!"));
+            textEntity.Add(new Position(40, 50));
+            textEntity.Add(Core.Rendering.CreateText(fontAtlas, "Alice has a cat!"));
 
             hudWorld.AddEntity(textEntity);
 
@@ -223,15 +223,15 @@ namespace OpenBreed.Game.States
             stateMachine.SetInitialState("Standing_Right");
 
             var actor = Core.Entities.Create();
-            actor.Components.Add(stateMachine);
-            actor.Components.Add(animator);
-            actor.Components.Add(sprite);
-            actor.Components.Add(new DynamicPosition(64, 288));
-            actor.Components.Add(new Direction(1, 0));
-            actor.Components.Add(new AxisAlignedBoxShape(32, 32));
-            actor.Components.Add(new CreatureMovement());
-            actor.Components.Add(new DynamicBody());
-            actor.Components.Add(new KeyboardCreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
+            actor.Add(stateMachine);
+            actor.Add(animator);
+            actor.Add(sprite);
+            actor.Add(new DynamicPosition(64, 288));
+            actor.Add(new Direction(1, 0));
+            actor.Add(new AxisAlignedBoxShape(32, 32));
+            actor.Add(new CreatureMovement());
+            actor.Add(new DynamicBody());
+            actor.Add(new KeyboardCreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
 
             gameWorld.AddEntity(actor);
 
@@ -249,7 +249,7 @@ namespace OpenBreed.Game.States
                     {
                         blockBuilder.SetIndices(x + 5, y + 5);
                         blockBuilder.SetTileId(v);
-                        gameWorld.AddEntity((WorldEntity)blockBuilder.Build());
+                        gameWorld.AddEntity((Entity)blockBuilder.Build());
                     }
                 }
             }

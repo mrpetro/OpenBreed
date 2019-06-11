@@ -35,7 +35,7 @@ namespace OpenBreed.Core
 
         #region Internal Methods
 
-        internal void AddEntity(EntityBase entity)
+        internal void AddEntity(IEntity entity)
         {
             entities.Add(entity.Guid, entity);
         }
@@ -45,9 +45,9 @@ namespace OpenBreed.Core
             return Guid.NewGuid();
         }
 
-        public IWorldEntity Create()
+        public IEntity Create()
         {
-            return new WorldEntity(Core);
+            return new Entity(Core);
         }
 
         #endregion Internal Methods

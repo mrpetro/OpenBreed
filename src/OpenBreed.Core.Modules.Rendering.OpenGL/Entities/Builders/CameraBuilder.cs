@@ -4,7 +4,7 @@ using OpenTK;
 
 namespace OpenBreed.Core.Modules.Rendering.Entities.Builders
 {
-    public class CameraBuilder : WorldEntityBuilder
+    public class CameraBuilder : EntityBuilder
     {
         #region Internal Fields
 

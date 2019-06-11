@@ -2,11 +2,11 @@
 
 namespace OpenBreed.Core.Entities.Builders
 {
-    public abstract class WorldEntityBuilder : IEntityBuilder
+    public abstract class EntityBuilder : IEntityBuilder
     {
         #region Public Constructors
 
-        public WorldEntityBuilder(ICore core)
+        public EntityBuilder(ICore core)
         {
             Core = core ?? throw new ArgumentNullException(nameof(core));
         }

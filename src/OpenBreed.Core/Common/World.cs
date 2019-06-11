@@ -26,9 +26,9 @@ namespace OpenBreed.Core
 
         #region Private Fields
 
-        private readonly List<IWorldEntity> entities = new List<IWorldEntity>();
-        private readonly List<IWorldEntity> toAdd = new List<IWorldEntity>();
-        private readonly List<IWorldEntity> toRemove = new List<IWorldEntity>();
+        private readonly List<IEntity> entities = new List<IEntity>();
+        private readonly List<IEntity> toAdd = new List<IEntity>();
+        private readonly List<IEntity> toRemove = new List<IEntity>();
         private readonly List<IWorldSystem> systems = new List<IWorldSystem>();
 
         private float timeMultiplier = 1.0f;
@@ -40,7 +40,7 @@ namespace OpenBreed.Core
         public World(ICore core)
         {
             Core = core;
-            Entities = new ReadOnlyCollection<IWorldEntity>(entities);
+            Entities = new ReadOnlyCollection<IEntity>(entities);
 
             SoundSystem = Core.Sounds.CreateSoundSystem();
             ControlSystem = Core.CreateControlSystem();
@@ -80,7 +80,7 @@ namespace OpenBreed.Core
 
         public ICore Core { get; }
 
-        public ReadOnlyCollection<IWorldEntity> Entities { get; }
+        public ReadOnlyCollection<IEntity> Entities { get; }
 
         public IAudioSystem SoundSystem { get; }
         public IPhysicsSystem PhysicsSystem { get; }
@@ -99,7 +99,7 @@ namespace OpenBreed.Core
         /// An exception will be thrown if given entity already exists in world
         /// </summary>
         /// <param name="entity">Entity to be added to this world</param>
-        public void AddEntity(IWorldEntity entity)
+        public void AddEntity(IEntity entity)
         {
             if (entity.CurrentWorld != null)
                 throw new InvalidOperationException("Entity can't exist in more than one world.");
@@ -113,7 +113,7 @@ namespace OpenBreed.Core
         /// An exception will be thrown if given entity does not exist in this world.
         /// </summary>
         /// <param name="entity">Entity to be removed from this world</param>
-        public void RemoveEntity(WorldEntity entity)
+        public void RemoveEntity(Entity entity)
         {
             if (entity.CurrentWorld != this)
                 throw new InvalidOperationException("Entity doesn't exist in this world");
@@ -148,7 +148,7 @@ namespace OpenBreed.Core
 
         #region Internal Methods
 
-        internal void RegisterEntity(WorldEntity entity)
+        internal void RegisterEntity(Entity entity)
         {
             //Initialize the entity and add it to entities list
             entity.Initialize(this);
@@ -159,7 +159,7 @@ namespace OpenBreed.Core
                 AddComponent(entity.Components[i]);
         }
 
-        internal void UnregisterEntity(WorldEntity entity)
+        internal void UnregisterEntity(Entity entity)
         {
             //Remove all entity components from world systems
             for (int i = 0; i < entity.Components.Count; i++)
@@ -190,7 +190,7 @@ namespace OpenBreed.Core
             {
                 //Process entities to remove
                 for (int i = 0; i < toRemove.Count; i++)
-                    UnregisterEntity((WorldEntity)toRemove[i]);
+                    UnregisterEntity((Entity)toRemove[i]);
 
                 toRemove.Clear();
             }
@@ -199,7 +199,7 @@ namespace OpenBreed.Core
             {
                 //Process entities to add
                 for (int i = 0; i < toAdd.Count; i++)
-                    RegisterEntity((WorldEntity)toAdd[i]);
+                    RegisterEntity((Entity)toAdd[i]);
 
                 toAdd.Clear();
             }

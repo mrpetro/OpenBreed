@@ -227,15 +227,15 @@ namespace OpenBreed.Game.States
 
 
             var actor = Core.Entities.Create();
-            actor.Components.Add(stateMachine);
-            actor.Components.Add(animator);
-            actor.Components.Add(Core.Rendering.CreateSprite(spriteAtlas));
-            actor.Components.Add(new DynamicPosition(20, 20));
-            actor.Components.Add(new Direction(1, 0));
-            actor.Components.Add(new AxisAlignedBoxShape(32, 32));
-            actor.Components.Add(new CreatureMovement());
-            actor.Components.Add(new DynamicBody());
-            actor.Components.Add(new KeyboardCreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
+            actor.Add(stateMachine);
+            actor.Add(animator);
+            actor.Add(Core.Rendering.CreateSprite(spriteAtlas));
+            actor.Add(new DynamicPosition(20, 20));
+            actor.Add(new Direction(1, 0));
+            actor.Add(new AxisAlignedBoxShape(32, 32));
+            actor.Add(new CreatureMovement());
+            actor.Add(new DynamicBody());
+            actor.Add(new KeyboardCreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
             WorldA.AddEntity(actor);
 
             var rnd = new Random();
@@ -252,7 +252,7 @@ namespace OpenBreed.Game.States
                     {
                         blockBuilder.SetIndices(x + 5, 10 - y + 5);
                         blockBuilder.SetTileId(v);
-                        WorldA.AddEntity((WorldEntity)blockBuilder.Build());
+                        WorldA.AddEntity((Entity)blockBuilder.Build());
                     }
                 }
             }
@@ -268,15 +268,15 @@ namespace OpenBreed.Game.States
             blockBuilder.SetTileAtlas(tileAtlas);
 
             var actor = Core.Entities.Create();
-            actor.Components.Add(stateMachine);
-            actor.Components.Add(animator);
-            actor.Components.Add(Core.Rendering.CreateSprite(spriteAtlas));
-            actor.Components.Add(new DynamicPosition(50, 20));
-            actor.Components.Add(new Direction(1, 0));
-            actor.Components.Add(new AxisAlignedBoxShape(32, 32));
-            actor.Components.Add(new CreatureMovement());
-            actor.Components.Add(new DynamicBody());
-            actor.Components.Add(new KeyboardCreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
+            actor.Add(stateMachine);
+            actor.Add(animator);
+            actor.Add(Core.Rendering.CreateSprite(spriteAtlas));
+            actor.Add(new DynamicPosition(50, 20));
+            actor.Add(new Direction(1, 0));
+            actor.Add(new AxisAlignedBoxShape(32, 32));
+            actor.Add(new CreatureMovement());
+            actor.Add(new DynamicBody());
+            actor.Add(new KeyboardCreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
             WorldB.AddEntity(actor);
 
             var rnd = new Random();
@@ -293,7 +293,7 @@ namespace OpenBreed.Game.States
                     {
                         blockBuilder.SetIndices(x + 5, y + 5);
                         blockBuilder.SetTileId(v);
-                        WorldB.AddEntity((WorldEntity)blockBuilder.Build());
+                        WorldB.AddEntity((Entity)blockBuilder.Build());
                     }
                 }
             }

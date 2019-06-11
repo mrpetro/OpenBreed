@@ -7,7 +7,7 @@ using OpenBreed.Core.Systems.Common.Components;
 
 namespace OpenBreed.Game.Entities.Builders
 {
-    public class WorldBlockBuilder : WorldEntityBuilder
+    public class WorldBlockBuilder : EntityBuilder
     {
         #region Internal Fields
 
@@ -48,9 +48,9 @@ namespace OpenBreed.Game.Entities.Builders
         {
             var entity = Core.Entities.Create();
 
-            entity.Components.Add(new Position(x * 16, y * 16));
-            entity.Components.Add(new GridBoxBody(16));
-            entity.Components.Add(Core.Rendering.CreateTile(tileAtlas, tileId));
+            entity.Add(new Position(x * 16, y * 16));
+            entity.Add(new GridBoxBody(16));
+            entity.Add(Core.Rendering.CreateTile(tileAtlas, tileId));
 
             return entity;
         }

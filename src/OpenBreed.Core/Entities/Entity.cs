@@ -1,25 +1,42 @@
-﻿using OpenBreed.Core.Entities.Builders;
+﻿using OpenBreed.Core.Systems.Common.Components;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace OpenBreed.Core.Entities
 {
-    public class WorldEntity : EntityBase, IWorldEntity
+    /// <summary>
+    /// Entity interface implementation
+    /// </summary>
+    public class Entity : IEntity
     {
-        #region Public Constructors
+        #region Private Fields
 
-        public WorldEntity(WorldEntityBuilder builder) : base(builder.Core)
+        private List<IEntityComponent> components = new List<IEntityComponent>();
+
+        #endregion Private Fields
+
+        #region Protected Constructors
+
+        public Entity(ICore core)
         {
+            Core = core ?? throw new ArgumentNullException(nameof(core));
+
+            Components = new ReadOnlyCollection<IEntityComponent>(components);
+
+            Guid = Core.Entities.GetGuid();
+
+            Core.Entities.AddEntity(this);
         }
 
-        internal WorldEntity(ICore core) : base(core)
-        {
-
-        }
-
-        #endregion Public Constructors
+        #endregion Protected Constructors
 
         #region Public Properties
 
         public World CurrentWorld { get; private set; }
+        public ReadOnlyCollection<IEntityComponent> Components { get; }
+        public Guid Guid { get; }
+        public ICore Core { get; }
 
         #endregion Public Properties
 
@@ -33,6 +50,16 @@ namespace OpenBreed.Core.Entities
         public virtual void LeaveWorld()
         {
             CurrentWorld.RemoveEntity(this);
+        }
+
+        public void Add(IEntityComponent component)
+        {
+            components.Add(component);
+        }
+
+        public bool Remove(IEntityComponent component)
+        {
+            return components.Remove(component);
         }
 
         #endregion Public Methods
