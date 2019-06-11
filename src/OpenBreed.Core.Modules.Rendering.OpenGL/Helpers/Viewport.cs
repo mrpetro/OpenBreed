@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Modules.Rendering.Entities;
+﻿using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Core.Modules.Rendering.Entities;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
@@ -177,21 +178,19 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         public Matrix4 GetTransform()
         {
             var transform = Matrix4.Identity;
-            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-X, -Y, 0));
-            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-Width / 2.0f, -Height / 2.0f, 1.0f));
+            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(X, Y, 0));
+            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(Width / 2.0f, Height / 2.0f, 1.0f));
             return transform;
         }
 
         public Vector2 GetWorldCoords(Vector2 screenCoords)
         {
             var cameraT = Camera.GetTransform();
+            cameraT = Matrix4.Mult(cameraT,GetTransform());
             cameraT.Invert();
 
-            var pointLB = new Vector3(-Width / 2.0f - X, -Height / 2.0f - Y, 0.0f);
-            pointLB = Vector3.Add(pointLB, new Vector3(screenCoords));
-            var tLB = Matrix4.CreateTranslation(pointLB);
-            tLB = Matrix4.Mult(tLB, cameraT);
-            pointLB = tLB.ExtractTranslation();
+            var pointLB = new Vector4(screenCoords.X, screenCoords.Y, 0.0f, 1.0f);
+            pointLB = Vector4.Transform(pointLB, cameraT);
 
             return new Vector2(pointLB.X, pointLB.Y);
         }
@@ -200,17 +199,10 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         {
             var transf = Camera.GetTransform();
             transf.Invert();
-            var pointLB = new Vector3(-Width / 2.0f, -Height / 2.0f, 0.0f);
-            var pointRT = new Vector3(Width / 2.0f, Height / 2.0f, 0.0f);
-
-            var tLB = Matrix4.CreateTranslation(pointLB);
-            var tRT = Matrix4.CreateTranslation(pointRT);
-
-            tLB = Matrix4.Mult(tLB, transf);
-            tRT = Matrix4.Mult(tRT, transf);
-
-            pointLB = tLB.ExtractTranslation();
-            pointRT = tRT.ExtractTranslation();
+            var pointLB = new Vector4(-Width / 2.0f, -Height / 2.0f, 0.0f, 1.0f);
+            var pointRT = new Vector4(Width / 2.0f, Height / 2.0f, 0.0f, 1.0f);
+            pointLB = Vector4.Transform(pointLB, transf);
+            pointRT = Vector4.Transform(pointRT, transf);
 
             left = pointLB.X;
             bottom = pointLB.Y;
