@@ -67,7 +67,7 @@ namespace OpenBreed.Game.Components
             }
 
             if(controller.Waypoints.Count > 0)
-                RenderTools.DrawLine(position.Current, controller.Waypoints[0], Color4.Gold);
+                RenderTools.DrawLine(position.Value, controller.Waypoints[0], Color4.Gold);
 
             sprite.Draw(viewport);
         }

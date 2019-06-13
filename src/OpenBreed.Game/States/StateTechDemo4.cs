@@ -176,7 +176,7 @@ namespace OpenBreed.Game.States
             hudWorld.AddEntity(hudCamera);
 
 
-            hudViewport = new Viewport(50, 50, 540, 380);
+            hudViewport = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
             hudViewport.Camera = hudCamera;
 
 
@@ -211,7 +211,7 @@ namespace OpenBreed.Game.States
             gameWorld.AddEntity(gameCamera);
 
 
-            gameViewport = new Viewport(50, 50, 540, 380);
+            gameViewport = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
             gameViewport.Camera = gameCamera;
 
             var blockBuilder = new WorldBlockBuilder(Core);
@@ -226,7 +226,8 @@ namespace OpenBreed.Game.States
             actor.Add(stateMachine);
             actor.Add(animator);
             actor.Add(sprite);
-            actor.Add(new DynamicPosition(64, 288));
+            actor.Add(new Position(64, 288));
+            actor.Add(new Velocity(0, 0));
             actor.Add(new Direction(1, 0));
             actor.Add(new AxisAlignedBoxShape(32, 32));
             actor.Add(new CreatureMovement());

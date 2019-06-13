@@ -56,6 +56,8 @@ namespace OpenBreed.Core.Modules.Rendering
         IViewportMan Viewports { get; }
 
         void Cleanup();
+
+
         void Draw(float time);
 
         #endregion Public Methods

@@ -58,12 +58,25 @@ namespace OpenBreed.Core
             toAdd.Add(world);
         }
 
+        /// <summary>
+        /// Updates the world
+        /// </summary>
+        /// <param name="dt">Delta time</param>
         public void Update(float dt)
         {
             Cleanup();
 
             for (int i = 0; i < Items.Count; i++)
                 Items[i].Update(dt);
+        }
+
+        /// <summary>
+        /// Renders this world
+        /// </summary>
+        /// <param name="dt">Delta time</param>
+        public void Render(float dt)
+        {
+
         }
 
         #endregion Public Methods

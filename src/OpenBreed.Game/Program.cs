@@ -177,24 +177,11 @@ namespace OpenBreed.Game
             GL.LoadMatrix(ref ortho);
             //GL.Ortho(0, ClientRectangle.Width, 0, ClientRectangle.Height, 0, 1); // Origin in lower-left corner
 
+
+            Rendering.Viewports.OnClientResize(0, 0, ClientRectangle.Width, ClientRectangle.Height);
+
             StateMachine.OnResize(ClientRectangle);
         }
-
-        //private void UpdateCursor()
-        //{
-        //    var mouseState = Mouse.GetCursorState();
-        //    var mousePoint = new Point(mouseState.X, mouseState.Y);
-        //    var clientPoint = PointToClient(mousePoint);
-        //    var newCursorPos = new Vector2(clientPoint.X, ClientRectangle.Height - clientPoint.Y);
-        //    var newWheel = mouseState.WheelPrecise;
-
-        //    CursorDelta = newCursorPos - CursorPos;
-        //    CursorPos = newCursorPos;
-        //    WheelDelta = newWheel - Wheel;
-        //    Wheel = newWheel;
-        //}
-
-
 
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
@@ -214,6 +201,8 @@ namespace OpenBreed.Game
             Title = $"Open Breed (Version: {appVersion} Vsync: {VSync} FPS: {1f / e.Time:0})";
 
             base.OnRenderFrame(e);
+
+            Worlds.Render((float)e.Time);
 
             Rendering.Draw((float)e.Time);
 

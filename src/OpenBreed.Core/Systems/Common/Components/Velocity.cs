@@ -5,28 +5,28 @@ using System;
 namespace OpenBreed.Core.Systems.Common.Components
 {
     /// <summary>
-    /// Position entity component class that can be used to store entity current position information
-    /// Example: Actor is standing somewhere in the world at current position
+    /// Velocity entity component class that can be used to store entity current velocity information
+    /// Example: Actor is going somewhere with specific velocity vector
     /// </summary>
-    public class Position : IEntityComponent
+    public class Velocity : IEntityComponent
     {
         #region Public Constructors
 
         /// <summary>
-        /// Constructor with passed initial position value
+        /// Constructor with passed initial velocity value
         /// </summary>
         /// <param name="value">Initial value vector</param>
-        public Position(Vector2 value)
+        public Velocity(Vector2 value)
         {
             Value = value;
         }
 
         /// <summary>
-        /// Constructor with passed initial position values
+        /// Constructor with passed initial velocity values
         /// </summary>
         /// <param name="x">Initial x value</param>
         /// <param name="y">Initial y value</param>
-        public Position(float x, float y)
+        public Velocity(float x, float y)
         {
             Value = new Vector2(x, y);
         }
@@ -36,7 +36,7 @@ namespace OpenBreed.Core.Systems.Common.Components
         #region Public Properties
 
         /// <summary>
-        /// Position value
+        /// Velocity value
         /// </summary>
         public Vector2 Value { get; set; }
 

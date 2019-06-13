@@ -180,7 +180,7 @@ namespace OpenBreed.Game.States
             World.AddEntity(Camera1);
 
 
-            viewport = new Viewport(50, 50, 540, 380);
+            viewport = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
             viewport.Camera = Camera1;
 
             Core.Worlds.Add(World);
@@ -196,7 +196,8 @@ namespace OpenBreed.Game.States
             actor.Add(stateMachine);
             actor.Add(animator);
             actor.Add(new AIControllerDebug(Core.Rendering.CreateSprite(spriteAtlas)));
-            actor.Add(new DynamicPosition(64, 288));
+            actor.Add(new Position(64, 288));
+            actor.Add(new Velocity(0, 0));
             actor.Add(new Direction(1, 0));
             actor.Add(new AxisAlignedBoxShape(32, 32));
             actor.Add(new CreatureMovement());

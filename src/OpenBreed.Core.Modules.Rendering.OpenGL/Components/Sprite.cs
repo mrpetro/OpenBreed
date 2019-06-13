@@ -56,7 +56,7 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         {
             GL.PushMatrix();
 
-            GL.Translate((int)position.Current.X, (int)position.Current.Y, 0.0f);
+            GL.Translate((int)position.Value.X, (int)position.Value.Y, 0.0f);
             GL.Translate(-atlas.SpriteWidth / 2, -atlas.SpriteHeight / 2, 0.0f);
             atlas.Draw(ImageId);
 

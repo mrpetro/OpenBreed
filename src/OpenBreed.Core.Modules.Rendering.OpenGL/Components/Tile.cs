@@ -50,8 +50,8 @@ namespace OpenBreed.Core.Modules.Rendering.Components
 
         public void GetMapIndices(out int x, out int y)
         {
-            x = (int)(position.Current.X / atlas.TileSize);
-            y = (int)(position.Current.Y / atlas.TileSize);
+            x = (int)(position.Value.X / atlas.TileSize);
+            y = (int)(position.Value.Y / atlas.TileSize);
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         {
             GL.PushMatrix();
 
-            GL.Translate(position.Current.X, position.Current.Y, 0.0f);
+            GL.Translate(position.Value.X, position.Value.Y, 0.0f);
             atlas.Draw(ImageId);
 
             GL.PopMatrix();

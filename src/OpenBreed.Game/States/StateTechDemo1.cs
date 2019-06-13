@@ -208,13 +208,13 @@ namespace OpenBreed.Game.States
             Camera2 = (Camera)cameraBuilder.Build();
             World.AddEntity(Camera2);
 
-            viewportA = new Viewport(50, 50, 540, 380);
+            viewportA = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
             viewportA.Camera = Camera1;
 
-            viewportB = new Viewport(50, 50, 540, 380);
+            viewportB = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
             viewportB.Camera = Camera2;
 
-            viewportC = new Viewport(50, 50, 540, 380);
+            viewportC = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
             viewportC.Camera = Camera2;
 
             Core.Worlds.Add(World);
@@ -230,7 +230,8 @@ namespace OpenBreed.Game.States
             actor.Add(stateMachine);
             actor.Add(animator);
             actor.Add(new CollisionDebug(Core.Rendering.CreateSprite(spriteAtlas)));
-            actor.Add(new DynamicPosition(64, 288));
+            actor.Add(new Position(64, 288));
+            actor.Add(new Velocity(0, 0));
             actor.Add(new Direction(1, 0));
             actor.Add(new AxisAlignedBoxShape(32, 32));
             actor.Add(new CreatureMovement());

@@ -61,7 +61,7 @@ namespace OpenBreed.Game.Components
         {
             if (waypoints.Any())
             {
-                var distanceVec = Vector2.Subtract(waypoints.First(), position.Current);
+                var distanceVec = Vector2.Subtract(waypoints.First(), position.Value);
                 var targetVector = distanceVec;
 
                 targetVector.Normalize();
@@ -75,7 +75,7 @@ namespace OpenBreed.Game.Components
                 if (distanceVec.Length < 16.0f)
                 {
                     //Force position of entity when it's close enough to waypoint
-                    position.Current = waypoints.First();
+                    position.Value = waypoints.First();
                     waypoints.RemoveAt(0);
                     return;
                 }

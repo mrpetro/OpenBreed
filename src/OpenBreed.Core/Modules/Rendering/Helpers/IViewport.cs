@@ -11,6 +11,8 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
     /// </summary>
     public interface IViewport
     {
+        void OnClientResize(float x, float y, float width, float height);
+
         /// <summary>
         /// Draw viewport content to the screen
         /// </summary>

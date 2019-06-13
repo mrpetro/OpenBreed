@@ -17,7 +17,8 @@ namespace OpenBreed.Game.Components
 
         private Vector2 thrust;
 
-        private DynamicPosition position;
+        private Position position;
+        private Velocity velocity;
         private Direction direction;
 
         #endregion Private Fields
@@ -60,7 +61,8 @@ namespace OpenBreed.Game.Components
 
         public void Initialize(IEntity entity)
         {
-            position = entity.Components.OfType<DynamicPosition>().First();
+            position = entity.Components.OfType<Position>().First();
+            velocity = entity.Components.OfType<Velocity>().First();
             direction = entity.Components.OfType<Direction>().First();
         }
 
@@ -78,14 +80,13 @@ namespace OpenBreed.Game.Components
         {
             direction.Current = thrust;
 
-            var newSpeed = position.Velocity;
+            var newSpeed = velocity.Value;
             newSpeed += thrust;// * dt;
 
             newSpeed.X = MathHelper.Clamp(newSpeed.X, -MAXSPEED, MAXSPEED);
             newSpeed.Y = MathHelper.Clamp(newSpeed.Y, -MAXSPEED, MAXSPEED);
 
-            position.Current = position.Old;
-            position.Current += newSpeed;
+            position.Value += newSpeed;
         }
 
         #endregion Public Methods

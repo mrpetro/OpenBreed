@@ -3,6 +3,7 @@ using OpenBreed.Core.Modules.Rendering.Entities;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
+using System;
 using System.Drawing;
 
 namespace OpenBreed.Core.Modules.Rendering.Helpers
@@ -21,7 +22,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         /// <param name="y">Y screen coordinate of left bottom viewport corner</param>
         /// <param name="width">Width of defined viewport</param>
         /// <param name="height">Height of defined viewport</param>
-        public Viewport(float x, float y, float width, float height)
+        internal Viewport(float x, float y, float width, float height)
         {
             X = x;
             Y = y;
@@ -103,6 +104,11 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         #endregion Public Properties
 
         #region Public Methods
+
+        public void OnClientResize(float x, float y, float width, float height)
+        {
+
+        }
 
         public bool TestScreenCoords(Vector2 point)
         {
