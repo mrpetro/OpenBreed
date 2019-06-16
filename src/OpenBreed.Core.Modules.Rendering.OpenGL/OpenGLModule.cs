@@ -11,6 +11,7 @@ namespace OpenBreed.Core.Modules.Rendering
         #region Private Fields
 
         private TextureMan textureMan = new TextureMan();
+        private TileMan tileMan = new TileMan();
         private ViewportMan viewportMan = new ViewportMan();
 
         #endregion Private Fields
@@ -29,6 +30,8 @@ namespace OpenBreed.Core.Modules.Rendering
         public ICore Core { get; }
 
         public ITextureMan Textures { get { return textureMan; } }
+
+        public ITileMan Tiles { get { return tileMan; } }
 
         public IViewportMan Viewports { get { return viewportMan; } }
 

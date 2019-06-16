@@ -56,6 +56,7 @@
     <Compile Include="Helpers\SpriteAtlas.cs" />
     <Compile Include="Helpers\Texture.cs" />
     <Compile Include="Helpers\TileAtlas.cs" />
+    <Compile Include="Helpers\TileMan.cs" />
     <Compile Include="Helpers\Vertex.cs" />
     <Compile Include="Helpers\Viewport.cs" />
     <Compile Include="Helpers\ViewportMan.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="OpenGLModule.cs" />
     <Compile Include="Systems\RenderSystem.cs" />
     <Compile Include="Helpers\TextureMan.cs" />
+    <Compile Include="Systems\TileSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">

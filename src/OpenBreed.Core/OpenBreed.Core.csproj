@@ -65,6 +65,7 @@
     <Compile Include="Modules\Physics\Components\IStaticBody.cs" />
     <Compile Include="Modules\Rendering\Components\ITile.cs" />
     <Compile Include="Modules\Rendering\Helpers\IFont.cs" />
+    <Compile Include="Modules\Rendering\Helpers\ITileMan.cs" />
     <Compile Include="Modules\Rendering\Helpers\ITileAtlas.cs" />
     <Compile Include="Modules\Rendering\Helpers\ISpriteAtlas.cs" />
     <Compile Include="Modules\Rendering\Helpers\ITextureMan.cs" />

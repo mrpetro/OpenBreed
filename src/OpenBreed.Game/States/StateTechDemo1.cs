@@ -54,7 +54,7 @@ namespace OpenBreed.Game.States
 
         private ITexture tileTex;
         private ITexture spriteTex;
-        private TileAtlas tileAtlas;
+        private ITileAtlas tileAtlas;
         private SpriteAtlas spriteAtlas;
         private Viewport viewportA;
         private Viewport viewportB;
@@ -192,7 +192,7 @@ namespace OpenBreed.Game.States
             //Resources
             tileTex = Core.Rendering.Textures.Load(@"Content\TileAtlasTest32bit.bmp");
             spriteTex = Core.Rendering.Textures.Load(@"Content\ArrowSpriteSet.png");
-            tileAtlas = new TileAtlas(tileTex, 16, 4, 4);
+            tileAtlas = Core.Rendering.Tiles.Create(tileTex, 16, 4, 4);
             spriteAtlas = new SpriteAtlas(spriteTex, 32, 32, 8, 1);
 
             cameraBuilder.SetPosition(new Vector2(64, 64));

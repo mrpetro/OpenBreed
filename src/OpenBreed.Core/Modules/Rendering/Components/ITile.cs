@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.Systems.Common.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +13,16 @@ namespace OpenBreed.Core.Modules.Rendering.Components
     /// </summary>
     public interface ITile : IRenderComponent
     {
+        /// <summary>
+        /// Tile position
+        /// </summary>
+        Position Position { get; }
+
+        /// <summary>
+        /// Width and height of this tile
+        /// </summary>
+        float Size { get; }
+
         /// <summary>
         /// Id of tile image from the atlas
         /// </summary>

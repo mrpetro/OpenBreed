@@ -13,7 +13,7 @@ namespace OpenBreed.Game.Entities.Builders
 
         internal int x;
         internal int y;
-        internal TileAtlas tileAtlas;
+        internal ITileAtlas tileAtlas;
         internal int tileId;
 
         #endregion Internal Fields
@@ -34,7 +34,7 @@ namespace OpenBreed.Game.Entities.Builders
             this.y = y;
         }
 
-        public void SetTileAtlas(TileAtlas tileAtlas)
+        public void SetTileAtlas(ITileAtlas tileAtlas)
         {
             this.tileAtlas = tileAtlas;
         }

@@ -51,6 +51,11 @@ namespace OpenBreed.Core.Modules.Rendering
         ITextureMan Textures { get; }
 
         /// <summary>
+        /// Tile manager
+        /// </summary>
+        ITileMan Tiles { get; }
+
+        /// <summary>
         /// Viewports manager
         /// </summary>
         IViewportMan Viewports { get; }

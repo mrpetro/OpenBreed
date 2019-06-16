@@ -16,11 +16,12 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         #region Private Fields
 
         private Position position;
+
         private ITileAtlas atlas;
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
         internal Tile(ITileAtlas atlas, int imageId)
         {
@@ -28,9 +29,14 @@ namespace OpenBreed.Core.Modules.Rendering.Components
             ImageId = imageId;
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
+
+        /// <summary>
+        /// Tile position
+        /// </summary>
+        public Position Position { get { return position; } }
 
         /// <summary>
         /// Id of tile image from the atlas
@@ -47,12 +53,6 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         #endregion Public Properties
 
         #region Public Methods
-
-        public void GetMapIndices(out int x, out int y)
-        {
-            x = (int)(position.Value.X / atlas.TileSize);
-            y = (int)(position.Value.Y / atlas.TileSize);
-        }
 
         /// <summary>
         /// Draw this tile to given viewport

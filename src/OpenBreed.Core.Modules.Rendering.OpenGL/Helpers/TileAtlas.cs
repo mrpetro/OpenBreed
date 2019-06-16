@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Core.Modules.Rendering.Helpers
 {
-    public class TileAtlas : ITileAtlas
+    internal class TileAtlas : ITileAtlas
     {
         #region Private Fields
 
@@ -20,9 +20,9 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        public TileAtlas(ITexture texture, int tileSize, int tileColumns, int tileRows)
+        internal TileAtlas(ITexture texture, int tileSize, int tileColumns, int tileRows)
         {
             this.Texture = texture;
 
@@ -34,7 +34,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             BuildCoords(tileRows, tileColumns);
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
 
