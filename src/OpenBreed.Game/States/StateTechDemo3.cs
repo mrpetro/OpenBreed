@@ -190,7 +190,7 @@ namespace OpenBreed.Game.States
             stateMachine.SetInitialState("Standing_Right");
 
             var blockBuilder = new WorldBlockBuilder(Core);
-            blockBuilder.SetTileAtlas(tileAtlas);
+            blockBuilder.SetTileAtlas(tileAtlas.Id);
 
             actor = Core.Entities.Create();
             actor.Add(stateMachine);

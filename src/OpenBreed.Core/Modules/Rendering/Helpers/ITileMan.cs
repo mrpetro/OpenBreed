@@ -4,7 +4,7 @@
     {
         #region Public Methods
 
-        ITileAtlas GetById(string id);
+        ITileAtlas GetById(int id);
 
         ITileAtlas Create(ITexture texture, int tileSize, int tileColumns, int tileRows);
 

@@ -8,6 +8,11 @@
         #region Public Properties
 
         /// <summary>
+        /// Id of this tile atlas
+        /// </summary>
+        int Id { get; }
+
+        /// <summary>
         /// Atlas tile size
         /// </summary>
         float TileSize { get; }

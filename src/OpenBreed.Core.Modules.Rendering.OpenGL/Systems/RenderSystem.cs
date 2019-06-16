@@ -35,9 +35,9 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Public Constructors
 
-        public RenderSystem(ICore core, int width, int height) : base(core)
+        public RenderSystem(ICore core, int width, int height, float tileSize) : base(core)
         {
-            tiles = new TileSystem(core, width, height);
+            tiles = new TileSystem(core, width, height, tileSize);
 
             sprites = new List<ISprite>();
             texts = new List<IText>();

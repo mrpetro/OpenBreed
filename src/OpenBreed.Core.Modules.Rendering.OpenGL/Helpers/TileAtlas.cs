@@ -22,8 +22,9 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #region Internal Constructors
 
-        internal TileAtlas(ITexture texture, int tileSize, int tileColumns, int tileRows)
+        internal TileAtlas(int id, ITexture texture, int tileSize, int tileColumns, int tileRows)
         {
+            Id = id;
             this.Texture = texture;
 
             TileSize = tileSize;
@@ -40,6 +41,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         public ITexture Texture { get; }
         public float TileSize { get; }
+        public int Id { get; }
 
         #endregion Public Properties
 

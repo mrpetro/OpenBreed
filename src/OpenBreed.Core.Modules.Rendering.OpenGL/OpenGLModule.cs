@@ -43,9 +43,9 @@ namespace OpenBreed.Core.Modules.Rendering
         /// Creates render system and return it
         /// </summary>
         /// <returns>Render system interface</returns>
-        public IRenderSystem CreateRenderSystem(int gridWidth, int gridHeight)
+        public IRenderSystem CreateRenderSystem(int gridWidth, int gridHeight, float tileSize)
         {
-            return new RenderSystem(Core, gridWidth, gridHeight);
+            return new RenderSystem(Core, gridWidth, gridHeight, tileSize);
         }
 
         public IText CreateText(IFont font, string value = null)
@@ -58,9 +58,9 @@ namespace OpenBreed.Core.Modules.Rendering
             return new Sprite(atlas, imageId);
         }
 
-        public ITile CreateTile(ITileAtlas atlas, int imageId = 0)
+        public ITile CreateTile(int atlasId, int imageId = 0)
         {
-            return new Tile(atlas, imageId);
+            return new Tile(atlasId, imageId);
         }
 
         public void Draw(float dt)

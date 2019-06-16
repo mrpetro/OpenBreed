@@ -19,9 +19,9 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         Position Position { get; }
 
         /// <summary>
-        /// Width and height of this tile
+        /// Id of tile atlas
         /// </summary>
-        float Size { get; }
+        int AtlasId { get; set; }
 
         /// <summary>
         /// Id of tile image from the atlas

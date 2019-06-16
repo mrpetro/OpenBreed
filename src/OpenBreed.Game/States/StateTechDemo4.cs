@@ -215,7 +215,7 @@ namespace OpenBreed.Game.States
             gameViewport.Camera = gameCamera;
 
             var blockBuilder = new WorldBlockBuilder(Core);
-            blockBuilder.SetTileAtlas(tileAtlas);
+            blockBuilder.SetTileAtlas(tileAtlas.Id);
 
             var sprite = Core.Rendering.CreateSprite(spriteAtlas);
             var animator = ActorHelper.CreateAnimator();

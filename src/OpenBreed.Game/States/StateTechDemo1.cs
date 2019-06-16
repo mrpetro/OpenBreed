@@ -220,7 +220,7 @@ namespace OpenBreed.Game.States
             Core.Worlds.Add(World);
 
             var blockBuilder = new WorldBlockBuilder(Core);
-            blockBuilder.SetTileAtlas(tileAtlas);
+            blockBuilder.SetTileAtlas(tileAtlas.Id);
 
             var animator = ActorHelper.CreateAnimator();
             var stateMachine = ActorHelper.CreateStateMachine();

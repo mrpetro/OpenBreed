@@ -18,8 +18,9 @@ namespace OpenBreed.Core.Modules.Rendering
         /// </summary>
         /// <param name="gridWidth">Tiles grid width size</param>
         /// <param name="gridHeight">Tiles grid height size</param>
+        /// <param name="tileSize">Grid tile size</param>
         /// <returns>Render system interface</returns>
-        IRenderSystem CreateRenderSystem(int gridWidth, int gridHeight);
+        IRenderSystem CreateRenderSystem(int gridWidth, int gridHeight, float tileSize);
 
         /// <summary>
         /// Creates text component using given font
@@ -40,10 +41,10 @@ namespace OpenBreed.Core.Modules.Rendering
         /// <summary>
         /// Create tile component using given tile atlas
         /// </summary>
-        /// <param name="tileAtlas">Tile atlas to use fr this tile component</param>
+        /// <param name="atlasId">Id of tile atlas to use fr this tile component</param>
         /// <param name="imageId">Optiona initial tile atlas image id</param>
         /// <returns>Sprite component</returns>
-        ITile CreateTile(ITileAtlas tileAtlas, int imageId = 0);
+        ITile CreateTile(int atlasId, int imageId = 0);
 
         /// <summary>
         /// Textures manager

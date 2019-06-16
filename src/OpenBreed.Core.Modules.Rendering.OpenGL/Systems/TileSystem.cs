@@ -27,8 +27,10 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Public Constructors
 
-        public TileSystem(ICore core, int width, int height)
+        public TileSystem(ICore core, int width, int height, float tileSize)
         {
+            Core = core;
+            TileSize = tileSize;
             InitializeTilesMap(width, height);
         }
 
@@ -36,9 +38,10 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Public Properties
 
+        public ICore Core { get; }
         public int TileMapHeight { get; private set; }
-
         public int TileMapWidth { get; private set; }
+        public float TileSize { get; }
 
         #endregion Public Properties
 
@@ -75,7 +78,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                     var tile = tiles[i + TileMapHeight * j];
 
                     if (tile != null)
-                        tile.Draw(viewport);
+                        DrawTile(tile);
                 }
             }
 
@@ -85,7 +88,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         public void AddTile(ITile tile)
         {
             int x, y;
-            GetMapIndices(tile, tile.Position, out x, out y);
+            GetMapIndices(tile.Position, out x, out y);
             var tileId = x + TileMapHeight * y;
 
             if (x >= TileMapWidth)
@@ -100,6 +103,17 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         #endregion Public Methods
 
         #region Private Methods
+
+        private void DrawTile(ITile tile)
+        {
+            GL.PushMatrix();
+
+            GL.Translate(tile.Position.Value.X, tile.Position.Value.Y, 0.0f);
+
+             Core.Rendering.Tiles.GetById(tile.AtlasId).Draw(tile.ImageId);
+
+            GL.PopMatrix();
+        }
 
         private void InitializeTilesMap(int width, int height)
         {
@@ -136,10 +150,10 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             }
         }
 
-        private void GetMapIndices(ITile tile, Position position, out int x, out int y)
+        private void GetMapIndices(Position position, out int x, out int y)
         {
-            x = (int)(position.Value.X / tile.Size);
-            y = (int)(position.Value.Y / tile.Size);
+            x = (int)(position.Value.X / (int)TileSize);
+            y = (int)(position.Value.Y / (int)TileSize);
         }
 
         #endregion Private Methods

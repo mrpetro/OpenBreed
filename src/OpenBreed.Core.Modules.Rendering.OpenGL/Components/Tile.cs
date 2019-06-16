@@ -17,15 +17,13 @@ namespace OpenBreed.Core.Modules.Rendering.Components
 
         private Position position;
 
-        private ITileAtlas atlas;
-
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal Tile(ITileAtlas atlas, int imageId)
+        internal Tile(int atlasId, int imageId)
         {
-            this.atlas = atlas;
+            AtlasId = atlasId;
             ImageId = imageId;
         }
 
@@ -39,16 +37,16 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         public Position Position { get { return position; } }
 
         /// <summary>
+        /// Id of tile atlas
+        /// </summary>
+        public int AtlasId { get; set; }
+
+        /// <summary>
         /// Id of tile image from the atlas
         /// </summary>
         public int ImageId { get; set; }
 
         public Type SystemType { get { return typeof(RenderSystem); } }
-
-        /// <summary>
-        /// Width and height of this tile
-        /// </summary>
-        public float Size { get { return atlas.TileSize; } }
 
         #endregion Public Properties
 
@@ -60,12 +58,6 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         /// <param name="viewport">Viewport which this tile will be rendered to</param>
         public void Draw(IViewport viewport)
         {
-            GL.PushMatrix();
-
-            GL.Translate(position.Value.X, position.Value.Y, 0.0f);
-            atlas.Draw(ImageId);
-
-            GL.PopMatrix();
         }
 
         /// <summary>

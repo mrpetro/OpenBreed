@@ -13,7 +13,7 @@ namespace OpenBreed.Game.Entities.Builders
 
         internal int x;
         internal int y;
-        internal ITileAtlas tileAtlas;
+        internal int atlasId;
         internal int tileId;
 
         #endregion Internal Fields
@@ -34,9 +34,9 @@ namespace OpenBreed.Game.Entities.Builders
             this.y = y;
         }
 
-        public void SetTileAtlas(ITileAtlas tileAtlas)
+        public void SetTileAtlas(int atlasId)
         {
-            this.tileAtlas = tileAtlas;
+            this.atlasId = atlasId;
         }
 
         public void SetTileId(int tileId)
@@ -50,7 +50,7 @@ namespace OpenBreed.Game.Entities.Builders
 
             entity.Add(new Position(x * 16, y * 16));
             entity.Add(new GridBoxBody(16));
-            entity.Add(Core.Rendering.CreateTile(tileAtlas, tileId));
+            entity.Add(Core.Rendering.CreateTile(atlasId, tileId));
 
             return entity;
         }

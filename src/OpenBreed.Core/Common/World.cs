@@ -47,7 +47,7 @@ namespace OpenBreed.Core
             MovementSystem = Core.CreateMovementSystem();
             PhysicsSystem = Core.Physics.CreatePhysicsSystem(64, 64);
             AnimationSystem = Core.CreateAnimationSystem();
-            RenderSystem = Core.Rendering.CreateRenderSystem(64,64);
+            RenderSystem = Core.Rendering.CreateRenderSystem(64,64, 16);
 
             //systems.Add(SoundSystem);
 
