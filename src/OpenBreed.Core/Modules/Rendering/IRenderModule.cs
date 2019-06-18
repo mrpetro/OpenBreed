@@ -23,6 +23,12 @@ namespace OpenBreed.Core.Modules.Rendering
         IRenderSystem CreateRenderSystem(int gridWidth, int gridHeight, float tileSize);
 
         /// <summary>
+        /// Create system for handling sprites
+        /// </summary>
+        /// <returns>Sprite system</returns>
+        ISpriteSystem CreateSpriteSystem();
+
+        /// <summary>
         /// Creates text component using given font
         /// </summary>
         /// <param name="font">IFont object to use for this text component</param>
@@ -33,15 +39,15 @@ namespace OpenBreed.Core.Modules.Rendering
         /// <summary>
         /// Create sprite component using given sprite atlas
         /// </summary>
-        /// <param name="spriteAtlas">Sprite atlas to use fr this sprite component</param>
+        /// <param name="atlasId">Id of sprite atlas to use for this sprite component</param>
         /// <param name="imageId">Optiona initial sprite atlas image id</param>
         /// <returns>Sprite component</returns>
-        ISprite CreateSprite(ISpriteAtlas spriteAtlas, int imageId = 0);
+        ISprite CreateSprite(int atlasId, int imageId = 0);
 
         /// <summary>
         /// Create tile component using given tile atlas
         /// </summary>
-        /// <param name="atlasId">Id of tile atlas to use fr this tile component</param>
+        /// <param name="atlasId">Id of tile atlas to use for this tile component</param>
         /// <param name="imageId">Optiona initial tile atlas image id</param>
         /// <returns>Sprite component</returns>
         ITile CreateTile(int atlasId, int imageId = 0);
@@ -50,6 +56,11 @@ namespace OpenBreed.Core.Modules.Rendering
         /// Textures manager
         /// </summary>
         ITextureMan Textures { get; }
+
+        /// <summary>
+        /// Sprite manager
+        /// </summary>
+        ISpriteMan Sprites { get; }
 
         /// <summary>
         /// Tile manager

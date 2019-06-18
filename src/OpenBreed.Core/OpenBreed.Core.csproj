@@ -63,6 +63,8 @@
     <Compile Include="Modules\Physics\Components\IDynamicBody.cs" />
     <Compile Include="Modules\Physics\Components\IPhysicsComponent.cs" />
     <Compile Include="Modules\Physics\Components\IStaticBody.cs" />
+    <Compile Include="Modules\Rendering\Helpers\ISpriteMan.cs" />
+    <Compile Include="Modules\Rendering\Systems\CameraSystem.cs" />
     <Compile Include="Modules\Rendering\Components\ITile.cs" />
     <Compile Include="Modules\Rendering\Helpers\IFont.cs" />
     <Compile Include="Modules\Rendering\Helpers\ITileMan.cs" />
@@ -79,6 +81,8 @@
     <Compile Include="Modules\Rendering\IRenderModule.cs" />
     <Compile Include="Modules\Audio\IAudioModule.cs" />
     <Compile Include="Modules\Rendering\Helpers\ITexture.cs" />
+    <Compile Include="Modules\Rendering\Systems\ITileSystem.cs" />
+    <Compile Include="Modules\Rendering\Systems\ISpriteSystem.cs" />
     <Compile Include="States\IStateBuilder.cs" />
     <Compile Include="States\IState.cs" />
     <Compile Include="States\StateMachine.cs" />
@@ -94,6 +98,7 @@
     <Compile Include="Modules\Physics\IPhysicsSystem.cs" />
     <Compile Include="Modules\Rendering\Systems\IRenderSystem.cs" />
     <Compile Include="Modules\Audio\Systems\IAudioSystem.cs" />
+    <Compile Include="Systems\IWorldSystemEx.cs" />
     <Compile Include="Systems\WorldSystem.cs" />
     <Compile Include="Systems\IWorldSystem.cs" />
     <Compile Include="Systems\Common\Components\Transformation.cs" />

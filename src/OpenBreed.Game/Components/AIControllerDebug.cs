@@ -32,6 +32,20 @@ namespace OpenBreed.Game.Components
 
         #region Public Properties
 
+        public Position Position { get { return sprite.Position; } }
+
+        public int AtlasId
+        {
+            get
+            {
+                return sprite.AtlasId;
+            }
+            set
+            {
+                sprite.AtlasId = value;
+            }
+        }
+
         /// <summary>
         /// Id of sprite image from the atlas
         /// </summary>

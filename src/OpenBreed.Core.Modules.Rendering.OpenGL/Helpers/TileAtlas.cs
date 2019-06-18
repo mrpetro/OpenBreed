@@ -25,8 +25,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         internal TileAtlas(int id, ITexture texture, int tileSize, int tileColumns, int tileRows)
         {
             Id = id;
-            this.Texture = texture;
-
+            Texture = texture;
             TileSize = tileSize;
 
             vboList = new List<int>();

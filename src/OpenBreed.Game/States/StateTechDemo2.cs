@@ -60,7 +60,7 @@ namespace OpenBreed.Game.States
         private ITexture tileTex;
         private ITexture spriteTex;
         private ITileAtlas tileAtlas;
-        private SpriteAtlas spriteAtlas;
+        private ISpriteAtlas spriteAtlas;
         private Viewport viewportLeft;
         private Viewport viewportRight;
 
@@ -88,7 +88,7 @@ namespace OpenBreed.Game.States
             tileTex = Core.Rendering.Textures.Load(@"Content\TileAtlasTest32bit.bmp");
             spriteTex = Core.Rendering.Textures.Load(@"Content\ArrowSpriteSet.png");
             tileAtlas = Core.Rendering.Tiles.Create(tileTex, 16, 4, 4);
-            spriteAtlas = new SpriteAtlas(spriteTex, 32, 32, 8, 1);
+            spriteAtlas = Core.Rendering.Sprites.Create(spriteTex, 32, 32, 8, 1);
 
             cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);
@@ -229,7 +229,7 @@ namespace OpenBreed.Game.States
             var actor = Core.Entities.Create();
             actor.Add(stateMachine);
             actor.Add(animator);
-            actor.Add(Core.Rendering.CreateSprite(spriteAtlas));
+            actor.Add(Core.Rendering.CreateSprite(spriteAtlas.Id));
             actor.Add(new Position(20, 20));
             actor.Add(new Velocity(0, 0));
             actor.Add(new Direction(1, 0));
@@ -271,7 +271,7 @@ namespace OpenBreed.Game.States
             var actor = Core.Entities.Create();
             actor.Add(stateMachine);
             actor.Add(animator);
-            actor.Add(Core.Rendering.CreateSprite(spriteAtlas));
+            actor.Add(Core.Rendering.CreateSprite(spriteAtlas.Id));
             actor.Add(new Position(50, 20));
             actor.Add(new Velocity(0, 0));
             actor.Add(new Direction(1, 0));

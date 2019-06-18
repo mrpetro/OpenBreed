@@ -8,6 +8,11 @@
         #region Public Properties
 
         /// <summary>
+        /// Id of this sprite atlas
+        /// </summary>
+        int Id { get; }
+
+        /// <summary>
         /// Atlas sprite width
         /// </summary>
         float SpriteWidth { get; }

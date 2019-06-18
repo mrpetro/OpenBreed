@@ -27,10 +27,10 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #region Public Constructors
 
-        public SpriteAtlas(ITexture texture, float spriteWidth, float spriteHeight, int spriteColumns, int spriteRows)
+        public SpriteAtlas(int id, ITexture texture, float spriteWidth, float spriteHeight, int spriteColumns, int spriteRows)
         {
-            this.Texture = texture;
-
+            Id = id;
+            Texture = texture;
             SpriteWidth = spriteWidth;
             SpriteHeight = spriteHeight;
 
@@ -43,6 +43,11 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         #endregion Public Constructors
 
         #region Public Properties
+
+        /// <summary>
+        /// Id of this sprite atlas
+        /// </summary>
+        public int Id { get; }
 
         public float SpriteWidth { get; }
 

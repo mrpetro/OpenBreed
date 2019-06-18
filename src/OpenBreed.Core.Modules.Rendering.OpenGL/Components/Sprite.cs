@@ -19,7 +19,6 @@ namespace OpenBreed.Core.Modules.Rendering.Components
     {
         #region Private Fields
 
-        private ISpriteAtlas atlas;
         private Position position;
         private AxisAlignedBoxShape shape;
 
@@ -27,15 +26,25 @@ namespace OpenBreed.Core.Modules.Rendering.Components
 
         #region Internal Constructors
 
-        internal Sprite(ISpriteAtlas atlas, int imageId)
+        internal Sprite(int atlasId, int imageId)
         {
-            this.atlas = atlas;
+            AtlasId = atlasId;
             this.ImageId = ImageId;
         }
 
         #endregion Internal Constructors
 
         #region Public Properties
+
+        /// <summary>
+        /// Speite position component reference
+        /// </summary>
+        public Position Position { get { return position; } }
+
+        /// <summary>
+        /// Id of sprite atlas
+        /// </summary>
+        public int AtlasId { get; set; }
 
         /// <summary>
         /// Id of sprite image from the atlas
@@ -54,13 +63,6 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
         public void Draw(IViewport viewport)
         {
-            GL.PushMatrix();
-
-            GL.Translate((int)position.Value.X, (int)position.Value.Y, 0.0f);
-            GL.Translate(-atlas.SpriteWidth / 2, -atlas.SpriteHeight / 2, 0.0f);
-            atlas.Draw(ImageId);
-
-            GL.PopMatrix();
         }
 
         /// <summary>

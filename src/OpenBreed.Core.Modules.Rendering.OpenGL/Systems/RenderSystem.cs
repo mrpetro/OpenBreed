@@ -18,7 +18,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         #region Public Fields
 
         private TileSystem tiles;
-
+        private SpriteSystem sprites;
 
         public int MAX_TILES_COUNT = 1024 * 1024;
 
@@ -26,7 +26,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Fields
 
-        private List<ISprite> sprites;
+        //private List<ISprite> sprites;
 
         private List<IDebug> debugs;
         private List<IText> texts;
@@ -38,8 +38,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         public RenderSystem(ICore core, int width, int height, float tileSize) : base(core)
         {
             tiles = new TileSystem(core, width, height, tileSize);
+            sprites = new SpriteSystem(core);
 
-            sprites = new List<ISprite>();
             texts = new List<IText>();
             debugs = new List<IDebug>();
         }
@@ -61,7 +61,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             tiles.Draw(viewport);
 
-            DrawSprites(viewport);
+            sprites.Draw(viewport);
 
             DrawDebugs(viewport);
 
@@ -77,7 +77,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             if (component is Tile)
                 tiles.AddTile((Tile)component);
             else if (component is ISprite)
-                AddSprite((ISprite)component);
+                sprites.AddSprite((ISprite)component);
             else if (component is IText)
                 AddText((IText)component);
             else
@@ -93,16 +93,10 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Methods
 
-        private void AddSprite(ISprite sprite)
-        {
-            sprites.Add(sprite);
-        }
-
         private void AddText(IText text)
         {
             texts.Add(text);
         }
-
 
         /// <summary>
         /// This will draw all debugs to viewport given in the parameter
@@ -112,33 +106,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             for (int i = 0; i < debugs.Count; i++)
                 debugs[i].Draw(viewport);
-        }
-
-        /// <summary>
-        /// This will draw all sprites to viewport given in the parameter
-        /// </summary>
-        /// <param name="viewport">Viewport on which sprites will be drawn to</param>
-        private void DrawSprites(Viewport viewport)
-        {
-            float left, bottom, right, top;
-            viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
-
-            //GL.Color4(1.0f, 1.0f, 1.0f, 1.0f);
-            GL.Enable(EnableCap.Blend);
-            GL.Enable(EnableCap.AlphaTest);
-            GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusSrcAlpha);
-            GL.AlphaFunc(AlphaFunction.Greater, 0.0f);
-            GL.Enable(EnableCap.Texture2D);
-
-            for (int i = 0; i < sprites.Count; i++)
-            {
-                var sprite = sprites[i];
-                sprite.Draw(viewport);
-            }
-
-            GL.Disable(EnableCap.Texture2D);
-            GL.Disable(EnableCap.AlphaTest);
-            GL.Disable(EnableCap.Blend);
         }
 
         /// <summary>

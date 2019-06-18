@@ -8,7 +8,7 @@ using System;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TileSystem
+    public class TileSystem : ITileSystem
     {
         #region Public Fields
 
@@ -110,7 +110,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
             GL.Translate(tile.Position.Value.X, tile.Position.Value.Y, 0.0f);
 
-             Core.Rendering.Tiles.GetById(tile.AtlasId).Draw(tile.ImageId);
+            Core.Rendering.Tiles.GetById(tile.AtlasId).Draw(tile.ImageId);
 
             GL.PopMatrix();
         }
@@ -154,6 +154,21 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             x = (int)(position.Value.X / (int)TileSize);
             y = (int)(position.Value.Y / (int)TileSize);
+        }
+
+        public void Initialize(World world)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Deinitialize(World world)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(float dt)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion Private Methods

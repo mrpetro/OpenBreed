@@ -47,7 +47,7 @@ namespace OpenBreed.Game.States
         private ITexture tileTex;
         private ITexture spriteTex;
         private ITileAtlas tileAtlas;
-        private SpriteAtlas spriteAtlas;
+        private ISpriteAtlas spriteAtlas;
         private Viewport gameViewport;
         private Viewport hudViewport;
 
@@ -202,7 +202,7 @@ namespace OpenBreed.Game.States
             tileTex = Core.Rendering.Textures.Load(@"Content\TileAtlasTest32bit.bmp");
             spriteTex = Core.Rendering.Textures.Load(@"Content\ArrowSpriteSet.png");
             tileAtlas = Core.Rendering.Tiles.Create(tileTex, 16, 4, 4);
-            spriteAtlas = new SpriteAtlas(spriteTex, 32, 32, 8, 1);
+            spriteAtlas = Core.Rendering.Sprites.Create(spriteTex, 32, 32, 8, 1);
 
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
@@ -217,7 +217,7 @@ namespace OpenBreed.Game.States
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas.Id);
 
-            var sprite = Core.Rendering.CreateSprite(spriteAtlas);
+            var sprite = Core.Rendering.CreateSprite(spriteAtlas.Id);
             var animator = ActorHelper.CreateAnimator();
             var stateMachine = ActorHelper.CreateStateMachine();
             stateMachine.SetInitialState("Standing_Right");

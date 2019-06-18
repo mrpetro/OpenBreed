@@ -11,6 +11,7 @@ namespace OpenBreed.Core.Modules.Rendering
         #region Private Fields
 
         private TextureMan textureMan = new TextureMan();
+        private SpriteMan spriteMan = new SpriteMan();
         private TileMan tileMan = new TileMan();
         private ViewportMan viewportMan = new ViewportMan();
 
@@ -31,6 +32,8 @@ namespace OpenBreed.Core.Modules.Rendering
 
         public ITextureMan Textures { get { return textureMan; } }
 
+        public ISpriteMan Sprites { get { return spriteMan; } }
+
         public ITileMan Tiles { get { return tileMan; } }
 
         public IViewportMan Viewports { get { return viewportMan; } }
@@ -48,14 +51,32 @@ namespace OpenBreed.Core.Modules.Rendering
             return new RenderSystem(Core, gridWidth, gridHeight, tileSize);
         }
 
+        /// <summary>
+        /// Create system for handling sprites
+        /// </summary>
+        /// <returns>Sprite system</returns>
+        public ISpriteSystem CreateSpriteSystem()
+        {
+            return new SpriteSystem(Core);
+        }
+
+        /// <summary>
+        /// Create system for handling tiles
+        /// </summary>
+        /// <returns>Tile system</returns>
+        ITileSystem CreateTileSystem(int gridWidth, int gridHeight, float tileSize)
+        {
+            return new TileSystem(Core, gridWidth, gridHeight, tileSize);
+        }
+
         public IText CreateText(IFont font, string value = null)
         {
             return new Text(font, value);
         }
 
-        public ISprite CreateSprite(ISpriteAtlas atlas, int imageId = 0)
+        public ISprite CreateSprite(int atlasId, int imageId = 0)
         {
-            return new Sprite(atlas, imageId);
+            return new Sprite(atlasId, imageId);
         }
 
         public ITile CreateTile(int atlasId, int imageId = 0)
