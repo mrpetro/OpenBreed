@@ -1,16 +1,14 @@
 ﻿using OpenTK;
+using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using OpenTK.Graphics.OpenGL;
-using OpenTK.Graphics;
-using System;
-using System.Drawing.Imaging;
-using OpenBreed.Core.Modules.Rendering.Helpers;
 
 namespace OpenBreed.Core.Modules.Rendering.Helpers
 {
-    public class FontAtlas : IFont
+    internal class FontAtlas : IFont
     {
         #region Public Fields
 
@@ -34,28 +32,32 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #region Public Constructors
 
-        public FontAtlas(ITextureMan textures, string fontName, int fontSize)
+        internal FontAtlas(int id, ITextureMan textures, string fontName, int fontSize)
         {
+            Id = id;
             vboList = new List<int>();
 
             RenderTools.CreateIndicesArray(indices, out ibo);
-
-
 
             BuildCoords(textures, fontName, fontSize);
         }
 
         #endregion Public Constructors
 
-        #region Public Properties
-
-        #endregion Public Properties
-
         #region Internal Properties
 
         internal ITexture Texture { get; private set; }
 
         #endregion Internal Properties
+
+        #region Private Properties
+
+        /// <summary>
+        /// Id of this sprite atlas
+        /// </summary>
+        public int Id { get; }
+
+        #endregion Private Properties
 
         #region Public Methods
 
@@ -88,7 +90,6 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
                 }
             }
             return charMap;
-
         }
 
         public void Draw(char character)
@@ -177,7 +178,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         private void InitializeIndices()
         {
         }
-        
+
         private void BuildCoords(ITextureMan textures, string fontName, int fontSize)
         {
             using (var font = new Font(fontName, fontSize))
@@ -203,10 +204,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
                     }
                 }
             }
-
-
         }
-
 
         #endregion Private Methods
     }

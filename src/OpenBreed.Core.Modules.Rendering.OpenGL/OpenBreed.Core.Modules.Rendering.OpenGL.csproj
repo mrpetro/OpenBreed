@@ -65,6 +65,7 @@
     <Compile Include="OpenGLModule.cs" />
     <Compile Include="Systems\RenderSystem.cs" />
     <Compile Include="Helpers\TextureMan.cs" />
+    <Compile Include="Systems\TextSystem.cs" />
     <Compile Include="Systems\SpriteSystem.cs" />
     <Compile Include="Systems\TileSystem.cs" />
   </ItemGroup>

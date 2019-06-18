@@ -31,10 +31,10 @@ namespace OpenBreed.Core.Modules.Rendering
         /// <summary>
         /// Creates text component using given font
         /// </summary>
-        /// <param name="font">IFont object to use for this text component</param>
+        /// <param name="fontId">Id of font to use for this text component</param>
         /// <param name="value">Optional initial text value</param>
         /// <returns>Text component</returns>
-        IText CreateText(IFont font, string value = null);
+        IText CreateText(int fontId, string value = null);
 
         /// <summary>
         /// Create sprite component using given sprite atlas
@@ -66,6 +66,11 @@ namespace OpenBreed.Core.Modules.Rendering
         /// Tile manager
         /// </summary>
         ITileMan Tiles { get; }
+
+        /// <summary>
+        /// Font manager
+        /// </summary>
+        IFontMan Fonts { get; }
 
         /// <summary>
         /// Viewports manager

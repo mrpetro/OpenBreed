@@ -179,12 +179,11 @@ namespace OpenBreed.Game.States
             hudViewport = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
             hudViewport.Camera = hudCamera;
 
-
-            var fontAtlas = new FontAtlas(Core.Rendering.Textures, "ALGERIAN", 50);
+            var fontAtlas = Core.Rendering.Fonts.Create("ALGERIAN", 50);
 
             var textEntity = Core.Entities.Create();
             textEntity.Add(new Position(40, 50));
-            textEntity.Add(Core.Rendering.CreateText(fontAtlas, "Alice has a cat!"));
+            textEntity.Add(Core.Rendering.CreateText(fontAtlas.Id, "Alice has a cat!"));
 
             hudWorld.AddEntity(textEntity);
 

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Core.Modules.Rendering.Helpers
 {
-    public class SpriteAtlas : ISpriteAtlas
+    internal class SpriteAtlas : ISpriteAtlas
     {
         #region Public Fields
 
@@ -27,7 +27,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #region Public Constructors
 
-        public SpriteAtlas(int id, ITexture texture, float spriteWidth, float spriteHeight, int spriteColumns, int spriteRows)
+        internal SpriteAtlas(int id, ITexture texture, float spriteWidth, float spriteHeight, int spriteColumns, int spriteRows)
         {
             Id = id;
             Texture = texture;

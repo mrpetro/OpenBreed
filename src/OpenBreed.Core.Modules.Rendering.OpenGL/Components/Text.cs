@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems.Common.Components;
@@ -14,24 +13,34 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         #region Private Fields
 
         private Position position;
-        private IFont font;
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        internal Text(IFont font, string value)
+        internal Text(int fontId, string value)
         {
-            this.font = font;
+            FontId = fontId;
             Value = value;
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
 
+        /// <summary>
+        /// Id of text font
+        /// </summary>
+        public int FontId { get; set; }
+
         public string Value { get; set; }
+
         public Type SystemType { get { return typeof(RenderSystem); } }
+
+        /// <summary>
+        /// Text position component reference
+        /// </summary>
+        public Position Position { get { return position; } }
 
         #endregion Public Properties
 
@@ -44,15 +53,7 @@ namespace OpenBreed.Core.Modules.Rendering.Components
 
         public void Draw(IViewport viewport)
         {
-            GL.Enable(EnableCap.Texture2D);
-            GL.PushMatrix();
 
-            GL.Translate(position.Value.X, position.Value.Y, 0.0f);
-
-            font.Draw(Value);
-
-            GL.PopMatrix();
-            GL.Disable(EnableCap.Texture2D);
         }
 
         public void Initialize(IEntity entity)

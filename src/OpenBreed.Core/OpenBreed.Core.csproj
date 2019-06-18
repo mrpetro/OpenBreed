@@ -63,6 +63,7 @@
     <Compile Include="Modules\Physics\Components\IDynamicBody.cs" />
     <Compile Include="Modules\Physics\Components\IPhysicsComponent.cs" />
     <Compile Include="Modules\Physics\Components\IStaticBody.cs" />
+    <Compile Include="Modules\Rendering\Helpers\IFontMan.cs" />
     <Compile Include="Modules\Rendering\Helpers\ISpriteMan.cs" />
     <Compile Include="Modules\Rendering\Systems\CameraSystem.cs" />
     <Compile Include="Modules\Rendering\Components\ITile.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Modules\Rendering\IRenderModule.cs" />
     <Compile Include="Modules\Audio\IAudioModule.cs" />
     <Compile Include="Modules\Rendering\Helpers\ITexture.cs" />
+    <Compile Include="Modules\Rendering\Systems\ITextSystem.cs" />
     <Compile Include="Modules\Rendering\Systems\ITileSystem.cs" />
     <Compile Include="Modules\Rendering\Systems\ISpriteSystem.cs" />
     <Compile Include="States\IStateBuilder.cs" />

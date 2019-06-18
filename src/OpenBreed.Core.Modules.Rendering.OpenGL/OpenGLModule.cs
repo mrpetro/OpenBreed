@@ -13,6 +13,7 @@ namespace OpenBreed.Core.Modules.Rendering
         private TextureMan textureMan = new TextureMan();
         private SpriteMan spriteMan = new SpriteMan();
         private TileMan tileMan = new TileMan();
+        private FontMan fontMan;
         private ViewportMan viewportMan = new ViewportMan();
 
         #endregion Private Fields
@@ -22,6 +23,8 @@ namespace OpenBreed.Core.Modules.Rendering
         public OpenGLModule(ICore core)
         {
             Core = core ?? throw new ArgumentNullException(nameof(core));
+
+            fontMan = new FontMan(this);
         }
 
         #endregion Public Constructors
@@ -35,6 +38,8 @@ namespace OpenBreed.Core.Modules.Rendering
         public ISpriteMan Sprites { get { return spriteMan; } }
 
         public ITileMan Tiles { get { return tileMan; } }
+
+        public IFontMan Fonts { get { return fontMan; } }
 
         public IViewportMan Viewports { get { return viewportMan; } }
 
@@ -69,9 +74,9 @@ namespace OpenBreed.Core.Modules.Rendering
             return new TileSystem(Core, gridWidth, gridHeight, tileSize);
         }
 
-        public IText CreateText(IFont font, string value = null)
+        public IText CreateText(int fontId, string value = null)
         {
-            return new Text(font, value);
+            return new Text(fontId, value);
         }
 
         public ISprite CreateSprite(int atlasId, int imageId = 0)

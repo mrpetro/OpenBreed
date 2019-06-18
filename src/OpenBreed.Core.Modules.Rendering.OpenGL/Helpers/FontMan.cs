@@ -2,10 +2,11 @@
 
 namespace OpenBreed.Core.Modules.Rendering.Helpers
 {
-    public class FontMan
+    public class FontMan : IFontMan
     {
         #region Private Fields
 
+        private readonly List<IFont> items = new List<IFont>();
         private Dictionary<string, FontAtlas> fonts = new Dictionary<string, FontAtlas>();
 
         private OpenGLModule module;
@@ -23,14 +24,16 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #region Public Methods
 
-        public FontAtlas Create(string fontName, int fontSize)
+        public IFont GetById(int id)
         {
+            return items[id];
+        }
 
-
-            //bitmap.Save($"D:\\{fontName}-{fontSize}.png", ImageFormat.Png);
-
-
-            return new FontAtlas(module.Textures, fontName, fontSize);
+        public IFont Create(string fontName, int fontSize)
+        {
+            var newFontAtlas = new FontAtlas(items.Count, module.Textures, fontName, fontSize);
+            items.Add(newFontAtlas);
+            return newFontAtlas;
         }
 
         #endregion Public Methods
