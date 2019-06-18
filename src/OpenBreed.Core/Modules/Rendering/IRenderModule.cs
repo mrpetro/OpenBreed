@@ -29,6 +29,12 @@ namespace OpenBreed.Core.Modules.Rendering
         ISpriteSystem CreateSpriteSystem();
 
         /// <summary>
+        /// Create system for handling texts
+        /// </summary>
+        /// <returns>Text system</returns>
+        ITextSystem CreateTextSystem();
+
+        /// <summary>
         /// Creates text component using given font
         /// </summary>
         /// <param name="fontId">Id of font to use for this text component</param>

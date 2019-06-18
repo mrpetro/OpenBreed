@@ -27,8 +27,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Fields
 
-        private List<IDebug> debugs;
-
         #endregion Private Fields
 
         #region Public Constructors
@@ -38,8 +36,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             tiles = new TileSystem(core, width, height, tileSize);
             sprites = new SpriteSystem(core);
             texts = new TextSystem(core);
-
-            debugs = new List<IDebug>();
         }
 
         #endregion Public Constructors
@@ -60,8 +56,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             tiles.Draw(viewport);
 
             sprites.Draw(viewport);
-
-            DrawDebugs(viewport);
 
             texts.Draw(viewport);
         }
@@ -90,16 +84,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         #endregion Protected Methods
 
         #region Private Methods
-
-        /// <summary>
-        /// This will draw all debugs to viewport given in the parameter
-        /// </summary>
-        /// <param name="viewport">Viewport on which debugs will be drawn to</param>
-        private void DrawDebugs(Viewport viewport)
-        {
-            for (int i = 0; i < debugs.Count; i++)
-                debugs[i].Draw(viewport);
-        }
 
         #endregion Private Methods
     }

@@ -66,6 +66,15 @@ namespace OpenBreed.Core.Modules.Rendering
         }
 
         /// <summary>
+        /// Create system for handling texts
+        /// </summary>
+        /// <returns>Text system</returns>
+        public ITextSystem CreateTextSystem()
+        {
+            return new TextSystem(Core);
+        }
+
+        /// <summary>
         /// Create system for handling tiles
         /// </summary>
         /// <returns>Tile system</returns>

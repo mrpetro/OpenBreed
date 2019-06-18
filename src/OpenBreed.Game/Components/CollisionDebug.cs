@@ -97,8 +97,6 @@ namespace OpenBreed.Game.Components
             }
             else
                 RenderTools.DrawBox(body.Aabb, Color4.Green);
-
-            sprite.Draw(viewport);
         }
 
         /// <summary>

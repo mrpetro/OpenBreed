@@ -69,6 +69,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
         public void DrawSprite(IViewport viewport, ISprite sprite)
         {
+            sprite.Draw(viewport);
+
             GL.PushMatrix();
 
             GL.Translate((int)sprite.Position.Value.X, (int)sprite.Position.Value.Y, 0.0f);
