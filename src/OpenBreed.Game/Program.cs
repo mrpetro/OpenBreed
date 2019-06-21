@@ -202,8 +202,6 @@ namespace OpenBreed.Game
 
             base.OnRenderFrame(e);
 
-            Worlds.Render((float)e.Time);
-
             Rendering.Draw((float)e.Time);
 
             SwapBuffers();

@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using OpenBreed.Core.Extensions;
 
 namespace OpenBreed.Core
 {
@@ -18,6 +19,7 @@ namespace OpenBreed.Core
     /// </summary>
     public class World
     {
+
         #region Public Fields
 
         public const float MAX_TILE_MULTIPLIER = 10.0f;
@@ -29,7 +31,7 @@ namespace OpenBreed.Core
         private readonly List<IEntity> entities = new List<IEntity>();
         private readonly List<IEntity> toAdd = new List<IEntity>();
         private readonly List<IEntity> toRemove = new List<IEntity>();
-        private readonly List<IWorldSystem> systems = new List<IWorldSystem>();
+        private readonly List<IWorldSystemEx> systems = new List<IWorldSystemEx>();
 
         private float timeMultiplier = 1.0f;
 
@@ -37,28 +39,11 @@ namespace OpenBreed.Core
 
         #region Public Constructors
 
-        public World(ICore core)
+        protected World(ICore core)
         {
             Core = core;
             Entities = new ReadOnlyCollection<IEntity>(entities);
-
-            SoundSystem = Core.Sounds.CreateSoundSystem();
-            ControlSystem = Core.CreateControlSystem();
-            MovementSystem = Core.CreateMovementSystem();
-            PhysicsSystem = Core.Physics.CreatePhysicsSystem(64, 64);
-            AnimationSystem = Core.CreateAnimationSystem();
-            //RenderSystem = Core.Rendering.CreateSpriteSystem()
-            RenderSystem = Core.Rendering.CreateRenderSystem(64,64, 16);
-
-            //systems.Add(Core.Rendering.CreateSpriteSystem());
-
-            //systems.Add(SoundSystem);
-
-            systems.Add(ControlSystem);
-            systems.Add(MovementSystem);
-            systems.Add(PhysicsSystem);
-            systems.Add(AnimationSystem);
-            systems.Add(RenderSystem);
+            Systems = new ReadOnlyCollection<IWorldSystemEx>(systems);
         }
 
         #endregion Public Constructors
@@ -84,13 +69,7 @@ namespace OpenBreed.Core
         public ICore Core { get; }
 
         public ReadOnlyCollection<IEntity> Entities { get; }
-
-        public IAudioSystem SoundSystem { get; }
-        public IPhysicsSystem PhysicsSystem { get; }
-        public IControlSystem ControlSystem { get; }
-        public IMovementSystem MovementSystem { get; }
-        public IAnimationSystem AnimationSystem { get; }
-        public IRenderSystem RenderSystem { get; }
+        public ReadOnlyCollection<IWorldSystemEx> Systems { get; }
 
         #endregion Public Properties
 
@@ -138,13 +117,7 @@ namespace OpenBreed.Core
         {
             Cleanup();
 
-            ControlSystem.Update(dt * TimeMultiplier);
-
-            MovementSystem.Update(dt * TimeMultiplier);
-
-            PhysicsSystem.Update(dt * TimeMultiplier);
-
-            AnimationSystem.Update(dt * TimeMultiplier);
+            systems.OfType<IUpdatableSystem>().ForEach(item => item.Update(dt * TimeMultiplier));
         }
 
         #endregion Public Methods
@@ -156,6 +129,8 @@ namespace OpenBreed.Core
             //Initialize the entity and add it to entities list
             entity.Initialize(this);
             entities.Add(entity);
+
+            AddToSystems(entity);
 
             //Add all entity components to world systems
             for (int i = 0; i < entity.Components.Count; i++)
@@ -177,12 +152,12 @@ namespace OpenBreed.Core
 
         #region Protected Methods
 
-        protected virtual void AddSystem(IWorldSystem system)
+        protected virtual void AddSystem(IWorldSystemEx system)
         {
             systems.Add(system);
         }
 
-        protected virtual void RemoveSystem(IWorldSystem system)
+        protected virtual void RemoveSystem(IWorldSystemEx system)
         {
             systems.Add(system);
         }
@@ -212,6 +187,14 @@ namespace OpenBreed.Core
 
         #region Private Methods
 
+        private void AddToSystems(Entity entity)
+        {
+            foreach (var system in systems)
+            {
+                if (system.Matches(entity))
+                    system.AddEntity(entity);
+            }
+        }
         private void InitializeSystems()
         {
             for (int i = 0; i < systems.Count; i++)
@@ -234,7 +217,10 @@ namespace OpenBreed.Core
             if (foundSystem == null)
                 throw new InvalidOperationException($"System {component.SystemType} not registered.");
 
-            foundSystem.AddComponent(component);
+            //TODO: Remove this when ready
+            var oldSys = foundSystem as IWorldSystem;
+            if(oldSys != null)
+                oldSys.AddComponent(component);
         }
 
         private void RemoveComponent(IEntityComponent component)
@@ -244,9 +230,13 @@ namespace OpenBreed.Core
             if (foundSystem == null)
                 throw new InvalidOperationException($"System {component.SystemType} not registered.");
 
-            foundSystem.RemoveComponent(component);
+            //TODO: Remove this when ready
+            var oldSys = foundSystem as IWorldSystem;
+            if (oldSys != null)
+                oldSys.RemoveComponent(component);
         }
 
         #endregion Private Methods
+
     }
 }

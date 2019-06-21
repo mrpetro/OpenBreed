@@ -65,6 +65,7 @@
     <Compile Include="States\StateTechDemo2.cs" />
     <Compile Include="States\StateTechDemo1.cs" />
     <Compile Include="Tools.cs" />
+    <Compile Include="Worlds\GameWorld.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

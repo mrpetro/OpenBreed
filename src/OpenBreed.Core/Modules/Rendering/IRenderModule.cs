@@ -13,26 +13,32 @@ namespace OpenBreed.Core.Modules.Rendering
     {
         #region Public Methods
 
+        ///// <summary>
+        ///// Creates render system and return it
+        ///// </summary>
+        ///// <param name="gridWidth">Tiles grid width size</param>
+        ///// <param name="gridHeight">Tiles grid height size</param>
+        ///// <param name="tileSize">Grid tile size</param>
+        ///// <returns>Render system interface</returns>
+        //IRenderSystem CreateRenderSystem(int gridWidth, int gridHeight, float tileSize);
+
         /// <summary>
-        /// Creates render system and return it
+        /// Create system for handling tiles
         /// </summary>
-        /// <param name="gridWidth">Tiles grid width size</param>
-        /// <param name="gridHeight">Tiles grid height size</param>
-        /// <param name="tileSize">Grid tile size</param>
-        /// <returns>Render system interface</returns>
-        IRenderSystem CreateRenderSystem(int gridWidth, int gridHeight, float tileSize);
+        /// <returns>Tile system</returns>
+        IWorldSystemEx CreateTileSystem(int gridWidth, int gridHeight, float tileSize);
 
         /// <summary>
         /// Create system for handling sprites
         /// </summary>
         /// <returns>Sprite system</returns>
-        ISpriteSystem CreateSpriteSystem();
+        IWorldSystemEx CreateSpriteSystem();
 
         /// <summary>
         /// Create system for handling texts
         /// </summary>
         /// <returns>Text system</returns>
-        ITextSystem CreateTextSystem();
+        IWorldSystemEx CreateTextSystem();
 
         /// <summary>
         /// Creates text component using given font
@@ -86,7 +92,7 @@ namespace OpenBreed.Core.Modules.Rendering
         void Cleanup();
 
 
-        void Draw(float time);
+        void Draw(float dt);
 
         #endregion Public Methods
     }

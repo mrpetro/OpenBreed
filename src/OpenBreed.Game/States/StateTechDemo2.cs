@@ -15,6 +15,7 @@ using OpenTK.Input;
 using System;
 using System.Drawing;
 using OpenBreed.Core.Entities;
+using OpenBreed.Game.Worlds;
 
 namespace OpenBreed.Game.States
 {
@@ -80,8 +81,8 @@ namespace OpenBreed.Game.States
 
         private void InitializeAll()
         {
-            WorldA = new World(Core);
-            WorldB = new World(Core);
+            WorldA = new GameWorld(Core);
+            WorldB = new GameWorld(Core);
             var cameraBuilder = new CameraBuilder(Core);
 
             //Resources

@@ -10,17 +10,12 @@ namespace OpenBreed.Core.Modules.Rendering.Components
     /// <summary>
     /// Text render component interface
     /// </summary>
-    public interface IText : IRenderComponent
+    public interface IText : IEntityComponent
     {
         /// <summary>
         /// Id of text font
         /// </summary>
         int FontId { get; set; }
-
-        /// <summary>
-        /// Text position component reference
-        /// </summary>
-        Position Position { get; }
 
         /// <summary>
         /// Actual text of this component

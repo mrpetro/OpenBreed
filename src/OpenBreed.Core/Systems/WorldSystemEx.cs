@@ -1,0 +1,97 @@
+﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.Systems.Common.Components;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace OpenBreed.Core.Systems
+{
+    public abstract class WorldSystemEx : IWorldSystemEx
+    {
+        #region Protected Fields
+
+        #endregion Protected Fields
+
+        #region Private Fields
+
+        private readonly List<Type> requiredComponentTypes = new List<Type>();
+
+        #endregion Private Fields
+
+        #region Protected Constructors
+
+        protected WorldSystemEx(ICore core)
+        {
+            Core = core;
+        }
+
+        #endregion Protected Constructors
+
+        #region Public Properties
+
+        /// <summary>
+        /// Reference to Core
+        /// </summary>
+        public ICore Core { get; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        /// <summary>
+        /// Initialize the system when world is created
+        /// </summary>
+        /// <param name="world">World that this system is initialized on</param>
+        public virtual void Initialize(World world)
+        {
+        }
+
+        /// <summary>
+        /// Deinitialize the system when world is destroyed
+        /// </summary>
+        /// <param name="world">World that this system is part of</param>
+        public virtual void Deinitialize(World world)
+        {
+        }
+
+        public bool Matches(IEntity entity)
+        {
+            foreach (var type in requiredComponentTypes)
+            {
+                if(!entity.Components.Any(item => item.GetType() == type))
+                    return false;
+            }
+
+            return true;
+        }
+
+        public virtual void AddEntity(IEntity entity)
+        {
+        }
+
+        public virtual void RemoveEntity(IEntity entity)
+        {
+        }
+
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        protected int Require<C>() where C : IEntityComponent
+        {
+            var type = typeof(C);
+
+            var typeIndex = requiredComponentTypes.IndexOf(type);
+
+            if (typeIndex >= 0)
+                return typeIndex;
+            else
+            {
+                requiredComponentTypes.Add(type);
+                return requiredComponentTypes.Count - 1;
+            }
+        }
+
+        #endregion Protected Methods
+    }
+}

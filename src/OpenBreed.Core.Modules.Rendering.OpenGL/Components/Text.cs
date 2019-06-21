@@ -12,8 +12,6 @@ namespace OpenBreed.Core.Modules.Rendering.Components
     {
         #region Private Fields
 
-        private Position position;
-
         #endregion Private Fields
 
         #region Internal Constructors
@@ -35,12 +33,7 @@ namespace OpenBreed.Core.Modules.Rendering.Components
 
         public string Value { get; set; }
 
-        public Type SystemType { get { return typeof(RenderSystem); } }
-
-        /// <summary>
-        /// Text position component reference
-        /// </summary>
-        public Position Position { get { return position; } }
+        public Type SystemType { get { return null; } }
 
         #endregion Public Properties
 
@@ -51,14 +44,8 @@ namespace OpenBreed.Core.Modules.Rendering.Components
             throw new NotImplementedException();
         }
 
-        public void Draw(IViewport viewport)
-        {
-
-        }
-
         public void Initialize(IEntity entity)
         {
-            position = entity.Components.OfType<Position>().FirstOrDefault();
         }
 
         #endregion Public Methods

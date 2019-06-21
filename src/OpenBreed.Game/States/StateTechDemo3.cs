@@ -17,6 +17,7 @@ using OpenTK.Input;
 using System;
 using System.Drawing;
 using OpenBreed.Core.Entities;
+using OpenBreed.Game.Worlds;
 
 namespace OpenBreed.Game.States
 {
@@ -163,7 +164,7 @@ namespace OpenBreed.Game.States
 
         private void InitializeWorld()
         {
-            World = new World(Core);
+            World = new GameWorld(Core);
 
             var cameraBuilder = new CameraBuilder(Core);
 
@@ -195,7 +196,8 @@ namespace OpenBreed.Game.States
             actor = Core.Entities.Create();
             actor.Add(stateMachine);
             actor.Add(animator);
-            actor.Add(new AIControllerDebug(Core.Rendering.CreateSprite(spriteAtlas.Id)));
+            //actor.Add(new AIControllerDebug(Core.Rendering.CreateSprite(spriteAtlas.Id)));
+            actor.Add(Core.Rendering.CreateSprite(spriteAtlas.Id));
             actor.Add(new Position(64, 288));
             actor.Add(new Velocity(0, 0));
             actor.Add(new Direction(1, 0));

@@ -11,13 +11,8 @@ namespace OpenBreed.Core.Modules.Rendering.Components
     /// <summary>
     /// Tile render component interface
     /// </summary>
-    public interface ITile : IRenderComponent
+    public interface ITile : IEntityComponent
     {
-        /// <summary>
-        /// Tile position
-        /// </summary>
-        Position Position { get; }
-
         /// <summary>
         /// Id of tile atlas
         /// </summary>

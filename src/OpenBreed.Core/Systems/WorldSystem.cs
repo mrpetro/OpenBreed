@@ -1,9 +1,18 @@
-﻿using OpenBreed.Core.Systems.Common.Components;
+﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.Systems.Common.Components;
+using System;
+using System.Collections.Generic;
 
 namespace OpenBreed.Core.Systems
 {
     public abstract class WorldSystem<T> : IWorldSystem where T : IEntityComponent
     {
+        #region Private Fields
+
+        private readonly List<Type> requiredComponents = new List<Type>();
+
+        #endregion Private Fields
+
         #region Protected Constructors
 
         protected WorldSystem(ICore core)
@@ -66,13 +75,44 @@ namespace OpenBreed.Core.Systems
         {
         }
 
+        public bool Matches(Entity entity)
+        {
+            return false;
+        }
+
+        public void AddEntity(Entity entity)
+        {
+        }
+
         #endregion Public Methods
 
         #region Protected Methods
 
+        protected void Require<C>()
+        {
+            var type = typeof(C);
+            if (!requiredComponents.Contains(type))
+                requiredComponents.Add(type);
+        }
+
         protected abstract void AddComponent(T component);
 
         protected abstract void RemoveComponent(T component);
+
+        public bool Matches(IEntity entity)
+        {
+            return false;
+        }
+
+        public void AddEntity(IEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveEntity(IEntity entity)
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion Protected Methods
     }

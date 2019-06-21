@@ -19,7 +19,6 @@ namespace OpenBreed.Core.Modules.Rendering.Components
     {
         #region Private Fields
 
-        private Position position;
         private AxisAlignedBoxShape shape;
 
         #endregion Private Fields
@@ -37,11 +36,6 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         #region Public Properties
 
         /// <summary>
-        /// Speite position component reference
-        /// </summary>
-        public Position Position { get { return position; } }
-
-        /// <summary>
         /// Id of sprite atlas
         /// </summary>
         public int AtlasId { get; set; }
@@ -51,19 +45,11 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         /// </summary>
         public int ImageId { get; set; }
 
-        public Type SystemType { get { return typeof(RenderSystem); } }
+        public Type SystemType { get { return null; } }
 
         #endregion Public Properties
 
         #region Public Methods
-
-        /// <summary>
-        /// Draw this sprite to given viewport
-        /// </summary>
-        /// <param name="viewport">Viewport which this sprite will be rendered to</param>
-        public void Draw(IViewport viewport)
-        {
-        }
 
         /// <summary>
         /// Initialize this component
@@ -71,7 +57,6 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         /// <param name="entity">Entity which this component belongs to</param>
         public void Initialize(IEntity entity)
         {
-            position = entity.Components.OfType<Position>().First();
             shape = entity.Components.OfType<AxisAlignedBoxShape>().First();
         }
 

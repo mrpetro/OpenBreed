@@ -19,6 +19,7 @@ using OpenTK.Input;
 using System;
 using System.Drawing;
 using OpenBreed.Core.Entities;
+using OpenBreed.Game.Worlds;
 
 namespace OpenBreed.Game.States
 {
@@ -165,7 +166,7 @@ namespace OpenBreed.Game.States
 
         private void InitializeHud()
         {
-            var hudWorld = new World(Core);
+            var hudWorld = new GameWorld(Core);
 
             var cameraBuilder = new CameraBuilder(Core);
 
@@ -193,7 +194,7 @@ namespace OpenBreed.Game.States
 
         private void InitializeWorld()
         {
-            var gameWorld = new World(Core);
+            var gameWorld = new GameWorld(Core);
 
             var cameraBuilder = new CameraBuilder(Core);
 

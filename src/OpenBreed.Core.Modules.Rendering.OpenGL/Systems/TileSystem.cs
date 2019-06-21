@@ -1,16 +1,21 @@
-﻿using OpenBreed.Core.Modules.Rendering.Components;
+﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Common.Components;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System;
+using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TileSystem : ITileSystem
+    public class TileSystem : WorldSystemEx, IRenderableSystem
     {
         #region Public Fields
+
+        public int MAX_TILES_COUNT = 1024 * 1024;
 
         /// <summary>
         /// Debug flag
@@ -21,15 +26,17 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Fields
 
-        private ITile[] tiles;
+        private IEntity[] entities;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TileSystem(ICore core, int width, int height, float tileSize)
+        public TileSystem(ICore core, int width, int height, float tileSize) : base(core)
         {
-            Core = core;
+            Require<Tile>();
+            Require<Position>();
+
             TileSize = tileSize;
             InitializeTilesMap(width, height);
         }
@@ -38,7 +45,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Public Properties
 
-        public ICore Core { get; }
         public int TileMapHeight { get; private set; }
         public int TileMapWidth { get; private set; }
         public float TileSize { get; }
@@ -51,7 +57,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// This will draw all tiles to viewport given in the parameter
         /// </summary>
         /// <param name="viewport">Viewport on which tiles will be drawn to</param>
-        public void Draw(Viewport viewport)
+        public void Render(IViewport viewport, float dt)
         {
             float left, bottom, right, top;
             viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
@@ -75,20 +81,23 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             {
                 for (int i = leftIndex; i < rightIndex; i++)
                 {
-                    var tile = tiles[i + TileMapHeight * j];
+                    var entity = entities[i + TileMapHeight * j];
 
-                    if (tile != null)
-                        DrawTile(tile);
+                    if (entity != null)
+                        DrawTile(entity);
                 }
             }
 
             GL.Disable(EnableCap.Texture2D);
         }
 
-        public void AddTile(ITile tile)
+        public override void AddEntity(IEntity entity)
         {
+            var tile = entity.Components.OfType<ITile>().First();
+            var position = entity.Components.OfType<Position>().First();
+
             int x, y;
-            GetMapIndices(tile.Position, out x, out y);
+            GetMapIndices(position, out x, out y);
             var tileId = x + TileMapHeight * y;
 
             if (x >= TileMapWidth)
@@ -97,18 +106,26 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             if (y >= TileMapHeight)
                 throw new InvalidOperationException($"Tile Y coordinate exceeds tile map height size.");
 
-            tiles[tileId] = tile;
+            entities[tileId] = entity;
+        }
+
+        public override void RemoveEntity(IEntity entity)
+        {
+
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void DrawTile(ITile tile)
+        private void DrawTile(IEntity entity)
         {
+            var tile = entity.Components.OfType<Tile>().First();
+            var position = entity.Components.OfType<Position>().First();
+
             GL.PushMatrix();
 
-            GL.Translate(tile.Position.Value.X, tile.Position.Value.Y, 0.0f);
+            GL.Translate(position.Value.X, position.Value.Y, 0.0f);
 
             Core.Rendering.Tiles.GetById(tile.AtlasId).Draw(tile.ImageId);
 
@@ -119,7 +136,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             TileMapHeight = width;
             TileMapWidth = height;
-            tiles = new Tile[width * height];
+            entities = new IEntity[width * height];
         }
 
         /// <summary>
@@ -154,21 +171,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             x = (int)(position.Value.X / (int)TileSize);
             y = (int)(position.Value.Y / (int)TileSize);
-        }
-
-        public void Initialize(World world)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Deinitialize(World world)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(float dt)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion Private Methods

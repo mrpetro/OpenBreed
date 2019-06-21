@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Systems.Common.Components;
+﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.Systems.Common.Components;
 
 namespace OpenBreed.Core.Systems
 {
@@ -20,6 +21,10 @@ namespace OpenBreed.Core.Systems
         /// </summary>
         /// <param name="component">Component to remove</param>
         void RemoveComponent(IEntityComponent component);
+
+        bool Matches(Entity entity);
+
+        void AddEntity(Entity entity);
 
         #endregion Public Methods
     }

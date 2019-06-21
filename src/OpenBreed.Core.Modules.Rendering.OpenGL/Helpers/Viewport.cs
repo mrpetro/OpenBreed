@@ -1,10 +1,14 @@
-﻿using OpenBreed.Core.Modules.Rendering.Components;
+﻿using OpenBreed.Core.Extensions;
+using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Entities;
+using OpenBreed.Core.Modules.Rendering.Systems;
+using OpenBreed.Core.Systems;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Drawing;
+using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Helpers
 {
@@ -128,9 +132,10 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         }
 
         /// <summary>
-        /// Perform draw of render system from world that current camera is looking at
+        /// Render this viewport content to the screen
         /// </summary>
-        public void Draw()
+        /// <param name="dt">Time step</param>
+        public void Render(float dt)
         {
             GL.Translate(X, Y, 0.0f);
 
@@ -160,7 +165,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             if (DrawBackgroud)
                 DrawBackground();
 
-            Camera.RenderTo(this);
+            DrawCameraView(dt);
 
             if (Clipping)
             {
@@ -179,6 +184,24 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             }
 
             GL.Translate(-X, -Y, 0.0f);
+        }
+
+        /// <summary>
+        /// This will render world part currently visible by the camera into given viewport
+        /// </summary>
+        /// <param name="dt">Time step</param>
+        private void DrawCameraView(float dt)
+        {
+            GL.PushMatrix();
+
+            GL.Translate(Width / 2, Height / 2, 0.0f);
+
+            var transform = Camera.GetTransform();
+            GL.MultMatrix(ref transform);
+
+            Camera.CurrentWorld.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(this, dt));
+
+            GL.PopMatrix();
         }
 
         public Matrix4 GetTransform()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Systems
 {
-    public interface IAnimationSystem : IWorldSystem
+    public interface IAnimationSystem : IUpdatableSystem
     {
 
     }

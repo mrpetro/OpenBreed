@@ -70,15 +70,6 @@ namespace OpenBreed.Core
                 Items[i].Update(dt);
         }
 
-        /// <summary>
-        /// Renders this world
-        /// </summary>
-        /// <param name="dt">Delta time</param>
-        public void Render(float dt)
-        {
-
-        }
-
         #endregion Public Methods
 
         #region Private Methods

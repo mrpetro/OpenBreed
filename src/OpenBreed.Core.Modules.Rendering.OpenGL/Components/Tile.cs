@@ -15,8 +15,6 @@ namespace OpenBreed.Core.Modules.Rendering.Components
     {
         #region Private Fields
 
-        private Position position;
-
         #endregion Private Fields
 
         #region Internal Constructors
@@ -32,11 +30,6 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         #region Public Properties
 
         /// <summary>
-        /// Tile position
-        /// </summary>
-        public Position Position { get { return position; } }
-
-        /// <summary>
         /// Id of tile atlas
         /// </summary>
         public int AtlasId { get; set; }
@@ -46,19 +39,11 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         /// </summary>
         public int ImageId { get; set; }
 
-        public Type SystemType { get { return typeof(RenderSystem); } }
+        public Type SystemType { get { return null; } }
 
         #endregion Public Properties
 
         #region Public Methods
-
-        /// <summary>
-        /// Draw this tile to given viewport
-        /// </summary>
-        /// <param name="viewport">Viewport which this tile will be rendered to</param>
-        public void Draw(IViewport viewport)
-        {
-        }
 
         /// <summary>
         /// Initialize this component
@@ -66,7 +51,6 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         /// <param name="entity">Entity which this component belongs to</param>
         public void Initialize(IEntity entity)
         {
-            position = entity.Components.OfType<Position>().First();
         }
 
         /// <summary>

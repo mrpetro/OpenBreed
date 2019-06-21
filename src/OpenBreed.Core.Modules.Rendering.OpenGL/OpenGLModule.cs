@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
+using OpenBreed.Core.Systems;
 using OpenTK.Graphics.OpenGL;
 using System;
 
@@ -47,20 +48,20 @@ namespace OpenBreed.Core.Modules.Rendering
 
         #region Public Methods
 
-        /// <summary>
-        /// Creates render system and return it
-        /// </summary>
-        /// <returns>Render system interface</returns>
-        public IRenderSystem CreateRenderSystem(int gridWidth, int gridHeight, float tileSize)
-        {
-            return new RenderSystem(Core, gridWidth, gridHeight, tileSize);
-        }
+        ///// <summary>
+        ///// Creates render system and return it
+        ///// </summary>
+        ///// <returns>Render system interface</returns>
+        //public IRenderSystem CreateRenderSystem(int gridWidth, int gridHeight, float tileSize)
+        //{
+        //    return new RenderSystem(Core, gridWidth, gridHeight, tileSize);
+        //}
 
         /// <summary>
         /// Create system for handling sprites
         /// </summary>
         /// <returns>Sprite system</returns>
-        public ISpriteSystem CreateSpriteSystem()
+        public IWorldSystemEx CreateSpriteSystem()
         {
             return new SpriteSystem(Core);
         }
@@ -69,7 +70,7 @@ namespace OpenBreed.Core.Modules.Rendering
         /// Create system for handling texts
         /// </summary>
         /// <returns>Text system</returns>
-        public ITextSystem CreateTextSystem()
+        public IWorldSystemEx CreateTextSystem()
         {
             return new TextSystem(Core);
         }
@@ -78,7 +79,7 @@ namespace OpenBreed.Core.Modules.Rendering
         /// Create system for handling tiles
         /// </summary>
         /// <returns>Tile system</returns>
-        ITileSystem CreateTileSystem(int gridWidth, int gridHeight, float tileSize)
+        public IWorldSystemEx CreateTileSystem(int gridWidth, int gridHeight, float tileSize)
         {
             return new TileSystem(Core, gridWidth, gridHeight, tileSize);
         }

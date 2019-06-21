@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="CoreTools.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="InputsMan.cs" />
     <Compile Include="Modules\Audio\Components\IAudioComponent.cs" />
     <Compile Include="Modules\Audio\Components\ISoundEmiter.cs" />
@@ -74,8 +75,6 @@
     <Compile Include="Modules\Rendering\Helpers\ITextureMan.cs" />
     <Compile Include="Modules\ICoreModule.cs" />
     <Compile Include="Modules\Physics\IPhysicsModule.cs" />
-    <Compile Include="Modules\Rendering\Components\IDebug.cs" />
-    <Compile Include="Modules\Rendering\Components\IRenderComponent.cs" />
     <Compile Include="Modules\Rendering\Components\ISprite.cs" />
     <Compile Include="Modules\Rendering\Components\IText.cs" />
     <Compile Include="Modules\Rendering\Helpers\IViewportMan.cs" />
@@ -98,9 +97,11 @@
     <Compile Include="Systems\IControlSystem.cs" />
     <Compile Include="Systems\IMovementSystem.cs" />
     <Compile Include="Modules\Physics\IPhysicsSystem.cs" />
-    <Compile Include="Modules\Rendering\Systems\IRenderSystem.cs" />
     <Compile Include="Modules\Audio\Systems\IAudioSystem.cs" />
+    <Compile Include="Systems\IRenderableSystem.cs" />
+    <Compile Include="Systems\IUpdatableSystem.cs" />
     <Compile Include="Systems\IWorldSystemEx.cs" />
+    <Compile Include="Systems\WorldSystemEx.cs" />
     <Compile Include="Systems\WorldSystem.cs" />
     <Compile Include="Systems\IWorldSystem.cs" />
     <Compile Include="Systems\Common\Components\Transformation.cs" />

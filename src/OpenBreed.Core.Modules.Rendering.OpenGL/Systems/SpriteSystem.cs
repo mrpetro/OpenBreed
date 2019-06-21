@@ -1,41 +1,32 @@
-﻿using OpenBreed.Core.Modules.Rendering.Components;
+﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Common.Components;
-using OpenTK;
-using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class SpriteSystem : ISpriteSystem
+    public class SpriteSystem : WorldSystemEx, IRenderableSystem
     {
-        #region Public Fields
-
-        #endregion Public Fields
-
         #region Private Fields
 
-        private List<ISprite> sprites;
+        private List<IEntity> entities;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public SpriteSystem(ICore core)
+        public SpriteSystem(ICore core) : base(core)
         {
-            Core = core;
-            sprites = new List<ISprite>();
+            entities = new List<IEntity>();
+            Require<Sprite>();
+            Require<Position>();
         }
 
         #endregion Public Constructors
-
-        #region Public Properties
-
-        public ICore Core { get; }
-
-        #endregion Public Properties
 
         #region Public Methods
 
@@ -43,7 +34,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// This will draw all tiles to viewport given in the parameter
         /// </summary>
         /// <param name="viewport">Viewport on which tiles will be drawn to</param>
-        public void Draw(Viewport viewport)
+        public void Render(IViewport viewport, float dt)
         {
             float left, bottom, right, top;
             viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
@@ -55,25 +46,36 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.AlphaFunc(AlphaFunction.Greater, 0.0f);
             GL.Enable(EnableCap.Texture2D);
 
-            for (int i = 0; i < sprites.Count; i++)
-                DrawSprite(viewport, sprites[i]);
+            for (int i = 0; i < entities.Count; i++)
+                DrawSprite(viewport, entities[i]);
 
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.AlphaTest);
             GL.Disable(EnableCap.Blend);
         }
 
+        public override void AddEntity(IEntity entity)
+        {
+            entities.Add(entity);
+        }
+
+        public override void RemoveEntity(IEntity entity)
+        {
+            entities.Remove(entity);
+        }
+
         /// <summary>
         /// Draw this sprite to given viewport
         /// </summary>
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
-        public void DrawSprite(IViewport viewport, ISprite sprite)
+        public void DrawSprite(IViewport viewport, IEntity entity)
         {
-            sprite.Draw(viewport);
+            var sprite = entity.Components.OfType< ISprite>().First();
+            var position = entity.Components.OfType<Position>().First();
 
             GL.PushMatrix();
 
-            GL.Translate((int)sprite.Position.Value.X, (int)sprite.Position.Value.Y, 0.0f);
+            GL.Translate((int)position.Value.X, (int)position.Value.Y, 0.0f);
 
             var spriteAtlas = Core.Rendering.Sprites.GetById(sprite.AtlasId);
             GL.Translate(-spriteAtlas.SpriteWidth / 2, -spriteAtlas.SpriteHeight / 2, 0.0f);
@@ -82,30 +84,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.PopMatrix();
         }
 
-        public void AddSprite(ISprite sprite)
-        {
-            sprites.Add(sprite);
-        }
-
         #endregion Public Methods
-
-        #region Private Methods
-
-        public void Initialize(World world)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Deinitialize(World world)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(float dt)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion Private Methods
     }
 }

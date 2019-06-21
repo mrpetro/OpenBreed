@@ -72,7 +72,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         internal void Draw(float dt)
         {
             for (int i = 0; i < items.Count; i++)
-                items[i].Draw();
+                items[i].Render(dt);
         }
 
         internal void Cleanup()

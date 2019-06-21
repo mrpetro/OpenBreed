@@ -57,30 +57,5 @@ namespace OpenBreed.Core.Modules.Rendering.Entities
         }
 
         #endregion Public Methods
-
-        #region Internal Methods
-
-        /// <summary>
-        /// This will render world part currently visible by the camera into given viewport
-        /// </summary>
-        /// <param name="viewport">Viewport that camera will render to</param>
-        internal void RenderTo(Viewport viewport)
-        {
-            GL.PushMatrix();
-
-            GL.Translate(viewport.Width / 2, viewport.Height / 2, 0.0f);
-
-            var transform = GetTransform();
-            GL.MultMatrix(ref transform);
-
-            //TODO: Design problem, refactor this someday
-            var renderSystem = (RenderSystem)CurrentWorld.RenderSystem;
-
-            renderSystem.Draw(viewport);
-
-            GL.PopMatrix();
-        }
-
-        #endregion Internal Methods
     }
 }

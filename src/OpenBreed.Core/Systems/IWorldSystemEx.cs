@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Systems.Common.Components;
+﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.Systems.Common.Components;
 
 namespace OpenBreed.Core.Systems
 {
@@ -21,11 +22,11 @@ namespace OpenBreed.Core.Systems
         /// <param name="world">World that this system is part of</param>
         void Deinitialize(World world);
 
-        /// <summary>
-        /// Update this system with given time step
-        /// </summary>
-        /// <param name="dt">Time step</param>
-        void Update(float dt);
+        bool Matches(IEntity entity);
+
+        void AddEntity(IEntity entity);
+
+        void RemoveEntity(IEntity entity);
 
         #endregion Public Methods
     }

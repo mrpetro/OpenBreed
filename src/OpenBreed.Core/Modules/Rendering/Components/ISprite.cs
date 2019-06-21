@@ -10,13 +10,8 @@ namespace OpenBreed.Core.Modules.Rendering.Components
     /// <summary>
     /// Sprite render component interface
     /// </summary>
-    public interface ISprite : IRenderComponent
+    public interface ISprite : IEntityComponent
     {
-        /// <summary>
-        /// Sprite position component reference
-        /// </summary>
-        Position Position { get; }
-
         /// <summary>
         /// Id of sprite atlas
         /// </summary>

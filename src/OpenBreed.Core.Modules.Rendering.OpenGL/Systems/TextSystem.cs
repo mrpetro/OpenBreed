@@ -1,33 +1,36 @@
-﻿using OpenBreed.Core.Modules.Rendering.Components;
+﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.Systems;
+using OpenBreed.Core.Systems.Common.Components;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TextSystem : ITextSystem
+    public class TextSystem : WorldSystemEx, IRenderableSystem
     {
         #region Private Fields
 
-        private List<IText> texts;
+        private List<IEntity> entities;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TextSystem(ICore core)
+        public TextSystem(ICore core) : base(core)
         {
-            Core = core;
-            texts = new List<IText>();
+            entities = new List<IEntity>();
+            Require<Text>();
+            Require<Position>();
         }
 
         #endregion Public Constructors
 
         #region Public Properties
-
-        public ICore Core { get; }
 
         #endregion Public Properties
 
@@ -37,7 +40,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// Draw all texts to viewport given in the parameter
         /// </summary>
         /// <param name="viewport">Viewport on which sprites will be drawn to</param>
-        public void Draw(Viewport viewport)
+        public void Render(IViewport viewport, float dt)
         {
             float left, bottom, right, top;
             viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
@@ -49,20 +52,23 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             //GL.AlphaFunc(AlphaFunction.Greater, 0.0f);
             GL.Enable(EnableCap.Texture2D);
 
-            for (int i = 0; i < texts.Count; i++)
-                DrawText(viewport, texts[i]);
+            for (int i = 0; i < entities.Count; i++)
+                DrawText(viewport, entities[i]);
 
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.AlphaTest);
             GL.Disable(EnableCap.Blend);
         }
 
-        public void DrawText(IViewport viewport, IText text)
+        public void DrawText(IViewport viewport, IEntity entity)
         {
+            var text = entity.Components.OfType<IText>().First();
+            var position = entity.Components.OfType<Position>().First();
+
             GL.Enable(EnableCap.Texture2D);
             GL.PushMatrix();
 
-            GL.Translate(text.Position.Value.X, text.Position.Value.Y, 0.0f);
+            GL.Translate(position.Value.X, position.Value.Y, 0.0f);
 
             Core.Rendering.Fonts.GetById(text.FontId).Draw(text.Value);
 
@@ -70,24 +76,14 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Disable(EnableCap.Texture2D);
         }
 
-        public void AddText(IText text)
+        public override void AddEntity(IEntity entity)
         {
-            texts.Add(text);
+            entities.Add(entity);
         }
 
-        public void Initialize(World world)
+        public override void RemoveEntity(IEntity entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Deinitialize(World world)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(float dt)
-        {
-            throw new NotImplementedException();
+            entities.Remove(entity);
         }
 
         #endregion Public Methods
