@@ -230,7 +230,7 @@ namespace OpenBreed.Game.States
             actor.Add(new Velocity(0, 0));
             actor.Add(new Direction(1, 0));
             actor.Add(new AxisAlignedBoxShape(32, 32));
-            actor.Add(new CreatureMovement());
+            actor.Add(new Motion());
             actor.Add(new DynamicBody());
             actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
 

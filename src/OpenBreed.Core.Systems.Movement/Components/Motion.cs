@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace OpenBreed.Core.Systems.Movement.Components
 {
-    public class CreatureMovement : IEntityComponent
+    public class Motion : IEntityComponent
     {
         #region Private Fields
 
@@ -20,7 +20,7 @@ namespace OpenBreed.Core.Systems.Movement.Components
 
         #region Public Constructors
 
-        public CreatureMovement()
+        public Motion()
         {
         }
 
