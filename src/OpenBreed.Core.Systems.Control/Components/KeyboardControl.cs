@@ -15,8 +15,6 @@ namespace OpenBreed.Core.Systems.Control.Components
     {
         #region Private Fields
 
-        private StateMachine stateMachine;
-
         #endregion Private Fields
 
         #region Public Constructors

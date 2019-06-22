@@ -1,16 +1,19 @@
 ﻿using OpenBreed.Core.Systems.Common.Components;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace OpenBreed.Core.Entities
 {
+    public delegate void EntityPerform(string actionName, params object[] arguments);
+
     /// <summary>
     /// Entity interface
     /// </summary>
     public interface IEntity
     {
         #region Public Properties
+
+        EntityPerform PerformDelegate { get; set; }
 
         /// <summary>
         /// World that this entity is currently in

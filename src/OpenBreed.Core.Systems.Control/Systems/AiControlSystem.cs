@@ -28,7 +28,6 @@ namespace OpenBreed.Core.Systems.Control.Systems
         {
             Require<AiControl>();
             Require<Position>();
-            Require<StateMachine>();
         }
 
         #endregion Public Constructors
@@ -45,7 +44,6 @@ namespace OpenBreed.Core.Systems.Control.Systems
         {
             var control = entity.Components.OfType<AiControl>().First();
             var position = entity.Components.OfType<Position>().First();
-            var stateMachine = entity.Components.OfType<StateMachine>().First();
 
             if (control.Waypoints.Any())
             {
@@ -69,10 +67,10 @@ namespace OpenBreed.Core.Systems.Control.Systems
                 }
 
                 var direction = MovementTools.SnapToCompass8Way(targetVector);
-                stateMachine.Perform("Walk", direction);
+                entity.PerformDelegate("Walk", direction);
             }
             else
-                stateMachine.Perform("Stop");
+                entity.PerformDelegate("Stop");
         }
 
         public override void AddEntity(IEntity entity)

@@ -72,9 +72,9 @@ namespace OpenBreed.Game.Entities
             return animator;
         }
 
-        public static StateMachine CreateStateMachine()
+        public static StateMachine CreateStateMachine(IEntity entity)
         {
-            var stateMachine = new StateMachine();
+            var stateMachine = new StateMachine(entity);
 
             stateMachine.AddState(new StandingState("Standing_Right", "STANDING_RIGHT", new Vector2(1, 0)));
             stateMachine.AddState(new StandingState("Standing_Right_Down", "STANDING_RIGHT_DOWN", new Vector2(1, -1)));

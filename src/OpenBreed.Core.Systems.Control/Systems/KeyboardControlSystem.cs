@@ -26,7 +26,6 @@ namespace OpenBreed.Core.Systems.Control.Systems
         public KeyboardControlSystem(ICore core) : base(core)
         {  
             Require<KeyboardControl>();
-            Require<StateMachine>();
         }
 
         #endregion Public Constructors
@@ -48,7 +47,6 @@ namespace OpenBreed.Core.Systems.Control.Systems
             var direction = new Vector2(0, 0);
 
             var control = entity.Components.OfType<KeyboardControl>().First();
-            var stateMachine = entity.Components.OfType<StateMachine>().First();
 
             if (keyState[control.MoveLeftKey])
                 direction.X = -1;
@@ -61,9 +59,9 @@ namespace OpenBreed.Core.Systems.Control.Systems
                 direction.Y = -1;
 
             if (direction != Vector2.Zero)
-                stateMachine.Perform("Walk", direction);
+                entity.PerformDelegate("Walk", direction);
             else
-                stateMachine.Perform("Stop");
+                entity.PerformDelegate("Stop");
         }
 
         public override void AddEntity(IEntity entity)

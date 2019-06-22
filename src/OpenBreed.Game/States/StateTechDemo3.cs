@@ -189,8 +189,6 @@ namespace OpenBreed.Game.States
             Core.Worlds.Add(World);
 
             var animator = ActorHelper.CreateAnimator();
-            var stateMachine = ActorHelper.CreateStateMachine();
-            stateMachine.SetInitialState("Standing_Right");
 
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas.Id);
@@ -207,7 +205,11 @@ namespace OpenBreed.Game.States
             actor.Add(new CreatureMovement());
             actor.Add(new DynamicBody());
             actor.Add(new AiControl());
-            actor.Add(stateMachine);
+
+            var stateMachine = ActorHelper.CreateStateMachine(actor);
+            stateMachine.SetInitialState("Standing_Right");
+            stateMachine.Initialize();
+
             World.AddEntity(actor);
 
             var rnd = new Random();

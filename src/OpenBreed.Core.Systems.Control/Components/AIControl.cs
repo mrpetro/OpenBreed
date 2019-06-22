@@ -17,7 +17,6 @@ namespace OpenBreed.Core.Systems.Control.Components
     {
         #region Private Fields
 
-        private StateMachine stateMachine;
         private Position position;
 
         #endregion Private Fields
@@ -47,7 +46,6 @@ namespace OpenBreed.Core.Systems.Control.Components
 
         public void Initialize(IEntity entity)
         {
-            stateMachine = entity.Components.OfType<StateMachine>().First();
             position = entity.Components.OfType<Position>().First();
         }
 

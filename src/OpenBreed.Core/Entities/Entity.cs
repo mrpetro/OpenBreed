@@ -16,11 +16,13 @@ namespace OpenBreed.Core.Entities
 
         #endregion Private Fields
 
-        #region Protected Constructors
+        #region Public Constructors
 
         public Entity(ICore core)
         {
             Core = core ?? throw new ArgumentNullException(nameof(core));
+
+            PerformDelegate = PerformDefault;
 
             Components = new ReadOnlyCollection<IEntityComponent>(components);
 
@@ -29,7 +31,7 @@ namespace OpenBreed.Core.Entities
             Core.Entities.AddEntity(this);
         }
 
-        #endregion Protected Constructors
+        #endregion Public Constructors
 
         #region Public Properties
 
@@ -37,6 +39,13 @@ namespace OpenBreed.Core.Entities
         public ICore Core { get; }
         public World CurrentWorld { get; private set; }
         public Guid Guid { get; }
+
+        private void PerformDefault(string actionName, params object[] arguments)
+        {
+            //DO NOTHING HERE
+        }
+
+        public EntityPerform PerformDelegate { get; set; }
 
         #endregion Public Properties
 
