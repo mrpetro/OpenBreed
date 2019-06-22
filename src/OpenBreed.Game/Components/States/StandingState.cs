@@ -2,6 +2,7 @@
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems.Animation.Components;
 using OpenBreed.Core.Systems.Common.Components;
+using OpenBreed.Core.Systems.Movement.Components;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace OpenBreed.Game.Components.States
 {
     public class StandingState : IState
     {
-        private CreatureMovement creatureMovement;
+        private Thrust thrust;
         private SpriteAnimator spriteAnimator;
         private Direction direction;
         private readonly string animationId;
@@ -30,13 +31,13 @@ namespace OpenBreed.Game.Components.States
 
         public void EnterState()
         {
-            creatureMovement.Stop();
+            thrust.Value = Vector2.Zero;
             spriteAnimator.Play(animationId);
         }
 
         public void Initialize(IEntity entity)
         {
-            creatureMovement = entity.Components.OfType<CreatureMovement>().First();
+            thrust = entity.Components.OfType<Thrust>().First();
             spriteAnimator = entity.Components.OfType<SpriteAnimator>().First();
             direction = entity.Components.OfType<Direction>().First();
         }

@@ -117,6 +117,7 @@ namespace OpenBreed.Core
         {
             Cleanup();
 
+            systems.OfType<IUpdatableSystemEx>().ForEach(item => item.Update(dt * TimeMultiplier));
             systems.OfType<IUpdatableSystem>().ForEach(item => item.Update(dt * TimeMultiplier));
         }
 

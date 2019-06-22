@@ -44,8 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\IMovementComponent.cs" />
-    <Compile Include="MovementSystem.cs" />
+    <Compile Include="Components\CreatureMovement.cs" />
+    <Compile Include="Systems\MovementSystem.cs" />
     <Compile Include="MovementTools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

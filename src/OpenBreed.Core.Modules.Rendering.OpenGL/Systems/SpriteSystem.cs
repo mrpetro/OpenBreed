@@ -13,7 +13,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
     {
         #region Private Fields
 
-        private List<IEntity> entities;
+        private readonly List<IEntity> entities = new List<IEntity>();
 
         #endregion Private Fields
 
@@ -21,7 +21,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         public SpriteSystem(ICore core) : base(core)
         {
-            entities = new List<IEntity>();
             Require<Sprite>();
             Require<Position>();
         }

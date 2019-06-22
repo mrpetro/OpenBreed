@@ -2,24 +2,19 @@
 using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Systems.Movement;
 using OpenBreed.Core.Systems.Movement.Components;
+using OpenBreed.Core.Systems.Movement.Systems;
 using OpenTK;
 using System;
 using System.Linq;
 
-namespace OpenBreed.Game.Components
+namespace OpenBreed.Core.Systems.Movement.Components
 {
-    public class CreatureMovement : IMovementComponent
+    public class CreatureMovement : IEntityComponent
     {
         #region Private Fields
 
         private float speedPercent = 1.0f;
         private float MAXSPEED = 8.0f;
-
-        private Vector2 thrust;
-
-        private Position position;
-        private Velocity velocity;
-        private Direction direction;
 
         #endregion Private Fields
 
@@ -48,7 +43,7 @@ namespace OpenBreed.Game.Components
 
         public float Speed { get { return speedPercent * MAXSPEED; } }
 
-        public Type SystemType { get { return typeof(MovementSystem); } }
+        public Type SystemType { get { return null; } }
 
         #endregion Public Properties
 
@@ -61,32 +56,7 @@ namespace OpenBreed.Game.Components
 
         public void Initialize(IEntity entity)
         {
-            position = entity.Components.OfType<Position>().First();
-            velocity = entity.Components.OfType<Velocity>().First();
-            direction = entity.Components.OfType<Direction>().First();
-        }
 
-        public void Stop()
-        {
-            thrust = Vector2.Zero;
-        }
-
-        public void Move(Vector2 direction)
-        {
-            thrust = direction.Normalized() * Speed;
-        }
-
-        public void Update(float dt)
-        {
-            direction.Current = thrust;
-
-            var newSpeed = velocity.Value;
-            newSpeed += thrust;// * dt;
-
-            newSpeed.X = MathHelper.Clamp(newSpeed.X, -MAXSPEED, MAXSPEED);
-            newSpeed.Y = MathHelper.Clamp(newSpeed.Y, -MAXSPEED, MAXSPEED);
-
-            position.Value += newSpeed;
         }
 
         #endregion Public Methods

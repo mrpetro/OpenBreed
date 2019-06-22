@@ -20,6 +20,8 @@ using System;
 using System.Drawing;
 using OpenBreed.Core.Entities;
 using OpenBreed.Game.Worlds;
+using OpenBreed.Core.Systems.Control.Components;
+using OpenBreed.Core.Systems.Movement.Components;
 
 namespace OpenBreed.Game.States
 {
@@ -223,17 +225,17 @@ namespace OpenBreed.Game.States
             stateMachine.SetInitialState("Standing_Right");
 
             var actor = Core.Entities.Create();
-            actor.Add(stateMachine);
             actor.Add(animator);
             actor.Add(sprite);
             actor.Add(new Position(64, 288));
+            actor.Add(new Thrust(0, 0));
             actor.Add(new Velocity(0, 0));
             actor.Add(new Direction(1, 0));
             actor.Add(new AxisAlignedBoxShape(32, 32));
             actor.Add(new CreatureMovement());
             actor.Add(new DynamicBody());
-            actor.Add(new KeyboardCreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
-
+            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
+            actor.Add(stateMachine);
             gameWorld.AddEntity(actor);
 
             var rnd = new Random();

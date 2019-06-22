@@ -16,6 +16,8 @@ using System;
 using System.Drawing;
 using OpenBreed.Core.Entities;
 using OpenBreed.Game.Worlds;
+using OpenBreed.Core.Systems.Control.Components;
+using OpenBreed.Core.Systems.Movement.Components;
 
 namespace OpenBreed.Game.States
 {
@@ -228,16 +230,18 @@ namespace OpenBreed.Game.States
 
 
             var actor = Core.Entities.Create();
-            actor.Add(stateMachine);
+
             actor.Add(animator);
             actor.Add(Core.Rendering.CreateSprite(spriteAtlas.Id));
             actor.Add(new Position(20, 20));
+            actor.Add(new Thrust(0, 0));
             actor.Add(new Velocity(0, 0));
             actor.Add(new Direction(1, 0));
             actor.Add(new AxisAlignedBoxShape(32, 32));
             actor.Add(new CreatureMovement());
             actor.Add(new DynamicBody());
-            actor.Add(new KeyboardCreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
+            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
+            actor.Add(stateMachine);
             WorldA.AddEntity(actor);
 
             var rnd = new Random();
@@ -270,16 +274,18 @@ namespace OpenBreed.Game.States
             blockBuilder.SetTileAtlas(tileAtlas.Id);
 
             var actor = Core.Entities.Create();
-            actor.Add(stateMachine);
+
             actor.Add(animator);
             actor.Add(Core.Rendering.CreateSprite(spriteAtlas.Id));
             actor.Add(new Position(50, 20));
+            actor.Add(new Thrust(0, 0));
             actor.Add(new Velocity(0, 0));
             actor.Add(new Direction(1, 0));
             actor.Add(new AxisAlignedBoxShape(32, 32));
             actor.Add(new CreatureMovement());
             actor.Add(new DynamicBody());
-            actor.Add(new KeyboardCreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
+            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
+            actor.Add(stateMachine);
             WorldB.AddEntity(actor);
 
             var rnd = new Random();

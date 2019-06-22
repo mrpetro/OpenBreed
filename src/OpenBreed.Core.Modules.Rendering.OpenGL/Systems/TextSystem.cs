@@ -15,7 +15,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
     {
         #region Private Fields
 
-        private List<IEntity> entities;
+        private readonly List<IEntity> entities = new List<IEntity>();
 
         #endregion Private Fields
 
@@ -23,7 +23,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         public TextSystem(ICore core) : base(core)
         {
-            entities = new List<IEntity>();
             Require<Text>();
             Require<Position>();
         }

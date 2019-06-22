@@ -61,22 +61,10 @@ namespace OpenBreed.Core
         #region Public Methods
 
         /// <summary>
-        /// Creates movement system and return it
-        /// </summary>
-        /// <returns>Movement system interface</returns>
-        IMovementSystem CreateMovementSystem();
-
-        /// <summary>
         /// Creates animation system and return it
         /// </summary>
         /// <returns>Animation system interface</returns>
         IAnimationSystem CreateAnimationSystem();
-
-        /// <summary>
-        /// Creates control system and return it
-        /// </summary>
-        /// <returns>Control system interface</returns>
-        IControlSystem CreateControlSystem();
 
         /// <summary>
         /// Perform exit

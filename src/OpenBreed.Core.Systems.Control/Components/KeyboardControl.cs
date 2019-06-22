@@ -1,15 +1,17 @@
 ﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.States;
+using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Systems.Control;
 using OpenBreed.Core.Systems.Control.Components;
+using OpenBreed.Core.Systems.Control.Systems;
 using OpenTK;
 using OpenTK.Input;
 using System;
 using System.Linq;
 
-namespace OpenBreed.Game.Components
+namespace OpenBreed.Core.Systems.Control.Components
 {
-    public class KeyboardCreatureController : IKeyboardController
+    public class KeyboardControl : IEntityComponent
     {
         #region Private Fields
 
@@ -19,7 +21,7 @@ namespace OpenBreed.Game.Components
 
         #region Public Constructors
 
-        public KeyboardCreatureController(Key moveUpKey, Key moveDownKey, Key moveLeftKey, Key moveRightKey)
+        public KeyboardControl(Key moveUpKey, Key moveDownKey, Key moveLeftKey, Key moveRightKey)
         {
             MoveUpKey = moveUpKey;
             MoveDownKey = moveDownKey;
@@ -35,7 +37,7 @@ namespace OpenBreed.Game.Components
         public Key MoveDownKey { get; set; }
         public Key MoveLeftKey { get; set; }
         public Key MoveRightKey { get; set; }
-        public Type SystemType { get { return typeof(ControlSystem); } }
+        public Type SystemType { get { return null; } }
 
         #endregion Public Properties
 
@@ -48,27 +50,7 @@ namespace OpenBreed.Game.Components
 
         public void Initialize(IEntity entity)
         {
-            stateMachine = entity.Components.OfType<StateMachine>().First();
-        }
 
-        public void ProcessInputs(float dt, KeyboardState keyState)
-        {
-            var direction = new Vector2(0, 0);
-
-            if (keyState[MoveLeftKey])
-                direction.X = -1;
-            else if (keyState[MoveRightKey])
-                direction.X = 1;
-
-            if (keyState[MoveUpKey])
-                direction.Y = 1;
-            else if (keyState[MoveDownKey])
-                direction.Y = -1;
-
-            if (direction != Vector2.Zero)
-                stateMachine.Perform("Walk", direction);
-            else
-                stateMachine.Perform("Stop");
         }
 
         #endregion Public Methods

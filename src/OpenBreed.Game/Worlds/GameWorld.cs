@@ -1,4 +1,6 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Systems.Control.Systems;
+using OpenBreed.Core.Systems.Movement.Systems;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,16 +13,23 @@ namespace OpenBreed.Game.Worlds
     {
         public GameWorld(ICore core) : base(core)
         {
-            AddSystem(Core.Sounds.CreateSoundSystem());
-            AddSystem(Core.CreateControlSystem());
-            AddSystem(Core.CreateMovementSystem());
+
+            //Input
+            AddSystem(new KeyboardControlSystem(core));
+            AddSystem(new AiControlSystem(core));
+
+            //Action
+            AddSystem(new MovementSystem(core));
             AddSystem(Core.Physics.CreatePhysicsSystem(64, 64));
             AddSystem(Core.CreateAnimationSystem());
 
+            //Audio
+            AddSystem(Core.Sounds.CreateSoundSystem());
+
+            //Video
             AddSystem(Core.Rendering.CreateTileSystem(64, 64, 16));
             AddSystem(Core.Rendering.CreateSpriteSystem());
             AddSystem(Core.Rendering.CreateTextSystem());
-            //AddSystem(Core.Rendering.CreateRenderSystem(64, 64, 16));
         }
     }
 }

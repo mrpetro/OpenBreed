@@ -16,6 +16,8 @@ using OpenTK.Input;
 using System;
 using System.Drawing;
 using System.Reflection;
+using OpenBreed.Core.Systems.Movement.Systems;
+using OpenBreed.Core.Systems.Control.Systems;
 
 namespace OpenBreed.Game
 {
@@ -111,19 +113,9 @@ namespace OpenBreed.Game
 
         #region Public Methods
 
-        public IMovementSystem CreateMovementSystem()
-        {
-            return new MovementSystem(this);
-        }
-
         public IAnimationSystem CreateAnimationSystem()
         {
             return new AnimationSystem(this);
-        }
-
-        public IControlSystem CreateControlSystem()
-        {
-            return new ControlSystem(this);
         }
 
         public IPhysicsSystem CreatePhysicsSystem()
