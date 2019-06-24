@@ -54,7 +54,8 @@
     <Compile Include="Helpers\AabbXComparer.cs" />
     <Compile Include="Helpers\Box2Extensions.cs" />
     <Compile Include="PhysicsModule.cs" />
-    <Compile Include="PhysicsSystem.cs" />
+    <Compile Include="Systems\DynamicPhysicsSystem.cs" />
+    <Compile Include="Systems\PhysicsSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

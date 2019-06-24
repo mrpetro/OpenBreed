@@ -49,7 +49,6 @@
   <ItemGroup>
     <Compile Include="Commands\MoveToCommand.cs" />
     <Compile Include="Components\AIControllerDebug.cs" />
-    <Compile Include="Components\SpriteAnimator.cs" />
     <Compile Include="Components\CollisionDebug.cs" />
     <Compile Include="Components\States\WalkingState.cs" />
     <Compile Include="Components\States\StandingState.cs" />

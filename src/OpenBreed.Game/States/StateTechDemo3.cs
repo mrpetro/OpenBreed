@@ -188,7 +188,7 @@ namespace OpenBreed.Game.States
 
             Core.Worlds.Add(World);
 
-            var animator = ActorHelper.CreateAnimator();
+            var animator = ActorHelper.CreateAnimation(Core);
 
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas.Id);

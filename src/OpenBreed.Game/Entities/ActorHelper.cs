@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Entities;
+﻿using OpenBreed.Core;
+using OpenBreed.Core.Entities;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems.Animation.Components;
 using OpenBreed.Game.Components;
@@ -15,61 +16,61 @@ namespace OpenBreed.Game.Entities
     public static class ActorHelper
     {
 
-        public static SpriteAnimator CreateAnimator()
+        public static Animation<int> CreateAnimation(ICore core)
         {
-            var animationStandingRight = new Animation<int>();
+            var animationStandingRight = core.Animations.Create<int>("STANDING_RIGHT");
             animationStandingRight.AddFrame(0, 2.0f);
-            var animationStandingRightDown = new Animation<int>();
+            var animationStandingRightDown = core.Animations.Create<int>("STANDING_RIGHT_DOWN");
             animationStandingRightDown.AddFrame(1, 2.0f);
-            var animationStandingDown = new Animation<int>();
+            var animationStandingDown = core.Animations.Create<int>("STANDING_DOWN");
             animationStandingDown.AddFrame(2, 2.0f);
-            var animationStandingDownLeft = new Animation<int>();
+            var animationStandingDownLeft = core.Animations.Create<int>("STANDING_DOWN_LEFT");
             animationStandingDownLeft.AddFrame(3, 2.0f);
-            var animationStandingLeft = new Animation<int>();
+            var animationStandingLeft = core.Animations.Create<int>("STANDING_LEFT");
             animationStandingLeft.AddFrame(4, 2.0f);
-            var animationStandingLeftUp = new Animation<int>();
+            var animationStandingLeftUp = core.Animations.Create<int>("STANDING_LEFT_UP");
             animationStandingLeftUp.AddFrame(5, 2.0f);
-            var animationStandingUp = new Animation<int>();
+            var animationStandingUp = core.Animations.Create<int>("STANDING_UP");
             animationStandingUp.AddFrame(6, 2.0f);
-            var animationStandingUpRight = new Animation<int>();
+            var animationStandingUpRight = core.Animations.Create<int>("STANDING_UP_RIGHT");
             animationStandingUpRight.AddFrame(7, 2.0f);
 
-            var animationWalkingRight = new Animation<int>();
+            var animationWalkingRight = core.Animations.Create<int>("WALKING_RIGHT");
             animationWalkingRight.AddFrame(0, 2.0f);
-            var animationWalkingRightDown = new Animation<int>();
+            var animationWalkingRightDown = core.Animations.Create<int>("WALKING_RIGHT_DOWN");
             animationWalkingRightDown.AddFrame(1, 2.0f);
-            var animationWalkingDown = new Animation<int>();
+            var animationWalkingDown = core.Animations.Create<int>("WALKING_DOWN");
             animationWalkingDown.AddFrame(2, 2.0f);
-            var animationWalkingDownLeft = new Animation<int>();
+            var animationWalkingDownLeft = core.Animations.Create<int>("WALKING_DOWN_LEFT");
             animationWalkingDownLeft.AddFrame(3, 2.0f);
-            var animationWalkingLeft = new Animation<int>();
+            var animationWalkingLeft = core.Animations.Create<int>("WALKING_LEFT");
             animationWalkingLeft.AddFrame(4, 2.0f);
-            var animationWalkingLeftUp = new Animation<int>();
+            var animationWalkingLeftUp = core.Animations.Create<int>("WALKING_LEFT_UP");
             animationWalkingLeftUp.AddFrame(5, 2.0f);
-            var animationWalkingUp = new Animation<int>();
+            var animationWalkingUp = core.Animations.Create<int>("WALKING_UP");
             animationWalkingUp.AddFrame(6, 2.0f);
-            var animationWalkingUpRight = new Animation<int>();
+            var animationWalkingUpRight = core.Animations.Create<int>("WALKING_UP_RIGHT");
             animationWalkingUpRight.AddFrame(7, 2.0f);
 
-            var animator = new SpriteAnimator(4.0f, true);
-            animator.AddAnimation("STANDING_RIGHT", animationStandingRight);
-            animator.AddAnimation("STANDING_RIGHT_DOWN", animationStandingRightDown);
-            animator.AddAnimation("STANDING_DOWN", animationStandingDown);
-            animator.AddAnimation("STANDING_DOWN_LEFT", animationStandingDownLeft);
-            animator.AddAnimation("STANDING_LEFT", animationStandingLeft);
-            animator.AddAnimation("STANDING_LEFT_UP", animationStandingLeftUp);
-            animator.AddAnimation("STANDING_UP", animationStandingUp);
-            animator.AddAnimation("STANDING_UP_RIGHT", animationStandingUpRight);
-            animator.AddAnimation("WALKING_RIGHT", animationWalkingRight);
-            animator.AddAnimation("WALKING_RIGHT_DOWN", animationWalkingRightDown);
-            animator.AddAnimation("WALKING_DOWN", animationWalkingDown);
-            animator.AddAnimation("WALKING_DOWN_LEFT", animationWalkingDownLeft);
-            animator.AddAnimation("WALKING_LEFT", animationWalkingLeft);
-            animator.AddAnimation("WALKING_LEFT_UP", animationWalkingLeftUp);
-            animator.AddAnimation("WALKING_UP", animationWalkingUp);
-            animator.AddAnimation("WALKING_UP_RIGHT", animationWalkingUpRight);
+            var animation = new Animation<int>(4.0f, true);
+            animation.AddAnimation("STANDING_RIGHT", animationStandingRight);
+            animation.AddAnimation("STANDING_RIGHT_DOWN", animationStandingRightDown);
+            animation.AddAnimation("STANDING_DOWN", animationStandingDown);
+            animation.AddAnimation("STANDING_DOWN_LEFT", animationStandingDownLeft);
+            animation.AddAnimation("STANDING_LEFT", animationStandingLeft);
+            animation.AddAnimation("STANDING_LEFT_UP", animationStandingLeftUp);
+            animation.AddAnimation("STANDING_UP", animationStandingUp);
+            animation.AddAnimation("STANDING_UP_RIGHT", animationStandingUpRight);
+            animation.AddAnimation("WALKING_RIGHT", animationWalkingRight);
+            animation.AddAnimation("WALKING_RIGHT_DOWN", animationWalkingRightDown);
+            animation.AddAnimation("WALKING_DOWN", animationWalkingDown);
+            animation.AddAnimation("WALKING_DOWN_LEFT", animationWalkingDownLeft);
+            animation.AddAnimation("WALKING_LEFT", animationWalkingLeft);
+            animation.AddAnimation("WALKING_LEFT_UP", animationWalkingLeftUp);
+            animation.AddAnimation("WALKING_UP", animationWalkingUp);
+            animation.AddAnimation("WALKING_UP_RIGHT", animationWalkingUpRight);
 
-            return animator;
+            return animation;
         }
 
         public static StateMachine CreateStateMachine(IEntity entity)

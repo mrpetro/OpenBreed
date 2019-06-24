@@ -16,7 +16,7 @@ namespace OpenBreed.Game.Components.States
     {
         private Thrust thrust;
         private Motion creatureMovement;
-        private SpriteAnimator spriteAnimator;
+        private Animation<int> spriteAnimation;
         private Direction direction;
         private readonly string animationId;
         private readonly Vector2 walkDirection;
@@ -32,7 +32,7 @@ namespace OpenBreed.Game.Components.States
         public void EnterState()
         {
             thrust.Value = walkDirection * creatureMovement.Speed;
-            spriteAnimator.Play(animationId);
+            spriteAnimation.Play(animationId);
         }
 
         public void Initialize(IEntity entity)
@@ -40,7 +40,7 @@ namespace OpenBreed.Game.Components.States
             thrust = entity.Components.OfType<Thrust>().First();
             direction = entity.Components.OfType<Direction>().First();
             creatureMovement = entity.Components.OfType<Motion>().First();
-            spriteAnimator = entity.Components.OfType<SpriteAnimator>().First();
+            spriteAnimation = entity.Components.OfType<Animation<int>>().First();
             direction = entity.Components.OfType<Direction>().First();
         }
 

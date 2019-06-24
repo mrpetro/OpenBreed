@@ -18,6 +18,8 @@ using System.Drawing;
 using System.Reflection;
 using OpenBreed.Core.Systems.Movement.Systems;
 using OpenBreed.Core.Systems.Control.Systems;
+using OpenBreed.Core.Modules.Physics.Systems;
+using OpenBreed.Core.Modules.Animation;
 
 namespace OpenBreed.Game
 {
@@ -41,6 +43,7 @@ namespace OpenBreed.Game
             Physics = new PhysicsModule(this);
 
             Entities = new EntityMan(this);
+            Animations = new AnimMan(this);
             Inputs = new InputsMan(this);
             Worlds = new WorldMan(this);
             StateMachine = new StateMan(this);
@@ -106,6 +109,7 @@ namespace OpenBreed.Game
         public IPhysicsModule Physics { get; }
         public EntityMan Entities { get; }
         public InputsMan Inputs { get; }
+        public IAnimMan Animations { get; }
         public WorldMan Worlds { get; }
         public StateMan StateMachine { get; }
 
@@ -113,10 +117,10 @@ namespace OpenBreed.Game
 
         #region Public Methods
 
-        public IAnimationSystem CreateAnimationSystem()
-        {
-            return new AnimationSystem(this);
-        }
+        //public IAnimationSystem CreateAnimationSystem()
+        //{
+        //    return new AnimationSystem(this);
+        //}
 
         public IPhysicsSystem CreatePhysicsSystem()
         {

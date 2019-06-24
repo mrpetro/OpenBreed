@@ -220,7 +220,7 @@ namespace OpenBreed.Game.States
             blockBuilder.SetTileAtlas(tileAtlas.Id);
 
             var sprite = Core.Rendering.CreateSprite(spriteAtlas.Id);
-            var animator = ActorHelper.CreateAnimator();
+            var animator = ActorHelper.CreateAnimation(Core);
 
             var actor = Core.Entities.Create();
             actor.Add(animator);

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using OpenBreed.Core.Systems;
 
-namespace OpenBreed.Core.Modules.Physics
+namespace OpenBreed.Core.Modules.Physics.Systems
 {
     public class PhysicsSystem : WorldSystem<IPhysicsComponent>, IPhysicsSystem
     {

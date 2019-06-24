@@ -3,6 +3,7 @@ using OpenBreed.Core.Entities;
 using OpenTK;
 using System;
 using System.Linq;
+using OpenBreed.Core.Modules.Physics.Systems;
 
 namespace OpenBreed.Core.Modules.Physics.Components
 {

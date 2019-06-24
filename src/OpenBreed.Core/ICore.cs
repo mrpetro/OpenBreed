@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Modules;
+using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Rendering;
@@ -42,6 +43,11 @@ namespace OpenBreed.Core
         InputsMan Inputs { get; }
 
         /// <summary>
+        /// Animations manager
+        /// </summary>
+        IAnimMan Animations { get; }
+
+        /// <summary>
         /// Worlds manager
         /// </summary>
         WorldMan Worlds { get; }
@@ -59,12 +65,6 @@ namespace OpenBreed.Core
         #endregion Public Properties
 
         #region Public Methods
-
-        /// <summary>
-        /// Creates animation system and return it
-        /// </summary>
-        /// <returns>Animation system interface</returns>
-        IAnimationSystem CreateAnimationSystem();
 
         /// <summary>
         /// Perform exit

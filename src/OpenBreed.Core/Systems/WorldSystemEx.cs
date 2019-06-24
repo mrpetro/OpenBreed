@@ -58,7 +58,7 @@ namespace OpenBreed.Core.Systems
         {
             foreach (var type in requiredComponentTypes)
             {
-                if(!entity.Components.Any(item => item.GetType() == type))
+                if(!entity.Components.Any(item => type.IsAssignableFrom(item.GetType())))
                     return false;
             }
 

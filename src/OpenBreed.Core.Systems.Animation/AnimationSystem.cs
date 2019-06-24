@@ -1,14 +1,16 @@
-﻿using OpenBreed.Core.Systems.Animation.Components;
-using System;
+﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Core.Systems.Animation.Components;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenBreed.Core.Systems.Animation
 {
-    public class AnimationSystem : WorldSystem<IAnimationComponent>, IAnimationSystem
+    public class AnimationSystem : WorldSystemEx, IUpdatableSystemEx
     {
         #region Private Fields
 
-        private List<IAnimationComponent> animators;
+        private List<IEntity> entities = new List<IEntity>();
 
         #endregion Private Fields
 
@@ -16,33 +18,43 @@ namespace OpenBreed.Core.Systems.Animation
 
         public AnimationSystem(ICore core) : base(core)
         {
-            animators = new List<IAnimationComponent>();
+            Require<ISprite>();
+            Require<Animation<int>>();
         }
 
         #endregion Public Constructors
 
         #region Public Methods
 
-        public override void Update(float dt)
+        public void Update(float dt)
         {
-            for (int i = 0; i < animators.Count; i++)
-                animators[i].Animate(dt);
+            for (int i = 0; i < entities.Count; i++)
+                AnimateEntity(dt, entities[i]);
+        }
+
+        public override void AddEntity(IEntity entity)
+        {
+            entities.Add(entity);
+        }
+
+        public override void RemoveEntity(IEntity entity)
+        {
+            entities.Remove(entity);
         }
 
         #endregion Public Methods
 
-        #region Protected Methods
+        #region Private Methods
 
-        protected override void AddComponent(IAnimationComponent component)
+        private void AnimateEntity(float dt, IEntity entity)
         {
-            animators.Add(component);
+            var sprite = entity.Components.OfType<ISprite>().First();
+            var animation = entity.Components.OfType<Animation<int>>().First();
+
+            animation.Animate(dt);
+            sprite.ImageId = animation.Frame;
         }
 
-        protected override void RemoveComponent(IAnimationComponent component)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion Protected Methods
+        #endregion Private Methods
     }
 }
