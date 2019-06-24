@@ -1,10 +1,8 @@
 ﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.States;
 using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Systems.Control.Components;
 using OpenBreed.Core.Systems.Movement;
 using OpenTK;
-using OpenTK.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +17,8 @@ namespace OpenBreed.Core.Systems.Control.Systems
         #region Private Fields
 
         private readonly List<IEntity> entities = new List<IEntity>();
+        private readonly List<AiControl> aiControlComps = new List<AiControl>();
+        private readonly List<IPosition> positionComps = new List<IPosition>();
 
         #endregion Private Fields
 
@@ -27,7 +27,7 @@ namespace OpenBreed.Core.Systems.Control.Systems
         public AiControlSystem(ICore core) : base(core)
         {
             Require<AiControl>();
-            Require<Position>();
+            Require<IPosition>();
         }
 
         #endregion Public Constructors
@@ -37,13 +37,30 @@ namespace OpenBreed.Core.Systems.Control.Systems
         public void Update(float dt)
         {
             for (int i = 0; i < entities.Count; i++)
-                ControlEntity(dt, entities[i]);
+                ControlEntity(dt, i);
         }
 
-        private void ControlEntity(float dt, IEntity entity)
+        public override void AddEntity(IEntity entity)
         {
-            var control = entity.Components.OfType<AiControl>().First();
-            var position = entity.Components.OfType<Position>().First();
+            entities.Add(entity);
+            aiControlComps.Add(entity.Components.OfType<AiControl>().First());
+            positionComps.Add(entity.Components.OfType<IPosition>().First());
+        }
+
+        public override void RemoveEntity(IEntity entity)
+        {
+            entities.Remove(entity);
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void ControlEntity(float dt, int index)
+        {
+            var entity = entities[index];
+            var control = aiControlComps[index];
+            var position = positionComps[index];
 
             if (control.Waypoints.Any())
             {
@@ -73,18 +90,6 @@ namespace OpenBreed.Core.Systems.Control.Systems
                 entity.PerformDelegate("Stop");
         }
 
-        public override void AddEntity(IEntity entity)
-        {
-            entities.Add(entity);
-        }
-
-        public override void RemoveEntity(IEntity entity)
-        {
-            entities.Remove(entity);
-        }
-
-        #endregion Public Methods
-
-
+        #endregion Private Methods
     }
 }

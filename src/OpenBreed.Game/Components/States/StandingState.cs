@@ -14,9 +14,9 @@ namespace OpenBreed.Game.Components.States
 {
     public class StandingState : IState
     {
-        private Thrust thrust;
+        private IThrust thrust;
         private Animator<int> spriteAnimation;
-        private Direction direction;
+        private IDirection direction;
         private readonly string animationId;
         private readonly Vector2 facingDirection;
 
@@ -37,9 +37,9 @@ namespace OpenBreed.Game.Components.States
 
         public void Initialize(IEntity entity)
         {
-            thrust = entity.Components.OfType<Thrust>().First();
+            thrust = entity.Components.OfType<IThrust>().First();
             spriteAnimation = entity.Components.OfType<Animator<int>>().First();
-            direction = entity.Components.OfType<Direction>().First();
+            direction = entity.Components.OfType<IDirection>().First();
         }
 
         public void LeaveState()

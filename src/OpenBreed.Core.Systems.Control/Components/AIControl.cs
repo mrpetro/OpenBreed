@@ -17,7 +17,7 @@ namespace OpenBreed.Core.Systems.Control.Components
     {
         #region Private Fields
 
-        private Position position;
+        private IPosition position;
 
         #endregion Private Fields
 
@@ -46,7 +46,7 @@ namespace OpenBreed.Core.Systems.Control.Components
 
         public void Initialize(IEntity entity)
         {
-            position = entity.Components.OfType<Position>().First();
+            position = entity.Components.OfType<IPosition>().First();
         }
 
         #endregion Public Methods

@@ -185,7 +185,7 @@ namespace OpenBreed.Game.States
             var fontAtlas = Core.Rendering.Fonts.Create("ALGERIAN", 50);
 
             var textEntity = Core.Entities.Create();
-            textEntity.Add(new Position(40, 50));
+            textEntity.Add(Position.Create(40, 50));
             textEntity.Add(Core.Rendering.CreateText(fontAtlas.Id, "Alice has a cat!"));
 
             hudWorld.AddEntity(textEntity);
@@ -225,10 +225,10 @@ namespace OpenBreed.Game.States
             var actor = Core.Entities.Create();
             actor.Add(animator);
             actor.Add(sprite);
-            actor.Add(new Position(64, 288));
-            actor.Add(new Thrust(0, 0));
-            actor.Add(new Velocity(0, 0));
-            actor.Add(new Direction(1, 0));
+            actor.Add(Position.Create(64, 288));
+            actor.Add(Thrust.Create(0, 0));
+            actor.Add(Velocity.Create(0, 0));
+            actor.Add(Direction.Create(1, 0));
             actor.Add(new AxisAlignedBoxShape(32, 32));
             actor.Add(new Motion());
             actor.Add(new DynamicBody());

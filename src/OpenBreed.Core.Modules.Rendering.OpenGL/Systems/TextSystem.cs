@@ -16,6 +16,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         #region Private Fields
 
         private readonly List<IEntity> entities = new List<IEntity>();
+        private readonly List<IText> textComps = new List<IText>();
+        private readonly List<IPosition> positionComps = new List<IPosition>();
 
         #endregion Private Fields
 
@@ -23,8 +25,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         public TextSystem(ICore core) : base(core)
         {
-            Require<Text>();
-            Require<Position>();
+            Require<IText>();
+            Require<IPosition>();
         }
 
         #endregion Public Constructors
@@ -52,17 +54,18 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Enable(EnableCap.Texture2D);
 
             for (int i = 0; i < entities.Count; i++)
-                DrawText(viewport, entities[i]);
+                DrawEntityText(viewport, i);
 
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.AlphaTest);
             GL.Disable(EnableCap.Blend);
         }
 
-        public void DrawText(IViewport viewport, IEntity entity)
+        public void DrawEntityText(IViewport viewport, int index)
         {
-            var text = entity.Components.OfType<IText>().First();
-            var position = entity.Components.OfType<Position>().First();
+            var entity = entities[index];
+            var text = textComps[index];
+            var position = positionComps[index];
 
             GL.Enable(EnableCap.Texture2D);
             GL.PushMatrix();
@@ -78,6 +81,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         public override void AddEntity(IEntity entity)
         {
             entities.Add(entity);
+            textComps.Add(entity.Components.OfType<IText>().First());
+            positionComps.Add(entity.Components.OfType<IPosition>().First());
         }
 
         public override void RemoveEntity(IEntity entity)

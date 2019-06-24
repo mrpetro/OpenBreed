@@ -14,10 +14,10 @@ namespace OpenBreed.Game.Components.States
 {
     public class WalkingState : IState
     {
-        private Thrust thrust;
+        private IThrust thrust;
         private Motion creatureMovement;
         private Animator<int> spriteAnimation;
-        private Direction direction;
+        private IDirection direction;
         private readonly string animationId;
         private readonly Vector2 walkDirection;
         public WalkingState(string id, string animationId, Vector2 walkDirection)
@@ -37,11 +37,10 @@ namespace OpenBreed.Game.Components.States
 
         public void Initialize(IEntity entity)
         {
-            thrust = entity.Components.OfType<Thrust>().First();
-            direction = entity.Components.OfType<Direction>().First();
+            thrust = entity.Components.OfType<IThrust>().First();
+            direction = entity.Components.OfType<IDirection>().First();
             creatureMovement = entity.Components.OfType<Motion>().First();
             spriteAnimation = entity.Components.OfType<Animator<int>>().First();
-            direction = entity.Components.OfType<Direction>().First();
         }
 
         public void LeaveState()

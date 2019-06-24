@@ -14,7 +14,7 @@ namespace OpenBreed.Core.Modules.Audio.Components
     {
         #region Private Fields
 
-        private Position position;
+        private IPosition position;
 
         #endregion Private Fields
 
@@ -40,7 +40,7 @@ namespace OpenBreed.Core.Modules.Audio.Components
 
         public void Initialize(IEntity entity)
         {
-            position = entity.Components.OfType<Position>().First();
+            position = entity.Components.OfType<IPosition>().First();
         }
 
         public void Play(string soundId)

@@ -12,11 +12,11 @@ namespace OpenBreed.Core.Systems.Movement.Systems
 
         private float MAXSPEED = 8.0f;
 
-        private List<IEntity> entities = new List<IEntity>();
-        private List<Thrust> thrustComps = new List<Thrust>();
-        private List<Position> positionComps = new List<Position>();
-        private List<Direction> directionComps = new List<Direction>();
-        private List<Velocity> velocityComps = new List<Velocity>();
+        private readonly List<IEntity> entities = new List<IEntity>();
+        private readonly List<IThrust> thrustComps = new List<IThrust>();
+        private readonly List<IPosition> positionComps = new List<IPosition>();
+        private readonly List<IDirection> directionComps = new List<IDirection>();
+        private readonly List<IVelocity> velocityComps = new List<IVelocity>();
 
         #endregion Private Fields
 
@@ -24,10 +24,10 @@ namespace OpenBreed.Core.Systems.Movement.Systems
 
         public MovementSystem(ICore core) : base(core)
         {
-            Require<Thrust>();
-            Require<Position>();
-            Require<Direction>();
-            Require<Velocity>();
+            Require<IThrust>();
+            Require<IPosition>();
+            Require<IDirection>();
+            Require<IVelocity>();
         }
 
         #endregion Public Constructors
@@ -48,7 +48,7 @@ namespace OpenBreed.Core.Systems.Movement.Systems
             var direction = directionComps[index];
             var velocity = velocityComps[index];
 
-            direction.Current = thrust.Value;
+            direction.Value = thrust.Value;
 
             var newSpeed = velocity.Value;
             newSpeed += thrust.Value;// * dt;
@@ -62,10 +62,10 @@ namespace OpenBreed.Core.Systems.Movement.Systems
         public override void AddEntity(IEntity entity)
         {
             entities.Add(entity);
-            positionComps.Add(entity.Components.OfType<Position>().First());
-            thrustComps.Add(entity.Components.OfType<Thrust>().First());
-            directionComps.Add(entity.Components.OfType<Direction>().First());
-            velocityComps.Add(entity.Components.OfType<Velocity>().First());
+            positionComps.Add(entity.Components.OfType<IPosition>().First());
+            thrustComps.Add(entity.Components.OfType<IThrust>().First());
+            directionComps.Add(entity.Components.OfType<IDirection>().First());
+            velocityComps.Add(entity.Components.OfType<IVelocity>().First());
         }
 
         public override void RemoveEntity(IEntity entity)

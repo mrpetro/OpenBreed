@@ -12,7 +12,7 @@ namespace OpenBreed.Core.Modules.Physics.Components
         #region Private Fields
 
         private float size;
-        private Position position;
+        private IPosition position;
 
         #endregion Private Fields
 
@@ -48,7 +48,7 @@ namespace OpenBreed.Core.Modules.Physics.Components
 
         public void Initialize(IEntity entity)
         {
-            position = entity.Components.OfType<Position>().First();
+            position = entity.Components.OfType<IPosition>().First();
 
             Aabb = new Box2
             {

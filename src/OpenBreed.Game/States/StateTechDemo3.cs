@@ -197,10 +197,10 @@ namespace OpenBreed.Game.States
             actor.Add(animator);
             //actor.Add(new AIControllerDebug(Core.Rendering.CreateSprite(spriteAtlas.Id)));
             actor.Add(Core.Rendering.CreateSprite(spriteAtlas.Id));
-            actor.Add(new Position(64, 288));
-            actor.Add(new Thrust(0, 0));
-            actor.Add(new Velocity(0, 0));
-            actor.Add(new Direction(1, 0));
+            actor.Add(Position.Create(64, 288));
+            actor.Add(Thrust.Create(0, 0));
+            actor.Add(Velocity.Create(0, 0));
+            actor.Add(Direction.Create(1, 0));
             actor.Add(new AxisAlignedBoxShape(32, 32));
             actor.Add(new Motion());
             actor.Add(new DynamicBody());

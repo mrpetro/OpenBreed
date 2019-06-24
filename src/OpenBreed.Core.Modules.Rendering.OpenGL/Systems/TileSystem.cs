@@ -27,6 +27,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         #region Private Fields
 
         private IEntity[] entities;
+        private ITile[] tileComps;
+        private IPosition[] positionComps;
 
         #endregion Private Fields
 
@@ -34,8 +36,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         public TileSystem(ICore core, int width, int height, float tileSize) : base(core)
         {
-            Require<Tile>();
-            Require<Position>();
+            Require<ITile>();
+            Require<IPosition>();
 
             TileSize = tileSize;
             InitializeTilesMap(width, height);
@@ -81,10 +83,9 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             {
                 for (int i = leftIndex; i < rightIndex; i++)
                 {
-                    var entity = entities[i + TileMapHeight * j];
+                    var index = i + TileMapHeight * j;
 
-                    if (entity != null)
-                        DrawTile(entity);
+                    DrawEntityTile(index);
                 }
             }
 
@@ -93,8 +94,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         public override void AddEntity(IEntity entity)
         {
-            var tile = entity.Components.OfType<ITile>().First();
-            var position = entity.Components.OfType<Position>().First();
+            var position = entity.Components.OfType<IPosition>().First();
 
             int x, y;
             GetMapIndices(position, out x, out y);
@@ -107,21 +107,27 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                 throw new InvalidOperationException($"Tile Y coordinate exceeds tile map height size.");
 
             entities[tileId] = entity;
+            tileComps[tileId] = entity.Components.OfType<ITile>().First();
+            positionComps[tileId] = position;
         }
 
         public override void RemoveEntity(IEntity entity)
         {
-
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void DrawTile(IEntity entity)
+        private void DrawEntityTile(int index)
         {
-            var tile = entity.Components.OfType<Tile>().First();
-            var position = entity.Components.OfType<Position>().First();
+            var entity = entities[index];
+
+            if (entity == null)
+                return;
+
+            var tile = tileComps[index];
+            var position = positionComps[index];
 
             GL.PushMatrix();
 
@@ -137,6 +143,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             TileMapHeight = width;
             TileMapWidth = height;
             entities = new IEntity[width * height];
+            tileComps = new ITile[width * height];
+            positionComps = new IPosition[width * height];
         }
 
         /// <summary>
@@ -167,7 +175,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             }
         }
 
-        private void GetMapIndices(Position position, out int x, out int y)
+        private void GetMapIndices(IPosition position, out int x, out int y)
         {
             x = (int)(position.Value.X / (int)TileSize);
             y = (int)(position.Value.Y / (int)TileSize);

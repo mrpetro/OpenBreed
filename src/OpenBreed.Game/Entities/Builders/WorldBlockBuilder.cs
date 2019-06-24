@@ -48,7 +48,7 @@ namespace OpenBreed.Game.Entities.Builders
         {
             var entity = Core.Entities.Create();
 
-            entity.Add(new Position(x * 16, y * 16));
+            entity.Add(Position.Create(x * 16, y * 16));
             entity.Add(new GridBoxBody(16));
             entity.Add(Core.Rendering.CreateTile(atlasId, tileId));
 

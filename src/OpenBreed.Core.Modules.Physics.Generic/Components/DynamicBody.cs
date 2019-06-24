@@ -54,8 +54,8 @@ namespace OpenBreed.Core.Modules.Physics.Components
         public Vector2 Projection { get; private set; }
 
         public IShapeComponent Shape { get; private set; }
-        public Position Position { get; private set; }
-        public Velocity Velocity { get; private set; }
+        public IPosition Position { get; private set; }
+        public IVelocity Velocity { get; private set; }
 
         public Box2 Aabb
         {
@@ -78,8 +78,8 @@ namespace OpenBreed.Core.Modules.Physics.Components
 
         public void Initialize(IEntity entity)
         {
-            Position = entity.Components.OfType<Position>().First();
-            Velocity = entity.Components.OfType<Velocity>().First();
+            Position = entity.Components.OfType<IPosition>().First();
+            Velocity = entity.Components.OfType<IVelocity>().First();
             Shape = entity.Components.OfType<IShapeComponent>().First();
         }
 

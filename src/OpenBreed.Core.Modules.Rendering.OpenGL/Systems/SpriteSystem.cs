@@ -14,6 +14,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         #region Private Fields
 
         private readonly List<IEntity> entities = new List<IEntity>();
+        private readonly List<ISprite> spriteComps = new List<ISprite>();
+        private readonly List<IPosition> positionComps = new List<IPosition>();
 
         #endregion Private Fields
 
@@ -21,8 +23,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         public SpriteSystem(ICore core) : base(core)
         {
-            Require<Sprite>();
-            Require<Position>();
+            Require<ISprite>();
+            Require<IPosition>();
         }
 
         #endregion Public Constructors
@@ -46,7 +48,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Enable(EnableCap.Texture2D);
 
             for (int i = 0; i < entities.Count; i++)
-                DrawSprite(viewport, entities[i]);
+                DrawEntitySprite(viewport, i);
 
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.AlphaTest);
@@ -56,6 +58,9 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         public override void AddEntity(IEntity entity)
         {
             entities.Add(entity);
+            spriteComps.Add(entity.Components.OfType<ISprite>().First());
+            positionComps.Add(entity.Components.OfType<IPosition>().First());
+
         }
 
         public override void RemoveEntity(IEntity entity)
@@ -67,10 +72,11 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// Draw this sprite to given viewport
         /// </summary>
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
-        public void DrawSprite(IViewport viewport, IEntity entity)
+        public void DrawEntitySprite(IViewport viewport, int index)
         {
-            var sprite = entity.Components.OfType< ISprite>().First();
-            var position = entity.Components.OfType<Position>().First();
+            var entity = entities[index];
+            var sprite = spriteComps[index];
+            var position = positionComps[index];
 
             GL.PushMatrix();
 

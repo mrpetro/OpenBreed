@@ -89,8 +89,12 @@
     <Compile Include="States\IStateBuilder.cs" />
     <Compile Include="States\IState.cs" />
     <Compile Include="States\StateMachine.cs" />
+    <Compile Include="Systems\Common\Components\IDirection.cs" />
     <Compile Include="Systems\Common\Components\IShapeComponent.cs" />
+    <Compile Include="Systems\Common\Components\IPosition.cs" />
+    <Compile Include="Systems\Common\Components\IThrust.cs" />
     <Compile Include="Systems\Common\Components\Thrust.cs" />
+    <Compile Include="Systems\Common\Components\IVelocity.cs" />
     <Compile Include="Systems\Common\Components\Velocity.cs" />
     <Compile Include="Systems\Common\Components\Position.cs" />
     <Compile Include="Systems\Common\Components\Direction.cs" />
