@@ -13,6 +13,10 @@ namespace OpenBreed.Core.Systems.Movement.Systems
         private float MAXSPEED = 8.0f;
 
         private List<IEntity> entities = new List<IEntity>();
+        private List<Thrust> thrustComps = new List<Thrust>();
+        private List<Position> positionComps = new List<Position>();
+        private List<Direction> directionComps = new List<Direction>();
+        private List<Velocity> velocityComps = new List<Velocity>();
 
         #endregion Private Fields
 
@@ -33,15 +37,16 @@ namespace OpenBreed.Core.Systems.Movement.Systems
         public void Update(float dt)
         {
             for (int i = 0; i < entities.Count; i++)
-                UpdateEntity(dt, entities[i]);
+                UpdateEntity(dt, i);
         }
 
-        public void UpdateEntity(float dt, IEntity entity)
+        public void UpdateEntity(float dt, int index)
         {
-            var position = entity.Components.OfType<Position>().First();
-            var thrust = entity.Components.OfType<Thrust>().First();
-            var direction = entity.Components.OfType<Direction>().First();
-            var velocity = entity.Components.OfType<Velocity>().First();
+            var entity = entities[index];
+            var position = positionComps[index];
+            var thrust = thrustComps[index];
+            var direction = directionComps[index];
+            var velocity = velocityComps[index];
 
             direction.Current = thrust.Value;
 
@@ -57,6 +62,10 @@ namespace OpenBreed.Core.Systems.Movement.Systems
         public override void AddEntity(IEntity entity)
         {
             entities.Add(entity);
+            positionComps.Add(entity.Components.OfType<Position>().First());
+            thrustComps.Add(entity.Components.OfType<Thrust>().First());
+            directionComps.Add(entity.Components.OfType<Direction>().First());
+            velocityComps.Add(entity.Components.OfType<Velocity>().First());
         }
 
         public override void RemoveEntity(IEntity entity)

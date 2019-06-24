@@ -16,7 +16,7 @@ namespace OpenBreed.Game.Entities
     public static class ActorHelper
     {
 
-        public static Animation<int> CreateAnimation(ICore core)
+        public static Animator<int> CreateAnimation(ICore core)
         {
             var animationStandingRight = core.Animations.Create<int>("STANDING_RIGHT");
             animationStandingRight.AddFrame(0, 2.0f);
@@ -52,7 +52,7 @@ namespace OpenBreed.Game.Entities
             var animationWalkingUpRight = core.Animations.Create<int>("WALKING_UP_RIGHT");
             animationWalkingUpRight.AddFrame(7, 2.0f);
 
-            var animation = new Animation<int>(4.0f, true);
+            var animation = new Animator<int>(4.0f, true);
             animation.AddAnimation("STANDING_RIGHT", animationStandingRight);
             animation.AddAnimation("STANDING_RIGHT_DOWN", animationStandingRightDown);
             animation.AddAnimation("STANDING_DOWN", animationStandingDown);

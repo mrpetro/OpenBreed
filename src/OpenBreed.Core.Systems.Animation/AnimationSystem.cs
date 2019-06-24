@@ -19,7 +19,7 @@ namespace OpenBreed.Core.Systems.Animation
         public AnimationSystem(ICore core) : base(core)
         {
             Require<ISprite>();
-            Require<Animation<int>>();
+            Require<Animator<int>>();
         }
 
         #endregion Public Constructors
@@ -49,7 +49,7 @@ namespace OpenBreed.Core.Systems.Animation
         private void AnimateEntity(float dt, IEntity entity)
         {
             var sprite = entity.Components.OfType<ISprite>().First();
-            var animation = entity.Components.OfType<Animation<int>>().First();
+            var animation = entity.Components.OfType<Animator<int>>().First();
 
             animation.Animate(dt);
             sprite.ImageId = animation.Frame;

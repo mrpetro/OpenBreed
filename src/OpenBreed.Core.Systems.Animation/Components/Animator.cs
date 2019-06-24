@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace OpenBreed.Core.Systems.Animation.Components
 {
-    public class Animation<T> : IEntityComponent
+    public class Animator<T> : IEntityComponent
     {
         #region Private Fields
 
@@ -21,7 +21,7 @@ namespace OpenBreed.Core.Systems.Animation.Components
 
         #region Public Constructors
 
-        public Animation(float speed = 1.0f, bool loop = false)
+        public Animator(float speed = 1.0f, bool loop = false)
         {
             Speed = speed;
             Loop = loop;
@@ -34,7 +34,7 @@ namespace OpenBreed.Core.Systems.Animation.Components
         public bool Paused { get; set; }
         public float Speed { get; set; }
         public IEnumerable<string> AnimationNames { get { return animations.Keys; } }
-        public Type SystemType { get { return typeof(AnimationSystem); } }
+        public Type SystemType { get { return null; } }
 
         public bool Loop { get; set; }
 
