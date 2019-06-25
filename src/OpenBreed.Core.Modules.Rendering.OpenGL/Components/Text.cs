@@ -33,21 +33,6 @@ namespace OpenBreed.Core.Modules.Rendering.Components
 
         public string Value { get; set; }
 
-        public Type SystemType { get { return null; } }
-
         #endregion Public Properties
-
-        #region Public Methods
-
-        public void Deinitialize(IEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Initialize(IEntity entity)
-        {
-        }
-
-        #endregion Public Methods
     }
 }

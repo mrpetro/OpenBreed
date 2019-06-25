@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TileSystem : WorldSystemEx, IRenderableSystem
+    public class TileSystem : WorldSystem, IRenderableSystem
     {
         #region Public Fields
 

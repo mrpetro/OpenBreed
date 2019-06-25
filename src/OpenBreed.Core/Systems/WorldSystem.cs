@@ -2,14 +2,19 @@
 using OpenBreed.Core.Systems.Common.Components;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenBreed.Core.Systems
 {
-    public abstract class WorldSystem<T> : IWorldSystem where T : IEntityComponent
+    public abstract class WorldSystem : IWorldSystem
     {
+        #region Protected Fields
+
+        #endregion Protected Fields
+
         #region Private Fields
 
-        private readonly List<Type> requiredComponents = new List<Type>();
+        private readonly List<Type> requiredComponentTypes = new List<Type>();
 
         #endregion Private Fields
 
@@ -49,38 +54,22 @@ namespace OpenBreed.Core.Systems
         {
         }
 
-        /// <summary>
-        /// Add the component to this system when entity is added to it's world
-        /// </summary>
-        /// <param name="component">Component to add</param>
-        public void AddComponent(IEntityComponent component)
+        public bool Matches(IEntity entity)
         {
-            AddComponent((T)component);
+            foreach (var type in requiredComponentTypes)
+            {
+                if(!entity.Components.Any(item => type.IsAssignableFrom(item.GetType())))
+                    return false;
+            }
+
+            return true;
         }
 
-        /// <summary>
-        /// Remove the component from this system when entity is being removed from it's world
-        /// </summary>
-        /// <param name="component">Component to remove</param>
-        public void RemoveComponent(IEntityComponent component)
-        {
-            RemoveComponent((T)component);
-        }
-
-        /// <summary>
-        /// Update this system with given time step
-        /// </summary>
-        /// <param name="dt">Time step</param>
-        public virtual void Update(float dt)
+        public virtual void AddEntity(IEntity entity)
         {
         }
 
-        public bool Matches(Entity entity)
-        {
-            return false;
-        }
-
-        public void AddEntity(Entity entity)
+        public virtual void RemoveEntity(IEntity entity)
         {
         }
 
@@ -88,30 +77,19 @@ namespace OpenBreed.Core.Systems
 
         #region Protected Methods
 
-        protected void Require<C>()
+        protected int Require<C>() where C : IEntityComponent
         {
             var type = typeof(C);
-            if (!requiredComponents.Contains(type))
-                requiredComponents.Add(type);
-        }
 
-        protected abstract void AddComponent(T component);
+            var typeIndex = requiredComponentTypes.IndexOf(type);
 
-        protected abstract void RemoveComponent(T component);
-
-        public bool Matches(IEntity entity)
-        {
-            return false;
-        }
-
-        public void AddEntity(IEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveEntity(IEntity entity)
-        {
-            throw new NotImplementedException();
+            if (typeIndex >= 0)
+                return typeIndex;
+            else
+            {
+                requiredComponentTypes.Add(type);
+                return requiredComponentTypes.Count - 1;
+            }
         }
 
         #endregion Protected Methods

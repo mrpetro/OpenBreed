@@ -39,29 +39,6 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         /// </summary>
         public int ImageId { get; set; }
 
-        public Type SystemType { get { return null; } }
-
         #endregion Public Properties
-
-        #region Public Methods
-
-        /// <summary>
-        /// Initialize this component
-        /// </summary>
-        /// <param name="entity">Entity which this component belongs to</param>
-        public void Initialize(IEntity entity)
-        {
-        }
-
-        /// <summary>
-        /// Deinitialize this component
-        /// </summary>
-        /// <param name="entity">Entity which this component belongs to</param>
-        public void Deinitialize(IEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion Public Methods
     }
 }

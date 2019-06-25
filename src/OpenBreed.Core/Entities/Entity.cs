@@ -78,8 +78,8 @@ namespace OpenBreed.Core.Entities
         internal void Deinitialize()
         {
             //Deinitialize all entity components
-            for (int i = 0; i < Components.Count; i++)
-                Components[i].Deinitialize(this);
+            //for (int i = 0; i < Components.Count; i++)
+            //    Components[i].Deinitialize(this);
 
             //Forget the world in which entity was
             CurrentWorld = null;
@@ -91,8 +91,8 @@ namespace OpenBreed.Core.Entities
             CurrentWorld = world;
 
             //Initialize all entity components
-            for (int i = 0; i < Components.Count; i++)
-                Components[i].Initialize(this);
+            //for (int i = 0; i < Components.Count; i++)
+            //    Components[i].Initialize(this);
         }
 
         #endregion Internal Methods

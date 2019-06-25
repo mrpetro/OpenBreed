@@ -26,19 +26,19 @@ namespace OpenBreed.Core.Modules.Rendering
         /// Create system for handling tiles
         /// </summary>
         /// <returns>Tile system</returns>
-        IWorldSystemEx CreateTileSystem(int gridWidth, int gridHeight, float tileSize);
+        IWorldSystem CreateTileSystem(int gridWidth, int gridHeight, float tileSize);
 
         /// <summary>
         /// Create system for handling sprites
         /// </summary>
         /// <returns>Sprite system</returns>
-        IWorldSystemEx CreateSpriteSystem();
+        IWorldSystem CreateSpriteSystem();
 
         /// <summary>
         /// Create system for handling texts
         /// </summary>
         /// <returns>Text system</returns>
-        IWorldSystemEx CreateTextSystem();
+        IWorldSystem CreateTextSystem();
 
         /// <summary>
         /// Creates text component using given font

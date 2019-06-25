@@ -26,12 +26,6 @@ namespace OpenBreed.Core.States
 
         #endregion Public Constructors
 
-        #region Public Properties
-
-        public Type SystemType { get { return null; } }
-
-        #endregion Public Properties
-
         #region Public Methods
 
         public void AddState(IState state)

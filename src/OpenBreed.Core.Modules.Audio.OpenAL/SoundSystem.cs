@@ -6,9 +6,13 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Core.Modules.Audio
 {
-    public class SoundSystem : WorldSystem<IAudioComponent>, IAudioSystem
+    public class SoundSystem : WorldSystem, IAudioSystem
     {
+        #region Private Fields
+
         private List<IAudioComponent> components;
+
+        #endregion Private Fields
 
         #region Public Constructors
 
@@ -19,18 +23,5 @@ namespace OpenBreed.Core.Modules.Audio
 
         #endregion Public Constructors
 
-        #region Protected Methods
-
-        protected override void AddComponent(IAudioComponent component)
-        {
-            components.Add(component);
-        }
-
-        protected override void RemoveComponent(IAudioComponent component)
-        {
-            components.Remove(component);
-        }
-
-        #endregion Protected Methods
     }
 }

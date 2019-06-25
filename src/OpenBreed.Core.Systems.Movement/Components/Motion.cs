@@ -43,22 +43,6 @@ namespace OpenBreed.Core.Systems.Movement.Components
 
         public float Speed { get { return speedPercent * MAXSPEED; } }
 
-        public Type SystemType { get { return null; } }
-
         #endregion Public Properties
-
-        #region Public Methods
-
-        public void Deinitialize(IEntity entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Initialize(IEntity entity)
-        {
-
-        }
-
-        #endregion Public Methods
     }
 }

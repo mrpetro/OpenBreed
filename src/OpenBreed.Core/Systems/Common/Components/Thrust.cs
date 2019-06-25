@@ -40,11 +40,6 @@ namespace OpenBreed.Core.Systems.Common.Components
         /// </summary>
         public Vector2 Value { get; set; }
 
-        /// <summary>
-        /// System type that this component is part of
-        /// </summary>
-        public Type SystemType { get { return null; } }
-
         #endregion Public Properties
 
         #region Public Methods
@@ -57,22 +52,6 @@ namespace OpenBreed.Core.Systems.Common.Components
         public static IThrust Create(float x, float y)
         {
             return new Thrust(x, y);
-        }
-
-        /// <summary>
-        /// Initialize this component
-        /// </summary>
-        /// <param name="entity">Entity which this component belongs to</param>
-        public void Initialize(IEntity entity)
-        {
-        }
-
-        /// <summary>
-        /// Deinitialize this component
-        /// </summary>
-        /// <param name="entity">Entity which this component belongs to</param>
-        public void Deinitialize(IEntity entity)
-        {
         }
 
         #endregion Public Methods

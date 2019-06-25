@@ -6,25 +6,27 @@ namespace OpenBreed.Core.Systems
     /// <summary>
     /// Interface to system which is part of some world
     /// </summary>
-    public interface IWorldSystem : IWorldSystemEx
+    public interface IWorldSystem
     {
         #region Public Methods
 
         /// <summary>
-        /// Add the component to this system when entity is added to it's world
+        /// Initialize the system when world is created
         /// </summary>
-        /// <param name="component">Component to add</param>
-        void AddComponent(IEntityComponent component);
+        /// <param name="world">World that this system is initialized on</param>
+        void Initialize(World world);
 
         /// <summary>
-        /// Remove the component from this system when entity is being removed from it's world
+        /// Deinitialize the system when world is destroyed
         /// </summary>
-        /// <param name="component">Component to remove</param>
-        void RemoveComponent(IEntityComponent component);
+        /// <param name="world">World that this system is part of</param>
+        void Deinitialize(World world);
 
-        bool Matches(Entity entity);
+        bool Matches(IEntity entity);
 
-        void AddEntity(Entity entity);
+        void AddEntity(IEntity entity);
+
+        void RemoveEntity(IEntity entity);
 
         #endregion Public Methods
     }

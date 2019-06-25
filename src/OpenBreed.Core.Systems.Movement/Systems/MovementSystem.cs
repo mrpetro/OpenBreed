@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace OpenBreed.Core.Systems.Movement.Systems
 {
-    public class MovementSystem : WorldSystemEx, IUpdatableSystemEx
+    public class MovementSystem : WorldSystem, IUpdatableSystem
     {
         #region Private Fields
 

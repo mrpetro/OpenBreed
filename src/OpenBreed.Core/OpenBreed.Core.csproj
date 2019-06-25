@@ -105,12 +105,9 @@
     <Compile Include="Modules\Physics\IPhysicsSystem.cs" />
     <Compile Include="Modules\Audio\Systems\IAudioSystem.cs" />
     <Compile Include="Systems\IRenderableSystem.cs" />
-    <Compile Include="Systems\IUpdatableSystemEx.cs" />
     <Compile Include="Systems\IUpdatableSystem.cs" />
-    <Compile Include="Systems\IWorldSystemEx.cs" />
-    <Compile Include="Systems\WorldSystemEx.cs" />
-    <Compile Include="Systems\WorldSystem.cs" />
     <Compile Include="Systems\IWorldSystem.cs" />
+    <Compile Include="Systems\WorldSystem.cs" />
     <Compile Include="Systems\Common\Components\Transformation.cs" />
     <Compile Include="Systems\Common\Components\ITransformComponent.cs" />
     <Compile Include="ICore.cs" />

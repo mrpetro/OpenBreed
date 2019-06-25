@@ -34,7 +34,6 @@ namespace OpenBreed.Core.Systems.Animation.Components
         public bool Paused { get; set; }
         public float Speed { get; set; }
         public IEnumerable<string> AnimationNames { get { return animations.Keys; } }
-        public Type SystemType { get { return null; } }
 
         public bool Loop { get; set; }
 
@@ -92,15 +91,6 @@ namespace OpenBreed.Core.Systems.Animation.Components
             }
 
             Frame = currentAnimation.GetFrame(currentPosition);
-        }
-
-        public void Deinitialize(IEntity entity)
-        {
-        }
-
-        public void Initialize(IEntity entity)
-        {
-
         }
 
         public void AddAnimation(string animationName, IAnimationData<T> animation)

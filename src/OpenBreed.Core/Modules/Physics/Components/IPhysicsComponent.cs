@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Systems.Common.Components;
+﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.Systems.Common.Components;
 using OpenTK;
 
 namespace OpenBreed.Core.Modules.Physics.Components
@@ -13,5 +14,13 @@ namespace OpenBreed.Core.Modules.Physics.Components
         Box2 Aabb { get; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        void Deinitialize(IEntity entity);
+
+        void Initialize(IEntity entity);
+
+        #endregion Public Methods
     }
 }

@@ -4,16 +4,21 @@ using OpenBreed.Core.Modules.Physics.Helpers;
 using System;
 using System.Collections.Generic;
 using OpenBreed.Core.Systems;
+using OpenBreed.Core.Entities;
+using System.Linq;
 
 namespace OpenBreed.Core.Modules.Physics.Systems
 {
-    public class PhysicsSystem : WorldSystem<IPhysicsComponent>, IPhysicsSystem
+    public class PhysicsSystem : WorldSystem, IPhysicsSystem
     {
         #region Private Fields
 
         private static readonly AabbXComparer comparer = new AabbXComparer();
-        private List<IStaticBody>[] gridArray;
-        private List<IDynamicBody> dynamicBodies;
+
+        private List<IEntity>[] gridStaticEntities;
+        private List<IStaticBody>[] gridStaticComps;
+        private readonly List<IEntity> dynamicEntities = new List<IEntity>();
+        private readonly List<IDynamicBody> dynamicBodies = new List<IDynamicBody>();
 
         #endregion Private Fields
 
@@ -21,11 +26,14 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         public PhysicsSystem(ICore core, int gridWidth, int gridHeight) : base(core)
         {
+            Require<IPhysicsComponent>();
+
             GridWidth = gridWidth;
             GridHeight = gridHeight;
 
             InitializeGrid();
 
+            dynamicEntities = new List<IEntity>();
             dynamicBodies = new List<IDynamicBody>();
         }
 
@@ -41,7 +49,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         #region Public Methods
 
-        public override void Update(float dt)
+        public void Update(float dt)
         {
             Integrate();
 
@@ -52,19 +60,23 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         #region Protected Methods
 
-        protected override void AddComponent(IPhysicsComponent component)
+        public override void AddEntity(IEntity entity)
         {
-            if (component is IStaticBody)
-                AddStaticBody((IStaticBody)component);
-            else if (component is IDynamicBody)
-                AddDynamicBody((IDynamicBody)component);
+            var physicsComponent = entity.Components.OfType<IPhysicsComponent>().First();
+
+            physicsComponent.Initialize(entity);
+
+            if (physicsComponent is IStaticBody)
+                AddStaticBody(entity, (IStaticBody)physicsComponent);
+            else if (physicsComponent is IDynamicBody)
+                AddDynamicBody(entity, (IDynamicBody)physicsComponent);
             else
-                throw new NotImplementedException($"{component}");
+                throw new NotImplementedException($"{physicsComponent}");
         }
 
         //    //QueryStaticMatrix(m_Dynamics.back());
         //}
-        protected override void RemoveComponent(IPhysicsComponent component)
+        public override void RemoveEntity(IEntity entity)
         {
             throw new NotImplementedException();
         }
@@ -127,7 +139,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 for (int xIndex = leftIndex; xIndex < rightIndex; xIndex++)
                 {
                     collider.Boxes.Add(new Tuple<int, int>(xIndex, yIndex));
-                    var collideres = gridArray[xIndex + GridWidth * yIndex];
+                    var collideres = gridStaticComps[xIndex + GridWidth * yIndex];
                     for (int boxIndex = 0; boxIndex < collideres.Count; boxIndex++)
                     {
                         boxesSet.Add(collideres[boxIndex]);
@@ -197,7 +209,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 return 1;
         }
 
-        private void AddStaticBody(IStaticBody body)
+        private void AddStaticBody(IEntity entity, IStaticBody body)
         {
             int x, y;
             body.GetGridIndices(out x, out y);
@@ -209,20 +221,26 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             if (y >= GridHeight)
                 throw new InvalidOperationException($"Grid box body Y coordinate exceeds grid height size.");
 
-            gridArray[gridIndex].Add(body);
+            gridStaticEntities[gridIndex].Add(entity);
+            gridStaticComps[gridIndex].Add(body);
         }
 
-        private void AddDynamicBody(IDynamicBody body)
+        private void AddDynamicBody(IEntity entity, IDynamicBody body)
         {
+            dynamicEntities.Add(entity);
             dynamicBodies.Add(body);
         }
 
         private void InitializeGrid()
         {
-            gridArray = new List<IStaticBody>[GridWidth * GridHeight];
+            gridStaticEntities = new List<IEntity>[GridWidth * GridHeight];
+            gridStaticComps = new List<IStaticBody>[GridWidth * GridHeight];
 
-            for (int i = 0; i < gridArray.Length; i++)
-                gridArray[i] = new List<IStaticBody>();
+            for (int i = 0; i < gridStaticEntities.Length; i++)
+                gridStaticEntities[i] = new List<IEntity>();
+
+            for (int i = 0; i < gridStaticComps.Length; i++)
+                gridStaticComps[i] = new List<IStaticBody>();
         }
 
         #endregion Private Methods

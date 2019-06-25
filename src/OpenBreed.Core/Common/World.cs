@@ -31,7 +31,7 @@ namespace OpenBreed.Core
         private readonly List<IEntity> entities = new List<IEntity>();
         private readonly List<IEntity> toAdd = new List<IEntity>();
         private readonly List<IEntity> toRemove = new List<IEntity>();
-        private readonly List<IWorldSystemEx> systems = new List<IWorldSystemEx>();
+        private readonly List<IWorldSystem> systems = new List<IWorldSystem>();
 
         private float timeMultiplier = 1.0f;
 
@@ -43,7 +43,7 @@ namespace OpenBreed.Core
         {
             Core = core;
             Entities = new ReadOnlyCollection<IEntity>(entities);
-            Systems = new ReadOnlyCollection<IWorldSystemEx>(systems);
+            Systems = new ReadOnlyCollection<IWorldSystem>(systems);
         }
 
         #endregion Public Constructors
@@ -69,7 +69,7 @@ namespace OpenBreed.Core
         public ICore Core { get; }
 
         public ReadOnlyCollection<IEntity> Entities { get; }
-        public ReadOnlyCollection<IWorldSystemEx> Systems { get; }
+        public ReadOnlyCollection<IWorldSystem> Systems { get; }
 
         #endregion Public Properties
 
@@ -117,7 +117,6 @@ namespace OpenBreed.Core
         {
             Cleanup();
 
-            systems.OfType<IUpdatableSystemEx>().ForEach(item => item.Update(dt * TimeMultiplier));
             systems.OfType<IUpdatableSystem>().ForEach(item => item.Update(dt * TimeMultiplier));
         }
 
@@ -132,18 +131,10 @@ namespace OpenBreed.Core
             entities.Add(entity);
 
             AddToSystems(entity);
-
-            //Add all entity components to world systems
-            for (int i = 0; i < entity.Components.Count; i++)
-                AddComponent(entity.Components[i]);
         }
 
         internal void UnregisterEntity(Entity entity)
         {
-            //Remove all entity components from world systems
-            for (int i = 0; i < entity.Components.Count; i++)
-                RemoveComponent(entity.Components[i]);
-
             //Deinitialize the entity and remove it from entities list
             entity.Deinitialize();
             entities.Remove(entity);
@@ -153,12 +144,12 @@ namespace OpenBreed.Core
 
         #region Protected Methods
 
-        protected virtual void AddSystem(IWorldSystemEx system)
+        protected virtual void AddSystem(IWorldSystem system)
         {
             systems.Add(system);
         }
 
-        protected virtual void RemoveSystem(IWorldSystemEx system)
+        protected virtual void RemoveSystem(IWorldSystem system)
         {
             systems.Add(system);
         }
@@ -206,35 +197,6 @@ namespace OpenBreed.Core
         {
             for (int i = 0; i < systems.Count; i++)
                 systems[i].Deinitialize(this);
-        }
-
-        private void AddComponent(IEntityComponent component)
-        {
-            if (component.SystemType == null)
-                return;
-
-            var foundSystem = systems.FirstOrDefault(item => item.GetType() == component.SystemType);
-
-            if (foundSystem == null)
-                throw new InvalidOperationException($"System {component.SystemType} not registered.");
-
-            //TODO: Remove this when ready
-            var oldSys = foundSystem as IWorldSystem;
-            if(oldSys != null)
-                oldSys.AddComponent(component);
-        }
-
-        private void RemoveComponent(IEntityComponent component)
-        {
-            var foundSystem = systems.FirstOrDefault(item => item.GetType() == component.SystemType);
-
-            if (foundSystem == null)
-                throw new InvalidOperationException($"System {component.SystemType} not registered.");
-
-            //TODO: Remove this when ready
-            var oldSys = foundSystem as IWorldSystem;
-            if (oldSys != null)
-                oldSys.RemoveComponent(component);
         }
 
         #endregion Private Methods

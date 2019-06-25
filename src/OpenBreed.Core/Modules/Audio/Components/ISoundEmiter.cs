@@ -1,9 +1,11 @@
-﻿namespace OpenBreed.Core.Modules.Audio.Components
+﻿using OpenBreed.Core.Systems.Common.Components;
+
+namespace OpenBreed.Core.Modules.Audio.Components
 {
     /// <summary>
     /// Sound emiter component interface
     /// </summary>
-    public interface ISoundEmiter : IAudioComponent
+    public interface ISoundEmiter : IEntityComponent
     {
         #region Public Methods
 

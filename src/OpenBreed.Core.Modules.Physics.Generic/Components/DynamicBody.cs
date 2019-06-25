@@ -65,8 +65,6 @@ namespace OpenBreed.Core.Modules.Physics.Components
             }
         }
 
-        public Type SystemType { get { return typeof(PhysicsSystem); } }
-
         #endregion Public Properties
 
         #region Public Methods

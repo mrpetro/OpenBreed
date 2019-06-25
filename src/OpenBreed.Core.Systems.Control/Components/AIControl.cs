@@ -33,34 +33,7 @@ namespace OpenBreed.Core.Systems.Control.Components
         #region Public Properties
 
         public List<Vector2> Waypoints { get; }
-        public Type SystemType { get { return null; } }
 
         #endregion Public Properties
-
-        #region Public Methods
-
-        public void Deinitialize(IEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Initialize(IEntity entity)
-        {
-            position = entity.Components.OfType<IPosition>().First();
-        }
-
-        #endregion Public Methods
-
-        #region Private Methods
-
-        private Vector2 Snap(Vector2 position, float gridSize)
-        {
-            position = Vector2.Divide(position, gridSize);
-            position.X = (int)position.X * gridSize + gridSize / 2.0f;
-            position.Y = (int)position.Y * gridSize + gridSize / 2.0f;
-            return position;
-        }
-
-        #endregion Private Methods
     }
 }

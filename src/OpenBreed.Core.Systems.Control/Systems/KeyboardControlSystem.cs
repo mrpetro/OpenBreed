@@ -13,7 +13,7 @@ namespace OpenBreed.Core.Systems.Control.Systems
     /// <summary>
     /// Control system should be used to control actions
     /// </summary>
-    public class KeyboardControlSystem : WorldSystemEx, IUpdatableSystemEx
+    public class KeyboardControlSystem : WorldSystem, IUpdatableSystem
     {
         #region Private Fields
 

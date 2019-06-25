@@ -61,7 +61,7 @@ namespace OpenBreed.Core.Modules.Rendering
         /// Create system for handling sprites
         /// </summary>
         /// <returns>Sprite system</returns>
-        public IWorldSystemEx CreateSpriteSystem()
+        public IWorldSystem CreateSpriteSystem()
         {
             return new SpriteSystem(Core);
         }
@@ -70,7 +70,7 @@ namespace OpenBreed.Core.Modules.Rendering
         /// Create system for handling texts
         /// </summary>
         /// <returns>Text system</returns>
-        public IWorldSystemEx CreateTextSystem()
+        public IWorldSystem CreateTextSystem()
         {
             return new TextSystem(Core);
         }
@@ -79,7 +79,7 @@ namespace OpenBreed.Core.Modules.Rendering
         /// Create system for handling tiles
         /// </summary>
         /// <returns>Tile system</returns>
-        public IWorldSystemEx CreateTileSystem(int gridWidth, int gridHeight, float tileSize)
+        public IWorldSystem CreateTileSystem(int gridWidth, int gridHeight, float tileSize)
         {
             return new TileSystem(Core, gridWidth, gridHeight, tileSize);
         }

@@ -35,7 +35,6 @@ namespace OpenBreed.Core.Systems.Control.Components
         public Key MoveDownKey { get; set; }
         public Key MoveLeftKey { get; set; }
         public Key MoveRightKey { get; set; }
-        public Type SystemType { get { return null; } }
 
         #endregion Public Properties
 

@@ -29,8 +29,6 @@ namespace OpenBreed.Core.Modules.Physics.Components
 
         public Box2 Aabb { get; private set; }
 
-        public Type SystemType { get { return typeof(PhysicsSystem); } }
-
         #endregion Public Properties
 
         #region Public Methods

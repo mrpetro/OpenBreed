@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public interface ITileSystem : IWorldSystemEx
+    public interface ITileSystem : IWorldSystem
     {
     }
 }

@@ -49,20 +49,6 @@ namespace OpenBreed.Core.Systems.Common.Components
 
         public Matrix4 Matrix { get { return Value; } set { Value = value; } }
 
-        public Type SystemType { get { return null; } }
-
         #endregion Public Properties
-
-        #region Public Methods
-
-        public void Deinitialize(IEntity entity)
-        {
-        }
-
-        public void Initialize(IEntity entity)
-        {
-        }
-
-        #endregion Public Methods
     }
 }

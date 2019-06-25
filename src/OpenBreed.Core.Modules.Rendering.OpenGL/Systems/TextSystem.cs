@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TextSystem : WorldSystemEx, IRenderableSystem
+    public class TextSystem : WorldSystem, IRenderableSystem
     {
         #region Private Fields
 

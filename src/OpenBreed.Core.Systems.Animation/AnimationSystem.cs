@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace OpenBreed.Core.Systems.Animation
 {
-    public class AnimationSystem : WorldSystemEx, IUpdatableSystemEx
+    public class AnimationSystem : WorldSystem, IAnimationSystem
     {
         #region Private Fields
 

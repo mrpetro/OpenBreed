@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class SpriteSystem : WorldSystemEx, IRenderableSystem
+    public class SpriteSystem : WorldSystem, IRenderableSystem
     {
         #region Private Fields
 
