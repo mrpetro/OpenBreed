@@ -80,9 +80,9 @@ namespace OpenBreed.Game.States
 
         public ICore Core { get; }
 
-        public Camera Camera1 { get; private set; }
+        public CameraEntity Camera1 { get; private set; }
 
-        public Camera Camera2 { get; private set; }
+        public CameraEntity Camera2 { get; private set; }
 
         public override string Id { get { return ID; } }
 
@@ -137,7 +137,7 @@ namespace OpenBreed.Game.States
                     var delta4 = Vector4.Transform(transf, new Vector4(Core.Inputs.CursorDelta));
                     var delta2 = new Vector2(-delta4.X, -delta4.Y);
 
-                    hoverViewport.Camera.Position += delta2;
+                    hoverViewport.Camera.Position.Value += delta2;
                 }
             }
         }
@@ -201,14 +201,15 @@ namespace OpenBreed.Game.States
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
-            Camera1 = (Camera)cameraBuilder.Build();
+
+            Camera1 = (CameraEntity)cameraBuilder.Build();
 
             World.AddEntity(Camera1);
 
             cameraBuilder.SetPosition(new Vector2(64, 288));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
-            Camera2 = (Camera)cameraBuilder.Build();
+            Camera2 = (CameraEntity)cameraBuilder.Build();
             World.AddEntity(Camera2);
 
             viewportA = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
@@ -232,7 +233,7 @@ namespace OpenBreed.Game.States
             actor.Add(animator);
             //actor.Add(new CollisionDebug(Core.Rendering.CreateSprite(spriteAtlas.Id)));
             actor.Add(Core.Rendering.CreateSprite(spriteAtlas.Id));
-            actor.Add(Position.Create(64, 288));
+            actor.Add(new Position(64, 288));
             actor.Add(Thrust.Create(0, 0));
             actor.Add(Velocity.Create(0, 0));
             actor.Add(Direction.Create(1, 0));

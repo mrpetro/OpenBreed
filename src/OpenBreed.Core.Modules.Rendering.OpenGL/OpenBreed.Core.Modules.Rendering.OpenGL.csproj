@@ -46,11 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Camera.cs" />
     <Compile Include="Components\Sprite.cs" />
     <Compile Include="Components\Text.cs" />
     <Compile Include="Components\Tile.cs" />
     <Compile Include="Entities\Builders\CameraBuilder.cs" />
-    <Compile Include="Entities\Camera.cs" />
+    <Compile Include="Entities\CameraEntity.cs" />
     <Compile Include="Helpers\FontAtlas.cs" />
     <Compile Include="Helpers\FontMan.cs" />
     <Compile Include="Helpers\RenderTools.cs" />

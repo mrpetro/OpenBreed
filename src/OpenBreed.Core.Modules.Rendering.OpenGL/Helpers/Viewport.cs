@@ -68,12 +68,14 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         /// <summary>
         /// Camera that is attached to this viewport
         /// </summary>
-        public Camera Camera { get; set; }
+        public CameraEntity Camera { get; set; }
 
-        /// <summary>
-        /// Height of this viewport
-        /// </summary>
-        public float Height { get; set; }
+        public ICamera CameraEx { get; set; }
+
+    /// <summary>
+    /// Height of this viewport
+    /// </summary>
+    public float Height { get; set; }
 
         /// <summary>
         /// Left edge screen coordinate of this viewport

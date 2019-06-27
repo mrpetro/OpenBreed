@@ -10,7 +10,10 @@ namespace OpenBreed.Core.Entities
     /// </summary>
     public class Entity : IEntity
     {
+
         #region Private Fields
+
+        private EntityMan manager;
 
         private List<IEntityComponent> components = new List<IEntityComponent>();
 
@@ -18,9 +21,9 @@ namespace OpenBreed.Core.Entities
 
         #region Public Constructors
 
-        public Entity(ICore core)
+        public Entity(EntityMan manager)
         {
-            Core = core ?? throw new ArgumentNullException(nameof(core));
+            this.manager = manager ?? throw new ArgumentNullException(nameof(manager));
 
             PerformDelegate = PerformDefault;
 
@@ -36,20 +39,23 @@ namespace OpenBreed.Core.Entities
         #region Public Properties
 
         public ReadOnlyCollection<IEntityComponent> Components { get; }
-        public ICore Core { get; }
-        public World CurrentWorld { get; private set; }
-        public Guid Guid { get; }
 
-        private void PerformDefault(string actionName, params object[] arguments)
-        {
-            //DO NOTHING HERE
-        }
+        public ICore Core { get { return manager.Core; } }
+
+        public World CurrentWorld { get; private set; }
+
+        public Guid Guid { get; }
 
         public EntityPerform PerformDelegate { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
+
+        public void PostMessage(IEntityMsg message)
+        {
+            manager.PostMsg(this, message);
+        }
 
         public void Add(IEntityComponent component)
         {
@@ -96,5 +102,15 @@ namespace OpenBreed.Core.Entities
         }
 
         #endregion Internal Methods
+
+        #region Private Methods
+
+        private void PerformDefault(string actionName, params object[] arguments)
+        {
+            //DO NOTHING HERE
+        }
+
+        #endregion Private Methods
+
     }
 }

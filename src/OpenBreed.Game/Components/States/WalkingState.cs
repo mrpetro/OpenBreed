@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems.Animation.Components;
+using OpenBreed.Core.Systems.Animation.Messages;
 using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Systems.Movement.Components;
 using OpenTK;
@@ -14,6 +15,7 @@ namespace OpenBreed.Game.Components.States
 {
     public class WalkingState : IState
     {
+        private IEntity entity;
         private IThrust thrust;
         private Motion creatureMovement;
         private Animator<int> spriteAnimation;
@@ -32,11 +34,13 @@ namespace OpenBreed.Game.Components.States
         public void EnterState()
         {
             thrust.Value = walkDirection * creatureMovement.Speed;
-            spriteAnimation.Play(animationId);
+
+            entity.PostMessage(new PlayAnimMsg(animationId));
         }
 
         public void Initialize(IEntity entity)
         {
+            this.entity = entity;
             thrust = entity.Components.OfType<IThrust>().First();
             direction = entity.Components.OfType<IDirection>().First();
             creatureMovement = entity.Components.OfType<Motion>().First();

@@ -1,6 +1,4 @@
-﻿using OpenBreed.Core.Entities;
-using OpenTK;
-using System;
+﻿using OpenTK;
 
 namespace OpenBreed.Core.Systems.Common.Components
 {
@@ -8,15 +6,15 @@ namespace OpenBreed.Core.Systems.Common.Components
     /// Position entity component class that can be used to store entity current position information
     /// Example: Actor is standing somewhere in the world at current position
     /// </summary>
-    public struct Position : IPosition
+    public class Position : IPosition
     {
-        #region Private Constructors
+        #region Public Constructors
 
         /// <summary>
         /// Constructor with passed initial position value
         /// </summary>
         /// <param name="value">Initial value vector</param>
-        private Position(Vector2 value)
+        public Position(Vector2 value)
         {
             Value = value;
         }
@@ -26,12 +24,12 @@ namespace OpenBreed.Core.Systems.Common.Components
         /// </summary>
         /// <param name="x">Initial x value</param>
         /// <param name="y">Initial y value</param>
-        private Position(float x, float y)
+        public Position(float x, float y)
         {
             Value = new Vector2(x, y);
         }
 
-        #endregion Private Constructors
+        #endregion Public Constructors
 
         #region Public Properties
 
@@ -41,19 +39,5 @@ namespace OpenBreed.Core.Systems.Common.Components
         public Vector2 Value { get; set; }
 
         #endregion Public Properties
-
-        #region Public Methods
-
-        public static IPosition Create(Vector2 value)
-        {
-            return new Position(value);
-        }
-
-        public static IPosition Create(float x, float y)
-        {
-            return new Position(x, y);
-        }
-
-        #endregion Public Methods
     }
 }

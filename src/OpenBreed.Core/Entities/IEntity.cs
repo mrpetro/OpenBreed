@@ -16,6 +16,11 @@ namespace OpenBreed.Core.Entities
         EntityPerform PerformDelegate { get; set; }
 
         /// <summary>
+        /// Core reference
+        /// </summary>
+        ICore Core { get; }
+
+        /// <summary>
         /// World that this entity is currently in
         /// </summary>
         World CurrentWorld { get; }
@@ -33,6 +38,12 @@ namespace OpenBreed.Core.Entities
         #endregion Public Properties
 
         #region Public Methods
+
+        /// <summary>
+        /// Post message of specific type
+        /// </summary>
+        /// <param name="message"></param>
+        void PostMessage(IEntityMsg message);
 
         /// <summary>
         /// Add component to entity

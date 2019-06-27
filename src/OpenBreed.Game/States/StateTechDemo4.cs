@@ -72,8 +72,8 @@ namespace OpenBreed.Game.States
 
         public ICore Core { get; }
 
-        public Camera gameCamera { get; private set; }
-        public Camera hudCamera { get; private set; }
+        public CameraEntity gameCamera { get; private set; }
+        public CameraEntity hudCamera { get; private set; }
 
         public override string Id { get { return ID; } }
 
@@ -119,7 +119,7 @@ namespace OpenBreed.Game.States
                     var delta4 = Vector4.Transform(transf, new Vector4(Core.Inputs.CursorDelta));
                     var delta2 = new Vector2(-delta4.X, -delta4.Y);
  
-                    hoverViewport.Camera.Position += delta2;
+                    hoverViewport.Camera.Position.Value += delta2;
                 }
              }
         }
@@ -175,7 +175,7 @@ namespace OpenBreed.Game.States
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
-            hudCamera = (Camera)cameraBuilder.Build();
+            hudCamera = (CameraEntity)cameraBuilder.Build();
             hudWorld.AddEntity(hudCamera);
 
 
@@ -185,7 +185,7 @@ namespace OpenBreed.Game.States
             var fontAtlas = Core.Rendering.Fonts.Create("ALGERIAN", 50);
 
             var textEntity = Core.Entities.Create();
-            textEntity.Add(Position.Create(40, 50));
+            textEntity.Add(new Position(40, 50));
             textEntity.Add(Core.Rendering.CreateText(fontAtlas.Id, "Alice has a cat!"));
 
             hudWorld.AddEntity(textEntity);
@@ -209,7 +209,7 @@ namespace OpenBreed.Game.States
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
-            gameCamera = (Camera)cameraBuilder.Build();
+            gameCamera = (CameraEntity)cameraBuilder.Build();
             gameWorld.AddEntity(gameCamera);
 
 
@@ -225,7 +225,7 @@ namespace OpenBreed.Game.States
             var actor = Core.Entities.Create();
             actor.Add(animator);
             actor.Add(sprite);
-            actor.Add(Position.Create(64, 288));
+            actor.Add(new Position(64, 288));
             actor.Add(Thrust.Create(0, 0));
             actor.Add(Velocity.Create(0, 0));
             actor.Add(Direction.Create(1, 0));

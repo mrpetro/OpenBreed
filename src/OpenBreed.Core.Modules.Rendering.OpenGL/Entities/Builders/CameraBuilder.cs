@@ -26,7 +26,7 @@ namespace OpenBreed.Core.Modules.Rendering.Entities.Builders
 
         public override IEntity Build()
         {
-            return new Camera(this);
+            return new CameraEntity(this);
         }
 
         public void SetPosition(Vector2 position)

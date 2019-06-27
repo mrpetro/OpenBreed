@@ -5,6 +5,7 @@ using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenBreed.Core.Modules.Rendering.Systems;
+using OpenBreed.Core.Modules.Rendering.Components;
 
 namespace OpenBreed.Core.Modules.Rendering.Entities
 {
@@ -12,28 +13,25 @@ namespace OpenBreed.Core.Modules.Rendering.Entities
     /// This class is an camera entity that is part of the world
     ///
     /// </summary>
-    public class Camera : Entity
+    public class CameraEntity : Entity
     {
         #region Public Constructors
 
-        public Camera(CameraBuilder builder) : base(builder.Core)
+        public CameraEntity(CameraBuilder builder) : base(builder.Core.Entities)
         {
-            Position = builder.position;
+            Position = new Position(builder.position);
             Rotation = builder.rotation;
             Zoom = builder.zoom;
 
-            Transform = new Transformation(builder.position,
-                                               builder.rotation,
-                                               builder.zoom);
-            Add(Transform);
+            Add(Position);
+            Add(new Camera());
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public Transformation Transform { get; }
-        public Vector2 Position { get; set; }
+        public IPosition Position { get; set; }
 
         public float Rotation { get; set; }
 
@@ -46,14 +44,10 @@ namespace OpenBreed.Core.Modules.Rendering.Entities
         public Matrix4 GetTransform()
         {
             var transform = Matrix4.Identity;
-            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-Position.X, -Position.Y, 0));
+            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-Position.Value.X, -Position.Value.Y, 0));
             transform = Matrix4.Mult(transform, Matrix4.CreateRotationZ(-Rotation));
             transform = Matrix4.Mult(transform, Matrix4.CreateScale(Zoom, Zoom, 1.0f));
             return transform;
-        }
-
-        public void Update()
-        {
         }
 
         #endregion Public Methods

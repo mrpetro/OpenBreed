@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="CoreTools.cs" />
+    <Compile Include="Entities\IEntityMsg.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="InputsMan.cs" />
     <Compile Include="Modules\Animation\IAnimationData.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Modules\Physics\Components\IDynamicBody.cs" />
     <Compile Include="Modules\Physics\Components\IPhysicsComponent.cs" />
     <Compile Include="Modules\Physics\Components\IStaticBody.cs" />
+    <Compile Include="Modules\Rendering\Components\ICamera.cs" />
     <Compile Include="Modules\Rendering\Helpers\IFontMan.cs" />
     <Compile Include="Modules\Rendering\Helpers\ISpriteMan.cs" />
     <Compile Include="Modules\Rendering\Systems\CameraSystem.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="Modules\Rendering\Systems\ISpriteSystem.cs" />
     <Compile Include="States\IStateBuilder.cs" />
     <Compile Include="States\IState.cs" />
+    <Compile Include="States\Messenger.cs" />
     <Compile Include="States\StateMachine.cs" />
     <Compile Include="Systems\Common\Components\IDirection.cs" />
     <Compile Include="Systems\Common\Components\IShapeComponent.cs" />

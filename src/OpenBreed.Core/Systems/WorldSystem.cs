@@ -92,6 +92,11 @@ namespace OpenBreed.Core.Systems
             }
         }
 
+        public virtual bool HandleMsg(IEntity sender, IEntityMsg message)
+        {
+            return false;
+        }
+
         #endregion Protected Methods
     }
 }

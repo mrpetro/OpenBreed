@@ -22,7 +22,7 @@ namespace OpenBreed.Game.Worlds
             //Action
             AddSystem(new MovementSystem(core));
             AddSystem(Core.Physics.CreatePhysicsSystem(64, 64));
-            AddSystem(new AnimationSystem(core));
+            AddSystem(new SpriteAnimSystem(core));
 
             //Audio
             AddSystem(Core.Sounds.CreateSoundSystem());
