@@ -59,18 +59,6 @@ namespace OpenBreed.Core
             return Guid.NewGuid();
         }
 
-        internal void PostMsg(Entity sender, IEntityMsg message)
-        {
-            if (sender.CurrentWorld == null)
-                return;
-
-            foreach (var system in sender.CurrentWorld.Systems)
-            {
-                if (system.HandleMsg(sender, message))
-                    break;
-            }
-        }
-
         #endregion Internal Methods
     }
 }

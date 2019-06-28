@@ -89,6 +89,20 @@ namespace OpenBreed.Core
             toAdd.Add(entity);
         }
 
+        public void PostMsg(IEntity sender, IEntityMsg entityMsg)
+        {
+            foreach (var system in Systems)
+            {
+                if (system.HandleMsg(sender, entityMsg))
+                    break;
+            }
+        }
+
+        public void PostEvent(IWorldSystem sender, ISystemEvent systemEvent)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Method will remove given entity from this world.
         /// Entity will not be removed immediately but at the end of each world update.
@@ -151,7 +165,7 @@ namespace OpenBreed.Core
 
         protected virtual void RemoveSystem(IWorldSystem system)
         {
-            systems.Add(system);
+            systems.Remove(system);
         }
 
         protected void Cleanup()
@@ -196,7 +210,7 @@ namespace OpenBreed.Core
         private void DeinitializeSystems()
         {
             for (int i = 0; i < systems.Count; i++)
-                systems[i].Deinitialize(this);
+                systems[i].Deinitialize();
         }
 
         #endregion Private Methods

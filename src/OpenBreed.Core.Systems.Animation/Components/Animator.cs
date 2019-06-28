@@ -21,9 +21,7 @@ namespace OpenBreed.Core.Systems.Animation.Components
         public float Position { get; set; }
         public bool Paused { get; set; }
         public float Speed { get; set; }
-
         public bool Loop { get; set; }
-
         public T Frame { get; set; }
 
         #endregion Public Properties

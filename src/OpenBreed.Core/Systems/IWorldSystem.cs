@@ -11,6 +11,11 @@ namespace OpenBreed.Core.Systems
         #region Public Methods
 
         /// <summary>
+        /// World which owns this system
+        /// </summary>
+        World World { get; }
+
+        /// <summary>
         /// Initialize the system when world is created
         /// </summary>
         /// <param name="world">World that this system is initialized on</param>
@@ -19,8 +24,7 @@ namespace OpenBreed.Core.Systems
         /// <summary>
         /// Deinitialize the system when world is destroyed
         /// </summary>
-        /// <param name="world">World that this system is part of</param>
-        void Deinitialize(World world);
+        void Deinitialize();
 
         bool Matches(IEntity entity);
 
@@ -35,6 +39,12 @@ namespace OpenBreed.Core.Systems
         /// <param name="message">message</param>
         /// <returns>True if message was handled, false otherwise</returns>
         bool HandleMsg(IEntity sender, IEntityMsg message);
+
+        /// <summary>
+        /// Post system event 
+        /// </summary>
+        /// <param name="systemEvent">System event to be posted</param>
+        void PostEvent(ISystemEvent systemEvent);
 
         #endregion Public Methods
     }

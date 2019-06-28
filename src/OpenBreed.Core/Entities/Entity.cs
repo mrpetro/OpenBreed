@@ -54,7 +54,8 @@ namespace OpenBreed.Core.Entities
 
         public void PostMessage(IEntityMsg message)
         {
-            manager.PostMsg(this, message);
+            if(CurrentWorld != null)
+                CurrentWorld.PostMsg(this, message);
         }
 
         public void Add(IEntityComponent component)

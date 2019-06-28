@@ -34,6 +34,11 @@ namespace OpenBreed.Core.Systems
         /// </summary>
         public ICore Core { get; }
 
+        /// <summary>
+        /// World which owns this system
+        /// </summary>
+        public World World { get; private set; }
+
         #endregion Public Properties
 
         #region Public Methods
@@ -44,14 +49,21 @@ namespace OpenBreed.Core.Systems
         /// <param name="world">World that this system is initialized on</param>
         public virtual void Initialize(World world)
         {
+            if (World != null)
+                throw new InvalidOperationException("World sytem already initialized.");
+
+            World = world;
         }
 
         /// <summary>
         /// Deinitialize the system when world is destroyed
         /// </summary>
-        /// <param name="world">World that this system is part of</param>
-        public virtual void Deinitialize(World world)
+        public virtual void Deinitialize()
         {
+            if(World == null)
+                throw new InvalidOperationException("World sytem already deinitialized.");
+
+            World = null;
         }
 
         public bool Matches(IEntity entity)
@@ -95,6 +107,11 @@ namespace OpenBreed.Core.Systems
         public virtual bool HandleMsg(IEntity sender, IEntityMsg message)
         {
             return false;
+        }
+
+        public void PostEvent(ISystemEvent systemEvent)
+        {
+            World.PostEvent(this, systemEvent);
         }
 
         #endregion Protected Methods

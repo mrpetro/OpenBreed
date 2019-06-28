@@ -34,7 +34,7 @@ namespace OpenBreed.Core.Systems.Animation
         public void Update(float dt)
         {
             for (int i = 0; i < entities.Count; i++)
-                AnimateEntity(dt, i);
+                Animate(i, dt);
         }
 
         public override void AddEntity(IEntity entity)
@@ -68,8 +68,10 @@ namespace OpenBreed.Core.Systems.Animation
             animator.Paused = true;
         }
 
-        public void Animate(Animator<int> animator, float dt)
+        public void Animate(int index, float dt)
         {
+            var animator = animatorComps[index];
+
             if (animator.Paused)
                 return;
 
@@ -89,9 +91,14 @@ namespace OpenBreed.Core.Systems.Animation
                 }
             }
 
-            animator.Frame = animator.Data.GetFrame(animator.Position);
-        }
+            var newFrame = animator.Data.GetFrame(animator.Position);
 
+            if (animator.Frame != newFrame)
+            {
+                animator.Frame = newFrame;
+                OnFrameChanged(index, animator.Frame);
+            }
+        }
 
         public override bool HandleMsg(IEntity sender, IEntityMsg message)
         {
@@ -120,10 +127,9 @@ namespace OpenBreed.Core.Systems.Animation
             return true;
         }
 
-        private void AnimateEntity(float dt, int index)
+        private void OnFrameChanged(int index, int frame)
         {
-            Animate(animatorComps[index], dt);
-            spriteComps[index].ImageId = animatorComps[index].Frame;
+            spriteComps[index].ImageId = frame;
         }
 
         #endregion Private Methods
