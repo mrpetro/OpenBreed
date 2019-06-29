@@ -42,7 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SpriteAnimSystem.cs" />
+    <Compile Include="Events\FrameChangedEvent.cs" />
+    <Compile Include="AnimSystem.cs" />
     <Compile Include="AnimMan.cs" />
     <Compile Include="Components\Animator.cs" />
     <Compile Include="Components\AnimationData.cs" />

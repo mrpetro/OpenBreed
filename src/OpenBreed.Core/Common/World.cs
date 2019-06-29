@@ -14,6 +14,9 @@ using OpenBreed.Core.Extensions;
 
 namespace OpenBreed.Core
 {
+    public delegate void SystemEventDelegate(ISystemEvent systemEvent);
+
+
     /// <summary>
     /// World class which contains systems and entities
     /// </summary>
@@ -83,7 +86,7 @@ namespace OpenBreed.Core
         /// <param name="entity">Entity to be added to this world</param>
         public void AddEntity(IEntity entity)
         {
-            if (entity.CurrentWorld != null)
+            if (entity.World != null)
                 throw new InvalidOperationException("Entity can't exist in more than one world.");
 
             toAdd.Add(entity);
@@ -98,10 +101,22 @@ namespace OpenBreed.Core
             }
         }
 
-        public void PostEvent(IWorldSystem sender, ISystemEvent systemEvent)
-        {
-            throw new NotImplementedException();
-        }
+        //public void SubscribeEvent(string eventType, 
+
+        //private readonly Dictionary<string, List<IEntity>> eventListeners = new Dictionary<string, List<IEntity>>();
+
+        //public void PostEvent(IWorldSystem sender, ISystemEvent systemEvent)
+        //{
+        //    foreach (var item in eventListeners)
+        //    {
+        //        List<IEntity> listeners = null;
+        //        if (!eventListeners.TryGetValue(systemEvent.Type, out listeners))
+        //            return;
+
+        //        foreach (var listener in listeners)
+        //            listener.
+        //    }
+        //}
 
         /// <summary>
         /// Method will remove given entity from this world.
@@ -111,7 +126,7 @@ namespace OpenBreed.Core
         /// <param name="entity">Entity to be removed from this world</param>
         public void RemoveEntity(IEntity entity)
         {
-            if (entity.CurrentWorld != this)
+            if (entity.World != this)
                 throw new InvalidOperationException("Entity doesn't exist in this world");
 
             toRemove.Add(entity);

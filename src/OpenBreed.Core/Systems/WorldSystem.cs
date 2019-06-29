@@ -109,10 +109,10 @@ namespace OpenBreed.Core.Systems
             return false;
         }
 
-        public void PostEvent(ISystemEvent systemEvent)
-        {
-            World.PostEvent(this, systemEvent);
-        }
+        //public void PostEvent(ISystemEvent systemEvent)
+        //{
+        //    World.PostEvent(this, systemEvent);
+        //}
 
         #endregion Protected Methods
     }

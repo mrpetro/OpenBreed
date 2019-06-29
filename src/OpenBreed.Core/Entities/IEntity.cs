@@ -1,10 +1,13 @@
-﻿using OpenBreed.Core.Systems.Common.Components;
+﻿using OpenBreed.Core.Systems;
+using OpenBreed.Core.Systems.Common.Components;
 using System;
 using System.Collections.ObjectModel;
 
 namespace OpenBreed.Core.Entities
 {
     public delegate void EntityPerform(string actionName, params object[] arguments);
+
+    public delegate void SystemEventDelegate(IWorldSystem system, ISystemEvent systemEvent);
 
     /// <summary>
     /// Entity interface
@@ -16,6 +19,11 @@ namespace OpenBreed.Core.Entities
         EntityPerform PerformDelegate { get; set; }
 
         /// <summary>
+        /// System event handle delegate
+        /// </summary>
+        SystemEventDelegate HandleSystemEvent { get; set; }
+
+        /// <summary>
         /// Core reference
         /// </summary>
         ICore Core { get; }
@@ -23,7 +31,7 @@ namespace OpenBreed.Core.Entities
         /// <summary>
         /// World that this entity is currently in
         /// </summary>
-        World CurrentWorld { get; }
+        World World { get; }
 
         /// <summary>
         /// Read-olny list of components for this entity

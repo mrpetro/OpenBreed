@@ -10,7 +10,6 @@ namespace OpenBreed.Core.Entities
     /// </summary>
     public class Entity : IEntity
     {
-
         #region Private Fields
 
         private EntityMan manager;
@@ -42,11 +41,13 @@ namespace OpenBreed.Core.Entities
 
         public ICore Core { get { return manager.Core; } }
 
-        public World CurrentWorld { get; private set; }
+        public World World { get; private set; }
 
         public Guid Guid { get; }
 
         public EntityPerform PerformDelegate { get; set; }
+
+        public SystemEventDelegate HandleSystemEvent { get; set; }
 
         #endregion Public Properties
 
@@ -54,8 +55,8 @@ namespace OpenBreed.Core.Entities
 
         public void PostMessage(IEntityMsg message)
         {
-            if(CurrentWorld != null)
-                CurrentWorld.PostMsg(this, message);
+            if (World != null)
+                World.PostMsg(this, message);
         }
 
         public void Add(IEntityComponent component)
@@ -70,7 +71,7 @@ namespace OpenBreed.Core.Entities
 
         public virtual void LeaveWorld()
         {
-            CurrentWorld.RemoveEntity(this);
+            World.RemoveEntity(this);
         }
 
         public bool Remove(IEntityComponent component)
@@ -89,13 +90,13 @@ namespace OpenBreed.Core.Entities
             //    Components[i].Deinitialize(this);
 
             //Forget the world in which entity was
-            CurrentWorld = null;
+            World = null;
         }
 
         internal void Initialize(World world)
         {
             //Remember in what world entity is
-            CurrentWorld = world;
+            World = world;
 
             //Initialize all entity components
             //for (int i = 0; i < Components.Count; i++)
@@ -112,6 +113,5 @@ namespace OpenBreed.Core.Entities
         }
 
         #endregion Private Methods
-
     }
 }

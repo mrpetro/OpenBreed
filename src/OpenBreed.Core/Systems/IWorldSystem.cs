@@ -40,11 +40,11 @@ namespace OpenBreed.Core.Systems
         /// <returns>True if message was handled, false otherwise</returns>
         bool HandleMsg(IEntity sender, IEntityMsg message);
 
-        /// <summary>
-        /// Post system event 
-        /// </summary>
-        /// <param name="systemEvent">System event to be posted</param>
-        void PostEvent(ISystemEvent systemEvent);
+        ///// <summary>
+        ///// Post system event 
+        ///// </summary>
+        ///// <param name="systemEvent">System event to be posted</param>
+        //void PostEvent(ISystemEvent systemEvent);
 
         #endregion Public Methods
     }

@@ -1,27 +1,34 @@
 ﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.States;
+using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Animation.Components;
+using OpenBreed.Core.Systems.Animation.Events;
 using OpenBreed.Core.Systems.Animation.Messages;
 using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Systems.Movement.Components;
 using OpenTK;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Game.Components.States
 {
     public class WalkingState : IState
     {
+        #region Private Fields
+
+        private readonly string animationId;
+        private readonly Vector2 walkDirection;
         private IEntity entity;
         private IThrust thrust;
         private Motion creatureMovement;
         private Animator<int> spriteAnimation;
+        private ISprite sprite;
         private IDirection direction;
-        private readonly string animationId;
-        private readonly Vector2 walkDirection;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
         public WalkingState(string id, string animationId, Vector2 walkDirection)
         {
             Id = id;
@@ -29,7 +36,15 @@ namespace OpenBreed.Game.Components.States
             this.walkDirection = walkDirection;
         }
 
+        #endregion Public Constructors
+
+        #region Public Properties
+
         public string Id { get; }
+
+        #endregion Public Properties
+
+        #region Public Methods
 
         public void EnterState()
         {
@@ -44,7 +59,10 @@ namespace OpenBreed.Game.Components.States
             thrust = entity.Components.OfType<IThrust>().First();
             direction = entity.Components.OfType<IDirection>().First();
             creatureMovement = entity.Components.OfType<Motion>().First();
+            sprite = entity.Components.OfType<ISprite>().First();
             spriteAnimation = entity.Components.OfType<Animator<int>>().First();
+
+            entity.HandleSystemEvent = HandleSystemEvent;
         }
 
         public void LeaveState()
@@ -103,5 +121,29 @@ namespace OpenBreed.Game.Components.States
 
             return null;
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void HandleSystemEvent(IWorldSystem system, ISystemEvent systemEvent)
+        {
+            switch (systemEvent.Type)
+            {
+                case FrameChangedEvent<int>.TYPE:
+                    HandleFrameChangeEvent(system, (FrameChangedEvent<int>)systemEvent);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void HandleFrameChangeEvent(IWorldSystem system, FrameChangedEvent<int> systemEvent)
+        {
+            sprite.ImageId = systemEvent.Frame;
+        }
+
+        #endregion Private Methods
     }
 }

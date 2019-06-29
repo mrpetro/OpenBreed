@@ -2,28 +2,27 @@
 using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Systems.Animation.Components;
+using OpenBreed.Core.Systems.Animation.Events;
 using OpenBreed.Core.Systems.Animation.Messages;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Core.Systems.Animation
 {
-    public class SpriteAnimSystem : WorldSystem, IAnimationSystem
+    public class AnimSystem<T> : WorldSystem, IAnimationSystem
     {
 
         #region Private Fields
 
         private readonly List<IEntity> entities = new List<IEntity>();
-        private readonly List<Animator<int>> animatorComps = new List<Animator<int>>();
-        private readonly List<ISprite> spriteComps = new List<ISprite>();
+        private readonly List<Animator<T>> animatorComps = new List<Animator<T>>();
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public SpriteAnimSystem(ICore core) : base(core)
+        public AnimSystem(ICore core) : base(core)
         {
-            Require<ISprite>();
             Require<Animator<int>>();
         }
 
@@ -40,8 +39,7 @@ namespace OpenBreed.Core.Systems.Animation
         public override void AddEntity(IEntity entity)
         {
             entities.Add(entity);
-            animatorComps.Add(entity.Components.OfType<Animator<int>>().First());
-            spriteComps.Add(entity.Components.OfType<ISprite>().First());
+            animatorComps.Add(entity.Components.OfType<Animator<T>>().First());
         }
 
         public override void RemoveEntity(IEntity entity)
@@ -49,7 +47,7 @@ namespace OpenBreed.Core.Systems.Animation
             entities.Remove(entity);
         }
 
-        public void Play(Animator<int> animator, IAnimationData<int> data = null, float startPosition = 0.0f)
+        public void Play(Animator<T> animator, IAnimationData<T> data = null, float startPosition = 0.0f)
         {
             animator.Data = data;
 
@@ -57,12 +55,12 @@ namespace OpenBreed.Core.Systems.Animation
             animator.Paused = false;
         }
 
-        public void Pause(Animator<int> animator)
+        public void Pause(Animator<T> animator)
         {
             animator.Paused = true;
         }
 
-        public void Stop(Animator<int> animator)
+        public void Stop(Animator<T> animator)
         {
             animator.Position = 0.0f;
             animator.Paused = true;
@@ -93,10 +91,10 @@ namespace OpenBreed.Core.Systems.Animation
 
             var newFrame = animator.Data.GetFrame(animator.Position);
 
-            if (animator.Frame != newFrame)
+            if (!animator.Frame.Equals(newFrame))
             {
                 animator.Frame = newFrame;
-                OnFrameChanged(index, animator.Frame);
+                entities[index].HandleSystemEvent?.Invoke(this, new FrameChangedEvent<T>(animator.Frame));
             }
         }
 
@@ -122,14 +120,9 @@ namespace OpenBreed.Core.Systems.Animation
             if (index < 0)
                 return false;
 
-            Play(animatorComps[index], (IAnimationData<int>)Core.Animations.GetByName(message.Id));
+            Play(animatorComps[index], (IAnimationData<T>)Core.Animations.GetByName(message.Id));
 
             return true;
-        }
-
-        private void OnFrameChanged(int index, int frame)
-        {
-            spriteComps[index].ImageId = frame;
         }
 
         #endregion Private Methods

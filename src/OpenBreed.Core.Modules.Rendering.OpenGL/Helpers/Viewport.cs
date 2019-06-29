@@ -201,7 +201,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             var transform = Camera.GetTransform();
             GL.MultMatrix(ref transform);
 
-            Camera.CurrentWorld.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(this, dt));
+            Camera.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(this, dt));
 
             GL.PopMatrix();
         }
