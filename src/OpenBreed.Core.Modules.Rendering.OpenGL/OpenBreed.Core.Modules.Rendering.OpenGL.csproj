@@ -63,6 +63,7 @@
     <Compile Include="Helpers\Vertex.cs" />
     <Compile Include="Helpers\Viewport.cs" />
     <Compile Include="Helpers\ViewportMan.cs" />
+    <Compile Include="Messages\SetTextMsg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OpenGLModule.cs" />
     <Compile Include="Helpers\TextureMan.cs" />

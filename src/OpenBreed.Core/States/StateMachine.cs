@@ -8,10 +8,9 @@ namespace OpenBreed.Core.States
     {
         #region Private Fields
 
-        private IEntity entity;
+        public IEntity Entity { get; }
         private Dictionary<string, IState> states = new Dictionary<string, IState>();
         private IState currentState = null;
-        private string initialStateId;
 
         #endregion Private Fields
 
@@ -19,9 +18,8 @@ namespace OpenBreed.Core.States
 
         public StateMachine(IEntity entity)
         {
-            this.entity = entity;
-
-            entity.PerformDelegate = Perform;
+            Entity = entity;
+            Entity.PerformDelegate = Perform;
         }
 
         #endregion Public Constructors
@@ -39,16 +37,19 @@ namespace OpenBreed.Core.States
             states.Add(state.Id, state);
         }
 
-        public void Initialize()
+        /// <summary>
+        /// Initialize state machine with particular state
+        /// </summary>
+        /// <param name="initialStateId">Initial state id</param>
+        public void Initialize(string initialStateId)
         {
             foreach (var state in states)
-                state.Value.Initialize(entity);
+                state.Value.Initialize(Entity);
 
             if (currentState != null)
                 throw new InvalidOperationException($"Initial state already set to '{currentState.Id}'");
 
             currentState = states[initialStateId];
-            //Console.WriteLine($"Entering state '{currentState.Id}'");
             currentState.EnterState();
         }
 
@@ -61,11 +62,6 @@ namespace OpenBreed.Core.States
 
             if (nextStateName != currentState.Id)
                 ChangeState(nextStateName);
-        }
-
-        public void SetInitialState(string stateId, params object[] arguments)
-        {
-            initialStateId = stateId;
         }
 
         #endregion Public Methods

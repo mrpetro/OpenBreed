@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Components\AiControl.cs" />
     <Compile Include="Components\KeyboardControl.cs" />
+    <Compile Include="Events\ControlDirectionChangedEvent.cs" />
     <Compile Include="Systems\AiControlSystem.cs" />
     <Compile Include="Systems\KeyboardControlSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

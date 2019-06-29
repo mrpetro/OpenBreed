@@ -55,6 +55,7 @@
     <Compile Include="Components\States\StandingState.cs" />
     <Compile Include="Entities\ActorHelper.cs" />
     <Compile Include="Entities\Builders\WorldBlockBuilder.cs" />
+    <Compile Include="Helpers\TextHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="States\StateTechDemo4.cs" />

@@ -1,11 +1,13 @@
 ﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Animation.Components;
 using OpenBreed.Core.Systems.Animation.Events;
 using OpenBreed.Core.Systems.Animation.Messages;
 using OpenBreed.Core.Systems.Common.Components;
+using OpenBreed.Core.Systems.Control.Events;
 using OpenBreed.Core.Systems.Movement.Components;
 using OpenTK;
 using System.Linq;
@@ -18,7 +20,6 @@ namespace OpenBreed.Game.Components.States
 
         private readonly string animationId;
         private readonly Vector2 walkDirection;
-        private IEntity entity;
         private IThrust thrust;
         private Motion creatureMovement;
         private Animator<int> spriteAnimation;
@@ -40,6 +41,7 @@ namespace OpenBreed.Game.Components.States
 
         #region Public Properties
 
+        public IEntity Entity { get; private set; }
         public string Id { get; }
 
         #endregion Public Properties
@@ -50,12 +52,13 @@ namespace OpenBreed.Game.Components.States
         {
             thrust.Value = walkDirection * creatureMovement.Speed;
 
-            entity.PostMessage(new PlayAnimMsg(animationId));
+            Entity.PostMessage(new PlayAnimMsg(animationId));
+            Entity.PostMessage(new SetTextMsg("Hero - Walking"));
         }
 
         public void Initialize(IEntity entity)
         {
-            this.entity = entity;
+            Entity = entity;
             thrust = entity.Components.OfType<IThrust>().First();
             direction = entity.Components.OfType<IDirection>().First();
             creatureMovement = entity.Components.OfType<Motion>().First();
@@ -133,7 +136,9 @@ namespace OpenBreed.Game.Components.States
                 case FrameChangedEvent<int>.TYPE:
                     HandleFrameChangeEvent(system, (FrameChangedEvent<int>)systemEvent);
                     break;
-
+                case ControlDirectionChangedEvent.TYPE:
+                    HandleControlDirectionChangedEvent(system, (ControlDirectionChangedEvent)systemEvent);
+                    break;
                 default:
                     break;
             }
@@ -142,6 +147,14 @@ namespace OpenBreed.Game.Components.States
         private void HandleFrameChangeEvent(IWorldSystem system, FrameChangedEvent<int> systemEvent)
         {
             sprite.ImageId = systemEvent.Frame;
+        }
+
+        private void HandleControlDirectionChangedEvent(IWorldSystem system, ControlDirectionChangedEvent systemEvent)
+        {
+            if (systemEvent.Direction != Vector2.Zero)
+                Entity.PostMessage(new StateChangeMsg("Walk", systemEvent.Direction));
+            else
+                Entity.PostMessage(new StateChangeMsg("Stop"));
         }
 
         #endregion Private Methods

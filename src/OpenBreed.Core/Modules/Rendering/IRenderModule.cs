@@ -2,6 +2,7 @@
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems;
+using OpenTK;
 using System.Drawing;
 
 namespace OpenBreed.Core.Modules.Rendering
@@ -44,9 +45,10 @@ namespace OpenBreed.Core.Modules.Rendering
         /// Creates text component using given font
         /// </summary>
         /// <param name="fontId">Id of font to use for this text component</param>
+        /// <param name="offset">Offset position from position component</param>
         /// <param name="value">Optional initial text value</param>
         /// <returns>Text component</returns>
-        IText CreateText(int fontId, string value = null);
+        IText CreateText(int fontId, Vector2 offset, string value = null);
 
         /// <summary>
         /// Create sprite component using given sprite atlas

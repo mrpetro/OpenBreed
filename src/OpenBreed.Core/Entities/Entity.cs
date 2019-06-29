@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Systems.Common.Components;
+﻿using OpenBreed.Core.States;
+using OpenBreed.Core.Systems.Common.Components;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,8 +24,6 @@ namespace OpenBreed.Core.Entities
         public Entity(EntityMan manager)
         {
             this.manager = manager ?? throw new ArgumentNullException(nameof(manager));
-
-            PerformDelegate = PerformDefault;
 
             Components = new ReadOnlyCollection<IEntityComponent>(components);
 
@@ -55,8 +54,16 @@ namespace OpenBreed.Core.Entities
 
         public void PostMessage(IEntityMsg message)
         {
-            if (World != null)
-                World.PostMsg(this, message);
+            if (message.Type == StateChangeMsg.TYPE && PerformDelegate != null)
+            {
+                var stateChangeMsg = (StateChangeMsg)message;
+                PerformDelegate.Invoke(stateChangeMsg.StateId, stateChangeMsg.Args);
+            }
+            else
+            {
+                if (World != null)
+                    World.PostMsg(this, message);
+            }
         }
 
         public void Add(IEntityComponent component)
@@ -104,14 +111,5 @@ namespace OpenBreed.Core.Entities
         }
 
         #endregion Internal Methods
-
-        #region Private Methods
-
-        private void PerformDefault(string actionName, params object[] arguments)
-        {
-            //DO NOTHING HERE
-        }
-
-        #endregion Private Methods
     }
 }

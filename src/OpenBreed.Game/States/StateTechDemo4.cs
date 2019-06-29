@@ -22,6 +22,7 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Game.Worlds;
 using OpenBreed.Core.Systems.Control.Components;
 using OpenBreed.Core.Systems.Movement.Components;
+using OpenBreed.Game.Helpers;
 
 namespace OpenBreed.Game.States
 {
@@ -186,7 +187,7 @@ namespace OpenBreed.Game.States
 
             var textEntity = Core.Entities.Create();
             textEntity.Add(new Position(40, 50));
-            textEntity.Add(Core.Rendering.CreateText(fontAtlas.Id, "Alice has a cat!"));
+            textEntity.Add(Core.Rendering.CreateText(fontAtlas.Id, Vector2.Zero, "Alice has a cat!"));
 
             hudWorld.AddEntity(textEntity);
 
@@ -224,6 +225,7 @@ namespace OpenBreed.Game.States
 
             var actor = Core.Entities.Create();
             actor.Add(animator);
+            actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
             actor.Add(sprite);
             actor.Add(new Position(64, 288));
             actor.Add(Thrust.Create(0, 0));
@@ -235,8 +237,7 @@ namespace OpenBreed.Game.States
             actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
 
             var stateMachine = ActorHelper.CreateStateMachine(actor);
-            stateMachine.SetInitialState("Standing_Right");
-            stateMachine.Initialize();
+            stateMachine.Initialize("Standing_Down");
 
             gameWorld.AddEntity(actor);
 

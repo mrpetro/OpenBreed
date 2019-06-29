@@ -47,7 +47,8 @@
     <Compile Include="AnimMan.cs" />
     <Compile Include="Components\Animator.cs" />
     <Compile Include="Components\AnimationData.cs" />
-    <Compile Include="Components\IAnimationComponent.cs" />
+    <Compile Include="Messages\PauseAnimMsg.cs" />
+    <Compile Include="Messages\StopAnimMsg.cs" />
     <Compile Include="Messages\PlayAnimMsg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

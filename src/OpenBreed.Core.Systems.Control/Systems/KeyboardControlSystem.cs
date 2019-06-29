@@ -2,6 +2,7 @@
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Systems.Control.Components;
+using OpenBreed.Core.Systems.Control.Events;
 using OpenTK;
 using OpenTK.Input;
 using System;
@@ -44,7 +45,7 @@ namespace OpenBreed.Core.Systems.Control.Systems
 
         private void ProcessInputs(float dt, KeyboardState keyState, IEntity entity)
         {
-            var direction = new Vector2(0, 0);
+            var direction = Vector2.Zero;
 
             var control = entity.Components.OfType<KeyboardControl>().First();
 
@@ -58,10 +59,11 @@ namespace OpenBreed.Core.Systems.Control.Systems
             else if (keyState[control.MoveDownKey])
                 direction.Y = -1;
 
-            if (direction != Vector2.Zero)
-                entity.PerformDelegate("Walk", direction);
-            else
-                entity.PerformDelegate("Stop");
+            if (control.Direction == direction)
+                return;
+
+            control.Direction = direction;
+            entity.HandleSystemEvent?.Invoke(this, new ControlDirectionChangedEvent(control.Direction));
         }
 
         public override void AddEntity(IEntity entity)

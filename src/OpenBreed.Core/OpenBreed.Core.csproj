@@ -93,6 +93,7 @@
     <Compile Include="States\IStateBuilder.cs" />
     <Compile Include="States\IState.cs" />
     <Compile Include="States\Messenger.cs" />
+    <Compile Include="States\StateChangeMsg.cs" />
     <Compile Include="States\StateMachine.cs" />
     <Compile Include="Systems\Common\Components\IDirection.cs" />
     <Compile Include="Systems\Common\Components\IShapeComponent.cs" />

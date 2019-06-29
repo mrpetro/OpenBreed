@@ -1,22 +1,11 @@
-﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.States;
-using OpenBreed.Core.Systems.Common.Components;
-using OpenBreed.Core.Systems.Control;
-using OpenBreed.Core.Systems.Control.Components;
-using OpenBreed.Core.Systems.Control.Systems;
+﻿using OpenBreed.Core.Systems.Common.Components;
 using OpenTK;
 using OpenTK.Input;
-using System;
-using System.Linq;
 
 namespace OpenBreed.Core.Systems.Control.Components
 {
     public class KeyboardControl : IEntityComponent
     {
-        #region Private Fields
-
-        #endregion Private Fields
-
         #region Public Constructors
 
         public KeyboardControl(Key moveUpKey, Key moveDownKey, Key moveLeftKey, Key moveRightKey)
@@ -31,25 +20,12 @@ namespace OpenBreed.Core.Systems.Control.Components
 
         #region Public Properties
 
+        public Vector2 Direction { get; set; }
         public Key MoveUpKey { get; set; }
         public Key MoveDownKey { get; set; }
         public Key MoveLeftKey { get; set; }
         public Key MoveRightKey { get; set; }
 
         #endregion Public Properties
-
-        #region Public Methods
-
-        public void Deinitialize(IEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Initialize(IEntity entity)
-        {
-
-        }
-
-        #endregion Public Methods
     }
 }

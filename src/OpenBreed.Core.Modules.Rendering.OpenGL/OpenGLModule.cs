@@ -2,6 +2,7 @@
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems;
+using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System;
 
@@ -48,15 +49,6 @@ namespace OpenBreed.Core.Modules.Rendering
 
         #region Public Methods
 
-        ///// <summary>
-        ///// Creates render system and return it
-        ///// </summary>
-        ///// <returns>Render system interface</returns>
-        //public IRenderSystem CreateRenderSystem(int gridWidth, int gridHeight, float tileSize)
-        //{
-        //    return new RenderSystem(Core, gridWidth, gridHeight, tileSize);
-        //}
-
         /// <summary>
         /// Create system for handling sprites
         /// </summary>
@@ -84,9 +76,16 @@ namespace OpenBreed.Core.Modules.Rendering
             return new TileSystem(Core, gridWidth, gridHeight, tileSize);
         }
 
-        public IText CreateText(int fontId, string value = null)
+        /// <summary>
+        /// Creates text component using given font
+        /// </summary>
+        /// <param name="fontId">Id of font to use for this text component</param>
+        /// <param name="offset">Offset position from position component</param>
+        /// <param name="value">Optional initial text value</param>
+        /// <returns>Text component</returns>
+        public IText CreateText(int fontId, Vector2 offset, string value = null)
         {
-            return new Text(fontId, value);
+            return new Text(fontId, offset, value);
         }
 
         public ISprite CreateSprite(int atlasId, int imageId = 0)

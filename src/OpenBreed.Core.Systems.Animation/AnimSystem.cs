@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation;
-using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Systems.Animation.Components;
 using OpenBreed.Core.Systems.Animation.Events;
 using OpenBreed.Core.Systems.Animation.Messages;
@@ -11,7 +10,6 @@ namespace OpenBreed.Core.Systems.Animation
 {
     public class AnimSystem<T> : WorldSystem, IAnimationSystem
     {
-
         #region Private Fields
 
         private readonly List<IEntity> entities = new List<IEntity>();
@@ -105,6 +103,12 @@ namespace OpenBreed.Core.Systems.Animation
                 case PlayAnimMsg.TYPE:
                     return HandlePlayAnimMsg(sender, (PlayAnimMsg)message);
 
+                case PauseAnimMsg.TYPE:
+                    return HandlePauseAnimMsg(sender, (PauseAnimMsg)message);
+
+                case StopAnimMsg.TYPE:
+                    return HandleStopAnimMsg(sender, (StopAnimMsg)message);
+
                 default:
                     return false;
             }
@@ -113,6 +117,28 @@ namespace OpenBreed.Core.Systems.Animation
         #endregion Public Methods
 
         #region Private Methods
+
+        private bool HandlePauseAnimMsg(IEntity sender, PauseAnimMsg message)
+        {
+            var index = entities.IndexOf(sender);
+            if (index < 0)
+                return false;
+
+            Pause(animatorComps[index]);
+
+            return true;
+        }
+
+        private bool HandleStopAnimMsg(IEntity sender, StopAnimMsg message)
+        {
+            var index = entities.IndexOf(sender);
+            if (index < 0)
+                return false;
+
+            Stop(animatorComps[index]);
+
+            return true;
+        }
 
         private bool HandlePlayAnimMsg(IEntity sender, PlayAnimMsg message)
         {
@@ -126,6 +152,5 @@ namespace OpenBreed.Core.Systems.Animation
         }
 
         #endregion Private Methods
-
     }
 }

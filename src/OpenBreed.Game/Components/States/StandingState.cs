@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems.Animation.Components;
 using OpenBreed.Core.Systems.Animation.Messages;
@@ -15,7 +16,7 @@ namespace OpenBreed.Game.Components.States
 {
     public class StandingState : IState
     {
-        private IEntity entity;
+        public IEntity Entity { get; private set; }
         private IThrust thrust;
         private Animator<int> spriteAnimation;
         private IDirection direction;
@@ -34,12 +35,13 @@ namespace OpenBreed.Game.Components.States
         public void EnterState()
         {
             thrust.Value = Vector2.Zero;
-            entity.PostMessage(new PlayAnimMsg(animationId));
+            Entity.PostMessage(new PlayAnimMsg(animationId));
+            Entity.PostMessage(new SetTextMsg("Hero - Standing"));
         }
 
         public void Initialize(IEntity entity)
         {
-            this.entity = entity;
+            Entity = entity;
             thrust = entity.Components.OfType<IThrust>().First();
             spriteAnimation = entity.Components.OfType<Animator<int>>().First();
             direction = entity.Components.OfType<IDirection>().First();

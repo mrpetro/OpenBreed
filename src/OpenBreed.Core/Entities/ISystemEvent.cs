@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OpenBreed.Core.Entities
+﻿namespace OpenBreed.Core.Entities
 {
     public interface ISystemEvent
     {
+        #region Public Properties
+
         string Type { get; }
         object Data { get; }
+
+        #endregion Public Properties
     }
 }

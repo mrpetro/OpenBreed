@@ -174,7 +174,7 @@ namespace OpenBreed.Game.States
             tileTex = Core.Rendering.Textures.Load(@"Content\TileAtlasTest32bit.bmp");
             spriteTex = Core.Rendering.Textures.Load(@"Content\ArrowSpriteSet.png");
             tileAtlas = Core.Rendering.Tiles.Create(tileTex, 16, 4, 4);
-            spriteAtlas = Core.Rendering.Sprites.Create(spriteTex, 32, 32, 8, 1);
+            spriteAtlas = Core.Rendering.Sprites.Create(spriteTex, 32, 32, 8, 5);
 
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
@@ -207,8 +207,7 @@ namespace OpenBreed.Game.States
             actor.Add(new AiControl());
 
             var stateMachine = ActorHelper.CreateStateMachine(actor);
-            stateMachine.SetInitialState("Standing_Right");
-            stateMachine.Initialize();
+            stateMachine.Initialize("Standing_Right");
 
             World.AddEntity(actor);
 

@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Systems.Control.Components;
+using OpenBreed.Core.Systems.Control.Events;
 using OpenBreed.Core.Systems.Movement;
 using OpenTK;
 using System;
@@ -62,6 +63,8 @@ namespace OpenBreed.Core.Systems.Control.Systems
             var control = aiControlComps[index];
             var position = positionComps[index];
 
+            var direction = Vector2.Zero;
+
             if (control.Waypoints.Any())
             {
                 var distanceVec = Vector2.Subtract(control.Waypoints.First(), position.Value);
@@ -71,10 +74,6 @@ namespace OpenBreed.Core.Systems.Control.Systems
 
                 int compass = (((int)Math.Round(Math.Atan2(targetVector.Y, targetVector.X) / (2 * Math.PI / 8))) + 8) % 8;
 
-                //Console.WriteLine($"Distance Left: {targetVector.Length}");
-
-                //Console.WriteLine($"Move Dir: {targetVector}");
-
                 if (distanceVec.Length < 16.0f)
                 {
                     //Force position of entity when it's close enough to waypoint
@@ -83,11 +82,14 @@ namespace OpenBreed.Core.Systems.Control.Systems
                     return;
                 }
 
-                var direction = MovementTools.SnapToCompass8Way(targetVector);
-                entity.PerformDelegate("Walk", direction);
+                direction = MovementTools.SnapToCompass8Way(targetVector);
             }
-            else
-                entity.PerformDelegate("Stop");
+
+            if (control.Direction == direction)
+                return;
+
+            control.Direction = direction;
+            entity.HandleSystemEvent?.Invoke(this, new ControlDirectionChangedEvent(control.Direction));
         }
 
         #endregion Private Methods

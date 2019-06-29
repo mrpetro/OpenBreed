@@ -1,11 +1,11 @@
 ﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Common.Components;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,10 +30,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         }
 
         #endregion Public Constructors
-
-        #region Public Properties
-
-        #endregion Public Properties
 
         #region Public Methods
 
@@ -72,10 +68,24 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
             GL.Translate(position.Value.X, position.Value.Y, 0.0f);
 
+            GL.Translate(text.Offset.X, text.Offset.Y, 0.0f);
+
             Core.Rendering.Fonts.GetById(text.FontId).Draw(text.Value);
 
             GL.PopMatrix();
             GL.Disable(EnableCap.Texture2D);
+        }
+
+        public override bool HandleMsg(IEntity sender, IEntityMsg message)
+        {
+            switch (message.Type)
+            {
+                case SetTextMsg.TYPE:
+                    return HandleSetTextMsg(sender, (SetTextMsg)message);
+
+                default:
+                    return false;
+            }
         }
 
         public override void AddEntity(IEntity entity)
@@ -91,5 +101,20 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private bool HandleSetTextMsg(IEntity sender, SetTextMsg message)
+        {
+            var index = entities.IndexOf(sender);
+            if (index < 0)
+                return false;
+
+            textComps[index].Value = message.Text;
+
+            return true;
+        }
+
+        #endregion Private Methods
     }
 }
