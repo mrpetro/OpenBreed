@@ -52,6 +52,8 @@
     <Compile Include="Components\Tile.cs" />
     <Compile Include="Entities\Builders\CameraBuilder.cs" />
     <Compile Include="Entities\CameraEntity.cs" />
+    <Compile Include="Helpers\Builders\FontAtlasBuilder.cs" />
+    <Compile Include="Helpers\Builders\SpriteAtlasBuilder.cs" />
     <Compile Include="Helpers\FontAtlas.cs" />
     <Compile Include="Helpers\FontMan.cs" />
     <Compile Include="Helpers\RenderTools.cs" />

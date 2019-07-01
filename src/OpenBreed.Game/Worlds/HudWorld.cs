@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Game.Worlds
 {
-    public class GameWorld : World
+    public class HudWorld : World
     {
-        public GameWorld(ICore core) : base(core)
+        public HudWorld(ICore core) : base(core)
         {
 
             //Input
@@ -21,14 +21,13 @@ namespace OpenBreed.Game.Worlds
 
             //Action
             AddSystem(new MovementSystem(core));
-            AddSystem(Core.Physics.CreatePhysicsSystem(64, 64));
             AddSystem(new AnimSystem<int>(core));
 
             //Audio
             AddSystem(Core.Sounds.CreateSoundSystem());
 
             //Video
-            AddSystem(Core.Rendering.CreateTileSystem(64, 64, 16, true));
+            AddSystem(Core.Rendering.CreateTileSystem(64, 64, 16, false));
             AddSystem(Core.Rendering.CreateSpriteSystem());
             AddSystem(Core.Rendering.CreateTextSystem());
         }

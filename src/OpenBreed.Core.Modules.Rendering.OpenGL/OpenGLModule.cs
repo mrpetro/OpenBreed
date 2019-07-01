@@ -13,9 +13,9 @@ namespace OpenBreed.Core.Modules.Rendering
         #region Private Fields
 
         private TextureMan textureMan = new TextureMan();
-        private SpriteMan spriteMan = new SpriteMan();
         private TileMan tileMan = new TileMan();
-        private FontMan fontMan;
+        private readonly SpriteMan spriteMan;
+        private readonly FontMan fontMan;
         private ViewportMan viewportMan = new ViewportMan();
 
         #endregion Private Fields
@@ -26,6 +26,7 @@ namespace OpenBreed.Core.Modules.Rendering
         {
             Core = core ?? throw new ArgumentNullException(nameof(core));
 
+            spriteMan = new SpriteMan(this);
             fontMan = new FontMan(this);
         }
 
@@ -71,9 +72,9 @@ namespace OpenBreed.Core.Modules.Rendering
         /// Create system for handling tiles
         /// </summary>
         /// <returns>Tile system</returns>
-        public IWorldSystem CreateTileSystem(int gridWidth, int gridHeight, float tileSize)
+        public ITileSystem CreateTileSystem(int gridWidth, int gridHeight, float tileSize, bool drawGrid)
         {
-            return new TileSystem(Core, gridWidth, gridHeight, tileSize);
+            return new TileSystem(Core, gridWidth, gridHeight, tileSize, drawGrid);
         }
 
         /// <summary>

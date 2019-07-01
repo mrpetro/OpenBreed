@@ -1,13 +1,13 @@
 ﻿using OpenBreed.Core.Systems;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public interface ITileSystem : IWorldSystem
+    public interface ITileSystem : IRenderableSystem
     {
+        #region Public Properties
+
+        bool GridVisible { get; set; }
+
+        #endregion Public Properties
     }
 }

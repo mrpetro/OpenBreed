@@ -27,18 +27,29 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #region Public Constructors
 
-        internal SpriteAtlas(int id, ITexture texture, float spriteWidth, float spriteHeight, int spriteColumns, int spriteRows)
+        internal SpriteAtlas(SpriteAtlasBuilder builder)
         {
-            Id = id;
-            Texture = texture;
-            SpriteWidth = spriteWidth;
-            SpriteHeight = spriteHeight;
-
+            Id = builder.GetNewId();
+            Texture = builder.Texture;
+            SpriteWidth = builder.SpriteWidth;
+            SpriteHeight = builder.SpriteHeight;
             vboList = new List<int>();
-
             RenderTools.CreateIndicesArray(indices, out ibo);
-            BuildCoords(spriteRows, spriteColumns);
+            CreateVertices(builder.coords);
         }
+
+        //internal SpriteAtlas(int id, ITexture texture, float spriteWidth, float spriteHeight, int spriteColumns, int spriteRows)
+        //{
+        //    Id = id;
+        //    Texture = texture;
+        //    SpriteWidth = spriteWidth;
+        //    SpriteHeight = spriteHeight;
+
+        //    vboList = new List<int>();
+
+        //    RenderTools.CreateIndicesArray(indices, out ibo);
+        //    BuildCoords(spriteRows, spriteColumns);
+        //}
 
         #endregion Public Constructors
 
@@ -98,6 +109,18 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         private void InitializeIndices()
         {
+        }
+
+        private void CreateVertices(List<Vector2> coords)
+        {
+            foreach (var coord in coords)
+            {
+                var newCoord = Vector2.Divide(coord, new Vector2(Texture.Width, Texture.Height));
+                var vertices = CreateVertices(newCoord);
+                int vbo;
+                RenderTools.CreateVertexArray(vertices, out vbo);
+                vboList.Add(vbo);
+            }
         }
 
         private void BuildCoords(int spriteRows, int spriteColumns)

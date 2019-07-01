@@ -32,14 +32,14 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #region Public Constructors
 
-        internal FontAtlas(int id, ITextureMan textures, string fontName, int fontSize)
+        internal FontAtlas(FontAtlasBuilder builder)
         {
-            Id = id;
+            Id = builder.GetNewId();
             vboList = new List<int>();
 
             RenderTools.CreateIndicesArray(indices, out ibo);
 
-            BuildCoords(textures, fontName, fontSize);
+            BuildCoords(builder.FontMan.Module.Textures, builder.FontName, builder.FontSize);
         }
 
         #endregion Public Constructors

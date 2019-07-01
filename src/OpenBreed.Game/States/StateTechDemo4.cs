@@ -169,28 +169,33 @@ namespace OpenBreed.Game.States
 
         private void InitializeHud()
         {
-            var hudWorld = new GameWorld(Core);
+            var hudWorld = new HudWorld(Core);
 
             var cameraBuilder = new CameraBuilder(Core);
 
-            cameraBuilder.SetPosition(new Vector2(64, 64));
+            cameraBuilder.SetPosition(new Vector2(320, 280));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
             hudCamera = (CameraEntity)cameraBuilder.Build();
             hudWorld.AddEntity(hudCamera);
 
 
-            hudViewport = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
+            hudViewport = (Viewport)Core.Rendering.Viewports.Create(0, 0, 540, 380);
             hudViewport.Camera = hudCamera;
 
-            var fontAtlas = Core.Rendering.Fonts.Create("ALGERIAN", 50);
+            var algerian50 = Core.Rendering.Fonts.Create("ALGERIAN", 50);
+            var arial12 = Core.Rendering.Fonts.Create("ARIAL", 12);
 
             var textEntity = Core.Entities.Create();
-            textEntity.Add(new Position(40, 50));
-            textEntity.Add(Core.Rendering.CreateText(fontAtlas.Id, Vector2.Zero, "Alice has a cat!"));
-
+            textEntity.Add(new Position(0, 0));
+            textEntity.Add(Core.Rendering.CreateText(algerian50.Id, Vector2.Zero, "Alice has a cat!"));
             hudWorld.AddEntity(textEntity);
 
+            var fpsEntity = Core.Entities.Create();
+
+            fpsEntity.Add(new Position(0, 400));
+            fpsEntity.Add(Core.Rendering.CreateText(arial12.Id, Vector2.Zero, "0 fps"));
+            hudWorld.AddEntity(fpsEntity);
 
             Core.Worlds.Add(hudWorld);
         }

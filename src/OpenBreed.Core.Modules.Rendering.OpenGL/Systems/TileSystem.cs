@@ -11,16 +11,16 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TileSystem : WorldSystem, IRenderableSystem
+    public class TileSystem : WorldSystem, ITileSystem
     {
         #region Public Fields
 
         public int MAX_TILES_COUNT = 1024 * 1024;
 
         /// <summary>
-        /// Debug flag
+        /// Grid visibility flag for debugging purpose
         /// </summary>
-        public bool GridVisible = true;
+        public bool GridVisible { get; set; }
 
         #endregion Public Fields
 
@@ -34,12 +34,14 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Public Constructors
 
-        public TileSystem(ICore core, int width, int height, float tileSize) : base(core)
+        public TileSystem(ICore core, int width, int height, float tileSize, bool gridVisible) : base(core)
         {
             Require<ITile>();
             Require<IPosition>();
 
             TileSize = tileSize;
+            GridVisible = gridVisible;
+
             InitializeTilesMap(width, height);
         }
 
