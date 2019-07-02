@@ -17,17 +17,14 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         public int MAX_TILES_COUNT = 1024 * 1024;
 
-        /// <summary>
-        /// Grid visibility flag for debugging purpose
-        /// </summary>
-        public bool GridVisible { get; set; }
-
         #endregion Public Fields
 
         #region Private Fields
 
         private IEntity[] entities;
+
         private ITile[] tileComps;
+
         private IPosition[] positionComps;
 
         #endregion Private Fields
@@ -48,6 +45,11 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         #endregion Public Constructors
 
         #region Public Properties
+
+        /// <summary>
+        /// Grid visibility flag for debugging purpose
+        /// </summary>
+        public bool GridVisible { get; set; }
 
         public int TileMapHeight { get; private set; }
         public int TileMapWidth { get; private set; }
@@ -94,7 +96,11 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Disable(EnableCap.Texture2D);
         }
 
-        public override void AddEntity(IEntity entity)
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        protected override void RegisterEntity(IEntity entity)
         {
             var position = entity.Components.OfType<IPosition>().First();
 
@@ -113,11 +119,11 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             positionComps[tileId] = position;
         }
 
-        public override void RemoveEntity(IEntity entity)
+        protected override void UnregisterEntity(IEntity entity)
         {
         }
 
-        #endregion Public Methods
+        #endregion Protected Methods
 
         #region Private Methods
 

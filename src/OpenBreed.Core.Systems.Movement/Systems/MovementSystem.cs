@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.Systems.Common.Components;
 using OpenTK;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,13 +11,12 @@ namespace OpenBreed.Core.Systems.Movement.Systems
     {
         #region Private Fields
 
-        private float MAXSPEED = 8.0f;
-
         private readonly List<IEntity> entities = new List<IEntity>();
         private readonly List<IThrust> thrustComps = new List<IThrust>();
         private readonly List<IPosition> positionComps = new List<IPosition>();
         private readonly List<IDirection> directionComps = new List<IDirection>();
         private readonly List<IVelocity> velocityComps = new List<IVelocity>();
+        private float MAXSPEED = 8.0f;
 
         #endregion Private Fields
 
@@ -59,7 +59,11 @@ namespace OpenBreed.Core.Systems.Movement.Systems
             position.Value += newSpeed;
         }
 
-        public override void AddEntity(IEntity entity)
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        protected override void RegisterEntity(IEntity entity)
         {
             entities.Add(entity);
             positionComps.Add(entity.Components.OfType<IPosition>().First());
@@ -68,11 +72,20 @@ namespace OpenBreed.Core.Systems.Movement.Systems
             velocityComps.Add(entity.Components.OfType<IVelocity>().First());
         }
 
-        public override void RemoveEntity(IEntity entity)
+        protected override void UnregisterEntity(IEntity entity)
         {
-            entities.Remove(entity);
+            var index = entities.IndexOf(entity);
+
+            if (index < 0)
+                throw new InvalidOperationException("Entity not found in this system.");
+
+            entities.RemoveAt(index);
+            positionComps.RemoveAt(index);
+            thrustComps.RemoveAt(index);
+            directionComps.RemoveAt(index);
+            velocityComps.RemoveAt(index);
         }
 
-        #endregion Public Methods
+        #endregion Protected Methods
     }
 }

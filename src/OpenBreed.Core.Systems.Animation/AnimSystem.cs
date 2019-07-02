@@ -3,6 +3,7 @@ using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Systems.Animation.Components;
 using OpenBreed.Core.Systems.Animation.Events;
 using OpenBreed.Core.Systems.Animation.Messages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -32,17 +33,6 @@ namespace OpenBreed.Core.Systems.Animation
         {
             for (int i = 0; i < entities.Count; i++)
                 Animate(i, dt);
-        }
-
-        public override void AddEntity(IEntity entity)
-        {
-            entities.Add(entity);
-            animatorComps.Add(entity.Components.OfType<Animator<T>>().First());
-        }
-
-        public override void RemoveEntity(IEntity entity)
-        {
-            entities.Remove(entity);
         }
 
         public void Play(Animator<T> animator, IAnimationData<T> data = null, float startPosition = 0.0f)
@@ -115,6 +105,27 @@ namespace OpenBreed.Core.Systems.Animation
         }
 
         #endregion Public Methods
+
+        #region Protected Methods
+
+        protected override void RegisterEntity(IEntity entity)
+        {
+            entities.Add(entity);
+            animatorComps.Add(entity.Components.OfType<Animator<T>>().First());
+        }
+
+        protected override void UnregisterEntity(IEntity entity)
+        {
+            var index = entities.IndexOf(entity);
+
+            if (index < 0)
+                throw new InvalidOperationException("Entity not found in this system.");
+
+            entities.RemoveAt(index);
+            animatorComps.RemoveAt(index);
+        }
+
+        #endregion Protected Methods
 
         #region Private Methods
 

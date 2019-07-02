@@ -1,10 +1,9 @@
-﻿using OpenBreed.Core.Systems.Common;
+﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Helpers;
+using OpenBreed.Core.Systems;
 using System;
 using System.Collections.Generic;
-using OpenBreed.Core.Systems;
-using OpenBreed.Core.Entities;
 using System.Linq;
 
 namespace OpenBreed.Core.Modules.Physics.Systems
@@ -15,10 +14,10 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         private static readonly AabbXComparer comparer = new AabbXComparer();
 
-        private List<IEntity>[] gridStaticEntities;
-        private List<IStaticBody>[] gridStaticComps;
         private readonly List<IEntity> dynamicEntities = new List<IEntity>();
         private readonly List<IDynamicBody> dynamicBodies = new List<IDynamicBody>();
+        private List<IEntity>[] gridStaticEntities;
+        private List<IStaticBody>[] gridStaticComps;
 
         #endregion Private Fields
 
@@ -60,7 +59,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         #region Protected Methods
 
-        public override void AddEntity(IEntity entity)
+        protected override void RegisterEntity(IEntity entity)
         {
             var physicsComponent = entity.Components.OfType<IPhysicsComponent>().First();
 
@@ -74,9 +73,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 throw new NotImplementedException($"{physicsComponent}");
         }
 
-        //    //QueryStaticMatrix(m_Dynamics.back());
-        //}
-        public override void RemoveEntity(IEntity entity)
+        protected override void UnregisterEntity(IEntity entity)
         {
             throw new NotImplementedException();
         }

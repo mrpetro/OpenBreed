@@ -186,6 +186,7 @@ namespace OpenBreed.Game
             Inputs.Update();
 
             Rendering.Cleanup();
+            Worlds.Cleanup();
 
             StateMachine.Update((float)e.Time);
 

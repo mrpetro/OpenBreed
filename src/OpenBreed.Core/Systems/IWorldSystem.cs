@@ -22,6 +22,11 @@ namespace OpenBreed.Core.Systems
         void Initialize(World world);
 
         /// <summary>
+        /// Perform cleanup of entites and their components related with this system
+        /// </summary>
+        void Cleanup();
+
+        /// <summary>
         /// Deinitialize the system when world is destroyed
         /// </summary>
         void Deinitialize();

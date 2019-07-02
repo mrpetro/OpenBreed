@@ -1,6 +1,4 @@
 ﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.States;
-using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Systems.Control.Components;
 using OpenBreed.Core.Systems.Control.Events;
 using OpenTK;
@@ -25,7 +23,7 @@ namespace OpenBreed.Core.Systems.Control.Systems
         #region Public Constructors
 
         public KeyboardControlSystem(ICore core) : base(core)
-        {  
+        {
             Require<KeyboardControl>();
         }
 
@@ -40,8 +38,30 @@ namespace OpenBreed.Core.Systems.Control.Systems
 
             for (int i = 0; i < entities.Count; i++)
                 ProcessInputs(dt, keyState, entities[i]);
-
         }
+
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        protected override void RegisterEntity(IEntity entity)
+        {
+            entities.Add(entity);
+        }
+
+        protected override void UnregisterEntity(IEntity entity)
+        {
+            var index = entities.IndexOf(entity);
+
+            if (index < 0)
+                throw new InvalidOperationException("Entity not found in this system.");
+
+            entities.RemoveAt(index);
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
 
         private void ProcessInputs(float dt, KeyboardState keyState, IEntity entity)
         {
@@ -66,18 +86,6 @@ namespace OpenBreed.Core.Systems.Control.Systems
             entity.HandleSystemEvent?.Invoke(this, new ControlDirectionChangedEvent(control.Direction));
         }
 
-        public override void AddEntity(IEntity entity)
-        {
-            entities.Add(entity);
-        }
-
-        public override void RemoveEntity(IEntity entity)
-        {
-            entities.Remove(entity);
-        }
-
-        #endregion Public Methods
-
-
+        #endregion Private Methods
     }
 }

@@ -1,28 +1,21 @@
 ﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Audio.Systems;
-using OpenBreed.Core.Modules.Physics;
-using OpenBreed.Core.Modules.Rendering;
-using OpenBreed.Core.Modules.Rendering.Systems;
+using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Systems;
-using OpenBreed.Core.Systems.Common.Components;
 using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using OpenBreed.Core.Extensions;
 
 namespace OpenBreed.Core
 {
     public delegate void SystemEventDelegate(ISystemEvent systemEvent);
-
 
     /// <summary>
     /// World class which contains systems and entities
     /// </summary>
     public class World
     {
-
         #region Public Fields
 
         public const float MAX_TILE_MULTIPLIER = 10.0f;
@@ -40,7 +33,7 @@ namespace OpenBreed.Core
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Protected Constructors
 
         protected World(ICore core)
         {
@@ -49,7 +42,7 @@ namespace OpenBreed.Core
             Systems = new ReadOnlyCollection<IWorldSystem>(systems);
         }
 
-        #endregion Public Constructors
+        #endregion Protected Constructors
 
         #region Public Properties
 
@@ -101,23 +94,6 @@ namespace OpenBreed.Core
             }
         }
 
-        //public void SubscribeEvent(string eventType, 
-
-        //private readonly Dictionary<string, List<IEntity>> eventListeners = new Dictionary<string, List<IEntity>>();
-
-        //public void PostEvent(IWorldSystem sender, ISystemEvent systemEvent)
-        //{
-        //    foreach (var item in eventListeners)
-        //    {
-        //        List<IEntity> listeners = null;
-        //        if (!eventListeners.TryGetValue(systemEvent.Type, out listeners))
-        //            return;
-
-        //        foreach (var listener in listeners)
-        //            listener.
-        //    }
-        //}
-
         /// <summary>
         /// Method will remove given entity from this world.
         /// Entity will not be removed immediately but at the end of each world update.
@@ -144,8 +120,6 @@ namespace OpenBreed.Core
 
         public void Update(float dt)
         {
-            Cleanup();
-
             systems.OfType<IUpdatableSystem>().ForEach(item => item.Update(dt * TimeMultiplier));
         }
 
@@ -169,21 +143,7 @@ namespace OpenBreed.Core
             entities.Remove(entity);
         }
 
-        #endregion Internal Methods
-
-        #region Protected Methods
-
-        protected virtual void AddSystem(IWorldSystem system)
-        {
-            systems.Add(system);
-        }
-
-        protected virtual void RemoveSystem(IWorldSystem system)
-        {
-            systems.Remove(system);
-        }
-
-        protected void Cleanup()
+        internal void Cleanup()
         {
             if (toRemove.Any())
             {
@@ -202,6 +162,23 @@ namespace OpenBreed.Core
 
                 toAdd.Clear();
             }
+
+            //Perform cleanup on all world systems
+            Systems.ForEach(item => item.Cleanup());
+        }
+
+        #endregion Internal Methods
+
+        #region Protected Methods
+
+        protected virtual void AddSystem(IWorldSystem system)
+        {
+            systems.Add(system);
+        }
+
+        protected virtual void RemoveSystem(IWorldSystem system)
+        {
+            systems.Remove(system);
         }
 
         #endregion Protected Methods
@@ -216,6 +193,7 @@ namespace OpenBreed.Core
                     system.AddEntity(entity);
             }
         }
+
         private void InitializeSystems()
         {
             for (int i = 0; i < systems.Count; i++)
@@ -229,6 +207,5 @@ namespace OpenBreed.Core
         }
 
         #endregion Private Methods
-
     }
 }

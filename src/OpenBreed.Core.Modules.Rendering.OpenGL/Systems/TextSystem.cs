@@ -6,6 +6,7 @@ using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Common.Components;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -88,19 +89,30 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             }
         }
 
-        public override void AddEntity(IEntity entity)
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        protected override void RegisterEntity(IEntity entity)
         {
             entities.Add(entity);
             textComps.Add(entity.Components.OfType<IText>().First());
             positionComps.Add(entity.Components.OfType<IPosition>().First());
         }
 
-        public override void RemoveEntity(IEntity entity)
+        protected override void UnregisterEntity(IEntity entity)
         {
-            entities.Remove(entity);
+            var index = entities.IndexOf(entity);
+
+            if (index < 0)
+                throw new InvalidOperationException("Entity not found in this system.");
+
+            entities.RemoveAt(index);
+            textComps.RemoveAt(index);
+            positionComps.RemoveAt(index);
         }
 
-        #endregion Public Methods
+        #endregion Protected Methods
 
         #region Private Methods
 

@@ -8,11 +8,10 @@ namespace OpenBreed.Core.Systems
 {
     public abstract class WorldSystem : IWorldSystem
     {
-        #region Protected Fields
-
-        #endregion Protected Fields
-
         #region Private Fields
+
+        private readonly List<IEntity> toAdd = new List<IEntity>();
+        private readonly List<IEntity> toRemove = new List<IEntity>();
 
         private readonly List<Type> requiredComponentTypes = new List<Type>();
 
@@ -60,7 +59,7 @@ namespace OpenBreed.Core.Systems
         /// </summary>
         public virtual void Deinitialize()
         {
-            if(World == null)
+            if (World == null)
                 throw new InvalidOperationException("World sytem already deinitialized.");
 
             World = null;
@@ -70,24 +69,60 @@ namespace OpenBreed.Core.Systems
         {
             foreach (var type in requiredComponentTypes)
             {
-                if(!entity.Components.Any(item => type.IsAssignableFrom(item.GetType())))
+                if (!entity.Components.Any(item => type.IsAssignableFrom(item.GetType())))
                     return false;
             }
 
             return true;
         }
 
-        public virtual void AddEntity(IEntity entity)
+        public void AddEntity(IEntity entity)
         {
+            toAdd.Add(entity);
         }
 
-        public virtual void RemoveEntity(IEntity entity)
+        public void RemoveEntity(IEntity entity)
         {
+            toRemove.Add(entity);
+        }
+
+        public virtual bool HandleMsg(IEntity sender, IEntityMsg message)
+        {
+            return false;
+        }
+
+        public void Cleanup()
+        {
+            if (toRemove.Any())
+            {
+                //Process entities to remove
+                for (int i = 0; i < toRemove.Count; i++)
+                    UnregisterEntity((Entity)toRemove[i]);
+
+                toRemove.Clear();
+            }
+
+            if (toAdd.Any())
+            {
+                //Process entities to add
+                for (int i = 0; i < toAdd.Count; i++)
+                    RegisterEntity((Entity)toAdd[i]);
+
+                toAdd.Clear();
+            }
         }
 
         #endregion Public Methods
 
         #region Protected Methods
+
+        protected virtual void UnregisterEntity(IEntity entity)
+        {
+        }
+
+        protected virtual void RegisterEntity(IEntity entity)
+        {
+        }
 
         protected int Require<C>() where C : IEntityComponent
         {
@@ -104,16 +139,11 @@ namespace OpenBreed.Core.Systems
             }
         }
 
-        public virtual bool HandleMsg(IEntity sender, IEntityMsg message)
-        {
-            return false;
-        }
+        #endregion Protected Methods
 
         //public void PostEvent(ISystemEvent systemEvent)
         //{
         //    World.PostEvent(this, systemEvent);
         //}
-
-        #endregion Protected Methods
     }
 }

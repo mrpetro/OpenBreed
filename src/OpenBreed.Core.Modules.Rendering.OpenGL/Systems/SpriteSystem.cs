@@ -4,6 +4,7 @@ using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Common.Components;
 using OpenTK.Graphics.OpenGL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -55,19 +56,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Disable(EnableCap.Blend);
         }
 
-        public override void AddEntity(IEntity entity)
-        {
-            entities.Add(entity);
-            spriteComps.Add(entity.Components.OfType<ISprite>().First());
-            positionComps.Add(entity.Components.OfType<IPosition>().First());
-
-        }
-
-        public override void RemoveEntity(IEntity entity)
-        {
-            entities.Remove(entity);
-        }
-
         /// <summary>
         /// Draw this sprite to given viewport
         /// </summary>
@@ -90,5 +78,28 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         }
 
         #endregion Public Methods
+
+        #region Protected Methods
+
+        protected override void RegisterEntity(IEntity entity)
+        {
+            entities.Add(entity);
+            spriteComps.Add(entity.Components.OfType<ISprite>().First());
+            positionComps.Add(entity.Components.OfType<IPosition>().First());
+        }
+
+        protected override void UnregisterEntity(IEntity entity)
+        {
+            var index = entities.IndexOf(entity);
+
+            if (index < 0)
+                throw new InvalidOperationException("Entity not found in this system.");
+
+            entities.RemoveAt(index);
+            spriteComps.RemoveAt(index);
+            positionComps.RemoveAt(index);
+        }
+
+        #endregion Protected Methods
     }
 }
