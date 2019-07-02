@@ -2,6 +2,7 @@
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems;
+using OpenTK;
 using System.Drawing;
 
 namespace OpenBreed.Core.Modules.Rendering
@@ -13,37 +14,61 @@ namespace OpenBreed.Core.Modules.Rendering
     {
         #region Public Methods
 
+        ///// <summary>
+        ///// Creates render system and return it
+        ///// </summary>
+        ///// <param name="gridWidth">Tiles grid width size</param>
+        ///// <param name="gridHeight">Tiles grid height size</param>
+        ///// <param name="tileSize">Grid tile size</param>
+        ///// <returns>Render system interface</returns>
+        //IRenderSystem CreateRenderSystem(int gridWidth, int gridHeight, float tileSize);
+
         /// <summary>
-        /// Creates render system and return it
+        /// Create system for handling tiles
         /// </summary>
-        /// <param name="gridWidth">Tiles grid width size</param>
-        /// <param name="gridHeight">Tiles grid height size</param>
-        /// <returns>Render system interface</returns>
-        IRenderSystem CreateRenderSystem(int gridWidth, int gridHeight);
+        /// <param name="gridWidth">Tile grid width</param>
+        /// <param name="gridHeight">Tile grid height</param>
+        /// <param name="tileSize">Grid tile size</param>
+        /// <param name="gridVisible">Grid visibility flag for debugging purpose</param>
+        /// <returns>Tile system object</returns>
+        ITileSystem CreateTileSystem(int gridWidth, int gridHeight, float tileSize, bool gridVisible = false);
+
+        /// <summary>
+        /// Create system for handling sprites
+        /// </summary>
+        /// <returns>Sprite system</returns>
+        IWorldSystem CreateSpriteSystem();
+
+        /// <summary>
+        /// Create system for handling texts
+        /// </summary>
+        /// <returns>Text system</returns>
+        IWorldSystem CreateTextSystem();
 
         /// <summary>
         /// Creates text component using given font
         /// </summary>
-        /// <param name="font">IFont object to use for this text component</param>
+        /// <param name="fontId">Id of font to use for this text component</param>
+        /// <param name="offset">Offset position from position component</param>
         /// <param name="value">Optional initial text value</param>
         /// <returns>Text component</returns>
-        IText CreateText(IFont font, string value = null);
+        IText CreateText(int fontId, Vector2 offset, string value = null);
 
         /// <summary>
         /// Create sprite component using given sprite atlas
         /// </summary>
-        /// <param name="spriteAtlas">Sprite atlas to use fr this sprite component</param>
+        /// <param name="atlasId">Id of sprite atlas to use for this sprite component</param>
         /// <param name="imageId">Optiona initial sprite atlas image id</param>
         /// <returns>Sprite component</returns>
-        ISprite CreateSprite(ISpriteAtlas spriteAtlas, int imageId = 0);
+        ISprite CreateSprite(int atlasId, int imageId = 0);
 
         /// <summary>
         /// Create tile component using given tile atlas
         /// </summary>
-        /// <param name="tileAtlas">Tile atlas to use fr this tile component</param>
+        /// <param name="atlasId">Id of tile atlas to use for this tile component</param>
         /// <param name="imageId">Optiona initial tile atlas image id</param>
         /// <returns>Sprite component</returns>
-        ITile CreateTile(ITileAtlas tileAtlas, int imageId = 0);
+        ITile CreateTile(int atlasId, int imageId = 0);
 
         /// <summary>
         /// Textures manager
@@ -51,12 +76,29 @@ namespace OpenBreed.Core.Modules.Rendering
         ITextureMan Textures { get; }
 
         /// <summary>
+        /// Sprite manager
+        /// </summary>
+        ISpriteMan Sprites { get; }
+
+        /// <summary>
+        /// Tile manager
+        /// </summary>
+        ITileMan Tiles { get; }
+
+        /// <summary>
+        /// Font manager
+        /// </summary>
+        IFontMan Fonts { get; }
+
+        /// <summary>
         /// Viewports manager
         /// </summary>
         IViewportMan Viewports { get; }
 
         void Cleanup();
-        void Draw(float time);
+
+
+        void Draw(float dt);
 
         #endregion Public Methods
     }

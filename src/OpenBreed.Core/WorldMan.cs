@@ -58,22 +58,20 @@ namespace OpenBreed.Core
             toAdd.Add(world);
         }
 
+        /// <summary>
+        /// Updates the world
+        /// </summary>
+        /// <param name="dt">Delta time</param>
         public void Update(float dt)
         {
-            Cleanup();
-
             for (int i = 0; i < Items.Count; i++)
                 Items[i].Update(dt);
         }
 
-        #endregion Public Methods
-
-        #region Private Methods
-
         /// <summary>
         /// Add or remove any pending worlds
         /// </summary>
-        private void Cleanup()
+        public void Cleanup()
         {
             if (toRemove.Any())
             {
@@ -98,8 +96,12 @@ namespace OpenBreed.Core
 
                 toAdd.Clear();
             }
+
+            //Don cleanups on remaining worlds
+            for (int i = 0; i < items.Count; i++)
+                items[i].Cleanup();
         }
 
-        #endregion Private Methods
+        #endregion Public Methods
     }
 }

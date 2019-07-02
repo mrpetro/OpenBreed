@@ -1,97 +1,111 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Rendering;
-using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenBreed.Core.Modules.Rendering.Systems;
-using OpenBreed.Core.Systems.Common.Components;
-using OpenTK.Graphics;
-using System;
-using System.Linq;
+﻿//using OpenBreed.Core;
+//using OpenBreed.Core.Entities;
+//using OpenBreed.Core.Modules.Rendering;
+//using OpenBreed.Core.Modules.Rendering.Components;
+//using OpenBreed.Core.Modules.Rendering.Helpers;
+//using OpenBreed.Core.Modules.Rendering.Systems;
+//using OpenBreed.Core.Systems.Common.Components;
+//using OpenTK.Graphics;
+//using System;
+//using System.Linq;
 
-namespace OpenBreed.Game.Components
-{
-    public class AIControllerDebug : ISprite
-    {
-        #region Private Fields
+//namespace OpenBreed.Game.Components
+//{
+//    public class AIControllerDebug : ISprite
+//    {
+//        #region Private Fields
 
-        private ISprite sprite;
-        private Position position;
-        private AICreatureController controller;
+//        private ISprite sprite;
+//        private Position position;
+//        private AICreatureController controller;
 
-        #endregion Private Fields
+//        #endregion Private Fields
 
-        #region Public Constructors
+//        #region Public Constructors
 
-        public AIControllerDebug(ISprite sprite)
-        {
-            this.sprite = sprite ?? throw new ArgumentNullException(nameof(sprite));
-        }
+//        public AIControllerDebug(ISprite sprite)
+//        {
+//            this.sprite = sprite ?? throw new ArgumentNullException(nameof(sprite));
+//        }
 
-        #endregion Public Constructors
+//        #endregion Public Constructors
 
-        #region Public Properties
+//        #region Public Properties
 
-        /// <summary>
-        /// Id of sprite image from the atlas
-        /// </summary>
-        public int ImageId
-        {
-            get
-            {
-                return sprite.ImageId;
-            }
-            set
-            {
-                sprite.ImageId = value;
-            }
-        }
+//        public Position Position { get { return sprite.Position; } }
 
-        public Type SystemType { get { return typeof(RenderSystem); } }
+//        public int AtlasId
+//        {
+//            get
+//            {
+//                return sprite.AtlasId;
+//            }
+//            set
+//            {
+//                sprite.AtlasId = value;
+//            }
+//        }
 
-        #endregion Public Properties
+//        /// <summary>
+//        /// Id of sprite image from the atlas
+//        /// </summary>
+//        public int ImageId
+//        {
+//            get
+//            {
+//                return sprite.ImageId;
+//            }
+//            set
+//            {
+//                sprite.ImageId = value;
+//            }
+//        }
 
-        #region Public Methods
+//        public Type SystemType { get { return null; } }
 
-        /// <summary>
-        /// Draw this sprite to given viewport
-        /// </summary>
-        /// <param name="viewport">Viewport which this sprite will be rendered to</param>
-        public void Draw(IViewport viewport)
-        {
-            for (int i = 1; i < controller.Waypoints.Count; i++)
-            {
-                var wps = controller.Waypoints[i - 1];
-                var wpe = controller.Waypoints[i];
-                RenderTools.DrawLine(wps, wpe, Color4.Gold);
-            }
+//        #endregion Public Properties
 
-            if(controller.Waypoints.Count > 0)
-                RenderTools.DrawLine(position.Current, controller.Waypoints[0], Color4.Gold);
+//        #region Public Methods
 
-            sprite.Draw(viewport);
-        }
+//        /// <summary>
+//        /// Draw this sprite to given viewport
+//        /// </summary>
+//        /// <param name="viewport">Viewport which this sprite will be rendered to</param>
+//        public void Draw(IViewport viewport)
+//        {
+//            for (int i = 1; i < controller.Waypoints.Count; i++)
+//            {
+//                var wps = controller.Waypoints[i - 1];
+//                var wpe = controller.Waypoints[i];
+//                RenderTools.DrawLine(wps, wpe, Color4.Gold);
+//            }
 
-        /// <summary>
-        /// Initialize this component
-        /// </summary>
-        /// <param name="entity">Entity which this component belongs to</param>
-        public void Initialize(IEntity entity)
-        {
-            position = entity.Components.OfType<Position>().First();
-            controller = entity.Components.OfType<AICreatureController>().First();
-            sprite.Initialize(entity);
-        }
+//            if(controller.Waypoints.Count > 0)
+//                RenderTools.DrawLine(position.Value, controller.Waypoints[0], Color4.Gold);
 
-        /// <summary>
-        /// Deinitialize this component
-        /// </summary>
-        /// <param name="entity">Entity which this component belongs to</param>
-        public void Deinitialize(IEntity entity)
-        {
-            throw new NotImplementedException();
-        }
+//            sprite.Draw(viewport);
+//        }
 
-        #endregion Public Methods
-    }
-}
+//        /// <summary>
+//        /// Initialize this component
+//        /// </summary>
+//        /// <param name="entity">Entity which this component belongs to</param>
+//        public void Initialize(IEntity entity)
+//        {
+//            position = entity.Components.OfType<Position>().First();
+//            controller = entity.Components.OfType<AICreatureController>().First();
+//            sprite.Initialize(entity);
+//        }
+
+//        /// <summary>
+//        /// Deinitialize this component
+//        /// </summary>
+//        /// <param name="entity">Entity which this component belongs to</param>
+//        public void Deinitialize(IEntity entity)
+//        {
+//            throw new NotImplementedException();
+//        }
+
+//        #endregion Public Methods
+//    }
+//}

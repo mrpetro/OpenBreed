@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OpenBreed.Core.Modules.Rendering</RootNamespace>
     <AssemblyName>OpenBreed.Core.Modules.Rendering.OpenGL</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,24 +46,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Camera.cs" />
     <Compile Include="Components\Sprite.cs" />
     <Compile Include="Components\Text.cs" />
     <Compile Include="Components\Tile.cs" />
     <Compile Include="Entities\Builders\CameraBuilder.cs" />
-    <Compile Include="Entities\Camera.cs" />
+    <Compile Include="Entities\CameraEntity.cs" />
+    <Compile Include="Helpers\Builders\FontAtlasBuilder.cs" />
+    <Compile Include="Helpers\Builders\SpriteAtlasBuilder.cs" />
     <Compile Include="Helpers\FontAtlas.cs" />
     <Compile Include="Helpers\FontMan.cs" />
     <Compile Include="Helpers\RenderTools.cs" />
     <Compile Include="Helpers\SpriteAtlas.cs" />
     <Compile Include="Helpers\Texture.cs" />
     <Compile Include="Helpers\TileAtlas.cs" />
+    <Compile Include="Helpers\SpriteMan.cs" />
+    <Compile Include="Helpers\TileMan.cs" />
     <Compile Include="Helpers\Vertex.cs" />
     <Compile Include="Helpers\Viewport.cs" />
     <Compile Include="Helpers\ViewportMan.cs" />
+    <Compile Include="Messages\SetTextMsg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OpenGLModule.cs" />
-    <Compile Include="Systems\RenderSystem.cs" />
     <Compile Include="Helpers\TextureMan.cs" />
+    <Compile Include="Systems\TextSystem.cs" />
+    <Compile Include="Systems\SpriteSystem.cs" />
+    <Compile Include="Systems\TileSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">

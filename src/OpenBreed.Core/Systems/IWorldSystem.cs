@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Systems.Common.Components;
+﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.Systems.Common.Components;
 
 namespace OpenBreed.Core.Systems
 {
@@ -10,34 +11,45 @@ namespace OpenBreed.Core.Systems
         #region Public Methods
 
         /// <summary>
+        /// World which owns this system
+        /// </summary>
+        World World { get; }
+
+        /// <summary>
         /// Initialize the system when world is created
         /// </summary>
         /// <param name="world">World that this system is initialized on</param>
         void Initialize(World world);
 
         /// <summary>
+        /// Perform cleanup of entites and their components related with this system
+        /// </summary>
+        void Cleanup();
+
+        /// <summary>
         /// Deinitialize the system when world is destroyed
         /// </summary>
-        /// <param name="world">World that this system is part of</param>
-        void Deinitialize(World world);
+        void Deinitialize();
+
+        bool Matches(IEntity entity);
+
+        void AddEntity(IEntity entity);
+
+        void RemoveEntity(IEntity entity);
 
         /// <summary>
-        /// Add the component to this system when entity is added to it's world
+        /// Handle given entity message
         /// </summary>
-        /// <param name="component">Component to add</param>
-        void AddComponent(IEntityComponent component);
+        /// <param name="sender">entity which is sending the message</param>
+        /// <param name="message">message</param>
+        /// <returns>True if message was handled, false otherwise</returns>
+        bool HandleMsg(IEntity sender, IEntityMsg message);
 
-        /// <summary>
-        /// Remove the component from this system when entity is being removed from it's world
-        /// </summary>
-        /// <param name="component">Component to remove</param>
-        void RemoveComponent(IEntityComponent component);
-
-        /// <summary>
-        /// Update this system with given time step
-        /// </summary>
-        /// <param name="dt">Time step</param>
-        void Update(float dt);
+        ///// <summary>
+        ///// Post system event 
+        ///// </summary>
+        ///// <param name="systemEvent">System event to be posted</param>
+        //void PostEvent(ISystemEvent systemEvent);
 
         #endregion Public Methods
     }

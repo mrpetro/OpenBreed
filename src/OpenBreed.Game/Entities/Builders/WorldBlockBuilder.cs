@@ -1,17 +1,19 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Entities.Builders;
+using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.Systems.Common.Components;
 
 namespace OpenBreed.Game.Entities.Builders
 {
-    public class WorldBlockBuilder : WorldEntityBuilder
+    public class WorldBlockBuilder : EntityBuilder
     {
         #region Internal Fields
 
         internal int x;
         internal int y;
-        internal TileAtlas tileAtlas;
+        internal int atlasId;
         internal int tileId;
 
         #endregion Internal Fields
@@ -32,9 +34,9 @@ namespace OpenBreed.Game.Entities.Builders
             this.y = y;
         }
 
-        public void SetTileAtlas(TileAtlas tileAtlas)
+        public void SetTileAtlas(int atlasId)
         {
-            this.tileAtlas = tileAtlas;
+            this.atlasId = atlasId;
         }
 
         public void SetTileId(int tileId)
@@ -44,7 +46,13 @@ namespace OpenBreed.Game.Entities.Builders
 
         public override IEntity Build()
         {
-            return new WorldBlock(this);
+            var entity = Core.Entities.Create();
+
+            entity.Add(new Position(x * 16, y * 16));
+            entity.Add(new GridBoxBody(16));
+            entity.Add(Core.Rendering.CreateTile(atlasId, tileId));
+
+            return entity;
         }
 
         #endregion Public Methods

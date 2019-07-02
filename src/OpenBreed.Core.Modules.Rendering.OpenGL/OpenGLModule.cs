@@ -1,6 +1,8 @@
 ﻿using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
+using OpenBreed.Core.Systems;
+using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System;
 
@@ -11,6 +13,9 @@ namespace OpenBreed.Core.Modules.Rendering
         #region Private Fields
 
         private TextureMan textureMan = new TextureMan();
+        private TileMan tileMan = new TileMan();
+        private readonly SpriteMan spriteMan;
+        private readonly FontMan fontMan;
         private ViewportMan viewportMan = new ViewportMan();
 
         #endregion Private Fields
@@ -20,6 +25,9 @@ namespace OpenBreed.Core.Modules.Rendering
         public OpenGLModule(ICore core)
         {
             Core = core ?? throw new ArgumentNullException(nameof(core));
+
+            spriteMan = new SpriteMan(this);
+            fontMan = new FontMan(this);
         }
 
         #endregion Public Constructors
@@ -30,6 +38,12 @@ namespace OpenBreed.Core.Modules.Rendering
 
         public ITextureMan Textures { get { return textureMan; } }
 
+        public ISpriteMan Sprites { get { return spriteMan; } }
+
+        public ITileMan Tiles { get { return tileMan; } }
+
+        public IFontMan Fonts { get { return fontMan; } }
+
         public IViewportMan Viewports { get { return viewportMan; } }
 
         #endregion Public Properties
@@ -37,27 +51,52 @@ namespace OpenBreed.Core.Modules.Rendering
         #region Public Methods
 
         /// <summary>
-        /// Creates render system and return it
+        /// Create system for handling sprites
         /// </summary>
-        /// <returns>Render system interface</returns>
-        public IRenderSystem CreateRenderSystem(int gridWidth, int gridHeight)
+        /// <returns>Sprite system</returns>
+        public IWorldSystem CreateSpriteSystem()
         {
-            return new RenderSystem(Core, gridWidth, gridHeight);
+            return new SpriteSystem(Core);
         }
 
-        public IText CreateText(IFont font, string value = null)
+        /// <summary>
+        /// Create system for handling texts
+        /// </summary>
+        /// <returns>Text system</returns>
+        public IWorldSystem CreateTextSystem()
         {
-            return new Text(font, value);
+            return new TextSystem(Core);
         }
 
-        public ISprite CreateSprite(ISpriteAtlas atlas, int imageId = 0)
+        /// <summary>
+        /// Create system for handling tiles
+        /// </summary>
+        /// <returns>Tile system</returns>
+        public ITileSystem CreateTileSystem(int gridWidth, int gridHeight, float tileSize, bool drawGrid)
         {
-            return new Sprite(atlas, imageId);
+            return new TileSystem(Core, gridWidth, gridHeight, tileSize, drawGrid);
         }
 
-        public ITile CreateTile(ITileAtlas atlas, int imageId = 0)
+        /// <summary>
+        /// Creates text component using given font
+        /// </summary>
+        /// <param name="fontId">Id of font to use for this text component</param>
+        /// <param name="offset">Offset position from position component</param>
+        /// <param name="value">Optional initial text value</param>
+        /// <returns>Text component</returns>
+        public IText CreateText(int fontId, Vector2 offset, string value = null)
         {
-            return new Tile(atlas, imageId);
+            return new Text(fontId, offset, value);
+        }
+
+        public ISprite CreateSprite(int atlasId, int imageId = 0)
+        {
+            return new Sprite(atlasId, imageId);
+        }
+
+        public ITile CreateTile(int atlasId, int imageId = 0)
+        {
+            return new Tile(atlasId, imageId);
         }
 
         public void Draw(float dt)
@@ -86,7 +125,7 @@ namespace OpenBreed.Core.Modules.Rendering
         {
             GL.PushMatrix();
 
-            GL.Translate(Core.CursorPos.X, Core.CursorPos.Y, 0.0f);
+            GL.Translate(Core.Inputs.CursorPos.X, Core.Inputs.CursorPos.Y, 0.0f);
 
             GL.Color3(1.0f, 0.0f, 0.0f);
             GL.Begin(PrimitiveType.Triangles);

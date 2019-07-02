@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Modules;
+using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Rendering;
@@ -42,6 +43,11 @@ namespace OpenBreed.Core
         InputsMan Inputs { get; }
 
         /// <summary>
+        /// Animations manager
+        /// </summary>
+        IAnimMan Animations { get; }
+
+        /// <summary>
         /// Worlds manager
         /// </summary>
         WorldMan Worlds { get; }
@@ -52,46 +58,13 @@ namespace OpenBreed.Core
         StateMan StateMachine { get; }
 
         /// <summary>
-        /// Gets cursor position in window coordinates
+        /// Client display transformation matrix
         /// </summary>
-        Vector2 CursorPos { get; }
-
-        /// <summary>
-        /// Gets position delta (difference between current and previous)
-        /// </summary>
-        Vector2 CursorDelta { get; }
-
-        /// <summary>
-        /// Gets cursor wheel value
-        /// </summary>
-        float Wheel { get; }
-
-        /// <summary>
-        /// Gets wheel delta (difference between current and previous)
-        /// </summary>
-        float WheelDelta { get; }
+        Matrix4 ClientTransform { get; }
 
         #endregion Public Properties
 
         #region Public Methods
-
-        /// <summary>
-        /// Creates movement system and return it
-        /// </summary>
-        /// <returns>Movement system interface</returns>
-        IMovementSystem CreateMovementSystem();
-
-        /// <summary>
-        /// Creates animation system and return it
-        /// </summary>
-        /// <returns>Animation system interface</returns>
-        IAnimationSystem CreateAnimationSystem();
-
-        /// <summary>
-        /// Creates control system and return it
-        /// </summary>
-        /// <returns>Control system interface</returns>
-        IControlSystem CreateControlSystem();
 
         /// <summary>
         /// Perform exit

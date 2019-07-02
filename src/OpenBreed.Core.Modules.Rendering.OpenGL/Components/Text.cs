@@ -1,8 +1,8 @@
 ﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems.Common.Components;
+using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Linq;
@@ -13,53 +13,36 @@ namespace OpenBreed.Core.Modules.Rendering.Components
     {
         #region Private Fields
 
-        private Position position;
-        private IFont font;
-
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        internal Text(IFont font, string value)
+        internal Text(int fontId, Vector2 offset, string value)
         {
-            this.font = font;
+            FontId = fontId;
+            Offset = offset;
             Value = value;
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
 
+        /// <summary>
+        /// Id of text font
+        /// </summary>
+        public int FontId { get; set; }
+
+        /// <summary>
+        /// Offset position of text
+        /// </summary>
+        public Vector2 Offset { get; set; }
+
+        /// <summary>
+        /// Actual text of this component
+        /// </summary>
         public string Value { get; set; }
-        public Type SystemType { get { return typeof(RenderSystem); } }
 
         #endregion Public Properties
-
-        #region Public Methods
-
-        public void Deinitialize(IEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Draw(IViewport viewport)
-        {
-            GL.Enable(EnableCap.Texture2D);
-            GL.PushMatrix();
-
-            GL.Translate(position.Current.X, position.Current.Y, 0.0f);
-
-            font.Draw(Value);
-
-            GL.PopMatrix();
-            GL.Disable(EnableCap.Texture2D);
-        }
-
-        public void Initialize(IEntity entity)
-        {
-            position = entity.Components.OfType<Position>().FirstOrDefault();
-        }
-
-        #endregion Public Methods
     }
 }

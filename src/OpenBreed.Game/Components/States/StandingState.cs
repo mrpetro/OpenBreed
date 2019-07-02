@@ -1,7 +1,10 @@
 ﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems.Animation.Components;
+using OpenBreed.Core.Systems.Animation.Messages;
 using OpenBreed.Core.Systems.Common.Components;
+using OpenBreed.Core.Systems.Movement.Components;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -13,9 +16,10 @@ namespace OpenBreed.Game.Components.States
 {
     public class StandingState : IState
     {
-        private CreatureMovement creatureMovement;
-        private SpriteAnimator spriteAnimator;
-        private Direction direction;
+        public IEntity Entity { get; private set; }
+        private IThrust thrust;
+        private Animator<int> spriteAnimation;
+        private IDirection direction;
         private readonly string animationId;
         private readonly Vector2 facingDirection;
 
@@ -30,15 +34,17 @@ namespace OpenBreed.Game.Components.States
 
         public void EnterState()
         {
-            creatureMovement.Stop();
-            spriteAnimator.Play(animationId);
+            thrust.Value = Vector2.Zero;
+            Entity.PostMessage(new PlayAnimMsg(animationId));
+            Entity.PostMessage(new SetTextMsg("Hero - Standing"));
         }
 
         public void Initialize(IEntity entity)
         {
-            creatureMovement = entity.Components.OfType<CreatureMovement>().First();
-            spriteAnimator = entity.Components.OfType<SpriteAnimator>().First();
-            direction = entity.Components.OfType<Direction>().First();
+            Entity = entity;
+            thrust = entity.Components.OfType<IThrust>().First();
+            spriteAnimation = entity.Components.OfType<Animator<int>>().First();
+            direction = entity.Components.OfType<IDirection>().First();
         }
 
         public void LeaveState()

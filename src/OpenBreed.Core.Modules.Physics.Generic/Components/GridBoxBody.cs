@@ -3,6 +3,7 @@ using OpenBreed.Core.Entities;
 using OpenTK;
 using System;
 using System.Linq;
+using OpenBreed.Core.Modules.Physics.Systems;
 
 namespace OpenBreed.Core.Modules.Physics.Components
 {
@@ -11,7 +12,7 @@ namespace OpenBreed.Core.Modules.Physics.Components
         #region Private Fields
 
         private float size;
-        private Position position;
+        private IPosition position;
 
         #endregion Private Fields
 
@@ -28,8 +29,6 @@ namespace OpenBreed.Core.Modules.Physics.Components
 
         public Box2 Aabb { get; private set; }
 
-        public Type SystemType { get { return typeof(PhysicsSystem); } }
-
         #endregion Public Properties
 
         #region Public Methods
@@ -41,20 +40,20 @@ namespace OpenBreed.Core.Modules.Physics.Components
 
         public void GetGridIndices(out int x, out int y)
         {
-            x = (int)(position.Current.X / size);
-            y = (int)(position.Current.Y / size);
+            x = (int)(position.Value.X / size);
+            y = (int)(position.Value.Y / size);
         }
 
         public void Initialize(IEntity entity)
         {
-            position = entity.Components.OfType<Position>().First();
+            position = entity.Components.OfType<IPosition>().First();
 
             Aabb = new Box2
             {
-                Left = position.Current.X,
-                Bottom = position.Current.Y,
-                Right = position.Current.X + size,
-                Top = position.Current.Y + size,
+                Left = position.Value.X,
+                Bottom = position.Value.Y,
+                Right = position.Value.X + size,
+                Top = position.Value.Y + size,
             };
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenBreed.Core.Systems.Common.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,13 @@ namespace OpenBreed.Core.Modules.Rendering.Components
     /// <summary>
     /// Sprite render component interface
     /// </summary>
-    public interface ISprite : IRenderComponent
+    public interface ISprite : IEntityComponent
     {
+        /// <summary>
+        /// Id of sprite atlas
+        /// </summary>
+        int AtlasId { get; set; }
+
         /// <summary>
         /// Id of sprite image from the atlas
         /// </summary>

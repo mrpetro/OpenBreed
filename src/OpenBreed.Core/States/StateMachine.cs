@@ -1,23 +1,28 @@
 ﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.Systems;
-using OpenBreed.Core.Systems.Common.Components;
-using OpenTK;
 using System;
 using System.Collections.Generic;
 
 namespace OpenBreed.Core.States
 {
-    public class StateMachine : IEntityComponent
+    public class StateMachine
     {
         #region Private Fields
 
+        public IEntity Entity { get; }
         private Dictionary<string, IState> states = new Dictionary<string, IState>();
         private IState currentState = null;
-        private string initialStateId;
-
-        public Type SystemType { get { return null; } }
 
         #endregion Private Fields
+
+        #region Public Constructors
+
+        public StateMachine(IEntity entity)
+        {
+            Entity = entity;
+            Entity.PerformDelegate = Perform;
+        }
+
+        #endregion Public Constructors
 
         #region Public Methods
 
@@ -32,34 +37,19 @@ namespace OpenBreed.Core.States
             states.Add(state.Id, state);
         }
 
-        public void Initialize(IEntity entity)
+        /// <summary>
+        /// Initialize state machine with particular state
+        /// </summary>
+        /// <param name="initialStateId">Initial state id</param>
+        public void Initialize(string initialStateId)
         {
             foreach (var state in states)
-                state.Value.Initialize(entity);
+                state.Value.Initialize(Entity);
 
             if (currentState != null)
                 throw new InvalidOperationException($"Initial state already set to '{currentState.Id}'");
 
             currentState = states[initialStateId];
-            //Console.WriteLine($"Entering state '{currentState.Id}'");
-            currentState.EnterState();
-        }
-
-        public void Deinitialize(IEntity entity)
-        {
-
-        }
-
-        #endregion Public Methods
-
-        #region Private Methods
-
-        private void ChangeState(string nextStateId)
-        {
-            //Console.WriteLine($"Leaving state '{currentState.Id}'");
-            currentState.LeaveState();
-            currentState = states[nextStateId];
-            //Console.WriteLine($"Entering state '{currentState.Id}'");
             currentState.EnterState();
         }
 
@@ -74,10 +64,17 @@ namespace OpenBreed.Core.States
                 ChangeState(nextStateName);
         }
 
-        public void SetInitialState(string stateId, params object[] arguments)
-        {
-            initialStateId = stateId;
+        #endregion Public Methods
 
+        #region Private Methods
+
+        private void ChangeState(string nextStateId)
+        {
+            //Console.WriteLine($"Leaving state '{currentState.Id}'");
+            currentState.LeaveState();
+            currentState = states[nextStateId];
+            //Console.WriteLine($"Entering state '{currentState.Id}'");
+            currentState.EnterState();
         }
 
         #endregion Private Methods

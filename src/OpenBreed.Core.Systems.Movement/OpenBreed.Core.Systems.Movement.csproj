@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OpenBreed.Core.Systems.Movement</RootNamespace>
     <AssemblyName>OpenBreed.Core.Systems.Movement</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,8 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\IMovementComponent.cs" />
-    <Compile Include="MovementSystem.cs" />
+    <Compile Include="Components\Motion.cs" />
+    <Compile Include="Systems\MovementSystem.cs" />
     <Compile Include="MovementTools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

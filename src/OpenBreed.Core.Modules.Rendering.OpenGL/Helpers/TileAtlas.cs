@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Core.Modules.Rendering.Helpers
 {
-    public class TileAtlas : ITileAtlas
+    internal class TileAtlas : ITileAtlas
     {
         #region Private Fields
 
@@ -20,12 +20,12 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        public TileAtlas(ITexture texture, int tileSize, int tileColumns, int tileRows)
+        internal TileAtlas(int id, ITexture texture, int tileSize, int tileColumns, int tileRows)
         {
-            this.Texture = texture;
-
+            Id = id;
+            Texture = texture;
             TileSize = tileSize;
 
             vboList = new List<int>();
@@ -34,12 +34,13 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             BuildCoords(tileRows, tileColumns);
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
 
         public ITexture Texture { get; }
         public float TileSize { get; }
+        public int Id { get; }
 
         #endregion Public Properties
 

@@ -14,8 +14,6 @@ namespace OpenBreed.Core.Modules.Audio.Components
     {
         #region Private Fields
 
-        private Position position;
-
         #endregion Private Fields
 
         #region Public Constructors
@@ -26,22 +24,7 @@ namespace OpenBreed.Core.Modules.Audio.Components
 
         #endregion Public Constructors
 
-        #region Public Properties
-
-        public Type SystemType { get { return typeof(SoundSystem); } }
-
-        #endregion Public Properties
-
         #region Public Methods
-
-        public void Deinitialize(IEntity entity)
-        {
-        }
-
-        public void Initialize(IEntity entity)
-        {
-            position = entity.Components.OfType<Position>().First();
-        }
 
         public void Play(string soundId)
         {

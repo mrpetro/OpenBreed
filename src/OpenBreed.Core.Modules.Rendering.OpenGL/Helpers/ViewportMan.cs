@@ -32,6 +32,17 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #region Public Methods
 
+        public void OnClientResize(float x, float y, float width, float height)
+        {
+            for (int i = 0; i < items.Count; i++)
+                items[i].OnClientResize(x, y, width, height);
+        }
+
+        public IViewport Create(float x, float y, float width, float height)
+        {
+            return new Viewport(x, y, width, height);
+        }
+
         public void Remove(IViewport viewport)
         {
             if (toRemove.Contains(viewport))
@@ -61,7 +72,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         internal void Draw(float dt)
         {
             for (int i = 0; i < items.Count; i++)
-                items[i].Draw();
+                items[i].Render(dt);
         }
 
         internal void Cleanup()

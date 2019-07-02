@@ -14,6 +14,10 @@ using OpenTK;
 using OpenTK.Input;
 using System;
 using System.Drawing;
+using OpenBreed.Core.Entities;
+using OpenBreed.Game.Worlds;
+using OpenBreed.Core.Systems.Control.Components;
+using OpenBreed.Core.Systems.Movement.Components;
 
 namespace OpenBreed.Game.States
 {
@@ -58,10 +62,8 @@ namespace OpenBreed.Game.States
 
         private ITexture tileTex;
         private ITexture spriteTex;
-        private TileAtlas tileAtlas;
-        private SpriteAtlas spriteAtlas;
-        private int px;
-        private int py;
+        private ITileAtlas tileAtlas;
+        private ISpriteAtlas spriteAtlas;
         private Viewport viewportLeft;
         private Viewport viewportRight;
 
@@ -81,32 +83,32 @@ namespace OpenBreed.Game.States
 
         private void InitializeAll()
         {
-            WorldA = new World(Core);
-            WorldB = new World(Core);
+            WorldA = new GameWorld(Core);
+            WorldB = new GameWorld(Core);
             var cameraBuilder = new CameraBuilder(Core);
 
             //Resources
             tileTex = Core.Rendering.Textures.Load(@"Content\TileAtlasTest32bit.bmp");
             spriteTex = Core.Rendering.Textures.Load(@"Content\ArrowSpriteSet.png");
-            tileAtlas = new TileAtlas(tileTex, 16, 4, 4);
-            spriteAtlas = new SpriteAtlas(spriteTex, 32, 32, 8, 1);
+            tileAtlas = Core.Rendering.Tiles.Create(tileTex, 16, 4, 4);
+            spriteAtlas = Core.Rendering.Sprites.Create(spriteTex, 32, 32, 8, 5);
 
             cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
-            Camera1 = (Camera)cameraBuilder.Build();
+            Camera1 = (CameraEntity)cameraBuilder.Build();
             WorldA.AddEntity(Camera1);
 
             cameraBuilder.SetPosition(new Vector2(64, 0));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
-            Camera2 = (Camera)cameraBuilder.Build();
+            Camera2 = (CameraEntity)cameraBuilder.Build();
             WorldB.AddEntity(Camera2);
 
-            viewportLeft = new Viewport(50, 50, 540, 380);
+            viewportLeft = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
             viewportLeft.Camera = Camera1;
 
-            viewportRight = new Viewport(50, 50, 540, 380);
+            viewportRight = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
             viewportRight.Camera = Camera2;
 
             Core.Worlds.Add(WorldA);
@@ -119,9 +121,9 @@ namespace OpenBreed.Game.States
 
         public ICore Core { get; }
 
-        public Camera Camera1 { get; private set; }
+        public CameraEntity Camera1 { get; private set; }
 
-        public Camera Camera2 { get; private set; }
+        public CameraEntity Camera2 { get; private set; }
 
         public override string Id { get { return ID; } }
 
@@ -151,9 +153,9 @@ namespace OpenBreed.Game.States
 
             Viewport hoverViewport = null;
 
-            if (viewportLeft.TestScreenCoords(Core.CursorPos))
+            if (viewportLeft.TestScreenCoords(Core.Inputs.CursorPos))
                 hoverViewport = viewportLeft;
-            else if (viewportRight.TestScreenCoords(Core.CursorPos))
+            else if (viewportRight.TestScreenCoords(Core.Inputs.CursorPos))
                 hoverViewport = viewportRight;
             else
                 hoverViewport = null;
@@ -166,10 +168,10 @@ namespace OpenBreed.Game.States
                 {
                     var transf = hoverViewport.Camera.GetTransform();
                     transf.Invert();
-                    var delta4 = Vector4.Transform(transf, new Vector4(Core.CursorDelta));
+                    var delta4 = Vector4.Transform(transf, new Vector4(Core.Inputs.CursorDelta));
                     var delta2 = new Vector2(-delta4.X, -delta4.Y);
 
-                    hoverViewport.Camera.Position += delta2;
+                    hoverViewport.Camera.Position.Value += delta2;
                 }
             }
         }
@@ -220,25 +222,27 @@ namespace OpenBreed.Game.States
         private void InitializeWorldA()
         {
             var blockBuilder = new WorldBlockBuilder(Core);
-            blockBuilder.SetTileAtlas(tileAtlas);
+            blockBuilder.SetTileAtlas(tileAtlas.Id);
 
-            var animator = ActorHelper.CreateAnimator();
-            var stateMachine = ActorHelper.CreateStateMachine();
-            stateMachine.SetInitialState("Standing_Right");
+            var animator = ActorHelper.CreateAnimation(Core);
 
-            var actorBuilder = new WorldActorBuilder(Core);
-            actorBuilder.SetStateMachine(stateMachine);
-            actorBuilder.SetAnimator(animator);
-            actorBuilder.SetSpriteAtlas(spriteAtlas);
-            actorBuilder.SetSprite(Core.Rendering.CreateSprite(spriteAtlas));
-            actorBuilder.SetPosition(new DynamicPosition(20, 20));
-            actorBuilder.SetDirection(new Direction(1, 0));
-            actorBuilder.SetShape(new AxisAlignedBoxShape(32, 32));
-            actorBuilder.SetMovement(new CreatureMovement());
-            actorBuilder.SetBody(new DynamicBody());
+            var actor = Core.Entities.Create();
 
-            actorBuilder.SetController(new KeyboardCreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
-            WorldA.AddEntity((WorldActor)actorBuilder.Build());
+            actor.Add(animator);
+            actor.Add(Core.Rendering.CreateSprite(spriteAtlas.Id));
+            actor.Add(new Position(20, 20));
+            actor.Add(Thrust.Create(0, 0));
+            actor.Add(Velocity.Create(0, 0));
+            actor.Add(Direction.Create(1, 0));
+            actor.Add(new AxisAlignedBoxShape(32, 32));
+            actor.Add(new Motion());
+            actor.Add(new DynamicBody());
+            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
+
+            var stateMachine = ActorHelper.CreateStateMachine(actor);
+            stateMachine.Initialize("Standing_Right");
+
+            WorldA.AddEntity(actor);
 
             var rnd = new Random();
 
@@ -254,7 +258,7 @@ namespace OpenBreed.Game.States
                     {
                         blockBuilder.SetIndices(x + 5, 10 - y + 5);
                         blockBuilder.SetTileId(v);
-                        WorldA.AddEntity((WorldBlock)blockBuilder.Build());
+                        WorldA.AddEntity(blockBuilder.Build());
                     }
                 }
             }
@@ -262,26 +266,28 @@ namespace OpenBreed.Game.States
 
         private void InitializeWorldB()
         {
-            var animator = ActorHelper.CreateAnimator();
-            var stateMachine = ActorHelper.CreateStateMachine();
-            stateMachine.SetInitialState("Standing_Down");
+            var animator = ActorHelper.CreateAnimation(Core);
 
             var blockBuilder = new WorldBlockBuilder(Core);
-            blockBuilder.SetTileAtlas(tileAtlas);
+            blockBuilder.SetTileAtlas(tileAtlas.Id);
 
-            var actorBuilder = new WorldActorBuilder(Core);
-            actorBuilder.SetStateMachine(stateMachine);
-            actorBuilder.SetAnimator(animator);
-            actorBuilder.SetSpriteAtlas(spriteAtlas);
-            actorBuilder.SetSprite(Core.Rendering.CreateSprite(spriteAtlas));
-            actorBuilder.SetPosition(new DynamicPosition(50, 20));
-            actorBuilder.SetDirection(new Direction(1, 0));
-            actorBuilder.SetShape(new AxisAlignedBoxShape(32, 32));
-            actorBuilder.SetMovement(new CreatureMovement());
-            actorBuilder.SetBody(new DynamicBody());
+            var actor = Core.Entities.Create();
 
-            actorBuilder.SetController(new KeyboardCreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
-            WorldB.AddEntity((WorldActor)actorBuilder.Build());
+            actor.Add(animator);
+            actor.Add(Core.Rendering.CreateSprite(spriteAtlas.Id));
+            actor.Add(new Position(50, 20));
+            actor.Add(Thrust.Create(0, 0));
+            actor.Add(Velocity.Create(0, 0));
+            actor.Add(Direction.Create(1, 0));
+            actor.Add(new AxisAlignedBoxShape(32, 32));
+            actor.Add(new Motion());
+            actor.Add(new DynamicBody());
+            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
+
+            var stateMachine = ActorHelper.CreateStateMachine(actor);
+            stateMachine.Initialize("Standing_Down");
+
+            WorldB.AddEntity(actor);
 
             var rnd = new Random();
 
@@ -297,7 +303,7 @@ namespace OpenBreed.Game.States
                     {
                         blockBuilder.SetIndices(x + 5, y + 5);
                         blockBuilder.SetTileId(v);
-                        WorldB.AddEntity((WorldBlock)blockBuilder.Build());
+                        WorldB.AddEntity(blockBuilder.Build());
                     }
                 }
             }

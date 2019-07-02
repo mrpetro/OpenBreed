@@ -8,17 +8,17 @@ namespace OpenBreed.Core.Systems.Common.Components
     /// Direction entity component class that can be used to store entity current direction information
     /// Example: Actor is facing particular direction when standing
     /// </summary>
-    public class Direction : IEntityComponent
+    public class Direction : IDirection
     {
-        #region Public Constructors
+        #region Private Constructors
 
         /// <summary>
         /// Constructor with passed initial direction value
         /// </summary>
         /// <param name="value">Initial value vector</param>
-        public Direction(Vector2 value)
+        private Direction(Vector2 value)
         {
-            Current = value;
+            Value = value;
         }
 
         /// <summary>
@@ -26,43 +26,32 @@ namespace OpenBreed.Core.Systems.Common.Components
         /// </summary>
         /// <param name="x">Initial x value</param>
         /// <param name="y">Initial y value</param>
-        public Direction(float x, float y)
+        private Direction(float x, float y)
         {
-            Current = new Vector2(x, y);
+            Value = new Vector2(x, y);
         }
 
-        #endregion Public Constructors
+        #endregion Private Constructors
 
         #region Public Properties
 
         /// <summary>
-        /// Current direction value
+        /// Direction value
         /// </summary>
-        public Vector2 Current { get; set; }
-
-        /// <summary>
-        /// System type that this component is part of
-        /// </summary>
-        public Type SystemType { get { return null; } }
+        public Vector2 Value { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        /// <summary>
-        /// Initialize this component
-        /// </summary>
-        /// <param name="entity">Entity which this component belongs to</param>
-        public void Initialize(IEntity entity)
+        public static IDirection Create(Vector2 value)
         {
+            return new Direction(value);
         }
 
-        /// <summary>
-        /// Deinitialize this component
-        /// </summary>
-        /// <param name="entity">Entity which this component belongs to</param>
-        public void Deinitialize(IEntity entity)
+        public static IDirection Create(float x, float y)
         {
+            return new Direction(x, y);
         }
 
         #endregion Public Methods

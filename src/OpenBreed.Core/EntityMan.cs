@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.Systems;
 using System;
 using System.Collections.Generic;
 
@@ -12,6 +13,21 @@ namespace OpenBreed.Core
 
         #endregion Private Fields
 
+        #region Public Constructors
+
+        public EntityMan(ICore core)
+        {
+            Core = core;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public ICore Core { get; }
+
+        #endregion Public Properties
+
         #region Public Methods
 
         public IEntity GetByGuid(Guid guid)
@@ -24,11 +40,16 @@ namespace OpenBreed.Core
                 throw new InvalidOperationException($"Entity with Guid '{guid}' not found.");
         }
 
+        public IEntity Create()
+        {
+            return new Entity(this);
+        }
+
         #endregion Public Methods
 
         #region Internal Methods
 
-        internal void AddEntity(EntityBase entity)
+        internal void AddEntity(IEntity entity)
         {
             entities.Add(entity.Guid, entity);
         }

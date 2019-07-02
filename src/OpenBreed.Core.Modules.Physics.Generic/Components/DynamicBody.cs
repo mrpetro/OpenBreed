@@ -5,6 +5,7 @@ using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenBreed.Core.Modules.Physics.Systems;
 
 namespace OpenBreed.Core.Modules.Physics.Components
 {
@@ -53,17 +54,16 @@ namespace OpenBreed.Core.Modules.Physics.Components
         public Vector2 Projection { get; private set; }
 
         public IShapeComponent Shape { get; private set; }
-        public DynamicPosition Position { get; private set; }
+        public IPosition Position { get; private set; }
+        public IVelocity Velocity { get; private set; }
 
         public Box2 Aabb
         {
             get
             {
-                return Shape.Aabb.Translated(Position.Current);
+                return Shape.Aabb.Translated(Position.Value);
             }
         }
-
-        public Type SystemType { get { return typeof(PhysicsSystem); } }
 
         #endregion Public Properties
 
@@ -76,7 +76,8 @@ namespace OpenBreed.Core.Modules.Physics.Components
 
         public void Initialize(IEntity entity)
         {
-            Position = entity.Components.OfType<DynamicPosition>().First();
+            Position = entity.Components.OfType<IPosition>().First();
+            Velocity = entity.Components.OfType<IVelocity>().First();
             Shape = entity.Components.OfType<IShapeComponent>().First();
         }
 
@@ -159,8 +160,8 @@ namespace OpenBreed.Core.Modules.Physics.Components
             var d = DRAG;
             var g = 0.0f;
 
-            var p = Position.Current;
-            var o = Position.Old;
+            var o = Position.Value;
+            var p = o + Velocity.Value;
 
             float px, py;
 
@@ -170,7 +171,7 @@ namespace OpenBreed.Core.Modules.Physics.Components
             px = p.X;
             py = p.Y;
 
-            Position.Old = new Vector2(px, py);
+            Position.Value = new Vector2(px, py);
 
             //integrate
             p.X += (d * px) - (d * ox);
@@ -194,13 +195,13 @@ namespace OpenBreed.Core.Modules.Physics.Components
 
         private void ReportVsStatic(Vector2 projection, Vector2 normal, IStaticBody staticBody)
         {
-            var p = Position.Current;
-            var o = Position.Old;
+            var o = Position.Value;
+            var p = o + Velocity.Value;
 
             //find component of velocity parallel to collision normal
-            var dp = Vector2.Dot(Position.Velocity, normal);
+            var dp = Vector2.Dot(Velocity.Value, normal);
             var n = Vector2.Multiply(normal, dp);
-            var t = Vector2.Subtract(Position.Velocity, n);
+            var t = Vector2.Subtract(Velocity.Value, n);
 
             //we only want to apply collision response forces if the object is travelling into, and not out of, the collision
             float b, bx, by, f, fx, fy;
@@ -221,11 +222,9 @@ namespace OpenBreed.Core.Modules.Physics.Components
                 bx = by = fx = fy = 0;
             }
 
-            Position.Current += projection;
-
-            Position.Old += projection;
-            Position.Old += new Vector2(bx, by);
-            Position.Old += new Vector2(fx, fy);
+            Position.Value += projection;
+            Position.Value += new Vector2(bx, by);
+            Position.Value += new Vector2(fx, fy);
         }
 
         #endregion Private Methods

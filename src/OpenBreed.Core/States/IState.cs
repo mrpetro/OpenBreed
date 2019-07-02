@@ -6,6 +6,8 @@ namespace OpenBreed.Core.States
     {
         #region Public Properties
 
+        IEntity Entity { get; }
+
         string Id { get; }
 
         #endregion Public Properties

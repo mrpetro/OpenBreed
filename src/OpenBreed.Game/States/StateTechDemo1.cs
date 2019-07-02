@@ -15,6 +15,10 @@ using OpenTK;
 using OpenTK.Input;
 using System;
 using System.Drawing;
+using OpenBreed.Core.Entities;
+using OpenBreed.Game.Worlds;
+using OpenBreed.Core.Systems.Control.Components;
+using OpenBreed.Core.Systems.Movement.Components;
 
 namespace OpenBreed.Game.States
 {
@@ -53,8 +57,8 @@ namespace OpenBreed.Game.States
 
         private ITexture tileTex;
         private ITexture spriteTex;
-        private TileAtlas tileAtlas;
-        private SpriteAtlas spriteAtlas;
+        private ITileAtlas tileAtlas;
+        private ISpriteAtlas spriteAtlas;
         private Viewport viewportA;
         private Viewport viewportB;
         private Viewport viewportC;
@@ -76,9 +80,9 @@ namespace OpenBreed.Game.States
 
         public ICore Core { get; }
 
-        public Camera Camera1 { get; private set; }
+        public CameraEntity Camera1 { get; private set; }
 
-        public Camera Camera2 { get; private set; }
+        public CameraEntity Camera2 { get; private set; }
 
         public override string Id { get { return ID; } }
 
@@ -113,11 +117,11 @@ namespace OpenBreed.Game.States
 
             Viewport hoverViewport = null;
 
-            if (viewportA.TestScreenCoords(Core.CursorPos))
+            if (viewportA.TestScreenCoords(Core.Inputs.CursorPos))
                 hoverViewport = viewportA;
-            else if (viewportB.TestScreenCoords(Core.CursorPos))
+            else if (viewportB.TestScreenCoords(Core.Inputs.CursorPos))
                 hoverViewport = viewportB;
-            else if (viewportC.TestScreenCoords(Core.CursorPos))
+            else if (viewportC.TestScreenCoords(Core.Inputs.CursorPos))
                 hoverViewport = viewportC;
             else
                 hoverViewport = null;
@@ -130,10 +134,10 @@ namespace OpenBreed.Game.States
                 {
                     var transf = hoverViewport.Camera.GetTransform();
                     transf.Invert();
-                    var delta4 = Vector4.Transform(transf, new Vector4(Core.CursorDelta));
+                    var delta4 = Vector4.Transform(transf, new Vector4(Core.Inputs.CursorDelta));
                     var delta2 = new Vector2(-delta4.X, -delta4.Y);
 
-                    hoverViewport.Camera.Position += delta2;
+                    hoverViewport.Camera.Position.Value += delta2;
                 }
             }
         }
@@ -184,61 +188,64 @@ namespace OpenBreed.Game.States
 
         private void InitializeWorld()
         {
-            World = new World(Core);
+            World = new GameWorld(Core);
 
             var cameraBuilder = new CameraBuilder(Core);
 
             //Resources
             tileTex = Core.Rendering.Textures.Load(@"Content\TileAtlasTest32bit.bmp");
             spriteTex = Core.Rendering.Textures.Load(@"Content\ArrowSpriteSet.png");
-            tileAtlas = new TileAtlas(tileTex, 16, 4, 4);
-            spriteAtlas = new SpriteAtlas(spriteTex, 32, 32, 8, 1);
+            tileAtlas = Core.Rendering.Tiles.Create(tileTex, 16, 4, 4);
+            spriteAtlas = Core.Rendering.Sprites.Create(spriteTex, 32, 32, 8, 5);
 
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
-            Camera1 = (Camera)cameraBuilder.Build();
+
+            Camera1 = (CameraEntity)cameraBuilder.Build();
+
             World.AddEntity(Camera1);
 
             cameraBuilder.SetPosition(new Vector2(64, 288));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
-            Camera2 = (Camera)cameraBuilder.Build();
+            Camera2 = (CameraEntity)cameraBuilder.Build();
             World.AddEntity(Camera2);
 
-            viewportA = new Viewport(50, 50, 540, 380);
+            viewportA = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
             viewportA.Camera = Camera1;
 
-            viewportB = new Viewport(50, 50, 540, 380);
+            viewportB = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
             viewportB.Camera = Camera2;
 
-            viewportC = new Viewport(50, 50, 540, 380);
+            viewportC = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
             viewportC.Camera = Camera2;
 
             Core.Worlds.Add(World);
 
             var blockBuilder = new WorldBlockBuilder(Core);
-            blockBuilder.SetTileAtlas(tileAtlas);
+            blockBuilder.SetTileAtlas(tileAtlas.Id);
 
-            var animator = ActorHelper.CreateAnimator();
-            var stateMachine = ActorHelper.CreateStateMachine();
-            stateMachine.SetInitialState("Standing_Down");
-
-            var actorBuilder = new WorldActorBuilder(Core);
-            actorBuilder.SetStateMachine(stateMachine);
-            actorBuilder.SetAnimator(animator);
-            actorBuilder.SetSpriteAtlas(spriteAtlas);
-            actorBuilder.SetSprite(new CollisionDebug(Core.Rendering.CreateSprite(spriteAtlas)));
-            actorBuilder.SetPosition(new DynamicPosition(64, 288));
-            actorBuilder.SetDirection(new Direction(1, 0));
-            actorBuilder.SetShape(new AxisAlignedBoxShape(32, 32));
-            actorBuilder.SetMovement(new CreatureMovement());
-            actorBuilder.SetBody(new DynamicBody());
+            var animator = ActorHelper.CreateAnimation(Core);
 
 
-            actorBuilder.SetController(new KeyboardCreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
+            var actor = Core.Entities.Create();
+            actor.Add(animator);
+            //actor.Add(new CollisionDebug(Core.Rendering.CreateSprite(spriteAtlas.Id)));
+            actor.Add(Core.Rendering.CreateSprite(spriteAtlas.Id));
+            actor.Add(new Position(64, 288));
+            actor.Add(Thrust.Create(0, 0));
+            actor.Add(Velocity.Create(0, 0));
+            actor.Add(Direction.Create(1, 0));
+            actor.Add(new AxisAlignedBoxShape(32, 32));
+            actor.Add(new Motion());
+            actor.Add(new DynamicBody());
+            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
 
-            World.AddEntity((WorldActor)actorBuilder.Build());
+            var stateMachine = ActorHelper.CreateStateMachine(actor);
+            stateMachine.Initialize("Standing_Down");
+
+            World.AddEntity(actor);
 
             var rnd = new Random();
 
@@ -254,44 +261,7 @@ namespace OpenBreed.Game.States
                     {
                         blockBuilder.SetIndices(x + 5, y + 5);
                         blockBuilder.SetTileId(v);
-                        World.AddEntity((WorldBlock)blockBuilder.Build());
-                    }
-                }
-            }
-        }
-
-        private void InitializeWorldB()
-        {
-            var blockBuilder = new WorldBlockBuilder(Core);
-            blockBuilder.SetTileAtlas(tileAtlas);
-
-            var actorBuilder = new WorldActorBuilder(Core);
-            actorBuilder.SetSpriteAtlas(spriteAtlas);
-            actorBuilder.SetSprite(Core.Rendering.CreateSprite(spriteAtlas));
-            actorBuilder.SetPosition(new DynamicPosition(50, 20));
-            actorBuilder.SetDirection(new Direction(1, 0));
-            actorBuilder.SetShape(new AxisAlignedBoxShape(32, 32));
-            actorBuilder.SetMovement(new CreatureMovement());
-            actorBuilder.SetBody(new DynamicBody());
-
-            actorBuilder.SetController(new KeyboardCreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
-            World.AddEntity((WorldActor)actorBuilder.Build());
-
-            var rnd = new Random();
-
-            var ymax = mapB.Length / 10;
-
-            for (int x = 0; x < 10; x++)
-            {
-                for (int y = 0; y < ymax; y++)
-                {
-                    var v = mapB[x + y * 10];
-
-                    if (v > 0)
-                    {
-                        blockBuilder.SetIndices(x + 5, y + 5);
-                        blockBuilder.SetTileId(v);
-                        World.AddEntity((WorldBlock)blockBuilder.Build());
+                        World.AddEntity(blockBuilder.Build());
                     }
                 }
             }

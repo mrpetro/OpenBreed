@@ -1,8 +1,14 @@
-﻿using OpenBreed.Core.Modules.Rendering.Entities;
+﻿using OpenBreed.Core.Extensions;
+using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Core.Modules.Rendering.Entities;
+using OpenBreed.Core.Modules.Rendering.Systems;
+using OpenBreed.Core.Systems;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
+using System;
 using System.Drawing;
+using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Helpers
 {
@@ -20,7 +26,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         /// <param name="y">Y screen coordinate of left bottom viewport corner</param>
         /// <param name="width">Width of defined viewport</param>
         /// <param name="height">Height of defined viewport</param>
-        public Viewport(float x, float y, float width, float height)
+        internal Viewport(float x, float y, float width, float height)
         {
             X = x;
             Y = y;
@@ -62,12 +68,14 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         /// <summary>
         /// Camera that is attached to this viewport
         /// </summary>
-        public Camera Camera { get; set; }
+        public CameraEntity Camera { get; set; }
 
-        /// <summary>
-        /// Height of this viewport
-        /// </summary>
-        public float Height { get; set; }
+        public ICamera CameraEx { get; set; }
+
+    /// <summary>
+    /// Height of this viewport
+    /// </summary>
+    public float Height { get; set; }
 
         /// <summary>
         /// Left edge screen coordinate of this viewport
@@ -103,6 +111,11 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #region Public Methods
 
+        public void OnClientResize(float x, float y, float width, float height)
+        {
+
+        }
+
         public bool TestScreenCoords(Vector2 point)
         {
             if (point.X < Left)
@@ -121,9 +134,10 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         }
 
         /// <summary>
-        /// Perform draw of render system from world that current camera is looking at
+        /// Render this viewport content to the screen
         /// </summary>
-        public void Draw()
+        /// <param name="dt">Time step</param>
+        public void Render(float dt)
         {
             GL.Translate(X, Y, 0.0f);
 
@@ -153,7 +167,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             if (DrawBackgroud)
                 DrawBackground();
 
-            Camera.RenderTo(this);
+            DrawCameraView(dt);
 
             if (Clipping)
             {
@@ -174,24 +188,40 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             GL.Translate(-X, -Y, 0.0f);
         }
 
+        /// <summary>
+        /// This will render world part currently visible by the camera into given viewport
+        /// </summary>
+        /// <param name="dt">Time step</param>
+        private void DrawCameraView(float dt)
+        {
+            GL.PushMatrix();
+
+            GL.Translate(Width / 2, Height / 2, 0.0f);
+
+            var transform = Camera.GetTransform();
+            GL.MultMatrix(ref transform);
+
+            Camera.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(this, dt));
+
+            GL.PopMatrix();
+        }
+
         public Matrix4 GetTransform()
         {
             var transform = Matrix4.Identity;
-            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-X, -Y, 0));
-            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-Width / 2.0f, -Height / 2.0f, 1.0f));
+            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(X, Y, 0));
+            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(Width / 2.0f, Height / 2.0f, 1.0f));
             return transform;
         }
 
         public Vector2 GetWorldCoords(Vector2 screenCoords)
         {
             var cameraT = Camera.GetTransform();
+            cameraT = Matrix4.Mult(cameraT,GetTransform());
             cameraT.Invert();
 
-            var pointLB = new Vector3(-Width / 2.0f - X, -Height / 2.0f - Y, 0.0f);
-            pointLB = Vector3.Add(pointLB, new Vector3(screenCoords));
-            var tLB = Matrix4.CreateTranslation(pointLB);
-            tLB = Matrix4.Mult(tLB, cameraT);
-            pointLB = tLB.ExtractTranslation();
+            var pointLB = new Vector4(screenCoords.X, screenCoords.Y, 0.0f, 1.0f);
+            pointLB = Vector4.Transform(pointLB, cameraT);
 
             return new Vector2(pointLB.X, pointLB.Y);
         }
@@ -200,17 +230,10 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         {
             var transf = Camera.GetTransform();
             transf.Invert();
-            var pointLB = new Vector3(-Width / 2.0f, -Height / 2.0f, 0.0f);
-            var pointRT = new Vector3(Width / 2.0f, Height / 2.0f, 0.0f);
-
-            var tLB = Matrix4.CreateTranslation(pointLB);
-            var tRT = Matrix4.CreateTranslation(pointRT);
-
-            tLB = Matrix4.Mult(tLB, transf);
-            tRT = Matrix4.Mult(tRT, transf);
-
-            pointLB = tLB.ExtractTranslation();
-            pointRT = tRT.ExtractTranslation();
+            var pointLB = new Vector4(-Width / 2.0f, -Height / 2.0f, 0.0f, 1.0f);
+            var pointRT = new Vector4(Width / 2.0f, Height / 2.0f, 0.0f, 1.0f);
+            pointLB = Vector4.Transform(pointLB, transf);
+            pointRT = Vector4.Transform(pointRT, transf);
 
             left = pointLB.X;
             bottom = pointLB.Y;

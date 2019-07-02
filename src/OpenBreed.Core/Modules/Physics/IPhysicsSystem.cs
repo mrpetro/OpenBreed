@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Modules.Physics
 {
-    public interface IPhysicsSystem : IWorldSystem
+    public interface IPhysicsSystem : IUpdatableSystem
     {
     }
 }

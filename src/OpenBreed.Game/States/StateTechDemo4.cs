@@ -18,6 +18,11 @@ using OpenTK;
 using OpenTK.Input;
 using System;
 using System.Drawing;
+using OpenBreed.Core.Entities;
+using OpenBreed.Game.Worlds;
+using OpenBreed.Core.Systems.Control.Components;
+using OpenBreed.Core.Systems.Movement.Components;
+using OpenBreed.Game.Helpers;
 
 namespace OpenBreed.Game.States
 {
@@ -43,11 +48,10 @@ namespace OpenBreed.Game.States
             3,3,3,3,3,3,3,3,3,3
         };
 
-        private WorldActor actor;
         private ITexture tileTex;
         private ITexture spriteTex;
-        private TileAtlas tileAtlas;
-        private SpriteAtlas spriteAtlas;
+        private ITileAtlas tileAtlas;
+        private ISpriteAtlas spriteAtlas;
         private Viewport gameViewport;
         private Viewport hudViewport;
 
@@ -69,8 +73,8 @@ namespace OpenBreed.Game.States
 
         public ICore Core { get; }
 
-        public Camera gameCamera { get; private set; }
-        public Camera hudCamera { get; private set; }
+        public CameraEntity gameCamera { get; private set; }
+        public CameraEntity hudCamera { get; private set; }
 
         public override string Id { get { return ID; } }
 
@@ -100,7 +104,7 @@ namespace OpenBreed.Game.States
 
             Viewport hoverViewport = null;
 
-            if (gameViewport.TestScreenCoords(Core.CursorPos))
+            if (gameViewport.TestScreenCoords(Core.Inputs.CursorPos))
                 hoverViewport = gameViewport;
             else
                 hoverViewport = null;
@@ -113,10 +117,10 @@ namespace OpenBreed.Game.States
                 {
                     var transf = hoverViewport.Camera.GetTransform();
                     transf.Invert();
-                    var delta4 = Vector4.Transform(transf, new Vector4(Core.CursorDelta));
+                    var delta4 = Vector4.Transform(transf, new Vector4(Core.Inputs.CursorDelta));
                     var delta2 = new Vector2(-delta4.X, -delta4.Y);
  
-                    hoverViewport.Camera.Position += delta2;
+                    hoverViewport.Camera.Position.Value += delta2;
                 }
              }
         }
@@ -165,85 +169,81 @@ namespace OpenBreed.Game.States
 
         private void InitializeHud()
         {
-            var hudWorld = new World(Core);
+            var hudWorld = new HudWorld(Core);
 
             var cameraBuilder = new CameraBuilder(Core);
 
-            cameraBuilder.SetPosition(new Vector2(64, 64));
+            cameraBuilder.SetPosition(new Vector2(320, 280));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
-            hudCamera = (Camera)cameraBuilder.Build();
+            hudCamera = (CameraEntity)cameraBuilder.Build();
             hudWorld.AddEntity(hudCamera);
 
 
-            hudViewport = new Viewport(50, 50, 540, 380);
+            hudViewport = (Viewport)Core.Rendering.Viewports.Create(0, 0, 540, 380);
             hudViewport.Camera = hudCamera;
 
+            var algerian50 = Core.Rendering.Fonts.Create("ALGERIAN", 50);
+            var arial12 = Core.Rendering.Fonts.Create("ARIAL", 12);
 
-            var textBuilder = new TextBuilder(Core);
-            textBuilder.SetPosition(new Position(40, 50));
-            var fontAtlas = new FontAtlas(Core.Rendering.Textures, "ALGERIAN", 50);
-            textBuilder.SetText(Core.Rendering.CreateText(fontAtlas, "Alice has a cat!"));
+            var textEntity = Core.Entities.Create();
+            textEntity.Add(new Position(0, 0));
+            textEntity.Add(Core.Rendering.CreateText(algerian50.Id, Vector2.Zero, "Alice has a cat!"));
+            hudWorld.AddEntity(textEntity);
 
+            var fpsEntity = Core.Entities.Create();
 
-            var text = (TextEntity)textBuilder.Build();
-            hudWorld.AddEntity(text);
-
+            fpsEntity.Add(new Position(0, 400));
+            fpsEntity.Add(Core.Rendering.CreateText(arial12.Id, Vector2.Zero, "0 fps"));
+            hudWorld.AddEntity(fpsEntity);
 
             Core.Worlds.Add(hudWorld);
         }
 
         private void InitializeWorld()
         {
-            var gameWorld = new World(Core);
+            var gameWorld = new GameWorld(Core);
 
             var cameraBuilder = new CameraBuilder(Core);
 
             //Resources
             tileTex = Core.Rendering.Textures.Load(@"Content\TileAtlasTest32bit.bmp");
             spriteTex = Core.Rendering.Textures.Load(@"Content\ArrowSpriteSet.png");
-            tileAtlas = new TileAtlas(tileTex, 16, 4, 4);
-            spriteAtlas = new SpriteAtlas(spriteTex, 32, 32, 8, 1);
+            tileAtlas = Core.Rendering.Tiles.Create(tileTex, 16, 4, 4);
+            spriteAtlas = Core.Rendering.Sprites.Create(spriteTex, 32, 32, 8, 5);
 
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
-            gameCamera = (Camera)cameraBuilder.Build();
+            gameCamera = (CameraEntity)cameraBuilder.Build();
             gameWorld.AddEntity(gameCamera);
 
 
-            gameViewport = new Viewport(50, 50, 540, 380);
+            gameViewport = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
             gameViewport.Camera = gameCamera;
 
             var blockBuilder = new WorldBlockBuilder(Core);
-            blockBuilder.SetTileAtlas(tileAtlas);
+            blockBuilder.SetTileAtlas(tileAtlas.Id);
 
-            var actorBuilder = new WorldActorBuilder(Core);
+            var sprite = Core.Rendering.CreateSprite(spriteAtlas.Id);
+            var animator = ActorHelper.CreateAnimation(Core);
 
+            var actor = Core.Entities.Create();
+            actor.Add(animator);
+            actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
+            actor.Add(sprite);
+            actor.Add(new Position(64, 288));
+            actor.Add(Thrust.Create(0, 0));
+            actor.Add(Velocity.Create(0, 0));
+            actor.Add(Direction.Create(1, 0));
+            actor.Add(new AxisAlignedBoxShape(32, 32));
+            actor.Add(new Motion());
+            actor.Add(new DynamicBody());
+            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
 
-            var sprite = Core.Rendering.CreateSprite(spriteAtlas);
+            var stateMachine = ActorHelper.CreateStateMachine(actor);
+            stateMachine.Initialize("Standing_Down");
 
-
-            actorBuilder.SetSpriteAtlas(spriteAtlas);
-            actorBuilder.SetSprite(sprite);
-
-            var animator = ActorHelper.CreateAnimator();
-            var stateMachine = ActorHelper.CreateStateMachine();
-            stateMachine.SetInitialState("Standing_Right");
-
-            actorBuilder.SetStateMachine(stateMachine);
-            actorBuilder.SetAnimator(animator);
-            actorBuilder.SetPosition(new DynamicPosition(64, 288));
-            actorBuilder.SetDirection(new Direction(1, 0));
-            actorBuilder.SetShape(new AxisAlignedBoxShape(32, 32));
-            actorBuilder.SetMovement(new CreatureMovement());
-            actorBuilder.SetBody(new DynamicBody());
-
-            
-
-            actorBuilder.SetController(new KeyboardCreatureController(Key.Up, Key.Down, Key.Left, Key.Right));
-
-            actor = (WorldActor)actorBuilder.Build();
             gameWorld.AddEntity(actor);
 
             var rnd = new Random();
@@ -260,7 +260,7 @@ namespace OpenBreed.Game.States
                     {
                         blockBuilder.SetIndices(x + 5, y + 5);
                         blockBuilder.SetTileId(v);
-                        gameWorld.AddEntity((WorldBlock)blockBuilder.Build());
+                        gameWorld.AddEntity(blockBuilder.Build());
                     }
                 }
             }

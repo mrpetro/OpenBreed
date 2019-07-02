@@ -1,10 +1,6 @@
 ﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Audio.Systems;
-using OpenBreed.Core.Modules.Physics;
-using OpenBreed.Core.Modules.Rendering;
-using OpenBreed.Core.Modules.Rendering.Systems;
+using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Systems;
-using OpenBreed.Core.Systems.Common.Components;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -13,6 +9,8 @@ using System.Linq;
 
 namespace OpenBreed.Core
 {
+    public delegate void SystemEventDelegate(ISystemEvent systemEvent);
+
     /// <summary>
     /// World class which contains systems and entities
     /// </summary>
@@ -26,39 +24,25 @@ namespace OpenBreed.Core
 
         #region Private Fields
 
-        private readonly List<IWorldEntity> entities = new List<IWorldEntity>();
-        private readonly List<IWorldEntity> toAdd = new List<IWorldEntity>();
-        private readonly List<IWorldEntity> toRemove = new List<IWorldEntity>();
+        private readonly List<IEntity> entities = new List<IEntity>();
+        private readonly List<IEntity> toAdd = new List<IEntity>();
+        private readonly List<IEntity> toRemove = new List<IEntity>();
         private readonly List<IWorldSystem> systems = new List<IWorldSystem>();
 
         private float timeMultiplier = 1.0f;
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Protected Constructors
 
-        public World(ICore core)
+        protected World(ICore core)
         {
             Core = core;
-            Entities = new ReadOnlyCollection<IWorldEntity>(entities);
-
-            SoundSystem = Core.Sounds.CreateSoundSystem();
-            ControlSystem = Core.CreateControlSystem();
-            MovementSystem = Core.CreateMovementSystem();
-            PhysicsSystem = Core.Physics.CreatePhysicsSystem(64, 64);
-            AnimationSystem = Core.CreateAnimationSystem();
-            RenderSystem = Core.Rendering.CreateRenderSystem(64,64);
-
-            //systems.Add(SoundSystem);
-
-            systems.Add(ControlSystem);
-            systems.Add(MovementSystem);
-            systems.Add(PhysicsSystem);
-            systems.Add(AnimationSystem);
-            systems.Add(RenderSystem);
+            Entities = new ReadOnlyCollection<IEntity>(entities);
+            Systems = new ReadOnlyCollection<IWorldSystem>(systems);
         }
 
-        #endregion Public Constructors
+        #endregion Protected Constructors
 
         #region Public Properties
 
@@ -80,14 +64,8 @@ namespace OpenBreed.Core
 
         public ICore Core { get; }
 
-        public ReadOnlyCollection<IWorldEntity> Entities { get; }
-
-        public IAudioSystem SoundSystem { get; }
-        public IPhysicsSystem PhysicsSystem { get; }
-        public IControlSystem ControlSystem { get; }
-        public IMovementSystem MovementSystem { get; }
-        public IAnimationSystem AnimationSystem { get; }
-        public IRenderSystem RenderSystem { get; }
+        public ReadOnlyCollection<IEntity> Entities { get; }
+        public ReadOnlyCollection<IWorldSystem> Systems { get; }
 
         #endregion Public Properties
 
@@ -99,12 +77,21 @@ namespace OpenBreed.Core
         /// An exception will be thrown if given entity already exists in world
         /// </summary>
         /// <param name="entity">Entity to be added to this world</param>
-        public void AddEntity(WorldEntity entity)
+        public void AddEntity(IEntity entity)
         {
-            if (entity.CurrentWorld != null)
+            if (entity.World != null)
                 throw new InvalidOperationException("Entity can't exist in more than one world.");
 
             toAdd.Add(entity);
+        }
+
+        public void PostMsg(IEntity sender, IEntityMsg entityMsg)
+        {
+            foreach (var system in Systems)
+            {
+                if (system.HandleMsg(sender, entityMsg))
+                    break;
+            }
         }
 
         /// <summary>
@@ -113,9 +100,9 @@ namespace OpenBreed.Core
         /// An exception will be thrown if given entity does not exist in this world.
         /// </summary>
         /// <param name="entity">Entity to be removed from this world</param>
-        public void RemoveEntity(WorldEntity entity)
+        public void RemoveEntity(IEntity entity)
         {
-            if (entity.CurrentWorld != this)
+            if (entity.World != this)
                 throw new InvalidOperationException("Entity doesn't exist in this world");
 
             toRemove.Add(entity);
@@ -133,41 +120,51 @@ namespace OpenBreed.Core
 
         public void Update(float dt)
         {
-            ControlSystem.Update(dt * TimeMultiplier);
-
-            MovementSystem.Update(dt * TimeMultiplier);
-
-            PhysicsSystem.Update(dt * TimeMultiplier);
-
-            AnimationSystem.Update(dt * TimeMultiplier);
-
-            Cleanup();
+            systems.OfType<IUpdatableSystem>().ForEach(item => item.Update(dt * TimeMultiplier));
         }
 
         #endregion Public Methods
 
         #region Internal Methods
 
-        internal void RegisterEntity(WorldEntity entity)
+        internal void RegisterEntity(Entity entity)
         {
             //Initialize the entity and add it to entities list
             entity.Initialize(this);
             entities.Add(entity);
 
-            //Add all entity components to world systems
-            for (int i = 0; i < entity.Components.Count; i++)
-                AddComponent(entity.Components[i]);
+            AddToSystems(entity);
         }
 
-        internal void UnregisterEntity(WorldEntity entity)
+        internal void UnregisterEntity(Entity entity)
         {
-            //Remove all entity components from world systems
-            for (int i = 0; i < entity.Components.Count; i++)
-                RemoveComponent(entity.Components[i]);
-
             //Deinitialize the entity and remove it from entities list
             entity.Deinitialize();
             entities.Remove(entity);
+        }
+
+        internal void Cleanup()
+        {
+            if (toRemove.Any())
+            {
+                //Process entities to remove
+                for (int i = 0; i < toRemove.Count; i++)
+                    UnregisterEntity((Entity)toRemove[i]);
+
+                toRemove.Clear();
+            }
+
+            if (toAdd.Any())
+            {
+                //Process entities to add
+                for (int i = 0; i < toAdd.Count; i++)
+                    RegisterEntity((Entity)toAdd[i]);
+
+                toAdd.Clear();
+            }
+
+            //Perform cleanup on all world systems
+            Systems.ForEach(item => item.Cleanup());
         }
 
         #endregion Internal Methods
@@ -181,33 +178,21 @@ namespace OpenBreed.Core
 
         protected virtual void RemoveSystem(IWorldSystem system)
         {
-            systems.Add(system);
-        }
-
-        protected void Cleanup()
-        {
-            if (toRemove.Any())
-            {
-                //Process entities to remove
-                for (int i = 0; i < toRemove.Count; i++)
-                    UnregisterEntity((WorldEntity)toRemove[i]);
-
-                toRemove.Clear();
-            }
-
-            if (toAdd.Any())
-            {
-                //Process entities to add
-                for (int i = 0; i < toAdd.Count; i++)
-                    RegisterEntity((WorldEntity)toAdd[i]);
-
-                toAdd.Clear();
-            }
+            systems.Remove(system);
         }
 
         #endregion Protected Methods
 
         #region Private Methods
+
+        private void AddToSystems(Entity entity)
+        {
+            foreach (var system in systems)
+            {
+                if (system.Matches(entity))
+                    system.AddEntity(entity);
+            }
+        }
 
         private void InitializeSystems()
         {
@@ -218,30 +203,7 @@ namespace OpenBreed.Core
         private void DeinitializeSystems()
         {
             for (int i = 0; i < systems.Count; i++)
-                systems[i].Deinitialize(this);
-        }
-
-        private void AddComponent(IEntityComponent component)
-        {
-            if (component.SystemType == null)
-                return;
-
-            var foundSystem = systems.FirstOrDefault(item => item.GetType() == component.SystemType);
-
-            if (foundSystem == null)
-                throw new InvalidOperationException($"System {component.SystemType} not registered.");
-
-            foundSystem.AddComponent(component);
-        }
-
-        private void RemoveComponent(IEntityComponent component)
-        {
-            var foundSystem = systems.FirstOrDefault(item => item.GetType() == component.SystemType);
-
-            if (foundSystem == null)
-                throw new InvalidOperationException($"System {component.SystemType} not registered.");
-
-            foundSystem.RemoveComponent(component);
+                systems[i].Deinitialize();
         }
 
         #endregion Private Methods

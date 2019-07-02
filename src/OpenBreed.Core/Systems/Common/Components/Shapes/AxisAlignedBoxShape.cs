@@ -27,20 +27,6 @@ namespace OpenBreed.Core.Systems.Common.Components.Shapes
         public float Width { get; }
         public float Height { get; }
 
-        public Type SystemType { get { return null; } }
-
         #endregion Public Properties
-
-        #region Public Methods
-
-        public void Initialize(IEntity entity)
-        {
-        }
-
-        public void Deinitialize(IEntity entity)
-        {
-        }
-
-        #endregion Public Methods
     }
 }

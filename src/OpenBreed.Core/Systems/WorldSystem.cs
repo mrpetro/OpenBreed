@@ -1,9 +1,22 @@
-﻿using OpenBreed.Core.Systems.Common.Components;
+﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.Systems.Common.Components;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenBreed.Core.Systems
 {
-    public abstract class WorldSystem<T> : IWorldSystem where T : IEntityComponent
+    public abstract class WorldSystem : IWorldSystem
     {
+        #region Private Fields
+
+        private readonly List<IEntity> toAdd = new List<IEntity>();
+        private readonly List<IEntity> toRemove = new List<IEntity>();
+
+        private readonly List<Type> requiredComponentTypes = new List<Type>();
+
+        #endregion Private Fields
+
         #region Protected Constructors
 
         protected WorldSystem(ICore core)
@@ -20,6 +33,11 @@ namespace OpenBreed.Core.Systems
         /// </summary>
         public ICore Core { get; }
 
+        /// <summary>
+        /// World which owns this system
+        /// </summary>
+        public World World { get; private set; }
+
         #endregion Public Properties
 
         #region Public Methods
@@ -30,50 +48,102 @@ namespace OpenBreed.Core.Systems
         /// <param name="world">World that this system is initialized on</param>
         public virtual void Initialize(World world)
         {
+            if (World != null)
+                throw new InvalidOperationException("World sytem already initialized.");
+
+            World = world;
         }
 
         /// <summary>
         /// Deinitialize the system when world is destroyed
         /// </summary>
-        /// <param name="world">World that this system is part of</param>
-        public virtual void Deinitialize(World world)
+        public virtual void Deinitialize()
         {
+            if (World == null)
+                throw new InvalidOperationException("World sytem already deinitialized.");
+
+            World = null;
         }
 
-        /// <summary>
-        /// Add the component to this system when entity is added to it's world
-        /// </summary>
-        /// <param name="component">Component to add</param>
-        public void AddComponent(IEntityComponent component)
+        public bool Matches(IEntity entity)
         {
-            AddComponent((T)component);
+            foreach (var type in requiredComponentTypes)
+            {
+                if (!entity.Components.Any(item => type.IsAssignableFrom(item.GetType())))
+                    return false;
+            }
+
+            return true;
         }
 
-        /// <summary>
-        /// Remove the component from this system when entity is being removed from it's world
-        /// </summary>
-        /// <param name="component">Component to remove</param>
-        public void RemoveComponent(IEntityComponent component)
+        public void AddEntity(IEntity entity)
         {
-            RemoveComponent((T)component);
+            toAdd.Add(entity);
         }
 
-        /// <summary>
-        /// Update this system with given time step
-        /// </summary>
-        /// <param name="dt">Time step</param>
-        public virtual void Update(float dt)
+        public void RemoveEntity(IEntity entity)
         {
+            toRemove.Add(entity);
+        }
+
+        public virtual bool HandleMsg(IEntity sender, IEntityMsg message)
+        {
+            return false;
+        }
+
+        public void Cleanup()
+        {
+            if (toRemove.Any())
+            {
+                //Process entities to remove
+                for (int i = 0; i < toRemove.Count; i++)
+                    UnregisterEntity((Entity)toRemove[i]);
+
+                toRemove.Clear();
+            }
+
+            if (toAdd.Any())
+            {
+                //Process entities to add
+                for (int i = 0; i < toAdd.Count; i++)
+                    RegisterEntity((Entity)toAdd[i]);
+
+                toAdd.Clear();
+            }
         }
 
         #endregion Public Methods
 
         #region Protected Methods
 
-        protected abstract void AddComponent(T component);
+        protected virtual void UnregisterEntity(IEntity entity)
+        {
+        }
 
-        protected abstract void RemoveComponent(T component);
+        protected virtual void RegisterEntity(IEntity entity)
+        {
+        }
+
+        protected int Require<C>() where C : IEntityComponent
+        {
+            var type = typeof(C);
+
+            var typeIndex = requiredComponentTypes.IndexOf(type);
+
+            if (typeIndex >= 0)
+                return typeIndex;
+            else
+            {
+                requiredComponentTypes.Add(type);
+                return requiredComponentTypes.Count - 1;
+            }
+        }
 
         #endregion Protected Methods
+
+        //public void PostEvent(ISystemEvent systemEvent)
+        //{
+        //    World.PostEvent(this, systemEvent);
+        //}
     }
 }

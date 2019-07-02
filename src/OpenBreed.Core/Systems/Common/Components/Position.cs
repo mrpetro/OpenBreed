@@ -1,6 +1,4 @@
-﻿using OpenBreed.Core.Entities;
-using OpenTK;
-using System;
+﻿using OpenTK;
 
 namespace OpenBreed.Core.Systems.Common.Components
 {
@@ -8,7 +6,7 @@ namespace OpenBreed.Core.Systems.Common.Components
     /// Position entity component class that can be used to store entity current position information
     /// Example: Actor is standing somewhere in the world at current position
     /// </summary>
-    public class Position : IEntityComponent
+    public class Position : IPosition
     {
         #region Public Constructors
 
@@ -18,7 +16,7 @@ namespace OpenBreed.Core.Systems.Common.Components
         /// <param name="value">Initial value vector</param>
         public Position(Vector2 value)
         {
-            Current = value;
+            Value = value;
         }
 
         /// <summary>
@@ -28,7 +26,7 @@ namespace OpenBreed.Core.Systems.Common.Components
         /// <param name="y">Initial y value</param>
         public Position(float x, float y)
         {
-            Current = new Vector2(x, y);
+            Value = new Vector2(x, y);
         }
 
         #endregion Public Constructors
@@ -36,35 +34,10 @@ namespace OpenBreed.Core.Systems.Common.Components
         #region Public Properties
 
         /// <summary>
-        /// Current position value
+        /// Position value
         /// </summary>
-        public Vector2 Current { get; set; }
-
-        /// <summary>
-        /// System type that this component is part of
-        /// </summary>
-        public Type SystemType { get { return null; } }
+        public Vector2 Value { get; set; }
 
         #endregion Public Properties
-
-        #region Public Methods
-
-        /// <summary>
-        /// Initialize this component
-        /// </summary>
-        /// <param name="entity">Entity which this component belongs to</param>
-        public void Initialize(IEntity entity)
-        {
-        }
-
-        /// <summary>
-        /// Deinitialize this component
-        /// </summary>
-        /// <param name="entity">Entity which this component belongs to</param>
-        public void Deinitialize(IEntity entity)
-        {
-        }
-
-        #endregion Public Methods
     }
 }

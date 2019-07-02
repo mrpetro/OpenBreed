@@ -8,10 +8,11 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>OpenBreed.Game</RootNamespace>
     <AssemblyName>OpenBreed.Game</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -48,21 +49,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\MoveToCommand.cs" />
-    <Compile Include="Components\AICreatureController.cs" />
     <Compile Include="Components\AIControllerDebug.cs" />
-    <Compile Include="Components\KeyboardCreatureController.cs" />
-    <Compile Include="Components\SpriteAnimator.cs" />
-    <Compile Include="Components\CreatureMovement.cs" />
     <Compile Include="Components\CollisionDebug.cs" />
     <Compile Include="Components\States\WalkingState.cs" />
     <Compile Include="Components\States\StandingState.cs" />
     <Compile Include="Entities\ActorHelper.cs" />
-    <Compile Include="Entities\Builders\TextBuilder.cs" />
-    <Compile Include="Entities\Builders\WorldActorBuilder.cs" />
     <Compile Include="Entities\Builders\WorldBlockBuilder.cs" />
-    <Compile Include="Entities\TextEntity.cs" />
-    <Compile Include="Entities\WorldActor.cs" />
-    <Compile Include="Entities\WorldBlock.cs" />
+    <Compile Include="Helpers\TextHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="States\StateTechDemo4.cs" />
@@ -70,6 +63,8 @@
     <Compile Include="States\StateTechDemo2.cs" />
     <Compile Include="States\StateTechDemo1.cs" />
     <Compile Include="Tools.cs" />
+    <Compile Include="Worlds\GameWorld.cs" />
+    <Compile Include="Worlds\HudWorld.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -107,11 +102,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\ArrowSpriteSet.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Content\TexTest24bit.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -133,6 +123,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\TileAtlasTest32bit.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\ArrowSpriteSet.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

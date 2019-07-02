@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OpenBreed.Core.Systems.Common.Components;
+using OpenTK;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +11,18 @@ namespace OpenBreed.Core.Modules.Rendering.Components
     /// <summary>
     /// Text render component interface
     /// </summary>
-    public interface IText : IRenderComponent
+    public interface IText : IEntityComponent
     {
+        /// <summary>
+        /// Id of text font
+        /// </summary>
+        int FontId { get; set; }
+
+        /// <summary>
+        /// Offset position of text
+        /// </summary>
+        Vector2 Offset { get; set; }
+
         /// <summary>
         /// Actual text of this component
         /// </summary>

@@ -12,6 +12,8 @@ namespace OpenBreed.Core.States
         public StateMan StateMan { get; private set; }
         public abstract string Id { get; }
 
+        public IEntity Entity => throw new NotImplementedException();
+
         #endregion Public Properties
 
         #region Public Methods
