@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Modules.Animation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -33,7 +34,7 @@ namespace OpenBreed.Core.Systems.Animation.Components
 
         #region Public Methods
 
-        public T GetFrame(float time)
+        private T GetFrameGetFameNoTransition(float time)
         {
             foreach (var frame in frames)
             {
@@ -42,6 +43,17 @@ namespace OpenBreed.Core.Systems.Animation.Components
             }
 
             return frames.Last().Value;
+        }
+
+        public T GetFrame(float time, FrameTransition transition = FrameTransition.None)
+        {
+            switch (transition)
+            {
+                case FrameTransition.None:
+                    return GetFrameGetFameNoTransition(time);
+                default:
+                    throw new NotImplementedException($"Transition '{transition}' not implemented.");
+            }
         }
 
         public void AddFrame(T value, float frameTime)

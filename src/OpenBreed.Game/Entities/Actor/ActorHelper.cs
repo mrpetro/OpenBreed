@@ -1,22 +1,34 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Physics.Components;
+using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems.Animation.Components;
-using OpenBreed.Game.Components;
-using OpenBreed.Game.Components.States;
+using OpenBreed.Core.Systems.Common.Components;
+using OpenBreed.Core.Systems.Common.Components.Shapes;
+using OpenBreed.Core.Systems.Control.Components;
+using OpenBreed.Core.Systems.Movement.Components;
+using OpenBreed.Game.Entities.Actor.States;
 using OpenTK;
+using OpenTK.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Game.Entities
+namespace OpenBreed.Game.Entities.Actor
 {
     public static class ActorHelper
     {
+        public static ISpriteAtlas SetupSprites(ICore core)
+        {
+            var spriteTex = core.Rendering.Textures.Create(@"Content\ArrowSpriteSet.png");
 
-        public static Animator<int> CreateAnimation(ICore core)
+            return core.Rendering.Sprites.Create(spriteTex.Id, 32, 32, 8, 5);
+        }
+
+        public static void SetupAnimations(ICore core)
         {
             var animationStandingRight = core.Animations.Create<int>("STANDING_RIGHT");
             animationStandingRight.AddFrame(0, 2.0f);
@@ -83,9 +95,23 @@ namespace OpenBreed.Game.Entities
             animationWalkingUpRight.AddFrame(23, 1.0f);
             animationWalkingUpRight.AddFrame(31, 1.0f);
             animationWalkingUpRight.AddFrame(39, 1.0f);
+        }
 
-            var animation = new Animator<int>(10.0f, true);
-            return animation;
+        public static IEntity CreateActor(ICore core, Vector2 pos, ISpriteAtlas atlas)
+        {
+            var actor = core.Entities.Create();
+            actor.Add(new Animator<int>(10.0f, true));
+            //actor.Add(new CollisionDebug(Core.Rendering.CreateSprite(spriteAtlas.Id)));
+            actor.Add(core.Rendering.CreateSprite(atlas.Id));
+            actor.Add(new Position(pos));
+            actor.Add(Thrust.Create(0, 0));
+            actor.Add(Velocity.Create(0, 0));
+            actor.Add(Direction.Create(1, 0));
+            actor.Add(new AxisAlignedBoxShape(32, 32));
+            actor.Add(new Motion());
+            actor.Add(new DynamicBody());
+
+            return actor;
         }
 
         public static StateMachine CreateStateMachine(IEntity entity)

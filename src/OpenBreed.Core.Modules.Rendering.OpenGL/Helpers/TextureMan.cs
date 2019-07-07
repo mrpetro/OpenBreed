@@ -9,13 +9,28 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
     /// Textures manager class  which handles creating textures from various sources
     /// Or just retrieving them by ID or name.
     /// </summary>
-    public class TextureMan : ITextureMan
+    internal class TextureMan : ITextureMan
     {
         #region Private Fields
 
-        private Dictionary<string, ITexture> textures = new Dictionary<string, ITexture>();
+        private readonly List<ITexture> items = new List<ITexture>();
 
         #endregion Private Fields
+
+        #region Internal Constructors
+
+        internal TextureMan(OpenGLModule module)
+        {
+            Module = module ?? throw new ArgumentNullException(nameof(module));
+        }
+
+        #endregion Internal Constructors
+
+        #region Internal Properties
+
+        internal OpenGLModule Module { get; }
+
+        #endregion Internal Properties
 
         #region Public Methods
 
@@ -26,19 +41,12 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         /// <param name="filePath">File path to image file</param>
         /// <param name="id">Optional ID of texture to create</param>
         /// <returns>ITexture object</returns>
-        public ITexture Load(string filePath, string id = null)
+        public ITexture Create(string filePath)
         {
             if (filePath == null)
                 throw new ArgumentNullException(nameof(filePath));
 
-            var fullPath = Path.GetFullPath(filePath);
-
-            ITexture texture = null;
-
-            if (textures.TryGetValue(fullPath, out texture))
-                return texture;
-
-            return AddFrom(fullPath);
+            return AddFrom(filePath);
         }
 
         /// <summary>
@@ -46,42 +54,32 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         /// </summary>
         public void UnloadAll()
         {
-            foreach (var texture in textures.Values)
+            foreach (var texture in items)
                 texture.Dispose();
 
-            textures.Clear();
+            items.Clear();
         }
 
         /// <summary>
-        /// Get texture object by it's ID
+        /// Get texture object by it's Id
         /// </summary>
-        /// <param name="id">Given ID of texture</param>
+        /// <param name="id">Given Id of texture</param>
         /// <returns>Return ITexture object if found, false otherwise</returns>
-        public ITexture GetById(string id)
+        public ITexture GetById(int id)
         {
-            ITexture texture = null;
-
-            if (textures.TryGetValue(id, out texture))
-                return texture;
-            else
-                return null;
+            return items[id];
         }
 
         /// <summary>
         /// Creates texture object from given bitmap and return it
         /// </summary>
         /// <param name="bitmap">Bitmap to create texture from</param>
-        /// <param name="id">Obligatory ID of texture to create</param>
         /// <returns>ITexture object</returns>
-        public ITexture Load(Bitmap bitmap, string id)
+        public ITexture Create(Bitmap bitmap)
         {
-            ITexture texture;
-
-            if (textures.TryGetValue(id, out texture))
-                return texture;
-
-            texture = Texture.CreateFromBitmap(bitmap);
-            textures.Add(id, texture);
+            var texture = Texture.CreateFromBitmap(bitmap);
+            texture.Id = items.Count;
+            items.Add(texture);
             return texture;
         }
 
@@ -95,7 +93,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
                 throw new InvalidOperationException($"File '{filePath}' doesn't exist.");
 
             using (var bitmap = new Bitmap(filePath))
-                return Load(bitmap, filePath);
+                return Create(bitmap);
         }
 
         #endregion Internal Methods

@@ -77,7 +77,7 @@ namespace OpenBreed.Core.Systems.Animation
                 }
             }
 
-            var newFrame = animator.Data.GetFrame(animator.Position);
+            var newFrame = animator.Data.GetFrame(animator.Position, animator.Transition);
 
             if (!animator.Frame.Equals(newFrame))
             {

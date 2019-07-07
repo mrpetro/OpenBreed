@@ -94,14 +94,14 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         public void Draw(char character)
         {
-            GL.BindTexture(TextureTarget.Texture2D, Texture.Id);
+            GL.BindTexture(TextureTarget.Texture2D, Texture.InternalId);
             RenderTools.Draw(vboList[Lookup[character].Item1], ibo, 6);
             GL.BindTexture(TextureTarget.Texture2D, 0);
         }
 
         public void Draw(string text)
         {
-            GL.BindTexture(TextureTarget.Texture2D, Texture.Id);
+            GL.BindTexture(TextureTarget.Texture2D, Texture.InternalId);
 
             var offset = 0.0f;
 
@@ -120,7 +120,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         public void Draw(int spriteId)
         {
-            GL.BindTexture(TextureTarget.Texture2D, Texture.Id);
+            GL.BindTexture(TextureTarget.Texture2D, Texture.InternalId);
             RenderTools.Draw(vboList[spriteId], ibo, 6);
             GL.BindTexture(TextureTarget.Texture2D, 0);
         }
@@ -185,7 +185,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             {
                 var bitmap = GenerateCharacters(font, out Size maxCharSize);
 
-                Texture = textures.Load(bitmap, $"FontTexture#{font.Name}#{fontSize}");
+                Texture = textures.Create(bitmap);
 
                 for (int i = 0; i < Characters.Length; i++)
                 {

@@ -12,11 +12,11 @@ namespace OpenBreed.Core.Modules.Rendering
     {
         #region Private Fields
 
-        private TextureMan textureMan = new TextureMan();
-        private TileMan tileMan = new TileMan();
         private readonly SpriteMan spriteMan;
         private readonly FontMan fontMan;
-        private ViewportMan viewportMan = new ViewportMan();
+        private TextureMan textureMan;
+        private TileMan tileMan;
+        private ViewportMan viewportMan;
 
         #endregion Private Fields
 
@@ -26,6 +26,9 @@ namespace OpenBreed.Core.Modules.Rendering
         {
             Core = core ?? throw new ArgumentNullException(nameof(core));
 
+            viewportMan = new ViewportMan(this);
+            textureMan = new TextureMan(this);
+            tileMan = new TileMan(this);
             spriteMan = new SpriteMan(this);
             fontMan = new FontMan(this);
         }

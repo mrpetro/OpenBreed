@@ -17,6 +17,11 @@ namespace OpenBreed.Core.Systems.Animation.Components
 
         #region Public Properties
 
+        /// <summary>
+        /// Transition method from frame to frame 
+        /// </summary>
+        public FrameTransition Transition { get; set; }
+
         public IAnimationData<T> Data { get; set; }
         public float Position { get; set; }
         public bool Paused { get; set; }

@@ -51,10 +51,15 @@
     <Compile Include="Commands\MoveToCommand.cs" />
     <Compile Include="Components\AIControllerDebug.cs" />
     <Compile Include="Components\CollisionDebug.cs" />
-    <Compile Include="Components\States\WalkingState.cs" />
-    <Compile Include="Components\States\StandingState.cs" />
-    <Compile Include="Entities\ActorHelper.cs" />
+    <Compile Include="Entities\Actor\States\WalkingState.cs" />
+    <Compile Include="Entities\Actor\States\StandingState.cs" />
+    <Compile Include="Entities\Actor\ActorHelper.cs" />
     <Compile Include="Entities\Builders\WorldBlockBuilder.cs" />
+    <Compile Include="Entities\Door\DoorHelper.cs" />
+    <Compile Include="Entities\Door\States\OpenedState.cs" />
+    <Compile Include="Entities\Door\States\ClosedState.cs" />
+    <Compile Include="Entities\Door\States\OpeningState.cs" />
+    <Compile Include="Entities\Door\States\ClosingState.cs" />
     <Compile Include="Helpers\TextHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -131,5 +136,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

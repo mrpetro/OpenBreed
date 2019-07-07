@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\AiControl.cs" />
+    <Compile Include="Components\DigitalInput.cs" />
     <Compile Include="Components\KeyboardControl.cs" />
     <Compile Include="Events\ControlDirectionChangedEvent.cs" />
     <Compile Include="Systems\AiControlSystem.cs" />

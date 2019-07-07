@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Game.Components.States
+namespace OpenBreed.Game.Entities.Actor.States
 {
     public class StandingState : IState
     {
