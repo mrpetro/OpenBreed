@@ -4,7 +4,7 @@ using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems;
-using OpenBreed.Core.Systems.Animation;
+using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Systems.Control;
 using OpenBreed.Core.Systems.Movement;
 using OpenBreed.Core.Modules.Physics;
@@ -41,9 +41,9 @@ namespace OpenBreed.Game
             Rendering = new OpenGLModule(this);
             Sounds = new OpenALModule(this);
             Physics = new PhysicsModule(this);
+            Animations = new AnimationModule(this);
 
             Entities = new EntityMan(this);
-            Animations = new AnimMan(this);
             Inputs = new InputsMan(this);
             Worlds = new WorldMan(this);
             StateMachine = new StateMan(this);
@@ -107,9 +107,10 @@ namespace OpenBreed.Game
         public IRenderModule Rendering { get; }
         public IAudioModule Sounds { get; }
         public IPhysicsModule Physics { get; }
+        public IAnimationModule Animations { get; }
         public EntityMan Entities { get; }
         public InputsMan Inputs { get; }
-        public IAnimMan Animations { get; }
+
         public WorldMan Worlds { get; }
         public StateMan StateMachine { get; }
 

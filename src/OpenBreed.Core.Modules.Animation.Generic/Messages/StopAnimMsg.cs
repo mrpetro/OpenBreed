@@ -1,18 +1,18 @@
 ﻿using OpenBreed.Core.Entities;
 
-namespace OpenBreed.Core.Systems.Animation.Messages
+namespace OpenBreed.Core.Modules.Animation.Messages
 {
-    public struct PlayAnimMsg : IEntityMsg
+    public struct StopAnimMsg : IEntityMsg
     {
         #region Public Fields
 
-        public const string TYPE = "PLAY_ANIM";
+        public const string TYPE = "STOP_ANIM";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public PlayAnimMsg(string id)
+        public StopAnimMsg(string id)
         {
             Data = id;
         }
@@ -23,7 +23,6 @@ namespace OpenBreed.Core.Systems.Animation.Messages
 
         public string Type { get { return TYPE; } }
         public object Data { get; }
-        public string Id { get { return (string)Data; } }
 
         #endregion Public Properties
     }

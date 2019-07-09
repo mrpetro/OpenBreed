@@ -60,8 +60,9 @@
     <Compile Include="Entities\IEntityMsg.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="InputsMan.cs" />
-    <Compile Include="Modules\Animation\IAnimationData.cs" />
-    <Compile Include="Modules\Animation\IAnimMan.cs" />
+    <Compile Include="Modules\Animation\Helpers\IAnimationData.cs" />
+    <Compile Include="Modules\Animation\Helpers\IAnimMan.cs" />
+    <Compile Include="Modules\Animation\IAnimationModule.cs" />
     <Compile Include="Modules\Audio\Components\IAudioComponent.cs" />
     <Compile Include="Modules\Audio\Components\ISoundEmiter.cs" />
     <Compile Include="Modules\Audio\Helpers\ISound.cs" />

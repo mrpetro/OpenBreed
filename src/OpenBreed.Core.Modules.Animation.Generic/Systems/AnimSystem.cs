@@ -1,13 +1,15 @@
 ﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation;
-using OpenBreed.Core.Systems.Animation.Components;
-using OpenBreed.Core.Systems.Animation.Events;
-using OpenBreed.Core.Systems.Animation.Messages;
+using OpenBreed.Core.Modules.Animation.Components;
+using OpenBreed.Core.Modules.Animation.Helpers;
+using OpenBreed.Core.Systems;
+using OpenBreed.Core.Modules.Animation.Events;
+using OpenBreed.Core.Modules.Animation.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OpenBreed.Core.Systems.Animation
+namespace OpenBreed.Core.Modules.Animation.Systems
 {
     public class AnimSystem<T> : WorldSystem, IAnimationSystem
     {
@@ -157,7 +159,7 @@ namespace OpenBreed.Core.Systems.Animation
             if (index < 0)
                 return false;
 
-            Play(animatorComps[index], (IAnimationData<T>)Core.Animations.GetByName(message.Id));
+            Play(animatorComps[index], (IAnimationData<T>)Core.Animations.Anims.GetByName(message.Id));
 
             return true;
         }

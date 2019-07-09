@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Systems.Animation.Components;
+using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Systems.Common.Components.Shapes;
 using OpenBreed.Core.Modules.Physics.Components;

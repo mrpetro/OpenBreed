@@ -1,4 +1,4 @@
-﻿namespace OpenBreed.Core.Modules.Animation
+﻿namespace OpenBreed.Core.Modules.Animation.Helpers
 {
     /// <summary>
     /// Transition methods between frames

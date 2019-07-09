@@ -1,7 +1,8 @@
 ﻿using OpenBreed.Core.Modules.Animation;
+using OpenBreed.Core.Modules.Animation.Helpers;
 using OpenBreed.Core.Systems.Common.Components;
 
-namespace OpenBreed.Core.Systems.Animation.Components
+namespace OpenBreed.Core.Modules.Animation.Components
 {
     public class Animator<T> : IEntityComponent
     {

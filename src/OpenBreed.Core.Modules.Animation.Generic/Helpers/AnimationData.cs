@@ -1,9 +1,10 @@
 ﻿using OpenBreed.Core.Modules.Animation;
+using OpenBreed.Core.Modules.Animation.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OpenBreed.Core.Systems.Animation.Components
+namespace OpenBreed.Core.Modules.Animation.Helpers
 {
     internal class AnimationData<T> : IAnimationData<T>
     {

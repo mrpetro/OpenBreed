@@ -1,8 +1,8 @@
 ﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Systems.Animation.Components;
-using OpenBreed.Core.Systems.Animation.Messages;
+using OpenBreed.Core.Modules.Animation.Components;
+using OpenBreed.Core.Modules.Animation.Messages;
 using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Core.Systems.Movement.Components;
 using OpenTK;

@@ -1,28 +1,29 @@
 ﻿using OpenBreed.Core.Entities;
 
-namespace OpenBreed.Core.Systems.Animation.Messages
+namespace OpenBreed.Core.Modules.Animation.Events
 {
-    public struct StopAnimMsg : IEntityMsg
+    public class FrameChangedEvent<T> : ISystemEvent
     {
         #region Public Fields
 
-        public const string TYPE = "STOP_ANIM";
+        public const string TYPE = "FRAME_CHANGED";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public StopAnimMsg(string id)
+        public FrameChangedEvent(T frame)
         {
-            Data = id;
+            Frame = frame;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
+        public T Frame { get; }
         public string Type { get { return TYPE; } }
-        public object Data { get; }
+        public object Data { get { return Frame; } }
 
         #endregion Public Properties
     }

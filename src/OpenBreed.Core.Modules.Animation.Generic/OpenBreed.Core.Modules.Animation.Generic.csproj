@@ -7,8 +7,8 @@
     <ProjectGuid>{657319C5-4BA7-4A81-B7D1-4527CEAE125C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpenBreed.Core.Systems.Animation</RootNamespace>
-    <AssemblyName>OpenBreed.Core.Systems.Animation</AssemblyName>
+    <RootNamespace>OpenBreed.Core.Modules.Animation</RootNamespace>
+    <AssemblyName>OpenBreed.Core.Modules.Animation</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -43,13 +43,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Events\FrameChangedEvent.cs" />
-    <Compile Include="AnimSystem.cs" />
-    <Compile Include="AnimMan.cs" />
+    <Compile Include="Systems\AnimSystem.cs" />
+    <Compile Include="Helpers\AnimMan.cs" />
     <Compile Include="Components\Animator.cs" />
-    <Compile Include="Components\AnimationData.cs" />
+    <Compile Include="Helpers\AnimationData.cs" />
     <Compile Include="Messages\PauseAnimMsg.cs" />
     <Compile Include="Messages\StopAnimMsg.cs" />
     <Compile Include="Messages\PlayAnimMsg.cs" />
+    <Compile Include="AnimationModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

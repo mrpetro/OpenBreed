@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Systems.Animation;
+using OpenBreed.Core.Modules.Animation.Systems;
+using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Systems.Control.Systems;
 using OpenBreed.Core.Systems.Movement.Systems;
 using System;
@@ -21,7 +22,7 @@ namespace OpenBreed.Game.Worlds
 
             //Action
             AddSystem(new MovementSystem(core));
-            AddSystem(new AnimSystem<int>(core));
+            AddSystem(Core.Animations.CreateAnimationSystem<int>());
 
             //Audio
             AddSystem(Core.Sounds.CreateSoundSystem());

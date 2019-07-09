@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Modules.Phys
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Systems.Control", "OpenBreed.Core.Systems.Control\OpenBreed.Core.Systems.Control.csproj", "{CF689601-0842-497F-A05F-B31431697B4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Systems.Animation", "OpenBreed.Core.Systems.Animation\OpenBreed.Core.Systems.Animation.csproj", "{657319C5-4BA7-4A81-B7D1-4527CEAE125C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Modules.Animation.Generic", "OpenBreed.Core.Modules.Animation.Generic\OpenBreed.Core.Modules.Animation.Generic.csproj", "{657319C5-4BA7-4A81-B7D1-4527CEAE125C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Systems.Movement", "OpenBreed.Core.Systems.Movement\OpenBreed.Core.Systems.Movement.csproj", "{E004FAAA-6D4D-48B5-93D9-8E9E15DE5812}"
 EndProject

@@ -1,7 +1,9 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Animation.Components;
+using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Systems.Animation.Components;
+using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Game.Components;
 using OpenBreed.Game.Components.States;
 using OpenTK;
@@ -18,9 +20,9 @@ namespace OpenBreed.Game.Entities.Door
 
         public static Animator<int> CreateHorizontalAnimator(ICore core)
         {
-            var horizontalDoorOpening = core.Animations.Create<int>("HORIZONTAL_DOOR_OPENING");
+            var horizontalDoorOpening = core.Animations.Anims.Create<int>("HORIZONTAL_DOOR_OPENING");
             horizontalDoorOpening.AddFrame(0, 2.0f);
-            var horizontalDoorClosing = core.Animations.Create<int>("HORIZONTAL_DOOR_CLOSING");
+            var horizontalDoorClosing = core.Animations.Anims.Create<int>("HORIZONTAL_DOOR_CLOSING");
             horizontalDoorClosing.AddFrame(1, 2.0f);
 
             var animation = new Animator<int>(10.0f, true);
@@ -29,9 +31,9 @@ namespace OpenBreed.Game.Entities.Door
 
         public static Animator<int> CreateVerticalAnimator(ICore core)
         {
-            var verticalDoorOpening = core.Animations.Create<int>("VERTICAL_DOOR_OPENING");
+            var verticalDoorOpening = core.Animations.Anims.Create<int>("VERTICAL_DOOR_OPENING");
             verticalDoorOpening.AddFrame(0, 2.0f);
-            var verticalDoorClosing = core.Animations.Create<int>("VERTICAL_DOOR_CLOSING");
+            var verticalDoorClosing = core.Animations.Anims.Create<int>("VERTICAL_DOOR_CLOSING");
             verticalDoorClosing.AddFrame(1, 2.0f);
 
             var animation = new Animator<int>(10.0f, true);
@@ -60,6 +62,17 @@ namespace OpenBreed.Game.Entities.Door
             stateMachine.AddState(new ClosedState("Closed", 0));
 
             return stateMachine;
+        }
+
+        public static IEntity CreateDoor(ICore core, Vector2 pos, ISpriteAtlas atlas)
+        {
+            var door = core.Entities.Create();
+            //door.Add(new Animator<int>(10.0f, true));
+            //door.Add(core.Rendering.CreateSprite(atlas.Id));
+            //door.Add(new Position(pos));
+            //door.Add(new AxisAlignedBoxShape(32, 32));
+            //door.Add(new StaticBody());
+            return door;
         }
     }
 }

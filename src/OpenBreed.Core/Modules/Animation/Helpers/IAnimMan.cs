@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Core.Modules.Animation
+namespace OpenBreed.Core.Modules.Animation.Helpers
 {
     public interface IAnimMan
     {

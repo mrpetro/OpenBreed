@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Animation;
+using OpenBreed.Core.Modules.Animation.Helpers;
 using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Rendering;
@@ -33,6 +34,11 @@ namespace OpenBreed.Core
         IPhysicsModule Physics { get; }
 
         /// <summary>
+        /// Reference to animation core module
+        /// </summary>
+        IAnimationModule Animations { get; }
+
+        /// <summary>
         /// Entities manager
         /// </summary>
         EntityMan Entities { get; }
@@ -41,11 +47,6 @@ namespace OpenBreed.Core
         /// Inputs manager
         /// </summary>
         InputsMan Inputs { get; }
-
-        /// <summary>
-        /// Animations manager
-        /// </summary>
-        IAnimMan Animations { get; }
 
         /// <summary>
         /// Worlds manager
