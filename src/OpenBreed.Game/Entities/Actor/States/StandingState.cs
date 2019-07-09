@@ -3,14 +3,14 @@ using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Messages;
-using OpenBreed.Core.Systems.Common.Components;
-using OpenBreed.Core.Systems.Movement.Components;
+using OpenBreed.Core.Modules.Animation.Systems.Movement.Components;
 using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Core.Common.Systems.Components;
 
 namespace OpenBreed.Game.Entities.Actor.States
 {

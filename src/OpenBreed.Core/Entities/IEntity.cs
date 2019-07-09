@@ -1,5 +1,7 @@
-﻿using OpenBreed.Core.Systems;
-using OpenBreed.Core.Systems.Common.Components;
+﻿using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Modules.Animation.Systems;
 using System;
 using System.Collections.ObjectModel;
 

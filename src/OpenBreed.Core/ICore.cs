@@ -6,7 +6,6 @@ using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Systems;
 using OpenTK;
 
 namespace OpenBreed.Core

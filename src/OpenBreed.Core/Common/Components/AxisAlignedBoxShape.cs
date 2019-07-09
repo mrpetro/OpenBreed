@@ -2,7 +2,7 @@
 using OpenTK;
 using System;
 
-namespace OpenBreed.Core.Systems.Common.Components.Shapes
+namespace OpenBreed.Core.Common.Systems.Components
 {
     /// <summary>
     /// Box shape which is always axis aligned (can't be oriented)

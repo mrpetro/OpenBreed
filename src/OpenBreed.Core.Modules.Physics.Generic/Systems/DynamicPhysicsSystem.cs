@@ -1,9 +1,9 @@
-﻿//using OpenBreed.Core.Systems.Common;
+﻿//using OpenBreed.Core.Modules.Animation.Systems.Common;
 //using OpenBreed.Core.Modules.Physics.Components;
 //using OpenBreed.Core.Modules.Physics.Helpers;
 //using System;
 //using System.Collections.Generic;
-//using OpenBreed.Core.Systems;
+//using OpenBreed.Core.Modules.Animation.Systems;
 
 //namespace OpenBreed.Core.Modules.Physics.Systems
 //{

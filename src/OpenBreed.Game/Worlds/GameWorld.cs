@@ -1,7 +1,8 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Common;
 using OpenBreed.Core.Modules.Animation;
-using OpenBreed.Core.Systems.Control.Systems;
-using OpenBreed.Core.Systems.Movement.Systems;
+using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
+using OpenBreed.Core.Modules.Animation.Systems.Movement.Systems;
 using System;
 using System.Collections.Generic;
 using System.Linq;

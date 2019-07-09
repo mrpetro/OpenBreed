@@ -1,9 +1,9 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Entities.Builders;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenBreed.Core.Systems.Common.Components;
 
 namespace OpenBreed.Game.Entities.Builders
 {

@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Systems;
+﻿using OpenBreed.Core.Common.Systems;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {

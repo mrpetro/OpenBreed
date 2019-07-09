@@ -3,10 +3,10 @@ using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Systems;
+using OpenBreed.Core.Modules.Animation.Systems;
 using OpenBreed.Core.Modules.Animation;
-using OpenBreed.Core.Systems.Control;
-using OpenBreed.Core.Systems.Movement;
+using OpenBreed.Core.Modules.Animation.Systems.Control;
+using OpenBreed.Core.Modules.Animation.Systems.Movement;
 using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Game.States;
 using OpenTK;
@@ -16,10 +16,9 @@ using OpenTK.Input;
 using System;
 using System.Drawing;
 using System.Reflection;
-using OpenBreed.Core.Systems.Movement.Systems;
-using OpenBreed.Core.Systems.Control.Systems;
+using OpenBreed.Core.Modules.Animation.Systems.Movement.Systems;
+using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Physics.Systems;
-using OpenBreed.Core.Modules.Animation;
 
 namespace OpenBreed.Game
 {

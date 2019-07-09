@@ -1,7 +1,7 @@
-﻿using OpenBreed.Core.Entities;
+﻿using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Helpers;
-using OpenBreed.Core.Systems;
 using System;
 using System.Collections.Generic;
 using System.Linq;

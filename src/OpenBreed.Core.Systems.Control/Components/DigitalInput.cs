@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Core.Systems.Control.Components
+namespace OpenBreed.Core.Modules.Animation.Systems.Control.Components
 {
     public class DigitalInput
     {

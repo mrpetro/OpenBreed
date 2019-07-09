@@ -4,8 +4,6 @@ using OpenBreed.Core.Modules.Rendering.Entities;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Systems.Common.Components;
-using OpenBreed.Core.Systems.Common.Components.Shapes;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Game.Entities;
 using OpenBreed.Game.Entities.Builders;
@@ -15,9 +13,10 @@ using System;
 using System.Drawing;
 using OpenBreed.Core.Entities;
 using OpenBreed.Game.Worlds;
-using OpenBreed.Core.Systems.Control.Components;
-using OpenBreed.Core.Systems.Movement.Components;
+using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
+using OpenBreed.Core.Modules.Animation.Systems.Movement.Components;
 using OpenBreed.Game.Entities.Actor;
+using OpenBreed.Core.Common;
 
 namespace OpenBreed.Game.States
 {

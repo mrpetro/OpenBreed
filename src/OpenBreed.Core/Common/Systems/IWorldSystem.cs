@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.Systems.Common.Components;
 
-namespace OpenBreed.Core.Systems
+namespace OpenBreed.Core.Common.Systems
 {
     /// <summary>
     /// Interface to system which is part of some world

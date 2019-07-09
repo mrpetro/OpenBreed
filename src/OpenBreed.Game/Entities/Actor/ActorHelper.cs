@@ -4,11 +4,8 @@ using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Systems.Common.Components;
-using OpenBreed.Core.Systems.Common.Components.Shapes;
-using OpenBreed.Core.Systems.Control.Components;
-using OpenBreed.Core.Systems.Movement.Components;
+using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
+using OpenBreed.Core.Modules.Animation.Systems.Movement.Components;
 using OpenBreed.Game.Entities.Actor.States;
 using OpenTK;
 using OpenTK.Input;
@@ -17,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Core.Common.Systems.Components;
 
 namespace OpenBreed.Game.Entities.Actor
 {

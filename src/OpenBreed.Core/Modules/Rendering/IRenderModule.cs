@@ -1,9 +1,10 @@
 ﻿using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
-using OpenBreed.Core.Systems;
+using OpenBreed.Core.Modules.Animation.Systems;
 using OpenTK;
 using System.Drawing;
+using OpenBreed.Core.Common.Systems;
 
 namespace OpenBreed.Core.Modules.Rendering
 {

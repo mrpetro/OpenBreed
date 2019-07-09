@@ -1,13 +1,13 @@
-﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.Systems.Common.Components;
-using OpenBreed.Core.Systems.Movement;
-using OpenBreed.Core.Systems.Movement.Components;
-using OpenBreed.Core.Systems.Movement.Systems;
+﻿using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Animation.Systems.Movement;
+using OpenBreed.Core.Modules.Animation.Systems.Movement.Components;
+using OpenBreed.Core.Modules.Animation.Systems.Movement.Systems;
 using OpenTK;
 using System;
 using System.Linq;
 
-namespace OpenBreed.Core.Systems.Movement.Components
+namespace OpenBreed.Core.Modules.Animation.Systems.Movement.Components
 {
     public class Motion : IEntityComponent
     {

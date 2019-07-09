@@ -1,7 +1,7 @@
 ﻿using OpenTK;
 using System;
 
-namespace OpenBreed.Core.Systems.Movement
+namespace OpenBreed.Core.Modules.Animation.Systems.Movement
 {
     /// <summary>
     /// Various methods and values related with movement system and components

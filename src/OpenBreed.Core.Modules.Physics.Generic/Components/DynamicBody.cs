@@ -1,11 +1,11 @@
-﻿using OpenBreed.Core.Systems.Common.Components;
-using OpenBreed.Core.Entities;
+﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Helpers;
 using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenBreed.Core.Modules.Physics.Systems;
+using OpenBreed.Core.Common.Systems.Components;
 
 namespace OpenBreed.Core.Modules.Physics.Components
 {

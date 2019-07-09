@@ -1,11 +1,12 @@
-﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.Systems.Common.Components;
+﻿using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Entities;
+using OpenBreed.Core.Common.Systems.Components;
 using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OpenBreed.Core.Systems.Movement.Systems
+namespace OpenBreed.Core.Modules.Animation.Systems.Movement.Systems
 {
     public class MovementSystem : WorldSystem, IUpdatableSystem
     {

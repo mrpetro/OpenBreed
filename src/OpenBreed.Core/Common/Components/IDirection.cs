@@ -1,6 +1,6 @@
 ﻿using OpenTK;
 
-namespace OpenBreed.Core.Systems.Common.Components
+namespace OpenBreed.Core.Common.Systems.Components
 {
     /// <summary>
     /// Direction entity component class that can be used to store entity current direction information

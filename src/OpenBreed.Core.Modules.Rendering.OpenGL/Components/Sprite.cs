@@ -1,8 +1,6 @@
 ﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
-using OpenBreed.Core.Systems.Common.Components;
-using OpenBreed.Core.Systems.Common.Components.Shapes;
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Linq;

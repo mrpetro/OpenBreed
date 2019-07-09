@@ -3,7 +3,6 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Systems.Common.Components;
 using OpenBreed.Game.Components;
 using OpenBreed.Game.Components.States;
 using OpenTK;

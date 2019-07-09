@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Core.Modules.Animation.Helpers;
-using OpenBreed.Core.Systems;
+using OpenBreed.Core.Modules.Animation.Systems;
 
 namespace OpenBreed.Core.Modules.Animation
 {

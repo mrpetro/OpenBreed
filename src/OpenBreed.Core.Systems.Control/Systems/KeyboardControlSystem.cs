@@ -1,13 +1,14 @@
-﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.Systems.Control.Components;
-using OpenBreed.Core.Systems.Control.Events;
+﻿using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
+using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenTK;
 using OpenTK.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OpenBreed.Core.Systems.Control.Systems
+namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 {
     /// <summary>
     /// Control system should be used to control actions

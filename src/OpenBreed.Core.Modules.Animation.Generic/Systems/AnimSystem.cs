@@ -2,12 +2,13 @@
 using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Helpers;
-using OpenBreed.Core.Systems;
+using OpenBreed.Core.Modules.Animation.Systems;
 using OpenBreed.Core.Modules.Animation.Events;
 using OpenBreed.Core.Modules.Animation.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenBreed.Core.Common.Systems;
 
 namespace OpenBreed.Core.Modules.Animation.Systems
 {

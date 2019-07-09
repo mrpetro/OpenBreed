@@ -4,7 +4,7 @@ using OpenBreed.Core.Modules.Animation.Systems;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
-using OpenBreed.Core.Systems;
+using OpenBreed.Core.Modules.Animation.Systems;
 using System;
 
 namespace OpenBreed.Core.Modules.Animation

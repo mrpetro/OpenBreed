@@ -2,7 +2,7 @@
 using OpenTK;
 using System;
 
-namespace OpenBreed.Core.Systems.Common.Components
+namespace OpenBreed.Core.Common.Systems.Components
 {
     /// <summary>
     /// Velocity entity component class that can be used to store entity current velocity information

@@ -1,16 +1,17 @@
 ﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Systems;
+using OpenBreed.Core.Modules.Animation.Systems;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Events;
 using OpenBreed.Core.Modules.Animation.Messages;
-using OpenBreed.Core.Systems.Common.Components;
-using OpenBreed.Core.Systems.Control.Events;
-using OpenBreed.Core.Systems.Movement.Components;
+using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
+using OpenBreed.Core.Modules.Animation.Systems.Movement.Components;
 using OpenTK;
 using System.Linq;
 using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Common.Systems;
 
 namespace OpenBreed.Game.Entities.Actor.States
 {
