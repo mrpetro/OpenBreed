@@ -1,8 +1,11 @@
 ﻿using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenTK;
+using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
@@ -17,6 +20,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         private readonly List<IEntity> entities = new List<IEntity>();
         private readonly List<ISprite> spriteComps = new List<ISprite>();
         private readonly List<IPosition> positionComps = new List<IPosition>();
+        private readonly List<IDynamicBody> debugComps = new List<IDynamicBody>();
 
         #endregion Private Fields
 
@@ -65,6 +69,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             var entity = entities[index];
             var sprite = spriteComps[index];
             var position = positionComps[index];
+            var dynamic = debugComps[index];
+            Draw(dynamic, viewport);
 
             GL.PushMatrix();
 
@@ -77,6 +83,33 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.PopMatrix();
         }
 
+        /// <summary>
+        /// Draw this sprite to given viewport
+        /// </summary>
+        /// <param name="viewport">Viewport which this sprite will be rendered to</param>
+        public void Draw(IDynamicBody body, IViewport viewport)
+        {
+            if (body.Boxes != null)
+            {
+                foreach (var item in body.Boxes)
+                {
+                    RenderTools.DrawRectangle(item.Item1 * 16.0f,
+                                              item.Item2 * 16.0f,
+                                              item.Item1 * 16.0f + 16.0f,
+                                              item.Item2 * 16.0f + 16.0f);
+                }
+            }
+
+            //if (body.Collides)
+            //{
+            //    RenderTools.DrawBox(body.Aabb, Color4.Red);
+            //    RenderTools.DrawLine(body.Aabb.GetCenter(), Vector2.Add(body.Aabb.GetCenter(), body.Projection * 10), Color4.Purple);
+            //}
+            //else
+            //    RenderTools.DrawBox(body.Aabb, Color4.Green);
+        }
+
+
         #endregion Public Methods
 
         #region Protected Methods
@@ -86,6 +119,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             entities.Add(entity);
             spriteComps.Add(entity.Components.OfType<ISprite>().First());
             positionComps.Add(entity.Components.OfType<IPosition>().First());
+            debugComps.Add(entity.Components.OfType<IDynamicBody>().First());
         }
 
         protected override void UnregisterEntity(IEntity entity)
@@ -98,6 +132,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             entities.RemoveAt(index);
             spriteComps.RemoveAt(index);
             positionComps.RemoveAt(index);
+            debugComps.RemoveAt(index);
         }
 
         #endregion Protected Methods

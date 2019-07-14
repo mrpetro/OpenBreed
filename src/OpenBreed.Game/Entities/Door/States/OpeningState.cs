@@ -17,9 +17,7 @@ namespace OpenBreed.Game.Components.States
     public class OpeningState : IState
     {
         public IEntity Entity { get; private set; }
-        private IThrust thrust;
         private Animator<int> spriteAnimation;
-        private IDirection direction;
         private readonly string animationId;
 
         public OpeningState(string id, string animationId)
@@ -32,17 +30,14 @@ namespace OpenBreed.Game.Components.States
 
         public void EnterState()
         {
-            thrust.Value = Vector2.Zero;
             Entity.PostMessage(new PlayAnimMsg(animationId));
-            Entity.PostMessage(new SetTextMsg("Hero - Standing"));
+            Entity.PostMessage(new SetTextMsg("Door - Opening"));
         }
 
         public void Initialize(IEntity entity)
         {
             Entity = entity;
-            thrust = entity.Components.OfType<IThrust>().First();
             spriteAnimation = entity.Components.OfType<Animator<int>>().First();
-            direction = entity.Components.OfType<IDirection>().First();
         }
 
         public void LeaveState()

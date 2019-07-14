@@ -1,29 +1,35 @@
 ﻿using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Helpers;
+using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Core.Modules.Physics.Systems
 {
-    public class PhysicsSystem : WorldSystem, IPhysicsSystem
+    internal class PhysicsSystem : WorldSystem, IPhysicsSystem
     {
         #region Private Fields
 
         private static readonly AabbXComparer comparer = new AabbXComparer();
 
         private readonly List<IEntity> dynamicEntities = new List<IEntity>();
-        private readonly List<IDynamicBody> dynamicBodies = new List<IDynamicBody>();
+        private readonly List<IDynamicBody> dynamicBodyComps = new List<IDynamicBody>();
+        private readonly List<IPosition> positionComps = new List<IPosition>();
+        private readonly List<IVelocity> velocityComps = new List<IVelocity>();
+        private readonly List<IShapeComponent> shapeComps = new List<IShapeComponent>();
+
         private List<IEntity>[] gridStaticEntities;
         private List<IStaticBody>[] gridStaticComps;
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        public PhysicsSystem(ICore core, int gridWidth, int gridHeight) : base(core)
+        internal PhysicsSystem(ICore core, int gridWidth, int gridHeight) : base(core)
         {
             Require<IPhysicsComponent>();
 
@@ -31,12 +37,9 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             GridHeight = gridHeight;
 
             InitializeGrid();
-
-            dynamicEntities = new List<IEntity>();
-            dynamicBodies = new List<IDynamicBody>();
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
 
@@ -50,8 +53,6 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         public void Update(float dt)
         {
-            Integrate();
-
             BruteForce(dt);
         }
 
@@ -66,27 +67,54 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             physicsComponent.Initialize(entity);
 
             if (physicsComponent is IStaticBody)
-                AddStaticBody(entity, (IStaticBody)physicsComponent);
+                RegisterStaticEntity(entity, (IStaticBody)physicsComponent);
             else if (physicsComponent is IDynamicBody)
-                AddDynamicBody(entity, (IDynamicBody)physicsComponent);
+                RegisterDynamicEntity(entity, (IDynamicBody)physicsComponent);
             else
                 throw new NotImplementedException($"{physicsComponent}");
         }
 
         protected override void UnregisterEntity(IEntity entity)
         {
-            throw new NotImplementedException();
+            var physicsComponent = entity.Components.OfType<IPhysicsComponent>().First();
+
+            physicsComponent.Initialize(entity);
+
+            if (physicsComponent is IStaticBody)
+                UnregisterStaticEntity(entity);
+            else if (physicsComponent is IDynamicBody)
+                UnregisterDynamicEntity(entity);
+            else
+                throw new NotImplementedException($"{physicsComponent}");
         }
 
         #endregion Protected Methods
 
         #region Private Methods
 
+        private void UnregisterDynamicEntity(IEntity entity)
+        {
+            var index = dynamicEntities.IndexOf(entity);
+
+            if (index < 0)
+                throw new InvalidOperationException("Entity not found in this system.");
+
+            dynamicEntities.RemoveAt(index);
+            positionComps.RemoveAt(index);
+            velocityComps.RemoveAt(index);
+            shapeComps.RemoveAt(index);
+        }
+
+        private void UnregisterStaticEntity(IEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
         private void BruteForce(float dt)
         {
             List<IDynamicBody> activeList = new List<IDynamicBody>();
 
-            for (int i = 0; i < dynamicBodies.Count; i++)
+            for (int i = 0; i < dynamicBodyComps.Count; i++)
             {
                 //for (int e = i; e < dynamicBodies.Count; e++)
                 //{
@@ -94,22 +122,30 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 //        DetectNarrowPhase(i, e);
                 //}
 
-                QueryStaticMatrix(dynamicBodies[i]);
+                QueryStaticMatrix(i,dt);
             }
         }
 
-        private void QueryStaticMatrix(IDynamicBody collider)
+        private void QueryStaticMatrix(int index, float dt)
         {
-            collider.Collides = false;
-            collider.Boxes = new List<Tuple<int, int>>();
+            var entity = dynamicEntities[index];
+            var dynamicBody = dynamicBodyComps[index];
+            var position = positionComps[index];
+            var velocity = velocityComps[index];
+            var shape = shapeComps[index];
 
-            int xMod = (int)collider.Aabb.Right % 16;
-            int yMod = (int)collider.Aabb.Top % 16;
+            var dynamicAabb = shape.Aabb.Translated(position.Value);
 
-            int leftIndex = (int)collider.Aabb.Left >> 4;
-            int rightIndex = (int)collider.Aabb.Right >> 4;
-            int bottomIndex = (int)collider.Aabb.Bottom >> 4;
-            int topIndex = (int)collider.Aabb.Top >> 4;
+            dynamicBody.Collides = false;
+            dynamicBody.Boxes = new List<Tuple<int, int>>();
+
+            int xMod = (int)dynamicAabb.Right % 16;
+            int yMod = (int)dynamicAabb.Top % 16;
+
+            int leftIndex = (int)dynamicAabb.Left >> 4;
+            int rightIndex = (int)dynamicAabb.Right >> 4;
+            int bottomIndex = (int)dynamicAabb.Bottom >> 4;
+            int topIndex = (int)dynamicAabb.Top >> 4;
 
             if (xMod > 0)
                 rightIndex++;
@@ -130,12 +166,12 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 topIndex = GridHeight - 1;
 
             //Collect all unique aabb boxes
-            var boxesSet = new HashSet<IStaticBody>();
+            var boxesSet = new List<IStaticBody>();
             for (int yIndex = bottomIndex; yIndex < topIndex; yIndex++)
             {
                 for (int xIndex = leftIndex; xIndex < rightIndex; xIndex++)
                 {
-                    collider.Boxes.Add(new Tuple<int, int>(xIndex, yIndex));
+                    dynamicBody.Boxes.Add(new Tuple<int, int>(xIndex, yIndex));
                     var collideres = gridStaticComps[xIndex + GridWidth * yIndex];
                     for (int boxIndex = 0; boxIndex < collideres.Count; boxIndex++)
                     {
@@ -147,21 +183,17 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             if (boxesSet.Count == 0)
                 return;
 
+            var pos = dynamicAabb.GetCenter();
+
+
+            boxesSet.Sort((x, y) => ShortestDistanceComparer(pos, x, y));
+
             //Iterate all collected static bodies for detail test
             foreach (var item in boxesSet)
             {
-                collider.CollideVsStatic(item);
+                dynamicAabb = shape.Aabb.Translated(position.Value);
+                DynamicHelper.CollideDynamicVsStatic(dynamicBody, position, velocity, dynamicAabb, item, dt);
             }
-        }
-
-        private void CollideDynamicVsStatic(IDynamicBody dynamicBody, IStaticBody staticBody)
-        {
-        }
-
-        private void Integrate()
-        {
-            for (int i = 0; i < dynamicBodies.Count; i++)
-                dynamicBodies[i].IntegrateVerlet();
         }
 
         //public override void Update(float dt)
@@ -206,7 +238,20 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 return 1;
         }
 
-        private void AddStaticBody(IEntity entity, IStaticBody body)
+        private int ShortestDistanceComparer(Vector2 pos, IStaticBody x, IStaticBody y)
+        {
+            var lx = Vector2.Distance(pos, x.Aabb.GetCenter());
+            var ly = Vector2.Distance(pos, y.Aabb.GetCenter());
+
+            if (lx < ly)
+                return -1;
+            if (lx == ly)
+                return 0;
+            else
+                return 1;
+        }
+
+        private void RegisterStaticEntity(IEntity entity, IStaticBody body)
         {
             int x, y;
             body.GetGridIndices(out x, out y);
@@ -222,10 +267,14 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             gridStaticComps[gridIndex].Add(body);
         }
 
-        private void AddDynamicBody(IEntity entity, IDynamicBody body)
+        private void RegisterDynamicEntity(IEntity entity, IDynamicBody body)
         {
             dynamicEntities.Add(entity);
-            dynamicBodies.Add(body);
+            dynamicBodyComps.Add(body);
+            positionComps.Add(entity.Components.OfType<IPosition>().First());
+            velocityComps.Add(entity.Components.OfType<IVelocity>().First());
+
+            shapeComps.Add(entity.Components.OfType<IShapeComponent>().First());
         }
 
         private void InitializeGrid()

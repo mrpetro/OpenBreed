@@ -51,7 +51,7 @@ namespace OpenBreed.Game.Entities.Actor.States
 
         public void EnterState()
         {
-            thrust.Value = walkDirection * creatureMovement.Speed;
+            thrust.Value = walkDirection * creatureMovement.Acceleration;
 
             Entity.PostMessage(new PlayAnimMsg(animationId));
             Entity.PostMessage(new SetTextMsg("Hero - Walking"));

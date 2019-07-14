@@ -14,7 +14,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Movement.Components
         #region Private Fields
 
         private float speedPercent = 1.0f;
-        private float MAXSPEED = 8.0f;
+        private float MAX_ACCELERATION = 1024.0f;
 
         #endregion Private Fields
 
@@ -41,7 +41,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Movement.Components
             }
         }
 
-        public float Speed { get { return speedPercent * MAXSPEED; } }
+        public float Acceleration { get { return speedPercent * MAX_ACCELERATION; } }
 
         #endregion Public Properties
     }

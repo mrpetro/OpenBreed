@@ -55,6 +55,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Common\Components\GroupPart.cs" />
+    <Compile Include="Common\Systems\GroupSystem.cs" />
     <Compile Include="CoreTools.cs" />
     <Compile Include="Entities\ISystemEvent.cs" />
     <Compile Include="Entities\IEntityMsg.cs" />

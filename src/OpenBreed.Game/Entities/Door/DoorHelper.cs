@@ -1,6 +1,8 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
+using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
 using OpenBreed.Game.Components;
@@ -63,15 +65,40 @@ namespace OpenBreed.Game.Entities.Door
             return stateMachine;
         }
 
-        public static IEntity CreateDoor(ICore core, Vector2 pos, ISpriteAtlas atlas)
+
+
+        public static List<IEntity> CreateHorizontalDoor(ICore core, int x, int y, ISpriteAtlas spriteAtlas, ITileAtlas tileAtlas)
         {
+            var collection = new List<IEntity>();
+
             var door = core.Entities.Create();
+
+            var doorPart1 = core.Entities.Create();
+            doorPart1.Add(new Position(x * 16, y * 16));
+            doorPart1.Add(new GridBoxBody(16));
+            doorPart1.Add(new GroupPart(door.Guid));
+            doorPart1.Add(core.Rendering.CreateTile(tileAtlas.Id, 2));
+
+            var doorPart2 = core.Entities.Create();
+            doorPart2.Add(new Position((x + 1) * 16, y * 16));
+            doorPart2.Add(new GridBoxBody(16));
+            doorPart2.Add(core.Rendering.CreateTile(tileAtlas.Id, 2));
+            doorPart2.Add(new GroupPart(door.Guid));
+
             //door.Add(new Animator<int>(10.0f, true));
             //door.Add(core.Rendering.CreateSprite(atlas.Id));
             //door.Add(new Position(pos));
             //door.Add(new AxisAlignedBoxShape(32, 32));
             //door.Add(new StaticBody());
-            return door;
+
+            var doorSm = DoorHelper.CreateHorizontalStateMachine(door);
+            //doorSm.Initialize("Closed");
+
+            collection.Add(door);
+            collection.Add(doorPart1);
+            collection.Add(doorPart2);
+
+            return collection;
         }
     }
 }

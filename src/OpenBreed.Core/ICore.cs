@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Modules;
+﻿using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Helpers;
 using OpenBreed.Core.Modules.Audio;
@@ -36,6 +37,12 @@ namespace OpenBreed.Core
         /// Reference to animation core module
         /// </summary>
         IAnimationModule Animations { get; }
+
+        /// <summary>
+        /// Create group system
+        /// </summary>
+        /// <returns>Group system</returns>
+        GroupSystem CreateGroupSystem();
 
         /// <summary>
         /// Entities manager

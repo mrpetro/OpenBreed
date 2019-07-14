@@ -5,11 +5,14 @@ using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenBreed.Core.Modules.Physics.Components;
 
 namespace OpenBreed.Core.Modules.Animation.Systems.Movement.Systems
 {
     public class MovementSystem : WorldSystem, IUpdatableSystem
     {
+        private const float FLOOR_FRICTION = 0.1f;
+
         #region Private Fields
 
         private readonly List<IEntity> entities = new List<IEntity>();
@@ -17,7 +20,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Movement.Systems
         private readonly List<IPosition> positionComps = new List<IPosition>();
         private readonly List<IDirection> directionComps = new List<IDirection>();
         private readonly List<IVelocity> velocityComps = new List<IVelocity>();
-        private float MAXSPEED = 8.0f;
+        private readonly List<IDynamicBody> dynamicBodyComps = new List<IDynamicBody>();
 
         #endregion Private Fields
 
@@ -29,6 +32,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Movement.Systems
             Require<IPosition>();
             Require<IDirection>();
             Require<IVelocity>();
+            Require<IDynamicBody>();
         }
 
         #endregion Public Constructors
@@ -48,16 +52,22 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Movement.Systems
             var thrust = thrustComps[index];
             var direction = directionComps[index];
             var velocity = velocityComps[index];
+            var dynamicBody = dynamicBodyComps[index];
 
             direction.Value = thrust.Value;
 
-            var newSpeed = velocity.Value;
-            newSpeed += thrust.Value;// * dt;
+            //Velocity equation
+            var newVel = velocity.Value + thrust.Value * dt;
 
-            newSpeed.X = MathHelper.Clamp(newSpeed.X, -MAXSPEED, MAXSPEED);
-            newSpeed.Y = MathHelper.Clamp(newSpeed.Y, -MAXSPEED, MAXSPEED);
+            //Apply friction force
+            newVel += -newVel * FLOOR_FRICTION;
 
-            position.Value += newSpeed;
+            //Verlet integration
+            var newPos = position.Value + (velocity.Value + newVel) * 0.5f * dt;
+
+            velocity.Value = newVel;
+            dynamicBody.OldPosition = position.Value;
+            position.Value = newPos;
         }
 
         #endregion Public Methods
@@ -71,6 +81,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Movement.Systems
             thrustComps.Add(entity.Components.OfType<IThrust>().First());
             directionComps.Add(entity.Components.OfType<IDirection>().First());
             velocityComps.Add(entity.Components.OfType<IVelocity>().First());
+            dynamicBodyComps.Add(entity.Components.OfType<IDynamicBody>().First());
         }
 
         protected override void UnregisterEntity(IEntity entity)
@@ -85,6 +96,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Movement.Systems
             thrustComps.RemoveAt(index);
             directionComps.RemoveAt(index);
             velocityComps.RemoveAt(index);
+            dynamicBodyComps.RemoveAt(index);
         }
 
         #endregion Protected Methods

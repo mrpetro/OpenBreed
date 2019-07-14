@@ -20,17 +20,18 @@ using OpenBreed.Core.Modules.Animation.Systems.Movement.Components;
 using OpenBreed.Game.Helpers;
 using OpenBreed.Game.Entities.Actor;
 using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Game.Entities.Door;
 
 namespace OpenBreed.Game.States
 {
     /// <summary>
     /// Tech Demo Class: Animation
     /// </summary>
-    public class StateTechDemo4 : BaseState
+    public class StateTechDemo5 : BaseState
     {
         #region Public Fields
 
-        public const string ID = "TECH_DEMO_4";
+        public const string ID = "TECH_DEMO_5";
 
         #endregion Public Fields
 
@@ -50,18 +51,16 @@ namespace OpenBreed.Game.States
         private ITileAtlas tileAtlas;
         private ISpriteAtlas spriteAtlas;
         private Viewport gameViewport;
-        private Viewport hudViewport;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public StateTechDemo4(ICore core)
+        public StateTechDemo5(ICore core)
         {
             Core = core;
 
             InitializeWorld();
-            InitializeHud();
         }
 
         #endregion Public Constructors
@@ -87,11 +86,6 @@ namespace OpenBreed.Game.States
             gameViewport.Y = clientRectangle.Y + 25;
             gameViewport.Width = clientRectangle.Width  - 50;
             gameViewport.Height = clientRectangle.Height - 50;
-
-            hudViewport.X = clientRectangle.X + 25;
-            hudViewport.Y = clientRectangle.Y + 25;
-            hudViewport.Width = clientRectangle.Width - 50;
-            hudViewport.Height = clientRectangle.Height - 50;
         }
 
         public override void Update(float dt)
@@ -142,10 +136,9 @@ namespace OpenBreed.Game.States
             Core.Inputs.KeyDown += Inputs_KeyDown;
 
             Core.Rendering.Viewports.Add(gameViewport);
-            Core.Rendering.Viewports.Add(hudViewport);
 
             Console.Clear();
-            Console.WriteLine("---------- Fonts & Texts --------");
+            Console.WriteLine("---------- Entity groups --------");
             Console.WriteLine("This demo shows typical usage of fonts and texts on the screen.");
             Console.WriteLine("Constrols:");
             Console.WriteLine("RMB + Move mouse cursor = Camera control over hovered viewport");
@@ -154,7 +147,6 @@ namespace OpenBreed.Game.States
 
         protected override void OnLeave()
         {
-            Core.Rendering.Viewports.Remove(hudViewport);
             Core.Rendering.Viewports.Remove(gameViewport);
 
             Core.Inputs.KeyDown -= Inputs_KeyDown;
@@ -163,39 +155,6 @@ namespace OpenBreed.Game.States
         #endregion Protected Methods
 
         #region Private Methods
-
-        private void InitializeHud()
-        {
-            var hudWorld = new HudWorld(Core);
-
-            var cameraBuilder = new CameraBuilder(Core);
-
-            cameraBuilder.SetPosition(new Vector2(320, 280));
-            cameraBuilder.SetRotation(0.0f);
-            cameraBuilder.SetZoom(1);
-            hudCamera = (CameraEntity)cameraBuilder.Build();
-            hudWorld.AddEntity(hudCamera);
-
-
-            hudViewport = (Viewport)Core.Rendering.Viewports.Create(0, 0, 540, 380);
-            hudViewport.Camera = hudCamera;
-
-            var algerian50 = Core.Rendering.Fonts.Create("ALGERIAN", 50);
-            var arial12 = Core.Rendering.Fonts.Create("ARIAL", 12);
-
-            var textEntity = Core.Entities.Create();
-            textEntity.Add(new Position(0, 0));
-            textEntity.Add(Core.Rendering.CreateText(algerian50.Id, Vector2.Zero, "Alice has a cat!"));
-            hudWorld.AddEntity(textEntity);
-
-            var fpsEntity = Core.Entities.Create();
-
-            fpsEntity.Add(new Position(0, 400));
-            fpsEntity.Add(Core.Rendering.CreateText(arial12.Id, Vector2.Zero, "0 fps"));
-            hudWorld.AddEntity(fpsEntity);
-
-            Core.Worlds.Add(hudWorld);
-        }
 
         private void InitializeWorld()
         {
@@ -226,10 +185,15 @@ namespace OpenBreed.Game.States
             actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
             actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
 
-            var stateMachine = ActorHelper.CreateStateMachine(actor);
-            stateMachine.Initialize("Standing_Down");
-
+   
+            var actorSm = ActorHelper.CreateStateMachine(actor);
+            actorSm.Initialize("Standing_Down");
             gameWorld.AddEntity(actor);
+
+            var doorCollection = DoorHelper.CreateHorizontalDoor(Core, 3, 20, spriteAtlas, tileAtlas);
+
+            foreach (var item in doorCollection)
+                gameWorld.AddEntity(item);
 
             var rnd = new Random();
 

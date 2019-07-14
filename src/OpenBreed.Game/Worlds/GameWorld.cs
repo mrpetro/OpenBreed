@@ -25,6 +25,9 @@ namespace OpenBreed.Game.Worlds
             AddSystem(Core.Physics.CreatePhysicsSystem(64, 64));
             AddSystem(Core.Animations.CreateAnimationSystem<int>());
 
+            //Other
+            AddSystem(Core.CreateGroupSystem());
+
             //Audio
             AddSystem(Core.Sounds.CreateSoundSystem());
 

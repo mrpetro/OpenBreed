@@ -19,6 +19,7 @@ using System.Reflection;
 using OpenBreed.Core.Modules.Animation.Systems.Movement.Systems;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Physics.Systems;
+using OpenBreed.Core.Common.Systems;
 
 namespace OpenBreed.Game
 {
@@ -50,8 +51,9 @@ namespace OpenBreed.Game
             StateMachine.RegisterState(new StateTechDemo2(this));
             StateMachine.RegisterState(new StateTechDemo3(this));
             StateMachine.RegisterState(new StateTechDemo4(this));
+            StateMachine.RegisterState(new StateTechDemo5(this));
             //StateMan.RegisterState(new MenuState(this));
-            StateMachine.SetNextState(StateTechDemo4.ID);
+            StateMachine.SetNextState(StateTechDemo5.ID);
             StateMachine.ChangeState();
 
             VSync = VSyncMode.On;
@@ -117,14 +119,9 @@ namespace OpenBreed.Game
 
         #region Public Methods
 
-        //public IAnimationSystem CreateAnimationSystem()
-        //{
-        //    return new AnimationSystem(this);
-        //}
-
-        public IPhysicsSystem CreatePhysicsSystem()
+        public GroupSystem CreateGroupSystem()
         {
-            return new PhysicsSystem(this, 64, 64);
+            return new GroupSystem(this);
         }
 
         #endregion Public Methods
