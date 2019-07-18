@@ -1,11 +1,12 @@
-﻿using OpenBreed.Core.Modules;
+﻿using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Animation;
+using OpenBreed.Core.Modules.Animation.Helpers;
 using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Systems;
 using OpenTK;
 
 namespace OpenBreed.Core
@@ -33,6 +34,17 @@ namespace OpenBreed.Core
         IPhysicsModule Physics { get; }
 
         /// <summary>
+        /// Reference to animation core module
+        /// </summary>
+        IAnimationModule Animations { get; }
+
+        /// <summary>
+        /// Create group system
+        /// </summary>
+        /// <returns>Group system</returns>
+        GroupSystem CreateGroupSystem();
+
+        /// <summary>
         /// Entities manager
         /// </summary>
         EntityMan Entities { get; }
@@ -41,11 +53,6 @@ namespace OpenBreed.Core
         /// Inputs manager
         /// </summary>
         InputsMan Inputs { get; }
-
-        /// <summary>
-        /// Animations manager
-        /// </summary>
-        IAnimMan Animations { get; }
 
         /// <summary>
         /// Worlds manager

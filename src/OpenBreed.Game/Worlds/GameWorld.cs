@@ -1,7 +1,8 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Systems.Animation;
-using OpenBreed.Core.Systems.Control.Systems;
-using OpenBreed.Core.Systems.Movement.Systems;
+using OpenBreed.Core.Common;
+using OpenBreed.Core.Modules.Animation;
+using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
+using OpenBreed.Core.Modules.Physics.Systems;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,10 @@ namespace OpenBreed.Game.Worlds
             //Action
             AddSystem(new MovementSystem(core));
             AddSystem(Core.Physics.CreatePhysicsSystem(64, 64));
-            AddSystem(new AnimSystem<int>(core));
+            AddSystem(Core.Animations.CreateAnimationSystem<int>());
+
+            //Other
+            AddSystem(Core.CreateGroupSystem());
 
             //Audio
             AddSystem(Core.Sounds.CreateSoundSystem());
@@ -30,6 +34,7 @@ namespace OpenBreed.Game.Worlds
             //Video
             AddSystem(Core.Rendering.CreateTileSystem(64, 64, 16, true));
             AddSystem(Core.Rendering.CreateSpriteSystem());
+            AddSystem(Core.Rendering.CreateWireframeSystem());
             AddSystem(Core.Rendering.CreateTextSystem());
         }
     }

@@ -1,5 +1,7 @@
-﻿using OpenBreed.Core.Systems;
-using OpenBreed.Core.Systems.Common.Components;
+﻿using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Modules.Animation.Systems;
 using System;
 using System.Collections.ObjectModel;
 
@@ -39,9 +41,14 @@ namespace OpenBreed.Core.Entities
         ReadOnlyCollection<IEntityComponent> Components { get; }
 
         /// <summary>
-        /// Unique identification number of this entity
+        /// Identification number of this entity
         /// </summary>
-        Guid Guid { get; }
+        int Id { get; }
+
+        /// <summary>
+        /// Property for various debug data
+        /// </summary>
+        object DebugData { get; set; }
 
         #endregion Public Properties
 

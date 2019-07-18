@@ -11,14 +11,15 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         private Texture(int id)
         {
-            Id = id;
+            InternalId = id;
         }
 
         #endregion Private Constructors
 
         #region Public Properties
 
-        public int Id { get; }
+        public int InternalId { get; }
+        public int Id { get; internal set; }
         public int Width { get; private set; }
         public int Height { get; private set; }
 
@@ -167,7 +168,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         public void Dispose()
         {
-            GL.DeleteTexture(Id);
+            GL.DeleteTexture(InternalId);
         }
 
         #endregion Public Methods

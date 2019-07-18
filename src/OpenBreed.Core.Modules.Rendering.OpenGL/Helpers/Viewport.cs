@@ -2,13 +2,14 @@
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Entities;
 using OpenBreed.Core.Modules.Rendering.Systems;
-using OpenBreed.Core.Systems;
+using OpenBreed.Core.Modules.Animation.Systems;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Drawing;
 using System.Linq;
+using OpenBreed.Core.Common.Systems;
 
 namespace OpenBreed.Core.Modules.Rendering.Helpers
 {

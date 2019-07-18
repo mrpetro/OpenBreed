@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenTK;
+﻿using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System.Collections.Generic;
@@ -25,7 +24,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
         internal SpriteAtlas(SpriteAtlasBuilder builder)
         {
@@ -38,20 +37,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             CreateVertices(builder.coords);
         }
 
-        //internal SpriteAtlas(int id, ITexture texture, float spriteWidth, float spriteHeight, int spriteColumns, int spriteRows)
-        //{
-        //    Id = id;
-        //    Texture = texture;
-        //    SpriteWidth = spriteWidth;
-        //    SpriteHeight = spriteHeight;
-
-        //    vboList = new List<int>();
-
-        //    RenderTools.CreateIndicesArray(indices, out ibo);
-        //    BuildCoords(spriteRows, spriteColumns);
-        //}
-
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
 
@@ -76,7 +62,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         public void Draw(int spriteId)
         {
-            GL.BindTexture(TextureTarget.Texture2D, Texture.Id);
+            GL.BindTexture(TextureTarget.Texture2D, Texture.InternalId);
             RenderTools.Draw(vboList[spriteId], ibo, 6);
             GL.BindTexture(TextureTarget.Texture2D, 0);
         }

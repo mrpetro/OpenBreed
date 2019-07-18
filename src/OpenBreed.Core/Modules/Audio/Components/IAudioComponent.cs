@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Systems.Common.Components;
+﻿using OpenBreed.Core.Common.Systems.Components;
 
 namespace OpenBreed.Core.Modules.Audio.Components
 {

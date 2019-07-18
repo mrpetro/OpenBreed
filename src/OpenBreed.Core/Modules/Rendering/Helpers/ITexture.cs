@@ -10,7 +10,12 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         #region Public Properties
 
         /// <summary>
-        /// Id if this texture
+        /// Internal Id of this texture, used for OpenGL for example
+        /// </summary>
+        int InternalId { get; }
+
+        /// <summary>
+        /// Texture manager Id
         /// </summary>
         int Id { get; }
 

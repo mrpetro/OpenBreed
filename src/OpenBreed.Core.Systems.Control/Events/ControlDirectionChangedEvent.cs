@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Core.Entities;
 using OpenTK;
 
-namespace OpenBreed.Core.Systems.Control.Events
+namespace OpenBreed.Core.Modules.Animation.Systems.Control.Events
 {
     public class ControlDirectionChangedEvent : ISystemEvent
     {

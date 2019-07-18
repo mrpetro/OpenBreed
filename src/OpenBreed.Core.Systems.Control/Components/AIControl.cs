@@ -1,8 +1,8 @@
-﻿using OpenBreed.Core.Systems.Common.Components;
+﻿using OpenBreed.Core.Common.Systems.Components;
 using OpenTK;
 using System.Collections.Generic;
 
-namespace OpenBreed.Core.Systems.Control.Components
+namespace OpenBreed.Core.Modules.Animation.Systems.Control.Components
 {
     public class AiControl : IEntityComponent
     {

@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Systems;
+﻿using OpenBreed.Core.Modules.Animation.Systems;
 
 namespace OpenBreed.Core.Modules.Physics
 {

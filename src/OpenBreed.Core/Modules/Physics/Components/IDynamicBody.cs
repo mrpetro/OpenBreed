@@ -1,4 +1,5 @@
-﻿using OpenTK;
+﻿using OpenBreed.Core.Common.Systems.Components;
+using OpenTK;
 using System;
 using System.Collections.Generic;
 
@@ -10,6 +11,8 @@ namespace OpenBreed.Core.Modules.Physics.Components
     public interface IDynamicBody : IPhysicsComponent
     {
         #region Public Properties
+
+        Vector2 OldPosition { get; set; }
 
         /// <summary>
         /// DEBUG only
@@ -24,25 +27,11 @@ namespace OpenBreed.Core.Modules.Physics.Components
         /// <summary>
         /// DEBUG only
         /// </summary>
-        Vector2 Projection { get; }
+        Vector2 Projection { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
-
-        /// <summary>
-        /// Check/Report collision with static body
-        /// </summary>
-        /// <param name="staticBody">Static body to check and report collision</param>
-        void CollideVsStatic(IStaticBody staticBody);
-
-        /// <summary>
-        /// Check/Report collision with dynamic body
-        /// </summary>
-        /// <param name="dynamicBody">Dynamic body to check and report collision</param>
-        void CollideVsDynamic(IDynamicBody dynamicBody);
-
-        void IntegrateVerlet();
 
         #endregion Public Methods
     }

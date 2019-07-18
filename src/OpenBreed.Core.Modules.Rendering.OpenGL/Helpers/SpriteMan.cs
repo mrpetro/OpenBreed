@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Core.Modules.Rendering.Helpers
 {
-    public class SpriteMan : ISpriteMan
+    internal class SpriteMan : ISpriteMan
     {
         #region Private Fields
 
@@ -22,19 +22,21 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #region Public Properties
 
-        public OpenGLModule Module { get; }
+        internal  OpenGLModule Module { get; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public ISpriteAtlas Create(ITexture texture, int spriteWidth, int spriteHeight, int spriteColumns, int spriteRows)
+        public ISpriteAtlas Create(int textureId, int spriteWidth, int spriteHeight, int spriteColumns, int spriteRows)
         {
             var saBuilder = new SpriteAtlasBuilder(this);
+
+            var texture = Module.Textures.GetById(textureId);
             saBuilder.SetTexture(texture);
             saBuilder.SetSpriteSize(spriteWidth, spriteHeight);
             saBuilder.BuildCoords(spriteRows, spriteColumns);
-            var newSpriteAtlas = new SpriteAtlas(saBuilder);
+            var newSpriteAtlas = saBuilder.Build();
             items.Add(newSpriteAtlas);
             return newSpriteAtlas;
         }

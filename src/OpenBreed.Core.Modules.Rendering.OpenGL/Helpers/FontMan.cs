@@ -2,7 +2,7 @@
 
 namespace OpenBreed.Core.Modules.Rendering.Helpers
 {
-    public class FontMan : IFontMan
+    internal class FontMan : IFontMan
     {
         #region Internal Fields
 
@@ -17,14 +17,14 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        public FontMan(OpenGLModule module)
+        internal FontMan(OpenGLModule module)
         {
             Module = module;
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Methods
 

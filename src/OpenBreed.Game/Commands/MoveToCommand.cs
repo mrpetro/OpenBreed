@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Systems.Control.Components;
-using OpenBreed.Game.Components;
+using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
 using OpenBreed.Game.Entities;
 using OpenTK;
 using System;

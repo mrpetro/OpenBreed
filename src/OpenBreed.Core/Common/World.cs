@@ -1,13 +1,14 @@
-﻿using OpenBreed.Core.Entities;
+﻿using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Entities;
 using OpenBreed.Core.Extensions;
-using OpenBreed.Core.Systems;
+using OpenBreed.Core.Modules.Animation.Systems;
 using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace OpenBreed.Core
+namespace OpenBreed.Core.Common
 {
     public delegate void SystemEventDelegate(ISystemEvent systemEvent);
 

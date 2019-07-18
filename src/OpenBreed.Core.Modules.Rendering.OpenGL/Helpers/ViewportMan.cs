@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Helpers
 {
-    public class ViewportMan : IViewportMan
+    internal class ViewportMan : IViewportMan
     {
         #region Private Fields
 
@@ -17,8 +17,9 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #region Public Constructors
 
-        public ViewportMan()
+        internal ViewportMan(OpenGLModule module)
         {
+            Module = module ?? throw new ArgumentNullException(nameof(module));
             Items = new ReadOnlyCollection<IViewport>(items);
         }
 
@@ -29,6 +30,12 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         public ReadOnlyCollection<IViewport> Items { get; }
 
         #endregion Public Properties
+
+        #region Internal Properties
+
+        internal OpenGLModule Module { get; }
+
+        #endregion Internal Properties
 
         #region Public Methods
 

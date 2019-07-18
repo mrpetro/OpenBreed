@@ -48,7 +48,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         public void Draw(int tileId)
         {
-            GL.BindTexture(TextureTarget.Texture2D, Texture.Id);
+            GL.BindTexture(TextureTarget.Texture2D, Texture.InternalId);
             RenderTools.Draw(vboList[tileId], ibo, 6);
             GL.BindTexture(TextureTarget.Texture2D, 0);
         }

@@ -1,11 +1,11 @@
-﻿using OpenBreed.Core.Systems.Common.Components;
-using OpenBreed.Core.Entities;
+﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Core.Common.Systems.Components;
 
 namespace OpenBreed.Core.Modules.Rendering.Entities
 {
@@ -17,9 +17,9 @@ namespace OpenBreed.Core.Modules.Rendering.Entities
     {
         #region Public Constructors
 
-        public CameraEntity(CameraBuilder builder) : base(builder.Core.Entities)
+        public CameraEntity(CameraBuilder builder) : base(builder.Core)
         {
-            Position = new Position(builder.position);
+            Position = Common.Systems.Components.Position.Create(builder.position);
             Rotation = builder.rotation;
             Zoom = builder.zoom;
 

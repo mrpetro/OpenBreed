@@ -1,7 +1,6 @@
-﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.Systems;
+﻿using OpenBreed.Core.Collections;
+using OpenBreed.Core.Entities;
 using System;
-using System.Collections.Generic;
 
 namespace OpenBreed.Core
 {
@@ -9,7 +8,7 @@ namespace OpenBreed.Core
     {
         #region Private Fields
 
-        private readonly Dictionary<Guid, IEntity> entities = new Dictionary<Guid, IEntity>();
+        private readonly IdMap<IEntity> entities = new IdMap<IEntity>();
 
         #endregion Private Fields
 
@@ -30,35 +29,23 @@ namespace OpenBreed.Core
 
         #region Public Methods
 
-        public IEntity GetByGuid(Guid guid)
+        public IEntity GetById(int id)
         {
-            IEntity entity;
+            var entity = entities[id];
 
-            if (entities.TryGetValue(guid, out entity))
+            if (entities.TryGetValue(id, out entity))
                 return entity;
             else
-                throw new InvalidOperationException($"Entity with Guid '{guid}' not found.");
+                throw new InvalidOperationException($"Entity with Guid '{id}' not found.");
         }
 
         public IEntity Create()
         {
-            return new Entity(this);
+            var newEntity = new Entity(Core);
+            newEntity.Id = entities.Add(newEntity);
+            return newEntity;
         }
 
         #endregion Public Methods
-
-        #region Internal Methods
-
-        internal void AddEntity(IEntity entity)
-        {
-            entities.Add(entity.Guid, entity);
-        }
-
-        internal Guid GetGuid()
-        {
-            return Guid.NewGuid();
-        }
-
-        #endregion Internal Methods
     }
 }

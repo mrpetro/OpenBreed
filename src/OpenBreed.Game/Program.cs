@@ -3,10 +3,9 @@ using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Systems;
-using OpenBreed.Core.Systems.Animation;
-using OpenBreed.Core.Systems.Control;
-using OpenBreed.Core.Systems.Movement;
+using OpenBreed.Core.Modules.Animation.Systems;
+using OpenBreed.Core.Modules.Animation;
+using OpenBreed.Core.Modules.Animation.Systems.Control;
 using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Game.States;
 using OpenTK;
@@ -16,10 +15,11 @@ using OpenTK.Input;
 using System;
 using System.Drawing;
 using System.Reflection;
-using OpenBreed.Core.Systems.Movement.Systems;
-using OpenBreed.Core.Systems.Control.Systems;
+using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Physics.Systems;
-using OpenBreed.Core.Modules.Animation;
+using OpenBreed.Core.Common.Systems;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenBreed.Game
 {
@@ -41,9 +41,9 @@ namespace OpenBreed.Game
             Rendering = new OpenGLModule(this);
             Sounds = new OpenALModule(this);
             Physics = new PhysicsModule(this);
+            Animations = new AnimationModule(this);
 
             Entities = new EntityMan(this);
-            Animations = new AnimMan(this);
             Inputs = new InputsMan(this);
             Worlds = new WorldMan(this);
             StateMachine = new StateMan(this);
@@ -51,8 +51,9 @@ namespace OpenBreed.Game
             StateMachine.RegisterState(new StateTechDemo2(this));
             StateMachine.RegisterState(new StateTechDemo3(this));
             StateMachine.RegisterState(new StateTechDemo4(this));
+            StateMachine.RegisterState(new StateTechDemo5(this));
             //StateMan.RegisterState(new MenuState(this));
-            StateMachine.SetNextState(StateTechDemo4.ID);
+            StateMachine.SetNextState(StateTechDemo5.ID);
             StateMachine.ChangeState();
 
             VSync = VSyncMode.On;
@@ -107,9 +108,10 @@ namespace OpenBreed.Game
         public IRenderModule Rendering { get; }
         public IAudioModule Sounds { get; }
         public IPhysicsModule Physics { get; }
+        public IAnimationModule Animations { get; }
         public EntityMan Entities { get; }
         public InputsMan Inputs { get; }
-        public IAnimMan Animations { get; }
+
         public WorldMan Worlds { get; }
         public StateMan StateMachine { get; }
 
@@ -117,14 +119,9 @@ namespace OpenBreed.Game
 
         #region Public Methods
 
-        //public IAnimationSystem CreateAnimationSystem()
-        //{
-        //    return new AnimationSystem(this);
-        //}
-
-        public IPhysicsSystem CreatePhysicsSystem()
+        public GroupSystem CreateGroupSystem()
         {
-            return new PhysicsSystem(this, 64, 64);
+            return new GroupSystem(this);
         }
 
         #endregion Public Methods
@@ -195,7 +192,9 @@ namespace OpenBreed.Game
 
         protected override void OnRenderFrame(FrameEventArgs e)
         {
-            Title = $"Open Breed (Version: {appVersion} Vsync: {VSync} FPS: {1f / e.Time:0})";
+            var fps = 1.0f / (float)e.Time;
+
+            Title = $"Open Breed (Version: {appVersion} Vsync: {VSync} FPS: {fps})";
 
             base.OnRenderFrame(e);
 
@@ -216,7 +215,7 @@ namespace OpenBreed.Game
             //luaTest.Example();
 
             var program = new Program();
-            program.Run(30.0);
+            program.Run(30.0, 60.0);
         }
 
         #endregion Private Methods

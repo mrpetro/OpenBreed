@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Core.Modules.Rendering.Helpers
 {
-    public class TileMan : ITileMan
+    internal class TileMan : ITileMan
     {
         #region Private Fields
 
@@ -11,10 +11,26 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #endregion Private Fields
 
+        #region Internal Constructors
+
+        internal TileMan(OpenGLModule module)
+        {
+            Module = module ?? throw new ArgumentNullException(nameof(module));
+        }
+
+        #endregion Internal Constructors
+
+        #region Internal Properties
+
+        internal OpenGLModule Module { get; }
+
+        #endregion Internal Properties
+
         #region Public Methods
 
-        public ITileAtlas Create(ITexture texture, int tileSize, int tileColumns, int tileRows)
+        public ITileAtlas Create(int textureId, int tileSize, int tileColumns, int tileRows)
         {
+            var texture = Module.Textures.GetById(textureId);
             var newTileAtlas = new TileAtlas(items.Count, texture, tileSize, tileColumns, tileRows);
             items.Add(newTileAtlas);
             return newTileAtlas;

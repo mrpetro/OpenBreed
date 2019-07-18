@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.Systems.Common.Components;
 using System;
 using System.Linq;
 

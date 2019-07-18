@@ -1,17 +1,12 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Systems.Animation.Components;
-using OpenBreed.Core.Systems.Common.Components;
-using OpenBreed.Core.Systems.Common.Components.Shapes;
+using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Entities;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
-using OpenBreed.Game.Commands;
-using OpenBreed.Game.Components;
-using OpenBreed.Game.Components.States;
 using OpenBreed.Game.Entities;
 using OpenBreed.Game.Entities.Builders;
 using OpenTK;
@@ -20,9 +15,10 @@ using System;
 using System.Drawing;
 using OpenBreed.Core.Entities;
 using OpenBreed.Game.Worlds;
-using OpenBreed.Core.Systems.Control.Components;
-using OpenBreed.Core.Systems.Movement.Components;
+using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
 using OpenBreed.Game.Helpers;
+using OpenBreed.Game.Entities.Actor;
+using OpenBreed.Core.Common.Systems.Components;
 
 namespace OpenBreed.Game.States
 {
@@ -149,7 +145,7 @@ namespace OpenBreed.Game.States
 
             Console.Clear();
             Console.WriteLine("---------- Fonts & Texts --------");
-            Console.WriteLine("This demo shows three viewports with two cameras attached to them.");
+            Console.WriteLine("This demo shows typical usage of fonts and texts on the screen.");
             Console.WriteLine("Constrols:");
             Console.WriteLine("RMB + Move mouse cursor = Camera control over hovered viewport");
             Console.WriteLine("Keyboard arrows  = Control arrow actor");
@@ -207,10 +203,10 @@ namespace OpenBreed.Game.States
             var cameraBuilder = new CameraBuilder(Core);
 
             //Resources
-            tileTex = Core.Rendering.Textures.Load(@"Content\TileAtlasTest32bit.bmp");
-            spriteTex = Core.Rendering.Textures.Load(@"Content\ArrowSpriteSet.png");
-            tileAtlas = Core.Rendering.Tiles.Create(tileTex, 16, 4, 4);
-            spriteAtlas = Core.Rendering.Sprites.Create(spriteTex, 32, 32, 8, 5);
+            tileTex = Core.Rendering.Textures.Create(@"Content\TileAtlasTest32bit.bmp");
+            spriteTex = Core.Rendering.Textures.Create(@"Content\ArrowSpriteSet.png");
+            tileAtlas = Core.Rendering.Tiles.Create(tileTex.Id, 16, 4, 4);
+            spriteAtlas = Core.Rendering.Sprites.Create(spriteTex.Id, 32, 32, 8, 5);
 
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
@@ -225,21 +221,9 @@ namespace OpenBreed.Game.States
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas.Id);
 
-            var sprite = Core.Rendering.CreateSprite(spriteAtlas.Id);
-            var animator = ActorHelper.CreateAnimation(Core);
-
-            var actor = Core.Entities.Create();
-            actor.Add(animator);
-            actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
-            actor.Add(sprite);
-            actor.Add(new Position(64, 288));
-            actor.Add(Thrust.Create(0, 0));
-            actor.Add(Velocity.Create(0, 0));
-            actor.Add(Direction.Create(1, 0));
-            actor.Add(new AxisAlignedBoxShape(32, 32));
-            actor.Add(new Motion());
-            actor.Add(new DynamicBody());
+            var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288), spriteAtlas);
             actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
+            actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
 
             var stateMachine = ActorHelper.CreateStateMachine(actor);
             stateMachine.Initialize("Standing_Down");
