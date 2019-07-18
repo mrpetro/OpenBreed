@@ -16,7 +16,6 @@ using System.Drawing;
 using OpenBreed.Core.Entities;
 using OpenBreed.Game.Worlds;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
-using OpenBreed.Core.Modules.Animation.Systems.Movement.Components;
 using OpenBreed.Game.Entities.Actor;
 using OpenBreed.Core.Common;
 

@@ -16,11 +16,11 @@ using System.Drawing;
 using OpenBreed.Core.Entities;
 using OpenBreed.Game.Worlds;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
-using OpenBreed.Core.Modules.Animation.Systems.Movement.Components;
 using OpenBreed.Game.Helpers;
 using OpenBreed.Game.Entities.Actor;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Game.Entities.Door;
+using OpenBreed.Game.Entities.Box;
 
 namespace OpenBreed.Game.States
 {
@@ -190,28 +190,43 @@ namespace OpenBreed.Game.States
             actorSm.Initialize("Standing_Down");
             gameWorld.AddEntity(actor);
 
+            var rnd = new Random();
+
+            for (int i = 0; i < 200; i++)
+            {
+                var ball = BoxHelper.CreateBox(Core, new Vector2(rnd.Next(16, 64), rnd.Next(16, 64)),
+                                                      new Vector2(rnd.Next(70, 700), rnd.Next(70, 700)),
+                                                      new Vector2(rnd.Next(-50, 50), rnd.Next(-50, 50)));
+
+                gameWorld.AddEntity(ball);
+            }
+
+
             var doorCollection = DoorHelper.CreateHorizontalDoor(Core, 3, 20, spriteAtlas, tileAtlas);
 
             foreach (var item in doorCollection)
                 gameWorld.AddEntity(item);
 
-            var rnd = new Random();
-
-            var ymax = mapA.Length / 10;
-
-            for (int x = 0; x < 10; x++)
+            for (int x = 0; x < 64; x++)
             {
-                for (int y = 0; y < ymax; y++)
-                {
-                    var v = mapA[x + y * 10];
+                blockBuilder.SetIndices(x, 0);
+                blockBuilder.SetTileId(1);
+                gameWorld.AddEntity(blockBuilder.Build());
 
-                    if (v > 0)
-                    {
-                        blockBuilder.SetIndices(x + 5, y + 5);
-                        blockBuilder.SetTileId(v);
-                        gameWorld.AddEntity(blockBuilder.Build());
-                    }
-                }
+                blockBuilder.SetIndices(x, 62);
+                blockBuilder.SetTileId(2);
+                gameWorld.AddEntity(blockBuilder.Build());
+            }
+
+            for (int y = 1; y < 63; y++)
+            {
+                blockBuilder.SetIndices(0, y);
+                blockBuilder.SetTileId(3);
+                gameWorld.AddEntity(blockBuilder.Build());
+
+                blockBuilder.SetIndices(62, y);
+                blockBuilder.SetTileId(4);
+                gameWorld.AddEntity(blockBuilder.Build());
             }
 
             Core.Worlds.Add(gameWorld);

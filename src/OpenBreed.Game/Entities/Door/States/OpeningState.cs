@@ -3,7 +3,6 @@ using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Messages;
 using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Modules.Animation.Systems.Movement.Components;
 using OpenTK;
 using System;
 using System.Collections.Generic;

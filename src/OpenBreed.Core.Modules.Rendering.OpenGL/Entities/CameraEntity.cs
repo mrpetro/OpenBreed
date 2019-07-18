@@ -17,9 +17,9 @@ namespace OpenBreed.Core.Modules.Rendering.Entities
     {
         #region Public Constructors
 
-        public CameraEntity(CameraBuilder builder) : base(builder.Core.Entities)
+        public CameraEntity(CameraBuilder builder) : base(builder.Core)
         {
-            Position = new Position(builder.position);
+            Position = Common.Systems.Components.Position.Create(builder.position);
             Rotation = builder.rotation;
             Zoom = builder.zoom;
 

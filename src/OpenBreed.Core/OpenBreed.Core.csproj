@@ -54,8 +54,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Collections\IdMap.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Common\Components\GroupPart.cs" />
+    <Compile Include="Common\Helpers\MovementTools.cs" />
     <Compile Include="Common\Systems\GroupSystem.cs" />
     <Compile Include="CoreTools.cs" />
     <Compile Include="Entities\ISystemEvent.cs" />
@@ -73,6 +75,7 @@
     <Compile Include="Modules\Physics\Components\IPhysicsComponent.cs" />
     <Compile Include="Modules\Physics\Components\IStaticBody.cs" />
     <Compile Include="Modules\Rendering\Components\ICamera.cs" />
+    <Compile Include="Modules\Rendering\Components\IWireframe.cs" />
     <Compile Include="Modules\Rendering\Helpers\IFontMan.cs" />
     <Compile Include="Modules\Rendering\Helpers\ISpriteMan.cs" />
     <Compile Include="Modules\Rendering\Systems\CameraSystem.cs" />
@@ -91,6 +94,7 @@
     <Compile Include="Modules\Audio\IAudioModule.cs" />
     <Compile Include="Modules\Rendering\Helpers\ITexture.cs" />
     <Compile Include="Modules\Rendering\Systems\ITextSystem.cs" />
+    <Compile Include="Modules\Rendering\Systems\IWireframeSystem.cs" />
     <Compile Include="Modules\Rendering\Systems\ITileSystem.cs" />
     <Compile Include="Modules\Rendering\Systems\ISpriteSystem.cs" />
     <Compile Include="States\IStateBuilder.cs" />

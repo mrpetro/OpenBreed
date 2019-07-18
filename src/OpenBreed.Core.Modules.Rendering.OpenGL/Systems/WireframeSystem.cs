@@ -13,23 +13,24 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class SpriteSystem : WorldSystem, ISpriteSystem
+    public class WireframeSystem : WorldSystem, IWireframeSystem
     {
         #region Private Fields
 
         private readonly List<IEntity> entities = new List<IEntity>();
-        private readonly List<ISprite> spriteComps = new List<ISprite>();
+        private readonly List<IWireframe> wireframeComps = new List<IWireframe>();
         private readonly List<IPosition> positionComps = new List<IPosition>();
-        private readonly List<IDynamicBody> debugComps = new List<IDynamicBody>();
+        private readonly List<IShapeComponent> shapeComps = new List<IShapeComponent>();
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public SpriteSystem(ICore core) : base(core)
+        public WireframeSystem(ICore core) : base(core)
         {
-            Require<ISprite>();
+            Require<IWireframe>();
             Require<IPosition>();
+            Require<IShapeComponent>();
         }
 
         #endregion Public Constructors
@@ -53,7 +54,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Enable(EnableCap.Texture2D);
 
             for (int i = 0; i < entities.Count; i++)
-                DrawEntitySprite(viewport, i);
+                DrawEntityWireframe(viewport, i);
 
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.AlphaTest);
@@ -61,26 +62,36 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         }
 
         /// <summary>
-        /// Draw this sprite to given viewport
+        /// Draw this wireframe to given viewport
         /// </summary>
-        /// <param name="viewport">Viewport which this sprite will be rendered to</param>
-        public void DrawEntitySprite(IViewport viewport, int index)
+        /// <param name="viewport">Viewport which entity wireframe will be rendered to</param>
+        public void DrawEntityWireframe(IViewport viewport, int index)
         {
             var entity = entities[index];
-            var sprite = spriteComps[index];
+            var wireframe = wireframeComps[index];
             var position = positionComps[index];
-            var dynamic = debugComps[index];
-            Draw(dynamic, viewport);
+            var shape = shapeComps[index];
 
             GL.PushMatrix();
 
             GL.Translate((int)position.Value.X, (int)position.Value.Y, 0.0f);
 
-            var spriteAtlas = Core.Rendering.Sprites.GetById(sprite.AtlasId);
-            GL.Translate(-spriteAtlas.SpriteWidth / 2, -spriteAtlas.SpriteHeight / 2, 0.0f);
-            spriteAtlas.Draw(sprite.ImageId);
+            if (shape is AxisAlignedBoxShape)
+                DrawBox((AxisAlignedBoxShape)shape, wireframe.Color);
 
             GL.PopMatrix();
+
+            if (entity.DebugData != null)
+            {
+                var data = entity.DebugData as object[];
+                if (data != null)
+                {
+                    if ((string)data[0] == "COLLISION_PAIR")
+                    {
+                        RenderTools.DrawLine((Vector2)data[1], (Vector2)data[2], Color4.Yellow);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -109,7 +120,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             //    RenderTools.DrawBox(body.Aabb, Color4.Green);
         }
 
-
         #endregion Public Methods
 
         #region Protected Methods
@@ -117,9 +127,9 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         protected override void RegisterEntity(IEntity entity)
         {
             entities.Add(entity);
-            spriteComps.Add(entity.Components.OfType<ISprite>().First());
+            wireframeComps.Add(entity.Components.OfType<IWireframe>().First());
             positionComps.Add(entity.Components.OfType<IPosition>().First());
-            debugComps.Add(entity.Components.OfType<IDynamicBody>().First());
+            shapeComps.Add(entity.Components.OfType<IShapeComponent>().First());
         }
 
         protected override void UnregisterEntity(IEntity entity)
@@ -130,11 +140,20 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                 throw new InvalidOperationException("Entity not found in this system.");
 
             entities.RemoveAt(index);
-            spriteComps.RemoveAt(index);
+            wireframeComps.RemoveAt(index);
             positionComps.RemoveAt(index);
-            debugComps.RemoveAt(index);
+            shapeComps.RemoveAt(index);
         }
 
         #endregion Protected Methods
+
+        #region Private Methods
+
+        private void DrawBox(AxisAlignedBoxShape box, Color4 color)
+        {
+            RenderTools.DrawBox(box.Aabb, color);
+        }
+
+        #endregion Private Methods
     }
 }

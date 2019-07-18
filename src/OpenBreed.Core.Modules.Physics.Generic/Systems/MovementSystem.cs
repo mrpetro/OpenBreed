@@ -7,11 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenBreed.Core.Modules.Physics.Components;
 
-namespace OpenBreed.Core.Modules.Animation.Systems.Movement.Systems
+namespace OpenBreed.Core.Modules.Physics.Systems
 {
     public class MovementSystem : WorldSystem, IUpdatableSystem
     {
-        private const float FLOOR_FRICTION = 0.1f;
+        private const float FLOOR_FRICTION = 0.0f;
 
         #region Private Fields
 

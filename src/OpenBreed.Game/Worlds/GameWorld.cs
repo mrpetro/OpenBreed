@@ -2,7 +2,7 @@
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
-using OpenBreed.Core.Modules.Animation.Systems.Movement.Systems;
+using OpenBreed.Core.Modules.Physics.Systems;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +34,7 @@ namespace OpenBreed.Game.Worlds
             //Video
             AddSystem(Core.Rendering.CreateTileSystem(64, 64, 16, true));
             AddSystem(Core.Rendering.CreateSpriteSystem());
+            AddSystem(Core.Rendering.CreateWireframeSystem());
             AddSystem(Core.Rendering.CreateTextSystem());
         }
     }

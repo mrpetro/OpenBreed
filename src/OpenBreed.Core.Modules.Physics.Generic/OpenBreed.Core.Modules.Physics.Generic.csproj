@@ -52,10 +52,13 @@
   <ItemGroup>
     <Compile Include="Components\DynamicBody.cs" />
     <Compile Include="Components\GridBoxBody.cs" />
+    <Compile Include="Components\Motion.cs" />
     <Compile Include="Helpers\AabbXComparer.cs" />
     <Compile Include="Helpers\Box2Extensions.cs" />
+    <Compile Include="Helpers\DynamicPack.cs" />
     <Compile Include="Helpers\DynamicHelper.cs" />
     <Compile Include="PhysicsModule.cs" />
+    <Compile Include="Systems\MovementSystem.cs" />
     <Compile Include="Systems\PhysicsSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

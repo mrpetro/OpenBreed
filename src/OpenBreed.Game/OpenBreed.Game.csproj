@@ -54,6 +54,7 @@
     <Compile Include="Entities\Actor\States\WalkingState.cs" />
     <Compile Include="Entities\Actor\States\StandingState.cs" />
     <Compile Include="Entities\Actor\ActorHelper.cs" />
+    <Compile Include="Entities\Box\BoxHelper.cs" />
     <Compile Include="Entities\Builders\WorldBlockBuilder.cs" />
     <Compile Include="Entities\Door\DoorHelper.cs" />
     <Compile Include="Entities\Door\States\OpenedState.cs" />
@@ -93,10 +94,6 @@
     <ProjectReference Include="..\OpenBreed.Core.Systems.Control\OpenBreed.Core.Systems.Control.csproj">
       <Project>{CF689601-0842-497F-A05F-B31431697B4E}</Project>
       <Name>OpenBreed.Core.Systems.Control</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Core.Systems.Movement\OpenBreed.Core.Systems.Movement.csproj">
-      <Project>{E004FAAA-6D4D-48B5-93D9-8E9E15DE5812}</Project>
-      <Name>OpenBreed.Core.Systems.Movement</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Core.Modules.Physics.Generic\OpenBreed.Core.Modules.Physics.Generic.csproj">
       <Project>{C9F84CE7-732C-4A31-89DC-B87E3D9685BE}</Project>

@@ -76,14 +76,14 @@ namespace OpenBreed.Game.Entities.Door
             var doorPart1 = core.Entities.Create();
             doorPart1.Add(new Position(x * 16, y * 16));
             doorPart1.Add(new GridBoxBody(16));
-            doorPart1.Add(new GroupPart(door.Guid));
+            doorPart1.Add(new GroupPart(door.Id));
             doorPart1.Add(core.Rendering.CreateTile(tileAtlas.Id, 2));
 
             var doorPart2 = core.Entities.Create();
             doorPart2.Add(new Position((x + 1) * 16, y * 16));
             doorPart2.Add(new GridBoxBody(16));
             doorPart2.Add(core.Rendering.CreateTile(tileAtlas.Id, 2));
-            doorPart2.Add(new GroupPart(door.Guid));
+            doorPart2.Add(new GroupPart(door.Id));
 
             //door.Add(new Animator<int>(10.0f, true));
             //door.Add(core.Rendering.CreateSprite(atlas.Id));

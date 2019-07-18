@@ -14,7 +14,7 @@ namespace OpenBreed.Core.Common.Systems.Components
         /// Constructor with passed initial position value
         /// </summary>
         /// <param name="value">Initial value vector</param>
-        public Position(Vector2 value)
+        internal Position(Vector2 value)
         {
             Value = value;
         }
@@ -39,5 +39,19 @@ namespace OpenBreed.Core.Common.Systems.Components
         public Vector2 Value { get; set; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public static IPosition Create(Vector2 value)
+        {
+            return new Position(value);
+        }
+
+        public static IPosition Create(float x, float y)
+        {
+            return new Position(x, y);
+        }
+
+        #endregion Public Methods
     }
 }

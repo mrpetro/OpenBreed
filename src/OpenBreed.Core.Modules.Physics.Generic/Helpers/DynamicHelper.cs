@@ -7,32 +7,39 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
 {
     public static class DynamicHelper
     {
+        #region Private Fields
+
         /// <summary>
         /// Generic Coefficient of restitution between Dynamic and Static Body
         /// Values:
         ///     0 - perfectly inelastic collision
         ///     1 - perfectly elastic collision
         /// </summary>
-        private const float GENERIC_COR = 0.0f;
+        private const float GENERIC_COR = 1.0f;
 
+        #endregion Private Fields
 
         #region Internal Methods
 
-        internal static void ResolveVsAABB(IDynamicBody dynamicBody, IPosition position, IVelocity velocity, IStaticBody staticBody, float dt)
+        internal static void ResolveVsAABB(DynamicPack pack, IStaticBody staticBody, float dt)
         {
-            ResolveVsGridCell(dynamicBody, position, velocity, dynamicBody.Projection, staticBody, dt);
+            ResolveVsGridCell(pack, staticBody, dt);
         }
 
         /// <summary>
         /// Check/Report collision with dynamic body
         /// </summary>
         /// <param name="dynamicBody">Dynamic body to check and report collision</param>
-        internal static void CollideVsDynamic(IDynamicBody dynamicBodyA, IDynamicBody dynamicBodyB)
+        internal static void CollideVsDynamic(DynamicPack packA, DynamicPack packB)
         {
+            packA.Entity.DebugData = new object[] {"COLLISION_PAIR", packA.Aabb.GetCenter(), packB.Aabb.GetCenter() };
+            packB.Entity.DebugData = new object[] { "COLLISION_PAIR", packA.Aabb.GetCenter(), packB.Aabb.GetCenter() };
         }
 
-        internal static void CollideDynamicVsStatic(IDynamicBody dynamicBody, IPosition position, IVelocity velocity, Box2 dynamicAabb, IStaticBody staticBody, float dt)
+        internal static void CollideVsStatic(DynamicPack pack, IStaticBody staticBody, float dt)
         {
+            var dynamicAabb = pack.Aabb;
+
             //if (!Aabb.CollidesWith(staticBody.Aabb))
             //    return;
 
@@ -96,25 +103,25 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
                         }
                     }
 
-                    dynamicBody.Collides = true;
+                    pack.Body.Collides = true;
 
-                    dynamicBody.Projection = new Vector2(px, py);
+                    pack.Body.Projection = new Vector2(px, py);
 
-                    DynamicHelper.ResolveVsAABB(dynamicBody, position, velocity, staticBody, dt);
+                    DynamicHelper.ResolveVsAABB(pack, staticBody, dt);
                 }
             }
         }
 
-        internal static void ResolveVsGridCell(IDynamicBody dynamicBody, IPosition position, IVelocity velocity, Vector2 projection, IStaticBody staticBody, float dt)
+        internal static void ResolveVsGridCell(DynamicPack pack, IStaticBody staticBody, float dt)
         {
+            var projection = pack.Body.Projection;
 
-            dynamicBody.OldPosition = position.Value;
-            position.Value += dynamicBody.Projection;
+            pack.Position.Value += pack.Body.Projection;
 
             var normal = projection.Normalized();
 
             //find component of velocity parallel to collision normal
-            var dp = Vector2.Dot(velocity.Value, normal);
+            var dp = Vector2.Dot(pack.Velocity.Value, normal);
 
             //Apply collision response forces if the object is travelling into, and not out of, the collision
             if (dp < 0)
@@ -122,13 +129,10 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
                 var cor = GENERIC_COR;
 
                 var vn = Vector2.Multiply(normal, dp);
-                var vt = velocity.Value - vn;
+                var vt = pack.Velocity.Value - vn;
 
-                velocity.Value = vt - cor * vn;
+                pack.Velocity.Value = vt - cor * vn;
             }
-
-            //dynamicBody.OldPosition = position.Value;
-            //velocity.Value = Vector2.Zero;
         }
 
         #endregion Internal Methods

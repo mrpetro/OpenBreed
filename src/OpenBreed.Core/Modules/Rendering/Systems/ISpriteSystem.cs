@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public interface ISpriteSystem : IWorldSystem
+    public interface ISpriteSystem : IRenderableSystem
     {
     }
 }

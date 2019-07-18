@@ -14,23 +14,16 @@ namespace OpenBreed.Core.Entities
     {
         #region Private Fields
 
-        private EntityMan manager;
-
-        private List<IEntityComponent> components = new List<IEntityComponent>();
+        private readonly List<IEntityComponent> components = new List<IEntityComponent>();
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public Entity(EntityMan manager)
+        public Entity(ICore core)
         {
-            this.manager = manager ?? throw new ArgumentNullException(nameof(manager));
-
+            Core = core ?? throw new ArgumentNullException(nameof(core));
             Components = new ReadOnlyCollection<IEntityComponent>(components);
-
-            Guid = Core.Entities.GetGuid();
-
-            Core.Entities.AddEntity(this);
         }
 
         #endregion Public Constructors
@@ -39,11 +32,13 @@ namespace OpenBreed.Core.Entities
 
         public ReadOnlyCollection<IEntityComponent> Components { get; }
 
-        public ICore Core { get { return manager.Core; } }
+        public ICore Core { get; }
 
         public World World { get; private set; }
 
-        public Guid Guid { get; }
+        public int Id { get; internal set; }
+
+        public object DebugData { get; set; }
 
         public EntityPerform PerformDelegate { get; set; }
 

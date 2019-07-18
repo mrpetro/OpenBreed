@@ -6,9 +6,9 @@ namespace OpenBreed.Core.Common.Systems.Components
     {
         #region Public Constructors
 
-        public GroupPart(Guid guid)
+        public GroupPart(int entityId)
         {
-            Guid = guid;
+            EntityId = entityId;
         }
 
         #endregion Public Constructors
@@ -16,9 +16,9 @@ namespace OpenBreed.Core.Common.Systems.Components
         #region Public Properties
 
         /// <summary>
-        /// Grouping Entity Guid
+        /// Grouping Entity ID
         /// </summary>
-        public Guid Guid { get; }
+        public int EntityId { get; }
 
         #endregion Public Properties
     }

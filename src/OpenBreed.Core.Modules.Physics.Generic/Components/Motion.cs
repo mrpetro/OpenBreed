@@ -1,13 +1,10 @@
 ﻿using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Systems.Movement;
-using OpenBreed.Core.Modules.Animation.Systems.Movement.Components;
-using OpenBreed.Core.Modules.Animation.Systems.Movement.Systems;
 using OpenTK;
 using System;
 using System.Linq;
 
-namespace OpenBreed.Core.Modules.Animation.Systems.Movement.Components
+namespace OpenBreed.Core.Modules.Physics.Components
 {
     public class Motion : IEntityComponent
     {

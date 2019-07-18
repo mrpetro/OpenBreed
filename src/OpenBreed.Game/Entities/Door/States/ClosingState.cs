@@ -7,7 +7,6 @@ using OpenBreed.Core.States;
 using OpenBreed.Core.Modules.Animation.Systems;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
-using OpenBreed.Core.Modules.Animation.Systems.Movement.Components;
 using OpenTK;
 using System.Linq;
 using OpenBreed.Core.Common.Systems;

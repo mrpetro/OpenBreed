@@ -1,9 +1,9 @@
 ﻿using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Common.Systems.Helpers;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
-using OpenBreed.Core.Modules.Animation.Systems.Movement;
 using OpenTK;
 using System;
 using System.Collections.Generic;

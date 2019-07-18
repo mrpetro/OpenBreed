@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Systems.Cont
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Modules.Animation.Generic", "OpenBreed.Core.Modules.Animation.Generic\OpenBreed.Core.Modules.Animation.Generic.csproj", "{657319C5-4BA7-4A81-B7D1-4527CEAE125C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Systems.Movement", "OpenBreed.Core.Systems.Movement\OpenBreed.Core.Systems.Movement.csproj", "{E004FAAA-6D4D-48B5-93D9-8E9E15DE5812}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Modules.Audio.OpenAL", "OpenBreed.Core.Modules.Audio.OpenAL\OpenBreed.Core.Modules.Audio.OpenAL.csproj", "{82AF3D57-A4F4-4339-859A-7E82942B96DF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{AC17BDB5-E1D1-4635-A7D5-065BCA642796}"
@@ -54,10 +52,6 @@ Global
 		{657319C5-4BA7-4A81-B7D1-4527CEAE125C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{657319C5-4BA7-4A81-B7D1-4527CEAE125C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{657319C5-4BA7-4A81-B7D1-4527CEAE125C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E004FAAA-6D4D-48B5-93D9-8E9E15DE5812}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E004FAAA-6D4D-48B5-93D9-8E9E15DE5812}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E004FAAA-6D4D-48B5-93D9-8E9E15DE5812}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E004FAAA-6D4D-48B5-93D9-8E9E15DE5812}.Release|Any CPU.Build.0 = Release|Any CPU
 		{82AF3D57-A4F4-4339-859A-7E82942B96DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{82AF3D57-A4F4-4339-859A-7E82942B96DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82AF3D57-A4F4-4339-859A-7E82942B96DF}.Release|Any CPU.ActiveCfg = Release|Any CPU

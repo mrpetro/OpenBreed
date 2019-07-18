@@ -6,7 +6,6 @@ using OpenBreed.Core.States;
 using OpenBreed.Core.Modules.Animation.Systems;
 using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Systems.Control;
-using OpenBreed.Core.Modules.Animation.Systems.Movement;
 using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Game.States;
 using OpenTK;
@@ -16,10 +15,11 @@ using OpenTK.Input;
 using System;
 using System.Drawing;
 using System.Reflection;
-using OpenBreed.Core.Modules.Animation.Systems.Movement.Systems;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Physics.Systems;
 using OpenBreed.Core.Common.Systems;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenBreed.Game
 {
@@ -192,7 +192,9 @@ namespace OpenBreed.Game
 
         protected override void OnRenderFrame(FrameEventArgs e)
         {
-            Title = $"Open Breed (Version: {appVersion} Vsync: {VSync} FPS: {1f / e.Time:0})";
+            var fps = 1.0f / (float)e.Time;
+
+            Title = $"Open Breed (Version: {appVersion} Vsync: {VSync} FPS: {fps})";
 
             base.OnRenderFrame(e);
 
@@ -213,7 +215,7 @@ namespace OpenBreed.Game
             //luaTest.Example();
 
             var program = new Program();
-            program.Run(30.0);
+            program.Run(30.0, 60.0);
         }
 
         #endregion Private Methods

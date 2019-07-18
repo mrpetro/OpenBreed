@@ -4,8 +4,6 @@ using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
-using OpenBreed.Core.Modules.Animation.Systems.Movement.Components;
 using OpenBreed.Game.Entities.Actor.States;
 using OpenTK;
 using OpenTK.Input;
@@ -102,7 +100,7 @@ namespace OpenBreed.Game.Entities.Actor
             actor.Add(new Animator<int>(10.0f, true));
             //actor.Add(new CollisionDebug(Core.Rendering.CreateSprite(spriteAtlas.Id)));
             actor.Add(core.Rendering.CreateSprite(atlas.Id));
-            actor.Add(new Position(pos));
+            actor.Add(Position.Create(pos));
             actor.Add(Thrust.Create(0, 0));
             actor.Add(Velocity.Create(0, 0));
             actor.Add(Direction.Create(1, 0));

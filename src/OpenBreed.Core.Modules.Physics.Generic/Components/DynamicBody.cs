@@ -18,22 +18,12 @@ namespace OpenBreed.Core.Modules.Physics.Components
     {
         #region Private Fields
 
-
-        public float DRAG { get; set; }
-        public float FRICTION { get; set; }
-        public float BOUNCE { get; set; }
-
         #endregion Private Fields
-
-        //must be in [0,1], where 1 means full bounce. but 1 seems to
 
         #region Public Constructors
 
         public DynamicBody()
         {
-            DRAG = 0.0f; //0 means full drag, 1 is no drag
-            FRICTION = 0.0f;
-            BOUNCE = 1f;
         }
 
         #endregion Public Constructors
@@ -67,6 +57,11 @@ namespace OpenBreed.Core.Modules.Physics.Components
             get
             {
                 return new Box2();
+            }
+
+            set
+            {
+
             }
         }
 

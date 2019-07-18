@@ -45,7 +45,7 @@ namespace OpenBreed.Core.Common.Systems
 
         public override bool HandleMsg(IEntity sender, IEntityMsg message)
         {
-            foreach (var item in entities.Where(item => item.Guid == sender.Guid))
+            foreach (var item in entities.Where(item => item.Id == sender.Id))
                 item.PostMessage(message);
 
             return true;

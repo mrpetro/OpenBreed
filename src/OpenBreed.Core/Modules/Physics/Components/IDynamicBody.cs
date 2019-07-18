@@ -12,9 +12,6 @@ namespace OpenBreed.Core.Modules.Physics.Components
     {
         #region Public Properties
 
-        float DRAG { get; set; }
-        float FRICTION { get; set; }
-
         Vector2 OldPosition { get; set; }
 
         /// <summary>

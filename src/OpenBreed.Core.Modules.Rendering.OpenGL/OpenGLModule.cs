@@ -6,6 +6,7 @@ using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System;
 using OpenBreed.Core.Common.Systems;
+using OpenTK.Graphics;
 
 namespace OpenBreed.Core.Modules.Rendering
 {
@@ -58,16 +59,25 @@ namespace OpenBreed.Core.Modules.Rendering
         /// Create system for handling sprites
         /// </summary>
         /// <returns>Sprite system</returns>
-        public IWorldSystem CreateSpriteSystem()
+        public ISpriteSystem CreateSpriteSystem()
         {
             return new SpriteSystem(Core);
+        }
+
+        /// <summary>
+        /// Create system for handling wireframes
+        /// </summary>
+        /// <returns>Wireframe system</returns>
+        public IWireframeSystem CreateWireframeSystem()
+        {
+            return new WireframeSystem(Core);
         }
 
         /// <summary>
         /// Create system for handling texts
         /// </summary>
         /// <returns>Text system</returns>
-        public IWorldSystem CreateTextSystem()
+        public ITextSystem CreateTextSystem()
         {
             return new TextSystem(Core);
         }
@@ -91,6 +101,17 @@ namespace OpenBreed.Core.Modules.Rendering
         public IText CreateText(int fontId, Vector2 offset, string value = null)
         {
             return new Text(fontId, offset, value);
+        }
+
+        /// <summary>
+        /// Create wireframe render component
+        /// </summary>
+        /// <param name="thickness">Thickness of wireframe lines</param>
+        /// <param name="color">Color of wireframe lines</param>
+        /// <returns></returns>
+        public IWireframe CreateWireframe(float thickness, Color4 color)
+        {
+            return new Wireframe(thickness, color);
         }
 
         public ISprite CreateSprite(int atlasId, int imageId = 0)

@@ -5,13 +5,13 @@ using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Events;
 using OpenBreed.Core.Modules.Animation.Messages;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
-using OpenBreed.Core.Modules.Animation.Systems.Movement.Components;
 using OpenTK;
 using System.Linq;
 using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Modules.Physics.Components;
 
 namespace OpenBreed.Game.Entities.Actor.States
 {

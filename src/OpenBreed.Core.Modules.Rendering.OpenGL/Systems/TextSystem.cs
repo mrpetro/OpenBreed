@@ -13,7 +13,7 @@ using OpenBreed.Core.Common.Systems.Components;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TextSystem : WorldSystem, IRenderableSystem
+    public class TextSystem : WorldSystem, ITextSystem
     {
         #region Private Fields
 
