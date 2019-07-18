@@ -106,7 +106,7 @@ namespace OpenBreed.Game.Entities.Actor
             actor.Add(Direction.Create(1, 0));
             actor.Add(new AxisAlignedBoxShape(32, 32));
             actor.Add(new Motion());
-            actor.Add(new DynamicBody());
+            actor.Add(new DynamicBody(1.0f));
 
             return actor;
         }

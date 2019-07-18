@@ -11,7 +11,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 {
     public class MovementSystem : WorldSystem, IUpdatableSystem
     {
-        private const float FLOOR_FRICTION = 0.0f;
+        private const float FLOOR_FRICTION = 0.2f;
 
         #region Private Fields
 
@@ -60,7 +60,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             var newVel = velocity.Value + thrust.Value * dt;
 
             //Apply friction force
-            newVel += -newVel * FLOOR_FRICTION;
+            newVel += -newVel * FLOOR_FRICTION * dynamicBody.FrictionFactor;
 
             //Verlet integration
             var newPos = position.Value + (velocity.Value + newVel) * 0.5f * dt;

@@ -16,14 +16,21 @@ namespace OpenBreed.Core.Modules.Physics.Components
     /// </summary>
     public class DynamicBody : IDynamicBody
     {
+        /// <summary>
+        /// Non real physical factor for friction.
+        /// </summary>
+        public float FrictionFactor { get; internal set; }
+
+
         #region Private Fields
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DynamicBody()
+        public DynamicBody(float frictionFactor)
         {
+            FrictionFactor = frictionFactor;
         }
 
         #endregion Public Constructors

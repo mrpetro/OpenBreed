@@ -12,6 +12,14 @@ namespace OpenBreed.Core.Modules.Physics.Components
     {
         #region Public Properties
 
+        /// <summary>
+        /// Non real physical factor for friction.
+        /// </summary>
+        float FrictionFactor { get; }
+
+        /// <summary>
+        /// Position from previous frame used for Verlet
+        /// </summary>
         Vector2 OldPosition { get; set; }
 
         /// <summary>
