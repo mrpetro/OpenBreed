@@ -114,7 +114,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                     if (nextCollider.Aabb.Left < currentCollider.Aabb.Right)
                     {
                         if (nextCollider.Aabb.Bottom <= currentCollider.Aabb.Top && nextCollider.Aabb.Top > currentCollider.Aabb.Bottom)
-                            TestNarrowPhaseDynamic(nextCollider, currentCollider);
+                            TestNarrowPhaseDynamic(nextCollider, currentCollider, dt);
                     }
                     else
                     {
@@ -127,21 +127,24 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             QueryStaticGrid(dynamicPacks.Last(), dt);
         }
 
-        private void TestNarrowPhaseDynamic(DynamicPack bodyA, DynamicPack bodyB)
+        private void TestNarrowPhaseDynamic(DynamicPack bodyA, DynamicPack bodyB, float dt)
         {
-            DynamicHelper.CollideVsDynamic(bodyA, bodyB);
+            Vector2 projection;
+            if (DynamicHelper.TestVsDynamic(this, bodyA, bodyB, dt, out projection))
+                DynamicHelper.ResolveVsDynamic(bodyA, bodyB, projection, dt);
         }
 
-        private void TestNarrowPhaseStatic(DynamicPack bodyA, StaticPack bodyB, float dt)
+        private void TestNarrowPhaseStatic(DynamicPack bodyA, StaticPack staticBody, float dt)
         {
-            DynamicHelper.CollideVsStatic(bodyA, bodyB, dt);
+            Vector2 projection;
+            if(DynamicHelper.TestVsStatic(this, bodyA, staticBody, dt, out projection))
+                DynamicHelper.ResolveVsStatic(bodyA, staticBody, projection , dt);
         }
 
         private void QueryStaticGrid(DynamicPack pack, float dt)
         {
             var dynamicAabb = pack.Aabb;
 
-            pack.Body.Collides = false;
             pack.Body.Boxes = new List<Tuple<int, int>>();
 
             int xMod = (int)dynamicAabb.Right % CELL_SIZE;

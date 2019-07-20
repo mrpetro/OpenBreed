@@ -30,17 +30,7 @@ namespace OpenBreed.Core.Modules.Physics.Components
         /// <summary>
         /// DEBUG only
         /// </summary>
-        bool Collides { get; set; }
-
-        /// <summary>
-        /// DEBUG only
-        /// </summary>
         List<Tuple<int, int>> Boxes { get; set; }
-
-        /// <summary>
-        /// DEBUG only
-        /// </summary>
-        Vector2 Projection { get; set; }
 
         #endregion Public Properties
 

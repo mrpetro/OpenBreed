@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Modules.Physics.Components;
+using OpenBreed.Core.Modules.Physics.Systems;
 using OpenTK;
 using System;
 
@@ -21,117 +22,42 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
 
         #region Internal Methods
 
-        internal static void ResolveVsAABB(DynamicPack bodyA, StaticPack bodyB, float dt)
+        internal static bool TestVsDynamic(PhysicsSystem system, DynamicPack bodyA, DynamicPack bodyB, float dt, out Vector2 projection)
         {
-            ResolveVsGridCell(bodyA, bodyB, dt);
+            return CollisionChecker.Check(bodyA.Position.Value, bodyA.Shape, bodyB.Position.Value, bodyB.Shape, out projection);
         }
 
-        /// <summary>
-        /// Check/Report collision with dynamic body
-        /// </summary>
-        /// <param name="dynamicBody">Dynamic body to check and report collision</param>
-        internal static void CollideVsDynamic(DynamicPack packA, DynamicPack packB)
+        internal static bool TestVsStatic(PhysicsSystem system, DynamicPack bodyA, StaticPack bodyB, float dt, out Vector2 projection)
         {
-            packA.Entity.DebugData = new object[] {"COLLISION_PAIR", packA.Aabb.GetCenter(), packB.Aabb.GetCenter() };
-            packB.Entity.DebugData = new object[] { "COLLISION_PAIR", packA.Aabb.GetCenter(), packB.Aabb.GetCenter() };
+            return CollisionChecker.Check(bodyA.Position.Value, bodyA.Shape, bodyB.Position.Value, bodyB.Shape, out projection);
         }
 
-        internal static void CollideVsStatic(DynamicPack bodyA, StaticPack bodyB, float dt)
+        internal static void ResolveVsDynamic(DynamicPack dynamicBody, DynamicPack staticBody, Vector2 projection, float dt)
         {
-            var dynamicAabb = bodyA.Aabb;
+            dynamicBody.Entity.DebugData = new object[] { "COLLISION_PAIR", dynamicBody.Aabb.GetCenter(), staticBody.Aabb.GetCenter() };
+            staticBody.Entity.DebugData = new object[] { "COLLISION_PAIR", dynamicBody.Aabb.GetCenter(), staticBody.Aabb.GetCenter() };
 
-            //if (!Aabb.CollidesWith(staticBody.Aabb))
-            //    return;
-
-            //TODO: Checking/resolving collisions between actual bodies needs to be implemented
-
-            //NOTE: For now only Aabb boxes are being processed
-            var dPos = dynamicAabb.GetCenter();
-            var dHalfWidth = dynamicAabb.Width / 2.0f;
-            var dHalfHeight = dynamicAabb.Height / 2.0f;
-
-            var sPos = bodyB.Aabb.GetCenter();
-            var sHalfWidth = bodyB.Aabb.Width / 2.0f;
-            var sHalfHeight = bodyB.Aabb.Height / 2.0f;
-
-            var tx = sPos.X;
-            var ty = sPos.Y;
-            var txw = sHalfWidth;
-            var tyw = sHalfHeight;
-
-            var dx = dPos.X - tx;//tile->obj delta
-            var px = (txw + dHalfWidth) - Math.Abs(dx);//penetration depth in x
-
-            if (0 < px)
-            {
-                var dy = dPos.Y - ty;//tile->obj delta
-                var py = (tyw + dHalfHeight) - Math.Abs(dy);//pen depth in y
-
-                if (0 < py)
-                {
-                    //object may be colliding with tile; call tile-specific collision function
-
-                    //calculate projection vectors
-                    if (px < py)
-                    {
-                        //project in x
-                        if (dx < 0)
-                        {
-                            //project to the left
-                            px *= -1;
-                            py = 0;
-                        }
-                        else
-                        {
-                            //proj to right
-                            py = 0;
-                        }
-                    }
-                    else
-                    {
-                        //project in y
-                        if (dy < 0)
-                        {
-                            //project up
-                            px = 0;
-                            py *= -1;
-                        }
-                        else
-                        {
-                            //project down
-                            px = 0;
-                        }
-                    }
-
-                    bodyA.Body.Collides = true;
-
-                    bodyA.Body.Projection = new Vector2(px, py);
-
-                    DynamicHelper.ResolveVsAABB(bodyA, bodyB, dt);
-                }
-            }
+            //TODO: To have proper solver for two moving boxes
         }
 
-        internal static void ResolveVsGridCell(DynamicPack bodyA, StaticPack bodyB, float dt)
+        internal static void ResolveVsStatic(DynamicPack dynamicBody, StaticPack staticBody, Vector2 projection, float dt)
         {
-            var projection = bodyA.Body.Projection;
-
-            bodyA.Position.Value += bodyA.Body.Projection;
+            dynamicBody.Position.Value += projection;
 
             var normal = projection.Normalized();
 
             //find component of velocity parallel to collision normal
-            var dp = Vector2.Dot(bodyA.Velocity.Value, normal);
+            var dp = Vector2.Dot(dynamicBody.Velocity.Value, normal);
 
             //Apply collision response forces if the object is travelling into, and not out of, the collision
             if (dp < 0)
             {
-                var cor = GENERIC_COR * bodyA.Body.CorFactor;
+                var cor = GENERIC_COR * dynamicBody.Body.CorFactor;
 
                 var vn = Vector2.Multiply(normal, dp);
-                var vt = bodyA.Velocity.Value - vn;
+                var vt = dynamicBody.Velocity.Value - vn;
 
-                bodyA.Velocity.Value = vt - cor * vn;
+                dynamicBody.Velocity.Value = vt - cor * vn;
             }
         }
 
