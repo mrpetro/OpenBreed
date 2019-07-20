@@ -71,9 +71,8 @@
     <Compile Include="Modules\Audio\Components\ISoundEmiter.cs" />
     <Compile Include="Modules\Audio\Helpers\ISound.cs" />
     <Compile Include="Modules\Audio\Helpers\ISoundMan.cs" />
-    <Compile Include="Modules\Physics\Components\IDynamicBody.cs" />
+    <Compile Include="Modules\Physics\Components\IBody.cs" />
     <Compile Include="Modules\Physics\Components\IPhysicsComponent.cs" />
-    <Compile Include="Modules\Physics\Components\IStaticBody.cs" />
     <Compile Include="Modules\Rendering\Components\ICamera.cs" />
     <Compile Include="Modules\Rendering\Components\IWireframe.cs" />
     <Compile Include="Modules\Rendering\Helpers\IFontMan.cs" />

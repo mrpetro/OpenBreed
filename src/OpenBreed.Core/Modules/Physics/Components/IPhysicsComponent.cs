@@ -10,7 +10,7 @@ namespace OpenBreed.Core.Modules.Physics.Components
     {
         #region Public Properties
 
-        Box2 Aabb { get; set; }
+        //Box2 Aabb { get; set; }
 
         #endregion Public Properties
     }

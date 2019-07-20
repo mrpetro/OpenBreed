@@ -16,12 +16,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         private const int CELL_SIZE = 16;
 
-        private static readonly AabbXComparer comparer = new AabbXComparer();
-
         private readonly List<DynamicPack> dynamicPacks = new List<DynamicPack>();
-
-        private List<IEntity>[] gridStaticEntities;
-        private List<IStaticBody>[] gridStaticComps;
+        private List<StaticPack>[] gridStaticPacks;
 
         #endregion Private Fields
 
@@ -51,7 +47,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         public void Update(float dt)
         {
-            BruteForce(dt);
+            SweepAndPrune(dt);
         }
 
         #endregion Public Methods
@@ -60,26 +56,18 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         protected override void RegisterEntity(IEntity entity)
         {
-            var physicsComponent = entity.Components.OfType<IPhysicsComponent>().First();
-
-            if (physicsComponent is IStaticBody)
-                RegisterStaticEntity(entity, (IStaticBody)physicsComponent);
-            else if (physicsComponent is IDynamicBody)
-                RegisterDynamicEntity(entity, (IDynamicBody)physicsComponent);
+            if (entity.Components.Any(item => item is IVelocity))
+                RegisterDynamicEntity(entity);
             else
-                throw new NotImplementedException($"{physicsComponent}");
+                RegisterStaticEntity(entity);
         }
 
         protected override void UnregisterEntity(IEntity entity)
         {
-            var physicsComponent = entity.Components.OfType<IPhysicsComponent>().First();
-
-            if (physicsComponent is IStaticBody)
-                UnregisterStaticEntity(entity);
-            else if (physicsComponent is IDynamicBody)
+            if (entity.Components.Any(item => item is IVelocity))
                 UnregisterDynamicEntity(entity);
             else
-                throw new NotImplementedException($"{physicsComponent}");
+                UnregisterStaticEntity(entity);
         }
 
         #endregion Protected Methods
@@ -101,7 +89,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             throw new NotImplementedException();
         }
 
-        private void BruteForce(float dt)
+        private void SweepAndPrune(float dt)
         {
             var xActiveList = new List<DynamicPack>();
             DynamicPack nextCollider = null;
@@ -114,15 +102,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
             for (int i = 0; i < dynamicPacks.Count - 1; i++)
             {
-                //for (int e = i; e < dynamicBodyComps.Count; e++)
-                //{
-                //    if (CheckBoundingBoxForOverlap(i, e))
-                //        DetectNarrowPhase(i, e);
-                //}
-
-
-                QueryStaticMatrix(dynamicPacks[i], dt);
-
+                QueryStaticGrid(dynamicPacks[i], dt);
 
                 nextCollider = dynamicPacks[i + 1];
                 xActiveList.Add(dynamicPacks[i]);
@@ -134,21 +114,30 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                     if (nextCollider.Aabb.Left < currentCollider.Aabb.Right)
                     {
                         if (nextCollider.Aabb.Bottom <= currentCollider.Aabb.Top && nextCollider.Aabb.Top > currentCollider.Aabb.Bottom)
-                            DynamicHelper.CollideVsDynamic(nextCollider, currentCollider);
+                            TestNarrowPhaseDynamic(nextCollider, currentCollider);
                     }
                     else
                     {
                         xActiveList.RemoveAt(j);
-
                         j--;
                     }
                 }
             }
 
-            QueryStaticMatrix(dynamicPacks.Last(), dt);
+            QueryStaticGrid(dynamicPacks.Last(), dt);
         }
 
-        private void QueryStaticMatrix(DynamicPack pack, float dt)
+        private void TestNarrowPhaseDynamic(DynamicPack bodyA, DynamicPack bodyB)
+        {
+            DynamicHelper.CollideVsDynamic(bodyA, bodyB);
+        }
+
+        private void TestNarrowPhaseStatic(DynamicPack bodyA, StaticPack bodyB, float dt)
+        {
+            DynamicHelper.CollideVsStatic(bodyA, bodyB, dt);
+        }
+
+        private void QueryStaticGrid(DynamicPack pack, float dt)
         {
             var dynamicAabb = pack.Aabb;
 
@@ -182,17 +171,15 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 topIndex = GridHeight - 1;
 
             //Collect all unique aabb boxes
-            var boxesSet = new List<IStaticBody>();
+            var boxesSet = new List<StaticPack>();
             for (int yIndex = bottomIndex; yIndex < topIndex; yIndex++)
             {
                 for (int xIndex = leftIndex; xIndex < rightIndex; xIndex++)
                 {
                     pack.Body.Boxes.Add(new Tuple<int, int>(xIndex, yIndex));
-                    var collideres = gridStaticComps[xIndex + GridWidth * yIndex];
+                    var collideres = gridStaticPacks[xIndex + GridWidth * yIndex];
                     for (int boxIndex = 0; boxIndex < collideres.Count; boxIndex++)
-                    {
                         boxesSet.Add(collideres[boxIndex]);
-                    }
                 }
             }
 
@@ -201,13 +188,11 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
             var pos = dynamicAabb.GetCenter();
 
-            boxesSet.Sort((x, y) => ShortestDistanceComparer(pos, x, y));
+            boxesSet.Sort((x, y) => ShortestDistanceComparer(pos, x.Aabb, y.Aabb));
 
             //Iterate all collected static bodies for detail test
             foreach (var item in boxesSet)
-            {
-                DynamicHelper.CollideVsStatic(pack, item, dt);
-            }
+                TestNarrowPhaseStatic(pack, item, dt);
         }
 
         private int Xcomparison(DynamicPack x, DynamicPack y)
@@ -223,10 +208,10 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 return 1;
         }
 
-        private int ShortestDistanceComparer(Vector2 pos, IStaticBody x, IStaticBody y)
+        private int ShortestDistanceComparer(Vector2 pos, Box2 x, Box2 y)
         {
-            var lx = Vector2.Distance(pos, x.Aabb.GetCenter());
-            var ly = Vector2.Distance(pos, y.Aabb.GetCenter());
+            var lx = Vector2.Distance(pos, x.GetCenter());
+            var ly = Vector2.Distance(pos, y.GetCenter());
 
             if (lx < ly)
                 return -1;
@@ -242,17 +227,14 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             y = (int)(pos.Y / CELL_SIZE);
         }
 
-        private void RegisterStaticEntity(IEntity entity, IStaticBody body)
+        private void RegisterStaticEntity(IEntity entity)
         {
-            var position = entity.Components.OfType<IPosition>().First();
+            var pack = new StaticPack(entity,
+                                      entity.Components.OfType<IBody>().First(),
+                                      entity.Components.OfType<IPosition>().First(),
+                                      entity.Components.OfType<IShapeComponent>().First());
 
-            body.Aabb = new Box2
-            {
-                Left = position.Value.X,
-                Bottom = position.Value.Y,
-                Right = position.Value.X + CELL_SIZE,
-                Top = position.Value.Y + CELL_SIZE,
-            };
+            var position = pack.Position;
 
             int x, y;
             GetGridIndices(position.Value, out x, out y);
@@ -265,14 +247,13 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             if (y >= GridHeight)
                 throw new InvalidOperationException($"Grid box body Y coordinate exceeds grid height size.");
 
-            gridStaticEntities[gridIndex].Add(entity);
-            gridStaticComps[gridIndex].Add(body);
+            gridStaticPacks[gridIndex].Add(pack);
         }
 
-        private void RegisterDynamicEntity(IEntity entity, IDynamicBody body)
+        private void RegisterDynamicEntity(IEntity entity)
         {
-            var pack = new DynamicPack(entity, 
-                                      body,
+            var pack = new DynamicPack(entity,
+                                      entity.Components.OfType<IBody>().First(),
                                       entity.Components.OfType<IPosition>().First(),
                                       entity.Components.OfType<IVelocity>().First(),
                                       entity.Components.OfType<IShapeComponent>().First());
@@ -282,14 +263,10 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         private void InitializeGrid()
         {
-            gridStaticEntities = new List<IEntity>[GridWidth * GridHeight];
-            gridStaticComps = new List<IStaticBody>[GridWidth * GridHeight];
+            gridStaticPacks = new List<StaticPack>[GridWidth * GridHeight];
 
-            for (int i = 0; i < gridStaticEntities.Length; i++)
-                gridStaticEntities[i] = new List<IEntity>();
-
-            for (int i = 0; i < gridStaticComps.Length; i++)
-                gridStaticComps[i] = new List<IStaticBody>();
+            for (int i = 0; i < gridStaticPacks.Length; i++)
+                gridStaticPacks[i] = new List<StaticPack>();
         }
 
         #endregion Private Methods

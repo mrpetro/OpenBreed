@@ -21,9 +21,9 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
 
         #region Internal Methods
 
-        internal static void ResolveVsAABB(DynamicPack pack, IStaticBody staticBody, float dt)
+        internal static void ResolveVsAABB(DynamicPack bodyA, StaticPack bodyB, float dt)
         {
-            ResolveVsGridCell(pack, staticBody, dt);
+            ResolveVsGridCell(bodyA, bodyB, dt);
         }
 
         /// <summary>
@@ -36,9 +36,9 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
             packB.Entity.DebugData = new object[] { "COLLISION_PAIR", packA.Aabb.GetCenter(), packB.Aabb.GetCenter() };
         }
 
-        internal static void CollideVsStatic(DynamicPack pack, IStaticBody staticBody, float dt)
+        internal static void CollideVsStatic(DynamicPack bodyA, StaticPack bodyB, float dt)
         {
-            var dynamicAabb = pack.Aabb;
+            var dynamicAabb = bodyA.Aabb;
 
             //if (!Aabb.CollidesWith(staticBody.Aabb))
             //    return;
@@ -50,9 +50,9 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
             var dHalfWidth = dynamicAabb.Width / 2.0f;
             var dHalfHeight = dynamicAabb.Height / 2.0f;
 
-            var sPos = staticBody.Aabb.GetCenter();
-            var sHalfWidth = staticBody.Aabb.Width / 2.0f;
-            var sHalfHeight = staticBody.Aabb.Height / 2.0f;
+            var sPos = bodyB.Aabb.GetCenter();
+            var sHalfWidth = bodyB.Aabb.Width / 2.0f;
+            var sHalfHeight = bodyB.Aabb.Height / 2.0f;
 
             var tx = sPos.X;
             var ty = sPos.Y;
@@ -103,35 +103,35 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
                         }
                     }
 
-                    pack.Body.Collides = true;
+                    bodyA.Body.Collides = true;
 
-                    pack.Body.Projection = new Vector2(px, py);
+                    bodyA.Body.Projection = new Vector2(px, py);
 
-                    DynamicHelper.ResolveVsAABB(pack, staticBody, dt);
+                    DynamicHelper.ResolveVsAABB(bodyA, bodyB, dt);
                 }
             }
         }
 
-        internal static void ResolveVsGridCell(DynamicPack pack, IStaticBody staticBody, float dt)
+        internal static void ResolveVsGridCell(DynamicPack bodyA, StaticPack bodyB, float dt)
         {
-            var projection = pack.Body.Projection;
+            var projection = bodyA.Body.Projection;
 
-            pack.Position.Value += pack.Body.Projection;
+            bodyA.Position.Value += bodyA.Body.Projection;
 
             var normal = projection.Normalized();
 
             //find component of velocity parallel to collision normal
-            var dp = Vector2.Dot(pack.Velocity.Value, normal);
+            var dp = Vector2.Dot(bodyA.Velocity.Value, normal);
 
             //Apply collision response forces if the object is travelling into, and not out of, the collision
             if (dp < 0)
             {
-                var cor = GENERIC_COR;
+                var cor = GENERIC_COR * bodyA.Body.CorFactor;
 
                 var vn = Vector2.Multiply(normal, dp);
-                var vt = pack.Velocity.Value - vn;
+                var vt = bodyA.Velocity.Value - vn;
 
-                pack.Velocity.Value = vt - cor * vn;
+                bodyA.Velocity.Value = vt - cor * vn;
             }
         }
 

@@ -192,7 +192,7 @@ namespace OpenBreed.Game.States
 
             var rnd = new Random();
 
-            for (int i = 0; i < 200; i++)
+            for (int i = 0; i < 700; i++)
             {
                 var ball = BoxHelper.CreateBox(Core, new Vector2(rnd.Next(16, 64), rnd.Next(16, 64)),
                                                       new Vector2(rnd.Next(70, 700), rnd.Next(70, 700)),

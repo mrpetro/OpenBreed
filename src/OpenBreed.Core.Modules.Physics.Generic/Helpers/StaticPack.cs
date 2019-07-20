@@ -6,22 +6,20 @@ using OpenTK;
 namespace OpenBreed.Core.Modules.Physics.Helpers
 {
     /// <summary>
-    /// Package of entity and dynamic body related components
+    /// Package of entity and static body related components
     /// </summary>
-    internal class DynamicPack
+    internal class StaticPack
     {
         #region Internal Constructors
 
-        internal DynamicPack(IEntity entity,
+        internal StaticPack(IEntity entity,
             IBody body,
             IPosition position,
-            IVelocity velocity,
             IShapeComponent shape)
         {
             Entity = entity;
             Body = body;
             Position = position;
-            Velocity = velocity;
             Shape = shape;
         }
 
@@ -32,7 +30,6 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
         internal IEntity Entity { get; }
         internal IBody Body { get; }
         internal IPosition Position { get; }
-        internal IVelocity Velocity { get; }
         internal IShapeComponent Shape { get; }
 
         internal Box2 Aabb { get { return Shape.Aabb.Translated(Position.Value); } }

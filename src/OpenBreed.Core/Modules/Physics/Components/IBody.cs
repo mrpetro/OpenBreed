@@ -6,16 +6,21 @@ using System.Collections.Generic;
 namespace OpenBreed.Core.Modules.Physics.Components
 {
     /// <summary>
-    /// Physical body component interface which is used in entites that are moving in world coordinates
+    /// Body component data used for physical interactions in world
     /// </summary>
-    public interface IDynamicBody : IPhysicsComponent
+    public interface IBody : IPhysicsComponent
     {
         #region Public Properties
 
         /// <summary>
-        /// Non real physical factor for friction.
+        /// Coefficient of friction factor for this body.
         /// </summary>
-        float FrictionFactor { get; }
+        float CofFactor { get; }
+
+        /// <summary>
+        /// Coefficient of restitution factor for this body.
+        /// </summary>
+        float CorFactor { get; }
 
         /// <summary>
         /// Position from previous frame used for Verlet

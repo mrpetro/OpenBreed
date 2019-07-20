@@ -104,9 +104,9 @@ namespace OpenBreed.Game.Entities.Actor
             actor.Add(Thrust.Create(0, 0));
             actor.Add(Velocity.Create(0, 0));
             actor.Add(Direction.Create(1, 0));
-            actor.Add(new AxisAlignedBoxShape(32, 32));
+            actor.Add(new AxisAlignedBoxShape(-16, -16, 32, 32));
             actor.Add(new Motion());
-            actor.Add(new DynamicBody(1.0f));
+            actor.Add(new Body(1.0f, 0.0f));
 
             return actor;
         }
