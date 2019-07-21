@@ -26,7 +26,7 @@ namespace OpenBreed.Game.Entities.Box
             ball.Add(Direction.Create(1, 0));
             ball.Add(new AxisAlignedBoxShape(-size.X / 2, -size.Y / 2, size.X, size.Y));
             ball.Add(new Motion());
-            ball.Add(new Body(0.0f, 0.5f));
+            ball.Add(new Body(1.0f, 1.0f));
 
             return ball;
         }
