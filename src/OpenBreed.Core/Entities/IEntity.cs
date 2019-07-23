@@ -1,14 +1,11 @@
 ﻿using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Modules.Animation.Systems;
-using System;
+using OpenBreed.Core.States;
 using System.Collections.ObjectModel;
 
 namespace OpenBreed.Core.Entities
 {
-    public delegate void EntityPerform(string actionName, params object[] arguments);
-
     public delegate void SystemEventDelegate(IWorldSystem system, ISystemEvent systemEvent);
 
     /// <summary>
@@ -18,7 +15,7 @@ namespace OpenBreed.Core.Entities
     {
         #region Public Properties
 
-        EntityPerform PerformDelegate { get; set; }
+        StateMachine StateMachine { get; }
 
         /// <summary>
         /// System event handle delegate
@@ -54,11 +51,13 @@ namespace OpenBreed.Core.Entities
 
         #region Public Methods
 
+        StateMachine AddStateMachine();
+
         /// <summary>
         /// Post message of specific type
         /// </summary>
         /// <param name="message"></param>
-        void PostMessage(IEntityMsg message);
+        void PostMsg(IEntityMsg message);
 
         /// <summary>
         /// Add component to entity

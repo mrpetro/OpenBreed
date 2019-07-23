@@ -69,8 +69,8 @@ namespace OpenBreed.Game.States
 
         public ICore Core { get; }
 
-        public CameraEntity gameCamera { get; private set; }
-        public CameraEntity hudCamera { get; private set; }
+        public CameraEntity GameCamera { get; private set; }
+        public CameraEntity HudCamera { get; private set; }
 
         public override string Id { get { return ID; } }
 
@@ -171,12 +171,12 @@ namespace OpenBreed.Game.States
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
-            gameCamera = (CameraEntity)cameraBuilder.Build();
-            gameWorld.AddEntity(gameCamera);
+            GameCamera = (CameraEntity)cameraBuilder.Build();
+            gameWorld.AddEntity(GameCamera);
 
 
             gameViewport = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
-            gameViewport.Camera = gameCamera;
+            gameViewport.Camera = GameCamera;
 
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas.Id);
@@ -187,7 +187,7 @@ namespace OpenBreed.Game.States
 
    
             var actorSm = ActorHelper.CreateStateMachine(actor);
-            actorSm.Initialize("Standing_Down");
+            actorSm.SetInitialState("Standing_Down");
             gameWorld.AddEntity(actor);
 
             var rnd = new Random();

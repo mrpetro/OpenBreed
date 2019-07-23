@@ -43,7 +43,7 @@ namespace OpenBreed.Game.Entities.Door
 
         public static StateMachine CreateHorizontalStateMachine(IEntity entity)
         {
-            var stateMachine = new StateMachine(entity);
+            var stateMachine = entity.AddStateMachine();
 
             stateMachine.AddState(new OpeningState("Opening", "HORIZONTAL_DOOR_OPENING"));
             stateMachine.AddState(new OpenedState("Opened", 0));
@@ -55,7 +55,7 @@ namespace OpenBreed.Game.Entities.Door
 
         public static StateMachine CreateVerticalStateMachine(IEntity entity)
         {
-            var stateMachine = new StateMachine(entity);
+            var stateMachine = entity.AddStateMachine();
 
             stateMachine.AddState(new OpeningState("Opening", "HORIZONTAL_DOOR_OPENING"));
             stateMachine.AddState(new OpenedState("Opened", 0));
@@ -93,7 +93,7 @@ namespace OpenBreed.Game.Entities.Door
             //door.Add(new AxisAlignedBoxShape(32, 32));
             //door.Add(new StaticBody());
 
-            var doorSm = DoorHelper.CreateHorizontalStateMachine(door);
+            //var doorSm = DoorHelper.CreateHorizontalStateMachine(door);
             //doorSm.Initialize("Closed");
 
             collection.Add(door);

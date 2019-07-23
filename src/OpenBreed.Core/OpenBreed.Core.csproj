@@ -57,11 +57,16 @@
     <Compile Include="Collections\IdMap.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Common\Components\GroupPart.cs" />
+    <Compile Include="Common\Helpers\IMsg.cs" />
+    <Compile Include="Common\Helpers\IMsgHandler.cs" />
     <Compile Include="Common\Helpers\MovementTools.cs" />
+    <Compile Include="Common\Helpers\StateChangeMsgHandler.cs" />
     <Compile Include="Common\Systems\GroupSystem.cs" />
     <Compile Include="CoreTools.cs" />
     <Compile Include="Entities\ISystemEvent.cs" />
     <Compile Include="Entities\IEntityMsg.cs" />
+    <Compile Include="Entities\WorldMessageBus.cs" />
+    <Compile Include="Entities\CoreMessageBus.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="InputsMan.cs" />
     <Compile Include="Modules\Animation\Helpers\IAnimationData.cs" />
@@ -161,6 +166,7 @@
     <Reference Include="OpenTK, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>..\..\packages\OpenTK.3.0.1\lib\net20\OpenTK.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

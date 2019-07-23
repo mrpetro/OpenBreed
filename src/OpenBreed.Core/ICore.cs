@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Helpers;
@@ -63,6 +64,11 @@ namespace OpenBreed.Core
         /// States machine
         /// </summary>
         StateMan StateMachine { get; }
+
+        /// <summary>
+        /// Message bus
+        /// </summary>
+        CoreMessageBus MessageBus{ get; }
 
         /// <summary>
         /// Client display transformation matrix

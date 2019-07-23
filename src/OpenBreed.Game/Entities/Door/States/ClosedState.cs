@@ -43,7 +43,7 @@ namespace OpenBreed.Game.Components.States
         public void EnterState()
         {
             //Entity.PostMessage(new ChangeTileMsg(tileId));
-            Entity.PostMessage(new SetTextMsg("Door - Closed"));
+            Entity.Core.MessageBus.PostMsg(this, new SetTextMsg(Entity, "Door - Closed"));
         }
 
         public void Initialize(IEntity entity)
@@ -88,9 +88,9 @@ namespace OpenBreed.Game.Components.States
         private void HandleControlDirectionChangedEvent(IWorldSystem system, ControlDirectionChangedEvent systemEvent)
         {
             if (systemEvent.Direction != Vector2.Zero)
-                Entity.PostMessage(new StateChangeMsg("Walk", systemEvent.Direction));
+                Entity.PostMsg(new StateChangeMsg(Entity, "Walk", systemEvent.Direction));
             else
-                Entity.PostMessage(new StateChangeMsg("Stop"));
+                Entity.PostMsg(new StateChangeMsg(Entity, "Stop"));
         }
 
         #endregion Private Methods

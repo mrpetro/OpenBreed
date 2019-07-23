@@ -37,12 +37,12 @@ namespace OpenBreed.Core.Common.Systems
         void RemoveEntity(IEntity entity);
 
         /// <summary>
-        /// Handle given entity message
+        /// Handle given message
         /// </summary>
-        /// <param name="sender">entity which is sending the message</param>
+        /// <param name="sender">Object is sending the message</param>
         /// <param name="message">message</param>
         /// <returns>True if message was handled, false otherwise</returns>
-        bool HandleMsg(IEntity sender, IEntityMsg message);
+        bool HandleMsg(object sender, IMsg message);
 
         ///// <summary>
         ///// Post system event 

@@ -113,7 +113,7 @@ namespace OpenBreed.Game.Entities.Actor
 
         public static StateMachine CreateStateMachine(IEntity entity)
         {
-            var stateMachine = new StateMachine(entity);
+            var stateMachine = entity.AddStateMachine();
 
             stateMachine.AddState(new StandingState("Standing_Right", "STANDING_RIGHT", new Vector2(1, 0)));
             stateMachine.AddState(new StandingState("Standing_Right_Down", "STANDING_RIGHT_DOWN", new Vector2(1, -1)));

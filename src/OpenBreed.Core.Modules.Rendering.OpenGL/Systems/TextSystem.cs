@@ -78,7 +78,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Disable(EnableCap.Texture2D);
         }
 
-        public override bool HandleMsg(IEntity sender, IEntityMsg message)
+        public override bool HandleMsg(object sender, IMsg message)
         {
             switch (message.Type)
             {
@@ -117,9 +117,9 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Methods
 
-        private bool HandleSetTextMsg(IEntity sender, SetTextMsg message)
+        private bool HandleSetTextMsg(object sender, SetTextMsg message)
         {
-            var index = entities.IndexOf(sender);
+            var index = entities.IndexOf(message.Entity);
             if (index < 0)
                 return false;
 

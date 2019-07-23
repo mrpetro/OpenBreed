@@ -53,8 +53,8 @@ namespace OpenBreed.Game.Entities.Actor.States
         {
             thrust.Value = walkDirection * creatureMovement.Acceleration;
 
-            Entity.PostMessage(new PlayAnimMsg(animationId));
-            Entity.PostMessage(new SetTextMsg("Hero - Walking"));
+            Entity.Core.MessageBus.PostMsg(this, new PlayAnimMsg(Entity, animationId));
+            Entity.Core.MessageBus.PostMsg(this, new SetTextMsg(Entity, "Hero - Walking"));
         }
 
         public void Initialize(IEntity entity)
@@ -153,9 +153,9 @@ namespace OpenBreed.Game.Entities.Actor.States
         private void HandleControlDirectionChangedEvent(IWorldSystem system, ControlDirectionChangedEvent systemEvent)
         {
             if (systemEvent.Direction != Vector2.Zero)
-                Entity.PostMessage(new StateChangeMsg("Walk", systemEvent.Direction));
+                Entity.PostMsg(new StateChangeMsg(Entity, "Walk", systemEvent.Direction));
             else
-                Entity.PostMessage(new StateChangeMsg("Stop"));
+                Entity.PostMsg(new StateChangeMsg(Entity, "Stop"));
         }
 
         #endregion Private Methods

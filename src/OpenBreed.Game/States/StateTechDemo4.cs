@@ -69,8 +69,8 @@ namespace OpenBreed.Game.States
 
         public ICore Core { get; }
 
-        public CameraEntity gameCamera { get; private set; }
-        public CameraEntity hudCamera { get; private set; }
+        public CameraEntity GameCamera { get; private set; }
+        public CameraEntity HudCamera { get; private set; }
 
         public override string Id { get { return ID; } }
 
@@ -172,12 +172,12 @@ namespace OpenBreed.Game.States
             cameraBuilder.SetPosition(new Vector2(320, 280));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
-            hudCamera = (CameraEntity)cameraBuilder.Build();
-            hudWorld.AddEntity(hudCamera);
+            HudCamera = (CameraEntity)cameraBuilder.Build();
+            hudWorld.AddEntity(HudCamera);
 
 
             hudViewport = (Viewport)Core.Rendering.Viewports.Create(0, 0, 540, 380);
-            hudViewport.Camera = hudCamera;
+            hudViewport.Camera = HudCamera;
 
             var algerian50 = Core.Rendering.Fonts.Create("ALGERIAN", 50);
             var arial12 = Core.Rendering.Fonts.Create("ARIAL", 12);
@@ -211,12 +211,12 @@ namespace OpenBreed.Game.States
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
-            gameCamera = (CameraEntity)cameraBuilder.Build();
-            gameWorld.AddEntity(gameCamera);
+            GameCamera = (CameraEntity)cameraBuilder.Build();
+            gameWorld.AddEntity(GameCamera);
 
 
             gameViewport = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
-            gameViewport.Camera = gameCamera;
+            gameViewport.Camera = GameCamera;
 
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas.Id);
@@ -226,7 +226,7 @@ namespace OpenBreed.Game.States
             actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
 
             var stateMachine = ActorHelper.CreateStateMachine(actor);
-            stateMachine.Initialize("Standing_Down");
+            stateMachine.SetInitialState("Standing_Down");
 
             gameWorld.AddEntity(actor);
 

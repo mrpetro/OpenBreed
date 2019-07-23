@@ -20,6 +20,7 @@ using OpenBreed.Core.Modules.Physics.Systems;
 using OpenBreed.Core.Common.Systems;
 using System.Collections.Generic;
 using System.Linq;
+using OpenBreed.Core.Entities;
 
 namespace OpenBreed.Game
 {
@@ -47,6 +48,7 @@ namespace OpenBreed.Game
             Inputs = new InputsMan(this);
             Worlds = new WorldMan(this);
             StateMachine = new StateMan(this);
+            MessageBus = new CoreMessageBus(this);
             StateMachine.RegisterState(new StateTechDemo1(this));
             StateMachine.RegisterState(new StateTechDemo2(this));
             StateMachine.RegisterState(new StateTechDemo3(this));
@@ -111,6 +113,7 @@ namespace OpenBreed.Game
         public IAnimationModule Animations { get; }
         public EntityMan Entities { get; }
         public InputsMan Inputs { get; }
+        public CoreMessageBus MessageBus { get; }
 
         public WorldMan Worlds { get; }
         public StateMan StateMachine { get; }

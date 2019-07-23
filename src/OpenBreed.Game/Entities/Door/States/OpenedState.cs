@@ -42,7 +42,7 @@ namespace OpenBreed.Game.Components.States
         public void EnterState()
         {
             //Entity.PostMessage(new ChangeTileMsg(tileId));
-            Entity.PostMessage(new SetTextMsg("Door - Opened"));
+            Entity.Core.MessageBus.PostMsg(this, new SetTextMsg(Entity, "Door - Opened"));
         }
 
         public void Initialize(IEntity entity)

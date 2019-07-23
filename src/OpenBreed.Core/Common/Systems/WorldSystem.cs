@@ -86,7 +86,7 @@ namespace OpenBreed.Core.Common.Systems
             toRemove.Add(entity);
         }
 
-        public virtual bool HandleMsg(IEntity sender, IEntityMsg message)
+        public virtual bool HandleMsg(object sender, IMsg message)
         {
             return false;
         }

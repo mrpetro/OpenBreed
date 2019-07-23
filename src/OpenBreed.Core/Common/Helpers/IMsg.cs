@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Entities
 {
-    public interface IMsg
+    public interface IEntityMsg : IMsg
     {
-        string Type { get; }
-        object Data { get; }
+        IEntity Entity { get; }
     }
 }
