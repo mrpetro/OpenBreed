@@ -10,6 +10,7 @@ using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenTK;
 using System.Linq;
 using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Common.Helpers;
 
 namespace OpenBreed.Game.Components.States
 {

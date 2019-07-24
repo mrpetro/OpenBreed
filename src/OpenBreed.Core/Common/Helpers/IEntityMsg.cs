@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Core.Entities
+namespace OpenBreed.Core.Common.Helpers
 {
     public interface IMsg
     {

@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Entities;
+﻿using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Entities;
 
 namespace OpenBreed.Core.Modules.Animation.Events
 {

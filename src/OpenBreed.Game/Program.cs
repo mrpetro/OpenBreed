@@ -50,6 +50,7 @@ namespace OpenBreed.Game
             Worlds = new WorldMan(this);
             StateMachine = new StateMan(this);
             MessageBus = new CoreMessageBus(this);
+            EventBus = new CoreEventBus(this);
             StateMachine.RegisterState(new StateTechDemo1(this));
             StateMachine.RegisterState(new StateTechDemo2(this));
             StateMachine.RegisterState(new StateTechDemo3(this));
@@ -115,6 +116,7 @@ namespace OpenBreed.Game
         public EntityMan Entities { get; }
         public InputsMan Inputs { get; }
         public CoreMessageBus MessageBus { get; }
+        public CoreEventBus EventBus { get; }
 
         public WorldMan Worlds { get; }
         public StateMan StateMachine { get; }
@@ -183,6 +185,9 @@ namespace OpenBreed.Game
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             base.OnUpdateFrame(e);
+
+            //Raise events which were enqueued in previous frame
+            EventBus.RaiseEnqueued();
 
             Inputs.Update();
 

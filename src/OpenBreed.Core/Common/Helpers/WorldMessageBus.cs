@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace OpenBreed.Core.Entities
+namespace OpenBreed.Core.Common.Helpers
 {
     public class WorldMessageBus : IMsgHandler
     {

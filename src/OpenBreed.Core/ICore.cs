@@ -72,6 +72,11 @@ namespace OpenBreed.Core
         CoreMessageBus MessageBus{ get; }
 
         /// <summary>
+        /// Event bus
+        /// </summary>
+        CoreEventBus EventBus { get; }
+
+        /// <summary>
         /// Client display transformation matrix
         /// </summary>
         Matrix4 ClientTransform { get; }

@@ -1,6 +1,6 @@
-﻿namespace OpenBreed.Core.Entities
+﻿namespace OpenBreed.Core.Common.Helpers
 {
-    public interface ISystemEvent
+    public interface IEvent
     {
         #region Public Properties
 
