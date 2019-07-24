@@ -21,6 +21,7 @@ using OpenBreed.Core.Common.Systems;
 using System.Collections.Generic;
 using System.Linq;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Common.Helpers;
 
 namespace OpenBreed.Game
 {

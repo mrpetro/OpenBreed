@@ -66,7 +66,7 @@
     <Compile Include="Entities\ISystemEvent.cs" />
     <Compile Include="Entities\IEntityMsg.cs" />
     <Compile Include="Entities\WorldMessageBus.cs" />
-    <Compile Include="Entities\CoreMessageBus.cs" />
+    <Compile Include="Common\Helpers\CoreMessageBus.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="InputsMan.cs" />
     <Compile Include="Modules\Animation\Helpers\IAnimationData.cs" />

@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Common.Systems.Components;
+﻿using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using System;
 using System.Collections.Generic;
