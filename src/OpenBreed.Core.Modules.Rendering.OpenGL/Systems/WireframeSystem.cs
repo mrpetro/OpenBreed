@@ -98,7 +98,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// Draw this sprite to given viewport
         /// </summary>
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
-        public void Draw(IDynamicBody body, IViewport viewport)
+        public void Draw(IBody body, IViewport viewport)
         {
             if (body.Boxes != null)
             {

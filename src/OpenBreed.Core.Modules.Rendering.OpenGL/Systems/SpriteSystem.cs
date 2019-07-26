@@ -20,7 +20,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         private readonly List<IEntity> entities = new List<IEntity>();
         private readonly List<ISprite> spriteComps = new List<ISprite>();
         private readonly List<IPosition> positionComps = new List<IPosition>();
-        private readonly List<IDynamicBody> debugComps = new List<IDynamicBody>();
+        private readonly List<IBody> debugComps = new List<IBody>();
 
         #endregion Private Fields
 
@@ -87,7 +87,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// Draw this sprite to given viewport
         /// </summary>
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
-        public void Draw(IDynamicBody body, IViewport viewport)
+        public void Draw(IBody body, IViewport viewport)
         {
             if (body.Boxes != null)
             {
@@ -119,7 +119,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             entities.Add(entity);
             spriteComps.Add(entity.Components.OfType<ISprite>().First());
             positionComps.Add(entity.Components.OfType<IPosition>().First());
-            debugComps.Add(entity.Components.OfType<IDynamicBody>().First());
+            debugComps.Add(entity.Components.OfType<IBody>().First());
         }
 
         protected override void UnregisterEntity(IEntity entity)

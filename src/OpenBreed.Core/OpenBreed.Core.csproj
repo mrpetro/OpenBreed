@@ -57,11 +57,17 @@
     <Compile Include="Collections\IdMap.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Common\Components\GroupPart.cs" />
+    <Compile Include="Common\Helpers\CoreEventBus.cs" />
+    <Compile Include="Common\Helpers\IMsg.cs" />
+    <Compile Include="Common\Helpers\IMsgHandler.cs" />
+    <Compile Include="Common\Helpers\IEvent.cs" />
     <Compile Include="Common\Helpers\MovementTools.cs" />
+    <Compile Include="Common\Helpers\StateChangeMsgHandler.cs" />
     <Compile Include="Common\Systems\GroupSystem.cs" />
     <Compile Include="CoreTools.cs" />
-    <Compile Include="Entities\ISystemEvent.cs" />
-    <Compile Include="Entities\IEntityMsg.cs" />
+    <Compile Include="Common\Helpers\IEntityMsg.cs" />
+    <Compile Include="Common\Helpers\WorldMessageBus.cs" />
+    <Compile Include="Common\Helpers\CoreMessageBus.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="InputsMan.cs" />
     <Compile Include="Modules\Animation\Helpers\IAnimationData.cs" />
@@ -71,9 +77,8 @@
     <Compile Include="Modules\Audio\Components\ISoundEmiter.cs" />
     <Compile Include="Modules\Audio\Helpers\ISound.cs" />
     <Compile Include="Modules\Audio\Helpers\ISoundMan.cs" />
-    <Compile Include="Modules\Physics\Components\IDynamicBody.cs" />
+    <Compile Include="Modules\Physics\Components\IBody.cs" />
     <Compile Include="Modules\Physics\Components\IPhysicsComponent.cs" />
-    <Compile Include="Modules\Physics\Components\IStaticBody.cs" />
     <Compile Include="Modules\Rendering\Components\ICamera.cs" />
     <Compile Include="Modules\Rendering\Components\IWireframe.cs" />
     <Compile Include="Modules\Rendering\Helpers\IFontMan.cs" />
@@ -99,7 +104,6 @@
     <Compile Include="Modules\Rendering\Systems\ISpriteSystem.cs" />
     <Compile Include="States\IStateBuilder.cs" />
     <Compile Include="States\IState.cs" />
-    <Compile Include="States\Messenger.cs" />
     <Compile Include="States\StateChangeMsg.cs" />
     <Compile Include="States\StateMachine.cs" />
     <Compile Include="Common\Components\IDirection.cs" />
@@ -162,6 +166,7 @@
     <Reference Include="OpenTK, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>..\..\packages\OpenTK.3.0.1\lib\net20\OpenTK.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

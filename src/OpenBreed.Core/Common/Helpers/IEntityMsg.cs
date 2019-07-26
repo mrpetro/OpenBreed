@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Core.States
+namespace OpenBreed.Core.Common.Helpers
 {
-    public class Messenger
+    public interface IMsg
     {
+        string Type { get; }
+        object Data { get; }
     }
 }

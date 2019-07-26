@@ -20,6 +20,8 @@ using OpenBreed.Core.Modules.Physics.Systems;
 using OpenBreed.Core.Common.Systems;
 using System.Collections.Generic;
 using System.Linq;
+using OpenBreed.Core.Entities;
+using OpenBreed.Core.Common.Helpers;
 
 namespace OpenBreed.Game
 {
@@ -47,6 +49,8 @@ namespace OpenBreed.Game
             Inputs = new InputsMan(this);
             Worlds = new WorldMan(this);
             StateMachine = new StateMan(this);
+            MessageBus = new CoreMessageBus(this);
+            EventBus = new CoreEventBus(this);
             StateMachine.RegisterState(new StateTechDemo1(this));
             StateMachine.RegisterState(new StateTechDemo2(this));
             StateMachine.RegisterState(new StateTechDemo3(this));
@@ -111,6 +115,8 @@ namespace OpenBreed.Game
         public IAnimationModule Animations { get; }
         public EntityMan Entities { get; }
         public InputsMan Inputs { get; }
+        public CoreMessageBus MessageBus { get; }
+        public CoreEventBus EventBus { get; }
 
         public WorldMan Worlds { get; }
         public StateMan StateMachine { get; }
@@ -179,6 +185,11 @@ namespace OpenBreed.Game
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             base.OnUpdateFrame(e);
+
+            //Post messages which were enqueued in previous frame
+            MessageBus.PostEnqueued();
+            //Raise events which were enqueued in previous frame
+            EventBus.RaiseEnqueued();
 
             Inputs.Update();
 

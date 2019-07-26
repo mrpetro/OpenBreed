@@ -1,16 +1,13 @@
 ﻿using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Modules.Animation.Systems;
+using OpenBreed.Core.States;
 using System;
 using System.Collections.ObjectModel;
 
 namespace OpenBreed.Core.Entities
 {
-    public delegate void EntityPerform(string actionName, params object[] arguments);
-
-    public delegate void SystemEventDelegate(IWorldSystem system, ISystemEvent systemEvent);
-
     /// <summary>
     /// Entity interface
     /// </summary>
@@ -18,12 +15,7 @@ namespace OpenBreed.Core.Entities
     {
         #region Public Properties
 
-        EntityPerform PerformDelegate { get; set; }
-
-        /// <summary>
-        /// System event handle delegate
-        /// </summary>
-        SystemEventDelegate HandleSystemEvent { get; set; }
+        StateMachine StateMachine { get; }
 
         /// <summary>
         /// Core reference
@@ -54,11 +46,26 @@ namespace OpenBreed.Core.Entities
 
         #region Public Methods
 
+        StateMachine AddStateMachine();
+
         /// <summary>
         /// Post message of specific type
         /// </summary>
         /// <param name="message"></param>
-        void PostMessage(IEntityMsg message);
+        void PostMsg(IEntityMsg message);
+
+        /// <summary>
+        /// Raise event of specific type
+        /// </summary>
+        /// <param name="ev"></param>
+        void RaiseEvent(IEvent ev);
+
+        /// <summary>
+        /// Subscribe to particular event
+        /// </summary>
+        /// <param name="eventType">event type to subscribe to</param>
+        /// <param name="callback">event callback</param>
+        void Subscribe(string eventType, Action<object, IEvent> callback);
 
         /// <summary>
         /// Add component to entity

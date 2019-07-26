@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Common.Systems.Components;
+﻿using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -43,10 +44,10 @@ namespace OpenBreed.Core.Common.Systems
             groupPartComps.RemoveAt(index);
         }
 
-        public override bool HandleMsg(IEntity sender, IEntityMsg message)
+        public override bool HandleMsg(object sender, IMsg message)
         {
-            foreach (var item in entities.Where(item => item.Id == sender.Id))
-                item.PostMessage(message);
+            foreach (var item in entities.Where(item => item.Id == ((IEntityMsg)message).Entity.Id))
+                item.PostMsg((IEntityMsg)message);
 
             return true;
         }

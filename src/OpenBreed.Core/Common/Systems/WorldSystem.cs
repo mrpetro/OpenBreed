@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Common.Systems.Components;
+﻿using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -86,7 +87,7 @@ namespace OpenBreed.Core.Common.Systems
             toRemove.Add(entity);
         }
 
-        public virtual bool HandleMsg(IEntity sender, IEntityMsg message)
+        public virtual bool HandleMsg(object sender, IMsg message)
         {
             return false;
         }
@@ -141,9 +142,5 @@ namespace OpenBreed.Core.Common.Systems
 
         #endregion Protected Methods
 
-        //public void PostEvent(ISystemEvent systemEvent)
-        //{
-        //    World.PostEvent(this, systemEvent);
-        //}
     }
 }

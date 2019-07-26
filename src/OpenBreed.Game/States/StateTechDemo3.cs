@@ -193,7 +193,7 @@ namespace OpenBreed.Game.States
             blockBuilder.SetTileAtlas(tileAtlas.Id);
 
             var stateMachine = ActorHelper.CreateStateMachine(actor);
-            stateMachine.Initialize("Standing_Right");
+            stateMachine.SetInitialState("Standing_Right");
 
             World.AddEntity(actor);
 

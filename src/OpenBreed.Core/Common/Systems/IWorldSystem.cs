@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Entities;
+﻿using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Entities;
 
 namespace OpenBreed.Core.Common.Systems
 {
@@ -37,18 +38,12 @@ namespace OpenBreed.Core.Common.Systems
         void RemoveEntity(IEntity entity);
 
         /// <summary>
-        /// Handle given entity message
+        /// Handle given message
         /// </summary>
-        /// <param name="sender">entity which is sending the message</param>
+        /// <param name="sender">Object is sending the message</param>
         /// <param name="message">message</param>
         /// <returns>True if message was handled, false otherwise</returns>
-        bool HandleMsg(IEntity sender, IEntityMsg message);
-
-        ///// <summary>
-        ///// Post system event 
-        ///// </summary>
-        ///// <param name="systemEvent">System event to be posted</param>
-        //void PostEvent(ISystemEvent systemEvent);
+        bool HandleMsg(object sender, IMsg message);
 
         #endregion Public Methods
     }

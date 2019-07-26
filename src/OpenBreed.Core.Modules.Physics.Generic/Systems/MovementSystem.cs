@@ -11,7 +11,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 {
     public class MovementSystem : WorldSystem, IUpdatableSystem
     {
-        private const float FLOOR_FRICTION = 0.0f;
+        private const float FLOOR_FRICTION = 0.2f;
 
         #region Private Fields
 
@@ -20,7 +20,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         private readonly List<IPosition> positionComps = new List<IPosition>();
         private readonly List<IDirection> directionComps = new List<IDirection>();
         private readonly List<IVelocity> velocityComps = new List<IVelocity>();
-        private readonly List<IDynamicBody> dynamicBodyComps = new List<IDynamicBody>();
+        private readonly List<IBody> dynamicBodyComps = new List<IBody>();
 
         #endregion Private Fields
 
@@ -32,7 +32,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             Require<IPosition>();
             Require<IDirection>();
             Require<IVelocity>();
-            Require<IDynamicBody>();
+            Require<IBody>();
         }
 
         #endregion Public Constructors
@@ -60,7 +60,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             var newVel = velocity.Value + thrust.Value * dt;
 
             //Apply friction force
-            newVel += -newVel * FLOOR_FRICTION;
+            newVel += -newVel * FLOOR_FRICTION * dynamicBody.CofFactor;
 
             //Verlet integration
             var newPos = position.Value + (velocity.Value + newVel) * 0.5f * dt;
@@ -81,7 +81,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             thrustComps.Add(entity.Components.OfType<IThrust>().First());
             directionComps.Add(entity.Components.OfType<IDirection>().First());
             velocityComps.Add(entity.Components.OfType<IVelocity>().First());
-            dynamicBodyComps.Add(entity.Components.OfType<IDynamicBody>().First());
+            dynamicBodyComps.Add(entity.Components.OfType<IBody>().First());
         }
 
         protected override void UnregisterEntity(IEntity entity)

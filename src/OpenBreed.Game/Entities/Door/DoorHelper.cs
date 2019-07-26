@@ -43,7 +43,7 @@ namespace OpenBreed.Game.Entities.Door
 
         public static StateMachine CreateHorizontalStateMachine(IEntity entity)
         {
-            var stateMachine = new StateMachine(entity);
+            var stateMachine = entity.AddStateMachine();
 
             stateMachine.AddState(new OpeningState("Opening", "HORIZONTAL_DOOR_OPENING"));
             stateMachine.AddState(new OpenedState("Opened", 0));
@@ -55,7 +55,7 @@ namespace OpenBreed.Game.Entities.Door
 
         public static StateMachine CreateVerticalStateMachine(IEntity entity)
         {
-            var stateMachine = new StateMachine(entity);
+            var stateMachine = entity.AddStateMachine();
 
             stateMachine.AddState(new OpeningState("Opening", "HORIZONTAL_DOOR_OPENING"));
             stateMachine.AddState(new OpenedState("Opened", 0));
@@ -75,13 +75,15 @@ namespace OpenBreed.Game.Entities.Door
 
             var doorPart1 = core.Entities.Create();
             doorPart1.Add(new Position(x * 16, y * 16));
-            doorPart1.Add(new GridBoxBody(16));
+            doorPart1.Add(new Body(1.0f, 1.0f));
+            doorPart1.Add(new AxisAlignedBoxShape(0, 0, 16, 16));
             doorPart1.Add(new GroupPart(door.Id));
             doorPart1.Add(core.Rendering.CreateTile(tileAtlas.Id, 2));
 
             var doorPart2 = core.Entities.Create();
             doorPart2.Add(new Position((x + 1) * 16, y * 16));
-            doorPart2.Add(new GridBoxBody(16));
+            doorPart2.Add(new Body(1.0f, 1.0f));
+            doorPart2.Add(new AxisAlignedBoxShape(0, 0, 16, 16));
             doorPart2.Add(core.Rendering.CreateTile(tileAtlas.Id, 2));
             doorPart2.Add(new GroupPart(door.Id));
 
@@ -91,7 +93,7 @@ namespace OpenBreed.Game.Entities.Door
             //door.Add(new AxisAlignedBoxShape(32, 32));
             //door.Add(new StaticBody());
 
-            var doorSm = DoorHelper.CreateHorizontalStateMachine(door);
+            //var doorSm = DoorHelper.CreateHorizontalStateMachine(door);
             //doorSm.Initialize("Closed");
 
             collection.Add(door);

@@ -230,7 +230,7 @@ namespace OpenBreed.Game.States
             actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
 
             var stateMachine = ActorHelper.CreateStateMachine(actor);
-            stateMachine.Initialize("Standing_Down");
+            stateMachine.SetInitialState("Standing_Down");
 
             World.AddEntity(actor);
 

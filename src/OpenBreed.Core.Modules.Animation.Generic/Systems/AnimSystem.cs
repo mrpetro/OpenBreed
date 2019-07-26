@@ -1,18 +1,18 @@
-﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation;
+﻿using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Animation.Helpers;
-using OpenBreed.Core.Modules.Animation.Systems;
 using OpenBreed.Core.Modules.Animation.Events;
+using OpenBreed.Core.Modules.Animation.Helpers;
 using OpenBreed.Core.Modules.Animation.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenBreed.Core.Common.Systems;
 
 namespace OpenBreed.Core.Modules.Animation.Systems
 {
-    public class AnimSystem<T> : WorldSystem, IAnimationSystem
+    public class AnimSystem<T> : WorldSystem, IAnimationSystem, IMsgHandler
     {
         #region Private Fields
 
@@ -31,6 +31,15 @@ namespace OpenBreed.Core.Modules.Animation.Systems
         #endregion Public Constructors
 
         #region Public Methods
+
+        public override void Initialize(World world)
+        {
+            base.Initialize(world);
+
+            World.MessageBus.RegisterHandler(PlayAnimMsg.TYPE, this);
+            World.MessageBus.RegisterHandler(PauseAnimMsg.TYPE, this);
+            World.MessageBus.RegisterHandler(StopAnimMsg.TYPE, this);
+        }
 
         public void Update(float dt)
         {
@@ -85,11 +94,12 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             if (!animator.Frame.Equals(newFrame))
             {
                 animator.Frame = newFrame;
-                entities[index].HandleSystemEvent?.Invoke(this, new FrameChangedEvent<T>(animator.Frame));
+
+                entities[index].RaiseEvent(new FrameChangedEvent<T>(animator.Frame));
             }
         }
 
-        public override bool HandleMsg(IEntity sender, IEntityMsg message)
+        public override bool HandleMsg(object sender, IMsg message)
         {
             switch (message.Type)
             {
@@ -132,9 +142,9 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         #region Private Methods
 
-        private bool HandlePauseAnimMsg(IEntity sender, PauseAnimMsg message)
+        private bool HandlePauseAnimMsg(object sender, PauseAnimMsg message)
         {
-            var index = entities.IndexOf(sender);
+            var index = entities.IndexOf(message.Entity);
             if (index < 0)
                 return false;
 
@@ -143,9 +153,9 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             return true;
         }
 
-        private bool HandleStopAnimMsg(IEntity sender, StopAnimMsg message)
+        private bool HandleStopAnimMsg(object sender, StopAnimMsg message)
         {
-            var index = entities.IndexOf(sender);
+            var index = entities.IndexOf(message.Entity);
             if (index < 0)
                 return false;
 
@@ -154,9 +164,9 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             return true;
         }
 
-        private bool HandlePlayAnimMsg(IEntity sender, PlayAnimMsg message)
+        private bool HandlePlayAnimMsg(object sender, PlayAnimMsg message)
         {
-            var index = entities.IndexOf(sender);
+            var index = entities.IndexOf(message.Entity);
             if (index < 0)
                 return false;
 

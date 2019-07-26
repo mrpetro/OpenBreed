@@ -10,10 +10,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Helpers;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TextSystem : WorldSystem, ITextSystem
+    public class TextSystem : WorldSystem, ITextSystem, IMsgHandler
     {
         #region Private Fields
 
@@ -34,6 +36,13 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         #endregion Public Constructors
 
         #region Public Methods
+
+        public override void Initialize(World world)
+        {
+            base.Initialize(world);
+
+            World.MessageBus.RegisterHandler(SetTextMsg.TYPE, this);
+        }
 
         /// <summary>
         /// Draw all texts to viewport given in the parameter
@@ -78,7 +87,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Disable(EnableCap.Texture2D);
         }
 
-        public override bool HandleMsg(IEntity sender, IEntityMsg message)
+        public override bool HandleMsg(object sender, IMsg message)
         {
             switch (message.Type)
             {
@@ -117,9 +126,9 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Methods
 
-        private bool HandleSetTextMsg(IEntity sender, SetTextMsg message)
+        private bool HandleSetTextMsg(object sender, SetTextMsg message)
         {
-            var index = entities.IndexOf(sender);
+            var index = entities.IndexOf(message.Entity);
             if (index < 0)
                 return false;
 

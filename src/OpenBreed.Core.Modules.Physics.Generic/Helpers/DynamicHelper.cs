@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Modules.Physics.Components;
+using OpenBreed.Core.Modules.Physics.Systems;
 using OpenTK;
 using System;
 
@@ -21,117 +22,82 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
 
         #region Internal Methods
 
-        internal static void ResolveVsAABB(DynamicPack pack, IStaticBody staticBody, float dt)
+        internal static bool TestVsDynamic(PhysicsSystem system, DynamicPack bodyA, DynamicPack bodyB, float dt, out Vector2 projection)
         {
-            ResolveVsGridCell(pack, staticBody, dt);
+            return CollisionChecker.Check(bodyA.Position.Value, bodyA.Shape, bodyB.Position.Value, bodyB.Shape, out projection);
+        }
+
+        internal static bool TestVsStatic(PhysicsSystem system, DynamicPack bodyA, StaticPack bodyB, float dt, out Vector2 projection)
+        {
+            return CollisionChecker.Check(bodyA.Position.Value, bodyA.Shape, bodyB.Position.Value, bodyB.Shape, out projection);
         }
 
         /// <summary>
-        /// Check/Report collision with dynamic body
+        /// Resolve collision between two dynamic bodies. Simplified pseudo physics version.
         /// </summary>
-        /// <param name="dynamicBody">Dynamic body to check and report collision</param>
-        internal static void CollideVsDynamic(DynamicPack packA, DynamicPack packB)
+        /// <param name="bodyA">First dynamic body</param>
+        /// <param name="bodyB">Second dynamic body</param>
+        /// <param name="projection">Given collision projection vector</param>
+        /// <param name="dt">Delta time</param>
+        internal static void ResolveVsDynamic(DynamicPack bodyA, DynamicPack bodyB, Vector2 projection, float dt)
         {
-            packA.Entity.DebugData = new object[] {"COLLISION_PAIR", packA.Aabb.GetCenter(), packB.Aabb.GetCenter() };
-            packB.Entity.DebugData = new object[] { "COLLISION_PAIR", packA.Aabb.GetCenter(), packB.Aabb.GetCenter() };
-        }
+            bodyA.Entity.DebugData = new object[] { "COLLISION_PAIR", bodyA.Aabb.GetCenter(), bodyB.Aabb.GetCenter() };
+            bodyB.Entity.DebugData = new object[] { "COLLISION_PAIR", bodyA.Aabb.GetCenter(), bodyB.Aabb.GetCenter() };
 
-        internal static void CollideVsStatic(DynamicPack pack, IStaticBody staticBody, float dt)
-        {
-            var dynamicAabb = pack.Aabb;
+            bodyA.Position.Value += projection / 2;
+            bodyB.Position.Value -= projection / 2;
 
-            //if (!Aabb.CollidesWith(staticBody.Aabb))
-            //    return;
+            var normalA = projection.Normalized();
+            var normalB = -projection.Normalized();
 
-            //TODO: Checking/resolving collisions between actual bodies needs to be implemented
+            //find component of velocity parallel to collision normal
+            var dpA = Vector2.Dot(bodyA.Velocity.Value, normalA);
+            var dpB = Vector2.Dot(bodyB.Velocity.Value, normalB);
 
-            //NOTE: For now only Aabb boxes are being processed
-            var dPos = dynamicAabb.GetCenter();
-            var dHalfWidth = dynamicAabb.Width / 2.0f;
-            var dHalfHeight = dynamicAabb.Height / 2.0f;
-
-            var sPos = staticBody.Aabb.GetCenter();
-            var sHalfWidth = staticBody.Aabb.Width / 2.0f;
-            var sHalfHeight = staticBody.Aabb.Height / 2.0f;
-
-            var tx = sPos.X;
-            var ty = sPos.Y;
-            var txw = sHalfWidth;
-            var tyw = sHalfHeight;
-
-            var dx = dPos.X - tx;//tile->obj delta
-            var px = (txw + dHalfWidth) - Math.Abs(dx);//penetration depth in x
-
-            if (0 < px)
+            //Apply collision response forces if the object is travelling into, and not out of, the collision
+            if (dpA < 0)
             {
-                var dy = dPos.Y - ty;//tile->obj delta
-                var py = (tyw + dHalfHeight) - Math.Abs(dy);//pen depth in y
+                var corA = GENERIC_COR * bodyA.Body.CorFactor;
+                var vnA = Vector2.Multiply(normalA, dpA);
+                var vtA = bodyA.Velocity.Value - vnA;
+                bodyA.Velocity.Value = vtA - corA * vnA;
+            }
 
-                if (0 < py)
-                {
-                    //object may be colliding with tile; call tile-specific collision function
-
-                    //calculate projection vectors
-                    if (px < py)
-                    {
-                        //project in x
-                        if (dx < 0)
-                        {
-                            //project to the left
-                            px *= -1;
-                            py = 0;
-                        }
-                        else
-                        {
-                            //proj to right
-                            py = 0;
-                        }
-                    }
-                    else
-                    {
-                        //project in y
-                        if (dy < 0)
-                        {
-                            //project up
-                            px = 0;
-                            py *= -1;
-                        }
-                        else
-                        {
-                            //project down
-                            px = 0;
-                        }
-                    }
-
-                    pack.Body.Collides = true;
-
-                    pack.Body.Projection = new Vector2(px, py);
-
-                    DynamicHelper.ResolveVsAABB(pack, staticBody, dt);
-                }
+            //Apply collision response forces if the object is travelling into, and not out of, the collision
+            if (dpB < 0)
+            {
+                var corB = GENERIC_COR * bodyB.Body.CorFactor;
+                var vnB = Vector2.Multiply(normalB, dpB);
+                var vtB = bodyB.Velocity.Value - vnB;
+                bodyB.Velocity.Value = vtB - corB * vnB;
             }
         }
 
-        internal static void ResolveVsGridCell(DynamicPack pack, IStaticBody staticBody, float dt)
+        /// <summary>
+        /// Resolve collision of moving body vs static body. Simplified pseudo physics version.
+        /// </summary>
+        /// <param name="dynamicBody">Given dynamic body</param>
+        /// <param name="staticBody">Given static body</param>
+        /// <param name="projection">Given collision projection vector</param>
+        /// <param name="dt">Delta time</param>
+        internal static void ResolveVsStatic(DynamicPack dynamicBody, StaticPack staticBody, Vector2 projection, float dt)
         {
-            var projection = pack.Body.Projection;
-
-            pack.Position.Value += pack.Body.Projection;
+            dynamicBody.Position.Value += projection;
 
             var normal = projection.Normalized();
 
             //find component of velocity parallel to collision normal
-            var dp = Vector2.Dot(pack.Velocity.Value, normal);
+            var dp = Vector2.Dot(dynamicBody.Velocity.Value, normal);
 
             //Apply collision response forces if the object is travelling into, and not out of, the collision
             if (dp < 0)
             {
-                var cor = GENERIC_COR;
+                var cor = GENERIC_COR * dynamicBody.Body.CorFactor;
 
                 var vn = Vector2.Multiply(normal, dp);
-                var vt = pack.Velocity.Value - vn;
+                var vt = dynamicBody.Velocity.Value - vn;
 
-                pack.Velocity.Value = vt - cor * vn;
+                dynamicBody.Velocity.Value = vt - cor * vn;
             }
         }
 

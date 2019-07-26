@@ -10,20 +10,30 @@ using OpenBreed.Core.Common.Systems.Components;
 namespace OpenBreed.Core.Modules.Physics.Components
 {
     /// <summary>
-    /// Dynamic body
-    /// Borrowing calculations from amazing N tutorials implementation for now:
-    /// https://www.metanetsoftware.com/technique/tutorialA.html
+    /// Physical Body data
     /// </summary>
-    public class DynamicBody : IDynamicBody
+    public class Body : IBody
     {
+        /// <summary>
+        /// Coefficient of friction factor for this body.
+        /// </summary>
+        public float CofFactor { get; internal set; }
+
+        /// <summary>
+        /// Coefficient of restitution factor for this body.
+        /// </summary>
+        public float CorFactor { get; internal set; }
+
         #region Private Fields
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DynamicBody()
+        public Body(float cofFactor, float corFactor)
         {
+            CofFactor = cofFactor;
+            CorFactor = corFactor;
         }
 
         #endregion Public Constructors
@@ -51,19 +61,6 @@ namespace OpenBreed.Core.Modules.Physics.Components
         /// OldPosition used for verlet integration
         /// </summary>
         public Vector2 OldPosition { get; set; }
-
-        public Box2 Aabb
-        {
-            get
-            {
-                return new Box2();
-            }
-
-            set
-            {
-
-            }
-        }
 
         #endregion Public Properties
 

@@ -12,6 +12,7 @@ using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Modules.Physics.Components;
+using OpenBreed.Core.Common.Helpers;
 
 namespace OpenBreed.Game.Entities.Actor.States
 {
@@ -53,8 +54,8 @@ namespace OpenBreed.Game.Entities.Actor.States
         {
             thrust.Value = walkDirection * creatureMovement.Acceleration;
 
-            Entity.PostMessage(new PlayAnimMsg(animationId));
-            Entity.PostMessage(new SetTextMsg("Hero - Walking"));
+            Entity.Core.MessageBus.Enqueue(this, new PlayAnimMsg(Entity, animationId));
+            Entity.Core.MessageBus.Enqueue(this, new SetTextMsg(Entity, "Hero - Walking"));
         }
 
         public void Initialize(IEntity entity)
@@ -66,8 +67,21 @@ namespace OpenBreed.Game.Entities.Actor.States
             sprite = entity.Components.OfType<ISprite>().First();
             spriteAnimation = entity.Components.OfType<Animator<int>>().First();
 
-            entity.HandleSystemEvent = HandleSystemEvent;
+
+            Entity.Subscribe(FrameChangedEvent<int>.TYPE, OnFrameChanged);
+            Entity.Subscribe(ControlDirectionChangedEvent.TYPE, OnControlDirectionChanged);
         }
+
+        private void OnFrameChanged(object sender, IEvent e)
+        {
+            HandleFrameChangeEvent((FrameChangedEvent<int>)e);
+        }
+
+        private void OnControlDirectionChanged(object sender, IEvent e)
+        {
+            HandleControlDirectionChangedEvent((ControlDirectionChangedEvent)e);
+        }
+
 
         public void LeaveState()
         {
@@ -130,32 +144,17 @@ namespace OpenBreed.Game.Entities.Actor.States
 
         #region Private Methods
 
-        private void HandleSystemEvent(IWorldSystem system, ISystemEvent systemEvent)
-        {
-            switch (systemEvent.Type)
-            {
-                case FrameChangedEvent<int>.TYPE:
-                    HandleFrameChangeEvent(system, (FrameChangedEvent<int>)systemEvent);
-                    break;
-                case ControlDirectionChangedEvent.TYPE:
-                    HandleControlDirectionChangedEvent(system, (ControlDirectionChangedEvent)systemEvent);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void HandleFrameChangeEvent(IWorldSystem system, FrameChangedEvent<int> systemEvent)
+        private void HandleFrameChangeEvent(FrameChangedEvent<int> systemEvent)
         {
             sprite.ImageId = systemEvent.Frame;
         }
 
-        private void HandleControlDirectionChangedEvent(IWorldSystem system, ControlDirectionChangedEvent systemEvent)
+        private void HandleControlDirectionChangedEvent(ControlDirectionChangedEvent systemEvent)
         {
             if (systemEvent.Direction != Vector2.Zero)
-                Entity.PostMessage(new StateChangeMsg("Walk", systemEvent.Direction));
+                Entity.PostMsg(new StateChangeMsg(Entity, "Walk", systemEvent.Direction));
             else
-                Entity.PostMessage(new StateChangeMsg("Stop"));
+                Entity.PostMsg(new StateChangeMsg(Entity, "Stop"));
         }
 
         #endregion Private Methods

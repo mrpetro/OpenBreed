@@ -10,6 +10,7 @@ using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenTK;
 using System.Linq;
 using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Common.Helpers;
 
 namespace OpenBreed.Game.Components.States
 {
@@ -42,14 +43,12 @@ namespace OpenBreed.Game.Components.States
         public void EnterState()
         {
             //Entity.PostMessage(new ChangeTileMsg(tileId));
-            Entity.PostMessage(new SetTextMsg("Door - Opened"));
+            Entity.Core.MessageBus.Enqueue(this, new SetTextMsg(Entity, "Door - Opened"));
         }
 
         public void Initialize(IEntity entity)
         {
             Entity = entity;
-
-            entity.HandleSystemEvent = HandleSystemEvent;
         }
 
         public void LeaveState()
@@ -77,17 +76,5 @@ namespace OpenBreed.Game.Components.States
 
         #endregion Public Methods
 
-        #region Private Methods
-
-        private void HandleSystemEvent(IWorldSystem system, ISystemEvent systemEvent)
-        {
-            switch (systemEvent.Type)
-            {
-                default:
-                    break;
-            }
-        }
-
-        #endregion Private Methods
     }
 }

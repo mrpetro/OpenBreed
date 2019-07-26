@@ -1,7 +1,8 @@
-﻿using OpenBreed.Core.Common.Systems;
+﻿using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Extensions;
-using OpenBreed.Core.Modules.Animation.Systems;
+using OpenBreed.Core.States;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,6 @@ using System.Linq;
 
 namespace OpenBreed.Core.Common
 {
-    public delegate void SystemEventDelegate(ISystemEvent systemEvent);
-
     /// <summary>
     /// World class which contains systems and entities
     /// </summary>
@@ -41,6 +40,9 @@ namespace OpenBreed.Core.Common
             Core = core;
             Entities = new ReadOnlyCollection<IEntity>(entities);
             Systems = new ReadOnlyCollection<IWorldSystem>(systems);
+
+            MessageBus = new WorldMessageBus(this);
+            MessageBus.RegisterHandler(StateChangeMsg.TYPE, new StateChangeMsgHandler(this));
         }
 
         #endregion Protected Constructors
@@ -64,9 +66,9 @@ namespace OpenBreed.Core.Common
         }
 
         public ICore Core { get; }
-
         public ReadOnlyCollection<IEntity> Entities { get; }
         public ReadOnlyCollection<IWorldSystem> Systems { get; }
+        public WorldMessageBus MessageBus { get; }
 
         #endregion Public Properties
 

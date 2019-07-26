@@ -104,16 +104,16 @@ namespace OpenBreed.Game.Entities.Actor
             actor.Add(Thrust.Create(0, 0));
             actor.Add(Velocity.Create(0, 0));
             actor.Add(Direction.Create(1, 0));
-            actor.Add(new AxisAlignedBoxShape(32, 32));
+            actor.Add(new AxisAlignedBoxShape(-16, -16, 32, 32));
             actor.Add(new Motion());
-            actor.Add(new DynamicBody());
+            actor.Add(new Body(1.0f, 0.0f));
 
             return actor;
         }
 
         public static StateMachine CreateStateMachine(IEntity entity)
         {
-            var stateMachine = new StateMachine(entity);
+            var stateMachine = entity.AddStateMachine();
 
             stateMachine.AddState(new StandingState("Standing_Right", "STANDING_RIGHT", new Vector2(1, 0)));
             stateMachine.AddState(new StandingState("Standing_Right_Down", "STANDING_RIGHT_DOWN", new Vector2(1, -1)));

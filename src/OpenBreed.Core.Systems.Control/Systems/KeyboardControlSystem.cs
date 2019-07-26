@@ -84,7 +84,8 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
                 return;
 
             control.Direction = direction;
-            entity.HandleSystemEvent?.Invoke(this, new ControlDirectionChangedEvent(control.Direction));
+
+            entity.RaiseEvent(new ControlDirectionChangedEvent(control.Direction));
         }
 
         #endregion Private Methods

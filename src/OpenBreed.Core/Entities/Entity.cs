@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.States;
 using System;
@@ -32,6 +33,8 @@ namespace OpenBreed.Core.Entities
 
         public ReadOnlyCollection<IEntityComponent> Components { get; }
 
+        public StateMachine StateMachine { get; private set; }
+
         public ICore Core { get; }
 
         public World World { get; private set; }
@@ -40,26 +43,37 @@ namespace OpenBreed.Core.Entities
 
         public object DebugData { get; set; }
 
-        public EntityPerform PerformDelegate { get; set; }
-
-        public SystemEventDelegate HandleSystemEvent { get; set; }
-
         #endregion Public Properties
 
         #region Public Methods
 
-        public void PostMessage(IEntityMsg message)
+        public StateMachine AddStateMachine()
         {
-            if (message.Type == StateChangeMsg.TYPE && PerformDelegate != null)
-            {
-                var stateChangeMsg = (StateChangeMsg)message;
-                PerformDelegate.Invoke(stateChangeMsg.StateId, stateChangeMsg.Args);
-            }
-            else
-            {
-                if (World != null)
-                    World.PostMsg(this, message);
-            }
+            if (StateMachine != null)
+                throw new InvalidOperationException("State machine added to entity.");
+
+            StateMachine = new StateMachine(this);
+            return StateMachine;
+        }
+
+        public void PostMsg(IEntityMsg msg)
+        {
+            Core.MessageBus.Enqueue(this, msg);
+        }
+
+        public void RaiseEvent(IEvent ev)
+        {
+            Core.EventBus.Enqueue(this, ev);
+        }
+
+        public void Subscribe(string eventType, Action<object, IEvent> callback)
+        {
+            Core.EventBus.Subscribe(eventType, callback);
+        }
+
+        public void Unsubscribe(string eventType, Action<object, IEvent> callback)
+        {
+            Core.EventBus.Unsubscribe(eventType, callback);
         }
 
         public void Add(IEntityComponent component)
@@ -88,9 +102,8 @@ namespace OpenBreed.Core.Entities
 
         internal void Deinitialize()
         {
-            //Deinitialize all entity components
-            //for (int i = 0; i < Components.Count; i++)
-            //    Components[i].Deinitialize(this);
+            if (StateMachine != null)
+                StateMachine.Deinitialize();
 
             //Forget the world in which entity was
             World = null;
@@ -101,9 +114,8 @@ namespace OpenBreed.Core.Entities
             //Remember in what world entity is
             World = world;
 
-            //Initialize all entity components
-            //for (int i = 0; i < Components.Count; i++)
-            //    Components[i].Initialize(this);
+            if (StateMachine != null)
+                StateMachine.Initialize();
         }
 
         #endregion Internal Methods

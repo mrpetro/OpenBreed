@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Entities;
+﻿using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Entities;
 
 namespace OpenBreed.Core.Modules.Rendering.Messages
 {
@@ -12,8 +13,9 @@ namespace OpenBreed.Core.Modules.Rendering.Messages
 
         #region Public Constructors
 
-        public SetTextMsg(string text)
+        public SetTextMsg(IEntity entity, string text)
         {
+            Entity = entity;
             Text = text;
         }
 
@@ -21,6 +23,7 @@ namespace OpenBreed.Core.Modules.Rendering.Messages
 
         #region Public Properties
 
+        public IEntity Entity { get; }
         public string Type { get { return TYPE; } }
         public object Data { get { return Text; } }
         public string Text { get; }

@@ -10,6 +10,7 @@ using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenTK;
 using System.Linq;
 using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Common.Helpers;
 
 namespace OpenBreed.Game.Components.States
 {
@@ -44,8 +45,8 @@ namespace OpenBreed.Game.Components.States
 
         public void EnterState()
         {
-            Entity.PostMessage(new PlayAnimMsg(animationId));
-            Entity.PostMessage(new SetTextMsg("Door - Closing"));
+            Entity.Core.MessageBus.Enqueue(this, new PlayAnimMsg(Entity, animationId));
+            Entity.Core.MessageBus.Enqueue(this, new SetTextMsg(Entity, "Door - Closing"));
         }
 
         public void Initialize(IEntity entity)
@@ -54,7 +55,6 @@ namespace OpenBreed.Game.Components.States
             sprite = entity.Components.OfType<ISprite>().First();
             spriteAnimation = entity.Components.OfType<Animator<int>>().First();
 
-            entity.HandleSystemEvent = HandleSystemEvent;
         }
 
         public void LeaveState()
@@ -82,36 +82,5 @@ namespace OpenBreed.Game.Components.States
 
         #endregion Public Methods
 
-        #region Private Methods
-
-        private void HandleSystemEvent(IWorldSystem system, ISystemEvent systemEvent)
-        {
-            switch (systemEvent.Type)
-            {
-                case FrameChangedEvent<int>.TYPE:
-                    HandleFrameChangeEvent(system, (FrameChangedEvent<int>)systemEvent);
-                    break;
-                case ControlDirectionChangedEvent.TYPE:
-                    HandleControlDirectionChangedEvent(system, (ControlDirectionChangedEvent)systemEvent);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void HandleFrameChangeEvent(IWorldSystem system, FrameChangedEvent<int> systemEvent)
-        {
-            sprite.ImageId = systemEvent.Frame;
-        }
-
-        private void HandleControlDirectionChangedEvent(IWorldSystem system, ControlDirectionChangedEvent systemEvent)
-        {
-            if (systemEvent.Direction != Vector2.Zero)
-                Entity.PostMessage(new StateChangeMsg("Walk", systemEvent.Direction));
-            else
-                Entity.PostMessage(new StateChangeMsg("Stop"));
-        }
-
-        #endregion Private Methods
     }
 }

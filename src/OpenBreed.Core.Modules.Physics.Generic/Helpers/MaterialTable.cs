@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Core.Entities
+namespace OpenBreed.Core.Modules.Physics.Helpers
 {
-    public interface IEntityMsg
+    class MaterialTable
     {
-        string Type { get; }
-        object Data { get; }
     }
 }
