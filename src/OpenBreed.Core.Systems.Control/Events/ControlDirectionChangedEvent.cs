@@ -1,10 +1,9 @@
 ﻿using OpenBreed.Core.Common.Helpers;
-using OpenBreed.Core.Entities;
 using OpenTK;
 
 namespace OpenBreed.Core.Modules.Animation.Systems.Control.Events
 {
-    public class ControlDirectionChangedEvent : ISystemEvent
+    public class ControlDirectionChangedEvent : IEvent
     {
         #region Public Fields
 
@@ -25,7 +24,6 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Events
 
         public Vector2 Direction { get; }
         public string Type { get { return TYPE; } }
-        public object Data { get { return Direction; } }
 
         #endregion Public Properties
     }

@@ -35,8 +35,8 @@ namespace OpenBreed.Game.Entities.Actor.States
         {
             thrust.Value = Vector2.Zero;
 
-            Entity.Core.MessageBus.PostMsg(this, new PlayAnimMsg(Entity, animationId));
-            Entity.Core.MessageBus.PostMsg(this, new SetTextMsg(Entity, "Hero - Standing"));
+            Entity.Core.MessageBus.Enqueue(this, new PlayAnimMsg(Entity, animationId));
+            Entity.Core.MessageBus.Enqueue(this, new SetTextMsg(Entity, "Hero - Standing"));
         }
 
         public void Initialize(IEntity entity)

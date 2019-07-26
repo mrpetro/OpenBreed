@@ -11,8 +11,6 @@ using System.Linq;
 
 namespace OpenBreed.Core.Common
 {
-    public delegate void SystemEventDelegate(ISystemEvent systemEvent);
-
     /// <summary>
     /// World class which contains systems and entities
     /// </summary>
@@ -88,10 +86,6 @@ namespace OpenBreed.Core.Common
                 throw new InvalidOperationException("Entity can't exist in more than one world.");
 
             toAdd.Add(entity);
-        }
-
-        public void RaiseSystemEvent(IWorldSystem system, ISystemEvent systemEvent)
-        {
         }
 
         public void PostMsg(IEntity sender, IEntityMsg entityMsg)

@@ -95,9 +95,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             {
                 animator.Frame = newFrame;
 
-                World.RaiseSystemEvent(this, new FrameChangedEvent<T>(animator.Frame));
-
-                entities[index].HandleSystemEvent?.Invoke(this, new FrameChangedEvent<T>(animator.Frame));
+                entities[index].RaiseEvent(new FrameChangedEvent<T>(animator.Frame));
             }
         }
 

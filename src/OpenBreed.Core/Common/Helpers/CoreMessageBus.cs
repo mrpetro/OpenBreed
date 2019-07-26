@@ -1,7 +1,4 @@
-﻿using OpenBreed.Core.Common.Helpers;
-using OpenBreed.Core.Entities;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace OpenBreed.Core.Common.Helpers
@@ -9,6 +6,8 @@ namespace OpenBreed.Core.Common.Helpers
     public class CoreMessageBus
     {
         #region Private Fields
+
+        private readonly Queue<MsgData> queue = new Queue<MsgData>();
 
         private Dictionary<string, IMsgHandler> handlers = new Dictionary<string, IMsgHandler>();
 
@@ -31,16 +30,34 @@ namespace OpenBreed.Core.Common.Helpers
 
         #region Public Methods
 
+        public void Enqueue(object sender, IMsg msg)
+        {
+            queue.Enqueue(new MsgData(sender, msg));
+        }
+
+        public void PostEnqueued()
+        {
+            while (queue.Count > 0)
+            {
+                var ed = queue.Dequeue();
+                Post(ed.Sender, ed.Msg);
+            }
+        }
+
         public void RegisterHandler(string msgType, IMsgHandler msgHandler)
         {
             handlers.Add(msgType, msgHandler);
         }
 
-        public void PostMsg(object sender, IMsg msg)
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void Post(object sender, IMsg msg)
         {
             if (msg is IEntityMsg)
             {
-                PostEntityMsg(sender, (IEntityMsg)msg);
+                Post(sender, (IEntityMsg)msg);
                 return;
             }
 
@@ -49,7 +66,7 @@ namespace OpenBreed.Core.Common.Helpers
                 handler.HandleMsg(sender, msg);
         }
 
-        private void PostEntityMsg(object sender, IEntityMsg msg)
+        private void Post(object sender, IEntityMsg msg)
         {
             Debug.Assert(msg != null);
             Debug.Assert(msg.Entity != null);
@@ -58,6 +75,30 @@ namespace OpenBreed.Core.Common.Helpers
             msg.Entity.World.MessageBus.HandleMsg(sender, msg);
         }
 
-        #endregion Public Methods
+        #endregion Private Methods
+
+        #region Private Structs
+
+        private struct MsgData
+        {
+            #region Internal Fields
+
+            internal object Sender;
+            internal IMsg Msg;
+
+            #endregion Internal Fields
+
+            #region Internal Constructors
+
+            internal MsgData(object sender, IMsg msg)
+            {
+                Sender = sender;
+                Msg = msg;
+            }
+
+            #endregion Internal Constructors
+        }
+
+        #endregion Private Structs
     }
 }

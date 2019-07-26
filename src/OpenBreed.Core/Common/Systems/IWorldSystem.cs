@@ -45,12 +45,6 @@ namespace OpenBreed.Core.Common.Systems
         /// <returns>True if message was handled, false otherwise</returns>
         bool HandleMsg(object sender, IMsg message);
 
-        ///// <summary>
-        ///// Post system event 
-        ///// </summary>
-        ///// <param name="systemEvent">System event to be posted</param>
-        //void PostEvent(ISystemEvent systemEvent);
-
         #endregion Public Methods
     }
 }

@@ -29,8 +29,8 @@ namespace OpenBreed.Game.Components.States
 
         public void EnterState()
         {
-            Entity.Core.MessageBus.PostMsg(this, new PlayAnimMsg(Entity, animationId));
-            Entity.Core.MessageBus.PostMsg(this, new SetTextMsg(Entity, "Door - Opening"));
+            Entity.Core.MessageBus.Enqueue(this, new PlayAnimMsg(Entity, animationId));
+            Entity.Core.MessageBus.Enqueue(this, new SetTextMsg(Entity, "Door - Opening"));
         }
 
         public void Initialize(IEntity entity)

@@ -1,9 +1,8 @@
 ﻿using OpenBreed.Core.Common.Helpers;
-using OpenBreed.Core.Entities;
 
 namespace OpenBreed.Core.Modules.Animation.Events
 {
-    public class FrameChangedEvent<T> : ISystemEvent
+    public class FrameChangedEvent<T> : IEvent
     {
         #region Public Fields
 
@@ -24,7 +23,6 @@ namespace OpenBreed.Core.Modules.Animation.Events
 
         public T Frame { get; }
         public string Type { get { return TYPE; } }
-        public object Data { get { return Frame; } }
 
         #endregion Public Properties
     }

@@ -142,9 +142,5 @@ namespace OpenBreed.Core.Common.Systems
 
         #endregion Protected Methods
 
-        //public void PostEvent(ISystemEvent systemEvent)
-        //{
-        //    World.PostEvent(this, systemEvent);
-        //}
     }
 }

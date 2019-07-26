@@ -186,6 +186,8 @@ namespace OpenBreed.Game
         {
             base.OnUpdateFrame(e);
 
+            //Post messages which were enqueued in previous frame
+            MessageBus.PostEnqueued();
             //Raise events which were enqueued in previous frame
             EventBus.RaiseEnqueued();
 

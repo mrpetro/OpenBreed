@@ -43,8 +43,6 @@ namespace OpenBreed.Core.Entities
 
         public object DebugData { get; set; }
 
-        public SystemEventDelegate HandleSystemEvent { get; set; }
-
         #endregion Public Properties
 
         #region Public Methods
@@ -60,7 +58,22 @@ namespace OpenBreed.Core.Entities
 
         public void PostMsg(IEntityMsg msg)
         {
-            Core.MessageBus.PostMsg(this, msg);
+            Core.MessageBus.Enqueue(this, msg);
+        }
+
+        public void RaiseEvent(IEvent ev)
+        {
+            Core.EventBus.Enqueue(this, ev);
+        }
+
+        public void Subscribe(string eventType, Action<object, IEvent> callback)
+        {
+            Core.EventBus.Subscribe(eventType, callback);
+        }
+
+        public void Unsubscribe(string eventType, Action<object, IEvent> callback)
+        {
+            Core.EventBus.Unsubscribe(eventType, callback);
         }
 
         public void Add(IEntityComponent component)

@@ -45,8 +45,8 @@ namespace OpenBreed.Game.Components.States
 
         public void EnterState()
         {
-            Entity.Core.MessageBus.PostMsg(this, new PlayAnimMsg(Entity, animationId));
-            Entity.Core.MessageBus.PostMsg(this, new SetTextMsg(Entity, "Door - Closing"));
+            Entity.Core.MessageBus.Enqueue(this, new PlayAnimMsg(Entity, animationId));
+            Entity.Core.MessageBus.Enqueue(this, new SetTextMsg(Entity, "Door - Closing"));
         }
 
         public void Initialize(IEntity entity)
@@ -55,7 +55,6 @@ namespace OpenBreed.Game.Components.States
             sprite = entity.Components.OfType<ISprite>().First();
             spriteAnimation = entity.Components.OfType<Animator<int>>().First();
 
-            entity.HandleSystemEvent = HandleSystemEvent;
         }
 
         public void LeaveState()
@@ -83,36 +82,5 @@ namespace OpenBreed.Game.Components.States
 
         #endregion Public Methods
 
-        #region Private Methods
-
-        private void HandleSystemEvent(IWorldSystem system, ISystemEvent systemEvent)
-        {
-            switch (systemEvent.Type)
-            {
-                case FrameChangedEvent<int>.TYPE:
-                    HandleFrameChangeEvent(system, (FrameChangedEvent<int>)systemEvent);
-                    break;
-                case ControlDirectionChangedEvent.TYPE:
-                    HandleControlDirectionChangedEvent(system, (ControlDirectionChangedEvent)systemEvent);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void HandleFrameChangeEvent(IWorldSystem system, FrameChangedEvent<int> systemEvent)
-        {
-            sprite.ImageId = systemEvent.Frame;
-        }
-
-        private void HandleControlDirectionChangedEvent(IWorldSystem system, ControlDirectionChangedEvent systemEvent)
-        {
-            if (systemEvent.Direction != Vector2.Zero)
-                Entity.PostMsg(new StateChangeMsg(Entity, "Walk", systemEvent.Direction));
-            else
-                Entity.PostMsg(new StateChangeMsg(Entity, "Stop"));
-        }
-
-        #endregion Private Methods
     }
 }

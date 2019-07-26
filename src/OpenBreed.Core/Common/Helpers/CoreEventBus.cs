@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
 
 namespace OpenBreed.Core.Common.Helpers
 {
@@ -7,7 +7,8 @@ namespace OpenBreed.Core.Common.Helpers
     {
         #region Private Fields
 
-        private readonly Queue<EventData> queue = new Queue<EventData>();
+        private readonly Queue<EventSubscription> queue = new Queue<EventSubscription>();
+        private Dictionary<string, List<Action<object, IEvent>>> listeners = new Dictionary<string, List<Action<object, IEvent>>>();
 
         #endregion Private Fields
 
@@ -30,7 +31,7 @@ namespace OpenBreed.Core.Common.Helpers
 
         public void Enqueue(object sender, IEvent e)
         {
-            queue.Enqueue(new EventData(sender, e));
+            queue.Enqueue(new EventSubscription(sender, e));
         }
 
         public void RaiseEnqueued()
@@ -38,28 +39,50 @@ namespace OpenBreed.Core.Common.Helpers
             while (queue.Count > 0)
             {
                 var ed = queue.Dequeue();
-                Raise(ed.Sender, ed.Event);
+                NotifyListeners(ed.Sender, ed.Event);
             }
         }
 
-        public void Raise(object sender, IEvent ev)
+        public void Subscribe(string eventType, Action<object, IEvent> callback)
         {
-            //if (ev is IEvent)
-            //{
-            //    PostEntityMsg(sender, (IEntityMsg)ev);
-            //    return;
-            //}
+            List<Action<object, IEvent>> callbacks = null;
 
-            //IMsgHandler handler = null;
-            //if (handlers.TryGetValue(ev.Type, out handler))
-            //    handler.HandleMsg(sender, ev);
+            if (!listeners.TryGetValue(eventType, out callbacks))
+            {
+                callbacks = new List<Action<object, IEvent>>();
+                listeners.Add(eventType, callbacks);
+            }
+
+            callbacks.Add(callback);
+        }
+
+        public void Unsubscribe(string eventType, Action<object, IEvent> callback)
+        {
+            List<Action<object, IEvent>> callbacks = null;
+
+            if (!listeners.TryGetValue(eventType, out callbacks))
+                return;
+
+            callbacks.Remove(callback);
         }
 
         #endregion Public Methods
 
+        #region Private Methods
+
+        private void NotifyListeners(object sender, IEvent ev)
+        {
+            List<Action<object, IEvent>> callbacks = null;
+
+            if (listeners.TryGetValue(ev.Type, out callbacks))
+                callbacks.ForEach(item => item(sender, ev));
+        }
+
+        #endregion Private Methods
+
         #region Private Structs
 
-        private struct EventData
+        private struct EventSubscription
         {
             #region Internal Fields
 
@@ -70,7 +93,7 @@ namespace OpenBreed.Core.Common.Helpers
 
             #region Internal Constructors
 
-            internal EventData(object sender, IEvent e)
+            internal EventSubscription(object sender, IEvent e)
             {
                 Sender = sender;
                 Event = e;

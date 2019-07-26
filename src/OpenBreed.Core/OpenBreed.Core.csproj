@@ -65,7 +65,6 @@
     <Compile Include="Common\Helpers\StateChangeMsgHandler.cs" />
     <Compile Include="Common\Systems\GroupSystem.cs" />
     <Compile Include="CoreTools.cs" />
-    <Compile Include="Common\Helpers\ISystemEvent.cs" />
     <Compile Include="Common\Helpers\IEntityMsg.cs" />
     <Compile Include="Common\Helpers\WorldMessageBus.cs" />
     <Compile Include="Common\Helpers\CoreMessageBus.cs" />
