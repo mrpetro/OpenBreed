@@ -3,20 +3,19 @@ using OpenBreed.Core.Entities;
 
 namespace OpenBreed.Core.Modules.Rendering.Messages
 {
-    public struct SetTextMsg : IEntityMsg
+    public struct SpriteOnMsg : IEntityMsg
     {
         #region Public Fields
 
-        public const string TYPE = "SET_TEXT";
+        public const string TYPE = "SPRITE_ON";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public SetTextMsg(IEntity entity, string text)
+        public SpriteOnMsg(IEntity entity)
         {
             Entity = entity;
-            Text = text;
         }
 
         #endregion Public Constructors
@@ -25,8 +24,6 @@ namespace OpenBreed.Core.Modules.Rendering.Messages
 
         public IEntity Entity { get; }
         public string Type { get { return TYPE; } }
-        public object Data { get { return Text; } }
-        public string Text { get; }
 
         #endregion Public Properties
     }

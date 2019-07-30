@@ -59,6 +59,7 @@
     <Compile Include="Helpers\FontMan.cs" />
     <Compile Include="Helpers\RenderTools.cs" />
     <Compile Include="Helpers\SpriteAtlas.cs" />
+    <Compile Include="Helpers\SpritePack.cs" />
     <Compile Include="Helpers\Texture.cs" />
     <Compile Include="Helpers\TileAtlas.cs" />
     <Compile Include="Helpers\SpriteMan.cs" />
@@ -66,7 +67,10 @@
     <Compile Include="Helpers\Vertex.cs" />
     <Compile Include="Helpers\Viewport.cs" />
     <Compile Include="Helpers\ViewportMan.cs" />
-    <Compile Include="Messages\SetTextMsg.cs" />
+    <Compile Include="Messages\SpriteOnMsg.cs" />
+    <Compile Include="Messages\SpriteOffMsg.cs" />
+    <Compile Include="Messages\TileSetMsg.cs" />
+    <Compile Include="Messages\TextSetMsg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OpenGLModule.cs" />
     <Compile Include="Helpers\TextureMan.cs" />

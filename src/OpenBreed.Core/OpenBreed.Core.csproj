@@ -69,6 +69,7 @@
     <Compile Include="Common\Helpers\WorldMessageBus.cs" />
     <Compile Include="Common\Helpers\CoreMessageBus.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="ILogMan.cs" />
     <Compile Include="InputsMan.cs" />
     <Compile Include="Modules\Animation\Helpers\IAnimationData.cs" />
     <Compile Include="Modules\Animation\Helpers\IAnimMan.cs" />

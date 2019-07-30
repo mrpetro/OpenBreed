@@ -60,10 +60,11 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             animator.Paused = true;
         }
 
-        public void Stop(Animator<T> animator)
+        public void Stop(IEntity entity, Animator<T> animator)
         {
             animator.Position = 0.0f;
             animator.Paused = true;
+            RaiseAnimStoppedEvent(entity, animator);
         }
 
         public void Animate(int index, float dt)
@@ -84,7 +85,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
                     animator.Position = animator.Position - animator.Data.Length;
                 else
                 {
-                    Stop(animator);
+                    Stop(entities[index], animator);
                     return;
                 }
             }
@@ -94,8 +95,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             if (!animator.Frame.Equals(newFrame))
             {
                 animator.Frame = newFrame;
-
-                entities[index].RaiseEvent(new FrameChangedEvent<T>(animator.Frame));
+                RaiseAnimChangedEvent(entities[index], animator);
             }
         }
 
@@ -142,6 +142,16 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         #region Private Methods
 
+        private void RaiseAnimStoppedEvent(IEntity entity, Animator<T> animator)
+        {
+            entity.RaiseEvent(new AnimStoppedEvent<T>(animator));
+        }
+
+        private void RaiseAnimChangedEvent(IEntity entity, Animator<T> animator)
+        {
+            entity.RaiseEvent(new AnimChangedEvent<T>(animator.Frame));
+        }
+
         private bool HandlePauseAnimMsg(object sender, PauseAnimMsg message)
         {
             var index = entities.IndexOf(message.Entity);
@@ -159,7 +169,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             if (index < 0)
                 return false;
 
-            Stop(animatorComps[index]);
+            Stop(message.Entity, animatorComps[index]);
 
             return true;
         }
@@ -170,7 +180,12 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             if (index < 0)
                 return false;
 
-            Play(animatorComps[index], (IAnimationData<T>)Core.Animations.Anims.GetByName(message.Id));
+            var animData = (IAnimationData<T>)Core.Animations.Anims.GetByName(message.Id);
+
+            if (animData == null)
+                Core.Logging.Warning($"Animation with ID = '{message.Id}' not found.");
+
+            Play(animatorComps[index], animData);
 
             return true;
         }

@@ -1,27 +1,28 @@
 ﻿using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Entities;
 
-namespace OpenBreed.Core.Modules.Animation.Events
+namespace OpenBreed.Core.Modules.Rendering.Messages
 {
-    public class FrameChangedEvent<T> : IEvent
+    public struct SpriteOffMsg : IEntityMsg
     {
         #region Public Fields
 
-        public const string TYPE = "FRAME_CHANGED";
+        public const string TYPE = "SPRITE_OFF";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public FrameChangedEvent(T frame)
+        public SpriteOffMsg(IEntity entity)
         {
-            Frame = frame;
+            Entity = entity;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public T Frame { get; }
+        public IEntity Entity { get; }
         public string Type { get { return TYPE; } }
 
         #endregion Public Properties

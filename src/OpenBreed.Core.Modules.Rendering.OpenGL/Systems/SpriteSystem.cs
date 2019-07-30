@@ -1,9 +1,12 @@
-﻿using OpenBreed.Core.Common.Systems;
+﻿using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
@@ -13,14 +16,12 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class SpriteSystem : WorldSystem, ISpriteSystem
+    public class SpriteSystem : WorldSystem, ISpriteSystem, IMsgHandler
     {
         #region Private Fields
 
-        private readonly List<IEntity> entities = new List<IEntity>();
-        private readonly List<ISprite> spriteComps = new List<ISprite>();
-        private readonly List<IPosition> positionComps = new List<IPosition>();
-        private readonly List<IBody> debugComps = new List<IBody>();
+        private readonly List<SpritePack> inactive = new List<SpritePack>();
+        private readonly List<SpritePack> active = new List<SpritePack>();
 
         #endregion Private Fields
 
@@ -35,6 +36,55 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         #endregion Public Constructors
 
         #region Public Methods
+
+        public override void Initialize(World world)
+        {
+            base.Initialize(world);
+
+            World.MessageBus.RegisterHandler(SpriteOnMsg.TYPE, this);
+            World.MessageBus.RegisterHandler(SpriteOffMsg.TYPE, this);
+        }
+
+        public override bool HandleMsg(object sender, IMsg msg)
+        {
+            switch (msg.Type)
+            {
+                case SpriteOnMsg.TYPE:
+                    return HandleSpriteOnMsg(sender, (SpriteOnMsg)msg);
+                case SpriteOffMsg.TYPE:
+                    return HandleSpriteOffMsg(sender, (SpriteOffMsg)msg);
+
+                default:
+                    return false;
+            }
+        }
+
+        private bool HandleSpriteOnMsg(object sender, SpriteOnMsg msg)
+        {
+            var toActivate = inactive.FirstOrDefault(item => item.Entity == msg.Entity);
+
+            if (toActivate != null)
+            {
+                active.Add(toActivate);
+                inactive.Remove(toActivate);
+            }
+
+            return true;
+        }
+
+        private bool HandleSpriteOffMsg(object sender, SpriteOffMsg msg)
+        {
+            var toDeactivate = active.FirstOrDefault(item => item.Entity == msg.Entity);
+
+            if (toDeactivate != null)
+            {
+                inactive.Add(toDeactivate);
+                active.Remove(toDeactivate);
+            }
+
+            return true;
+        }
+
 
         /// <summary>
         /// This will draw all tiles to viewport given in the parameter
@@ -52,7 +102,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.AlphaFunc(AlphaFunction.Greater, 0.0f);
             GL.Enable(EnableCap.Texture2D);
 
-            for (int i = 0; i < entities.Count; i++)
+            for (int i = 0; i < active.Count; i++)
                 DrawEntitySprite(viewport, i);
 
             GL.Disable(EnableCap.Texture2D);
@@ -66,19 +116,18 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
         public void DrawEntitySprite(IViewport viewport, int index)
         {
-            var entity = entities[index];
-            var sprite = spriteComps[index];
-            var position = positionComps[index];
-            var dynamic = debugComps[index];
-            Draw(dynamic, viewport);
+            var pack = active[index];
+
+            //if(dynamic != null)
+            //    Draw(dynamic, viewport);
 
             GL.PushMatrix();
 
-            GL.Translate((int)position.Value.X, (int)position.Value.Y, 0.0f);
+            GL.Translate((int)pack.Position.Value.X, (int)pack.Position.Value.Y, 0.0f);
 
-            var spriteAtlas = Core.Rendering.Sprites.GetById(sprite.AtlasId);
-            GL.Translate(-spriteAtlas.SpriteWidth / 2, -spriteAtlas.SpriteHeight / 2, 0.0f);
-            spriteAtlas.Draw(sprite.ImageId);
+            var spriteAtlas = Core.Rendering.Sprites.GetById(pack.Sprite.AtlasId);
+            //GL.Translate(-spriteAtlas.SpriteWidth / 2, -spriteAtlas.SpriteHeight / 2, 0.0f);
+            spriteAtlas.Draw(pack.Sprite.ImageId);
 
             GL.PopMatrix();
         }
@@ -99,14 +148,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                                               item.Item2 * 16.0f + 16.0f);
                 }
             }
-
-            //if (body.Collides)
-            //{
-            //    RenderTools.DrawBox(body.Aabb, Color4.Red);
-            //    RenderTools.DrawLine(body.Aabb.GetCenter(), Vector2.Add(body.Aabb.GetCenter(), body.Projection * 10), Color4.Purple);
-            //}
-            //else
-            //    RenderTools.DrawBox(body.Aabb, Color4.Green);
         }
 
 
@@ -116,23 +157,21 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         protected override void RegisterEntity(IEntity entity)
         {
-            entities.Add(entity);
-            spriteComps.Add(entity.Components.OfType<ISprite>().First());
-            positionComps.Add(entity.Components.OfType<IPosition>().First());
-            debugComps.Add(entity.Components.OfType<IBody>().First());
+            var pack = new SpritePack(entity,
+                                      entity.Components.OfType<ISprite>().First(),
+                                      entity.Components.OfType<IPosition>().First());
+
+            active.Add(pack);
         }
 
         protected override void UnregisterEntity(IEntity entity)
         {
-            var index = entities.IndexOf(entity);
+            var pack = active.FirstOrDefault(item => item.Entity == entity);
 
-            if (index < 0)
+            if (pack == null)
                 throw new InvalidOperationException("Entity not found in this system.");
 
-            entities.RemoveAt(index);
-            spriteComps.RemoveAt(index);
-            positionComps.RemoveAt(index);
-            debugComps.RemoveAt(index);
+            active.Remove(pack);
         }
 
         #endregion Protected Methods

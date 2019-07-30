@@ -132,42 +132,40 @@ namespace OpenBreed.Core.Common
 
         internal void RegisterEntity(Entity entity)
         {
-            //Initialize the entity and add it to entities list
-            entity.Initialize(this);
-            entities.Add(entity);
-
             AddToSystems(entity);
+
+            //Initialize the entity and add it to entities list
+            entities.Add(entity);
         }
 
         internal void UnregisterEntity(Entity entity)
         {
             //Deinitialize the entity and remove it from entities list
-            entity.Deinitialize();
             entities.Remove(entity);
         }
 
         internal void Cleanup()
         {
-            if (toRemove.Any())
-            {
-                //Process entities to remove
-                for (int i = 0; i < toRemove.Count; i++)
-                    UnregisterEntity((Entity)toRemove[i]);
+            //Perform deinitialization of removed entities
+            toRemove.ForEach(item => ((Entity)item).Deinitialize());
 
-                toRemove.Clear();
-            }
+            //Process entities to remove
+            for (int i = 0; i < toRemove.Count; i++)
+                UnregisterEntity((Entity)toRemove[i]);
 
-            if (toAdd.Any())
-            {
-                //Process entities to add
-                for (int i = 0; i < toAdd.Count; i++)
-                    RegisterEntity((Entity)toAdd[i]);
+            toRemove.Clear();
 
-                toAdd.Clear();
-            }
+            //Process entities to add
+            for (int i = 0; i < toAdd.Count; i++)
+                RegisterEntity((Entity)toAdd[i]);
+
 
             //Perform cleanup on all world systems
             Systems.ForEach(item => item.Cleanup());
+
+            //Perform initialization of added entities
+            toAdd.ForEach(item => ((Entity)item).Initialize(this));
+            toAdd.Clear();
         }
 
         #endregion Internal Methods

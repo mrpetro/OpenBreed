@@ -68,6 +68,13 @@ namespace OpenBreed.Core.Entities
         void Subscribe(string eventType, Action<object, IEvent> callback);
 
         /// <summary>
+        /// Unsubscribe from particular event
+        /// </summary>
+        /// <param name="eventType">event type to unsubscribe from</param>
+        /// <param name="callback">event callback to unsubscribe</param>
+        void Unsubscribe(string eventType, Action<object, IEvent> callback);
+
+        /// <summary>
         /// Add component to entity
         /// </summary>
         /// <param name="component">Component to add</param>

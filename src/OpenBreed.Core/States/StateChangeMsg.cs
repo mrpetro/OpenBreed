@@ -26,7 +26,6 @@ namespace OpenBreed.Core.States
 
         public IEntity Entity { get; }
         public string Type { get { return TYPE; } }
-        public object Data { get { return StateId; } }
         public string StateId { get; }
         public object[] Args { get; }
 

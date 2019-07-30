@@ -41,7 +41,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             base.Initialize(world);
 
-            World.MessageBus.RegisterHandler(SetTextMsg.TYPE, this);
+            World.MessageBus.RegisterHandler(TextSetMsg.TYPE, this);
         }
 
         /// <summary>
@@ -91,8 +91,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             switch (message.Type)
             {
-                case SetTextMsg.TYPE:
-                    return HandleSetTextMsg(sender, (SetTextMsg)message);
+                case TextSetMsg.TYPE:
+                    return HandleTextSetMsg(sender, (TextSetMsg)message);
 
                 default:
                     return false;
@@ -126,7 +126,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Methods
 
-        private bool HandleSetTextMsg(object sender, SetTextMsg message)
+        private bool HandleTextSetMsg(object sender, TextSetMsg message)
         {
             var index = entities.IndexOf(message.Entity);
             if (index < 0)

@@ -1,8 +1,11 @@
-﻿using OpenBreed.Core.Common.Systems;
+﻿using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
@@ -11,7 +14,7 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TileSystem : WorldSystem, ITileSystem
+    public class TileSystem : WorldSystem, ITileSystem, IMsgHandler
     {
         #region Public Fields
 
@@ -59,6 +62,13 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Public Methods
 
+        public override void Initialize(World world)
+        {
+            base.Initialize(world);
+
+            World.MessageBus.RegisterHandler(TileSetMsg.TYPE, this);
+        }
+
         /// <summary>
         /// This will draw all tiles to viewport given in the parameter
         /// </summary>
@@ -96,9 +106,32 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Disable(EnableCap.Texture2D);
         }
 
+        public override bool HandleMsg(object sender, IMsg msg)
+        {
+            switch (msg.Type)
+            {
+                case TileSetMsg.TYPE:
+                    return HandleTileSetMsg(sender, (TileSetMsg)msg);
+
+                default:
+                    return false;
+            }
+        }
+
         #endregion Public Methods
 
         #region Protected Methods
+
+        private bool HandleTileSetMsg(object sender, TileSetMsg msg)
+        {
+            var index = Array.IndexOf(entities, msg.Entity);
+            if (index < 0)
+                return false;
+
+            tileComps[index].ImageId = msg.TileId;
+
+            return true;
+        }
 
         protected override void RegisterEntity(IEntity entity)
         {

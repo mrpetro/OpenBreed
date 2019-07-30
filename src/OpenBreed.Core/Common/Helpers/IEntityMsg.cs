@@ -9,6 +9,5 @@ namespace OpenBreed.Core.Common.Helpers
     public interface IMsg
     {
         string Type { get; }
-        object Data { get; }
     }
 }

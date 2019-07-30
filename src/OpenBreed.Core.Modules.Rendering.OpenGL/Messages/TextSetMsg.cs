@@ -1,22 +1,22 @@
 ﻿using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Entities;
 
-namespace OpenBreed.Core.Modules.Animation.Messages
+namespace OpenBreed.Core.Modules.Rendering.Messages
 {
-    public struct PauseAnimMsg : IEntityMsg
+    public struct TextSetMsg : IEntityMsg
     {
         #region Public Fields
 
-        public const string TYPE = "PAUSE_ANIM";
+        public const string TYPE = "TEXT_SET";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public PauseAnimMsg(IEntity entity, string id)
+        public TextSetMsg(IEntity entity, string text)
         {
             Entity = entity;
-            Id = id;
+            Text = text;
         }
 
         #endregion Public Constructors
@@ -25,7 +25,7 @@ namespace OpenBreed.Core.Modules.Animation.Messages
 
         public IEntity Entity { get; }
         public string Type { get { return TYPE; } }
-        public string Id { get; }
+        public string Text { get; }
 
         #endregion Public Properties
     }

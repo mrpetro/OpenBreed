@@ -62,6 +62,7 @@
     <Compile Include="Entities\Door\States\OpeningState.cs" />
     <Compile Include="Entities\Door\States\ClosingState.cs" />
     <Compile Include="Helpers\EntityMsgHandler.cs" />
+    <Compile Include="Helpers\LogMan.cs" />
     <Compile Include="Helpers\TextHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -135,6 +136,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Content\DoorSpriteSet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -22,6 +22,8 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Game.Entities.Door;
+using OpenBreed.Game.Helpers;
 
 namespace OpenBreed.Game
 {
@@ -40,11 +42,11 @@ namespace OpenBreed.Game
         {
             appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
+            Logging = new LogMan(this);
             Rendering = new OpenGLModule(this);
             Sounds = new OpenALModule(this);
             Physics = new PhysicsModule(this);
             Animations = new AnimationModule(this);
-
             Entities = new EntityMan(this);
             Inputs = new InputsMan(this);
             Worlds = new WorldMan(this);
@@ -114,6 +116,7 @@ namespace OpenBreed.Game
         public IPhysicsModule Physics { get; }
         public IAnimationModule Animations { get; }
         public EntityMan Entities { get; }
+        public ILogMan Logging { get; }
         public InputsMan Inputs { get; }
         public CoreMessageBus MessageBus { get; }
         public CoreEventBus EventBus { get; }
@@ -138,6 +141,8 @@ namespace OpenBreed.Game
         {
             base.OnLoad(e);
 
+            DoorHelper.CreateHorizontalAnimations(this);
+            DoorHelper.CreateVerticalAnimations(this);
 
             //GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.One);                  // Select The Type Of Blending
 

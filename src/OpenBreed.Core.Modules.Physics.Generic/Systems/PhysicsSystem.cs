@@ -1,8 +1,12 @@
-﻿using OpenBreed.Core.Common.Systems;
+﻿using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Components;
+using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Physics.Helpers;
+using OpenBreed.Core.Modules.Physics.Messages;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -10,14 +14,15 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Physics.Systems
 {
-    internal class PhysicsSystem : WorldSystem, IPhysicsSystem
+    internal class PhysicsSystem : WorldSystem, IPhysicsSystem, IMsgHandler
     {
         #region Private Fields
 
         private const int CELL_SIZE = 16;
 
-        private readonly List<DynamicPack> dynamicPacks = new List<DynamicPack>();
-        private List<StaticPack>[] gridStaticPacks;
+        private readonly List<DynamicPack> inactiveDynamics = new List<DynamicPack>();
+        private readonly List<DynamicPack> activeDynamics = new List<DynamicPack>();
+        private List<StaticPack>[] gridStatics;
 
         #endregion Private Fields
 
@@ -45,14 +50,77 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         #region Public Methods
 
+        public override void Initialize(World world)
+        {
+            base.Initialize(world);
+
+            World.MessageBus.RegisterHandler(BodyOnMsg.TYPE, this);
+            World.MessageBus.RegisterHandler(BodyOffMsg.TYPE, this);
+        }
+
         public void Update(float dt)
         {
             SweepAndPrune(dt);
         }
 
+        public override bool HandleMsg(object sender, IMsg msg)
+        {
+            switch (msg.Type)
+            {
+                case BodyOnMsg.TYPE:
+                    return HandleBodyOnMsg(sender, (BodyOnMsg)msg);
+                case BodyOffMsg.TYPE:
+                    return HandleBodyOffMsg(sender, (BodyOffMsg)msg);
+
+                default:
+                    return false;
+            }
+        }
+
         #endregion Public Methods
 
         #region Protected Methods
+
+        private bool HandleBodyOnMsg(object sender, BodyOnMsg msg)
+        {
+            var dynamicToActivate = inactiveDynamics.FirstOrDefault(item => item.Entity == msg.Entity);
+
+            if (dynamicToActivate != null)
+            {
+                activeDynamics.Add(dynamicToActivate);
+                inactiveDynamics.Remove(dynamicToActivate);
+                return true;
+            }
+
+            return true;
+        }
+
+        private bool HandleBodyOffMsg(object sender, BodyOffMsg msg)
+        {
+            var dynamicToDeactivate = activeDynamics.FirstOrDefault(item => item.Entity == msg.Entity);
+
+            if (dynamicToDeactivate != null)
+            {
+                inactiveDynamics.Add(dynamicToDeactivate);
+                activeDynamics.Remove(dynamicToDeactivate);
+                return true;
+            }
+
+
+            foreach (var list in gridStatics)
+            {
+                var toDeactivate = list.FirstOrDefault(item => item.Entity == msg.Entity);
+
+                if (toDeactivate != null)
+                {
+                    list.Remove(toDeactivate);
+                    return true;
+                }
+            }
+
+            return true;
+        }
+
 
         protected override void RegisterEntity(IEntity entity)
         {
@@ -74,38 +142,23 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         #region Private Methods
 
-        private void UnregisterDynamicEntity(IEntity entity)
-        {
-            var dynamic = dynamicPacks.FirstOrDefault(item => item.Entity == entity);
-
-            if (dynamic == null)
-                throw new InvalidOperationException("Entity not found in this system.");
-
-            dynamicPacks.Remove(dynamic);
-        }
-
-        private void UnregisterStaticEntity(IEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
         private void SweepAndPrune(float dt)
         {
             var xActiveList = new List<DynamicPack>();
             DynamicPack nextCollider = null;
 
-            dynamicPacks.Sort(Xcomparison);
+            activeDynamics.Sort(Xcomparison);
 
             //Clear dynamics
-            for (int i = 0; i < dynamicPacks.Count; i++)
-                dynamicPacks[i].Entity.DebugData = null;
+            for (int i = 0; i < activeDynamics.Count; i++)
+                activeDynamics[i].Entity.DebugData = null;
 
-            for (int i = 0; i < dynamicPacks.Count - 1; i++)
+            for (int i = 0; i < activeDynamics.Count - 1; i++)
             {
-                QueryStaticGrid(dynamicPacks[i], dt);
+                QueryStaticGrid(activeDynamics[i], dt);
 
-                nextCollider = dynamicPacks[i + 1];
-                xActiveList.Add(dynamicPacks[i]);
+                nextCollider = activeDynamics[i + 1];
+                xActiveList.Add(activeDynamics[i]);
 
                 for (int j = 0; j < xActiveList.Count; j++)
                 {
@@ -124,21 +177,29 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 }
             }
 
-            QueryStaticGrid(dynamicPacks.Last(), dt);
+            QueryStaticGrid(activeDynamics.Last(), dt);
         }
 
         private void TestNarrowPhaseDynamic(DynamicPack bodyA, DynamicPack bodyB, float dt)
         {
             Vector2 projection;
             if (DynamicHelper.TestVsDynamic(this, bodyA, bodyB, dt, out projection))
+            {
+                bodyA.Entity.RaiseEvent(new CollisionEvent(bodyB.Entity));
+                bodyB.Entity.RaiseEvent(new CollisionEvent(bodyA.Entity));
                 DynamicHelper.ResolveVsDynamic(bodyA, bodyB, projection, dt);
+            }
         }
 
-        private void TestNarrowPhaseStatic(DynamicPack bodyA, StaticPack staticBody, float dt)
+        private void TestNarrowPhaseStatic(DynamicPack bodyA, StaticPack bodyB, float dt)
         {
             Vector2 projection;
-            if(DynamicHelper.TestVsStatic(this, bodyA, staticBody, dt, out projection))
-                DynamicHelper.ResolveVsStatic(bodyA, staticBody, projection , dt);
+            if (DynamicHelper.TestVsStatic(this, bodyA, bodyB, dt, out projection))
+            {
+                bodyA.Entity.RaiseEvent(new CollisionEvent(bodyB.Entity));
+                bodyB.Entity.RaiseEvent(new CollisionEvent(bodyA.Entity));
+                DynamicHelper.ResolveVsStatic(bodyA, bodyB, projection, dt);
+            }
         }
 
         private void QueryStaticGrid(DynamicPack pack, float dt)
@@ -180,7 +241,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 for (int xIndex = leftIndex; xIndex < rightIndex; xIndex++)
                 {
                     pack.Body.Boxes.Add(new Tuple<int, int>(xIndex, yIndex));
-                    var collideres = gridStaticPacks[xIndex + GridWidth * yIndex];
+                    var collideres = gridStatics[xIndex + GridWidth * yIndex];
                     for (int boxIndex = 0; boxIndex < collideres.Count; boxIndex++)
                         boxesSet.Add(collideres[boxIndex]);
                 }
@@ -250,7 +311,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             if (y >= GridHeight)
                 throw new InvalidOperationException($"Grid box body Y coordinate exceeds grid height size.");
 
-            gridStaticPacks[gridIndex].Add(pack);
+            gridStatics[gridIndex].Add(pack);
         }
 
         private void RegisterDynamicEntity(IEntity entity)
@@ -261,15 +322,30 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                                       entity.Components.OfType<IVelocity>().First(),
                                       entity.Components.OfType<IShapeComponent>().First());
 
-            dynamicPacks.Add(pack);
+            activeDynamics.Add(pack);
+        }
+
+        private void UnregisterDynamicEntity(IEntity entity)
+        {
+            var dynamic = activeDynamics.FirstOrDefault(item => item.Entity == entity);
+
+            if (dynamic == null)
+                throw new InvalidOperationException("Entity not found in this system.");
+
+            activeDynamics.Remove(dynamic);
+        }
+
+        private void UnregisterStaticEntity(IEntity entity)
+        {
+            throw new NotImplementedException();
         }
 
         private void InitializeGrid()
         {
-            gridStaticPacks = new List<StaticPack>[GridWidth * GridHeight];
+            gridStatics = new List<StaticPack>[GridWidth * GridHeight];
 
-            for (int i = 0; i < gridStaticPacks.Length; i++)
-                gridStaticPacks[i] = new List<StaticPack>();
+            for (int i = 0; i < gridStatics.Length; i++)
+                gridStatics[i] = new List<StaticPack>();
         }
 
         #endregion Private Methods

@@ -47,6 +47,11 @@ namespace OpenBreed.Core
         GroupSystem CreateGroupSystem();
 
         /// <summary>
+        /// Logging manager
+        /// </summary>
+        ILogMan Logging { get; }
+
+        /// <summary>
         /// Entities manager
         /// </summary>
         EntityMan Entities { get; }
