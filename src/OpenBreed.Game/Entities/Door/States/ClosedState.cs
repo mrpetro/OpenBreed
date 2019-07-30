@@ -1,16 +1,11 @@
-﻿using OpenBreed.Core.Entities;
+﻿using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Modules.Animation.Systems;
-using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Animation.Events;
-using OpenBreed.Core.Modules.Animation.Messages;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
-using OpenTK;
 using System.Linq;
-using OpenBreed.Core.Common.Systems;
-using OpenBreed.Core.Common.Helpers;
 
 namespace OpenBreed.Game.Components.States
 {
@@ -18,16 +13,19 @@ namespace OpenBreed.Game.Components.States
     {
         #region Private Fields
 
-        private int tileId;
+        private readonly int leftTileId;
+        private readonly int rightTileId;
+        private IEntity[] doorParts;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ClosedState(string id, int tileId)
+        public ClosedState(string id, int leftTileId, int rightTileId)
         {
             Id = id;
-            this.tileId = tileId;
+            this.leftTileId = leftTileId;
+            this.rightTileId = rightTileId;
         }
 
         #endregion Public Constructors
@@ -43,32 +41,36 @@ namespace OpenBreed.Game.Components.States
 
         public void EnterState()
         {
-            //Entity.PostMessage(new ChangeTileMsg(tileId));
-            Entity.Core.MessageBus.Enqueue(this, new SetTextMsg(Entity, "Door - Closed"));
+            Entity.PostMsg(new SpriteOffMsg(Entity));
+            Entity.PostMsg(new TileSetMsg(doorParts[0], leftTileId));
+            Entity.PostMsg(new TileSetMsg(doorParts[1], rightTileId));
+
+            Entity.PostMsg(new TextSetMsg(Entity, "Door - Closed"));
+
+            foreach (var doorPart in doorParts)
+                doorPart.Subscribe(CollisionEvent.TYPE, OnCollision);
         }
 
         public void Initialize(IEntity entity)
         {
             Entity = entity;
+
+            doorParts = Entity.World.Systems.OfType<GroupSystem>().First().GetGroup(Entity).ToArray();
         }
 
         public void LeaveState()
         {
+            foreach (var doorPart in doorParts)
+                doorPart.Unsubscribe(CollisionEvent.TYPE, OnCollision);
         }
 
         public string Process(string actionName, object[] arguments)
         {
             switch (actionName)
             {
-                case "Stop":
-                    {
+                case "Open":
+                    return "Opening";
 
-                        break;
-                    }
-                case "Walk":
-                    {
-                        break;
-                    }
                 default:
                     break;
             }
@@ -77,5 +79,19 @@ namespace OpenBreed.Game.Components.States
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private void OnCollision(object sender, IEvent e)
+        {
+            HandleCollisionEvent((CollisionEvent)e);
+        }
+
+        private void HandleCollisionEvent(CollisionEvent e)
+        {
+            Entity.PostMsg(new StateChangeMsg(Entity, "Open"));
+        }
+
+        #endregion Private Methods
     }
 }

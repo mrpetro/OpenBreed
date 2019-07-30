@@ -68,12 +68,12 @@ namespace OpenBreed.Core.Entities
 
         public void Subscribe(string eventType, Action<object, IEvent> callback)
         {
-            Core.EventBus.Subscribe(eventType, callback);
+            Core.EventBus.Subscribe(this, eventType, callback);
         }
 
         public void Unsubscribe(string eventType, Action<object, IEvent> callback)
         {
-            Core.EventBus.Unsubscribe(eventType, callback);
+            Core.EventBus.Unsubscribe(this, eventType, callback);
         }
 
         public void Add(IEntityComponent component)

@@ -1,23 +1,26 @@
-﻿using OpenBreed.Core.Entities;
+﻿using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
+using OpenBreed.Core.Modules.Animation.Events;
 using OpenBreed.Core.Modules.Animation.Messages;
+using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Core.States;
-using OpenTK;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenBreed.Core.Common.Systems.Components;
 
 namespace OpenBreed.Game.Components.States
 {
     public class OpeningState : IState
     {
-        public IEntity Entity { get; private set; }
-        private Animator<int> spriteAnimation;
+        #region Private Fields
+
         private readonly string animationId;
+        private Animator<int> animator;
+        private ISprite sprite;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public OpeningState(string id, string animationId)
         {
@@ -25,55 +28,77 @@ namespace OpenBreed.Game.Components.States
             this.animationId = animationId;
         }
 
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public IEntity Entity { get; private set; }
         public string Id { get; }
+
+        #endregion Public Properties
+
+        #region Public Methods
 
         public void EnterState()
         {
-            Entity.Core.MessageBus.Enqueue(this, new PlayAnimMsg(Entity, animationId));
-            Entity.Core.MessageBus.Enqueue(this, new SetTextMsg(Entity, "Door - Opening"));
+            Entity.PostMsg(new SpriteOnMsg(Entity));
+            Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
+            Entity.PostMsg(new TextSetMsg(Entity, "Door - Opening"));
+
+            Entity.Subscribe(AnimChangedEvent<int>.TYPE, OnAnimChanged);
+            Entity.Subscribe(AnimStoppedEvent<int>.TYPE, OnAnimStopped);
         }
 
         public void Initialize(IEntity entity)
         {
             Entity = entity;
-            spriteAnimation = entity.Components.OfType<Animator<int>>().First();
+            animator = entity.Components.OfType<Animator<int>>().First();
+            sprite = entity.Components.OfType<ISprite>().First();
         }
 
         public void LeaveState()
         {
+            Entity.Unsubscribe(AnimChangedEvent<int>.TYPE, OnAnimChanged);
+            Entity.Unsubscribe(AnimStoppedEvent<int>.TYPE, OnAnimStopped);
         }
 
         public string Process(string actionName, object[] arguments)
         {
             switch (actionName)
             {
-                case "Walk":
-                    {
-                        var walkDirection = (Vector2)arguments[0];
-
-                        if (walkDirection.X == 1 && walkDirection.Y == 0)
-                            return "Walking_Right";
-                        else if (walkDirection.X == 1 && walkDirection.Y == -1)
-                            return "Walking_Right_Down";
-                        else if (walkDirection.X == 0 && walkDirection.Y == -1)
-                            return "Walking_Down";
-                        else if (walkDirection.X == -1 && walkDirection.Y == -1)
-                            return "Walking_Down_Left";
-                        else if (walkDirection.X == -1 && walkDirection.Y == 0)
-                            return "Walking_Left";
-                        else if (walkDirection.X == -1 && walkDirection.Y == 1)
-                            return "Walking_Left_Up";
-                        else if (walkDirection.X == 0 && walkDirection.Y == 1)
-                            return "Walking_Up";
-                        else if (walkDirection.X == 1 && walkDirection.Y == 1)
-                            return "Walking_Up_Right";
-                        break;
-                    }
+                case "Opened":
+                    return "Opened";
                 default:
                     break;
             }
 
             return null;
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void OnAnimChanged(object sender, IEvent e)
+        {
+            HandleAnimChangeEvent((AnimChangedEvent<int>)e);
+        }
+
+        private void OnAnimStopped(object sender, IEvent e)
+        {
+            HandleAnimStoppedEvent((AnimStoppedEvent<int>)e);
+        }
+
+        private void HandleAnimChangeEvent(AnimChangedEvent<int> e)
+        {
+            sprite.ImageId = e.Frame;
+        }
+
+        private void HandleAnimStoppedEvent(AnimStoppedEvent<int> e)
+        {
+            Entity.PostMsg(new StateChangeMsg(Entity, "Opened"));
+        }
+
+        #endregion Private Methods
     }
 }

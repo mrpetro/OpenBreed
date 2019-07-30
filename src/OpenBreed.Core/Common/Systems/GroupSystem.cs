@@ -44,6 +44,15 @@ namespace OpenBreed.Core.Common.Systems
             groupPartComps.RemoveAt(index);
         }
 
+        public IEnumerable<IEntity> GetGroup(IEntity leader)
+        {
+            for (int i = 0; i < groupPartComps.Count; i++)
+            {
+                if (groupPartComps[i].EntityId == leader.Id)
+                    yield return entities[i];
+            }
+        }
+
         public override bool HandleMsg(object sender, IMsg message)
         {
             foreach (var item in entities.Where(item => item.Id == ((IEntityMsg)message).Entity.Id))

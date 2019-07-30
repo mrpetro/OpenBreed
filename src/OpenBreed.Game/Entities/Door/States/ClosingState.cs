@@ -11,6 +11,7 @@ using OpenTK;
 using System.Linq;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Modules.Physics.Messages;
 
 namespace OpenBreed.Game.Components.States
 {
@@ -19,7 +20,8 @@ namespace OpenBreed.Game.Components.States
         #region Private Fields
 
         private readonly string animationId;
-        private Animator<int> spriteAnimation;
+        private IEntity[] doorParts;
+        private Animator<int> animator;
         private ISprite sprite;
 
         #endregion Private Fields
@@ -45,16 +47,21 @@ namespace OpenBreed.Game.Components.States
 
         public void EnterState()
         {
-            Entity.Core.MessageBus.Enqueue(this, new PlayAnimMsg(Entity, animationId));
-            Entity.Core.MessageBus.Enqueue(this, new SetTextMsg(Entity, "Door - Closing"));
+            Entity.PostMsg(new SpriteOnMsg(Entity));
+
+            foreach (var part in doorParts)
+                Entity.PostMsg(new BodyOnMsg(part));
+
+            Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
+            Entity.PostMsg(new TextSetMsg(Entity, "Door - Closing"));
         }
 
         public void Initialize(IEntity entity)
         {
             Entity = entity;
             sprite = entity.Components.OfType<ISprite>().First();
-            spriteAnimation = entity.Components.OfType<Animator<int>>().First();
-
+            animator = entity.Components.OfType<Animator<int>>().First();
+            doorParts = Entity.World.Systems.OfType<GroupSystem>().First().GetGroup(Entity).ToArray();
         }
 
         public void LeaveState()
@@ -65,14 +72,8 @@ namespace OpenBreed.Game.Components.States
         {
             switch (actionName)
             {
-                case "Stop":
-                    {
-                        break;
-                    }
-                case "Walk":
-                    {
-                        break;
-                    }
+                case "Close":
+                    return "Closed";
                 default:
                     break;
             }

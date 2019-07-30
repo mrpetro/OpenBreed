@@ -64,6 +64,8 @@ namespace OpenBreed.Core.Common.Helpers
             IMsgHandler handler = null;
             if (handlers.TryGetValue(msg.Type, out handler))
                 handler.HandleMsg(sender, msg);
+            else
+                Core.Logging.Warning($"Handler for message '{msg}' not registered");
         }
 
         private void Post(object sender, IEntityMsg msg)

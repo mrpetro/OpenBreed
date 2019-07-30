@@ -11,15 +11,6 @@ namespace OpenBreed.Core.Common.Systems.Components
         #region Public Constructors
 
         /// <summary>
-        /// Constructor with passed initial position value
-        /// </summary>
-        /// <param name="value">Initial value vector</param>
-        internal Position(Vector2 value)
-        {
-            Value = value;
-        }
-
-        /// <summary>
         /// Constructor with passed initial position values
         /// </summary>
         /// <param name="x">Initial x value</param>
@@ -30,6 +21,19 @@ namespace OpenBreed.Core.Common.Systems.Components
         }
 
         #endregion Public Constructors
+
+        #region Private Constructors
+
+        /// <summary>
+        /// Constructor with passed initial position value
+        /// </summary>
+        /// <param name="value">Initial value vector</param>
+        private Position(Vector2 value)
+        {
+            Value = value;
+        }
+
+        #endregion Private Constructors
 
         #region Public Properties
 

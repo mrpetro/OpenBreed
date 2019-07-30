@@ -53,12 +53,15 @@
     <Compile Include="Components\Body.cs" />
     <Compile Include="Components\Material.cs" />
     <Compile Include="Components\Motion.cs" />
+    <Compile Include="Events\CollisionEvent.cs" />
     <Compile Include="Helpers\Box2Extensions.cs" />
     <Compile Include="Helpers\CollisionChecker.cs" />
     <Compile Include="Helpers\StaticPack.cs" />
     <Compile Include="Helpers\DynamicPack.cs" />
     <Compile Include="Helpers\DynamicHelper.cs" />
     <Compile Include="Helpers\MaterialTable.cs" />
+    <Compile Include="Messages\BodyOffMsg.cs" />
+    <Compile Include="Messages\BodyOnMsg.cs" />
     <Compile Include="PhysicsModule.cs" />
     <Compile Include="Systems\MovementSystem.cs" />
     <Compile Include="Systems\PhysicsSystem.cs" />

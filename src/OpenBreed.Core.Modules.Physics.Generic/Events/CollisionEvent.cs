@@ -1,22 +1,21 @@
 ﻿using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Entities;
 
-namespace OpenBreed.Core.Modules.Animation.Messages
+namespace OpenBreed.Core.Modules.Physics.Events
 {
-    public struct PauseAnimMsg : IEntityMsg
+    public class CollisionEvent : IEvent
     {
         #region Public Fields
 
-        public const string TYPE = "PAUSE_ANIM";
+        public const string TYPE = "COLLISION_OCCURED";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public PauseAnimMsg(IEntity entity, string id)
+        public CollisionEvent(IEntity entity)
         {
             Entity = entity;
-            Id = id;
         }
 
         #endregion Public Constructors
@@ -25,7 +24,6 @@ namespace OpenBreed.Core.Modules.Animation.Messages
 
         public IEntity Entity { get; }
         public string Type { get { return TYPE; } }
-        public string Id { get; }
 
         #endregion Public Properties
     }

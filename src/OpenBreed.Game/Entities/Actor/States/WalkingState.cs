@@ -54,8 +54,8 @@ namespace OpenBreed.Game.Entities.Actor.States
         {
             thrust.Value = walkDirection * creatureMovement.Acceleration;
 
-            Entity.Core.MessageBus.Enqueue(this, new PlayAnimMsg(Entity, animationId));
-            Entity.Core.MessageBus.Enqueue(this, new SetTextMsg(Entity, "Hero - Walking"));
+            Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
+            Entity.PostMsg(new TextSetMsg(Entity, "Hero - Walking"));
         }
 
         public void Initialize(IEntity entity)
@@ -68,20 +68,19 @@ namespace OpenBreed.Game.Entities.Actor.States
             spriteAnimation = entity.Components.OfType<Animator<int>>().First();
 
 
-            Entity.Subscribe(FrameChangedEvent<int>.TYPE, OnFrameChanged);
+            Entity.Subscribe(AnimChangedEvent<int>.TYPE, OnFrameChanged);
             Entity.Subscribe(ControlDirectionChangedEvent.TYPE, OnControlDirectionChanged);
         }
 
         private void OnFrameChanged(object sender, IEvent e)
         {
-            HandleFrameChangeEvent((FrameChangedEvent<int>)e);
+            HandleFrameChangeEvent((AnimChangedEvent<int>)e);
         }
 
         private void OnControlDirectionChanged(object sender, IEvent e)
         {
             HandleControlDirectionChangedEvent((ControlDirectionChangedEvent)e);
         }
-
 
         public void LeaveState()
         {
@@ -144,7 +143,7 @@ namespace OpenBreed.Game.Entities.Actor.States
 
         #region Private Methods
 
-        private void HandleFrameChangeEvent(FrameChangedEvent<int> systemEvent)
+        private void HandleFrameChangeEvent(AnimChangedEvent<int> systemEvent)
         {
             sprite.ImageId = systemEvent.Frame;
         }

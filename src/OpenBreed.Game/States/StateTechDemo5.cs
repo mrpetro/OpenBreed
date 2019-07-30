@@ -47,9 +47,12 @@ namespace OpenBreed.Game.States
         };
 
         private ITexture tileTex;
-        private ITexture spriteTex;
+        private ITexture arrowTex;
+        private ITexture doorTex;
         private ITileAtlas tileAtlas;
-        private ISpriteAtlas spriteAtlas;
+        private ISpriteAtlas arrowSpriteAtlas;
+        private ISpriteAtlas doorHorizontalAtlas;
+        private ISpriteAtlas doorVerticalAtlas;
         private Viewport gameViewport;
 
         #endregion Private Fields
@@ -164,9 +167,12 @@ namespace OpenBreed.Game.States
 
             //Resources
             tileTex = Core.Rendering.Textures.Create(@"Content\TileAtlasTest32bit.bmp");
-            spriteTex = Core.Rendering.Textures.Create(@"Content\ArrowSpriteSet.png");
+            doorTex = Core.Rendering.Textures.Create(@"Content\DoorSpriteSet.png");
+            arrowTex = Core.Rendering.Textures.Create(@"Content\ArrowSpriteSet.png");
             tileAtlas = Core.Rendering.Tiles.Create(tileTex.Id, 16, 4, 4);
-            spriteAtlas = Core.Rendering.Sprites.Create(spriteTex.Id, 32, 32, 8, 5);
+            arrowSpriteAtlas = Core.Rendering.Sprites.Create(arrowTex.Id, 32, 32, 8, 5);
+            doorHorizontalAtlas = DoorHelper.SetupHorizontalDoorSprites(Core, doorTex);
+            doorVerticalAtlas = DoorHelper.SetupVerticalDoorSprites(Core, doorTex);
 
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
@@ -181,7 +187,7 @@ namespace OpenBreed.Game.States
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas.Id);
 
-            var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288), spriteAtlas);
+            var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288), arrowSpriteAtlas);
             actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
             actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
 
@@ -192,40 +198,37 @@ namespace OpenBreed.Game.States
 
             var rnd = new Random();
 
-            for (int i = 0; i < 50; i++)
-            {
-                var ball = BoxHelper.CreateBox(Core, new Vector2(rnd.Next(16, 64), rnd.Next(16, 64)),
-                                                      new Vector2(rnd.Next(70, 700), rnd.Next(70, 700)),
-                                                      new Vector2(rnd.Next(-50, 50), rnd.Next(-50, 50)));
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    var ball = BoxHelper.CreateBox(Core, new Vector2(rnd.Next(16, 64), rnd.Next(16, 64)),
+            //                                          new Vector2(rnd.Next(70, 700), rnd.Next(70, 700)),
+            //                                          new Vector2(rnd.Next(-50, 50), rnd.Next(-50, 50)));
 
-                gameWorld.AddEntity(ball);
-            }
+            //    gameWorld.AddEntity(ball);
+            //}
 
-
-            var doorCollection = DoorHelper.CreateHorizontalDoor(Core, 3, 20, spriteAtlas, tileAtlas);
-
-            foreach (var item in doorCollection)
-                gameWorld.AddEntity(item);
+            for (int i = 0; i < 30; i++)
+                DoorHelper.AddHorizontalDoor(gameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3, doorHorizontalAtlas, tileAtlas);
 
             for (int x = 0; x < 64; x++)
             {
                 blockBuilder.SetIndices(x, 0);
-                blockBuilder.SetTileId(1);
+                blockBuilder.SetTileId(9);
                 gameWorld.AddEntity(blockBuilder.Build());
 
                 blockBuilder.SetIndices(x, 62);
-                blockBuilder.SetTileId(2);
+                blockBuilder.SetTileId(9);
                 gameWorld.AddEntity(blockBuilder.Build());
             }
 
             for (int y = 1; y < 63; y++)
             {
                 blockBuilder.SetIndices(0, y);
-                blockBuilder.SetTileId(3);
+                blockBuilder.SetTileId(9);
                 gameWorld.AddEntity(blockBuilder.Build());
 
                 blockBuilder.SetIndices(62, y);
-                blockBuilder.SetTileId(4);
+                blockBuilder.SetTileId(9);
                 gameWorld.AddEntity(blockBuilder.Build());
             }
 

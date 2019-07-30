@@ -1,22 +1,26 @@
 ﻿using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace OpenBreed.Core.Modules.Animation.Messages
+namespace OpenBreed.Core.Modules.Physics.Messages
 {
-    public struct PauseAnimMsg : IEntityMsg
+    public struct BodyOnMsg : IEntityMsg
     {
         #region Public Fields
 
-        public const string TYPE = "PAUSE_ANIM";
+        public const string TYPE = "BODY_ON";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public PauseAnimMsg(IEntity entity, string id)
+        public BodyOnMsg(IEntity entity)
         {
             Entity = entity;
-            Id = id;
         }
 
         #endregion Public Constructors
@@ -25,7 +29,6 @@ namespace OpenBreed.Core.Modules.Animation.Messages
 
         public IEntity Entity { get; }
         public string Type { get { return TYPE; } }
-        public string Id { get; }
 
         #endregion Public Properties
     }

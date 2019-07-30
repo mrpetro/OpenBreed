@@ -16,7 +16,7 @@ namespace OpenBreed.Core.Modules.Animation.Messages
         public StopAnimMsg(IEntity entity, string id)
         {
             Entity = entity;
-            Data = id;
+            Id = id;
         }
 
         #endregion Public Constructors
@@ -25,7 +25,7 @@ namespace OpenBreed.Core.Modules.Animation.Messages
 
         public IEntity Entity { get; }
         public string Type { get { return TYPE; } }
-        public object Data { get; }
+        public string Id { get; }
 
         #endregion Public Properties
     }
