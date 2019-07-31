@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
@@ -18,6 +19,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
     {
         #region Public Fields
 
+        public const int TILE_SIZE = 16;
         public int MAX_TILES_COUNT = 1024 * 1024;
 
         #endregion Public Fields
@@ -28,7 +30,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         private ITile[] tileComps;
 
-        private IPosition[] positionComps;
+        private GridPosition[] positionComps;
 
         #endregion Private Fields
 
@@ -37,7 +39,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         public TileSystem(ICore core, int width, int height, float tileSize, bool gridVisible) : base(core)
         {
             Require<ITile>();
-            Require<IPosition>();
+            Require<GridPosition>();
 
             TileSize = tileSize;
             GridVisible = gridVisible;
@@ -78,10 +80,10 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             float left, bottom, right, top;
             viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
 
-            int leftIndex = (int)left / 16;
-            int bottomIndex = (int)bottom / 16;
-            int rightIndex = (int)right / 16 + 1;
-            int topIndex = (int)top / 16 + 1;
+            int leftIndex = (int)left / TILE_SIZE;
+            int bottomIndex = (int)bottom / TILE_SIZE;
+            int rightIndex = (int)right / TILE_SIZE + 1;
+            int topIndex = (int)top / TILE_SIZE + 1;
 
             leftIndex = MathHelper.Clamp(leftIndex, 0, TileMapHeight);
             rightIndex = MathHelper.Clamp(rightIndex, 0, TileMapHeight);
@@ -135,21 +137,19 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         protected override void RegisterEntity(IEntity entity)
         {
-            var position = entity.Components.OfType<IPosition>().First();
+            var pos = entity.Components.OfType<GridPosition>().First();
 
-            int x, y;
-            GetMapIndices(position, out x, out y);
-            var tileId = x + TileMapHeight * y;
-
-            if (x >= TileMapWidth)
+            if (pos.X >= TileMapWidth)
                 throw new InvalidOperationException($"Tile X coordinate exceeds tile map width size.");
 
-            if (y >= TileMapHeight)
+            if (pos.Y >= TileMapHeight)
                 throw new InvalidOperationException($"Tile Y coordinate exceeds tile map height size.");
+
+            var tileId = pos.X + TileMapHeight * pos.Y;
 
             entities[tileId] = entity;
             tileComps[tileId] = entity.Components.OfType<ITile>().First();
-            positionComps[tileId] = position;
+            positionComps[tileId] = pos;
         }
 
         protected override void UnregisterEntity(IEntity entity)
@@ -172,7 +172,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
             GL.PushMatrix();
 
-            GL.Translate(position.Value.X, position.Value.Y, 0.0f);
+            GL.Translate(position.X * TILE_SIZE, position.Y * TILE_SIZE, 0.0f);
 
             Core.Rendering.Tiles.GetById(tile.AtlasId).Draw(tile.ImageId);
 
@@ -185,7 +185,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             TileMapWidth = height;
             entities = new IEntity[width * height];
             tileComps = new ITile[width * height];
-            positionComps = new IPosition[width * height];
+            positionComps = new GridPosition[width * height];
         }
 
         /// <summary>

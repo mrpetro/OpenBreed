@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
@@ -50,6 +51,21 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         #region Public Methods
 
+        public static Vector2 GetTileCenter(GridPosition pos)
+        {
+            return new Vector2(pos.X * CELL_SIZE + CELL_SIZE / 2, pos.Y * CELL_SIZE + CELL_SIZE / 2);
+        }
+
+        public static Box2 GetTileBox(GridPosition pos)
+        {
+            return new Box2(pos.X * CELL_SIZE, pos.Y * CELL_SIZE, (pos.X + 1) * CELL_SIZE, (pos.Y + 1) * CELL_SIZE);
+        }
+
+        public static Vector2 GetTilePos(GridPosition pos)
+        {
+            return new Vector2(pos.X * CELL_SIZE, pos.Y * CELL_SIZE);
+        }
+
         public override void Initialize(World world)
         {
             base.Initialize(world);
@@ -69,6 +85,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             {
                 case BodyOnMsg.TYPE:
                     return HandleBodyOnMsg(sender, (BodyOnMsg)msg);
+
                 case BodyOffMsg.TYPE:
                     return HandleBodyOffMsg(sender, (BodyOffMsg)msg);
 
@@ -80,6 +97,26 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         #endregion Public Methods
 
         #region Protected Methods
+
+        protected override void RegisterEntity(IEntity entity)
+        {
+            if (entity.Components.Any(item => item is IVelocity))
+                RegisterDynamicEntity(entity);
+            else
+                RegisterStaticEntity(entity);
+        }
+
+        protected override void UnregisterEntity(IEntity entity)
+        {
+            if (entity.Components.Any(item => item is IVelocity))
+                UnregisterDynamicEntity(entity);
+            else
+                UnregisterStaticEntity(entity);
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
 
         private bool HandleBodyOnMsg(object sender, BodyOnMsg msg)
         {
@@ -106,7 +143,6 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 return true;
             }
 
-
             foreach (var list in gridStatics)
             {
                 var toDeactivate = list.FirstOrDefault(item => item.Entity == msg.Entity);
@@ -120,27 +156,6 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
             return true;
         }
-
-
-        protected override void RegisterEntity(IEntity entity)
-        {
-            if (entity.Components.Any(item => item is IVelocity))
-                RegisterDynamicEntity(entity);
-            else
-                RegisterStaticEntity(entity);
-        }
-
-        protected override void UnregisterEntity(IEntity entity)
-        {
-            if (entity.Components.Any(item => item is IVelocity))
-                UnregisterDynamicEntity(entity);
-            else
-                UnregisterStaticEntity(entity);
-        }
-
-        #endregion Protected Methods
-
-        #region Private Methods
 
         private void SweepAndPrune(float dt)
         {
@@ -252,7 +267,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
             var pos = dynamicAabb.GetCenter();
 
-            boxesSet.Sort((x, y) => ShortestDistanceComparer(pos, x.Aabb, y.Aabb));
+            boxesSet.Sort((a, b) => ShortestDistanceComparer(pos, GetTileCenter(a.GridPosition), GetTileCenter(b.GridPosition)));
 
             //Iterate all collected static bodies for detail test
             foreach (var item in boxesSet)
@@ -272,10 +287,10 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 return 1;
         }
 
-        private int ShortestDistanceComparer(Vector2 pos, Box2 x, Box2 y)
+        private int ShortestDistanceComparer(Vector2 pos, Vector2 a, Vector2 b)
         {
-            var lx = Vector2.Distance(pos, x.GetCenter());
-            var ly = Vector2.Distance(pos, y.GetCenter());
+            var lx = Vector2.Distance(pos, a);
+            var ly = Vector2.Distance(pos, b);
 
             if (lx < ly)
                 return -1;
@@ -285,31 +300,22 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 return 1;
         }
 
-        private void GetGridIndices(Vector2 pos, out int x, out int y)
-        {
-            x = (int)(pos.X / CELL_SIZE);
-            y = (int)(pos.Y / CELL_SIZE);
-        }
-
         private void RegisterStaticEntity(IEntity entity)
         {
             var pack = new StaticPack(entity,
                                       entity.Components.OfType<IBody>().First(),
-                                      entity.Components.OfType<IPosition>().First(),
+                                      entity.Components.OfType<GridPosition>().First(),
                                       entity.Components.OfType<IShapeComponent>().First());
 
-            var position = pack.Position;
+            var pos = pack.GridPosition;
 
-            int x, y;
-            GetGridIndices(position.Value, out x, out y);
-
-            var gridIndex = x + GridHeight * y;
-
-            if (x >= GridWidth)
+            if (pos.X >= GridWidth)
                 throw new InvalidOperationException($"Grid box body X coordinate exceeds grid width size.");
 
-            if (y >= GridHeight)
+            if (pos.Y >= GridHeight)
                 throw new InvalidOperationException($"Grid box body Y coordinate exceeds grid height size.");
+
+            var gridIndex = pos.X + GridHeight * pos.Y;
 
             gridStatics[gridIndex].Add(pack);
         }

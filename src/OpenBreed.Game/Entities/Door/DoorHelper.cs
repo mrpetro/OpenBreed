@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
@@ -93,14 +94,14 @@ namespace OpenBreed.Game.Entities.Door
             var door = core.Entities.Create();
 
             var doorPart1 = core.Entities.Create();
-            doorPart1.Add(new Position(x * 16, y * 16));
+            doorPart1.Add(GridPosition.Create(x, y));
             doorPart1.Add(new Body(1.0f, 1.0f));
             doorPart1.Add(new AxisAlignedBoxShape(0, 0, 16, 16));
             doorPart1.Add(new GroupPart(door.Id));
             doorPart1.Add(core.Rendering.CreateTile(tileAtlas.Id));
 
             var doorPart2 = core.Entities.Create();
-            doorPart2.Add(Position.Create(x * 16, (y + 1) * 16));
+            doorPart2.Add(GridPosition.Create(x, y + 1));
             doorPart2.Add(new Body(1.0f, 1.0f));
             doorPart2.Add(new AxisAlignedBoxShape(0, 0, 16, 16));
             doorPart2.Add(core.Rendering.CreateTile(tileAtlas.Id));
@@ -128,14 +129,14 @@ namespace OpenBreed.Game.Entities.Door
             var door = core.Entities.Create();
 
             var doorPart1 = core.Entities.Create();
-            doorPart1.Add(new Position(x * 16, y * 16));
+            doorPart1.Add(GridPosition.Create(x, y));
             doorPart1.Add(new Body(1.0f, 1.0f));
             doorPart1.Add(new AxisAlignedBoxShape(0, 0, 16, 16));
             doorPart1.Add(new GroupPart(door.Id));
             doorPart1.Add(core.Rendering.CreateTile(tileAtlas.Id));
 
             var doorPart2 = core.Entities.Create();
-            doorPart2.Add(Position.Create((x + 1) * 16, y * 16));
+            doorPart2.Add(GridPosition.Create(x + 1, y));
             doorPart2.Add(new Body(1.0f, 1.0f));
             doorPart2.Add(new AxisAlignedBoxShape(0, 0, 16, 16));
             doorPart2.Add(core.Rendering.CreateTile(tileAtlas.Id));

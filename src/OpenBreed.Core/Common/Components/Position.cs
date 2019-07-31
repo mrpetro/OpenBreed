@@ -8,21 +8,17 @@ namespace OpenBreed.Core.Common.Systems.Components
     /// </summary>
     public class Position : IPosition
     {
-        #region Public Constructors
+        #region Private Constructors
 
         /// <summary>
         /// Constructor with passed initial position values
         /// </summary>
         /// <param name="x">Initial x value</param>
         /// <param name="y">Initial y value</param>
-        public Position(float x, float y)
+        private Position(float x, float y)
         {
             Value = new Vector2(x, y);
         }
-
-        #endregion Public Constructors
-
-        #region Private Constructors
 
         /// <summary>
         /// Constructor with passed initial position value

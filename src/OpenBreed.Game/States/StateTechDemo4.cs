@@ -183,13 +183,13 @@ namespace OpenBreed.Game.States
             var arial12 = Core.Rendering.Fonts.Create("ARIAL", 12);
 
             var textEntity = Core.Entities.Create();
-            textEntity.Add(new Position(0, 0));
+            textEntity.Add(Position.Create(0, 0));
             textEntity.Add(Core.Rendering.CreateText(algerian50.Id, Vector2.Zero, "Alice has a cat!"));
             hudWorld.AddEntity(textEntity);
 
             var fpsEntity = Core.Entities.Create();
 
-            fpsEntity.Add(new Position(0, 400));
+            fpsEntity.Add(Position.Create(0, 400));
             fpsEntity.Add(Core.Rendering.CreateText(arial12.Id, Vector2.Zero, "0 fps"));
             hudWorld.AddEntity(fpsEntity);
 
