@@ -9,7 +9,9 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         #region Internal Fields
 
         internal readonly List<Vector2> coords = new List<Vector2>();
-        
+
+        internal Vector2 offset;
+
         #endregion Internal Fields
 
         #region Private Fields
@@ -51,6 +53,11 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
                     coords.Add(coord);
                 }
             }
+        }
+
+        internal void SetOffset(int offsetX, int offsetY)
+        {
+            offset = new Vector2(offsetX, offsetY);
         }
 
         public void SetSpriteSize(int width, int height)

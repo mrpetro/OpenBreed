@@ -28,13 +28,14 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #region Public Methods
 
-        public ISpriteAtlas Create(int textureId, int spriteWidth, int spriteHeight, int spriteColumns, int spriteRows)
+        public ISpriteAtlas Create(int textureId, int spriteWidth, int spriteHeight, int spriteColumns, int spriteRows, int offsetX = 0, int offsetY = 0)
         {
             var saBuilder = new SpriteAtlasBuilder(this);
 
             var texture = Module.Textures.GetById(textureId);
             saBuilder.SetTexture(texture);
             saBuilder.SetSpriteSize(spriteWidth, spriteHeight);
+            saBuilder.SetOffset(offsetX, offsetY);
             saBuilder.BuildCoords(spriteRows, spriteColumns);
             var newSpriteAtlas = saBuilder.Build();
             items.Add(newSpriteAtlas);

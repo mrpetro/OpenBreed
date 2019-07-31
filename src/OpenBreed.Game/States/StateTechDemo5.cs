@@ -207,8 +207,11 @@ namespace OpenBreed.Game.States
             //    gameWorld.AddEntity(ball);
             //}
 
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 10; i++)
                 DoorHelper.AddHorizontalDoor(gameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3, doorHorizontalAtlas, tileAtlas);
+
+            for (int i = 0; i < 10; i++)
+                DoorHelper.AddVerticalDoor(gameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3, doorVerticalAtlas, tileAtlas);
 
             for (int x = 0; x < 64; x++)
             {

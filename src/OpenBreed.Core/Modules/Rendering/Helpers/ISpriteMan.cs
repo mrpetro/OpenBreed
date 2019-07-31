@@ -11,7 +11,7 @@
         /// <returns>Sprite atlas object</returns>
         ISpriteAtlas GetById(int id);
 
-        ISpriteAtlas Create(int textureId, int spriteWidth, int spriteHeight, int spriteColumns, int spriteRows);
+        ISpriteAtlas Create(int textureId, int spriteWidth, int spriteHeight, int spriteColumns, int spriteRows, int offsetX = 0, int offsetY = 0);
 
         /// <summary>
         /// Unloads all textures

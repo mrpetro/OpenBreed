@@ -34,7 +34,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             SpriteHeight = builder.SpriteHeight;
             vboList = new List<int>();
             RenderTools.CreateIndicesArray(indices, out ibo);
-            CreateVertices(builder.coords);
+            CreateVertices(builder.coords, builder.offset);
         }
 
         #endregion Internal Constructors
@@ -97,11 +97,12 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         {
         }
 
-        private void CreateVertices(List<Vector2> coords)
+        private void CreateVertices(List<Vector2> coords, Vector2 coordOffset)
         {
             foreach (var coord in coords)
             {
-                var newCoord = Vector2.Divide(coord, new Vector2(Texture.Width, Texture.Height));
+                var newCoord = Vector2.Add(coord, coordOffset);
+                newCoord = Vector2.Divide(newCoord, new Vector2(Texture.Width, Texture.Height));
                 var vertices = CreateVertices(newCoord);
                 int vbo;
                 RenderTools.CreateVertexArray(vertices, out vbo);
