@@ -185,7 +185,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             {
                 var bitmap = GenerateCharacters(font, out Size maxCharSize);
 
-                Texture = textures.Create(bitmap);
+                Texture = textures.Create($"Textures/Fonts/{fontName}/{fontSize}",bitmap);
 
                 for (int i = 0; i < Characters.Length; i++)
                 {

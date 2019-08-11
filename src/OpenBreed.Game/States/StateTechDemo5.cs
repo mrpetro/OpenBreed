@@ -166,13 +166,12 @@ namespace OpenBreed.Game.States
             var cameraBuilder = new CameraBuilder(Core);
 
             //Resources
-            tileTex = Core.Rendering.Textures.Create(@"Content\TileAtlasTest32bit.bmp");
-            doorTex = Core.Rendering.Textures.Create(@"Content\DoorSpriteSet.png");
-            arrowTex = Core.Rendering.Textures.Create(@"Content\ArrowSpriteSet.png");
+            tileTex = Core.Rendering.Textures.GetByAlias("Textures/Tiles/16/Test");
+            arrowTex = Core.Rendering.Textures.GetByAlias("Textures/Sprites/Arrow");
             tileAtlas = Core.Rendering.Tiles.Create(tileTex.Id, 16, 4, 4);
             arrowSpriteAtlas = Core.Rendering.Sprites.Create(arrowTex.Id, 32, 32, 8, 5);
-            doorHorizontalAtlas = DoorHelper.SetupHorizontalDoorSprites(Core, doorTex);
-            doorVerticalAtlas = DoorHelper.SetupVerticalDoorSprites(Core, doorTex);
+            doorHorizontalAtlas = DoorHelper.SetupHorizontalDoorSprites(Core);
+            doorVerticalAtlas = DoorHelper.SetupVerticalDoorSprites(Core);
 
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);

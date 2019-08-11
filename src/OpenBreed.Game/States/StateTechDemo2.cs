@@ -86,8 +86,8 @@ namespace OpenBreed.Game.States
             var cameraBuilder = new CameraBuilder(Core);
 
             //Resources
-            tileTex = Core.Rendering.Textures.Create(@"Content\TileAtlasTest32bit.bmp");
-            spriteTex = Core.Rendering.Textures.Create(@"Content\ArrowSpriteSet.png");
+            tileTex = Core.Rendering.Textures.GetByAlias("Textures/Tiles/16/Test");
+            spriteTex = Core.Rendering.Textures.GetByAlias("Textures/Sprites/Arrow");
             tileAtlas = Core.Rendering.Tiles.Create(tileTex.Id, 16, 4, 4);
             spriteAtlas = Core.Rendering.Sprites.Create(spriteTex.Id, 32, 32, 8, 5);
 

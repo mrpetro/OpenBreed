@@ -191,7 +191,9 @@ namespace OpenBreed.Game.States
             var cameraBuilder = new CameraBuilder(Core);
 
             //Resources
-            tileTex = Core.Rendering.Textures.Create(@"Content\TileAtlasTest32bit.bmp");
+            tileTex = Core.Rendering.Textures.GetByAlias("Textures/Tiles/16/Test");
+
+
             tileAtlas = Core.Rendering.Tiles.Create(tileTex.Id, 16, 4, 4);
 
             cameraBuilder.SetPosition(new Vector2(64, 64));

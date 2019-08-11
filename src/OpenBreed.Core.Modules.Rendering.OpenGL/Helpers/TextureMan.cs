@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 
@@ -13,6 +14,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
     {
         #region Private Fields
 
+        private readonly Dictionary<string, ITexture> aliases = new Dictionary<string, ITexture>();
         private readonly List<ITexture> items = new List<ITexture>();
 
         #endregion Private Fields
@@ -35,21 +37,6 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         #region Public Methods
 
         /// <summary>
-        /// Creates texture object from image file path and return it
-        /// If id parameter is not set, texture ID will be set to file path
-        /// </summary>
-        /// <param name="filePath">File path to image file</param>
-        /// <param name="id">Optional ID of texture to create</param>
-        /// <returns>ITexture object</returns>
-        public ITexture Create(string filePath)
-        {
-            if (filePath == null)
-                throw new ArgumentNullException(nameof(filePath));
-
-            return AddFrom(filePath);
-        }
-
-        /// <summary>
         /// Unloads all textures
         /// </summary>
         public void UnloadAll()
@@ -58,6 +45,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
                 texture.Dispose();
 
             items.Clear();
+            aliases.Clear();
         }
 
         /// <summary>
@@ -70,30 +58,65 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             return items[id];
         }
 
+        public ITexture GetByAlias(string alias)
+        {
+            ITexture result = null;
+            aliases.TryGetValue(alias, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Creates texture object from image file path and return it
+        /// If id parameter is not set, texture ID will be set to file path
+        /// </summary>
+        /// <param name="alias">Alias name to access the texture</param>
+        /// <param name="filePath">File path to image file</param>
+        /// <returns>ITexture object</returns>
+        public ITexture Create(string alias, string filePath)
+        {
+            Debug.Assert(!string.IsNullOrWhiteSpace(alias), "Alias is empty!");
+            Debug.Assert(!string.IsNullOrWhiteSpace(filePath), "File path is empty!");
+
+            ITexture result;
+            if (aliases.TryGetValue(alias, out result))
+                return result;
+
+            if (!File.Exists(filePath))
+                throw new InvalidOperationException($"File '{filePath}' doesn't exist.");
+
+            using (var bitmap = new Bitmap(filePath))
+                return InternalCreate(alias, bitmap);
+        }
+
         /// <summary>
         /// Creates texture object from given bitmap and return it
         /// </summary>
+        /// <param name="alias">Alias name to access the texture</param>
         /// <param name="bitmap">Bitmap to create texture from</param>
         /// <returns>ITexture object</returns>
-        public ITexture Create(Bitmap bitmap)
+        public ITexture Create(string alias, Bitmap bitmap)
         {
-            var texture = Texture.CreateFromBitmap(bitmap);
-            texture.Id = items.Count;
-            items.Add(texture);
-            return texture;
+            Debug.Assert(!string.IsNullOrWhiteSpace(alias), "Alias is empty!");
+            Debug.Assert(bitmap != null, "Bitmap is null!");
+
+            ITexture result;
+            if (aliases.TryGetValue(alias, out result))
+                return result;
+
+            return InternalCreate(alias, bitmap);
         }
 
         #endregion Public Methods
 
         #region Internal Methods
 
-        internal ITexture AddFrom(string filePath)
+        internal ITexture InternalCreate(string alias, Bitmap bitmap)
         {
-            if (!File.Exists(filePath))
-                throw new InvalidOperationException($"File '{filePath}' doesn't exist.");
-
-            using (var bitmap = new Bitmap(filePath))
-                return Create(bitmap);
+            var texture = Texture.CreateFromBitmap(bitmap);
+            texture.Id = items.Count;
+            items.Add(texture);
+            aliases.Add(alias, texture);
+            return texture;
         }
 
         #endregion Internal Methods

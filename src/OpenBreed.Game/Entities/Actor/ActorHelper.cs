@@ -20,7 +20,7 @@ namespace OpenBreed.Game.Entities.Actor
     {
         public static ISpriteAtlas SetupSprites(ICore core)
         {
-            var spriteTex = core.Rendering.Textures.Create(@"Content\ArrowSpriteSet.png");
+            var spriteTex = core.Rendering.Textures.GetByAlias("Textures/Sprites/Arrow");
 
             return core.Rendering.Sprites.Create(spriteTex.Id, 32, 32, 8, 5);
         }

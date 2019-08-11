@@ -141,6 +141,10 @@ namespace OpenBreed.Game
         {
             base.OnLoad(e);
 
+            Rendering.Textures.Create("Textures/Tiles/16/Test", @"Content\TileAtlasTest32bit.bmp");
+            Rendering.Textures.Create("Textures/Sprites/Door", @"Content\DoorSpriteSet.png");
+            Rendering.Textures.Create("Textures/Sprites/Arrow", @"Content\ArrowSpriteSet.png");
+
             DoorHelper.CreateHorizontalAnimations(this);
             DoorHelper.CreateVerticalAnimations(this);
 

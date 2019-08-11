@@ -21,13 +21,15 @@ namespace OpenBreed.Game.Entities.Door
 {
     public static class DoorHelper
     {
-        public static ISpriteAtlas SetupHorizontalDoorSprites(ICore core, ITexture texture)
+        public static ISpriteAtlas SetupHorizontalDoorSprites(ICore core)
         {
+            var texture = core.Rendering.Textures.GetByAlias("Textures/Sprites/Door");
             return core.Rendering.Sprites.Create(texture.Id, 32, 16, 5, 1, 0, 0);
         }
 
-        public static ISpriteAtlas SetupVerticalDoorSprites(ICore core, ITexture texture)
+        public static ISpriteAtlas SetupVerticalDoorSprites(ICore core)
         {
+            var texture = core.Rendering.Textures.GetByAlias("Textures/Sprites/Door");
             return core.Rendering.Sprites.Create(texture.Id, 16, 32, 5, 1, 0, 16);
         }
 
@@ -125,6 +127,7 @@ namespace OpenBreed.Game.Entities.Door
         public static void AddHorizontalDoor(World world, int x, int y, ISpriteAtlas spriteAtlas, ITileAtlas tileAtlas)
         {
             var core = world.Core;
+
 
             var door = core.Entities.Create();
 
