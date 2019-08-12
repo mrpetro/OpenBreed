@@ -18,18 +18,27 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         ITexture GetById(int id);
 
         /// <summary>
+        /// Get texture by user friendly alias
+        /// </summary>
+        /// <param name="alias">Alias name</param>
+        /// <returns></returns>
+        ITexture GetByAlias(string alias);
+
+        /// <summary>
         /// Creates texture object from given bitmap and return it
         /// </summary>
+        /// <param name="alias">Alias name to access the texture</param>
         /// <param name="bitmap">Bitmap to create texture from</param>
         /// <returns>ITexture object</returns>
-        ITexture Create(Bitmap bitmap);
+        ITexture Create(string alias, Bitmap bitmap);
 
         /// <summary>
         /// Creates texture object from image file path and return it
         /// </summary>
+        /// <param name="alias">Alias name to access the texture</param>
         /// <param name="filePath">File path to image file</param>
         /// <returns>ITexture object</returns>
-        ITexture Create(string filePath);
+        ITexture Create(string alias, string filePath);
 
         /// <summary>
         /// Unloads all textures

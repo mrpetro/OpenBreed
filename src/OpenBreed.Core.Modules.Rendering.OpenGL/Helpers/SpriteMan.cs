@@ -8,6 +8,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         #region Private Fields
 
         private readonly List<ISpriteAtlas> items = new List<ISpriteAtlas>();
+        private readonly Dictionary<string, ISpriteAtlas> aliases = new Dictionary<string, ISpriteAtlas>();
 
         #endregion Private Fields
 
@@ -28,22 +29,35 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #region Public Methods
 
-        public ISpriteAtlas Create(int textureId, int spriteWidth, int spriteHeight, int spriteColumns, int spriteRows)
+        public ISpriteAtlas Create(string alias, int textureId, int spriteWidth, int spriteHeight, int spriteColumns, int spriteRows, int offsetX = 0, int offsetY = 0)
         {
+            ISpriteAtlas result;
+            if (aliases.TryGetValue(alias, out result))
+                return result;
+
             var saBuilder = new SpriteAtlasBuilder(this);
 
             var texture = Module.Textures.GetById(textureId);
             saBuilder.SetTexture(texture);
             saBuilder.SetSpriteSize(spriteWidth, spriteHeight);
+            saBuilder.SetOffset(offsetX, offsetY);
             saBuilder.BuildCoords(spriteRows, spriteColumns);
-            var newSpriteAtlas = saBuilder.Build();
-            items.Add(newSpriteAtlas);
-            return newSpriteAtlas;
+            result = saBuilder.Build();
+            items.Add(result);
+            aliases.Add(alias, result);
+            return result;
         }
 
         public ISpriteAtlas GetById(int id)
         {
             return items[id];
+        }
+
+        public ISpriteAtlas GetByAlias(string alias)
+        {
+            ISpriteAtlas result = null;
+            aliases.TryGetValue(alias, out result);
+            return result;
         }
 
         public void UnloadAll()

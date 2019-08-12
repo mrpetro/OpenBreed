@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Entities.Builders;
@@ -48,7 +49,7 @@ namespace OpenBreed.Game.Entities.Builders
         {
             var entity = Core.Entities.Create();
 
-            entity.Add(new Position(x * 16, y * 16));
+            entity.Add(GridPosition.Create(x, y));
             entity.Add(new Body(1.0f, 1.0f));
             entity.Add(new AxisAlignedBoxShape(0, 0, 16, 16));
             entity.Add(Core.Rendering.CreateTile(atlasId, tileId));

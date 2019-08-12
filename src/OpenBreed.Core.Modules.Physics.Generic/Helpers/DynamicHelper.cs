@@ -29,7 +29,7 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
 
         internal static bool TestVsStatic(PhysicsSystem system, DynamicPack bodyA, StaticPack bodyB, float dt, out Vector2 projection)
         {
-            return CollisionChecker.Check(bodyA.Position.Value, bodyA.Shape, bodyB.Position.Value, bodyB.Shape, out projection);
+            return CollisionChecker.Check(bodyA.Position.Value, bodyA.Shape, PhysicsSystem.GetTilePos(bodyB.GridPosition), bodyB.Shape, out projection);
         }
 
         /// <summary>

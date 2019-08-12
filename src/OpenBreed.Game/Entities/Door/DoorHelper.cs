@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
@@ -20,14 +21,14 @@ namespace OpenBreed.Game.Entities.Door
 {
     public static class DoorHelper
     {
-        public static ISpriteAtlas SetupHorizontalDoorSprites(ICore core, ITexture texture)
+        public static ISpriteAtlas SetupHorizontalDoorSprites(ICore core)
         {
-            return core.Rendering.Sprites.Create(texture.Id, 32, 16, 5, 1);
+            return core.Rendering.Sprites.GetByAlias("Atlases/Sprites/Door/Horizontal");
         }
 
-        public static ISpriteAtlas SetupVerticalDoorSprites(ICore core, ITexture texture)
+        public static ISpriteAtlas SetupVerticalDoorSprites(ICore core)
         {
-            return core.Rendering.Sprites.Create(texture.Id, 16, 32, 5, 1);
+            return core.Rendering.Sprites.GetByAlias("Atlases/Sprites/Door/Vertical");
         }
 
         public static void CreateHorizontalAnimations(ICore core)
@@ -86,26 +87,60 @@ namespace OpenBreed.Game.Entities.Door
             return stateMachine;
         }
 
-
-
-        public static void AddHorizontalDoor(World world, int x, int y, ISpriteAtlas spriteAtlas, ITileAtlas tileAtlas)
+        public static void AddVerticalDoor(World world, int x, int y, ISpriteAtlas spriteAtlas, ITileAtlas tileAtlas)
         {
             var core = world.Core;
 
             var door = core.Entities.Create();
 
             var doorPart1 = core.Entities.Create();
-            doorPart1.Add(new Position(x * 16, y * 16));
+            doorPart1.Add(GridPosition.Create(x, y));
             doorPart1.Add(new Body(1.0f, 1.0f));
             doorPart1.Add(new AxisAlignedBoxShape(0, 0, 16, 16));
             doorPart1.Add(new GroupPart(door.Id));
-            doorPart1.Add(core.Rendering.CreateTile(tileAtlas.Id, 2));
+            doorPart1.Add(core.Rendering.CreateTile(tileAtlas.Id));
 
             var doorPart2 = core.Entities.Create();
-            doorPart2.Add(Position.Create((x + 1) * 16, y * 16));
+            doorPart2.Add(GridPosition.Create(x, y + 1));
             doorPart2.Add(new Body(1.0f, 1.0f));
             doorPart2.Add(new AxisAlignedBoxShape(0, 0, 16, 16));
-            doorPart2.Add(core.Rendering.CreateTile(tileAtlas.Id, 2));
+            doorPart2.Add(core.Rendering.CreateTile(tileAtlas.Id));
+            doorPart2.Add(new GroupPart(door.Id));
+
+
+            door.Add(new Animator<int>(5.0f, false));
+            door.Add(core.Rendering.CreateSprite(spriteAtlas.Id));
+            door.Add(Position.Create(x * 16, y * 16));
+            door.Add(new AxisAlignedBoxShape(0, 0, 16, 32));
+            door.Add(TextHelper.Create(core, new Vector2(-10, 10), "Door"));
+
+            var doorSm = DoorHelper.CreateVerticalStateMachine(door);
+            doorSm.SetInitialState("Closed");
+
+            world.AddEntity(doorPart1);
+            world.AddEntity(doorPart2);
+            world.AddEntity(door);
+        }
+
+        public static void AddHorizontalDoor(World world, int x, int y, ISpriteAtlas spriteAtlas, ITileAtlas tileAtlas)
+        {
+            var core = world.Core;
+
+
+            var door = core.Entities.Create();
+
+            var doorPart1 = core.Entities.Create();
+            doorPart1.Add(GridPosition.Create(x, y));
+            doorPart1.Add(new Body(1.0f, 1.0f));
+            doorPart1.Add(new AxisAlignedBoxShape(0, 0, 16, 16));
+            doorPart1.Add(new GroupPart(door.Id));
+            doorPart1.Add(core.Rendering.CreateTile(tileAtlas.Id));
+
+            var doorPart2 = core.Entities.Create();
+            doorPart2.Add(GridPosition.Create(x + 1, y));
+            doorPart2.Add(new Body(1.0f, 1.0f));
+            doorPart2.Add(new AxisAlignedBoxShape(0, 0, 16, 16));
+            doorPart2.Add(core.Rendering.CreateTile(tileAtlas.Id));
             doorPart2.Add(new GroupPart(door.Id));
 
 

@@ -46,9 +46,6 @@ namespace OpenBreed.Game.States
             3,3,3,3,3,3,3,3,3,3
         };
 
-        private ITexture tileTex;
-        private ITexture arrowTex;
-        private ITexture doorTex;
         private ITileAtlas tileAtlas;
         private ISpriteAtlas arrowSpriteAtlas;
         private ISpriteAtlas doorHorizontalAtlas;
@@ -166,13 +163,10 @@ namespace OpenBreed.Game.States
             var cameraBuilder = new CameraBuilder(Core);
 
             //Resources
-            tileTex = Core.Rendering.Textures.Create(@"Content\TileAtlasTest32bit.bmp");
-            doorTex = Core.Rendering.Textures.Create(@"Content\DoorSpriteSet.png");
-            arrowTex = Core.Rendering.Textures.Create(@"Content\ArrowSpriteSet.png");
-            tileAtlas = Core.Rendering.Tiles.Create(tileTex.Id, 16, 4, 4);
-            arrowSpriteAtlas = Core.Rendering.Sprites.Create(arrowTex.Id, 32, 32, 8, 5);
-            doorHorizontalAtlas = DoorHelper.SetupHorizontalDoorSprites(Core, doorTex);
-            doorVerticalAtlas = DoorHelper.SetupVerticalDoorSprites(Core, doorTex);
+            tileAtlas = Core.Rendering.Tiles.GetByAlias("Atlases/Tiles/16/Test");
+            arrowSpriteAtlas = Core.Rendering.Sprites.GetByAlias("Atlases/Sprites/Arrow");
+            doorHorizontalAtlas = DoorHelper.SetupHorizontalDoorSprites(Core);
+            doorVerticalAtlas = DoorHelper.SetupVerticalDoorSprites(Core);
 
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
@@ -207,8 +201,11 @@ namespace OpenBreed.Game.States
             //    gameWorld.AddEntity(ball);
             //}
 
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 10; i++)
                 DoorHelper.AddHorizontalDoor(gameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3, doorHorizontalAtlas, tileAtlas);
+
+            for (int i = 0; i < 10; i++)
+                DoorHelper.AddVerticalDoor(gameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3, doorVerticalAtlas, tileAtlas);
 
             for (int x = 0; x < 64; x++)
             {

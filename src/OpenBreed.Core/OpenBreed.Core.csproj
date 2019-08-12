@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Collections\IdMap.cs" />
     <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Common\Components\GridPosition.cs" />
     <Compile Include="Common\Components\GroupPart.cs" />
     <Compile Include="Common\Helpers\CoreEventBus.cs" />
     <Compile Include="Common\Helpers\IMsg.cs" />

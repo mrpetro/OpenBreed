@@ -53,15 +53,6 @@ namespace OpenBreed.Game
             StateMachine = new StateMan(this);
             MessageBus = new CoreMessageBus(this);
             EventBus = new CoreEventBus(this);
-            StateMachine.RegisterState(new StateTechDemo1(this));
-            StateMachine.RegisterState(new StateTechDemo2(this));
-            StateMachine.RegisterState(new StateTechDemo3(this));
-            StateMachine.RegisterState(new StateTechDemo4(this));
-            StateMachine.RegisterState(new StateTechDemo5(this));
-            //StateMan.RegisterState(new MenuState(this));
-            StateMachine.SetNextState(StateTechDemo5.ID);
-            StateMachine.ChangeState();
-
             VSync = VSyncMode.On;
         }
 
@@ -141,8 +132,28 @@ namespace OpenBreed.Game
         {
             base.OnLoad(e);
 
+            var tileTex = Rendering.Textures.Create("Textures/Tiles/16/Test", @"Content\TileAtlasTest32bit.bmp");
+            Rendering.Tiles.Create("Atlases/Tiles/16/Test",tileTex.Id, 16, 4, 4);
+
+            var doorTex = Rendering.Textures.Create("Textures/Sprites/Door", @"Content\DoorSpriteSet.png");
+            Rendering.Sprites.Create("Atlases/Sprites/Door/Horizontal", doorTex.Id, 32, 16, 5, 1, 0, 0);
+            Rendering.Sprites.Create("Atlases/Sprites/Door/Vertical", doorTex.Id, 16, 32, 5, 1, 0, 16);
+
+            var arrowTex = Rendering.Textures.Create("Textures/Sprites/Arrow", @"Content\ArrowSpriteSet.png");
+            Rendering.Sprites.Create("Atlases/Sprites/Arrow", arrowTex.Id, 32, 32, 8, 5);
+
             DoorHelper.CreateHorizontalAnimations(this);
             DoorHelper.CreateVerticalAnimations(this);
+
+            StateMachine.RegisterState(new StateTechDemo1(this));
+            StateMachine.RegisterState(new StateTechDemo2(this));
+            StateMachine.RegisterState(new StateTechDemo3(this));
+            StateMachine.RegisterState(new StateTechDemo4(this));
+            StateMachine.RegisterState(new StateTechDemo5(this));
+            //StateMan.RegisterState(new MenuState(this));
+            StateMachine.SetNextState(StateTechDemo5.ID);
+            StateMachine.ChangeState();
+
 
             //GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.One);                  // Select The Type Of Blending
 

@@ -44,8 +44,6 @@ namespace OpenBreed.Game.States
             3,3,3,3,3,3,3,3,3,3
         };
 
-        private ITexture tileTex;
-        private ITexture spriteTex;
         private ITileAtlas tileAtlas;
         private ISpriteAtlas spriteAtlas;
         private Viewport gameViewport;
@@ -183,13 +181,13 @@ namespace OpenBreed.Game.States
             var arial12 = Core.Rendering.Fonts.Create("ARIAL", 12);
 
             var textEntity = Core.Entities.Create();
-            textEntity.Add(new Position(0, 0));
+            textEntity.Add(Position.Create(0, 0));
             textEntity.Add(Core.Rendering.CreateText(algerian50.Id, Vector2.Zero, "Alice has a cat!"));
             hudWorld.AddEntity(textEntity);
 
             var fpsEntity = Core.Entities.Create();
 
-            fpsEntity.Add(new Position(0, 400));
+            fpsEntity.Add(Position.Create(0, 400));
             fpsEntity.Add(Core.Rendering.CreateText(arial12.Id, Vector2.Zero, "0 fps"));
             hudWorld.AddEntity(fpsEntity);
 
@@ -203,10 +201,8 @@ namespace OpenBreed.Game.States
             var cameraBuilder = new CameraBuilder(Core);
 
             //Resources
-            tileTex = Core.Rendering.Textures.Create(@"Content\TileAtlasTest32bit.bmp");
-            spriteTex = Core.Rendering.Textures.Create(@"Content\ArrowSpriteSet.png");
-            tileAtlas = Core.Rendering.Tiles.Create(tileTex.Id, 16, 4, 4);
-            spriteAtlas = Core.Rendering.Sprites.Create(spriteTex.Id, 32, 32, 8, 5);
+            tileAtlas = Core.Rendering.Tiles.GetByAlias("Atlases/Tiles/16/Test");
+            spriteAtlas = Core.Rendering.Sprites.GetByAlias("Atlases/Sprites/Arrow");
 
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);

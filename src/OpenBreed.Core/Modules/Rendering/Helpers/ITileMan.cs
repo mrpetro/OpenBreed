@@ -6,7 +6,9 @@
 
         ITileAtlas GetById(int id);
 
-        ITileAtlas Create(int textureId, int tileSize, int tileColumns, int tileRows);
+        ITileAtlas GetByAlias(string alias);
+
+        ITileAtlas Create(string atlas, int textureId, int tileSize, int tileColumns, int tileRows);
 
         /// <summary>
         /// Unloads all textures
