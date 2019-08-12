@@ -23,14 +23,12 @@ namespace OpenBreed.Game.Entities.Door
     {
         public static ISpriteAtlas SetupHorizontalDoorSprites(ICore core)
         {
-            var texture = core.Rendering.Textures.GetByAlias("Textures/Sprites/Door");
-            return core.Rendering.Sprites.Create(texture.Id, 32, 16, 5, 1, 0, 0);
+            return core.Rendering.Sprites.GetByAlias("Atlases/Sprites/Door/Horizontal");
         }
 
         public static ISpriteAtlas SetupVerticalDoorSprites(ICore core)
         {
-            var texture = core.Rendering.Textures.GetByAlias("Textures/Sprites/Door");
-            return core.Rendering.Sprites.Create(texture.Id, 16, 32, 5, 1, 0, 16);
+            return core.Rendering.Sprites.GetByAlias("Atlases/Sprites/Door/Vertical");
         }
 
         public static void CreateHorizontalAnimations(ICore core)

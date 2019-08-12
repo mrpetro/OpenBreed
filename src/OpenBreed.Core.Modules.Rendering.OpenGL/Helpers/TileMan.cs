@@ -8,6 +8,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         #region Private Fields
 
         private readonly List<ITileAtlas> items = new List<ITileAtlas>();
+        private readonly Dictionary<string, ITileAtlas> aliases = new Dictionary<string, ITileAtlas>();
 
         #endregion Private Fields
 
@@ -28,17 +29,29 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #region Public Methods
 
-        public ITileAtlas Create(int textureId, int tileSize, int tileColumns, int tileRows)
+        public ITileAtlas Create(string alias, int textureId, int tileSize, int tileColumns, int tileRows)
         {
+            ITileAtlas result;
+            if (aliases.TryGetValue(alias, out result))
+                return result;
+
             var texture = Module.Textures.GetById(textureId);
-            var newTileAtlas = new TileAtlas(items.Count, texture, tileSize, tileColumns, tileRows);
-            items.Add(newTileAtlas);
-            return newTileAtlas;
+            result = new TileAtlas(items.Count, texture, tileSize, tileColumns, tileRows);
+            items.Add(result);
+            aliases.Add(alias, result);
+            return result;
         }
 
         public ITileAtlas GetById(int id)
         {
             return items[id];
+        }
+
+        public ITileAtlas GetByAlias(string alias)
+        {
+            ITileAtlas result = null;
+            aliases.TryGetValue(alias, out result);
+            return result;
         }
 
         public void UnloadAll()
