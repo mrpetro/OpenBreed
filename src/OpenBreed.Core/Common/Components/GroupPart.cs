@@ -1,17 +1,15 @@
-﻿using System;
-
-namespace OpenBreed.Core.Common.Systems.Components
+﻿namespace OpenBreed.Core.Common.Systems.Components
 {
     public class GroupPart : IEntityComponent
     {
-        #region Public Constructors
+        #region Private Constructors
 
-        public GroupPart(int entityId)
+        private GroupPart(int entityId)
         {
             EntityId = entityId;
         }
 
-        #endregion Public Constructors
+        #endregion Private Constructors
 
         #region Public Properties
 
@@ -21,5 +19,14 @@ namespace OpenBreed.Core.Common.Systems.Components
         public int EntityId { get; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public static GroupPart Create(int id)
+        {
+            return new GroupPart(id);
+        }
+
+        #endregion Public Methods
     }
 }
