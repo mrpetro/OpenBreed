@@ -69,11 +69,19 @@ namespace OpenBreed.Game.States
         public StateTechDemo2(ICore core)
         {
             Core = core;
+        }
 
-            InitializeAll();
+        private void DeinitializeAll()
+        {
+            WorldA.RemoveAllEntities();
+            WorldB.RemoveAllEntities();
+            Core.Worlds.Remove(WorldA);
+            Core.Worlds.Remove(WorldB);
 
-            InitializeWorldA();
-            InitializeWorldB();
+            Core.Rendering.Viewports.Remove(viewportLeft);
+            Core.Rendering.Viewports.Remove(viewportRight);
+
+            Core.Inputs.KeyDown -= Inputs_KeyDown;
         }
 
         private void InitializeAll()
@@ -105,6 +113,11 @@ namespace OpenBreed.Game.States
 
             Core.Worlds.Add(WorldA);
             Core.Worlds.Add(WorldB);
+
+            Core.Inputs.KeyDown += Inputs_KeyDown;
+
+            Core.Rendering.Viewports.Add(viewportLeft);
+            Core.Rendering.Viewports.Add(viewportRight);
         }
 
         #endregion Public Constructors
@@ -174,10 +187,10 @@ namespace OpenBreed.Game.States
 
         protected override void OnEnter()
         {
-            Core.Inputs.KeyDown += Inputs_KeyDown;
+            InitializeAll();
 
-            Core.Rendering.Viewports.Add(viewportLeft);
-            Core.Rendering.Viewports.Add(viewportRight);
+            InitializeWorldA();
+            InitializeWorldB();
 
             Console.Clear();
             Console.WriteLine("---------- Multi-worlds --------");
@@ -201,10 +214,7 @@ namespace OpenBreed.Game.States
 
         protected override void OnLeave()
         {
-            Core.Rendering.Viewports.Remove(viewportLeft);
-            Core.Rendering.Viewports.Remove(viewportRight);
-
-            Core.Inputs.KeyDown -= Inputs_KeyDown;
+            DeinitializeAll();
         }
 
         #endregion Protected Methods

@@ -1,24 +1,18 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenBreed.Core.States;
-using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Rendering;
-using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
 using OpenBreed.Core.Modules.Rendering.Entities;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
-using OpenBreed.Game.Entities;
+using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.States;
+using OpenBreed.Game.Entities.Actor;
 using OpenBreed.Game.Entities.Builders;
+using OpenBreed.Game.Helpers;
+using OpenBreed.Game.Worlds;
 using OpenTK;
 using OpenTK.Input;
 using System;
 using System.Drawing;
-using OpenBreed.Core.Entities;
-using OpenBreed.Game.Worlds;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
-using OpenBreed.Game.Helpers;
-using OpenBreed.Game.Entities.Actor;
-using OpenBreed.Core.Common.Systems.Components;
 
 namespace OpenBreed.Game.States
 {
@@ -30,6 +24,10 @@ namespace OpenBreed.Game.States
         #region Public Fields
 
         public const string ID = "TECH_DEMO_4";
+
+        public HudWorld HudWorld;
+
+        public GameWorld GameWorld;
 
         #endregion Public Fields
 
@@ -55,9 +53,6 @@ namespace OpenBreed.Game.States
         public StateTechDemo4(ICore core)
         {
             Core = core;
-
-            InitializeWorld();
-            InitializeHud();
         }
 
         #endregion Public Constructors
@@ -81,7 +76,7 @@ namespace OpenBreed.Game.States
 
             gameViewport.X = clientRectangle.X + 25;
             gameViewport.Y = clientRectangle.Y + 25;
-            gameViewport.Width = clientRectangle.Width  - 50;
+            gameViewport.Width = clientRectangle.Width - 50;
             gameViewport.Height = clientRectangle.Height - 50;
 
             hudViewport.X = clientRectangle.X + 25;
@@ -112,29 +107,21 @@ namespace OpenBreed.Game.States
                     transf.Invert();
                     var delta4 = Vector4.Transform(transf, new Vector4(Core.Inputs.CursorDelta));
                     var delta2 = new Vector2(-delta4.X, -delta4.Y);
- 
+
                     hoverViewport.Camera.Position.Value += delta2;
                 }
-             }
+            }
         }
 
         #endregion Public Methods
 
         #region Protected Methods
 
-        private void Inputs_KeyDown(object sender, KeyboardKeyEventArgs e)
-        {
-            var pressedKey = e.Key.ToString();
-
-            if (pressedKey.StartsWith("Number"))
-            {
-                pressedKey = pressedKey.Replace("Number", "");
-                Core.StateMachine.SetNextState($"TECH_DEMO_{pressedKey}");
-            }
-        }
-
         protected override void OnEnter()
         {
+            InitializeWorld();
+            InitializeHud();
+
             Core.Inputs.KeyDown += Inputs_KeyDown;
 
             Core.Rendering.Viewports.Add(gameViewport);
@@ -150,6 +137,11 @@ namespace OpenBreed.Game.States
 
         protected override void OnLeave()
         {
+            GameWorld.RemoveAllEntities();
+            Core.Worlds.Remove(GameWorld);
+            HudWorld.RemoveAllEntities();
+            Core.Worlds.Remove(HudWorld);
+
             Core.Rendering.Viewports.Remove(hudViewport);
             Core.Rendering.Viewports.Remove(gameViewport);
 
@@ -160,9 +152,20 @@ namespace OpenBreed.Game.States
 
         #region Private Methods
 
+        private void Inputs_KeyDown(object sender, KeyboardKeyEventArgs e)
+        {
+            var pressedKey = e.Key.ToString();
+
+            if (pressedKey.StartsWith("Number"))
+            {
+                pressedKey = pressedKey.Replace("Number", "");
+                Core.StateMachine.SetNextState($"TECH_DEMO_{pressedKey}");
+            }
+        }
+
         private void InitializeHud()
         {
-            var hudWorld = new HudWorld(Core);
+            HudWorld = new HudWorld(Core);
 
             var cameraBuilder = new CameraBuilder(Core);
 
@@ -170,8 +173,7 @@ namespace OpenBreed.Game.States
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
             HudCamera = (CameraEntity)cameraBuilder.Build();
-            hudWorld.AddEntity(HudCamera);
-
+            HudWorld.AddEntity(HudCamera);
 
             hudViewport = (Viewport)Core.Rendering.Viewports.Create(0, 0, 540, 380);
             hudViewport.Camera = HudCamera;
@@ -182,20 +184,20 @@ namespace OpenBreed.Game.States
             var textEntity = Core.Entities.Create();
             textEntity.Add(Position.Create(0, 0));
             textEntity.Add(Core.Rendering.CreateText(algerian50.Id, Vector2.Zero, "Alice has a cat!"));
-            hudWorld.AddEntity(textEntity);
+            HudWorld.AddEntity(textEntity);
 
             var fpsEntity = Core.Entities.Create();
 
             fpsEntity.Add(Position.Create(0, 400));
             fpsEntity.Add(Core.Rendering.CreateText(arial12.Id, Vector2.Zero, "0 fps"));
-            hudWorld.AddEntity(fpsEntity);
+            HudWorld.AddEntity(fpsEntity);
 
-            Core.Worlds.Add(hudWorld);
+            Core.Worlds.Add(HudWorld);
         }
 
         private void InitializeWorld()
         {
-            var gameWorld = new GameWorld(Core);
+            GameWorld = new GameWorld(Core);
 
             var cameraBuilder = new CameraBuilder(Core);
 
@@ -206,8 +208,7 @@ namespace OpenBreed.Game.States
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
             GameCamera = (CameraEntity)cameraBuilder.Build();
-            gameWorld.AddEntity(GameCamera);
-
+            GameWorld.AddEntity(GameCamera);
 
             gameViewport = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
             gameViewport.Camera = GameCamera;
@@ -222,7 +223,7 @@ namespace OpenBreed.Game.States
             var stateMachine = ActorHelper.CreateStateMachine(actor);
             stateMachine.SetInitialState("Standing_Down");
 
-            gameWorld.AddEntity(actor);
+            GameWorld.AddEntity(actor);
 
             var rnd = new Random();
 
@@ -238,12 +239,12 @@ namespace OpenBreed.Game.States
                     {
                         blockBuilder.SetIndices(x + 5, y + 5);
                         blockBuilder.SetTileId(v);
-                        gameWorld.AddEntity(blockBuilder.Build());
+                        GameWorld.AddEntity(blockBuilder.Build());
                     }
                 }
             }
 
-            Core.Worlds.Add(gameWorld);
+            Core.Worlds.Add(GameWorld);
         }
 
         #endregion Private Methods

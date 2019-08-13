@@ -24,6 +24,7 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Game.Entities.Door;
 using OpenBreed.Game.Helpers;
+using OpenBreed.Game.Entities.Actor;
 
 namespace OpenBreed.Game
 {
@@ -144,6 +145,7 @@ namespace OpenBreed.Game
 
             DoorHelper.CreateHorizontalAnimations(this);
             DoorHelper.CreateVerticalAnimations(this);
+            ActorHelper.CreateAnimations(this);
 
             StateMachine.RegisterState(new StateTechDemo1(this));
             StateMachine.RegisterState(new StateTechDemo2(this));

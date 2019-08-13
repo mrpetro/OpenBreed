@@ -56,8 +56,6 @@ namespace OpenBreed.Game.States
         public StateTechDemo5(ICore core)
         {
             Core = core;
-
-            InitializeWorld();
         }
 
         #endregion Public Constructors
@@ -130,8 +128,9 @@ namespace OpenBreed.Game.States
 
         protected override void OnEnter()
         {
-            Core.Inputs.KeyDown += Inputs_KeyDown;
+            InitializeWorld();
 
+            Core.Inputs.KeyDown += Inputs_KeyDown;
             Core.Rendering.Viewports.Add(gameViewport);
 
             Console.Clear();
@@ -144,10 +143,13 @@ namespace OpenBreed.Game.States
 
         protected override void OnLeave()
         {
-            Core.Rendering.Viewports.Remove(gameViewport);
+            GameWorld.RemoveAllEntities();
+            Core.Worlds.Remove(GameWorld);
 
+            Core.Rendering.Viewports.Remove(gameViewport);
             Core.Inputs.KeyDown -= Inputs_KeyDown;
         }
+        public GameWorld GameWorld;
 
         #endregion Protected Methods
 
@@ -155,7 +157,7 @@ namespace OpenBreed.Game.States
 
         private void InitializeWorld()
         {
-            var gameWorld = new GameWorld(Core);
+            GameWorld = new GameWorld(Core);
 
             var cameraBuilder = new CameraBuilder(Core);
 
@@ -166,7 +168,7 @@ namespace OpenBreed.Game.States
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
             GameCamera = (CameraEntity)cameraBuilder.Build();
-            gameWorld.AddEntity(GameCamera);
+            GameWorld.AddEntity(GameCamera);
 
 
             gameViewport = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
@@ -182,7 +184,7 @@ namespace OpenBreed.Game.States
    
             var actorSm = ActorHelper.CreateStateMachine(actor);
             actorSm.SetInitialState("Standing_Down");
-            gameWorld.AddEntity(actor);
+            GameWorld.AddEntity(actor);
 
             var rnd = new Random();
 
@@ -196,34 +198,34 @@ namespace OpenBreed.Game.States
             //}
 
             for (int i = 0; i < 10; i++)
-                DoorHelper.AddHorizontalDoor(Core, gameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3, tileAtlas);
+                DoorHelper.AddHorizontalDoor(Core, GameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3, tileAtlas);
 
             for (int i = 0; i < 10; i++)
-                DoorHelper.AddVerticalDoor(Core, gameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3, tileAtlas);
+                DoorHelper.AddVerticalDoor(Core, GameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3, tileAtlas);
 
             for (int x = 0; x < 64; x++)
             {
                 blockBuilder.SetIndices(x, 0);
                 blockBuilder.SetTileId(9);
-                gameWorld.AddEntity(blockBuilder.Build());
+                GameWorld.AddEntity(blockBuilder.Build());
 
                 blockBuilder.SetIndices(x, 62);
                 blockBuilder.SetTileId(9);
-                gameWorld.AddEntity(blockBuilder.Build());
+                GameWorld.AddEntity(blockBuilder.Build());
             }
 
             for (int y = 1; y < 63; y++)
             {
                 blockBuilder.SetIndices(0, y);
                 blockBuilder.SetTileId(9);
-                gameWorld.AddEntity(blockBuilder.Build());
+                GameWorld.AddEntity(blockBuilder.Build());
 
                 blockBuilder.SetIndices(62, y);
                 blockBuilder.SetTileId(9);
-                gameWorld.AddEntity(blockBuilder.Build());
+                GameWorld.AddEntity(blockBuilder.Build());
             }
 
-            Core.Worlds.Add(gameWorld);
+            Core.Worlds.Add(GameWorld);
         }
 
         #endregion Private Methods
