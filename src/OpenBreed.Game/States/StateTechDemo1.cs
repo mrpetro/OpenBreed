@@ -218,11 +218,9 @@ namespace OpenBreed.Game.States
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas.Id);
 
-            var spriteAtlas = ActorHelper.SetupSprites(Core);
-
             ActorHelper.SetupAnimations(Core);
 
-            var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288), spriteAtlas);
+            var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288));
             actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
 
             var stateMachine = ActorHelper.CreateStateMachine(actor);

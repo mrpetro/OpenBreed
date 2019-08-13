@@ -18,11 +18,6 @@ namespace OpenBreed.Game.Entities.Actor
 {
     public static class ActorHelper
     {
-        public static ISpriteAtlas SetupSprites(ICore core)
-        {
-            return core.Rendering.Sprites.GetByAlias("Atlases/Sprites/Arrow");
-        }
-
         public static void SetupAnimations(ICore core)
         {
             var animationStandingRight = core.Animations.Anims.Create<int>("STANDING_RIGHT");
@@ -92,8 +87,10 @@ namespace OpenBreed.Game.Entities.Actor
             animationWalkingUpRight.AddFrame(39, 1.0f);
         }
 
-        public static IEntity CreateActor(ICore core, Vector2 pos, ISpriteAtlas atlas)
+        public static IEntity CreateActor(ICore core, Vector2 pos)
         {
+            var atlas = core.Rendering.Sprites.GetByAlias("Atlases/Sprites/Arrow");
+
             var actor = core.Entities.Create();
             actor.Add(new Animator<int>(10.0f, true));
             //actor.Add(new CollisionDebug(Core.Rendering.CreateSprite(spriteAtlas.Id)));

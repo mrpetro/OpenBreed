@@ -47,9 +47,6 @@ namespace OpenBreed.Game.States
         };
 
         private ITileAtlas tileAtlas;
-        private ISpriteAtlas arrowSpriteAtlas;
-        private ISpriteAtlas doorHorizontalAtlas;
-        private ISpriteAtlas doorVerticalAtlas;
         private Viewport gameViewport;
 
         #endregion Private Fields
@@ -164,9 +161,6 @@ namespace OpenBreed.Game.States
 
             //Resources
             tileAtlas = Core.Rendering.Tiles.GetByAlias("Atlases/Tiles/16/Test");
-            arrowSpriteAtlas = Core.Rendering.Sprites.GetByAlias("Atlases/Sprites/Arrow");
-            doorHorizontalAtlas = DoorHelper.SetupHorizontalDoorSprites(Core);
-            doorVerticalAtlas = DoorHelper.SetupVerticalDoorSprites(Core);
 
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
@@ -181,7 +175,7 @@ namespace OpenBreed.Game.States
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas.Id);
 
-            var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288), arrowSpriteAtlas);
+            var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288));
             actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
             actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
 
@@ -202,10 +196,10 @@ namespace OpenBreed.Game.States
             //}
 
             for (int i = 0; i < 10; i++)
-                DoorHelper.AddHorizontalDoor(gameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3, doorHorizontalAtlas, tileAtlas);
+                DoorHelper.AddHorizontalDoor(Core, gameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3, tileAtlas);
 
             for (int i = 0; i < 10; i++)
-                DoorHelper.AddVerticalDoor(gameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3, doorVerticalAtlas, tileAtlas);
+                DoorHelper.AddVerticalDoor(Core, gameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3, tileAtlas);
 
             for (int x = 0; x < 64; x++)
             {

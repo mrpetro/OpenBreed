@@ -182,7 +182,7 @@ namespace OpenBreed.Game.States
 
             Core.Worlds.Add(World);
 
-            actor = ActorHelper.CreateActor(Core, new Vector2(64, 288), spriteAtlas);
+            actor = ActorHelper.CreateActor(Core, new Vector2(64, 288));
             actor.Add(new AiControl());
 
             var blockBuilder = new WorldBlockBuilder(Core);

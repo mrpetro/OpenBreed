@@ -45,7 +45,6 @@ namespace OpenBreed.Game.States
         };
 
         private ITileAtlas tileAtlas;
-        private ISpriteAtlas spriteAtlas;
         private Viewport gameViewport;
         private Viewport hudViewport;
 
@@ -202,7 +201,6 @@ namespace OpenBreed.Game.States
 
             //Resources
             tileAtlas = Core.Rendering.Tiles.GetByAlias("Atlases/Tiles/16/Test");
-            spriteAtlas = Core.Rendering.Sprites.GetByAlias("Atlases/Sprites/Arrow");
 
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
@@ -217,7 +215,7 @@ namespace OpenBreed.Game.States
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas.Id);
 
-            var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288), spriteAtlas);
+            var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288));
             actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
             actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
 
