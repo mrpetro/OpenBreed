@@ -1,11 +1,6 @@
-﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Physics.Helpers;
-using OpenTK;
+﻿using OpenTK;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using OpenBreed.Core.Modules.Physics.Systems;
-using OpenBreed.Core.Common.Systems.Components;
 
 namespace OpenBreed.Core.Modules.Physics.Components
 {
@@ -14,20 +9,6 @@ namespace OpenBreed.Core.Modules.Physics.Components
     /// </summary>
     public class Body : IBody
     {
-        /// <summary>
-        /// Coefficient of friction factor for this body.
-        /// </summary>
-        public float CofFactor { get; internal set; }
-
-        /// <summary>
-        /// Coefficient of restitution factor for this body.
-        /// </summary>
-        public float CorFactor { get; internal set; }
-
-        #region Private Fields
-
-        #endregion Private Fields
-
         #region Public Constructors
 
         public Body(float cofFactor, float corFactor)
@@ -41,9 +22,14 @@ namespace OpenBreed.Core.Modules.Physics.Components
         #region Public Properties
 
         /// <summary>
-        /// DEBUG only
+        /// Coefficient of friction factor for this body.
         /// </summary>
-        public bool Collides { get; set; }
+        public float CofFactor { get; internal set; }
+
+        /// <summary>
+        /// Coefficient of restitution factor for this body.
+        /// </summary>
+        public float CorFactor { get; internal set; }
 
         /// <summary>
         /// DEBUG only
@@ -55,7 +41,7 @@ namespace OpenBreed.Core.Modules.Physics.Components
         /// DEBUG only
         /// </summary>
         ///
-        public Vector2 Projection { get;  set; }
+        public Vector2 Projection { get; set; }
 
         /// <summary>
         /// OldPosition used for verlet integration
@@ -63,23 +49,5 @@ namespace OpenBreed.Core.Modules.Physics.Components
         public Vector2 OldPosition { get; set; }
 
         #endregion Public Properties
-
-        #region Public Methods
-
-        public void Deinitialize(IEntity entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Initialize(IEntity entity)
-        {
-        }
-
-        #endregion Public Methods
-
-        #region Private Methods
-
-
-        #endregion Private Methods
     }
 }

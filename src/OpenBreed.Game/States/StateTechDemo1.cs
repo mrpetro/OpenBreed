@@ -65,8 +65,6 @@ namespace OpenBreed.Game.States
         public StateTechDemo1(ICore core)
         {
             Core = core;
-
-            InitializeWorld();
         }
 
         #endregion Public Constructors
@@ -143,11 +141,7 @@ namespace OpenBreed.Game.States
 
         protected override void OnEnter()
         {
-            Core.Inputs.KeyDown += Inputs_KeyDown;
-
-            Core.Rendering.Viewports.Add(viewportA);
-            Core.Rendering.Viewports.Add(viewportB);
-            Core.Rendering.Viewports.Add(viewportC);
+            InitializeWorld();
 
             Console.Clear();
             Console.WriteLine("---------- Viewports & Cameras --------");
@@ -170,16 +164,24 @@ namespace OpenBreed.Game.States
 
         protected override void OnLeave()
         {
+            DeinitializeWorld();
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
+
+        private void DeinitializeWorld()
+        {
+            World.RemoveAllEntities();
+
+            Core.Worlds.Remove(World);
             Core.Rendering.Viewports.Remove(viewportA);
             Core.Rendering.Viewports.Remove(viewportB);
             Core.Rendering.Viewports.Remove(viewportC);
 
             Core.Inputs.KeyDown -= Inputs_KeyDown;
         }
-
-        #endregion Protected Methods
-
-        #region Private Methods
 
         private void InitializeWorld()
         {
@@ -218,11 +220,7 @@ namespace OpenBreed.Game.States
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas(tileAtlas.Id);
 
-            var spriteAtlas = ActorHelper.SetupSprites(Core);
-
-            ActorHelper.SetupAnimations(Core);
-
-            var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288), spriteAtlas);
+            var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288));
             actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
 
             var stateMachine = ActorHelper.CreateStateMachine(actor);
@@ -248,6 +246,12 @@ namespace OpenBreed.Game.States
                     }
                 }
             }
+
+            Core.Inputs.KeyDown += Inputs_KeyDown;
+
+            Core.Rendering.Viewports.Add(viewportA);
+            Core.Rendering.Viewports.Add(viewportB);
+            Core.Rendering.Viewports.Add(viewportC);
         }
 
         #endregion Private Methods

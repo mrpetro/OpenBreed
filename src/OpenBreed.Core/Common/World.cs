@@ -126,6 +126,12 @@ namespace OpenBreed.Core.Common
             systems.OfType<IUpdatableSystem>().ForEach(item => item.Update(dt * TimeMultiplier));
         }
 
+        public void RemoveAllEntities()
+        {
+            for (int i = 0; i < entities.Count; i++)
+                RemoveEntity(entities[i]);
+        }
+
         #endregion Public Methods
 
         #region Internal Methods
@@ -158,7 +164,6 @@ namespace OpenBreed.Core.Common
             //Process entities to add
             for (int i = 0; i < toAdd.Count; i++)
                 RegisterEntity((Entity)toAdd[i]);
-
 
             //Perform cleanup on all world systems
             Systems.ForEach(item => item.Cleanup());

@@ -57,8 +57,6 @@ namespace OpenBreed.Game.States
         public StateTechDemo3(ICore core)
         {
             Core = core;
-
-            InitializeWorld();
         }
 
         #endregion Public Constructors
@@ -135,11 +133,17 @@ namespace OpenBreed.Game.States
             }
         }
 
+        private void DeinitializeWorld()
+        {
+            World.RemoveAllEntities();
+            Core.Worlds.Remove(World);
+            Core.Rendering.Viewports.Remove(viewport);
+            Core.Inputs.KeyDown -= Inputs_KeyDown;
+        }
+
         protected override void OnEnter()
         {
-            Core.Inputs.KeyDown += Inputs_KeyDown;
-
-            Core.Rendering.Viewports.Add(viewport);
+            InitializeWorld();
 
             Console.Clear();
             Console.WriteLine("---------- Pathfinding --------");
@@ -151,9 +155,7 @@ namespace OpenBreed.Game.States
 
         protected override void OnLeave()
         {
-            Core.Rendering.Viewports.Remove(viewport);
-
-            Core.Inputs.KeyDown -= Inputs_KeyDown;
+            DeinitializeWorld();
         }
 
         #endregion Protected Methods
@@ -182,7 +184,7 @@ namespace OpenBreed.Game.States
 
             Core.Worlds.Add(World);
 
-            actor = ActorHelper.CreateActor(Core, new Vector2(64, 288), spriteAtlas);
+            actor = ActorHelper.CreateActor(Core, new Vector2(64, 288));
             actor.Add(new AiControl());
 
             var blockBuilder = new WorldBlockBuilder(Core);
@@ -211,6 +213,9 @@ namespace OpenBreed.Game.States
                     }
                 }
             }
+
+            Core.Inputs.KeyDown += Inputs_KeyDown;
+            Core.Rendering.Viewports.Add(viewport);
         }
 
         #endregion Private Methods

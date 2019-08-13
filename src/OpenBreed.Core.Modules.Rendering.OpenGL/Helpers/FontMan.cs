@@ -13,6 +13,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         #region Private Fields
 
         private readonly List<IFont> items = new List<IFont>();
+        private readonly Dictionary<string, IFont> aliases = new Dictionary<string, IFont>();
         private Dictionary<string, FontAtlas> fonts = new Dictionary<string, FontAtlas>();
 
         #endregion Private Fields
@@ -35,12 +36,20 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         public IFont Create(string fontName, int fontSize)
         {
+            fontName = fontName.Trim().ToLower();
             var faBuilder = new FontAtlasBuilder(this);
             faBuilder.SetFontName(fontName);
             faBuilder.SetFontSize(fontSize);
-            var newFontAtlas = new FontAtlas(faBuilder);
-            items.Add(newFontAtlas);
-            return newFontAtlas;
+
+            var alias = $"Fonts/{fontName}/{fontSize}";
+            IFont result;
+            if (aliases.TryGetValue(alias, out result))
+                return result;
+
+            result = new FontAtlas(faBuilder);
+            items.Add(result);
+            aliases.Add(alias, result);
+            return result;
         }
 
         #endregion Public Methods
