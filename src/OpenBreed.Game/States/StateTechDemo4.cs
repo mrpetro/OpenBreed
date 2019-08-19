@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
+using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Entities;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
 using OpenBreed.Core.Modules.Rendering.Helpers;
@@ -183,13 +184,13 @@ namespace OpenBreed.Game.States
 
             var textEntity = Core.Entities.Create();
             textEntity.Add(Position.Create(0, 0));
-            textEntity.Add(Core.Rendering.CreateText(algerian50.Id, Vector2.Zero, "Alice has a cat!"));
+            textEntity.Add(Text.Create(algerian50.Id, Vector2.Zero, "Alice has a cat!"));
             HudWorld.AddEntity(textEntity);
 
             var fpsEntity = Core.Entities.Create();
 
             fpsEntity.Add(Position.Create(0, 400));
-            fpsEntity.Add(Core.Rendering.CreateText(arial12.Id, Vector2.Zero, "0 fps"));
+            fpsEntity.Add(Text.Create(arial12.Id, Vector2.Zero, "0 fps"));
             HudWorld.AddEntity(fpsEntity);
 
             Core.Worlds.Add(HudWorld);

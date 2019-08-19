@@ -1,11 +1,4 @@
-﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenBreed.Core.Modules.Rendering.Systems;
-using OpenTK.Graphics.OpenGL;
-using System;
-using System.Linq;
-
-namespace OpenBreed.Core.Modules.Rendering.Components
+﻿namespace OpenBreed.Core.Modules.Rendering.Components
 {
     /// <summary>
     /// Axis-aligned sprite render component
@@ -13,17 +6,17 @@ namespace OpenBreed.Core.Modules.Rendering.Components
     ///  - axis-aligned box shape
     ///  - position
     /// </summary>
-    internal class Sprite : ISprite
+    public class Sprite : ISprite
     {
-        #region Internal Constructors
+        #region Private Constructors
 
-        internal Sprite(int atlasId, int imageId)
+        private Sprite(int atlasId, int imageId)
         {
             AtlasId = atlasId;
             this.ImageId = ImageId;
         }
 
-        #endregion Internal Constructors
+        #endregion Private Constructors
 
         #region Public Properties
 
@@ -38,5 +31,20 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         public int ImageId { get; set; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        /// <summary>
+        /// Create sprite render component using given sprite atlas
+        /// </summary>
+        /// <param name="atlasId">Id of sprite atlas to use for this sprite component</param>
+        /// <param name="imageId">Optiona initial sprite atlas image id</param>
+        /// <returns>Sprite component</returns>
+        public static Sprite Create(int atlasId, int imageId = 0)
+        {
+            return new Sprite(atlasId, imageId);
+        }
+
+        #endregion Public Methods
     }
 }

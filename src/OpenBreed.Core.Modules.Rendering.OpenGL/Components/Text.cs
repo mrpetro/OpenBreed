@@ -1,29 +1,19 @@
-﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenBreed.Core.Modules.Rendering.Systems;
-using OpenTK;
-using OpenTK.Graphics.OpenGL;
-using System;
-using System.Linq;
+﻿using OpenTK;
 
 namespace OpenBreed.Core.Modules.Rendering.Components
 {
-    internal class Text : IText
+    public class Text : IText
     {
-        #region Private Fields
+        #region Private Constructors
 
-        #endregion Private Fields
-
-        #region Internal Constructors
-
-        internal Text(int fontId, Vector2 offset, string value)
+        private Text(int fontId, Vector2 offset, string value)
         {
             FontId = fontId;
             Offset = offset;
             Value = value;
         }
 
-        #endregion Internal Constructors
+        #endregion Private Constructors
 
         #region Public Properties
 
@@ -43,5 +33,21 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         public string Value { get; set; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        /// <summary>
+        /// Creates text component using given font
+        /// </summary>
+        /// <param name="fontId">Id of font to use for this text component</param>
+        /// <param name="offset">Offset position from position component</param>
+        /// <param name="value">Optional initial text value</param>
+        /// <returns>Text component</returns>
+        public static Text Create(int fontId, Vector2 offset, string value = null)
+        {
+            return new Text(fontId, offset, value);
+        }
+
+        #endregion Public Methods
     }
 }

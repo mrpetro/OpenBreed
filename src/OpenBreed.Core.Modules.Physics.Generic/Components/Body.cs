@@ -11,13 +11,21 @@ namespace OpenBreed.Core.Modules.Physics.Components
     {
         #region Public Constructors
 
-        public Body(float cofFactor, float corFactor)
+        public Body()
+        {
+        }
+
+        #endregion Public Constructors
+
+        #region Private Constructors
+
+        private Body(float cofFactor, float corFactor)
         {
             CofFactor = cofFactor;
             CorFactor = corFactor;
         }
 
-        #endregion Public Constructors
+        #endregion Private Constructors
 
         #region Public Properties
 
@@ -49,5 +57,14 @@ namespace OpenBreed.Core.Modules.Physics.Components
         public Vector2 OldPosition { get; set; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public static Body Create(float cofFactor, float corFactor)
+        {
+            return new Body(cofFactor, corFactor);
+        }
+
+        #endregion Public Methods
     }
 }

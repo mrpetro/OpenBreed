@@ -16,7 +16,7 @@ namespace OpenBreed.Core.Modules.Rendering.Messages
         public TileSetMsg(IEntity entity, int tileId)
         {
             Entity = entity;
-            TileId = tileId;
+            TileImageId = tileId;
         }
 
         #endregion Public Constructors
@@ -25,7 +25,7 @@ namespace OpenBreed.Core.Modules.Rendering.Messages
 
         public IEntity Entity { get; }
         public string Type { get { return TYPE; } }
-        public int TileId { get; }
+        public int TileImageId { get; }
 
         #endregion Public Properties
     }

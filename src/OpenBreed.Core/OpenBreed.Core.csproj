@@ -54,6 +54,13 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BlueprintMan.cs" />
+    <Compile Include="Blueprints\BlueprintXml.cs" />
+    <Compile Include="Blueprints\ComponentStateXml.cs" />
+    <Compile Include="Blueprints\IComponentState.cs" />
+    <Compile Include="Blueprints\IEntityDef.cs" />
+    <Compile Include="Blueprints\EntityDefXml.cs" />
+    <Compile Include="Blueprints\IBlueprint.cs" />
     <Compile Include="Collections\IdMap.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Common\Components\GridPosition.cs" />
@@ -104,6 +111,7 @@
     <Compile Include="Modules\Rendering\Systems\IWireframeSystem.cs" />
     <Compile Include="Modules\Rendering\Systems\ITileSystem.cs" />
     <Compile Include="Modules\Rendering\Systems\ISpriteSystem.cs" />
+    <Compile Include="Other.cs" />
     <Compile Include="States\IStateBuilder.cs" />
     <Compile Include="States\IState.cs" />
     <Compile Include="States\StateChangeMsg.cs" />
@@ -170,6 +178,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\KeraLua.1.0.14\build\net45\KeraLua.targets" Condition="Exists('..\..\packages\KeraLua.1.0.14\build\net45\KeraLua.targets')" />

@@ -92,18 +92,6 @@ namespace OpenBreed.Core.Modules.Rendering
         }
 
         /// <summary>
-        /// Creates text component using given font
-        /// </summary>
-        /// <param name="fontId">Id of font to use for this text component</param>
-        /// <param name="offset">Offset position from position component</param>
-        /// <param name="value">Optional initial text value</param>
-        /// <returns>Text component</returns>
-        public IText CreateText(int fontId, Vector2 offset, string value = null)
-        {
-            return new Text(fontId, offset, value);
-        }
-
-        /// <summary>
         /// Create wireframe render component
         /// </summary>
         /// <param name="thickness">Thickness of wireframe lines</param>
@@ -112,16 +100,6 @@ namespace OpenBreed.Core.Modules.Rendering
         public IWireframe CreateWireframe(float thickness, Color4 color)
         {
             return new Wireframe(thickness, color);
-        }
-
-        public ISprite CreateSprite(int atlasId, int imageId = 0)
-        {
-            return new Sprite(atlasId, imageId);
-        }
-
-        public ITile CreateTile(int atlasId, int imageId = 0)
-        {
-            return new Tile(atlasId, imageId);
         }
 
         public void Draw(float dt)

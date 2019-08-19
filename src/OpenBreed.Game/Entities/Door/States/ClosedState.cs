@@ -1,6 +1,9 @@
-﻿using OpenBreed.Core.Common.Helpers;
+﻿using OpenBreed.Core.Common.Components;
+using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Messages;
@@ -13,8 +16,8 @@ namespace OpenBreed.Game.Components.States
     {
         #region Private Fields
 
-        private readonly int leftTileId;
-        private readonly int rightTileId;
+        private readonly int leftTileImageId;
+        private readonly int rightTileImageId;
         private IEntity[] doorParts;
 
         #endregion Private Fields
@@ -24,8 +27,8 @@ namespace OpenBreed.Game.Components.States
         public ClosedState(string id, int leftTileId, int rightTileId)
         {
             Id = id;
-            this.leftTileId = leftTileId;
-            this.rightTileId = rightTileId;
+            this.leftTileImageId = leftTileId;
+            this.rightTileImageId = rightTileId;
         }
 
         #endregion Public Constructors
@@ -42,8 +45,8 @@ namespace OpenBreed.Game.Components.States
         public void EnterState()
         {
             Entity.PostMsg(new SpriteOffMsg(Entity));
-            Entity.PostMsg(new TileSetMsg(doorParts[0], leftTileId));
-            Entity.PostMsg(new TileSetMsg(doorParts[1], rightTileId));
+            Entity.PostMsg(new TileSetMsg(doorParts[0], leftTileImageId));
+            Entity.PostMsg(new TileSetMsg(doorParts[1], rightTileImageId));
 
             Entity.PostMsg(new TextSetMsg(Entity, "Door - Closed"));
 
@@ -54,6 +57,26 @@ namespace OpenBreed.Game.Components.States
         public void Initialize(IEntity entity)
         {
             Entity = entity;
+
+            var core = entity.Core;
+            var world = entity.World;
+
+            //var doorPart1 = core.Entities.Create();
+            //doorPart1.Add(GridPosition.Create(x, y));
+            //doorPart1.Add(Body.Create(1.0f, 1.0f));
+            //doorPart1.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
+            //doorPart1.Add(GroupPart.Create(door.Id));
+            //doorPart1.Add(Tile.Create(tileAtlas.Id));
+
+            //var doorPart2 = core.Entities.Create();
+            //doorPart2.Add(GridPosition.Create(x + 1, y));
+            //doorPart2.Add(Body.Create(1.0f, 1.0f));
+            //doorPart2.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
+            //doorPart2.Add(Tile.Create(tileAtlas.Id));
+            //doorPart2.Add(GroupPart.Create(door.Id));
+
+            //world.AddEntity(doorPart1);
+            //world.AddEntity(doorPart2);
 
             doorParts = Entity.World.Systems.OfType<GroupSystem>().First().GetGroup(Entity).ToArray();
         }

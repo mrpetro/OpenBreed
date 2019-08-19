@@ -8,6 +8,14 @@ namespace OpenBreed.Core.Common.Components
     /// </summary>
     public class GridPosition : IEntityComponent
     {
+        #region Public Constructors
+
+        public GridPosition()
+        {
+        }
+
+        #endregion Public Constructors
+
         #region Private Constructors
 
         /// <summary>
@@ -34,6 +42,11 @@ namespace OpenBreed.Core.Common.Components
         public static GridPosition Create(int x, int y)
         {
             return new GridPosition(x, y);
+        }
+        
+        public static void Register(EntityMan entities)
+        {
+            //EntityMan.AddSetter("GridPosition.Offset",(o) => 
         }
 
         #endregion Public Methods

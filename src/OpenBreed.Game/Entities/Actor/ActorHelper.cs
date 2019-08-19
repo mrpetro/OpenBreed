@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Modules.Rendering.Components;
 
 namespace OpenBreed.Game.Entities.Actor
 {
@@ -94,14 +95,14 @@ namespace OpenBreed.Game.Entities.Actor
             var actor = core.Entities.Create();
             actor.Add(new Animator<int>(10.0f, true));
             //actor.Add(new CollisionDebug(Core.Rendering.CreateSprite(spriteAtlas.Id)));
-            actor.Add(core.Rendering.CreateSprite(atlas.Id));
+            actor.Add(Sprite.Create(atlas.Id));
             actor.Add(Position.Create(pos));
             actor.Add(Thrust.Create(0, 0));
             actor.Add(Velocity.Create(0, 0));
             actor.Add(Direction.Create(1, 0));
-            actor.Add(new AxisAlignedBoxShape(0, 0, 32, 32));
+            actor.Add(AxisAlignedBoxShape.Create(0, 0, 32, 32));
             actor.Add(new Motion());
-            actor.Add(new Body(1.0f, 0.0f));
+            actor.Add(Body.Create(1.0f, 0.0f));
 
             return actor;
         }

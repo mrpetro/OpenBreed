@@ -11,6 +11,9 @@ using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
@@ -26,11 +29,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Fields
 
-        private IEntity[] entities;
-
-        private ITile[] tileComps;
-
-        private GridPosition[] positionComps;
+        private Hashtable entities = new Hashtable();
+        private List<ITile>[] cells;
 
         #endregion Private Fields
 
@@ -99,9 +99,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             {
                 for (int i = leftIndex; i < rightIndex; i++)
                 {
-                    var index = i + TileMapHeight * j;
-
-                    DrawEntityTile(index);
+                    DrawCellTiles(i, j);
                 }
             }
 
@@ -124,19 +122,10 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Protected Methods
 
-        private bool HandleTileSetMsg(object sender, TileSetMsg msg)
-        {
-            var index = Array.IndexOf(entities, msg.Entity);
-            if (index < 0)
-                return false;
-
-            tileComps[index].ImageId = msg.TileId;
-
-            return true;
-        }
-
         protected override void RegisterEntity(IEntity entity)
         {
+            Debug.Assert(!entities.Contains(entity), "Entity already added!");
+
             var pos = entity.Components.OfType<GridPosition>().First();
 
             if (pos.X >= TileMapWidth)
@@ -145,36 +134,58 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             if (pos.Y >= TileMapHeight)
                 throw new InvalidOperationException($"Tile Y coordinate exceeds tile map height size.");
 
-            var tileId = pos.X + TileMapHeight * pos.Y;
+            var cellIndex = pos.X + TileMapWidth * pos.Y;
 
-            entities[tileId] = entity;
-            tileComps[tileId] = entity.Components.OfType<ITile>().First();
-            positionComps[tileId] = pos;
+            var tile = entity.Components.OfType<ITile>().First();
+
+            entities[entity] = tile;
+
+            var cellTiles = cells[cellIndex];
+
+            if (cellTiles == null)
+            {
+                cellTiles = new List<ITile>();
+                cells[cellIndex] = cellTiles;
+            }
+
+            cells[cellIndex].Add(tile);
         }
 
         protected override void UnregisterEntity(IEntity entity)
         {
+            throw new NotImplementedException();
         }
 
         #endregion Protected Methods
 
         #region Private Methods
 
-        private void DrawEntityTile(int index)
+        private bool HandleTileSetMsg(object sender, TileSetMsg msg)
         {
-            var entity = entities[index];
+            var tile = (ITile)entities[msg.Entity];
+            if (tile == null)
+                return false;
 
-            if (entity == null)
+            tile.ImageId = msg.TileImageId;
+
+            return true;
+        }
+
+        private void DrawCellTiles(int xIndex, int yIndex)
+        {
+            var index = xIndex + TileMapWidth * yIndex;
+
+            var cellTiles = cells[index];
+
+            if (cellTiles == null)
                 return;
-
-            var tile = tileComps[index];
-            var position = positionComps[index];
 
             GL.PushMatrix();
 
-            GL.Translate(position.X * TILE_SIZE, position.Y * TILE_SIZE, 0.0f);
+            GL.Translate(xIndex * TILE_SIZE, yIndex * TILE_SIZE, 0.0f);
 
-            Core.Rendering.Tiles.GetById(tile.AtlasId).Draw(tile.ImageId);
+            for (int i = 0; i < cellTiles.Count; i++)
+                Core.Rendering.Tiles.GetById(cellTiles[i].AtlasId).Draw(cellTiles[i].ImageId);
 
             GL.PopMatrix();
         }
@@ -183,9 +194,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             TileMapHeight = width;
             TileMapWidth = height;
-            entities = new IEntity[width * height];
-            tileComps = new ITile[width * height];
-            positionComps = new GridPosition[width * height];
+            cells = new List<ITile>[width * height];
         }
 
         /// <summary>
@@ -202,16 +211,16 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             for (int j = bottomIndex; j < topIndex; j++)
             {
                 GL.Begin(PrimitiveType.Lines);
-                GL.Vertex2(leftIndex * 16, j * 16);
-                GL.Vertex2(rightIndex * 16, j * 16);
+                GL.Vertex2(leftIndex * TILE_SIZE, j * TILE_SIZE);
+                GL.Vertex2(rightIndex * TILE_SIZE, j * TILE_SIZE);
                 GL.End();
             }
 
             for (int i = leftIndex; i < rightIndex; i++)
             {
                 GL.Begin(PrimitiveType.Lines);
-                GL.Vertex2(i * 16, bottomIndex * 16);
-                GL.Vertex2(i * 16, topIndex * 16);
+                GL.Vertex2(i * TILE_SIZE, bottomIndex * TILE_SIZE);
+                GL.Vertex2(i * TILE_SIZE, topIndex * TILE_SIZE);
                 GL.End();
             }
         }
