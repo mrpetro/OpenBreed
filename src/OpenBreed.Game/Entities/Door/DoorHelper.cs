@@ -78,9 +78,10 @@ namespace OpenBreed.Game.Entities.Door
             return stateMachine;
         }
 
-        public static void AddVerticalDoor(ICore core, World world, int x, int y, ITileAtlas tileAtlas)
+        public static void AddVerticalDoor(ICore core, World world, int x, int y)
         {
-            var spriteAtlas = core.Rendering.Sprites.GetByAlias("Atlases/Sprites/Door/Vertical");
+
+
 
             var door = core.Entities.Create();
 
@@ -89,18 +90,18 @@ namespace OpenBreed.Game.Entities.Door
             doorPart1.Add(Body.Create(1.0f, 1.0f));
             doorPart1.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
             doorPart1.Add(GroupPart.Create(door.Id));
-            doorPart1.Add(Tile.Create(tileAtlas.Id));
+            doorPart1.Add(core.Rendering.CreateTile("Atlases/Tiles/16/Test"));
 
             var doorPart2 = core.Entities.Create();
             doorPart2.Add(GridPosition.Create(x, y + 1));
             doorPart2.Add(Body.Create(1.0f, 1.0f));
             doorPart2.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
-            doorPart2.Add(Tile.Create(tileAtlas.Id));
+            doorPart2.Add(core.Rendering.CreateTile("Atlases/Tiles/16/Test"));
             doorPart2.Add(GroupPart.Create(door.Id));
 
 
             door.Add(new Animator<int>(5.0f, false));
-            door.Add(Sprite.Create(spriteAtlas.Id));
+            door.Add(core.Rendering.CreateSprite("Atlases/Sprites/Door/Vertical"));
             door.Add(Position.Create(x * 16, y * 16));
             door.Add(AxisAlignedBoxShape.Create(0, 0, 16, 32));
             door.Add(TextHelper.Create(core, new Vector2(-10, 10), "Door"));
@@ -113,10 +114,8 @@ namespace OpenBreed.Game.Entities.Door
             world.AddEntity(door);
         }
 
-        public static void AddHorizontalDoor(ICore core, World world, int x, int y, ITileAtlas tileAtlas)
+        public static void AddHorizontalDoor(ICore core, World world, int x, int y)
         {
-            var spriteAtlas = core.Rendering.Sprites.GetByAlias("Atlases/Sprites/Door/Horizontal");
-
             var doorBlueprint = core.Blueprints.GetByName("HorizontalDoor");
 
             //var doorAlt = core.Entities.CreateFromBlueprint(doorBlueprint,);
@@ -129,18 +128,18 @@ namespace OpenBreed.Game.Entities.Door
             doorPart1.Add(Body.Create(1.0f, 1.0f));
             doorPart1.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
             doorPart1.Add(GroupPart.Create(door.Id));
-            doorPart1.Add(Tile.Create(tileAtlas.Id));
+            doorPart1.Add(core.Rendering.CreateTile("Atlases/Tiles/16/Test"));
 
             var doorPart2 = core.Entities.Create();
             doorPart2.Add(GridPosition.Create(x + 1, y));
             doorPart2.Add(Body.Create(1.0f, 1.0f));
             doorPart2.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
-            doorPart2.Add(Tile.Create(tileAtlas.Id));
+            doorPart2.Add(core.Rendering.CreateTile("Atlases/Tiles/16/Test"));
             doorPart2.Add(GroupPart.Create(door.Id));
 
 
             door.Add(new Animator<int>(5.0f, false));
-            door.Add(Sprite.Create(spriteAtlas.Id));
+            door.Add(core.Rendering.CreateSprite("Atlases/Sprites/Door/Horizontal"));
             door.Add(Position.Create(x * 16, y * 16));
             door.Add(AxisAlignedBoxShape.Create(0, 0, 32, 16));
             door.Add(TextHelper.Create(core, new Vector2(-10, 10), "Door"));

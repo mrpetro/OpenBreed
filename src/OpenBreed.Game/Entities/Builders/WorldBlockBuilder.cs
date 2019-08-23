@@ -36,9 +36,10 @@ namespace OpenBreed.Game.Entities.Builders
             this.y = y;
         }
 
-        public void SetTileAtlas(int atlasId)
+        public void SetTileAtlas(string atlasAlias)
         {
-            this.atlasId = atlasId;
+            var atlas = Core.Rendering.Tiles.GetByAlias(atlasAlias);
+            this.atlasId = atlas.Id;
         }
 
         public void SetTileId(int tileId)

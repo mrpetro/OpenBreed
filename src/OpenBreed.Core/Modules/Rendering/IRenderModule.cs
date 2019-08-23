@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
@@ -78,6 +79,20 @@ namespace OpenBreed.Core.Modules.Rendering
         /// <param name="color">Color of wireframe lines</param>
         /// <returns></returns>
         IWireframe CreateWireframe(float thickness, Color4 color);
+
+        /// <summary>
+        /// Create sprite entity component
+        /// </summary>
+        /// <param name="spriteAlias">Sprite atlas alias to use</param>
+        /// <returns>Sprite entity component</returns>
+        ISprite CreateSprite(string spriteAlias);
+
+        /// <summary>
+        /// Create tile entity component
+        /// </summary>
+        /// <param name="tileAlias">Tile atlas alias to use</param>
+        /// <returns>Tile entity component</returns>
+        ITile CreateTile(string tileAtlas);
 
         void Cleanup();
 

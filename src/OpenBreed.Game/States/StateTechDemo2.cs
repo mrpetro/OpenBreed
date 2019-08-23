@@ -58,7 +58,6 @@ namespace OpenBreed.Game.States
             7,7,7,7,7,7,7,7,0,0
         };
 
-        private ITileAtlas tileAtlas;
         private Viewport viewportLeft;
         private Viewport viewportRight;
 
@@ -91,8 +90,6 @@ namespace OpenBreed.Game.States
             var cameraBuilder = new CameraBuilder(Core);
 
             //Resources
-            tileAtlas = Core.Rendering.Tiles.GetByAlias("Atlases/Tiles/16/Test");
-
             cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
@@ -224,7 +221,7 @@ namespace OpenBreed.Game.States
         private void InitializeWorldA()
         {
             var blockBuilder = new WorldBlockBuilder(Core);
-            blockBuilder.SetTileAtlas(tileAtlas.Id);
+            blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
 
             var actor = ActorHelper.CreateActor(Core, new Vector2(20, 20));
             actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
@@ -260,7 +257,7 @@ namespace OpenBreed.Game.States
             actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
 
             var blockBuilder = new WorldBlockBuilder(Core);
-            blockBuilder.SetTileAtlas(tileAtlas.Id);
+            blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
 
             var stateMachine = ActorHelper.CreateStateMachine(actor);
             stateMachine.SetInitialState("Standing_Down");

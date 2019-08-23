@@ -46,7 +46,6 @@ namespace OpenBreed.Game.States
             3,3,3,3,3,3,3,3,3,3
         };
 
-        private ITileAtlas tileAtlas;
         private Viewport gameViewport;
 
         #endregion Private Fields
@@ -161,9 +160,6 @@ namespace OpenBreed.Game.States
 
             var cameraBuilder = new CameraBuilder(Core);
 
-            //Resources
-            tileAtlas = Core.Rendering.Tiles.GetByAlias("Atlases/Tiles/16/Test");
-
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
@@ -175,7 +171,7 @@ namespace OpenBreed.Game.States
             gameViewport.Camera = GameCamera;
 
             var blockBuilder = new WorldBlockBuilder(Core);
-            blockBuilder.SetTileAtlas(tileAtlas.Id);
+            blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
 
             var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288));
             actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
@@ -198,10 +194,10 @@ namespace OpenBreed.Game.States
             //}
 
             for (int i = 0; i < 10; i++)
-                DoorHelper.AddHorizontalDoor(Core, GameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3, tileAtlas);
+                DoorHelper.AddHorizontalDoor(Core, GameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3);
 
             for (int i = 0; i < 10; i++)
-                DoorHelper.AddVerticalDoor(Core, GameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3, tileAtlas);
+                DoorHelper.AddVerticalDoor(Core, GameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3);
 
             for (int x = 0; x < 64; x++)
             {

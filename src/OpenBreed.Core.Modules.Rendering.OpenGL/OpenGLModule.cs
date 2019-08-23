@@ -7,6 +7,7 @@ using OpenTK.Graphics.OpenGL;
 using System;
 using OpenBreed.Core.Common.Systems;
 using OpenTK.Graphics;
+using OpenBreed.Core.Common.Systems.Components;
 
 namespace OpenBreed.Core.Modules.Rendering
 {
@@ -138,6 +139,18 @@ namespace OpenBreed.Core.Modules.Rendering
             GL.End();
 
             GL.PopMatrix();
+        }
+
+        public ISprite CreateSprite(string spriteAlias)
+        {
+            var atlas = Sprites.GetByAlias(spriteAlias);
+            return Sprite.Create(atlas.Id);
+        }
+
+        public ITile CreateTile(string tileAtlas)
+        {
+            var atlas = Tiles.GetByAlias(tileAtlas);
+            return Tile.Create(atlas.Id);
         }
 
         #endregion Private Methods

@@ -46,8 +46,6 @@ namespace OpenBreed.Game.States
         };
 
         private IEntity actor;
-        private ITileAtlas tileAtlas;
-        private ISpriteAtlas spriteAtlas;
         private Viewport viewport;
 
         #endregion Private Fields
@@ -169,9 +167,6 @@ namespace OpenBreed.Game.States
             var cameraBuilder = new CameraBuilder(Core);
 
             //Resources
-            tileAtlas = Core.Rendering.Tiles.GetByAlias("Atlases/Tiles/16/Test");
-            spriteAtlas = Core.Rendering.Sprites.GetByAlias("Atlases/Sprites/Arrow");
-
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
@@ -188,7 +183,7 @@ namespace OpenBreed.Game.States
             actor.Add(new AiControl());
 
             var blockBuilder = new WorldBlockBuilder(Core);
-            blockBuilder.SetTileAtlas(tileAtlas.Id);
+            blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
 
             var stateMachine = ActorHelper.CreateStateMachine(actor);
             stateMachine.SetInitialState("Standing_Right");
