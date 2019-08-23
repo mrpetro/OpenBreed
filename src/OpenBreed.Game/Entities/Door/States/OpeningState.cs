@@ -15,8 +15,6 @@ namespace OpenBreed.Game.Components.States
         #region Private Fields
 
         private readonly string animationId;
-        private Animator<int> animator;
-        private ISprite sprite;
 
         #endregion Private Fields
 
@@ -52,8 +50,6 @@ namespace OpenBreed.Game.Components.States
         public void Initialize(IEntity entity)
         {
             Entity = entity;
-            animator = entity.Components.OfType<Animator<int>>().First();
-            sprite = entity.Components.OfType<ISprite>().First();
         }
 
         public void LeaveState()
@@ -91,7 +87,7 @@ namespace OpenBreed.Game.Components.States
 
         private void HandleAnimChangeEvent(AnimChangedEvent<int> e)
         {
-            sprite.ImageId = e.Frame;
+            Entity.PostMsg(new SpriteSetMsg(Entity, e.Frame));
         }
 
         private void HandleAnimStoppedEvent(AnimStoppedEvent<int> e)

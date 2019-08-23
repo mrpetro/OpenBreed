@@ -70,6 +70,7 @@
     <Compile Include="Helpers\ViewportMan.cs" />
     <Compile Include="Messages\SpriteOnMsg.cs" />
     <Compile Include="Messages\SpriteOffMsg.cs" />
+    <Compile Include="Messages\SpriteSetMsg.cs" />
     <Compile Include="Messages\TileSetMsg.cs" />
     <Compile Include="Messages\TextSetMsg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

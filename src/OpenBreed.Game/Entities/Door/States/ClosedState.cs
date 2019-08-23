@@ -58,26 +58,6 @@ namespace OpenBreed.Game.Components.States
         {
             Entity = entity;
 
-            var core = entity.Core;
-            var world = entity.World;
-
-            //var doorPart1 = core.Entities.Create();
-            //doorPart1.Add(GridPosition.Create(x, y));
-            //doorPart1.Add(Body.Create(1.0f, 1.0f));
-            //doorPart1.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
-            //doorPart1.Add(GroupPart.Create(door.Id));
-            //doorPart1.Add(Tile.Create(tileAtlas.Id));
-
-            //var doorPart2 = core.Entities.Create();
-            //doorPart2.Add(GridPosition.Create(x + 1, y));
-            //doorPart2.Add(Body.Create(1.0f, 1.0f));
-            //doorPart2.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
-            //doorPart2.Add(Tile.Create(tileAtlas.Id));
-            //doorPart2.Add(GroupPart.Create(door.Id));
-
-            //world.AddEntity(doorPart1);
-            //world.AddEntity(doorPart2);
-
             doorParts = Entity.World.Systems.OfType<GroupSystem>().First().GetGroup(Entity).ToArray();
         }
 

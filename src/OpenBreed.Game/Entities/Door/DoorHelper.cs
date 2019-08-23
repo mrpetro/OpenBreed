@@ -119,7 +119,7 @@ namespace OpenBreed.Game.Entities.Door
 
             var doorBlueprint = core.Blueprints.GetByName("HorizontalDoor");
 
-            var doorAlt = core.Entities.CreateFromBlueprint(doorBlueprint);
+            //var doorAlt = core.Entities.CreateFromBlueprint(doorBlueprint,);
 
 
             var door = core.Entities.Create();

@@ -166,7 +166,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             if (tile == null)
                 return false;
 
-            tile.ImageId = msg.TileImageId;
+            tile.ImageId = msg.ImageId;
 
             return true;
         }

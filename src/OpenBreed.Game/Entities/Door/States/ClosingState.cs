@@ -21,8 +21,6 @@ namespace OpenBreed.Game.Components.States
 
         private readonly string animationId;
         private IEntity[] doorParts;
-        private Animator<int> animator;
-        private ISprite sprite;
 
         #endregion Private Fields
 
@@ -59,8 +57,6 @@ namespace OpenBreed.Game.Components.States
         public void Initialize(IEntity entity)
         {
             Entity = entity;
-            sprite = entity.Components.OfType<ISprite>().First();
-            animator = entity.Components.OfType<Animator<int>>().First();
             doorParts = Entity.World.Systems.OfType<GroupSystem>().First().GetGroup(Entity).ToArray();
         }
 

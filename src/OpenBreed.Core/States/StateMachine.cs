@@ -2,6 +2,7 @@
 using OpenBreed.Core.Entities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace OpenBreed.Core.States
 {
@@ -33,8 +34,7 @@ namespace OpenBreed.Core.States
 
         public void AddState(IState state)
         {
-            if (state == null)
-                throw new ArgumentNullException(nameof(state));
+            Debug.Assert(state != null, "State must not be null");
 
             if (string.IsNullOrWhiteSpace(state.Id))
                 throw new ArgumentNullException(nameof(state.Id));

@@ -3,17 +3,17 @@ using OpenBreed.Core.Entities;
 
 namespace OpenBreed.Core.Modules.Rendering.Messages
 {
-    public struct TileSetMsg : IEntityMsg
+    public struct SpriteSetMsg : IEntityMsg
     {
         #region Public Fields
 
-        public const string TYPE = "TILE_SET";
+        public const string TYPE = "SPRITE_SET";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public TileSetMsg(IEntity entity, int imageId)
+        public SpriteSetMsg(IEntity entity, int imageId)
         {
             Entity = entity;
             ImageId = imageId;
