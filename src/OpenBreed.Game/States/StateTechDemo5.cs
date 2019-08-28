@@ -178,7 +178,7 @@ namespace OpenBreed.Game.States
             actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
 
    
-            var actorSm = ActorHelper.CreateStateMachine(actor);
+            var actorSm = ActorHelper.CreateMovementFSM(actor);
             actorSm.SetInitialState("Standing_Down");
             GameWorld.AddEntity(actor);
 

@@ -226,7 +226,7 @@ namespace OpenBreed.Game.States
             var actor = ActorHelper.CreateActor(Core, new Vector2(20, 20));
             actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
 
-            var stateMachine = ActorHelper.CreateStateMachine(actor);
+            var stateMachine = ActorHelper.CreateMovementFSM(actor);
             stateMachine.SetInitialState("Standing_Right");
 
             WorldA.AddEntity(actor);
@@ -259,7 +259,7 @@ namespace OpenBreed.Game.States
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
 
-            var stateMachine = ActorHelper.CreateStateMachine(actor);
+            var stateMachine = ActorHelper.CreateMovementFSM(actor);
             stateMachine.SetInitialState("Standing_Down");
 
             WorldB.AddEntity(actor);

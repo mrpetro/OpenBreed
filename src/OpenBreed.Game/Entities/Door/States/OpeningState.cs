@@ -92,7 +92,7 @@ namespace OpenBreed.Game.Components.States
 
         private void HandleAnimStoppedEvent(AnimStoppedEvent<int> e)
         {
-            Entity.PostMsg(new StateChangeMsg(Entity, "Opened"));
+            Entity.PostMsg(new StateChangeMsg(Entity, "Functioning", "Opened"));
         }
 
         #endregion Private Methods

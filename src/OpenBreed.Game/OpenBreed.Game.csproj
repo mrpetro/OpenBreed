@@ -51,8 +51,10 @@
     <Compile Include="Commands\MoveToCommand.cs" />
     <Compile Include="Components\AIControllerDebug.cs" />
     <Compile Include="Components\CollisionDebug.cs" />
-    <Compile Include="Entities\Actor\States\WalkingState.cs" />
-    <Compile Include="Entities\Actor\States\StandingState.cs" />
+    <Compile Include="Entities\Actor\States\Attacking\AimingState.cs" />
+    <Compile Include="Entities\Actor\States\Attacking\ShootingState.cs" />
+    <Compile Include="Entities\Actor\States\Movement\WalkingState.cs" />
+    <Compile Include="Entities\Actor\States\Movement\StandingState.cs" />
     <Compile Include="Entities\Actor\ActorHelper.cs" />
     <Compile Include="Entities\Box\BoxHelper.cs" />
     <Compile Include="Entities\Builders\WorldBlockBuilder.cs" />
@@ -61,6 +63,8 @@
     <Compile Include="Entities\Door\States\ClosedState.cs" />
     <Compile Include="Entities\Door\States\OpeningState.cs" />
     <Compile Include="Entities\Door\States\ClosingState.cs" />
+    <Compile Include="Entities\Projectile\ProjectileHelper.cs" />
+    <Compile Include="Entities\Projectile\States\FiredState.cs" />
     <Compile Include="Helpers\EntityMsgHandler.cs" />
     <Compile Include="Helpers\LogMan.cs" />
     <Compile Include="Helpers\TextHelper.cs" />
@@ -142,6 +146,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Content\LaserSpriteSet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="Content\BPHorizontalDoor.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

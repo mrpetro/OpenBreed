@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Core.Common.Systems.Components;
 
-namespace OpenBreed.Game.Entities.Actor.States
+namespace OpenBreed.Game.Entities.Actor.States.Movement
 {
     public class StandingState : IState
     {

@@ -63,6 +63,8 @@
     <Compile Include="Blueprints\IBlueprint.cs" />
     <Compile Include="Collections\IdMap.cs" />
     <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Common\Components\Builders\ComponentBuilder.cs" />
+    <Compile Include="Common\Components\Builders\GridPositionBuilder.cs" />
     <Compile Include="Common\Components\GridPosition.cs" />
     <Compile Include="Common\Components\GroupPart.cs" />
     <Compile Include="Common\Helpers\CoreEventBus.cs" />

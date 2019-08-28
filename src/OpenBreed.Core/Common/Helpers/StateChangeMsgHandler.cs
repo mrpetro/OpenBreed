@@ -1,4 +1,6 @@
 ﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.States;
+using System.Linq;
 
 namespace OpenBreed.Core.Common.Helpers
 {
@@ -23,16 +25,19 @@ namespace OpenBreed.Core.Common.Helpers
 
         public bool HandleMsg(object sender, IMsg msg)
         {
-            return HandleEntityMsg(sender, (IEntityMsg)msg);
+            return HandleEntityMsg(sender, (StateChangeMsg)msg);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private bool HandleEntityMsg(object sender, IEntityMsg msg)
+        private bool HandleEntityMsg(object sender, StateChangeMsg msg)
         {
-            msg.Entity.StateMachine.HandleMsg(sender, msg);
+            var fsm = msg.Entity.FsmList.FirstOrDefault(item => item.Name == msg.FsmName);
+
+            if(fsm != null)
+                fsm.HandleMsg(sender, msg);
 
             return true;
         }

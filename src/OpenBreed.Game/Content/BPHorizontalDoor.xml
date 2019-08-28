@@ -1,7 +1,13 @@
 <?xml version="1.0"?>
 <Blueprint Name="HorizontalDoor" >
     <Entities>
-        <Entity Name="DoorMain" >
+        <Entity Name="Door" >
+            <ComponentTypes>
+                <ComponentType>OpenBreed.Core.Common.Components.Position</ComponentType>
+                <ComponentType>OpenBreed.Core.Modules.Physics.Components.Body</ComponentType>
+                <ComponentType>OpenBreed.Core.Common.Systems.Components.AxisAlignedBoxShape</ComponentType>
+                <ComponentType>OpenBreed.Core.Modules.Rendering.Components.Text</ComponentType>
+            </ComponentTypes>
         </Entity>
         <Entity Name="DoorPart1" >
             <ComponentTypes>
@@ -18,6 +24,9 @@
                         <Y>0</Y>
                     </Value>
                 </ComponentState>
+                <ComponentState Key="GridPosition.Snapped" >
+                    <Value Type="OpenTK.Vector2, OpenTK" From="Position" />
+                </ComponentState>
                 <ComponentState Key="Body.CofFactor">
                     <Value Type="System.Single">1.0</Value>
                 </ComponentState>
@@ -31,10 +40,10 @@
                     <Value Type="System.Single">0.0</Value>
                 </ComponentState>
                 <ComponentState Key="AxisAlignedBoxShape.Width">
-                    <Value Type="System.Single">0.0</Value>
+                    <Value Type="System.Single">16.0</Value>
                 </ComponentState>
                 <ComponentState Key="AxisAlignedBoxShape.Height">
-                    <Value Type="System.Single">0.0</Value>
+                    <Value Type="System.Single">16.0</Value>
                 </ComponentState>
                 <ComponentState Key="GroupPart.EntityId.FromName">
                     <Value Type="System.String">DoorMain</Value>
@@ -53,7 +62,7 @@
                 <ComponentType>OpenBreed.Core.Modules.Rendering.Components.Tile</ComponentType>
             </ComponentTypes>
             <ComponentStates>
-                <ComponentState  Key="GridPosition.Offset" >
+                <ComponentState Key="GridPosition.Offset" >
                     <Value Type="OpenTK.Vector2, OpenTK">
                         <X>1</X>
                         <Y>0</Y>

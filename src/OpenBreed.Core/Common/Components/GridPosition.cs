@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Common.Systems.Components;
+﻿using OpenBreed.Core.Common.Components.Builders;
+using OpenBreed.Core.Common.Systems.Components;
 
 namespace OpenBreed.Core.Common.Components
 {
@@ -10,8 +11,10 @@ namespace OpenBreed.Core.Common.Components
     {
         #region Public Constructors
 
-        public GridPosition()
+        public GridPosition(GridPositionBuilder builder)
         {
+            X = builder.X + builder.OffsetX;
+            Y = builder.Y + builder.OffsetY;
         }
 
         #endregion Public Constructors

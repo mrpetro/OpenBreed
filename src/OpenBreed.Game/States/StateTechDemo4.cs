@@ -218,7 +218,7 @@ namespace OpenBreed.Game.States
             actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
             actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
 
-            var stateMachine = ActorHelper.CreateStateMachine(actor);
+            var stateMachine = ActorHelper.CreateMovementFSM(actor);
             stateMachine.SetInitialState("Standing_Down");
 
             GameWorld.AddEntity(actor);

@@ -14,7 +14,7 @@ using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Common.Helpers;
 
-namespace OpenBreed.Game.Entities.Actor.States
+namespace OpenBreed.Game.Entities.Actor.States.Movement
 {
     public class WalkingState : IState
     {
@@ -151,9 +151,9 @@ namespace OpenBreed.Game.Entities.Actor.States
         private void HandleControlDirectionChangedEvent(ControlDirectionChangedEvent systemEvent)
         {
             if (systemEvent.Direction != Vector2.Zero)
-                Entity.PostMsg(new StateChangeMsg(Entity, "Walk", systemEvent.Direction));
+                Entity.PostMsg(new StateChangeMsg(Entity, "Movement", "Walk", systemEvent.Direction));
             else
-                Entity.PostMsg(new StateChangeMsg(Entity, "Stop"));
+                Entity.PostMsg(new StateChangeMsg(Entity, "Movement", "Stop"));
         }
 
         #endregion Private Methods

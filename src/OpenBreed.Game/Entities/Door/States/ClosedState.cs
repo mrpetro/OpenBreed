@@ -92,7 +92,7 @@ namespace OpenBreed.Game.Components.States
 
         private void HandleCollisionEvent(CollisionEvent e)
         {
-            Entity.PostMsg(new StateChangeMsg(Entity, "Open"));
+            Entity.PostMsg(new StateChangeMsg(Entity, "Functioning", "Open"));
         }
 
         #endregion Private Methods

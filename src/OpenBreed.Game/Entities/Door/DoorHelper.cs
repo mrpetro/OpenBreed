@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Blueprints;
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
@@ -13,6 +14,7 @@ using OpenBreed.Game.Components.States;
 using OpenBreed.Game.Helpers;
 using OpenTK;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,8 @@ namespace OpenBreed.Game.Entities.Door
 {
     public static class DoorHelper
     {
+        private const string TILE_ATLAS = "Atlases/Tiles/16/Test";
+
         public static void CreateHorizontalAnimations(ICore core)
         {
             var horizontalDoorOpening = core.Animations.Anims.Create<int>("HORIZONTAL_DOOR_OPENING");
@@ -54,9 +58,9 @@ namespace OpenBreed.Game.Entities.Door
             verticalDoorClosing.AddFrame(4, 1.0f);
         }
 
-        public static StateMachine CreateHorizontalStateMachine(IEntity entity)
+        public static StateMachine CreateHorizontalFSM(IEntity entity)
         {
-            var stateMachine = entity.AddStateMachine();
+            var stateMachine = entity.AddFSM("Functioning");
 
             stateMachine.AddState(new OpeningState("Opening", "HORIZONTAL_DOOR_OPENING"));
             stateMachine.AddState(new OpenedState("Opened", 2, 3));
@@ -66,9 +70,9 @@ namespace OpenBreed.Game.Entities.Door
             return stateMachine;
         }
 
-        public static StateMachine CreateVerticalStateMachine(IEntity entity)
+        public static StateMachine CreateVerticalFSM(IEntity entity)
         {
-            var stateMachine = entity.AddStateMachine();
+            var stateMachine = entity.AddFSM("Functioning");
 
             stateMachine.AddState(new OpeningState("Opening", "VERTICAL_DOOR_OPENING"));
             stateMachine.AddState(new OpenedState("Opened", 5, 9));
@@ -90,13 +94,13 @@ namespace OpenBreed.Game.Entities.Door
             doorPart1.Add(Body.Create(1.0f, 1.0f));
             doorPart1.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
             doorPart1.Add(GroupPart.Create(door.Id));
-            doorPart1.Add(core.Rendering.CreateTile("Atlases/Tiles/16/Test"));
+            doorPart1.Add(core.Rendering.CreateTile(TILE_ATLAS));
 
             var doorPart2 = core.Entities.Create();
             doorPart2.Add(GridPosition.Create(x, y + 1));
             doorPart2.Add(Body.Create(1.0f, 1.0f));
             doorPart2.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
-            doorPart2.Add(core.Rendering.CreateTile("Atlases/Tiles/16/Test"));
+            doorPart2.Add(core.Rendering.CreateTile(TILE_ATLAS));
             doorPart2.Add(GroupPart.Create(door.Id));
 
 
@@ -106,7 +110,7 @@ namespace OpenBreed.Game.Entities.Door
             door.Add(AxisAlignedBoxShape.Create(0, 0, 16, 32));
             door.Add(TextHelper.Create(core, new Vector2(-10, 10), "Door"));
 
-            var doorSm = DoorHelper.CreateVerticalStateMachine(door);
+            var doorSm = DoorHelper.CreateVerticalFSM(door);
             doorSm.SetInitialState("Closed");
 
             world.AddEntity(doorPart1);
@@ -116,9 +120,12 @@ namespace OpenBreed.Game.Entities.Door
 
         public static void AddHorizontalDoor(ICore core, World world, int x, int y)
         {
-            var doorBlueprint = core.Blueprints.GetByName("HorizontalDoor");
+            //var doorBlueprint = core.Blueprints.GetByName("HorizontalDoor");
 
-            //var doorAlt = core.Entities.CreateFromBlueprint(doorBlueprint,);
+            var states = new Dictionary<string, IComponentState>();
+
+
+            //var doorAlt = core.Entities.CreateFromBlueprint(doorBlueprint, states);
 
 
             var door = core.Entities.Create();
@@ -128,13 +135,13 @@ namespace OpenBreed.Game.Entities.Door
             doorPart1.Add(Body.Create(1.0f, 1.0f));
             doorPart1.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
             doorPart1.Add(GroupPart.Create(door.Id));
-            doorPart1.Add(core.Rendering.CreateTile("Atlases/Tiles/16/Test"));
+            doorPart1.Add(core.Rendering.CreateTile(TILE_ATLAS));
 
             var doorPart2 = core.Entities.Create();
             doorPart2.Add(GridPosition.Create(x + 1, y));
             doorPart2.Add(Body.Create(1.0f, 1.0f));
             doorPart2.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
-            doorPart2.Add(core.Rendering.CreateTile("Atlases/Tiles/16/Test"));
+            doorPart2.Add(core.Rendering.CreateTile(TILE_ATLAS));
             doorPart2.Add(GroupPart.Create(door.Id));
 
 
@@ -144,7 +151,7 @@ namespace OpenBreed.Game.Entities.Door
             door.Add(AxisAlignedBoxShape.Create(0, 0, 32, 16));
             door.Add(TextHelper.Create(core, new Vector2(-10, 10), "Door"));
 
-            var doorSm = DoorHelper.CreateHorizontalStateMachine(door);
+            var doorSm = DoorHelper.CreateHorizontalFSM(door);
             doorSm.SetInitialState("Closed");
 
             world.AddEntity(doorPart1);

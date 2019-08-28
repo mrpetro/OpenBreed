@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Blueprints;
+using OpenBreed.Core.Common.Components.Builders;
 using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Modules.Animation;
@@ -9,6 +10,7 @@ using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.States;
 using OpenBreed.Game.Entities.Actor;
 using OpenBreed.Game.Entities.Door;
+using OpenBreed.Game.Entities.Projectile;
 using OpenBreed.Game.Helpers;
 using OpenBreed.Game.States;
 using OpenTK;
@@ -57,6 +59,8 @@ namespace OpenBreed.Game
         {
             ComponentStateXml.RegisterTypeParser(typeof(Vector2), ReadVector2);
             ComponentStateXml.RegisterTypeParser(typeof(string), ReadString);
+
+            EntityMan.RegisterBuilder("OpenBreed.Core.Common.Components.GridPosition", GridPositionBuilder.Create);
         }
 
         private object ReadString(XmlReader reader)
@@ -193,16 +197,20 @@ namespace OpenBreed.Game
             Rendering.Sprites.Create("Atlases/Sprites/Door/Horizontal", doorTex.Id, 32, 16, 5, 1, 0, 0);
             Rendering.Sprites.Create("Atlases/Sprites/Door/Vertical", doorTex.Id, 16, 32, 5, 1, 0, 16);
 
+            var laserTex = Rendering.Textures.Create("Textures/Sprites/Laser", @"Content\LaserSpriteSet.png");
+            Rendering.Sprites.Create("Atlases/Sprites/Projectiles/Laser", laserTex.Id, 16, 16, 8, 1, 0, 0);
+
             var arrowTex = Rendering.Textures.Create("Textures/Sprites/Arrow", @"Content\ArrowSpriteSet.png");
             Rendering.Sprites.Create("Atlases/Sprites/Arrow", arrowTex.Id, 32, 32, 8, 5);
 
 
 
-            Blueprints.Import(@".\Content\BPHorizontalDoor.xml");
+            //Blueprints.Import(@".\Content\BPHorizontalDoor.xml");
 
             DoorHelper.CreateHorizontalAnimations(this);
             DoorHelper.CreateVerticalAnimations(this);
             ActorHelper.CreateAnimations(this);
+            ProjectileHelper.CreateAnimations(this);
 
             StateMachine.RegisterState(new StateTechDemo1(this));
             StateMachine.RegisterState(new StateTechDemo2(this));

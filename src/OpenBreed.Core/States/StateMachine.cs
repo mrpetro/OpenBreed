@@ -17,14 +17,17 @@ namespace OpenBreed.Core.States
 
         #region Public Constructors
 
-        internal StateMachine(IEntity entity)
+        internal StateMachine(string name, IEntity entity)
         {
+            Name = name;
             Entity = entity;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
+
+        public string Name { get; }
 
         public IEntity Entity { get; }
 

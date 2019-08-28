@@ -5,6 +5,7 @@ using OpenBreed.Core.States;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace OpenBreed.Core.Entities
 {
@@ -17,12 +18,17 @@ namespace OpenBreed.Core.Entities
 
         private readonly List<IEntityComponent> components = new List<IEntityComponent>();
 
+        private List<StateMachine> fsmList;
+
         #endregion Private Fields
 
         #region Public Constructors
 
         public Entity(ICore core)
         {
+            fsmList = new List<StateMachine>();
+            FsmList = new ReadOnlyCollection<StateMachine>(fsmList);
+
             Core = core ?? throw new ArgumentNullException(nameof(core));
             Components = new ReadOnlyCollection<IEntityComponent>(components);
         }
@@ -32,8 +38,7 @@ namespace OpenBreed.Core.Entities
         #region Public Properties
 
         public ReadOnlyCollection<IEntityComponent> Components { get; }
-
-        public StateMachine StateMachine { get; private set; }
+        public ReadOnlyCollection<StateMachine> FsmList { get; }
 
         public ICore Core { get; }
 
@@ -47,13 +52,17 @@ namespace OpenBreed.Core.Entities
 
         #region Public Methods
 
-        public StateMachine AddStateMachine()
+        public StateMachine AddFSM(string name)
         {
-            if (StateMachine != null)
-                throw new InvalidOperationException("State machine added to entity.");
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentNullException(nameof(name));
 
-            StateMachine = new StateMachine(this);
-            return StateMachine;
+            if (fsmList.Any(item => item.Name == name))
+                throw new InvalidOperationException($"State machine '{name}' already exist.");
+
+            var newFsm = new StateMachine(name, this);
+            fsmList.Add(newFsm);
+            return newFsm;
         }
 
         public void PostMsg(IEntityMsg msg)
@@ -102,8 +111,8 @@ namespace OpenBreed.Core.Entities
 
         internal void Deinitialize()
         {
-            if (StateMachine != null)
-                StateMachine.Deinitialize();
+            foreach (var fsm in fsmList)
+                fsm.Deinitialize();
 
             //Forget the world in which entity was
             World = null;
@@ -114,8 +123,8 @@ namespace OpenBreed.Core.Entities
             //Remember in what world entity is
             World = world;
 
-            if (StateMachine != null)
-                StateMachine.Initialize();
+            foreach (var fsm in fsmList)
+                fsm.Initialize();
         }
 
         #endregion Internal Methods
