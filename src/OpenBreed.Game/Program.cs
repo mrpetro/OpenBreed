@@ -60,7 +60,7 @@ namespace OpenBreed.Game
             ComponentStateXml.RegisterTypeParser(typeof(Vector2), ReadVector2);
             ComponentStateXml.RegisterTypeParser(typeof(string), ReadString);
 
-            EntityMan.RegisterBuilder("OpenBreed.Core.Common.Components.GridPosition", GridPositionBuilder.Create);
+            //EntityMan.RegisterBuilder("OpenBreed.Core.Common.Components.GridPosition", GridPositionBuilder.Create);
         }
 
         private object ReadString(XmlReader reader)

@@ -55,10 +55,11 @@ namespace OpenBreed.Core.Modules.Rendering
         /// </summary>
         /// <param name="gridWidth">Tile grid width</param>
         /// <param name="gridHeight">Tile grid height</param>
+        /// <param name="layersNo">Number of tile layers</param>
         /// <param name="tileSize">Grid tile size</param>
         /// <param name="gridVisible">Grid visibility flag for debugging purpose</param>
         /// <returns>Tile system object</returns>
-        ITileSystem CreateTileSystem(int gridWidth, int gridHeight, float tileSize, bool gridVisible = false);
+        ITileSystem CreateTileSystem(int gridWidth, int gridHeight, int layersNo, float tileSize, bool gridVisible = false);
 
         /// <summary>
         /// Create system for handling sprites

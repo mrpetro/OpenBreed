@@ -6,6 +6,7 @@ using OpenBreed.Core.Entities.Builders;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenTK;
 
 namespace OpenBreed.Game.Entities.Builders
 {
@@ -13,8 +14,7 @@ namespace OpenBreed.Game.Entities.Builders
     {
         #region Internal Fields
 
-        internal int x;
-        internal int y;
+        internal Vector2 pos;
         internal int atlasId;
         internal int tileId;
 
@@ -30,10 +30,9 @@ namespace OpenBreed.Game.Entities.Builders
 
         #region Public Methods
 
-        public void SetIndices(int x, int y)
+        public void SetPosition(Vector2 pos )
         {
-            this.x = x;
-            this.y = y;
+            this.pos = pos;
         }
 
         public void SetTileAtlas(string atlasAlias)
@@ -51,7 +50,7 @@ namespace OpenBreed.Game.Entities.Builders
         {
             var entity = Core.Entities.Create();
 
-            entity.Add(GridPosition.Create(x, y));
+            entity.Add(Position.Create(pos));
             entity.Add(Body.Create(1.0f, 1.0f));
             entity.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
             entity.Add(Tile.Create(atlasId, tileId));

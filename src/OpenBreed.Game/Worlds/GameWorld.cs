@@ -32,7 +32,7 @@ namespace OpenBreed.Game.Worlds
             AddSystem(Core.Sounds.CreateSoundSystem());
 
             //Video
-            AddSystem(Core.Rendering.CreateTileSystem(64, 64, 16, true));
+            AddSystem(Core.Rendering.CreateTileSystem(64, 64, 1, 16, true));
             AddSystem(Core.Rendering.CreateSpriteSystem());
             AddSystem(Core.Rendering.CreateWireframeSystem());
             AddSystem(Core.Rendering.CreateTextSystem());

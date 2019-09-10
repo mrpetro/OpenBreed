@@ -50,8 +50,7 @@ namespace OpenBreed.Game.Components.States
 
             Entity.PostMsg(new TextSetMsg(Entity, "Door - Closed"));
 
-            foreach (var doorPart in doorParts)
-                doorPart.Subscribe(CollisionEvent.TYPE, OnCollision);
+            Entity.Subscribe(CollisionEvent.TYPE, OnCollision);
         }
 
         public void Initialize(IEntity entity)

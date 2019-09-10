@@ -131,8 +131,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             var pack = active[index];
 
-            //if(dynamic != null)
-            //    Draw(dynamic, viewport);
+            DrawDebug(pack, viewport);
 
             GL.PushMatrix();
 
@@ -149,8 +148,13 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// Draw this sprite to given viewport
         /// </summary>
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
-        public void Draw(IBody body, IViewport viewport)
+        private void DrawDebug(SpritePack pack, IViewport viewport)
         {
+            var body = pack.Entity.Components.OfType<IBody>().FirstOrDefault();
+
+            if (body == null)
+                return;
+
             if (body.Boxes != null)
             {
                 foreach (var item in body.Boxes)
@@ -162,7 +166,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                 }
             }
         }
-
 
         #endregion Public Methods
 

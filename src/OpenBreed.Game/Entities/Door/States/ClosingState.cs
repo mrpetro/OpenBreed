@@ -46,9 +46,7 @@ namespace OpenBreed.Game.Components.States
         public void EnterState()
         {
             Entity.PostMsg(new SpriteOnMsg(Entity));
-
-            foreach (var part in doorParts)
-                Entity.PostMsg(new BodyOnMsg(part));
+            Entity.PostMsg(new BodyOnMsg(Entity));
 
             Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
             Entity.PostMsg(new TextSetMsg(Entity, "Door - Closing"));

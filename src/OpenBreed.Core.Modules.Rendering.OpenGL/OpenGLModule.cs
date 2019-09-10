@@ -87,9 +87,9 @@ namespace OpenBreed.Core.Modules.Rendering
         /// Create system for handling tiles
         /// </summary>
         /// <returns>Tile system</returns>
-        public ITileSystem CreateTileSystem(int gridWidth, int gridHeight, float tileSize, bool drawGrid)
+        public ITileSystem CreateTileSystem(int gridWidth, int gridHeight, int layersNo, float tileSize, bool drawGrid)
         {
-            return new TileSystem(Core, gridWidth, gridHeight, tileSize, drawGrid);
+            return new TileSystem(Core, gridWidth, gridHeight, layersNo, tileSize, drawGrid);
         }
 
         /// <summary>

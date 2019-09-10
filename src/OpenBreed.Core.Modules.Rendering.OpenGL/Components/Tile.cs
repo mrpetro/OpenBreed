@@ -5,14 +5,6 @@
     /// </summary>
     public class Tile : ITile
     {
-        #region Public Constructors
-
-        public Tile()
-        {
-        }
-
-        #endregion Public Constructors
-
         #region Private Constructors
 
         private Tile(int atlasId, int imageId)
@@ -34,6 +26,8 @@
         /// Id of tile image from the atlas
         /// </summary>
         public int ImageId { get; set; }
+
+        public bool IsEmpty { get { return ImageId == 0 && AtlasId == 0; } }
 
         #endregion Public Properties
 

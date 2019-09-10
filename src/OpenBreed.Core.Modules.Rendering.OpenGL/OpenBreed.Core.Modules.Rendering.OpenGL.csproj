@@ -49,8 +49,9 @@
     <Compile Include="Components\Camera.cs" />
     <Compile Include="Components\Sprite.cs" />
     <Compile Include="Components\Text.cs" />
-    <Compile Include="Components\Wireframe.cs" />
+    <Compile Include="Components\TileCell.cs" />
     <Compile Include="Components\Tile.cs" />
+    <Compile Include="Components\Wireframe.cs" />
     <Compile Include="Entities\Builders\CameraBuilder.cs" />
     <Compile Include="Entities\CameraEntity.cs" />
     <Compile Include="Helpers\Builders\FontAtlasBuilder.cs" />

@@ -12,7 +12,6 @@ using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
@@ -30,21 +29,24 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         #region Private Fields
 
         private Hashtable entities = new Hashtable();
-        private List<ITile>[] cells;
+        private TileCell[] cells;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TileSystem(ICore core, int width, int height, float tileSize, bool gridVisible) : base(core)
+        public TileSystem(ICore core, int width, int height, int layersNo, float tileSize, bool gridVisible) : base(core)
         {
             Require<ITile>();
-            Require<GridPosition>();
+            Require<Position>();
 
+            GridHeight = width;
+            GridWidth = height;
+            LayersNo = layersNo;
             TileSize = tileSize;
             GridVisible = gridVisible;
 
-            InitializeTilesMap(width, height);
+            InitializeTilesMap();
         }
 
         #endregion Public Constructors
@@ -56,8 +58,9 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// </summary>
         public bool GridVisible { get; set; }
 
-        public int TileMapHeight { get; private set; }
-        public int TileMapWidth { get; private set; }
+        public int GridHeight { get; }
+        public int GridWidth { get; }
+        public int LayersNo { get; }
         public float TileSize { get; }
 
         #endregion Public Properties
@@ -85,21 +88,24 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             int rightIndex = (int)right / TILE_SIZE + 1;
             int topIndex = (int)top / TILE_SIZE + 1;
 
-            leftIndex = MathHelper.Clamp(leftIndex, 0, TileMapHeight);
-            rightIndex = MathHelper.Clamp(rightIndex, 0, TileMapHeight);
-            bottomIndex = MathHelper.Clamp(bottomIndex, 0, TileMapWidth);
-            topIndex = MathHelper.Clamp(topIndex, 0, TileMapWidth);
+            leftIndex = MathHelper.Clamp(leftIndex, 0, GridHeight);
+            rightIndex = MathHelper.Clamp(rightIndex, 0, GridHeight);
+            bottomIndex = MathHelper.Clamp(bottomIndex, 0, GridWidth);
+            topIndex = MathHelper.Clamp(topIndex, 0, GridWidth);
 
             if (GridVisible)
                 DrawGrid(leftIndex, bottomIndex, rightIndex, topIndex);
 
             GL.Enable(EnableCap.Texture2D);
 
-            for (int j = bottomIndex; j < topIndex; j++)
+            for (int layerNo = 0; layerNo < LayersNo; layerNo++)
             {
-                for (int i = leftIndex; i < rightIndex; i++)
+                for (int j = bottomIndex; j < topIndex; j++)
                 {
-                    DrawCellTiles(i, j);
+                    for (int i = leftIndex; i < rightIndex; i++)
+                    {
+                        DrawCellTiles(i, j, layerNo);
+                    }
                 }
             }
 
@@ -118,6 +124,22 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             }
         }
 
+        public bool TryGetGridIndices(Vector2 point, out int xIndex, out int yIndex)
+        {
+            xIndex = (int)point.X / TILE_SIZE;
+            yIndex = (int)point.Y / TILE_SIZE;
+            if (xIndex < 0)
+                return false;
+            if (yIndex < 0)
+                return false;
+            if (xIndex >= GridWidth)
+                return false;
+            if (yIndex >= GridHeight)
+                return false;
+
+            return true;
+        }
+
         #endregion Public Methods
 
         #region Protected Methods
@@ -126,29 +148,24 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             Debug.Assert(!entities.Contains(entity), "Entity already added!");
 
-            var pos = entity.Components.OfType<GridPosition>().First();
+            var pos = entity.Components.OfType<Position>().First();
 
-            if (pos.X >= TileMapWidth)
-                throw new InvalidOperationException($"Tile X coordinate exceeds tile map width size.");
+            int xIndex;
+            int yIndex;
 
-            if (pos.Y >= TileMapHeight)
-                throw new InvalidOperationException($"Tile Y coordinate exceeds tile map height size.");
+            if(!TryGetGridIndices(pos.Value, out xIndex, out yIndex))
+                throw new InvalidOperationException($"Tile position exceeds tile grid limits.");
 
-            var cellIndex = pos.X + TileMapWidth * pos.Y;
+            var cellIndex = xIndex + GridWidth * yIndex;
 
-            var tile = entity.Components.OfType<ITile>().First();
+            var tile = entity.Components.OfType<Tile>().First();
 
             entities[entity] = tile;
 
-            var cellTiles = cells[cellIndex];
+            var tileCell = this.cells[cellIndex];
 
-            if (cellTiles == null)
-            {
-                cellTiles = new List<ITile>();
-                cells[cellIndex] = cellTiles;
-            }
-
-            cells[cellIndex].Add(tile);
+            tileCell.AtlasId = tile.AtlasId;
+            tileCell.ImageId = tile.ImageId;
         }
 
         protected override void UnregisterEntity(IEntity entity)
@@ -166,35 +183,45 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             if (tile == null)
                 return false;
 
-            tile.ImageId = msg.ImageId;
+            var pos = msg.Entity.Components.OfType<Position>().First();
+
+            int xIndex;
+            int yIndex;
+
+            if (!TryGetGridIndices(pos.Value, out xIndex, out yIndex))
+                throw new InvalidOperationException($"Tile position exceeds tile grid limits.");
+
+            var cellIndex = xIndex + GridWidth * yIndex;
+
+            var tileCell = this.cells[cellIndex];
+            tileCell.ImageId = msg.ImageId;
 
             return true;
         }
 
-        private void DrawCellTiles(int xIndex, int yIndex)
+        private void DrawCellTiles(int xIndex, int yIndex, int layerNo)
         {
-            var index = xIndex + TileMapWidth * yIndex;
+            var index = layerNo * GridWidth * GridHeight + xIndex + GridWidth * yIndex;
 
-            var cellTiles = cells[index];
+            var cellTile = cells[index];
 
-            if (cellTiles == null)
-                return;
+            if (!cellTile.IsEmpty)
+            {
+                GL.PushMatrix();
 
-            GL.PushMatrix();
+                GL.Translate(xIndex * TILE_SIZE, yIndex * TILE_SIZE, 0.0f);
 
-            GL.Translate(xIndex * TILE_SIZE, yIndex * TILE_SIZE, 0.0f);
+                Core.Rendering.Tiles.GetById(cellTile.AtlasId).Draw(cellTile.ImageId);
 
-            for (int i = 0; i < cellTiles.Count; i++)
-                Core.Rendering.Tiles.GetById(cellTiles[i].AtlasId).Draw(cellTiles[i].ImageId);
-
-            GL.PopMatrix();
+                GL.PopMatrix();
+            }
         }
 
-        private void InitializeTilesMap(int width, int height)
+        private void InitializeTilesMap()
         {
-            TileMapHeight = width;
-            TileMapWidth = height;
-            cells = new List<ITile>[width * height];
+            cells = new TileCell[GridWidth * GridHeight * LayersNo];
+            for (int i = 0; i < cells.Length; i++)
+                cells[i] = TileCell.Create();
         }
 
         /// <summary>

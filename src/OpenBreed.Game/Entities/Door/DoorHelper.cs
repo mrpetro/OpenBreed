@@ -90,21 +90,17 @@ namespace OpenBreed.Game.Entities.Door
             var door = core.Entities.Create();
 
             var doorPart1 = core.Entities.Create();
-            doorPart1.Add(GridPosition.Create(x, y));
-            doorPart1.Add(Body.Create(1.0f, 1.0f));
-            doorPart1.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
+            doorPart1.Add(Position.Create(x * 16, y * 16));
             doorPart1.Add(GroupPart.Create(door.Id));
             doorPart1.Add(core.Rendering.CreateTile(TILE_ATLAS));
 
             var doorPart2 = core.Entities.Create();
-            doorPart2.Add(GridPosition.Create(x, y + 1));
-            doorPart2.Add(Body.Create(1.0f, 1.0f));
-            doorPart2.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
+            doorPart2.Add(Position.Create(x * 16, y * 16 + 16));
             doorPart2.Add(core.Rendering.CreateTile(TILE_ATLAS));
             doorPart2.Add(GroupPart.Create(door.Id));
 
-
             door.Add(new Animator<int>(5.0f, false));
+            door.Add(Body.Create(1.0f, 1.0f));
             door.Add(core.Rendering.CreateSprite("Atlases/Sprites/Door/Vertical"));
             door.Add(Position.Create(x * 16, y * 16));
             door.Add(AxisAlignedBoxShape.Create(0, 0, 16, 32));
@@ -131,21 +127,18 @@ namespace OpenBreed.Game.Entities.Door
             var door = core.Entities.Create();
 
             var doorPart1 = core.Entities.Create();
-            doorPart1.Add(GridPosition.Create(x, y));
-            doorPart1.Add(Body.Create(1.0f, 1.0f));
-            doorPart1.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
+            doorPart1.Add(Position.Create(x * 16, y * 16));
             doorPart1.Add(GroupPart.Create(door.Id));
             doorPart1.Add(core.Rendering.CreateTile(TILE_ATLAS));
 
             var doorPart2 = core.Entities.Create();
-            doorPart2.Add(GridPosition.Create(x + 1, y));
-            doorPart2.Add(Body.Create(1.0f, 1.0f));
-            doorPart2.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
+            doorPart2.Add(Position.Create(x * 16 + 16, y * 16));
             doorPart2.Add(core.Rendering.CreateTile(TILE_ATLAS));
             doorPart2.Add(GroupPart.Create(door.Id));
 
 
             door.Add(new Animator<int>(5.0f, false));
+            door.Add(Body.Create(1.0f, 1.0f));
             door.Add(core.Rendering.CreateSprite("Atlases/Sprites/Door/Horizontal"));
             door.Add(Position.Create(x * 16, y * 16));
             door.Add(AxisAlignedBoxShape.Create(0, 0, 32, 16));

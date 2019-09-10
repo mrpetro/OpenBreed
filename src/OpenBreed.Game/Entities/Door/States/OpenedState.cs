@@ -48,9 +48,7 @@ namespace OpenBreed.Game.Components.States
         public void EnterState()
         {
             Entity.PostMsg(new SpriteOffMsg(Entity));
-
-            foreach (var part in doorParts)
-                Entity.PostMsg(new BodyOffMsg(part));
+            Entity.PostMsg(new BodyOffMsg(Entity));
 
             Entity.PostMsg(new TileSetMsg(doorParts[0], leftTileId));
             Entity.PostMsg(new TileSetMsg(doorParts[1], rightTileId));

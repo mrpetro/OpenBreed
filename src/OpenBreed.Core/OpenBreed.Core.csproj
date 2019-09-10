@@ -91,11 +91,11 @@
     <Compile Include="Modules\Physics\Components\IBody.cs" />
     <Compile Include="Modules\Physics\Components\IPhysicsComponent.cs" />
     <Compile Include="Modules\Rendering\Components\ICamera.cs" />
+    <Compile Include="Modules\Rendering\Components\ITile.cs" />
     <Compile Include="Modules\Rendering\Components\IWireframe.cs" />
     <Compile Include="Modules\Rendering\Helpers\IFontMan.cs" />
     <Compile Include="Modules\Rendering\Helpers\ISpriteMan.cs" />
     <Compile Include="Modules\Rendering\Systems\CameraSystem.cs" />
-    <Compile Include="Modules\Rendering\Components\ITile.cs" />
     <Compile Include="Modules\Rendering\Helpers\IFont.cs" />
     <Compile Include="Modules\Rendering\Helpers\ITileMan.cs" />
     <Compile Include="Modules\Rendering\Helpers\ITileAtlas.cs" />
