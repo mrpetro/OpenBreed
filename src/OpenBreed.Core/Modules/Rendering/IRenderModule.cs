@@ -31,6 +31,11 @@ namespace OpenBreed.Core.Modules.Rendering
         ITileMan Tiles { get; }
 
         /// <summary>
+        /// Stamp manager
+        /// </summary>
+        IStampMan Stamps { get; }
+
+        /// <summary>
         /// Font manager
         /// </summary>
         IFontMan Fonts { get; }

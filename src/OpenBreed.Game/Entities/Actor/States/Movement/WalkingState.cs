@@ -26,7 +26,6 @@ namespace OpenBreed.Game.Entities.Actor.States.Movement
         private Motion creatureMovement;
         private Animator<int> spriteAnimation;
         private ISprite sprite;
-        private IDirection direction;
 
         #endregion Private Fields
 
@@ -62,7 +61,6 @@ namespace OpenBreed.Game.Entities.Actor.States.Movement
         {
             Entity = entity;
             thrust = entity.Components.OfType<IThrust>().First();
-            direction = entity.Components.OfType<IDirection>().First();
             creatureMovement = entity.Components.OfType<Motion>().First();
             sprite = entity.Components.OfType<ISprite>().First();
             spriteAnimation = entity.Components.OfType<Animator<int>>().First();

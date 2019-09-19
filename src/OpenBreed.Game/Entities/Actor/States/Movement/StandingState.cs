@@ -18,7 +18,6 @@ namespace OpenBreed.Game.Entities.Actor.States.Movement
         public IEntity Entity { get; private set; }
         private IThrust thrust;
         private Animator<int> spriteAnimation;
-        private IDirection direction;
         private readonly string animationId;
         private readonly Vector2 facingDirection;
 
@@ -44,7 +43,6 @@ namespace OpenBreed.Game.Entities.Actor.States.Movement
             Entity = entity;
             thrust = entity.Components.OfType<IThrust>().First();
             spriteAnimation = entity.Components.OfType<Animator<int>>().First();
-            direction = entity.Components.OfType<IDirection>().First();
         }
 
         public void LeaveState()

@@ -207,15 +207,15 @@ namespace OpenBreed.Game
 
             //Blueprints.Import(@".\Content\BPHorizontalDoor.xml");
 
-            DoorHelper.CreateHorizontalAnimations(this);
-            DoorHelper.CreateVerticalAnimations(this);
+            DoorHelper.CreateStamps(this);
+            DoorHelper.CreateAnimations(this);
             ActorHelper.CreateAnimations(this);
             ProjectileHelper.CreateAnimations(this);
 
-            StateMachine.RegisterState(new StateTechDemo1(this));
-            StateMachine.RegisterState(new StateTechDemo2(this));
-            StateMachine.RegisterState(new StateTechDemo3(this));
-            StateMachine.RegisterState(new StateTechDemo4(this));
+            //StateMachine.RegisterState(new StateTechDemo1(this));
+            //StateMachine.RegisterState(new StateTechDemo2(this));
+            //StateMachine.RegisterState(new StateTechDemo3(this));
+            //StateMachine.RegisterState(new StateTechDemo4(this));
             StateMachine.RegisterState(new StateTechDemo5(this));
             //StateMan.RegisterState(new MenuState(this));
             StateMachine.SetNextState(StateTechDemo5.ID);

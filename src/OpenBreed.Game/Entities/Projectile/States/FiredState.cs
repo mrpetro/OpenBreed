@@ -1,26 +1,26 @@
-﻿using OpenBreed.Core.Common.Systems.Components;
+﻿using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Messages;
+using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Core.States;
 using OpenTK;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Game.Entities.Projectile.States
 {
     public class FiredState : IState
     {
-        public IEntity Entity { get; private set; }
-        private IThrust thrust;
-        private Animator<int> spriteAnimation;
-        private IDirection direction;
+        #region Private Fields
+
         private readonly string animationId;
         private readonly Vector2 fireDirection;
+        private IThrust thrust;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public FiredState(string id, string animationId, Vector2 fireDirection)
         {
@@ -29,7 +29,16 @@ namespace OpenBreed.Game.Entities.Projectile.States
             this.fireDirection = fireDirection;
         }
 
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public IEntity Entity { get; private set; }
         public string Id { get; }
+
+        #endregion Public Properties
+
+        #region Public Methods
 
         public void EnterState()
         {
@@ -37,14 +46,13 @@ namespace OpenBreed.Game.Entities.Projectile.States
 
             Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
             Entity.PostMsg(new TextSetMsg(Entity, "Projectile - Fired"));
+            Entity.Subscribe(CollisionEvent.TYPE, OnCollision);
         }
 
         public void Initialize(IEntity entity)
         {
             Entity = entity;
             thrust = entity.Components.OfType<IThrust>().First();
-            spriteAnimation = entity.Components.OfType<Animator<int>>().First();
-            direction = entity.Components.OfType<IDirection>().First();
         }
 
         public void LeaveState()
@@ -83,5 +91,21 @@ namespace OpenBreed.Game.Entities.Projectile.States
 
             return null;
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void OnCollision(object sender, IEvent e)
+        {
+            HandleCollisionEvent((CollisionEvent)e);
+        }
+
+        private void HandleCollisionEvent(CollisionEvent e)
+        {
+            Entity.PostMsg(new StateChangeMsg(Entity, "Attacking", "Open"));
+        }
+
+        #endregion Private Methods
     }
 }

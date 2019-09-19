@@ -72,6 +72,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             base.Initialize(world);
 
             World.MessageBus.RegisterHandler(TileSetMsg.TYPE, this);
+            World.MessageBus.RegisterHandler(PutStampMsg.TYPE, this);
         }
 
         /// <summary>
@@ -118,7 +119,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             {
                 case TileSetMsg.TYPE:
                     return HandleTileSetMsg(sender, (TileSetMsg)msg);
-
+                case PutStampMsg.TYPE:
+                    return HandlePutStampMsg(sender, (PutStampMsg)msg);
                 default:
                     return false;
             }
@@ -195,6 +197,35 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
             var tileCell = this.cells[cellIndex];
             tileCell.ImageId = msg.ImageId;
+
+            return true;
+        }
+
+        private bool HandlePutStampMsg(object sender, PutStampMsg msg)
+        {
+            var stamp = Core.Rendering.Stamps.GetById(msg.StampId);
+
+            if (stamp == null)
+                return false;
+
+            int xIndex;
+            int yIndex;
+
+            if (!TryGetGridIndices(msg.Position, out xIndex, out yIndex))
+                throw new InvalidOperationException($"Tile position exceeds tile grid limits.");
+
+            for (int j = 0; j < stamp.Height; j++)
+            {
+                var cellIndex = xIndex + GridWidth * (yIndex + j);
+
+                for (int i = 0; i < stamp.Width; i++)
+                {
+                    var imageId = stamp.Data[i + stamp.Width * j];
+                    this.cells[cellIndex].ImageId = imageId;
+                    this.cells[cellIndex].AtlasId = 0;
+                    cellIndex++;
+                }
+            }
 
             return true;
         }

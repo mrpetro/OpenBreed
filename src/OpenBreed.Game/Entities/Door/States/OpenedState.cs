@@ -12,6 +12,7 @@ using System.Linq;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Modules.Physics.Messages;
+using OpenBreed.Core.Common.Systems.Components;
 
 namespace OpenBreed.Game.Components.States
 {
@@ -19,19 +20,16 @@ namespace OpenBreed.Game.Components.States
     {
         #region Private Fields
 
-        private readonly int leftTileId;
-        private readonly int rightTileId;
-        private IEntity[] doorParts;
+        private readonly int stampId;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public OpenedState(string id, int leftTileId, int rightTileId)
+        public OpenedState(string id, int stampId)
         {
             Id = id;
-            this.leftTileId = leftTileId;
-            this.rightTileId = rightTileId;
+            this.stampId = stampId;
         }
 
         #endregion Public Constructors
@@ -50,15 +48,15 @@ namespace OpenBreed.Game.Components.States
             Entity.PostMsg(new SpriteOffMsg(Entity));
             Entity.PostMsg(new BodyOffMsg(Entity));
 
-            Entity.PostMsg(new TileSetMsg(doorParts[0], leftTileId));
-            Entity.PostMsg(new TileSetMsg(doorParts[1], rightTileId));
+            var pos = Entity.Components.OfType<IPosition>().FirstOrDefault();
+
+            Entity.PostMsg(new PutStampMsg(Entity, stampId, 0, pos.Value));
             Entity.PostMsg(new TextSetMsg(Entity, "Door - Opened"));
         }
 
         public void Initialize(IEntity entity)
         {
             Entity = entity;
-            doorParts = Entity.World.Systems.OfType<GroupSystem>().First().GetGroup(Entity).ToArray();
         }
 
         public void LeaveState()

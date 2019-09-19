@@ -74,6 +74,7 @@
     <Compile Include="Common\Helpers\MovementTools.cs" />
     <Compile Include="Common\Helpers\StateChangeMsgHandler.cs" />
     <Compile Include="Common\Systems\GroupSystem.cs" />
+    <Compile Include="Common\Systems\TimerSystem.cs" />
     <Compile Include="CoreTools.cs" />
     <Compile Include="Common\Helpers\IEntityMsg.cs" />
     <Compile Include="Common\Helpers\WorldMessageBus.cs" />
@@ -90,11 +91,14 @@
     <Compile Include="Modules\Audio\Helpers\ISoundMan.cs" />
     <Compile Include="Modules\Physics\Components\IBody.cs" />
     <Compile Include="Modules\Physics\Components\IPhysicsComponent.cs" />
+    <Compile Include="Modules\Rendering\Components\Builders\IStampBuilder.cs" />
     <Compile Include="Modules\Rendering\Components\ICamera.cs" />
     <Compile Include="Modules\Rendering\Components\ITile.cs" />
     <Compile Include="Modules\Rendering\Components\IWireframe.cs" />
     <Compile Include="Modules\Rendering\Helpers\IFontMan.cs" />
     <Compile Include="Modules\Rendering\Helpers\ISpriteMan.cs" />
+    <Compile Include="Modules\Rendering\Helpers\IStampMan.cs" />
+    <Compile Include="Modules\Rendering\Helpers\ITileStamp.cs" />
     <Compile Include="Modules\Rendering\Systems\CameraSystem.cs" />
     <Compile Include="Modules\Rendering\Helpers\IFont.cs" />
     <Compile Include="Modules\Rendering\Helpers\ITileMan.cs" />

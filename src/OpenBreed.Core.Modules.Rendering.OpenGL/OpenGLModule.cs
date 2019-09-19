@@ -16,6 +16,7 @@ namespace OpenBreed.Core.Modules.Rendering
         #region Private Fields
 
         private readonly SpriteMan spriteMan;
+        private readonly StampMan stampMan;
         private readonly FontMan fontMan;
         private TextureMan textureMan;
         private TileMan tileMan;
@@ -33,6 +34,7 @@ namespace OpenBreed.Core.Modules.Rendering
             textureMan = new TextureMan(this);
             tileMan = new TileMan(this);
             spriteMan = new SpriteMan(this);
+            stampMan = new StampMan(this);
             fontMan = new FontMan(this);
         }
 
@@ -45,6 +47,8 @@ namespace OpenBreed.Core.Modules.Rendering
         public ITextureMan Textures { get { return textureMan; } }
 
         public ISpriteMan Sprites { get { return spriteMan; } }
+
+        public IStampMan Stamps { get { return stampMan; } }
 
         public ITileMan Tiles { get { return tileMan; } }
 

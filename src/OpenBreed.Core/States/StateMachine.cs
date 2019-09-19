@@ -96,7 +96,7 @@ namespace OpenBreed.Core.States
                 return;
 
             if (nextStateName != currentState.Id)
-                ChangeState(nextStateName);
+                ChangeState(nextStateName, arguments);
         }
 
         #endregion Public Methods
@@ -109,7 +109,7 @@ namespace OpenBreed.Core.States
             return true;
         }
 
-        private void ChangeState(string nextStateId)
+        private void ChangeState(string nextStateId, params object[] arguments)
         {
             //Console.WriteLine($"Leaving state '{currentState.Id}'");
             currentState.LeaveState();

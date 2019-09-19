@@ -20,7 +20,6 @@ namespace OpenBreed.Game.Components.States
         #region Private Fields
 
         private readonly string animationId;
-        private IEntity[] doorParts;
 
         #endregion Private Fields
 
@@ -55,7 +54,6 @@ namespace OpenBreed.Game.Components.States
         public void Initialize(IEntity entity)
         {
             Entity = entity;
-            doorParts = Entity.World.Systems.OfType<GroupSystem>().First().GetGroup(Entity).ToArray();
         }
 
         public void LeaveState()

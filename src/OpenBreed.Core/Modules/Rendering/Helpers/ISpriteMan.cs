@@ -1,5 +1,8 @@
 ﻿namespace OpenBreed.Core.Modules.Rendering.Helpers
 {
+    /// <summary>
+    /// Sprite manager interface
+    /// </summary>
     public interface ISpriteMan
     {
         #region Public Methods
