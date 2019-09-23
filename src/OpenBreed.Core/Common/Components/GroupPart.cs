@@ -2,6 +2,14 @@
 {
     public class GroupPart : IEntityComponent
     {
+        #region Public Constructors
+
+        public GroupPart()
+        {
+        }
+
+        #endregion Public Constructors
+
         #region Private Constructors
 
         private GroupPart(int entityId)
@@ -22,9 +30,9 @@
 
         #region Public Methods
 
-        public static GroupPart Create(int id)
+        public static GroupPart Create(int entityId)
         {
-            return new GroupPart(id);
+            return new GroupPart(entityId);
         }
 
         #endregion Public Methods

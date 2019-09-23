@@ -18,7 +18,6 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         private readonly List<IEntity> entities = new List<IEntity>();
         private readonly List<IThrust> thrustComps = new List<IThrust>();
         private readonly List<IPosition> positionComps = new List<IPosition>();
-        private readonly List<IDirection> directionComps = new List<IDirection>();
         private readonly List<IVelocity> velocityComps = new List<IVelocity>();
         private readonly List<IBody> dynamicBodyComps = new List<IBody>();
 
@@ -30,7 +29,6 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         {
             Require<IThrust>();
             Require<IPosition>();
-            Require<IDirection>();
             Require<IVelocity>();
             Require<IBody>();
         }
@@ -50,11 +48,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             var entity = entities[index];
             var position = positionComps[index];
             var thrust = thrustComps[index];
-            var direction = directionComps[index];
             var velocity = velocityComps[index];
             var dynamicBody = dynamicBodyComps[index];
-
-            direction.Value = thrust.Value;
 
             //Velocity equation
             var newVel = velocity.Value + thrust.Value * dt;
@@ -79,7 +74,6 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             entities.Add(entity);
             positionComps.Add(entity.Components.OfType<IPosition>().First());
             thrustComps.Add(entity.Components.OfType<IThrust>().First());
-            directionComps.Add(entity.Components.OfType<IDirection>().First());
             velocityComps.Add(entity.Components.OfType<IVelocity>().First());
             dynamicBodyComps.Add(entity.Components.OfType<IBody>().First());
         }
@@ -94,7 +88,6 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             entities.RemoveAt(index);
             positionComps.RemoveAt(index);
             thrustComps.RemoveAt(index);
-            directionComps.RemoveAt(index);
             velocityComps.RemoveAt(index);
             dynamicBodyComps.RemoveAt(index);
         }

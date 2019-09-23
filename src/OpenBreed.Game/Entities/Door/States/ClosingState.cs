@@ -20,9 +20,6 @@ namespace OpenBreed.Game.Components.States
         #region Private Fields
 
         private readonly string animationId;
-        private IEntity[] doorParts;
-        private Animator<int> animator;
-        private ISprite sprite;
 
         #endregion Private Fields
 
@@ -45,12 +42,10 @@ namespace OpenBreed.Game.Components.States
 
         #region Public Methods
 
-        public void EnterState()
+        public void EnterState(object[] arguments)
         {
             Entity.PostMsg(new SpriteOnMsg(Entity));
-
-            foreach (var part in doorParts)
-                Entity.PostMsg(new BodyOnMsg(part));
+            Entity.PostMsg(new BodyOnMsg(Entity));
 
             Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
             Entity.PostMsg(new TextSetMsg(Entity, "Door - Closing"));
@@ -59,9 +54,6 @@ namespace OpenBreed.Game.Components.States
         public void Initialize(IEntity entity)
         {
             Entity = entity;
-            sprite = entity.Components.OfType<ISprite>().First();
-            animator = entity.Components.OfType<Animator<int>>().First();
-            doorParts = Entity.World.Systems.OfType<GroupSystem>().First().GetGroup(Entity).ToArray();
         }
 
         public void LeaveState()

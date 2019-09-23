@@ -51,19 +51,17 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         #region Public Methods
 
-        public static Vector2 GetTileCenter(GridPosition pos)
+        public static Vector2 GetTileCenter(Position pos)
         {
-            return new Vector2(pos.X * CELL_SIZE + CELL_SIZE / 2, pos.Y * CELL_SIZE + CELL_SIZE / 2);
+            return new Vector2(pos.Value.X + CELL_SIZE / 2, pos.Value.Y + CELL_SIZE / 2);
         }
 
-        public static Box2 GetTileBox(GridPosition pos)
+        public static Box2 GetTileBox(Position pos)
         {
-            return new Box2(pos.X * CELL_SIZE, pos.Y * CELL_SIZE, (pos.X + 1) * CELL_SIZE, (pos.Y + 1) * CELL_SIZE);
-        }
+            var bx = pos.Value.X;
+            var by = pos.Value.Y;
 
-        public static Vector2 GetTilePos(GridPosition pos)
-        {
-            return new Vector2(pos.X * CELL_SIZE, pos.Y * CELL_SIZE);
+            return new Box2(bx, by, bx + CELL_SIZE, by + CELL_SIZE);
         }
 
         public override void Initialize(World world)
@@ -92,6 +90,22 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 default:
                     return false;
             }
+        }
+
+        public bool TryGetGridIndices(Vector2 point, out int xIndex, out int yIndex)
+        {
+            xIndex = (int)point.X / CELL_SIZE;
+            yIndex = (int)point.Y / CELL_SIZE;
+            if (xIndex < 0)
+                return false;
+            if (yIndex < 0)
+                return false;
+            if (xIndex >= GridWidth)
+                return false;
+            if (yIndex >= GridHeight)
+                return false;
+
+            return true;
         }
 
         #endregion Public Methods
@@ -150,7 +164,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 if (toDeactivate != null)
                 {
                     list.Remove(toDeactivate);
-                    return true;
+                    //return true;
                 }
             }
 
@@ -195,26 +209,57 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             QueryStaticGrid(activeDynamics.Last(), dt);
         }
 
-        private void TestNarrowPhaseDynamic(DynamicPack bodyA, DynamicPack bodyB, float dt)
+        private void TestNarrowPhaseDynamic(DynamicPack packA, DynamicPack packB, float dt)
         {
             Vector2 projection;
-            if (DynamicHelper.TestVsDynamic(this, bodyA, bodyB, dt, out projection))
+            if (DynamicHelper.TestVsDynamic(this, packA, packB, dt, out projection))
             {
-                bodyA.Entity.RaiseEvent(new CollisionEvent(bodyB.Entity));
-                bodyB.Entity.RaiseEvent(new CollisionEvent(bodyA.Entity));
-                DynamicHelper.ResolveVsDynamic(bodyA, bodyB, projection, dt);
+                packA.Body.CollisionCallback?.Invoke(packB.Entity, projection);
+                packB.Body.CollisionCallback?.Invoke(packA.Entity, projection);
+
+                //bodyA.Entity.RaiseEvent(new CollisionEvent(bodyB.Entity));
+                //bodyB.Entity.RaiseEvent(new CollisionEvent(bodyA.Entity));
+                //DynamicHelper.ResolveVsDynamic(bodyA, bodyB, projection, dt);
             }
         }
 
-        private void TestNarrowPhaseStatic(DynamicPack bodyA, StaticPack bodyB, float dt)
+        private void TestNarrowPhaseStatic(DynamicPack packA, StaticPack packB, float dt)
         {
             Vector2 projection;
-            if (DynamicHelper.TestVsStatic(this, bodyA, bodyB, dt, out projection))
+            if (DynamicHelper.TestVsStatic(this, packA, packB, dt, out projection))
             {
-                bodyA.Entity.RaiseEvent(new CollisionEvent(bodyB.Entity));
-                bodyB.Entity.RaiseEvent(new CollisionEvent(bodyA.Entity));
-                DynamicHelper.ResolveVsStatic(bodyA, bodyB, projection, dt);
+                packA.Body.CollisionCallback?.Invoke(packB.Entity, projection);
+                packB.Body.CollisionCallback?.Invoke(packA.Entity, projection);
             }
+        }
+
+        private void GetAabbIndices(Box2 aabb, out int left, out int right, out int bottom, out int top)
+        {
+            int xMod = (int)aabb.Right % CELL_SIZE;
+            int yMod = (int)aabb.Top % CELL_SIZE;
+
+            left = (int)aabb.Left >> 4;
+            right = (int)aabb.Right >> 4;
+            bottom = (int)aabb.Bottom >> 4;
+            top = (int)aabb.Top >> 4;
+
+            if (xMod > 0)
+                right++;
+
+            if (yMod > 0)
+                top++;
+
+            if (left < 0)
+                left = 0;
+
+            if (bottom < 0)
+                bottom = 0;
+
+            if (right > GridWidth - 1)
+                right = GridWidth - 1;
+
+            if (top > GridHeight - 1)
+                top = GridHeight - 1;
         }
 
         private void QueryStaticGrid(DynamicPack pack, float dt)
@@ -223,31 +268,12 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
             pack.Body.Boxes = new List<Tuple<int, int>>();
 
-            int xMod = (int)dynamicAabb.Right % CELL_SIZE;
-            int yMod = (int)dynamicAabb.Top % CELL_SIZE;
+            int leftIndex;
+            int rightIndex;
+            int bottomIndex;
+            int topIndex;
 
-            int leftIndex = (int)dynamicAabb.Left >> 4;
-            int rightIndex = (int)dynamicAabb.Right >> 4;
-            int bottomIndex = (int)dynamicAabb.Bottom >> 4;
-            int topIndex = (int)dynamicAabb.Top >> 4;
-
-            if (xMod > 0)
-                rightIndex++;
-
-            if (yMod > 0)
-                topIndex++;
-
-            if (leftIndex < 0)
-                leftIndex = 0;
-
-            if (bottomIndex < 0)
-                bottomIndex = 0;
-
-            if (rightIndex > GridWidth - 1)
-                rightIndex = GridWidth - 1;
-
-            if (topIndex > GridHeight - 1)
-                topIndex = GridHeight - 1;
+            GetAabbIndices(dynamicAabb, out leftIndex, out rightIndex, out bottomIndex, out topIndex);
 
             //Collect all unique aabb boxes
             var boxesSet = new List<StaticPack>();
@@ -258,7 +284,10 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                     pack.Body.Boxes.Add(new Tuple<int, int>(xIndex, yIndex));
                     var collideres = gridStatics[xIndex + GridWidth * yIndex];
                     for (int boxIndex = 0; boxIndex < collideres.Count; boxIndex++)
-                        boxesSet.Add(collideres[boxIndex]);
+                    {
+                        if(!boxesSet.Contains(collideres[boxIndex]))
+                            boxesSet.Add(collideres[boxIndex]);
+                    }
                 }
             }
 
@@ -267,7 +296,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
             var pos = dynamicAabb.GetCenter();
 
-            boxesSet.Sort((a, b) => ShortestDistanceComparer(pos, GetTileCenter(a.GridPosition), GetTileCenter(b.GridPosition)));
+            boxesSet.Sort((a, b) => ShortestDistanceComparer(pos, GetTileCenter(a.Position), GetTileCenter(b.Position)));
 
             //Iterate all collected static bodies for detail test
             foreach (var item in boxesSet)
@@ -304,21 +333,37 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         {
             var pack = new StaticPack(entity,
                                       entity.Components.OfType<IBody>().First(),
-                                      entity.Components.OfType<GridPosition>().First(),
+                                      entity.Components.OfType<Position>().First(),
                                       entity.Components.OfType<IShapeComponent>().First());
 
-            var pos = pack.GridPosition;
+            var pos = pack.Position;
 
-            if (pos.X >= GridWidth)
-                throw new InvalidOperationException($"Grid box body X coordinate exceeds grid width size.");
+            int xIndex;
+            int yIndex;
 
-            if (pos.Y >= GridHeight)
-                throw new InvalidOperationException($"Grid box body Y coordinate exceeds grid height size.");
+            if (!TryGetGridIndices(pos.Value, out xIndex, out yIndex))
+                throw new InvalidOperationException($"Tile position exceeds tile grid limits.");
 
-            var gridIndex = pos.X + GridHeight * pos.Y;
+            var aabb = pack.Aabb;
 
-            gridStatics[gridIndex].Add(pack);
+            int leftIndex;
+            int rightIndex;
+            int bottomIndex;
+            int topIndex;
+
+            GetAabbIndices(aabb, out leftIndex, out rightIndex, out bottomIndex, out topIndex);
+
+            for (int j = bottomIndex; j < topIndex; j++)
+            {
+                var gridIndex = GridWidth * j + leftIndex;
+                for (int i = leftIndex; i < rightIndex; i++)
+                {
+                    gridStatics[gridIndex].Add(pack);
+                    gridIndex++;
+                }
+            }
         }
+
 
         private void RegisterDynamicEntity(IEntity entity)
         {

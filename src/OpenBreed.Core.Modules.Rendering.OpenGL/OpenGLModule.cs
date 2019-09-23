@@ -7,6 +7,7 @@ using OpenTK.Graphics.OpenGL;
 using System;
 using OpenBreed.Core.Common.Systems;
 using OpenTK.Graphics;
+using OpenBreed.Core.Common.Systems.Components;
 
 namespace OpenBreed.Core.Modules.Rendering
 {
@@ -15,6 +16,7 @@ namespace OpenBreed.Core.Modules.Rendering
         #region Private Fields
 
         private readonly SpriteMan spriteMan;
+        private readonly StampMan stampMan;
         private readonly FontMan fontMan;
         private TextureMan textureMan;
         private TileMan tileMan;
@@ -32,6 +34,7 @@ namespace OpenBreed.Core.Modules.Rendering
             textureMan = new TextureMan(this);
             tileMan = new TileMan(this);
             spriteMan = new SpriteMan(this);
+            stampMan = new StampMan(this);
             fontMan = new FontMan(this);
         }
 
@@ -44,6 +47,8 @@ namespace OpenBreed.Core.Modules.Rendering
         public ITextureMan Textures { get { return textureMan; } }
 
         public ISpriteMan Sprites { get { return spriteMan; } }
+
+        public IStampMan Stamps { get { return stampMan; } }
 
         public ITileMan Tiles { get { return tileMan; } }
 
@@ -86,21 +91,9 @@ namespace OpenBreed.Core.Modules.Rendering
         /// Create system for handling tiles
         /// </summary>
         /// <returns>Tile system</returns>
-        public ITileSystem CreateTileSystem(int gridWidth, int gridHeight, float tileSize, bool drawGrid)
+        public ITileSystem CreateTileSystem(int gridWidth, int gridHeight, int layersNo, float tileSize, bool drawGrid)
         {
-            return new TileSystem(Core, gridWidth, gridHeight, tileSize, drawGrid);
-        }
-
-        /// <summary>
-        /// Creates text component using given font
-        /// </summary>
-        /// <param name="fontId">Id of font to use for this text component</param>
-        /// <param name="offset">Offset position from position component</param>
-        /// <param name="value">Optional initial text value</param>
-        /// <returns>Text component</returns>
-        public IText CreateText(int fontId, Vector2 offset, string value = null)
-        {
-            return new Text(fontId, offset, value);
+            return new TileSystem(Core, gridWidth, gridHeight, layersNo, tileSize, drawGrid);
         }
 
         /// <summary>
@@ -112,16 +105,6 @@ namespace OpenBreed.Core.Modules.Rendering
         public IWireframe CreateWireframe(float thickness, Color4 color)
         {
             return new Wireframe(thickness, color);
-        }
-
-        public ISprite CreateSprite(int atlasId, int imageId = 0)
-        {
-            return new Sprite(atlasId, imageId);
-        }
-
-        public ITile CreateTile(int atlasId, int imageId = 0)
-        {
-            return new Tile(atlasId, imageId);
         }
 
         public void Draw(float dt)
@@ -160,6 +143,18 @@ namespace OpenBreed.Core.Modules.Rendering
             GL.End();
 
             GL.PopMatrix();
+        }
+
+        public ISprite CreateSprite(string spriteAlias)
+        {
+            var atlas = Sprites.GetByAlias(spriteAlias);
+            return Sprite.Create(atlas.Id);
+        }
+
+        public ITile CreateTile(string tileAtlas)
+        {
+            var atlas = Tiles.GetByAlias(tileAtlas);
+            return Tile.Create(atlas.Id);
         }
 
         #endregion Private Methods

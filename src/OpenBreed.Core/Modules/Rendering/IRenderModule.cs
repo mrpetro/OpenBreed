@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
@@ -30,6 +31,11 @@ namespace OpenBreed.Core.Modules.Rendering
         ITileMan Tiles { get; }
 
         /// <summary>
+        /// Stamp manager
+        /// </summary>
+        IStampMan Stamps { get; }
+
+        /// <summary>
         /// Font manager
         /// </summary>
         IFontMan Fonts { get; }
@@ -54,10 +60,11 @@ namespace OpenBreed.Core.Modules.Rendering
         /// </summary>
         /// <param name="gridWidth">Tile grid width</param>
         /// <param name="gridHeight">Tile grid height</param>
+        /// <param name="layersNo">Number of tile layers</param>
         /// <param name="tileSize">Grid tile size</param>
         /// <param name="gridVisible">Grid visibility flag for debugging purpose</param>
         /// <returns>Tile system object</returns>
-        ITileSystem CreateTileSystem(int gridWidth, int gridHeight, float tileSize, bool gridVisible = false);
+        ITileSystem CreateTileSystem(int gridWidth, int gridHeight, int layersNo, float tileSize, bool gridVisible = false);
 
         /// <summary>
         /// Create system for handling sprites
@@ -72,15 +79,6 @@ namespace OpenBreed.Core.Modules.Rendering
         ITextSystem CreateTextSystem();
 
         /// <summary>
-        /// Creates text render component using given font
-        /// </summary>
-        /// <param name="fontId">Id of font to use for this text component</param>
-        /// <param name="offset">Offset position from position component</param>
-        /// <param name="value">Optional initial text value</param>
-        /// <returns>Text component</returns>
-        IText CreateText(int fontId, Vector2 offset, string value = null);
-
-        /// <summary>
         /// Create wireframe render component
         /// </summary>
         /// <param name="thickness">Thickness of wireframe lines</param>
@@ -89,20 +87,18 @@ namespace OpenBreed.Core.Modules.Rendering
         IWireframe CreateWireframe(float thickness, Color4 color);
 
         /// <summary>
-        /// Create sprite render component using given sprite atlas
+        /// Create sprite entity component
         /// </summary>
-        /// <param name="atlasId">Id of sprite atlas to use for this sprite component</param>
-        /// <param name="imageId">Optiona initial sprite atlas image id</param>
-        /// <returns>Sprite component</returns>
-        ISprite CreateSprite(int atlasId, int imageId = 0);
+        /// <param name="spriteAlias">Sprite atlas alias to use</param>
+        /// <returns>Sprite entity component</returns>
+        ISprite CreateSprite(string spriteAlias);
 
         /// <summary>
-        /// Create tile render component using given tile atlas
+        /// Create tile entity component
         /// </summary>
-        /// <param name="atlasId">Id of tile atlas to use for this tile component</param>
-        /// <param name="imageId">Optiona initial tile atlas image id</param>
-        /// <returns>Sprite component</returns>
-        ITile CreateTile(int atlasId, int imageId = 0);
+        /// <param name="tileAlias">Tile atlas alias to use</param>
+        /// <returns>Tile entity component</returns>
+        ITile CreateTile(string tileAtlas);
 
         void Cleanup();
 

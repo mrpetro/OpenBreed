@@ -21,6 +21,7 @@ using OpenBreed.Game.Entities.Actor;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Game.Entities.Door;
 using OpenBreed.Game.Entities.Box;
+using OpenBreed.Game.Entities.Projectile;
 
 namespace OpenBreed.Game.States
 {
@@ -46,7 +47,6 @@ namespace OpenBreed.Game.States
             3,3,3,3,3,3,3,3,3,3
         };
 
-        private ITileAtlas tileAtlas;
         private Viewport gameViewport;
 
         #endregion Private Fields
@@ -134,8 +134,8 @@ namespace OpenBreed.Game.States
             Core.Rendering.Viewports.Add(gameViewport);
 
             Console.Clear();
-            Console.WriteLine("---------- Entity groups --------");
-            Console.WriteLine("This demo shows typical usage of fonts and texts on the screen.");
+            Console.WriteLine("---------- Door entities --------");
+            Console.WriteLine("This demo shows door entites with usage of FSM pattern. Actor can open doors by touching them.");
             Console.WriteLine("Constrols:");
             Console.WriteLine("RMB + Move mouse cursor = Camera control over hovered viewport");
             Console.WriteLine("Keyboard arrows  = Control arrow actor");
@@ -161,9 +161,6 @@ namespace OpenBreed.Game.States
 
             var cameraBuilder = new CameraBuilder(Core);
 
-            //Resources
-            tileAtlas = Core.Rendering.Tiles.GetByAlias("Atlases/Tiles/16/Test");
-
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
@@ -175,16 +172,19 @@ namespace OpenBreed.Game.States
             gameViewport.Camera = GameCamera;
 
             var blockBuilder = new WorldBlockBuilder(Core);
-            blockBuilder.SetTileAtlas(tileAtlas.Id);
+            blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
 
             var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288));
-            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
+            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right, Key.ControlRight));
             actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
 
    
-            var actorSm = ActorHelper.CreateStateMachine(actor);
+            var actorSm = ActorHelper.CreateMovementFSM(actor);
             actorSm.SetInitialState("Standing_Down");
             GameWorld.AddEntity(actor);
+
+            //ProjectileHelper.AddProjectile(Core, GameWorld, 100, 100, 0, 0);
+
 
             var rnd = new Random();
 
@@ -198,29 +198,35 @@ namespace OpenBreed.Game.States
             //}
 
             for (int i = 0; i < 10; i++)
-                DoorHelper.AddHorizontalDoor(Core, GameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3, tileAtlas);
+                DoorHelper.AddHorizontalDoor(Core, GameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3);
 
             for (int i = 0; i < 10; i++)
-                DoorHelper.AddVerticalDoor(Core, GameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3, tileAtlas);
+                DoorHelper.AddVerticalDoor(Core, GameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3);
+
+            //blockBuilder.SetPosition(new Vector2(5 * 16, 10 * 16));
+            //blockBuilder.SetTileId(2);
+            //GameWorld.AddEntity(blockBuilder.Build());
+
+            //DoorHelper.AddHorizontalDoor(Core, GameWorld,  3,  3);
 
             for (int x = 0; x < 64; x++)
             {
-                blockBuilder.SetIndices(x, 0);
+                blockBuilder.SetPosition(new Vector2(x * 16, 0));
                 blockBuilder.SetTileId(9);
                 GameWorld.AddEntity(blockBuilder.Build());
 
-                blockBuilder.SetIndices(x, 62);
+                blockBuilder.SetPosition(new Vector2(x * 16, 62 * 16));
                 blockBuilder.SetTileId(9);
                 GameWorld.AddEntity(blockBuilder.Build());
             }
 
             for (int y = 1; y < 63; y++)
             {
-                blockBuilder.SetIndices(0, y);
+                blockBuilder.SetPosition(new Vector2(0, y * 16));
                 blockBuilder.SetTileId(9);
                 GameWorld.AddEntity(blockBuilder.Build());
 
-                blockBuilder.SetIndices(62, y);
+                blockBuilder.SetPosition(new Vector2(62 * 16, y * 16));
                 blockBuilder.SetTileId(9);
                 GameWorld.AddEntity(blockBuilder.Build());
             }

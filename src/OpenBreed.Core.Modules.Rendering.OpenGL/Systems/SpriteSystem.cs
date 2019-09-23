@@ -43,6 +43,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
             World.MessageBus.RegisterHandler(SpriteOnMsg.TYPE, this);
             World.MessageBus.RegisterHandler(SpriteOffMsg.TYPE, this);
+            World.MessageBus.RegisterHandler(SpriteSetMsg.TYPE, this);
         }
 
         public override bool HandleMsg(object sender, IMsg msg)
@@ -53,7 +54,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                     return HandleSpriteOnMsg(sender, (SpriteOnMsg)msg);
                 case SpriteOffMsg.TYPE:
                     return HandleSpriteOffMsg(sender, (SpriteOffMsg)msg);
-
+                case SpriteSetMsg.TYPE:
+                    return HandleSpriteSetMsg(sender, (SpriteSetMsg)msg);
                 default:
                     return false;
             }
@@ -68,6 +70,17 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                 active.Add(toActivate);
                 inactive.Remove(toActivate);
             }
+
+            return true;
+        }
+
+        private bool HandleSpriteSetMsg(object sender, SpriteSetMsg msg)
+        {
+            var toModify = active.FirstOrDefault(item => item.Entity == msg.Entity);
+            if (toModify == null)
+                return false;
+
+            toModify.Sprite.ImageId = msg.ImageId;
 
             return true;
         }
@@ -118,8 +131,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             var pack = active[index];
 
-            //if(dynamic != null)
-            //    Draw(dynamic, viewport);
+            DrawDebug(pack, viewport);
 
             GL.PushMatrix();
 
@@ -136,8 +148,13 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// Draw this sprite to given viewport
         /// </summary>
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
-        public void Draw(IBody body, IViewport viewport)
+        private void DrawDebug(SpritePack pack, IViewport viewport)
         {
+            var body = pack.Entity.Components.OfType<IBody>().FirstOrDefault();
+
+            if (body == null)
+                return;
+
             if (body.Boxes != null)
             {
                 foreach (var item in body.Boxes)
@@ -149,7 +166,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                 }
             }
         }
-
 
         #endregion Public Methods
 

@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
+using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Entities;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
 using OpenBreed.Core.Modules.Rendering.Helpers;
@@ -42,7 +43,6 @@ namespace OpenBreed.Game.States
             3,3,3,3,3,3,3,3,3,3
         };
 
-        private ITileAtlas tileAtlas;
         private Viewport gameViewport;
         private Viewport hudViewport;
 
@@ -183,13 +183,13 @@ namespace OpenBreed.Game.States
 
             var textEntity = Core.Entities.Create();
             textEntity.Add(Position.Create(0, 0));
-            textEntity.Add(Core.Rendering.CreateText(algerian50.Id, Vector2.Zero, "Alice has a cat!"));
+            textEntity.Add(Text.Create(algerian50.Id, Vector2.Zero, "Alice has a cat!"));
             HudWorld.AddEntity(textEntity);
 
             var fpsEntity = Core.Entities.Create();
 
             fpsEntity.Add(Position.Create(0, 400));
-            fpsEntity.Add(Core.Rendering.CreateText(arial12.Id, Vector2.Zero, "0 fps"));
+            fpsEntity.Add(Text.Create(arial12.Id, Vector2.Zero, "0 fps"));
             HudWorld.AddEntity(fpsEntity);
 
             Core.Worlds.Add(HudWorld);
@@ -202,8 +202,6 @@ namespace OpenBreed.Game.States
             var cameraBuilder = new CameraBuilder(Core);
 
             //Resources
-            tileAtlas = Core.Rendering.Tiles.GetByAlias("Atlases/Tiles/16/Test");
-
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
@@ -214,13 +212,13 @@ namespace OpenBreed.Game.States
             gameViewport.Camera = GameCamera;
 
             var blockBuilder = new WorldBlockBuilder(Core);
-            blockBuilder.SetTileAtlas(tileAtlas.Id);
+            blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
 
             var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288));
-            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
+            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right, Key.ControlRight));
             actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
 
-            var stateMachine = ActorHelper.CreateStateMachine(actor);
+            var stateMachine = ActorHelper.CreateMovementFSM(actor);
             stateMachine.SetInitialState("Standing_Down");
 
             GameWorld.AddEntity(actor);
@@ -237,7 +235,7 @@ namespace OpenBreed.Game.States
 
                     if (v > 0)
                     {
-                        blockBuilder.SetIndices(x + 5, y + 5);
+                        blockBuilder.SetPosition(new Vector2(x * 16 + 5 * 16, y * 16 + 5 * 16));
                         blockBuilder.SetTileId(v);
                         GameWorld.AddEntity(blockBuilder.Build());
                     }

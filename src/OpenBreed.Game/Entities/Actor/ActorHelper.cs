@@ -13,6 +13,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Game.Entities.Actor.States.Movement;
+using OpenBreed.Game.Entities.Actor.States.Attacking;
+using OpenBreed.Core.Modules.Physics.Events;
+using OpenBreed.Core.Modules.Physics.Helpers;
 
 namespace OpenBreed.Game.Entities.Actor
 {
@@ -87,28 +92,55 @@ namespace OpenBreed.Game.Entities.Actor
             animationWalkingUpRight.AddFrame(39, 1.0f);
         }
 
+        private static void OnCollision(IEntity thisEntity, IEntity otherEntity, Vector2 projection)
+        {
+            thisEntity.RaiseEvent(new CollisionEvent(otherEntity));
+
+            var body = otherEntity.Components.OfType<IBody>().FirstOrDefault();
+
+            var type = body.Tag;
+
+            switch (type)
+            {
+                case "Static":
+                    DynamicHelper.ResolveVsStatic(thisEntity, otherEntity, projection);
+                    return;
+                default:
+                    break;
+            }  
+        }
+
         public static IEntity CreateActor(ICore core, Vector2 pos)
         {
-            var atlas = core.Rendering.Sprites.GetByAlias("Atlases/Sprites/Arrow");
-
             var actor = core.Entities.Create();
             actor.Add(new Animator<int>(10.0f, true));
             //actor.Add(new CollisionDebug(Core.Rendering.CreateSprite(spriteAtlas.Id)));
-            actor.Add(core.Rendering.CreateSprite(atlas.Id));
+            actor.Add(core.Rendering.CreateSprite("Atlases/Sprites/Arrow"));
             actor.Add(Position.Create(pos));
             actor.Add(Thrust.Create(0, 0));
             actor.Add(Velocity.Create(0, 0));
             actor.Add(Direction.Create(1, 0));
-            actor.Add(new AxisAlignedBoxShape(0, 0, 32, 32));
+            actor.Add(AxisAlignedBoxShape.Create(0, 0, 32, 32));
             actor.Add(new Motion());
-            actor.Add(new Body(1.0f, 0.0f));
+            actor.Add(Body.Create(1.0f, 0.0f, "Dynamic", (e,c) => OnCollision(actor,e,c)));
 
             return actor;
         }
 
-        public static StateMachine CreateStateMachine(IEntity entity)
+        public static StateMachine CreateAttackingFSM(IEntity entity)
         {
-            var stateMachine = entity.AddStateMachine();
+            var stateMachine = entity.AddFSM("Attacking");
+
+            stateMachine.AddState(new ShootingState("Shooting"));
+            stateMachine.AddState(new IdleState("Idle"));
+            stateMachine.AddState(new CooldownState("Cooldown"));
+
+            return stateMachine;
+        }
+
+        public static StateMachine CreateMovementFSM(IEntity entity)
+        {
+            var stateMachine = entity.AddFSM("Movement");
 
             stateMachine.AddState(new StandingState("Standing_Right", "STANDING_RIGHT", new Vector2(1, 0)));
             stateMachine.AddState(new StandingState("Standing_Right_Down", "STANDING_RIGHT_DOWN", new Vector2(1, -1)));

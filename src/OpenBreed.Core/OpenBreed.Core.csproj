@@ -54,8 +54,17 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BlueprintMan.cs" />
+    <Compile Include="Blueprints\BlueprintXml.cs" />
+    <Compile Include="Blueprints\ComponentStateXml.cs" />
+    <Compile Include="Blueprints\IComponentState.cs" />
+    <Compile Include="Blueprints\IEntityDef.cs" />
+    <Compile Include="Blueprints\EntityDefXml.cs" />
+    <Compile Include="Blueprints\IBlueprint.cs" />
     <Compile Include="Collections\IdMap.cs" />
     <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Common\Components\Builders\ComponentBuilder.cs" />
+    <Compile Include="Common\Components\Builders\GridPositionBuilder.cs" />
     <Compile Include="Common\Components\GridPosition.cs" />
     <Compile Include="Common\Components\GroupPart.cs" />
     <Compile Include="Common\Helpers\CoreEventBus.cs" />
@@ -65,6 +74,7 @@
     <Compile Include="Common\Helpers\MovementTools.cs" />
     <Compile Include="Common\Helpers\StateChangeMsgHandler.cs" />
     <Compile Include="Common\Systems\GroupSystem.cs" />
+    <Compile Include="Common\Systems\TimerSystem.cs" />
     <Compile Include="CoreTools.cs" />
     <Compile Include="Common\Helpers\IEntityMsg.cs" />
     <Compile Include="Common\Helpers\WorldMessageBus.cs" />
@@ -81,12 +91,15 @@
     <Compile Include="Modules\Audio\Helpers\ISoundMan.cs" />
     <Compile Include="Modules\Physics\Components\IBody.cs" />
     <Compile Include="Modules\Physics\Components\IPhysicsComponent.cs" />
+    <Compile Include="Modules\Rendering\Components\Builders\IStampBuilder.cs" />
     <Compile Include="Modules\Rendering\Components\ICamera.cs" />
+    <Compile Include="Modules\Rendering\Components\ITile.cs" />
     <Compile Include="Modules\Rendering\Components\IWireframe.cs" />
     <Compile Include="Modules\Rendering\Helpers\IFontMan.cs" />
     <Compile Include="Modules\Rendering\Helpers\ISpriteMan.cs" />
+    <Compile Include="Modules\Rendering\Helpers\IStampMan.cs" />
+    <Compile Include="Modules\Rendering\Helpers\ITileStamp.cs" />
     <Compile Include="Modules\Rendering\Systems\CameraSystem.cs" />
-    <Compile Include="Modules\Rendering\Components\ITile.cs" />
     <Compile Include="Modules\Rendering\Helpers\IFont.cs" />
     <Compile Include="Modules\Rendering\Helpers\ITileMan.cs" />
     <Compile Include="Modules\Rendering\Helpers\ITileAtlas.cs" />
@@ -104,6 +117,7 @@
     <Compile Include="Modules\Rendering\Systems\IWireframeSystem.cs" />
     <Compile Include="Modules\Rendering\Systems\ITileSystem.cs" />
     <Compile Include="Modules\Rendering\Systems\ISpriteSystem.cs" />
+    <Compile Include="Other.cs" />
     <Compile Include="States\IStateBuilder.cs" />
     <Compile Include="States\IState.cs" />
     <Compile Include="States\StateChangeMsg.cs" />
@@ -170,6 +184,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\KeraLua.1.0.14\build\net45\KeraLua.targets" Condition="Exists('..\..\packages\KeraLua.1.0.14\build\net45\KeraLua.targets')" />

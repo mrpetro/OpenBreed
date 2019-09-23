@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace OpenBreed.Core.Modules.Rendering.Helpers
+namespace OpenBreed.Core.Modules.Rendering.Helpers.Builders
 {
     public class SpriteAtlasBuilder
     {

@@ -1,30 +1,19 @@
-﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenBreed.Core.Modules.Rendering.Systems;
-using OpenTK.Graphics.OpenGL;
-using System;
-using System.Linq;
-
-namespace OpenBreed.Core.Modules.Rendering.Components
+﻿namespace OpenBreed.Core.Modules.Rendering.Components
 {
     /// <summary>
     /// Axis-aligned tile render component with same height and width
     /// </summary>
-    internal class Tile : ITile
+    public class Tile : ITile
     {
-        #region Private Fields
+        #region Private Constructors
 
-        #endregion Private Fields
-
-        #region Internal Constructors
-
-        internal Tile(int atlasId, int imageId)
+        private Tile(int atlasId, int imageId)
         {
             AtlasId = atlasId;
             ImageId = imageId;
         }
 
-        #endregion Internal Constructors
+        #endregion Private Constructors
 
         #region Public Properties
 
@@ -38,6 +27,23 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         /// </summary>
         public int ImageId { get; set; }
 
+        public bool IsEmpty { get { return ImageId == 0 && AtlasId == 0; } }
+
         #endregion Public Properties
+
+        #region Public Methods
+
+        /// <summary>
+        /// Create tile render component using given tile atlas
+        /// </summary>
+        /// <param name="atlasId">Id of tile atlas to use for this tile component</param>
+        /// <param name="imageId">Optiona initial tile atlas image id</param>
+        /// <returns>Tile component</returns>
+        public static Tile Create(int atlasId, int imageId = 0)
+        {
+            return new Tile(atlasId, imageId);
+        }
+
+        #endregion Public Methods
     }
 }

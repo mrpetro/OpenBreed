@@ -1,20 +1,18 @@
-﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.States;
-using OpenBreed.Core.Modules.Animation.Systems;
+﻿using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Events;
 using OpenBreed.Core.Modules.Animation.Messages;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
+using OpenBreed.Core.Modules.Physics.Components;
+using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Core.Modules.Rendering.Messages;
+using OpenBreed.Core.States;
 using OpenTK;
 using System.Linq;
-using OpenBreed.Core.Modules.Rendering.Messages;
-using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Common.Systems;
-using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Common.Helpers;
 
-namespace OpenBreed.Game.Entities.Actor.States
+namespace OpenBreed.Game.Entities.Actor.States.Movement
 {
     public class WalkingState : IState
     {
@@ -26,7 +24,6 @@ namespace OpenBreed.Game.Entities.Actor.States
         private Motion creatureMovement;
         private Animator<int> spriteAnimation;
         private ISprite sprite;
-        private IDirection direction;
 
         #endregion Private Fields
 
@@ -50,40 +47,32 @@ namespace OpenBreed.Game.Entities.Actor.States
 
         #region Public Methods
 
-        public void EnterState()
+        public void EnterState(object[] arguments)
         {
             thrust.Value = walkDirection * creatureMovement.Acceleration;
 
+            Entity.Components.OfType<Direction>().FirstOrDefault().Value = walkDirection.Normalized();
+
             Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
             Entity.PostMsg(new TextSetMsg(Entity, "Hero - Walking"));
+
+            Entity.Subscribe(AnimChangedEvent<int>.TYPE, OnFrameChanged);
+            Entity.Subscribe(ControlDirectionChangedEvent.TYPE, OnControlDirectionChanged);
         }
 
         public void Initialize(IEntity entity)
         {
             Entity = entity;
             thrust = entity.Components.OfType<IThrust>().First();
-            direction = entity.Components.OfType<IDirection>().First();
             creatureMovement = entity.Components.OfType<Motion>().First();
             sprite = entity.Components.OfType<ISprite>().First();
             spriteAnimation = entity.Components.OfType<Animator<int>>().First();
-
-
-            Entity.Subscribe(AnimChangedEvent<int>.TYPE, OnFrameChanged);
-            Entity.Subscribe(ControlDirectionChangedEvent.TYPE, OnControlDirectionChanged);
-        }
-
-        private void OnFrameChanged(object sender, IEvent e)
-        {
-            HandleFrameChangeEvent((AnimChangedEvent<int>)e);
-        }
-
-        private void OnControlDirectionChanged(object sender, IEvent e)
-        {
-            HandleControlDirectionChangedEvent((ControlDirectionChangedEvent)e);
         }
 
         public void LeaveState()
         {
+            Entity.Unsubscribe(AnimChangedEvent<int>.TYPE, OnFrameChanged);
+            Entity.Unsubscribe(ControlDirectionChangedEvent.TYPE, OnControlDirectionChanged);
         }
 
         public string Process(string actionName, object[] arguments)
@@ -143,6 +132,16 @@ namespace OpenBreed.Game.Entities.Actor.States
 
         #region Private Methods
 
+        private void OnFrameChanged(object sender, IEvent e)
+        {
+            HandleFrameChangeEvent((AnimChangedEvent<int>)e);
+        }
+
+        private void OnControlDirectionChanged(object sender, IEvent e)
+        {
+            HandleControlDirectionChangedEvent((ControlDirectionChangedEvent)e);
+        }
+
         private void HandleFrameChangeEvent(AnimChangedEvent<int> systemEvent)
         {
             sprite.ImageId = systemEvent.Frame;
@@ -151,9 +150,9 @@ namespace OpenBreed.Game.Entities.Actor.States
         private void HandleControlDirectionChangedEvent(ControlDirectionChangedEvent systemEvent)
         {
             if (systemEvent.Direction != Vector2.Zero)
-                Entity.PostMsg(new StateChangeMsg(Entity, "Walk", systemEvent.Direction));
+                Entity.PostMsg(new StateChangeMsg(Entity, "Movement", "Walk", systemEvent.Direction));
             else
-                Entity.PostMsg(new StateChangeMsg(Entity, "Stop"));
+                Entity.PostMsg(new StateChangeMsg(Entity, "Movement", "Stop"));
         }
 
         #endregion Private Methods

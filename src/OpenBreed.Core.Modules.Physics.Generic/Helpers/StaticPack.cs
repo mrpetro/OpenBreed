@@ -15,12 +15,12 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
 
         internal StaticPack(IEntity entity,
             IBody body,
-            GridPosition gridPosition,
+            Position position,
             IShapeComponent shape)
         {
             Entity = entity;
             Body = body;
-            GridPosition = gridPosition;
+            Position = position;
             Shape = shape;
         }
 
@@ -30,8 +30,11 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
 
         internal IEntity Entity { get; }
         internal IBody Body { get; }
-        internal GridPosition GridPosition { get; }
+        internal Position Position { get; }
         internal IShapeComponent Shape { get; }
+
+        internal Box2 Aabb { get { return Shape.Aabb.Translated(Position.Value); } }
+
 
         #endregion Internal Properties
     }

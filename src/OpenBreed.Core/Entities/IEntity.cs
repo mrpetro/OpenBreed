@@ -4,6 +4,7 @@ using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.States;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace OpenBreed.Core.Entities
@@ -15,7 +16,7 @@ namespace OpenBreed.Core.Entities
     {
         #region Public Properties
 
-        StateMachine StateMachine { get; }
+        ReadOnlyCollection<StateMachine> FsmList { get; }
 
         /// <summary>
         /// Core reference
@@ -46,7 +47,7 @@ namespace OpenBreed.Core.Entities
 
         #region Public Methods
 
-        StateMachine AddStateMachine();
+        StateMachine AddFSM(string name);
 
         /// <summary>
         /// Post message of specific type

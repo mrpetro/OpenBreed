@@ -46,8 +46,6 @@ namespace OpenBreed.Game.States
         };
 
         private IEntity actor;
-        private ITileAtlas tileAtlas;
-        private ISpriteAtlas spriteAtlas;
         private Viewport viewport;
 
         #endregion Private Fields
@@ -147,10 +145,10 @@ namespace OpenBreed.Game.States
 
             Console.Clear();
             Console.WriteLine("---------- Pathfinding --------");
-            Console.WriteLine("This demo shows three viewports with two cameras attached to them.");
+            Console.WriteLine("This demo shows actor pathfinding function (NOT IMPLEMENTED YET)");
             Console.WriteLine("Constrols:");
             Console.WriteLine("RMB + Move mouse cursor = Camera control over hovered viewport");
-            Console.WriteLine("Keyboard arrows  = Control arrow actor");
+            Console.WriteLine("LMB = Set next point destination for Actor");
         }
 
         protected override void OnLeave()
@@ -169,9 +167,6 @@ namespace OpenBreed.Game.States
             var cameraBuilder = new CameraBuilder(Core);
 
             //Resources
-            tileAtlas = Core.Rendering.Tiles.GetByAlias("Atlases/Tiles/16/Test");
-            spriteAtlas = Core.Rendering.Sprites.GetByAlias("Atlases/Sprites/Arrow");
-
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
@@ -188,9 +183,9 @@ namespace OpenBreed.Game.States
             actor.Add(new AiControl());
 
             var blockBuilder = new WorldBlockBuilder(Core);
-            blockBuilder.SetTileAtlas(tileAtlas.Id);
+            blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
 
-            var stateMachine = ActorHelper.CreateStateMachine(actor);
+            var stateMachine = ActorHelper.CreateMovementFSM(actor);
             stateMachine.SetInitialState("Standing_Right");
 
             World.AddEntity(actor);
@@ -207,7 +202,7 @@ namespace OpenBreed.Game.States
 
                     if (v > 0)
                     {
-                        blockBuilder.SetIndices(x + 5, y + 5);
+                        blockBuilder.SetPosition(new Vector2((x + 5) * 16, (y + 5) * 16));
                         blockBuilder.SetTileId(v);
                         World.AddEntity(blockBuilder.Build());
                     }

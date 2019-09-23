@@ -11,6 +11,8 @@ using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System;
+using System.Collections;
+using System.Diagnostics;
 using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
@@ -26,25 +28,25 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Fields
 
-        private IEntity[] entities;
-
-        private ITile[] tileComps;
-
-        private GridPosition[] positionComps;
+        private Hashtable entities = new Hashtable();
+        private TileCell[] cells;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TileSystem(ICore core, int width, int height, float tileSize, bool gridVisible) : base(core)
+        public TileSystem(ICore core, int width, int height, int layersNo, float tileSize, bool gridVisible) : base(core)
         {
             Require<ITile>();
-            Require<GridPosition>();
+            Require<Position>();
 
+            GridHeight = width;
+            GridWidth = height;
+            LayersNo = layersNo;
             TileSize = tileSize;
             GridVisible = gridVisible;
 
-            InitializeTilesMap(width, height);
+            InitializeTilesMap();
         }
 
         #endregion Public Constructors
@@ -56,8 +58,9 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// </summary>
         public bool GridVisible { get; set; }
 
-        public int TileMapHeight { get; private set; }
-        public int TileMapWidth { get; private set; }
+        public int GridHeight { get; }
+        public int GridWidth { get; }
+        public int LayersNo { get; }
         public float TileSize { get; }
 
         #endregion Public Properties
@@ -69,6 +72,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             base.Initialize(world);
 
             World.MessageBus.RegisterHandler(TileSetMsg.TYPE, this);
+            World.MessageBus.RegisterHandler(PutStampMsg.TYPE, this);
         }
 
         /// <summary>
@@ -85,23 +89,24 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             int rightIndex = (int)right / TILE_SIZE + 1;
             int topIndex = (int)top / TILE_SIZE + 1;
 
-            leftIndex = MathHelper.Clamp(leftIndex, 0, TileMapHeight);
-            rightIndex = MathHelper.Clamp(rightIndex, 0, TileMapHeight);
-            bottomIndex = MathHelper.Clamp(bottomIndex, 0, TileMapWidth);
-            topIndex = MathHelper.Clamp(topIndex, 0, TileMapWidth);
+            leftIndex = MathHelper.Clamp(leftIndex, 0, GridHeight);
+            rightIndex = MathHelper.Clamp(rightIndex, 0, GridHeight);
+            bottomIndex = MathHelper.Clamp(bottomIndex, 0, GridWidth);
+            topIndex = MathHelper.Clamp(topIndex, 0, GridWidth);
 
             if (GridVisible)
                 DrawGrid(leftIndex, bottomIndex, rightIndex, topIndex);
 
             GL.Enable(EnableCap.Texture2D);
 
-            for (int j = bottomIndex; j < topIndex; j++)
+            for (int layerNo = 0; layerNo < LayersNo; layerNo++)
             {
-                for (int i = leftIndex; i < rightIndex; i++)
+                for (int j = bottomIndex; j < topIndex; j++)
                 {
-                    var index = i + TileMapHeight * j;
-
-                    DrawEntityTile(index);
+                    for (int i = leftIndex; i < rightIndex; i++)
+                    {
+                        DrawCellTiles(i, j, layerNo);
+                    }
                 }
             }
 
@@ -114,78 +119,140 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             {
                 case TileSetMsg.TYPE:
                     return HandleTileSetMsg(sender, (TileSetMsg)msg);
-
+                case PutStampMsg.TYPE:
+                    return HandlePutStampMsg(sender, (PutStampMsg)msg);
                 default:
                     return false;
             }
+        }
+
+        public bool TryGetGridIndices(Vector2 point, out int xIndex, out int yIndex)
+        {
+            xIndex = (int)point.X / TILE_SIZE;
+            yIndex = (int)point.Y / TILE_SIZE;
+            if (xIndex < 0)
+                return false;
+            if (yIndex < 0)
+                return false;
+            if (xIndex >= GridWidth)
+                return false;
+            if (yIndex >= GridHeight)
+                return false;
+
+            return true;
         }
 
         #endregion Public Methods
 
         #region Protected Methods
 
-        private bool HandleTileSetMsg(object sender, TileSetMsg msg)
-        {
-            var index = Array.IndexOf(entities, msg.Entity);
-            if (index < 0)
-                return false;
-
-            tileComps[index].ImageId = msg.TileId;
-
-            return true;
-        }
-
         protected override void RegisterEntity(IEntity entity)
         {
-            var pos = entity.Components.OfType<GridPosition>().First();
+            Debug.Assert(!entities.Contains(entity), "Entity already added!");
 
-            if (pos.X >= TileMapWidth)
-                throw new InvalidOperationException($"Tile X coordinate exceeds tile map width size.");
+            var pos = entity.Components.OfType<Position>().First();
 
-            if (pos.Y >= TileMapHeight)
-                throw new InvalidOperationException($"Tile Y coordinate exceeds tile map height size.");
+            int xIndex;
+            int yIndex;
 
-            var tileId = pos.X + TileMapHeight * pos.Y;
+            if(!TryGetGridIndices(pos.Value, out xIndex, out yIndex))
+                throw new InvalidOperationException($"Tile position exceeds tile grid limits.");
 
-            entities[tileId] = entity;
-            tileComps[tileId] = entity.Components.OfType<ITile>().First();
-            positionComps[tileId] = pos;
+            var cellIndex = xIndex + GridWidth * yIndex;
+
+            var tile = entity.Components.OfType<Tile>().First();
+
+            entities[entity] = tile;
+
+            var tileCell = this.cells[cellIndex];
+
+            tileCell.AtlasId = tile.AtlasId;
+            tileCell.ImageId = tile.ImageId;
         }
 
         protected override void UnregisterEntity(IEntity entity)
         {
+            throw new NotImplementedException();
         }
 
         #endregion Protected Methods
 
         #region Private Methods
 
-        private void DrawEntityTile(int index)
+        private bool HandleTileSetMsg(object sender, TileSetMsg msg)
         {
-            var entity = entities[index];
+            var tile = (ITile)entities[msg.Entity];
+            if (tile == null)
+                return false;
 
-            if (entity == null)
-                return;
+            var pos = msg.Entity.Components.OfType<Position>().First();
 
-            var tile = tileComps[index];
-            var position = positionComps[index];
+            int xIndex;
+            int yIndex;
 
-            GL.PushMatrix();
+            if (!TryGetGridIndices(pos.Value, out xIndex, out yIndex))
+                throw new InvalidOperationException($"Tile position exceeds tile grid limits.");
 
-            GL.Translate(position.X * TILE_SIZE, position.Y * TILE_SIZE, 0.0f);
+            var cellIndex = xIndex + GridWidth * yIndex;
 
-            Core.Rendering.Tiles.GetById(tile.AtlasId).Draw(tile.ImageId);
+            var tileCell = this.cells[cellIndex];
+            tileCell.ImageId = msg.ImageId;
 
-            GL.PopMatrix();
+            return true;
         }
 
-        private void InitializeTilesMap(int width, int height)
+        private bool HandlePutStampMsg(object sender, PutStampMsg msg)
         {
-            TileMapHeight = width;
-            TileMapWidth = height;
-            entities = new IEntity[width * height];
-            tileComps = new ITile[width * height];
-            positionComps = new GridPosition[width * height];
+            var stamp = Core.Rendering.Stamps.GetById(msg.StampId);
+
+            if (stamp == null)
+                return false;
+
+            int xIndex;
+            int yIndex;
+
+            if (!TryGetGridIndices(msg.Position, out xIndex, out yIndex))
+                throw new InvalidOperationException($"Tile position exceeds tile grid limits.");
+
+            for (int j = 0; j < stamp.Height; j++)
+            {
+                var cellIndex = xIndex + GridWidth * (yIndex + j);
+
+                for (int i = 0; i < stamp.Width; i++)
+                {
+                    var imageId = stamp.Data[i + stamp.Width * j];
+                    this.cells[cellIndex].ImageId = imageId;
+                    this.cells[cellIndex].AtlasId = 0;
+                    cellIndex++;
+                }
+            }
+
+            return true;
+        }
+
+        private void DrawCellTiles(int xIndex, int yIndex, int layerNo)
+        {
+            var index = layerNo * GridWidth * GridHeight + xIndex + GridWidth * yIndex;
+
+            var cellTile = cells[index];
+
+            if (!cellTile.IsEmpty)
+            {
+                GL.PushMatrix();
+
+                GL.Translate(xIndex * TILE_SIZE, yIndex * TILE_SIZE, 0.0f);
+
+                Core.Rendering.Tiles.GetById(cellTile.AtlasId).Draw(cellTile.ImageId);
+
+                GL.PopMatrix();
+            }
+        }
+
+        private void InitializeTilesMap()
+        {
+            cells = new TileCell[GridWidth * GridHeight * LayersNo];
+            for (int i = 0; i < cells.Length; i++)
+                cells[i] = TileCell.Create();
         }
 
         /// <summary>
@@ -202,16 +269,16 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             for (int j = bottomIndex; j < topIndex; j++)
             {
                 GL.Begin(PrimitiveType.Lines);
-                GL.Vertex2(leftIndex * 16, j * 16);
-                GL.Vertex2(rightIndex * 16, j * 16);
+                GL.Vertex2(leftIndex * TILE_SIZE, j * TILE_SIZE);
+                GL.Vertex2(rightIndex * TILE_SIZE, j * TILE_SIZE);
                 GL.End();
             }
 
             for (int i = leftIndex; i < rightIndex; i++)
             {
                 GL.Begin(PrimitiveType.Lines);
-                GL.Vertex2(i * 16, bottomIndex * 16);
-                GL.Vertex2(i * 16, topIndex * 16);
+                GL.Vertex2(i * TILE_SIZE, bottomIndex * TILE_SIZE);
+                GL.Vertex2(i * TILE_SIZE, topIndex * TILE_SIZE);
                 GL.End();
             }
         }

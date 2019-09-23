@@ -58,7 +58,6 @@ namespace OpenBreed.Game.States
             7,7,7,7,7,7,7,7,0,0
         };
 
-        private ITileAtlas tileAtlas;
         private Viewport viewportLeft;
         private Viewport viewportRight;
 
@@ -91,8 +90,6 @@ namespace OpenBreed.Game.States
             var cameraBuilder = new CameraBuilder(Core);
 
             //Resources
-            tileAtlas = Core.Rendering.Tiles.GetByAlias("Atlases/Tiles/16/Test");
-
             cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
@@ -198,7 +195,7 @@ namespace OpenBreed.Game.States
             Console.WriteLine("Constrols:");
             Console.WriteLine("MMB + Move mouse cursor over hovered viewport = Camera scroll control");
             Console.WriteLine("Mouse wheel over hovered viewport = Camera zoom control");
-            Console.WriteLine("Keyboard arrows  = Control arrow actor");
+            Console.WriteLine("Keyboard arrows = Control arrow actor");
         }
 
         private void Inputs_KeyDown(object sender, KeyboardKeyEventArgs e)
@@ -224,12 +221,12 @@ namespace OpenBreed.Game.States
         private void InitializeWorldA()
         {
             var blockBuilder = new WorldBlockBuilder(Core);
-            blockBuilder.SetTileAtlas(tileAtlas.Id);
+            blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
 
             var actor = ActorHelper.CreateActor(Core, new Vector2(20, 20));
-            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
+            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right, Key.ControlRight));
 
-            var stateMachine = ActorHelper.CreateStateMachine(actor);
+            var stateMachine = ActorHelper.CreateMovementFSM(actor);
             stateMachine.SetInitialState("Standing_Right");
 
             WorldA.AddEntity(actor);
@@ -246,7 +243,7 @@ namespace OpenBreed.Game.States
 
                     if (v > 0)
                     {
-                        blockBuilder.SetIndices(x + 5, 10 - y + 5);
+                        blockBuilder.SetPosition(new Vector2((x + 5) * 16, (16 - y + 5) * 16));
                         blockBuilder.SetTileId(v);
                         WorldA.AddEntity(blockBuilder.Build());
                     }
@@ -257,12 +254,12 @@ namespace OpenBreed.Game.States
         private void InitializeWorldB()
         {
             var actor = ActorHelper.CreateActor(Core, new Vector2(50, 20));
-            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
+            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right, Key.ControlRight));
 
             var blockBuilder = new WorldBlockBuilder(Core);
-            blockBuilder.SetTileAtlas(tileAtlas.Id);
+            blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
 
-            var stateMachine = ActorHelper.CreateStateMachine(actor);
+            var stateMachine = ActorHelper.CreateMovementFSM(actor);
             stateMachine.SetInitialState("Standing_Down");
 
             WorldB.AddEntity(actor);
@@ -279,7 +276,7 @@ namespace OpenBreed.Game.States
 
                     if (v > 0)
                     {
-                        blockBuilder.SetIndices(x + 5, y + 5);
+                        blockBuilder.SetPosition(new Vector2((x + 5) * 16, (y + 5) * 16));
                         blockBuilder.SetTileId(v);
                         WorldB.AddEntity(blockBuilder.Build());
                     }

@@ -1,4 +1,5 @@
-﻿using OpenTK;
+﻿using OpenBreed.Core.Entities;
+using OpenTK;
 using System;
 using System.Collections.Generic;
 
@@ -11,13 +12,23 @@ namespace OpenBreed.Core.Modules.Physics.Components
     {
         #region Public Constructors
 
-        public Body(float cofFactor, float corFactor)
+        public Body()
         {
-            CofFactor = cofFactor;
-            CorFactor = corFactor;
         }
 
         #endregion Public Constructors
+
+        #region Private Constructors
+
+        private Body(float cofFactor, float corFactor, string tag, Action<IEntity, Vector2> collisionCallback)
+        {
+            CofFactor = cofFactor;
+            CorFactor = corFactor;
+            Tag = tag;
+            CollisionCallback = collisionCallback;
+        }
+
+        #endregion Private Constructors
 
         #region Public Properties
 
@@ -30,6 +41,11 @@ namespace OpenBreed.Core.Modules.Physics.Components
         /// Coefficient of restitution factor for this body.
         /// </summary>
         public float CorFactor { get; internal set; }
+
+        /// <summary>
+        /// User defined tag
+        /// </summary>
+        public string Tag { get; set; }
 
         /// <summary>
         /// DEBUG only
@@ -48,6 +64,20 @@ namespace OpenBreed.Core.Modules.Physics.Components
         /// </summary>
         public Vector2 OldPosition { get; set; }
 
+        /// <summary>
+        /// Collistion callback
+        /// </summary>
+        public Action<IEntity, Vector2> CollisionCallback { get; set; }
+
         #endregion Public Properties
+
+        #region Public Methods
+
+        public static Body Create(float cofFactor, float corFactor, string tag, Action<IEntity, Vector2> collisionCallback = null)
+        {
+            return new Body(cofFactor, corFactor, tag, collisionCallback);
+        }
+
+        #endregion Public Methods
     }
 }

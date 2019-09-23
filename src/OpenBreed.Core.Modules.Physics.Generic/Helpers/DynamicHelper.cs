@@ -1,8 +1,10 @@
 ﻿using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Systems;
 using OpenTK;
 using System;
+using System.Linq;
 
 namespace OpenBreed.Core.Modules.Physics.Helpers
 {
@@ -16,7 +18,7 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
         ///     0 - perfectly inelastic collision
         ///     1 - perfectly elastic collision
         /// </summary>
-        private const float GENERIC_COR = 1.0f;
+        public const float GENERIC_COR = 1.0f;
 
         #endregion Private Fields
 
@@ -29,7 +31,7 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
 
         internal static bool TestVsStatic(PhysicsSystem system, DynamicPack bodyA, StaticPack bodyB, float dt, out Vector2 projection)
         {
-            return CollisionChecker.Check(bodyA.Position.Value, bodyA.Shape, PhysicsSystem.GetTilePos(bodyB.GridPosition), bodyB.Shape, out projection);
+            return CollisionChecker.Check(bodyA.Position.Value, bodyA.Shape, bodyB.Position.Value, bodyB.Shape, out projection);
         }
 
         /// <summary>
@@ -76,28 +78,31 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
         /// <summary>
         /// Resolve collision of moving body vs static body. Simplified pseudo physics version.
         /// </summary>
-        /// <param name="dynamicBody">Given dynamic body</param>
-        /// <param name="staticBody">Given static body</param>
+        /// <param name="entityA">Given dynamic body</param>
+        /// <param name="entityB">Given static body</param>
         /// <param name="projection">Given collision projection vector</param>
-        /// <param name="dt">Delta time</param>
-        internal static void ResolveVsStatic(DynamicPack dynamicBody, StaticPack staticBody, Vector2 projection, float dt)
+        public static void ResolveVsStatic(IEntity entityA, IEntity entityB, Vector2 projection)
         {
-            dynamicBody.Position.Value += projection;
+            var p = entityA.Components.OfType<IPosition>().FirstOrDefault();
+            var v = entityA.Components.OfType<IVelocity>().FirstOrDefault();
+            var body = entityA.Components.OfType<IBody>().FirstOrDefault();
+
+            p.Value += projection;
 
             var normal = projection.Normalized();
 
             //find component of velocity parallel to collision normal
-            var dp = Vector2.Dot(dynamicBody.Velocity.Value, normal);
+            var dp = Vector2.Dot(v.Value, normal);
 
             //Apply collision response forces if the object is travelling into, and not out of, the collision
             if (dp < 0)
             {
-                var cor = GENERIC_COR * dynamicBody.Body.CorFactor;
+                var cor = DynamicHelper.GENERIC_COR * body.CorFactor;
 
                 var vn = Vector2.Multiply(normal, dp);
-                var vt = dynamicBody.Velocity.Value - vn;
+                var vt = v.Value - vn;
 
-                dynamicBody.Velocity.Value = vt - cor * vn;
+                v.Value = vt - cor * vn;
             }
         }
 
