@@ -15,18 +15,16 @@ namespace OpenBreed.Game.Entities.Projectile.States
         #region Private Fields
 
         private readonly string animationId;
-        private readonly Vector2 fireDirection;
-        private IThrust thrust;
+        private IVelocity velocity;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public FiredState(string id, string animationId, Vector2 fireDirection)
+        public FiredState(string id, string animationId)
         {
             Id = id;
             this.animationId = animationId;
-            this.fireDirection = fireDirection;
         }
 
         #endregion Public Constructors
@@ -40,9 +38,9 @@ namespace OpenBreed.Game.Entities.Projectile.States
 
         #region Public Methods
 
-        public void EnterState()
+        public void EnterState(object[] arguments)
         {
-            thrust.Value = fireDirection;
+            velocity.Value = (Vector2)arguments[0];
 
             Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
             Entity.PostMsg(new TextSetMsg(Entity, "Projectile - Fired"));
@@ -52,7 +50,7 @@ namespace OpenBreed.Game.Entities.Projectile.States
         public void Initialize(IEntity entity)
         {
             Entity = entity;
-            thrust = entity.Components.OfType<IThrust>().First();
+            velocity = entity.Components.OfType<IVelocity>().First();
         }
 
         public void LeaveState()
@@ -65,23 +63,23 @@ namespace OpenBreed.Game.Entities.Projectile.States
             {
                 case "Destroy":
                     {
-                        var walkDirection = (Vector2)arguments[0];
+                        var direction = (Vector2)arguments[0];
 
-                        if (walkDirection.X == 1 && walkDirection.Y == 0)
+                        if (direction.X == 1 && direction.Y == 0)
                             return "Destroy_Right";
-                        else if (walkDirection.X == 1 && walkDirection.Y == -1)
+                        else if (direction.X == 1 && direction.Y == -1)
                             return "Destroy_Right_Down";
-                        else if (walkDirection.X == 0 && walkDirection.Y == -1)
+                        else if (direction.X == 0 && direction.Y == -1)
                             return "Destroy_Down";
-                        else if (walkDirection.X == -1 && walkDirection.Y == -1)
+                        else if (direction.X == -1 && direction.Y == -1)
                             return "Destroy_Down_Left";
-                        else if (walkDirection.X == -1 && walkDirection.Y == 0)
+                        else if (direction.X == -1 && direction.Y == 0)
                             return "Destroy_Left";
-                        else if (walkDirection.X == -1 && walkDirection.Y == 1)
+                        else if (direction.X == -1 && direction.Y == 1)
                             return "Destroy_Left_Up";
-                        else if (walkDirection.X == 0 && walkDirection.Y == 1)
+                        else if (direction.X == 0 && direction.Y == 1)
                             return "Destroy_Up";
-                        else if (walkDirection.X == 1 && walkDirection.Y == 1)
+                        else if (direction.X == 1 && direction.Y == 1)
                             return "Destroy_Up_Right";
                         break;
                     }

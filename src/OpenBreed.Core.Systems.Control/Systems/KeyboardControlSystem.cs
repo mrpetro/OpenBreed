@@ -67,8 +67,13 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
         private void ProcessInputs(float dt, KeyboardState keyState, IEntity entity)
         {
             var direction = Vector2.Zero;
+            var fire = false;
+
 
             var control = entity.Components.OfType<KeyboardControl>().First();
+
+            if (keyState[control.FireKey])
+                fire = true;
 
             if (keyState[control.MoveLeftKey])
                 direction.X = -1;
@@ -80,12 +85,17 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
             else if (keyState[control.MoveDownKey])
                 direction.Y = -1;
 
-            if (control.Direction == direction)
-                return;
+            if (control.Direction != direction)
+            {
+                control.Direction = direction;
+                entity.RaiseEvent(new ControlDirectionChangedEvent(control.Direction));
+            }
 
-            control.Direction = direction;
-
-            entity.RaiseEvent(new ControlDirectionChangedEvent(control.Direction));
+            if (control.Fire != fire)
+            {
+                control.Fire = fire;
+                entity.RaiseEvent(new ControlFireChangedEvent(control.Fire));
+            }
         }
 
         #endregion Private Methods

@@ -6,6 +6,7 @@ using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Physics.Components;
+using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
@@ -89,7 +90,7 @@ namespace OpenBreed.Game.Entities.Door
             var door = core.Entities.Create();
 
             door.Add(new Animator<int>(5.0f, false));
-            door.Add(Body.Create(1.0f, 1.0f));
+            door.Add(Body.Create(1.0f, 1.0f, "Static", (e, c) => OnCollision(door, e, c)));
             door.Add(core.Rendering.CreateSprite("Atlases/Sprites/Door/Vertical"));
             door.Add(Position.Create(x * 16, y * 16));
             door.Add(AxisAlignedBoxShape.Create(0, 0, 16, 32));
@@ -101,6 +102,11 @@ namespace OpenBreed.Game.Entities.Door
             //world.AddEntity(doorPart1);
             //world.AddEntity(doorPart2);
             world.AddEntity(door);
+        }
+
+        private static void OnCollision(IEntity thisEntity, IEntity otherEntity, Vector2 projection)
+        {
+            thisEntity.RaiseEvent(new CollisionEvent(otherEntity));
         }
 
         public static void AddHorizontalDoor(ICore core, World world, int x, int y)
@@ -116,7 +122,7 @@ namespace OpenBreed.Game.Entities.Door
             var door = core.Entities.Create();
 
             door.Add(new Animator<int>(5.0f, false));
-            door.Add(Body.Create(1.0f, 1.0f));
+            door.Add(Body.Create(1.0f, 1.0f, "Static", (e, c) => OnCollision(door, e, c)));
             door.Add(core.Rendering.CreateSprite("Atlases/Sprites/Door/Horizontal"));
             door.Add(Position.Create(x * 16, y * 16));
             door.Add(AxisAlignedBoxShape.Create(0, 0, 32, 16));

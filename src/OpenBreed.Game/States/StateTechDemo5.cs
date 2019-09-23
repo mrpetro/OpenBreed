@@ -134,8 +134,8 @@ namespace OpenBreed.Game.States
             Core.Rendering.Viewports.Add(gameViewport);
 
             Console.Clear();
-            Console.WriteLine("---------- Entity groups --------");
-            Console.WriteLine("This demo shows typical usage of fonts and texts on the screen.");
+            Console.WriteLine("---------- Door entities --------");
+            Console.WriteLine("This demo shows door entites with usage of FSM pattern. Actor can open doors by touching them.");
             Console.WriteLine("Constrols:");
             Console.WriteLine("RMB + Move mouse cursor = Camera control over hovered viewport");
             Console.WriteLine("Keyboard arrows  = Control arrow actor");
@@ -175,7 +175,7 @@ namespace OpenBreed.Game.States
             blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
 
             var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288));
-            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
+            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right, Key.ControlRight));
             actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
 
    

@@ -4,9 +4,11 @@ using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Entities.Builders;
 using OpenBreed.Core.Modules.Physics.Components;
+using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenTK;
+using System.Linq;
 
 namespace OpenBreed.Game.Entities.Builders
 {
@@ -46,12 +48,18 @@ namespace OpenBreed.Game.Entities.Builders
             this.tileId = tileId;
         }
 
+        private static void OnCollision(IEntity thisEntity, IEntity otherEntity, Vector2 projection)
+        {
+            thisEntity.RaiseEvent(new CollisionEvent(otherEntity));
+        }
+
+
         public override IEntity Build()
         {
             var entity = Core.Entities.Create();
 
             entity.Add(Position.Create(pos));
-            entity.Add(Body.Create(1.0f, 1.0f));
+            entity.Add(Body.Create(1.0f, 1.0f, "Static", (e, c) => OnCollision(entity, e, c)));
             entity.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
             entity.Add(Tile.Create(atlasId, tileId));
 

@@ -1,12 +1,12 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
+using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Entities;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
-using OpenBreed.Game.Commands;
 using OpenBreed.Game.Entities;
 using OpenBreed.Game.Entities.Builders;
 using OpenTK;
@@ -16,21 +16,24 @@ using System.Drawing;
 using OpenBreed.Core.Entities;
 using OpenBreed.Game.Worlds;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
+using OpenBreed.Game.Helpers;
 using OpenBreed.Game.Entities.Actor;
-using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Game.Entities.Door;
+using OpenBreed.Game.Entities.Box;
+using OpenBreed.Game.Entities.Projectile;
+using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 
 namespace OpenBreed.Game.States
 {
     /// <summary>
-    /// Tech Demo Class: Pathfinding
+    /// Tech Demo Class: Projectiles
     /// </summary>
-    public class StateTechDemo3 : BaseState
+    public class StateTechDemo6 : BaseState
     {
         #region Public Fields
 
-        public const string ID = "TECH_DEMO_3";
-
-        public World World;
+        public const string ID = "TECH_DEMO_6";
 
         #endregion Public Fields
 
@@ -45,14 +48,13 @@ namespace OpenBreed.Game.States
             3,3,3,3,3,3,3,3,3,3
         };
 
-        private IEntity actor;
-        private Viewport viewport;
+        private Viewport gameViewport;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public StateTechDemo3(ICore core)
+        public StateTechDemo6(ICore core)
         {
             Core = core;
         }
@@ -63,7 +65,8 @@ namespace OpenBreed.Game.States
 
         public ICore Core { get; }
 
-        public CameraEntity Camera1 { get; private set; }
+        public CameraEntity GameCamera { get; private set; }
+        public CameraEntity HudCamera { get; private set; }
 
         public override string Id { get { return ID; } }
 
@@ -75,10 +78,10 @@ namespace OpenBreed.Game.States
         {
             base.OnResize(clientRectangle);
 
-            viewport.X = clientRectangle.X + 25;
-            viewport.Y = clientRectangle.Y + 25;
-            viewport.Width = clientRectangle.Width  - 50;
-            viewport.Height = clientRectangle.Height - 50;
+            gameViewport.X = clientRectangle.X + 25;
+            gameViewport.Y = clientRectangle.Y + 25;
+            gameViewport.Width = clientRectangle.Width  - 50;
+            gameViewport.Height = clientRectangle.Height - 50;
         }
 
         public override void Update(float dt)
@@ -88,8 +91,8 @@ namespace OpenBreed.Game.States
 
             Viewport hoverViewport = null;
 
-            if (viewport.TestScreenCoords(Core.Inputs.CursorPos))
-                hoverViewport = viewport;
+            if (gameViewport.TestScreenCoords(Core.Inputs.CursorPos))
+                hoverViewport = gameViewport;
             else
                 hoverViewport = null;
 
@@ -105,13 +108,6 @@ namespace OpenBreed.Game.States
                     var delta2 = new Vector2(-delta4.X, -delta4.Y);
  
                     hoverViewport.Camera.Position.Value += delta2;
-                }
-
-                if (mouseState.IsButtonDown(MouseButton.Left))
-                {
-                    var worldCoords = hoverViewport.GetWorldCoords(Core.Inputs.CursorPos);
-                    var moveToCommand = new MoveToCommand(actor, worldCoords);
-                    moveToCommand.Execute();
                 }
              }
         }
@@ -131,30 +127,31 @@ namespace OpenBreed.Game.States
             }
         }
 
-        private void DeinitializeWorld()
-        {
-            World.RemoveAllEntities();
-            Core.Worlds.Remove(World);
-            Core.Rendering.Viewports.Remove(viewport);
-            Core.Inputs.KeyDown -= Inputs_KeyDown;
-        }
-
         protected override void OnEnter()
         {
             InitializeWorld();
 
+            Core.Inputs.KeyDown += Inputs_KeyDown;
+            Core.Rendering.Viewports.Add(gameViewport);
+
             Console.Clear();
-            Console.WriteLine("---------- Pathfinding --------");
-            Console.WriteLine("This demo shows actor pathfinding function (NOT IMPLEMENTED YET)");
+            Console.WriteLine("---------- Projectile entities --------");
+            Console.WriteLine("This demo shows projectiles in use.");
             Console.WriteLine("Constrols:");
             Console.WriteLine("RMB + Move mouse cursor = Camera control over hovered viewport");
-            Console.WriteLine("LMB = Set next point destination for Actor");
+            Console.WriteLine("Keyboard Right Ctrl = Shoot projectiles");
+            Console.WriteLine("Keyboard arrows  = Control arrow actor");
         }
 
         protected override void OnLeave()
         {
-            DeinitializeWorld();
+            GameWorld.RemoveAllEntities();
+            Core.Worlds.Remove(GameWorld);
+
+            Core.Rendering.Viewports.Remove(gameViewport);
+            Core.Inputs.KeyDown -= Inputs_KeyDown;
         }
+        public GameWorld GameWorld;
 
         #endregion Protected Methods
 
@@ -162,55 +159,61 @@ namespace OpenBreed.Game.States
 
         private void InitializeWorld()
         {
-            World = new GameWorld(Core);
+            GameWorld = new GameWorld(Core);
 
             var cameraBuilder = new CameraBuilder(Core);
 
-            //Resources
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
-            Camera1 = (CameraEntity)cameraBuilder.Build();
-            World.AddEntity(Camera1);
+            GameCamera = (CameraEntity)cameraBuilder.Build();
+            GameWorld.AddEntity(GameCamera);
 
 
-            viewport = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
-            viewport.Camera = Camera1;
-
-            Core.Worlds.Add(World);
-
-            actor = ActorHelper.CreateActor(Core, new Vector2(64, 288));
-            actor.Add(new AiControl());
+            gameViewport = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
+            gameViewport.Camera = GameCamera;
 
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
 
-            var stateMachine = ActorHelper.CreateMovementFSM(actor);
-            stateMachine.SetInitialState("Standing_Right");
+            var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288));
+            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right, Key.ControlRight));
+            actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
 
-            World.AddEntity(actor);
+   
+            var movementFsm = ActorHelper.CreateMovementFSM(actor);
+            var atackFsm = ActorHelper.CreateAttackingFSM(actor);
+            movementFsm.SetInitialState("Standing_Down");
+            atackFsm.SetInitialState("Idle");
+            GameWorld.AddEntity(actor);
 
             var rnd = new Random();
 
-            var ymax = mapA.Length / 10;
+            //DoorHelper.AddHorizontalDoor(Core, GameWorld,  3,  3);
 
-            for (int x = 0; x < 10; x++)
+            for (int x = 0; x < 64; x++)
             {
-                for (int y = 0; y < ymax; y++)
-                {
-                    var v = mapA[x + y * 10];
+                blockBuilder.SetPosition(new Vector2(x * 16, 0));
+                blockBuilder.SetTileId(9);
+                GameWorld.AddEntity(blockBuilder.Build());
 
-                    if (v > 0)
-                    {
-                        blockBuilder.SetPosition(new Vector2((x + 5) * 16, (y + 5) * 16));
-                        blockBuilder.SetTileId(v);
-                        World.AddEntity(blockBuilder.Build());
-                    }
-                }
+                blockBuilder.SetPosition(new Vector2(x * 16, 62 * 16));
+                blockBuilder.SetTileId(9);
+                GameWorld.AddEntity(blockBuilder.Build());
             }
 
-            Core.Inputs.KeyDown += Inputs_KeyDown;
-            Core.Rendering.Viewports.Add(viewport);
+            for (int y = 1; y < 63; y++)
+            {
+                blockBuilder.SetPosition(new Vector2(0, y * 16));
+                blockBuilder.SetTileId(9);
+                GameWorld.AddEntity(blockBuilder.Build());
+
+                blockBuilder.SetPosition(new Vector2(62 * 16, y * 16));
+                blockBuilder.SetTileId(9);
+                GameWorld.AddEntity(blockBuilder.Build());
+            }
+
+            Core.Worlds.Add(GameWorld);
         }
 
         #endregion Private Methods

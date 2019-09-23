@@ -215,7 +215,7 @@ namespace OpenBreed.Game.States
             blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
 
             var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288));
-            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
+            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right, Key.ControlRight));
             actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
 
             var stateMachine = ActorHelper.CreateMovementFSM(actor);

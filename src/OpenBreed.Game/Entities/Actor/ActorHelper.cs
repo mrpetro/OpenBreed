@@ -15,6 +15,9 @@ using System.Threading.Tasks;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Game.Entities.Actor.States.Movement;
+using OpenBreed.Game.Entities.Actor.States.Attacking;
+using OpenBreed.Core.Modules.Physics.Events;
+using OpenBreed.Core.Modules.Physics.Helpers;
 
 namespace OpenBreed.Game.Entities.Actor
 {
@@ -89,6 +92,24 @@ namespace OpenBreed.Game.Entities.Actor
             animationWalkingUpRight.AddFrame(39, 1.0f);
         }
 
+        private static void OnCollision(IEntity thisEntity, IEntity otherEntity, Vector2 projection)
+        {
+            thisEntity.RaiseEvent(new CollisionEvent(otherEntity));
+
+            var body = otherEntity.Components.OfType<IBody>().FirstOrDefault();
+
+            var type = body.Tag;
+
+            switch (type)
+            {
+                case "Static":
+                    DynamicHelper.ResolveVsStatic(thisEntity, otherEntity, projection);
+                    return;
+                default:
+                    break;
+            }  
+        }
+
         public static IEntity CreateActor(ICore core, Vector2 pos)
         {
             var actor = core.Entities.Create();
@@ -101,7 +122,7 @@ namespace OpenBreed.Game.Entities.Actor
             actor.Add(Direction.Create(1, 0));
             actor.Add(AxisAlignedBoxShape.Create(0, 0, 32, 32));
             actor.Add(new Motion());
-            actor.Add(Body.Create(1.0f, 0.0f));
+            actor.Add(Body.Create(1.0f, 0.0f, "Dynamic", (e,c) => OnCollision(actor,e,c)));
 
             return actor;
         }
@@ -110,23 +131,9 @@ namespace OpenBreed.Game.Entities.Actor
         {
             var stateMachine = entity.AddFSM("Attacking");
 
-            stateMachine.AddState(new StandingState("Standing_Right", "STANDING_RIGHT", new Vector2(1, 0)));
-            stateMachine.AddState(new StandingState("Standing_Right_Down", "STANDING_RIGHT_DOWN", new Vector2(1, -1)));
-            stateMachine.AddState(new StandingState("Standing_Down", "STANDING_DOWN", new Vector2(0, -1)));
-            stateMachine.AddState(new StandingState("Standing_Down_Left", "STANDING_DOWN_LEFT", new Vector2(-1, -1)));
-            stateMachine.AddState(new StandingState("Standing_Left", "STANDING_LEFT", new Vector2(-1, 0)));
-            stateMachine.AddState(new StandingState("Standing_Left_Up", "STANDING_LEFT_UP", new Vector2(-1, 1)));
-            stateMachine.AddState(new StandingState("Standing_Up", "STANDING_UP", new Vector2(0, 1)));
-            stateMachine.AddState(new StandingState("Standing_Up_Right", "STANDING_UP_RIGHT", new Vector2(1, 1)));
-
-            stateMachine.AddState(new WalkingState("Walking_Right", "WALKING_RIGHT", new Vector2(1, 0)));
-            stateMachine.AddState(new WalkingState("Walking_Right_Down", "WALKING_RIGHT_DOWN", new Vector2(1, -1)));
-            stateMachine.AddState(new WalkingState("Walking_Down", "WALKING_DOWN", new Vector2(0, -1)));
-            stateMachine.AddState(new WalkingState("Walking_Down_Left", "WALKING_DOWN_LEFT", new Vector2(-1, -1)));
-            stateMachine.AddState(new WalkingState("Walking_Left", "WALKING_LEFT", new Vector2(-1, 0)));
-            stateMachine.AddState(new WalkingState("Walking_Left_Up", "WALKING_LEFT_UP", new Vector2(-1, 1)));
-            stateMachine.AddState(new WalkingState("Walking_Up", "WALKING_UP", new Vector2(0, 1)));
-            stateMachine.AddState(new WalkingState("Walking_Up_Right", "WALKING_UP_RIGHT", new Vector2(1, 1)));
+            stateMachine.AddState(new ShootingState("Shooting"));
+            stateMachine.AddState(new IdleState("Idle"));
+            stateMachine.AddState(new CooldownState("Cooldown"));
 
             return stateMachine;
         }

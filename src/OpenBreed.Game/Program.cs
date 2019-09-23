@@ -212,13 +212,14 @@ namespace OpenBreed.Game
             ActorHelper.CreateAnimations(this);
             ProjectileHelper.CreateAnimations(this);
 
-            //StateMachine.RegisterState(new StateTechDemo1(this));
-            //StateMachine.RegisterState(new StateTechDemo2(this));
-            //StateMachine.RegisterState(new StateTechDemo3(this));
-            //StateMachine.RegisterState(new StateTechDemo4(this));
+            StateMachine.RegisterState(new StateTechDemo1(this));
+            StateMachine.RegisterState(new StateTechDemo2(this));
+            StateMachine.RegisterState(new StateTechDemo3(this));
+            StateMachine.RegisterState(new StateTechDemo4(this));
             StateMachine.RegisterState(new StateTechDemo5(this));
+            StateMachine.RegisterState(new StateTechDemo6(this));
             //StateMan.RegisterState(new MenuState(this));
-            StateMachine.SetNextState(StateTechDemo5.ID);
+            StateMachine.SetNextState(StateTechDemo6.ID);
             StateMachine.ChangeState();
 
             //GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.One);                  // Select The Type Of Blending

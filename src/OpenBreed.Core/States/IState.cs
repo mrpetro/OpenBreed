@@ -16,7 +16,7 @@ namespace OpenBreed.Core.States
 
         void Initialize(IEntity entity);
 
-        void EnterState();
+        void EnterState(object[] arguments);
 
         void LeaveState();
 

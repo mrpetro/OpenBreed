@@ -51,7 +51,8 @@
     <Compile Include="Commands\MoveToCommand.cs" />
     <Compile Include="Components\AIControllerDebug.cs" />
     <Compile Include="Components\CollisionDebug.cs" />
-    <Compile Include="Entities\Actor\States\Attacking\AimingState.cs" />
+    <Compile Include="Entities\Actor\States\Attacking\IdleState.cs" />
+    <Compile Include="Entities\Actor\States\Attacking\CooldownState.cs" />
     <Compile Include="Entities\Actor\States\Attacking\ShootingState.cs" />
     <Compile Include="Entities\Actor\States\Movement\WalkingState.cs" />
     <Compile Include="Entities\Actor\States\Movement\StandingState.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="States\StateTechDemo4.cs" />
+    <Compile Include="States\StateTechDemo6.cs" />
     <Compile Include="States\StateTechDemo5.cs" />
     <Compile Include="States\StateTechDemo3.cs" />
     <Compile Include="States\StateTechDemo2.cs" />

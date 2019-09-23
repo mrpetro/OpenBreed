@@ -209,25 +209,27 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             QueryStaticGrid(activeDynamics.Last(), dt);
         }
 
-        private void TestNarrowPhaseDynamic(DynamicPack bodyA, DynamicPack bodyB, float dt)
+        private void TestNarrowPhaseDynamic(DynamicPack packA, DynamicPack packB, float dt)
         {
             Vector2 projection;
-            if (DynamicHelper.TestVsDynamic(this, bodyA, bodyB, dt, out projection))
+            if (DynamicHelper.TestVsDynamic(this, packA, packB, dt, out projection))
             {
-                bodyA.Entity.RaiseEvent(new CollisionEvent(bodyB.Entity));
-                bodyB.Entity.RaiseEvent(new CollisionEvent(bodyA.Entity));
-                DynamicHelper.ResolveVsDynamic(bodyA, bodyB, projection, dt);
+                packA.Body.CollisionCallback?.Invoke(packB.Entity, projection);
+                packB.Body.CollisionCallback?.Invoke(packA.Entity, projection);
+
+                //bodyA.Entity.RaiseEvent(new CollisionEvent(bodyB.Entity));
+                //bodyB.Entity.RaiseEvent(new CollisionEvent(bodyA.Entity));
+                //DynamicHelper.ResolveVsDynamic(bodyA, bodyB, projection, dt);
             }
         }
 
-        private void TestNarrowPhaseStatic(DynamicPack bodyA, StaticPack bodyB, float dt)
+        private void TestNarrowPhaseStatic(DynamicPack packA, StaticPack packB, float dt)
         {
             Vector2 projection;
-            if (DynamicHelper.TestVsStatic(this, bodyA, bodyB, dt, out projection))
+            if (DynamicHelper.TestVsStatic(this, packA, packB, dt, out projection))
             {
-                bodyA.Entity.RaiseEvent(new CollisionEvent(bodyB.Entity));
-                bodyB.Entity.RaiseEvent(new CollisionEvent(bodyA.Entity));
-                DynamicHelper.ResolveVsStatic(bodyA, bodyB, projection, dt);
+                packA.Body.CollisionCallback?.Invoke(packB.Entity, projection);
+                packB.Body.CollisionCallback?.Invoke(packA.Entity, projection);
             }
         }
 

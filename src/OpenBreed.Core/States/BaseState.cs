@@ -41,7 +41,7 @@ namespace OpenBreed.Core.States
 
         }
 
-        public void EnterState()
+        public void EnterState(object[] arguments)
         {
             Console.WriteLine($"Entering state '{Id}'");
             OnEnter();

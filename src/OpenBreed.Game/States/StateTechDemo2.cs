@@ -195,7 +195,7 @@ namespace OpenBreed.Game.States
             Console.WriteLine("Constrols:");
             Console.WriteLine("MMB + Move mouse cursor over hovered viewport = Camera scroll control");
             Console.WriteLine("Mouse wheel over hovered viewport = Camera zoom control");
-            Console.WriteLine("Keyboard arrows  = Control arrow actor");
+            Console.WriteLine("Keyboard arrows = Control arrow actor");
         }
 
         private void Inputs_KeyDown(object sender, KeyboardKeyEventArgs e)
@@ -224,7 +224,7 @@ namespace OpenBreed.Game.States
             blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
 
             var actor = ActorHelper.CreateActor(Core, new Vector2(20, 20));
-            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
+            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right, Key.ControlRight));
 
             var stateMachine = ActorHelper.CreateMovementFSM(actor);
             stateMachine.SetInitialState("Standing_Right");
@@ -254,7 +254,7 @@ namespace OpenBreed.Game.States
         private void InitializeWorldB()
         {
             var actor = ActorHelper.CreateActor(Core, new Vector2(50, 20));
-            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right));
+            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right, Key.ControlRight));
 
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");

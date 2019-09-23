@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Entities;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -23,9 +24,19 @@ namespace OpenBreed.Core.Modules.Physics.Components
         float CorFactor { get; }
 
         /// <summary>
+        /// User defined tag
+        /// </summary>
+        string Tag { get; set; }
+
+        /// <summary>
         /// Position from previous frame used for Verlet
         /// </summary>
         Vector2 OldPosition { get; set; }
+
+        /// <summary>
+        /// Collistion callback
+        /// </summary>
+        Action<IEntity, Vector2> CollisionCallback { get; set; }
 
         /// <summary>
         /// DEBUG only

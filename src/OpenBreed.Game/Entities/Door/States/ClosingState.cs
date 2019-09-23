@@ -42,7 +42,7 @@ namespace OpenBreed.Game.Components.States
 
         #region Public Methods
 
-        public void EnterState()
+        public void EnterState(object[] arguments)
         {
             Entity.PostMsg(new SpriteOnMsg(Entity));
             Entity.PostMsg(new BodyOnMsg(Entity));

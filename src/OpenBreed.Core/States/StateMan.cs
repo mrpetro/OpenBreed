@@ -44,7 +44,7 @@ namespace OpenBreed.Core.States
                 activeState.LeaveState();
 
             activeState = nextState;
-            activeState.EnterState();
+            activeState.EnterState(null);
         }
 
         public void Update(float dt)

@@ -42,6 +42,11 @@ namespace OpenBreed.Core.Entities
 
         public ICore Core { get; }
 
+        /// <summary>
+        /// User purpose data
+        /// </summary>
+        public object Tag { get; set; }
+
         public World World { get; private set; }
 
         public int Id { get; internal set; }

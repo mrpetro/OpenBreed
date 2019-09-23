@@ -1,25 +1,28 @@
-﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Rendering.Messages;
-using OpenBreed.Core.States;
+﻿using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Messages;
+using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
+using OpenBreed.Core.Modules.Rendering.Messages;
+using OpenBreed.Core.States;
 using OpenTK;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenBreed.Core.Common.Systems.Components;
 
 namespace OpenBreed.Game.Entities.Actor.States.Movement
 {
     public class StandingState : IState
     {
-        public IEntity Entity { get; private set; }
-        private IThrust thrust;
-        private Animator<int> spriteAnimation;
+        #region Private Fields
+
         private readonly string animationId;
         private readonly Vector2 facingDirection;
+        private IThrust thrust;
+        private Animator<int> spriteAnimation;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public StandingState(string id, string animationId, Vector2 facingDirection)
         {
@@ -28,14 +31,25 @@ namespace OpenBreed.Game.Entities.Actor.States.Movement
             this.facingDirection = facingDirection;
         }
 
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public IEntity Entity { get; private set; }
         public string Id { get; }
 
-        public void EnterState()
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public void EnterState(object[] arguments)
         {
             thrust.Value = Vector2.Zero;
 
             Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
             Entity.PostMsg(new TextSetMsg(Entity, "Hero - Standing"));
+
+            Entity.Subscribe(ControlDirectionChangedEvent.TYPE, OnControlDirectionChanged);
         }
 
         public void Initialize(IEntity entity)
@@ -47,6 +61,7 @@ namespace OpenBreed.Game.Entities.Actor.States.Movement
 
         public void LeaveState()
         {
+            Entity.Unsubscribe(ControlDirectionChangedEvent.TYPE, OnControlDirectionChanged);
         }
 
         public string Process(string actionName, object[] arguments)
@@ -81,5 +96,24 @@ namespace OpenBreed.Game.Entities.Actor.States.Movement
 
             return null;
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void HandleControlDirectionChangedEvent(ControlDirectionChangedEvent systemEvent)
+        {
+            if (systemEvent.Direction != Vector2.Zero)
+                Entity.PostMsg(new StateChangeMsg(Entity, "Movement", "Walk", systemEvent.Direction));
+            else
+                Entity.PostMsg(new StateChangeMsg(Entity, "Movement", "Stop"));
+        }
+
+        private void OnControlDirectionChanged(object sender, IEvent e)
+        {
+            HandleControlDirectionChangedEvent((ControlDirectionChangedEvent)e);
+        }
+
+        #endregion Private Methods
     }
 }
