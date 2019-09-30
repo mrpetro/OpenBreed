@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Events\AnimStoppedEvent.cs" />
     <Compile Include="Events\AnimChangedEvent.cs" />
+    <Compile Include="Messages\SetAnimMsg.cs" />
     <Compile Include="Systems\AnimSystem.cs" />
     <Compile Include="Helpers\AnimMan.cs" />
     <Compile Include="Components\Animator.cs" />

@@ -109,8 +109,10 @@ namespace OpenBreed.Game.Entities.Door
             thisEntity.RaiseEvent(new CollisionEvent(otherEntity));
         }
 
-        public static void AddHorizontalDoor(ICore core, World world, int x, int y)
+        public static void AddHorizontalDoor(World world, int x, int y)
         {
+            var core = world.Core;
+
             //var doorBlueprint = core.Blueprints.GetByName("HorizontalDoor");
 
             var states = new Dictionary<string, IComponentState>();

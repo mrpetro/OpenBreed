@@ -4,6 +4,8 @@ using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Core.States;
 using OpenTK;
+using System;
+using System.Linq;
 using System.Timers;
 
 namespace OpenBreed.Game.Entities.Actor.States.Attacking
@@ -16,7 +18,7 @@ namespace OpenBreed.Game.Entities.Actor.States.Attacking
 
         public CooldownState(string id)
         {
-            Id = id;
+            Name = id;
         }
 
         #endregion Public Constructors
@@ -24,16 +26,16 @@ namespace OpenBreed.Game.Entities.Actor.States.Attacking
         #region Public Properties
 
         public IEntity Entity { get; private set; }
-        public string Id { get; }
+        public string Name { get; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void EnterState(object[] arguments)
+        public void EnterState()
         {
             //Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            Entity.PostMsg(new TextSetMsg(Entity, "Hero - Cooldown"));
+            Entity.PostMsg(new TextSetMsg(Entity, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
             Entity.Subscribe(ControlFireChangedEvent.TYPE, OnControlFireChanged);
 

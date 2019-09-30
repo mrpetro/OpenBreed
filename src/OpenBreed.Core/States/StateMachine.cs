@@ -12,11 +12,10 @@ namespace OpenBreed.Core.States
 
         private Dictionary<string, IState> states = new Dictionary<string, IState>();
         private IState currentState;
-        private object[] currentArgs;
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
         internal StateMachine(string name, IEntity entity)
         {
@@ -24,7 +23,7 @@ namespace OpenBreed.Core.States
             Entity = entity;
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
 
@@ -32,50 +31,37 @@ namespace OpenBreed.Core.States
 
         public IEntity Entity { get; }
 
+        public string CurrentStateName { get { return currentState.Name; } }
+
         #endregion Public Properties
 
         #region Public Methods
+
+        public override string ToString()
+        {
+            return $"{Name}({CurrentStateName})";
+        }
 
         public void AddState(IState state)
         {
             Debug.Assert(state != null, "State must not be null");
 
-            if (string.IsNullOrWhiteSpace(state.Id))
-                throw new ArgumentNullException(nameof(state.Id));
+            if (string.IsNullOrWhiteSpace(state.Name))
+                throw new ArgumentNullException(nameof(state.Name));
 
-            states.Add(state.Id, state);
-        }
-
-        internal void Initialize()
-        {
-            if (currentState == null)
-                throw new InvalidOperationException("Initial state not set");
-
-            foreach (var state in states)
-                state.Value.Initialize(Entity);
-
-            currentState.EnterState(currentArgs);
-        }
-
-        internal void Deinitialize()
-        {
-            currentState.LeaveState();
-
-            //foreach (var state in states)
-            //    state.Value.Deinitialize(Entity);
+            states.Add(state.Name, state);
         }
 
         /// <summary>
         /// Set particular initial state for this state machine
         /// </summary>
         /// <param name="initialStateId">Initial state id</param>
-        public void SetInitialState(string initialStateId, params object[] arguments)
+        public void SetInitialState(string initialStateId)
         {
             if (currentState != null)
-                throw new InvalidOperationException($"Initial state already set to '{currentState.Id}'");
+                throw new InvalidOperationException($"Initial state already set to '{currentState.Name}'");
 
             currentState = states[initialStateId];
-            currentArgs = arguments;
         }
 
         public bool HandleMsg(object sender, IMsg message)
@@ -92,12 +78,13 @@ namespace OpenBreed.Core.States
 
         public void Perform(string actionName, params object[] arguments)
         {
+            var ps = currentState;
             var nextStateName = currentState.Process(actionName, arguments);
 
             if (nextStateName == null)
                 return;
 
-            if (nextStateName != currentState.Id)
+            if (nextStateName != currentState.Name)
             {
                 ChangeState(nextStateName, arguments);
             }
@@ -105,11 +92,34 @@ namespace OpenBreed.Core.States
 
         #endregion Public Methods
 
+        #region Internal Methods
+
+        internal void Initialize()
+        {
+            if (currentState == null)
+                throw new InvalidOperationException("Initial state not set");
+
+            foreach (var state in states)
+                state.Value.Initialize(Entity);
+
+            currentState.EnterState();
+        }
+
+        internal void Deinitialize()
+        {
+            currentState.LeaveState();
+
+            //foreach (var state in states)
+            //    state.Value.Deinitialize(Entity);
+        }
+
+        #endregion Internal Methods
+
         #region Private Methods
 
         private bool HandleStateChangeMsg(object sender, StateChangeMsg message)
         {
-            Perform(message.StateId, message.Args);
+            Perform(message.StateId);
             return true;
         }
 
@@ -118,10 +128,9 @@ namespace OpenBreed.Core.States
             //Console.WriteLine($"Leaving state '{currentState.Id}'");
             currentState.LeaveState();
             currentState = states[nextStateId];
-            currentArgs = arguments;
 
             //Console.WriteLine($"Entering state '{currentState.Id}'");
-            currentState.EnterState(arguments);
+            currentState.EnterState();
         }
 
         #endregion Private Methods

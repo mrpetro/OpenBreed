@@ -6,6 +6,7 @@ using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Core.States;
 using OpenBreed.Game.Entities.Projectile;
 using OpenTK;
+using System;
 using System.Linq;
 
 namespace OpenBreed.Game.Entities.Actor.States.Attacking
@@ -14,9 +15,9 @@ namespace OpenBreed.Game.Entities.Actor.States.Attacking
     {
         #region Public Constructors
 
-        public ShootingState(string id)
+        public ShootingState(string name)
         {
-            Id = id;
+            Name = name;
         }
 
         #endregion Public Constructors
@@ -24,24 +25,23 @@ namespace OpenBreed.Game.Entities.Actor.States.Attacking
         #region Public Properties
 
         public IEntity Entity { get; private set; }
-        public string Id { get; }
+        public string Name { get; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void EnterState(object[] arguments)
+        public void EnterState()
         {
             //Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            Entity.PostMsg(new TextSetMsg(Entity, "Hero - Shooting"));
-
+            Entity.PostMsg(new TextSetMsg(Entity, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
             var pos = Entity.Components.OfType<Position>().FirstOrDefault().Value;
             pos += new Vector2(8,8);
-            var velocity = Entity.Components.OfType<Direction>().FirstOrDefault().Value;
-            velocity.Normalize();
-            velocity *= 500.0f;
-            ProjectileHelper.AddProjectile(Entity.Core, Entity.World, pos.X, pos.Y, velocity.X, velocity.Y);
+            var direction = Entity.Components.OfType<Direction>().FirstOrDefault().Value;
+            direction.Normalize();
+            direction *= 500.0f;
+            ProjectileHelper.AddProjectile(Entity.Core, Entity.World, pos.X, pos.Y, direction.X, direction.Y);
 
             Entity.PostMsg(new StateChangeMsg(Entity, "Attacking", "Wait"));
 

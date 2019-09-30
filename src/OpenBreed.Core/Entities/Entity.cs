@@ -53,6 +53,8 @@ namespace OpenBreed.Core.Entities
 
         public object DebugData { get; set; }
 
+        public IEnumerable<string> CurrentStateNames => FsmList.Select(item => item.ToString());
+
         #endregion Public Properties
 
         #region Public Methods

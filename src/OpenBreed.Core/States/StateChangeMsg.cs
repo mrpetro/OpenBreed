@@ -13,12 +13,11 @@ namespace OpenBreed.Core.States
 
         #region Public Constructors
 
-        public StateChangeMsg(IEntity entity, string fsmName, string stateId, params object[] args)
+        public StateChangeMsg(IEntity entity, string fsmName, string stateId)
         {
             Entity = entity;
             FsmName = fsmName;
             StateId = stateId;
-            Args = args;
         }
 
         #endregion Public Constructors
@@ -29,7 +28,6 @@ namespace OpenBreed.Core.States
         public string Type { get { return TYPE; } }
         public string FsmName { get; }
         public string StateId { get; }
-        public object[] Args { get; }
 
         #endregion Public Properties
     }

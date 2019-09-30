@@ -36,6 +36,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
         {
             base.Initialize(world);
 
+            World.MessageBus.RegisterHandler(SetAnimMsg.TYPE, this);
             World.MessageBus.RegisterHandler(PlayAnimMsg.TYPE, this);
             World.MessageBus.RegisterHandler(PauseAnimMsg.TYPE, this);
             World.MessageBus.RegisterHandler(StopAnimMsg.TYPE, this);
@@ -47,9 +48,18 @@ namespace OpenBreed.Core.Modules.Animation.Systems
                 Animate(i, dt);
         }
 
-        public void Play(Animator<T> animator, IAnimationData<T> data = null, float startPosition = 0.0f)
+        public void Set(Animator<T> animator, IAnimationData<T> data = null, float startPosition = 0.0f)
         {
             animator.Data = data;
+
+            animator.Position = startPosition;
+            animator.Paused = false;
+        }
+
+        public void Play(Animator<T> animator, IAnimationData<T> data = null, float startPosition = 0.0f)
+        {
+            if(data != null)
+                animator.Data = data;
 
             animator.Position = startPosition;
             animator.Paused = false;
@@ -103,6 +113,9 @@ namespace OpenBreed.Core.Modules.Animation.Systems
         {
             switch (message.Type)
             {
+                case SetAnimMsg.TYPE:
+                    return HandleSetAnimMsg(sender, (SetAnimMsg)message);
+
                 case PlayAnimMsg.TYPE:
                     return HandlePlayAnimMsg(sender, (PlayAnimMsg)message);
 
@@ -174,18 +187,36 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             return true;
         }
 
+        private bool HandleSetAnimMsg(object sender, SetAnimMsg message)
+        {
+            var index = entities.IndexOf(message.Entity);
+            if (index < 0)
+                return false;
+
+            var animData = (IAnimationData<T>)Core.Animations.Anims.GetByName(message.Name);
+
+            if (animData == null)
+                Core.Logging.Warning($"Animation with ID = '{message.Name}' not found.");
+
+            Play(animatorComps[index], animData);
+
+            return true;
+        }
+
         private bool HandlePlayAnimMsg(object sender, PlayAnimMsg message)
         {
             var index = entities.IndexOf(message.Entity);
             if (index < 0)
                 return false;
 
-            var animData = (IAnimationData<T>)Core.Animations.Anims.GetByName(message.Id);
+            var animator = animatorComps[index];
+
+            var animData = message.Name != null ? (IAnimationData<T>)Core.Animations.Anims.GetByName(message.Name) : animator.Data;
 
             if (animData == null)
-                Core.Logging.Warning($"Animation with ID = '{message.Id}' not found.");
+                Core.Logging.Warning($"Animation with ID = '{message.Name}' not found.");
 
-            Play(animatorComps[index], animData);
+            Play(animator, animData);
 
             return true;
         }

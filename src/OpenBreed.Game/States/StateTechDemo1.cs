@@ -76,7 +76,7 @@ namespace OpenBreed.Game.States
 
         public CameraEntity Camera2 { get; private set; }
 
-        public override string Id { get { return ID; } }
+        public override string Name { get { return ID; } }
 
         #endregion Public Properties
 
@@ -221,7 +221,7 @@ namespace OpenBreed.Game.States
             actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right, Key.ControlRight));
 
             var stateMachine = ActorHelper.CreateMovementFSM(actor);
-            stateMachine.SetInitialState("Standing_Down");
+            stateMachine.SetInitialState("Standing");
 
             World.AddEntity(actor);
 

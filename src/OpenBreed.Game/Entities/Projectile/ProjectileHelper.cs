@@ -2,6 +2,7 @@
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Physics.Helpers;
@@ -21,21 +22,21 @@ namespace OpenBreed.Game.Entities.Projectile
     {
         public static void CreateAnimations(ICore core)
         {
-            var laserR = core.Animations.Anims.Create<int>("Animations/Laser/Right/Fired");
+            var laserR = core.Animations.Anims.Create<int>("Animations/Laser/Fired/Right");
             laserR.AddFrame(0, 2.0f);
-            var laserRD = core.Animations.Anims.Create<int>("Animations/Laser/RightDown/Fired");
+            var laserRD = core.Animations.Anims.Create<int>("Animations/Laser/Fired/RightDown");
             laserRD.AddFrame(1, 2.0f);
-            var laserD = core.Animations.Anims.Create<int>("Animations/Laser/Down/Fired");
+            var laserD = core.Animations.Anims.Create<int>("Animations/Laser/Fired/Down");
             laserD.AddFrame(2, 2.0f);
-            var laserDL = core.Animations.Anims.Create<int>("Animations/Laser/DownLeft/Fired");
+            var laserDL = core.Animations.Anims.Create<int>("Animations/Laser/Fired/DownLeft");
             laserDL.AddFrame(3, 2.0f);
-            var laserL = core.Animations.Anims.Create<int>("Animations/Laser/Left/Fired");
+            var laserL = core.Animations.Anims.Create<int>("Animations/Laser/Fired/Left");
             laserL.AddFrame(4, 2.0f);
-            var laserLU = core.Animations.Anims.Create<int>("Animations/Laser/LeftUp/Fired");
+            var laserLU = core.Animations.Anims.Create<int>("Animations/Laser/Fired/LeftUp");
             laserLU.AddFrame(5, 2.0f);
-            var laserU = core.Animations.Anims.Create<int>("Animations/Laser/Up/Fired");
+            var laserU = core.Animations.Anims.Create<int>("Animations/Laser/Fired/Up");
             laserU.AddFrame(6, 2.0f);
-            var laserUR = core.Animations.Anims.Create<int>("Animations/Laser/UpRight/Fired");
+            var laserUR = core.Animations.Anims.Create<int>("Animations/Laser/Fired/UpRight");
             laserUR.AddFrame(7, 2.0f);
         }
 
@@ -62,32 +63,25 @@ namespace OpenBreed.Game.Entities.Projectile
             var projectile = core.Entities.Create();
 
             projectile.Add(core.Rendering.CreateSprite("Atlases/Sprites/Projectiles/Laser"));
+            projectile.Add(new Animator<int>(10.0f, true));
             projectile.Add(Position.Create(x, y ));
             projectile.Add(Thrust.Create(0, 0));
             projectile.Add(Body.Create(0, 1, "Dynamic", (e, c) => OnCollision(projectile, e, c)));
             projectile.Add(Velocity.Create(vx, vy));
             projectile.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
             projectile.Add(TextHelper.Create(core, new Vector2(-10, 10), "Bullet"));
+            world.AddEntity(projectile);
 
             var doorSm = ProjectileHelper.CreateStateMachine(projectile);
-            doorSm.SetInitialState("Fired", new Vector2(vx,vy));
+            doorSm.SetInitialState("Fired");
 
-            world.AddEntity(projectile);
         }
 
         public static StateMachine CreateStateMachine(IEntity entity)
         {
             var stateMachine = entity.AddFSM("Attacking");
 
-            stateMachine.AddState(new FiredState("Fired", "Animations/Laser/Right/Fired"));
-            //stateMachine.AddState(new FiredState("Fired_Right", "Animations/Laser/Right/Fired", new Vector2(100, 0)));
-            //stateMachine.AddState(new FiredState("Fired_Right_Down", "Animations/Laser/RightDown/Fired", new Vector2(1, -1)));
-            //stateMachine.AddState(new FiredState("Fired_Down", "Animations/Laser/Down/Fired", new Vector2(0, -1)));
-            //stateMachine.AddState(new FiredState("Fired_Down_Left", "Animations/Laser/DownLeft/Fired", new Vector2(-1, -1)));
-            //stateMachine.AddState(new FiredState("Fired_Left", "Animations/Laser/Left/Fired", new Vector2(-1, 0)));
-            //stateMachine.AddState(new FiredState("Fired_Left_Up", "Animations/Laser/LeftUp/Fired", new Vector2(-1, 1)));
-            //stateMachine.AddState(new FiredState("Fired_Up", "Animations/Laser/Up/Fired", new Vector2(0, 1)));
-            //stateMachine.AddState(new FiredState("Fired_Up_Right", "Animations/Laser/UpRight/Fired", new Vector2(1, 1)));
+            stateMachine.AddState(new FiredState("Fired", "Animations/Laser/Fired/"));
 
             return stateMachine;
         }

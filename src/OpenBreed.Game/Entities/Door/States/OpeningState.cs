@@ -22,7 +22,7 @@ namespace OpenBreed.Game.Components.States
 
         public OpeningState(string id, string animationId)
         {
-            Id = id;
+            Name = id;
             this.animationId = animationId;
         }
 
@@ -31,13 +31,13 @@ namespace OpenBreed.Game.Components.States
         #region Public Properties
 
         public IEntity Entity { get; private set; }
-        public string Id { get; }
+        public string Name { get; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void EnterState(object[] arguments)
+        public void EnterState()
         {
             Entity.PostMsg(new SpriteOnMsg(Entity));
             Entity.PostMsg(new PlayAnimMsg(Entity, animationId));

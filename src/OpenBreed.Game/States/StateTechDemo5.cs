@@ -67,7 +67,7 @@ namespace OpenBreed.Game.States
         public CameraEntity GameCamera { get; private set; }
         public CameraEntity HudCamera { get; private set; }
 
-        public override string Id { get { return ID; } }
+        public override string Name { get { return ID; } }
 
         #endregion Public Properties
 
@@ -179,8 +179,8 @@ namespace OpenBreed.Game.States
             actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
 
    
-            var actorSm = ActorHelper.CreateMovementFSM(actor);
-            actorSm.SetInitialState("Standing_Down");
+            var movementSm = ActorHelper.CreateMovementFSM(actor);
+            movementSm.SetInitialState("Standing");
             GameWorld.AddEntity(actor);
 
             //ProjectileHelper.AddProjectile(Core, GameWorld, 100, 100, 0, 0);
@@ -198,7 +198,7 @@ namespace OpenBreed.Game.States
             //}
 
             for (int i = 0; i < 10; i++)
-                DoorHelper.AddHorizontalDoor(Core, GameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3);
+                DoorHelper.AddHorizontalDoor(GameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3);
 
             for (int i = 0; i < 10; i++)
                 DoorHelper.AddVerticalDoor(Core, GameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3);

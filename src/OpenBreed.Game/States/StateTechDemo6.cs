@@ -68,7 +68,7 @@ namespace OpenBreed.Game.States
         public CameraEntity GameCamera { get; private set; }
         public CameraEntity HudCamera { get; private set; }
 
-        public override string Id { get { return ID; } }
+        public override string Name { get { return ID; } }
 
         #endregion Public Properties
 
@@ -183,8 +183,10 @@ namespace OpenBreed.Game.States
    
             var movementFsm = ActorHelper.CreateMovementFSM(actor);
             var atackFsm = ActorHelper.CreateAttackingFSM(actor);
-            movementFsm.SetInitialState("Standing_Down");
+            var rotateFsm = ActorHelper.CreateRotationFSM(actor);
+            movementFsm.SetInitialState("Standing");
             atackFsm.SetInitialState("Idle");
+            rotateFsm.SetInitialState("Idle");
             GameWorld.AddEntity(actor);
 
             var rnd = new Random();

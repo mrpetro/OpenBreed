@@ -8,7 +8,7 @@ namespace OpenBreed.Core.States
 
         IEntity Entity { get; }
 
-        string Id { get; }
+        string Name { get; }
 
         #endregion Public Properties
 
@@ -16,7 +16,7 @@ namespace OpenBreed.Core.States
 
         void Initialize(IEntity entity);
 
-        void EnterState(object[] arguments);
+        void EnterState();
 
         void LeaveState();
 

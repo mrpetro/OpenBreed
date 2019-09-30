@@ -3,17 +3,17 @@ using OpenBreed.Core.Entities;
 
 namespace OpenBreed.Core.Modules.Animation.Messages
 {
-    public struct PlayAnimMsg : IEntityMsg
+    public struct SetAnimMsg : IEntityMsg
     {
         #region Public Fields
 
-        public const string TYPE = "PLAY_ANIM";
+        public const string TYPE = "SET_ANIM";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public PlayAnimMsg(IEntity entity, string name)
+        public SetAnimMsg(IEntity entity, string name)
         {
             Entity = entity;
             Name = name;
