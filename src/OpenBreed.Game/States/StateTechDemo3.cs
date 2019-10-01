@@ -185,8 +185,10 @@ namespace OpenBreed.Game.States
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
 
-            var movementSm = ActorHelper.CreateMovementFSM(actor);
-            movementSm.SetInitialState("Standing");
+            var movementFsm = ActorHelper.CreateMovementFSM(actor);
+            var rotateFsm = ActorHelper.CreateRotationFSM(actor);
+            movementFsm.SetInitialState("Standing");
+            rotateFsm.SetInitialState("Idle");
 
             World.AddEntity(actor);
 

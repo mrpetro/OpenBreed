@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Blueprints;
-using OpenBreed.Core.Common.Components.Builders;
 using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Modules.Animation;
@@ -53,44 +52,6 @@ namespace OpenBreed.Game
             VSync = VSyncMode.On;
 
             RegisterBlueprintParsers();
-        }
-
-        private void RegisterBlueprintParsers()
-        {
-            ComponentStateXml.RegisterTypeParser(typeof(Vector2), ReadVector2);
-            ComponentStateXml.RegisterTypeParser(typeof(string), ReadString);
-
-            //EntityMan.RegisterBuilder("OpenBreed.Core.Common.Components.GridPosition", GridPositionBuilder.Create);
-        }
-
-        private object ReadString(XmlReader reader)
-        {
-            reader.ReadStartElement();
-            var text = reader.ReadContentAsString();
-            reader.ReadEndElement();
-            return text;
-        }
-
-        private object ReadVector2(XmlReader reader)
-        {
-            reader.ReadStartElement();
-
-            if (reader.Name != "X")
-                throw new FormatException("Expected 'X' value");
-
-            reader.ReadStartElement();
-            var x = reader.ReadContentAsFloat();
-            reader.ReadEndElement();
-
-            if (reader.Name != "Y")
-                throw new FormatException("Expected 'Y' value");
-
-            reader.ReadStartElement();
-            var y = reader.ReadContentAsFloat();
-            reader.ReadEndElement();
-
-            reader.ReadEndElement();
-            return new Vector2(x,y);
         }
 
         #endregion Public Constructors
@@ -203,8 +164,6 @@ namespace OpenBreed.Game
             var arrowTex = Rendering.Textures.Create("Textures/Sprites/Arrow", @"Content\ArrowSpriteSet.png");
             Rendering.Sprites.Create("Atlases/Sprites/Arrow", arrowTex.Id, 32, 32, 8, 5);
 
-
-
             //Blueprints.Import(@".\Content\BPHorizontalDoor.xml");
 
             DoorHelper.CreateStamps(this);
@@ -258,19 +217,16 @@ namespace OpenBreed.Game
         {
             base.OnUpdateFrame(e);
 
-            //Post messages which were enqueued in previous frame
-            MessageBus.PostEnqueued();
-            //Raise events which were enqueued in previous frame
-            EventBus.RaiseEnqueued();
-
             Inputs.Update();
-
+            PostAndRaise();
             Rendering.Cleanup();
+            PostAndRaise();
             Worlds.Cleanup();
-
+            PostAndRaise();
             StateMachine.Update((float)e.Time);
-
+            PostAndRaise();
             Worlds.Update((float)e.Time);
+            PostAndRaise();
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -299,6 +255,50 @@ namespace OpenBreed.Game
 
             var program = new Program();
             program.Run(30.0, 60.0);
+        }
+
+        private void RegisterBlueprintParsers()
+        {
+            ComponentStateXml.RegisterTypeParser(typeof(Vector2), ReadVector2);
+            ComponentStateXml.RegisterTypeParser(typeof(string), ReadString);
+
+            //EntityMan.RegisterBuilder("OpenBreed.Core.Common.Components.GridPosition", GridPositionBuilder.Create);
+        }
+
+        private object ReadString(XmlReader reader)
+        {
+            reader.ReadStartElement();
+            var text = reader.ReadContentAsString();
+            reader.ReadEndElement();
+            return text;
+        }
+
+        private object ReadVector2(XmlReader reader)
+        {
+            reader.ReadStartElement();
+
+            if (reader.Name != "X")
+                throw new FormatException("Expected 'X' value");
+
+            reader.ReadStartElement();
+            var x = reader.ReadContentAsFloat();
+            reader.ReadEndElement();
+
+            if (reader.Name != "Y")
+                throw new FormatException("Expected 'Y' value");
+
+            reader.ReadStartElement();
+            var y = reader.ReadContentAsFloat();
+            reader.ReadEndElement();
+
+            reader.ReadEndElement();
+            return new Vector2(x, y);
+        }
+
+        private void PostAndRaise()
+        {
+            MessageBus.PostEnqueued();
+            EventBus.RaiseEnqueued();
         }
 
         #endregion Private Methods

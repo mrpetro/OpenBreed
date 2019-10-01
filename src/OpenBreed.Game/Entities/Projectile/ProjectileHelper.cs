@@ -60,6 +60,7 @@ namespace OpenBreed.Game.Entities.Projectile
 
         public static void AddProjectile(ICore core, World world, float x, float y, float vx, float vy)
         {
+
             var projectile = core.Entities.Create();
 
             projectile.Add(core.Rendering.CreateSprite("Atlases/Sprites/Projectiles/Laser"));
@@ -74,7 +75,6 @@ namespace OpenBreed.Game.Entities.Projectile
 
             var doorSm = ProjectileHelper.CreateStateMachine(projectile);
             doorSm.SetInitialState("Fired");
-
         }
 
         public static StateMachine CreateStateMachine(IEntity entity)

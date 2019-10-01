@@ -220,8 +220,10 @@ namespace OpenBreed.Game.States
             var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288));
             actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right, Key.ControlRight));
 
-            var stateMachine = ActorHelper.CreateMovementFSM(actor);
-            stateMachine.SetInitialState("Standing");
+            var movementFsm = ActorHelper.CreateMovementFSM(actor);
+            var rotateFsm = ActorHelper.CreateRotationFSM(actor);
+            movementFsm.SetInitialState("Standing");
+            rotateFsm.SetInitialState("Idle");
 
             World.AddEntity(actor);
 

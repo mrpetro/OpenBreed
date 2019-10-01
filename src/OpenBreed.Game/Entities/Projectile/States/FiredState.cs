@@ -44,6 +44,7 @@ namespace OpenBreed.Game.Entities.Projectile.States
 
         public void EnterState()
         {
+
             var direction = Entity.Components.OfType<IVelocity>().First().Value;
 
             var animDirName = AnimHelper.ToDirectionName(direction);

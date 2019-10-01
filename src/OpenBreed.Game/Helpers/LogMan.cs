@@ -7,6 +7,9 @@ namespace OpenBreed.Game.Helpers
     {
         #region Private Fields
 
+        private static ConsoleColor WARNING_COLOR = ConsoleColor.Yellow;
+        private static ConsoleColor VERBOSE_COLOR = ConsoleColor.Gray;
+
         private ICore core;
 
         #endregion Private Fields
@@ -28,9 +31,19 @@ namespace OpenBreed.Game.Helpers
 
         #region Public Methods
 
+        public void Verbose(string message)
+        {
+            Verbose(DefaultChannel, message);
+        }
+
+        public void Verbose(int channel, string message)
+        {
+            WriteLineWithColor(message, VERBOSE_COLOR);
+        }
+
         public void Warning(int channel, string message)
         {
-            Console.WriteLine(message);
+            WriteLineWithColor(message, WARNING_COLOR);
         }
 
         public void Warning(string message)
@@ -39,5 +52,17 @@ namespace OpenBreed.Game.Helpers
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private void WriteLineWithColor(string message, ConsoleColor color)
+        {
+            var prevColor = Console.ForegroundColor;
+            Console.ForegroundColor = color;
+            Console.WriteLine(message);
+            Console.ForegroundColor = prevColor;
+        }
+
+        #endregion Private Methods
     }
 }

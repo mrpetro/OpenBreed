@@ -178,9 +178,11 @@ namespace OpenBreed.Game.States
             actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right, Key.ControlRight));
             actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
 
-   
-            var movementSm = ActorHelper.CreateMovementFSM(actor);
-            movementSm.SetInitialState("Standing");
+
+            var movementFsm = ActorHelper.CreateMovementFSM(actor);
+            var rotateFsm = ActorHelper.CreateRotationFSM(actor);
+            movementFsm.SetInitialState("Standing");
+            rotateFsm.SetInitialState("Idle");
             GameWorld.AddEntity(actor);
 
             //ProjectileHelper.AddProjectile(Core, GameWorld, 100, 100, 0, 0);
