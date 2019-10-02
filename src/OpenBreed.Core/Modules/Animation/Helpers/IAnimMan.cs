@@ -10,10 +10,10 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
     {
         #region Public Methods
 
-        IAnimationData GetById(int id);
-        IAnimationData GetByName(string name);
+        IAnimation GetById(int id);
+        IAnimation GetByName(string name);
 
-        IAnimationData<T> Create<T>(string name);
+        IAnimation<T> Create<T>(string name);
 
         #endregion Public Methods
     }

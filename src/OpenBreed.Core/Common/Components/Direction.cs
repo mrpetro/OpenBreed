@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core.Entities;
-using OpenTK;
+﻿using OpenTK;
 using System;
 
 namespace OpenBreed.Core.Common.Systems.Components
@@ -10,6 +9,8 @@ namespace OpenBreed.Core.Common.Systems.Components
     /// </summary>
     public class Direction : IDirection
     {
+        private Vector2 value;
+
         #region Private Constructors
 
         /// <summary>
@@ -18,7 +19,7 @@ namespace OpenBreed.Core.Common.Systems.Components
         /// <param name="value">Initial value vector</param>
         private Direction(Vector2 value)
         {
-            Value = value;
+            this.value = value;
         }
 
         /// <summary>
@@ -28,17 +29,34 @@ namespace OpenBreed.Core.Common.Systems.Components
         /// <param name="y">Initial y value</param>
         private Direction(float x, float y)
         {
-            Value = new Vector2(x, y);
+            this.value = new Vector2(x, y);
         }
 
         #endregion Private Constructors
+
+        #region Public Events
+
+        public event EventHandler<Vector2> ValueChanged;
+
+        #endregion Public Events
 
         #region Public Properties
 
         /// <summary>
         /// Direction value
         /// </summary>
-        public Vector2 Value { get; set; }
+        public Vector2 Value
+        {
+            get { return value; }
+            set
+            {
+                if (this.value == value)
+                    return;
+
+                this.value = value;
+                ValueChanged?.Invoke(this, this.value);
+            }
+        }
 
         #endregion Public Properties
 

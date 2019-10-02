@@ -16,7 +16,15 @@ namespace OpenBreed.Core.Entities
     {
         #region Public Properties
 
+        /// <summary>
+        /// Read-only list of state machines
+        /// </summary>
         ReadOnlyCollection<StateMachine> FsmList { get; }
+
+        /// <summary>
+        /// Enumeration of all current state names
+        /// </summary>
+        IEnumerable<string> CurrentStateNames { get; }
 
         /// <summary>
         /// Core reference

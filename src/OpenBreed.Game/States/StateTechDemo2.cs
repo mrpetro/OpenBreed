@@ -127,7 +127,7 @@ namespace OpenBreed.Game.States
 
         public CameraEntity Camera2 { get; private set; }
 
-        public override string Id { get { return ID; } }
+        public override string Name { get { return ID; } }
 
         #endregion Public Properties
 
@@ -226,8 +226,8 @@ namespace OpenBreed.Game.States
             var actor = ActorHelper.CreateActor(Core, new Vector2(20, 20));
             actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right, Key.ControlRight));
 
-            var stateMachine = ActorHelper.CreateMovementFSM(actor);
-            stateMachine.SetInitialState("Standing_Right");
+            var movementSm = ActorHelper.CreateMovementFSM(actor);
+            movementSm.SetInitialState("Standing");
 
             WorldA.AddEntity(actor);
 
@@ -259,8 +259,10 @@ namespace OpenBreed.Game.States
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
 
-            var stateMachine = ActorHelper.CreateMovementFSM(actor);
-            stateMachine.SetInitialState("Standing_Down");
+            var movementFsm = ActorHelper.CreateMovementFSM(actor);
+            var rotateFsm = ActorHelper.CreateRotationFSM(actor);
+            movementFsm.SetInitialState("Standing");
+            rotateFsm.SetInitialState("Idle");
 
             WorldB.AddEntity(actor);
 

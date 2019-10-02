@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Game.Entities.Actor.States.Attacking
+namespace OpenBreed.Game.Entities.Actor.States.Rotation
 {
     public class IdleState : IState
     {
@@ -29,7 +29,7 @@ namespace OpenBreed.Game.Entities.Actor.States.Attacking
             // Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
             Entity.PostMsg(new TextSetMsg(Entity, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
-            Entity.Subscribe(ControlFireChangedEvent.TYPE, OnControlFireChanged);
+            Entity.Subscribe(ControlDirectionChangedEvent.TYPE, OnControlDirectionChanged);
         }
 
         public void Initialize(IEntity entity)
@@ -39,34 +39,42 @@ namespace OpenBreed.Game.Entities.Actor.States.Attacking
 
         public void LeaveState()
         {
-            Entity.Unsubscribe(ControlFireChangedEvent.TYPE, OnControlFireChanged);
+            Entity.Unsubscribe(ControlDirectionChangedEvent.TYPE, OnControlDirectionChanged);
         }
-
-        private void OnControlFireChanged(object sender, IEvent e)
-        {
-            HandleControlFireChangedEvent((ControlFireChangedEvent)e);
-        }
-
-        private void HandleControlFireChangedEvent(ControlFireChangedEvent systemEvent)
-        {
-            if (systemEvent.Fire)
-                Entity.PostMsg(new StateChangeMsg(Entity, "Attacking", "Shoot"));
-        }
-
 
         public string Process(string actionName, object[] arguments)
         {
             switch (actionName)
             {
-                case "Shoot":
+                case "Rotate":
                     {
-                        return "Shooting";
+                        return "Rotating";
                     }
                 default:
                     break;
             }
 
             return null;
+        }
+
+        private void OnControlDirectionChanged(object sender, IEvent e)
+        {
+            HandleControlDirectionChangedEvent((ControlDirectionChangedEvent)e);
+        }
+
+        private void HandleControlDirectionChangedEvent(ControlDirectionChangedEvent systemEvent)
+        {
+            if (systemEvent.Direction != Vector2.Zero)
+            {
+                var dir = Entity.Components.OfType<Direction>().First();
+
+                if (dir.Value != systemEvent.Direction)
+                {
+                    dir.Value = systemEvent.Direction;
+                    Entity.PostMsg(new StateChangeMsg(Entity, "Rotation", "Rotate"));
+                }
+            }
+
         }
     }
 }

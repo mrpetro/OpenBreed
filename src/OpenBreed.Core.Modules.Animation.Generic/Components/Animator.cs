@@ -4,7 +4,7 @@ using OpenBreed.Core.Modules.Animation.Helpers;
 
 namespace OpenBreed.Core.Modules.Animation.Components
 {
-    public class Animator<T> : IEntityComponent
+    public class Animator : IEntityComponent
     {
         #region Public Constructors
 
@@ -23,12 +23,12 @@ namespace OpenBreed.Core.Modules.Animation.Components
         /// </summary>
         public FrameTransition Transition { get; set; }
 
-        public IAnimationData<T> Data { get; set; }
+        public int AnimId { get; set; }
         public float Position { get; set; }
         public bool Paused { get; set; }
         public float Speed { get; set; }
         public bool Loop { get; set; }
-        public T Frame { get; set; }
+        public object Frame { get; set; }
 
         #endregion Public Properties
 

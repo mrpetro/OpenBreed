@@ -10,7 +10,7 @@ namespace OpenBreed.Core.States
         #region Public Properties
 
         public StateMan StateMan { get; private set; }
-        public abstract string Id { get; }
+        public abstract string Name { get; }
 
         public IEntity Entity => throw new NotImplementedException();
 
@@ -41,15 +41,15 @@ namespace OpenBreed.Core.States
 
         }
 
-        public void EnterState(object[] arguments)
+        public void EnterState()
         {
-            Console.WriteLine($"Entering state '{Id}'");
+            Console.WriteLine($"Entering state '{Name}'");
             OnEnter();
         }
 
         public void LeaveState()
         {
-            Console.WriteLine($"Leaving state '{Id}'");
+            Console.WriteLine($"Leaving state '{Name}'");
             OnLeave();
         }
 

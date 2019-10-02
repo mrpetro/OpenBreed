@@ -15,7 +15,7 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
         internal readonly AnimationModule Module;
 
 
-        private readonly List<IAnimationData> items = new List<IAnimationData>();
+        private readonly List<IAnimation> items = new List<IAnimation>();
 
         #endregion Private Fields
 
@@ -36,19 +36,19 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
 
         #region Public Methods
 
-        public IAnimationData<T> Create<T>(string name)
+        public IAnimation<T> Create<T>(string name)
         {
-            var newAnimationData = new AnimationData<T>(items.Count, name);
+            var newAnimationData = new Animation<T>(items.Count, name);
             items.Add(newAnimationData);
             return newAnimationData;
         }
 
-        public IAnimationData GetById(int id)
+        public IAnimation GetById(int id)
         {
             return items[id];
         }
 
-        public IAnimationData GetByName(string name)
+        public IAnimation GetByName(string name)
         {
             return items.FirstOrDefault(item => item.Name == name);
         }

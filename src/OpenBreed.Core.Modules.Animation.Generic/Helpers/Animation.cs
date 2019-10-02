@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Animation.Helpers
 {
-    internal class AnimationData<T> : IAnimationData<T>
+    internal class Animation<T> : IAnimation<T>
     {
         #region Private Fields
 
@@ -16,7 +16,7 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
 
         #region Internal Constructors
 
-        internal AnimationData(int id, string name)
+        internal Animation(int id, string name)
         {
             Id = id;
             Name = name;
@@ -35,7 +35,7 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
 
         #region Public Methods
 
-        private T GetFrameGetFameNoTransition(float time)
+        private T GetFrameNoTransition(float time)
         {
             foreach (var frame in frames)
             {
@@ -46,12 +46,26 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
             return frames.Last().Value;
         }
 
+        public bool TryGetNextFrame(float time, object currentFrame, out object nextFrame, FrameTransition transition = FrameTransition.None)
+        {
+            T cf = default(T);
+
+            if(currentFrame != null)
+                cf = (T)currentFrame;
+
+            var nf = GetFrame(time, transition);
+
+            nextFrame = nf;
+
+            return !cf.Equals(nf);
+        }
+
         public T GetFrame(float time, FrameTransition transition = FrameTransition.None)
         {
             switch (transition)
             {
                 case FrameTransition.None:
-                    return GetFrameGetFameNoTransition(time);
+                    return GetFrameNoTransition(time);
                 default:
                     throw new NotImplementedException($"Transition '{transition}' not implemented.");
             }

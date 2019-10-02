@@ -6,29 +6,31 @@ using OpenBreed.Core.Modules.Animation.Events;
 using OpenBreed.Core.Modules.Animation.Messages;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Physics.Components;
+using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Core.States;
 using OpenBreed.Game.Helpers;
 using OpenTK;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace OpenBreed.Game.Entities.Actor.States.Movement
+namespace OpenBreed.Game.Entities.Actor.States.Rotation
 {
-    public class WalkingState : IState
+    public class RotatingState : IState
     {
         #region Private Fields
 
         private readonly string animPrefix;
-        private Direction direction;
-        private ISprite sprite;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public WalkingState(string id, string animPrefix)
+        public RotatingState(string id, string animPrefix)
         {
             Name = id;
             this.animPrefix = animPrefix;
@@ -51,26 +53,22 @@ namespace OpenBreed.Game.Entities.Actor.States.Movement
             var movement = Entity.Components.OfType<Motion>().First();
             Entity.Components.OfType<IThrust>().First().Value = direction.Value * movement.Acceleration;
 
-            var animDirPostfix = AnimHelper.ToDirectionName(direction.Value);
+            var animDirName = AnimHelper.ToDirectionName(direction.Value);
+            var animMovementName = Entity.FsmList.First(item => item.Name == "Movement");
 
-            Entity.PostMsg(new PlayAnimMsg(Entity, $"{animPrefix}/{Name}/{animDirPostfix}"));
+            Entity.PostMsg(new PlayAnimMsg(Entity, $"{animPrefix}/{animMovementName.CurrentStateName}/{animDirName}"));
             Entity.PostMsg(new TextSetMsg(Entity, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
-            Entity.Subscribe(AnimChangedEvent.TYPE, OnFrameChanged);
-            Entity.Subscribe(ControlDirectionChangedEvent.TYPE, OnControlDirectionChanged);
+            Entity.PostMsg(new StateChangeMsg(Entity, "Rotation", "Stop"));
         }
-     
+
         public void Initialize(IEntity entity)
         {
             Entity = entity;
-            direction = Entity.Components.OfType<Direction>().FirstOrDefault();
-            sprite = entity.Components.OfType<ISprite>().First();
         }
 
         public void LeaveState()
         {
-            Entity.Unsubscribe(AnimChangedEvent.TYPE, OnFrameChanged);
-            Entity.Unsubscribe(ControlDirectionChangedEvent.TYPE, OnControlDirectionChanged);
         }
 
         public string Process(string actionName, object[] arguments)
@@ -79,8 +77,7 @@ namespace OpenBreed.Game.Entities.Actor.States.Movement
             {
                 case "Stop":
                     {
-                        return "Standing";
-
+                        return "Idle";
                     }
                 default:
                     break;
@@ -91,31 +88,5 @@ namespace OpenBreed.Game.Entities.Actor.States.Movement
 
         #endregion Public Methods
 
-        #region Private Methods
-
-        private void OnFrameChanged(object sender, IEvent e)
-        {
-            HandleFrameChangeEvent((AnimChangedEvent)e);
-        }
-
-        private void OnControlDirectionChanged(object sender, IEvent e)
-        {
-            HandleControlDirectionChangedEvent((ControlDirectionChangedEvent)e);
-        }
-
-        private void HandleFrameChangeEvent(AnimChangedEvent systemEvent)
-        {
-            sprite.ImageId = (int)systemEvent.Frame;
-        }
-
-        private void HandleControlDirectionChangedEvent(ControlDirectionChangedEvent systemEvent)
-        {
-            if (systemEvent.Direction != Vector2.Zero)
-                Entity.PostMsg(new StateChangeMsg(Entity, "Movement", "Walk"));
-            else
-                Entity.PostMsg(new StateChangeMsg(Entity, "Movement", "Stop"));
-        }
-
-        #endregion Private Methods
     }
 }

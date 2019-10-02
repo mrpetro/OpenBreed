@@ -98,7 +98,7 @@ namespace OpenBreed.Core
                 toAdd.Clear();
             }
 
-            //Don cleanups on remaining worlds
+            //Do cleanups on remaining worlds
             for (int i = 0; i < items.Count; i++)
                 items[i].Cleanup();
         }

@@ -24,7 +24,7 @@ namespace OpenBreed.Game.Components.States
 
         public ClosedState(string id, int stampId)
         {
-            Id = id;
+            Name = id;
             this.stampId = stampId;
         }
 
@@ -33,13 +33,13 @@ namespace OpenBreed.Game.Components.States
         #region Public Properties
 
         public IEntity Entity { get; private set; }
-        public string Id { get; }
+        public string Name { get; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void EnterState(object[] arguments)
+        public void EnterState()
         {
             Entity.PostMsg(new SpriteOffMsg(Entity));
 
