@@ -53,7 +53,7 @@ namespace OpenBreed.Game.Entities.Projectile.States
             Entity.PostMsg(new TextSetMsg(Entity, "Projectile - Fired"));
             Entity.Subscribe(CollisionEvent.TYPE, OnCollision);
 
-            Entity.Subscribe(AnimChangedEvent<int>.TYPE, OnFrameChanged);
+            Entity.Subscribe(AnimChangedEvent.TYPE, OnFrameChanged);
         }
 
         public void Initialize(IEntity entity)
@@ -65,17 +65,17 @@ namespace OpenBreed.Game.Entities.Projectile.States
 
         public void LeaveState()
         {
-            Entity.Unsubscribe(AnimChangedEvent<int>.TYPE, OnFrameChanged);
+            Entity.Unsubscribe(AnimChangedEvent.TYPE, OnFrameChanged);
         }
 
         private void OnFrameChanged(object sender, IEvent e)
         {
-            HandleFrameChangeEvent((AnimChangedEvent<int>)e);
+            HandleFrameChangeEvent((AnimChangedEvent)e);
         }
 
-        private void HandleFrameChangeEvent(AnimChangedEvent<int> systemEvent)
+        private void HandleFrameChangeEvent(AnimChangedEvent systemEvent)
         {
-            sprite.ImageId = systemEvent.Frame;
+            sprite.ImageId = (int)systemEvent.Frame;
         }
 
         public string Process(string actionName, object[] arguments)

@@ -2,7 +2,7 @@
 
 namespace OpenBreed.Core.Modules.Animation.Events
 {
-    public class AnimChangedEvent<T> : IEvent
+    public class AnimChangedEvent : IEvent
     {
         #region Public Fields
 
@@ -12,7 +12,7 @@ namespace OpenBreed.Core.Modules.Animation.Events
 
         #region Public Constructors
 
-        public AnimChangedEvent(T frame)
+        public AnimChangedEvent(object frame)
         {
             Frame = frame;
         }
@@ -21,7 +21,7 @@ namespace OpenBreed.Core.Modules.Animation.Events
 
         #region Public Properties
 
-        public T Frame { get; }
+        public object Frame { get; }
         public string Type { get { return TYPE; } }
 
         #endregion Public Properties

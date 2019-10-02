@@ -51,8 +51,6 @@ namespace OpenBreed.Game.Entities.Actor.States.Attacking
         {
             if (systemEvent.Fire)
                 Entity.PostMsg(new StateChangeMsg(Entity, "Attacking", "Shoot"));
-            else
-                Entity.PostMsg(new StateChangeMsg(Entity, "Attacking", "Idle"));
         }
 
 

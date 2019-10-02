@@ -56,7 +56,7 @@ namespace OpenBreed.Game.Entities.Actor.States.Movement
             Entity.PostMsg(new PlayAnimMsg(Entity, $"{animPrefix}/{Name}/{animDirPostfix}"));
             Entity.PostMsg(new TextSetMsg(Entity, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
-            Entity.Subscribe(AnimChangedEvent<int>.TYPE, OnFrameChanged);
+            Entity.Subscribe(AnimChangedEvent.TYPE, OnFrameChanged);
             Entity.Subscribe(ControlDirectionChangedEvent.TYPE, OnControlDirectionChanged);
         }
      
@@ -69,7 +69,7 @@ namespace OpenBreed.Game.Entities.Actor.States.Movement
 
         public void LeaveState()
         {
-            Entity.Unsubscribe(AnimChangedEvent<int>.TYPE, OnFrameChanged);
+            Entity.Unsubscribe(AnimChangedEvent.TYPE, OnFrameChanged);
             Entity.Unsubscribe(ControlDirectionChangedEvent.TYPE, OnControlDirectionChanged);
         }
 
@@ -95,7 +95,7 @@ namespace OpenBreed.Game.Entities.Actor.States.Movement
 
         private void OnFrameChanged(object sender, IEvent e)
         {
-            HandleFrameChangeEvent((AnimChangedEvent<int>)e);
+            HandleFrameChangeEvent((AnimChangedEvent)e);
         }
 
         private void OnControlDirectionChanged(object sender, IEvent e)
@@ -103,9 +103,9 @@ namespace OpenBreed.Game.Entities.Actor.States.Movement
             HandleControlDirectionChangedEvent((ControlDirectionChangedEvent)e);
         }
 
-        private void HandleFrameChangeEvent(AnimChangedEvent<int> systemEvent)
+        private void HandleFrameChangeEvent(AnimChangedEvent systemEvent)
         {
-            sprite.ImageId = systemEvent.Frame;
+            sprite.ImageId = (int)systemEvent.Frame;
         }
 
         private void HandleControlDirectionChangedEvent(ControlDirectionChangedEvent systemEvent)

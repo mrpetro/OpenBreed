@@ -114,7 +114,7 @@ namespace OpenBreed.Game.Entities.Actor
         public static IEntity CreateActor(ICore core, Vector2 pos)
         {
             var actor = core.Entities.Create();
-            actor.Add(new Animator<int>(10.0f, true));
+            actor.Add(new Animator(10.0f, true));
             //actor.Add(new CollisionDebug(Core.Rendering.CreateSprite(spriteAtlas.Id)));
             actor.Add(core.Rendering.CreateSprite("Atlases/Sprites/Arrow"));
             actor.Add(Position.Create(pos));

@@ -6,8 +6,7 @@ namespace OpenBreed.Core.Modules.Animation.Events
     /// <summary>
     /// Animation stoped event class, occurs when animation has been stoped
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class AnimStoppedEvent<T> : IEvent
+    public class AnimStoppedEvent : IEvent
     {
         #region Public Fields
 
@@ -17,7 +16,7 @@ namespace OpenBreed.Core.Modules.Animation.Events
 
         #region Public Constructors
 
-        public AnimStoppedEvent(Animator<T> animator)
+        public AnimStoppedEvent(Animator animator)
         {
             Animator = animator;
         }
@@ -26,7 +25,7 @@ namespace OpenBreed.Core.Modules.Animation.Events
 
         #region Public Properties
 
-        public Animator<T> Animator { get; }
+        public Animator Animator { get; }
         public string Type { get { return TYPE; } }
 
         #endregion Public Properties

@@ -17,7 +17,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
         #region Private Fields
 
         private readonly List<IEntity> entities = new List<IEntity>();
-        private readonly List<Animator<T>> animatorComps = new List<Animator<T>>();
+        private readonly List<Animator> animatorComps = new List<Animator>();
 
         #endregion Private Fields
 
@@ -25,7 +25,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         public AnimSystem(ICore core) : base(core)
         {
-            Require<Animator<int>>();
+            Require<Animator>();
         }
 
         #endregion Public Constructors
@@ -48,29 +48,34 @@ namespace OpenBreed.Core.Modules.Animation.Systems
                 Animate(i, dt);
         }
 
-        public void Set(Animator<T> animator, IAnimationData<T> data = null, float startPosition = 0.0f)
+        public void Set(Animator animator, int animId = -1, float startPosition = 0.0f)
         {
-            animator.Data = data;
+            //animator.Data = data;
 
+            animator.AnimId = animId;
             animator.Position = startPosition;
             animator.Paused = false;
         }
 
-        public void Play(Animator<T> animator, IAnimationData<T> data = null, float startPosition = 0.0f)
+        public void Play(Animator animator, int animId = -1, float startPosition = 0.0f)
         {
-            if(data != null)
-                animator.Data = data;
+            if(animId != -1)
+                animator.AnimId = animId;
 
+            //if (data != null)
+            //    animator.Data = data;
+
+            animator.AnimId = animId;
             animator.Position = startPosition;
             animator.Paused = false;
         }
 
-        public void Pause(Animator<T> animator)
+        public void Pause(Animator animator)
         {
             animator.Paused = true;
         }
 
-        public void Stop(IEntity entity, Animator<T> animator)
+        public void Stop(IEntity entity, Animator animator)
         {
             animator.Position = 0.0f;
             animator.Paused = true;
@@ -84,15 +89,17 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             if (animator.Paused)
                 return;
 
-            if (animator.Data == null)
+            if (animator.AnimId < 0)
                 return;
+
+            var data = Core.Animations.Anims.GetById(animator.AnimId);
 
             animator.Position += animator.Speed * dt;
 
-            if (animator.Position > animator.Data.Length)
+            if (animator.Position > data.Length)
             {
                 if (animator.Loop)
-                    animator.Position = animator.Position - animator.Data.Length;
+                    animator.Position = animator.Position - data.Length;
                 else
                 {
                     Stop(entities[index], animator);
@@ -100,11 +107,11 @@ namespace OpenBreed.Core.Modules.Animation.Systems
                 }
             }
 
-            var newFrame = animator.Data.GetFrame(animator.Position, animator.Transition);
+            object nextFrame;
 
-            if (!animator.Frame.Equals(newFrame))
+            if (data.TryGetNextFrame(animator.Position, animator.Frame, out nextFrame, animator.Transition))
             {
-                animator.Frame = newFrame;
+                animator.Frame = nextFrame;
                 RaiseAnimChangedEvent(entities[index], animator);
             }
         }
@@ -137,7 +144,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
         protected override void RegisterEntity(IEntity entity)
         {
             entities.Add(entity);
-            animatorComps.Add(entity.Components.OfType<Animator<T>>().First());
+            animatorComps.Add(entity.Components.OfType<Animator>().First());
         }
 
         protected override void UnregisterEntity(IEntity entity)
@@ -155,14 +162,14 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         #region Private Methods
 
-        private void RaiseAnimStoppedEvent(IEntity entity, Animator<T> animator)
+        private void RaiseAnimStoppedEvent(IEntity entity, Animator animator)
         {
-            entity.RaiseEvent(new AnimStoppedEvent<T>(animator));
+            entity.RaiseEvent(new AnimStoppedEvent(animator));
         }
 
-        private void RaiseAnimChangedEvent(IEntity entity, Animator<T> animator)
+        private void RaiseAnimChangedEvent(IEntity entity, Animator animator)
         {
-            entity.RaiseEvent(new AnimChangedEvent<T>(animator.Frame));
+            entity.RaiseEvent(new AnimChangedEvent(animator.Frame));
         }
 
         private bool HandlePauseAnimMsg(object sender, PauseAnimMsg message)
@@ -193,12 +200,12 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             if (index < 0)
                 return false;
 
-            var animData = (IAnimationData<T>)Core.Animations.Anims.GetByName(message.Name);
+            var animData = Core.Animations.Anims.GetByName(message.Name);
 
             if (animData == null)
                 Core.Logging.Warning($"Animation with ID = '{message.Name}' not found.");
 
-            Play(animatorComps[index], animData);
+            Play(animatorComps[index], animData.Id);
 
             return true;
         }
@@ -211,12 +218,21 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
             var animator = animatorComps[index];
 
-            var animData = message.Name != null ? (IAnimationData<T>)Core.Animations.Anims.GetByName(message.Name) : animator.Data;
+            int animId = -1;
 
-            if (animData == null)
-                Core.Logging.Warning($"Animation with ID = '{message.Name}' not found.");
+            if (message.Name != null)
+            {
+                var data = Core.Animations.Anims.GetByName(message.Name);
 
-            Play(animator, animData);
+                if (data == null)
+                    Core.Logging.Warning($"Animation with ID = '{message.Name}' not found.");
+                else
+                    animId = data.Id;
+            }
+            else
+                animId = animator.AnimId;
+
+            Play(animator, animId);
 
             return true;
         }

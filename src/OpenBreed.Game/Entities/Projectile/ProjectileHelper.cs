@@ -64,7 +64,7 @@ namespace OpenBreed.Game.Entities.Projectile
             var projectile = core.Entities.Create();
 
             projectile.Add(core.Rendering.CreateSprite("Atlases/Sprites/Projectiles/Laser"));
-            projectile.Add(new Animator<int>(10.0f, true));
+            projectile.Add(new Animator(10.0f, true));
             projectile.Add(Position.Create(x, y ));
             projectile.Add(Thrust.Create(0, 0));
             projectile.Add(Body.Create(0, 1, "Dynamic", (e, c) => OnCollision(projectile, e, c)));
