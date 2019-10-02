@@ -16,7 +16,7 @@
         LinearInterpolation
     }
 
-    public interface IAnimationData
+    public interface IAnimation
     {
         #region Public Properties
 
@@ -29,7 +29,7 @@
         #endregion Public Properties
     }
 
-    public interface IAnimationData<T> : IAnimationData
+    public interface IAnimation<T> : IAnimation
     {
         #region Public Methods
 

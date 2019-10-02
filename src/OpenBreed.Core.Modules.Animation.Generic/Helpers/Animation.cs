@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Animation.Helpers
 {
-    internal class AnimationData<T> : IAnimationData<T>
+    internal class Animation<T> : IAnimation<T>
     {
         #region Private Fields
 
@@ -16,7 +16,7 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
 
         #region Internal Constructors
 
-        internal AnimationData(int id, string name)
+        internal Animation(int id, string name)
         {
             Id = id;
             Name = name;

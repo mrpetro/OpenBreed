@@ -4,6 +4,8 @@ using OpenBreed.Core.Modules.Animation.Systems;
 using System;
 using System.Collections.Generic;
 using OpenBreed.Core.Common.Systems;
+using OpenTK.Audio.OpenAL;
+using OpenTK;
 
 namespace OpenBreed.Core.Modules.Audio
 {
@@ -21,6 +23,9 @@ namespace OpenBreed.Core.Modules.Audio
         {
             components = new List<IAudioComponent>();
         }
+
+
+
 
         #endregion Public Constructors
 

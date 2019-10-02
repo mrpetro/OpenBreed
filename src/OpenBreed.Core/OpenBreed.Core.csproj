@@ -82,7 +82,7 @@
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="ILogMan.cs" />
     <Compile Include="InputsMan.cs" />
-    <Compile Include="Modules\Animation\Helpers\IAnimationData.cs" />
+    <Compile Include="Modules\Animation\Helpers\IAnimation.cs" />
     <Compile Include="Modules\Animation\Helpers\IAnimMan.cs" />
     <Compile Include="Modules\Animation\IAnimationModule.cs" />
     <Compile Include="Modules\Audio\Components\IAudioComponent.cs" />

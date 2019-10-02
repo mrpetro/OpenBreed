@@ -116,47 +116,50 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\TexTest24bit.bmp">
+    <None Include="Content\Graphics\TexTest24bit.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\TexTest32bit.bmp">
+    <None Include="Content\Graphics\TexTest32bit.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\TexTest4bitIndexed.bmp">
+    <None Include="Content\Graphics\TexTest4bitIndexed.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\TexTest8bitIndexed.bmp">
+    <None Include="Content\Graphics\TexTest8bitIndexed.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\TileAtlasTest32bit.bmp">
+    <None Include="Content\Graphics\TileAtlasTest32bit.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\ArrowSpriteSet.png">
+    <None Include="Content\Graphics\ArrowSpriteSet.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\DoorSpriteSet.png">
+    <None Include="Content\Graphics\DoorSpriteSet.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\LaserSpriteSet.png">
+    <None Include="Content\Graphics\LaserSpriteSet.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="Content\BPHorizontalDoor.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\Sounds\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

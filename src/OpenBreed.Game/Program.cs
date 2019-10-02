@@ -151,17 +151,17 @@ namespace OpenBreed.Game
         {
             base.OnLoad(e);
 
-            var tileTex = Rendering.Textures.Create("Textures/Tiles/16/Test", @"Content\TileAtlasTest32bit.bmp");
+            var tileTex = Rendering.Textures.Create("Textures/Tiles/16/Test", @"Content\Graphics\TileAtlasTest32bit.bmp");
             Rendering.Tiles.Create("Atlases/Tiles/16/Test", tileTex.Id, 16, 4, 4);
 
-            var doorTex = Rendering.Textures.Create("Textures/Sprites/Door", @"Content\DoorSpriteSet.png");
+            var doorTex = Rendering.Textures.Create("Textures/Sprites/Door", @"Content\Graphics\DoorSpriteSet.png");
             Rendering.Sprites.Create("Atlases/Sprites/Door/Horizontal", doorTex.Id, 32, 16, 5, 1, 0, 0);
             Rendering.Sprites.Create("Atlases/Sprites/Door/Vertical", doorTex.Id, 16, 32, 5, 1, 0, 16);
 
-            var laserTex = Rendering.Textures.Create("Textures/Sprites/Laser", @"Content\LaserSpriteSet.png");
+            var laserTex = Rendering.Textures.Create("Textures/Sprites/Laser", @"Content\Graphics\LaserSpriteSet.png");
             Rendering.Sprites.Create("Atlases/Sprites/Projectiles/Laser", laserTex.Id, 16, 16, 8, 1, 0, 0);
 
-            var arrowTex = Rendering.Textures.Create("Textures/Sprites/Arrow", @"Content\ArrowSpriteSet.png");
+            var arrowTex = Rendering.Textures.Create("Textures/Sprites/Arrow", @"Content\Graphics\ArrowSpriteSet.png");
             Rendering.Sprites.Create("Atlases/Sprites/Arrow", arrowTex.Id, 32, 32, 8, 5);
 
             //Blueprints.Import(@".\Content\BPHorizontalDoor.xml");
@@ -254,6 +254,10 @@ namespace OpenBreed.Game
             //luaTest.Example();
 
             var program = new Program();
+
+            program.Sounds.Sounds.PlaySound(0);
+
+
             program.Run(30.0, 60.0);
         }
 

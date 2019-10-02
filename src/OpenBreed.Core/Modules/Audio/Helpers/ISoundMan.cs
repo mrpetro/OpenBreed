@@ -33,5 +33,10 @@ namespace OpenBreed.Core.Modules.Audio.Helpers
         /// </summary>
         void UnloadAll();
 
+        /// <summary>
+        /// Play sound with particular id
+        /// </summary>
+        /// <param name="id">ID number of sound to play</param>
+        void PlaySound(int id);
     }
 }
