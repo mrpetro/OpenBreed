@@ -255,7 +255,7 @@ namespace OpenBreed.Game
 
             var program = new Program();
 
-            program.Sounds.Sounds.PlaySound(0);
+            //program.Sounds.Sounds.PlaySound(0);
 
 
             program.Run(30.0, 60.0);
