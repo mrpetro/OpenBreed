@@ -2,11 +2,15 @@
 using OpenBreed.Core.Blueprints;
 using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Entities;
+using OpenBreed.Core.Inputs;
 using OpenBreed.Core.Modules.Animation;
+using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.States;
+using OpenBreed.Core.Systems.Control.Systems;
 using OpenBreed.Game.Entities.Actor;
 using OpenBreed.Game.Entities.Door;
 using OpenBreed.Game.Entities.Projectile;
@@ -44,6 +48,7 @@ namespace OpenBreed.Game
             Animations = new AnimationModule(this);
             Blueprints = new BlueprintMan(this);
             Entities = new EntityMan(this);
+            Players = new PlayersMan(this);
             Inputs = new InputsMan(this);
             Worlds = new WorldMan(this);
             StateMachine = new StateMan(this);
@@ -69,6 +74,8 @@ namespace OpenBreed.Game
         public BlueprintMan Blueprints { get; }
 
         public EntityMan Entities { get; }
+
+        public PlayersMan Players { get; }
 
         public ILogMan Logging { get; }
 
@@ -147,9 +154,27 @@ namespace OpenBreed.Game
             Inputs.OnKeyPress(e);
         }
 
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+
+            Inputs.RegisterHandler(new WalkingControlHandler());
+
+
+            var p1 = Players.AddPlayer("P1");
+            p1.RegisterInput(new WalkingPlayerInput());
+            p1.AddKeyBinding("Walking", "Left", Key.Left);
+            p1.AddKeyBinding("Walking", "Right", Key.Right);
+            p1.AddKeyBinding("Walking", "Up", Key.Up);
+            p1.AddKeyBinding("Walking", "Down", Key.Down);
+
+            var p2 = Players.AddPlayer("P2");
+            p2.RegisterInput(new WalkingPlayerInput());
+            p2.AddKeyBinding("Walking", "Left", Key.A);
+            p2.AddKeyBinding("Walking", "Right", Key.D);
+            p2.AddKeyBinding("Walking", "Up", Key.W);
+            p2.AddKeyBinding("Walking", "Down", Key.S);
 
             var tileTex = Rendering.Textures.Create("Textures/Tiles/16/Test", @"Content\Graphics\TileAtlasTest32bit.bmp");
             Rendering.Tiles.Create("Atlases/Tiles/16/Test", tileTex.Id, 16, 4, 4);
@@ -217,7 +242,9 @@ namespace OpenBreed.Game
         {
             base.OnUpdateFrame(e);
 
+            Players.ResetInputs();
             Inputs.Update();
+            Players.ApplyInputs();
             PostAndRaise();
             Rendering.Cleanup();
             PostAndRaise();

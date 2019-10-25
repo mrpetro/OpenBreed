@@ -137,6 +137,7 @@ namespace OpenBreed.Game.States
             Core.Worlds.Remove(World);
             Core.Rendering.Viewports.Remove(viewport);
             Core.Inputs.KeyDown -= Inputs_KeyDown;
+            Core.Players.LooseAllControls();
         }
 
         protected override void OnEnter()

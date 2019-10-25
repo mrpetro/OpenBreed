@@ -38,19 +38,28 @@ namespace OpenBreed.Core.Common.Helpers
 
         public void PostMsg(object sender, IMsg msg)
         {
-            HandleMsg(sender, msg);
+            RecieveMsg(sender, msg);
         }
 
-        public bool HandleMsg(object sender, IMsg msg)
+        public bool RecieveMsg(object sender, IMsg msg)
         {
             IMsgHandler handler = null;
             if (handlers.TryGetValue(msg.Type, out handler))
             {
-                handler.HandleMsg(sender, msg);
+                handler.RecieveMsg(sender, msg);
                 return true;
             }
 
             return false;
+        }
+
+        public bool EnqueueMsg(object sender, IEntityMsg msg)
+        {
+            IMsgHandler handler = null;
+            if (!handlers.TryGetValue(msg.Type, out handler))
+                return false;
+
+            return handler.EnqueueMsg(sender, msg);
         }
 
         #endregion Public Methods

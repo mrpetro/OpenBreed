@@ -43,7 +43,7 @@ namespace OpenBreed.Core.Common.Systems
         /// <param name="sender">Object is sending the message</param>
         /// <param name="message">message</param>
         /// <returns>True if message was handled, false otherwise</returns>
-        bool HandleMsg(object sender, IMsg message);
+        bool RecieveMsg(object sender, IMsg message);
 
         #endregion Public Methods
     }

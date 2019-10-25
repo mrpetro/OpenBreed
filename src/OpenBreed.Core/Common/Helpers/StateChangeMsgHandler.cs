@@ -23,7 +23,7 @@ namespace OpenBreed.Core.Common.Helpers
 
         #region Public Methods
 
-        public bool HandleMsg(object sender, IMsg msg)
+        public bool RecieveMsg(object sender, IMsg msg)
         {
             return HandleEntityMsg(sender, (StateChangeMsg)msg);
         }
@@ -37,9 +37,14 @@ namespace OpenBreed.Core.Common.Helpers
             var fsm = msg.Entity.FsmList.FirstOrDefault(item => item.Name == msg.FsmName);
 
             if(fsm != null)
-                fsm.HandleMsg(sender, msg);
+                fsm.RecieveMsg(sender, msg);
 
             return true;
+        }
+
+        public bool EnqueueMsg(object sender, IEntityMsg msg)
+        {
+            return false;
         }
 
         #endregion Private Methods

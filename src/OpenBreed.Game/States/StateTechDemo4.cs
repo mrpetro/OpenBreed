@@ -6,6 +6,7 @@ using OpenBreed.Core.Modules.Rendering.Entities;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
+using OpenBreed.Core.Systems.Control.Components;
 using OpenBreed.Game.Entities.Actor;
 using OpenBreed.Game.Entities.Builders;
 using OpenBreed.Game.Helpers;
@@ -146,6 +147,7 @@ namespace OpenBreed.Game.States
             Core.Rendering.Viewports.Remove(gameViewport);
 
             Core.Inputs.KeyDown -= Inputs_KeyDown;
+            Core.Players.LooseAllControls();
         }
 
         #endregion Protected Methods
@@ -215,8 +217,14 @@ namespace OpenBreed.Game.States
             blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
 
             var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288));
-            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right, Key.ControlRight));
+            actor.Add(new WalkingControl());
             actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
+
+            var player1 = Core.Players.GetByName("P1");
+            player1.AssumeControl(actor);
+            var player2 = Core.Players.GetByName("P2");
+            player2.AssumeControl(actor);
+
 
             var movementFsm = ActorHelper.CreateMovementFSM(actor);
             var rotateFsm = ActorHelper.CreateRotationFSM(actor);

@@ -16,10 +16,11 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class SpriteSystem : WorldSystem, ISpriteSystem, IMsgHandler
+    public class SpriteSystem : WorldSystem, ISpriteSystem, IMsgListener
     {
         #region Private Fields
 
+        private MsgHandler msgHandler;
         private readonly List<SpritePack> inactive = new List<SpritePack>();
         private readonly List<SpritePack> active = new List<SpritePack>();
 
@@ -29,6 +30,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         public SpriteSystem(ICore core) : base(core)
         {
+            msgHandler = new MsgHandler(this);
+
             Require<ISprite>();
             Require<IPosition>();
         }
@@ -41,12 +44,12 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             base.Initialize(world);
 
-            World.MessageBus.RegisterHandler(SpriteOnMsg.TYPE, this);
-            World.MessageBus.RegisterHandler(SpriteOffMsg.TYPE, this);
-            World.MessageBus.RegisterHandler(SpriteSetMsg.TYPE, this);
+            World.MessageBus.RegisterHandler(SpriteOnMsg.TYPE, msgHandler);
+            World.MessageBus.RegisterHandler(SpriteOffMsg.TYPE, msgHandler);
+            World.MessageBus.RegisterHandler(SpriteSetMsg.TYPE, msgHandler);
         }
 
-        public override bool HandleMsg(object sender, IMsg msg)
+        public override bool RecieveMsg(object sender, IMsg msg)
         {
             switch (msg.Type)
             {
@@ -105,6 +108,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// <param name="viewport">Viewport on which tiles will be drawn to</param>
         public void Render(IViewport viewport, float dt)
         {
+            msgHandler.PostEnqueued();
+
             float left, bottom, right, top;
             viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
 
@@ -188,6 +193,11 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                 throw new InvalidOperationException("Entity not found in this system.");
 
             active.Remove(pack);
+        }
+
+        public bool EnqueueMsg(object sender, IEntityMsg msg)
+        {
+            return false;
         }
 
         #endregion Protected Methods

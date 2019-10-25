@@ -16,8 +16,11 @@ namespace OpenBreed.Game.Worlds
         public GameWorld(ICore core) : base(core)
         {
 
+            //AI
+            // Pathfinding/ AI systems here
+
             //Input
-            AddSystem(new KeyboardControlSystem(core));
+            AddSystem(new WalkingControlSystem(core));
             AddSystem(new AiControlSystem(core));
 
             //Action

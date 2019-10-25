@@ -22,6 +22,7 @@ using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Game.Entities.Door;
 using OpenBreed.Game.Entities.Box;
 using OpenBreed.Game.Entities.Projectile;
+using OpenBreed.Core.Systems.Control.Components;
 
 namespace OpenBreed.Game.States
 {
@@ -148,6 +149,7 @@ namespace OpenBreed.Game.States
 
             Core.Rendering.Viewports.Remove(gameViewport);
             Core.Inputs.KeyDown -= Inputs_KeyDown;
+            Core.Players.LooseAllControls();
         }
         public GameWorld GameWorld;
 
@@ -175,9 +177,13 @@ namespace OpenBreed.Game.States
             blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
 
             var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288));
-            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right, Key.ControlRight));
+            actor.Add(new WalkingControl());
             actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
 
+            var player1 = Core.Players.GetByName("P1");
+            player1.AssumeControl(actor);
+            var player2 = Core.Players.GetByName("P2");
+            player2.AssumeControl(actor);
 
             var movementFsm = ActorHelper.CreateMovementFSM(actor);
             var rotateFsm = ActorHelper.CreateRotationFSM(actor);

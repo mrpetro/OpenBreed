@@ -15,12 +15,13 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Physics.Systems
 {
-    internal class PhysicsSystem : WorldSystem, IPhysicsSystem, IMsgHandler
+    internal class PhysicsSystem : WorldSystem, IPhysicsSystem, IMsgListener
     {
         #region Private Fields
 
         private const int CELL_SIZE = 16;
 
+        private MsgHandler msgHandler;
         private readonly List<DynamicPack> inactiveDynamics = new List<DynamicPack>();
         private readonly List<DynamicPack> activeDynamics = new List<DynamicPack>();
         private List<StaticPack>[] gridStatics;
@@ -31,6 +32,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         internal PhysicsSystem(ICore core, int gridWidth, int gridHeight) : base(core)
         {
+            msgHandler = new MsgHandler(this);
+
             Require<IPhysicsComponent>();
 
             GridWidth = gridWidth;
@@ -68,16 +71,18 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         {
             base.Initialize(world);
 
-            World.MessageBus.RegisterHandler(BodyOnMsg.TYPE, this);
-            World.MessageBus.RegisterHandler(BodyOffMsg.TYPE, this);
+            World.MessageBus.RegisterHandler(BodyOnMsg.TYPE, msgHandler);
+            World.MessageBus.RegisterHandler(BodyOffMsg.TYPE, msgHandler);
         }
 
         public void Update(float dt)
         {
+            msgHandler.PostEnqueued();
+
             SweepAndPrune(dt);
         }
 
-        public override bool HandleMsg(object sender, IMsg msg)
+        public override bool RecieveMsg(object sender, IMsg msg)
         {
             switch (msg.Type)
             {
