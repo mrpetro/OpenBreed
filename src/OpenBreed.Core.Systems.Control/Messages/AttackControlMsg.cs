@@ -4,20 +4,21 @@ using OpenTK;
 
 namespace OpenBreed.Core.Modules.Animation.Systems.Control.Messages
 {
-    public struct WalkingControlMsg : IEntityMsg
+    public struct AttackControlMsg : IEntityMsg
     {
         #region Public Fields
 
-        public const string TYPE = "WALKING_CONTROL";
+        public const string TYPE = "ATTACK_CONTROL";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public WalkingControlMsg(IEntity entity, Vector2 direction)
+        public AttackControlMsg(IEntity entity, bool primary, bool secondary)
         {
             Entity = entity;
-            Direction = direction;
+            Primary = primary;
+            Secondary = secondary;
         }
 
         #endregion Public Constructors
@@ -26,8 +27,10 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Messages
 
         public IEntity Entity { get; }
         public string Type { get { return TYPE; } }
-        public Vector2 Direction { get; }
 
+        public bool Primary { get; }
+        public bool Secondary { get; }
+        
         #endregion Public Properties
     }
 }

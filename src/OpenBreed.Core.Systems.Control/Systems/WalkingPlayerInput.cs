@@ -34,7 +34,7 @@ namespace OpenBreed.Core.Systems.Control.Systems
                 if (control == null)
                     continue;
 
-                Console.WriteLine($"{player.Name} -> ({AxisX},{AxisY})");
+                Console.WriteLine($"{player.Name} -> Walk({AxisX},{AxisY})");
                 entity.PostMsg(new WalkingControlMsg(entity, new OpenTK.Vector2(AxisX, AxisY)));
             }
 

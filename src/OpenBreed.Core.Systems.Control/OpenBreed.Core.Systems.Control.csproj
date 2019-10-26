@@ -53,19 +53,21 @@
     <Compile Include="Components\AiControl.cs" />
     <Compile Include="Components\BaseControl.cs" />
     <Compile Include="Components\DrivingControl.cs" />
+    <Compile Include="Components\AttackControl.cs" />
     <Compile Include="Components\WalkingControl.cs" />
-    <Compile Include="Components\DigitalInput.cs" />
     <Compile Include="Components\FlyingControl.cs" />
-    <Compile Include="Components\KeyboardControl.cs" />
     <Compile Include="Components\TankControl.cs" />
     <Compile Include="Components\TurretControl.cs" />
     <Compile Include="Events\ControlFireChangedEvent.cs" />
     <Compile Include="Events\ControlDirectionChangedEvent.cs" />
+    <Compile Include="Messages\AttackControlMsg.cs" />
     <Compile Include="Messages\WalkingControlMsg.cs" />
     <Compile Include="Systems\AiControlSystem.cs" />
+    <Compile Include="Systems\AttackingControlHandler.cs" />
     <Compile Include="Systems\WalkingControlHandler.cs" />
     <Compile Include="Systems\WalkingControlSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Systems\AttackingPlayerInput.cs" />
     <Compile Include="Systems\WalkingPlayerInput.cs" />
   </ItemGroup>
   <ItemGroup>

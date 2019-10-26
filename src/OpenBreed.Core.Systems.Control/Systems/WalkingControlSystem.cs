@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Entities;
@@ -26,7 +27,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
         {
             msgHandler = new MsgHandler(this);
 
-            Require<WalkingControl>();
+            Require<IControlComponent>();
         }
 
         #endregion Public Constructors
@@ -38,6 +39,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
             base.Initialize(world);
 
             World.MessageBus.RegisterHandler(WalkingControlMsg.TYPE, msgHandler);
+            World.MessageBus.RegisterHandler(AttackControlMsg.TYPE, msgHandler);
         }
 
         public void Update(float dt)
@@ -51,7 +53,8 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
             {
                 case WalkingControlMsg.TYPE:
                     return HandleWalkingControlMsg(sender, (WalkingControlMsg)message);
-
+                case AttackControlMsg.TYPE:
+                    return HandleAttackControlMsg(sender, (AttackControlMsg)message);
                 default:
                     return false;
             }
@@ -80,12 +83,21 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         #region Private Methods
 
+        private bool HandleAttackControlMsg(object sender, AttackControlMsg msg)
+        {
+            var control = msg.Entity.Components.OfType<AttackControl>().First();
+
+            if (control.AttackPrimary != msg.Primary)
+            {
+                control.AttackPrimary = msg.Primary;
+                msg.Entity.RaiseEvent(new ControlFireChangedEvent(control.AttackPrimary));
+            }
+
+            return true;
+        }
+
         private bool HandleWalkingControlMsg(object sender, WalkingControlMsg msg)
         {
-            var index = entities.IndexOf(msg.Entity);
-            if (index < 0)
-                return false;
-
             var control = msg.Entity.Components.OfType<WalkingControl>().First();
 
             if (control.Direction != msg.Direction)

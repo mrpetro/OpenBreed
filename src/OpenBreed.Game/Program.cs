@@ -160,10 +160,12 @@ namespace OpenBreed.Game
             base.OnLoad(e);
 
             Inputs.RegisterHandler(new WalkingControlHandler());
-
+            Inputs.RegisterHandler(new AttackControlHandler());
 
             var p1 = Players.AddPlayer("P1");
+            p1.RegisterInput(new AttackingPlayerInput());
             p1.RegisterInput(new WalkingPlayerInput());
+            p1.AddKeyBinding("Attacking", "Primary", Key.ControlRight);
             p1.AddKeyBinding("Walking", "Left", Key.Left);
             p1.AddKeyBinding("Walking", "Right", Key.Right);
             p1.AddKeyBinding("Walking", "Up", Key.Up);

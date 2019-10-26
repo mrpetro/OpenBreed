@@ -180,7 +180,7 @@ namespace OpenBreed.Game.States
 
             var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288));
             actor.Add(new WalkingControl());
-
+            actor.Add(new AttackControl());
 
             actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
 
