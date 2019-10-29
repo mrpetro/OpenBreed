@@ -15,6 +15,7 @@ using OpenBreed.Game.Entities.Actor;
 using OpenBreed.Game.Entities.Door;
 using OpenBreed.Game.Entities.Projectile;
 using OpenBreed.Game.Helpers;
+using OpenBreed.Game.Items;
 using OpenBreed.Game.States;
 using OpenTK;
 using OpenTK.Graphics;
@@ -49,6 +50,7 @@ namespace OpenBreed.Game
             Blueprints = new BlueprintMan(this);
             Entities = new EntityMan(this);
             Players = new PlayersMan(this);
+            Items = new ItemsMan(this);
             Inputs = new InputsMan(this);
             Worlds = new WorldMan(this);
             StateMachine = new StateMan(this);
@@ -78,6 +80,8 @@ namespace OpenBreed.Game
         public PlayersMan Players { get; }
 
         public ILogMan Logging { get; }
+
+        public ItemsMan Items { get; }
 
         public InputsMan Inputs { get; }
 
@@ -154,10 +158,16 @@ namespace OpenBreed.Game
             Inputs.OnKeyPress(e);
         }
 
+        private void RegisterItems()
+        {
+            Items.Register(new CreditsItem());
+        }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+
+            RegisterItems();
 
             Inputs.RegisterHandler(new WalkingControlHandler());
             Inputs.RegisterHandler(new AttackControlHandler());

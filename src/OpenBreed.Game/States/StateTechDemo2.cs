@@ -226,7 +226,7 @@ namespace OpenBreed.Game.States
             blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
 
             var actor = ActorHelper.CreateActor(Core, new Vector2(20, 20));
-            //actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right, Key.ControlRight));
+            actor.Add(new WalkingControl());
 
             var player1 = Core.Players.GetByName("P1");
             player1.AssumeControl(actor);

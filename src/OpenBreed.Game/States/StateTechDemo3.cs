@@ -18,6 +18,7 @@ using OpenBreed.Game.Worlds;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
 using OpenBreed.Game.Entities.Actor;
 using OpenBreed.Core.Common;
+using OpenBreed.Game.Helpers;
 
 namespace OpenBreed.Game.States
 {
@@ -193,8 +194,9 @@ namespace OpenBreed.Game.States
 
             World.AddEntity(actor);
 
-            var rnd = new Random();
+            SandBoxHelper.SetupMap(World);
 
+            var rnd = new Random();
             var ymax = mapA.Length / 10;
 
             for (int x = 0; x < 10; x++)

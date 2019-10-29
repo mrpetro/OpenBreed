@@ -68,6 +68,11 @@ namespace OpenBreed.Core
         PlayersMan Players { get; }
 
         /// <summary>
+        /// Items manager
+        /// </summary>
+        ItemsMan Items { get; }
+
+        /// <summary>
         /// Inputs manager
         /// </summary>
         InputsMan Inputs { get; }

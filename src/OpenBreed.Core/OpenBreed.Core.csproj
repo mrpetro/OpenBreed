@@ -40,6 +40,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -49,6 +50,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -65,9 +67,11 @@
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Common\Components\Builders\ComponentBuilder.cs" />
     <Compile Include="Common\Components\Builders\GridPositionBuilder.cs" />
+    <Compile Include="Common\Components\EquipmentComponent.cs" />
     <Compile Include="Common\Components\GridPosition.cs" />
     <Compile Include="Common\Components\GroupPart.cs" />
     <Compile Include="Common\Components\IControlComponent.cs" />
+    <Compile Include="Common\Components\InventoryComponent.cs" />
     <Compile Include="Common\Helpers\CoreEventBus.cs" />
     <Compile Include="Common\Helpers\IMsg.cs" />
     <Compile Include="Common\Helpers\IMsgHandler.cs" />
@@ -90,6 +94,8 @@
     <Compile Include="Inputs\InputController.cs" />
     <Compile Include="Inputs\InputsMan.cs" />
     <Compile Include="Inputs\IPlayerInput.cs" />
+    <Compile Include="Item.cs" />
+    <Compile Include="ItemsMan.cs" />
     <Compile Include="Modules\Animation\Helpers\IAnimation.cs" />
     <Compile Include="Modules\Animation\Helpers\IAnimMan.cs" />
     <Compile Include="Modules\Animation\IAnimationModule.cs" />

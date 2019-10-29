@@ -18,6 +18,7 @@ using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
 using OpenBreed.Game.Entities.Actor;
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Systems.Control.Components;
+using OpenBreed.Game.Helpers;
 
 namespace OpenBreed.Game.States
 {
@@ -233,6 +234,8 @@ namespace OpenBreed.Game.States
             rotateFsm.SetInitialState("Idle");
 
             World.AddEntity(actor);
+
+            SandBoxHelper.SetupMap(World);
 
             var rnd = new Random();
 
