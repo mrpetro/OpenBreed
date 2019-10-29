@@ -17,7 +17,7 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TileSystem : WorldSystem, ITileSystem, IMsgHandler
+    public class TileSystem : WorldSystem, ITileSystem, IMsgListener
     {
         #region Public Fields
 
@@ -28,6 +28,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Fields
 
+        private MsgHandler msgHandler;
         private Hashtable entities = new Hashtable();
         private TileCell[] cells;
 
@@ -37,6 +38,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         public TileSystem(ICore core, int width, int height, int layersNo, float tileSize, bool gridVisible) : base(core)
         {
+            msgHandler = new MsgHandler(this);
+
             Require<ITile>();
             Require<Position>();
 
@@ -71,8 +74,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             base.Initialize(world);
 
-            World.MessageBus.RegisterHandler(TileSetMsg.TYPE, this);
-            World.MessageBus.RegisterHandler(PutStampMsg.TYPE, this);
+            World.MessageBus.RegisterHandler(TileSetMsg.TYPE, msgHandler);
+            World.MessageBus.RegisterHandler(PutStampMsg.TYPE, msgHandler);
         }
 
         /// <summary>
@@ -81,6 +84,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// <param name="viewport">Viewport on which tiles will be drawn to</param>
         public void Render(IViewport viewport, float dt)
         {
+            msgHandler.PostEnqueued();
+
             float left, bottom, right, top;
             viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
 
@@ -113,7 +118,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Disable(EnableCap.Texture2D);
         }
 
-        public override bool HandleMsg(object sender, IMsg msg)
+        public override bool RecieveMsg(object sender, IMsg msg)
         {
             switch (msg.Type)
             {
@@ -287,6 +292,11 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             x = (int)(position.Value.X / (int)TileSize);
             y = (int)(position.Value.Y / (int)TileSize);
+        }
+
+        public bool EnqueueMsg(object sender, IEntityMsg msg)
+        {
+            return false;
         }
 
         #endregion Private Methods

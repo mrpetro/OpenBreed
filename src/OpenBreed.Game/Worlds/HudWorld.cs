@@ -18,7 +18,7 @@ namespace OpenBreed.Game.Worlds
         {
 
             //Input
-            AddSystem(new KeyboardControlSystem(core));
+            AddSystem(new WalkingControlSystem(core));
             AddSystem(new AiControlSystem(core));
 
             //Action

@@ -22,6 +22,7 @@ using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Game.Entities.Door;
 using OpenBreed.Game.Entities.Box;
 using OpenBreed.Game.Entities.Projectile;
+using OpenBreed.Core.Systems.Control.Components;
 
 namespace OpenBreed.Game.States
 {
@@ -148,6 +149,7 @@ namespace OpenBreed.Game.States
 
             Core.Rendering.Viewports.Remove(gameViewport);
             Core.Inputs.KeyDown -= Inputs_KeyDown;
+            Core.Players.LooseAllControls();
         }
         public GameWorld GameWorld;
 
@@ -171,13 +173,14 @@ namespace OpenBreed.Game.States
             gameViewport = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
             gameViewport.Camera = GameCamera;
 
-            var blockBuilder = new WorldBlockBuilder(Core);
-            blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
-
             var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288));
-            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right, Key.ControlRight));
+            actor.Add(new WalkingControl());
             actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
 
+            var player1 = Core.Players.GetByName("P1");
+            player1.AssumeControl(actor);
+            var player2 = Core.Players.GetByName("P2");
+            player2.AssumeControl(actor);
 
             var movementFsm = ActorHelper.CreateMovementFSM(actor);
             var rotateFsm = ActorHelper.CreateRotationFSM(actor);
@@ -187,51 +190,15 @@ namespace OpenBreed.Game.States
 
             //ProjectileHelper.AddProjectile(Core, GameWorld, 100, 100, 0, 0);
 
+            SandBoxHelper.SetupMap(GameWorld);
 
             var rnd = new Random();
-
-            //for (int i = 0; i < 5; i++)
-            //{
-            //    var ball = BoxHelper.CreateBox(Core, new Vector2(rnd.Next(16, 64), rnd.Next(16, 64)),
-            //                                          new Vector2(rnd.Next(70, 700), rnd.Next(70, 700)),
-            //                                          new Vector2(rnd.Next(-50, 50), rnd.Next(-50, 50)));
-
-            //    gameWorld.AddEntity(ball);
-            //}
 
             for (int i = 0; i < 10; i++)
                 DoorHelper.AddHorizontalDoor(GameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3);
 
             for (int i = 0; i < 10; i++)
                 DoorHelper.AddVerticalDoor(Core, GameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3);
-
-            //blockBuilder.SetPosition(new Vector2(5 * 16, 10 * 16));
-            //blockBuilder.SetTileId(2);
-            //GameWorld.AddEntity(blockBuilder.Build());
-
-            //DoorHelper.AddHorizontalDoor(Core, GameWorld,  3,  3);
-
-            for (int x = 0; x < 64; x++)
-            {
-                blockBuilder.SetPosition(new Vector2(x * 16, 0));
-                blockBuilder.SetTileId(9);
-                GameWorld.AddEntity(blockBuilder.Build());
-
-                blockBuilder.SetPosition(new Vector2(x * 16, 62 * 16));
-                blockBuilder.SetTileId(9);
-                GameWorld.AddEntity(blockBuilder.Build());
-            }
-
-            for (int y = 1; y < 63; y++)
-            {
-                blockBuilder.SetPosition(new Vector2(0, y * 16));
-                blockBuilder.SetTileId(9);
-                GameWorld.AddEntity(blockBuilder.Build());
-
-                blockBuilder.SetPosition(new Vector2(62 * 16, y * 16));
-                blockBuilder.SetTileId(9);
-                GameWorld.AddEntity(blockBuilder.Build());
-            }
 
             Core.Worlds.Add(GameWorld);
         }

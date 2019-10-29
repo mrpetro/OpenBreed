@@ -26,6 +26,7 @@ namespace OpenBreed.Game.Entities.Builders
 
         public WorldBlockBuilder(ICore core) : base(core)
         {
+            HasBody = true;
         }
 
         #endregion Public Constructors
@@ -53,14 +54,20 @@ namespace OpenBreed.Game.Entities.Builders
             thisEntity.RaiseEvent(new CollisionEvent(otherEntity));
         }
 
+        public bool HasBody { get; set; }
 
         public override IEntity Build()
         {
             var entity = Core.Entities.Create();
 
             entity.Add(Position.Create(pos));
-            entity.Add(Body.Create(1.0f, 1.0f, "Static", (e, c) => OnCollision(entity, e, c)));
-            entity.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
+
+            if (HasBody)
+            {
+                entity.Add(Body.Create(1.0f, 1.0f, "Static", (e, c) => OnCollision(entity, e, c)));
+                entity.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
+            }
+
             entity.Add(Tile.Create(atlasId, tileId));
 
             return entity;

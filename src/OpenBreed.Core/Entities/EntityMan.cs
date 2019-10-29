@@ -2,11 +2,10 @@
 using OpenBreed.Core.Collections;
 using OpenBreed.Core.Common.Components.Builders;
 using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Entities;
 using System;
 using System.Collections.Generic;
 
-namespace OpenBreed.Core
+namespace OpenBreed.Core.Entities
 {
     public class EntityMan
     {
@@ -15,16 +14,6 @@ namespace OpenBreed.Core
         private static Dictionary<string, Func<ICore, ComponentBuilder>> builders = new Dictionary<string, Func<ICore, ComponentBuilder>>();
 
         private static Dictionary<string, Action<object>> setters = new Dictionary<string, Action<object>>();
-
-        public static void RegisterBuilder(string componentTypeName, Func<ICore, ComponentBuilder> creatorFunc)
-        {
-            builders.Add(componentTypeName, creatorFunc);
-        }
-
-        public static void AddSetter(string key, Action<object> action)
-        {
-            setters.Add(key, action);
-        }
 
         private readonly IdMap<IEntity> entities = new IdMap<IEntity>();
 
@@ -47,6 +36,16 @@ namespace OpenBreed.Core
 
         #region Public Methods
 
+        public static void RegisterBuilder(string componentTypeName, Func<ICore, ComponentBuilder> creatorFunc)
+        {
+            builders.Add(componentTypeName, creatorFunc);
+        }
+
+        public static void AddSetter(string key, Action<object> action)
+        {
+            setters.Add(key, action);
+        }
+
         public IEntity GetById(int id)
         {
             var entity = entities[id];
@@ -55,14 +54,6 @@ namespace OpenBreed.Core
                 return entity;
             else
                 throw new InvalidOperationException($"Entity with Guid '{id}' not found.");
-        }
-
-        private ComponentBuilder CreateBuilder(string componentType)
-        {
-            if (builders.TryGetValue(componentType, out Func<ICore, ComponentBuilder> builderCreator))
-                return builderCreator.Invoke(Core);
-            else
-                return null;
         }
 
         public List<IEntity> CreateFromBlueprint(IBlueprint blueprint, Dictionary<string, IComponentState> states = null)
@@ -93,11 +84,18 @@ namespace OpenBreed.Core
 
         #region Private Methods
 
+        private ComponentBuilder CreateBuilder(string componentType)
+        {
+            if (builders.TryGetValue(componentType, out Func<ICore, ComponentBuilder> builderCreator))
+                return builderCreator.Invoke(Core);
+            else
+                return null;
+        }
+
         private void SetComponentStates(IEntity entity, IEntityDef def)
         {
             foreach (var componentState in def.ComponentStates)
             {
-
             }
         }
 
@@ -121,7 +119,6 @@ namespace OpenBreed.Core
             foreach (var componentType in def.ComponentTypes)
             {
                 var componentBuilder = CreateBuilder(componentType);
-
 
                 var type = Type.GetType(componentType);
 

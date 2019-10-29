@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Animation.Systems
 {
-    public class AnimSystem<T> : WorldSystem, IAnimationSystem, IMsgHandler
+    public class AnimSystem<T> : WorldSystem, IAnimationSystem, IMsgListener
     {
         #region Private Fields
 
@@ -30,20 +30,26 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         #endregion Public Constructors
 
+        private MsgHandler msgHandler;
+
         #region Public Methods
 
         public override void Initialize(World world)
         {
+            msgHandler = new MsgHandler(this);
+
             base.Initialize(world);
 
-            World.MessageBus.RegisterHandler(SetAnimMsg.TYPE, this);
-            World.MessageBus.RegisterHandler(PlayAnimMsg.TYPE, this);
-            World.MessageBus.RegisterHandler(PauseAnimMsg.TYPE, this);
-            World.MessageBus.RegisterHandler(StopAnimMsg.TYPE, this);
+            World.MessageBus.RegisterHandler(SetAnimMsg.TYPE, msgHandler);
+            World.MessageBus.RegisterHandler(PlayAnimMsg.TYPE, msgHandler);
+            World.MessageBus.RegisterHandler(PauseAnimMsg.TYPE, msgHandler);
+            World.MessageBus.RegisterHandler(StopAnimMsg.TYPE, msgHandler);
         }
 
         public void Update(float dt)
         {
+            msgHandler.PostEnqueued();
+
             for (int i = 0; i < entities.Count; i++)
                 Animate(i, dt);
         }
@@ -116,7 +122,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             }
         }
 
-        public override bool HandleMsg(object sender, IMsg message)
+        public override bool RecieveMsg(object sender, IMsg message)
         {
             switch (message.Type)
             {

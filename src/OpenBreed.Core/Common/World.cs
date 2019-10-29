@@ -24,6 +24,7 @@ namespace OpenBreed.Core.Common
 
         #region Private Fields
 
+        private MsgHandler msgHandler;
         private readonly List<IEntity> entities = new List<IEntity>();
         private readonly List<IEntity> toAdd = new List<IEntity>();
         private readonly List<IEntity> toRemove = new List<IEntity>();
@@ -92,7 +93,7 @@ namespace OpenBreed.Core.Common
         {
             foreach (var system in Systems)
             {
-                if (system.HandleMsg(sender, entityMsg))
+                if (system.RecieveMsg(sender, entityMsg))
                     break;
             }
         }

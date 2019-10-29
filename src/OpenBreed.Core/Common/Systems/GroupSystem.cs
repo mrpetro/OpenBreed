@@ -53,7 +53,7 @@ namespace OpenBreed.Core.Common.Systems
             }
         }
 
-        public override bool HandleMsg(object sender, IMsg message)
+        public override bool RecieveMsg(object sender, IMsg message)
         {
             foreach (var item in entities.Where(item => item.Id == ((IEntityMsg)message).Entity.Id))
                 item.PostMsg((IEntityMsg)message);

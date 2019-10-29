@@ -134,6 +134,11 @@ namespace OpenBreed.Core.Entities
                 fsm.Initialize();
         }
 
+        public override string ToString()
+        {
+            return $"Entity({Id})";
+        }
+
         #endregion Internal Methods
     }
 }

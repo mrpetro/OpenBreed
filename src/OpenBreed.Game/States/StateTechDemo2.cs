@@ -16,6 +16,7 @@ using OpenBreed.Game.Worlds;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
 using OpenBreed.Game.Entities.Actor;
 using OpenBreed.Core.Common;
+using OpenBreed.Core.Systems.Control.Components;
 
 namespace OpenBreed.Game.States
 {
@@ -81,6 +82,7 @@ namespace OpenBreed.Game.States
             Core.Rendering.Viewports.Remove(viewportRight);
 
             Core.Inputs.KeyDown -= Inputs_KeyDown;
+            Core.Players.LooseAllControls();
         }
 
         private void InitializeAll()
@@ -224,7 +226,12 @@ namespace OpenBreed.Game.States
             blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
 
             var actor = ActorHelper.CreateActor(Core, new Vector2(20, 20));
-            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right, Key.ControlRight));
+            actor.Add(new WalkingControl());
+
+            var player1 = Core.Players.GetByName("P1");
+            player1.AssumeControl(actor);
+            var player2 = Core.Players.GetByName("P2");
+            player2.AssumeControl(actor);
 
             var movementSm = ActorHelper.CreateMovementFSM(actor);
             movementSm.SetInitialState("Standing");
@@ -254,7 +261,12 @@ namespace OpenBreed.Game.States
         private void InitializeWorldB()
         {
             var actor = ActorHelper.CreateActor(Core, new Vector2(50, 20));
-            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right, Key.ControlRight));
+            actor.Add(new WalkingControl());
+
+            var player1 = Core.Players.GetByName("P1");
+            player1.AssumeControl(actor);
+            var player2 = Core.Players.GetByName("P2");
+            player2.AssumeControl(actor);
 
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");

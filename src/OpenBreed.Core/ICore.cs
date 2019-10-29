@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Inputs;
 using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Helpers;
@@ -60,6 +61,16 @@ namespace OpenBreed.Core
         /// Entities manager
         /// </summary>
         EntityMan Entities { get; }
+
+        /// <summary>
+        /// Players manager
+        /// </summary>
+        PlayersMan Players { get; }
+
+        /// <summary>
+        /// Items manager
+        /// </summary>
+        ItemsMan Items { get; }
 
         /// <summary>
         /// Inputs manager

@@ -64,7 +64,7 @@ namespace OpenBreed.Core.States
             currentState = states[initialStateId];
         }
 
-        public bool HandleMsg(object sender, IMsg message)
+        public bool RecieveMsg(object sender, IMsg message)
         {
             switch (message.Type)
             {
@@ -131,6 +131,11 @@ namespace OpenBreed.Core.States
 
             //Console.WriteLine($"Entering state '{currentState.Id}'");
             currentState.EnterState();
+        }
+
+        public bool EnqueueMsg(object sender, IEntityMsg msg)
+        {
+            return false;
         }
 
         #endregion Private Methods

@@ -17,6 +17,8 @@ using OpenBreed.Game.Worlds;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
 using OpenBreed.Game.Entities.Actor;
 using OpenBreed.Core.Common;
+using OpenBreed.Core.Systems.Control.Components;
+using OpenBreed.Game.Helpers;
 
 namespace OpenBreed.Game.States
 {
@@ -180,6 +182,7 @@ namespace OpenBreed.Game.States
             Core.Rendering.Viewports.Remove(viewportC);
 
             Core.Inputs.KeyDown -= Inputs_KeyDown;
+            Core.Players.LooseAllControls();
         }
 
         private void InitializeWorld()
@@ -218,7 +221,12 @@ namespace OpenBreed.Game.States
             blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
 
             var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288));
-            actor.Add(new KeyboardControl(Key.Up, Key.Down, Key.Left, Key.Right, Key.ControlRight));
+            actor.Add(new WalkingControl());
+
+            var player1 = Core.Players.GetByName("P1");
+            player1.AssumeControl(actor);
+            var player2 = Core.Players.GetByName("P2");
+            player2.AssumeControl(actor);
 
             var movementFsm = ActorHelper.CreateMovementFSM(actor);
             var rotateFsm = ActorHelper.CreateRotationFSM(actor);
@@ -226,6 +234,8 @@ namespace OpenBreed.Game.States
             rotateFsm.SetInitialState("Idle");
 
             World.AddEntity(actor);
+
+            SandBoxHelper.SetupMap(World);
 
             var rnd = new Random();
 

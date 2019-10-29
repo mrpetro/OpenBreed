@@ -15,10 +15,11 @@ using OpenBreed.Core.Common.Helpers;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TextSystem : WorldSystem, ITextSystem, IMsgHandler
+    public class TextSystem : WorldSystem, ITextSystem, IMsgListener
     {
         #region Private Fields
 
+        private MsgHandler msgHandler;
         private readonly List<IEntity> entities = new List<IEntity>();
         private readonly List<IText> textComps = new List<IText>();
         private readonly List<IPosition> positionComps = new List<IPosition>();
@@ -29,6 +30,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         public TextSystem(ICore core) : base(core)
         {
+            msgHandler = new MsgHandler(this);
+
             Require<IText>();
             Require<IPosition>();
         }
@@ -41,7 +44,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             base.Initialize(world);
 
-            World.MessageBus.RegisterHandler(TextSetMsg.TYPE, this);
+            World.MessageBus.RegisterHandler(TextSetMsg.TYPE, msgHandler);
         }
 
         /// <summary>
@@ -50,6 +53,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// <param name="viewport">Viewport on which sprites will be drawn to</param>
         public void Render(IViewport viewport, float dt)
         {
+            msgHandler.PostEnqueued();
+
             float left, bottom, right, top;
             viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
 
@@ -87,7 +92,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Disable(EnableCap.Texture2D);
         }
 
-        public override bool HandleMsg(object sender, IMsg message)
+        public override bool RecieveMsg(object sender, IMsg message)
         {
             switch (message.Type)
             {
@@ -135,6 +140,11 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             textComps[index].Value = message.Text;
 
             return true;
+        }
+
+        public bool EnqueueMsg(object sender, IEntityMsg msg)
+        {
+            return false;
         }
 
         #endregion Private Methods
