@@ -1,6 +1,8 @@
 ﻿using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
+using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Core.States;
 using System;
@@ -8,7 +10,7 @@ using System.Linq;
 
 namespace OpenBreed.Game.Entities.Pickable.States
 {
-    public class IdleState : IState
+    public class LyingState : IState
     {
         #region Private Fields
 
@@ -18,7 +20,7 @@ namespace OpenBreed.Game.Entities.Pickable.States
 
         #region Public Constructors
 
-        public IdleState(string id, int stampId)
+        public LyingState(string id, int stampId)
         {
             Name = id;
             this.stampId = stampId;
@@ -39,8 +41,9 @@ namespace OpenBreed.Game.Entities.Pickable.States
         {
             // Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
             Entity.PostMsg(new TextSetMsg(Entity, String.Join(", ", Entity.CurrentStateNames.ToArray())));
-
-            Entity.Subscribe(ControlFireChangedEvent.TYPE, OnControlFireChanged);
+            var pos = Entity.Components.OfType<IPosition>().FirstOrDefault();
+            Entity.PostMsg(new PutStampMsg(Entity, stampId, 0, pos.Value));
+            Entity.Subscribe(CollisionEvent.TYPE, OnCollision);
         }
 
         public void Initialize(IEntity entity)
@@ -50,7 +53,17 @@ namespace OpenBreed.Game.Entities.Pickable.States
 
         public void LeaveState()
         {
-            Entity.Unsubscribe(ControlFireChangedEvent.TYPE, OnControlFireChanged);
+            Entity.Unsubscribe(CollisionEvent.TYPE, OnCollision);
+        }
+
+        private void OnCollision(object sender, IEvent e)
+        {
+            HandleCollisionEvent((CollisionEvent)e);
+        }
+
+        private void HandleCollisionEvent(CollisionEvent e)
+        {
+            Entity.PostMsg(new StateChangeMsg(Entity, "Functioning", "Pick"));
         }
 
         public string Process(string actionName, object[] arguments)

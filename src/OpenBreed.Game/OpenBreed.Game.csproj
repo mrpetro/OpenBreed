@@ -69,7 +69,7 @@
     <Compile Include="Entities\Door\States\OpeningState.cs" />
     <Compile Include="Entities\Door\States\ClosingState.cs" />
     <Compile Include="Entities\Pickable\PickableHelper.cs" />
-    <Compile Include="Entities\Pickable\States\IdleState.cs" />
+    <Compile Include="Entities\Pickable\States\LyingState.cs" />
     <Compile Include="Entities\Pickable\States\PickingState.cs" />
     <Compile Include="Entities\Projectile\ProjectileHelper.cs" />
     <Compile Include="Entities\Projectile\States\FiredState.cs" />

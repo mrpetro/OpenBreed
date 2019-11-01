@@ -13,6 +13,7 @@ using OpenBreed.Core.States;
 using OpenBreed.Core.Systems.Control.Systems;
 using OpenBreed.Game.Entities.Actor;
 using OpenBreed.Game.Entities.Door;
+using OpenBreed.Game.Entities.Pickable;
 using OpenBreed.Game.Entities.Projectile;
 using OpenBreed.Game.Helpers;
 using OpenBreed.Game.Items;
@@ -204,6 +205,7 @@ namespace OpenBreed.Game
             //Blueprints.Import(@".\Content\BPHorizontalDoor.xml");
 
             DoorHelper.CreateStamps(this);
+            PickableHelper.CreateStamps(this);
             DoorHelper.CreateAnimations(this);
             ActorHelper.CreateAnimations(this);
             ProjectileHelper.CreateAnimations(this);

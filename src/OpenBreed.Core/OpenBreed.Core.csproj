@@ -87,6 +87,7 @@
     <Compile Include="Common\Helpers\IEntityMsg.cs" />
     <Compile Include="Common\Helpers\WorldMessageBus.cs" />
     <Compile Include="Common\Helpers\CoreMessageBus.cs" />
+    <Compile Include="Entities\EntityDestroyMsg.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Inputs\IControlHandler.cs" />
     <Compile Include="ILogMan.cs" />

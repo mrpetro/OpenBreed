@@ -57,6 +57,7 @@ namespace OpenBreed.Game.Components.States
 
         public void LeaveState()
         {
+            Entity.Unsubscribe(CollisionEvent.TYPE, OnCollision);
         }
 
         public string Process(string actionName, object[] arguments)

@@ -26,6 +26,7 @@ using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Systems.Control.Components;
 using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Modules.Rendering.Messages;
+using OpenBreed.Game.Entities.Pickable;
 
 namespace OpenBreed.Game.States
 {
@@ -196,6 +197,13 @@ namespace OpenBreed.Game.States
             atackFsm.SetInitialState("Idle");
             rotateFsm.SetInitialState("Idle");
             GameWorld.AddEntity(actor);
+
+            var rnd = new Random();
+
+            for (int i = 0; i < 10; i++)
+            {
+                PickableHelper.AddItem(Core, GameWorld, rnd.Next(5, 60), rnd.Next(5, 60));
+            }
 
             SandBoxHelper.SetupMap(GameWorld);
 
