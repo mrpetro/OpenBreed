@@ -149,6 +149,8 @@ namespace OpenBreed.Core.Common
         {
             //Deinitialize the entity and remove it from entities list
             entities.Remove(entity);
+
+            RemoveFromSystems(entity);
         }
 
         internal void Cleanup()
@@ -160,8 +162,6 @@ namespace OpenBreed.Core.Common
             for (int i = 0; i < toRemove.Count; i++)
                 UnregisterEntity((Entity)toRemove[i]);
 
-            toRemove.Clear();
-
             //Process entities to add
             for (int i = 0; i < toAdd.Count; i++)
                 RegisterEntity((Entity)toAdd[i]);
@@ -171,6 +171,8 @@ namespace OpenBreed.Core.Common
 
             //Perform initialization of added entities
             toAdd.ForEach(item => ((Entity)item).Initialize(this));
+
+            toRemove.Clear();
             toAdd.Clear();
         }
 
@@ -198,6 +200,15 @@ namespace OpenBreed.Core.Common
             {
                 if (system.Matches(entity))
                     system.AddEntity(entity);
+            }
+        }
+
+        private void RemoveFromSystems(Entity entity)
+        {
+            foreach (var system in systems)
+            {
+                if (system.Matches(entity))
+                    system.RemoveEntity(entity);
             }
         }
 

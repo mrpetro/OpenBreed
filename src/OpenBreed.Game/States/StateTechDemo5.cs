@@ -78,10 +78,7 @@ namespace OpenBreed.Game.States
         {
             base.OnResize(clientRectangle);
 
-            gameViewport.X = clientRectangle.X + 25;
-            gameViewport.Y = clientRectangle.Y + 25;
-            gameViewport.Width = clientRectangle.Width  - 50;
-            gameViewport.Height = clientRectangle.Height - 50;
+            UpdateViewports(clientRectangle);
         }
 
         public override void Update(float dt)
@@ -131,6 +128,8 @@ namespace OpenBreed.Game.States
         {
             InitializeWorld();
 
+            UpdateViewports(Core.ClientRectangle);
+
             Core.Inputs.KeyDown += Inputs_KeyDown;
             Core.Rendering.Viewports.Add(gameViewport);
 
@@ -140,6 +139,14 @@ namespace OpenBreed.Game.States
             Console.WriteLine("Constrols:");
             Console.WriteLine("RMB + Move mouse cursor = Camera control over hovered viewport");
             Console.WriteLine("Keyboard arrows  = Control arrow actor");
+        }
+
+        private void UpdateViewports(Rectangle clientRectangle)
+        {
+            gameViewport.X = clientRectangle.X + 25;
+            gameViewport.Y = clientRectangle.Y + 25;
+            gameViewport.Width = clientRectangle.Width - 50;
+            gameViewport.Height = clientRectangle.Height - 50;
         }
 
         protected override void OnLeave()

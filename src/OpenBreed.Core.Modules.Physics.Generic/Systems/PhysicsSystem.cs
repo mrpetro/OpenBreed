@@ -334,6 +334,14 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 return 1;
         }
 
+        private static Box2 GetAabb(IEntity entity)
+        {
+            var shape = entity.Components.OfType<IShapeComponent>().First();
+            var pos = entity.Components.OfType<Position>().First();
+
+            return shape.Aabb.Translated(pos.Value);
+        }
+
         private void RegisterStaticEntity(IEntity entity)
         {
             var pack = new StaticPack(entity,
@@ -369,6 +377,27 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             }
         }
 
+        private void UnregisterStaticEntity(IEntity entity)
+        {
+            var aabb = GetAabb(entity);
+
+            int leftIndex;
+            int rightIndex;
+            int bottomIndex;
+            int topIndex;
+
+            GetAabbIndices(aabb, out leftIndex, out rightIndex, out bottomIndex, out topIndex);
+
+            for (int j = bottomIndex; j < topIndex; j++)
+            {
+                var gridIndex = GridWidth * j + leftIndex;
+                for (int i = leftIndex; i < rightIndex; i++)
+                {
+                    gridStatics[gridIndex].RemoveAll(item => item.Entity == entity);
+                    gridIndex++;
+                }
+            }
+        }
 
         private void RegisterDynamicEntity(IEntity entity)
         {
@@ -389,11 +418,6 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 throw new InvalidOperationException("Entity not found in this system.");
 
             activeDynamics.Remove(dynamic);
-        }
-
-        private void UnregisterStaticEntity(IEntity entity)
-        {
-            throw new NotImplementedException();
         }
 
         private void InitializeGrid()

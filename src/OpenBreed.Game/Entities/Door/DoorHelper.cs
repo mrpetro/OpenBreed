@@ -26,6 +26,10 @@ namespace OpenBreed.Game.Entities.Door
     public static class DoorHelper
     {
         private const string TILE_ATLAS = "Atlases/Tiles/16/Test";
+        private const string STAMP_DOOR_HORIZONTAL_CLOSED = "Tiles/Stamps/Door/Horizontal/Closed";
+        private const string STAMP_DOOR_HORIZONTAL_OPENED = "Tiles/Stamps/Door/Horizontal/Opened";
+        private const string STAMP_DOOR_VERTICAL_CLOSED = "Tiles/Stamps/Door/Vertical/Closed";
+        private const string STAMP_DOOR_VERTICAL_OPENED = "Tiles/Stamps/Door/Vertical/Opened";
 
         public static void CreateAnimations(ICore core)
         {
@@ -59,8 +63,8 @@ namespace OpenBreed.Game.Entities.Door
         {
             var stateMachine = entity.AddFSM("Functioning");
 
-            var openedStamp = entity.Core.Rendering.Stamps.GetByName("Tiles/Stamps/Door/Horizontal/Opened");
-            var closedStamp = entity.Core.Rendering.Stamps.GetByName("Tiles/Stamps/Door/Horizontal/Closed");
+            var openedStamp = entity.Core.Rendering.Stamps.GetByName(STAMP_DOOR_HORIZONTAL_OPENED);
+            var closedStamp = entity.Core.Rendering.Stamps.GetByName(STAMP_DOOR_HORIZONTAL_CLOSED);
 
             stateMachine.AddState(new OpeningState("Opening", "Animations/Door/Horizontal/Opening"));
             stateMachine.AddState(new OpenedState("Opened", openedStamp.Id));
@@ -74,8 +78,8 @@ namespace OpenBreed.Game.Entities.Door
         {
             var stateMachine = entity.AddFSM("Functioning");
 
-            var openedStamp = entity.Core.Rendering.Stamps.GetByName("Tiles/Stamps/Door/Vertical/Opened");
-            var closedStamp = entity.Core.Rendering.Stamps.GetByName("Tiles/Stamps/Door/Vertical/Closed");
+            var openedStamp = entity.Core.Rendering.Stamps.GetByName(STAMP_DOOR_VERTICAL_OPENED);
+            var closedStamp = entity.Core.Rendering.Stamps.GetByName(STAMP_DOOR_VERTICAL_CLOSED);
 
             stateMachine.AddState(new OpeningState("Opening", "Animations/Door/Vertical/Opening"));
             stateMachine.AddState(new OpenedState("Opened", openedStamp.Id));
@@ -143,7 +147,7 @@ namespace OpenBreed.Game.Entities.Door
             var stampBuilder = core.Rendering.Stamps.Create();
 
             stampBuilder.ClearTiles();
-            stampBuilder.SetName("Tiles/Stamps/Door/Horizontal/Closed");
+            stampBuilder.SetName(STAMP_DOOR_HORIZONTAL_CLOSED);
             stampBuilder.SetSize(2, 1);
             stampBuilder.SetOrigin(0, 0);
             stampBuilder.AddTile(0, 0, 0);
@@ -151,7 +155,7 @@ namespace OpenBreed.Game.Entities.Door
             stampBuilder.Build();
 
             stampBuilder.ClearTiles();
-            stampBuilder.SetName("Tiles/Stamps/Door/Horizontal/Opened");
+            stampBuilder.SetName(STAMP_DOOR_HORIZONTAL_OPENED);
             stampBuilder.SetSize(2, 1);
             stampBuilder.SetOrigin(0, 0);
             stampBuilder.AddTile(0, 0, 2);
@@ -159,7 +163,7 @@ namespace OpenBreed.Game.Entities.Door
             stampBuilder.Build();
 
             stampBuilder.ClearTiles();
-            stampBuilder.SetName("Tiles/Stamps/Door/Vertical/Closed");
+            stampBuilder.SetName(STAMP_DOOR_VERTICAL_CLOSED);
             stampBuilder.SetSize(1, 2);
             stampBuilder.SetOrigin(0, 0);
             stampBuilder.AddTile(0, 0, 4);
@@ -167,7 +171,7 @@ namespace OpenBreed.Game.Entities.Door
             stampBuilder.Build();
 
             stampBuilder.ClearTiles();
-            stampBuilder.SetName("Tiles/Stamps/Door/Vertical/Opened");
+            stampBuilder.SetName(STAMP_DOOR_VERTICAL_OPENED);
             stampBuilder.SetSize(1, 2);
             stampBuilder.SetOrigin(0, 0);
             stampBuilder.AddTile(0, 0, 5);

@@ -1,24 +1,18 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenBreed.Core.States;
-using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Rendering;
-using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Core.Common;
 using OpenBreed.Core.Modules.Rendering.Entities;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
-using OpenBreed.Game.Entities;
+using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.States;
+using OpenBreed.Core.Systems.Control.Components;
+using OpenBreed.Game.Entities.Actor;
 using OpenBreed.Game.Entities.Builders;
+using OpenBreed.Game.Helpers;
+using OpenBreed.Game.Worlds;
 using OpenTK;
 using OpenTK.Input;
 using System;
 using System.Drawing;
-using OpenBreed.Core.Entities;
-using OpenBreed.Game.Worlds;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
-using OpenBreed.Game.Entities.Actor;
-using OpenBreed.Core.Common;
-using OpenBreed.Core.Systems.Control.Components;
-using OpenBreed.Game.Helpers;
 
 namespace OpenBreed.Game.States
 {
@@ -88,20 +82,7 @@ namespace OpenBreed.Game.States
         {
             base.OnResize(clientRectangle);
 
-            viewportA.X = clientRectangle.X + 25;
-            viewportA.Y = clientRectangle.Y + 25;
-            viewportA.Width = clientRectangle.Width / 2 - 25;
-            viewportA.Height = clientRectangle.Height / 2 - 25;
-
-            viewportB.X = clientRectangle.X + 25 + clientRectangle.Width / 2;
-            viewportB.Y = clientRectangle.Y + 25;
-            viewportB.Width = clientRectangle.Width / 2 - 50;
-            viewportB.Height = clientRectangle.Height / 2 - 25;
-
-            viewportC.X = clientRectangle.X + 25;
-            viewportC.Y = clientRectangle.Y + 25 + clientRectangle.Height / 2;
-            viewportC.Width = clientRectangle.Width - 50;
-            viewportC.Height = clientRectangle.Height - clientRectangle.Height / 2 - 50 ;
+            UpdateViewports(clientRectangle);
         }
 
         public override void Update(float dt)
@@ -144,12 +125,42 @@ namespace OpenBreed.Game.States
         {
             InitializeWorld();
 
+            UpdateViewports(Core.ClientRectangle);
+
             Console.Clear();
             Console.WriteLine("---------- Viewports & Cameras --------");
             Console.WriteLine("This demo shows three viewports with two cameras attached to them.");
             Console.WriteLine("Constrols:");
             Console.WriteLine("RMB + Move mouse cursor = Camera control over hovered viewport");
             Console.WriteLine("Keyboard arrows  = Control arrow actor");
+            Console.WriteLine("Keyboard arrows  = Control arrow actor");
+        }
+
+        protected override void OnLeave()
+        {
+            DeinitializeWorld();
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
+
+        private void UpdateViewports(Rectangle clientRectangle)
+        {
+            viewportA.X = clientRectangle.X + 25;
+            viewportA.Y = clientRectangle.Y + 25;
+            viewportA.Width = clientRectangle.Width / 2 - 25;
+            viewportA.Height = clientRectangle.Height / 2 - 25;
+
+            viewportB.X = clientRectangle.X + 25 + clientRectangle.Width / 2;
+            viewportB.Y = clientRectangle.Y + 25;
+            viewportB.Width = clientRectangle.Width / 2 - 50;
+            viewportB.Height = clientRectangle.Height / 2 - 25;
+
+            viewportC.X = clientRectangle.X + 25;
+            viewportC.Y = clientRectangle.Y + 25 + clientRectangle.Height / 2;
+            viewportC.Width = clientRectangle.Width - 50;
+            viewportC.Height = clientRectangle.Height - clientRectangle.Height / 2 - 50;
         }
 
         private void Inputs_KeyDown(object sender, KeyboardKeyEventArgs e)
@@ -162,15 +173,6 @@ namespace OpenBreed.Game.States
                 Core.StateMachine.SetNextState($"TECH_DEMO_{pressedKey}");
             }
         }
-
-        protected override void OnLeave()
-        {
-            DeinitializeWorld();
-        }
-
-        #endregion Protected Methods
-
-        #region Private Methods
 
         private void DeinitializeWorld()
         {

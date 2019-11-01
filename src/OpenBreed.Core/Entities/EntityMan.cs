@@ -80,9 +80,22 @@ namespace OpenBreed.Core.Entities
             return newEntity;
         }
 
+        public void Destroy(IEntity entity)
+        {
+            entity.RemovedFromWorld += Entity_RemovedFromWorld;
+            entity.World.RemoveEntity(entity);
+        }
+
         #endregion Public Methods
 
         #region Private Methods
+
+        private void Entity_RemovedFromWorld(object sender, Common.World e)
+        {
+            var entity = (IEntity)sender;
+            entity.RemovedFromWorld -= Entity_RemovedFromWorld;
+            entities.RemoveById(entity.Id);
+        }
 
         private ComponentBuilder CreateBuilder(string componentType)
         {

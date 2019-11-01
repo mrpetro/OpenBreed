@@ -1,24 +1,20 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenBreed.Core.States;
-using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Rendering;
-using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Core.Common;
+using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
 using OpenBreed.Core.Modules.Rendering.Entities;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
+using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.States;
 using OpenBreed.Game.Commands;
-using OpenBreed.Game.Entities;
+using OpenBreed.Game.Entities.Actor;
 using OpenBreed.Game.Entities.Builders;
+using OpenBreed.Game.Helpers;
+using OpenBreed.Game.Worlds;
 using OpenTK;
 using OpenTK.Input;
 using System;
 using System.Drawing;
-using OpenBreed.Core.Entities;
-using OpenBreed.Game.Worlds;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
-using OpenBreed.Game.Entities.Actor;
-using OpenBreed.Core.Common;
-using OpenBreed.Game.Helpers;
 
 namespace OpenBreed.Game.States
 {
@@ -76,10 +72,7 @@ namespace OpenBreed.Game.States
         {
             base.OnResize(clientRectangle);
 
-            viewport.X = clientRectangle.X + 25;
-            viewport.Y = clientRectangle.Y + 25;
-            viewport.Width = clientRectangle.Width  - 50;
-            viewport.Height = clientRectangle.Height - 50;
+            UpdateViewports(clientRectangle);
         }
 
         public override void Update(float dt)
@@ -104,7 +97,7 @@ namespace OpenBreed.Game.States
                     transf.Invert();
                     var delta4 = Vector4.Transform(transf, new Vector4(Core.Inputs.CursorDelta));
                     var delta2 = new Vector2(-delta4.X, -delta4.Y);
- 
+
                     hoverViewport.Camera.Position.Value += delta2;
                 }
 
@@ -114,12 +107,35 @@ namespace OpenBreed.Game.States
                     var moveToCommand = new MoveToCommand(actor, worldCoords);
                     moveToCommand.Execute();
                 }
-             }
+            }
         }
 
         #endregion Public Methods
 
         #region Protected Methods
+
+        protected override void OnEnter()
+        {
+            InitializeWorld();
+
+            UpdateViewports(Core.ClientRectangle);
+
+            Console.Clear();
+            Console.WriteLine("---------- Pathfinding --------");
+            Console.WriteLine("This demo shows actor pathfinding function (NOT IMPLEMENTED YET)");
+            Console.WriteLine("Constrols:");
+            Console.WriteLine("RMB + Move mouse cursor = Camera control over hovered viewport");
+            Console.WriteLine("LMB = Set next point destination for Actor");
+        }
+
+        protected override void OnLeave()
+        {
+            DeinitializeWorld();
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
 
         private void Inputs_KeyDown(object sender, KeyboardKeyEventArgs e)
         {
@@ -141,26 +157,13 @@ namespace OpenBreed.Game.States
             Core.Players.LooseAllControls();
         }
 
-        protected override void OnEnter()
+        private void UpdateViewports(Rectangle clientRectangle)
         {
-            InitializeWorld();
-
-            Console.Clear();
-            Console.WriteLine("---------- Pathfinding --------");
-            Console.WriteLine("This demo shows actor pathfinding function (NOT IMPLEMENTED YET)");
-            Console.WriteLine("Constrols:");
-            Console.WriteLine("RMB + Move mouse cursor = Camera control over hovered viewport");
-            Console.WriteLine("LMB = Set next point destination for Actor");
+            viewport.X = clientRectangle.X + 25;
+            viewport.Y = clientRectangle.Y + 25;
+            viewport.Width = clientRectangle.Width - 50;
+            viewport.Height = clientRectangle.Height - 50;
         }
-
-        protected override void OnLeave()
-        {
-            DeinitializeWorld();
-        }
-
-        #endregion Protected Methods
-
-        #region Private Methods
 
         private void InitializeWorld()
         {
@@ -174,7 +177,6 @@ namespace OpenBreed.Game.States
             cameraBuilder.SetZoom(1);
             Camera1 = (CameraEntity)cameraBuilder.Build();
             World.AddEntity(Camera1);
-
 
             viewport = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
             viewport.Camera = Camera1;

@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Helpers;
-using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.States;
 using System;
@@ -14,6 +13,15 @@ namespace OpenBreed.Core.Entities
     /// </summary>
     public interface IEntity
     {
+        #region Public Events
+
+        /// <summary>
+        /// Called when entity is removed from world
+        /// </summary>
+        event EventHandler<World> RemovedFromWorld;
+
+        #endregion Public Events
+
         #region Public Properties
 
         /// <summary>

@@ -35,6 +35,12 @@ namespace OpenBreed.Core.Entities
 
         #endregion Public Constructors
 
+        #region Public Events
+
+        public event EventHandler<World> RemovedFromWorld;
+
+        #endregion Public Events
+
         #region Public Properties
 
         public ReadOnlyCollection<IEntityComponent> Components { get; }
@@ -112,6 +118,16 @@ namespace OpenBreed.Core.Entities
             return components.Remove(component);
         }
 
+        public override string ToString()
+        {
+            return $"Entity({Id})";
+        }
+
+        private void OnRemoved(World world)
+        {
+            RemovedFromWorld?.Invoke(this, world);
+        }
+
         #endregion Public Methods
 
         #region Internal Methods
@@ -121,8 +137,11 @@ namespace OpenBreed.Core.Entities
             foreach (var fsm in fsmList)
                 fsm.Deinitialize();
 
+            var from = World;
+
             //Forget the world in which entity was
             World = null;
+            OnRemoved(from);
         }
 
         internal void Initialize(World world)
@@ -132,11 +151,6 @@ namespace OpenBreed.Core.Entities
 
             foreach (var fsm in fsmList)
                 fsm.Initialize();
-        }
-
-        public override string ToString()
-        {
-            return $"Entity({Id})";
         }
 
         #endregion Internal Methods

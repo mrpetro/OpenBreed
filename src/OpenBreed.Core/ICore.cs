@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Common.Helpers;
+﻿using System.Drawing;
+using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Inputs;
@@ -101,6 +102,11 @@ namespace OpenBreed.Core
         /// Client display transformation matrix
         /// </summary>
         Matrix4 ClientTransform { get; }
+
+        /// <summary>
+        /// Client screen rectangle
+        /// </summary>
+        Rectangle ClientRectangle { get; }
 
         #endregion Public Properties
 

@@ -26,6 +26,7 @@ using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Systems.Control.Components;
 using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Modules.Rendering.Messages;
+using OpenBreed.Game.Entities.Pickable;
 
 namespace OpenBreed.Game.States
 {
@@ -81,10 +82,7 @@ namespace OpenBreed.Game.States
         {
             base.OnResize(clientRectangle);
 
-            gameViewport.X = clientRectangle.X + 25;
-            gameViewport.Y = clientRectangle.Y + 25;
-            gameViewport.Width = clientRectangle.Width  - 50;
-            gameViewport.Height = clientRectangle.Height - 50;
+            UpdateViewports(clientRectangle);
         }
 
         public override void Update(float dt)
@@ -134,6 +132,8 @@ namespace OpenBreed.Game.States
         {
             InitializeWorld();
 
+            UpdateViewports(Core.ClientRectangle);
+
             Core.Inputs.KeyDown += Inputs_KeyDown;
             Core.Rendering.Viewports.Add(gameViewport);
 
@@ -144,6 +144,14 @@ namespace OpenBreed.Game.States
             Console.WriteLine("RMB + Move mouse cursor = Camera control over hovered viewport");
             Console.WriteLine("Keyboard Right Ctrl = Shoot projectiles");
             Console.WriteLine("Keyboard arrows  = Control arrow actor");
+        }
+
+        private void UpdateViewports(Rectangle clientRectangle)
+        {
+            gameViewport.X = clientRectangle.X + 25;
+            gameViewport.Y = clientRectangle.Y + 25;
+            gameViewport.Width = clientRectangle.Width - 50;
+            gameViewport.Height = clientRectangle.Height - 50;
         }
 
         protected override void OnLeave()
@@ -196,6 +204,13 @@ namespace OpenBreed.Game.States
             atackFsm.SetInitialState("Idle");
             rotateFsm.SetInitialState("Idle");
             GameWorld.AddEntity(actor);
+
+            var rnd = new Random();
+
+            for (int i = 0; i < 10; i++)
+            {
+                PickableHelper.AddItem(Core, GameWorld, rnd.Next(5, 60), rnd.Next(5, 60));
+            }
 
             SandBoxHelper.SetupMap(GameWorld);
 

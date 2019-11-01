@@ -36,12 +36,12 @@ namespace OpenBreed.Game.States
         #region Private Fields
 
         private static byte[] mapA = new byte[] {
-            3,3,3,3,3,3,3,3,3,3,
-            0,0,0,0,0,0,0,0,1,3,
-            0,0,0,0,0,0,0,0,1,3,
-            3,0,0,1,0,1,0,0,4,3,
-            3,0,0,2,2,2,0,0,2,3,
-            3,3,3,3,3,3,3,3,3,3
+            10,10,10,10,10,10,10,10,10,15,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 11,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 11,
+            11,0, 0,11, 0,11, 0, 0, 0, 11,
+            11,0, 0,11, 0,11, 0, 0, 0, 11,
+            10,10,10,10,10,10,10,10,10,7
         };
 
         private Viewport gameViewport;
@@ -75,15 +75,7 @@ namespace OpenBreed.Game.States
         {
             base.OnResize(clientRectangle);
 
-            gameViewport.X = clientRectangle.X + 25;
-            gameViewport.Y = clientRectangle.Y + 25;
-            gameViewport.Width = clientRectangle.Width - 50;
-            gameViewport.Height = clientRectangle.Height - 50;
-
-            hudViewport.X = clientRectangle.X + 25;
-            hudViewport.Y = clientRectangle.Y + 25;
-            hudViewport.Width = clientRectangle.Width - 50;
-            hudViewport.Height = clientRectangle.Height - 50;
+            UpdateViewports(clientRectangle);
         }
 
         public override void Update(float dt)
@@ -123,6 +115,8 @@ namespace OpenBreed.Game.States
             InitializeWorld();
             InitializeHud();
 
+            UpdateViewports(Core.ClientRectangle);
+
             Core.Inputs.KeyDown += Inputs_KeyDown;
 
             Core.Rendering.Viewports.Add(gameViewport);
@@ -134,6 +128,19 @@ namespace OpenBreed.Game.States
             Console.WriteLine("Constrols:");
             Console.WriteLine("RMB + Move mouse cursor = Camera control over hovered viewport");
             Console.WriteLine("Keyboard arrows  = Control arrow actor");
+        }
+
+        private void UpdateViewports(Rectangle clientRectangle)
+        {
+            gameViewport.X = clientRectangle.X + 25;
+            gameViewport.Y = clientRectangle.Y + 25;
+            gameViewport.Width = clientRectangle.Width - 50;
+            gameViewport.Height = clientRectangle.Height - 50;
+
+            hudViewport.X = clientRectangle.X + 25;
+            hudViewport.Y = clientRectangle.Y + 25;
+            hudViewport.Width = clientRectangle.Width - 50;
+            hudViewport.Height = clientRectangle.Height - 50;
         }
 
         protected override void OnLeave()
