@@ -112,7 +112,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #region Public Methods
 
-        public void OnClientResize(float x, float y, float width, float height)
+        public void OnClientResize(Rectangle clientRectangle)
         {
 
         }

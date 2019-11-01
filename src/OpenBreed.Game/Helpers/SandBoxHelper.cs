@@ -19,9 +19,9 @@ namespace OpenBreed.Game.Helpers
             blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
 
             blockBuilder.HasBody = false;
-            for (int x = 0; x < 64; x++)
+            for (int x = 0; x < 63; x++)
             {
-                for (int y = 0; y < 64; y++)
+                for (int y = 0; y < 63; y++)
                 {
                     blockBuilder.SetPosition(new Vector2(x * 16, y * 16));
                     blockBuilder.SetTileId(12);
@@ -31,27 +31,40 @@ namespace OpenBreed.Game.Helpers
 
             blockBuilder.HasBody = true;
 
-            for (int x = 0; x < 64; x++)
+            for (int x = 0; x < 63; x++)
             {
                 blockBuilder.SetPosition(new Vector2(x * 16, 0));
-                blockBuilder.SetTileId(9);
+                blockBuilder.SetTileId(10);
                 world.AddEntity(blockBuilder.Build());
 
                 blockBuilder.SetPosition(new Vector2(x * 16, 62 * 16));
-                blockBuilder.SetTileId(9);
+                blockBuilder.SetTileId(10);
                 world.AddEntity(blockBuilder.Build());
             }
 
-            for (int y = 0; y < 64; y++)
+            for (int y = 0; y < 63; y++)
             {
                 blockBuilder.SetPosition(new Vector2(0, y * 16));
-                blockBuilder.SetTileId(9);
+                blockBuilder.SetTileId(11);
                 world.AddEntity(blockBuilder.Build());
 
                 blockBuilder.SetPosition(new Vector2(62 * 16, y * 16));
-                blockBuilder.SetTileId(9);
+                blockBuilder.SetTileId(11);
                 world.AddEntity(blockBuilder.Build());
             }
+
+            blockBuilder.SetPosition(new Vector2(0 * 16, 0 * 16));
+            blockBuilder.SetTileId(14);
+            world.AddEntity(blockBuilder.Build());
+            blockBuilder.SetPosition(new Vector2(62 * 16, 0 * 16));
+            blockBuilder.SetTileId(15);
+            world.AddEntity(blockBuilder.Build());
+            blockBuilder.SetPosition(new Vector2(62 * 16, 62 * 16));
+            blockBuilder.SetTileId(7);
+            world.AddEntity(blockBuilder.Build());
+            blockBuilder.SetPosition(new Vector2(0 * 16, 62 * 16));
+            blockBuilder.SetTileId(6);
+            world.AddEntity(blockBuilder.Build());
         }
     }
 }

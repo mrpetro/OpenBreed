@@ -247,7 +247,7 @@ namespace OpenBreed.Game
             GL.LoadMatrix(ref ortho);
             //GL.Ortho(0, ClientRectangle.Width, 0, ClientRectangle.Height, 0, 1); // Origin in lower-left corner
 
-            Rendering.Viewports.OnClientResize(0, 0, ClientRectangle.Width, ClientRectangle.Height);
+            Rendering.Viewports.OnClientResize(ClientRectangle);
 
             StateMachine.OnResize(ClientRectangle);
         }

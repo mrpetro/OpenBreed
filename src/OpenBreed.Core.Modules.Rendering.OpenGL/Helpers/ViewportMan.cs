@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Helpers
@@ -9,7 +10,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
     {
         #region Private Fields
 
-        private readonly List<IViewport> items = new List<IViewport>();
+        private readonly List<IViewport> viewports = new List<IViewport>();
         private readonly List<IViewport> toAdd = new List<IViewport>();
         private readonly List<IViewport> toRemove = new List<IViewport>();
 
@@ -20,7 +21,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         internal ViewportMan(OpenGLModule module)
         {
             Module = module ?? throw new ArgumentNullException(nameof(module));
-            Items = new ReadOnlyCollection<IViewport>(items);
+            Items = new ReadOnlyCollection<IViewport>(viewports);
         }
 
         #endregion Public Constructors
@@ -39,10 +40,10 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #region Public Methods
 
-        public void OnClientResize(float x, float y, float width, float height)
+        public void OnClientResize(Rectangle clientRectangle)
         {
-            for (int i = 0; i < items.Count; i++)
-                items[i].OnClientResize(x, y, width, height);
+            for (int i = 0; i < viewports.Count; i++)
+                viewports[i].OnClientResize(clientRectangle);
         }
 
         public IViewport Create(float x, float y, float width, float height)
@@ -55,10 +56,10 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             if (toRemove.Contains(viewport))
                 throw new InvalidOperationException("Viewport already pending removing.");
 
-            if (!items.Contains(viewport))
+            if (!viewports.Contains(viewport))
                 throw new InvalidOperationException("Viewport is not added.");
 
-            items.Remove(viewport);
+            viewports.Remove(viewport);
         }
 
         public void Add(IViewport viewport)
@@ -66,7 +67,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             if (toAdd.Contains(viewport))
                 throw new InvalidOperationException("Viewport already pending adding.");
 
-            if (items.Contains(viewport))
+            if (viewports.Contains(viewport))
                 throw new InvalidOperationException("Viewport already added.");
 
             toAdd.Add(viewport);
@@ -78,8 +79,8 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         internal void Draw(float dt)
         {
-            for (int i = 0; i < items.Count; i++)
-                items[i].Render(dt);
+            for (int i = 0; i < viewports.Count; i++)
+                viewports[i].Render(dt);
         }
 
         internal void Cleanup()
@@ -89,7 +90,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
                 //Process entities to remove
                 for (int i = 0; i < toRemove.Count; i++)
                 {
-                    items.Remove(toRemove[i]);
+                    viewports.Remove(toRemove[i]);
                 }
 
                 toRemove.Clear();
@@ -100,7 +101,8 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
                 //Process entities to add
                 for (int i = 0; i < toAdd.Count; i++)
                 {
-                    items.Add(toAdd[i]);
+                    viewports.Add(toAdd[i]);
+                    OnClientResize(Module.Core.ClientRectangle);
                 }
 
                 toAdd.Clear();

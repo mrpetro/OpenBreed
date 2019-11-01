@@ -1,22 +1,17 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Core.Common;
 using OpenBreed.Core.Modules.Rendering.Entities;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Game.Entities;
+using OpenBreed.Core.Systems.Control.Components;
+using OpenBreed.Game.Entities.Actor;
 using OpenBreed.Game.Entities.Builders;
+using OpenBreed.Game.Worlds;
 using OpenTK;
 using OpenTK.Input;
 using System;
 using System.Drawing;
-using OpenBreed.Core.Entities;
-using OpenBreed.Game.Worlds;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
-using OpenBreed.Game.Entities.Actor;
-using OpenBreed.Core.Common;
-using OpenBreed.Core.Systems.Control.Components;
 
 namespace OpenBreed.Game.States
 {
@@ -71,6 +66,90 @@ namespace OpenBreed.Game.States
             Core = core;
         }
 
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public ICore Core { get; }
+
+        public CameraEntity Camera1 { get; private set; }
+
+        public CameraEntity Camera2 { get; private set; }
+
+        public override string Name { get { return ID; } }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public override void OnResize(Rectangle clientRectangle)
+        {
+            base.OnResize(clientRectangle);
+
+            UpdateViewports(clientRectangle);
+        }
+
+        public override void Update(float dt)
+        {
+            var keyState = Keyboard.GetState();
+            var mouseState = Mouse.GetState();
+
+            Viewport hoverViewport = null;
+
+            if (viewportLeft.TestScreenCoords(Core.Inputs.CursorPos))
+                hoverViewport = viewportLeft;
+            else if (viewportRight.TestScreenCoords(Core.Inputs.CursorPos))
+                hoverViewport = viewportRight;
+            else
+                hoverViewport = null;
+
+            if (hoverViewport != null)
+            {
+                hoverViewport.Camera.Zoom = Tools.GetZoom(Core, hoverViewport.Camera.Zoom);
+
+                if (mouseState.IsButtonDown(MouseButton.Middle))
+                {
+                    var transf = hoverViewport.Camera.GetTransform();
+                    transf.Invert();
+                    var delta4 = Vector4.Transform(transf, new Vector4(Core.Inputs.CursorDelta));
+                    var delta2 = new Vector2(-delta4.X, -delta4.Y);
+
+                    hoverViewport.Camera.Position.Value += delta2;
+                }
+            }
+        }
+
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        protected override void OnEnter()
+        {
+            InitializeAll();
+
+            InitializeWorldA();
+            InitializeWorldB();
+
+            UpdateViewports(Core.ClientRectangle);
+
+            Console.Clear();
+            Console.WriteLine("---------- Multi-worlds --------");
+            Console.WriteLine("This demo shows two separate worlds, one per viewport");
+            Console.WriteLine("Constrols:");
+            Console.WriteLine("MMB + Move mouse cursor over hovered viewport = Camera scroll control");
+            Console.WriteLine("Mouse wheel over hovered viewport = Camera zoom control");
+            Console.WriteLine("Keyboard arrows = Control arrow actor");
+        }
+
+        protected override void OnLeave()
+        {
+            DeinitializeAll();
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
+
         private void DeinitializeAll()
         {
             WorldA.RemoveAllEntities();
@@ -119,26 +198,8 @@ namespace OpenBreed.Game.States
             Core.Rendering.Viewports.Add(viewportRight);
         }
 
-        #endregion Public Constructors
-
-        #region Public Properties
-
-        public ICore Core { get; }
-
-        public CameraEntity Camera1 { get; private set; }
-
-        public CameraEntity Camera2 { get; private set; }
-
-        public override string Name { get { return ID; } }
-
-        #endregion Public Properties
-
-        #region Public Methods
-
-        public override void OnResize(Rectangle clientRectangle)
+        private void UpdateViewports(Rectangle clientRectangle)
         {
-            base.OnResize(clientRectangle);
-
             viewportLeft.X = clientRectangle.X + 25;
             viewportLeft.Y = clientRectangle.Y + 25;
             viewportLeft.Width = clientRectangle.Width / 2 - 50;
@@ -148,56 +209,6 @@ namespace OpenBreed.Game.States
             viewportRight.Y = clientRectangle.Y + 25;
             viewportRight.Width = clientRectangle.Width / 2 - 50;
             viewportRight.Height = clientRectangle.Height - 50;
-        }
-
-        public override void Update(float dt)
-        {
-            var keyState = Keyboard.GetState();
-            var mouseState = Mouse.GetState();
-
-            Viewport hoverViewport = null;
-
-            if (viewportLeft.TestScreenCoords(Core.Inputs.CursorPos))
-                hoverViewport = viewportLeft;
-            else if (viewportRight.TestScreenCoords(Core.Inputs.CursorPos))
-                hoverViewport = viewportRight;
-            else
-                hoverViewport = null;
-
-            if (hoverViewport != null)
-            {
-                hoverViewport.Camera.Zoom = Tools.GetZoom(Core, hoverViewport.Camera.Zoom);
-
-                if (mouseState.IsButtonDown(MouseButton.Middle))
-                {
-                    var transf = hoverViewport.Camera.GetTransform();
-                    transf.Invert();
-                    var delta4 = Vector4.Transform(transf, new Vector4(Core.Inputs.CursorDelta));
-                    var delta2 = new Vector2(-delta4.X, -delta4.Y);
-
-                    hoverViewport.Camera.Position.Value += delta2;
-                }
-            }
-        }
-
-        #endregion Public Methods
-
-        #region Protected Methods
-
-        protected override void OnEnter()
-        {
-            InitializeAll();
-
-            InitializeWorldA();
-            InitializeWorldB();
-
-            Console.Clear();
-            Console.WriteLine("---------- Multi-worlds --------");
-            Console.WriteLine("This demo shows two separate worlds, one per viewport");
-            Console.WriteLine("Constrols:");
-            Console.WriteLine("MMB + Move mouse cursor over hovered viewport = Camera scroll control");
-            Console.WriteLine("Mouse wheel over hovered viewport = Camera zoom control");
-            Console.WriteLine("Keyboard arrows = Control arrow actor");
         }
 
         private void Inputs_KeyDown(object sender, KeyboardKeyEventArgs e)
@@ -210,15 +221,6 @@ namespace OpenBreed.Game.States
                 Core.StateMachine.SetNextState($"TECH_DEMO_{pressedKey}");
             }
         }
-
-        protected override void OnLeave()
-        {
-            DeinitializeAll();
-        }
-
-        #endregion Protected Methods
-
-        #region Private Methods
 
         private void InitializeWorldA()
         {
