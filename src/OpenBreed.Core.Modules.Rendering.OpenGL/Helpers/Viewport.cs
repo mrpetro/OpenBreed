@@ -16,6 +16,8 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
     {
         #region Private Fields
 
+        private const float ZOOM_BASE = 1.0f / 512.0f;
+
         private ICore core;
 
         #endregion Private Fields
@@ -218,9 +220,9 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         {
             var transform = Camera.Transform;
 
-            var ratio = core.ClientRatio *Ratio;
+            var ratio = core.ClientRatio * Ratio;
             transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f, ratio, 1.0f));
-            transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f / 256.0f, 1.0f / 256.0f, 1.0f));
+            transform = Matrix4.Mult(transform, Matrix4.CreateScale(ZOOM_BASE, ZOOM_BASE, 1.0f));
             transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(0.5f, 0.5f, 0.0f));
 
             return transform;
@@ -306,10 +308,10 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             //Draw background for this viewport
             GL.Color4(BackgroundColor);
             GL.Begin(PrimitiveType.Polygon);
-            GL.Vertex3(0, Height, 0.0);
+            GL.Vertex3(0, 1.0f, 0.0);
             GL.Vertex3(0, 0, 0.0);
-            GL.Vertex3(Width, 0, 0.0);
-            GL.Vertex3(Width, Height, 0.0);
+            GL.Vertex3(1.0f, 0, 0.0);
+            GL.Vertex3(1.0f, 1.0f, 0.0);
             GL.End();
         }
 

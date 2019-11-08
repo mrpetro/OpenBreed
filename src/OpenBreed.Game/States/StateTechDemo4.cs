@@ -210,7 +210,9 @@ namespace OpenBreed.Game.States
 
             gameViewport = (Viewport)Core.Rendering.Viewports.Create(0.05f, 0.05f, 0.9f, 0.9f);
             gameViewport.DrawBorder = true;
-            gameViewport.Clipping = false;
+            gameViewport.Clipping = true;
+            //gameViewport.DrawBackgroud = true;
+            //gameViewport.BackgroundColor = new OpenTK.Graphics.Color4(255, 0, 0, 255);
             gameViewport.Camera = GameCamera;
 
             var blockBuilder = new WorldBlockBuilder(Core);

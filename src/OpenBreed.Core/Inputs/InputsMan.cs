@@ -90,7 +90,7 @@ namespace OpenBreed.Core.Inputs
         public ICore Core { get; }
 
         /// <summary>
-        /// Gets cursor position in window coordinates
+        /// Gets cursor position in client coordinates
         /// </summary>
         public Vector2 CursorPos { get; private set; }
 
