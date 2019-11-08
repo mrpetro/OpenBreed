@@ -40,15 +40,9 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #region Public Methods
 
-        public void OnClientResize(Rectangle clientRectangle)
-        {
-            for (int i = 0; i < viewports.Count; i++)
-                viewports[i].OnClientResize(clientRectangle);
-        }
-
         public IViewport Create(float x, float y, float width, float height)
         {
-            return new Viewport(x, y, width, height);
+            return new Viewport(Module.Core, x, y, width, height);
         }
 
         public void Remove(IViewport viewport)
@@ -100,10 +94,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             {
                 //Process entities to add
                 for (int i = 0; i < toAdd.Count; i++)
-                {
                     viewports.Add(toAdd[i]);
-                    OnClientResize(Module.Core.ClientRectangle);
-                }
 
                 toAdd.Clear();
             }

@@ -71,21 +71,14 @@ namespace OpenBreed.Game.States
 
         #region Public Methods
 
-        public override void OnResize(Rectangle clientRectangle)
-        {
-            base.OnResize(clientRectangle);
-
-            UpdateViewports(clientRectangle);
-        }
+        private Viewport hoverViewport = null;
 
         public override void Update(float dt)
         {
             var keyState = Keyboard.GetState();
             var mouseState = Mouse.GetState();
 
-            Viewport hoverViewport = null;
-
-            if (gameViewport.TestScreenCoords(Core.Inputs.CursorPos))
+            if (gameViewport.TestClientCoords(Core.Inputs.CursorPos))
                 hoverViewport = gameViewport;
             else
                 hoverViewport = null;
@@ -96,13 +89,22 @@ namespace OpenBreed.Game.States
 
                 if (mouseState.IsButtonDown(MouseButton.Middle))
                 {
-                    var transf = hoverViewport.Camera.GetTransform();
-                    transf.Invert();
-                    var delta4 = Vector4.Transform(transf, new Vector4(Core.Inputs.CursorDelta));
+                    var delta4 = hoverViewport.ClientToWorldVector(Core.Inputs.CursorDelta);
                     var delta2 = new Vector2(-delta4.X, -delta4.Y);
 
                     hoverViewport.Camera.Position.Value += delta2;
                 }
+            }
+        }
+
+        private void Inputs_MouseMove(object sender, MouseMoveEventArgs e)
+        {
+            //Console.WriteLine($"ScreenPos: {CoreTools.ToConsole(Core.Inputs.CursorPos)}");
+
+            if (hoverViewport != null)
+            {
+                //Console.WriteLine($"ViewportPos: {CoreTools.ToConsole(hoverViewport.FromClientPoint(Core.Inputs.CursorPos))}");
+                Console.WriteLine($"WorldPos: {CoreTools.ToConsole(hoverViewport.ClientToWorldPoint(Core.Inputs.CursorPos))}");
             }
         }
 
@@ -115,8 +117,7 @@ namespace OpenBreed.Game.States
             InitializeWorld();
             InitializeHud();
 
-            UpdateViewports(Core.ClientRectangle);
-
+            Core.Inputs.MouseMove += Inputs_MouseMove;
             Core.Inputs.KeyDown += Inputs_KeyDown;
 
             Core.Rendering.Viewports.Add(gameViewport);
@@ -130,19 +131,6 @@ namespace OpenBreed.Game.States
             Console.WriteLine("Keyboard arrows  = Control arrow actor");
         }
 
-        private void UpdateViewports(Rectangle clientRectangle)
-        {
-            gameViewport.X = clientRectangle.X + 25;
-            gameViewport.Y = clientRectangle.Y + 25;
-            gameViewport.Width = clientRectangle.Width - 50;
-            gameViewport.Height = clientRectangle.Height - 50;
-
-            hudViewport.X = clientRectangle.X + 25;
-            hudViewport.Y = clientRectangle.Y + 25;
-            hudViewport.Width = clientRectangle.Width - 50;
-            hudViewport.Height = clientRectangle.Height - 50;
-        }
-
         protected override void OnLeave()
         {
             GameWorld.RemoveAllEntities();
@@ -154,6 +142,7 @@ namespace OpenBreed.Game.States
             Core.Rendering.Viewports.Remove(gameViewport);
 
             Core.Inputs.KeyDown -= Inputs_KeyDown;
+            Core.Inputs.MouseMove -= Inputs_MouseMove;
             Core.Players.LooseAllControls();
         }
 
@@ -178,13 +167,15 @@ namespace OpenBreed.Game.States
 
             var cameraBuilder = new CameraBuilder(Core);
 
-            cameraBuilder.SetPosition(new Vector2(320, 280));
+            cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);
-            cameraBuilder.SetZoom(1);
+            cameraBuilder.SetZoom(1.0f);
             HudCamera = (CameraEntity)cameraBuilder.Build();
             HudWorld.AddEntity(HudCamera);
 
-            hudViewport = (Viewport)Core.Rendering.Viewports.Create(0, 0, 540, 380);
+            hudViewport = (Viewport)Core.Rendering.Viewports.Create(0.0f,0.0f, 1.0f , 1.0f);
+            hudViewport.DrawBorder = true;
+            hudViewport.Clipping = false;
             hudViewport.Camera = HudCamera;
 
             var algerian50 = Core.Rendering.Fonts.Create("ALGERIAN", 50);
@@ -197,7 +188,7 @@ namespace OpenBreed.Game.States
 
             var fpsEntity = Core.Entities.Create();
 
-            fpsEntity.Add(Position.Create(0, 400));
+            fpsEntity.Add(Position.Create(0, 0));
             fpsEntity.Add(Text.Create(arial12.Id, Vector2.Zero, "0 fps"));
             HudWorld.AddEntity(fpsEntity);
 
@@ -211,13 +202,15 @@ namespace OpenBreed.Game.States
             var cameraBuilder = new CameraBuilder(Core);
 
             //Resources
-            cameraBuilder.SetPosition(new Vector2(64, 64));
+            cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);
-            cameraBuilder.SetZoom(1);
+            cameraBuilder.SetZoom(1.0f);
             GameCamera = (CameraEntity)cameraBuilder.Build();
             GameWorld.AddEntity(GameCamera);
 
-            gameViewport = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
+            gameViewport = (Viewport)Core.Rendering.Viewports.Create(0.05f, 0.05f, 0.9f, 0.9f);
+            gameViewport.DrawBorder = true;
+            gameViewport.Clipping = false;
             gameViewport.Camera = GameCamera;
 
             var blockBuilder = new WorldBlockBuilder(Core);

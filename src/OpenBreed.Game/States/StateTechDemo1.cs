@@ -78,25 +78,18 @@ namespace OpenBreed.Game.States
 
         #region Public Methods
 
-        public override void OnResize(Rectangle clientRectangle)
-        {
-            base.OnResize(clientRectangle);
-
-            UpdateViewports(clientRectangle);
-        }
+        private Viewport hoverViewport = null;
 
         public override void Update(float dt)
         {
             var keyState = Keyboard.GetState();
             var mouseState = Mouse.GetState();
 
-            Viewport hoverViewport = null;
-
-            if (viewportA.TestScreenCoords(Core.Inputs.CursorPos))
+            if (viewportA.TestClientCoords(Core.Inputs.CursorPos))
                 hoverViewport = viewportA;
-            else if (viewportB.TestScreenCoords(Core.Inputs.CursorPos))
+            else if (viewportB.TestClientCoords(Core.Inputs.CursorPos))
                 hoverViewport = viewportB;
-            else if (viewportC.TestScreenCoords(Core.Inputs.CursorPos))
+            else if (viewportC.TestClientCoords(Core.Inputs.CursorPos))
                 hoverViewport = viewportC;
             else
                 hoverViewport = null;
@@ -107,9 +100,7 @@ namespace OpenBreed.Game.States
 
                 if (mouseState.IsButtonDown(MouseButton.Middle))
                 {
-                    var transf = hoverViewport.Camera.GetTransform();
-                    transf.Invert();
-                    var delta4 = Vector4.Transform(transf, new Vector4(Core.Inputs.CursorDelta));
+                    var delta4 = hoverViewport.ClientToWorldVector(Core.Inputs.CursorDelta);
                     var delta2 = new Vector2(-delta4.X, -delta4.Y);
 
                     hoverViewport.Camera.Position.Value += delta2;
@@ -124,8 +115,6 @@ namespace OpenBreed.Game.States
         protected override void OnEnter()
         {
             InitializeWorld();
-
-            UpdateViewports(Core.ClientRectangle);
 
             Console.Clear();
             Console.WriteLine("---------- Viewports & Cameras --------");
@@ -144,24 +133,6 @@ namespace OpenBreed.Game.States
         #endregion Protected Methods
 
         #region Private Methods
-
-        private void UpdateViewports(Rectangle clientRectangle)
-        {
-            viewportA.X = clientRectangle.X + 25;
-            viewportA.Y = clientRectangle.Y + 25;
-            viewportA.Width = clientRectangle.Width / 2 - 25;
-            viewportA.Height = clientRectangle.Height / 2 - 25;
-
-            viewportB.X = clientRectangle.X + 25 + clientRectangle.Width / 2;
-            viewportB.Y = clientRectangle.Y + 25;
-            viewportB.Width = clientRectangle.Width / 2 - 50;
-            viewportB.Height = clientRectangle.Height / 2 - 25;
-
-            viewportC.X = clientRectangle.X + 25;
-            viewportC.Y = clientRectangle.Y + 25 + clientRectangle.Height / 2;
-            viewportC.Width = clientRectangle.Width - 50;
-            viewportC.Height = clientRectangle.Height - clientRectangle.Height / 2 - 50;
-        }
 
         private void Inputs_KeyDown(object sender, KeyboardKeyEventArgs e)
         {
@@ -184,6 +155,7 @@ namespace OpenBreed.Game.States
             Core.Rendering.Viewports.Remove(viewportC);
 
             Core.Inputs.KeyDown -= Inputs_KeyDown;
+            Core.Inputs.MouseMove -= Inputs_MouseMove;
             Core.Players.LooseAllControls();
         }
 
@@ -208,13 +180,19 @@ namespace OpenBreed.Game.States
             Camera2 = (CameraEntity)cameraBuilder.Build();
             World.AddEntity(Camera2);
 
-            viewportA = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
+            viewportA = (Viewport)Core.Rendering.Viewports.Create(0.05f, 0.05f, 0.45f, 0.45f);
+            viewportA.Clipping = true;
+            viewportA.DrawBorder = true;
             viewportA.Camera = Camera1;
 
-            viewportB = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
+            viewportB = (Viewport)Core.Rendering.Viewports.Create(0.55f, 0.05f, 0.40f, 0.45f);
+            viewportB.Clipping = true;
+            viewportB.DrawBorder = true;
             viewportB.Camera = Camera2;
 
-            viewportC = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
+            viewportC = (Viewport)Core.Rendering.Viewports.Create(0.05f, 0.55f, 0.90f, 0.40f);
+            viewportC.Clipping = true;
+            viewportC.DrawBorder = true;
             viewportC.Camera = Camera2;
 
             Core.Worlds.Add(World);
@@ -259,10 +237,21 @@ namespace OpenBreed.Game.States
             }
 
             Core.Inputs.KeyDown += Inputs_KeyDown;
+            Core.Inputs.MouseMove += Inputs_MouseMove;
 
             Core.Rendering.Viewports.Add(viewportA);
             Core.Rendering.Viewports.Add(viewportB);
             Core.Rendering.Viewports.Add(viewportC);
+        }
+
+        private void Inputs_MouseMove(object sender, MouseMoveEventArgs e)
+        {
+            //Console.WriteLine($"ScreenPos: {CoreTools.ToConsole(Core.Inputs.CursorPos)}");
+
+            if (hoverViewport != null)
+            {
+                Console.WriteLine($"ViewportPos: {CoreTools.ToConsole(hoverViewport.FromClientPoint(Core.Inputs.CursorPos))}");
+            }
         }
 
         #endregion Private Methods

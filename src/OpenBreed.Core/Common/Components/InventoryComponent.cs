@@ -11,6 +11,24 @@ namespace OpenBreed.Core.Common.Components
 
         #endregion Private Fields
 
+        #region Public Constructors
+
+        public Bag(string name)
+        {
+            Name = name;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        /// <summary>
+        /// Name of this bag. I.e. "Backpack"
+        /// </summary>
+        public string Name { get; }
+
+        #endregion Public Properties
+
         #region Public Methods
 
         public void AddItem(int itemId, int quantity = 1)

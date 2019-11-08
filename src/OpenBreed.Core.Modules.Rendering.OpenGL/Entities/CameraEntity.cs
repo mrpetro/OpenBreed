@@ -6,6 +6,7 @@ using OpenTK.Graphics.OpenGL;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Common.Systems.Components;
+using System;
 
 namespace OpenBreed.Core.Modules.Rendering.Entities
 {
@@ -17,8 +18,12 @@ namespace OpenBreed.Core.Modules.Rendering.Entities
     {
         #region Public Constructors
 
+        ICore core;
+
         public CameraEntity(CameraBuilder builder) : base(builder.Core)
         {
+            core = builder.Core;
+
             Position = Common.Systems.Components.Position.Create(builder.position);
             Rotation = builder.rotation;
             Zoom = builder.zoom;
@@ -41,13 +46,36 @@ namespace OpenBreed.Core.Modules.Rendering.Entities
 
         #region Public Methods
 
-        public Matrix4 GetTransform()
+        //public Vector2 GetScreenToWorld(Vector2 worldPosition)
+        //{
+
+        //}
+
+        //public Vector2 GetViewportToWorld(Vector2 worldPosition)
+        //{
+
+        //}
+
+        //public Vector2 GetWorldToScreen(Vector2 worldPosition)
+        //{
+
+        //}
+
+        //public Vector2 GetWorldToViewport(Vector2 worldPosition)
+        //{
+
+        //}
+
+        public Matrix4 Transform
         {
-            var transform = Matrix4.Identity;
-            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-Position.Value.X, -Position.Value.Y, 0));
-            transform = Matrix4.Mult(transform, Matrix4.CreateRotationZ(-Rotation));
-            transform = Matrix4.Mult(transform, Matrix4.CreateScale(Zoom, Zoom, 1.0f));
-            return transform;
+            get
+            {
+                var transform = Matrix4.Identity;
+                transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-Position.Value.X, -Position.Value.Y, 0.0f));
+                transform = Matrix4.Mult(transform, Matrix4.CreateRotationZ(-Rotation));
+                transform = Matrix4.Mult(transform, Matrix4.CreateScale(Zoom, Zoom, 1.0f));
+                return transform;
+            }
         }
 
         #endregion Public Methods

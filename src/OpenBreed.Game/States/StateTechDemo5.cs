@@ -74,13 +74,6 @@ namespace OpenBreed.Game.States
 
         #region Public Methods
 
-        public override void OnResize(Rectangle clientRectangle)
-        {
-            base.OnResize(clientRectangle);
-
-            UpdateViewports(clientRectangle);
-        }
-
         public override void Update(float dt)
         {
             var keyState = Keyboard.GetState();
@@ -88,7 +81,7 @@ namespace OpenBreed.Game.States
 
             Viewport hoverViewport = null;
 
-            if (gameViewport.TestScreenCoords(Core.Inputs.CursorPos))
+            if (gameViewport.TestClientCoords(Core.Inputs.CursorPos))
                 hoverViewport = gameViewport;
             else
                 hoverViewport = null;
@@ -99,11 +92,9 @@ namespace OpenBreed.Game.States
 
                 if (mouseState.IsButtonDown(MouseButton.Middle))
                 {
-                    var transf = hoverViewport.Camera.GetTransform();
-                    transf.Invert();
-                    var delta4 = Vector4.Transform(transf, new Vector4(Core.Inputs.CursorDelta));
+                    var delta4 = hoverViewport.ClientToWorldVector(Core.Inputs.CursorDelta);
                     var delta2 = new Vector2(-delta4.X, -delta4.Y);
- 
+
                     hoverViewport.Camera.Position.Value += delta2;
                 }
              }
@@ -128,8 +119,6 @@ namespace OpenBreed.Game.States
         {
             InitializeWorld();
 
-            UpdateViewports(Core.ClientRectangle);
-
             Core.Inputs.KeyDown += Inputs_KeyDown;
             Core.Rendering.Viewports.Add(gameViewport);
 
@@ -139,14 +128,6 @@ namespace OpenBreed.Game.States
             Console.WriteLine("Constrols:");
             Console.WriteLine("RMB + Move mouse cursor = Camera control over hovered viewport");
             Console.WriteLine("Keyboard arrows  = Control arrow actor");
-        }
-
-        private void UpdateViewports(Rectangle clientRectangle)
-        {
-            gameViewport.X = clientRectangle.X + 25;
-            gameViewport.Y = clientRectangle.Y + 25;
-            gameViewport.Width = clientRectangle.Width - 50;
-            gameViewport.Height = clientRectangle.Height - 50;
         }
 
         protected override void OnLeave()
@@ -177,7 +158,7 @@ namespace OpenBreed.Game.States
             GameWorld.AddEntity(GameCamera);
 
 
-            gameViewport = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
+            gameViewport = (Viewport)Core.Rendering.Viewports.Create(0.05f, 0.05f, 0.90f, 0.90f);
             gameViewport.Camera = GameCamera;
 
             var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288));

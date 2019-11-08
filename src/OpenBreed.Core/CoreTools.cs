@@ -1,5 +1,7 @@
-﻿using System;
+﻿using OpenTK;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +20,11 @@ namespace OpenBreed.Core
         public static void ThrowComponentRequiredException<T>()
         {
             throw new InvalidOperationException($"Component {typeof(T)} required");
+        }
+
+        public static string ToConsole(Vector2 point)
+        {
+            return string.Format(CultureInfo.InvariantCulture ,"{0:0.000}, {1:0.000}", point.X, point.Y);
         }
     }
 }
