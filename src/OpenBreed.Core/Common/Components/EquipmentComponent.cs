@@ -2,7 +2,7 @@
 
 namespace OpenBreed.Core.Common.Components
 {
-    public class Slot
+    public struct Slot
     {
         #region Public Constructors
 
@@ -16,7 +16,14 @@ namespace OpenBreed.Core.Common.Components
 
         #region Public Properties
 
+        /// <summary>
+        /// Name of this slot. I.e. "Shoulder", "Head", "Torso", "Hand", etc...
+        /// </summary>
         public string Name { get; }
+
+        /// <summary>
+        /// Id of item which occupies this equipment slot
+        /// </summary>
         public int ItemId { get; set; }
 
         #endregion Public Properties

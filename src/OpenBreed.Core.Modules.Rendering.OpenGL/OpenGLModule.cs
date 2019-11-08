@@ -113,6 +113,8 @@ namespace OpenBreed.Core.Modules.Rendering
 
             GL.PushMatrix();
 
+            GL.Scale(Core.ClientRectangle.Width, Core.ClientRectangle.Height, 1.0f);
+
             viewportMan.Draw(dt);
 
             DrawCursor();
@@ -137,9 +139,9 @@ namespace OpenBreed.Core.Modules.Rendering
 
             GL.Color3(1.0f, 0.0f, 0.0f);
             GL.Begin(PrimitiveType.Triangles);
-            GL.Vertex3(0, -20, 0.0);
+            GL.Vertex3(0, -0.03, 0.0);
             GL.Vertex3(0, 0, 0.0);
-            GL.Vertex3(10, -20, 0.0);
+            GL.Vertex3(0.015, -0.03, 0.0);
             GL.End();
 
             GL.PopMatrix();

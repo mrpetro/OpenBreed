@@ -19,6 +19,7 @@ using OpenBreed.Game.Entities.Actor.States.Attacking;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Physics.Helpers;
 using OpenBreed.Game.Entities.Actor.States.Rotation;
+using OpenBreed.Core.Common.Components;
 
 namespace OpenBreed.Game.Entities.Actor
 {
@@ -121,6 +122,8 @@ namespace OpenBreed.Game.Entities.Actor
             actor.Add(Thrust.Create(0, 0));
             actor.Add(Velocity.Create(0, 0));
             actor.Add(Direction.Create(1, 0));
+            actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
+            actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
             actor.Add(AxisAlignedBoxShape.Create(0, 0, 32, 32));
             actor.Add(new Motion());
             actor.Add(Body.Create(1.0f, 0.0f, "Dynamic", (e,c) => OnCollision(actor,e,c)));

@@ -41,8 +41,6 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         /// <param name="viewport">Viewport to remove</param>
         void Remove(IViewport viewport);
 
-        void OnClientResize(Rectangle clientRectangle);
-
         #endregion Public Methods
     }
 }

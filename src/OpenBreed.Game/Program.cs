@@ -98,11 +98,14 @@ namespace OpenBreed.Game
         {
             get
             {
-                var transf = Matrix4.CreateScale(1.0f, -1.0f, 0.0f);
-                transf *= Matrix4.CreateTranslation(0.0f, ClientRectangle.Height, 0.0f);
+                var transf = Matrix4.CreateScale(ClientRectangle.Width, -ClientRectangle.Height, 1.0f);
+                transf.Invert();
+                transf = Matrix4.Mult(transf, Matrix4.CreateTranslation(0.0f, 1.0f, 0.0f));
                 return transf;
             }
         }
+
+        public float ClientRatio { get { return (float)ClientRectangle.Width / (float)ClientRectangle.Height; } }
 
         #endregion Public Properties
 
@@ -159,11 +162,6 @@ namespace OpenBreed.Game
             Inputs.OnKeyPress(e);
         }
 
-        private void RegisterItems()
-        {
-            Items.Register(new CreditsItem());
-        }
-
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -217,7 +215,7 @@ namespace OpenBreed.Game
             StateMachine.RegisterState(new StateTechDemo5(this));
             StateMachine.RegisterState(new StateTechDemo6(this));
             //StateMan.RegisterState(new MenuState(this));
-            StateMachine.SetNextState(StateTechDemo6.ID);
+            StateMachine.SetNextState(StateTechDemo4.ID);
             StateMachine.ChangeState();
 
             //GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.One);                  // Select The Type Of Blending
@@ -246,8 +244,6 @@ namespace OpenBreed.Game
 
             GL.LoadMatrix(ref ortho);
             //GL.Ortho(0, ClientRectangle.Width, 0, ClientRectangle.Height, 0, 1); // Origin in lower-left corner
-
-            Rendering.Viewports.OnClientResize(ClientRectangle);
 
             StateMachine.OnResize(ClientRectangle);
         }
@@ -298,8 +294,12 @@ namespace OpenBreed.Game
 
             //program.Sounds.Sounds.PlaySound(0);
 
-
             program.Run(30.0, 60.0);
+        }
+
+        private void RegisterItems()
+        {
+            Items.Register(new CreditsItem());
         }
 
         private void RegisterBlueprintParsers()

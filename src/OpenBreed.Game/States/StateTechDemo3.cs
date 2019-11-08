@@ -68,13 +68,6 @@ namespace OpenBreed.Game.States
 
         #region Public Methods
 
-        public override void OnResize(Rectangle clientRectangle)
-        {
-            base.OnResize(clientRectangle);
-
-            UpdateViewports(clientRectangle);
-        }
-
         public override void Update(float dt)
         {
             var keyState = Keyboard.GetState();
@@ -82,7 +75,7 @@ namespace OpenBreed.Game.States
 
             Viewport hoverViewport = null;
 
-            if (viewport.TestScreenCoords(Core.Inputs.CursorPos))
+            if (viewport.TestClientCoords(Core.Inputs.CursorPos))
                 hoverViewport = viewport;
             else
                 hoverViewport = null;
@@ -93,9 +86,7 @@ namespace OpenBreed.Game.States
 
                 if (mouseState.IsButtonDown(MouseButton.Middle))
                 {
-                    var transf = hoverViewport.Camera.GetTransform();
-                    transf.Invert();
-                    var delta4 = Vector4.Transform(transf, new Vector4(Core.Inputs.CursorDelta));
+                    var delta4 = hoverViewport.ClientToWorldVector(Core.Inputs.CursorDelta);
                     var delta2 = new Vector2(-delta4.X, -delta4.Y);
 
                     hoverViewport.Camera.Position.Value += delta2;
@@ -103,7 +94,7 @@ namespace OpenBreed.Game.States
 
                 if (mouseState.IsButtonDown(MouseButton.Left))
                 {
-                    var worldCoords = hoverViewport.GetWorldCoords(Core.Inputs.CursorPos);
+                    var worldCoords = hoverViewport.ClientToWorldPoint(Core.Inputs.CursorPos);
                     var moveToCommand = new MoveToCommand(actor, worldCoords);
                     moveToCommand.Execute();
                 }
@@ -117,8 +108,6 @@ namespace OpenBreed.Game.States
         protected override void OnEnter()
         {
             InitializeWorld();
-
-            UpdateViewports(Core.ClientRectangle);
 
             Console.Clear();
             Console.WriteLine("---------- Pathfinding --------");
@@ -157,14 +146,6 @@ namespace OpenBreed.Game.States
             Core.Players.LooseAllControls();
         }
 
-        private void UpdateViewports(Rectangle clientRectangle)
-        {
-            viewport.X = clientRectangle.X + 25;
-            viewport.Y = clientRectangle.Y + 25;
-            viewport.Width = clientRectangle.Width - 50;
-            viewport.Height = clientRectangle.Height - 50;
-        }
-
         private void InitializeWorld()
         {
             World = new GameWorld(Core);
@@ -178,7 +159,7 @@ namespace OpenBreed.Game.States
             Camera1 = (CameraEntity)cameraBuilder.Build();
             World.AddEntity(Camera1);
 
-            viewport = (Viewport)Core.Rendering.Viewports.Create(50, 50, 540, 380);
+            viewport = (Viewport)Core.Rendering.Viewports.Create(0.05f, 0.05f, 0.9f, 0.9f);
             viewport.Camera = Camera1;
 
             Core.Worlds.Add(World);

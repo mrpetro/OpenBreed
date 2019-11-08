@@ -104,9 +104,14 @@ namespace OpenBreed.Core
         Matrix4 ClientTransform { get; }
 
         /// <summary>
-        /// Client screen rectangle
+        /// Client display rectangle
         /// </summary>
         Rectangle ClientRectangle { get; }
+
+        /// <summary>
+        /// Client display aspect ratio
+        /// </summary>
+        float ClientRatio { get; }
 
         #endregion Public Properties
 
