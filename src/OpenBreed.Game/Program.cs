@@ -166,6 +166,8 @@ namespace OpenBreed.Game
         {
             base.OnLoad(e);
 
+            Title = $"Open Breed (Version: {appVersion} Vsync: {VSync})";
+
             RegisterItems();
 
             Inputs.RegisterHandler(new WalkingControlHandler());
@@ -268,10 +270,6 @@ namespace OpenBreed.Game
 
         protected override void OnRenderFrame(FrameEventArgs e)
         {
-            var fps = 1.0f / (float)e.Time;
-
-            Title = $"Open Breed (Version: {appVersion} Vsync: {VSync} FPS: {fps})";
-
             base.OnRenderFrame(e);
 
             Rendering.Draw((float)e.Time);

@@ -236,11 +236,14 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             return new Vector2(newPos4.X, newPos4.Y);
         }
 
-        public Vector4 ViewportToWorldPoint(Vector4 point)
+        public Vector2 ViewportToWorldPoint(Vector2 point)
         {
             var cameraT = GetCameraTransform();
             cameraT.Invert();
-            return Vector4.Transform(point, cameraT);
+            var pointLB = new Vector4(point.X, point.Y, 0.0f, 1.0f);
+            pointLB = Vector4.Transform(pointLB, cameraT);
+
+            return new Vector2(pointLB.X, pointLB.Y);
         }
 
         public Vector2 ClientToWorldPoint(Vector2 point)
@@ -269,8 +272,8 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         public void GetVisibleRectangle(out float left, out float bottom, out float right, out float top)
         {
-            var pointLB = new Vector4(0.0f, 0.0f, 0.0f, 1.0f);
-            var pointRT = new Vector4(1.0f, 1.0f, 0.0f, 1.0f);
+            var pointLB = new Vector2(0.0f, 0.0f);
+            var pointRT = new Vector2(1.0f, 1.0f);
             pointLB = ViewportToWorldPoint(pointLB);
             pointRT = ViewportToWorldPoint(pointRT);
             //pointLB = Vector4.Transform(pointLB, transf);

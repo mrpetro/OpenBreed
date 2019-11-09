@@ -16,6 +16,11 @@ namespace OpenBreed.Core.Modules.Rendering
         #region Public Properties
 
         /// <summary>
+        /// Get current rendering frames per second
+        /// </summary>
+        float Fps { get; }
+
+        /// <summary>
         /// Textures manager
         /// </summary>
         ITextureMan Textures { get; }

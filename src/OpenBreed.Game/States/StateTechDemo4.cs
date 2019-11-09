@@ -1,10 +1,12 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Entities;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
 using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems.Control.Components;
 using OpenBreed.Game.Entities.Actor;
@@ -15,6 +17,7 @@ using OpenTK;
 using OpenTK.Input;
 using System;
 using System.Drawing;
+using System.Linq;
 
 namespace OpenBreed.Game.States
 {
@@ -46,6 +49,7 @@ namespace OpenBreed.Game.States
 
         private Viewport gameViewport;
         private Viewport hudViewport;
+        private IEntity fpsTextEntity;
 
         #endregion Private Fields
 
@@ -75,6 +79,8 @@ namespace OpenBreed.Game.States
 
         public override void Update(float dt)
         {
+            fpsTextEntity.PostMsg(new TextSetMsg(fpsTextEntity, $"{Core.Rendering.Fps} fps"));
+
             var keyState = Keyboard.GetState();
             var mouseState = Mouse.GetState();
 
@@ -120,9 +126,6 @@ namespace OpenBreed.Game.States
             Core.Inputs.MouseMove += Inputs_MouseMove;
             Core.Inputs.KeyDown += Inputs_KeyDown;
 
-            Core.Rendering.Viewports.Add(gameViewport);
-            Core.Rendering.Viewports.Add(hudViewport);
-
             Console.Clear();
             Console.WriteLine("---------- Fonts & Texts --------");
             Console.WriteLine("This demo shows typical usage of fonts and texts on the screen.");
@@ -164,19 +167,21 @@ namespace OpenBreed.Game.States
         private void InitializeHud()
         {
             HudWorld = new HudWorld(Core);
+            hudViewport = (Viewport)Core.Rendering.Viewports.Create(0.0f,0.0f, 1.0f , 1.0f);
+            Core.Rendering.Viewports.Add(hudViewport);
+            hudViewport.DrawBorder = true;
+            hudViewport.Clipping = false;
 
             var cameraBuilder = new CameraBuilder(Core);
-
-            cameraBuilder.SetPosition(new Vector2(0, 0));
+            cameraBuilder.SetPosition(new Vector2(0,0));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1.0f);
             HudCamera = (CameraEntity)cameraBuilder.Build();
             HudWorld.AddEntity(HudCamera);
-
-            hudViewport = (Viewport)Core.Rendering.Viewports.Create(0.0f,0.0f, 1.0f , 1.0f);
-            hudViewport.DrawBorder = true;
-            hudViewport.Clipping = false;
             hudViewport.Camera = HudCamera;
+
+            var cameraPos = HudCamera.Components.OfType<IPosition>().FirstOrDefault();
+            cameraPos.Value = hudViewport.ViewportToWorldPoint(new Vector2(1.0f, 1.0f));
 
             var algerian50 = Core.Rendering.Fonts.Create("ALGERIAN", 50);
             var arial12 = Core.Rendering.Fonts.Create("ARIAL", 12);
@@ -186,11 +191,12 @@ namespace OpenBreed.Game.States
             textEntity.Add(Text.Create(algerian50.Id, Vector2.Zero, "Alice has a cat!"));
             HudWorld.AddEntity(textEntity);
 
-            var fpsEntity = Core.Entities.Create();
+            fpsTextEntity = Core.Entities.Create();
 
-            fpsEntity.Add(Position.Create(0, 0));
-            fpsEntity.Add(Text.Create(arial12.Id, Vector2.Zero, "0 fps"));
-            HudWorld.AddEntity(fpsEntity);
+            fpsTextEntity.Add(Position.Create(0, 0));
+            fpsTextEntity.Add(Text.Create(arial12.Id, Vector2.Zero, "0 fps"));
+            HudWorld.AddEntity(fpsTextEntity);
+
 
             Core.Worlds.Add(HudWorld);
         }
@@ -209,6 +215,7 @@ namespace OpenBreed.Game.States
             GameWorld.AddEntity(GameCamera);
 
             gameViewport = (Viewport)Core.Rendering.Viewports.Create(0.05f, 0.05f, 0.9f, 0.9f);
+            Core.Rendering.Viewports.Add(gameViewport);
             gameViewport.DrawBorder = true;
             gameViewport.Clipping = true;
             //gameViewport.DrawBackgroud = true;
