@@ -88,6 +88,11 @@
             <Parameters />
           </Format>
         </EPFArchiveFileAsset>
+        <EPFArchiveFileAsset Id="Assets.HERO2.SPR" EntryName="HERO2.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+        </EPFArchiveFileAsset>
         <EPFArchiveFileAsset Id="Assets.ALIEN_A.SPR" EntryName="ALIEN_A.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf">
           <Format Name="ABTASPR">
             <Parameters />
@@ -144,6 +149,36 @@
           </Format>
         </EPFArchiveFileAsset>
         <EPFArchiveFileAsset Id="Assets.RESIDENT.SPR" EntryName="RESIDENT.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+        </EPFArchiveFileAsset>
+        <EPFArchiveFileAsset Id="Assets.COMP1.SPR" EntryName="COMP1.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+        </EPFArchiveFileAsset>
+        <EPFArchiveFileAsset Id="Assets.COMP2.SPR" EntryName="COMP2.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+        </EPFArchiveFileAsset>
+        <EPFArchiveFileAsset Id="Assets.COMP3.SPR" EntryName="COMP3.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+        </EPFArchiveFileAsset>
+        <EPFArchiveFileAsset Id="Assets.COMPFONT.SPR" EntryName="COMPFONT.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+        </EPFArchiveFileAsset>
+        <EPFArchiveFileAsset Id="Assets.STATUS.SPR" EntryName="STATUS.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf">
+          <Format Name="ABTASPR">
+            <Parameters />
+          </Format>
+        </EPFArchiveFileAsset>
+        <EPFArchiveFileAsset Id="Assets.TORCH.SPR" EntryName="TORCH.SPR" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf">
           <Format Name="ABTASPR">
             <Parameters />
           </Format>
@@ -1522,6 +1557,13 @@
             <PaletteRef>Palettes.MAP.01.ALCM</PaletteRef>
           </PaletteRefs>
         </SpriteSetFromSPR>
+        <SpriteSetFromSPR Id="SpriteSets.HERO2">
+          <DataRef>Assets.HERO2.SPR</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.01.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.01.ALCM</PaletteRef>
+          </PaletteRefs>
+        </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="SpriteSets.RESIDENT">
           <DataRef>Assets.RESIDENT.SPR</DataRef>
           <PaletteRefs>
@@ -1581,6 +1623,41 @@
         </SpriteSetFromSPR>
         <SpriteSetFromSPR Id="SpriteSets.ALIEN_X">
           <DataRef>Assets.ALIEN_X.SPR</DataRef>
+        </SpriteSetFromSPR>
+        <SpriteSetFromSPR Id="SpriteSets.COMP1">
+          <DataRef>Assets.COMP1.SPR</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+          </PaletteRefs>
+        </SpriteSetFromSPR>
+        <SpriteSetFromSPR Id="SpriteSets.COMP2">
+          <DataRef>Assets.COMP2.SPR</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+          </PaletteRefs>
+        </SpriteSetFromSPR>
+        <SpriteSetFromSPR Id="SpriteSets.COMP3">
+          <DataRef>Assets.COMP3.SPR</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+          </PaletteRefs>
+        </SpriteSetFromSPR>
+        <SpriteSetFromSPR Id="SpriteSets.COMPFONT">
+          <DataRef>Assets.COMPFONT.SPR</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+          </PaletteRefs>
+        </SpriteSetFromSPR>
+        <SpriteSetFromSPR Id="SpriteSets.TORCH">
+          <DataRef>Assets.TORCH.SPR</DataRef>
+          <PaletteRefs>
+            <PaletteRef>Palettes.MAP.02.CMAP</PaletteRef>
+            <PaletteRef>Palettes.MAP.02.ALCM</PaletteRef>
+          </PaletteRefs>
         </SpriteSetFromSPR>
       </Items>
     </SpriteSets>
@@ -2282,6 +2359,7 @@
             <SpriteSetRef>SpriteSets.SPR8A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.SPR8B</SpriteSetRef>
             <SpriteSetRef>SpriteSets.HERO1</SpriteSetRef>
+            <SpriteSetRef>SpriteSets.HERO2</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_A</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_B</SpriteSetRef>
             <SpriteSetRef>SpriteSets.ALIEN_C</SpriteSetRef>
