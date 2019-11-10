@@ -49,11 +49,11 @@ namespace OpenBreed.Common.Sprites.Readers.SPR
 
             spriteBuilder.SetIndex(index);
 
-            //Read sprite header data(height, width and sprite bitmap data offset)
-            int height = binReader.ReadInt16();
-            height = MathHelper.ToNextPowOf2(height);
+            //Read sprite header data(width, height and sprite bitmap data offset)
             int width = binReader.ReadInt16();
             width = MathHelper.ToNextPowOf2(width);
+            int height = binReader.ReadInt16();
+            height = MathHelper.ToNextPowOf2(height);
             spriteBuilder.SetSize(width, height);
             UInt16 offset = binReader.ReadUInt16();
 
@@ -83,9 +83,10 @@ namespace OpenBreed.Common.Sprites.Readers.SPR
 
                 byte lineStart = binReader.ReadByte();
                 byte lineLength = binReader.ReadByte();
+                var lineBytes = binReader.ReadBytes(lineLength);
 
                 for (byte i = 0; i < lineLength; i++)
-                    spriteData[lineNo * spriteBuilder.Width + lineStart + i] = binReader.ReadByte();
+                    spriteData[(lineStart + i) * spriteBuilder.Width + lineNo] = lineBytes[i];
             }
 
             spriteBuilder.SetData(spriteData);
