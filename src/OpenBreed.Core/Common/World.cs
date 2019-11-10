@@ -71,6 +71,16 @@ namespace OpenBreed.Core.Common
         public ReadOnlyCollection<IWorldSystem> Systems { get; }
         public WorldMessageBus MessageBus { get; }
 
+        /// <summary>
+        /// Id of this world
+        /// </summary>
+        public int Id { get; }
+
+        /// <summary>
+        /// Name of this world
+        /// </summary>
+        public string Name { get; set; }
+
         #endregion Public Properties
 
         #region Public Methods

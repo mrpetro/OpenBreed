@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenBreed.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -12,6 +13,11 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
     /// </summary>
     public interface IViewport
     {
+        /// <summary>
+        /// Entity which view is being rendered to this viewport
+        /// </summary>
+        IEntity CameraEntity { get; }
+
         void GetVisibleRectangle(out float left, out float bottom, out float right, out float top);
 
         /// <summary>

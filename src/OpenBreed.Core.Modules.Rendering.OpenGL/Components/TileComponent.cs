@@ -1,13 +1,13 @@
 ﻿namespace OpenBreed.Core.Modules.Rendering.Components
 {
     /// <summary>
-    /// Tile system cell data
+    /// Axis-aligned tile render component with same height and width
     /// </summary>
-    internal class TileCell
+    public class TileComponent : ITileComponent
     {
         #region Private Constructors
 
-        private TileCell(int atlasId, int imageId)
+        private TileComponent(int atlasId, int imageId)
         {
             AtlasId = atlasId;
             ImageId = imageId;
@@ -27,21 +27,21 @@
         /// </summary>
         public int ImageId { get; set; }
 
-        public bool IsEmpty { get { return AtlasId == -1; } }
+        public bool IsEmpty { get { return ImageId == 0 && AtlasId == 0; } }
 
         #endregion Public Properties
 
         #region Public Methods
 
         /// <summary>
-        /// Create TileCell using given tile atlas
+        /// Create tile render component using given tile atlas
         /// </summary>
-        /// <param name="atlasId">Id of tile atlas to use for this TileCell</param>
+        /// <param name="atlasId">Id of tile atlas to use for this tile component</param>
         /// <param name="imageId">Optiona initial tile atlas image id</param>
         /// <returns>Tile component</returns>
-        public static TileCell Create(int atlasId = -1, int imageId = 0)
+        public static TileComponent Create(int atlasId, int imageId = 0)
         {
-            return new TileCell(atlasId, imageId);
+            return new TileComponent(atlasId, imageId);
         }
 
         #endregion Public Methods

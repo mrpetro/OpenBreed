@@ -1,7 +1,10 @@
 ﻿using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Entities;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Entities;
+using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
@@ -72,11 +75,24 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         public float Bottom { get { return Y; } }
 
         /// <summary>
-        /// Camera that is attached to this viewport
+        /// Entity which view is being rendered to this viewport
         /// </summary>
-        public CameraEntity Camera { get; set; }
+        public IEntity CameraEntity { get; set; }
 
-        public ICamera CameraEx { get; set; }
+        /// <summary>
+        /// Zoom of camera
+        /// </summary>
+        public float Zoom
+        {
+            get
+            {
+                return CameraEntity.Components.OfType<ICameraComponent>().First().Zoom;
+            }
+            set
+            {
+                CameraEntity.Components.OfType<ICameraComponent>().First().Zoom = value;
+            }
+        }
 
         /// <summary>
         /// Height of this viewport
@@ -135,6 +151,16 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         #endregion Public Properties
 
         #region Public Methods
+
+        public void ScrollBy(Vector2 vector)
+        {
+            var cameraComponent = CameraEntity.Components.OfType<ICameraComponent>().First();
+            var position = CameraEntity.Components.OfType<IPosition>().First();
+
+            var delta4 = ClientToWorldVector(vector);
+            var delta2 = new Vector2(-delta4.X, -delta4.Y);
+            position.Value += delta2;
+        }
 
         public bool TestClientCoords(Vector2 point)
         {
@@ -218,7 +244,12 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         /// <returns>Camera transformation matrix</returns>
         public Matrix4 GetCameraTransform()
         {
-            var transform = Camera.Transform;
+            var pos = CameraEntity.Components.OfType<IPosition>().First();
+            var camera = CameraEntity.Components.OfType<ICameraComponent>().First();
+
+            var transform = Matrix4.Identity;
+            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-pos.Value.X, -pos.Value.Y, 0.0f));
+            transform = Matrix4.Mult(transform, Matrix4.CreateScale(camera.Zoom, camera.Zoom, 1.0f));
 
             var ratio = core.ClientRatio * Ratio;
             transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f, ratio, 1.0f));
@@ -301,7 +332,8 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             var transform = GetCameraTransform();
             GL.MultMatrix(ref transform);
 
-            Camera.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(this, dt));
+            CameraEntity.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(this, dt));
+            //Camera.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(this, dt));
 
             GL.PopMatrix();
         }

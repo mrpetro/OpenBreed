@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core", "OpenBreed
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Modules.Rendering.OpenGL", "OpenBreed.Core.Modules.Rendering.OpenGL\OpenBreed.Core.Modules.Rendering.OpenGL.csproj", "{EA747476-89FE-462A-9BDC-DFC2E9A64EAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Game", "OpenBreed.Game\OpenBreed.Game.csproj", "{FB015343-45FD-4482-991D-90F21613E361}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Sandbox", "OpenBreed.Sandbox\OpenBreed.Sandbox.csproj", "{FB015343-45FD-4482-991D-90F21613E361}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Modules.Physics.Generic", "OpenBreed.Core.Modules.Physics.Generic\OpenBreed.Core.Modules.Physics.Generic.csproj", "{C9F84CE7-732C-4A31-89DC-B87E3D9685BE}"
 EndProject

@@ -40,7 +40,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             msgHandler = new MsgHandler(this);
 
-            Require<ITile>();
+            Require<ITileComponent>();
             Require<Position>();
 
             GridHeight = width;
@@ -165,7 +165,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
             var cellIndex = xIndex + GridWidth * yIndex;
 
-            var tile = entity.Components.OfType<Tile>().First();
+            var tile = entity.Components.OfType<TileComponent>().First();
 
             entities[entity] = tile;
 
@@ -186,7 +186,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         private bool HandleTileSetMsg(object sender, TileSetMsg msg)
         {
-            var tile = (ITile)entities[msg.Entity];
+            var tile = (ITileComponent)entities[msg.Entity];
             if (tile == null)
                 return false;
 

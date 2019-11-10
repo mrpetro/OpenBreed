@@ -96,14 +96,14 @@ namespace OpenBreed.Core.Modules.Rendering
         /// </summary>
         /// <param name="spriteAlias">Sprite atlas alias to use</param>
         /// <returns>Sprite entity component</returns>
-        ISprite CreateSprite(string spriteAlias);
+        ISpriteComponent CreateSprite(string spriteAlias);
 
         /// <summary>
         /// Create tile entity component
         /// </summary>
         /// <param name="tileAlias">Tile atlas alias to use</param>
         /// <returns>Tile entity component</returns>
-        ITile CreateTile(string tileAtlas);
+        ITileComponent CreateTile(string tileAtlas);
 
         void Cleanup();
 

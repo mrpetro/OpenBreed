@@ -128,16 +128,16 @@ namespace OpenBreed.Core.Modules.Rendering
             viewportMan.Cleanup();
         }
 
-        public ISprite CreateSprite(string spriteAlias)
+        public ISpriteComponent CreateSprite(string spriteAlias)
         {
             var atlas = Sprites.GetByAlias(spriteAlias);
-            return Sprite.Create(atlas.Id);
+            return SpriteComponent.Create(atlas.Id);
         }
 
-        public ITile CreateTile(string tileAtlas)
+        public ITileComponent CreateTile(string tileAtlas)
         {
             var atlas = Tiles.GetByAlias(tileAtlas);
-            return Tile.Create(atlas.Id);
+            return TileComponent.Create(atlas.Id);
         }
 
         #endregion Public Methods

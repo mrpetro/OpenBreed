@@ -1,5 +1,7 @@
-﻿using OpenBreed.Core.Entities;
+﻿using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Entities;
 using OpenBreed.Core.Entities.Builders;
+using OpenBreed.Core.Modules.Rendering.Components;
 using OpenTK;
 
 namespace OpenBreed.Core.Modules.Rendering.Entities.Builders
@@ -26,7 +28,10 @@ namespace OpenBreed.Core.Modules.Rendering.Entities.Builders
 
         public override IEntity Build()
         {
-            return new CameraEntity(this);
+            var entity = Core.Entities.Create();
+            entity.Add(Position.Create(position));
+            entity.Add(CameraComponent.Create(1.0f));
+            return entity;
         }
 
         public void SetPosition(Vector2 position)

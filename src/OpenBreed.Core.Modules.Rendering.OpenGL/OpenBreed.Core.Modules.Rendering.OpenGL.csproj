@@ -48,14 +48,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\Camera.cs" />
-    <Compile Include="Components\Sprite.cs" />
-    <Compile Include="Components\Text.cs" />
+    <Compile Include="Components\CameraComponent.cs" />
+    <Compile Include="Components\SpriteComponent.cs" />
+    <Compile Include="Components\TextComponent.cs" />
     <Compile Include="Components\TileCell.cs" />
-    <Compile Include="Components\Tile.cs" />
+    <Compile Include="Components\TileComponent.cs" />
     <Compile Include="Components\Wireframe.cs" />
     <Compile Include="Entities\Builders\CameraBuilder.cs" />
-    <Compile Include="Entities\CameraEntity.cs" />
     <Compile Include="Helpers\Builders\FontAtlasBuilder.cs" />
     <Compile Include="Helpers\Builders\SpriteAtlasBuilder.cs" />
     <Compile Include="Helpers\Builders\StampBuilder.cs" />
