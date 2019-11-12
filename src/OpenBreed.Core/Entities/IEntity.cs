@@ -59,6 +59,11 @@ namespace OpenBreed.Core.Entities
         /// </summary>
         object DebugData { get; set; }
 
+        /// <summary>
+        /// Property for user purpose data
+        /// </summary>
+        object Tag { get; set; }
+
         #endregion Public Properties
 
         #region Public Methods

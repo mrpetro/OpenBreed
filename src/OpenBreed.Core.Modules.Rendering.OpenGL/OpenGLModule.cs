@@ -1,13 +1,9 @@
 ﻿using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
-using OpenBreed.Core.Modules.Animation.Systems;
-using OpenTK;
+using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System;
-using OpenBreed.Core.Common.Systems;
-using OpenTK.Graphics;
-using OpenBreed.Core.Common.Systems.Components;
 
 namespace OpenBreed.Core.Modules.Rendering
 {
@@ -18,6 +14,7 @@ namespace OpenBreed.Core.Modules.Rendering
         private readonly SpriteMan spriteMan;
         private readonly StampMan stampMan;
         private readonly FontMan fontMan;
+        private float fps;
         private TextureMan textureMan;
         private TileMan tileMan;
         private ViewportMan viewportMan;
@@ -55,6 +52,8 @@ namespace OpenBreed.Core.Modules.Rendering
         public IFontMan Fonts { get { return fontMan; } }
 
         public IViewportMan Viewports { get { return viewportMan; } }
+
+        public float Fps { get { return fps; } }
 
         #endregion Public Properties
 
@@ -109,6 +108,8 @@ namespace OpenBreed.Core.Modules.Rendering
 
         public void Draw(float dt)
         {
+            fps = 1.0f / dt;
+
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
             GL.PushMatrix();
@@ -125,6 +126,18 @@ namespace OpenBreed.Core.Modules.Rendering
         public void Cleanup()
         {
             viewportMan.Cleanup();
+        }
+
+        public ISpriteComponent CreateSprite(string spriteAlias, float order = 0.0f)
+        {
+            var atlas = Sprites.GetByAlias(spriteAlias);
+            return SpriteComponent.Create(atlas.Id, 0, order);
+        }
+
+        public ITileComponent CreateTile(string tileAtlas)
+        {
+            var atlas = Tiles.GetByAlias(tileAtlas);
+            return TileComponent.Create(atlas.Id);
         }
 
         #endregion Public Methods
@@ -145,18 +158,6 @@ namespace OpenBreed.Core.Modules.Rendering
             GL.End();
 
             GL.PopMatrix();
-        }
-
-        public ISprite CreateSprite(string spriteAlias)
-        {
-            var atlas = Sprites.GetByAlias(spriteAlias);
-            return Sprite.Create(atlas.Id);
-        }
-
-        public ITile CreateTile(string tileAtlas)
-        {
-            var atlas = Tiles.GetByAlias(tileAtlas);
-            return Tile.Create(atlas.Id);
         }
 
         #endregion Private Methods

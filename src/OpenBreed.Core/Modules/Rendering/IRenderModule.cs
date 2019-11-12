@@ -16,6 +16,11 @@ namespace OpenBreed.Core.Modules.Rendering
         #region Public Properties
 
         /// <summary>
+        /// Get current rendering frames per second
+        /// </summary>
+        float Fps { get; }
+
+        /// <summary>
         /// Textures manager
         /// </summary>
         ITextureMan Textures { get; }
@@ -90,15 +95,16 @@ namespace OpenBreed.Core.Modules.Rendering
         /// Create sprite entity component
         /// </summary>
         /// <param name="spriteAlias">Sprite atlas alias to use</param>
+        /// <param name="order">Initial order of rendering for this sprite</param>
         /// <returns>Sprite entity component</returns>
-        ISprite CreateSprite(string spriteAlias);
+        ISpriteComponent CreateSprite(string spriteAlias, float order = 0.0f);
 
         /// <summary>
         /// Create tile entity component
         /// </summary>
         /// <param name="tileAlias">Tile atlas alias to use</param>
         /// <returns>Tile entity component</returns>
-        ITile CreateTile(string tileAtlas);
+        ITileComponent CreateTile(string tileAtlas);
 
         void Cleanup();
 

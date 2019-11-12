@@ -1,7 +1,10 @@
 ﻿using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Entities;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Entities;
+using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
@@ -16,6 +19,8 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
     {
         #region Private Fields
 
+        private const float ZOOM_BASE = 1.0f / 512.0f;
+
         private ICore core;
 
         #endregion Private Fields
@@ -29,13 +34,14 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         /// <param name="y">Y client percent coordinate of left bottom viewport corner</param>
         /// <param name="width">Width of defined viewport</param>
         /// <param name="height">Height of defined viewport</param>
-        internal Viewport(ICore core, float x, float y, float width, float height)
+        internal Viewport(ICore core, float x, float y, float width, float height, float order)
         {
             this.core = core;
             X = x;
             Y = y;
             Width = width;
             Height = height;
+            Order = order;
 
             Clipping = true;
         }
@@ -48,6 +54,11 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         ///  Flag to draw border box of viewport
         /// </summary>
         public bool DrawBorder { get; set; }
+
+        /// <summary>
+        /// Order of drawing, higher value object is rendered on top of lower value objects
+        /// </summary>
+        public float Order { get; set; }
 
         /// <summary>
         /// Flag to clip any graphics that is outside of viewport box
@@ -70,11 +81,24 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         public float Bottom { get { return Y; } }
 
         /// <summary>
-        /// Camera that is attached to this viewport
+        /// Entity which view is being rendered to this viewport
         /// </summary>
-        public CameraEntity Camera { get; set; }
+        public IEntity CameraEntity { get; set; }
 
-        public ICamera CameraEx { get; set; }
+        /// <summary>
+        /// Zoom of camera
+        /// </summary>
+        public float Zoom
+        {
+            get
+            {
+                return CameraEntity.Components.OfType<ICameraComponent>().First().Zoom;
+            }
+            set
+            {
+                CameraEntity.Components.OfType<ICameraComponent>().First().Zoom = value;
+            }
+        }
 
         /// <summary>
         /// Height of this viewport
@@ -133,6 +157,16 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         #endregion Public Properties
 
         #region Public Methods
+
+        public void ScrollBy(Vector2 vector)
+        {
+            var cameraComponent = CameraEntity.Components.OfType<ICameraComponent>().First();
+            var position = CameraEntity.Components.OfType<IPosition>().First();
+
+            var delta4 = ClientToWorldVector(vector);
+            var delta2 = new Vector2(-delta4.X, -delta4.Y);
+            position.Value += delta2;
+        }
 
         public bool TestClientCoords(Vector2 point)
         {
@@ -216,11 +250,16 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         /// <returns>Camera transformation matrix</returns>
         public Matrix4 GetCameraTransform()
         {
-            var transform = Camera.Transform;
+            var pos = CameraEntity.Components.OfType<IPosition>().First();
+            var camera = CameraEntity.Components.OfType<ICameraComponent>().First();
 
-            var ratio = core.ClientRatio *Ratio;
+            var transform = Matrix4.Identity;
+            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-pos.Value.X, -pos.Value.Y, 0.0f));
+            transform = Matrix4.Mult(transform, Matrix4.CreateScale(camera.Zoom, camera.Zoom, 1.0f));
+
+            var ratio = core.ClientRatio * Ratio;
             transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f, ratio, 1.0f));
-            transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f / 256.0f, 1.0f / 256.0f, 1.0f));
+            transform = Matrix4.Mult(transform, Matrix4.CreateScale(ZOOM_BASE, ZOOM_BASE, 1.0f));
             transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(0.5f, 0.5f, 0.0f));
 
             return transform;
@@ -234,11 +273,14 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             return new Vector2(newPos4.X, newPos4.Y);
         }
 
-        public Vector4 ViewportToWorldPoint(Vector4 point)
+        public Vector2 ViewportToWorldPoint(Vector2 point)
         {
             var cameraT = GetCameraTransform();
             cameraT.Invert();
-            return Vector4.Transform(point, cameraT);
+            var pointLB = new Vector4(point.X, point.Y, 0.0f, 1.0f);
+            pointLB = Vector4.Transform(pointLB, cameraT);
+
+            return new Vector2(pointLB.X, pointLB.Y);
         }
 
         public Vector2 ClientToWorldPoint(Vector2 point)
@@ -267,8 +309,8 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         public void GetVisibleRectangle(out float left, out float bottom, out float right, out float top)
         {
-            var pointLB = new Vector4(0.0f, 0.0f, 0.0f, 1.0f);
-            var pointRT = new Vector4(1.0f, 1.0f, 0.0f, 1.0f);
+            var pointLB = new Vector2(0.0f, 0.0f);
+            var pointRT = new Vector2(1.0f, 1.0f);
             pointLB = ViewportToWorldPoint(pointLB);
             pointRT = ViewportToWorldPoint(pointRT);
             //pointLB = Vector4.Transform(pointLB, transf);
@@ -296,7 +338,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             var transform = GetCameraTransform();
             GL.MultMatrix(ref transform);
 
-            Camera.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(this, dt));
+            CameraEntity.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(this, dt));
 
             GL.PopMatrix();
         }
@@ -306,10 +348,10 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             //Draw background for this viewport
             GL.Color4(BackgroundColor);
             GL.Begin(PrimitiveType.Polygon);
-            GL.Vertex3(0, Height, 0.0);
+            GL.Vertex3(0, 1.0f, 0.0);
             GL.Vertex3(0, 0, 0.0);
-            GL.Vertex3(Width, 0, 0.0);
-            GL.Vertex3(Width, Height, 0.0);
+            GL.Vertex3(1.0f, 0, 0.0);
+            GL.Vertex3(1.0f, 1.0f, 0.0);
             GL.End();
         }
 

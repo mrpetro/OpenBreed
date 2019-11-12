@@ -21,7 +21,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         private MsgHandler msgHandler;
         private readonly List<IEntity> entities = new List<IEntity>();
-        private readonly List<IText> textComps = new List<IText>();
+        private readonly List<ITextComponent> textComps = new List<ITextComponent>();
         private readonly List<IPosition> positionComps = new List<IPosition>();
 
         #endregion Private Fields
@@ -32,7 +32,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             msgHandler = new MsgHandler(this);
 
-            Require<IText>();
+            Require<ITextComponent>();
             Require<IPosition>();
         }
 
@@ -82,7 +82,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Enable(EnableCap.Texture2D);
             GL.PushMatrix();
 
-            GL.Translate(position.Value.X, position.Value.Y, 0.0f);
+            GL.Translate(position.Value.X, position.Value.Y, text.Order);
 
             GL.Translate(text.Offset.X, text.Offset.Y, 0.0f);
 
@@ -111,7 +111,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         protected override void RegisterEntity(IEntity entity)
         {
             entities.Add(entity);
-            textComps.Add(entity.Components.OfType<IText>().First());
+            textComps.Add(entity.Components.OfType<ITextComponent>().First());
             positionComps.Add(entity.Components.OfType<IPosition>().First());
         }
 

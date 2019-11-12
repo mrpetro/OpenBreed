@@ -32,7 +32,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             msgHandler = new MsgHandler(this);
 
-            Require<ISprite>();
+            Require<ISpriteComponent>();
             Require<IPosition>();
         }
 
@@ -140,7 +140,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
             GL.PushMatrix();
 
-            GL.Translate((int)pack.Position.Value.X, (int)pack.Position.Value.Y, 0.0f);
+            GL.Translate((int)pack.Position.Value.X, (int)pack.Position.Value.Y, pack.Sprite.Order);
 
             var spriteAtlas = Core.Rendering.Sprites.GetById(pack.Sprite.AtlasId);
             //GL.Translate(-spriteAtlas.SpriteWidth / 2, -spriteAtlas.SpriteHeight / 2, 0.0f);
@@ -179,7 +179,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         protected override void RegisterEntity(IEntity entity)
         {
             var pack = new SpritePack(entity,
-                                      entity.Components.OfType<ISprite>().First(),
+                                      entity.Components.OfType<ISpriteComponent>().First(),
                                       entity.Components.OfType<IPosition>().First());
 
             active.Add(pack);

@@ -3,7 +3,6 @@
 - Refactor messaging / event system for consistency
 - Reimplement physics system to fit ECS design rules more if possible
 - implement trigger POC
-- implement door POC
 - implement entity emiter component (i.e. for projectiles)
 - implement implement sound system using OpenAL
 

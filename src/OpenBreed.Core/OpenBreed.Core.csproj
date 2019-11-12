@@ -107,8 +107,8 @@
     <Compile Include="Modules\Physics\Components\IBody.cs" />
     <Compile Include="Modules\Physics\Components\IPhysicsComponent.cs" />
     <Compile Include="Modules\Rendering\Components\Builders\IStampBuilder.cs" />
-    <Compile Include="Modules\Rendering\Components\ICamera.cs" />
-    <Compile Include="Modules\Rendering\Components\ITile.cs" />
+    <Compile Include="Modules\Rendering\Components\ICameraComponent.cs" />
+    <Compile Include="Modules\Rendering\Components\ITileComponent.cs" />
     <Compile Include="Modules\Rendering\Components\IWireframe.cs" />
     <Compile Include="Modules\Rendering\Helpers\IFontMan.cs" />
     <Compile Include="Modules\Rendering\Helpers\ISpriteMan.cs" />
@@ -122,8 +122,8 @@
     <Compile Include="Modules\Rendering\Helpers\ITextureMan.cs" />
     <Compile Include="Modules\ICoreModule.cs" />
     <Compile Include="Modules\Physics\IPhysicsModule.cs" />
-    <Compile Include="Modules\Rendering\Components\ISprite.cs" />
-    <Compile Include="Modules\Rendering\Components\IText.cs" />
+    <Compile Include="Modules\Rendering\Components\ISpriteComponent.cs" />
+    <Compile Include="Modules\Rendering\Components\ITextComponent.cs" />
     <Compile Include="Modules\Rendering\Helpers\IViewportMan.cs" />
     <Compile Include="Modules\Rendering\IRenderModule.cs" />
     <Compile Include="Modules\Audio\IAudioModule.cs" />
