@@ -85,17 +85,6 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
 
         #region Private Methods
 
-        private void OnControlFireChanged(object sender, IEvent e)
-        {
-            HandleControlFireChangedEvent((ControlFireChangedEvent)e);
-        }
-
-        private void HandleControlFireChangedEvent(ControlFireChangedEvent systemEvent)
-        {
-            if (systemEvent.Fire)
-                Entity.PostMsg(new StateChangeMsg(Entity, "Attacking", "Shoot"));
-        }
-
         #endregion Private Methods
     }
 }

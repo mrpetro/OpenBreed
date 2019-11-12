@@ -6,11 +6,12 @@ namespace OpenBreed.Core.Modules.Rendering.Components
     {
         #region Private Constructors
 
-        private TextComponent(int fontId, Vector2 offset, string value)
+        private TextComponent(int fontId, Vector2 offset, string value, float order)
         {
             FontId = fontId;
             Offset = offset;
             Value = value;
+            Order = order;
         }
 
         #endregion Private Constructors
@@ -32,6 +33,11 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         /// </summary>
         public string Value { get; set; }
 
+        /// <summary>
+        /// Order of drawing, higher value object is rendered on top of lower value objects
+        /// </summary>
+        public float Order { get; set; }
+
         #endregion Public Properties
 
         #region Public Methods
@@ -42,10 +48,11 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         /// <param name="fontId">Id of font to use for this text component</param>
         /// <param name="offset">Offset position from position component</param>
         /// <param name="value">Optional initial text value</param>
+        /// <param name="order">Optional initial object rendering order</param>
         /// <returns>Text component</returns>
-        public static TextComponent Create(int fontId, Vector2 offset, string value = null)
+        public static TextComponent Create(int fontId, Vector2 offset, string value = null, float order = 0.0f)
         {
-            return new TextComponent(fontId, offset, value);
+            return new TextComponent(fontId, offset, value, order);
         }
 
         #endregion Public Methods

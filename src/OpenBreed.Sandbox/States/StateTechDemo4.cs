@@ -30,8 +30,6 @@ namespace OpenBreed.Sandbox.States
 
         public const string ID = "TECH_DEMO_4";
 
-        public HudWorld HudWorld;
-
         public GameWorld GameWorld;
 
         #endregion Public Fields
@@ -48,8 +46,6 @@ namespace OpenBreed.Sandbox.States
         };
 
         private Viewport gameViewport;
-        private Viewport hudViewport;
-        private IEntity fpsTextEntity;
 
         #endregion Private Fields
 
@@ -67,7 +63,6 @@ namespace OpenBreed.Sandbox.States
         public ICore Core { get; }
 
         public IEntity GameCamera { get; private set; }
-        public IEntity HudCamera { get; private set; }
 
         public override string Name { get { return ID; } }
 
@@ -79,8 +74,6 @@ namespace OpenBreed.Sandbox.States
 
         public override void Update(float dt)
         {
-            fpsTextEntity.PostMsg(new TextSetMsg(fpsTextEntity, $"{Core.Rendering.Fps} fps"));
-
             var keyState = Keyboard.GetState();
             var mouseState = Mouse.GetState();
 
@@ -116,7 +109,6 @@ namespace OpenBreed.Sandbox.States
         protected override void OnEnter()
         {
             InitializeWorld();
-            InitializeHud();
 
             Core.Inputs.MouseMove += Inputs_MouseMove;
             Core.Inputs.KeyDown += Inputs_KeyDown;
@@ -133,10 +125,7 @@ namespace OpenBreed.Sandbox.States
         {
             GameWorld.RemoveAllEntities();
             Core.Worlds.Remove(GameWorld);
-            HudWorld.RemoveAllEntities();
-            Core.Worlds.Remove(HudWorld);
 
-            Core.Rendering.Viewports.Remove(hudViewport);
             Core.Rendering.Viewports.Remove(gameViewport);
 
             Core.Inputs.KeyDown -= Inputs_KeyDown;
@@ -157,43 +146,6 @@ namespace OpenBreed.Sandbox.States
                 pressedKey = pressedKey.Replace("Number", "");
                 Core.StateMachine.SetNextState($"TECH_DEMO_{pressedKey}");
             }
-        }
-
-        private void InitializeHud()
-        {
-            HudWorld = new HudWorld(Core);
-            hudViewport = (Viewport)Core.Rendering.Viewports.Create(0.0f,0.0f, 1.0f , 1.0f);
-            Core.Rendering.Viewports.Add(hudViewport);
-            hudViewport.DrawBorder = true;
-            hudViewport.Clipping = false;
-
-            var cameraBuilder = new CameraBuilder(Core);
-            cameraBuilder.SetPosition(new Vector2(0,0));
-            cameraBuilder.SetRotation(0.0f);
-            cameraBuilder.SetZoom(1.0f);
-            HudCamera = cameraBuilder.Build();
-            HudWorld.AddEntity(HudCamera);
-            hudViewport.CameraEntity = HudCamera;
-
-            var cameraPos = HudCamera.Components.OfType<IPosition>().FirstOrDefault();
-            cameraPos.Value = hudViewport.ViewportToWorldPoint(new Vector2(1.0f, 1.0f));
-
-            var algerian50 = Core.Rendering.Fonts.Create("ALGERIAN", 50);
-            var arial12 = Core.Rendering.Fonts.Create("ARIAL", 12);
-
-            var textEntity = Core.Entities.Create();
-            textEntity.Add(Position.Create(0, 0));
-            textEntity.Add(TextComponent.Create(algerian50.Id, Vector2.Zero, "Alice has a cat!"));
-            HudWorld.AddEntity(textEntity);
-
-            fpsTextEntity = Core.Entities.Create();
-
-            fpsTextEntity.Add(Position.Create(0, 0));
-            fpsTextEntity.Add(TextComponent.Create(arial12.Id, Vector2.Zero, "0 fps"));
-            HudWorld.AddEntity(fpsTextEntity);
-
-
-            Core.Worlds.Add(HudWorld);
         }
 
         private void InitializeWorld()

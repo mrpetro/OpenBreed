@@ -22,5 +22,10 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         /// Id of tile image from the atlas
         /// </summary>
         int ImageId { get; set; }
+
+        /// <summary>
+        /// Order of drawing, higher value object is rendered on top of lower value objects
+        /// </summary>
+        float Order { get; set; }
     }
 }

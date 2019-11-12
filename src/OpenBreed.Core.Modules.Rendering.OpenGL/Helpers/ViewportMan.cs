@@ -40,9 +40,9 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #region Public Methods
 
-        public IViewport Create(float x, float y, float width, float height)
+        public IViewport Create(float x, float y, float width, float height, float order = 0.0f)
         {
-            return new Viewport(Module.Core, x, y, width, height);
+            return new Viewport(Module.Core, x, y, width, height, order);
         }
 
         public void Remove(IViewport viewport)
@@ -95,6 +95,8 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
                 //Process entities to add
                 for (int i = 0; i < toAdd.Count; i++)
                     viewports.Add(toAdd[i]);
+
+                viewports.Sort((a, b) => { return a.Order.CompareTo(b.Order); });
 
                 toAdd.Clear();
             }

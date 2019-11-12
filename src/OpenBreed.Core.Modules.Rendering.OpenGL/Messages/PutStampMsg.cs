@@ -33,6 +33,10 @@ namespace OpenBreed.Core.Modules.Rendering.Messages
 
         public IEntity Entity { get; }
         public int StampId { get; }
+
+        /// <summary>
+        /// TODO: Implement usage of this
+        /// </summary>
         public int LayerNo { get; }
         public Vector2 Position { get; }
 

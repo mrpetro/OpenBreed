@@ -95,8 +95,9 @@ namespace OpenBreed.Core.Modules.Rendering
         /// Create sprite entity component
         /// </summary>
         /// <param name="spriteAlias">Sprite atlas alias to use</param>
+        /// <param name="order">Initial order of rendering for this sprite</param>
         /// <returns>Sprite entity component</returns>
-        ISpriteComponent CreateSprite(string spriteAlias);
+        ISpriteComponent CreateSprite(string spriteAlias, float order = 0.0f);
 
         /// <summary>
         /// Create tile entity component

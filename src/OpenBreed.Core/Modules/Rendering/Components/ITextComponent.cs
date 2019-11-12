@@ -27,5 +27,10 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         /// Actual text of this component
         /// </summary>
         string Value { get; set; }
+
+        /// <summary>
+        /// Order of drawing, higher value object is rendered on top of lower value objects
+        /// </summary>
+        float Order { get; set; }
     }
 }

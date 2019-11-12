@@ -15,9 +15,11 @@ using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Entities.Projectile;
+using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Items;
 using OpenBreed.Sandbox.States;
+using OpenBreed.Sandbox.Worlds;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
@@ -93,6 +95,8 @@ namespace OpenBreed.Sandbox
         public WorldMan Worlds { get; }
 
         public StateMan StateMachine { get; }
+
+        private HudWorld hudWorld;
 
         public Matrix4 ClientTransform
         {
@@ -196,6 +200,9 @@ namespace OpenBreed.Sandbox
             Rendering.Sprites.Create("Atlases/Sprites/Door/Horizontal", doorTex.Id, 32, 16, 5, 1, 0, 0);
             Rendering.Sprites.Create("Atlases/Sprites/Door/Vertical", doorTex.Id, 16, 32, 5, 1, 0, 16);
 
+            var teleportTex = Rendering.Textures.Create("Textures/Sprites/Teleport", @"Content\Graphics\TeleportSpriteSet.png");
+            Rendering.Sprites.Create(TeleportHelper.SPRITE_TELEPORT_ENTRY, teleportTex.Id, 32, 32, 4, 1, 0, 0);
+
             var laserTex = Rendering.Textures.Create("Textures/Sprites/Laser", @"Content\Graphics\LaserSpriteSet.png");
             Rendering.Sprites.Create("Atlases/Sprites/Projectiles/Laser", laserTex.Id, 16, 16, 8, 1, 0, 0);
 
@@ -208,7 +215,11 @@ namespace OpenBreed.Sandbox
             PickableHelper.CreateStamps(this);
             DoorHelper.CreateAnimations(this);
             ActorHelper.CreateAnimations(this);
+            TeleportHelper.CreateAnimations(this);
             ProjectileHelper.CreateAnimations(this);
+
+            hudWorld = new HudWorld(this);
+            hudWorld.Setup();
 
             StateMachine.RegisterState(new StateTechDemo1(this));
             StateMachine.RegisterState(new StateTechDemo2(this));
@@ -229,8 +240,8 @@ namespace OpenBreed.Sandbox
             //GL.Enable(EnableCap.Blend);
             //GL.BlendFunc(BlendingFactor.SrcAlpha,BlendingFactor.OneMinusSrcAlpha);
 
-            GL.DepthFunc(DepthFunction.Never);
-            //GL.Enable(EnableCap.DepthTest);
+            GL.DepthFunc(DepthFunction.Lequal);
+            GL.Enable(EnableCap.DepthTest);
         }
 
         protected override void OnResize(EventArgs e)
@@ -240,12 +251,8 @@ namespace OpenBreed.Sandbox
             GL.LoadIdentity();
             GL.Viewport(0, 0, ClientRectangle.Width, ClientRectangle.Height);
             GL.MatrixMode(MatrixMode.Modelview);
-            //GL.LoadIdentity();
-
-            var ortho = Matrix4.CreateOrthographicOffCenter(0.0f, ClientRectangle.Width, 0.0f, ClientRectangle.Height, 0.0f, 1.0f);
-
+            var ortho = Matrix4.CreateOrthographicOffCenter(0.0f, ClientRectangle.Width, 0.0f, ClientRectangle.Height, -100.0f, 100.0f);
             GL.LoadMatrix(ref ortho);
-            //GL.Ortho(0, ClientRectangle.Width, 0, ClientRectangle.Height, 0, 1); // Origin in lower-left corner
 
             StateMachine.OnResize(ClientRectangle);
         }
@@ -253,6 +260,7 @@ namespace OpenBreed.Sandbox
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             base.OnUpdateFrame(e);
+
 
             Players.ResetInputs();
             Inputs.Update();
@@ -266,6 +274,9 @@ namespace OpenBreed.Sandbox
             PostAndRaise();
             Worlds.Update((float)e.Time);
             PostAndRaise();
+
+            hudWorld.Update();
+
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)

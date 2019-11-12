@@ -27,7 +27,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         /// <param name="width">Viewport width</param>
         /// <param name="height">Viewport height</param>
         /// <returns></returns>
-        IViewport Create(float x, float y, float width, float height);
+        IViewport Create(float x, float y, float width, float height, float order = 0.0f);
 
         /// <summary>
         /// Add viewport given as parameter to render module

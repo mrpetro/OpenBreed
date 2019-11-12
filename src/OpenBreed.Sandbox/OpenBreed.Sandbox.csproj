@@ -71,6 +71,7 @@
     <Compile Include="Entities\Pickable\PickableHelper.cs" />
     <Compile Include="Entities\Pickable\States\LyingState.cs" />
     <Compile Include="Entities\Pickable\States\PickingState.cs" />
+    <Compile Include="Entities\Teleport\TeleportHelper.cs" />
     <Compile Include="Entities\Projectile\ProjectileHelper.cs" />
     <Compile Include="Entities\Projectile\States\FiredState.cs" />
     <Compile Include="Helpers\AnimHelper.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="States\StateTechDemo1.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="Worlds\GameWorld.cs" />
+    <Compile Include="Worlds\Hub.cs" />
     <Compile Include="Worlds\HudWorld.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +160,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Content\Graphics\TeleportSpriteSet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Content\Graphics\LaserSpriteSet.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -167,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Sounds\" />
+    <Folder Include="Entities\WorldGate\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

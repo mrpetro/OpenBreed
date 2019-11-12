@@ -28,6 +28,7 @@ using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Sandbox.Entities.Pickable;
 using System.Linq;
+using OpenBreed.Sandbox.Entities.Teleport;
 
 namespace OpenBreed.Sandbox.States
 {
@@ -180,6 +181,9 @@ namespace OpenBreed.Sandbox.States
             atackFsm.SetInitialState("Idle");
             rotateFsm.SetInitialState("Idle");
             GameWorld.AddEntity(actor);
+
+            var teleportExit = TeleportHelper.AddTeleportExit(Core, GameWorld, 20, 10);
+            TeleportHelper.AddTeleportEntry(Core, GameWorld, 10, 10, teleportExit.Id);
 
             var rnd = new Random();
 

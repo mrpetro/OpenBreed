@@ -34,13 +34,14 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         /// <param name="y">Y client percent coordinate of left bottom viewport corner</param>
         /// <param name="width">Width of defined viewport</param>
         /// <param name="height">Height of defined viewport</param>
-        internal Viewport(ICore core, float x, float y, float width, float height)
+        internal Viewport(ICore core, float x, float y, float width, float height, float order)
         {
             this.core = core;
             X = x;
             Y = y;
             Width = width;
             Height = height;
+            Order = order;
 
             Clipping = true;
         }
@@ -53,6 +54,11 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         ///  Flag to draw border box of viewport
         /// </summary>
         public bool DrawBorder { get; set; }
+
+        /// <summary>
+        /// Order of drawing, higher value object is rendered on top of lower value objects
+        /// </summary>
+        public float Order { get; set; }
 
         /// <summary>
         /// Flag to clip any graphics that is outside of viewport box
@@ -333,7 +339,6 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             GL.MultMatrix(ref transform);
 
             CameraEntity.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(this, dt));
-            //Camera.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(this, dt));
 
             GL.PopMatrix();
         }

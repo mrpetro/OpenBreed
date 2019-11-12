@@ -82,7 +82,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Enable(EnableCap.Texture2D);
             GL.PushMatrix();
 
-            GL.Translate(position.Value.X, position.Value.Y, 0.0f);
+            GL.Translate(position.Value.X, position.Value.Y, text.Order);
 
             GL.Translate(text.Offset.X, text.Offset.Y, 0.0f);
 

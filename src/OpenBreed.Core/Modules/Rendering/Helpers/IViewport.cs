@@ -18,6 +18,11 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         /// </summary>
         IEntity CameraEntity { get; }
 
+        /// <summary>
+        /// Order of drawing, higher value object is rendered on top of lower value objects
+        /// </summary>
+        float Order { get; set; }
+
         void GetVisibleRectangle(out float left, out float bottom, out float right, out float top);
 
         /// <summary>

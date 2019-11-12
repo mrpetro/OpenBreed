@@ -140,7 +140,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
             GL.PushMatrix();
 
-            GL.Translate((int)pack.Position.Value.X, (int)pack.Position.Value.Y, 0.0f);
+            GL.Translate((int)pack.Position.Value.X, (int)pack.Position.Value.Y, pack.Sprite.Order);
 
             var spriteAtlas = Core.Rendering.Sprites.GetById(pack.Sprite.AtlasId);
             //GL.Translate(-spriteAtlas.SpriteWidth / 2, -spriteAtlas.SpriteHeight / 2, 0.0f);

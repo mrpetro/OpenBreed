@@ -49,7 +49,7 @@ namespace OpenBreed.Core.Entities
         public ICore Core { get; }
 
         /// <summary>
-        /// User purpose data
+        /// Property for user purpose data
         /// </summary>
         public object Tag { get; set; }
 

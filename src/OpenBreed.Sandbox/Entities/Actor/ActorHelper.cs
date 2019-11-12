@@ -117,7 +117,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             var actor = core.Entities.Create();
             actor.Add(new Animator(10.0f, true));
             //actor.Add(new CollisionDebug(Core.Rendering.CreateSprite(spriteAtlas.Id)));
-            actor.Add(core.Rendering.CreateSprite("Atlases/Sprites/Arrow"));
+            actor.Add(core.Rendering.CreateSprite("Atlases/Sprites/Arrow", 1.0f));
             actor.Add(Position.Create(pos));
             actor.Add(Thrust.Create(0, 0));
             actor.Add(Velocity.Create(0, 0));

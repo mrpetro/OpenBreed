@@ -7,10 +7,11 @@
     {
         #region Private Constructors
 
-        private TileComponent(int atlasId, int imageId)
+        private TileComponent(int atlasId, int imageId, float order)
         {
             AtlasId = atlasId;
             ImageId = imageId;
+            Order = order;
         }
 
         #endregion Private Constructors
@@ -27,6 +28,11 @@
         /// </summary>
         public int ImageId { get; set; }
 
+        /// <summary>
+        /// Order of drawing, higher value object is rendered on top of lower value objects
+        /// </summary>
+        public float Order { get; set; }
+
         public bool IsEmpty { get { return ImageId == 0 && AtlasId == 0; } }
 
         #endregion Public Properties
@@ -38,10 +44,11 @@
         /// </summary>
         /// <param name="atlasId">Id of tile atlas to use for this tile component</param>
         /// <param name="imageId">Optiona initial tile atlas image id</param>
+        /// <param name="order">Optional initial object rendering order</param>
         /// <returns>Tile component</returns>
-        public static TileComponent Create(int atlasId, int imageId = 0)
+        public static TileComponent Create(int atlasId, int imageId = 0, float order = 0.0f)
         {
-            return new TileComponent(atlasId, imageId);
+            return new TileComponent(atlasId, imageId, order);
         }
 
         #endregion Public Methods
