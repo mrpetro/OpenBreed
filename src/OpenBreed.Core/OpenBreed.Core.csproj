@@ -97,6 +97,8 @@
     <Compile Include="Inputs\IPlayerInput.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="ItemsMan.cs" />
+    <Compile Include="JobMan.cs" />
+    <Compile Include="MathTools.cs" />
     <Compile Include="Modules\Animation\Helpers\IAnimation.cs" />
     <Compile Include="Modules\Animation\Helpers\IAnimMan.cs" />
     <Compile Include="Modules\Animation\IAnimationModule.cs" />

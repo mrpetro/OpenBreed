@@ -53,7 +53,7 @@ namespace OpenBreed.Core.Common.Helpers
             return false;
         }
 
-        public bool EnqueueMsg(object sender, IEntityMsg msg)
+        public bool EnqueueMsg(object sender, IMsg msg)
         {
             IMsgHandler handler = null;
             if (!handlers.TryGetValue(msg.Type, out handler))

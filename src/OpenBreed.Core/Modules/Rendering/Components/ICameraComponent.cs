@@ -13,8 +13,13 @@ namespace OpenBreed.Core.Modules.Rendering.Components
     public interface ICameraComponent : IEntityComponent
     {
         /// <summary>
-        /// Zoom factor of camera
+        /// Zoom factor of camera view
         /// </summary>
         float Zoom { get; set; }
+
+        /// <summary>
+        /// Brightness of camera view
+        /// </summary>
+        float Brightness { get; set; }
     }
 }

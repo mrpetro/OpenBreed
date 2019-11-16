@@ -29,6 +29,8 @@ using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Sandbox.Entities.Pickable;
 using System.Linq;
 using OpenBreed.Sandbox.Entities.Teleport;
+using OpenBreed.Sandbox.Entities.Camera;
+using OpenBreed.Core.Modules.Animation.Helpers;
 
 namespace OpenBreed.Sandbox.States
 {
@@ -156,7 +158,9 @@ namespace OpenBreed.Sandbox.States
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
+
             GameCamera = cameraBuilder.Build();
+            GameCamera.Add(new Animator(10.0f, false, -1, FrameTransition.LinearInterpolation));
             GameWorld.AddEntity(GameCamera);
 
 
@@ -164,6 +168,8 @@ namespace OpenBreed.Sandbox.States
             gameViewport.CameraEntity = GameCamera;
 
             var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288));
+            actor.Tag = GameCamera;
+
             actor.Add(new WalkingControl());
             actor.Add(new AttackControl());
 

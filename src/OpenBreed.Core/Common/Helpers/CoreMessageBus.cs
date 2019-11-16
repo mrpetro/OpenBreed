@@ -46,7 +46,7 @@ namespace OpenBreed.Core.Common.Helpers
             IMsgHandler handler = null;
             if (handlers.TryGetValue(msg.Type, out handler))
             {
-                if (handler.EnqueueMsg(sender, (IEntityMsg)msg))
+                if (handler.EnqueueMsg(sender, msg))
                     return;
             }
 

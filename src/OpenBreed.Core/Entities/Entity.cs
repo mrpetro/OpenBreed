@@ -78,7 +78,7 @@ namespace OpenBreed.Core.Entities
             return newFsm;
         }
 
-        public void PostMsg(IEntityMsg msg)
+        public void PostMsg(IMsg msg)
         {
             Core.MessageBus.Enqueue(this, msg);
         }

@@ -3,11 +3,10 @@ using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Entities;
-using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
+using System;
 using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Helpers
@@ -20,7 +19,8 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         #region Private Fields
 
         private const float ZOOM_BASE = 1.0f / 512.0f;
-
+        private const float BRIGHTNESS_Z_LEVEL = 50.0f;
+        private static float time = 0.0f;
         private ICore core;
 
         #endregion Private Fields
@@ -209,12 +209,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
                 //Draw rectangle shape which will clip anything inside viewport
                 GL.Color3(0.0f, 0.0f, 0.0f);
 
-                GL.Begin(PrimitiveType.Polygon);
-                GL.Vertex3(0, 1.0f, 0.0);
-                GL.Vertex3(0, 0, 0.0);
-                GL.Vertex3(1.0f, 0, 0.0);
-                GL.Vertex3(1.0f, 1.0f, 0.0);
-                GL.End();
+                DrawUnitQuad();
 
                 GL.StencilFunc(StencilFunction.Equal, 0x1, 0x1);
                 GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Keep);
@@ -232,8 +227,8 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
             if (DrawBorder)
             {
-                GL.Begin(PrimitiveType.LineLoop);
                 GL.Color4(1.0f, 0.0f, 0.0f, 1.0f);
+                GL.Begin(PrimitiveType.LineLoop);
                 GL.Vertex3(0, 1.0f, 0.0);
                 GL.Vertex3(0, 0, 0.0);
                 GL.Vertex3(1.0f, 0, 0.0);
@@ -326,33 +321,67 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #region Private Methods
 
+        private static void DrawUnitQuad()
+        {
+            GL.Begin(PrimitiveType.Polygon);
+            GL.Vertex3(0, 1.0f, 0);
+            GL.Vertex3(0, 0, 0);
+            GL.Vertex3(1.0f, 0, 0);
+            GL.Vertex3(1.0f, 1.0f, 0);
+            GL.End();
+        }
+
+        private void DrawBrightnessEffect(float brightness)
+        {
+            GL.Enable(EnableCap.Blend);
+            if (brightness > 1.0)
+            {
+                GL.BlendFunc(BlendingFactor.DstColor, BlendingFactor.One);
+                GL.Color3(brightness - 1, brightness - 1, brightness - 1);
+            }
+            else
+            {
+                GL.BlendFunc(BlendingFactor.Zero, BlendingFactor.SrcColor);
+                GL.Color3(brightness, brightness, brightness);
+            }
+
+            GL.Translate(0, 0, BRIGHTNESS_Z_LEVEL);
+            DrawUnitQuad();
+            GL.Disable(EnableCap.Blend);
+        }
+
         /// <summary>
         /// This will render world part currently visible by the camera into given viewport
         /// </summary>
         /// <param name="dt">Time step</param>
         private void DrawCameraView(float dt)
         {
-            GL.PushMatrix();
+            try
+            {
+                GL.PushMatrix();
 
-            //Apply camera transformation matrix
-            var transform = GetCameraTransform();
-            GL.MultMatrix(ref transform);
+                //Apply camera transformation matrix
+                var transform = GetCameraTransform();
+                GL.MultMatrix(ref transform);
 
-            CameraEntity.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(this, dt));
+                CameraEntity.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(this, dt));
+            }
+            finally
+            {
+                GL.PopMatrix();
+            }
 
-            GL.PopMatrix();
+            var cameraComponent = CameraEntity.Components.OfType<ICameraComponent>().First();
+
+            //Draw camera effects
+            DrawBrightnessEffect(cameraComponent.Brightness);
         }
 
         private void DrawBackground()
         {
             //Draw background for this viewport
             GL.Color4(BackgroundColor);
-            GL.Begin(PrimitiveType.Polygon);
-            GL.Vertex3(0, 1.0f, 0.0);
-            GL.Vertex3(0, 0, 0.0);
-            GL.Vertex3(1.0f, 0, 0.0);
-            GL.Vertex3(1.0f, 1.0f, 0.0);
-            GL.End();
+            DrawUnitQuad();
         }
 
         #endregion Private Methods

@@ -8,11 +8,12 @@ namespace OpenBreed.Core.Modules.Animation.Components
     {
         #region Public Constructors
 
-        public Animator(float speed = 1.0f, bool loop = false, int animId = 0)
+        public Animator(float speed = 1.0f, bool loop = false, int animId = 0, FrameTransition transition = FrameTransition.None)
         {
             Speed = speed;
             Loop = loop;
             AnimId = animId;
+            Transition = transition;
         }
 
         #endregion Public Constructors

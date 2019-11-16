@@ -33,7 +33,6 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         internal PhysicsSystem(ICore core, int gridWidth, int gridHeight) : base(core)
         {
             msgHandler = new MsgHandler(this);
-
             Require<IPhysicsComponent>();
 
             GridWidth = gridWidth;

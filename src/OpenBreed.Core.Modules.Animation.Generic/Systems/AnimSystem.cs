@@ -4,7 +4,6 @@ using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Events;
-using OpenBreed.Core.Modules.Animation.Helpers;
 using OpenBreed.Core.Modules.Animation.Messages;
 using System;
 using System.Collections.Generic;
@@ -18,6 +17,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         private readonly List<IEntity> entities = new List<IEntity>();
         private readonly List<Animator> animatorComps = new List<Animator>();
+        private readonly MsgHandler msgHandler;
 
         #endregion Private Fields
 
@@ -25,18 +25,16 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         public AnimSystem(ICore core) : base(core)
         {
+            msgHandler = new MsgHandler(this);
             Require<Animator>();
         }
 
         #endregion Public Constructors
 
-        private MsgHandler msgHandler;
-
         #region Public Methods
 
         public override void Initialize(World world)
         {
-            msgHandler = new MsgHandler(this);
 
             base.Initialize(world);
 
@@ -65,7 +63,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         public void Play(Animator animator, int animId = -1, float startPosition = 0.0f)
         {
-            if(animId != -1)
+            if (animId != -1)
                 animator.AnimId = animId;
 
             //if (data != null)

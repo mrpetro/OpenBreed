@@ -59,6 +59,11 @@ namespace OpenBreed.Core
         BlueprintMan Blueprints { get; }
 
         /// <summary>
+        /// Jobs manager
+        /// </summary>
+        JobMan Jobs { get; }
+
+        /// <summary>
         /// Entities manager
         /// </summary>
         EntityMan Entities { get; }

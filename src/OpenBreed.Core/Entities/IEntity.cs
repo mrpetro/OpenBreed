@@ -74,7 +74,7 @@ namespace OpenBreed.Core.Entities
         /// Post message of specific type
         /// </summary>
         /// <param name="message"></param>
-        void PostMsg(IEntityMsg message);
+        void PostMsg(IMsg message);
 
         /// <summary>
         /// Raise event of specific type

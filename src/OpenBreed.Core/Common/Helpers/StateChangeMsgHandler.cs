@@ -42,7 +42,7 @@ namespace OpenBreed.Core.Common.Helpers
             return true;
         }
 
-        public bool EnqueueMsg(object sender, IEntityMsg msg)
+        public bool EnqueueMsg(object sender, IMsg msg)
         {
             return false;
         }
