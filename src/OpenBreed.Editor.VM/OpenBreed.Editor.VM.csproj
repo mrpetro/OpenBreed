@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OpenBreed.Editor.VM</RootNamespace>
     <AssemblyName>OpenBreed.Editor.VM</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -224,10 +224,6 @@
     <ProjectReference Include="..\OpenBreed.Editor.Cfg\OpenBreed.Editor.Cfg.csproj">
       <Project>{91f957f8-8c01-462c-9fe3-276bb56a7b7e}</Project>
       <Name>OpenBreed.Editor.Cfg</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ToolsABTA\ToolsABTA.csproj">
-      <Project>{27037E0B-F963-4F7B-975D-741D683D66C7}</Project>
-      <Name>ToolsABTA</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

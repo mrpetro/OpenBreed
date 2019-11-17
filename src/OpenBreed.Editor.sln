@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Editor.VM", "OpenBreed.Editor.VM\OpenBreed.Editor.VM.csproj", "{4E57CB0D-A13B-48A9-9D47-52B96D75F283}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolsABTA", "ToolsABTA\ToolsABTA.csproj", "{27037E0B-F963-4F7B-975D-741D683D66C7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Editor.Cfg", "OpenBreed.Editor.Cfg\OpenBreed.Editor.Cfg.csproj", "{91F957F8-8C01-462C-9FE3-276BB56A7B7E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Common", "..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj", "{9894E7F4-7C85-4173-9D05-F50CFD2E4163}"
@@ -59,24 +57,6 @@ Global
 		{4E57CB0D-A13B-48A9-9D47-52B96D75F283}.Release|x64.Build.0 = Release|Any CPU
 		{4E57CB0D-A13B-48A9-9D47-52B96D75F283}.Release|x86.ActiveCfg = Release|Any CPU
 		{4E57CB0D-A13B-48A9-9D47-52B96D75F283}.Release|x86.Build.0 = Release|Any CPU
-		{27037E0B-F963-4F7B-975D-741D683D66C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{27037E0B-F963-4F7B-975D-741D683D66C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{27037E0B-F963-4F7B-975D-741D683D66C7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{27037E0B-F963-4F7B-975D-741D683D66C7}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{27037E0B-F963-4F7B-975D-741D683D66C7}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{27037E0B-F963-4F7B-975D-741D683D66C7}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{27037E0B-F963-4F7B-975D-741D683D66C7}.Debug|x64.Build.0 = Debug|Any CPU
-		{27037E0B-F963-4F7B-975D-741D683D66C7}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{27037E0B-F963-4F7B-975D-741D683D66C7}.Debug|x86.Build.0 = Debug|Any CPU
-		{27037E0B-F963-4F7B-975D-741D683D66C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{27037E0B-F963-4F7B-975D-741D683D66C7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{27037E0B-F963-4F7B-975D-741D683D66C7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{27037E0B-F963-4F7B-975D-741D683D66C7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{27037E0B-F963-4F7B-975D-741D683D66C7}.Release|Win32.ActiveCfg = Release|Any CPU
-		{27037E0B-F963-4F7B-975D-741D683D66C7}.Release|x64.ActiveCfg = Release|Any CPU
-		{27037E0B-F963-4F7B-975D-741D683D66C7}.Release|x64.Build.0 = Release|Any CPU
-		{27037E0B-F963-4F7B-975D-741D683D66C7}.Release|x86.ActiveCfg = Release|Any CPU
-		{27037E0B-F963-4F7B-975D-741D683D66C7}.Release|x86.Build.0 = Release|Any CPU
 		{91F957F8-8C01-462C-9FE3-276BB56A7B7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{91F957F8-8C01-462C-9FE3-276BB56A7B7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91F957F8-8C01-462C-9FE3-276BB56A7B7E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
