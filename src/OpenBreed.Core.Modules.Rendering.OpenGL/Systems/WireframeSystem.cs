@@ -19,7 +19,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         private readonly List<IEntity> entities = new List<IEntity>();
         private readonly List<IWireframe> wireframeComps = new List<IWireframe>();
-        private readonly List<IPosition> positionComps = new List<IPosition>();
+        private readonly List<Position> positionComps = new List<Position>();
         private readonly List<IShapeComponent> shapeComps = new List<IShapeComponent>();
 
         #endregion Private Fields
@@ -29,7 +29,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         public WireframeSystem(ICore core) : base(core)
         {
             Require<IWireframe>();
-            Require<IPosition>();
+            Require<Position>();
             Require<IShapeComponent>();
         }
 
@@ -128,7 +128,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             entities.Add(entity);
             wireframeComps.Add(entity.Components.OfType<IWireframe>().First());
-            positionComps.Add(entity.Components.OfType<IPosition>().First());
+            positionComps.Add(entity.Components.OfType<Position>().First());
             shapeComps.Add(entity.Components.OfType<IShapeComponent>().First());
         }
 

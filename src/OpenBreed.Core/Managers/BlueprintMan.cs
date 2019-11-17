@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace OpenBreed.Core
+namespace OpenBreed.Core.Managers
 {
     public class BlueprintMan
     {

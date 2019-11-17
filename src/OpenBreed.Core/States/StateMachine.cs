@@ -133,7 +133,7 @@ namespace OpenBreed.Core.States
             currentState.EnterState();
         }
 
-        public bool EnqueueMsg(object sender, IEntityMsg msg)
+        public bool EnqueueMsg(object sender, IMsg msg)
         {
             return false;
         }

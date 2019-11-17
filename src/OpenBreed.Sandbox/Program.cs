@@ -4,6 +4,7 @@ using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Inputs;
+using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Audio;
@@ -12,12 +13,14 @@ using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems.Control.Systems;
 using OpenBreed.Sandbox.Entities.Actor;
+using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Items;
+using OpenBreed.Sandbox.Managers;
 using OpenBreed.Sandbox.States;
 using OpenBreed.Sandbox.Worlds;
 using OpenTK;
@@ -46,6 +49,8 @@ namespace OpenBreed.Sandbox
             appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
             Logging = new LogMan(this);
+            MessageBus = new CoreMessageBus(this);
+            EventBus = new CoreEventBus(this);
             Rendering = new OpenGLModule(this);
             Sounds = new OpenALModule(this);
             Physics = new PhysicsModule(this);
@@ -57,8 +62,8 @@ namespace OpenBreed.Sandbox
             Inputs = new InputsMan(this);
             Worlds = new WorldMan(this);
             StateMachine = new StateMan(this);
-            MessageBus = new CoreMessageBus(this);
-            EventBus = new CoreEventBus(this);
+
+            Jobs = new JobMan(this);
             VSync = VSyncMode.On;
 
             RegisterBlueprintParsers();
@@ -83,6 +88,8 @@ namespace OpenBreed.Sandbox
         public PlayersMan Players { get; }
 
         public ILogMan Logging { get; }
+
+        public JobMan Jobs { get; }
 
         public ItemsMan Items { get; }
 
@@ -211,6 +218,7 @@ namespace OpenBreed.Sandbox
 
             //Blueprints.Import(@".\Content\BPHorizontalDoor.xml");
 
+            CameraHelper.CreateAnimations(this);
             DoorHelper.CreateStamps(this);
             PickableHelper.CreateStamps(this);
             DoorHelper.CreateAnimations(this);
@@ -271,6 +279,8 @@ namespace OpenBreed.Sandbox
             Worlds.Cleanup();
             PostAndRaise();
             StateMachine.Update((float)e.Time);
+            PostAndRaise();
+            Jobs.Update((float)e.Time);
             PostAndRaise();
             Worlds.Update((float)e.Time);
             PostAndRaise();

@@ -14,8 +14,8 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
 
         internal DynamicPack(IEntity entity,
             IBody body,
-            IPosition position,
-            IVelocity velocity,
+            Position position,
+            Velocity velocity,
             IShapeComponent shape)
         {
             Entity = entity;
@@ -31,8 +31,8 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
 
         internal IEntity Entity { get; }
         internal IBody Body { get; }
-        internal IPosition Position { get; }
-        internal IVelocity Velocity { get; }
+        internal Position Position { get; }
+        internal Velocity Velocity { get; }
         internal IShapeComponent Shape { get; }
 
         internal Box2 Aabb { get { return Shape.Aabb.Translated(Position.Value); } }

@@ -16,9 +16,9 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         #region Private Fields
 
         private readonly List<IEntity> entities = new List<IEntity>();
-        private readonly List<IThrust> thrustComps = new List<IThrust>();
-        private readonly List<IPosition> positionComps = new List<IPosition>();
-        private readonly List<IVelocity> velocityComps = new List<IVelocity>();
+        private readonly List<Thrust> thrustComps = new List<Thrust>();
+        private readonly List<Position> positionComps = new List<Position>();
+        private readonly List<Velocity> velocityComps = new List<Velocity>();
         private readonly List<IBody> dynamicBodyComps = new List<IBody>();
 
         #endregion Private Fields
@@ -27,15 +27,19 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         public MovementSystem(ICore core) : base(core)
         {
-            Require<IThrust>();
-            Require<IPosition>();
-            Require<IVelocity>();
+            Require<Thrust>();
+            Require<Position>();
+            Require<Velocity>();
             Require<IBody>();
         }
 
         #endregion Public Constructors
 
         #region Public Methods
+
+        public void UpdatePauseImmuneOnly(float dt)
+        {
+        }
 
         public void Update(float dt)
         {
@@ -72,9 +76,9 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         protected override void RegisterEntity(IEntity entity)
         {
             entities.Add(entity);
-            positionComps.Add(entity.Components.OfType<IPosition>().First());
-            thrustComps.Add(entity.Components.OfType<IThrust>().First());
-            velocityComps.Add(entity.Components.OfType<IVelocity>().First());
+            positionComps.Add(entity.Components.OfType<Position>().First());
+            thrustComps.Add(entity.Components.OfType<Thrust>().First());
+            velocityComps.Add(entity.Components.OfType<Velocity>().First());
             dynamicBodyComps.Add(entity.Components.OfType<IBody>().First());
         }
 

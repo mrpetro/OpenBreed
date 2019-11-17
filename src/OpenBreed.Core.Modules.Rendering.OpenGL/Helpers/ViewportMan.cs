@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Modules.Rendering.Messages;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
@@ -73,6 +75,8 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         internal void Draw(float dt)
         {
+
+
             for (int i = 0; i < viewports.Count; i++)
                 viewports[i].Render(dt);
         }

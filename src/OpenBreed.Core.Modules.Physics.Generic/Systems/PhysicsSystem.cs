@@ -33,7 +33,6 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         internal PhysicsSystem(ICore core, int gridWidth, int gridHeight) : base(core)
         {
             msgHandler = new MsgHandler(this);
-
             Require<IPhysicsComponent>();
 
             GridWidth = gridWidth;
@@ -73,6 +72,10 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
             World.MessageBus.RegisterHandler(BodyOnMsg.TYPE, msgHandler);
             World.MessageBus.RegisterHandler(BodyOffMsg.TYPE, msgHandler);
+        }
+
+        public void UpdatePauseImmuneOnly(float dt)
+        {
         }
 
         public void Update(float dt)
@@ -119,7 +122,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         protected override void RegisterEntity(IEntity entity)
         {
-            if (entity.Components.Any(item => item is IVelocity))
+            if (entity.Components.Any(item => item is Velocity))
                 RegisterDynamicEntity(entity);
             else
                 RegisterStaticEntity(entity);
@@ -127,7 +130,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         protected override void UnregisterEntity(IEntity entity)
         {
-            if (entity.Components.Any(item => item is IVelocity))
+            if (entity.Components.Any(item => item is Velocity))
                 UnregisterDynamicEntity(entity);
             else
                 UnregisterStaticEntity(entity);
@@ -403,8 +406,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         {
             var pack = new DynamicPack(entity,
                                       entity.Components.OfType<IBody>().First(),
-                                      entity.Components.OfType<IPosition>().First(),
-                                      entity.Components.OfType<IVelocity>().First(),
+                                      entity.Components.OfType<Position>().First(),
+                                      entity.Components.OfType<Velocity>().First(),
                                       entity.Components.OfType<IShapeComponent>().First());
 
             activeDynamics.Add(pack);

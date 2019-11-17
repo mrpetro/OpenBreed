@@ -7,7 +7,7 @@ namespace OpenBreed.Core.Common.Helpers
     {
         #region Private Fields
 
-        private readonly Queue<Tuple<object, IEntityMsg>> queue = new Queue<Tuple<object, IEntityMsg>>();
+        private readonly Queue<Tuple<object, IMsg>> queue = new Queue<Tuple<object, IMsg>>();
 
         private readonly IMsgListener listener;
 
@@ -33,9 +33,9 @@ namespace OpenBreed.Core.Common.Helpers
             }
         }
 
-        public bool EnqueueMsg(object sender, IEntityMsg msg)
+        public bool EnqueueMsg(object sender, IMsg msg)
         {
-            queue.Enqueue(new Tuple<object, IEntityMsg>(sender, msg));
+            queue.Enqueue(new Tuple<object, IMsg>(sender, msg));
             return true;
         }
 

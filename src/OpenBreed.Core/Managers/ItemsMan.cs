@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Core.Collections;
 using System;
 
-namespace OpenBreed.Core
+namespace OpenBreed.Core.Managers
 {
     public class ItemsMan
     {

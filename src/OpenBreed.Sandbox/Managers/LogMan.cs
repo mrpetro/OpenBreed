@@ -1,7 +1,8 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Managers;
 using System;
 
-namespace OpenBreed.Sandbox.Helpers
+namespace OpenBreed.Sandbox.Managers
 {
     internal class LogMan : ILogMan
     {

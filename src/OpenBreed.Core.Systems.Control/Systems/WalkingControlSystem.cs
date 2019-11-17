@@ -42,6 +42,10 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
             World.MessageBus.RegisterHandler(AttackControlMsg.TYPE, msgHandler);
         }
 
+        public void UpdatePauseImmuneOnly(float dt)
+        {
+        }
+
         public void Update(float dt)
         {
             msgHandler.PostEnqueued();

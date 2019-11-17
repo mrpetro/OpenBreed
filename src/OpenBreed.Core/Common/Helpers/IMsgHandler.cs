@@ -6,7 +6,7 @@
 
         bool RecieveMsg(object sender, IMsg msg);
 
-        bool EnqueueMsg(object sender, IEntityMsg msg);
+        bool EnqueueMsg(object sender, IMsg msg);
 
         #endregion Public Methods
     }

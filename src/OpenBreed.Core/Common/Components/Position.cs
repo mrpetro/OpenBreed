@@ -6,7 +6,7 @@ namespace OpenBreed.Core.Common.Systems.Components
     /// Position entity component class that can be used to store entity current position information
     /// Example: Actor is standing somewhere in the world at current position
     /// </summary>
-    public class Position : IPosition
+    public class Position : IEntityComponent
     {
         #region Private Constructors
 
@@ -42,12 +42,12 @@ namespace OpenBreed.Core.Common.Systems.Components
 
         #region Public Methods
 
-        public static IPosition Create(Vector2 value)
+        public static Position Create(Vector2 value)
         {
             return new Position(value);
         }
 
-        public static IPosition Create(float x, float y)
+        public static Position Create(float x, float y)
         {
             return new Position(x, y);
         }

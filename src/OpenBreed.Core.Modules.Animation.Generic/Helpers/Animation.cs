@@ -46,6 +46,37 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
             return frames.Last().Value;
         }
 
+        private void GetFrames(float time, out KeyValuePair<float, T> start, out KeyValuePair<float, T> end)
+        {
+            start = frames.First();
+
+            foreach (var frame in frames)
+            {
+                if (time <= frame.Key)
+                {
+                    end = frame;
+                    return;
+                }
+                else
+                    start = frame;
+            }
+
+            end = frames.Last();
+        }
+
+        private T GetFrameLinearInterpolation(float time)
+        {
+            KeyValuePair<float, T> start;
+            KeyValuePair<float, T> end;
+
+            GetFrames(time, out start, out end);
+
+            var ct = time - start.Key;
+            var dt = end.Key - start.Key;
+
+            return (T)MathTools.Lerp(start.Value, end.Value, ct / dt);
+        }
+
         public bool TryGetNextFrame(float time, object currentFrame, out object nextFrame, FrameTransition transition = FrameTransition.None)
         {
             T cf = default(T);
@@ -66,6 +97,12 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
             {
                 case FrameTransition.None:
                     return GetFrameNoTransition(time);
+                case FrameTransition.LinearInterpolation:
+                    {
+                        var g = GetFrameLinearInterpolation(time);
+                        Console.WriteLine(g);
+                        return g;
+                    }
                 default:
                     throw new NotImplementedException($"Transition '{transition}' not implemented.");
             }

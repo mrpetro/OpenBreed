@@ -69,7 +69,7 @@ namespace OpenBreed.Sandbox.Worlds
             AddEntity(hudCamera);
             hudViewport.CameraEntity = hudCamera;
 
-            var cameraPos = hudCamera.Components.OfType<IPosition>().FirstOrDefault();
+            var cameraPos = hudCamera.Components.OfType<Position>().FirstOrDefault();
             cameraPos.Value = hudViewport.ViewportToWorldPoint(new Vector2(1.0f, 1.0f));
 
             var arial12 = Core.Rendering.Fonts.Create("ARIAL", 12);

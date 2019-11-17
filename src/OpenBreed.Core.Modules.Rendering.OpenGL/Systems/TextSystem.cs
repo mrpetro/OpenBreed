@@ -22,7 +22,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         private MsgHandler msgHandler;
         private readonly List<IEntity> entities = new List<IEntity>();
         private readonly List<ITextComponent> textComps = new List<ITextComponent>();
-        private readonly List<IPosition> positionComps = new List<IPosition>();
+        private readonly List<Position> positionComps = new List<Position>();
 
         #endregion Private Fields
 
@@ -33,7 +33,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             msgHandler = new MsgHandler(this);
 
             Require<ITextComponent>();
-            Require<IPosition>();
+            Require<Position>();
         }
 
         #endregion Public Constructors
@@ -112,7 +112,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             entities.Add(entity);
             textComps.Add(entity.Components.OfType<ITextComponent>().First());
-            positionComps.Add(entity.Components.OfType<IPosition>().First());
+            positionComps.Add(entity.Components.OfType<Position>().First());
         }
 
         protected override void UnregisterEntity(IEntity entity)

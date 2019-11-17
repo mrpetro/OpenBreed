@@ -12,9 +12,15 @@ namespace OpenBreed.Core.Common.Systems
     public interface IUpdatableSystem : IWorldSystem
     {
         /// <summary>
-        /// Update this system with given time step
+        /// Update all entities in this system using given time step
         /// </summary>
         /// <param name="dt">Time step</param>
         void Update(float dt);
+
+        /// <summary>
+        /// Update only enitites immune from pausing in this system using given time step
+        /// </summary>
+        /// <param name="dt">Time step</param>
+        void UpdatePauseImmuneOnly(float dt);
     }
 }

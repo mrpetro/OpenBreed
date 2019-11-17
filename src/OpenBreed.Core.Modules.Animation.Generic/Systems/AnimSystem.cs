@@ -4,8 +4,8 @@ using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Events;
-using OpenBreed.Core.Modules.Animation.Helpers;
 using OpenBreed.Core.Modules.Animation.Messages;
+using OpenBreed.Core.Modules.Rendering.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +18,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         private readonly List<IEntity> entities = new List<IEntity>();
         private readonly List<Animator> animatorComps = new List<Animator>();
+        private readonly MsgHandler msgHandler;
 
         #endregion Private Fields
 
@@ -25,25 +26,34 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         public AnimSystem(ICore core) : base(core)
         {
+            msgHandler = new MsgHandler(this);
             Require<Animator>();
         }
 
         #endregion Public Constructors
 
-        private MsgHandler msgHandler;
-
         #region Public Methods
 
         public override void Initialize(World world)
         {
-            msgHandler = new MsgHandler(this);
-
             base.Initialize(world);
 
             World.MessageBus.RegisterHandler(SetAnimMsg.TYPE, msgHandler);
             World.MessageBus.RegisterHandler(PlayAnimMsg.TYPE, msgHandler);
             World.MessageBus.RegisterHandler(PauseAnimMsg.TYPE, msgHandler);
             World.MessageBus.RegisterHandler(StopAnimMsg.TYPE, msgHandler);
+        }
+
+        public void UpdatePauseImmuneOnly(float dt)
+        {
+            msgHandler.PostEnqueued();
+
+            //For now only entities with camera are immune. This implementation sucks.
+            for (int i = 0; i < entities.Count; i++)
+            {
+                if (entities[i].Components.OfType<ICameraComponent>().Any())
+                    Animate(i, dt);
+            }
         }
 
         public void Update(float dt)
@@ -65,7 +75,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         public void Play(Animator animator, int animId = -1, float startPosition = 0.0f)
         {
-            if(animId != -1)
+            if (animId != -1)
                 animator.AnimId = animId;
 
             //if (data != null)

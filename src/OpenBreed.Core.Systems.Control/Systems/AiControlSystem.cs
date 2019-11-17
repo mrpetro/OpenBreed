@@ -20,7 +20,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         private readonly List<IEntity> entities = new List<IEntity>();
         private readonly List<AiControl> aiControlComps = new List<AiControl>();
-        private readonly List<IPosition> positionComps = new List<IPosition>();
+        private readonly List<Position> positionComps = new List<Position>();
 
         #endregion Private Fields
 
@@ -29,12 +29,16 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
         public AiControlSystem(ICore core) : base(core)
         {
             Require<AiControl>();
-            Require<IPosition>();
+            Require<Position>();
         }
 
         #endregion Public Constructors
 
         #region Public Methods
+
+        public void UpdatePauseImmuneOnly(float dt)
+        {
+        }
 
         public void Update(float dt)
         {
@@ -50,7 +54,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
         {
             entities.Add(entity);
             aiControlComps.Add(entity.Components.OfType<AiControl>().First());
-            positionComps.Add(entity.Components.OfType<IPosition>().First());
+            positionComps.Add(entity.Components.OfType<Position>().First());
         }
 
         protected override void UnregisterEntity(IEntity entity)
