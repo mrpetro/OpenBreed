@@ -1,27 +1,11 @@
-﻿using System;
+﻿using OpenBreed.Core.Managers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Core
 {
-    public interface IJob : IDisposable
-    {
-        #region Public Properties
-
-        Action Complete { get; set; }
-
-        #endregion Public Properties
-
-        #region Public Methods
-
-        void Execute();
-
-        #endregion Public Methods
-    }
-
-    public class JobMan
+    public class JobChain : IJob
     {
         #region Private Fields
 
@@ -33,16 +17,15 @@ namespace OpenBreed.Core
 
         #region Public Constructors
 
-        public JobMan(ICore core)
+        public JobChain()
         {
-            Core = core;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public ICore Core { get; }
+        public Action<IJob> Complete { get; set; }
 
         #endregion Public Properties
 
@@ -53,8 +36,15 @@ namespace OpenBreed.Core
             queue.Enqueue(job);
         }
 
-        public void Update()
+        public void Execute()
         {
+        }
+
+        public void Update(float dt)
+        {
+            if (currentJob != null)
+                currentJob.Update(dt);
+
             while (completed.Any())
                 completed.Dequeue().Dispose();
 
@@ -69,11 +59,15 @@ namespace OpenBreed.Core
             }
         }
 
+        public void Dispose()
+        {
+        }
+
         #endregion Public Methods
 
         #region Private Methods
 
-        private void OnComplete()
+        private void OnComplete(IJob job)
         {
             completed.Enqueue(currentJob);
             currentJob = null;

@@ -7,7 +7,7 @@ namespace OpenBreed.Core.Common.Systems.Components
     /// Direction entity component class that can be used to store entity current direction information
     /// Example: Actor is facing particular direction when standing
     /// </summary>
-    public class Direction : IDirection
+    public class Direction : IEntityComponent
     {
         private Vector2 value;
 
@@ -62,12 +62,12 @@ namespace OpenBreed.Core.Common.Systems.Components
 
         #region Public Methods
 
-        public static IDirection Create(Vector2 value)
+        public static Direction Create(Vector2 value)
         {
             return new Direction(value);
         }
 
-        public static IDirection Create(float x, float y)
+        public static Direction Create(float x, float y)
         {
             return new Direction(x, y);
         }

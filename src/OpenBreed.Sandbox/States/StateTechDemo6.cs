@@ -161,6 +161,7 @@ namespace OpenBreed.Sandbox.States
 
             GameCamera = cameraBuilder.Build();
             GameCamera.Add(new Animator(10.0f, false, -1, FrameTransition.LinearInterpolation));
+
             GameWorld.AddEntity(GameCamera);
 
 
@@ -174,6 +175,8 @@ namespace OpenBreed.Sandbox.States
             actor.Add(new AttackControl());
 
             actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
+
+            Core.Jobs.Execute(new CameraFollowJob(GameCamera, actor));
 
             var player1 = Core.Players.GetByName("P1");
             player1.AssumeControl(actor);

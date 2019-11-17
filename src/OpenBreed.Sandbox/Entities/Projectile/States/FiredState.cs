@@ -19,7 +19,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
 
         private ISpriteComponent sprite;
         private readonly string animPrefix;
-        private IVelocity velocity;
+        private Velocity velocity;
 
         #endregion Private Fields
 
@@ -45,7 +45,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
         public void EnterState()
         {
 
-            var direction = Entity.Components.OfType<IVelocity>().First().Value;
+            var direction = Entity.Components.OfType<Velocity>().First().Value;
 
             var animDirName = AnimHelper.ToDirectionName(direction);
 
@@ -59,7 +59,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
         public void Initialize(IEntity entity)
         {
             Entity = entity;
-            velocity = entity.Components.OfType<IVelocity>().First();
+            velocity = entity.Components.OfType<Velocity>().First();
             sprite = entity.Components.OfType<ISpriteComponent>().First();
         }
 

@@ -5,6 +5,7 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Events;
 using OpenBreed.Core.Modules.Animation.Messages;
+using OpenBreed.Core.Modules.Rendering.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,13 +36,24 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         public override void Initialize(World world)
         {
-
             base.Initialize(world);
 
             World.MessageBus.RegisterHandler(SetAnimMsg.TYPE, msgHandler);
             World.MessageBus.RegisterHandler(PlayAnimMsg.TYPE, msgHandler);
             World.MessageBus.RegisterHandler(PauseAnimMsg.TYPE, msgHandler);
             World.MessageBus.RegisterHandler(StopAnimMsg.TYPE, msgHandler);
+        }
+
+        public void UpdatePauseImmuneOnly(float dt)
+        {
+            msgHandler.PostEnqueued();
+
+            //For now only entities with camera are immune. This implementation sucks.
+            for (int i = 0; i < entities.Count; i++)
+            {
+                if (entities[i].Components.OfType<ICameraComponent>().Any())
+                    Animate(i, dt);
+            }
         }
 
         public void Update(float dt)

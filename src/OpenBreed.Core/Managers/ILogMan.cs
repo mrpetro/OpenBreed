@@ -1,4 +1,4 @@
-﻿namespace OpenBreed.Core
+﻿namespace OpenBreed.Core.Managers
 {
     public interface ILogMan
     {

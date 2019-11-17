@@ -51,6 +51,11 @@ namespace OpenBreed.Core.Common
         #region Public Properties
 
         /// <summary>
+        /// Indicates if this world is paused
+        /// </summary>
+        public bool Paused { get; set; }
+
+        /// <summary>
         /// Time "speed" control value, can't be negative but can be 0 (Basicaly stops time).
         /// </summary>
         public float TimeMultiplier
@@ -134,7 +139,10 @@ namespace OpenBreed.Core.Common
 
         public void Update(float dt)
         {
-            systems.OfType<IUpdatableSystem>().ForEach(item => item.Update(dt * TimeMultiplier));
+            if (Paused)
+                systems.OfType<IUpdatableSystem>().ForEach(item => item.UpdatePauseImmuneOnly(dt * TimeMultiplier));
+            else
+                systems.OfType<IUpdatableSystem>().ForEach(item => item.Update(dt * TimeMultiplier));
         }
 
         public void RemoveAllEntities()

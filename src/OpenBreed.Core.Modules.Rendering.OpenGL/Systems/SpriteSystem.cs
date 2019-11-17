@@ -33,7 +33,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             msgHandler = new MsgHandler(this);
 
             Require<ISpriteComponent>();
-            Require<IPosition>();
+            Require<Position>();
         }
 
         #endregion Public Constructors
@@ -180,7 +180,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             var pack = new SpritePack(entity,
                                       entity.Components.OfType<ISpriteComponent>().First(),
-                                      entity.Components.OfType<IPosition>().First());
+                                      entity.Components.OfType<Position>().First());
 
             active.Add(pack);
         }

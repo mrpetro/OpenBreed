@@ -49,7 +49,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
         {
             var direction = Entity.Components.OfType<Direction>().First();
             var movement = Entity.Components.OfType<Motion>().First();
-            Entity.Components.OfType<IThrust>().First().Value = direction.Value * movement.Acceleration;
+            Entity.Components.OfType<Thrust>().First().Value = direction.Value * movement.Acceleration;
 
             var animDirPostfix = AnimHelper.ToDirectionName(direction.Value);
 

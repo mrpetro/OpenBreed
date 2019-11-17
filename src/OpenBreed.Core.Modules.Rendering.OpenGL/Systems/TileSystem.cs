@@ -288,7 +288,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             }
         }
 
-        private void GetMapIndices(IPosition position, out int x, out int y)
+        private void GetMapIndices(Position position, out int x, out int y)
         {
             x = (int)(position.Value.X / (int)TileSize);
             y = (int)(position.Value.Y / (int)TileSize);

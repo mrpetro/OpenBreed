@@ -8,7 +8,7 @@ namespace OpenBreed.Core.Common.Systems.Components
     /// Thrust entity component class that can be used to store entity current thrust information
     /// Example: Actor is applied with specific thrust vector to move in specific direction
     /// </summary>
-    public class Thrust : IThrust
+    public class Thrust : IEntityComponent
     {
         #region Public Constructors
 
@@ -44,12 +44,12 @@ namespace OpenBreed.Core.Common.Systems.Components
 
         #region Public Methods
 
-        public static IThrust Create(Vector2 value)
+        public static Thrust Create(Vector2 value)
         {
             return new Thrust(value);
         }
 
-        public static IThrust Create(float x, float y)
+        public static Thrust Create(float x, float y)
         {
             return new Thrust(x, y);
         }

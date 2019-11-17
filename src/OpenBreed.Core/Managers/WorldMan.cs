@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace OpenBreed.Core
+namespace OpenBreed.Core.Managers
 {
     public class WorldMan
     {

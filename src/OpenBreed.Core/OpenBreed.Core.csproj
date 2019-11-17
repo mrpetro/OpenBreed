@@ -56,7 +56,8 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BlueprintMan.cs" />
+    <Compile Include="IJob.cs" />
+    <Compile Include="Managers\BlueprintMan.cs" />
     <Compile Include="Blueprints\BlueprintXml.cs" />
     <Compile Include="Blueprints\ComponentStateXml.cs" />
     <Compile Include="Blueprints\IComponentState.cs" />
@@ -90,14 +91,15 @@
     <Compile Include="Entities\EntityDestroyMsg.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Inputs\IControlHandler.cs" />
-    <Compile Include="ILogMan.cs" />
+    <Compile Include="Managers\ILogMan.cs" />
     <Compile Include="Inputs\InputControl.cs" />
     <Compile Include="Inputs\InputController.cs" />
     <Compile Include="Inputs\InputsMan.cs" />
     <Compile Include="Inputs\IPlayerInput.cs" />
     <Compile Include="Item.cs" />
-    <Compile Include="ItemsMan.cs" />
-    <Compile Include="JobMan.cs" />
+    <Compile Include="Managers\ItemsMan.cs" />
+    <Compile Include="JobChain.cs" />
+    <Compile Include="Managers\JobMan.cs" />
     <Compile Include="MathTools.cs" />
     <Compile Include="Modules\Animation\Helpers\IAnimation.cs" />
     <Compile Include="Modules\Animation\Helpers\IAnimMan.cs" />
@@ -136,17 +138,13 @@
     <Compile Include="Modules\Rendering\Systems\ISpriteSystem.cs" />
     <Compile Include="Other.cs" />
     <Compile Include="Player.cs" />
-    <Compile Include="PlayersMan.cs" />
+    <Compile Include="Managers\PlayersMan.cs" />
     <Compile Include="States\IStateBuilder.cs" />
     <Compile Include="States\IState.cs" />
     <Compile Include="States\StateChangeMsg.cs" />
     <Compile Include="States\StateMachine.cs" />
-    <Compile Include="Common\Components\IDirection.cs" />
     <Compile Include="Common\Components\IShapeComponent.cs" />
-    <Compile Include="Common\Components\IPosition.cs" />
-    <Compile Include="Common\Components\IThrust.cs" />
     <Compile Include="Common\Components\Thrust.cs" />
-    <Compile Include="Common\Components\IVelocity.cs" />
     <Compile Include="Common\Components\Velocity.cs" />
     <Compile Include="Common\Components\Position.cs" />
     <Compile Include="Common\Components\Direction.cs" />
@@ -173,7 +171,8 @@
     <Compile Include="States\StateMan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\World.cs" />
-    <Compile Include="WorldMan.cs" />
+    <Compile Include="WorldJob.cs" />
+    <Compile Include="Managers\WorldMan.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config" />

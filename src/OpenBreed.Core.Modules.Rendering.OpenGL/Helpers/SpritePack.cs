@@ -13,7 +13,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         internal SpritePack(IEntity entity,
             ISpriteComponent sprite,
-            IPosition position)
+            Position position)
         {
             Entity = entity;
             Sprite = sprite;
@@ -26,7 +26,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         internal IEntity Entity { get; }
         internal ISpriteComponent Sprite { get; }
-        internal IPosition Position { get; }
+        internal Position Position { get; }
 
         #endregion Internal Properties
     }

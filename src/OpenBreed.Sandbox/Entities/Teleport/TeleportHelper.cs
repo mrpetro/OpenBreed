@@ -104,17 +104,10 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
             var exitEntityId = (int)thisEntity.Tag;
             var existEntity = thisEntity.Core.Entities.GetById(exitEntityId);
-            var exitPos = existEntity.Components.OfType<IPosition>().First();
+            var exitPos = existEntity.Components.OfType<Position>().First();
             var thisAabb = thisEntity.Components.OfType<IShapeComponent>().First().Aabb;
             var otherAabb = otherEntity.Components.OfType<IShapeComponent>().First().Aabb;
             var offset = new Vector2((32 - otherAabb.Width) / 2.0f, (32 - otherAabb.Height) / 2.0f);
-
-            thisEntity.Core.Jobs.Equeue(new CameraEffectJob(cameraEntity, CameraGuyHelper.CAMERA_FADE_OUT));
-            thisEntity.Core.Jobs.Equeue(new CameraEffectJob(cameraEntity, CameraGuyHelper.CAMERA_FADE_IN));
-
-            //cameraEntity.PostMsg(new PlayAnimMsg(cameraEntity, CameraGuyHelper.CAMERA_FADE_OUT));
-            //cameraEntity.Subscribe(AnimChangedEvent.TYPE, OnAnimChanged);
-            //cameraEntity.Subscribe(AnimStoppedEvent.TYPE, OnAnimStopped);
 
             //Vanilla game
             //1. Pause game
@@ -123,75 +116,18 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             //4. Unpause game
             //5. Camera fade-in
 
-            otherEntity.Components.OfType<IPosition>().First().Value = exitPos.Value + offset;
+            var jobChain = new JobChain();
+  
+            jobChain.Equeue(new WorldJob(cameraEntity.World, "Pause"));
+            jobChain.Equeue(new CameraEffectJob(cameraEntity, CameraHelper.CAMERA_FADE_OUT));
+            jobChain.Equeue(new TeleportJob(otherEntity, exitPos.Value + offset, true));
+            jobChain.Equeue(new WorldJob(cameraEntity.World, "Unpause"));
+            jobChain.Equeue(new CameraEffectJob(cameraEntity, CameraHelper.CAMERA_FADE_IN));
+
+            thisEntity.Core.Jobs.Execute(jobChain);
         }
 
 
-
-        #endregion Private Methods
-    }
-
-
-
-    public class CameraEffectJob : IJob
-    {
-        #region Private Fields
-
-        private IEntity entity;
-        private string animName;
-
-        #endregion Private Fields
-
-        #region Public Constructors
-
-        public CameraEffectJob(IEntity entity, string animName)
-        {
-            this.entity = entity;
-            this.animName = animName;
-        }
-
-        #endregion Public Constructors
-
-        #region Public Properties
-
-        public Action Complete { get; set; }
-
-        #endregion Public Properties
-
-        #region Public Methods
-
-        public void Execute()
-        {
-            entity.Subscribe(AnimChangedEvent.TYPE, OnAnimChanged);
-            entity.Subscribe(AnimStoppedEvent.TYPE, OnAnimStopped);
-            entity.PostMsg(new PlayAnimMsg(entity, animName));
-        }
-
-        public void Dispose()
-        {
-            entity.Unsubscribe(AnimChangedEvent.TYPE, OnAnimChanged);
-            entity.Unsubscribe(AnimStoppedEvent.TYPE, OnAnimStopped);
-        }
-
-        #endregion Public Methods
-
-        #region Private Methods
-
-        private void OnAnimStopped(object sender, IEvent arg2)
-        {
-            Complete();
-        }
-
-        private void OnAnimChanged(object sender, IEvent e)
-        {
-            HandleFrameChangeEvent((IEntity)sender, (AnimChangedEvent)e);
-        }
-
-        private void HandleFrameChangeEvent(IEntity entity, AnimChangedEvent systemEvent)
-        {
-            var cameraCmp = entity.Components.OfType<ICameraComponent>().First();
-            cameraCmp.Brightness = (float)systemEvent.Frame;
-        }
 
         #endregion Private Methods
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OpenBreed.Core
+namespace OpenBreed.Core.Managers
 {
     public class PlayersMan
     {

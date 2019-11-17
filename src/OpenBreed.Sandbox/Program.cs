@@ -4,6 +4,7 @@ using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Inputs;
+using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Audio;
@@ -19,6 +20,7 @@ using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Items;
+using OpenBreed.Sandbox.Managers;
 using OpenBreed.Sandbox.States;
 using OpenBreed.Sandbox.Worlds;
 using OpenTK;
@@ -216,7 +218,7 @@ namespace OpenBreed.Sandbox
 
             //Blueprints.Import(@".\Content\BPHorizontalDoor.xml");
 
-            CameraGuyHelper.CreateAnimations(this);
+            CameraHelper.CreateAnimations(this);
             DoorHelper.CreateStamps(this);
             PickableHelper.CreateStamps(this);
             DoorHelper.CreateAnimations(this);
@@ -278,7 +280,8 @@ namespace OpenBreed.Sandbox
             PostAndRaise();
             StateMachine.Update((float)e.Time);
             PostAndRaise();
-            Jobs.Update();
+            Jobs.Update((float)e.Time);
+            PostAndRaise();
             Worlds.Update((float)e.Time);
             PostAndRaise();
 

@@ -8,7 +8,7 @@ namespace OpenBreed.Core.Common.Systems.Components
     /// Velocity entity component class that can be used to store entity current velocity information
     /// Example: Actor is going somewhere with specific velocity vector
     /// </summary>
-    public class Velocity : IVelocity
+    public class Velocity : IEntityComponent
     {
         #region Public Constructors
 
@@ -44,12 +44,12 @@ namespace OpenBreed.Core.Common.Systems.Components
 
         #region Public Methods
 
-        public static IVelocity Create(Vector2 value)
+        public static Velocity Create(Vector2 value)
         {
             return new Velocity(value);
         }
 
-        public static IVelocity Create(float x, float y)
+        public static Velocity Create(float x, float y)
         {
             return new Velocity(x, y);
         }

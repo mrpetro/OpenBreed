@@ -18,7 +18,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
         #region Private Fields
 
         private readonly string animPrefix;
-        private IThrust thrust;
+        private Thrust thrust;
 
         #endregion Private Fields
 
@@ -60,7 +60,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
         public void Initialize(IEntity entity)
         {
             Entity = entity;
-            thrust = entity.Components.OfType<IThrust>().First();
+            thrust = entity.Components.OfType<Thrust>().First();
         }
 
         public void LeaveState()

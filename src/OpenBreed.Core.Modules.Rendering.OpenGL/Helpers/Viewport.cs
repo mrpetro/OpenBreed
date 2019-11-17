@@ -161,7 +161,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         public void ScrollBy(Vector2 vector)
         {
             var cameraComponent = CameraEntity.Components.OfType<ICameraComponent>().First();
-            var position = CameraEntity.Components.OfType<IPosition>().First();
+            var position = CameraEntity.Components.OfType<Position>().First();
 
             var delta4 = ClientToWorldVector(vector);
             var delta2 = new Vector2(-delta4.X, -delta4.Y);
@@ -245,7 +245,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         /// <returns>Camera transformation matrix</returns>
         public Matrix4 GetCameraTransform()
         {
-            var pos = CameraEntity.Components.OfType<IPosition>().First();
+            var pos = CameraEntity.Components.OfType<Position>().First();
             var camera = CameraEntity.Components.OfType<ICameraComponent>().First();
 
             var transform = Matrix4.Identity;
