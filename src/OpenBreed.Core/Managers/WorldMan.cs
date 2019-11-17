@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Collections;
 using OpenBreed.Core.Common;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -46,7 +47,22 @@ namespace OpenBreed.Core.Managers
         #region Public Methods
 
         /// <summary>
-        /// Creates world, It will be initialized and added to Core at nearest Manager Update
+        /// Returns world with given ID. Will throw exception when such world has not been found.
+        /// </summary>
+        /// <param name="id">If of world to be returned</param>
+        /// <returns>World reference</returns>
+        public World GetById(int id)
+        {
+            var world = worlds[id];
+
+            if (worlds.TryGetValue(id, out world))
+                return world;
+            else
+                throw new InvalidOperationException($"World with ID '{id}' not found.");
+        }
+
+        /// <summary>
+        /// Creates world, It will be initialized and added to Core at nearest manager update
         /// </summary>
         /// <returns>New World</returns>
         public World Create()
