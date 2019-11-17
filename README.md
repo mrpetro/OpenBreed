@@ -50,9 +50,11 @@ So the goal is to trace or rebuild data hardcoded in game executables and store 
 
 Source code language: C#
 
-Platform: .NET 4.6.1 for now
+Platform: .NET 4.7.2 for now
 
 DevEnv: MSVS 2017 (Community or compatible)
+
+Design architecture: Entity–Component–System(ECS) for now
 
 Libraries:
 OpenTK has been choosen for handling graphics, inputs and sounds. Visit https://opentk.net for more information.
