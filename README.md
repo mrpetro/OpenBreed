@@ -5,7 +5,7 @@ Open source reimplementation of classic Alien Breed 2D games:
  - *Alien Breed: Tower Assault* - (ABTA)
  
 ## Project wiki
-[Over here](https://github.com/mrpetro/OpenBreed/wiki)
+[Over here](https://github.com/mrpetro/OpenBreed/wiki) - Not updating it that much... Sorry...
  
 ## Obtaining game resources
  
@@ -25,8 +25,8 @@ ABTA PC port uses exactly same resources as Amiga version but the container is E
 ## What is in current development
 * Game engine in entity component system (ECS) architecture
 * Readers for various resources from all three games
-* Developing of OpenBreed.Editor - at least to state of reading & viewing most of games resources.
-* Design & creation of game databases - these will be useful when developing OpenBreed engine. 
+* (On hiatus) Developing of OpenBreed.Editor - at least to state of reading & viewing most of games resources.
+* (On hiatus) Design & creation of game databases - these will be useful when developing OpenBreed engine. 
 * Some refactoring in OpenBreed.Common & Editor
 
 ## What's to do
