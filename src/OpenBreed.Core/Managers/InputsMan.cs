@@ -1,11 +1,12 @@
 ﻿using OpenBreed.Core.Common.Components;
+using OpenBreed.Core.Inputs;
 using OpenTK;
 using OpenTK.Input;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace OpenBreed.Core.Inputs
+namespace OpenBreed.Core.Managers
 {
     public class KeyboardStateEventArgs : EventArgs
     {

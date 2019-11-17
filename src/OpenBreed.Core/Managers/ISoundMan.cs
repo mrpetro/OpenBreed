@@ -1,10 +1,11 @@
-﻿using System;
+﻿using OpenBreed.Core.Modules.Audio.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Core.Modules.Audio.Helpers
+namespace OpenBreed.Core.Managers
 {
     /// <summary>
     /// Sounds manager interface  which handles creating sounds from various sources

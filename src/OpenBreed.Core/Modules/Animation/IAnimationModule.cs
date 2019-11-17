@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Modules.Animation.Helpers;
+﻿using OpenBreed.Core.Managers;
+using OpenBreed.Core.Modules.Animation.Helpers;
 using OpenBreed.Core.Modules.Animation.Systems;
 
 namespace OpenBreed.Core.Modules.Animation

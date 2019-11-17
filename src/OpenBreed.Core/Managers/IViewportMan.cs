@@ -1,7 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using OpenBreed.Core.Modules.Rendering.Helpers;
+using System.Collections.ObjectModel;
 using System.Drawing;
 
-namespace OpenBreed.Core.Modules.Rendering.Helpers
+namespace OpenBreed.Core.Managers
 {
     /// <summary>
     /// Viewport manager interface which handles render module viewports 

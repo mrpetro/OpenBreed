@@ -1,4 +1,6 @@
-﻿namespace OpenBreed.Core.Modules.Rendering.Helpers
+﻿using OpenBreed.Core.Modules.Rendering.Helpers;
+
+namespace OpenBreed.Core.Managers
 {
     /// <summary>
     /// Sprite manager interface

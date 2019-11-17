@@ -1,10 +1,11 @@
-﻿using System;
+﻿using OpenBreed.Core.Modules.Animation.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Core.Modules.Animation.Helpers
+namespace OpenBreed.Core.Managers
 {
     public interface IAnimMan
     {
