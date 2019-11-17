@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OpenBreed.Editor.UI.WinForms</RootNamespace>
     <AssemblyName>OpenBreed.Editor.UI.WinForms</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -647,12 +648,9 @@
       <Project>{4E57CB0D-A13B-48A9-9D47-52B96D75F283}</Project>
       <Name>OpenBreed.Editor.VM</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ToolsABTA\ToolsABTA.csproj">
-      <Project>{27037E0B-F963-4F7B-975D-741D683D66C7}</Project>
-      <Name>ToolsABTA</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
