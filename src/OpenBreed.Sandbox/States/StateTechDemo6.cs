@@ -31,6 +31,8 @@ using System.Linq;
 using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Core.Modules.Animation.Helpers;
+using OpenBreed.Sandbox.Entities.WorldGate;
+using OpenBreed.Core.Common;
 
 namespace OpenBreed.Sandbox.States
 {
@@ -143,7 +145,7 @@ namespace OpenBreed.Sandbox.States
             Core.Inputs.KeyDown -= Inputs_KeyDown;
             Core.Players.LooseAllControls();
         }
-        public GameWorld GameWorld;
+        public World GameWorld;
 
         #endregion Protected Methods
 
@@ -151,7 +153,7 @@ namespace OpenBreed.Sandbox.States
 
         private void InitializeWorld()
         {
-            GameWorld = new GameWorld(Core);
+            GameWorld = GameWorldHelper.CreateGameWorld(Core);
 
             var cameraBuilder = new CameraBuilder(Core);
 
@@ -191,6 +193,8 @@ namespace OpenBreed.Sandbox.States
             rotateFsm.SetInitialState("Idle");
             GameWorld.AddEntity(actor);
 
+            var worldExit = WorldGateHelper.AddWorldExit(Core, GameWorld, 30, 10, 1);
+
             var teleportExit = TeleportHelper.AddTeleportExit(Core, GameWorld, 20, 10);
             TeleportHelper.AddTeleportEntry(Core, GameWorld, 10, 10, teleportExit.Id);
 
@@ -203,7 +207,6 @@ namespace OpenBreed.Sandbox.States
 
             SandBoxHelper.SetupMap(GameWorld);
 
-            Core.Worlds.Add(GameWorld);
         }
 
         #endregion Private Methods

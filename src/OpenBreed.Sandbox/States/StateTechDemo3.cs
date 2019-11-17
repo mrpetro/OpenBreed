@@ -146,7 +146,7 @@ namespace OpenBreed.Sandbox.States
 
         private void InitializeWorld()
         {
-            World = new GameWorld(Core);
+            World = GameWorldHelper.CreateGameWorld(Core);
 
             var cameraBuilder = new CameraBuilder(Core);
 
@@ -159,8 +159,6 @@ namespace OpenBreed.Sandbox.States
 
             viewport = (Viewport)Core.Rendering.Viewports.Create(0.05f, 0.05f, 0.9f, 0.9f);
             viewport.CameraEntity = Camera1;
-
-            Core.Worlds.Add(World);
 
             actor = ActorHelper.CreateActor(Core, new Vector2(64, 288));
             actor.Add(new AiControl());

@@ -165,7 +165,7 @@
     <Compile Include="Entities\IEntityBuilder.cs" />
     <Compile Include="Entities\Builders\EntityBuilder.cs" />
     <Compile Include="Entities\Entity.cs" />
-    <Compile Include="Entities\EntityMan.cs" />
+    <Compile Include="Managers\EntityMan.cs" />
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="States\BaseState.cs" />
     <Compile Include="States\StateMan.cs" />

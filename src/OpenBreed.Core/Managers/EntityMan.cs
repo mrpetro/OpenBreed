@@ -2,10 +2,11 @@
 using OpenBreed.Core.Collections;
 using OpenBreed.Core.Common.Components.Builders;
 using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Entities;
 using System;
 using System.Collections.Generic;
 
-namespace OpenBreed.Core.Entities
+namespace OpenBreed.Core.Managers
 {
     public class EntityMan
     {

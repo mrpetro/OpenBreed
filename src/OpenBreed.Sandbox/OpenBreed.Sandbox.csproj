@@ -77,8 +77,10 @@
     <Compile Include="Entities\Projectile\ProjectileHelper.cs" />
     <Compile Include="Entities\Projectile\States\FiredState.cs" />
     <Compile Include="Entities\Teleport\TeleportJob.cs" />
+    <Compile Include="Entities\WorldGate\WorldGateHelper.cs" />
     <Compile Include="Helpers\AnimHelper.cs" />
     <Compile Include="Helpers\EntityMsgHandler.cs" />
+    <Compile Include="Jobs\FpsTextUpdateJob.cs" />
     <Compile Include="Managers\LogMan.cs" />
     <Compile Include="Helpers\SandBoxHelper.cs" />
     <Compile Include="Helpers\TextHelper.cs" />
@@ -92,9 +94,9 @@
     <Compile Include="States\StateTechDemo2.cs" />
     <Compile Include="States\StateTechDemo1.cs" />
     <Compile Include="Tools.cs" />
-    <Compile Include="Worlds\GameWorld.cs" />
+    <Compile Include="Worlds\GameWorldHelper.cs" />
     <Compile Include="Worlds\Hub.cs" />
-    <Compile Include="Worlds\HudWorld.cs" />
+    <Compile Include="Worlds\HudWorldHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -175,7 +177,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Sounds\" />
-    <Folder Include="Entities\WorldGate\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

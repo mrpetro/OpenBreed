@@ -1,29 +1,17 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Common;
+using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Rendering.Entities.Builders;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Rendering;
-using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Entities;
-using OpenBreed.Core.Modules.Rendering.Entities.Builders;
-using OpenBreed.Sandbox.Entities;
-using OpenBreed.Sandbox.Entities.Builders;
+using OpenBreed.Core.Systems.Control.Components;
+using OpenBreed.Sandbox.Entities.Actor;
+using OpenBreed.Sandbox.Entities.Door;
+using OpenBreed.Sandbox.Helpers;
+using OpenBreed.Sandbox.Worlds;
 using OpenTK;
 using OpenTK.Input;
 using System;
-using System.Drawing;
-using OpenBreed.Core.Entities;
-using OpenBreed.Sandbox.Worlds;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
-using OpenBreed.Sandbox.Helpers;
-using OpenBreed.Sandbox.Entities.Actor;
-using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Sandbox.Entities.Door;
-using OpenBreed.Sandbox.Entities.Box;
-using OpenBreed.Sandbox.Entities.Projectile;
-using OpenBreed.Core.Systems.Control.Components;
-using System.Linq;
 
 namespace OpenBreed.Sandbox.States
 {
@@ -35,6 +23,8 @@ namespace OpenBreed.Sandbox.States
         #region Public Fields
 
         public const string ID = "TECH_DEMO_5";
+
+        public World GameWorld;
 
         #endregion Public Fields
 
@@ -100,17 +90,6 @@ namespace OpenBreed.Sandbox.States
 
         #region Protected Methods
 
-        private void Inputs_KeyDown(object sender, KeyboardKeyEventArgs e)
-        {
-            var pressedKey = e.Key.ToString();
-
-            if (pressedKey.StartsWith("Number"))
-            {
-                pressedKey = pressedKey.Replace("Number", "");
-                Core.StateMachine.SetNextState($"TECH_DEMO_{pressedKey}");
-            }
-        }
-
         protected override void OnEnter()
         {
             InitializeWorld();
@@ -135,15 +114,25 @@ namespace OpenBreed.Sandbox.States
             Core.Inputs.KeyDown -= Inputs_KeyDown;
             Core.Players.LooseAllControls();
         }
-        public GameWorld GameWorld;
 
         #endregion Protected Methods
 
         #region Private Methods
 
+        private void Inputs_KeyDown(object sender, KeyboardKeyEventArgs e)
+        {
+            var pressedKey = e.Key.ToString();
+
+            if (pressedKey.StartsWith("Number"))
+            {
+                pressedKey = pressedKey.Replace("Number", "");
+                Core.StateMachine.SetNextState($"TECH_DEMO_{pressedKey}");
+            }
+        }
+
         private void InitializeWorld()
         {
-            GameWorld = new GameWorld(Core);
+            GameWorld = GameWorldHelper.CreateGameWorld(Core);
 
             var cameraBuilder = new CameraBuilder(Core);
 
@@ -152,7 +141,6 @@ namespace OpenBreed.Sandbox.States
             cameraBuilder.SetZoom(1);
             GameCamera = cameraBuilder.Build();
             GameWorld.AddEntity(GameCamera);
-
 
             gameViewport = (Viewport)Core.Rendering.Viewports.Create(0.05f, 0.05f, 0.90f, 0.90f);
             gameViewport.CameraEntity = GameCamera;
@@ -184,7 +172,6 @@ namespace OpenBreed.Sandbox.States
             for (int i = 0; i < 10; i++)
                 DoorHelper.AddVerticalDoor(Core, GameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3);
 
-            Core.Worlds.Add(GameWorld);
         }
 
         #endregion Private Methods

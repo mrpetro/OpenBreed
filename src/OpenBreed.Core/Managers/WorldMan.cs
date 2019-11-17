@@ -1,18 +1,21 @@
-﻿using OpenBreed.Core.Common;
-using System;
+﻿using OpenBreed.Core.Collections;
+using OpenBreed.Core.Common;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace OpenBreed.Core.Managers
 {
+    /// <summary>
+    /// Manager responsible for creating, removing and updating core worlds
+    /// </summary>
     public class WorldMan
     {
         #region Private Fields
 
-        private readonly List<World> items = new List<World>();
         private readonly List<World> toAdd = new List<World>();
         private readonly List<World> toRemove = new List<World>();
+        private readonly IdMap<World> worlds = new IdMap<World>();
 
         #endregion Private Fields
 
@@ -21,46 +24,55 @@ namespace OpenBreed.Core.Managers
         public WorldMan(ICore core)
         {
             Core = core;
-
-            Items = new ReadOnlyCollection<World>(items);
+            Items = worlds.Items;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
+        /// <summary>
+        /// ReadOnly collection of all loaded worlds
+        /// </summary>
         public ReadOnlyCollection<World> Items { get; }
 
+        /// <summary>
+        /// Reference to Core object
+        /// </summary>
         public ICore Core { get; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void Remove(World world)
+        /// <summary>
+        /// Creates world, It will be initialized and added to Core at nearest Manager Update
+        /// </summary>
+        /// <returns>New World</returns>
+        public World Create()
         {
-            if (toRemove.Contains(world))
-                throw new InvalidOperationException("World already pending removing.");
-
-            if (!items.Contains(world))
-                throw new InvalidOperationException("World is not added.");
-
-            items.Remove(world);
-        }
-
-        public void Add(World world)
-        {
-            if (toAdd.Contains(world))
-                throw new InvalidOperationException("World already pending adding.");
-
-            if (items.Contains(world))
-                throw new InvalidOperationException("World already added.");
-
-            toAdd.Add(world);
+            var newWorld = new World(Core);
+            toAdd.Add(newWorld);
+            return newWorld;
         }
 
         /// <summary>
-        /// Updates the world
+        /// Marks given world to be removed from Core, it will be removed at nearest Manager Update
+        /// </summary>
+        /// <param name="world">World to be removed</param>
+        public void Remove(World world)
+        {
+            if (toRemove.Contains(world))
+            {
+                Core.Logging.Warning($"World '{world}' already pending removing.");
+                return;
+            }
+
+            toRemove.Add(world);
+        }
+
+        /// <summary>
+        /// Updates all worlds
         /// </summary>
         /// <param name="dt">Delta time</param>
         public void Update(float dt)
@@ -80,7 +92,7 @@ namespace OpenBreed.Core.Managers
                 for (int i = 0; i < toRemove.Count; i++)
                 {
                     toRemove[i].Deinitialize();
-                    items.Remove(toRemove[i]);
+                    worlds.RemoveById(toRemove[i].Id);
                 }
 
                 toRemove.Clear();
@@ -91,7 +103,7 @@ namespace OpenBreed.Core.Managers
                 //Process entities to add
                 for (int i = 0; i < toAdd.Count; i++)
                 {
-                    items.Add(toAdd[i]);
+                    toAdd[i].Id = worlds.Add(toAdd[i]);
                     toAdd[i].Initialize();
                 }
 
@@ -99,8 +111,8 @@ namespace OpenBreed.Core.Managers
             }
 
             //Do cleanups on remaining worlds
-            for (int i = 0; i < items.Count; i++)
-                items[i].Cleanup();
+            for (int i = 0; i < worlds.Items.Count; i++)
+                worlds.Items[i].Cleanup();
         }
 
         #endregion Public Methods

@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Common", "..\Open
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPFArchive", "..\EPFArchive\src\EPFArchive\EPFArchive.csproj", "{52249C4E-EAF8-45CE-A757-AAA3C3C125D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Common.XmlDatabase", "..\OpenBreed.Common\src\OpenBreed.Common.XmlDatabase\OpenBreed.Common.XmlDatabase.csproj", "{C4095745-E19C-4DE9-B2E4-37E55FA0D225}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,12 +72,17 @@ Global
 		{52249C4E-EAF8-45CE-A757-AAA3C3C125D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52249C4E-EAF8-45CE-A757-AAA3C3C125D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52249C4E-EAF8-45CE-A757-AAA3C3C125D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4095745-E19C-4DE9-B2E4-37E55FA0D225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4095745-E19C-4DE9-B2E4-37E55FA0D225}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4095745-E19C-4DE9-B2E4-37E55FA0D225}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4095745-E19C-4DE9-B2E4-37E55FA0D225}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9894E7F4-7C85-4173-9D05-F50CFD2E4163} = {FB7D9CCD-64E4-46A6-B723-F64B48C35D2E}
+		{C4095745-E19C-4DE9-B2E4-37E55FA0D225} = {FB7D9CCD-64E4-46A6-B723-F64B48C35D2E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {36FCF31C-C702-49A1-8355-120BD345CF95}

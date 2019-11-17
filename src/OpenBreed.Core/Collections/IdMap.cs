@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace OpenBreed.Core.Collections
 {
@@ -13,7 +14,18 @@ namespace OpenBreed.Core.Collections
 
         #endregion Private Fields
 
-        #region Public Indexers
+        #region Public Constructors
+
+        public IdMap()
+        {
+            Items = new ReadOnlyCollection<T>(items);
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public ReadOnlyCollection<T> Items { get; }
 
         public int Count
         {
@@ -22,6 +34,10 @@ namespace OpenBreed.Core.Collections
                 return items.Count - freeIdCache.Count;
             }
         }
+
+        #endregion Public Properties
+
+        #region Public Indexers
 
         public T this[int id]
         {

@@ -18,25 +18,24 @@ namespace OpenBreed.Core.Common
     {
         #region Public Fields
 
-        public const float MAX_TILE_MULTIPLIER = 10.0f;
+        public const float MAX_TIME_MULTIPLIER = 10.0f;
 
         #endregion Public Fields
 
         #region Private Fields
 
-        private MsgHandler msgHandler;
         private readonly List<IEntity> entities = new List<IEntity>();
         private readonly List<IEntity> toAdd = new List<IEntity>();
         private readonly List<IEntity> toRemove = new List<IEntity>();
         private readonly List<IWorldSystem> systems = new List<IWorldSystem>();
-
+        private MsgHandler msgHandler;
         private float timeMultiplier = 1.0f;
 
         #endregion Private Fields
 
-        #region Protected Constructors
+        #region Internal Constructors
 
-        protected World(ICore core)
+        internal World(ICore core)
         {
             Core = core;
             Entities = new ReadOnlyCollection<IEntity>(entities);
@@ -46,12 +45,12 @@ namespace OpenBreed.Core.Common
             MessageBus.RegisterHandler(StateChangeMsg.TYPE, new StateChangeMsgHandler(this));
         }
 
-        #endregion Protected Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
 
         /// <summary>
-        /// Indicates if this world is paused
+        /// Pauses or unpauses this world
         /// </summary>
         public bool Paused { get; set; }
 
@@ -67,7 +66,7 @@ namespace OpenBreed.Core.Common
 
             set
             {
-                timeMultiplier = MathHelper.Clamp(value, 0, MAX_TILE_MULTIPLIER);
+                timeMultiplier = MathHelper.Clamp(value, 0, MAX_TIME_MULTIPLIER);
             }
         }
 
@@ -79,7 +78,7 @@ namespace OpenBreed.Core.Common
         /// <summary>
         /// Id of this world
         /// </summary>
-        public int Id { get; }
+        public int Id { get; internal set; }
 
         /// <summary>
         /// Name of this world
@@ -151,6 +150,16 @@ namespace OpenBreed.Core.Common
                 RemoveEntity(entities[i]);
         }
 
+        public virtual void AddSystem(IWorldSystem system)
+        {
+            systems.Add(system);
+        }
+
+        public virtual void RemoveSystem(IWorldSystem system)
+        {
+            systems.Remove(system);
+        }
+
         #endregion Public Methods
 
         #region Internal Methods
@@ -195,20 +204,6 @@ namespace OpenBreed.Core.Common
         }
 
         #endregion Internal Methods
-
-        #region Protected Methods
-
-        protected virtual void AddSystem(IWorldSystem system)
-        {
-            systems.Add(system);
-        }
-
-        protected virtual void RemoveSystem(IWorldSystem system)
-        {
-            systems.Remove(system);
-        }
-
-        #endregion Protected Methods
 
         #region Private Methods
 
