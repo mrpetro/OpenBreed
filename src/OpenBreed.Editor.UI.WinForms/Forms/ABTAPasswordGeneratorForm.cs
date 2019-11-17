@@ -12,7 +12,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 {
     public partial class ABTAPasswordGeneratorForm : Form
     {
-        private readonly ABTAPasswordEncoder _passwordEncoder = new ABTAPasswordEncoder();
+        private readonly AbtaPasswordEncoder _passwordEncoder = new AbtaPasswordEncoder();
 
         public ABTAPasswordGeneratorForm()
         {
@@ -26,7 +26,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
         private void Reset()
         {
-            cbxLevel.DataSource = ABTAPasswordEncoder.LEVELS;
+            cbxLevel.DataSource = AbtaPasswordEncoder.LEVELS;
 
             numP1Lives.Value = 3;
             cbxP1AssaultGun.SelectedIndex = 0;
