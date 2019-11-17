@@ -48,7 +48,7 @@ So the goal is to trace or rebuild data hardcoded in game executables and store 
 
 ## Development stuff
 
-Source code language: C#
+Source code language: **C#**
 
 Platform: **.NET 4.7.2** for now
 
