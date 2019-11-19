@@ -130,9 +130,23 @@ namespace OpenBreed.Sandbox.States
             }
         }
 
+        public static void SetupWorld(World world)
+        {
+            SandBoxHelper.SetupMap(world);
+
+            var rnd = new Random();
+
+            for (int i = 0; i < 10; i++)
+                DoorHelper.AddHorizontalDoor(world, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3);
+
+            for (int i = 0; i < 10; i++)
+                DoorHelper.AddVerticalDoor(world.Core, world, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3);
+        }
+
         private void InitializeWorld()
         {
             GameWorld = GameWorldHelper.CreateGameWorld(Core);
+            SetupWorld(GameWorld);
 
             var cameraBuilder = new CameraBuilder(Core);
 
@@ -147,7 +161,7 @@ namespace OpenBreed.Sandbox.States
 
             var actor = ActorHelper.CreateActor(Core, new Vector2(64, 288));
             actor.Add(new WalkingControl());
-            actor.Add(TextHelper.Create(Core, new Vector2(-10, 10), "Hero"));
+            actor.Add(TextHelper.Create(Core, new Vector2(0, 32), "Hero"));
 
             var player1 = Core.Players.GetByName("P1");
             player1.AssumeControl(actor);
@@ -158,20 +172,7 @@ namespace OpenBreed.Sandbox.States
             var rotateFsm = ActorHelper.CreateRotationFSM(actor);
             movementFsm.SetInitialState("Standing");
             rotateFsm.SetInitialState("Idle");
-            GameWorld.AddEntity(actor);
-
-            //ProjectileHelper.AddProjectile(Core, GameWorld, 100, 100, 0, 0);
-
-            SandBoxHelper.SetupMap(GameWorld);
-
-            var rnd = new Random();
-
-            for (int i = 0; i < 10; i++)
-                DoorHelper.AddHorizontalDoor(GameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3);
-
-            for (int i = 0; i < 10; i++)
-                DoorHelper.AddVerticalDoor(Core, GameWorld, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3);
-
+            GameWorld.AddEntity(actor); 
         }
 
         #endregion Private Methods

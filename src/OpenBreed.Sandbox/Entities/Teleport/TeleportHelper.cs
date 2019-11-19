@@ -7,9 +7,11 @@ using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Events;
 using OpenBreed.Core.Modules.Animation.Messages;
 using OpenBreed.Core.Modules.Physics.Components;
+using OpenBreed.Core.Modules.Physics.Messages;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Helpers;
+using OpenBreed.Sandbox.Jobs;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -53,7 +55,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             teleportEntry.Add(core.Rendering.CreateSprite(SPRITE_TELEPORT_ENTRY));
             teleportEntry.Add(Position.Create(x * 16, y * 16));
             teleportEntry.Add(AxisAlignedBoxShape.Create(16, 16, 8, 8));
-            teleportEntry.Add(TextHelper.Create(core, new Vector2(-10, 10), "TeleportEntry"));
+            teleportEntry.Add(TextHelper.Create(core, new Vector2(0, 32), "TeleportEntry"));
             teleportEntry.Subscribe(AnimChangedEvent.TYPE, OnTeleportFrameChanged);
             teleportEntry.Tag = exitEntityId;
 
@@ -72,7 +74,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             teleportEntity.Add(core.Rendering.CreateSprite(SPRITE_TELEPORT_ENTRY));
             teleportEntity.Add(Position.Create(x * 16, y * 16));
             teleportEntity.Add(AxisAlignedBoxShape.Create(16, 16, 8, 8));
-            teleportEntity.Add(TextHelper.Create(core, new Vector2(-10, 10), "TeleportExit"));
+            teleportEntity.Add(TextHelper.Create(core, new Vector2(0, 32), "TeleportExit"));
             teleportEntity.Subscribe(AnimChangedEvent.TYPE, OnTeleportFrameChanged);
 
             world.AddEntity(teleportEntity);
@@ -95,19 +97,22 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             sprite.ImageId = (int)systemEvent.Frame;
         }
 
-        private static void OnCollision(IEntity thisEntity, IEntity otherEntity, Vector2 projection)
+        private static void OnCollision(IEntity entryEntity, IEntity targetEntity, Vector2 projection)
         {
-            var cameraEntity = otherEntity.Tag as IEntity;
+            entryEntity.PostMsg(new BodyOffMsg(entryEntity));
+            Console.WriteLine("Hit");
+
+            var cameraEntity = targetEntity.Tag as IEntity;
 
             if (cameraEntity == null)
                 return;
 
-            var exitEntityId = (int)thisEntity.Tag;
-            var existEntity = thisEntity.Core.Entities.GetById(exitEntityId);
+            var exitEntityId = (int)entryEntity.Tag;
+            var existEntity = entryEntity.Core.Entities.GetById(exitEntityId);
             var exitPos = existEntity.Components.OfType<Position>().First();
-            var thisAabb = thisEntity.Components.OfType<IShapeComponent>().First().Aabb;
-            var otherAabb = otherEntity.Components.OfType<IShapeComponent>().First().Aabb;
-            var offset = new Vector2((32 - otherAabb.Width) / 2.0f, (32 - otherAabb.Height) / 2.0f);
+            var entryAabb = entryEntity.Components.OfType<IShapeComponent>().First().Aabb;
+            var targetAabb = targetEntity.Components.OfType<IShapeComponent>().First().Aabb;
+            var offset = new Vector2((32 - targetAabb.Width) / 2.0f, (32 - targetAabb.Height) / 2.0f);
 
             //Vanilla game
             //1. Pause game
@@ -117,14 +122,15 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             //5. Camera fade-in
 
             var jobChain = new JobChain();
-  
+            //jobChain.Equeue(new EntityJob(entryEntity, "BodyOff"));
             jobChain.Equeue(new WorldJob(cameraEntity.World, "Pause"));
             jobChain.Equeue(new CameraEffectJob(cameraEntity, CameraHelper.CAMERA_FADE_OUT));
-            jobChain.Equeue(new TeleportJob(otherEntity, exitPos.Value + offset, true));
+            jobChain.Equeue(new TeleportJob(targetEntity, exitPos.Value + offset, true));
             jobChain.Equeue(new WorldJob(cameraEntity.World, "Unpause"));
             jobChain.Equeue(new CameraEffectJob(cameraEntity, CameraHelper.CAMERA_FADE_IN));
+            jobChain.Equeue(new EntityJob(entryEntity, "BodyOn"));
 
-            thisEntity.Core.Jobs.Execute(jobChain);
+            entryEntity.Core.Jobs.Execute(jobChain);
         }
 
 

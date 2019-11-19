@@ -80,6 +80,8 @@
     <Compile Include="Entities\WorldGate\WorldGateHelper.cs" />
     <Compile Include="Helpers\AnimHelper.cs" />
     <Compile Include="Helpers\EntityMsgHandler.cs" />
+    <Compile Include="IWorldLoader.cs" />
+    <Compile Include="Jobs\EntityJob.cs" />
     <Compile Include="Jobs\FpsTextUpdateJob.cs" />
     <Compile Include="Managers\LogMan.cs" />
     <Compile Include="Helpers\SandBoxHelper.cs" />

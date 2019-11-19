@@ -266,24 +266,20 @@ namespace OpenBreed.Sandbox
         {
             base.OnUpdateFrame(e);
 
-
+            Rendering.Cleanup();
+            PostAndRaise();
             Players.ResetInputs();
             Inputs.Update();
             Players.ApplyInputs();
-            PostAndRaise();
-            Rendering.Cleanup();
             PostAndRaise();
             Worlds.Cleanup();
             PostAndRaise();
             StateMachine.Update((float)e.Time);
             PostAndRaise();
-            Jobs.Update((float)e.Time);
-            PostAndRaise();
             Worlds.Update((float)e.Time);
             PostAndRaise();
-
-            //hudWorld.Update();
-
+            Jobs.Update((float)e.Time);
+            PostAndRaise();
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)

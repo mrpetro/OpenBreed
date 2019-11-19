@@ -74,8 +74,8 @@ namespace OpenBreed.Core.Managers
                 {
                     var job = toExecute[i];
                     job.Complete = OnComplete;
-                    job.Execute();
                     running.Add(job);
+                    job.Execute();
                 }
 
                 toExecute.Clear();
