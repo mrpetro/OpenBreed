@@ -150,6 +150,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             {
                 activeDynamics.Add(dynamicToActivate);
                 inactiveDynamics.Remove(dynamicToActivate);
+                msg.Entity.RaiseEvent(new BodyOnEvent(msg.Entity));
                 return true;
             }
 
@@ -158,10 +159,11 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             {
                 InsertToGrid(staticToActivate);
                 inactiveStatics.Remove(staticToActivate);
+                msg.Entity.RaiseEvent(new BodyOnEvent(msg.Entity));
                 return true;
             }
 
-            return true;
+            return false;
         }
 
         private bool HandleBodyOffMsg(object sender, BodyOffMsg msg)
@@ -172,16 +174,21 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             {
                 inactiveDynamics.Add(dynamicToDeactivate);
                 activeDynamics.Remove(dynamicToDeactivate);
+
+                msg.Entity.RaiseEvent(new BodyOffEvent(msg.Entity));
                 return true;
             }
 
-
             var staticToDeactivate = RemoveFromGrid(msg.Entity);
 
-            if(staticToDeactivate != null)
+            if (staticToDeactivate != null)
+            {
                 inactiveStatics.Add(staticToDeactivate);
+                msg.Entity.RaiseEvent(new BodyOffEvent(msg.Entity));
+                return true;
+            }
 
-            return true;
+            return false;
         }
 
         private void SweepAndPrune(float dt)
@@ -219,7 +226,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 }
             }
 
-            QueryStaticGrid(activeDynamics.Last(), dt);
+            if(activeDynamics.Count > 0)
+                QueryStaticGrid(activeDynamics.Last(), dt);
         }
 
         private void TestNarrowPhaseDynamic(DynamicPack packA, DynamicPack packB, float dt)
@@ -433,6 +441,9 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         private void UnregisterDynamicEntity(IEntity entity)
         {
             var dynamic = activeDynamics.FirstOrDefault(item => item.Entity == entity);
+
+            if (dynamic == null)
+                dynamic = inactiveDynamics.FirstOrDefault(item => item.Entity == entity);
 
             if (dynamic == null)
                 throw new InvalidOperationException("Entity not found in this system.");

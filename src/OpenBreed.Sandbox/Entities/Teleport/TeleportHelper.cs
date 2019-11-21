@@ -99,9 +99,6 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         private static void OnCollision(IEntity entryEntity, IEntity targetEntity, Vector2 projection)
         {
-            entryEntity.PostMsg(new BodyOffMsg(entryEntity));
-            Console.WriteLine("Hit");
-
             var cameraEntity = targetEntity.Tag as IEntity;
 
             if (cameraEntity == null)
@@ -128,7 +125,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             jobChain.Equeue(new TeleportJob(targetEntity, exitPos.Value + offset, true));
             jobChain.Equeue(new WorldJob(cameraEntity.World, "Unpause"));
             jobChain.Equeue(new CameraEffectJob(cameraEntity, CameraHelper.CAMERA_FADE_IN));
-            jobChain.Equeue(new EntityJob(entryEntity, "BodyOn"));
+            //jobChain.Equeue(new EntityJob(entryEntity, "BodyOn"));
 
             entryEntity.Core.Jobs.Execute(jobChain);
         }

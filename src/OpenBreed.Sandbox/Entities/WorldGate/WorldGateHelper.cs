@@ -55,11 +55,10 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
         #region Private Methods
 
+        private static int c = 0;
+
         private static void OnCollision(IEntity exitEntity, IEntity targetEntity, Vector2 projection)
         {
-            exitEntity.PostMsg(new BodyOffMsg(exitEntity));
-            Console.WriteLine("Hit");
-
             var cameraEntity = targetEntity.Tag as IEntity;
 
             if (cameraEntity == null)
@@ -68,16 +67,14 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             var exitInfo = (Tuple<string, int>)exitEntity.Tag;
 
             var jobChain = new JobChain();
-            //jobChain.Equeue(new EntityJob(exitEntity, "BodyOff"));
             jobChain.Equeue(new WorldJob(cameraEntity.World, "Pause"));
             jobChain.Equeue(new CameraEffectJob(cameraEntity, CameraHelper.CAMERA_FADE_OUT));
 
-
-            //jobChain.Equeue(new EntityJob(cameraEntity, "LeaveWorld"));
+            jobChain.Equeue(new EntityJob(cameraEntity, "LeaveWorld"));
             jobChain.Equeue(new EntityJob(targetEntity, "LeaveWorld"));
 
-            //jobChain.Equeue(new EntityJob(cameraEntity, "EnterWorld", exitInfo.Item1, exitInfo.Item2));
-            //jobChain.Equeue(new EntityJob(targetEntity, "EnterWorld", exitInfo.Item1, exitInfo.Item2));
+            jobChain.Equeue(new EntityJob(cameraEntity, "EnterWorld", exitInfo.Item1, exitInfo.Item2));
+            jobChain.Equeue(new EntityJob(targetEntity, "EnterWorld", exitInfo.Item1, exitInfo.Item2));
 
             //jobChain.Equeue(new TeleportJob(targetEntity, exitPos.Value + offset, true));
             //jobChain.Equeue(new WorldJob(cameraEntity.World, "Unpause"));

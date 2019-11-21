@@ -36,7 +36,7 @@ namespace OpenBreed.Sandbox.Jobs
 
         public void Execute()
         {
-            entity.PostMsg(new TextSetMsg(entity, $"FPS: {entity.Core.Rendering.Fps.ToString("0.00")}"));
+            //entity.PostMsg(new TextSetMsg(entity, $"FPS: {entity.Core.Rendering.Fps.ToString("0.00")}"));
         }
 
         public void Update(float dt)

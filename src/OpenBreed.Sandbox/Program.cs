@@ -272,10 +272,9 @@ namespace OpenBreed.Sandbox
             Inputs.Update();
             Players.ApplyInputs();
             PostAndRaise();
-            Worlds.Cleanup();
-            PostAndRaise();
             StateMachine.Update((float)e.Time);
             PostAndRaise();
+            Worlds.Cleanup();
             Worlds.Update((float)e.Time);
             PostAndRaise();
             Jobs.Update((float)e.Time);

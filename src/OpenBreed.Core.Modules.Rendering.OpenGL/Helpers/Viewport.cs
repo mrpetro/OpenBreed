@@ -364,7 +364,8 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
                 var transform = GetCameraTransform();
                 GL.MultMatrix(ref transform);
 
-                CameraEntity.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(this, dt));
+                if(CameraEntity.World != null)
+                    CameraEntity.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(this, dt));
             }
             finally
             {

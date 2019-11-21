@@ -38,6 +38,7 @@ namespace OpenBreed.Core.Entities
         #region Public Events
 
         public event EventHandler<World> RemovedFromWorld;
+        public event EventHandler<World> AddedToWorld;
 
         #endregion Public Events
 
@@ -123,9 +124,14 @@ namespace OpenBreed.Core.Entities
             return $"Entity({Id})";
         }
 
-        private void OnRemoved(World world)
+        private void OnRemovedFrom(World world)
         {
             RemovedFromWorld?.Invoke(this, world);
+        }
+
+        private void OnAddedTo(World world)
+        {
+            AddedToWorld?.Invoke(this, world);
         }
 
         #endregion Public Methods
@@ -141,16 +147,18 @@ namespace OpenBreed.Core.Entities
 
             //Forget the world in which entity was
             World = null;
-            OnRemoved(from);
+            OnRemovedFrom(from);
         }
 
         internal void Initialize(World world)
         {
             //Remember in what world entity is
             World = world;
+            OnAddedTo(World);
 
             foreach (var fsm in fsmList)
                 fsm.Initialize();
+
         }
 
         #endregion Internal Methods

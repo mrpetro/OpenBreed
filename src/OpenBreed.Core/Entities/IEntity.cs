@@ -20,6 +20,11 @@ namespace OpenBreed.Core.Entities
         /// </summary>
         event EventHandler<World> RemovedFromWorld;
 
+        /// <summary>
+        /// Called when entity is added to world
+        /// </summary>
+        event EventHandler<World> AddedToWorld;
+
         #endregion Public Events
 
         #region Public Properties
