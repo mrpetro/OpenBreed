@@ -13,9 +13,9 @@ namespace OpenBreed.Sandbox.Worlds
 {
     public static class GameWorldHelper
     {
-        public static World CreateGameWorld(ICore core)
+        public static World CreateGameWorld(ICore core, string worldName)
         {
-            var gameWorld = core.Worlds.Create();
+            var gameWorld = core.Worlds.Create(worldName);
 
             //AI
             // Pathfinding/ AI systems here

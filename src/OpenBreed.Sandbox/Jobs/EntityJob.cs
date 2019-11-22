@@ -85,8 +85,13 @@ namespace OpenBreed.Sandbox.Jobs
 
         private void EnterWorld(string worldName, int entryId)
         {
-            var world = GameWorldHelper.CreateGameWorld(entity.Core);
-            //StateTechDemo5.SetupWorld(world);
+            var world = entity.Core.Worlds.GetByName(worldName);
+
+            if (world == null)
+            {
+                world = GameWorldHelper.CreateGameWorld(entity.Core, worldName);
+                StateTechDemo5.SetupWorld(world);
+            }
 
             entity.AddedToWorld += Entity_AddedToWorld;
             world.AddEntity(entity);

@@ -145,7 +145,7 @@ namespace OpenBreed.Sandbox.States
 
         private void InitializeWorld()
         {
-            GameWorld = GameWorldHelper.CreateGameWorld(Core);
+            GameWorld = GameWorldHelper.CreateGameWorld(Core, "DEMO5");
             SetupWorld(GameWorld);
 
             var cameraBuilder = new CameraBuilder(Core);

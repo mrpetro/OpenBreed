@@ -35,9 +35,10 @@ namespace OpenBreed.Core.Common
 
         #region Internal Constructors
 
-        internal World(ICore core)
+        internal World(ICore core, string name)
         {
             Core = core;
+            Name = name;
             Entities = new ReadOnlyCollection<IEntity>(entities);
             Systems = new ReadOnlyCollection<IWorldSystem>(systems);
 

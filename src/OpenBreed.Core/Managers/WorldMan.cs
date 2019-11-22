@@ -17,6 +17,7 @@ namespace OpenBreed.Core.Managers
         private readonly List<World> toAdd = new List<World>();
         private readonly List<World> toRemove = new List<World>();
         private readonly IdMap<World> worlds = new IdMap<World>();
+        private readonly Dictionary<string, int> namesToIds = new Dictionary<string, int>();
 
         #endregion Private Fields
 
@@ -62,12 +63,29 @@ namespace OpenBreed.Core.Managers
         }
 
         /// <summary>
+        /// Gets world by it's name
+        /// </summary>
+        /// <param name="name">Name of world to find</param>
+        /// <returns>World object if found, null otherwise</returns>
+        public World GetByName(string name)
+        {
+            int worldId;
+            if (!namesToIds.TryGetValue(name, out worldId))
+                return null;
+
+            return worlds[worldId];
+        }
+
+        /// <summary>
         /// Creates world, It will be initialized and added to Core at nearest manager update
         /// </summary>
         /// <returns>New World</returns>
-        public World Create()
+        public World Create(string name)
         {
-            var newWorld = new World(Core);
+            if (namesToIds.ContainsKey(name))
+                throw new InvalidOperationException($"World with name '{name}' already exist.");
+
+            var newWorld = new World(Core, name);
             toAdd.Add(newWorld);
             return newWorld;
         }
@@ -119,8 +137,10 @@ namespace OpenBreed.Core.Managers
                 //Process entities to add
                 for (int i = 0; i < toAdd.Count; i++)
                 {
-                    toAdd[i].Id = worlds.Add(toAdd[i]);
-                    toAdd[i].Initialize();
+                    var world = toAdd[i];
+                    world.Id = worlds.Add(world);
+                    namesToIds.Add(world.Name, world.Id);
+                    world.Initialize();
                 }
 
                 toAdd.Clear();

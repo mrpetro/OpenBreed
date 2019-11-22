@@ -18,7 +18,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         public static void CreateHudWorld(ICore core)
         {
-            var hudWorld = core.Worlds.Create();
+            var hudWorld = core.Worlds.Create("HUD");
 
             //Input
             hudWorld.AddSystem(new WalkingControlSystem(core));
