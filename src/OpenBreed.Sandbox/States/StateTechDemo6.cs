@@ -153,7 +153,10 @@ namespace OpenBreed.Sandbox.States
 
         private void InitializeWorld()
         {
-            GameWorld = GameWorldHelper.CreateGameWorld(Core, "DEMO6");
+            using (var reader = new TxtFileWorldReader(Core, ".\\Content\\Maps\\hub.txt"))
+                GameWorld = reader.GetWorld();
+
+            //GameWorld = GameWorldHelper.CreateGameWorld(Core, "DEMO6");
 
             var cameraBuilder = new CameraBuilder(Core);
 
@@ -170,7 +173,7 @@ namespace OpenBreed.Sandbox.States
             gameViewport = (Viewport)Core.Rendering.Viewports.Create(0.05f, 0.05f, 0.90f, 0.90f);
             gameViewport.CameraEntity = GameCamera;
 
-            var actor = ActorHelper.CreateActor(Core, new Vector2(450, 288));
+            var actor = ActorHelper.CreateActor(Core, new Vector2(128, 128));
             actor.Tag = GameCamera;
 
             actor.Add(new WalkingControl());
@@ -193,19 +196,19 @@ namespace OpenBreed.Sandbox.States
             rotateFsm.SetInitialState("Idle");
             GameWorld.AddEntity(actor);
 
-            var worldExit = WorldGateHelper.AddWorldExit(Core, GameWorld, 30, 10, "TECH_DEMO_5", 1);
+            var worldExit = WorldGateHelper.AddWorldExit(Core, GameWorld, 10, 20, "TECH_DEMO_5", 1);
 
-            var teleportExit = TeleportHelper.AddTeleportExit(Core, GameWorld, 20, 10);
-            TeleportHelper.AddTeleportEntry(Core, GameWorld, 10, 10, teleportExit.Id);
+            TeleportHelper.AddTeleportEntry(GameWorld, 10, 10, 5);
+            TeleportHelper.AddTeleportExit(GameWorld, 10, 15, 5);
 
-            var rnd = new Random();
+            //var rnd = new Random();
 
-            for (int i = 0; i < 10; i++)
-            {
-                PickableHelper.AddItem(Core, GameWorld, rnd.Next(5, 60), rnd.Next(5, 60));
-            }
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    PickableHelper.AddItem(Core, GameWorld, rnd.Next(5, 60), rnd.Next(5, 60));
+            //}
 
-            SandBoxHelper.SetupMap(GameWorld);
+            //SandBoxHelper.SetupMap(GameWorld);
 
         }
 

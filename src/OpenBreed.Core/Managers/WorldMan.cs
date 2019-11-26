@@ -19,6 +19,11 @@ namespace OpenBreed.Core.Managers
         private readonly IdMap<World> worlds = new IdMap<World>();
         private readonly Dictionary<string, int> namesToIds = new Dictionary<string, int>();
 
+        public WorldBuilder GetBuilder()
+        {
+            return new WorldBuilder(Core);
+        }
+
         #endregion Private Fields
 
         #region Public Constructors

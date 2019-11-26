@@ -5,6 +5,7 @@ using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenBreed.Core.Managers
 {
@@ -45,6 +46,11 @@ namespace OpenBreed.Core.Managers
         public static void AddSetter(string key, Action<object> action)
         {
             setters.Add(key, action);
+        }
+
+        public IEnumerable<IEntity> GetByTag(object tag)
+        {
+            return entities.Items.Where(item => item.Tag != null && item.Tag.Equals(tag));
         }
 
         public IEntity GetById(int id)

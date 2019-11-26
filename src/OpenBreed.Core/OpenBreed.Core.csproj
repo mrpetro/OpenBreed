@@ -171,6 +171,7 @@
     <Compile Include="Managers\StateMan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\World.cs" />
+    <Compile Include="WorldBuilder.cs" />
     <Compile Include="WorldJob.cs" />
     <Compile Include="Managers\WorldMan.cs" />
   </ItemGroup>

@@ -140,7 +140,7 @@ namespace OpenBreed.Sandbox.States
                 DoorHelper.AddHorizontalDoor(world, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3);
 
             for (int i = 0; i < 10; i++)
-                DoorHelper.AddVerticalDoor(world.Core, world, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3);
+                DoorHelper.AddVerticalDoor(world, rnd.Next(1, 20) * 3, rnd.Next(1, 20) * 3);
         }
 
         private void InitializeWorld()

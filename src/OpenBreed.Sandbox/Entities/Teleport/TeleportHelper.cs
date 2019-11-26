@@ -19,6 +19,16 @@ using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Teleport
 {
+    public struct TeleportPair : IEquatable<TeleportPair>
+    {
+        public int Id;
+
+        public bool Equals(TeleportPair other)
+        {
+            return Id == other.Id;
+        }
+    }
+
     public static class TeleportHelper
     {
         #region Public Fields
@@ -44,12 +54,14 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             animationTeleportEntry.AddFrame(3, 1.0f);
         }
 
-        public static IEntity AddTeleportEntry(ICore core, World world, int x, int y, int exitEntityId)
+        public static IEntity AddTeleportEntry(World world, int x, int y, int pairId)
         {
+            var core = world.Core;
             var anim = core.Animations.Anims.GetByName(ANIMATION_TELEPORT_ENTRY);
 
             var teleportEntry = core.Entities.Create();
 
+            teleportEntry.Tag = new TeleportPair { Id = pairId };
             teleportEntry.Add(new Animator(10.0f, true, anim.Id));
             teleportEntry.Add(Body.Create(1.0f, 1.0f, "Trigger", (e, c) => OnCollision(teleportEntry, e, c)));
             teleportEntry.Add(core.Rendering.CreateSprite(SPRITE_TELEPORT_ENTRY));
@@ -57,29 +69,30 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             teleportEntry.Add(AxisAlignedBoxShape.Create(16, 16, 8, 8));
             teleportEntry.Add(TextHelper.Create(core, new Vector2(0, 32), "TeleportEntry"));
             teleportEntry.Subscribe(AnimChangedEvent.TYPE, OnTeleportFrameChanged);
-            teleportEntry.Tag = exitEntityId;
 
             world.AddEntity(teleportEntry);
 
             return teleportEntry;
         }
 
-        public static IEntity AddTeleportExit(ICore core, World world, int x, int y)
+        public static IEntity AddTeleportExit(World world, int x, int y, int pairId)
         {
+            var core = world.Core;
             var anim = core.Animations.Anims.GetByName(ANIMATION_TELEPORT_ENTRY);
 
-            var teleportEntity = core.Entities.Create();
+            var teleportExit = core.Entities.Create();
 
-            teleportEntity.Add(new Animator(10.0f, true, anim.Id));
-            teleportEntity.Add(core.Rendering.CreateSprite(SPRITE_TELEPORT_ENTRY));
-            teleportEntity.Add(Position.Create(x * 16, y * 16));
-            teleportEntity.Add(AxisAlignedBoxShape.Create(16, 16, 8, 8));
-            teleportEntity.Add(TextHelper.Create(core, new Vector2(0, 32), "TeleportExit"));
-            teleportEntity.Subscribe(AnimChangedEvent.TYPE, OnTeleportFrameChanged);
+            teleportExit.Tag = new TeleportPair { Id = pairId };
+            teleportExit.Add(new Animator(10.0f, true, anim.Id));
+            teleportExit.Add(core.Rendering.CreateSprite(SPRITE_TELEPORT_ENTRY));
+            teleportExit.Add(Position.Create(x * 16, y * 16));
+            teleportExit.Add(AxisAlignedBoxShape.Create(16, 16, 8, 8));
+            teleportExit.Add(TextHelper.Create(core, new Vector2(0, 32), "TeleportExit"));
+            teleportExit.Subscribe(AnimChangedEvent.TYPE, OnTeleportFrameChanged);
 
-            world.AddEntity(teleportEntity);
+            world.AddEntity(teleportExit);
 
-            return teleportEntity;
+            return teleportExit;
         }
 
         #endregion Public Methods
@@ -104,8 +117,9 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             if (cameraEntity == null)
                 return;
 
-            var exitEntityId = (int)entryEntity.Tag;
-            var existEntity = entryEntity.Core.Entities.GetById(exitEntityId);
+            var pair = (TeleportPair)entryEntity.Tag;
+
+            var existEntity = entryEntity.Core.Entities.GetByTag(pair).FirstOrDefault(item => item != entryEntity);
             var exitPos = existEntity.Components.OfType<Position>().First();
             var entryAabb = entryEntity.Components.OfType<IShapeComponent>().First().Aabb;
             var targetAabb = targetEntity.Components.OfType<IShapeComponent>().First().Aabb;

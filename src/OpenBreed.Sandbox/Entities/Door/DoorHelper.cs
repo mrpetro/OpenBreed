@@ -89,8 +89,9 @@ namespace OpenBreed.Sandbox.Entities.Door
             return stateMachine;
         }
 
-        public static void AddVerticalDoor(ICore core, World world, int x, int y)
+        public static void AddVerticalDoor(World world, int x, int y)
         {
+            var core = world.Core;
             var door = core.Entities.Create();
 
             door.Add(new Animator(5.0f, false));
@@ -158,8 +159,8 @@ namespace OpenBreed.Sandbox.Entities.Door
             stampBuilder.SetName(STAMP_DOOR_HORIZONTAL_OPENED);
             stampBuilder.SetSize(2, 1);
             stampBuilder.SetOrigin(0, 0);
-            stampBuilder.AddTile(0, 0, 2);
-            stampBuilder.AddTile(1, 0, 3);
+            stampBuilder.AddTile(0, 0, 12);
+            stampBuilder.AddTile(1, 0, 12);
             stampBuilder.Build();
 
             stampBuilder.ClearTiles();
@@ -174,8 +175,8 @@ namespace OpenBreed.Sandbox.Entities.Door
             stampBuilder.SetName(STAMP_DOOR_VERTICAL_OPENED);
             stampBuilder.SetSize(1, 2);
             stampBuilder.SetOrigin(0, 0);
-            stampBuilder.AddTile(0, 0, 5);
-            stampBuilder.AddTile(0, 1, 9);
+            stampBuilder.AddTile(0, 0, 12);
+            stampBuilder.AddTile(0, 1, 12);
             stampBuilder.Build();
 
         }
