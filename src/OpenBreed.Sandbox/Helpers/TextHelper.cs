@@ -14,7 +14,7 @@ namespace OpenBreed.Sandbox.Helpers
     {
         public static IEntityComponent Create(ICore core, Vector2 offset, string text)
         {
-            var fontAtlas = core.Rendering.Fonts.Create("Arial", 12);
+            var fontAtlas = core.Rendering.Fonts.Create("Arial", 9);
             return TextComponent.Create(fontAtlas.Id, offset, text);
         }
     }

@@ -154,8 +154,8 @@ namespace OpenBreed.Sandbox.States
 
         private void InitializeAll()
         {
-            WorldA = new GameWorld(Core);
-            WorldB = new GameWorld(Core);
+            WorldA = GameWorldHelper.CreateGameWorld(Core, "DEMO2_A");
+            WorldB = GameWorldHelper.CreateGameWorld(Core, "DEMO2_B");
             var cameraBuilder = new CameraBuilder(Core);
 
             //Resources
@@ -177,9 +177,6 @@ namespace OpenBreed.Sandbox.States
             viewportRight = (Viewport)Core.Rendering.Viewports.Create(0.55f, 0.05f, 0.40f, 0.90f);
 
             viewportRight.CameraEntity = Camera2;
-
-            Core.Worlds.Add(WorldA);
-            Core.Worlds.Add(WorldB);
 
             Core.Inputs.KeyDown += Inputs_KeyDown;
 

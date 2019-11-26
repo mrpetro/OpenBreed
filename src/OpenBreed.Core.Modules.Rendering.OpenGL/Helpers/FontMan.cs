@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using OpenBreed.Core.Managers;
+using System.Collections.Generic;
 
 namespace OpenBreed.Core.Modules.Rendering.Helpers
 {

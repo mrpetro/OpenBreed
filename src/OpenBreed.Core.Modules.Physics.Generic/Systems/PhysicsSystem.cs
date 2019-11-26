@@ -25,6 +25,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         private readonly List<DynamicPack> inactiveDynamics = new List<DynamicPack>();
         private readonly List<DynamicPack> activeDynamics = new List<DynamicPack>();
         private List<StaticPack>[] gridStatics;
+        private readonly List<StaticPack> inactiveStatics = new List<StaticPack>();
+
 
         #endregion Private Fields
 
@@ -148,10 +150,20 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             {
                 activeDynamics.Add(dynamicToActivate);
                 inactiveDynamics.Remove(dynamicToActivate);
+                msg.Entity.RaiseEvent(new BodyOnEvent(msg.Entity));
                 return true;
             }
 
-            return true;
+            var staticToActivate = inactiveStatics.FirstOrDefault(item => item.Entity == msg.Entity);
+            if (staticToActivate != null)
+            {
+                InsertToGrid(staticToActivate);
+                inactiveStatics.Remove(staticToActivate);
+                msg.Entity.RaiseEvent(new BodyOnEvent(msg.Entity));
+                return true;
+            }
+
+            return false;
         }
 
         private bool HandleBodyOffMsg(object sender, BodyOffMsg msg)
@@ -162,21 +174,21 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             {
                 inactiveDynamics.Add(dynamicToDeactivate);
                 activeDynamics.Remove(dynamicToDeactivate);
+
+                msg.Entity.RaiseEvent(new BodyOffEvent(msg.Entity));
                 return true;
             }
 
-            foreach (var list in gridStatics)
-            {
-                var toDeactivate = list.FirstOrDefault(item => item.Entity == msg.Entity);
+            var staticToDeactivate = RemoveFromGrid(msg.Entity);
 
-                if (toDeactivate != null)
-                {
-                    list.Remove(toDeactivate);
-                    //return true;
-                }
+            if (staticToDeactivate != null)
+            {
+                inactiveStatics.Add(staticToDeactivate);
+                msg.Entity.RaiseEvent(new BodyOffEvent(msg.Entity));
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         private void SweepAndPrune(float dt)
@@ -214,7 +226,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 }
             }
 
-            QueryStaticGrid(activeDynamics.Last(), dt);
+            if(activeDynamics.Count > 0)
+                QueryStaticGrid(activeDynamics.Last(), dt);
         }
 
         private void TestNarrowPhaseDynamic(DynamicPack packA, DynamicPack packB, float dt)
@@ -345,19 +358,12 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             return shape.Aabb.Translated(pos.Value);
         }
 
-        private void RegisterStaticEntity(IEntity entity)
+        private void InsertToGrid(StaticPack pack)
         {
-            var pack = new StaticPack(entity,
-                                      entity.Components.OfType<IBody>().First(),
-                                      entity.Components.OfType<Position>().First(),
-                                      entity.Components.OfType<IShapeComponent>().First());
-
-            var pos = pack.Position;
-
             int xIndex;
             int yIndex;
 
-            if (!TryGetGridIndices(pos.Value, out xIndex, out yIndex))
+            if (!TryGetGridIndices(pack.Position.Value, out xIndex, out yIndex))
                 throw new InvalidOperationException($"Tile position exceeds tile grid limits.");
 
             var aabb = pack.Aabb;
@@ -380,8 +386,9 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             }
         }
 
-        private void UnregisterStaticEntity(IEntity entity)
+        private StaticPack RemoveFromGrid(IEntity entity)
         {
+            StaticPack result = null;
             var aabb = GetAabb(entity);
 
             int leftIndex;
@@ -396,10 +403,28 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 var gridIndex = GridWidth * j + leftIndex;
                 for (int i = leftIndex; i < rightIndex; i++)
                 {
-                    gridStatics[gridIndex].RemoveAll(item => item.Entity == entity);
+                    result = gridStatics[gridIndex].FirstOrDefault(item => item.Entity == entity);
+                    gridStatics[gridIndex].Remove(result);
                     gridIndex++;
                 }
             }
+
+            return result;
+        }
+
+        private void RegisterStaticEntity(IEntity entity)
+        {
+            var pack = new StaticPack(entity,
+                                      entity.Components.OfType<IBody>().First(),
+                                      entity.Components.OfType<Position>().First(),
+                                      entity.Components.OfType<IShapeComponent>().First());
+
+            InsertToGrid(pack);
+        }
+
+        private void UnregisterStaticEntity(IEntity entity)
+        {
+            RemoveFromGrid(entity);
         }
 
         private void RegisterDynamicEntity(IEntity entity)
@@ -416,6 +441,9 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         private void UnregisterDynamicEntity(IEntity entity)
         {
             var dynamic = activeDynamics.FirstOrDefault(item => item.Entity == entity);
+
+            if (dynamic == null)
+                dynamic = inactiveDynamics.FirstOrDefault(item => item.Entity == entity);
 
             if (dynamic == null)
                 throw new InvalidOperationException("Entity not found in this system.");

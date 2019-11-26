@@ -6,6 +6,7 @@ using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Modules.Animation.Systems;
 using System;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Core.Modules.Animation
 {

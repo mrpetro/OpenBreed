@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Managers;
 using OpenTK;
 
 namespace OpenBreed.Core.States

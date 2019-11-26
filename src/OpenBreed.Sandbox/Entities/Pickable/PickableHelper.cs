@@ -39,7 +39,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable
             item.Add(Body.Create(1.0f, 1.0f, "Trigger", (e, c) => OnCollision(item, e, c)));
             item.Add(Position.Create(x * 16, y * 16));
             item.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
-            item.Add(TextHelper.Create(core, new Vector2(-10, 10), "Ammo"));
+            item.Add(TextHelper.Create(core, new Vector2(0, 20), "Ammo"));
 
             var doorSm = PickableHelper.CreateFSM(item);
             doorSm.SetInitialState("Lying");

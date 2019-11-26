@@ -77,8 +77,12 @@
     <Compile Include="Entities\Projectile\ProjectileHelper.cs" />
     <Compile Include="Entities\Projectile\States\FiredState.cs" />
     <Compile Include="Entities\Teleport\TeleportJob.cs" />
+    <Compile Include="Entities\WorldGate\WorldGateHelper.cs" />
     <Compile Include="Helpers\AnimHelper.cs" />
     <Compile Include="Helpers\EntityMsgHandler.cs" />
+    <Compile Include="IWorldReader.cs" />
+    <Compile Include="Jobs\EntityJob.cs" />
+    <Compile Include="Jobs\FpsTextUpdateJob.cs" />
     <Compile Include="Managers\LogMan.cs" />
     <Compile Include="Helpers\SandBoxHelper.cs" />
     <Compile Include="Helpers\TextHelper.cs" />
@@ -92,9 +96,11 @@
     <Compile Include="States\StateTechDemo2.cs" />
     <Compile Include="States\StateTechDemo1.cs" />
     <Compile Include="Tools.cs" />
-    <Compile Include="Worlds\GameWorld.cs" />
+    <Compile Include="Worlds\GameWorldHelper.cs" />
     <Compile Include="Worlds\Hub.cs" />
-    <Compile Include="Worlds\HudWorld.cs" />
+    <Compile Include="Worlds\HudWorldHelper.cs" />
+    <Compile Include="Worlds\TxtFileWorldReader.cs" />
+    <Compile Include="Worlds\WorldBuilderHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -163,6 +169,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Maps\hub.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Content\Graphics\TeleportSpriteSet.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -175,7 +184,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Sounds\" />
-    <Folder Include="Entities\WorldGate\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

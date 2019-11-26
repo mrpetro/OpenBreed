@@ -43,8 +43,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             Require<ITileComponent>();
             Require<Position>();
 
-            GridHeight = width;
-            GridWidth = height;
+            GridHeight = height;
+            GridWidth = width;
             LayersNo = layersNo;
             TileSize = tileSize;
             GridVisible = gridVisible;
@@ -94,10 +94,10 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             int rightIndex = (int)right / TILE_SIZE + 1;
             int topIndex = (int)top / TILE_SIZE + 1;
 
-            leftIndex = MathHelper.Clamp(leftIndex, 0, GridHeight);
-            rightIndex = MathHelper.Clamp(rightIndex, 0, GridHeight);
-            bottomIndex = MathHelper.Clamp(bottomIndex, 0, GridWidth);
-            topIndex = MathHelper.Clamp(topIndex, 0, GridWidth);
+            leftIndex = MathHelper.Clamp(leftIndex, 0, GridWidth);
+            rightIndex = MathHelper.Clamp(rightIndex, 0, GridWidth);
+            bottomIndex = MathHelper.Clamp(bottomIndex, 0, GridHeight);
+            topIndex = MathHelper.Clamp(topIndex, 0, GridHeight);
 
             if (GridVisible)
                 DrawGrid(leftIndex, bottomIndex, rightIndex, topIndex);

@@ -5,6 +5,7 @@ using OpenBreed.Core.Modules.Animation.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Core.Modules.Animation.Helpers
 {

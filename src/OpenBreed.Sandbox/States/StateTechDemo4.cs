@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
@@ -30,7 +31,7 @@ namespace OpenBreed.Sandbox.States
 
         public const string ID = "TECH_DEMO_4";
 
-        public GameWorld GameWorld;
+        public World GameWorld;
 
         #endregion Public Fields
 
@@ -150,7 +151,7 @@ namespace OpenBreed.Sandbox.States
 
         private void InitializeWorld()
         {
-            GameWorld = new GameWorld(Core);
+            GameWorld = GameWorldHelper.CreateGameWorld(Core, "DEMO4");
 
             var cameraBuilder = new CameraBuilder(Core);
 
@@ -210,7 +211,6 @@ namespace OpenBreed.Sandbox.States
                 }
             }
 
-            Core.Worlds.Add(GameWorld);
         }
 
         #endregion Private Methods

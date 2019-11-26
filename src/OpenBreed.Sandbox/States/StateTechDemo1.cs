@@ -160,7 +160,7 @@ namespace OpenBreed.Sandbox.States
 
         private void InitializeWorld()
         {
-            World = new GameWorld(Core);
+            World = GameWorldHelper.CreateGameWorld(Core, "DEMO1");
 
             var cameraBuilder = new CameraBuilder(Core);
 
@@ -193,8 +193,6 @@ namespace OpenBreed.Sandbox.States
             viewportC.Clipping = true;
             viewportC.DrawBorder = true;
             viewportC.CameraEntity = Camera2;
-
-            Core.Worlds.Add(World);
 
             var blockBuilder = new WorldBlockBuilder(Core);
             blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");

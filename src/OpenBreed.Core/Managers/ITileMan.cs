@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core.Modules.Rendering.Components.Builders;
+using OpenBreed.Core.Modules.Rendering.Helpers;
 
-namespace OpenBreed.Core.Modules.Rendering.Helpers
+namespace OpenBreed.Core.Managers
 {
     public interface ITileMan
     {

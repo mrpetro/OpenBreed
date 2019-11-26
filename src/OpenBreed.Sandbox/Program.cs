@@ -103,8 +103,6 @@ namespace OpenBreed.Sandbox
 
         public StateMan StateMachine { get; }
 
-        private HudWorld hudWorld;
-
         public Matrix4 ClientTransform
         {
             get
@@ -226,8 +224,9 @@ namespace OpenBreed.Sandbox
             TeleportHelper.CreateAnimations(this);
             ProjectileHelper.CreateAnimations(this);
 
-            hudWorld = new HudWorld(this);
-            hudWorld.Setup();
+            HudWorldHelper.CreateHudWorld(this);
+
+
 
             StateMachine.RegisterState(new StateTechDemo1(this));
             StateMachine.RegisterState(new StateTechDemo2(this));
@@ -269,24 +268,19 @@ namespace OpenBreed.Sandbox
         {
             base.OnUpdateFrame(e);
 
-
+            Rendering.Cleanup();
+            PostAndRaise();
             Players.ResetInputs();
             Inputs.Update();
             Players.ApplyInputs();
             PostAndRaise();
-            Rendering.Cleanup();
+            StateMachine.Update((float)e.Time);
             PostAndRaise();
             Worlds.Cleanup();
-            PostAndRaise();
-            StateMachine.Update((float)e.Time);
+            Worlds.Update((float)e.Time);
             PostAndRaise();
             Jobs.Update((float)e.Time);
             PostAndRaise();
-            Worlds.Update((float)e.Time);
-            PostAndRaise();
-
-            hudWorld.Update();
-
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)

@@ -1,9 +1,10 @@
-﻿using OpenTK;
+﻿using OpenBreed.Core.States;
+using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace OpenBreed.Core.States
+namespace OpenBreed.Core.Managers
 {
     public class StateMan
     {
