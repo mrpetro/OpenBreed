@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Core.States;
@@ -34,6 +35,21 @@ namespace OpenBreed.Core.Common
         #endregion Private Fields
 
         #region Internal Constructors
+
+        private Dictionary<Type, Dictionary<int, IEntityComponent>> components = new Dictionary<Type, Dictionary<int, IEntityComponent>>();
+
+        public void AddComponent<T>(int entityId, IEntityComponent component)
+        {
+            Dictionary<int, IEntityComponent> typeComponents = null;
+
+            if(!components.TryGetValue(typeof(T), out typeComponents))
+            {
+                typeComponents = new Dictionary<int, IEntityComponent>();
+                components.Add(typeof(T), typeComponents);
+            }
+
+            typeComponents.Add(entityId, component);
+        }
 
         internal World(ICore core, string name)
         {
@@ -102,15 +118,6 @@ namespace OpenBreed.Core.Common
                 throw new InvalidOperationException("Entity can't exist in more than one world.");
 
             toAdd.Add(entity);
-        }
-
-        public void PostMsg(IEntity sender, IEntityMsg entityMsg)
-        {
-            foreach (var system in Systems)
-            {
-                if (system.RecieveMsg(sender, entityMsg))
-                    break;
-            }
         }
 
         /// <summary>

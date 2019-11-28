@@ -41,7 +41,7 @@ namespace OpenBreed.Core.Common.Helpers
 
         public bool RecieveMsg(object sender, IMsg msg)
         {
-            throw new NotImplementedException();
+            return listener.RecieveMsg(sender, msg);
         }
 
         #endregion Public Methods

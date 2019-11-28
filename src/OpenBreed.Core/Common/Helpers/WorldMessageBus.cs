@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace OpenBreed.Core.Common.Helpers
 {
-    public class WorldMessageBus : IMsgHandler
+    public class WorldMessageBus
     {
         #region Private Fields
 
@@ -51,15 +51,6 @@ namespace OpenBreed.Core.Common.Helpers
             }
 
             return false;
-        }
-
-        public bool EnqueueMsg(object sender, IMsg msg)
-        {
-            IMsgHandler handler = null;
-            if (!handlers.TryGetValue(msg.Type, out handler))
-                return false;
-
-            return handler.EnqueueMsg(sender, msg);
         }
 
         #endregion Public Methods

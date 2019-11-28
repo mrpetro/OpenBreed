@@ -10,6 +10,7 @@ using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Rendering;
+using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems.Control.Systems;
 using OpenBreed.Sandbox.Entities.Actor;
@@ -119,11 +120,6 @@ namespace OpenBreed.Sandbox
         #endregion Public Properties
 
         #region Public Methods
-
-        public GroupSystem CreateGroupSystem()
-        {
-            return new GroupSystem(this);
-        }
 
         #endregion Public Methods
 
@@ -268,6 +264,7 @@ namespace OpenBreed.Sandbox
         {
             base.OnUpdateFrame(e);
 
+            Worlds.Cleanup();
             Rendering.Cleanup();
             PostAndRaise();
             Players.ResetInputs();
@@ -276,7 +273,6 @@ namespace OpenBreed.Sandbox
             PostAndRaise();
             StateMachine.Update((float)e.Time);
             PostAndRaise();
-            Worlds.Cleanup();
             Worlds.Update((float)e.Time);
             PostAndRaise();
             Jobs.Update((float)e.Time);

@@ -79,7 +79,6 @@
     <Compile Include="Entities\Teleport\TeleportJob.cs" />
     <Compile Include="Entities\WorldGate\WorldGateHelper.cs" />
     <Compile Include="Helpers\AnimHelper.cs" />
-    <Compile Include="Helpers\EntityMsgHandler.cs" />
     <Compile Include="IWorldReader.cs" />
     <Compile Include="Jobs\EntityJob.cs" />
     <Compile Include="Jobs\FpsTextUpdateJob.cs" />

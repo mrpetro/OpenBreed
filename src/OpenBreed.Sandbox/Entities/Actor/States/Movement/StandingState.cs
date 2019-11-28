@@ -52,7 +52,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             thrust.Value = Vector2.Zero;
 
             Entity.PostMsg(new PlayAnimMsg(Entity,  $"{animPrefix}/{Name}/{animDirName}"));
-            Entity.PostMsg(new TextSetMsg(Entity, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            Entity.PostMsg(new TextSetMsg(Entity.World.Id, Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
             Entity.Subscribe(ControlDirectionChangedEvent.TYPE, OnControlDirectionChanged);
         }

@@ -186,16 +186,10 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         private bool HandleTileSetMsg(object sender, TileSetMsg msg)
         {
-            var tile = (ITileComponent)entities[msg.Entity];
-            if (tile == null)
-                return false;
-
-            var pos = msg.Entity.Components.OfType<Position>().First();
-
             int xIndex;
             int yIndex;
 
-            if (!TryGetGridIndices(pos.Value, out xIndex, out yIndex))
+            if (!TryGetGridIndices(msg.Position, out xIndex, out yIndex))
                 throw new InvalidOperationException($"Tile position exceeds tile grid limits.");
 
             var cellIndex = xIndex + GridWidth * yIndex;
