@@ -197,19 +197,6 @@ namespace OpenBreed.Sandbox.States
             GameWorld.AddEntity(actor);
 
             var worldExit = WorldGateHelper.AddWorldExit(Core, GameWorld, 10, 20, "TECH_DEMO_5", 1);
-
-            TeleportHelper.AddTeleportEntry(GameWorld, 10, 10, 5);
-            TeleportHelper.AddTeleportExit(GameWorld, 10, 15, 5);
-
-            //var rnd = new Random();
-
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    PickableHelper.AddItem(Core, GameWorld, rnd.Next(5, 60), rnd.Next(5, 60));
-            //}
-
-            //SandBoxHelper.SetupMap(GameWorld);
-
         }
 
         #endregion Private Methods

@@ -1,7 +1,9 @@
 ﻿using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Extensions;
+using OpenBreed.Core.Managers;
 using OpenBreed.Core.States;
 using OpenTK;
 using System;
@@ -28,7 +30,7 @@ namespace OpenBreed.Core.Common
         private readonly List<IEntity> toAdd = new List<IEntity>();
         private readonly List<IEntity> toRemove = new List<IEntity>();
         private readonly List<IWorldSystem> systems = new List<IWorldSystem>();
-        private MsgHandler msgHandler;
+
         private float timeMultiplier = 1.0f;
 
         #endregion Private Fields
@@ -39,8 +41,10 @@ namespace OpenBreed.Core.Common
         {
             Core = core;
             Name = name;
+
             Entities = new ReadOnlyCollection<IEntity>(entities);
             Systems = new ReadOnlyCollection<IWorldSystem>(systems);
+            Components = new ComponentsMan();
 
             MessageBus = new WorldMessageBus(this);
             MessageBus.RegisterHandler(StateChangeMsg.TYPE, new StateChangeMsgHandler(this));
@@ -74,6 +78,7 @@ namespace OpenBreed.Core.Common
         public ICore Core { get; }
         public ReadOnlyCollection<IEntity> Entities { get; }
         public ReadOnlyCollection<IWorldSystem> Systems { get; }
+        public ComponentsMan Components { get; }
         public WorldMessageBus MessageBus { get; }
 
         /// <summary>
@@ -102,15 +107,6 @@ namespace OpenBreed.Core.Common
                 throw new InvalidOperationException("Entity can't exist in more than one world.");
 
             toAdd.Add(entity);
-        }
-
-        public void PostMsg(IEntity sender, IEntityMsg entityMsg)
-        {
-            foreach (var system in Systems)
-            {
-                if (system.RecieveMsg(sender, entityMsg))
-                    break;
-            }
         }
 
         /// <summary>

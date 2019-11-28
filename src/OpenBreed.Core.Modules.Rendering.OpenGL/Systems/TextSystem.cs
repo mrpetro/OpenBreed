@@ -20,7 +20,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         #region Private Fields
 
         private MsgHandler msgHandler;
-        private readonly List<IEntity> entities = new List<IEntity>();
+        private readonly List<int> entities = new List<int>();
         private readonly List<ITextComponent> textComps = new List<ITextComponent>();
         private readonly List<Position> positionComps = new List<Position>();
 
@@ -53,8 +53,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// <param name="viewport">Viewport on which sprites will be drawn to</param>
         public void Render(IViewport viewport, float dt)
         {
-            msgHandler.PostEnqueued();
-
             float left, bottom, right, top;
             viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
 
@@ -75,7 +73,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         public void DrawEntityText(IViewport viewport, int index)
         {
-            var entity = entities[index];
             var text = textComps[index];
             var position = positionComps[index];
 
@@ -110,14 +107,14 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         protected override void RegisterEntity(IEntity entity)
         {
-            entities.Add(entity);
+            entities.Add(entity.Id);
             textComps.Add(entity.Components.OfType<ITextComponent>().First());
             positionComps.Add(entity.Components.OfType<Position>().First());
         }
 
         protected override void UnregisterEntity(IEntity entity)
         {
-            var index = entities.IndexOf(entity);
+            var index = entities.IndexOf(entity.Id);
 
             if (index < 0)
                 throw new InvalidOperationException("Entity not found in this system.");
@@ -133,7 +130,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         private bool HandleTextSetMsg(object sender, TextSetMsg message)
         {
-            var index = entities.IndexOf(message.Entity);
+            var index = entities.IndexOf(message.EntityId);
             if (index < 0)
                 return false;
 

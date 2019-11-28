@@ -9,8 +9,6 @@ namespace OpenBreed.Core.Common.Helpers
 
         private readonly Queue<MsgData> queue = new Queue<MsgData>();
 
-        private Dictionary<string, IMsgHandler> handlers = new Dictionary<string, IMsgHandler>();
-
         #endregion Private Fields
 
         #region Public Constructors
@@ -30,26 +28,8 @@ namespace OpenBreed.Core.Common.Helpers
 
         #region Public Methods
 
-        private bool EnqueueEntityMsg(object sender, IEntityMsg msg)
-        {
-            return msg.Entity.World.MessageBus.EnqueueMsg(sender, msg);
-        }
-
         public void Enqueue(object sender, IMsg msg)
         {
-            if (msg is IEntityMsg)
-            {
-                if(EnqueueEntityMsg(sender, (IEntityMsg)msg))
-                    return;
-            }
-
-            IMsgHandler handler = null;
-            if (handlers.TryGetValue(msg.Type, out handler))
-            {
-                if (handler.EnqueueMsg(sender, msg))
-                    return;
-            }
-
             queue.Enqueue(new MsgData(sender, msg));
         }
 
@@ -60,11 +40,6 @@ namespace OpenBreed.Core.Common.Helpers
                 var ed = queue.Dequeue();
                 Post(ed.Sender, ed.Msg);
             }
-        }
-
-        public void RegisterHandler(string msgType, IMsgHandler msgHandler)
-        {
-            handlers.Add(msgType, msgHandler);
         }
 
         #endregion Public Methods
@@ -78,12 +53,11 @@ namespace OpenBreed.Core.Common.Helpers
                 Post(sender, (IEntityMsg)msg);
                 return;
             }
-
-            IMsgHandler handler = null;
-            if (handlers.TryGetValue(msg.Type, out handler))
-                handler.RecieveMsg(sender, msg);
-            else
-                Core.Logging.Warning($"Handler for message '{msg}' not registered");
+            else if (msg is IWorldMsg)
+            {
+                Post(sender, (IWorldMsg)msg);
+                return;
+            }
         }
 
         private void Post(object sender, IEntityMsg msg)
@@ -92,7 +66,14 @@ namespace OpenBreed.Core.Common.Helpers
             Debug.Assert(msg.Entity != null);
             Debug.Assert(msg.Entity.World != null);
 
-            msg.Entity.World.MessageBus.RecieveMsg(sender, msg);
+            msg.Entity.World.MessageBus.PostMsg(sender, msg);
+        }
+
+        private void Post(object sender, IWorldMsg msg)
+        {
+            Debug.Assert(msg != null);
+
+            Core.Worlds.PostMsg(sender, msg);
         }
 
         #endregion Private Methods

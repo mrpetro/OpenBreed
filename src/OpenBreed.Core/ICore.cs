@@ -44,12 +44,6 @@ namespace OpenBreed.Core
         IAnimationModule Animations { get; }
 
         /// <summary>
-        /// Create group system
-        /// </summary>
-        /// <returns>Group system</returns>
-        GroupSystem CreateGroupSystem();
-
-        /// <summary>
         /// Logging manager
         /// </summary>
         ILogMan Logging { get; }

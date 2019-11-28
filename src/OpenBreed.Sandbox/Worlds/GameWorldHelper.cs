@@ -27,9 +27,6 @@ namespace OpenBreed.Sandbox.Worlds
             gameWorld.AddSystem(core.Physics.CreatePhysicsSystem(width, height));
             gameWorld.AddSystem(core.Animations.CreateAnimationSystem<int>());
 
-            //Other
-            gameWorld.AddSystem(core.CreateGroupSystem());
-
             //Audio
             gameWorld.AddSystem(core.Sounds.CreateSoundSystem());
 
@@ -57,9 +54,6 @@ namespace OpenBreed.Sandbox.Worlds
             gameWorld.AddSystem(new MovementSystem(core));
             gameWorld.AddSystem(core.Physics.CreatePhysicsSystem(64, 64));
             gameWorld.AddSystem(core.Animations.CreateAnimationSystem<int>());
-
-            //Other
-            gameWorld.AddSystem(core.CreateGroupSystem());
 
             //Audio
             gameWorld.AddSystem(core.Sounds.CreateSoundSystem());

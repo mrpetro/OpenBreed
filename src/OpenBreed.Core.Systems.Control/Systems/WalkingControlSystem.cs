@@ -48,7 +48,6 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         public void Update(float dt)
         {
-            msgHandler.PostEnqueued();
         }
 
         public override bool RecieveMsg(object sender, IMsg message)

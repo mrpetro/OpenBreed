@@ -48,7 +48,7 @@ namespace OpenBreed.Sandbox.Components.States
             Entity.PostMsg(new BodyOnMsg(Entity));
 
             Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            Entity.PostMsg(new TextSetMsg(Entity, "Door - Closing"));
+            Entity.PostMsg(new TextSetMsg(Entity.World.Id, Entity.Id, "Door - Closing"));
         }
 
         public void Initialize(IEntity entity)

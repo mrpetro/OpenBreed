@@ -82,8 +82,6 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         public void Update(float dt)
         {
-            msgHandler.PostEnqueued();
-
             SweepAndPrune(dt);
         }
 

@@ -7,8 +7,6 @@ namespace OpenBreed.Core.Common.Helpers
     {
         #region Private Fields
 
-        private readonly Queue<Tuple<object, IMsg>> queue = new Queue<Tuple<object, IMsg>>();
-
         private readonly IMsgListener listener;
 
         #endregion Private Fields
@@ -24,24 +22,9 @@ namespace OpenBreed.Core.Common.Helpers
 
         #region Public Methods
 
-        public void PostEnqueued()
+        public bool HandleMsg(object sender, IMsg msg)
         {
-            while (queue.Count > 0)
-            {
-                var ed = queue.Dequeue();
-                listener.RecieveMsg(ed.Item1, ed.Item2);
-            }
-        }
-
-        public bool EnqueueMsg(object sender, IMsg msg)
-        {
-            queue.Enqueue(new Tuple<object, IMsg>(sender, msg));
-            return true;
-        }
-
-        public bool RecieveMsg(object sender, IMsg msg)
-        {
-            throw new NotImplementedException();
+            return listener.RecieveMsg(sender, msg);
         }
 
         #endregion Public Methods

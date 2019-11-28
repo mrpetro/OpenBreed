@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Modules.Rendering.Messages
 {
-    public class PutStampMsg : IEntityMsg
+    public class PutStampMsg : IWorldMsg
     {
         #region Public Fields
 
@@ -19,9 +19,9 @@ namespace OpenBreed.Core.Modules.Rendering.Messages
 
         #region Public Constructors
 
-        public PutStampMsg(IEntity entity, int stampId, int layerNo, Vector2 position)
+        public PutStampMsg(int worldId, int stampId, int layerNo, Vector2 position)
         {
-            Entity = entity;
+            WorldId = worldId;
             StampId = stampId;
             LayerNo = layerNo;
             Position = position;
@@ -31,7 +31,7 @@ namespace OpenBreed.Core.Modules.Rendering.Messages
 
         #region Public Properties
 
-        public IEntity Entity { get; }
+        public int WorldId { get; }
         public int StampId { get; }
 
         /// <summary>

@@ -27,7 +27,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
         public void EnterState()
         {
             // Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            Entity.PostMsg(new TextSetMsg(Entity, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            Entity.PostMsg(new TextSetMsg(Entity.World.Id, Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
             Entity.Subscribe(ControlDirectionChangedEvent.TYPE, OnControlDirectionChanged);
         }

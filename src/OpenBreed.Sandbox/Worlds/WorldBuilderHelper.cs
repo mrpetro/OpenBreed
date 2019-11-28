@@ -5,6 +5,7 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.Teleport;
@@ -30,6 +31,7 @@ namespace OpenBreed.Sandbox.Worlds
             builder.RegisterCode('<', AddTeleportExit);
 
             builder.RegisterCode(' ', AddAirCell);
+
             builder.RegisterCode(SETUP_WORLD, SetupWorld);
             builder.RegisterCode(PLAYER_SPAWN_POINT, AddPlayer);
         }
@@ -41,7 +43,9 @@ namespace OpenBreed.Sandbox.Worlds
             var y = (int)args[1];
             var pairCode = (int)args[2];
 
+
             TeleportHelper.AddTeleportEntry(world, x, y , pairCode);
+            world.Core.MessageBus.Enqueue(null, new TileSetMsg(world.Id,0, 12, new Vector2(x * 16, y * 16 )));
         }
 
         private static void AddTeleportExit(World world, int code, object[] args)
@@ -52,6 +56,7 @@ namespace OpenBreed.Sandbox.Worlds
             var pairCode = (int)args[2];
 
             TeleportHelper.AddTeleportExit(world, x, y, pairCode);
+            world.Core.MessageBus.Enqueue(null, new TileSetMsg(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private static void AddPlayer(World world, int code, object[] args)

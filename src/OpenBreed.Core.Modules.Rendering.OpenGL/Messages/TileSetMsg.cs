@@ -1,9 +1,10 @@
 ﻿using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Entities;
+using OpenTK;
 
 namespace OpenBreed.Core.Modules.Rendering.Messages
 {
-    public struct TileSetMsg : IEntityMsg
+    public struct TileSetMsg : IWorldMsg
     {
         #region Public Fields
 
@@ -13,23 +14,25 @@ namespace OpenBreed.Core.Modules.Rendering.Messages
 
         #region Public Constructors
 
-        public TileSetMsg(IEntity entity, int imageId)
+        public TileSetMsg(int worldId, int atlasId, int imageId, Vector2 position)
         {
-            Entity = entity;
-            //TileId = tileId;
-            //AtlasId = atlasId;
+            WorldId = worldId;
+
+            AtlasId = atlasId;
             ImageId = imageId;
+            Position = position;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public IEntity Entity { get; }
-        public string Type { get { return TYPE; } }
-        //public int TileId { get; }
-        //public int AtlasId { get; }
+        public int WorldId { get; }
+        public int AtlasId { get; }
         public int ImageId { get; }
+        public Vector2 Position { get; }
+
+        public string Type { get { return TYPE; } }
 
         #endregion Public Properties
     }
