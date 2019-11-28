@@ -91,6 +91,7 @@
     <Compile Include="Entities\EntityDestroyMsg.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Inputs\IControlHandler.cs" />
+    <Compile Include="Managers\ComponentsMan.cs" />
     <Compile Include="Managers\ILogMan.cs" />
     <Compile Include="Inputs\InputControl.cs" />
     <Compile Include="Inputs\InputController.cs" />

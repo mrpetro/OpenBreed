@@ -3,6 +3,7 @@ using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Extensions;
+using OpenBreed.Core.Managers;
 using OpenBreed.Core.States;
 using OpenTK;
 using System;
@@ -29,59 +30,21 @@ namespace OpenBreed.Core.Common
         private readonly List<IEntity> toAdd = new List<IEntity>();
         private readonly List<IEntity> toRemove = new List<IEntity>();
         private readonly List<IWorldSystem> systems = new List<IWorldSystem>();
-        private MsgHandler msgHandler;
+
         private float timeMultiplier = 1.0f;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        private Dictionary<Type, Dictionary<int, IEntityComponent>> components = new Dictionary<Type, Dictionary<int, IEntityComponent>>();
-
-        public void AddEntityComponent<T>(int entityId, IEntityComponent component) where T: class
-        {
-            Dictionary<int, IEntityComponent> typeComponents = null;
-
-            if(!components.TryGetValue(typeof(T), out typeComponents))
-            {
-                typeComponents = new Dictionary<int, IEntityComponent>();
-                components.Add(typeof(T), typeComponents);
-            }
-
-            typeComponents.Add(entityId, component);
-        }
-
-        public bool RemoveEntityComponent<T>(int entityId)
-        {
-            Dictionary<int, IEntityComponent> typeComponents = null;
-
-            if (!components.TryGetValue(typeof(T), out typeComponents))
-                return false;
-
-            return typeComponents.Remove(entityId);
-        }
-
-        public T GetEntityComponent<T>(int entityId) where T: class
-        {
-            Dictionary<int, IEntityComponent> typeComponents = null;
-
-            if (!components.TryGetValue(typeof(T), out typeComponents))
-                return null;
-
-            IEntityComponent component;
-
-            if (!typeComponents.TryGetValue(entityId, out component))
-                return null;
-
-            return (T)component;
-        }
-
         internal World(ICore core, string name)
         {
             Core = core;
             Name = name;
+
             Entities = new ReadOnlyCollection<IEntity>(entities);
             Systems = new ReadOnlyCollection<IWorldSystem>(systems);
+            Components = new ComponentsMan();
 
             MessageBus = new WorldMessageBus(this);
             MessageBus.RegisterHandler(StateChangeMsg.TYPE, new StateChangeMsgHandler(this));
@@ -115,6 +78,7 @@ namespace OpenBreed.Core.Common
         public ICore Core { get; }
         public ReadOnlyCollection<IEntity> Entities { get; }
         public ReadOnlyCollection<IWorldSystem> Systems { get; }
+        public ComponentsMan Components { get; }
         public WorldMessageBus MessageBus { get; }
 
         /// <summary>
