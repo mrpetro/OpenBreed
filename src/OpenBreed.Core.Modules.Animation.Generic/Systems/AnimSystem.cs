@@ -46,8 +46,6 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         public void UpdatePauseImmuneOnly(float dt)
         {
-            msgHandler.PostEnqueued();
-
             //For now only entities with camera are immune. This implementation sucks.
             for (int i = 0; i < entities.Count; i++)
             {
@@ -58,8 +56,6 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         public void Update(float dt)
         {
-            msgHandler.PostEnqueued();
-
             for (int i = 0; i < entities.Count; i++)
                 Animate(i, dt);
         }

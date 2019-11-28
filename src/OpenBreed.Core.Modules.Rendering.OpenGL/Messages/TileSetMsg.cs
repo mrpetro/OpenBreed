@@ -14,9 +14,11 @@ namespace OpenBreed.Core.Modules.Rendering.Messages
 
         #region Public Constructors
 
-        public TileSetMsg(int worldId, int imageId, Vector2 position)
+        public TileSetMsg(int worldId, int atlasId, int imageId, Vector2 position)
         {
             WorldId = worldId;
+
+            AtlasId = atlasId;
             ImageId = imageId;
             Position = position;
         }
@@ -26,11 +28,11 @@ namespace OpenBreed.Core.Modules.Rendering.Messages
         #region Public Properties
 
         public int WorldId { get; }
-        public string Type { get { return TYPE; } }
-
+        public int AtlasId { get; }
+        public int ImageId { get; }
         public Vector2 Position { get; }
 
-        public int ImageId { get; }
+        public string Type { get { return TYPE; } }
 
         #endregion Public Properties
     }

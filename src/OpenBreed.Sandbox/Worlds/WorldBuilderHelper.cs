@@ -45,9 +45,7 @@ namespace OpenBreed.Sandbox.Worlds
 
 
             TeleportHelper.AddTeleportEntry(world, x, y , pairCode);
-
-            world.Core.MessageBus.Enqueue(null, new TileSetMsg(world.Id, 12, new Vector2(x * 16, y * 16)));
-            //blockBuilder.SetTileId(ToTileId(gfxCode));
+            world.Core.MessageBus.Enqueue(null, new TileSetMsg(world.Id,0, 12, new Vector2(x * 16, y * 16 )));
         }
 
         private static void AddTeleportExit(World world, int code, object[] args)
@@ -58,6 +56,7 @@ namespace OpenBreed.Sandbox.Worlds
             var pairCode = (int)args[2];
 
             TeleportHelper.AddTeleportExit(world, x, y, pairCode);
+            world.Core.MessageBus.Enqueue(null, new TileSetMsg(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private static void AddPlayer(World world, int code, object[] args)

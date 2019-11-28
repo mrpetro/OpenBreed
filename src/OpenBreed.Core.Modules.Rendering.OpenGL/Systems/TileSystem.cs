@@ -84,8 +84,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// <param name="viewport">Viewport on which tiles will be drawn to</param>
         public void Render(IViewport viewport, float dt)
         {
-            msgHandler.PostEnqueued();
-
             float left, bottom, right, top;
             viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
 
@@ -195,6 +193,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             var cellIndex = xIndex + GridWidth * yIndex;
 
             var tileCell = this.cells[cellIndex];
+            tileCell.AtlasId = msg.AtlasId;
             tileCell.ImageId = msg.ImageId;
 
             return true;
