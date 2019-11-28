@@ -64,7 +64,7 @@ namespace OpenBreed.Core.States
             currentState = states[initialStateId];
         }
 
-        public bool RecieveMsg(object sender, IMsg message)
+        public bool HandleMsg(object sender, IMsg message)
         {
             switch (message.Type)
             {

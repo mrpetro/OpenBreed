@@ -33,13 +33,7 @@ namespace OpenBreed.Core.Common.Helpers
             }
         }
 
-        public bool EnqueueMsg(object sender, IMsg msg)
-        {
-            queue.Enqueue(new Tuple<object, IMsg>(sender, msg));
-            return true;
-        }
-
-        public bool RecieveMsg(object sender, IMsg msg)
+        public bool HandleMsg(object sender, IMsg msg)
         {
             return listener.RecieveMsg(sender, msg);
         }

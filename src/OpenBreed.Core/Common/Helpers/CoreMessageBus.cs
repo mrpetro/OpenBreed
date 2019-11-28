@@ -66,7 +66,7 @@ namespace OpenBreed.Core.Common.Helpers
             Debug.Assert(msg.Entity != null);
             Debug.Assert(msg.Entity.World != null);
 
-            msg.Entity.World.MessageBus.RecieveMsg(sender, msg);
+            msg.Entity.World.MessageBus.PostMsg(sender, msg);
         }
 
         private void Post(object sender, IWorldMsg msg)
