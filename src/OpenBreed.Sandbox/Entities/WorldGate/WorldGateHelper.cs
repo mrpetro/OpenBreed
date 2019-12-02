@@ -23,8 +23,9 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
     {
         #region Public Methods
 
-        public static IEntity AddWorldExit(ICore core, World world, int x, int y, string worldName, int entryId)
+        public static IEntity AddWorldExit(World world, int x, int y, string worldName, int entryId)
         {
+            var core = world.Core;
             var teleportEntry = core.Entities.Create();
 
             teleportEntry.Add(Body.Create(1.0f, 1.0f, "Trigger", (e, c) => OnCollision(teleportEntry, e, c)));
@@ -38,8 +39,9 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             return teleportEntry;
         }
 
-        public static IEntity AddWorldEntry(ICore core, World world, int x, int y, int entryEntityId)
+        public static IEntity AddWorldEntry(World world, int x, int y, int entryEntityId)
         {
+            var core = world.Core;
             var teleportEntity = core.Entities.Create();
 
             teleportEntity.Add(Position.Create(x * 16, y * 16));
@@ -55,8 +57,6 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
         #region Private Methods
 
-        private static int c = 0;
-
         private static void OnCollision(IEntity exitEntity, IEntity targetEntity, Vector2 projection)
         {
             var cameraEntity = targetEntity.Tag as IEntity;
@@ -67,6 +67,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             var exitInfo = (Tuple<string, int>)exitEntity.Tag;
 
             var jobChain = new JobChain();
+
             jobChain.Equeue(new WorldJob(cameraEntity.World, "Pause"));
             jobChain.Equeue(new CameraEffectJob(cameraEntity, CameraHelper.CAMERA_FADE_OUT));
 
@@ -77,7 +78,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             jobChain.Equeue(new EntityJob(targetEntity, "EnterWorld", exitInfo.Item1, exitInfo.Item2));
 
             //jobChain.Equeue(new TeleportJob(targetEntity, exitPos.Value + offset, true));
-            //jobChain.Equeue(new WorldJob(cameraEntity.World, "Unpause"));
+            jobChain.Equeue(new WorldJob(cameraEntity.World, "Unpause"));
             jobChain.Equeue(new CameraEffectJob(cameraEntity, CameraHelper.CAMERA_FADE_IN));
 
             exitEntity.Core.Jobs.Execute(jobChain);

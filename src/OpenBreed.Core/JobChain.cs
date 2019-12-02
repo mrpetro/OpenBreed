@@ -69,7 +69,7 @@ namespace OpenBreed.Core
 
         private void OnComplete(IJob job)
         {
-            completed.Enqueue(currentJob);
+            completed.Enqueue(job);
             currentJob = null;
         }
 

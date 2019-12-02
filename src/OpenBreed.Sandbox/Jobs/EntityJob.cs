@@ -89,8 +89,12 @@ namespace OpenBreed.Sandbox.Jobs
 
             if (world == null)
             {
-                world = GameWorldHelper.CreateGameWorld(entity.Core, worldName);
-                StateTechDemo5.SetupWorld(world);
+                using (var reader = new TxtFileWorldReader(entity.Core, $".\\Content\\Maps\\{worldName}.txt"))
+                    world = reader.GetWorld();
+                //world = GameWorldHelper.CreateGameWorld(entity.Core, worldName);
+
+   
+                //StateTechDemo5.SetupWorld(world);
             }
 
             entity.AddedToWorld += Entity_AddedToWorld;
