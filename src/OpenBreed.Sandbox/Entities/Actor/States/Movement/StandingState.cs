@@ -51,8 +51,8 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
             thrust.Value = Vector2.Zero;
 
-            Entity.PostMsg(new PlayAnimMsg(Entity,  $"{animPrefix}/{Name}/{animDirName}"));
-            Entity.PostMsg(new TextSetMsg(Entity.World.Id, Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            Entity.PostMsg(new PlayAnimMsg(Entity.Id,  $"{animPrefix}/{Name}/{animDirName}"));
+            Entity.PostMsg(new TextSetMsg(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
             Entity.Subscribe(ControlDirectionChangedEvent.TYPE, OnControlDirectionChanged);
         }
@@ -90,7 +90,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
         private void HandleControlDirectionChangedEvent(ControlDirectionChangedEvent systemEvent)
         {
             if (systemEvent.Direction != Vector2.Zero)
-                Entity.PostMsg(new StateChangeMsg(Entity, "Movement", "Walk"));
+                Entity.PostMsg(new StateChangeMsg(Entity.Id, "Movement", "Walk"));
         }
 
         private void OnControlDirectionChanged(object sender, IEvent e)

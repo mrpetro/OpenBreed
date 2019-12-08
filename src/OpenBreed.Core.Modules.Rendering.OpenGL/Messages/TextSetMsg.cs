@@ -3,7 +3,7 @@ using OpenBreed.Core.Entities;
 
 namespace OpenBreed.Core.Modules.Rendering.Messages
 {
-    public struct TextSetMsg : IWorldMsg
+    public struct TextSetMsg : IEntityMsg
     {
         #region Public Fields
 
@@ -13,9 +13,8 @@ namespace OpenBreed.Core.Modules.Rendering.Messages
 
         #region Public Constructors
 
-        public TextSetMsg(int worldId, int entityId, string text)
+        public TextSetMsg(int entityId, string text)
         {
-            WorldId = worldId;
             EntityId = entityId;
             Text = text;
         }
@@ -24,7 +23,6 @@ namespace OpenBreed.Core.Modules.Rendering.Messages
 
         #region Public Properties
 
-        public int WorldId { get; }
         public int EntityId { get; }
         public string Type { get { return TYPE; } }
         public string Text { get; }

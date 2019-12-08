@@ -16,7 +16,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
     {
         #region Private Fields
 
-        private readonly List<IEntity> entities = new List<IEntity>();
+        private readonly List<int> entities = new List<int>();
         private readonly List<Animator> animatorComps = new List<Animator>();
         private readonly MsgHandler msgHandler;
 
@@ -49,7 +49,8 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             //For now only entities with camera are immune. This implementation sucks.
             for (int i = 0; i < entities.Count; i++)
             {
-                if (entities[i].Components.OfType<ICameraComponent>().Any())
+                var entity = Core.Entities.GetById(entities[i]);
+                if (entity.Components.OfType<ICameraComponent>().Any())
                     Animate(i, dt);
             }
         }
@@ -114,7 +115,8 @@ namespace OpenBreed.Core.Modules.Animation.Systems
                     animator.Position = animator.Position - data.Length;
                 else
                 {
-                    Stop(entities[index], animator);
+                    var entity = Core.Entities.GetById(entities[index]);
+                    Stop(entity, animator);
                     return;
                 }
             }
@@ -124,7 +126,9 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             if (data.TryGetNextFrame(animator.Position, animator.Frame, out nextFrame, animator.Transition))
             {
                 animator.Frame = nextFrame;
-                RaiseAnimChangedEvent(entities[index], animator);
+
+                var entity = Core.Entities.GetById(entities[index]);
+                RaiseAnimChangedEvent(entity, animator);
             }
         }
 
@@ -155,13 +159,13 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         protected override void RegisterEntity(IEntity entity)
         {
-            entities.Add(entity);
+            entities.Add(entity.Id);
             animatorComps.Add(entity.Components.OfType<Animator>().First());
         }
 
         protected override void UnregisterEntity(IEntity entity)
         {
-            var index = entities.IndexOf(entity);
+            var index = entities.IndexOf(entity.Id);
 
             if (index < 0)
                 throw new InvalidOperationException("Entity not found in this system.");
@@ -186,7 +190,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         private bool HandlePauseAnimMsg(object sender, PauseAnimMsg message)
         {
-            var index = entities.IndexOf(message.Entity);
+            var index = entities.IndexOf(message.EntityId);
             if (index < 0)
                 return false;
 
@@ -197,25 +201,26 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         private bool HandleStopAnimMsg(object sender, StopAnimMsg message)
         {
-            var index = entities.IndexOf(message.Entity);
+            var index = entities.IndexOf(message.EntityId);
             if (index < 0)
                 return false;
 
-            Stop(message.Entity, animatorComps[index]);
+            var entity = Core.Entities.GetById(message.EntityId);
+            Stop(entity, animatorComps[index]);
 
             return true;
         }
 
         private bool HandleSetAnimMsg(object sender, SetAnimMsg message)
         {
-            var index = entities.IndexOf(message.Entity);
+            var index = entities.IndexOf(message.EntityId);
             if (index < 0)
                 return false;
 
-            var animData = Core.Animations.Anims.GetByName(message.Name);
+            var animData = Core.Animations.Anims.GetByName(message.Id);
 
             if (animData == null)
-                Core.Logging.Warning($"Animation with ID = '{message.Name}' not found.");
+                Core.Logging.Warning($"Animation with ID = '{message.Id}' not found.");
 
             Play(animatorComps[index], animData.Id);
 
@@ -224,7 +229,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         private bool HandlePlayAnimMsg(object sender, PlayAnimMsg message)
         {
-            var index = entities.IndexOf(message.Entity);
+            var index = entities.IndexOf(message.EntityId);
             if (index < 0)
                 return false;
 
@@ -232,12 +237,12 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
             int animId = -1;
 
-            if (message.Name != null)
+            if (message.Id != null)
             {
-                var data = Core.Animations.Anims.GetByName(message.Name);
+                var data = Core.Animations.Anims.GetByName(message.Id);
 
                 if (data == null)
-                    Core.Logging.Warning($"Animation with ID = '{message.Name}' not found.");
+                    Core.Logging.Warning($"Animation with ID = '{message.Id}' not found.");
                 else
                     animId = data.Id;
             }

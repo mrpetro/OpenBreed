@@ -35,7 +35,7 @@ namespace OpenBreed.Core.Systems.Control.Systems
                     continue;
 
                 Console.WriteLine($"{player.Name} -> Walk({AxisX},{AxisY})");
-                entity.PostMsg(new WalkingControlMsg(entity, new OpenTK.Vector2(AxisX, AxisY)));
+                entity.PostMsg(new WalkingControlMsg(entity.Id, new OpenTK.Vector2(AxisX, AxisY)));
             }
 
             OldAxisX = AxisX;

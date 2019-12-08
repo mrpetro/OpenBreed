@@ -42,9 +42,9 @@ namespace OpenBreed.Sandbox.Worlds
 
                 var exitNoTxt = split[0][0];
                 var mapName = split[1];
-                var mapEntryNo = int.Parse(split[2]);
+                var entryNoTxt = split[2][0];
 
-                helper.RegisterExit(exitNoTxt, mapName, mapEntryNo);
+                helper.RegisterExit(exitNoTxt, mapName, entryNoTxt);
             }
         }
 

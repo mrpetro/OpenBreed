@@ -13,9 +13,9 @@ namespace OpenBreed.Core.Modules.Rendering.Messages
 
         #region Public Constructors
 
-        public SpriteSetMsg(IEntity entity, int imageId)
+        public SpriteSetMsg(int entityId, int imageId)
         {
-            Entity = entity;
+            EntityId = entityId;
             ImageId = imageId;
         }
 
@@ -23,9 +23,10 @@ namespace OpenBreed.Core.Modules.Rendering.Messages
 
         #region Public Properties
 
-        public IEntity Entity { get; }
+        public int EntityId { get; }
         public string Type { get { return TYPE; } }
         public int ImageId { get; }
+
 
         #endregion Public Properties
     }

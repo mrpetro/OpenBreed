@@ -35,7 +35,7 @@ namespace OpenBreed.Core.Systems.Control.Systems
                     continue;
 
                 Console.WriteLine($"{player.Name} -> Attack({Primary},{Secondary})");
-                entity.PostMsg(new AttackControlMsg(entity, Primary, Secondary));
+                entity.PostMsg(new AttackControlMsg(entity.Id, entity, Primary, Secondary));
             }
 
             OldPrimary = Primary;

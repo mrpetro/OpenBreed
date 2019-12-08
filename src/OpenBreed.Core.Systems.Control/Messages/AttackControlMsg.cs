@@ -14,9 +14,9 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Messages
 
         #region Public Constructors
 
-        public AttackControlMsg(IEntity entity, bool primary, bool secondary)
+        public AttackControlMsg(int entityId, IEntity entity, bool primary, bool secondary)
         {
-            Entity = entity;
+            EntityId = entityId;
             Primary = primary;
             Secondary = secondary;
         }
@@ -25,7 +25,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Messages
 
         #region Public Properties
 
-        public IEntity Entity { get; }
+        public int EntityId { get; }
         public string Type { get { return TYPE; } }
 
         public bool Primary { get; }

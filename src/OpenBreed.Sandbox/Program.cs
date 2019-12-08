@@ -1,17 +1,13 @@
-﻿using OpenBreed.Core;
+﻿using NLua;
+using OpenBreed.Core;
 using OpenBreed.Core.Blueprints;
 using OpenBreed.Core.Common.Helpers;
-using OpenBreed.Core.Common.Systems;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Inputs;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Rendering;
-using OpenBreed.Core.Modules.Rendering.Messages;
-using OpenBreed.Core.States;
 using OpenBreed.Core.Systems.Control.Systems;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Camera;
@@ -19,7 +15,6 @@ using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Sandbox.Entities.Teleport;
-using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Items;
 using OpenBreed.Sandbox.Managers;
 using OpenBreed.Sandbox.States;
@@ -49,6 +44,7 @@ namespace OpenBreed.Sandbox
         {
             appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
+            LuaState = new Lua();
             Logging = new LogMan(this);
             MessageBus = new CoreMessageBus(this);
             EventBus = new CoreEventBus(this);
@@ -117,11 +113,9 @@ namespace OpenBreed.Sandbox
 
         public float ClientRatio { get { return (float)ClientRectangle.Width / (float)ClientRectangle.Height; } }
 
+        public Lua LuaState { get; }
+
         #endregion Public Properties
-
-        #region Public Methods
-
-        #endregion Public Methods
 
         #region Protected Methods
 
@@ -222,8 +216,6 @@ namespace OpenBreed.Sandbox
 
             HudWorldHelper.CreateHudWorld(this);
 
-
-
             StateMachine.RegisterState(new StateTechDemo1(this));
             StateMachine.RegisterState(new StateTechDemo2(this));
             StateMachine.RegisterState(new StateTechDemo3(this));
@@ -245,6 +237,10 @@ namespace OpenBreed.Sandbox
 
             GL.DepthFunc(DepthFunction.Lequal);
             GL.Enable(EnableCap.DepthTest);
+
+            //var s = new OpenBreed.Core.Scripting.LoadTest();
+
+            //s.Example();
         }
 
         protected override void OnResize(EventArgs e)
@@ -266,17 +262,14 @@ namespace OpenBreed.Sandbox
 
             Worlds.Cleanup();
             Rendering.Cleanup();
-            PostAndRaise();
             Players.ResetInputs();
             Inputs.Update();
             Players.ApplyInputs();
-            PostAndRaise();
             StateMachine.Update((float)e.Time);
             PostAndRaise();
             Worlds.Update((float)e.Time);
             PostAndRaise();
             Jobs.Update((float)e.Time);
-            PostAndRaise();
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)

@@ -76,6 +76,14 @@ namespace OpenBreed.Core.Entities
         StateMachine AddFSM(string name);
 
         /// <summary>
+        /// This will run script with specifc name,
+        /// </summary>
+        /// <param name="name">Name of the script</param>
+        /// <param name="args">script arguments</param>
+        /// <returns></returns>
+        bool RunScript(string name, params object[] args);
+
+        /// <summary>
         /// Post message of specific type
         /// </summary>
         /// <param name="message"></param>

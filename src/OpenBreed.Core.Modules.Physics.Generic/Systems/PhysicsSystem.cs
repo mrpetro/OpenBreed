@@ -142,22 +142,24 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         private bool HandleBodyOnMsg(object sender, BodyOnMsg msg)
         {
-            var dynamicToActivate = inactiveDynamics.FirstOrDefault(item => item.Entity == msg.Entity);
+            var dynamicToActivate = inactiveDynamics.FirstOrDefault(item => item.EntityId == msg.EntityId);
+
+            var entity = Core.Entities.GetById(msg.EntityId);
 
             if (dynamicToActivate != null)
             {
                 activeDynamics.Add(dynamicToActivate);
                 inactiveDynamics.Remove(dynamicToActivate);
-                msg.Entity.RaiseEvent(new BodyOnEvent(msg.Entity));
+                entity.RaiseEvent(new BodyOnEvent(entity));
                 return true;
             }
 
-            var staticToActivate = inactiveStatics.FirstOrDefault(item => item.Entity == msg.Entity);
+            var staticToActivate = inactiveStatics.FirstOrDefault(item => item.EntityId == msg.EntityId);
             if (staticToActivate != null)
             {
                 InsertToGrid(staticToActivate);
                 inactiveStatics.Remove(staticToActivate);
-                msg.Entity.RaiseEvent(new BodyOnEvent(msg.Entity));
+                entity.RaiseEvent(new BodyOnEvent(entity));
                 return true;
             }
 
@@ -166,23 +168,26 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         private bool HandleBodyOffMsg(object sender, BodyOffMsg msg)
         {
-            var dynamicToDeactivate = activeDynamics.FirstOrDefault(item => item.Entity == msg.Entity);
+            var dynamicToDeactivate = activeDynamics.FirstOrDefault(item => item.EntityId == msg.EntityId);
+
+            var entity = Core.Entities.GetById(msg.EntityId);
 
             if (dynamicToDeactivate != null)
             {
                 inactiveDynamics.Add(dynamicToDeactivate);
                 activeDynamics.Remove(dynamicToDeactivate);
 
-                msg.Entity.RaiseEvent(new BodyOffEvent(msg.Entity));
+
+                entity.RaiseEvent(new BodyOffEvent(entity));
                 return true;
             }
 
-            var staticToDeactivate = RemoveFromGrid(msg.Entity);
+            var staticToDeactivate = RemoveFromGrid(entity);
 
             if (staticToDeactivate != null)
             {
                 inactiveStatics.Add(staticToDeactivate);
-                msg.Entity.RaiseEvent(new BodyOffEvent(msg.Entity));
+                entity.RaiseEvent(new BodyOffEvent(entity));
                 return true;
             }
 
@@ -198,7 +203,10 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
             //Clear dynamics
             for (int i = 0; i < activeDynamics.Count; i++)
-                activeDynamics[i].Entity.DebugData = null;
+            {
+                var entity = Core.Entities.GetById(activeDynamics[i].EntityId);
+                entity.DebugData = null;
+            }
 
             for (int i = 0; i < activeDynamics.Count - 1; i++)
             {
@@ -233,8 +241,11 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             Vector2 projection;
             if (DynamicHelper.TestVsDynamic(this, packA, packB, dt, out projection))
             {
-                packA.Body.CollisionCallback?.Invoke(packB.Entity, projection);
-                packB.Body.CollisionCallback?.Invoke(packA.Entity, projection);
+                var entityA = Core.Entities.GetById(packA.EntityId);
+                var entityB = Core.Entities.GetById(packB.EntityId);
+
+                packA.Body.CollisionCallback?.Invoke(entityB, projection);
+                packB.Body.CollisionCallback?.Invoke(entityA, projection);
 
                 //bodyA.Entity.RaiseEvent(new CollisionEvent(bodyB.Entity));
                 //bodyB.Entity.RaiseEvent(new CollisionEvent(bodyA.Entity));
@@ -247,8 +258,11 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             Vector2 projection;
             if (DynamicHelper.TestVsStatic(this, packA, packB, dt, out projection))
             {
-                packA.Body.CollisionCallback?.Invoke(packB.Entity, projection);
-                packB.Body.CollisionCallback?.Invoke(packA.Entity, projection);
+                var entityA = Core.Entities.GetById(packA.EntityId);
+                var entityB = Core.Entities.GetById(packB.EntityId);
+
+                packA.Body.CollisionCallback?.Invoke(entityB, projection);
+                packB.Body.CollisionCallback?.Invoke(entityA, projection);
             }
         }
 
@@ -401,7 +415,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 var gridIndex = GridWidth * j + leftIndex;
                 for (int i = leftIndex; i < rightIndex; i++)
                 {
-                    result = gridStatics[gridIndex].FirstOrDefault(item => item.Entity == entity);
+                    result = gridStatics[gridIndex].FirstOrDefault(item => item.EntityId == entity.Id);
                     gridStatics[gridIndex].Remove(result);
                     gridIndex++;
                 }
@@ -412,7 +426,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         private void RegisterStaticEntity(IEntity entity)
         {
-            var pack = new StaticPack(entity,
+            var pack = new StaticPack(entity.Id,
                                       entity.Components.OfType<IBody>().First(),
                                       entity.Components.OfType<Position>().First(),
                                       entity.Components.OfType<IShapeComponent>().First());
@@ -427,7 +441,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         private void RegisterDynamicEntity(IEntity entity)
         {
-            var pack = new DynamicPack(entity,
+            var pack = new DynamicPack(entity.Id,
                                       entity.Components.OfType<IBody>().First(),
                                       entity.Components.OfType<Position>().First(),
                                       entity.Components.OfType<Velocity>().First(),
@@ -438,10 +452,10 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         private void UnregisterDynamicEntity(IEntity entity)
         {
-            var dynamic = activeDynamics.FirstOrDefault(item => item.Entity == entity);
+            var dynamic = activeDynamics.FirstOrDefault(item => item.EntityId == entity.Id);
 
             if (dynamic == null)
-                dynamic = inactiveDynamics.FirstOrDefault(item => item.Entity == entity);
+                dynamic = inactiveDynamics.FirstOrDefault(item => item.EntityId == entity.Id);
 
             if (dynamic == null)
                 throw new InvalidOperationException("Entity not found in this system.");

@@ -21,7 +21,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         private MsgHandler msgHandler;
         private readonly List<int> entities = new List<int>();
-        private readonly List<ITextComponent> textComps = new List<ITextComponent>();
+        private readonly List<TextComponent> textComps = new List<TextComponent>();
         private readonly List<Position> positionComps = new List<Position>();
 
         #endregion Private Fields
@@ -32,7 +32,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             msgHandler = new MsgHandler(this);
 
-            Require<ITextComponent>();
+            Require<TextComponent>();
             Require<Position>();
         }
 
@@ -108,7 +108,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         protected override void RegisterEntity(IEntity entity)
         {
             entities.Add(entity.Id);
-            textComps.Add(entity.Components.OfType<ITextComponent>().First());
+            textComps.Add(entity.Components.OfType<TextComponent>().First());
             positionComps.Add(entity.Components.OfType<Position>().First());
         }
 
@@ -130,6 +130,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         private bool HandleTextSetMsg(object sender, TextSetMsg message)
         {
+            var entity = Core.Entities.GetById(message.EntityId);
+
             var index = entities.IndexOf(message.EntityId);
             if (index < 0)
                 return false;

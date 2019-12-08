@@ -79,6 +79,20 @@ namespace OpenBreed.Core.Entities
             return newFsm;
         }
 
+        public bool RunScript(string name, params object[] args)
+        {
+            throw new NotImplementedException();
+         //   Core.LuaState["ce"] = this;
+
+         //   Core.LuaState.DoString(@"
+	        //res1 = ce.Id
+	        //");
+
+         //   var r = Core.LuaState["res1"];
+
+         //   return false;
+        }
+
         public void PostMsg(IMsg msg)
         {
             Core.MessageBus.Enqueue(this, msg);

@@ -19,6 +19,16 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Entities.WorldGate
 {
+    public struct WorldGatePair : IEquatable<WorldGatePair>
+    {
+        public int Id;
+
+        public bool Equals(WorldGatePair other)
+        {
+            return Id == other.Id;
+        }
+    }
+
     public class WorldGateHelper
     {
         #region Public Methods
@@ -39,11 +49,11 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             return teleportEntry;
         }
 
-        public static IEntity AddWorldEntry(World world, int x, int y, int entryEntityId)
+        public static IEntity AddWorldEntry(World world, int x, int y, int entryId)
         {
             var core = world.Core;
             var teleportEntity = core.Entities.Create();
-
+            teleportEntity.Tag = new WorldGatePair() { Id = entryId };
             teleportEntity.Add(Position.Create(x * 16, y * 16));
             teleportEntity.Add(AxisAlignedBoxShape.Create(16, 16, 8, 8));
             teleportEntity.Add(TextHelper.Create(core, new Vector2(0, 32), "WorldEntry"));

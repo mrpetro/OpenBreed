@@ -44,7 +44,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
         {
             entity.Subscribe(AnimChangedEvent.TYPE, OnAnimChanged);
             entity.Subscribe(AnimStoppedEvent.TYPE, OnAnimStopped);
-            entity.PostMsg(new PlayAnimMsg(entity, animName));
+            entity.PostMsg(new PlayAnimMsg(entity.Id, animName));
         }
 
         public void Update(float dt)

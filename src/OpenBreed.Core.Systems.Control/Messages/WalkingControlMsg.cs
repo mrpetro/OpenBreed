@@ -14,9 +14,9 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Messages
 
         #region Public Constructors
 
-        public WalkingControlMsg(IEntity entity, Vector2 direction)
+        public WalkingControlMsg(int entityId, Vector2 direction)
         {
-            Entity = entity;
+            EntityId = entityId;
             Direction = direction;
         }
 
@@ -24,7 +24,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Messages
 
         #region Public Properties
 
-        public IEntity Entity { get; }
+        public int EntityId { get; }
         public string Type { get { return TYPE; } }
         public Vector2 Direction { get; }
 

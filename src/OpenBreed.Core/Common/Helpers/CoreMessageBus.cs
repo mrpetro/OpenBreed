@@ -63,10 +63,10 @@ namespace OpenBreed.Core.Common.Helpers
         private void Post(object sender, IEntityMsg msg)
         {
             Debug.Assert(msg != null);
-            Debug.Assert(msg.Entity != null);
-            Debug.Assert(msg.Entity.World != null);
+            Debug.Assert(msg.EntityId >= 0);
 
-            msg.Entity.World.MessageBus.PostMsg(sender, msg);
+            var entity = Core.Entities.GetById(msg.EntityId);
+            entity.World.MessageBus.PostMsg(sender, msg);
         }
 
         private void Post(object sender, IWorldMsg msg)

@@ -27,7 +27,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         public void EnterState()
         {
             // Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            Entity.PostMsg(new TextSetMsg(Entity.World.Id, Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            Entity.PostMsg(new TextSetMsg(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
             Entity.Subscribe(ControlFireChangedEvent.TYPE, OnControlFireChanged);
         }
@@ -50,9 +50,9 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         private void HandleControlFireChangedEvent(ControlFireChangedEvent systemEvent)
         {
             if (systemEvent.Fire)
-                Entity.PostMsg(new StateChangeMsg(Entity, "Attacking", "Shoot"));
+                Entity.PostMsg(new StateChangeMsg(Entity.Id, "Attacking", "Shoot"));
             else
-                Entity.PostMsg(new StateChangeMsg(Entity, "Attacking", "Stop"));
+                Entity.PostMsg(new StateChangeMsg(Entity.Id, "Attacking", "Stop"));
         }
 
 

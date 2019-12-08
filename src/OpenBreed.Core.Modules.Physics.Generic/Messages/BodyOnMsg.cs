@@ -18,16 +18,16 @@ namespace OpenBreed.Core.Modules.Physics.Messages
 
         #region Public Constructors
 
-        public BodyOnMsg(IEntity entity)
+        public BodyOnMsg(int entityId)
         {
-            Entity = entity;
+            EntityId = entityId;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public IEntity Entity { get; }
+        public int EntityId { get; }
         public string Type { get { return TYPE; } }
 
         #endregion Public Properties

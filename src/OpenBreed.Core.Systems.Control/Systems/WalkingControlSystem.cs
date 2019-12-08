@@ -88,12 +88,15 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         private bool HandleAttackControlMsg(object sender, AttackControlMsg msg)
         {
-            var control = msg.Entity.Components.OfType<AttackControl>().First();
+            var entity = Core.Entities.GetById(msg.EntityId);
+
+
+            var control = entity.Components.OfType<AttackControl>().First();
 
             if (control.AttackPrimary != msg.Primary)
             {
                 control.AttackPrimary = msg.Primary;
-                msg.Entity.RaiseEvent(new ControlFireChangedEvent(control.AttackPrimary));
+                entity.RaiseEvent(new ControlFireChangedEvent(control.AttackPrimary));
             }
 
             return true;
@@ -101,12 +104,14 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         private bool HandleWalkingControlMsg(object sender, WalkingControlMsg msg)
         {
-            var control = msg.Entity.Components.OfType<WalkingControl>().First();
+            var entity = Core.Entities.GetById(msg.EntityId);
+
+            var control = entity.Components.OfType<WalkingControl>().First();
 
             if (control.Direction != msg.Direction)
             {
                 control.Direction = msg.Direction;
-                msg.Entity.RaiseEvent(new ControlDirectionChangedEvent(control.Direction));
+                entity.RaiseEvent(new ControlDirectionChangedEvent(control.Direction));
             }
 
             return true;

@@ -41,10 +41,13 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
         /// <param name="bodyB">Second dynamic body</param>
         /// <param name="projection">Given collision projection vector</param>
         /// <param name="dt">Delta time</param>
-        internal static void ResolveVsDynamic(DynamicPack bodyA, DynamicPack bodyB, Vector2 projection, float dt)
+        internal static void ResolveVsDynamic(ICore core, DynamicPack bodyA, DynamicPack bodyB, Vector2 projection, float dt)
         {
-            bodyA.Entity.DebugData = new object[] { "COLLISION_PAIR", bodyA.Aabb.GetCenter(), bodyB.Aabb.GetCenter() };
-            bodyB.Entity.DebugData = new object[] { "COLLISION_PAIR", bodyA.Aabb.GetCenter(), bodyB.Aabb.GetCenter() };
+            var entityA = core.Entities.GetById(bodyA.EntityId);
+            var entityB = core.Entities.GetById(bodyB.EntityId);
+
+            entityA.DebugData = new object[] { "COLLISION_PAIR", bodyA.Aabb.GetCenter(), bodyB.Aabb.GetCenter() };
+            entityB.DebugData = new object[] { "COLLISION_PAIR", bodyA.Aabb.GetCenter(), bodyB.Aabb.GetCenter() };
 
             bodyA.Position.Value += projection / 2;
             bodyB.Position.Value -= projection / 2;

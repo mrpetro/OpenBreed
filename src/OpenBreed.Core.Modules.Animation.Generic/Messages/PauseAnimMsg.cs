@@ -13,9 +13,9 @@ namespace OpenBreed.Core.Modules.Animation.Messages
 
         #region Public Constructors
 
-        public PauseAnimMsg(IEntity entity, string id)
+        public PauseAnimMsg(int entityId, string id)
         {
-            Entity = entity;
+            EntityId = entityId;
             Id = id;
         }
 
@@ -23,7 +23,7 @@ namespace OpenBreed.Core.Modules.Animation.Messages
 
         #region Public Properties
 
-        public IEntity Entity { get; }
+        public int EntityId { get; }
         public string Type { get { return TYPE; } }
         public string Id { get; }
 

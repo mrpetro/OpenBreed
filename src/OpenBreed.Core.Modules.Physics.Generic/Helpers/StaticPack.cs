@@ -13,12 +13,12 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
     {
         #region Internal Constructors
 
-        internal StaticPack(IEntity entity,
+        internal StaticPack(int entityId,
             IBody body,
             Position position,
             IShapeComponent shape)
         {
-            Entity = entity;
+            EntityId = entityId;
             Body = body;
             Position = position;
             Shape = shape;
@@ -28,7 +28,7 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
 
         #region Internal Properties
 
-        internal IEntity Entity { get; }
+        internal int EntityId { get; }
         internal IBody Body { get; }
         internal Position Position { get; }
         internal IShapeComponent Shape { get; }

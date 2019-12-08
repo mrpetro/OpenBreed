@@ -119,12 +119,12 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
             var pair = (TeleportPair)entryEntity.Tag;
 
-            var existEntity = entryEntity.Core.Entities.GetByTag(pair).FirstOrDefault(item => item != entryEntity);
+            var exitEntity = entryEntity.Core.Entities.GetByTag(pair).FirstOrDefault(item => item != entryEntity);
 
-            if (existEntity == null)
+            if (exitEntity == null)
                 throw new Exception("No exit entity found");
 
-            var exitPos = existEntity.Components.OfType<Position>().First();
+            var exitPos = exitEntity.Components.OfType<Position>().First();
             var entryAabb = entryEntity.Components.OfType<IShapeComponent>().First().Aabb;
             var targetAabb = targetEntity.Components.OfType<IShapeComponent>().First().Aabb;
             var offset = new Vector2((32 - targetAabb.Width) / 2.0f, (32 - targetAabb.Height) / 2.0f);
