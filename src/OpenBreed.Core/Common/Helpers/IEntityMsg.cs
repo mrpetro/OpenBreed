@@ -9,6 +9,6 @@ namespace OpenBreed.Core.Common.Helpers
 {
     public interface IEntityMsg : IMsg
     {
-        IEntity Entity { get; }
+        int EntityId { get; }
     }
 }

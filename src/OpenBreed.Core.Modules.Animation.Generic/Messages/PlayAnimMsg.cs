@@ -13,19 +13,19 @@ namespace OpenBreed.Core.Modules.Animation.Messages
 
         #region Public Constructors
 
-        public PlayAnimMsg(IEntity entity, string name)
+        public PlayAnimMsg(int entityId, string id)
         {
-            Entity = entity;
-            Name = name;
+            EntityId = entityId;
+            Id = id;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public IEntity Entity { get; }
+        public int EntityId { get; }
         public string Type { get { return TYPE; } }
-        public string Name { get; }
+        public string Id { get; }
 
         #endregion Public Properties
     }

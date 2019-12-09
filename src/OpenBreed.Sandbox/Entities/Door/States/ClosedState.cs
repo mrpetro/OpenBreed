@@ -8,6 +8,7 @@ using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Core.States;
+using System;
 using System.Linq;
 
 namespace OpenBreed.Sandbox.Components.States
@@ -41,13 +42,13 @@ namespace OpenBreed.Sandbox.Components.States
 
         public void EnterState()
         {
-            Entity.PostMsg(new SpriteOffMsg(Entity));
+            Entity.PostMsg(new SpriteOffMsg(Entity.Id));
 
             var pos = Entity.Components.OfType<Position>().FirstOrDefault();
             Entity.PostMsg(new PutStampMsg(Entity.World.Id, stampId, 0, pos.Value));
-            Entity.PostMsg(new TextSetMsg(Entity.World.Id, Entity.Id, "Door - Closed"));
+            Entity.PostMsg(new TextSetMsg(Entity.Id, "Door - Closed"));
 
-            Entity.Subscribe(CollisionEvent.TYPE, OnCollision);
+            Entity.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, OnCollision);
         }
 
         public void Initialize(IEntity entity)
@@ -57,7 +58,7 @@ namespace OpenBreed.Sandbox.Components.States
 
         public void LeaveState()
         {
-            Entity.Unsubscribe(CollisionEvent.TYPE, OnCollision);
+            Entity.Unsubscribe(PhysicsEventTypes.COLLISION_OCCURRED, OnCollision);
         }
 
         public string Process(string actionName, object[] arguments)
@@ -78,14 +79,14 @@ namespace OpenBreed.Sandbox.Components.States
 
         #region Private Methods
 
-        private void OnCollision(object sender, IEvent e)
+        private void OnCollision(object sender, EventArgs eventArgs)
         {
-            HandleCollisionEvent((CollisionEvent)e);
+            HandleCollisionEvent((CollisionEventArgs)eventArgs);
         }
 
-        private void HandleCollisionEvent(CollisionEvent e)
+        private void HandleCollisionEvent(CollisionEventArgs e)
         {
-            Entity.PostMsg(new StateChangeMsg(Entity, "Functioning", "Open"));
+            Entity.PostMsg(new StateChangeMsg(Entity.Id, "Functioning", "Open"));
         }
 
         #endregion Private Methods

@@ -56,10 +56,10 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
             var animDirName = AnimHelper.ToDirectionName(direction.Value);
             var animMovementName = Entity.FsmList.First(item => item.Name == "Movement");
 
-            Entity.PostMsg(new PlayAnimMsg(Entity, $"{animPrefix}/{animMovementName.CurrentStateName}/{animDirName}"));
-            Entity.PostMsg(new TextSetMsg(Entity.World.Id, Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            Entity.PostMsg(new PlayAnimMsg(Entity.Id, $"{animPrefix}/{animMovementName.CurrentStateName}/{animDirName}"));
+            Entity.PostMsg(new TextSetMsg(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
-            Entity.PostMsg(new StateChangeMsg(Entity, "Rotation", "Stop"));
+            Entity.PostMsg(new StateChangeMsg(Entity.Id, "Rotation", "Stop"));
         }
 
         public void Initialize(IEntity entity)

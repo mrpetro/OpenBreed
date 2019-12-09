@@ -1,8 +1,14 @@
-﻿using OpenTK;
+﻿using OpenBreed.Core.Common.Systems.Components;
+using OpenTK;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Modules.Rendering.Components
 {
-    public class TextComponent : ITextComponent
+    public class TextComponent : IEntityComponent
     {
         #region Private Constructors
 

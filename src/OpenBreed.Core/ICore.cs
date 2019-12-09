@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using NLua;
 using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Entities;
@@ -97,6 +98,11 @@ namespace OpenBreed.Core
         /// Event bus
         /// </summary>
         CoreEventBus EventBus { get; }
+
+        /// <summary>
+        /// Lua state machine
+        /// </summary>
+        Lua LuaState { get; }
 
         /// <summary>
         /// Client display transformation matrix

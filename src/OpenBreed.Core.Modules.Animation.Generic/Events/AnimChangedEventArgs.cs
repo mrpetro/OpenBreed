@@ -1,18 +1,16 @@
 ﻿using OpenBreed.Core.Common.Helpers;
+using System;
 
 namespace OpenBreed.Core.Modules.Animation.Events
 {
-    public class AnimChangedEvent : IEvent
+    /// <summary>
+    /// Event arguments that are passed with ANIMATION_CHANGED event
+    /// </summary>
+    public class AnimChangedEventArgs : EventArgs
     {
-        #region Public Fields
-
-        public const string TYPE = "ANIMATION_CHANGED";
-
-        #endregion Public Fields
-
         #region Public Constructors
 
-        public AnimChangedEvent(object frame)
+        public AnimChangedEventArgs(object frame)
         {
             Frame = frame;
         }
@@ -22,11 +20,7 @@ namespace OpenBreed.Core.Modules.Animation.Events
         #region Public Properties
 
         public object Frame { get; }
-        public string Type { get { return TYPE; } }
 
         #endregion Public Properties
     }
-
-
-
 }

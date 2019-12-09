@@ -13,20 +13,6 @@ namespace OpenBreed.Core.Entities
     /// </summary>
     public interface IEntity
     {
-        #region Public Events
-
-        /// <summary>
-        /// Called when entity is removed from world
-        /// </summary>
-        event EventHandler<World> RemovedFromWorld;
-
-        /// <summary>
-        /// Called when entity is added to world
-        /// </summary>
-        event EventHandler<World> AddedToWorld;
-
-        #endregion Public Events
-
         #region Public Properties
 
         /// <summary>
@@ -76,30 +62,39 @@ namespace OpenBreed.Core.Entities
         StateMachine AddFSM(string name);
 
         /// <summary>
+        /// This will run script with specifc name,
+        /// </summary>
+        /// <param name="name">Name of the script</param>
+        /// <param name="args">script arguments</param>
+        /// <returns></returns>
+        bool RunScript(string name, params object[] args);
+
+        /// <summary>
         /// Post message of specific type
         /// </summary>
         /// <param name="message"></param>
         void PostMsg(IMsg message);
 
         /// <summary>
-        /// Raise event of specific type
+        /// Enqueue an event of specific type and arguments
         /// </summary>
-        /// <param name="ev"></param>
-        void RaiseEvent(IEvent ev);
+        /// <param name="eventType">Type of event to enqueue</param>
+        /// <param name="eventArgs">Arguments of event</param>
+        void EnqueueEvent(string eventType, EventArgs eventArgs);
 
         /// <summary>
         /// Subscribe to particular event
         /// </summary>
         /// <param name="eventType">event type to subscribe to</param>
         /// <param name="callback">event callback</param>
-        void Subscribe(string eventType, Action<object, IEvent> callback);
+        void Subscribe(string eventType, Action<object, EventArgs> callback);
 
         /// <summary>
         /// Unsubscribe from particular event
         /// </summary>
         /// <param name="eventType">event type to unsubscribe from</param>
         /// <param name="callback">event callback to unsubscribe</param>
-        void Unsubscribe(string eventType, Action<object, IEvent> callback);
+        void Unsubscribe(string eventType, Action<object, EventArgs> callback);
 
         /// <summary>
         /// Add component to entity

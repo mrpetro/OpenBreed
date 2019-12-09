@@ -20,21 +20,43 @@ namespace OpenBreed.Sandbox.Worlds
             txtReader = File.OpenText(filePath);
         }
 
-        public World GetWorld()
+        private void ReadBody(WorldBuilder worldBuilder)
         {
-            var worldBuilder = Core.Worlds.GetBuilder();
-            WorldBuilderHelper.RegisterHandlers(worldBuilder);
-
-            ReadName(worldBuilder);
             ReadSize(worldBuilder);
-
-            txtReader.ReadLine();
-
 
             worldBuilder.Add(WorldBuilderHelper.SETUP_WORLD, new object[] { worldBuilder.Width, worldBuilder.Height });
 
             for (int y = 0; y < worldBuilder.Height; y++)
                 ReadMapLine(worldBuilder, y);
+        }
+
+        private void ReadExits(WorldBuilder worldBuilder, WorldBuilderHelper helper)
+        {
+            var split = txtReader.ReadLine().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            var exitsNoTxt = split[1];
+            var exitsNo = int.Parse(exitsNoTxt);
+
+            for (int i = 0; i < exitsNo; i++)
+            {
+                split = txtReader.ReadLine().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                var exitNoTxt = split[0][0];
+                var mapName = split[1];
+                var entryNoTxt = split[2][0];
+
+                helper.RegisterExit(exitNoTxt, mapName, entryNoTxt);
+            }
+        }
+
+        public World GetWorld()
+        {
+            var worldBuilder = Core.Worlds.GetBuilder();
+            var helper = new WorldBuilderHelper(worldBuilder);
+            helper.RegisterHandlers();
+
+            ReadName(worldBuilder);
+            ReadBody(worldBuilder);
+            ReadExits(worldBuilder, helper);
 
             return worldBuilder.Build(); 
         }
@@ -47,8 +69,9 @@ namespace OpenBreed.Sandbox.Worlds
 
         private void ReadSize(WorldBuilder builder)
         {
-            var widthTxt = txtReader.ReadLine().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1];
-            var heightTxt = txtReader.ReadLine().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1];
+            var split = txtReader.ReadLine().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            var widthTxt = split[1];
+            var heightTxt = split[2];
             var width = int.Parse(widthTxt);
             var height = int.Parse(heightTxt);
 

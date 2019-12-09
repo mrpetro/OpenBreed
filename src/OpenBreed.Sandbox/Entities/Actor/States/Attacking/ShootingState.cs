@@ -34,7 +34,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         public void EnterState()
         {
             //Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            Entity.PostMsg(new TextSetMsg(Entity.World.Id, Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            Entity.PostMsg(new TextSetMsg(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
             var pos = Entity.Components.OfType<Position>().FirstOrDefault().Value;
             pos += new Vector2(8,8);
@@ -43,7 +43,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             direction *= 500.0f;
             ProjectileHelper.AddProjectile(Entity.Core, Entity.World, pos.X, pos.Y, direction.X, direction.Y);
 
-            Entity.PostMsg(new StateChangeMsg(Entity, "Attacking", "Wait"));
+            Entity.PostMsg(new StateChangeMsg(Entity.Id, "Attacking", "Wait"));
 
         }
 

@@ -38,6 +38,26 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.2</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.2</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="OpenTK, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\Packages\OpenTK.3.0.1\lib\net20\OpenTK.dll</HintPath>
@@ -55,9 +75,10 @@
     <Compile Include="Components\Body.cs" />
     <Compile Include="Components\Material.cs" />
     <Compile Include="Components\Motion.cs" />
-    <Compile Include="Events\BodyOnEvent.cs" />
-    <Compile Include="Events\BodyOffEvent.cs" />
-    <Compile Include="Events\CollisionEvent.cs" />
+    <Compile Include="Events\BodyOnEventArgs.cs" />
+    <Compile Include="Events\BodyOffEventArgs.cs" />
+    <Compile Include="Events\CollisionEventArgs.cs" />
+    <Compile Include="Events\PhysicsEventTypes.cs" />
     <Compile Include="Helpers\Box2Extensions.cs" />
     <Compile Include="Helpers\CollisionChecker.cs" />
     <Compile Include="Helpers\StaticPack.cs" />

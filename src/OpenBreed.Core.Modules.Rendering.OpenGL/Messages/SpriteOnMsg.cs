@@ -13,16 +13,16 @@ namespace OpenBreed.Core.Modules.Rendering.Messages
 
         #region Public Constructors
 
-        public SpriteOnMsg(IEntity entity)
+        public SpriteOnMsg(int entityId)
         {
-            Entity = entity;
+            EntityId = entityId;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public IEntity Entity { get; }
+        public int EntityId { get; }
         public string Type { get { return TYPE; } }
 
         #endregion Public Properties

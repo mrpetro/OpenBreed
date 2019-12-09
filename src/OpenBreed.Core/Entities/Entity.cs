@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Events;
 using OpenBreed.Core.States;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace OpenBreed.Core.Entities
     /// <summary>
     /// Entity interface implementation
     /// </summary>
-    public class Entity : IEntity
+    internal class Entity : IEntity
     {
         #region Private Fields
 
@@ -22,9 +23,9 @@ namespace OpenBreed.Core.Entities
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        public Entity(ICore core)
+        internal Entity(ICore core)
         {
             fsmList = new List<StateMachine>();
             FsmList = new ReadOnlyCollection<StateMachine>(fsmList);
@@ -33,14 +34,7 @@ namespace OpenBreed.Core.Entities
             Components = new ReadOnlyCollection<IEntityComponent>(components);
         }
 
-        #endregion Public Constructors
-
-        #region Public Events
-
-        public event EventHandler<World> RemovedFromWorld;
-        public event EventHandler<World> AddedToWorld;
-
-        #endregion Public Events
+        #endregion Internal Constructors
 
         #region Public Properties
 
@@ -79,22 +73,36 @@ namespace OpenBreed.Core.Entities
             return newFsm;
         }
 
+        public bool RunScript(string name, params object[] args)
+        {
+            throw new NotImplementedException();
+            //   Core.LuaState["ce"] = this;
+
+            //   Core.LuaState.DoString(@"
+            //res1 = ce.Id
+            //");
+
+            //   var r = Core.LuaState["res1"];
+
+            //   return false;
+        }
+
         public void PostMsg(IMsg msg)
         {
             Core.MessageBus.Enqueue(this, msg);
         }
 
-        public void RaiseEvent(IEvent ev)
+        public void EnqueueEvent(string eventType, EventArgs eventArgs)
         {
-            Core.EventBus.Enqueue(this, ev);
+            Core.EventBus.Enqueue(this, eventType, eventArgs);
         }
 
-        public void Subscribe(string eventType, Action<object, IEvent> callback)
+        public void Subscribe(string eventType, Action<object, EventArgs> callback)
         {
             Core.EventBus.Subscribe(this, eventType, callback);
         }
 
-        public void Unsubscribe(string eventType, Action<object, IEvent> callback)
+        public void Unsubscribe(string eventType, Action<object, EventArgs> callback)
         {
             Core.EventBus.Unsubscribe(this, eventType, callback);
         }
@@ -124,16 +132,6 @@ namespace OpenBreed.Core.Entities
             return $"Entity({Id})";
         }
 
-        private void OnRemovedFrom(World world)
-        {
-            RemovedFromWorld?.Invoke(this, world);
-        }
-
-        private void OnAddedTo(World world)
-        {
-            AddedToWorld?.Invoke(this, world);
-        }
-
         #endregion Public Methods
 
         #region Internal Methods
@@ -147,6 +145,8 @@ namespace OpenBreed.Core.Entities
 
             //Forget the world in which entity was
             World = null;
+
+            from.OnEntityRemoved(this);
             OnRemovedFrom(from);
         }
 
@@ -158,9 +158,22 @@ namespace OpenBreed.Core.Entities
 
             foreach (var fsm in fsmList)
                 fsm.Initialize();
-
         }
 
         #endregion Internal Methods
+
+        #region Private Methods
+
+        private void OnRemovedFrom(World world)
+        {
+            EnqueueEvent(CoreEventTypes.ENTITY_REMOVED_FROM_WORLD, new EntityRemovedFromWorldEventArgs(this, world));
+        }
+
+        private void OnAddedTo(World world)
+        {
+            EnqueueEvent(CoreEventTypes.ENTITY_ADDED_TO_WORLD, new EntityAddedToWorldEventArgs(this, world));
+        }
+
+        #endregion Private Methods
     }
 }

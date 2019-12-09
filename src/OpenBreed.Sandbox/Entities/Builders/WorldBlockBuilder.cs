@@ -51,7 +51,7 @@ namespace OpenBreed.Sandbox.Entities.Builders
 
         private static void OnCollision(IEntity thisEntity, IEntity otherEntity, Vector2 projection)
         {
-            thisEntity.RaiseEvent(new CollisionEvent(otherEntity));
+            thisEntity.EnqueueEvent(PhysicsEventTypes.COLLISION_OCCURRED, new CollisionEventArgs(otherEntity));
         }
 
         public bool HasBody { get; set; }

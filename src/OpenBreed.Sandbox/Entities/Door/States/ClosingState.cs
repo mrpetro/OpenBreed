@@ -44,11 +44,11 @@ namespace OpenBreed.Sandbox.Components.States
 
         public void EnterState()
         {
-            Entity.PostMsg(new SpriteOnMsg(Entity));
-            Entity.PostMsg(new BodyOnMsg(Entity));
+            Entity.PostMsg(new SpriteOnMsg(Entity.Id));
+            Entity.PostMsg(new BodyOnMsg(Entity.Id));
 
-            Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            Entity.PostMsg(new TextSetMsg(Entity.World.Id, Entity.Id, "Door - Closing"));
+            Entity.PostMsg(new PlayAnimMsg(Entity.Id, animationId));
+            Entity.PostMsg(new TextSetMsg(Entity.Id, "Door - Closing"));
         }
 
         public void Initialize(IEntity entity)

@@ -34,7 +34,9 @@ namespace OpenBreed.Core.Common.Helpers
 
         private bool HandleEntityMsg(object sender, StateChangeMsg msg)
         {
-            var fsm = msg.Entity.FsmList.FirstOrDefault(item => item.Name == msg.FsmName);
+            var entity = world.Core.Entities.GetById(msg.EntityId);
+
+            var fsm = entity.FsmList.FirstOrDefault(item => item.Name == msg.FsmName);
 
             if(fsm != null)
                 fsm.HandleMsg(sender, msg);

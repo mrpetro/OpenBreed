@@ -66,7 +66,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         private bool HandleSpriteOnMsg(object sender, SpriteOnMsg msg)
         {
-            var toActivate = inactive.FirstOrDefault(item => item.Entity == msg.Entity);
+            var toActivate = inactive.FirstOrDefault(item => item.EntityId == msg.EntityId);
 
             if (toActivate != null)
             {
@@ -79,7 +79,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         private bool HandleSpriteSetMsg(object sender, SpriteSetMsg msg)
         {
-            var toModify = active.FirstOrDefault(item => item.Entity == msg.Entity);
+            var toModify = active.FirstOrDefault(item => item.EntityId == msg.EntityId);
             if (toModify == null)
                 return false;
 
@@ -90,7 +90,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         private bool HandleSpriteOffMsg(object sender, SpriteOffMsg msg)
         {
-            var toDeactivate = active.FirstOrDefault(item => item.Entity == msg.Entity);
+            var toDeactivate = active.FirstOrDefault(item => item.EntityId == msg.EntityId);
 
             if (toDeactivate != null)
             {
@@ -153,7 +153,9 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
         private void DrawDebug(SpritePack pack, IViewport viewport)
         {
-            var body = pack.Entity.Components.OfType<IBody>().FirstOrDefault();
+            var entity = Core.Entities.GetById(pack.EntityId);
+
+            var body = entity.Components.OfType<IBody>().FirstOrDefault();
 
             if (body == null)
                 return;
@@ -176,7 +178,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         protected override void RegisterEntity(IEntity entity)
         {
-            var pack = new SpritePack(entity,
+            var pack = new SpritePack(entity.Id,
                                       entity.Components.OfType<ISpriteComponent>().First(),
                                       entity.Components.OfType<Position>().First());
 
@@ -185,7 +187,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         protected override void UnregisterEntity(IEntity entity)
         {
-            var pack = active.FirstOrDefault(item => item.Entity == entity);
+            var pack = active.FirstOrDefault(item => item.EntityId == entity.Id);
 
             if (pack == null)
                 throw new InvalidOperationException("Entity not found in this system.");

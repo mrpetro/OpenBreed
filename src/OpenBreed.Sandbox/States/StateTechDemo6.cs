@@ -195,8 +195,6 @@ namespace OpenBreed.Sandbox.States
             atackFsm.SetInitialState("Idle");
             rotateFsm.SetInitialState("Idle");
             GameWorld.AddEntity(actor);
-
-            var worldExit = WorldGateHelper.AddWorldExit(Core, GameWorld, 10, 20, "TECH_DEMO_5", 1);
         }
 
         #endregion Private Methods

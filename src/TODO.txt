@@ -1,5 +1,4 @@
 
-- Implement destroying of components from entity on runtime
 - Refactor messaging / event system for consistency
 - Reimplement physics system to fit ECS design rules more if possible
 - implement trigger POC

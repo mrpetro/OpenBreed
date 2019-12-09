@@ -1,7 +1,5 @@
 MAP.NAME HUB
-MAP.WIDTH 16
-MAP.HEIGHT 32
-MAP.BODY
+MAP.BODY 16 32
 O7O2O2O2O2O2O2O2O2O2O2O2O2O2O2O9
 O4 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
 O4 5 5 5 5 5 5>1 5 5 5 5 5 5 5O4
@@ -10,32 +8,38 @@ O4 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
 O4 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
 O7O2O2O2O3 5 5 5 5 5 5 5 5 5 5O4
 O4 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
-O4 5 5 5DV 5 5 5 5 5 5 5 5 5 5O4
+O4{4 5 5DV 5 5 5 5 5 5 5 5 5 5O4
 O1O2O2O2O9 5 5 5 5 5 5 5 5 5 5O4
  0 0 0 0O4 5 5 5 5 5 5 5 5 5 5O4
  0 0 0 0O4 5 5 5 5 5 5 5 5 5 5O4
 O7O2O2O2O3 5 5 5 5 5 5 5 5 5 5O4
 O4 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
-O4 5 5 5DV 5 5 5 5 5 5 5 5 5 5O4
+O4{3 5 5DV 5 5 5 5 5 5 5 5 5 5O4
 O1O2O2O2O9 5 5 5 5 5 5 5 5 5 5O4
  0 0 0 0O4 5 5 5 5 5 5 5 5 5 5O4
  0 0 0 0O4 5 5 5 5 5 5 5 5 5 5O4
 O7O2O2O2O3 5 5 5 5 5 5 5 5 5 5O4
 O4 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
-O4 5 5 5DV 5 5 5 5 5 5 5 5 5 5O4
+O4{2 5 5DV 5 5 5 5 5 5 5 5 5 5O4
 O1O2O2O2O9 5 5 5 5 5 5 5 5 5 5O4
  0 0 0 0O4 5 5 5 5 5 5 5 5 5 5O4
  0 0 0 0O4 5 5 5 5 5 5 5 5 5 5O4
 O7O2O2O2O3 5 5 5 5 5 5 5 5 5 5O4
 O4 5 5 5 5 5 5 5 5 5 5 5 5 5 5O4
-O4 5 5 5DV 5 5 5 5 5 5 5 5 5 5O4
-O1O2O2O2O9 5 5<1 5 5 5 5 5 5 5O4
+O4{1 5 5DV 5 5 5 5 5 5 5 5 5 5O4
+O1O2O2O2O9 5 5 5 5 5 5 5 5 5 5O4
  0 0 0 0O4 5 5 5 5 5 5 5 5 5 5O4
- 0 0 0 0O4 5 5 5 5 5 5 5 5 5 5O4
- 0 0 0 0O4 5 5 5 5 5 5 5 5 5 5O4
+ 0 0 0 0O4 5 5<1 5 5 5 5 5 5 5O4
+ 0 0 0 0O4 5 5 5 5 5 5}1 5 5 5O4
  0 0 0 0O1O2O2O2O2O2O2O2O2O2O2O3
+MAP.EXITS 3
+1 DEMO_1 1
+2 DEMO_2 1
+3 DEMO_3 1
 O - Obstacle
 S - Spawn point
 D - Door (V - Vertical, H - Horizontal)
-> - Teleport Entrance (Number - Number of pair)
-< - Teleport Exit (Number - Number of pair)
+> - Teleport Entrance (Number - Number teleport of pair)
+< - Teleport Exit (Number - Number of teleport pair)
+} - World Entry (Number - Number of gate pair)
+{ - World Exit (Number - Number of gate pair)

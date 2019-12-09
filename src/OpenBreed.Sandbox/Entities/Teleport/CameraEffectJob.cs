@@ -42,9 +42,9 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         public void Execute()
         {
-            entity.Subscribe(AnimChangedEvent.TYPE, OnAnimChanged);
-            entity.Subscribe(AnimStoppedEvent.TYPE, OnAnimStopped);
-            entity.PostMsg(new PlayAnimMsg(entity, animName));
+            entity.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, OnAnimChanged);
+            entity.Subscribe(AnimationEventTypes.ANIMATION_STOPPED, OnAnimStopped);
+            entity.PostMsg(new PlayAnimMsg(entity.Id, animName));
         }
 
         public void Update(float dt)
@@ -53,25 +53,25 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         public void Dispose()
         {
-            entity.Unsubscribe(AnimChangedEvent.TYPE, OnAnimChanged);
-            entity.Unsubscribe(AnimStoppedEvent.TYPE, OnAnimStopped);
+            entity.Unsubscribe(AnimationEventTypes.ANIMATION_CHANGED, OnAnimChanged);
+            entity.Unsubscribe(AnimationEventTypes.ANIMATION_STOPPED, OnAnimStopped);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void OnAnimStopped(object sender, IEvent e)
+        private void OnAnimStopped(object sender, EventArgs eventArgs)
         {
             Complete(this);
         }
 
-        private void OnAnimChanged(object sender, IEvent e)
+        private void OnAnimChanged(object sender, EventArgs eventArgs)
         {
-            HandleFrameChangeEvent((IEntity)sender, (AnimChangedEvent)e);
+            HandleFrameChangeEvent((IEntity)sender, (AnimChangedEventArgs)eventArgs);
         }
 
-        private void HandleFrameChangeEvent(IEntity entity, AnimChangedEvent systemEvent)
+        private void HandleFrameChangeEvent(IEntity entity, AnimChangedEventArgs systemEvent)
         {
             var cameraCmp = entity.Components.OfType<ICameraComponent>().First();
             cameraCmp.Brightness = (float)systemEvent.Frame;
