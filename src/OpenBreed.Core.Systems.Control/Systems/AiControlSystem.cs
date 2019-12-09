@@ -4,6 +4,7 @@ using OpenBreed.Core.Common.Systems.Helpers;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
+using OpenBreed.Core.Systems.Control.Events;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -106,7 +107,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
             control.Direction = direction;
 
-            entity.RaiseEvent(new ControlDirectionChangedEvent(control.Direction));
+            entity.EnqueueEvent(ControlEventTypes.CONTROL_DIRECTION_CHANGED, new ControlDirectionChangedEvent(control.Direction));
         }
 
         #endregion Private Methods

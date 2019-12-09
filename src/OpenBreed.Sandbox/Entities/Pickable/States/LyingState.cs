@@ -43,7 +43,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
             Entity.PostMsg(new TextSetMsg(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
             var pos = Entity.Components.OfType<Position>().FirstOrDefault();
             Entity.PostMsg(new PutStampMsg(Entity.World.Id, stampId, 0, pos.Value));
-            Entity.Subscribe(CollisionEvent.TYPE, OnCollision);
+            Entity.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, OnCollision);
         }
 
         public void Initialize(IEntity entity)
@@ -53,15 +53,15 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
 
         public void LeaveState()
         {
-            Entity.Unsubscribe(CollisionEvent.TYPE, OnCollision);
+            Entity.Unsubscribe(PhysicsEventTypes.COLLISION_OCCURRED, OnCollision);
         }
 
-        private void OnCollision(object sender, IEvent e)
+        private void OnCollision(object sender, EventArgs e)
         {
-            HandleCollisionEvent((CollisionEvent)e);
+            HandleCollisionEvent((CollisionEventArgs)e);
         }
 
-        private void HandleCollisionEvent(CollisionEvent e)
+        private void HandleCollisionEvent(CollisionEventArgs e)
         {
             Entity.PostMsg(new StateChangeMsg(Entity.Id, "Functioning", "Pick"));
         }

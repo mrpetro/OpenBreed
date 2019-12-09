@@ -6,6 +6,7 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Messages;
 using OpenBreed.Core.Systems.Control.Components;
+using OpenBreed.Core.Systems.Control.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -96,7 +97,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
             if (control.AttackPrimary != msg.Primary)
             {
                 control.AttackPrimary = msg.Primary;
-                entity.RaiseEvent(new ControlFireChangedEvent(control.AttackPrimary));
+                entity.EnqueueEvent(ControlEventTypes.CONTROL_FIRE_CHANGED, new ControlFireChangedEvent(control.AttackPrimary));
             }
 
             return true;
@@ -111,7 +112,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
             if (control.Direction != msg.Direction)
             {
                 control.Direction = msg.Direction;
-                entity.RaiseEvent(new ControlDirectionChangedEvent(control.Direction));
+                entity.EnqueueEvent(ControlEventTypes.CONTROL_DIRECTION_CHANGED, new ControlDirectionChangedEvent(control.Direction));
             }
 
             return true;

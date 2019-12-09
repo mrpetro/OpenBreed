@@ -3,6 +3,7 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Core.States;
+using OpenBreed.Core.Systems.Control.Events;
 using OpenTK;
 using System;
 using System.Linq;
@@ -37,7 +38,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             //Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
             Entity.PostMsg(new TextSetMsg(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
-            Entity.Subscribe(ControlFireChangedEvent.TYPE, OnControlFireChanged);
+            Entity.Subscribe(ControlEventTypes.CONTROL_FIRE_CHANGED, OnControlFireChanged);
 
             timer.Start();
             timer.Elapsed += Timer_Elapsed;
@@ -60,10 +61,10 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             timer.Stop();
             timer.Elapsed -= Timer_Elapsed;
 
-            Entity.Unsubscribe(ControlFireChangedEvent.TYPE, OnControlFireChanged);
+            Entity.Unsubscribe(ControlEventTypes.CONTROL_FIRE_CHANGED, OnControlFireChanged);
         }
 
-        private void OnControlFireChanged(object sender, IEvent e)
+        private void OnControlFireChanged(object sender, EventArgs e)
         {
             HandleControlFireChangedEvent((ControlFireChangedEvent)e);
         }

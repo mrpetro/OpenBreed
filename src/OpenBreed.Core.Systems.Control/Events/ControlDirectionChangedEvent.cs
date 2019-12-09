@@ -1,16 +1,14 @@
 ﻿using OpenBreed.Core.Common.Helpers;
 using OpenTK;
+using System;
 
 namespace OpenBreed.Core.Modules.Animation.Systems.Control.Events
 {
-    public class ControlDirectionChangedEvent : IEvent
+    /// <summary>
+    /// Event arguments that are passed with CONTROL_DIRECTION_CHANGED event
+    /// </summary>
+    public class ControlDirectionChangedEvent : EventArgs
     {
-        #region Public Fields
-
-        public const string TYPE = "CONTROL_DIRECTION_CHANGED";
-
-        #endregion Public Fields
-
         #region Public Constructors
 
         public ControlDirectionChangedEvent(Vector2 direction)
@@ -23,7 +21,6 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Events
         #region Public Properties
 
         public Vector2 Direction { get; }
-        public string Type { get { return TYPE; } }
 
         #endregion Public Properties
     }

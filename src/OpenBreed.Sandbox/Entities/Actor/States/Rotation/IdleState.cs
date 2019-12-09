@@ -4,6 +4,7 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Core.States;
+using OpenBreed.Core.Systems.Control.Events;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
             // Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
             Entity.PostMsg(new TextSetMsg(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
-            Entity.Subscribe(ControlDirectionChangedEvent.TYPE, OnControlDirectionChanged);
+            Entity.Subscribe(ControlEventTypes.CONTROL_DIRECTION_CHANGED, OnControlDirectionChanged);
         }
 
         public void Initialize(IEntity entity)
@@ -39,7 +40,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 
         public void LeaveState()
         {
-            Entity.Unsubscribe(ControlDirectionChangedEvent.TYPE, OnControlDirectionChanged);
+            Entity.Unsubscribe(ControlEventTypes.CONTROL_DIRECTION_CHANGED, OnControlDirectionChanged);
         }
 
         public string Process(string actionName, object[] arguments)
@@ -57,7 +58,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
             return null;
         }
 
-        private void OnControlDirectionChanged(object sender, IEvent e)
+        private void OnControlDirectionChanged(object sender, EventArgs e)
         {
             HandleControlDirectionChangedEvent((ControlDirectionChangedEvent)e);
         }

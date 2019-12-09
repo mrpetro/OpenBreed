@@ -52,7 +52,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable
 
         private static void OnCollision(IEntity thisEntity, IEntity otherEntity, Vector2 projection)
         {
-            thisEntity.RaiseEvent(new CollisionEvent(otherEntity));
+            thisEntity.EnqueueEvent(PhysicsEventTypes.COLLISION_OCCURRED, new CollisionEventArgs(otherEntity));
         }
 
         public static void CreateStamps(ICore core)

@@ -1,16 +1,12 @@
-﻿using OpenBreed.Core.Common.Helpers;
-using OpenTK;
+﻿using System;
 
 namespace OpenBreed.Core.Modules.Animation.Systems.Control.Events
 {
-    public class ControlFireChangedEvent : IEvent
+    /// <summary>
+    /// Event arguments that are passed with CONTROL_FIRE_CHANGED event
+    /// </summary>
+    public class ControlFireChangedEvent : EventArgs
     {
-        #region Public Fields
-
-        public const string TYPE = "CONTROL_FIRE_CHANGED";
-
-        #endregion Public Fields
-
         #region Public Constructors
 
         public ControlFireChangedEvent(bool fire)
@@ -23,7 +19,6 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Events
         #region Public Properties
 
         public bool Fire { get; }
-        public string Type { get { return TYPE; } }
 
         #endregion Public Properties
     }

@@ -80,6 +80,7 @@
     <Compile Include="Components\FlyingControl.cs" />
     <Compile Include="Components\TankControl.cs" />
     <Compile Include="Components\TurretControl.cs" />
+    <Compile Include="Events\ControlEventTypes.cs" />
     <Compile Include="Events\ControlFireChangedEvent.cs" />
     <Compile Include="Events\ControlDirectionChangedEvent.cs" />
     <Compile Include="Messages\AttackControlMsg.cs" />

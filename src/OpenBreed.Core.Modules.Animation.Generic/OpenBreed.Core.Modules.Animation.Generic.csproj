@@ -64,8 +64,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Events\AnimStoppedEvent.cs" />
-    <Compile Include="Events\AnimChangedEvent.cs" />
+    <Compile Include="Events\AnimationEventTypes.cs" />
+    <Compile Include="Events\AnimStoppedEventArgs.cs" />
+    <Compile Include="Events\AnimChangedEventArgs.cs" />
     <Compile Include="Messages\SetAnimMsg.cs" />
     <Compile Include="Systems\AnimSystem.cs" />
     <Compile Include="Helpers\AnimMan.cs" />

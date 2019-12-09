@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems;
-using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Events;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.States;
@@ -15,6 +15,9 @@ namespace OpenBreed.Core.Common
 {
     /// <summary>
     /// World class which contains systems and entities
+    /// 
+    /// Enqueues events:
+    /// WorldInitializedEvent - when world is initialized
     /// </summary>
     public class World
     {
@@ -123,24 +126,16 @@ namespace OpenBreed.Core.Common
             toRemove.Add(entity);
         }
 
-        public void Initialize()
+        internal void OnEntityRemoved(IEntity entity)
         {
-            InitializeSystems();
-            Cleanup();
+            //Core.EventBus.Enqueue(
+            //throw new NotImplementedException();
         }
 
-        public void Deinitialize()
-        {
-        }
-
-        public void Update(float dt)
-        {
-            if (Paused)
-                systems.OfType<IUpdatableSystem>().ForEach(item => item.UpdatePauseImmuneOnly(dt * TimeMultiplier));
-            else
-                systems.OfType<IUpdatableSystem>().ForEach(item => item.Update(dt * TimeMultiplier));
-        }
-
+        /// <summary>
+        /// Method will remove all entities from this world.
+        /// Entities will not be removed immediately but at the end of each world update.
+        /// </summary>
         public void RemoveAllEntities()
         {
             for (int i = 0; i < entities.Count; i++)
@@ -161,9 +156,30 @@ namespace OpenBreed.Core.Common
 
         #region Internal Methods
 
+        internal void Update(float dt)
+        {
+            if (Paused)
+                systems.OfType<IUpdatableSystem>().ForEach(item => item.UpdatePauseImmuneOnly(dt * TimeMultiplier));
+            else
+                systems.OfType<IUpdatableSystem>().ForEach(item => item.Update(dt * TimeMultiplier));
+        }
+
+        internal void Initialize()
+        {
+            InitializeSystems();
+            Cleanup();
+
+            Core.EventBus.Enqueue(this, CoreEventTypes.WORLD_INITIALIZED , new WorldInitializedEventArgs(this));
+        }
+
+        internal void Deinitialize()
+        {
+            Core.EventBus.Enqueue(this, CoreEventTypes.WORLD_DEINITIALIZED, new WorldDeinitializedEventArgs(this));
+        }
+
         internal void RegisterEntity(Entity entity)
         {
-            AddToSystems(entity);
+            AddEntityToSystems(entity);
 
             //Initialize the entity and add it to entities list
             entities.Add(entity);
@@ -174,7 +190,7 @@ namespace OpenBreed.Core.Common
             //Deinitialize the entity and remove it from entities list
             entities.Remove(entity);
 
-            RemoveFromSystems(entity);
+            RemoveEntityFromSystems(entity);
         }
 
         internal void Cleanup()
@@ -204,7 +220,7 @@ namespace OpenBreed.Core.Common
 
         #region Private Methods
 
-        private void AddToSystems(Entity entity)
+        private void AddEntityToSystems(Entity entity)
         {
             foreach (var system in systems)
             {
@@ -213,7 +229,7 @@ namespace OpenBreed.Core.Common
             }
         }
 
-        private void RemoveFromSystems(Entity entity)
+        private void RemoveEntityFromSystems(Entity entity)
         {
             foreach (var system in systems)
             {

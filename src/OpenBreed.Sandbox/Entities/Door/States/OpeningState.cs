@@ -6,6 +6,7 @@ using OpenBreed.Core.Modules.Animation.Messages;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Core.States;
+using System;
 using System.Linq;
 
 namespace OpenBreed.Sandbox.Components.States
@@ -43,8 +44,8 @@ namespace OpenBreed.Sandbox.Components.States
             Entity.PostMsg(new PlayAnimMsg(Entity.Id, animationId));
             Entity.PostMsg(new TextSetMsg(Entity.Id, "Door - Opening"));
 
-            Entity.Subscribe(AnimChangedEvent.TYPE, OnAnimChanged);
-            Entity.Subscribe(AnimStoppedEvent.TYPE, OnAnimStopped);
+            Entity.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, OnAnimChanged);
+            Entity.Subscribe(AnimationEventTypes.ANIMATION_STOPPED, OnAnimStopped);
         }
 
         public void Initialize(IEntity entity)
@@ -54,8 +55,8 @@ namespace OpenBreed.Sandbox.Components.States
 
         public void LeaveState()
         {
-            Entity.Unsubscribe(AnimChangedEvent.TYPE, OnAnimChanged);
-            Entity.Unsubscribe(AnimStoppedEvent.TYPE, OnAnimStopped);
+            Entity.Unsubscribe(AnimationEventTypes.ANIMATION_CHANGED, OnAnimChanged);
+            Entity.Unsubscribe(AnimationEventTypes.ANIMATION_STOPPED, OnAnimStopped);
         }
 
         public string Process(string actionName, object[] arguments)
@@ -75,22 +76,22 @@ namespace OpenBreed.Sandbox.Components.States
 
         #region Private Methods
 
-        private void OnAnimChanged(object sender, IEvent e)
+        private void OnAnimChanged(object sender, EventArgs eventArgs)
         {
-            HandleAnimChangeEvent((AnimChangedEvent)e);
+            HandleAnimChangeEvent((AnimChangedEventArgs)eventArgs);
         }
 
-        private void OnAnimStopped(object sender, IEvent e)
+        private void OnAnimStopped(object sender, EventArgs eventArgs)
         {
-            HandleAnimStoppedEvent((AnimStoppedEvent)e);
+            HandleAnimStoppedEvent((AnimStoppedEventArgs)eventArgs);
         }
 
-        private void HandleAnimChangeEvent(AnimChangedEvent e)
+        private void HandleAnimChangeEvent(AnimChangedEventArgs e)
         {
             Entity.PostMsg(new SpriteSetMsg(Entity.Id, (int)e.Frame));
         }
 
-        private void HandleAnimStoppedEvent(AnimStoppedEvent e)
+        private void HandleAnimStoppedEvent(AnimStoppedEventArgs e)
         {
             Entity.PostMsg(new StateChangeMsg(Entity.Id, "Functioning", "Opened"));
         }

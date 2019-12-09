@@ -2,6 +2,7 @@
 using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Events;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Physics.Messages;
 using OpenBreed.Sandbox.Entities.WorldGate;
@@ -78,14 +79,21 @@ namespace OpenBreed.Sandbox.Jobs
 
         private void LeaveWorld()
         {
-            entity.RemovedFromWorld += Entity_RemovedFromWorld;
+            entity.Subscribe(CoreEventTypes.ENTITY_REMOVED_FROM_WORLD, OnEntityRemovedFromWorld);
+
+            //entity.RemovedFromWorld += Entity_RemovedFromWorld;
             entity.World.RemoveEntity(entity);
         }
 
-        private void Entity_RemovedFromWorld(object sender, Core.Common.World e)
+        private void OnEntityRemovedFromWorld(object sender, EventArgs e)
         {
             Complete(this);
         }
+
+        //private void Entity_RemovedFromWorld(object sender, Core.Common.World e)
+        //{
+        //    Complete(this);
+        //}
 
         private void SetPosition(IEntity entity, int entryId)
         {
@@ -116,37 +124,36 @@ namespace OpenBreed.Sandbox.Jobs
                     world = reader.GetWorld();
             }
 
-            entity.AddedToWorld += Entity_AddedToWorld;
+            entity.Subscribe(CoreEventTypes.ENTITY_ADDED_TO_WORLD, OnEntityAddedToWorld);
             world.AddEntity(entity);
-
 
             SetPosition(entity, entryId);
         }
 
-        private void Entity_AddedToWorld(object sender, Core.Common.World e)
+        private void OnEntityAddedToWorld(object sender, EventArgs e)
         {
             Complete(this);
         }
 
-        private void OnBodyOff(object sender, IEvent entity)
+        private void OnBodyOff(object sender, EventArgs e)
         {
             Complete(this);
         }
 
-        private void OnBodyOn(object sender, IEvent entity)
+        private void OnBodyOn(object sender, EventArgs e)
         {
             Complete(this);
         }
 
         private void BodyOff()
         {
-            entity.Subscribe(BodyOffEvent.TYPE, OnBodyOff);
+            entity.Subscribe(PhysicsEventTypes.BODY_OFF, OnBodyOff);
             entity.PostMsg(new BodyOffMsg(entity.Id));
         }
 
         private void BodyOn()
         {
-            entity.Subscribe(BodyOnEvent.TYPE, OnBodyOn);
+            entity.Subscribe(PhysicsEventTypes.BODY_ON, OnBodyOn);
             entity.PostMsg(new BodyOnMsg(entity.Id));
         }
 

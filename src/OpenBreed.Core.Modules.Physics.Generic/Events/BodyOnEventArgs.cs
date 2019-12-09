@@ -8,17 +8,18 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Modules.Physics.Events
 {
-    public class BodyOnEvent : IEvent
+    /// <summary>
+    /// Event arguments that are passed with BODY_ON event
+    /// </summary>
+    public class BodyOnEventArgs : EventArgs
     {
         #region Public Fields
-
-        public const string TYPE = "BODY_ON";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public BodyOnEvent(IEntity entity)
+        public BodyOnEventArgs(IEntity entity)
         {
             Entity = entity;
         }
@@ -28,7 +29,6 @@ namespace OpenBreed.Core.Modules.Physics.Events
         #region Public Properties
 
         public IEntity Entity { get; }
-        public string Type { get { return TYPE; } }
 
         #endregion Public Properties
     }

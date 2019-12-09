@@ -1,22 +1,17 @@
 ﻿using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Modules.Animation.Components;
+using System;
 
 namespace OpenBreed.Core.Modules.Animation.Events
 {
     /// <summary>
-    /// Animation stoped event class, occurs when animation has been stoped
+    /// Event arguments that are passed with ANIMATION_STOPPED event
     /// </summary>
-    public class AnimStoppedEvent : IEvent
+    public class AnimStoppedEventArgs : EventArgs
     {
-        #region Public Fields
-
-        public const string TYPE = "ANIMATION_STOPPED";
-
-        #endregion Public Fields
-
         #region Public Constructors
 
-        public AnimStoppedEvent(Animator animator)
+        public AnimStoppedEventArgs(Animator animator)
         {
             Animator = animator;
         }
@@ -26,7 +21,6 @@ namespace OpenBreed.Core.Modules.Animation.Events
         #region Public Properties
 
         public Animator Animator { get; }
-        public string Type { get { return TYPE; } }
 
         #endregion Public Properties
     }

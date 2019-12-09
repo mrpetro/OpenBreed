@@ -68,7 +68,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             teleportEntry.Add(Position.Create(x * 16, y * 16));
             teleportEntry.Add(AxisAlignedBoxShape.Create(16, 16, 8, 8));
             teleportEntry.Add(TextHelper.Create(core, new Vector2(0, 32), "TeleportEntry"));
-            teleportEntry.Subscribe(AnimChangedEvent.TYPE, OnTeleportFrameChanged);
+            teleportEntry.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, OnTeleportFrameChanged);
 
             world.AddEntity(teleportEntry);
 
@@ -88,7 +88,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             teleportExit.Add(Position.Create(x * 16, y * 16));
             teleportExit.Add(AxisAlignedBoxShape.Create(16, 16, 8, 8));
             teleportExit.Add(TextHelper.Create(core, new Vector2(0, 32), "TeleportExit"));
-            teleportExit.Subscribe(AnimChangedEvent.TYPE, OnTeleportFrameChanged);
+            teleportExit.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, OnTeleportFrameChanged);
 
             world.AddEntity(teleportExit);
 
@@ -99,12 +99,12 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         #region Private Methods
 
-        private static void OnTeleportFrameChanged(object sender, IEvent e)
+        private static void OnTeleportFrameChanged(object sender, EventArgs eventArgs)
         {
-            HandleTeleportFrameChangeEvent((IEntity)sender, (AnimChangedEvent)e);
+            HandleTeleportFrameChangeEvent((IEntity)sender, (AnimChangedEventArgs)eventArgs);
         }
 
-        private static void HandleTeleportFrameChangeEvent(IEntity entity, AnimChangedEvent systemEvent)
+        private static void HandleTeleportFrameChangeEvent(IEntity entity, AnimChangedEventArgs systemEvent)
         {
             var sprite = entity.Components.OfType<ISpriteComponent>().First();
             sprite.ImageId = (int)systemEvent.Frame;

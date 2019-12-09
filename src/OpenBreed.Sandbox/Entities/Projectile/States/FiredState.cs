@@ -9,6 +9,7 @@ using OpenBreed.Core.Modules.Rendering.Messages;
 using OpenBreed.Core.States;
 using OpenBreed.Sandbox.Helpers;
 using OpenTK;
+using System;
 using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Projectile.States
@@ -51,9 +52,9 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
 
             Entity.PostMsg(new PlayAnimMsg(Entity.Id, animPrefix + animDirName));
             Entity.PostMsg(new TextSetMsg(Entity.Id, "Projectile - Fired"));
-            Entity.Subscribe(CollisionEvent.TYPE, OnCollision);
+            Entity.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, OnCollision);
 
-            Entity.Subscribe(AnimChangedEvent.TYPE, OnFrameChanged);
+            Entity.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, OnFrameChanged);
         }
 
         public void Initialize(IEntity entity)
@@ -65,15 +66,15 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
 
         public void LeaveState()
         {
-            Entity.Unsubscribe(AnimChangedEvent.TYPE, OnFrameChanged);
+            Entity.Unsubscribe(AnimationEventTypes.ANIMATION_CHANGED, OnFrameChanged);
         }
 
-        private void OnFrameChanged(object sender, IEvent e)
+        private void OnFrameChanged(object sender, EventArgs e)
         {
-            HandleFrameChangeEvent((AnimChangedEvent)e);
+            HandleFrameChangeEvent((AnimChangedEventArgs)e);
         }
 
-        private void HandleFrameChangeEvent(AnimChangedEvent systemEvent)
+        private void HandleFrameChangeEvent(AnimChangedEventArgs systemEvent)
         {
             sprite.ImageId = (int)systemEvent.Frame;
         }
@@ -88,12 +89,12 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
 
         #region Private Methods
 
-        private void OnCollision(object sender, IEvent e)
+        private void OnCollision(object sender, EventArgs e)
         {
-            HandleCollisionEvent((CollisionEvent)e);
+            HandleCollisionEvent((CollisionEventArgs)e);
         }
 
-        private void HandleCollisionEvent(CollisionEvent e)
+        private void HandleCollisionEvent(CollisionEventArgs e)
         {
             //Entity.PostMsg(new StateChangeMsg(Entity, "Attacking", "Open"));
         }

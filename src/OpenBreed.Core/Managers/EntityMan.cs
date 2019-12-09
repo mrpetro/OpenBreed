@@ -3,6 +3,7 @@ using OpenBreed.Core.Collections;
 using OpenBreed.Core.Common.Components.Builders;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,7 +90,7 @@ namespace OpenBreed.Core.Managers
 
         public void Destroy(IEntity entity)
         {
-            entity.RemovedFromWorld += Entity_RemovedFromWorld;
+            entity.Subscribe(CoreEventTypes.ENTITY_REMOVED_FROM_WORLD, OnEntityRemovedFromWorld);
             entity.World.RemoveEntity(entity);
         }
 
@@ -97,10 +98,10 @@ namespace OpenBreed.Core.Managers
 
         #region Private Methods
 
-        private void Entity_RemovedFromWorld(object sender, Common.World e)
+        private void OnEntityRemovedFromWorld(object sender, EventArgs e)
         {
             var entity = (IEntity)sender;
-            entity.RemovedFromWorld -= Entity_RemovedFromWorld;
+            entity.Unsubscribe(CoreEventTypes.ENTITY_REMOVED_FROM_WORLD, OnEntityRemovedFromWorld);
             entities.RemoveById(entity.Id);
         }
 
