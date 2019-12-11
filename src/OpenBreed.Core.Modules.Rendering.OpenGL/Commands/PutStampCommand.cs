@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Common.Helpers;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Entities;
 using OpenTK;
 using System;
@@ -7,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Core.Modules.Rendering.Messages
+namespace OpenBreed.Core.Modules.Rendering.Commands
 {
-    public class PutStampMsg : IWorldMsg
+    public class PutStampCommand : IWorldCommand
     {
         #region Public Fields
 
@@ -19,7 +20,7 @@ namespace OpenBreed.Core.Modules.Rendering.Messages
 
         #region Public Constructors
 
-        public PutStampMsg(int worldId, int stampId, int layerNo, Vector2 position)
+        public PutStampCommand(int worldId, int stampId, int layerNo, Vector2 position)
         {
             WorldId = worldId;
             StampId = stampId;

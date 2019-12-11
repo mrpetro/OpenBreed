@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Common;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Events;
@@ -87,9 +88,9 @@ namespace OpenBreed.Core.Entities
             //   return false;
         }
 
-        public void PostMsg(IMsg msg)
+        public void PostCommand(ICommand command)
         {
-            Core.MessageBus.Enqueue(this, msg);
+            Core.MessageBus.Enqueue(this, command);
         }
 
         public void EnqueueEvent(string eventType, EventArgs eventArgs)
@@ -146,32 +147,32 @@ namespace OpenBreed.Core.Entities
             //Forget the world in which entity was
             World = null;
 
-            from.OnEntityRemoved(this);
-            OnRemovedFrom(from);
+            OnLeftWorld(from);
         }
 
         internal void Initialize(World world)
         {
             //Remember in what world entity is
             World = world;
-            OnAddedTo(World);
 
             foreach (var fsm in fsmList)
                 fsm.Initialize();
+
+            OnEnteredWorld(World);
         }
 
         #endregion Internal Methods
 
         #region Private Methods
 
-        private void OnRemovedFrom(World world)
+        private void OnLeftWorld(World world)
         {
-            EnqueueEvent(CoreEventTypes.ENTITY_REMOVED_FROM_WORLD, new EntityRemovedFromWorldEventArgs(this, world));
+            EnqueueEvent(CoreEventTypes.ENTITY_LEFT_WORLD, new EntityLeftWorldEventArgs(this, world));
         }
 
-        private void OnAddedTo(World world)
+        private void OnEnteredWorld(World world)
         {
-            EnqueueEvent(CoreEventTypes.ENTITY_ADDED_TO_WORLD, new EntityAddedToWorldEventArgs(this, world));
+            EnqueueEvent(CoreEventTypes.ENTITY_ENTERED_WORLD, new EntityEnteredWorldEventArgs(this, world));
         }
 
         #endregion Private Methods

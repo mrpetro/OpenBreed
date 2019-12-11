@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Common.Helpers;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Entities;
 
 namespace OpenBreed.Core.Common.Systems
@@ -38,12 +39,12 @@ namespace OpenBreed.Core.Common.Systems
         void RemoveEntity(IEntity entity);
 
         /// <summary>
-        /// Handle given message
+        /// Handle given command
         /// </summary>
-        /// <param name="sender">Object is sending the message</param>
-        /// <param name="message">message</param>
-        /// <returns>True if message was handled, false otherwise</returns>
-        bool RecieveMsg(object sender, IMsg message);
+        /// <param name="sender">Object is sending the command</param>
+        /// <param name="cmd">Command to recieve</param>
+        /// <returns>True if command was handled, false otherwise</returns>
+        bool RecieveCommand(object sender, ICommand cmd);
 
         #endregion Public Methods
     }

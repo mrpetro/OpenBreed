@@ -3,7 +3,7 @@ using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Animation.Events;
-using OpenBreed.Core.Modules.Animation.Messages;
+using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
 using System;
 using System.Collections.Generic;
@@ -44,7 +44,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
         {
             entity.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, OnAnimChanged);
             entity.Subscribe(AnimationEventTypes.ANIMATION_STOPPED, OnAnimStopped);
-            entity.PostMsg(new PlayAnimMsg(entity.Id, animName));
+            entity.PostCommand(new PlayAnimCommand(entity.Id, animName));
         }
 
         public void Update(float dt)

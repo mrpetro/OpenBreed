@@ -6,21 +6,22 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenBreed.Core.Modules.Rendering.Messages;
+using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class SpriteSystem : WorldSystem, ISpriteSystem, IMsgListener
+    public class SpriteSystem : WorldSystem, ISpriteSystem, ICommandListener
     {
         #region Private Fields
 
-        private MsgHandler msgHandler;
+        private CommandHandler cmdHandler;
         private readonly List<SpritePack> inactive = new List<SpritePack>();
         private readonly List<SpritePack> active = new List<SpritePack>();
 
@@ -30,7 +31,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         public SpriteSystem(ICore core) : base(core)
         {
-            msgHandler = new MsgHandler(this);
+            cmdHandler = new CommandHandler(this);
 
             Require<ISpriteComponent>();
             Require<Position>();
@@ -44,29 +45,29 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             base.Initialize(world);
 
-            World.MessageBus.RegisterHandler(SpriteOnMsg.TYPE, msgHandler);
-            World.MessageBus.RegisterHandler(SpriteOffMsg.TYPE, msgHandler);
-            World.MessageBus.RegisterHandler(SpriteSetMsg.TYPE, msgHandler);
+            World.MessageBus.RegisterHandler(SpriteOnCommand.TYPE, cmdHandler);
+            World.MessageBus.RegisterHandler(SpriteOffCommand.TYPE, cmdHandler);
+            World.MessageBus.RegisterHandler(SpriteSetCommand.TYPE, cmdHandler);
         }
 
-        public override bool RecieveMsg(object sender, IMsg msg)
+        public override bool RecieveCommand(object sender, ICommand cmd)
         {
-            switch (msg.Type)
+            switch (cmd.Type)
             {
-                case SpriteOnMsg.TYPE:
-                    return HandleSpriteOnMsg(sender, (SpriteOnMsg)msg);
-                case SpriteOffMsg.TYPE:
-                    return HandleSpriteOffMsg(sender, (SpriteOffMsg)msg);
-                case SpriteSetMsg.TYPE:
-                    return HandleSpriteSetMsg(sender, (SpriteSetMsg)msg);
+                case SpriteOnCommand.TYPE:
+                    return HandleSpriteOnCommand(sender, (SpriteOnCommand)cmd);
+                case SpriteOffCommand.TYPE:
+                    return HandleSpriteOffCommand(sender, (SpriteOffCommand)cmd);
+                case SpriteSetCommand.TYPE:
+                    return HandleSpriteSetCommand(sender, (SpriteSetCommand)cmd);
                 default:
                     return false;
             }
         }
 
-        private bool HandleSpriteOnMsg(object sender, SpriteOnMsg msg)
+        private bool HandleSpriteOnCommand(object sender, SpriteOnCommand cmd)
         {
-            var toActivate = inactive.FirstOrDefault(item => item.EntityId == msg.EntityId);
+            var toActivate = inactive.FirstOrDefault(item => item.EntityId == cmd.EntityId);
 
             if (toActivate != null)
             {
@@ -77,20 +78,20 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             return true;
         }
 
-        private bool HandleSpriteSetMsg(object sender, SpriteSetMsg msg)
+        private bool HandleSpriteSetCommand(object sender, SpriteSetCommand cmd)
         {
-            var toModify = active.FirstOrDefault(item => item.EntityId == msg.EntityId);
+            var toModify = active.FirstOrDefault(item => item.EntityId == cmd.EntityId);
             if (toModify == null)
                 return false;
 
-            toModify.Sprite.ImageId = msg.ImageId;
+            toModify.Sprite.ImageId = cmd.ImageId;
 
             return true;
         }
 
-        private bool HandleSpriteOffMsg(object sender, SpriteOffMsg msg)
+        private bool HandleSpriteOffCommand(object sender, SpriteOffCommand cmd)
         {
-            var toDeactivate = active.FirstOrDefault(item => item.EntityId == msg.EntityId);
+            var toDeactivate = active.FirstOrDefault(item => item.EntityId == cmd.EntityId);
 
             if (toDeactivate != null)
             {
@@ -195,7 +196,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             active.Remove(pack);
         }
 
-        public bool EnqueueMsg(object sender, IEntityMsg msg)
+        public bool EnqueueMsg(object sender, IEntityCommand msg)
         {
             return false;
         }

@@ -1,10 +1,11 @@
-﻿using OpenBreed.Core.Common.Helpers;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Entities;
 using OpenTK;
 
-namespace OpenBreed.Core.Modules.Animation.Systems.Control.Messages
+namespace OpenBreed.Core.Modules.Animation.Systems.Control.Commands
 {
-    public struct WalkingControlMsg : IEntityMsg
+    public struct WalkingControlCommand : IEntityCommand
     {
         #region Public Fields
 
@@ -14,7 +15,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Messages
 
         #region Public Constructors
 
-        public WalkingControlMsg(int entityId, Vector2 direction)
+        public WalkingControlCommand(int entityId, Vector2 direction)
         {
             EntityId = entityId;
             Direction = direction;

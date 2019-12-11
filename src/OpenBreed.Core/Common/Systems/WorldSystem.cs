@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Common.Helpers;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using System;
@@ -87,7 +88,7 @@ namespace OpenBreed.Core.Common.Systems
             toRemove.Add(entity);
         }
 
-        public virtual bool RecieveMsg(object sender, IMsg message)
+        public virtual bool RecieveCommand(object sender, ICommand cmd)
         {
             return false;
         }

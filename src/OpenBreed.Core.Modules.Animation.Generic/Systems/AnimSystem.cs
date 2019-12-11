@@ -4,21 +4,22 @@ using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Events;
-using OpenBreed.Core.Modules.Animation.Messages;
+using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Core.Modules.Animation.Systems
 {
-    public class AnimSystem<T> : WorldSystem, IAnimationSystem, IMsgListener
+    public class AnimSystem<T> : WorldSystem, IAnimationSystem, ICommandListener
     {
         #region Private Fields
 
         private readonly List<int> entities = new List<int>();
         private readonly List<Animator> animatorComps = new List<Animator>();
-        private readonly MsgHandler msgHandler;
+        private readonly CommandHandler cmdHandler;
 
         #endregion Private Fields
 
@@ -26,7 +27,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         public AnimSystem(ICore core) : base(core)
         {
-            msgHandler = new MsgHandler(this);
+            cmdHandler = new CommandHandler(this);
             Require<Animator>();
         }
 
@@ -38,10 +39,10 @@ namespace OpenBreed.Core.Modules.Animation.Systems
         {
             base.Initialize(world);
 
-            World.MessageBus.RegisterHandler(SetAnimMsg.TYPE, msgHandler);
-            World.MessageBus.RegisterHandler(PlayAnimMsg.TYPE, msgHandler);
-            World.MessageBus.RegisterHandler(PauseAnimMsg.TYPE, msgHandler);
-            World.MessageBus.RegisterHandler(StopAnimMsg.TYPE, msgHandler);
+            World.MessageBus.RegisterHandler(SetAnimCommand.TYPE, cmdHandler);
+            World.MessageBus.RegisterHandler(PlayAnimCommand.TYPE, cmdHandler);
+            World.MessageBus.RegisterHandler(PauseAnimCommand.TYPE, cmdHandler);
+            World.MessageBus.RegisterHandler(StopAnimCommand.TYPE, cmdHandler);
         }
 
         public void UpdatePauseImmuneOnly(float dt)
@@ -132,21 +133,21 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             }
         }
 
-        public override bool RecieveMsg(object sender, IMsg message)
+        public override bool RecieveCommand(object sender, ICommand cmd)
         {
-            switch (message.Type)
+            switch (cmd.Type)
             {
-                case SetAnimMsg.TYPE:
-                    return HandleSetAnimMsg(sender, (SetAnimMsg)message);
+                case SetAnimCommand.TYPE:
+                    return HandleSetAnimCommand(sender, (SetAnimCommand)cmd);
 
-                case PlayAnimMsg.TYPE:
-                    return HandlePlayAnimMsg(sender, (PlayAnimMsg)message);
+                case PlayAnimCommand.TYPE:
+                    return HandlePlayAnimCommand(sender, (PlayAnimCommand)cmd);
 
-                case PauseAnimMsg.TYPE:
-                    return HandlePauseAnimMsg(sender, (PauseAnimMsg)message);
+                case PauseAnimCommand.TYPE:
+                    return HandlePauseAnimCommand(sender, (PauseAnimCommand)cmd);
 
-                case StopAnimMsg.TYPE:
-                    return HandleStopAnimMsg(sender, (StopAnimMsg)message);
+                case StopAnimCommand.TYPE:
+                    return HandleStopAnimCommand(sender, (StopAnimCommand)cmd);
 
                 default:
                     return false;
@@ -188,9 +189,9 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             entity.EnqueueEvent(AnimationEventTypes.ANIMATION_CHANGED, new AnimChangedEventArgs(animator.Frame));
         }
 
-        private bool HandlePauseAnimMsg(object sender, PauseAnimMsg message)
+        private bool HandlePauseAnimCommand(object sender, PauseAnimCommand cmd)
         {
-            var index = entities.IndexOf(message.EntityId);
+            var index = entities.IndexOf(cmd.EntityId);
             if (index < 0)
                 return false;
 
@@ -199,37 +200,37 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             return true;
         }
 
-        private bool HandleStopAnimMsg(object sender, StopAnimMsg message)
+        private bool HandleStopAnimCommand(object sender, StopAnimCommand cmd)
         {
-            var index = entities.IndexOf(message.EntityId);
+            var index = entities.IndexOf(cmd.EntityId);
             if (index < 0)
                 return false;
 
-            var entity = Core.Entities.GetById(message.EntityId);
+            var entity = Core.Entities.GetById(cmd.EntityId);
             Stop(entity, animatorComps[index]);
 
             return true;
         }
 
-        private bool HandleSetAnimMsg(object sender, SetAnimMsg message)
+        private bool HandleSetAnimCommand(object sender, SetAnimCommand cmd)
         {
-            var index = entities.IndexOf(message.EntityId);
+            var index = entities.IndexOf(cmd.EntityId);
             if (index < 0)
                 return false;
 
-            var animData = Core.Animations.Anims.GetByName(message.Id);
+            var animData = Core.Animations.Anims.GetByName(cmd.Id);
 
             if (animData == null)
-                Core.Logging.Warning($"Animation with ID = '{message.Id}' not found.");
+                Core.Logging.Warning($"Animation with ID = '{cmd.Id}' not found.");
 
             Play(animatorComps[index], animData.Id);
 
             return true;
         }
 
-        private bool HandlePlayAnimMsg(object sender, PlayAnimMsg message)
+        private bool HandlePlayAnimCommand(object sender, PlayAnimCommand cmd)
         {
-            var index = entities.IndexOf(message.EntityId);
+            var index = entities.IndexOf(cmd.EntityId);
             if (index < 0)
                 return false;
 
@@ -237,12 +238,12 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
             int animId = -1;
 
-            if (message.Id != null)
+            if (cmd.Id != null)
             {
-                var data = Core.Animations.Anims.GetByName(message.Id);
+                var data = Core.Animations.Anims.GetByName(cmd.Id);
 
                 if (data == null)
-                    Core.Logging.Warning($"Animation with ID = '{message.Id}' not found.");
+                    Core.Logging.Warning($"Animation with ID = '{cmd.Id}' not found.");
                 else
                     animId = data.Id;
             }

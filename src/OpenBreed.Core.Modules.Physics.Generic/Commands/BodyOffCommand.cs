@@ -1,22 +1,27 @@
-﻿using OpenBreed.Core.Common.Helpers;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace OpenBreed.Core.Modules.Animation.Messages
+namespace OpenBreed.Core.Modules.Physics.Commands
 {
-    public struct PlayAnimMsg : IEntityMsg
+    public struct BodyOffCommand : IEntityCommand
     {
         #region Public Fields
 
-        public const string TYPE = "PLAY_ANIM";
+        public const string TYPE = "BODY_OFF";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public PlayAnimMsg(int entityId, string id)
+        public BodyOffCommand(int entityId)
         {
             EntityId = entityId;
-            Id = id;
         }
 
         #endregion Public Constructors
@@ -25,7 +30,6 @@ namespace OpenBreed.Core.Modules.Animation.Messages
 
         public int EntityId { get; }
         public string Type { get { return TYPE; } }
-        public string Id { get; }
 
         #endregion Public Properties
     }

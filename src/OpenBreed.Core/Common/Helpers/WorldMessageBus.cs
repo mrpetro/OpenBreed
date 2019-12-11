@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Common;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Helpers;
 using System;
 using System.Collections.Generic;
@@ -36,12 +37,12 @@ namespace OpenBreed.Core.Common.Helpers
             handlers.Add(msgType, msgHandler);
         }
 
-        public void PostMsg(object sender, IMsg msg)
+        public void PostCommand(object sender, ICommand cmd)
         {
             IMsgHandler handler = null;
-            if (handlers.TryGetValue(msg.Type, out handler))
+            if (handlers.TryGetValue(cmd.Type, out handler))
             {
-                handler.HandleMsg(sender, msg);
+                handler.Handle(sender, cmd);
             }
         }
 

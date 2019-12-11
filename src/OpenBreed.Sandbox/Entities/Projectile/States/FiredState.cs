@@ -2,10 +2,10 @@
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Events;
-using OpenBreed.Core.Modules.Animation.Messages;
+using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Messages;
+using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
 using OpenBreed.Sandbox.Helpers;
 using OpenTK;
@@ -50,8 +50,8 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
 
             var animDirName = AnimHelper.ToDirectionName(direction);
 
-            Entity.PostMsg(new PlayAnimMsg(Entity.Id, animPrefix + animDirName));
-            Entity.PostMsg(new TextSetMsg(Entity.Id, "Projectile - Fired"));
+            Entity.PostCommand(new PlayAnimCommand(Entity.Id, animPrefix + animDirName));
+            Entity.PostCommand(new TextSetCommand(Entity.Id, "Projectile - Fired"));
             Entity.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, OnCollision);
 
             Entity.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, OnFrameChanged);

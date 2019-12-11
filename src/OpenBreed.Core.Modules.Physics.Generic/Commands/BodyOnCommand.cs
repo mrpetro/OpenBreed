@@ -1,22 +1,27 @@
-﻿using OpenBreed.Core.Common.Helpers;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace OpenBreed.Core.Modules.Rendering.Messages
+namespace OpenBreed.Core.Modules.Physics.Commands
 {
-    public struct SpriteSetMsg : IEntityMsg
+    public struct BodyOnCommand : IEntityCommand
     {
         #region Public Fields
 
-        public const string TYPE = "SPRITE_SET";
+        public const string TYPE = "BODY_ON";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public SpriteSetMsg(int entityId, int imageId)
+        public BodyOnCommand(int entityId)
         {
             EntityId = entityId;
-            ImageId = imageId;
         }
 
         #endregion Public Constructors
@@ -25,8 +30,6 @@ namespace OpenBreed.Core.Modules.Rendering.Messages
 
         public int EntityId { get; }
         public string Type { get { return TYPE; } }
-        public int ImageId { get; }
-
 
         #endregion Public Properties
     }

@@ -1,17 +1,21 @@
 ﻿using OpenBreed.Core.Common;
 using OpenBreed.Core.Entities;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Events
 {
     /// <summary>
-    /// Event arguments that are passed with ENTITY_ADDED_TO_WORLD event
-    /// </summary>
-    public class EntityAddedToWorldEventArgs : EventArgs
+    /// Event arguments that are passed with ENTITY_LEFT_WORLD event
+    /// </summary> 
+    public class EntityLeftWorldEventArgs : EventArgs
     {
         #region Public Constructors
 
-        public EntityAddedToWorldEventArgs(IEntity entity, World world)
+        public EntityLeftWorldEventArgs(IEntity entity, World world)
         {
             Entity = entity;
             World = world;

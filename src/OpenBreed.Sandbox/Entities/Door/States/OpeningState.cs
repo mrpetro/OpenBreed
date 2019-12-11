@@ -2,9 +2,9 @@
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Events;
-using OpenBreed.Core.Modules.Animation.Messages;
+using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Messages;
+using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
 using System;
 using System.Linq;
@@ -40,9 +40,9 @@ namespace OpenBreed.Sandbox.Components.States
 
         public void EnterState()
         {
-            Entity.PostMsg(new SpriteOnMsg(Entity.Id));
-            Entity.PostMsg(new PlayAnimMsg(Entity.Id, animationId));
-            Entity.PostMsg(new TextSetMsg(Entity.Id, "Door - Opening"));
+            Entity.PostCommand(new SpriteOnCommand(Entity.Id));
+            Entity.PostCommand(new PlayAnimCommand(Entity.Id, animationId));
+            Entity.PostCommand(new TextSetCommand(Entity.Id, "Door - Opening"));
 
             Entity.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, OnAnimChanged);
             Entity.Subscribe(AnimationEventTypes.ANIMATION_STOPPED, OnAnimStopped);
@@ -88,12 +88,12 @@ namespace OpenBreed.Sandbox.Components.States
 
         private void HandleAnimChangeEvent(AnimChangedEventArgs e)
         {
-            Entity.PostMsg(new SpriteSetMsg(Entity.Id, (int)e.Frame));
+            Entity.PostCommand(new SpriteSetCommand(Entity.Id, (int)e.Frame));
         }
 
         private void HandleAnimStoppedEvent(AnimStoppedEventArgs e)
         {
-            Entity.PostMsg(new StateChangeMsg(Entity.Id, "Functioning", "Opened"));
+            Entity.PostCommand(new StateChangeCommand(Entity.Id, "Functioning", "Opened"));
         }
 
         #endregion Private Methods

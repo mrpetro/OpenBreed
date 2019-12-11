@@ -85,8 +85,8 @@
     <Compile Include="Helpers\DynamicPack.cs" />
     <Compile Include="Helpers\DynamicHelper.cs" />
     <Compile Include="Helpers\MaterialTable.cs" />
-    <Compile Include="Messages\BodyOffMsg.cs" />
-    <Compile Include="Messages\BodyOnMsg.cs" />
+    <Compile Include="Commands\BodyOffCommand.cs" />
+    <Compile Include="Commands\BodyOnCommand.cs" />
     <Compile Include="PhysicsModule.cs" />
     <Compile Include="Systems\MovementSystem.cs" />
     <Compile Include="Systems\PhysicsSystem.cs" />

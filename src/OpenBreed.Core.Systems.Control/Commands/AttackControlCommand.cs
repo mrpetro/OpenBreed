@@ -1,10 +1,11 @@
-﻿using OpenBreed.Core.Common.Helpers;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Entities;
 using OpenTK;
 
-namespace OpenBreed.Core.Modules.Animation.Systems.Control.Messages
+namespace OpenBreed.Core.Modules.Animation.Systems.Control.Commands
 {
-    public struct AttackControlMsg : IEntityMsg
+    public struct AttackControlCommand : IEntityCommand
     {
         #region Public Fields
 
@@ -14,7 +15,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Messages
 
         #region Public Constructors
 
-        public AttackControlMsg(int entityId, IEntity entity, bool primary, bool secondary)
+        public AttackControlCommand(int entityId, IEntity entity, bool primary, bool secondary)
         {
             EntityId = entityId;
             Primary = primary;

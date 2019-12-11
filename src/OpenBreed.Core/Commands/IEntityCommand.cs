@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Core.Common.Helpers
+namespace OpenBreed.Core.Commands
 {
-    public interface IEntityMsg : IMsg
+    public interface IEntityCommand : ICommand
     {
         int EntityId { get; }
     }

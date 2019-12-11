@@ -1,22 +1,23 @@
-﻿using OpenBreed.Core.Common.Helpers;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Entities;
 
-namespace OpenBreed.Core.Modules.Animation.Messages
+namespace OpenBreed.Core.Modules.Rendering.Commands
 {
-    public struct SetAnimMsg : IEntityMsg
+    public struct TextSetCommand : IEntityCommand
     {
         #region Public Fields
 
-        public const string TYPE = "SET_ANIM";
+        public const string TYPE = "TEXT_SET";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public SetAnimMsg(int entityId, string id)
+        public TextSetCommand(int entityId, string text)
         {
             EntityId = entityId;
-            Id = id;
+            Text = text;
         }
 
         #endregion Public Constructors
@@ -25,7 +26,7 @@ namespace OpenBreed.Core.Modules.Animation.Messages
 
         public int EntityId { get; }
         public string Type { get { return TYPE; } }
-        public string Id { get; }
+        public string Text { get; }
 
         #endregion Public Properties
     }

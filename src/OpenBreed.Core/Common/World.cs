@@ -50,7 +50,7 @@ namespace OpenBreed.Core.Common
             Components = new ComponentsMan();
 
             MessageBus = new WorldMessageBus(this);
-            MessageBus.RegisterHandler(StateChangeMsg.TYPE, new StateChangeMsgHandler(this));
+            MessageBus.RegisterHandler(StateChangeCommand.TYPE, new StateChangeCommandHandler(this));
         }
 
         #endregion Internal Constructors
@@ -124,12 +124,6 @@ namespace OpenBreed.Core.Common
                 throw new InvalidOperationException("Entity doesn't exist in this world");
 
             toRemove.Add(entity);
-        }
-
-        internal void OnEntityRemoved(IEntity entity)
-        {
-            //Core.EventBus.Enqueue(
-            //throw new NotImplementedException();
         }
 
         /// <summary>

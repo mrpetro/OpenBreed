@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Core.Common.Helpers
+namespace OpenBreed.Core.Commands
 {
-    public interface IWorldMsg : IMsg
+    public interface IWorldCommand : ICommand
     {
         int WorldId { get; }
     }

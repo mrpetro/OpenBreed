@@ -1,10 +1,11 @@
-﻿using OpenBreed.Core.Common.Helpers;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Entities;
 using OpenTK;
 
-namespace OpenBreed.Core.Modules.Rendering.Messages
+namespace OpenBreed.Core.Modules.Rendering.Commands
 {
-    public struct TileSetMsg : IWorldMsg
+    public struct TileSetCommand : IWorldCommand
     {
         #region Public Fields
 
@@ -14,7 +15,7 @@ namespace OpenBreed.Core.Modules.Rendering.Messages
 
         #region Public Constructors
 
-        public TileSetMsg(int worldId, int atlasId, int imageId, Vector2 position)
+        public TileSetCommand(int worldId, int atlasId, int imageId, Vector2 position)
         {
             WorldId = worldId;
 

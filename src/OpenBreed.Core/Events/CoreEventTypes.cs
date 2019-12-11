@@ -20,12 +20,12 @@
         /// <summary>
         /// Occurs when entity is removed from world
         /// </summary>
-        public const string ENTITY_REMOVED_FROM_WORLD = "ENTITY_REMOVED_FROM_WORLD";
+        public const string ENTITY_LEFT_WORLD = "ENTITY_REMOVED_FROM_WORLD";
 
         /// <summary>
         /// Occurs when entity is added to world
         /// </summary>
-        public const string ENTITY_ADDED_TO_WORLD = "ENTITY_ADDED_TO_WORLD";
+        public const string ENTITY_ENTERED_WORLD = "ENTITY_ADDED_TO_WORLD";
 
         #endregion Public Fields
     }

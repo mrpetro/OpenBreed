@@ -6,7 +6,7 @@ using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenBreed.Core.Modules.Rendering.Messages;
+using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
@@ -14,10 +14,11 @@ using System;
 using System.Collections;
 using System.Diagnostics;
 using System.Linq;
+using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TileSystem : WorldSystem, ITileSystem, IMsgListener
+    public class TileSystem : WorldSystem, ITileSystem, ICommandListener
     {
         #region Public Fields
 
@@ -28,7 +29,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Fields
 
-        private MsgHandler msgHandler;
+        private CommandHandler cmdHandler;
         private Hashtable entities = new Hashtable();
         private TileCell[] cells;
 
@@ -38,7 +39,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         public TileSystem(ICore core, int width, int height, int layersNo, float tileSize, bool gridVisible) : base(core)
         {
-            msgHandler = new MsgHandler(this);
+            cmdHandler = new CommandHandler(this);
 
             Require<ITileComponent>();
             Require<Position>();
@@ -74,8 +75,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             base.Initialize(world);
 
-            World.MessageBus.RegisterHandler(TileSetMsg.TYPE, msgHandler);
-            World.MessageBus.RegisterHandler(PutStampMsg.TYPE, msgHandler);
+            World.MessageBus.RegisterHandler(TileSetCommand.TYPE, cmdHandler);
+            World.MessageBus.RegisterHandler(PutStampCommand.TYPE, cmdHandler);
         }
 
         /// <summary>
@@ -116,14 +117,14 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Disable(EnableCap.Texture2D);
         }
 
-        public override bool RecieveMsg(object sender, IMsg msg)
+        public override bool RecieveCommand(object sender, ICommand cmd)
         {
-            switch (msg.Type)
+            switch (cmd.Type)
             {
-                case TileSetMsg.TYPE:
-                    return HandleTileSetMsg(sender, (TileSetMsg)msg);
-                case PutStampMsg.TYPE:
-                    return HandlePutStampMsg(sender, (PutStampMsg)msg);
+                case TileSetCommand.TYPE:
+                    return HandleTileSetCommand(sender, (TileSetCommand)cmd);
+                case PutStampCommand.TYPE:
+                    return HandlePutStampCommand(sender, (PutStampCommand)cmd);
                 default:
                     return false;
             }
@@ -182,24 +183,24 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Methods
 
-        private bool HandleTileSetMsg(object sender, TileSetMsg msg)
+        private bool HandleTileSetCommand(object sender, TileSetCommand cmd)
         {
             int xIndex;
             int yIndex;
 
-            if (!TryGetGridIndices(msg.Position, out xIndex, out yIndex))
+            if (!TryGetGridIndices(cmd.Position, out xIndex, out yIndex))
                 throw new InvalidOperationException($"Tile position exceeds tile grid limits.");
 
             var cellIndex = xIndex + GridWidth * yIndex;
 
             var tileCell = this.cells[cellIndex];
-            tileCell.AtlasId = msg.AtlasId;
-            tileCell.ImageId = msg.ImageId;
+            tileCell.AtlasId = cmd.AtlasId;
+            tileCell.ImageId = cmd.ImageId;
 
             return true;
         }
 
-        private bool HandlePutStampMsg(object sender, PutStampMsg msg)
+        private bool HandlePutStampCommand(object sender, PutStampCommand msg)
         {
             var stamp = Core.Rendering.Stamps.GetById(msg.StampId);
 
@@ -285,11 +286,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             x = (int)(position.Value.X / (int)TileSize);
             y = (int)(position.Value.Y / (int)TileSize);
-        }
-
-        public bool EnqueueMsg(object sender, IEntityMsg msg)
-        {
-            return false;
         }
 
         #endregion Private Methods

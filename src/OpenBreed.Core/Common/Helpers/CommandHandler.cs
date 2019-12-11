@@ -1,19 +1,20 @@
-﻿using System;
+﻿using OpenBreed.Core.Commands;
+using System;
 using System.Collections.Generic;
 
 namespace OpenBreed.Core.Common.Helpers
 {
-    public class MsgHandler : IMsgHandler
+    public class CommandHandler : IMsgHandler
     {
         #region Private Fields
 
-        private readonly IMsgListener listener;
+        private readonly ICommandListener listener;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public MsgHandler(IMsgListener listener)
+        public CommandHandler(ICommandListener listener)
         {
             this.listener = listener;
         }
@@ -22,9 +23,9 @@ namespace OpenBreed.Core.Common.Helpers
 
         #region Public Methods
 
-        public bool HandleMsg(object sender, IMsg msg)
+        public bool Handle(object sender, IMsg cmd)
         {
-            return listener.RecieveMsg(sender, msg);
+            return listener.RecieveCommand(sender, (ICommand)cmd);
         }
 
         #endregion Public Methods

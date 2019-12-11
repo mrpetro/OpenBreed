@@ -8,7 +8,6 @@ using OpenBreed.Core.Modules.Rendering.Entities;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
-using OpenBreed.Sandbox.Commands;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Helpers;
@@ -93,8 +92,8 @@ namespace OpenBreed.Sandbox.States
                 if (mouseState.IsButtonDown(MouseButton.Left))
                 {
                     var worldCoords = hoverViewport.ClientToWorldPoint(Core.Inputs.CursorPos);
-                    var moveToCommand = new MoveToCommand(actor, worldCoords);
-                    moveToCommand.Execute();
+                    //var moveToCommand = new MoveToCommand(actor, worldCoords);
+                    //moveToCommand.Execute();
                 }
             }
         }

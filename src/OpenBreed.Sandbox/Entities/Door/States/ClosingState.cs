@@ -1,8 +1,8 @@
 ﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Events;
-using OpenBreed.Core.Modules.Animation.Messages;
+using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Messages;
+using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Modules.Animation.Systems;
 using OpenBreed.Core.Modules.Animation.Components;
@@ -11,7 +11,7 @@ using OpenTK;
 using System.Linq;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Helpers;
-using OpenBreed.Core.Modules.Physics.Messages;
+using OpenBreed.Core.Modules.Physics.Commands;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -44,11 +44,11 @@ namespace OpenBreed.Sandbox.Components.States
 
         public void EnterState()
         {
-            Entity.PostMsg(new SpriteOnMsg(Entity.Id));
-            Entity.PostMsg(new BodyOnMsg(Entity.Id));
+            Entity.PostCommand(new SpriteOnCommand(Entity.Id));
+            Entity.PostCommand(new BodyOnCommand(Entity.Id));
 
-            Entity.PostMsg(new PlayAnimMsg(Entity.Id, animationId));
-            Entity.PostMsg(new TextSetMsg(Entity.Id, "Door - Closing"));
+            Entity.PostCommand(new PlayAnimCommand(Entity.Id, animationId));
+            Entity.PostCommand(new TextSetCommand(Entity.Id, "Door - Closing"));
         }
 
         public void Initialize(IEntity entity)

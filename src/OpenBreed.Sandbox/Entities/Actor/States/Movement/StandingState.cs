@@ -2,9 +2,9 @@
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Animation.Messages;
+using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
-using OpenBreed.Core.Modules.Rendering.Messages;
+using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems.Control.Events;
 using OpenBreed.Sandbox.Helpers;
@@ -52,8 +52,8 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
             thrust.Value = Vector2.Zero;
 
-            Entity.PostMsg(new PlayAnimMsg(Entity.Id,  $"{animPrefix}/{Name}/{animDirName}"));
-            Entity.PostMsg(new TextSetMsg(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            Entity.PostCommand(new PlayAnimCommand(Entity.Id,  $"{animPrefix}/{Name}/{animDirName}"));
+            Entity.PostCommand(new TextSetCommand(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
             Entity.Subscribe(ControlEventTypes.CONTROL_DIRECTION_CHANGED, OnControlDirectionChanged);
         }
@@ -91,7 +91,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
         private void HandleControlDirectionChangedEvent(ControlDirectionChangedEvent systemEvent)
         {
             if (systemEvent.Direction != Vector2.Zero)
-                Entity.PostMsg(new StateChangeMsg(Entity.Id, "Movement", "Walk"));
+                Entity.PostCommand(new StateChangeCommand(Entity.Id, "Movement", "Walk"));
         }
 
         private void OnControlDirectionChanged(object sender, EventArgs eventArgs)

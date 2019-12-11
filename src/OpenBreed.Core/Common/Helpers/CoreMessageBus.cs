@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using OpenBreed.Core.Commands;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace OpenBreed.Core.Common.Helpers
@@ -48,32 +49,32 @@ namespace OpenBreed.Core.Common.Helpers
 
         private void Post(object sender, IMsg msg)
         {
-            if (msg is IEntityMsg)
+            if (msg is IEntityCommand)
             {
-                Post(sender, (IEntityMsg)msg);
+                Post(sender, (IEntityCommand)msg);
                 return;
             }
-            else if (msg is IWorldMsg)
+            else if (msg is IWorldCommand)
             {
-                Post(sender, (IWorldMsg)msg);
+                Post(sender, (IWorldCommand)msg);
                 return;
             }
         }
 
-        private void Post(object sender, IEntityMsg msg)
+        private void Post(object sender, IEntityCommand msg)
         {
             Debug.Assert(msg != null);
             Debug.Assert(msg.EntityId >= 0);
 
             var entity = Core.Entities.GetById(msg.EntityId);
-            entity.World.MessageBus.PostMsg(sender, msg);
+            entity.World.MessageBus.PostCommand(sender, msg);
         }
 
-        private void Post(object sender, IWorldMsg msg)
+        private void Post(object sender, IWorldCommand msg)
         {
             Debug.Assert(msg != null);
 
-            Core.Worlds.PostMsg(sender, msg);
+            Core.Worlds.PostCommand(sender, msg);
         }
 
         #endregion Private Methods

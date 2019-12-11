@@ -4,21 +4,22 @@ using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Messages;
+using OpenBreed.Core.Modules.Animation.Systems.Control.Commands;
 using OpenBreed.Core.Systems.Control.Components;
 using OpenBreed.Core.Systems.Control.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 {
-    public class WalkingControlSystem : WorldSystem, IUpdatableSystem, IMsgListener
+    public class WalkingControlSystem : WorldSystem, IUpdatableSystem, ICommandListener
     {
         #region Private Fields
 
         private readonly List<IEntity> entities = new List<IEntity>();
-        private MsgHandler msgHandler;
+        private CommandHandler cmdHandler;
 
         #endregion Private Fields
 
@@ -26,7 +27,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         public WalkingControlSystem(ICore core) : base(core)
         {
-            msgHandler = new MsgHandler(this);
+            cmdHandler = new CommandHandler(this);
 
             Require<IControlComponent>();
         }
@@ -39,8 +40,8 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
         {
             base.Initialize(world);
 
-            World.MessageBus.RegisterHandler(WalkingControlMsg.TYPE, msgHandler);
-            World.MessageBus.RegisterHandler(AttackControlMsg.TYPE, msgHandler);
+            World.MessageBus.RegisterHandler(WalkingControlCommand.TYPE, cmdHandler);
+            World.MessageBus.RegisterHandler(AttackControlCommand.TYPE, cmdHandler);
         }
 
         public void UpdatePauseImmuneOnly(float dt)
@@ -51,14 +52,14 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
         {
         }
 
-        public override bool RecieveMsg(object sender, IMsg message)
+        public override bool RecieveCommand(object sender, ICommand cmd)
         {
-            switch (message.Type)
+            switch (cmd.Type)
             {
-                case WalkingControlMsg.TYPE:
-                    return HandleWalkingControlMsg(sender, (WalkingControlMsg)message);
-                case AttackControlMsg.TYPE:
-                    return HandleAttackControlMsg(sender, (AttackControlMsg)message);
+                case WalkingControlCommand.TYPE:
+                    return HandleWalkingControlCommand(sender, (WalkingControlCommand)cmd);
+                case AttackControlCommand.TYPE:
+                    return HandleAttackControlCommand(sender, (AttackControlCommand)cmd);
                 default:
                     return false;
             }
@@ -87,31 +88,31 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         #region Private Methods
 
-        private bool HandleAttackControlMsg(object sender, AttackControlMsg msg)
+        private bool HandleAttackControlCommand(object sender, AttackControlCommand cmd)
         {
-            var entity = Core.Entities.GetById(msg.EntityId);
+            var entity = Core.Entities.GetById(cmd.EntityId);
 
 
             var control = entity.Components.OfType<AttackControl>().First();
 
-            if (control.AttackPrimary != msg.Primary)
+            if (control.AttackPrimary != cmd.Primary)
             {
-                control.AttackPrimary = msg.Primary;
+                control.AttackPrimary = cmd.Primary;
                 entity.EnqueueEvent(ControlEventTypes.CONTROL_FIRE_CHANGED, new ControlFireChangedEvent(control.AttackPrimary));
             }
 
             return true;
         }
 
-        private bool HandleWalkingControlMsg(object sender, WalkingControlMsg msg)
+        private bool HandleWalkingControlCommand(object sender, WalkingControlCommand cmd)
         {
-            var entity = Core.Entities.GetById(msg.EntityId);
+            var entity = Core.Entities.GetById(cmd.EntityId);
 
             var control = entity.Components.OfType<WalkingControl>().First();
 
-            if (control.Direction != msg.Direction)
+            if (control.Direction != cmd.Direction)
             {
-                control.Direction = msg.Direction;
+                control.Direction = cmd.Direction;
                 entity.EnqueueEvent(ControlEventTypes.CONTROL_DIRECTION_CHANGED, new ControlDirectionChangedEvent(control.Direction));
             }
 

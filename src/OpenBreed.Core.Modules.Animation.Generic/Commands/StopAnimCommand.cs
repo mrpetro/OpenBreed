@@ -1,21 +1,23 @@
-﻿using OpenBreed.Core.Common.Helpers;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Entities;
 
-namespace OpenBreed.Core.Modules.Rendering.Messages
+namespace OpenBreed.Core.Modules.Animation.Commands
 {
-    public struct SpriteOffMsg : IEntityMsg
+    public struct StopAnimCommand : IEntityCommand
     {
         #region Public Fields
 
-        public const string TYPE = "SPRITE_OFF";
+        public const string TYPE = "STOP_ANIM";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public SpriteOffMsg(int entityId)
+        public StopAnimCommand(int entityId, string id)
         {
             EntityId = entityId;
+            Id = id;
         }
 
         #endregion Public Constructors
@@ -24,6 +26,7 @@ namespace OpenBreed.Core.Modules.Rendering.Messages
 
         public int EntityId { get; }
         public string Type { get { return TYPE; } }
+        public string Id { get; }
 
         #endregion Public Properties
     }

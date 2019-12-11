@@ -1,23 +1,22 @@
-﻿using OpenBreed.Core.Common.Helpers;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Entities;
 
-namespace OpenBreed.Core.States
+namespace OpenBreed.Core.Modules.Rendering.Commands
 {
-    public class StateChangeMsg : IEntityMsg
+    public struct SpriteOnCommand : IEntityCommand
     {
         #region Public Fields
 
-        public const string TYPE = "STATE_CHANGE";
+        public const string TYPE = "SPRITE_ON";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public StateChangeMsg(int entityId, string fsmName, string stateId)
+        public SpriteOnCommand(int entityId)
         {
             EntityId = entityId;
-            FsmName = fsmName;
-            StateId = stateId;
         }
 
         #endregion Public Constructors
@@ -26,8 +25,6 @@ namespace OpenBreed.Core.States
 
         public int EntityId { get; }
         public string Type { get { return TYPE; } }
-        public string FsmName { get; }
-        public string StateId { get; }
 
         #endregion Public Properties
     }

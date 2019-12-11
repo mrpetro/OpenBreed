@@ -25,7 +25,7 @@ using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Systems.Control.Components;
 using OpenBreed.Core.Common.Components;
-using OpenBreed.Core.Modules.Rendering.Messages;
+using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Sandbox.Entities.Pickable;
 using System.Linq;
 using OpenBreed.Sandbox.Entities.Teleport;

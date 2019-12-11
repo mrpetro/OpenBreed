@@ -5,7 +5,7 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Events;
 using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Physics.Messages;
+using OpenBreed.Core.Modules.Physics.Commands;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Helpers;

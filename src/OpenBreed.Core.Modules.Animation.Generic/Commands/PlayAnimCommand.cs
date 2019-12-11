@@ -1,19 +1,20 @@
-﻿using OpenBreed.Core.Common.Helpers;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Entities;
 
-namespace OpenBreed.Core.Modules.Animation.Messages
+namespace OpenBreed.Core.Modules.Animation.Commands
 {
-    public struct PauseAnimMsg : IEntityMsg
+    public struct PlayAnimCommand : IEntityCommand
     {
         #region Public Fields
 
-        public const string TYPE = "PAUSE_ANIM";
+        public const string TYPE = "PLAY_ANIM";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public PauseAnimMsg(int entityId, string id)
+        public PlayAnimCommand(int entityId, string id)
         {
             EntityId = entityId;
             Id = id;

@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Collections;
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Helpers;
 using System;
@@ -11,7 +12,7 @@ namespace OpenBreed.Core.Managers
     /// <summary>
     /// Manager responsible for creating, removing and updating core worlds
     /// </summary>
-    public class WorldMan : IMsgListener
+    public class WorldMan
     {
         #region Private Fields
 
@@ -20,7 +21,7 @@ namespace OpenBreed.Core.Managers
         private readonly IdMap<World> worlds = new IdMap<World>();
         private readonly Dictionary<string, int> namesToIds = new Dictionary<string, int>();
 
-        private readonly MsgHandler handler;
+        private readonly CommandHandler handler;
 
         public WorldBuilder GetBuilder()
         {
@@ -35,19 +36,12 @@ namespace OpenBreed.Core.Managers
         {
             Core = core;
             Items = worlds.Items;
-
-            handler = new MsgHandler(this);
         }
 
-        public bool RecieveMsg(object sender, IMsg msg)
+        internal void PostCommand(object sender, IWorldCommand cmd)
         {
-            throw new NotImplementedException();
-        }
-
-        internal void PostMsg(object sender, IWorldMsg msg)
-        {
-            var targetWorld = Core.Worlds.GetById(msg.WorldId);
-            targetWorld.MessageBus.PostMsg(sender, msg);
+            var targetWorld = Core.Worlds.GetById(cmd.WorldId);
+            targetWorld.MessageBus.PostCommand(sender, cmd);
         }
 
         #endregion Public Constructors

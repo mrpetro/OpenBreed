@@ -7,21 +7,22 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Physics.Helpers;
-using OpenBreed.Core.Modules.Physics.Messages;
+using OpenBreed.Core.Modules.Physics.Commands;
 using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Core.Modules.Physics.Systems
 {
-    internal class PhysicsSystem : WorldSystem, IPhysicsSystem, IMsgListener
+    internal class PhysicsSystem : WorldSystem, IPhysicsSystem, ICommandListener
     {
         #region Private Fields
 
         private const int CELL_SIZE = 16;
 
-        private MsgHandler msgHandler;
+        private CommandHandler cmdHandler;
         private readonly List<DynamicPack> inactiveDynamics = new List<DynamicPack>();
         private readonly List<DynamicPack> activeDynamics = new List<DynamicPack>();
         private List<StaticPack>[] gridStatics;
@@ -34,7 +35,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         internal PhysicsSystem(ICore core, int gridWidth, int gridHeight) : base(core)
         {
-            msgHandler = new MsgHandler(this);
+            cmdHandler = new CommandHandler(this);
             Require<IPhysicsComponent>();
 
             GridWidth = gridWidth;
@@ -72,8 +73,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         {
             base.Initialize(world);
 
-            World.MessageBus.RegisterHandler(BodyOnMsg.TYPE, msgHandler);
-            World.MessageBus.RegisterHandler(BodyOffMsg.TYPE, msgHandler);
+            World.MessageBus.RegisterHandler(BodyOnCommand.TYPE, cmdHandler);
+            World.MessageBus.RegisterHandler(BodyOffCommand.TYPE, cmdHandler);
         }
 
         public void UpdatePauseImmuneOnly(float dt)
@@ -85,15 +86,15 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             SweepAndPrune(dt);
         }
 
-        public override bool RecieveMsg(object sender, IMsg msg)
+        public override bool RecieveCommand(object sender, ICommand cmd)
         {
-            switch (msg.Type)
+            switch (cmd.Type)
             {
-                case BodyOnMsg.TYPE:
-                    return HandleBodyOnMsg(sender, (BodyOnMsg)msg);
+                case BodyOnCommand.TYPE:
+                    return HandleBodyOnCommand(sender, (BodyOnCommand)cmd);
 
-                case BodyOffMsg.TYPE:
-                    return HandleBodyOffMsg(sender, (BodyOffMsg)msg);
+                case BodyOffCommand.TYPE:
+                    return HandleBodyOffCommand(sender, (BodyOffCommand)cmd);
 
                 default:
                     return false;
@@ -140,11 +141,11 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         #region Private Methods
 
-        private bool HandleBodyOnMsg(object sender, BodyOnMsg msg)
+        private bool HandleBodyOnCommand(object sender, BodyOnCommand cmd)
         {
-            var dynamicToActivate = inactiveDynamics.FirstOrDefault(item => item.EntityId == msg.EntityId);
+            var dynamicToActivate = inactiveDynamics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
 
-            var entity = Core.Entities.GetById(msg.EntityId);
+            var entity = Core.Entities.GetById(cmd.EntityId);
 
             if (dynamicToActivate != null)
             {
@@ -154,7 +155,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 return true;
             }
 
-            var staticToActivate = inactiveStatics.FirstOrDefault(item => item.EntityId == msg.EntityId);
+            var staticToActivate = inactiveStatics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
             if (staticToActivate != null)
             {
                 InsertToGrid(staticToActivate);
@@ -166,11 +167,11 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             return false;
         }
 
-        private bool HandleBodyOffMsg(object sender, BodyOffMsg msg)
+        private bool HandleBodyOffCommand(object sender, BodyOffCommand cmd)
         {
-            var dynamicToDeactivate = activeDynamics.FirstOrDefault(item => item.EntityId == msg.EntityId);
+            var dynamicToDeactivate = activeDynamics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
 
-            var entity = Core.Entities.GetById(msg.EntityId);
+            var entity = Core.Entities.GetById(cmd.EntityId);
 
             if (dynamicToDeactivate != null)
             {

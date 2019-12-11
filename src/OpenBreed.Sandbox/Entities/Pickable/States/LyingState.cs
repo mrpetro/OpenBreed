@@ -3,7 +3,7 @@ using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Messages;
+using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
 using System;
 using System.Linq;
@@ -40,9 +40,9 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
         public void EnterState()
         {
             // Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            Entity.PostMsg(new TextSetMsg(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            Entity.PostCommand(new TextSetCommand(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
             var pos = Entity.Components.OfType<Position>().FirstOrDefault();
-            Entity.PostMsg(new PutStampMsg(Entity.World.Id, stampId, 0, pos.Value));
+            Entity.PostCommand(new PutStampCommand(Entity.World.Id, stampId, 0, pos.Value));
             Entity.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, OnCollision);
         }
 
@@ -63,7 +63,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
 
         private void HandleCollisionEvent(CollisionEventArgs e)
         {
-            Entity.PostMsg(new StateChangeMsg(Entity.Id, "Functioning", "Pick"));
+            Entity.PostCommand(new StateChangeCommand(Entity.Id, "Functioning", "Pick"));
         }
 
         public string Process(string actionName, object[] arguments)

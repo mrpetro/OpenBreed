@@ -4,7 +4,7 @@ using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Physics.Messages;
+using OpenBreed.Core.Modules.Physics.Commands;
 using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Sandbox.States;
 using OpenBreed.Sandbox.Worlds;
@@ -79,7 +79,7 @@ namespace OpenBreed.Sandbox.Jobs
 
         private void LeaveWorld()
         {
-            entity.Subscribe(CoreEventTypes.ENTITY_REMOVED_FROM_WORLD, OnEntityRemovedFromWorld);
+            entity.Subscribe(CoreEventTypes.ENTITY_LEFT_WORLD, OnEntityRemovedFromWorld);
 
             //entity.RemovedFromWorld += Entity_RemovedFromWorld;
             entity.World.RemoveEntity(entity);
@@ -124,7 +124,7 @@ namespace OpenBreed.Sandbox.Jobs
                     world = reader.GetWorld();
             }
 
-            entity.Subscribe(CoreEventTypes.ENTITY_ADDED_TO_WORLD, OnEntityAddedToWorld);
+            entity.Subscribe(CoreEventTypes.ENTITY_ENTERED_WORLD, OnEntityAddedToWorld);
             world.AddEntity(entity);
 
             SetPosition(entity, entryId);
@@ -148,13 +148,13 @@ namespace OpenBreed.Sandbox.Jobs
         private void BodyOff()
         {
             entity.Subscribe(PhysicsEventTypes.BODY_OFF, OnBodyOff);
-            entity.PostMsg(new BodyOffMsg(entity.Id));
+            entity.PostCommand(new BodyOffCommand(entity.Id));
         }
 
         private void BodyOn()
         {
             entity.Subscribe(PhysicsEventTypes.BODY_ON, OnBodyOn);
-            entity.PostMsg(new BodyOnMsg(entity.Id));
+            entity.PostCommand(new BodyOnCommand(entity.Id));
         }
 
         #endregion Private Methods

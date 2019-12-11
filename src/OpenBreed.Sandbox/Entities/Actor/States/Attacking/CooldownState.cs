@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
-using OpenBreed.Core.Modules.Rendering.Messages;
+using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems.Control.Events;
 using OpenTK;
@@ -36,7 +36,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         public void EnterState()
         {
             //Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            Entity.PostMsg(new TextSetMsg(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            Entity.PostCommand(new TextSetCommand(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
             Entity.Subscribe(ControlEventTypes.CONTROL_FIRE_CHANGED, OnControlFireChanged);
 
@@ -46,7 +46,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            Entity.PostMsg(new StateChangeMsg(Entity.Id, "Attacking", "Shoot"));
+            Entity.PostCommand(new StateChangeCommand(Entity.Id, "Attacking", "Shoot"));
         }
 
         public void Initialize(IEntity entity)
@@ -72,9 +72,9 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         private void HandleControlFireChangedEvent(ControlFireChangedEvent systemEvent)
         {
             if (systemEvent.Fire)
-                Entity.PostMsg(new StateChangeMsg(Entity.Id, "Attacking", "Shoot"));
+                Entity.PostCommand(new StateChangeCommand(Entity.Id, "Attacking", "Shoot"));
             else
-                Entity.PostMsg(new StateChangeMsg(Entity.Id, "Attacking", "Stop"));
+                Entity.PostCommand(new StateChangeCommand(Entity.Id, "Attacking", "Stop"));
         }
 
 

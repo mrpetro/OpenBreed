@@ -76,10 +76,11 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Common\Helpers\IWorldMsg.cs" />
+    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\IWorldCommand.cs" />
     <Compile Include="Events\CoreEventTypes.cs" />
-    <Compile Include="Events\EntityAddedToWorldEventArgs.cs" />
-    <Compile Include="Events\EntityRemovedFromWorldEventArgs.cs" />
+    <Compile Include="Events\EntityEnteredWorldEventArgs.cs" />
+    <Compile Include="Events\EntityLeftWorldEventArgs.cs" />
     <Compile Include="Events\WorldDeinitializedEventArgs.cs" />
     <Compile Include="Events\WorldInitializedEventArgs.cs" />
     <Compile Include="IJob.cs" />
@@ -91,7 +92,6 @@
     <Compile Include="Blueprints\EntityDefXml.cs" />
     <Compile Include="Blueprints\IBlueprint.cs" />
     <Compile Include="Collections\IdMap.cs" />
-    <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Common\Components\Builders\ComponentBuilder.cs" />
     <Compile Include="Common\Components\Builders\GridPositionBuilder.cs" />
     <Compile Include="Common\Components\EquipmentComponent.cs" />
@@ -100,19 +100,19 @@
     <Compile Include="Common\Components\IControlComponent.cs" />
     <Compile Include="Common\Components\InventoryComponent.cs" />
     <Compile Include="Common\Helpers\CoreEventBus.cs" />
-    <Compile Include="Common\Helpers\IEntityMsg.cs" />
-    <Compile Include="Common\Helpers\IMsgHandler.cs" />
-    <Compile Include="Common\Helpers\IMsgListener.cs" />
+    <Compile Include="Commands\IEntityCommand.cs" />
+    <Compile Include="Commands\IMsgHandler.cs" />
+    <Compile Include="Commands\ICommandListener.cs" />
     <Compile Include="Common\Helpers\MovementTools.cs" />
-    <Compile Include="Common\Helpers\MsgHandler.cs" />
-    <Compile Include="Common\Helpers\StateChangeMsgHandler.cs" />
+    <Compile Include="Common\Helpers\CommandHandler.cs" />
+    <Compile Include="Common\Helpers\StateChangeCommandHandler.cs" />
     <Compile Include="Common\Systems\StateMachineSystem.cs" />
     <Compile Include="Common\Systems\TimerSystem.cs" />
     <Compile Include="CoreTools.cs" />
-    <Compile Include="Common\Helpers\IMsg.cs" />
+    <Compile Include="Commands\IMsg.cs" />
     <Compile Include="Common\Helpers\WorldMessageBus.cs" />
     <Compile Include="Common\Helpers\CoreMessageBus.cs" />
-    <Compile Include="Entities\EntityDestroyMsg.cs" />
+    <Compile Include="Commands\DestroyEntityCommand.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Inputs\IControlHandler.cs" />
     <Compile Include="Managers\ComponentsMan.cs" />
@@ -166,7 +166,7 @@
     <Compile Include="Managers\PlayersMan.cs" />
     <Compile Include="States\IStateBuilder.cs" />
     <Compile Include="States\IState.cs" />
-    <Compile Include="States\StateChangeMsg.cs" />
+    <Compile Include="States\StateChangeCommand.cs" />
     <Compile Include="States\StateMachine.cs" />
     <Compile Include="Common\Components\IShapeComponent.cs" />
     <Compile Include="Common\Components\Thrust.cs" />

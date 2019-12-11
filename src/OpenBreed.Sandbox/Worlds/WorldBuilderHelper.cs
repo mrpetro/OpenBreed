@@ -2,7 +2,7 @@
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Messages;
+using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.Teleport;
@@ -74,7 +74,7 @@ namespace OpenBreed.Sandbox.Worlds
             var pairCode = (int)args[2];
 
             TeleportHelper.AddTeleportEntry(world, x, y, pairCode);
-            world.Core.MessageBus.Enqueue(null, new TileSetMsg(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            world.Core.MessageBus.Enqueue(null, new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private static void AddWorldEntry(World world, int code, object[] args)
@@ -85,7 +85,7 @@ namespace OpenBreed.Sandbox.Worlds
             var pairCode = (int)args[2];
 
             WorldGateHelper.AddWorldEntry(world, x, y, pairCode);
-            world.Core.MessageBus.Enqueue(null, new TileSetMsg(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            world.Core.MessageBus.Enqueue(null, new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private static void AddTeleportExit(World world, int code, object[] args)
@@ -96,7 +96,7 @@ namespace OpenBreed.Sandbox.Worlds
             var pairCode = (int)args[2];
 
             TeleportHelper.AddTeleportExit(world, x, y, pairCode);
-            world.Core.MessageBus.Enqueue(null, new TileSetMsg(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            world.Core.MessageBus.Enqueue(null, new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private void AddWorldExit(World world, int code, object[] args)
@@ -111,7 +111,7 @@ namespace OpenBreed.Sandbox.Worlds
                 return;
 
             WorldGateHelper.AddWorldExit(world, x, y, exitInfo.Item1, exitInfo.Item2);
-            world.Core.MessageBus.Enqueue(null, new TileSetMsg(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            world.Core.MessageBus.Enqueue(null, new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private static void AddPlayer(World world, int code, object[] args)

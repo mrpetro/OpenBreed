@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Core.Inputs;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Messages;
+using OpenBreed.Core.Modules.Animation.Systems.Control.Commands;
 using OpenBreed.Core.Systems.Control.Components;
 using System;
 using System.Collections.Generic;
@@ -35,7 +35,7 @@ namespace OpenBreed.Core.Systems.Control.Systems
                     continue;
 
                 Console.WriteLine($"{player.Name} -> Walk({AxisX},{AxisY})");
-                entity.PostMsg(new WalkingControlMsg(entity.Id, new OpenTK.Vector2(AxisX, AxisY)));
+                entity.PostCommand(new WalkingControlCommand(entity.Id, new OpenTK.Vector2(AxisX, AxisY)));
             }
 
             OldAxisX = AxisX;

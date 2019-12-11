@@ -1,10 +1,12 @@
-﻿namespace OpenBreed.Core.Common.Helpers
+﻿using OpenBreed.Core.Commands;
+
+namespace OpenBreed.Core.Commands
 {
     public interface IMsgHandler
     {
         #region Public Methods
 
-        bool HandleMsg(object sender, IMsg msg);
+        bool Handle(object sender, IMsg msg);
 
         #endregion Public Methods
     }
