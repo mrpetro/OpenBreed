@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Core.Collections;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -41,7 +41,7 @@ namespace OpenBreed.Core.Managers
         internal void PostCommand(object sender, IWorldCommand cmd)
         {
             var targetWorld = Core.Worlds.GetById(cmd.WorldId);
-            targetWorld.MessageBus.PostCommand(sender, cmd);
+            targetWorld.Handle(sender, cmd);
         }
 
         #endregion Public Constructors

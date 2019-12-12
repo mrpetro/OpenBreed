@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Helpers;
+
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.States;
@@ -90,22 +90,22 @@ namespace OpenBreed.Core.Entities
 
         public void PostCommand(ICommand command)
         {
-            Core.MessageBus.Enqueue(this, command);
+            Core.Commands.Post(this, command);
         }
 
-        public void EnqueueEvent(string eventType, EventArgs eventArgs)
+        public void RaiseEvent(string eventType, EventArgs eventArgs)
         {
-            Core.EventBus.Enqueue(this, eventType, eventArgs);
+            Core.Events.Raise(this, eventType, eventArgs);
         }
 
         public void Subscribe(string eventType, Action<object, EventArgs> callback)
         {
-            Core.EventBus.Subscribe(this, eventType, callback);
+            Core.Events.Subscribe(this, eventType, callback);
         }
 
         public void Unsubscribe(string eventType, Action<object, EventArgs> callback)
         {
-            Core.EventBus.Unsubscribe(this, eventType, callback);
+            Core.Events.Unsubscribe(this, eventType, callback);
         }
 
         public void Add(IEntityComponent component)
@@ -167,12 +167,12 @@ namespace OpenBreed.Core.Entities
 
         private void OnLeftWorld(World world)
         {
-            EnqueueEvent(CoreEventTypes.ENTITY_LEFT_WORLD, new EntityLeftWorldEventArgs(this, world));
+            RaiseEvent(CoreEventTypes.ENTITY_LEFT_WORLD, new EntityLeftWorldEventArgs(this, world));
         }
 
         private void OnEnteredWorld(World world)
         {
-            EnqueueEvent(CoreEventTypes.ENTITY_ENTERED_WORLD, new EntityEnteredWorldEventArgs(this, world));
+            RaiseEvent(CoreEventTypes.ENTITY_ENTERED_WORLD, new EntityEnteredWorldEventArgs(this, world));
         }
 
         #endregion Private Methods

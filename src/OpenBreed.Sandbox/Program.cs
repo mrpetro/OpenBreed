@@ -1,7 +1,7 @@
 ﻿using NLua;
 using OpenBreed.Core;
 using OpenBreed.Core.Blueprints;
-using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
@@ -45,13 +45,11 @@ namespace OpenBreed.Sandbox
             appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
             LuaState = new Lua();
+
             Logging = new LogMan(this);
-            MessageBus = new CoreMessageBus(this);
-            EventBus = new CoreEventBus(this);
-            Rendering = new OpenGLModule(this);
-            Sounds = new OpenALModule(this);
-            Physics = new PhysicsModule(this);
-            Animations = new AnimationModule(this);
+            Commands = new CommandsMan(this);
+            Events = new EventsMan(this);
+
             Blueprints = new BlueprintMan(this);
             Entities = new EntityMan(this);
             Players = new PlayersMan(this);
@@ -59,8 +57,13 @@ namespace OpenBreed.Sandbox
             Inputs = new InputsMan(this);
             Worlds = new WorldMan(this);
             StateMachine = new StateMan(this);
-
             Jobs = new JobMan(this);
+
+            Rendering = new OpenGLModule(this);
+            Sounds = new OpenALModule(this);
+            Physics = new PhysicsModule(this);
+            Animations = new AnimationModule(this);
+
             VSync = VSyncMode.On;
 
             RegisterBlueprintParsers();
@@ -92,9 +95,9 @@ namespace OpenBreed.Sandbox
 
         public InputsMan Inputs { get; }
 
-        public CoreMessageBus MessageBus { get; }
+        public CommandsMan Commands { get; }
 
-        public CoreEventBus EventBus { get; }
+        public EventsMan Events { get; }
 
         public WorldMan Worlds { get; }
 
@@ -266,9 +269,7 @@ namespace OpenBreed.Sandbox
             Inputs.Update();
             Players.ApplyInputs();
             StateMachine.Update((float)e.Time);
-            PostAndRaise();
             Worlds.Update((float)e.Time);
-            PostAndRaise();
             Jobs.Update((float)e.Time);
         }
 
@@ -340,12 +341,6 @@ namespace OpenBreed.Sandbox
 
             reader.ReadEndElement();
             return new Vector2(x, y);
-        }
-
-        private void PostAndRaise()
-        {
-            MessageBus.PostEnqueued();
-            EventBus.RaiseEnqueued();
         }
 
         #endregion Private Methods

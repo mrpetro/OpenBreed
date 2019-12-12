@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Components;
-using OpenBreed.Core.Common.Helpers;
+
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
@@ -13,10 +13,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenBreed.Core.Commands;
+using OpenBreed.Core.Helpers;
 
 namespace OpenBreed.Core.Modules.Physics.Systems
 {
-    internal class PhysicsSystem : WorldSystem, IPhysicsSystem, ICommandListener
+    internal class PhysicsSystem : WorldSystem, IPhysicsSystem, ICommandExecutor
     {
         #region Private Fields
 
@@ -73,8 +74,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         {
             base.Initialize(world);
 
-            World.MessageBus.RegisterHandler(BodyOnCommand.TYPE, cmdHandler);
-            World.MessageBus.RegisterHandler(BodyOffCommand.TYPE, cmdHandler);
+            World.RegisterHandler(BodyOnCommand.TYPE, cmdHandler);
+            World.RegisterHandler(BodyOffCommand.TYPE, cmdHandler);
         }
 
         public void UpdatePauseImmuneOnly(float dt)
@@ -83,10 +84,12 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         public void Update(float dt)
         {
+            cmdHandler.ExecuteEnqueued();
+
             SweepAndPrune(dt);
         }
 
-        public override bool RecieveCommand(object sender, ICommand cmd)
+        public override bool ExecuteCommand(object sender, ICommand cmd)
         {
             switch (cmd.Type)
             {
@@ -151,7 +154,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             {
                 activeDynamics.Add(dynamicToActivate);
                 inactiveDynamics.Remove(dynamicToActivate);
-                entity.EnqueueEvent(PhysicsEventTypes.BODY_ON, new BodyOnEventArgs(entity));
+                entity.RaiseEvent(PhysicsEventTypes.BODY_ON, new BodyOnEventArgs(entity));
                 return true;
             }
 
@@ -160,7 +163,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             {
                 InsertToGrid(staticToActivate);
                 inactiveStatics.Remove(staticToActivate);
-                entity.EnqueueEvent(PhysicsEventTypes.BODY_ON, new BodyOnEventArgs(entity));
+                entity.RaiseEvent(PhysicsEventTypes.BODY_ON, new BodyOnEventArgs(entity));
                 return true;
             }
 
@@ -179,7 +182,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 activeDynamics.Remove(dynamicToDeactivate);
 
 
-                entity.EnqueueEvent(PhysicsEventTypes.BODY_OFF, new BodyOffEventArgs(entity));
+                entity.RaiseEvent(PhysicsEventTypes.BODY_OFF, new BodyOffEventArgs(entity));
                 return true;
             }
 
@@ -188,7 +191,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             if (staticToDeactivate != null)
             {
                 inactiveStatics.Add(staticToDeactivate);
-                entity.EnqueueEvent(PhysicsEventTypes.BODY_OFF, new BodyOffEventArgs(entity));
+                entity.RaiseEvent(PhysicsEventTypes.BODY_OFF, new BodyOffEventArgs(entity));
                 return true;
             }
 

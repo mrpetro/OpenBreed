@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Entities;
 
 namespace OpenBreed.Core.Common.Systems
@@ -44,7 +43,7 @@ namespace OpenBreed.Core.Common.Systems
         /// <param name="sender">Object is sending the command</param>
         /// <param name="cmd">Command to recieve</param>
         /// <returns>True if command was handled, false otherwise</returns>
-        bool RecieveCommand(object sender, ICommand cmd);
+        bool ExecuteCommand(object sender, ICommand cmd);
 
         #endregion Public Methods
     }

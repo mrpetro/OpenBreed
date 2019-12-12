@@ -1,7 +1,7 @@
 ﻿using OpenTK;
 using System;
 
-namespace OpenBreed.Core.Common.Systems.Helpers
+namespace OpenBreed.Core.Helpers
 {
     /// <summary>
     /// Various methods and values related with movement system and components

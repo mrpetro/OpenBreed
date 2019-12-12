@@ -1,29 +1,27 @@
-﻿using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Helpers;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Modules.Physics.Components;
+using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenBreed.Core.Modules.Rendering.Commands;
-using OpenTK;
-using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class SpriteSystem : WorldSystem, ISpriteSystem, ICommandListener
+    public class SpriteSystem : WorldSystem, ISpriteSystem, ICommandExecutor
     {
         #region Private Fields
 
-        private CommandHandler cmdHandler;
         private readonly List<SpritePack> inactive = new List<SpritePack>();
         private readonly List<SpritePack> active = new List<SpritePack>();
+        private CommandHandler cmdHandler;
 
         #endregion Private Fields
 
@@ -45,63 +43,28 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             base.Initialize(world);
 
-            World.MessageBus.RegisterHandler(SpriteOnCommand.TYPE, cmdHandler);
-            World.MessageBus.RegisterHandler(SpriteOffCommand.TYPE, cmdHandler);
-            World.MessageBus.RegisterHandler(SpriteSetCommand.TYPE, cmdHandler);
+            World.RegisterHandler(SpriteOnCommand.TYPE, cmdHandler);
+            World.RegisterHandler(SpriteOffCommand.TYPE, cmdHandler);
+            World.RegisterHandler(SpriteSetCommand.TYPE, cmdHandler);
         }
 
-        public override bool RecieveCommand(object sender, ICommand cmd)
+        public override bool ExecuteCommand(object sender, ICommand cmd)
         {
             switch (cmd.Type)
             {
                 case SpriteOnCommand.TYPE:
                     return HandleSpriteOnCommand(sender, (SpriteOnCommand)cmd);
+
                 case SpriteOffCommand.TYPE:
                     return HandleSpriteOffCommand(sender, (SpriteOffCommand)cmd);
+
                 case SpriteSetCommand.TYPE:
                     return HandleSpriteSetCommand(sender, (SpriteSetCommand)cmd);
+
                 default:
                     return false;
             }
         }
-
-        private bool HandleSpriteOnCommand(object sender, SpriteOnCommand cmd)
-        {
-            var toActivate = inactive.FirstOrDefault(item => item.EntityId == cmd.EntityId);
-
-            if (toActivate != null)
-            {
-                active.Add(toActivate);
-                inactive.Remove(toActivate);
-            }
-
-            return true;
-        }
-
-        private bool HandleSpriteSetCommand(object sender, SpriteSetCommand cmd)
-        {
-            var toModify = active.FirstOrDefault(item => item.EntityId == cmd.EntityId);
-            if (toModify == null)
-                return false;
-
-            toModify.Sprite.ImageId = cmd.ImageId;
-
-            return true;
-        }
-
-        private bool HandleSpriteOffCommand(object sender, SpriteOffCommand cmd)
-        {
-            var toDeactivate = active.FirstOrDefault(item => item.EntityId == cmd.EntityId);
-
-            if (toDeactivate != null)
-            {
-                inactive.Add(toDeactivate);
-                active.Remove(toDeactivate);
-            }
-
-            return true;
-        }
-
 
         /// <summary>
         /// This will draw all tiles to viewport given in the parameter
@@ -109,6 +72,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// <param name="viewport">Viewport on which tiles will be drawn to</param>
         public void Render(IViewport viewport, float dt)
         {
+            cmdHandler.ExecuteEnqueued();
+
             float left, bottom, right, top;
             viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
 
@@ -148,29 +113,9 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.PopMatrix();
         }
 
-        /// <summary>
-        /// Draw this sprite to given viewport
-        /// </summary>
-        /// <param name="viewport">Viewport which this sprite will be rendered to</param>
-        private void DrawDebug(SpritePack pack, IViewport viewport)
+        public bool EnqueueMsg(object sender, IEntityCommand msg)
         {
-            var entity = Core.Entities.GetById(pack.EntityId);
-
-            var body = entity.Components.OfType<IBody>().FirstOrDefault();
-
-            if (body == null)
-                return;
-
-            if (body.Boxes != null)
-            {
-                foreach (var item in body.Boxes)
-                {
-                    RenderTools.DrawRectangle(item.Item1 * 16.0f,
-                                              item.Item2 * 16.0f,
-                                              item.Item1 * 16.0f + 16.0f,
-                                              item.Item2 * 16.0f + 16.0f);
-                }
-            }
+            return false;
         }
 
         #endregion Public Methods
@@ -196,11 +141,72 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             active.Remove(pack);
         }
 
-        public bool EnqueueMsg(object sender, IEntityCommand msg)
+        #endregion Protected Methods
+
+        #region Private Methods
+
+        private bool HandleSpriteOnCommand(object sender, SpriteOnCommand cmd)
         {
-            return false;
+            var toActivate = inactive.FirstOrDefault(item => item.EntityId == cmd.EntityId);
+
+            if (toActivate != null)
+            {
+                active.Add(toActivate);
+                inactive.Remove(toActivate);
+            }
+
+            return true;
         }
 
-        #endregion Protected Methods
+        private bool HandleSpriteSetCommand(object sender, SpriteSetCommand cmd)
+        {
+            var toModify = active.FirstOrDefault(item => item.EntityId == cmd.EntityId);
+            if (toModify == null)
+                return false;
+
+            toModify.Sprite.ImageId = cmd.ImageId;
+
+            return true;
+        }
+
+        private bool HandleSpriteOffCommand(object sender, SpriteOffCommand cmd)
+        {
+            var toDeactivate = active.FirstOrDefault(item => item.EntityId == cmd.EntityId);
+
+            if (toDeactivate != null)
+            {
+                inactive.Add(toDeactivate);
+                active.Remove(toDeactivate);
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Draw this sprite to given viewport
+        /// </summary>
+        /// <param name="viewport">Viewport which this sprite will be rendered to</param>
+        private void DrawDebug(SpritePack pack, IViewport viewport)
+        {
+            var entity = Core.Entities.GetById(pack.EntityId);
+
+            var body = entity.Components.OfType<IBody>().FirstOrDefault();
+
+            if (body == null)
+                return;
+
+            if (body.Boxes != null)
+            {
+                foreach (var item in body.Boxes)
+                {
+                    RenderTools.DrawRectangle(item.Item1 * 16.0f,
+                                              item.Item2 * 16.0f,
+                                              item.Item1 * 16.0f + 16.0f,
+                                              item.Item2 * 16.0f + 16.0f);
+                }
+            }
+        }
+
+        #endregion Private Methods
     }
 }

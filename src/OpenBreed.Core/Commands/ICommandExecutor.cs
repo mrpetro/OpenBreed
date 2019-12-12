@@ -2,11 +2,11 @@
 
 namespace OpenBreed.Core.Commands
 {
-    public interface ICommandListener
+    public interface ICommandExecutor
     {
         #region Public Methods
 
-        bool RecieveCommand(object sender, ICommand cmd);
+        bool ExecuteCommand(object sender, ICommand cmd);
 
         #endregion Public Methods
     }

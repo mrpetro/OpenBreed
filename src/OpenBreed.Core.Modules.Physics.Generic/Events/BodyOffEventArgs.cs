@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core.Common.Helpers;
-using OpenBreed.Core.Entities;
+﻿using OpenBreed.Core.Entities;
 using System;
 
 namespace OpenBreed.Core.Modules.Physics.Events

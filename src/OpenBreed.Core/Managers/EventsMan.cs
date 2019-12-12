@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace OpenBreed.Core.Common.Helpers
+namespace OpenBreed.Core.Managers
 {
-    public class CoreEventBus
+    public class EventsMan
     {
         #region Private Fields
 
-        private readonly Queue<EventSubscription> queue = new Queue<EventSubscription>();
         private Dictionary<object, Dictionary<string, List<Action<object, EventArgs>>>> listeners = new Dictionary<object, Dictionary<string, List<Action<object, EventArgs>>>>();
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public CoreEventBus(ICore core)
+        public EventsMan(ICore core)
         {
             Core = core;
         }
@@ -29,23 +28,14 @@ namespace OpenBreed.Core.Common.Helpers
 
         #region Public Methods
 
-        public void Enqueue(object sender, string eventName, EventArgs eventArgs)
+        public void Raise(object sender, string eventName, EventArgs eventArgs)
         {
-            queue.Enqueue(new EventSubscription(sender, eventName, eventArgs));
-        }
-
-        public void RaiseEnqueued()
-        {
-            while (queue.Count > 0)
-            {
-                var ed = queue.Dequeue();
-                NotifyListeners(ed.Sender, ed.EventType, ed.EventArgs);
-            }
+            NotifyListeners(sender, eventName, eventArgs);
         }
 
         public void Subscribe(object sender, string eventType, Action<object, EventArgs> callback)
         {
-            Dictionary<string,List<Action<object, EventArgs>>> eventTypes = null;
+            Dictionary<string, List<Action<object, EventArgs>>> eventTypes = null;
             List<Action<object, EventArgs>> callbacks = null;
 
             if (!listeners.TryGetValue(sender, out eventTypes))
@@ -66,7 +56,7 @@ namespace OpenBreed.Core.Common.Helpers
         public void Unsubscribe(object sender, string eventType, Action<object, EventArgs> callback)
         {
             Dictionary<string, List<Action<object, EventArgs>>> eventTypes = null;
-  
+
             if (!listeners.TryGetValue(sender, out eventTypes))
                 return;
 
@@ -98,31 +88,5 @@ namespace OpenBreed.Core.Common.Helpers
         }
 
         #endregion Private Methods
-
-        #region Private Structs
-
-        private struct EventSubscription
-        {
-            #region Internal Fields
-
-            internal object Sender;
-            internal string EventType;
-            internal EventArgs EventArgs;
-
-            #endregion Internal Fields
-
-            #region Internal Constructors
-
-            internal EventSubscription(object sender, string eventType, EventArgs eventArgs)
-            {
-                Sender = sender;
-                EventType = eventType;
-                EventArgs = eventArgs;
-            }
-
-            #endregion Internal Constructors
-        }
-
-        #endregion Private Structs
     }
 }

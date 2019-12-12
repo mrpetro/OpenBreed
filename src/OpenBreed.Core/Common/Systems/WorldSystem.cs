@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using System;
@@ -88,7 +87,7 @@ namespace OpenBreed.Core.Common.Systems
             toRemove.Add(entity);
         }
 
-        public virtual bool RecieveCommand(object sender, ICommand cmd)
+        public virtual bool ExecuteCommand(object sender, ICommand cmd)
         {
             return false;
         }

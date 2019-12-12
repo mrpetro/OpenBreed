@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Helpers;
+
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.States;
 using System;
@@ -81,7 +81,7 @@ namespace OpenBreed.Core.Entities
         /// </summary>
         /// <param name="eventType">Type of event to enqueue</param>
         /// <param name="eventArgs">Arguments of event</param>
-        void EnqueueEvent(string eventType, EventArgs eventArgs);
+        void RaiseEvent(string eventType, EventArgs eventArgs);
 
         /// <summary>
         /// Subscribe to particular event

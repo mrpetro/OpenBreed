@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Entities;
 
 namespace OpenBreed.Core.States

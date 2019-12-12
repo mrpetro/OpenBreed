@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Components;
-using OpenBreed.Core.Common.Helpers;
+
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
@@ -11,10 +11,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenBreed.Core.Commands;
+using OpenBreed.Core.Helpers;
 
 namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 {
-    public class WalkingControlSystem : WorldSystem, IUpdatableSystem, ICommandListener
+    public class WalkingControlSystem : WorldSystem, IUpdatableSystem, ICommandExecutor
     {
         #region Private Fields
 
@@ -40,8 +41,8 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
         {
             base.Initialize(world);
 
-            World.MessageBus.RegisterHandler(WalkingControlCommand.TYPE, cmdHandler);
-            World.MessageBus.RegisterHandler(AttackControlCommand.TYPE, cmdHandler);
+            World.RegisterHandler(WalkingControlCommand.TYPE, cmdHandler);
+            World.RegisterHandler(AttackControlCommand.TYPE, cmdHandler);
         }
 
         public void UpdatePauseImmuneOnly(float dt)
@@ -50,9 +51,10 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         public void Update(float dt)
         {
+            cmdHandler.ExecuteEnqueued();
         }
 
-        public override bool RecieveCommand(object sender, ICommand cmd)
+        public override bool ExecuteCommand(object sender, ICommand cmd)
         {
             switch (cmd.Type)
             {
@@ -98,7 +100,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
             if (control.AttackPrimary != cmd.Primary)
             {
                 control.AttackPrimary = cmd.Primary;
-                entity.EnqueueEvent(ControlEventTypes.CONTROL_FIRE_CHANGED, new ControlFireChangedEvent(control.AttackPrimary));
+                entity.RaiseEvent(ControlEventTypes.CONTROL_FIRE_CHANGED, new ControlFireChangedEvent(control.AttackPrimary));
             }
 
             return true;
@@ -113,7 +115,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
             if (control.Direction != cmd.Direction)
             {
                 control.Direction = cmd.Direction;
-                entity.EnqueueEvent(ControlEventTypes.CONTROL_DIRECTION_CHANGED, new ControlDirectionChangedEvent(control.Direction));
+                entity.RaiseEvent(ControlEventTypes.CONTROL_DIRECTION_CHANGED, new ControlDirectionChangedEvent(control.Direction));
             }
 
             return true;

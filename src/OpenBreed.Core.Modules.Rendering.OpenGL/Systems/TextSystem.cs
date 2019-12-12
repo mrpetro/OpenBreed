@@ -11,16 +11,17 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Helpers;
+
 using OpenBreed.Core.Commands;
+using OpenBreed.Core.Helpers;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TextSystem : WorldSystem, ITextSystem, ICommandListener
+    public class TextSystem : WorldSystem, ITextSystem, ICommandExecutor
     {
         #region Private Fields
 
-        private CommandHandler msgHandler;
+        private CommandHandler cmdHandler;
         private readonly List<int> entities = new List<int>();
         private readonly List<TextComponent> textComps = new List<TextComponent>();
         private readonly List<Position> positionComps = new List<Position>();
@@ -31,7 +32,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         public TextSystem(ICore core) : base(core)
         {
-            msgHandler = new CommandHandler(this);
+            cmdHandler = new CommandHandler(this);
 
             Require<TextComponent>();
             Require<Position>();
@@ -45,7 +46,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             base.Initialize(world);
 
-            World.MessageBus.RegisterHandler(TextSetCommand.TYPE, msgHandler);
+            World.RegisterHandler(TextSetCommand.TYPE, cmdHandler);
         }
 
         /// <summary>
@@ -54,6 +55,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// <param name="viewport">Viewport on which sprites will be drawn to</param>
         public void Render(IViewport viewport, float dt)
         {
+            cmdHandler.ExecuteEnqueued();
+
             float left, bottom, right, top;
             viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
 
@@ -90,7 +93,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Disable(EnableCap.Texture2D);
         }
 
-        public override bool RecieveCommand(object sender, ICommand cmd)
+        public override bool ExecuteCommand(object sender, ICommand cmd)
         {
             switch (cmd.Type)
             {

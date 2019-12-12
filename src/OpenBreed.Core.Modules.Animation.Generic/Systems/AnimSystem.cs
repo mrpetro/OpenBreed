@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
@@ -10,10 +9,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenBreed.Core.Commands;
+using OpenBreed.Core.Helpers;
 
 namespace OpenBreed.Core.Modules.Animation.Systems
 {
-    public class AnimSystem<T> : WorldSystem, IAnimationSystem, ICommandListener
+    public class AnimSystem<T> : WorldSystem, IAnimationSystem, ICommandExecutor
     {
         #region Private Fields
 
@@ -39,10 +39,10 @@ namespace OpenBreed.Core.Modules.Animation.Systems
         {
             base.Initialize(world);
 
-            World.MessageBus.RegisterHandler(SetAnimCommand.TYPE, cmdHandler);
-            World.MessageBus.RegisterHandler(PlayAnimCommand.TYPE, cmdHandler);
-            World.MessageBus.RegisterHandler(PauseAnimCommand.TYPE, cmdHandler);
-            World.MessageBus.RegisterHandler(StopAnimCommand.TYPE, cmdHandler);
+            World.RegisterHandler(SetAnimCommand.TYPE, cmdHandler);
+            World.RegisterHandler(PlayAnimCommand.TYPE, cmdHandler);
+            World.RegisterHandler(PauseAnimCommand.TYPE, cmdHandler);
+            World.RegisterHandler(StopAnimCommand.TYPE, cmdHandler);
         }
 
         public void UpdatePauseImmuneOnly(float dt)
@@ -58,6 +58,8 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         public void Update(float dt)
         {
+            cmdHandler.ExecuteEnqueued();
+
             for (int i = 0; i < entities.Count; i++)
                 Animate(i, dt);
         }
@@ -133,7 +135,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             }
         }
 
-        public override bool RecieveCommand(object sender, ICommand cmd)
+        public override bool ExecuteCommand(object sender, ICommand cmd)
         {
             switch (cmd.Type)
             {
@@ -181,12 +183,12 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         private void RaiseAnimStoppedEvent(IEntity entity, Animator animator)
         {
-            entity.EnqueueEvent(AnimationEventTypes.ANIMATION_STOPPED, new AnimStoppedEventArgs(animator));
+            entity.RaiseEvent(AnimationEventTypes.ANIMATION_STOPPED, new AnimStoppedEventArgs(animator));
         }
 
         private void RaiseAnimChangedEvent(IEntity entity, Animator animator)
         {
-            entity.EnqueueEvent(AnimationEventTypes.ANIMATION_CHANGED, new AnimChangedEventArgs(animator.Frame));
+            entity.RaiseEvent(AnimationEventTypes.ANIMATION_CHANGED, new AnimChangedEventArgs(animator.Frame));
         }
 
         private bool HandlePauseAnimCommand(object sender, PauseAnimCommand cmd)

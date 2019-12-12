@@ -1,8 +1,10 @@
-﻿using OpenBreed.Core.Common.Helpers;
+﻿using OpenBreed.Core.Commands;
+
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Extensions;
+using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.States;
 using OpenTK;
@@ -15,11 +17,11 @@ namespace OpenBreed.Core.Common
 {
     /// <summary>
     /// World class which contains systems and entities
-    /// 
+    ///
     /// Enqueues events:
     /// WorldInitializedEvent - when world is initialized
     /// </summary>
-    public class World
+    public class World : IMsgHandler, ICommandExecutor
     {
         #region Public Fields
 
@@ -36,6 +38,9 @@ namespace OpenBreed.Core.Common
 
         private float timeMultiplier = 1.0f;
 
+        private CommandHandler commandHandler;
+        private MsgHandlerRelay msgHandlerRelay;
+
         #endregion Private Fields
 
         #region Internal Constructors
@@ -49,8 +54,10 @@ namespace OpenBreed.Core.Common
             Systems = new ReadOnlyCollection<IWorldSystem>(systems);
             Components = new ComponentsMan();
 
-            MessageBus = new WorldMessageBus(this);
-            MessageBus.RegisterHandler(StateChangeCommand.TYPE, new StateChangeCommandHandler(this));
+            commandHandler = new CommandHandler(this);
+            msgHandlerRelay = new MsgHandlerRelay(this);
+
+            RegisterHandler(StateChangeCommand.TYPE, commandHandler);
         }
 
         #endregion Internal Constructors
@@ -79,10 +86,12 @@ namespace OpenBreed.Core.Common
         }
 
         public ICore Core { get; }
+
         public ReadOnlyCollection<IEntity> Entities { get; }
+
         public ReadOnlyCollection<IWorldSystem> Systems { get; }
+
         public ComponentsMan Components { get; }
-        public WorldMessageBus MessageBus { get; }
 
         /// <summary>
         /// Id of this world
@@ -97,6 +106,18 @@ namespace OpenBreed.Core.Common
         #endregion Public Properties
 
         #region Public Methods
+
+        public bool ExecuteCommand(object sender, ICommand cmd)
+        {
+            switch (cmd.Type)
+            {
+                case StateChangeCommand.TYPE:
+                    return HandleStateChangeCommand(sender, (StateChangeCommand)cmd);
+
+                default:
+                    return false;
+            }
+        }
 
         /// <summary>
         /// Method will add given entity to this world.
@@ -146,12 +167,24 @@ namespace OpenBreed.Core.Common
             systems.Remove(system);
         }
 
+        public void RegisterHandler(string msgType, IMsgHandler msgHandler)
+        {
+            msgHandlerRelay.RegisterHandler(msgType, msgHandler);
+        }
+
+        public bool Handle(object sender, IMsg msg)
+        {
+            return msgHandlerRelay.Handle(sender, msg);
+        }
+
         #endregion Public Methods
 
         #region Internal Methods
 
         internal void Update(float dt)
         {
+            commandHandler.ExecuteEnqueued();
+
             if (Paused)
                 systems.OfType<IUpdatableSystem>().ForEach(item => item.UpdatePauseImmuneOnly(dt * TimeMultiplier));
             else
@@ -163,12 +196,12 @@ namespace OpenBreed.Core.Common
             InitializeSystems();
             Cleanup();
 
-            Core.EventBus.Enqueue(this, CoreEventTypes.WORLD_INITIALIZED , new WorldInitializedEventArgs(this));
+            Core.Events.Raise(this, CoreEventTypes.WORLD_INITIALIZED, new WorldInitializedEventArgs(this));
         }
 
         internal void Deinitialize()
         {
-            Core.EventBus.Enqueue(this, CoreEventTypes.WORLD_DEINITIALIZED, new WorldDeinitializedEventArgs(this));
+            Core.Events.Raise(this, CoreEventTypes.WORLD_DEINITIALIZED, new WorldDeinitializedEventArgs(this));
         }
 
         internal void RegisterEntity(Entity entity)
@@ -213,6 +246,18 @@ namespace OpenBreed.Core.Common
         #endregion Internal Methods
 
         #region Private Methods
+
+        private bool HandleStateChangeCommand(object sender, StateChangeCommand cmd)
+        {
+            var entity = Core.Entities.GetById(cmd.EntityId);
+
+            var fsm = entity.FsmList.FirstOrDefault(item => item.Name == cmd.FsmName);
+
+            if (fsm != null)
+                fsm.Handle(sender, cmd);
+
+            return true;
+        }
 
         private void AddEntityToSystems(Entity entity)
         {

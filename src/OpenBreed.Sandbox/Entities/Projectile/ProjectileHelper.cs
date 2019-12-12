@@ -42,7 +42,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
         private static void OnCollision(IEntity thisEntity, IEntity otherEntity, Vector2 projection)
         {
-            thisEntity.EnqueueEvent(PhysicsEventTypes.COLLISION_OCCURRED, new CollisionEventArgs(otherEntity));
+            thisEntity.RaiseEvent(PhysicsEventTypes.COLLISION_OCCURRED, new CollisionEventArgs(otherEntity));
 
             var body = otherEntity.Components.OfType<IBody>().FirstOrDefault();
 

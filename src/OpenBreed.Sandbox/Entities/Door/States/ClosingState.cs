@@ -10,7 +10,7 @@ using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenTK;
 using System.Linq;
 using OpenBreed.Core.Common.Systems;
-using OpenBreed.Core.Common.Helpers;
+
 using OpenBreed.Core.Modules.Physics.Commands;
 
 namespace OpenBreed.Sandbox.Components.States

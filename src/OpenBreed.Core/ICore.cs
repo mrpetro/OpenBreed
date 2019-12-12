@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
 using NLua;
-using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Inputs;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
@@ -90,14 +90,14 @@ namespace OpenBreed.Core
         StateMan StateMachine { get; }
 
         /// <summary>
-        /// Message bus
+        /// Commands manager
         /// </summary>
-        CoreMessageBus MessageBus{ get; }
+        CommandsMan Commands{ get; }
 
         /// <summary>
-        /// Event bus
+        /// Events manager
         /// </summary>
-        CoreEventBus EventBus { get; }
+        EventsMan Events { get; }
 
         /// <summary>
         /// Lua state machine
