@@ -72,6 +72,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\AiControlSystemBuilder.cs" />
+    <Compile Include="Builders\WalkingControlSystemBuilder.cs" />
     <Compile Include="Components\AiControl.cs" />
     <Compile Include="Components\BaseControl.cs" />
     <Compile Include="Components\DrivingControl.cs" />

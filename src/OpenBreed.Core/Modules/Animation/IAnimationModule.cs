@@ -12,12 +12,6 @@ namespace OpenBreed.Core.Modules.Animation
         #region Public Methods
 
         /// <summary>
-        /// Creates animation system and return it
-        /// </summary>
-        /// <returns>Animation system interface</returns>
-        IAnimationSystem CreateAnimationSystem<T>();
-
-        /// <summary>
         /// Animations manager
         /// </summary>
         IAnimMan Anims { get; }

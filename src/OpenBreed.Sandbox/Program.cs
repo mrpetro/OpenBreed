@@ -1,12 +1,17 @@
 ﻿using NLua;
 using OpenBreed.Core;
 using OpenBreed.Core.Blueprints;
+using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Animation;
+using OpenBreed.Core.Modules.Animation.Builders;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Audio;
+using OpenBreed.Core.Modules.Audio.Builders;
 using OpenBreed.Core.Modules.Physics;
+using OpenBreed.Core.Modules.Physics.Builders;
+using OpenBreed.Core.Modules.Physics.Systems;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Systems.Control.Systems;
 using OpenBreed.Sandbox.Entities.Actor;
@@ -61,7 +66,6 @@ namespace OpenBreed.Sandbox
 
             Rendering = new OpenGLModule(this);
             Sounds = new OpenALModule(this);
-            Physics = new PhysicsModule(this);
             Animations = new AnimationModule(this);
 
             VSync = VSyncMode.On;
@@ -76,8 +80,6 @@ namespace OpenBreed.Sandbox
         public IRenderModule Rendering { get; }
 
         public IAudioModule Sounds { get; }
-
-        public IPhysicsModule Physics { get; }
 
         public IAnimationModule Animations { get; }
 
@@ -102,6 +104,57 @@ namespace OpenBreed.Sandbox
         public WorldMan Worlds { get; }
 
         public StateMan StateMachine { get; }
+
+        public WalkingControlSystemBuilder CreateWalkingControlSystem()
+        {
+            return new WalkingControlSystemBuilder(this);
+        }
+
+        public AiControlSystemBuilder CreateAiControlSystem()
+        {
+            return new AiControlSystemBuilder(this);
+        }
+
+        public PhysicsSystemBuilder CreatePhysicsSystem()
+        {
+            return new PhysicsSystemBuilder(this);
+        }
+
+        public AnimationSystemBuilder CreateAnimationSystem()
+        {
+            return new AnimationSystemBuilder(this);
+        }
+
+        public MovementSystemBuilder CreateMovementSystem()
+        {
+            return new MovementSystemBuilder(this);
+        }
+
+        public TileSystemBuilder CreateTileSystem()
+        {
+            return new TileSystemBuilder(this);
+        }
+
+        public SpriteSystemBuilder CreateSpriteSystem()
+        {
+            return new SpriteSystemBuilder(this);
+        }
+
+        public TextSystemBuilder CreateTextSystem()
+        {
+            return new TextSystemBuilder(this);
+        }
+
+        public WireframeSystemBuilder CreateWireframeSystem()
+        {
+            return new WireframeSystemBuilder(this);
+        }
+
+        public SoundSystemBuilder CreateSoundSystem()
+        {
+            return new SoundSystemBuilder(this);
+        }
+
 
         public Matrix4 ClientTransform
         {

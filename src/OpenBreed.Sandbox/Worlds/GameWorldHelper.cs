@@ -13,58 +13,43 @@ namespace OpenBreed.Sandbox.Worlds
 {
     public static class GameWorldHelper
     {
-        public static World SetupSystems(ICore core, World gameWorld, int width, int height)
+        public static void AddSystems(Program core, WorldBuilder builder)
         {
+            int width = builder.width;
+            int height = builder.height;
+
             //AI
             // Pathfinding/ AI systems here
 
             //Input
-            gameWorld.AddSystem(new WalkingControlSystem(core));
-            gameWorld.AddSystem(new AiControlSystem(core));
+            builder.AddSystem(core.CreateWalkingControlSystem().Build());
+            builder.AddSystem(core.CreateAiControlSystem().Build());
 
             //Action
-            gameWorld.AddSystem(new MovementSystem(core));
-            gameWorld.AddSystem(core.Physics.CreatePhysicsSystem(width, height));
-            gameWorld.AddSystem(core.Animations.CreateAnimationSystem<int>());
+            builder.AddSystem(core.CreateMovementSystem().Build());
+            builder.AddSystem(core.CreatePhysicsSystem().SetGridSize(width, height).Build());
+            builder.AddSystem(core.CreateAnimationSystem().Build());
 
             //Audio
-            gameWorld.AddSystem(core.Sounds.CreateSoundSystem());
+            builder.AddSystem(core.CreateSoundSystem().Build());
 
             //Video
-            gameWorld.AddSystem(core.Rendering.CreateTileSystem(width, height, 1, 16, true));
-            gameWorld.AddSystem(core.Rendering.CreateSpriteSystem());
-            gameWorld.AddSystem(core.Rendering.CreateWireframeSystem());
-            gameWorld.AddSystem(core.Rendering.CreateTextSystem());
-
-            return gameWorld;
+            builder.AddSystem(core.CreateTileSystem().SetGridSize(width, height)
+                                                       .SetLayersNo(1)
+                                                       .SetTileSize(16)
+                                                       .SetGridVisible(true)
+                                                       .Build());
+            builder.AddSystem(core.CreateSpriteSystem().Build());
+            builder.AddSystem(core.CreateWireframeSystem().Build());
+            builder.AddSystem(core.CreateTextSystem().Build());
         }
 
-        public static World CreateGameWorld(ICore core, string worldName)
+        public static World CreateGameWorld(Program core, string worldName)
         {
-            var gameWorld = core.Worlds.Create(worldName);
+            var builder = core.Worlds.Create().SetName(worldName);
+            AddSystems(core, builder);
 
-            //AI
-            // Pathfinding/ AI systems here
-
-            //Input
-            gameWorld.AddSystem(new WalkingControlSystem(core));
-            gameWorld.AddSystem(new AiControlSystem(core));
-
-            //Action
-            gameWorld.AddSystem(new MovementSystem(core));
-            gameWorld.AddSystem(core.Physics.CreatePhysicsSystem(64, 64));
-            gameWorld.AddSystem(core.Animations.CreateAnimationSystem<int>());
-
-            //Audio
-            gameWorld.AddSystem(core.Sounds.CreateSoundSystem());
-
-            //Video
-            gameWorld.AddSystem(core.Rendering.CreateTileSystem(64, 64, 1, 16, true));
-            gameWorld.AddSystem(core.Rendering.CreateSpriteSystem());
-            gameWorld.AddSystem(core.Rendering.CreateWireframeSystem());
-            gameWorld.AddSystem(core.Rendering.CreateTextSystem());
-
-            return gameWorld;
+            return builder.Build();
         }
     }
 }

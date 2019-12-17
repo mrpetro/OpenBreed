@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 {
@@ -59,7 +60,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
             Entity.PostCommand(new PlayAnimCommand(Entity.Id, $"{animPrefix}/{animMovementName.CurrentStateName}/{animDirName}"));
             Entity.PostCommand(new TextSetCommand(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
-            Entity.PostCommand(new StateChangeCommand(Entity.Id, "Rotation", "Stop"));
+            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Rotation", "Stop"));
         }
 
         public void Initialize(IEntity entity)

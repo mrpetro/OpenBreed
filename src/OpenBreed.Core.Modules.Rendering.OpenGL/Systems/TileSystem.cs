@@ -16,6 +16,7 @@ using System.Diagnostics;
 using System.Linq;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Helpers;
+using OpenBreed.Core.Modules.Physics.Builders;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
@@ -38,18 +39,18 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Public Constructors
 
-        public TileSystem(ICore core, int width, int height, int layersNo, float tileSize, bool gridVisible) : base(core)
+        internal TileSystem(TileSystemBuilder builder) : base(builder.core)
         {
             cmdHandler = new CommandHandler(this);
 
             Require<ITileComponent>();
             Require<Position>();
 
-            GridHeight = height;
-            GridWidth = width;
-            LayersNo = layersNo;
-            TileSize = tileSize;
-            GridVisible = gridVisible;
+            GridWidth = builder.gridWidth;
+            GridHeight = builder.gridHeight;
+            LayersNo = builder.layersNo;
+            TileSize = builder.tileSize;
+            GridVisible = builder.gridVisible;
 
             InitializeTilesMap();
         }

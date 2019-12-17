@@ -52,7 +52,7 @@ namespace OpenBreed.Sandbox.States
 
         #region Public Constructors
 
-        public StateTechDemo4(ICore core)
+        public StateTechDemo4(Program core)
         {
             Core = core;
         }
@@ -61,7 +61,7 @@ namespace OpenBreed.Sandbox.States
 
         #region Public Properties
 
-        public ICore Core { get; }
+        public Program Core { get; }
 
         public IEntity GameCamera { get; private set; }
 

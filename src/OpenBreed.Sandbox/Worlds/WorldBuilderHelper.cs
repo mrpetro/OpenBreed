@@ -17,8 +17,6 @@ namespace OpenBreed.Sandbox.Worlds
     {
         #region Public Fields
 
-        public const int SETUP_WORLD = 10000;
-
         public const int PLAYER_SPAWN_POINT = 'P';
 
         #endregion Public Fields
@@ -58,7 +56,6 @@ namespace OpenBreed.Sandbox.Worlds
 
             builder.RegisterCode(' ', AddAirCell);
 
-            builder.RegisterCode(SETUP_WORLD, SetupWorld);
             builder.RegisterCode(PLAYER_SPAWN_POINT, AddPlayer);
         }
 
@@ -200,11 +197,6 @@ namespace OpenBreed.Sandbox.Worlds
                 DoorHelper.AddHorizontalDoor(world, x, y);
             else if (type == 'V')
                 DoorHelper.AddVerticalDoor(world, x, y);
-        }
-
-        private static void SetupWorld(World world, int code, object[] args)
-        {
-            GameWorldHelper.SetupSystems(world.Core, world, (int)args[0], (int)args[1]);
         }
 
         #endregion Private Methods

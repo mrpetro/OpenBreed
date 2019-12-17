@@ -11,6 +11,7 @@ using OpenBreed.Sandbox.Helpers;
 using OpenTK;
 using System;
 using System.Linq;
+using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 {
@@ -91,7 +92,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
         private void HandleControlDirectionChangedEvent(ControlDirectionChangedEvent systemEvent)
         {
             if (systemEvent.Direction != Vector2.Zero)
-                Entity.PostCommand(new StateChangeCommand(Entity.Id, "Movement", "Walk"));
+                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Movement", "Walk"));
         }
 
         private void OnControlDirectionChanged(object sender, EventArgs eventArgs)

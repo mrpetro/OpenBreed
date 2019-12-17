@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenBreed.Core.Modules.Physics.Components;
+using OpenBreed.Core.Modules.Physics.Builders;
 
 namespace OpenBreed.Core.Modules.Physics.Systems
 {
@@ -25,7 +26,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         #region Public Constructors
 
-        public MovementSystem(ICore core) : base(core)
+        public MovementSystem(MovementSystemBuilder builder) : base(builder.core)
         {
             Require<Thrust>();
             Require<Position>();

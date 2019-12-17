@@ -10,6 +10,7 @@ using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
 using System;
 using System.Linq;
+using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -86,7 +87,7 @@ namespace OpenBreed.Sandbox.Components.States
 
         private void HandleCollisionEvent(CollisionEventArgs e)
         {
-            Entity.PostCommand(new StateChangeCommand(Entity.Id, "Functioning", "Open"));
+            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Functioning", "Open"));
         }
 
         #endregion Private Methods

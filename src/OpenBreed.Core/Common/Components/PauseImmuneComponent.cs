@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Sandbox.Worlds
+namespace OpenBreed.Core.Common.Components
 {
-    public class Hub
+    class PauseImmuneComponent
     {
     }
 }

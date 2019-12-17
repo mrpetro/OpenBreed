@@ -6,7 +6,6 @@ using OpenBreed.Core.Events;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
-using OpenBreed.Core.States;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -45,19 +44,27 @@ namespace OpenBreed.Core.Common
 
         #region Internal Constructors
 
-        internal World(ICore core, string name)
+        internal World(WorldBuilder builder)
         {
-            Core = core;
-            Name = name;
+            Core = builder.core;
+            Name = builder.name;
 
             Entities = new ReadOnlyCollection<IEntity>(entities);
-            Systems = new ReadOnlyCollection<IWorldSystem>(systems);
-            Components = new ComponentsMan();
 
+            systems = builder.systems;
+            Systems = new ReadOnlyCollection<IWorldSystem>(systems);
+
+            Components = new ComponentsMan();
             commandHandler = new CommandHandler(this);
             msgHandlerRelay = new MsgHandlerRelay(this);
+            RegisterHandler(EntitySetStateCommand.TYPE, commandHandler);
 
-            RegisterHandler(StateChangeCommand.TYPE, commandHandler);
+            Core.Worlds.RegisterWorld(this);
+
+            foreach (var system in systems)
+                system.Initialize(this);
+
+            builder.InvokeActions(this);
         }
 
         #endregion Internal Constructors
@@ -111,8 +118,11 @@ namespace OpenBreed.Core.Common
         {
             switch (cmd.Type)
             {
-                case StateChangeCommand.TYPE:
-                    return HandleStateChangeCommand(sender, (StateChangeCommand)cmd);
+                case EntitySetStateCommand.TYPE:
+                    return HandleStateChangeCommand(sender, (EntitySetStateCommand)cmd);
+
+                case WorldSetPauseCommand.TYPE:
+                    return HandleWorldPauseCommand(sender, (WorldSetPauseCommand)cmd);
 
                 default:
                     return false;
@@ -157,16 +167,6 @@ namespace OpenBreed.Core.Common
                 RemoveEntity(entities[i]);
         }
 
-        public virtual void AddSystem(IWorldSystem system)
-        {
-            systems.Add(system);
-        }
-
-        public virtual void RemoveSystem(IWorldSystem system)
-        {
-            systems.Remove(system);
-        }
-
         public void RegisterHandler(string msgType, IMsgHandler msgHandler)
         {
             msgHandlerRelay.RegisterHandler(msgType, msgHandler);
@@ -193,7 +193,7 @@ namespace OpenBreed.Core.Common
 
         internal void Initialize()
         {
-            InitializeSystems();
+            //InitializeSystems();
             Cleanup();
 
             Core.Events.Raise(this, CoreEventTypes.WORLD_INITIALIZED, new WorldInitializedEventArgs(this));
@@ -247,7 +247,13 @@ namespace OpenBreed.Core.Common
 
         #region Private Methods
 
-        private bool HandleStateChangeCommand(object sender, StateChangeCommand cmd)
+        private void InitializeSystems()
+        {
+            for (int i = 0; i < systems.Count; i++)
+                systems[i].Initialize(this);
+        }
+
+        private bool HandleStateChangeCommand(object sender, EntitySetStateCommand cmd)
         {
             var entity = Core.Entities.GetById(cmd.EntityId);
 
@@ -255,6 +261,13 @@ namespace OpenBreed.Core.Common
 
             if (fsm != null)
                 fsm.Handle(sender, cmd);
+
+            return true;
+        }
+
+        private bool HandleWorldPauseCommand(object sender, WorldSetPauseCommand cmd)
+        {
+            Paused = cmd.Pause;
 
             return true;
         }
@@ -277,18 +290,18 @@ namespace OpenBreed.Core.Common
             }
         }
 
-        private void InitializeSystems()
-        {
-            for (int i = 0; i < systems.Count; i++)
-                systems[i].Initialize(this);
-        }
-
-        private void DeinitializeSystems()
-        {
-            for (int i = 0; i < systems.Count; i++)
-                systems[i].Deinitialize();
-        }
-
         #endregion Private Methods
+
+        //private void InitializeSystems()
+        //{
+        //    for (int i = 0; i < systems.Count; i++)
+        //        systems[i].Initialize(this);
+        //}
+
+        //private void DeinitializeSystems()
+        //{
+        //    for (int i = 0; i < systems.Count; i++)
+        //        systems[i].Deinitialize();
+        //}
     }
 }

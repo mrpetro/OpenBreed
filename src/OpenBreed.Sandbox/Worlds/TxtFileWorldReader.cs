@@ -24,9 +24,7 @@ namespace OpenBreed.Sandbox.Worlds
         {
             ReadSize(worldBuilder);
 
-            worldBuilder.Add(WorldBuilderHelper.SETUP_WORLD, new object[] { worldBuilder.Width, worldBuilder.Height });
-
-            for (int y = 0; y < worldBuilder.Height; y++)
+            for (int y = 0; y < worldBuilder.height; y++)
                 ReadMapLine(worldBuilder, y);
         }
 
@@ -50,14 +48,15 @@ namespace OpenBreed.Sandbox.Worlds
 
         public World GetWorld()
         {
-            var worldBuilder = Core.Worlds.GetBuilder();
+            var worldBuilder = Core.Worlds.Create();
             var helper = new WorldBuilderHelper(worldBuilder);
+
             helper.RegisterHandlers();
 
             ReadName(worldBuilder);
             ReadBody(worldBuilder);
             ReadExits(worldBuilder, helper);
-
+            GameWorldHelper.AddSystems((Program)Core, worldBuilder);
             return worldBuilder.Build(); 
         }
 
@@ -82,8 +81,8 @@ namespace OpenBreed.Sandbox.Worlds
         {
             var mapLine = txtReader.ReadLine();
 
-            for (int x = 0; x < builder.Width; x++)
-                ReadCell(builder, x, builder.Height - y - 1, mapLine[x*2], mapLine[x*2 + 1]);
+            for (int x = 0; x < builder.width; x++)
+                ReadCell(builder, x, builder.height - y - 1, mapLine[x*2], mapLine[x*2 + 1]);
         }
 
         private void ReadCell(WorldBuilder builder, int x, int y, int actionCode, int gfxCode)

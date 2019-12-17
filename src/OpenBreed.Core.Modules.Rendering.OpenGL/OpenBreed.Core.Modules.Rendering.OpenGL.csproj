@@ -68,6 +68,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\WireframeSystemBuilder.cs" />
+    <Compile Include="Builders\TextSystemBuilder.cs" />
+    <Compile Include="Builders\SpriteSystemBuilder.cs" />
+    <Compile Include="Builders\TileSystemBuilder.cs" />
     <Compile Include="Components\CameraComponent.cs" />
     <Compile Include="Components\SpriteComponent.cs" />
     <Compile Include="Components\TileCell.cs" />

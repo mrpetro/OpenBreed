@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Helpers;
+using OpenBreed.Core.Modules.Physics.Builders;
 
 namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 {
@@ -26,7 +27,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         #region Public Constructors
 
-        public WalkingControlSystem(ICore core) : base(core)
+        internal WalkingControlSystem(WalkingControlSystemBuilder builder) : base(builder.core)
         {
             cmdHandler = new CommandHandler(this);
 

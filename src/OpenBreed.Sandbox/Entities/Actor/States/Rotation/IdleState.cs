@@ -1,4 +1,5 @@
 ﻿
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
@@ -72,7 +73,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
                 if (dir.Value != systemEvent.Direction)
                 {
                     dir.Value = systemEvent.Direction;
-                    Entity.PostCommand(new StateChangeCommand(Entity.Id, "Rotation", "Rotate"));
+                    Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Rotation", "Rotate"));
                 }
             }
 

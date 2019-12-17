@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
@@ -25,6 +26,13 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         #endregion Private Fields
 
         #region Public Constructors
+
+        public WireframeSystem(WireframeSystemBuilder builder) : base(builder.core)
+        {
+            Require<IWireframe>();
+            Require<Position>();
+            Require<IShapeComponent>();
+        }
 
         public WireframeSystem(ICore core) : base(core)
         {

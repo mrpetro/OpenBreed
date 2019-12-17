@@ -2,19 +2,19 @@
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Entities;
 
-namespace OpenBreed.Core.States
+namespace OpenBreed.Core.Commands
 {
-    public class StateChangeCommand : IEntityCommand
+    public class EntitySetStateCommand : IEntityCommand
     {
         #region Public Fields
 
-        public const string TYPE = "STATE_CHANGE";
+        public const string TYPE = "ENTITY_SET_STATE";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public StateChangeCommand(int entityId, string fsmName, string stateId)
+        public EntitySetStateCommand(int entityId, string fsmName, string stateId)
         {
             EntityId = entityId;
             FsmName = fsmName;

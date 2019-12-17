@@ -1,4 +1,5 @@
 ﻿
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
@@ -63,7 +64,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
 
         private void HandleCollisionEvent(CollisionEventArgs e)
         {
-            Entity.PostCommand(new StateChangeCommand(Entity.Id, "Functioning", "Pick"));
+            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Functioning", "Pick"));
         }
 
         public string Process(string actionName, object[] arguments)

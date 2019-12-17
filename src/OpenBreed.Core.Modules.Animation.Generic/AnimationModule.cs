@@ -4,7 +4,6 @@ using OpenBreed.Core.Modules.Animation.Systems;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
-using OpenBreed.Core.Modules.Animation.Systems;
 using System;
 using OpenBreed.Core.Managers;
 
@@ -38,15 +37,6 @@ namespace OpenBreed.Core.Modules.Animation
         #endregion Public Properties
 
         #region Public Methods
-
-        /// <summary>
-        /// Create system for handling sprites
-        /// </summary>
-        /// <returns>Sprite system</returns>
-        public IAnimationSystem CreateAnimationSystem<T>()
-        {
-            return new AnimSystem<T>(Core);
-        }
 
         #endregion Public Methods
     }

@@ -14,6 +14,7 @@ using OpenBreed.Core.Common;
 
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Helpers;
+using OpenBreed.Core.Modules.Physics.Builders;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
@@ -30,7 +31,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Public Constructors
 
-        public TextSystem(ICore core) : base(core)
+        internal TextSystem(TextSystemBuilder builder) : base(builder.core)
         {
             cmdHandler = new CommandHandler(this);
 

@@ -1,46 +1,44 @@
-﻿using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Components;
-
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Helpers;
+using OpenBreed.Core.Modules.Physics.Builders;
+using OpenBreed.Core.Modules.Physics.Commands;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Physics.Helpers;
-using OpenBreed.Core.Modules.Physics.Commands;
 using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenBreed.Core.Commands;
-using OpenBreed.Core.Helpers;
 
 namespace OpenBreed.Core.Modules.Physics.Systems
 {
-    internal class PhysicsSystem : WorldSystem, IPhysicsSystem, ICommandExecutor
+    public class PhysicsSystem : WorldSystem, IPhysicsSystem, ICommandExecutor
     {
         #region Private Fields
 
         private const int CELL_SIZE = 16;
 
-        private CommandHandler cmdHandler;
         private readonly List<DynamicPack> inactiveDynamics = new List<DynamicPack>();
         private readonly List<DynamicPack> activeDynamics = new List<DynamicPack>();
-        private List<StaticPack>[] gridStatics;
         private readonly List<StaticPack> inactiveStatics = new List<StaticPack>();
-
+        private CommandHandler cmdHandler;
+        private List<StaticPack>[] gridStatics;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal PhysicsSystem(ICore core, int gridWidth, int gridHeight) : base(core)
+        internal PhysicsSystem(PhysicsSystemBuilder builder) : base(builder.core)
         {
             cmdHandler = new CommandHandler(this);
             Require<IPhysicsComponent>();
 
-            GridWidth = gridWidth;
-            GridHeight = gridHeight;
+            GridWidth = builder.gridWidth;
+            GridHeight = builder.gridHeight;
 
             InitializeGrid();
         }
@@ -144,6 +142,14 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         #region Private Methods
 
+        private static Box2 GetAabb(IEntity entity)
+        {
+            var shape = entity.Components.OfType<IShapeComponent>().First();
+            var pos = entity.Components.OfType<Position>().First();
+
+            return shape.Aabb.Translated(pos.Value);
+        }
+
         private bool HandleBodyOnCommand(object sender, BodyOnCommand cmd)
         {
             var dynamicToActivate = inactiveDynamics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
@@ -180,7 +186,6 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             {
                 inactiveDynamics.Add(dynamicToDeactivate);
                 activeDynamics.Remove(dynamicToDeactivate);
-
 
                 entity.RaiseEvent(PhysicsEventTypes.BODY_OFF, new BodyOffEventArgs(entity));
                 return true;
@@ -236,7 +241,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 }
             }
 
-            if(activeDynamics.Count > 0)
+            if (activeDynamics.Count > 0)
                 QueryStaticGrid(activeDynamics.Last(), dt);
         }
 
@@ -322,7 +327,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                     var collideres = gridStatics[xIndex + GridWidth * yIndex];
                     for (int boxIndex = 0; boxIndex < collideres.Count; boxIndex++)
                     {
-                        if(!boxesSet.Contains(collideres[boxIndex]))
+                        if (!boxesSet.Contains(collideres[boxIndex]))
                             boxesSet.Add(collideres[boxIndex]);
                     }
                 }
@@ -364,14 +369,6 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 return 0;
             else
                 return 1;
-        }
-
-        private static Box2 GetAabb(IEntity entity)
-        {
-            var shape = entity.Components.OfType<IShapeComponent>().First();
-            var pos = entity.Components.OfType<Position>().First();
-
-            return shape.Aabb.Translated(pos.Value);
         }
 
         private void InsertToGrid(StaticPack pack)

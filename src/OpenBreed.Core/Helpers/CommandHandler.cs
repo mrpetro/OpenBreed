@@ -1,5 +1,8 @@
 ﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Systems;
+using OpenBreed.Core.Entities;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenBreed.Core.Helpers
 {

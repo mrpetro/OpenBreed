@@ -35,11 +35,6 @@ namespace OpenBreed.Core
         IAudioModule Sounds { get; }
 
         /// <summary>
-        /// Reference to physics core module
-        /// </summary>
-        IPhysicsModule Physics { get; }
-
-        /// <summary>
         /// Reference to animation core module
         /// </summary>
         IAnimationModule Animations { get; }

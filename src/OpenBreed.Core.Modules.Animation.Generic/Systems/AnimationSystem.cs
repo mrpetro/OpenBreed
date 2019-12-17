@@ -10,10 +10,11 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Helpers;
+using OpenBreed.Core.Modules.Animation.Builders;
 
 namespace OpenBreed.Core.Modules.Animation.Systems
 {
-    public class AnimSystem<T> : WorldSystem, IAnimationSystem, ICommandExecutor
+    public class AnimationSystem : WorldSystem, IAnimationSystem, ICommandExecutor
     {
         #region Private Fields
 
@@ -25,7 +26,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         #region Public Constructors
 
-        public AnimSystem(ICore core) : base(core)
+        public AnimationSystem(AnimationSystemBuilder builder) : base(builder.core)
         {
             cmdHandler = new CommandHandler(this);
             Require<Animator>();
@@ -47,6 +48,8 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         public void UpdatePauseImmuneOnly(float dt)
         {
+            cmdHandler.ExecuteEnqueued();
+
             //For now only entities with camera are immune. This implementation sucks.
             for (int i = 0; i < entities.Count; i++)
             {

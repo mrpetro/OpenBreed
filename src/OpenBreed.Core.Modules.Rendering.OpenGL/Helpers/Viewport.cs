@@ -20,7 +20,6 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         private const float ZOOM_BASE = 1.0f / 512.0f;
         private const float BRIGHTNESS_Z_LEVEL = 50.0f;
-        private static float time = 0.0f;
         private ICore core;
 
         #endregion Private Fields

@@ -4,6 +4,7 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
+using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Systems.Control.Events;
 using OpenTK;
 using System;
@@ -27,7 +28,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         #region Public Constructors
 
-        public AiControlSystem(ICore core) : base(core)
+        internal AiControlSystem(AiControlSystemBuilder builder) : base(builder.core)
         {
             Require<AiControl>();
             Require<Position>();

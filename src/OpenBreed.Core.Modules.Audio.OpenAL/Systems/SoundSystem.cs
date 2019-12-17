@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using OpenBreed.Core.Common.Systems;
 using OpenTK.Audio.OpenAL;
 using OpenTK;
+using OpenBreed.Core.Modules.Audio.Builders;
 
-namespace OpenBreed.Core.Modules.Audio
+namespace OpenBreed.Core.Modules.Audio.Systems
 {
     public class SoundSystem : WorldSystem, IAudioSystem
     {
@@ -19,13 +20,10 @@ namespace OpenBreed.Core.Modules.Audio
 
         #region Public Constructors
 
-        public SoundSystem(ICore core) : base(core)
+        internal SoundSystem(SoundSystemBuilder builder) : base(builder.core)
         {
             components = new List<IAudioComponent>();
         }
-
-
-
 
         #endregion Public Constructors
 

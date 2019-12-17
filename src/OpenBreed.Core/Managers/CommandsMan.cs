@@ -46,7 +46,9 @@ namespace OpenBreed.Core.Managers
             Debug.Assert(msg.EntityId >= 0);
 
             var entity = Core.Entities.GetById(msg.EntityId);
-            entity.World.Handle(sender, msg);
+
+            if(entity.World != null)
+                entity.World.Handle(sender, msg);
         }
 
         private void Post(object sender, IWorldCommand msg)

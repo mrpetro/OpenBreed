@@ -68,8 +68,8 @@ namespace OpenBreed.Core.States
         {
             switch (cmd.Type)
             {
-                case StateChangeCommand.TYPE:
-                    return HandleStateChangeMsg(sender, (StateChangeCommand)cmd);
+                case EntitySetStateCommand.TYPE:
+                    return HandleStateChangeMsg(sender, (EntitySetStateCommand)cmd);
 
                 default:
                     return false;
@@ -117,7 +117,7 @@ namespace OpenBreed.Core.States
 
         #region Private Methods
 
-        private bool HandleStateChangeMsg(object sender, StateChangeCommand message)
+        private bool HandleStateChangeMsg(object sender, EntitySetStateCommand message)
         {
             Perform(message.StateId);
             return true;

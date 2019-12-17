@@ -1,4 +1,5 @@
 ﻿
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Rendering.Commands;
@@ -46,7 +47,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            Entity.PostCommand(new StateChangeCommand(Entity.Id, "Attacking", "Shoot"));
+            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Attacking", "Shoot"));
         }
 
         public void Initialize(IEntity entity)
@@ -72,9 +73,9 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         private void HandleControlFireChangedEvent(ControlFireChangedEvent systemEvent)
         {
             if (systemEvent.Fire)
-                Entity.PostCommand(new StateChangeCommand(Entity.Id, "Attacking", "Shoot"));
+                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Attacking", "Shoot"));
             else
-                Entity.PostCommand(new StateChangeCommand(Entity.Id, "Attacking", "Stop"));
+                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Attacking", "Stop"));
         }
 
 

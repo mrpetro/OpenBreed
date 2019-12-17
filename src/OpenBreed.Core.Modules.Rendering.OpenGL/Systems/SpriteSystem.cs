@@ -4,6 +4,7 @@ using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Helpers;
+using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
@@ -27,7 +28,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Public Constructors
 
-        public SpriteSystem(ICore core) : base(core)
+        internal SpriteSystem(SpriteSystemBuilder builder) : base(builder.core)
         {
             cmdHandler = new CommandHandler(this);
 

@@ -16,27 +16,37 @@ namespace OpenBreed.Sandbox.Worlds
     {
         #region Public Methods
 
-        public static void CreateHudWorld(ICore core)
+        public static void AddSystems(Program core, WorldBuilder builder)
         {
-            var hudWorld = core.Worlds.Create("HUD");
-
             //Input
-            hudWorld.AddSystem(new WalkingControlSystem(core));
-            hudWorld.AddSystem(new AiControlSystem(core));
+            builder.AddSystem(core.CreateWalkingControlSystem().Build());
+            builder.AddSystem(core.CreateAiControlSystem().Build());
 
             //Action
-            hudWorld.AddSystem(new MovementSystem(core));
-            hudWorld.AddSystem(core.Animations.CreateAnimationSystem<int>());
+            builder.AddSystem(core.CreateMovementSystem().Build());
+            builder.AddSystem(core.CreateAnimationSystem().Build());
 
             //Audio
-            hudWorld.AddSystem(core.Sounds.CreateSoundSystem());
+            builder.AddSystem(core.CreateSoundSystem().Build());
 
             //Video
-            hudWorld.AddSystem(core.Rendering.CreateTileSystem(64, 64, 1, 16, false));
-            hudWorld.AddSystem(core.Rendering.CreateSpriteSystem());
-            hudWorld.AddSystem(core.Rendering.CreateTextSystem());
+            builder.AddSystem(core.CreateTileSystem().SetGridSize(64, 64)
+                                           .SetLayersNo(1)
+                                           .SetTileSize(16)
+                                           .SetGridVisible(false)
+                                           .Build());
 
-            Setup(hudWorld);
+            builder.AddSystem(core.CreateSpriteSystem().Build());
+            builder.AddSystem(core.CreateTextSystem().Build());
+        }
+
+        public static void CreateHudWorld(Program core)
+        {
+            var builder = core.Worlds.Create().SetName("HUD");
+
+            AddSystems(core, builder);
+
+            Setup(builder.Build());
         }
 
         #endregion Public Methods

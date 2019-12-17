@@ -68,12 +68,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\SpriteSystemBuilder.cs" />
     <Compile Include="Components\LocalSoundEmiter.cs" />
     <Compile Include="Components\GlobalSoundEmiter.cs" />
     <Compile Include="Helpers\SoundMan.cs" />
     <Compile Include="OpenALModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SoundSystem.cs" />
+    <Compile Include="Systems\SoundSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">

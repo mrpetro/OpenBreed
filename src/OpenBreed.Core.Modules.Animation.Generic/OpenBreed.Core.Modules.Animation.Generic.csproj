@@ -64,11 +64,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\AnimationSystemBuilder.cs" />
     <Compile Include="Events\AnimationEventTypes.cs" />
     <Compile Include="Events\AnimStoppedEventArgs.cs" />
     <Compile Include="Events\AnimChangedEventArgs.cs" />
     <Compile Include="Commands\SetAnimCommand.cs" />
-    <Compile Include="Systems\AnimSystem.cs" />
+    <Compile Include="Systems\AnimationSystem.cs" />
     <Compile Include="Helpers\AnimMan.cs" />
     <Compile Include="Components\Animator.cs" />
     <Compile Include="Helpers\Animation.cs" />
