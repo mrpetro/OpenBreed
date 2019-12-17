@@ -1,8 +1,17 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Modules.Animation;
+using OpenBreed.Core.Modules.Animation.Components;
+using OpenBreed.Core.Modules.Animation.Helpers;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Physics.Systems;
+using OpenBreed.Core.Modules.Rendering.Entities.Builders;
+using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.Systems.Control.Components;
+using OpenBreed.Sandbox.Entities.Actor;
+using OpenBreed.Sandbox.Entities.Teleport;
+using OpenBreed.Sandbox.Helpers;
+using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +59,55 @@ namespace OpenBreed.Sandbox.Worlds
             AddSystems(core, builder);
 
             return builder.Build();
+        }
+
+        internal static void CreateGameWorld(Program core)
+        {
+            World gameWorld = null;
+
+            using (var reader = new TxtFileWorldReader(core, ".\\Content\\Maps\\hub.txt"))
+                gameWorld = reader.GetWorld();
+
+            //GameWorld = GameWorldHelper.CreateGameWorld(Core, "DEMO6");
+
+            var cameraBuilder = new CameraBuilder(core);
+
+            cameraBuilder.SetPosition(new Vector2(64, 64));
+            cameraBuilder.SetRotation(0.0f);
+            cameraBuilder.SetZoom(1);
+
+            var gameCamera = cameraBuilder.Build();
+            gameCamera.Add(new Animator(10.0f, false, -1, FrameTransition.LinearInterpolation));
+
+            gameWorld.AddEntity(gameCamera);
+
+            var gameViewport = (Viewport)core.Rendering.Viewports.Create(0.05f, 0.05f, 0.90f, 0.90f);
+            gameViewport.CameraEntity = gameCamera;
+
+            var actor = ActorHelper.CreateActor(core, new Vector2(128, 128));
+            actor.Tag = gameCamera;
+
+            actor.Add(new WalkingControl());
+            actor.Add(new AttackControl());
+
+            actor.Add(TextHelper.Create(core, new Vector2(0, 32), "Hero"));
+
+            core.Jobs.Execute(new CameraFollowJob(gameCamera, actor));
+
+            var player1 = core.Players.GetByName("P1");
+            player1.AssumeControl(actor);
+            var player2 = core.Players.GetByName("P2");
+            player2.AssumeControl(actor);
+
+            var movementFsm = ActorHelper.CreateMovementFSM(actor);
+            var atackFsm = ActorHelper.CreateAttackingFSM(actor);
+            var rotateFsm = ActorHelper.CreateRotationFSM(actor);
+            movementFsm.SetInitialState("Standing");
+            atackFsm.SetInitialState("Idle");
+            rotateFsm.SetInitialState("Idle");
+            gameWorld.AddEntity(actor);
+
+            core.Rendering.Viewports.Add(gameViewport);
         }
     }
 }

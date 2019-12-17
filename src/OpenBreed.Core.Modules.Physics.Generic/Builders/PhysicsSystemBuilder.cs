@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Common.Systems;
+﻿using OpenBreed.Core.Builders;
+using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Modules.Physics.Systems;
 
 namespace OpenBreed.Core.Modules.Physics.Builders

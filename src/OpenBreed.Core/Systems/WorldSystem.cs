@@ -1,11 +1,12 @@
 ﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OpenBreed.Core.Common.Systems
+namespace OpenBreed.Core.Systems
 {
     public abstract class WorldSystem : IWorldSystem
     {

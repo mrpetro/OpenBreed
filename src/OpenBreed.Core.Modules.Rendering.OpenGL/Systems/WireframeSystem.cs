@@ -5,6 +5,7 @@ using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.Systems;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;

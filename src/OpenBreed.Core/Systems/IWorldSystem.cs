@@ -1,7 +1,8 @@
 ﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common;
 using OpenBreed.Core.Entities;
 
-namespace OpenBreed.Core.Common.Systems
+namespace OpenBreed.Core.Systems
 {
     /// <summary>
     /// Interface to system which is part of some world

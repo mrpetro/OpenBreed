@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Core.Common.Systems
+namespace OpenBreed.Core.Systems
 {
     /// <summary>
     /// System that state will be rendered to parricular viewport during core render phase

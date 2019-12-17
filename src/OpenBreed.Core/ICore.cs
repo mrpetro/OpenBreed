@@ -80,11 +80,6 @@ namespace OpenBreed.Core
         WorldMan Worlds { get; }
 
         /// <summary>
-        /// States machine
-        /// </summary>
-        StateMan StateMachine { get; }
-
-        /// <summary>
         /// Commands manager
         /// </summary>
         CommandsMan Commands{ get; }

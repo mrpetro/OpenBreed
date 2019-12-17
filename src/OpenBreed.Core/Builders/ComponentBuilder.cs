@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Core.Common.Systems.Components;
 
-namespace OpenBreed.Core.Common.Components.Builders
+namespace OpenBreed.Core.Builders
 {
     public abstract class ComponentBuilder
     {

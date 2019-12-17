@@ -5,7 +5,7 @@
 //using System.Text;
 //using System.Threading.Tasks;
 
-//namespace OpenBreed.Core.Common.Systems
+//namespace OpenBreed.Core.Systems
 //{
 //    public class StateMachineSystem : WorldSystem, IMsgListener
 //    {

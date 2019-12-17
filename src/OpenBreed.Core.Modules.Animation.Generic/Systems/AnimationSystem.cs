@@ -11,6 +11,7 @@ using System.Linq;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Modules.Animation.Builders;
+using OpenBreed.Core.Systems;
 
 namespace OpenBreed.Core.Modules.Animation.Systems
 {

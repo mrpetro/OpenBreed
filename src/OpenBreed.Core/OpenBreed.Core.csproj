@@ -81,7 +81,7 @@
     <Compile Include="Commands\IWorldCommand.cs" />
     <Compile Include="Commands\WorldSetPauseCommand.cs" />
     <Compile Include="Common\Components\PauseImmuneComponent.cs" />
-    <Compile Include="Common\Systems\IWorldSystemBuilder.cs" />
+    <Compile Include="Builders\IWorldSystemBuilder.cs" />
     <Compile Include="Events\CoreEventTypes.cs" />
     <Compile Include="Events\EntityEnteredWorldEventArgs.cs" />
     <Compile Include="Events\EntityLeftWorldEventArgs.cs" />
@@ -96,7 +96,7 @@
     <Compile Include="Blueprints\EntityDefXml.cs" />
     <Compile Include="Blueprints\IBlueprint.cs" />
     <Compile Include="Collections\IdMap.cs" />
-    <Compile Include="Common\Components\Builders\ComponentBuilder.cs" />
+    <Compile Include="Builders\ComponentBuilder.cs" />
     <Compile Include="Common\Components\EquipmentComponent.cs" />
     <Compile Include="Common\Components\IControlComponent.cs" />
     <Compile Include="Common\Components\InventoryComponent.cs" />
@@ -106,8 +106,8 @@
     <Compile Include="Commands\ICommandExecutor.cs" />
     <Compile Include="Helpers\MovementTools.cs" />
     <Compile Include="Helpers\CommandHandler.cs" />
-    <Compile Include="Common\Systems\StateMachineSystem.cs" />
-    <Compile Include="Common\Systems\TimerSystem.cs" />
+    <Compile Include="Systems\StateMachineSystem.cs" />
+    <Compile Include="Systems\TimerSystem.cs" />
     <Compile Include="CoreTools.cs" />
     <Compile Include="Commands\IMsg.cs" />
     <Compile Include="Helpers\MsgHandlerRelay.cs" />
@@ -177,10 +177,10 @@
     <Compile Include="Modules\Animation\Systems\IAnimationSystem.cs" />
     <Compile Include="Modules\Physics\IPhysicsSystem.cs" />
     <Compile Include="Modules\Audio\Systems\IAudioSystem.cs" />
-    <Compile Include="Common\Systems\IRenderableSystem.cs" />
-    <Compile Include="Common\Systems\IUpdatableSystem.cs" />
-    <Compile Include="Common\Systems\IWorldSystem.cs" />
-    <Compile Include="Common\Systems\WorldSystem.cs" />
+    <Compile Include="Systems\IRenderableSystem.cs" />
+    <Compile Include="Systems\IUpdatableSystem.cs" />
+    <Compile Include="Systems\IWorldSystem.cs" />
+    <Compile Include="Systems\WorldSystem.cs" />
     <Compile Include="Common\Components\Transformation.cs" />
     <Compile Include="ICore.cs" />
     <Compile Include="Common\Components\IEntityComponent.cs" />

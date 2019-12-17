@@ -22,7 +22,6 @@ using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Items;
 using OpenBreed.Sandbox.Managers;
-using OpenBreed.Sandbox.States;
 using OpenBreed.Sandbox.Worlds;
 using OpenTK;
 using OpenTK.Graphics;
@@ -61,7 +60,6 @@ namespace OpenBreed.Sandbox
             Items = new ItemsMan(this);
             Inputs = new InputsMan(this);
             Worlds = new WorldMan(this);
-            StateMachine = new StateMan(this);
             Jobs = new JobMan(this);
 
             Rendering = new OpenGLModule(this);
@@ -102,8 +100,6 @@ namespace OpenBreed.Sandbox
         public EventsMan Events { get; }
 
         public WorldMan Worlds { get; }
-
-        public StateMan StateMachine { get; }
 
         public WalkingControlSystemBuilder CreateWalkingControlSystem()
         {
@@ -272,15 +268,7 @@ namespace OpenBreed.Sandbox
 
             HudWorldHelper.CreateHudWorld(this);
 
-            StateMachine.RegisterState(new StateTechDemo1(this));
-            StateMachine.RegisterState(new StateTechDemo2(this));
-            StateMachine.RegisterState(new StateTechDemo3(this));
-            StateMachine.RegisterState(new StateTechDemo4(this));
-            StateMachine.RegisterState(new StateTechDemo5(this));
-            StateMachine.RegisterState(new StateTechDemo6(this));
-            //StateMan.RegisterState(new MenuState(this));
-            StateMachine.SetNextState(StateTechDemo6.ID);
-            StateMachine.ChangeState();
+            GameWorldHelper.CreateGameWorld(this);
 
             //GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.One);                  // Select The Type Of Blending
 
@@ -309,7 +297,7 @@ namespace OpenBreed.Sandbox
             var ortho = Matrix4.CreateOrthographicOffCenter(0.0f, ClientRectangle.Width, 0.0f, ClientRectangle.Height, -100.0f, 100.0f);
             GL.LoadMatrix(ref ortho);
 
-            StateMachine.OnResize(ClientRectangle);
+            //StateMachine.OnResize(ClientRectangle);
         }
 
         protected override void OnUpdateFrame(FrameEventArgs e)
@@ -321,7 +309,7 @@ namespace OpenBreed.Sandbox
             Players.ResetInputs();
             Inputs.Update();
             Players.ApplyInputs();
-            StateMachine.Update((float)e.Time);
+            //StateMachine.Update((float)e.Time);
             Worlds.Update((float)e.Time);
             Jobs.Update((float)e.Time);
         }

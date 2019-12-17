@@ -126,7 +126,6 @@
     <Compile Include="States\StateTechDemo1.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="Worlds\GameWorldHelper.cs" />
-    <Compile Include="Worlds\Hub.cs" />
     <Compile Include="Worlds\HudWorldHelper.cs" />
     <Compile Include="Worlds\TxtFileWorldReader.cs" />
     <Compile Include="Worlds\WorldBuilderHelper.cs" />
@@ -221,6 +220,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\Scripts\" />
     <Folder Include="Content\Sounds\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
