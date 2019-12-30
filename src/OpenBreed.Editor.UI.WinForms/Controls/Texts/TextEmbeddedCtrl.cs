@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using OpenBreed.Editor.VM.Assets;
+using OpenBreed.Editor.VM.DataSources;
 using OpenBreed.Editor.VM;
 using OpenBreed.Editor.VM.Palettes;
 using OpenBreed.Editor.VM.Texts;

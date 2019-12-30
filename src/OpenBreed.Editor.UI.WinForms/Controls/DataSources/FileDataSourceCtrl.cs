@@ -7,21 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using OpenBreed.Editor.VM.Assets;
+using OpenBreed.Editor.VM.DataSources;
 
-namespace OpenBreed.Editor.UI.WinForms.Controls.Assets
+namespace OpenBreed.Editor.UI.WinForms.Controls.DataSources
 {
-    public partial class FileAssetCtrl : UserControl
+    public partial class FileDataSourceCtrl : UserControl
     {
         #region Private Fields
 
-        private FileAssetVM _vm;
+        private FileDataSourceVM _vm;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public FileAssetCtrl()
+        public FileDataSourceCtrl()
         {
             InitializeComponent();
         }
@@ -30,7 +30,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Assets
 
         #region Public Methods
 
-        public void Initialize(FileAssetVM vm)
+        public void Initialize(FileDataSourceVM vm)
         {
             _vm = vm;
 

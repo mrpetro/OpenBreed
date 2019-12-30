@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Texts;
+using OpenBreed.Common.DataSources;
 
 namespace OpenBreed.Editor.VM
 {
@@ -29,6 +30,8 @@ namespace OpenBreed.Editor.VM
                 return new DbMapTableVM();
             else if (repository is IRepository<IActionSetEntry>)
                 return new DbActionSetTableVM();
+            else if (repository is IRepository<IDataSourceEntry>)
+                return new DbDataSourceTableVM();
             else if (repository is IRepository<IAssetEntry>)
                 return new DbAssetTableVM();
             else if (repository is IRepository<ITileSetEntry>)

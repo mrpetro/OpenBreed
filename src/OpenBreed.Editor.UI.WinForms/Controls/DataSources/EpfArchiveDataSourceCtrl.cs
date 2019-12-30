@@ -7,21 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using OpenBreed.Editor.VM.Assets;
+using OpenBreed.Editor.VM.DataSources;
 
-namespace OpenBreed.Editor.UI.WinForms.Controls.Assets
+namespace OpenBreed.Editor.UI.WinForms.Controls.DataSources
 {
-    public partial class EpfArchiveAssetCtrl : UserControl
+    public partial class EpfArchiveDataSourceCtrl : UserControl
     {
         #region Private Fields
 
-        private EPFArchiveFileAssetVM _vm;
+        private EPFArchiveFileDataSourceVM _vm;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public EpfArchiveAssetCtrl()
+        public EpfArchiveDataSourceCtrl()
         {
             InitializeComponent();
         }
@@ -30,7 +30,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Assets
 
         #region Public Methods
 
-        public void Initialize(EPFArchiveFileAssetVM vm)
+        public void Initialize(EPFArchiveFileDataSourceVM vm)
         {
             _vm = vm;
 

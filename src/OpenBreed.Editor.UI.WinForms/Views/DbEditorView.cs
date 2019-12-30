@@ -24,8 +24,8 @@ using OpenBreed.Editor.UI.WinForms.Controls.Actions;
 using OpenBreed.Editor.UI.WinForms.Controls.Palettes;
 using OpenBreed.Editor.UI.WinForms.Controls.Maps;
 using OpenBreed.Editor.VM.Maps;
-using OpenBreed.Editor.VM.Assets;
-using OpenBreed.Editor.UI.WinForms.Controls.Assets;
+using OpenBreed.Editor.VM.DataSources;
+using OpenBreed.Editor.UI.WinForms.Controls.DataSources;
 using OpenBreed.Editor.VM.Texts;
 using OpenBreed.Editor.UI.WinForms.Controls.Texts;
 using OpenBreed.Editor.VM.Sprites;
@@ -81,7 +81,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _viewFactory.Register<PaletteEditorVM, EntryEditorView<PaletteEditorCtrl>>();
             _viewFactory.Register<TextEditorVM, EntryEditorView<TextEditorCtrl>>();
             _viewFactory.Register<MapEditorVM, EntryEditorView<MapEditorCtrl>>();
-            _viewFactory.Register<AssetEditorVM, EntryEditorView<AssetEditorCtrl>>();
+            _viewFactory.Register<DataSourceEditorVM, EntryEditorView<DataSourceEditorCtrl>>();
         }
 
         #endregion Public Constructors

@@ -71,10 +71,12 @@
     <Compile Include="..\Shared\SharedAssemblyInfo.cs">
       <Link>SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Assets\AssetEditorVM.cs" />
-    <Compile Include="Assets\AssetVM.cs" />
-    <Compile Include="Assets\FileAssetVM.cs" />
-    <Compile Include="Assets\EPFArchiveFileAssetVM.cs" />
+    <Compile Include="Database\Entries\DbDataSourceEntryVM.cs" />
+    <Compile Include="Database\Tables\DbDataSourceTableVM.cs" />
+    <Compile Include="DataSources\DataSourceEditorVM.cs" />
+    <Compile Include="DataSources\DataSourceVM.cs" />
+    <Compile Include="DataSources\FileDataSourceVM.cs" />
+    <Compile Include="DataSources\EPFArchiveFileDataSourceVM.cs" />
     <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="Base\BindingListExtensions.cs" />
     <Compile Include="Base\Command.cs" />

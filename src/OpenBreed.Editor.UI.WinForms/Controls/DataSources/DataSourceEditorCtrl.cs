@@ -7,23 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using OpenBreed.Editor.VM.Assets;
+using OpenBreed.Editor.VM.DataSources;
 using OpenBreed.Editor.VM;
 
-namespace OpenBreed.Editor.UI.WinForms.Controls.Assets
+namespace OpenBreed.Editor.UI.WinForms.Controls.DataSources
 {
-    public partial class AssetEditorCtrl : EntryEditorInnerCtrl
+    public partial class DataSourceEditorCtrl : EntryEditorInnerCtrl
     {
-        private AssetEditorVM _vm;
+        private DataSourceEditorVM _vm;
 
-        public AssetEditorCtrl()
+        public DataSourceEditorCtrl()
         {
             InitializeComponent();
         }
 
         public override void Initialize(EntryEditorVM vm)
         {
-            _vm = vm as AssetEditorVM ?? throw new InvalidOperationException(nameof(vm));
+            _vm = vm as DataSourceEditorVM ?? throw new InvalidOperationException(nameof(vm));
 
             _vm.PropertyChanged += _vm_PropertyChanged;
 
@@ -42,24 +42,24 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Assets
             }
         }
 
-        private void OnEditableChanged(AssetVM asset)
+        private void OnEditableChanged(DataSourceVM asset)
         {
             Controls.Clear();
 
             if (asset == null)
                 return;
 
-            if (asset is FileAssetVM)
+            if (asset is FileDataSourceVM)
             {
-                var control = new FileAssetCtrl();
-                control.Initialize((FileAssetVM)asset);
+                var control = new FileDataSourceCtrl();
+                control.Initialize((FileDataSourceVM)asset);
                 control.Dock = DockStyle.Fill;
                 Controls.Add(control);
             }
-            else if (asset is EPFArchiveFileAssetVM)
+            else if (asset is EPFArchiveFileDataSourceVM)
             {
-                var control = new EpfArchiveAssetCtrl();
-                control.Initialize((EPFArchiveFileAssetVM)asset);
+                var control = new EpfArchiveDataSourceCtrl();
+                control.Initialize((EPFArchiveFileDataSourceVM)asset);
                 control.Dock = DockStyle.Fill;
                 Controls.Add(control);
             }

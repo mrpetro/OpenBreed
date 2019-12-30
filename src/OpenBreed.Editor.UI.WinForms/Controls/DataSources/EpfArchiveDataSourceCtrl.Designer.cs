@@ -1,6 +1,6 @@
-﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Assets
+﻿namespace OpenBreed.Editor.UI.WinForms.Controls.DataSources
 {
-    partial class EpfArchiveAssetCtrl
+    partial class EpfArchiveDataSourceCtrl
     {
         /// <summary> 
         /// Required designer variable.
@@ -31,10 +31,10 @@
             this.btnFileBrowser = new System.Windows.Forms.Button();
             this.tbxEpfArchivePath = new System.Windows.Forms.TextBox();
             this.cbxEntryName = new System.Windows.Forms.ComboBox();
-            this.grpEpfArchiveAsset = new System.Windows.Forms.GroupBox();
+            this.grpEpfArchiveDataSource = new System.Windows.Forms.GroupBox();
             this.lblEpfArchiveFilePath = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.grpEpfArchiveAsset.SuspendLayout();
+            this.grpEpfArchiveDataSource.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnFileBrowser
@@ -66,20 +66,20 @@
             this.cbxEntryName.Size = new System.Drawing.Size(279, 21);
             this.cbxEntryName.TabIndex = 2;
             // 
-            // grpEpfArchiveAsset
+            // grpEpfArchiveDataSource
             // 
-            this.grpEpfArchiveAsset.Controls.Add(this.label1);
-            this.grpEpfArchiveAsset.Controls.Add(this.lblEpfArchiveFilePath);
-            this.grpEpfArchiveAsset.Controls.Add(this.cbxEntryName);
-            this.grpEpfArchiveAsset.Controls.Add(this.btnFileBrowser);
-            this.grpEpfArchiveAsset.Controls.Add(this.tbxEpfArchivePath);
-            this.grpEpfArchiveAsset.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpEpfArchiveAsset.Location = new System.Drawing.Point(0, 0);
-            this.grpEpfArchiveAsset.Name = "grpEpfArchiveAsset";
-            this.grpEpfArchiveAsset.Size = new System.Drawing.Size(415, 81);
-            this.grpEpfArchiveAsset.TabIndex = 3;
-            this.grpEpfArchiveAsset.TabStop = false;
-            this.grpEpfArchiveAsset.Text = "EPF Archive entry asset";
+            this.grpEpfArchiveDataSource.Controls.Add(this.label1);
+            this.grpEpfArchiveDataSource.Controls.Add(this.lblEpfArchiveFilePath);
+            this.grpEpfArchiveDataSource.Controls.Add(this.cbxEntryName);
+            this.grpEpfArchiveDataSource.Controls.Add(this.btnFileBrowser);
+            this.grpEpfArchiveDataSource.Controls.Add(this.tbxEpfArchivePath);
+            this.grpEpfArchiveDataSource.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpEpfArchiveDataSource.Location = new System.Drawing.Point(0, 0);
+            this.grpEpfArchiveDataSource.Name = "grpEpfArchiveDataSource";
+            this.grpEpfArchiveDataSource.Size = new System.Drawing.Size(415, 81);
+            this.grpEpfArchiveDataSource.TabIndex = 3;
+            this.grpEpfArchiveDataSource.TabStop = false;
+            this.grpEpfArchiveDataSource.Text = "EPF Archive entry data source";
             // 
             // lblEpfArchiveFilePath
             // 
@@ -99,15 +99,15 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Entry name:";
             // 
-            // EpfArchiveAssetCtrl
+            // EpfArchiveDataSourceCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.grpEpfArchiveAsset);
-            this.Name = "EpfArchiveAssetCtrl";
+            this.Controls.Add(this.grpEpfArchiveDataSource);
+            this.Name = "EpfArchiveDataSourceCtrl";
             this.Size = new System.Drawing.Size(415, 81);
-            this.grpEpfArchiveAsset.ResumeLayout(false);
-            this.grpEpfArchiveAsset.PerformLayout();
+            this.grpEpfArchiveDataSource.ResumeLayout(false);
+            this.grpEpfArchiveDataSource.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -117,7 +117,7 @@
         private System.Windows.Forms.Button btnFileBrowser;
         private System.Windows.Forms.TextBox tbxEpfArchivePath;
         private System.Windows.Forms.ComboBox cbxEntryName;
-        private System.Windows.Forms.GroupBox grpEpfArchiveAsset;
+        private System.Windows.Forms.GroupBox grpEpfArchiveDataSource;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblEpfArchiveFilePath;
     }

@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Texts;
+using OpenBreed.Common.DataSources;
 
 namespace OpenBreed.Editor.VM.Database
 {
@@ -29,6 +30,8 @@ namespace OpenBreed.Editor.VM.Database
                 return new DbSoundEntryVM();
             else if (entry is IMapEntry)
                 return new DbMapEntryVM();
+            else if (entry is IDataSourceEntry)
+                return new DbDataSourceEntryVM();
             else if (entry is IAssetEntry)
                 return new DbAssetEntryVM();
             else if (entry is IActionSetEntry)
