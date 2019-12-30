@@ -1,14 +1,11 @@
-﻿using OpenBreed.Common.XmlDatabase.Tables.Images;
-using OpenBreed.Common.XmlDatabase.Tables.Palettes;
-using OpenBreed.Common.XmlDatabase.Tables.Sprites;
-using OpenBreed.Common.XmlDatabase.Tables.Tiles;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Palettes;
 using OpenBreed.Common.XmlDatabase.Items.Palettes;
+using OpenBreed.Common.XmlDatabase.Tables;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {

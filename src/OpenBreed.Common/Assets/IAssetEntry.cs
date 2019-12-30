@@ -1,15 +1,15 @@
 ﻿using OpenBreed.Common.Formats;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Assets
 {
     public interface IAssetEntry : IEntry
     {
+        #region Public Properties
+
         IFormatEntry Format { get; }
 
+        string DataSourceRef { get; }
+
+        #endregion Public Properties
     }
 }

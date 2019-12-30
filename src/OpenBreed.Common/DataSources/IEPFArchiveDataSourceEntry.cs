@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Assets
+namespace OpenBreed.Common.DataSources
 {
-    public interface IEPFArchiveAssetEntry : IAssetEntry
+    public interface IEPFArchiveDataSourceEntry : IDataSourceEntry
     {
         string ArchivePath { get; set; }
         string EntryName { get; set; }

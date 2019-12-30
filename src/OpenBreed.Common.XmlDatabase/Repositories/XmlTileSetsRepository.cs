@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Tiles;
-using OpenBreed.Common.XmlDatabase.Tables.Tiles;
+using OpenBreed.Common.XmlDatabase.Tables;
 using OpenBreed.Common.XmlDatabase.Items.Tiles;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories

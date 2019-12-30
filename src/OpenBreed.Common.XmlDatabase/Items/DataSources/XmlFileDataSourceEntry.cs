@@ -1,27 +1,32 @@
-﻿using OpenBreed.Common.Assets;
+﻿using OpenBreed.Common.DataSources;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
 
-namespace OpenBreed.Common.XmlDatabase.Items.Assets
+namespace OpenBreed.Common.XmlDatabase.Items.DataSources
 {
     [Serializable]
     [Description("File"), Category("Appearance")]
-    public class XmlFileAssetEntry : XmlAssetEntry, IFileAssetEntry
+    public class XmlFileDataSourceEntry : XmlDataSourceEntry, IFileDataSourceEntry
     {
+        #region Public Properties
+
         [XmlAttribute]
         public string FilePath { get; set; }
 
+        #endregion Public Properties
+
+        #region Public Methods
+
         public override IEntry Copy()
         {
-            return new XmlFileAssetEntry()
+            return new XmlFileDataSourceEntry()
             {
                 Id = this.Id,
                 FilePath = this.FilePath
             };
         }
+
+        #endregion Public Methods
     }
 }

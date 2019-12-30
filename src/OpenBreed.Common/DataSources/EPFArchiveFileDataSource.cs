@@ -7,9 +7,9 @@ using EPF;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Formats;
 
-namespace OpenBreed.Common.Assets
+namespace OpenBreed.Common.DataSources
 {
-    public class EPFArchiveFileAsset : AssetBase
+    public class EPFArchiveFileDataSource : DataSourceBase
     {
 
         #region Private Fields
@@ -20,8 +20,8 @@ namespace OpenBreed.Common.Assets
 
         #region Public Constructors
 
-        public EPFArchiveFileAsset(AssetsDataProvider manager, string id, IDataFormatType formatType, List<FormatParameter> formatParameters, string archivePath, string entryName) :
-            base(manager, id, formatType, formatParameters)
+        public EPFArchiveFileDataSource(DataSourceProvider provider, string id, string archivePath, string entryName) :
+            base(provider, id)
         {
             ArchivePath = archivePath;
             EntryName = entryName;
@@ -64,7 +64,7 @@ namespace OpenBreed.Common.Assets
             if (_entry != null)
                 throw new InvalidOperationException($"Entry {EntryName} already initialized.");
 
-            var archive = _manager.GetArchive(AssetsDataProvider.ExpandVariables(ArchivePath));
+            var archive = provider.GetArchive(DataSourceProvider.ExpandVariables(ArchivePath));
             _entry = archive.FindEntry(EntryName);
         }
 

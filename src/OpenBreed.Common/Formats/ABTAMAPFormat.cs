@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.Assets;
+using OpenBreed.Common.DataSources;
 using OpenBreed.Common.Maps;
 using OpenBreed.Common.Maps.Builders;
 using OpenBreed.Common.Maps.Readers.MAP;
@@ -21,25 +22,25 @@ namespace OpenBreed.Common.Formats
 
         #region Public Methods
 
-        public object Load(AssetBase asset, List<FormatParameter> parameters)
+        public object Load(DataSourceBase ds, List<FormatParameter> parameters)
         {
             //Remember to set source stream to begining
-            asset.Stream.Seek(0, SeekOrigin.Begin);
+            ds.Stream.Seek(0, SeekOrigin.Begin);
 
             var mapBuilder = MapBuilder.NewMapModel();
             MAPReader mapReader = new MAPReader(mapBuilder, MAPFormat.ABTA);
-            return mapReader.Read(asset.Stream);
+            return mapReader.Read(ds.Stream);
         }
 
-        public void Save(AssetBase asset, object model, List<FormatParameter> parameters)
+        public void Save(DataSourceBase ds, object model, List<FormatParameter> parameters)
         {
-            if (asset.Stream == null)
+            if (ds.Stream == null)
                 throw new InvalidOperationException("Asset stream not opened.");
 
             //Remember to clear the stream before writing
-            asset.Stream.SetLength(0);
+            ds.Stream.SetLength(0);
 
-            MAPWriter mapWriter = new MAPWriter(asset.Stream, MAPFormat.ABTA);
+            MAPWriter mapWriter = new MAPWriter(ds.Stream, MAPFormat.ABTA);
             mapWriter.Write((MapModel)model);
         }
 

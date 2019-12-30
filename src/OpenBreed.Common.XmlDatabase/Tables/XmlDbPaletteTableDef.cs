@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace OpenBreed.Common.XmlDatabase.Tables.Palettes
+namespace OpenBreed.Common.XmlDatabase.Tables
 {
     public class XmlDbPaletteTableDef : XmlDbTableDef
     {

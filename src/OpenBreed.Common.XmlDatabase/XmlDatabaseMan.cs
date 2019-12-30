@@ -1,12 +1,7 @@
 ﻿using OpenBreed.Common.XmlDatabase;
 using OpenBreed.Common.XmlDatabase.Items.Assets;
-using OpenBreed.Common.XmlDatabase.Tables.Images;
-using OpenBreed.Common.XmlDatabase.Tables.Maps;
-using OpenBreed.Common.XmlDatabase.Tables.Palettes;
-using OpenBreed.Common.XmlDatabase.Tables.Actions;
-using OpenBreed.Common.XmlDatabase.Tables.Assets;
-using OpenBreed.Common.XmlDatabase.Tables.Sprites;
-using OpenBreed.Common.XmlDatabase.Tables.Tiles;
+using OpenBreed.Common.XmlDatabase.Tables;
+
 using OpenBreed.Common.Formats;
 using OpenBreed.Common.Assets;
 using System;
@@ -14,7 +9,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Common.XmlDatabase.Tables.Texts;
 
 namespace OpenBreed.Common.XmlDatabase
 {
@@ -81,6 +75,17 @@ namespace OpenBreed.Common.XmlDatabase
             if (table == null)
             {
                 table = new XmlDbActionSetTableDef();
+                Data.Tables.Add(table);
+            }
+            return table;
+        }
+
+        internal XmlDbDataSourceTableDef GetDataSourcesTable()
+        {
+            var table = Data.Tables.OfType<XmlDbDataSourceTableDef>().FirstOrDefault();
+            if (table == null)
+            {
+                table = new XmlDbDataSourceTableDef();
                 Data.Tables.Add(table);
             }
             return table;
