@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Assets
+namespace OpenBreed.Common.DataSources
 {
-    public interface IFileAssetEntry : IAssetEntry
+    public interface IFileDataSourceEntry : IDataSourceEntry
     {
         #region Public Properties
 

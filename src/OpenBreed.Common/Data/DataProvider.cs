@@ -19,6 +19,7 @@ namespace OpenBreed.Common.Data
         {
             UnitOfWork = unitOfWork;
 
+            DataSources = new DataSourceProvider(this);
             TileSets = new TileSetsDataProvider(this);
             SpriteSets = new SpriteSetsDataProvider(this);
             ActionSets = new ActionSetsDataProvider(this);
@@ -36,6 +37,7 @@ namespace OpenBreed.Common.Data
 
         #region Public Properties
 
+        public DataSourceProvider DataSources { get; }
         public ActionSetsDataProvider ActionSets { get; }
         public AssetsDataProvider Assets { get; }
         public DataFormatMan FormatMan { get; } = new DataFormatMan();

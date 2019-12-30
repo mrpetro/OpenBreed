@@ -1,117 +1,154 @@
 <?xml version="1.0"?>
 <Database>
   <Tables>
+    <DataSources>
+      <Items>
+        <FileDataSource Id="DataSources.L0MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L0MA" />
+        <FileDataSource Id="DataSources.L1MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L1MA" />
+        <FileDataSource Id="DataSources.L2MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L2MA" />
+        <FileDataSource Id="DataSources.L3MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L3MA" />
+        <FileDataSource Id="DataSources.L4MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L4MA" />
+        <FileDataSource Id="DataSources.L5MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L5MA" />
+        <FileDataSource Id="DataSources.L6MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L6MA" />
+        <FileDataSource Id="DataSources.L7MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L7MA" />
+        <FileDataSource Id="DataSources.L8MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L8MA" />
+        <FileDataSource Id="DataSources.L9MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L9MA" />
+        <FileDataSource Id="DataSources.LAMA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LAMA" />
+        <FileDataSource Id="DataSources.LBMA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LBMA" />
+        <FileDataSource Id="DataSources.LABM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LABM" />
+        <FileDataSource Id="DataSources.LBBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LBBM" />
+        <FileDataSource Id="DataSources.LCBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LCBM" />
+        <FileDataSource Id="DataSources.LDBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LDBM" />
+        <FileDataSource Id="DataSources.LEBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LEBM" />
+        <FileDataSource Id="DataSources.LFBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LFBM" />
+        <FileDataSource Id="DataSources.LP01" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP01" />
+        <FileDataSource Id="DataSources.LP01B" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP01B" />
+        <FileDataSource Id="DataSources.LP02" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP02" />
+        <FileDataSource Id="DataSources.LP03" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP03" />
+        <FileDataSource Id="DataSources.LP04" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP04" />
+        <FileDataSource Id="DataSources.LP05" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP05" />
+        <FileDataSource Id="DataSources.LP06" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP06" />
+        <FileDataSource Id="DataSources.LP07" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP07" />
+        <FileDataSource Id="DataSources.L0AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L0AN" />
+        <FileDataSource Id="DataSources.L1AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L1AN" />
+        <FileDataSource Id="DataSources.L2AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L2AN" />
+        <FileDataSource Id="DataSources.L3AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L3AN" />
+        <FileDataSource Id="DataSources.L4AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L4AN" />
+        <FileDataSource Id="DataSources.L5AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L5AN" />
+        <FileDataSource Id="DataSources.PARTF" FilePath="%Cfg.Options.ABSE.GameFolderPath%\PARTF" />
+      </Items>
+    </DataSources>
     <Assets>
       <Items>
-        <FileAsset Id="Assets.L0MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L0MA">
+        <Asset Id="Assets.L0MA" DataSourceRef="DataSources.L0MA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.L1MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L1MA">
+        </Asset>
+        <Asset Id="Assets.L1MA" DataSourceRef="DataSources.L1MA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.L2MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L2MA">
+        </Asset>
+        <Asset Id="Assets.L2MA" DataSourceRef="DataSources.L2MA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.L3MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L3MA">
+        </Asset>
+        <Asset Id="Assets.L3MA" DataSourceRef="DataSources.L3MA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.L4MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L4MA">
+        </Asset>
+        <Asset Id="Assets.L4MA" DataSourceRef="DataSources.L4MA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.L5MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L5MA">
+        </Asset>
+        <Asset Id="Assets.L5MA" DataSourceRef="DataSources.L5MA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.L6MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L6MA">
+        </Asset>
+        <Asset Id="Assets.L6MA" DataSourceRef="DataSources.L6MA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.L7MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L7MA">
+        </Asset>
+        <Asset Id="Assets.L7MA" DataSourceRef="DataSources.L7MA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.L8MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L8MA">
+        </Asset>
+        <Asset Id="Assets.L8MA" DataSourceRef="DataSources.L8MA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.L9MA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L9MA">
+        </Asset>
+        <Asset Id="Assets.L9MA" DataSourceRef="DataSources.L9MA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.LAMA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LAMA">
+        </Asset>
+        <Asset Id="Assets.LAMA" DataSourceRef="DataSources.LAMA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.LBMA" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LBMA">
+        </Asset>
+        <Asset Id="Assets.LBMA" DataSourceRef="DataSources.LBMA">
           <Format Name="ABSE_MAP">
             <Parameters />
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.LABM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LABM">
+        </Asset>
+        <Asset Id="Assets.LABM" DataSourceRef="DataSources.LABM">
           <Format Name="ACBM_TILE_SET">
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
             </Parameters>
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.LBBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LBBM">
+        </Asset>
+        <Asset Id="Assets.LBBM" DataSourceRef="DataSources.LBBM">
           <Format Name="ACBM_TILE_SET">
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
             </Parameters>
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.LCBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LCBM">
+        </Asset>
+        <Asset Id="Assets.LCBM" DataSourceRef="DataSources.LCBM">
           <Format Name="ACBM_TILE_SET">
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
             </Parameters>
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.LDBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LDBM">
+        </Asset>
+        <Asset Id="Assets.LDBM" DataSourceRef="DataSources.LDBM">
           <Format Name="ACBM_TILE_SET">
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
             </Parameters>
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.LEBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LEBM">
+        </Asset>
+        <Asset Id="Assets.LEBM" DataSourceRef="DataSources.LEBM">
           <Format Name="ACBM_TILE_SET">
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
             </Parameters>
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.LFBM" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LFBM">
+        </Asset>
+        <Asset Id="Assets.LFBM" DataSourceRef="DataSources.LFBM">
           <Format Name="ACBM_TILE_SET">
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
             </Parameters>
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.LP01" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP01">
+        </Asset>
+        <Asset Id="Assets.LP01" DataSourceRef="DataSources.LP01">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">640</Parameter>
@@ -120,8 +157,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
             </Parameters>
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.LP01B" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP01B">
+        </Asset>
+        <Asset Id="Assets.LP01B" DataSourceRef="DataSources.LP01B">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -130,8 +167,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
             </Parameters>
           </Format> 
-        </FileAsset>
-        <FileAsset Id="Assets.LP02" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP02">
+        </Asset>
+        <Asset Id="Assets.LP02" DataSourceRef="DataSources.LP02">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -140,8 +177,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
             </Parameters>
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.LP03" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP03">
+        </Asset>
+        <Asset Id="Assets.LP03" DataSourceRef="DataSources.LP03">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -150,8 +187,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
             </Parameters>
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.LP04" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP04">
+        </Asset>
+        <Asset Id="Assets.LP04" DataSourceRef="DataSources.LP04">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -160,8 +197,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
             </Parameters>
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.LP05" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP05">
+        </Asset>
+        <Asset Id="Assets.LP05" DataSourceRef="DataSources.LP05">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -170,8 +207,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
             </Parameters>
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.LP06" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP06">
+        </Asset>
+        <Asset Id="Assets.LP06" DataSourceRef="DataSources.LP06">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -180,8 +217,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
             </Parameters>
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.LP07" FilePath="%Cfg.Options.ABSE.GameFolderPath%\LP07">
+        </Asset>
+        <Asset Id="Assets.LP07" DataSourceRef="DataSources.LP07">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -190,8 +227,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">16BIT</Parameter>
             </Parameters>
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.L0AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L0AN">
+        </Asset>
+        <Asset Id="Assets.L0AN" DataSourceRef="DataSources.L0AN">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -200,8 +237,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.L1AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L1AN">
+        </Asset>
+        <Asset Id="Assets.L1AN" DataSourceRef="DataSources.L1AN">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -210,8 +247,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.L2AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L2AN">
+        </Asset>
+        <Asset Id="Assets.L2AN" DataSourceRef="DataSources.L2AN">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -220,8 +257,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.L3AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L3AN">
+        </Asset>
+        <Asset Id="Assets.L3AN" DataSourceRef="DataSources.L3AN">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -230,8 +267,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.L4AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L4AN">
+        </Asset>
+        <Asset Id="Assets.L4AN" DataSourceRef="DataSources.L4AN">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -240,8 +277,8 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.L5AN" FilePath="%Cfg.Options.ABSE.GameFolderPath%\L5AN">
+        </Asset>
+        <Asset Id="Assets.L5AN" DataSourceRef="DataSources.L5AN">
           <Format Name="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
@@ -250,12 +287,12 @@
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
           </Format>
-        </FileAsset>
-        <FileAsset Id="Assets.PARTF" FilePath="%Cfg.Options.ABSE.GameFolderPath%\PARTF">
+        </Asset>
+        <Asset Id="Assets.PARTF" DataSourceRef="DataSources.PARTF">
           <Format Name="BINARY">
             <Parameters />
           </Format>
-        </FileAsset>
+        </Asset>
       </Items>
     </Assets>
     <Images>

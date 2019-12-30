@@ -1,34 +1,12 @@
-﻿using OpenBreed.Common.XmlDatabase;
-using OpenBreed.Common.XmlDatabase.Items.Maps;
-using OpenBreed.Common.XmlDatabase.Items.Palettes;
-using OpenBreed.Common.XmlDatabase.Items.Actions;
-using OpenBreed.Common.XmlDatabase.Items.Assets;
-using OpenBreed.Common.XmlDatabase.Items.Sprites;
-using OpenBreed.Common.XmlDatabase.Items.Tiles;
-using OpenBreed.Common.XmlDatabase.Tables;
-using OpenBreed.Common.XmlDatabase.Tables.Maps;
-using OpenBreed.Common.XmlDatabase.Tables.Palettes;
-using OpenBreed.Common.XmlDatabase.Tables.Actions;
-using OpenBreed.Common.XmlDatabase.Tables.Assets;
-using OpenBreed.Common.XmlDatabase.Tables.Sprites;
-using OpenBreed.Common.XmlDatabase.Tables.Tiles;
-using OpenBreed.Common.Images;
-using OpenBreed.Common.Palettes;
-using OpenBreed.Common.Actions;
-using OpenBreed.Common.Sprites;
-using OpenBreed.Common.Tiles;
+﻿using OpenBreed.Common.XmlDatabase.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenBreed.Common.XmlDatabase.Repositories;
 
 namespace OpenBreed.Common.XmlDatabase
 {
     internal class XmlUnitOfWork : IUnitOfWork
     {
-
         #region Private Fields
 
         private readonly XmlDatabaseMan _context;
@@ -98,18 +76,18 @@ namespace OpenBreed.Common.XmlDatabase
 
         private void RegisterRepos()
         {
+            RegisterRepository(new XmlDataSourcesRepository(_context));
             RegisterRepository(new XmlAssetsRepository(_context));
             RegisterRepository(new XmlTileSetsRepository(_context));
             RegisterRepository(new XmlSpriteSetsRepository(_context));
             RegisterRepository(new XmlActionSetsRepository(_context));
             RegisterRepository(new XmlImagesRepository(_context));
-            RegisterRepository(new XmlPalettesRepository( _context));
+            RegisterRepository(new XmlPalettesRepository(_context));
             RegisterRepository(new XmlTextsRepository(_context));
             RegisterRepository(new XmlMapsRepository(_context));
             RegisterRepository(new XmlSoundsRepository(_context));
         }
 
         #endregion Private Methods
-
     }
 }

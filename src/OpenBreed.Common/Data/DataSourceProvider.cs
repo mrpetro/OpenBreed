@@ -1,5 +1,6 @@
 ﻿using EPF;
 using OpenBreed.Common.Assets;
+using OpenBreed.Common.DataSources;
 using OpenBreed.Common.Helpers;
 using System;
 using System.Collections.Generic;
@@ -10,19 +11,21 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Data
 {
-    public class AssetsDataProvider
+    public delegate string ExpandVariablesDelegate(string text);
+
+    public class DataSourceProvider
     {
 
         #region Private Fields
 
-        private readonly Dictionary<string, AssetBase> _openedAssets = new Dictionary<string, AssetBase>();
+        private readonly Dictionary<string, DataSourceBase> _openedDataSources = new Dictionary<string, DataSourceBase>();
         private Dictionary<string, EPFArchive> _openedArchives = new Dictionary<string, EPFArchive>();
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public AssetsDataProvider(DataProvider dataProvider)
+        public DataSourceProvider(DataProvider dataProvider)
         {
             DataProvider = dataProvider;
         }
@@ -31,25 +34,27 @@ namespace OpenBreed.Common.Data
 
         #region Public Properties
 
+        public static ExpandVariablesDelegate ExpandVariables { get; set; }
+
         public DataProvider DataProvider { get; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public AssetBase GetAsset(string name)
+        public DataSourceBase GetDataSource(string name)
         {
-            AssetBase asset = null;
-            if (_openedAssets.TryGetValue(name, out asset))
-                return asset;
+            DataSourceBase ds = null;
+            if (_openedDataSources.TryGetValue(name, out ds))
+                return ds;
 
-            var entry = DataProvider.UnitOfWork.GetRepository<IAssetEntry>().GetById(name);
+            var entry = DataProvider.UnitOfWork.GetRepository<IDataSourceEntry>().GetById(name);
             if (entry == null)
-                throw new Exception($"Asset error: {name}");
+                throw new Exception($"Data source error: {name}");
 
-            asset = CreateAsset(entry);
+            ds = CreateDataSource(entry);
 
-            return asset;
+            return ds;
         }
 
         #endregion Public Methods
@@ -81,42 +86,44 @@ namespace OpenBreed.Common.Data
             return archive;
         }
 
-        internal void LockSource(AssetBase source)
+        internal void LockDataSource(DataSourceBase ds)
         {
-            _openedAssets.Add(source.Id, source);
+            _openedDataSources.Add(ds.Id, ds);
         }
 
-        internal void ReleaseSource(AssetBase source)
+        internal void ReleaseDataSource(DataSourceBase ds)
         {
-            _openedAssets.Remove(source.Id);
+            _openedDataSources.Remove(ds.Id);
         }
 
         internal void Save()
         {
             foreach (var openedArchive in _openedArchives)
-            {
-                //if (openedArchive.Value.IsModified)
                     openedArchive.Value.Save();
-            }
         }
 
         #endregion Internal Methods
 
         #region Private Methods
 
-        private AssetBase CreateAsset(IAssetEntry assetEntry)
+        private DataSourceBase CreateDataSource(IDataSourceEntry dsEntry)
         {
-            var formatType = DataProvider.FormatMan.GetFormatType(assetEntry.Format.Name);
+            if (dsEntry is IFileDataSourceEntry)
+                return CreateFileDataSource((IFileDataSourceEntry)dsEntry);
+            else if (dsEntry is IEPFArchiveDataSourceEntry)
+                return CreateEPFArchiveDataSource((IEPFArchiveDataSourceEntry)dsEntry);
+            else
+                throw new NotImplementedException("Unknown sourceDef");
+        }
 
-            if (formatType == null)
-                throw new Exception($"Unknown format {assetEntry.Format.Name}");
+        private DataSourceBase CreateEPFArchiveDataSource(IEPFArchiveDataSourceEntry dsEntry)
+        {
+            return new EPFArchiveFileDataSource(this, dsEntry.Id, dsEntry.ArchivePath, dsEntry.EntryName);
+        }
 
-            var ds = DataProvider.DataSources.GetDataSource(assetEntry.DataSourceRef);
-
-            if (ds == null)
-                throw new Exception($"Unknown DataSourceRef {assetEntry.DataSourceRef}");
-
-            return new AssetBase(this, assetEntry.Id, ds, formatType, assetEntry.Format.Parameters);
+        private DataSourceBase CreateFileDataSource(IFileDataSourceEntry dsEntry)
+        {
+            return new FileDataSource(this, dsEntry.Id, dsEntry.FilePath);
         }
 
         #endregion Private Methods

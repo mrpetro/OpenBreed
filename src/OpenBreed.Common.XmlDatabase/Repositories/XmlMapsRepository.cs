@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Common.Maps;
 using OpenBreed.Common.XmlDatabase.Items.Maps;
-using OpenBreed.Common.XmlDatabase.Tables.Maps;
+using OpenBreed.Common.XmlDatabase.Tables;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Common.Texts;
 using OpenBreed.Common.XmlDatabase.Items.Texts;
-using OpenBreed.Common.XmlDatabase.Tables.Texts;
+using OpenBreed.Common.XmlDatabase.Tables;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -7,26 +7,26 @@ using OpenBreed.Common.Formats;
 using OpenBreed.Common.Logging;
 using System.ComponentModel;
 using System.Globalization;
-using OpenBreed.Common.Assets;
+using OpenBreed.Common.DataSources;
 using OpenBreed.Common.XmlDatabase.Tables;
-using OpenBreed.Common.XmlDatabase.Items.Assets;
+using OpenBreed.Common.XmlDatabase.Items.DataSources;
 
 namespace OpenBreed.Common.XmlDatabase.Repositories
 {
-    public class XmlAssetsRepository : XmlRepositoryBase, IRepository<IAssetEntry>
+    public class XmlDataSourcesRepository : XmlRepositoryBase, IRepository<IDataSourceEntry>
     {
 
         #region Private Fields
 
-        private readonly XmlDbAssetTableDef _table;
+        private readonly XmlDbDataSourceTableDef _table;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public XmlAssetsRepository(XmlDatabaseMan context) : base(context)
+        public XmlDataSourcesRepository(XmlDatabaseMan context) : base(context)
         {
-            _table = context.GetAssetsTable();
+            _table = context.GetDataSourcesTable();
 
 
         }
@@ -36,13 +36,14 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
         #region Public Properties
 
         public IEnumerable<IEntry> Entries { get { return _table.Items; } }
-        public string Name { get { return "Assets"; } }
+        public string Name { get { return "Data sources"; } }
 
         public IEnumerable<Type> EntryTypes
         {
             get
             {
-                yield return typeof(XmlAssetEntry);
+                yield return typeof(XmlFileDataSourceEntry);
+                yield return typeof(XmlEPFArchiveFileDataSourceEntry);
             }
         }
 
@@ -50,7 +51,7 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         #region Public Methods
 
-        public void Add(IAssetEntry entity)
+        public void Add(IDataSourceEntry entity)
         {
             throw new NotImplementedException();
         }
@@ -60,18 +61,18 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             return _table.Items.FirstOrDefault(item => item.Id == id);
         }
 
-        public IAssetEntry GetById(string id)
+        public IDataSourceEntry GetById(string id)
         {
             var assetDef = _table.Items.FirstOrDefault(item => item.Id == id);
             if (assetDef == null)
-                throw new Exception("No Asset definition found with Id: " + id);
+                throw new Exception("No Data source definition found with Id: " + id);
 
             return assetDef;
         }
 
-        public IAssetEntry GetNextTo(IAssetEntry entry)
+        public IDataSourceEntry GetNextTo(IDataSourceEntry entry)
         {
-            var index = _table.Items.IndexOf((XmlAssetEntry)entry);
+            var index = _table.Items.IndexOf((XmlDataSourceEntry)entry);
             if (index < 0)
                 throw new InvalidOperationException($"{entry} not found in repository");
 
@@ -83,9 +84,9 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
                 return _table.Items[index];
         }
 
-        public IAssetEntry GetPreviousTo(IAssetEntry entry)
+        public IDataSourceEntry GetPreviousTo(IDataSourceEntry entry)
         {
-            var index = _table.Items.IndexOf((XmlAssetEntry)entry);
+            var index = _table.Items.IndexOf((XmlDataSourceEntry)entry);
             if (index < 0)
                 throw new InvalidOperationException($"{entry} not found in repository");
 
@@ -105,24 +106,24 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
             if (entryType == null)
                 entryType = EntryTypes.FirstOrDefault();
 
-            var newEntry = Create(entryType) as XmlAssetEntry;
+            var newEntry = Create(entryType) as XmlDataSourceEntry;
 
             newEntry.Id = newId;
             _table.Items.Add(newEntry);
             return newEntry;
         }
-        public void Remove(IAssetEntry entry)
+        public void Remove(IDataSourceEntry entry)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(IAssetEntry entry)
+        public void Update(IDataSourceEntry entry)
         {
-            var index = _table.Items.IndexOf((XmlAssetEntry)entry);
+            var index = _table.Items.IndexOf((XmlDataSourceEntry)entry);
             if (index < 0)
                 throw new InvalidOperationException($"{entry} not found in repository");
 
-            _table.Items[index] = (XmlAssetEntry)entry;
+            _table.Items[index] = (XmlDataSourceEntry)entry;
         }
 
         #endregion Public Methods

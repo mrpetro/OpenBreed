@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Images;
-using OpenBreed.Common.XmlDatabase.Tables.Images;
+using OpenBreed.Common.XmlDatabase.Tables;
 using OpenBreed.Common.Sounds;
 using OpenBreed.Common.XmlDatabase.Items.Sounds;
 
