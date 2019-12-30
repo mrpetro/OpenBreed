@@ -1,6 +1,6 @@
-﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Assets
+﻿namespace OpenBreed.Editor.UI.WinForms.Controls.DataSources
 {
-    partial class AssetEditorCtrl
+    partial class DataSourceEditorCtrl
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,11 +30,11 @@
         {
             this.SuspendLayout();
             // 
-            // AssetEditorCtrl
+            // DataSourceEditorCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "AssetEditorCtrl";
+            this.Name = "DataSourceEditorCtrl";
             this.Size = new System.Drawing.Size(484, 373);
             this.ResumeLayout(false);
 

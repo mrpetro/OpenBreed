@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Assets;
 
-namespace OpenBreed.Editor.VM.Assets
+namespace OpenBreed.Editor.VM.DataSources
 {
-    public class AssetVM : EditableEntryVM
+    public class DataSourceVM : EditableEntryVM
     {
         #region Public Constructors
 
-        public AssetVM()
+        public DataSourceVM()
         {
         }
 

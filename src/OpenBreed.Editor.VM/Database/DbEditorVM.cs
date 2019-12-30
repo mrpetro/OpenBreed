@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.XmlDatabase;
-using OpenBreed.Editor.VM.Assets;
+using OpenBreed.Editor.VM.DataSources;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Database.Entries;
 using OpenBreed.Editor.VM.Images;

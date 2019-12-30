@@ -1,6 +1,6 @@
-﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Assets
+﻿namespace OpenBreed.Editor.UI.WinForms.Controls.DataSources
 {
-    partial class FileAssetCtrl
+    partial class FileDataSourceCtrl
     {
         /// <summary> 
         /// Required designer variable.
@@ -76,12 +76,12 @@
             this.lblFilePath.TabIndex = 4;
             this.lblFilePath.Text = "File path:";
             // 
-            // FileAssetCtrl
+            // FileDataSourceCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.grpFilePath);
-            this.Name = "FileAssetCtrl";
+            this.Name = "FileDataSourceCtrl";
             this.Size = new System.Drawing.Size(381, 46);
             this.grpFilePath.ResumeLayout(false);
             this.grpFilePath.PerformLayout();

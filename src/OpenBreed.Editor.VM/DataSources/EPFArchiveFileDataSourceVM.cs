@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Assets;
+using OpenBreed.Common.DataSources;
 using OpenBreed.Common.XmlDatabase.Items.Assets;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Editor.VM.Assets
+namespace OpenBreed.Editor.VM.DataSources
 {
-    public class EPFArchiveFileAssetVM : AssetVM
+    public class EPFArchiveFileDataSourceVM : DataSourceVM
     {
 
         #region Private Fields
@@ -40,26 +41,26 @@ namespace OpenBreed.Editor.VM.Assets
         internal override void FromEntry(IEntry entry)
         {
             base.FromEntry(entry);
-            FromEntry((IEPFArchiveAssetEntry)entry);
+            FromEntry((IEPFArchiveDataSourceEntry)entry);
         }
 
         internal override void ToEntry(IEntry entry)
         {
             base.ToEntry(entry);
-            ToEntry((IEPFArchiveAssetEntry)entry);
+            ToEntry((IEPFArchiveDataSourceEntry)entry);
         }
 
         #endregion Internal Methods
 
         #region Private Methods
 
-        private void FromEntry(IEPFArchiveAssetEntry entry)
+        private void FromEntry(IEPFArchiveDataSourceEntry entry)
         {
             ArchivePath = entry.ArchivePath;
             EntryName = entry.EntryName;
         }
 
-        private void ToEntry(IEPFArchiveAssetEntry entry)
+        private void ToEntry(IEPFArchiveDataSourceEntry entry)
         {
             entry.ArchivePath = ArchivePath;
             entry.EntryName = EntryName;

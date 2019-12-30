@@ -1,17 +1,10 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Assets;
-using OpenBreed.Common.XmlDatabase.Items.Assets;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OpenBreed.Common.DataSources;
 
-namespace OpenBreed.Editor.VM.Assets
+namespace OpenBreed.Editor.VM.DataSources
 {
-    public class FileAssetVM : AssetVM
+    public class FileDataSourceVM : DataSourceVM
     {
-
         #region Private Fields
 
         private string _filePath;
@@ -33,30 +26,29 @@ namespace OpenBreed.Editor.VM.Assets
         internal override void FromEntry(IEntry entry)
         {
             base.FromEntry(entry);
-            FromEntry((IFileAssetEntry)entry);
+            FromEntry((IFileDataSourceEntry)entry);
         }
 
         internal override void ToEntry(IEntry entry)
         {
             base.ToEntry(entry);
-            ToEntry((IFileAssetEntry)entry);
+            ToEntry((IFileDataSourceEntry)entry);
         }
 
         #endregion Internal Methods
 
         #region Private Methods
 
-        private void FromEntry(IFileAssetEntry source)
+        private void FromEntry(IFileDataSourceEntry source)
         {
             FilePath = source.FilePath;
         }
 
-        private void ToEntry(IFileAssetEntry source)
+        private void ToEntry(IFileDataSourceEntry source)
         {
             source.FilePath = FilePath;
         }
 
         #endregion Private Methods
-
     }
 }

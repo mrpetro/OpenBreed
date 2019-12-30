@@ -28,7 +28,7 @@ using OpenBreed.Common.XmlDatabase;
 using OpenBreed.Common.Sounds;
 using OpenBreed.Editor.VM.Sounds;
 using OpenBreed.Editor.VM.Database.Entries;
-using OpenBreed.Editor.VM.Assets;
+using OpenBreed.Editor.VM.DataSources;
 using OpenBreed.Common.Images;
 using OpenBreed.Common.Maps;
 using OpenBreed.Common.Assets;
@@ -36,6 +36,7 @@ using OpenBreed.Common.Data;
 using OpenBreed.Editor.VM.Logging;
 using OpenBreed.Common.Texts;
 using OpenBreed.Editor.VM.Texts;
+using OpenBreed.Common.DataSources;
 
 namespace OpenBreed.Editor.VM
 {
@@ -72,7 +73,7 @@ namespace OpenBreed.Editor.VM
             entryEditorFactory.Register<IRepository<IImageEntry>, ImageEditorVM>();
             entryEditorFactory.Register<IRepository<ISoundEntry>, SoundEditorVM>();
             entryEditorFactory.Register<IRepository<IMapEntry>, MapEditorVM>();
-            entryEditorFactory.Register<IRepository<IAssetEntry>, AssetEditorVM>();
+            entryEditorFactory.Register<IRepository<IDataSourceEntry>, DataSourceEditorVM>();
             ServiceLocator.Instance.RegisterService<DbEntryEditorFactory>(entryEditorFactory);
 
             ServiceLocator.Instance.RegisterService<DbTableFactory>(new DbTableFactory());
@@ -87,7 +88,7 @@ namespace OpenBreed.Editor.VM
             DbEditor = new DbEditorVM();
             //PaletteEditor = new PaletteEditorVM();
             //SpriteViewer = new SpriteViewerVM(this);
-            AssetsDataProvider.ExpandVariables = Settings.ExpandVariables;
+            DataSourceProvider.ExpandVariables = Settings.ExpandVariables;
         }
 
         #endregion Public Constructors

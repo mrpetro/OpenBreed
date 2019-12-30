@@ -1,43 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OpenBreed.Editor.VM;
-using OpenBreed.Common.Assets;
-using OpenBreed.Editor.VM.Tiles;
-using OpenBreed.Editor.VM.Maps;
-using OpenBreed.Editor.VM.Actions;
-using OpenBreed.Editor.VM.Tools;
+﻿using OpenBreed.Common;
 using OpenBreed.Editor.VM.Base;
-using System.IO;
-using OpenBreed.Common;
-using OpenBreed.Editor.VM.Database;
-using OpenBreed.Editor.VM.Database.Entries;
-using OpenBreed.Common.XmlDatabase;
-using System.ComponentModel;
-using OpenBreed.Common.XmlDatabase.Items.Assets;
-using OpenBreed.Common.XmlDatabase.Tables.Assets;
-using OpenBreed.Common.XmlDatabase.Items.Maps;
-using OpenBreed.Common.XmlDatabase.Items.Images;
-using OpenBreed.Common.XmlDatabase.Tables;
-using OpenBreed.Common.XmlDatabase.Tables.Images;
-using OpenBreed.Editor.VM.Database.Tables;
-using OpenBreed.Common.XmlDatabase.Tables.Maps;
-using OpenBreed.Common.XmlDatabase.Tables.Actions;
-using OpenBreed.Common.XmlDatabase.Items.Actions;
-using OpenBreed.Common.XmlDatabase.Items.Tiles;
-using OpenBreed.Common.XmlDatabase.Tables.Tiles;
-using OpenBreed.Common.XmlDatabase.Items.Sprites;
-using OpenBreed.Common.XmlDatabase.Tables.Sprites;
-using OpenBreed.Common.XmlDatabase.Items.Palettes;
-using OpenBreed.Common.XmlDatabase.Tables.Palettes;
-using OpenBreed.Common.Images;
-using OpenBreed.Common.Maps;
-using OpenBreed.Common.Actions;
-using OpenBreed.Common.Tiles;
-using OpenBreed.Common.Sprites;
-using OpenBreed.Common.Palettes;
-using OpenBreed.Common.Sounds;
+using System;
+using System.Collections.Generic;
 
 namespace OpenBreed.Editor.VM.Database
 {
@@ -51,7 +15,6 @@ namespace OpenBreed.Editor.VM.Database
 
     public class DatabaseVM : BaseViewModel, IDisposable
     {
-
         #region Private Fields
 
         private string _name;
@@ -70,6 +33,7 @@ namespace OpenBreed.Editor.VM.Database
         #region Public Properties
 
         public bool IsModified { get; internal set; }
+
         public string Name
         {
             get { return _name; }
@@ -82,11 +46,15 @@ namespace OpenBreed.Editor.VM.Database
             set { SetProperty(ref _state, value); }
         }
 
+        #endregion Public Properties
+
+        #region Public Methods
+
         public void Dispose()
         {
         }
 
-        #endregion Public Properties
+        #endregion Public Methods
 
         #region Internal Methods
 
@@ -99,6 +67,5 @@ namespace OpenBreed.Editor.VM.Database
         }
 
         #endregion Internal Methods
-
     }
 }
