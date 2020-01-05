@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using OpenBreed.Common;
 using OpenBreed.Common.Logging;
+using OpenBreed.Common.Helpers;
 
 namespace OpenBreed.Editor.Cfg
 {
@@ -26,7 +27,7 @@ namespace OpenBreed.Editor.Cfg
         private SettingsCfg GetDefault()
         {
             string defaultCfgPath = Path.Combine(ProgramTools.AppDir, DEFAULT_CFG_PATH);
-            return Other.RestoreFromXml<SettingsCfg>(defaultCfgPath);
+            return XmlHelper.RestoreFromXml<SettingsCfg>(defaultCfgPath);
         }
 
         private void RegisterVariables()
@@ -73,7 +74,7 @@ namespace OpenBreed.Editor.Cfg
 
                 if (File.Exists(cfgPath))
                 {
-                    Cfg = Other.RestoreFromXml<SettingsCfg>(cfgPath);
+                    Cfg = XmlHelper.RestoreFromXml<SettingsCfg>(cfgPath);
                     LogMan.Instance.Success("Settings configuration restored.");
                 }
                 else
@@ -95,7 +96,7 @@ namespace OpenBreed.Editor.Cfg
             try
             {
                 string cfgPath = Path.Combine(ProgramTools.AppProductDataDir, CFG_FILE_NAME);
-                Other.StoreAsXml<SettingsCfg>(cfgPath, Cfg, true);
+                XmlHelper.StoreAsXml<SettingsCfg>(cfgPath, Cfg, true);
 
                 LogMan.Instance.Success("Settings configuration stored.");
             }

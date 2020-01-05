@@ -71,20 +71,15 @@ namespace OpenBreed.Editor.VM.Sprites
                 throw new NotImplementedException();
         }
 
-        protected override void UpdateEntry(SpriteSetVM source, ISpriteSetEntry target)
+        protected override void UpdateEntry(SpriteSetVM source, ISpriteSetEntry entry)
         {
-            base.UpdateEntry(source, target);
+            base.UpdateEntry(source, entry);
         }
 
-        protected override void UpdateVM(ISpriteSetEntry source, SpriteSetVM target)
+        protected override void UpdateVM(ISpriteSetEntry entry, SpriteSetVM target)
         {
-            var model = DataProvider.SpriteSets.GetSpriteSet(source.Id);
-
-            if (model != null)
-                target.FromModel(model);
-
-            SetupPaletteIds(source.PaletteRefs, target);
-            base.UpdateVM(source, target);
+            base.UpdateVM(entry, target);
+            SetupPaletteIds(entry.PaletteRefs, target);
         }
 
         #endregion Protected Methods

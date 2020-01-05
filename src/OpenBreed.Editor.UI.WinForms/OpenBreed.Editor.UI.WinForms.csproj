@@ -272,6 +272,18 @@
     <Compile Include="Controls\Sounds\SoundEditorCtrl.Designer.cs">
       <DependentUpon>SoundEditorCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Sprites\SpriteEditorViewCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Sprites\SpriteEditorViewCtrl.Designer.cs">
+      <DependentUpon>SpriteEditorViewCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Sprites\SpriteFromImageEditorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Sprites\SpriteFromImageEditorCtrl.Designer.cs">
+      <DependentUpon>SpriteFromImageEditorCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Sprites\SpriteSetFromImageCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -295,6 +307,12 @@
     </Compile>
     <Compile Include="Controls\Sprites\SpriteSetEditorCtrl.Designer.cs">
       <DependentUpon>SpriteSetEditorCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Sprites\SpriteSetViewCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Sprites\SpriteSetViewCtrl.Designer.cs">
+      <DependentUpon>SpriteSetViewCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Texts\TextEmbeddedCtrl.cs">
       <SubType>UserControl</SubType>
@@ -373,6 +391,11 @@
     <Compile Include="ControlExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SaveFileQuery.cs" />
     <Compile Include="Views\DbTablesEditorView.cs">
       <SubType>Form</SubType>
@@ -552,6 +575,12 @@
     <EmbeddedResource Include="Controls\Sounds\SoundEditorCtrl.resx">
       <DependentUpon>SoundEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Sprites\SpriteEditorViewCtrl.resx">
+      <DependentUpon>SpriteEditorViewCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Sprites\SpriteFromImageEditorCtrl.resx">
+      <DependentUpon>SpriteFromImageEditorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Sprites\SpriteSetFromImageCtrl.resx">
       <DependentUpon>SpriteSetFromImageCtrl.cs</DependentUpon>
     </EmbeddedResource>
@@ -563,6 +592,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Sprites\SpriteSetEditorCtrl.resx">
       <DependentUpon>SpriteSetEditorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Sprites\SpriteSetViewCtrl.resx">
+      <DependentUpon>SpriteSetViewCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Texts\TextEmbeddedCtrl.resx">
       <DependentUpon>TextEmbeddedCtrl.cs</DependentUpon>
@@ -596,6 +628,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MapPropertiesCtrl.resx">
       <DependentUpon>MapPropertiesCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\DbTablesEditorView.resx">
       <DependentUpon>DbTablesEditorView.cs</DependentUpon>

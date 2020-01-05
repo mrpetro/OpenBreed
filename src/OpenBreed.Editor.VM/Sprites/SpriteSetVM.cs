@@ -1,13 +1,9 @@
-﻿using OpenBreed.Common.Data;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Common.Drawing;
 using OpenBreed.Common.Palettes;
 using OpenBreed.Common.Sprites;
-using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM.Palettes;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
@@ -32,13 +28,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Public Properties
 
-        public BindingList<SpriteVM> Items { get; private set; }
-
-
-        internal virtual void FromModel(SpriteSetModel spriteSet)
-        {
-
-        }
+        public BindingList<SpriteVM> Items { get; }
 
         public PaletteModel Palette
         {
@@ -50,17 +40,6 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Internal Methods
 
-        internal void SetupSprites(List<SpriteModel> sprites)
-        {
-            Items.UpdateAfter(() =>
-            {
-                Items.Clear();
-
-                foreach (var sprite in sprites)
-                    Items.Add(SpriteVM.Create(sprite));
-            });
-        }
-
         #endregion Internal Methods
 
         #region Private Methods
@@ -71,7 +50,7 @@ namespace OpenBreed.Editor.VM.Sprites
             {
                 case nameof(Palette):
                     foreach (var item in Items)
-                        BitmapHelper.SetPaletteColors(item.Bitmap, Palette.Data);
+                        BitmapHelper.SetPaletteColors(item.Image, Palette.Data);
                     break;
 
                 default:

@@ -145,8 +145,10 @@
     <Compile Include="Renderer\TilesToolRenderer.cs" />
     <Compile Include="Renderer\ViewCursorRenderer.cs" />
     <Compile Include="Renderer\ViewRenderer.cs" />
+    <Compile Include="Sprites\SpriteFromImageEditorVM.cs" />
     <Compile Include="Sprites\SpriteSetEditorVM.cs" />
     <Compile Include="Sprites\SpriteSetFromImageVM.cs" />
+    <Compile Include="Sprites\SpriteFromImageVM.cs" />
     <Compile Include="Texts\TextEditorVM.cs" />
     <Compile Include="Texts\TextEmbeddedVM.cs" />
     <Compile Include="Texts\TextFromMapVM.cs" />

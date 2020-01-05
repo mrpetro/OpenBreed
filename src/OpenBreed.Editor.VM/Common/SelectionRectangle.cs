@@ -8,8 +8,8 @@ namespace OpenBreed.Editor.VM.Common
 {
     public class SelectionRectangle
     {
-        private Point m_SelectStartPos;
-        private Point m_SelectEndPos;
+        private Point selectStartPos;
+        private Point selectEndPos;
 
         public SelectionRectangle()
         {
@@ -17,33 +17,49 @@ namespace OpenBreed.Editor.VM.Common
 
         public void SetStart(Point coordinates)
         {
-            m_SelectStartPos = coordinates;
-            m_SelectEndPos = m_SelectStartPos;
+            selectStartPos = coordinates;
+            selectEndPos = selectStartPos;
         }
 
         public void Update(Point coordinates)
         {
-            m_SelectEndPos = coordinates;
+            selectEndPos = coordinates;
         }
 
         public void SetFinish(Point coordinates)
         {
-            m_SelectEndPos = coordinates;
+            selectEndPos = coordinates;
+        }
+
+        public Rectangle GetRectangle()
+        {
+            int startX = selectStartPos.X;
+            int startY = selectStartPos.Y;
+            int endX = selectEndPos.X;
+            int endY = selectEndPos.Y;
+
+            int xFrom = Math.Min(startX, endX);
+            int xTo = Math.Max(startX, endX);
+            int yFrom = Math.Min(startY, endY);
+            int yTo = Math.Max(startY, endY);
+
+            return new Rectangle(xFrom, yFrom, xTo - xFrom, yTo - yFrom);
+
         }
 
         public Rectangle GetRectangle(int size)
         {
-            int startX = m_SelectStartPos.X;
-            int startY = m_SelectStartPos.Y;
-            int endX = m_SelectEndPos.X;
-            int endY = m_SelectEndPos.Y;
+            int startX = selectStartPos.X;
+            int startY = selectStartPos.Y;
+            int endX = selectEndPos.X;
+            int endY = selectEndPos.Y;
 
-            if (m_SelectStartPos.X <= m_SelectEndPos.X)
+            if (selectStartPos.X <= selectEndPos.X)
                 endX++;
             else
                 startX++;
 
-            if (m_SelectStartPos.Y <= m_SelectEndPos.Y)
+            if (selectStartPos.Y <= selectEndPos.Y)
                 endY++;
             else
                 startY++;

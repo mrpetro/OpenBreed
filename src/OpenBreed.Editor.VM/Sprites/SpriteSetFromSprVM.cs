@@ -1,6 +1,8 @@
-﻿using OpenBreed.Common.Palettes;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Common.Sprites;
 using OpenBreed.Editor.VM.Base;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
@@ -40,14 +42,43 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #endregion Public Properties
 
+        #region Internal Methods
+
+        internal override void FromEntry(IEntry entry)
+        {
+            FromEntry((ISpriteSetFromSprEntry)entry);
+        }
+
+        #endregion Internal Methods
+
         #region Private Methods
 
+        private void FromEntry(ISpriteSetFromSprEntry entry)
+        {
+            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
 
-        internal override void FromModel(SpriteSetModel spriteSet)
+            var model = dataProvider.SpriteSets.GetSpriteSet(entry.Id);
+
+            if (model != null)
+                FromModel(model);
+        }
+
+        private void FromModel(SpriteSetModel spriteSet)
         {
             SetupSprites(spriteSet.Sprites);
 
             CurrentItem = Items.FirstOrDefault();
+        }
+
+        private void SetupSprites(List<SpriteModel> sprites)
+        {
+            Items.UpdateAfter(() =>
+            {
+                Items.Clear();
+
+                foreach (var sprite in sprites)
+                    Items.Add(SpriteVM.Create(sprite));
+            });
         }
 
         private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
