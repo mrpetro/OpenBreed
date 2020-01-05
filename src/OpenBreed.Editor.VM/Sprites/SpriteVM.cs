@@ -8,26 +8,26 @@ namespace OpenBreed.Editor.VM.Sprites
 {
     public class SpriteVM : BaseViewModel
     {
-
         #region Private Fields
 
-        private Bitmap _bitmap;
+        private Bitmap image;
 
-        private int _id;
+        private int id;
 
         #endregion Private Fields
 
         #region Public Properties
 
-        public Bitmap Bitmap
+        public Bitmap Image
         {
-            get { return _bitmap; }
-            set { SetProperty(ref _bitmap, value); }
+            get { return image; }
+            set { SetProperty(ref image, value); }
         }
-        public int ID
+
+        public int Id
         {
-            get { return _id; }
-            set { SetProperty(ref _id, value); }
+            get { return id; }
+            set { SetProperty(ref id, value); }
         }
 
         #endregion Public Properties
@@ -36,33 +36,41 @@ namespace OpenBreed.Editor.VM.Sprites
 
         public static SpriteVM Create(SpriteModel spriteModel)
         {
-            var bitmap = new Bitmap(spriteModel.Width, spriteModel.Height, PixelFormat.Format8bppIndexed);
+            var newSprite = new SpriteVM();
+            newSprite.FromModel(spriteModel);
+            return newSprite;
+        }
+
+        public void UpdateBitmap(int width, int height, byte[] data)
+        {
+            var bitmap = new Bitmap(width, height, PixelFormat.Format8bppIndexed);
 
             //Create a BitmapData and Lock all pixels to be written
-            BitmapData bmpData = bitmap.LockBits(new Rectangle(0, 0, spriteModel.Width, spriteModel.Height),
+            var bmpData = bitmap.LockBits(new Rectangle(0, 0, width, height),
                                                     ImageLockMode.WriteOnly, bitmap.PixelFormat);
 
             //Copy the data from the byte array into BitmapData.Scan0
-            Marshal.Copy(spriteModel.Data, 0, bmpData.Scan0, spriteModel.Data.Length);
+            Marshal.Copy(data, 0, bmpData.Scan0, data.Length);
 
             //Unlock the pixels
             bitmap.UnlockBits(bmpData);
+            Image = bitmap;
+        }
 
-            var newSprite = new SpriteVM();
-            newSprite.ID = spriteModel.Index;
-            newSprite.Bitmap = bitmap;
-            return newSprite;
+        public void FromModel(SpriteModel model)
+        {
+            UpdateBitmap(model.Width, model.Height, model.Data);
+            Id = model.Index;
         }
 
         public void Draw(Graphics gfx, float x, float y, int factor)
         {
-            int width = _bitmap.Width * factor;
-            int height = _bitmap.Height * factor;
+            int width = image.Width * factor;
+            int height = image.Height * factor;
 
-            gfx.DrawImage(_bitmap, (int)x, (int)y, width, height);
+            gfx.DrawImage(image, (int)x, (int)y, width, height);
         }
 
         #endregion Public Methods
-
     }
 }

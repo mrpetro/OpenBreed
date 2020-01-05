@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using OpenBreed.Editor.VM.Sprites;
+using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using OpenBreed.Editor.VM.Sprites;
-using OpenBreed.Common.Sprites;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
 {
     public partial class SpriteSetFromImageCtrl : UserControl
     {
-
         #region Private Fields
 
-        private SpriteSetFromImageVM _vm;
+        private SpriteSetFromImageVM vm;
 
         #endregion Private Fields
 
@@ -35,62 +29,68 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
 
         public void Initialize(SpriteSetFromImageVM vm)
         {
-            _vm = vm ?? throw new InvalidOperationException(nameof(vm));
+            this.vm = vm ?? throw new InvalidOperationException(nameof(vm));
 
-            numSpriteNo.DataBindings.Clear();
-            numSpriteNo.DataBindings.Add(nameof(numSpriteNo.Value), _vm, nameof(_vm.CurrentIndex), false, DataSourceUpdateMode.OnPropertyChanged);
+            SpriteEditor.Initialize(this.vm.SpriteEditor);
 
-            _vm.PropertyChanged += _vm_PropertyChanged;
-            pnlSprite.Paint += PnlSprite_Paint;
+            btnAddSprite.Click += (s, a) => vm.AddSprite();
+            btnRemoveSprite.Click += (s, a) => vm.RemoveSprite();
 
-            UpdateItems();
+            DGV.DataBindings.Add(nameof(DGV.CurrentRowIndex), vm, nameof(vm.CurrentSpriteIndex), false, DataSourceUpdateMode.OnPropertyChanged);
+            SetupDataGridView();
+        }
+
+        private void SetupDataGridView()
+        {
+            DGV.DataSource = null;
+
+            DGV.Columns.Clear();
+            DGV.RowHeadersVisible = false;
+            DGV.AllowUserToAddRows = false;
+            DGV.AllowUserToDeleteRows = false;
+            DGV.AllowUserToResizeRows = true;
+            DGV.MultiSelect = false;
+            DGV.AutoGenerateColumns = false;
+            DGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DGV.RowTemplate.Height = 64;
+
+            var idColumn = new DataGridViewTextBoxColumn();
+            idColumn.HeaderText = "Id";
+            idColumn.Name = "Id";
+            idColumn.DataPropertyName = "Id";
+            idColumn.MinimumWidth = 40;
+            idColumn.Width = 40;
+            idColumn.ReadOnly = true;
+            idColumn.Resizable = DataGridViewTriState.False;
+            DGV.Columns.Add(idColumn);
+
+            var imageColumn = new DataGridViewImageColumn();
+            imageColumn.HeaderText = "Image";
+            imageColumn.Name = "Image";
+            imageColumn.DataPropertyName = "Image";
+            imageColumn.ImageLayout = DataGridViewImageCellLayout.Normal;
+            imageColumn.DefaultCellStyle.BackColor = Color.Gray;
+            imageColumn.ReadOnly = true;
+            imageColumn.MinimumWidth = 50;
+            imageColumn.Width = 50;
+            imageColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            imageColumn.Resizable = DataGridViewTriState.False;
+            DGV.Columns.Add(imageColumn);
+
+            //var descriptionColumn = new DataGridViewTextBoxColumn();
+            //descriptionColumn.HeaderText = "Size";
+            //descriptionColumn.Name = "Description";
+            //descriptionColumn.DataPropertyName = "Description";
+            //descriptionColumn.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            //descriptionColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //descriptionColumn.ReadOnly = false;
+            //descriptionColumn.Resizable = DataGridViewTriState.False;
+            //DGV.Columns.Add(descriptionColumn);
+
+            DGV.DataSource = vm.Items;
         }
 
         #endregion Public Methods
-
-        #region Private Methods
-
-        private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case (nameof(_vm.CurrentItem)):
-                    pnlSprite.Invalidate();
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void PnlSprite_Paint(object sender, PaintEventArgs e)
-        {
-            if (_vm.CurrentItem != null)
-                _vm.CurrentItem.Draw(e.Graphics, 0, 0, 2);
-        }
-
-        private void SetNoSpriteSetState()
-        {
-            this.Visible = false;
-            numSpriteNo.Minimum = -1;
-            numSpriteNo.Maximum = -1;
-        }
-
-        private void SetSpriteSetState()
-        {
-            this.Visible = true;
-            numSpriteNo.Minimum = 0;
-            numSpriteNo.Maximum = _vm.Items.Count - 1;
-        }
-
-        void UpdateItems()
-        {
-            SetSpriteSetState();
-
-            Invalidate();
-            pnlSprite.Invalidate();
-        }
-
-        #endregion Private Methods
 
     }
 }

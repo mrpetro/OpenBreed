@@ -28,57 +28,117 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblSpriteNo = new System.Windows.Forms.Label();
-            this.numSpriteNo = new System.Windows.Forms.NumericUpDown();
-            this.pnlSprite = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.numSpriteNo)).BeginInit();
+            this.MainPanel = new System.Windows.Forms.Panel();
+            this.DGV = new OpenBreed.Common.UI.WinForms.Controls.DataGridViewEx();
+            this.btnAddSprite = new System.Windows.Forms.Button();
+            this.btnRemoveSprite = new System.Windows.Forms.Button();
+            this.Split = new System.Windows.Forms.SplitContainer();
+            this.SpriteEditor = new OpenBreed.Editor.UI.WinForms.Controls.Sprites.SpriteFromImageEditorCtrl();
+            this.MainPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Split)).BeginInit();
+            this.Split.Panel1.SuspendLayout();
+            this.Split.Panel2.SuspendLayout();
+            this.Split.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lblSpriteNo
+            // MainPanel
             // 
-            this.lblSpriteNo.AutoSize = true;
-            this.lblSpriteNo.Location = new System.Drawing.Point(3, 5);
-            this.lblSpriteNo.Name = "lblSpriteNo";
-            this.lblSpriteNo.Size = new System.Drawing.Size(52, 13);
-            this.lblSpriteNo.TabIndex = 7;
-            this.lblSpriteNo.Text = "Sprite no:";
+            this.MainPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MainPanel.Controls.Add(this.DGV);
+            this.MainPanel.Controls.Add(this.btnAddSprite);
+            this.MainPanel.Controls.Add(this.btnRemoveSprite);
+            this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainPanel.Location = new System.Drawing.Point(0, 0);
+            this.MainPanel.Name = "MainPanel";
+            this.MainPanel.Size = new System.Drawing.Size(332, 399);
+            this.MainPanel.TabIndex = 9;
             // 
-            // numSpriteNo
+            // DGV
             // 
-            this.numSpriteNo.Location = new System.Drawing.Point(61, 3);
-            this.numSpriteNo.Name = "numSpriteNo";
-            this.numSpriteNo.Size = new System.Drawing.Size(53, 20);
-            this.numSpriteNo.TabIndex = 6;
+            this.DGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV.CurrentRowIndex = -1;
+            this.DGV.Location = new System.Drawing.Point(2, 32);
+            this.DGV.Name = "DGV";
+            this.DGV.Size = new System.Drawing.Size(325, 363);
+            this.DGV.TabIndex = 10;
             // 
-            // pnlSprite
+            // btnAddSprite
             // 
-            this.pnlSprite.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlSprite.Location = new System.Drawing.Point(6, 29);
-            this.pnlSprite.Name = "pnlSprite";
-            this.pnlSprite.Size = new System.Drawing.Size(417, 244);
-            this.pnlSprite.TabIndex = 5;
+            this.btnAddSprite.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.btnAddSprite.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnAddSprite.Location = new System.Drawing.Point(3, 3);
+            this.btnAddSprite.Name = "btnAddSprite";
+            this.btnAddSprite.Size = new System.Drawing.Size(57, 23);
+            this.btnAddSprite.TabIndex = 8;
+            this.btnAddSprite.Text = "Add";
+            this.btnAddSprite.UseVisualStyleBackColor = true;
             // 
-            // SpriteSetView
+            // btnRemoveSprite
+            // 
+            this.btnRemoveSprite.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemoveSprite.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnRemoveSprite.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnRemoveSprite.Location = new System.Drawing.Point(270, 3);
+            this.btnRemoveSprite.Name = "btnRemoveSprite";
+            this.btnRemoveSprite.Size = new System.Drawing.Size(57, 23);
+            this.btnRemoveSprite.TabIndex = 9;
+            this.btnRemoveSprite.Text = "Remove";
+            this.btnRemoveSprite.UseVisualStyleBackColor = true;
+            // 
+            // Split
+            // 
+            this.Split.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Split.Location = new System.Drawing.Point(0, 0);
+            this.Split.Name = "Split";
+            // 
+            // Split.Panel1
+            // 
+            this.Split.Panel1.Controls.Add(this.MainPanel);
+            // 
+            // Split.Panel2
+            // 
+            this.Split.Panel2.Controls.Add(this.SpriteEditor);
+            this.Split.Size = new System.Drawing.Size(674, 399);
+            this.Split.SplitterDistance = 332;
+            this.Split.TabIndex = 0;
+            // 
+            // SpriteEditor
+            // 
+            this.SpriteEditor.AutoScroll = true;
+            this.SpriteEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SpriteEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SpriteEditor.Location = new System.Drawing.Point(0, 0);
+            this.SpriteEditor.Name = "SpriteEditor";
+            this.SpriteEditor.Size = new System.Drawing.Size(338, 399);
+            this.SpriteEditor.TabIndex = 0;
+            // 
+            // SpriteSetFromImageCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.lblSpriteNo);
-            this.Controls.Add(this.numSpriteNo);
-            this.Controls.Add(this.pnlSprite);
-            this.Name = "SpriteSetView";
-            this.Size = new System.Drawing.Size(426, 276);
-            ((System.ComponentModel.ISupportInitialize)(this.numSpriteNo)).EndInit();
+            this.Controls.Add(this.Split);
+            this.Name = "SpriteSetFromImageCtrl";
+            this.Size = new System.Drawing.Size(674, 399);
+            this.MainPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DGV)).EndInit();
+            this.Split.Panel1.ResumeLayout(false);
+            this.Split.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Split)).EndInit();
+            this.Split.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lblSpriteNo;
-        private System.Windows.Forms.NumericUpDown numSpriteNo;
-        private System.Windows.Forms.Panel pnlSprite;
+        private System.Windows.Forms.Panel MainPanel;
+        private System.Windows.Forms.SplitContainer Split;
+        private SpriteFromImageEditorCtrl SpriteEditor;
+        private System.Windows.Forms.Button btnAddSprite;
+        private System.Windows.Forms.Button btnRemoveSprite;
+        private OpenBreed.Common.UI.WinForms.Controls.DataGridViewEx DGV;
     }
 }
