@@ -49,11 +49,11 @@ namespace OpenBreed.Common.XmlDatabase.Repositories
 
         public IImageEntry GetById(string id)
         {
-            var spriteSetDef = _table.Items.FirstOrDefault(item => item.Id == id);
-            if (spriteSetDef == null)
+            var entryDef = _table.Items.FirstOrDefault(item => item.Id == id);
+            if (entryDef == null)
                 throw new Exception("No Image definition found with Id: " + id);
 
-            return spriteSetDef;
+            return entryDef;
         }
 
         public IImageEntry GetNextTo(IImageEntry entry)

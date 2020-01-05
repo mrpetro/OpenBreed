@@ -1,16 +1,23 @@
-﻿using OpenBreed.Common.Formats;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace OpenBreed.Common.Sprites
 {
     public interface ISpriteSetFromImageEntry : ISpriteSetEntry
     {
+        #region Public Properties
+
         string DataRef { get; }
 
-        List<ISpriteCoords> Sprites { get; }
+        ReadOnlyCollection<ISpriteCoords> Sprites { get; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        void ClearCoords();
+        void AddCoords(int x, int y, int width, int height);
+
+        #endregion Public Methods
     }
 }

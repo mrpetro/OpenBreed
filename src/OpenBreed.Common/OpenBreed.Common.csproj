@@ -78,6 +78,7 @@
     <Compile Include="Formats\IFormatEntry.cs" />
     <Compile Include="Formats\PCMSoundFormat.cs" />
     <Compile Include="Helpers\IOHelper.cs" />
+    <Compile Include="Helpers\XmlHelper.cs" />
     <Compile Include="IDatabase.cs" />
     <Compile Include="Images\IImageEntry.cs" />
     <Compile Include="Data\MapsDataProvider.cs" />

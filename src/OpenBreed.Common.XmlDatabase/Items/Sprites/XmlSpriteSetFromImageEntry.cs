@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common.Sprites;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -21,11 +22,11 @@ namespace OpenBreed.Common.XmlDatabase.Items.Sprites
         public List<XmlSpriteCoords> XmlSprites { get; set; }
 
         [XmlIgnore]
-        public List<ISpriteCoords> Sprites
+        public ReadOnlyCollection<ISpriteCoords> Sprites
         {
             get
             {
-                return XmlSprites.Cast<ISpriteCoords>().ToList();
+                return new ReadOnlyCollection<ISpriteCoords>(XmlSprites.Cast<ISpriteCoords>().ToList());
             }
         }
 
@@ -37,6 +38,16 @@ namespace OpenBreed.Common.XmlDatabase.Items.Sprites
                 Description = this.Description,
                 DataRef = this.DataRef
             };
+        }
+
+        public void ClearCoords()
+        {
+            XmlSprites.Clear();
+        }
+
+        public void AddCoords(int x, int y, int width, int height)
+        {
+            XmlSprites.Add(new XmlSpriteCoords() { X = x, Y = y, Width = width, Height = height });
         }
     }
 }

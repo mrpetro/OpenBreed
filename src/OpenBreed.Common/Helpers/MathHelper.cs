@@ -4,7 +4,10 @@ using System.Text;
 
 namespace OpenBreed.Common.Helpers
 {
-    public class MathHelper
+    /// <summary>
+    /// Helper class with various meth related methods
+    /// </summary>
+    public static class MathHelper
     {
         /// <summary>
         /// Rounds integer to next closest power of 2

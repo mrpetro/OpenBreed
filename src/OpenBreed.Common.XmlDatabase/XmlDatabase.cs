@@ -9,6 +9,7 @@ using OpenBreed.Common.XmlDatabase.Resources;
 using OpenBreed.Common.XmlDatabase.Tables;
 using OpenBreed.Common.XmlDatabase.Items.Images;
 using OpenBreed.Common.XmlDatabase.Items.Maps;
+using OpenBreed.Common.Helpers;
 
 namespace OpenBreed.Common.XmlDatabase
 {
@@ -49,12 +50,12 @@ namespace OpenBreed.Common.XmlDatabase
 
         public static XmlDatabase Load(string filePath)
         {
-            return Other.RestoreFromXml<XmlDatabase>(filePath);
+            return XmlHelper.RestoreFromXml<XmlDatabase>(filePath);
         }
 
         public void Save(string xmlFilePath)
         {
-            Other.StoreAsXml<XmlDatabase>(xmlFilePath, this);
+            XmlHelper.StoreAsXml<XmlDatabase>(xmlFilePath, this);
         }
 
         #endregion Public Methods
