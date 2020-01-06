@@ -9,6 +9,6 @@ namespace OpenBreed.Common.Images
 {
     public interface IImageEntry : IEntry
     {
-        string DataRef { get; }
+        string DataRef { get; set; }
     }
 }
