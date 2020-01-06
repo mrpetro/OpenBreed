@@ -20,21 +20,21 @@ namespace OpenBreed.Common.Formats
 
         #region Public Methods
 
-        public DataFormat Create(AssetBase asset, IFormatEntry format)
+        public DataFormat Create(AssetBase asset, string formatType, List<FormatParameter> formatParameters)
         {
-            var formatType = GetFormatType(format.Name);
-            if (formatType == null)
-                throw new Exception($"Unknown format {format.Name}");
+            var ft = GetFormatType(formatType);
+            if (ft == null)
+                throw new InvalidOperationException("Unknown format type: " + formatType);
 
-            return new DataFormat(formatType, asset, format.Parameters);
+            return new DataFormat(ft, asset, formatParameters);
         }
 
-        public void RegisterFormat(string formatAlias, IDataFormatType format)
+        public void RegisterFormat(string formatType, IDataFormatType format)
         {
-            if (_formats.ContainsKey(formatAlias))
-                throw new InvalidOperationException($"Format alias '{formatAlias}' already registered.");
+            if (_formats.ContainsKey(formatType))
+                throw new InvalidOperationException($"Format type '{formatType}' already registered.");
 
-            _formats.Add(formatAlias, format);
+            _formats.Add(formatType, format);
         }
 
         #endregion Public Methods
@@ -43,11 +43,11 @@ namespace OpenBreed.Common.Formats
 
         internal IDataFormatType GetFormatType(string formatType)
         {
-            IDataFormatType sourceMan = null;
-            if (_formats.TryGetValue(formatType, out sourceMan))
-                return sourceMan;
+            IDataFormatType ft = null;
+            if (_formats.TryGetValue(formatType, out ft))
+                return ft;
             else
-                throw new InvalidOperationException("Unknown format: " + formatType);
+                throw new InvalidOperationException("Unknown format type: " + formatType);
         }
 
         #endregion Internal Methods

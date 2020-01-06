@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.Formats;
+using System.Collections.Generic;
 
 namespace OpenBreed.Common.Assets
 {
@@ -6,9 +7,9 @@ namespace OpenBreed.Common.Assets
     {
         #region Public Properties
 
-        IFormatEntry Format { get; }
-
         string DataSourceRef { get; }
+        string FormatType { get; }
+        List<FormatParameter> Parameters { get; }
 
         #endregion Public Properties
     }

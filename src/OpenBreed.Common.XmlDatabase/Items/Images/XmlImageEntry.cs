@@ -22,7 +22,7 @@ namespace OpenBreed.Common.XmlDatabase.Items.Images
 
         public override IEntry Copy()
         {
-            throw new NotImplementedException();
+            return new XmlImageEntry() { Id = this.Id, Description = this.Description, DataRef = this.DataRef };
         }
 
         #endregion Public Properties

@@ -98,7 +98,6 @@
     <Compile Include="XmlDatabaseFactory.cs" />
     <Compile Include="XmlDatabaseMan.cs" />
     <Compile Include="XmlDbEntry.cs" />
-    <Compile Include="XmlFormatEntry.cs" />
     <Compile Include="XmlFormatParameter.cs" />
     <Compile Include="XmlUnitOfWork.cs" />
   </ItemGroup>

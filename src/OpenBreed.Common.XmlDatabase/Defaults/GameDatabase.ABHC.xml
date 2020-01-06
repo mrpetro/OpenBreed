@@ -63,462 +63,350 @@
     </DataSources>
     <Assets>
       <Items>
-        <Asset Id="Assets.L1MA" DataSourceRef="DataSources.L1MA">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+        <Asset Id="Assets.L1MA" DataSourceRef="DataSources.L1MA" FormatType="ABHC_MAP" >
+          <Parameters />
         </Asset>
-        <Asset Id="Assets.L2MA" DataSourceRef="DataSources.L2MA">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+        <Asset Id="Assets.L2MA" DataSourceRef="DataSources.L2MA" FormatType="ABHC_MAP" >
+          <Parameters />
         </Asset>
-        <Asset Id="Assets.L3MA" DataSourceRef="DataSources.L3MA">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+        <Asset Id="Assets.L3MA" DataSourceRef="DataSources.L3MA" FormatType="ABHC_MAP" >
+          <Parameters />
         </Asset>
-        <Asset Id="Assets.L4MA" DataSourceRef="DataSources.L4MA">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+        <Asset Id="Assets.L4MA" DataSourceRef="DataSources.L4MA" FormatType="ABHC_MAP" >
+          <Parameters />
         </Asset>
-        <Asset Id="Assets.L5MA" DataSourceRef="DataSources.L5MA">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+        <Asset Id="Assets.L5MA" DataSourceRef="DataSources.L5MA" FormatType="ABHC_MAP" >
+          <Parameters />
         </Asset>
-        <Asset Id="Assets.L6MA" DataSourceRef="DataSources.L6MA">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+        <Asset Id="Assets.L6MA" DataSourceRef="DataSources.L6MA" FormatType="ABHC_MAP" >
+          <Parameters />
         </Asset>
-        <Asset Id="Assets.L7MA" DataSourceRef="DataSources.L7MA">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+        <Asset Id="Assets.L7MA" DataSourceRef="DataSources.L7MA" FormatType="ABHC_MAP" >
+          <Parameters />
         </Asset>
-        <Asset Id="Assets.L8MA" DataSourceRef="DataSources.L8MA">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+        <Asset Id="Assets.L8MA" DataSourceRef="DataSources.L8MA" FormatType="ABHC_MAP" >
+          <Parameters />
         </Asset>
-        <Asset Id="Assets.L9MA" DataSourceRef="DataSources.L9MA">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+        <Asset Id="Assets.L9MA" DataSourceRef="DataSources.L9MA" FormatType="ABHC_MAP" >
+          <Parameters />
         </Asset>
-        <Asset Id="Assets.LAMA" DataSourceRef="DataSources.LAMA">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+        <Asset Id="Assets.LAMA" DataSourceRef="DataSources.LAMA" FormatType="ABHC_MAP" >
+          <Parameters />
         </Asset>
-        <Asset Id="Assets.LBMA" DataSourceRef="DataSources.LBMA">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+        <Asset Id="Assets.LBMA" DataSourceRef="DataSources.LBMA" FormatType="ABHC_MAP" >
+          <Parameters />
         </Asset>
-        <Asset Id="Assets.LCMA" DataSourceRef="DataSources.LCMA">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+        <Asset Id="Assets.LCMA" DataSourceRef="DataSources.LCMA" FormatType="ABHC_MAP" >
+          <Parameters />
         </Asset>
-        <Asset Id="Assets.LDMA" DataSourceRef="DataSources.LDMA">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+        <Asset Id="Assets.LDMA" DataSourceRef="DataSources.LDMA" FormatType="ABHC_MAP" >
+          <Parameters />
         </Asset>
-        <Asset Id="Assets.LEMA" DataSourceRef="DataSources.LEMA">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+        <Asset Id="Assets.LEMA" DataSourceRef="DataSources.LEMA" FormatType="ABHC_MAP" >
+          <Parameters />
         </Asset>
-        <Asset Id="Assets.MMA1" DataSourceRef="DataSources.MMA1">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+        <Asset Id="Assets.MMA1" DataSourceRef="DataSources.MMA1" FormatType="ABHC_MAP" >
+          <Parameters />
         </Asset>
-        <Asset Id="Assets.MMA2" DataSourceRef="DataSources.MMA2">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+        <Asset Id="Assets.MMA2" DataSourceRef="DataSources.MMA2" FormatType="ABHC_MAP" >
+          <Parameters />
         </Asset>
-        <Asset Id="Assets.MMA3" DataSourceRef="DataSources.MMA3">
-          <Format Name="ABHC_MAP">
-            <Parameters />
-          </Format>
+        <Asset Id="Assets.MMA3" DataSourceRef="DataSources.MMA3" FormatType="ABHC_MAP" >
+          <Parameters />
         </Asset>
-        <Asset Id="Assets.L1BM" DataSourceRef="DataSources.L1BM">
-          <Format Name="ACBM_TILE_SET">
+        <Asset Id="Assets.L1BM" DataSourceRef="DataSources.L1BM" FormatType="ACBM_TILE_SET">
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.L2BM" DataSourceRef="DataSources.L2BM">
-          <Format Name="ACBM_TILE_SET">
+        <Asset Id="Assets.L2BM" DataSourceRef="DataSources.L2BM" FormatType="ACBM_TILE_SET">
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.L3BM" DataSourceRef="DataSources.L3BM">
-          <Format Name="ACBM_TILE_SET">
+        <Asset Id="Assets.L3BM" DataSourceRef="DataSources.L3BM" FormatType="ACBM_TILE_SET">
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.L4BM" DataSourceRef="DataSources.L4BM">
-          <Format Name="ACBM_TILE_SET">
+        <Asset Id="Assets.L4BM" DataSourceRef="DataSources.L4BM" FormatType="ACBM_TILE_SET">
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.L5BM" DataSourceRef="DataSources.L5BM">
-          <Format Name="ACBM_TILE_SET">
+        <Asset Id="Assets.L5BM" DataSourceRef="DataSources.L5BM" FormatType="ACBM_TILE_SET">
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.L6BM" DataSourceRef="DataSources.L6BM">
-          <Format Name="ACBM_TILE_SET">
+        <Asset Id="Assets.L6BM" DataSourceRef="DataSources.L6BM" FormatType="ACBM_TILE_SET">
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.L7BM" DataSourceRef="DataSources.L7BM">
-          <Format Name="ACBM_TILE_SET">
+        <Asset Id="Assets.L7BM" DataSourceRef="DataSources.L7BM" FormatType="ACBM_TILE_SET">
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.L8BM" DataSourceRef="DataSources.L8BM">
-          <Format Name="ACBM_TILE_SET">
+        <Asset Id="Assets.L8BM" DataSourceRef="DataSources.L8BM" FormatType="ACBM_TILE_SET">
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.L9BM" DataSourceRef="DataSources.L9BM">
-          <Format Name="ACBM_TILE_SET">
+        <Asset Id="Assets.L9BM" DataSourceRef="DataSources.L9BM" FormatType="ACBM_TILE_SET">
             <Parameters>
               <Parameter Name="TILE_SIZE" Type="System.Int32">16</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.L1LP" DataSourceRef="DataSources.L1LP">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.L1LP" DataSourceRef="DataSources.L1LP" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">256</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">8</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">32BIT</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.L2LP" DataSourceRef="DataSources.L2LP">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.L2LP" DataSourceRef="DataSources.L2LP" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">256</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">8</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">32BIT</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.L6LP" DataSourceRef="DataSources.L6LP">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.L6LP" DataSourceRef="DataSources.L6LP" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">256</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">8</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">32BIT</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.LALP" DataSourceRef="DataSources.LALP">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.LALP" DataSourceRef="DataSources.LALP" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">256</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">8</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">32BIT</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.CHAD" DataSourceRef="DataSources.CHAD">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.CHAD" DataSourceRef="DataSources.CHAD" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">640</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">512</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">2</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.CHAR" DataSourceRef="DataSources.CHAR">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.CHAR" DataSourceRef="DataSources.CHAR" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">256</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">8</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">32BIT</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.ENDA" DataSourceRef="DataSources.ENDA">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.ENDA" DataSourceRef="DataSources.ENDA" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">480</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">7</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.ENDP" DataSourceRef="DataSources.ENDP">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.ENDP" DataSourceRef="DataSources.ENDP" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">256</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">7</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">32BIT</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.ETXT" DataSourceRef="DataSources.ETXT">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.ETXT" DataSourceRef="DataSources.ETXT" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">1024</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">1</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.HPIC" DataSourceRef="DataSources.HPIC">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.HPIC" DataSourceRef="DataSources.HPIC" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">288</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">5</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">32BIT</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.IPIC" DataSourceRef="DataSources.IPIC">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.IPIC" DataSourceRef="DataSources.IPIC" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">640</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">512</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">7</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">32BIT</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.HSP1" DataSourceRef="DataSources.HSP1">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.HSP1" DataSourceRef="DataSources.HSP1" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">160</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">4</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.HSP2" DataSourceRef="DataSources.HSP2">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.HSP2" DataSourceRef="DataSources.HSP2" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">160</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">4</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.HSP3" DataSourceRef="DataSources.HSP3">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.HSP3" DataSourceRef="DataSources.HSP3" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">160</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">4</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.HSP4" DataSourceRef="DataSources.HSP4">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.HSP4" DataSourceRef="DataSources.HSP4" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">160</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">4</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.L1BO" DataSourceRef="DataSources.L1BO">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.L1BO" DataSourceRef="DataSources.L1BO" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">512</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.L2BO" DataSourceRef="DataSources.L2BO">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.L2BO" DataSourceRef="DataSources.L2BO" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">512</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.L3BO" DataSourceRef="DataSources.L3BO">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.L3BO" DataSourceRef="DataSources.L3BO" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">512</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.L4BO" DataSourceRef="DataSources.L4BO">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.L4BO" DataSourceRef="DataSources.L4BO" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">512</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.L5BO" DataSourceRef="DataSources.L5BO">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.L5BO" DataSourceRef="DataSources.L5BO" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">512</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.L6BO" DataSourceRef="DataSources.L6BO">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.L6BO" DataSourceRef="DataSources.L6BO" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">512</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.L7BO" DataSourceRef="DataSources.L7BO">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.L7BO" DataSourceRef="DataSources.L7BO" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">512</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.L8BO" DataSourceRef="DataSources.L8BO">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.L8BO" DataSourceRef="DataSources.L8BO" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">512</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.L9BO" DataSourceRef="DataSources.L9BO">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.L9BO" DataSourceRef="DataSources.L9BO" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">512</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.LABO" DataSourceRef="DataSources.LABO">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.LABO" DataSourceRef="DataSources.LABO" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">512</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.LBBO" DataSourceRef="DataSources.LBBO">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.LBBO" DataSourceRef="DataSources.LBBO" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">512</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.LCBO" DataSourceRef="DataSources.LCBO">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.LCBO" DataSourceRef="DataSources.LCBO" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">512</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.LDBO" DataSourceRef="DataSources.LDBO">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.LDBO" DataSourceRef="DataSources.LDBO" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">512</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.LEBO" DataSourceRef="DataSources.LEBO">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.LEBO" DataSourceRef="DataSources.LEBO" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">512</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.MPIC" DataSourceRef="DataSources.MPIC">
-          <Format Name="ACBM_IMAGE">
+        <Asset Id="Assets.MPIC" DataSourceRef="DataSources.MPIC" FormatType="ACBM_IMAGE">
             <Parameters>
               <Parameter Name="WIDTH" Type="System.Int32">320</Parameter>
               <Parameter Name="HEIGHT" Type="System.Int32">256</Parameter>
               <Parameter Name="BIT_PLANES_NO" Type="System.Int32">6</Parameter>
               <Parameter Name="PALETTE_MODE" Type="System.String">NONE</Parameter>
             </Parameters>
-          </Format>
         </Asset>
       </Items>
     </Assets>

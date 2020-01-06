@@ -186,1188 +186,830 @@
     </DataSources>
     <Assets>
       <Items>
-        <Asset Id="Assets.SPR1A.SPR" DataSourceRef="DataSources.SPR1A.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.SPR1B.SPR" DataSourceRef="DataSources.SPR1B.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.SPR3A.SPR" DataSourceRef="DataSources.SPR3A.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.SPR3B.SPR" DataSourceRef="DataSources.SPR3B.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.SPR4A.SPR" DataSourceRef="DataSources.SPR4A.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.SPR4B.SPR" DataSourceRef="DataSources.SPR4B.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.SPR5A.SPR" DataSourceRef="DataSources.SPR5A.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.SPR5B.SPR" DataSourceRef="DataSources.SPR5B.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.SPR6A.SPR" DataSourceRef="DataSources.SPR6A.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.SPR6B.SPR" DataSourceRef="DataSources.SPR6B.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.SPR7A.SPR" DataSourceRef="DataSources.SPR7A.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.SPR7B.SPR" DataSourceRef="DataSources.SPR7B.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.SPR8A.SPR" DataSourceRef="DataSources.SPR8A.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.SPR8B.SPR" DataSourceRef="DataSources.SPR8B.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.SPRDA.SPR" DataSourceRef="DataSources.SPRDA.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.SPRDB.SPR" DataSourceRef="DataSources.SPRDB.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.HERO1.SPR" DataSourceRef="DataSources.HERO1.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.HERO2.SPR" DataSourceRef="DataSources.HERO2.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.ALIEN_A.SPR" DataSourceRef="DataSources.ALIEN_A.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.ALIEN_B.SPR" DataSourceRef="DataSources.ALIEN_B.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.ALIEN_C.SPR" DataSourceRef="DataSources.ALIEN_C.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.ALIEN_E.SPR" DataSourceRef="DataSources.ALIEN_E.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.ALIEN_F.SPR" DataSourceRef="DataSources.ALIEN_F.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.ALIEN_G.SPR" DataSourceRef="DataSources.ALIEN_G.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.ALIEN_H.SPR" DataSourceRef="DataSources.ALIEN_H.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.ALIEN_I.SPR" DataSourceRef="DataSources.ALIEN_I.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.ALIEN_J.SPR" DataSourceRef="DataSources.ALIEN_J.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.ALIEN_K.SPR" DataSourceRef="DataSources.ALIEN_K.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.ALIEN_X.SPR" DataSourceRef="DataSources.ALIEN_X.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.RESIDENT.SPR" DataSourceRef="DataSources.RESIDENT.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.COMP1.SPR" DataSourceRef="DataSources.COMP1.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.COMP2.SPR" DataSourceRef="DataSources.COMP2.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.COMP3.SPR" DataSourceRef="DataSources.COMP3.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.COMPFONT.SPR" DataSourceRef="DataSources.COMPFONT.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.STATUS.SPR" DataSourceRef="DataSources.STATUS.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.TORCH.SPR" DataSourceRef="DataSources.TORCH.SPR">
-          <Format Name="ABTASPR">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.LEVEL1.BLK" DataSourceRef="DataSources.LEVEL1.BLK">
-          <Format Name="ABTABLK">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.LEVEL3.BLK" DataSourceRef="DataSources.LEVEL3.BLK">
-          <Format Name="ABTABLK">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.LEVEL4.BLK" DataSourceRef="DataSources.LEVEL4.BLK">
-          <Format Name="ABTABLK">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.LEVEL5.BLK" DataSourceRef="DataSources.LEVEL5.BLK">
-          <Format Name="ABTABLK">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.LEVEL6.BLK" DataSourceRef="DataSources.LEVEL6.BLK">
-          <Format Name="ABTABLK">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.LEVEL7.BLK" DataSourceRef="DataSources.LEVEL7.BLK">
-          <Format Name="ABTABLK">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.LEVEL8.BLK" DataSourceRef="DataSources.LEVEL8.BLK">
-          <Format Name="ABTABLK">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.LEVELD.BLK" DataSourceRef="DataSources.LEVELD.BLK">
-          <Format Name="ABTABLK">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.01" DataSourceRef="DataSources.MAP.01">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.02" DataSourceRef="DataSources.MAP.02">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.03" DataSourceRef="DataSources.MAP.03">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.04" DataSourceRef="DataSources.MAP.04">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.05" DataSourceRef="DataSources.MAP.05">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.06" DataSourceRef="DataSources.MAP.06">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.07" DataSourceRef="DataSources.MAP.07">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.08" DataSourceRef="DataSources.MAP.08">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.09" DataSourceRef="DataSources.MAP.09">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.10" DataSourceRef="DataSources.MAP.10">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.11" DataSourceRef="DataSources.MAP.11">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.12" DataSourceRef="DataSources.MAP.12">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.13" DataSourceRef="DataSources.MAP.13">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.14" DataSourceRef="DataSources.MAP.14">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.15" DataSourceRef="DataSources.MAP.15">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.16" DataSourceRef="DataSources.MAP.16">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.17" DataSourceRef="DataSources.MAP.17">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.18" DataSourceRef="DataSources.MAP.18">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.19" DataSourceRef="DataSources.MAP.19">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.20" DataSourceRef="DataSources.MAP.20">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.21" DataSourceRef="DataSources.MAP.21">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.22" DataSourceRef="DataSources.MAP.22">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.23" DataSourceRef="DataSources.MAP.23">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.24" DataSourceRef="DataSources.MAP.24">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.25" DataSourceRef="DataSources.MAP.25">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.26" DataSourceRef="DataSources.MAP.26">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.27" DataSourceRef="DataSources.MAP.27">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.28" DataSourceRef="DataSources.MAP.28">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.29" DataSourceRef="DataSources.MAP.29">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.30" DataSourceRef="DataSources.MAP.30">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.31" DataSourceRef="DataSources.MAP.31">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.32" DataSourceRef="DataSources.MAP.32">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.33" DataSourceRef="DataSources.MAP.33">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.34" DataSourceRef="DataSources.MAP.34">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.35" DataSourceRef="DataSources.MAP.35">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.36" DataSourceRef="DataSources.MAP.36">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.37" DataSourceRef="DataSources.MAP.37">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.38" DataSourceRef="DataSources.MAP.38">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.39" DataSourceRef="DataSources.MAP.39">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.40" DataSourceRef="DataSources.MAP.40">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.41" DataSourceRef="DataSources.MAP.41">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.42" DataSourceRef="DataSources.MAP.42">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.43" DataSourceRef="DataSources.MAP.43">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.44" DataSourceRef="DataSources.MAP.44">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.45" DataSourceRef="DataSources.MAP.45">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.46" DataSourceRef="DataSources.MAP.46">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.47" DataSourceRef="DataSources.MAP.47">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.48" DataSourceRef="DataSources.MAP.48">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.49" DataSourceRef="DataSources.MAP.49">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.50" DataSourceRef="DataSources.MAP.50">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.51" DataSourceRef="DataSources.MAP.51">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.52" DataSourceRef="DataSources.MAP.52">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.53" DataSourceRef="DataSources.MAP.53">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.54" DataSourceRef="DataSources.MAP.54">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.MAP.55" DataSourceRef="DataSources.MAP.55">
-          <Format Name="ABTA_MAP">
-            <Parameters />
-          </Format>
-        </Asset>
-        <Asset Id="Assets.ALIEN1" DataSourceRef="DataSources.ALIEN1">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPR1A.SPR" DataSourceRef="DataSources.SPR1A.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.SPR1B.SPR" DataSourceRef="DataSources.SPR1B.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.SPR3A.SPR" DataSourceRef="DataSources.SPR3A.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.SPR3B.SPR" DataSourceRef="DataSources.SPR3B.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.SPR4A.SPR" DataSourceRef="DataSources.SPR4A.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.SPR4B.SPR" DataSourceRef="DataSources.SPR4B.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.SPR5A.SPR" DataSourceRef="DataSources.SPR5A.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.SPR5B.SPR" DataSourceRef="DataSources.SPR5B.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.SPR6A.SPR" DataSourceRef="DataSources.SPR6A.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.SPR6B.SPR" DataSourceRef="DataSources.SPR6B.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.SPR7A.SPR" DataSourceRef="DataSources.SPR7A.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.SPR7B.SPR" DataSourceRef="DataSources.SPR7B.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.SPR8A.SPR" DataSourceRef="DataSources.SPR8A.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.SPR8B.SPR" DataSourceRef="DataSources.SPR8B.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.SPRDA.SPR" DataSourceRef="DataSources.SPRDA.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.SPRDB.SPR" DataSourceRef="DataSources.SPRDB.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.HERO1.SPR" DataSourceRef="DataSources.HERO1.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.HERO2.SPR" DataSourceRef="DataSources.HERO2.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.ALIEN_A.SPR" DataSourceRef="DataSources.ALIEN_A.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.ALIEN_B.SPR" DataSourceRef="DataSources.ALIEN_B.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.ALIEN_C.SPR" DataSourceRef="DataSources.ALIEN_C.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.ALIEN_E.SPR" DataSourceRef="DataSources.ALIEN_E.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.ALIEN_F.SPR" DataSourceRef="DataSources.ALIEN_F.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.ALIEN_G.SPR" DataSourceRef="DataSources.ALIEN_G.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.ALIEN_H.SPR" DataSourceRef="DataSources.ALIEN_H.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.ALIEN_I.SPR" DataSourceRef="DataSources.ALIEN_I.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.ALIEN_J.SPR" DataSourceRef="DataSources.ALIEN_J.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.ALIEN_K.SPR" DataSourceRef="DataSources.ALIEN_K.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.ALIEN_X.SPR" DataSourceRef="DataSources.ALIEN_X.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.RESIDENT.SPR" DataSourceRef="DataSources.RESIDENT.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.COMP1.SPR" DataSourceRef="DataSources.COMP1.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.COMP2.SPR" DataSourceRef="DataSources.COMP2.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.COMP3.SPR" DataSourceRef="DataSources.COMP3.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.COMPFONT.SPR" DataSourceRef="DataSources.COMPFONT.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.STATUS.SPR" DataSourceRef="DataSources.STATUS.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.TORCH.SPR" DataSourceRef="DataSources.TORCH.SPR" FormatType="ABTASPR">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.LEVEL1.BLK" DataSourceRef="DataSources.LEVEL1.BLK" FormatType="ABTABLK">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.LEVEL3.BLK" DataSourceRef="DataSources.LEVEL3.BLK" FormatType="ABTABLK">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.LEVEL4.BLK" DataSourceRef="DataSources.LEVEL4.BLK" FormatType="ABTABLK">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.LEVEL5.BLK" DataSourceRef="DataSources.LEVEL5.BLK" FormatType="ABTABLK">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.LEVEL6.BLK" DataSourceRef="DataSources.LEVEL6.BLK" FormatType="ABTABLK">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.LEVEL7.BLK" DataSourceRef="DataSources.LEVEL7.BLK" FormatType="ABTABLK">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.LEVEL8.BLK" DataSourceRef="DataSources.LEVEL8.BLK" FormatType="ABTABLK">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.LEVELD.BLK" DataSourceRef="DataSources.LEVELD.BLK" FormatType="ABTABLK">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.01" DataSourceRef="DataSources.MAP.01" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.02" DataSourceRef="DataSources.MAP.02" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.03" DataSourceRef="DataSources.MAP.03" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.04" DataSourceRef="DataSources.MAP.04" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.05" DataSourceRef="DataSources.MAP.05" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.06" DataSourceRef="DataSources.MAP.06" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.07" DataSourceRef="DataSources.MAP.07" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.08" DataSourceRef="DataSources.MAP.08" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.09" DataSourceRef="DataSources.MAP.09" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.10" DataSourceRef="DataSources.MAP.10" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.11" DataSourceRef="DataSources.MAP.11" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.12" DataSourceRef="DataSources.MAP.12" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.13" DataSourceRef="DataSources.MAP.13" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.14" DataSourceRef="DataSources.MAP.14" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.15" DataSourceRef="DataSources.MAP.15" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.16" DataSourceRef="DataSources.MAP.16" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.17" DataSourceRef="DataSources.MAP.17" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.18" DataSourceRef="DataSources.MAP.18" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.19" DataSourceRef="DataSources.MAP.19" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.20" DataSourceRef="DataSources.MAP.20" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.21" DataSourceRef="DataSources.MAP.21" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.22" DataSourceRef="DataSources.MAP.22" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.23" DataSourceRef="DataSources.MAP.23" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.24" DataSourceRef="DataSources.MAP.24" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.25" DataSourceRef="DataSources.MAP.25" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.26" DataSourceRef="DataSources.MAP.26" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.27" DataSourceRef="DataSources.MAP.27" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.28" DataSourceRef="DataSources.MAP.28" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.29" DataSourceRef="DataSources.MAP.29" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.30" DataSourceRef="DataSources.MAP.30" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.31" DataSourceRef="DataSources.MAP.31" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.32" DataSourceRef="DataSources.MAP.32" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.33" DataSourceRef="DataSources.MAP.33" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.34" DataSourceRef="DataSources.MAP.34" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.35" DataSourceRef="DataSources.MAP.35" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.36" DataSourceRef="DataSources.MAP.36" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.37" DataSourceRef="DataSources.MAP.37" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.38" DataSourceRef="DataSources.MAP.38" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.39" DataSourceRef="DataSources.MAP.39" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.40" DataSourceRef="DataSources.MAP.40" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.41" DataSourceRef="DataSources.MAP.41" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.42" DataSourceRef="DataSources.MAP.42" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.43" DataSourceRef="DataSources.MAP.43" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.44" DataSourceRef="DataSources.MAP.44" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.45" DataSourceRef="DataSources.MAP.45" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.46" DataSourceRef="DataSources.MAP.46" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.47" DataSourceRef="DataSources.MAP.47" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.48" DataSourceRef="DataSources.MAP.48" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.49" DataSourceRef="DataSources.MAP.49" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.50" DataSourceRef="DataSources.MAP.50" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.51" DataSourceRef="DataSources.MAP.51" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.52" DataSourceRef="DataSources.MAP.52" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.53" DataSourceRef="DataSources.MAP.53" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.54" DataSourceRef="DataSources.MAP.54" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.MAP.55" DataSourceRef="DataSources.MAP.55" FormatType="ABTA_MAP">
+          <Parameters />
+        </Asset>
+        <Asset Id="Assets.ALIEN1" DataSourceRef="DataSources.ALIEN1" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.ALIEN2" DataSourceRef="DataSources.ALIEN2">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.ALIEN2" DataSourceRef="DataSources.ALIEN2" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.ALIEN3" DataSourceRef="DataSources.ALIEN3">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.ALIEN3" DataSourceRef="DataSources.ALIEN3" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.ALIEN4" DataSourceRef="DataSources.ALIEN4">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.ALIEN4" DataSourceRef="DataSources.ALIEN4" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.AMMO" DataSourceRef="DataSources.AMMO">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.AMMO" DataSourceRef="DataSources.AMMO" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.BACKING1" DataSourceRef="DataSources.BACKING1">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.BACKING1" DataSourceRef="DataSources.BACKING1" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.BACKING2" DataSourceRef="DataSources.BACKING2">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.BACKING2" DataSourceRef="DataSources.BACKING2" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.BACKING3" DataSourceRef="DataSources.BACKING3">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.BACKING3" DataSourceRef="DataSources.BACKING3" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.BACKING4" DataSourceRef="DataSources.BACKING4">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.BACKING4" DataSourceRef="DataSources.BACKING4" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.CACOON1" DataSourceRef="DataSources.CACOON1">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.CACOON1" DataSourceRef="DataSources.CACOON1" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.COMPUTER" DataSourceRef="DataSources.COMPUTER">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.COMPUTER" DataSourceRef="DataSources.COMPUTER" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.COUNTDWN" DataSourceRef="DataSources.COUNTDWN">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.COUNTDWN" DataSourceRef="DataSources.COUNTDWN" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.CREDITS" DataSourceRef="DataSources.CREDITS">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.CREDITS" DataSourceRef="DataSources.CREDITS" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.CURSOR" DataSourceRef="DataSources.CURSOR">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.CURSOR" DataSourceRef="DataSources.CURSOR" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.DIE" DataSourceRef="DataSources.DIE">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.DIE" DataSourceRef="DataSources.DIE" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.DOOR1" DataSourceRef="DataSources.DOOR1">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.DOOR1" DataSourceRef="DataSources.DOOR1" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.EAT1" DataSourceRef="DataSources.EAT1">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.EAT1" DataSourceRef="DataSources.EAT1" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.EXPLOS" DataSourceRef="DataSources.EXPLOS">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.EXPLOS" DataSourceRef="DataSources.EXPLOS" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.FLAMEOFF" DataSourceRef="DataSources.FLAMEOFF">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.FLAMEOFF" DataSourceRef="DataSources.FLAMEOFF" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.FLAMEON" DataSourceRef="DataSources.FLAMEON">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.FLAMEON" DataSourceRef="DataSources.FLAMEON" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.GENERATE" DataSourceRef="DataSources.GENERATE">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.GENERATE" DataSourceRef="DataSources.GENERATE" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.GRENADE" DataSourceRef="DataSources.GRENADE">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.GRENADE" DataSourceRef="DataSources.GRENADE" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.GRUNT1" DataSourceRef="DataSources.GRUNT1">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.GRUNT1" DataSourceRef="DataSources.GRUNT1" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.HATCH1" DataSourceRef="DataSources.HATCH1">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.HATCH1" DataSourceRef="DataSources.HATCH1" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.HEALTH" DataSourceRef="DataSources.HEALTH">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.HEALTH" DataSourceRef="DataSources.HEALTH" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.KEYS" DataSourceRef="DataSources.KEYS">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.KEYS" DataSourceRef="DataSources.KEYS" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.LAZER1" DataSourceRef="DataSources.LAZER1">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.LAZER1" DataSourceRef="DataSources.LAZER1" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.LAZER2" DataSourceRef="DataSources.LAZER2">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.LAZER2" DataSourceRef="DataSources.LAZER2" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.LAZER3" DataSourceRef="DataSources.LAZER3">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.LAZER3" DataSourceRef="DataSources.LAZER3" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.LAZER4" DataSourceRef="DataSources.LAZER4">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.LAZER4" DataSourceRef="DataSources.LAZER4" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.LIZARD" DataSourceRef="DataSources.LIZARD">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.LIZARD" DataSourceRef="DataSources.LIZARD" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.MGUN" DataSourceRef="DataSources.MGUN">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.MGUN" DataSourceRef="DataSources.MGUN" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.MINETICK" DataSourceRef="DataSources.MINETICK">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.MINETICK" DataSourceRef="DataSources.MINETICK" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.MISSILE" DataSourceRef="DataSources.MISSILE">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.MISSILE" DataSourceRef="DataSources.MISSILE" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.NULLSAMP" DataSourceRef="DataSources.NULLSAMP">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.NULLSAMP" DataSourceRef="DataSources.NULLSAMP" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.ONEWAY" DataSourceRef="DataSources.ONEWAY">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.ONEWAY" DataSourceRef="DataSources.ONEWAY" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.OUTAMMO" DataSourceRef="DataSources.OUTAMMO">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.OUTAMMO" DataSourceRef="DataSources.OUTAMMO" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SELECT" DataSourceRef="DataSources.SELECT">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SELECT" DataSourceRef="DataSources.SELECT" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SIREN" DataSourceRef="DataSources.SIREN">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SIREN" DataSourceRef="DataSources.SIREN" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH01" DataSourceRef="DataSources.SPEECH01">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH01" DataSourceRef="DataSources.SPEECH01" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH02" DataSourceRef="DataSources.SPEECH02">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH02" DataSourceRef="DataSources.SPEECH02" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH03" DataSourceRef="DataSources.SPEECH03">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH03" DataSourceRef="DataSources.SPEECH03" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH04" DataSourceRef="DataSources.SPEECH04">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH04" DataSourceRef="DataSources.SPEECH04" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH05" DataSourceRef="DataSources.SPEECH05">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH05" DataSourceRef="DataSources.SPEECH05" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH06" DataSourceRef="DataSources.SPEECH06">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH06" DataSourceRef="DataSources.SPEECH06" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH07" DataSourceRef="DataSources.SPEECH07">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH07" DataSourceRef="DataSources.SPEECH07" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH08" DataSourceRef="DataSources.SPEECH08">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH08" DataSourceRef="DataSources.SPEECH08" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH09" DataSourceRef="DataSources.SPEECH09">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH09" DataSourceRef="DataSources.SPEECH09" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH10" DataSourceRef="DataSources.SPEECH10">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH10" DataSourceRef="DataSources.SPEECH10" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH11" DataSourceRef="DataSources.SPEECH11">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH11" DataSourceRef="DataSources.SPEECH11" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH12" DataSourceRef="DataSources.SPEECH12">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH12" DataSourceRef="DataSources.SPEECH12" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH13" DataSourceRef="DataSources.SPEECH13">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH13" DataSourceRef="DataSources.SPEECH13" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH14" DataSourceRef="DataSources.SPEECH14">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH14" DataSourceRef="DataSources.SPEECH14" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH15" DataSourceRef="DataSources.SPEECH15">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH15" DataSourceRef="DataSources.SPEECH15" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH16" DataSourceRef="DataSources.SPEECH16">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH16" DataSourceRef="DataSources.SPEECH16" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH17" DataSourceRef="DataSources.SPEECH17">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH17" DataSourceRef="DataSources.SPEECH17" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH18" DataSourceRef="DataSources.SPEECH18">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH18" DataSourceRef="DataSources.SPEECH18" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH19" DataSourceRef="DataSources.SPEECH19">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH19" DataSourceRef="DataSources.SPEECH19" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH20" DataSourceRef="DataSources.SPEECH20">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH20" DataSourceRef="DataSources.SPEECH20" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH21" DataSourceRef="DataSources.SPEECH21">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH21" DataSourceRef="DataSources.SPEECH21" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH22" DataSourceRef="DataSources.SPEECH22">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH22" DataSourceRef="DataSources.SPEECH22" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH23" DataSourceRef="DataSources.SPEECH23">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH23" DataSourceRef="DataSources.SPEECH23" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH24" DataSourceRef="DataSources.SPEECH24">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH24" DataSourceRef="DataSources.SPEECH24" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH25" DataSourceRef="DataSources.SPEECH25">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH25" DataSourceRef="DataSources.SPEECH25" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH26" DataSourceRef="DataSources.SPEECH26">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH26" DataSourceRef="DataSources.SPEECH26" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPEECH27" DataSourceRef="DataSources.SPEECH27">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPEECH27" DataSourceRef="DataSources.SPEECH27" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">9600</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SPLAT1" DataSourceRef="DataSources.SPLAT1">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SPLAT1" DataSourceRef="DataSources.SPLAT1" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.SWITCH" DataSourceRef="DataSources.SWITCH">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.SWITCH" DataSourceRef="DataSources.SWITCH" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.TELE" DataSourceRef="DataSources.TELE">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.TELE" DataSourceRef="DataSources.TELE" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.TURRET1" DataSourceRef="DataSources.TURRET1">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.TURRET1" DataSourceRef="DataSources.TURRET1" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.TURRET2" DataSourceRef="DataSources.TURRET2">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.TURRET2" DataSourceRef="DataSources.TURRET2" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.XTRALIFE" DataSourceRef="DataSources.XTRALIFE">
-          <Format Name="PCM_SOUND">
+        <Asset Id="Assets.XTRALIFE" DataSourceRef="DataSources.XTRALIFE" FormatType="PCM_SOUND">
             <Parameters>
               <Parameter Name="SAMPLE_RATE" Type="System.Int32">11025</Parameter>
               <Parameter Name="BITS_PER_SAMPLE" Type="System.Int32">8</Parameter>
               <Parameter Name="CHANNELS" Type="System.Int32">1</Parameter>
             </Parameters>
-          </Format>
         </Asset>
-        <Asset Id="Assets.EPSLOGO1.LBM" DataSourceRef="DataSources.EPSLOGO1.LBM">
-          <Format Name="IFF_IMAGE">
-            <Parameters/>
-          </Format>
+        <Asset Id="Assets.EPSLOGO1.LBM" DataSourceRef="DataSources.EPSLOGO1.LBM" FormatType="IFF_IMAGE">
+          <Parameters/>
         </Asset>
-        <Asset Id="Assets.EPSLOGO2.LBM" DataSourceRef="DataSources.EPSLOGO2.LBM">
-          <Format Name="IFF_IMAGE">
-            <Parameters/>
-          </Format>
+        <Asset Id="Assets.EPSLOGO2.LBM" DataSourceRef="DataSources.EPSLOGO2.LBM" FormatType="IFF_IMAGE">
+          <Parameters/>
         </Asset>
-        <Asset Id="Assets.OUTRO.LBM" DataSourceRef="DataSources.OUTRO.LBM">
-          <Format Name="IFF_IMAGE">
-            <Parameters/>
-          </Format>
+        <Asset Id="Assets.OUTRO.LBM" DataSourceRef="DataSources.OUTRO.LBM" FormatType="IFF_IMAGE">
+          <Parameters/>
         </Asset>
-        <Asset Id="Assets.T17LOGO.LBM" DataSourceRef="DataSources.T17LOGO.LBM">
-          <Format Name="IFF_IMAGE">
-            <Parameters/>
-          </Format>
+        <Asset Id="Assets.T17LOGO.LBM" DataSourceRef="DataSources.T17LOGO.LBM" FormatType="IFF_IMAGE">
+          <Parameters/>
         </Asset>
-        <Asset Id="Assets.COMPUTER.LBM" DataSourceRef="DataSources.COMPUTER.LBM">
-          <Format Name="IFF_IMAGE">
-            <Parameters/>
-          </Format>
+        <Asset Id="Assets.COMPUTER.LBM" DataSourceRef="DataSources.COMPUTER.LBM" FormatType="IFF_IMAGE">
+          <Parameters/>
         </Asset>
-        <Asset Id="Assets.IPC.LBM" DataSourceRef="DataSources.IPC.LBM">
-          <Format Name="IFF_IMAGE">
-            <Parameters/>
-          </Format>
+        <Asset Id="Assets.IPC.LBM" DataSourceRef="DataSources.IPC.LBM" FormatType="IFF_IMAGE">
+          <Parameters/>
         </Asset>
-        <Asset Id="Assets.SMARTPIC.LBM" DataSourceRef="DataSources.SMARTPIC.LBM">
-          <Format Name="IFF_IMAGE">
-            <Parameters/>
-          </Format>
+        <Asset Id="Assets.SMARTPIC.LBM" DataSourceRef="DataSources.SMARTPIC.LBM" FormatType="IFF_IMAGE">
+          <Parameters/>
         </Asset>
-        <Asset Id="Assets.TITLEBAC.LBM" DataSourceRef="DataSources.TITLEBAC.LBM">
-          <Format Name="IFF_IMAGE">
-            <Parameters/>
-          </Format>
+        <Asset Id="Assets.TITLEBAC.LBM" DataSourceRef="DataSources.TITLEBAC.LBM" FormatType="IFF_IMAGE">
+          <Parameters/>
         </Asset>
       </Items>
     </Assets>
