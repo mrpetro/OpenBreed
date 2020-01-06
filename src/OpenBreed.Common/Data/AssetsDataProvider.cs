@@ -106,17 +106,17 @@ namespace OpenBreed.Common.Data
 
         private AssetBase CreateAsset(IAssetEntry assetEntry)
         {
-            var formatType = DataProvider.FormatMan.GetFormatType(assetEntry.Format.Name);
+            var formatType = DataProvider.FormatMan.GetFormatType(assetEntry.FormatType);
 
             if (formatType == null)
-                throw new Exception($"Unknown format {assetEntry.Format.Name}");
+                throw new Exception($"Unknown format {assetEntry.FormatType}");
 
             var ds = DataProvider.DataSources.GetDataSource(assetEntry.DataSourceRef);
 
             if (ds == null)
                 throw new Exception($"Unknown DataSourceRef {assetEntry.DataSourceRef}");
 
-            return new AssetBase(this, assetEntry.Id, ds, formatType, assetEntry.Format.Parameters);
+            return new AssetBase(this, assetEntry.Id, ds, formatType, assetEntry.Parameters);
         }
 
         #endregion Private Methods

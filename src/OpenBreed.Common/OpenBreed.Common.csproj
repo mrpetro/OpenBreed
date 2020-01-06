@@ -75,7 +75,6 @@
     <Compile Include="Formats\IFFImageFormat.cs" />
     <Compile Include="Formats\DataFormat.cs" />
     <Compile Include="Formats\FormatParameter.cs" />
-    <Compile Include="Formats\IFormatEntry.cs" />
     <Compile Include="Formats\PCMSoundFormat.cs" />
     <Compile Include="Helpers\IOHelper.cs" />
     <Compile Include="Helpers\XmlHelper.cs" />
