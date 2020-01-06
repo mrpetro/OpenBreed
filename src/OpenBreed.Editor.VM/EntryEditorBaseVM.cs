@@ -1,22 +1,16 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM.Database;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM
 {
-    public abstract class EntryEditorBaseVM<E,VM> : EntryEditorVM where VM : EditableEntryVM, new() where E : IEntry
+    public abstract class EntryEditorBaseVM<E, VM> : EntryEditorVM where VM : EditableEntryVM, new() where E : IEntry
     {
-
         #region Private Fields
 
         //private VM _editable;
         //private string _editableName;
         private E _edited;
+
         private E _next;
         private E _previous;
         private IRepository<E> _repository;
@@ -49,19 +43,19 @@ namespace OpenBreed.Editor.VM
             set { base.SetProperty(ref _editable, value); }
         }
 
+        #endregion Public Properties
+
         //public override string EditableName
         //{
         //    get { return _editableName; }
         //    set { SetProperty(ref _editableName, value); }
         //}
 
-        #endregion Public Properties
-
         #region Public Methods
 
         public override void Commit()
         {
-            string originalName = _edited.Id;
+            var originalId = _edited.Id;
 
             UpdateEntry((VM)_editable, _edited);
 
@@ -70,11 +64,12 @@ namespace OpenBreed.Editor.VM
             else
                 _repository.Add(_edited);
 
+            UpdateControls();
             CommitEnabled = false;
             RevertEnabled = true;
             EditMode = true;
 
-            CommitedAction?.Invoke(originalName);
+            CommitedAction?.Invoke(originalId);
         }
 
         public override void Revert()
@@ -128,9 +123,30 @@ namespace OpenBreed.Editor.VM
 
         #region Private Methods
 
+        private bool IsIdUnique()
+        {
+            var foundEntry = _repository.Find(Editable.Id);
+
+            if (foundEntry == null)
+                return true;
+
+            return false;
+        }
+
         private void Editable_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            CommitEnabled = true;
+            var canCommit = true;
+
+            switch (e.PropertyName)
+            {
+                case nameof(Editable.Id):
+                    canCommit = IsIdUnique();
+                    break;
+                default:
+                    break;
+            }
+
+            CommitEnabled = canCommit;
         }
 
         private void EditEntry(E entry)
@@ -148,12 +164,12 @@ namespace OpenBreed.Editor.VM
             UpdateVM(entry, vm);
             Editable = vm;
             Editable.PropertyChanged += Editable_PropertyChanged;
-            Update();
+            UpdateControls();
 
             CommitEnabled = false;
         }
 
-        private void Update()
+        private void UpdateControls()
         {
             if (Editable == null)
                 Title = $"{EditorName} - no entry to edit";
@@ -165,6 +181,5 @@ namespace OpenBreed.Editor.VM
         }
 
         #endregion Private Methods
-
     }
 }

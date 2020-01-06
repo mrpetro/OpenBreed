@@ -40,6 +40,7 @@ namespace OpenBreed.Editor.VM.Images
             get { return _assetRef; }
             set { SetProperty(ref _assetRef, value); }
         }
+
         public int Height
         {
             get { return _height; }

@@ -83,17 +83,11 @@
     <Compile Include="Controls\Common\AssetFormatCtrl.Designer.cs">
       <DependentUpon>AssetFormatCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Images\ImageDataSourceCtrl.cs">
+    <Compile Include="Controls\Common\EntryRefIdEditorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Images\ImageDataSourceCtrl.Designer.cs">
-      <DependentUpon>ImageDataSourceCtrl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Common\EntryRefCtrl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Common\EntryRefCtrl.Designer.cs">
-      <DependentUpon>EntryRefCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Common\EntryRefIdEditorCtrl.Designer.cs">
+      <DependentUpon>EntryRefIdEditorCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Common\EntryRefIdSelectorCtrl.cs">
       <SubType>UserControl</SubType>
@@ -485,11 +479,8 @@
     <EmbeddedResource Include="Controls\Common\AssetFormatCtrl.resx">
       <DependentUpon>AssetFormatCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Images\ImageDataSourceCtrl.resx">
-      <DependentUpon>ImageDataSourceCtrl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Common\EntryRefCtrl.resx">
-      <DependentUpon>EntryRefCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Common\EntryRefIdEditorCtrl.resx">
+      <DependentUpon>EntryRefIdEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Common\EntryRefIdSelectorCtrl.resx">
       <DependentUpon>EntryRefIdSelectorCtrl.cs</DependentUpon>

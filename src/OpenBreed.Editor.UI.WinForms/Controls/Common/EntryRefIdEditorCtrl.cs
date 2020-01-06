@@ -13,17 +13,17 @@ using OpenBreed.Editor.UI.WinForms.Forms.Common;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Common
 {
-    public partial class EntryRefCtrl : UserControl
+    public partial class EntryRefIdEditorCtrl : UserControl
     {
         #region Private Fields
 
-        private EntryRefVM _vm;
+        private EntryRefIdEditorVM _vm;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public EntryRefCtrl()
+        public EntryRefIdEditorCtrl()
         {
             InitializeComponent();
         }
@@ -32,16 +32,16 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Common
 
         #region Public Methods
 
-        public void Initialize(EntryRefVM vm)
+        public void Initialize(EntryRefIdEditorVM vm)
         {
-            _vm = vm ?? throw new ArgumentNullException(nameof(EntryRefVM));
+            _vm = vm ?? throw new ArgumentNullException(nameof(EntryRefIdEditorVM));
 
             tbxEntryId.DataBindings.Add(nameof(tbxEntryId.Text), _vm, nameof(_vm.RefId), false, DataSourceUpdateMode.OnPropertyChanged);
             btnEntryIdSelect.Click += (s,a) => _vm.SelectActionSetId();
             _vm.OpenRefIdSelectorAction = OnOpenRefIdSelector;
         }
 
-        private void OnOpenRefIdSelector(EntryRefSelectorVM vm)
+        private void OnOpenRefIdSelector(EntryRefIdSelectorVM vm)
         {
             using (var form = new RefIdSelectorForm())
             {

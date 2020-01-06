@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using OpenBreed.Common.Images;
 using OpenBreed.Common;
 using System.ComponentModel;
+using OpenBreed.Editor.VM.Common;
+using OpenBreed.Common.Assets;
 
 namespace OpenBreed.Editor.VM.Images
 {
@@ -18,8 +20,8 @@ namespace OpenBreed.Editor.VM.Images
 
         public ImageEditorVM(IRepository repository) : base(repository)
         {
-            DataSource = new ImageDataSourceVM();
-
+            ImageAssetRefIdEditor = new EntryRefIdEditorVM(typeof(IAssetEntry));
+            ImageAssetRefIdEditor.RefIdSelected = (newRefId) => { Editable.AssetRef = newRefId; };
             PropertyChanged += This_PropertyChanged;
         }
 
@@ -27,7 +29,8 @@ namespace OpenBreed.Editor.VM.Images
 
         #region Public Properties
 
-        public ImageDataSourceVM DataSource { get; }
+        public EntryRefIdEditorVM ImageAssetRefIdEditor { get; }
+
         public override string EditorName { get { return "Image Editor"; } }
 
         #endregion Public Properties
@@ -52,19 +55,21 @@ namespace OpenBreed.Editor.VM.Images
 
         #region Protected Methods
 
-        protected override void UpdateEntry(ImageVM source, IImageEntry target)
+        protected override void UpdateEntry(ImageVM source, IImageEntry entry)
         {
-            base.UpdateEntry(source, target);
+            entry.DataRef = source.AssetRef;
+
+            base.UpdateEntry(source, entry);
         }
 
-        protected override void UpdateVM(IImageEntry source, ImageVM target)
+        protected override void UpdateVM(IImageEntry entry, ImageVM target)
         {
-            target.AssetRef = source.DataRef;
+            target.AssetRef = entry.DataRef;
 
-            if(source.DataRef != null)
-                target.Image = DataProvider.Images.GetImage(source.Id);
+            if(entry.DataRef != null)
+                target.Image = DataProvider.Images.GetImage(entry.Id);
 
-            base.UpdateVM(source, target);
+            base.UpdateVM(entry, target);
         }
 
         private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -72,7 +77,7 @@ namespace OpenBreed.Editor.VM.Images
             switch (e.PropertyName)
             {
                 case nameof(Editable):
-                    DataSource.AssetEntryRef.RefId = (Editable.AssetRef == null) ? null : Editable.AssetRef;
+                    ImageAssetRefIdEditor.RefId = (Editable.AssetRef == null) ? null : Editable.AssetRef;
                     break;
                 default:
                     break;

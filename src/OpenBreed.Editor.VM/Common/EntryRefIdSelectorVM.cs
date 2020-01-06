@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Common
 {
-    public class EntryRefSelectorVM : BaseViewModel
+    public class EntryRefIdSelectorVM : BaseViewModel
     {
         #region Private Fields
 
@@ -20,7 +20,7 @@ namespace OpenBreed.Editor.VM.Common
 
         public BindingList<string> Items { get; }
 
-        public EntryRefSelectorVM(Type type)
+        public EntryRefIdSelectorVM(Type type)
         {
             Items = new BindingList<string>();
 

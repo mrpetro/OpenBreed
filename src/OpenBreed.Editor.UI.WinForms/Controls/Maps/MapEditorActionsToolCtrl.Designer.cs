@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.LayoutTable = new System.Windows.Forms.TableLayoutPanel();
-            this.EntryRef = new OpenBreed.Editor.UI.WinForms.Controls.Common.EntryRefCtrl();
+            this.EntryRef = new OpenBreed.Editor.UI.WinForms.Controls.Common.EntryRefIdEditorCtrl();
             this.ActionsSelector = new OpenBreed.Editor.UI.WinForms.Controls.Maps.MapEditorActionsSelectorCtrl();
             this.LayoutTable.SuspendLayout();
             this.SuspendLayout();
@@ -81,7 +81,7 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel LayoutTable;
-        private Common.EntryRefCtrl EntryRef;
+        private Common.EntryRefIdEditorCtrl EntryRef;
         private MapEditorActionsSelectorCtrl ActionsSelector;
     }
 }

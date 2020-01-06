@@ -30,13 +30,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
         {
             InitializeComponent();
 
-            DGV.AutoGenerateColumns = true;
-            DGV.AutoSize = true;
-            DGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DGV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            DGV.AllowUserToResizeRows = false;
-            DGV.AllowUserToAddRows = false;
-            DGV.RowHeadersVisible = false;
+            SetupDataGridView();
 
             DGV.MouseClick += DGV_MouseClick;
             DGV.CellMouseDoubleClick += DGV_CellMouseDoubleClick;
@@ -149,6 +143,40 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
 
             this.Controls.Remove(_newEntryCreatorCtrl);
             _newEntryCreatorCtrl = null;
+        }
+
+        private void SetupDataGridView()
+        {
+            DGV.DataSource = null;
+
+            DGV.Columns.Clear();
+            DGV.AutoGenerateColumns = false;
+            DGV.AutoSize = true;
+            DGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DGV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            DGV.AllowUserToResizeRows = false;
+            DGV.AllowUserToAddRows = false;
+            DGV.RowHeadersVisible = false;
+
+            var idColumn = new DataGridViewTextBoxColumn();
+            idColumn.HeaderText = "Id";
+            idColumn.Name = "Id";
+            idColumn.DataPropertyName = "Id";
+            idColumn.MinimumWidth = 40;
+            idColumn.Width = 40;
+            idColumn.ReadOnly = true;
+            idColumn.Resizable = DataGridViewTriState.False;
+            DGV.Columns.Add(idColumn);
+
+            var descriptionColumn = new DataGridViewTextBoxColumn();
+            descriptionColumn.HeaderText = "Description";
+            descriptionColumn.Name = "Description";
+            descriptionColumn.DataPropertyName = "Description";
+            descriptionColumn.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            descriptionColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            descriptionColumn.ReadOnly = false;
+            descriptionColumn.Resizable = DataGridViewTriState.False;
+            DGV.Columns.Add(descriptionColumn);
         }
 
         #endregion Private Methods

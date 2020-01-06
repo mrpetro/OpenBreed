@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Common
 {
-    partial class EntryRefCtrl
+    partial class EntryRefIdEditorCtrl
     {
         /// <summary> 
         /// Required designer variable.
@@ -54,13 +54,13 @@
             this.tbxEntryId.Size = new System.Drawing.Size(350, 20);
             this.tbxEntryId.TabIndex = 3;
             // 
-            // EntryRefCtrl
+            // EntryRefIdEditorCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tbxEntryId);
             this.Controls.Add(this.btnEntryIdSelect);
-            this.Name = "EntryRefCtrl";
+            this.Name = "EntryRefIdEditorCtrl";
             this.Size = new System.Drawing.Size(410, 21);
             this.ResumeLayout(false);
             this.PerformLayout();
