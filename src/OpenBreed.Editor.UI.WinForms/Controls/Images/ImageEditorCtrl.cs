@@ -27,7 +27,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Images
         {
             _vm = vm as ImageEditorVM ?? throw new InvalidOperationException(nameof(vm));
 
-            DataSource.Initialize(_vm.DataSource);
+            ImageAssetRefIdEditor.Initialize(_vm.ImageAssetRefIdEditor);
             ImageView.Initialize(_vm);
         }
     }

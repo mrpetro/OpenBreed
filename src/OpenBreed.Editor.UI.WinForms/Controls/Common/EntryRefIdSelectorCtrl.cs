@@ -13,14 +13,14 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Common
 {
     public partial class EntryRefIdSelectorCtrl : UserControl
     {
-        private EntryRefSelectorVM _vm;
+        private EntryRefIdSelectorVM _vm;
 
         public EntryRefIdSelectorCtrl()
         {
             InitializeComponent();
         }
 
-        public void Initialize(EntryRefSelectorVM vm)
+        public void Initialize(EntryRefIdSelectorVM vm)
         {
             _vm = vm;
 

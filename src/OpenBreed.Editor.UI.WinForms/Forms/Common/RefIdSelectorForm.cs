@@ -13,16 +13,16 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.Common
 {
     public partial class RefIdSelectorForm : Form
     {
-        private EntryRefSelectorVM _vm;
+        private EntryRefIdSelectorVM _vm;
 
         public RefIdSelectorForm()
         {
             InitializeComponent();
         }
 
-        internal void Initialize(EntryRefSelectorVM vm)
+        internal void Initialize(EntryRefIdSelectorVM vm)
         {
-            _vm = vm ?? throw new ArgumentNullException(nameof(EntryRefSelectorVM));
+            _vm = vm ?? throw new ArgumentNullException(nameof(EntryRefIdSelectorVM));
 
             Ctrl.Initialize(vm);
         }

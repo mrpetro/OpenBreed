@@ -80,8 +80,8 @@
     <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="Base\BindingListExtensions.cs" />
     <Compile Include="Base\Command.cs" />
-    <Compile Include="Common\EntryRefVM.cs" />
-    <Compile Include="Common\EntryRefSelectorVM.cs" />
+    <Compile Include="Common\EntryRefIdEditorVM.cs" />
+    <Compile Include="Common\EntryRefIdSelectorVM.cs" />
     <Compile Include="Common\SelectModeEnum.cs" />
     <Compile Include="Database\DbTableEditorBaseVM.cs" />
     <Compile Include="Database\DbTableNewEntryCreatorVM.cs" />
@@ -123,7 +123,6 @@
     <Compile Include="EditableEntryVM.cs" />
     <Compile Include="IDialogProvider.cs" />
     <Compile Include="IFolderBrowserQuery.cs" />
-    <Compile Include="Images\ImageDataSourceVM.cs" />
     <Compile Include="Images\ImageEditorVM.cs" />
     <Compile Include="Images\ImageVM.cs" />
     <Compile Include="IOpenFileQuery.cs" />

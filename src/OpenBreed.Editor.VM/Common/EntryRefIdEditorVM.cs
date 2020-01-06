@@ -3,7 +3,7 @@ using System;
 
 namespace OpenBreed.Editor.VM.Common
 {
-    public class EntryRefVM : BaseViewModel
+    public class EntryRefIdEditorVM : BaseViewModel
     {
 
         #region Private Fields
@@ -15,7 +15,7 @@ namespace OpenBreed.Editor.VM.Common
 
         #region Public Constructors
 
-        public EntryRefVM(Type type)
+        public EntryRefIdEditorVM(Type type)
         {
             _entryType = type;
         }
@@ -24,7 +24,9 @@ namespace OpenBreed.Editor.VM.Common
 
         #region Public Properties
 
-        public Action<EntryRefSelectorVM> OpenRefIdSelectorAction { get; set; }
+        public Action<string> RefIdSelected { get; set; }
+        public Action<EntryRefIdSelectorVM> OpenRefIdSelectorAction { get; set; }
+
         public string RefId
         {
             get { return _refId; }
@@ -37,7 +39,7 @@ namespace OpenBreed.Editor.VM.Common
 
         public void SelectActionSetId()
         {
-            var refSelector = new EntryRefSelectorVM(_entryType);
+            var refSelector = new EntryRefIdSelectorVM(_entryType);
             refSelector.CurrentEntryId = RefId;
             OpenRefIdSelectorAction?.Invoke(refSelector);
 
@@ -45,6 +47,7 @@ namespace OpenBreed.Editor.VM.Common
                 return;
 
             RefId = refSelector.SelectedEntryId;
+            RefIdSelected?.Invoke(RefId);
         }
 
         #endregion Public Methods

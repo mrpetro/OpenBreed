@@ -29,7 +29,7 @@ namespace OpenBreed.Editor.VM.Maps
         {
             Parent = parent;
 
-            ActionEntryRef = new EntryRefVM(typeof(IActionSetEntry));
+            ActionEntryRef = new EntryRefIdEditorVM(typeof(IActionSetEntry));
             ActionsSelector = new MapEditorActionsSelectorVM(this);
 
             ActionEntryRef.PropertyChanged += ActionEntryRef_PropertyChanged;
@@ -41,7 +41,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Properties
 
-        public EntryRefVM ActionEntryRef { get; }
+        public EntryRefIdEditorVM ActionEntryRef { get; }
 
         public ActionSetVM ActionSet
         {
