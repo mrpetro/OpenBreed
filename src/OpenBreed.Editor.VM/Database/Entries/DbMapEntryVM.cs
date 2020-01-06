@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenBreed.Common;
-using OpenBreed.Common.XmlDatabase;
-using OpenBreed.Common.XmlDatabase.Items.Maps;
+﻿using OpenBreed.Common;
 using OpenBreed.Common.Maps;
+using System;
 
 namespace OpenBreed.Editor.VM.Database.Entries
 {
@@ -26,13 +20,19 @@ namespace OpenBreed.Editor.VM.Database.Entries
 
         #endregion Public Constructors
 
+        #region Public Properties
+
+        public override IEntry Entry { get { return _entry; } }
+
+        #endregion Public Properties
+
         #region Public Methods
 
         public override void Load(IEntry entry)
         {
             _entry = entry as IMapEntry ?? throw new InvalidOperationException($"Expected {nameof(IMapEntry)}");
 
-            base.Load(entry);     
+            base.Load(entry);
         }
 
         #endregion Public Methods

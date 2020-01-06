@@ -20,6 +20,8 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
         {
             InitializeComponent();
 
+            SetupDataGridView();
+
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
         }
 
@@ -37,7 +39,8 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
             btnRemoveSprite.Click += (s, a) => vm.RemoveSprite();
 
             DGV.DataBindings.Add(nameof(DGV.CurrentRowIndex), vm, nameof(vm.CurrentSpriteIndex), false, DataSourceUpdateMode.OnPropertyChanged);
-            SetupDataGridView();
+
+            DGV.DataSource = vm.Items;
         }
 
         private void SetupDataGridView()
@@ -76,18 +79,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
             imageColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             imageColumn.Resizable = DataGridViewTriState.False;
             DGV.Columns.Add(imageColumn);
-
-            //var descriptionColumn = new DataGridViewTextBoxColumn();
-            //descriptionColumn.HeaderText = "Size";
-            //descriptionColumn.Name = "Description";
-            //descriptionColumn.DataPropertyName = "Description";
-            //descriptionColumn.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            //descriptionColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            //descriptionColumn.ReadOnly = false;
-            //descriptionColumn.Resizable = DataGridViewTriState.False;
-            //DGV.Columns.Add(descriptionColumn);
-
-            DGV.DataSource = vm.Items;
         }
 
         #endregion Public Methods

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenBreed.Common;
-using OpenBreed.Common.XmlDatabase;
-using OpenBreed.Common.XmlDatabase.Items.Images;
+﻿using OpenBreed.Common;
 using OpenBreed.Common.Images;
+using System;
 
 namespace OpenBreed.Editor.VM.Database.Entries
 {
@@ -15,6 +9,9 @@ namespace OpenBreed.Editor.VM.Database.Entries
         #region Private Fields
 
         private string _assetId;
+
+
+        private IImageEntry _entry;
 
         #endregion Private Fields
 
@@ -26,17 +23,9 @@ namespace OpenBreed.Editor.VM.Database.Entries
 
         #endregion Public Constructors
 
-        #region Public Methods
+        #region Public Properties
 
-        public override void Load(IEntry entry)
-        {
-            var imageEntry = entry as IImageEntry ?? throw new InvalidOperationException($"Expected {nameof(IImageEntry)}");
-            AssetId = imageEntry.DataRef;
-
-            base.Load(entry);
-        }
-
-        #endregion Public Methods
+        public override IEntry Entry { get { return _entry; } }
 
         public string AssetId
         {
@@ -44,5 +33,18 @@ namespace OpenBreed.Editor.VM.Database.Entries
             set { SetProperty(ref _assetId, value); }
         }
 
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public override void Load(IEntry entry)
+        {
+            _entry = entry as IImageEntry ?? throw new InvalidOperationException($"Expected {nameof(IImageEntry)}");
+            AssetId = _entry.DataRef;
+
+            base.Load(entry);
+        }
+
+        #endregion Public Methods
     }
 }

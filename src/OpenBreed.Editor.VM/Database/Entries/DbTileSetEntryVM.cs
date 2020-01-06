@@ -1,14 +1,6 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.XmlDatabase;
-using OpenBreed.Common.XmlDatabase.Items.Actions;
-using OpenBreed.Common.XmlDatabase.Items.Assets;
-using OpenBreed.Common.XmlDatabase.Items.Tiles;
 using OpenBreed.Common.Tiles;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database.Entries
 {
@@ -28,6 +20,12 @@ namespace OpenBreed.Editor.VM.Database.Entries
 
         #endregion Public Constructors
 
+        #region Public Properties
+
+        public override IEntry Entry { get { return _entry; } }
+
+        #endregion Public Properties
+
         #region Public Methods
 
         public override void Load(IEntry entry)
@@ -36,7 +34,6 @@ namespace OpenBreed.Editor.VM.Database.Entries
 
             base.Load(entry);
         }
-
 
         #endregion Public Methods
     }

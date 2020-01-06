@@ -20,6 +20,12 @@ namespace OpenBreed.Editor.VM.Database.Entries
 
         #endregion Public Constructors
 
+        #region Public Properties
+
+        public override IEntry Entry { get { return _entry; } }
+
+        #endregion Public Properties
+
         #region Public Methods
 
         public override void Load(IEntry entry)

@@ -215,10 +215,9 @@ namespace OpenBreed.Editor.VM.Database
         private void OnEntryCommited(string entryId)
         {
             var entryVM = _editable.Entries.FirstOrDefault(item => item.Id == entryId);
-            var entry = _edited.Entries.FirstOrDefault(item => item.Id == entryId);
 
-            if (entryVM != null && entry != null)
-                entryVM.Load(entry);
+            if (entryVM != null)
+                entryVM.Load(entryVM.Entry);
         }
         private void UpdateTitle()
         {

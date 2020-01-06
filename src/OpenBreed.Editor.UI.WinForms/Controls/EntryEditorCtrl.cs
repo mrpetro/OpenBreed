@@ -79,16 +79,16 @@ namespace OpenBreed.Editor.UI.WinForms.Controls
 
         private void OnEditableChanged(EditableEntryVM entry)
         {
-            tbxName.DataBindings.Clear();
+            tbxId.DataBindings.Clear();
             tbxDescription.DataBindings.Clear();
             if (entry == null)
             {
-                tbxName.Text = null;
+                tbxId.Text = null;
                 tbxDescription.Text = null;
             }
             else
             {
-                tbxName.DataBindings.Add(nameof(tbxName.Text), entry, nameof(entry.Id), false, DataSourceUpdateMode.OnPropertyChanged);
+                tbxId.DataBindings.Add(nameof(tbxId.Text), entry, nameof(entry.Id), false, DataSourceUpdateMode.OnPropertyChanged);
                 tbxDescription.DataBindings.Add(nameof(tbxDescription.Text), entry, nameof(entry.Description), false, DataSourceUpdateMode.OnPropertyChanged);
             }
         }

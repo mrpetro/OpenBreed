@@ -1,21 +1,17 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.XmlDatabase;
 using OpenBreed.Editor.VM.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database.Entries
 {
     public abstract class DbEntryVM : BaseViewModel
     {
-        private string _description;
+        #region Private Fields
 
-        #region Public Fields
+        private string description;
 
-        #endregion Public Fields
+        private string id;
+
+        #endregion Private Fields
 
         #region Public Constructors
 
@@ -27,12 +23,18 @@ namespace OpenBreed.Editor.VM.Database.Entries
 
         #region Public Properties
 
-        public virtual string Id { get; private set; }
+        public abstract IEntry Entry { get; }
+
+        public virtual string Id
+        {
+            get { return id; }
+            private set { SetProperty(ref id, value); }
+        }
 
         public string Description
         {
-            get { return _description; }
-            set { SetProperty(ref _description, value); }
+            get { return description; }
+            set { SetProperty(ref description, value); }
         }
 
         #endregion Public Properties
@@ -46,6 +48,5 @@ namespace OpenBreed.Editor.VM.Database.Entries
         }
 
         #endregion Public Methods
-
     }
 }
