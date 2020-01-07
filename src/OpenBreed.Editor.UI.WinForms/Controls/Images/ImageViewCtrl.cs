@@ -30,6 +30,8 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Images
             _vm = vm as ImageEditorVM ?? throw new InvalidOperationException(nameof(vm));
             _vm.PropertyChanged += _vm_PropertyChanged;
 
+            _vm.RefreshAction = Invalidate;
+
             UpdateViewState();
         }
 
@@ -60,8 +62,8 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Images
 
         private void SetImageState()
         {
-            Width = _vm.Editable.Width;
-            Height = _vm.Editable.Height;
+            Width = _vm.Image.Width;
+            Height = _vm.Image.Height;
             Invalidate();
         }
 
@@ -76,7 +78,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Images
             e.Graphics.SmoothingMode = SmoothingMode.None;
             e.Graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
 
-            _vm.Draw(e.Graphics, 0, 0, 1);
+            _vm.Draw(e.Graphics);
 
             base.OnPaint(e);
         }

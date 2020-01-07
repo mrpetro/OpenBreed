@@ -1,20 +1,20 @@
-﻿using OpenBreed.Editor.VM.Base;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenBreed.Common.Images;
-using OpenBreed.Common;
-using System.ComponentModel;
-using OpenBreed.Editor.VM.Common;
+﻿using OpenBreed.Common;
 using OpenBreed.Common.Assets;
+using OpenBreed.Common.Images;
+using OpenBreed.Editor.VM.Common;
+using System;
+using System.ComponentModel;
+using System.Drawing;
 
 namespace OpenBreed.Editor.VM.Images
 {
     public class ImageEditorVM : EntryEditorBaseVM<IImageEntry, ImageVM>
     {
+        #region Private Fields
+
+        private Image image;
+
+        #endregion Private Fields
 
         #region Public Constructors
 
@@ -33,43 +33,80 @@ namespace OpenBreed.Editor.VM.Images
 
         public override string EditorName { get { return "Image Editor"; } }
 
+        public Image Image
+        {
+            get { return image; }
+            set { SetProperty(ref image, value); }
+        }
+
+        public Action RefreshAction { get; set; }
+
         #endregion Public Properties
 
         #region Public Methods
 
-        public void Draw(Graphics gfx, float x, float y, int factor)
+        public void Draw(Graphics gfx)
         {
-            if (Editable == null)
+            if (Image == null)
                 return;
 
-            if (Editable.Image == null)
-                return;
-
-            int width = Editable.Width * factor;
-            int height = Editable.Height * factor;
-
-            gfx.DrawImage(Editable.Image, (int)x, (int)y, width, height);
+            gfx.DrawImage(Image, 0, 0, Image.Width, Image.Height);
         }
 
         #endregion Public Methods
 
         #region Protected Methods
 
+        protected override void OnEditablePropertyChanged(string propertyName)
+        {
+            switch (propertyName)
+            {
+                case nameof(Editable.AssetRef):
+                    UpdateImage(Editable);
+                    Refresh();
+                    break;
+
+                default:
+                    break;
+            }
+
+            base.OnEditablePropertyChanged(propertyName);
+        }
+
         protected override void UpdateEntry(ImageVM source, IImageEntry entry)
         {
             entry.DataRef = source.AssetRef;
-
             base.UpdateEntry(source, entry);
         }
 
         protected override void UpdateVM(IImageEntry entry, ImageVM target)
         {
             target.AssetRef = entry.DataRef;
-
-            if(entry.DataRef != null)
-                target.Image = DataProvider.Images.GetImage(entry.Id);
-
+            UpdateImage(target);
             base.UpdateVM(entry, target);
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
+
+        private void Refresh()
+        {
+            RefreshAction?.Invoke();
+        }
+
+        private void UpdateImage(ImageVM vm)
+        {
+            if (vm.AssetRef != null)
+            {
+                if (!DataProvider.TryGetData<Image>(vm.AssetRef, out Image item, out string message))
+                {
+                    ServiceLocator.Instance.GetService<IDialogProvider>().ShowMessage(message, "Invalid asset");
+                    Image = System.Drawing.SystemIcons.Error.ToBitmap();
+                }
+                else
+                    Image = item;
+            }
         }
 
         private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -79,13 +116,12 @@ namespace OpenBreed.Editor.VM.Images
                 case nameof(Editable):
                     ImageAssetRefIdEditor.RefId = (Editable.AssetRef == null) ? null : Editable.AssetRef;
                     break;
+
                 default:
                     break;
             }
         }
 
-
-        #endregion Protected Methods
-
+        #endregion Private Methods
     }
 }

@@ -66,15 +66,15 @@
             // TablePanel
             // 
             this.TablePanel.ColumnCount = 1;
-            this.TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TablePanel.Controls.Add(this.ImageView, 0, 1);
             this.TablePanel.Controls.Add(this.grpImageAssetRefIdEditor, 0, 0);
             this.TablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TablePanel.Location = new System.Drawing.Point(0, 0);
             this.TablePanel.Name = "TablePanel";
             this.TablePanel.RowCount = 2;
-            this.TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.08901F));
-            this.TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.911F));
+            this.TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TablePanel.Size = new System.Drawing.Size(783, 382);
             this.TablePanel.TabIndex = 1;
             // 
