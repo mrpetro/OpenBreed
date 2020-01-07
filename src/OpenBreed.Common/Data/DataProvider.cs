@@ -54,6 +54,29 @@ namespace OpenBreed.Common.Data
 
         #region Public Methods
 
+        public bool TryGetData<T>(string id, out T item, out string message)
+        {
+            var data = GetData(id);
+
+            if (data == null)
+            {
+                item = default(T);
+                message = $"No asset with ID '{id}' found.";
+                return false;
+            }
+
+            if (data is T)
+            {
+                item = (T)data;
+                message = null;
+                return true;
+            }
+
+            item = default(T);
+            message = $"Asset with ID '{id}' is not of type '{typeof(T)}'.";
+            return false;
+        }
+
         public object GetData(string id)
         {
             object data;
