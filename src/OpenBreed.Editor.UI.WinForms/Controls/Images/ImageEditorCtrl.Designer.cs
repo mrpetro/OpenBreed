@@ -31,9 +31,9 @@
             this.ImageView = new OpenBreed.Editor.UI.WinForms.Controls.Images.ImageViewCtrl();
             this.grpImageAssetRefIdEditor = new System.Windows.Forms.GroupBox();
             this.ImageAssetRefIdEditor = new OpenBreed.Editor.UI.WinForms.Controls.Common.EntryRefIdEditorCtrl();
-            this.TablePanel = new System.Windows.Forms.TableLayoutPanel();
+            this.LayoutTable = new System.Windows.Forms.TableLayoutPanel();
             this.grpImageAssetRefIdEditor.SuspendLayout();
-            this.TablePanel.SuspendLayout();
+            this.LayoutTable.SuspendLayout();
             this.SuspendLayout();
             // 
             // ImageView
@@ -63,30 +63,30 @@
             this.ImageAssetRefIdEditor.Size = new System.Drawing.Size(771, 25);
             this.ImageAssetRefIdEditor.TabIndex = 0;
             // 
-            // TablePanel
+            // LayoutTable
             // 
-            this.TablePanel.ColumnCount = 1;
-            this.TablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TablePanel.Controls.Add(this.ImageView, 0, 1);
-            this.TablePanel.Controls.Add(this.grpImageAssetRefIdEditor, 0, 0);
-            this.TablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TablePanel.Location = new System.Drawing.Point(0, 0);
-            this.TablePanel.Name = "TablePanel";
-            this.TablePanel.RowCount = 2;
-            this.TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.TablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TablePanel.Size = new System.Drawing.Size(783, 382);
-            this.TablePanel.TabIndex = 1;
+            this.LayoutTable.ColumnCount = 1;
+            this.LayoutTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.LayoutTable.Controls.Add(this.ImageView, 0, 1);
+            this.LayoutTable.Controls.Add(this.grpImageAssetRefIdEditor, 0, 0);
+            this.LayoutTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LayoutTable.Location = new System.Drawing.Point(0, 0);
+            this.LayoutTable.Name = "LayoutTable";
+            this.LayoutTable.RowCount = 2;
+            this.LayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.LayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.LayoutTable.Size = new System.Drawing.Size(783, 382);
+            this.LayoutTable.TabIndex = 1;
             // 
             // ImageEditorCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.TablePanel);
+            this.Controls.Add(this.LayoutTable);
             this.Name = "ImageEditorCtrl";
             this.Size = new System.Drawing.Size(783, 382);
             this.grpImageAssetRefIdEditor.ResumeLayout(false);
-            this.TablePanel.ResumeLayout(false);
+            this.LayoutTable.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -95,6 +95,6 @@
         private ImageViewCtrl ImageView;
         private System.Windows.Forms.GroupBox grpImageAssetRefIdEditor;
         private Common.EntryRefIdEditorCtrl ImageAssetRefIdEditor;
-        private System.Windows.Forms.TableLayoutPanel TablePanel;
+        private System.Windows.Forms.TableLayoutPanel LayoutTable;
     }
 }

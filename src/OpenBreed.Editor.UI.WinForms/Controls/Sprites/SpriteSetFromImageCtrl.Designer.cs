@@ -34,12 +34,17 @@
             this.btnRemoveSprite = new System.Windows.Forms.Button();
             this.Split = new System.Windows.Forms.SplitContainer();
             this.SpriteEditor = new OpenBreed.Editor.UI.WinForms.Controls.Sprites.SpriteFromImageEditorCtrl();
+            this.LayoutTable = new System.Windows.Forms.TableLayoutPanel();
+            this.grpImageAssetRefIdEditor = new System.Windows.Forms.GroupBox();
+            this.ImageAssetRefIdEditor = new OpenBreed.Editor.UI.WinForms.Controls.Common.EntryRefIdEditorCtrl();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Split)).BeginInit();
             this.Split.Panel1.SuspendLayout();
             this.Split.Panel2.SuspendLayout();
             this.Split.SuspendLayout();
+            this.LayoutTable.SuspendLayout();
+            this.grpImageAssetRefIdEditor.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainPanel
@@ -51,7 +56,7 @@
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(0, 0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(332, 399);
+            this.MainPanel.Size = new System.Drawing.Size(329, 343);
             this.MainPanel.TabIndex = 9;
             // 
             // DGV
@@ -63,7 +68,7 @@
             this.DGV.CurrentRowIndex = -1;
             this.DGV.Location = new System.Drawing.Point(2, 32);
             this.DGV.Name = "DGV";
-            this.DGV.Size = new System.Drawing.Size(325, 363);
+            this.DGV.Size = new System.Drawing.Size(322, 307);
             this.DGV.TabIndex = 10;
             // 
             // btnAddSprite
@@ -82,7 +87,7 @@
             this.btnRemoveSprite.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRemoveSprite.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btnRemoveSprite.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnRemoveSprite.Location = new System.Drawing.Point(270, 3);
+            this.btnRemoveSprite.Location = new System.Drawing.Point(267, 3);
             this.btnRemoveSprite.Name = "btnRemoveSprite";
             this.btnRemoveSprite.Size = new System.Drawing.Size(57, 23);
             this.btnRemoveSprite.TabIndex = 9;
@@ -92,7 +97,7 @@
             // Split
             // 
             this.Split.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Split.Location = new System.Drawing.Point(0, 0);
+            this.Split.Location = new System.Drawing.Point(3, 53);
             this.Split.Name = "Split";
             // 
             // Split.Panel1
@@ -102,8 +107,8 @@
             // Split.Panel2
             // 
             this.Split.Panel2.Controls.Add(this.SpriteEditor);
-            this.Split.Size = new System.Drawing.Size(674, 399);
-            this.Split.SplitterDistance = 332;
+            this.Split.Size = new System.Drawing.Size(668, 343);
+            this.Split.SplitterDistance = 329;
             this.Split.TabIndex = 0;
             // 
             // SpriteEditor
@@ -113,14 +118,48 @@
             this.SpriteEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SpriteEditor.Location = new System.Drawing.Point(0, 0);
             this.SpriteEditor.Name = "SpriteEditor";
-            this.SpriteEditor.Size = new System.Drawing.Size(338, 399);
+            this.SpriteEditor.Size = new System.Drawing.Size(335, 343);
             this.SpriteEditor.TabIndex = 0;
+            // 
+            // LayoutTable
+            // 
+            this.LayoutTable.ColumnCount = 1;
+            this.LayoutTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.LayoutTable.Controls.Add(this.grpImageAssetRefIdEditor, 0, 0);
+            this.LayoutTable.Controls.Add(this.Split, 0, 1);
+            this.LayoutTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LayoutTable.Location = new System.Drawing.Point(0, 0);
+            this.LayoutTable.Name = "LayoutTable";
+            this.LayoutTable.RowCount = 2;
+            this.LayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.LayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.LayoutTable.Size = new System.Drawing.Size(674, 399);
+            this.LayoutTable.TabIndex = 1;
+            // 
+            // grpImageAssetRefIdEditor
+            // 
+            this.grpImageAssetRefIdEditor.Controls.Add(this.ImageAssetRefIdEditor);
+            this.grpImageAssetRefIdEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpImageAssetRefIdEditor.Location = new System.Drawing.Point(3, 3);
+            this.grpImageAssetRefIdEditor.Name = "grpImageAssetRefIdEditor";
+            this.grpImageAssetRefIdEditor.Size = new System.Drawing.Size(668, 44);
+            this.grpImageAssetRefIdEditor.TabIndex = 3;
+            this.grpImageAssetRefIdEditor.TabStop = false;
+            this.grpImageAssetRefIdEditor.Text = "Asset image reference ID";
+            // 
+            // ImageAssetRefIdEditor
+            // 
+            this.ImageAssetRefIdEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ImageAssetRefIdEditor.Location = new System.Drawing.Point(3, 16);
+            this.ImageAssetRefIdEditor.Name = "ImageAssetRefIdEditor";
+            this.ImageAssetRefIdEditor.Size = new System.Drawing.Size(662, 25);
+            this.ImageAssetRefIdEditor.TabIndex = 0;
             // 
             // SpriteSetFromImageCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.Split);
+            this.Controls.Add(this.LayoutTable);
             this.Name = "SpriteSetFromImageCtrl";
             this.Size = new System.Drawing.Size(674, 399);
             this.MainPanel.ResumeLayout(false);
@@ -129,6 +168,8 @@
             this.Split.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Split)).EndInit();
             this.Split.ResumeLayout(false);
+            this.LayoutTable.ResumeLayout(false);
+            this.grpImageAssetRefIdEditor.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -140,5 +181,8 @@
         private System.Windows.Forms.Button btnAddSprite;
         private System.Windows.Forms.Button btnRemoveSprite;
         private OpenBreed.Common.UI.WinForms.Controls.DataGridViewEx DGV;
+        private System.Windows.Forms.TableLayoutPanel LayoutTable;
+        private System.Windows.Forms.GroupBox grpImageAssetRefIdEditor;
+        private Common.EntryRefIdEditorCtrl ImageAssetRefIdEditor;
     }
 }
