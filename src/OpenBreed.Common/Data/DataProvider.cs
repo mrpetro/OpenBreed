@@ -93,9 +93,9 @@ namespace OpenBreed.Common.Data
 
         public void Save()
         {
-            SaveEx();
+            SaveModels();
 
-            Assets.Save();
+            DataSources.Save();
 
             UnitOfWork.Save();
         }
@@ -117,7 +117,8 @@ namespace OpenBreed.Common.Data
             FormatMan.RegisterFormat("BINARY", new BinaryFormat());
             FormatMan.RegisterFormat("PCM_SOUND", new PCMSoundFormat());
         }
-        private void SaveEx()
+
+        private void SaveModels()
         {
             foreach (var item in _models)
             {
@@ -132,7 +133,7 @@ namespace OpenBreed.Common.Data
                 }
                 catch (Exception ex)
                 {
-                    LogMan.Instance.Error($"Problems saving asset {asset.Id}, Reason: {ex.Message}");
+                    LogMan.Instance.Error($"Problems saving model to asset '{asset.Id}'. Reason: {ex.Message}");
                 }
             }
         }

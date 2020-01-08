@@ -50,10 +50,17 @@ namespace OpenBreed.Common.XmlDatabase
 
         #region Public Methods
 
-        public static XmlDatabaseMan Open(string xmlFilePath)
+
+
+        public static XmlDatabaseMan Open(string xmlFilePath, bool readOnly = false)
         {
-            return new XmlDatabaseMan(xmlFilePath, DatabaseMode.Read);
+            var mode = DatabaseMode.Update;
+            if (readOnly)
+                mode = DatabaseMode.ReadOnly;
+
+            return new XmlDatabaseMan(xmlFilePath, mode);
         }
+
         public IUnitOfWork CreateUnitOfWork()
         {
             return new XmlUnitOfWork(this);
@@ -61,8 +68,10 @@ namespace OpenBreed.Common.XmlDatabase
 
         public void Save()
         {
-            Data.Save(XmlFilePath);
-            //Data.Save($"{XmlFilePath.Replace(".xml","_out.xml")}");
+            if (Mode == DatabaseMode.Update)
+                Data.Save(XmlFilePath);
+            else
+                throw new InvalidOperationException("Database opened in 'ReadOnly' mode.");
         }
 
         #endregion Public Methods
