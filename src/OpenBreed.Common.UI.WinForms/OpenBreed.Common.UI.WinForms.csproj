@@ -48,7 +48,6 @@
     <Compile Include="..\Shared\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="Controls\BaseCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>

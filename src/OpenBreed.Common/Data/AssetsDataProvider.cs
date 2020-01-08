@@ -16,7 +16,6 @@ namespace OpenBreed.Common.Data
         #region Private Fields
 
         private readonly Dictionary<string, AssetBase> _openedAssets = new Dictionary<string, AssetBase>();
-        private Dictionary<string, EPFArchive> _openedArchives = new Dictionary<string, EPFArchive>();
 
         #endregion Private Fields
 
@@ -37,15 +36,15 @@ namespace OpenBreed.Common.Data
 
         #region Public Methods
 
-        public AssetBase GetAsset(string name)
+        public AssetBase GetAsset(string id)
         {
             AssetBase asset = null;
-            if (_openedAssets.TryGetValue(name, out asset))
+            if (_openedAssets.TryGetValue(id, out asset))
                 return asset;
 
-            var entry = DataProvider.UnitOfWork.GetRepository<IAssetEntry>().GetById(name);
+            var entry = DataProvider.UnitOfWork.GetRepository<IAssetEntry>().GetById(id);
             if (entry == null)
-                throw new Exception($"Asset error: {name}");
+                throw new Exception($"Asset error: {id}");
 
             asset = CreateAsset(entry);
 
@@ -56,31 +55,6 @@ namespace OpenBreed.Common.Data
 
         #region Internal Methods
 
-        internal void CloseAll()
-        {
-            Save();
-
-            foreach (var openedArchive in _openedArchives)
-                openedArchive.Value.Dispose();
-
-            _openedArchives.Clear();
-        }
-
-        internal EPFArchive GetArchive(string archivePath)
-        {
-            string normalizedPath = IOHelper.GetNormalizedPath(archivePath);
-
-            EPFArchive archive = null;
-            if (!_openedArchives.TryGetValue(normalizedPath, out archive))
-            {
-                File.Copy(normalizedPath, normalizedPath + ".bkp", true);
-                archive = EPFArchive.ToUpdate(File.Open(normalizedPath, FileMode.Open), true);
-                _openedArchives.Add(normalizedPath, archive);
-            }
-
-            return archive;
-        }
-
         internal void LockSource(AssetBase source)
         {
             _openedAssets.Add(source.Id, source);
@@ -89,15 +63,6 @@ namespace OpenBreed.Common.Data
         internal void ReleaseSource(AssetBase source)
         {
             _openedAssets.Remove(source.Id);
-        }
-
-        internal void Save()
-        {
-            foreach (var openedArchive in _openedArchives)
-            {
-                //if (openedArchive.Value.IsModified)
-                    openedArchive.Value.Save();
-            }
         }
 
         #endregion Internal Methods

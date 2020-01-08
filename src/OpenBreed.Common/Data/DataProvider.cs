@@ -54,6 +54,29 @@ namespace OpenBreed.Common.Data
 
         #region Public Methods
 
+        public bool TryGetData<T>(string id, out T item, out string message)
+        {
+            var data = GetData(id);
+
+            if (data == null)
+            {
+                item = default(T);
+                message = $"No asset with ID '{id}' found.";
+                return false;
+            }
+
+            if (data is T)
+            {
+                item = (T)data;
+                message = null;
+                return true;
+            }
+
+            item = default(T);
+            message = $"Asset with ID '{id}' is not of type '{typeof(T)}'.";
+            return false;
+        }
+
         public object GetData(string id)
         {
             object data;
@@ -70,9 +93,9 @@ namespace OpenBreed.Common.Data
 
         public void Save()
         {
-            SaveEx();
+            SaveModels();
 
-            Assets.Save();
+            DataSources.Save();
 
             UnitOfWork.Save();
         }
@@ -94,7 +117,8 @@ namespace OpenBreed.Common.Data
             FormatMan.RegisterFormat("BINARY", new BinaryFormat());
             FormatMan.RegisterFormat("PCM_SOUND", new PCMSoundFormat());
         }
-        private void SaveEx()
+
+        private void SaveModels()
         {
             foreach (var item in _models)
             {
@@ -109,7 +133,7 @@ namespace OpenBreed.Common.Data
                 }
                 catch (Exception ex)
                 {
-                    LogMan.Instance.Error($"Problems saving asset {asset.Id}, Reason: {ex.Message}");
+                    LogMan.Instance.Error($"Problems saving model to asset '{asset.Id}'. Reason: {ex.Message}");
                 }
             }
         }

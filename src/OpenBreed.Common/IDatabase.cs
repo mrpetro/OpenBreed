@@ -9,7 +9,7 @@ namespace OpenBreed.Common
     public enum DatabaseMode
     {
         Create,
-        Read,
+        ReadOnly,
         Update
     }
 

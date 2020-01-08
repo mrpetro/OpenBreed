@@ -113,7 +113,7 @@
     <Compile Include="Tiles\ITileSetFromImageEntry.cs" />
     <Compile Include="Tiles\ITileSetFromBlkEntry.cs" />
     <Compile Include="Tiles\ITileSetEntry.cs" />
-    <Compile Include="Drawing\BitmapHelper.cs" />
+    <Compile Include="Helpers\BitmapHelper.cs" />
     <Compile Include="IEntry.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="FileMan.cs" />
