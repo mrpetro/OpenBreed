@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
 {
-    partial class SpriteSetFromImageCtrl
+    partial class SpriteSetFromImageEditorCtrl
     {
         /// <summary> 
         /// Required designer variable.
@@ -155,12 +155,12 @@
             this.ImageAssetRefIdEditor.Size = new System.Drawing.Size(662, 25);
             this.ImageAssetRefIdEditor.TabIndex = 0;
             // 
-            // SpriteSetFromImageCtrl
+            // SpriteSetFromImageEditorCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.LayoutTable);
-            this.Name = "SpriteSetFromImageCtrl";
+            this.Name = "SpriteSetFromImageEditorCtrl";
             this.Size = new System.Drawing.Size(674, 399);
             this.MainPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).EndInit();

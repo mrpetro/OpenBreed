@@ -31,11 +31,11 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Public Constructors
 
-        public SpriteFromImageEditorVM(SpriteSetFromImageVM owner)
+        public SpriteFromImageEditorVM(SpriteSetFromImageEditorVM parent)
         {
-            Owner = owner;
+            Parent = parent;
 
-            Owner.PropertyChanged += Owner_PropertyChanged;
+            Parent.PropertyChanged += Owner_PropertyChanged;
 
             PropertyChanged += This_PropertyChanged;
 
@@ -80,7 +80,7 @@ namespace OpenBreed.Editor.VM.Sprites
             private set { SetProperty(ref spriteRectangle, value); }
         }
 
-        public SpriteSetFromImageVM Owner { get; }
+        public SpriteSetFromImageEditorVM Parent { get; }
 
         public Size SnapSize
         {
@@ -94,15 +94,15 @@ namespace OpenBreed.Editor.VM.Sprites
 
         public void Update()
         {
-            Owner.CurrentSprite.SourceRectangle = SpriteRectangle;
+            Parent.CurrentSprite.SourceRectangle = SpriteRectangle;
             UpdateControls();
-            Owner.UpdateSpriteImage(Owner.CurrentSprite, SpriteRectangle);
+            Parent.UpdateSpriteImage(Parent.CurrentSprite, SpriteRectangle);
             Close();
         }
 
         public void Undo()
         {
-            SpriteRectangle = Owner.CurrentSprite.SourceRectangle;
+            SpriteRectangle = Parent.CurrentSprite.SourceRectangle;
             UpdateControls();
             RefreshAction?.Invoke();
         }
@@ -148,13 +148,13 @@ namespace OpenBreed.Editor.VM.Sprites
 
         public void DrawSpriteEditorView(Graphics gfx)
         {
-            if (Owner.SourceImage == null)
+            if (Parent.SourceImage == null)
                 return;
 
-            int width = Owner.SourceImage.Width;
-            int height = Owner.SourceImage.Height;
+            int width = Parent.SourceImage.Width;
+            int height = Parent.SourceImage.Height;
 
-            gfx.DrawImage(Owner.SourceImage, 0, 0, width, height);
+            gfx.DrawImage(Parent.SourceImage, 0, 0, width, height);
 
             if (ShowShadowRectangles)
                 DrawShadowRectangles(gfx);
@@ -178,12 +178,12 @@ namespace OpenBreed.Editor.VM.Sprites
 
         private void DrawShadowRectangles(Graphics gfx)
         {
-            for (int i = 0; i < Owner.Items.Count; i++)
+            for (int i = 0; i < Parent.Items.Count; i++)
             {
-                if (i == Owner.CurrentSpriteIndex)
+                if (i == Parent.CurrentSpriteIndex)
                     continue;
 
-                var item = Owner.Items[i];
+                var item = Parent.Items[i];
                 var r = ((SpriteFromImageVM)item).SourceRectangle;
                 gfx.FillRectangle(ShadowSpriteBrush, r);
                 gfx.DrawRectangle(ShadowSpritePen, r);
@@ -204,7 +204,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         private void UpdateControls()
         {
-            var isModified = SpriteRectangle != Owner.CurrentSprite.SourceRectangle;
+            var isModified = SpriteRectangle != Parent.CurrentSprite.SourceRectangle;
             UpdateEnabled = isModified && (SpriteRectangle.Width != 0 && SpriteRectangle.Height != 0);
             UndoEnabled = isModified;
         }
@@ -213,8 +213,8 @@ namespace OpenBreed.Editor.VM.Sprites
         {
             switch (e.PropertyName)
             {
-                case nameof(Owner.CurrentSpriteIndex):
-                    Restore(Owner.CurrentSpriteIndex);
+                case nameof(Parent.CurrentSpriteIndex):
+                    Restore(Parent.CurrentSpriteIndex);
                     break;
 
                 default:
@@ -234,7 +234,7 @@ namespace OpenBreed.Editor.VM.Sprites
             if (spriteIndex < 0)
                 return;
 
-            SpriteRectangle = Owner.CurrentSprite.SourceRectangle;
+            SpriteRectangle = Parent.CurrentSprite.SourceRectangle;
             UpdateControls();
             RefreshAction?.Invoke();
         }

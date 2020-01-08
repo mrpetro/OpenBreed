@@ -1,47 +1,41 @@
 ﻿using OpenBreed.Editor.VM.Sprites;
 using System;
-using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
 {
-    public partial class SpriteSetFromImageCtrl : UserControl
+    public partial class SpriteSetFromSprEditorCtrl : UserControl
     {
         #region Private Fields
 
-        private SpriteSetFromImageVM vm;
+        private SpriteSetFromSprEditorVM vm;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public SpriteSetFromImageCtrl()
+        public SpriteSetFromSprEditorCtrl()
         {
             InitializeComponent();
 
             SetupDataGridView();
-
-            this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
         }
 
         #endregion Public Constructors
 
         #region Public Methods
 
-        public void Initialize(SpriteSetFromImageVM vm)
+        public void Initialize(SpriteSetFromSprEditorVM vm)
         {
             this.vm = vm ?? throw new InvalidOperationException(nameof(vm));
 
-            SpriteEditor.Initialize(this.vm.SpriteEditor);
-
-            btnAddSprite.Click += (s, a) => vm.AddSprite();
-            btnRemoveSprite.Click += (s, a) => vm.RemoveSprite();
-
-            DGV.DataBindings.Add(nameof(DGV.CurrentRowIndex), vm, nameof(vm.CurrentSpriteIndex), false, DataSourceUpdateMode.OnPropertyChanged);
-
             DGV.DataSource = vm.Items;
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private void SetupDataGridView()
         {
@@ -81,7 +75,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
             DGV.Columns.Add(imageColumn);
         }
 
-        #endregion Public Methods
-
+        #endregion Private Methods
     }
 }

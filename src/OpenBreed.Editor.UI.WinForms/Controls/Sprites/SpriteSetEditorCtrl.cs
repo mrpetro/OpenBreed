@@ -55,15 +55,15 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
 
             if (spriteSet is SpriteSetFromSprVM)
             {
-                var control = new SpriteSetFromSprCtrl();
-                control.Initialize((SpriteSetFromSprVM)spriteSet);
+                var control = new SpriteSetFromSprEditorCtrl();
+                control.Initialize((SpriteSetFromSprEditorVM)_vm.Subeditor);
                 control.Dock = DockStyle.Fill;
                 Panel.Controls.Add(control);
             }
             else if (spriteSet is SpriteSetFromImageVM)
             {
-                var control = new SpriteSetFromImageCtrl();
-                control.Initialize((SpriteSetFromImageVM)spriteSet);
+                var control = new SpriteSetFromImageEditorCtrl();
+                control.Initialize((SpriteSetFromImageEditorVM)_vm.Subeditor);
                 control.Dock = DockStyle.Fill;
                 Panel.Controls.Add(control);
             }
