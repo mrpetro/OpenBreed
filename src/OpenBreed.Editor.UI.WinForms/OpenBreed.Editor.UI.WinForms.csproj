@@ -278,17 +278,17 @@
     <Compile Include="Controls\Sprites\SpriteFromImageEditorCtrl.Designer.cs">
       <DependentUpon>SpriteFromImageEditorCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Sprites\SpriteSetFromImageCtrl.cs">
+    <Compile Include="Controls\Sprites\SpriteSetFromImageEditorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Sprites\SpriteSetFromImageCtrl.Designer.cs">
-      <DependentUpon>SpriteSetFromImageCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Sprites\SpriteSetFromImageEditorCtrl.Designer.cs">
+      <DependentUpon>SpriteSetFromImageEditorCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Sprites\SpriteSetFromSprCtrl.cs">
+    <Compile Include="Controls\Sprites\SpriteSetFromSprEditorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Sprites\SpriteSetFromSprCtrl.Designer.cs">
-      <DependentUpon>SpriteSetFromSprCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Sprites\SpriteSetFromSprEditorCtrl.Designer.cs">
+      <DependentUpon>SpriteSetFromSprEditorCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Maps\MapEditorTileSetSelectorCtrl.cs">
       <SubType>UserControl</SubType>
@@ -572,11 +572,11 @@
     <EmbeddedResource Include="Controls\Sprites\SpriteFromImageEditorCtrl.resx">
       <DependentUpon>SpriteFromImageEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Sprites\SpriteSetFromImageCtrl.resx">
-      <DependentUpon>SpriteSetFromImageCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Sprites\SpriteSetFromImageEditorCtrl.resx">
+      <DependentUpon>SpriteSetFromImageEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Sprites\SpriteSetFromSprCtrl.resx">
-      <DependentUpon>SpriteSetFromSprCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Sprites\SpriteSetFromSprEditorCtrl.resx">
+      <DependentUpon>SpriteSetFromSprEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Maps\MapEditorTileSetSelectorCtrl.resx">
       <DependentUpon>MapEditorTileSetSelectorCtrl.cs</DependentUpon>

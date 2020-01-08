@@ -36,8 +36,8 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
 
         private void UpdateViewState()
         {
-            Width = vm.Owner.SourceImage.Width;
-            Height = vm.Owner.SourceImage.Height;
+            Width = vm.Parent.SourceImage.Width;
+            Height = vm.Parent.SourceImage.Height;
             Invalidate();
         }
 

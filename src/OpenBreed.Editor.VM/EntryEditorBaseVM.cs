@@ -119,6 +119,23 @@ namespace OpenBreed.Editor.VM
             target.FromEntry(source);
         }
 
+        protected virtual void OnEditablePropertyChanged(string propertyName)
+        {
+            var canCommit = true;
+
+            switch (propertyName)
+            {
+                case nameof(Editable.Id):
+                    canCommit = IsIdUnique();
+                    break;
+
+                default:
+                    break;
+            }
+
+            CommitEnabled = canCommit;
+        }
+
         #endregion Protected Methods
 
         #region Private Methods
@@ -135,18 +152,7 @@ namespace OpenBreed.Editor.VM
 
         private void Editable_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            var canCommit = true;
-
-            switch (e.PropertyName)
-            {
-                case nameof(Editable.Id):
-                    canCommit = IsIdUnique();
-                    break;
-                default:
-                    break;
-            }
-
-            CommitEnabled = canCommit;
+            OnEditablePropertyChanged(e.PropertyName);
         }
 
         private void EditEntry(E entry)

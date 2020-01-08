@@ -8,10 +8,10 @@ using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using OpenBreed.Editor.VM.Palettes;
 using System.Linq;
-using OpenBreed.Common.Drawing;
 using System;
 using OpenBreed.Common.Formats;
 using OpenBreed.Common.Palettes;
+using OpenBreed.Common.Helpers;
 
 namespace OpenBreed.Editor.VM.Tiles
 {
