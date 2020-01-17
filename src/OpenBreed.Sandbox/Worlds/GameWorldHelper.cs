@@ -82,7 +82,7 @@ namespace OpenBreed.Sandbox.Worlds
             gameWorld.AddEntity(gameCamera);
 
             var gameViewport = (Viewport)core.Rendering.Viewports.Create(0.05f, 0.05f, 0.90f, 0.90f);
-            gameViewport.CameraEntity = gameCamera;
+            gameViewport.Camera = gameCamera;
 
             var actor = ActorHelper.CreateActor(core, new Vector2(128, 128));
             actor.Tag = gameCamera;

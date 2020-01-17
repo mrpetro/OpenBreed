@@ -132,6 +132,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Content Include="Content\Scripts\start.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -220,7 +223,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\Scripts\" />
     <Folder Include="Content\Sounds\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

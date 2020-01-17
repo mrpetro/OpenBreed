@@ -16,7 +16,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         /// <summary>
         /// Entity which view is being rendered to this viewport
         /// </summary>
-        IEntity CameraEntity { get; }
+        IEntity Camera { get; }
 
         /// <summary>
         /// Order of drawing, higher value object is rendered on top of lower value objects

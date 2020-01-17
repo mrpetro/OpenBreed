@@ -90,9 +90,9 @@ namespace OpenBreed.Core
         EventsMan Events { get; }
 
         /// <summary>
-        /// Lua state machine
+        /// Scripts manager
         /// </summary>
-        Lua LuaState { get; }
+        IScriptMan Scripts { get; }
 
         /// <summary>
         /// Client display transformation matrix

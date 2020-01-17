@@ -81,9 +81,9 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         public float Bottom { get { return Y; } }
 
         /// <summary>
-        /// Entity which view is being rendered to this viewport
+        /// Camera entity which view is being rendered to this viewport
         /// </summary>
-        public IEntity CameraEntity { get; set; }
+        public IEntity Camera { get; set; }
 
         /// <summary>
         /// Zoom of camera
@@ -92,11 +92,11 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         {
             get
             {
-                return CameraEntity.Components.OfType<ICameraComponent>().First().Zoom;
+                return Camera.Components.OfType<ICameraComponent>().First().Zoom;
             }
             set
             {
-                CameraEntity.Components.OfType<ICameraComponent>().First().Zoom = value;
+                Camera.Components.OfType<ICameraComponent>().First().Zoom = value;
             }
         }
 
@@ -160,8 +160,8 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         public void ScrollBy(Vector2 vector)
         {
-            var cameraComponent = CameraEntity.Components.OfType<ICameraComponent>().First();
-            var position = CameraEntity.Components.OfType<Position>().First();
+            var cameraComponent = Camera.Components.OfType<ICameraComponent>().First();
+            var position = Camera.Components.OfType<Position>().First();
 
             var delta4 = ClientToWorldVector(vector);
             var delta2 = new Vector2(-delta4.X, -delta4.Y);
@@ -245,8 +245,8 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         /// <returns>Camera transformation matrix</returns>
         public Matrix4 GetCameraTransform()
         {
-            var pos = CameraEntity.Components.OfType<Position>().First();
-            var camera = CameraEntity.Components.OfType<ICameraComponent>().First();
+            var pos = Camera.Components.OfType<Position>().First();
+            var camera = Camera.Components.OfType<ICameraComponent>().First();
 
             var transform = Matrix4.Identity;
             transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-pos.Value.X, -pos.Value.Y, 0.0f));
@@ -364,15 +364,15 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
                 var transform = GetCameraTransform();
                 GL.MultMatrix(ref transform);
 
-                if(CameraEntity.World != null)
-                    CameraEntity.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(this, dt));
+                if(Camera.World != null)
+                    Camera.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(this, dt));
             }
             finally
             {
                 GL.PopMatrix();
             }
 
-            var cameraComponent = CameraEntity.Components.OfType<ICameraComponent>().First();
+            var cameraComponent = Camera.Components.OfType<ICameraComponent>().First();
 
             //Draw camera effects
             DrawBrightnessEffect(cameraComponent.Brightness);

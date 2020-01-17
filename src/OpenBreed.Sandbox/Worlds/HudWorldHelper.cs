@@ -67,7 +67,7 @@ namespace OpenBreed.Sandbox.Worlds
             cameraBuilder.SetZoom(1.0f);
             var hudCamera = cameraBuilder.Build();
             world.AddEntity(hudCamera);
-            hudViewport.CameraEntity = hudCamera;
+            hudViewport.Camera = hudCamera;
 
             var cameraPos = hudCamera.Components.OfType<Position>().FirstOrDefault();
             cameraPos.Value = hudViewport.ViewportToWorldPoint(new Vector2(1.0f, 1.0f));

@@ -1,18 +1,15 @@
 ﻿using NLua;
 using OpenBreed.Core;
 using OpenBreed.Core.Blueprints;
-using OpenBreed.Core.Common.Systems;
-using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Builders;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Audio.Builders;
-using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Physics.Builders;
-using OpenBreed.Core.Modules.Physics.Systems;
 using OpenBreed.Core.Modules.Rendering;
+using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Systems.Control.Systems;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Camera;
@@ -48,9 +45,9 @@ namespace OpenBreed.Sandbox
         {
             appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-            LuaState = new Lua();
-
             Logging = new LogMan(this);
+
+            Scripts = new LuaScriptMan(this);
             Commands = new CommandsMan(this);
             Events = new EventsMan(this);
 
@@ -100,6 +97,25 @@ namespace OpenBreed.Sandbox
         public EventsMan Events { get; }
 
         public WorldMan Worlds { get; }
+
+        public IScriptMan Scripts { get; }
+
+        public Matrix4 ClientTransform
+        {
+            get
+            {
+                var transf = Matrix4.CreateScale(ClientRectangle.Width, -ClientRectangle.Height, 1.0f);
+                transf.Invert();
+                transf = Matrix4.Mult(transf, Matrix4.CreateTranslation(0.0f, 1.0f, 0.0f));
+                return transf;
+            }
+        }
+
+        public float ClientRatio { get { return (float)ClientRectangle.Width / (float)ClientRectangle.Height; } }
+
+        #endregion Public Properties
+
+        #region Public Methods
 
         public WalkingControlSystemBuilder CreateWalkingControlSystem()
         {
@@ -151,23 +167,7 @@ namespace OpenBreed.Sandbox
             return new SoundSystemBuilder(this);
         }
 
-
-        public Matrix4 ClientTransform
-        {
-            get
-            {
-                var transf = Matrix4.CreateScale(ClientRectangle.Width, -ClientRectangle.Height, 1.0f);
-                transf.Invert();
-                transf = Matrix4.Mult(transf, Matrix4.CreateTranslation(0.0f, 1.0f, 0.0f));
-                return transf;
-            }
-        }
-
-        public float ClientRatio { get { return (float)ClientRectangle.Width / (float)ClientRectangle.Height; } }
-
-        public Lua LuaState { get; }
-
-        #endregion Public Properties
+        #endregion Public Methods
 
         #region Protected Methods
 
@@ -282,9 +282,15 @@ namespace OpenBreed.Sandbox
             GL.DepthFunc(DepthFunction.Lequal);
             GL.Enable(EnableCap.DepthTest);
 
-            //var s = new OpenBreed.Core.Scripting.LoadTest();
 
-            //s.Example();
+            var result = Scripts.RunFile("Content\\Scripts\\start.lua");
+
+            var fnc = (LuaFunction)Scripts.GetObject("EngineInitialized");
+
+            fnc.Call();
+
+
+            var myass = (IViewport)Scripts.GetObject("myass");
         }
 
         protected override void OnResize(EventArgs e)

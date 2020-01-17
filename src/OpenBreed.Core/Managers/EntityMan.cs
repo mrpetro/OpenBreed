@@ -55,6 +55,14 @@ namespace OpenBreed.Core.Managers
             return entities.Items.Where(item => item.Tag != null && item.Tag.Equals(tag));
         }
 
+        public int Count
+        {
+            get
+            {
+                return entities.Count;
+            }
+        }
+
         public IEntity GetById(int id)
         {
             var entity = entities[id];

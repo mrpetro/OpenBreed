@@ -106,6 +106,10 @@
     <Compile Include="Commands\ICommandExecutor.cs" />
     <Compile Include="Helpers\MovementTools.cs" />
     <Compile Include="Helpers\CommandHandler.cs" />
+    <Compile Include="Managers\IScriptMan.cs" />
+    <Compile Include="Managers\LuaScriptMan.cs" />
+    <Compile Include="Scripting\IScriptFunc.cs" />
+    <Compile Include="Scripting\LuaScriptFunc.cs" />
     <Compile Include="Systems\StateMachineSystem.cs" />
     <Compile Include="Systems\TimerSystem.cs" />
     <Compile Include="CoreTools.cs" />
@@ -184,7 +188,6 @@
     <Compile Include="Common\Components\Transformation.cs" />
     <Compile Include="ICore.cs" />
     <Compile Include="Common\Components\IEntityComponent.cs" />
-    <Compile Include="Scripting\LoadTest.cs" />
     <Compile Include="Entities\IEntityBuilder.cs" />
     <Compile Include="Entities\Builders\EntityBuilder.cs" />
     <Compile Include="Entities\Entity.cs" />
