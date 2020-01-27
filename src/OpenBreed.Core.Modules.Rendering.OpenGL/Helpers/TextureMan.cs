@@ -8,7 +8,7 @@ using System.IO;
 namespace OpenBreed.Core.Modules.Rendering.Helpers
 {
     /// <summary>
-    /// Textures manager class  which handles creating textures from various sources
+    /// Textures manager class which handles creating textures from various sources
     /// Or just retrieving them by ID or name.
     /// </summary>
     internal class TextureMan : ITextureMan

@@ -1,6 +1,5 @@
 ﻿using NLua;
 using OpenBreed.Core.Scripting;
-using System;
 
 namespace OpenBreed.Core.Managers
 {
@@ -24,7 +23,16 @@ namespace OpenBreed.Core.Managers
             luaState = new Lua();
             luaState.LoadCLRPackage();
             luaState["Core"] = Core;
+
+            //Define table placeholder for templates namespace
+            luaState.NewTable("Templates");
+            //Define table placeholder for entity templates namespace
+            luaState.NewTable("Templates.Entities");
+            //Define table placeholder for viewport templates namespace
+            luaState.NewTable("Templates.Viewports");
+
         }
+
 
         #endregion Public Constructors
 
@@ -38,7 +46,11 @@ namespace OpenBreed.Core.Managers
 
         public object GetObject(string objectName)
         {
-            return luaState[objectName];
+            var value = luaState[objectName];
+            if (value is LuaFunction)
+                return new LuaScriptFunc((LuaFunction)value);
+            else
+                return value;
         }
 
         public object RunString(string script)
@@ -64,6 +76,34 @@ namespace OpenBreed.Core.Managers
         public IScriptFunc CompileFile(string filePath)
         {
             return new LuaScriptFunc(luaState.LoadFile(filePath));
+        }
+
+        public bool TryInvokeFunction(string funcName, params object[] funcArgs)
+        {
+            var func = (LuaFunction)luaState[funcName] as LuaFunction;
+
+            if (func == null)
+                return false;
+
+            func.Call(funcArgs);
+            return true;
+        }
+
+        public bool TryInvokeFunction(string funcName, out object funcResult, params object[] funcArgs)
+        {
+            var func = (LuaFunction)luaState[funcName] as LuaFunction;
+
+            if (func == null)
+            {
+                funcResult = null;
+#if DEBUG
+                Core.Logging.Warning($"'{funcName}' not existing.");
+#endif
+                return false;
+            }
+
+            funcResult = func.Call(funcArgs);
+            return true;
         }
 
         #endregion Public Methods

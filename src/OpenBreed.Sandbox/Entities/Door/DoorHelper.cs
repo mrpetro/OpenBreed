@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Blueprints;
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
@@ -117,14 +116,6 @@ namespace OpenBreed.Sandbox.Entities.Door
         public static void AddHorizontalDoor(World world, int x, int y)
         {
             var core = world.Core;
-
-            //var doorBlueprint = core.Blueprints.GetByName("HorizontalDoor");
-
-            var states = new Dictionary<string, IComponentState>();
-
-
-            //var doorAlt = core.Entities.CreateFromBlueprint(doorBlueprint, states);
-
 
             var door = core.Entities.Create();
 

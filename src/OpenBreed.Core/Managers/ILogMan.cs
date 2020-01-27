@@ -18,6 +18,10 @@
 
         void Warning(int channel, string message);
 
+        void Error(string message);
+
+        void Error(int channel, string message);
+
         #endregion Public Methods
     }
 }

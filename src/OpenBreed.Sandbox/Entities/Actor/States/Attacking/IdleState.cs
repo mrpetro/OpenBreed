@@ -1,4 +1,5 @@
 ﻿
+using NLua;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
@@ -32,6 +33,11 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             Entity.PostCommand(new TextSetCommand(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
             Entity.Subscribe(ControlEventTypes.CONTROL_FIRE_CHANGED, OnControlFireChanged);
+
+
+            var s = (LuaTable)Entity.Core.Scripts.GetObject("AtackingFsm.IdleState");
+            var r = ((LuaFunction)s["Enter"]).Call(Entity);
+
         }
 
         public void Initialize(IEntity entity)

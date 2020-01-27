@@ -82,6 +82,9 @@
   <ItemGroup>
     <Compile Include="Commands\MoveToCommand.cs" />
     <Compile Include="Components\CollisionDebug.cs" />
+    <Content Include="Entities\Actor\Arrow.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Compile Include="Entities\Actor\States\Attacking\IdleState.cs" />
     <Compile Include="Entities\Actor\States\Attacking\CooldownState.cs" />
     <Compile Include="Entities\Actor\States\Attacking\ShootingState.cs" />
@@ -133,6 +136,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <Content Include="Content\Scripts\start.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\Actor\States\Attacking\IdleState.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="OpenTK.dll.config" />

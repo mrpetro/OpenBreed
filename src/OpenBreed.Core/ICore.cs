@@ -45,11 +45,6 @@ namespace OpenBreed.Core
         ILogMan Logging { get; }
 
         /// <summary>
-        /// Blueprints manager
-        /// </summary>
-        BlueprintMan Blueprints { get; }
-
-        /// <summary>
         /// Jobs manager
         /// </summary>
         JobMan Jobs { get; }

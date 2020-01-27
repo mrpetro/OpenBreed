@@ -72,6 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\BodyComponentBuilder.cs" />
     <Compile Include="Builders\MovementSystemBuilder.cs" />
     <Compile Include="Builders\PhysicsSystemBuilder.cs" />
     <Compile Include="Components\Body.cs" />

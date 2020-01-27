@@ -80,6 +80,11 @@
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\IWorldCommand.cs" />
     <Compile Include="Commands\WorldSetPauseCommand.cs" />
+    <Compile Include="Common\Builders\PositionComponentBuilder.cs" />
+    <Compile Include="Common\Builders\VelocityComponentBuilder.cs" />
+    <Compile Include="Common\Builders\ThrustComponentBuilder.cs" />
+    <Compile Include="Common\Builders\DirectionComponentBuilder.cs" />
+    <Compile Include="Common\Builders\IComponentBuilder.cs" />
     <Compile Include="Common\Components\PauseImmuneComponent.cs" />
     <Compile Include="Builders\IWorldSystemBuilder.cs" />
     <Compile Include="Events\CoreEventTypes.cs" />
@@ -88,13 +93,6 @@
     <Compile Include="Events\WorldDeinitializedEventArgs.cs" />
     <Compile Include="Events\WorldInitializedEventArgs.cs" />
     <Compile Include="IJob.cs" />
-    <Compile Include="Managers\BlueprintMan.cs" />
-    <Compile Include="Blueprints\BlueprintXml.cs" />
-    <Compile Include="Blueprints\ComponentStateXml.cs" />
-    <Compile Include="Blueprints\IComponentState.cs" />
-    <Compile Include="Blueprints\IEntityDef.cs" />
-    <Compile Include="Blueprints\EntityDefXml.cs" />
-    <Compile Include="Blueprints\IBlueprint.cs" />
     <Compile Include="Collections\IdMap.cs" />
     <Compile Include="Builders\ComponentBuilder.cs" />
     <Compile Include="Common\Components\EquipmentComponent.cs" />

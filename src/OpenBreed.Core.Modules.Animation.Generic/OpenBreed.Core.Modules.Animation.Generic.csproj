@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builders\AnimationSystemBuilder.cs" />
+    <Compile Include="Builders\AnimatorComponentBuilder.cs" />
     <Compile Include="Events\AnimationEventTypes.cs" />
     <Compile Include="Events\AnimStoppedEventArgs.cs" />
     <Compile Include="Events\AnimChangedEventArgs.cs" />

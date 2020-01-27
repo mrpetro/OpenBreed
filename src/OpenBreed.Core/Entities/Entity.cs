@@ -26,12 +26,14 @@ namespace OpenBreed.Core.Entities
 
         #region Internal Constructors
 
-        internal Entity(ICore core)
+        internal Entity(ICore core, List<IEntityComponent> initialComponents)
         {
             fsmList = new List<StateMachine>();
             FsmList = new ReadOnlyCollection<StateMachine>(fsmList);
 
             Core = core ?? throw new ArgumentNullException(nameof(core));
+
+            components = initialComponents ?? new List<IEntityComponent>();
             Components = new ReadOnlyCollection<IEntityComponent>(components);
         }
 

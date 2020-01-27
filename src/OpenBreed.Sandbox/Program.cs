@@ -1,6 +1,7 @@
 ﻿using NLua;
 using OpenBreed.Core;
-using OpenBreed.Core.Blueprints;
+using OpenBreed.Core.Common.Builders;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Builders;
@@ -10,6 +11,7 @@ using OpenBreed.Core.Modules.Audio.Builders;
 using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.Scripting;
 using OpenBreed.Core.Systems.Control.Systems;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Camera;
@@ -50,8 +52,6 @@ namespace OpenBreed.Sandbox
             Scripts = new LuaScriptMan(this);
             Commands = new CommandsMan(this);
             Events = new EventsMan(this);
-
-            Blueprints = new BlueprintMan(this);
             Entities = new EntityMan(this);
             Players = new PlayersMan(this);
             Items = new ItemsMan(this);
@@ -64,8 +64,6 @@ namespace OpenBreed.Sandbox
             Animations = new AnimationModule(this);
 
             VSync = VSyncMode.On;
-
-            RegisterBlueprintParsers();
         }
 
         #endregion Public Constructors
@@ -77,8 +75,6 @@ namespace OpenBreed.Sandbox
         public IAudioModule Sounds { get; }
 
         public IAnimationModule Animations { get; }
-
-        public BlueprintMan Blueprints { get; }
 
         public EntityMan Entities { get; }
 
@@ -282,15 +278,33 @@ namespace OpenBreed.Sandbox
             GL.DepthFunc(DepthFunction.Lequal);
             GL.Enable(EnableCap.DepthTest);
 
+            Entities.RegisterComponentBuilder("AnimatorComponent", AnimatorComponentBuilder.New);
+            Entities.RegisterComponentBuilder("DirectionComponent", DirectionComponentBuilder.New);
+            Entities.RegisterComponentBuilder("VelocityComponent", VelocityComponentBuilder.New);
+            Entities.RegisterComponentBuilder("ThrustComponent", ThrustComponentBuilder.New);
+            Entities.RegisterComponentBuilder("PositionComponent", PositionComponentBuilder.New);
+            Entities.RegisterComponentBuilder("BodyComponent", BodyComponentBuilder.New);
+
+            Scripts.RunFile(@"Entities\Actor\Arrow.lua");
+
+            var entity = Entities.CreateFromTemplate("Arrow");
+
+
+            var func = Scripts.RunFile(@"Entities\Actor\States\Attacking\IdleState.lua");
+
+
+            //var r = func.Invoke();
 
             var result = Scripts.RunFile("Content\\Scripts\\start.lua");
 
-            var fnc = (LuaFunction)Scripts.GetObject("EngineInitialized");
-
-            fnc.Call();
-
+            OnEngineInitialized();
 
             var myass = (IViewport)Scripts.GetObject("myass");
+        }
+
+        protected void OnEngineInitialized()
+        {
+            Scripts.TryInvokeFunction("EngineInitialized");
         }
 
         protected override void OnResize(EventArgs e)
@@ -350,14 +364,6 @@ namespace OpenBreed.Sandbox
         private void RegisterItems()
         {
             Items.Register(new CreditsItem());
-        }
-
-        private void RegisterBlueprintParsers()
-        {
-            ComponentStateXml.RegisterTypeParser(typeof(Vector2), ReadVector2);
-            ComponentStateXml.RegisterTypeParser(typeof(string), ReadString);
-
-            //EntityMan.RegisterBuilder("OpenBreed.Core.Common.Components.GridPosition", GridPositionBuilder.Create);
         }
 
         private object ReadString(XmlReader reader)

@@ -1,0 +1,75 @@
+
+
+
+<Entity>
+    
+    <Components>
+        <Position>
+            
+        </Position>
+        <Velocity>
+            
+        </Velocity>
+        <Thrust>
+            
+        </Thrust>
+        <Direction>
+            
+        </Direction>
+        <Sprite>
+            <AtlasId></AtlasId>
+        </Sprite>
+        <Shape></Shape>
+        
+    </Components>
+  
+    <FSMs>
+        <FSM>
+            <Name>Movement</Name>
+            <InitialState>Standing</InitialState>
+            <States>
+                <State>
+                    <Name>Standing</Name>
+                    <Enter>
+                    </Enter>
+                    <Leave>
+                    </Leave>
+                </State>
+                <State>
+                    <Name>Walking</Name>
+                    <Enter>
+                    </Enter>
+                    <Leave>
+                    </Leave>
+                </State>
+            </States>
+        </FSM>
+        <FSM>
+            <Name>Attacking</Name>
+            <InitialState>Idle</InitialState>
+            <States>
+                <State>
+                    <Name>Idle</Name>
+                    <Enter>
+                    </Enter>
+                    <Leave>
+                    </Leave>
+                </State>
+                <State>
+                    <Name>Shooting</Name>
+                    <Enter>
+                    </Enter>
+                    <Leave>
+                    </Leave>
+                <State>
+                    <Name>Cooldown</Name>
+                    <Enter>
+                    </Enter>
+                    <Leave>
+                    </Leave>
+                </State>
+                </State>
+            </States>
+        </FSM>
+    </FSMs>
+</Entity>

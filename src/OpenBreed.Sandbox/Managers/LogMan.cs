@@ -8,6 +8,7 @@ namespace OpenBreed.Sandbox.Managers
     {
         #region Private Fields
 
+        private static ConsoleColor ERROR_COLOR = ConsoleColor.Red;
         private static ConsoleColor WARNING_COLOR = ConsoleColor.Yellow;
         private static ConsoleColor VERBOSE_COLOR = ConsoleColor.Gray;
 
@@ -48,6 +49,16 @@ namespace OpenBreed.Sandbox.Managers
         }
 
         public void Warning(string message)
+        {
+            Warning(DefaultChannel, message);
+        }
+
+        public void Error(int channel, string message)
+        {
+            WriteLineWithColor(message, ERROR_COLOR);
+        }
+
+        public void Error(string message)
         {
             Warning(DefaultChannel, message);
         }
