@@ -60,5 +60,5 @@ DevEnv: **MSVS 2017** (Community or compatible)
 Design architecture: **Entity–Component–System(ECS)** for now
 
 Libraries:
-**NLua** - handling entity creations and their logic trough scripting. Visit http://nlua.org/ for more information.
-**OpenTK** - handling graphics, inputs and sounds. Visit https://opentk.net for more information.
+* **NLua** - handling entity creations and their logic trough scripting. Visit http://nlua.org/ for more information.
+* **OpenTK** - handling graphics, inputs and sounds. Visit https://opentk.net for more information.
