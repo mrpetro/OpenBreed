@@ -5,7 +5,7 @@ Open source reimplementation of classic Alien Breed 2D games:
  - *Alien Breed: Tower Assault* - (ABTA)
 
 ## Is this playable? 
- *Not yet*
+ **Not yet**
 
 ## Project wiki
 [Over here](https://github.com/mrpetro/OpenBreed/wiki) - Not updating it that much... Sorry...
