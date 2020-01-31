@@ -3,17 +3,20 @@ Open source reimplementation of classic Alien Breed 2D games:
  - *Alien Breed (Special Edition 92)* - (ABSE)
  - *Alien Breed II: Horror continues* - (ABHC)
  - *Alien Breed: Tower Assault* - (ABTA)
- 
+
+## Is this playable? 
+ *Not yet*
+
 ## Project wiki
 [Over here](https://github.com/mrpetro/OpenBreed/wiki) - Not updating it that much... Sorry...
  
 ## Obtaining game resources
  
-Best way to obtain resources for ABSE is to get them from Amiga port. This would require some decrunching of ATN! files.
+Best way to obtain resources for ABSE is to get them from Amiga version. This would require some decrunching of ATN! files.
 As for ABHC, luckly the game was added as a bonus to ABTA CD32 release and this verion has standard file system on CD.  This would also require some ATN! decrunching.
 ABTA PC port uses exactly same resources as Amiga version but the container is EPF archive, which can be handled.
 
-## What is ready
+## What is ready? 
 
 * MAP reader for ABTA (it will probably for for all three titles since this format didn't changed that much)
 * SPR(spriteset) reader for ABTA
@@ -22,14 +25,14 @@ ABTA PC port uses exactly same resources as Amiga version but the container is E
 * ACBM tileSet reader for ABHC and ABSE
 * ACBM image reader for some images from ABHC and ABSE
 
-## What is in current development
+## What is in current development? 
 * Game engine in entity component system (ECS) architecture
-* Readers for various resources from all three games
+* Scripting system
 * (On hiatus) Developing of OpenBreed.Editor - at least to state of reading & viewing most of games resources.
 * (On hiatus) Design & creation of game databases - these will be useful when developing OpenBreed engine. 
 * Some refactoring in OpenBreed.Common & Editor
 
-## What's to do
+## What is to do? 
 
 Those three games have common problem related with resources. Most of graphic/sound/sprite/tiles are stored as asset files delivered with game executables. But... there are still alot of data which is "hardcoded" in executables.
 Examples:
@@ -57,4 +60,5 @@ DevEnv: **MSVS 2017** (Community or compatible)
 Design architecture: **Entity–Component–System(ECS)** for now
 
 Libraries:
+**NLua** - handling entity creations and their logic trough scripting. Visit http://nlua.org/ for more information.
 **OpenTK** - handling graphics, inputs and sounds. Visit https://opentk.net for more information.
