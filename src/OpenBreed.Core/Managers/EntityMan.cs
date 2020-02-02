@@ -18,7 +18,7 @@ namespace OpenBreed.Core.Managers
         private const string TEMPLATES_NAMESPACE = "Templates.Entities";
         private readonly IdMap<IEntity> entities = new IdMap<IEntity>();
 
-        private readonly Dictionary<string, Func<IComponentBuilder>> builders = new Dictionary<string, Func<IComponentBuilder>>();
+        private readonly Dictionary<string, Func<ICore, IComponentBuilder>> builders = new Dictionary<string, Func<ICore, IComponentBuilder>>();
 
         #endregion Private Fields
 
@@ -62,7 +62,7 @@ namespace OpenBreed.Core.Managers
                 throw new InvalidOperationException($"Entity with Guid '{id}' not found.");
         }
 
-        public void RegisterComponentBuilder(string componentName, Func<IComponentBuilder> newAction)
+        public void RegisterComponentBuilder(string componentName, Func<ICore, IComponentBuilder> newAction)
         {
             builders.Add(componentName, newAction);
         }
@@ -115,10 +115,10 @@ namespace OpenBreed.Core.Managers
 
         private void AppendComponent(string componentName, LuaTable componentTable, ref List<IEntityComponent> components)
         {
-            if (!builders.TryGetValue(componentName, out Func<IComponentBuilder> newAction))
+            if (!builders.TryGetValue(componentName, out Func<ICore, IComponentBuilder> newAction))
                 throw new NotImplementedException($"Builder for entity component '{componentName}' not implemented.");
 
-            var builder = newAction.Invoke();
+            var builder = newAction.Invoke(this.Core);
 
             foreach (KeyValuePair<object, object> pair in componentTable)
             {

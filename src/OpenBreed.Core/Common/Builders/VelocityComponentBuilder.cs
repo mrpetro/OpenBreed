@@ -3,28 +3,37 @@ using System;
 
 namespace OpenBreed.Core.Common.Builders
 {
-    public class VelocityComponentBuilder : IComponentBuilder
+    public class VelocityComponentBuilder : BaseComponentBuilder
     {
         #region Private Fields
 
         private float x;
+
         private float y;
 
         #endregion Private Fields
 
-        #region Public Methods
+        #region Protected Constructors
 
-        public static IComponentBuilder New()
+        protected VelocityComponentBuilder(ICore core) : base(core)
         {
-            return new VelocityComponentBuilder();
         }
 
-        public IEntityComponent Build()
+        #endregion Protected Constructors
+
+        #region Public Methods
+
+        public static IComponentBuilder New(ICore core)
+        {
+            return new VelocityComponentBuilder(core);
+        }
+
+        public override IEntityComponent Build()
         {
             return Velocity.Create(x, y);
         }
 
-        public void SetProperty(object key, object value)
+        public override void SetProperty(object key, object value)
         {
             var index = Convert.ToInt64(key);
 

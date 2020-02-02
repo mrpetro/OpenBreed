@@ -80,6 +80,7 @@
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\IWorldCommand.cs" />
     <Compile Include="Commands\WorldSetPauseCommand.cs" />
+    <Compile Include="Common\Builders\BaseComponentBuilder.cs" />
     <Compile Include="Common\Builders\PositionComponentBuilder.cs" />
     <Compile Include="Common\Builders\VelocityComponentBuilder.cs" />
     <Compile Include="Common\Builders\ThrustComponentBuilder.cs" />
@@ -135,8 +136,6 @@
     <Compile Include="Modules\Audio\Components\ISoundEmiter.cs" />
     <Compile Include="Modules\Audio\Helpers\ISound.cs" />
     <Compile Include="Managers\ISoundMan.cs" />
-    <Compile Include="Modules\Physics\Components\IBody.cs" />
-    <Compile Include="Modules\Physics\Components\IPhysicsComponent.cs" />
     <Compile Include="Modules\Rendering\Components\Builders\IStampBuilder.cs" />
     <Compile Include="Modules\Rendering\Components\ICameraComponent.cs" />
     <Compile Include="Modules\Rendering\Components\ITileComponent.cs" />

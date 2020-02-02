@@ -209,12 +209,32 @@ namespace OpenBreed.Sandbox
             Inputs.OnKeyPress(e);
         }
 
+        private void RegisterComponentBuilders()
+        {
+            Entities.RegisterComponentBuilder("AnimatorComponent", AnimatorComponentBuilder.New);
+            Entities.RegisterComponentBuilder("DirectionComponent", DirectionComponentBuilder.New);
+            Entities.RegisterComponentBuilder("VelocityComponent", VelocityComponentBuilder.New);
+            Entities.RegisterComponentBuilder("ThrustComponent", ThrustComponentBuilder.New);
+            Entities.RegisterComponentBuilder("PositionComponent", PositionComponentBuilder.New);
+            Entities.RegisterComponentBuilder("BodyComponent", BodyComponentBuilder.New);
+            Entities.RegisterComponentBuilder("MotionComponent", MotionComponentBuilder.New);
+            Entities.RegisterComponentBuilder("SpriteComponent", SpriteComponentBuilder.New);
+        }
+
+        private void RegisterEntityTemplates()
+        {
+            Scripts.RunFile(@"Entities\Actor\Arrow.lua");
+
+        }
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
             Title = $"Open Breed Sandbox (Version: {appVersion} Vsync: {VSync})";
 
+            RegisterComponentBuilders();
+            RegisterEntityTemplates();
             RegisterItems();
 
             Inputs.RegisterHandler(new WalkingControlHandler());
@@ -278,28 +298,16 @@ namespace OpenBreed.Sandbox
             GL.DepthFunc(DepthFunction.Lequal);
             GL.Enable(EnableCap.DepthTest);
 
-            Entities.RegisterComponentBuilder("AnimatorComponent", AnimatorComponentBuilder.New);
-            Entities.RegisterComponentBuilder("DirectionComponent", DirectionComponentBuilder.New);
-            Entities.RegisterComponentBuilder("VelocityComponent", VelocityComponentBuilder.New);
-            Entities.RegisterComponentBuilder("ThrustComponent", ThrustComponentBuilder.New);
-            Entities.RegisterComponentBuilder("PositionComponent", PositionComponentBuilder.New);
-            Entities.RegisterComponentBuilder("BodyComponent", BodyComponentBuilder.New);
-
-            Scripts.RunFile(@"Entities\Actor\Arrow.lua");
-
-            var entity = Entities.CreateFromTemplate("Arrow");
-
-
-            var func = Scripts.RunFile(@"Entities\Actor\States\Attacking\IdleState.lua");
+            //var func = Scripts.RunFile(@"Entities\Actor\States\Attacking\IdleState.lua");
 
 
             //var r = func.Invoke();
 
-            var result = Scripts.RunFile("Content\\Scripts\\start.lua");
+            //var result = Scripts.RunFile("Content\\Scripts\\start.lua");
 
             OnEngineInitialized();
 
-            var myass = (IViewport)Scripts.GetObject("myass");
+            //var myass = (IViewport)Scripts.GetObject("myass");
         }
 
         protected void OnEngineInitialized()

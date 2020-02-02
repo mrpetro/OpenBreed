@@ -3,8 +3,13 @@ using System;
 
 namespace OpenBreed.Core.Common.Builders
 {
-    public class ThrustComponentBuilder : IComponentBuilder
+    public class ThrustComponentBuilder : BaseComponentBuilder
     {
+        protected ThrustComponentBuilder(ICore core) : base(core)
+        {
+        }
+
+
         #region Private Fields
 
         private float x;
@@ -14,17 +19,17 @@ namespace OpenBreed.Core.Common.Builders
 
         #region Public Methods
 
-        public static IComponentBuilder New()
+        public static IComponentBuilder New(ICore core)
         {
-            return new ThrustComponentBuilder();
+            return new ThrustComponentBuilder(core);
         }
 
-        public IEntityComponent Build()
+        public override IEntityComponent Build()
         {
             return Thrust.Create(x, y);
         }
 
-        public void SetProperty(object key, object value)
+        public override void SetProperty(object key, object value)
         {
             var index = Convert.ToInt64(key);
 

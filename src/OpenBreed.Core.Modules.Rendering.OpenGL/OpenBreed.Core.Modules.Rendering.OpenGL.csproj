@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\SpriteComponentBuilder.cs" />
     <Compile Include="Builders\WireframeSystemBuilder.cs" />
     <Compile Include="Builders\TextSystemBuilder.cs" />
     <Compile Include="Builders\SpriteSystemBuilder.cs" />

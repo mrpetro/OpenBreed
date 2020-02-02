@@ -3,28 +3,37 @@ using System;
 
 namespace OpenBreed.Core.Common.Builders
 {
-    public class PositionComponentBuilder : IComponentBuilder
+    public class PositionComponentBuilder : BaseComponentBuilder
     {
         #region Private Fields
 
         private float x;
+
         private float y;
 
         #endregion Private Fields
 
-        #region Public Methods
+        #region Protected Constructors
 
-        public static IComponentBuilder New()
+        protected PositionComponentBuilder(ICore core) : base(core)
         {
-            return new PositionComponentBuilder();
         }
 
-        public IEntityComponent Build()
+        #endregion Protected Constructors
+
+        #region Public Methods
+
+        public static IComponentBuilder New(ICore core)
+        {
+            return new PositionComponentBuilder(core);
+        }
+
+        public override IEntityComponent Build()
         {
             return Position.Create(x, y);
         }
 
-        public void SetProperty(object key, object value)
+        public override void SetProperty(object key, object value)
         {
             var index = Convert.ToInt64(key);
 

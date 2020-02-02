@@ -2,14 +2,10 @@
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Modules.Animation.Components;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Modules.Animation.Builders
 {
-    public class AnimatorComponentBuilder : IComponentBuilder
+    public class AnimatorComponentBuilder : BaseComponentBuilder
     {
         #region Private Fields
 
@@ -18,19 +14,27 @@ namespace OpenBreed.Core.Modules.Animation.Builders
 
         #endregion Private Fields
 
-        #region Public Methods
+        #region Protected Constructors
 
-        public static IComponentBuilder New()
+        protected AnimatorComponentBuilder(ICore core) : base(core)
         {
-            return new AnimatorComponentBuilder();
         }
 
-        public IEntityComponent Build()
+        #endregion Protected Constructors
+
+        #region Public Methods
+
+        public static IComponentBuilder New(ICore core)
+        {
+            return new AnimatorComponentBuilder(core);
+        }
+
+        public override IEntityComponent Build()
         {
             return new Animator(speed, loop);
         }
 
-        public void SetProperty(object key, object value)
+        public override void SetProperty(object key, object value)
         {
             var propertyName = Convert.ToString(key);
 

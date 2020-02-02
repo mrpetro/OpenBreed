@@ -94,7 +94,7 @@ namespace OpenBreed.Sandbox.Entities.Door
             var door = core.Entities.Create();
 
             door.Add(new Animator(5.0f, false));
-            door.Add(Body.Create(1.0f, 1.0f, "Static", (e, c) => OnCollision(door, e, c)));
+            door.Add(Body.Create(1.0f, 1.0f, "Static"));
             door.Add(core.Rendering.CreateSprite("Atlases/Sprites/Door/Vertical"));
             door.Add(Position.Create(x * 16, y * 16));
             door.Add(AxisAlignedBoxShape.Create(0, 0, 16, 32));
@@ -108,11 +108,6 @@ namespace OpenBreed.Sandbox.Entities.Door
             world.AddEntity(door);
         }
 
-        private static void OnCollision(IEntity thisEntity, IEntity otherEntity, Vector2 projection)
-        {
-            thisEntity.RaiseEvent(PhysicsEventTypes.COLLISION_OCCURRED, new CollisionEventArgs(otherEntity));
-        }
-
         public static void AddHorizontalDoor(World world, int x, int y)
         {
             var core = world.Core;
@@ -120,7 +115,7 @@ namespace OpenBreed.Sandbox.Entities.Door
             var door = core.Entities.Create();
 
             door.Add(new Animator(5.0f, false));
-            door.Add(Body.Create(1.0f, 1.0f, "Static", (e, c) => OnCollision(door, e, c)));
+            door.Add(Body.Create(1.0f, 1.0f, "Static"));
             door.Add(core.Rendering.CreateSprite("Atlases/Sprites/Door/Horizontal"));
             door.Add(Position.Create(x * 16, y * 16));
             door.Add(AxisAlignedBoxShape.Create(0, 0, 32, 16));

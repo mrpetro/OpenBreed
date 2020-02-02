@@ -9,5 +9,9 @@
     BodyComponent = {
         CofFactor = 1.0,
         CorFactor = 0.0,
-        Type = "Dynamic"}
+        Type = "Dynamic"},
+	MotionComponent = {},
+	SpriteComponent = {
+		AtlasAlias = "Atlases/Sprites/Arrow",
+        Order = 10.0}
 }

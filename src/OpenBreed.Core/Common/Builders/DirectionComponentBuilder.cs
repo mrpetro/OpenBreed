@@ -3,28 +3,37 @@ using System;
 
 namespace OpenBreed.Core.Common.Builders
 {
-    public class DirectionComponentBuilder : IComponentBuilder
+    public class DirectionComponentBuilder : BaseComponentBuilder
     {
         #region Private Fields
 
         private float x;
+
         private float y;
 
         #endregion Private Fields
 
-        #region Public Methods
+        #region Protected Constructors
 
-        public static IComponentBuilder New()
+        protected DirectionComponentBuilder(ICore core) : base(core)
         {
-            return new DirectionComponentBuilder();
         }
 
-        public IEntityComponent Build()
+        #endregion Protected Constructors
+
+        #region Public Methods
+
+        public static IComponentBuilder New(ICore core)
+        {
+            return new DirectionComponentBuilder(core);
+        }
+
+        public override IEntityComponent Build()
         {
             return Direction.Create(x, y);
         }
 
-        public void SetProperty(object key, object value)
+        public override void SetProperty(object key, object value)
         {
             var index = Convert.ToInt64(key);
 

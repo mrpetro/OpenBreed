@@ -49,11 +49,6 @@ namespace OpenBreed.Sandbox.Entities.Builders
             this.tileId = tileId;
         }
 
-        private static void OnCollision(IEntity thisEntity, IEntity otherEntity, Vector2 projection)
-        {
-            thisEntity.RaiseEvent(PhysicsEventTypes.COLLISION_OCCURRED, new CollisionEventArgs(otherEntity));
-        }
-
         public bool HasBody { get; set; }
 
         public override IEntity Build()
@@ -64,7 +59,7 @@ namespace OpenBreed.Sandbox.Entities.Builders
 
             if (HasBody)
             {
-                entity.Add(Body.Create(1.0f, 1.0f, "Static", (e, c) => OnCollision(entity, e, c)));
+                entity.Add(Body.Create(1.0f, 1.0f, "Static"));
                 entity.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
             }
 

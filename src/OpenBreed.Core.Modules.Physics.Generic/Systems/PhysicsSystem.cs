@@ -36,7 +36,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         internal PhysicsSystem(PhysicsSystemBuilder builder) : base(builder.core)
         {
             cmdHandler = new CommandHandler(this);
-            Require<IPhysicsComponent>();
+            Require<Body>();
 
             GridWidth = builder.gridWidth;
             GridHeight = builder.gridHeight;
@@ -254,8 +254,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 var entityA = Core.Entities.GetById(packA.EntityId);
                 var entityB = Core.Entities.GetById(packB.EntityId);
 
-                packA.Body.CollisionCallback?.Invoke(entityB, projection);
-                packB.Body.CollisionCallback?.Invoke(entityA, projection);
+                entityA.RaiseEvent(PhysicsEventTypes.COLLISION_OCCURRED, new CollisionEventArgs(entityB, projection));
+                entityB.RaiseEvent(PhysicsEventTypes.COLLISION_OCCURRED, new CollisionEventArgs(entityA, projection));
 
                 //bodyA.Entity.RaiseEvent(new CollisionEvent(bodyB.Entity));
                 //bodyB.Entity.RaiseEvent(new CollisionEvent(bodyA.Entity));
@@ -271,8 +271,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 var entityA = Core.Entities.GetById(packA.EntityId);
                 var entityB = Core.Entities.GetById(packB.EntityId);
 
-                packA.Body.CollisionCallback?.Invoke(entityB, projection);
-                packB.Body.CollisionCallback?.Invoke(entityA, projection);
+                entityA.RaiseEvent(PhysicsEventTypes.COLLISION_OCCURRED, new CollisionEventArgs(entityB, projection));
+                entityB.RaiseEvent(PhysicsEventTypes.COLLISION_OCCURRED, new CollisionEventArgs(entityA, projection));
             }
         }
 
@@ -429,7 +429,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         private void RegisterStaticEntity(IEntity entity)
         {
             var pack = new StaticPack(entity.Id,
-                                      entity.Components.OfType<IBody>().First(),
+                                      entity.Components.OfType<Body>().First(),
                                       entity.Components.OfType<Position>().First(),
                                       entity.Components.OfType<IShapeComponent>().First());
 
@@ -444,7 +444,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         private void RegisterDynamicEntity(IEntity entity)
         {
             var pack = new DynamicPack(entity.Id,
-                                      entity.Components.OfType<IBody>().First(),
+                                      entity.Components.OfType<Body>().First(),
                                       entity.Components.OfType<Position>().First(),
                                       entity.Components.OfType<Velocity>().First(),
                                       entity.Components.OfType<IShapeComponent>().First());

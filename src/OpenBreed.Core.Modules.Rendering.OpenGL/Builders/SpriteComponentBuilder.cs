@@ -1,40 +1,39 @@
 ﻿using OpenBreed.Core.Common.Builders;
 using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Modules.Physics.Components;
+using OpenBreed.Core.Modules.Rendering.Components;
 using System;
 
 namespace OpenBreed.Core.Modules.Physics.Builders
 {
-    public class BodyComponentBuilder : BaseComponentBuilder
+    public class SpriteComponentBuilder : BaseComponentBuilder
     {
         #region Private Fields
 
-        private float cofFactor;
-
-        private float corFactor;
-
-        private string type;
+        private string atlasAlias;
+        private int imageId;
+        private float order;
 
         #endregion Private Fields
 
-        #region Protected Constructors
+        #region Private Constructors
 
-        protected BodyComponentBuilder(ICore core) : base(core)
+        private SpriteComponentBuilder(ICore core) : base(core)
         {
         }
 
-        #endregion Protected Constructors
+        #endregion Private Constructors
 
         #region Public Methods
 
         public static IComponentBuilder New(ICore core)
         {
-            return new BodyComponentBuilder(core);
+            return new SpriteComponentBuilder(core);
         }
 
         public override IEntityComponent Build()
         {
-            return new Body() { CofFactor = cofFactor, CorFactor = corFactor, Tag = type };
+            var atlas = Core.Rendering.Sprites.GetByAlias(atlasAlias);
+            return SpriteComponent.Create(atlas.Id, imageId, order);
         }
 
         public override void SetProperty(object key, object value)
@@ -42,16 +41,16 @@ namespace OpenBreed.Core.Modules.Physics.Builders
             var propertyName = Convert.ToString(key);
             switch (propertyName)
             {
-                case "CofFactor":
-                    cofFactor = Convert.ToSingle(value);
+                case "AtlasAlias":
+                    atlasAlias = Convert.ToString(value);
                     break;
 
-                case "CorFactor":
-                    corFactor = Convert.ToSingle(value);
+                case "ImageId":
+                    imageId = Convert.ToInt32(value);
                     break;
 
-                case "type":
-                    type = Convert.ToString(value);
+                case "Order":
+                    order = Convert.ToSingle(value);
                     break;
 
                 default:

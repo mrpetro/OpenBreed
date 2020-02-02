@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Entities;
+﻿using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Entities;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ namespace OpenBreed.Core.Modules.Physics.Components
     /// <summary>
     /// Physical Body data
     /// </summary>
-    public class Body : IBody
+    public class Body : IEntityComponent
     {
         #region Public Constructors
 
@@ -20,12 +21,11 @@ namespace OpenBreed.Core.Modules.Physics.Components
 
         #region Private Constructors
 
-        private Body(float cofFactor, float corFactor, string tag, Action<IEntity, Vector2> collisionCallback)
+        private Body(float cofFactor, float corFactor, string tag)
         {
             CofFactor = cofFactor;
             CorFactor = corFactor;
             Tag = tag;
-            CollisionCallback = collisionCallback;
         }
 
         #endregion Private Constructors
@@ -64,18 +64,13 @@ namespace OpenBreed.Core.Modules.Physics.Components
         /// </summary>
         public Vector2 OldPosition { get; set; }
 
-        /// <summary>
-        /// Collistion callback
-        /// </summary>
-        public Action<IEntity, Vector2> CollisionCallback { get; set; }
-
         #endregion Public Properties
 
         #region Public Methods
 
-        public static Body Create(float cofFactor, float corFactor, string tag, Action<IEntity, Vector2> collisionCallback = null)
+        public static Body Create(float cofFactor, float corFactor, string tag)
         {
-            return new Body(cofFactor, corFactor, tag, collisionCallback);
+            return new Body(cofFactor, corFactor, tag);
         }
 
         #endregion Public Methods

@@ -21,7 +21,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         private readonly List<Thrust> thrustComps = new List<Thrust>();
         private readonly List<Position> positionComps = new List<Position>();
         private readonly List<Velocity> velocityComps = new List<Velocity>();
-        private readonly List<IBody> dynamicBodyComps = new List<IBody>();
+        private readonly List<Body> dynamicBodyComps = new List<Body>();
 
         #endregion Private Fields
 
@@ -32,7 +32,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             Require<Thrust>();
             Require<Position>();
             Require<Velocity>();
-            Require<IBody>();
+            Require<Body>();
         }
 
         #endregion Public Constructors
@@ -81,7 +81,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             positionComps.Add(entity.Components.OfType<Position>().First());
             thrustComps.Add(entity.Components.OfType<Thrust>().First());
             velocityComps.Add(entity.Components.OfType<Velocity>().First());
-            dynamicBodyComps.Add(entity.Components.OfType<IBody>().First());
+            dynamicBodyComps.Add(entity.Components.OfType<Body>().First());
         }
 
         protected override void UnregisterEntity(IEntity entity)

@@ -5,7 +5,6 @@ using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Modules.Physics.Builders;
-using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
@@ -102,7 +101,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             var pack = active[index];
 
-            DrawDebug(pack, viewport);
+            //DrawDebug(pack, viewport);
 
             GL.PushMatrix();
 
@@ -184,30 +183,30 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             return true;
         }
 
-        /// <summary>
-        /// Draw this sprite to given viewport
-        /// </summary>
-        /// <param name="viewport">Viewport which this sprite will be rendered to</param>
-        private void DrawDebug(SpritePack pack, IViewport viewport)
-        {
-            var entity = Core.Entities.GetById(pack.EntityId);
+        ///// <summary>
+        ///// Draw this sprite to given viewport
+        ///// </summary>
+        ///// <param name="viewport">Viewport which this sprite will be rendered to</param>
+        //private void DrawDebug(SpritePack pack, IViewport viewport)
+        //{
+        //    var entity = Core.Entities.GetById(pack.EntityId);
 
-            var body = entity.Components.OfType<IBody>().FirstOrDefault();
+        //    var body = entity.Components.OfType<Body>().FirstOrDefault();
 
-            if (body == null)
-                return;
+        //    if (body == null)
+        //        return;
 
-            if (body.Boxes != null)
-            {
-                foreach (var item in body.Boxes)
-                {
-                    RenderTools.DrawRectangle(item.Item1 * 16.0f,
-                                              item.Item2 * 16.0f,
-                                              item.Item1 * 16.0f + 16.0f,
-                                              item.Item2 * 16.0f + 16.0f);
-                }
-            }
-        }
+        //    if (body.Boxes != null)
+        //    {
+        //        foreach (var item in body.Boxes)
+        //        {
+        //            RenderTools.DrawRectangle(item.Item1 * 16.0f,
+        //                                      item.Item2 * 16.0f,
+        //                                      item.Item1 * 16.0f + 16.0f,
+        //                                      item.Item2 * 16.0f + 16.0f);
+        //        }
+        //    }
+        //}
 
         #endregion Private Methods
     }
