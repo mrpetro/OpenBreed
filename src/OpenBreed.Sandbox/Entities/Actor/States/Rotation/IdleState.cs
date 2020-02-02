@@ -1,8 +1,9 @@
-﻿using OpenBreed.Core.Common.Helpers;
+﻿
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
-using OpenBreed.Core.Modules.Rendering.Messages;
+using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Systems.Control.Events;
 using OpenTK;
@@ -28,7 +29,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
         public void EnterState()
         {
             // Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            Entity.PostMsg(new TextSetMsg(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            Entity.PostCommand(new TextSetCommand(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
             Entity.Subscribe(ControlEventTypes.CONTROL_DIRECTION_CHANGED, OnControlDirectionChanged);
         }
@@ -72,7 +73,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
                 if (dir.Value != systemEvent.Direction)
                 {
                     dir.Value = systemEvent.Direction;
-                    Entity.PostMsg(new StateChangeMsg(Entity.Id, "Rotation", "Rotate"));
+                    Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Rotation", "Rotate"));
                 }
             }
 

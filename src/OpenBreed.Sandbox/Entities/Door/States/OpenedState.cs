@@ -1,17 +1,17 @@
 ﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Messages;
+using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Modules.Animation.Systems;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Events;
-using OpenBreed.Core.Modules.Animation.Messages;
+using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenTK;
 using System.Linq;
 using OpenBreed.Core.Common.Systems;
-using OpenBreed.Core.Common.Helpers;
-using OpenBreed.Core.Modules.Physics.Messages;
+
+using OpenBreed.Core.Modules.Physics.Commands;
 using OpenBreed.Core.Common.Systems.Components;
 
 namespace OpenBreed.Sandbox.Components.States
@@ -45,13 +45,13 @@ namespace OpenBreed.Sandbox.Components.States
 
         public void EnterState()
         {
-            Entity.PostMsg(new SpriteOffMsg(Entity.Id));
-            Entity.PostMsg(new BodyOffMsg(Entity.Id));
+            Entity.PostCommand(new SpriteOffCommand(Entity.Id));
+            Entity.PostCommand(new BodyOffCommand(Entity.Id));
 
             var pos = Entity.Components.OfType<Position>().FirstOrDefault();
 
-            Entity.PostMsg(new PutStampMsg(Entity.World.Id, stampId, 0, pos.Value));
-            Entity.PostMsg(new TextSetMsg(Entity.Id, "Door - Opened"));
+            Entity.PostCommand(new PutStampCommand(Entity.World.Id, stampId, 0, pos.Value));
+            Entity.PostCommand(new TextSetCommand(Entity.Id, "Door - Opened"));
         }
 
         public void Initialize(IEntity entity)

@@ -1,13 +1,17 @@
 ﻿using NLua;
 using OpenBreed.Core;
-using OpenBreed.Core.Blueprints;
-using OpenBreed.Core.Common.Helpers;
+using OpenBreed.Core.Common.Builders;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Animation;
+using OpenBreed.Core.Modules.Animation.Builders;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Audio;
-using OpenBreed.Core.Modules.Physics;
+using OpenBreed.Core.Modules.Audio.Builders;
+using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Rendering;
+using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.Scripting;
 using OpenBreed.Core.Systems.Control.Systems;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Camera;
@@ -17,7 +21,6 @@ using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Items;
 using OpenBreed.Sandbox.Managers;
-using OpenBreed.Sandbox.States;
 using OpenBreed.Sandbox.Worlds;
 using OpenTK;
 using OpenTK.Graphics;
@@ -44,26 +47,23 @@ namespace OpenBreed.Sandbox
         {
             appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-            LuaState = new Lua();
             Logging = new LogMan(this);
-            MessageBus = new CoreMessageBus(this);
-            EventBus = new CoreEventBus(this);
-            Rendering = new OpenGLModule(this);
-            Sounds = new OpenALModule(this);
-            Physics = new PhysicsModule(this);
-            Animations = new AnimationModule(this);
-            Blueprints = new BlueprintMan(this);
+
+            Scripts = new LuaScriptMan(this);
+            Commands = new CommandsMan(this);
+            Events = new EventsMan(this);
             Entities = new EntityMan(this);
             Players = new PlayersMan(this);
             Items = new ItemsMan(this);
             Inputs = new InputsMan(this);
             Worlds = new WorldMan(this);
-            StateMachine = new StateMan(this);
-
             Jobs = new JobMan(this);
-            VSync = VSyncMode.On;
 
-            RegisterBlueprintParsers();
+            Rendering = new OpenGLModule(this);
+            Sounds = new OpenALModule(this);
+            Animations = new AnimationModule(this);
+
+            VSync = VSyncMode.On;
         }
 
         #endregion Public Constructors
@@ -74,11 +74,7 @@ namespace OpenBreed.Sandbox
 
         public IAudioModule Sounds { get; }
 
-        public IPhysicsModule Physics { get; }
-
         public IAnimationModule Animations { get; }
-
-        public BlueprintMan Blueprints { get; }
 
         public EntityMan Entities { get; }
 
@@ -92,13 +88,13 @@ namespace OpenBreed.Sandbox
 
         public InputsMan Inputs { get; }
 
-        public CoreMessageBus MessageBus { get; }
+        public CommandsMan Commands { get; }
 
-        public CoreEventBus EventBus { get; }
+        public EventsMan Events { get; }
 
         public WorldMan Worlds { get; }
 
-        public StateMan StateMachine { get; }
+        public IScriptMan Scripts { get; }
 
         public Matrix4 ClientTransform
         {
@@ -113,9 +109,61 @@ namespace OpenBreed.Sandbox
 
         public float ClientRatio { get { return (float)ClientRectangle.Width / (float)ClientRectangle.Height; } }
 
-        public Lua LuaState { get; }
-
         #endregion Public Properties
+
+        #region Public Methods
+
+        public WalkingControlSystemBuilder CreateWalkingControlSystem()
+        {
+            return new WalkingControlSystemBuilder(this);
+        }
+
+        public AiControlSystemBuilder CreateAiControlSystem()
+        {
+            return new AiControlSystemBuilder(this);
+        }
+
+        public PhysicsSystemBuilder CreatePhysicsSystem()
+        {
+            return new PhysicsSystemBuilder(this);
+        }
+
+        public AnimationSystemBuilder CreateAnimationSystem()
+        {
+            return new AnimationSystemBuilder(this);
+        }
+
+        public MovementSystemBuilder CreateMovementSystem()
+        {
+            return new MovementSystemBuilder(this);
+        }
+
+        public TileSystemBuilder CreateTileSystem()
+        {
+            return new TileSystemBuilder(this);
+        }
+
+        public SpriteSystemBuilder CreateSpriteSystem()
+        {
+            return new SpriteSystemBuilder(this);
+        }
+
+        public TextSystemBuilder CreateTextSystem()
+        {
+            return new TextSystemBuilder(this);
+        }
+
+        public WireframeSystemBuilder CreateWireframeSystem()
+        {
+            return new WireframeSystemBuilder(this);
+        }
+
+        public SoundSystemBuilder CreateSoundSystem()
+        {
+            return new SoundSystemBuilder(this);
+        }
+
+        #endregion Public Methods
 
         #region Protected Methods
 
@@ -161,12 +209,32 @@ namespace OpenBreed.Sandbox
             Inputs.OnKeyPress(e);
         }
 
+        private void RegisterComponentBuilders()
+        {
+            Entities.RegisterComponentBuilder("AnimatorComponent", AnimatorComponentBuilder.New);
+            Entities.RegisterComponentBuilder("DirectionComponent", DirectionComponentBuilder.New);
+            Entities.RegisterComponentBuilder("VelocityComponent", VelocityComponentBuilder.New);
+            Entities.RegisterComponentBuilder("ThrustComponent", ThrustComponentBuilder.New);
+            Entities.RegisterComponentBuilder("PositionComponent", PositionComponentBuilder.New);
+            Entities.RegisterComponentBuilder("BodyComponent", BodyComponentBuilder.New);
+            Entities.RegisterComponentBuilder("MotionComponent", MotionComponentBuilder.New);
+            Entities.RegisterComponentBuilder("SpriteComponent", SpriteComponentBuilder.New);
+        }
+
+        private void RegisterEntityTemplates()
+        {
+            Scripts.RunFile(@"Entities\Actor\Arrow.lua");
+
+        }
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
             Title = $"Open Breed Sandbox (Version: {appVersion} Vsync: {VSync})";
 
+            RegisterComponentBuilders();
+            RegisterEntityTemplates();
             RegisterItems();
 
             Inputs.RegisterHandler(new WalkingControlHandler());
@@ -216,15 +284,7 @@ namespace OpenBreed.Sandbox
 
             HudWorldHelper.CreateHudWorld(this);
 
-            StateMachine.RegisterState(new StateTechDemo1(this));
-            StateMachine.RegisterState(new StateTechDemo2(this));
-            StateMachine.RegisterState(new StateTechDemo3(this));
-            StateMachine.RegisterState(new StateTechDemo4(this));
-            StateMachine.RegisterState(new StateTechDemo5(this));
-            StateMachine.RegisterState(new StateTechDemo6(this));
-            //StateMan.RegisterState(new MenuState(this));
-            StateMachine.SetNextState(StateTechDemo6.ID);
-            StateMachine.ChangeState();
+            GameWorldHelper.CreateGameWorld(this);
 
             //GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.One);                  // Select The Type Of Blending
 
@@ -238,9 +298,21 @@ namespace OpenBreed.Sandbox
             GL.DepthFunc(DepthFunction.Lequal);
             GL.Enable(EnableCap.DepthTest);
 
-            //var s = new OpenBreed.Core.Scripting.LoadTest();
+            //var func = Scripts.RunFile(@"Entities\Actor\States\Attacking\IdleState.lua");
 
-            //s.Example();
+
+            //var r = func.Invoke();
+
+            //var result = Scripts.RunFile("Content\\Scripts\\start.lua");
+
+            OnEngineInitialized();
+
+            //var myass = (IViewport)Scripts.GetObject("myass");
+        }
+
+        protected void OnEngineInitialized()
+        {
+            Scripts.TryInvokeFunction("EngineInitialized");
         }
 
         protected override void OnResize(EventArgs e)
@@ -253,7 +325,7 @@ namespace OpenBreed.Sandbox
             var ortho = Matrix4.CreateOrthographicOffCenter(0.0f, ClientRectangle.Width, 0.0f, ClientRectangle.Height, -100.0f, 100.0f);
             GL.LoadMatrix(ref ortho);
 
-            StateMachine.OnResize(ClientRectangle);
+            //StateMachine.OnResize(ClientRectangle);
         }
 
         protected override void OnUpdateFrame(FrameEventArgs e)
@@ -265,10 +337,8 @@ namespace OpenBreed.Sandbox
             Players.ResetInputs();
             Inputs.Update();
             Players.ApplyInputs();
-            StateMachine.Update((float)e.Time);
-            PostAndRaise();
+            //StateMachine.Update((float)e.Time);
             Worlds.Update((float)e.Time);
-            PostAndRaise();
             Jobs.Update((float)e.Time);
         }
 
@@ -304,14 +374,6 @@ namespace OpenBreed.Sandbox
             Items.Register(new CreditsItem());
         }
 
-        private void RegisterBlueprintParsers()
-        {
-            ComponentStateXml.RegisterTypeParser(typeof(Vector2), ReadVector2);
-            ComponentStateXml.RegisterTypeParser(typeof(string), ReadString);
-
-            //EntityMan.RegisterBuilder("OpenBreed.Core.Common.Components.GridPosition", GridPositionBuilder.Create);
-        }
-
         private object ReadString(XmlReader reader)
         {
             reader.ReadStartElement();
@@ -340,12 +402,6 @@ namespace OpenBreed.Sandbox
 
             reader.ReadEndElement();
             return new Vector2(x, y);
-        }
-
-        private void PostAndRaise()
-        {
-            MessageBus.PostEnqueued();
-            EventBus.RaiseEnqueued();
         }
 
         #endregion Private Methods

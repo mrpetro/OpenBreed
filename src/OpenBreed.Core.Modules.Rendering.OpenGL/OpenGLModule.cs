@@ -61,42 +61,6 @@ namespace OpenBreed.Core.Modules.Rendering
         #region Public Methods
 
         /// <summary>
-        /// Create system for handling sprites
-        /// </summary>
-        /// <returns>Sprite system</returns>
-        public ISpriteSystem CreateSpriteSystem()
-        {
-            return new SpriteSystem(Core);
-        }
-
-        /// <summary>
-        /// Create system for handling wireframes
-        /// </summary>
-        /// <returns>Wireframe system</returns>
-        public IWireframeSystem CreateWireframeSystem()
-        {
-            return new WireframeSystem(Core);
-        }
-
-        /// <summary>
-        /// Create system for handling texts
-        /// </summary>
-        /// <returns>Text system</returns>
-        public ITextSystem CreateTextSystem()
-        {
-            return new TextSystem(Core);
-        }
-
-        /// <summary>
-        /// Create system for handling tiles
-        /// </summary>
-        /// <returns>Tile system</returns>
-        public ITileSystem CreateTileSystem(int gridWidth, int gridHeight, int layersNo, float tileSize, bool drawGrid)
-        {
-            return new TileSystem(Core, gridWidth, gridHeight, layersNo, tileSize, drawGrid);
-        }
-
-        /// <summary>
         /// Create wireframe render component
         /// </summary>
         /// <param name="thickness">Thickness of wireframe lines</param>

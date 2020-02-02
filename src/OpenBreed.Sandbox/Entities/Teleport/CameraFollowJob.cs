@@ -1,10 +1,10 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Common.Helpers;
+
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Animation.Events;
-using OpenBreed.Core.Modules.Animation.Messages;
+using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenTK;
 using System;

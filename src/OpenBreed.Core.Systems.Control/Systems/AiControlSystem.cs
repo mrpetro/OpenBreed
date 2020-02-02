@@ -1,9 +1,11 @@
 ﻿using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Common.Systems.Helpers;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Components;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
+using OpenBreed.Core.Modules.Physics.Builders;
+using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Control.Events;
 using OpenTK;
 using System;
@@ -27,7 +29,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         #region Public Constructors
 
-        public AiControlSystem(ICore core) : base(core)
+        internal AiControlSystem(AiControlSystemBuilder builder) : base(builder.core)
         {
             Require<AiControl>();
             Require<Position>();
@@ -107,7 +109,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
             control.Direction = direction;
 
-            entity.EnqueueEvent(ControlEventTypes.CONTROL_DIRECTION_CHANGED, new ControlDirectionChangedEvent(control.Direction));
+            entity.RaiseEvent(ControlEventTypes.CONTROL_DIRECTION_CHANGED, new ControlDirectionChangedEvent(control.Direction));
         }
 
         #endregion Private Methods

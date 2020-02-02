@@ -64,17 +64,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\AnimationSystemBuilder.cs" />
+    <Compile Include="Builders\AnimatorComponentBuilder.cs" />
     <Compile Include="Events\AnimationEventTypes.cs" />
     <Compile Include="Events\AnimStoppedEventArgs.cs" />
     <Compile Include="Events\AnimChangedEventArgs.cs" />
-    <Compile Include="Messages\SetAnimMsg.cs" />
-    <Compile Include="Systems\AnimSystem.cs" />
+    <Compile Include="Commands\SetAnimCommand.cs" />
+    <Compile Include="Systems\AnimationSystem.cs" />
     <Compile Include="Helpers\AnimMan.cs" />
     <Compile Include="Components\Animator.cs" />
     <Compile Include="Helpers\Animation.cs" />
-    <Compile Include="Messages\PauseAnimMsg.cs" />
-    <Compile Include="Messages\StopAnimMsg.cs" />
-    <Compile Include="Messages\PlayAnimMsg.cs" />
+    <Compile Include="Commands\PauseAnimCommand.cs" />
+    <Compile Include="Commands\StopAnimCommand.cs" />
+    <Compile Include="Commands\PlayAnimCommand.cs" />
     <Compile Include="AnimationModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

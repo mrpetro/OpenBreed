@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
 using NLua;
-using OpenBreed.Core.Common.Helpers;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Inputs;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
@@ -35,11 +35,6 @@ namespace OpenBreed.Core
         IAudioModule Sounds { get; }
 
         /// <summary>
-        /// Reference to physics core module
-        /// </summary>
-        IPhysicsModule Physics { get; }
-
-        /// <summary>
         /// Reference to animation core module
         /// </summary>
         IAnimationModule Animations { get; }
@@ -48,11 +43,6 @@ namespace OpenBreed.Core
         /// Logging manager
         /// </summary>
         ILogMan Logging { get; }
-
-        /// <summary>
-        /// Blueprints manager
-        /// </summary>
-        BlueprintMan Blueprints { get; }
 
         /// <summary>
         /// Jobs manager
@@ -85,24 +75,19 @@ namespace OpenBreed.Core
         WorldMan Worlds { get; }
 
         /// <summary>
-        /// States machine
+        /// Commands manager
         /// </summary>
-        StateMan StateMachine { get; }
+        CommandsMan Commands{ get; }
 
         /// <summary>
-        /// Message bus
+        /// Events manager
         /// </summary>
-        CoreMessageBus MessageBus{ get; }
+        EventsMan Events { get; }
 
         /// <summary>
-        /// Event bus
+        /// Scripts manager
         /// </summary>
-        CoreEventBus EventBus { get; }
-
-        /// <summary>
-        /// Lua state machine
-        /// </summary>
-        Lua LuaState { get; }
+        IScriptMan Scripts { get; }
 
         /// <summary>
         /// Client display transformation matrix

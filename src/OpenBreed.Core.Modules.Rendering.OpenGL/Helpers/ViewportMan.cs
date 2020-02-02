@@ -1,6 +1,5 @@
-﻿using OpenBreed.Core.Common.Helpers;
-using OpenBreed.Core.Managers;
-using OpenBreed.Core.Modules.Rendering.Messages;
+﻿using OpenBreed.Core.Managers;
+using OpenBreed.Core.Modules.Rendering.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

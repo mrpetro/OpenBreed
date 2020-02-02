@@ -1,10 +1,12 @@
-﻿using OpenBreed.Core.Common.Helpers;
+﻿using OpenBreed.Core.Commands;
+
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Extensions;
+using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
-using OpenBreed.Core.States;
+using OpenBreed.Core.Systems;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -15,11 +17,11 @@ namespace OpenBreed.Core.Common
 {
     /// <summary>
     /// World class which contains systems and entities
-    /// 
+    ///
     /// Enqueues events:
     /// WorldInitializedEvent - when world is initialized
     /// </summary>
-    public class World
+    public class World : IMsgHandler, ICommandExecutor
     {
         #region Public Fields
 
@@ -36,21 +38,34 @@ namespace OpenBreed.Core.Common
 
         private float timeMultiplier = 1.0f;
 
+        private CommandHandler commandHandler;
+        private MsgHandlerRelay msgHandlerRelay;
+
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal World(ICore core, string name)
+        internal World(WorldBuilder builder)
         {
-            Core = core;
-            Name = name;
+            Core = builder.core;
+            Name = builder.name;
 
             Entities = new ReadOnlyCollection<IEntity>(entities);
-            Systems = new ReadOnlyCollection<IWorldSystem>(systems);
-            Components = new ComponentsMan();
 
-            MessageBus = new WorldMessageBus(this);
-            MessageBus.RegisterHandler(StateChangeMsg.TYPE, new StateChangeMsgHandler(this));
+            systems = builder.systems;
+            Systems = new ReadOnlyCollection<IWorldSystem>(systems);
+
+            Components = new ComponentsMan();
+            commandHandler = new CommandHandler(this);
+            msgHandlerRelay = new MsgHandlerRelay(this);
+            RegisterHandler(EntitySetStateCommand.TYPE, commandHandler);
+
+            Core.Worlds.RegisterWorld(this);
+
+            foreach (var system in systems)
+                system.Initialize(this);
+
+            builder.InvokeActions(this);
         }
 
         #endregion Internal Constructors
@@ -79,10 +94,12 @@ namespace OpenBreed.Core.Common
         }
 
         public ICore Core { get; }
+
         public ReadOnlyCollection<IEntity> Entities { get; }
+
         public ReadOnlyCollection<IWorldSystem> Systems { get; }
+
         public ComponentsMan Components { get; }
-        public WorldMessageBus MessageBus { get; }
 
         /// <summary>
         /// Id of this world
@@ -97,6 +114,21 @@ namespace OpenBreed.Core.Common
         #endregion Public Properties
 
         #region Public Methods
+
+        public bool ExecuteCommand(object sender, ICommand cmd)
+        {
+            switch (cmd.Type)
+            {
+                case EntitySetStateCommand.TYPE:
+                    return HandleStateChangeCommand(sender, (EntitySetStateCommand)cmd);
+
+                case WorldSetPauseCommand.TYPE:
+                    return HandleWorldPauseCommand(sender, (WorldSetPauseCommand)cmd);
+
+                default:
+                    return false;
+            }
+        }
 
         /// <summary>
         /// Method will add given entity to this world.
@@ -126,12 +158,6 @@ namespace OpenBreed.Core.Common
             toRemove.Add(entity);
         }
 
-        internal void OnEntityRemoved(IEntity entity)
-        {
-            //Core.EventBus.Enqueue(
-            //throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Method will remove all entities from this world.
         /// Entities will not be removed immediately but at the end of each world update.
@@ -142,14 +168,14 @@ namespace OpenBreed.Core.Common
                 RemoveEntity(entities[i]);
         }
 
-        public virtual void AddSystem(IWorldSystem system)
+        public void RegisterHandler(string msgType, IMsgHandler msgHandler)
         {
-            systems.Add(system);
+            msgHandlerRelay.RegisterHandler(msgType, msgHandler);
         }
 
-        public virtual void RemoveSystem(IWorldSystem system)
+        public bool Handle(object sender, IMsg msg)
         {
-            systems.Remove(system);
+            return msgHandlerRelay.Handle(sender, msg);
         }
 
         #endregion Public Methods
@@ -158,6 +184,8 @@ namespace OpenBreed.Core.Common
 
         internal void Update(float dt)
         {
+            commandHandler.ExecuteEnqueued();
+
             if (Paused)
                 systems.OfType<IUpdatableSystem>().ForEach(item => item.UpdatePauseImmuneOnly(dt * TimeMultiplier));
             else
@@ -166,15 +194,15 @@ namespace OpenBreed.Core.Common
 
         internal void Initialize()
         {
-            InitializeSystems();
+            //InitializeSystems();
             Cleanup();
 
-            Core.EventBus.Enqueue(this, CoreEventTypes.WORLD_INITIALIZED , new WorldInitializedEventArgs(this));
+            Core.Events.Raise(this, CoreEventTypes.WORLD_INITIALIZED, new WorldInitializedEventArgs(this));
         }
 
         internal void Deinitialize()
         {
-            Core.EventBus.Enqueue(this, CoreEventTypes.WORLD_DEINITIALIZED, new WorldDeinitializedEventArgs(this));
+            Core.Events.Raise(this, CoreEventTypes.WORLD_DEINITIALIZED, new WorldDeinitializedEventArgs(this));
         }
 
         internal void RegisterEntity(Entity entity)
@@ -220,6 +248,31 @@ namespace OpenBreed.Core.Common
 
         #region Private Methods
 
+        private void InitializeSystems()
+        {
+            for (int i = 0; i < systems.Count; i++)
+                systems[i].Initialize(this);
+        }
+
+        private bool HandleStateChangeCommand(object sender, EntitySetStateCommand cmd)
+        {
+            var entity = Core.Entities.GetById(cmd.EntityId);
+
+            var fsm = entity.FsmList.FirstOrDefault(item => item.Name == cmd.FsmName);
+
+            if (fsm != null)
+                fsm.Handle(sender, cmd);
+
+            return true;
+        }
+
+        private bool HandleWorldPauseCommand(object sender, WorldSetPauseCommand cmd)
+        {
+            Paused = cmd.Pause;
+
+            return true;
+        }
+
         private void AddEntityToSystems(Entity entity)
         {
             foreach (var system in systems)
@@ -238,18 +291,18 @@ namespace OpenBreed.Core.Common
             }
         }
 
-        private void InitializeSystems()
-        {
-            for (int i = 0; i < systems.Count; i++)
-                systems[i].Initialize(this);
-        }
-
-        private void DeinitializeSystems()
-        {
-            for (int i = 0; i < systems.Count; i++)
-                systems[i].Deinitialize();
-        }
-
         #endregion Private Methods
+
+        //private void InitializeSystems()
+        //{
+        //    for (int i = 0; i < systems.Count; i++)
+        //        systems[i].Initialize(this);
+        //}
+
+        //private void DeinitializeSystems()
+        //{
+        //    for (int i = 0; i < systems.Count; i++)
+        //        systems[i].Deinitialize();
+        //}
     }
 }

@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPFArchive", "..\EPFArchive
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Common.XmlDatabase", "..\OpenBreed.Common\src\OpenBreed.Common.XmlDatabase\OpenBreed.Common.XmlDatabase.csproj", "{C4095745-E19C-4DE9-B2E4-37E55FA0D225}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Game", "OpenBreed.Game\OpenBreed.Game.csproj", "{6FC15DD4-5043-4BE3-AA9A-D69B9A60A626}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -118,6 +120,14 @@ Global
 		{C4095745-E19C-4DE9-B2E4-37E55FA0D225}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C4095745-E19C-4DE9-B2E4-37E55FA0D225}.Release|x64.ActiveCfg = Release|Any CPU
 		{C4095745-E19C-4DE9-B2E4-37E55FA0D225}.Release|x64.Build.0 = Release|Any CPU
+		{6FC15DD4-5043-4BE3-AA9A-D69B9A60A626}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FC15DD4-5043-4BE3-AA9A-D69B9A60A626}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FC15DD4-5043-4BE3-AA9A-D69B9A60A626}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6FC15DD4-5043-4BE3-AA9A-D69B9A60A626}.Debug|x64.Build.0 = Debug|Any CPU
+		{6FC15DD4-5043-4BE3-AA9A-D69B9A60A626}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FC15DD4-5043-4BE3-AA9A-D69B9A60A626}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FC15DD4-5043-4BE3-AA9A-D69B9A60A626}.Release|x64.ActiveCfg = Release|Any CPU
+		{6FC15DD4-5043-4BE3-AA9A-D69B9A60A626}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

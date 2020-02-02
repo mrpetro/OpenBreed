@@ -34,15 +34,6 @@ namespace OpenBreed.Core.Modules.Audio
         #region Public Methods
 
         /// <summary>
-        /// Creates sound system and return it
-        /// </summary>
-        /// <returns>Sound system interface</returns>
-        public IAudioSystem CreateSoundSystem()
-        {
-            return new SoundSystem(Core);
-        }
-
-        /// <summary>
         /// Create local sound emiter that emits sound from specific position in owning world coordinates
         /// </summary>
         /// <returns>Local sound emiter</returns>

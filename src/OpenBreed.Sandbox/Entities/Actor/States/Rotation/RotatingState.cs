@@ -1,14 +1,14 @@
-﻿using OpenBreed.Core.Common.Helpers;
+﻿
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Events;
-using OpenBreed.Core.Modules.Animation.Messages;
+using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Messages;
+using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
 using OpenBreed.Sandbox.Helpers;
 using OpenTK;
@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 {
@@ -56,10 +57,10 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
             var animDirName = AnimHelper.ToDirectionName(direction.Value);
             var animMovementName = Entity.FsmList.First(item => item.Name == "Movement");
 
-            Entity.PostMsg(new PlayAnimMsg(Entity.Id, $"{animPrefix}/{animMovementName.CurrentStateName}/{animDirName}"));
-            Entity.PostMsg(new TextSetMsg(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            Entity.PostCommand(new PlayAnimCommand(Entity.Id, $"{animPrefix}/{animMovementName.CurrentStateName}/{animDirName}"));
+            Entity.PostCommand(new TextSetCommand(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
-            Entity.PostMsg(new StateChangeMsg(Entity.Id, "Rotation", "Stop"));
+            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Rotation", "Stop"));
         }
 
         public void Initialize(IEntity entity)

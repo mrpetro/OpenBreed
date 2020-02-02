@@ -1,8 +1,9 @@
-﻿using OpenBreed.Core.Common.Helpers;
+﻿
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
-using OpenBreed.Core.Modules.Rendering.Messages;
+using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
 using OpenBreed.Sandbox.Entities.Projectile;
 using OpenTK;
@@ -34,7 +35,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         public void EnterState()
         {
             //Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            Entity.PostMsg(new TextSetMsg(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            Entity.PostCommand(new TextSetCommand(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
             var pos = Entity.Components.OfType<Position>().FirstOrDefault().Value;
             pos += new Vector2(8,8);
@@ -43,7 +44,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             direction *= 500.0f;
             ProjectileHelper.AddProjectile(Entity.Core, Entity.World, pos.X, pos.Y, direction.X, direction.Y);
 
-            Entity.PostMsg(new StateChangeMsg(Entity.Id, "Attacking", "Wait"));
+            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Attacking", "Wait"));
 
         }
 

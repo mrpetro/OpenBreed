@@ -40,18 +40,18 @@ namespace OpenBreed.Sandbox.Entities.Projectile
             laserUR.AddFrame(7, 2.0f);
         }
 
-        private static void OnCollision(IEntity thisEntity, IEntity otherEntity, Vector2 projection)
+        private static void OnCollision(IEntity entity, CollisionEventArgs args)
         {
-            thisEntity.EnqueueEvent(PhysicsEventTypes.COLLISION_OCCURRED, new CollisionEventArgs(otherEntity));
+            entity.RaiseEvent(PhysicsEventTypes.COLLISION_OCCURRED, new CollisionEventArgs(args.Entity, args.Projection));
 
-            var body = otherEntity.Components.OfType<IBody>().FirstOrDefault();
+            var body = args.Entity.Components.OfType<Body>().FirstOrDefault();
 
             var type = body.Tag;
 
             switch (type)
             {
                 case "Solid":
-                    DynamicHelper.ResolveVsStatic(thisEntity, otherEntity, projection);
+                    DynamicHelper.ResolveVsStatic(entity, args.Entity, args.Projection);
                     return;
                 default:
                     break;
@@ -67,10 +67,11 @@ namespace OpenBreed.Sandbox.Entities.Projectile
             projectile.Add(new Animator(10.0f, true));
             projectile.Add(Position.Create(x, y ));
             projectile.Add(Thrust.Create(0, 0));
-            projectile.Add(Body.Create(0, 1, "Dynamic", (e, c) => OnCollision(projectile, e, c)));
+            projectile.Add(Body.Create(0, 1, "Dynamic"));
             projectile.Add(Velocity.Create(vx, vy));
             projectile.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
             projectile.Add(TextHelper.Create(core, new Vector2(-10, 10), "Bullet"));
+            projectile.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, (s, a) => OnCollision((IEntity)s, (CollisionEventArgs)a));
             world.AddEntity(projectile);
 
             var doorSm = ProjectileHelper.CreateStateMachine(projectile);

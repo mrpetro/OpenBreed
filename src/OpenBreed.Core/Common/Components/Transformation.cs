@@ -4,7 +4,7 @@ using System;
 
 namespace OpenBreed.Core.Common.Systems.Components
 {
-    public class Transformation : ITransformComponent
+    public class Transformation
     {
         #region Public Fields
 

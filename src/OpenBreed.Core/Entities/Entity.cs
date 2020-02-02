@@ -1,5 +1,6 @@
-﻿using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Helpers;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common;
+
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.States;
@@ -25,12 +26,14 @@ namespace OpenBreed.Core.Entities
 
         #region Internal Constructors
 
-        internal Entity(ICore core)
+        internal Entity(ICore core, List<IEntityComponent> initialComponents)
         {
             fsmList = new List<StateMachine>();
             FsmList = new ReadOnlyCollection<StateMachine>(fsmList);
 
             Core = core ?? throw new ArgumentNullException(nameof(core));
+
+            components = initialComponents ?? new List<IEntityComponent>();
             Components = new ReadOnlyCollection<IEntityComponent>(components);
         }
 
@@ -87,24 +90,24 @@ namespace OpenBreed.Core.Entities
             //   return false;
         }
 
-        public void PostMsg(IMsg msg)
+        public void PostCommand(ICommand command)
         {
-            Core.MessageBus.Enqueue(this, msg);
+            Core.Commands.Post(this, command);
         }
 
-        public void EnqueueEvent(string eventType, EventArgs eventArgs)
+        public void RaiseEvent(string eventType, EventArgs eventArgs)
         {
-            Core.EventBus.Enqueue(this, eventType, eventArgs);
+            Core.Events.Raise(this, eventType, eventArgs);
         }
 
         public void Subscribe(string eventType, Action<object, EventArgs> callback)
         {
-            Core.EventBus.Subscribe(this, eventType, callback);
+            Core.Events.Subscribe(this, eventType, callback);
         }
 
         public void Unsubscribe(string eventType, Action<object, EventArgs> callback)
         {
-            Core.EventBus.Unsubscribe(this, eventType, callback);
+            Core.Events.Unsubscribe(this, eventType, callback);
         }
 
         public void Add(IEntityComponent component)
@@ -146,32 +149,32 @@ namespace OpenBreed.Core.Entities
             //Forget the world in which entity was
             World = null;
 
-            from.OnEntityRemoved(this);
-            OnRemovedFrom(from);
+            OnLeftWorld(from);
         }
 
         internal void Initialize(World world)
         {
             //Remember in what world entity is
             World = world;
-            OnAddedTo(World);
 
             foreach (var fsm in fsmList)
                 fsm.Initialize();
+
+            OnEnteredWorld(World);
         }
 
         #endregion Internal Methods
 
         #region Private Methods
 
-        private void OnRemovedFrom(World world)
+        private void OnLeftWorld(World world)
         {
-            EnqueueEvent(CoreEventTypes.ENTITY_REMOVED_FROM_WORLD, new EntityRemovedFromWorldEventArgs(this, world));
+            RaiseEvent(CoreEventTypes.ENTITY_LEFT_WORLD, new EntityLeftWorldEventArgs(this, world));
         }
 
-        private void OnAddedTo(World world)
+        private void OnEnteredWorld(World world)
         {
-            EnqueueEvent(CoreEventTypes.ENTITY_ADDED_TO_WORLD, new EntityAddedToWorldEventArgs(this, world));
+            RaiseEvent(CoreEventTypes.ENTITY_ENTERED_WORLD, new EntityEnteredWorldEventArgs(this, world));
         }
 
         #endregion Private Methods

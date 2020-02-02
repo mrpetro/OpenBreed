@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Commands
 {
-    public interface ICommand
+    public interface ICommand : IMsg
     {
-        void Execute();
-    };
+    }
 }

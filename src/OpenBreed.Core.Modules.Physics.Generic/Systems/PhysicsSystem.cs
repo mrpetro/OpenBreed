@@ -1,13 +1,15 @@
-﻿using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Components;
-using OpenBreed.Core.Common.Helpers;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Helpers;
+using OpenBreed.Core.Modules.Physics.Builders;
+using OpenBreed.Core.Modules.Physics.Commands;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Physics.Helpers;
-using OpenBreed.Core.Modules.Physics.Messages;
+using OpenBreed.Core.Systems;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -15,30 +17,29 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Physics.Systems
 {
-    internal class PhysicsSystem : WorldSystem, IPhysicsSystem, IMsgListener
+    public class PhysicsSystem : WorldSystem, IPhysicsSystem, ICommandExecutor
     {
         #region Private Fields
 
         private const int CELL_SIZE = 16;
 
-        private MsgHandler msgHandler;
         private readonly List<DynamicPack> inactiveDynamics = new List<DynamicPack>();
         private readonly List<DynamicPack> activeDynamics = new List<DynamicPack>();
-        private List<StaticPack>[] gridStatics;
         private readonly List<StaticPack> inactiveStatics = new List<StaticPack>();
-
+        private CommandHandler cmdHandler;
+        private List<StaticPack>[] gridStatics;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal PhysicsSystem(ICore core, int gridWidth, int gridHeight) : base(core)
+        internal PhysicsSystem(PhysicsSystemBuilder builder) : base(builder.core)
         {
-            msgHandler = new MsgHandler(this);
-            Require<IPhysicsComponent>();
+            cmdHandler = new CommandHandler(this);
+            Require<Body>();
 
-            GridWidth = gridWidth;
-            GridHeight = gridHeight;
+            GridWidth = builder.gridWidth;
+            GridHeight = builder.gridHeight;
 
             InitializeGrid();
         }
@@ -72,8 +73,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         {
             base.Initialize(world);
 
-            World.MessageBus.RegisterHandler(BodyOnMsg.TYPE, msgHandler);
-            World.MessageBus.RegisterHandler(BodyOffMsg.TYPE, msgHandler);
+            World.RegisterHandler(BodyOnCommand.TYPE, cmdHandler);
+            World.RegisterHandler(BodyOffCommand.TYPE, cmdHandler);
         }
 
         public void UpdatePauseImmuneOnly(float dt)
@@ -82,18 +83,20 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         public void Update(float dt)
         {
+            cmdHandler.ExecuteEnqueued();
+
             SweepAndPrune(dt);
         }
 
-        public override bool RecieveMsg(object sender, IMsg msg)
+        public override bool ExecuteCommand(object sender, ICommand cmd)
         {
-            switch (msg.Type)
+            switch (cmd.Type)
             {
-                case BodyOnMsg.TYPE:
-                    return HandleBodyOnMsg(sender, (BodyOnMsg)msg);
+                case BodyOnCommand.TYPE:
+                    return HandleBodyOnCommand(sender, (BodyOnCommand)cmd);
 
-                case BodyOffMsg.TYPE:
-                    return HandleBodyOffMsg(sender, (BodyOffMsg)msg);
+                case BodyOffCommand.TYPE:
+                    return HandleBodyOffCommand(sender, (BodyOffCommand)cmd);
 
                 default:
                     return false;
@@ -140,45 +143,52 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         #region Private Methods
 
-        private bool HandleBodyOnMsg(object sender, BodyOnMsg msg)
+        private static Box2 GetAabb(IEntity entity)
         {
-            var dynamicToActivate = inactiveDynamics.FirstOrDefault(item => item.EntityId == msg.EntityId);
+            var shape = entity.Components.OfType<IShapeComponent>().First();
+            var pos = entity.Components.OfType<Position>().First();
 
-            var entity = Core.Entities.GetById(msg.EntityId);
+            return shape.Aabb.Translated(pos.Value);
+        }
+
+        private bool HandleBodyOnCommand(object sender, BodyOnCommand cmd)
+        {
+            var dynamicToActivate = inactiveDynamics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
+
+            var entity = Core.Entities.GetById(cmd.EntityId);
 
             if (dynamicToActivate != null)
             {
                 activeDynamics.Add(dynamicToActivate);
                 inactiveDynamics.Remove(dynamicToActivate);
-                entity.EnqueueEvent(PhysicsEventTypes.BODY_ON, new BodyOnEventArgs(entity));
+                entity.RaiseEvent(PhysicsEventTypes.BODY_ON, new BodyOnEventArgs(entity));
                 return true;
             }
 
-            var staticToActivate = inactiveStatics.FirstOrDefault(item => item.EntityId == msg.EntityId);
+            var staticToActivate = inactiveStatics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
             if (staticToActivate != null)
             {
                 InsertToGrid(staticToActivate);
                 inactiveStatics.Remove(staticToActivate);
-                entity.EnqueueEvent(PhysicsEventTypes.BODY_ON, new BodyOnEventArgs(entity));
+                entity.RaiseEvent(PhysicsEventTypes.BODY_ON, new BodyOnEventArgs(entity));
                 return true;
             }
 
             return false;
         }
 
-        private bool HandleBodyOffMsg(object sender, BodyOffMsg msg)
+        private bool HandleBodyOffCommand(object sender, BodyOffCommand cmd)
         {
-            var dynamicToDeactivate = activeDynamics.FirstOrDefault(item => item.EntityId == msg.EntityId);
+            var dynamicToDeactivate = activeDynamics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
 
-            var entity = Core.Entities.GetById(msg.EntityId);
+            var entity = Core.Entities.GetById(cmd.EntityId);
 
             if (dynamicToDeactivate != null)
             {
                 inactiveDynamics.Add(dynamicToDeactivate);
                 activeDynamics.Remove(dynamicToDeactivate);
 
-
-                entity.EnqueueEvent(PhysicsEventTypes.BODY_OFF, new BodyOffEventArgs(entity));
+                entity.RaiseEvent(PhysicsEventTypes.BODY_OFF, new BodyOffEventArgs(entity));
                 return true;
             }
 
@@ -187,7 +197,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             if (staticToDeactivate != null)
             {
                 inactiveStatics.Add(staticToDeactivate);
-                entity.EnqueueEvent(PhysicsEventTypes.BODY_OFF, new BodyOffEventArgs(entity));
+                entity.RaiseEvent(PhysicsEventTypes.BODY_OFF, new BodyOffEventArgs(entity));
                 return true;
             }
 
@@ -232,7 +242,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 }
             }
 
-            if(activeDynamics.Count > 0)
+            if (activeDynamics.Count > 0)
                 QueryStaticGrid(activeDynamics.Last(), dt);
         }
 
@@ -244,8 +254,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 var entityA = Core.Entities.GetById(packA.EntityId);
                 var entityB = Core.Entities.GetById(packB.EntityId);
 
-                packA.Body.CollisionCallback?.Invoke(entityB, projection);
-                packB.Body.CollisionCallback?.Invoke(entityA, projection);
+                entityA.RaiseEvent(PhysicsEventTypes.COLLISION_OCCURRED, new CollisionEventArgs(entityB, projection));
+                entityB.RaiseEvent(PhysicsEventTypes.COLLISION_OCCURRED, new CollisionEventArgs(entityA, projection));
 
                 //bodyA.Entity.RaiseEvent(new CollisionEvent(bodyB.Entity));
                 //bodyB.Entity.RaiseEvent(new CollisionEvent(bodyA.Entity));
@@ -261,8 +271,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 var entityA = Core.Entities.GetById(packA.EntityId);
                 var entityB = Core.Entities.GetById(packB.EntityId);
 
-                packA.Body.CollisionCallback?.Invoke(entityB, projection);
-                packB.Body.CollisionCallback?.Invoke(entityA, projection);
+                entityA.RaiseEvent(PhysicsEventTypes.COLLISION_OCCURRED, new CollisionEventArgs(entityB, projection));
+                entityB.RaiseEvent(PhysicsEventTypes.COLLISION_OCCURRED, new CollisionEventArgs(entityA, projection));
             }
         }
 
@@ -318,7 +328,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                     var collideres = gridStatics[xIndex + GridWidth * yIndex];
                     for (int boxIndex = 0; boxIndex < collideres.Count; boxIndex++)
                     {
-                        if(!boxesSet.Contains(collideres[boxIndex]))
+                        if (!boxesSet.Contains(collideres[boxIndex]))
                             boxesSet.Add(collideres[boxIndex]);
                     }
                 }
@@ -360,14 +370,6 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 return 0;
             else
                 return 1;
-        }
-
-        private static Box2 GetAabb(IEntity entity)
-        {
-            var shape = entity.Components.OfType<IShapeComponent>().First();
-            var pos = entity.Components.OfType<Position>().First();
-
-            return shape.Aabb.Translated(pos.Value);
         }
 
         private void InsertToGrid(StaticPack pack)
@@ -427,7 +429,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         private void RegisterStaticEntity(IEntity entity)
         {
             var pack = new StaticPack(entity.Id,
-                                      entity.Components.OfType<IBody>().First(),
+                                      entity.Components.OfType<Body>().First(),
                                       entity.Components.OfType<Position>().First(),
                                       entity.Components.OfType<IShapeComponent>().First());
 
@@ -442,7 +444,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         private void RegisterDynamicEntity(IEntity entity)
         {
             var pack = new DynamicPack(entity.Id,
-                                      entity.Components.OfType<IBody>().First(),
+                                      entity.Components.OfType<Body>().First(),
                                       entity.Components.OfType<Position>().First(),
                                       entity.Components.OfType<Velocity>().First(),
                                       entity.Components.OfType<IShapeComponent>().First());

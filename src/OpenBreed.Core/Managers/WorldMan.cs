@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Core.Collections;
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +11,7 @@ namespace OpenBreed.Core.Managers
     /// <summary>
     /// Manager responsible for creating, removing and updating core worlds
     /// </summary>
-    public class WorldMan : IMsgListener
+    public class WorldMan
     {
         #region Private Fields
 
@@ -19,13 +19,6 @@ namespace OpenBreed.Core.Managers
         private readonly List<World> toRemove = new List<World>();
         private readonly IdMap<World> worlds = new IdMap<World>();
         private readonly Dictionary<string, int> namesToIds = new Dictionary<string, int>();
-
-        private readonly MsgHandler handler;
-
-        public WorldBuilder GetBuilder()
-        {
-            return new WorldBuilder(Core);
-        }
 
         #endregion Private Fields
 
@@ -35,19 +28,6 @@ namespace OpenBreed.Core.Managers
         {
             Core = core;
             Items = worlds.Items;
-
-            handler = new MsgHandler(this);
-        }
-
-        public bool RecieveMsg(object sender, IMsg msg)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal void PostMsg(object sender, IWorldMsg msg)
-        {
-            var targetWorld = Core.Worlds.GetById(msg.WorldId);
-            targetWorld.MessageBus.PostMsg(sender, msg);
         }
 
         #endregion Public Constructors
@@ -67,6 +47,11 @@ namespace OpenBreed.Core.Managers
         #endregion Public Properties
 
         #region Public Methods
+
+        public WorldBuilder Create()
+        {
+            return new WorldBuilder(Core);
+        }
 
         /// <summary>
         /// Returns world with given ID. Will throw exception when such world has not been found.
@@ -95,22 +80,6 @@ namespace OpenBreed.Core.Managers
                 return null;
 
             return worlds[worldId];
-        }
-
-        /// <summary>
-        /// Creates world, It will be initialized at nearest manager update
-        /// </summary>
-        /// <returns>New World</returns>
-        public World Create(string name)
-        {
-            if (namesToIds.ContainsKey(name))
-                throw new InvalidOperationException($"World with name '{name}' already exist.");
-
-            var newWorld = new World(Core, name);
-            newWorld.Id = worlds.Add(newWorld);
-            namesToIds.Add(newWorld.Name, newWorld.Id);
-            toInitialize.Add(newWorld);
-            return newWorld;
         }
 
         /// <summary>
@@ -170,5 +139,22 @@ namespace OpenBreed.Core.Managers
         }
 
         #endregion Public Methods
+
+        #region Internal Methods
+
+        internal void PostCommand(object sender, IWorldCommand cmd)
+        {
+            var targetWorld = Core.Worlds.GetById(cmd.WorldId);
+            targetWorld.Handle(sender, cmd);
+        }
+
+        internal void RegisterWorld(World newWorld)
+        {
+            newWorld.Id = worlds.Add(newWorld);
+            namesToIds.Add(newWorld.Name, newWorld.Id);
+            toInitialize.Add(newWorld);
+        }
+
+        #endregion Internal Methods
     }
 }

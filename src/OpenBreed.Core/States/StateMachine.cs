@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Common.Helpers;
+﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -64,12 +64,12 @@ namespace OpenBreed.Core.States
             currentState = states[initialStateId];
         }
 
-        public bool HandleMsg(object sender, IMsg message)
+        public bool Handle(object sender, IMsg cmd)
         {
-            switch (message.Type)
+            switch (cmd.Type)
             {
-                case StateChangeMsg.TYPE:
-                    return HandleStateChangeMsg(sender, (StateChangeMsg)message);
+                case EntitySetStateCommand.TYPE:
+                    return HandleStateChangeMsg(sender, (EntitySetStateCommand)cmd);
 
                 default:
                     return false;
@@ -117,7 +117,7 @@ namespace OpenBreed.Core.States
 
         #region Private Methods
 
-        private bool HandleStateChangeMsg(object sender, StateChangeMsg message)
+        private bool HandleStateChangeMsg(object sender, EntitySetStateCommand message)
         {
             Perform(message.StateId);
             return true;
@@ -131,11 +131,6 @@ namespace OpenBreed.Core.States
 
             //Console.WriteLine($"Entering state '{currentState.Id}'");
             currentState.EnterState();
-        }
-
-        public bool EnqueueMsg(object sender, IMsg msg)
-        {
-            return false;
         }
 
         #endregion Private Methods

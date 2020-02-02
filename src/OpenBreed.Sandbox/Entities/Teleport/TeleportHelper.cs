@@ -1,13 +1,13 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Helpers;
+
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Events;
-using OpenBreed.Core.Modules.Animation.Messages;
+using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Physics.Messages;
+using OpenBreed.Core.Modules.Physics.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Helpers;
@@ -16,6 +16,7 @@ using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenBreed.Core.Modules.Physics.Events;
 
 namespace OpenBreed.Sandbox.Entities.Teleport
 {
@@ -63,13 +64,13 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
             teleportEntry.Tag = new TeleportPair { Id = pairId };
             teleportEntry.Add(new Animator(10.0f, true, anim.Id));
-            teleportEntry.Add(Body.Create(1.0f, 1.0f, "Trigger", (e, c) => OnCollision(teleportEntry, e, c)));
+            teleportEntry.Add(Body.Create(1.0f, 1.0f, "Trigger"));
             teleportEntry.Add(core.Rendering.CreateSprite(SPRITE_TELEPORT_ENTRY));
             teleportEntry.Add(Position.Create(x * 16, y * 16));
             teleportEntry.Add(AxisAlignedBoxShape.Create(16, 16, 8, 8));
             teleportEntry.Add(TextHelper.Create(core, new Vector2(0, 32), "TeleportEntry"));
-            teleportEntry.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, OnTeleportFrameChanged);
-
+            teleportEntry.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, (s, a) => OnFrameChanged((IEntity)s, (AnimChangedEventArgs)a));
+            teleportEntry.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, (s, a) => OnCollision((IEntity)s, (CollisionEventArgs)a));
             world.AddEntity(teleportEntry);
 
             return teleportEntry;
@@ -88,7 +89,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             teleportExit.Add(Position.Create(x * 16, y * 16));
             teleportExit.Add(AxisAlignedBoxShape.Create(16, 16, 8, 8));
             teleportExit.Add(TextHelper.Create(core, new Vector2(0, 32), "TeleportExit"));
-            teleportExit.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, OnTeleportFrameChanged);
+            teleportExit.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, (s,a) => OnFrameChanged((IEntity)s, (AnimChangedEventArgs)a));
 
             world.AddEntity(teleportExit);
 
@@ -99,19 +100,17 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         #region Private Methods
 
-        private static void OnTeleportFrameChanged(object sender, EventArgs eventArgs)
-        {
-            HandleTeleportFrameChangeEvent((IEntity)sender, (AnimChangedEventArgs)eventArgs);
-        }
-
-        private static void HandleTeleportFrameChangeEvent(IEntity entity, AnimChangedEventArgs systemEvent)
+        private static void OnFrameChanged(IEntity entity, AnimChangedEventArgs systemEvent)
         {
             var sprite = entity.Components.OfType<ISpriteComponent>().First();
             sprite.ImageId = (int)systemEvent.Frame;
         }
 
-        private static void OnCollision(IEntity entryEntity, IEntity targetEntity, Vector2 projection)
+        private static void OnCollision(IEntity entity, CollisionEventArgs args)
         {
+            var entryEntity = entity;
+            var targetEntity = args.Entity;
+
             var cameraEntity = targetEntity.Tag as IEntity;
 
             if (cameraEntity == null)

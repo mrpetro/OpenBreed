@@ -2,7 +2,7 @@
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Messages;
+using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.Teleport;
@@ -16,8 +16,6 @@ namespace OpenBreed.Sandbox.Worlds
     public class WorldBuilderHelper
     {
         #region Public Fields
-
-        public const int SETUP_WORLD = 10000;
 
         public const int PLAYER_SPAWN_POINT = 'P';
 
@@ -58,7 +56,6 @@ namespace OpenBreed.Sandbox.Worlds
 
             builder.RegisterCode(' ', AddAirCell);
 
-            builder.RegisterCode(SETUP_WORLD, SetupWorld);
             builder.RegisterCode(PLAYER_SPAWN_POINT, AddPlayer);
         }
 
@@ -74,7 +71,7 @@ namespace OpenBreed.Sandbox.Worlds
             var pairCode = (int)args[2];
 
             TeleportHelper.AddTeleportEntry(world, x, y, pairCode);
-            world.Core.MessageBus.Enqueue(null, new TileSetMsg(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            world.Core.Commands.Post(null, new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private static void AddWorldEntry(World world, int code, object[] args)
@@ -85,7 +82,7 @@ namespace OpenBreed.Sandbox.Worlds
             var pairCode = (int)args[2];
 
             WorldGateHelper.AddWorldEntry(world, x, y, pairCode);
-            world.Core.MessageBus.Enqueue(null, new TileSetMsg(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            world.Core.Commands.Post(null, new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private static void AddTeleportExit(World world, int code, object[] args)
@@ -96,7 +93,7 @@ namespace OpenBreed.Sandbox.Worlds
             var pairCode = (int)args[2];
 
             TeleportHelper.AddTeleportExit(world, x, y, pairCode);
-            world.Core.MessageBus.Enqueue(null, new TileSetMsg(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            world.Core.Commands.Post(null, new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private void AddWorldExit(World world, int code, object[] args)
@@ -111,16 +108,11 @@ namespace OpenBreed.Sandbox.Worlds
                 return;
 
             WorldGateHelper.AddWorldExit(world, x, y, exitInfo.Item1, exitInfo.Item2);
-            world.Core.MessageBus.Enqueue(null, new TileSetMsg(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            world.Core.Commands.Post(null, new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private static void AddPlayer(World world, int code, object[] args)
         {
-        }
-
-        private static void OnCollision(IEntity thisEntity, IEntity otherEntity, Vector2 projection)
-        {
-            thisEntity.EnqueueEvent(PhysicsEventTypes.COLLISION_OCCURRED, new CollisionEventArgs(otherEntity));
         }
 
         private static int ToTileId(int gfxCode)
@@ -200,11 +192,6 @@ namespace OpenBreed.Sandbox.Worlds
                 DoorHelper.AddHorizontalDoor(world, x, y);
             else if (type == 'V')
                 DoorHelper.AddVerticalDoor(world, x, y);
-        }
-
-        private static void SetupWorld(World world, int code, object[] args)
-        {
-            GameWorldHelper.SetupSystems(world.Core, world, (int)args[0], (int)args[1]);
         }
 
         #endregion Private Methods

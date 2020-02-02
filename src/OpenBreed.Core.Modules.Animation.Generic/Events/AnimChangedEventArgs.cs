@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core.Common.Helpers;
-using System;
+﻿using System;
 
 namespace OpenBreed.Core.Modules.Animation.Events
 {

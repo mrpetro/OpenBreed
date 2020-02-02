@@ -1,5 +1,6 @@
-﻿using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Helpers;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common;
+
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.States;
 using System;
@@ -70,17 +71,17 @@ namespace OpenBreed.Core.Entities
         bool RunScript(string name, params object[] args);
 
         /// <summary>
-        /// Post message of specific type
+        /// Post command of specific type
         /// </summary>
-        /// <param name="message"></param>
-        void PostMsg(IMsg message);
+        /// <param name="cmd">Command to post</param>
+        void PostCommand(ICommand cmd);
 
         /// <summary>
         /// Enqueue an event of specific type and arguments
         /// </summary>
         /// <param name="eventType">Type of event to enqueue</param>
         /// <param name="eventArgs">Arguments of event</param>
-        void EnqueueEvent(string eventType, EventArgs eventArgs);
+        void RaiseEvent(string eventType, EventArgs eventArgs);
 
         /// <summary>
         /// Subscribe to particular event

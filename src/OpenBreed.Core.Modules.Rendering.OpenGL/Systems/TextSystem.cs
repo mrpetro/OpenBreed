@@ -2,7 +2,7 @@
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenBreed.Core.Modules.Rendering.Messages;
+using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.Modules.Animation.Systems;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
@@ -11,15 +11,19 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Helpers;
+
+using OpenBreed.Core.Commands;
+using OpenBreed.Core.Helpers;
+using OpenBreed.Core.Modules.Physics.Builders;
+using OpenBreed.Core.Systems;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TextSystem : WorldSystem, ITextSystem, IMsgListener
+    public class TextSystem : WorldSystem, ITextSystem, ICommandExecutor
     {
         #region Private Fields
 
-        private MsgHandler msgHandler;
+        private CommandHandler cmdHandler;
         private readonly List<int> entities = new List<int>();
         private readonly List<TextComponent> textComps = new List<TextComponent>();
         private readonly List<Position> positionComps = new List<Position>();
@@ -28,9 +32,9 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Public Constructors
 
-        public TextSystem(ICore core) : base(core)
+        internal TextSystem(TextSystemBuilder builder) : base(builder.core)
         {
-            msgHandler = new MsgHandler(this);
+            cmdHandler = new CommandHandler(this);
 
             Require<TextComponent>();
             Require<Position>();
@@ -44,7 +48,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             base.Initialize(world);
 
-            World.MessageBus.RegisterHandler(TextSetMsg.TYPE, msgHandler);
+            World.RegisterHandler(TextSetCommand.TYPE, cmdHandler);
         }
 
         /// <summary>
@@ -53,6 +57,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// <param name="viewport">Viewport on which sprites will be drawn to</param>
         public void Render(IViewport viewport, float dt)
         {
+            cmdHandler.ExecuteEnqueued();
+
             float left, bottom, right, top;
             viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
 
@@ -89,12 +95,12 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Disable(EnableCap.Texture2D);
         }
 
-        public override bool RecieveMsg(object sender, IMsg message)
+        public override bool ExecuteCommand(object sender, ICommand cmd)
         {
-            switch (message.Type)
+            switch (cmd.Type)
             {
-                case TextSetMsg.TYPE:
-                    return HandleTextSetMsg(sender, (TextSetMsg)message);
+                case TextSetCommand.TYPE:
+                    return HandleTextSetCommand(sender, (TextSetCommand)cmd);
 
                 default:
                     return false;
@@ -128,20 +134,20 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Methods
 
-        private bool HandleTextSetMsg(object sender, TextSetMsg message)
+        private bool HandleTextSetCommand(object sender, TextSetCommand cmd)
         {
-            var entity = Core.Entities.GetById(message.EntityId);
+            var entity = Core.Entities.GetById(cmd.EntityId);
 
-            var index = entities.IndexOf(message.EntityId);
+            var index = entities.IndexOf(cmd.EntityId);
             if (index < 0)
                 return false;
 
-            textComps[index].Value = message.Text;
+            textComps[index].Value = cmd.Text;
 
             return true;
         }
 
-        public bool EnqueueMsg(object sender, IEntityMsg msg)
+        public bool EnqueueMsg(object sender, IEntityCommand msg)
         {
             return false;
         }

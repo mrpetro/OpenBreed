@@ -1,6 +1,7 @@
-﻿using OpenBreed.Core.Blueprints;
+﻿using NLua;
 using OpenBreed.Core.Collections;
-using OpenBreed.Core.Common.Components.Builders;
+using OpenBreed.Core.Common.Builders;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
@@ -14,11 +15,10 @@ namespace OpenBreed.Core.Managers
     {
         #region Private Fields
 
-        private static Dictionary<string, Func<ICore, ComponentBuilder>> builders = new Dictionary<string, Func<ICore, ComponentBuilder>>();
-
-        private static Dictionary<string, Action<object>> setters = new Dictionary<string, Action<object>>();
-
+        private const string TEMPLATES_NAMESPACE = "Templates.Entities";
         private readonly IdMap<IEntity> entities = new IdMap<IEntity>();
+
+        private readonly Dictionary<string, Func<ICore, IComponentBuilder>> builders = new Dictionary<string, Func<ICore, IComponentBuilder>>();
 
         #endregion Private Fields
 
@@ -35,19 +35,17 @@ namespace OpenBreed.Core.Managers
 
         public ICore Core { get; }
 
+        public int Count
+        {
+            get
+            {
+                return entities.Count;
+            }
+        }
+
         #endregion Public Properties
 
         #region Public Methods
-
-        public static void RegisterBuilder(string componentTypeName, Func<ICore, ComponentBuilder> creatorFunc)
-        {
-            builders.Add(componentTypeName, creatorFunc);
-        }
-
-        public static void AddSetter(string key, Action<object> action)
-        {
-            setters.Add(key, action);
-        }
 
         public IEnumerable<IEntity> GetByTag(object tag)
         {
@@ -64,33 +62,34 @@ namespace OpenBreed.Core.Managers
                 throw new InvalidOperationException($"Entity with Guid '{id}' not found.");
         }
 
-        public List<IEntity> CreateFromBlueprint(IBlueprint blueprint, Dictionary<string, IComponentState> states = null)
+        public void RegisterComponentBuilder(string componentName, Func<ICore, IComponentBuilder> newAction)
         {
-            var list = new List<IEntity>();
-
-            foreach (var entityDef in blueprint.Entities)
-            {
-                var entity = Create();
-
-                var builders = CreateBuilders(entityDef);
-
-                //AppendComponents(entity, entityDef);
-                SetComponentStates(entity, entityDef);
-            }
-
-            return list;
+            builders.Add(componentName, newAction);
         }
 
-        public IEntity Create()
+        public IEntity CreateFromTemplate(string templateName)
         {
-            var newEntity = new Entity(Core);
+            var entityTable = Core.Scripts.GetObject($"{TEMPLATES_NAMESPACE}.{templateName}") as LuaTable;
+
+            if (entityTable == null)
+                throw new Exception($"Entity template '{templateName}' not found.");
+
+            var components = new List<IEntityComponent>();
+            BuildEntityComponents(entityTable, ref components);
+
+            return Create(components);
+        }
+
+        public IEntity Create(List<IEntityComponent> initialComponents = null)
+        {
+            var newEntity = new Entity(Core, initialComponents);
             newEntity.Id = entities.Add(newEntity);
             return newEntity;
         }
 
         public void Destroy(IEntity entity)
         {
-            entity.Subscribe(CoreEventTypes.ENTITY_REMOVED_FROM_WORLD, OnEntityRemovedFromWorld);
+            entity.Subscribe(CoreEventTypes.ENTITY_LEFT_WORLD, OnEntityRemovedFromWorld);
             entity.World.RemoveEntity(entity);
         }
 
@@ -98,58 +97,49 @@ namespace OpenBreed.Core.Managers
 
         #region Private Methods
 
+        private void BuildEntityComponents(LuaTable entityTable, ref List<IEntityComponent> components)
+        {
+            foreach (KeyValuePair<object, object> pair in entityTable)
+            {
+                var cmpName = pair.Key as string;
+                if (cmpName == null)
+                    throw new Exception("Expected component name of 'string' type in entity table key.");
+
+                var cmpTable = pair.Value as LuaTable;
+                if (cmpTable == null)
+                    throw new Exception("Expected component value of 'LuaTable' type in entity table value.");
+
+                AppendComponent(cmpName, cmpTable, ref components);
+            }
+        }
+
+        private void AppendComponent(string componentName, LuaTable componentTable, ref List<IEntityComponent> components)
+        {
+            if (!builders.TryGetValue(componentName, out Func<ICore, IComponentBuilder> newAction))
+                throw new NotImplementedException($"Builder for entity component '{componentName}' not implemented.");
+
+            var builder = newAction.Invoke(this.Core);
+
+            foreach (KeyValuePair<object, object> pair in componentTable)
+            {
+                try
+                {
+                    builder.SetProperty(pair.Key, pair.Value);
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException($"Invalid component property with key '{pair.Key}'.", ex);
+                }
+            }
+
+            components.Add(builder.Build());
+        }
+
         private void OnEntityRemovedFromWorld(object sender, EventArgs e)
         {
             var entity = (IEntity)sender;
-            entity.Unsubscribe(CoreEventTypes.ENTITY_REMOVED_FROM_WORLD, OnEntityRemovedFromWorld);
+            entity.Unsubscribe(CoreEventTypes.ENTITY_LEFT_WORLD, OnEntityRemovedFromWorld);
             entities.RemoveById(entity.Id);
-        }
-
-        private ComponentBuilder CreateBuilder(string componentType)
-        {
-            if (builders.TryGetValue(componentType, out Func<ICore, ComponentBuilder> builderCreator))
-                return builderCreator.Invoke(Core);
-            else
-                return null;
-        }
-
-        private void SetComponentStates(IEntity entity, IEntityDef def)
-        {
-            foreach (var componentState in def.ComponentStates)
-            {
-            }
-        }
-
-        private List<ComponentBuilder> CreateBuilders(IEntityDef def)
-        {
-            var builders = new List<ComponentBuilder>();
-
-            foreach (var componentType in def.ComponentTypes)
-            {
-                var componentBuilder = CreateBuilder(componentType);
-
-                if (componentBuilder != null)
-                    builders.Add(componentBuilder);
-            }
-
-            return builders;
-        }
-
-        private void AppendComponents(IEntity entity, IEntityDef def)
-        {
-            foreach (var componentType in def.ComponentTypes)
-            {
-                var componentBuilder = CreateBuilder(componentType);
-
-                var type = Type.GetType(componentType);
-
-                if (type == null)
-                    continue;
-
-                var component = Activator.CreateInstance(type) as IEntityComponent;
-
-                entity.Add(component);
-            }
         }
 
         #endregion Private Methods

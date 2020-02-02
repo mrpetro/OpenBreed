@@ -94,41 +94,38 @@ namespace OpenBreed.Sandbox.Entities.Actor
             animationWalkingUpRight.AddFrame(39, 1.0f);
         }
 
-        private static void OnCollision(IEntity thisEntity, IEntity otherEntity, Vector2 projection)
+        public static IEntity CreateActor(ICore core, Vector2 pos)
         {
-            thisEntity.EnqueueEvent(PhysicsEventTypes.COLLISION_OCCURRED, new CollisionEventArgs(otherEntity));
+            //var actor = core.Entities.Create();
 
-            var body = otherEntity.Components.OfType<IBody>().FirstOrDefault();
+            var actor = core.Entities.CreateFromTemplate("Arrow");
+
+            //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
+            //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
+            actor.Add(AxisAlignedBoxShape.Create(0, 0, 32, 32));
+
+
+            actor.Components.OfType<Position>().First().Value = pos;
+
+            actor.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, (s,a) => OnCollision((IEntity)s,(CollisionEventArgs)a));
+
+            return actor;
+        }
+
+        private static void OnCollision(IEntity entity, CollisionEventArgs args)
+        {
+            var body = args.Entity.Components.OfType<Body>().FirstOrDefault();
 
             var type = body.Tag;
 
             switch (type)
             {
                 case "Static":
-                    DynamicHelper.ResolveVsStatic(thisEntity, otherEntity, projection);
+                    DynamicHelper.ResolveVsStatic(entity, args.Entity, args.Projection);
                     return;
                 default:
                     break;
-            }  
-        }
-
-        public static IEntity CreateActor(ICore core, Vector2 pos)
-        {
-            var actor = core.Entities.Create();
-            actor.Add(new Animator(10.0f, true));
-            //actor.Add(new CollisionDebug(Core.Rendering.CreateSprite(spriteAtlas.Id)));
-            actor.Add(core.Rendering.CreateSprite("Atlases/Sprites/Arrow", 10.0f));
-            actor.Add(Position.Create(pos));
-            actor.Add(Thrust.Create(0, 0));
-            actor.Add(Velocity.Create(0, 0));
-            actor.Add(Direction.Create(1, 0));
-            actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
-            actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
-            actor.Add(AxisAlignedBoxShape.Create(0, 0, 32, 32));
-            actor.Add(new Motion());
-            actor.Add(Body.Create(1.0f, 0.0f, "Dynamic", (e,c) => OnCollision(actor,e,c)));
-
-            return actor;
+            }
         }
 
         public static StateMachine CreateAttackingFSM(IEntity entity)

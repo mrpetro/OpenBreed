@@ -1,9 +1,10 @@
 ﻿using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Physics.Components;
+using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.Systems;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
@@ -25,6 +26,13 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         #endregion Private Fields
 
         #region Public Constructors
+
+        public WireframeSystem(WireframeSystemBuilder builder) : base(builder.core)
+        {
+            Require<IWireframe>();
+            Require<Position>();
+            Require<IShapeComponent>();
+        }
 
         public WireframeSystem(ICore core) : base(core)
         {
@@ -94,31 +102,31 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             }
         }
 
-        /// <summary>
-        /// Draw this sprite to given viewport
-        /// </summary>
-        /// <param name="viewport">Viewport which this sprite will be rendered to</param>
-        public void Draw(IBody body, IViewport viewport)
-        {
-            if (body.Boxes != null)
-            {
-                foreach (var item in body.Boxes)
-                {
-                    RenderTools.DrawRectangle(item.Item1 * 16.0f,
-                                              item.Item2 * 16.0f,
-                                              item.Item1 * 16.0f + 16.0f,
-                                              item.Item2 * 16.0f + 16.0f);
-                }
-            }
+        ///// <summary>
+        ///// Draw this sprite to given viewport
+        ///// </summary>
+        ///// <param name="viewport">Viewport which this sprite will be rendered to</param>
+        //public void Draw(Body body, IViewport viewport)
+        //{
+        //    if (body.Boxes != null)
+        //    {
+        //        foreach (var item in body.Boxes)
+        //        {
+        //            RenderTools.DrawRectangle(item.Item1 * 16.0f,
+        //                                      item.Item2 * 16.0f,
+        //                                      item.Item1 * 16.0f + 16.0f,
+        //                                      item.Item2 * 16.0f + 16.0f);
+        //        }
+        //    }
 
-            //if (body.Collides)
-            //{
-            //    RenderTools.DrawBox(body.Aabb, Color4.Red);
-            //    RenderTools.DrawLine(body.Aabb.GetCenter(), Vector2.Add(body.Aabb.GetCenter(), body.Projection * 10), Color4.Purple);
-            //}
-            //else
-            //    RenderTools.DrawBox(body.Aabb, Color4.Green);
-        }
+        //    //if (body.Collides)
+        //    //{
+        //    //    RenderTools.DrawBox(body.Aabb, Color4.Red);
+        //    //    RenderTools.DrawLine(body.Aabb.GetCenter(), Vector2.Add(body.Aabb.GetCenter(), body.Projection * 10), Color4.Purple);
+        //    //}
+        //    //else
+        //    //    RenderTools.DrawBox(body.Aabb, Color4.Green);
+        //}
 
         #endregion Public Methods
 

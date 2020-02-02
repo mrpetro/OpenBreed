@@ -1,8 +1,17 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Modules.Animation;
+using OpenBreed.Core.Modules.Animation.Components;
+using OpenBreed.Core.Modules.Animation.Helpers;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Physics.Systems;
+using OpenBreed.Core.Modules.Rendering.Entities.Builders;
+using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.Systems.Control.Components;
+using OpenBreed.Sandbox.Entities.Actor;
+using OpenBreed.Sandbox.Entities.Teleport;
+using OpenBreed.Sandbox.Helpers;
+using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,58 +22,92 @@ namespace OpenBreed.Sandbox.Worlds
 {
     public static class GameWorldHelper
     {
-        public static World SetupSystems(ICore core, World gameWorld, int width, int height)
+        public static void AddSystems(Program core, WorldBuilder builder)
         {
+            int width = builder.width;
+            int height = builder.height;
+
             //AI
             // Pathfinding/ AI systems here
 
             //Input
-            gameWorld.AddSystem(new WalkingControlSystem(core));
-            gameWorld.AddSystem(new AiControlSystem(core));
+            builder.AddSystem(core.CreateWalkingControlSystem().Build());
+            builder.AddSystem(core.CreateAiControlSystem().Build());
 
             //Action
-            gameWorld.AddSystem(new MovementSystem(core));
-            gameWorld.AddSystem(core.Physics.CreatePhysicsSystem(width, height));
-            gameWorld.AddSystem(core.Animations.CreateAnimationSystem<int>());
+            builder.AddSystem(core.CreateMovementSystem().Build());
+            builder.AddSystem(core.CreatePhysicsSystem().SetGridSize(width, height).Build());
+            builder.AddSystem(core.CreateAnimationSystem().Build());
 
             //Audio
-            gameWorld.AddSystem(core.Sounds.CreateSoundSystem());
+            builder.AddSystem(core.CreateSoundSystem().Build());
 
             //Video
-            gameWorld.AddSystem(core.Rendering.CreateTileSystem(width, height, 1, 16, true));
-            gameWorld.AddSystem(core.Rendering.CreateSpriteSystem());
-            gameWorld.AddSystem(core.Rendering.CreateWireframeSystem());
-            gameWorld.AddSystem(core.Rendering.CreateTextSystem());
-
-            return gameWorld;
+            builder.AddSystem(core.CreateTileSystem().SetGridSize(width, height)
+                                                       .SetLayersNo(1)
+                                                       .SetTileSize(16)
+                                                       .SetGridVisible(true)
+                                                       .Build());
+            builder.AddSystem(core.CreateSpriteSystem().Build());
+            builder.AddSystem(core.CreateWireframeSystem().Build());
+            builder.AddSystem(core.CreateTextSystem().Build());
         }
 
-        public static World CreateGameWorld(ICore core, string worldName)
+        public static World CreateGameWorld(Program core, string worldName)
         {
-            var gameWorld = core.Worlds.Create(worldName);
+            var builder = core.Worlds.Create().SetName(worldName);
+            AddSystems(core, builder);
 
-            //AI
-            // Pathfinding/ AI systems here
+            return builder.Build();
+        }
 
-            //Input
-            gameWorld.AddSystem(new WalkingControlSystem(core));
-            gameWorld.AddSystem(new AiControlSystem(core));
+        internal static void CreateGameWorld(Program core)
+        {
+            World gameWorld = null;
 
-            //Action
-            gameWorld.AddSystem(new MovementSystem(core));
-            gameWorld.AddSystem(core.Physics.CreatePhysicsSystem(64, 64));
-            gameWorld.AddSystem(core.Animations.CreateAnimationSystem<int>());
+            using (var reader = new TxtFileWorldReader(core, ".\\Content\\Maps\\hub.txt"))
+                gameWorld = reader.GetWorld();
 
-            //Audio
-            gameWorld.AddSystem(core.Sounds.CreateSoundSystem());
+            //GameWorld = GameWorldHelper.CreateGameWorld(Core, "DEMO6");
 
-            //Video
-            gameWorld.AddSystem(core.Rendering.CreateTileSystem(64, 64, 1, 16, true));
-            gameWorld.AddSystem(core.Rendering.CreateSpriteSystem());
-            gameWorld.AddSystem(core.Rendering.CreateWireframeSystem());
-            gameWorld.AddSystem(core.Rendering.CreateTextSystem());
+            var cameraBuilder = new CameraBuilder(core);
 
-            return gameWorld;
+            cameraBuilder.SetPosition(new Vector2(64, 64));
+            cameraBuilder.SetRotation(0.0f);
+            cameraBuilder.SetZoom(1);
+
+            var gameCamera = cameraBuilder.Build();
+            gameCamera.Add(new Animator(10.0f, false, -1, FrameTransition.LinearInterpolation));
+
+            gameWorld.AddEntity(gameCamera);
+
+            var gameViewport = (Viewport)core.Rendering.Viewports.Create(0.05f, 0.05f, 0.90f, 0.90f);
+            gameViewport.Camera = gameCamera;
+
+            var actor = ActorHelper.CreateActor(core, new Vector2(128, 128));
+            actor.Tag = gameCamera;
+
+            actor.Add(new WalkingControl());
+            actor.Add(new AttackControl());
+
+            actor.Add(TextHelper.Create(core, new Vector2(0, 32), "Hero"));
+
+            core.Jobs.Execute(new CameraFollowJob(gameCamera, actor));
+
+            var player1 = core.Players.GetByName("P1");
+            player1.AssumeControl(actor);
+            var player2 = core.Players.GetByName("P2");
+            player2.AssumeControl(actor);
+
+            var movementFsm = ActorHelper.CreateMovementFSM(actor);
+            var atackFsm = ActorHelper.CreateAttackingFSM(actor);
+            var rotateFsm = ActorHelper.CreateRotationFSM(actor);
+            movementFsm.SetInitialState("Standing");
+            atackFsm.SetInitialState("Idle");
+            rotateFsm.SetInitialState("Idle");
+            gameWorld.AddEntity(actor);
+
+            core.Rendering.Viewports.Add(gameViewport);
         }
     }
 }

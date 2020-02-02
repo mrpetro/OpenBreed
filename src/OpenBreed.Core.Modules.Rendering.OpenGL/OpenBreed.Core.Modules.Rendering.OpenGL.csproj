@@ -68,6 +68,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\SpriteComponentBuilder.cs" />
+    <Compile Include="Builders\WireframeSystemBuilder.cs" />
+    <Compile Include="Builders\TextSystemBuilder.cs" />
+    <Compile Include="Builders\SpriteSystemBuilder.cs" />
+    <Compile Include="Builders\TileSystemBuilder.cs" />
+    <Compile Include="Commands\CameraFollowCommand.cs" />
     <Compile Include="Components\CameraComponent.cs" />
     <Compile Include="Components\SpriteComponent.cs" />
     <Compile Include="Components\TileCell.cs" />
@@ -92,12 +98,12 @@
     <Compile Include="Helpers\Vertex.cs" />
     <Compile Include="Helpers\Viewport.cs" />
     <Compile Include="Helpers\ViewportMan.cs" />
-    <Compile Include="Messages\PutStampMsg.cs" />
-    <Compile Include="Messages\SpriteOnMsg.cs" />
-    <Compile Include="Messages\SpriteOffMsg.cs" />
-    <Compile Include="Messages\SpriteSetMsg.cs" />
-    <Compile Include="Messages\TileSetMsg.cs" />
-    <Compile Include="Messages\TextSetMsg.cs" />
+    <Compile Include="Commands\PutStampCommand.cs" />
+    <Compile Include="Commands\SpriteOnCommand.cs" />
+    <Compile Include="Commands\SpriteOffCommand.cs" />
+    <Compile Include="Commands\SpriteSetCommand.cs" />
+    <Compile Include="Commands\TileSetCommand.cs" />
+    <Compile Include="Commands\TextSetCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OpenGLModule.cs" />
     <Compile Include="Helpers\TextureMan.cs" />
