@@ -69,6 +69,8 @@ namespace OpenBreed.Core.Managers
 
         public IEntity CreateFromTemplate(string templateName)
         {
+            Core.Logging.Verbose($"Creating entity from '{templateName}' template.");
+
             var entityTable = Core.Scripts.GetObject($"{TEMPLATES_NAMESPACE}.{templateName}") as LuaTable;
 
             if (entityTable == null)

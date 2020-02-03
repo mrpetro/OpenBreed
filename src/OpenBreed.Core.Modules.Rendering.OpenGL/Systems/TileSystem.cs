@@ -44,7 +44,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             cmdHandler = new CommandHandler(this);
 
-            Require<ITileComponent>();
+            Require<TileComponent>();
             Require<Position>();
 
             GridWidth = builder.gridWidth;

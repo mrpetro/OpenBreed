@@ -1,6 +1,8 @@
-﻿namespace OpenBreed.Core.Modules.Rendering.Components
+﻿using OpenBreed.Core.Common.Systems.Components;
+
+namespace OpenBreed.Core.Modules.Rendering.Components
 {
-    public class CameraComponent : ICameraComponent
+    public class CameraComponent : IEntityComponent
     {
         #region Public Constructors
 
@@ -22,7 +24,7 @@
 
         #region Public Methods
 
-        public static ICameraComponent Create(float zoom, float brightness = 1.0f)
+        public static CameraComponent Create(float zoom, float brightness = 1.0f)
         {
             return new CameraComponent(zoom, brightness);
         }

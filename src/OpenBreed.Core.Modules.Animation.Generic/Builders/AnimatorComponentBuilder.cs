@@ -11,6 +11,7 @@ namespace OpenBreed.Core.Modules.Animation.Builders
 
         private float speed;
         private bool loop;
+        private string animationAlias;
 
         #endregion Private Fields
 
@@ -31,7 +32,12 @@ namespace OpenBreed.Core.Modules.Animation.Builders
 
         public override IEntityComponent Build()
         {
-            return new Animator(speed, loop);
+            var anim = Core.Animations.Anims.GetByName(animationAlias);
+
+            if (anim == null)
+                return new Animator(speed, loop);
+            else
+                return new Animator(speed, loop, anim.Id);
         }
 
         public override void SetProperty(object key, object value)
@@ -42,8 +48,10 @@ namespace OpenBreed.Core.Modules.Animation.Builders
                 speed = Convert.ToSingle(value);
             else if (propertyName == "Loop")
                 loop = Convert.ToBoolean(value);
+            else if (propertyName == "AnimationAlias")
+                animationAlias = Convert.ToString(value);
             else
-                throw new ArgumentException("Too many property keys given.");
+                throw new ArgumentException($"Unknown '{propertyName}' property key given.");
         }
 
         #endregion Public Methods

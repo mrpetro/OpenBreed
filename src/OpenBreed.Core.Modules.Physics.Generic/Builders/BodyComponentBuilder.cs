@@ -50,7 +50,7 @@ namespace OpenBreed.Core.Modules.Physics.Builders
                     corFactor = Convert.ToSingle(value);
                     break;
 
-                case "type":
+                case "Type":
                     type = Convert.ToString(value);
                     break;
 

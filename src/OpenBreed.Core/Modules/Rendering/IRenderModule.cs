@@ -63,21 +63,6 @@ namespace OpenBreed.Core.Modules.Rendering
         /// <returns></returns>
         IWireframe CreateWireframe(float thickness, Color4 color);
 
-        /// <summary>
-        /// Create sprite entity component
-        /// </summary>
-        /// <param name="spriteAlias">Sprite atlas alias to use</param>
-        /// <param name="order">Initial order of rendering for this sprite</param>
-        /// <returns>Sprite entity component</returns>
-        ISpriteComponent CreateSprite(string spriteAlias, float order = 0.0f);
-
-        /// <summary>
-        /// Create tile entity component
-        /// </summary>
-        /// <param name="tileAlias">Tile atlas alias to use</param>
-        /// <returns>Tile entity component</returns>
-        ITileComponent CreateTile(string tileAtlas);
-
         void Cleanup();
 
         void Draw(float dt);

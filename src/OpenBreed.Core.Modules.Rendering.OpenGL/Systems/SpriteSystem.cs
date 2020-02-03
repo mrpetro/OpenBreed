@@ -32,7 +32,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             cmdHandler = new CommandHandler(this);
 
-            Require<ISpriteComponent>();
+            Require<SpriteComponent>();
             Require<Position>();
         }
 
@@ -126,7 +126,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         protected override void RegisterEntity(IEntity entity)
         {
             var pack = new SpritePack(entity.Id,
-                                      entity.Components.OfType<ISpriteComponent>().First(),
+                                      entity.Components.OfType<SpriteComponent>().First(),
                                       entity.Components.OfType<Position>().First());
 
             active.Add(pack);

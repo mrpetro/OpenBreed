@@ -24,7 +24,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         private readonly string animPrefix;
         private Direction direction;
-        private ISpriteComponent sprite;
+        private SpriteComponent sprite;
 
         #endregion Private Fields
 
@@ -66,7 +66,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
         {
             Entity = entity;
             direction = Entity.Components.OfType<Direction>().FirstOrDefault();
-            sprite = entity.Components.OfType<ISpriteComponent>().First();
+            sprite = entity.Components.OfType<SpriteComponent>().First();
         }
 
         public void LeaveState()

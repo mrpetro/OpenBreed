@@ -1,9 +1,11 @@
-﻿namespace OpenBreed.Core.Modules.Rendering.Components
+﻿using OpenBreed.Core.Common.Systems.Components;
+
+namespace OpenBreed.Core.Modules.Rendering.Components
 {
     /// <summary>
     /// Axis-aligned tile render component with same height and width
     /// </summary>
-    public class TileComponent : ITileComponent
+    public class TileComponent : IEntityComponent
     {
         #region Private Constructors
 
