@@ -12,6 +12,7 @@ using OpenBreed.Core.Commands;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Modules.Animation.Builders;
 using OpenBreed.Core.Systems;
+using OpenBreed.Core.Common.Components;
 
 namespace OpenBreed.Core.Modules.Animation.Systems
 {
@@ -51,11 +52,10 @@ namespace OpenBreed.Core.Modules.Animation.Systems
         {
             cmdHandler.ExecuteEnqueued();
 
-            //For now only entities with camera are immune. This implementation sucks.
             for (int i = 0; i < entities.Count; i++)
             {
                 var entity = Core.Entities.GetById(entities[i]);
-                if (entity.Components.OfType<ICameraComponent>().Any())
+                if (entity.Components.OfType<PauseImmuneComponent>().Any())
                     Animate(i, dt);
             }
         }

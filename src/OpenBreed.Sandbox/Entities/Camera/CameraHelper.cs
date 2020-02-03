@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
@@ -36,6 +37,7 @@ namespace OpenBreed.Sandbox.Entities.Camera
             cameraEntity.Add(new Animator(10.0f, true, 0, FrameTransition.LinearInterpolation));
             cameraEntity.Add(Position.Create(x, y));
             cameraEntity.Add(CameraComponent.Create(1.0f));
+            cameraEntity.Add(new PauseImmuneComponent());
             world.AddEntity(cameraEntity);
             return cameraEntity;
         }

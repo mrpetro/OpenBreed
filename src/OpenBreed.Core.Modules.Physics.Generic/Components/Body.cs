@@ -43,6 +43,11 @@ namespace OpenBreed.Core.Modules.Physics.Components
         public float CorFactor { get; internal set; }
 
         /// <summary>
+        /// ID of shape
+        /// </summary>
+        public int ShapeId { get; internal set; }
+
+        /// <summary>
         /// User defined tag
         /// </summary>
         public string Tag { get; set; }

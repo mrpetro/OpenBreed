@@ -1,4 +1,6 @@
-﻿namespace OpenBreed.Core.Modules.Rendering.Components
+﻿using OpenBreed.Core.Common.Systems.Components;
+
+namespace OpenBreed.Core.Modules.Rendering.Components
 {
     /// <summary>
     /// Axis-aligned sprite render component
@@ -6,7 +8,7 @@
     ///  - axis-aligned box shape
     ///  - position
     /// </summary>
-    public class SpriteComponent : ISpriteComponent
+    public class SpriteComponent : IEntityComponent
     {
         #region Private Constructors
 

@@ -42,8 +42,6 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
         private static void OnCollision(IEntity entity, CollisionEventArgs args)
         {
-            entity.RaiseEvent(PhysicsEventTypes.COLLISION_OCCURRED, new CollisionEventArgs(args.Entity, args.Projection));
-
             var body = args.Entity.Components.OfType<Body>().FirstOrDefault();
 
             var type = body.Tag;
@@ -60,18 +58,18 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
         public static void AddProjectile(ICore core, World world, float x, float y, float vx, float vy)
         {
+            var projectile = core.Entities.CreateFromTemplate("Projectile");
 
-            var projectile = core.Entities.Create();
-
-            projectile.Add(core.Rendering.CreateSprite("Atlases/Sprites/Projectiles/Laser"));
-            projectile.Add(new Animator(10.0f, true));
-            projectile.Add(Position.Create(x, y ));
-            projectile.Add(Thrust.Create(0, 0));
-            projectile.Add(Body.Create(0, 1, "Dynamic"));
-            projectile.Add(Velocity.Create(vx, vy));
             projectile.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
             projectile.Add(TextHelper.Create(core, new Vector2(-10, 10), "Bullet"));
+
+            projectile.Components.OfType<Position>().First().Value = new Vector2(x, y);
+            projectile.Components.OfType<Velocity>().First().Value = new Vector2(vx, vy);
+
             projectile.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, (s, a) => OnCollision((IEntity)s, (CollisionEventArgs)a));
+
+
+
             world.AddEntity(projectile);
 
             var doorSm = ProjectileHelper.CreateStateMachine(projectile);

@@ -224,6 +224,11 @@ namespace OpenBreed.Sandbox
         private void RegisterEntityTemplates()
         {
             Scripts.RunFile(@"Entities\Actor\Arrow.lua");
+            Scripts.RunFile(@"Entities\Door\DoorHorizontal.lua");
+            Scripts.RunFile(@"Entities\Door\DoorVertical.lua");
+            Scripts.RunFile(@"Entities\Projectile\Projectile.lua");
+            Scripts.RunFile(@"Entities\Teleport\TeleportEntry.lua");
+            Scripts.RunFile(@"Entities\Teleport\TeleportExit.lua");
 
         }
 

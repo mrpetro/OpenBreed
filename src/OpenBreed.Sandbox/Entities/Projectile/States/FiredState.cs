@@ -18,7 +18,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
     {
         #region Private Fields
 
-        private ISpriteComponent sprite;
+        private SpriteComponent sprite;
         private readonly string animPrefix;
         private Velocity velocity;
 
@@ -61,7 +61,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
         {
             Entity = entity;
             velocity = entity.Components.OfType<Velocity>().First();
-            sprite = entity.Components.OfType<ISpriteComponent>().First();
+            sprite = entity.Components.OfType<SpriteComponent>().First();
         }
 
         public void LeaveState()
