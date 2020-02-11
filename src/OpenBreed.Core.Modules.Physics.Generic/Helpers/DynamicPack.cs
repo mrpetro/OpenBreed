@@ -13,7 +13,7 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
         #region Internal Constructors
 
         internal DynamicPack(int entityId,
-            Body body,
+            BodyComponent body,
             Position position,
             Velocity velocity,
             IShapeComponent shape)
@@ -30,7 +30,7 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
         #region Internal Properties
 
         internal int EntityId { get; }
-        internal Body Body { get; }
+        internal BodyComponent Body { get; }
         internal Position Position { get; }
         internal Velocity Velocity { get; }
         internal IShapeComponent Shape { get; }

@@ -36,7 +36,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         internal PhysicsSystem(PhysicsSystemBuilder builder) : base(builder.core)
         {
             cmdHandler = new CommandHandler(this);
-            Require<Body>();
+            Require<BodyComponent>();
 
             GridWidth = builder.gridWidth;
             GridHeight = builder.gridHeight;
@@ -429,7 +429,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         private void RegisterStaticEntity(IEntity entity)
         {
             var pack = new StaticPack(entity.Id,
-                                      entity.Components.OfType<Body>().First(),
+                                      entity.Components.OfType<BodyComponent>().First(),
                                       entity.Components.OfType<Position>().First(),
                                       entity.Components.OfType<IShapeComponent>().First());
 
@@ -444,7 +444,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         private void RegisterDynamicEntity(IEntity entity)
         {
             var pack = new DynamicPack(entity.Id,
-                                      entity.Components.OfType<Body>().First(),
+                                      entity.Components.OfType<BodyComponent>().First(),
                                       entity.Components.OfType<Position>().First(),
                                       entity.Components.OfType<Velocity>().First(),
                                       entity.Components.OfType<IShapeComponent>().First());

@@ -114,7 +114,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         private static void OnCollision(IEntity entity, CollisionEventArgs args)
         {
-            var body = args.Entity.Components.OfType<Body>().FirstOrDefault();
+            var body = args.Entity.Components.OfType<BodyComponent>().FirstOrDefault();
 
             var type = body.Tag;
 

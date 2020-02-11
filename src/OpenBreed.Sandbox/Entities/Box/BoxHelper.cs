@@ -25,8 +25,8 @@ namespace OpenBreed.Sandbox.Entities.Box
             ball.Add(Velocity.Create(velocity));
             ball.Add(Direction.Create(1, 0));
             ball.Add(AxisAlignedBoxShape.Create(-size.X / 2, -size.Y / 2, size.X, size.Y));
-            ball.Add(new Motion());
-            ball.Add(Body.Create(1.0f, 1.0f, null));
+            ball.Add(new MotionComponent());
+            ball.Add(BodyComponent.Create(1.0f, 1.0f, null));
 
             return ball;
         }

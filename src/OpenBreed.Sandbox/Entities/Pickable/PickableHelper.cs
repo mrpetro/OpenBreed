@@ -36,7 +36,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable
             var item = core.Entities.Create();
 
             //item.Add(new Animator(5.0f, false));
-            item.Add(Body.Create(1.0f, 1.0f, "Trigger"));
+            item.Add(BodyComponent.Create(1.0f, 1.0f, "Trigger"));
             item.Add(Position.Create(x * 16, y * 16));
             item.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
             item.Add(TextHelper.Create(core, new Vector2(0, 20), "Ammo"));

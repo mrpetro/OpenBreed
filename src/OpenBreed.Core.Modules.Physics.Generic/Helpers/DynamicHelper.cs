@@ -88,7 +88,7 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
         {
             var p = entityA.Components.OfType<Position>().FirstOrDefault();
             var v = entityA.Components.OfType<Velocity>().FirstOrDefault();
-            var body = entityA.Components.OfType<Body>().FirstOrDefault();
+            var body = entityA.Components.OfType<BodyComponent>().FirstOrDefault();
 
             p.Value += projection;
 

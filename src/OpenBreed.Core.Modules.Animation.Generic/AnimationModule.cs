@@ -9,7 +9,7 @@ using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Core.Modules.Animation
 {
-    public class AnimationModule : IAnimationModule
+    public class AnimationModule : BaseCoreModule, IAnimationModule
     {
         #region Private Fields
 
@@ -19,10 +19,8 @@ namespace OpenBreed.Core.Modules.Animation
 
         #region Public Constructors
 
-        public AnimationModule(ICore core)
+        public AnimationModule(ICore core) : base(core)
         {
-            Core = core ?? throw new ArgumentNullException(nameof(core));
-
             animMan = new AnimMan(this);
         }
 
@@ -30,7 +28,6 @@ namespace OpenBreed.Core.Modules.Animation
 
         #region Public Properties
 
-        public ICore Core { get; }
 
         public IAnimMan Anims { get { return animMan; } }
 

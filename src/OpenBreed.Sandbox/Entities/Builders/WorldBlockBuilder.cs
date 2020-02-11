@@ -59,7 +59,7 @@ namespace OpenBreed.Sandbox.Entities.Builders
 
             if (HasBody)
             {
-                entity.Add(Body.Create(1.0f, 1.0f, "Static"));
+                entity.Add(BodyComponent.Create(1.0f, 1.0f, "Static"));
                 entity.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
             }
 

@@ -39,7 +39,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             var core = world.Core;
             var teleportEntry = core.Entities.Create();
 
-            teleportEntry.Add(Body.Create(1.0f, 1.0f, "Trigger"));
+            teleportEntry.Add(BodyComponent.Create(1.0f, 1.0f, "Trigger"));
             teleportEntry.Add(Position.Create(x * 16, y * 16));
             teleportEntry.Add(AxisAlignedBoxShape.Create(16, 16, 8, 8));
             teleportEntry.Add(TextHelper.Create(core, new Vector2(0, 32), "WorldExit"));

@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Entities;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -9,11 +8,11 @@ namespace OpenBreed.Core.Modules.Physics.Components
     /// <summary>
     /// Physical Body data
     /// </summary>
-    public class Body : IEntityComponent
+    public class BodyComponent : IEntityComponent
     {
         #region Public Constructors
 
-        public Body()
+        public BodyComponent()
         {
         }
 
@@ -21,7 +20,7 @@ namespace OpenBreed.Core.Modules.Physics.Components
 
         #region Private Constructors
 
-        private Body(float cofFactor, float corFactor, string tag)
+        private BodyComponent(float cofFactor, float corFactor, string tag)
         {
             CofFactor = cofFactor;
             CorFactor = corFactor;
@@ -43,9 +42,9 @@ namespace OpenBreed.Core.Modules.Physics.Components
         public float CorFactor { get; internal set; }
 
         /// <summary>
-        /// ID of shape
+        /// List of Fixture IDs
         /// </summary>
-        public int ShapeId { get; internal set; }
+        public List<int> Fixtures { get; internal set; }
 
         /// <summary>
         /// User defined tag
@@ -73,9 +72,9 @@ namespace OpenBreed.Core.Modules.Physics.Components
 
         #region Public Methods
 
-        public static Body Create(float cofFactor, float corFactor, string tag)
+        public static BodyComponent Create(float cofFactor, float corFactor, string tag)
         {
-            return new Body(cofFactor, corFactor, tag);
+            return new BodyComponent(cofFactor, corFactor, tag);
         }
 
         #endregion Public Methods
