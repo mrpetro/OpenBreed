@@ -7,7 +7,8 @@
     BodyComponent = {
         CofFactor = 1.0,
         CorFactor = 1.0,
-        Type = "Trigger"},
+        Type = "Trigger",
+		Fixtures = { "Fixtures/TeleportEntry" } },
 	SpriteComponent = {
 		AtlasAlias = "Atlases/Sprites/Teleport/Entry",
         Order = 0.0}

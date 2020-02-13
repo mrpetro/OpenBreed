@@ -62,7 +62,6 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             var teleportEntry = core.Entities.CreateFromTemplate("TeleportEntry");
 
             teleportEntry.Tag = new TeleportPair { Id = pairId };
-            teleportEntry.Add(AxisAlignedBoxShape.Create(16, 16, 8, 8));
             teleportEntry.Add(TextHelper.Create(core, new Vector2(0, 32), "TeleportEntry"));
 
             teleportEntry.Components.OfType<Position>().First().Value = new Vector2( 16 * x, 16 * y);
@@ -81,7 +80,6 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             var teleportExit = core.Entities.CreateFromTemplate("TeleportExit");
 
             teleportExit.Tag = new TeleportPair { Id = pairId };
-            teleportExit.Add(AxisAlignedBoxShape.Create(16, 16, 8, 8));
             teleportExit.Add(TextHelper.Create(core, new Vector2(0, 32), "TeleportExit"));
 
             teleportExit.Components.OfType<Position>().First().Value = new Vector2(16 * x, 16 * y);
@@ -121,8 +119,8 @@ namespace OpenBreed.Sandbox.Entities.Teleport
                 throw new Exception("No exit entity found");
 
             var exitPos = exitEntity.Components.OfType<Position>().First();
-            var entryAabb = entryEntity.Components.OfType<IShapeComponent>().First().Aabb;
-            var targetAabb = targetEntity.Components.OfType<IShapeComponent>().First().Aabb;
+            var entryAabb = entryEntity.Components.OfType<BodyComponent>().First().Aabb;
+            var targetAabb = targetEntity.Components.OfType<BodyComponent>().First().Aabb;
             var offset = new Vector2((32 - targetAabb.Width) / 2.0f, (32 - targetAabb.Height) / 2.0f);
 
             //Vanilla game

@@ -20,16 +20,22 @@ namespace OpenBreed.Core.Modules.Physics.Components
 
         #region Private Constructors
 
-        private BodyComponent(float cofFactor, float corFactor, string tag)
+        private BodyComponent(float cofFactor, float corFactor, string tag, List<int> fixtures)
         {
             CofFactor = cofFactor;
             CorFactor = corFactor;
             Tag = tag;
+            Fixtures = fixtures;
         }
 
         #endregion Private Constructors
 
         #region Public Properties
+
+        /// <summary>
+        /// Axis-aligned bounding box of this body
+        /// </summary>
+        public Box2 Aabb { get; internal set; }
 
         /// <summary>
         /// Coefficient of friction factor for this body.
@@ -72,9 +78,9 @@ namespace OpenBreed.Core.Modules.Physics.Components
 
         #region Public Methods
 
-        public static BodyComponent Create(float cofFactor, float corFactor, string tag)
+        public static BodyComponent Create(float cofFactor, float corFactor, string tag, List<int> fixtures)
         {
-            return new BodyComponent(cofFactor, corFactor, tag);
+            return new BodyComponent(cofFactor, corFactor, tag, fixtures);
         }
 
         #endregion Public Methods

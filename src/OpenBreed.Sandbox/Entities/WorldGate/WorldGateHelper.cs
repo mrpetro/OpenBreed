@@ -37,26 +37,29 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
         public static IEntity AddWorldExit(World world, int x, int y, string worldName, int entryId)
         {
             var core = world.Core;
-            var teleportEntry = core.Entities.Create();
 
-            teleportEntry.Add(BodyComponent.Create(1.0f, 1.0f, "Trigger"));
-            teleportEntry.Add(Position.Create(x * 16, y * 16));
-            teleportEntry.Add(AxisAlignedBoxShape.Create(16, 16, 8, 8));
-            teleportEntry.Add(TextHelper.Create(core, new Vector2(0, 32), "WorldExit"));
-            teleportEntry.Tag = new Tuple<string, int>(worldName, entryId);
-            teleportEntry.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, (s, a) => OnCollision((IEntity)s, (CollisionEventArgs)a));
-            world.AddEntity(teleportEntry);
+            var teleportEntity = core.Entities.CreateFromTemplate("WorldGateExit");
 
-            return teleportEntry;
+
+            //teleportEntry.Add(BodyComponent.Create(1.0f, 1.0f, "Trigger"));
+            //teleportEntry.Add(Position.Create(x * 16, y * 16));
+            //teleportEntry.Add(AxisAlignedBoxShape.Create(16, 16, 8, 8));
+            teleportEntity.Add(TextHelper.Create(core, new Vector2(0, 32), "WorldExit"));
+            teleportEntity.Tag = new Tuple<string, int>(worldName, entryId);
+
+            teleportEntity.Components.OfType<Position>().First().Value = new Vector2(16 * x, 16 * y);
+            teleportEntity.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, (s, a) => OnCollision((IEntity)s, (CollisionEventArgs)a));
+            world.AddEntity(teleportEntity);
+
+            return teleportEntity;
         }
 
         public static IEntity AddWorldEntry(World world, int x, int y, int entryId)
         {
             var core = world.Core;
-            var teleportEntity = core.Entities.Create();
+            var teleportEntity = core.Entities.CreateFromTemplate("WorldGateEntry");
             teleportEntity.Tag = new WorldGatePair() { Id = entryId };
-            teleportEntity.Add(Position.Create(x * 16, y * 16));
-            teleportEntity.Add(AxisAlignedBoxShape.Create(16, 16, 8, 8));
+            teleportEntity.Components.OfType<Position>().First().Value = new Vector2(16 * x, 16 * y);
             teleportEntity.Add(TextHelper.Create(core, new Vector2(0, 32), "WorldEntry"));
 
             world.AddEntity(teleportEntity);

@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Core.Modules.Physics.Components;
+using OpenBreed.Core.Modules.Physics;
 
 namespace OpenBreed.Sandbox.Entities.Teleport
 {
@@ -46,7 +48,9 @@ namespace OpenBreed.Sandbox.Entities.Teleport
         {
             var cameraPos = cameraEntity.Components.OfType<Position>().First();
             var targetPos = targetEntity.Components.OfType<Position>().First();
-            var targetAabb = targetEntity.Components.OfType<IShapeComponent>().First().Aabb;
+
+            var targetAabb = targetEntity.Components.OfType<BodyComponent>().First().Aabb;
+
             var offset = new Vector2(targetAabb.Width / 2.0f, targetAabb.Height / 2.0f);
             cameraPos.Value = targetPos.Value + offset;
         }
@@ -55,7 +59,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
         {
             var cameraPos = cameraEntity.Components.OfType<Position>().First();
             var targetPos = targetEntity.Components.OfType<Position>().First();
-            var targetAabb = targetEntity.Components.OfType<IShapeComponent>().First().Aabb;
+            var targetAabb = targetEntity.Components.OfType<BodyComponent>().First().Aabb;
             var offset = new Vector2(targetAabb.Width / 2.0f, targetAabb.Height / 2.0f);
             cameraPos.Value = targetPos.Value + offset;
         }

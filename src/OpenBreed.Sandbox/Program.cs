@@ -9,6 +9,7 @@ using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Audio.Builders;
 using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Physics.Builders;
+using OpenBreed.Core.Modules.Physics.Components.Shapes;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Systems.Control.Systems;
 using OpenBreed.Sandbox.Entities.Actor;
@@ -161,10 +162,10 @@ namespace OpenBreed.Sandbox
             return new TextSystemBuilder(this);
         }
 
-        public WireframeSystemBuilder CreateWireframeSystem()
-        {
-            return new WireframeSystemBuilder(this);
-        }
+        //public WireframeSystemBuilder CreateWireframeSystem()
+        //{
+        //    return new WireframeSystemBuilder(this);
+        //}
 
         public SoundSystemBuilder CreateSoundSystem()
         {
@@ -229,6 +230,7 @@ namespace OpenBreed.Sandbox
             Title = $"Open Breed Sandbox (Version: {appVersion} Vsync: {VSync})";
 
             RegisterComponentBuilders();
+            RegisterFixtures();
             RegisterEntityTemplates();
             RegisterItems();
 
@@ -271,7 +273,7 @@ namespace OpenBreed.Sandbox
 
             CameraHelper.CreateAnimations(this);
             DoorHelper.CreateStamps(this);
-            PickableHelper.CreateStamps(this);
+            //PickableHelper.CreateStamps(this);
             DoorHelper.CreateAnimations(this);
             ActorHelper.CreateAnimations(this);
             TeleportHelper.CreateAnimations(this);
@@ -381,6 +383,17 @@ namespace OpenBreed.Sandbox
             Entities.RegisterComponentBuilder("SpriteComponent", SpriteComponentBuilder.New);
         }
 
+        private void RegisterFixtures()
+        {
+            Physics.Fixturs.Create("Fixtures/GridCell", "Trigger", new BoxShape(0, 0, 16, 16));
+            Physics.Fixturs.Create("Fixtures/TeleportEntry", "Trigger", new BoxShape(16, 16, 8, 8));
+            Physics.Fixturs.Create("Fixtures/TeleportExit", "Trigger", new BoxShape(16, 16, 8, 8));
+            Physics.Fixturs.Create("Fixtures/Projectile", "Dynamic", new BoxShape(0, 0, 16, 16));
+            Physics.Fixturs.Create("Fixtures/DoorVertical", "Static", new BoxShape(0, 0, 16, 32));
+            Physics.Fixturs.Create("Fixtures/DoorHorizontal", "Static", new BoxShape(0, 0, 32, 16));
+            Physics.Fixturs.Create("Fixtures/Arrow", "Dynamic", new BoxShape(0, 0, 32, 32));
+        }
+
         private void RegisterEntityTemplates()
         {
             Scripts.RunFile(@"Entities\Actor\Arrow.lua");
@@ -389,6 +402,8 @@ namespace OpenBreed.Sandbox
             Scripts.RunFile(@"Entities\Projectile\Projectile.lua");
             Scripts.RunFile(@"Entities\Teleport\TeleportEntry.lua");
             Scripts.RunFile(@"Entities\Teleport\TeleportExit.lua");
+            Scripts.RunFile(@"Entities\WorldGate\WorldGateEntry.lua");
+            Scripts.RunFile(@"Entities\WorldGate\WorldGateExit.lua");
         }
 
         private void RegisterItems()

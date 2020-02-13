@@ -49,7 +49,7 @@ namespace OpenBreed.Sandbox.Worlds
                                                        .SetGridVisible(true)
                                                        .Build());
             builder.AddSystem(core.CreateSpriteSystem().Build());
-            builder.AddSystem(core.CreateWireframeSystem().Build());
+            //builder.AddSystem(core.CreateWireframeSystem().Build());
             builder.AddSystem(core.CreateTextSystem().Build());
         }
 

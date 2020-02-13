@@ -7,6 +7,14 @@ namespace OpenBreed.Core.Modules.Physics.Components.Shapes
     /// </summary>
     public class BoxShape : IShape
     {
+        public BoxShape(float x, float y, float width, float height)
+        {
+            X = x;
+            Y = y;
+            Width = width;
+            Height = height;
+        }
+
         #region Public Properties
 
         public float X { get; set; }

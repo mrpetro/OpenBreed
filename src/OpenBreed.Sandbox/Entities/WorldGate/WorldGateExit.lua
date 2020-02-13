@@ -1,4 +1,4 @@
-﻿Templates.Entities.TeleportExit = {
+﻿Templates.Entities.WorldGateExit = {
     AnimatorComponent = {
         Speed = 10.0,
         Loop = true,

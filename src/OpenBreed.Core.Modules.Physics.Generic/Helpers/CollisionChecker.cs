@@ -1,4 +1,6 @@
 ﻿using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Modules.Physics.Components;
+using OpenBreed.Core.Modules.Physics.Components.Shapes;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -10,10 +12,10 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
 {
     public static class CollisionChecker
     {
-        public static bool Check(Vector2 posA, AxisAlignedBoxShape shapeA, Vector2 posB, AxisAlignedBoxShape shapeB, out Vector2 projection)
+        public static bool Check(Vector2 posA, BoxShape shapeA, Vector2 posB, BoxShape shapeB, out Vector2 projection)
         {
-            var aabbA = shapeA.Aabb;
-            var aabbB = shapeB.Aabb;
+            var aabbA = shapeA.GetAabb();
+            var aabbB = shapeB.GetAabb();
             aabbB.Translate(posB - posA);
 
             var aPos = aabbA.GetCenter();
@@ -79,10 +81,10 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
             return false;
         }
 
-        public static bool Check(Vector2 posA, IShapeComponent shapeA, Vector2 posB, IShapeComponent shapeB, out Vector2 projection)
+        public static bool Check(Vector2 posA, Fixture fixtureA, Vector2 posB, Fixture fixtureB, out Vector2 projection)
         {
-            if (shapeA is AxisAlignedBoxShape && shapeB is AxisAlignedBoxShape)
-                return Check(posA, (AxisAlignedBoxShape)shapeA, posB, (AxisAlignedBoxShape)shapeB, out projection);
+            if (fixtureA.Shape is BoxShape && fixtureB.Shape is BoxShape)
+                return Check(posA, (BoxShape)fixtureA.Shape, posB, (BoxShape)fixtureB.Shape, out projection);
             else
                 throw new NotImplementedException();
         }

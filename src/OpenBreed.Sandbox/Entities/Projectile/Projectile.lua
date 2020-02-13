@@ -8,7 +8,8 @@
     BodyComponent = {
         CofFactor = 0.0,
         CorFactor = 1.0,
-        Type = "Dynamic"},
+        Type = "Dynamic",
+		Fixtures = { "Fixtures/Projectile" } },
 	SpriteComponent = {
 		AtlasAlias = "Atlases/Sprites/Projectiles/Laser",
         Order = 0.0}

@@ -102,7 +102,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
             //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
             //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
-            actor.Add(AxisAlignedBoxShape.Create(0, 0, 32, 32));
+            //actor.Add(AxisAlignedBoxShape.Create(0, 0, 32, 32));
 
 
             actor.Components.OfType<Position>().First().Value = pos;
