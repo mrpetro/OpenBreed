@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Common;
+using OpenBreed.Core.Events;
 using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Helpers;
@@ -92,6 +93,10 @@ namespace OpenBreed.Sandbox.Worlds
 
             actor.Add(TextHelper.Create(core, new Vector2(0, 32), "Hero"));
 
+            actor.Subscribe(CoreEventTypes.ENTITY_ENTERED_WORLD, OnEntityEntered);
+            actor.Subscribe(CoreEventTypes.ENTITY_LEFT_WORLD, OnEntityLeftWorld);
+
+
             core.Jobs.Execute(new CameraFollowJob(gameCamera, actor));
 
             var player1 = core.Players.GetByName("P1");
@@ -108,6 +113,19 @@ namespace OpenBreed.Sandbox.Worlds
             gameWorld.AddEntity(actor);
 
             core.Rendering.Viewports.Add(gameViewport);
+        }
+
+        private static void OnEntityEntered(object sender, EventArgs e)
+        {
+            var ea = (EntityEnteredWorldEventArgs)e;
+            ea.Entity.Core.Logging.Verbose($"Entity '{ea.Entity.Id}' entered world '{ea.World.Name}'.");
+        }
+
+        private static void OnEntityLeftWorld(object sender, EventArgs e)
+        {
+            var ea = (EntityLeftWorldEventArgs)e;
+            ea.Entity.Core.Logging.Verbose($"Entity '{ea.Entity.Id}' left world '{ea.World.Name}'.");
+
         }
     }
 }

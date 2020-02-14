@@ -115,6 +115,11 @@ namespace OpenBreed.Core.Common
 
         #region Public Methods
 
+        public override string ToString()
+        {
+            return $"World:{Name}";
+        }
+
         public bool ExecuteCommand(object sender, ICommand cmd)
         {
             switch (cmd.Type)

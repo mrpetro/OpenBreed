@@ -132,7 +132,7 @@ namespace OpenBreed.Core.Entities
 
         public override string ToString()
         {
-            return $"Entity({Id})";
+            return $"Entity:{Id}";
         }
 
         #endregion Public Methods

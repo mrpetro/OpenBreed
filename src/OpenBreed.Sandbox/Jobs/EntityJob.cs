@@ -124,14 +124,15 @@ namespace OpenBreed.Sandbox.Jobs
                     world = reader.GetWorld();
             }
 
-            entity.Subscribe(CoreEventTypes.ENTITY_ENTERED_WORLD, OnEntityAddedToWorld);
+            entity.Subscribe(CoreEventTypes.ENTITY_ENTERED_WORLD, OnEntityEntered);
             world.AddEntity(entity);
 
             SetPosition(entity, entryId);
         }
 
-        private void OnEntityAddedToWorld(object sender, EventArgs e)
+        private void OnEntityEntered(object sender, EventArgs e)
         {
+            var ea = (EntityEnteredWorldEventArgs)e;
             Complete(this);
         }
 

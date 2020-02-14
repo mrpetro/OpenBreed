@@ -42,6 +42,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         public void Execute()
         {
+            entity.Core.Logging.Verbose($"Executing camera effect '{animName}.'");
             entity.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, OnAnimChanged);
             entity.Subscribe(AnimationEventTypes.ANIMATION_STOPPED, OnAnimStopped);
             entity.PostCommand(new PlayAnimCommand(entity.Id, animName));
