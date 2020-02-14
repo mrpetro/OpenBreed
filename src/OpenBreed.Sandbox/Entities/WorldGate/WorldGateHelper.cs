@@ -17,6 +17,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Core.Modules.Physics.Events;
+using OpenBreed.Core.Modules.Rendering.Components;
 
 namespace OpenBreed.Sandbox.Entities.WorldGate
 {
@@ -32,6 +33,9 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
     public class WorldGateHelper
     {
+        public const string SPRITE_WORLD_ENTRY = "Atlases/Sprites/World/Entry";
+        public const string SPRITE_WORLD_EXIT = "Atlases/Sprites/World/Exit";
+
         #region Public Methods
 
         public static IEntity AddWorldExit(World world, int x, int y, string worldName, int entryId)
@@ -49,9 +53,17 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
             teleportEntity.Components.OfType<Position>().First().Value = new Vector2(16 * x, 16 * y);
             teleportEntity.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, (s, a) => OnCollision((IEntity)s, (CollisionEventArgs)a));
+            teleportEntity.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, (s, a) => OnFrameChanged((IEntity)s, (AnimChangedEventArgs)a));
+
             world.AddEntity(teleportEntity);
 
             return teleportEntity;
+        }
+
+        private static void OnFrameChanged(IEntity entity, AnimChangedEventArgs systemEvent)
+        {
+            var sprite = entity.Components.OfType<SpriteComponent>().First();
+            sprite.ImageId = (int)systemEvent.Frame;
         }
 
         public static IEntity AddWorldEntry(World world, int x, int y, int entryId)
@@ -61,6 +73,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             teleportEntity.Tag = new WorldGatePair() { Id = entryId };
             teleportEntity.Components.OfType<Position>().First().Value = new Vector2(16 * x, 16 * y);
             teleportEntity.Add(TextHelper.Create(core, new Vector2(0, 32), "WorldEntry"));
+            teleportEntity.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, (s, a) => OnFrameChanged((IEntity)s, (AnimChangedEventArgs)a));
 
             world.AddEntity(teleportEntity);
 

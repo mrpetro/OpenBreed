@@ -10,6 +10,6 @@
         Type = "Trigger",
 		Fixtures = { "Fixtures/TeleportExit" } },
 	SpriteComponent = {
-		AtlasAlias = "Atlases/Sprites/Teleport/Entry",
+		AtlasAlias = "Atlases/Sprites/Teleport/Exit",
         Order = 0.0}
 }

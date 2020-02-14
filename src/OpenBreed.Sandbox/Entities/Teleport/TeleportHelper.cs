@@ -35,12 +35,14 @@ namespace OpenBreed.Sandbox.Entities.Teleport
         #region Public Fields
 
         public const string SPRITE_TELEPORT_ENTRY = "Atlases/Sprites/Teleport/Entry";
+        public const string SPRITE_TELEPORT_EXIT = "Atlases/Sprites/Teleport/Exit";
 
         #endregion Public Fields
 
         #region Private Fields
 
         private const string ANIMATION_TELEPORT_ENTRY = "Animations/Teleport/Entry";
+        private const string ANIMATION_TELEPORT_EXIT = "Animations/Teleport/Exit";
 
         #endregion Private Fields
 
@@ -53,6 +55,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             animationTeleportEntry.AddFrame(1, 1.0f);
             animationTeleportEntry.AddFrame(2, 1.0f);
             animationTeleportEntry.AddFrame(3, 1.0f);
+
         }
 
         public static IEntity AddTeleportEntry(World world, int x, int y, int pairId)

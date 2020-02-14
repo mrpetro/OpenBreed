@@ -18,6 +18,7 @@ using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Sandbox.Entities.Teleport;
+using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Sandbox.Items;
 using OpenBreed.Sandbox.Managers;
 using OpenBreed.Sandbox.Worlds;
@@ -262,6 +263,9 @@ namespace OpenBreed.Sandbox
 
             var teleportTex = Rendering.Textures.Create("Textures/Sprites/Teleport", @"Content\Graphics\TeleportSpriteSet.png");
             Rendering.Sprites.Create(TeleportHelper.SPRITE_TELEPORT_ENTRY, teleportTex.Id, 32, 32, 4, 1, 0, 0);
+            Rendering.Sprites.Create(TeleportHelper.SPRITE_TELEPORT_EXIT, teleportTex.Id, 32, 32, 4, 1, 0, 32);
+            Rendering.Sprites.Create(WorldGateHelper.SPRITE_WORLD_ENTRY, teleportTex.Id, 32, 32, 4, 1, 0, 96);
+            Rendering.Sprites.Create(WorldGateHelper.SPRITE_WORLD_EXIT, teleportTex.Id, 32, 32, 4, 1, 0, 64);
 
             var laserTex = Rendering.Textures.Create("Textures/Sprites/Laser", @"Content\Graphics\LaserSpriteSet.png");
             Rendering.Sprites.Create("Atlases/Sprites/Projectiles/Laser", laserTex.Id, 16, 16, 8, 1, 0, 0);
