@@ -8,7 +8,7 @@ using System;
 
 namespace OpenBreed.Core.Modules.Rendering
 {
-    public class OpenGLModule : IRenderModule
+    public class OpenGLModule : BaseCoreModule, IRenderModule
     {
         #region Private Fields
 
@@ -24,10 +24,8 @@ namespace OpenBreed.Core.Modules.Rendering
 
         #region Public Constructors
 
-        public OpenGLModule(ICore core)
+        public OpenGLModule(ICore core) : base(core)
         {
-            Core = core ?? throw new ArgumentNullException(nameof(core));
-
             viewportMan = new ViewportMan(this);
             textureMan = new TextureMan(this);
             tileMan = new TileMan(this);
@@ -39,8 +37,6 @@ namespace OpenBreed.Core.Modules.Rendering
         #endregion Public Constructors
 
         #region Public Properties
-
-        public ICore Core { get; }
 
         public ITextureMan Textures { get { return textureMan; } }
 

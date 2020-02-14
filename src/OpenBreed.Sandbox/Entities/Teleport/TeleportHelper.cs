@@ -35,12 +35,14 @@ namespace OpenBreed.Sandbox.Entities.Teleport
         #region Public Fields
 
         public const string SPRITE_TELEPORT_ENTRY = "Atlases/Sprites/Teleport/Entry";
+        public const string SPRITE_TELEPORT_EXIT = "Atlases/Sprites/Teleport/Exit";
 
         #endregion Public Fields
 
         #region Private Fields
 
         private const string ANIMATION_TELEPORT_ENTRY = "Animations/Teleport/Entry";
+        private const string ANIMATION_TELEPORT_EXIT = "Animations/Teleport/Exit";
 
         #endregion Private Fields
 
@@ -53,6 +55,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             animationTeleportEntry.AddFrame(1, 1.0f);
             animationTeleportEntry.AddFrame(2, 1.0f);
             animationTeleportEntry.AddFrame(3, 1.0f);
+
         }
 
         public static IEntity AddTeleportEntry(World world, int x, int y, int pairId)
@@ -62,7 +65,6 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             var teleportEntry = core.Entities.CreateFromTemplate("TeleportEntry");
 
             teleportEntry.Tag = new TeleportPair { Id = pairId };
-            teleportEntry.Add(AxisAlignedBoxShape.Create(16, 16, 8, 8));
             teleportEntry.Add(TextHelper.Create(core, new Vector2(0, 32), "TeleportEntry"));
 
             teleportEntry.Components.OfType<Position>().First().Value = new Vector2( 16 * x, 16 * y);
@@ -81,7 +83,6 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             var teleportExit = core.Entities.CreateFromTemplate("TeleportExit");
 
             teleportExit.Tag = new TeleportPair { Id = pairId };
-            teleportExit.Add(AxisAlignedBoxShape.Create(16, 16, 8, 8));
             teleportExit.Add(TextHelper.Create(core, new Vector2(0, 32), "TeleportExit"));
 
             teleportExit.Components.OfType<Position>().First().Value = new Vector2(16 * x, 16 * y);
@@ -121,8 +122,8 @@ namespace OpenBreed.Sandbox.Entities.Teleport
                 throw new Exception("No exit entity found");
 
             var exitPos = exitEntity.Components.OfType<Position>().First();
-            var entryAabb = entryEntity.Components.OfType<IShapeComponent>().First().Aabb;
-            var targetAabb = targetEntity.Components.OfType<IShapeComponent>().First().Aabb;
+            var entryAabb = entryEntity.Components.OfType<BodyComponent>().First().Aabb;
+            var targetAabb = targetEntity.Components.OfType<BodyComponent>().First().Aabb;
             var offset = new Vector2((32 - targetAabb.Width) / 2.0f, (32 - targetAabb.Height) / 2.0f);
 
             //Vanilla game

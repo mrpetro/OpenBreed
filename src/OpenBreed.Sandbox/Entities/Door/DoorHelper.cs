@@ -95,7 +95,7 @@ namespace OpenBreed.Sandbox.Entities.Door
             //var door = core.Entities.Create();
             var door = core.Entities.CreateFromTemplate("DoorVertical");
 
-            door.Add(AxisAlignedBoxShape.Create(0, 0, 16, 32));
+            //door.Add(AxisAlignedBoxShape.Create(0, 0, 16, 32));
             door.Add(TextHelper.Create(core, new Vector2(-10, 10), "Door"));
 
             door.Components.OfType<Position>().First().Value = new Vector2(16 * x, 16 * y);
@@ -112,7 +112,7 @@ namespace OpenBreed.Sandbox.Entities.Door
 
             var door = core.Entities.CreateFromTemplate("DoorHorizontal");
 
-            door.Add(AxisAlignedBoxShape.Create(0, 0, 32, 16));
+            //door.Add(AxisAlignedBoxShape.Create(0, 0, 32, 16));
             door.Add(TextHelper.Create(core, new Vector2(-10, 10), "Door"));
 
             door.Components.OfType<Position>().First().Value = new Vector2(16 * x, 16 * y);

@@ -14,14 +14,12 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
         #region Internal Constructors
 
         internal StaticPack(int entityId,
-            Body body,
-            Position position,
-            IShapeComponent shape)
+            BodyComponent body,
+            Position position)
         {
             EntityId = entityId;
             Body = body;
             Position = position;
-            Shape = shape;
         }
 
         #endregion Internal Constructors
@@ -29,12 +27,16 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
         #region Internal Properties
 
         internal int EntityId { get; }
-        internal Body Body { get; }
+        internal BodyComponent Body { get; }
         internal Position Position { get; }
-        internal IShapeComponent Shape { get; }
 
-        internal Box2 Aabb { get { return Shape.Aabb.Translated(Position.Value); } }
-
+        internal Box2 Aabb
+        {
+            get
+            {
+                return Body.Aabb;
+            }
+        }
 
         #endregion Internal Properties
     }

@@ -23,7 +23,7 @@ namespace OpenBreed.Core.Modules.Physics.Builders
 
         public override IEntityComponent Build()
         {
-            return new Motion();
+            return new MotionComponent();
         }
 
         public override void SetProperty(object key, object value)

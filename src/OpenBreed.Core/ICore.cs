@@ -104,6 +104,13 @@ namespace OpenBreed.Core
         /// </summary>
         float ClientRatio { get; }
 
+        /// <summary>
+        /// Get core module of specific type
+        /// </summary>
+        /// <typeparam name="T">Type of module to get</typeparam>
+        /// <returns>Core module</returns>
+        T GetModule<T>() where T : ICoreModule;
+
         #endregion Public Properties
 
         #region Public Methods

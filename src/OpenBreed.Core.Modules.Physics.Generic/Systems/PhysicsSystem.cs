@@ -23,6 +23,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         private const int CELL_SIZE = 16;
 
+        public FixtureMan Fixtures { get; }
+
         private readonly List<DynamicPack> inactiveDynamics = new List<DynamicPack>();
         private readonly List<DynamicPack> activeDynamics = new List<DynamicPack>();
         private readonly List<StaticPack> inactiveStatics = new List<StaticPack>();
@@ -35,8 +37,10 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         internal PhysicsSystem(PhysicsSystemBuilder builder) : base(builder.core)
         {
+            Fixtures = Core.GetModule<PhysicsModule>().Fixturs;
+
             cmdHandler = new CommandHandler(this);
-            Require<Body>();
+            Require<BodyComponent>();
 
             GridWidth = builder.gridWidth;
             GridHeight = builder.gridHeight;
@@ -85,7 +89,24 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         {
             cmdHandler.ExecuteEnqueued();
 
+            UpdateAabbs();
+
             SweepAndPrune(dt);
+        }
+
+        private void UpdateAabb(BodyComponent body, Position pos)
+        {
+            var fixture = Fixtures.GetById(body.Fixtures.First());
+            body.Aabb = fixture.Shape.GetAabb().Translated(pos.Value);
+        }
+
+        private void UpdateAabbs()
+        {
+            for (int i = 0; i < activeDynamics.Count; i++)
+            {
+                var ad = activeDynamics[i];
+                UpdateAabb(ad.Body, ad.Position);
+            }
         }
 
         public override bool ExecuteCommand(object sender, ICommand cmd)
@@ -145,10 +166,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         private static Box2 GetAabb(IEntity entity)
         {
-            var shape = entity.Components.OfType<IShapeComponent>().First();
-            var pos = entity.Components.OfType<Position>().First();
-
-            return shape.Aabb.Translated(pos.Value);
+            var body = entity.Components.OfType<BodyComponent>().First();
+            return body.Aabb;
         }
 
         private bool HandleBodyOnCommand(object sender, BodyOnCommand cmd)
@@ -380,6 +399,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             if (!TryGetGridIndices(pack.Position.Value, out xIndex, out yIndex))
                 throw new InvalidOperationException($"Tile position exceeds tile grid limits.");
 
+            UpdateAabb(pack.Body, pack.Position);
+
             var aabb = pack.Aabb;
 
             int leftIndex;
@@ -429,9 +450,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         private void RegisterStaticEntity(IEntity entity)
         {
             var pack = new StaticPack(entity.Id,
-                                      entity.Components.OfType<Body>().First(),
-                                      entity.Components.OfType<Position>().First(),
-                                      entity.Components.OfType<IShapeComponent>().First());
+                                      entity.Components.OfType<BodyComponent>().First(),
+                                      entity.Components.OfType<Position>().First());
 
             InsertToGrid(pack);
         }
@@ -444,10 +464,9 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         private void RegisterDynamicEntity(IEntity entity)
         {
             var pack = new DynamicPack(entity.Id,
-                                      entity.Components.OfType<Body>().First(),
+                                      entity.Components.OfType<BodyComponent>().First(),
                                       entity.Components.OfType<Position>().First(),
-                                      entity.Components.OfType<Velocity>().First(),
-                                      entity.Components.OfType<IShapeComponent>().First());
+                                      entity.Components.OfType<Velocity>().First());
 
             activeDynamics.Add(pack);
         }

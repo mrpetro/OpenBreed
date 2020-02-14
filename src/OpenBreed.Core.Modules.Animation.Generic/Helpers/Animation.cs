@@ -98,11 +98,7 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
                 case FrameTransition.None:
                     return GetFrameNoTransition(time);
                 case FrameTransition.LinearInterpolation:
-                    {
-                        var g = GetFrameLinearInterpolation(time);
-                        Console.WriteLine(g);
-                        return g;
-                    }
+                        return GetFrameLinearInterpolation(time);
                 default:
                     throw new NotImplementedException($"Transition '{transition}' not implemented.");
             }

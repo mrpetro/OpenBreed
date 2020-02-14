@@ -6,7 +6,8 @@
     BodyComponent = {
         CofFactor = 1.0,
         CorFactor = 1.0,
-        Type = "Static"},
+        Type = "Static",
+		Fixtures = { "Fixtures/DoorHorizontal" } },
 	SpriteComponent = {
 		AtlasAlias = "Atlases/Sprites/Door/Horizontal",
         Order = 0.0}

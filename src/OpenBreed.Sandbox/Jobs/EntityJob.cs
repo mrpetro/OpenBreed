@@ -10,6 +10,7 @@ using OpenBreed.Sandbox.Worlds;
 using OpenTK;
 using System;
 using System.Linq;
+using OpenBreed.Core.Modules.Physics.Components;
 
 namespace OpenBreed.Sandbox.Jobs
 {
@@ -104,7 +105,7 @@ namespace OpenBreed.Sandbox.Jobs
                 throw new Exception($"No entry with id '{pair.Id}' found.");
 
             var entryPos = entryEntity.Components.OfType<Position>().First();
-            var entryAabb = entryEntity.Components.OfType<IShapeComponent>().First().Aabb;
+            var entryAabb = entryEntity.Components.OfType<BodyComponent>().First().Aabb;
             //var entityAabb = entity.Components.OfType<IShapeComponent>().First().Aabb;
             var entityPos = entity.Components.OfType<Position>().First();
 
@@ -123,14 +124,15 @@ namespace OpenBreed.Sandbox.Jobs
                     world = reader.GetWorld();
             }
 
-            entity.Subscribe(CoreEventTypes.ENTITY_ENTERED_WORLD, OnEntityAddedToWorld);
+            entity.Subscribe(CoreEventTypes.ENTITY_ENTERED_WORLD, OnEntityEntered);
             world.AddEntity(entity);
 
             SetPosition(entity, entryId);
         }
 
-        private void OnEntityAddedToWorld(object sender, EventArgs e)
+        private void OnEntityEntered(object sender, EventArgs e)
         {
+            var ea = (EntityEnteredWorldEventArgs)e;
             Complete(this);
         }
 

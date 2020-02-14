@@ -76,13 +76,19 @@
     <Compile Include="Builders\BodyComponentBuilder.cs" />
     <Compile Include="Builders\MovementSystemBuilder.cs" />
     <Compile Include="Builders\PhysicsSystemBuilder.cs" />
-    <Compile Include="Components\Body.cs" />
+    <Compile Include="Components\BodyComponent.cs" />
+    <Compile Include="Components\Fixture.cs" />
     <Compile Include="Components\Material.cs" />
-    <Compile Include="Components\Motion.cs" />
+    <Compile Include="Components\MotionComponent.cs" />
+    <Compile Include="Components\Shapes\BoxShape.cs" />
+    <Compile Include="Components\Shapes\CircleShape.cs" />
+    <Compile Include="Components\Shapes\IShape.cs" />
+    <Compile Include="Components\Shapes\PolygonShape.cs" />
     <Compile Include="Events\BodyOnEventArgs.cs" />
     <Compile Include="Events\BodyOffEventArgs.cs" />
     <Compile Include="Events\CollisionEventArgs.cs" />
     <Compile Include="Events\PhysicsEventTypes.cs" />
+    <Compile Include="Helpers\FixtureMan.cs" />
     <Compile Include="Helpers\Box2Extensions.cs" />
     <Compile Include="Helpers\CollisionChecker.cs" />
     <Compile Include="Helpers\StaticPack.cs" />
@@ -91,6 +97,7 @@
     <Compile Include="Helpers\MaterialTable.cs" />
     <Compile Include="Commands\BodyOffCommand.cs" />
     <Compile Include="Commands\BodyOnCommand.cs" />
+    <Compile Include="PhysicsModule.cs" />
     <Compile Include="Systems\MovementSystem.cs" />
     <Compile Include="Systems\PhysicsSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -105,5 +112,6 @@
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

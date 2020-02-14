@@ -1,4 +1,4 @@
-﻿Templates.Entities.TeleportEntry = {
+﻿Templates.Entities.WorldGateExit = {
     AnimatorComponent = {
         Speed = 10.0,
         Loop = true,
@@ -8,8 +8,8 @@
         CofFactor = 1.0,
         CorFactor = 1.0,
         Type = "Trigger",
-		Fixtures = { "Fixtures/TeleportEntry" } },
+		Fixtures = { "Fixtures/TeleportExit" } },
 	SpriteComponent = {
-		AtlasAlias = "Atlases/Sprites/Teleport/Entry",
+		AtlasAlias = "Atlases/Sprites/World/Exit",
         Order = 0.0}
 }

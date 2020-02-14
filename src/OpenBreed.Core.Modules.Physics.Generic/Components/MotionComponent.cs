@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Physics.Components
 {
-    public class Motion : IEntityComponent
+    public class MotionComponent : IEntityComponent
     {
         #region Private Fields
 
@@ -17,7 +17,7 @@ namespace OpenBreed.Core.Modules.Physics.Components
 
         #region Public Constructors
 
-        public Motion()
+        public MotionComponent()
         {
         }
 

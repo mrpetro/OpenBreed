@@ -6,7 +6,7 @@ using System;
 
 namespace OpenBreed.Core.Modules.Audio
 {
-    public class OpenALModule : IAudioModule
+    public class OpenALModule : BaseCoreModule, IAudioModule
     {
         #region Private Fields
 
@@ -16,16 +16,14 @@ namespace OpenBreed.Core.Modules.Audio
 
         #region Public Constructors
 
-        public OpenALModule(ICore core)
+        public OpenALModule(ICore core) : base(core)
         {
-            Core = core ?? throw new ArgumentNullException(nameof(core));
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public ICore Core { get; }
 
         public ISoundMan Sounds { get { return soundMan; } }
 

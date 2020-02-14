@@ -1,17 +1,16 @@
-﻿using NLua;
-using OpenBreed.Core;
+﻿using OpenBreed.Core;
 using OpenBreed.Core.Common.Builders;
-using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Managers;
+using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Builders;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Audio.Builders;
+using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Physics.Builders;
+using OpenBreed.Core.Modules.Physics.Components.Shapes;
 using OpenBreed.Core.Modules.Rendering;
-using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenBreed.Core.Scripting;
 using OpenBreed.Core.Systems.Control.Systems;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Camera;
@@ -19,6 +18,7 @@ using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Sandbox.Entities.Teleport;
+using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Sandbox.Items;
 using OpenBreed.Sandbox.Managers;
 using OpenBreed.Sandbox.Worlds;
@@ -27,8 +27,8 @@ using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using System;
+using System.Collections.Generic;
 using System.Reflection;
-using System.Xml;
 
 namespace OpenBreed.Sandbox
 {
@@ -37,6 +37,8 @@ namespace OpenBreed.Sandbox
         #region Private Fields
 
         private string appVersion;
+
+        private Dictionary<Type, ICoreModule> modules = new Dictionary<Type, ICoreModule>();
 
         #endregion Private Fields
 
@@ -60,8 +62,14 @@ namespace OpenBreed.Sandbox
             Jobs = new JobMan(this);
 
             Rendering = new OpenGLModule(this);
+            Physics = new PhysicsModule(this);
             Sounds = new OpenALModule(this);
             Animations = new AnimationModule(this);
+
+            RegisterModule(Rendering);
+            RegisterModule(Physics);
+            RegisterModule(Sounds);
+            RegisterModule(Animations);
 
             VSync = VSyncMode.On;
         }
@@ -71,6 +79,8 @@ namespace OpenBreed.Sandbox
         #region Public Properties
 
         public IRenderModule Rendering { get; }
+
+        public PhysicsModule Physics { get; }
 
         public IAudioModule Sounds { get; }
 
@@ -153,14 +163,19 @@ namespace OpenBreed.Sandbox
             return new TextSystemBuilder(this);
         }
 
-        public WireframeSystemBuilder CreateWireframeSystem()
-        {
-            return new WireframeSystemBuilder(this);
-        }
+        //public WireframeSystemBuilder CreateWireframeSystem()
+        //{
+        //    return new WireframeSystemBuilder(this);
+        //}
 
         public SoundSystemBuilder CreateSoundSystem()
         {
             return new SoundSystemBuilder(this);
+        }
+
+        public T GetModule<T>() where T : ICoreModule
+        {
+            return (T)modules[typeof(T)];
         }
 
         #endregion Public Methods
@@ -209,29 +224,6 @@ namespace OpenBreed.Sandbox
             Inputs.OnKeyPress(e);
         }
 
-        private void RegisterComponentBuilders()
-        {
-            Entities.RegisterComponentBuilder("AnimatorComponent", AnimatorComponentBuilder.New);
-            Entities.RegisterComponentBuilder("DirectionComponent", DirectionComponentBuilder.New);
-            Entities.RegisterComponentBuilder("VelocityComponent", VelocityComponentBuilder.New);
-            Entities.RegisterComponentBuilder("ThrustComponent", ThrustComponentBuilder.New);
-            Entities.RegisterComponentBuilder("PositionComponent", PositionComponentBuilder.New);
-            Entities.RegisterComponentBuilder("BodyComponent", BodyComponentBuilder.New);
-            Entities.RegisterComponentBuilder("MotionComponent", MotionComponentBuilder.New);
-            Entities.RegisterComponentBuilder("SpriteComponent", SpriteComponentBuilder.New);
-        }
-
-        private void RegisterEntityTemplates()
-        {
-            Scripts.RunFile(@"Entities\Actor\Arrow.lua");
-            Scripts.RunFile(@"Entities\Door\DoorHorizontal.lua");
-            Scripts.RunFile(@"Entities\Door\DoorVertical.lua");
-            Scripts.RunFile(@"Entities\Projectile\Projectile.lua");
-            Scripts.RunFile(@"Entities\Teleport\TeleportEntry.lua");
-            Scripts.RunFile(@"Entities\Teleport\TeleportExit.lua");
-
-        }
-
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -239,6 +231,7 @@ namespace OpenBreed.Sandbox
             Title = $"Open Breed Sandbox (Version: {appVersion} Vsync: {VSync})";
 
             RegisterComponentBuilders();
+            RegisterFixtures();
             RegisterEntityTemplates();
             RegisterItems();
 
@@ -270,6 +263,9 @@ namespace OpenBreed.Sandbox
 
             var teleportTex = Rendering.Textures.Create("Textures/Sprites/Teleport", @"Content\Graphics\TeleportSpriteSet.png");
             Rendering.Sprites.Create(TeleportHelper.SPRITE_TELEPORT_ENTRY, teleportTex.Id, 32, 32, 4, 1, 0, 0);
+            Rendering.Sprites.Create(TeleportHelper.SPRITE_TELEPORT_EXIT, teleportTex.Id, 32, 32, 4, 1, 0, 32);
+            Rendering.Sprites.Create(WorldGateHelper.SPRITE_WORLD_ENTRY, teleportTex.Id, 32, 32, 4, 1, 0, 96);
+            Rendering.Sprites.Create(WorldGateHelper.SPRITE_WORLD_EXIT, teleportTex.Id, 32, 32, 4, 1, 0, 64);
 
             var laserTex = Rendering.Textures.Create("Textures/Sprites/Laser", @"Content\Graphics\LaserSpriteSet.png");
             Rendering.Sprites.Create("Atlases/Sprites/Projectiles/Laser", laserTex.Id, 16, 16, 8, 1, 0, 0);
@@ -281,7 +277,7 @@ namespace OpenBreed.Sandbox
 
             CameraHelper.CreateAnimations(this);
             DoorHelper.CreateStamps(this);
-            PickableHelper.CreateStamps(this);
+            //PickableHelper.CreateStamps(this);
             DoorHelper.CreateAnimations(this);
             ActorHelper.CreateAnimations(this);
             TeleportHelper.CreateAnimations(this);
@@ -304,7 +300,6 @@ namespace OpenBreed.Sandbox
             GL.Enable(EnableCap.DepthTest);
 
             //var func = Scripts.RunFile(@"Entities\Actor\States\Attacking\IdleState.lua");
-
 
             //var r = func.Invoke();
 
@@ -374,39 +369,50 @@ namespace OpenBreed.Sandbox
             program.Run(30.0, 60.0);
         }
 
+        private void RegisterModule(ICoreModule module)
+        {
+            modules.Add(module.GetType(), module);
+        }
+
+        private void RegisterComponentBuilders()
+        {
+            BodyComponentBuilder.Register(this);
+
+            Entities.RegisterComponentBuilder("AnimatorComponent", AnimatorComponentBuilder.New);
+            Entities.RegisterComponentBuilder("DirectionComponent", DirectionComponentBuilder.New);
+            Entities.RegisterComponentBuilder("VelocityComponent", VelocityComponentBuilder.New);
+            Entities.RegisterComponentBuilder("ThrustComponent", ThrustComponentBuilder.New);
+            Entities.RegisterComponentBuilder("PositionComponent", PositionComponentBuilder.New);
+            Entities.RegisterComponentBuilder("MotionComponent", MotionComponentBuilder.New);
+            Entities.RegisterComponentBuilder("SpriteComponent", SpriteComponentBuilder.New);
+        }
+
+        private void RegisterFixtures()
+        {
+            Physics.Fixturs.Create("Fixtures/GridCell", "Trigger", new BoxShape(0, 0, 16, 16));
+            Physics.Fixturs.Create("Fixtures/TeleportEntry", "Trigger", new BoxShape(16, 16, 8, 8));
+            Physics.Fixturs.Create("Fixtures/TeleportExit", "Trigger", new BoxShape(16, 16, 8, 8));
+            Physics.Fixturs.Create("Fixtures/Projectile", "Dynamic", new BoxShape(0, 0, 16, 16));
+            Physics.Fixturs.Create("Fixtures/DoorVertical", "Static", new BoxShape(0, 0, 16, 32));
+            Physics.Fixturs.Create("Fixtures/DoorHorizontal", "Static", new BoxShape(0, 0, 32, 16));
+            Physics.Fixturs.Create("Fixtures/Arrow", "Dynamic", new BoxShape(0, 0, 32, 32));
+        }
+
+        private void RegisterEntityTemplates()
+        {
+            Scripts.RunFile(@"Entities\Actor\Arrow.lua");
+            Scripts.RunFile(@"Entities\Door\DoorHorizontal.lua");
+            Scripts.RunFile(@"Entities\Door\DoorVertical.lua");
+            Scripts.RunFile(@"Entities\Projectile\Projectile.lua");
+            Scripts.RunFile(@"Entities\Teleport\TeleportEntry.lua");
+            Scripts.RunFile(@"Entities\Teleport\TeleportExit.lua");
+            Scripts.RunFile(@"Entities\WorldGate\WorldGateEntry.lua");
+            Scripts.RunFile(@"Entities\WorldGate\WorldGateExit.lua");
+        }
+
         private void RegisterItems()
         {
             Items.Register(new CreditsItem());
-        }
-
-        private object ReadString(XmlReader reader)
-        {
-            reader.ReadStartElement();
-            var text = reader.ReadContentAsString();
-            reader.ReadEndElement();
-            return text;
-        }
-
-        private object ReadVector2(XmlReader reader)
-        {
-            reader.ReadStartElement();
-
-            if (reader.Name != "X")
-                throw new FormatException("Expected 'X' value");
-
-            reader.ReadStartElement();
-            var x = reader.ReadContentAsFloat();
-            reader.ReadEndElement();
-
-            if (reader.Name != "Y")
-                throw new FormatException("Expected 'Y' value");
-
-            reader.ReadStartElement();
-            var y = reader.ReadContentAsFloat();
-            reader.ReadEndElement();
-
-            reader.ReadEndElement();
-            return new Vector2(x, y);
         }
 
         #endregion Private Methods

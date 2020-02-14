@@ -42,7 +42,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
         private static void OnCollision(IEntity entity, CollisionEventArgs args)
         {
-            var body = args.Entity.Components.OfType<Body>().FirstOrDefault();
+            var body = args.Entity.Components.OfType<BodyComponent>().FirstOrDefault();
 
             var type = body.Tag;
 
@@ -60,7 +60,6 @@ namespace OpenBreed.Sandbox.Entities.Projectile
         {
             var projectile = core.Entities.CreateFromTemplate("Projectile");
 
-            projectile.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
             projectile.Add(TextHelper.Create(core, new Vector2(-10, 10), "Bullet"));
 
             projectile.Components.OfType<Position>().First().Value = new Vector2(x, y);

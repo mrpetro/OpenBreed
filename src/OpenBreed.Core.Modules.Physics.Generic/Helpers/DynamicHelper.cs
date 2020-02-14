@@ -26,12 +26,38 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
 
         internal static bool TestVsDynamic(PhysicsSystem system, DynamicPack bodyA, DynamicPack bodyB, float dt, out Vector2 projection)
         {
-            return CollisionChecker.Check(bodyA.Position.Value, bodyA.Shape, bodyB.Position.Value, bodyB.Shape, out projection);
+            if (bodyA.Body.Fixtures.Count > 0)
+            {
+                var fixtureA = system.Fixtures.GetById(bodyA.Body.Fixtures.First());
+
+                if (bodyB.Body.Fixtures != null && bodyB.Body.Fixtures.Count > 0)
+                {
+                    var fixtureB = system.Fixtures.GetById(bodyB.Body.Fixtures.First());
+                    return CollisionChecker.Check(bodyA.Position.Value, fixtureA, bodyB.Position.Value, fixtureB, out projection);
+                }
+                else
+                    throw new NotImplementedException();
+            }
+            else
+                throw new NotImplementedException();
         }
 
         internal static bool TestVsStatic(PhysicsSystem system, DynamicPack bodyA, StaticPack bodyB, float dt, out Vector2 projection)
         {
-            return CollisionChecker.Check(bodyA.Position.Value, bodyA.Shape, bodyB.Position.Value, bodyB.Shape, out projection);
+            if (bodyA.Body.Fixtures.Count > 0)
+            {
+                var fixtureA = system.Fixtures.GetById(bodyA.Body.Fixtures.First());
+
+                if (bodyB.Body.Fixtures != null && bodyB.Body.Fixtures.Count > 0)
+                {
+                    var fixtureB = system.Fixtures.GetById(bodyB.Body.Fixtures.First());
+                    return CollisionChecker.Check(bodyA.Position.Value, fixtureA, bodyB.Position.Value, fixtureB, out projection);
+                }
+                else
+                    throw new NotImplementedException();
+            }
+            else
+                throw new NotImplementedException();
         }
 
         /// <summary>
@@ -88,7 +114,7 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
         {
             var p = entityA.Components.OfType<Position>().FirstOrDefault();
             var v = entityA.Components.OfType<Velocity>().FirstOrDefault();
-            var body = entityA.Components.OfType<Body>().FirstOrDefault();
+            var body = entityA.Components.OfType<BodyComponent>().FirstOrDefault();
 
             p.Value += projection;
 

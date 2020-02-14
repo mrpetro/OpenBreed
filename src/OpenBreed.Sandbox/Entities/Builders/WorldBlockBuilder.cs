@@ -3,11 +3,13 @@ using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Entities.Builders;
+using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenTK;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Builders
@@ -27,7 +29,11 @@ namespace OpenBreed.Sandbox.Entities.Builders
         public WorldBlockBuilder(ICore core) : base(core)
         {
             HasBody = true;
+
+            physics = core.GetModule<PhysicsModule>();
         }
+
+        private PhysicsModule physics;
 
         #endregion Public Constructors
 
@@ -59,8 +65,9 @@ namespace OpenBreed.Sandbox.Entities.Builders
 
             if (HasBody)
             {
-                entity.Add(Body.Create(1.0f, 1.0f, "Static"));
-                entity.Add(AxisAlignedBoxShape.Create(0, 0, 16, 16));
+                var fixtureId = physics.Fixturs.GetByAlias("Fixtures/GridCell").Id;
+
+                entity.Add(BodyComponent.Create(1.0f, 1.0f, "Static",new List<int>(new int[] { fixtureId })));
             }
 
             entity.Add(TileComponent.Create(atlasId, tileId));

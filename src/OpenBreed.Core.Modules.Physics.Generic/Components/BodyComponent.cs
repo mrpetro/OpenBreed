@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Entities;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -9,11 +8,11 @@ namespace OpenBreed.Core.Modules.Physics.Components
     /// <summary>
     /// Physical Body data
     /// </summary>
-    public class Body : IEntityComponent
+    public class BodyComponent : IEntityComponent
     {
         #region Public Constructors
 
-        public Body()
+        public BodyComponent()
         {
         }
 
@@ -21,16 +20,22 @@ namespace OpenBreed.Core.Modules.Physics.Components
 
         #region Private Constructors
 
-        private Body(float cofFactor, float corFactor, string tag)
+        private BodyComponent(float cofFactor, float corFactor, string tag, List<int> fixtures)
         {
             CofFactor = cofFactor;
             CorFactor = corFactor;
             Tag = tag;
+            Fixtures = fixtures;
         }
 
         #endregion Private Constructors
 
         #region Public Properties
+
+        /// <summary>
+        /// Axis-aligned bounding box of this body
+        /// </summary>
+        public Box2 Aabb { get; internal set; }
 
         /// <summary>
         /// Coefficient of friction factor for this body.
@@ -43,9 +48,9 @@ namespace OpenBreed.Core.Modules.Physics.Components
         public float CorFactor { get; internal set; }
 
         /// <summary>
-        /// ID of shape
+        /// List of Fixture IDs
         /// </summary>
-        public int ShapeId { get; internal set; }
+        public List<int> Fixtures { get; internal set; }
 
         /// <summary>
         /// User defined tag
@@ -73,9 +78,9 @@ namespace OpenBreed.Core.Modules.Physics.Components
 
         #region Public Methods
 
-        public static Body Create(float cofFactor, float corFactor, string tag)
+        public static BodyComponent Create(float cofFactor, float corFactor, string tag, List<int> fixtures)
         {
-            return new Body(cofFactor, corFactor, tag);
+            return new BodyComponent(cofFactor, corFactor, tag, fixtures);
         }
 
         #endregion Public Methods
