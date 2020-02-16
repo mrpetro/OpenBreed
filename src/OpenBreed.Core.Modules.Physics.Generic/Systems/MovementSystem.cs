@@ -78,10 +78,10 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         protected override void RegisterEntity(IEntity entity)
         {
             entities.Add(entity);
-            positionComps.Add(entity.Components.OfType<Position>().First());
-            thrustComps.Add(entity.Components.OfType<Thrust>().First());
-            velocityComps.Add(entity.Components.OfType<Velocity>().First());
-            dynamicBodyComps.Add(entity.Components.OfType<BodyComponent>().First());
+            positionComps.Add(entity.GetComponent<Position>());
+            thrustComps.Add(entity.GetComponent<Thrust>());
+            velocityComps.Add(entity.GetComponent<Velocity>());
+            dynamicBodyComps.Add(entity.GetComponent<BodyComponent>());
         }
 
         protected override void UnregisterEntity(IEntity entity)

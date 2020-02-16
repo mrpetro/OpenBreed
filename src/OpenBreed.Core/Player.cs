@@ -70,7 +70,7 @@ namespace OpenBreed.Core
 
         public void AssumeControl(IEntity entity)
         {
-            var controlComponent = entity.Components.OfType<IControlComponent>().FirstOrDefault();
+            var controlComponent = entity.TryGetComponent<IControlComponent>();
 
             if (controlComponent == null)
                 throw new InvalidOperationException($"Control on entity '{entity}' not allowed.");

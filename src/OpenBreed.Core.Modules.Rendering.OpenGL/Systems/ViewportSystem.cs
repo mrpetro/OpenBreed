@@ -76,8 +76,8 @@
 //        /// <returns>Camera transformation matrix</returns>
 //        public Matrix4 GetCameraTransform(IEntity camera)
 //        {
-//            var pos = camera.Components.OfType<Position>().First();
-//            var cmc = camera.Components.OfType<CameraComponent>().First();
+//            var pos = camera.GetComponent<Position>().First();
+//            var cmc = camera.GetComponent<CameraComponent>().First();
 
 //            var transform = Matrix4.Identity;
 //            transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-pos.Value.X, -pos.Value.Y, 0.0f));
@@ -97,8 +97,8 @@
 //        /// <param name="dt">Time step</param>
 //        public void RenderViewport(float dt, IEntity entity)
 //        {
-//            var vpc = entity.Components.OfType< ViewportComponent>().First();
-//            var pos = entity.Components.OfType<Position>().First();
+//            var vpc = entity.GetComponent< ViewportComponent>().First();
+//            var pos = entity.GetComponent<Position>().First();
 
 
 //            GL.PushMatrix();
@@ -172,7 +172,7 @@
 //                GL.PopMatrix();
 //            }
 
-//            var cameraComponent = camera.Components.OfType<CameraComponent>().First();
+//            var cameraComponent = camera.GetComponent<CameraComponent>().First();
 
 //            //Draw camera effects
 //            DrawBrightnessEffect(cameraComponent.Brightness);

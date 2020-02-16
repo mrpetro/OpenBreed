@@ -18,7 +18,7 @@
 
 //        public MoveToCommand(IEntity actor, Vector2 position)
 //        {
-//            controller = actor.Components.OfType<AiControl>().FirstOrDefault();
+//            controller = actor.TryGetComponent<AiControl>().FirstOrDefault();
 
 //            this.position = position;
 //        }

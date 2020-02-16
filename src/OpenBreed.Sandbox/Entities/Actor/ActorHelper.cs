@@ -105,7 +105,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             //actor.Add(AxisAlignedBoxShape.Create(0, 0, 32, 32));
 
 
-            actor.Components.OfType<Position>().First().Value = pos;
+            actor.GetComponent<Position>().Value = pos;
 
             actor.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, (s,a) => OnCollision((IEntity)s,(CollisionEventArgs)a));
 
@@ -114,7 +114,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         private static void OnCollision(IEntity entity, CollisionEventArgs args)
         {
-            var body = args.Entity.Components.OfType<BodyComponent>().FirstOrDefault();
+            var body = args.Entity.TryGetComponent<BodyComponent>();
 
             var type = body.Tag;
 

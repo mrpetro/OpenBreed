@@ -76,18 +76,14 @@ namespace OpenBreed.Core.Entities
             return newFsm;
         }
 
-        public bool RunScript(string name, params object[] args)
+        public T TryGetComponent<T>()
         {
-            throw new NotImplementedException();
-            //   Core.LuaState["ce"] = this;
+            return components.OfType<T>().FirstOrDefault();
+        }
 
-            //   Core.LuaState.DoString(@"
-            //res1 = ce.Id
-            //");
-
-            //   var r = Core.LuaState["res1"];
-
-            //   return false;
+        public T GetComponent<T>()
+        {
+            return components.OfType<T>().First();
         }
 
         public void PostCommand(ICommand command)

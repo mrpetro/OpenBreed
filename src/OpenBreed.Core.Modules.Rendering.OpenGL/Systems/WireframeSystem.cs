@@ -135,9 +135,9 @@
 //        protected override void RegisterEntity(IEntity entity)
 //        {
 //            entities.Add(entity);
-//            wireframeComps.Add(entity.Components.OfType<IWireframe>().First());
-//            positionComps.Add(entity.Components.OfType<Position>().First());
-//            shapeComps.Add(entity.Components.OfType<IShapeComponent>().First());
+//            wireframeComps.Add(entity.GetComponent<IWireframe>().First());
+//            positionComps.Add(entity.GetComponent<Position>().First());
+//            shapeComps.Add(entity.GetComponent<IShapeComponent>().First());
 //        }
 
 //        protected override void UnregisterEntity(IEntity entity)

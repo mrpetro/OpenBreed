@@ -50,9 +50,9 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 
         public void EnterState()
         {
-            var direction = Entity.Components.OfType<Direction>().First();
-            var movement = Entity.Components.OfType<MotionComponent>().First();
-            Entity.Components.OfType<Thrust>().First().Value = direction.Value * movement.Acceleration;
+            var direction = Entity.GetComponent<Direction>();
+            var movement = Entity.GetComponent<MotionComponent>();
+            Entity.GetComponent<Thrust>().Value = direction.Value * movement.Acceleration;
 
             var animDirName = AnimHelper.ToDirectionName(direction.Value);
             var animMovementName = Entity.FsmList.First(item => item.Name == "Movement");

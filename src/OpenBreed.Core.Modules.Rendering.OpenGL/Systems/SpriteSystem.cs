@@ -99,8 +99,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
         public void DrawSprite(IViewport viewport, IEntity entity)
         {
-            var pos = entity.Components.OfType<Position>().First();
-            var sprite = entity.Components.OfType<SpriteComponent>().First();
+            var pos = entity.GetComponent<Position>();
+            var sprite = entity.GetComponent<SpriteComponent>();
 
             GL.PushMatrix();
 
@@ -155,7 +155,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             if (toModify == null)
                 return false;
 
-            var sprite = toModify.Components.OfType<SpriteComponent>().First();
+            var sprite = toModify.GetComponent<SpriteComponent>();
             sprite.ImageId = cmd.ImageId;
 
             return true;
@@ -182,7 +182,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         //{
         //    var entity = Core.Entities.GetById(pack.EntityId);
 
-        //    var body = entity.Components.OfType<Body>().FirstOrDefault();
+        //    var body = entity.GetComponent<Body>().FirstOrDefault();
 
         //    if (body == null)
         //        return;

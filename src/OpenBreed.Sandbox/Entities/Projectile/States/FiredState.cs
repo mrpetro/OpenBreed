@@ -46,7 +46,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
         public void EnterState()
         {
 
-            var direction = Entity.Components.OfType<Velocity>().First().Value;
+            var direction = Entity.GetComponent<Velocity>().Value;
 
             var animDirName = AnimHelper.ToDirectionName(direction);
 
@@ -60,8 +60,8 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
         public void Initialize(IEntity entity)
         {
             Entity = entity;
-            velocity = entity.Components.OfType<Velocity>().First();
-            sprite = entity.Components.OfType<SpriteComponent>().First();
+            velocity = entity.GetComponent<Velocity>();
+            sprite = entity.GetComponent<SpriteComponent>();
         }
 
         public void LeaveState()

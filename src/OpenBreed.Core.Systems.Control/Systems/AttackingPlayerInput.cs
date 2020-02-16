@@ -29,7 +29,7 @@ namespace OpenBreed.Core.Systems.Control.Systems
 
             foreach (var entity in player.ControlledEntities)
             {
-                var control = entity.Components.OfType<AttackControl>().FirstOrDefault();
+                var control = entity.TryGetComponent<AttackControl>();
 
                 if (control == null)
                     continue;

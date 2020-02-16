@@ -167,7 +167,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
         protected override void RegisterEntity(IEntity entity)
         {
             entities.Add(entity.Id);
-            animatorComps.Add(entity.Components.OfType<Animator>().First());
+            animatorComps.Add(entity.GetComponent<Animator>());
         }
 
         protected override void UnregisterEntity(IEntity entity)

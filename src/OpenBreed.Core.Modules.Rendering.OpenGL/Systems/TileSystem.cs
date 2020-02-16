@@ -159,7 +159,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             Debug.Assert(!entities.Contains(entity), "Entity already added!");
 
-            var pos = entity.Components.OfType<Position>().First();
+            var pos = entity.GetComponent<Position>();
 
             int xIndex;
             int yIndex;
@@ -169,7 +169,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
             var cellIndex = xIndex + GridWidth * yIndex;
 
-            var tile = entity.Components.OfType<TileComponent>().First();
+            var tile = entity.GetComponent<TileComponent>();
 
             entities[entity] = tile;
 

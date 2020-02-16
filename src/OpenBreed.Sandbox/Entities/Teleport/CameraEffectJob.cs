@@ -74,7 +74,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         private void HandleFrameChangeEvent(IEntity entity, AnimChangedEventArgs systemEvent)
         {
-            var cameraCmp = entity.Components.OfType<CameraComponent>().First();
+            var cameraCmp = entity.GetComponent<CameraComponent>();
             cameraCmp.Brightness = (float)systemEvent.Frame;
         }
 

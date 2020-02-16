@@ -68,17 +68,17 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Enable(EnableCap.Texture2D);
 
             for (int i = 0; i < entities.Count; i++)
-                DrawEntityText(viewport, entities[i]);
+                DrawText(viewport, entities[i]);
 
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.AlphaTest);
             GL.Disable(EnableCap.Blend);
         }
 
-        public void DrawEntityText(IViewport viewport, IEntity entity)
+        public void DrawText(IViewport viewport, IEntity entity)
         {
-            var pos = entity.Components.OfType<Position>().First();
-            var text = entity.Components.OfType<TextComponent>().First();
+            var pos = entity.GetComponent<Position>();
+            var text = entity.GetComponent<TextComponent>();
 
             GL.Enable(EnableCap.Texture2D);
             GL.PushMatrix();
@@ -129,7 +129,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             if (toModify == null)
                 return false;
 
-            var text = toModify.Components.OfType<TextComponent>().First();
+            var text = toModify.GetComponent<TextComponent>();
             text.Value = cmd.Text;
 
             return true;

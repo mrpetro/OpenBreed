@@ -98,7 +98,7 @@ namespace OpenBreed.Sandbox.Entities.Door
             //door.Add(AxisAlignedBoxShape.Create(0, 0, 16, 32));
             door.Add(TextHelper.Create(core, new Vector2(-10, 10), "Door"));
 
-            door.Components.OfType<Position>().First().Value = new Vector2(16 * x, 16 * y);
+            door.GetComponent<Position>().Value = new Vector2(16 * x, 16 * y);
 
             var doorSm = DoorHelper.CreateVerticalFSM(door);
             doorSm.SetInitialState("Closed");
@@ -115,7 +115,7 @@ namespace OpenBreed.Sandbox.Entities.Door
             //door.Add(AxisAlignedBoxShape.Create(0, 0, 32, 16));
             door.Add(TextHelper.Create(core, new Vector2(-10, 10), "Door"));
 
-            door.Components.OfType<Position>().First().Value = new Vector2(16 * x, 16 * y);
+            door.GetComponent<Position>().Value = new Vector2(16 * x, 16 * y);
 
             var doorSm = DoorHelper.CreateHorizontalFSM(door);
             doorSm.SetInitialState("Closed");
