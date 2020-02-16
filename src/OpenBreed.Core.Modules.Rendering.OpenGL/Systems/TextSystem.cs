@@ -24,9 +24,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         #region Private Fields
 
         private CommandHandler cmdHandler;
-        private readonly List<int> entities = new List<int>();
-        private readonly List<TextComponent> textComps = new List<TextComponent>();
-        private readonly List<Position> positionComps = new List<Position>();
+        private readonly List<IEntity> entities = new List<IEntity>();
 
         #endregion Private Fields
 
@@ -70,22 +68,22 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Enable(EnableCap.Texture2D);
 
             for (int i = 0; i < entities.Count; i++)
-                DrawEntityText(viewport, i);
+                DrawEntityText(viewport, entities[i]);
 
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.AlphaTest);
             GL.Disable(EnableCap.Blend);
         }
 
-        public void DrawEntityText(IViewport viewport, int index)
+        public void DrawEntityText(IViewport viewport, IEntity entity)
         {
-            var text = textComps[index];
-            var position = positionComps[index];
+            var pos = entity.Components.OfType<Position>().First();
+            var text = entity.Components.OfType<TextComponent>().First();
 
             GL.Enable(EnableCap.Texture2D);
             GL.PushMatrix();
 
-            GL.Translate(position.Value.X, position.Value.Y, text.Order);
+            GL.Translate(pos.Value.X, pos.Value.Y, text.Order);
 
             GL.Translate(text.Offset.X, text.Offset.Y, 0.0f);
 
@@ -113,21 +111,12 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         protected override void RegisterEntity(IEntity entity)
         {
-            entities.Add(entity.Id);
-            textComps.Add(entity.Components.OfType<TextComponent>().First());
-            positionComps.Add(entity.Components.OfType<Position>().First());
+            entities.Add(entity);
         }
 
         protected override void UnregisterEntity(IEntity entity)
         {
-            var index = entities.IndexOf(entity.Id);
-
-            if (index < 0)
-                throw new InvalidOperationException("Entity not found in this system.");
-
-            entities.RemoveAt(index);
-            textComps.RemoveAt(index);
-            positionComps.RemoveAt(index);
+            entities.Remove(entity);
         }
 
         #endregion Protected Methods
@@ -136,13 +125,12 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         private bool HandleTextSetCommand(object sender, TextSetCommand cmd)
         {
-            var entity = Core.Entities.GetById(cmd.EntityId);
-
-            var index = entities.IndexOf(cmd.EntityId);
-            if (index < 0)
+            var toModify = entities.FirstOrDefault(item => item.Id == cmd.EntityId);
+            if (toModify == null)
                 return false;
 
-            textComps[index].Value = cmd.Text;
+            var text = toModify.Components.OfType<TextComponent>().First();
+            text.Value = cmd.Text;
 
             return true;
         }

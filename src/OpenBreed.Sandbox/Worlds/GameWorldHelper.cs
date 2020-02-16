@@ -40,8 +40,8 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem(core.CreatePhysicsSystem().SetGridSize(width, height).Build());
             builder.AddSystem(core.CreateAnimationSystem().Build());
 
-            //Audio
-            builder.AddSystem(core.CreateSoundSystem().Build());
+            ////Audio
+            //builder.AddSystem(core.CreateSoundSystem().Build());
 
             //Video
             builder.AddSystem(core.CreateTileSystem().SetGridSize(width, height)

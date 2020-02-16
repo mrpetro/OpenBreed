@@ -20,8 +20,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
     {
         #region Private Fields
 
-        private readonly List<SpritePack> inactive = new List<SpritePack>();
-        private readonly List<SpritePack> active = new List<SpritePack>();
+        private readonly List<IEntity> inactive = new List<IEntity>();
+        private readonly List<IEntity> active = new List<IEntity>();
         private CommandHandler cmdHandler;
 
         #endregion Private Fields
@@ -86,7 +86,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Enable(EnableCap.Texture2D);
 
             for (int i = 0; i < active.Count; i++)
-                DrawEntitySprite(viewport, i);
+                DrawSprite(viewport, active[i]);
 
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.AlphaTest);
@@ -97,19 +97,18 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// Draw this sprite to given viewport
         /// </summary>
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
-        public void DrawEntitySprite(IViewport viewport, int index)
+        public void DrawSprite(IViewport viewport, IEntity entity)
         {
-            var pack = active[index];
-
-            //DrawDebug(pack, viewport);
+            var pos = entity.Components.OfType<Position>().First();
+            var sprite = entity.Components.OfType<SpriteComponent>().First();
 
             GL.PushMatrix();
 
-            GL.Translate((int)pack.Position.Value.X, (int)pack.Position.Value.Y, pack.Sprite.Order);
+            GL.Translate((int)pos.Value.X, (int)pos.Value.Y, sprite.Order);
 
-            var spriteAtlas = Core.Rendering.Sprites.GetById(pack.Sprite.AtlasId);
+            var spriteAtlas = Core.Rendering.Sprites.GetById(sprite.AtlasId);
             //GL.Translate(-spriteAtlas.SpriteWidth / 2, -spriteAtlas.SpriteHeight / 2, 0.0f);
-            spriteAtlas.Draw(pack.Sprite.ImageId);
+            spriteAtlas.Draw(sprite.ImageId);
 
             GL.PopMatrix();
         }
@@ -125,21 +124,12 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         protected override void RegisterEntity(IEntity entity)
         {
-            var pack = new SpritePack(entity.Id,
-                                      entity.Components.OfType<SpriteComponent>().First(),
-                                      entity.Components.OfType<Position>().First());
-
-            active.Add(pack);
+            active.Add(entity);
         }
 
         protected override void UnregisterEntity(IEntity entity)
         {
-            var pack = active.FirstOrDefault(item => item.EntityId == entity.Id);
-
-            if (pack == null)
-                throw new InvalidOperationException("Entity not found in this system.");
-
-            active.Remove(pack);
+            active.Remove(entity);
         }
 
         #endregion Protected Methods
@@ -148,7 +138,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         private bool HandleSpriteOnCommand(object sender, SpriteOnCommand cmd)
         {
-            var toActivate = inactive.FirstOrDefault(item => item.EntityId == cmd.EntityId);
+            var toActivate = inactive.FirstOrDefault(item => item.Id == cmd.EntityId);
 
             if (toActivate != null)
             {
@@ -161,18 +151,19 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         private bool HandleSpriteSetCommand(object sender, SpriteSetCommand cmd)
         {
-            var toModify = active.FirstOrDefault(item => item.EntityId == cmd.EntityId);
+            var toModify = active.FirstOrDefault(item => item.Id == cmd.EntityId);
             if (toModify == null)
                 return false;
 
-            toModify.Sprite.ImageId = cmd.ImageId;
+            var sprite = toModify.Components.OfType<SpriteComponent>().First();
+            sprite.ImageId = cmd.ImageId;
 
             return true;
         }
 
         private bool HandleSpriteOffCommand(object sender, SpriteOffCommand cmd)
         {
-            var toDeactivate = active.FirstOrDefault(item => item.EntityId == cmd.EntityId);
+            var toDeactivate = active.FirstOrDefault(item => item.Id == cmd.EntityId);
 
             if (toDeactivate != null)
             {

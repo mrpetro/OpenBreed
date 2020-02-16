@@ -8,6 +8,7 @@ using OpenTK.Audio.OpenAL;
 using OpenTK;
 using OpenBreed.Core.Modules.Audio.Builders;
 using OpenBreed.Core.Systems;
+using OpenBreed.Core.Entities;
 
 namespace OpenBreed.Core.Modules.Audio.Systems
 {
@@ -24,6 +25,16 @@ namespace OpenBreed.Core.Modules.Audio.Systems
         internal SoundSystem(SoundSystemBuilder builder) : base(builder.core)
         {
             components = new List<IAudioComponent>();
+        }
+
+        protected override void RegisterEntity(IEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void UnregisterEntity(IEntity entity)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion Public Constructors

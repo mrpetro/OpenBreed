@@ -78,6 +78,7 @@
     <Compile Include="Components\SpriteComponent.cs" />
     <Compile Include="Components\TileCell.cs" />
     <Compile Include="Components\TileComponent.cs" />
+    <Compile Include="Components\ViewportComponent.cs" />
     <Compile Include="Components\Wireframe.cs" />
     <Compile Include="Entities\Builders\CameraBuilder.cs" />
     <Compile Include="Helpers\Builders\FontAtlasBuilder.cs" />
@@ -89,7 +90,6 @@
     <Compile Include="Helpers\RenderTools.cs" />
     <Compile Include="Helpers\SpriteAtlas.cs" />
     <Compile Include="Helpers\StampMan.cs" />
-    <Compile Include="Helpers\SpritePack.cs" />
     <Compile Include="Helpers\Texture.cs" />
     <Compile Include="Helpers\TileAtlas.cs" />
     <Compile Include="Helpers\SpriteMan.cs" />
@@ -107,6 +107,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OpenGLModule.cs" />
     <Compile Include="Helpers\TextureMan.cs" />
+    <Compile Include="Systems\ViewportSystem.cs" />
     <Compile Include="Systems\WireframeSystem.cs" />
     <Compile Include="Systems\TextSystem.cs" />
     <Compile Include="Systems\SpriteSystem.cs" />

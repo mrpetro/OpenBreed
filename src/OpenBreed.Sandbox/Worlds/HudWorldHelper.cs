@@ -26,8 +26,8 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem(core.CreateMovementSystem().Build());
             builder.AddSystem(core.CreateAnimationSystem().Build());
 
-            //Audio
-            builder.AddSystem(core.CreateSoundSystem().Build());
+            ////Audio
+            //builder.AddSystem(core.CreateSoundSystem().Build());
 
             //Video
             builder.AddSystem(core.CreateTileSystem().SetGridSize(64, 64)
