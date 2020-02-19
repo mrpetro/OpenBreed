@@ -6,6 +6,7 @@ using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Helpers;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Physics.Systems;
+using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Systems.Control.Components;
@@ -113,6 +114,9 @@ namespace OpenBreed.Sandbox.Worlds
             gameWorld.AddEntity(actor);
 
             core.Rendering.Viewports.Add(gameViewport);
+
+
+            core.Entities.GetByTag("ScreenViewport").FirstOrDefault().GetComponent<ViewportComponent>().CameraEntityId = gameCamera.Id;
         }
 
         private static void OnEntityEntered(object sender, EventArgs e)

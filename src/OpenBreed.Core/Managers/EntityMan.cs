@@ -54,12 +54,10 @@ namespace OpenBreed.Core.Managers
 
         public IEntity GetById(int id)
         {
-            var entity = entities[id];
-
-            if (entities.TryGetValue(id, out entity))
+            if (entities.TryGetValue(id, out IEntity entity))
                 return entity;
             else
-                throw new InvalidOperationException($"Entity with Guid '{id}' not found.");
+                return null;
         }
 
         public void RegisterComponentBuilder(string componentName, Func<ICore, IComponentBuilder> newAction)

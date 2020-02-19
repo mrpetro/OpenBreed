@@ -16,7 +16,7 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class SpriteSystem : WorldSystem, ISpriteSystem, ICommandExecutor
+    public class SpriteSystem : WorldSystem, ICommandExecutor, ICameraSystem
     {
         #region Private Fields
 
@@ -67,16 +67,20 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             }
         }
 
+
         /// <summary>
-        /// This will draw all tiles to viewport given in the parameter
+        /// Render this system using given viewport component and time step
         /// </summary>
-        /// <param name="viewport">Viewport on which tiles will be drawn to</param>
-        public void Render(IViewport viewport, float dt)
+        /// <param name="viewport">Rendered viewport</param>
+        /// <param name="dt">Time step</param>
+        public void Render(IEntity viewport, float dt)
+        {
+
+        }
+
+        public void Render(float left, float bottom, float right, float top, float dt)
         {
             cmdHandler.ExecuteEnqueued();
-
-            float left, bottom, right, top;
-            viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
 
             //GL.Color4(1.0f, 1.0f, 1.0f, 1.0f);
             GL.Enable(EnableCap.Blend);
@@ -86,7 +90,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Enable(EnableCap.Texture2D);
 
             for (int i = 0; i < active.Count; i++)
-                DrawSprite(viewport, active[i]);
+                DrawSprite(active[i]);
 
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.AlphaTest);
@@ -94,10 +98,22 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         }
 
         /// <summary>
+        /// This will draw all tiles to viewport given in the parameter
+        /// </summary>
+        /// <param name="viewport">Viewport on which tiles will be drawn to</param>
+        public void Render(IViewport viewport, float dt)
+        {
+            float left, bottom, right, top;
+            viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
+
+            Render(left, bottom, right, top, dt);
+        }
+
+        /// <summary>
         /// Draw this sprite to given viewport
         /// </summary>
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
-        public void DrawSprite(IViewport viewport, IEntity entity)
+        public void DrawSprite(IEntity entity)
         {
             var pos = entity.GetComponent<Position>();
             var sprite = entity.GetComponent<SpriteComponent>();

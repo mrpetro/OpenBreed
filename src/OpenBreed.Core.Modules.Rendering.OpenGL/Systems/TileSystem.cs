@@ -21,7 +21,7 @@ using OpenBreed.Core.Systems;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TileSystem : WorldSystem, ITileSystem, ICommandExecutor
+    public class TileSystem : WorldSystem, ICommandExecutor, ICameraSystem
     {
         #region Public Fields
 
@@ -83,15 +83,17 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         }
 
         /// <summary>
-        /// This will draw all tiles to viewport given in the parameter
+        /// Render this system using given viewport component and time step
         /// </summary>
-        /// <param name="viewport">Viewport on which tiles will be drawn to</param>
-        public void Render(IViewport viewport, float dt)
+        /// <param name="viewport">Rendered viewport</param>
+        /// <param name="dt">Time step</param>
+        public void Render(IEntity viewport, float dt)
+        {
+        }
+
+        public void Render(float left, float bottom, float right, float top, float dt)
         {
             cmdHandler.ExecuteEnqueued();
-
-            float left, bottom, right, top;
-            viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
 
             int leftIndex = (int)left / TILE_SIZE;
             int bottomIndex = (int)bottom / TILE_SIZE;
@@ -120,6 +122,18 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             }
 
             GL.Disable(EnableCap.Texture2D);
+        }
+
+        /// <summary>
+        /// This will draw all tiles to viewport given in the parameter
+        /// </summary>
+        /// <param name="viewport">Viewport on which tiles will be drawn to</param>
+        public void Render(IViewport viewport, float dt)
+        {
+            float left, bottom, right, top;
+            viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
+
+            Render(left, bottom, right, top, dt);
         }
 
         public override bool ExecuteCommand(object sender, ICommand cmd)

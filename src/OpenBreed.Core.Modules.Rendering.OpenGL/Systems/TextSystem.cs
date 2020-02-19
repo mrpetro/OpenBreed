@@ -19,7 +19,7 @@ using OpenBreed.Core.Systems;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TextSystem : WorldSystem, ITextSystem, ICommandExecutor
+    public class TextSystem : WorldSystem, ICommandExecutor, ICameraSystem
     {
         #region Private Fields
 
@@ -50,15 +50,17 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         }
 
         /// <summary>
-        /// Draw all texts to viewport given in the parameter
+        /// Render this system using given viewport component and time step
         /// </summary>
-        /// <param name="viewport">Viewport on which sprites will be drawn to</param>
-        public void Render(IViewport viewport, float dt)
+        /// <param name="viewport">Rendered viewport</param>
+        /// <param name="dt">Time step</param>
+        public void Render(IEntity viewport, float dt)
+        {
+        }
+
+        public void Render(float left, float bottom, float right, float top, float dt)
         {
             cmdHandler.ExecuteEnqueued();
-
-            float left, bottom, right, top;
-            viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
 
             GL.Enable(EnableCap.Blend);
             GL.Enable(EnableCap.AlphaTest);
@@ -68,14 +70,26 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Enable(EnableCap.Texture2D);
 
             for (int i = 0; i < entities.Count; i++)
-                DrawText(viewport, entities[i]);
+                DrawText(entities[i]);
 
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.AlphaTest);
             GL.Disable(EnableCap.Blend);
         }
 
-        public void DrawText(IViewport viewport, IEntity entity)
+        /// <summary>
+        /// Draw all texts to viewport given in the parameter
+        /// </summary>
+        /// <param name="viewport">Viewport on which sprites will be drawn to</param>
+        public void Render(IViewport viewport, float dt)
+        {
+            float left, bottom, right, top;
+            viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
+
+            Render(left, bottom, right, top, dt);
+        }
+
+        public void DrawText(IEntity entity)
         {
             var pos = entity.GetComponent<Position>();
             var text = entity.GetComponent<TextComponent>();

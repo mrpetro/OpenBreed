@@ -5,6 +5,17 @@ namespace OpenBreed.Core.Modules.Rendering.Components
 {
     public class ViewportComponent : IEntityComponent
     {
+        #region Public Constructors
+
+        public ViewportComponent(float width, float height)
+        {
+            Width = width;
+            Height = height;
+            CameraEntityId = -1;
+        }
+
+        #endregion Public Constructors
+
         #region Public Properties
 
         /// <summary>
@@ -50,7 +61,7 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         /// <summary>
         /// Camera entity ID which view is being rendered to this viewport
         /// </summary>
-        public int CameraEntityId { get; }
+        public int CameraEntityId { get; set; }
 
         #endregion Public Properties
     }

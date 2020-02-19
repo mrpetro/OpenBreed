@@ -1,10 +1,15 @@
-﻿using OpenBreed.Core.Managers;
+﻿using OpenBreed.Core.Common;
+using OpenBreed.Core.Entities;
+using OpenBreed.Core.Extensions;
+using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
+using OpenBreed.Core.Systems;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System;
+using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering
 {
@@ -50,6 +55,10 @@ namespace OpenBreed.Core.Modules.Rendering
 
         public IViewportMan Viewports { get { return viewportMan; } }
 
+        public IEntity ScreenViewport {get; }
+
+        public World ScreenWorld { get; set; }
+
         public float Fps { get { return fps; } }
 
         #endregion Public Properties
@@ -77,7 +86,9 @@ namespace OpenBreed.Core.Modules.Rendering
 
             GL.Scale(Core.ClientRectangle.Width, Core.ClientRectangle.Height, 1.0f);
 
-            viewportMan.Draw(dt);
+            //viewportMan.Draw(dt);
+
+            ScreenWorld?.Systems.OfType<ViewportSystem>().First().Render(dt);
 
             DrawCursor();
 

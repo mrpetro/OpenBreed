@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Common.Systems;
+﻿using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Rendering.Components;
@@ -50,6 +51,11 @@ namespace OpenBreed.Core.Modules.Rendering
         /// Viewports manager
         /// </summary>
         IViewportMan Viewports { get; }
+
+        /// <summary>
+        /// World from which rendering will start
+        /// </summary>
+        World ScreenWorld { get; set; }
 
         #endregion Public Properties
 
