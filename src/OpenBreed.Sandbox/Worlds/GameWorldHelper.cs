@@ -9,6 +9,7 @@ using OpenBreed.Core.Modules.Physics.Systems;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
 using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems.Control.Components;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Teleport;
@@ -45,6 +46,7 @@ namespace OpenBreed.Sandbox.Worlds
             //builder.AddSystem(core.CreateSoundSystem().Build());
 
             //Video
+            builder.AddSystem(new ViewportSystem(core));
             builder.AddSystem(core.CreateTileSystem().SetGridSize(width, height)
                                                        .SetLayersNo(1)
                                                        .SetTileSize(16)
@@ -81,10 +83,11 @@ namespace OpenBreed.Sandbox.Worlds
             var gameCamera = cameraBuilder.Build();
             gameCamera.Add(new Animator(10.0f, false, -1, FrameTransition.LinearInterpolation));
 
-            gameWorld.AddEntity(gameCamera);
 
-            var gameViewport = (Viewport)core.Rendering.Viewports.Create(0.05f, 0.05f, 0.90f, 0.90f);
-            gameViewport.Camera = gameCamera;
+            var vp = ScreenWorldHelper.CreateViewportEntity(core, "TV", -64, 0, 128,128);
+            gameWorld.AddEntity(vp);
+
+            gameWorld.AddEntity(gameCamera);
 
             var actor = ActorHelper.CreateActor(core, new Vector2(128, 128));
             actor.Tag = gameCamera;
@@ -113,10 +116,9 @@ namespace OpenBreed.Sandbox.Worlds
             rotateFsm.SetInitialState("Idle");
             gameWorld.AddEntity(actor);
 
-            core.Rendering.Viewports.Add(gameViewport);
-
-
             core.Entities.GetByTag("ScreenViewport").FirstOrDefault().GetComponent<ViewportComponent>().CameraEntityId = gameCamera.Id;
+            core.Entities.GetByTag("TV").FirstOrDefault().GetComponent<ViewportComponent>().CameraEntityId = gameCamera.Id;
+       
         }
 
         private static void OnEntityEntered(object sender, EventArgs e)

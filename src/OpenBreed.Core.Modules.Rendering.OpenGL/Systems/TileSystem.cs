@@ -21,7 +21,7 @@ using OpenBreed.Core.Systems;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TileSystem : WorldSystem, ICommandExecutor, ICameraSystem
+    public class TileSystem : WorldSystem, ICommandExecutor, IRenderableSystem
     {
         #region Public Fields
 
@@ -82,23 +82,14 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             World.RegisterHandler(PutStampCommand.TYPE, cmdHandler);
         }
 
-        /// <summary>
-        /// Render this system using given viewport component and time step
-        /// </summary>
-        /// <param name="viewport">Rendered viewport</param>
-        /// <param name="dt">Time step</param>
-        public void Render(IEntity viewport, float dt)
-        {
-        }
-
-        public void Render(float left, float bottom, float right, float top, float dt)
+        public void Render(Box2 viewBox, ref int depth, float dt)
         {
             cmdHandler.ExecuteEnqueued();
 
-            int leftIndex = (int)left / TILE_SIZE;
-            int bottomIndex = (int)bottom / TILE_SIZE;
-            int rightIndex = (int)right / TILE_SIZE + 1;
-            int topIndex = (int)top / TILE_SIZE + 1;
+            int leftIndex = (int)viewBox.Left / TILE_SIZE;
+            int bottomIndex = (int)viewBox.Bottom / TILE_SIZE;
+            int rightIndex = (int)viewBox.Right / TILE_SIZE + 1;
+            int topIndex = (int)viewBox.Top / TILE_SIZE + 1;
 
             leftIndex = MathHelper.Clamp(leftIndex, 0, GridWidth);
             rightIndex = MathHelper.Clamp(rightIndex, 0, GridWidth);
@@ -116,24 +107,12 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                 {
                     for (int i = leftIndex; i < rightIndex; i++)
                     {
-                        DrawCellTiles(i, j, layerNo);
+                        RenderCellTiles(i, j, layerNo);
                     }
                 }
             }
 
             GL.Disable(EnableCap.Texture2D);
-        }
-
-        /// <summary>
-        /// This will draw all tiles to viewport given in the parameter
-        /// </summary>
-        /// <param name="viewport">Viewport on which tiles will be drawn to</param>
-        public void Render(IViewport viewport, float dt)
-        {
-            float left, bottom, right, top;
-            viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
-
-            Render(left, bottom, right, top, dt);
         }
 
         public override bool ExecuteCommand(object sender, ICommand cmd)
@@ -248,7 +227,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             return true;
         }
 
-        private void DrawCellTiles(int xIndex, int yIndex, int layerNo)
+        private void RenderCellTiles(int xIndex, int yIndex, int layerNo)
         {
             var index = layerNo * GridWidth * GridHeight + xIndex + GridWidth * yIndex;
 

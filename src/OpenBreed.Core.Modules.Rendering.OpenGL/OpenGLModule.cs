@@ -6,6 +6,7 @@ using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems;
+using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System;
@@ -23,7 +24,6 @@ namespace OpenBreed.Core.Modules.Rendering
         private float fps;
         private TextureMan textureMan;
         private TileMan tileMan;
-        private ViewportMan viewportMan;
 
         #endregion Private Fields
 
@@ -31,7 +31,6 @@ namespace OpenBreed.Core.Modules.Rendering
 
         public OpenGLModule(ICore core) : base(core)
         {
-            viewportMan = new ViewportMan(this);
             textureMan = new TextureMan(this);
             tileMan = new TileMan(this);
             spriteMan = new SpriteMan(this);
@@ -52,8 +51,6 @@ namespace OpenBreed.Core.Modules.Rendering
         public ITileMan Tiles { get { return tileMan; } }
 
         public IFontMan Fonts { get { return fontMan; } }
-
-        public IViewportMan Viewports { get { return viewportMan; } }
 
         public IEntity ScreenViewport {get; }
 
@@ -88,7 +85,10 @@ namespace OpenBreed.Core.Modules.Rendering
 
             //viewportMan.Draw(dt);
 
-            ScreenWorld?.Systems.OfType<ViewportSystem>().First().Render(dt);
+            var viewBox = Box2.FromTLRB(1.0f, 0.0f, 1.0f, 0.0f);
+            var depth = 0;
+
+            ScreenWorld?.Systems.OfType<ViewportSystem>().First().Render(viewBox, ref depth, dt);
 
             DrawCursor();
 
@@ -97,7 +97,6 @@ namespace OpenBreed.Core.Modules.Rendering
 
         public void Cleanup()
         {
-            viewportMan.Cleanup();
         }
 
         #endregion Public Methods

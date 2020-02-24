@@ -55,32 +55,32 @@ namespace OpenBreed.Sandbox.Worlds
 
         private static void Setup(World world)
         {
-            var hudViewport = (Viewport)world.Core.Rendering.Viewports.Create(0.0f, 0.0f, 1.0f, 1.0f, 100.0f);
-            world.Core.Rendering.Viewports.Add(hudViewport);
-            hudViewport.DrawBorder = true;
-            hudViewport.DrawBackgroud = false;
-            hudViewport.Clipping = false;
+            //var hudViewport = (Viewport)world.Core.Rendering.Viewports.Create(0.0f, 0.0f, 1.0f, 1.0f, 100.0f);
+            //world.Core.Rendering.Viewports.Add(hudViewport);
+            //hudViewport.DrawBorder = true;
+            //hudViewport.DrawBackgroud = false;
+            //hudViewport.Clipping = false;
 
-            var cameraBuilder = new CameraBuilder(world.Core);
-            cameraBuilder.SetPosition(new Vector2(0, 0));
-            cameraBuilder.SetRotation(0.0f);
-            cameraBuilder.SetZoom(1.0f);
-            var hudCamera = cameraBuilder.Build();
-            world.AddEntity(hudCamera);
-            hudViewport.Camera = hudCamera;
+            //var cameraBuilder = new CameraBuilder(world.Core);
+            //cameraBuilder.SetPosition(new Vector2(0, 0));
+            //cameraBuilder.SetRotation(0.0f);
+            //cameraBuilder.SetZoom(1.0f);
+            //var hudCamera = cameraBuilder.Build();
+            //world.AddEntity(hudCamera);
+            //hudViewport.Camera = hudCamera;
 
-            var cameraPos = hudCamera.TryGetComponent<Position>();
-            cameraPos.Value = hudViewport.ViewportToWorldPoint(new Vector2(1.0f, 1.0f));
+            //var cameraPos = hudCamera.TryGetComponent<Position>();
+            //cameraPos.Value = hudViewport.ViewportToWorldPoint(new Vector2(1.0f, 1.0f));
 
-            var arial12 = world.Core.Rendering.Fonts.Create("ARIAL", 9);
+            //var arial12 = world.Core.Rendering.Fonts.Create("ARIAL", 9);
 
-            var fpsTextEntity = world.Core.Entities.Create();
+            //var fpsTextEntity = world.Core.Entities.Create();
 
-            fpsTextEntity.Add(Position.Create(0, 0));
-            fpsTextEntity.Add(TextComponent.Create(arial12.Id, Vector2.Zero, "FPS: 0.0", 100.0f));
-            world.AddEntity(fpsTextEntity);
+            //fpsTextEntity.Add(Position.Create(0, 0));
+            //fpsTextEntity.Add(TextComponent.Create(arial12.Id, Vector2.Zero, "FPS: 0.0", 100.0f));
+            //world.AddEntity(fpsTextEntity);
 
-            world.Core.Jobs.Execute(new FpsTextUpdateJob(fpsTextEntity));
+            //world.Core.Jobs.Execute(new FpsTextUpdateJob(fpsTextEntity));
         }
 
         #endregion Private Methods

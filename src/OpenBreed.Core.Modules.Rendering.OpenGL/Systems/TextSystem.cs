@@ -1,34 +1,30 @@
-﻿using OpenBreed.Core.Common.Systems;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenBreed.Core.Modules.Rendering.Commands;
-using OpenBreed.Core.Modules.Animation.Systems;
-using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using OpenBreed.Core.Common.Systems.Components;
+﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
-
-using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Entities;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Modules.Physics.Builders;
+using OpenBreed.Core.Modules.Rendering.Commands;
+using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Systems;
+using OpenTK;
+using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TextSystem : WorldSystem, ICommandExecutor, ICameraSystem
+    public class TextSystem : WorldSystem, ICommandExecutor, IRenderableSystem
     {
         #region Private Fields
 
-        private CommandHandler cmdHandler;
         private readonly List<IEntity> entities = new List<IEntity>();
+        private CommandHandler cmdHandler;
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
         internal TextSystem(TextSystemBuilder builder) : base(builder.core)
         {
@@ -38,7 +34,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             Require<Position>();
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Methods
 
@@ -49,16 +45,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             World.RegisterHandler(TextSetCommand.TYPE, cmdHandler);
         }
 
-        /// <summary>
-        /// Render this system using given viewport component and time step
-        /// </summary>
-        /// <param name="viewport">Rendered viewport</param>
-        /// <param name="dt">Time step</param>
-        public void Render(IEntity viewport, float dt)
-        {
-        }
-
-        public void Render(float left, float bottom, float right, float top, float dt)
+        public void Render(Box2 viewBox, ref int depth, float dt)
         {
             cmdHandler.ExecuteEnqueued();
 
@@ -70,41 +57,11 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Enable(EnableCap.Texture2D);
 
             for (int i = 0; i < entities.Count; i++)
-                DrawText(entities[i]);
+                RenderText(entities[i]);
 
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.AlphaTest);
             GL.Disable(EnableCap.Blend);
-        }
-
-        /// <summary>
-        /// Draw all texts to viewport given in the parameter
-        /// </summary>
-        /// <param name="viewport">Viewport on which sprites will be drawn to</param>
-        public void Render(IViewport viewport, float dt)
-        {
-            float left, bottom, right, top;
-            viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
-
-            Render(left, bottom, right, top, dt);
-        }
-
-        public void DrawText(IEntity entity)
-        {
-            var pos = entity.GetComponent<Position>();
-            var text = entity.GetComponent<TextComponent>();
-
-            GL.Enable(EnableCap.Texture2D);
-            GL.PushMatrix();
-
-            GL.Translate(pos.Value.X, pos.Value.Y, text.Order);
-
-            GL.Translate(text.Offset.X, text.Offset.Y, 0.0f);
-
-            Core.Rendering.Fonts.GetById(text.FontId).Draw(text.Value);
-
-            GL.PopMatrix();
-            GL.Disable(EnableCap.Texture2D);
         }
 
         public override bool ExecuteCommand(object sender, ICommand cmd)
@@ -117,6 +74,11 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                 default:
                     return false;
             }
+        }
+
+        public bool EnqueueMsg(object sender, IEntityCommand msg)
+        {
+            return false;
         }
 
         #endregion Public Methods
@@ -137,6 +99,24 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Methods
 
+        private void RenderText(IEntity entity)
+        {
+            var pos = entity.GetComponent<Position>();
+            var text = entity.GetComponent<TextComponent>();
+
+            GL.Enable(EnableCap.Texture2D);
+            GL.PushMatrix();
+
+            GL.Translate(pos.Value.X, pos.Value.Y, text.Order);
+
+            GL.Translate(text.Offset.X, text.Offset.Y, 0.0f);
+
+            Core.Rendering.Fonts.GetById(text.FontId).Draw(text.Value);
+
+            GL.PopMatrix();
+            GL.Disable(EnableCap.Texture2D);
+        }
+
         private bool HandleTextSetCommand(object sender, TextSetCommand cmd)
         {
             var toModify = entities.FirstOrDefault(item => item.Id == cmd.EntityId);
@@ -147,11 +127,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             text.Value = cmd.Text;
 
             return true;
-        }
-
-        public bool EnqueueMsg(object sender, IEntityCommand msg)
-        {
-            return false;
         }
 
         #endregion Private Methods

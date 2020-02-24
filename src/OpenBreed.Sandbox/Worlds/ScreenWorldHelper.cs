@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenTK.Graphics;
@@ -18,9 +19,19 @@ namespace OpenBreed.Sandbox.Worlds
         {
             //Video
             builder.AddSystem(new ViewportSystem(core));
-            builder.AddSystem(core.CreateSpriteSystem().Build());
+            //builder.AddSystem(core.CreateSpriteSystem().Build());
             //builder.AddSystem(core.CreateWireframeSystem().Build());
-            builder.AddSystem(core.CreateTextSystem().Build());
+            //builder.AddSystem(core.CreateTextSystem().Build());
+        }
+
+        public static IEntity CreateViewportEntity(ICore core, string name, float x, float y, float width, float height)
+        {
+            var viewport = core.Entities.Create();
+            viewport.Tag = name;
+            viewport.Add(new ViewportComponent(width, height) { DrawBorder = true, DrawBackgroud = false, Clipping = true, BackgroundColor = Color4.Blue });
+            viewport.Add(Position.Create(x, y));
+
+            return viewport;
         }
 
         public static World CreateWorld(Program core)
@@ -30,10 +41,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             var world = builder.Build();
 
-            var viewport = core.Entities.Create();
-            viewport.Tag = "ScreenViewport";
-            viewport.Add(new ViewportComponent(0.9f, 0.9f) { DrawBorder = true, DrawBackgroud = false, Clipping = true, BackgroundColor = Color4.Blue });
-            viewport.Add(Position.Create(0.05f,0.05f));
+            var viewport = CreateViewportEntity(core, "ScreenViewport", 0.05f, 0.05f, 0.9f, 0.9f);
 
             world.AddEntity(viewport);
 

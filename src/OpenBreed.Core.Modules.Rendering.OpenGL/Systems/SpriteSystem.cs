@@ -1,22 +1,20 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Systems;
+using OpenTK;
 using OpenTK.Graphics.OpenGL;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class SpriteSystem : WorldSystem, ICommandExecutor, ICameraSystem
+    public class SpriteSystem : WorldSystem, ICommandExecutor, IRenderableSystem
     {
         #region Private Fields
 
@@ -26,7 +24,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
         internal SpriteSystem(SpriteSystemBuilder builder) : base(builder.core)
         {
@@ -36,7 +34,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             Require<Position>();
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Methods
 
@@ -67,18 +65,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             }
         }
 
-
-        /// <summary>
-        /// Render this system using given viewport component and time step
-        /// </summary>
-        /// <param name="viewport">Rendered viewport</param>
-        /// <param name="dt">Time step</param>
-        public void Render(IEntity viewport, float dt)
-        {
-
-        }
-
-        public void Render(float left, float bottom, float right, float top, float dt)
+        public void Render(Box2 viewBox, ref int depth, float dt)
         {
             cmdHandler.ExecuteEnqueued();
 
@@ -90,43 +77,11 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Enable(EnableCap.Texture2D);
 
             for (int i = 0; i < active.Count; i++)
-                DrawSprite(active[i]);
+                RenderSprite(active[i]);
 
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.AlphaTest);
             GL.Disable(EnableCap.Blend);
-        }
-
-        /// <summary>
-        /// This will draw all tiles to viewport given in the parameter
-        /// </summary>
-        /// <param name="viewport">Viewport on which tiles will be drawn to</param>
-        public void Render(IViewport viewport, float dt)
-        {
-            float left, bottom, right, top;
-            viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
-
-            Render(left, bottom, right, top, dt);
-        }
-
-        /// <summary>
-        /// Draw this sprite to given viewport
-        /// </summary>
-        /// <param name="viewport">Viewport which this sprite will be rendered to</param>
-        public void DrawSprite(IEntity entity)
-        {
-            var pos = entity.GetComponent<Position>();
-            var sprite = entity.GetComponent<SpriteComponent>();
-
-            GL.PushMatrix();
-
-            GL.Translate((int)pos.Value.X, (int)pos.Value.Y, sprite.Order);
-
-            var spriteAtlas = Core.Rendering.Sprites.GetById(sprite.AtlasId);
-            //GL.Translate(-spriteAtlas.SpriteWidth / 2, -spriteAtlas.SpriteHeight / 2, 0.0f);
-            spriteAtlas.Draw(sprite.ImageId);
-
-            GL.PopMatrix();
         }
 
         public bool EnqueueMsg(object sender, IEntityCommand msg)
@@ -151,6 +106,26 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         #endregion Protected Methods
 
         #region Private Methods
+
+        /// <summary>
+        /// Draw this sprite to given viewport
+        /// </summary>
+        /// <param name="viewport">Viewport which this sprite will be rendered to</param>
+        private void RenderSprite(IEntity entity)
+        {
+            var pos = entity.GetComponent<Position>();
+            var sprite = entity.GetComponent<SpriteComponent>();
+
+            GL.PushMatrix();
+
+            GL.Translate((int)pos.Value.X, (int)pos.Value.Y, sprite.Order);
+
+            var spriteAtlas = Core.Rendering.Sprites.GetById(sprite.AtlasId);
+            //GL.Translate(-spriteAtlas.SpriteWidth / 2, -spriteAtlas.SpriteHeight / 2, 0.0f);
+            spriteAtlas.Draw(sprite.ImageId);
+
+            GL.PopMatrix();
+        }
 
         private bool HandleSpriteOnCommand(object sender, SpriteOnCommand cmd)
         {
@@ -190,6 +165,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             return true;
         }
 
+        #endregion Private Methods
+
         ///// <summary>
         ///// Draw this sprite to given viewport
         ///// </summary>
@@ -214,7 +191,5 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         //        }
         //    }
         //}
-
-        #endregion Private Methods
     }
 }

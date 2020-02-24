@@ -48,11 +48,6 @@ namespace OpenBreed.Core.Modules.Rendering
         IFontMan Fonts { get; }
 
         /// <summary>
-        /// Viewports manager
-        /// </summary>
-        IViewportMan Viewports { get; }
-
-        /// <summary>
         /// World from which rendering will start
         /// </summary>
         World ScreenWorld { get; set; }

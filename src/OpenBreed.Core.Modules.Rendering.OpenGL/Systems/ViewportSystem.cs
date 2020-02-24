@@ -2,28 +2,23 @@
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Systems;
-using System;
+using OpenTK;
+using OpenTK.Graphics.OpenGL;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
-using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenTK;
-using OpenBreed.Core.Extensions;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
     public class ViewportSystem : WorldSystem, ICommandExecutor, IRenderableSystem
     {
+        #region Private Fields
+
         private const float ZOOM_BASE = 1.0f / 512.0f;
         private const float BRIGHTNESS_Z_LEVEL = 50.0f;
-
-        #region Private Fields
 
         private readonly List<IEntity> entities = new List<IEntity>();
         private CommandHandler cmdHandler;
@@ -44,17 +39,19 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Public Methods
 
+        public static void DrawUnitQuad()
+        {
+            GL.Begin(PrimitiveType.Polygon);
+            GL.Vertex3(0, 1.0f, 0);
+            GL.Vertex3(0, 0, 0);
+            GL.Vertex3(1.0f, 0, 0);
+            GL.Vertex3(1.0f, 1.0f, 0);
+            GL.End();
+        }
+
         public override void Initialize(World world)
         {
             base.Initialize(world);
-        }
-
-        /// <summary>
-        /// This will draw all tiles to viewport given in the parameter
-        /// </summary>
-        /// <param name="viewport">Viewport on which tiles will be drawn to</param>
-        public void Render(IViewport viewport, float dt)
-        {
         }
 
         /// <summary>
@@ -81,6 +78,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-pos.Value.X, -pos.Value.Y, 0.0f));
             transform = Matrix4.Mult(transform, Matrix4.CreateScale(cmc.Zoom, cmc.Zoom, 1.0f));
 
+            //TODO: Calculate proper viewport ratio
             var ratio = Core.ClientRatio * 1.0f;// Ratio;
             transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f, ratio, 1.0f));
             transform = Matrix4.Mult(transform, Matrix4.CreateScale(ZOOM_BASE, ZOOM_BASE, 1.0f));
@@ -89,21 +87,70 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             return transform;
         }
 
-        public void Render(float dt)
+        public void Render(Box2 viewBox, ref int depth, float dt)
         {
+            if (depth > 2)
+                return;
+
+            depth++;
+
             for (int i = 0; i < entities.Count; i++)
-                Render(entities[i], dt);
+                RenderViewport(entities[i], viewBox, ref depth, dt);
+        }
+
+        public bool EnqueueMsg(object sender, IEntityCommand msg)
+        {
+            return false;
+        }
+
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        protected override void RegisterEntity(IEntity entity)
+        {
+            entities.Add(entity);
+        }
+
+        protected override void UnregisterEntity(IEntity entity)
+        {
+            entities.Remove(entity);
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
+
+        private void GetVisibleRectangle(Matrix4 cameraT, out Box2 viewBox)
+        {
+            var pointLB = new Vector4(0.0f, 0.0f, 0.0f, 1.0f);
+            var pointRT = new Vector4(1.0f, 1.0f, 0.0f, 1.0f);
+            pointLB = Vector4.Transform(pointLB, cameraT);
+            pointRT = Vector4.Transform(pointRT, cameraT);
+            viewBox = Box2.FromTLRB(pointRT.Y, pointLB.X, pointRT.X, pointLB.Y);
         }
 
         /// <summary>
         /// Render this viewport content to the client
         /// </summary>
         /// <param name="dt">Time step</param>
-        public void Render(IEntity entity, float dt)
+        private void RenderViewport(IEntity entity, Box2 viewBox, ref int depth, float dt)
         {
             var vpc = entity.GetComponent<ViewportComponent>();
             var pos = entity.GetComponent<Position>();
 
+            //Test viewport for clippling here
+            if (pos.Value.X + vpc.Width < viewBox.Left)
+                return;
+
+            if (pos.Value.X > viewBox.Right)
+                return;
+
+            if (pos.Value.Y + vpc.Height < viewBox.Bottom)
+                return;
+
+            if (pos.Value.Y > viewBox.Top)
+                return;
 
             GL.PushMatrix();
 
@@ -111,21 +158,26 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             var transform = GetTransform(pos, vpc);
             GL.MultMatrix(ref transform);
 
+
+            //TODO: Fix clipping for viewport in viewport scenarios
             if (vpc.Clipping)
             {
                 //Clear stencil buffer before drawing in it
+
+                //if(depth == 0)
                 GL.Clear(ClearBufferMask.StencilBufferBit);
+
                 //Enable stencil buffer
                 GL.Enable(EnableCap.StencilTest);
 
-                GL.StencilFunc(StencilFunction.Equal, 0x1, 0x1);
+                GL.StencilFunc(StencilFunction.Equal, 0x01, 0x01);
                 GL.StencilOp(StencilOp.Replace, StencilOp.Replace, StencilOp.Replace);
                 //Draw rectangle shape which will clip anything inside viewport
                 GL.Color3(0.0f, 0.0f, 0.0f);
 
                 DrawUnitQuad();
 
-                GL.StencilFunc(StencilFunction.Equal, 0x1, 0x1);
+                GL.StencilFunc(StencilFunction.Equal, 0x01, 0x01);
                 GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Keep);
             }
 
@@ -134,8 +186,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
             var cameraEntity = Core.Entities.GetById(vpc.CameraEntityId);
 
-            if(cameraEntity != null)
-                DrawCameraView(dt, entity, cameraEntity);
+            if (cameraEntity != null)
+                DrawCameraView(depth, dt, entity, cameraEntity);
 
             if (vpc.Clipping)
             {
@@ -156,36 +208,11 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.PopMatrix();
         }
 
-        public Vector2 ViewportToWorldPoint(IEntity camera, Vector2 point)
-        {
-            var cameraT = GetCameraTransform(camera);
-            cameraT.Invert();
-            var pointLB = new Vector4(point.X, point.Y, 0.0f, 1.0f);
-            pointLB = Vector4.Transform(pointLB, cameraT);
-
-            return new Vector2(pointLB.X, pointLB.Y);
-        }
-
-        public void GetVisibleRectangle(IEntity camera, out float left, out float bottom, out float right, out float top)
-        {
-            var pointLB = new Vector2(0.0f, 0.0f);
-            var pointRT = new Vector2(1.0f, 1.0f);
-            pointLB = ViewportToWorldPoint(camera, pointLB);
-            pointRT = ViewportToWorldPoint(camera, pointRT);
-            //pointLB = Vector4.Transform(pointLB, transf);
-            //pointRT = Vector4.Transform(pointRT, transf);
-
-            left = pointLB.X;
-            bottom = pointLB.Y;
-            right = pointRT.X;
-            top = pointRT.Y;
-        }
-
         /// <summary>
         /// This will render world part currently visible by the camera into given viewport
         /// </summary>
         /// <param name="dt">Time step</param>
-        private void DrawCameraView(float dt, IEntity viewport, IEntity camera)
+        private void DrawCameraView(int depth, float dt, IEntity viewport, IEntity camera)
         {
             try
             {
@@ -195,10 +222,12 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                 var transform = GetCameraTransform(camera);
                 GL.MultMatrix(ref transform);
 
-                GetVisibleRectangle(camera, out float left, out float bottom, out float right, out float top);
+                var cameraT = transform.Inverted();
+
+                GetVisibleRectangle(cameraT, out Box2 viewBox);
 
                 if (camera.World != null)
-                    camera.World.Systems.OfType<ICameraSystem>().ForEach(item => item.Render(left,bottom, right, top, dt));
+                    camera.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(viewBox, ref depth, dt));
             }
             finally
             {
@@ -230,48 +259,12 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Disable(EnableCap.Blend);
         }
 
-        public static void DrawUnitQuad()
-        {
-            GL.Begin(PrimitiveType.Polygon);
-            GL.Vertex3(0, 1.0f, 0);
-            GL.Vertex3(0, 0, 0);
-            GL.Vertex3(1.0f, 0, 0);
-            GL.Vertex3(1.0f, 1.0f, 0);
-            GL.End();
-        }
-
         private void DrawBackground(ViewportComponent vpc)
         {
             //Draw background for this viewport
             GL.Color4(vpc.BackgroundColor);
             DrawUnitQuad();
         }
-
-        public bool EnqueueMsg(object sender, IEntityCommand msg)
-        {
-            return false;
-        }
-
-        #endregion Public Methods
-
-        #region Protected Methods
-
-        protected override void RegisterEntity(IEntity entity)
-        {
-            entities.Add(entity);
-        }
-
-        protected override void UnregisterEntity(IEntity entity)
-        {
-            entities.Remove(entity);
-        }
-
-        #endregion Protected Methods
-
-        #region Private Methods
-
-
-
 
         #endregion Private Methods
     }
