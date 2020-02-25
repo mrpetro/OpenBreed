@@ -34,6 +34,8 @@ O4 5 5 5 5 5 5 5 5 5 5 5 5 5 5}1 5 5 5 5 5 5 5 5 5 5 5 5 5{1 5O4
 O1O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O3
 MAP.EXITS 1
 1 HUB 1
+MAP.VIEWPORTS 0
+----------------------------------------------------------------
 O - Obstacle
 S - Spawn point
 D - Door (V - Vertical, H - Horizontal)

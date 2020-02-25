@@ -69,28 +69,33 @@ namespace OpenBreed.Sandbox.Worlds
         {
             World gameWorld = null;
 
-            using (var reader = new TxtFileWorldReader(core, ".\\Content\\Maps\\hub.txt"))
-                gameWorld = reader.GetWorld();
-
-            //GameWorld = GameWorldHelper.CreateGameWorld(Core, "DEMO6");
-
             var cameraBuilder = new CameraBuilder(core);
 
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
 
+            var playerCamera = cameraBuilder.Build();
+            playerCamera.Tag = "PlayerCamera";
+            playerCamera.Add(new Animator(10.0f, false, -1, FrameTransition.LinearInterpolation));
+
             var gameCamera = cameraBuilder.Build();
+            gameCamera.Tag = "HubCamera";
             gameCamera.Add(new Animator(10.0f, false, -1, FrameTransition.LinearInterpolation));
 
+            using (var reader = new TxtFileWorldReader(core, ".\\Content\\Maps\\hub.txt"))
+                gameWorld = reader.GetWorld();
 
-            var vp = ScreenWorldHelper.CreateViewportEntity(core, "TV", -64, 0, 128,128);
-            gameWorld.AddEntity(vp);
+            //GameWorld = GameWorldHelper.CreateGameWorld(Core, "DEMO6");
 
+
+
+
+            gameWorld.AddEntity(playerCamera);
             gameWorld.AddEntity(gameCamera);
 
             var actor = ActorHelper.CreateActor(core, new Vector2(128, 128));
-            actor.Tag = gameCamera;
+            actor.Tag = playerCamera;
 
             actor.Add(new WalkingControl());
             actor.Add(new AttackControl());
@@ -101,7 +106,7 @@ namespace OpenBreed.Sandbox.Worlds
             actor.Subscribe(CoreEventTypes.ENTITY_LEFT_WORLD, OnEntityLeftWorld);
 
 
-            core.Jobs.Execute(new CameraFollowJob(gameCamera, actor));
+            core.Jobs.Execute(new CameraFollowJob(playerCamera, actor));
 
             var player1 = core.Players.GetByName("P1");
             player1.AssumeControl(actor);
@@ -116,9 +121,7 @@ namespace OpenBreed.Sandbox.Worlds
             rotateFsm.SetInitialState("Idle");
             gameWorld.AddEntity(actor);
 
-            core.Entities.GetByTag("ScreenViewport").FirstOrDefault().GetComponent<ViewportComponent>().CameraEntityId = gameCamera.Id;
-            core.Entities.GetByTag("TV").FirstOrDefault().GetComponent<ViewportComponent>().CameraEntityId = gameCamera.Id;
-       
+            core.Entities.GetByTag("ScreenViewport").FirstOrDefault().GetComponent<ViewportComponent>().CameraEntityId = playerCamera.Id;  
         }
 
         private static void OnEntityEntered(object sender, EventArgs e)

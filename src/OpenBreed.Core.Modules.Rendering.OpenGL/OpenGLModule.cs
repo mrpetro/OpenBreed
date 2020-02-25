@@ -83,8 +83,6 @@ namespace OpenBreed.Core.Modules.Rendering
 
             GL.Scale(Core.ClientRectangle.Width, Core.ClientRectangle.Height, 1.0f);
 
-            //viewportMan.Draw(dt);
-
             var viewBox = Box2.FromTLRB(1.0f, 0.0f, 1.0f, 0.0f);
             var depth = 0;
 

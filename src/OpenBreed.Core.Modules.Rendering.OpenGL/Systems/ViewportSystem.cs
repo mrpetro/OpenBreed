@@ -17,6 +17,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
     {
         #region Private Fields
 
+        private const int RENDER_MAX_DEPTH = 3;
         private const float ZOOM_BASE = 1.0f / 512.0f;
         private const float BRIGHTNESS_Z_LEVEL = 50.0f;
 
@@ -89,7 +90,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         public void Render(Box2 viewBox, ref int depth, float dt)
         {
-            if (depth > 2)
+            if (depth > RENDER_MAX_DEPTH)
                 return;
 
             depth++;
