@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Rendering.Components.Builders;
+using OpenBreed.Core.Modules.Rendering.Helpers;
 
-namespace OpenBreed.Core.Modules.Rendering.Helpers
+namespace OpenBreed.Core.Modules.Rendering.Managers
 {
     internal class TileMan : ITileMan
     {

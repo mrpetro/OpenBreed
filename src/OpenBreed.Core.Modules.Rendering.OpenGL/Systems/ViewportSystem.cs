@@ -70,7 +70,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// This will return camera tranformation matrix which includes aspect ratio correction
         /// </summary>
         /// <returns>Camera transformation matrix</returns>
-        public Matrix4 GetCameraTransform(IEntity camera)
+        public Matrix4 GetCameraTransform(float ratio, IEntity camera)
         {
             var pos = camera.GetComponent<Position>();
             var cmc = camera.GetComponent<CameraComponent>();
@@ -79,8 +79,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-pos.Value.X, -pos.Value.Y, 0.0f));
             transform = Matrix4.Mult(transform, Matrix4.CreateScale(cmc.Zoom, cmc.Zoom, 1.0f));
 
-            //TODO: Calculate proper viewport ratio
-            var ratio = Core.ClientRatio * 1.0f;// Ratio;
             transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f, ratio, 1.0f));
             transform = Matrix4.Mult(transform, Matrix4.CreateScale(ZOOM_BASE, ZOOM_BASE, 1.0f));
             transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(0.5f, 0.5f, 0.0f));
@@ -88,7 +86,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             return transform;
         }
 
-        public void Render(Box2 viewBox, ref int depth, float dt)
+        public void Render(Box2 viewBox, int depth, float dt)
         {
             if (depth > RENDER_MAX_DEPTH)
                 return;
@@ -96,7 +94,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             depth++;
 
             for (int i = 0; i < entities.Count; i++)
-                RenderViewport(entities[i], viewBox, ref depth, dt);
+                RenderViewport(entities[i], viewBox, depth, dt);
         }
 
         public bool EnqueueMsg(object sender, IEntityCommand msg)
@@ -135,22 +133,22 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// Render this viewport content to the client
         /// </summary>
         /// <param name="dt">Time step</param>
-        private void RenderViewport(IEntity entity, Box2 viewBox, ref int depth, float dt)
+        private void RenderViewport(IEntity vpe, Box2 clipBox, int depth, float dt)
         {
-            var vpc = entity.GetComponent<ViewportComponent>();
-            var pos = entity.GetComponent<Position>();
+            var vpc = vpe.GetComponent<ViewportComponent>();
+            var pos = vpe.GetComponent<Position>();
 
             //Test viewport for clippling here
-            if (pos.Value.X + vpc.Width < viewBox.Left)
+            if (pos.Value.X + vpc.Width < clipBox.Left)
                 return;
 
-            if (pos.Value.X > viewBox.Right)
+            if (pos.Value.X > clipBox.Right)
                 return;
 
-            if (pos.Value.Y + vpc.Height < viewBox.Bottom)
+            if (pos.Value.Y + vpc.Height < clipBox.Bottom)
                 return;
 
-            if (pos.Value.Y > viewBox.Top)
+            if (pos.Value.Y > clipBox.Top)
                 return;
 
             GL.PushMatrix();
@@ -164,8 +162,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             if (vpc.Clipping)
             {
                 //Clear stencil buffer before drawing in it
-
-                //if(depth == 0)
                 GL.Clear(ClearBufferMask.StencilBufferBit);
 
                 //Enable stencil buffer
@@ -188,7 +184,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             var cameraEntity = Core.Entities.GetById(vpc.CameraEntityId);
 
             if (cameraEntity != null)
-                DrawCameraView(depth, dt, entity, cameraEntity);
+                DrawCameraView(depth, dt, vpc, cameraEntity);
 
             if (vpc.Clipping)
             {
@@ -213,22 +209,23 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// This will render world part currently visible by the camera into given viewport
         /// </summary>
         /// <param name="dt">Time step</param>
-        private void DrawCameraView(int depth, float dt, IEntity viewport, IEntity camera)
+        private void DrawCameraView(int depth, float dt, ViewportComponent vpc, IEntity camera)
         {
             try
             {
                 GL.PushMatrix();
 
                 //Apply camera transformation matrix
-                var transform = GetCameraTransform(camera);
+                var transform = GetCameraTransform(vpc.Ratio, camera);
+
                 GL.MultMatrix(ref transform);
 
                 var cameraT = transform.Inverted();
 
-                GetVisibleRectangle(cameraT, out Box2 viewBox);
+                GetVisibleRectangle(cameraT, out Box2 clipBox);
 
                 if (camera.World != null)
-                    camera.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(viewBox, ref depth, dt));
+                    camera.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(clipBox, depth, dt));
             }
             finally
             {

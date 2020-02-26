@@ -139,7 +139,6 @@
     <Compile Include="Modules\Audio\Helpers\ISound.cs" />
     <Compile Include="Managers\ISoundMan.cs" />
     <Compile Include="Modules\Rendering\Components\Builders\IStampBuilder.cs" />
-    <Compile Include="Modules\Rendering\Components\IWireframe.cs" />
     <Compile Include="Managers\IFontMan.cs" />
     <Compile Include="Managers\ISpriteMan.cs" />
     <Compile Include="Managers\IStampMan.cs" />

@@ -56,17 +56,11 @@ namespace OpenBreed.Core.Modules.Rendering
 
         #region Public Methods
 
-        /// <summary>
-        /// Create wireframe render component
-        /// </summary>
-        /// <param name="thickness">Thickness of wireframe lines</param>
-        /// <param name="color">Color of wireframe lines</param>
-        /// <returns></returns>
-        IWireframe CreateWireframe(float thickness, Color4 color);
-
         void Cleanup();
 
         void Draw(float dt);
+
+        void OnResize();
 
         #endregion Public Methods
     }

@@ -1,10 +1,11 @@
 ﻿using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Rendering.Components.Builders;
+using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Helpers.Builders;
 using System;
 using System.Collections.Generic;
 
-namespace OpenBreed.Core.Modules.Rendering.Helpers
+namespace OpenBreed.Core.Modules.Rendering.Managers
 {
     internal class StampMan : IStampMan
     {

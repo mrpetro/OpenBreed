@@ -41,7 +41,8 @@ namespace OpenBreed.Sandbox.Worlds
 
             var world = builder.Build();
 
-            var viewport = CreateViewportEntity(core, "ScreenViewport", 0.05f, 0.05f, 0.9f, 0.9f);
+            //var viewport = CreateViewportEntity(core, "ScreenViewport", 0.05f, 0.05f, 0.9f, 0.9f);
+            var viewport = CreateViewportEntity(core, "ScreenViewport", 0, 0, core.ClientRectangle.Width, core.ClientRectangle.Height);
 
             world.AddEntity(viewport);
 

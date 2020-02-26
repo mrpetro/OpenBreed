@@ -1,4 +1,5 @@
-﻿using OpenTK;
+﻿using OpenBreed.Core.Modules.Rendering.Managers;
+using OpenTK;
 using System.Collections.Generic;
 
 namespace OpenBreed.Core.Modules.Rendering.Helpers

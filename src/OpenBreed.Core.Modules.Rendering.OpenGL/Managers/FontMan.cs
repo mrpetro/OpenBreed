@@ -1,7 +1,8 @@
 ﻿using OpenBreed.Core.Managers;
+using OpenBreed.Core.Modules.Rendering.Helpers;
 using System.Collections.Generic;
 
-namespace OpenBreed.Core.Modules.Rendering.Helpers
+namespace OpenBreed.Core.Modules.Rendering.Managers
 {
     internal class FontMan : IFontMan
     {

@@ -82,7 +82,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             World.RegisterHandler(PutStampCommand.TYPE, cmdHandler);
         }
 
-        public void Render(Box2 viewBox, ref int depth, float dt)
+        public void Render(Box2 viewBox, int depth, float dt)
         {
             cmdHandler.ExecuteEnqueued();
 

@@ -9,7 +9,7 @@ namespace OpenBreed.Core.Systems
     {
         #region Public Methods
 
-        void Render(Box2 viewBox, ref int depth, float dt);
+        void Render(Box2 viewBox, int depth, float dt);
 
         #endregion Public Methods
     }

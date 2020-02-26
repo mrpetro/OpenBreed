@@ -4,6 +4,7 @@ using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.Modules.Rendering.Managers;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems;
 using OpenTK;
@@ -52,8 +53,6 @@ namespace OpenBreed.Core.Modules.Rendering
 
         public IFontMan Fonts { get { return fontMan; } }
 
-        public IEntity ScreenViewport {get; }
-
         public World ScreenWorld { get; set; }
 
         public float Fps { get { return fps; } }
@@ -62,16 +61,7 @@ namespace OpenBreed.Core.Modules.Rendering
 
         #region Public Methods
 
-        /// <summary>
-        /// Create wireframe render component
-        /// </summary>
-        /// <param name="thickness">Thickness of wireframe lines</param>
-        /// <param name="color">Color of wireframe lines</param>
-        /// <returns></returns>
-        public IWireframe CreateWireframe(float thickness, Color4 color)
-        {
-            return new Wireframe(thickness, color);
-        }
+        private Box2 clipBox;
 
         public void Draw(float dt)
         {
@@ -81,12 +71,11 @@ namespace OpenBreed.Core.Modules.Rendering
 
             GL.PushMatrix();
 
-            GL.Scale(Core.ClientRectangle.Width, Core.ClientRectangle.Height, 1.0f);
+            var clipBox = Box2.FromTLRB(Core.ClientRectangle.Width, 0.0f, Core.ClientRectangle.Height, 0.0f);
 
-            var viewBox = Box2.FromTLRB(1.0f, 0.0f, 1.0f, 0.0f);
             var depth = 0;
 
-            ScreenWorld?.Systems.OfType<ViewportSystem>().First().Render(viewBox, ref depth, dt);
+            ScreenWorld?.Systems.OfType<ViewportSystem>().FirstOrDefault()?.Render(clipBox, depth, dt);
 
             DrawCursor();
 
@@ -115,6 +104,11 @@ namespace OpenBreed.Core.Modules.Rendering
             GL.End();
 
             GL.PopMatrix();
+        }
+
+        public void OnResize()
+        {
+
         }
 
         #endregion Private Methods

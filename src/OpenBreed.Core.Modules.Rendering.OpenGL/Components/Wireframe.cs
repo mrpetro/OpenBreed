@@ -1,11 +1,12 @@
-﻿using OpenTK.Graphics;
+﻿using OpenBreed.Core.Common.Systems.Components;
+using OpenTK.Graphics;
 
 namespace OpenBreed.Core.Modules.Rendering.Components
 {
     /// <summary>
     /// Wireframe render component implementation
     /// </summary>
-    internal class Wireframe : IWireframe
+    internal class Wireframe : IEntityComponent
     {
         #region Internal Constructors
 
