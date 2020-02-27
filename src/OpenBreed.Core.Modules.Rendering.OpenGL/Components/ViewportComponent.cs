@@ -3,15 +3,20 @@ using OpenTK.Graphics;
 
 namespace OpenBreed.Core.Modules.Rendering.Components
 {
+    /// <summary>
+    /// Viewport component as display for cameras
+    /// Related systems:
+    /// - ViewportSystem
+    /// </summary>
     public class ViewportComponent : IEntityComponent
     {
         #region Public Constructors
 
-        public ViewportComponent(float width, float height)
+        public ViewportComponent(float width, float height, int cameraEntityId = -1)
         {
             Width = width;
             Height = height;
-            CameraEntityId = -1;
+            CameraEntityId = cameraEntityId;
         }
 
         #endregion Public Constructors
@@ -59,10 +64,26 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         public float Ratio { get { return Width / Height; } }
 
         /// <summary>
-        /// Camera entity ID which view is being rendered to this viewport
+        /// Camera entity ID which FOV(Field of view) is being rendered to this viewport
         /// </summary>
         public int CameraEntityId { get; set; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        /// <summary>
+        /// Create viewport component for viewport system
+        /// </summary>
+        /// <param name="width">Initial width of viewport</param>
+        /// <param name="height">Initial height of viewport</param>
+        /// <param name="cameraEntityId">Initial camera entity ID</param>
+        /// <returns></returns>
+        public static ViewportComponent Create(float width, float height, int cameraEntityId = -1)
+        {
+            return new ViewportComponent(width, height, cameraEntityId);
+        }
+
+        #endregion Public Methods
     }
 }

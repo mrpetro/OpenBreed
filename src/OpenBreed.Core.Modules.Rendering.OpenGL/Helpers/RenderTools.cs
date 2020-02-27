@@ -66,6 +66,16 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             GL.End();
         }
 
+        public static void DrawUnitQuad()
+        {
+            GL.Begin(PrimitiveType.Polygon);
+            GL.Vertex3(0, 1.0f, 0);
+            GL.Vertex3(0, 0, 0);
+            GL.Vertex3(1.0f, 0, 0);
+            GL.Vertex3(1.0f, 1.0f, 0);
+            GL.End();
+        }
+
         public static void DrawBox(Box2 box, Color4 color)
         {
             GL.Begin(PrimitiveType.LineLoop);

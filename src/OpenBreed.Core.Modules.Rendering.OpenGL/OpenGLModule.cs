@@ -22,8 +22,6 @@ namespace OpenBreed.Core.Modules.Rendering
         private TextureMan textureMan;
         private TileMan tileMan;
 
-        private Box2 clipBox;
-
         #endregion Private Fields
 
         #region Public Constructors

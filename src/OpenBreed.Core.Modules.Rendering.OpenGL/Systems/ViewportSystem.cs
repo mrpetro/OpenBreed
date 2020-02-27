@@ -5,6 +5,7 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Systems;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
@@ -13,6 +14,13 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
+    /// <summary>
+    /// Viewport system for rendering cameras FOV (Field of view) in viewports
+    /// Related components:
+    /// - ViewportComponent
+    /// - CameraComponent
+    /// - Position
+    /// </summary>
     public class ViewportSystem : WorldSystem, ICommandExecutor, IRenderableSystem
     {
         #region Private Fields
@@ -39,16 +47,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         #endregion Public Constructors
 
         #region Public Methods
-
-        public static void DrawUnitQuad()
-        {
-            GL.Begin(PrimitiveType.Polygon);
-            GL.Vertex3(0, 1.0f, 0);
-            GL.Vertex3(0, 0, 0);
-            GL.Vertex3(1.0f, 0, 0);
-            GL.Vertex3(1.0f, 1.0f, 0);
-            GL.End();
-        }
 
         public override void Initialize(World world)
         {
@@ -157,7 +155,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             var transform = GetTransform(pos, vpc);
             GL.MultMatrix(ref transform);
 
-
             //TODO: Fix clipping for viewport in viewport scenarios
             if (vpc.Clipping)
             {
@@ -172,7 +169,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                 //Draw rectangle shape which will clip anything inside viewport
                 GL.Color3(0.0f, 0.0f, 0.0f);
 
-                DrawUnitQuad();
+                RenderTools.DrawUnitQuad();
 
                 GL.StencilFunc(StencilFunction.Equal, 0x01, 0x01);
                 GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Keep);
@@ -253,7 +250,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             }
 
             GL.Translate(0, 0, BRIGHTNESS_Z_LEVEL);
-            DrawUnitQuad();
+            RenderTools.DrawUnitQuad();
             GL.Disable(EnableCap.Blend);
         }
 
@@ -261,7 +258,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             //Draw background for this viewport
             GL.Color4(vpc.BackgroundColor);
-            DrawUnitQuad();
+            RenderTools.DrawUnitQuad();
         }
 
         #endregion Private Methods
