@@ -6,6 +6,7 @@ using OpenBreed.Core.Modules.Rendering.Managers;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
+using System;
 using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering
@@ -85,6 +86,7 @@ namespace OpenBreed.Core.Modules.Rendering
         {
             Core.Events.Raise(this, GfxEventTypes.CLIENT_RESIZED, new ClientResizedEventArgs(width, height));
         }
+
 
         #endregion Public Methods
 

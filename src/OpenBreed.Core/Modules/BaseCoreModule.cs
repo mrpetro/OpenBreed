@@ -21,5 +21,14 @@ namespace OpenBreed.Core.Modules
         public ICore Core { get; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public void Subscribe(string eventType, Action<object, EventArgs> callback)
+        {
+            Core.Events.Subscribe(this, eventType, callback);
+        }
+
+        #endregion Public Methods
     }
 }

@@ -46,7 +46,7 @@ namespace OpenBreed.Sandbox.Worlds
             //var viewport = CreateViewportEntity(core, "ScreenViewport", 0.05f, 0.05f, 0.9f, 0.9f);
             var viewport = CreateViewportEntity(core, "ScreenViewport", 0, 0, core.ClientRectangle.Width, core.ClientRectangle.Height);
 
-            viewport.Subscribe(GfxEventTypes.CLIENT_RESIZED, (s,a) => OnClientResized(viewport, (ClientResizedEventArgs)a));
+            core.Rendering.Subscribe(GfxEventTypes.CLIENT_RESIZED, (s,a) => OnClientResized(viewport, (ClientResizedEventArgs)a));
 
             world.AddEntity(viewport);
 
