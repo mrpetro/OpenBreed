@@ -2,7 +2,9 @@
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Core.Modules.Rendering.Events;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenTK.Graphics;
 using System;
@@ -44,9 +46,19 @@ namespace OpenBreed.Sandbox.Worlds
             //var viewport = CreateViewportEntity(core, "ScreenViewport", 0.05f, 0.05f, 0.9f, 0.9f);
             var viewport = CreateViewportEntity(core, "ScreenViewport", 0, 0, core.ClientRectangle.Width, core.ClientRectangle.Height);
 
+            viewport.Subscribe(GfxEventTypes.CLIENT_RESIZED, (s,a) => OnClientResized(viewport, (ClientResizedEventArgs)a));
+
             world.AddEntity(viewport);
 
             return world;
         }
+
+        private static void OnClientResized(IEntity viewport, ClientResizedEventArgs args)
+        {
+            var vpc = viewport.GetComponent<ViewportComponent>();
+            vpc.Width = args.Width;
+            vpc.Height = args.Height;
+        }
+
     }
 }

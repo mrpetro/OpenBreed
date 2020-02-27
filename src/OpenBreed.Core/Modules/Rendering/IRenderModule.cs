@@ -60,7 +60,7 @@ namespace OpenBreed.Core.Modules.Rendering
 
         void Draw(float dt);
 
-        void OnResize();
+        void OnResize(float width, float height);
 
         #endregion Public Methods
     }

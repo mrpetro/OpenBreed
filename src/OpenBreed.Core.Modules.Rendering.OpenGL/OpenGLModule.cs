@@ -1,16 +1,11 @@
 ﻿using OpenBreed.Core.Common;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Managers;
-using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.Modules.Physics.Events;
+using OpenBreed.Core.Modules.Rendering.Events;
 using OpenBreed.Core.Modules.Rendering.Managers;
 using OpenBreed.Core.Modules.Rendering.Systems;
-using OpenBreed.Core.Systems;
 using OpenTK;
-using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
-using System;
 using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering
@@ -25,6 +20,8 @@ namespace OpenBreed.Core.Modules.Rendering
         private float fps;
         private TextureMan textureMan;
         private TileMan tileMan;
+
+        private Box2 clipBox;
 
         #endregion Private Fields
 
@@ -61,8 +58,6 @@ namespace OpenBreed.Core.Modules.Rendering
 
         #region Public Methods
 
-        private Box2 clipBox;
-
         public void Draw(float dt)
         {
             fps = 1.0f / dt;
@@ -86,6 +81,11 @@ namespace OpenBreed.Core.Modules.Rendering
         {
         }
 
+        public void OnResize(float width, float height)
+        {
+            Core.Events.Raise(this, GfxEventTypes.CLIENT_RESIZED, new ClientResizedEventArgs(width, height));
+        }
+
         #endregion Public Methods
 
         #region Private Methods
@@ -104,11 +104,6 @@ namespace OpenBreed.Core.Modules.Rendering
             GL.End();
 
             GL.PopMatrix();
-        }
-
-        public void OnResize()
-        {
-
         }
 
         #endregion Private Methods
