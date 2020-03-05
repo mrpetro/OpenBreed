@@ -43,15 +43,15 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         public void Execute()
         {
-            var posCmp = entity.Components.OfType<Position>().First();
+            var posCmp = entity.GetComponent<Position>();
             posCmp.Value = newPosition;
 
             if (cancelMovement)
             {
-                var velocityCmp = entity.Components.OfType<Velocity>().First();
+                var velocityCmp = entity.GetComponent<Velocity>();
                 velocityCmp.Value = Vector2.Zero;
 
-                var thrustCmp = entity.Components.OfType<Thrust>().First();
+                var thrustCmp = entity.GetComponent<Thrust>();
                 thrustCmp.Value = Vector2.Zero;
             }
 

@@ -1,4 +1,4 @@
-﻿namespace OpenBreed.Core.Modules.Rendering.Components
+﻿namespace OpenBreed.Core.Modules.Rendering.Helpers
 {
     /// <summary>
     /// Tile system cell data

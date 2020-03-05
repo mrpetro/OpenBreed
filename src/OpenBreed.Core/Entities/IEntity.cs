@@ -37,6 +37,20 @@ namespace OpenBreed.Core.Entities
         World World { get; }
 
         /// <summary>
+        /// Gets component of specific type if it exists
+        /// </summary>
+        /// <typeparam name="T">Type of component to get</typeparam>
+        /// <returns>Entity component if exists, null if not</returns>
+        T TryGetComponent<T>();
+
+        /// <summary>
+        /// Gets component of specific type
+        /// </summary>
+        /// <typeparam name="T">Type of component to get </typeparam>
+        /// <returns>Entity component if exists, throws exception if not</returns>
+        T GetComponent<T>();
+
+        /// <summary>
         /// Read-olny list of components for this entity
         /// </summary>
         ReadOnlyCollection<IEntityComponent> Components { get; }
@@ -61,14 +75,6 @@ namespace OpenBreed.Core.Entities
         #region Public Methods
 
         StateMachine AddFSM(string name);
-
-        /// <summary>
-        /// This will run script with specifc name,
-        /// </summary>
-        /// <param name="name">Name of the script</param>
-        /// <param name="args">script arguments</param>
-        /// <returns></returns>
-        bool RunScript(string name, params object[] args);
 
         /// <summary>
         /// Post command of specific type

@@ -104,10 +104,10 @@ namespace OpenBreed.Sandbox.Jobs
             if (entryEntity == null)
                 throw new Exception($"No entry with id '{pair.Id}' found.");
 
-            var entryPos = entryEntity.Components.OfType<Position>().First();
-            var entryAabb = entryEntity.Components.OfType<BodyComponent>().First().Aabb;
-            //var entityAabb = entity.Components.OfType<IShapeComponent>().First().Aabb;
-            var entityPos = entity.Components.OfType<Position>().First();
+            var entryPos = entryEntity.GetComponent<Position>();
+            var entryAabb = entryEntity.GetComponent<BodyComponent>().Aabb;
+            //var entityAabb = entity.GetComponent<IShapeComponent>().First().Aabb;
+            var entityPos = entity.GetComponent<Position>();
 
             //var offset = new Vector2((32 - entityAabb.Width) / 2.0f, (32 - entityAabb.Height) / 2.0f);
 

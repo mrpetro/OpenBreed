@@ -47,7 +47,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         public void EnterState()
         {
-            var direction = Entity.Components.OfType<Direction>().First().Value;
+            var direction = Entity.GetComponent<Direction>().Value;
 
             var animDirName = AnimHelper.ToDirectionName(direction);
 
@@ -62,7 +62,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
         public void Initialize(IEntity entity)
         {
             Entity = entity;
-            thrust = entity.Components.OfType<Thrust>().First();
+            thrust = entity.GetComponent<Thrust>();
         }
 
         public void LeaveState()

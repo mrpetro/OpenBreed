@@ -43,6 +43,9 @@ namespace OpenBreed.Core.Collections
         {
             get
             {
+                if (id == -1)
+                    return default(T);
+
                 return items[id];
             }
         }

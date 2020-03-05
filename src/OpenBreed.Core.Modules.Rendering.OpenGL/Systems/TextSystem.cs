@@ -1,36 +1,30 @@
-﻿using OpenBreed.Core.Common.Systems;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenBreed.Core.Modules.Rendering.Commands;
-using OpenBreed.Core.Modules.Animation.Systems;
-using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using OpenBreed.Core.Common.Systems.Components;
+﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
-
-using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Entities;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Modules.Physics.Builders;
+using OpenBreed.Core.Modules.Rendering.Commands;
+using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Systems;
+using OpenTK;
+using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TextSystem : WorldSystem, ITextSystem, ICommandExecutor
+    public class TextSystem : WorldSystem, ICommandExecutor, IRenderableSystem
     {
         #region Private Fields
 
+        private readonly List<IEntity> entities = new List<IEntity>();
         private CommandHandler cmdHandler;
-        private readonly List<int> entities = new List<int>();
-        private readonly List<TextComponent> textComps = new List<TextComponent>();
-        private readonly List<Position> positionComps = new List<Position>();
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
         internal TextSystem(TextSystemBuilder builder) : base(builder.core)
         {
@@ -40,7 +34,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             Require<Position>();
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Methods
 
@@ -51,16 +45,9 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             World.RegisterHandler(TextSetCommand.TYPE, cmdHandler);
         }
 
-        /// <summary>
-        /// Draw all texts to viewport given in the parameter
-        /// </summary>
-        /// <param name="viewport">Viewport on which sprites will be drawn to</param>
-        public void Render(IViewport viewport, float dt)
+        public void Render(Box2 viewBox, int depth, float dt)
         {
             cmdHandler.ExecuteEnqueued();
-
-            float left, bottom, right, top;
-            viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
 
             GL.Enable(EnableCap.Blend);
             GL.Enable(EnableCap.AlphaTest);
@@ -70,29 +57,11 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Enable(EnableCap.Texture2D);
 
             for (int i = 0; i < entities.Count; i++)
-                DrawEntityText(viewport, i);
+                RenderText(entities[i]);
 
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.AlphaTest);
             GL.Disable(EnableCap.Blend);
-        }
-
-        public void DrawEntityText(IViewport viewport, int index)
-        {
-            var text = textComps[index];
-            var position = positionComps[index];
-
-            GL.Enable(EnableCap.Texture2D);
-            GL.PushMatrix();
-
-            GL.Translate(position.Value.X, position.Value.Y, text.Order);
-
-            GL.Translate(text.Offset.X, text.Offset.Y, 0.0f);
-
-            Core.Rendering.Fonts.GetById(text.FontId).Draw(text.Value);
-
-            GL.PopMatrix();
-            GL.Disable(EnableCap.Texture2D);
         }
 
         public override bool ExecuteCommand(object sender, ICommand cmd)
@@ -107,49 +76,57 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             }
         }
 
+        public bool EnqueueMsg(object sender, IEntityCommand msg)
+        {
+            return false;
+        }
+
         #endregion Public Methods
 
         #region Protected Methods
 
         protected override void RegisterEntity(IEntity entity)
         {
-            entities.Add(entity.Id);
-            textComps.Add(entity.Components.OfType<TextComponent>().First());
-            positionComps.Add(entity.Components.OfType<Position>().First());
+            entities.Add(entity);
         }
 
         protected override void UnregisterEntity(IEntity entity)
         {
-            var index = entities.IndexOf(entity.Id);
-
-            if (index < 0)
-                throw new InvalidOperationException("Entity not found in this system.");
-
-            entities.RemoveAt(index);
-            textComps.RemoveAt(index);
-            positionComps.RemoveAt(index);
+            entities.Remove(entity);
         }
 
         #endregion Protected Methods
 
         #region Private Methods
 
-        private bool HandleTextSetCommand(object sender, TextSetCommand cmd)
+        private void RenderText(IEntity entity)
         {
-            var entity = Core.Entities.GetById(cmd.EntityId);
+            var pos = entity.GetComponent<Position>();
+            var text = entity.GetComponent<TextComponent>();
 
-            var index = entities.IndexOf(cmd.EntityId);
-            if (index < 0)
-                return false;
+            GL.Enable(EnableCap.Texture2D);
+            GL.PushMatrix();
 
-            textComps[index].Value = cmd.Text;
+            GL.Translate(pos.Value.X, pos.Value.Y, text.Order);
 
-            return true;
+            GL.Translate(text.Offset.X, text.Offset.Y, 0.0f);
+
+            Core.Rendering.Fonts.GetById(text.FontId).Draw(text.Value);
+
+            GL.PopMatrix();
+            GL.Disable(EnableCap.Texture2D);
         }
 
-        public bool EnqueueMsg(object sender, IEntityCommand msg)
+        private bool HandleTextSetCommand(object sender, TextSetCommand cmd)
         {
-            return false;
+            var toModify = entities.FirstOrDefault(item => item.Id == cmd.EntityId);
+            if (toModify == null)
+                return false;
+
+            var text = toModify.GetComponent<TextComponent>();
+            text.Value = cmd.Text;
+
+            return true;
         }
 
         #endregion Private Methods

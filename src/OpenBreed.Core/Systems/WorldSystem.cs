@@ -118,13 +118,9 @@ namespace OpenBreed.Core.Systems
 
         #region Protected Methods
 
-        protected virtual void UnregisterEntity(IEntity entity)
-        {
-        }
+        protected abstract void UnregisterEntity(IEntity entity);
 
-        protected virtual void RegisterEntity(IEntity entity)
-        {
-        }
+        protected abstract void RegisterEntity(IEntity entity);
 
         protected int Require<C>() where C : IEntityComponent
         {

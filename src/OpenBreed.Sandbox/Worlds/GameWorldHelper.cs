@@ -6,8 +6,10 @@ using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Helpers;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Physics.Systems;
+using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
 using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems.Control.Components;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Teleport;
@@ -40,8 +42,8 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem(core.CreatePhysicsSystem().SetGridSize(width, height).Build());
             builder.AddSystem(core.CreateAnimationSystem().Build());
 
-            //Audio
-            builder.AddSystem(core.CreateSoundSystem().Build());
+            ////Audio
+            //builder.AddSystem(core.CreateSoundSystem().Build());
 
             //Video
             builder.AddSystem(core.CreateTileSystem().SetGridSize(width, height)
@@ -52,6 +54,8 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem(core.CreateSpriteSystem().Build());
             //builder.AddSystem(core.CreateWireframeSystem().Build());
             builder.AddSystem(core.CreateTextSystem().Build());
+
+            builder.AddSystem(new ViewportSystem(core));
         }
 
         public static World CreateGameWorld(Program core, string worldName)
@@ -66,27 +70,33 @@ namespace OpenBreed.Sandbox.Worlds
         {
             World gameWorld = null;
 
-            using (var reader = new TxtFileWorldReader(core, ".\\Content\\Maps\\hub.txt"))
-                gameWorld = reader.GetWorld();
-
-            //GameWorld = GameWorldHelper.CreateGameWorld(Core, "DEMO6");
-
             var cameraBuilder = new CameraBuilder(core);
 
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(1);
 
+            var playerCamera = cameraBuilder.Build();
+            playerCamera.Tag = "PlayerCamera";
+            playerCamera.Add(new Animator(10.0f, false, -1, FrameTransition.LinearInterpolation));
+
             var gameCamera = cameraBuilder.Build();
+            gameCamera.Tag = "HubCamera";
             gameCamera.Add(new Animator(10.0f, false, -1, FrameTransition.LinearInterpolation));
 
+            using (var reader = new TxtFileWorldReader(core, ".\\Content\\Maps\\hub.txt"))
+                gameWorld = reader.GetWorld();
+
+            //GameWorld = GameWorldHelper.CreateGameWorld(Core, "DEMO6");
+
+
+
+
+            gameWorld.AddEntity(playerCamera);
             gameWorld.AddEntity(gameCamera);
 
-            var gameViewport = (Viewport)core.Rendering.Viewports.Create(0.05f, 0.05f, 0.90f, 0.90f);
-            gameViewport.Camera = gameCamera;
-
             var actor = ActorHelper.CreateActor(core, new Vector2(128, 128));
-            actor.Tag = gameCamera;
+            actor.Tag = playerCamera;
 
             actor.Add(new WalkingControl());
             actor.Add(new AttackControl());
@@ -97,7 +107,7 @@ namespace OpenBreed.Sandbox.Worlds
             actor.Subscribe(CoreEventTypes.ENTITY_LEFT_WORLD, OnEntityLeftWorld);
 
 
-            core.Jobs.Execute(new CameraFollowJob(gameCamera, actor));
+            core.Jobs.Execute(new CameraFollowJob(playerCamera, actor));
 
             var player1 = core.Players.GetByName("P1");
             player1.AssumeControl(actor);
@@ -112,7 +122,7 @@ namespace OpenBreed.Sandbox.Worlds
             rotateFsm.SetInitialState("Idle");
             gameWorld.AddEntity(actor);
 
-            core.Rendering.Viewports.Add(gameViewport);
+            core.Entities.GetByTag("ScreenViewport").FirstOrDefault().GetComponent<ViewportComponent>().CameraEntityId = playerCamera.Id;  
         }
 
         private static void OnEntityEntered(object sender, EventArgs e)

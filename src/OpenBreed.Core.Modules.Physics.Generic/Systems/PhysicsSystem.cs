@@ -166,7 +166,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         private static Box2 GetAabb(IEntity entity)
         {
-            var body = entity.Components.OfType<BodyComponent>().First();
+            var body = entity.GetComponent<BodyComponent>();
             return body.Aabb;
         }
 
@@ -450,8 +450,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         private void RegisterStaticEntity(IEntity entity)
         {
             var pack = new StaticPack(entity.Id,
-                                      entity.Components.OfType<BodyComponent>().First(),
-                                      entity.Components.OfType<Position>().First());
+                                      entity.GetComponent<BodyComponent>(),
+                                      entity.GetComponent<Position>());
 
             InsertToGrid(pack);
         }
@@ -464,9 +464,9 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         private void RegisterDynamicEntity(IEntity entity)
         {
             var pack = new DynamicPack(entity.Id,
-                                      entity.Components.OfType<BodyComponent>().First(),
-                                      entity.Components.OfType<Position>().First(),
-                                      entity.Components.OfType<Velocity>().First());
+                                      entity.GetComponent<BodyComponent>(),
+                                      entity.GetComponent<Position>(),
+                                      entity.GetComponent<Velocity>());
 
             activeDynamics.Add(pack);
         }

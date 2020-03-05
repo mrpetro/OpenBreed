@@ -105,8 +105,8 @@
 //        /// <param name="entity">Entity which this component belongs to</param>
 //        public void Initialize(IEntity entity)
 //        {
-//            position = entity.Components.OfType<Position>().First();
-//            body = entity.Components.OfType<DynamicBody>().First();
+//            position = entity.TryGetComponent<Position>().First();
+//            body = entity.TryGetComponent<DynamicBody>().First();
 //            sprite.Initialize(entity);
 //        }
 

@@ -48,7 +48,7 @@ namespace OpenBreed.Sandbox.Components.States
             Entity.PostCommand(new SpriteOffCommand(Entity.Id));
             Entity.PostCommand(new BodyOffCommand(Entity.Id));
 
-            var pos = Entity.Components.OfType<Position>().FirstOrDefault();
+            var pos = Entity.GetComponent<Position>();
 
             Entity.PostCommand(new PutStampCommand(Entity.World.Id, stampId, 0, pos.Value));
             Entity.PostCommand(new TextSetCommand(Entity.Id, "Door - Opened"));

@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Common.Systems;
+﻿using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Rendering.Components;
@@ -6,6 +7,7 @@ using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenTK;
 using OpenTK.Graphics;
+using System;
 
 namespace OpenBreed.Core.Modules.Rendering
 {
@@ -47,25 +49,19 @@ namespace OpenBreed.Core.Modules.Rendering
         IFontMan Fonts { get; }
 
         /// <summary>
-        /// Viewports manager
+        /// World from which rendering will start
         /// </summary>
-        IViewportMan Viewports { get; }
+        World ScreenWorld { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        /// <summary>
-        /// Create wireframe render component
-        /// </summary>
-        /// <param name="thickness">Thickness of wireframe lines</param>
-        /// <param name="color">Color of wireframe lines</param>
-        /// <returns></returns>
-        IWireframe CreateWireframe(float thickness, Color4 color);
-
         void Cleanup();
 
         void Draw(float dt);
+
+        void OnResize(float width, float height);
 
         #endregion Public Methods
     }

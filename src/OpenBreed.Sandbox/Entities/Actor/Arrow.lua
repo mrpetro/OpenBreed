@@ -14,5 +14,5 @@
 	MotionComponent = {},
 	SpriteComponent = {
 		AtlasAlias = "Atlases/Sprites/Arrow",
-        Order = 10.0}
+        Order = 100.0}
 }

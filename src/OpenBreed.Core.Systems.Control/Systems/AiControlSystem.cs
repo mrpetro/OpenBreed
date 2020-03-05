@@ -56,8 +56,8 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
         protected override void RegisterEntity(IEntity entity)
         {
             entities.Add(entity);
-            aiControlComps.Add(entity.Components.OfType<AiControl>().First());
-            positionComps.Add(entity.Components.OfType<Position>().First());
+            aiControlComps.Add(entity.GetComponent<AiControl>());
+            positionComps.Add(entity.GetComponent<Position>());
         }
 
         protected override void UnregisterEntity(IEntity entity)

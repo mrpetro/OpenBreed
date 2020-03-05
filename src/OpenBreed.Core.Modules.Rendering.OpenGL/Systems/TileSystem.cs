@@ -21,7 +21,7 @@ using OpenBreed.Core.Systems;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TileSystem : WorldSystem, ITileSystem, ICommandExecutor
+    public class TileSystem : WorldSystem, ICommandExecutor, IRenderableSystem
     {
         #region Public Fields
 
@@ -82,21 +82,14 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             World.RegisterHandler(PutStampCommand.TYPE, cmdHandler);
         }
 
-        /// <summary>
-        /// This will draw all tiles to viewport given in the parameter
-        /// </summary>
-        /// <param name="viewport">Viewport on which tiles will be drawn to</param>
-        public void Render(IViewport viewport, float dt)
+        public void Render(Box2 viewBox, int depth, float dt)
         {
             cmdHandler.ExecuteEnqueued();
 
-            float left, bottom, right, top;
-            viewport.GetVisibleRectangle(out left, out bottom, out right, out top);
-
-            int leftIndex = (int)left / TILE_SIZE;
-            int bottomIndex = (int)bottom / TILE_SIZE;
-            int rightIndex = (int)right / TILE_SIZE + 1;
-            int topIndex = (int)top / TILE_SIZE + 1;
+            int leftIndex = (int)viewBox.Left / TILE_SIZE;
+            int bottomIndex = (int)viewBox.Bottom / TILE_SIZE;
+            int rightIndex = (int)viewBox.Right / TILE_SIZE + 1;
+            int topIndex = (int)viewBox.Top / TILE_SIZE + 1;
 
             leftIndex = MathHelper.Clamp(leftIndex, 0, GridWidth);
             rightIndex = MathHelper.Clamp(rightIndex, 0, GridWidth);
@@ -114,7 +107,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                 {
                     for (int i = leftIndex; i < rightIndex; i++)
                     {
-                        DrawCellTiles(i, j, layerNo);
+                        RenderCellTiles(i, j, layerNo);
                     }
                 }
             }
@@ -159,7 +152,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             Debug.Assert(!entities.Contains(entity), "Entity already added!");
 
-            var pos = entity.Components.OfType<Position>().First();
+            var pos = entity.GetComponent<Position>();
 
             int xIndex;
             int yIndex;
@@ -169,7 +162,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
             var cellIndex = xIndex + GridWidth * yIndex;
 
-            var tile = entity.Components.OfType<TileComponent>().First();
+            var tile = entity.GetComponent<TileComponent>();
 
             entities[entity] = tile;
 
@@ -234,7 +227,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             return true;
         }
 
-        private void DrawCellTiles(int xIndex, int yIndex, int layerNo)
+        private void RenderCellTiles(int xIndex, int yIndex, int layerNo)
         {
             var index = layerNo * GridWidth * GridHeight + xIndex + GridWidth * yIndex;
 

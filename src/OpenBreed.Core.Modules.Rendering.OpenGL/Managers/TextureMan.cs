@@ -1,11 +1,12 @@
 ﻿using OpenBreed.Core.Managers;
+using OpenBreed.Core.Modules.Rendering.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 
-namespace OpenBreed.Core.Modules.Rendering.Helpers
+namespace OpenBreed.Core.Modules.Rendering.Managers
 {
     /// <summary>
     /// Textures manager class which handles creating textures from various sources

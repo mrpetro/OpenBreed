@@ -68,7 +68,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
         {
             if (systemEvent.Direction != Vector2.Zero)
             {
-                var dir = Entity.Components.OfType<Direction>().First();
+                var dir = Entity.GetComponent<Direction>();
 
                 if (dir.Value != systemEvent.Direction)
                 {

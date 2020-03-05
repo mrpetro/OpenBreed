@@ -1,10 +1,13 @@
-﻿using OpenBreed.Core.Managers;
-using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Helpers;
+﻿using OpenBreed.Core.Common;
+using OpenBreed.Core.Managers;
+using OpenBreed.Core.Modules.Physics.Events;
+using OpenBreed.Core.Modules.Rendering.Events;
+using OpenBreed.Core.Modules.Rendering.Managers;
 using OpenBreed.Core.Modules.Rendering.Systems;
-using OpenTK.Graphics;
+using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System;
+using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering
 {
@@ -18,7 +21,6 @@ namespace OpenBreed.Core.Modules.Rendering
         private float fps;
         private TextureMan textureMan;
         private TileMan tileMan;
-        private ViewportMan viewportMan;
 
         #endregion Private Fields
 
@@ -26,7 +28,6 @@ namespace OpenBreed.Core.Modules.Rendering
 
         public OpenGLModule(ICore core) : base(core)
         {
-            viewportMan = new ViewportMan(this);
             textureMan = new TextureMan(this);
             tileMan = new TileMan(this);
             spriteMan = new SpriteMan(this);
@@ -48,24 +49,13 @@ namespace OpenBreed.Core.Modules.Rendering
 
         public IFontMan Fonts { get { return fontMan; } }
 
-        public IViewportMan Viewports { get { return viewportMan; } }
+        public World ScreenWorld { get; set; }
 
         public float Fps { get { return fps; } }
 
         #endregion Public Properties
 
         #region Public Methods
-
-        /// <summary>
-        /// Create wireframe render component
-        /// </summary>
-        /// <param name="thickness">Thickness of wireframe lines</param>
-        /// <param name="color">Color of wireframe lines</param>
-        /// <returns></returns>
-        public IWireframe CreateWireframe(float thickness, Color4 color)
-        {
-            return new Wireframe(thickness, color);
-        }
 
         public void Draw(float dt)
         {
@@ -75,9 +65,11 @@ namespace OpenBreed.Core.Modules.Rendering
 
             GL.PushMatrix();
 
-            GL.Scale(Core.ClientRectangle.Width, Core.ClientRectangle.Height, 1.0f);
+            var clipBox = Box2.FromTLRB(Core.ClientRectangle.Width, 0.0f, Core.ClientRectangle.Height, 0.0f);
 
-            viewportMan.Draw(dt);
+            var depth = 0;
+
+            ScreenWorld?.Systems.OfType<ViewportSystem>().FirstOrDefault()?.Render(clipBox, depth, dt);
 
             DrawCursor();
 
@@ -86,8 +78,13 @@ namespace OpenBreed.Core.Modules.Rendering
 
         public void Cleanup()
         {
-            viewportMan.Cleanup();
         }
+
+        public void OnResize(float width, float height)
+        {
+            Core.Events.Raise(this, GfxEventTypes.CLIENT_RESIZED, new ClientResizedEventArgs(width, height));
+        }
+
 
         #endregion Public Methods
 

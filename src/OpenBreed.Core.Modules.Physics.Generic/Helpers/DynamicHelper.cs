@@ -112,9 +112,9 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
         /// <param name="projection">Given collision projection vector</param>
         public static void ResolveVsStatic(IEntity entityA, IEntity entityB, Vector2 projection)
         {
-            var p = entityA.Components.OfType<Position>().FirstOrDefault();
-            var v = entityA.Components.OfType<Velocity>().FirstOrDefault();
-            var body = entityA.Components.OfType<BodyComponent>().FirstOrDefault();
+            var p = entityA.TryGetComponent<Position>();
+            var v = entityA.TryGetComponent<Velocity>();
+            var body = entityA.TryGetComponent<BodyComponent>();
 
             p.Value += projection;
 

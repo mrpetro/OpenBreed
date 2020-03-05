@@ -3,6 +3,7 @@ using OpenBreed.Core.Common;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Commands;
+using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.Teleport;
@@ -10,6 +11,7 @@ using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenTK;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -26,6 +28,9 @@ namespace OpenBreed.Sandbox.Worlds
         private WorldBuilder builder;
 
         private Dictionary<int, Tuple<string, int>> exits = new Dictionary<int, Tuple<string, int>>();
+
+        private Dictionary<int, (int, int, string)> viewports = new Dictionary<int, (int, int, string)>();
+
 
         #endregion Private Fields
 
@@ -45,6 +50,11 @@ namespace OpenBreed.Sandbox.Worlds
             exits.Add(exitNo, new Tuple<string, int>(mapName, mapEntryId));
         }
 
+        public void RegisterViewport(int viewportNo, int width, int height, string cameraName)
+        {
+            viewports.Add(viewportNo, (width, height, cameraName));
+        }
+
         public void RegisterHandlers()
         {
             builder.RegisterCode('O', AddObstacleCell);
@@ -53,6 +63,7 @@ namespace OpenBreed.Sandbox.Worlds
             builder.RegisterCode('<', AddTeleportExit);
             builder.RegisterCode('}', AddWorldEntry);
             builder.RegisterCode('{', AddWorldExit);
+            builder.RegisterCode('V', AddViewport);
 
             builder.RegisterCode(' ', AddAirCell);
 
@@ -62,6 +73,22 @@ namespace OpenBreed.Sandbox.Worlds
         #endregion Public Methods
 
         #region Private Methods
+
+        private void AddViewport(World world, int code, object[] args)
+        {
+            var core = world.Core;
+            var x = (int)args[0];
+            var y = (int)args[1];
+            var pairCode = (int)args[2];
+
+            if (!viewports.TryGetValue(pairCode, out (int Width, int Height, string CameraName ) viewportData))
+                return;
+
+            var vp = ScreenWorldHelper.CreateViewportEntity(core, $"TV{pairCode}" , x * 16, y * 16, viewportData.Width, viewportData.Height);
+
+            vp.GetComponent<ViewportComponent>().CameraEntityId = core.Entities.GetByTag(viewportData.CameraName).FirstOrDefault().Id;
+            world.AddEntity(vp);
+        }
 
         private static void AddTeleportEntry(World world, int code, object[] args)
         {

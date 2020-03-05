@@ -97,7 +97,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
             var entity = Core.Entities.GetById(cmd.EntityId);
 
 
-            var control = entity.Components.OfType<AttackControl>().First();
+            var control = entity.GetComponent<AttackControl>();
 
             if (control.AttackPrimary != cmd.Primary)
             {
@@ -112,7 +112,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
         {
             var entity = Core.Entities.GetById(cmd.EntityId);
 
-            var control = entity.Components.OfType<WalkingControl>().First();
+            var control = entity.GetComponent<WalkingControl>();
 
             if (control.Direction != cmd.Direction)
             {

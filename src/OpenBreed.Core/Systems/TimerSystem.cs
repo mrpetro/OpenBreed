@@ -29,7 +29,7 @@
 //        protected override void RegisterEntity(IEntity entity)
 //        {
 //            entities.Add(entity);
-//            groupPartComps.Add(entity.Components.OfType<GroupPart>().First());
+//            groupPartComps.Add(entity.GetComponent<GroupPart>().First());
 //        }
 
 //        protected override void UnregisterEntity(IEntity entity)

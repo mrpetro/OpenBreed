@@ -46,6 +46,25 @@ namespace OpenBreed.Sandbox.Worlds
             }
         }
 
+        private void ReadViewports(WorldBuilder worldBuilder, WorldBuilderHelper helper)
+        {
+            var split = txtReader.ReadLine().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            var viewportsNoTxt = split[1];
+            var viewportsNo = int.Parse(viewportsNoTxt);
+
+            for (int i = 0; i < viewportsNo; i++)
+            {
+                split = txtReader.ReadLine().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                var viewportNoTxt = split[0][0];
+                var width = int.Parse(split[1]);
+                var height = int.Parse(split[2]);
+                var cameraName = split[3];
+
+                helper.RegisterViewport(viewportNoTxt, width, height, cameraName);
+            }
+        }
+
         public World GetWorld()
         {
             var worldBuilder = Core.Worlds.Create();
@@ -56,6 +75,7 @@ namespace OpenBreed.Sandbox.Worlds
             ReadName(worldBuilder);
             ReadBody(worldBuilder);
             ReadExits(worldBuilder, helper);
+            ReadViewports(worldBuilder, helper);
             GameWorldHelper.AddSystems((Program)Core, worldBuilder);
             return worldBuilder.Build(); 
         }

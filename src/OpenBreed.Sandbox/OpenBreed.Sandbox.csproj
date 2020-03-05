@@ -130,6 +130,7 @@
     <Compile Include="Tools.cs" />
     <Compile Include="Worlds\GameWorldHelper.cs" />
     <Compile Include="Worlds\HudWorldHelper.cs" />
+    <Compile Include="Worlds\ScreenWorldHelper.cs" />
     <Compile Include="Worlds\TxtFileWorldReader.cs" />
     <Compile Include="Worlds\WorldBuilderHelper.cs" />
   </ItemGroup>

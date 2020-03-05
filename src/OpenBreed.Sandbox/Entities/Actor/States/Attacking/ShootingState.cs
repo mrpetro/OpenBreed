@@ -37,9 +37,9 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             //Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
             Entity.PostCommand(new TextSetCommand(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
-            var pos = Entity.Components.OfType<Position>().FirstOrDefault().Value;
+            var pos = Entity.GetComponent<Position>().Value;
             pos += new Vector2(8,8);
-            var direction = Entity.Components.OfType<Direction>().FirstOrDefault().Value;
+            var direction = Entity.GetComponent<Direction>().Value;
             direction.Normalize();
             direction *= 500.0f;
             ProjectileHelper.AddProjectile(Entity.Core, Entity.World, pos.X, pos.Y, direction.X, direction.Y);
