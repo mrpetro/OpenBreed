@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Modules.Rendering.Builders;
 using OpenTK.Graphics;
 
 namespace OpenBreed.Core.Modules.Rendering.Components
@@ -12,11 +13,19 @@ namespace OpenBreed.Core.Modules.Rendering.Components
     {
         #region Public Constructors
 
-        public ViewportComponent(float width, float height, int cameraEntityId = -1)
+        /// <summary>
+        /// Constructor for builder
+        /// </summary>
+        /// <param name="builder"></param>
+        internal ViewportComponent(ViewportComponentBuilder builder)
         {
-            Width = width;
-            Height = height;
-            CameraEntityId = cameraEntityId;
+            Width = builder.Width;
+            Height = builder.Height;
+            CameraEntityId = -1;
+            DrawBorder = builder.DrawBorder;
+            DrawBackgroud = builder.DrawBackground;
+            BackgroundColor = builder.BackgroundColor;
+            Clipping = builder.Clipping;
         }
 
         #endregion Public Constructors
@@ -69,21 +78,5 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         public int CameraEntityId { get; set; }
 
         #endregion Public Properties
-
-        #region Public Methods
-
-        /// <summary>
-        /// Create viewport component for viewport system
-        /// </summary>
-        /// <param name="width">Initial width of viewport</param>
-        /// <param name="height">Initial height of viewport</param>
-        /// <param name="cameraEntityId">Initial camera entity ID</param>
-        /// <returns></returns>
-        public static ViewportComponent Create(float width, float height, int cameraEntityId = -1)
-        {
-            return new ViewportComponent(width, height, cameraEntityId);
-        }
-
-        #endregion Public Methods
     }
 }

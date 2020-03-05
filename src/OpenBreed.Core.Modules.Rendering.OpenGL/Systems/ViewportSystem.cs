@@ -158,35 +158,28 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             //TODO: Fix clipping for viewport in viewport scenarios
             if (vpc.Clipping)
             {
-                //Clear stencil buffer before drawing in it
-                GL.Clear(ClearBufferMask.StencilBufferBit);
-
                 //Enable stencil buffer
-                GL.Enable(EnableCap.StencilTest);
+                if (depth == 1)
+                    GL.Enable(EnableCap.StencilTest);
 
-                GL.StencilFunc(StencilFunction.Equal, 0x01, 0x01);
-                GL.StencilOp(StencilOp.Replace, StencilOp.Replace, StencilOp.Replace);
-                //Draw rectangle shape which will clip anything inside viewport
+
+                GL.ColorMask(false, false, false, false);
+                GL.DepthMask(false);
+                GL.StencilFunc(StencilFunction.Always, depth, depth);
+                GL.StencilOp(StencilOp.Incr, StencilOp.Incr, StencilOp.Incr);
+
+                // Draw rectangle
                 GL.Color3(0.0f, 0.0f, 0.0f);
-
                 RenderTools.DrawUnitQuad();
 
-                GL.StencilFunc(StencilFunction.Equal, 0x01, 0x01);
+                GL.ColorMask(true, true, true, true);
+                GL.DepthMask(true);
+                GL.StencilFunc(StencilFunction.Equal, depth, depth);
                 GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Keep);
             }
 
             if (vpc.DrawBackgroud)
                 DrawBackground(vpc);
-
-            var cameraEntity = Core.Entities.GetById(vpc.CameraEntityId);
-
-            if (cameraEntity != null)
-                DrawCameraView(depth, dt, vpc, cameraEntity);
-
-            if (vpc.Clipping)
-            {
-                GL.Disable(EnableCap.StencilTest);
-            }
 
             if (vpc.DrawBorder)
             {
@@ -197,6 +190,31 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                 GL.Vertex3(1.0f, 0, 0.0);
                 GL.Vertex3(1.0f, 1.0f, 0.0);
                 GL.End();
+            }
+
+            var cameraEntity = Core.Entities.GetById(vpc.CameraEntityId);
+
+            if (cameraEntity != null)
+                DrawCameraView(depth, dt, vpc, cameraEntity);
+
+
+
+            if (vpc.Clipping)
+            {
+                GL.ColorMask(false, false, false, false);
+                GL.DepthMask(false);
+                GL.StencilFunc(StencilFunction.Always, depth, depth);
+                GL.StencilOp(StencilOp.Decr, StencilOp.Decr, StencilOp.Decr);
+
+                // Draw rectangle
+                GL.Color3(0.0f, 0.0f, 0.0f);
+                RenderTools.DrawUnitQuad();
+
+                GL.ColorMask(true, true, true, true);
+                GL.DepthMask(true);
+
+                if (depth == 1)
+                    GL.Disable(EnableCap.StencilTest);
             }
 
             GL.PopMatrix();

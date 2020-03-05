@@ -35,7 +35,7 @@ O1O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O2O3
 MAP.EXITS 1
 1 HUB 1
 MAP.VIEWPORTS 2
-1 256 64 PlayerCamera
+1 256 128 PlayerCamera
 2 64 256 HubCamera
 ----------------------------------------------------------------
 O - Obstacle

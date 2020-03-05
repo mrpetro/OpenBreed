@@ -3,6 +3,7 @@ using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Events;
+using OpenBreed.Core.Modules.Rendering.Builders;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Events;
 using OpenBreed.Core.Modules.Rendering.Systems;
@@ -30,7 +31,16 @@ namespace OpenBreed.Sandbox.Worlds
         {
             var viewport = core.Entities.Create();
             viewport.Tag = name;
-            viewport.Add(new ViewportComponent(width, height) { DrawBorder = true, DrawBackgroud = false, Clipping = true, BackgroundColor = Color4.Blue });
+
+            var vpcBuilder = ViewportComponentBuilder.New(core);
+            vpcBuilder.SetProperty("Width", width);
+            vpcBuilder.SetProperty("Height", height);
+            vpcBuilder.SetProperty("DrawBorder", true);
+            vpcBuilder.SetProperty("DrawBackground", true);
+            vpcBuilder.SetProperty("Clipping", true);
+            vpcBuilder.SetProperty("BackgroundColor", Color4.Black);
+
+            viewport.Add(vpcBuilder.Build());
             viewport.Add(Position.Create(x, y));
 
             return viewport;
@@ -44,7 +54,7 @@ namespace OpenBreed.Sandbox.Worlds
             var world = builder.Build();
 
             //var viewport = CreateViewportEntity(core, "ScreenViewport", 0.05f, 0.05f, 0.9f, 0.9f);
-            var viewport = CreateViewportEntity(core, "ScreenViewport", 0, 0, core.ClientRectangle.Width, core.ClientRectangle.Height);
+            var viewport = CreateViewportEntity(core, "ScreenViewport", 32, 32, core.ClientRectangle.Width - 64, core.ClientRectangle.Height - 64);
 
             core.Rendering.Subscribe(GfxEventTypes.CLIENT_RESIZED, (s,a) => OnClientResized(viewport, (ClientResizedEventArgs)a));
 
@@ -56,8 +66,8 @@ namespace OpenBreed.Sandbox.Worlds
         private static void OnClientResized(IEntity viewport, ClientResizedEventArgs args)
         {
             var vpc = viewport.GetComponent<ViewportComponent>();
-            vpc.Width = args.Width;
-            vpc.Height = args.Height;
+            vpc.Width = args.Width - 64;
+            vpc.Height = args.Height - 64;
         }
 
     }

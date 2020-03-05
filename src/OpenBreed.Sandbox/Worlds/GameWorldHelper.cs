@@ -46,7 +46,6 @@ namespace OpenBreed.Sandbox.Worlds
             //builder.AddSystem(core.CreateSoundSystem().Build());
 
             //Video
-            builder.AddSystem(new ViewportSystem(core));
             builder.AddSystem(core.CreateTileSystem().SetGridSize(width, height)
                                                        .SetLayersNo(1)
                                                        .SetTileSize(16)
@@ -55,6 +54,8 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem(core.CreateSpriteSystem().Build());
             //builder.AddSystem(core.CreateWireframeSystem().Build());
             builder.AddSystem(core.CreateTextSystem().Build());
+
+            builder.AddSystem(new ViewportSystem(core));
         }
 
         public static World CreateGameWorld(Program core, string worldName)
