@@ -30,7 +30,7 @@ namespace OpenBreed.Core.Modules.Rendering.Entities.Builders
         public override IEntity Build()
         {
             var entity = Core.Entities.Create();
-            entity.Add(Position.Create(position));
+            entity.Add(PositionComponent.Create(position));
             entity.Add(CameraComponent.Create(1.0f));
             entity.Add(new PauseImmuneComponent());
             return entity;

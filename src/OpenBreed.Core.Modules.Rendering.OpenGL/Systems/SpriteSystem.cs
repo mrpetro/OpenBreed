@@ -31,7 +31,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             cmdHandler = new CommandHandler(this);
 
             Require<SpriteComponent>();
-            Require<Position>();
+            Require<PositionComponent>();
         }
 
         #endregion Internal Constructors
@@ -113,7 +113,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
         private void RenderSprite(IEntity entity)
         {
-            var pos = entity.GetComponent<Position>();
+            var pos = entity.GetComponent<PositionComponent>();
             var sprite = entity.GetComponent<SpriteComponent>();
 
             GL.PushMatrix();

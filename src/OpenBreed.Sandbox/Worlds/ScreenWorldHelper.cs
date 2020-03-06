@@ -41,7 +41,7 @@ namespace OpenBreed.Sandbox.Worlds
             vpcBuilder.SetProperty("BackgroundColor", Color4.Black);
 
             viewport.Add(vpcBuilder.Build());
-            viewport.Add(Position.Create(x, y));
+            viewport.Add(PositionComponent.Create(x, y));
 
             return viewport;
         }

@@ -18,9 +18,9 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         #region Private Fields
 
         private readonly List<IEntity> entities = new List<IEntity>();
-        private readonly List<Thrust> thrustComps = new List<Thrust>();
-        private readonly List<Position> positionComps = new List<Position>();
-        private readonly List<Velocity> velocityComps = new List<Velocity>();
+        private readonly List<ThrustComponent> thrustComps = new List<ThrustComponent>();
+        private readonly List<PositionComponent> positionComps = new List<PositionComponent>();
+        private readonly List<VelocityComponent> velocityComps = new List<VelocityComponent>();
         private readonly List<BodyComponent> dynamicBodyComps = new List<BodyComponent>();
 
         #endregion Private Fields
@@ -29,9 +29,9 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         public MovementSystem(MovementSystemBuilder builder) : base(builder.core)
         {
-            Require<Thrust>();
-            Require<Position>();
-            Require<Velocity>();
+            Require<ThrustComponent>();
+            Require<PositionComponent>();
+            Require<VelocityComponent>();
             Require<BodyComponent>();
         }
 
@@ -78,9 +78,9 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         protected override void RegisterEntity(IEntity entity)
         {
             entities.Add(entity);
-            positionComps.Add(entity.GetComponent<Position>());
-            thrustComps.Add(entity.GetComponent<Thrust>());
-            velocityComps.Add(entity.GetComponent<Velocity>());
+            positionComps.Add(entity.GetComponent<PositionComponent>());
+            thrustComps.Add(entity.GetComponent<ThrustComponent>());
+            velocityComps.Add(entity.GetComponent<VelocityComponent>());
             dynamicBodyComps.Add(entity.GetComponent<BodyComponent>());
         }
 

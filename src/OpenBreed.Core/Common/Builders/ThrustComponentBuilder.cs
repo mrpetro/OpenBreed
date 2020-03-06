@@ -26,7 +26,7 @@ namespace OpenBreed.Core.Common.Builders
 
         public override IEntityComponent Build()
         {
-            return Thrust.Create(x, y);
+            return ThrustComponent.Create(x, y);
         }
 
         public override void SetProperty(object key, object value)

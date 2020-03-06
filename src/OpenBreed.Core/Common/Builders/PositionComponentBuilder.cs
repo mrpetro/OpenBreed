@@ -30,7 +30,7 @@ namespace OpenBreed.Core.Common.Builders
 
         public override IEntityComponent Build()
         {
-            return Position.Create(x, y);
+            return PositionComponent.Create(x, y);
         }
 
         public override void SetProperty(object key, object value)

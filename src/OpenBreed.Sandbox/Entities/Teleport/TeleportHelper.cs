@@ -67,7 +67,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             teleportEntry.Tag = new TeleportPair { Id = pairId };
             teleportEntry.Add(TextHelper.Create(core, new Vector2(0, 32), "TeleportEntry"));
 
-            teleportEntry.GetComponent<Position>().Value = new Vector2( 16 * x, 16 * y);
+            teleportEntry.GetComponent<PositionComponent>().Value = new Vector2( 16 * x, 16 * y);
 
             teleportEntry.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, (s, a) => OnFrameChanged((IEntity)s, (AnimChangedEventArgs)a));
             teleportEntry.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, (s, a) => OnCollision((IEntity)s, (CollisionEventArgs)a));
@@ -85,7 +85,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             teleportExit.Tag = new TeleportPair { Id = pairId };
             teleportExit.Add(TextHelper.Create(core, new Vector2(0, 32), "TeleportExit"));
 
-            teleportExit.GetComponent<Position>().Value = new Vector2(16 * x, 16 * y);
+            teleportExit.GetComponent<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
 
             teleportExit.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, (s,a) => OnFrameChanged((IEntity)s, (AnimChangedEventArgs)a));
 
@@ -121,7 +121,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             if (exitEntity == null)
                 throw new Exception("No exit entity found");
 
-            var exitPos = exitEntity.GetComponent<Position>();
+            var exitPos = exitEntity.GetComponent<PositionComponent>();
             var entryAabb = entryEntity.GetComponent<BodyComponent>().Aabb;
             var targetAabb = targetEntity.GetComponent<BodyComponent>().Aabb;
             var offset = new Vector2((32 - targetAabb.Width) / 2.0f, (32 - targetAabb.Height) / 2.0f);

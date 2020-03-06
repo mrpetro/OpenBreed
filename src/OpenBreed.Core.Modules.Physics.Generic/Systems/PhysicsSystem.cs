@@ -60,12 +60,12 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         #region Public Methods
 
-        public static Vector2 GetTileCenter(Position pos)
+        public static Vector2 GetTileCenter(PositionComponent pos)
         {
             return new Vector2(pos.Value.X + CELL_SIZE / 2, pos.Value.Y + CELL_SIZE / 2);
         }
 
-        public static Box2 GetTileBox(Position pos)
+        public static Box2 GetTileBox(PositionComponent pos)
         {
             var bx = pos.Value.X;
             var by = pos.Value.Y;
@@ -94,7 +94,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             SweepAndPrune(dt);
         }
 
-        private void UpdateAabb(BodyComponent body, Position pos)
+        private void UpdateAabb(BodyComponent body, PositionComponent pos)
         {
             var fixture = Fixtures.GetById(body.Fixtures.First());
             body.Aabb = fixture.Shape.GetAabb().Translated(pos.Value);
@@ -146,7 +146,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         protected override void RegisterEntity(IEntity entity)
         {
-            if (entity.Components.Any(item => item is Velocity))
+            if (entity.Components.Any(item => item is VelocityComponent))
                 RegisterDynamicEntity(entity);
             else
                 RegisterStaticEntity(entity);
@@ -154,7 +154,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         protected override void UnregisterEntity(IEntity entity)
         {
-            if (entity.Components.Any(item => item is Velocity))
+            if (entity.Components.Any(item => item is VelocityComponent))
                 UnregisterDynamicEntity(entity);
             else
                 UnregisterStaticEntity(entity);
@@ -451,7 +451,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         {
             var pack = new StaticPack(entity.Id,
                                       entity.GetComponent<BodyComponent>(),
-                                      entity.GetComponent<Position>());
+                                      entity.GetComponent<PositionComponent>());
 
             InsertToGrid(pack);
         }
@@ -465,8 +465,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         {
             var pack = new DynamicPack(entity.Id,
                                       entity.GetComponent<BodyComponent>(),
-                                      entity.GetComponent<Position>(),
-                                      entity.GetComponent<Velocity>());
+                                      entity.GetComponent<PositionComponent>(),
+                                      entity.GetComponent<VelocityComponent>());
 
             activeDynamics.Add(pack);
         }

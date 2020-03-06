@@ -105,7 +105,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             //actor.Add(AxisAlignedBoxShape.Create(0, 0, 32, 32));
 
 
-            actor.GetComponent<Position>().Value = pos;
+            actor.GetComponent<PositionComponent>().Value = pos;
 
             actor.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, (s,a) => OnCollision((IEntity)s,(CollisionEventArgs)a));
 
