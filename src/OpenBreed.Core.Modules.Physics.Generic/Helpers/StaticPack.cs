@@ -15,7 +15,7 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
 
         internal StaticPack(int entityId,
             BodyComponent body,
-            Position position)
+            PositionComponent position)
         {
             EntityId = entityId;
             Body = body;
@@ -28,7 +28,7 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
 
         internal int EntityId { get; }
         internal BodyComponent Body { get; }
-        internal Position Position { get; }
+        internal PositionComponent Position { get; }
 
         internal Box2 Aabb
         {

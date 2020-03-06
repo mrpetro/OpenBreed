@@ -31,7 +31,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             cmdHandler = new CommandHandler(this);
 
             Require<TextComponent>();
-            Require<Position>();
+            Require<PositionComponent>();
         }
 
         #endregion Internal Constructors
@@ -101,7 +101,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         private void RenderText(IEntity entity)
         {
-            var pos = entity.GetComponent<Position>();
+            var pos = entity.GetComponent<PositionComponent>();
             var text = entity.GetComponent<TextComponent>();
 
             GL.Enable(EnableCap.Texture2D);

@@ -41,7 +41,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             cmdHandler = new CommandHandler(this);
 
             Require<ViewportComponent>();
-            Require<Position>();
+            Require<PositionComponent>();
         }
 
         #endregion Public Constructors
@@ -56,7 +56,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// <summary>
         /// Local transformation matrix of this viewport
         /// </summary>
-        public Matrix4 GetTransform(Position pos, ViewportComponent vpc)
+        public Matrix4 GetTransform(PositionComponent pos, ViewportComponent vpc)
         {
             var transform = Matrix4.Identity;
             transform = Matrix4.Mult(transform, Matrix4.CreateScale(vpc.Width, vpc.Height, 1.0f));
@@ -70,7 +70,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// <returns>Camera transformation matrix</returns>
         public Matrix4 GetCameraTransform(float ratio, IEntity camera)
         {
-            var pos = camera.GetComponent<Position>();
+            var pos = camera.GetComponent<PositionComponent>();
             var cmc = camera.GetComponent<CameraComponent>();
 
             var transform = Matrix4.Identity;
@@ -134,7 +134,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         private void RenderViewport(IEntity vpe, Box2 clipBox, int depth, float dt)
         {
             var vpc = vpe.GetComponent<ViewportComponent>();
-            var pos = vpe.GetComponent<Position>();
+            var pos = vpe.GetComponent<PositionComponent>();
 
             //Test viewport for clippling here
             if (pos.Value.X + vpc.Width < clipBox.Left)
@@ -196,8 +196,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
             if (cameraEntity != null)
                 DrawCameraView(depth, dt, vpc, cameraEntity);
-
-
 
             if (vpc.Clipping)
             {

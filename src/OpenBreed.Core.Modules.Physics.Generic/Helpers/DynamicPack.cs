@@ -14,8 +14,8 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
 
         internal DynamicPack(int entityId,
             BodyComponent body,
-            Position position,
-            Velocity velocity)
+            PositionComponent position,
+            VelocityComponent velocity)
         {
             EntityId = entityId;
             Body = body;
@@ -29,8 +29,8 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
 
         internal int EntityId { get; }
         internal BodyComponent Body { get; }
-        internal Position Position { get; }
-        internal Velocity Velocity { get; }
+        internal PositionComponent Position { get; }
+        internal VelocityComponent Velocity { get; }
 
         internal Box2 Aabb
         {

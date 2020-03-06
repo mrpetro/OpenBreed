@@ -61,7 +61,7 @@ namespace OpenBreed.Sandbox.Entities.Builders
         {
             var entity = Core.Entities.Create();
 
-            entity.Add(Position.Create(pos));
+            entity.Add(PositionComponent.Create(pos));
 
             if (HasBody)
             {

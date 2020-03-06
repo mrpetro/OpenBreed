@@ -45,7 +45,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             cmdHandler = new CommandHandler(this);
 
             Require<TileComponent>();
-            Require<Position>();
+            Require<PositionComponent>();
 
             GridWidth = builder.gridWidth;
             GridHeight = builder.gridHeight;
@@ -152,7 +152,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             Debug.Assert(!entities.Contains(entity), "Entity already added!");
 
-            var pos = entity.GetComponent<Position>();
+            var pos = entity.GetComponent<PositionComponent>();
 
             int xIndex;
             int yIndex;
@@ -280,7 +280,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             }
         }
 
-        private void GetMapIndices(Position position, out int x, out int y)
+        private void GetMapIndices(PositionComponent position, out int x, out int y)
         {
             x = (int)(position.Value.X / (int)TileSize);
             y = (int)(position.Value.Y / (int)TileSize);

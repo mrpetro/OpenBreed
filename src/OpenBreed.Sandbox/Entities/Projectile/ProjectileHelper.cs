@@ -62,8 +62,8 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
             projectile.Add(TextHelper.Create(core, new Vector2(-10, 10), "Bullet"));
 
-            projectile.GetComponent<Position>().Value = new Vector2(x, y);
-            projectile.GetComponent<Velocity>().Value = new Vector2(vx, vy);
+            projectile.GetComponent<PositionComponent>().Value = new Vector2(x, y);
+            projectile.GetComponent<VelocityComponent>().Value = new Vector2(vx, vy);
 
             projectile.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, (s, a) => OnCollision((IEntity)s, (CollisionEventArgs)a));
 

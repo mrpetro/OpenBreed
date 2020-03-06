@@ -160,9 +160,9 @@
     <Compile Include="States\IState.cs" />
     <Compile Include="Commands\EntitySetStateCommand.cs" />
     <Compile Include="States\StateMachine.cs" />
-    <Compile Include="Common\Components\Thrust.cs" />
-    <Compile Include="Common\Components\Velocity.cs" />
-    <Compile Include="Common\Components\Position.cs" />
+    <Compile Include="Common\Components\ThrustComponent.cs" />
+    <Compile Include="Common\Components\VelocityComponent.cs" />
+    <Compile Include="Common\Components\PositionComponent.cs" />
     <Compile Include="Common\Components\Direction.cs" />
     <Compile Include="Modules\Animation\Systems\IAnimationSystem.cs" />
     <Compile Include="Modules\Physics\IPhysicsSystem.cs" />

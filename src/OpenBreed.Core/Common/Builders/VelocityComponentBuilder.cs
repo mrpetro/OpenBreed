@@ -30,7 +30,7 @@ namespace OpenBreed.Core.Common.Builders
 
         public override IEntityComponent Build()
         {
-            return Velocity.Create(x, y);
+            return VelocityComponent.Create(x, y);
         }
 
         public override void SetProperty(object key, object value)

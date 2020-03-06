@@ -46,8 +46,8 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         public void Execute()
         {
-            var cameraPos = cameraEntity.GetComponent<Position>();
-            var targetPos = targetEntity.GetComponent<Position>();
+            var cameraPos = cameraEntity.GetComponent<PositionComponent>();
+            var targetPos = targetEntity.GetComponent<PositionComponent>();
 
             var targetAabb = targetEntity.GetComponent<BodyComponent>().Aabb;
 
@@ -57,8 +57,8 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         public void Update(float dt)
         {
-            var cameraPos = cameraEntity.GetComponent<Position>();
-            var targetPos = targetEntity.GetComponent<Position>();
+            var cameraPos = cameraEntity.GetComponent<PositionComponent>();
+            var targetPos = targetEntity.GetComponent<PositionComponent>();
             var targetAabb = targetEntity.GetComponent<BodyComponent>().Aabb;
             var offset = new Vector2(targetAabb.Width / 2.0f, targetAabb.Height / 2.0f);
             cameraPos.Value = targetPos.Value + offset;

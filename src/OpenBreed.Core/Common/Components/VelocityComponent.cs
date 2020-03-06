@@ -5,28 +5,28 @@ using System;
 namespace OpenBreed.Core.Common.Systems.Components
 {
     /// <summary>
-    /// Thrust entity component class that can be used to store entity current thrust information
-    /// Example: Actor is applied with specific thrust vector to move in specific direction
+    /// Velocity entity component class that can be used to store entity current velocity information
+    /// Example: Actor is going somewhere with specific velocity vector
     /// </summary>
-    public class Thrust : IEntityComponent
+    public class VelocityComponent : IEntityComponent
     {
         #region Public Constructors
 
         /// <summary>
-        /// Constructor with passed initial thrust value
+        /// Constructor with passed initial velocity value
         /// </summary>
         /// <param name="value">Initial value vector</param>
-        private Thrust(Vector2 value)
+        private VelocityComponent(Vector2 value)
         {
             Value = value;
         }
 
         /// <summary>
-        /// Constructor with passed initial thrust values
+        /// Constructor with passed initial velocity values
         /// </summary>
         /// <param name="x">Initial x value</param>
         /// <param name="y">Initial y value</param>
-        private Thrust(float x, float y)
+        private VelocityComponent(float x, float y)
         {
             Value = new Vector2(x, y);
         }
@@ -36,7 +36,7 @@ namespace OpenBreed.Core.Common.Systems.Components
         #region Public Properties
 
         /// <summary>
-        /// Thrust value
+        /// Velocity value
         /// </summary>
         public Vector2 Value { get; set; }
 
@@ -44,14 +44,14 @@ namespace OpenBreed.Core.Common.Systems.Components
 
         #region Public Methods
 
-        public static Thrust Create(Vector2 value)
+        public static VelocityComponent Create(Vector2 value)
         {
-            return new Thrust(value);
+            return new VelocityComponent(value);
         }
 
-        public static Thrust Create(float x, float y)
+        public static VelocityComponent Create(float x, float y)
         {
-            return new Thrust(x, y);
+            return new VelocityComponent(x, y);
         }
 
         #endregion Public Methods

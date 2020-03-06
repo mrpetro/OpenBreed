@@ -23,7 +23,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         private readonly List<IEntity> entities = new List<IEntity>();
         private readonly List<AiControl> aiControlComps = new List<AiControl>();
-        private readonly List<Position> positionComps = new List<Position>();
+        private readonly List<PositionComponent> positionComps = new List<PositionComponent>();
 
         #endregion Private Fields
 
@@ -32,7 +32,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
         internal AiControlSystem(AiControlSystemBuilder builder) : base(builder.core)
         {
             Require<AiControl>();
-            Require<Position>();
+            Require<PositionComponent>();
         }
 
         #endregion Public Constructors
@@ -57,7 +57,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
         {
             entities.Add(entity);
             aiControlComps.Add(entity.GetComponent<AiControl>());
-            positionComps.Add(entity.GetComponent<Position>());
+            positionComps.Add(entity.GetComponent<PositionComponent>());
         }
 
         protected override void UnregisterEntity(IEntity entity)
