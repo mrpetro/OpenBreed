@@ -75,10 +75,10 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
             var transform = Matrix4.Identity;
             transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-pos.Value.X, -pos.Value.Y, 0.0f));
-            transform = Matrix4.Mult(transform, Matrix4.CreateScale(cmc.Zoom, cmc.Zoom, 1.0f));
+            transform = Matrix4.Mult(transform, Matrix4.CreateScale(cmc.Zoom, cmc.Height, 1.0f));
 
-            transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f, ratio, 1.0f));
-            transform = Matrix4.Mult(transform, Matrix4.CreateScale(ZOOM_BASE, ZOOM_BASE, 1.0f));
+            //transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f, ratio, 1.0f));
+            //transform = Matrix4.Mult(transform, Matrix4.CreateScale(ZOOM_BASE, ZOOM_BASE, 1.0f));
             transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(0.5f, 0.5f, 0.0f));
 
             return transform;

@@ -74,7 +74,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
-            cameraBuilder.SetZoom(1);
+            cameraBuilder.SetZoom(1.0f / (float)core.ClientRectangle.Width , 1.0f / (float)core.ClientRectangle.Height);
 
             var playerCamera = cameraBuilder.Build();
             playerCamera.Tag = "PlayerCamera";
@@ -122,7 +122,7 @@ namespace OpenBreed.Sandbox.Worlds
             rotateFsm.SetInitialState("Idle");
             gameWorld.AddEntity(actor);
 
-            core.Entities.GetByTag("ScreenViewport").FirstOrDefault().GetComponent<ViewportComponent>().CameraEntityId = playerCamera.Id;  
+            core.Entities.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).FirstOrDefault().GetComponent<ViewportComponent>().CameraEntityId = playerCamera.Id;  
         }
 
         private static void OnEntityEntered(object sender, EventArgs e)
