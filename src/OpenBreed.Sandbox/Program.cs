@@ -327,8 +327,7 @@ namespace OpenBreed.Sandbox
             var ortho = Matrix4.CreateOrthographicOffCenter(0.0f, ClientRectangle.Width, 0.0f, ClientRectangle.Height, -100.0f, 100.0f);
             GL.LoadMatrix(ref ortho);
 
-            Rendering.OnResize(ClientRectangle.Width, ClientRectangle.Height);
-            //StateMachine.OnResize(ClientRectangle);
+            Rendering.OnClientResized(ClientRectangle.Width, ClientRectangle.Height);
         }
 
         protected override void OnUpdateFrame(FrameEventArgs e)

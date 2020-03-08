@@ -4,6 +4,7 @@ using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Builders;
+using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Events;
 using OpenBreed.Core.Modules.Rendering.Systems;
@@ -70,16 +71,12 @@ namespace OpenBreed.Sandbox.Worlds
 
         private static void ResizeGameViewport(IEntity viewport, ClientResizedEventArgs args)
         {
-            var vpc = viewport.GetComponent<ViewportComponent>();
-            vpc.Width = args.Width - 64;
-            vpc.Height = args.Height - 64;
+            viewport.PostCommand(new ViewportResizeCommand(viewport.Id, args.Width - 64, args.Height - 64));
         }
 
         private static void ResizeHudViewport(IEntity viewport, ClientResizedEventArgs args)
         {
-            var vpc = viewport.GetComponent<ViewportComponent>();
-            vpc.Width = args.Width;
-            vpc.Height = args.Height;
+            viewport.PostCommand(new ViewportResizeCommand(viewport.Id, args.Width, args.Height));
         }
 
     }

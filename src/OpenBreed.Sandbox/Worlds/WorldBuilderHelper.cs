@@ -87,6 +87,9 @@ namespace OpenBreed.Sandbox.Worlds
             var vp = ScreenWorldHelper.CreateViewportEntity(core, $"TV{pairCode}" , x * 16, y * 16, viewportData.Width, viewportData.Height, true);
 
             vp.GetComponent<ViewportComponent>().CameraEntityId = core.Entities.GetByTag(viewportData.CameraName).FirstOrDefault().Id;
+
+            //GameWorldHelper.SetPreserveAspectRatio(vp);
+
             world.AddEntity(vp);
         }
 

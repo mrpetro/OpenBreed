@@ -4,10 +4,14 @@ using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Helpers;
+using OpenBreed.Core.Modules.Physics.Events;
+using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Core.Modules.Rendering.Events;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Systems;
 using OpenTK;
+using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +55,40 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         public override void Initialize(World world)
         {
             base.Initialize(world);
+
+            World.RegisterHandler(ViewportResizeCommand.TYPE, cmdHandler);
+        }
+
+        public override bool ExecuteCommand(object sender, ICommand cmd)
+        {
+            switch (cmd.Type)
+            {
+                case ViewportResizeCommand.TYPE:
+                    return HandleViewportResizeCommand(sender, (ViewportResizeCommand)cmd);
+
+                default:
+                    return false;
+            }
+        }
+
+        private bool HandleViewportResizeCommand(object sender, ViewportResizeCommand cmd)
+        {
+            var toResize = entities.FirstOrDefault(item => item.Id == cmd.EntityId);
+
+            if (toResize != null)
+            {
+                var vpc = toResize.GetComponent<ViewportComponent>();
+
+                if (vpc.Width == cmd.Width && vpc.Height == cmd.Height)
+                    return true;
+
+                vpc.Width = cmd.Width;
+                vpc.Height = cmd.Height;
+
+                toResize.RaiseEvent(GfxEventTypes.VIEWPORT_RESIZED, new ViewportResizedEventArgs(vpc.Width, vpc.Height));
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -68,16 +106,16 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// This will return camera tranformation matrix which includes aspect ratio correction
         /// </summary>
         /// <returns>Camera transformation matrix</returns>
-        public Matrix4 GetCameraTransform(float ratio, IEntity camera)
+        public Matrix4 GetCameraTransform(ViewportComponent vpc, IEntity camera)
         {
             var pos = camera.GetComponent<PositionComponent>();
             var cmc = camera.GetComponent<CameraComponent>();
 
             var transform = Matrix4.Identity;
             transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-pos.Value.X, -pos.Value.Y, 0.0f));
-            transform = Matrix4.Mult(transform, Matrix4.CreateScale(cmc.Zoom, cmc.Height, 1.0f));
+            transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f / cmc.Width, 1.0f / cmc.Height, 1.0f));
 
-            //transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f, ratio, 1.0f));
+            transform = Matrix4.Mult(transform, Matrix4.CreateScale(cmc.Width / vpc.Width, cmc.Height / vpc.Height, 1.0f));
             //transform = Matrix4.Mult(transform, Matrix4.CreateScale(ZOOM_BASE, ZOOM_BASE, 1.0f));
             transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(0.5f, 0.5f, 0.0f));
 
@@ -86,6 +124,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         public void Render(Box2 viewBox, int depth, float dt)
         {
+            cmdHandler.ExecuteEnqueued();
+
             if (depth > RENDER_MAX_DEPTH)
                 return;
 
@@ -229,13 +269,15 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                 GL.PushMatrix();
 
                 //Apply camera transformation matrix
-                var transform = GetCameraTransform(vpc.Ratio, camera);
+                var transform = GetCameraTransform(vpc, camera);
 
                 GL.MultMatrix(ref transform);
 
                 var cameraT = transform.Inverted();
 
                 GetVisibleRectangle(cameraT, out Box2 clipBox);
+            
+                RenderTools.DrawBox(clipBox, Color4.LightBlue);
 
                 if (camera.World != null)
                     camera.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(clipBox, depth, dt));
