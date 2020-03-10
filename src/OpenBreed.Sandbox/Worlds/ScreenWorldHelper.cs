@@ -57,8 +57,8 @@ namespace OpenBreed.Sandbox.Worlds
 
             var world = builder.Build();
 
-            var gameViewport = CreateViewportEntity(core, GAME_VIEWPORT, 32, 32, core.ClientRectangle.Width - 64, core.ClientRectangle.Height - 64, true, false);
-            var hudViewport = CreateViewportEntity(core, HUD_VIEWPORT, 0, 0, core.ClientRectangle.Width, core.ClientRectangle.Height, false, false);
+            var gameViewport = CreateViewportEntity(core, GAME_VIEWPORT, 32, 32, core.ClientRectangle.Width - 64, core.ClientRectangle.Height - 64, true, true);
+            var hudViewport = CreateViewportEntity(core, HUD_VIEWPORT, 0, 0, core.ClientRectangle.Width, core.ClientRectangle.Height, false, true);
 
             core.Rendering.Subscribe(GfxEventTypes.CLIENT_RESIZED, (s, a) => ResizeGameViewport(gameViewport, (ClientResizedEventArgs)a));
             core.Rendering.Subscribe(GfxEventTypes.CLIENT_RESIZED, (s, a) => ResizeHudViewport(hudViewport, (ClientResizedEventArgs)a));

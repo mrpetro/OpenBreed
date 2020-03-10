@@ -115,14 +115,36 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-pos.Value.X, -pos.Value.Y, 0.0f));
             transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f / cmc.Width, 1.0f / cmc.Height, 1.0f));
 
-            transform = Matrix4.Mult(transform, Matrix4.CreateScale(cmc.Width / vpc.Width, cmc.Height / vpc.Height, 1.0f));
-            //transform = Matrix4.Mult(transform, Matrix4.CreateScale(ZOOM_BASE, ZOOM_BASE, 1.0f));
+            var vcRatio = vpc.Ratio / cmc.Ratio;
+
+            switch (vpc.ScalingType)
+            {
+                case ViewportScalingType.None:
+                    transform = Matrix4.Mult(transform, Matrix4.CreateScale(cmc.Width / vpc.Width, cmc.Height / vpc.Height, 1.0f));
+                    break;
+                case ViewportScalingType.FitHeightPreserveAspectRatio:
+                    transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f / vpc.Ratio * cmc.Ratio, 1.0f, 1.0f));
+                    break;
+                case ViewportScalingType.FitWidthPreserveAspectRatio:
+                    transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f, 1.0f * vcRatio, 1.0f));
+                    break;
+                case ViewportScalingType.FitBothPreserveAspectRatio:
+                    if(vcRatio >= 1)
+                        transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f / vcRatio, 1.0f, 1.0f));
+                    else
+                        transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f, vcRatio, 1.0f));
+                    break;
+                case ViewportScalingType.FitBothIgnoreAspectRatio:
+                default:
+                    break;
+            }
+
             transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(0.5f, 0.5f, 0.0f));
 
             return transform;
         }
 
-        public void Render(Box2 viewBox, int depth, float dt)
+        public void Render(Box2 clipBox, int depth, float dt)
         {
             cmdHandler.ExecuteEnqueued();
 
@@ -132,7 +154,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             depth++;
 
             for (int i = 0; i < entities.Count; i++)
-                RenderViewport(entities[i], viewBox, depth, dt);
+                RenderViewport(entities[i], clipBox, depth, dt);
         }
 
         public bool EnqueueMsg(object sender, IEntityCommand msg)
@@ -158,13 +180,26 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Methods
 
-        private void GetVisibleRectangle(Matrix4 cameraT, out Box2 viewBox)
+        private void GetVisibleRectangle(IEntity camera, Matrix4 cameraT, out Box2 viewBox)
         {
-            var pointLB = new Vector4(0.0f, 0.0f, 0.0f, 1.0f);
-            var pointRT = new Vector4(1.0f, 1.0f, 0.0f, 1.0f);
-            pointLB = Vector4.Transform(pointLB, cameraT);
-            pointRT = Vector4.Transform(pointRT, cameraT);
-            viewBox = Box2.FromTLRB(pointRT.Y, pointLB.X, pointRT.X, pointLB.Y);
+            var pos = camera.GetComponent<PositionComponent>();
+            var cmc = camera.GetComponent<CameraComponent>();
+            var x = pos.Value.X;
+            var y = pos.Value.Y;
+
+            viewBox = Box2.FromTLRB(y + cmc.Height / 2.0f, x - cmc.Width / 2.0f, x + cmc.Width / 2.0f, y - cmc.Height / 2.0f);
+
+            //var x = pos.Value.X * 0.5f;
+            //var y = pos.Value.Y * 0.5f;
+            ////var x = 0.0f;
+            ////var y = 0.0f;
+
+            //var pointLB = new Vector4(0.0f, 0.0f, 0.0f, -0.5f);
+            //var pointRT = new Vector4(-0.5f, -0.5f, 0.0f, -0.5f);
+            //pointLB = Vector4.Transform(pointLB, cameraT);
+            //pointRT = Vector4.Transform(pointRT, cameraT);
+            //cmc
+            //viewBox = Box2.FromTLRB(y - pointRT.Y, x - pointLB.X , x - pointRT.X, y - pointLB.Y);
         }
 
         /// <summary>
@@ -271,16 +306,19 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                 //Apply camera transformation matrix
                 var transform = GetCameraTransform(vpc, camera);
 
+                //GL.Scale(1.5f, 1.5f, 1.0f);
+ 
                 GL.MultMatrix(ref transform);
 
-                var cameraT = transform.Inverted();
+                //var cameraT = transform.Inverted();
+  
+                GetVisibleRectangle(camera, transform, out Box2 clipBox);
 
-                GetVisibleRectangle(cameraT, out Box2 clipBox);
-            
-                RenderTools.DrawBox(clipBox, Color4.LightBlue);
 
                 if (camera.World != null)
                     camera.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(clipBox, depth, dt));
+
+                RenderTools.DrawBox(clipBox, Color4.LightBlue);
             }
             finally
             {

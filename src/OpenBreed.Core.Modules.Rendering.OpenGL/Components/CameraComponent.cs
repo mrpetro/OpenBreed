@@ -33,6 +33,11 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         public float Height { get; set; }
 
         /// <summary>
+        /// Aspect ratio of this camera
+        /// </summary>
+        public float Ratio { get { return Width / Height; } }
+
+        /// <summary>
         /// Brightness value of camera
         /// </summary>
         public float Brightness { get; set; }

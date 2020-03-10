@@ -77,12 +77,13 @@ namespace OpenBreed.Sandbox.Worlds
 
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
-            cameraBuilder.SetZoom(core.ClientRectangle.Width , core.ClientRectangle.Height);
+            cameraBuilder.SetZoom(320 , 240);
 
             var playerCamera = cameraBuilder.Build();
             playerCamera.Tag = "PlayerCamera";
             playerCamera.Add(new Animator(10.0f, false, -1, FrameTransition.LinearInterpolation));
 
+            cameraBuilder.SetZoom(640, 480);
             var gameCamera = cameraBuilder.Build();
             gameCamera.Tag = "HubCamera";
             gameCamera.Add(new Animator(10.0f, false, -1, FrameTransition.LinearInterpolation));
