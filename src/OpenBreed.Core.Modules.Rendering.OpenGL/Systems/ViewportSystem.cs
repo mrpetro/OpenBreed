@@ -230,29 +230,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             var transform = GetTransform(pos, vpc);
             GL.MultMatrix(ref transform);
 
-            //TODO: Fix clipping for viewport in viewport scenarios
-            if (vpc.Clipping)
-            {
-                //Enable stencil buffer
-                if (depth == 1)
-                    GL.Enable(EnableCap.StencilTest);
-
-
-                GL.ColorMask(false, false, false, false);
-                GL.DepthMask(false);
-                GL.StencilFunc(StencilFunction.Always, depth, depth);
-                GL.StencilOp(StencilOp.Incr, StencilOp.Incr, StencilOp.Incr);
-
-                // Draw rectangle
-                GL.Color3(0.0f, 0.0f, 0.0f);
-                RenderTools.DrawUnitQuad();
-
-                GL.ColorMask(true, true, true, true);
-                GL.DepthMask(true);
-                GL.StencilFunc(StencilFunction.Equal, depth, depth);
-                GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Keep);
-            }
-
             if (vpc.DrawBackgroud)
                 DrawBackground(vpc);
 
@@ -271,24 +248,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
             if (cameraEntity != null)
                 DrawCameraView(depth, dt, vpc, cameraEntity);
-
-            if (vpc.Clipping)
-            {
-                GL.ColorMask(false, false, false, false);
-                GL.DepthMask(false);
-                GL.StencilFunc(StencilFunction.Always, depth, depth);
-                GL.StencilOp(StencilOp.Decr, StencilOp.Decr, StencilOp.Decr);
-
-                // Draw rectangle
-                GL.Color3(0.0f, 0.0f, 0.0f);
-                RenderTools.DrawUnitQuad();
-
-                GL.ColorMask(true, true, true, true);
-                GL.DepthMask(true);
-
-                if (depth == 1)
-                    GL.Disable(EnableCap.StencilTest);
-            }
 
             GL.PopMatrix();
         }
@@ -314,11 +273,51 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
   
                 GetVisibleRectangle(camera, transform, out Box2 clipBox);
 
+                if (vpc.Clipping)
+                {
+                    //Enable stencil buffer
+                    if (depth == 1)
+                        GL.Enable(EnableCap.StencilTest);
+
+
+                    GL.ColorMask(false, false, false, false);
+                    GL.DepthMask(false);
+                    GL.StencilFunc(StencilFunction.Always, depth, depth);
+                    GL.StencilOp(StencilOp.Incr, StencilOp.Incr, StencilOp.Incr);
+
+                    // Draw black box
+                    GL.Color4(Color4.Black);
+                    RenderTools.DrawBox(clipBox);
+
+                    GL.ColorMask(true, true, true, true);
+                    GL.DepthMask(true);
+                    GL.StencilFunc(StencilFunction.Equal, depth, depth);
+                    GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Keep);
+                }
 
                 if (camera.World != null)
                     camera.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(clipBox, depth, dt));
 
-                RenderTools.DrawBox(clipBox, Color4.LightBlue);
+                GL.Color4(Color4.LightBlue);
+                RenderTools.DrawRectangle(clipBox);
+
+                if (vpc.Clipping)
+                {
+                    GL.ColorMask(false, false, false, false);
+                    GL.DepthMask(false);
+                    GL.StencilFunc(StencilFunction.Always, depth, depth);
+                    GL.StencilOp(StencilOp.Decr, StencilOp.Decr, StencilOp.Decr);
+
+                    // Draw black box
+                    GL.Color4(Color4.Black);
+                    RenderTools.DrawBox(clipBox);
+
+                    GL.ColorMask(true, true, true, true);
+                    GL.DepthMask(true);
+
+                    if (depth == 1)
+                        GL.Disable(EnableCap.StencilTest);
+                }
             }
             finally
             {
@@ -346,7 +345,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             }
 
             GL.Translate(0, 0, BRIGHTNESS_Z_LEVEL);
-            RenderTools.DrawUnitQuad();
+            RenderTools.DrawUnitRectangle();
             GL.Disable(EnableCap.Blend);
         }
 
@@ -354,7 +353,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             //Draw background for this viewport
             GL.Color4(vpc.BackgroundColor);
-            RenderTools.DrawUnitQuad();
+            RenderTools.DrawUnitRectangle();
         }
 
         #endregion Private Methods
