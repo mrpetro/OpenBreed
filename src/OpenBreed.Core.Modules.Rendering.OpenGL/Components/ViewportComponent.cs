@@ -5,6 +5,18 @@ using OpenTK.Graphics;
 namespace OpenBreed.Core.Modules.Rendering.Components
 {
     /// <summary>
+    /// Types of scaling for camera display in viewports
+    /// </summary>
+    public enum ViewportScalingType
+    {
+        None,
+        FitWidthPreserveAspectRatio,
+        FitHeightPreserveAspectRatio,
+        FitBothPreserveAspectRatio,
+        FitBothIgnoreAspectRatio
+    }
+
+    /// <summary>
     /// Viewport component as display for cameras
     /// Related systems:
     /// - ViewportSystem
@@ -35,12 +47,14 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         /// <summary>
         /// Width of this viewport
         /// </summary>
-        public float Width { get; set; }
+        public float Width { get; internal set; }
 
         /// <summary>
         /// Height of this viewport
         /// </summary>
-        public float Height { get; set; }
+        public float Height { get; internal set; }
+
+
 
         /// <summary>
         ///  Flag to draw border box of viewport
@@ -73,7 +87,12 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         public float Ratio { get { return Width / Height; } }
 
         /// <summary>
-        /// Camera entity ID which FOV(Field of view) is being rendered to this viewport
+        /// Type of scaling strategy for camera display 
+        /// </summary>
+        public ViewportScalingType ScalingType { get; set; }
+
+        /// <summary>
+        /// Camera entity ID which display is being rendered to this viewport
         /// </summary>
         public int CameraEntityId { get; set; }
 

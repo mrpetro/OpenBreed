@@ -45,7 +45,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             World.RegisterHandler(TextSetCommand.TYPE, cmdHandler);
         }
 
-        public void Render(Box2 viewBox, int depth, float dt)
+        public void Render(Box2 clipBox, int depth, float dt)
         {
             cmdHandler.ExecuteEnqueued();
 
@@ -57,7 +57,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Enable(EnableCap.Texture2D);
 
             for (int i = 0; i < entities.Count; i++)
-                RenderText(entities[i]);
+                RenderText(entities[i], clipBox);
 
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.AlphaTest);
@@ -99,19 +99,22 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Methods
 
-        private void RenderText(IEntity entity)
+        private void RenderText(IEntity entity, Box2 clipBox)
         {
             var pos = entity.GetComponent<PositionComponent>();
-            var text = entity.GetComponent<TextComponent>();
+            var tcp = entity.GetComponent<TextComponent>();
 
             GL.Enable(EnableCap.Texture2D);
             GL.PushMatrix();
 
-            GL.Translate(pos.Value.X, pos.Value.Y, text.Order);
+            GL.Translate(pos.Value.X, pos.Value.Y, 0.0f);
 
-            GL.Translate(text.Offset.X, text.Offset.Y, 0.0f);
-
-            Core.Rendering.Fonts.GetById(text.FontId).Draw(text.Value);
+            for (int i = 0; i < tcp.Parts.Count; i++)
+            {
+                var part = tcp.Parts[i];
+                GL.Translate(part.Offset.X, part.Offset.Y, 0.0f);
+                Core.Rendering.Fonts.GetById(part.FontId).Draw(part.Text);
+            }
 
             GL.PopMatrix();
             GL.Disable(EnableCap.Texture2D);
@@ -124,7 +127,13 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                 return false;
 
             var text = toModify.GetComponent<TextComponent>();
-            text.Value = cmd.Text;
+
+            if (cmd.PartId < 0 || cmd.PartId >= text.Parts.Count)
+            {
+                Core.Logging.Error($"Unknown text part ID({cmd.PartId}) to modify.");
+            }
+
+            text.Parts[cmd.PartId].Text = cmd.Text;
 
             return true;
         }

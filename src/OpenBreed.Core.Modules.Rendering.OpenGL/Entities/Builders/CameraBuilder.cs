@@ -14,6 +14,7 @@ namespace OpenBreed.Core.Modules.Rendering.Entities.Builders
         internal Vector2 position;
         internal float rotation;
         internal float zoom;
+        internal float height;
 
         #endregion Internal Fields
 
@@ -31,7 +32,7 @@ namespace OpenBreed.Core.Modules.Rendering.Entities.Builders
         {
             var entity = Core.Entities.Create();
             entity.Add(PositionComponent.Create(position));
-            entity.Add(CameraComponent.Create(1.0f));
+            entity.Add(CameraComponent.Create(zoom, height));
             entity.Add(new PauseImmuneComponent());
             return entity;
         }
@@ -46,9 +47,10 @@ namespace OpenBreed.Core.Modules.Rendering.Entities.Builders
             this.rotation = rotation;
         }
 
-        public void SetZoom(float zoom)
+        public void SetZoom(float zoom, float height)
         {
             this.zoom = zoom;
+            this.height = height;
         }
 
         #endregion Public Methods

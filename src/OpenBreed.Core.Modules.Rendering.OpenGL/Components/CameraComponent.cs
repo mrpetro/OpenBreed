@@ -11,9 +11,10 @@ namespace OpenBreed.Core.Modules.Rendering.Components
     {
         #region Private Constructors
 
-        private CameraComponent(float zoom, float brightness)
+        private CameraComponent(float width, float height, float brightness)
         {
-            Zoom = zoom;
+            Width = width;
+            Height = height;
             Brightness = brightness;
         }
 
@@ -22,9 +23,19 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         #region Public Properties
 
         /// <summary>
-        /// Zoom value of camera
+        /// Width value of camera
         /// </summary>
-        public float Zoom { get; set; }
+        public float Width { get; set; }
+
+        /// <summary>
+        /// Height value of camera
+        /// </summary>
+        public float Height { get; set; }
+
+        /// <summary>
+        /// Aspect ratio of this camera
+        /// </summary>
+        public float Ratio { get { return Width / Height; } }
 
         /// <summary>
         /// Brightness value of camera
@@ -41,9 +52,9 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         /// <param name="zoom">Initial zoom value</param>
         /// <param name="brightness">Initial brightness value</param>
         /// <returns>Camera component</returns>
-        public static CameraComponent Create(float zoom, float brightness = 1.0f)
+        public static CameraComponent Create(float zoom, float height, float brightness = 1.0f)
         {
-            return new CameraComponent(zoom, brightness);
+            return new CameraComponent(zoom, height, brightness);
         }
 
         #endregion Public Methods

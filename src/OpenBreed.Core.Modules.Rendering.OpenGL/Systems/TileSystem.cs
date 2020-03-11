@@ -82,14 +82,14 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             World.RegisterHandler(PutStampCommand.TYPE, cmdHandler);
         }
 
-        public void Render(Box2 viewBox, int depth, float dt)
+        public void Render(Box2 clipBox, int depth, float dt)
         {
             cmdHandler.ExecuteEnqueued();
 
-            int leftIndex = (int)viewBox.Left / TILE_SIZE;
-            int bottomIndex = (int)viewBox.Bottom / TILE_SIZE;
-            int rightIndex = (int)viewBox.Right / TILE_SIZE + 1;
-            int topIndex = (int)viewBox.Top / TILE_SIZE + 1;
+            int leftIndex = (int)clipBox.Left / TILE_SIZE;
+            int bottomIndex = (int)clipBox.Bottom / TILE_SIZE;
+            int rightIndex = (int)clipBox.Right / TILE_SIZE + 1;
+            int topIndex = (int)clipBox.Top / TILE_SIZE + 1;
 
             leftIndex = MathHelper.Clamp(leftIndex, 0, GridWidth);
             rightIndex = MathHelper.Clamp(rightIndex, 0, GridWidth);

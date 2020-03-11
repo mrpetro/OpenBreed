@@ -1,13 +1,16 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Common;
+using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Helpers;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
+using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Physics.Systems;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
+using OpenBreed.Core.Modules.Rendering.Events;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems.Control.Components;
@@ -74,12 +77,13 @@ namespace OpenBreed.Sandbox.Worlds
 
             cameraBuilder.SetPosition(new Vector2(64, 64));
             cameraBuilder.SetRotation(0.0f);
-            cameraBuilder.SetZoom(1);
+            cameraBuilder.SetZoom(320 , 240);
 
             var playerCamera = cameraBuilder.Build();
             playerCamera.Tag = "PlayerCamera";
             playerCamera.Add(new Animator(10.0f, false, -1, FrameTransition.LinearInterpolation));
 
+            cameraBuilder.SetZoom(640, 480);
             var gameCamera = cameraBuilder.Build();
             gameCamera.Tag = "HubCamera";
             gameCamera.Add(new Animator(10.0f, false, -1, FrameTransition.LinearInterpolation));
@@ -122,7 +126,24 @@ namespace OpenBreed.Sandbox.Worlds
             rotateFsm.SetInitialState("Idle");
             gameWorld.AddEntity(actor);
 
-            core.Entities.GetByTag("ScreenViewport").FirstOrDefault().GetComponent<ViewportComponent>().CameraEntityId = playerCamera.Id;  
+            var gameViewport = core.Entities.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
+
+            gameViewport.GetComponent<ViewportComponent>().CameraEntityId = playerCamera.Id;
+
+            //gameViewport.Subscribe(GfxEventTypes.VIEWPORT_RESIZED, (s, a) => UpdateCameraFov(playerCamera, (ViewportResizedEventArgs)a));
+            //SetPreserveAspectRatio(gameViewport);
+        }
+
+        public static void SetPreserveAspectRatio(IEntity viewportEntity)
+        {
+            var cameraEntity = viewportEntity.Core.Entities.GetById(viewportEntity.GetComponent<ViewportComponent>().CameraEntityId);
+            viewportEntity.Subscribe(GfxEventTypes.VIEWPORT_RESIZED, (s, a) => UpdateCameraFov(cameraEntity, (ViewportResizedEventArgs)a));
+        }
+
+        private static void UpdateCameraFov(IEntity cameraEntity, ViewportResizedEventArgs a)
+        {
+            cameraEntity.GetComponent<CameraComponent>().Width = a.Width;
+            cameraEntity.GetComponent<CameraComponent>().Height = a.Height;
         }
 
         private static void OnEntityEntered(object sender, EventArgs e)

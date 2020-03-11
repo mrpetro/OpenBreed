@@ -51,7 +51,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
             var animDirName = AnimHelper.ToDirectionName(direction);
 
             Entity.PostCommand(new PlayAnimCommand(Entity.Id, animPrefix + animDirName));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, "Projectile - Fired"));
+            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, "Projectile - Fired"));
             Entity.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, OnCollision);
 
             Entity.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, OnFrameChanged);

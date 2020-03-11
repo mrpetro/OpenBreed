@@ -1,34 +1,32 @@
 ﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Entities;
 
 namespace OpenBreed.Core.Modules.Rendering.Commands
 {
-    public struct TextSetCommand : IEntityCommand
+    public class ViewportResizeCommand : IEntityCommand
     {
         #region Public Fields
 
-        public const string TYPE = "TEXT_SET";
+        public const string TYPE = "RESIZE_VIEWPORT";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public TextSetCommand(int entityId, int partId, string text)
+        public ViewportResizeCommand(int entityId, float width, float height)
         {
             EntityId = entityId;
-            PartId = partId;
-            Text = text;
+            Width = width;
+            Height = height;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public string Type { get { return TYPE; } }
-
         public int EntityId { get; }
-        public int PartId { get; }
-        public string Text { get; }
+        public string Type { get { return TYPE; } }
+        public float Width { get; }
+        public float Height { get; }
 
         #endregion Public Properties
     }

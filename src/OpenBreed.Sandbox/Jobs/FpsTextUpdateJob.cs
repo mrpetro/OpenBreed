@@ -41,7 +41,7 @@ namespace OpenBreed.Sandbox.Jobs
 
         public void Update(float dt)
         {
-            entity.PostCommand(new TextSetCommand(entity.Id, $"FPS: {entity.Core.Rendering.Fps.ToString("0.00")}"));
+            entity.PostCommand(new TextSetCommand(entity.Id, 0, $"FPS: {entity.Core.Rendering.Fps.ToString("0.00")}"));
         }
 
         public void Dispose()

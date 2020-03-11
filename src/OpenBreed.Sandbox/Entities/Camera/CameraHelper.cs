@@ -36,7 +36,7 @@ namespace OpenBreed.Sandbox.Entities.Camera
 
             cameraEntity.Add(new Animator(10.0f, true, 0, FrameTransition.LinearInterpolation));
             cameraEntity.Add(PositionComponent.Create(x, y));
-            cameraEntity.Add(CameraComponent.Create(1.0f));
+            cameraEntity.Add(CameraComponent.Create(1.0f, 1.0f));
             cameraEntity.Add(new PauseImmuneComponent());
             world.AddEntity(cameraEntity);
             return cameraEntity;

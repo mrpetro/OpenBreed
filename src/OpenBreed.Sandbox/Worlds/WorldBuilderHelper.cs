@@ -84,9 +84,12 @@ namespace OpenBreed.Sandbox.Worlds
             if (!viewports.TryGetValue(pairCode, out (int Width, int Height, string CameraName ) viewportData))
                 return;
 
-            var vp = ScreenWorldHelper.CreateViewportEntity(core, $"TV{pairCode}" , x * 16, y * 16, viewportData.Width, viewportData.Height);
+            var vp = ScreenWorldHelper.CreateViewportEntity(core, $"TV{pairCode}" , x * 16, y * 16, viewportData.Width, viewportData.Height, true);
 
             vp.GetComponent<ViewportComponent>().CameraEntityId = core.Entities.GetByTag(viewportData.CameraName).FirstOrDefault().Id;
+            vp.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
+            //GameWorldHelper.SetPreserveAspectRatio(vp);
+
             world.AddEntity(vp);
         }
 

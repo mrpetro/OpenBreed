@@ -69,15 +69,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builders\SpriteComponentBuilder.cs" />
+    <Compile Include="Builders\TextComponentBuilder.cs" />
     <Compile Include="Builders\ViewportComponentBuilder.cs" />
     <Compile Include="Builders\WireframeSystemBuilder.cs" />
     <Compile Include="Builders\TextSystemBuilder.cs" />
     <Compile Include="Builders\SpriteSystemBuilder.cs" />
     <Compile Include="Builders\TileSystemBuilder.cs" />
     <Compile Include="Commands\CameraFollowCommand.cs" />
+    <Compile Include="Commands\ViewportResizeCommand.cs" />
     <Compile Include="Components\CameraComponent.cs" />
     <Compile Include="Components\SpriteComponent.cs" />
     <Compile Include="Components\TextComponent.cs" />
+    <Compile Include="Events\ViewportResizedEventArgs.cs" />
     <Compile Include="Events\ClientResizedEventArgs.cs" />
     <Compile Include="Events\GfxEventTypes.cs" />
     <Compile Include="Helpers\TileCell.cs" />

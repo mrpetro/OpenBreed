@@ -80,7 +80,7 @@ namespace OpenBreed.Core.Modules.Rendering
         {
         }
 
-        public void OnResize(float width, float height)
+        public void OnClientResized(float width, float height)
         {
             Core.Events.Raise(this, GfxEventTypes.CLIENT_RESIZED, new ClientResizedEventArgs(width, height));
         }

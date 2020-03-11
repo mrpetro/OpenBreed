@@ -15,5 +15,10 @@ namespace OpenBreed.Core.Modules.Rendering.Events
         /// Occurs when rendering client screen was resized
         /// </summary>
         public const string CLIENT_RESIZED = "CLIENT_RESIZED";
+
+        /// <summary>
+        /// Occurs when rendering viewport was resized
+        /// </summary>
+        public const string VIEWPORT_RESIZED = "VIEWPORT_RESIZED";
     }
 }

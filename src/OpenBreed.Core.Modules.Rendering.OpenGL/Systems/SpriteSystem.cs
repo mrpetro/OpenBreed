@@ -65,7 +65,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             }
         }
 
-        public void Render(Box2 viewBox, int depth, float dt)
+        public void Render(Box2 clipBox, int depth, float dt)
         {
             cmdHandler.ExecuteEnqueued();
 
@@ -77,7 +77,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Enable(EnableCap.Texture2D);
 
             for (int i = 0; i < active.Count; i++)
-                RenderSprite(active[i]);
+                RenderSprite(active[i], clipBox);
 
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.AlphaTest);
@@ -111,18 +111,32 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// Draw this sprite to given viewport
         /// </summary>
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
-        private void RenderSprite(IEntity entity)
+        private void RenderSprite(IEntity entity, Box2 clipBox)
         {
             var pos = entity.GetComponent<PositionComponent>();
-            var sprite = entity.GetComponent<SpriteComponent>();
+            var spc = entity.GetComponent<SpriteComponent>();
+            var atlas = Core.Rendering.Sprites.GetById(spc.AtlasId);
+
+            //Test viewport for clippling here
+            if (pos.Value.X + atlas.SpriteWidth < clipBox.Left)
+                return;
+
+            if (pos.Value.X > clipBox.Right)
+                return;
+
+            if (pos.Value.Y + atlas.SpriteHeight < clipBox.Bottom)
+                return;
+
+            if (pos.Value.Y > clipBox.Top)
+                return;
+
 
             GL.PushMatrix();
 
-            GL.Translate((int)pos.Value.X, (int)pos.Value.Y, sprite.Order);
+            GL.Translate((int)pos.Value.X, (int)pos.Value.Y, spc.Order);
 
-            var spriteAtlas = Core.Rendering.Sprites.GetById(sprite.AtlasId);
             //GL.Translate(-spriteAtlas.SpriteWidth / 2, -spriteAtlas.SpriteHeight / 2, 0.0f);
-            spriteAtlas.Draw(sprite.ImageId);
+            atlas.Draw(spc.ImageId);
 
             GL.PopMatrix();
         }
