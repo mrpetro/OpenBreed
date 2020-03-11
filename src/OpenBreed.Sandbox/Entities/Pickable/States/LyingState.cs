@@ -41,7 +41,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
         public void EnterState()
         {
             // Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, String.Join(", ", Entity.CurrentStateNames.ToArray())));
             var pos = Entity.GetComponent<PositionComponent>();
             Entity.PostCommand(new PutStampCommand(Entity.World.Id, stampId, 0, pos.Value));
             Entity.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, OnCollision);

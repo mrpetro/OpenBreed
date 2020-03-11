@@ -47,7 +47,7 @@ namespace OpenBreed.Sandbox.Components.States
 
             var pos = Entity.GetComponent<PositionComponent>();
             Entity.PostCommand(new PutStampCommand(Entity.World.Id, stampId, 0, pos.Value));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, "Door - Closed"));
+            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, "Door - Closed"));
 
             Entity.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, OnCollision);
         }

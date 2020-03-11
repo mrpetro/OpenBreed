@@ -11,6 +11,7 @@ using OpenBreed.Core.Modules.Rendering.Events;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Sandbox.Jobs;
 using OpenTK;
+using OpenTK.Graphics;
 using System;
 using System.Linq;
 
@@ -72,7 +73,7 @@ namespace OpenBreed.Sandbox.Worlds
             var fpsTextEntity = world.Core.Entities.Create();
 
             fpsTextEntity.Add(PositionComponent.Create(new Vector2(-fpsTextEntity.Core.ClientRectangle.Width / 2.0f, -fpsTextEntity.Core.ClientRectangle.Height / 2.0f)));
-            fpsTextEntity.Add(TextComponent.Create(arial12.Id, Vector2.Zero, "FPS: 0.0", 100.0f));
+            fpsTextEntity.Add(TextComponent.Create(arial12.Id, Vector2.Zero, Color4.White, "FPS: 0.0", 100.0f));
             world.AddEntity(fpsTextEntity);
 
             world.Core.Jobs.Execute(new FpsTextUpdateJob(fpsTextEntity));

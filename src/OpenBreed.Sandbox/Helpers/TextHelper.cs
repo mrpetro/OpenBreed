@@ -2,6 +2,7 @@
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenTK;
+using OpenTK.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace OpenBreed.Sandbox.Helpers
         public static IEntityComponent Create(ICore core, Vector2 offset, string text)
         {
             var fontAtlas = core.Rendering.Fonts.Create("Arial", 9);
-            return TextComponent.Create(fontAtlas.Id, offset, text);
+            return TextComponent.Create(fontAtlas.Id, offset, Color4.White, text);
         }
     }
 }

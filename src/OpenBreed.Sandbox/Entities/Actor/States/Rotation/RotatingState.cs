@@ -58,7 +58,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
             var animMovementName = Entity.FsmList.First(item => item.Name == "Movement");
 
             Entity.PostCommand(new PlayAnimCommand(Entity.Id, $"{animPrefix}/{animMovementName.CurrentStateName}/{animDirName}"));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
             Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Rotation", "Stop"));
         }

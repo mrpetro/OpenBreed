@@ -273,12 +273,14 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
   
                 GetVisibleRectangle(camera, transform, out Box2 clipBox);
 
+                GL.Color4(Color4.LightBlue);
+                RenderTools.DrawRectangle(clipBox);
+
                 if (vpc.Clipping)
                 {
                     //Enable stencil buffer
                     if (depth == 1)
                         GL.Enable(EnableCap.StencilTest);
-
 
                     GL.ColorMask(false, false, false, false);
                     GL.DepthMask(false);
@@ -297,9 +299,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
                 if (camera.World != null)
                     camera.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(clipBox, depth, dt));
-
-                GL.Color4(Color4.LightBlue);
-                RenderTools.DrawRectangle(clipBox);
 
                 if (vpc.Clipping)
                 {

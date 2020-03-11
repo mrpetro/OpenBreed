@@ -13,9 +13,10 @@ namespace OpenBreed.Core.Modules.Rendering.Commands
 
         #region Public Constructors
 
-        public TextSetCommand(int entityId, string text)
+        public TextSetCommand(int entityId, int partId, string text)
         {
             EntityId = entityId;
+            PartId = partId;
             Text = text;
         }
 
@@ -23,8 +24,10 @@ namespace OpenBreed.Core.Modules.Rendering.Commands
 
         #region Public Properties
 
-        public int EntityId { get; }
         public string Type { get { return TYPE; } }
+
+        public int EntityId { get; }
+        public int PartId { get; }
         public string Text { get; }
 
         #endregion Public Properties

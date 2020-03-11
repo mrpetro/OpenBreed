@@ -51,7 +51,7 @@ namespace OpenBreed.Sandbox.Components.States
             var pos = Entity.GetComponent<PositionComponent>();
 
             Entity.PostCommand(new PutStampCommand(Entity.World.Id, stampId, 0, pos.Value));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, "Door - Opened"));
+            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, "Door - Opened"));
         }
 
         public void Initialize(IEntity entity)

@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builders\SpriteComponentBuilder.cs" />
+    <Compile Include="Builders\TextComponentBuilder.cs" />
     <Compile Include="Builders\ViewportComponentBuilder.cs" />
     <Compile Include="Builders\WireframeSystemBuilder.cs" />
     <Compile Include="Builders\TextSystemBuilder.cs" />
