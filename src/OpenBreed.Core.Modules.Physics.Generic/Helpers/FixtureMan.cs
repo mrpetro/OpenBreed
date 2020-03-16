@@ -1,5 +1,5 @@
-﻿using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Physics.Components.Shapes;
+﻿using OpenBreed.Core.Common.Systems.Shapes;
+using OpenBreed.Core.Modules.Physics.Components;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

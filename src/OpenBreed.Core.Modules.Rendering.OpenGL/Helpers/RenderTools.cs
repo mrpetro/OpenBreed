@@ -68,6 +68,16 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         public static void DrawUnitRectangle()
         {
+            GL.Begin(PrimitiveType.LineLoop);
+            GL.Vertex3(0, 1.0f, 0);
+            GL.Vertex3(0, 0, 0);
+            GL.Vertex3(1.0f, 0, 0);
+            GL.Vertex3(1.0f, 1.0f, 0);
+            GL.End();
+        }
+
+        public static void DrawUnitBox()
+        {
             GL.Begin(PrimitiveType.Polygon);
             GL.Vertex3(0, 1.0f, 0);
             GL.Vertex3(0, 0, 0);
@@ -76,9 +86,9 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             GL.End();
         }
 
-        public static void DrawBox(Box2 box)
+        public static void DrawRectangle(Box2 box)
         {
-            GL.Begin(PrimitiveType.Polygon);
+            GL.Begin(PrimitiveType.LineLoop);
             GL.Vertex3(box.Left, box.Top, 0.0f);
             GL.Vertex3(box.Left, box.Bottom, 0.0f);
             GL.Vertex3(box.Right, box.Bottom, 0.0f);
@@ -86,9 +96,9 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             GL.End();
         }
 
-        public static void DrawRectangle(Box2 box)
+        public static void DrawBox(Box2 box)
         {
-            GL.Begin(PrimitiveType.LineLoop);
+            GL.Begin(PrimitiveType.Polygon);
             GL.Vertex3(box.Left, box.Top, 0.0f);
             GL.Vertex3(box.Left, box.Bottom, 0.0f);
             GL.Vertex3(box.Right, box.Bottom, 0.0f);

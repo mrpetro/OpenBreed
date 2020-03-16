@@ -71,36 +71,41 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             }
         }
 
-        private bool HandleViewportResizeCommand(object sender, ViewportResizeCommand cmd)
+        public Vector4 ClientToWorld(Vector4 coords, IEntity viewport)
         {
-            var toResize = entities.FirstOrDefault(item => item.Id == cmd.EntityId);
+            var vpc = viewport.GetComponent<ViewportComponent>();
+            var pos = viewport.GetComponent<PositionComponent>();
 
-            if (toResize != null)
-            {
-                var vpc = toResize.GetComponent<ViewportComponent>();
+            var camera = Core.Entities.GetById(vpc.CameraEntityId);
 
-                if (vpc.Width == cmd.Width && vpc.Height == cmd.Height)
-                    return true;
+            var x = Matrix4.Identity;
 
-                vpc.Width = cmd.Width;
-                vpc.Height = cmd.Height;
+            var screenX = Core.ClientTransform;
+            x = Matrix4.Mult(screenX, x);
 
-                toResize.RaiseEvent(GfxEventTypes.VIEWPORT_RESIZED, new ViewportResizedEventArgs(vpc.Width, vpc.Height));
-            }
+            var viewportX = GetViewportTransform(pos, vpc);
+            x = Matrix4.Mult(viewportX, x);
 
-            return true;
+            var cameraX = GetCameraTransform(vpc, camera);
+            x = Matrix4.Mult(cameraX, x);
+
+            x.Invert();
+
+            return Vector4.Transform(coords, x);
         }
 
         /// <summary>
         /// Local transformation matrix of this viewport
         /// </summary>
-        public Matrix4 GetTransform(PositionComponent pos, ViewportComponent vpc)
+        public Matrix4 GetViewportTransform(PositionComponent pos, ViewportComponent vpc)
         {
             var transform = Matrix4.Identity;
             transform = Matrix4.Mult(transform, Matrix4.CreateScale(vpc.Width, vpc.Height, 1.0f));
             transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(pos.Value.X, pos.Value.Y, 0.0f));
             return transform;
         }
+
+        //public void ApplyAspectRatio(ViewportComponent vpc)
 
         /// <summary>
         /// This will return camera tranformation matrix which includes aspect ratio correction
@@ -122,18 +127,22 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                 case ViewportScalingType.None:
                     transform = Matrix4.Mult(transform, Matrix4.CreateScale(cmc.Width / vpc.Width, cmc.Height / vpc.Height, 1.0f));
                     break;
+
                 case ViewportScalingType.FitHeightPreserveAspectRatio:
-                    transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f / vpc.Ratio * cmc.Ratio, 1.0f, 1.0f));
+                    transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f / vcRatio, 1.0f, 1.0f));
                     break;
+
                 case ViewportScalingType.FitWidthPreserveAspectRatio:
-                    transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f, 1.0f * vcRatio, 1.0f));
+                    transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f, vcRatio, 1.0f));
                     break;
+
                 case ViewportScalingType.FitBothPreserveAspectRatio:
-                    if(vcRatio >= 1)
+                    if (vcRatio >= 1)
                         transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f / vcRatio, 1.0f, 1.0f));
                     else
                         transform = Matrix4.Mult(transform, Matrix4.CreateScale(1.0f, vcRatio, 1.0f));
                     break;
+
                 case ViewportScalingType.FitBothIgnoreAspectRatio:
                 default:
                     break;
@@ -179,6 +188,26 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         #endregion Protected Methods
 
         #region Private Methods
+
+        private bool HandleViewportResizeCommand(object sender, ViewportResizeCommand cmd)
+        {
+            var toResize = entities.FirstOrDefault(item => item.Id == cmd.EntityId);
+
+            if (toResize != null)
+            {
+                var vpc = toResize.GetComponent<ViewportComponent>();
+
+                if (vpc.Width == cmd.Width && vpc.Height == cmd.Height)
+                    return true;
+
+                vpc.Width = cmd.Width;
+                vpc.Height = cmd.Height;
+
+                toResize.RaiseEvent(GfxEventTypes.VIEWPORT_RESIZED, new ViewportResizedEventArgs(vpc.Width, vpc.Height));
+            }
+
+            return true;
+        }
 
         private void GetVisibleRectangle(IEntity camera, Matrix4 cameraT, out Box2 viewBox)
         {
@@ -227,8 +256,9 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.PushMatrix();
 
             //Apply viewport transformation matrix
-            var transform = GetTransform(pos, vpc);
+            var transform = GetViewportTransform(pos, vpc);
             GL.MultMatrix(ref transform);
+
 
             if (vpc.DrawBackgroud)
                 DrawBackground(vpc);
@@ -236,12 +266,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             if (vpc.DrawBorder)
             {
                 GL.Color4(1.0f, 0.0f, 0.0f, 1.0f);
-                GL.Begin(PrimitiveType.LineLoop);
-                GL.Vertex3(0, 1.0f, 0.0);
-                GL.Vertex3(0, 0, 0.0);
-                GL.Vertex3(1.0f, 0, 0.0);
-                GL.Vertex3(1.0f, 1.0f, 0.0);
-                GL.End();
+                RenderTools.DrawUnitRectangle();
             }
 
             var cameraEntity = Core.Entities.GetById(vpc.CameraEntityId);
@@ -265,12 +290,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                 //Apply camera transformation matrix
                 var transform = GetCameraTransform(vpc, camera);
 
-                //GL.Scale(1.5f, 1.5f, 1.0f);
- 
                 GL.MultMatrix(ref transform);
 
-                //var cameraT = transform.Inverted();
-  
                 GetVisibleRectangle(camera, transform, out Box2 clipBox);
 
                 GL.Color4(Color4.LightBlue);
@@ -344,7 +365,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             }
 
             GL.Translate(0, 0, BRIGHTNESS_Z_LEVEL);
-            RenderTools.DrawUnitRectangle();
+            RenderTools.DrawUnitBox();
             GL.Disable(EnableCap.Blend);
         }
 
@@ -352,7 +373,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             //Draw background for this viewport
             GL.Color4(vpc.BackgroundColor);
-            RenderTools.DrawUnitRectangle();
+            RenderTools.DrawUnitBox();
         }
 
         #endregion Private Methods

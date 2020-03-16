@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Modules.Rendering.Builders;
+using OpenTK;
 using OpenTK.Graphics;
 
 namespace OpenBreed.Core.Modules.Rendering.Components
@@ -53,8 +54,6 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         /// Height of this viewport
         /// </summary>
         public float Height { get; internal set; }
-
-
 
         /// <summary>
         ///  Flag to draw border box of viewport

@@ -1,6 +1,6 @@
 ﻿using OpenTK;
 
-namespace OpenBreed.Core.Modules.Physics.Components.Shapes
+namespace OpenBreed.Core.Common.Systems.Shapes
 {
     /// <summary>
     /// Shape interface for fixtures

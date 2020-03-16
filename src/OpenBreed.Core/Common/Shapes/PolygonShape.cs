@@ -1,7 +1,7 @@
 ﻿using OpenTK;
 using System;
 
-namespace OpenBreed.Core.Modules.Physics.Components.Shapes
+namespace OpenBreed.Core.Common.Systems.Shapes
 {
     /// <summary>
     /// Place holder implementation for fixture polygon shape

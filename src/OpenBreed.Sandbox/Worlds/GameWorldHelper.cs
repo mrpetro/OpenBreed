@@ -1,11 +1,13 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Helpers;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
+using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Physics.Systems;
 using OpenBreed.Core.Modules.Rendering.Components;
@@ -14,9 +16,11 @@ using OpenBreed.Core.Modules.Rendering.Events;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems.Control.Components;
+using OpenBreed.Sandbox.Components;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Helpers;
+using OpenBreed.Sandbox.Systems;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -58,6 +62,8 @@ namespace OpenBreed.Sandbox.Worlds
             //builder.AddSystem(core.CreateWireframeSystem().Build());
             builder.AddSystem(core.CreateTextSystem().Build());
 
+            builder.AddSystem(new UiSystem(core));
+
             builder.AddSystem(new ViewportSystem(core));
         }
 
@@ -75,7 +81,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             var cameraBuilder = new CameraBuilder(core);
 
-            cameraBuilder.SetPosition(new Vector2(64, 64));
+            cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetZoom(320 , 240);
 
@@ -130,8 +136,20 @@ namespace OpenBreed.Sandbox.Worlds
 
             gameViewport.GetComponent<ViewportComponent>().CameraEntityId = playerCamera.Id;
 
+            var cursorEntity = core.Entities.Create();
+        
+            var spriteBuilder = SpriteComponentBuilder.New(core);
+            spriteBuilder.SetProperty("AtlasAlias", "Atlases/Sprites/Arrow");
+            spriteBuilder.SetProperty("Order", 100.0);
+            spriteBuilder.SetProperty("ImageId", 0);
+            cursorEntity.Add(spriteBuilder.Build());
+            cursorEntity.Add(PositionComponent.Create(0, 0));
+            cursorEntity.Add(new CursorInputComponent(0));
+
             //gameViewport.Subscribe(GfxEventTypes.VIEWPORT_RESIZED, (s, a) => UpdateCameraFov(playerCamera, (ViewportResizedEventArgs)a));
             //SetPreserveAspectRatio(gameViewport);
+
+            gameWorld.AddEntity(cursorEntity);
         }
 
         public static void SetPreserveAspectRatio(IEntity viewportEntity)

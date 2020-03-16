@@ -85,7 +85,7 @@
     <Content Include="Entities\Actor\Arrow.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Compile Include="Components\UiComponent.cs" />
+    <Compile Include="Components\CursorInputComponent.cs" />
     <Compile Include="Entities\Actor\States\Attacking\IdleState.cs" />
     <Compile Include="Entities\Actor\States\Attacking\CooldownState.cs" />
     <Compile Include="Entities\Actor\States\Attacking\ShootingState.cs" />

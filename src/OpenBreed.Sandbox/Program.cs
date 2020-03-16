@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Common.Builders;
+using OpenBreed.Core.Common.Systems.Shapes;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Animation;
@@ -9,7 +10,6 @@ using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Audio.Builders;
 using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Physics.Builders;
-using OpenBreed.Core.Modules.Physics.Components.Shapes;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Systems.Control.Systems;
 using OpenBreed.Sandbox.Entities.Actor;
@@ -55,6 +55,7 @@ namespace OpenBreed.Sandbox
             Commands = new CommandsMan(this);
             Events = new EventsMan(this);
             Entities = new EntityMan(this);
+            Shapes = new ShapeMan(this);
             Players = new PlayersMan(this);
             Items = new ItemsMan(this);
             Inputs = new InputsMan(this);
@@ -88,6 +89,8 @@ namespace OpenBreed.Sandbox
 
         public EntityMan Entities { get; }
 
+        public ShapeMan Shapes { get; }
+
         public PlayersMan Players { get; }
 
         public ILogMan Logging { get; }
@@ -106,16 +109,7 @@ namespace OpenBreed.Sandbox
 
         public IScriptMan Scripts { get; }
 
-        public Matrix4 ClientTransform
-        {
-            get
-            {
-                var transf = Matrix4.CreateScale(ClientRectangle.Width, -ClientRectangle.Height, 1.0f);
-                transf.Invert();
-                transf = Matrix4.Mult(transf, Matrix4.CreateTranslation(0.0f, 1.0f, 0.0f));
-                return transf;
-            }
-        }
+        public Matrix4 ClientTransform { get; private set; }
 
         public float ClientRatio { get { return (float)ClientRectangle.Width / (float)ClientRectangle.Height; } }
 
@@ -231,6 +225,7 @@ namespace OpenBreed.Sandbox
             Title = $"Open Breed Sandbox (Version: {appVersion} Vsync: {VSync})";
 
             RegisterComponentBuilders();
+            RegisterShapes();
             RegisterFixtures();
             RegisterEntityTemplates();
             RegisterItems();
@@ -272,8 +267,6 @@ namespace OpenBreed.Sandbox
 
             var arrowTex = Rendering.Textures.Create("Textures/Sprites/Arrow", @"Content\Graphics\ArrowSpriteSet.png");
             Rendering.Sprites.Create("Atlases/Sprites/Arrow", arrowTex.Id, 32, 32, 8, 5);
-
-            //Blueprints.Import(@".\Content\BPHorizontalDoor.xml");
 
             CameraHelper.CreateAnimations(this);
             DoorHelper.CreateStamps(this);
@@ -326,7 +319,9 @@ namespace OpenBreed.Sandbox
             GL.MatrixMode(MatrixMode.Modelview);
             var ortho = Matrix4.CreateOrthographicOffCenter(0.0f, ClientRectangle.Width, 0.0f, ClientRectangle.Height, -100.0f, 100.0f);
             GL.LoadMatrix(ref ortho);
-
+            ClientTransform = Matrix4.Identity;
+            ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateTranslation(0.0f, -ClientRectangle.Height, 0.0f));
+            ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateScale(1.0f,-1.0f,1.0f));
             Rendering.OnClientResized(ClientRectangle.Width, ClientRectangle.Height);
         }
 
@@ -389,15 +384,24 @@ namespace OpenBreed.Sandbox
             Entities.RegisterComponentBuilder("SpriteComponent", SpriteComponentBuilder.New);
         }
 
+        private void RegisterShapes()
+        {
+            Shapes.Register("Shapes/Box_0_0_16_16", new BoxShape(0, 0, 16, 16));
+            Shapes.Register("Shapes/Box_16_16_8_8", new BoxShape(16, 16, 8, 8));
+            Shapes.Register("Shapes/Box_0_0_16_32", new BoxShape(0, 0, 16, 32));
+            Shapes.Register("Shapes/Box_0_0_32_16", new BoxShape(0, 0, 32, 16));
+            Shapes.Register("Shapes/Box_0_0_32_32", new BoxShape(0, 0, 32, 32));
+        }
+
         private void RegisterFixtures()
         {
-            Physics.Fixturs.Create("Fixtures/GridCell", "Trigger", new BoxShape(0, 0, 16, 16));
-            Physics.Fixturs.Create("Fixtures/TeleportEntry", "Trigger", new BoxShape(16, 16, 8, 8));
-            Physics.Fixturs.Create("Fixtures/TeleportExit", "Trigger", new BoxShape(16, 16, 8, 8));
-            Physics.Fixturs.Create("Fixtures/Projectile", "Dynamic", new BoxShape(0, 0, 16, 16));
-            Physics.Fixturs.Create("Fixtures/DoorVertical", "Static", new BoxShape(0, 0, 16, 32));
-            Physics.Fixturs.Create("Fixtures/DoorHorizontal", "Static", new BoxShape(0, 0, 32, 16));
-            Physics.Fixturs.Create("Fixtures/Arrow", "Dynamic", new BoxShape(0, 0, 32, 32));
+            Physics.Fixturs.Create("Fixtures/GridCell", "Trigger", Shapes.GetByTag("Shapes/Box_0_0_16_16"));
+            Physics.Fixturs.Create("Fixtures/TeleportEntry", "Trigger", Shapes.GetByTag("Shapes/Box_16_16_8_8"));
+            Physics.Fixturs.Create("Fixtures/TeleportExit", "Trigger", Shapes.GetByTag("Shapes/Box_16_16_8_8"));
+            Physics.Fixturs.Create("Fixtures/Projectile", "Dynamic", Shapes.GetByTag("Shapes/Box_0_0_16_16"));
+            Physics.Fixturs.Create("Fixtures/DoorVertical", "Static", Shapes.GetByTag("Shapes/Box_0_0_16_32"));
+            Physics.Fixturs.Create("Fixtures/DoorHorizontal", "Static", Shapes.GetByTag("Shapes/Box_0_0_32_16"));
+            Physics.Fixturs.Create("Fixtures/Arrow", "Dynamic", Shapes.GetByTag("Shapes/Box_0_0_32_32"));
         }
 
         private void RegisterEntityTemplates()

@@ -1,16 +1,14 @@
 ﻿using OpenBreed.Core.Common.Systems.Components;
 using OpenTK;
 using OpenTK.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Modules.Rendering.Components
 {
     public class TextPart
     {
+        #region Public Constructors
+
         public TextPart(int fontId, Vector2 offset, Color4 color, string text, float order)
         {
             FontId = fontId;
@@ -19,6 +17,10 @@ namespace OpenBreed.Core.Modules.Rendering.Components
             Order = order;
             Color = color;
         }
+
+        #endregion Public Constructors
+
+        #region Public Properties
 
         /// <summary>
         /// Id of text font
@@ -44,13 +46,13 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         /// Order of drawing, higher value object is rendered on top of lower value objects
         /// </summary>
         public float Order { get; set; }
+
+        #endregion Public Properties
     }
 
     public class TextComponent : IEntityComponent
     {
         #region Private Constructors
-
-        public List<TextPart> Parts { get; }
 
         private TextComponent(int fontId, Vector2 offset, Color4 color, string value, float order)
         {
@@ -61,6 +63,8 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         #endregion Private Constructors
 
         #region Public Properties
+
+        public List<TextPart> Parts { get; }
 
         #endregion Public Properties
 

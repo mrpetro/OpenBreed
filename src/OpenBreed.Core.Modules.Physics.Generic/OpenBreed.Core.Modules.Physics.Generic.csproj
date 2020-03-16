@@ -80,10 +80,6 @@
     <Compile Include="Components\Fixture.cs" />
     <Compile Include="Components\Material.cs" />
     <Compile Include="Components\MotionComponent.cs" />
-    <Compile Include="Components\Shapes\BoxShape.cs" />
-    <Compile Include="Components\Shapes\CircleShape.cs" />
-    <Compile Include="Components\Shapes\IShape.cs" />
-    <Compile Include="Components\Shapes\PolygonShape.cs" />
     <Compile Include="Events\BodyOnEventArgs.cs" />
     <Compile Include="Events\BodyOffEventArgs.cs" />
     <Compile Include="Events\CollisionEventArgs.cs" />

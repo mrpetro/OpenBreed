@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Modules.Physics.Components.Shapes;
+﻿using OpenBreed.Core.Common.Systems.Shapes;
 
 namespace OpenBreed.Core.Modules.Physics.Components
 {

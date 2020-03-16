@@ -63,22 +63,29 @@ namespace OpenBreed.Core.Modules.Rendering
 
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
-            GL.PushMatrix();
+            try
+            {
+                GL.PushMatrix();
 
-            var clipBox = Box2.FromTLRB(Core.ClientRectangle.Width, 0.0f, Core.ClientRectangle.Height, 0.0f);
+                var clipBox = Box2.FromTLRB(Core.ClientRectangle.Width, 0.0f, Core.ClientRectangle.Height, 0.0f);
 
-            var depth = 0;
+                var depth = 0;
 
-            ScreenWorld?.Systems.OfType<ViewportSystem>().FirstOrDefault()?.Render(clipBox, depth, dt);
+                ScreenWorld?.Systems.OfType<ViewportSystem>().FirstOrDefault()?.Render(clipBox, depth, dt);
 
-            DrawCursor();
+                DrawCursor();
 
-            GL.PopMatrix();
+            }
+            finally
+            {
+                GL.PopMatrix();
+            }
         }
 
         public void Cleanup()
         {
         }
+
 
         public void OnClientResized(float width, float height)
         {

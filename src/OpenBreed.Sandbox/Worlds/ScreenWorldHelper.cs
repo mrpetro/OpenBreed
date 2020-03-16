@@ -2,6 +2,7 @@
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Builders;
 using OpenBreed.Core.Modules.Rendering.Commands;
@@ -58,8 +59,9 @@ namespace OpenBreed.Sandbox.Worlds
             var world = builder.Build();
 
             var gameViewport = CreateViewportEntity(core, GAME_VIEWPORT, 32, 32, core.ClientRectangle.Width - 64, core.ClientRectangle.Height - 64, true, true);
+            //gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
+            //gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitHeightPreserveAspectRatio;
             gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
-
             var hudViewport = CreateViewportEntity(core, HUD_VIEWPORT, 0, 0, core.ClientRectangle.Width, core.ClientRectangle.Height, false, true);
 
             core.Rendering.Subscribe(GfxEventTypes.CLIENT_RESIZED, (s, a) => ResizeGameViewport(gameViewport, (ClientResizedEventArgs)a));
@@ -68,7 +70,15 @@ namespace OpenBreed.Sandbox.Worlds
             world.AddEntity(gameViewport);
             world.AddEntity(hudViewport);
 
+
+            gameViewport.Subscribe(GfxEventTypes.VIEWPORT_CLICKED, (s, a) => OnViewportClick((IEntity)s, (ViewportClickedEventArgs)a));
+
             return world;
+        }
+
+        private static void OnViewportClick(IEntity viewport, ViewportClickedEventArgs args)
+        {
+            throw new NotImplementedException();
         }
 
         private static void ResizeGameViewport(IEntity viewport, ClientResizedEventArgs args)
