@@ -1,14 +1,14 @@
 ﻿using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Modules.Animation;
+using OpenBreed.Core.Modules.Animation.Builders;
 using OpenBreed.Core.Modules.Animation.Helpers;
 
 namespace OpenBreed.Core.Modules.Animation.Components
 {
-    public class Animator : IEntityComponent
+    public class AnimatorComponent : IEntityComponent
     {
         #region Public Constructors
 
-        public Animator(float speed = 1.0f, bool loop = false, int animId = 0, FrameTransition transition = FrameTransition.None)
+        public AnimatorComponent(float speed = 1.0f, bool loop = false, int animId = 0, FrameTransition transition = FrameTransition.None)
         {
             Speed = speed;
             Loop = loop;
@@ -18,10 +18,24 @@ namespace OpenBreed.Core.Modules.Animation.Components
 
         #endregion Public Constructors
 
+        #region Internal Constructors
+
+        internal AnimatorComponent(AnimatorComponentBuilder builder)
+        {
+            Speed = builder.Speed;
+            Loop = builder.Loop;
+            AnimId = builder.AnimId;
+
+            //TODO: add this to builder
+            Transition = FrameTransition.None;
+        }
+
+        #endregion Internal Constructors
+
         #region Public Properties
 
         /// <summary>
-        /// Transition method from frame to frame 
+        /// Transition method from frame to frame
         /// </summary>
         public FrameTransition Transition { get; set; }
 
@@ -33,9 +47,5 @@ namespace OpenBreed.Core.Modules.Animation.Components
         public object Frame { get; set; }
 
         #endregion Public Properties
-
-        #region Public Methods
-
-        #endregion Public Methods
     }
 }

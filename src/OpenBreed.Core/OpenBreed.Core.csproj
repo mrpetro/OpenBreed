@@ -169,7 +169,7 @@
     <Compile Include="Common\Components\ThrustComponent.cs" />
     <Compile Include="Common\Components\VelocityComponent.cs" />
     <Compile Include="Common\Components\PositionComponent.cs" />
-    <Compile Include="Common\Components\Direction.cs" />
+    <Compile Include="Common\Components\DirectionComponent.cs" />
     <Compile Include="Modules\Animation\Systems\IAnimationSystem.cs" />
     <Compile Include="Modules\Physics\IPhysicsSystem.cs" />
     <Compile Include="Modules\Audio\Systems\IAudioSystem.cs" />

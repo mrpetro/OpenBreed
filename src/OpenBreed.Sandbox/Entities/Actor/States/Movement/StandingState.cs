@@ -47,7 +47,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         public void EnterState()
         {
-            var direction = Entity.GetComponent<Direction>().Value;
+            var direction = Entity.GetComponent<DirectionComponent>().Value;
 
             var animDirName = AnimHelper.ToDirectionName(direction);
 

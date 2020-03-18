@@ -23,7 +23,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
         #region Private Fields
 
         private readonly string animPrefix;
-        private Direction direction;
+        private DirectionComponent direction;
         private SpriteComponent sprite;
 
         #endregion Private Fields
@@ -49,7 +49,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         public void EnterState()
         {
-            var direction = Entity.GetComponent<Direction>();
+            var direction = Entity.GetComponent<DirectionComponent>();
             var movement = Entity.GetComponent<MotionComponent>();
             Entity.GetComponent<ThrustComponent>().Value = direction.Value * movement.Acceleration;
 
@@ -65,7 +65,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
         public void Initialize(IEntity entity)
         {
             Entity = entity;
-            direction = Entity.TryGetComponent<Direction>();
+            direction = Entity.TryGetComponent<DirectionComponent>();
             sprite = entity.GetComponent<SpriteComponent>();
         }
 

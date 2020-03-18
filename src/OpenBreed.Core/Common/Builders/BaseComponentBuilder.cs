@@ -10,8 +10,14 @@ namespace OpenBreed.Core.Common.Builders
     /// <summary>
     /// Base entity component builder abstract class
     /// </summary>
-    public abstract class BaseComponentBuilder : IComponentBuilder
+    public abstract class BaseComponentBuilder<T> : IComponentBuilder where T : IComponentBuilder
     {
+        #region Private Fields
+
+        private static Dictionary<string, Action<T, object>> setters = new Dictionary<string, Action<T, object>>();
+
+        #endregion Private Fields
+
         #region Protected Constructors
 
         protected BaseComponentBuilder(ICore core)
@@ -67,19 +73,6 @@ namespace OpenBreed.Core.Common.Builders
             return list;
         }
 
-        public int ToFontId(object value)
-        {
-            if (value is int)
-                return (int)value;
-
-            var luaTable = (LuaTable)value;
-
-            var fontName = Convert.ToString(luaTable[1]);
-            var fontSize = Convert.ToInt32(luaTable[2]);
-
-            return Core.Rendering.Fonts.Create(fontName, fontSize).Id;
-        }
-
         public static Vector2 ToVector2(object value)
         {
             if (value is Vector2)
@@ -125,10 +118,36 @@ namespace OpenBreed.Core.Common.Builders
             return list;
         }
 
+        public int ToFontId(object value)
+        {
+            if (value is int)
+                return (int)value;
+
+            var luaTable = (LuaTable)value;
+
+            var fontName = Convert.ToString(luaTable[1]);
+            var fontSize = Convert.ToInt32(luaTable[2]);
+
+            return Core.Rendering.Fonts.Create(fontName, fontSize).Id;
+        }
+
         public abstract IEntityComponent Build();
 
-        public abstract void SetProperty(object key, object value);
+        public virtual void SetProperty(object key, object value)
+        {
+            var propertyName = Convert.ToString(key);
+            setters[propertyName].Invoke((T)(IComponentBuilder)this, value);
+        }
 
         #endregion Public Methods
+
+        #region Protected Methods
+
+        protected static void RegisterSetter(string name, Action<T, object> setter)
+        {
+            setters.Add(name, setter);
+        }
+
+        #endregion Protected Methods
     }
 }

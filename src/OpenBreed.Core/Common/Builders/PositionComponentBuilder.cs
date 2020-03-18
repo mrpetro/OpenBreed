@@ -3,7 +3,7 @@ using System;
 
 namespace OpenBreed.Core.Common.Builders
 {
-    public class PositionComponentBuilder : BaseComponentBuilder
+    public class PositionComponentBuilder : BaseComponentBuilder<PositionComponentBuilder>
     {
         #region Private Fields
 

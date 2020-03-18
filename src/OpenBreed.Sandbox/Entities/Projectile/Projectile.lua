@@ -11,7 +11,7 @@
         Type = "Dynamic",
 		Fixtures = { "Fixtures/Projectile" } },
 	SpriteComponent = {
-		AtlasAlias = "Atlases/Sprites/Projectiles/Laser",
+		AtlasId = "Atlases/Sprites/Projectiles/Laser",
         Order = 0.0},
 	TextComponent = {
 		Text = "Bullet",

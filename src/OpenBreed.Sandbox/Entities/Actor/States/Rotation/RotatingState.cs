@@ -50,7 +50,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 
         public void EnterState()
         {
-            var direction = Entity.GetComponent<Direction>();
+            var direction = Entity.GetComponent<DirectionComponent>();
             var movement = Entity.GetComponent<MotionComponent>();
             Entity.GetComponent<ThrustComponent>().Value = direction.Value * movement.Acceleration;
 

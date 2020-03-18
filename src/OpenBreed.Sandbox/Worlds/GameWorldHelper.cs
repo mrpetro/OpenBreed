@@ -87,12 +87,12 @@ namespace OpenBreed.Sandbox.Worlds
 
             var playerCamera = cameraBuilder.Build();
             playerCamera.Tag = "PlayerCamera";
-            playerCamera.Add(new Animator(10.0f, false, -1, FrameTransition.LinearInterpolation));
+            playerCamera.Add(new AnimatorComponent(10.0f, false, -1, FrameTransition.LinearInterpolation));
 
             cameraBuilder.SetFov(640, 480);
             var gameCamera = cameraBuilder.Build();
             gameCamera.Tag = "HubCamera";
-            gameCamera.Add(new Animator(10.0f, false, -1, FrameTransition.LinearInterpolation));
+            gameCamera.Add(new AnimatorComponent(10.0f, false, -1, FrameTransition.LinearInterpolation));
 
             using (var reader = new TxtFileWorldReader(core, ".\\Content\\Maps\\hub.txt"))
                 gameWorld = reader.GetWorld();
@@ -139,7 +139,7 @@ namespace OpenBreed.Sandbox.Worlds
             var cursorEntity = core.Entities.Create();
         
             var spriteBuilder = SpriteComponentBuilder.New(core);
-            spriteBuilder.SetProperty("AtlasAlias", "Atlases/Sprites/Cursors");
+            spriteBuilder.SetProperty("AtlasId", "Atlases/Sprites/Cursors");
             spriteBuilder.SetProperty("Order", 100.0);
             spriteBuilder.SetProperty("ImageId", 0);
             cursorEntity.Add(spriteBuilder.Build());

@@ -21,7 +21,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
         #region Private Fields
 
         private readonly List<int> entities = new List<int>();
-        private readonly List<Animator> animatorComps = new List<Animator>();
+        private readonly List<AnimatorComponent> animatorComps = new List<AnimatorComponent>();
         private readonly CommandHandler cmdHandler;
 
         #endregion Private Fields
@@ -31,7 +31,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
         public AnimationSystem(AnimationSystemBuilder builder) : base(builder.core)
         {
             cmdHandler = new CommandHandler(this);
-            Require<Animator>();
+            Require<AnimatorComponent>();
         }
 
         #endregion Public Constructors
@@ -68,7 +68,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
                 Animate(i, dt);
         }
 
-        public void Set(Animator animator, int animId = -1, float startPosition = 0.0f)
+        public void Set(AnimatorComponent animator, int animId = -1, float startPosition = 0.0f)
         {
             //animator.Data = data;
 
@@ -77,7 +77,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             animator.Paused = false;
         }
 
-        public void Play(Animator animator, int animId = -1, float startPosition = 0.0f)
+        public void Play(AnimatorComponent animator, int animId = -1, float startPosition = 0.0f)
         {
             if (animId != -1)
                 animator.AnimId = animId;
@@ -90,12 +90,12 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             animator.Paused = false;
         }
 
-        public void Pause(Animator animator)
+        public void Pause(AnimatorComponent animator)
         {
             animator.Paused = true;
         }
 
-        public void Stop(IEntity entity, Animator animator)
+        public void Stop(IEntity entity, AnimatorComponent animator)
         {
             animator.Position = 0.0f;
             animator.Paused = true;
@@ -167,7 +167,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
         protected override void RegisterEntity(IEntity entity)
         {
             entities.Add(entity.Id);
-            animatorComps.Add(entity.GetComponent<Animator>());
+            animatorComps.Add(entity.GetComponent<AnimatorComponent>());
         }
 
         protected override void UnregisterEntity(IEntity entity)
@@ -185,12 +185,12 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         #region Private Methods
 
-        private void RaiseAnimStoppedEvent(IEntity entity, Animator animator)
+        private void RaiseAnimStoppedEvent(IEntity entity, AnimatorComponent animator)
         {
             entity.RaiseEvent(AnimationEventTypes.ANIMATION_STOPPED, new AnimStoppedEventArgs(animator));
         }
 
-        private void RaiseAnimChangedEvent(IEntity entity, Animator animator)
+        private void RaiseAnimChangedEvent(IEntity entity, AnimatorComponent animator)
         {
             entity.RaiseEvent(AnimationEventTypes.ANIMATION_CHANGED, new AnimChangedEventArgs(animator.Frame));
         }

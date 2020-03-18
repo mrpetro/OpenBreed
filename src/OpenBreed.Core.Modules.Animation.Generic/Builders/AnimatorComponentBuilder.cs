@@ -5,15 +5,15 @@ using System;
 
 namespace OpenBreed.Core.Modules.Animation.Builders
 {
-    public class AnimatorComponentBuilder : BaseComponentBuilder
+    public class AnimatorComponentBuilder : BaseComponentBuilder<AnimatorComponentBuilder>
     {
-        #region Private Fields
+        #region Internal Fields
 
-        private float speed;
-        private bool loop;
-        private string animationAlias;
+        internal float Speed;
+        internal bool Loop;
+        internal int AnimId;
 
-        #endregion Private Fields
+        #endregion Internal Fields
 
         #region Protected Constructors
 
@@ -30,30 +30,32 @@ namespace OpenBreed.Core.Modules.Animation.Builders
             return new AnimatorComponentBuilder(core);
         }
 
-        public override IEntityComponent Build()
+        public static void Register(ICore core)
         {
-            var anim = Core.Animations.Anims.GetByName(animationAlias);
+            core.Entities.RegisterComponentBuilder(nameof(AnimatorComponent), New);
 
-            if (anim == null)
-                return new Animator(speed, loop);
-            else
-                return new Animator(speed, loop, anim.Id);
+            RegisterSetter(nameof(Speed), (o, value) => { o.Speed = Convert.ToSingle(value); });
+            RegisterSetter(nameof(Loop), (o, value) => { o.Loop = Convert.ToBoolean(value); });
+            RegisterSetter(nameof(AnimId), (o, value) => { o.AnimId = o.ToAnimId(value); });
         }
 
-        public override void SetProperty(object key, object value)
+        public override IEntityComponent Build()
         {
-            var propertyName = Convert.ToString(key);
-
-            if (propertyName == "Speed")
-                speed = Convert.ToSingle(value);
-            else if (propertyName == "Loop")
-                loop = Convert.ToBoolean(value);
-            else if (propertyName == "AnimationAlias")
-                animationAlias = Convert.ToString(value);
-            else
-                throw new ArgumentException($"Unknown '{propertyName}' property key given.");
+            return new AnimatorComponent(this);
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private int ToAnimId(object value)
+        {
+            if (value is int)
+                return (int)value;
+
+            return Core.Animations.Anims.GetByName(Convert.ToString(value)).Id;
+        }
+
+        #endregion Private Methods
     }
 }

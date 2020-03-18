@@ -72,7 +72,7 @@
     <Compile Include="Commands\SetAnimCommand.cs" />
     <Compile Include="Systems\AnimationSystem.cs" />
     <Compile Include="Helpers\AnimMan.cs" />
-    <Compile Include="Components\Animator.cs" />
+    <Compile Include="Components\AnimatorComponent.cs" />
     <Compile Include="Helpers\Animation.cs" />
     <Compile Include="Commands\PauseAnimCommand.cs" />
     <Compile Include="Commands\StopAnimCommand.cs" />

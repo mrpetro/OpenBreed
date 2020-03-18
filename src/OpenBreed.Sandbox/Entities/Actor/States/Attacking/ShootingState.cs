@@ -39,7 +39,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 
             var pos = Entity.GetComponent<PositionComponent>().Value;
             pos += new Vector2(8,8);
-            var direction = Entity.GetComponent<Direction>().Value;
+            var direction = Entity.GetComponent<DirectionComponent>().Value;
             direction.Normalize();
             direction *= 500.0f;
             ProjectileHelper.AddProjectile(Entity.Core, Entity.World, pos.X, pos.Y, direction.X, direction.Y);

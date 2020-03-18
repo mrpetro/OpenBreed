@@ -13,7 +13,7 @@
 		Fixtures = { "Fixtures/Arrow" } },
 	MotionComponent = {},
 	SpriteComponent = {
-		AtlasAlias = "Atlases/Sprites/Arrow",
+		AtlasId = "Atlases/Sprites/Arrow",
         Order = 100.0},
 	TextComponent = {
 		Text = "Hero",

@@ -1,4 +1,5 @@
-﻿using OpenTK;
+﻿using OpenBreed.Core.Common.Builders;
+using OpenTK;
 using System;
 
 namespace OpenBreed.Core.Common.Systems.Components
@@ -7,32 +8,26 @@ namespace OpenBreed.Core.Common.Systems.Components
     /// Direction entity component class that can be used to store entity current direction information
     /// Example: Actor is facing particular direction when standing
     /// </summary>
-    public class Direction : IEntityComponent
+    public class DirectionComponent : IEntityComponent
     {
+        #region Private Fields
+
         private Vector2 value;
 
-        #region Private Constructors
+        #endregion Private Fields
+
+        #region Internal Constructors
 
         /// <summary>
         /// Constructor with passed initial direction value
         /// </summary>
         /// <param name="value">Initial value vector</param>
-        private Direction(Vector2 value)
+        internal DirectionComponent(DirectionComponentBuilder builder)
         {
-            this.value = value;
+            this.value = builder.Value;
         }
 
-        /// <summary>
-        /// Constructor with passed initial direction values
-        /// </summary>
-        /// <param name="x">Initial x value</param>
-        /// <param name="y">Initial y value</param>
-        private Direction(float x, float y)
-        {
-            this.value = new Vector2(x, y);
-        }
-
-        #endregion Private Constructors
+        #endregion Internal Constructors
 
         #region Public Events
 
@@ -59,19 +54,5 @@ namespace OpenBreed.Core.Common.Systems.Components
         }
 
         #endregion Public Properties
-
-        #region Public Methods
-
-        public static Direction Create(Vector2 value)
-        {
-            return new Direction(value);
-        }
-
-        public static Direction Create(float x, float y)
-        {
-            return new Direction(x, y);
-        }
-
-        #endregion Public Methods
     }
 }

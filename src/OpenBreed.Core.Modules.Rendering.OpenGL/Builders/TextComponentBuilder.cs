@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Modules.Rendering.Builders
 {
-    public class TextComponentBuilder : BaseComponentBuilder
+    public class TextComponentBuilder : BaseComponentBuilder<TextComponentBuilder>
     {
         #region Private Fields
 

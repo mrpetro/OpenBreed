@@ -1,15 +1,17 @@
 ﻿using OpenBreed.Core.Common.Systems.Components;
+using OpenTK;
 using System;
 
 namespace OpenBreed.Core.Common.Builders
 {
-    public class DirectionComponentBuilder : BaseComponentBuilder
+    public class DirectionComponentBuilder : BaseComponentBuilder<DirectionComponentBuilder>
     {
         #region Private Fields
 
         private float x;
-
         private float y;
+
+        internal Vector2 Value;
 
         #endregion Private Fields
 
@@ -30,7 +32,8 @@ namespace OpenBreed.Core.Common.Builders
 
         public override IEntityComponent Build()
         {
-            return Direction.Create(x, y);
+            Value = new Vector2(x, y);
+            return new DirectionComponent(this);
         }
 
         public override void SetProperty(object key, object value)
@@ -43,6 +46,11 @@ namespace OpenBreed.Core.Common.Builders
                 y = Convert.ToSingle(value);
             else
                 throw new ArgumentException("Too many property keys given.");
+        }
+
+        public static void Register(ICore core)
+        {
+            core.Entities.RegisterComponentBuilder(nameof(DirectionComponent), DirectionComponentBuilder.New);
         }
 
         #endregion Public Methods

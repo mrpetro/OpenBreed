@@ -9,7 +9,7 @@
         Type = "Static",
 		Fixtures = { "Fixtures/DoorVertical" } },
 	SpriteComponent = {
-		AtlasAlias = "Atlases/Sprites/Door/Vertical",
+		AtlasId = "Atlases/Sprites/Door/Vertical",
         Order = 0.0},
 	TextComponent = {
 		Text = "Door",

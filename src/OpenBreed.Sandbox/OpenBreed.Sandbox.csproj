@@ -121,7 +121,6 @@
     <Compile Include="Jobs\EntityJob.cs" />
     <Compile Include="Jobs\FpsTextUpdateJob.cs" />
     <Compile Include="Managers\LogMan.cs" />
-    <Compile Include="Helpers\SandBoxHelper.cs" />
     <Compile Include="Items\CreditsItem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
