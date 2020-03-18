@@ -14,5 +14,11 @@
 	MotionComponent = {},
 	SpriteComponent = {
 		AtlasAlias = "Atlases/Sprites/Arrow",
-        Order = 100.0}
+        Order = 100.0},
+	TextComponent = {
+		Text = "Hero",
+		Offset = { 0, 32 },
+		Color = { 255, 255, 255, 255 },
+		FontId = { "Arial", 9 },
+        Order = 0.0}
 }

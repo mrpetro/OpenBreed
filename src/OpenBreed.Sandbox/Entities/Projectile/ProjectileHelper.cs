@@ -60,8 +60,6 @@ namespace OpenBreed.Sandbox.Entities.Projectile
         {
             var projectile = core.Entities.CreateFromTemplate("Projectile");
 
-            projectile.Add(TextHelper.Create(core, new Vector2(-10, 10), "Bullet"));
-
             projectile.GetComponent<PositionComponent>().Value = new Vector2(x, y);
             projectile.GetComponent<VelocityComponent>().Value = new Vector2(vx, vy);
 

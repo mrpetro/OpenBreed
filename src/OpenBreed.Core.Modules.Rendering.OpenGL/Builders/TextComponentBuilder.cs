@@ -1,77 +1,97 @@
-﻿//using OpenBreed.Core.Common.Builders;
-//using OpenBreed.Core.Common.Systems.Components;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using OpenBreed.Core.Common.Builders;
+using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Modules.Rendering.Components;
+using OpenTK;
+using OpenTK.Graphics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-//namespace OpenBreed.Core.Modules.Rendering.Builders
-//{
-//    public class TextComponentBuilder : BaseComponentBuilder
-//    {
-//        #region Private Fields
+namespace OpenBreed.Core.Modules.Rendering.Builders
+{
+    public class TextComponentBuilder : BaseComponentBuilder
+    {
+        #region Private Fields
 
-//        internal int AtlasId { get; private set; }
-//        internal string AtlasAlias
-//        {
-//            set
-//            {
-//                AtlasId = Core.Rendering.Sprites.GetByAlias(value).Id;
-//            }
-//        }
+        /// <summary>
+        /// Id of text font
+        /// </summary>
+        public int FontId { get; set; }
 
-//        internal int ImageId { get; private set; }
-//        internal float Order { get; private set; }
+        /// <summary>
+        /// Offset position of this text part
+        /// </summary>
+        public Vector2 Offset { get; set; }
 
-//        #endregion Private Fields
+        /// <summary>
+        /// Color of this text part
+        /// </summary>
+        public Color4 Color { get; set; }
 
-//        #region Private Constructors
+        /// <summary>
+        /// Actual text of this part
+        /// </summary>
+        public string Text { get; set; }
 
-//        private TextComponentBuilder(ICore core) : base(core)
-//        {
-//        }
+        /// <summary>
+        /// Order of drawing, higher value object is rendered on top of lower value objects
+        /// </summary>
+        public float Order { get; set; }
 
-//        #endregion Private Constructors
+        #endregion Private Fields
 
-//        #region Public Methods
+        #region Private Constructors
 
-//        public static IComponentBuilder New(ICore core)
-//        {
-//            return new TextComponentBuilder(core);
-//        }
+        private TextComponentBuilder(ICore core) : base(core)
+        {
+        }
 
-//        public override IEntityComponent Build()
-//        {
-//            return TextComponentBuilder.Create(AtlasId, ImageId, Order);
-//        }
+        #endregion Private Constructors
 
-//        public override void SetProperty(object key, object value)
-//        {
-//            var propertyName = Convert.ToString(key);
-//            switch (propertyName)
-//            {
-//                case nameof(AtlasAlias):
-//                    AtlasAlias = Convert.ToString(value);
-//                    break;
+        #region Public Methods
 
-//                case nameof(AtlasId):
-//                    AtlasId = Convert.ToInt32(value);
-//                    break;
+        public static IComponentBuilder New(ICore core)
+        {
+            return new TextComponentBuilder(core);
+        }
 
-//                case nameof(ImageId):
-//                    ImageId = Convert.ToInt32(value);
-//                    break;
+        public override IEntityComponent Build()
+        {
+            return TextComponent.Create(FontId, Offset, Color, Text, Order);
+        }
 
-//                case nameof(Order):
-//                    Order = Convert.ToSingle(value);
-//                    break;
+        public override void SetProperty(object key, object value)
+        {
+            var propertyName = Convert.ToString(key);
+            switch (propertyName)
+            {
+                case nameof(FontId):
+                    FontId = ToFontId(value);
+                    break;
 
-//                default:
-//                    break;
-//            }
-//        }
+                case nameof(Text):
+                    Text = Convert.ToString(value);
+                    break;
 
-//        #endregion Public Methods
-//    }
-//}
+                case nameof(Order):
+                    Order = Convert.ToSingle(value);
+                    break;
+
+                case nameof(Offset):
+                    Offset = ToVector2(value);
+                    break;
+
+                case nameof(Color):
+                    Color = ToColor4(value);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        #endregion Public Methods
+    }
+}

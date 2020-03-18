@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Modules.Physics.Builders;
 
 namespace OpenBreed.Core.Modules.Rendering.Components
 {
@@ -10,16 +11,16 @@ namespace OpenBreed.Core.Modules.Rendering.Components
     /// </summary>
     public class SpriteComponent : IEntityComponent
     {
-        #region Private Constructors
+        #region Internal Constructors
 
-        private SpriteComponent(int atlasId, int imageId, float order)
+        internal SpriteComponent(SpriteComponentBuilder builder)
         {
-            AtlasId = atlasId;
-            ImageId = ImageId;
-            Order = order;
+            AtlasId = builder.AtlasId;
+            ImageId = builder.ImageId;
+            Order = builder.Order;
         }
 
-        #endregion Private Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
 
@@ -41,18 +42,6 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         #endregion Public Properties
 
         #region Public Methods
-
-        /// <summary>
-        /// Create sprite render component using given sprite atlas
-        /// </summary>
-        /// <param name="atlasId">Id of sprite atlas to use for this sprite component</param>
-        /// <param name="imageId">Optional initial sprite atlas image id</param>
-        /// <param name="order">Optional initial object rendering order</param>
-        /// <returns>Sprite component</returns>
-        public static SpriteComponent Create(int atlasId, int imageId = 0, float order = 0.0f)
-        {
-            return new SpriteComponent(atlasId, imageId, order);
-        }
 
         #endregion Public Methods
     }

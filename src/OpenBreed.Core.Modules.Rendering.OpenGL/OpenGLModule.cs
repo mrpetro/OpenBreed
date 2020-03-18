@@ -1,12 +1,12 @@
 ﻿using OpenBreed.Core.Common;
+using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Events;
 using OpenBreed.Core.Modules.Rendering.Managers;
-using OpenBreed.Core.Modules.Rendering.Systems;
+using OpenBreed.Core.Systems;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
-using System;
 using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering
@@ -18,7 +18,6 @@ namespace OpenBreed.Core.Modules.Rendering
         private readonly SpriteMan spriteMan;
         private readonly StampMan stampMan;
         private readonly FontMan fontMan;
-        private float fps;
         private TextureMan textureMan;
         private TileMan tileMan;
 
@@ -51,30 +50,28 @@ namespace OpenBreed.Core.Modules.Rendering
 
         public World ScreenWorld { get; set; }
 
-        public float Fps { get { return fps; } }
+        public float Fps { get; private set; }
 
         #endregion Public Properties
+
+        #region Private Properties
+
+        private Box2 ClipBox { get { return Box2.FromTLRB(Core.ClientRectangle.Width, 0.0f, Core.ClientRectangle.Height, 0.0f); } }
+
+        #endregion Private Properties
 
         #region Public Methods
 
         public void Draw(float dt)
         {
-            fps = 1.0f / dt;
+            Fps = 1.0f / dt;
 
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
             try
             {
                 GL.PushMatrix();
-
-                var clipBox = Box2.FromTLRB(Core.ClientRectangle.Width, 0.0f, Core.ClientRectangle.Height, 0.0f);
-
-                var depth = 0;
-
-                ScreenWorld?.Systems.OfType<ViewportSystem>().FirstOrDefault()?.Render(clipBox, depth, dt);
-
-                DrawCursor();
-
+                ScreenWorld?.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(ClipBox, 0, dt));
             }
             finally
             {
@@ -86,33 +83,11 @@ namespace OpenBreed.Core.Modules.Rendering
         {
         }
 
-
         public void OnClientResized(float width, float height)
         {
             Core.Events.Raise(this, GfxEventTypes.CLIENT_RESIZED, new ClientResizedEventArgs(width, height));
         }
 
-
         #endregion Public Methods
-
-        #region Private Methods
-
-        private void DrawCursor()
-        {
-            GL.PushMatrix();
-
-            GL.Translate(Core.Inputs.CursorPos.X, Core.Inputs.CursorPos.Y, 0.0f);
-
-            GL.Color3(1.0f, 0.0f, 0.0f);
-            GL.Begin(PrimitiveType.Triangles);
-            GL.Vertex3(0, -0.03, 0.0);
-            GL.Vertex3(0, 0, 0.0);
-            GL.Vertex3(0.015, -0.03, 0.0);
-            GL.End();
-
-            GL.PopMatrix();
-        }
-
-        #endregion Private Methods
     }
 }

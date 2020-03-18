@@ -12,5 +12,11 @@
 		Fixtures = { "Fixtures/Projectile" } },
 	SpriteComponent = {
 		AtlasAlias = "Atlases/Sprites/Projectiles/Laser",
+        Order = 0.0},
+	TextComponent = {
+		Text = "Bullet",
+		Offset = { -10, 10 },
+		Color = { 255, 255, 255, 255 },
+		FontId = { "Arial", 9 },
         Order = 0.0}
 }

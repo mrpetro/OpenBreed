@@ -135,7 +135,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
             GL.Translate((int)pos.Value.X, (int)pos.Value.Y, spc.Order);
 
-            //GL.Translate(-spriteAtlas.SpriteWidth / 2, -spriteAtlas.SpriteHeight / 2, 0.0f);
             atlas.Draw(spc.ImageId);
 
             GL.PopMatrix();

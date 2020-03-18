@@ -105,8 +105,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             return transform;
         }
 
-        //public void ApplyAspectRatio(ViewportComponent vpc)
-
         /// <summary>
         /// This will return camera tranformation matrix which includes aspect ratio correction
         /// </summary>

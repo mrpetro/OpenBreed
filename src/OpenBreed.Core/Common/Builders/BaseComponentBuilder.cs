@@ -1,5 +1,7 @@
 ﻿using NLua;
 using OpenBreed.Core.Common.Systems.Components;
+using OpenTK;
+using OpenTK.Graphics;
 using System;
 using System.Collections.Generic;
 
@@ -63,6 +65,43 @@ namespace OpenBreed.Core.Common.Builders
             }
 
             return list;
+        }
+
+        public int ToFontId(object value)
+        {
+            if (value is int)
+                return (int)value;
+
+            var luaTable = (LuaTable)value;
+
+            var fontName = Convert.ToString(luaTable[1]);
+            var fontSize = Convert.ToInt32(luaTable[2]);
+
+            return Core.Rendering.Fonts.Create(fontName, fontSize).Id;
+        }
+
+        public static Vector2 ToVector2(object value)
+        {
+            if (value is Vector2)
+                return (Vector2)value;
+
+            var luaTable = (LuaTable)value;
+
+            return new Vector2(Convert.ToSingle(luaTable[1]),
+                               Convert.ToSingle(luaTable[2]));
+        }
+
+        public static Color4 ToColor4(object value)
+        {
+            if (value is Color4)
+                return (Color4)value;
+
+            var luaTable = (LuaTable)value;
+
+            return new Color4(Convert.ToByte(luaTable[1]),
+                              Convert.ToByte(luaTable[2]),
+                              Convert.ToByte(luaTable[3]),
+                              Convert.ToByte(luaTable[4]));
         }
 
         public static List<string> ToStringArray(object value)

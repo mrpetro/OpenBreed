@@ -65,7 +65,6 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             var teleportEntry = core.Entities.CreateFromTemplate("TeleportEntry");
 
             teleportEntry.Tag = new TeleportPair { Id = pairId };
-            teleportEntry.Add(TextHelper.Create(core, new Vector2(0, 32), "TeleportEntry"));
 
             teleportEntry.GetComponent<PositionComponent>().Value = new Vector2( 16 * x, 16 * y);
 
@@ -83,7 +82,6 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             var teleportExit = core.Entities.CreateFromTemplate("TeleportExit");
 
             teleportExit.Tag = new TeleportPair { Id = pairId };
-            teleportExit.Add(TextHelper.Create(core, new Vector2(0, 32), "TeleportExit"));
 
             teleportExit.GetComponent<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
 

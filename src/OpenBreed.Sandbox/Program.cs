@@ -11,6 +11,7 @@ using OpenBreed.Core.Modules.Audio.Builders;
 using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Rendering;
+using OpenBreed.Core.Modules.Rendering.Builders;
 using OpenBreed.Core.Systems.Control.Systems;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Camera;
@@ -268,6 +269,9 @@ namespace OpenBreed.Sandbox
             var arrowTex = Rendering.Textures.Create("Textures/Sprites/Arrow", @"Content\Graphics\ArrowSpriteSet.png");
             Rendering.Sprites.Create("Atlases/Sprites/Arrow", arrowTex.Id, 32, 32, 8, 5);
 
+            var cursorsTex = Rendering.Textures.Create("Textures/Sprites/Cursors", @"Content\Graphics\Cursors.png");
+            Rendering.Sprites.Create("Atlases/Sprites/Cursors", cursorsTex.Id, 16, 16, 1, 1);
+
             CameraHelper.CreateAnimations(this);
             DoorHelper.CreateStamps(this);
             //PickableHelper.CreateStamps(this);
@@ -382,6 +386,7 @@ namespace OpenBreed.Sandbox
             Entities.RegisterComponentBuilder("PositionComponent", PositionComponentBuilder.New);
             Entities.RegisterComponentBuilder("MotionComponent", MotionComponentBuilder.New);
             Entities.RegisterComponentBuilder("SpriteComponent", SpriteComponentBuilder.New);
+            Entities.RegisterComponentBuilder("TextComponent", TextComponentBuilder.New);
         }
 
         private void RegisterShapes()

@@ -83,13 +83,13 @@ namespace OpenBreed.Sandbox.Worlds
 
             cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);
-            cameraBuilder.SetZoom(320 , 240);
+            cameraBuilder.SetFov(320 , 240);
 
             var playerCamera = cameraBuilder.Build();
             playerCamera.Tag = "PlayerCamera";
             playerCamera.Add(new Animator(10.0f, false, -1, FrameTransition.LinearInterpolation));
 
-            cameraBuilder.SetZoom(640, 480);
+            cameraBuilder.SetFov(640, 480);
             var gameCamera = cameraBuilder.Build();
             gameCamera.Tag = "HubCamera";
             gameCamera.Add(new Animator(10.0f, false, -1, FrameTransition.LinearInterpolation));
@@ -111,7 +111,7 @@ namespace OpenBreed.Sandbox.Worlds
             actor.Add(new WalkingControl());
             actor.Add(new AttackControl());
 
-            actor.Add(TextHelper.Create(core, new Vector2(0, 32), "Hero"));
+            //actor.Add(TextHelper.Create(core, new Vector2(0, 32), "Hero"));
 
             actor.Subscribe(CoreEventTypes.ENTITY_ENTERED_WORLD, OnEntityEntered);
             actor.Subscribe(CoreEventTypes.ENTITY_LEFT_WORLD, OnEntityLeftWorld);
@@ -139,7 +139,7 @@ namespace OpenBreed.Sandbox.Worlds
             var cursorEntity = core.Entities.Create();
         
             var spriteBuilder = SpriteComponentBuilder.New(core);
-            spriteBuilder.SetProperty("AtlasAlias", "Atlases/Sprites/Arrow");
+            spriteBuilder.SetProperty("AtlasAlias", "Atlases/Sprites/Cursors");
             spriteBuilder.SetProperty("Order", 100.0);
             spriteBuilder.SetProperty("ImageId", 0);
             cursorEntity.Add(spriteBuilder.Build());

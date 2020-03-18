@@ -40,7 +40,7 @@ namespace OpenBreed.Core.Modules.Physics.Builders
 
         public override IEntityComponent Build()
         {
-            return SpriteComponent.Create(AtlasId, ImageId, Order);
+            return new SpriteComponent(this);
         }
 
         public override void SetProperty(object key, object value)

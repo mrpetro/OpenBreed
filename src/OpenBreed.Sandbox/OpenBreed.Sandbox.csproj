@@ -82,6 +82,9 @@
   <ItemGroup>
     <Compile Include="Commands\MoveToCommand.cs" />
     <Compile Include="Components\CollisionDebug.cs" />
+    <None Include="Content\Graphics\Cursors.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="Entities\Actor\Arrow.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -102,6 +105,7 @@
     <Compile Include="Entities\Door\States\ClosedState.cs" />
     <Compile Include="Entities\Door\States\OpeningState.cs" />
     <Compile Include="Entities\Door\States\ClosingState.cs" />
+    <Compile Include="Entities\FpsCounter\FpsCounterHelper.cs" />
     <Compile Include="Entities\Pickable\PickableHelper.cs" />
     <Compile Include="Entities\Pickable\States\LyingState.cs" />
     <Compile Include="Entities\Pickable\States\PickingState.cs" />
@@ -118,7 +122,6 @@
     <Compile Include="Jobs\FpsTextUpdateJob.cs" />
     <Compile Include="Managers\LogMan.cs" />
     <Compile Include="Helpers\SandBoxHelper.cs" />
-    <Compile Include="Helpers\TextHelper.cs" />
     <Compile Include="Items\CreditsItem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
