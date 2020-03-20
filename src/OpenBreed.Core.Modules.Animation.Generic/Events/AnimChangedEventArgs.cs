@@ -3,7 +3,7 @@
 namespace OpenBreed.Core.Modules.Animation.Events
 {
     /// <summary>
-    /// Event arguments that are passed with ANIMATION_CHANGED event
+    /// Event args for event that occurs when animation frame is changed
     /// </summary>
     public class AnimChangedEventArgs : EventArgs
     {

@@ -4,7 +4,7 @@ using System;
 namespace OpenBreed.Core.Modules.Physics.Events
 {
     /// <summary>
-    /// Event arguments that are passed with BODY_OFF event
+    /// Event args for event that occurs when entity body collision disables
     /// </summary>
     public class BodyOffEventArgs : EventArgs
     {

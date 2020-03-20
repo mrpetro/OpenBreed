@@ -5,7 +5,6 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Systems.Control.Events;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -31,7 +30,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
             // Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
             Entity.PostCommand(new TextSetCommand(Entity.Id, 0, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
-            Entity.Subscribe(ControlEventTypes.CONTROL_DIRECTION_CHANGED, OnControlDirectionChanged);
+            Entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
         public void Initialize(IEntity entity)
@@ -41,7 +40,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 
         public void LeaveState()
         {
-            Entity.Unsubscribe(ControlEventTypes.CONTROL_DIRECTION_CHANGED, OnControlDirectionChanged);
+            Entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
         public string Process(string actionName, object[] arguments)
@@ -59,24 +58,18 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
             return null;
         }
 
-        private void OnControlDirectionChanged(object sender, EventArgs e)
+        private void OnControlDirectionChanged(object sender, ControlDirectionChangedEventArgs e)
         {
-            HandleControlDirectionChangedEvent((ControlDirectionChangedEvent)e);
-        }
-
-        private void HandleControlDirectionChangedEvent(ControlDirectionChangedEvent systemEvent)
-        {
-            if (systemEvent.Direction != Vector2.Zero)
+            if (e.Direction != Vector2.Zero)
             {
                 var dir = Entity.GetComponent<DirectionComponent>();
 
-                if (dir.Value != systemEvent.Direction)
+                if (dir.Value != e.Direction)
                 {
-                    dir.Value = systemEvent.Direction;
+                    dir.Value = e.Direction;
                     Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Rotation", "Rotate"));
                 }
             }
-
         }
     }
 }

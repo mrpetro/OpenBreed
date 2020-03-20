@@ -94,7 +94,6 @@
     <Compile Include="Common\Shapes\CircleShape.cs" />
     <Compile Include="Common\Shapes\IShape.cs" />
     <Compile Include="Common\Shapes\PolygonShape.cs" />
-    <Compile Include="Events\CoreEventTypes.cs" />
     <Compile Include="Events\EntityEnteredWorldEventArgs.cs" />
     <Compile Include="Events\EntityLeftWorldEventArgs.cs" />
     <Compile Include="Events\WorldDeinitializedEventArgs.cs" />

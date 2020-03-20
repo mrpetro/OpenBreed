@@ -40,8 +40,9 @@ namespace OpenBreed.Sandbox.Entities.Projectile
             laserUR.AddFrame(7, 2.0f);
         }
 
-        private static void OnCollision(IEntity entity, CollisionEventArgs args)
+        private static void OnCollision(object sender, CollisionEventArgs args)
         {
+            var entity = (IEntity)sender;
             var body = args.Entity.TryGetComponent<BodyComponent>();
 
             var type = body.Tag;
@@ -63,9 +64,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
             projectile.GetComponent<PositionComponent>().Value = new Vector2(x, y);
             projectile.GetComponent<VelocityComponent>().Value = new Vector2(vx, vy);
 
-            projectile.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, (s, a) => OnCollision((IEntity)s, (CollisionEventArgs)a));
-
-
+            projectile.Subscribe<CollisionEventArgs>(OnCollision);
 
             world.AddEntity(projectile);
 

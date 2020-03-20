@@ -49,7 +49,7 @@ namespace OpenBreed.Sandbox.Components.States
             Entity.PostCommand(new PutStampCommand(Entity.World.Id, stampId, 0, pos.Value));
             Entity.PostCommand(new TextSetCommand(Entity.Id, 0, "Door - Closed"));
 
-            Entity.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, OnCollision);
+            Entity.Subscribe<CollisionEventArgs>(OnCollision);
         }
 
         public void Initialize(IEntity entity)
@@ -59,7 +59,7 @@ namespace OpenBreed.Sandbox.Components.States
 
         public void LeaveState()
         {
-            Entity.Unsubscribe(PhysicsEventTypes.COLLISION_OCCURRED, OnCollision);
+            Entity.Unsubscribe<CollisionEventArgs>(OnCollision);
         }
 
         public string Process(string actionName, object[] arguments)
@@ -80,12 +80,7 @@ namespace OpenBreed.Sandbox.Components.States
 
         #region Private Methods
 
-        private void OnCollision(object sender, EventArgs eventArgs)
-        {
-            HandleCollisionEvent((CollisionEventArgs)eventArgs);
-        }
-
-        private void HandleCollisionEvent(CollisionEventArgs e)
+        private void OnCollision(object sender, CollisionEventArgs eventArgs)
         {
             Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Functioning", "Open"));
         }

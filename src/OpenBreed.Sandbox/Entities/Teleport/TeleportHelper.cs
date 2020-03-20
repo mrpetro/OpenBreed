@@ -68,8 +68,8 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
             teleportEntry.GetComponent<PositionComponent>().Value = new Vector2( 16 * x, 16 * y);
 
-            teleportEntry.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, (s, a) => OnFrameChanged((IEntity)s, (AnimChangedEventArgs)a));
-            teleportEntry.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, (s, a) => OnCollision((IEntity)s, (CollisionEventArgs)a));
+            teleportEntry.Subscribe<AnimChangedEventArgs>(OnFrameChanged);
+            teleportEntry.Subscribe<CollisionEventArgs>(OnCollision);
             world.AddEntity(teleportEntry);
 
             return teleportEntry;
@@ -85,7 +85,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
             teleportExit.GetComponent<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
 
-            teleportExit.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, (s,a) => OnFrameChanged((IEntity)s, (AnimChangedEventArgs)a));
+            teleportExit.Subscribe<AnimChangedEventArgs>(OnFrameChanged);
 
             world.AddEntity(teleportExit);
 
@@ -96,14 +96,16 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         #region Private Methods
 
-        private static void OnFrameChanged(IEntity entity, AnimChangedEventArgs systemEvent)
+        private static void OnFrameChanged(object sender, AnimChangedEventArgs e)
         {
+            var entity = (IEntity)sender;
             var sprite = entity.GetComponent<SpriteComponent>();
-            sprite.ImageId = (int)systemEvent.Frame;
+            sprite.ImageId = (int)e.Frame;
         }
 
-        private static void OnCollision(IEntity entity, CollisionEventArgs args)
+        private static void OnCollision(object sender, CollisionEventArgs args)
         {
+            var entity = (IEntity)sender;
             var entryEntity = entity;
             var targetEntity = args.Entity;
 

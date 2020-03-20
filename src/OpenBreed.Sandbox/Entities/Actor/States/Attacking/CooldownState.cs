@@ -4,7 +4,6 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Systems.Control.Events;
 using OpenTK;
 using System;
 using System.Linq;
@@ -39,7 +38,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             //Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
             Entity.PostCommand(new TextSetCommand(Entity.Id, 0, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
-            Entity.Subscribe(ControlEventTypes.CONTROL_FIRE_CHANGED, OnControlFireChanged);
+            Entity.Subscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
 
             timer.Start();
             timer.Elapsed += Timer_Elapsed;
@@ -62,22 +61,16 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             timer.Stop();
             timer.Elapsed -= Timer_Elapsed;
 
-            Entity.Unsubscribe(ControlEventTypes.CONTROL_FIRE_CHANGED, OnControlFireChanged);
+            Entity.Unsubscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
         }
 
-        private void OnControlFireChanged(object sender, EventArgs e)
+        private void OnControlFireChanged(object sender, ControlFireChangedEvenrArgs e)
         {
-            HandleControlFireChangedEvent((ControlFireChangedEvent)e);
-        }
-
-        private void HandleControlFireChangedEvent(ControlFireChangedEvent systemEvent)
-        {
-            if (systemEvent.Fire)
+            if (e.Fire)
                 Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Attacking", "Shoot"));
             else
                 Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Attacking", "Stop"));
         }
-
 
         public string Process(string actionName, object[] arguments)
         {

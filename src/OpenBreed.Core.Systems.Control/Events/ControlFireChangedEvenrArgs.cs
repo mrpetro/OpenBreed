@@ -3,13 +3,13 @@
 namespace OpenBreed.Core.Modules.Animation.Systems.Control.Events
 {
     /// <summary>
-    /// Event arguments that are passed with CONTROL_FIRE_CHANGED event
+    /// Event args for event that occurs when control fire flag changes
     /// </summary>
-    public class ControlFireChangedEvent : EventArgs
+    public class ControlFireChangedEvenrArgs : EventArgs
     {
         #region Public Constructors
 
-        public ControlFireChangedEvent(bool fire)
+        public ControlFireChangedEvenrArgs(bool fire)
         {
             Fire = fire;
         }

@@ -7,7 +7,6 @@ using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Events;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Systems;
 using OpenTK;
@@ -201,7 +200,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                 vpc.Width = cmd.Width;
                 vpc.Height = cmd.Height;
 
-                toResize.RaiseEvent(GfxEventTypes.VIEWPORT_RESIZED, new ViewportResizedEventArgs(vpc.Width, vpc.Height));
+                toResize.RaiseEvent(new ViewportResizedEventArgs(vpc.Width, vpc.Height));
             }
 
             return true;

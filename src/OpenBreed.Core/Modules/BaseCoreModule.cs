@@ -24,9 +24,9 @@ namespace OpenBreed.Core.Modules
 
         #region Public Methods
 
-        public void Subscribe(string eventType, Action<object, EventArgs> callback)
+        public void Subscribe<T>(Action<object, T> callback) where T: EventArgs
         {
-            Core.Events.Subscribe(this, eventType, callback);
+            Core.Events.Subscribe(this, callback);
         }
 
         #endregion Public Methods

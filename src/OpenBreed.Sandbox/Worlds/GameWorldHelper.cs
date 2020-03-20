@@ -12,7 +12,6 @@ using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Physics.Systems;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
-using OpenBreed.Core.Modules.Rendering.Events;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems.Control.Components;
@@ -113,8 +112,8 @@ namespace OpenBreed.Sandbox.Worlds
 
             //actor.Add(TextHelper.Create(core, new Vector2(0, 32), "Hero"));
 
-            actor.Subscribe(CoreEventTypes.ENTITY_ENTERED_WORLD, OnEntityEntered);
-            actor.Subscribe(CoreEventTypes.ENTITY_LEFT_WORLD, OnEntityLeftWorld);
+            actor.Subscribe<EntityEnteredWorldEventArgs>(OnEntityEntered);
+            actor.Subscribe<EntityLeftWorldEventArgs>(OnEntityLeftWorld);
 
 
             core.Jobs.Execute(new CameraFollowJob(playerCamera, actor));
@@ -155,7 +154,7 @@ namespace OpenBreed.Sandbox.Worlds
         public static void SetPreserveAspectRatio(IEntity viewportEntity)
         {
             var cameraEntity = viewportEntity.Core.Entities.GetById(viewportEntity.GetComponent<ViewportComponent>().CameraEntityId);
-            viewportEntity.Subscribe(GfxEventTypes.VIEWPORT_RESIZED, (s, a) => UpdateCameraFov(cameraEntity, (ViewportResizedEventArgs)a));
+            viewportEntity.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateCameraFov(cameraEntity, a));
         }
 
         private static void UpdateCameraFov(IEntity cameraEntity, ViewportResizedEventArgs a)
@@ -164,16 +163,14 @@ namespace OpenBreed.Sandbox.Worlds
             cameraEntity.GetComponent<CameraComponent>().Height = a.Height;
         }
 
-        private static void OnEntityEntered(object sender, EventArgs e)
+        private static void OnEntityEntered(object sender, EntityEnteredWorldEventArgs a)
         {
-            var ea = (EntityEnteredWorldEventArgs)e;
-            ea.Entity.Core.Logging.Verbose($"Entity '{ea.Entity.Id}' entered world '{ea.World.Name}'.");
+            a.Entity.Core.Logging.Verbose($"Entity '{a.Entity.Id}' entered world '{a.World.Name}'.");
         }
 
-        private static void OnEntityLeftWorld(object sender, EventArgs e)
+        private static void OnEntityLeftWorld(object sender, EntityLeftWorldEventArgs a)
         {
-            var ea = (EntityLeftWorldEventArgs)e;
-            ea.Entity.Core.Logging.Verbose($"Entity '{ea.Entity.Id}' left world '{ea.World.Name}'.");
+            a.Entity.Core.Logging.Verbose($"Entity '{a.Entity.Id}' left world '{a.World.Name}'.");
 
         }
     }

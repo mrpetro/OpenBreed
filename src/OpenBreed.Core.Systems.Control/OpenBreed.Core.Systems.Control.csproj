@@ -82,9 +82,8 @@
     <Compile Include="Components\FlyingControl.cs" />
     <Compile Include="Components\TankControl.cs" />
     <Compile Include="Components\TurretControl.cs" />
-    <Compile Include="Events\ControlEventTypes.cs" />
-    <Compile Include="Events\ControlFireChangedEvent.cs" />
-    <Compile Include="Events\ControlDirectionChangedEvent.cs" />
+    <Compile Include="Events\ControlFireChangedEvenrArgs.cs" />
+    <Compile Include="Events\ControlDirectionChangedEventArgs.cs" />
     <Compile Include="Commands\AttackControlCommand.cs" />
     <Compile Include="Commands\WalkingControlCommand.cs" />
     <Compile Include="Systems\AiControlSystem.cs" />

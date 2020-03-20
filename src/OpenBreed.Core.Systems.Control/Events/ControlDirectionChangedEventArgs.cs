@@ -5,13 +5,13 @@ using System;
 namespace OpenBreed.Core.Modules.Animation.Systems.Control.Events
 {
     /// <summary>
-    /// Event arguments that are passed with CONTROL_DIRECTION_CHANGED event
+    /// Event args for event that occurs when control direction is changed
     /// </summary>
-    public class ControlDirectionChangedEvent : EventArgs
+    public class ControlDirectionChangedEventArgs : EventArgs
     {
         #region Public Constructors
 
-        public ControlDirectionChangedEvent(Vector2 direction)
+        public ControlDirectionChangedEventArgs(Vector2 direction)
         {
             Direction = direction;
         }

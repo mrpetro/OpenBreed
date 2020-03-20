@@ -4,7 +4,7 @@ using System;
 namespace OpenBreed.Core.Modules.Physics.Events
 {
     /// <summary>
-    /// Event arguments that are passed with VIEWPORT_RESIZED event
+    /// Event args for event that occurs when rendering viewport was resized
     /// </summary>
     public class ViewportResizedEventArgs : EventArgs
     {

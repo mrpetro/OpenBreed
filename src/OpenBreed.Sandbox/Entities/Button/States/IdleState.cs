@@ -10,10 +10,12 @@ using System;
 using System.Linq;
 using OpenBreed.Core.Commands;
 
-namespace OpenBreed.Sandbox.Components.States
+namespace OpenBreed.Sandbox.Entities.Button.States
 {
-    public class OpeningState : IState
+    public class IdleState : IState
     {
+        public  const string NAME = "Idle";
+
         #region Private Fields
 
         private readonly string animationId;
@@ -22,10 +24,10 @@ namespace OpenBreed.Sandbox.Components.States
 
         #region Public Constructors
 
-        public OpeningState(string id, string animationId)
+        public IdleState()
         {
-            Name = id;
-            this.animationId = animationId;
+            //Name = id;
+            //this.animationId = animationId;
         }
 
         #endregion Public Constructors
@@ -33,7 +35,7 @@ namespace OpenBreed.Sandbox.Components.States
         #region Public Properties
 
         public IEntity Entity { get; private set; }
-        public string Name { get; }
+        public string Name { get { return NAME; } }
 
         #endregion Public Properties
 
@@ -82,7 +84,7 @@ namespace OpenBreed.Sandbox.Components.States
             Entity.PostCommand(new SpriteSetCommand(Entity.Id, (int)e.Frame));
         }
 
-        private void OnAnimStopped(object sender, AnimStoppedEventArgs e)
+        private void OnAnimStopped(object sender, AnimStoppedEventArgs eventArgs)
         {
             Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Functioning", "Opened"));
         }

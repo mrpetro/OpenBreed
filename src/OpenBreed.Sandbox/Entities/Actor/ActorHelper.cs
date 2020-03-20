@@ -107,13 +107,14 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
             actor.GetComponent<PositionComponent>().Value = pos;
 
-            actor.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, (s,a) => OnCollision((IEntity)s,(CollisionEventArgs)a));
+            actor.Subscribe<CollisionEventArgs>(OnCollision);
 
             return actor;
         }
 
-        private static void OnCollision(IEntity entity, CollisionEventArgs args)
+        private static void OnCollision(object sender, CollisionEventArgs args)
         {
+            var entity = (IEntity)sender;
             var body = args.Entity.TryGetComponent<BodyComponent>();
 
             var type = body.Tag;

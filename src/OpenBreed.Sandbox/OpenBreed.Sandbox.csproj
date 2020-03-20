@@ -99,6 +99,9 @@
     <Compile Include="Entities\Actor\States\Rotation\RotatingState.cs" />
     <Compile Include="Entities\Box\BoxHelper.cs" />
     <Compile Include="Entities\Builders\WorldBlockBuilder.cs" />
+    <Compile Include="Entities\Button\ButtonHelper.cs" />
+    <Compile Include="Entities\Button\States\PressedState.cs" />
+    <Compile Include="Entities\Button\States\IdleState.cs" />
     <Compile Include="Entities\Camera\CameraHelper.cs" />
     <Compile Include="Entities\Door\DoorHelper.cs" />
     <Compile Include="Entities\Door\States\OpenedState.cs" />
@@ -166,6 +169,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\WorldGate\WorldGateEntry.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\Button\Button.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="OpenTK.dll.config" />

@@ -83,7 +83,6 @@
     <Compile Include="Events\BodyOnEventArgs.cs" />
     <Compile Include="Events\BodyOffEventArgs.cs" />
     <Compile Include="Events\CollisionEventArgs.cs" />
-    <Compile Include="Events\PhysicsEventTypes.cs" />
     <Compile Include="Helpers\FixtureMan.cs" />
     <Compile Include="Helpers\Box2Extensions.cs" />
     <Compile Include="Helpers\CollisionChecker.cs" />

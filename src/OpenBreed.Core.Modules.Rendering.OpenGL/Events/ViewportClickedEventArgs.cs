@@ -5,7 +5,7 @@ using System;
 namespace OpenBreed.Core.Modules.Physics.Events
 {
     /// <summary>
-    /// Event arguments that are passed with VIEWPORT_CLICKED event
+    /// Event args for event that occurs when rendering viewport was clicked with cursor
     /// </summary>
     public class ViewportClickedEventArgs : EventArgs
     {

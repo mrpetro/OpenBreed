@@ -1,30 +1,35 @@
-﻿
-using OpenBreed.Core.Commands;
+﻿using OpenBreed.Core.Common.Components;
+
+using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
+using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Events;
+using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
 using System;
 using System.Linq;
+using OpenBreed.Core.Commands;
 
-namespace OpenBreed.Sandbox.Entities.Pickable.States
+namespace OpenBreed.Sandbox.Entities.Button.States
 {
-    public class LyingState : IState
+    public class PressedState : IState
     {
+        public const string NAME = "Pressed";
+
         #region Private Fields
 
-        private int stampId;
+        private readonly int stampId;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public LyingState(string id, int stampId)
+        public PressedState()
         {
-            Name = id;
-            this.stampId = stampId;
+            //Name = id;
+            //this.stampId = stampId;
         }
 
         #endregion Public Constructors
@@ -32,7 +37,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
         #region Public Properties
 
         public IEntity Entity { get; private set; }
-        public string Name { get; }
+        public string Name { get { return NAME; } }
 
         #endregion Public Properties
 
@@ -40,10 +45,12 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
 
         public void EnterState()
         {
-            // Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            Entity.PostCommand(new SpriteOffCommand(Entity.Id));
+
             var pos = Entity.GetComponent<PositionComponent>();
             Entity.PostCommand(new PutStampCommand(Entity.World.Id, stampId, 0, pos.Value));
+            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, "Door - Closed"));
+
             Entity.Subscribe<CollisionEventArgs>(OnCollision);
         }
 
@@ -57,19 +64,13 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
             Entity.Unsubscribe<CollisionEventArgs>(OnCollision);
         }
 
-        private void OnCollision(object sender, CollisionEventArgs e)
-        {
-            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Functioning", "Pick"));
-        }
-
         public string Process(string actionName, object[] arguments)
         {
             switch (actionName)
             {
-                case "Pick":
-                    {
-                        return "Picking";
-                    }
+                case "Open":
+                    return "Opening";
+
                 default:
                     break;
             }
@@ -80,6 +81,11 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
         #endregion Public Methods
 
         #region Private Methods
+
+        private void OnCollision(object sender, CollisionEventArgs eventArgs)
+        {
+            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Functioning", "Open"));
+        }
 
         #endregion Private Methods
     }

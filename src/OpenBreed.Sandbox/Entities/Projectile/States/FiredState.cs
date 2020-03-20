@@ -52,9 +52,9 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
 
             Entity.PostCommand(new PlayAnimCommand(Entity.Id, animPrefix + animDirName));
             Entity.PostCommand(new TextSetCommand(Entity.Id, 0, "Projectile - Fired"));
-            Entity.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, OnCollision);
+            Entity.Subscribe<CollisionEventArgs>(OnCollision);
 
-            Entity.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, OnFrameChanged);
+            Entity.Subscribe<AnimChangedEventArgs>(OnFrameChanged);
         }
 
         public void Initialize(IEntity entity)
@@ -66,17 +66,12 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
 
         public void LeaveState()
         {
-            Entity.Unsubscribe(AnimationEventTypes.ANIMATION_CHANGED, OnFrameChanged);
+            Entity.Unsubscribe<AnimChangedEventArgs>(OnFrameChanged);
         }
 
-        private void OnFrameChanged(object sender, EventArgs e)
+        private void OnFrameChanged(object sender, AnimChangedEventArgs e)
         {
-            HandleFrameChangeEvent((AnimChangedEventArgs)e);
-        }
-
-        private void HandleFrameChangeEvent(AnimChangedEventArgs systemEvent)
-        {
-            sprite.ImageId = (int)systemEvent.Frame;
+            sprite.ImageId = (int)e.Frame;
         }
 
         public string Process(string actionName, object[] arguments)
@@ -89,12 +84,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
 
         #region Private Methods
 
-        private void OnCollision(object sender, EventArgs e)
-        {
-            HandleCollisionEvent((CollisionEventArgs)e);
-        }
-
-        private void HandleCollisionEvent(CollisionEventArgs e)
+        private void OnCollision(object sender, CollisionEventArgs e)
         {
             //Entity.PostMsg(new StateChangeMsg(Entity, "Attacking", "Open"));
         }

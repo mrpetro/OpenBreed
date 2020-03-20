@@ -6,7 +6,6 @@ using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Systems.Control.Events;
 using OpenBreed.Sandbox.Helpers;
 using OpenTK;
 using System;
@@ -56,7 +55,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             Entity.PostCommand(new PlayAnimCommand(Entity.Id,  $"{animPrefix}/{Name}/{animDirName}"));
             Entity.PostCommand(new TextSetCommand(Entity.Id, 0, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
-            Entity.Subscribe(ControlEventTypes.CONTROL_DIRECTION_CHANGED, OnControlDirectionChanged);
+            Entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
         public void Initialize(IEntity entity)
@@ -67,7 +66,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         public void LeaveState()
         {
-            Entity.Unsubscribe(ControlEventTypes.CONTROL_DIRECTION_CHANGED, OnControlDirectionChanged);
+            Entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
         public string Process(string actionName, object[] arguments)
@@ -89,15 +88,10 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         #region Private Methods
 
-        private void HandleControlDirectionChangedEvent(ControlDirectionChangedEvent systemEvent)
+        private void OnControlDirectionChanged(object sender, ControlDirectionChangedEventArgs eventArgs)
         {
-            if (systemEvent.Direction != Vector2.Zero)
+            if (eventArgs.Direction != Vector2.Zero)
                 Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Movement", "Walk"));
-        }
-
-        private void OnControlDirectionChanged(object sender, EventArgs eventArgs)
-        {
-            HandleControlDirectionChangedEvent((ControlDirectionChangedEvent)eventArgs);
         }
 
         #endregion Private Methods

@@ -91,19 +91,19 @@ namespace OpenBreed.Core.Entities
             Core.Commands.Post(this, command);
         }
 
-        public void RaiseEvent(string eventType, EventArgs eventArgs)
+        public void RaiseEvent<T>(T eventArgs) where T : EventArgs
         {
-            Core.Events.Raise(this, eventType, eventArgs);
+            Core.Events.Raise(this, eventArgs);
         }
 
-        public void Subscribe(string eventType, Action<object, EventArgs> callback)
+        public void Subscribe<T>(Action<object, T> callback) where T : EventArgs
         {
-            Core.Events.Subscribe(this, eventType, callback);
+            Core.Events.Subscribe(this, callback);
         }
 
-        public void Unsubscribe(string eventType, Action<object, EventArgs> callback)
+        public void Unsubscribe<T>(Action<object, T> callback) where T : EventArgs
         {
-            Core.Events.Unsubscribe(this, eventType, callback);
+            Core.Events.Unsubscribe(this, callback);
         }
 
         public void Add(IEntityComponent component)
@@ -165,12 +165,12 @@ namespace OpenBreed.Core.Entities
 
         private void OnLeftWorld(World world)
         {
-            RaiseEvent(CoreEventTypes.ENTITY_LEFT_WORLD, new EntityLeftWorldEventArgs(this, world));
+            RaiseEvent(new EntityLeftWorldEventArgs(this, world));
         }
 
         private void OnEnteredWorld(World world)
         {
-            RaiseEvent(CoreEventTypes.ENTITY_ENTERED_WORLD, new EntityEnteredWorldEventArgs(this, world));
+            RaiseEvent(new EntityEnteredWorldEventArgs(this, world));
         }
 
         #endregion Private Methods

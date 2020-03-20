@@ -187,12 +187,12 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         private void RaiseAnimStoppedEvent(IEntity entity, AnimatorComponent animator)
         {
-            entity.RaiseEvent(AnimationEventTypes.ANIMATION_STOPPED, new AnimStoppedEventArgs(animator));
+            entity.RaiseEvent(new AnimStoppedEventArgs(animator));
         }
 
         private void RaiseAnimChangedEvent(IEntity entity, AnimatorComponent animator)
         {
-            entity.RaiseEvent(AnimationEventTypes.ANIMATION_CHANGED, new AnimChangedEventArgs(animator.Frame));
+            entity.RaiseEvent(new AnimChangedEventArgs(animator.Frame));
         }
 
         private bool HandlePauseAnimCommand(object sender, PauseAnimCommand cmd)

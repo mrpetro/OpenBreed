@@ -83,7 +83,6 @@
     <Compile Include="Events\ViewportClickedEventArgs.cs" />
     <Compile Include="Events\ViewportResizedEventArgs.cs" />
     <Compile Include="Events\ClientResizedEventArgs.cs" />
-    <Compile Include="Events\GfxEventTypes.cs" />
     <Compile Include="Helpers\TileCell.cs" />
     <Compile Include="Components\TileComponent.cs" />
     <Compile Include="Components\ViewportComponent.cs" />

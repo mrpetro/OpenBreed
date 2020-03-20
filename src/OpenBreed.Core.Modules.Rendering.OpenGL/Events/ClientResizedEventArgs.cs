@@ -3,7 +3,7 @@
 namespace OpenBreed.Core.Modules.Physics.Events
 {
     /// <summary>
-    /// Event arguments that are passed with CLIENT_RESIZED event
+    /// Event args for event that occurs when rendering client screen was resized
     /// </summary>
     public class ClientResizedEventArgs : EventArgs
     {

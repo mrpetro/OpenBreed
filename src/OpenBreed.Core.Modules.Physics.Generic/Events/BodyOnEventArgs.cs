@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace OpenBreed.Core.Modules.Physics.Events
 {
     /// <summary>
-    /// Event arguments that are passed with BODY_ON event
+    /// Event args for event that occurs when entity body collision enables
     /// </summary>
     public class BodyOnEventArgs : EventArgs
     {

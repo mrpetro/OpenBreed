@@ -3,7 +3,6 @@ using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Events;
 using OpenBreed.Sandbox.Jobs;
 using OpenBreed.Sandbox.Worlds;
 using OpenTK;
@@ -32,7 +31,7 @@ namespace OpenBreed.Sandbox.Entities.FpsCounter
             var hudViewport = world.Core.Entities.GetByTag(ScreenWorldHelper.HUD_VIEWPORT).First();
 
             world.Core.Jobs.Execute(new FpsTextUpdateJob(fpsTextEntity));
-            hudViewport.Subscribe(GfxEventTypes.VIEWPORT_RESIZED, (s, a) => UpdateFpsPos(fpsTextEntity, (ViewportResizedEventArgs)a));
+            hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateFpsPos(fpsTextEntity, a));
         }
 
         private static void UpdateFpsPos(IEntity fpsTextEntity, ViewportResizedEventArgs a)

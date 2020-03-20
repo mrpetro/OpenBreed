@@ -4,7 +4,7 @@ using System;
 namespace OpenBreed.Core.Modules.Animation.Events
 {
     /// <summary>
-    /// Event arguments that are passed with ANIMATION_STOPPED event
+    /// Event args for event that occurs when animation is stopped
     /// </summary>
     public class AnimStoppedEventArgs : EventArgs
     {

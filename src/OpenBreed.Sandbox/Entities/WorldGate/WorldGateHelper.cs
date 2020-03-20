@@ -47,18 +47,19 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             teleportEntity.Tag = new Tuple<string, int>(worldName, entryId);
 
             teleportEntity.GetComponent<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
-            teleportEntity.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, (s, a) => OnCollision((IEntity)s, (CollisionEventArgs)a));
-            teleportEntity.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, (s, a) => OnFrameChanged((IEntity)s, (AnimChangedEventArgs)a));
+            teleportEntity.Subscribe<CollisionEventArgs>(OnCollision);
+            teleportEntity.Subscribe<AnimChangedEventArgs>(OnFrameChanged);
 
             world.AddEntity(teleportEntity);
 
             return teleportEntity;
         }
 
-        private static void OnFrameChanged(IEntity entity, AnimChangedEventArgs systemEvent)
+        private static void OnFrameChanged(object sender, AnimChangedEventArgs e)
         {
+            var entity = (IEntity)sender;
             var sprite = entity.GetComponent<SpriteComponent>();
-            sprite.ImageId = (int)systemEvent.Frame;
+            sprite.ImageId = (int)e.Frame;
         }
 
         public static IEntity AddWorldEntry(World world, int x, int y, int entryId)
@@ -67,7 +68,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             var teleportEntity = core.Entities.CreateFromTemplate("WorldGateEntry");
             teleportEntity.Tag = new WorldGatePair() { Id = entryId };
             teleportEntity.GetComponent<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
-            teleportEntity.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, (s, a) => OnFrameChanged((IEntity)s, (AnimChangedEventArgs)a));
+            teleportEntity.Subscribe<AnimChangedEventArgs>(OnFrameChanged);
 
             world.AddEntity(teleportEntity);
 
@@ -78,8 +79,9 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
         #region Private Methods
 
-        private static void OnCollision(IEntity entity, CollisionEventArgs args)
+        private static void OnCollision(object sender, CollisionEventArgs args)
         {
+            var entity = (IEntity)sender;
             var exitEntity = entity;
             var targetEntity = args.Entity;
 

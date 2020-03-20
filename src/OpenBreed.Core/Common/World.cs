@@ -1,6 +1,4 @@
 ﻿using OpenBreed.Core.Commands;
-
-using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Extensions;
@@ -183,6 +181,11 @@ namespace OpenBreed.Core.Common
             return msgHandlerRelay.Handle(sender, msg);
         }
 
+        public void RaiseEvent<T>(T eventArgs) where T : EventArgs
+        {
+            Core.Events.Raise(this, eventArgs);
+        }
+
         #endregion Public Methods
 
         #region Internal Methods
@@ -202,12 +205,12 @@ namespace OpenBreed.Core.Common
             //InitializeSystems();
             Cleanup();
 
-            Core.Events.Raise(this, CoreEventTypes.WORLD_INITIALIZED, new WorldInitializedEventArgs(this));
+            RaiseEvent(new WorldInitializedEventArgs(this));
         }
 
         internal void Deinitialize()
         {
-            Core.Events.Raise(this, CoreEventTypes.WORLD_DEINITIALIZED, new WorldDeinitializedEventArgs(this));
+            RaiseEvent(new WorldDeinitializedEventArgs(this));
         }
 
         internal void RegisterEntity(Entity entity)

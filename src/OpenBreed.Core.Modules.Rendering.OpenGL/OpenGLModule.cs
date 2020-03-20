@@ -2,7 +2,6 @@
 using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Events;
 using OpenBreed.Core.Modules.Rendering.Managers;
 using OpenBreed.Core.Systems;
 using OpenTK;
@@ -85,7 +84,7 @@ namespace OpenBreed.Core.Modules.Rendering
 
         public void OnClientResized(float width, float height)
         {
-            Core.Events.Raise(this, GfxEventTypes.CLIENT_RESIZED, new ClientResizedEventArgs(width, height));
+            Core.Events.Raise(this, new ClientResizedEventArgs(width, height));
         }
 
         #endregion Public Methods
