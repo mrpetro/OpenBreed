@@ -1,97 +1,49 @@
-﻿//
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Components;
+using OpenBreed.Core.Entities;
+using OpenBreed.Core.Helpers;
+using System;
+using System.Collections.Generic;
 
-//namespace OpenBreed.Core.Systems
-//{
-//    public class StateMachineSystem : WorldSystem, IMsgListener
-//    {
-//        #region Private Fields
+namespace OpenBreed.Core.Systems
+{
+    public class StateMachineSystem : WorldSystem, ICommandExecutor
+    {
+        #region Private Fields
 
-//        private readonly List<IEntity> entities = new List<IEntity>();
-//        private readonly List<Animator> animatorComps = new List<Animator>();
+        private readonly List<IEntity> entities = new List<IEntity>();
 
-//        #endregion Private Fields
+        private readonly CommandHandler cmdHandler;
 
-//        #region Public Constructors
+        #endregion Private Fields
 
-//        public StateMachineSystem(ICore core) : base(core)
-//        {
-//            Require<Animator>();
-//        }
+        #region Public Constructors
 
-//        #endregion Public Constructors
+        public StateMachineSystem(ICore core) : base(core)
+        {
+            cmdHandler = new CommandHandler(this);
+            Require<FsmComponent>();
+        }
 
-//        private MsgHandler msgHandler;
+        #endregion Public Constructors
 
-//        #region Public Methods
+        #region Protected Methods
 
-//        public override void Initialize(World world)
-//        {
-//            msgHandler = new MsgHandler(this);
+        protected override void RegisterEntity(IEntity entity)
+        {
+            entities.Add(entity);
+        }
 
-//            base.Initialize(world);
+        protected override void UnregisterEntity(IEntity entity)
+        {
+            var index = entities.IndexOf(entity);
 
-//            World.MessageBus.RegisterHandler(SetAnimMsg.TYPE, msgHandler);
-//            World.MessageBus.RegisterHandler(PlayAnimMsg.TYPE, msgHandler);
-//            World.MessageBus.RegisterHandler(PauseAnimMsg.TYPE, msgHandler);
-//            World.MessageBus.RegisterHandler(StopAnimMsg.TYPE, msgHandler);
-//        }
+            if (index < 0)
+                throw new InvalidOperationException("Entity not found in this system.");
 
-//        public void Update(float dt)
-//        {
-//            msgHandler.PostEnqueued();
+            entities.RemoveAt(index);
+        }
 
-//            for (int i = 0; i < entities.Count; i++)
-//                Animate(i, dt);
-//        }
-
-
-//        public override bool RecieveMsg(object sender, IMsg message)
-//        {
-//            switch (message.Type)
-//            {
-//                case SetAnimMsg.TYPE:
-//                    return HandleSetAnimMsg(sender, (SetAnimMsg)message);
-
-//                case PlayAnimMsg.TYPE:
-//                    return HandlePlayAnimMsg(sender, (PlayAnimMsg)message);
-
-//                case PauseAnimMsg.TYPE:
-//                    return HandlePauseAnimMsg(sender, (PauseAnimMsg)message);
-
-//                case StopAnimMsg.TYPE:
-//                    return HandleStopAnimMsg(sender, (StopAnimMsg)message);
-
-//                default:
-//                    return false;
-//            }
-//        }
-
-//        #endregion Public Methods
-
-//        #region Protected Methods
-
-//        protected override void RegisterEntity(IEntity entity)
-//        {
-//            entities.Add(entity);
-//            animatorComps.Add(entity.GetComponent<Animator>().First());
-//        }
-
-//        protected override void UnregisterEntity(IEntity entity)
-//        {
-//            var index = entities.IndexOf(entity);
-
-//            if (index < 0)
-//                throw new InvalidOperationException("Entity not found in this system.");
-
-//            entities.RemoveAt(index);
-//            animatorComps.RemoveAt(index);
-//        }
-
-//        #endregion Protected Methods
-//    }
-//}
+        #endregion Protected Methods
+    }
+}

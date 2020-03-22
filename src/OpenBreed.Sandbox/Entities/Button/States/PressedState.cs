@@ -14,13 +14,11 @@ using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Button.States
 {
-    public class PressedState : IState
+    public class PressedState : IState<ButtonState>
     {
-        public const string NAME = "Pressed";
-
         #region Private Fields
 
-        private readonly int stampId;
+    private readonly int stampId;
 
         #endregion Private Fields
 
@@ -37,7 +35,7 @@ namespace OpenBreed.Sandbox.Entities.Button.States
         #region Public Properties
 
         public IEntity Entity { get; private set; }
-        public string Name { get { return NAME; } }
+        public ButtonState Id => ButtonState.Pressed;
 
         #endregion Public Properties
 
@@ -64,18 +62,18 @@ namespace OpenBreed.Sandbox.Entities.Button.States
             Entity.Unsubscribe<CollisionEventArgs>(OnCollision);
         }
 
-        public string Process(string actionName, object[] arguments)
+        public ButtonState Process(string actionName, object[] arguments)
         {
             switch (actionName)
             {
                 case "Open":
-                    return "Opening";
+                    return ButtonState.Idle;
 
                 default:
                     break;
             }
 
-            return null;
+            return Id;
         }
 
         #endregion Public Methods
@@ -84,7 +82,7 @@ namespace OpenBreed.Sandbox.Entities.Button.States
 
         private void OnCollision(object sender, CollisionEventArgs eventArgs)
         {
-            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Functioning", "Open"));
+            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "FunctioningState", "Open"));
         }
 
         #endregion Private Methods

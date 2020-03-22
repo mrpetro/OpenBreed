@@ -12,7 +12,7 @@ using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Button.States
 {
-    public class IdleState : IState
+    public class IdleState : IState<ButtonState>
     {
         public  const string NAME = "Idle";
 
@@ -26,8 +26,6 @@ namespace OpenBreed.Sandbox.Entities.Button.States
 
         public IdleState()
         {
-            //Name = id;
-            //this.animationId = animationId;
         }
 
         #endregion Public Constructors
@@ -35,7 +33,7 @@ namespace OpenBreed.Sandbox.Entities.Button.States
         #region Public Properties
 
         public IEntity Entity { get; private set; }
-        public string Name { get { return NAME; } }
+        public ButtonState Id => ButtonState.Idle;
 
         #endregion Public Properties
 
@@ -62,17 +60,17 @@ namespace OpenBreed.Sandbox.Entities.Button.States
             Entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
 
-        public string Process(string actionName, object[] arguments)
+        public ButtonState Process(string actionName, object[] arguments)
         {
             switch (actionName)
             {
                 case "Opened":
-                    return "Opened";
+                    return ButtonState.Pressed;
                 default:
                     break;
             }
 
-            return null;
+            return Id;
         }
 
         #endregion Public Methods
@@ -86,7 +84,7 @@ namespace OpenBreed.Sandbox.Entities.Button.States
 
         private void OnAnimStopped(object sender, AnimStoppedEventArgs eventArgs)
         {
-            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Functioning", "Opened"));
+            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "FunctioningState", "Opened"));
         }
 
         #endregion Private Methods

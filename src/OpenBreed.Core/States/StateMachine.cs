@@ -6,20 +6,28 @@ using System.Diagnostics;
 
 namespace OpenBreed.Core.States
 {
-    public class StateMachine : IMsgHandler
+    public interface IStateMachine : IMsgHandler
+    {
+        string Name { get; }
+        string CurrentStateName { get; }
+        void Initialize();
+        void Deinitialize();
+    }
+
+
+    public class StateMachine<T> : IStateMachine where T : struct, IConvertible
     {
         #region Private Fields
 
-        private Dictionary<string, IState> states = new Dictionary<string, IState>();
-        private IState currentState;
+        private Dictionary<T, IState<T>> states = new Dictionary<T, IState<T>>();
+        private IState<T> currentState;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal StateMachine(string name, IEntity entity)
+        internal StateMachine(IEntity entity)
         {
-            Name = name;
             Entity = entity;
         }
 
@@ -27,11 +35,13 @@ namespace OpenBreed.Core.States
 
         #region Public Properties
 
-        public string Name { get; }
+        public string Name => typeof(T).Name;
+
+        public string CurrentStateName => currentState.Id.ToString();
 
         public IEntity Entity { get; }
 
-        public string CurrentStateName { get { return currentState.Name; } }
+        public T CurrentStateId { get { return currentState.Id; } }
 
         #endregion Public Properties
 
@@ -39,27 +49,27 @@ namespace OpenBreed.Core.States
 
         public override string ToString()
         {
-            return $"{Name}({CurrentStateName})";
+            return $"{typeof(T)}({CurrentStateId})";
         }
 
-        public void AddState(IState state)
+        public void AddState(IState<T> state)
         {
             Debug.Assert(state != null, "State must not be null");
 
-            if (string.IsNullOrWhiteSpace(state.Name))
-                throw new ArgumentNullException(nameof(state.Name));
+            if (!Enum.IsDefined(typeof(T), state.Id))
+                throw new InvalidOperationException($"State '{state.Id}' not defined in this FSM.");
 
-            states.Add(state.Name, state);
+            states.Add(state.Id, state);
         }
 
         /// <summary>
         /// Set particular initial state for this state machine
         /// </summary>
         /// <param name="initialStateId">Initial state id</param>
-        public void SetInitialState(string initialStateId)
+        public void SetInitialState(T initialStateId)
         {
             if (currentState != null)
-                throw new InvalidOperationException($"Initial state already set to '{currentState.Name}'");
+                throw new InvalidOperationException($"Initial state already set to '{currentState.Id}'");
 
             currentState = states[initialStateId];
         }
@@ -78,23 +88,17 @@ namespace OpenBreed.Core.States
 
         public void Perform(string actionName, params object[] arguments)
         {
-            var ps = currentState;
             var nextStateName = currentState.Process(actionName, arguments);
 
-            if (nextStateName == null)
-                return;
-
-            if (nextStateName != currentState.Name)
-            {
+            if (!Equals(nextStateName,currentState.Id))
                 ChangeState(nextStateName, arguments);
-            }
         }
 
         #endregion Public Methods
 
         #region Internal Methods
 
-        internal void Initialize()
+        public void Initialize()
         {
             if (currentState == null)
                 throw new InvalidOperationException("Initial state not set");
@@ -105,7 +109,7 @@ namespace OpenBreed.Core.States
             currentState.EnterState();
         }
 
-        internal void Deinitialize()
+        public void Deinitialize()
         {
             currentState.LeaveState();
 
@@ -123,7 +127,7 @@ namespace OpenBreed.Core.States
             return true;
         }
 
-        private void ChangeState(string nextStateId, params object[] arguments)
+        private void ChangeState(T nextStateId, params object[] arguments)
         {
             //Console.WriteLine($"Leaving state '{currentState.Id}'");
             currentState.LeaveState();

@@ -21,19 +21,18 @@ using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 {
-    public class RotatingState : IState
+    public class RotatingState : IState<RotationState>
     {
         #region Private Fields
 
-        private readonly string animPrefix;
+    private readonly string animPrefix;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public RotatingState(string id, string animPrefix)
+        public RotatingState(string animPrefix)
         {
-            Name = id;
             this.animPrefix = animPrefix;
         }
 
@@ -42,7 +41,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
         #region Public Properties
 
         public IEntity Entity { get; private set; }
-        public string Name { get; }
+        public RotationState Id => RotationState.Rotating;
 
         #endregion Public Properties
 
@@ -55,12 +54,16 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
             Entity.GetComponent<ThrustComponent>().Value = direction.Value * movement.Acceleration;
 
             var animDirName = AnimHelper.ToDirectionName(direction.Value);
-            var animMovementName = Entity.FsmList.First(item => item.Name == "Movement");
+            var movementSm = Entity.FsmList.First(item => item.Name == "MovementState");
 
-            Entity.PostCommand(new PlayAnimCommand(Entity.Id, $"{animPrefix}/{animMovementName.CurrentStateName}/{animDirName}"));
+            if (movementSm == null)
+            {
+            }
+
+            Entity.PostCommand(new PlayAnimCommand(Entity.Id, $"{animPrefix}/{movementSm.CurrentStateName}/{animDirName}"));
             Entity.PostCommand(new TextSetCommand(Entity.Id, 0, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
-            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Rotation", "Stop"));
+            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "RotationState", "Stop"));
         }
 
         public void Initialize(IEntity entity)
@@ -72,19 +75,19 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
         {
         }
 
-        public string Process(string actionName, object[] arguments)
+        public RotationState Process(string actionName, object[] arguments)
         {
             switch (actionName)
             {
                 case "Stop":
                     {
-                        return "Idle";
+                        return RotationState.Idle;
                     }
                 default:
                     break;
             }
 
-            return null;
+            return Id;
         }
 
         #endregion Public Methods

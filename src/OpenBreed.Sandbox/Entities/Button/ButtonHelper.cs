@@ -18,19 +18,19 @@ namespace OpenBreed.Sandbox.Entities.Button
         {
             var core = world.Core;
 
-            var door = core.Entities.CreateFromTemplate("Button");
+            var button = core.Entities.CreateFromTemplate("Button");
 
-            door.GetComponent<PositionComponent>().Value = new Vector2(0, 0);
+            button.GetComponent<PositionComponent>().Value = new Vector2(0, 0);
 
-            var doorSm = CreateFSM(door);
-            doorSm.SetInitialState(IdleState.NAME);
+            var buttonSm = CreateFSM(button);
+            buttonSm.SetInitialState(ButtonState.Idle);
 
-            world.AddEntity(door);
+            world.AddEntity(button);
         }
 
-        public static StateMachine CreateFSM(IEntity entity)
+        public static StateMachine<ButtonState> CreateFSM(IEntity entity)
         {
-            var stateMachine = entity.AddFSM("CursorHandling");
+            var stateMachine = entity.AddFsm<ButtonState>();
 
             stateMachine.AddState(new IdleState());
             stateMachine.AddState(new PressedState());

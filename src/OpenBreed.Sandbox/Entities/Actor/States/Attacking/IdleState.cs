@@ -15,16 +15,15 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {
-    public class IdleState : IState
+    public class IdleState : IState<AttackingState>
     {
         public IEntity Entity { get; private set; }
 
-        public IdleState(string id)
+        public IdleState()
         {
-            Name = id;
         }
 
-        public string Name { get; }
+        public AttackingState Id => AttackingState.Idle;
 
         public void EnterState()
         {
@@ -46,24 +45,24 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         private void OnControlFireChanged(object sender, ControlFireChangedEvenrArgs eventArgs)
         {
             if (eventArgs.Fire)
-                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Attacking", "Shoot"));
+                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "AttackingState", "Shoot"));
             else
-                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Attacking", "Stop"));
+                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "AttackingState", "Stop"));
         }
 
-        public string Process(string actionName, object[] arguments)
+        public AttackingState Process(string actionName, object[] arguments)
         {
             switch (actionName)
             {
                 case "Shoot":
                     {
-                        return "Shooting";
+                        return AttackingState.Shooting;
                     }
                 default:
                     break;
             }
 
-            return null;
+            return AttackingState.Idle;
         }
     }
 }

@@ -11,15 +11,14 @@ using System.Timers;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {
-    public class CooldownState : IState
+    public class CooldownState : IState<AttackingState>
     {
         private Timer timer;
 
         #region Public Constructors
 
-        public CooldownState(string id)
+        public CooldownState()
         {
-            Name = id;
         }
 
         #endregion Public Constructors
@@ -27,7 +26,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         #region Public Properties
 
         public IEntity Entity { get; private set; }
-        public string Name { get; }
+        public AttackingState Id => AttackingState.Cooldown;
 
         #endregion Public Properties
 
@@ -46,7 +45,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Attacking", "Shoot"));
+            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "AttackingState", "Shoot"));
         }
 
         public void Initialize(IEntity entity)
@@ -67,28 +66,28 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         private void OnControlFireChanged(object sender, ControlFireChangedEvenrArgs e)
         {
             if (e.Fire)
-                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Attacking", "Shoot"));
+                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "AttackingState", "Shoot"));
             else
-                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Attacking", "Stop"));
+                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "AttackingState", "Stop"));
         }
 
-        public string Process(string actionName, object[] arguments)
+        public AttackingState Process(string actionName, object[] arguments)
         {
             switch (actionName)
             {
                 case "Stop":
                     {
-                        return "Idle";
+                        return AttackingState.Idle;
                     }
                 case "Shoot":
                     {
-                        return "Shooting";
+                        return AttackingState.Shooting;
                     }
                 default:
                     break;
             }
 
-            return null;
+            return AttackingState.Cooldown;
         }
 
         #endregion Public Methods

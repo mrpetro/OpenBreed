@@ -89,21 +89,26 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Compile Include="Components\CursorInputComponent.cs" />
+    <Compile Include="Entities\Actor\States\Attacking\AttackingState.cs" />
     <Compile Include="Entities\Actor\States\Attacking\IdleState.cs" />
     <Compile Include="Entities\Actor\States\Attacking\CooldownState.cs" />
     <Compile Include="Entities\Actor\States\Attacking\ShootingState.cs" />
+    <Compile Include="Entities\Actor\States\Movement\MovementState.cs" />
     <Compile Include="Entities\Actor\States\Movement\WalkingState.cs" />
     <Compile Include="Entities\Actor\States\Movement\StandingState.cs" />
     <Compile Include="Entities\Actor\ActorHelper.cs" />
+    <Compile Include="Entities\Actor\States\Rotation\RotationState.cs" />
     <Compile Include="Entities\Actor\States\Rotation\IdleState.cs" />
     <Compile Include="Entities\Actor\States\Rotation\RotatingState.cs" />
     <Compile Include="Entities\Box\BoxHelper.cs" />
     <Compile Include="Entities\Builders\WorldBlockBuilder.cs" />
     <Compile Include="Entities\Button\ButtonHelper.cs" />
+    <Compile Include="Entities\Button\ButtonState.cs" />
     <Compile Include="Entities\Button\States\PressedState.cs" />
     <Compile Include="Entities\Button\States\IdleState.cs" />
     <Compile Include="Entities\Camera\CameraHelper.cs" />
     <Compile Include="Entities\Door\DoorHelper.cs" />
+    <Compile Include="Entities\Door\States\FunctioningState.cs" />
     <Compile Include="Entities\Door\States\OpenedState.cs" />
     <Compile Include="Entities\Door\States\ClosedState.cs" />
     <Compile Include="Entities\Door\States\OpeningState.cs" />
@@ -112,6 +117,7 @@
     <Compile Include="Entities\Pickable\PickableHelper.cs" />
     <Compile Include="Entities\Pickable\States\LyingState.cs" />
     <Compile Include="Entities\Pickable\States\PickingState.cs" />
+    <Compile Include="Entities\Projectile\States\AttackingState.cs" />
     <Compile Include="Entities\Teleport\CameraFollowJob.cs" />
     <Compile Include="Entities\Teleport\CameraEffectJob.cs" />
     <Compile Include="Entities\Teleport\TeleportHelper.cs" />
@@ -127,12 +133,6 @@
     <Compile Include="Items\CreditsItem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="States\StateTechDemo4.cs" />
-    <Compile Include="States\StateTechDemo6.cs" />
-    <Compile Include="States\StateTechDemo5.cs" />
-    <Compile Include="States\StateTechDemo3.cs" />
-    <Compile Include="States\StateTechDemo2.cs" />
-    <Compile Include="States\StateTechDemo1.cs" />
     <Compile Include="Systems\UiSystem.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="Worlds\GameWorldHelper.cs" />

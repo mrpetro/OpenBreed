@@ -19,7 +19,7 @@ namespace OpenBreed.Core.Entities
         /// <summary>
         /// Read-only list of state machines
         /// </summary>
-        ReadOnlyCollection<StateMachine> FsmList { get; }
+        ReadOnlyCollection<IStateMachine> FsmList { get; }
 
         /// <summary>
         /// Enumeration of all current state names
@@ -74,7 +74,7 @@ namespace OpenBreed.Core.Entities
 
         #region Public Methods
 
-        StateMachine AddFSM(string name);
+        StateMachine<T> AddFsm<T>() where T : struct, IConvertible;
 
         /// <summary>
         /// Post command of specific type
@@ -85,21 +85,18 @@ namespace OpenBreed.Core.Entities
         /// <summary>
         /// Enqueue an event of specific type and arguments
         /// </summary>
-        /// <param name="eventType">Type of event to enqueue</param>
         /// <param name="eventArgs">Arguments of event</param>
         void RaiseEvent<T>(T eventArgs) where T : EventArgs;
 
         /// <summary>
         /// Subscribe to particular event
         /// </summary>
-        /// <param name="eventType">event type to subscribe to</param>
         /// <param name="callback">event callback</param>
         void Subscribe<T>(Action<object, T> callback) where T : EventArgs;
 
         /// <summary>
         /// Unsubscribe from particular event
         /// </summary>
-        /// <param name="eventType">event type to unsubscribe from</param>
         /// <param name="callback">event callback to unsubscribe</param>
         void Unsubscribe<T>(Action<object, T> callback) where T : EventArgs;
 

@@ -9,10 +9,11 @@ using OpenBreed.Core.States;
 using System;
 using System.Linq;
 using OpenBreed.Core.Commands;
+using OpenBreed.Sandbox.Entities.Door.States;
 
 namespace OpenBreed.Sandbox.Components.States
 {
-    public class OpeningState : IState
+    public class OpeningState : IState<FunctioningState>
     {
         #region Private Fields
 
@@ -22,9 +23,8 @@ namespace OpenBreed.Sandbox.Components.States
 
         #region Public Constructors
 
-        public OpeningState(string id, string animationId)
+        public OpeningState(string animationId)
         {
-            Name = id;
             this.animationId = animationId;
         }
 
@@ -33,7 +33,7 @@ namespace OpenBreed.Sandbox.Components.States
         #region Public Properties
 
         public IEntity Entity { get; private set; }
-        public string Name { get; }
+        public FunctioningState Id => FunctioningState.Opening;
 
         #endregion Public Properties
 
@@ -60,17 +60,17 @@ namespace OpenBreed.Sandbox.Components.States
             Entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
 
-        public string Process(string actionName, object[] arguments)
+        public FunctioningState Process(string actionName, object[] arguments)
         {
             switch (actionName)
             {
                 case "Opened":
-                    return "Opened";
+                    return FunctioningState.Opened;
                 default:
                     break;
             }
 
-            return null;
+            return Id;
         }
 
         #endregion Public Methods
@@ -84,7 +84,7 @@ namespace OpenBreed.Sandbox.Components.States
 
         private void OnAnimStopped(object sender, AnimStoppedEventArgs e)
         {
-            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Functioning", "Opened"));
+            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "FunctioningState", "Opened"));
         }
 
         #endregion Private Methods

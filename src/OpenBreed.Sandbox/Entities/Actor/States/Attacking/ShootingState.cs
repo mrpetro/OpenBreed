@@ -12,13 +12,12 @@ using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {
-    public class ShootingState : IState
+    public class ShootingState : IState<AttackingState>
     {
         #region Public Constructors
 
-        public ShootingState(string name)
+        public ShootingState()
         {
-            Name = name;
         }
 
         #endregion Public Constructors
@@ -26,7 +25,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         #region Public Properties
 
         public IEntity Entity { get; private set; }
-        public string Name { get; }
+        public AttackingState Id => AttackingState.Shooting;
 
         #endregion Public Properties
 
@@ -44,7 +43,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             direction *= 500.0f;
             ProjectileHelper.AddProjectile(Entity.Core, Entity.World, pos.X, pos.Y, direction.X, direction.Y);
 
-            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Attacking", "Wait"));
+            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "AttackingState", "Wait"));
 
         }
 
@@ -71,23 +70,23 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         //        Entity.PostMsg(new StateChangeMsg(Entity, "Attacking", "Cooldown"));
         //}
 
-        public string Process(string actionName, object[] arguments)
+        public AttackingState Process(string actionName, object[] arguments)
         {
             switch (actionName)
             {
                 case "Wait":
                     {
-                        return "Cooldown";
+                        return AttackingState.Cooldown;
                     }
                 case "Stop":
                     {
-                        return "Idle";
+                        return AttackingState.Idle;
                     }
                 default:
                     break;
             }
 
-            return null;
+            return Id;
         }
 
         #endregion Public Methods

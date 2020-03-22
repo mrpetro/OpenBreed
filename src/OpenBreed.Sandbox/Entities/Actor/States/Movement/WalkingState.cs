@@ -17,11 +17,11 @@ using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 {
-    public class WalkingState : IState
+    public class WalkingState : IState<MovementState>
     {
         #region Private Fields
 
-        private readonly string animPrefix;
+    private readonly string animPrefix;
         private DirectionComponent direction;
         private SpriteComponent sprite;
 
@@ -29,9 +29,8 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         #region Public Constructors
 
-        public WalkingState(string id, string animPrefix)
+        public WalkingState( string animPrefix)
         {
-            Name = id;
             this.animPrefix = animPrefix;
         }
 
@@ -40,7 +39,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
         #region Public Properties
 
         public IEntity Entity { get; private set; }
-        public string Name { get; }
+        public MovementState Id => MovementState.Walking;
 
         #endregion Public Properties
 
@@ -54,7 +53,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
             var animDirPostfix = AnimHelper.ToDirectionName(direction.Value);
 
-            Entity.PostCommand(new PlayAnimCommand(Entity.Id, $"{animPrefix}/{Name}/{animDirPostfix}"));
+            Entity.PostCommand(new PlayAnimCommand(Entity.Id, $"{animPrefix}/{Id}/{animDirPostfix}"));
             Entity.PostCommand(new TextSetCommand(Entity.Id, 0, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
             Entity.Subscribe<AnimChangedEventArgs>(OnFrameChanged);
@@ -74,20 +73,20 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             Entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
-        public string Process(string actionName, object[] arguments)
+        public MovementState Process(string actionName, object[] arguments)
         {
             switch (actionName)
             {
                 case "Stop":
                     {
-                        return "Standing";
+                        return MovementState.Standing;
 
                     }
                 default:
                     break;
             }
 
-            return null;
+            return Id;
         }
 
         #endregion Public Methods
@@ -102,9 +101,9 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
         private void OnControlDirectionChanged(object sender, ControlDirectionChangedEventArgs e)
         {
             if (e.Direction != Vector2.Zero)
-                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Movement", "Walk"));
+                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "MovementState", "Walk"));
             else
-                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Movement", "Stop"));
+                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "MovementState", "Stop"));
         }
 
         #endregion Private Methods

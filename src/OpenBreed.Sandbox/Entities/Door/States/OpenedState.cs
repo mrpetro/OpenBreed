@@ -13,10 +13,11 @@ using OpenBreed.Core.Common.Systems;
 
 using OpenBreed.Core.Modules.Physics.Commands;
 using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Sandbox.Entities.Door.States;
 
 namespace OpenBreed.Sandbox.Components.States
 {
-    public class OpenedState : IState
+    public class OpenedState : IState<FunctioningState>
     {
         #region Private Fields
 
@@ -26,9 +27,8 @@ namespace OpenBreed.Sandbox.Components.States
 
         #region Public Constructors
 
-        public OpenedState(string id, int stampId)
+        public OpenedState(int stampId)
         {
-            Name = id;
             this.stampId = stampId;
         }
 
@@ -37,7 +37,7 @@ namespace OpenBreed.Sandbox.Components.States
         #region Public Properties
 
         public IEntity Entity { get; private set; }
-        public string Name { get; }
+        public FunctioningState Id => FunctioningState.Opened;
 
         #endregion Public Properties
 
@@ -63,17 +63,17 @@ namespace OpenBreed.Sandbox.Components.States
         {
         }
 
-        public string Process(string actionName, object[] arguments)
+        public FunctioningState Process(string actionName, object[] arguments)
         {
             switch (actionName)
             {
                 case "Close":
-                    return "Closing";
+                    return FunctioningState.Closing;
                 default:
                     break;
             }
 
-            return null;
+            return Id;
         }
 
         #endregion Public Methods

@@ -11,10 +11,11 @@ using OpenBreed.Core.States;
 using System;
 using System.Linq;
 using OpenBreed.Core.Commands;
+using OpenBreed.Sandbox.Entities.Door.States;
 
 namespace OpenBreed.Sandbox.Components.States
 {
-    public class ClosedState : IState
+    public class ClosedState : IState<FunctioningState>
     {
         #region Private Fields
 
@@ -24,9 +25,8 @@ namespace OpenBreed.Sandbox.Components.States
 
         #region Public Constructors
 
-        public ClosedState(string id, int stampId)
+        public ClosedState(int stampId)
         {
-            Name = id;
             this.stampId = stampId;
         }
 
@@ -35,7 +35,7 @@ namespace OpenBreed.Sandbox.Components.States
         #region Public Properties
 
         public IEntity Entity { get; private set; }
-        public string Name { get; }
+        public FunctioningState Id => FunctioningState.Closed;
 
         #endregion Public Properties
 
@@ -62,18 +62,18 @@ namespace OpenBreed.Sandbox.Components.States
             Entity.Unsubscribe<CollisionEventArgs>(OnCollision);
         }
 
-        public string Process(string actionName, object[] arguments)
+        public FunctioningState Process(string actionName, object[] arguments)
         {
             switch (actionName)
             {
                 case "Open":
-                    return "Opening";
+                    return FunctioningState.Opening;
 
                 default:
                     break;
             }
 
-            return null;
+            return Id;
         }
 
         #endregion Public Methods
@@ -82,7 +82,7 @@ namespace OpenBreed.Sandbox.Components.States
 
         private void OnCollision(object sender, CollisionEventArgs eventArgs)
         {
-            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Functioning", "Open"));
+            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "FunctioningState", "Open"));
         }
 
         #endregion Private Methods

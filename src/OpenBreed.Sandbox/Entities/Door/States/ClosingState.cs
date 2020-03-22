@@ -12,10 +12,11 @@ using System.Linq;
 using OpenBreed.Core.Common.Systems;
 
 using OpenBreed.Core.Modules.Physics.Commands;
+using OpenBreed.Sandbox.Entities.Door.States;
 
 namespace OpenBreed.Sandbox.Components.States
 {
-    public class ClosingState : IState
+    public class ClosingState : IState<FunctioningState>
     {
         #region Private Fields
 
@@ -25,9 +26,8 @@ namespace OpenBreed.Sandbox.Components.States
 
         #region Public Constructors
 
-        public ClosingState(string id, string animationId)
+        public ClosingState(string animationId)
         {
-            Name = id;
             this.animationId = animationId;
         }
 
@@ -36,7 +36,7 @@ namespace OpenBreed.Sandbox.Components.States
         #region Public Properties
 
         public IEntity Entity { get; private set; }
-        public string Name { get; }
+        public FunctioningState Id => FunctioningState.Closing;
 
         #endregion Public Properties
 
@@ -60,17 +60,17 @@ namespace OpenBreed.Sandbox.Components.States
         {
         }
 
-        public string Process(string actionName, object[] arguments)
+        public FunctioningState Process(string actionName, object[] arguments)
         {
             switch (actionName)
             {
                 case "Close":
-                    return "Closed";
+                    return FunctioningState.Closed;
                 default:
                     break;
             }
 
-            return null;
+            return Id;
         }
 
         #endregion Public Methods

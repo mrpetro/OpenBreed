@@ -129,33 +129,33 @@ namespace OpenBreed.Sandbox.Entities.Actor
             }
         }
 
-        public static StateMachine CreateAttackingFSM(IEntity entity)
+        public static StateMachine<AttackingState> CreateAttackingFSM(IEntity entity)
         {
-            var stateMachine = entity.AddFSM("Attacking");
+            var stateMachine = entity.AddFsm< AttackingState>();
 
-            stateMachine.AddState(new ShootingState("Shooting"));
-            stateMachine.AddState(new States.Attacking.IdleState("Idle"));
-            stateMachine.AddState(new CooldownState("Cooldown"));
+            stateMachine.AddState(new ShootingState());
+            stateMachine.AddState(new States.Attacking.IdleState());
+            stateMachine.AddState(new CooldownState());
 
             return stateMachine;
         }
 
-        public static StateMachine CreateRotationFSM(IEntity entity)
+        public static StateMachine<RotationState> CreateRotationFSM(IEntity entity)
         {
-            var stateMachine = entity.AddFSM("Rotation");
+            var stateMachine = entity.AddFsm<RotationState>();
 
-            stateMachine.AddState(new States.Rotation.IdleState("Idle"));
-            stateMachine.AddState(new RotatingState("Rotating", "Animations/Actor"));
+            stateMachine.AddState(new States.Rotation.IdleState());
+            stateMachine.AddState(new RotatingState("Animations/Actor"));
 
             return stateMachine;
         }
 
-        public static StateMachine CreateMovementFSM(IEntity entity)
+        public static StateMachine<MovementState> CreateMovementFSM(IEntity entity)
         {
-            var stateMachine = entity.AddFSM("Movement");
+            var stateMachine = entity.AddFsm< MovementState>();
 
-            stateMachine.AddState(new StandingState("Standing", "Animations/Actor"));
-            stateMachine.AddState(new WalkingState("Walking", "Animations/Actor"));
+            stateMachine.AddState(new StandingState("Animations/Actor"));
+            stateMachine.AddState(new WalkingState("Animations/Actor"));
 
             return stateMachine;
         }

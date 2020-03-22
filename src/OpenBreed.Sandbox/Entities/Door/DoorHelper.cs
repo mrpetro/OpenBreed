@@ -11,6 +11,7 @@ using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
 using OpenBreed.Sandbox.Components;
 using OpenBreed.Sandbox.Components.States;
+using OpenBreed.Sandbox.Entities.Door.States;
 using OpenBreed.Sandbox.Helpers;
 using OpenTK;
 using System;
@@ -58,32 +59,32 @@ namespace OpenBreed.Sandbox.Entities.Door
             verticalDoorClosing.AddFrame(4, 1.0f);
         }
 
-        public static StateMachine CreateHorizontalFSM(IEntity entity)
+        public static StateMachine<FunctioningState> CreateHorizontalFSM(IEntity entity)
         {
-            var stateMachine = entity.AddFSM("Functioning");
+            var stateMachine = entity.AddFsm<FunctioningState>();
 
             var openedStamp = entity.Core.Rendering.Stamps.GetByName(STAMP_DOOR_HORIZONTAL_OPENED);
             var closedStamp = entity.Core.Rendering.Stamps.GetByName(STAMP_DOOR_HORIZONTAL_CLOSED);
 
-            stateMachine.AddState(new OpeningState("Opening", "Animations/Door/Horizontal/Opening"));
-            stateMachine.AddState(new OpenedState("Opened", openedStamp.Id));
-            stateMachine.AddState(new ClosingState("Closing", "Animations/Door/Horizontal/Closing"));
-            stateMachine.AddState(new ClosedState("Closed", closedStamp.Id));
+            stateMachine.AddState(new OpeningState("Animations/Door/Horizontal/Opening"));
+            stateMachine.AddState(new OpenedState(openedStamp.Id));
+            stateMachine.AddState(new ClosingState("Animations/Door/Horizontal/Closing"));
+            stateMachine.AddState(new ClosedState(closedStamp.Id));
 
             return stateMachine;
         }
 
-        public static StateMachine CreateVerticalFSM(IEntity entity)
+        public static StateMachine<FunctioningState> CreateVerticalFSM(IEntity entity)
         {
-            var stateMachine = entity.AddFSM("Functioning");
+            var stateMachine = entity.AddFsm<FunctioningState>();
 
             var openedStamp = entity.Core.Rendering.Stamps.GetByName(STAMP_DOOR_VERTICAL_OPENED);
             var closedStamp = entity.Core.Rendering.Stamps.GetByName(STAMP_DOOR_VERTICAL_CLOSED);
 
-            stateMachine.AddState(new OpeningState("Opening", "Animations/Door/Vertical/Opening"));
-            stateMachine.AddState(new OpenedState("Opened", openedStamp.Id));
-            stateMachine.AddState(new ClosingState("Closing", "Animations/Door/Vertical/Closing"));
-            stateMachine.AddState(new ClosedState("Closed", closedStamp.Id));
+            stateMachine.AddState(new OpeningState("Animations/Door/Vertical/Opening"));
+            stateMachine.AddState(new OpenedState(openedStamp.Id));
+            stateMachine.AddState(new ClosingState("Animations/Door/Vertical/Closing"));
+            stateMachine.AddState(new ClosedState(closedStamp.Id));
 
             return stateMachine;
         }
@@ -97,8 +98,12 @@ namespace OpenBreed.Sandbox.Entities.Door
 
             door.GetComponent<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
 
+            //var fsmComponent = new FsmComponent();
+            //fsmComponent.States.Add(new MachineState() {MachineId = world.
+
+
             var doorSm = DoorHelper.CreateVerticalFSM(door);
-            doorSm.SetInitialState("Closed");
+            doorSm.SetInitialState(FunctioningState.Closed);
 
             world.AddEntity(door);
         }
@@ -112,7 +117,7 @@ namespace OpenBreed.Sandbox.Entities.Door
             door.GetComponent<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
 
             var doorSm = DoorHelper.CreateHorizontalFSM(door);
-            doorSm.SetInitialState("Closed");
+            doorSm.SetInitialState(FunctioningState.Closed);
 
             world.AddEntity(door);
         }

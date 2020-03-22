@@ -8,7 +8,7 @@ namespace OpenBreed.Core.Managers
     {
         #region Private Fields
 
-        private Dictionary<object, Dictionary<string, List<(object, MethodInfo)>>> listeners = new Dictionary<object, Dictionary<string, List<(object, MethodInfo)>>>();
+        private Dictionary<object, Dictionary<Type, List<(object, MethodInfo)>>> listeners = new Dictionary<object, Dictionary<Type, List<(object, MethodInfo)>>>();
 
         #endregion Private Fields
 
@@ -31,51 +31,18 @@ namespace OpenBreed.Core.Managers
 
         public void Raise<T>(object sender, T eventArgs) where T : EventArgs
         {
-            Raise(sender, eventArgs.GetType().FullName, eventArgs);
+            NotifyListeners(sender, eventArgs.GetType(), eventArgs);
         }
 
         public void Subscribe<T>(object sender, Action<object, T> callback) where T : EventArgs
         {
-            Subscribe(sender, typeof(T).FullName, (callback.Target, callback.Method));
-        }
-
-        public void Unsubscribe<T>(object sender, Action<object, T> callback) where T : EventArgs
-        {
-            Unsubscribe(sender, typeof(T).FullName, (callback.Target, callback.Method));
-        }
-
-        #endregion Public Methods
-
-        #region Private Methods
-
-        private void Raise(object sender, string eventName, EventArgs eventArgs)
-        {
-            NotifyListeners(sender, eventName, eventArgs);
-        }
-
-        private void Unsubscribe(object sender, string eventType, (object, MethodInfo) callback)
-        {
-            Dictionary<string, List<(object, MethodInfo)>> eventTypes = null;
-
-            if (!listeners.TryGetValue(sender, out eventTypes))
-                return;
-
-            List<(object, MethodInfo)> callbacks = null;
-
-            if (!eventTypes.TryGetValue(eventType, out callbacks))
-                return;
-
-            callbacks.Remove(callback);
-        }
-
-        private void Subscribe(object sender, string eventType, (object, MethodInfo) callback)
-        {
-            Dictionary<string, List<(object, MethodInfo)>> eventTypes = null;
+            var eventType = typeof(T);
+            Dictionary<Type, List<(object, MethodInfo)>> eventTypes = null;
             List<(object, MethodInfo)> callbacks = null;
 
             if (!listeners.TryGetValue(sender, out eventTypes))
             {
-                eventTypes = new Dictionary<string, List<(object, MethodInfo)>>();
+                eventTypes = new Dictionary<Type, List<(object, MethodInfo)>>();
                 listeners.Add(sender, eventTypes);
             }
 
@@ -85,12 +52,32 @@ namespace OpenBreed.Core.Managers
                 eventTypes.Add(eventType, callbacks);
             }
 
-            callbacks.Add(callback);
+            callbacks.Add((callback.Target, callback.Method));
         }
 
-        private void NotifyListeners(object sender, string eventType, EventArgs eventArgs)
+        public void Unsubscribe<T>(object sender, Action<object, T> callback) where T : EventArgs
         {
-            Dictionary<string, List<(object, MethodInfo)>> eventTypes = null;
+            var eventType = typeof(T);
+            Dictionary<Type, List<(object, MethodInfo)>> eventTypes = null;
+
+            if (!listeners.TryGetValue(sender, out eventTypes))
+                return;
+
+            List<(object, MethodInfo)> callbacks = null;
+
+            if (!eventTypes.TryGetValue(eventType, out callbacks))
+                return;
+
+            callbacks.Remove((callback.Target, callback.Method));
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void NotifyListeners(object sender, Type eventType, EventArgs eventArgs)
+        {
+            Dictionary<Type, List<(object, MethodInfo)>> eventTypes = null;
 
             if (!listeners.TryGetValue(sender, out eventTypes))
                 return;

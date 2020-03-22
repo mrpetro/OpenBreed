@@ -14,16 +14,15 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 {
-    public class IdleState : IState
+    public class IdleState : IState<RotationState>
     {
         public IEntity Entity { get; private set; }
 
-        public IdleState(string id)
+        public IdleState()
         {
-            Name = id;
         }
 
-        public string Name { get; }
+        public RotationState Id => RotationState.Idle;
 
         public void EnterState()
         {
@@ -43,19 +42,19 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
             Entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
-        public string Process(string actionName, object[] arguments)
+        public RotationState Process(string actionName, object[] arguments)
         {
             switch (actionName)
             {
                 case "Rotate":
                     {
-                        return "Rotating";
+                        return RotationState.Rotating;
                     }
                 default:
                     break;
             }
 
-            return null;
+            return Id;
         }
 
         private void OnControlDirectionChanged(object sender, ControlDirectionChangedEventArgs e)
@@ -67,7 +66,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
                 if (dir.Value != e.Direction)
                 {
                     dir.Value = e.Direction;
-                    Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Rotation", "Rotate"));
+                    Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "RotationState", "Rotate"));
                 }
             }
         }

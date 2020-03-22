@@ -14,11 +14,11 @@ using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Projectile.States
 {
-    public class FiredState : IState
+    public class FiredState : IState<AttackingState>
     {
         #region Private Fields
 
-        private SpriteComponent sprite;
+    private SpriteComponent sprite;
         private readonly string animPrefix;
         private VelocityComponent velocity;
 
@@ -26,9 +26,8 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
 
         #region Public Constructors
 
-        public FiredState(string name, string animPrefix)
+        public FiredState(string animPrefix)
         {
-            Name = name;
             this.animPrefix = animPrefix;
         }
 
@@ -37,7 +36,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
         #region Public Properties
 
         public IEntity Entity { get; private set; }
-        public string Name { get; }
+        public AttackingState Id => AttackingState.Fired;
 
         #endregion Public Properties
 
@@ -74,10 +73,10 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
             sprite.ImageId = (int)e.Frame;
         }
 
-        public string Process(string actionName, object[] arguments)
+        public AttackingState Process(string actionName, object[] arguments)
         {
 
-            return null;
+            return Id;
         }
 
         #endregion Public Methods

@@ -69,14 +69,14 @@ namespace OpenBreed.Sandbox.Entities.Projectile
             world.AddEntity(projectile);
 
             var doorSm = ProjectileHelper.CreateStateMachine(projectile);
-            doorSm.SetInitialState("Fired");
+            doorSm.SetInitialState(AttackingState.Fired);
         }
 
-        public static StateMachine CreateStateMachine(IEntity entity)
+        public static StateMachine<AttackingState> CreateStateMachine(IEntity entity)
         {
-            var stateMachine = entity.AddFSM("Attacking");
+            var stateMachine = entity.AddFsm<AttackingState>();
 
-            stateMachine.AddState(new FiredState("Fired", "Animations/Laser/Fired/"));
+            stateMachine.AddState(new FiredState("Animations/Laser/Fired/"));
 
             return stateMachine;
         }

@@ -126,9 +126,9 @@ namespace OpenBreed.Sandbox.Worlds
             var movementFsm = ActorHelper.CreateMovementFSM(actor);
             var atackFsm = ActorHelper.CreateAttackingFSM(actor);
             var rotateFsm = ActorHelper.CreateRotationFSM(actor);
-            movementFsm.SetInitialState("Standing");
-            atackFsm.SetInitialState("Idle");
-            rotateFsm.SetInitialState("Idle");
+            movementFsm.SetInitialState(Entities.Actor.States.Movement.MovementState.Standing);
+            atackFsm.SetInitialState( Entities.Actor.States.Attacking.AttackingState.Idle);
+            rotateFsm.SetInitialState(Entities.Actor.States.Rotation.RotationState.Idle);
             gameWorld.AddEntity(actor);
 
             var gameViewport = core.Entities.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();

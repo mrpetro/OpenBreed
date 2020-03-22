@@ -63,8 +63,8 @@ namespace OpenBreed.Sandbox.Worlds
             gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
             var hudViewport = CreateViewportEntity(core, HUD_VIEWPORT, 0, 0, core.ClientRectangle.Width, core.ClientRectangle.Height, false, true);
 
-            core.Rendering.Subscribe<ClientResizedEventArgs>((s, a) => ResizeGameViewport(gameViewport, (ClientResizedEventArgs)a));
-            core.Rendering.Subscribe<ClientResizedEventArgs>((s, a) => ResizeHudViewport(hudViewport, (ClientResizedEventArgs)a));
+            core.Rendering.Subscribe<ClientResizedEventArgs>((s, a) => ResizeGameViewport(gameViewport, a));
+            core.Rendering.Subscribe<ClientResizedEventArgs>((s, a) => ResizeHudViewport(hudViewport, a));
 
             world.AddEntity(gameViewport);
             world.AddEntity(hudViewport);

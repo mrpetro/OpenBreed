@@ -59,7 +59,7 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
 
         private void OnCollision(object sender, CollisionEventArgs e)
         {
-            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Functioning", "Pick"));
+            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "FunctioningState", "Pick"));
         }
 
         public string Process(string actionName, object[] arguments)

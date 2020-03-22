@@ -20,7 +20,7 @@ namespace OpenBreed.Core.Entities
 
         private readonly List<IEntityComponent> components = new List<IEntityComponent>();
 
-        private List<StateMachine> fsmList;
+        private List<IStateMachine> fsmList;
 
         #endregion Private Fields
 
@@ -28,8 +28,8 @@ namespace OpenBreed.Core.Entities
 
         internal Entity(ICore core, List<IEntityComponent> initialComponents)
         {
-            fsmList = new List<StateMachine>();
-            FsmList = new ReadOnlyCollection<StateMachine>(fsmList);
+            fsmList = new List<IStateMachine>();
+            FsmList = new ReadOnlyCollection<IStateMachine>(fsmList);
 
             Core = core ?? throw new ArgumentNullException(nameof(core));
 
@@ -42,7 +42,7 @@ namespace OpenBreed.Core.Entities
         #region Public Properties
 
         public ReadOnlyCollection<IEntityComponent> Components { get; }
-        public ReadOnlyCollection<StateMachine> FsmList { get; }
+        public ReadOnlyCollection<IStateMachine> FsmList { get; }
 
         public ICore Core { get; }
 
@@ -63,15 +63,9 @@ namespace OpenBreed.Core.Entities
 
         #region Public Methods
 
-        public StateMachine AddFSM(string name)
+        public StateMachine<T> AddFsm<T>() where T : struct, IConvertible
         {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentNullException(nameof(name));
-
-            if (fsmList.Any(item => item.Name == name))
-                throw new InvalidOperationException($"State machine '{name}' already exist.");
-
-            var newFsm = new StateMachine(name, this);
+            var newFsm = new StateMachine<T>(this);
             fsmList.Add(newFsm);
             return newFsm;
         }

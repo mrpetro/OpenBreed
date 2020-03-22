@@ -56,6 +56,7 @@ namespace OpenBreed.Sandbox
             Commands = new CommandsMan(this);
             Events = new EventsMan(this);
             Entities = new EntityMan(this);
+            StateMachines = new FsmMan(this);
             Shapes = new ShapeMan(this);
             Players = new PlayersMan(this);
             Items = new ItemsMan(this);
@@ -89,6 +90,8 @@ namespace OpenBreed.Sandbox
         public IAnimationModule Animations { get; }
 
         public EntityMan Entities { get; }
+
+        public FsmMan StateMachines { get; }
 
         public ShapeMan Shapes { get; }
 

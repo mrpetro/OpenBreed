@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Entities;
+using System;
 
 namespace OpenBreed.Core.States
 {
@@ -7,8 +8,6 @@ namespace OpenBreed.Core.States
         #region Public Properties
 
         IEntity Entity { get; }
-
-        string Name { get; }
 
         #endregion Public Properties
 
@@ -20,8 +19,14 @@ namespace OpenBreed.Core.States
 
         void LeaveState();
 
-        string Process(string actionName, object[] arguments);
 
         #endregion Public Methods
     }
+
+    public interface IState<T> : IState where T : struct, IConvertible
+    {
+        T Id { get; }
+        T Process(string actionName, object[] arguments);
+    }
+
 }
