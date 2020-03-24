@@ -13,6 +13,7 @@ using OpenBreed.Core.Common.Systems;
 
 using OpenBreed.Core.Modules.Physics.Commands;
 using OpenBreed.Sandbox.Entities.Door.States;
+using System;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -58,19 +59,6 @@ namespace OpenBreed.Sandbox.Components.States
 
         public void LeaveState()
         {
-        }
-
-        public FunctioningState Process(FunctioningImpulse impulse, object[] arguments)
-        {
-            switch (impulse)
-            {
-                case FunctioningImpulse.StopClosing:
-                    return FunctioningState.Closed;
-                default:
-                    break;
-            }
-
-            return Id;
         }
 
         #endregion Public Methods

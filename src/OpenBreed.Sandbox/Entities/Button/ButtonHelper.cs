@@ -35,6 +35,8 @@ namespace OpenBreed.Sandbox.Entities.Button
             stateMachine.AddState(new IdleState());
             stateMachine.AddState(new PressedState());
 
+            stateMachine.AddTransition(ButtonState.Pressed, ButtonImpulse.Unpress, ButtonState.Idle);
+            stateMachine.AddTransition(ButtonState.Idle, ButtonImpulse.Press, ButtonState.Pressed);
 
             return stateMachine;
         }

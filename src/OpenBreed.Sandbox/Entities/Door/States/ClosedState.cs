@@ -62,20 +62,6 @@ namespace OpenBreed.Sandbox.Components.States
             Entity.Unsubscribe<CollisionEventArgs>(OnCollision);
         }
 
-        public FunctioningState Process(FunctioningImpulse impulse, object[] arguments)
-        {
-            switch (impulse)
-            {
-                case FunctioningImpulse.Open:
-                    return FunctioningState.Opening;
-
-                default:
-                    break;
-            }
-
-            return Id;
-        }
-
         #endregion Public Methods
 
         #region Private Methods

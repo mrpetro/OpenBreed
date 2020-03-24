@@ -70,25 +70,6 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         //        Entity.PostMsg(new StateChangeMsg(Entity, "Attacking", "Cooldown"));
         //}
 
-        public AttackingState Process(AttackingImpulse impulse, object[] arguments)
-        {
-            switch (impulse)
-            {
-                case AttackingImpulse.Wait:
-                    {
-                        return AttackingState.Cooldown;
-                    }
-                case AttackingImpulse.Stop:
-                    {
-                        return AttackingState.Idle;
-                    }
-                default:
-                    break;
-            }
-
-            return Id;
-        }
-
         #endregion Public Methods
 
         #region Private Methods

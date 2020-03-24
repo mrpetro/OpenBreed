@@ -71,25 +71,6 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
                 Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "AttackingState", "Stop"));
         }
 
-        public AttackingState Process(AttackingImpulse impulse, object[] arguments)
-        {
-            switch (impulse)
-            {
-                case AttackingImpulse.Stop:
-                    {
-                        return AttackingState.Idle;
-                    }
-                case AttackingImpulse.Shoot:
-                    {
-                        return AttackingState.Shooting;
-                    }
-                default:
-                    break;
-            }
-
-            return AttackingState.Cooldown;
-        }
-
         #endregion Public Methods
 
         #region Private Methods

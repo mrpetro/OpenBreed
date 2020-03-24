@@ -26,7 +26,6 @@ namespace OpenBreed.Core.States
     public interface IState<TState, TImpulse> : IState where TState : struct, IConvertible where TImpulse : struct, IConvertible
     {
         TState Id { get; }
-        TState Process(TImpulse impulse, object[] arguments);
     }
 
 }

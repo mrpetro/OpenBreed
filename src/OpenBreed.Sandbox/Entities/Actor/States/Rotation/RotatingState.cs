@@ -75,21 +75,6 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
         {
         }
 
-        public RotationState Process(RotationImpulse impulse, object[] arguments)
-        {
-            switch (impulse)
-            {
-                case RotationImpulse.Stop:
-                    {
-                        return RotationState.Idle;
-                    }
-                default:
-                    break;
-            }
-
-            return Id;
-        }
-
         #endregion Public Methods
 
     }

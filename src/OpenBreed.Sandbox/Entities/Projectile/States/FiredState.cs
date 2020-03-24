@@ -63,11 +63,6 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
             Entity.Unsubscribe<AnimChangedEventArgs>(OnFrameChanged);
         }
 
-        public AttackingState Process(AttackingImpulse impulse, object[] arguments)
-        {
-            return Id;
-        }
-
         #endregion Public Methods
 
         #region Private Methods

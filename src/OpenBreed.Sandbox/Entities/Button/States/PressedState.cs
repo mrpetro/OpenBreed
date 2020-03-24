@@ -62,20 +62,6 @@ namespace OpenBreed.Sandbox.Entities.Button.States
             Entity.Unsubscribe<CollisionEventArgs>(OnCollision);
         }
 
-        public ButtonState Process(ButtonImpulse impulse, object[] arguments)
-        {
-            switch (impulse)
-            {
-                case ButtonImpulse.Unpress:
-                    return ButtonState.Idle;
-
-                default:
-                    break;
-            }
-
-            return Id;
-        }
-
         #endregion Public Methods
 
         #region Private Methods

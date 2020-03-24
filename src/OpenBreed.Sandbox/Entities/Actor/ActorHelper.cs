@@ -137,6 +137,12 @@ namespace OpenBreed.Sandbox.Entities.Actor
             stateMachine.AddState(new States.Attacking.IdleState());
             stateMachine.AddState(new CooldownState());
 
+            stateMachine.AddTransition(AttackingState.Shooting, AttackingImpulse.Stop, AttackingState.Idle);
+            stateMachine.AddTransition(AttackingState.Shooting, AttackingImpulse.Wait, AttackingState.Cooldown);
+            stateMachine.AddTransition(AttackingState.Cooldown, AttackingImpulse.Stop, AttackingState.Idle);
+            stateMachine.AddTransition(AttackingState.Cooldown, AttackingImpulse.Shoot, AttackingState.Shooting);
+            stateMachine.AddTransition(AttackingState.Idle, AttackingImpulse.Shoot, AttackingState.Shooting);
+
             return stateMachine;
         }
 
@@ -147,13 +153,10 @@ namespace OpenBreed.Sandbox.Entities.Actor
             stateMachine.AddState(new States.Rotation.IdleState());
             stateMachine.AddState(new RotatingState("Animations/Actor"));
 
-            stateMachine.AddTransition(RotationState.Rotating, RotationState.Idle, StopRotating);
+            stateMachine.AddTransition(RotationState.Rotating, RotationImpulse.Stop , RotationState.Idle);
+            stateMachine.AddTransition(RotationState.Idle, RotationImpulse.Rotate, RotationState.Rotating);
 
             return stateMachine;
-        }
-
-        private static void StopRotating()
-        {
         }
 
         public static StateMachine<MovementState, MovementImpulse> CreateMovementFSM(IEntity entity)
@@ -162,6 +165,9 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
             stateMachine.AddState(new StandingState("Animations/Actor"));
             stateMachine.AddState(new WalkingState("Animations/Actor"));
+
+            stateMachine.AddTransition(MovementState.Walking, MovementImpulse.Stop, MovementState.Standing);
+            stateMachine.AddTransition(MovementState.Standing, MovementImpulse.Walk, MovementState.Walking);
 
             return stateMachine;
         }

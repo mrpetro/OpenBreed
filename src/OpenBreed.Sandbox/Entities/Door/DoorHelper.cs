@@ -71,6 +71,11 @@ namespace OpenBreed.Sandbox.Entities.Door
             stateMachine.AddState(new ClosingState("Animations/Door/Horizontal/Closing"));
             stateMachine.AddState(new ClosedState(closedStamp.Id));
 
+            stateMachine.AddTransition(FunctioningState.Closed, FunctioningImpulse.Open, FunctioningState.Opening);
+            stateMachine.AddTransition(FunctioningState.Opening, FunctioningImpulse.StopOpening, FunctioningState.Opened);
+            stateMachine.AddTransition(FunctioningState.Opened, FunctioningImpulse.Close, FunctioningState.Closing);
+            stateMachine.AddTransition(FunctioningState.Closing, FunctioningImpulse.StopClosing, FunctioningState.Closed);
+
             return stateMachine;
         }
 
@@ -85,6 +90,11 @@ namespace OpenBreed.Sandbox.Entities.Door
             stateMachine.AddState(new OpenedState(openedStamp.Id));
             stateMachine.AddState(new ClosingState("Animations/Door/Vertical/Closing"));
             stateMachine.AddState(new ClosedState(closedStamp.Id));
+
+            stateMachine.AddTransition(FunctioningState.Closed, FunctioningImpulse.Open, FunctioningState.Opening);
+            stateMachine.AddTransition(FunctioningState.Opening, FunctioningImpulse.StopOpening, FunctioningState.Opened);
+            stateMachine.AddTransition(FunctioningState.Opened, FunctioningImpulse.Close, FunctioningState.Closing);
+            stateMachine.AddTransition(FunctioningState.Closing, FunctioningImpulse.StopClosing, FunctioningState.Closed);
 
             return stateMachine;
         }

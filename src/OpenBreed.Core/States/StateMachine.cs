@@ -3,6 +3,7 @@ using OpenBreed.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace OpenBreed.Core.States
 {
@@ -34,7 +35,7 @@ namespace OpenBreed.Core.States
         private Dictionary<TState, IState<TState, TImpulse>> states = new Dictionary<TState, IState<TState, TImpulse>>();
         private IState<TState, TImpulse> currentState;
 
-        private Dictionary<(TState, TState), Action> transitions = new Dictionary<(TState, TState), Action>();
+        private Dictionary<TState, Dictionary<TImpulse, TState>> transitions = new Dictionary<TState, Dictionary<TImpulse, TState>>();
 
         private Dictionary<TState, Action> onEntryActions = new Dictionary<TState, Action>();
         private Dictionary<TState, Action> onLeaveActions = new Dictionary<TState, Action>();
@@ -70,6 +71,12 @@ namespace OpenBreed.Core.States
         }
         public void SetStateEntry(TState state, Action action)
         {
+            onEntryActions[state] = action;
+        }
+
+        public void SetStateLeave(TState state, Action action)
+        {
+            onLeaveActions[state] = action;
         }
 
         public void AddState(IState<TState, TImpulse> state)
@@ -108,10 +115,25 @@ namespace OpenBreed.Core.States
 
         public void Perform(TImpulse impulse, params object[] arguments)
         {
-            var nextStateName = currentState.Process(impulse, arguments);
+            if (transitions.Any())
+            {
+                Dictionary<TImpulse, TState> transition;
+                if (transitions.TryGetValue(CurrentStateId, out transition))
+                {
+                    TState toState;
+                    if (transition.TryGetValue(impulse, out toState))
+                    {
+                        if (!Equals(toState, currentState.Id))
+                            ChangeState(toState, arguments);
+                    }
+                    else
+                        Entity.Core.Logging.Warning($"FSM: Transition from state '{CurrentStateId}' using impulse '{impulse}' not defined.");
+                }
+                else
+                    Entity.Core.Logging.Warning($"FSM: Transition from state '{CurrentStateId}' not defined.");
 
-            if (!Equals(nextStateName, currentState.Id))
-                ChangeState(nextStateName, arguments);
+                return;
+            }
         }
 
         public void Initialize()
@@ -133,10 +155,19 @@ namespace OpenBreed.Core.States
             //    state.Value.Deinitialize(Entity);
         }
 
-        public void AddTransition(TState fromState, TState toState, Action action)
+        public void AddTransition(TState fromState, TImpulse impulse, TState toState)
         {
-            transitions.Add((fromState, toState), action);
+            Dictionary<TImpulse, TState> transition;
+
+            if (!transitions.TryGetValue(fromState, out transition))
+            {
+                transition = new Dictionary<TImpulse, TState>();
+                transitions.Add(fromState, transition);
+            }
+
+            transition[impulse] = toState;
         }
+
 
         #endregion Public Methods
 

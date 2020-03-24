@@ -60,19 +60,6 @@ namespace OpenBreed.Sandbox.Components.States
             Entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
 
-        public FunctioningState Process(FunctioningImpulse impulse, object[] arguments)
-        {
-            switch (impulse)
-            {
-                case FunctioningImpulse.StopOpening:
-                    return FunctioningState.Opened;
-                default:
-                    break;
-            }
-
-            return Id;
-        }
-
         #endregion Public Methods
 
         #region Private Methods

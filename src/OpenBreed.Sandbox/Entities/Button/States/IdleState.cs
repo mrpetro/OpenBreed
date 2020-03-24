@@ -60,19 +60,6 @@ namespace OpenBreed.Sandbox.Entities.Button.States
             Entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
 
-        public ButtonState Process(ButtonImpulse impulse, object[] arguments)
-        {
-            switch (impulse)
-            {
-                case ButtonImpulse.Press:
-                    return ButtonState.Pressed;
-                default:
-                    break;
-            }
-
-            return Id;
-        }
-
         #endregion Public Methods
 
         #region Private Methods

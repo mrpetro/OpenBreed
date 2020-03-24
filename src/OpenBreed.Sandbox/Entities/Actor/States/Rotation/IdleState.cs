@@ -44,17 +44,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 
         public RotationState Process(RotationImpulse impulse, object[] arguments)
         {
-            switch (impulse)
-            {
-                case RotationImpulse.Rotate:
-                    {
-                        return RotationState.Rotating;
-                    }
-                default:
-                    break;
-            }
-
-            return Id;
+            throw new InvalidOperationException();
         }
 
         private void OnControlDirectionChanged(object sender, ControlDirectionChangedEventArgs e)

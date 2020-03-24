@@ -68,21 +68,6 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             Entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
-        public MovementState Process(MovementImpulse impulse, object[] arguments)
-        {
-            switch (impulse)
-            {
-                case MovementImpulse.Walk:
-                    {
-                        return MovementState.Walking;
-                    }
-                default:
-                    break;
-            }
-
-            return Id;
-        }
-
         #endregion Public Methods
 
         #region Private Methods
