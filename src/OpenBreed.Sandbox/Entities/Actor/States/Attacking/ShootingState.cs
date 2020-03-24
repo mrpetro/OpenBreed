@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {
-    public class ShootingState : IState<AttackingState>
+    public class ShootingState : IState<AttackingState, AttackingImpulse>
     {
         #region Public Constructors
 
@@ -70,15 +70,15 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         //        Entity.PostMsg(new StateChangeMsg(Entity, "Attacking", "Cooldown"));
         //}
 
-        public AttackingState Process(string actionName, object[] arguments)
+        public AttackingState Process(AttackingImpulse impulse, object[] arguments)
         {
-            switch (actionName)
+            switch (impulse)
             {
-                case "Wait":
+                case AttackingImpulse.Wait:
                     {
                         return AttackingState.Cooldown;
                     }
-                case "Stop":
+                case AttackingImpulse.Stop:
                     {
                         return AttackingState.Idle;
                     }

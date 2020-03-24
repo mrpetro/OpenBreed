@@ -11,4 +11,10 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
         Idle,
         Rotating
     }
+
+    public enum RotationImpulse
+    {
+        Stop,
+        Rotate
+    }
 }

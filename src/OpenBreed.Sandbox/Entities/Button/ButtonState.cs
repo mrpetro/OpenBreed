@@ -11,4 +11,10 @@ namespace OpenBreed.Sandbox.Entities.Button
         Idle,
         Pressed,
     }
+
+    public enum ButtonImpulse
+    {
+        Unpress,
+        Press
+    }
 }

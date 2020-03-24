@@ -23,10 +23,10 @@ namespace OpenBreed.Core.States
         #endregion Public Methods
     }
 
-    public interface IState<T> : IState where T : struct, IConvertible
+    public interface IState<TState, TImpulse> : IState where TState : struct, IConvertible where TImpulse : struct, IConvertible
     {
-        T Id { get; }
-        T Process(string actionName, object[] arguments);
+        TState Id { get; }
+        TState Process(TImpulse impulse, object[] arguments);
     }
 
 }

@@ -12,7 +12,7 @@ using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Button.States
 {
-    public class IdleState : IState<ButtonState>
+    public class IdleState : IState<ButtonState, ButtonImpulse>
     {
         public  const string NAME = "Idle";
 
@@ -60,11 +60,11 @@ namespace OpenBreed.Sandbox.Entities.Button.States
             Entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
 
-        public ButtonState Process(string actionName, object[] arguments)
+        public ButtonState Process(ButtonImpulse impulse, object[] arguments)
         {
-            switch (actionName)
+            switch (impulse)
             {
-                case "Opened":
+                case ButtonImpulse.Press:
                     return ButtonState.Pressed;
                 default:
                     break;

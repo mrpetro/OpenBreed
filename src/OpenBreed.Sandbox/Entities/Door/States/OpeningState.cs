@@ -13,7 +13,7 @@ using OpenBreed.Sandbox.Entities.Door.States;
 
 namespace OpenBreed.Sandbox.Components.States
 {
-    public class OpeningState : IState<FunctioningState>
+    public class OpeningState : IState<FunctioningState, FunctioningImpulse>
     {
         #region Private Fields
 
@@ -60,11 +60,11 @@ namespace OpenBreed.Sandbox.Components.States
             Entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
 
-        public FunctioningState Process(string actionName, object[] arguments)
+        public FunctioningState Process(FunctioningImpulse impulse, object[] arguments)
         {
-            switch (actionName)
+            switch (impulse)
             {
-                case "Opened":
+                case FunctioningImpulse.StopOpening:
                     return FunctioningState.Opened;
                 default:
                     break;
@@ -84,7 +84,7 @@ namespace OpenBreed.Sandbox.Components.States
 
         private void OnAnimStopped(object sender, AnimStoppedEventArgs e)
         {
-            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "FunctioningState", "Opened"));
+            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "FunctioningState", "StopOpening"));
         }
 
         #endregion Private Methods

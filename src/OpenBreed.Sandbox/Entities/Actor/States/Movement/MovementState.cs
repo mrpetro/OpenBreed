@@ -11,4 +11,10 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
         Standing,
         Walking
     }
+
+    public enum MovementImpulse
+    {
+        Stop,
+        Walk
+    }
 }

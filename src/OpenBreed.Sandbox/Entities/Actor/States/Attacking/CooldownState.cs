@@ -11,7 +11,7 @@ using System.Timers;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {
-    public class CooldownState : IState<AttackingState>
+    public class CooldownState : IState<AttackingState, AttackingImpulse>
     {
         private Timer timer;
 
@@ -71,15 +71,15 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
                 Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "AttackingState", "Stop"));
         }
 
-        public AttackingState Process(string actionName, object[] arguments)
+        public AttackingState Process(AttackingImpulse impulse, object[] arguments)
         {
-            switch (actionName)
+            switch (impulse)
             {
-                case "Stop":
+                case AttackingImpulse.Stop:
                     {
                         return AttackingState.Idle;
                     }
-                case "Shoot":
+                case AttackingImpulse.Shoot:
                     {
                         return AttackingState.Shooting;
                     }

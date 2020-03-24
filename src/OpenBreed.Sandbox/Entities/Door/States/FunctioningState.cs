@@ -13,4 +13,12 @@ namespace OpenBreed.Sandbox.Entities.Door.States
         Opened,
         Opening
     }
+
+    public enum FunctioningImpulse
+    {
+        Close,
+        StopClosing,
+        Open,
+        StopOpening
+    }
 }

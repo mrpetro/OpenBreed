@@ -74,7 +74,7 @@ namespace OpenBreed.Core.Entities
 
         #region Public Methods
 
-        StateMachine<T> AddFsm<T>() where T : struct, IConvertible;
+        StateMachine<TState, TImpulse> AddFsm<TState, TImpulse>() where TState : struct, IConvertible where TImpulse : struct, IConvertible;
 
         /// <summary>
         /// Post command of specific type

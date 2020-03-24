@@ -14,7 +14,7 @@ using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Button.States
 {
-    public class PressedState : IState<ButtonState>
+    public class PressedState : IState<ButtonState, ButtonImpulse>
     {
         #region Private Fields
 
@@ -62,11 +62,11 @@ namespace OpenBreed.Sandbox.Entities.Button.States
             Entity.Unsubscribe<CollisionEventArgs>(OnCollision);
         }
 
-        public ButtonState Process(string actionName, object[] arguments)
+        public ButtonState Process(ButtonImpulse impulse, object[] arguments)
         {
-            switch (actionName)
+            switch (impulse)
             {
-                case "Open":
+                case ButtonImpulse.Unpress:
                     return ButtonState.Idle;
 
                 default:

@@ -15,7 +15,7 @@ using OpenBreed.Sandbox.Entities.Door.States;
 
 namespace OpenBreed.Sandbox.Components.States
 {
-    public class ClosedState : IState<FunctioningState>
+    public class ClosedState : IState<FunctioningState, FunctioningImpulse>
     {
         #region Private Fields
 
@@ -62,11 +62,11 @@ namespace OpenBreed.Sandbox.Components.States
             Entity.Unsubscribe<CollisionEventArgs>(OnCollision);
         }
 
-        public FunctioningState Process(string actionName, object[] arguments)
+        public FunctioningState Process(FunctioningImpulse impulse, object[] arguments)
         {
-            switch (actionName)
+            switch (impulse)
             {
-                case "Open":
+                case FunctioningImpulse.Open:
                     return FunctioningState.Opening;
 
                 default:

@@ -63,9 +63,9 @@ namespace OpenBreed.Core.Entities
 
         #region Public Methods
 
-        public StateMachine<T> AddFsm<T>() where T : struct, IConvertible
+        public StateMachine<TState, TImpulse> AddFsm<TState, TImpulse>() where TState : struct, IConvertible where TImpulse : struct, IConvertible
         {
-            var newFsm = new StateMachine<T>(this);
+            var newFsm = new StateMachine<TState, TImpulse>(this);
             fsmList.Add(newFsm);
             return newFsm;
         }

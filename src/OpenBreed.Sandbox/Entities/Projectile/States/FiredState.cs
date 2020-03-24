@@ -1,25 +1,21 @@
-﻿
-using OpenBreed.Core.Common.Systems.Components;
+﻿using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Events;
 using OpenBreed.Core.Modules.Animation.Commands;
+using OpenBreed.Core.Modules.Animation.Events;
 using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Commands;
+using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.States;
 using OpenBreed.Sandbox.Helpers;
-using OpenTK;
-using System;
-using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Projectile.States
 {
-    public class FiredState : IState<AttackingState>
+    public class FiredState : IState<AttackingState, AttackingImpulse>
     {
         #region Private Fields
 
-    private SpriteComponent sprite;
         private readonly string animPrefix;
+        private SpriteComponent sprite;
         private VelocityComponent velocity;
 
         #endregion Private Fields
@@ -44,7 +40,6 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
 
         public void EnterState()
         {
-
             var direction = Entity.GetComponent<VelocityComponent>().Value;
 
             var animDirName = AnimHelper.ToDirectionName(direction);
@@ -68,20 +63,19 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
             Entity.Unsubscribe<AnimChangedEventArgs>(OnFrameChanged);
         }
 
-        private void OnFrameChanged(object sender, AnimChangedEventArgs e)
+        public AttackingState Process(AttackingImpulse impulse, object[] arguments)
         {
-            sprite.ImageId = (int)e.Frame;
-        }
-
-        public AttackingState Process(string actionName, object[] arguments)
-        {
-
             return Id;
         }
 
         #endregion Public Methods
 
         #region Private Methods
+
+        private void OnFrameChanged(object sender, AnimChangedEventArgs e)
+        {
+            sprite.ImageId = (int)e.Frame;
+        }
 
         private void OnCollision(object sender, CollisionEventArgs e)
         {

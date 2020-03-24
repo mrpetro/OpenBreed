@@ -16,7 +16,7 @@ using OpenBreed.Sandbox.Entities.Door.States;
 
 namespace OpenBreed.Sandbox.Components.States
 {
-    public class ClosingState : IState<FunctioningState>
+    public class ClosingState : IState<FunctioningState, FunctioningImpulse>
     {
         #region Private Fields
 
@@ -60,11 +60,11 @@ namespace OpenBreed.Sandbox.Components.States
         {
         }
 
-        public FunctioningState Process(string actionName, object[] arguments)
+        public FunctioningState Process(FunctioningImpulse impulse, object[] arguments)
         {
-            switch (actionName)
+            switch (impulse)
             {
-                case "Close":
+                case FunctioningImpulse.StopClosing:
                     return FunctioningState.Closed;
                 default:
                     break;

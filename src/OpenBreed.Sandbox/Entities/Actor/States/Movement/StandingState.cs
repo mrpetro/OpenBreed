@@ -14,7 +14,7 @@ using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 {
-    public class StandingState : IState<MovementState>
+    public class StandingState : IState<MovementState, MovementImpulse>
     {
         #region Private Fields
 
@@ -68,11 +68,11 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             Entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
-        public MovementState Process(string actionName, object[] arguments)
+        public MovementState Process(MovementImpulse impulse, object[] arguments)
         {
-            switch (actionName)
+            switch (impulse)
             {
-                case "Walk":
+                case MovementImpulse.Walk:
                     {
                         return MovementState.Walking;
                     }

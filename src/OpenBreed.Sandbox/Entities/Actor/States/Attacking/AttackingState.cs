@@ -12,4 +12,11 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         Shooting,
         Cooldown
     }
+
+    public enum AttackingImpulse
+    {
+        Stop,
+        Shoot,
+        Wait
+    }
 }

@@ -11,4 +11,9 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
         Idle,
         Fired
     }
+
+    public enum AttackingImpulse
+    {
+        Fired
+    }
 }

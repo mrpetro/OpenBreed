@@ -59,9 +59,9 @@ namespace OpenBreed.Sandbox.Entities.Door
             verticalDoorClosing.AddFrame(4, 1.0f);
         }
 
-        public static StateMachine<FunctioningState> CreateHorizontalFSM(IEntity entity)
+        public static StateMachine<FunctioningState, FunctioningImpulse> CreateHorizontalFSM(IEntity entity)
         {
-            var stateMachine = entity.AddFsm<FunctioningState>();
+            var stateMachine = entity.AddFsm<FunctioningState, FunctioningImpulse>();
 
             var openedStamp = entity.Core.Rendering.Stamps.GetByName(STAMP_DOOR_HORIZONTAL_OPENED);
             var closedStamp = entity.Core.Rendering.Stamps.GetByName(STAMP_DOOR_HORIZONTAL_CLOSED);
@@ -74,9 +74,9 @@ namespace OpenBreed.Sandbox.Entities.Door
             return stateMachine;
         }
 
-        public static StateMachine<FunctioningState> CreateVerticalFSM(IEntity entity)
+        public static StateMachine<FunctioningState, FunctioningImpulse> CreateVerticalFSM(IEntity entity)
         {
-            var stateMachine = entity.AddFsm<FunctioningState>();
+            var stateMachine = entity.AddFsm<FunctioningState, FunctioningImpulse>();
 
             var openedStamp = entity.Core.Rendering.Stamps.GetByName(STAMP_DOOR_VERTICAL_OPENED);
             var closedStamp = entity.Core.Rendering.Stamps.GetByName(STAMP_DOOR_VERTICAL_CLOSED);

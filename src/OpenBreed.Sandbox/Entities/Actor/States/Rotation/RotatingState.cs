@@ -21,7 +21,7 @@ using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 {
-    public class RotatingState : IState<RotationState>
+    public class RotatingState : IState<RotationState, RotationImpulse>
     {
         #region Private Fields
 
@@ -75,11 +75,11 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
         {
         }
 
-        public RotationState Process(string actionName, object[] arguments)
+        public RotationState Process(RotationImpulse impulse, object[] arguments)
         {
-            switch (actionName)
+            switch (impulse)
             {
-                case "Stop":
+                case RotationImpulse.Stop:
                     {
                         return RotationState.Idle;
                     }

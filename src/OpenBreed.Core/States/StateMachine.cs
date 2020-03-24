@@ -8,19 +8,36 @@ namespace OpenBreed.Core.States
 {
     public interface IStateMachine : IMsgHandler
     {
+
+        #region Public Properties
+
         string Name { get; }
         string CurrentStateName { get; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
         void Initialize();
+
         void Deinitialize();
+
+        #endregion Public Methods
+
     }
 
-
-    public class StateMachine<T> : IStateMachine where T : struct, IConvertible
+    public class StateMachine<TState, TImpulse> : IStateMachine where TState : struct, IConvertible where TImpulse : struct, IConvertible
     {
+
         #region Private Fields
 
-        private Dictionary<T, IState<T>> states = new Dictionary<T, IState<T>>();
-        private IState<T> currentState;
+        private Dictionary<TState, IState<TState, TImpulse>> states = new Dictionary<TState, IState<TState, TImpulse>>();
+        private IState<TState, TImpulse> currentState;
+
+        private Dictionary<(TState, TState), Action> transitions = new Dictionary<(TState, TState), Action>();
+
+        private Dictionary<TState, Action> onEntryActions = new Dictionary<TState, Action>();
+        private Dictionary<TState, Action> onLeaveActions = new Dictionary<TState, Action>();
 
         #endregion Private Fields
 
@@ -35,13 +52,13 @@ namespace OpenBreed.Core.States
 
         #region Public Properties
 
-        public string Name => typeof(T).Name;
+        public string Name => typeof(TState).Name;
 
         public string CurrentStateName => currentState.Id.ToString();
 
         public IEntity Entity { get; }
 
-        public T CurrentStateId { get { return currentState.Id; } }
+        public TState CurrentStateId { get { return currentState.Id; } }
 
         #endregion Public Properties
 
@@ -49,14 +66,17 @@ namespace OpenBreed.Core.States
 
         public override string ToString()
         {
-            return $"{typeof(T)}({CurrentStateId})";
+            return $"{typeof(TState)}({CurrentStateId})";
+        }
+        public void SetStateEntry(TState state, Action action)
+        {
         }
 
-        public void AddState(IState<T> state)
+        public void AddState(IState<TState, TImpulse> state)
         {
             Debug.Assert(state != null, "State must not be null");
 
-            if (!Enum.IsDefined(typeof(T), state.Id))
+            if (!Enum.IsDefined(typeof(TState), state.Id))
                 throw new InvalidOperationException($"State '{state.Id}' not defined in this FSM.");
 
             states.Add(state.Id, state);
@@ -66,7 +86,7 @@ namespace OpenBreed.Core.States
         /// Set particular initial state for this state machine
         /// </summary>
         /// <param name="initialStateId">Initial state id</param>
-        public void SetInitialState(T initialStateId)
+        public void SetInitialState(TState initialStateId)
         {
             if (currentState != null)
                 throw new InvalidOperationException($"Initial state already set to '{currentState.Id}'");
@@ -86,17 +106,13 @@ namespace OpenBreed.Core.States
             }
         }
 
-        public void Perform(string actionName, params object[] arguments)
+        public void Perform(TImpulse impulse, params object[] arguments)
         {
-            var nextStateName = currentState.Process(actionName, arguments);
+            var nextStateName = currentState.Process(impulse, arguments);
 
-            if (!Equals(nextStateName,currentState.Id))
+            if (!Equals(nextStateName, currentState.Id))
                 ChangeState(nextStateName, arguments);
         }
-
-        #endregion Public Methods
-
-        #region Internal Methods
 
         public void Initialize()
         {
@@ -117,17 +133,26 @@ namespace OpenBreed.Core.States
             //    state.Value.Deinitialize(Entity);
         }
 
-        #endregion Internal Methods
+        public void AddTransition(TState fromState, TState toState, Action action)
+        {
+            transitions.Add((fromState, toState), action);
+        }
+
+        #endregion Public Methods
 
         #region Private Methods
 
         private bool HandleStateChangeMsg(object sender, EntitySetStateCommand message)
         {
-            Perform(message.StateId);
+            TImpulse impulse;
+            if (!Enum.TryParse(message.StateId, out impulse))
+                throw new InvalidOperationException();
+
+            Perform(impulse);
             return true;
         }
 
-        private void ChangeState(T nextStateId, params object[] arguments)
+        private void ChangeState(TState nextStateId, params object[] arguments)
         {
             //Console.WriteLine($"Leaving state '{currentState.Id}'");
             currentState.LeaveState();
@@ -138,5 +163,6 @@ namespace OpenBreed.Core.States
         }
 
         #endregion Private Methods
+
     }
 }

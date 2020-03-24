@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 {
-    public class IdleState : IState<RotationState>
+    public class IdleState : IState<RotationState, RotationImpulse>
     {
         public IEntity Entity { get; private set; }
 
@@ -42,11 +42,11 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
             Entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
-        public RotationState Process(string actionName, object[] arguments)
+        public RotationState Process(RotationImpulse impulse, object[] arguments)
         {
-            switch (actionName)
+            switch (impulse)
             {
-                case "Rotate":
+                case RotationImpulse.Rotate:
                     {
                         return RotationState.Rotating;
                     }

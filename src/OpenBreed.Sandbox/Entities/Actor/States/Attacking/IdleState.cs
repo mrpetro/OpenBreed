@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {
-    public class IdleState : IState<AttackingState>
+    public class IdleState : IState<AttackingState, AttackingImpulse>
     {
         public IEntity Entity { get; private set; }
 
@@ -50,11 +50,11 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
                 Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "AttackingState", "Stop"));
         }
 
-        public AttackingState Process(string actionName, object[] arguments)
+        public AttackingState Process(AttackingImpulse impulse, object[] arguments)
         {
-            switch (actionName)
+            switch (impulse)
             {
-                case "Shoot":
+                case AttackingImpulse.Shoot:
                     {
                         return AttackingState.Shooting;
                     }
