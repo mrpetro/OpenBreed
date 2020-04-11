@@ -21,7 +21,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
         #region Private Fields
 
         private readonly List<int> entities = new List<int>();
-        private readonly List<AnimatorComponent> animatorComps = new List<AnimatorComponent>();
+        private readonly List<AnimationComponent> animationComps = new List<AnimationComponent>();
         private readonly CommandHandler cmdHandler;
 
         #endregion Private Fields
@@ -31,7 +31,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
         public AnimationSystem(AnimationSystemBuilder builder) : base(builder.core)
         {
             cmdHandler = new CommandHandler(this);
-            Require<AnimatorComponent>();
+            Require<AnimationComponent>();
         }
 
         #endregion Public Constructors
@@ -68,17 +68,19 @@ namespace OpenBreed.Core.Modules.Animation.Systems
                 Animate(i, dt);
         }
 
-        public void Set(AnimatorComponent animator, int animId = -1, float startPosition = 0.0f)
+        public void Set(AnimationComponent ac, int animatorId, int animId = -1, float startPosition = 0.0f)
         {
-            //animator.Data = data;
+            var animator = ac.Items[animatorId];
 
             animator.AnimId = animId;
             animator.Position = startPosition;
             animator.Paused = false;
         }
 
-        public void Play(AnimatorComponent animator, int animId = -1, float startPosition = 0.0f)
+        public void Play(AnimationComponent ac, int animatorId, int animId = -1, float startPosition = 0.0f)
         {
+            var animator = ac.Items[animatorId];
+
             if (animId != -1)
                 animator.AnimId = animId;
 
@@ -90,21 +92,25 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             animator.Paused = false;
         }
 
-        public void Pause(AnimatorComponent animator)
+        public void Pause(AnimationComponent ac, int animatorId)
         {
+            var animator = ac.Items[animatorId];
+
             animator.Paused = true;
         }
 
-        public void Stop(IEntity entity, AnimatorComponent animator)
+        public void Stop(IEntity entity, AnimationComponent ac, int animatorId)
         {
+            var animator = ac.Items[animatorId];
+
             animator.Position = 0.0f;
             animator.Paused = true;
-            RaiseAnimStoppedEvent(entity, animator);
+            RaiseAnimStoppedEvent(entity, ac);
         }
 
-        public void Animate(int index, float dt)
+        private void UpdateAnimator(int index, AnimationComponent ac, int animatorId, float dt)
         {
-            var animator = animatorComps[index];
+            var animator = ac.Items[animatorId];
 
             if (animator.Paused)
                 return;
@@ -123,7 +129,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
                 else
                 {
                     var entity = Core.Entities.GetById(entities[index]);
-                    Stop(entity, animator);
+                    Stop(entity, ac, 0);
                     return;
                 }
             }
@@ -135,8 +141,18 @@ namespace OpenBreed.Core.Modules.Animation.Systems
                 animator.Frame = nextFrame;
 
                 var entity = Core.Entities.GetById(entities[index]);
-                RaiseAnimChangedEvent(entity, animator);
+                RaiseAnimChangedEvent(entity, ac, animatorId);
             }
+        }
+
+        public void Animate(int index, float dt)
+        {
+            var ac = animationComps[index];
+
+            for (int i = 0; i < ac.Items.Count; i++)
+            {
+                UpdateAnimator(index, ac, 0, dt);
+            } 
         }
 
         public override bool ExecuteCommand(object sender, ICommand cmd)
@@ -167,7 +183,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
         protected override void RegisterEntity(IEntity entity)
         {
             entities.Add(entity.Id);
-            animatorComps.Add(entity.GetComponent<AnimatorComponent>());
+            animationComps.Add(entity.GetComponent<AnimationComponent>());
         }
 
         protected override void UnregisterEntity(IEntity entity)
@@ -178,21 +194,21 @@ namespace OpenBreed.Core.Modules.Animation.Systems
                 throw new InvalidOperationException("Entity not found in this system.");
 
             entities.RemoveAt(index);
-            animatorComps.RemoveAt(index);
+            animationComps.RemoveAt(index);
         }
 
         #endregion Protected Methods
 
         #region Private Methods
 
-        private void RaiseAnimStoppedEvent(IEntity entity, AnimatorComponent animator)
+        private void RaiseAnimStoppedEvent(IEntity entity, AnimationComponent ac)
         {
-            entity.RaiseEvent(new AnimStoppedEventArgs(animator));
+            entity.RaiseEvent(new AnimStoppedEventArgs(ac));
         }
 
-        private void RaiseAnimChangedEvent(IEntity entity, AnimatorComponent animator)
+        private void RaiseAnimChangedEvent(IEntity entity, AnimationComponent ac, int animatorId)
         {
-            entity.RaiseEvent(new AnimChangedEventArgs(animator.Frame));
+            entity.RaiseEvent(new AnimChangedEventArgs(ac.Items[animatorId].Frame));
         }
 
         private bool HandlePauseAnimCommand(object sender, PauseAnimCommand cmd)
@@ -201,7 +217,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             if (index < 0)
                 return false;
 
-            Pause(animatorComps[index]);
+            Pause(animationComps[index], cmd.AnimatorId);
 
             return true;
         }
@@ -213,7 +229,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
                 return false;
 
             var entity = Core.Entities.GetById(cmd.EntityId);
-            Stop(entity, animatorComps[index]);
+            Stop(entity, animationComps[index], cmd.AnimatorId);
 
             return true;
         }
@@ -229,7 +245,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             if (animData == null)
                 Core.Logging.Warning($"Animation with ID = '{cmd.Id}' not found.");
 
-            Play(animatorComps[index], animData.Id);
+            Play(animationComps[index], 0, animData.Id);
 
             return true;
         }
@@ -240,7 +256,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             if (index < 0)
                 return false;
 
-            var animator = animatorComps[index];
+            var ac = animationComps[index];
 
             int animId = -1;
 
@@ -254,9 +270,12 @@ namespace OpenBreed.Core.Modules.Animation.Systems
                     animId = data.Id;
             }
             else
+            {
+                var animator = ac.Items[cmd.AnimatorId];
                 animId = animator.AnimId;
+            }
 
-            Play(animator, animId);
+            Play(ac, 0, animId);
 
             return true;
         }

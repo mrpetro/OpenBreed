@@ -1,5 +1,5 @@
 ﻿Templates.Entities.TeleportExit = {
-    AnimatorComponent = {
+    AnimationComponent = {
         Speed = 10.0,
         Loop = true,
 		AnimId = "Animations/Teleport/Entry"},

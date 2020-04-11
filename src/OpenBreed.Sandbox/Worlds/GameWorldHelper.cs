@@ -89,12 +89,12 @@ namespace OpenBreed.Sandbox.Worlds
 
             var playerCamera = cameraBuilder.Build();
             playerCamera.Tag = "PlayerCamera";
-            playerCamera.Add(new AnimatorComponent(10.0f, false, -1, FrameTransition.LinearInterpolation));
+            playerCamera.Add(new AnimationComponent(10.0f, false, -1, FrameTransition.LinearInterpolation));
 
             cameraBuilder.SetFov(640, 480);
             var gameCamera = cameraBuilder.Build();
             gameCamera.Tag = "HubCamera";
-            gameCamera.Add(new AnimatorComponent(10.0f, false, -1, FrameTransition.LinearInterpolation));
+            gameCamera.Add(new AnimationComponent(10.0f, false, -1, FrameTransition.LinearInterpolation));
 
             using (var reader = new TxtFileWorldReader(core, ".\\Content\\Maps\\hub.txt"))
                 gameWorld = reader.GetWorld();

@@ -1,5 +1,5 @@
 ﻿Templates.Entities.Projectile = {
-    AnimatorComponent = {
+    AnimationComponent = {
         Speed = 10.0,
         Loop = true},
     PositionComponent = { 0, 0 },

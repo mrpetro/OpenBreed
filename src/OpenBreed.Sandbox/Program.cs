@@ -385,7 +385,7 @@ namespace OpenBreed.Sandbox
         private void RegisterComponentBuilders()
         {
             BodyComponentBuilder.Register(this);
-            AnimatorComponentBuilder.Register(this);
+            AnimationComponentBuilder.Register(this);
             DirectionComponentBuilder.Register(this);
 
             Entities.RegisterComponentBuilder("VelocityComponent", VelocityComponentBuilder.New);

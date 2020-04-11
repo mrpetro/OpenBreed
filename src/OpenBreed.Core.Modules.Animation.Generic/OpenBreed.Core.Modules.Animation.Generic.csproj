@@ -65,13 +65,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builders\AnimationSystemBuilder.cs" />
-    <Compile Include="Builders\AnimatorComponentBuilder.cs" />
+    <Compile Include="Builders\AnimationComponentBuilder.cs" />
     <Compile Include="Events\AnimStoppedEventArgs.cs" />
     <Compile Include="Events\AnimChangedEventArgs.cs" />
     <Compile Include="Commands\SetAnimCommand.cs" />
     <Compile Include="Systems\AnimationSystem.cs" />
     <Compile Include="Helpers\AnimMan.cs" />
-    <Compile Include="Components\AnimatorComponent.cs" />
+    <Compile Include="Components\AnimationComponent.cs" />
     <Compile Include="Helpers\Animation.cs" />
     <Compile Include="Commands\PauseAnimCommand.cs" />
     <Compile Include="Commands\StopAnimCommand.cs" />

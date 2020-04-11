@@ -53,7 +53,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
             var animDirPostfix = AnimHelper.ToDirectionName(direction.Value);
 
-            Entity.PostCommand(new PlayAnimCommand(Entity.Id, $"{animPrefix}/{Id}/{animDirPostfix}"));
+            Entity.PostCommand(new PlayAnimCommand(Entity.Id, $"{animPrefix}/{Id}/{animDirPostfix}", 0));
             Entity.PostCommand(new TextSetCommand(Entity.Id, 0, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
             Entity.Subscribe<AnimChangedEventArgs>(OnFrameChanged);

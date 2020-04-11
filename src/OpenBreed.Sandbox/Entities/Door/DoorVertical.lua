@@ -1,5 +1,5 @@
 ﻿Templates.Entities.DoorVertical = {
-    AnimatorComponent = {
+    AnimationComponent = {
         Speed = 5.0,
         Loop = false},
     PositionComponent = { 0, 0 },

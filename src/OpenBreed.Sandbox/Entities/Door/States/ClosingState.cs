@@ -48,7 +48,7 @@ namespace OpenBreed.Sandbox.Components.States
             entity.PostCommand(new SpriteOnCommand(entity.Id));
             entity.PostCommand(new BodyOnCommand(entity.Id));
 
-            entity.PostCommand(new PlayAnimCommand(entity.Id, animationId));
+            entity.PostCommand(new PlayAnimCommand(entity.Id, animationId, 0));
             entity.PostCommand(new TextSetCommand(entity.Id, 0, "Door - Closing"));
         }
 

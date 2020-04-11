@@ -42,7 +42,7 @@ namespace OpenBreed.Sandbox.Components.States
         public void EnterState(IEntity entity)
         {
             entity.PostCommand(new SpriteOnCommand(entity.Id));
-            entity.PostCommand(new PlayAnimCommand(entity.Id, animationId));
+            entity.PostCommand(new PlayAnimCommand(entity.Id, animationId, 0));
             entity.PostCommand(new TextSetCommand(entity.Id, 0, "Door - Opening"));
 
             entity.Subscribe<AnimChangedEventArgs>(OnAnimChanged);

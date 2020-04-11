@@ -14,9 +14,10 @@ namespace OpenBreed.Core.Modules.Animation.Commands
 
         #region Public Constructors
 
-        public SetAnimCommand(int entityId, string id)
+        public SetAnimCommand(int entityId, string id, int animatorId)
         {
             EntityId = entityId;
+            AnimatorId = animatorId;
             Id = id;
         }
 
@@ -26,6 +27,7 @@ namespace OpenBreed.Core.Modules.Animation.Commands
 
         public int EntityId { get; }
         public string Type { get { return TYPE; } }
+        public int AnimatorId { get; }
         public string Id { get; }
 
         #endregion Public Properties
