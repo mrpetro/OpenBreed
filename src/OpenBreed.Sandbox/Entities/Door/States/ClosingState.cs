@@ -17,7 +17,7 @@ using System;
 
 namespace OpenBreed.Sandbox.Components.States
 {
-    public class ClosingState : IState<FunctioningState, FunctioningImpulse>
+    public class ClosingState : IStateEx<FunctioningState, FunctioningImpulse>
     {
         #region Private Fields
 
@@ -36,28 +36,23 @@ namespace OpenBreed.Sandbox.Components.States
 
         #region Public Properties
 
-        public IEntity Entity { get; private set; }
-        public FunctioningState Id => FunctioningState.Closing;
+        public int Id => (int)(ValueType)FunctioningState.Closing;
+        public int FsmId { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void EnterState()
+        public void EnterState(IEntity entity)
         {
-            Entity.PostCommand(new SpriteOnCommand(Entity.Id));
-            Entity.PostCommand(new BodyOnCommand(Entity.Id));
+            entity.PostCommand(new SpriteOnCommand(entity.Id));
+            entity.PostCommand(new BodyOnCommand(entity.Id));
 
-            Entity.PostCommand(new PlayAnimCommand(Entity.Id, animationId));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, "Door - Closing"));
+            entity.PostCommand(new PlayAnimCommand(entity.Id, animationId));
+            entity.PostCommand(new TextSetCommand(entity.Id, 0, "Door - Closing"));
         }
 
-        public void Initialize(IEntity entity)
-        {
-            Entity = entity;
-        }
-
-        public void LeaveState()
+        public void LeaveState(IEntity entity)
         {
         }
 

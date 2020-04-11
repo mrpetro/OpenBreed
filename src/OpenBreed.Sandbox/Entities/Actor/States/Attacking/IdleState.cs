@@ -45,8 +45,10 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         private void OnControlFireChanged(object sender, ControlFireChangedEvenrArgs eventArgs)
         {
             if (eventArgs.Fire)
+                //Entity.Impulse<AttackingState, AttackingImpulse>(AttackingImpulse.Shoot);
                 Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "AttackingState", "Shoot"));
             else
+                //Entity.Impulse<AttackingState, AttackingImpulse>(AttackingImpulse.Stop);
                 Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "AttackingState", "Stop"));
         }
 

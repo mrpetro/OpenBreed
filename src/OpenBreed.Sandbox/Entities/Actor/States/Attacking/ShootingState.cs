@@ -43,8 +43,8 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             direction *= 500.0f;
             ProjectileHelper.AddProjectile(Entity.Core, Entity.World, pos.X, pos.Y, direction.X, direction.Y);
 
+            //Entity.Impulse<AttackingState, AttackingImpulse>(AttackingImpulse.Wait);
             Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "AttackingState", "Wait"));
-
         }
 
         public void Initialize(IEntity entity)

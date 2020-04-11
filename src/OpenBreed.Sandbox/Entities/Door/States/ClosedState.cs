@@ -15,7 +15,7 @@ using OpenBreed.Sandbox.Entities.Door.States;
 
 namespace OpenBreed.Sandbox.Components.States
 {
-    public class ClosedState : IState<FunctioningState, FunctioningImpulse>
+    public class ClosedState : IStateEx<FunctioningState, FunctioningImpulse>
     {
         #region Private Fields
 
@@ -34,32 +34,31 @@ namespace OpenBreed.Sandbox.Components.States
 
         #region Public Properties
 
-        public IEntity Entity { get; private set; }
-        public FunctioningState Id => FunctioningState.Closed;
+        public int Id => (int)(ValueType)FunctioningState.Closed;
+
+        /// <summary>
+        /// TODO: Insecure, encapsulate this somehow
+        /// </summary>
+        public int FsmId { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void EnterState()
+        public void EnterState(IEntity entity)
         {
-            Entity.PostCommand(new SpriteOffCommand(Entity.Id));
+            entity.PostCommand(new SpriteOffCommand(entity.Id));
 
-            var pos = Entity.GetComponent<PositionComponent>();
-            Entity.PostCommand(new PutStampCommand(Entity.World.Id, stampId, 0, pos.Value));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, "Door - Closed"));
+            var pos = entity.GetComponent<PositionComponent>();
+            entity.PostCommand(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
+            entity.PostCommand(new TextSetCommand(entity.Id, 0, "Door - Closed"));
 
-            Entity.Subscribe<CollisionEventArgs>(OnCollision);
+            entity.Subscribe<CollisionEventArgs>(OnCollision);
         }
 
-        public void Initialize(IEntity entity)
+        public void LeaveState(IEntity entity)
         {
-            Entity = entity;
-        }
-
-        public void LeaveState()
-        {
-            Entity.Unsubscribe<CollisionEventArgs>(OnCollision);
+            entity.Unsubscribe<CollisionEventArgs>(OnCollision);
         }
 
         #endregion Public Methods
@@ -68,7 +67,8 @@ namespace OpenBreed.Sandbox.Components.States
 
         private void OnCollision(object sender, CollisionEventArgs eventArgs)
         {
-            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "FunctioningState", "Open"));
+            var entity = sender as IEntity;
+            entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)FunctioningImpulse.Open));
         }
 
         #endregion Private Methods

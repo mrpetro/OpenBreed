@@ -283,6 +283,10 @@ namespace OpenBreed.Sandbox
             TeleportHelper.CreateAnimations(this);
             ProjectileHelper.CreateAnimations(this);
 
+            DoorHelper.CreateHorizontalFSM(this);
+            DoorHelper.CreateVerticalFSM(this);
+
+
             Rendering.ScreenWorld = ScreenWorldHelper.CreateWorld(this);
 
             HudWorldHelper.CreateHudWorld(this);

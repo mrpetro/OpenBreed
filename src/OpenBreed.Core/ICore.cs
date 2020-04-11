@@ -55,6 +55,11 @@ namespace OpenBreed.Core
         EntityMan Entities { get; }
 
         /// <summary>
+        /// State machine manager
+        /// </summary>
+        FsmMan StateMachines { get; }
+
+        /// <summary>
         /// Players manager
         /// </summary>
         PlayersMan Players { get; }

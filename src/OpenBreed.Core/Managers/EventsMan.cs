@@ -87,7 +87,13 @@ namespace OpenBreed.Core.Managers
             if (!eventTypes.TryGetValue(eventType, out callbacks))
                 return;
 
-            callbacks.ForEach(item => item.Method.Invoke(item.Target, new object[] { sender, eventArgs }));
+            for (int i = 0; i < callbacks.Count; i++)
+            {
+                var item = callbacks[i];
+                item.Method.Invoke(item.Target, new object[] { sender, eventArgs });
+            }
+
+            //callbacks.ForEach(item => item.Method.Invoke(item.Target, new object[] { sender, eventArgs }));
         }
 
         #endregion Private Methods

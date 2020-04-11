@@ -14,6 +14,7 @@ using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
+using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Control.Components;
 using OpenBreed.Sandbox.Components;
 using OpenBreed.Sandbox.Entities.Actor;
@@ -47,6 +48,8 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem(core.CreateMovementSystem().Build());
             builder.AddSystem(core.CreatePhysicsSystem().SetGridSize(width, height).Build());
             builder.AddSystem(core.CreateAnimationSystem().Build());
+
+            builder.AddSystem(new StateMachineSystem(core));
 
             ////Audio
             //builder.AddSystem(core.CreateSoundSystem().Build());

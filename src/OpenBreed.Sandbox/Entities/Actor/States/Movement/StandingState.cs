@@ -75,6 +75,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
         private void OnControlDirectionChanged(object sender, ControlDirectionChangedEventArgs eventArgs)
         {
             if (eventArgs.Direction != Vector2.Zero)
+                //Entity.Impulse<MovementState, MovementImpulse>(MovementImpulse.Walk);
                 Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "MovementState", "Walk"));
         }
 

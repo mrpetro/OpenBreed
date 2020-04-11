@@ -6,6 +6,7 @@ using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
+using OpenBreed.Sandbox.Entities.Door.States;
 using System;
 using System.Linq;
 
@@ -59,22 +60,8 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
 
         private void OnCollision(object sender, CollisionEventArgs e)
         {
+            //Entity.Impulse<FunctioningState, FunctioningImpulse>(FunctioningImpulse.Pick);
             Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "FunctioningState", "Pick"));
-        }
-
-        public string Process(string actionName, object[] arguments)
-        {
-            switch (actionName)
-            {
-                case "Pick":
-                    {
-                        return "Picking";
-                    }
-                default:
-                    break;
-            }
-
-            return null;
         }
 
         #endregion Public Methods

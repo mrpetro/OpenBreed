@@ -37,20 +37,6 @@ namespace OpenBreed.Core.Entities
         World World { get; }
 
         /// <summary>
-        /// Gets component of specific type if it exists
-        /// </summary>
-        /// <typeparam name="T">Type of component to get</typeparam>
-        /// <returns>Entity component if exists, null if not</returns>
-        T TryGetComponent<T>();
-
-        /// <summary>
-        /// Gets component of specific type
-        /// </summary>
-        /// <typeparam name="T">Type of component to get </typeparam>
-        /// <returns>Entity component if exists, throws exception if not</returns>
-        T GetComponent<T>();
-
-        /// <summary>
         /// Read-olny list of components for this entity
         /// </summary>
         ReadOnlyCollection<IEntityComponent> Components { get; }
@@ -73,6 +59,20 @@ namespace OpenBreed.Core.Entities
         #endregion Public Properties
 
         #region Public Methods
+
+        /// <summary>
+        /// Gets component of specific type if it exists
+        /// </summary>
+        /// <typeparam name="T">Type of component to get</typeparam>
+        /// <returns>Entity component if exists, null if not</returns>
+        T TryGetComponent<T>();
+
+        /// <summary>
+        /// Gets component of specific type
+        /// </summary>
+        /// <typeparam name="T">Type of component to get </typeparam>
+        /// <returns>Entity component if exists, throws exception if not</returns>
+        T GetComponent<T>();
 
         StateMachine<TState, TImpulse> AddFsm<TState, TImpulse>() where TState : struct, IConvertible where TImpulse : struct, IConvertible;
 

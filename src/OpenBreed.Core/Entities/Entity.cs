@@ -63,6 +63,12 @@ namespace OpenBreed.Core.Entities
 
         #region Public Methods
 
+        //public void Impulse<TState, TImpulse>(TImpulse impulse) where TState : struct, IConvertible where TImpulse : struct, IConvertible
+        //{
+        //    var sm = FsmList.OfType<StateMachine<TState, TImpulse>>().FirstOrDefault();
+        //    sm.Perform(impulse);
+        //}
+
         public StateMachine<TState, TImpulse> AddFsm<TState, TImpulse>() where TState : struct, IConvertible where TImpulse : struct, IConvertible
         {
             var newFsm = new StateMachine<TState, TImpulse>(this);

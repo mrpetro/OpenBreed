@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Core.Common.Components
 {
-    public struct MachineState
+    public class MachineState
     {
         #region Public Fields
 
-        public int MachineId;
+        public int FsmId;
         public int StateId;
 
         #endregion Public Fields

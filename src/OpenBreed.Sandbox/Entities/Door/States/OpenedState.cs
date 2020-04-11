@@ -18,7 +18,7 @@ using System;
 
 namespace OpenBreed.Sandbox.Components.States
 {
-    public class OpenedState : IState<FunctioningState, FunctioningImpulse>
+    public class OpenedState : IStateEx<FunctioningState, FunctioningImpulse>
     {
         #region Private Fields
 
@@ -37,30 +37,25 @@ namespace OpenBreed.Sandbox.Components.States
 
         #region Public Properties
 
-        public IEntity Entity { get; private set; }
-        public FunctioningState Id => FunctioningState.Opened;
+        public int Id => (int)(ValueType)FunctioningState.Opened;
+        public int FsmId { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void EnterState()
+        public void EnterState(IEntity entity)
         {
-            Entity.PostCommand(new SpriteOffCommand(Entity.Id));
-            Entity.PostCommand(new BodyOffCommand(Entity.Id));
+            entity.PostCommand(new SpriteOffCommand(entity.Id));
+            entity.PostCommand(new BodyOffCommand(entity.Id));
 
-            var pos = Entity.GetComponent<PositionComponent>();
+            var pos = entity.GetComponent<PositionComponent>();
 
-            Entity.PostCommand(new PutStampCommand(Entity.World.Id, stampId, 0, pos.Value));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, "Door - Opened"));
+            entity.PostCommand(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
+            entity.PostCommand(new TextSetCommand(entity.Id, 0, "Door - Opened"));
         }
 
-        public void Initialize(IEntity entity)
-        {
-            Entity = entity;
-        }
-
-        public void LeaveState()
+        public void LeaveState(IEntity entity)
         {
         }
 

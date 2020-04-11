@@ -45,6 +45,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
+            //Entity.Impulse<AttackingState, AttackingImpulse>(AttackingImpulse.Shoot);
             Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "AttackingState", "Shoot"));
         }
 
@@ -66,8 +67,10 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         private void OnControlFireChanged(object sender, ControlFireChangedEvenrArgs e)
         {
             if (e.Fire)
+                //Entity.Impulse<AttackingState, AttackingImpulse>(AttackingImpulse.Shoot);
                 Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "AttackingState", "Shoot"));
             else
+                //Entity.Impulse<AttackingState, AttackingImpulse>(AttackingImpulse.Stop);
                 Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "AttackingState", "Stop"));
         }
 

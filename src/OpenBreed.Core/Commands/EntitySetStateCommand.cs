@@ -1,24 +1,20 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Helpers;
-using OpenBreed.Core.Entities;
-
-namespace OpenBreed.Core.Commands
+﻿namespace OpenBreed.Core.Commands
 {
-    public class EntitySetStateCommand : IEntityCommand
+    public class SetStateCommand : IEntityCommand
     {
         #region Public Fields
 
-        public const string TYPE = "ENTITY_SET_STATE";
+        public const string TYPE = "SET_STATE";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public EntitySetStateCommand(int entityId, string fsmName, string stateId)
+        public SetStateCommand(int entityId, int fsmId, int impulseId)
         {
             EntityId = entityId;
-            FsmName = fsmName;
-            StateId = stateId;
+            FsmId = fsmId;
+            ImpulseId = impulseId;
         }
 
         #endregion Public Constructors
@@ -27,8 +23,8 @@ namespace OpenBreed.Core.Commands
 
         public int EntityId { get; }
         public string Type { get { return TYPE; } }
-        public string FsmName { get; }
-        public string StateId { get; }
+        public int FsmId { get; }
+        public int ImpulseId { get; }
 
         #endregion Public Properties
     }

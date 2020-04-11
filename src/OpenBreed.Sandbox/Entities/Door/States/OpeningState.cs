@@ -13,7 +13,7 @@ using OpenBreed.Sandbox.Entities.Door.States;
 
 namespace OpenBreed.Sandbox.Components.States
 {
-    public class OpeningState : IState<FunctioningState, FunctioningImpulse>
+    public class OpeningState : IStateEx<FunctioningState, FunctioningImpulse>
     {
         #region Private Fields
 
@@ -32,32 +32,27 @@ namespace OpenBreed.Sandbox.Components.States
 
         #region Public Properties
 
-        public IEntity Entity { get; private set; }
-        public FunctioningState Id => FunctioningState.Opening;
+        public int Id => (int)(ValueType)FunctioningState.Opening;
+        public int FsmId { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void EnterState()
+        public void EnterState(IEntity entity)
         {
-            Entity.PostCommand(new SpriteOnCommand(Entity.Id));
-            Entity.PostCommand(new PlayAnimCommand(Entity.Id, animationId));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, "Door - Opening"));
+            entity.PostCommand(new SpriteOnCommand(entity.Id));
+            entity.PostCommand(new PlayAnimCommand(entity.Id, animationId));
+            entity.PostCommand(new TextSetCommand(entity.Id, 0, "Door - Opening"));
 
-            Entity.Subscribe<AnimChangedEventArgs>(OnAnimChanged);
-            Entity.Subscribe<AnimStoppedEventArgs>(OnAnimStopped);
+            entity.Subscribe<AnimChangedEventArgs>(OnAnimChanged);
+            entity.Subscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
 
-        public void Initialize(IEntity entity)
+        public void LeaveState(IEntity entity)
         {
-            Entity = entity;
-        }
-
-        public void LeaveState()
-        {
-            Entity.Unsubscribe<AnimChangedEventArgs>(OnAnimChanged);
-            Entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
+            entity.Unsubscribe<AnimChangedEventArgs>(OnAnimChanged);
+            entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
 
         #endregion Public Methods
@@ -66,12 +61,15 @@ namespace OpenBreed.Sandbox.Components.States
 
         private void OnAnimChanged(object sender, AnimChangedEventArgs e)
         {
-            Entity.PostCommand(new SpriteSetCommand(Entity.Id, (int)e.Frame));
+            var entity = sender as IEntity;
+
+            entity.PostCommand(new SpriteSetCommand(entity.Id, (int)e.Frame));
         }
 
         private void OnAnimStopped(object sender, AnimStoppedEventArgs e)
         {
-            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "FunctioningState", "StopOpening"));
+            var entity = sender as IEntity;
+            entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)FunctioningImpulse.StopOpening));
         }
 
         #endregion Private Methods

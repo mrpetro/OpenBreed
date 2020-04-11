@@ -60,9 +60,7 @@ namespace OpenBreed.Core.Managers
         /// <returns>World reference</returns>
         public World GetById(int id)
         {
-            var world = worlds[id];
-
-            if (worlds.TryGetValue(id, out world))
+            if (worlds.TryGetValue(id, out World world))
                 return world;
             else
                 throw new InvalidOperationException($"World with ID '{id}' not found.");

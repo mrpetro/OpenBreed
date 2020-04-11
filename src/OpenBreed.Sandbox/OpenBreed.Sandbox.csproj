@@ -115,6 +115,7 @@
     <Compile Include="Entities\Door\States\ClosingState.cs" />
     <Compile Include="Entities\FpsCounter\FpsCounterHelper.cs" />
     <Compile Include="Entities\Pickable\PickableHelper.cs" />
+    <Compile Include="Entities\Pickable\States\FunctioningState.cs" />
     <Compile Include="Entities\Pickable\States\LyingState.cs" />
     <Compile Include="Entities\Pickable\States\PickingState.cs" />
     <Compile Include="Entities\Projectile\States\AttackingState.cs" />

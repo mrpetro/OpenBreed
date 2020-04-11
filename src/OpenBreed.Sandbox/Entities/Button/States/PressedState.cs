@@ -11,6 +11,7 @@ using OpenBreed.Core.States;
 using System;
 using System.Linq;
 using OpenBreed.Core.Commands;
+using OpenBreed.Sandbox.Entities.Door.States;
 
 namespace OpenBreed.Sandbox.Entities.Button.States
 {
@@ -68,6 +69,7 @@ namespace OpenBreed.Sandbox.Entities.Button.States
 
         private void OnCollision(object sender, CollisionEventArgs eventArgs)
         {
+            //Entity.Impulse<ButtonState, ButtonImpulse>(ButtonImpulse.Unpress);
             Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "FunctioningState", "Open"));
         }
 

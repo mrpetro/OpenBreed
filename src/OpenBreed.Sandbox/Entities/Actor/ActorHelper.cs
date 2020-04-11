@@ -156,7 +156,14 @@ namespace OpenBreed.Sandbox.Entities.Actor
             stateMachine.AddTransition(RotationState.Rotating, RotationImpulse.Stop , RotationState.Idle);
             stateMachine.AddTransition(RotationState.Idle, RotationImpulse.Rotate, RotationState.Rotating);
 
+            stateMachine.AddOnEnterState(RotationState.Idle, RotationImpulse.Stop, OnStop);
+
             return stateMachine;
+        }
+
+        private static void OnStop()
+        {
+            //Console.WriteLine("Rotation -> Stopped");
         }
 
         public static StateMachine<MovementState, MovementImpulse> CreateMovementFSM(IEntity entity)

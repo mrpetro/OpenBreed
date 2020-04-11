@@ -71,6 +71,7 @@ namespace OpenBreed.Sandbox.Entities.Button.States
 
         private void OnAnimStopped(object sender, AnimStoppedEventArgs eventArgs)
         {
+            //Entity.Impulse<ButtonState, ButtonImpulse>(ButtonImpulse.Press);
             Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "FunctioningState", "Opened"));
         }
 

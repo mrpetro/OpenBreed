@@ -56,6 +56,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
                 if (dir.Value != e.Direction)
                 {
                     dir.Value = e.Direction;
+                    //Entity.Impulse<RotationState, RotationImpulse>(RotationImpulse.Rotate);
                     Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "RotationState", "Rotate"));
                 }
             }

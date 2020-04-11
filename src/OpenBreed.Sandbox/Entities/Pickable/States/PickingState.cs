@@ -58,17 +58,6 @@ namespace OpenBreed.Sandbox.Entities.Pickable.States
 
         }
 
-        public string Process(string actionName, object[] arguments)
-        {
-            switch (actionName)
-            {
-                default:
-                    break;
-            }
-
-            return null;
-        }
-
         #endregion Public Methods
     }
 }
