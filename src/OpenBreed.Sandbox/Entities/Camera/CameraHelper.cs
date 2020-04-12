@@ -21,11 +21,11 @@ namespace OpenBreed.Sandbox.Entities.Camera
 
         public static void CreateAnimations(ICore core)
         {
-            var cameraEffectFadeOut = core.Animations.Anims.Create<float>(CAMERA_FADE_OUT);
+            var cameraEffectFadeOut = core.Animations.Create<float>(CAMERA_FADE_OUT);
             cameraEffectFadeOut.AddFrame(1.0f, 0.0f);
             cameraEffectFadeOut.AddFrame(0.0f, 10.0f);
 
-            var cameraEffectFadeIn = core.Animations.Anims.Create<float>(CAMERA_FADE_IN);
+            var cameraEffectFadeIn = core.Animations.Create<float>(CAMERA_FADE_IN);
             cameraEffectFadeIn.AddFrame(0.0f, 0.0f);
             cameraEffectFadeIn.AddFrame(1.0f, 10.0f);
         }

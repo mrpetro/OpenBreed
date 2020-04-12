@@ -50,7 +50,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         public static void CreateAnimations(ICore core)
         {
-            var animationTeleportEntry = core.Animations.Anims.Create<int>(ANIMATION_TELEPORT_ENTRY);
+            var animationTeleportEntry = core.Animations.Create<int>(ANIMATION_TELEPORT_ENTRY);
             animationTeleportEntry.AddFrame(0, 1.0f);
             animationTeleportEntry.AddFrame(1, 1.0f);
             animationTeleportEntry.AddFrame(2, 1.0f);

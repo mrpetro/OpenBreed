@@ -1,15 +1,16 @@
 ﻿using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Modules.Animation.Builders;
+using OpenBreed.Core.Common.Builders;
 using OpenBreed.Core.Modules.Animation.Helpers;
 using System.Collections.Generic;
+using OpenBreed.Core.Modules.Animation.Builders;
 
 namespace OpenBreed.Core.Modules.Animation.Components
 {
-    public class AnimationData
+    public class Animator
     {
         #region Public Constructors
 
-        public AnimationData(int animatorId)
+        public Animator(int animatorId)
         {
             AnimatorId = animatorId;
         }
@@ -46,9 +47,9 @@ namespace OpenBreed.Core.Modules.Animation.Components
             //AnimId = animId;
             //Transition = transition;
 
-            Items = new List<AnimationData>(new AnimationData[]
+            Items = new List<Animator>(new Animator[]
             {
-                new AnimationData(10)
+                new Animator(10)
                 {
                     Speed = speed,
                     Loop = loop,
@@ -71,9 +72,9 @@ namespace OpenBreed.Core.Modules.Animation.Components
             //TODO: add this to builder
             //Transition = FrameTransition.None;
 
-            Items = new List<AnimationData>(new AnimationData[]
+            Items = new List<Animator>(new Animator[]
             {
-                new AnimationData(10)
+                new Animator(10)
                 {
                     Speed = builder.Speed,
                     Loop = builder.Loop,
@@ -87,7 +88,7 @@ namespace OpenBreed.Core.Modules.Animation.Components
 
         #region Public Properties
 
-        public List<AnimationData> Items { get; }
+        public List<Animator> Items { get; }
 
         #endregion Public Properties
     }

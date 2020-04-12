@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core.Modules.Animation;
-using OpenBreed.Core.Modules.Animation.Helpers;
+﻿using OpenBreed.Core.Modules.Animation.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +33,47 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
         #endregion Public Properties
 
         #region Public Methods
+
+        public bool TryGetNextFrame(Animator animator, out object nextFrame)
+        {
+            T cf = default(T);
+
+            if (animator.Frame != null)
+                cf = (T)animator.Frame;
+
+            var nf = GetFrame(animator.Position, animator.Transition);
+
+            nextFrame = nf;
+
+            return !cf.Equals(nf);
+        }
+
+        public T GetFrame(float time, FrameTransition transition = FrameTransition.None)
+        {
+            switch (transition)
+            {
+                case FrameTransition.None:
+                    return GetFrameNoTransition(time);
+
+                case FrameTransition.LinearInterpolation:
+                    return GetFrameLinearInterpolation(time);
+
+                default:
+                    throw new NotImplementedException($"Transition '{transition}' not implemented.");
+            }
+        }
+
+        public void AddFrame(T value, float frameTime)
+        {
+            if (frames.Any())
+                frames.Add(frames.Last().Key + frameTime, value);
+            else
+                frames.Add(frameTime, value);
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private T GetFrameNoTransition(float time)
         {
@@ -77,41 +117,6 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
             return (T)MathTools.Lerp(start.Value, end.Value, ct / dt);
         }
 
-        public bool TryGetNextFrame(float time, object currentFrame, out object nextFrame, FrameTransition transition = FrameTransition.None)
-        {
-            T cf = default(T);
-
-            if(currentFrame != null)
-                cf = (T)currentFrame;
-
-            var nf = GetFrame(time, transition);
-
-            nextFrame = nf;
-
-            return !cf.Equals(nf);
-        }
-
-        public T GetFrame(float time, FrameTransition transition = FrameTransition.None)
-        {
-            switch (transition)
-            {
-                case FrameTransition.None:
-                    return GetFrameNoTransition(time);
-                case FrameTransition.LinearInterpolation:
-                        return GetFrameLinearInterpolation(time);
-                default:
-                    throw new NotImplementedException($"Transition '{transition}' not implemented.");
-            }
-        }
-
-        public void AddFrame(T value, float frameTime)
-        {
-            if (frames.Any())
-                frames.Add(frames.Last().Key + frameTime, value);
-            else
-                frames.Add(frameTime, value);
-        }
-
-        #endregion Public Methods
+        #endregion Private Methods
     }
 }

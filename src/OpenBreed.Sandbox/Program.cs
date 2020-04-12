@@ -67,12 +67,11 @@ namespace OpenBreed.Sandbox
             Rendering = new OpenGLModule(this);
             Physics = new PhysicsModule(this);
             Sounds = new OpenALModule(this);
-            Animations = new AnimationModule(this);
+            Animations = new AnimMan(this);
 
             RegisterModule(Rendering);
             RegisterModule(Physics);
             RegisterModule(Sounds);
-            RegisterModule(Animations);
 
             VSync = VSyncMode.On;
         }
@@ -87,7 +86,7 @@ namespace OpenBreed.Sandbox
 
         public IAudioModule Sounds { get; }
 
-        public IAnimationModule Animations { get; }
+        public AnimMan Animations { get; }
 
         public EntityMan Entities { get; }
 

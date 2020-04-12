@@ -35,9 +35,9 @@ namespace OpenBreed.Core
         IAudioModule Sounds { get; }
 
         /// <summary>
-        /// Reference to animation core module
+        /// Reference to animation manager
         /// </summary>
-        IAnimationModule Animations { get; }
+        AnimMan Animations { get; }
 
         /// <summary>
         /// Logging manager

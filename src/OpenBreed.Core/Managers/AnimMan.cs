@@ -1,20 +1,17 @@
-﻿using OpenBreed.Core.Modules.Animation;
-using OpenBreed.Core.Modules.Animation.Helpers;
-using OpenBreed.Core.Modules.Rendering;
-using OpenBreed.Core.Modules.Animation.Components;
+﻿using OpenBreed.Core.Modules.Animation.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenBreed.Core.Managers;
 
-namespace OpenBreed.Core.Modules.Animation.Helpers
+namespace OpenBreed.Core.Managers
 {
-    public class AnimMan : IAnimMan
+    public class AnimMan
     {
+        #region Internal Fields
+
+        #endregion Internal Fields
+
         #region Private Fields
-
-        internal readonly AnimationModule Module;
-
 
         private readonly List<IAnimation> items = new List<IAnimation>();
 
@@ -22,9 +19,9 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
 
         #region Public Constructors
 
-        public AnimMan(AnimationModule module)
+        public AnimMan(ICore core)
         {
-            Module = module;
+            Core = core;
         }
 
         #endregion Public Constructors

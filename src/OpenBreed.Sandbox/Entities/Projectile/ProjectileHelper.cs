@@ -22,21 +22,21 @@ namespace OpenBreed.Sandbox.Entities.Projectile
     {
         public static void CreateAnimations(ICore core)
         {
-            var laserR = core.Animations.Anims.Create<int>("Animations/Laser/Fired/Right");
+            var laserR = core.Animations.Create<int>("Animations/Laser/Fired/Right");
             laserR.AddFrame(0, 2.0f);
-            var laserRD = core.Animations.Anims.Create<int>("Animations/Laser/Fired/RightDown");
+            var laserRD = core.Animations.Create<int>("Animations/Laser/Fired/RightDown");
             laserRD.AddFrame(1, 2.0f);
-            var laserD = core.Animations.Anims.Create<int>("Animations/Laser/Fired/Down");
+            var laserD = core.Animations.Create<int>("Animations/Laser/Fired/Down");
             laserD.AddFrame(2, 2.0f);
-            var laserDL = core.Animations.Anims.Create<int>("Animations/Laser/Fired/DownLeft");
+            var laserDL = core.Animations.Create<int>("Animations/Laser/Fired/DownLeft");
             laserDL.AddFrame(3, 2.0f);
-            var laserL = core.Animations.Anims.Create<int>("Animations/Laser/Fired/Left");
+            var laserL = core.Animations.Create<int>("Animations/Laser/Fired/Left");
             laserL.AddFrame(4, 2.0f);
-            var laserLU = core.Animations.Anims.Create<int>("Animations/Laser/Fired/LeftUp");
+            var laserLU = core.Animations.Create<int>("Animations/Laser/Fired/LeftUp");
             laserLU.AddFrame(5, 2.0f);
-            var laserU = core.Animations.Anims.Create<int>("Animations/Laser/Fired/Up");
+            var laserU = core.Animations.Create<int>("Animations/Laser/Fired/Up");
             laserU.AddFrame(6, 2.0f);
-            var laserUR = core.Animations.Anims.Create<int>("Animations/Laser/Fired/UpRight");
+            var laserUR = core.Animations.Create<int>("Animations/Laser/Fired/UpRight");
             laserUR.AddFrame(7, 2.0f);
         }
 

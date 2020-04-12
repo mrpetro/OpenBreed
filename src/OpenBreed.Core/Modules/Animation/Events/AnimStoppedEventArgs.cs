@@ -10,7 +10,7 @@ namespace OpenBreed.Core.Modules.Animation.Events
     {
         #region Public Constructors
 
-        public AnimStoppedEventArgs(AnimationComponent animator)
+        public AnimStoppedEventArgs(Animator animator )
         {
             Animator = animator;
         }
@@ -19,7 +19,7 @@ namespace OpenBreed.Core.Modules.Animation.Events
 
         #region Public Properties
 
-        public AnimationComponent Animator { get; }
+        public Animator Animator { get; }
 
         #endregion Public Properties
     }

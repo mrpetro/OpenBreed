@@ -81,6 +81,7 @@
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\IWorldCommand.cs" />
     <Compile Include="Commands\WorldSetPauseCommand.cs" />
+    <Compile Include="Modules\Animation\Builders\AnimationComponentBuilder.cs" />
     <Compile Include="Common\Builders\BaseComponentBuilder.cs" />
     <Compile Include="Common\Builders\IBuilder.cs" />
     <Compile Include="Common\Builders\PositionComponentBuilder.cs" />
@@ -88,6 +89,8 @@
     <Compile Include="Common\Builders\ThrustComponentBuilder.cs" />
     <Compile Include="Common\Builders\DirectionComponentBuilder.cs" />
     <Compile Include="Common\Builders\IComponentBuilder.cs" />
+    <Compile Include="Modules\Animation\Builders\AnimationSystemBuilder.cs" />
+    <Compile Include="Modules\Animation\Components\AnimationComponent.cs" />
     <Compile Include="Common\Components\PauseImmuneComponent.cs" />
     <Compile Include="Builders\IWorldSystemBuilder.cs" />
     <Compile Include="Common\Components\ShapeComponent.cs" />
@@ -106,6 +109,7 @@
     <Compile Include="Common\Components\EquipmentComponent.cs" />
     <Compile Include="Common\Components\IControlComponent.cs" />
     <Compile Include="Common\Components\InventoryComponent.cs" />
+    <Compile Include="Managers\AnimMan.cs" />
     <Compile Include="Managers\EventsMan.cs" />
     <Compile Include="Commands\IEntityCommand.cs" />
     <Compile Include="Commands\IMsgHandler.cs" />
@@ -116,6 +120,14 @@
     <Compile Include="Managers\IScriptMan.cs" />
     <Compile Include="Managers\LuaScriptMan.cs" />
     <Compile Include="Managers\ShapeMan.cs" />
+    <Compile Include="Modules\Animation\Commands\PauseAnimCommand.cs" />
+    <Compile Include="Modules\Animation\Commands\PlayAnimCommand.cs" />
+    <Compile Include="Modules\Animation\Commands\SetAnimCommand.cs" />
+    <Compile Include="Modules\Animation\Commands\StopAnimCommand.cs" />
+    <Compile Include="Modules\Animation\Events\AnimChangedEventArgs.cs" />
+    <Compile Include="Modules\Animation\Events\AnimStoppedEventArgs.cs" />
+    <Compile Include="Modules\Animation\Helpers\Animation.cs" />
+    <Compile Include="Modules\Animation\Systems\AnimationSystem.cs" />
     <Compile Include="Modules\BaseCoreModule.cs" />
     <Compile Include="Scripting\IScriptFunc.cs" />
     <Compile Include="Scripting\LuaScriptFunc.cs" />
@@ -140,8 +152,6 @@
     <Compile Include="Managers\JobMan.cs" />
     <Compile Include="MathTools.cs" />
     <Compile Include="Modules\Animation\Helpers\IAnimation.cs" />
-    <Compile Include="Managers\IAnimMan.cs" />
-    <Compile Include="Modules\Animation\IAnimationModule.cs" />
     <Compile Include="Modules\Audio\Components\IAudioComponent.cs" />
     <Compile Include="Modules\Audio\Components\ISoundEmiter.cs" />
     <Compile Include="Modules\Audio\Helpers\ISound.cs" />
@@ -172,7 +182,6 @@
     <Compile Include="Common\Components\VelocityComponent.cs" />
     <Compile Include="Common\Components\PositionComponent.cs" />
     <Compile Include="Common\Components\DirectionComponent.cs" />
-    <Compile Include="Modules\Animation\Systems\IAnimationSystem.cs" />
     <Compile Include="Modules\Physics\IPhysicsSystem.cs" />
     <Compile Include="Modules\Audio\Systems\IAudioSystem.cs" />
     <Compile Include="Systems\IRenderableSystem.cs" />

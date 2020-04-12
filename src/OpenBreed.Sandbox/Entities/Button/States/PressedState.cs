@@ -1,17 +1,9 @@
-﻿using OpenBreed.Core.Common.Components;
-
-using OpenBreed.Core.Common.Systems;
+﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
-using System;
-using System.Linq;
-using OpenBreed.Core.Commands;
-using OpenBreed.Sandbox.Entities.Door.States;
 
 namespace OpenBreed.Sandbox.Entities.Button.States
 {
@@ -19,7 +11,7 @@ namespace OpenBreed.Sandbox.Entities.Button.States
     {
         #region Private Fields
 
-    private readonly int stampId;
+        private readonly int stampId;
 
         #endregion Private Fields
 

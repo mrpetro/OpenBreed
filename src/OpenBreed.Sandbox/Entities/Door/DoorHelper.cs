@@ -35,25 +35,25 @@ namespace OpenBreed.Sandbox.Entities.Door
 
         public static void CreateAnimations(ICore core)
         {
-            var horizontalDoorOpening = core.Animations.Anims.Create<int>("Animations/Door/Horizontal/Opening");
+            var horizontalDoorOpening = core.Animations.Create<int>("Animations/Door/Horizontal/Opening");
             horizontalDoorOpening.AddFrame(0, 1.0f);
             horizontalDoorOpening.AddFrame(1, 1.0f);
             horizontalDoorOpening.AddFrame(2, 1.0f);
             horizontalDoorOpening.AddFrame(3, 1.0f);
             horizontalDoorOpening.AddFrame(4, 1.0f);
-            var horizontalDoorClosing = core.Animations.Anims.Create<int>("Animations/Door/Horizontal/Closing");
+            var horizontalDoorClosing = core.Animations.Create<int>("Animations/Door/Horizontal/Closing");
             horizontalDoorClosing.AddFrame(4, 1.0f);
             horizontalDoorClosing.AddFrame(3, 1.0f);
             horizontalDoorClosing.AddFrame(2, 1.0f);
             horizontalDoorClosing.AddFrame(1, 1.0f);
             horizontalDoorClosing.AddFrame(0, 1.0f);
-            var verticalDoorOpening = core.Animations.Anims.Create<int>("Animations/Door/Vertical/Opening");
+            var verticalDoorOpening = core.Animations.Create<int>("Animations/Door/Vertical/Opening");
             verticalDoorOpening.AddFrame(0, 1.0f);
             verticalDoorOpening.AddFrame(1, 1.0f);
             verticalDoorOpening.AddFrame(2, 1.0f);
             verticalDoorOpening.AddFrame(3, 1.0f);
             verticalDoorOpening.AddFrame(4, 1.0f);
-            var verticalDoorClosing = core.Animations.Anims.Create<int>("Animations/Door/Vertical/Closing");
+            var verticalDoorClosing = core.Animations.Create<int>("Animations/Door/Vertical/Closing");
             verticalDoorClosing.AddFrame(1, 1.0f);
             verticalDoorClosing.AddFrame(1, 1.0f);
             verticalDoorClosing.AddFrame(2, 1.0f);

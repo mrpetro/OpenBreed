@@ -1,4 +1,6 @@
-﻿namespace OpenBreed.Core.Modules.Animation.Helpers
+﻿using OpenBreed.Core.Modules.Animation.Components;
+
+namespace OpenBreed.Core.Modules.Animation.Helpers
 {
     /// <summary>
     /// Transition methods between frames
@@ -24,7 +26,7 @@
         string Name { get; }
         float Length { get; }
 
-        bool TryGetNextFrame(float time, object currentFrame, out object nextFrame, FrameTransition transition = FrameTransition.None);
+        bool TryGetNextFrame(Animator animator, out object nextFrame);
 
         #endregion Public Properties
     }

@@ -1,8 +1,9 @@
 ﻿using OpenBreed.Core.Common.Builders;
 using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Modules.Animation.Components;
+using OpenBreed.Core.Common.Components;
 using System;
 using System.Collections.Generic;
+using OpenBreed.Core.Modules.Animation.Components;
 
 namespace OpenBreed.Core.Modules.Animation.Builders
 {
@@ -58,7 +59,7 @@ namespace OpenBreed.Core.Modules.Animation.Builders
             if (value is int)
                 return (int)value;
 
-            return Core.Animations.Anims.GetByName(Convert.ToString(value)).Id;
+            return Core.Animations.GetByName(Convert.ToString(value)).Id;
         }
 
         #endregion Private Methods
