@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Modules.Animation.Helpers;
+﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Animation.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,9 +35,9 @@ namespace OpenBreed.Core.Managers
 
         #region Public Methods
 
-        public IAnimation<T> Create<T>(string name)
+        public IAnimation<T> Create<T>(string name, Action<IEntity, T> frameUpdateAction)
         {
-            var newAnimationData = new Animation<T>(items.Count, name);
+            var newAnimationData = new Animation<T>(items.Count, name, frameUpdateAction);
             items.Add(newAnimationData);
             return newAnimationData;
         }

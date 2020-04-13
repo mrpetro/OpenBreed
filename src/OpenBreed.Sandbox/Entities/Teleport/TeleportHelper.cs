@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenBreed.Core.Modules.Physics.Events;
+using OpenBreed.Core.Modules.Rendering.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Teleport
 {
@@ -50,12 +51,17 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         public static void CreateAnimations(ICore core)
         {
-            var animationTeleportEntry = core.Animations.Create<int>(ANIMATION_TELEPORT_ENTRY);
+            var animationTeleportEntry = core.Animations.Create<int>(ANIMATION_TELEPORT_ENTRY, OnFrameUpdate);
             animationTeleportEntry.AddFrame(0, 1.0f);
             animationTeleportEntry.AddFrame(1, 1.0f);
             animationTeleportEntry.AddFrame(2, 1.0f);
             animationTeleportEntry.AddFrame(3, 1.0f);
 
+        }
+
+        private static void OnFrameUpdate(IEntity entity, int nextValue)
+        {
+            entity.PostCommand(new SpriteSetCommand(entity.Id, nextValue));
         }
 
         public static IEntity AddTeleportEntry(World world, int x, int y, int pairId)
@@ -68,7 +74,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
             teleportEntry.GetComponent<PositionComponent>().Value = new Vector2( 16 * x, 16 * y);
 
-            teleportEntry.Subscribe<AnimChangedEventArgs>(OnFrameChanged);
+            //teleportEntry.Subscribe<AnimChangedEventArgs>(OnFrameChanged);
             teleportEntry.Subscribe<CollisionEventArgs>(OnCollision);
             world.AddEntity(teleportEntry);
 
@@ -85,7 +91,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
             teleportExit.GetComponent<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
 
-            teleportExit.Subscribe<AnimChangedEventArgs>(OnFrameChanged);
+            //teleportExit.Subscribe<AnimChangedEventArgs>(OnFrameChanged);
 
             world.AddEntity(teleportExit);
 
@@ -96,12 +102,12 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         #region Private Methods
 
-        private static void OnFrameChanged(object sender, AnimChangedEventArgs e)
-        {
-            var entity = (IEntity)sender;
-            var sprite = entity.GetComponent<SpriteComponent>();
-            sprite.ImageId = (int)e.Frame;
-        }
+        //private static void OnFrameChanged(object sender, AnimChangedEventArgs e)
+        //{
+        //    var entity = (IEntity)sender;
+        //    var sprite = entity.GetComponent<SpriteComponent>();
+        //    sprite.ImageId = (int)e.Frame;
+        //}
 
         private static void OnCollision(object sender, CollisionEventArgs args)
         {

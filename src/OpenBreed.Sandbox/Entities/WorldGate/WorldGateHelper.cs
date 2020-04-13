@@ -48,18 +48,10 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
             teleportEntity.GetComponent<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
             teleportEntity.Subscribe<CollisionEventArgs>(OnCollision);
-            teleportEntity.Subscribe<AnimChangedEventArgs>(OnFrameChanged);
 
             world.AddEntity(teleportEntity);
 
             return teleportEntity;
-        }
-
-        private static void OnFrameChanged(object sender, AnimChangedEventArgs e)
-        {
-            var entity = (IEntity)sender;
-            var sprite = entity.GetComponent<SpriteComponent>();
-            sprite.ImageId = (int)e.Frame;
         }
 
         public static IEntity AddWorldEntry(World world, int x, int y, int entryId)
@@ -68,7 +60,6 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             var teleportEntity = core.Entities.CreateFromTemplate("WorldGateEntry");
             teleportEntity.Tag = new WorldGatePair() { Id = entryId };
             teleportEntity.GetComponent<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
-            teleportEntity.Subscribe<AnimChangedEventArgs>(OnFrameChanged);
 
             world.AddEntity(teleportEntity);
 

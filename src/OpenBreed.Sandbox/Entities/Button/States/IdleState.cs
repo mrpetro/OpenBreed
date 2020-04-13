@@ -45,7 +45,6 @@ namespace OpenBreed.Sandbox.Entities.Button.States
             Entity.PostCommand(new PlayAnimCommand(Entity.Id, animationId, 0));
             Entity.PostCommand(new TextSetCommand(Entity.Id, 0, "Door - Opening"));
 
-            Entity.Subscribe<AnimChangedEventArgs>(OnAnimChanged);
             Entity.Subscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
 
@@ -56,18 +55,12 @@ namespace OpenBreed.Sandbox.Entities.Button.States
 
         public void LeaveState()
         {
-            Entity.Unsubscribe<AnimChangedEventArgs>(OnAnimChanged);
             Entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
 
         #endregion Public Methods
 
         #region Private Methods
-
-        private void OnAnimChanged(object sender, AnimChangedEventArgs e)
-        {
-            Entity.PostCommand(new SpriteSetCommand(Entity.Id, (int)e.Frame));
-        }
 
         private void OnAnimStopped(object sender, AnimStoppedEventArgs eventArgs)
         {

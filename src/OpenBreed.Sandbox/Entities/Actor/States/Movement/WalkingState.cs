@@ -56,7 +56,6 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             Entity.PostCommand(new PlayAnimCommand(Entity.Id, $"{animPrefix}/{Id}/{animDirPostfix}", 0));
             Entity.PostCommand(new TextSetCommand(Entity.Id, 0, String.Join(", ", Entity.CurrentStateNames.ToArray())));
 
-            Entity.Subscribe<AnimChangedEventArgs>(OnFrameChanged);
             Entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
      
@@ -69,18 +68,12 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         public void LeaveState()
         {
-            Entity.Unsubscribe<AnimChangedEventArgs>(OnFrameChanged);
             Entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
         #endregion Public Methods
 
         #region Private Methods
-
-        private void OnFrameChanged(object sender, AnimChangedEventArgs e)
-        {
-            sprite.ImageId = (int)e.Frame;
-        }
 
         private void OnControlDirectionChanged(object sender, ControlDirectionChangedEventArgs e)
         {

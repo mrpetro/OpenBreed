@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Modules.Animation.Components;
+﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Animation.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +11,17 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
         #region Private Fields
 
         private SortedDictionary<float, T> frames = new SortedDictionary<float, T>();
+        private Action<IEntity, T> frameUpdateAction;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal Animation(int id, string name)
+        internal Animation(int id, string name, Action<IEntity, T> frameUpdateAction)
         {
             Id = id;
             Name = name;
+            this.frameUpdateAction = frameUpdateAction;
         }
 
         #endregion Internal Constructors
@@ -27,14 +30,13 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
 
         public int Id { get; }
         public string Name { get; }
-
         public float Length { get { return frames.Last().Key; } }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public bool TryGetNextFrame(Animator animator, out object nextFrame)
+        public bool UpdateWithNextFrame(IEntity entity, Animator animator, out object nextFrame)
         {
             T cf = default(T);
 
@@ -45,7 +47,12 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
 
             nextFrame = nf;
 
-            return !cf.Equals(nf);
+            var update = !cf.Equals(nf);
+
+            if (update)
+                frameUpdateAction.Invoke(entity, nf);
+
+            return update;
         }
 
         public T GetFrame(float time, FrameTransition transition = FrameTransition.None)

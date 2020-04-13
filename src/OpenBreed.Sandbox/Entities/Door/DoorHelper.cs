@@ -8,6 +8,7 @@ using OpenBreed.Core.Events;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Events;
+using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
@@ -35,31 +36,37 @@ namespace OpenBreed.Sandbox.Entities.Door
 
         public static void CreateAnimations(ICore core)
         {
-            var horizontalDoorOpening = core.Animations.Create<int>("Animations/Door/Horizontal/Opening");
+            var horizontalDoorOpening = core.Animations.Create<int>("Animations/Door/Horizontal/Opening", OnFrameUpdate);
             horizontalDoorOpening.AddFrame(0, 1.0f);
             horizontalDoorOpening.AddFrame(1, 1.0f);
             horizontalDoorOpening.AddFrame(2, 1.0f);
             horizontalDoorOpening.AddFrame(3, 1.0f);
             horizontalDoorOpening.AddFrame(4, 1.0f);
-            var horizontalDoorClosing = core.Animations.Create<int>("Animations/Door/Horizontal/Closing");
+            var horizontalDoorClosing = core.Animations.Create<int>("Animations/Door/Horizontal/Closing", OnFrameUpdate);
             horizontalDoorClosing.AddFrame(4, 1.0f);
             horizontalDoorClosing.AddFrame(3, 1.0f);
             horizontalDoorClosing.AddFrame(2, 1.0f);
             horizontalDoorClosing.AddFrame(1, 1.0f);
             horizontalDoorClosing.AddFrame(0, 1.0f);
-            var verticalDoorOpening = core.Animations.Create<int>("Animations/Door/Vertical/Opening");
+            var verticalDoorOpening = core.Animations.Create<int>("Animations/Door/Vertical/Opening", OnFrameUpdate);
             verticalDoorOpening.AddFrame(0, 1.0f);
             verticalDoorOpening.AddFrame(1, 1.0f);
             verticalDoorOpening.AddFrame(2, 1.0f);
             verticalDoorOpening.AddFrame(3, 1.0f);
             verticalDoorOpening.AddFrame(4, 1.0f);
-            var verticalDoorClosing = core.Animations.Create<int>("Animations/Door/Vertical/Closing");
+            var verticalDoorClosing = core.Animations.Create<int>("Animations/Door/Vertical/Closing", OnFrameUpdate);
             verticalDoorClosing.AddFrame(1, 1.0f);
             verticalDoorClosing.AddFrame(1, 1.0f);
             verticalDoorClosing.AddFrame(2, 1.0f);
             verticalDoorClosing.AddFrame(3, 1.0f);
             verticalDoorClosing.AddFrame(4, 1.0f);
         }
+
+        private static void OnFrameUpdate(IEntity entity, int nextValue)
+        {
+            entity.PostCommand(new SpriteSetCommand(entity.Id, nextValue));
+        }
+
 
         public static void CreateHorizontalFSM(ICore core)
         {

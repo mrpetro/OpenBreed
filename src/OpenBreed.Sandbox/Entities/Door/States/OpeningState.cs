@@ -45,13 +45,13 @@ namespace OpenBreed.Sandbox.Components.States
             entity.PostCommand(new PlayAnimCommand(entity.Id, animationId, 0));
             entity.PostCommand(new TextSetCommand(entity.Id, 0, "Door - Opening"));
 
-            entity.Subscribe<AnimChangedEventArgs>(OnAnimChanged);
+            //entity.Subscribe<AnimChangedEventArgs>(OnAnimChanged);
             entity.Subscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
 
         public void LeaveState(IEntity entity)
         {
-            entity.Unsubscribe<AnimChangedEventArgs>(OnAnimChanged);
+            //entity.Unsubscribe<AnimChangedEventArgs>(OnAnimChanged);
             entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
 
@@ -59,12 +59,12 @@ namespace OpenBreed.Sandbox.Components.States
 
         #region Private Methods
 
-        private void OnAnimChanged(object sender, AnimChangedEventArgs e)
-        {
-            var entity = sender as IEntity;
+        //private void OnAnimChanged(object sender, AnimChangedEventArgs e)
+        //{
+        //    var entity = sender as IEntity;
 
-            entity.PostCommand(new SpriteSetCommand(entity.Id, (int)e.Frame));
-        }
+        //    entity.PostCommand(new SpriteSetCommand(entity.Id, (int)e.Frame));
+        //}
 
         private void OnAnimStopped(object sender, AnimStoppedEventArgs e)
         {

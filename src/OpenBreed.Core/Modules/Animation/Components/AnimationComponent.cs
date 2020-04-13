@@ -1,8 +1,7 @@
 ﻿using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Common.Builders;
+using OpenBreed.Core.Modules.Animation.Builders;
 using OpenBreed.Core.Modules.Animation.Helpers;
 using System.Collections.Generic;
-using OpenBreed.Core.Modules.Animation.Builders;
 
 namespace OpenBreed.Core.Modules.Animation.Components
 {
@@ -49,7 +48,7 @@ namespace OpenBreed.Core.Modules.Animation.Components
 
             Items = new List<Animator>(new Animator[]
             {
-                new Animator(10)
+                new Animator(0)
                 {
                     Speed = speed,
                     Loop = loop,
@@ -74,7 +73,7 @@ namespace OpenBreed.Core.Modules.Animation.Components
 
             Items = new List<Animator>(new Animator[]
             {
-                new Animator(10)
+                new Animator(0)
                 {
                     Speed = builder.Speed,
                     Loop = builder.Loop,

@@ -47,8 +47,6 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
             Entity.PostCommand(new PlayAnimCommand(Entity.Id, animPrefix + animDirName, 0));
             Entity.PostCommand(new TextSetCommand(Entity.Id, 0, "Projectile - Fired"));
             Entity.Subscribe<CollisionEventArgs>(OnCollision);
-
-            Entity.Subscribe<AnimChangedEventArgs>(OnFrameChanged);
         }
 
         public void Initialize(IEntity entity)
@@ -60,17 +58,11 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
 
         public void LeaveState()
         {
-            Entity.Unsubscribe<AnimChangedEventArgs>(OnFrameChanged);
         }
 
         #endregion Public Methods
 
         #region Private Methods
-
-        private void OnFrameChanged(object sender, AnimChangedEventArgs e)
-        {
-            sprite.ImageId = (int)e.Frame;
-        }
 
         private void OnCollision(object sender, CollisionEventArgs e)
         {

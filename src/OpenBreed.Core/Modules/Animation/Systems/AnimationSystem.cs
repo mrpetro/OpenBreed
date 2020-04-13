@@ -180,7 +180,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
             object nextFrame;
 
-            if (data.TryGetNextFrame(animator, out nextFrame))
+            if (data.UpdateWithNextFrame(entity, animator, out nextFrame))
             {
                 animator.Frame = nextFrame;
                 RaiseAnimChangedEvent(entity, animator);

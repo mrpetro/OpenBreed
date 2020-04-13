@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Modules.Animation.Components;
+﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Animation.Components;
 
 namespace OpenBreed.Core.Modules.Animation.Helpers
 {
@@ -26,9 +27,13 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
         string Name { get; }
         float Length { get; }
 
-        bool TryGetNextFrame(Animator animator, out object nextFrame);
-
         #endregion Public Properties
+
+        #region Public Methods
+
+        bool UpdateWithNextFrame(IEntity entity, Animator animator, out object nextFrame);
+
+        #endregion Public Methods
     }
 
     public interface IAnimation<T> : IAnimation
