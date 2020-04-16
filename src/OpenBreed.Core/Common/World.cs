@@ -56,7 +56,6 @@ namespace OpenBreed.Core.Common
             Components = new ComponentsMan();
             commandHandler = new CommandHandler(this);
             msgHandlerRelay = new MsgHandlerRelay(this);
-            RegisterHandler(EntitySetStateCommand.TYPE, commandHandler);
 
             Core.Worlds.RegisterWorld(this);
 
@@ -122,9 +121,6 @@ namespace OpenBreed.Core.Common
         {
             switch (cmd.Type)
             {
-                case EntitySetStateCommand.TYPE:
-                    return HandleStateChangeCommand(sender, (EntitySetStateCommand)cmd);
-
                 case WorldSetPauseCommand.TYPE:
                     return HandleWorldPauseCommand(sender, (WorldSetPauseCommand)cmd);
 
@@ -260,18 +256,6 @@ namespace OpenBreed.Core.Common
         {
             for (int i = 0; i < systems.Count; i++)
                 systems[i].Initialize(this);
-        }
-
-        private bool HandleStateChangeCommand(object sender, EntitySetStateCommand cmd)
-        {
-            var entity = Core.Entities.GetById(cmd.EntityId);
-
-            var fsm = entity.FsmList.FirstOrDefault(item => item.Name == cmd.FsmName);
-
-            if (fsm != null)
-                fsm.Handle(sender, cmd);
-
-            return true;
         }
 
         private bool HandleWorldPauseCommand(object sender, WorldSetPauseCommand cmd)

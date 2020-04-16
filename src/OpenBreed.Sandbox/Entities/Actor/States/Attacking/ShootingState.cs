@@ -34,7 +34,8 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         public void EnterState(IEntity entity)
         {
             //Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            entity.PostCommand(new TextSetCommand(entity.Id, 0, string.Join(", ", entity.CurrentStateNames.ToArray())));
+            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
+            entity.PostCommand(new TextSetCommand(entity.Id, 0, string.Join(", ", currentStateNames.ToArray())));
 
             var pos = entity.GetComponent<PositionComponent>().Value;
             pos += new Vector2(8,8);

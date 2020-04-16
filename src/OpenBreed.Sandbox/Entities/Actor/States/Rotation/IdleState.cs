@@ -14,50 +14,41 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 {
-    public class IdleState : IState<RotationState, RotationImpulse>
+    public class IdleState : IStateEx<RotationState, RotationImpulse>
     {
-        public IEntity Entity { get; private set; }
-
         public IdleState()
         {
         }
 
-        public RotationState Id => RotationState.Idle;
+        public int Id => (int)RotationState.Idle;
+        public int FsmId { get; set; }
 
-        public void EnterState()
+        public void EnterState(IEntity entity)
         {
             // Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
+            entity.PostCommand(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
-            Entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
+            entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
-        public void Initialize(IEntity entity)
+        public void LeaveState(IEntity entity)
         {
-            Entity = entity;
-        }
-
-        public void LeaveState()
-        {
-            Entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
-        }
-
-        public RotationState Process(RotationImpulse impulse, object[] arguments)
-        {
-            throw new InvalidOperationException();
+            entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
         private void OnControlDirectionChanged(object sender, ControlDirectionChangedEventArgs e)
         {
+            var entity = sender as IEntity;
+
             if (e.Direction != Vector2.Zero)
             {
-                var dir = Entity.GetComponent<DirectionComponent>();
+                var dir = entity.GetComponent<DirectionComponent>();
 
                 if (dir.Value != e.Direction)
                 {
                     dir.Value = e.Direction;
-                    //Entity.Impulse<RotationState, RotationImpulse>(RotationImpulse.Rotate);
-                    Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "RotationState", "Rotate"));
+                    entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)RotationImpulse.Rotate));
                 }
             }
         }

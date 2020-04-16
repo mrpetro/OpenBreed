@@ -137,7 +137,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         public static void CreateAttackingFSM(ICore core)
         {
-            var stateMachine = core.StateMachines.Create<AttackingState, AttackingImpulse>("Actor.Attack");
+            var stateMachine = core.StateMachines.Create<AttackingState, AttackingImpulse>("Actor.Attacking");
 
             stateMachine.AddState(new States.Attacking.ShootingState());
             stateMachine.AddState(new States.Attacking.IdleState());
@@ -150,19 +150,17 @@ namespace OpenBreed.Sandbox.Entities.Actor
             stateMachine.AddTransition(AttackingState.Idle, AttackingImpulse.Shoot, AttackingState.Shooting);
         }
 
-        public static StateMachine<RotationState, RotationImpulse> CreateRotationFSM(IEntity entity)
+        public static void CreateRotationFSM(ICore core)
         {
-            var stateMachine = entity.AddFsm<RotationState, RotationImpulse>();
+            var stateMachine = core.StateMachines.Create<RotationState, RotationImpulse>("Actor.Rotation");
 
             stateMachine.AddState(new States.Rotation.IdleState());
-            stateMachine.AddState(new RotatingState("Animations/Actor"));
+            stateMachine.AddState(new States.Rotation.RotatingState("Animations/Actor"));
 
             stateMachine.AddTransition(RotationState.Rotating, RotationImpulse.Stop , RotationState.Idle);
             stateMachine.AddTransition(RotationState.Idle, RotationImpulse.Rotate, RotationState.Rotating);
 
             stateMachine.AddOnEnterState(RotationState.Idle, RotationImpulse.Stop, OnStop);
-
-            return stateMachine;
         }
 
         private static void OnStop()
@@ -170,17 +168,16 @@ namespace OpenBreed.Sandbox.Entities.Actor
             //Console.WriteLine("Rotation -> Stopped");
         }
 
-        public static StateMachine<MovementState, MovementImpulse> CreateMovementFSM(IEntity entity)
+        public static void CreateMovementFSM(ICore core)
         {
-            var stateMachine = entity.AddFsm<MovementState, MovementImpulse>();
+            var stateMachine = core.StateMachines.Create<MovementState, MovementImpulse>("Actor.Movement");
 
             stateMachine.AddState(new StandingState("Animations/Actor"));
             stateMachine.AddState(new WalkingState("Animations/Actor"));
 
             stateMachine.AddTransition(MovementState.Walking, MovementImpulse.Stop, MovementState.Standing);
             stateMachine.AddTransition(MovementState.Standing, MovementImpulse.Walk, MovementState.Walking);
-
-            return stateMachine;
+            stateMachine.AddTransition(MovementState.Walking, MovementImpulse.Walk, MovementState.Walking);
         }
     }
 }

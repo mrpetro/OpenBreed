@@ -20,17 +20,12 @@ namespace OpenBreed.Core.Entities
 
         private readonly List<IEntityComponent> components = new List<IEntityComponent>();
 
-        private List<IStateMachine> fsmList;
-
         #endregion Private Fields
 
         #region Internal Constructors
 
         internal Entity(ICore core, List<IEntityComponent> initialComponents)
         {
-            fsmList = new List<IStateMachine>();
-            FsmList = new ReadOnlyCollection<IStateMachine>(fsmList);
-
             Core = core ?? throw new ArgumentNullException(nameof(core));
 
             components = initialComponents ?? new List<IEntityComponent>();
@@ -42,7 +37,6 @@ namespace OpenBreed.Core.Entities
         #region Public Properties
 
         public ReadOnlyCollection<IEntityComponent> Components { get; }
-        public ReadOnlyCollection<IStateMachine> FsmList { get; }
 
         public ICore Core { get; }
 
@@ -57,8 +51,6 @@ namespace OpenBreed.Core.Entities
 
         public object DebugData { get; set; }
 
-        public IEnumerable<string> CurrentStateNames => FsmList.Select(item => item.ToString());
-
         #endregion Public Properties
 
         #region Public Methods
@@ -68,13 +60,6 @@ namespace OpenBreed.Core.Entities
         //    var sm = FsmList.OfType<StateMachine<TState, TImpulse>>().FirstOrDefault();
         //    sm.Perform(impulse);
         //}
-
-        public StateMachine<TState, TImpulse> AddFsm<TState, TImpulse>() where TState : struct, IConvertible where TImpulse : struct, IConvertible
-        {
-            var newFsm = new StateMachine<TState, TImpulse>(this);
-            fsmList.Add(newFsm);
-            return newFsm;
-        }
 
         public T TryGetComponent<T>()
         {
@@ -142,14 +127,9 @@ namespace OpenBreed.Core.Entities
 
         internal void Deinitialize()
         {
-            foreach (var fsm in fsmList)
-                fsm.Deinitialize();
-
             var from = World;
-
             //Forget the world in which entity was
             World = null;
-
             OnLeftWorld(from);
         }
 
@@ -157,10 +137,6 @@ namespace OpenBreed.Core.Entities
         {
             //Remember in what world entity is
             World = world;
-
-            foreach (var fsm in fsmList)
-                fsm.Initialize();
-
             OnEnteredWorld(World);
         }
 

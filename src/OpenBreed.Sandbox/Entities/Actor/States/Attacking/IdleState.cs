@@ -27,7 +27,9 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         public void EnterState(IEntity entity)
         {
             Console.WriteLine("Enter Idle");
-            entity.PostCommand(new TextSetCommand(entity.Id, 0, String.Join(", ", entity.CurrentStateNames.ToArray())));
+
+            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
+            entity.PostCommand(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
             entity.Subscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
         }

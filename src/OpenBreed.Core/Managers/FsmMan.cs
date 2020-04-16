@@ -3,6 +3,7 @@ using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.States;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Core.Managers
@@ -43,6 +44,23 @@ namespace OpenBreed.Core.Managers
         public IStateMachineEx GetByName(string name)
         {
             return list.Items.FirstOrDefault(item => item.Name == name);
+        }
+
+        public string GetStateName(int fsmId, int stateId)
+        {
+            var fsm = GetById(fsmId);
+            return fsm.GetStateName(stateId);
+        }
+
+        public string GetStateName(MachineState state)
+        {
+            return GetStateName(state.FsmId, state.StateId);
+        }
+
+        public IEnumerable<string> GetStateNames(IEntity entity)
+        {
+            var fsmComponent = entity.GetComponent<FsmComponent>();
+            return fsmComponent.States.Select(item => GetStateName(item));
         }
 
         public StateMachineEx<TState, TImpulse> Create<TState, TImpulse>(string name) where TState : Enum where TImpulse : Enum

@@ -14,12 +14,11 @@ using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 {
-    public class StandingState : IState<MovementState, MovementImpulse>
+    public class StandingState : IStateEx<MovementState, MovementImpulse>
     {
         #region Private Fields
 
-    private readonly string animPrefix;
-        private ThrustComponent thrust;
+        private readonly string animPrefix;
 
         #endregion Private Fields
 
@@ -34,38 +33,35 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         #region Public Properties
 
-        public IEntity Entity { get; private set; }
-        public MovementState Id => MovementState.Standing;
+        public int Id => (int)MovementState.Standing;
+        public int FsmId { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-
-
-        public void EnterState()
+        public void EnterState(IEntity entity)
         {
-            var direction = Entity.GetComponent<DirectionComponent>().Value;
+            var direction = entity.GetComponent<DirectionComponent>().Value;
 
             var animDirName = AnimHelper.ToDirectionName(direction);
 
+            var thrust = entity.GetComponent<ThrustComponent>();
+
             thrust.Value = Vector2.Zero;
 
-            Entity.PostCommand(new PlayAnimCommand(Entity.Id,  $"{animPrefix}/{Id}/{animDirName}", 0));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
+            entity.PostCommand(new PlayAnimCommand(entity.Id,  $"{animPrefix}/{stateName}/{animDirName}", 0));
 
-            Entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
+            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
+            entity.PostCommand(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
+
+            entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
-        public void Initialize(IEntity entity)
+        public void LeaveState(IEntity entity)
         {
-            Entity = entity;
-            thrust = entity.GetComponent<ThrustComponent>();
-        }
-
-        public void LeaveState()
-        {
-            Entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
+            entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
         #endregion Public Methods
@@ -74,9 +70,10 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         private void OnControlDirectionChanged(object sender, ControlDirectionChangedEventArgs eventArgs)
         {
+            var entity = sender as IEntity;
+
             if (eventArgs.Direction != Vector2.Zero)
-                //Entity.Impulse<MovementState, MovementImpulse>(MovementImpulse.Walk);
-                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "MovementState", "Walk"));
+                entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)MovementImpulse.Walk));
         }
 
         #endregion Private Methods

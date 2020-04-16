@@ -128,7 +128,7 @@ namespace OpenBreed.Core.Systems
                 var fromStateName = fsm.GetStateName(fsmData.StateId);
                 var impulseName = fsm.GetImpulseName(message.ImpulseId);
 
-                Core.Logging.Warning($"Entity '{message.EntityId}' has missing FSM transition from state '{fsmData.StateId}' using impulse '{message.ImpulseId}'.");
+                Core.Logging.Warning($"Entity '{message.EntityId}' has missing FSM transition from state '{fromStateName}' using impulse '{impulseName}'.");
                 return false;
             }
 

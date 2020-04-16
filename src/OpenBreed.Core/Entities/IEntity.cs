@@ -17,16 +17,6 @@ namespace OpenBreed.Core.Entities
         #region Public Properties
 
         /// <summary>
-        /// Read-only list of state machines
-        /// </summary>
-        ReadOnlyCollection<IStateMachine> FsmList { get; }
-
-        /// <summary>
-        /// Enumeration of all current state names
-        /// </summary>
-        IEnumerable<string> CurrentStateNames { get; }
-
-        /// <summary>
         /// Core reference
         /// </summary>
         ICore Core { get; }
@@ -80,8 +70,6 @@ namespace OpenBreed.Core.Entities
         /// <typeparam name="T">Type of component to get </typeparam>
         /// <returns>Entity component if exists, throws exception if not</returns>
         T GetComponent<T>();
-
-        StateMachine<TState, TImpulse> AddFsm<TState, TImpulse>() where TState : struct, IConvertible where TImpulse : struct, IConvertible;
 
         /// <summary>
         /// Post command of specific type
