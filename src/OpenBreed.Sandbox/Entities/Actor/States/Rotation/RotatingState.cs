@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 {
-    public class RotatingState : IStateEx<RotationState, RotationImpulse>
+    public class RotatingState : IState<RotationState, RotationImpulse>
     {
         #region Private Fields
 

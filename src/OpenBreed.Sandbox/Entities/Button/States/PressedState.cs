@@ -7,7 +7,7 @@ using OpenBreed.Core.States;
 
 namespace OpenBreed.Sandbox.Entities.Button.States
 {
-    public class PressedState : IStateEx<ButtonState, ButtonImpulse>
+    public class PressedState : IState<ButtonState, ButtonImpulse>
     {
         #region Private Fields
 

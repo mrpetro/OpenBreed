@@ -12,7 +12,7 @@ namespace OpenBreed.Core.Managers
     {
         #region Private Fields
 
-        private IdMap<IStateMachineEx> list = new IdMap<IStateMachineEx>();
+        private IdMap<IStateMachine> list = new IdMap<IStateMachine>();
 
         #endregion Private Fields
 
@@ -33,15 +33,15 @@ namespace OpenBreed.Core.Managers
 
         #region Public Methods
 
-        public IStateMachineEx GetById(int id)
+        public IStateMachine GetById(int id)
         {
-            if (list.TryGetValue(id, out IStateMachineEx fsm))
+            if (list.TryGetValue(id, out IStateMachine fsm))
                 return fsm;
             else
                 throw new InvalidOperationException($"State machine with ID '{id}' not found.");
         }
 
-        public IStateMachineEx GetByName(string name)
+        public IStateMachine GetByName(string name)
         {
             return list.Items.FirstOrDefault(item => item.Name == name);
         }
@@ -63,9 +63,9 @@ namespace OpenBreed.Core.Managers
             return fsmComponent.States.Select(item => GetStateName(item));
         }
 
-        public StateMachineEx<TState, TImpulse> Create<TState, TImpulse>(string name) where TState : Enum where TImpulse : Enum
+        public StateMachine<TState, TImpulse> Create<TState, TImpulse>(string name) where TState : Enum where TImpulse : Enum
         {
-            var newFsm = new StateMachineEx<TState, TImpulse>(name);
+            var newFsm = new StateMachine<TState, TImpulse>(name);
             newFsm.Id = list.Add(newFsm);
             return newFsm;
         }

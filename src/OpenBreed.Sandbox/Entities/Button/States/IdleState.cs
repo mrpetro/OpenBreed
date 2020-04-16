@@ -12,7 +12,7 @@ using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Button.States
 {
-    public class IdleState : IStateEx<ButtonState, ButtonImpulse>
+    public class IdleState : IState<ButtonState, ButtonImpulse>
     {
         public  const string NAME = "Idle";
 

@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {
-    public class IdleState : IStateEx<AttackingState, AttackingImpulse>
+    public class IdleState : IState<AttackingState, AttackingImpulse>
     {
         public IdleState()
         {

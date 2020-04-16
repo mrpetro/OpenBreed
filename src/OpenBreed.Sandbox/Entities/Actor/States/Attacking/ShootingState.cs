@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {
-    public class ShootingState : IStateEx<AttackingState, AttackingImpulse>
+    public class ShootingState : IState<AttackingState, AttackingImpulse>
     {
         #region Public Constructors
 

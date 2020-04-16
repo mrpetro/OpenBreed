@@ -18,7 +18,7 @@ using System;
 
 namespace OpenBreed.Sandbox.Components.States
 {
-    public class OpenedState : IStateEx<FunctioningState, FunctioningImpulse>
+    public class OpenedState : IState<FunctioningState, FunctioningImpulse>
     {
         #region Private Fields
 

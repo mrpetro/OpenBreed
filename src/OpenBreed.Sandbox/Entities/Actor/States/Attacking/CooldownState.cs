@@ -14,7 +14,7 @@ using System.Timers;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {
-    public class CooldownState : IStateEx<AttackingState, AttackingImpulse>
+    public class CooldownState : IState<AttackingState, AttackingImpulse>
     {
         private Timer timer;
 

@@ -15,7 +15,7 @@ using OpenBreed.Sandbox.Entities.Door.States;
 
 namespace OpenBreed.Sandbox.Components.States
 {
-    public class ClosedState : IStateEx<FunctioningState, FunctioningImpulse>
+    public class ClosedState : IState<FunctioningState, FunctioningImpulse>
     {
         #region Private Fields
 

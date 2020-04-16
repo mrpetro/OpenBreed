@@ -3,7 +3,7 @@ using System;
 
 namespace OpenBreed.Core.States
 {
-    public interface IStateEx
+    public interface IState
     {
         #region Public Properties
 
@@ -20,7 +20,7 @@ namespace OpenBreed.Core.States
         #endregion Public Methods
     }
 
-    public interface IStateEx<TState, TImpulse> : IStateEx where TState : Enum where TImpulse : Enum
+    public interface IState<TState, TImpulse> : IState where TState : Enum where TImpulse : Enum
     {
         int FsmId { get; set; }
     }

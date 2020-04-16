@@ -10,7 +10,7 @@ using OpenBreed.Sandbox.Helpers;
 
 namespace OpenBreed.Sandbox.Entities.Projectile.States
 {
-    public class FiredState : IStateEx<AttackingState, AttackingImpulse>
+    public class FiredState : IState<AttackingState, AttackingImpulse>
     {
         #region Private Fields
 

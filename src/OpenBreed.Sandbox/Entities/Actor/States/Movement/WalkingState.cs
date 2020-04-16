@@ -17,7 +17,7 @@ using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 {
-    public class WalkingState : IStateEx<MovementState, MovementImpulse>
+    public class WalkingState : IState<MovementState, MovementImpulse>
     {
         #region Private Fields
 

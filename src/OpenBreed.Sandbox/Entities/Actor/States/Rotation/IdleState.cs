@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 {
-    public class IdleState : IStateEx<RotationState, RotationImpulse>
+    public class IdleState : IState<RotationState, RotationImpulse>
     {
         public IdleState()
         {

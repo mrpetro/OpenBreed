@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace OpenBreed.Core.States
 {
-    public interface IStateMachineEx
+    public interface IStateMachine
     {
         #region Public Properties
 
@@ -234,11 +234,11 @@ namespace OpenBreed.Core.States
     //    #endregion Private Methods
     //}
 
-    public class StateMachineEx<TState, TImpulse> : IStateMachineEx where TState : Enum where TImpulse : Enum
+    public class StateMachine<TState, TImpulse> : IStateMachine where TState : Enum where TImpulse : Enum
     {
         #region Private Fields
 
-        private readonly Dictionary<TState, IStateEx<TState, TImpulse>> states = new Dictionary<TState, IStateEx<TState, TImpulse>>();
+        private readonly Dictionary<TState, IState<TState, TImpulse>> states = new Dictionary<TState, IState<TState, TImpulse>>();
         private readonly Dictionary<TState, Dictionary<TImpulse, TState>> transitions = new Dictionary<TState, Dictionary<TImpulse, TState>>();
         private readonly Dictionary<TState, Dictionary<TImpulse, Action>> onEnterActions = new Dictionary<TState, Dictionary<TImpulse, Action>>();
         private readonly Dictionary<TState, Dictionary<TImpulse, Action>> onLeaveActions = new Dictionary<TState, Dictionary<TImpulse, Action>>();
@@ -247,7 +247,7 @@ namespace OpenBreed.Core.States
 
         #region Internal Constructors
 
-        internal StateMachineEx(string name)
+        internal StateMachine(string name)
         {
             Name = name;
         }
@@ -268,7 +268,7 @@ namespace OpenBreed.Core.States
             return $"{Name}";
         }
 
-        public void AddState(IStateEx<TState, TImpulse> state)
+        public void AddState(IState<TState, TImpulse> state)
         {
             Debug.Assert(state != null, "State must not be null");
 
