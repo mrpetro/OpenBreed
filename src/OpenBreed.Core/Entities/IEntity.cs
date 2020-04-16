@@ -68,6 +68,13 @@ namespace OpenBreed.Core.Entities
         T TryGetComponent<T>();
 
         /// <summary>
+        /// Checks if entity contains component of specific type
+        /// </summary>
+        /// <typeparam name="T">Type of component to check</typeparam>
+        /// <returns>true if entity contains the component, false if not</returns>
+        bool Contains<T>();
+
+        /// <summary>
         /// Gets component of specific type
         /// </summary>
         /// <typeparam name="T">Type of component to get </typeparam>

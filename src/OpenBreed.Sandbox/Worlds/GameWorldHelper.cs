@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
@@ -49,6 +50,7 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem(core.CreatePhysicsSystem().SetGridSize(width, height).Build());
             builder.AddSystem(core.CreateAnimationSystem().Build());
 
+            builder.AddSystem(new TimerSystem(core));
             builder.AddSystem(new StateMachineSystem(core));
 
             ////Audio
@@ -108,6 +110,7 @@ namespace OpenBreed.Sandbox.Worlds
             gameWorld.AddEntity(gameCamera);
 
             var actor = ActorHelper.CreateActor(core, new Vector2(128, 128));
+            actor.Add(new FsmComponent());
             actor.Tag = playerCamera;
 
             actor.Add(new WalkingControl());
@@ -127,10 +130,10 @@ namespace OpenBreed.Sandbox.Worlds
             player2.AssumeControl(actor);
 
             var movementFsm = ActorHelper.CreateMovementFSM(actor);
-            var atackFsm = ActorHelper.CreateAttackingFSM(actor);
+            var atackFsm = core.StateMachines.GetByName("Actor.Attack");
             var rotateFsm = ActorHelper.CreateRotationFSM(actor);
             movementFsm.SetInitialState(Entities.Actor.States.Movement.MovementState.Standing);
-            atackFsm.SetInitialState( Entities.Actor.States.Attacking.AttackingState.Idle);
+            atackFsm.SetInitialState(actor, (int)Entities.Actor.States.Attacking.AttackingState.Idle);
             rotateFsm.SetInitialState(Entities.Actor.States.Rotation.RotationState.Idle);
             gameWorld.AddEntity(actor);
 

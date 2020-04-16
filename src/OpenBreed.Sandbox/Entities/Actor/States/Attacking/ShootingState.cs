@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {
-    public class ShootingState : IState<AttackingState, AttackingImpulse>
+    public class ShootingState : IStateEx<AttackingState, AttackingImpulse>
     {
         #region Public Constructors
 
@@ -24,36 +24,35 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 
         #region Public Properties
 
-        public IEntity Entity { get; private set; }
-        public AttackingState Id => AttackingState.Shooting;
+        public int Id => (int)AttackingState.Shooting;
+        public int FsmId { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void EnterState()
+        public void EnterState(IEntity entity)
         {
             //Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            entity.PostCommand(new TextSetCommand(entity.Id, 0, string.Join(", ", entity.CurrentStateNames.ToArray())));
 
-            var pos = Entity.GetComponent<PositionComponent>().Value;
+            var pos = entity.GetComponent<PositionComponent>().Value;
             pos += new Vector2(8,8);
-            var direction = Entity.GetComponent<DirectionComponent>().Value;
+            var direction = entity.GetComponent<DirectionComponent>().Value;
             direction.Normalize();
             direction *= 500.0f;
-            ProjectileHelper.AddProjectile(Entity.Core, Entity.World, pos.X, pos.Y, direction.X, direction.Y);
+            ProjectileHelper.AddProjectile(entity.Core, entity.World, pos.X, pos.Y, direction.X, direction.Y);
 
             //Entity.Impulse<AttackingState, AttackingImpulse>(AttackingImpulse.Wait);
-            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "AttackingState", "Wait"));
+            //entity.PostCommand(new EntitySetStateCommand(entity.Id, "AttackingState", "Wait"));
+            entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Wait));
+
+            Console.WriteLine("Enter Shooting");
         }
 
-        public void Initialize(IEntity entity)
+        public void LeaveState(IEntity entity)
         {
-            Entity = entity;
-        }
-
-        public void LeaveState()
-        {
+            Console.WriteLine("Leave Shooting");
             //Entity.Unsubscribe(ControlFireChangedEvent.TYPE, OnControlFireChanged);
         }
 

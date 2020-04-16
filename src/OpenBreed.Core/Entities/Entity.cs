@@ -81,6 +81,11 @@ namespace OpenBreed.Core.Entities
             return components.OfType<T>().FirstOrDefault();
         }
 
+        public bool Contains<T>()
+        {
+            return components.OfType<T>().Any();
+        }
+
         public T GetComponent<T>()
         {
             return components.OfType<T>().First();

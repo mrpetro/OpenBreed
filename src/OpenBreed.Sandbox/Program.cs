@@ -14,9 +14,9 @@ using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Modules.Rendering.Builders;
 using OpenBreed.Core.Systems.Control.Systems;
 using OpenBreed.Sandbox.Entities.Actor;
+using OpenBreed.Sandbox.Entities.Button;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.Door;
-using OpenBreed.Sandbox.Entities.Pickable;
 using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Entities.WorldGate;
@@ -284,7 +284,9 @@ namespace OpenBreed.Sandbox
 
             DoorHelper.CreateHorizontalFSM(this);
             DoorHelper.CreateVerticalFSM(this);
-
+            ProjectileHelper.CreateFsm(this);
+            ButtonHelper.CreateFSM(this);
+            ActorHelper.CreateAttackingFSM(this);
 
             Rendering.ScreenWorld = ScreenWorldHelper.CreateWorld(this);
 

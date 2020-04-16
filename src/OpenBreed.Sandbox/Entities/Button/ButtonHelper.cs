@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Common;
+﻿using OpenBreed.Core;
+using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.States;
@@ -22,23 +23,21 @@ namespace OpenBreed.Sandbox.Entities.Button
 
             button.GetComponent<PositionComponent>().Value = new Vector2(0, 0);
 
-            var buttonSm = CreateFSM(button);
-            buttonSm.SetInitialState(ButtonState.Idle);
+            var buttonSm = world.Core.StateMachines.GetByName("Button");
+            buttonSm.SetInitialState(button, (int)ButtonState.Idle);
 
             world.AddEntity(button);
         }
 
-        public static StateMachine<ButtonState, ButtonImpulse> CreateFSM(IEntity entity)
+        public static void CreateFSM(ICore core)
         {
-            var stateMachine = entity.AddFsm<ButtonState, ButtonImpulse>();
+            var buttonFsm = core.StateMachines.Create<ButtonState, ButtonImpulse>("Button");
 
-            stateMachine.AddState(new IdleState());
-            stateMachine.AddState(new PressedState());
+            buttonFsm.AddState(new IdleState());
+            buttonFsm.AddState(new PressedState());
 
-            stateMachine.AddTransition(ButtonState.Pressed, ButtonImpulse.Unpress, ButtonState.Idle);
-            stateMachine.AddTransition(ButtonState.Idle, ButtonImpulse.Press, ButtonState.Pressed);
-
-            return stateMachine;
+            buttonFsm.AddTransition(ButtonState.Pressed, ButtonImpulse.Unpress, ButtonState.Idle);
+            buttonFsm.AddTransition(ButtonState.Idle, ButtonImpulse.Press, ButtonState.Pressed);
         }
     }
 }

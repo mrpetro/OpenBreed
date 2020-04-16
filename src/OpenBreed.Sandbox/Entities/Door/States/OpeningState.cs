@@ -32,7 +32,7 @@ namespace OpenBreed.Sandbox.Components.States
 
         #region Public Properties
 
-        public int Id => (int)(ValueType)FunctioningState.Opening;
+        public int Id => (int)FunctioningState.Opening;
         public int FsmId { get; set; }
 
         #endregion Public Properties

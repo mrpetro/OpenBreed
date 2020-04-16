@@ -38,10 +38,16 @@ namespace OpenBreed.Core.States
         #region Public Methods
 
         void EnterState(IEntity entity, int stateId);
+
         void LeaveState(IEntity entity, int stateId);
 
         int GetNextStateId(int currentStateId, int impulseId, params object[] arguments);
+
         void SetInitialState(IEntity entity, int initialStateId);
+
+        string GetStateName(int stateId);
+
+        string GetImpulseName(int impulseId);
 
         #endregion Public Methods
     }
@@ -341,6 +347,45 @@ namespace OpenBreed.Core.States
             toImpulses[toImpulse] = action;
         }
 
+        public void EnterState(IEntity entity, int stateId)
+        {
+            states[(TState)(ValueType)stateId].EnterState(entity);
+        }
+
+        public void LeaveState(IEntity entity, int stateId)
+        {
+            states[(TState)(ValueType)stateId].LeaveState(entity);
+        }
+
+        public void SetInitialState(IEntity entity, int initialStateId)
+        {
+            Debug.Assert(entity.Contains<FsmComponent>(), $"Entity is missing {nameof(FsmComponent)}");
+
+            var fsmComponent = entity.GetComponent<FsmComponent>();
+            Debug.Assert(fsmComponent != null, "Expecting entity containing FsmComponent when setting inital state.");
+
+            var stateData = fsmComponent.States.FirstOrDefault(item => item.FsmId == Id);
+
+            if (stateData != null)
+                throw new InvalidOperationException("Initial state already set.");
+
+            stateData = new MachineState() { FsmId = Id, StateId = initialStateId };
+            fsmComponent.States.Add(stateData);
+
+            //var state = states[initialState];
+            //state.EnterState(entity);
+        }
+
+        public string GetStateName(int stateId)
+        {
+            return ((TState)(ValueType)stateId).ToString();
+        }
+
+        public string GetImpulseName(int impulseId)
+        {
+            return ((TImpulse)(ValueType)impulseId).ToString();
+        }
+
         #endregion Public Methods
 
         #region Private Methods
@@ -365,33 +410,6 @@ namespace OpenBreed.Core.States
             Action action;
             if (toImpulses.TryGetValue(toImpulse, out action))
                 action.Invoke();
-        }
-
-        public void EnterState(IEntity entity, int stateId)
-        {
-            states[(TState)(ValueType)stateId].EnterState(entity);
-        }
-
-        public void LeaveState(IEntity entity, int stateId)
-        {
-            states[(TState)(ValueType)stateId].LeaveState(entity);
-        }
-
-        public void SetInitialState(IEntity entity, int initialStateId)
-        {
-            var fsmComponent = entity.GetComponent<FsmComponent>();
-            Debug.Assert(fsmComponent != null, "Expecting entity containing FsmComponent when setting inital state.");
-
-            var stateData = fsmComponent.States.FirstOrDefault(item => item.FsmId == Id);
-
-            if (stateData != null)
-                throw new InvalidOperationException("Initial state already set.");
-
-            stateData = new MachineState() { FsmId = Id, StateId = initialStateId };
-            fsmComponent.States.Add(stateData);
-
-            //var state = states[initialState];
-            //state.EnterState(entity);
         }
 
         #endregion Private Methods

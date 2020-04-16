@@ -12,7 +12,7 @@ using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Button.States
 {
-    public class IdleState : IState<ButtonState, ButtonImpulse>
+    public class IdleState : IStateEx<ButtonState, ButtonImpulse>
     {
         public  const string NAME = "Idle";
 
@@ -32,30 +32,25 @@ namespace OpenBreed.Sandbox.Entities.Button.States
 
         #region Public Properties
 
-        public IEntity Entity { get; private set; }
-        public ButtonState Id => ButtonState.Idle;
+        public int Id => (int)ButtonState.Idle;
+        public int FsmId { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void EnterState()
+        public void EnterState(IEntity entity)
         {
-            Entity.PostCommand(new SpriteOnCommand(Entity.Id));
-            Entity.PostCommand(new PlayAnimCommand(Entity.Id, animationId, 0));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, "Door - Opening"));
+            entity.PostCommand(new SpriteOnCommand(entity.Id));
+            entity.PostCommand(new PlayAnimCommand(entity.Id, animationId, 0));
+            entity.PostCommand(new TextSetCommand(entity.Id, 0, "Door - Opening"));
 
-            Entity.Subscribe<AnimStoppedEventArgs>(OnAnimStopped);
+            entity.Subscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
 
-        public void Initialize(IEntity entity)
+        public void LeaveState(IEntity entity)
         {
-            Entity = entity;
-        }
-
-        public void LeaveState()
-        {
-            Entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
+            entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
 
         #endregion Public Methods
@@ -64,8 +59,9 @@ namespace OpenBreed.Sandbox.Entities.Button.States
 
         private void OnAnimStopped(object sender, AnimStoppedEventArgs eventArgs)
         {
-            //Entity.Impulse<ButtonState, ButtonImpulse>(ButtonImpulse.Press);
-            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "FunctioningState", "Opened"));
+            var entity = sender as IEntity;
+            entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)ButtonImpulse.Press));
+
         }
 
         #endregion Private Methods

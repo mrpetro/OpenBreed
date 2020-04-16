@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
@@ -66,25 +67,24 @@ namespace OpenBreed.Sandbox.Entities.Projectile
         public static void AddProjectile(ICore core, World world, float x, float y, float vx, float vy)
         {
             var projectile = core.Entities.CreateFromTemplate("Projectile");
+            projectile.Add(new FsmComponent());
 
             projectile.GetComponent<PositionComponent>().Value = new Vector2(x, y);
             projectile.GetComponent<VelocityComponent>().Value = new Vector2(vx, vy);
 
             projectile.Subscribe<CollisionEventArgs>(OnCollision);
 
+            var projectileFsm = core.StateMachines.GetByName("Projectile");
+            projectileFsm.SetInitialState(projectile, (int)AttackingState.Fired);
+
             world.AddEntity(projectile);
 
-            var doorSm = ProjectileHelper.CreateStateMachine(projectile);
-            doorSm.SetInitialState(AttackingState.Fired);
         }
 
-        public static StateMachine<AttackingState, AttackingImpulse> CreateStateMachine(IEntity entity)
+        public static void CreateFsm(ICore core)
         {
-            var stateMachine = entity.AddFsm<AttackingState, AttackingImpulse>();
-
+            var stateMachine = core.StateMachines.Create<AttackingState, AttackingImpulse>("Projectile");
             stateMachine.AddState(new FiredState("Animations/Laser/Fired/"));
-
-            return stateMachine;
         }
     }
 }

@@ -1,73 +1,73 @@
 ﻿
-using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
-using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Commands;
-using OpenBreed.Core.States;
-using OpenBreed.Sandbox.Entities.Door.States;
-using System;
-using System.Linq;
+//using OpenBreed.Core.Commands;
+//using OpenBreed.Core.Common.Systems.Components;
+//using OpenBreed.Core.Entities;
+//using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
+//using OpenBreed.Core.Modules.Physics.Events;
+//using OpenBreed.Core.Modules.Rendering.Commands;
+//using OpenBreed.Core.States;
+//using OpenBreed.Sandbox.Entities.Door.States;
+//using System;
+//using System.Linq;
 
-namespace OpenBreed.Sandbox.Entities.Pickable.States
-{
-    public class LyingState : IState
-    {
-        #region Private Fields
+//namespace OpenBreed.Sandbox.Entities.Pickable.States
+//{
+//    public class LyingState : IState
+//    {
+//        #region Private Fields
 
-        private int stampId;
+//        private int stampId;
 
-        #endregion Private Fields
+//        #endregion Private Fields
 
-        #region Public Constructors
+//        #region Public Constructors
 
-        public LyingState(string id, int stampId)
-        {
-            Name = id;
-            this.stampId = stampId;
-        }
+//        public LyingState(string id, int stampId)
+//        {
+//            Name = id;
+//            this.stampId = stampId;
+//        }
 
-        #endregion Public Constructors
+//        #endregion Public Constructors
 
-        #region Public Properties
+//        #region Public Properties
 
-        public IEntity Entity { get; private set; }
-        public string Name { get; }
+//        public IEntity Entity { get; private set; }
+//        public string Name { get; }
 
-        #endregion Public Properties
+//        #endregion Public Properties
 
-        #region Public Methods
+//        #region Public Methods
 
-        public void EnterState()
-        {
-            // Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, String.Join(", ", Entity.CurrentStateNames.ToArray())));
-            var pos = Entity.GetComponent<PositionComponent>();
-            Entity.PostCommand(new PutStampCommand(Entity.World.Id, stampId, 0, pos.Value));
-            Entity.Subscribe<CollisionEventArgs>(OnCollision);
-        }
+//        public void EnterState()
+//        {
+//            // Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
+//            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+//            var pos = Entity.GetComponent<PositionComponent>();
+//            Entity.PostCommand(new PutStampCommand(Entity.World.Id, stampId, 0, pos.Value));
+//            Entity.Subscribe<CollisionEventArgs>(OnCollision);
+//        }
 
-        public void Initialize(IEntity entity)
-        {
-            Entity = entity;
-        }
+//        public void Initialize(IEntity entity)
+//        {
+//            Entity = entity;
+//        }
 
-        public void LeaveState()
-        {
-            Entity.Unsubscribe<CollisionEventArgs>(OnCollision);
-        }
+//        public void LeaveState()
+//        {
+//            Entity.Unsubscribe<CollisionEventArgs>(OnCollision);
+//        }
 
-        private void OnCollision(object sender, CollisionEventArgs e)
-        {
-            //Entity.Impulse<FunctioningState, FunctioningImpulse>(FunctioningImpulse.Pick);
-            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "FunctioningState", "Pick"));
-        }
+//        private void OnCollision(object sender, CollisionEventArgs e)
+//        {
+//            //Entity.Impulse<FunctioningState, FunctioningImpulse>(FunctioningImpulse.Pick);
+//            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "FunctioningState", "Pick"));
+//        }
 
-        #endregion Public Methods
+//        #endregion Public Methods
 
-        #region Private Methods
+//        #region Private Methods
 
-        #endregion Private Methods
-    }
-}
+//        #endregion Private Methods
+//    }
+//}

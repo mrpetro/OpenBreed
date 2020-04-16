@@ -15,41 +15,35 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {
-    public class IdleState : IState<AttackingState, AttackingImpulse>
+    public class IdleState : IStateEx<AttackingState, AttackingImpulse>
     {
-        public IEntity Entity { get; private set; }
-
         public IdleState()
         {
         }
 
-        public AttackingState Id => AttackingState.Idle;
+        public int Id => (int)AttackingState.Idle;
+        public int FsmId { get; set; }
 
-        public void EnterState()
+        public void EnterState(IEntity entity)
         {
-            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            Console.WriteLine("Enter Idle");
+            entity.PostCommand(new TextSetCommand(entity.Id, 0, String.Join(", ", entity.CurrentStateNames.ToArray())));
 
-            Entity.Subscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
+            entity.Subscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
         }
 
-        public void Initialize(IEntity entity)
+        public void LeaveState(IEntity entity)
         {
-            Entity = entity;
-        }
-
-        public void LeaveState()
-        {
-            Entity.Unsubscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
+            Console.WriteLine("Leave Idle");
+            entity.Unsubscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
         }
 
         private void OnControlFireChanged(object sender, ControlFireChangedEvenrArgs eventArgs)
         {
+            var entity = sender as IEntity;
+
             if (eventArgs.Fire)
-                //Entity.Impulse<AttackingState, AttackingImpulse>(AttackingImpulse.Shoot);
-                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "AttackingState", "Shoot"));
-            else
-                //Entity.Impulse<AttackingState, AttackingImpulse>(AttackingImpulse.Stop);
-                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "AttackingState", "Stop"));
+                entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Shoot));
         }
 
     }

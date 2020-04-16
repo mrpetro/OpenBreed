@@ -105,7 +105,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             //var actor = core.Entities.Create();
 
             var actor = core.Entities.CreateFromTemplate("Arrow");
-
+            actor.Add(new TimerComponent());
             //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
             //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
             //actor.Add(AxisAlignedBoxShape.Create(0, 0, 32, 32));
@@ -135,21 +135,19 @@ namespace OpenBreed.Sandbox.Entities.Actor
             }
         }
 
-        public static StateMachine<AttackingState, AttackingImpulse> CreateAttackingFSM(IEntity entity)
+        public static void CreateAttackingFSM(ICore core)
         {
-            var stateMachine = entity.AddFsm<AttackingState, AttackingImpulse>();
+            var stateMachine = core.StateMachines.Create<AttackingState, AttackingImpulse>("Actor.Attack");
 
-            stateMachine.AddState(new ShootingState());
+            stateMachine.AddState(new States.Attacking.ShootingState());
             stateMachine.AddState(new States.Attacking.IdleState());
-            stateMachine.AddState(new CooldownState());
+            stateMachine.AddState(new States.Attacking.CooldownState());
 
             stateMachine.AddTransition(AttackingState.Shooting, AttackingImpulse.Stop, AttackingState.Idle);
             stateMachine.AddTransition(AttackingState.Shooting, AttackingImpulse.Wait, AttackingState.Cooldown);
             stateMachine.AddTransition(AttackingState.Cooldown, AttackingImpulse.Stop, AttackingState.Idle);
             stateMachine.AddTransition(AttackingState.Cooldown, AttackingImpulse.Shoot, AttackingState.Shooting);
             stateMachine.AddTransition(AttackingState.Idle, AttackingImpulse.Shoot, AttackingState.Shooting);
-
-            return stateMachine;
         }
 
         public static StateMachine<RotationState, RotationImpulse> CreateRotationFSM(IEntity entity)
