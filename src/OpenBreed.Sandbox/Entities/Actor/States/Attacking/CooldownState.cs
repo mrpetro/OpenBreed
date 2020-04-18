@@ -37,8 +37,6 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 
         public void EnterState(IEntity entity)
         {
-            Console.WriteLine("Enter Cooldown");
-
             var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
             entity.PostCommand(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
@@ -69,7 +67,6 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 
         public void LeaveState(IEntity entity)
         {
-            Console.WriteLine("Leave Cooldown");
             entity.Unsubscribe<TimerElapsedEventArgs>(OnTimerElapsed);
             entity.PostCommand(new TimerStopCommand(entity.Id, 0));
         }

@@ -82,6 +82,7 @@
     <Compile Include="Commands\TimerStopCommand.cs" />
     <Compile Include="Commands\TimerStartCommand.cs" />
     <Compile Include="Commands\WorldSetPauseCommand.cs" />
+    <Compile Include="Common\Components\ClassComponent.cs" />
     <Compile Include="Common\Components\TimerComponent.cs" />
     <Compile Include="Events\TimerElapsedEventArgs.cs" />
     <Compile Include="Modules\Animation\Builders\AnimationComponentBuilder.cs" />

@@ -10,6 +10,7 @@ using System;
 using System.Linq;
 using OpenBreed.Core.Commands;
 using OpenBreed.Sandbox.Entities.Door.States;
+using OpenBreed.Core.Common.Components;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -17,15 +18,15 @@ namespace OpenBreed.Sandbox.Components.States
     {
         #region Private Fields
 
-        private readonly string animationId;
+        private readonly string animPrefix;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public OpeningState(string animationId)
+        public OpeningState()
         {
-            this.animationId = animationId;
+            animPrefix = "Animations";
         }
 
         #endregion Public Constructors
@@ -42,7 +43,11 @@ namespace OpenBreed.Sandbox.Components.States
         public void EnterState(IEntity entity)
         {
             entity.PostCommand(new SpriteOnCommand(entity.Id));
-            entity.PostCommand(new PlayAnimCommand(entity.Id, animationId, 0));
+
+            var className = entity.GetComponent<ClassComponent>().Name;
+            var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
+            entity.PostCommand(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{stateName}", 0));
+
             entity.PostCommand(new TextSetCommand(entity.Id, 0, "Door - Opening"));
 
             //entity.Subscribe<AnimChangedEventArgs>(OnAnimChanged);

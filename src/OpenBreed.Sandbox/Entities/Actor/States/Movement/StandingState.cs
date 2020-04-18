@@ -11,6 +11,7 @@ using OpenTK;
 using System;
 using System.Linq;
 using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Components;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 {
@@ -24,9 +25,9 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         #region Public Constructors
 
-        public StandingState(string animPrefix)
+        public StandingState()
         {
-            this.animPrefix = animPrefix;
+            this.animPrefix = "Animations";
         }
 
         #endregion Public Constructors
@@ -45,13 +46,14 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             var direction = entity.GetComponent<DirectionComponent>().Value;
 
             var animDirName = AnimHelper.ToDirectionName(direction);
+            var className = entity.GetComponent<ClassComponent>().Name;
 
             var thrust = entity.GetComponent<ThrustComponent>();
 
             thrust.Value = Vector2.Zero;
 
             var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
-            entity.PostCommand(new PlayAnimCommand(entity.Id,  $"{animPrefix}/{stateName}/{animDirName}", 0));
+            entity.PostCommand(new PlayAnimCommand(entity.Id,  $"{animPrefix}/{className}/{stateName}/{animDirName}", 0));
 
             var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
             entity.PostCommand(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));

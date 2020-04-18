@@ -102,13 +102,6 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         #region Private Methods
 
-        //private static void OnFrameChanged(object sender, AnimChangedEventArgs e)
-        //{
-        //    var entity = (IEntity)sender;
-        //    var sprite = entity.GetComponent<SpriteComponent>();
-        //    sprite.ImageId = (int)e.Frame;
-        //}
-
         private static void OnCollision(object sender, CollisionEventArgs args)
         {
             var entity = (IEntity)sender;

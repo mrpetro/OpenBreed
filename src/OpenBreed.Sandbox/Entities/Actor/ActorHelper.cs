@@ -105,6 +105,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             //var actor = core.Entities.Create();
 
             var actor = core.Entities.CreateFromTemplate("Arrow");
+            actor.Add(new ClassComponent("Actor"));
             actor.Add(new TimerComponent());
             //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
             //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
@@ -155,7 +156,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             var stateMachine = core.StateMachines.Create<RotationState, RotationImpulse>("Actor.Rotation");
 
             stateMachine.AddState(new States.Rotation.IdleState());
-            stateMachine.AddState(new States.Rotation.RotatingState("Animations/Actor"));
+            stateMachine.AddState(new States.Rotation.RotatingState());
 
             stateMachine.AddTransition(RotationState.Rotating, RotationImpulse.Stop , RotationState.Idle);
             stateMachine.AddTransition(RotationState.Idle, RotationImpulse.Rotate, RotationState.Rotating);
@@ -172,8 +173,8 @@ namespace OpenBreed.Sandbox.Entities.Actor
         {
             var stateMachine = core.StateMachines.Create<MovementState, MovementImpulse>("Actor.Movement");
 
-            stateMachine.AddState(new StandingState("Animations/Actor"));
-            stateMachine.AddState(new WalkingState("Animations/Actor"));
+            stateMachine.AddState(new StandingState());
+            stateMachine.AddState(new WalkingState());
 
             stateMachine.AddTransition(MovementState.Walking, MovementImpulse.Stop, MovementState.Standing);
             stateMachine.AddTransition(MovementState.Standing, MovementImpulse.Walk, MovementState.Walking);

@@ -29,32 +29,32 @@ namespace OpenBreed.Sandbox.Entities.Door
     public static class DoorHelper
     {
         private const string TILE_ATLAS = "Atlases/Tiles/16/Test";
-        private const string STAMP_DOOR_HORIZONTAL_CLOSED = "Tiles/Stamps/Door/Horizontal/Closed";
-        private const string STAMP_DOOR_HORIZONTAL_OPENED = "Tiles/Stamps/Door/Horizontal/Opened";
-        private const string STAMP_DOOR_VERTICAL_CLOSED = "Tiles/Stamps/Door/Vertical/Closed";
-        private const string STAMP_DOOR_VERTICAL_OPENED = "Tiles/Stamps/Door/Vertical/Opened";
+        private const string STAMP_DOOR_HORIZONTAL_CLOSED = "Tiles/Stamps/DoorHorizontal/Closed";
+        private const string STAMP_DOOR_HORIZONTAL_OPENED = "Tiles/Stamps/DoorHorizontal/Opened";
+        private const string STAMP_DOOR_VERTICAL_CLOSED = "Tiles/Stamps/DoorVertical/Closed";
+        private const string STAMP_DOOR_VERTICAL_OPENED = "Tiles/Stamps/DoorVertical/Opened";
 
         public static void CreateAnimations(ICore core)
         {
-            var horizontalDoorOpening = core.Animations.Create<int>("Animations/Door/Horizontal/Opening", OnFrameUpdate);
+            var horizontalDoorOpening = core.Animations.Create<int>("Animations/DoorHorizontal/Opening", OnFrameUpdate);
             horizontalDoorOpening.AddFrame(0, 1.0f);
             horizontalDoorOpening.AddFrame(1, 1.0f);
             horizontalDoorOpening.AddFrame(2, 1.0f);
             horizontalDoorOpening.AddFrame(3, 1.0f);
             horizontalDoorOpening.AddFrame(4, 1.0f);
-            var horizontalDoorClosing = core.Animations.Create<int>("Animations/Door/Horizontal/Closing", OnFrameUpdate);
+            var horizontalDoorClosing = core.Animations.Create<int>("Animations/DoorHorizontal/Closing", OnFrameUpdate);
             horizontalDoorClosing.AddFrame(4, 1.0f);
             horizontalDoorClosing.AddFrame(3, 1.0f);
             horizontalDoorClosing.AddFrame(2, 1.0f);
             horizontalDoorClosing.AddFrame(1, 1.0f);
             horizontalDoorClosing.AddFrame(0, 1.0f);
-            var verticalDoorOpening = core.Animations.Create<int>("Animations/Door/Vertical/Opening", OnFrameUpdate);
+            var verticalDoorOpening = core.Animations.Create<int>("Animations/DoorVertical/Opening", OnFrameUpdate);
             verticalDoorOpening.AddFrame(0, 1.0f);
             verticalDoorOpening.AddFrame(1, 1.0f);
             verticalDoorOpening.AddFrame(2, 1.0f);
             verticalDoorOpening.AddFrame(3, 1.0f);
             verticalDoorOpening.AddFrame(4, 1.0f);
-            var verticalDoorClosing = core.Animations.Create<int>("Animations/Door/Vertical/Closing", OnFrameUpdate);
+            var verticalDoorClosing = core.Animations.Create<int>("Animations/DoorVertical/Closing", OnFrameUpdate);
             verticalDoorClosing.AddFrame(1, 1.0f);
             verticalDoorClosing.AddFrame(1, 1.0f);
             verticalDoorClosing.AddFrame(2, 1.0f);
@@ -76,10 +76,10 @@ namespace OpenBreed.Sandbox.Entities.Door
             var openedStamp = core.Rendering.Stamps.GetByName(STAMP_DOOR_HORIZONTAL_OPENED);
             var closedStamp = core.Rendering.Stamps.GetByName(STAMP_DOOR_HORIZONTAL_CLOSED);
 
-            fsm.AddState(new OpeningState("Animations/Door/Horizontal/Opening"));
-            fsm.AddState(new OpenedState(openedStamp.Id));
-            fsm.AddState(new ClosingState("Animations/Door/Horizontal/Closing"));
-            fsm.AddState(new ClosedState(closedStamp.Id));
+            fsm.AddState(new OpeningState());
+            fsm.AddState(new OpenedState());
+            fsm.AddState(new ClosingState());
+            fsm.AddState(new ClosedState());
 
             fsm.AddTransition(FunctioningState.Closed, FunctioningImpulse.Open, FunctioningState.Opening);
             fsm.AddTransition(FunctioningState.Opening, FunctioningImpulse.StopOpening, FunctioningState.Opened);
@@ -93,15 +93,10 @@ namespace OpenBreed.Sandbox.Entities.Door
 
             //var stateMachine = entity.AddFsm<FunctioningState, FunctioningImpulse>();
 
-            var openedStamp = core.Rendering.Stamps.GetByName(STAMP_DOOR_VERTICAL_OPENED);
-            var closedStamp = core.Rendering.Stamps.GetByName(STAMP_DOOR_VERTICAL_CLOSED);
-
-
-
-            stateMachine.AddState(new OpeningState("Animations/Door/Vertical/Opening"));
-            stateMachine.AddState(new OpenedState(openedStamp.Id));
-            stateMachine.AddState(new ClosingState("Animations/Door/Vertical/Closing"));
-            stateMachine.AddState(new ClosedState(closedStamp.Id));
+            stateMachine.AddState(new OpeningState());
+            stateMachine.AddState(new OpenedState());
+            stateMachine.AddState(new ClosingState());
+            stateMachine.AddState(new ClosedState());
 
             stateMachine.AddTransition(FunctioningState.Closed, FunctioningImpulse.Open, FunctioningState.Opening);
             stateMachine.AddTransition(FunctioningState.Opening, FunctioningImpulse.StopOpening, FunctioningState.Opened);
@@ -141,6 +136,7 @@ namespace OpenBreed.Sandbox.Entities.Door
 
             //var door = core.Entities.Create();
             var door = core.Entities.CreateFromTemplate("DoorVertical");
+            door.Add(new ClassComponent("DoorVertical"));
             door.Add(new FsmComponent());
 
             door.GetComponent<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
@@ -166,6 +162,7 @@ namespace OpenBreed.Sandbox.Entities.Door
             var core = world.Core;
 
             var door = core.Entities.CreateFromTemplate("DoorHorizontal");
+            door.Add(new ClassComponent("DoorHorizontal"));
             door.Add(new FsmComponent());
 
             door.GetComponent<PositionComponent>().Value = new Vector2(16 * x, 16 * y);

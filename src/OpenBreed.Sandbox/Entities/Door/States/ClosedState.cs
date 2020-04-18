@@ -1,17 +1,12 @@
-﻿using OpenBreed.Core.Common.Components;
-
-using OpenBreed.Core.Common.Systems;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
-using System;
-using System.Linq;
-using OpenBreed.Core.Commands;
 using OpenBreed.Sandbox.Entities.Door.States;
+using System;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -19,15 +14,15 @@ namespace OpenBreed.Sandbox.Components.States
     {
         #region Private Fields
 
-        private readonly int stampId;
+        private readonly string stampPrefix;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ClosedState(int stampId)
+        public ClosedState()
         {
-            this.stampId = stampId;
+            stampPrefix = "Tiles/Stamps";
         }
 
         #endregion Public Constructors
@@ -50,7 +45,14 @@ namespace OpenBreed.Sandbox.Components.States
             entity.PostCommand(new SpriteOffCommand(entity.Id));
 
             var pos = entity.GetComponent<PositionComponent>();
+
+            var className = entity.GetComponent<ClassComponent>().Name;
+            var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
+            var stampId = entity.Core.Rendering.Stamps.GetByName($"{stampPrefix}/{className}/{stateName}").Id;
             entity.PostCommand(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
+
+            //STAMP_DOOR_HORIZONTAL_CLOSED = $"{stampPrefix}/{className}/{stateName}";
+
             entity.PostCommand(new TextSetCommand(entity.Id, 0, "Door - Closed"));
 
             entity.Subscribe<CollisionEventArgs>(OnCollision);

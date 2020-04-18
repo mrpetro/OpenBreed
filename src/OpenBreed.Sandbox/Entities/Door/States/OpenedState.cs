@@ -15,6 +15,7 @@ using OpenBreed.Core.Modules.Physics.Commands;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Sandbox.Entities.Door.States;
 using System;
+using OpenBreed.Core.Common.Components;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -22,15 +23,15 @@ namespace OpenBreed.Sandbox.Components.States
     {
         #region Private Fields
 
-        private readonly int stampId;
+        private readonly string stampPrefix;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public OpenedState(int stampId)
+        public OpenedState()
         {
-            this.stampId = stampId;
+            this.stampPrefix = "Tiles/Stamps";
         }
 
         #endregion Public Constructors
@@ -51,7 +52,14 @@ namespace OpenBreed.Sandbox.Components.States
 
             var pos = entity.GetComponent<PositionComponent>();
 
+            //entity.PostCommand(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
+
+            var className = entity.GetComponent<ClassComponent>().Name;
+            var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
+            var stampId = entity.Core.Rendering.Stamps.GetByName($"{stampPrefix}/{className}/{stateName}").Id;
             entity.PostCommand(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
+
+
             entity.PostCommand(new TextSetCommand(entity.Id, 0, "Door - Opened"));
         }
 

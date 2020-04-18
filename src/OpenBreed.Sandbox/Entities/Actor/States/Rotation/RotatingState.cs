@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Commands;
@@ -21,9 +22,9 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 
         #region Public Constructors
 
-        public RotatingState(string animPrefix)
+        public RotatingState()
         {
-            this.animPrefix = animPrefix;
+            this.animPrefix = "Animations";
         }
 
         #endregion Public Constructors
@@ -44,9 +45,10 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
             entity.GetComponent<ThrustComponent>().Value = direction.Value * movement.Acceleration;
 
             var animDirName = AnimHelper.ToDirectionName(direction.Value);
+            var className = entity.GetComponent<ClassComponent>().Name;
             var movementFsm = entity.Core.StateMachines.GetByName("Actor.Movement");
             var movementStateName = movementFsm.GetCurrentStateName(entity);
-            entity.PostCommand(new PlayAnimCommand(entity.Id, $"{animPrefix}/{movementStateName}/{animDirName}", 0));
+            entity.PostCommand(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{movementStateName}/{animDirName}", 0));
 
             var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
             entity.PostCommand(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
