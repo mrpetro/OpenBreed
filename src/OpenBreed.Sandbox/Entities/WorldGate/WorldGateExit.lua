@@ -1,8 +1,8 @@
 ﻿Templates.Entities.WorldGateExit = {
-    AnimatorComponent = {
+    AnimationComponent = {
         Speed = 10.0,
         Loop = true,
-		AnimationAlias = "Animations/Teleport/Entry"},
+		AnimId = "Animations/Teleport/Entry"},
     PositionComponent = { 0, 0 },
     BodyComponent = {
         CofFactor = 1.0,
@@ -10,6 +10,12 @@
         Type = "Trigger",
 		Fixtures = { "Fixtures/TeleportExit" } },
 	SpriteComponent = {
-		AtlasAlias = "Atlases/Sprites/World/Exit",
+		AtlasId = "Atlases/Sprites/World/Exit",
+        Order = 0.0},
+	TextComponent = {
+		Text = "WorldExit",
+		Offset = { 0, 32 },
+		Color = { 255, 255, 255, 255 },
+		FontId = { "Arial", 9 },
         Order = 0.0}
 }

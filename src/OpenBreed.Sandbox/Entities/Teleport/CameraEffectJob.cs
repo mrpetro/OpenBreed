@@ -43,9 +43,8 @@ namespace OpenBreed.Sandbox.Entities.Teleport
         public void Execute()
         {
             entity.Core.Logging.Verbose($"Executing camera effect '{animName}.'");
-            entity.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, OnAnimChanged);
-            entity.Subscribe(AnimationEventTypes.ANIMATION_STOPPED, OnAnimStopped);
-            entity.PostCommand(new PlayAnimCommand(entity.Id, animName));
+            entity.Subscribe<AnimStoppedEventArgs>(OnAnimStopped);
+            entity.PostCommand(new PlayAnimCommand(entity.Id, animName, 0));
         }
 
         public void Update(float dt)
@@ -54,28 +53,16 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         public void Dispose()
         {
-            entity.Unsubscribe(AnimationEventTypes.ANIMATION_CHANGED, OnAnimChanged);
-            entity.Unsubscribe(AnimationEventTypes.ANIMATION_STOPPED, OnAnimStopped);
+            entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void OnAnimStopped(object sender, EventArgs eventArgs)
+        private void OnAnimStopped(object sender, AnimStoppedEventArgs eventArgs)
         {
             Complete(this);
-        }
-
-        private void OnAnimChanged(object sender, EventArgs eventArgs)
-        {
-            HandleFrameChangeEvent((IEntity)sender, (AnimChangedEventArgs)eventArgs);
-        }
-
-        private void HandleFrameChangeEvent(IEntity entity, AnimChangedEventArgs systemEvent)
-        {
-            var cameraCmp = entity.GetComponent<CameraComponent>();
-            cameraCmp.Brightness = (float)systemEvent.Frame;
         }
 
         #endregion Private Methods

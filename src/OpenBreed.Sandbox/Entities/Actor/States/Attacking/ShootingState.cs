@@ -12,48 +12,44 @@ using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {
-    public class ShootingState : IState
+    public class ShootingState : IState<AttackingState, AttackingImpulse>
     {
         #region Public Constructors
 
-        public ShootingState(string name)
+        public ShootingState()
         {
-            Name = name;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public IEntity Entity { get; private set; }
-        public string Name { get; }
+        public int Id => (int)AttackingState.Shooting;
+        public int FsmId { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void EnterState()
+        public void EnterState(IEntity entity)
         {
             //Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
+            entity.PostCommand(new TextSetCommand(entity.Id, 0, string.Join(", ", currentStateNames.ToArray())));
 
-            var pos = Entity.GetComponent<PositionComponent>().Value;
+            var pos = entity.GetComponent<PositionComponent>().Value;
             pos += new Vector2(8,8);
-            var direction = Entity.GetComponent<Direction>().Value;
+            var direction = entity.GetComponent<DirectionComponent>().Value;
             direction.Normalize();
             direction *= 500.0f;
-            ProjectileHelper.AddProjectile(Entity.Core, Entity.World, pos.X, pos.Y, direction.X, direction.Y);
+            ProjectileHelper.AddProjectile(entity.Core, entity.World, pos.X, pos.Y, direction.X, direction.Y);
 
-            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Attacking", "Wait"));
-
+            //Entity.Impulse<AttackingState, AttackingImpulse>(AttackingImpulse.Wait);
+            //entity.PostCommand(new EntitySetStateCommand(entity.Id, "AttackingState", "Wait"));
+            entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Wait));
         }
 
-        public void Initialize(IEntity entity)
-        {
-            Entity = entity;
-        }
-
-        public void LeaveState()
+        public void LeaveState(IEntity entity)
         {
             //Entity.Unsubscribe(ControlFireChangedEvent.TYPE, OnControlFireChanged);
         }
@@ -70,25 +66,6 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         //    else
         //        Entity.PostMsg(new StateChangeMsg(Entity, "Attacking", "Cooldown"));
         //}
-
-        public string Process(string actionName, object[] arguments)
-        {
-            switch (actionName)
-            {
-                case "Wait":
-                    {
-                        return "Cooldown";
-                    }
-                case "Stop":
-                    {
-                        return "Idle";
-                    }
-                default:
-                    break;
-            }
-
-            return null;
-        }
 
         #endregion Public Methods
 

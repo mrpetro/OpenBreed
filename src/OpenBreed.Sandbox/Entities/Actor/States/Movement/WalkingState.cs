@@ -9,113 +9,76 @@ using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Systems.Control.Events;
 using OpenBreed.Sandbox.Helpers;
 using OpenTK;
 using System;
 using System.Linq;
 using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Components;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 {
-    public class WalkingState : IState
+    public class WalkingState : IState<MovementState, MovementImpulse>
     {
         #region Private Fields
 
         private readonly string animPrefix;
-        private Direction direction;
-        private SpriteComponent sprite;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public WalkingState(string id, string animPrefix)
+        public WalkingState()
         {
-            Name = id;
-            this.animPrefix = animPrefix;
+            this.animPrefix = "Animations";
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public IEntity Entity { get; private set; }
-        public string Name { get; }
+        public int Id => (int)MovementState.Walking;
+        public int FsmId { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void EnterState()
+        public void EnterState(IEntity entity)
         {
-            var direction = Entity.GetComponent<Direction>();
-            var movement = Entity.GetComponent<MotionComponent>();
-            Entity.GetComponent<ThrustComponent>().Value = direction.Value * movement.Acceleration;
+            var direction = entity.GetComponent<DirectionComponent>();
+            var movement = entity.GetComponent<MotionComponent>();
+            entity.GetComponent<ThrustComponent>().Value = direction.Value * movement.Acceleration;
 
             var animDirPostfix = AnimHelper.ToDirectionName(direction.Value);
 
-            Entity.PostCommand(new PlayAnimCommand(Entity.Id, $"{animPrefix}/{Name}/{animDirPostfix}"));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
+            var className = entity.GetComponent<ClassComponent>().Name;
+            entity.PostCommand(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{stateName}/{animDirPostfix}", 0));
 
-            Entity.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, OnFrameChanged);
-            Entity.Subscribe(ControlEventTypes.CONTROL_DIRECTION_CHANGED, OnControlDirectionChanged);
+            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
+            entity.PostCommand(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
+
+            entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
      
-        public void Initialize(IEntity entity)
+        public void LeaveState(IEntity entity)
         {
-            Entity = entity;
-            direction = Entity.TryGetComponent<Direction>();
-            sprite = entity.GetComponent<SpriteComponent>();
-        }
-
-        public void LeaveState()
-        {
-            Entity.Unsubscribe(AnimationEventTypes.ANIMATION_CHANGED, OnFrameChanged);
-            Entity.Unsubscribe(ControlEventTypes.CONTROL_DIRECTION_CHANGED, OnControlDirectionChanged);
-        }
-
-        public string Process(string actionName, object[] arguments)
-        {
-            switch (actionName)
-            {
-                case "Stop":
-                    {
-                        return "Standing";
-
-                    }
-                default:
-                    break;
-            }
-
-            return null;
+            entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void OnFrameChanged(object sender, EventArgs eventArgs)
+        private void OnControlDirectionChanged(object sender, ControlDirectionChangedEventArgs e)
         {
-            HandleFrameChangeEvent((AnimChangedEventArgs)eventArgs);
-        }
+            var entity = sender as IEntity;
 
-        private void OnControlDirectionChanged(object sender, EventArgs eventArgs)
-        {
-            HandleControlDirectionChangedEvent((ControlDirectionChangedEvent)eventArgs);
-        }
-
-        private void HandleFrameChangeEvent(AnimChangedEventArgs systemEvent)
-        {
-            sprite.ImageId = (int)systemEvent.Frame;
-        }
-
-        private void HandleControlDirectionChangedEvent(ControlDirectionChangedEvent systemEvent)
-        {
-            if (systemEvent.Direction != Vector2.Zero)
-                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Movement", "Walk"));
+            if (e.Direction != Vector2.Zero)
+                entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)MovementImpulse.Walk));
             else
-                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Movement", "Stop"));
+                entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)MovementImpulse.Stop));
         }
 
         #endregion Private Methods

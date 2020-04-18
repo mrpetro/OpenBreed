@@ -7,8 +7,8 @@ using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Physics.Systems;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
-using OpenBreed.Core.Modules.Rendering.Events;
 using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Sandbox.Entities.FpsCounter;
 using OpenBreed.Sandbox.Jobs;
 using OpenTK;
 using OpenTK.Graphics;
@@ -63,20 +63,12 @@ namespace OpenBreed.Sandbox.Worlds
             var cameraBuilder = new CameraBuilder(world.Core);
             cameraBuilder.SetPosition(new Vector2(0,0));
             cameraBuilder.SetRotation(0.0f);
-            cameraBuilder.SetZoom(world.Core.ClientRectangle.Width, world.Core.ClientRectangle.Height);
+            cameraBuilder.SetFov(world.Core.ClientRectangle.Width, world.Core.ClientRectangle.Height);
             var hudCamera = cameraBuilder.Build();
             hudCamera.Tag = "HudCamera";
             world.AddEntity(hudCamera);
 
-            var arial12 = world.Core.Rendering.Fonts.Create("ARIAL", 9);
-
-            var fpsTextEntity = world.Core.Entities.Create();
-
-            fpsTextEntity.Add(PositionComponent.Create(new Vector2(-fpsTextEntity.Core.ClientRectangle.Width / 2.0f, -fpsTextEntity.Core.ClientRectangle.Height / 2.0f)));
-            fpsTextEntity.Add(TextComponent.Create(arial12.Id, Vector2.Zero, Color4.White, "FPS: 0.0", 100.0f));
-            world.AddEntity(fpsTextEntity);
-
-            world.Core.Jobs.Execute(new FpsTextUpdateJob(fpsTextEntity));
+            FpsCounterHelper.AddToWorld(world);
 
             var hudViewport = world.Core.Entities.GetByTag(ScreenWorldHelper.HUD_VIEWPORT).First();
             hudViewport.GetComponent<ViewportComponent>().CameraEntityId = hudCamera.Id;
@@ -84,14 +76,9 @@ namespace OpenBreed.Sandbox.Worlds
             //world.Core.Rendering.Subscribe(GfxEventTypes.CLIENT_RESIZED, (s, a) => UpdateFpsPos(fpsTextEntity, (ClientResizedEventArgs)a));
             //world.Core.Rendering.Subscribe(GfxEventTypes.CLIENT_RESIZED, (s, a) => UpdateCameraFov(hudCamera, (ClientResizedEventArgs)a));
 
-            hudViewport.Subscribe(GfxEventTypes.VIEWPORT_RESIZED, (s, a) => UpdateFpsPos(fpsTextEntity, (ViewportResizedEventArgs)a));
-            hudViewport.Subscribe(GfxEventTypes.VIEWPORT_RESIZED, (s, a) => UpdateCameraFov(hudCamera, (ViewportResizedEventArgs)a));
+            hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateCameraFov(hudCamera, a));
         }
 
-        private static void UpdateFpsPos(IEntity fpsTextEntity, ViewportResizedEventArgs a)
-        {
-            fpsTextEntity.GetComponent<PositionComponent>().Value = new Vector2(-a.Width / 2.0f, -a.Height / 2.0f );
-        }
 
         private static void UpdateCameraFov(IEntity cameraEntity, ViewportResizedEventArgs a)
         {

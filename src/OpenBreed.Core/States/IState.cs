@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Entities;
+using System;
 
 namespace OpenBreed.Core.States
 {
@@ -6,22 +7,21 @@ namespace OpenBreed.Core.States
     {
         #region Public Properties
 
-        IEntity Entity { get; }
-
-        string Name { get; }
+        int Id { get; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        void Initialize(IEntity entity);
+        void EnterState(IEntity entity);
 
-        void EnterState();
-
-        void LeaveState();
-
-        string Process(string actionName, object[] arguments);
+        void LeaveState(IEntity entity);
 
         #endregion Public Methods
+    }
+
+    public interface IState<TState, TImpulse> : IState where TState : Enum where TImpulse : Enum
+    {
+        int FsmId { get; set; }
     }
 }

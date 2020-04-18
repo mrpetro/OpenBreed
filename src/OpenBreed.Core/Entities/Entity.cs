@@ -20,17 +20,12 @@ namespace OpenBreed.Core.Entities
 
         private readonly List<IEntityComponent> components = new List<IEntityComponent>();
 
-        private List<StateMachine> fsmList;
-
         #endregion Private Fields
 
         #region Internal Constructors
 
         internal Entity(ICore core, List<IEntityComponent> initialComponents)
         {
-            fsmList = new List<StateMachine>();
-            FsmList = new ReadOnlyCollection<StateMachine>(fsmList);
-
             Core = core ?? throw new ArgumentNullException(nameof(core));
 
             components = initialComponents ?? new List<IEntityComponent>();
@@ -42,7 +37,6 @@ namespace OpenBreed.Core.Entities
         #region Public Properties
 
         public ReadOnlyCollection<IEntityComponent> Components { get; }
-        public ReadOnlyCollection<StateMachine> FsmList { get; }
 
         public ICore Core { get; }
 
@@ -57,28 +51,24 @@ namespace OpenBreed.Core.Entities
 
         public object DebugData { get; set; }
 
-        public IEnumerable<string> CurrentStateNames => FsmList.Select(item => item.ToString());
-
         #endregion Public Properties
 
         #region Public Methods
 
-        public StateMachine AddFSM(string name)
-        {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentNullException(nameof(name));
-
-            if (fsmList.Any(item => item.Name == name))
-                throw new InvalidOperationException($"State machine '{name}' already exist.");
-
-            var newFsm = new StateMachine(name, this);
-            fsmList.Add(newFsm);
-            return newFsm;
-        }
+        //public void Impulse<TState, TImpulse>(TImpulse impulse) where TState : struct, IConvertible where TImpulse : struct, IConvertible
+        //{
+        //    var sm = FsmList.OfType<StateMachine<TState, TImpulse>>().FirstOrDefault();
+        //    sm.Perform(impulse);
+        //}
 
         public T TryGetComponent<T>()
         {
             return components.OfType<T>().FirstOrDefault();
+        }
+
+        public bool Contains<T>()
+        {
+            return components.OfType<T>().Any();
         }
 
         public T GetComponent<T>()
@@ -91,19 +81,19 @@ namespace OpenBreed.Core.Entities
             Core.Commands.Post(this, command);
         }
 
-        public void RaiseEvent(string eventType, EventArgs eventArgs)
+        public void RaiseEvent<T>(T eventArgs) where T : EventArgs
         {
-            Core.Events.Raise(this, eventType, eventArgs);
+            Core.Events.Raise(this, eventArgs);
         }
 
-        public void Subscribe(string eventType, Action<object, EventArgs> callback)
+        public void Subscribe<T>(Action<object, T> callback) where T : EventArgs
         {
-            Core.Events.Subscribe(this, eventType, callback);
+            Core.Events.Subscribe(this, callback);
         }
 
-        public void Unsubscribe(string eventType, Action<object, EventArgs> callback)
+        public void Unsubscribe<T>(Action<object, T> callback) where T : EventArgs
         {
-            Core.Events.Unsubscribe(this, eventType, callback);
+            Core.Events.Unsubscribe(this, callback);
         }
 
         public void Add(IEntityComponent component)
@@ -137,14 +127,9 @@ namespace OpenBreed.Core.Entities
 
         internal void Deinitialize()
         {
-            foreach (var fsm in fsmList)
-                fsm.Deinitialize();
-
             var from = World;
-
             //Forget the world in which entity was
             World = null;
-
             OnLeftWorld(from);
         }
 
@@ -152,10 +137,6 @@ namespace OpenBreed.Core.Entities
         {
             //Remember in what world entity is
             World = world;
-
-            foreach (var fsm in fsmList)
-                fsm.Initialize();
-
             OnEnteredWorld(World);
         }
 
@@ -165,12 +146,12 @@ namespace OpenBreed.Core.Entities
 
         private void OnLeftWorld(World world)
         {
-            RaiseEvent(CoreEventTypes.ENTITY_LEFT_WORLD, new EntityLeftWorldEventArgs(this, world));
+            RaiseEvent(new EntityLeftWorldEventArgs(this, world));
         }
 
         private void OnEnteredWorld(World world)
         {
-            RaiseEvent(CoreEventTypes.ENTITY_ENTERED_WORLD, new EntityEnteredWorldEventArgs(this, world));
+            RaiseEvent(new EntityEnteredWorldEventArgs(this, world));
         }
 
         #endregion Private Methods

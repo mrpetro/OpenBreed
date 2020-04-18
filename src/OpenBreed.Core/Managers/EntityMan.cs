@@ -89,7 +89,7 @@ namespace OpenBreed.Core.Managers
 
         public void Destroy(IEntity entity)
         {
-            entity.Subscribe(CoreEventTypes.ENTITY_LEFT_WORLD, OnEntityRemovedFromWorld);
+            entity.Subscribe<EntityLeftWorldEventArgs>(OnEntityLeftWorld);
             entity.World.RemoveEntity(entity);
         }
 
@@ -135,10 +135,10 @@ namespace OpenBreed.Core.Managers
             components.Add(builder.Build());
         }
 
-        private void OnEntityRemovedFromWorld(object sender, EventArgs e)
+        private void OnEntityLeftWorld(object sender, EntityLeftWorldEventArgs e)
         {
             var entity = (IEntity)sender;
-            entity.Unsubscribe(CoreEventTypes.ENTITY_LEFT_WORLD, OnEntityRemovedFromWorld);
+            entity.Unsubscribe<EntityLeftWorldEventArgs>(OnEntityLeftWorld);
             entities.RemoveById(entity.Id);
         }
 

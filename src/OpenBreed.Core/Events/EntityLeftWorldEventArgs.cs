@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 namespace OpenBreed.Core.Events
 {
     /// <summary>
-    /// Event arguments that are passed with ENTITY_LEFT_WORLD event
-    /// </summary> 
+    /// Event args for event that occurs when entity left world
+    /// </summary>
     public class EntityLeftWorldEventArgs : EventArgs
     {
         #region Public Constructors

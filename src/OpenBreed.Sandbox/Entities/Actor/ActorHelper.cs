@@ -20,73 +20,79 @@ using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Physics.Helpers;
 using OpenBreed.Sandbox.Entities.Actor.States.Rotation;
 using OpenBreed.Core.Common.Components;
+using OpenBreed.Core.Modules.Rendering.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
     public static class ActorHelper
     {
+        private static void OnFrameUpdate(IEntity entity, int nextValue)
+        {
+            entity.PostCommand(new SpriteSetCommand(entity.Id, nextValue));
+        }
+
         public static void CreateAnimations(ICore core)
         {
-            var animationStandingRight = core.Animations.Anims.Create<int>("Animations/Actor/Standing/Right");
+            var animationStandingRight = core.Animations.Create<int>("Animations/Actor/Standing/Right", OnFrameUpdate);
             animationStandingRight.AddFrame(0, 2.0f);
-            var animationStandingRightDown = core.Animations.Anims.Create<int>("Animations/Actor/Standing/RightDown");
+            var animationStandingRightDown = core.Animations.Create<int>("Animations/Actor/Standing/RightDown", OnFrameUpdate);
             animationStandingRightDown.AddFrame(1, 2.0f);
-            var animationStandingDown = core.Animations.Anims.Create<int>("Animations/Actor/Standing/Down");
+            var animationStandingDown = core.Animations.Create<int>("Animations/Actor/Standing/Down", OnFrameUpdate);
             animationStandingDown.AddFrame(2, 2.0f);
-            var animationStandingDownLeft = core.Animations.Anims.Create<int>("Animations/Actor/Standing/DownLeft");
+            var animationStandingDownLeft = core.Animations.Create<int>("Animations/Actor/Standing/DownLeft", OnFrameUpdate);
             animationStandingDownLeft.AddFrame(3, 2.0f);
-            var animationStandingLeft = core.Animations.Anims.Create<int>("Animations/Actor/Standing/Left");
+            var animationStandingLeft = core.Animations.Create<int>("Animations/Actor/Standing/Left", OnFrameUpdate);
             animationStandingLeft.AddFrame(4, 2.0f);
-            var animationStandingLeftUp = core.Animations.Anims.Create<int>("Animations/Actor/Standing/LeftUp");
+            var animationStandingLeftUp = core.Animations.Create<int>("Animations/Actor/Standing/LeftUp", OnFrameUpdate);
             animationStandingLeftUp.AddFrame(5, 2.0f);
-            var animationStandingUp = core.Animations.Anims.Create<int>("Animations/Actor/Standing/Up");
+            var animationStandingUp = core.Animations.Create<int>("Animations/Actor/Standing/Up", OnFrameUpdate);
             animationStandingUp.AddFrame(6, 2.0f);
-            var animationStandingUpRight = core.Animations.Anims.Create<int>("Animations/Actor/Standing/UpRight");
+            var animationStandingUpRight = core.Animations.Create<int>("Animations/Actor/Standing/UpRight", OnFrameUpdate);
             animationStandingUpRight.AddFrame(7, 2.0f);
 
-            var animationWalkingRight = core.Animations.Anims.Create<int>("Animations/Actor/Walking/Right");
+            var animationWalkingRight = core.Animations.Create<int>("Animations/Actor/Walking/Right", OnFrameUpdate);
             animationWalkingRight.AddFrame(0, 1.0f);
             animationWalkingRight.AddFrame(8, 1.0f);
             animationWalkingRight.AddFrame(16, 1.0f);
             animationWalkingRight.AddFrame(24, 1.0f);
             animationWalkingRight.AddFrame(32, 1.0f);
-            var animationWalkingRightDown = core.Animations.Anims.Create<int>("Animations/Actor/Walking/RightDown");
+            var animationWalkingRightDown = core.Animations.Create<int>("Animations/Actor/Walking/RightDown", OnFrameUpdate);
             animationWalkingRightDown.AddFrame(1, 1.0f);
             animationWalkingRightDown.AddFrame(9, 1.0f);
             animationWalkingRightDown.AddFrame(17, 1.0f);
             animationWalkingRightDown.AddFrame(25, 1.0f);
             animationWalkingRightDown.AddFrame(33, 1.0f);
-            var animationWalkingDown = core.Animations.Anims.Create<int>("Animations/Actor/Walking/Down");
+            var animationWalkingDown = core.Animations.Create<int>("Animations/Actor/Walking/Down", OnFrameUpdate);
             animationWalkingDown.AddFrame(2, 1.0f);
             animationWalkingDown.AddFrame(10, 1.0f);
             animationWalkingDown.AddFrame(18, 1.0f);
             animationWalkingDown.AddFrame(26, 1.0f);
             animationWalkingDown.AddFrame(34, 1.0f);
-            var animationWalkingDownLeft = core.Animations.Anims.Create<int>("Animations/Actor/Walking/DownLeft");
+            var animationWalkingDownLeft = core.Animations.Create<int>("Animations/Actor/Walking/DownLeft", OnFrameUpdate);
             animationWalkingDownLeft.AddFrame(3, 1.0f);
             animationWalkingDownLeft.AddFrame(11, 1.0f);
             animationWalkingDownLeft.AddFrame(19, 1.0f);
             animationWalkingDownLeft.AddFrame(27, 1.0f);
             animationWalkingDownLeft.AddFrame(35, 1.0f);
-            var animationWalkingLeft = core.Animations.Anims.Create<int>("Animations/Actor/Walking/Left");
+            var animationWalkingLeft = core.Animations.Create<int>("Animations/Actor/Walking/Left", OnFrameUpdate);
             animationWalkingLeft.AddFrame(4, 1.0f);
             animationWalkingLeft.AddFrame(12, 1.0f);
             animationWalkingLeft.AddFrame(20, 1.0f);
             animationWalkingLeft.AddFrame(28, 1.0f);
             animationWalkingLeft.AddFrame(36, 1.0f);
-            var animationWalkingLeftUp = core.Animations.Anims.Create<int>("Animations/Actor/Walking/LeftUp");
+            var animationWalkingLeftUp = core.Animations.Create<int>("Animations/Actor/Walking/LeftUp", OnFrameUpdate);
             animationWalkingLeftUp.AddFrame(5, 1.0f);
             animationWalkingLeftUp.AddFrame(13, 1.0f);
             animationWalkingLeftUp.AddFrame(21, 1.0f);
             animationWalkingLeftUp.AddFrame(29, 1.0f);
             animationWalkingLeftUp.AddFrame(37, 1.0f);
-            var animationWalkingUp = core.Animations.Anims.Create<int>("Animations/Actor/Walking/Up");
+            var animationWalkingUp = core.Animations.Create<int>("Animations/Actor/Walking/Up", OnFrameUpdate);
             animationWalkingUp.AddFrame(6, 1.0f);
             animationWalkingUp.AddFrame(14, 1.0f);
             animationWalkingUp.AddFrame(22, 1.0f);
             animationWalkingUp.AddFrame(30, 1.0f);
             animationWalkingUp.AddFrame(38, 1.0f);
-            var animationWalkingUpRight = core.Animations.Anims.Create<int>("Animations/Actor/Walking/UpRight");
+            var animationWalkingUpRight = core.Animations.Create<int>("Animations/Actor/Walking/UpRight", OnFrameUpdate);
             animationWalkingUpRight.AddFrame(7, 1.0f);
             animationWalkingUpRight.AddFrame(15, 1.0f);
             animationWalkingUpRight.AddFrame(23, 1.0f);
@@ -99,7 +105,8 @@ namespace OpenBreed.Sandbox.Entities.Actor
             //var actor = core.Entities.Create();
 
             var actor = core.Entities.CreateFromTemplate("Arrow");
-
+            actor.Add(new ClassComponent("Actor"));
+            actor.Add(new TimerComponent());
             //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
             //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
             //actor.Add(AxisAlignedBoxShape.Create(0, 0, 32, 32));
@@ -107,13 +114,14 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
             actor.GetComponent<PositionComponent>().Value = pos;
 
-            actor.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, (s,a) => OnCollision((IEntity)s,(CollisionEventArgs)a));
+            actor.Subscribe<CollisionEventArgs>(OnCollision);
 
             return actor;
         }
 
-        private static void OnCollision(IEntity entity, CollisionEventArgs args)
+        private static void OnCollision(object sender, CollisionEventArgs args)
         {
+            var entity = (IEntity)sender;
             var body = args.Entity.TryGetComponent<BodyComponent>();
 
             var type = body.Tag;
@@ -128,35 +136,49 @@ namespace OpenBreed.Sandbox.Entities.Actor
             }
         }
 
-        public static StateMachine CreateAttackingFSM(IEntity entity)
+        public static void CreateAttackingFSM(ICore core)
         {
-            var stateMachine = entity.AddFSM("Attacking");
+            var stateMachine = core.StateMachines.Create<AttackingState, AttackingImpulse>("Actor.Attacking");
 
-            stateMachine.AddState(new ShootingState("Shooting"));
-            stateMachine.AddState(new States.Attacking.IdleState("Idle"));
-            stateMachine.AddState(new CooldownState("Cooldown"));
+            stateMachine.AddState(new States.Attacking.ShootingState());
+            stateMachine.AddState(new States.Attacking.IdleState());
+            stateMachine.AddState(new States.Attacking.CooldownState());
 
-            return stateMachine;
+            stateMachine.AddTransition(AttackingState.Shooting, AttackingImpulse.Stop, AttackingState.Idle);
+            stateMachine.AddTransition(AttackingState.Shooting, AttackingImpulse.Wait, AttackingState.Cooldown);
+            stateMachine.AddTransition(AttackingState.Cooldown, AttackingImpulse.Stop, AttackingState.Idle);
+            stateMachine.AddTransition(AttackingState.Cooldown, AttackingImpulse.Shoot, AttackingState.Shooting);
+            stateMachine.AddTransition(AttackingState.Idle, AttackingImpulse.Shoot, AttackingState.Shooting);
         }
 
-        public static StateMachine CreateRotationFSM(IEntity entity)
+        public static void CreateRotationFSM(ICore core)
         {
-            var stateMachine = entity.AddFSM("Rotation");
+            var stateMachine = core.StateMachines.Create<RotationState, RotationImpulse>("Actor.Rotation");
 
-            stateMachine.AddState(new States.Rotation.IdleState("Idle"));
-            stateMachine.AddState(new RotatingState("Rotating", "Animations/Actor"));
+            stateMachine.AddState(new States.Rotation.IdleState());
+            stateMachine.AddState(new States.Rotation.RotatingState());
 
-            return stateMachine;
+            stateMachine.AddTransition(RotationState.Rotating, RotationImpulse.Stop , RotationState.Idle);
+            stateMachine.AddTransition(RotationState.Idle, RotationImpulse.Rotate, RotationState.Rotating);
+
+            stateMachine.AddOnEnterState(RotationState.Idle, RotationImpulse.Stop, OnStop);
         }
 
-        public static StateMachine CreateMovementFSM(IEntity entity)
+        private static void OnStop()
         {
-            var stateMachine = entity.AddFSM("Movement");
+            //Console.WriteLine("Rotation -> Stopped");
+        }
 
-            stateMachine.AddState(new StandingState("Standing", "Animations/Actor"));
-            stateMachine.AddState(new WalkingState("Walking", "Animations/Actor"));
+        public static void CreateMovementFSM(ICore core)
+        {
+            var stateMachine = core.StateMachines.Create<MovementState, MovementImpulse>("Actor.Movement");
 
-            return stateMachine;
+            stateMachine.AddState(new StandingState());
+            stateMachine.AddState(new WalkingState());
+
+            stateMachine.AddTransition(MovementState.Walking, MovementImpulse.Stop, MovementState.Standing);
+            stateMachine.AddTransition(MovementState.Standing, MovementImpulse.Walk, MovementState.Walking);
+            stateMachine.AddTransition(MovementState.Walking, MovementImpulse.Walk, MovementState.Walking);
         }
     }
 }

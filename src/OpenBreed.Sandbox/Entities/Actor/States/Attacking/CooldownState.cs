@@ -1,10 +1,12 @@
 ﻿
 using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Events;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Systems.Control.Events;
+using OpenBreed.Core.Systems.Control.Components;
 using OpenTK;
 using System;
 using System.Linq;
@@ -12,90 +14,61 @@ using System.Timers;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {
-    public class CooldownState : IState
+    public class CooldownState : IState<AttackingState, AttackingImpulse>
     {
         private Timer timer;
 
         #region Public Constructors
 
-        public CooldownState(string id)
+        public CooldownState()
         {
-            Name = id;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public IEntity Entity { get; private set; }
-        public string Name { get; }
+        public int Id => (int)AttackingState.Cooldown;
+        public int FsmId { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void EnterState()
+        public void EnterState(IEntity entity)
         {
-            //Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
+            entity.PostCommand(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
-            Entity.Subscribe(ControlEventTypes.CONTROL_FIRE_CHANGED, OnControlFireChanged);
-
-            timer.Start();
-            timer.Elapsed += Timer_Elapsed;
+            entity.Subscribe<TimerElapsedEventArgs>(OnTimerElapsed);
+            entity.PostCommand(new TimerStartCommand(entity.Id, 0, 0.2));
         }
 
-        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        private void OnTimerElapsed(object sender, TimerElapsedEventArgs e)
         {
-            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Attacking", "Shoot"));
+            if (e.TimerId != 0)
+                return;
+
+            var entity = sender as IEntity;
+
+            var cc = entity.GetComponent<AttackControl>();
+
+            if(cc.AttackPrimary)
+                entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Shoot));
+            else
+                entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Stop));
         }
 
-        public void Initialize(IEntity entity)
+        public void Initialize(IEntity entity) 
         {
-            Entity = entity;
             timer = new Timer(100);
             timer.AutoReset = false;
         }
 
-        public void LeaveState()
+        public void LeaveState(IEntity entity)
         {
-            timer.Stop();
-            timer.Elapsed -= Timer_Elapsed;
-
-            Entity.Unsubscribe(ControlEventTypes.CONTROL_FIRE_CHANGED, OnControlFireChanged);
-        }
-
-        private void OnControlFireChanged(object sender, EventArgs e)
-        {
-            HandleControlFireChangedEvent((ControlFireChangedEvent)e);
-        }
-
-        private void HandleControlFireChangedEvent(ControlFireChangedEvent systemEvent)
-        {
-            if (systemEvent.Fire)
-                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Attacking", "Shoot"));
-            else
-                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Attacking", "Stop"));
-        }
-
-
-        public string Process(string actionName, object[] arguments)
-        {
-            switch (actionName)
-            {
-                case "Stop":
-                    {
-                        return "Idle";
-                    }
-                case "Shoot":
-                    {
-                        return "Shooting";
-                    }
-                default:
-                    break;
-            }
-
-            return null;
+            entity.Unsubscribe<TimerElapsedEventArgs>(OnTimerElapsed);
+            entity.PostCommand(new TimerStopCommand(entity.Id, 0));
         }
 
         #endregion Public Methods

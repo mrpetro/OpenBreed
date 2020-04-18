@@ -1,11 +1,13 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Physics.Helpers;
+using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
 using OpenBreed.Sandbox.Entities.Projectile.States;
 using OpenBreed.Sandbox.Helpers;
@@ -22,26 +24,32 @@ namespace OpenBreed.Sandbox.Entities.Projectile
     {
         public static void CreateAnimations(ICore core)
         {
-            var laserR = core.Animations.Anims.Create<int>("Animations/Laser/Fired/Right");
+            var laserR = core.Animations.Create<int>("Animations/Laser/Fired/Right", OnFrameUpdate);
             laserR.AddFrame(0, 2.0f);
-            var laserRD = core.Animations.Anims.Create<int>("Animations/Laser/Fired/RightDown");
+            var laserRD = core.Animations.Create<int>("Animations/Laser/Fired/RightDown", OnFrameUpdate);
             laserRD.AddFrame(1, 2.0f);
-            var laserD = core.Animations.Anims.Create<int>("Animations/Laser/Fired/Down");
+            var laserD = core.Animations.Create<int>("Animations/Laser/Fired/Down", OnFrameUpdate);
             laserD.AddFrame(2, 2.0f);
-            var laserDL = core.Animations.Anims.Create<int>("Animations/Laser/Fired/DownLeft");
+            var laserDL = core.Animations.Create<int>("Animations/Laser/Fired/DownLeft", OnFrameUpdate);
             laserDL.AddFrame(3, 2.0f);
-            var laserL = core.Animations.Anims.Create<int>("Animations/Laser/Fired/Left");
+            var laserL = core.Animations.Create<int>("Animations/Laser/Fired/Left", OnFrameUpdate);
             laserL.AddFrame(4, 2.0f);
-            var laserLU = core.Animations.Anims.Create<int>("Animations/Laser/Fired/LeftUp");
+            var laserLU = core.Animations.Create<int>("Animations/Laser/Fired/LeftUp", OnFrameUpdate);
             laserLU.AddFrame(5, 2.0f);
-            var laserU = core.Animations.Anims.Create<int>("Animations/Laser/Fired/Up");
+            var laserU = core.Animations.Create<int>("Animations/Laser/Fired/Up", OnFrameUpdate);
             laserU.AddFrame(6, 2.0f);
-            var laserUR = core.Animations.Anims.Create<int>("Animations/Laser/Fired/UpRight");
+            var laserUR = core.Animations.Create<int>("Animations/Laser/Fired/UpRight", OnFrameUpdate);
             laserUR.AddFrame(7, 2.0f);
         }
 
-        private static void OnCollision(IEntity entity, CollisionEventArgs args)
+        private static void OnFrameUpdate(IEntity entity, int nextValue)
         {
+            entity.PostCommand(new SpriteSetCommand(entity.Id, nextValue));
+        }
+
+        private static void OnCollision(object sender, CollisionEventArgs args)
+        {
+            var entity = (IEntity)sender;
             var body = args.Entity.TryGetComponent<BodyComponent>();
 
             var type = body.Tag;
@@ -59,29 +67,24 @@ namespace OpenBreed.Sandbox.Entities.Projectile
         public static void AddProjectile(ICore core, World world, float x, float y, float vx, float vy)
         {
             var projectile = core.Entities.CreateFromTemplate("Projectile");
-
-            projectile.Add(TextHelper.Create(core, new Vector2(-10, 10), "Bullet"));
+            projectile.Add(new FsmComponent());
 
             projectile.GetComponent<PositionComponent>().Value = new Vector2(x, y);
             projectile.GetComponent<VelocityComponent>().Value = new Vector2(vx, vy);
 
-            projectile.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, (s, a) => OnCollision((IEntity)s, (CollisionEventArgs)a));
+            projectile.Subscribe<CollisionEventArgs>(OnCollision);
 
-
+            var projectileFsm = core.StateMachines.GetByName("Projectile");
+            projectileFsm.SetInitialState(projectile, (int)AttackingState.Fired);
 
             world.AddEntity(projectile);
 
-            var doorSm = ProjectileHelper.CreateStateMachine(projectile);
-            doorSm.SetInitialState("Fired");
         }
 
-        public static StateMachine CreateStateMachine(IEntity entity)
+        public static void CreateFsm(ICore core)
         {
-            var stateMachine = entity.AddFSM("Attacking");
-
-            stateMachine.AddState(new FiredState("Fired", "Animations/Laser/Fired/"));
-
-            return stateMachine;
+            var stateMachine = core.StateMachines.Create<AttackingState, AttackingImpulse>("Projectile");
+            stateMachine.AddState(new FiredState("Animations/Laser/Fired/"));
         }
     }
 }

@@ -12,65 +12,53 @@ using System.Linq;
 using OpenBreed.Core.Common.Systems;
 
 using OpenBreed.Core.Modules.Physics.Commands;
+using OpenBreed.Sandbox.Entities.Door.States;
+using System;
+using OpenBreed.Core.Common.Components;
 
 namespace OpenBreed.Sandbox.Components.States
 {
-    public class ClosingState : IState
+    public class ClosingState : IState<FunctioningState, FunctioningImpulse>
     {
         #region Private Fields
 
-        private readonly string animationId;
+        private readonly string animPrefix;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ClosingState(string id, string animationId)
+        public ClosingState()
         {
-            Name = id;
-            this.animationId = animationId;
+            this.animPrefix = "Animations";
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public IEntity Entity { get; private set; }
-        public string Name { get; }
+        public int Id => (int)(ValueType)FunctioningState.Closing;
+        public int FsmId { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void EnterState()
+        public void EnterState(IEntity entity)
         {
-            Entity.PostCommand(new SpriteOnCommand(Entity.Id));
-            Entity.PostCommand(new BodyOnCommand(Entity.Id));
+            entity.PostCommand(new SpriteOnCommand(entity.Id));
+            entity.PostCommand(new BodyOnCommand(entity.Id));
 
-            Entity.PostCommand(new PlayAnimCommand(Entity.Id, animationId));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, "Door - Closing"));
+            var className = entity.GetComponent<ClassComponent>().Name;
+            var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
+            entity.PostCommand(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{stateName}", 0));
+
+
+            entity.PostCommand(new TextSetCommand(entity.Id, 0, "Door - Closing"));
         }
 
-        public void Initialize(IEntity entity)
+        public void LeaveState(IEntity entity)
         {
-            Entity = entity;
-        }
-
-        public void LeaveState()
-        {
-        }
-
-        public string Process(string actionName, object[] arguments)
-        {
-            switch (actionName)
-            {
-                case "Close":
-                    return "Closed";
-                default:
-                    break;
-            }
-
-            return null;
         }
 
         #endregion Public Methods

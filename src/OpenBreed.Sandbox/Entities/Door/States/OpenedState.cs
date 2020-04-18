@@ -13,67 +13,58 @@ using OpenBreed.Core.Common.Systems;
 
 using OpenBreed.Core.Modules.Physics.Commands;
 using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Sandbox.Entities.Door.States;
+using System;
+using OpenBreed.Core.Common.Components;
 
 namespace OpenBreed.Sandbox.Components.States
 {
-    public class OpenedState : IState
+    public class OpenedState : IState<FunctioningState, FunctioningImpulse>
     {
         #region Private Fields
 
-        private readonly int stampId;
+        private readonly string stampPrefix;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public OpenedState(string id, int stampId)
+        public OpenedState()
         {
-            Name = id;
-            this.stampId = stampId;
+            this.stampPrefix = "Tiles/Stamps";
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public IEntity Entity { get; private set; }
-        public string Name { get; }
+        public int Id => (int)(ValueType)FunctioningState.Opened;
+        public int FsmId { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void EnterState()
+        public void EnterState(IEntity entity)
         {
-            Entity.PostCommand(new SpriteOffCommand(Entity.Id));
-            Entity.PostCommand(new BodyOffCommand(Entity.Id));
+            entity.PostCommand(new SpriteOffCommand(entity.Id));
+            entity.PostCommand(new BodyOffCommand(entity.Id));
 
-            var pos = Entity.GetComponent<PositionComponent>();
+            var pos = entity.GetComponent<PositionComponent>();
 
-            Entity.PostCommand(new PutStampCommand(Entity.World.Id, stampId, 0, pos.Value));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, "Door - Opened"));
+            //entity.PostCommand(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
+
+            var className = entity.GetComponent<ClassComponent>().Name;
+            var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
+            var stampId = entity.Core.Rendering.Stamps.GetByName($"{stampPrefix}/{className}/{stateName}").Id;
+            entity.PostCommand(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
+
+
+            entity.PostCommand(new TextSetCommand(entity.Id, 0, "Door - Opened"));
         }
 
-        public void Initialize(IEntity entity)
+        public void LeaveState(IEntity entity)
         {
-            Entity = entity;
-        }
-
-        public void LeaveState()
-        {
-        }
-
-        public string Process(string actionName, object[] arguments)
-        {
-            switch (actionName)
-            {
-                case "Close":
-                    return "Closing";
-                default:
-                    break;
-            }
-
-            return null;
         }
 
         #endregion Public Methods

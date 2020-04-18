@@ -1,6 +1,4 @@
 ﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Systems;
-using OpenBreed.Core.Entities;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,6 +22,12 @@ namespace OpenBreed.Core.Helpers
         }
 
         #endregion Public Constructors
+
+        #region Public Properties
+
+        public bool AnyEnqueued => queue.Any();
+
+        #endregion Public Properties
 
         #region Public Methods
 

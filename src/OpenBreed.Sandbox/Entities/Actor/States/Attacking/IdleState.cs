@@ -6,7 +6,6 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Systems.Control.Events;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -16,62 +15,35 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {
-    public class IdleState : IState
+    public class IdleState : IState<AttackingState, AttackingImpulse>
     {
-        public IEntity Entity { get; private set; }
-
-        public IdleState(string id)
+        public IdleState()
         {
-            Name = id;
         }
 
-        public string Name { get; }
+        public int Id => (int)AttackingState.Idle;
+        public int FsmId { get; set; }
 
-        public void EnterState()
+        public void EnterState(IEntity entity)
         {
-            // Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
+            entity.PostCommand(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
-            Entity.Subscribe(ControlEventTypes.CONTROL_FIRE_CHANGED, OnControlFireChanged);
+            entity.Subscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
         }
 
-        public void Initialize(IEntity entity)
+        public void LeaveState(IEntity entity)
         {
-            Entity = entity;
+            entity.Unsubscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
         }
 
-        public void LeaveState()
+        private void OnControlFireChanged(object sender, ControlFireChangedEvenrArgs eventArgs)
         {
-            Entity.Unsubscribe(ControlEventTypes.CONTROL_FIRE_CHANGED, OnControlFireChanged);
+            var entity = sender as IEntity;
+
+            if (eventArgs.Fire)
+                entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Shoot));
         }
 
-        private void OnControlFireChanged(object sender, EventArgs eventArgs)
-        {
-            HandleControlFireChangedEvent((ControlFireChangedEvent)eventArgs);
-        }
-
-        private void HandleControlFireChangedEvent(ControlFireChangedEvent systemEvent)
-        {
-            if (systemEvent.Fire)
-                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Attacking", "Shoot"));
-            else
-                Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Attacking", "Stop"));
-        }
-
-
-        public string Process(string actionName, object[] arguments)
-        {
-            switch (actionName)
-            {
-                case "Shoot":
-                    {
-                        return "Shooting";
-                    }
-                default:
-                    break;
-            }
-
-            return null;
-        }
     }
 }

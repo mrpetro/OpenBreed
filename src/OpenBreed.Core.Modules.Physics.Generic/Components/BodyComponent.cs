@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Modules.Physics.Builders;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,12 @@ namespace OpenBreed.Core.Modules.Physics.Components
     {
         #region Public Constructors
 
-        public BodyComponent()
+        public BodyComponent(BodyComponentBuilder builder)
         {
+            CofFactor = builder.CofFactor;
+            CorFactor = builder.CorFactor;
+            Fixtures = builder.Fixtures;
+            Tag = builder.Type;
         }
 
         #endregion Public Constructors

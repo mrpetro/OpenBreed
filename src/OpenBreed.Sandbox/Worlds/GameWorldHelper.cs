@@ -1,22 +1,27 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Components;
+using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Helpers;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
+using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Physics.Systems;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
-using OpenBreed.Core.Modules.Rendering.Events;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
+using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Control.Components;
+using OpenBreed.Sandbox.Components;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Helpers;
+using OpenBreed.Sandbox.Systems;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -45,6 +50,9 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem(core.CreatePhysicsSystem().SetGridSize(width, height).Build());
             builder.AddSystem(core.CreateAnimationSystem().Build());
 
+            builder.AddSystem(new TimerSystem(core));
+            builder.AddSystem(new StateMachineSystem(core));
+
             ////Audio
             //builder.AddSystem(core.CreateSoundSystem().Build());
 
@@ -57,6 +65,8 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem(core.CreateSpriteSystem().Build());
             //builder.AddSystem(core.CreateWireframeSystem().Build());
             builder.AddSystem(core.CreateTextSystem().Build());
+
+            builder.AddSystem(new UiSystem(core));
 
             builder.AddSystem(new ViewportSystem(core));
         }
@@ -75,18 +85,18 @@ namespace OpenBreed.Sandbox.Worlds
 
             var cameraBuilder = new CameraBuilder(core);
 
-            cameraBuilder.SetPosition(new Vector2(64, 64));
+            cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);
-            cameraBuilder.SetZoom(320 , 240);
+            cameraBuilder.SetFov(320 , 240);
 
             var playerCamera = cameraBuilder.Build();
             playerCamera.Tag = "PlayerCamera";
-            playerCamera.Add(new Animator(10.0f, false, -1, FrameTransition.LinearInterpolation));
+            playerCamera.Add(new AnimationComponent(10.0f, false, -1, FrameTransition.LinearInterpolation));
 
-            cameraBuilder.SetZoom(640, 480);
+            cameraBuilder.SetFov(640, 480);
             var gameCamera = cameraBuilder.Build();
             gameCamera.Tag = "HubCamera";
-            gameCamera.Add(new Animator(10.0f, false, -1, FrameTransition.LinearInterpolation));
+            gameCamera.Add(new AnimationComponent(10.0f, false, -1, FrameTransition.LinearInterpolation));
 
             using (var reader = new TxtFileWorldReader(core, ".\\Content\\Maps\\hub.txt"))
                 gameWorld = reader.GetWorld();
@@ -100,15 +110,16 @@ namespace OpenBreed.Sandbox.Worlds
             gameWorld.AddEntity(gameCamera);
 
             var actor = ActorHelper.CreateActor(core, new Vector2(128, 128));
+            actor.Add(new FsmComponent());
             actor.Tag = playerCamera;
 
             actor.Add(new WalkingControl());
             actor.Add(new AttackControl());
 
-            actor.Add(TextHelper.Create(core, new Vector2(0, 32), "Hero"));
+            //actor.Add(TextHelper.Create(core, new Vector2(0, 32), "Hero"));
 
-            actor.Subscribe(CoreEventTypes.ENTITY_ENTERED_WORLD, OnEntityEntered);
-            actor.Subscribe(CoreEventTypes.ENTITY_LEFT_WORLD, OnEntityLeftWorld);
+            actor.Subscribe<EntityEnteredWorldEventArgs>(OnEntityEntered);
+            actor.Subscribe<EntityLeftWorldEventArgs>(OnEntityLeftWorld);
 
 
             core.Jobs.Execute(new CameraFollowJob(playerCamera, actor));
@@ -118,26 +129,38 @@ namespace OpenBreed.Sandbox.Worlds
             var player2 = core.Players.GetByName("P2");
             player2.AssumeControl(actor);
 
-            var movementFsm = ActorHelper.CreateMovementFSM(actor);
-            var atackFsm = ActorHelper.CreateAttackingFSM(actor);
-            var rotateFsm = ActorHelper.CreateRotationFSM(actor);
-            movementFsm.SetInitialState("Standing");
-            atackFsm.SetInitialState("Idle");
-            rotateFsm.SetInitialState("Idle");
+            var movementFsm = core.StateMachines.GetByName("Actor.Movement");
+            var atackFsm = core.StateMachines.GetByName("Actor.Attacking");
+            var rotateFsm = core.StateMachines.GetByName("Actor.Rotation");
+            movementFsm.SetInitialState(actor, (int)Entities.Actor.States.Movement.MovementState.Standing);
+            atackFsm.SetInitialState(actor, (int)Entities.Actor.States.Attacking.AttackingState.Idle);
+            rotateFsm.SetInitialState(actor, (int)Entities.Actor.States.Rotation.RotationState.Idle);
             gameWorld.AddEntity(actor);
 
             var gameViewport = core.Entities.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
 
             gameViewport.GetComponent<ViewportComponent>().CameraEntityId = playerCamera.Id;
 
+            var cursorEntity = core.Entities.Create();
+        
+            var spriteBuilder = SpriteComponentBuilder.New(core);
+            spriteBuilder.SetProperty("AtlasId", "Atlases/Sprites/Cursors");
+            spriteBuilder.SetProperty("Order", 100.0);
+            spriteBuilder.SetProperty("ImageId", 0);
+            cursorEntity.Add(spriteBuilder.Build());
+            cursorEntity.Add(PositionComponent.Create(0, 0));
+            cursorEntity.Add(new CursorInputComponent(0));
+
             //gameViewport.Subscribe(GfxEventTypes.VIEWPORT_RESIZED, (s, a) => UpdateCameraFov(playerCamera, (ViewportResizedEventArgs)a));
             //SetPreserveAspectRatio(gameViewport);
+
+            gameWorld.AddEntity(cursorEntity);
         }
 
         public static void SetPreserveAspectRatio(IEntity viewportEntity)
         {
             var cameraEntity = viewportEntity.Core.Entities.GetById(viewportEntity.GetComponent<ViewportComponent>().CameraEntityId);
-            viewportEntity.Subscribe(GfxEventTypes.VIEWPORT_RESIZED, (s, a) => UpdateCameraFov(cameraEntity, (ViewportResizedEventArgs)a));
+            viewportEntity.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateCameraFov(cameraEntity, a));
         }
 
         private static void UpdateCameraFov(IEntity cameraEntity, ViewportResizedEventArgs a)
@@ -146,16 +169,14 @@ namespace OpenBreed.Sandbox.Worlds
             cameraEntity.GetComponent<CameraComponent>().Height = a.Height;
         }
 
-        private static void OnEntityEntered(object sender, EventArgs e)
+        private static void OnEntityEntered(object sender, EntityEnteredWorldEventArgs a)
         {
-            var ea = (EntityEnteredWorldEventArgs)e;
-            ea.Entity.Core.Logging.Verbose($"Entity '{ea.Entity.Id}' entered world '{ea.World.Name}'.");
+            a.Entity.Core.Logging.Verbose($"Entity '{a.Entity.Id}' entered world '{a.World.Name}'.");
         }
 
-        private static void OnEntityLeftWorld(object sender, EventArgs e)
+        private static void OnEntityLeftWorld(object sender, EntityLeftWorldEventArgs a)
         {
-            var ea = (EntityLeftWorldEventArgs)e;
-            ea.Entity.Core.Logging.Verbose($"Entity '{ea.Entity.Id}' left world '{ea.World.Name}'.");
+            a.Entity.Core.Logging.Verbose($"Entity '{a.Entity.Id}' left world '{a.World.Name}'.");
 
         }
     }

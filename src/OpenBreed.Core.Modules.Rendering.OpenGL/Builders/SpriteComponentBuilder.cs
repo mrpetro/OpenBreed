@@ -5,19 +5,11 @@ using System;
 
 namespace OpenBreed.Core.Modules.Physics.Builders
 {
-    public class SpriteComponentBuilder : BaseComponentBuilder
+    public class SpriteComponentBuilder : BaseComponentBuilder<SpriteComponentBuilder>
     {
         #region Private Fields
 
         internal int AtlasId { get; private set; }
-        internal string AtlasAlias
-        {
-            set
-            {
-                AtlasId = Core.Rendering.Sprites.GetByAlias(value).Id;
-            }
-        }
-
         internal int ImageId { get; private set; }
         internal float Order { get; private set; }
 
@@ -40,7 +32,15 @@ namespace OpenBreed.Core.Modules.Physics.Builders
 
         public override IEntityComponent Build()
         {
-            return SpriteComponent.Create(AtlasId, ImageId, Order);
+            return new SpriteComponent(this);
+        }
+
+        public int ToAtlasId(object value)
+        {
+            if (value is int)
+                return (int)value;
+
+            return Core.Rendering.Sprites.GetByAlias(Convert.ToString(value)).Id;
         }
 
         public override void SetProperty(object key, object value)
@@ -48,12 +48,8 @@ namespace OpenBreed.Core.Modules.Physics.Builders
             var propertyName = Convert.ToString(key);
             switch (propertyName)
             {
-                case nameof(AtlasAlias):
-                    AtlasAlias = Convert.ToString(value);
-                    break;
-
                 case nameof(AtlasId):
-                    AtlasId = Convert.ToInt32(value);
+                    AtlasId = ToAtlasId(value);
                     break;
 
                 case nameof(ImageId):

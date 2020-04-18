@@ -8,6 +8,7 @@ using System.Linq;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Systems;
+using OpenBreed.Core.Modules.Physics.Helpers;
 
 namespace OpenBreed.Core.Modules.Physics.Systems
 {

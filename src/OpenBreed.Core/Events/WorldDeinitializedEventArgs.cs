@@ -4,7 +4,7 @@ using System;
 namespace OpenBreed.Core.Events
 {
     /// <summary>
-    /// Event arguments that are passed with WORLD_DEINITIALIZED event
+    /// Event args for event that occurs when world is deinitialized
     /// </summary>
     public class WorldDeinitializedEventArgs : EventArgs
     {

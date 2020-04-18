@@ -3,7 +3,7 @@ using System;
 
 namespace OpenBreed.Core.Common.Builders
 {
-    public class VelocityComponentBuilder : BaseComponentBuilder
+    public class VelocityComponentBuilder : BaseComponentBuilder<VelocityComponentBuilder>
     {
         #region Private Fields
 

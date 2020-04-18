@@ -82,29 +82,43 @@
   <ItemGroup>
     <Compile Include="Commands\MoveToCommand.cs" />
     <Compile Include="Components\CollisionDebug.cs" />
+    <None Include="Content\Graphics\Cursors.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="Entities\Actor\Arrow.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Compile Include="Components\UiComponent.cs" />
+    <Compile Include="Components\CursorInputComponent.cs" />
+    <Compile Include="Entities\Actor\States\Attacking\AttackingState.cs" />
     <Compile Include="Entities\Actor\States\Attacking\IdleState.cs" />
     <Compile Include="Entities\Actor\States\Attacking\CooldownState.cs" />
     <Compile Include="Entities\Actor\States\Attacking\ShootingState.cs" />
+    <Compile Include="Entities\Actor\States\Movement\MovementState.cs" />
     <Compile Include="Entities\Actor\States\Movement\WalkingState.cs" />
     <Compile Include="Entities\Actor\States\Movement\StandingState.cs" />
     <Compile Include="Entities\Actor\ActorHelper.cs" />
+    <Compile Include="Entities\Actor\States\Rotation\RotationState.cs" />
     <Compile Include="Entities\Actor\States\Rotation\IdleState.cs" />
     <Compile Include="Entities\Actor\States\Rotation\RotatingState.cs" />
     <Compile Include="Entities\Box\BoxHelper.cs" />
     <Compile Include="Entities\Builders\WorldBlockBuilder.cs" />
+    <Compile Include="Entities\Button\ButtonHelper.cs" />
+    <Compile Include="Entities\Button\ButtonState.cs" />
+    <Compile Include="Entities\Button\States\PressedState.cs" />
+    <Compile Include="Entities\Button\States\IdleState.cs" />
     <Compile Include="Entities\Camera\CameraHelper.cs" />
     <Compile Include="Entities\Door\DoorHelper.cs" />
+    <Compile Include="Entities\Door\States\FunctioningState.cs" />
     <Compile Include="Entities\Door\States\OpenedState.cs" />
     <Compile Include="Entities\Door\States\ClosedState.cs" />
     <Compile Include="Entities\Door\States\OpeningState.cs" />
     <Compile Include="Entities\Door\States\ClosingState.cs" />
+    <Compile Include="Entities\FpsCounter\FpsCounterHelper.cs" />
     <Compile Include="Entities\Pickable\PickableHelper.cs" />
+    <Compile Include="Entities\Pickable\States\FunctioningState.cs" />
     <Compile Include="Entities\Pickable\States\LyingState.cs" />
     <Compile Include="Entities\Pickable\States\PickingState.cs" />
+    <Compile Include="Entities\Projectile\States\AttackingState.cs" />
     <Compile Include="Entities\Teleport\CameraFollowJob.cs" />
     <Compile Include="Entities\Teleport\CameraEffectJob.cs" />
     <Compile Include="Entities\Teleport\TeleportHelper.cs" />
@@ -117,17 +131,9 @@
     <Compile Include="Jobs\EntityJob.cs" />
     <Compile Include="Jobs\FpsTextUpdateJob.cs" />
     <Compile Include="Managers\LogMan.cs" />
-    <Compile Include="Helpers\SandBoxHelper.cs" />
-    <Compile Include="Helpers\TextHelper.cs" />
     <Compile Include="Items\CreditsItem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="States\StateTechDemo4.cs" />
-    <Compile Include="States\StateTechDemo6.cs" />
-    <Compile Include="States\StateTechDemo5.cs" />
-    <Compile Include="States\StateTechDemo3.cs" />
-    <Compile Include="States\StateTechDemo2.cs" />
-    <Compile Include="States\StateTechDemo1.cs" />
     <Compile Include="Systems\UiSystem.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="Worlds\GameWorldHelper.cs" />
@@ -166,6 +172,9 @@
     <Content Include="Entities\WorldGate\WorldGateEntry.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Entities\Button\Button.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -177,10 +186,6 @@
     <ProjectReference Include="..\OpenBreed.Core.Modules.Rendering.OpenGL\OpenBreed.Core.Modules.Rendering.OpenGL.csproj">
       <Project>{EA747476-89FE-462A-9BDC-DFC2E9A64EAD}</Project>
       <Name>OpenBreed.Core.Modules.Rendering.OpenGL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Core.Modules.Animation.Generic\OpenBreed.Core.Modules.Animation.Generic.csproj">
-      <Project>{657319C5-4BA7-4A81-B7D1-4527CEAE125C}</Project>
-      <Name>OpenBreed.Core.Modules.Animation.Generic</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Core.Systems.Control\OpenBreed.Core.Systems.Control.csproj">
       <Project>{CF689601-0842-497F-A05F-B31431697B4E}</Project>

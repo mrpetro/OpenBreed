@@ -1,34 +1,27 @@
-﻿
-using OpenBreed.Core.Common.Systems.Components;
+﻿using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Events;
 using OpenBreed.Core.Modules.Animation.Commands;
+using OpenBreed.Core.Modules.Animation.Events;
 using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Commands;
+using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.States;
 using OpenBreed.Sandbox.Helpers;
-using OpenTK;
-using System;
-using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Projectile.States
 {
-    public class FiredState : IState
+    public class FiredState : IState<AttackingState, AttackingImpulse>
     {
         #region Private Fields
 
-        private SpriteComponent sprite;
         private readonly string animPrefix;
-        private VelocityComponent velocity;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public FiredState(string name, string animPrefix)
+        public FiredState(string animPrefix)
         {
-            Name = name;
             this.animPrefix = animPrefix;
         }
 
@@ -36,65 +29,37 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
 
         #region Public Properties
 
-        public IEntity Entity { get; private set; }
-        public string Name { get; }
+        public int Id => (int)AttackingState.Fired;
+        public int FsmId { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void EnterState()
+        public void EnterState(IEntity entity)
         {
-
-            var direction = Entity.GetComponent<VelocityComponent>().Value;
+            var direction = entity.GetComponent<VelocityComponent>().Value;
 
             var animDirName = AnimHelper.ToDirectionName(direction);
 
-            Entity.PostCommand(new PlayAnimCommand(Entity.Id, animPrefix + animDirName));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, "Projectile - Fired"));
-            Entity.Subscribe(PhysicsEventTypes.COLLISION_OCCURRED, OnCollision);
-
-            Entity.Subscribe(AnimationEventTypes.ANIMATION_CHANGED, OnFrameChanged);
+            entity.PostCommand(new PlayAnimCommand(entity.Id, animPrefix + animDirName, 0));
+            entity.PostCommand(new TextSetCommand(entity.Id, 0, "Projectile - Fired"));
+            entity.Subscribe<CollisionEventArgs>(OnCollision);
         }
 
         public void Initialize(IEntity entity)
         {
-            Entity = entity;
-            velocity = entity.GetComponent<VelocityComponent>();
-            sprite = entity.GetComponent<SpriteComponent>();
         }
 
-        public void LeaveState()
+        public void LeaveState(IEntity entity)
         {
-            Entity.Unsubscribe(AnimationEventTypes.ANIMATION_CHANGED, OnFrameChanged);
-        }
-
-        private void OnFrameChanged(object sender, EventArgs e)
-        {
-            HandleFrameChangeEvent((AnimChangedEventArgs)e);
-        }
-
-        private void HandleFrameChangeEvent(AnimChangedEventArgs systemEvent)
-        {
-            sprite.ImageId = (int)systemEvent.Frame;
-        }
-
-        public string Process(string actionName, object[] arguments)
-        {
-
-            return null;
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void OnCollision(object sender, EventArgs e)
-        {
-            HandleCollisionEvent((CollisionEventArgs)e);
-        }
-
-        private void HandleCollisionEvent(CollisionEventArgs e)
+        private void OnCollision(object sender, CollisionEventArgs e)
         {
             //Entity.PostMsg(new StateChangeMsg(Entity, "Attacking", "Open"));
         }

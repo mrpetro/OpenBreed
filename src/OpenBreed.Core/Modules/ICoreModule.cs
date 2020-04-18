@@ -15,11 +15,11 @@ namespace OpenBreed.Core.Modules
         ICore Core { get; }
 
         /// <summary>
-        /// Subscribe to event of particular type
+        /// 
         /// </summary>
-        /// <param name="eventType">Type of event to subscribe for</param>
-        /// <param name="callback">Callback action when event will occur</param>
-        void Subscribe(string eventType, Action<object, EventArgs> callback);
+        /// <typeparam name="T">Event type</typeparam>
+        /// <param name="callback">Event callback action</param>
+        void Subscribe<T>(Action<object, T> callback) where T : EventArgs;
 
         #endregion Public Properties
     }

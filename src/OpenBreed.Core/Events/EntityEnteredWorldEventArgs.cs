@@ -5,7 +5,7 @@ using System;
 namespace OpenBreed.Core.Events
 {
     /// <summary>
-    /// Event arguments that are passed with ENTITY_ENTERED_WORLD event
+    /// Event args for event that occurs when entity entered world
     /// </summary>
     public class EntityEnteredWorldEventArgs : EventArgs
     {

@@ -80,9 +80,9 @@
     <Compile Include="Components\CameraComponent.cs" />
     <Compile Include="Components\SpriteComponent.cs" />
     <Compile Include="Components\TextComponent.cs" />
+    <Compile Include="Events\ViewportClickedEventArgs.cs" />
     <Compile Include="Events\ViewportResizedEventArgs.cs" />
     <Compile Include="Events\ClientResizedEventArgs.cs" />
-    <Compile Include="Events\GfxEventTypes.cs" />
     <Compile Include="Helpers\TileCell.cs" />
     <Compile Include="Components\TileComponent.cs" />
     <Compile Include="Components\ViewportComponent.cs" />
@@ -112,6 +112,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OpenGLModule.cs" />
     <Compile Include="Managers\TextureMan.cs" />
+    <Compile Include="Systems\StampSystem.cs" />
     <Compile Include="Systems\ViewportSystem.cs" />
     <Compile Include="Systems\WireframeSystem.cs" />
     <Compile Include="Systems\TextSystem.cs" />

@@ -5,7 +5,7 @@ using System;
 namespace OpenBreed.Core.Modules.Physics.Events
 {
     /// <summary>
-    /// Event arguments that are passed with COLLISION_OCCURRED event
+    /// Event args for event that occurs when two entities are colliding
     /// </summary>
     public class CollisionEventArgs : EventArgs
     {

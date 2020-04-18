@@ -49,12 +49,12 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         /// <summary>
         /// Creates camera component for viewport system
         /// </summary>
-        /// <param name="zoom">Initial zoom value</param>
+        /// <param name="width">Initial zoom value</param>
         /// <param name="brightness">Initial brightness value</param>
         /// <returns>Camera component</returns>
-        public static CameraComponent Create(float zoom, float height, float brightness = 1.0f)
+        public static CameraComponent Create(float width, float height, float brightness = 1.0f)
         {
-            return new CameraComponent(zoom, height, brightness);
+            return new CameraComponent(width, height, brightness);
         }
 
         #endregion Public Methods

@@ -1,6 +1,4 @@
 ﻿using OpenBreed.Core.Commands;
-
-using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Extensions;
@@ -58,7 +56,6 @@ namespace OpenBreed.Core.Common
             Components = new ComponentsMan();
             commandHandler = new CommandHandler(this);
             msgHandlerRelay = new MsgHandlerRelay(this);
-            RegisterHandler(EntitySetStateCommand.TYPE, commandHandler);
 
             Core.Worlds.RegisterWorld(this);
 
@@ -124,9 +121,6 @@ namespace OpenBreed.Core.Common
         {
             switch (cmd.Type)
             {
-                case EntitySetStateCommand.TYPE:
-                    return HandleStateChangeCommand(sender, (EntitySetStateCommand)cmd);
-
                 case WorldSetPauseCommand.TYPE:
                     return HandleWorldPauseCommand(sender, (WorldSetPauseCommand)cmd);
 
@@ -183,6 +177,11 @@ namespace OpenBreed.Core.Common
             return msgHandlerRelay.Handle(sender, msg);
         }
 
+        public void RaiseEvent<T>(T eventArgs) where T : EventArgs
+        {
+            Core.Events.Raise(this, eventArgs);
+        }
+
         #endregion Public Methods
 
         #region Internal Methods
@@ -202,12 +201,12 @@ namespace OpenBreed.Core.Common
             //InitializeSystems();
             Cleanup();
 
-            Core.Events.Raise(this, CoreEventTypes.WORLD_INITIALIZED, new WorldInitializedEventArgs(this));
+            RaiseEvent(new WorldInitializedEventArgs(this));
         }
 
         internal void Deinitialize()
         {
-            Core.Events.Raise(this, CoreEventTypes.WORLD_DEINITIALIZED, new WorldDeinitializedEventArgs(this));
+            RaiseEvent(new WorldDeinitializedEventArgs(this));
         }
 
         internal void RegisterEntity(Entity entity)
@@ -257,18 +256,6 @@ namespace OpenBreed.Core.Common
         {
             for (int i = 0; i < systems.Count; i++)
                 systems[i].Initialize(this);
-        }
-
-        private bool HandleStateChangeCommand(object sender, EntitySetStateCommand cmd)
-        {
-            var entity = Core.Entities.GetById(cmd.EntityId);
-
-            var fsm = entity.FsmList.FirstOrDefault(item => item.Name == cmd.FsmName);
-
-            if (fsm != null)
-                fsm.Handle(sender, cmd);
-
-            return true;
         }
 
         private bool HandleWorldPauseCommand(object sender, WorldSetPauseCommand cmd)

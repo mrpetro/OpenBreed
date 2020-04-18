@@ -1,27 +1,24 @@
 ﻿using OpenBreed.Core.Common.Builders;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Rendering;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace OpenBreed.Core.Modules.Physics.Builders
 {
-    public class BodyComponentBuilder : BaseComponentBuilder
+    public class BodyComponentBuilder : BaseComponentBuilder<BodyComponentBuilder>
     {
-        #region Private Fields
+        #region Internal Fields
 
-        private static Dictionary<string, Action<BodyComponentBuilder, object>> setters = new Dictionary<string, Action<BodyComponentBuilder, object>>();
-        private float cofFactor;
+        internal float CofFactor;
 
-        private float corFactor;
+        internal float CorFactor;
 
-        private string type;
+        internal string Type;
 
-        private List<string> fixtures;
+        internal List<int> Fixtures;
 
-        #endregion Private Fields
+        #endregion Internal Fields
 
         #region Protected Constructors
 
@@ -40,50 +37,41 @@ namespace OpenBreed.Core.Modules.Physics.Builders
 
         public static void Register(ICore core)
         {
-            core.Entities.RegisterComponentBuilder("BodyComponent", New);
+            core.Entities.RegisterComponentBuilder(nameof(BodyComponent), New);
 
-            RegisterSetter("CofFactor", (o, value) => { o.cofFactor = Convert.ToSingle(value); });
-            RegisterSetter("CorFactor", (o, value) => { o.corFactor = Convert.ToSingle(value); });
-            RegisterSetter("Type", (o, value) => { o.type = Convert.ToString(value); });
-            RegisterSetter("Fixtures", (o, value) => { o.fixtures = ToStringArray(value); });
+            RegisterSetter("CofFactor", (o, value) => { o.CofFactor = Convert.ToSingle(value); });
+            RegisterSetter("CorFactor", (o, value) => { o.CorFactor = Convert.ToSingle(value); });
+            RegisterSetter("Type", (o, value) => { o.Type = Convert.ToString(value); });
+            RegisterSetter("Fixtures", (o, value) => { o.Fixtures = o.ToFixtureIdList(value); });
         }
 
         public override IEntityComponent Build()
         {
-            var fixtureIds = new List<int>();
-
-            if (fixtures != null)
-            {
-                foreach (var item in fixtures)
-                {
-                    var fixture = Core.GetModule<PhysicsModule>().Fixturs.GetByAlias(item);
-
-                    if (fixture != null)
-                        fixtureIds.Add(fixture.Id);
-                }
-            }
-
-            return new BodyComponent() { CofFactor = cofFactor, CorFactor = corFactor, Fixtures = fixtureIds, Tag = type };
-        }
-
-        public override void SetProperty(object key, object value)
-        {
-            var propertyName = Convert.ToString(key);
-            setters[propertyName].Invoke(this, value);
+            return new BodyComponent(this);
         }
 
         #endregion Public Methods
 
-        #region Protected Methods
-
-        protected static void RegisterSetter(string name, Action<BodyComponentBuilder, object> setter)
-        {
-            setters.Add(name, setter);
-        }
-
-        #endregion Protected Methods
-
         #region Private Methods
+
+        private List<int> ToFixtureIdList(object value)
+        {
+            if (value is List<int>)
+                return (List<int>)value;
+
+            var fixtureNames = ToStringArray(value);
+            var fixtureIds = new List<int>();
+
+            foreach (var fixtureName in fixtureNames)
+            {
+                var fixture = Core.GetModule<PhysicsModule>().Fixturs.GetByAlias(fixtureName);
+
+                if (fixture != null)
+                    fixtureIds.Add(fixture.Id);
+            }
+
+            return fixtureIds;
+        }
 
         #endregion Private Methods
     }

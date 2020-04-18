@@ -1,27 +1,18 @@
-﻿
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Animation.Events;
 using OpenBreed.Core.Modules.Animation.Commands;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
 using OpenBreed.Sandbox.Helpers;
-using OpenTK;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 {
-    public class RotatingState : IState
+    public class RotatingState : IState<RotationState, RotationImpulse>
     {
         #region Private Fields
 
@@ -31,63 +22,44 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 
         #region Public Constructors
 
-        public RotatingState(string id, string animPrefix)
+        public RotatingState()
         {
-            Name = id;
-            this.animPrefix = animPrefix;
+            this.animPrefix = "Animations";
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public IEntity Entity { get; private set; }
-        public string Name { get; }
+        public int Id => (int)RotationState.Rotating;
+        public int FsmId { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void EnterState()
+        public void EnterState(IEntity entity)
         {
-            var direction = Entity.GetComponent<Direction>();
-            var movement = Entity.GetComponent<MotionComponent>();
-            Entity.GetComponent<ThrustComponent>().Value = direction.Value * movement.Acceleration;
+            var direction = entity.GetComponent<DirectionComponent>();
+            var movement = entity.GetComponent<MotionComponent>();
+            entity.GetComponent<ThrustComponent>().Value = direction.Value * movement.Acceleration;
 
             var animDirName = AnimHelper.ToDirectionName(direction.Value);
-            var animMovementName = Entity.FsmList.First(item => item.Name == "Movement");
+            var className = entity.GetComponent<ClassComponent>().Name;
+            var movementFsm = entity.Core.StateMachines.GetByName("Actor.Movement");
+            var movementStateName = movementFsm.GetCurrentStateName(entity);
+            entity.PostCommand(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{movementStateName}/{animDirName}", 0));
 
-            Entity.PostCommand(new PlayAnimCommand(Entity.Id, $"{animPrefix}/{animMovementName.CurrentStateName}/{animDirName}"));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
+            entity.PostCommand(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
-            Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Rotation", "Stop"));
+            entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)RotationImpulse.Stop));
         }
 
-        public void Initialize(IEntity entity)
+        public void LeaveState(IEntity entity)
         {
-            Entity = entity;
-        }
-
-        public void LeaveState()
-        {
-        }
-
-        public string Process(string actionName, object[] arguments)
-        {
-            switch (actionName)
-            {
-                case "Stop":
-                    {
-                        return "Idle";
-                    }
-                default:
-                    break;
-            }
-
-            return null;
         }
 
         #endregion Public Methods
-
     }
 }

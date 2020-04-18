@@ -180,7 +180,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             {
                 activeDynamics.Add(dynamicToActivate);
                 inactiveDynamics.Remove(dynamicToActivate);
-                entity.RaiseEvent(PhysicsEventTypes.BODY_ON, new BodyOnEventArgs(entity));
+                entity.RaiseEvent(new BodyOnEventArgs(entity));
                 return true;
             }
 
@@ -189,7 +189,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             {
                 InsertToGrid(staticToActivate);
                 inactiveStatics.Remove(staticToActivate);
-                entity.RaiseEvent(PhysicsEventTypes.BODY_ON, new BodyOnEventArgs(entity));
+                entity.RaiseEvent(new BodyOnEventArgs(entity));
                 return true;
             }
 
@@ -207,7 +207,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 inactiveDynamics.Add(dynamicToDeactivate);
                 activeDynamics.Remove(dynamicToDeactivate);
 
-                entity.RaiseEvent(PhysicsEventTypes.BODY_OFF, new BodyOffEventArgs(entity));
+                entity.RaiseEvent(new BodyOffEventArgs(entity));
                 return true;
             }
 
@@ -216,7 +216,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             if (staticToDeactivate != null)
             {
                 inactiveStatics.Add(staticToDeactivate);
-                entity.RaiseEvent(PhysicsEventTypes.BODY_OFF, new BodyOffEventArgs(entity));
+                entity.RaiseEvent(new BodyOffEventArgs(entity));
                 return true;
             }
 
@@ -273,8 +273,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 var entityA = Core.Entities.GetById(packA.EntityId);
                 var entityB = Core.Entities.GetById(packB.EntityId);
 
-                entityA.RaiseEvent(PhysicsEventTypes.COLLISION_OCCURRED, new CollisionEventArgs(entityB, projection));
-                entityB.RaiseEvent(PhysicsEventTypes.COLLISION_OCCURRED, new CollisionEventArgs(entityA, projection));
+                entityA.RaiseEvent(new CollisionEventArgs(entityB, projection));
+                entityB.RaiseEvent(new CollisionEventArgs(entityA, projection));
 
                 //bodyA.Entity.RaiseEvent(new CollisionEvent(bodyB.Entity));
                 //bodyB.Entity.RaiseEvent(new CollisionEvent(bodyA.Entity));
@@ -290,8 +290,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 var entityA = Core.Entities.GetById(packA.EntityId);
                 var entityB = Core.Entities.GetById(packB.EntityId);
 
-                entityA.RaiseEvent(PhysicsEventTypes.COLLISION_OCCURRED, new CollisionEventArgs(entityB, projection));
-                entityB.RaiseEvent(PhysicsEventTypes.COLLISION_OCCURRED, new CollisionEventArgs(entityA, projection));
+                entityA.RaiseEvent(new CollisionEventArgs(entityB, projection));
+                entityB.RaiseEvent(new CollisionEventArgs(entityA, projection));
             }
         }
 

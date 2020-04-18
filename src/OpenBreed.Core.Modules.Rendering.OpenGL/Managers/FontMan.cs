@@ -39,14 +39,15 @@ namespace OpenBreed.Core.Modules.Rendering.Managers
         public IFont Create(string fontName, int fontSize)
         {
             fontName = fontName.Trim().ToLower();
-            var faBuilder = new FontAtlasBuilder(this);
-            faBuilder.SetFontName(fontName);
-            faBuilder.SetFontSize(fontSize);
 
             var alias = $"Fonts/{fontName}/{fontSize}";
             IFont result;
             if (aliases.TryGetValue(alias, out result))
                 return result;
+
+            var faBuilder = new FontAtlasBuilder(this);
+            faBuilder.SetFontName(fontName);
+            faBuilder.SetFontSize(fontSize);
 
             result = new FontAtlas(faBuilder);
             items.Add(result);

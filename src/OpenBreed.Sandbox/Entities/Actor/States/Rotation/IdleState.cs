@@ -5,7 +5,6 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
-using OpenBreed.Core.Systems.Control.Events;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -15,68 +14,43 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 {
-    public class IdleState : IState
+    public class IdleState : IState<RotationState, RotationImpulse>
     {
-        public IEntity Entity { get; private set; }
-
-        public IdleState(string id)
+        public IdleState()
         {
-            Name = id;
         }
 
-        public string Name { get; }
+        public int Id => (int)RotationState.Idle;
+        public int FsmId { get; set; }
 
-        public void EnterState()
+        public void EnterState(IEntity entity)
         {
             // Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            Entity.PostCommand(new TextSetCommand(Entity.Id, 0, String.Join(", ", Entity.CurrentStateNames.ToArray())));
+            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
+            entity.PostCommand(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
-            Entity.Subscribe(ControlEventTypes.CONTROL_DIRECTION_CHANGED, OnControlDirectionChanged);
+            entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
-        public void Initialize(IEntity entity)
+        public void LeaveState(IEntity entity)
         {
-            Entity = entity;
+            entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
-        public void LeaveState()
+        private void OnControlDirectionChanged(object sender, ControlDirectionChangedEventArgs e)
         {
-            Entity.Unsubscribe(ControlEventTypes.CONTROL_DIRECTION_CHANGED, OnControlDirectionChanged);
-        }
+            var entity = sender as IEntity;
 
-        public string Process(string actionName, object[] arguments)
-        {
-            switch (actionName)
+            if (e.Direction != Vector2.Zero)
             {
-                case "Rotate":
-                    {
-                        return "Rotating";
-                    }
-                default:
-                    break;
-            }
+                var dir = entity.GetComponent<DirectionComponent>();
 
-            return null;
-        }
-
-        private void OnControlDirectionChanged(object sender, EventArgs e)
-        {
-            HandleControlDirectionChangedEvent((ControlDirectionChangedEvent)e);
-        }
-
-        private void HandleControlDirectionChangedEvent(ControlDirectionChangedEvent systemEvent)
-        {
-            if (systemEvent.Direction != Vector2.Zero)
-            {
-                var dir = Entity.GetComponent<Direction>();
-
-                if (dir.Value != systemEvent.Direction)
+                if (dir.Value != e.Direction)
                 {
-                    dir.Value = systemEvent.Direction;
-                    Entity.PostCommand(new EntitySetStateCommand(Entity.Id, "Rotation", "Rotate"));
+                    dir.Value = e.Direction;
+                    entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)RotationImpulse.Rotate));
                 }
             }
-
         }
     }
 }
