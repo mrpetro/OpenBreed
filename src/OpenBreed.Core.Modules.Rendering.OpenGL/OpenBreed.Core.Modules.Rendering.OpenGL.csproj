@@ -72,7 +72,6 @@
     <Compile Include="Builders\SpriteComponentBuilder.cs" />
     <Compile Include="Builders\TextComponentBuilder.cs" />
     <Compile Include="Builders\ViewportComponentBuilder.cs" />
-    <Compile Include="Builders\WireframeSystemBuilder.cs" />
     <Compile Include="Builders\TextSystemBuilder.cs" />
     <Compile Include="Builders\SpriteSystemBuilder.cs" />
     <Compile Include="Builders\TileSystemBuilder.cs" />
