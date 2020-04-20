@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\TileComponentBuilder.cs" />
     <Compile Include="Builders\SpriteComponentBuilder.cs" />
     <Compile Include="Builders\TextComponentBuilder.cs" />
     <Compile Include="Builders\ViewportComponentBuilder.cs" />
