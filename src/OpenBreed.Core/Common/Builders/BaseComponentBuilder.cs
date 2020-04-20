@@ -10,11 +10,11 @@ namespace OpenBreed.Core.Common.Builders
     /// <summary>
     /// Base entity component builder abstract class
     /// </summary>
-    public abstract class BaseComponentBuilder<T> : IComponentBuilder where T : IComponentBuilder
+    public abstract class BaseComponentBuilder<TBuilder, TComponent> : IComponentBuilder where TBuilder : IComponentBuilder where TComponent : IEntityComponent
     {
         #region Private Fields
 
-        private static Dictionary<string, Action<T, object>> setters = new Dictionary<string, Action<T, object>>();
+        private static Dictionary<string, Action<TBuilder, object>> setters = new Dictionary<string, Action<TBuilder, object>>();
 
         #endregion Private Fields
 
@@ -136,14 +136,14 @@ namespace OpenBreed.Core.Common.Builders
         public virtual void SetProperty(object key, object value)
         {
             var propertyName = Convert.ToString(key);
-            setters[propertyName].Invoke((T)(IComponentBuilder)this, value);
+            setters[propertyName].Invoke((TBuilder)(IComponentBuilder)this, value);
         }
 
         #endregion Public Methods
 
         #region Protected Methods
 
-        protected static void RegisterSetter(string name, Action<T, object> setter)
+        protected static void RegisterSetter(string name, Action<TBuilder, object> setter)
         {
             setters.Add(name, setter);
         }

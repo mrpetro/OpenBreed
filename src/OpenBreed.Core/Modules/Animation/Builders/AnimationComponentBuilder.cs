@@ -7,7 +7,7 @@ using OpenBreed.Core.Modules.Animation.Components;
 
 namespace OpenBreed.Core.Modules.Animation.Builders
 {
-    public class AnimationComponentBuilder : BaseComponentBuilder<AnimationComponentBuilder>
+    public class AnimationComponentBuilder : BaseComponentBuilder<AnimationComponentBuilder, AnimationComponent>
     {
         #region Internal Fields
 

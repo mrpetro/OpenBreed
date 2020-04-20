@@ -4,7 +4,7 @@ using System;
 
 namespace OpenBreed.Core.Common.Builders
 {
-    public class DirectionComponentBuilder : BaseComponentBuilder<DirectionComponentBuilder>
+    public class DirectionComponentBuilder : BaseComponentBuilder<DirectionComponentBuilder, DirectionComponent>
     {
         #region Private Fields
 

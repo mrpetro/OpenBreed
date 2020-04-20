@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Modules.Rendering.Builders;
 using OpenTK;
 using OpenTK.Graphics;
 using System.Collections.Generic;
@@ -52,37 +53,20 @@ namespace OpenBreed.Core.Modules.Rendering.Components
 
     public class TextComponent : IEntityComponent
     {
-        #region Private Constructors
+        #region Internal Constructors
 
-        private TextComponent(int fontId, Vector2 offset, Color4 color, string value, float order)
+        internal TextComponent(TextComponentBuilder builder)
         {
             Parts = new List<TextPart>();
-            Parts.Add(new TextPart(fontId, offset, color, value, order));
+            Parts.Add(new TextPart(builder.FontId, builder.Offset, builder.Color, builder.Text, builder.Order));
         }
 
-        #endregion Private Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
 
         public List<TextPart> Parts { get; }
 
         #endregion Public Properties
-
-        #region Public Methods
-
-        /// <summary>
-        /// Creates text component using given font
-        /// </summary>
-        /// <param name="fontId">Id of font to use for this text component</param>
-        /// <param name="offset">Offset position from position component</param>
-        /// <param name="value">Optional initial text value</param>
-        /// <param name="order">Optional initial object rendering order</param>
-        /// <returns>Text component</returns>
-        public static TextComponent Create(int fontId, Vector2 offset, Color4 color, string value = null, float order = 0.0f)
-        {
-            return new TextComponent(fontId, offset, color, value, order);
-        }
-
-        #endregion Public Methods
     }
 }

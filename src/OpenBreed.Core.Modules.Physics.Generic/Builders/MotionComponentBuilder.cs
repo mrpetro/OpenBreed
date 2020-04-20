@@ -4,7 +4,7 @@ using OpenBreed.Core.Modules.Physics.Components;
 
 namespace OpenBreed.Core.Modules.Physics.Builders
 {
-    public class MotionComponentBuilder : BaseComponentBuilder<MotionComponentBuilder>
+    public class MotionComponentBuilder : BaseComponentBuilder<MotionComponentBuilder, MotionComponent>
     {
         #region Protected Constructors
 
