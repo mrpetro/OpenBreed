@@ -136,8 +136,8 @@ namespace OpenBreed.Sandbox.Entities.Door
 
             //var door = core.Entities.Create();
             var door = core.Entities.CreateFromTemplate("DoorVertical");
-            door.Add(new ClassComponent("DoorVertical"));
-            door.Add(new FsmComponent());
+            //door.Add(new ClassComponent("DoorVertical"));
+            //door.Add(new FsmComponent());
 
             door.GetComponent<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
 
@@ -162,8 +162,8 @@ namespace OpenBreed.Sandbox.Entities.Door
             var core = world.Core;
 
             var door = core.Entities.CreateFromTemplate("DoorHorizontal");
-            door.Add(new ClassComponent("DoorHorizontal"));
-            door.Add(new FsmComponent());
+            //door.Add(new ClassComponent("DoorHorizontal"));
+            //door.Add(new FsmComponent());
 
             door.GetComponent<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
 

@@ -397,6 +397,9 @@ namespace OpenBreed.Sandbox
             Entities.RegisterComponentBuilder("MotionComponent", MotionComponentBuilder.New);
             Entities.RegisterComponentBuilder("SpriteComponent", SpriteComponentBuilder.New);
             Entities.RegisterComponentBuilder("TextComponent", TextComponentBuilder.New);
+            Entities.RegisterComponentBuilder("ClassComponent", ClassComponentBuilder.New);
+            Entities.RegisterComponentBuilder("FsmComponent", FsmComponentBuilder.New);
+
         }
 
         private void RegisterShapes()

@@ -1,10 +1,16 @@
-﻿using OpenBreed.Core.Common.Systems.Components;
+﻿using OpenBreed.Core.Common.Builders;
+using OpenBreed.Core.Common.Systems.Components;
 
 namespace OpenBreed.Core.Common.Components
 {
     public class ClassComponent : IEntityComponent
     {
         #region Public Constructors
+
+        public ClassComponent(ClassComponentBuilder builder)
+        {
+            Name = builder.Name;
+        }
 
         public ClassComponent(string name)
         {

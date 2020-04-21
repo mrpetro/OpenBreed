@@ -67,7 +67,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
         public static void AddProjectile(ICore core, World world, float x, float y, float vx, float vy)
         {
             var projectile = core.Entities.CreateFromTemplate("Projectile");
-            projectile.Add(new FsmComponent());
+            //projectile.Add(new FsmComponent());
 
             projectile.GetComponent<PositionComponent>().Value = new Vector2(x, y);
             projectile.GetComponent<VelocityComponent>().Value = new Vector2(vx, vy);

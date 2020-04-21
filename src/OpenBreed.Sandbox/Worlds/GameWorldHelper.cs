@@ -110,7 +110,7 @@ namespace OpenBreed.Sandbox.Worlds
             gameWorld.AddEntity(gameCamera);
 
             var actor = ActorHelper.CreateActor(core, new Vector2(128, 128));
-            actor.Add(new FsmComponent());
+            //actor.Add(new FsmComponent());
             actor.Tag = playerCamera;
 
             actor.Add(new WalkingControl());
