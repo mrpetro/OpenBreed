@@ -105,12 +105,10 @@ namespace OpenBreed.Sandbox.Entities.Actor
             //var actor = core.Entities.Create();
 
             var actor = core.Entities.CreateFromTemplate("Arrow");
-            actor.Add(new ClassComponent("Actor"));
             actor.Add(new TimerComponent());
             //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
             //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
             //actor.Add(AxisAlignedBoxShape.Create(0, 0, 32, 32));
-
 
             actor.GetComponent<PositionComponent>().Value = pos;
 

@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using System;
+using System.Collections.Generic;
 
 namespace OpenBreed.Core.Common.Builders
 {
@@ -8,9 +9,7 @@ namespace OpenBreed.Core.Common.Builders
     {
         #region Private Fields
 
-        private float x;
-
-        private float y;
+        internal List<MachineState> States { get; }
 
         #endregion Private Fields
 
@@ -18,6 +17,7 @@ namespace OpenBreed.Core.Common.Builders
 
         protected FsmComponentBuilder(ICore core) : base(core)
         {
+            States = new List<MachineState>();
         }
 
         #endregion Protected Constructors
@@ -42,6 +42,24 @@ namespace OpenBreed.Core.Common.Builders
 
         public override void SetProperty(object key, object value)
         {
+            var index = Convert.ToInt64(key);
+
+            if (States.Count != index - 1)
+                throw new InvalidOperationException("Incorrect usage");
+
+            var toAdd = ToStringArray(value);
+
+            if(toAdd.Count != 2)
+                throw new InvalidOperationException("Incorrect usage");
+
+            var fsm = Core.StateMachines.GetByName(toAdd[0]);
+
+            if(fsm == null)
+                throw new InvalidOperationException($"FSM '{toAdd[0]}' does not exist.");
+
+            var stateId = fsm.GetStateIdByName(toAdd[1]);
+
+            States.Add(new MachineState() { FsmId = fsm.Id, StateId = stateId });
         }
 
         #endregion Public Methods

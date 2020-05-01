@@ -1,5 +1,8 @@
 ﻿Templates.Entities.Arrow = {
-    FsmComponent = { },
+    ClassComponent = { "Actor" },
+    FsmComponent = { { "Actor.Movement", "Standing" },
+					 { "Actor.Attacking", "Idle" },
+					 { "Actor.Rotation", "Idle" } },
     AnimationComponent = {
         Speed = 10.0,
         Loop = true},

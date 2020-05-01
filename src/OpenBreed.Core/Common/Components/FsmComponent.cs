@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core.Common.Builders;
 using OpenBreed.Core.Common.Systems.Components;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenBreed.Core.Common.Components
 {
@@ -20,7 +21,7 @@ namespace OpenBreed.Core.Common.Components
 
         public FsmComponent(FsmComponentBuilder builder)
         {
-            States = new List<MachineState>();
+            States = builder.States.ToList();
         }
 
         #endregion Public Constructors

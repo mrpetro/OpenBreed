@@ -282,8 +282,7 @@ namespace OpenBreed.Sandbox
             TeleportHelper.CreateAnimations(this);
             ProjectileHelper.CreateAnimations(this);
 
-            DoorHelper.CreateHorizontalFSM(this);
-            DoorHelper.CreateVerticalFSM(this);
+            DoorHelper.CreateFsm(this);
             ProjectileHelper.CreateFsm(this);
             ButtonHelper.CreateFSM(this);
             ActorHelper.CreateAttackingFSM(this);

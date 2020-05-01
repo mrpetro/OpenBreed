@@ -7,6 +7,7 @@ using OpenBreed.Core.States;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 
 namespace OpenBreed.Core.Entities
@@ -98,6 +99,8 @@ namespace OpenBreed.Core.Entities
 
         public void Add(IEntityComponent component)
         {
+            Debug.Assert(component != null, "Adding null component to entity is forbidden.");
+            Debug.Assert(!components.Any(item => item.GetType() == component.GetType()), "Adding two components of same type to one entity is forbidden.");
             components.Add(component);
         }
 

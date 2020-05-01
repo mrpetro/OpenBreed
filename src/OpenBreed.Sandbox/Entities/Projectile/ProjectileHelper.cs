@@ -74,8 +74,8 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
             projectile.Subscribe<CollisionEventArgs>(OnCollision);
 
-            var projectileFsm = core.StateMachines.GetByName("Projectile");
-            projectileFsm.SetInitialState(projectile, (int)AttackingState.Fired);
+            //var projectileFsm = core.StateMachines.GetByName("Projectile");
+            //projectileFsm.SetInitialState(projectile, (int)AttackingState.Fired);
 
             world.AddEntity(projectile);
 

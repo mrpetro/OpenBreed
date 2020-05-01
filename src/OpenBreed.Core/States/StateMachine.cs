@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Components;
+﻿using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -30,6 +29,8 @@ namespace OpenBreed.Core.States
         string GetCurrentStateName(IEntity entity);
 
         string GetStateName(int stateId);
+
+        int GetStateIdByName(string stateName);
 
         string GetImpulseName(int impulseId);
 
@@ -371,6 +372,11 @@ namespace OpenBreed.Core.States
         public string GetStateName(int stateId)
         {
             return ((TState)(ValueType)stateId).ToString();
+        }
+
+        public int GetStateIdByName(string stateName)
+        {
+            return (int)Enum.Parse(typeof(TState), stateName);
         }
 
         public string GetImpulseName(int impulseId)

@@ -128,13 +128,6 @@ namespace OpenBreed.Sandbox.Worlds
             player1.AssumeControl(actor);
             var player2 = core.Players.GetByName("P2");
             player2.AssumeControl(actor);
-
-            var movementFsm = core.StateMachines.GetByName("Actor.Movement");
-            var atackFsm = core.StateMachines.GetByName("Actor.Attacking");
-            var rotateFsm = core.StateMachines.GetByName("Actor.Rotation");
-            movementFsm.SetInitialState(actor, (int)Entities.Actor.States.Movement.MovementState.Standing);
-            atackFsm.SetInitialState(actor, (int)Entities.Actor.States.Attacking.AttackingState.Idle);
-            rotateFsm.SetInitialState(actor, (int)Entities.Actor.States.Rotation.RotationState.Idle);
             gameWorld.AddEntity(actor);
 
             var gameViewport = core.Entities.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();

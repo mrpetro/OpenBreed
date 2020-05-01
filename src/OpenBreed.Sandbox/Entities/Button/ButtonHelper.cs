@@ -23,9 +23,6 @@ namespace OpenBreed.Sandbox.Entities.Button
 
             button.GetComponent<PositionComponent>().Value = new Vector2(0, 0);
 
-            var buttonSm = world.Core.StateMachines.GetByName("Button");
-            buttonSm.SetInitialState(button, (int)ButtonState.Idle);
-
             world.AddEntity(button);
         }
 

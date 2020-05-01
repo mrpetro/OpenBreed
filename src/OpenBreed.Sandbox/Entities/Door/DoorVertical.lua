@@ -1,6 +1,6 @@
 ﻿Templates.Entities.DoorVertical = {
     ClassComponent = { "DoorVertical" },
-	FsmComponent = { },
+	FsmComponent = { { "Door.Functioning" , "Closed"} },
     AnimationComponent = {
         Speed = 5.0,
         Loop = false},
