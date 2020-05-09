@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OpenBreed.Core.Commands
+﻿namespace OpenBreed.Core.Commands
 {
-    public class WorldSetPauseCommand : IWorldCommand
+    public class PauseWorldCommand : IWorldCommand
     {
         #region Public Fields
 
-        public const string TYPE = "WORLD_PAUSE";
+        public const string TYPE = "PAUSE_WORLD";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public WorldSetPauseCommand(int worldId, bool pause)
+        public PauseWorldCommand(int worldId, bool pause)
         {
             WorldId = worldId;
-            Pause = pause; 
+            Pause = pause;
         }
 
         #endregion Public Constructors

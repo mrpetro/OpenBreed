@@ -85,10 +85,18 @@ namespace OpenBreed.Core.Systems
             timerData.Interval -= dt;
 
             if (timerData.Interval > 0.0)
+            {
+                RaiseTimerUpdateEvent(entity, timerData);
                 return;
+            }
 
             timerData.Enabled = false;
             RaiseTimerElapsedEvent(entity, timerData);
+        }
+
+        private void RaiseTimerUpdateEvent(IEntity entity, TimerData timerData)
+        {
+            entity.RaiseEvent(new TimerUpdateEventArgs(timerData.TimerId));
         }
 
         private void RaiseTimerElapsedEvent(IEntity entity, TimerData timerData)

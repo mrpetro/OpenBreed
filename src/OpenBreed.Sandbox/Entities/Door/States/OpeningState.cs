@@ -50,13 +50,11 @@ namespace OpenBreed.Sandbox.Components.States
 
             entity.PostCommand(new TextSetCommand(entity.Id, 0, "Door - Opening"));
 
-            //entity.Subscribe<AnimChangedEventArgs>(OnAnimChanged);
             entity.Subscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
 
         public void LeaveState(IEntity entity)
         {
-            //entity.Unsubscribe<AnimChangedEventArgs>(OnAnimChanged);
             entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
 

@@ -15,9 +15,7 @@
 		AtlasId = "Atlases/Sprites/Door/Horizontal",
         Order = 0.0},
 	TextComponent = {
-		Text = "Door",
-		Offset = { -10, 10 },
-		Color = { 255, 255, 255, 255 },
-		FontId = { "Arial", 9 },
-        Order = 0.0}
+		{T = "This "},
+		{T = "Door ", },
+		}
 }

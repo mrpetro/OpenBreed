@@ -388,8 +388,8 @@ namespace OpenBreed.Sandbox
         {
             BodyComponentBuilder.Register(this);
             AnimationComponentBuilder.Register(this);
-            DirectionComponentBuilder.Register(this);
 
+            Entities.RegisterComponentBuilder("DirectionComponent", DirectionComponentBuilder.New);
             Entities.RegisterComponentBuilder("VelocityComponent", VelocityComponentBuilder.New);
             Entities.RegisterComponentBuilder("ThrustComponent", ThrustComponentBuilder.New);
             Entities.RegisterComponentBuilder("PositionComponent", PositionComponentBuilder.New);
@@ -398,7 +398,7 @@ namespace OpenBreed.Sandbox
             Entities.RegisterComponentBuilder("TextComponent", TextComponentBuilder.New);
             Entities.RegisterComponentBuilder("ClassComponent", ClassComponentBuilder.New);
             Entities.RegisterComponentBuilder("FsmComponent", FsmComponentBuilder.New);
-
+            Entities.RegisterComponentBuilder("TimerComponent", TimerComponentBuilder.New);
         }
 
         private void RegisterShapes()

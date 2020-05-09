@@ -55,11 +55,11 @@ namespace OpenBreed.Sandbox.Entities.Door
             verticalDoorOpening.AddFrame(3, 1.0f);
             verticalDoorOpening.AddFrame(4, 1.0f);
             var verticalDoorClosing = core.Animations.Create<int>("Animations/DoorVertical/Closing", OnFrameUpdate);
-            verticalDoorClosing.AddFrame(1, 1.0f);
-            verticalDoorClosing.AddFrame(1, 1.0f);
-            verticalDoorClosing.AddFrame(2, 1.0f);
-            verticalDoorClosing.AddFrame(3, 1.0f);
             verticalDoorClosing.AddFrame(4, 1.0f);
+            verticalDoorClosing.AddFrame(3, 1.0f);
+            verticalDoorClosing.AddFrame(2, 1.0f);
+            verticalDoorClosing.AddFrame(1, 1.0f);
+            verticalDoorClosing.AddFrame(0, 1.0f);
         }
 
         private static void OnFrameUpdate(IEntity entity, int nextValue)
@@ -73,7 +73,7 @@ namespace OpenBreed.Sandbox.Entities.Door
             var fsm = core.StateMachines.Create<FunctioningState, FunctioningImpulse>("Door.Functioning");
 
             fsm.AddState(new OpeningState());
-            fsm.AddState(new OpenedState());
+            fsm.AddState(new OpenedAwaitClose());
             fsm.AddState(new ClosingState());
             fsm.AddState(new ClosedState());
 
@@ -109,9 +109,6 @@ namespace OpenBreed.Sandbox.Entities.Door
 
             //var door = core.Entities.Create();
             var door = core.Entities.CreateFromTemplate("DoorVertical");
-            //door.Add(new ClassComponent("DoorVertical"));
-            //door.Add(new FsmComponent());
-
             door.GetComponent<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
 
             world.AddEntity(door);
@@ -129,9 +126,6 @@ namespace OpenBreed.Sandbox.Entities.Door
             var core = world.Core;
 
             var door = core.Entities.CreateFromTemplate("DoorHorizontal");
-            //door.Add(new ClassComponent("DoorHorizontal"));
-            //door.Add(new FsmComponent());
-
             door.GetComponent<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
 
             //var doorFsm = world.Core.StateMachines.GetByName("Door.Functioning");

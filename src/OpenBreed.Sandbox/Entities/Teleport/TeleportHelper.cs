@@ -18,6 +18,8 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Commands;
+using OpenBreed.Core.Events;
+using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Teleport
 {
@@ -134,10 +136,10 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
             var jobChain = new JobChain();
             //jobChain.Equeue(new EntityJob(entryEntity, "BodyOff"));
-            jobChain.Equeue(new WorldJob(cameraEntity.World, "Pause"));
+            jobChain.Equeue(new WorldJobEx<WorldPausedEventArgs>(cameraEntity.World, new PauseWorldCommand(cameraEntity.World.Id, true)));
             jobChain.Equeue(new CameraEffectJob(cameraEntity, CameraHelper.CAMERA_FADE_OUT));
             jobChain.Equeue(new TeleportJob(targetEntity, exitPos.Value + offset, true));
-            jobChain.Equeue(new WorldJob(cameraEntity.World, "Unpause"));
+            jobChain.Equeue(new WorldJobEx<WorldUnpausedEventArgs>(cameraEntity.World, new PauseWorldCommand(cameraEntity.World.Id, false)));
             jobChain.Equeue(new CameraEffectJob(cameraEntity, CameraHelper.CAMERA_FADE_IN));
             //jobChain.Equeue(new EntityJob(entryEntity, "BodyOn"));
 

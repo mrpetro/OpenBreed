@@ -1,5 +1,7 @@
-﻿using OpenBreed.Core.Common.Systems.Components;
+﻿using OpenBreed.Core.Common.Builders;
+using OpenBreed.Core.Common.Systems.Components;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenBreed.Core.Common.Components
 {
@@ -28,9 +30,9 @@ namespace OpenBreed.Core.Common.Components
     {
         #region Public Constructors
 
-        public TimerComponent()
+        public TimerComponent(TimerComponentBuilder builder)
         {
-            Items = new List<TimerData>();
+            Items = builder.Items.ToList();
         }
 
         #endregion Public Constructors

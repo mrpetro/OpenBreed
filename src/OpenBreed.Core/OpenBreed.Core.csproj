@@ -81,12 +81,17 @@
     <Compile Include="Commands\IWorldCommand.cs" />
     <Compile Include="Commands\TimerStopCommand.cs" />
     <Compile Include="Commands\TimerStartCommand.cs" />
-    <Compile Include="Commands\WorldSetPauseCommand.cs" />
+    <Compile Include="Commands\PauseWorldCommand.cs" />
+    <Compile Include="Common\Builders\TimerComponentBuilder.cs" />
     <Compile Include="Common\Builders\FsmComponentBuilder.cs" />
     <Compile Include="Common\Builders\ClassComponentBuilder.cs" />
     <Compile Include="Common\Components\ClassComponent.cs" />
     <Compile Include="Common\Components\TimerComponent.cs" />
+    <Compile Include="Events\TimerUpdateEventArgs.cs" />
     <Compile Include="Events\TimerElapsedEventArgs.cs" />
+    <Compile Include="EntityJobEx.cs" />
+    <Compile Include="Events\WorldUnpausedEventArgs.cs" />
+    <Compile Include="Events\WorldPausedEventArgs.cs" />
     <Compile Include="Modules\Animation\Builders\AnimationComponentBuilder.cs" />
     <Compile Include="Common\Builders\BaseComponentBuilder.cs" />
     <Compile Include="Common\Builders\IBuilder.cs" />
@@ -137,6 +142,7 @@
     <Compile Include="Modules\BaseCoreModule.cs" />
     <Compile Include="Scripting\IScriptFunc.cs" />
     <Compile Include="Scripting\LuaScriptFunc.cs" />
+    <Compile Include="WorldJobEx.cs" />
     <Compile Include="Systems\StateMachineSystem.cs" />
     <Compile Include="Systems\TimerSystem.cs" />
     <Compile Include="CoreTools.cs" />

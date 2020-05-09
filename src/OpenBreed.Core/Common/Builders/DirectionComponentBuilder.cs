@@ -48,11 +48,6 @@ namespace OpenBreed.Core.Common.Builders
                 throw new ArgumentException("Too many property keys given.");
         }
 
-        public static void Register(ICore core)
-        {
-            core.Entities.RegisterComponentBuilder(nameof(DirectionComponent), DirectionComponentBuilder.New);
-        }
-
         #endregion Public Methods
     }
 }

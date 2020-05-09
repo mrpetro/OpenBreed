@@ -57,6 +57,8 @@ namespace OpenBreed.Core.Common
             commandHandler = new CommandHandler(this);
             msgHandlerRelay = new MsgHandlerRelay(this);
 
+            RegisterHandler(PauseWorldCommand.TYPE, commandHandler);
+
             Core.Worlds.RegisterWorld(this);
 
             foreach (var system in systems)
@@ -117,12 +119,27 @@ namespace OpenBreed.Core.Common
             return $"World:{Name}";
         }
 
+        public void PostCommand(ICommand command)
+        {
+            Core.Commands.Post(this, command);
+        }
+
+        public void Subscribe<T>(Action<object, T> callback) where T : EventArgs
+        {
+            Core.Events.Subscribe(this, callback);
+        }
+
+        public void Unsubscribe<T>(Action<object, T> callback) where T : EventArgs
+        {
+            Core.Events.Unsubscribe(this, callback);
+        }
+
         public bool ExecuteCommand(object sender, ICommand cmd)
         {
             switch (cmd.Type)
             {
-                case WorldSetPauseCommand.TYPE:
-                    return HandleWorldPauseCommand(sender, (WorldSetPauseCommand)cmd);
+                case PauseWorldCommand.TYPE:
+                    return HandlePauseWorld(sender, (PauseWorldCommand)cmd);
 
                 default:
                     return false;
@@ -258,10 +275,22 @@ namespace OpenBreed.Core.Common
                 systems[i].Initialize(this);
         }
 
-        private bool HandleWorldPauseCommand(object sender, WorldSetPauseCommand cmd)
+        public void Pause(bool value)
         {
-            Paused = cmd.Pause;
+            if (Paused == value)
+                return;
 
+            Paused = value;
+
+            if (Paused)
+                RaiseEvent(new WorldPausedEventArgs(this));
+            else
+                RaiseEvent(new WorldUnpausedEventArgs(this));
+        }
+
+        private bool HandlePauseWorld(object sender, PauseWorldCommand cmd)
+        {
+            Pause(cmd.Pause);
             return true;
         }
 

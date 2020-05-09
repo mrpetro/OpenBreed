@@ -15,6 +15,7 @@ using OpenBreed.Core.Modules.Physics.Commands;
 using OpenBreed.Sandbox.Entities.Door.States;
 using System;
 using OpenBreed.Core.Common.Components;
+using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -55,10 +56,18 @@ namespace OpenBreed.Sandbox.Components.States
 
 
             entity.PostCommand(new TextSetCommand(entity.Id, 0, "Door - Closing"));
+            entity.Subscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
 
         public void LeaveState(IEntity entity)
         {
+            entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
+        }
+
+        private void OnAnimStopped(object sender, AnimStoppedEventArgs e)
+        {
+            var entity = sender as IEntity;
+            entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)FunctioningImpulse.StopClosing));
         }
 
         #endregion Public Methods
