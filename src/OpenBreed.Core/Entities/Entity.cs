@@ -111,7 +111,7 @@ namespace OpenBreed.Core.Entities
 
         public override string ToString()
         {
-            return $"Entity:{Id}";
+            return $"Entity({Id})";
         }
 
         #endregion Public Methods
@@ -120,10 +120,7 @@ namespace OpenBreed.Core.Entities
 
         internal void Deinitialize()
         {
-            var from = World;
-            //Forget the world in which entity was
             World = null;
-            OnLeftWorld(from);
         }
 
         internal void Initialize(World world)
@@ -136,11 +133,6 @@ namespace OpenBreed.Core.Entities
         #endregion Internal Methods
 
         #region Private Methods
-
-        private void OnLeftWorld(World world)
-        {
-            RaiseEvent(new EntityLeftWorldEventArgs(this, world));
-        }
 
         private void OnEnteredWorld(World world)
         {

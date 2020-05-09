@@ -48,10 +48,6 @@ namespace OpenBreed.Sandbox.Jobs
         {
             switch (actionName)
             {
-                case "LeaveWorld":
-                    LeaveWorld();
-                    break;
-
                 case "EnterWorld":
                     EnterWorld((string)args[0], (int)args[1]);
                     break;
@@ -71,17 +67,6 @@ namespace OpenBreed.Sandbox.Jobs
         #endregion Public Methods
 
         #region Private Methods
-
-        private void LeaveWorld()
-        {
-            entity.Subscribe<EntityLeftWorldEventArgs>(OnEntityLeftWorld);
-            entity.World.PostCommand(new RemoveEntityCommand(entity.World.Id, entity.Id));
-        }
-
-        private void OnEntityLeftWorld(object sender, EntityLeftWorldEventArgs e)
-        {
-            Complete(this);
-        }
 
         private void SetPosition(IEntity entity, int entryId)
         {

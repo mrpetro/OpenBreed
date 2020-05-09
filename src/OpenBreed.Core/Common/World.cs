@@ -220,6 +220,7 @@ namespace OpenBreed.Core.Common
             entities.Remove(entity);
 
             RemoveEntityFromSystems(entity);
+            OnEntityRemoved(entity);
         }
 
         internal void Cleanup()
@@ -248,13 +249,18 @@ namespace OpenBreed.Core.Common
         private void InitializeEntity(IEntity entity)
         {
             ((Entity)entity).Initialize(this);
-            //OnAddEntity(entity);
+            //OnEntityAdded(entity);
         }
 
-        //private void OnAddEntity(IEntity entity)
+        //private void OnEntityAdded(IEntity entity)
         //{
-        //    RaiseEvent(new EntityEnteredWorldEventArgs(entity, this));
+        //    RaiseEvent(new EntityAddedEventArgs(entity, this));
         //}
+
+        private void OnEntityRemoved(IEntity entity)
+        {
+            RaiseEvent(new EntityRemovedEventArgs(Id, entity.Id));
+        }
 
         #endregion Internal Methods
 

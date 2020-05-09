@@ -97,11 +97,11 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             //entity.Subscribe<EntityLeftWorldEventArgs>(OnEntityLeftWorld);
             //entity.World.PostCommand(new RemoveEntityCommand(entity.World.Id, entity.Id));
 
-            //jobChain.Equeue(new WorldJobEx<EntityLeftWorldEventArgs>(cameraEntity.World, new RemoveEntityCommand(cameraEntity.World.Id, cameraEntity.Id)));
-            //jobChain.Equeue(new WorldJobEx<EntityLeftWorldEventArgs>(targetEntity.World, new RemoveEntityCommand(targetEntity.World.Id, targetEntity.Id)));
+            jobChain.Equeue(new WorldJobEx<EntityRemovedEventArgs>(cameraEntity.World, new RemoveEntityCommand(cameraEntity.World.Id, cameraEntity.Id)));
+            jobChain.Equeue(new WorldJobEx<EntityRemovedEventArgs>(targetEntity.World, new RemoveEntityCommand(targetEntity.World.Id, targetEntity.Id)));
 
-            jobChain.Equeue(new EntityJob(cameraEntity, "LeaveWorld"));
-            jobChain.Equeue(new EntityJob(targetEntity, "LeaveWorld"));
+            //jobChain.Equeue(new EntityJob(cameraEntity, "LeaveWorld"));
+            //jobChain.Equeue(new EntityJob(targetEntity, "LeaveWorld"));
 
             jobChain.Equeue(new EntityJob(cameraEntity, "EnterWorld", exitInfo.Item1, exitInfo.Item2));
             jobChain.Equeue(new EntityJob(targetEntity, "EnterWorld", exitInfo.Item1, exitInfo.Item2));

@@ -121,7 +121,7 @@ namespace OpenBreed.Sandbox.Worlds
             //actor.Add(TextHelper.Create(core, new Vector2(0, 32), "Hero"));
 
             actor.Subscribe<EntityEnteredWorldEventArgs>(OnEntityEntered);
-            actor.Subscribe<EntityLeftWorldEventArgs>(OnEntityLeftWorld);
+            gameWorld.Subscribe<EntityRemovedEventArgs>(OnEntityRemoved);
 
 
             core.Jobs.Execute(new CameraFollowJob(playerCamera, actor));
@@ -172,10 +172,10 @@ namespace OpenBreed.Sandbox.Worlds
             a.Entity.Core.Logging.Verbose($"Entity '{a.Entity.Id}' entered world '{a.World.Name}'.");
         }
 
-        private static void OnEntityLeftWorld(object sender, EntityLeftWorldEventArgs a)
+        private static void OnEntityRemoved(object sender, EntityRemovedEventArgs a)
         {
-            a.Entity.Core.Logging.Verbose($"Entity '{a.Entity.Id}' left world '{a.World.Name}'.");
-
+            var world = sender as World;
+            world.Core.Logging.Verbose($"Entity '{a.EntityId}' removed from world '{world.Name}'.");
         }
     }
 }
