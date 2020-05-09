@@ -104,16 +104,6 @@ namespace OpenBreed.Core.Entities
             components.Add(component);
         }
 
-        public virtual void EnterWorld(World world)
-        {
-            world.AddEntity(this);
-        }
-
-        public virtual void LeaveWorld()
-        {
-            World.RemoveEntity(this);
-        }
-
         public bool Remove(IEntityComponent component)
         {
             return components.Remove(component);

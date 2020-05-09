@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
@@ -23,7 +24,8 @@ namespace OpenBreed.Sandbox.Entities.Button
 
             button.GetComponent<PositionComponent>().Value = new Vector2(0, 0);
 
-            world.AddEntity(button);
+            world.PostCommand(new AddEntityCommand(world.Id, button.Id));
+            //world.AddEntity(button);
         }
 
         public static void CreateFSM(ICore core)

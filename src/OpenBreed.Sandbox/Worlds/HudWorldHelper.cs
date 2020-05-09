@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
@@ -66,7 +67,8 @@ namespace OpenBreed.Sandbox.Worlds
             cameraBuilder.SetFov(world.Core.ClientRectangle.Width, world.Core.ClientRectangle.Height);
             var hudCamera = cameraBuilder.Build();
             hudCamera.Tag = "HudCamera";
-            world.AddEntity(hudCamera);
+            world.PostCommand(new AddEntityCommand(world.Id, hudCamera.Id));
+            //world.AddEntity(hudCamera);
 
             FpsCounterHelper.AddToWorld(world);
 

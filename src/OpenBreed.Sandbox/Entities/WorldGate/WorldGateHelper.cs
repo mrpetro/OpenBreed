@@ -20,6 +20,7 @@ using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Events;
+using OpenBreed.Core.Modules.Animation.Commands;
 
 namespace OpenBreed.Sandbox.Entities.WorldGate
 {
@@ -51,7 +52,8 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             teleportEntity.GetComponent<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
             teleportEntity.Subscribe<CollisionEventArgs>(OnCollision);
 
-            world.AddEntity(teleportEntity);
+            world.PostCommand(new AddEntityCommand(world.Id, teleportEntity.Id));
+            //world.AddEntity(teleportEntity);
 
             return teleportEntity;
         }
@@ -62,8 +64,8 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             var teleportEntity = core.Entities.CreateFromTemplate("WorldGateEntry");
             teleportEntity.Tag = new WorldGatePair() { Id = entryId };
             teleportEntity.GetComponent<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
-
-            world.AddEntity(teleportEntity);
+            world.PostCommand(new AddEntityCommand(world.Id, teleportEntity.Id));
+            //world.AddEntity(teleportEntity);
 
             return teleportEntity;
         }
@@ -88,8 +90,10 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             var jobChain = new JobChain();
             jobChain.Equeue(new WorldJobEx<WorldPausedEventArgs>(cameraEntity.World, new PauseWorldCommand(cameraEntity.World.Id, true)));
             //jobChain.Equeue(new WorldJob(cameraEntity.World, "Pause"));
-            jobChain.Equeue(new CameraEffectJob(cameraEntity, CameraHelper.CAMERA_FADE_OUT));
+            jobChain.Equeue(new EntityJobEx<AnimStoppedEventArgs>(cameraEntity, new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_OUT, 0)));
+            //jobChain.Equeue(new CameraEffectJob(cameraEntity, CameraHelper.CAMERA_FADE_OUT));
 
+            //jobChain.Equeue(new EntityJobEx<EntityLeftWorldEventArgs>(cameraEntity, new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0)));
             jobChain.Equeue(new EntityJob(cameraEntity, "LeaveWorld"));
             jobChain.Equeue(new EntityJob(targetEntity, "LeaveWorld"));
 
@@ -98,7 +102,8 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
             jobChain.Equeue(new WorldJobEx<WorldUnpausedEventArgs>(cameraEntity.World, new PauseWorldCommand(cameraEntity.World.Id, false)));
             //jobChain.Equeue(new TeleportJob(targetEntity, exitPos.Value + offset, true));
-            jobChain.Equeue(new CameraEffectJob(cameraEntity, CameraHelper.CAMERA_FADE_IN));
+            jobChain.Equeue(new EntityJobEx<AnimStoppedEventArgs>(cameraEntity, new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0)));
+            //jobChain.Equeue(new CameraEffectJob(cameraEntity, CameraHelper.CAMERA_FADE_IN));
 
             exitEntity.Core.Jobs.Execute(jobChain);
         }

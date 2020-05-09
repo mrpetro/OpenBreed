@@ -111,7 +111,8 @@ namespace OpenBreed.Sandbox.Entities.Door
             var door = core.Entities.CreateFromTemplate("DoorVertical");
             door.GetComponent<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
 
-            world.AddEntity(door);
+            world.PostCommand(new AddEntityCommand(world.Id, door.Id));
+            //world.AddEntity(door);
 
             //door.Subscribe<EntityEnteredWorldEventArgs>((s, a) =>
             //{
@@ -136,7 +137,8 @@ namespace OpenBreed.Sandbox.Entities.Door
             //    door.PostCommand(new SetStateCommand(door.Id, doorSm.Id, FunctioningState.Closed));
             //});
 
-            world.AddEntity(door);
+            world.PostCommand(new AddEntityCommand(world.Id, door.Id));
+            //world.AddEntity(door);
 
 
             //doorSm.SetInitialState(FunctioningState.Closed);

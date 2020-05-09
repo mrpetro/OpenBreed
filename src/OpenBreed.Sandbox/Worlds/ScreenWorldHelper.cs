@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
@@ -66,9 +67,10 @@ namespace OpenBreed.Sandbox.Worlds
             core.Rendering.Subscribe<ClientResizedEventArgs>((s, a) => ResizeGameViewport(gameViewport, a));
             core.Rendering.Subscribe<ClientResizedEventArgs>((s, a) => ResizeHudViewport(hudViewport, a));
 
-            world.AddEntity(gameViewport);
-            world.AddEntity(hudViewport);
-
+            world.PostCommand(new AddEntityCommand(world.Id, gameViewport.Id));
+            world.PostCommand(new AddEntityCommand(world.Id, hudViewport.Id));
+            //world.AddEntity(gameViewport);
+            //world.AddEntity(hudViewport);
 
             gameViewport.Subscribe<ViewportClickedEventArgs>(OnViewportClick);
 

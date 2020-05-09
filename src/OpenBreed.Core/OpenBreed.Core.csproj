@@ -79,6 +79,8 @@
   <ItemGroup>
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\IWorldCommand.cs" />
+    <Compile Include="Commands\AddEntityCommand.cs" />
+    <Compile Include="Commands\RemoveEntityCommand.cs" />
     <Compile Include="Commands\TimerStopCommand.cs" />
     <Compile Include="Commands\TimerStartCommand.cs" />
     <Compile Include="Commands\PauseWorldCommand.cs" />

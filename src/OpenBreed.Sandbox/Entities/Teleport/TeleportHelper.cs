@@ -78,7 +78,8 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
             //teleportEntry.Subscribe<AnimChangedEventArgs>(OnFrameChanged);
             teleportEntry.Subscribe<CollisionEventArgs>(OnCollision);
-            world.AddEntity(teleportEntry);
+            world.PostCommand(new AddEntityCommand(world.Id, teleportEntry.Id));
+            //world.AddEntity(teleportEntry);
 
             return teleportEntry;
         }
@@ -95,7 +96,8 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
             //teleportExit.Subscribe<AnimChangedEventArgs>(OnFrameChanged);
 
-            world.AddEntity(teleportExit);
+            world.PostCommand(new AddEntityCommand(world.Id, teleportExit.Id));
+            //world.AddEntity(teleportExit);
 
             return teleportExit;
         }
@@ -137,10 +139,12 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             var jobChain = new JobChain();
             //jobChain.Equeue(new EntityJob(entryEntity, "BodyOff"));
             jobChain.Equeue(new WorldJobEx<WorldPausedEventArgs>(cameraEntity.World, new PauseWorldCommand(cameraEntity.World.Id, true)));
-            jobChain.Equeue(new CameraEffectJob(cameraEntity, CameraHelper.CAMERA_FADE_OUT));
+            jobChain.Equeue(new EntityJobEx<AnimStoppedEventArgs>(cameraEntity, new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_OUT, 0))); 
+            //jobChain.Equeue(new CameraEffectJob(cameraEntity, CameraHelper.CAMERA_FADE_OUT));
             jobChain.Equeue(new TeleportJob(targetEntity, exitPos.Value + offset, true));
             jobChain.Equeue(new WorldJobEx<WorldUnpausedEventArgs>(cameraEntity.World, new PauseWorldCommand(cameraEntity.World.Id, false)));
-            jobChain.Equeue(new CameraEffectJob(cameraEntity, CameraHelper.CAMERA_FADE_IN));
+            jobChain.Equeue(new EntityJobEx<AnimStoppedEventArgs>(cameraEntity, new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0)));
+            //jobChain.Equeue(new CameraEffectJob(cameraEntity, CameraHelper.CAMERA_FADE_IN));
             //jobChain.Equeue(new EntityJob(entryEntity, "BodyOn"));
 
             entryEntity.Core.Jobs.Execute(jobChain);

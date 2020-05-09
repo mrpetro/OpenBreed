@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
@@ -105,9 +106,10 @@ namespace OpenBreed.Sandbox.Worlds
 
 
 
-
-            gameWorld.AddEntity(playerCamera);
-            gameWorld.AddEntity(gameCamera);
+            gameWorld.PostCommand(new AddEntityCommand(gameWorld.Id, playerCamera.Id));
+            gameWorld.PostCommand(new AddEntityCommand(gameWorld.Id, gameCamera.Id));
+            //gameWorld.AddEntity(playerCamera);
+            //gameWorld.AddEntity(gameCamera);
 
             var actor = ActorHelper.CreateActor(core, new Vector2(128, 128));
             //actor.Add(new FsmComponent());
@@ -128,7 +130,9 @@ namespace OpenBreed.Sandbox.Worlds
             player1.AssumeControl(actor);
             var player2 = core.Players.GetByName("P2");
             player2.AssumeControl(actor);
-            gameWorld.AddEntity(actor);
+
+            gameWorld.PostCommand(new AddEntityCommand(gameWorld.Id, actor.Id));
+            //gameWorld.AddEntity(actor);
 
             var gameViewport = core.Entities.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
 
@@ -147,7 +151,8 @@ namespace OpenBreed.Sandbox.Worlds
             //gameViewport.Subscribe(GfxEventTypes.VIEWPORT_RESIZED, (s, a) => UpdateCameraFov(playerCamera, (ViewportResizedEventArgs)a));
             //SetPreserveAspectRatio(gameViewport);
 
-            gameWorld.AddEntity(cursorEntity);
+            gameWorld.PostCommand(new AddEntityCommand(gameWorld.Id, cursorEntity.Id));
+            //gameWorld.AddEntity(cursorEntity);
         }
 
         public static void SetPreserveAspectRatio(IEntity viewportEntity)

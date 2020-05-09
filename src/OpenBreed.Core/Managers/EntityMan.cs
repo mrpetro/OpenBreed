@@ -1,5 +1,6 @@
 ﻿using NLua;
 using OpenBreed.Core.Collections;
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common.Builders;
 using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
@@ -90,7 +91,7 @@ namespace OpenBreed.Core.Managers
         public void Destroy(IEntity entity)
         {
             entity.Subscribe<EntityLeftWorldEventArgs>(OnEntityLeftWorld);
-            entity.World.RemoveEntity(entity);
+            entity.World.PostCommand(new RemoveEntityCommand(entity.World.Id, entity.Id));
         }
 
         #endregion Public Methods

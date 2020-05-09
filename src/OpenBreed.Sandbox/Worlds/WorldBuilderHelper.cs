@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Events;
@@ -89,8 +90,8 @@ namespace OpenBreed.Sandbox.Worlds
             vp.GetComponent<ViewportComponent>().CameraEntityId = core.Entities.GetByTag(viewportData.CameraName).FirstOrDefault().Id;
             vp.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
             //GameWorldHelper.SetPreserveAspectRatio(vp);
-
-            world.AddEntity(vp);
+            world.PostCommand(new AddEntityCommand(world.Id, vp.Id));
+            //world.AddEntity(vp);
         }
 
         private static void AddTeleportEntry(World world, int code, object[] args)
@@ -193,7 +194,10 @@ namespace OpenBreed.Sandbox.Worlds
             blockBuilder.HasBody = false;
             blockBuilder.SetPosition(new Vector2(x * 16, y * 16));
             blockBuilder.SetTileId(ToTileId(gfxCode));
-            world.AddEntity(blockBuilder.Build());
+
+            var entity = blockBuilder.Build();
+            world.PostCommand(new AddEntityCommand(world.Id, entity.Id));
+            //world.AddEntity(blockBuilder.Build());
         }
 
         private static void AddObstacleCell(World world, int code, object[] args)
@@ -208,7 +212,10 @@ namespace OpenBreed.Sandbox.Worlds
             blockBuilder.HasBody = true;
             blockBuilder.SetPosition(new Vector2(x * 16, y * 16));
             blockBuilder.SetTileId(ToTileId(gfxCode));
-            world.AddEntity(blockBuilder.Build());
+
+            var entity = blockBuilder.Build();
+            world.PostCommand(new AddEntityCommand(world.Id, entity.Id));
+            //world.AddEntity(blockBuilder.Build());
         }
 
         private static void AddDoor(World world, int code, object[] args)

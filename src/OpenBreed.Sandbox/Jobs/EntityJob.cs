@@ -11,6 +11,7 @@ using OpenTK;
 using System;
 using System.Linq;
 using OpenBreed.Core.Modules.Physics.Components;
+using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Sandbox.Jobs
 {
@@ -54,12 +55,6 @@ namespace OpenBreed.Sandbox.Jobs
                 case "EnterWorld":
                     EnterWorld((string)args[0], (int)args[1]);
                     break;
-                case "BodyOff":
-                    BodyOff();
-                    break;
-                case "BodyOn":
-                    BodyOn();
-                    break;
                 default:
                     break;
             }
@@ -80,7 +75,7 @@ namespace OpenBreed.Sandbox.Jobs
         private void LeaveWorld()
         {
             entity.Subscribe<EntityLeftWorldEventArgs>(OnEntityLeftWorld);
-            entity.World.RemoveEntity(entity);
+            entity.World.PostCommand(new RemoveEntityCommand(entity.World.Id, entity.Id));
         }
 
         private void OnEntityLeftWorld(object sender, EntityLeftWorldEventArgs e)
@@ -118,7 +113,7 @@ namespace OpenBreed.Sandbox.Jobs
             }
 
             entity.Subscribe<EntityEnteredWorldEventArgs>(OnEntityEntered);
-            world.AddEntity(entity);
+            world.PostCommand(new AddEntityCommand(world.Id, entity.Id));
 
             SetPosition(entity, entryId);
         }
@@ -126,28 +121,6 @@ namespace OpenBreed.Sandbox.Jobs
         private void OnEntityEntered(object sender, EntityEnteredWorldEventArgs e)
         {
             Complete(this);
-        }
-
-        private void OnBodyOff(object sender, BodyOffEventArgs e)
-        {
-            Complete(this);
-        }
-
-        private void OnBodyOn(object sender, BodyOnEventArgs e)
-        {
-            Complete(this);
-        }
-
-        private void BodyOff()
-        {
-            entity.Subscribe<BodyOffEventArgs>(OnBodyOff);
-            entity.PostCommand(new BodyOffCommand(entity.Id));
-        }
-
-        private void BodyOn()
-        {
-            entity.Subscribe<BodyOnEventArgs>(OnBodyOn);
-            entity.PostCommand(new BodyOnCommand(entity.Id));
         }
 
         #endregion Private Methods

@@ -45,7 +45,7 @@ namespace OpenBreed.Core
 
         public void Execute()
         {
-            entity.World.Subscribe<TEventArgs>(OnTrigger);
+            entity.Subscribe<TEventArgs>(OnTrigger);
             entity.PostCommand(command);
         }
 

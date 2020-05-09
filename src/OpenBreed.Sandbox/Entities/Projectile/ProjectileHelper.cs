@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
@@ -76,8 +77,8 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
             //var projectileFsm = core.StateMachines.GetByName("Projectile");
             //projectileFsm.SetInitialState(projectile, (int)AttackingState.Fired);
-
-            world.AddEntity(projectile);
+            world.PostCommand(new AddEntityCommand(world.Id, projectile.Id));
+            //world.AddEntity(projectile);
 
         }
 

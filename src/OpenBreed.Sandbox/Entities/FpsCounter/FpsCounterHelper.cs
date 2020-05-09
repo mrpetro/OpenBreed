@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Common;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Events;
@@ -36,7 +37,8 @@ namespace OpenBreed.Sandbox.Entities.FpsCounter
 
 
             fpsTextEntity.Add(textBuilder.Build());
-            world.AddEntity(fpsTextEntity);
+            world.PostCommand(new AddEntityCommand(world.Id, fpsTextEntity.Id));
+            //world.AddEntity(fpsTextEntity);
 
 
             var hudViewport = world.Core.Entities.GetByTag(ScreenWorldHelper.HUD_VIEWPORT).First();
