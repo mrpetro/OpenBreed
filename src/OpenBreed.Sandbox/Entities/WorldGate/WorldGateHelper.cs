@@ -94,6 +94,12 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             //jobChain.Equeue(new CameraEffectJob(cameraEntity, CameraHelper.CAMERA_FADE_OUT));
 
             //jobChain.Equeue(new EntityJobEx<EntityLeftWorldEventArgs>(cameraEntity, new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0)));
+            //entity.Subscribe<EntityLeftWorldEventArgs>(OnEntityLeftWorld);
+            //entity.World.PostCommand(new RemoveEntityCommand(entity.World.Id, entity.Id));
+
+            //jobChain.Equeue(new WorldJobEx<EntityLeftWorldEventArgs>(cameraEntity.World, new RemoveEntityCommand(cameraEntity.World.Id, cameraEntity.Id)));
+            //jobChain.Equeue(new WorldJobEx<EntityLeftWorldEventArgs>(targetEntity.World, new RemoveEntityCommand(targetEntity.World.Id, targetEntity.Id)));
+
             jobChain.Equeue(new EntityJob(cameraEntity, "LeaveWorld"));
             jobChain.Equeue(new EntityJob(targetEntity, "LeaveWorld"));
 

@@ -76,7 +76,7 @@ namespace OpenBreed.Core.Common
         /// <summary>
         /// Pauses or unpauses this world
         /// </summary>
-        public bool Paused { get; set; }
+        public bool Paused { get; private set; }
 
         /// <summary>
         /// Time "speed" control value, can't be negative but can be 0 (Basicaly stops time).
@@ -239,11 +239,22 @@ namespace OpenBreed.Core.Common
             Systems.ForEach(item => item.Cleanup());
 
             //Perform initialization of added entities
-            toAdd.ForEach(item => ((Entity)item).Initialize(this));
+            toAdd.ForEach(item => InitializeEntity(item));
 
             toRemove.Clear();
             toAdd.Clear();
         }
+
+        private void InitializeEntity(IEntity entity)
+        {
+            ((Entity)entity).Initialize(this);
+            //OnAddEntity(entity);
+        }
+
+        //private void OnAddEntity(IEntity entity)
+        //{
+        //    RaiseEvent(new EntityEnteredWorldEventArgs(entity, this));
+        //}
 
         #endregion Internal Methods
 
