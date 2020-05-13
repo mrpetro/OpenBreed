@@ -21,6 +21,7 @@ using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Modules.Animation.Commands;
+using OpenBreed.Sandbox.Worlds;
 
 namespace OpenBreed.Sandbox.Entities.WorldGate
 {
@@ -97,14 +98,36 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             //entity.Subscribe<EntityLeftWorldEventArgs>(OnEntityLeftWorld);
             //entity.World.PostCommand(new RemoveEntityCommand(entity.World.Id, entity.Id));
 
+            //var job = new WorldJobEx<EntityRemovedEventArgs>(cameraEntity.World, new RemoveEntityCommand(cameraEntity.World.Id, cameraEntity.Id));
+
+
+
             jobChain.Equeue(new WorldJobEx<EntityRemovedEventArgs>(cameraEntity.World, new RemoveEntityCommand(cameraEntity.World.Id, cameraEntity.Id)));
             jobChain.Equeue(new WorldJobEx<EntityRemovedEventArgs>(targetEntity.World, new RemoveEntityCommand(targetEntity.World.Id, targetEntity.Id)));
 
             //jobChain.Equeue(new EntityJob(cameraEntity, "LeaveWorld"));
             //jobChain.Equeue(new EntityJob(targetEntity, "LeaveWorld"));
 
+            jobChain.Equeue(new EntityJobEx2(cameraEntity, () => TryCreateWorld(cameraEntity, exitInfo.Item1, exitInfo.Item2)));
+            //jobChain.Equeue(new EntityJobEx2(targetEntity, () => SetPosition(targetEntity, exitInfo.Item2)));
+
+            //jobChain.Equeue(new EntityJobEx2<EntityAddedEventArgs>(cameraEntity, () => AddToWorld(cameraEntity, exitInfo.Item1, exitInfo.Item2)));
+            //jobChain.Equeue(new EntityJobEx2<EntityAddedEventArgs>(targetEntity, () => AddToWorld(targetEntity, exitInfo.Item1, exitInfo.Item2)));
+
             jobChain.Equeue(new EntityJob(cameraEntity, "EnterWorld", exitInfo.Item1, exitInfo.Item2));
             jobChain.Equeue(new EntityJob(targetEntity, "EnterWorld", exitInfo.Item1, exitInfo.Item2));
+
+            //jobChain.Equeue(new WorldJobEx<EntityAddedEventArgs>(cameraEntity.World, new AddEntityCommand(cameraEntity.World.Id, cameraEntity.Id)));
+            //jobChain.Equeue(new WorldJobEx<EntityAddedEventArgs>(targetEntity.World, new AddEntityCommand(targetEntity.World.Id, targetEntity.Id)));
+
+
+            jobChain.Equeue(new EntityJobEx2(cameraEntity, () => SetPosition(cameraEntity, exitInfo.Item2)));
+            jobChain.Equeue(new EntityJobEx2(targetEntity, () => SetPosition(targetEntity, exitInfo.Item2)));
+            //jobChain.Equeue(new EntityJob(cameraEntity, "EnterWorld", exitInfo.Item1, exitInfo.Item2));
+            //jobChain.Equeue(new EntityJob(targetEntity, "EnterWorld", exitInfo.Item1, exitInfo.Item2));
+
+            //jobChain.Equeue(new EntityJob(cameraEntity, "SetPosition", exitInfo.Item1, exitInfo.Item2));
+            //jobChain.Equeue(new EntityJob(targetEntity, "SetPosition", exitInfo.Item1, exitInfo.Item2));
 
             jobChain.Equeue(new WorldJobEx<WorldUnpausedEventArgs>(cameraEntity.World, new PauseWorldCommand(cameraEntity.World.Id, false)));
             //jobChain.Equeue(new TeleportJob(targetEntity, exitPos.Value + offset, true));
@@ -114,7 +137,41 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             exitEntity.Core.Jobs.Execute(jobChain);
         }
 
+        private static void AddToWorld(IEntity target, string worldName, int entryId)
+        {
+            var world = target.Core.Worlds.GetByName(worldName);
+            world.PostCommand(new AddEntityCommand(world.Id, target.Id));
+        }
 
+        private static void TryCreateWorld(IEntity target, string worldName, int entryId)
+        {
+            var world = target.Core.Worlds.GetByName(worldName);
+
+            if (world == null)
+            {
+                using (var reader = new TxtFileWorldReader(target.Core, $".\\Content\\Maps\\{worldName}.txt"))
+                    world = reader.GetWorld();
+            }
+        }
+
+        private static void SetPosition(IEntity target, int entryId)
+        {
+            var pair = new WorldGatePair() { Id = entryId };
+
+            var entryEntity = target.Core.Entities.GetByTag(pair).FirstOrDefault();
+
+            if (entryEntity == null)
+                throw new Exception($"No entry with id '{pair.Id}' found.");
+
+            var entryPos = entryEntity.GetComponent<PositionComponent>();
+            var entryAabb = entryEntity.GetComponent<BodyComponent>().Aabb;
+            //var entityAabb = entity.GetComponent<IShapeComponent>().First().Aabb;
+            var entityPos = target.GetComponent<PositionComponent>();
+
+            //var offset = new Vector2((32 - entityAabb.Width) / 2.0f, (32 - entityAabb.Height) / 2.0f);
+
+            entityPos.Value = entryPos.Value;// + offset;
+        }
 
         #endregion Private Methods
     }

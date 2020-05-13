@@ -69,12 +69,15 @@ namespace OpenBreed.Core.Systems
         {
             entities.Add(entity);
 
-            entity.Subscribe<EntityEnteredWorldEventArgs>(OnEntityEnteredWorld);
+            InitializeComponent(entity);
+            //World.Subscribe<EntityAddedEventArgs>(OnEntityEnteredWorld);
+            //entity.Subscribe<EntityEnteredWorldEventArgs>(OnEntityEnteredWorld);
         }
 
         protected override void UnregisterEntity(IEntity entity)
         {
-            entity.Unsubscribe<EntityEnteredWorldEventArgs>(OnEntityEnteredWorld);
+            //World.Unsubscribe<EntityAddedEventArgs>(OnEntityEnteredWorld);
+            //entity.Unsubscribe<EntityEnteredWorldEventArgs>(OnEntityEnteredWorld);
 
             var index = entities.IndexOf(entity);
 
@@ -88,10 +91,36 @@ namespace OpenBreed.Core.Systems
 
         #region Private Methods
 
-        private void OnEntityEnteredWorld(object sender, EntityEnteredWorldEventArgs args)
+        private void InitializeComponent(IEntity entity)
         {
-            var entity = sender as IEntity;
+            var fsmComponent = entity.GetComponent<FsmComponent>();
 
+            foreach (var state in fsmComponent.States)
+                Core.StateMachines.EnterState(entity, state);
+        }
+
+        private void DeinitializeComponent(IEntity entity)
+        {
+            var fsmComponent = entity.GetComponent<FsmComponent>();
+
+            foreach (var state in fsmComponent.States)
+                Core.StateMachines.EnterState(entity, state);
+        }
+
+        //private void OnEntityEnteredWorld(object sender, EntityEnteredWorldEventArgs args)
+        //{
+        //    var entity = sender as IEntity;
+        //    //var entity = Core.Entities.GetById(args.EntityId);
+        //    var fsmComponent = entity.GetComponent<FsmComponent>();
+
+        //    foreach (var state in fsmComponent.States)
+        //        Core.StateMachines.EnterState(entity, state);
+        //}
+
+        private void OnEntityAdded(object sender, EntityAddedEventArgs args)
+        {
+            var world = sender as World;
+            var entity = Core.Entities.GetById(args.EntityId);
             var fsmComponent = entity.GetComponent<FsmComponent>();
 
             foreach (var state in fsmComponent.States)

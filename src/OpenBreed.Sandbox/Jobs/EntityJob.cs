@@ -12,6 +12,7 @@ using System;
 using System.Linq;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common;
 
 namespace OpenBreed.Sandbox.Jobs
 {
@@ -68,43 +69,22 @@ namespace OpenBreed.Sandbox.Jobs
 
         #region Private Methods
 
-        private void SetPosition(IEntity entity, int entryId)
-        {
-            var pair = new WorldGatePair() { Id = entryId };
-
-            var entryEntity = entity.Core.Entities.GetByTag(pair).FirstOrDefault();
-
-            if (entryEntity == null)
-                throw new Exception($"No entry with id '{pair.Id}' found.");
-
-            var entryPos = entryEntity.GetComponent<PositionComponent>();
-            var entryAabb = entryEntity.GetComponent<BodyComponent>().Aabb;
-            //var entityAabb = entity.GetComponent<IShapeComponent>().First().Aabb;
-            var entityPos = entity.GetComponent<PositionComponent>();
-
-            //var offset = new Vector2((32 - entityAabb.Width) / 2.0f, (32 - entityAabb.Height) / 2.0f);
-
-            entityPos.Value = entryPos.Value;// + offset;
-        }
-
         private void EnterWorld(string worldName, int entryId)
         {
             var world = entity.Core.Worlds.GetByName(worldName);
 
-            if (world == null)
-            {
-                using (var reader = new TxtFileWorldReader(entity.Core, $".\\Content\\Maps\\{worldName}.txt"))
-                    world = reader.GetWorld();
-            }
-
-            entity.Subscribe<EntityEnteredWorldEventArgs>(OnEntityEntered);
+            world.Subscribe<EntityAddedEventArgs>(OnEntityAdded);
+            //entity.Subscribe<EntityEnteredWorldEventArgs>(OnEntityEntered);
             world.PostCommand(new AddEntityCommand(world.Id, entity.Id));
-
-            SetPosition(entity, entryId);
         }
 
-        private void OnEntityEntered(object sender, EntityEnteredWorldEventArgs e)
+        private void OnEntityAdded(object sender, EntityAddedEventArgs e)
         {
+            if (e.EntityId != entity.Id)
+                return;
+
+            ((World)sender).Unsubscribe<EntityAddedEventArgs>(OnEntityAdded);
+
             Complete(this);
         }
 

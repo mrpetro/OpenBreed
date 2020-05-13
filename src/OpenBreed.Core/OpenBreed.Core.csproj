@@ -89,6 +89,8 @@
     <Compile Include="Common\Builders\ClassComponentBuilder.cs" />
     <Compile Include="Common\Components\ClassComponent.cs" />
     <Compile Include="Common\Components\TimerComponent.cs" />
+    <Compile Include="EntityJobEx2.cs" />
+    <Compile Include="Events\EntityAddedEventArgs.cs" />
     <Compile Include="Events\EntityRemovedEventArgs.cs" />
     <Compile Include="Events\TimerUpdateEventArgs.cs" />
     <Compile Include="Events\TimerElapsedEventArgs.cs" />
@@ -113,7 +115,6 @@
     <Compile Include="Common\Shapes\CircleShape.cs" />
     <Compile Include="Common\Shapes\IShape.cs" />
     <Compile Include="Common\Shapes\PolygonShape.cs" />
-    <Compile Include="Events\EntityEnteredWorldEventArgs.cs" />
     <Compile Include="Events\WorldDeinitializedEventArgs.cs" />
     <Compile Include="Events\WorldInitializedEventArgs.cs" />
     <Compile Include="IJob.cs" />

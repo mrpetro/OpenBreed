@@ -120,7 +120,8 @@ namespace OpenBreed.Sandbox.Worlds
 
             //actor.Add(TextHelper.Create(core, new Vector2(0, 32), "Hero"));
 
-            actor.Subscribe<EntityEnteredWorldEventArgs>(OnEntityEntered);
+            //actor.Subscribe<EntityEnteredWorldEventArgs>(OnEntityEntered);
+            gameWorld.Subscribe<EntityAddedEventArgs>(OnEntityAdded);
             gameWorld.Subscribe<EntityRemovedEventArgs>(OnEntityRemoved);
 
 
@@ -167,9 +168,10 @@ namespace OpenBreed.Sandbox.Worlds
             cameraEntity.GetComponent<CameraComponent>().Height = a.Height;
         }
 
-        private static void OnEntityEntered(object sender, EntityEnteredWorldEventArgs a)
+        private static void OnEntityAdded(object sender, EntityAddedEventArgs a)
         {
-            a.Entity.Core.Logging.Verbose($"Entity '{a.Entity.Id}' entered world '{a.World.Name}'.");
+            var world = sender as World;
+            world.Core.Logging.Verbose($"Entity '{a.EntityId}' added to world '{world.Name}'.");
         }
 
         private static void OnEntityRemoved(object sender, EntityRemovedEventArgs a)

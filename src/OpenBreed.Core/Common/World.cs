@@ -206,35 +206,10 @@ namespace OpenBreed.Core.Common
             RaiseEvent(new WorldDeinitializedEventArgs(this));
         }
 
-        internal void RegisterEntity(Entity entity)
-        {
-            AddEntityToSystems(entity);
-
-            //Initialize the entity and add it to entities list
-            entities.Add(entity);
-        }
-
-        internal void UnregisterEntity(Entity entity)
-        {
-            //Deinitialize the entity and remove it from entities list
-            entities.Remove(entity);
-
-            RemoveEntityFromSystems(entity);
-            OnEntityRemoved(entity);
-        }
-
         internal void Cleanup()
         {
             //Perform deinitialization of removed entities
-            toRemove.ForEach(item => ((Entity)item).Deinitialize());
-
-            //Process entities to remove
-            for (int i = 0; i < toRemove.Count; i++)
-                UnregisterEntity((Entity)toRemove[i]);
-
-            //Process entities to add
-            for (int i = 0; i < toAdd.Count; i++)
-                RegisterEntity((Entity)toAdd[i]);
+            toRemove.ForEach(item => DeinitializeEntity(item));
 
             //Perform cleanup on all world systems
             Systems.ForEach(item => item.Cleanup());
@@ -246,16 +221,26 @@ namespace OpenBreed.Core.Common
             toAdd.Clear();
         }
 
-        private void InitializeEntity(IEntity entity)
+        private void DeinitializeEntity(IEntity entity)
         {
-            ((Entity)entity).Initialize(this);
-            //OnEntityAdded(entity);
+            ((Entity)entity).World = null;
+            entities.Remove(entity);
+            RemoveEntityFromSystems(entity);
+            OnEntityRemoved(entity);
         }
 
-        //private void OnEntityAdded(IEntity entity)
-        //{
-        //    RaiseEvent(new EntityAddedEventArgs(entity, this));
-        //}
+        private void InitializeEntity(IEntity entity)
+        {
+            entities.Add(entity);
+            ((Entity)entity).World = this;
+            AddEntityToSystems(entity);
+            OnEntityAdded(entity);
+        }
+
+        private void OnEntityAdded(IEntity entity)
+        {
+            RaiseEvent(new EntityAddedEventArgs(Id, entity.Id));
+        }
 
         private void OnEntityRemoved(IEntity entity)
         {
@@ -333,7 +318,7 @@ namespace OpenBreed.Core.Common
             return true;
         }
 
-        private void AddEntityToSystems(Entity entity)
+        private void AddEntityToSystems(IEntity entity)
         {
             foreach (var system in systems)
             {
@@ -342,7 +327,7 @@ namespace OpenBreed.Core.Common
             }
         }
 
-        private void RemoveEntityFromSystems(Entity entity)
+        private void RemoveEntityFromSystems(IEntity entity)
         {
             foreach (var system in systems)
             {

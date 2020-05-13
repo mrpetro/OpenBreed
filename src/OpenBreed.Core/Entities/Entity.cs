@@ -2,8 +2,6 @@
 using OpenBreed.Core.Common;
 
 using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Events;
-using OpenBreed.Core.States;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -46,7 +44,7 @@ namespace OpenBreed.Core.Entities
         /// </summary>
         public object Tag { get; set; }
 
-        public World World { get; private set; }
+        public World World { get; internal set; }
 
         public int Id { get; internal set; }
 
@@ -55,12 +53,6 @@ namespace OpenBreed.Core.Entities
         #endregion Public Properties
 
         #region Public Methods
-
-        //public void Impulse<TState, TImpulse>(TImpulse impulse) where TState : struct, IConvertible where TImpulse : struct, IConvertible
-        //{
-        //    var sm = FsmList.OfType<StateMachine<TState, TImpulse>>().FirstOrDefault();
-        //    sm.Perform(impulse);
-        //}
 
         public T TryGetComponent<T>()
         {
@@ -118,27 +110,7 @@ namespace OpenBreed.Core.Entities
 
         #region Internal Methods
 
-        internal void Deinitialize()
-        {
-            World = null;
-        }
-
-        internal void Initialize(World world)
-        {
-            //Remember in what world entity is
-            World = world;
-            OnEnteredWorld(World);
-        }
 
         #endregion Internal Methods
-
-        #region Private Methods
-
-        private void OnEnteredWorld(World world)
-        {
-            RaiseEvent(new EntityEnteredWorldEventArgs(this, world));
-        }
-
-        #endregion Private Methods
     }
 }
