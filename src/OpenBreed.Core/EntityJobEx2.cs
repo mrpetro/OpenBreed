@@ -1,31 +1,35 @@
 ﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common;
 using OpenBreed.Core.Entities;
 using System;
 
 namespace OpenBreed.Core
 {
-    public class EntityJobEx2<TEventArgs> : IJob where TEventArgs : EventArgs
+    public class WorldJobEx2<TEventArgs> : IJob where TEventArgs : EventArgs
     {
         #region Private Fields
 
-        private IEntity entity;
         private Action action;
 
         #endregion Private Fields
 
         #region Private Constructors
 
+        private ICore core;
+        private string worldName;
 
-
-        public EntityJobEx2(IEntity entity, Action action)
+        public WorldJobEx2(ICore core, string worldName , Action action)
         {
-            this.entity = entity;
+            this.core = core;
+            this.worldName = worldName;
             this.action = action;
         }
 
+        internal World World => core.Worlds.GetByName(worldName);
+
         private void OnTrigger(object sender, TEventArgs args)
         {
-            entity.Unsubscribe<TEventArgs>(OnTrigger);
+            World.Unsubscribe<TEventArgs>(OnTrigger);
             Complete(this);
         }
 
@@ -45,13 +49,18 @@ namespace OpenBreed.Core
 
         public void Execute()
         {
-            entity.Subscribe<TEventArgs>(OnTrigger);
+            World.Subscribe<TEventArgs>(OnTrigger);
             action.Invoke();
         }
 
         public void Update(float dt)
         {
 
+        }
+
+        public void CompleteTrigger<T>()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion Public Methods
