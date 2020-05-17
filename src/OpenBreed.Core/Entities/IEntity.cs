@@ -22,11 +22,6 @@ namespace OpenBreed.Core.Entities
         ICore Core { get; }
 
         /// <summary>
-        /// World that this entity is currently in
-        /// </summary>
-        World World { get; }
-
-        /// <summary>
         /// Read-olny list of components for this entity
         /// </summary>
         ReadOnlyCollection<IEntityComponent> Components { get; }

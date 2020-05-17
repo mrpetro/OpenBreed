@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
-
+using OpenBreed.Core.Common.Builders;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using System;
 using System.Collections.Generic;
@@ -43,8 +44,6 @@ namespace OpenBreed.Core.Entities
         /// Property for user purpose data
         /// </summary>
         public object Tag { get; set; }
-
-        public World World { get; internal set; }
 
         public int Id { get; internal set; }
 

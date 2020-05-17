@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Extensions;
@@ -9,7 +10,9 @@ using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace OpenBreed.Core.Common
 {
@@ -223,7 +226,10 @@ namespace OpenBreed.Core.Common
 
         private void DeinitializeEntity(IEntity entity)
         {
-            ((Entity)entity).World = null;
+            var worldCmp = entity.GetComponent<WorldComponent>();
+
+            worldCmp.WorldId = -1;
+
             entities.Remove(entity);
             RemoveEntityFromSystems(entity);
             OnEntityRemoved(entity);
@@ -232,7 +238,10 @@ namespace OpenBreed.Core.Common
         private void InitializeEntity(IEntity entity)
         {
             entities.Add(entity);
-            ((Entity)entity).World = this;
+
+            var worldCmp = entity.GetComponent<WorldComponent>();
+            worldCmp.WorldId = Id;
+
             AddEntityToSystems(entity);
             OnEntityAdded(entity);
         }
@@ -259,7 +268,11 @@ namespace OpenBreed.Core.Common
         /// <param name="entity">Entity to be added to this world</param>
         private void AddEntity(IEntity entity)
         {
-            if (entity.World != null)
+            Debug.Assert(entity.Contains<WorldComponent>(), "Entity should have WorldComponent");
+
+            var worldCmp = entity.GetComponent<WorldComponent>();
+
+            if (worldCmp.WorldId >=0)
                 throw new InvalidOperationException("Entity can't exist in more than one world.");
 
             toAdd.Add(entity);
@@ -273,7 +286,11 @@ namespace OpenBreed.Core.Common
         /// <param name="entity">Entity to be removed from this world</param>
         private void RemoveEntity(IEntity entity)
         {
-            if (entity.World != this)
+            Debug.Assert(entity.Contains<WorldComponent>(), "Entity should have WorldComponent");
+
+            var worldCmp = entity.GetComponent<WorldComponent>();
+
+            if (worldCmp.WorldId != Id)
                 throw new InvalidOperationException("Entity doesn't exist in this world");
 
             toRemove.Add(entity);

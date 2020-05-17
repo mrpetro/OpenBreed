@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Common.Components;
+﻿using OpenBreed.Core.Common.Builders;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Entities.Builders;
@@ -31,6 +32,7 @@ namespace OpenBreed.Core.Modules.Rendering.Entities.Builders
         public override IEntity Build()
         {
             var entity = Core.Entities.Create();
+            entity.Add(WorldComponentBuilder.New(Core).Build());
             entity.Add(PositionComponent.Create(position));
             entity.Add(CameraComponent.Create(width, height));
             entity.Add(new PauseImmuneComponent());

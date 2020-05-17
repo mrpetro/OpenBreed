@@ -65,8 +65,10 @@ namespace OpenBreed.Sandbox.Entities.Projectile
             }
         }
 
-        public static void AddProjectile(ICore core, World world, float x, float y, float vx, float vy)
+        public static void AddProjectile(ICore core, int worldId, float x, float y, float vx, float vy)
         {
+            var world = core.Worlds.GetById(worldId);
+
             var projectile = core.Entities.CreateFromTemplate("Projectile");
             //projectile.Add(new FsmComponent());
 

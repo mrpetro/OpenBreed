@@ -47,9 +47,10 @@ namespace OpenBreed.Sandbox.Components.States
             var pos = entity.GetComponent<PositionComponent>();
 
             var className = entity.GetComponent<ClassComponent>().Name;
+            var worldId = entity.GetComponent<WorldComponent>().WorldId;
             var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
             var stampId = entity.Core.Rendering.Stamps.GetByName($"{stampPrefix}/{className}/{stateName}").Id;
-            entity.PostCommand(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
+            entity.PostCommand(new PutStampCommand(worldId, stampId, 0, pos.Value));
 
             //STAMP_DOOR_HORIZONTAL_CLOSED = $"{stampPrefix}/{className}/{stateName}";
 

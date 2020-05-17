@@ -1,4 +1,5 @@
 ﻿Templates.Entities.TeleportEntry = {
+    WorldComponent = {},
     AnimationComponent = {
         Speed = 10.0,
         Loop = true,

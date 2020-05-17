@@ -1,4 +1,5 @@
 ﻿Templates.Entities.DoorHorizontal = {
+    WorldComponent = {},
     FsmComponent = { { "Button" , "Idle"} },
     AnimationComponent = {
         Speed = 5.0,

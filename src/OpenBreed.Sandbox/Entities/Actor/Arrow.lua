@@ -1,4 +1,5 @@
 ﻿Templates.Entities.Arrow = {
+    WorldComponent = {},
     ClassComponent = { "Actor" },
     TimerComponent = {},
     FsmComponent = { { "Actor.Movement", "Standing" },

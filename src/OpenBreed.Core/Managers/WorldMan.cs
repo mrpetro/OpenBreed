@@ -13,6 +13,12 @@ namespace OpenBreed.Core.Managers
     /// </summary>
     public class WorldMan
     {
+        #region Public Fields
+
+        public const int NULL_WORLD_ID = -1;
+
+        #endregion Public Fields
+
         #region Private Fields
 
         private readonly List<World> toInitialize = new List<World>();
@@ -60,6 +66,9 @@ namespace OpenBreed.Core.Managers
         /// <returns>World reference</returns>
         public World GetById(int id)
         {
+            if (id == NULL_WORLD_ID)
+                return null;
+
             if (worlds.TryGetValue(id, out World world))
                 return world;
             else

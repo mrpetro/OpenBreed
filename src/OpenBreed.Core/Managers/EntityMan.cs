@@ -90,8 +90,18 @@ namespace OpenBreed.Core.Managers
 
         public void Destroy(IEntity entity)
         {
-            entity.World.Subscribe<EntityRemovedEventArgs>(OnEntityRemovedEventArgs);
-            entity.World.PostCommand(new RemoveEntityCommand(entity.World.Id, entity.Id));
+            var worldCmp = entity.TryGetComponent<WorldComponent>();
+
+            if (worldCmp == null)
+                return;
+
+            var world = Core.Worlds.GetById(worldCmp.WorldId);
+
+            if (world == null)
+                return;
+
+            world.Subscribe<EntityRemovedEventArgs>(OnEntityRemovedEventArgs);
+            world.PostCommand(new RemoveEntityCommand(worldCmp.WorldId, entity.Id));
         }
 
         #endregion Public Methods

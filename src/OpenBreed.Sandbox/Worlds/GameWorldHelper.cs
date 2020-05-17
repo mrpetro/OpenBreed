@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Builders;
 using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
@@ -146,6 +147,7 @@ namespace OpenBreed.Sandbox.Worlds
             spriteBuilder.SetProperty("Order", 100.0);
             spriteBuilder.SetProperty("ImageId", 0);
             cursorEntity.Add(spriteBuilder.Build());
+            cursorEntity.Add(WorldComponentBuilder.New(core).Build());
             cursorEntity.Add(PositionComponent.Create(0, 0));
             cursorEntity.Add(new CursorInputComponent(0));
 

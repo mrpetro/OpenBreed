@@ -1,5 +1,7 @@
 ﻿using System.Drawing;
+using System.Reflection.Emit;
 using NLua;
+using OpenBreed.Core.Common.Builders;
 using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Helpers;
@@ -112,13 +114,20 @@ namespace OpenBreed.Core
         /// <summary>
         /// Get core module of specific type
         /// </summary>
-        /// <typeparam name="T">Type of module to get</typeparam>
+        /// <typeparam name="TModule">Type of module to get</typeparam>
         /// <returns>Core module</returns>
-        T GetModule<T>() where T : ICoreModule;
+        TModule GetModule<TModule>() where TModule : ICoreModule;
+
+        /// <summary>
+        /// Get component builder
+        /// </summary>
+        /// <typeparam name="TBuilder">Component builder type to get</typeparam>
+        /// <returns>Component builder of specified type</returns>
+        TBuilder GetBuilder<TBuilder>() where TBuilder : IComponentBuilder;
 
         #endregion Public Properties
 
-        #region Public Methods
+            #region Public Methods
 
         /// <summary>
         /// Perform exit

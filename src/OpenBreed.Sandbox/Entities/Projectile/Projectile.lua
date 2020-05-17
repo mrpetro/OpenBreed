@@ -1,4 +1,5 @@
 ﻿Templates.Entities.Projectile = {
+    WorldComponent = {},
     FsmComponent = { { "Projectile" , "Fired"} },
     AnimationComponent = {
         Speed = 10.0,
