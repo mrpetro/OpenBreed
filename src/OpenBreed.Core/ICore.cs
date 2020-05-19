@@ -1,21 +1,12 @@
-﻿using System.Drawing;
-using System.Reflection.Emit;
-using NLua;
+﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common.Builders;
-using OpenBreed.Core.Common.Systems;
-using OpenBreed.Core.Entities;
 using OpenBreed.Core.Helpers;
-using OpenBreed.Core.Inputs;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
-using OpenBreed.Core.Modules.Animation;
-using OpenBreed.Core.Modules.Animation.Helpers;
 using OpenBreed.Core.Modules.Audio;
-using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Rendering;
-using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenBreed.Core.States;
 using OpenTK;
+using System.Drawing;
 
 namespace OpenBreed.Core
 {
@@ -84,7 +75,7 @@ namespace OpenBreed.Core
         /// <summary>
         /// Commands manager
         /// </summary>
-        CommandsMan Commands{ get; }
+        CommandsMan Commands { get; }
 
         /// <summary>
         /// Events manager
@@ -111,6 +102,12 @@ namespace OpenBreed.Core
         /// </summary>
         float ClientRatio { get; }
 
+        #endregion Public Properties
+
+        #region Public Methods
+
+        bool CanHandle(string msgType);
+
         /// <summary>
         /// Get core module of specific type
         /// </summary>
@@ -125,14 +122,14 @@ namespace OpenBreed.Core
         /// <returns>Component builder of specified type</returns>
         TBuilder GetBuilder<TBuilder>() where TBuilder : IComponentBuilder;
 
-        #endregion Public Properties
-
-            #region Public Methods
-
         /// <summary>
         /// Perform exit
         /// </summary>
         void Exit();
+
+        void RegisterHandler(string msgType, IMsgHandler msgHandler);
+
+        bool Handle(object sender, IMsg msg);
 
         #endregion Public Methods
     }

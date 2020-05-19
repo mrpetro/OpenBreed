@@ -1,6 +1,8 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common.Builders;
 using OpenBreed.Core.Common.Systems.Shapes;
+using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Animation.Builders;
@@ -34,25 +36,22 @@ using System.Reflection;
 
 namespace OpenBreed.Sandbox
 {
-    public class Program : GameWindow, ICore
+    public class Program : CoreBase
     {
         #region Private Fields
 
-        private readonly List<ISystem> systems = new List<ISystem>();
-
         private string appVersion;
-        private Dictionary<Type, ICoreModule> modules = new Dictionary<Type, ICoreModule>();
 
         #endregion Private Fields
 
         #region Public Constructors
+
 
         public Program()
             : base(800, 600, new GraphicsMode(new ColorFormat(8, 8, 8, 8), 24, 8), "OpenBreed")
         {
             appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-            Systems = new ReadOnlyCollection<ISystem>(systems);
 
             Logging = new LogMan(this);
 
@@ -77,6 +76,7 @@ namespace OpenBreed.Sandbox
             RegisterModule(Physics);
             RegisterModule(Sounds);
 
+
             VSync = VSyncMode.On;
         }
 
@@ -84,42 +84,41 @@ namespace OpenBreed.Sandbox
 
         #region Public Properties
 
-        public ReadOnlyCollection<ISystem> Systems { get; }
-        public IRenderModule Rendering { get; }
+        public override IRenderModule Rendering { get; }
 
         public PhysicsModule Physics { get; }
 
-        public IAudioModule Sounds { get; }
+        public override IAudioModule Sounds { get; }
 
-        public AnimMan Animations { get; }
+        public override AnimMan Animations { get; }
 
-        public EntityMan Entities { get; }
+        public override EntityMan Entities { get; }
 
-        public FsmMan StateMachines { get; }
+        public override FsmMan StateMachines { get; }
 
         public ShapeMan Shapes { get; }
 
-        public PlayersMan Players { get; }
+        public override PlayersMan Players { get; }
 
-        public ILogMan Logging { get; }
+        public override ILogMan Logging { get; }
 
-        public JobMan Jobs { get; }
+        public override JobMan Jobs { get; }
 
-        public ItemsMan Items { get; }
+        public override ItemsMan Items { get; }
 
-        public InputsMan Inputs { get; }
+        public override InputsMan Inputs { get; }
 
-        public CommandsMan Commands { get; }
+        public override CommandsMan Commands { get; }
 
-        public EventsMan Events { get; }
+        public override EventsMan Events { get; }
 
-        public WorldMan Worlds { get; }
+        public override WorldMan Worlds { get; }
 
-        public IScriptMan Scripts { get; }
+        public override IScriptMan Scripts { get; }
 
-        public Matrix4 ClientTransform { get; private set; }
+        public override Matrix4 ClientTransform { get; protected set; }
 
-        public float ClientRatio { get { return (float)ClientRectangle.Width / (float)ClientRectangle.Height; } }
+        public override float ClientRatio { get { return (float)ClientRectangle.Width / (float)ClientRectangle.Height; } }
 
         #endregion Public Properties
 
@@ -175,10 +174,7 @@ namespace OpenBreed.Sandbox
             return new SoundSystemBuilder(this);
         }
 
-        public T GetModule<T>() where T : ICoreModule
-        {
-            return (T)modules[typeof(T)];
-        }
+
 
         #endregion Public Methods
 
@@ -237,7 +233,7 @@ namespace OpenBreed.Sandbox
             RegisterFixtures();
             RegisterEntityTemplates();
             RegisterItems();
-
+ 
             Inputs.RegisterHandler(new WalkingControlHandler());
             Inputs.RegisterHandler(new AttackControlHandler());
 
@@ -353,6 +349,7 @@ namespace OpenBreed.Sandbox
             Inputs.Update();
             Players.ApplyInputs();
             //StateMachine.Update((float)e.Time);
+
             Worlds.Update((float)e.Time);
             Jobs.Update((float)e.Time);
         }
@@ -384,10 +381,6 @@ namespace OpenBreed.Sandbox
             program.Run(30.0, 60.0);
         }
 
-        private void RegisterModule(ICoreModule module)
-        {
-            modules.Add(module.GetType(), module);
-        }
 
         private void RegisterComponentBuilders()
         {

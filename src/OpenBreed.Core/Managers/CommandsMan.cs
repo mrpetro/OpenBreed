@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common.Components;
+using OpenBreed.Core.Helpers;
+using System;
 using System.Diagnostics;
 
 namespace OpenBreed.Core.Managers
@@ -14,7 +16,6 @@ namespace OpenBreed.Core.Managers
         }
 
         #endregion Public Constructors
-
         #region Public Properties
 
         public ICore Core { get; }
@@ -25,6 +26,12 @@ namespace OpenBreed.Core.Managers
 
         public void Post(object sender, IMsg msg)
         {
+            if (Core.CanHandle(msg.Type))
+            {
+                Core.Handle(sender, msg);
+                return;
+            }
+
             if (msg is IEntityCommand)
             {
                 Post(sender, (IEntityCommand)msg);

@@ -91,6 +91,7 @@
     <Compile Include="Common\Components\ClassComponent.cs" />
     <Compile Include="Common\Components\TimerComponent.cs" />
     <Compile Include="Common\Components\WorldComponent.cs" />
+    <Compile Include="CoreBase.cs" />
     <Compile Include="EntityJobEx2.cs" />
     <Compile Include="Events\EntityAddedEventArgs.cs" />
     <Compile Include="Events\EntityRemovedEventArgs.cs" />

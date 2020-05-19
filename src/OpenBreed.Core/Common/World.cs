@@ -12,7 +12,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices;
 
 namespace OpenBreed.Core.Common
 {
@@ -59,10 +58,6 @@ namespace OpenBreed.Core.Common
             Components = new ComponentsMan();
             commandHandler = new CommandHandler(this);
             msgHandlerRelay = new MsgHandlerRelay(this);
-
-            RegisterHandler(PauseWorldCommand.TYPE, commandHandler);
-            RegisterHandler(RemoveEntityCommand.TYPE, commandHandler);
-            RegisterHandler(AddEntityCommand.TYPE, commandHandler);
 
             Core.Worlds.RegisterWorld(this);
 
@@ -143,15 +138,6 @@ namespace OpenBreed.Core.Common
         {
             switch (cmd.Type)
             {
-                case PauseWorldCommand.TYPE:
-                    return HandlePauseWorld(sender, (PauseWorldCommand)cmd);
-
-                case RemoveEntityCommand.TYPE:
-                    return HandleRemoveEntity(sender, (RemoveEntityCommand)cmd);
-
-                case AddEntityCommand.TYPE:
-                    return HandleAddEntity(sender, (AddEntityCommand)cmd);
-
                 default:
                     return false;
             }
@@ -180,6 +166,55 @@ namespace OpenBreed.Core.Common
         public void RaiseEvent<T>(T eventArgs) where T : EventArgs
         {
             Core.Events.Raise(this, eventArgs);
+        }
+
+        /// <summary>
+        /// Method will add given entity to this world.
+        /// Entity will not be added immediately but at the end of each world update.
+        /// An exception will be thrown if given entity already exists in world
+        /// </summary>
+        /// <param name="entity">Entity to be added to this world</param>
+        public void AddEntity(IEntity entity)
+        {
+            Debug.Assert(entity.Contains<WorldComponent>(), "Entity should have WorldComponent");
+
+            var worldCmp = entity.GetComponent<WorldComponent>();
+
+            if (worldCmp.WorldId >= 0)
+                throw new InvalidOperationException("Entity can't exist in more than one world.");
+
+            toAdd.Add(entity);
+        }
+
+        /// <summary>
+        /// Method will remove given entity from this world.
+        /// Entity will not be removed immediately but at the end of each world update.
+        /// An exception will be thrown if given entity does not exist in this world.
+        /// </summary>
+        /// <param name="entity">Entity to be removed from this world</param>
+        public void RemoveEntity(IEntity entity)
+        {
+            Debug.Assert(entity.Contains<WorldComponent>(), "Entity should have WorldComponent");
+
+            var worldCmp = entity.GetComponent<WorldComponent>();
+
+            if (worldCmp.WorldId != Id)
+                throw new InvalidOperationException("Entity doesn't exist in this world");
+
+            toRemove.Add(entity);
+        }
+
+        public void Pause(bool value)
+        {
+            if (Paused == value)
+                return;
+
+            Paused = value;
+
+            if (Paused)
+                RaiseEvent(new WorldPausedEventArgs(this));
+            else
+                RaiseEvent(new WorldUnpausedEventArgs(this));
         }
 
         #endregion Public Methods
@@ -224,6 +259,10 @@ namespace OpenBreed.Core.Common
             toAdd.Clear();
         }
 
+        #endregion Internal Methods
+
+        #region Private Methods
+
         private void DeinitializeEntity(IEntity entity)
         {
             var worldCmp = entity.GetComponent<WorldComponent>();
@@ -256,83 +295,10 @@ namespace OpenBreed.Core.Common
             RaiseEvent(new EntityRemovedEventArgs(Id, entity.Id));
         }
 
-        #endregion Internal Methods
-
-        #region Private Methods
-
-        /// <summary>
-        /// Method will add given entity to this world.
-        /// Entity will not be added immediately but at the end of each world update.
-        /// An exception will be thrown if given entity already exists in world
-        /// </summary>
-        /// <param name="entity">Entity to be added to this world</param>
-        private void AddEntity(IEntity entity)
-        {
-            Debug.Assert(entity.Contains<WorldComponent>(), "Entity should have WorldComponent");
-
-            var worldCmp = entity.GetComponent<WorldComponent>();
-
-            if (worldCmp.WorldId >=0)
-                throw new InvalidOperationException("Entity can't exist in more than one world.");
-
-            toAdd.Add(entity);
-        }
-
-        /// <summary>
-        /// Method will remove given entity from this world.
-        /// Entity will not be removed immediately but at the end of each world update.
-        /// An exception will be thrown if given entity does not exist in this world.
-        /// </summary>
-        /// <param name="entity">Entity to be removed from this world</param>
-        private void RemoveEntity(IEntity entity)
-        {
-            Debug.Assert(entity.Contains<WorldComponent>(), "Entity should have WorldComponent");
-
-            var worldCmp = entity.GetComponent<WorldComponent>();
-
-            if (worldCmp.WorldId != Id)
-                throw new InvalidOperationException("Entity doesn't exist in this world");
-
-            toRemove.Add(entity);
-        }
-
         private void InitializeSystems()
         {
             for (int i = 0; i < systems.Count; i++)
                 systems[i].Initialize(this);
-        }
-
-        private void Pause(bool value)
-        {
-            if (Paused == value)
-                return;
-
-            Paused = value;
-
-            if (Paused)
-                RaiseEvent(new WorldPausedEventArgs(this));
-            else
-                RaiseEvent(new WorldUnpausedEventArgs(this));
-        }
-
-        private bool HandlePauseWorld(object sender, PauseWorldCommand cmd)
-        {
-            Pause(cmd.Pause);
-            return true;
-        }
-
-        private bool HandleRemoveEntity(object sender, RemoveEntityCommand cmd)
-        {
-            var entity = Core.Entities.GetById(cmd.EntityId);
-            RemoveEntity(entity);
-            return true;
-        }
-
-        private bool HandleAddEntity(object sender, AddEntityCommand cmd)
-        {
-            var entity = Core.Entities.GetById(cmd.EntityId);
-            AddEntity(entity);
-            return true;
         }
 
         private void AddEntityToSystems(IEntity entity)

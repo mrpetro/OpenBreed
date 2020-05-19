@@ -28,7 +28,12 @@ namespace OpenBreed.Core.Helpers
 
         #region Public Methods
 
-        internal void RegisterHandler(string msgType, IMsgHandler msgHandler)
+        public bool IsRegistered(string msgType)
+        {
+            return relayHandlers.ContainsKey(msgType);
+        }
+
+        public void RegisterHandler(string msgType, IMsgHandler msgHandler)
         {
             relayHandlers.Add(msgType, msgHandler);
         }
