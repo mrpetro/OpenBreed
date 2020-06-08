@@ -35,7 +35,6 @@ namespace OpenBreed.Sandbox.Entities
 
             var e = world.Core.Entities.Create();
 
-            e.Add(WorldComponentBuilder.NewSpec(world.Core).Build());
             e.Add(PositionComponentBuilder.New(world.Core).Build());
 
             var textBuilder = TextComponentBuilder.New(world.Core);

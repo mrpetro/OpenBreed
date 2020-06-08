@@ -9,6 +9,7 @@ using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 
 namespace OpenBreed.Core.Common
@@ -174,11 +175,7 @@ namespace OpenBreed.Core.Common
         /// <param name="entity">Entity to be added to this world</param>
         public void AddEntity(IEntity entity)
         {
-            Debug.Assert(entity.Contains<WorldComponent>(), "Entity should have WorldComponent");
-
-            var worldCmp = entity.GetComponent<WorldComponent>();
-
-            if (worldCmp.WorldId >= 0)
+            if (entity.World != null)
                 throw new InvalidOperationException("Entity can't exist in more than one world.");
 
             toAdd.Add(entity);
@@ -192,11 +189,7 @@ namespace OpenBreed.Core.Common
         /// <param name="entity">Entity to be removed from this world</param>
         public void RemoveEntity(IEntity entity)
         {
-            Debug.Assert(entity.Contains<WorldComponent>(), "Entity should have WorldComponent");
-
-            var worldCmp = entity.GetComponent<WorldComponent>();
-
-            if (worldCmp.WorldId != Id)
+            if (entity.World != this)
                 throw new InvalidOperationException("Entity doesn't exist in this world");
 
             toRemove.Add(entity);

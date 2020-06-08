@@ -153,7 +153,6 @@
     <Compile Include="Scripting\LuaScriptFunc.cs" />
     <Compile Include="Systems\ISystem.cs" />
     <Compile Include="Systems\TextInputSystem.cs" />
-    <Compile Include="Systems\WorldBouncerSystem.cs" />
     <Compile Include="WorldJobEx.cs" />
     <Compile Include="Systems\StateMachineSystem.cs" />
     <Compile Include="Systems\TimerSystem.cs" />

@@ -7,6 +7,7 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Events;
 using OpenBreed.Core.Modules.Animation.Helpers;
+using OpenBreed.Core.Modules.Rendering.Builders;
 using OpenBreed.Core.Modules.Rendering.Components;
 using System;
 using System.Collections.Generic;
@@ -36,19 +37,6 @@ namespace OpenBreed.Sandbox.Entities.Camera
         {
             var cameraCmp = entity.GetComponent<CameraComponent>();
             cameraCmp.Brightness = nextValue;
-        }
-
-        public static IEntity AddCamera(ICore core, World world, float x, float y)
-        {
-            var cameraEntity = core.Entities.Create();
-
-            cameraEntity.Add(new AnimationComponent(10.0f, true, 0, FrameTransition.LinearInterpolation));
-            cameraEntity.Add(PositionComponent.Create(x, y));
-            cameraEntity.Add(CameraComponent.Create(1.0f, 1.0f));
-            cameraEntity.Add(new PauseImmuneComponent());
-            world.PostCommand(new AddEntityCommand(world.Id, cameraEntity.Id));
-            //world.AddEntity(cameraEntity);
-            return cameraEntity;
         }
     }
 }
