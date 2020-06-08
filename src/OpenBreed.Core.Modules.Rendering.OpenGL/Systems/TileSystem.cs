@@ -148,7 +148,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Protected Methods
 
-        protected override void RegisterEntity(IEntity entity)
+        protected override void OnAddEntity(IEntity entity)
         {
             Debug.Assert(!entities.Contains(entity), "Entity already added!");
 
@@ -172,7 +172,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             tileCell.ImageId = tile.ImageId;
         }
 
-        protected override void UnregisterEntity(IEntity entity)
+        protected override void OnRemoveEntity(IEntity entity)
         {
             throw new NotImplementedException();
         }

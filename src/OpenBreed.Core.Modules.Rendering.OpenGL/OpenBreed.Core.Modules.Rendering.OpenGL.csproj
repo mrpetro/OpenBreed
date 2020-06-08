@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\CameraComponentBuilder.cs" />
     <Compile Include="Builders\TileComponentBuilder.cs" />
     <Compile Include="Builders\SpriteComponentBuilder.cs" />
     <Compile Include="Builders\TextComponentBuilder.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="OpenGLModule.cs" />
     <Compile Include="Managers\TextureMan.cs" />
     <Compile Include="Systems\StampSystem.cs" />
+    <Compile Include="Systems\TextPresenterSystem.cs" />
     <Compile Include="Systems\ViewportSystem.cs" />
     <Compile Include="Systems\WireframeSystem.cs" />
     <Compile Include="Systems\TextSystem.cs" />

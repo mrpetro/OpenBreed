@@ -52,14 +52,14 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         #region Protected Methods
 
-        protected override void RegisterEntity(IEntity entity)
+        protected override void OnAddEntity(IEntity entity)
         {
             entities.Add(entity);
             aiControlComps.Add(entity.GetComponent<AiControl>());
             positionComps.Add(entity.GetComponent<PositionComponent>());
         }
 
-        protected override void UnregisterEntity(IEntity entity)
+        protected override void OnRemoveEntity(IEntity entity)
         {
             var index = entities.IndexOf(entity);
 

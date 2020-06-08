@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Core.Modules.Rendering.Components
 {
+
     public class TextPart
     {
         #region Public Constructors

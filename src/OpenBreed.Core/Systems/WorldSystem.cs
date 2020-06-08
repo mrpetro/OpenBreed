@@ -99,7 +99,7 @@ namespace OpenBreed.Core.Systems
             {
                 //Process entities to remove
                 for (int i = 0; i < toRemove.Count; i++)
-                    UnregisterEntity((Entity)toRemove[i]);
+                    OnRemoveEntity((Entity)toRemove[i]);
 
                 toRemove.Clear();
             }
@@ -108,7 +108,7 @@ namespace OpenBreed.Core.Systems
             {
                 //Process entities to add
                 for (int i = 0; i < toAdd.Count; i++)
-                    RegisterEntity((Entity)toAdd[i]);
+                    OnAddEntity((Entity)toAdd[i]);
 
                 toAdd.Clear();
             }
@@ -118,9 +118,9 @@ namespace OpenBreed.Core.Systems
 
         #region Protected Methods
 
-        protected abstract void UnregisterEntity(IEntity entity);
+        protected abstract void OnRemoveEntity(IEntity entity);
 
-        protected abstract void RegisterEntity(IEntity entity);
+        protected abstract void OnAddEntity(IEntity entity);
 
         protected int Require<C>() where C : IEntityComponent
         {

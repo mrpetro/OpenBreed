@@ -22,6 +22,20 @@
         /// <param name="text">Text to draw</param>
         void Draw(string text);
 
+        /// <summary>
+        /// Gets single character width
+        /// </summary>
+        /// <param name="character">Character to get width from</param>
+        /// <returns>Width value</returns>
+        float GetWidth(char character);
+
+        /// <summary>
+        /// Gets text width
+        /// </summary>
+        /// <param name="text">Text to get width from</param>
+        /// <returns>Width value</returns>
+        float GetWidth(string text);
+
         #endregion Public Methods
     }
 }

@@ -93,12 +93,12 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Protected Methods
 
-        protected override void RegisterEntity(IEntity entity)
+        protected override void OnAddEntity(IEntity entity)
         {
             active.Add(entity);
         }
 
-        protected override void UnregisterEntity(IEntity entity)
+        protected override void OnRemoveEntity(IEntity entity)
         {
             active.Remove(entity);
         }

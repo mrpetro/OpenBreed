@@ -123,12 +123,12 @@ namespace OpenBreed.Core.Systems
 
         #region Protected Methods
 
-        protected override void RegisterEntity(IEntity entity)
+        protected override void OnAddEntity(IEntity entity)
         {
             entities.Add(entity.Id);
         }
 
-        protected override void UnregisterEntity(IEntity entity)
+        protected override void OnRemoveEntity(IEntity entity)
         {
             var index = entities.IndexOf(entity.Id);
 

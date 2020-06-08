@@ -27,12 +27,12 @@ namespace OpenBreed.Core.Modules.Audio.Systems
             components = new List<IAudioComponent>();
         }
 
-        protected override void RegisterEntity(IEntity entity)
+        protected override void OnAddEntity(IEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        protected override void UnregisterEntity(IEntity entity)
+        protected override void OnRemoveEntity(IEntity entity)
         {
             throw new NotImplementedException();
         }

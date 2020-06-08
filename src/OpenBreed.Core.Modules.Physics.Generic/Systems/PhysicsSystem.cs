@@ -144,7 +144,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         #region Protected Methods
 
-        protected override void RegisterEntity(IEntity entity)
+        protected override void OnAddEntity(IEntity entity)
         {
             if (entity.Components.Any(item => item is VelocityComponent))
                 RegisterDynamicEntity(entity);
@@ -152,7 +152,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 RegisterStaticEntity(entity);
         }
 
-        protected override void UnregisterEntity(IEntity entity)
+        protected override void OnRemoveEntity(IEntity entity)
         {
             if (entity.Components.Any(item => item is VelocityComponent))
                 UnregisterDynamicEntity(entity);

@@ -31,6 +31,8 @@ namespace OpenBreed.Core.Entities
         /// </summary>
         int Id { get; }
 
+
+
         /// <summary>
         /// Property for various debug data
         /// </summary>

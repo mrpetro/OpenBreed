@@ -65,7 +65,7 @@ namespace OpenBreed.Core.Systems
 
         #region Protected Methods
 
-        protected override void RegisterEntity(IEntity entity)
+        protected override void OnAddEntity(IEntity entity)
         {
             entities.Add(entity);
 
@@ -74,7 +74,7 @@ namespace OpenBreed.Core.Systems
             //entity.Subscribe<EntityEnteredWorldEventArgs>(OnEntityEnteredWorld);
         }
 
-        protected override void UnregisterEntity(IEntity entity)
+        protected override void OnRemoveEntity(IEntity entity)
         {
             //World.Unsubscribe<EntityAddedEventArgs>(OnEntityEnteredWorld);
             //entity.Unsubscribe<EntityEnteredWorldEventArgs>(OnEntityEnteredWorld);

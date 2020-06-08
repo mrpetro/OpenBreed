@@ -76,7 +76,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         #region Protected Methods
 
-        protected override void RegisterEntity(IEntity entity)
+        protected override void OnAddEntity(IEntity entity)
         {
             entities.Add(entity);
             positionComps.Add(entity.GetComponent<PositionComponent>());
@@ -85,7 +85,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             dynamicBodyComps.Add(entity.GetComponent<BodyComponent>());
         }
 
-        protected override void UnregisterEntity(IEntity entity)
+        protected override void OnRemoveEntity(IEntity entity)
         {
             var index = entities.IndexOf(entity);
 

@@ -15,7 +15,7 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TextSystem : WorldSystem, ICommandExecutor, IRenderableSystem
+    public class TextPresenterSystem : WorldSystem, ICommandExecutor, IRenderableSystem
     {
         #region Private Fields
 
@@ -26,7 +26,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Internal Constructors
 
-        internal TextSystem(TextSystemBuilder builder) : base(builder.core)
+        public TextPresenterSystem(ICore core) : base(core)
         {
             cmdHandler = new CommandHandler(this);
 
@@ -85,9 +85,17 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Protected Methods
 
+        private Vector2 cursorPos;
+
         protected override void OnAddEntity(IEntity entity)
         {
             entities.Add(entity);
+
+            entity.GetComponent<PositionComponent>().Value = cursorPos;
+            var p = entity.GetComponent<TextComponent>().Parts[0];
+            var font = Core.Rendering.Fonts.GetById(p.FontId);
+            var width = font.GetWidth(p.Text);
+            cursorPos = Vector2.Add(cursorPos, new Vector2(width, 0.0f));
         }
 
         protected override void OnRemoveEntity(IEntity entity)

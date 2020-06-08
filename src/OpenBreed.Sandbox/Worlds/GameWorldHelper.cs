@@ -81,7 +81,7 @@ namespace OpenBreed.Sandbox.Worlds
             return builder.Build();
         }
 
-        internal static void CreateGameWorld(Program core)
+        internal static void Create(Program core)
         {
             World gameWorld = null;
 

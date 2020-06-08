@@ -173,12 +173,12 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Protected Methods
 
-        protected override void RegisterEntity(IEntity entity)
+        protected override void OnAddEntity(IEntity entity)
         {
             entities.Add(entity);
         }
 
-        protected override void UnregisterEntity(IEntity entity)
+        protected override void OnRemoveEntity(IEntity entity)
         {
             entities.Remove(entity);
         }

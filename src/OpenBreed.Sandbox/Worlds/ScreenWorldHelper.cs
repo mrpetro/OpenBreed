@@ -23,6 +23,7 @@ namespace OpenBreed.Sandbox.Worlds
     {
         public const string GAME_VIEWPORT = "GameViewport";
         public const string HUD_VIEWPORT = "HUDViewport";
+        public const string TEXT_VIEWPORT = "TextViewport";
 
         public static void AddSystems(Program core, WorldBuilder builder)
         {
@@ -65,12 +66,16 @@ namespace OpenBreed.Sandbox.Worlds
             //gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitHeightPreserveAspectRatio;
             gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
             var hudViewport = CreateViewportEntity(core, HUD_VIEWPORT, 0, 0, core.ClientRectangle.Width, core.ClientRectangle.Height, false, true);
+            var textViewport = CreateViewportEntity(core, TEXT_VIEWPORT, 0, 0, core.ClientRectangle.Width, core.ClientRectangle.Height, false, true);
 
             core.Rendering.Subscribe<ClientResizedEventArgs>((s, a) => ResizeGameViewport(gameViewport, a));
             core.Rendering.Subscribe<ClientResizedEventArgs>((s, a) => ResizeHudViewport(hudViewport, a));
+            core.Rendering.Subscribe<ClientResizedEventArgs>((s, a) => ResizeTextViewport(hudViewport, a));
+
 
             world.PostCommand(new AddEntityCommand(world.Id, gameViewport.Id));
             world.PostCommand(new AddEntityCommand(world.Id, hudViewport.Id));
+            world.PostCommand(new AddEntityCommand(world.Id, textViewport.Id));
             //world.AddEntity(gameViewport);
             //world.AddEntity(hudViewport);
 
@@ -94,5 +99,9 @@ namespace OpenBreed.Sandbox.Worlds
             viewport.PostCommand(new ViewportResizeCommand(viewport.Id, args.Width, args.Height));
         }
 
+        private static void ResizeTextViewport(IEntity viewport, ClientResizedEventArgs args)
+        {
+            viewport.PostCommand(new ViewportResizeCommand(viewport.Id, args.Width, args.Height));
+        }
     }
 }

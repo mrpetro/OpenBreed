@@ -291,10 +291,10 @@ namespace OpenBreed.Sandbox
             ActorHelper.CreateRotationFSM(this);
 
             Rendering.ScreenWorld = ScreenWorldHelper.CreateWorld(this);
+            //TextWorldHelper.Create(this);
 
-            HudWorldHelper.CreateHudWorld(this);
-
-            GameWorldHelper.CreateGameWorld(this);
+            HudWorldHelper.Create(this);
+            GameWorldHelper.Create(this);
 
             //GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.One);                  // Select The Type Of Blending
 

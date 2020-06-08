@@ -13,7 +13,9 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
     {
         #region Public Fields
 
-        public const string Characters = @" qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789µ§½!""#¤%&/()=?^*@£€${[]}\~¨'-_.:,;<>|°©®±¥";
+        //public const string Characters = @" qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789µ§½!""#¤%&/()=?^*@£€${[]}\~¨'-_.:,;<>|°©®±¥ł";
+
+        public int[] Characters { get; }
 
         public static uint[] indices = {
                                             0,1,2,
@@ -24,18 +26,22 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #region Private Fields
 
-        private readonly Dictionary<char, Tuple<int, float>> Lookup = new Dictionary<char, Tuple<int, float>>();
+        private readonly Dictionary<int, (int, float)> Lookup = new Dictionary<int, (int, float)>();
         private int ibo;
 
         private List<int> vboList;
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
         internal FontAtlas(FontAtlasBuilder builder)
         {
-            Id = builder.GetNewId();
+            Characters = new int[256];
+            for (int i = 0; i < 256; i++)
+                Characters[i] = i;
+
+                            Id = builder.GetNewId();
             vboList = new List<int>();
 
             RenderTools.CreateIndicesArray(indices, out ibo);
@@ -43,7 +49,16 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             BuildCoords(builder.FontMan.Module.Textures, builder.FontName, builder.FontSize);
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
+
+        #region Public Properties
+
+        /// <summary>
+        /// Id of this sprite atlas
+        /// </summary>
+        public int Id { get; }
+
+        #endregion Public Properties
 
         #region Internal Properties
 
@@ -51,16 +66,20 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #endregion Internal Properties
 
-        #region Private Properties
-
-        /// <summary>
-        /// Id of this sprite atlas
-        /// </summary>
-        public int Id { get; }
-
-        #endregion Private Properties
-
         #region Public Methods
+
+        public float GetWidth(char character)
+        {
+            return Lookup[character].Item2;
+        }
+
+        public float GetWidth(string text)
+        {
+            var totalWidth = 0.0f;
+            for (int i = 0; i < text.Length; i++)
+                totalWidth += Lookup[text[i]].Item2;
+            return totalWidth;
+        }
 
         public Bitmap GenerateCharacters(Font font, out Size charSize)
         {
@@ -153,25 +172,40 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         #region Private Methods
 
-        private Bitmap GenerateCharacter(Font font, char c)
+        private Bitmap GenerateCharacter(Font font, int intCh)
         {
-            var size = GetSize(font, c);
+            var ch = (char)intCh;
+            var size = MeasureSize(font, ch);
             var bmp = new Bitmap((int)size.Width, (int)size.Height);
             using (var gfx = Graphics.FromImage(bmp))
             {
                 gfx.FillRectangle(Brushes.Black, 0, 0, bmp.Width, bmp.Height);
-                gfx.DrawString(c.ToString(), font, Brushes.White, 0, 0);
+                gfx.DrawRectangle(Pens.Blue, 0, 0, bmp.Width, bmp.Height);
+                gfx.DrawString(ch.ToString(), font, Brushes.White, 0, 0); ;
             }
             return bmp;
         }
 
-        private SizeF GetSize(Font font, char c)
+        private SizeF MeasureSize(Font font, char c)
         {
             using (var bmp = new Bitmap(512, 512))
             {
                 using (var gfx = Graphics.FromImage(bmp))
                 {
                     return gfx.MeasureString(c.ToString(), font);
+                }
+            }
+        }
+
+        private float MeasureWidth(Font font, char c)
+        {
+            using (var bmp = new Bitmap(512, 512))
+            {
+                using (var gfx = Graphics.FromImage(bmp))
+                {
+                    var stringFormat = new StringFormat(StringFormat.GenericTypographic);
+                    stringFormat.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
+                    return gfx.MeasureString(c.ToString(), font, 0, stringFormat).Width;
                 }
             }
         }
@@ -186,13 +220,14 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             {
                 var bitmap = GenerateCharacters(font, out Size maxCharSize);
 
-                Texture = textures.Create($"Textures/Fonts/{fontName}/{fontSize}",bitmap);
+                Texture = textures.Create($"Textures/Fonts/{fontName}/{fontSize}", bitmap);
 
                 for (int i = 0; i < Characters.Length; i++)
                 {
                     if (!Lookup.ContainsKey(Characters[i]))
                     {
-                        var charSize = GetSize(font, Characters[i]);
+                        var charSize = MeasureSize(font, (char)Characters[i]);
+                        var charWidth = MeasureWidth(font, (char)Characters[i]);
 
                         var coord = new Vector2(i * maxCharSize.Width, 0);
                         var vertices = CreateVertices(coord, charSize.Width, charSize.Height);
@@ -201,7 +236,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
                         RenderTools.CreateVertexArray(vertices, out vbo);
                         vboList.Add(vbo);
 
-                        Lookup.Add(Characters[i], new Tuple<int, float>(i, charSize.Width));
+                        Lookup.Add(Characters[i], (i, charWidth));
                     }
                 }
             }
