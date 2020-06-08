@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common.Builders;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
@@ -111,9 +111,9 @@ namespace OpenBreed.Core
         /// <summary>
         /// Get core module of specific type
         /// </summary>
-        /// <typeparam name="TModule">Type of module to get</typeparam>
+        /// <typeparam name="T">Type of module to get</typeparam>
         /// <returns>Core module</returns>
-        TModule GetModule<TModule>() where TModule : ICoreModule;
+        T GetModule<T>() where T : ICoreModule;
 
         /// <summary>
         /// Get component builder

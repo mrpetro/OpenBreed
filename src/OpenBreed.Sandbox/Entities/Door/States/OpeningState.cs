@@ -1,11 +1,16 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Components;
+﻿
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Commands;
+using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Events;
+using OpenBreed.Core.Modules.Animation.Commands;
+using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
+using System;
+using System.Linq;
+using OpenBreed.Core.Commands;
 using OpenBreed.Sandbox.Entities.Door.States;
+using OpenBreed.Core.Common.Components;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -13,7 +18,7 @@ namespace OpenBreed.Sandbox.Components.States
     {
         #region Private Fields
 
-        private const string ANIM_PREFIX = "Animations";
+        private readonly string animPrefix;
 
         #endregion Private Fields
 
@@ -21,6 +26,7 @@ namespace OpenBreed.Sandbox.Components.States
 
         public OpeningState()
         {
+            animPrefix = "Animations";
         }
 
         #endregion Public Constructors
@@ -40,7 +46,7 @@ namespace OpenBreed.Sandbox.Components.States
 
             var className = entity.GetComponent<ClassComponent>().Name;
             var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
-            entity.PostCommand(new PlayAnimCommand(entity.Id, $"{ANIM_PREFIX}/{className}/{stateName}", 0));
+            entity.PostCommand(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{stateName}", 0));
 
             entity.PostCommand(new TextSetCommand(entity.Id, 0, "Door - Opening"));
 
@@ -54,14 +60,14 @@ namespace OpenBreed.Sandbox.Components.States
 
         #endregion Public Methods
 
+        #region Private Methods
+
         //private void OnAnimChanged(object sender, AnimChangedEventArgs e)
         //{
         //    var entity = sender as IEntity;
 
         //    entity.PostCommand(new SpriteSetCommand(entity.Id, (int)e.Frame));
         //}
-
-        #region Private Methods
 
         private void OnAnimStopped(object sender, AnimStoppedEventArgs e)
         {

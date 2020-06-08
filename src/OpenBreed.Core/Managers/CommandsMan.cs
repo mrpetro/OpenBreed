@@ -55,14 +55,8 @@ namespace OpenBreed.Core.Managers
 
             var entity = Core.Entities.GetById(msg.EntityId);
 
-            var worldCmp = entity.TryGetComponent<WorldComponent>();
-
-            if (worldCmp == null)
-                return;
-
-            var world = Core.Worlds.GetById(worldCmp.WorldId);
-            if (world != null)
-                world.Handle(sender, msg);
+            if(entity.World != null)
+                entity.World.Handle(sender, msg);
         }
 
         private void Post(object sender, IWorldCommand msg)

@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Extensions;
@@ -10,7 +9,6 @@ using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 
 namespace OpenBreed.Core.Common
@@ -265,10 +263,7 @@ namespace OpenBreed.Core.Common
 
         private void DeinitializeEntity(IEntity entity)
         {
-            var worldCmp = entity.GetComponent<WorldComponent>();
-
-            worldCmp.WorldId = -1;
-
+            ((Entity)entity).World = null;
             entities.Remove(entity);
             RemoveEntityFromSystems(entity);
             OnEntityRemoved(entity);
@@ -277,10 +272,7 @@ namespace OpenBreed.Core.Common
         private void InitializeEntity(IEntity entity)
         {
             entities.Add(entity);
-
-            var worldCmp = entity.GetComponent<WorldComponent>();
-            worldCmp.WorldId = Id;
-
+            ((Entity)entity).World = this;
             AddEntityToSystems(entity);
             OnEntityAdded(entity);
         }

@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Extensions;
@@ -316,14 +315,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                     GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Keep);
                 }
 
-                var worldCmp = camera.TryGetComponent<WorldComponent>();
-                if (worldCmp != null)
-                {
-                    var world = camera.Core.Worlds.GetById(worldCmp.WorldId);
-
-                    if (world != null)
-                        world.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(clipBox, depth, dt));
-                }
+                if (camera.World != null)
+                    camera.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(clipBox, depth, dt));
 
                 if (vpc.Clipping)
                 {

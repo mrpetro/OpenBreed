@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Builders;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Builders;
@@ -47,7 +46,6 @@ namespace OpenBreed.Sandbox.Worlds
             vpcBuilder.SetProperty("Clipping", clipping);
             vpcBuilder.SetProperty("BackgroundColor", Color4.Black);
 
-            viewport.Add(WorldComponentBuilder.New(core).Build());
             viewport.Add(vpcBuilder.Build());
             viewport.Add(PositionComponent.Create(x, y));
 

@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Events;
@@ -40,8 +39,7 @@ namespace OpenBreed.Sandbox.Entities.Button.States
             entity.PostCommand(new SpriteOffCommand(entity.Id));
 
             var pos = entity.GetComponent<PositionComponent>();
-            var worldId = entity.GetComponent<WorldComponent>().WorldId;
-            entity.PostCommand(new PutStampCommand(worldId, stampId, 0, pos.Value));
+            entity.PostCommand(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
             entity.PostCommand(new TextSetCommand(entity.Id, 0, "Door - Closed"));
 
             entity.Subscribe<CollisionEventArgs>(OnCollision);

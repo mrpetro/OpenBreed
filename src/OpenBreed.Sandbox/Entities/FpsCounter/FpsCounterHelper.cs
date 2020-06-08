@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Builders;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Events;
@@ -26,7 +25,6 @@ namespace OpenBreed.Sandbox.Entities.FpsCounter
 
             var fpsTextEntity = world.Core.Entities.Create();
 
-            fpsTextEntity.Add(WorldComponentBuilder.NewSpec(world.Core).Build());
             fpsTextEntity.Add(PositionComponent.Create(new Vector2(-fpsTextEntity.Core.ClientRectangle.Width / 2.0f, -fpsTextEntity.Core.ClientRectangle.Height / 2.0f)));
 
             var textBuilder = TextComponentBuilder.New(world.Core);

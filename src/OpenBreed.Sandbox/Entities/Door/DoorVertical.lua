@@ -1,5 +1,4 @@
 ﻿Templates.Entities.DoorVertical = {
-    WorldComponent = {},
     ClassComponent = { "DoorVertical" },
     TimerComponent = {},
 	FsmComponent = { { "Door.Functioning" , "Closed"} },

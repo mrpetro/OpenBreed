@@ -5,6 +5,7 @@ using OpenBreed.Core.Common.Systems.Shapes;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
+using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Builders;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Audio;
@@ -13,7 +14,6 @@ using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Modules.Rendering.Builders;
-using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Control.Systems;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Button;
@@ -31,7 +31,6 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Reflection;
 
 namespace OpenBreed.Sandbox
@@ -335,7 +334,7 @@ namespace OpenBreed.Sandbox
             GL.LoadMatrix(ref ortho);
             ClientTransform = Matrix4.Identity;
             ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateTranslation(0.0f, -ClientRectangle.Height, 0.0f));
-            ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateScale(1.0f, -1.0f, 1.0f));
+            ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateScale(1.0f,-1.0f,1.0f));
             Rendering.OnClientResized(ClientRectangle.Width, ClientRectangle.Height);
         }
 
@@ -387,7 +386,6 @@ namespace OpenBreed.Sandbox
             BodyComponentBuilder.Register(this);
             AnimationComponentBuilder.Register(this);
 
-            Entities.RegisterComponentBuilder("WorldComponent", WorldComponentBuilder.New);
             Entities.RegisterComponentBuilder("DirectionComponent", DirectionComponentBuilder.New);
             Entities.RegisterComponentBuilder("VelocityComponent", VelocityComponentBuilder.New);
             Entities.RegisterComponentBuilder("ThrustComponent", ThrustComponentBuilder.New);
@@ -435,11 +433,6 @@ namespace OpenBreed.Sandbox
         private void RegisterItems()
         {
             Items.Register(new CreditsItem());
-        }
-
-        public TBuilder GetBuilder<TBuilder>() where TBuilder : IComponentBuilder
-        {
-            throw new NotImplementedException();
         }
 
         #endregion Private Methods

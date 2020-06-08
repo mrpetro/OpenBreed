@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Common.Builders;
 using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
@@ -63,7 +62,6 @@ namespace OpenBreed.Sandbox.Entities.Builders
         {
             var entity = Core.Entities.Create();
 
-            entity.Add(WorldComponentBuilder.New(Core).Build());
             entity.Add(PositionComponent.Create(pos));
 
 
