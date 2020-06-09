@@ -2,20 +2,20 @@
 
 namespace OpenBreed.Core.Events
 {
-    public class TextDataChanged : EventArgs
+    public class TextCaretPositionChanged : EventArgs
     {
         #region Public Constructors
 
-        public TextDataChanged(string text)
+        public TextCaretPositionChanged(int position)
         {
-            Text = text;
+            Position = position;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public string Text { get; }
+        public int Position { get; }
 
         #endregion Public Properties
     }

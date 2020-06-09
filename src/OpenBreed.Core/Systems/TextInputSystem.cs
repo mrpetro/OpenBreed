@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace OpenBreed.Core.Systems
 {
-    public class TextInputSystem : WorldSystem, ICommandExecutor
+    public class TextInputSystem : WorldSystem, ICommandExecutor, IUpdatableSystem
     {
         #region Private Fields
 
@@ -39,6 +39,18 @@ namespace OpenBreed.Core.Systems
             base.Initialize(world);
 
             World.RegisterHandler(TextCaretSetPosition.TYPE, cmdHandler);
+            World.RegisterHandler(TextDataInsert.TYPE, cmdHandler);
+            World.RegisterHandler(TextDataBackspace.TYPE, cmdHandler);
+        }
+
+        public void UpdatePauseImmuneOnly(float dt)
+        {
+            cmdHandler.ExecuteEnqueued();
+        }
+
+        public void Update(float dt)
+        {
+            cmdHandler.ExecuteEnqueued();
         }
 
         public override bool ExecuteCommand(object sender, ICommand cmd)
@@ -47,7 +59,10 @@ namespace OpenBreed.Core.Systems
             {
                 case TextCaretSetPosition.TYPE:
                     return HandleTextCaretSetPosition(sender, (TextCaretSetPosition)cmd);
-
+                case TextDataInsert.TYPE:
+                    return HandleTextDataInsert(sender, (TextDataInsert)cmd);
+                case TextDataBackspace.TYPE:
+                    return HandleTextDataBackspace(sender, (TextDataBackspace)cmd);
                 default:
                     return false;
             }
@@ -76,6 +91,51 @@ namespace OpenBreed.Core.Systems
 
         #region Private Methods
 
+        private bool HandleTextDataInsert(object sender, TextDataInsert cmd)
+        {
+            var toModify = entities.FirstOrDefault(item => item.Id == cmd.EntityId);
+            if (toModify == null)
+                return false;
+
+            var caretCmp = toModify.GetComponent<TextCaretComponent>();
+            var textCmp = toModify.GetComponent<TextDataComponent>();
+
+            if (string.IsNullOrEmpty(cmd.Text))
+                return true;
+
+            textCmp.Insert(caretCmp.Position, cmd.Text);
+            caretCmp.Position += cmd.Text.Length;
+
+            toModify.RaiseEvent(new TextDataChanged(textCmp.Data));
+            toModify.RaiseEvent(new TextCaretPositionChanged(caretCmp.Position));
+
+            return true;
+        }
+
+        private bool HandleTextDataBackspace(object sender, TextDataBackspace cmd)
+        {
+            var toModify = entities.FirstOrDefault(item => item.Id == cmd.EntityId);
+            if (toModify == null)
+                return false;
+
+            var caretCmp = toModify.GetComponent<TextCaretComponent>();
+            var textCmp = toModify.GetComponent<TextDataComponent>();
+
+            if (string.IsNullOrEmpty(textCmp.Data))
+                return true;
+
+            if (caretCmp.Position == 0)
+                return true;
+
+            textCmp.Remove(caretCmp.Position - 1, 1);
+            caretCmp.Position -= 1;
+
+            toModify.RaiseEvent(new TextDataChanged(textCmp.Data));
+            toModify.RaiseEvent(new TextCaretPositionChanged(caretCmp.Position));
+
+            return true;
+        }
+
         private bool HandleTextCaretSetPosition(object sender, TextCaretSetPosition cmd)
         {
             var toModify = entities.FirstOrDefault(item => item.Id == cmd.EntityId);
@@ -85,18 +145,22 @@ namespace OpenBreed.Core.Systems
             var caretCmp = toModify.GetComponent<TextCaretComponent>();
             var textCmp = toModify.GetComponent<TextDataComponent>();
 
-            // Nothing to do here
-            if (cmd.NewPosition == caretCmp.Position)
+            if (textCmp.Data.Length == 0)
                 return true;
 
-            if (cmd.NewPosition < 0)
-                caretCmp.Position = 0;
-            else if (cmd.NewPosition >= textCmp.Data.Length)
-                caretCmp.Position = textCmp.Data.Length - 1;
-            else
-                caretCmp.Position = cmd.NewPosition;
+            var newPosition = cmd.NewPosition;
 
-            toModify.RaiseEvent(new TextCaretPositionChanged(cmd.NewPosition));
+            if (newPosition < 0)
+                newPosition = 0;
+            else if (newPosition > textCmp.Data.Length)
+                newPosition = textCmp.Data.Length;
+
+            // Nothing to do here
+            if (newPosition == caretCmp.Position)
+                return true;
+
+            caretCmp.Position = cmd.NewPosition;
+            toModify.RaiseEvent(new TextCaretPositionChanged(caretCmp.Position));
 
             return true;
         }

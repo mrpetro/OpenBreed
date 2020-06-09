@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Common.Systems.Components;
+using System;
 
 namespace OpenBreed.Core.Common.Components
 {
@@ -6,15 +7,26 @@ namespace OpenBreed.Core.Common.Components
     {
         #region Public Constructors
 
-        public TextDataComponent()
+        public TextDataComponent(string data = "")
         {
+            Data = data;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public string Data { get; set; }
+        public string Data { get; private set; }
+
+        public void Insert(int position, string text)
+        {
+            Data = Data.Insert(position, text);
+        }
+
+        public void Remove(int position, int length)
+        {
+            Data = Data.Remove(position, length);
+        }
 
         #endregion Public Properties
     }

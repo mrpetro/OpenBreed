@@ -81,6 +81,8 @@
     <Compile Include="Commands\IWorldCommand.cs" />
     <Compile Include="Commands\AddEntityCommand.cs" />
     <Compile Include="Commands\RemoveEntityCommand.cs" />
+    <Compile Include="Commands\TextDataRemove.cs" />
+    <Compile Include="Commands\TextDataInsert.cs" />
     <Compile Include="Commands\TextCaretSetPosition.cs" />
     <Compile Include="Commands\TextInsertStringCommand.cs" />
     <Compile Include="Commands\TimerStopCommand.cs" />
@@ -97,6 +99,7 @@
     <Compile Include="EntityJobEx2.cs" />
     <Compile Include="Events\EntityAddedEventArgs.cs" />
     <Compile Include="Events\EntityRemovedEventArgs.cs" />
+    <Compile Include="Events\TextDataChanged.cs" />
     <Compile Include="Events\TextCaretPositionChanged.cs" />
     <Compile Include="Events\TimerUpdateEventArgs.cs" />
     <Compile Include="Events\TimerElapsedEventArgs.cs" />

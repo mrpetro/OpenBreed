@@ -290,8 +290,9 @@ namespace OpenBreed.Sandbox
             ActorHelper.CreateRotationFSM(this);
 
             Rendering.ScreenWorld = ScreenWorldHelper.CreateWorld(this);
-            //TextWorldHelper.Create(this);
 
+
+            TextWorldHelper.Create(this);
             HudWorldHelper.Create(this);
             GameWorldHelper.Create(this);
 

@@ -25,7 +25,7 @@ namespace OpenBreed.Sandbox.Entities
         {
             var e = world.Core.Entities.Create();
             e.Add(new TextCaretComponent());
-            e.Add(new TextDataComponent());
+            e.Add(new TextDataComponent("This is test"));
             return e;
         }
 

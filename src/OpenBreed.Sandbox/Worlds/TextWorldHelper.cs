@@ -3,6 +3,7 @@ using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Events;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
@@ -78,8 +79,11 @@ namespace OpenBreed.Sandbox.Worlds
 
             var caret = TextHelper.CreateCaret(world);
             ((Program)world.Core).KeyDown += (s, a) => ProcessKey(caret, a);
-            ((Program)world.Core).KeyPress += (s, a) => AddChar(world, a);
+            ((Program)world.Core).KeyPress += (s, a) => AddChar(caret, a);
 
+
+            caret.Subscribe<TextCaretPositionChanged>(OnTextCaretPositionChanged);
+            caret.Subscribe<TextDataChanged>(OnTextDataChanged);
 
             world.PostCommand(new AddEntityCommand(world.Id, caret.Id));
 
@@ -94,23 +98,56 @@ namespace OpenBreed.Sandbox.Worlds
             hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateCameraFov(hudCamera, a));
         }
 
-        private static void AddChar(World world, KeyPressEventArgs a)
+        private static void OnTextCaretPositionChanged(object sender, TextCaretPositionChanged e)
         {
-            TextHelper.AddChar(world, a.KeyChar);
+            var entity = sender as IEntity;
+            var dataCmp = entity.GetComponent<TextDataComponent>();
+
+            Console.Clear();
+
+            var text = dataCmp.Data;
+            text = text.Insert(e.Position, "|");
+
+            Console.WriteLine($"{e.Position}: {text}");
+        }
+
+        private static void OnTextDataChanged(object sender, TextDataChanged e)
+        {
+            var entity = sender as IEntity;
+
+            var caretCmp = entity.GetComponent<TextCaretComponent>();
+
+            Console.Clear();
+
+            var text = e.Text;
+            text = text.Insert(caretCmp.Position, "|");
+
+            Console.WriteLine($"{caretCmp.Position}: {text}");
+        }
+
+        private static void AddChar(IEntity caret, KeyPressEventArgs a)
+        {
+            caret.PostCommand(new TextDataInsert(caret.Id, a.KeyChar.ToString()));
         }
 
         private static void ProcessKey(IEntity caret, KeyboardKeyEventArgs a)
         {
-            //switch (a.Key)
-            //{
-            //    case Key.Left:
-            //        caret.GetComponent<WorldComponent>()
-            //    //    break;
-            //    //default:
-            //}
+            var caretCmp = caret.GetComponent<TextCaretComponent>();
 
-            //if(a.Key == Key.BackSpace)
-            //    TextHelper.RemoveLastChar(world);
+            switch (a.Key)
+            {
+                case Key.Left:
+                    caret.PostCommand(new TextCaretSetPosition(caret.Id, caretCmp.Position - 1));
+                    break;
+                case Key.Right:
+                    caret.PostCommand(new TextCaretSetPosition(caret.Id, caretCmp.Position + 1));
+                    break;
+                default:
+                    break;
+            }
+
+            if(a.Key == Key.BackSpace)
+                caret.PostCommand(new TextDataBackspace(caret.Id));
         }
 
         private static char KeyToChar(KeyboardKeyEventArgs e)
