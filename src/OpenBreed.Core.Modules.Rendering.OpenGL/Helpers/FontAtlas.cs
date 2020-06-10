@@ -2,7 +2,6 @@
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -11,11 +10,9 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 {
     internal class FontAtlas : IFont
     {
-        #region Public Fields
-
         //public const string Characters = @" qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789µ§½!""#¤%&/()=?^*@£€${[]}\~¨'-_.:,;<>|°©®±¥ł";
 
-        public int[] Characters { get; }
+        #region Public Fields
 
         public static uint[] indices = {
                                             0,1,2,
@@ -28,7 +25,6 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         private readonly Dictionary<int, (int, float)> Lookup = new Dictionary<int, (int, float)>();
         private int ibo;
-
         private List<int> vboList;
 
         #endregion Private Fields
@@ -41,22 +37,26 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             for (int i = 0; i < 256; i++)
                 Characters[i] = i;
 
-                            Id = builder.GetNewId();
+            Id = builder.GetNewId();
             vboList = new List<int>();
 
             RenderTools.CreateIndicesArray(indices, out ibo);
 
-            BuildCoords(builder.FontMan.Module.Textures, builder.FontName, builder.FontSize);
+            Height = BuildCoords(builder.FontMan.Module.Textures, builder.FontName, builder.FontSize);
         }
 
         #endregion Internal Constructors
 
         #region Public Properties
 
+        public int[] Characters { get; }
+
         /// <summary>
         /// Id of this sprite atlas
         /// </summary>
         public int Id { get; }
+
+        public float Height { get; }
 
         #endregion Public Properties
 
@@ -197,6 +197,17 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
             }
         }
 
+        private float MeasureHeight(Font font)
+        {
+            using (var bmp = new Bitmap(512, 512))
+            {
+                using (var gfx = Graphics.FromImage(bmp))
+                {
+                    return font.GetHeight(gfx);
+                }
+            }
+        }
+
         private float MeasureWidth(Font font, char c)
         {
             using (var bmp = new Bitmap(512, 512))
@@ -214,7 +225,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
         {
         }
 
-        private void BuildCoords(ITextureMan textures, string fontName, int fontSize)
+        private float BuildCoords(ITextureMan textures, string fontName, int fontSize)
         {
             using (var font = new Font(fontName, fontSize))
             {
@@ -239,6 +250,8 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
                         Lookup.Add(Characters[i], (i, charWidth));
                     }
                 }
+
+                return MeasureHeight(font);
             }
         }
 

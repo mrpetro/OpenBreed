@@ -106,7 +106,7 @@ namespace OpenBreed.Core.Systems
             textCmp.Insert(caretCmp.Position, cmd.Text);
             caretCmp.Position += cmd.Text.Length;
 
-            toModify.RaiseEvent(new TextDataChanged(textCmp.Data));
+            toModify.RaiseEvent(new TextDataChanged(textCmp.Data, TextDataChanged.ChangeType.Inserted, caretCmp.Position - cmd.Text.Length, cmd.Text.Length));
             toModify.RaiseEvent(new TextCaretPositionChanged(caretCmp.Position));
 
             return true;
@@ -130,7 +130,7 @@ namespace OpenBreed.Core.Systems
             textCmp.Remove(caretCmp.Position - 1, 1);
             caretCmp.Position -= 1;
 
-            toModify.RaiseEvent(new TextDataChanged(textCmp.Data));
+            toModify.RaiseEvent(new TextDataChanged(textCmp.Data, TextDataChanged.ChangeType.Removed, caretCmp.Position + 1, 1));
             toModify.RaiseEvent(new TextCaretPositionChanged(caretCmp.Position));
 
             return true;

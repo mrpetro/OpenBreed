@@ -80,6 +80,7 @@
     <Compile Include="Commands\ViewportResizeCommand.cs" />
     <Compile Include="Components\CameraComponent.cs" />
     <Compile Include="Components\SpriteComponent.cs" />
+    <Compile Include="Components\TextPresentationComponent.cs" />
     <Compile Include="Components\TextComponent.cs" />
     <Compile Include="Events\ViewportClickedEventArgs.cs" />
     <Compile Include="Events\ViewportResizedEventArgs.cs" />

@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Helpers;
@@ -30,7 +31,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         {
             cmdHandler = new CommandHandler(this);
 
-            Require<TextComponent>();
+            Require<TextDataComponent>();
+            Require<TextPresentationComponent>();
             Require<PositionComponent>();
         }
 
@@ -85,17 +87,9 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Protected Methods
 
-        private Vector2 cursorPos;
-
         protected override void OnAddEntity(IEntity entity)
         {
             entities.Add(entity);
-
-            entity.GetComponent<PositionComponent>().Value = cursorPos;
-            var p = entity.GetComponent<TextComponent>().Parts[0];
-            var font = Core.Rendering.Fonts.GetById(p.FontId);
-            var width = font.GetWidth(p.Text);
-            cursorPos = Vector2.Add(cursorPos, new Vector2(width, 0.0f));
         }
 
         protected override void OnRemoveEntity(IEntity entity)
@@ -110,18 +104,39 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         private void RenderText(IEntity entity, Box2 clipBox)
         {
             var pos = entity.GetComponent<PositionComponent>();
-            var tcp = entity.GetComponent<TextComponent>();
+            var tp = entity.GetComponent<TextPresentationComponent>();
+            var td = entity.GetComponent<TextDataComponent>();
 
             GL.Enable(EnableCap.Texture2D);
             GL.PushMatrix();
 
             GL.Translate(pos.Value.X, pos.Value.Y, 0.0f);
 
-            for (int i = 0; i < tcp.Parts.Count; i++)
+            var caretPosX = 0.0f;
+            var font = Core.Rendering.Fonts.GetById(tp.FontId);
+            var height = font.Height;
+
+            for (int i = 0; i < td.Data.Length; i++)
             {
-                var part = tcp.Parts[i];
-                GL.Translate(part.Offset.X, part.Offset.Y, 0.0f);
-                Core.Rendering.Fonts.GetById(part.FontId).Draw(part.Text);
+                var ch = td.Data[i];
+
+                switch (ch)
+                {
+                    case '\r':
+                        GL.Translate(-caretPosX, 0.0f, 0.0f);
+                        caretPosX = 0.0f;
+                        continue;
+                    case '\n':
+                        GL.Translate(0.0f, -height, 0.0f);
+                        continue;
+                    default:
+                        break;
+                }
+
+                font.Draw(ch);
+                var width = font.GetWidth(ch);
+                caretPosX += width;
+                GL.Translate(width, 0.0f, 0.0f);
             }
 
             GL.PopMatrix();

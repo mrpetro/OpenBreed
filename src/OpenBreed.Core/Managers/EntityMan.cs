@@ -53,6 +53,11 @@ namespace OpenBreed.Core.Managers
             return entities.Items.Where(item => item.Tag != null && item.Tag.Equals(tag));
         }
 
+        public IEnumerable<IEntity> Where(Func<IEntity, bool> predicate)
+        {
+            return entities.Items.Where(predicate);
+        }
+
         public IEntity GetById(int id)
         {
             if (entities.TryGetValue(id, out IEntity entity))
@@ -138,7 +143,7 @@ namespace OpenBreed.Core.Managers
 
         private void OnEntityRemovedEventArgs(object sender, EntityRemovedEventArgs e)
         {
-            var entity = (IEntity)sender;
+            var entity = Core.Entities.GetById(e.EntityId);
             entity.Unsubscribe<EntityRemovedEventArgs>(OnEntityRemovedEventArgs);
             entities.RemoveById(entity.Id);
         }

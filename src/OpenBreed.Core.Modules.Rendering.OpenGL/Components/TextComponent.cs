@@ -3,10 +3,10 @@ using OpenBreed.Core.Modules.Rendering.Builders;
 using OpenTK;
 using OpenTK.Graphics;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace OpenBreed.Core.Modules.Rendering.Components
 {
-
     public class TextPart
     {
         #region Public Constructors

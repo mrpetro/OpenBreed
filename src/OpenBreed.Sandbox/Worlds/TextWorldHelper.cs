@@ -77,23 +77,18 @@ namespace OpenBreed.Sandbox.Worlds
             hudCamera.Tag = "HudCamera";
             world.PostCommand(new AddEntityCommand(world.Id, hudCamera.Id));
 
-            var caret = TextHelper.CreateCaret(world);
+            var caret = TextHelper.CreateText(world);
             ((Program)world.Core).KeyDown += (s, a) => ProcessKey(caret, a);
             ((Program)world.Core).KeyPress += (s, a) => AddChar(caret, a);
 
-
-            caret.Subscribe<TextCaretPositionChanged>(OnTextCaretPositionChanged);
-            caret.Subscribe<TextDataChanged>(OnTextDataChanged);
+            //caret.Subscribe<TextCaretPositionChanged>(OnTextCaretPositionChanged);
+            //caret.Subscribe<TextDataChanged>(OnTextDataChanged);
 
             world.PostCommand(new AddEntityCommand(world.Id, caret.Id));
 
-            //TextHelper.Create(world, "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhT");
 
             var hudViewport = world.Core.Entities.GetByTag(ScreenWorldHelper.TEXT_VIEWPORT).First();
             hudViewport.GetComponent<ViewportComponent>().CameraEntityId = hudCamera.Id;
-
-            //world.Core.Rendering.Subscribe(GfxEventTypes.CLIENT_RESIZED, (s, a) => UpdateFpsPos(fpsTextEntity, (ClientResizedEventArgs)a));
-            //world.Core.Rendering.Subscribe(GfxEventTypes.CLIENT_RESIZED, (s, a) => UpdateCameraFov(hudCamera, (ClientResizedEventArgs)a));
 
             hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateCameraFov(hudCamera, a));
         }
@@ -130,24 +125,27 @@ namespace OpenBreed.Sandbox.Worlds
             caret.PostCommand(new TextDataInsert(caret.Id, a.KeyChar.ToString()));
         }
 
-        private static void ProcessKey(IEntity caret, KeyboardKeyEventArgs a)
+        private static void ProcessKey(IEntity entity, KeyboardKeyEventArgs a)
         {
-            var caretCmp = caret.GetComponent<TextCaretComponent>();
+            var caretCmp = entity.GetComponent<TextCaretComponent>();
 
             switch (a.Key)
             {
                 case Key.Left:
-                    caret.PostCommand(new TextCaretSetPosition(caret.Id, caretCmp.Position - 1));
+                    entity.PostCommand(new TextCaretSetPosition(entity.Id, caretCmp.Position - 1));
                     break;
                 case Key.Right:
-                    caret.PostCommand(new TextCaretSetPosition(caret.Id, caretCmp.Position + 1));
+                    entity.PostCommand(new TextCaretSetPosition(entity.Id, caretCmp.Position + 1));
+                    break;
+                case Key.Enter:
+                    entity.PostCommand(new TextDataInsert(entity.Id, "\r\n"));
                     break;
                 default:
                     break;
             }
 
             if(a.Key == Key.BackSpace)
-                caret.PostCommand(new TextDataBackspace(caret.Id));
+                entity.PostCommand(new TextDataBackspace(entity.Id));
         }
 
         private static char KeyToChar(KeyboardKeyEventArgs e)

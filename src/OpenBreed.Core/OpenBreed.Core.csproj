@@ -92,6 +92,7 @@
     <Compile Include="Common\Builders\FsmComponentBuilder.cs" />
     <Compile Include="Common\Builders\ClassComponentBuilder.cs" />
     <Compile Include="Common\Components\ClassComponent.cs" />
+    <Compile Include="Common\Components\GroupComponent.cs" />
     <Compile Include="Common\Components\TextCaretComponent.cs" />
     <Compile Include="Common\Components\TextDataComponent.cs" />
     <Compile Include="Common\Components\TimerComponent.cs" />
