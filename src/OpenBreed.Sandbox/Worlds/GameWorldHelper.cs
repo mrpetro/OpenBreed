@@ -48,6 +48,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             //Action
             builder.AddSystem(core.CreateMovementSystem().Build());
+            builder.AddSystem(new FollowingSystem(core));
             builder.AddSystem(core.CreatePhysicsSystem().SetGridSize(width, height).Build());
             builder.AddSystem(core.CreateAnimationSystem().Build());
 
@@ -112,6 +113,8 @@ namespace OpenBreed.Sandbox.Worlds
             //gameWorld.AddEntity(gameCamera);
 
             var actor = ActorHelper.CreateActor(core, new Vector2(128, 128));
+
+            playerCamera.GetComponent<FollowerComponent>().FollowedEntityId = actor.Id;
             //actor.Add(new FsmComponent());
             actor.Tag = playerCamera;
 
@@ -123,9 +126,6 @@ namespace OpenBreed.Sandbox.Worlds
             //actor.Subscribe<EntityEnteredWorldEventArgs>(OnEntityEntered);
             gameWorld.Subscribe<EntityAddedEventArgs>(OnEntityAdded);
             gameWorld.Subscribe<EntityRemovedEventArgs>(OnEntityRemoved);
-
-
-            core.Jobs.Execute(new CameraFollowJob(playerCamera, actor));
 
             var player1 = core.Players.GetByName("P1");
             player1.AssumeControl(actor);
@@ -153,7 +153,10 @@ namespace OpenBreed.Sandbox.Worlds
             //SetPreserveAspectRatio(gameViewport);
 
             gameWorld.PostCommand(new AddEntityCommand(gameWorld.Id, cursorEntity.Id));
-            //gameWorld.AddEntity(cursorEntity);
+
+
+
+            //gameWorld.PostCommand(new FollowerSetTargetCommand(playerCamera.Id, actor.Id));
         }
 
         public static void SetPreserveAspectRatio(IEntity viewportEntity)

@@ -120,7 +120,6 @@
     <Compile Include="Entities\Pickable\States\LyingState.cs" />
     <Compile Include="Entities\Pickable\States\PickingState.cs" />
     <Compile Include="Entities\Projectile\States\AttackingState.cs" />
-    <Compile Include="Entities\Teleport\CameraFollowJob.cs" />
     <Compile Include="Entities\Teleport\TeleportHelper.cs" />
     <Compile Include="Entities\Projectile\ProjectileHelper.cs" />
     <Compile Include="Entities\Projectile\States\FiredState.cs" />

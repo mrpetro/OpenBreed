@@ -81,6 +81,7 @@
     <Compile Include="Commands\IWorldCommand.cs" />
     <Compile Include="Commands\AddEntityCommand.cs" />
     <Compile Include="Commands\RemoveEntityCommand.cs" />
+    <Compile Include="Commands\FollowerSetTargetCommand.cs" />
     <Compile Include="Commands\TextDataRemove.cs" />
     <Compile Include="Commands\TextDataInsert.cs" />
     <Compile Include="Commands\TextCaretSetPosition.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Common\Builders\FsmComponentBuilder.cs" />
     <Compile Include="Common\Builders\ClassComponentBuilder.cs" />
     <Compile Include="Common\Components\ClassComponent.cs" />
+    <Compile Include="Common\Components\FollowerComponent.cs" />
     <Compile Include="Common\Components\GroupComponent.cs" />
     <Compile Include="Common\Components\TextCaretComponent.cs" />
     <Compile Include="Common\Components\TextDataComponent.cs" />
@@ -155,6 +157,7 @@
     <Compile Include="Modules\BaseCoreModule.cs" />
     <Compile Include="Scripting\IScriptFunc.cs" />
     <Compile Include="Scripting\LuaScriptFunc.cs" />
+    <Compile Include="Systems\FollowingSystem.cs" />
     <Compile Include="Systems\ISystem.cs" />
     <Compile Include="Systems\TextInputSystem.cs" />
     <Compile Include="WorldJobEx.cs" />

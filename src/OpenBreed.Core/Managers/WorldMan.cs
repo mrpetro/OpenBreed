@@ -140,7 +140,7 @@ namespace OpenBreed.Core.Managers
 
         #region Internal Methods
 
-        internal void PostCommand(object sender, IWorldCommand cmd)
+        internal void HandleCmd(object sender, IWorldCommand cmd)
         {
             var targetWorld = Core.Worlds.GetById(cmd.WorldId);
             targetWorld.Handle(sender, cmd);

@@ -129,7 +129,7 @@ namespace OpenBreed.Core
 
         void RegisterHandler(string msgType, IMsgHandler msgHandler);
 
-        bool Handle(object sender, IMsg msg);
+        bool HandleCmd(object sender, IMsg msg);
 
         #endregion Public Methods
     }

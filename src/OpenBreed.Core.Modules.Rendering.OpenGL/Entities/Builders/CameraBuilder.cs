@@ -39,6 +39,7 @@ namespace OpenBreed.Core.Modules.Rendering.Entities.Builders
             ccBuilder.SetProperty("Height", height);
             entity.Add(ccBuilder.Build());
             entity.Add(new PauseImmuneComponent());
+            entity.Add(new FollowerComponent());
             return entity;
         }
 

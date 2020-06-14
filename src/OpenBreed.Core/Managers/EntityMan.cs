@@ -8,6 +8,7 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace OpenBreed.Core.Managers
@@ -42,6 +43,17 @@ namespace OpenBreed.Core.Managers
             {
                 return entities.Count;
             }
+        }
+
+        internal void HandleCmd(object sender, IEntityCommand msg)
+        {
+            Debug.Assert(msg != null);
+            Debug.Assert(msg.EntityId >= 0);
+
+            var entity = GetById(msg.EntityId);
+
+            if (entity.World != null)
+                entity.World.Handle(sender, msg);
         }
 
         #endregion Public Properties

@@ -97,7 +97,7 @@ namespace OpenBreed.Core
             return msgHandlerRelay.IsRegistered(msgType);
         }
 
-        public bool Handle(object sender, IMsg msg)
+        public bool HandleCmd(object sender, IMsg msg)
         {
             return msgHandlerRelay.Handle(sender, msg);
         }
