@@ -107,26 +107,6 @@ namespace OpenBreed.Core.Systems
                 Core.StateMachines.EnterState(entity, state);
         }
 
-        //private void OnEntityEnteredWorld(object sender, EntityEnteredWorldEventArgs args)
-        //{
-        //    var entity = sender as IEntity;
-        //    //var entity = Core.Entities.GetById(args.EntityId);
-        //    var fsmComponent = entity.GetComponent<FsmComponent>();
-
-        //    foreach (var state in fsmComponent.States)
-        //        Core.StateMachines.EnterState(entity, state);
-        //}
-
-        private void OnEntityAdded(object sender, EntityAddedEventArgs args)
-        {
-            var world = sender as World;
-            var entity = Core.Entities.GetById(args.EntityId);
-            var fsmComponent = entity.GetComponent<FsmComponent>();
-
-            foreach (var state in fsmComponent.States)
-                Core.StateMachines.EnterState(entity, state);
-        }
-
         private bool HandleSetStateCommandMsg(object sender, SetStateCommand message)
         {
             var entity = Core.Entities.GetById(message.EntityId);

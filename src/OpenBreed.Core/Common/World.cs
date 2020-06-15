@@ -123,15 +123,15 @@ namespace OpenBreed.Core.Common
             Core.Commands.Post(this, command);
         }
 
-        public void Subscribe<T>(Action<object, T> callback) where T : EventArgs
-        {
-            Core.Events.Subscribe(this, callback);
-        }
+        //public void Subscribe<T>(Action<object, T> callback) where T : EventArgs
+        //{
+        //    Core.Events.Subscribe(this, callback);
+        //}
 
-        public void Unsubscribe<T>(Action<object, T> callback) where T : EventArgs
-        {
-            Core.Events.Unsubscribe(this, callback);
-        }
+        //public void Unsubscribe<T>(Action<object, T> callback) where T : EventArgs
+        //{
+        //    Core.Events.Unsubscribe(this, callback);
+        //}
 
         public bool ExecuteCommand(object sender, ICommand cmd)
         {
@@ -162,10 +162,10 @@ namespace OpenBreed.Core.Common
             return msgHandlerRelay.Handle(sender, msg);
         }
 
-        public void RaiseEvent<T>(T eventArgs) where T : EventArgs
-        {
-            Core.Events.Raise(this, eventArgs);
-        }
+        //public void RaiseEvent<T>(T eventArgs) where T : EventArgs
+        //{
+        //    Core.Events.Raise(this, eventArgs);
+        //}
 
         /// <summary>
         /// Method will add given entity to this world.
@@ -203,9 +203,9 @@ namespace OpenBreed.Core.Common
             Paused = value;
 
             if (Paused)
-                RaiseEvent(new WorldPausedEventArgs(this));
+                Core.Worlds.RaiseEvent(new WorldPausedEventArgs(this));
             else
-                RaiseEvent(new WorldUnpausedEventArgs(this));
+                Core.Worlds.RaiseEvent(new WorldUnpausedEventArgs(this));
         }
 
         #endregion Public Methods
@@ -227,12 +227,12 @@ namespace OpenBreed.Core.Common
             //InitializeSystems();
             Cleanup();
 
-            RaiseEvent(new WorldInitializedEventArgs(this));
+            Core.Worlds.RaiseEvent(new WorldInitializedEventArgs(this));
         }
 
         internal void Deinitialize()
         {
-            RaiseEvent(new WorldDeinitializedEventArgs(this));
+            Core.Worlds.RaiseEvent(new WorldDeinitializedEventArgs(this));
         }
 
         internal void Cleanup()
@@ -272,12 +272,12 @@ namespace OpenBreed.Core.Common
 
         private void OnEntityAdded(IEntity entity)
         {
-            RaiseEvent(new EntityAddedEventArgs(Id, entity.Id));
+            Core.Worlds.RaiseEvent(new EntityAddedEventArgs(Id, entity.Id));
         }
 
         private void OnEntityRemoved(IEntity entity)
         {
-            RaiseEvent(new EntityRemovedEventArgs(Id, entity.Id));
+            Core.Worlds.RaiseEvent(new EntityRemovedEventArgs(Id, entity.Id));
         }
 
         private void InitializeSystems()

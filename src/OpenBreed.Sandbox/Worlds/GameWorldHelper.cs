@@ -5,6 +5,7 @@ using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
+using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Helpers;
@@ -124,8 +125,8 @@ namespace OpenBreed.Sandbox.Worlds
             //actor.Add(TextHelper.Create(core, new Vector2(0, 32), "Hero"));
 
             //actor.Subscribe<EntityEnteredWorldEventArgs>(OnEntityEntered);
-            gameWorld.Subscribe<EntityAddedEventArgs>(OnEntityAdded);
-            gameWorld.Subscribe<EntityRemovedEventArgs>(OnEntityRemoved);
+            core.Worlds.Subscribe<EntityAddedEventArgs>(OnEntityAdded);
+            core.Worlds.Subscribe<EntityRemovedEventArgs>(OnEntityRemoved);
 
             var player1 = core.Players.GetByName("P1");
             player1.AssumeControl(actor);
@@ -173,13 +174,15 @@ namespace OpenBreed.Sandbox.Worlds
 
         private static void OnEntityAdded(object sender, EntityAddedEventArgs a)
         {
-            var world = sender as World;
+            var worldMan = sender as WorldMan;
+            var world = worldMan.GetById(a.WorldId);
             world.Core.Logging.Verbose($"Entity '{a.EntityId}' added to world '{world.Name}'.");
         }
 
         private static void OnEntityRemoved(object sender, EntityRemovedEventArgs a)
         {
-            var world = sender as World;
+            var worldMan = sender as WorldMan;
+            var world = worldMan.GetById(a.WorldId);
             world.Core.Logging.Verbose($"Entity '{a.EntityId}' removed from world '{world.Name}'.");
         }
     }

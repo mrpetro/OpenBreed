@@ -2,7 +2,6 @@
 using OpenBreed.Core.Collections;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common.Builders;
-using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
@@ -21,6 +20,8 @@ namespace OpenBreed.Core.Managers
         private readonly IdMap<IEntity> entities = new IdMap<IEntity>();
 
         private readonly Dictionary<string, Func<ICore, IComponentBuilder>> builders = new Dictionary<string, Func<ICore, IComponentBuilder>>();
+
+        private Queue<(object Sender, IEntityCommand Cmd)> noWorldQueue = new Queue<(object, IEntityCommand)>();
 
         #endregion Private Fields
 
@@ -43,17 +44,6 @@ namespace OpenBreed.Core.Managers
             {
                 return entities.Count;
             }
-        }
-
-        internal void HandleCmd(object sender, IEntityCommand msg)
-        {
-            Debug.Assert(msg != null);
-            Debug.Assert(msg.EntityId >= 0);
-
-            var entity = GetById(msg.EntityId);
-
-            if (entity.World != null)
-                entity.World.Handle(sender, msg);
         }
 
         #endregion Public Properties
@@ -107,11 +97,28 @@ namespace OpenBreed.Core.Managers
 
         public void Destroy(IEntity entity)
         {
-            entity.World.Subscribe<EntityRemovedEventArgs>(OnEntityRemovedEventArgs);
-            entity.World.PostCommand(new RemoveEntityCommand(entity.World.Id, entity.Id));
+            entity.Subscribe<EntityRemovedEventArgs>(OnEntityRemovedEventArgs);
+            entity.PostCommand(new RemoveEntityCommand(entity.World.Id, entity.Id));
         }
 
         #endregion Public Methods
+
+        #region Internal Methods
+
+        internal void HandleCmd(object sender, IEntityCommand msg)
+        {
+            Debug.Assert(msg != null);
+            Debug.Assert(msg.EntityId >= 0);
+
+            var entity = GetById(msg.EntityId);
+
+            if (entity.World != null)
+                entity.World.Handle(sender, msg);
+            else
+                noWorldQueue.Enqueue((sender, msg));
+        }
+
+        #endregion Internal Methods
 
         #region Private Methods
 

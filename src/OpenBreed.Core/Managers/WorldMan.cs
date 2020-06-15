@@ -80,6 +80,11 @@ namespace OpenBreed.Core.Managers
             return worlds[worldId];
         }
 
+        public void RaiseEvent<T>(T eventArgs) where T : EventArgs
+        {
+            Core.Events.Raise(this, eventArgs);
+        }
+
         /// <summary>
         /// Marks given world to be removed from Core, it will be removed at nearest Manager Update
         /// </summary>
@@ -103,6 +108,16 @@ namespace OpenBreed.Core.Managers
         {
             for (int i = 0; i < Items.Count; i++)
                 Items[i].Update(dt);
+        }
+
+        public void Subscribe<T>(Action<object, T> callback) where T : EventArgs
+        {
+            Core.Events.Subscribe(this, callback);
+        }
+
+        public void Unsubscribe<T>(Action<object, T> callback) where T : EventArgs
+        {
+            Core.Events.Unsubscribe(this, callback);
         }
 
         /// <summary>

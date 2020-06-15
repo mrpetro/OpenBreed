@@ -90,7 +90,9 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
             var jobChain = new JobChain();
 
-            var job = new WorldJobEx<WorldPausedEventArgs>(cameraEntity.World, new PauseWorldCommand(cameraEntity.World.Id, true));
+
+            var worldToRemoveFrom = cameraEntity.World;
+            var job = new WorldJob<WorldPausedEventArgs>((s, a) => { return a.World == worldToRemoveFrom; }, cameraEntity.Core.Worlds, () => cameraEntity.PostCommand(new PauseWorldCommand(worldToRemoveFrom.Id, true)));
 
 
             jobChain.Equeue(job);
@@ -98,20 +100,24 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             //jobChain.Equeue(new WorldJob(cameraEntity.World, "Pause"));
             jobChain.Equeue(new EntityJobEx<AnimStoppedEventArgs>(cameraEntity, new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_OUT, 0)));
 
-            jobChain.Equeue(new WorldJobEx<EntityRemovedEventArgs>(cameraEntity.World, new RemoveEntityCommand(cameraEntity.World.Id, cameraEntity.Id)));
-            jobChain.Equeue(new WorldJobEx<EntityRemovedEventArgs>(targetEntity.World, new RemoveEntityCommand(targetEntity.World.Id, targetEntity.Id)));
+
+            jobChain.Equeue(new WorldJob<EntityRemovedEventArgs>((s, a) =>
+            { 
+                return cameraEntity.Core.Worlds.GetById(a.WorldId) == worldToRemoveFrom;
+            },
+                cameraEntity.Core.Worlds, () => cameraEntity.PostCommand( new RemoveEntityCommand(worldToRemoveFrom.Id, cameraEntity.Id))));
+            jobChain.Equeue(new WorldJob<EntityRemovedEventArgs>((s, a) => { return targetEntity.Core.Worlds.GetById(a.WorldId) == worldToRemoveFrom; }, targetEntity.Core.Worlds, () => targetEntity.PostCommand(new RemoveEntityCommand(targetEntity.World.Id, targetEntity.Id))));
 
             jobChain.Equeue(new EntityJobEx2(cameraEntity, () => TryLoadWorld(cameraEntity, exitInfo.WorldName, exitInfo.EntryId)));
             //jobChain.Equeue(new EntityJobEx2(targetEntity, () => SetPosition(targetEntity, exitInfo.Item2)));
 
-            var job2 = new WorldJobEx2<EntityAddedEventArgs>(cameraEntity.Core, exitInfo.WorldName, () => AddToWorld(cameraEntity, exitInfo.WorldName, exitInfo.EntryId));
+            var job2 = new WorldJob<EntityAddedEventArgs>((s, a) => { return cameraEntity.Core.Worlds.GetById(a.WorldId).Name == exitInfo.WorldName; }, cameraEntity.Core.Worlds, () => AddToWorld(cameraEntity, exitInfo.WorldName, exitInfo.EntryId));
             //job2.CompleteTrigger<EntityAddedEventArgs>();
 
             jobChain.Equeue(job2);
 
-
             //jobChain.Equeue(new WorldJobEx2<EntityAddedEventArgs>(cameraEntity.Core, exitInfo.WorldName, () => AddToWorld(cameraEntity, exitInfo.WorldName, exitInfo.EntryId)));
-            jobChain.Equeue(new WorldJobEx2<EntityAddedEventArgs>(cameraEntity.Core, exitInfo.WorldName, () => AddToWorld(targetEntity, exitInfo.WorldName, exitInfo.EntryId)));
+            jobChain.Equeue(new WorldJob<EntityAddedEventArgs>((s, a) => { return cameraEntity.Core.Worlds.GetById(a.WorldId).Name == exitInfo.WorldName; }, cameraEntity.Core.Worlds, () => AddToWorld(targetEntity, exitInfo.WorldName, exitInfo.EntryId)));
 
 
 
@@ -120,7 +126,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             jobChain.Equeue(new EntityJobEx2(cameraEntity, () => SetPosition(cameraEntity, exitInfo.EntryId)));
             jobChain.Equeue(new EntityJobEx2(targetEntity, () => SetPosition(targetEntity, exitInfo.EntryId)));
 
-            jobChain.Equeue(new WorldJobEx<WorldUnpausedEventArgs>(cameraEntity.World, new PauseWorldCommand(cameraEntity.World.Id, false)));
+            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>((s, a) => { return a.World == worldToRemoveFrom; }, cameraEntity.Core.Worlds, () => cameraEntity.PostCommand( new PauseWorldCommand(worldToRemoveFrom.Id, false))));
 
             jobChain.Equeue(new EntityJobEx<AnimStoppedEventArgs>(cameraEntity, new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0)));
 
