@@ -6,7 +6,7 @@ namespace OpenBreed.Core.Commands
     {
         #region Public Methods
 
-        bool Handle(object sender, IMsg msg);
+        bool Handle(IMsg msg);
 
         #endregion Public Methods
     }

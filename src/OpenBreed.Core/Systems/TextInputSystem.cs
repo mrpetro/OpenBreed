@@ -53,16 +53,16 @@ namespace OpenBreed.Core.Systems
             cmdHandler.ExecuteEnqueued();
         }
 
-        public override bool ExecuteCommand(object sender, ICommand cmd)
+        public override bool ExecuteCommand(ICommand cmd)
         {
             switch (cmd.Type)
             {
                 case TextCaretSetPosition.TYPE:
-                    return HandleTextCaretSetPosition(sender, (TextCaretSetPosition)cmd);
+                    return HandleTextCaretSetPosition((TextCaretSetPosition)cmd);
                 case TextDataInsert.TYPE:
-                    return HandleTextDataInsert(sender, (TextDataInsert)cmd);
+                    return HandleTextDataInsert((TextDataInsert)cmd);
                 case TextDataBackspace.TYPE:
-                    return HandleTextDataBackspace(sender, (TextDataBackspace)cmd);
+                    return HandleTextDataBackspace((TextDataBackspace)cmd);
                 default:
                     return false;
             }
@@ -91,7 +91,7 @@ namespace OpenBreed.Core.Systems
 
         #region Private Methods
 
-        private bool HandleTextDataInsert(object sender, TextDataInsert cmd)
+        private bool HandleTextDataInsert(TextDataInsert cmd)
         {
             var toModify = entities.FirstOrDefault(item => item.Id == cmd.EntityId);
             if (toModify == null)
@@ -112,7 +112,7 @@ namespace OpenBreed.Core.Systems
             return true;
         }
 
-        private bool HandleTextDataBackspace(object sender, TextDataBackspace cmd)
+        private bool HandleTextDataBackspace(TextDataBackspace cmd)
         {
             var toModify = entities.FirstOrDefault(item => item.Id == cmd.EntityId);
             if (toModify == null)
@@ -136,7 +136,7 @@ namespace OpenBreed.Core.Systems
             return true;
         }
 
-        private bool HandleTextCaretSetPosition(object sender, TextCaretSetPosition cmd)
+        private bool HandleTextCaretSetPosition(TextCaretSetPosition cmd)
         {
             var toModify = entities.FirstOrDefault(item => item.Id == cmd.EntityId);
             if (toModify == null)

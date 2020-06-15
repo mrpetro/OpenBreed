@@ -69,12 +69,12 @@ namespace OpenBreed.Core.Systems
             followerPos.Value = targetPos.Value;
         }
 
-        public override bool ExecuteCommand(object sender, ICommand cmd)
+        public override bool ExecuteCommand(ICommand cmd)
         {
             switch (cmd.Type)
             {
                 case FollowerSetTargetCommand.TYPE:
-                    return HandleFollowerSetTargetCommand(sender, (FollowerSetTargetCommand)cmd);
+                    return HandleFollowerSetTargetCommand((FollowerSetTargetCommand)cmd);
 
                 default:
                     return false;
@@ -99,7 +99,7 @@ namespace OpenBreed.Core.Systems
 
         #region Private Methods
 
-        private bool HandleFollowerSetTargetCommand(object sender, FollowerSetTargetCommand cmd)
+        private bool HandleFollowerSetTargetCommand(FollowerSetTargetCommand cmd)
         {
             var entity = Core.Entities.GetById(cmd.EntityId);
             var fc = entity.GetComponent<FollowerComponent>();

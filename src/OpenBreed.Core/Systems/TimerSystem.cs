@@ -104,15 +104,15 @@ namespace OpenBreed.Core.Systems
             entity.RaiseEvent(new TimerElapsedEventArgs(timerData.TimerId));
         }
 
-        public override bool ExecuteCommand(object sender, ICommand cmd)
+        public override bool ExecuteCommand(ICommand cmd)
         {
             switch (cmd.Type)
             {
                 case TimerStartCommand.TYPE:
-                    return HandleTimerStartCommandMsg(sender, (TimerStartCommand)cmd);
+                    return HandleTimerStartCommandMsg((TimerStartCommand)cmd);
 
                 case TimerStopCommand.TYPE:
-                    return HandleTimerStopCommandMsg(sender, (TimerStopCommand)cmd);
+                    return HandleTimerStopCommandMsg((TimerStopCommand)cmd);
 
                 default:
                     return false;
@@ -142,7 +142,7 @@ namespace OpenBreed.Core.Systems
 
         #region Private Methods
 
-        private bool HandleTimerStartCommandMsg(object sender, TimerStartCommand cmd)
+        private bool HandleTimerStartCommandMsg(TimerStartCommand cmd)
         {
             var entity = Core.Entities.GetById(cmd.EntityId);
 
@@ -169,7 +169,7 @@ namespace OpenBreed.Core.Systems
             return true;
         }
 
-        private bool HandleTimerStopCommandMsg(object sender, TimerStopCommand cmd)
+        private bool HandleTimerStopCommandMsg(TimerStopCommand cmd)
         {
             var entity = Core.Entities.GetById(cmd.EntityId);
 

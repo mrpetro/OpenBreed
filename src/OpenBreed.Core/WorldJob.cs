@@ -1,7 +1,4 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Managers;
+﻿using OpenBreed.Core.Managers;
 using System;
 
 namespace OpenBreed.Core
@@ -33,10 +30,6 @@ namespace OpenBreed.Core
         public Action<IJob> Complete { get; set; }
 
         #endregion Public Properties
-
-        #region Internal Properties
-
-        #endregion Internal Properties
 
         #region Public Methods
 

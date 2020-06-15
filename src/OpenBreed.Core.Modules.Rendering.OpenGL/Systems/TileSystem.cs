@@ -115,14 +115,14 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Disable(EnableCap.Texture2D);
         }
 
-        public override bool ExecuteCommand(object sender, ICommand cmd)
+        public override bool ExecuteCommand(ICommand cmd)
         {
             switch (cmd.Type)
             {
                 case TileSetCommand.TYPE:
-                    return HandleTileSetCommand(sender, (TileSetCommand)cmd);
+                    return HandleTileSetCommand((TileSetCommand)cmd);
                 case PutStampCommand.TYPE:
-                    return HandlePutStampCommand(sender, (PutStampCommand)cmd);
+                    return HandlePutStampCommand((PutStampCommand)cmd);
                 default:
                     return false;
             }
@@ -181,7 +181,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Methods
 
-        private bool HandleTileSetCommand(object sender, TileSetCommand cmd)
+        private bool HandleTileSetCommand(TileSetCommand cmd)
         {
             int xIndex;
             int yIndex;
@@ -198,7 +198,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             return true;
         }
 
-        private bool HandlePutStampCommand(object sender, PutStampCommand msg)
+        private bool HandlePutStampCommand(PutStampCommand msg)
         {
             var stamp = Core.Rendering.Stamps.GetById(msg.StampId);
 

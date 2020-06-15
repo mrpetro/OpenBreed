@@ -6,7 +6,7 @@ namespace OpenBreed.Core.Commands
     {
         #region Public Methods
 
-        bool ExecuteCommand(object sender, ICommand cmd);
+        bool ExecuteCommand(ICommand cmd);
 
         #endregion Public Methods
     }

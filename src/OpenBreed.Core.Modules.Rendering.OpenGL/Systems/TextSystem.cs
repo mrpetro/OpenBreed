@@ -64,12 +64,12 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Disable(EnableCap.Blend);
         }
 
-        public override bool ExecuteCommand(object sender, ICommand cmd)
+        public override bool ExecuteCommand(ICommand cmd)
         {
             switch (cmd.Type)
             {
                 case TextSetCommand.TYPE:
-                    return HandleTextSetCommand(sender, (TextSetCommand)cmd);
+                    return HandleTextSetCommand((TextSetCommand)cmd);
 
                 default:
                     return false;
@@ -120,7 +120,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Disable(EnableCap.Texture2D);
         }
 
-        private bool HandleTextSetCommand(object sender, TextSetCommand cmd)
+        private bool HandleTextSetCommand(TextSetCommand cmd)
         {
             var toModify = entities.FirstOrDefault(item => item.Id == cmd.EntityId);
             if (toModify == null)

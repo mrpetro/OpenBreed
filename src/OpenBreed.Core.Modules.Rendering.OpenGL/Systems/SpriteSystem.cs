@@ -47,18 +47,18 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             World.RegisterHandler(SpriteSetCommand.TYPE, cmdHandler);
         }
 
-        public override bool ExecuteCommand(object sender, ICommand cmd)
+        public override bool ExecuteCommand(ICommand cmd)
         {
             switch (cmd.Type)
             {
                 case SpriteOnCommand.TYPE:
-                    return HandleSpriteOnCommand(sender, (SpriteOnCommand)cmd);
+                    return HandleSpriteOnCommand((SpriteOnCommand)cmd);
 
                 case SpriteOffCommand.TYPE:
-                    return HandleSpriteOffCommand(sender, (SpriteOffCommand)cmd);
+                    return HandleSpriteOffCommand((SpriteOffCommand)cmd);
 
                 case SpriteSetCommand.TYPE:
-                    return HandleSpriteSetCommand(sender, (SpriteSetCommand)cmd);
+                    return HandleSpriteSetCommand((SpriteSetCommand)cmd);
 
                 default:
                     return false;
@@ -140,7 +140,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.PopMatrix();
         }
 
-        private bool HandleSpriteOnCommand(object sender, SpriteOnCommand cmd)
+        private bool HandleSpriteOnCommand(SpriteOnCommand cmd)
         {
             var toActivate = inactive.FirstOrDefault(item => item.Id == cmd.EntityId);
 
@@ -153,7 +153,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             return true;
         }
 
-        private bool HandleSpriteSetCommand(object sender, SpriteSetCommand cmd)
+        private bool HandleSpriteSetCommand(SpriteSetCommand cmd)
         {
             var toModify = active.FirstOrDefault(item => item.Id == cmd.EntityId);
             if (toModify == null)
@@ -165,7 +165,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             return true;
         }
 
-        private bool HandleSpriteOffCommand(object sender, SpriteOffCommand cmd)
+        private bool HandleSpriteOffCommand(SpriteOffCommand cmd)
         {
             var toDeactivate = active.FirstOrDefault(item => item.Id == cmd.EntityId);
 

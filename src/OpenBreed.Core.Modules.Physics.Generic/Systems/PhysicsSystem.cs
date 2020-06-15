@@ -109,15 +109,15 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             }
         }
 
-        public override bool ExecuteCommand(object sender, ICommand cmd)
+        public override bool ExecuteCommand(ICommand cmd)
         {
             switch (cmd.Type)
             {
                 case BodyOnCommand.TYPE:
-                    return HandleBodyOnCommand(sender, (BodyOnCommand)cmd);
+                    return HandleBodyOnCommand((BodyOnCommand)cmd);
 
                 case BodyOffCommand.TYPE:
-                    return HandleBodyOffCommand(sender, (BodyOffCommand)cmd);
+                    return HandleBodyOffCommand((BodyOffCommand)cmd);
 
                 default:
                     return false;
@@ -170,7 +170,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             return body.Aabb;
         }
 
-        private bool HandleBodyOnCommand(object sender, BodyOnCommand cmd)
+        private bool HandleBodyOnCommand(BodyOnCommand cmd)
         {
             var dynamicToActivate = inactiveDynamics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
 
@@ -196,7 +196,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             return false;
         }
 
-        private bool HandleBodyOffCommand(object sender, BodyOffCommand cmd)
+        private bool HandleBodyOffCommand(BodyOffCommand cmd)
         {
             var dynamicToDeactivate = activeDynamics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
 

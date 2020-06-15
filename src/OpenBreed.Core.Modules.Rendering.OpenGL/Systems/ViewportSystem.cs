@@ -58,12 +58,12 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             World.RegisterHandler(ViewportResizeCommand.TYPE, cmdHandler);
         }
 
-        public override bool ExecuteCommand(object sender, ICommand cmd)
+        public override bool ExecuteCommand(ICommand cmd)
         {
             switch (cmd.Type)
             {
                 case ViewportResizeCommand.TYPE:
-                    return HandleViewportResizeCommand(sender, (ViewportResizeCommand)cmd);
+                    return HandleViewportResizeCommand((ViewportResizeCommand)cmd);
 
                 default:
                     return false;
@@ -186,7 +186,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Methods
 
-        private bool HandleViewportResizeCommand(object sender, ViewportResizeCommand cmd)
+        private bool HandleViewportResizeCommand(ViewportResizeCommand cmd)
         {
             var toResize = entities.FirstOrDefault(item => item.Id == cmd.EntityId);
 

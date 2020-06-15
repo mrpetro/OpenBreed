@@ -49,12 +49,12 @@ namespace OpenBreed.Core.Systems
             cmdHandler.ExecuteEnqueued();
         }
 
-        public override bool ExecuteCommand(object sender, ICommand cmd)
+        public override bool ExecuteCommand(ICommand cmd)
         {
             switch (cmd.Type)
             {
                 case SetStateCommand.TYPE:
-                    return HandleSetStateCommandMsg(sender, (SetStateCommand)cmd);
+                    return HandleSetStateCommandMsg((SetStateCommand)cmd);
 
                 default:
                     return false;
@@ -107,7 +107,7 @@ namespace OpenBreed.Core.Systems
                 Core.StateMachines.EnterState(entity, state);
         }
 
-        private bool HandleSetStateCommandMsg(object sender, SetStateCommand message)
+        private bool HandleSetStateCommandMsg(SetStateCommand message)
         {
             var entity = Core.Entities.GetById(message.EntityId);
 

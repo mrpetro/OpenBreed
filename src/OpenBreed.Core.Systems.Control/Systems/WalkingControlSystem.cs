@@ -55,14 +55,14 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
             cmdHandler.ExecuteEnqueued();
         }
 
-        public override bool ExecuteCommand(object sender, ICommand cmd)
+        public override bool ExecuteCommand(ICommand cmd)
         {
             switch (cmd.Type)
             {
                 case WalkingControlCommand.TYPE:
-                    return HandleWalkingControlCommand(sender, (WalkingControlCommand)cmd);
+                    return HandleWalkingControlCommand((WalkingControlCommand)cmd);
                 case AttackControlCommand.TYPE:
-                    return HandleAttackControlCommand(sender, (AttackControlCommand)cmd);
+                    return HandleAttackControlCommand((AttackControlCommand)cmd);
                 default:
                     return false;
             }
@@ -91,7 +91,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         #region Private Methods
 
-        private bool HandleAttackControlCommand(object sender, AttackControlCommand cmd)
+        private bool HandleAttackControlCommand(AttackControlCommand cmd)
         {
             var entity = Core.Entities.GetById(cmd.EntityId);
 
@@ -107,7 +107,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
             return true;
         }
 
-        private bool HandleWalkingControlCommand(object sender, WalkingControlCommand cmd)
+        private bool HandleWalkingControlCommand(WalkingControlCommand cmd)
         {
             var entity = Core.Entities.GetById(cmd.EntityId);
 

@@ -71,7 +71,7 @@ namespace OpenBreed.Core.Entities
 
         public void PostCommand(ICommand command)
         {
-            Core.Commands.Post(this, command);
+            Core.Commands.Post(command);
         }
 
         public void RaiseEvent<T>(T eventArgs) where T : EventArgs

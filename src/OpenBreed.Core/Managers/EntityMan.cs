@@ -21,7 +21,7 @@ namespace OpenBreed.Core.Managers
 
         private readonly Dictionary<string, Func<ICore, IComponentBuilder>> builders = new Dictionary<string, Func<ICore, IComponentBuilder>>();
 
-        private Queue<(object Sender, IEntityCommand Cmd)> noWorldQueue = new Queue<(object, IEntityCommand)>();
+        private Queue<IEntityCommand> noWorldQueue = new Queue<IEntityCommand>();
 
         #endregion Private Fields
 
@@ -105,7 +105,7 @@ namespace OpenBreed.Core.Managers
 
         #region Internal Methods
 
-        internal void HandleCmd(object sender, IEntityCommand msg)
+        internal void HandleCmd(IEntityCommand msg)
         {
             Debug.Assert(msg != null);
             Debug.Assert(msg.EntityId >= 0);
@@ -113,9 +113,9 @@ namespace OpenBreed.Core.Managers
             var entity = GetById(msg.EntityId);
 
             if (entity.World != null)
-                entity.World.Handle(sender, msg);
+                entity.World.Handle(msg);
             else
-                noWorldQueue.Enqueue((sender, msg));
+                noWorldQueue.Enqueue(msg);
         }
 
         #endregion Internal Methods

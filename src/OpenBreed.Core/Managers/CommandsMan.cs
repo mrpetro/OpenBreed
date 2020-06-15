@@ -24,24 +24,24 @@ namespace OpenBreed.Core.Managers
 
         #region Public Methods
 
-        public void Post(object sender, IMsg msg)
+        public void Post(IMsg msg)
         {
             Debug.Assert(msg != null);
 
             if (Core.CanHandle(msg.Type))
             {
-                Core.HandleCmd(sender, msg);
+                Core.HandleCmd(msg);
                 return;
             }
 
             if (msg is IEntityCommand)
             {
-                Post(sender, (IEntityCommand)msg);
+                Post((IEntityCommand)msg);
                 return;
             }
             else if (msg is IWorldCommand)
             {
-                Post(sender, (IWorldCommand)msg);
+                Post((IWorldCommand)msg);
                 return;
             }
         }
@@ -50,14 +50,14 @@ namespace OpenBreed.Core.Managers
 
         #region Private Methods
 
-        private void Post(object sender, IEntityCommand msg)
+        private void Post(IEntityCommand msg)
         {
-            Core.Entities.HandleCmd(sender, msg);
+            Core.Entities.HandleCmd(msg);
         }
 
-        private void Post(object sender, IWorldCommand msg)
+        private void Post(IWorldCommand msg)
         {
-            Core.Worlds.HandleCmd(sender, msg);
+            Core.Worlds.HandleCmd(msg);
         }
 
         #endregion Private Methods

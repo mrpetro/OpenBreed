@@ -102,21 +102,21 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             RaiseAnimStoppedEvent(entity, animator);
         }
 
-        public override bool ExecuteCommand(object sender, ICommand cmd)
+        public override bool ExecuteCommand(ICommand cmd)
         {
             switch (cmd.Type)
             {
                 case SetAnimCommand.TYPE:
-                    return HandleSetAnimCommand(sender, (SetAnimCommand)cmd);
+                    return HandleSetAnimCommand((SetAnimCommand)cmd);
 
                 case PlayAnimCommand.TYPE:
-                    return HandlePlayAnimCommand(sender, (PlayAnimCommand)cmd);
+                    return HandlePlayAnimCommand((PlayAnimCommand)cmd);
 
                 case PauseAnimCommand.TYPE:
-                    return HandlePauseAnimCommand(sender, (PauseAnimCommand)cmd);
+                    return HandlePauseAnimCommand((PauseAnimCommand)cmd);
 
                 case StopAnimCommand.TYPE:
-                    return HandleStopAnimCommand(sender, (StopAnimCommand)cmd);
+                    return HandleStopAnimCommand((StopAnimCommand)cmd);
 
                 default:
                     return false;
@@ -197,7 +197,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             entity.RaiseEvent(new AnimChangedEventArgs(animator.Frame));
         }
 
-        private bool HandlePauseAnimCommand(object sender, PauseAnimCommand cmd)
+        private bool HandlePauseAnimCommand(PauseAnimCommand cmd)
         {
             var entity = Core.Entities.GetById(cmd.EntityId);
             var ac = entity.GetComponent<AnimationComponent>();
@@ -208,7 +208,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             return true;
         }
 
-        private bool HandleStopAnimCommand(object sender, StopAnimCommand cmd)
+        private bool HandleStopAnimCommand(StopAnimCommand cmd)
         {
             var entity = Core.Entities.GetById(cmd.EntityId);
             var ac = entity.GetComponent<AnimationComponent>();
@@ -219,7 +219,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             return true;
         }
 
-        private bool HandleSetAnimCommand(object sender, SetAnimCommand cmd)
+        private bool HandleSetAnimCommand(SetAnimCommand cmd)
         {
             var entity = Core.Entities.GetById(cmd.EntityId);
             var ac = entity.GetComponent<AnimationComponent>();
@@ -234,7 +234,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             return true;
         }
 
-        private bool HandlePlayAnimCommand(object sender, PlayAnimCommand cmd)
+        private bool HandlePlayAnimCommand(PlayAnimCommand cmd)
         {
             var entity = Core.Entities.GetById(cmd.EntityId);
             var ac = entity.GetComponent<AnimationComponent>();

@@ -38,11 +38,11 @@ namespace OpenBreed.Core.Helpers
             relayHandlers.Add(msgType, msgHandler);
         }
 
-        public bool Handle(object sender, IMsg msg)
+        public bool Handle(IMsg msg)
         {
             IMsgHandler handler = null;
             if (relayHandlers.TryGetValue(msg.Type, out handler))
-                handler.Handle(sender, msg);
+                handler.Handle(msg);
 
             return true;
         }

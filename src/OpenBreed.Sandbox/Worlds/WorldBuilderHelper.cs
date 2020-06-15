@@ -102,7 +102,7 @@ namespace OpenBreed.Sandbox.Worlds
             var pairCode = (int)args[2];
 
             TeleportHelper.AddTeleportEntry(world, x, y, pairCode);
-            world.Core.Commands.Post(null, new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            world.Core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private static void AddWorldEntry(World world, int code, object[] args)
@@ -113,7 +113,7 @@ namespace OpenBreed.Sandbox.Worlds
             var pairCode = (int)args[2];
 
             WorldGateHelper.AddWorldEntry(world, x, y, pairCode);
-            world.Core.Commands.Post(null, new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            world.Core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private static void AddTeleportExit(World world, int code, object[] args)
@@ -124,7 +124,7 @@ namespace OpenBreed.Sandbox.Worlds
             var pairCode = (int)args[2];
 
             TeleportHelper.AddTeleportExit(world, x, y, pairCode);
-            world.Core.Commands.Post(null, new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            world.Core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private void AddWorldExit(World world, int code, object[] args)
@@ -139,7 +139,7 @@ namespace OpenBreed.Sandbox.Worlds
                 return;
 
             WorldGateHelper.AddWorldExit(world, x, y, exitInfo.Item1, exitInfo.Item2);
-            world.Core.Commands.Post(null, new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            world.Core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private static void AddPlayer(World world, int code, object[] args)

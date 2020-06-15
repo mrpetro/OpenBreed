@@ -8,7 +8,7 @@ namespace OpenBreed.Core.Helpers
     {
         #region Private Fields
 
-        private readonly Queue<CommandData> queue = new Queue<CommandData>();
+        private readonly Queue<ICommand> queue = new Queue<ICommand>();
 
         private readonly ICommandExecutor executor;
 
@@ -31,23 +31,23 @@ namespace OpenBreed.Core.Helpers
 
         #region Public Methods
 
-        public void Enqueue(object sender, ICommand cmd)
+        public void Enqueue(ICommand cmd)
         {
-            queue.Enqueue(new CommandData(sender, cmd));
+            queue.Enqueue(cmd);
         }
 
         public void ExecuteEnqueued()
         {
             while (queue.Count > 0)
             {
-                var ed = queue.Dequeue();
-                Execute(ed.Sender, ed.Cmd);
+                var cmd = queue.Dequeue();
+                Execute(cmd);
             }
         }
 
-        public bool Handle(object sender, IMsg cmd)
+        public bool Handle(IMsg cmd)
         {
-            Enqueue(sender, (ICommand)cmd);
+            Enqueue((ICommand)cmd);
             return true;
         }
 
@@ -55,35 +55,11 @@ namespace OpenBreed.Core.Helpers
 
         #region Private Methods
 
-        private void Execute(object sender, ICommand cmd)
+        private void Execute(ICommand cmd)
         {
-            executor.ExecuteCommand(sender, cmd);
+            executor.ExecuteCommand(cmd);
         }
 
         #endregion Private Methods
-
-        #region Private Structs
-
-        private struct CommandData
-        {
-            #region Internal Fields
-
-            internal object Sender;
-            internal ICommand Cmd;
-
-            #endregion Internal Fields
-
-            #region Internal Constructors
-
-            internal CommandData(object sender, ICommand cmd)
-            {
-                Sender = sender;
-                Cmd = cmd;
-            }
-
-            #endregion Internal Constructors
-        }
-
-        #endregion Private Structs
     }
 }

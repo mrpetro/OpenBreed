@@ -120,7 +120,7 @@ namespace OpenBreed.Core.Common
 
         public void PostCommand(ICommand command)
         {
-            Core.Commands.Post(this, command);
+            Core.Commands.Post(command);
         }
 
         //public void Subscribe<T>(Action<object, T> callback) where T : EventArgs
@@ -133,7 +133,7 @@ namespace OpenBreed.Core.Common
         //    Core.Events.Unsubscribe(this, callback);
         //}
 
-        public bool ExecuteCommand(object sender, ICommand cmd)
+        public bool ExecuteCommand(ICommand cmd)
         {
             switch (cmd.Type)
             {
@@ -157,9 +157,9 @@ namespace OpenBreed.Core.Common
             msgHandlerRelay.RegisterHandler(msgType, msgHandler);
         }
 
-        public bool Handle(object sender, IMsg msg)
+        public bool Handle(IMsg msg)
         {
-            return msgHandlerRelay.Handle(sender, msg);
+            return msgHandlerRelay.Handle(msg);
         }
 
         //public void RaiseEvent<T>(T eventArgs) where T : EventArgs

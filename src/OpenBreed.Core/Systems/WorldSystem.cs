@@ -88,7 +88,7 @@ namespace OpenBreed.Core.Systems
             toRemove.Add(entity);
         }
 
-        public virtual bool ExecuteCommand(object sender, ICommand cmd)
+        public virtual bool ExecuteCommand(ICommand cmd)
         {
             return false;
         }

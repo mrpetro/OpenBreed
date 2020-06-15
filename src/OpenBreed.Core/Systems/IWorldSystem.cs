@@ -44,7 +44,7 @@ namespace OpenBreed.Core.Systems
         /// <param name="sender">Object is sending the command</param>
         /// <param name="cmd">Command to recieve</param>
         /// <returns>True if command was handled, false otherwise</returns>
-        bool ExecuteCommand(object sender, ICommand cmd);
+        bool ExecuteCommand(ICommand cmd);
 
         #endregion Public Methods
     }

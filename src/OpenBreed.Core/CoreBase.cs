@@ -97,23 +97,23 @@ namespace OpenBreed.Core
             return msgHandlerRelay.IsRegistered(msgType);
         }
 
-        public bool HandleCmd(object sender, IMsg msg)
+        public bool HandleCmd(IMsg msg)
         {
-            return msgHandlerRelay.Handle(sender, msg);
+            return msgHandlerRelay.Handle(msg);
         }
 
-        public bool ExecuteCommand(object sender, ICommand cmd)
+        public bool ExecuteCommand(ICommand cmd)
         {
             switch (cmd.Type)
             {
                 case PauseWorldCommand.TYPE:
-                    return HandlePauseWorld(sender, (PauseWorldCommand)cmd);
+                    return HandlePauseWorld((PauseWorldCommand)cmd);
 
                 case RemoveEntityCommand.TYPE:
-                    return HandleRemoveEntity(sender, (RemoveEntityCommand)cmd);
+                    return HandleRemoveEntity((RemoveEntityCommand)cmd);
 
                 case AddEntityCommand.TYPE:
-                    return HandleAddEntity(sender, (AddEntityCommand)cmd);
+                    return HandleAddEntity((AddEntityCommand)cmd);
 
                 default:
                     return false;
@@ -145,7 +145,7 @@ namespace OpenBreed.Core
 
         #region Private Methods
 
-        private bool HandleRemoveEntity(object sender, RemoveEntityCommand cmd)
+        private bool HandleRemoveEntity(RemoveEntityCommand cmd)
         {
             var world = Worlds.GetById(cmd.WorldId);
             var entity = Entities.GetById(cmd.EntityId);
@@ -153,7 +153,7 @@ namespace OpenBreed.Core
             return true;
         }
 
-        private bool HandleAddEntity(object sender, AddEntityCommand cmd)
+        private bool HandleAddEntity(AddEntityCommand cmd)
         {
             var world = Worlds.GetById(cmd.WorldId);
             var entity = Entities.GetById(cmd.EntityId);
@@ -161,7 +161,7 @@ namespace OpenBreed.Core
             return true;
         }
 
-        private bool HandlePauseWorld(object sender, PauseWorldCommand cmd)
+        private bool HandlePauseWorld(PauseWorldCommand cmd)
         {
             var world = Worlds.GetById(cmd.WorldId);
             world.Pause(cmd.Pause);
