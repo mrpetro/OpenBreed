@@ -101,14 +101,13 @@
     <Compile Include="Common\Components\TextDataComponent.cs" />
     <Compile Include="Common\Components\TimerComponent.cs" />
     <Compile Include="CoreBase.cs" />
-    <Compile Include="EntityJobEx2.cs" />
     <Compile Include="Events\EntityAddedEventArgs.cs" />
     <Compile Include="Events\EntityRemovedEventArgs.cs" />
     <Compile Include="Events\TextDataChanged.cs" />
     <Compile Include="Events\TextCaretPositionChanged.cs" />
     <Compile Include="Events\TimerUpdateEventArgs.cs" />
     <Compile Include="Events\TimerElapsedEventArgs.cs" />
-    <Compile Include="EntityJobEx.cs" />
+    <Compile Include="EntityJob.cs" />
     <Compile Include="Events\WorldUnpausedEventArgs.cs" />
     <Compile Include="Events\WorldPausedEventArgs.cs" />
     <Compile Include="Modules\Animation\Builders\AnimationComponentBuilder.cs" />

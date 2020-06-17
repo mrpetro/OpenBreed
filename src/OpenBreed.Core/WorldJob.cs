@@ -16,10 +16,10 @@ namespace OpenBreed.Core
 
         #region Public Constructors
 
-        public WorldJob(Func<object, TEventArgs, bool> triggerFunc, WorldMan worldMan, Action action)
+        public WorldJob(WorldMan worldMan, Func<object, TEventArgs, bool> triggerFunc, Action action)
         {
-            this.triggerFunc = triggerFunc;
             this.worldMan = worldMan;
+            this.triggerFunc = triggerFunc;
             this.action = action;
         }
 

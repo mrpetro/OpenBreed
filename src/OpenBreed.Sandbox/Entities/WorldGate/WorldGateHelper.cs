@@ -97,21 +97,21 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             var worldIdToRemoveFrom = targetEntity.World.Id;
 
             //Pause this world
-            jobChain.Equeue(new WorldJob<WorldPausedEventArgs>((s, a) => { return a.WorldId == worldIdToRemoveFrom; }, targetEntity.Core.Worlds, () => targetEntity.PostCommand(new PauseWorldCommand(worldIdToRemoveFrom, true))));
+            jobChain.Equeue(new WorldJob<WorldPausedEventArgs>(core.Worlds, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => targetEntity.PostCommand(new PauseWorldCommand(worldIdToRemoveFrom, true))));
             //Fade out camera
-            jobChain.Equeue(new EntityJobEx<AnimStoppedEventArgs>(cameraEntity, new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_OUT, 0)));
+            jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => targetEntity.PostCommand(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_OUT, 0))));
             //Remove entity from this world
-            jobChain.Equeue(new WorldJob<EntityRemovedEventArgs>((s, a) => { return a.WorldId == worldIdToRemoveFrom; }, core.Worlds, () => targetEntity.PostCommand(new RemoveEntityCommand(targetEntity.World.Id, targetEntity.Id))));
+            jobChain.Equeue(new WorldJob<EntityRemovedEventArgs>(core.Worlds, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => targetEntity.PostCommand(new RemoveEntityCommand(targetEntity.World.Id, targetEntity.Id))));
             //Load next world if needed
-            jobChain.Equeue(new EntityJobEx2(targetEntity, () => TryLoadWorld(core, exitInfo.WorldName, exitInfo.EntryId)));
+            jobChain.Equeue(new EntityJob(() => TryLoadWorld(core, exitInfo.WorldName, exitInfo.EntryId)));
             //Add entity to next world
-            jobChain.Equeue(new WorldJob<EntityAddedEventArgs>((s, a) => { return core.Worlds.GetById(a.WorldId).Name == exitInfo.WorldName; }, core.Worlds, () => AddToWorld(targetEntity, exitInfo.WorldName, exitInfo.EntryId)));
+            jobChain.Equeue(new WorldJob<EntityAddedEventArgs>(core.Worlds, (s, a) => { return core.Worlds.GetById(a.WorldId).Name == exitInfo.WorldName; }, () => AddToWorld(targetEntity, exitInfo.WorldName, exitInfo.EntryId)));
             //Set position of entity to entry position in next world
-            jobChain.Equeue(new EntityJobEx2(targetEntity, () => SetPosition(targetEntity, exitInfo.EntryId, true)));
+            jobChain.Equeue(new EntityJob(() => SetPosition(targetEntity, exitInfo.EntryId, true)));
             //Unpause this world
-            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>((s, a) => { return a.WorldId == worldIdToRemoveFrom; }, core.Worlds, () => targetEntity.PostCommand( new PauseWorldCommand(worldIdToRemoveFrom, false))));
+            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(core.Worlds, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => targetEntity.PostCommand( new PauseWorldCommand(worldIdToRemoveFrom, false))));
             //Fade in camera
-            jobChain.Equeue(new EntityJobEx<AnimStoppedEventArgs>(cameraEntity, new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0)));
+            jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => targetEntity.PostCommand(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0))));
 
             exitEntity.Core.Jobs.Execute(jobChain);
         }
@@ -142,14 +142,16 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             if (entryEntity == null)
                 throw new Exception($"No entry with id '{pair.Id}' found.");
 
+
             var entryPos = entryEntity.GetComponent<PositionComponent>();
             var entryAabb = entryEntity.GetComponent<BodyComponent>().Aabb;
-            //var entityAabb = entity.GetComponent<IShapeComponent>().First().Aabb;
-            var entityPos = target.GetComponent<PositionComponent>();
+            var targetPos = target.GetComponent<PositionComponent>();
+            var targetAabb = target.GetComponent<BodyComponent>().Aabb;
+            var offset = new Vector2((32 - targetAabb.Width) / 2.0f, (32 - targetAabb.Height) / 2.0f);
 
-            //var offset = new Vector2((32 - entityAabb.Width) / 2.0f, (32 - entityAabb.Height) / 2.0f);
+            var newPosition = entryPos.Value + offset;
 
-            entityPos.Value = entryPos.Value;// + offset;
+            targetPos.Value = newPosition;
 
             if (cancelMovement)
             {
