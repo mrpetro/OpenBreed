@@ -123,16 +123,6 @@ namespace OpenBreed.Core.Common
             Core.Commands.Post(command);
         }
 
-        //public void Subscribe<T>(Action<object, T> callback) where T : EventArgs
-        //{
-        //    Core.Events.Subscribe(this, callback);
-        //}
-
-        //public void Unsubscribe<T>(Action<object, T> callback) where T : EventArgs
-        //{
-        //    Core.Events.Unsubscribe(this, callback);
-        //}
-
         public bool ExecuteCommand(ICommand cmd)
         {
             switch (cmd.Type)
@@ -161,11 +151,6 @@ namespace OpenBreed.Core.Common
         {
             return msgHandlerRelay.Handle(msg);
         }
-
-        //public void RaiseEvent<T>(T eventArgs) where T : EventArgs
-        //{
-        //    Core.Events.Raise(this, eventArgs);
-        //}
 
         /// <summary>
         /// Method will add given entity to this world.
@@ -227,12 +212,12 @@ namespace OpenBreed.Core.Common
             //InitializeSystems();
             Cleanup();
 
-            Core.Worlds.RaiseEvent(new WorldInitializedEventArgs(this));
+            Core.Worlds.RaiseEvent(new WorldInitializedEventArgs(Id));
         }
 
         internal void Deinitialize()
         {
-            Core.Worlds.RaiseEvent(new WorldDeinitializedEventArgs(this));
+            Core.Worlds.RaiseEvent(new WorldDeinitializedEventArgs(Id));
         }
 
         internal void Cleanup()

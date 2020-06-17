@@ -49,7 +49,8 @@ namespace OpenBreed.Sandbox.Worlds
 
             //Action
             builder.AddSystem(core.CreateMovementSystem().Build());
-            builder.AddSystem(new FollowingSystem(core));
+            builder.AddSystem(new FollowedSystem(core));
+            //builder.AddSystem(new FollowerSystem(core));
             builder.AddSystem(core.CreatePhysicsSystem().SetGridSize(width, height).Build());
             builder.AddSystem(core.CreateAnimationSystem().Build());
 
@@ -104,20 +105,9 @@ namespace OpenBreed.Sandbox.Worlds
             using (var reader = new TxtFileWorldReader(core, ".\\Content\\Maps\\hub.txt"))
                 gameWorld = reader.GetWorld();
 
-            //GameWorld = GameWorldHelper.CreateGameWorld(Core, "DEMO6");
-
-
-
             gameWorld.PostCommand(new AddEntityCommand(gameWorld.Id, playerCamera.Id));
-            gameWorld.PostCommand(new AddEntityCommand(gameWorld.Id, gameCamera.Id));
-            //gameWorld.AddEntity(playerCamera);
-            //gameWorld.AddEntity(gameCamera);
 
             var actor = ActorHelper.CreateActor(core, new Vector2(128, 128));
-
-            playerCamera.GetComponent<FollowerComponent>().FollowedEntityId = actor.Id;
-            //actor.Add(new FsmComponent());
-            actor.Tag = playerCamera;
 
             actor.Add(new WalkingControl());
             actor.Add(new AttackControl());
@@ -155,8 +145,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             gameWorld.PostCommand(new AddEntityCommand(gameWorld.Id, cursorEntity.Id));
 
-
-
+            gameWorld.PostCommand(new FollowedAddFollowerCommand(actor.Id, playerCamera.Id));
             //gameWorld.PostCommand(new FollowerSetTargetCommand(playerCamera.Id, actor.Id));
         }
 

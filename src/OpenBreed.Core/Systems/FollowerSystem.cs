@@ -3,14 +3,16 @@ using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Events;
 using OpenBreed.Core.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace OpenBreed.Core.Systems
 {
-    public class FollowingSystem : WorldSystem, ICommandExecutor, IUpdatableSystem
+    public class FollowerSystem : WorldSystem, ICommandExecutor, IUpdatableSystem
     {
         #region Private Fields
 
@@ -22,12 +24,26 @@ namespace OpenBreed.Core.Systems
 
         #region Public Constructors
 
-        public FollowingSystem(ICore core) : base(core)
+        public FollowerSystem(ICore core) : base(core)
         {
             cmdHandler = new CommandHandler(this);
             Require<FollowerComponent>();
             Require<PositionComponent>();
+
+            //Core.Worlds.Subscribe<EntityAddedEventArgs>(OnEntityAddedEventArgs);
         }
+
+        //private void OnEntityAddedEventArgs(object sender, EntityAddedEventArgs e)
+        //{
+        //    var followerEntities = Core.Entities.Where(item => item.Contains<FollowerComponent>());
+
+        //    var foundFollower = followerEntities.FirstOrDefault(item => item.GetComponent<FollowerComponent>().FollowedEntityId == e.EntityId);
+
+        //    if (foundFollower == null)
+        //        return;
+
+        //    Core.Commands.Post(new AddEntityCommand(e.WorldId, foundFollower.Id));
+        //}
 
         #endregion Public Constructors
 

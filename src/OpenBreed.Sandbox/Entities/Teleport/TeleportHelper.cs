@@ -20,6 +20,8 @@ using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Components;
+using OpenBreed.Sandbox.Entities.WorldGate;
 
 namespace OpenBreed.Sandbox.Entities.Teleport
 {
@@ -111,51 +113,57 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             var entity = (IEntity)sender;
             var entryEntity = entity;
             var targetEntity = args.Entity;
+            var core = targetEntity.Core;
 
-            var cameraEntity = targetEntity.Tag as IEntity;
+            var cameraEntity = targetEntity.GetComponent<FollowedComponent>().FollowerIds.
+                                                                              Select(item => core.Entities.GetById(item)).
+                                                                              FirstOrDefault(item => item.Tag is "PlayerCamera");
 
-            if (cameraEntity == null)
-                return;
+            //Vanilla game
+            var jobChain = new JobChain();
+            //1. Pause game
+            jobChain.Equeue(new WorldJob<WorldPausedEventArgs>((s, a) => { return a.World == cameraEntity.World; }, core.Worlds, () => cameraEntity.PostCommand(new PauseWorldCommand(cameraEntity.World.Id, true))));
+            //2. Camera fade-out   
+            jobChain.Equeue(new EntityJobEx<AnimStoppedEventArgs>(cameraEntity, new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_OUT, 0)));
+            //3. Teleport character
+            jobChain.Equeue(new EntityJobEx2(targetEntity, () => SetPosition(targetEntity, entryEntity, true)));
+            //4. Unpause game
+            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>((s, a) => { return a.World == cameraEntity.World; }, core.Worlds, () => cameraEntity.PostCommand(new PauseWorldCommand(cameraEntity.World.Id, false))));
+            //5. Camera fade-in
+            jobChain.Equeue(new EntityJobEx<AnimStoppedEventArgs>(cameraEntity, new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0)));
 
+            entryEntity.Core.Jobs.Execute(jobChain);
+        }
+
+        public static void SetPosition(IEntity target, IEntity entryEntity, bool cancelMovement)
+        {
             var pair = (TeleportPair)entryEntity.Tag;
-
-            var exitEntity = entryEntity.Core.Entities.GetByTag(pair).FirstOrDefault(item => item != entryEntity);
+            var exitEntity = target.Core.Entities.GetByTag(pair).FirstOrDefault(item => item != entryEntity);
 
             if (exitEntity == null)
                 throw new Exception("No exit entity found");
 
             var exitPos = exitEntity.GetComponent<PositionComponent>();
+            var targetPos = target.GetComponent<PositionComponent>();
             var entryAabb = entryEntity.GetComponent<BodyComponent>().Aabb;
-            var targetAabb = targetEntity.GetComponent<BodyComponent>().Aabb;
+            var targetAabb = target.GetComponent<BodyComponent>().Aabb;
             var offset = new Vector2((32 - targetAabb.Width) / 2.0f, (32 - targetAabb.Height) / 2.0f);
 
-            //Vanilla game
-            //1. Pause game
-            //2. Camera fade-out
-            //3. Teleport character
-            //4. Unpause game
-            //5. Camera fade-in
+            var newPosition = exitPos.Value + offset;
 
-            var jobChain = new JobChain();
-            //jobChain.Equeue(new EntityJob(entryEntity, "BodyOff"));
+            var posCmp = target.GetComponent<PositionComponent>();
+            posCmp.Value = newPosition;
 
-            //Func<object, WorldPausedEventArgs, bool> add = (x, y) => { return false; };
-            jobChain.Equeue(new WorldJob<WorldPausedEventArgs>((s, a) => { return a.World == cameraEntity.World; }, cameraEntity.Core.Worlds, () => cameraEntity.PostCommand(new PauseWorldCommand(cameraEntity.World.Id, true))));
-            jobChain.Equeue(new EntityJobEx<AnimStoppedEventArgs>(cameraEntity, new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_OUT, 0))); 
-            //jobChain.Equeue(new CameraEffectJob(cameraEntity, CameraHelper.CAMERA_FADE_OUT));
-            jobChain.Equeue(new TeleportJob(targetEntity, exitPos.Value + offset, true));
-            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>((s, a) => { return a.World == cameraEntity.World; }, cameraEntity.Core.Worlds, () => cameraEntity.PostCommand(new PauseWorldCommand(cameraEntity.World.Id, false))));
-            jobChain.Equeue(new EntityJobEx<AnimStoppedEventArgs>(cameraEntity, new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0)));
-            //jobChain.Equeue(new CameraEffectJob(cameraEntity, CameraHelper.CAMERA_FADE_IN));
-            //jobChain.Equeue(new EntityJob(entryEntity, "BodyOn"));
+            if (cancelMovement)
+            {
+                var velocityCmp = target.GetComponent<VelocityComponent>();
+                velocityCmp.Value = Vector2.Zero;
 
-            entryEntity.Core.Jobs.Execute(jobChain);
+                var thrustCmp = target.GetComponent<ThrustComponent>();
+                thrustCmp.Value = Vector2.Zero;
+            }
+
         }
-
-        //private static bool WorldCheckFunc(World a, World b)
-        //{
-        //    return a == b;
-        //}
 
         #endregion Private Methods
     }

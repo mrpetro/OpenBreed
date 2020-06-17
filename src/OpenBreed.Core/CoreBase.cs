@@ -155,6 +155,8 @@ namespace OpenBreed.Core
 
         private bool HandleAddEntity(AddEntityCommand cmd)
         {
+
+
             var world = Worlds.GetById(cmd.WorldId);
             var entity = Entities.GetById(cmd.EntityId);
             world.AddEntity(entity);

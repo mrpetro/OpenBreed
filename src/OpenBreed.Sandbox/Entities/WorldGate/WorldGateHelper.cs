@@ -22,6 +22,7 @@ using OpenBreed.Core.Commands;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Sandbox.Worlds;
+using OpenBreed.Core.Common.Components;
 
 namespace OpenBreed.Sandbox.Entities.WorldGate
 {
@@ -78,56 +79,35 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
         private static void OnCollision(object sender, CollisionEventArgs args)
         {
             var entity = (IEntity)sender;
+            var core = entity.Core;
             var exitEntity = entity;
             var targetEntity = args.Entity;
 
-            var cameraEntity = targetEntity.Tag as IEntity;
-
-            if (cameraEntity == null)
-                return;
+            var cameraEntity = targetEntity.GetComponent<FollowedComponent>().FollowerIds.
+                                                                              Select(item => core.Entities.GetById(item)).
+                                                                              FirstOrDefault(item => item.Tag is "PlayerCamera");
 
             var exitInfo = ((string WorldName, int EntryId))exitEntity.Tag;
 
             var jobChain = new JobChain();
 
+            var worldToRemoveFrom = targetEntity.World;
 
-            var worldToRemoveFrom = cameraEntity.World;
-            var job = new WorldJob<WorldPausedEventArgs>((s, a) => { return a.World == worldToRemoveFrom; }, cameraEntity.Core.Worlds, () => cameraEntity.PostCommand(new PauseWorldCommand(worldToRemoveFrom.Id, true)));
-
-
-            jobChain.Equeue(job);
-
-            //jobChain.Equeue(new WorldJob(cameraEntity.World, "Pause"));
+            //Pause this world
+            jobChain.Equeue(new WorldJob<WorldPausedEventArgs>((s, a) => { return a.World == worldToRemoveFrom; }, targetEntity.Core.Worlds, () => targetEntity.PostCommand(new PauseWorldCommand(worldToRemoveFrom.Id, true))));
+            //Fade out camera
             jobChain.Equeue(new EntityJobEx<AnimStoppedEventArgs>(cameraEntity, new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_OUT, 0)));
-
-
-            jobChain.Equeue(new WorldJob<EntityRemovedEventArgs>((s, a) =>
-            { 
-                return cameraEntity.Core.Worlds.GetById(a.WorldId) == worldToRemoveFrom;
-            },
-                cameraEntity.Core.Worlds, () => cameraEntity.PostCommand( new RemoveEntityCommand(worldToRemoveFrom.Id, cameraEntity.Id))));
-            jobChain.Equeue(new WorldJob<EntityRemovedEventArgs>((s, a) => { return targetEntity.Core.Worlds.GetById(a.WorldId) == worldToRemoveFrom; }, targetEntity.Core.Worlds, () => targetEntity.PostCommand(new RemoveEntityCommand(targetEntity.World.Id, targetEntity.Id))));
-
-            jobChain.Equeue(new EntityJobEx2(cameraEntity, () => TryLoadWorld(cameraEntity, exitInfo.WorldName, exitInfo.EntryId)));
-            //jobChain.Equeue(new EntityJobEx2(targetEntity, () => SetPosition(targetEntity, exitInfo.Item2)));
-
-            var job2 = new WorldJob<EntityAddedEventArgs>((s, a) => { return cameraEntity.Core.Worlds.GetById(a.WorldId).Name == exitInfo.WorldName; }, cameraEntity.Core.Worlds, () => AddToWorld(cameraEntity, exitInfo.WorldName, exitInfo.EntryId));
-            //job2.CompleteTrigger<EntityAddedEventArgs>();
-
-            jobChain.Equeue(job2);
-
-            //jobChain.Equeue(new WorldJobEx2<EntityAddedEventArgs>(cameraEntity.Core, exitInfo.WorldName, () => AddToWorld(cameraEntity, exitInfo.WorldName, exitInfo.EntryId)));
-            jobChain.Equeue(new WorldJob<EntityAddedEventArgs>((s, a) => { return cameraEntity.Core.Worlds.GetById(a.WorldId).Name == exitInfo.WorldName; }, cameraEntity.Core.Worlds, () => AddToWorld(targetEntity, exitInfo.WorldName, exitInfo.EntryId)));
-
-
-
-
-
-            jobChain.Equeue(new EntityJobEx2(cameraEntity, () => SetPosition(cameraEntity, exitInfo.EntryId)));
+            //Remove entity from this world
+            jobChain.Equeue(new WorldJob<EntityRemovedEventArgs>((s, a) => { return core.Worlds.GetById(a.WorldId) == worldToRemoveFrom; }, core.Worlds, () => targetEntity.PostCommand(new RemoveEntityCommand(targetEntity.World.Id, targetEntity.Id))));
+            //Load next world if needed
+            jobChain.Equeue(new EntityJobEx2(targetEntity, () => TryLoadWorld(core, exitInfo.WorldName, exitInfo.EntryId)));
+            //Add entity to next world
+            jobChain.Equeue(new WorldJob<EntityAddedEventArgs>((s, a) => { return core.Worlds.GetById(a.WorldId).Name == exitInfo.WorldName; }, core.Worlds, () => AddToWorld(targetEntity, exitInfo.WorldName, exitInfo.EntryId)));
+            //Set position of entity to entry position in next world
             jobChain.Equeue(new EntityJobEx2(targetEntity, () => SetPosition(targetEntity, exitInfo.EntryId)));
-
-            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>((s, a) => { return a.World == worldToRemoveFrom; }, cameraEntity.Core.Worlds, () => cameraEntity.PostCommand( new PauseWorldCommand(worldToRemoveFrom.Id, false))));
-
+            //Unpause this world
+            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>((s, a) => { return a.World == worldToRemoveFrom; }, core.Worlds, () => targetEntity.PostCommand( new PauseWorldCommand(worldToRemoveFrom.Id, false))));
+            //Fade in camera
             jobChain.Equeue(new EntityJobEx<AnimStoppedEventArgs>(cameraEntity, new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0)));
 
             exitEntity.Core.Jobs.Execute(jobChain);
@@ -139,13 +119,13 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             world.PostCommand(new AddEntityCommand(world.Id, target.Id));
         }
 
-        private static void TryLoadWorld(IEntity target, string worldName, int entryId)
+        private static void TryLoadWorld(ICore core, string worldName, int entryId)
         {
-            var world = target.Core.Worlds.GetByName(worldName);
+            var world = core.Worlds.GetByName(worldName);
 
             if (world == null)
             {
-                using (var reader = new TxtFileWorldReader(target.Core, $".\\Content\\Maps\\{worldName}.txt"))
+                using (var reader = new TxtFileWorldReader(core, $".\\Content\\Maps\\{worldName}.txt"))
                     world = reader.GetWorld();
             }
         }

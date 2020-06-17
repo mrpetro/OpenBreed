@@ -21,7 +21,7 @@ namespace OpenBreed.Core.Managers
 
         private readonly Dictionary<string, Func<ICore, IComponentBuilder>> builders = new Dictionary<string, Func<ICore, IComponentBuilder>>();
 
-        private Queue<IEntityCommand> noWorldQueue = new Queue<IEntityCommand>();
+        private Dictionary<int, Queue<IEntityCommand>> awaitingCommands = new Dictionary<int, Queue<IEntityCommand>>();
 
         #endregion Private Fields
 
@@ -92,12 +92,15 @@ namespace OpenBreed.Core.Managers
         {
             var newEntity = new Entity(Core, initialComponents);
             newEntity.Id = entities.Add(newEntity);
+
+            Core.Worlds.Subscribe<EntityAddedEventArgs>(OnEntityAddedEventArgs);
+
             return newEntity;
         }
 
         public void Destroy(IEntity entity)
         {
-            entity.Subscribe<EntityRemovedEventArgs>(OnEntityRemovedEventArgs);
+            Core.Worlds.Subscribe<EntityRemovedEventArgs>(OnEntityRemovedEventArgs);
             entity.PostCommand(new RemoveEntityCommand(entity.World.Id, entity.Id));
         }
 
@@ -115,7 +118,17 @@ namespace OpenBreed.Core.Managers
             if (entity.World != null)
                 entity.World.Handle(msg);
             else
-                noWorldQueue.Enqueue(msg);
+            {
+                Queue<IEntityCommand> cmds;
+                if (!awaitingCommands.TryGetValue(msg.EntityId, out cmds))
+                {
+                    cmds = new Queue<IEntityCommand>();
+                    awaitingCommands.Add(msg.EntityId, cmds);
+                }
+
+                cmds.Enqueue(msg);
+            }
+
         }
 
         #endregion Internal Methods
@@ -160,10 +173,26 @@ namespace OpenBreed.Core.Managers
             components.Add(builder.Build());
         }
 
+        private void OnEntityAddedEventArgs(object sender, EntityAddedEventArgs e)
+        {
+            Queue<IEntityCommand> cmds;
+
+            if (!awaitingCommands.TryGetValue(e.EntityId, out cmds))
+                return;
+
+            var entity = GetById(e.EntityId);
+
+            while (cmds.Any())
+            {
+                var cmd = cmds.Dequeue();
+                entity.World.Handle(cmd);
+            }
+        }
+
         private void OnEntityRemovedEventArgs(object sender, EntityRemovedEventArgs e)
         {
             var entity = Core.Entities.GetById(e.EntityId);
-            entity.Unsubscribe<EntityRemovedEventArgs>(OnEntityRemovedEventArgs);
+            Core.Worlds.Unsubscribe<EntityRemovedEventArgs>(OnEntityRemovedEventArgs);
             entities.RemoveById(entity.Id);
         }
 

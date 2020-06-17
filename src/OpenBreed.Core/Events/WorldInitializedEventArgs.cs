@@ -10,16 +10,16 @@ namespace OpenBreed.Core.Events
     {
         #region Public Constructors
 
-        public WorldInitializedEventArgs(World world)
+        public WorldInitializedEventArgs(int worldId)
         {
-            World = world;
+            WorldId = worldId;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public World World { get; }
+        public int WorldId { get; }
 
         #endregion Public Properties
     }
