@@ -188,9 +188,9 @@ namespace OpenBreed.Core.Common
             Paused = value;
 
             if (Paused)
-                Core.Worlds.RaiseEvent(new WorldPausedEventArgs(this));
+                Core.Worlds.RaiseEvent(new WorldPausedEventArgs(Id));
             else
-                Core.Worlds.RaiseEvent(new WorldUnpausedEventArgs(this));
+                Core.Worlds.RaiseEvent(new WorldUnpausedEventArgs(Id));
         }
 
         #endregion Public Methods

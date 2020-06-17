@@ -83,30 +83,33 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             var exitEntity = entity;
             var targetEntity = args.Entity;
 
-            var cameraEntity = targetEntity.GetComponent<FollowedComponent>().FollowerIds.
+            var cameraEntity = targetEntity.TryGetComponent<FollowedComponent>()?.FollowerIds.
                                                                               Select(item => core.Entities.GetById(item)).
                                                                               FirstOrDefault(item => item.Tag is "PlayerCamera");
+
+            if (cameraEntity == null)
+                return;
 
             var exitInfo = ((string WorldName, int EntryId))exitEntity.Tag;
 
             var jobChain = new JobChain();
 
-            var worldToRemoveFrom = targetEntity.World;
+            var worldIdToRemoveFrom = targetEntity.World.Id;
 
             //Pause this world
-            jobChain.Equeue(new WorldJob<WorldPausedEventArgs>((s, a) => { return a.World == worldToRemoveFrom; }, targetEntity.Core.Worlds, () => targetEntity.PostCommand(new PauseWorldCommand(worldToRemoveFrom.Id, true))));
+            jobChain.Equeue(new WorldJob<WorldPausedEventArgs>((s, a) => { return a.WorldId == worldIdToRemoveFrom; }, targetEntity.Core.Worlds, () => targetEntity.PostCommand(new PauseWorldCommand(worldIdToRemoveFrom, true))));
             //Fade out camera
             jobChain.Equeue(new EntityJobEx<AnimStoppedEventArgs>(cameraEntity, new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_OUT, 0)));
             //Remove entity from this world
-            jobChain.Equeue(new WorldJob<EntityRemovedEventArgs>((s, a) => { return core.Worlds.GetById(a.WorldId) == worldToRemoveFrom; }, core.Worlds, () => targetEntity.PostCommand(new RemoveEntityCommand(targetEntity.World.Id, targetEntity.Id))));
+            jobChain.Equeue(new WorldJob<EntityRemovedEventArgs>((s, a) => { return a.WorldId == worldIdToRemoveFrom; }, core.Worlds, () => targetEntity.PostCommand(new RemoveEntityCommand(targetEntity.World.Id, targetEntity.Id))));
             //Load next world if needed
             jobChain.Equeue(new EntityJobEx2(targetEntity, () => TryLoadWorld(core, exitInfo.WorldName, exitInfo.EntryId)));
             //Add entity to next world
             jobChain.Equeue(new WorldJob<EntityAddedEventArgs>((s, a) => { return core.Worlds.GetById(a.WorldId).Name == exitInfo.WorldName; }, core.Worlds, () => AddToWorld(targetEntity, exitInfo.WorldName, exitInfo.EntryId)));
             //Set position of entity to entry position in next world
-            jobChain.Equeue(new EntityJobEx2(targetEntity, () => SetPosition(targetEntity, exitInfo.EntryId)));
+            jobChain.Equeue(new EntityJobEx2(targetEntity, () => SetPosition(targetEntity, exitInfo.EntryId, true)));
             //Unpause this world
-            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>((s, a) => { return a.World == worldToRemoveFrom; }, core.Worlds, () => targetEntity.PostCommand( new PauseWorldCommand(worldToRemoveFrom.Id, false))));
+            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>((s, a) => { return a.WorldId == worldIdToRemoveFrom; }, core.Worlds, () => targetEntity.PostCommand( new PauseWorldCommand(worldIdToRemoveFrom, false))));
             //Fade in camera
             jobChain.Equeue(new EntityJobEx<AnimStoppedEventArgs>(cameraEntity, new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0)));
 
@@ -130,7 +133,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             }
         }
 
-        private static void SetPosition(IEntity target, int entryId)
+        private static void SetPosition(IEntity target, int entryId, bool cancelMovement)
         {
             var pair = new WorldGatePair() { Id = entryId };
 
@@ -147,6 +150,15 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             //var offset = new Vector2((32 - entityAabb.Width) / 2.0f, (32 - entityAabb.Height) / 2.0f);
 
             entityPos.Value = entryPos.Value;// + offset;
+
+            if (cancelMovement)
+            {
+                var velocityCmp = target.GetComponent<VelocityComponent>();
+                velocityCmp.Value = Vector2.Zero;
+
+                var thrustCmp = target.GetComponent<ThrustComponent>();
+                thrustCmp.Value = Vector2.Zero;
+            }
         }
 
         #endregion Private Methods

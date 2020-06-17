@@ -1,22 +1,21 @@
-﻿using OpenBreed.Core.Common;
-using System;
+﻿using System;
 
 namespace OpenBreed.Core.Events
 {
     public class WorldUnpausedEventArgs : EventArgs
     {
-        #region Private Constructors
+        #region Public Constructors
 
-        public WorldUnpausedEventArgs(World world)
+        public WorldUnpausedEventArgs(int worldId)
         {
-            World = world;
+            WorldId = worldId;
         }
 
-        #endregion Private Constructors
+        #endregion Public Constructors
 
         #region Public Properties
 
-        public World World { get; }
+        public int WorldId { get; }
 
         #endregion Public Properties
     }

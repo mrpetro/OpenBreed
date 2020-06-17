@@ -7,16 +7,16 @@ namespace OpenBreed.Core.Events
     {
         #region Private Constructors
 
-        public WorldPausedEventArgs(World world)
+        public WorldPausedEventArgs(int worldId)
         {
-            World = world;
+            WorldId = worldId;
         }
 
         #endregion Private Constructors
 
         #region Public Properties
 
-        public World World { get; }
+        public int WorldId { get; }
 
         #endregion Public Properties
     }

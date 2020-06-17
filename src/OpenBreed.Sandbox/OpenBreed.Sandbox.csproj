@@ -123,7 +123,6 @@
     <Compile Include="Entities\Teleport\TeleportHelper.cs" />
     <Compile Include="Entities\Projectile\ProjectileHelper.cs" />
     <Compile Include="Entities\Projectile\States\FiredState.cs" />
-    <Compile Include="Entities\Teleport\TeleportJob.cs" />
     <Compile Include="Entities\Text\TextHelper.cs" />
     <Compile Include="Entities\WorldGate\WorldGateHelper.cs" />
     <Compile Include="Helpers\AnimHelper.cs" />
