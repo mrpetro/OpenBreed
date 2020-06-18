@@ -116,7 +116,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             var targetEntity = args.Entity;
             var core = targetEntity.Core;
 
-            var cameraEntity = targetEntity.TryGetComponent<FollowedComponent>()?.FollowerIds.
+            var cameraEntity = targetEntity.TryGetComponent<FollowerComponent>()?.FollowerIds.
                                                                               Select(item => core.Entities.GetById(item)).
                                                                               FirstOrDefault(item => item.Tag is "PlayerCamera");
 

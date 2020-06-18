@@ -49,7 +49,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             //Action
             builder.AddSystem(core.CreateMovementSystem().Build());
-            builder.AddSystem(new FollowedSystem(core));
+            builder.AddSystem(new FollowerSystem(core));
             //builder.AddSystem(new FollowerSystem(core));
             builder.AddSystem(core.CreatePhysicsSystem().SetGridSize(width, height).Build());
             builder.AddSystem(core.CreateAnimationSystem().Build());

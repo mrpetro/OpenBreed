@@ -1,17 +1,21 @@
 ﻿using OpenBreed.Core.Common.Systems.Components;
+using System.Collections.Generic;
 
 namespace OpenBreed.Core.Common.Components
 {
     public class FollowerComponent : IEntityComponent
     {
-        #region Public Properties
+        #region Public Constructors
 
-        public FollowerComponent(int followedEntityId = -1)
+        public FollowerComponent()
         {
-            FollowedEntityId = followedEntityId;
         }
 
-        public int FollowedEntityId { get; set; }
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public List<int> FollowerIds { get; } = new List<int>();
 
         #endregion Public Properties
     }

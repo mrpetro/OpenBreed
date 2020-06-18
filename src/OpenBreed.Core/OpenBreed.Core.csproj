@@ -94,7 +94,6 @@
     <Compile Include="Common\Builders\FsmComponentBuilder.cs" />
     <Compile Include="Common\Builders\ClassComponentBuilder.cs" />
     <Compile Include="Common\Components\ClassComponent.cs" />
-    <Compile Include="Common\Components\FollowedComponent.cs" />
     <Compile Include="Common\Components\FollowerComponent.cs" />
     <Compile Include="Common\Components\GroupComponent.cs" />
     <Compile Include="Common\Components\TextCaretComponent.cs" />
@@ -158,7 +157,6 @@
     <Compile Include="Modules\BaseCoreModule.cs" />
     <Compile Include="Scripting\IScriptFunc.cs" />
     <Compile Include="Scripting\LuaScriptFunc.cs" />
-    <Compile Include="Systems\FollowedSystem.cs" />
     <Compile Include="Systems\FollowerSystem.cs" />
     <Compile Include="Systems\ISystem.cs" />
     <Compile Include="Systems\TextInputSystem.cs" />

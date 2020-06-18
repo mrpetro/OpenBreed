@@ -83,7 +83,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             var exitEntity = entity;
             var targetEntity = args.Entity;
 
-            var cameraEntity = targetEntity.TryGetComponent<FollowedComponent>()?.FollowerIds.
+            var cameraEntity = targetEntity.TryGetComponent<FollowerComponent>()?.FollowerIds.
                                                                               Select(item => core.Entities.GetById(item)).
                                                                               FirstOrDefault(item => item.Tag is "PlayerCamera");
 

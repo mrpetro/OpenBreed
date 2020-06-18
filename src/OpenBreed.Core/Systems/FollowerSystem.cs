@@ -35,7 +35,7 @@ namespace OpenBreed.Core.Systems
 
         //private void OnEntityAddedEventArgs(object sender, EntityAddedEventArgs e)
         //{
-        //    var followerEntities = Core.Entities.Where(item => item.Contains<FollowerComponent>());
+        //    var followeEntities = Core.Entities.Where(item => item.Contains<FollowerComponent>());
 
         //    var foundFollower = followerEntities.FirstOrDefault(item => item.GetComponent<FollowerComponent>().FollowedEntityId == e.EntityId);
 
@@ -53,7 +53,7 @@ namespace OpenBreed.Core.Systems
         {
             base.Initialize(world);
 
-            World.RegisterHandler(FollowerSetTargetCommand.TYPE, cmdHandler);
+            World.RegisterHandler(FollowedAddFollowerCommand.TYPE, cmdHandler);
         }
 
         public void UpdatePauseImmuneOnly(float dt)
@@ -73,24 +73,41 @@ namespace OpenBreed.Core.Systems
         {
             var fc = entity.GetComponent<FollowerComponent>();
 
-            var target = Core.Entities.GetById(fc.FollowedEntityId);
+            for (int i = 0; i < fc.FollowerIds.Count; i++)
+            {
+                var followerEntity = Core.Entities.GetById(fc.FollowerIds[i]);
 
-            if (target == null)
-                return;
+                if (followerEntity == null)
+                    continue;
 
-            var targetPos = target.GetComponent<PositionComponent>();
-            var followerPos = entity.GetComponent<PositionComponent>();
+                //Glue(entity, followerEntity);
+                Follow(entity, followerEntity);
+            }
+        }
 
-            //Just follower position to it's target position
-            followerPos.Value = targetPos.Value;
+        private void Follow (IEntity followed, IEntity follower)
+        {
+            var followedPos = followed.GetComponent<PositionComponent>();
+            var followerPos = follower.GetComponent<PositionComponent>();
+            var difference = followedPos.Value - followerPos.Value;
+            followerPos.Value += difference / 10;
+            //followerPos.Value = followedPos.Value;
+        }
+
+        private void Glue(IEntity followed, IEntity follower)
+        {
+            var followedPos = followed.GetComponent<PositionComponent>();
+            var followerPos = follower.GetComponent<PositionComponent>();
+
+            followerPos.Value = followedPos.Value;
         }
 
         public override bool ExecuteCommand(ICommand cmd)
         {
             switch (cmd.Type)
             {
-                case FollowerSetTargetCommand.TYPE:
-                    return HandleFollowerSetTargetCommand((FollowerSetTargetCommand)cmd);
+                case FollowedAddFollowerCommand.TYPE:
+                    return HandleFollowedAddFollowerCommand((FollowedAddFollowerCommand)cmd);
 
                 default:
                     return false;
@@ -104,22 +121,46 @@ namespace OpenBreed.Core.Systems
         protected override void OnAddEntity(IEntity entity)
         {
             entities.Add(entity);
+
+            var fc = entity.GetComponent<FollowerComponent>();
+
+            for (int i = 0; i < fc.FollowerIds.Count; i++)
+            {
+                var follower = Core.Entities.GetById(fc.FollowerIds[i]);
+
+                if (follower == null)
+                    continue;
+
+                follower.PostCommand(new AddEntityCommand(World.Id, follower.Id));
+            }
         }
 
         protected override void OnRemoveEntity(IEntity entity)
         {
             entities.Remove(entity);
+
+            var fc = entity.GetComponent<FollowerComponent>();
+
+            for (int i = 0; i < fc.FollowerIds.Count; i++)
+            {
+                var follower = Core.Entities.GetById(fc.FollowerIds[i]);
+
+                if (follower == null)
+                    continue;
+
+                follower.PostCommand(new RemoveEntityCommand(World.Id, follower.Id));
+            }
         }
 
         #endregion Protected Methods
 
         #region Private Methods
 
-        private bool HandleFollowerSetTargetCommand(FollowerSetTargetCommand cmd)
+        private bool HandleFollowedAddFollowerCommand(FollowedAddFollowerCommand cmd)
         {
             var entity = Core.Entities.GetById(cmd.EntityId);
             var fc = entity.GetComponent<FollowerComponent>();
-            fc.FollowedEntityId = cmd.TargetEntityId;
+            fc.FollowerIds.Add(cmd.FollowerEntityId);
             return true;
         }
 
