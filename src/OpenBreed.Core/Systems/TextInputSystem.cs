@@ -15,7 +15,7 @@ namespace OpenBreed.Core.Systems
     {
         #region Private Fields
 
-        private readonly List<IEntity> entities = new List<IEntity>();
+        private readonly List<Entity> entities = new List<Entity>();
         private CommandHandler cmdHandler;
 
         #endregion Private Fields
@@ -77,12 +77,12 @@ namespace OpenBreed.Core.Systems
 
         #region Protected Methods
 
-        protected override void OnAddEntity(IEntity entity)
+        protected override void OnAddEntity(Entity entity)
         {
             entities.Add(entity);
         }
 
-        protected override void OnRemoveEntity(IEntity entity)
+        protected override void OnRemoveEntity(Entity entity)
         {
             entities.Remove(entity);
         }
@@ -97,8 +97,8 @@ namespace OpenBreed.Core.Systems
             if (toModify == null)
                 return false;
 
-            var caretCmp = toModify.GetComponent<TextCaretComponent>();
-            var textCmp = toModify.GetComponent<TextDataComponent>();
+            var caretCmp = toModify.Get<TextCaretComponent>();
+            var textCmp = toModify.Get<TextDataComponent>();
 
             if (string.IsNullOrEmpty(cmd.Text))
                 return true;
@@ -118,8 +118,8 @@ namespace OpenBreed.Core.Systems
             if (toModify == null)
                 return false;
 
-            var caretCmp = toModify.GetComponent<TextCaretComponent>();
-            var textCmp = toModify.GetComponent<TextDataComponent>();
+            var caretCmp = toModify.Get<TextCaretComponent>();
+            var textCmp = toModify.Get<TextDataComponent>();
 
             if (string.IsNullOrEmpty(textCmp.Data))
                 return true;
@@ -142,8 +142,8 @@ namespace OpenBreed.Core.Systems
             if (toModify == null)
                 return false;
 
-            var caretCmp = toModify.GetComponent<TextCaretComponent>();
-            var textCmp = toModify.GetComponent<TextDataComponent>();
+            var caretCmp = toModify.Get<TextCaretComponent>();
+            var textCmp = toModify.Get<TextDataComponent>();
 
             if (textCmp.Data.Length == 0)
                 return true;

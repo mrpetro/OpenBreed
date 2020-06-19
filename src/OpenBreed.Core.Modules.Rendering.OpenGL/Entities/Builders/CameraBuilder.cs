@@ -29,7 +29,7 @@ namespace OpenBreed.Core.Modules.Rendering.Entities.Builders
 
         #region Public Methods
 
-        public override IEntity Build()
+        public override Entity Build()
         {
             var entity = Core.Entities.Create();
             entity.Add(PositionComponent.Create(position));

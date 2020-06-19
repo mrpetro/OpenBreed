@@ -110,11 +110,11 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
         /// <param name="entityA">Given dynamic body</param>
         /// <param name="entityB">Given static body</param>
         /// <param name="projection">Given collision projection vector</param>
-        public static void ResolveVsStatic(IEntity entityA, IEntity entityB, Vector2 projection)
+        public static void ResolveVsStatic(Entity entityA, Entity entityB, Vector2 projection)
         {
-            var p = entityA.TryGetComponent<PositionComponent>();
-            var v = entityA.TryGetComponent<VelocityComponent>();
-            var body = entityA.TryGetComponent<BodyComponent>();
+            var p = entityA.TryGet<PositionComponent>();
+            var v = entityA.TryGet<VelocityComponent>();
+            var body = entityA.TryGet<BodyComponent>();
 
             p.Value += projection;
 

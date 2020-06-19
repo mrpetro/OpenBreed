@@ -47,24 +47,24 @@ namespace OpenBreed.Sandbox.Components.States
 
         #region Public Methods
 
-        public void EnterState(IEntity entity)
+        public void EnterState(Entity entity)
         {
-            entity.PostCommand(new SpriteOffCommand(entity.Id));
-            entity.PostCommand(new BodyOffCommand(entity.Id));
+            entity.Core.Commands.Post(new SpriteOffCommand(entity.Id));
+            entity.Core.Commands.Post(new BodyOffCommand(entity.Id));
 
-            var pos = entity.GetComponent<PositionComponent>();
+            var pos = entity.Get<PositionComponent>();
 
             //entity.PostCommand(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
 
-            var className = entity.GetComponent<ClassComponent>().Name;
+            var className = entity.Get<ClassComponent>().Name;
             var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
             var stampId = entity.Core.Rendering.Stamps.GetByName($"{stampPrefix}/{className}/{stateName}").Id;
-            entity.PostCommand(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
-            entity.PostCommand(new TextSetCommand(entity.Id, 0, "Door - Opened"));
+            entity.Core.Commands.Post(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
+            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, "Door - Opened"));
 
             entity.Subscribe<TimerElapsedEventArgs>(OnTimerElapsed);
             entity.Subscribe<TimerUpdateEventArgs>(OnTimerUpdate);
-            entity.PostCommand(new TimerStartCommand(entity.Id, 0, 5.0));
+            entity.Core.Commands.Post(new TimerStartCommand(entity.Id, 0, 5.0));
         }
 
         private void OnTimerElapsed(object sender, TimerElapsedEventArgs e)
@@ -72,9 +72,9 @@ namespace OpenBreed.Sandbox.Components.States
             if (e.TimerId != 0)
                 return;
 
-            var entity = sender as IEntity;
+            var entity = sender as Entity;
 
-            entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)FunctioningImpulse.Close));
+            entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)FunctioningImpulse.Close));
         }
 
         private void OnTimerUpdate(object sender, TimerUpdateEventArgs e)
@@ -82,20 +82,20 @@ namespace OpenBreed.Sandbox.Components.States
             if (e.TimerId != 0)
                 return;
 
-            var entity = sender as IEntity;
+            var entity = sender as Entity;
 
-            var tcp = entity.GetComponent<TimerComponent>();
+            var tcp = entity.Get<TimerComponent>();
 
             var timer = tcp.Items.FirstOrDefault(item => item.TimerId == 0);
 
-            entity.PostCommand(new TextSetCommand(entity.Id, 0, $"Door - {timer.Interval:F2}s"));
+            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, $"Door - {timer.Interval:F2}s"));
         }
 
-        public void LeaveState(IEntity entity)
+        public void LeaveState(Entity entity)
         {
             entity.Unsubscribe<TimerUpdateEventArgs>(OnTimerUpdate);
             entity.Unsubscribe<TimerElapsedEventArgs>(OnTimerElapsed);
-            entity.PostCommand(new TimerStopCommand(entity.Id, 0));
+            entity.Core.Commands.Post(new TimerStopCommand(entity.Id, 0));
         }
 
         #endregion Public Methods

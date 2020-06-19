@@ -103,7 +103,7 @@
 //        /// Initialize this component
 //        /// </summary>
 //        /// <param name="entity">Entity which this component belongs to</param>
-//        public void Initialize(IEntity entity)
+//        public void Initialize(Entity entity)
 //        {
 //            position = entity.TryGetComponent<Position>().First();
 //            body = entity.TryGetComponent<DynamicBody>().First();
@@ -114,7 +114,7 @@
 //        /// Deinitialize this component
 //        /// </summary>
 //        /// <param name="entity">Entity which this component belongs to</param>
-//        public void Deinitialize(IEntity entity)
+//        public void Deinitialize(Entity entity)
 //        {
 //            throw new NotImplementedException();
 //        }

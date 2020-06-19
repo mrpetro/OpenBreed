@@ -63,12 +63,12 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         }
 
-        private static void OnFrameUpdate(IEntity entity, int nextValue)
+        private static void OnFrameUpdate(Entity entity, int nextValue)
         {
-            entity.PostCommand(new SpriteSetCommand(entity.Id, nextValue));
+            entity.Core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
         }
 
-        public static IEntity AddTeleportEntry(World world, int x, int y, int pairId)
+        public static Entity AddTeleportEntry(World world, int x, int y, int pairId)
         {
             var core = world.Core;
 
@@ -76,17 +76,17 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
             teleportEntry.Tag = new TeleportPair { Id = pairId };
 
-            teleportEntry.GetComponent<PositionComponent>().Value = new Vector2( 16 * x, 16 * y);
+            teleportEntry.Get<PositionComponent>().Value = new Vector2( 16 * x, 16 * y);
 
             //teleportEntry.Subscribe<AnimChangedEventArgs>(OnFrameChanged);
             teleportEntry.Subscribe<CollisionEventArgs>(OnCollision);
-            world.PostCommand(new AddEntityCommand(world.Id, teleportEntry.Id));
+            world.Core.Commands.Post(new AddEntityCommand(world.Id, teleportEntry.Id));
             //world.AddEntity(teleportEntry);
 
             return teleportEntry;
         }
 
-        public static IEntity AddTeleportExit(World world, int x, int y, int pairId)
+        public static Entity AddTeleportExit(World world, int x, int y, int pairId)
         {
             var core = world.Core;
 
@@ -94,11 +94,11 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
             teleportExit.Tag = new TeleportPair { Id = pairId };
 
-            teleportExit.GetComponent<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
+            teleportExit.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
 
             //teleportExit.Subscribe<AnimChangedEventArgs>(OnFrameChanged);
 
-            world.PostCommand(new AddEntityCommand(world.Id, teleportExit.Id));
+            world.Core.Commands.Post(new AddEntityCommand(world.Id, teleportExit.Id));
             //world.AddEntity(teleportExit);
 
             return teleportExit;
@@ -110,13 +110,13 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         private static void OnCollision(object sender, CollisionEventArgs args)
         {
-            var entity = (IEntity)sender;
+            var entity = (Entity)sender;
             var entryEntity = entity;
             var world = entity.World;
             var targetEntity = args.Entity;
             var core = targetEntity.Core;
 
-            var cameraEntity = targetEntity.TryGetComponent<FollowerComponent>()?.FollowerIds.
+            var cameraEntity = targetEntity.TryGet<FollowerComponent>()?.FollowerIds.
                                                                               Select(item => core.Entities.GetById(item)).
                                                                               FirstOrDefault(item => item.Tag is "PlayerCamera");
 
@@ -126,20 +126,20 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             //Vanilla game
             var jobChain = new JobChain();
             //1. Pause game
-            jobChain.Equeue(new WorldJob<WorldPausedEventArgs>(core.Worlds, (s, a) => { return a.WorldId == world.Id; }, () => cameraEntity.PostCommand(new PauseWorldCommand(world.Id, true))));
+            jobChain.Equeue(new WorldJob<WorldPausedEventArgs>(core.Worlds, (s, a) => { return a.WorldId == world.Id; }, () => core.Commands.Post(new PauseWorldCommand(world.Id, true))));
             //2. Camera fade-out   
-            jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => cameraEntity.PostCommand(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_OUT, 0))));
+            jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => core.Commands.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_OUT, 0))));
             //3. Teleport character
             jobChain.Equeue(new EntityJob(() => SetPosition(targetEntity, entryEntity, true)));
             //4. Unpause game
-            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(core.Worlds, (s, a) => { return a.WorldId == world.Id; }, () => cameraEntity.PostCommand(new PauseWorldCommand(world.Id, false))));
+            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(core.Worlds, (s, a) => { return a.WorldId == world.Id; }, () => core.Commands.Post(new PauseWorldCommand(world.Id, false))));
             //5. Camera fade-in
-            jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => cameraEntity.PostCommand(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0))));
+            jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => core.Commands.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0))));
 
             entryEntity.Core.Jobs.Execute(jobChain);
         }
 
-        public static void SetPosition(IEntity target, IEntity entryEntity, bool cancelMovement)
+        public static void SetPosition(Entity target, Entity entryEntity, bool cancelMovement)
         {
             var pair = (TeleportPair)entryEntity.Tag;
             var exitEntity = target.Core.Entities.GetByTag(pair).FirstOrDefault(item => item != entryEntity);
@@ -147,10 +147,10 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             if (exitEntity == null)
                 throw new Exception("No exit entity found");
 
-            var exitPos = exitEntity.GetComponent<PositionComponent>();
-            var exitAabb = exitEntity.GetComponent<BodyComponent>().Aabb;
-            var targetPos = target.GetComponent<PositionComponent>();
-            var targetAabb = target.GetComponent<BodyComponent>().Aabb;
+            var exitPos = exitEntity.Get<PositionComponent>();
+            var exitAabb = exitEntity.Get<BodyComponent>().Aabb;
+            var targetPos = target.Get<PositionComponent>();
+            var targetAabb = target.Get<BodyComponent>().Aabb;
             var offset = new Vector2((32 - targetAabb.Width) / 2.0f, (32 - targetAabb.Height) / 2.0f);
 
             var newPosition = exitPos.Value + offset;
@@ -159,10 +159,10 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
             if (cancelMovement)
             {
-                var velocityCmp = target.GetComponent<VelocityComponent>();
+                var velocityCmp = target.Get<VelocityComponent>();
                 velocityCmp.Value = Vector2.Zero;
 
-                var thrustCmp = target.GetComponent<ThrustComponent>();
+                var thrustCmp = target.Get<ThrustComponent>();
                 thrustCmp.Value = Vector2.Zero;
             }
 

@@ -23,32 +23,32 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
         public int Id => (int)RotationState.Idle;
         public int FsmId { get; set; }
 
-        public void EnterState(IEntity entity)
+        public void EnterState(Entity entity)
         {
             // Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
             var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
-            entity.PostCommand(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
+            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
             entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
-        public void LeaveState(IEntity entity)
+        public void LeaveState(Entity entity)
         {
             entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
         private void OnControlDirectionChanged(object sender, ControlDirectionChangedEventArgs e)
         {
-            var entity = sender as IEntity;
+            var entity = sender as Entity;
 
             if (e.Direction != Vector2.Zero)
             {
-                var dir = entity.GetComponent<DirectionComponent>();
+                var dir = entity.Get<DirectionComponent>();
 
                 if (dir.Value != e.Direction)
                 {
                     dir.Value = e.Direction;
-                    entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)RotationImpulse.Rotate));
+                    entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)RotationImpulse.Rotate));
                 }
             }
         }

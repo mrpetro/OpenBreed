@@ -37,7 +37,7 @@ namespace OpenBreed.Sandbox.Entities.FpsCounter
 
 
             fpsTextEntity.Add(textBuilder.Build());
-            world.PostCommand(new AddEntityCommand(world.Id, fpsTextEntity.Id));
+            world.Core.Commands.Post(new AddEntityCommand(world.Id, fpsTextEntity.Id));
             //world.AddEntity(fpsTextEntity);
 
 
@@ -47,9 +47,9 @@ namespace OpenBreed.Sandbox.Entities.FpsCounter
             hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateFpsPos(fpsTextEntity, a));
         }
 
-        private static void UpdateFpsPos(IEntity fpsTextEntity, ViewportResizedEventArgs a)
+        private static void UpdateFpsPos(Entity fpsTextEntity, ViewportResizedEventArgs a)
         {
-            fpsTextEntity.GetComponent<PositionComponent>().Value = new Vector2(-a.Width / 2.0f, -a.Height / 2.0f);
+            fpsTextEntity.Get<PositionComponent>().Value = new Vector2(-a.Width / 2.0f, -a.Height / 2.0f);
         }
     }
 }

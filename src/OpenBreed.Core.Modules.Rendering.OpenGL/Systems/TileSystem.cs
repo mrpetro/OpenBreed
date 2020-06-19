@@ -148,11 +148,11 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Protected Methods
 
-        protected override void OnAddEntity(IEntity entity)
+        protected override void OnAddEntity(Entity entity)
         {
             Debug.Assert(!entities.Contains(entity), "Entity already added!");
 
-            var pos = entity.GetComponent<PositionComponent>();
+            var pos = entity.Get<PositionComponent>();
 
             int xIndex;
             int yIndex;
@@ -162,7 +162,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
             var cellIndex = xIndex + GridWidth * yIndex;
 
-            var tile = entity.GetComponent<TileComponent>();
+            var tile = entity.Get<TileComponent>();
 
             entities[entity] = tile;
 
@@ -172,7 +172,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             tileCell.ImageId = tile.ImageId;
         }
 
-        protected override void OnRemoveEntity(IEntity entity)
+        protected override void OnRemoveEntity(Entity entity)
         {
             throw new NotImplementedException();
         }

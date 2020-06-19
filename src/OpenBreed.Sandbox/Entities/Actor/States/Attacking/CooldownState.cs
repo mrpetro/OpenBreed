@@ -35,13 +35,13 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 
         #region Public Methods
 
-        public void EnterState(IEntity entity)
+        public void EnterState(Entity entity)
         {
             var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
-            entity.PostCommand(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
+            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
             entity.Subscribe<TimerElapsedEventArgs>(OnTimerElapsed);
-            entity.PostCommand(new TimerStartCommand(entity.Id, 0, 0.2));
+            entity.Core.Commands.Post(new TimerStartCommand(entity.Id, 0, 0.2));
         }
 
         private void OnTimerElapsed(object sender, TimerElapsedEventArgs e)
@@ -49,26 +49,26 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             if (e.TimerId != 0)
                 return;
 
-            var entity = sender as IEntity;
+            var entity = sender as Entity;
 
-            var cc = entity.GetComponent<AttackControl>();
+            var cc = entity.Get<AttackControl>();
 
             if(cc.AttackPrimary)
-                entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Shoot));
+                entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Shoot));
             else
-                entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Stop));
+                entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Stop));
         }
 
-        public void Initialize(IEntity entity) 
+        public void Initialize(Entity entity) 
         {
             timer = new Timer(100);
             timer.AutoReset = false;
         }
 
-        public void LeaveState(IEntity entity)
+        public void LeaveState(Entity entity)
         {
             entity.Unsubscribe<TimerElapsedEventArgs>(OnTimerElapsed);
-            entity.PostCommand(new TimerStopCommand(entity.Id, 0));
+            entity.Core.Commands.Post(new TimerStopCommand(entity.Id, 0));
         }
 
         #endregion Public Methods

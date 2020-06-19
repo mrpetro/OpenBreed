@@ -35,7 +35,7 @@ namespace OpenBreed.Core.Managers
 
         #region Public Methods
 
-        public IAnimation<T> Create<T>(string name, Action<IEntity, T> frameUpdateAction)
+        public IAnimation<T> Create<T>(string name, Action<Entity, T> frameUpdateAction)
         {
             var newAnimationData = new Animation<T>(items.Count, name, frameUpdateAction);
             items.Add(newAnimationData);

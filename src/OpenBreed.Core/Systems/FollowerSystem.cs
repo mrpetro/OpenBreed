@@ -16,7 +16,7 @@ namespace OpenBreed.Core.Systems
     {
         #region Private Fields
 
-        private readonly List<IEntity> entities = new List<IEntity>();
+        private readonly List<Entity> entities = new List<Entity>();
 
         private readonly CommandHandler cmdHandler;
 
@@ -69,9 +69,9 @@ namespace OpenBreed.Core.Systems
                 Update(entities[i], dt);
         }
 
-        private void Update(IEntity entity, float dt)
+        private void Update(Entity entity, float dt)
         {
-            var fc = entity.GetComponent<FollowerComponent>();
+            var fc = entity.Get<FollowerComponent>();
 
             for (int i = 0; i < fc.FollowerIds.Count; i++)
             {
@@ -85,18 +85,18 @@ namespace OpenBreed.Core.Systems
             }
         }
 
-        private void Follow (IEntity followed, IEntity follower)
+        private void Follow (Entity followed, Entity follower)
         {
-            var followedPos = followed.GetComponent<PositionComponent>();
-            var followerPos = follower.GetComponent<PositionComponent>();
+            var followedPos = followed.Get<PositionComponent>();
+            var followerPos = follower.Get<PositionComponent>();
             var difference = followedPos.Value - followerPos.Value;
             followerPos.Value += difference / 10;
         }
 
-        private void Glue(IEntity followed, IEntity follower)
+        private void Glue(Entity followed, Entity follower)
         {
-            var followedPos = followed.GetComponent<PositionComponent>();
-            var followerPos = follower.GetComponent<PositionComponent>();
+            var followedPos = followed.Get<PositionComponent>();
+            var followerPos = follower.Get<PositionComponent>();
 
             followerPos.Value = followedPos.Value;
         }
@@ -117,11 +117,11 @@ namespace OpenBreed.Core.Systems
 
         #region Protected Methods
 
-        protected override void OnAddEntity(IEntity entity)
+        protected override void OnAddEntity(Entity entity)
         {
             entities.Add(entity);
 
-            var fc = entity.GetComponent<FollowerComponent>();
+            var fc = entity.Get<FollowerComponent>();
 
             for (int i = 0; i < fc.FollowerIds.Count; i++)
             {
@@ -130,15 +130,15 @@ namespace OpenBreed.Core.Systems
                 if (follower == null)
                     continue;
 
-                follower.PostCommand(new AddEntityCommand(World.Id, follower.Id));
+                follower.Core.Commands.Post(new AddEntityCommand(World.Id, follower.Id));
             }
         }
 
-        protected override void OnRemoveEntity(IEntity entity)
+        protected override void OnRemoveEntity(Entity entity)
         {
             entities.Remove(entity);
 
-            var fc = entity.GetComponent<FollowerComponent>();
+            var fc = entity.Get<FollowerComponent>();
 
             for (int i = 0; i < fc.FollowerIds.Count; i++)
             {
@@ -147,7 +147,7 @@ namespace OpenBreed.Core.Systems
                 if (follower == null)
                     continue;
 
-                follower.PostCommand(new RemoveEntityCommand(World.Id, follower.Id));
+                follower.Core.Commands.Post(new RemoveEntityCommand(World.Id, follower.Id));
             }
         }
 
@@ -158,7 +158,7 @@ namespace OpenBreed.Core.Systems
         private bool HandleFollowedAddFollowerCommand(FollowedAddFollowerCommand cmd)
         {
             var entity = Core.Entities.GetById(cmd.EntityId);
-            var fc = entity.GetComponent<FollowerComponent>();
+            var fc = entity.Get<FollowerComponent>();
             fc.FollowerIds.Add(cmd.FollowerEntityId);
             return true;
         }

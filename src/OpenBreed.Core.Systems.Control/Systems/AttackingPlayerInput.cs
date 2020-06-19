@@ -29,13 +29,13 @@ namespace OpenBreed.Core.Systems.Control.Systems
 
             foreach (var entity in player.ControlledEntities)
             {
-                var control = entity.TryGetComponent<AttackControl>();
+                var control = entity.TryGet<AttackControl>();
 
                 if (control == null)
                     continue;
 
                 Console.WriteLine($"{player.Name} -> Attack({Primary},{Secondary})");
-                entity.PostCommand(new AttackControlCommand(entity.Id, entity, Primary, Secondary));
+                entity.Core.Commands.Post(new AttackControlCommand(entity.Id, entity, Primary, Secondary));
             }
 
             OldPrimary = Primary;

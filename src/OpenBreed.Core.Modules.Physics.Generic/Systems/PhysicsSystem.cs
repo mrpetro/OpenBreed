@@ -144,7 +144,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         #region Protected Methods
 
-        protected override void OnAddEntity(IEntity entity)
+        protected override void OnAddEntity(Entity entity)
         {
             if (entity.Components.Any(item => item is VelocityComponent))
                 RegisterDynamicEntity(entity);
@@ -152,7 +152,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 RegisterStaticEntity(entity);
         }
 
-        protected override void OnRemoveEntity(IEntity entity)
+        protected override void OnRemoveEntity(Entity entity)
         {
             if (entity.Components.Any(item => item is VelocityComponent))
                 UnregisterDynamicEntity(entity);
@@ -164,9 +164,9 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         #region Private Methods
 
-        private static Box2 GetAabb(IEntity entity)
+        private static Box2 GetAabb(Entity entity)
         {
-            var body = entity.GetComponent<BodyComponent>();
+            var body = entity.Get<BodyComponent>();
             return body.Aabb;
         }
 
@@ -421,7 +421,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             }
         }
 
-        private StaticPack RemoveFromGrid(IEntity entity)
+        private StaticPack RemoveFromGrid(Entity entity)
         {
             StaticPack result = null;
             var aabb = GetAabb(entity);
@@ -447,31 +447,31 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             return result;
         }
 
-        private void RegisterStaticEntity(IEntity entity)
+        private void RegisterStaticEntity(Entity entity)
         {
             var pack = new StaticPack(entity.Id,
-                                      entity.GetComponent<BodyComponent>(),
-                                      entity.GetComponent<PositionComponent>());
+                                      entity.Get<BodyComponent>(),
+                                      entity.Get<PositionComponent>());
 
             InsertToGrid(pack);
         }
 
-        private void UnregisterStaticEntity(IEntity entity)
+        private void UnregisterStaticEntity(Entity entity)
         {
             RemoveFromGrid(entity);
         }
 
-        private void RegisterDynamicEntity(IEntity entity)
+        private void RegisterDynamicEntity(Entity entity)
         {
             var pack = new DynamicPack(entity.Id,
-                                      entity.GetComponent<BodyComponent>(),
-                                      entity.GetComponent<PositionComponent>(),
-                                      entity.GetComponent<VelocityComponent>());
+                                      entity.Get<BodyComponent>(),
+                                      entity.Get<PositionComponent>(),
+                                      entity.Get<VelocityComponent>());
 
             activeDynamics.Add(pack);
         }
 
-        private void UnregisterDynamicEntity(IEntity entity)
+        private void UnregisterDynamicEntity(Entity entity)
         {
             var dynamic = activeDynamics.FirstOrDefault(item => item.EntityId == entity.Id);
 

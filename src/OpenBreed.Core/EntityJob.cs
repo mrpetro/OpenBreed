@@ -50,14 +50,14 @@ namespace OpenBreed.Core
     {
         #region Private Fields
 
-        private IEntity entity;
+        private Entity entity;
         private Action action;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public EntityJob(IEntity entity, Action action)
+        public EntityJob(Entity entity, Action action)
         {
             this.entity = entity;
             this.action = action;

@@ -18,15 +18,15 @@ namespace OpenBreed.Core.States
 
         #region Public Methods
 
-        void EnterState(IEntity entity, int stateId);
+        void EnterState(Entity entity, int stateId);
 
-        void LeaveState(IEntity entity, int stateId);
+        void LeaveState(Entity entity, int stateId);
 
         int GetNextStateId(int currentStateId, int impulseId, params object[] arguments);
 
-        void SetInitialState(IEntity entity, int initialStateId);
+        void SetInitialState(Entity entity, int initialStateId);
 
-        string GetCurrentStateName(IEntity entity);
+        string GetCurrentStateName(Entity entity);
 
         string GetStateName(int stateId);
 
@@ -51,7 +51,7 @@ namespace OpenBreed.Core.States
 
     //    #region Internal Constructors
 
-    //    internal StateMachine(IEntity entity)
+    //    internal StateMachine(Entity entity)
     //    {
     //        Entity = entity;
     //    }
@@ -64,7 +64,7 @@ namespace OpenBreed.Core.States
 
     //    public string CurrentStateName => currentState.Id.ToString();
 
-    //    public IEntity Entity { get; }
+    //    public Entity Entity { get; }
 
     //    public TState CurrentStateId { get { return currentState.Id; } }
 
@@ -332,21 +332,21 @@ namespace OpenBreed.Core.States
             toImpulses[toImpulse] = action;
         }
 
-        public void EnterState(IEntity entity, int stateId)
+        public void EnterState(Entity entity, int stateId)
         {
             states[(TState)(ValueType)stateId].EnterState(entity);
         }
 
-        public void LeaveState(IEntity entity, int stateId)
+        public void LeaveState(Entity entity, int stateId)
         {
             states[(TState)(ValueType)stateId].LeaveState(entity);
         }
 
-        public void SetInitialState(IEntity entity, int initialStateId)
+        public void SetInitialState(Entity entity, int initialStateId)
         {
             Debug.Assert(entity.Contains<FsmComponent>(), $"Entity is missing {nameof(FsmComponent)}");
 
-            var fsmComponent = entity.GetComponent<FsmComponent>();
+            var fsmComponent = entity.Get<FsmComponent>();
             Debug.Assert(fsmComponent != null, "Expecting entity containing FsmComponent when setting inital state.");
 
             var stateData = fsmComponent.States.FirstOrDefault(item => item.FsmId == Id);
@@ -361,9 +361,9 @@ namespace OpenBreed.Core.States
             //state.EnterState(entity);
         }
 
-        public string GetCurrentStateName(IEntity entity)
+        public string GetCurrentStateName(Entity entity)
         {
-            var fsmComponent = entity.GetComponent<FsmComponent>();
+            var fsmComponent = entity.Get<FsmComponent>();
             var stateData = fsmComponent.States.FirstOrDefault(item => item.FsmId == Id);
 
             return ((TState)(ValueType)stateData.StateId).ToString();

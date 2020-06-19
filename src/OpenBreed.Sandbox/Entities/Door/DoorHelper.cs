@@ -62,9 +62,9 @@ namespace OpenBreed.Sandbox.Entities.Door
             verticalDoorClosing.AddFrame(0, 1.0f);
         }
 
-        private static void OnFrameUpdate(IEntity entity, int nextValue)
+        private static void OnFrameUpdate(Entity entity, int nextValue)
         {
-            entity.PostCommand(new SpriteSetCommand(entity.Id, nextValue));
+            entity.Core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
         }
 
 
@@ -109,9 +109,9 @@ namespace OpenBreed.Sandbox.Entities.Door
 
             //var door = core.Entities.Create();
             var door = core.Entities.CreateFromTemplate("DoorVertical");
-            door.GetComponent<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
+            door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
 
-            world.PostCommand(new AddEntityCommand(world.Id, door.Id));
+            world.Core.Commands.Post(new AddEntityCommand(world.Id, door.Id));
             //world.AddEntity(door);
 
             //door.Subscribe<EntityEnteredWorldEventArgs>((s, a) =>
@@ -127,7 +127,7 @@ namespace OpenBreed.Sandbox.Entities.Door
             var core = world.Core;
 
             var door = core.Entities.CreateFromTemplate("DoorHorizontal");
-            door.GetComponent<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
+            door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
 
             //var doorFsm = world.Core.StateMachines.GetByName("Door.Functioning");
             //doorFsm.SetInitialState(door, (int)FunctioningState.Closed);
@@ -137,7 +137,7 @@ namespace OpenBreed.Sandbox.Entities.Door
             //    door.PostCommand(new SetStateCommand(door.Id, doorSm.Id, FunctioningState.Closed));
             //});
 
-            world.PostCommand(new AddEntityCommand(world.Id, door.Id));
+            world.Core.Commands.Post(new AddEntityCommand(world.Id, door.Id));
             //world.AddEntity(door);
 
 

@@ -75,7 +75,7 @@ namespace OpenBreed.Sandbox.Worlds
             cameraBuilder.SetFov(world.Core.ClientRectangle.Width, world.Core.ClientRectangle.Height);
             var hudCamera = cameraBuilder.Build();
             hudCamera.Tag = "HudCamera";
-            world.PostCommand(new AddEntityCommand(world.Id, hudCamera.Id));
+            world.Core.Commands.Post(new AddEntityCommand(world.Id, hudCamera.Id));
 
             var caret = TextHelper.CreateText(world);
             ((Program)world.Core).KeyDown += (s, a) => ProcessKey(caret, a);
@@ -84,19 +84,19 @@ namespace OpenBreed.Sandbox.Worlds
             //caret.Subscribe<TextCaretPositionChanged>(OnTextCaretPositionChanged);
             //caret.Subscribe<TextDataChanged>(OnTextDataChanged);
 
-            world.PostCommand(new AddEntityCommand(world.Id, caret.Id));
+            world.Core.Commands.Post(new AddEntityCommand(world.Id, caret.Id));
 
 
             var hudViewport = world.Core.Entities.GetByTag(ScreenWorldHelper.TEXT_VIEWPORT).First();
-            hudViewport.GetComponent<ViewportComponent>().CameraEntityId = hudCamera.Id;
+            hudViewport.Get<ViewportComponent>().CameraEntityId = hudCamera.Id;
 
             hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateCameraFov(hudCamera, a));
         }
 
         private static void OnTextCaretPositionChanged(object sender, TextCaretPositionChanged e)
         {
-            var entity = sender as IEntity;
-            var dataCmp = entity.GetComponent<TextDataComponent>();
+            var entity = sender as Entity;
+            var dataCmp = entity.Get<TextDataComponent>();
 
             Console.Clear();
 
@@ -108,9 +108,9 @@ namespace OpenBreed.Sandbox.Worlds
 
         private static void OnTextDataChanged(object sender, TextDataChanged e)
         {
-            var entity = sender as IEntity;
+            var entity = sender as Entity;
 
-            var caretCmp = entity.GetComponent<TextCaretComponent>();
+            var caretCmp = entity.Get<TextCaretComponent>();
 
             Console.Clear();
 
@@ -120,32 +120,32 @@ namespace OpenBreed.Sandbox.Worlds
             Console.WriteLine($"{caretCmp.Position}: {text}");
         }
 
-        private static void AddChar(IEntity caret, KeyPressEventArgs a)
+        private static void AddChar(Entity caret, KeyPressEventArgs a)
         {
-            caret.PostCommand(new TextDataInsert(caret.Id, a.KeyChar.ToString()));
+            caret.Core.Commands.Post(new TextDataInsert(caret.Id, a.KeyChar.ToString()));
         }
 
-        private static void ProcessKey(IEntity entity, KeyboardKeyEventArgs a)
+        private static void ProcessKey(Entity entity, KeyboardKeyEventArgs a)
         {
-            var caretCmp = entity.GetComponent<TextCaretComponent>();
+            var caretCmp = entity.Get<TextCaretComponent>();
 
             switch (a.Key)
             {
                 case Key.Left:
-                    entity.PostCommand(new TextCaretSetPosition(entity.Id, caretCmp.Position - 1));
+                    entity.Core.Commands.Post(new TextCaretSetPosition(entity.Id, caretCmp.Position - 1));
                     break;
                 case Key.Right:
-                    entity.PostCommand(new TextCaretSetPosition(entity.Id, caretCmp.Position + 1));
+                    entity.Core.Commands.Post(new TextCaretSetPosition(entity.Id, caretCmp.Position + 1));
                     break;
                 case Key.Enter:
-                    entity.PostCommand(new TextDataInsert(entity.Id, "\r\n"));
+                    entity.Core.Commands.Post(new TextDataInsert(entity.Id, "\r\n"));
                     break;
                 default:
                     break;
             }
 
             if(a.Key == Key.BackSpace)
-                entity.PostCommand(new TextDataBackspace(entity.Id));
+                entity.Core.Commands.Post(new TextDataBackspace(entity.Id));
         }
 
         private static char KeyToChar(KeyboardKeyEventArgs e)
@@ -178,10 +178,10 @@ namespace OpenBreed.Sandbox.Worlds
             return '\0';
         }
 
-        private static void UpdateCameraFov(IEntity cameraEntity, ViewportResizedEventArgs a)
+        private static void UpdateCameraFov(Entity cameraEntity, ViewportResizedEventArgs a)
         {
-            cameraEntity.GetComponent<CameraComponent>().Width = a.Width;
-            cameraEntity.GetComponent<CameraComponent>().Height = a.Height;
+            cameraEntity.Get<CameraComponent>().Width = a.Width;
+            cameraEntity.Get<CameraComponent>().Height = a.Height;
         }
 
         #endregion Private Methods

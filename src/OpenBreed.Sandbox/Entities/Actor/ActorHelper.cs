@@ -26,9 +26,9 @@ namespace OpenBreed.Sandbox.Entities.Actor
 {
     public static class ActorHelper
     {
-        private static void OnFrameUpdate(IEntity entity, int nextValue)
+        private static void OnFrameUpdate(Entity entity, int nextValue)
         {
-            entity.PostCommand(new SpriteSetCommand(entity.Id, nextValue));
+            entity.Core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
         }
 
         public static void CreateAnimations(ICore core)
@@ -100,7 +100,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             animationWalkingUpRight.AddFrame(39, 1.0f);
         }
 
-        public static IEntity CreateActor(ICore core, Vector2 pos)
+        public static Entity CreateActor(ICore core, Vector2 pos)
         {
             //var actor = core.Entities.Create();
 
@@ -110,7 +110,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
             //actor.Add(AxisAlignedBoxShape.Create(0, 0, 32, 32));
             actor.Add(new FollowerComponent());
-            actor.GetComponent<PositionComponent>().Value = pos;
+            actor.Get<PositionComponent>().Value = pos;
 
             actor.Subscribe<CollisionEventArgs>(OnCollision);
 
@@ -119,8 +119,8 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         private static void OnCollision(object sender, CollisionEventArgs args)
         {
-            var entity = (IEntity)sender;
-            var body = args.Entity.TryGetComponent<BodyComponent>();
+            var entity = (Entity)sender;
+            var body = args.Entity.TryGet<BodyComponent>();
 
             var type = body.Tag;
 

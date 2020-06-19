@@ -68,16 +68,16 @@ namespace OpenBreed.Core.Systems
             }
         }
 
-        private void Update(IEntity entity, float dt)
+        private void Update(Entity entity, float dt)
         {
-            var tc = entity.GetComponent<TimerComponent>();
+            var tc = entity.Get<TimerComponent>();
 
             //Update all timers with delta time
             for (int i = 0; i < tc.Items.Count; i++)
                 UpdateTimer(entity, tc.Items[i], dt);
         }
 
-        private void UpdateTimer(IEntity entity, TimerData timerData, float dt)
+        private void UpdateTimer(Entity entity, TimerData timerData, float dt)
         {
             if (!timerData.Enabled)
                 return;
@@ -94,12 +94,12 @@ namespace OpenBreed.Core.Systems
             RaiseTimerElapsedEvent(entity, timerData);
         }
 
-        private void RaiseTimerUpdateEvent(IEntity entity, TimerData timerData)
+        private void RaiseTimerUpdateEvent(Entity entity, TimerData timerData)
         {
             entity.RaiseEvent(new TimerUpdateEventArgs(timerData.TimerId));
         }
 
-        private void RaiseTimerElapsedEvent(IEntity entity, TimerData timerData)
+        private void RaiseTimerElapsedEvent(Entity entity, TimerData timerData)
         {
             entity.RaiseEvent(new TimerElapsedEventArgs(timerData.TimerId));
         }
@@ -123,12 +123,12 @@ namespace OpenBreed.Core.Systems
 
         #region Protected Methods
 
-        protected override void OnAddEntity(IEntity entity)
+        protected override void OnAddEntity(Entity entity)
         {
             entities.Add(entity.Id);
         }
 
-        protected override void OnRemoveEntity(IEntity entity)
+        protected override void OnRemoveEntity(Entity entity)
         {
             var index = entities.IndexOf(entity.Id);
 
@@ -146,7 +146,7 @@ namespace OpenBreed.Core.Systems
         {
             var entity = Core.Entities.GetById(cmd.EntityId);
 
-            var timerComponent = entity.GetComponent<TimerComponent>();
+            var timerComponent = entity.Get<TimerComponent>();
 
             if (timerComponent == null)
             {
@@ -173,7 +173,7 @@ namespace OpenBreed.Core.Systems
         {
             var entity = Core.Entities.GetById(cmd.EntityId);
 
-            var timerComponent = entity.GetComponent<TimerComponent>();
+            var timerComponent = entity.Get<TimerComponent>();
 
             if (timerComponent == null)
             {

@@ -11,7 +11,7 @@ namespace OpenBreed.Core.Modules.Physics.Events
     {
         #region Public Constructors
 
-        public CollisionEventArgs(IEntity entity, Vector2 projection)
+        public CollisionEventArgs(Entity entity, Vector2 projection)
         {
             Entity = entity;
             Projection = projection;
@@ -21,7 +21,7 @@ namespace OpenBreed.Core.Modules.Physics.Events
 
         #region Public Properties
 
-        public IEntity Entity { get; }
+        public Entity Entity { get; }
 
         public Vector2 Projection { get; }
 

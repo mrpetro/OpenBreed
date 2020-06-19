@@ -22,7 +22,7 @@ namespace OpenBreed.Sandbox.Entities
         {
         }
 
-        public static IEntity CreateText(World world)
+        public static Entity CreateText(World world)
         {
             var e = world.Core.Entities.Create();
             e.Add(new TextCaretComponent());

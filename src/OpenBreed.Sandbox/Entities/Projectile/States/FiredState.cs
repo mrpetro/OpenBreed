@@ -36,22 +36,22 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
 
         #region Public Methods
 
-        public void EnterState(IEntity entity)
+        public void EnterState(Entity entity)
         {
-            var direction = entity.GetComponent<VelocityComponent>().Value;
+            var direction = entity.Get<VelocityComponent>().Value;
 
             var animDirName = AnimHelper.ToDirectionName(direction);
 
-            entity.PostCommand(new PlayAnimCommand(entity.Id, animPrefix + animDirName, 0));
-            entity.PostCommand(new TextSetCommand(entity.Id, 0, "Projectile - Fired"));
+            entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, animPrefix + animDirName, 0));
+            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, "Projectile - Fired"));
             entity.Subscribe<CollisionEventArgs>(OnCollision);
         }
 
-        public void Initialize(IEntity entity)
+        public void Initialize(Entity entity)
         {
         }
 
-        public void LeaveState(IEntity entity)
+        public void LeaveState(Entity entity)
         {
         }
 

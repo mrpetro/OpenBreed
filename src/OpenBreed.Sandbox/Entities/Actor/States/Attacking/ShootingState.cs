@@ -31,25 +31,25 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 
         #region Public Methods
 
-        public void EnterState(IEntity entity)
+        public void EnterState(Entity entity)
         {
             //Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
             var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
-            entity.PostCommand(new TextSetCommand(entity.Id, 0, string.Join(", ", currentStateNames.ToArray())));
+            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, string.Join(", ", currentStateNames.ToArray())));
 
-            var pos = entity.GetComponent<PositionComponent>().Value;
+            var pos = entity.Get<PositionComponent>().Value;
             pos += new Vector2(8,8);
-            var direction = entity.GetComponent<DirectionComponent>().Value;
+            var direction = entity.Get<DirectionComponent>().Value;
             direction.Normalize();
             direction *= 500.0f;
             ProjectileHelper.AddProjectile(entity.Core, entity.World, pos.X, pos.Y, direction.X, direction.Y);
 
             //Entity.Impulse<AttackingState, AttackingImpulse>(AttackingImpulse.Wait);
             //entity.PostCommand(new EntitySetStateCommand(entity.Id, "AttackingState", "Wait"));
-            entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Wait));
+            entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Wait));
         }
 
-        public void LeaveState(IEntity entity)
+        public void LeaveState(Entity entity)
         {
             //Entity.Unsubscribe(ControlFireChangedEvent.TYPE, OnControlFireChanged);
         }

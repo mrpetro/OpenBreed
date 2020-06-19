@@ -18,8 +18,8 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
     {
         #region Private Fields
 
-        private readonly List<IEntity> inactive = new List<IEntity>();
-        private readonly List<IEntity> active = new List<IEntity>();
+        private readonly List<Entity> inactive = new List<Entity>();
+        private readonly List<Entity> active = new List<Entity>();
         private CommandHandler cmdHandler;
 
         #endregion Private Fields
@@ -93,12 +93,12 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Protected Methods
 
-        protected override void OnAddEntity(IEntity entity)
+        protected override void OnAddEntity(Entity entity)
         {
             active.Add(entity);
         }
 
-        protected override void OnRemoveEntity(IEntity entity)
+        protected override void OnRemoveEntity(Entity entity)
         {
             active.Remove(entity);
         }
@@ -111,10 +111,10 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// Draw this sprite to given viewport
         /// </summary>
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
-        private void RenderSprite(IEntity entity, Box2 clipBox)
+        private void RenderSprite(Entity entity, Box2 clipBox)
         {
-            var pos = entity.GetComponent<PositionComponent>();
-            var spc = entity.GetComponent<SpriteComponent>();
+            var pos = entity.Get<PositionComponent>();
+            var spc = entity.Get<SpriteComponent>();
             var atlas = Core.Rendering.Sprites.GetById(spc.AtlasId);
 
             //Test viewport for clippling here
@@ -159,7 +159,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             if (toModify == null)
                 return false;
 
-            var sprite = toModify.GetComponent<SpriteComponent>();
+            var sprite = toModify.Get<SpriteComponent>();
             sprite.ImageId = cmd.ImageId;
 
             return true;

@@ -19,7 +19,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
     {
         #region Private Fields
 
-        private readonly List<IEntity> entities = new List<IEntity>();
+        private readonly List<Entity> entities = new List<Entity>();
         private CommandHandler cmdHandler;
 
         #endregion Private Fields
@@ -85,12 +85,12 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Protected Methods
 
-        protected override void OnAddEntity(IEntity entity)
+        protected override void OnAddEntity(Entity entity)
         {
             entities.Add(entity);
         }
 
-        protected override void OnRemoveEntity(IEntity entity)
+        protected override void OnRemoveEntity(Entity entity)
         {
             entities.Remove(entity);
         }
@@ -99,10 +99,10 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Methods
 
-        private void RenderText(IEntity entity, Box2 clipBox)
+        private void RenderText(Entity entity, Box2 clipBox)
         {
-            var pos = entity.GetComponent<PositionComponent>();
-            var tcp = entity.GetComponent<TextComponent>();
+            var pos = entity.Get<PositionComponent>();
+            var tcp = entity.Get<TextComponent>();
 
             GL.Enable(EnableCap.Texture2D);
             GL.PushMatrix();
@@ -126,7 +126,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             if (toModify == null)
                 return false;
 
-            var text = toModify.GetComponent<TextComponent>();
+            var text = toModify.Get<TextComponent>();
 
             if (cmd.PartId < 0 || cmd.PartId >= text.Parts.Count)
             {

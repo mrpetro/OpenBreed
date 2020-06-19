@@ -73,14 +73,14 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             }
         }
 
-        public void Set(IEntity entity, Animator animator, int animId = -1, float startPosition = 0.0f)
+        public void Set(Entity entity, Animator animator, int animId = -1, float startPosition = 0.0f)
         {
             animator.AnimId = animId;
             animator.Position = startPosition;
             animator.Paused = false;
         }
 
-        public void Play(IEntity entity, Animator animator, int animId = -1, float startPosition = 0.0f)
+        public void Play(Entity entity, Animator animator, int animId = -1, float startPosition = 0.0f)
         {
             if (animId != -1)
                 animator.AnimId = animId;
@@ -90,12 +90,12 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             animator.Paused = false;
         }
 
-        public void Pause(IEntity entity, Animator animator)
+        public void Pause(Entity entity, Animator animator)
         {
             animator.Paused = true;
         }
 
-        public void Stop(IEntity entity, Animator animator)
+        public void Stop(Entity entity, Animator animator)
         {
             animator.Position = 0.0f;
             animator.Paused = true;
@@ -127,12 +127,12 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         #region Protected Methods
 
-        protected override void OnAddEntity(IEntity entity)
+        protected override void OnAddEntity(Entity entity)
         {
             entities.Add(entity.Id);
         }
 
-        protected override void OnRemoveEntity(IEntity entity)
+        protected override void OnRemoveEntity(Entity entity)
         {
             var index = entities.IndexOf(entity.Id);
 
@@ -146,16 +146,16 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         #region Private Methods
 
-        private void Animate(IEntity entity, float dt)
+        private void Animate(Entity entity, float dt)
         {
-            var ac = entity.GetComponent<AnimationComponent>();
+            var ac = entity.Get<AnimationComponent>();
 
             //Update all animators with delta time
             for (int i = 0; i < ac.Items.Count; i++)
                 UpdateAnimator(entity, ac.Items[i], dt);
         }
 
-        private void UpdateAnimator(IEntity entity, Animator animator, float dt)
+        private void UpdateAnimator(Entity entity, Animator animator, float dt)
         {
             if (animator.Paused)
                 return;
@@ -187,12 +187,12 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             }
         }
 
-        private void RaiseAnimStoppedEvent(IEntity entity, Animator animator)
+        private void RaiseAnimStoppedEvent(Entity entity, Animator animator)
         {
             entity.RaiseEvent(new AnimStoppedEventArgs(animator));
         }
 
-        private void RaiseAnimChangedEvent(IEntity entity, Animator animator)
+        private void RaiseAnimChangedEvent(Entity entity, Animator animator)
         {
             entity.RaiseEvent(new AnimChangedEventArgs(animator.Frame));
         }
@@ -200,7 +200,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
         private bool HandlePauseAnimCommand(PauseAnimCommand cmd)
         {
             var entity = Core.Entities.GetById(cmd.EntityId);
-            var ac = entity.GetComponent<AnimationComponent>();
+            var ac = entity.Get<AnimationComponent>();
             var animator = ac.Items[cmd.AnimatorId];
 
             Pause(entity, animator);
@@ -211,7 +211,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
         private bool HandleStopAnimCommand(StopAnimCommand cmd)
         {
             var entity = Core.Entities.GetById(cmd.EntityId);
-            var ac = entity.GetComponent<AnimationComponent>();
+            var ac = entity.Get<AnimationComponent>();
             var animator = ac.Items[cmd.AnimatorId];
 
             Stop(entity, animator);
@@ -222,7 +222,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
         private bool HandleSetAnimCommand(SetAnimCommand cmd)
         {
             var entity = Core.Entities.GetById(cmd.EntityId);
-            var ac = entity.GetComponent<AnimationComponent>();
+            var ac = entity.Get<AnimationComponent>();
 
             var animData = Core.Animations.GetByName(cmd.Id);
 
@@ -237,7 +237,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
         private bool HandlePlayAnimCommand(PlayAnimCommand cmd)
         {
             var entity = Core.Entities.GetById(cmd.EntityId);
-            var ac = entity.GetComponent<AnimationComponent>();
+            var ac = entity.Get<AnimationComponent>();
             var animator = ac.Items[cmd.AnimatorId];
 
             int animId = -1;

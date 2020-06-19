@@ -22,9 +22,9 @@ namespace OpenBreed.Sandbox.Entities.Button
 
             var button = core.Entities.CreateFromTemplate("Button");
 
-            button.GetComponent<PositionComponent>().Value = new Vector2(0, 0);
+            button.Get<PositionComponent>().Value = new Vector2(0, 0);
 
-            world.PostCommand(new AddEntityCommand(world.Id, button.Id));
+            world.Core.Commands.Post(new AddEntityCommand(world.Id, button.Id));
             //world.AddEntity(button);
         }
 

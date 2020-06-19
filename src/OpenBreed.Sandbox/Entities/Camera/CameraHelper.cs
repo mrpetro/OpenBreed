@@ -33,9 +33,9 @@ namespace OpenBreed.Sandbox.Entities.Camera
             cameraEffectFadeIn.AddFrame(1.0f, 10.0f);
         }
 
-        private static void OnFrameUpdate(IEntity entity, float nextValue)
+        private static void OnFrameUpdate(Entity entity, float nextValue)
         {
-            var cameraCmp = entity.GetComponent<CameraComponent>();
+            var cameraCmp = entity.Get<CameraComponent>();
             cameraCmp.Brightness = nextValue;
         }
     }

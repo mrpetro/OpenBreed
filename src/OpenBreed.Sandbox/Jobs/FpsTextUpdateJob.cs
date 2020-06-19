@@ -13,13 +13,13 @@ namespace OpenBreed.Sandbox.Jobs
     {
         #region Private Fields
 
-        private IEntity entity;
+        private Entity entity;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public FpsTextUpdateJob(IEntity entity)
+        public FpsTextUpdateJob(Entity entity)
         {
             this.entity = entity;
         }
@@ -41,7 +41,7 @@ namespace OpenBreed.Sandbox.Jobs
 
         public void Update(float dt)
         {
-            entity.PostCommand(new TextSetCommand(entity.Id, 0, $"FPS: {entity.Core.Rendering.Fps.ToString("0.00")}"));
+            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, $"FPS: {entity.Core.Rendering.Fps.ToString("0.00")}"));
         }
 
         public void Dispose()

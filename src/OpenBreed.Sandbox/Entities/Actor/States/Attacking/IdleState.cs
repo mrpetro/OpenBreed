@@ -24,25 +24,25 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         public int Id => (int)AttackingState.Idle;
         public int FsmId { get; set; }
 
-        public void EnterState(IEntity entity)
+        public void EnterState(Entity entity)
         {
             var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
-            entity.PostCommand(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
+            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
             entity.Subscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
         }
 
-        public void LeaveState(IEntity entity)
+        public void LeaveState(Entity entity)
         {
             entity.Unsubscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
         }
 
         private void OnControlFireChanged(object sender, ControlFireChangedEvenrArgs eventArgs)
         {
-            var entity = sender as IEntity;
+            var entity = sender as Entity;
 
             if (eventArgs.Fire)
-                entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Shoot));
+                entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Shoot));
         }
 
     }

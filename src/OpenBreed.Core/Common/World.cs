@@ -30,9 +30,9 @@ namespace OpenBreed.Core.Common
 
         #region Private Fields
 
-        private readonly List<IEntity> entities = new List<IEntity>();
-        private readonly List<IEntity> toAdd = new List<IEntity>();
-        private readonly List<IEntity> toRemove = new List<IEntity>();
+        private readonly List<Entity> entities = new List<Entity>();
+        private readonly List<Entity> toAdd = new List<Entity>();
+        private readonly List<Entity> toRemove = new List<Entity>();
         private readonly List<IWorldSystem> systems = new List<IWorldSystem>();
 
         private float timeMultiplier = 1.0f;
@@ -49,7 +49,7 @@ namespace OpenBreed.Core.Common
             Core = builder.core;
             Name = builder.name;
 
-            Entities = new ReadOnlyCollection<IEntity>(entities);
+            Entities = new ReadOnlyCollection<Entity>(entities);
 
             systems = builder.systems;
             Systems = new ReadOnlyCollection<IWorldSystem>(systems);
@@ -93,7 +93,7 @@ namespace OpenBreed.Core.Common
 
         public ICore Core { get; }
 
-        public ReadOnlyCollection<IEntity> Entities { get; }
+        public ReadOnlyCollection<Entity> Entities { get; }
 
         public ReadOnlyCollection<IWorldSystem> Systems { get; }
 
@@ -116,11 +116,6 @@ namespace OpenBreed.Core.Common
         public override string ToString()
         {
             return $"World:{Name}";
-        }
-
-        public void PostCommand(ICommand command)
-        {
-            Core.Commands.Post(command);
         }
 
         public bool ExecuteCommand(ICommand cmd)
@@ -158,7 +153,7 @@ namespace OpenBreed.Core.Common
         /// An exception will be thrown if given entity already exists in world
         /// </summary>
         /// <param name="entity">Entity to be added to this world</param>
-        public void AddEntity(IEntity entity)
+        public void AddEntity(Entity entity)
         {
             if (entity.World != null)
                 throw new InvalidOperationException("Entity can't exist in more than one world.");
@@ -172,7 +167,7 @@ namespace OpenBreed.Core.Common
         /// An exception will be thrown if given entity does not exist in this world.
         /// </summary>
         /// <param name="entity">Entity to be removed from this world</param>
-        public void RemoveEntity(IEntity entity)
+        public void RemoveEntity(Entity entity)
         {
             if (entity.World != this)
                 throw new InvalidOperationException("Entity doesn't exist in this world");
@@ -239,7 +234,7 @@ namespace OpenBreed.Core.Common
 
         #region Private Methods
 
-        private void DeinitializeEntity(IEntity entity)
+        private void DeinitializeEntity(Entity entity)
         {
             ((Entity)entity).World = null;
             entities.Remove(entity);
@@ -247,7 +242,7 @@ namespace OpenBreed.Core.Common
             OnEntityRemoved(entity);
         }
 
-        private void InitializeEntity(IEntity entity)
+        private void InitializeEntity(Entity entity)
         {
             entities.Add(entity);
             ((Entity)entity).World = this;
@@ -255,12 +250,12 @@ namespace OpenBreed.Core.Common
             OnEntityAdded(entity);
         }
 
-        private void OnEntityAdded(IEntity entity)
+        private void OnEntityAdded(Entity entity)
         {
             Core.Worlds.RaiseEvent(new EntityAddedEventArgs(Id, entity.Id));
         }
 
-        private void OnEntityRemoved(IEntity entity)
+        private void OnEntityRemoved(Entity entity)
         {
             Core.Worlds.RaiseEvent(new EntityRemovedEventArgs(Id, entity.Id));
         }
@@ -271,7 +266,7 @@ namespace OpenBreed.Core.Common
                 systems[i].Initialize(this);
         }
 
-        private void AddEntityToSystems(IEntity entity)
+        private void AddEntityToSystems(Entity entity)
         {
             foreach (var system in systems)
             {
@@ -280,7 +275,7 @@ namespace OpenBreed.Core.Common
             }
         }
 
-        private void RemoveEntityFromSystems(IEntity entity)
+        private void RemoveEntityFromSystems(Entity entity)
         {
             foreach (var system in systems)
             {

@@ -14,7 +14,7 @@ namespace OpenBreed.Core.Systems
     {
         #region Private Fields
 
-        private readonly List<IEntity> entities = new List<IEntity>();
+        private readonly List<Entity> entities = new List<Entity>();
 
         private readonly CommandHandler cmdHandler;
 
@@ -65,7 +65,7 @@ namespace OpenBreed.Core.Systems
 
         #region Protected Methods
 
-        protected override void OnAddEntity(IEntity entity)
+        protected override void OnAddEntity(Entity entity)
         {
             entities.Add(entity);
 
@@ -74,7 +74,7 @@ namespace OpenBreed.Core.Systems
             //entity.Subscribe<EntityEnteredWorldEventArgs>(OnEntityEnteredWorld);
         }
 
-        protected override void OnRemoveEntity(IEntity entity)
+        protected override void OnRemoveEntity(Entity entity)
         {
             //World.Unsubscribe<EntityAddedEventArgs>(OnEntityEnteredWorld);
             //entity.Unsubscribe<EntityEnteredWorldEventArgs>(OnEntityEnteredWorld);
@@ -91,17 +91,17 @@ namespace OpenBreed.Core.Systems
 
         #region Private Methods
 
-        private void InitializeComponent(IEntity entity)
+        private void InitializeComponent(Entity entity)
         {
-            var fsmComponent = entity.GetComponent<FsmComponent>();
+            var fsmComponent = entity.Get<FsmComponent>();
 
             foreach (var state in fsmComponent.States)
                 Core.StateMachines.EnterState(entity, state);
         }
 
-        private void DeinitializeComponent(IEntity entity)
+        private void DeinitializeComponent(Entity entity)
         {
-            var fsmComponent = entity.GetComponent<FsmComponent>();
+            var fsmComponent = entity.Get<FsmComponent>();
 
             foreach (var state in fsmComponent.States)
                 Core.StateMachines.EnterState(entity, state);
@@ -111,7 +111,7 @@ namespace OpenBreed.Core.Systems
         {
             var entity = Core.Entities.GetById(message.EntityId);
 
-            var fsmComponent = entity.GetComponent<FsmComponent>();
+            var fsmComponent = entity.Get<FsmComponent>();
 
             if (fsmComponent == null)
             {

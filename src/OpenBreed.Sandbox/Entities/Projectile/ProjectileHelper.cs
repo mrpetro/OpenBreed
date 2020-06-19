@@ -43,15 +43,15 @@ namespace OpenBreed.Sandbox.Entities.Projectile
             laserUR.AddFrame(7, 2.0f);
         }
 
-        private static void OnFrameUpdate(IEntity entity, int nextValue)
+        private static void OnFrameUpdate(Entity entity, int nextValue)
         {
-            entity.PostCommand(new SpriteSetCommand(entity.Id, nextValue));
+            entity.Core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
         }
 
         private static void OnCollision(object sender, CollisionEventArgs args)
         {
-            var entity = (IEntity)sender;
-            var body = args.Entity.TryGetComponent<BodyComponent>();
+            var entity = (Entity)sender;
+            var body = args.Entity.TryGet<BodyComponent>();
 
             var type = body.Tag;
 
@@ -70,14 +70,14 @@ namespace OpenBreed.Sandbox.Entities.Projectile
             var projectile = core.Entities.CreateFromTemplate("Projectile");
             //projectile.Add(new FsmComponent());
 
-            projectile.GetComponent<PositionComponent>().Value = new Vector2(x, y);
-            projectile.GetComponent<VelocityComponent>().Value = new Vector2(vx, vy);
+            projectile.Get<PositionComponent>().Value = new Vector2(x, y);
+            projectile.Get<VelocityComponent>().Value = new Vector2(vx, vy);
 
             projectile.Subscribe<CollisionEventArgs>(OnCollision);
 
             //var projectileFsm = core.StateMachines.GetByName("Projectile");
             //projectileFsm.SetInitialState(projectile, (int)AttackingState.Fired);
-            world.PostCommand(new AddEntityCommand(world.Id, projectile.Id));
+            world.Core.Commands.Post(new AddEntityCommand(world.Id, projectile.Id));
             //world.AddEntity(projectile);
 
         }

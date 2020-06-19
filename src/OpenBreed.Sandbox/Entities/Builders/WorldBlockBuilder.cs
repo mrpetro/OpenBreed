@@ -58,7 +58,7 @@ namespace OpenBreed.Sandbox.Entities.Builders
 
         public bool HasBody { get; set; }
 
-        public override IEntity Build()
+        public override Entity Build()
         {
             var entity = Core.Entities.Create();
 

@@ -12,8 +12,8 @@ namespace OpenBreed.Core.Systems
     {
         #region Private Fields
 
-        private readonly List<IEntity> toAdd = new List<IEntity>();
-        private readonly List<IEntity> toRemove = new List<IEntity>();
+        private readonly List<Entity> toAdd = new List<Entity>();
+        private readonly List<Entity> toRemove = new List<Entity>();
 
         private readonly List<Type> requiredComponentTypes = new List<Type>();
 
@@ -67,7 +67,7 @@ namespace OpenBreed.Core.Systems
             World = null;
         }
 
-        public bool Matches(IEntity entity)
+        public bool Matches(Entity entity)
         {
             foreach (var type in requiredComponentTypes)
             {
@@ -78,12 +78,12 @@ namespace OpenBreed.Core.Systems
             return true;
         }
 
-        public void AddEntity(IEntity entity)
+        public void AddEntity(Entity entity)
         {
             toAdd.Add(entity);
         }
 
-        public void RemoveEntity(IEntity entity)
+        public void RemoveEntity(Entity entity)
         {
             toRemove.Add(entity);
         }
@@ -118,9 +118,9 @@ namespace OpenBreed.Core.Systems
 
         #region Protected Methods
 
-        protected abstract void OnRemoveEntity(IEntity entity);
+        protected abstract void OnRemoveEntity(Entity entity);
 
-        protected abstract void OnAddEntity(IEntity entity);
+        protected abstract void OnAddEntity(Entity entity);
 
         protected int Require<C>() where C : IEntityComponent
         {

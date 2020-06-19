@@ -32,11 +32,11 @@ namespace OpenBreed.Core.Systems
         /// </summary>
         void Deinitialize();
 
-        bool Matches(IEntity entity);
+        bool Matches(Entity entity);
 
-        void AddEntity(IEntity entity);
+        void AddEntity(Entity entity);
 
-        void RemoveEntity(IEntity entity);
+        void RemoveEntity(Entity entity);
 
         /// <summary>
         /// Handle given command

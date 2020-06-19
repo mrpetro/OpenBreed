@@ -45,29 +45,29 @@ namespace OpenBreed.Sandbox.Components.States
 
         #region Public Methods
 
-        public void EnterState(IEntity entity)
+        public void EnterState(Entity entity)
         {
-            entity.PostCommand(new SpriteOnCommand(entity.Id));
-            entity.PostCommand(new BodyOnCommand(entity.Id));
+            entity.Core.Commands.Post(new SpriteOnCommand(entity.Id));
+            entity.Core.Commands.Post(new BodyOnCommand(entity.Id));
 
-            var className = entity.GetComponent<ClassComponent>().Name;
+            var className = entity.Get<ClassComponent>().Name;
             var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
-            entity.PostCommand(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{stateName}", 0));
+            entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{stateName}", 0));
 
 
-            entity.PostCommand(new TextSetCommand(entity.Id, 0, "Door - Closing"));
+            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, "Door - Closing"));
             entity.Subscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
 
-        public void LeaveState(IEntity entity)
+        public void LeaveState(Entity entity)
         {
             entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
 
         private void OnAnimStopped(object sender, AnimStoppedEventArgs e)
         {
-            var entity = sender as IEntity;
-            entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)FunctioningImpulse.StopClosing));
+            var entity = sender as Entity;
+            entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)FunctioningImpulse.StopClosing));
         }
 
         #endregion Public Methods

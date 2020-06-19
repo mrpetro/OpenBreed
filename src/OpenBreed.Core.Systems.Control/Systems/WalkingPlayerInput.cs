@@ -29,13 +29,13 @@ namespace OpenBreed.Core.Systems.Control.Systems
 
             foreach (var entity in player.ControlledEntities)
             {
-                var control = entity.TryGetComponent<WalkingControl>();
+                var control = entity.TryGet<WalkingControl>();
 
                 if (control == null)
                     continue;
 
                 Console.WriteLine($"{player.Name} -> Walk({AxisX},{AxisY})");
-                entity.PostCommand(new WalkingControlCommand(entity.Id, new OpenTK.Vector2(AxisX, AxisY)));
+                entity.Core.Commands.Post(new WalkingControlCommand(entity.Id, new OpenTK.Vector2(AxisX, AxisY)));
             }
 
             OldAxisX = AxisX;

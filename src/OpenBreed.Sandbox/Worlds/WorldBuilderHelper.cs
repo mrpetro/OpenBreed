@@ -87,10 +87,10 @@ namespace OpenBreed.Sandbox.Worlds
 
             var vp = ScreenWorldHelper.CreateViewportEntity(core, $"TV{pairCode}" , x * 16, y * 16, viewportData.Width, viewportData.Height, true);
 
-            vp.GetComponent<ViewportComponent>().CameraEntityId = core.Entities.GetByTag(viewportData.CameraName).FirstOrDefault().Id;
-            vp.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
+            vp.Get<ViewportComponent>().CameraEntityId = core.Entities.GetByTag(viewportData.CameraName).FirstOrDefault().Id;
+            vp.Get<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
             //GameWorldHelper.SetPreserveAspectRatio(vp);
-            world.PostCommand(new AddEntityCommand(world.Id, vp.Id));
+            world.Core.Commands.Post(new AddEntityCommand(world.Id, vp.Id));
             //world.AddEntity(vp);
         }
 
@@ -196,7 +196,7 @@ namespace OpenBreed.Sandbox.Worlds
             blockBuilder.SetTileId(ToTileId(gfxCode));
 
             var entity = blockBuilder.Build();
-            world.PostCommand(new AddEntityCommand(world.Id, entity.Id));
+            world.Core.Commands.Post(new AddEntityCommand(world.Id, entity.Id));
             //world.AddEntity(blockBuilder.Build());
         }
 
@@ -214,7 +214,7 @@ namespace OpenBreed.Sandbox.Worlds
             blockBuilder.SetTileId(ToTileId(gfxCode));
 
             var entity = blockBuilder.Build();
-            world.PostCommand(new AddEntityCommand(world.Id, entity.Id));
+            world.Core.Commands.Post(new AddEntityCommand(world.Id, entity.Id));
             //world.AddEntity(blockBuilder.Build());
         }
 

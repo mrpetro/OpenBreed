@@ -18,7 +18,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         #region Private Fields
 
-        private readonly List<IEntity> entities = new List<IEntity>();
+        private readonly List<Entity> entities = new List<Entity>();
         private readonly List<ThrustComponent> thrustComps = new List<ThrustComponent>();
         private readonly List<PositionComponent> positionComps = new List<PositionComponent>();
         private readonly List<VelocityComponent> velocityComps = new List<VelocityComponent>();
@@ -76,16 +76,16 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         #region Protected Methods
 
-        protected override void OnAddEntity(IEntity entity)
+        protected override void OnAddEntity(Entity entity)
         {
             entities.Add(entity);
-            positionComps.Add(entity.GetComponent<PositionComponent>());
-            thrustComps.Add(entity.GetComponent<ThrustComponent>());
-            velocityComps.Add(entity.GetComponent<VelocityComponent>());
-            dynamicBodyComps.Add(entity.GetComponent<BodyComponent>());
+            positionComps.Add(entity.Get<PositionComponent>());
+            thrustComps.Add(entity.Get<ThrustComponent>());
+            velocityComps.Add(entity.Get<VelocityComponent>());
+            dynamicBodyComps.Add(entity.Get<BodyComponent>());
         }
 
-        protected override void OnRemoveEntity(IEntity entity)
+        protected override void OnRemoveEntity(Entity entity)
         {
             var index = entities.IndexOf(entity);
 

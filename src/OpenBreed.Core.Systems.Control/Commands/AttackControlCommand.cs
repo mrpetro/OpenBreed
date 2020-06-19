@@ -15,7 +15,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Commands
 
         #region Public Constructors
 
-        public AttackControlCommand(int entityId, IEntity entity, bool primary, bool secondary)
+        public AttackControlCommand(int entityId, Entity entity, bool primary, bool secondary)
         {
             EntityId = entityId;
             Primary = primary;

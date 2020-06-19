@@ -105,7 +105,7 @@ namespace OpenBreed.Sandbox.Worlds
             using (var reader = new TxtFileWorldReader(core, ".\\Content\\Maps\\hub.txt"))
                 gameWorld = reader.GetWorld();
 
-            gameWorld.PostCommand(new AddEntityCommand(gameWorld.Id, playerCamera.Id));
+            core.Commands.Post(new AddEntityCommand(gameWorld.Id, playerCamera.Id));
 
             var actor = ActorHelper.CreateActor(core, new Vector2(128, 128));
 
@@ -123,12 +123,12 @@ namespace OpenBreed.Sandbox.Worlds
             var player2 = core.Players.GetByName("P2");
             player2.AssumeControl(actor);
 
-            gameWorld.PostCommand(new AddEntityCommand(gameWorld.Id, actor.Id));
+            core.Commands.Post(new AddEntityCommand(gameWorld.Id, actor.Id));
             //gameWorld.AddEntity(actor);
 
             var gameViewport = core.Entities.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
 
-            gameViewport.GetComponent<ViewportComponent>().CameraEntityId = playerCamera.Id;
+            gameViewport.Get<ViewportComponent>().CameraEntityId = playerCamera.Id;
 
             var cursorEntity = core.Entities.Create();
         
@@ -143,22 +143,22 @@ namespace OpenBreed.Sandbox.Worlds
             //gameViewport.Subscribe(GfxEventTypes.VIEWPORT_RESIZED, (s, a) => UpdateCameraFov(playerCamera, (ViewportResizedEventArgs)a));
             //SetPreserveAspectRatio(gameViewport);
 
-            gameWorld.PostCommand(new AddEntityCommand(gameWorld.Id, cursorEntity.Id));
+            core.Commands.Post(new AddEntityCommand(gameWorld.Id, cursorEntity.Id));
 
-            gameWorld.PostCommand(new FollowedAddFollowerCommand(actor.Id, playerCamera.Id));
+            core.Commands.Post(new FollowedAddFollowerCommand(actor.Id, playerCamera.Id));
             //gameWorld.PostCommand(new FollowerSetTargetCommand(playerCamera.Id, actor.Id));
         }
 
-        public static void SetPreserveAspectRatio(IEntity viewportEntity)
+        public static void SetPreserveAspectRatio(Entity viewportEntity)
         {
-            var cameraEntity = viewportEntity.Core.Entities.GetById(viewportEntity.GetComponent<ViewportComponent>().CameraEntityId);
+            var cameraEntity = viewportEntity.Core.Entities.GetById(viewportEntity.Get<ViewportComponent>().CameraEntityId);
             viewportEntity.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateCameraFov(cameraEntity, a));
         }
 
-        private static void UpdateCameraFov(IEntity cameraEntity, ViewportResizedEventArgs a)
+        private static void UpdateCameraFov(Entity cameraEntity, ViewportResizedEventArgs a)
         {
-            cameraEntity.GetComponent<CameraComponent>().Width = a.Width;
-            cameraEntity.GetComponent<CameraComponent>().Height = a.Height;
+            cameraEntity.Get<CameraComponent>().Width = a.Width;
+            cameraEntity.Get<CameraComponent>().Height = a.Height;
         }
 
         private static void OnEntityAdded(object sender, EntityAddedEventArgs a)
