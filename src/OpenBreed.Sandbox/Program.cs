@@ -276,7 +276,6 @@ namespace OpenBreed.Sandbox
 
             CameraHelper.CreateAnimations(this);
             DoorHelper.CreateStamps(this);
-            //PickableHelper.CreateStamps(this);
             DoorHelper.CreateAnimations(this);
             ActorHelper.CreateAnimations(this);
             TeleportHelper.CreateAnimations(this);
@@ -291,32 +290,11 @@ namespace OpenBreed.Sandbox
 
             Rendering.ScreenWorld = ScreenWorldHelper.CreateWorld(this);
 
-
             //TextWorldHelper.Create(this);
             HudWorldHelper.Create(this);
             GameWorldHelper.Create(this);
 
-            //GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.One);                  // Select The Type Of Blending
-
-            //GL.Enable(EnableCap.StencilTest);
-            GL.ClearStencil(0x0);
-            GL.StencilMask(0xFFFFFFFF);
-            GL.ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-            //GL.Enable(EnableCap.Blend);
-            //GL.BlendFunc(BlendingFactor.SrcAlpha,BlendingFactor.OneMinusSrcAlpha);
-
-            GL.DepthFunc(DepthFunction.Lequal);
-            GL.Enable(EnableCap.DepthTest);
-
-            //var func = Scripts.RunFile(@"Entities\Actor\States\Attacking\IdleState.lua");
-
-            //var r = func.Invoke();
-
-            //var result = Scripts.RunFile("Content\\Scripts\\start.lua");
-
             OnEngineInitialized();
-
-            //var myass = (IViewport)Scripts.GetObject("myass");
         }
 
         protected void OnEngineInitialized()

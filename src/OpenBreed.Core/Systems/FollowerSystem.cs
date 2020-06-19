@@ -91,7 +91,6 @@ namespace OpenBreed.Core.Systems
             var followerPos = follower.GetComponent<PositionComponent>();
             var difference = followedPos.Value - followerPos.Value;
             followerPos.Value += difference / 10;
-            //followerPos.Value = followedPos.Value;
         }
 
         private void Glue(IEntity followed, IEntity follower)
