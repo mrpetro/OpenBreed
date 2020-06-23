@@ -79,7 +79,6 @@
   <ItemGroup>
     <Compile Include="Commands\FollowedAddFollowerCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Commands\IWorldCommand.cs" />
     <Compile Include="Commands\AddEntityCommand.cs" />
     <Compile Include="Commands\RemoveEntityCommand.cs" />
     <Compile Include="Commands\FollowerSetTargetCommand.cs" />
@@ -136,11 +135,7 @@
     <Compile Include="Common\Components\InventoryComponent.cs" />
     <Compile Include="Managers\AnimMan.cs" />
     <Compile Include="Managers\EventsMan.cs" />
-    <Compile Include="Commands\IEntityCommand.cs" />
-    <Compile Include="Commands\IMsgHandler.cs" />
-    <Compile Include="Commands\ICommandExecutor.cs" />
     <Compile Include="Helpers\MovementTools.cs" />
-    <Compile Include="Helpers\CommandHandler.cs" />
     <Compile Include="Managers\FsmMan.cs" />
     <Compile Include="Managers\IScriptMan.cs" />
     <Compile Include="Managers\LuaScriptMan.cs" />
@@ -163,8 +158,6 @@
     <Compile Include="Systems\StateMachineSystem.cs" />
     <Compile Include="Systems\TimerSystem.cs" />
     <Compile Include="CoreTools.cs" />
-    <Compile Include="Commands\IMsg.cs" />
-    <Compile Include="Helpers\MsgHandlerRelay.cs" />
     <Compile Include="Managers\CommandsMan.cs" />
     <Compile Include="Commands\DestroyEntityCommand.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />

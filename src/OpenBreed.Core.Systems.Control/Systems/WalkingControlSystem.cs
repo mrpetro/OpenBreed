@@ -13,15 +13,15 @@ using OpenBreed.Core.Commands;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Systems;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 {
-    public class WalkingControlSystem : WorldSystem, IUpdatableSystem, ICommandExecutor
+    public class WalkingControlSystem : WorldSystem, IUpdatableSystem
     {
         #region Private Fields
 
         private readonly List<Entity> entities = new List<Entity>();
-        private CommandHandler cmdHandler;
 
         #endregion Private Fields
 
@@ -29,8 +29,6 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         internal WalkingControlSystem(WalkingControlSystemBuilder builder) : base(builder.core)
         {
-            cmdHandler = new CommandHandler(this);
-
             Require<IControlComponent>();
         }
 
@@ -38,12 +36,10 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         #region Public Methods
 
-        public override void Initialize(World world)
+        public static void RegisterHandlers(CommandsMan commands)
         {
-            base.Initialize(world);
-
-            World.RegisterHandler(WalkingControlCommand.TYPE, cmdHandler);
-            World.RegisterHandler(AttackControlCommand.TYPE, cmdHandler);
+            commands.Register<WalkingControlCommand>(HandleWalkingControlCommand);
+            commands.Register<AttackControlCommand>(HandleAttackControlCommand);
         }
 
         public void UpdatePauseImmuneOnly(float dt)
@@ -52,20 +48,6 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         public void Update(float dt)
         {
-            cmdHandler.ExecuteEnqueued();
-        }
-
-        public override bool ExecuteCommand(ICommand cmd)
-        {
-            switch (cmd.Type)
-            {
-                case WalkingControlCommand.TYPE:
-                    return HandleWalkingControlCommand((WalkingControlCommand)cmd);
-                case AttackControlCommand.TYPE:
-                    return HandleAttackControlCommand((AttackControlCommand)cmd);
-                default:
-                    return false;
-            }
         }
 
         #endregion Public Methods
@@ -91,10 +73,9 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         #region Private Methods
 
-        private bool HandleAttackControlCommand(AttackControlCommand cmd)
+        private static bool HandleAttackControlCommand(ICore core, AttackControlCommand cmd)
         {
-            var entity = Core.Entities.GetById(cmd.EntityId);
-
+            var entity = core.Entities.GetById(cmd.EntityId);
 
             var control = entity.Get<AttackControl>();
 
@@ -107,9 +88,9 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
             return true;
         }
 
-        private bool HandleWalkingControlCommand(WalkingControlCommand cmd)
+        private static bool HandleWalkingControlCommand(ICore core, WalkingControlCommand cmd)
         {
-            var entity = Core.Entities.GetById(cmd.EntityId);
+            var entity = core.Entities.GetById(cmd.EntityId);
 
             var control = entity.Get<WalkingControl>();
 

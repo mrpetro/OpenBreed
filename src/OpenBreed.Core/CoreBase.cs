@@ -10,16 +10,12 @@ using OpenTK;
 using OpenTK.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace OpenBreed.Core
 {
-    public abstract class CoreBase : GameWindow, ICore, ICommandExecutor
+    public abstract class CoreBase : GameWindow, ICore
     {
         #region Private Fields
-
-        private CommandHandler commandHandler;
-        private MsgHandlerRelay msgHandlerRelay;
 
         private Dictionary<Type, ICoreModule> modules = new Dictionary<Type, ICoreModule>();
 
@@ -33,13 +29,6 @@ namespace OpenBreed.Core
             Events = new EventsMan(this);
             Entities = new EntityMan(this);
             Worlds = new WorldMan(this);
-
-            commandHandler = new CommandHandler(this);
-            msgHandlerRelay = new MsgHandlerRelay(commandHandler);
-
-            //RegisterHandler(PauseWorldCommand.TYPE, commandHandler);
-            //RegisterHandler(RemoveEntityCommand.TYPE, commandHandler);
-            //RegisterHandler(AddEntityCommand.TYPE, commandHandler);
         }
 
         #endregion Protected Constructors
@@ -84,14 +73,9 @@ namespace OpenBreed.Core
             return (T)modules[typeof(T)];
         }
 
-        public bool HandleCmd(IMsg msg)
-        {
-            return msgHandlerRelay.Handle(msg);
-        }
-
         public bool ExecuteCommand(ICommand cmd)
         {
-            switch (cmd.Type)
+            switch (cmd.Name)
             {
                 default:
                     return false;
@@ -101,6 +85,30 @@ namespace OpenBreed.Core
         public TBuilder GetBuilder<TBuilder>() where TBuilder : IComponentBuilder
         {
             throw new NotImplementedException();
+        }
+
+        public T GetSystemByEntityId<T>(int entityId) where T : IWorldSystem
+        {
+            var entity = Entities.GetById(entityId);
+            if (entity.World == null)
+                return default(T);
+            var system = entity.World.GetSystem<T>();
+            if (system == null)
+                return default(T);
+
+            return system;
+        }
+
+        public T GetSystemByWorldId<T>(int worldId) where T : IWorldSystem
+        {
+            var world = Worlds.GetById(worldId);
+            if (world == null)
+                return default(T);
+            var system = world.GetSystem<T>();
+            if (system == null)
+                return default(T);
+
+            return system;
         }
 
         #endregion Public Methods
@@ -115,15 +123,8 @@ namespace OpenBreed.Core
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             base.OnUpdateFrame(e);
-
-            commandHandler.ExecuteEnqueued();
         }
 
         #endregion Protected Methods
-
-        #region Private Methods
-
-
-        #endregion Private Methods
     }
 }

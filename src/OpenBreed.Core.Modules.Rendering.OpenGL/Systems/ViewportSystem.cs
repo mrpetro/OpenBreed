@@ -4,6 +4,7 @@ using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Helpers;
+using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
@@ -24,7 +25,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
     /// - CameraComponent
     /// - Position
     /// </summary>
-    public class ViewportSystem : WorldSystem, ICommandExecutor, IRenderableSystem
+    public class ViewportSystem : WorldSystem, IRenderableSystem
     {
         #region Private Fields
 
@@ -33,7 +34,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         private const float BRIGHTNESS_Z_LEVEL = 50.0f;
 
         private readonly List<Entity> entities = new List<Entity>();
-        private CommandHandler cmdHandler;
 
         #endregion Private Fields
 
@@ -41,8 +41,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         public ViewportSystem(ICore core) : base(core)
         {
-            cmdHandler = new CommandHandler(this);
-
             Require<ViewportComponent>();
             Require<PositionComponent>();
         }
@@ -51,23 +49,9 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Public Methods
 
-        public override void Initialize(World world)
+        public static void RegisterHandlers(CommandsMan commands)
         {
-            base.Initialize(world);
-
-            World.RegisterHandler(ViewportResizeCommand.TYPE, cmdHandler);
-        }
-
-        public override bool ExecuteCommand(ICommand cmd)
-        {
-            switch (cmd.Type)
-            {
-                case ViewportResizeCommand.TYPE:
-                    return HandleViewportResizeCommand((ViewportResizeCommand)cmd);
-
-                default:
-                    return false;
-            }
+            commands.Register<ViewportResizeCommand>(HandleViewportResizeCommand);
         }
 
         public Vector4 ClientToWorld(Vector4 coords, Entity viewport)
@@ -152,8 +136,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         public void Render(Box2 clipBox, int depth, float dt)
         {
-            cmdHandler.ExecuteEnqueued();
-
             if (depth > RENDER_MAX_DEPTH)
                 return;
 
@@ -161,11 +143,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
             for (int i = 0; i < entities.Count; i++)
                 RenderViewport(entities[i], clipBox, depth, dt);
-        }
-
-        public bool EnqueueMsg(object sender, IEntityCommand msg)
-        {
-            return false;
         }
 
         #endregion Public Methods
@@ -186,9 +163,9 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Methods
 
-        private bool HandleViewportResizeCommand(ViewportResizeCommand cmd)
+        private static bool HandleViewportResizeCommand(ICore core, ViewportResizeCommand cmd)
         {
-            var toResize = entities.FirstOrDefault(item => item.Id == cmd.EntityId);
+            var toResize = core.Entities.GetById(cmd.EntityId);
 
             if (toResize != null)
             {

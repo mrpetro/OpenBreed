@@ -21,7 +21,7 @@
 
         public int EntityId { get; }
 
-        public string Type { get { return TYPE; } }
+        public string Name { get { return TYPE; } }
 
         #endregion Public Properties
     }

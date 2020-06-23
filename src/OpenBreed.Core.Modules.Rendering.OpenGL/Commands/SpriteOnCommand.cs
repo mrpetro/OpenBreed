@@ -3,7 +3,7 @@ using OpenBreed.Core.Entities;
 
 namespace OpenBreed.Core.Modules.Rendering.Commands
 {
-    public struct SpriteOnCommand : IEntityCommand
+    public struct SpriteOnCommand : ICommand
     {
         #region Public Fields
 
@@ -23,7 +23,7 @@ namespace OpenBreed.Core.Modules.Rendering.Commands
         #region Public Properties
 
         public int EntityId { get; }
-        public string Type { get { return TYPE; } }
+        public string Name { get { return TYPE; } }
 
         #endregion Public Properties
     }

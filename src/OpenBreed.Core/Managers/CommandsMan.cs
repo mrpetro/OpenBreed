@@ -33,7 +33,7 @@ namespace OpenBreed.Core.Managers
             handlers.Add(typeof(T), (cmdHandler.Method, cmdHandler.Target));
         }
 
-        private Queue<IMsg> messageQueue = new Queue<IMsg>();
+        private Queue<ICommand> messageQueue = new Queue<ICommand>();
 
         public void ExecuteEnqueued()
         {
@@ -44,7 +44,7 @@ namespace OpenBreed.Core.Managers
             }
         }
 
-        private void Execute(IMsg msg)
+        private void Execute(ICommand msg)
         {
             if (!handlers.TryGetValue(msg.GetType(), out (MethodInfo Method, object Target) handler))
                 return;
@@ -52,7 +52,7 @@ namespace OpenBreed.Core.Managers
             handler.Method.Invoke(handler.Target, new object[] {Core,  msg });
         }
 
-        private bool TryHandle(IMsg msg)
+        private bool TryHandle(ICommand msg)
         {
             if (!handlers.TryGetValue(msg.GetType(), out (MethodInfo Method, object Target) handler))
                 return false;
@@ -63,40 +63,19 @@ namespace OpenBreed.Core.Managers
             return true;
         }
 
-        public void Post(IMsg msg)
+        public void Post(ICommand msg)
         {
             Debug.Assert(msg != null);
 
             if (TryHandle(msg))
                 return;
 
-            if (msg is IEntityCommand)
-            {
-                Post((IEntityCommand)msg);
-                return;
-            }
-            else if (msg is IWorldCommand)
-            {
-                Post((IWorldCommand)msg);
-                return;
-            }
-            else
-                Core.Logging.Warning($"Command '{msg.GetType()}' not registered.");
+            Core.Logging.Warning($"Command '{msg.GetType()}' not registered.");
         }
 
         #endregion Public Methods
 
         #region Private Methods
-
-        private void Post(IEntityCommand msg)
-        {
-            Core.Worlds.HandleCmd(msg);
-        }
-
-        private void Post(IWorldCommand msg)
-        {
-            Core.Worlds.HandleCmd(msg);
-        }
 
         #endregion Private Methods
     }

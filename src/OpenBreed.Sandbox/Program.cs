@@ -7,13 +7,16 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Builders;
+using OpenBreed.Core.Modules.Animation.Systems;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Audio.Builders;
 using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Physics.Builders;
+using OpenBreed.Core.Modules.Physics.Systems;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Modules.Rendering.Builders;
+using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Control.Systems;
 using OpenBreed.Sandbox.Entities.Actor;
@@ -217,6 +220,14 @@ namespace OpenBreed.Sandbox
             StateMachineSystem.RegisterHandlers(Commands);
             TextInputSystem.RegisterHandlers(Commands);
             TimerSystem.RegisterHandlers(Commands);
+            SpriteSystem.RegisterHandlers(Commands);
+            TileSystem.RegisterHandlers(Commands);
+            TextPresenterSystem.RegisterHandlers(Commands);
+            ViewportSystem.RegisterHandlers(Commands);
+            AnimationSystem.RegisterHandlers(Commands);
+            TextSystem.RegisterHandlers(Commands);
+            WalkingControlSystem.RegisterHandlers(Commands);
+            PhysicsSystem.RegisterHandlers(Commands);
         }
 
         protected override void OnLoad(EventArgs e)

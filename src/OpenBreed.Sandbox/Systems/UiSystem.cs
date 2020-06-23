@@ -13,11 +13,9 @@ using System.Linq;
 
 namespace OpenBreed.Sandbox.Systems
 {
-    public class UiSystem : WorldSystem, ICommandExecutor
+    public class UiSystem : WorldSystem
     {
         #region Private Fields
-
-        private CommandHandler cmdHandler;
 
         private List<Entity> entities = new List<Entity>();
 
@@ -27,8 +25,6 @@ namespace OpenBreed.Sandbox.Systems
 
         public UiSystem(ICore core) : base(core)
         {
-            cmdHandler = new CommandHandler(this);
-
             Require<CursorInputComponent>();
             Require<PositionComponent>();
         }

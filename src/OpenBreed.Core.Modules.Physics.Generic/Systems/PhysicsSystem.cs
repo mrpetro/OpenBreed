@@ -4,6 +4,7 @@ using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Helpers;
+using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Physics.Commands;
 using OpenBreed.Core.Modules.Physics.Components;
@@ -17,7 +18,7 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Physics.Systems
 {
-    public class PhysicsSystem : WorldSystem, IPhysicsSystem, ICommandExecutor
+    public class PhysicsSystem : WorldSystem, IPhysicsSystem
     {
         #region Private Fields
 
@@ -28,7 +29,6 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         private readonly List<DynamicPack> inactiveDynamics = new List<DynamicPack>();
         private readonly List<DynamicPack> activeDynamics = new List<DynamicPack>();
         private readonly List<StaticPack> inactiveStatics = new List<StaticPack>();
-        private CommandHandler cmdHandler;
         private List<StaticPack>[] gridStatics;
 
         #endregion Private Fields
@@ -39,7 +39,6 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         {
             Fixtures = Core.GetModule<PhysicsModule>().Fixturs;
 
-            cmdHandler = new CommandHandler(this);
             Require<BodyComponent>();
 
             GridWidth = builder.gridWidth;
@@ -73,12 +72,10 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             return new Box2(bx, by, bx + CELL_SIZE, by + CELL_SIZE);
         }
 
-        public override void Initialize(World world)
+        public static void RegisterHandlers(CommandsMan commands)
         {
-            base.Initialize(world);
-
-            World.RegisterHandler(BodyOnCommand.TYPE, cmdHandler);
-            World.RegisterHandler(BodyOffCommand.TYPE, cmdHandler);
+            commands.Register<BodyOnCommand>(HandleBodyOnCommand);
+            commands.Register<BodyOffCommand>(HandleBodyOffCommand);
         }
 
         public void UpdatePauseImmuneOnly(float dt)
@@ -87,8 +84,6 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         public void Update(float dt)
         {
-            cmdHandler.ExecuteEnqueued();
-
             UpdateAabbs();
 
             SweepAndPrune(dt);
@@ -106,21 +101,6 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             {
                 var ad = activeDynamics[i];
                 UpdateAabb(ad.Body, ad.Position);
-            }
-        }
-
-        public override bool ExecuteCommand(ICommand cmd)
-        {
-            switch (cmd.Type)
-            {
-                case BodyOnCommand.TYPE:
-                    return HandleBodyOnCommand((BodyOnCommand)cmd);
-
-                case BodyOffCommand.TYPE:
-                    return HandleBodyOffCommand((BodyOffCommand)cmd);
-
-                default:
-                    return false;
             }
         }
 
@@ -170,25 +150,29 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             return body.Aabb;
         }
 
-        private bool HandleBodyOnCommand(BodyOnCommand cmd)
+        private static bool HandleBodyOnCommand(ICore core, BodyOnCommand cmd)
         {
-            var dynamicToActivate = inactiveDynamics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
+            var system = core.GetSystemByEntityId<PhysicsSystem>(cmd.EntityId);
+            if (system == null)
+                return false;
 
-            var entity = Core.Entities.GetById(cmd.EntityId);
+            var dynamicToActivate = system.inactiveDynamics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
+
+            var entity = core.Entities.GetById(cmd.EntityId);
 
             if (dynamicToActivate != null)
             {
-                activeDynamics.Add(dynamicToActivate);
-                inactiveDynamics.Remove(dynamicToActivate);
+                system.activeDynamics.Add(dynamicToActivate);
+                system.inactiveDynamics.Remove(dynamicToActivate);
                 entity.RaiseEvent(new BodyOnEventArgs(entity));
                 return true;
             }
 
-            var staticToActivate = inactiveStatics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
+            var staticToActivate = system.inactiveStatics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
             if (staticToActivate != null)
             {
-                InsertToGrid(staticToActivate);
-                inactiveStatics.Remove(staticToActivate);
+                system.InsertToGrid(staticToActivate);
+                system.inactiveStatics.Remove(staticToActivate);
                 entity.RaiseEvent(new BodyOnEventArgs(entity));
                 return true;
             }
@@ -196,26 +180,30 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             return false;
         }
 
-        private bool HandleBodyOffCommand(BodyOffCommand cmd)
+        private static bool HandleBodyOffCommand(ICore core, BodyOffCommand cmd)
         {
-            var dynamicToDeactivate = activeDynamics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
+            var system = core.GetSystemByEntityId<PhysicsSystem>(cmd.EntityId);
+            if (system == null)
+                return false;
 
-            var entity = Core.Entities.GetById(cmd.EntityId);
+            var dynamicToDeactivate = system.activeDynamics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
+
+            var entity = core.Entities.GetById(cmd.EntityId);
 
             if (dynamicToDeactivate != null)
             {
-                inactiveDynamics.Add(dynamicToDeactivate);
-                activeDynamics.Remove(dynamicToDeactivate);
+                system.inactiveDynamics.Add(dynamicToDeactivate);
+                system.activeDynamics.Remove(dynamicToDeactivate);
 
                 entity.RaiseEvent(new BodyOffEventArgs(entity));
                 return true;
             }
 
-            var staticToDeactivate = RemoveFromGrid(entity);
+            var staticToDeactivate = system.RemoveFromGrid(entity);
 
             if (staticToDeactivate != null)
             {
-                inactiveStatics.Add(staticToDeactivate);
+                system.inactiveStatics.Add(staticToDeactivate);
                 entity.RaiseEvent(new BodyOffEventArgs(entity));
                 return true;
             }

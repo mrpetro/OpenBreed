@@ -35,11 +35,6 @@ namespace OpenBreed.Core.Systems
             commands.Register<TextDataBackspace>(HandleTextDataBackspace);
         }
 
-        public override void Initialize(World world)
-        {
-            base.Initialize(world);
-        }
-
         public void UpdatePauseImmuneOnly(float dt)
         {
         }

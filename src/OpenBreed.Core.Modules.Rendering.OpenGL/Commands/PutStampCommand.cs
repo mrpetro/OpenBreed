@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Modules.Rendering.Commands
 {
-    public class PutStampCommand : IWorldCommand
+    public class PutStampCommand : ICommand
     {
         #region Public Fields
 
@@ -40,7 +40,7 @@ namespace OpenBreed.Core.Modules.Rendering.Commands
         public int LayerNo { get; }
         public Vector2 Position { get; }
 
-        public string Type { get { return TYPE; } }
+        public string Name { get { return TYPE; } }
 
         #endregion Public Properties
     }

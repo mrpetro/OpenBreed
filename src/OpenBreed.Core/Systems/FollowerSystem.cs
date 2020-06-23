@@ -39,11 +39,6 @@ namespace OpenBreed.Core.Systems
 
         #region Public Methods
 
-        public override void Initialize(World world)
-        {
-            base.Initialize(world);
-        }
-
         public void UpdatePauseImmuneOnly(float dt)
         {
         }

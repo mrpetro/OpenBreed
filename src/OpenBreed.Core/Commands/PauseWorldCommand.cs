@@ -22,7 +22,7 @@
 
         public int WorldId { get; }
         public bool Pause { get; }
-        public string Type { get { return TYPE; } }
+        public string Name { get { return TYPE; } }
 
         #endregion Public Properties
     }

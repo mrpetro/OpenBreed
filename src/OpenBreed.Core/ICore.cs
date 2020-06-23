@@ -5,6 +5,7 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Rendering;
+using OpenBreed.Core.Systems;
 using OpenTK;
 using System.Drawing;
 
@@ -125,7 +126,9 @@ namespace OpenBreed.Core
         /// </summary>
         void Exit();
 
-        bool HandleCmd(IMsg msg);
+        T GetSystemByEntityId<T>(int entityId) where T : IWorldSystem;
+
+        T GetSystemByWorldId<T>(int worldId) where T : IWorldSystem;
 
         #endregion Public Methods
     }

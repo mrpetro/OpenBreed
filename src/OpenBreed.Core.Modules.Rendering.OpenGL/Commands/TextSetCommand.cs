@@ -3,7 +3,7 @@ using OpenBreed.Core.Entities;
 
 namespace OpenBreed.Core.Modules.Rendering.Commands
 {
-    public struct TextSetCommand : IEntityCommand
+    public struct TextSetCommand : ICommand
     {
         #region Public Fields
 
@@ -24,7 +24,7 @@ namespace OpenBreed.Core.Modules.Rendering.Commands
 
         #region Public Properties
 
-        public string Type { get { return TYPE; } }
+        public string Name { get { return TYPE; } }
 
         public int EntityId { get; }
         public int PartId { get; }

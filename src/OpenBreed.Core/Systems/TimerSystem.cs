@@ -37,11 +37,6 @@ namespace OpenBreed.Core.Systems
             commands.Register<TimerStopCommand>(HandleTimerStopCommand);
         }
 
-        public override void Initialize(World world)
-        {
-            base.Initialize(world);
-        }
-
         public void Update(float dt)
         {
             for (int i = 0; i < entities.Count; i++)

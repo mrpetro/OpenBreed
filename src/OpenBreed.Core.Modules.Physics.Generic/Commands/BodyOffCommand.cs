@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Modules.Physics.Commands
 {
-    public struct BodyOffCommand : IEntityCommand
+    public struct BodyOffCommand : ICommand
     {
         #region Public Fields
 
@@ -28,7 +28,7 @@ namespace OpenBreed.Core.Modules.Physics.Commands
         #region Public Properties
 
         public int EntityId { get; }
-        public string Type { get { return TYPE; } }
+        public string Name { get { return TYPE; } }
 
         #endregion Public Properties
     }

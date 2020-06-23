@@ -21,7 +21,7 @@ namespace OpenBreed.Core.Common
     /// Enqueues events:
     /// WorldInitializedEvent - when world is initialized
     /// </summary>
-    public class World : IMsgHandler, ICommandExecutor
+    public class World
     {
         #region Public Fields
 
@@ -38,9 +38,6 @@ namespace OpenBreed.Core.Common
 
         private float timeMultiplier = 1.0f;
 
-        private CommandHandler commandHandler;
-        private MsgHandlerRelay msgHandlerRelay;
-
         #endregion Private Fields
 
         #region Internal Constructors
@@ -56,8 +53,6 @@ namespace OpenBreed.Core.Common
             Systems = new ReadOnlyCollection<IWorldSystem>(systems);
 
             Components = new ComponentsMan();
-            commandHandler = new CommandHandler(this);
-            msgHandlerRelay = new MsgHandlerRelay(this);
 
             Core.Worlds.RegisterWorld(this);
 
@@ -119,15 +114,6 @@ namespace OpenBreed.Core.Common
             return $"World:{Name}";
         }
 
-        public bool ExecuteCommand(ICommand cmd)
-        {
-            switch (cmd.Type)
-            {
-                default:
-                    return false;
-            }
-        }
-
         /// <summary>
         /// Method will remove all entities from this world.
         /// Entities will not be removed immediately but at the end of each world update.
@@ -138,14 +124,9 @@ namespace OpenBreed.Core.Common
                 RemoveEntity(entities[i]);
         }
 
-        public void RegisterHandler(string msgType, IMsgHandler msgHandler)
+        public T GetSystem<T>() where T : IWorldSystem
         {
-            msgHandlerRelay.RegisterHandler(msgType, msgHandler);
-        }
-
-        public bool Handle(IMsg msg)
-        {
-            return msgHandlerRelay.Handle(msg);
+            return systems.OfType<T>().FirstOrDefault();
         }
 
         /// <summary>
@@ -195,8 +176,6 @@ namespace OpenBreed.Core.Common
 
         internal void Update(float dt)
         {
-            commandHandler.ExecuteEnqueued();
-
             if (Paused)
             {
                 foreach (var item in systems.OfType<IUpdatableSystem>())

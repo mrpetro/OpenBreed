@@ -22,8 +22,6 @@ namespace OpenBreed.Core.Managers
         private readonly IdMap<World> worlds = new IdMap<World>();
         private readonly Dictionary<string, int> namesToIds = new Dictionary<string, int>();
 
-        private Dictionary<int, Queue<IEntityCommand>> awaitingCommands = new Dictionary<int, Queue<IEntityCommand>>();
-
         #endregion Private Fields
 
         #region Public Constructors
@@ -36,8 +34,6 @@ namespace OpenBreed.Core.Managers
             Core.Commands.Register<PauseWorldCommand>(HandlePauseWorld);
             Core.Commands.Register<RemoveEntityCommand>(HandleRemoveEntity);
             Core.Commands.Register<AddEntityCommand>(HandleAddEntity);
-
-            Subscribe<EntityAddedEventArgs>(OnEntityAddedEventArgs);
         }
 
         #endregion Public Constructors
@@ -165,37 +161,6 @@ namespace OpenBreed.Core.Managers
 
         #region Internal Methods
 
-        internal void HandleCmd(IEntityCommand cmd)
-        {
-            Debug.Assert(cmd != null);
-            Debug.Assert(cmd.EntityId >= 0);
-
-            var entity = Core.Entities.GetById(cmd.EntityId);
-
-            if (entity.World != null)
-                entity.World.Handle(cmd);
-            else
-            {
-                Queue<IEntityCommand> cmds;
-                if (!awaitingCommands.TryGetValue(cmd.EntityId, out cmds))
-                {
-                    cmds = new Queue<IEntityCommand>();
-                    awaitingCommands.Add(cmd.EntityId, cmds);
-                }
-
-                cmds.Enqueue(cmd);
-            }
-        }
-
-        internal void HandleCmd(IWorldCommand cmd)
-        {
-            Debug.Assert(cmd != null);
-            Debug.Assert(cmd.WorldId >= 0);
-
-            var world = GetById(cmd.WorldId);
-            world.Handle(cmd);
-        }
-
         internal void RegisterWorld(World newWorld)
         {
             newWorld.Id = worlds.Add(newWorld);
@@ -228,22 +193,6 @@ namespace OpenBreed.Core.Managers
             var world = GetById(cmd.WorldId);
             world.Pause(cmd.Pause);
             return true;
-        }
-
-        private void OnEntityAddedEventArgs(object sender, EntityAddedEventArgs e)
-        {
-            Queue<IEntityCommand> cmds;
-
-            if (!awaitingCommands.TryGetValue(e.EntityId, out cmds))
-                return;
-
-            var world = GetById(e.WorldId);
-
-            while (cmds.Any())
-            {
-                var cmd = cmds.Dequeue();
-                world.Handle(cmd);
-            }
         }
 
         #endregion Private Methods

@@ -35,11 +35,6 @@ namespace OpenBreed.Core.Systems
             commands.Register<SetStateCommand>(HandleSetStateCommand);
         }
 
-        public override void Initialize(World world)
-        {
-            base.Initialize(world);
-        }
-
         public void Update(float dt)
         {
         }

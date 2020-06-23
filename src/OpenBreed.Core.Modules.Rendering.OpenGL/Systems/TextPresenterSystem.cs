@@ -4,6 +4,7 @@ using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Helpers;
+using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
@@ -16,12 +17,11 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TextPresenterSystem : WorldSystem, ICommandExecutor, IRenderableSystem
+    public class TextPresenterSystem : WorldSystem, IRenderableSystem
     {
         #region Private Fields
 
         private readonly List<Entity> entities = new List<Entity>();
-        private CommandHandler cmdHandler;
 
         #endregion Private Fields
 
@@ -29,8 +29,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         public TextPresenterSystem(ICore core) : base(core)
         {
-            cmdHandler = new CommandHandler(this);
-
             Require<TextDataComponent>();
             Require<TextPresentationComponent>();
             Require<PositionComponent>();
@@ -40,17 +38,12 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Public Methods
 
-        public override void Initialize(World world)
+        public static void RegisterHandlers(CommandsMan commands)
         {
-            base.Initialize(world);
-
-            World.RegisterHandler(TextSetCommand.TYPE, cmdHandler);
         }
 
         public void Render(Box2 clipBox, int depth, float dt)
         {
-            cmdHandler.ExecuteEnqueued();
-
             GL.Enable(EnableCap.Blend);
             GL.Enable(EnableCap.AlphaTest);
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusConstantColor);
@@ -64,23 +57,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.AlphaTest);
             GL.Disable(EnableCap.Blend);
-        }
-
-        public override bool ExecuteCommand(ICommand cmd)
-        {
-            switch (cmd.Type)
-            {
-                case TextSetCommand.TYPE:
-                    return HandleTextSetCommand((TextSetCommand)cmd);
-
-                default:
-                    return false;
-            }
-        }
-
-        public bool EnqueueMsg(object sender, IEntityCommand msg)
-        {
-            return false;
         }
 
         #endregion Public Methods
@@ -141,24 +117,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
             GL.PopMatrix();
             GL.Disable(EnableCap.Texture2D);
-        }
-
-        private bool HandleTextSetCommand(TextSetCommand cmd)
-        {
-            var toModify = entities.FirstOrDefault(item => item.Id == cmd.EntityId);
-            if (toModify == null)
-                return false;
-
-            var text = toModify.Get<TextComponent>();
-
-            if (cmd.PartId < 0 || cmd.PartId >= text.Parts.Count)
-            {
-                Core.Logging.Error($"Unknown text part ID({cmd.PartId}) to modify.");
-            }
-
-            text.Parts[cmd.PartId].Text = cmd.Text;
-
-            return true;
         }
 
         #endregion Private Methods

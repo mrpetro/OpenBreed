@@ -2,7 +2,7 @@
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Helpers;
+using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
@@ -14,13 +14,12 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class SpriteSystem : WorldSystem, ICommandExecutor, IRenderableSystem
+    public class SpriteSystem : WorldSystem, IRenderableSystem
     {
         #region Private Fields
 
         private readonly List<Entity> inactive = new List<Entity>();
         private readonly List<Entity> active = new List<Entity>();
-        private CommandHandler cmdHandler;
 
         #endregion Private Fields
 
@@ -28,8 +27,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         internal SpriteSystem(SpriteSystemBuilder builder) : base(builder.core)
         {
-            cmdHandler = new CommandHandler(this);
-
             Require<SpriteComponent>();
             Require<PositionComponent>();
         }
@@ -38,37 +35,15 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Public Methods
 
-        public override void Initialize(World world)
+        public static void RegisterHandlers(CommandsMan commands)
         {
-            base.Initialize(world);
-
-            World.RegisterHandler(SpriteOnCommand.TYPE, cmdHandler);
-            World.RegisterHandler(SpriteOffCommand.TYPE, cmdHandler);
-            World.RegisterHandler(SpriteSetCommand.TYPE, cmdHandler);
-        }
-
-        public override bool ExecuteCommand(ICommand cmd)
-        {
-            switch (cmd.Type)
-            {
-                case SpriteOnCommand.TYPE:
-                    return HandleSpriteOnCommand((SpriteOnCommand)cmd);
-
-                case SpriteOffCommand.TYPE:
-                    return HandleSpriteOffCommand((SpriteOffCommand)cmd);
-
-                case SpriteSetCommand.TYPE:
-                    return HandleSpriteSetCommand((SpriteSetCommand)cmd);
-
-                default:
-                    return false;
-            }
+            commands.Register<SpriteOnCommand>(HandleSpriteOnCommand);
+            commands.Register<SpriteOffCommand>(HandleSpriteOffCommand);
+            commands.Register<SpriteSetCommand>(HandleSpriteSetCommand);
         }
 
         public void Render(Box2 clipBox, int depth, float dt)
         {
-            cmdHandler.ExecuteEnqueued();
-
             //GL.Color4(1.0f, 1.0f, 1.0f, 1.0f);
             GL.Enable(EnableCap.Blend);
             GL.Enable(EnableCap.AlphaTest);
@@ -82,11 +57,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.AlphaTest);
             GL.Disable(EnableCap.Blend);
-        }
-
-        public bool EnqueueMsg(object sender, IEntityCommand msg)
-        {
-            return false;
         }
 
         #endregion Public Methods
@@ -106,6 +76,50 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         #endregion Protected Methods
 
         #region Private Methods
+
+        private static bool HandleSpriteOnCommand(ICore core, SpriteOnCommand cmd)
+        {
+            var system = core.GetSystemByEntityId<SpriteSystem>(cmd.EntityId);
+
+            var toActivate = system.inactive.FirstOrDefault(item => item.Id == cmd.EntityId);
+
+            if (toActivate != null)
+            {
+                system.active.Add(toActivate);
+                system.inactive.Remove(toActivate);
+            }
+
+            return true;
+        }
+
+        private static bool HandleSpriteSetCommand(ICore core, SpriteSetCommand cmd)
+        {
+            var system = core.GetSystemByEntityId<SpriteSystem>(cmd.EntityId);
+
+            var toModify = system.active.FirstOrDefault(item => item.Id == cmd.EntityId);
+            if (toModify == null)
+                return false;
+
+            var sprite = toModify.Get<SpriteComponent>();
+            sprite.ImageId = cmd.ImageId;
+
+            return true;
+        }
+
+        private static bool HandleSpriteOffCommand(ICore core, SpriteOffCommand cmd)
+        {
+            var system = core.GetSystemByEntityId<SpriteSystem>(cmd.EntityId);
+
+            var toDeactivate = system.active.FirstOrDefault(item => item.Id == cmd.EntityId);
+
+            if (toDeactivate != null)
+            {
+                system.inactive.Add(toDeactivate);
+                system.active.Remove(toDeactivate);
+            }
+
+            return true;
+        }
 
         /// <summary>
         /// Draw this sprite to given viewport
@@ -130,7 +144,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             if (pos.Value.Y > clipBox.Top)
                 return;
 
-
             GL.PushMatrix();
 
             GL.Translate((int)pos.Value.X, (int)pos.Value.Y, spc.Order);
@@ -138,44 +151,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             atlas.Draw(spc.ImageId);
 
             GL.PopMatrix();
-        }
-
-        private bool HandleSpriteOnCommand(SpriteOnCommand cmd)
-        {
-            var toActivate = inactive.FirstOrDefault(item => item.Id == cmd.EntityId);
-
-            if (toActivate != null)
-            {
-                active.Add(toActivate);
-                inactive.Remove(toActivate);
-            }
-
-            return true;
-        }
-
-        private bool HandleSpriteSetCommand(SpriteSetCommand cmd)
-        {
-            var toModify = active.FirstOrDefault(item => item.Id == cmd.EntityId);
-            if (toModify == null)
-                return false;
-
-            var sprite = toModify.Get<SpriteComponent>();
-            sprite.ImageId = cmd.ImageId;
-
-            return true;
-        }
-
-        private bool HandleSpriteOffCommand(SpriteOffCommand cmd)
-        {
-            var toDeactivate = active.FirstOrDefault(item => item.Id == cmd.EntityId);
-
-            if (toDeactivate != null)
-            {
-                inactive.Add(toDeactivate);
-                active.Remove(toDeactivate);
-            }
-
-            return true;
         }
 
         #endregion Private Methods
