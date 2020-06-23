@@ -5,6 +5,7 @@ using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Helpers;
+using OpenBreed.Core.Managers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,13 +13,11 @@ using System.Linq;
 
 namespace OpenBreed.Core.Systems
 {
-    public class FollowerSystem : WorldSystem, ICommandExecutor, IUpdatableSystem
+    public class FollowerSystem : WorldSystem, IUpdatableSystem
     {
         #region Private Fields
 
         private readonly List<Entity> entities = new List<Entity>();
-
-        private readonly CommandHandler cmdHandler;
 
         #endregion Private Fields
 
@@ -26,24 +25,15 @@ namespace OpenBreed.Core.Systems
 
         public FollowerSystem(ICore core) : base(core)
         {
-            cmdHandler = new CommandHandler(this);
             Require<FollowerComponent>();
             Require<PositionComponent>();
 
-            //Core.Worlds.Subscribe<EntityAddedEventArgs>(OnEntityAddedEventArgs);
         }
 
-        //private void OnEntityAddedEventArgs(object sender, EntityAddedEventArgs e)
-        //{
-        //    var followeEntities = Core.Entities.Where(item => item.Contains<FollowerComponent>());
-
-        //    var foundFollower = followerEntities.FirstOrDefault(item => item.GetComponent<FollowerComponent>().FollowedEntityId == e.EntityId);
-
-        //    if (foundFollower == null)
-        //        return;
-
-        //    Core.Commands.Post(new AddEntityCommand(e.WorldId, foundFollower.Id));
-        //}
+        public static void RegisterHandlers(CommandsMan commands)
+        {
+            commands.Register<FollowedAddFollowerCommand>(HandleFollowedAddFollowerCommand);
+        }
 
         #endregion Public Constructors
 
@@ -52,19 +42,14 @@ namespace OpenBreed.Core.Systems
         public override void Initialize(World world)
         {
             base.Initialize(world);
-
-            World.RegisterHandler(FollowedAddFollowerCommand.TYPE, cmdHandler);
         }
 
         public void UpdatePauseImmuneOnly(float dt)
         {
-            cmdHandler.ExecuteEnqueued();
         }
 
         public void Update(float dt)
         {
-            cmdHandler.ExecuteEnqueued();
-
             for (int i = 0; i < entities.Count; i++)
                 Update(entities[i], dt);
         }
@@ -85,7 +70,7 @@ namespace OpenBreed.Core.Systems
             }
         }
 
-        private void Follow (Entity followed, Entity follower)
+        private void Follow(Entity followed, Entity follower)
         {
             var followedPos = followed.Get<PositionComponent>();
             var followerPos = follower.Get<PositionComponent>();
@@ -99,18 +84,6 @@ namespace OpenBreed.Core.Systems
             var followerPos = follower.Get<PositionComponent>();
 
             followerPos.Value = followedPos.Value;
-        }
-
-        public override bool ExecuteCommand(ICommand cmd)
-        {
-            switch (cmd.Type)
-            {
-                case FollowedAddFollowerCommand.TYPE:
-                    return HandleFollowedAddFollowerCommand((FollowedAddFollowerCommand)cmd);
-
-                default:
-                    return false;
-            }
         }
 
         #endregion Public Methods
@@ -155,9 +128,9 @@ namespace OpenBreed.Core.Systems
 
         #region Private Methods
 
-        private bool HandleFollowedAddFollowerCommand(FollowedAddFollowerCommand cmd)
+        private static bool HandleFollowedAddFollowerCommand(ICore core, FollowedAddFollowerCommand cmd)
         {
-            var entity = Core.Entities.GetById(cmd.EntityId);
+            var entity = core.Entities.GetById(cmd.EntityId);
             var fc = entity.Get<FollowerComponent>();
             fc.FollowerIds.Add(cmd.FollowerEntityId);
             return true;

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace OpenBreed.Core.Common
 {
@@ -197,9 +198,24 @@ namespace OpenBreed.Core.Common
             commandHandler.ExecuteEnqueued();
 
             if (Paused)
-                systems.OfType<IUpdatableSystem>().ForEach(item => item.UpdatePauseImmuneOnly(dt * TimeMultiplier));
+            {
+                foreach (var item in systems.OfType<IUpdatableSystem>())
+                {
+                    Core.Commands.ExecuteEnqueued();
+                    item.UpdatePauseImmuneOnly(dt * TimeMultiplier);
+                }
+                //systems.OfType<IUpdatableSystem>().ForEach(item => item.UpdatePauseImmuneOnly(dt * TimeMultiplier));
+            }
+
             else
-                systems.OfType<IUpdatableSystem>().ForEach(item => item.Update(dt * TimeMultiplier));
+            {
+                foreach (var item in systems.OfType<IUpdatableSystem>())
+                {
+                    Core.Commands.ExecuteEnqueued();
+                    item.Update(dt * TimeMultiplier);
+                }
+                //systems.OfType<IUpdatableSystem>().ForEach(item => item.Update(dt * TimeMultiplier));
+            }
         }
 
         internal void Initialize()

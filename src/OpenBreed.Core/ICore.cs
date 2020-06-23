@@ -106,8 +106,6 @@ namespace OpenBreed.Core
 
         #region Public Methods
 
-        bool CanHandle(string msgType);
-
         /// <summary>
         /// Get core module of specific type
         /// </summary>
@@ -126,8 +124,6 @@ namespace OpenBreed.Core
         /// Perform exit
         /// </summary>
         void Exit();
-
-        void RegisterHandler(string msgType, IMsgHandler msgHandler);
 
         bool HandleCmd(IMsg msg);
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Commands
 {
-    public class DestroyEntityCommand : IEntityCommand
+    public class DestroyEntityCommand : ICommand
     {
         #region Public Fields
 

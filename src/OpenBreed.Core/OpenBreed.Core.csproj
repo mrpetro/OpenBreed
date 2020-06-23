@@ -86,7 +86,6 @@
     <Compile Include="Commands\TextDataRemove.cs" />
     <Compile Include="Commands\TextDataInsert.cs" />
     <Compile Include="Commands\TextCaretSetPosition.cs" />
-    <Compile Include="Commands\TextInsertStringCommand.cs" />
     <Compile Include="Commands\TimerStopCommand.cs" />
     <Compile Include="Commands\TimerStartCommand.cs" />
     <Compile Include="Commands\PauseWorldCommand.cs" />

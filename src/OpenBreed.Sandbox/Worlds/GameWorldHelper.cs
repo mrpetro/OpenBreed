@@ -105,8 +105,6 @@ namespace OpenBreed.Sandbox.Worlds
             using (var reader = new TxtFileWorldReader(core, ".\\Content\\Maps\\hub.txt"))
                 gameWorld = reader.GetWorld();
 
-            core.Commands.Post(new AddEntityCommand(gameWorld.Id, playerCamera.Id));
-
             var actor = ActorHelper.CreateActor(core, new Vector2(128, 128));
 
             actor.Add(new WalkingControl());

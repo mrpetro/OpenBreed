@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Core.Commands
 {
-    public class TimerStopCommand : IEntityCommand
+    public class TimerStopCommand : ICommand
     {
         #region Public Fields
 

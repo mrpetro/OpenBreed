@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Commands
 {
-    public class FollowerSetTargetCommand : IEntityCommand
+    public class FollowerSetTargetCommand : ICommand
     {
         #region Public Fields
 

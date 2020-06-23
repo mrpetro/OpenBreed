@@ -7,7 +7,6 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace OpenBreed.Core.Managers
@@ -20,8 +19,6 @@ namespace OpenBreed.Core.Managers
         private readonly IdMap<Entity> entities = new IdMap<Entity>();
 
         private readonly Dictionary<string, Func<ICore, IComponentBuilder>> builders = new Dictionary<string, Func<ICore, IComponentBuilder>>();
-
-        private Dictionary<int, Queue<IEntityCommand>> awaitingCommands = new Dictionary<int, Queue<IEntityCommand>>();
 
         #endregion Private Fields
 
@@ -92,9 +89,6 @@ namespace OpenBreed.Core.Managers
         {
             var newEntity = new Entity(Core, initialComponents);
             newEntity.Id = entities.Add(newEntity);
-
-            Core.Worlds.Subscribe<EntityAddedEventArgs>(OnEntityAddedEventArgs);
-
             return newEntity;
         }
 
@@ -105,33 +99,6 @@ namespace OpenBreed.Core.Managers
         }
 
         #endregion Public Methods
-
-        #region Internal Methods
-
-        internal void HandleCmd(IEntityCommand msg)
-        {
-            Debug.Assert(msg != null);
-            Debug.Assert(msg.EntityId >= 0);
-
-            var entity = GetById(msg.EntityId);
-
-            if (entity.World != null)
-                entity.World.Handle(msg);
-            else
-            {
-                Queue<IEntityCommand> cmds;
-                if (!awaitingCommands.TryGetValue(msg.EntityId, out cmds))
-                {
-                    cmds = new Queue<IEntityCommand>();
-                    awaitingCommands.Add(msg.EntityId, cmds);
-                }
-
-                cmds.Enqueue(msg);
-            }
-
-        }
-
-        #endregion Internal Methods
 
         #region Private Methods
 
@@ -171,22 +138,6 @@ namespace OpenBreed.Core.Managers
             }
 
             components.Add(builder.Build());
-        }
-
-        private void OnEntityAddedEventArgs(object sender, EntityAddedEventArgs e)
-        {
-            Queue<IEntityCommand> cmds;
-
-            if (!awaitingCommands.TryGetValue(e.EntityId, out cmds))
-                return;
-
-            var entity = GetById(e.EntityId);
-
-            while (cmds.Any())
-            {
-                var cmd = cmds.Dequeue();
-                entity.World.Handle(cmd);
-            }
         }
 
         private void OnEntityRemovedEventArgs(object sender, EntityRemovedEventArgs e)

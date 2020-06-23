@@ -4,19 +4,18 @@ using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Helpers;
+using OpenBreed.Core.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Core.Systems
 {
-    public class StateMachineSystem : WorldSystem, ICommandExecutor, IUpdatableSystem
+    public class StateMachineSystem : WorldSystem, IUpdatableSystem
     {
         #region Private Fields
 
         private readonly List<Entity> entities = new List<Entity>();
-
-        private readonly CommandHandler cmdHandler;
 
         #endregion Private Fields
 
@@ -24,7 +23,6 @@ namespace OpenBreed.Core.Systems
 
         public StateMachineSystem(ICore core) : base(core)
         {
-            cmdHandler = new CommandHandler(this);
             Require<FsmComponent>();
         }
 
@@ -32,33 +30,22 @@ namespace OpenBreed.Core.Systems
 
         #region Public Methods
 
+        public static void RegisterHandlers(CommandsMan commands)
+        {
+            commands.Register<SetStateCommand>(HandleSetStateCommand);
+        }
+
         public override void Initialize(World world)
         {
             base.Initialize(world);
-
-            World.RegisterHandler(SetStateCommand.TYPE, cmdHandler);
         }
 
         public void Update(float dt)
         {
-            cmdHandler.ExecuteEnqueued();
         }
 
         public void UpdatePauseImmuneOnly(float dt)
         {
-            cmdHandler.ExecuteEnqueued();
-        }
-
-        public override bool ExecuteCommand(ICommand cmd)
-        {
-            switch (cmd.Type)
-            {
-                case SetStateCommand.TYPE:
-                    return HandleSetStateCommandMsg((SetStateCommand)cmd);
-
-                default:
-                    return false;
-            }
         }
 
         #endregion Public Methods
@@ -107,42 +94,42 @@ namespace OpenBreed.Core.Systems
                 Core.StateMachines.EnterState(entity, state);
         }
 
-        private bool HandleSetStateCommandMsg(SetStateCommand message)
+        private static bool HandleSetStateCommand(ICore core, SetStateCommand cmd)
         {
-            var entity = Core.Entities.GetById(message.EntityId);
+            var entity = core.Entities.GetById(cmd.EntityId);
 
             var fsmComponent = entity.Get<FsmComponent>();
 
             if (fsmComponent == null)
             {
-                Core.Logging.Warning($"Entity '{message.EntityId}' has missing FSM component.");
+                core.Logging.Warning($"Entity '{cmd.EntityId}' has missing FSM component.");
                 return false;
             }
 
-            var fsm = Core.StateMachines.GetById(message.FsmId);
+            var fsm = core.StateMachines.GetById(cmd.FsmId);
 
-            var fsmData = fsmComponent.States.FirstOrDefault(item => item.FsmId == message.FsmId);
+            var fsmData = fsmComponent.States.FirstOrDefault(item => item.FsmId == cmd.FsmId);
 
             if (fsmData == null)
             {
-                Core.Logging.Warning($"Entity '{message.EntityId}' has missing data for FSM '{fsm.Name}'.");
+                core.Logging.Warning($"Entity '{cmd.EntityId}' has missing data for FSM '{fsm.Name}'.");
                 return false;
             }
 
-            Core.StateMachines.LeaveState(entity, fsmData);
-            var nextStateId = fsm.GetNextStateId(fsmData.StateId, message.ImpulseId);
+            core.StateMachines.LeaveState(entity, fsmData);
+            var nextStateId = fsm.GetNextStateId(fsmData.StateId, cmd.ImpulseId);
 
             if (nextStateId == -1)
             {
                 var fromStateName = fsm.GetStateName(fsmData.StateId);
-                var impulseName = fsm.GetImpulseName(message.ImpulseId);
+                var impulseName = fsm.GetImpulseName(cmd.ImpulseId);
 
-                Core.Logging.Warning($"Entity '{message.EntityId}' has missing FSM transition from state '{fromStateName}' using impulse '{impulseName}'.");
+                core.Logging.Warning($"Entity '{cmd.EntityId}' has missing FSM transition from state '{fromStateName}' using impulse '{impulseName}'.");
                 return false;
             }
 
             fsmData.StateId = nextStateId;
-            Core.StateMachines.EnterState(entity, fsmData);
+            core.StateMachines.EnterState(entity, fsmData);
 
             return true;
         }

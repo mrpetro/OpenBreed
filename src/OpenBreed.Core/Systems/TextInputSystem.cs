@@ -1,22 +1,18 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Components;
-using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
-using OpenBreed.Core.Helpers;
-using OpenTK;
+using OpenBreed.Core.Managers;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace OpenBreed.Core.Systems
 {
-    public class TextInputSystem : WorldSystem, ICommandExecutor, IUpdatableSystem
+    public class TextInputSystem : WorldSystem, IUpdatableSystem
     {
         #region Private Fields
 
         private readonly List<Entity> entities = new List<Entity>();
-        private CommandHandler cmdHandler;
 
         #endregion Private Fields
 
@@ -24,8 +20,6 @@ namespace OpenBreed.Core.Systems
 
         public TextInputSystem(ICore core) : base(core)
         {
-            cmdHandler = new CommandHandler(this);
-
             Require<TextCaretComponent>();
             Require<TextDataComponent>();
         }
@@ -34,43 +28,24 @@ namespace OpenBreed.Core.Systems
 
         #region Public Methods
 
+        public static void RegisterHandlers(CommandsMan commands)
+        {
+            commands.Register<TextCaretSetPosition>(HandleTextCaretSetPosition);
+            commands.Register<TextDataInsert>(HandleTextDataInsert);
+            commands.Register<TextDataBackspace>(HandleTextDataBackspace);
+        }
+
         public override void Initialize(World world)
         {
             base.Initialize(world);
-
-            World.RegisterHandler(TextCaretSetPosition.TYPE, cmdHandler);
-            World.RegisterHandler(TextDataInsert.TYPE, cmdHandler);
-            World.RegisterHandler(TextDataBackspace.TYPE, cmdHandler);
         }
 
         public void UpdatePauseImmuneOnly(float dt)
         {
-            cmdHandler.ExecuteEnqueued();
         }
 
         public void Update(float dt)
         {
-            cmdHandler.ExecuteEnqueued();
-        }
-
-        public override bool ExecuteCommand(ICommand cmd)
-        {
-            switch (cmd.Type)
-            {
-                case TextCaretSetPosition.TYPE:
-                    return HandleTextCaretSetPosition((TextCaretSetPosition)cmd);
-                case TextDataInsert.TYPE:
-                    return HandleTextDataInsert((TextDataInsert)cmd);
-                case TextDataBackspace.TYPE:
-                    return HandleTextDataBackspace((TextDataBackspace)cmd);
-                default:
-                    return false;
-            }
-        }
-
-        public bool EnqueueMsg(object sender, IEntityCommand msg)
-        {
-            return false;
         }
 
         #endregion Public Methods
@@ -91,9 +66,9 @@ namespace OpenBreed.Core.Systems
 
         #region Private Methods
 
-        private bool HandleTextDataInsert(TextDataInsert cmd)
+        private static bool HandleTextDataInsert(ICore core, TextDataInsert cmd)
         {
-            var toModify = entities.FirstOrDefault(item => item.Id == cmd.EntityId);
+            var toModify = core.Entities.GetById(cmd.EntityId);
             if (toModify == null)
                 return false;
 
@@ -112,9 +87,9 @@ namespace OpenBreed.Core.Systems
             return true;
         }
 
-        private bool HandleTextDataBackspace(TextDataBackspace cmd)
+        private static bool HandleTextDataBackspace(ICore core, TextDataBackspace cmd)
         {
-            var toModify = entities.FirstOrDefault(item => item.Id == cmd.EntityId);
+            var toModify = core.Entities.GetById(cmd.EntityId);
             if (toModify == null)
                 return false;
 
@@ -136,9 +111,9 @@ namespace OpenBreed.Core.Systems
             return true;
         }
 
-        private bool HandleTextCaretSetPosition(TextCaretSetPosition cmd)
+        private static bool HandleTextCaretSetPosition(ICore core, TextCaretSetPosition cmd)
         {
-            var toModify = entities.FirstOrDefault(item => item.Id == cmd.EntityId);
+            var toModify = core.Entities.GetById(cmd.EntityId);
             if (toModify == null)
                 return false;
 

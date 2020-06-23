@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Core.Commands
 {
-    public class TextDataBackspace : IEntityCommand
+    public class TextDataBackspace : ICommand
     {
         #region Public Fields
 

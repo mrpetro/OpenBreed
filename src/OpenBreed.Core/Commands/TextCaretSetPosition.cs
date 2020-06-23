@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Core.Commands
 {
-    public class TextCaretSetPosition : IEntityCommand
+    public class TextCaretSetPosition : ICommand
     {
         #region Public Fields
 

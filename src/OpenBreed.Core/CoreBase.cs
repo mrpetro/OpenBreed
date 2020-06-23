@@ -18,7 +18,6 @@ namespace OpenBreed.Core
     {
         #region Private Fields
 
-        private readonly List<ISystem> systems = new List<ISystem>();
         private CommandHandler commandHandler;
         private MsgHandlerRelay msgHandlerRelay;
 
@@ -30,21 +29,27 @@ namespace OpenBreed.Core
 
         protected CoreBase(int width, int height, GraphicsMode mode, string title) : base(width, height, mode, title)
         {
+            Commands = new CommandsMan(this);
+            Events = new EventsMan(this);
+            Entities = new EntityMan(this);
+            Worlds = new WorldMan(this);
+
             commandHandler = new CommandHandler(this);
             msgHandlerRelay = new MsgHandlerRelay(commandHandler);
 
-            Systems = new ReadOnlyCollection<ISystem>(systems);
-
-            RegisterHandler(PauseWorldCommand.TYPE, commandHandler);
-            RegisterHandler(RemoveEntityCommand.TYPE, commandHandler);
-            RegisterHandler(AddEntityCommand.TYPE, commandHandler);
+            //RegisterHandler(PauseWorldCommand.TYPE, commandHandler);
+            //RegisterHandler(RemoveEntityCommand.TYPE, commandHandler);
+            //RegisterHandler(AddEntityCommand.TYPE, commandHandler);
         }
 
         #endregion Protected Constructors
 
         #region Public Properties
 
-        public ReadOnlyCollection<ISystem> Systems { get; }
+        public EntityMan Entities { get; }
+        public CommandsMan Commands { get; }
+        public EventsMan Events { get; }
+        public WorldMan Worlds { get; }
 
         public abstract IRenderModule Rendering { get; }
 
@@ -56,8 +61,6 @@ namespace OpenBreed.Core
 
         public abstract JobMan Jobs { get; }
 
-        public abstract EntityMan Entities { get; }
-
         public abstract FsmMan StateMachines { get; }
 
         public abstract PlayersMan Players { get; }
@@ -65,12 +68,6 @@ namespace OpenBreed.Core
         public abstract ItemsMan Items { get; }
 
         public abstract InputsMan Inputs { get; }
-
-        public abstract WorldMan Worlds { get; }
-
-        public abstract CommandsMan Commands { get; }
-
-        public abstract EventsMan Events { get; }
 
         public abstract IScriptMan Scripts { get; }
 
@@ -82,19 +79,9 @@ namespace OpenBreed.Core
 
         #region Public Methods
 
-        public void RegisterHandler(string msgType, IMsgHandler msgHandler)
-        {
-            msgHandlerRelay.RegisterHandler(msgType, msgHandler);
-        }
-
         public T GetModule<T>() where T : ICoreModule
         {
             return (T)modules[typeof(T)];
-        }
-
-        public bool CanHandle(string msgType)
-        {
-            return msgHandlerRelay.IsRegistered(msgType);
         }
 
         public bool HandleCmd(IMsg msg)
@@ -106,15 +93,6 @@ namespace OpenBreed.Core
         {
             switch (cmd.Type)
             {
-                case PauseWorldCommand.TYPE:
-                    return HandlePauseWorld((PauseWorldCommand)cmd);
-
-                case RemoveEntityCommand.TYPE:
-                    return HandleRemoveEntity((RemoveEntityCommand)cmd);
-
-                case AddEntityCommand.TYPE:
-                    return HandleAddEntity((AddEntityCommand)cmd);
-
                 default:
                     return false;
             }
@@ -145,30 +123,6 @@ namespace OpenBreed.Core
 
         #region Private Methods
 
-        private bool HandleRemoveEntity(RemoveEntityCommand cmd)
-        {
-            var world = Worlds.GetById(cmd.WorldId);
-            var entity = Entities.GetById(cmd.EntityId);
-            world.RemoveEntity(entity);
-            return true;
-        }
-
-        private bool HandleAddEntity(AddEntityCommand cmd)
-        {
-
-
-            var world = Worlds.GetById(cmd.WorldId);
-            var entity = Entities.GetById(cmd.EntityId);
-            world.AddEntity(entity);
-            return true;
-        }
-
-        private bool HandlePauseWorld(PauseWorldCommand cmd)
-        {
-            var world = Worlds.GetById(cmd.WorldId);
-            world.Pause(cmd.Pause);
-            return true;
-        }
 
         #endregion Private Methods
     }

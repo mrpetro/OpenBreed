@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Core.Commands
 {
-    public class RemoveEntityCommand : IEntityCommand
+    public class RemoveEntityCommand : ICommand
     {
         #region Public Fields
 

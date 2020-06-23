@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Core.Commands
 {
-    public class TextDataInsert : IEntityCommand
+    public class TextDataInsert : ICommand
     {
         #region Public Fields
 

@@ -4,22 +4,19 @@ using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Helpers;
+using OpenBreed.Core.Managers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Systems
 {
-    public class TimerSystem : WorldSystem, ICommandExecutor, IUpdatableSystem
+    public class TimerSystem : WorldSystem, IUpdatableSystem
     {
         #region Private Fields
 
         private readonly List<int> entities = new List<int>();
-
-        private readonly CommandHandler cmdHandler;
 
         #endregion Private Fields
 
@@ -27,7 +24,6 @@ namespace OpenBreed.Core.Systems
 
         public TimerSystem(ICore core) : base(core)
         {
-            cmdHandler = new CommandHandler(this);
             Require<TimerComponent>();
         }
 
@@ -35,18 +31,19 @@ namespace OpenBreed.Core.Systems
 
         #region Public Methods
 
+        public static void RegisterHandlers(CommandsMan commands)
+        {
+            commands.Register<TimerStartCommand>(HandleTimerStartCommand);
+            commands.Register<TimerStopCommand>(HandleTimerStopCommand);
+        }
+
         public override void Initialize(World world)
         {
             base.Initialize(world);
-
-            World.RegisterHandler(TimerStartCommand.TYPE, cmdHandler);
-            World.RegisterHandler(TimerStopCommand.TYPE, cmdHandler);
         }
 
         public void Update(float dt)
         {
-            cmdHandler.ExecuteEnqueued();
-
             for (int i = 0; i < entities.Count; i++)
             {
                 var entity = Core.Entities.GetById(entities[i]);
@@ -58,14 +55,84 @@ namespace OpenBreed.Core.Systems
 
         public void UpdatePauseImmuneOnly(float dt)
         {
-            cmdHandler.ExecuteEnqueued();
-
             for (int i = 0; i < entities.Count; i++)
             {
                 var entity = Core.Entities.GetById(entities[i]);
                 if (entity.Components.OfType<PauseImmuneComponent>().Any())
                     Update(entity, dt);
             }
+        }
+
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        protected override void OnAddEntity(Entity entity)
+        {
+            entities.Add(entity.Id);
+        }
+
+        protected override void OnRemoveEntity(Entity entity)
+        {
+            var index = entities.IndexOf(entity.Id);
+
+            if (index < 0)
+                throw new InvalidOperationException("Entity not found in this system.");
+
+            entities.RemoveAt(index);
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
+
+        private static bool HandleTimerStartCommand(ICore core, TimerStartCommand cmd)
+        {
+            var entity = core.Entities.GetById(cmd.EntityId);
+
+            var timerComponent = entity.Get<TimerComponent>();
+
+            if (timerComponent == null)
+            {
+                core.Logging.Warning($"Entity '{cmd.EntityId}' has missing Timer Component.");
+                return false;
+            }
+
+            var timerData = timerComponent.Items.FirstOrDefault(item => item.TimerId == cmd.TimerId);
+
+            if (timerData == null)
+            {
+                timerData = new TimerData(cmd.TimerId, cmd.Interval);
+                timerComponent.Items.Add(timerData);
+            }
+            else
+                timerData.Interval = cmd.Interval;
+
+            timerData.Enabled = true;
+
+            return true;
+        }
+
+        private static bool HandleTimerStopCommand(ICore core, TimerStopCommand cmd)
+        {
+            var entity = core.Entities.GetById(cmd.EntityId);
+
+            var timerComponent = entity.Get<TimerComponent>();
+
+            if (timerComponent == null)
+            {
+                core.Logging.Warning($"Entity '{cmd.EntityId}' has missing Timer Component.");
+                return false;
+            }
+
+            var timerData = timerComponent.Items.FirstOrDefault(item => item.TimerId == cmd.TimerId);
+
+            if (timerData == null)
+                return true;
+
+            timerData.Enabled = false;
+
+            return true;
         }
 
         private void Update(Entity entity, float dt)
@@ -103,94 +170,6 @@ namespace OpenBreed.Core.Systems
         {
             entity.RaiseEvent(new TimerElapsedEventArgs(timerData.TimerId));
         }
-
-        public override bool ExecuteCommand(ICommand cmd)
-        {
-            switch (cmd.Type)
-            {
-                case TimerStartCommand.TYPE:
-                    return HandleTimerStartCommandMsg((TimerStartCommand)cmd);
-
-                case TimerStopCommand.TYPE:
-                    return HandleTimerStopCommandMsg((TimerStopCommand)cmd);
-
-                default:
-                    return false;
-            }
-        }
-
-        #endregion Public Methods
-
-        #region Protected Methods
-
-        protected override void OnAddEntity(Entity entity)
-        {
-            entities.Add(entity.Id);
-        }
-
-        protected override void OnRemoveEntity(Entity entity)
-        {
-            var index = entities.IndexOf(entity.Id);
-
-            if (index < 0)
-                throw new InvalidOperationException("Entity not found in this system.");
-
-            entities.RemoveAt(index);
-        }
-
-        #endregion Protected Methods
-
-        #region Private Methods
-
-        private bool HandleTimerStartCommandMsg(TimerStartCommand cmd)
-        {
-            var entity = Core.Entities.GetById(cmd.EntityId);
-
-            var timerComponent = entity.Get<TimerComponent>();
-
-            if (timerComponent == null)
-            {
-                Core.Logging.Warning($"Entity '{cmd.EntityId}' has missing Timer Component.");
-                return false;
-            }
-
-            var timerData = timerComponent.Items.FirstOrDefault(item => item.TimerId == cmd.TimerId);
-
-            if (timerData == null)
-            {
-                timerData = new TimerData(cmd.TimerId, cmd.Interval);
-                timerComponent.Items.Add(timerData);
-            }
-            else
-                timerData.Interval = cmd.Interval;
-
-            timerData.Enabled = true;
-
-            return true;
-        }
-
-        private bool HandleTimerStopCommandMsg(TimerStopCommand cmd)
-        {
-            var entity = Core.Entities.GetById(cmd.EntityId);
-
-            var timerComponent = entity.Get<TimerComponent>();
-
-            if (timerComponent == null)
-            {
-                Core.Logging.Warning($"Entity '{cmd.EntityId}' has missing Timer Component.");
-                return false;
-            }
-
-            var timerData = timerComponent.Items.FirstOrDefault(item => item.TimerId == cmd.TimerId);
-
-            if (timerData == null)
-                return true;
-
-            timerData.Enabled = false;
-
-            return true;
-        }
-
 
         #endregion Private Methods
     }

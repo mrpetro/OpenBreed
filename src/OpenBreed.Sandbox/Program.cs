@@ -14,6 +14,7 @@ using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Modules.Rendering.Builders;
+using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Control.Systems;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Button;
@@ -55,15 +56,12 @@ namespace OpenBreed.Sandbox
             Logging = new LogMan(this);
 
             Scripts = new LuaScriptMan(this);
-            Commands = new CommandsMan(this);
-            Events = new EventsMan(this);
-            Entities = new EntityMan(this);
             StateMachines = new FsmMan(this);
             Shapes = new ShapeMan(this);
             Players = new PlayersMan(this);
             Items = new ItemsMan(this);
             Inputs = new InputsMan(this);
-            Worlds = new WorldMan(this);
+
             Jobs = new JobMan(this);
 
             Rendering = new OpenGLModule(this);
@@ -91,8 +89,6 @@ namespace OpenBreed.Sandbox
 
         public override AnimMan Animations { get; }
 
-        public override EntityMan Entities { get; }
-
         public override FsmMan StateMachines { get; }
 
         public ShapeMan Shapes { get; }
@@ -106,12 +102,6 @@ namespace OpenBreed.Sandbox
         public override ItemsMan Items { get; }
 
         public override InputsMan Inputs { get; }
-
-        public override CommandsMan Commands { get; }
-
-        public override EventsMan Events { get; }
-
-        public override WorldMan Worlds { get; }
 
         public override IScriptMan Scripts { get; }
 
@@ -221,12 +211,21 @@ namespace OpenBreed.Sandbox
             Inputs.OnKeyPress(e);
         }
 
+        private void RegisterSystems()
+        {
+            FollowerSystem.RegisterHandlers(Commands);
+            StateMachineSystem.RegisterHandlers(Commands);
+            TextInputSystem.RegisterHandlers(Commands);
+            TimerSystem.RegisterHandlers(Commands);
+        }
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
             Title = $"Open Breed Sandbox (Version: {appVersion} Vsync: {VSync})";
 
+            RegisterSystems();
             RegisterComponentBuilders();
             RegisterShapes();
             RegisterFixtures();
@@ -321,13 +320,17 @@ namespace OpenBreed.Sandbox
         {
             base.OnUpdateFrame(e);
 
+            Commands.ExecuteEnqueued();
+
             Worlds.Cleanup();
+
             Rendering.Cleanup();
+
             Players.ResetInputs();
+
             Inputs.Update();
             Players.ApplyInputs();
             //StateMachine.Update((float)e.Time);
-
             Worlds.Update((float)e.Time);
             Jobs.Update((float)e.Time);
         }

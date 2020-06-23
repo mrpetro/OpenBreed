@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Core.Commands
 {
-    public class PauseWorldCommand : IWorldCommand
+    public class PauseWorldCommand : ICommand
     {
         #region Public Fields
 
