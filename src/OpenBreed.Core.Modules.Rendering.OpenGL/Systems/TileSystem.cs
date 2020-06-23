@@ -18,10 +18,11 @@ using OpenBreed.Core.Commands;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Systems;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TileSystem : WorldSystem, ICommandExecutor, IRenderableSystem
+    public class TileSystem : WorldSystem, IRenderableSystem
     {
         #region Public Fields
 
@@ -32,7 +33,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Fields
 
-        private CommandHandler cmdHandler;
         private Hashtable entities = new Hashtable();
         private TileCell[] cells;
 
@@ -42,8 +42,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         internal TileSystem(TileSystemBuilder builder) : base(builder.core)
         {
-            cmdHandler = new CommandHandler(this);
-
             Require<TileComponent>();
             Require<PositionComponent>();
 
@@ -74,18 +72,14 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Public Methods
 
-        public override void Initialize(World world)
+        public static void RegisterHandlers(CommandsMan commands)
         {
-            base.Initialize(world);
-
-            World.RegisterHandler(TileSetCommand.TYPE, cmdHandler);
-            World.RegisterHandler(PutStampCommand.TYPE, cmdHandler);
+            commands.Register<TileSetCommand>(HandleTileSetCommand);
+            commands.Register<PutStampCommand>(HandlePutStampCommand);
         }
 
         public void Render(Box2 clipBox, int depth, float dt)
         {
-            cmdHandler.ExecuteEnqueued();
-
             int leftIndex = (int)clipBox.Left / TILE_SIZE;
             int bottomIndex = (int)clipBox.Bottom / TILE_SIZE;
             int rightIndex = (int)clipBox.Right / TILE_SIZE + 1;
@@ -115,19 +109,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Disable(EnableCap.Texture2D);
         }
 
-        public override bool ExecuteCommand(object sender, ICommand cmd)
-        {
-            switch (cmd.Type)
-            {
-                case TileSetCommand.TYPE:
-                    return HandleTileSetCommand(sender, (TileSetCommand)cmd);
-                case PutStampCommand.TYPE:
-                    return HandlePutStampCommand(sender, (PutStampCommand)cmd);
-                default:
-                    return false;
-            }
-        }
-
         public bool TryGetGridIndices(Vector2 point, out int xIndex, out int yIndex)
         {
             xIndex = (int)point.X / TILE_SIZE;
@@ -148,11 +129,11 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Protected Methods
 
-        protected override void RegisterEntity(IEntity entity)
+        protected override void OnAddEntity(Entity entity)
         {
             Debug.Assert(!entities.Contains(entity), "Entity already added!");
 
-            var pos = entity.GetComponent<PositionComponent>();
+            var pos = entity.Get<PositionComponent>();
 
             int xIndex;
             int yIndex;
@@ -162,7 +143,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
             var cellIndex = xIndex + GridWidth * yIndex;
 
-            var tile = entity.GetComponent<TileComponent>();
+            var tile = entity.Get<TileComponent>();
 
             entities[entity] = tile;
 
@@ -172,7 +153,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             tileCell.ImageId = tile.ImageId;
         }
 
-        protected override void UnregisterEntity(IEntity entity)
+        protected override void OnRemoveEntity(Entity entity)
         {
             throw new NotImplementedException();
         }
@@ -181,26 +162,30 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Methods
 
-        private bool HandleTileSetCommand(object sender, TileSetCommand cmd)
+        private static bool HandleTileSetCommand(ICore core, TileSetCommand cmd)
         {
+            var system = core.GetSystemByWorldId<TileSystem>(cmd.WorldId);
+
             int xIndex;
             int yIndex;
 
-            if (!TryGetGridIndices(cmd.Position, out xIndex, out yIndex))
+            if (!system.TryGetGridIndices(cmd.Position, out xIndex, out yIndex))
                 throw new InvalidOperationException($"Tile position exceeds tile grid limits.");
 
-            var cellIndex = xIndex + GridWidth * yIndex;
+            var cellIndex = xIndex + system.GridWidth * yIndex;
 
-            var tileCell = this.cells[cellIndex];
+            var tileCell = system.cells[cellIndex];
             tileCell.AtlasId = cmd.AtlasId;
             tileCell.ImageId = cmd.ImageId;
 
             return true;
         }
 
-        private bool HandlePutStampCommand(object sender, PutStampCommand msg)
+        private static bool HandlePutStampCommand(ICore core, PutStampCommand cmd)
         {
-            var stamp = Core.Rendering.Stamps.GetById(msg.StampId);
+            var system = core.GetSystemByWorldId<TileSystem>(cmd.WorldId);
+
+            var stamp = core.Rendering.Stamps.GetById(cmd.StampId);
 
             if (stamp == null)
                 return false;
@@ -208,18 +193,18 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             int xIndex;
             int yIndex;
 
-            if (!TryGetGridIndices(msg.Position, out xIndex, out yIndex))
+            if (!system.TryGetGridIndices(cmd.Position, out xIndex, out yIndex))
                 throw new InvalidOperationException($"Tile position exceeds tile grid limits.");
 
             for (int j = 0; j < stamp.Height; j++)
             {
-                var cellIndex = xIndex + GridWidth * (yIndex + j);
+                var cellIndex = xIndex + system.GridWidth * (yIndex + j);
 
                 for (int i = 0; i < stamp.Width; i++)
                 {
                     var imageId = stamp.Data[i + stamp.Width * j];
-                    this.cells[cellIndex].ImageId = imageId;
-                    this.cells[cellIndex].AtlasId = 0;
+                    system.cells[cellIndex].ImageId = imageId;
+                    system.cells[cellIndex].AtlasId = 0;
                     cellIndex++;
                 }
             }

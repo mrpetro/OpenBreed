@@ -109,6 +109,7 @@
     <Compile Include="Entities\Camera\CameraHelper.cs" />
     <Compile Include="Entities\Door\DoorHelper.cs" />
     <Compile Include="Entities\Door\States\FunctioningState.cs" />
+    <Compile Include="Entities\Door\States\OpenedAwaitClose.cs" />
     <Compile Include="Entities\Door\States\OpenedState.cs" />
     <Compile Include="Entities\Door\States\ClosedState.cs" />
     <Compile Include="Entities\Door\States\OpeningState.cs" />
@@ -119,16 +120,13 @@
     <Compile Include="Entities\Pickable\States\LyingState.cs" />
     <Compile Include="Entities\Pickable\States\PickingState.cs" />
     <Compile Include="Entities\Projectile\States\AttackingState.cs" />
-    <Compile Include="Entities\Teleport\CameraFollowJob.cs" />
-    <Compile Include="Entities\Teleport\CameraEffectJob.cs" />
     <Compile Include="Entities\Teleport\TeleportHelper.cs" />
     <Compile Include="Entities\Projectile\ProjectileHelper.cs" />
     <Compile Include="Entities\Projectile\States\FiredState.cs" />
-    <Compile Include="Entities\Teleport\TeleportJob.cs" />
+    <Compile Include="Entities\Text\TextHelper.cs" />
     <Compile Include="Entities\WorldGate\WorldGateHelper.cs" />
     <Compile Include="Helpers\AnimHelper.cs" />
     <Compile Include="IWorldReader.cs" />
-    <Compile Include="Jobs\EntityJob.cs" />
     <Compile Include="Jobs\FpsTextUpdateJob.cs" />
     <Compile Include="Managers\LogMan.cs" />
     <Compile Include="Items\CreditsItem.cs" />
@@ -138,6 +136,7 @@
     <Compile Include="Tools.cs" />
     <Compile Include="Worlds\GameWorldHelper.cs" />
     <Compile Include="Worlds\HudWorldHelper.cs" />
+    <Compile Include="Worlds\TextWorldHelper.cs" />
     <Compile Include="Worlds\MenuWorldHelper.cs" />
     <Compile Include="Worlds\ScreenWorldHelper.cs" />
     <Compile Include="Worlds\TxtFileWorldReader.cs" />
@@ -173,6 +172,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Button\Button.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\Door\DoorSShh.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="OpenTK.dll.config" />

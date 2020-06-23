@@ -32,7 +32,7 @@
 
 //        #region Public Properties
 
-//        public IEntity Entity { get; private set; }
+//        public Entity Entity { get; private set; }
 //        public string Name { get; }
 
 //        #endregion Public Properties
@@ -48,7 +48,7 @@
 //            Entity.Subscribe<CollisionEventArgs>(OnCollision);
 //        }
 
-//        public void Initialize(IEntity entity)
+//        public void Initialize(Entity entity)
 //        {
 //            Entity = entity;
 //        }

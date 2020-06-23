@@ -1,12 +1,10 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common;
+﻿using OpenBreed.Core.Common;
 
 using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Events;
-using OpenBreed.Core.States;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 
 namespace OpenBreed.Core.Entities
@@ -14,7 +12,7 @@ namespace OpenBreed.Core.Entities
     /// <summary>
     /// Entity interface implementation
     /// </summary>
-    internal class Entity : IEntity
+    public class Entity
     {
         #region Private Fields
 
@@ -36,8 +34,14 @@ namespace OpenBreed.Core.Entities
 
         #region Public Properties
 
+        /// <summary>
+        /// Read-olny list of components for this entity
+        /// </summary>
         public ReadOnlyCollection<IEntityComponent> Components { get; }
 
+        /// <summary>
+        /// Core reference
+        /// </summary>
         public ICore Core { get; }
 
         /// <summary>
@@ -45,72 +49,98 @@ namespace OpenBreed.Core.Entities
         /// </summary>
         public object Tag { get; set; }
 
-        public World World { get; private set; }
+        /// <summary>
+        /// World reference this entity is currently in
+        /// </summary>
+        public World World { get; internal set; }
 
+        /// <summary>
+        /// Identification number of this entity
+        /// </summary>
         public int Id { get; internal set; }
 
+        /// <summary>
+        /// Property for various debug data
+        /// </summary>
         public object DebugData { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        //public void Impulse<TState, TImpulse>(TImpulse impulse) where TState : struct, IConvertible where TImpulse : struct, IConvertible
-        //{
-        //    var sm = FsmList.OfType<StateMachine<TState, TImpulse>>().FirstOrDefault();
-        //    sm.Perform(impulse);
-        //}
-
-        public T TryGetComponent<T>()
+        /// <summary>
+        /// Gets component of specific type if it exists
+        /// </summary>
+        /// <typeparam name="T">Type of component to get</typeparam>
+        /// <returns>Entity component if exists, null if not</returns>
+        public T TryGet<T>()
         {
             return components.OfType<T>().FirstOrDefault();
         }
 
+        /// <summary>
+        /// Checks if entity contains component of specific type
+        /// </summary>
+        /// <typeparam name="T">Type of component to check</typeparam>
+        /// <returns>true if entity contains the component, false if not</returns>
         public bool Contains<T>()
         {
             return components.OfType<T>().Any();
         }
 
-        public T GetComponent<T>()
+        /// <summary>
+        /// Gets component of specific type
+        /// </summary>
+        /// <typeparam name="T">Type of component to get </typeparam>
+        /// <returns>Entity component if exists, throws exception if not</returns>
+        public T Get<T>()
         {
             return components.OfType<T>().First();
         }
 
-        public void PostCommand(ICommand command)
-        {
-            Core.Commands.Post(this, command);
-        }
-
+        /// <summary>
+        /// Enqueue an event of specific type and arguments
+        /// </summary>
+        /// <param name="eventArgs">Arguments of event</param>
         public void RaiseEvent<T>(T eventArgs) where T : EventArgs
         {
             Core.Events.Raise(this, eventArgs);
         }
 
+        /// <summary>
+        /// Subscribe to particular event
+        /// </summary>
+        /// <param name="callback">event callback</param>
         public void Subscribe<T>(Action<object, T> callback) where T : EventArgs
         {
             Core.Events.Subscribe(this, callback);
         }
 
+        /// <summary>
+        /// Unsubscribe from particular event
+        /// </summary>
+        /// <param name="callback">event callback to unsubscribe</param>
         public void Unsubscribe<T>(Action<object, T> callback) where T : EventArgs
         {
             Core.Events.Unsubscribe(this, callback);
         }
 
+        /// <summary>
+        /// Add component to entity
+        /// </summary>
+        /// <param name="component">Component to add</param>
         public void Add(IEntityComponent component)
         {
+            Debug.Assert(component != null, "Adding null component to entity is forbidden.");
+            Debug.Assert(!components.Any(item => item.GetType() == component.GetType()), "Adding two components of same type to one entity is forbidden.");
             components.Add(component);
         }
 
-        public virtual void EnterWorld(World world)
-        {
-            world.AddEntity(this);
-        }
-
-        public virtual void LeaveWorld()
-        {
-            World.RemoveEntity(this);
-        }
-
+        /// <summary>
+        /// Remove component from entity
+        /// </summary>
+        /// <param name="component"></param>
+        /// <returns>True if component remove successfuly, false otherwise</returns>
         public bool Remove(IEntityComponent component)
         {
             return components.Remove(component);
@@ -118,42 +148,9 @@ namespace OpenBreed.Core.Entities
 
         public override string ToString()
         {
-            return $"Entity:{Id}";
+            return $"Entity({Id})";
         }
 
         #endregion Public Methods
-
-        #region Internal Methods
-
-        internal void Deinitialize()
-        {
-            var from = World;
-            //Forget the world in which entity was
-            World = null;
-            OnLeftWorld(from);
-        }
-
-        internal void Initialize(World world)
-        {
-            //Remember in what world entity is
-            World = world;
-            OnEnteredWorld(World);
-        }
-
-        #endregion Internal Methods
-
-        #region Private Methods
-
-        private void OnLeftWorld(World world)
-        {
-            RaiseEvent(new EntityLeftWorldEventArgs(this, world));
-        }
-
-        private void OnEnteredWorld(World world)
-        {
-            RaiseEvent(new EntityEnteredWorldEventArgs(this, world));
-        }
-
-        #endregion Private Methods
     }
 }

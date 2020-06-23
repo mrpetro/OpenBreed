@@ -1,4 +1,7 @@
 ﻿Templates.Entities.DoorHorizontal = {
+    ClassComponent = { "DoorHorizontal" },
+    TimerComponent = {},
+    FsmComponent = { { "Door.Functioning" , "Closed"} },
     AnimationComponent = {
         Speed = 5.0,
         Loop = false},

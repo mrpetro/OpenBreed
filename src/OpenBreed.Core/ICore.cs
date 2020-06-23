@@ -1,19 +1,13 @@
-﻿using System.Drawing;
-using NLua;
-using OpenBreed.Core.Common.Systems;
-using OpenBreed.Core.Entities;
+using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Builders;
 using OpenBreed.Core.Helpers;
-using OpenBreed.Core.Inputs;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
-using OpenBreed.Core.Modules.Animation;
-using OpenBreed.Core.Modules.Animation.Helpers;
 using OpenBreed.Core.Modules.Audio;
-using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Rendering;
-using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenBreed.Core.States;
+using OpenBreed.Core.Systems;
 using OpenTK;
+using System.Drawing;
 
 namespace OpenBreed.Core
 {
@@ -82,7 +76,7 @@ namespace OpenBreed.Core
         /// <summary>
         /// Commands manager
         /// </summary>
-        CommandsMan Commands{ get; }
+        CommandsMan Commands { get; }
 
         /// <summary>
         /// Events manager
@@ -109,6 +103,10 @@ namespace OpenBreed.Core
         /// </summary>
         float ClientRatio { get; }
 
+        #endregion Public Properties
+
+        #region Public Methods
+
         /// <summary>
         /// Get core module of specific type
         /// </summary>
@@ -116,14 +114,21 @@ namespace OpenBreed.Core
         /// <returns>Core module</returns>
         T GetModule<T>() where T : ICoreModule;
 
-        #endregion Public Properties
-
-        #region Public Methods
+        /// <summary>
+        /// Get component builder
+        /// </summary>
+        /// <typeparam name="TBuilder">Component builder type to get</typeparam>
+        /// <returns>Component builder of specified type</returns>
+        TBuilder GetBuilder<TBuilder>() where TBuilder : IComponentBuilder;
 
         /// <summary>
         /// Perform exit
         /// </summary>
         void Exit();
+
+        T GetSystemByEntityId<T>(int entityId) where T : IWorldSystem;
+
+        T GetSystemByWorldId<T>(int worldId) where T : IWorldSystem;
 
         #endregion Public Methods
     }

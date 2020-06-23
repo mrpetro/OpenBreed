@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
@@ -21,6 +22,7 @@ namespace OpenBreed.Sandbox.Worlds
     {
         public const string GAME_VIEWPORT = "GameViewport";
         public const string HUD_VIEWPORT = "HUDViewport";
+        public const string TEXT_VIEWPORT = "TextViewport";
 
         public static void AddSystems(Program core, WorldBuilder builder)
         {
@@ -31,7 +33,7 @@ namespace OpenBreed.Sandbox.Worlds
             //builder.AddSystem(core.CreateTextSystem().Build());
         }
 
-        public static IEntity CreateViewportEntity(ICore core, string name, float x, float y, float width, float height, bool drawBackground, bool clipping = true)
+        public static Entity CreateViewportEntity(ICore core, string name, float x, float y, float width, float height, bool drawBackground, bool clipping = true)
         {
             var viewport = core.Entities.Create();
             viewport.Tag = name;
@@ -60,15 +62,20 @@ namespace OpenBreed.Sandbox.Worlds
             var gameViewport = CreateViewportEntity(core, GAME_VIEWPORT, 32, 32, core.ClientRectangle.Width - 64, core.ClientRectangle.Height - 64, true, true);
             //gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
             //gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitHeightPreserveAspectRatio;
-            gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
+            gameViewport.Get<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
             var hudViewport = CreateViewportEntity(core, HUD_VIEWPORT, 0, 0, core.ClientRectangle.Width, core.ClientRectangle.Height, false, true);
+            var textViewport = CreateViewportEntity(core, TEXT_VIEWPORT, 0, 0, core.ClientRectangle.Width, core.ClientRectangle.Height, false, true);
 
             core.Rendering.Subscribe<ClientResizedEventArgs>((s, a) => ResizeGameViewport(gameViewport, a));
             core.Rendering.Subscribe<ClientResizedEventArgs>((s, a) => ResizeHudViewport(hudViewport, a));
+            core.Rendering.Subscribe<ClientResizedEventArgs>((s, a) => ResizeTextViewport(hudViewport, a));
 
-            world.AddEntity(gameViewport);
-            world.AddEntity(hudViewport);
 
+            core.Commands.Post(new AddEntityCommand(world.Id, gameViewport.Id));
+            core.Commands.Post(new AddEntityCommand(world.Id, hudViewport.Id));
+            core.Commands.Post(new AddEntityCommand(world.Id, textViewport.Id));
+            //world.AddEntity(gameViewport);
+            //world.AddEntity(hudViewport);
 
             gameViewport.Subscribe<ViewportClickedEventArgs>(OnViewportClick);
 
@@ -80,15 +87,19 @@ namespace OpenBreed.Sandbox.Worlds
             throw new NotImplementedException();
         }
 
-        private static void ResizeGameViewport(IEntity viewport, ClientResizedEventArgs args)
+        private static void ResizeGameViewport(Entity viewport, ClientResizedEventArgs args)
         {
-            viewport.PostCommand(new ViewportResizeCommand(viewport.Id, args.Width - 64, args.Height - 64));
+            viewport.Core.Commands.Post(new ViewportResizeCommand(viewport.Id, args.Width - 64, args.Height - 64));
         }
 
-        private static void ResizeHudViewport(IEntity viewport, ClientResizedEventArgs args)
+        private static void ResizeHudViewport(Entity viewport, ClientResizedEventArgs args)
         {
-            viewport.PostCommand(new ViewportResizeCommand(viewport.Id, args.Width, args.Height));
+            viewport.Core.Commands.Post(new ViewportResizeCommand(viewport.Id, args.Width, args.Height));
         }
 
+        private static void ResizeTextViewport(Entity viewport, ClientResizedEventArgs args)
+        {
+            viewport.Core.Commands.Post(new ViewportResizeCommand(viewport.Id, args.Width, args.Height));
+        }
     }
 }

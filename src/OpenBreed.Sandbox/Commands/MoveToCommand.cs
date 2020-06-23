@@ -16,7 +16,7 @@
 //        private AiControl controller;
 //        private Vector2 position;
 
-//        public MoveToCommand(IEntity actor, Vector2 position)
+//        public MoveToCommand(Entity actor, Vector2 position)
 //        {
 //            controller = actor.TryGetComponent<AiControl>().FirstOrDefault();
 

@@ -9,7 +9,9 @@ using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace OpenBreed.Core.Common
 {
@@ -19,7 +21,7 @@ namespace OpenBreed.Core.Common
     /// Enqueues events:
     /// WorldInitializedEvent - when world is initialized
     /// </summary>
-    public class World : IMsgHandler, ICommandExecutor
+    public class World
     {
         #region Public Fields
 
@@ -29,15 +31,12 @@ namespace OpenBreed.Core.Common
 
         #region Private Fields
 
-        private readonly List<IEntity> entities = new List<IEntity>();
-        private readonly List<IEntity> toAdd = new List<IEntity>();
-        private readonly List<IEntity> toRemove = new List<IEntity>();
+        private readonly List<Entity> entities = new List<Entity>();
+        private readonly List<Entity> toAdd = new List<Entity>();
+        private readonly List<Entity> toRemove = new List<Entity>();
         private readonly List<IWorldSystem> systems = new List<IWorldSystem>();
 
         private float timeMultiplier = 1.0f;
-
-        private CommandHandler commandHandler;
-        private MsgHandlerRelay msgHandlerRelay;
 
         #endregion Private Fields
 
@@ -48,14 +47,12 @@ namespace OpenBreed.Core.Common
             Core = builder.core;
             Name = builder.name;
 
-            Entities = new ReadOnlyCollection<IEntity>(entities);
+            Entities = new ReadOnlyCollection<Entity>(entities);
 
             systems = builder.systems;
             Systems = new ReadOnlyCollection<IWorldSystem>(systems);
 
             Components = new ComponentsMan();
-            commandHandler = new CommandHandler(this);
-            msgHandlerRelay = new MsgHandlerRelay(this);
 
             Core.Worlds.RegisterWorld(this);
 
@@ -72,7 +69,7 @@ namespace OpenBreed.Core.Common
         /// <summary>
         /// Pauses or unpauses this world
         /// </summary>
-        public bool Paused { get; set; }
+        public bool Paused { get; private set; }
 
         /// <summary>
         /// Time "speed" control value, can't be negative but can be 0 (Basicaly stops time).
@@ -92,7 +89,7 @@ namespace OpenBreed.Core.Common
 
         public ICore Core { get; }
 
-        public ReadOnlyCollection<IEntity> Entities { get; }
+        public ReadOnlyCollection<Entity> Entities { get; }
 
         public ReadOnlyCollection<IWorldSystem> Systems { get; }
 
@@ -117,16 +114,19 @@ namespace OpenBreed.Core.Common
             return $"World:{Name}";
         }
 
-        public bool ExecuteCommand(object sender, ICommand cmd)
+        /// <summary>
+        /// Method will remove all entities from this world.
+        /// Entities will not be removed immediately but at the end of each world update.
+        /// </summary>
+        public void RemoveAllEntities()
         {
-            switch (cmd.Type)
-            {
-                case WorldSetPauseCommand.TYPE:
-                    return HandleWorldPauseCommand(sender, (WorldSetPauseCommand)cmd);
+            for (int i = 0; i < entities.Count; i++)
+                RemoveEntity(entities[i]);
+        }
 
-                default:
-                    return false;
-            }
+        public T GetSystem<T>() where T : IWorldSystem
+        {
+            return systems.OfType<T>().FirstOrDefault();
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace OpenBreed.Core.Common
         /// An exception will be thrown if given entity already exists in world
         /// </summary>
         /// <param name="entity">Entity to be added to this world</param>
-        public void AddEntity(IEntity entity)
+        public void AddEntity(Entity entity)
         {
             if (entity.World != null)
                 throw new InvalidOperationException("Entity can't exist in more than one world.");
@@ -149,7 +149,7 @@ namespace OpenBreed.Core.Common
         /// An exception will be thrown if given entity does not exist in this world.
         /// </summary>
         /// <param name="entity">Entity to be removed from this world</param>
-        public void RemoveEntity(IEntity entity)
+        public void RemoveEntity(Entity entity)
         {
             if (entity.World != this)
                 throw new InvalidOperationException("Entity doesn't exist in this world");
@@ -157,29 +157,17 @@ namespace OpenBreed.Core.Common
             toRemove.Add(entity);
         }
 
-        /// <summary>
-        /// Method will remove all entities from this world.
-        /// Entities will not be removed immediately but at the end of each world update.
-        /// </summary>
-        public void RemoveAllEntities()
+        public void Pause(bool value)
         {
-            for (int i = 0; i < entities.Count; i++)
-                RemoveEntity(entities[i]);
-        }
+            if (Paused == value)
+                return;
 
-        public void RegisterHandler(string msgType, IMsgHandler msgHandler)
-        {
-            msgHandlerRelay.RegisterHandler(msgType, msgHandler);
-        }
+            Paused = value;
 
-        public bool Handle(object sender, IMsg msg)
-        {
-            return msgHandlerRelay.Handle(sender, msg);
-        }
-
-        public void RaiseEvent<T>(T eventArgs) where T : EventArgs
-        {
-            Core.Events.Raise(this, eventArgs);
+            if (Paused)
+                Core.Worlds.RaiseEvent(new WorldPausedEventArgs(Id));
+            else
+                Core.Worlds.RaiseEvent(new WorldUnpausedEventArgs(Id));
         }
 
         #endregion Public Methods
@@ -188,12 +176,25 @@ namespace OpenBreed.Core.Common
 
         internal void Update(float dt)
         {
-            commandHandler.ExecuteEnqueued();
-
             if (Paused)
-                systems.OfType<IUpdatableSystem>().ForEach(item => item.UpdatePauseImmuneOnly(dt * TimeMultiplier));
+            {
+                foreach (var item in systems.OfType<IUpdatableSystem>())
+                {
+                    Core.Commands.ExecuteEnqueued();
+                    item.UpdatePauseImmuneOnly(dt * TimeMultiplier);
+                }
+                //systems.OfType<IUpdatableSystem>().ForEach(item => item.UpdatePauseImmuneOnly(dt * TimeMultiplier));
+            }
+
             else
-                systems.OfType<IUpdatableSystem>().ForEach(item => item.Update(dt * TimeMultiplier));
+            {
+                foreach (var item in systems.OfType<IUpdatableSystem>())
+                {
+                    Core.Commands.ExecuteEnqueued();
+                    item.Update(dt * TimeMultiplier);
+                }
+                //systems.OfType<IUpdatableSystem>().ForEach(item => item.Update(dt * TimeMultiplier));
+            }
         }
 
         internal void Initialize()
@@ -201,48 +202,24 @@ namespace OpenBreed.Core.Common
             //InitializeSystems();
             Cleanup();
 
-            RaiseEvent(new WorldInitializedEventArgs(this));
+            Core.Worlds.RaiseEvent(new WorldInitializedEventArgs(Id));
         }
 
         internal void Deinitialize()
         {
-            RaiseEvent(new WorldDeinitializedEventArgs(this));
-        }
-
-        internal void RegisterEntity(Entity entity)
-        {
-            AddEntityToSystems(entity);
-
-            //Initialize the entity and add it to entities list
-            entities.Add(entity);
-        }
-
-        internal void UnregisterEntity(Entity entity)
-        {
-            //Deinitialize the entity and remove it from entities list
-            entities.Remove(entity);
-
-            RemoveEntityFromSystems(entity);
+            Core.Worlds.RaiseEvent(new WorldDeinitializedEventArgs(Id));
         }
 
         internal void Cleanup()
         {
             //Perform deinitialization of removed entities
-            toRemove.ForEach(item => ((Entity)item).Deinitialize());
-
-            //Process entities to remove
-            for (int i = 0; i < toRemove.Count; i++)
-                UnregisterEntity((Entity)toRemove[i]);
-
-            //Process entities to add
-            for (int i = 0; i < toAdd.Count; i++)
-                RegisterEntity((Entity)toAdd[i]);
+            toRemove.ForEach(item => DeinitializeEntity(item));
 
             //Perform cleanup on all world systems
             Systems.ForEach(item => item.Cleanup());
 
             //Perform initialization of added entities
-            toAdd.ForEach(item => ((Entity)item).Initialize(this));
+            toAdd.ForEach(item => InitializeEntity(item));
 
             toRemove.Clear();
             toAdd.Clear();
@@ -252,17 +229,36 @@ namespace OpenBreed.Core.Common
 
         #region Private Methods
 
+        private void DeinitializeEntity(Entity entity)
+        {
+            ((Entity)entity).World = null;
+            entities.Remove(entity);
+            RemoveEntityFromSystems(entity);
+            OnEntityRemoved(entity);
+        }
+
+        private void InitializeEntity(Entity entity)
+        {
+            entities.Add(entity);
+            ((Entity)entity).World = this;
+            AddEntityToSystems(entity);
+            OnEntityAdded(entity);
+        }
+
+        private void OnEntityAdded(Entity entity)
+        {
+            Core.Worlds.RaiseEvent(new EntityAddedEventArgs(Id, entity.Id));
+        }
+
+        private void OnEntityRemoved(Entity entity)
+        {
+            Core.Worlds.RaiseEvent(new EntityRemovedEventArgs(Id, entity.Id));
+        }
+
         private void InitializeSystems()
         {
             for (int i = 0; i < systems.Count; i++)
                 systems[i].Initialize(this);
-        }
-
-        private bool HandleWorldPauseCommand(object sender, WorldSetPauseCommand cmd)
-        {
-            Paused = cmd.Pause;
-
-            return true;
         }
 
         private void AddEntityToSystems(Entity entity)

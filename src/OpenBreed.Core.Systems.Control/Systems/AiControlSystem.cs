@@ -20,7 +20,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
     {
         #region Private Fields
 
-        private readonly List<IEntity> entities = new List<IEntity>();
+        private readonly List<Entity> entities = new List<Entity>();
         private readonly List<AiControl> aiControlComps = new List<AiControl>();
         private readonly List<PositionComponent> positionComps = new List<PositionComponent>();
 
@@ -52,14 +52,14 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         #region Protected Methods
 
-        protected override void RegisterEntity(IEntity entity)
+        protected override void OnAddEntity(Entity entity)
         {
             entities.Add(entity);
-            aiControlComps.Add(entity.GetComponent<AiControl>());
-            positionComps.Add(entity.GetComponent<PositionComponent>());
+            aiControlComps.Add(entity.Get<AiControl>());
+            positionComps.Add(entity.Get<PositionComponent>());
         }
 
-        protected override void UnregisterEntity(IEntity entity)
+        protected override void OnRemoveEntity(Entity entity)
         {
             var index = entities.IndexOf(entity);
 

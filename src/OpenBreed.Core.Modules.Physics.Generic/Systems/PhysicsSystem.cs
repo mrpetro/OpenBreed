@@ -4,6 +4,7 @@ using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Helpers;
+using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Physics.Commands;
 using OpenBreed.Core.Modules.Physics.Components;
@@ -17,7 +18,7 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Physics.Systems
 {
-    public class PhysicsSystem : WorldSystem, IPhysicsSystem, ICommandExecutor
+    public class PhysicsSystem : WorldSystem, IPhysicsSystem
     {
         #region Private Fields
 
@@ -28,7 +29,6 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         private readonly List<DynamicPack> inactiveDynamics = new List<DynamicPack>();
         private readonly List<DynamicPack> activeDynamics = new List<DynamicPack>();
         private readonly List<StaticPack> inactiveStatics = new List<StaticPack>();
-        private CommandHandler cmdHandler;
         private List<StaticPack>[] gridStatics;
 
         #endregion Private Fields
@@ -39,7 +39,6 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         {
             Fixtures = Core.GetModule<PhysicsModule>().Fixturs;
 
-            cmdHandler = new CommandHandler(this);
             Require<BodyComponent>();
 
             GridWidth = builder.gridWidth;
@@ -73,12 +72,10 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             return new Box2(bx, by, bx + CELL_SIZE, by + CELL_SIZE);
         }
 
-        public override void Initialize(World world)
+        public static void RegisterHandlers(CommandsMan commands)
         {
-            base.Initialize(world);
-
-            World.RegisterHandler(BodyOnCommand.TYPE, cmdHandler);
-            World.RegisterHandler(BodyOffCommand.TYPE, cmdHandler);
+            commands.Register<BodyOnCommand>(HandleBodyOnCommand);
+            commands.Register<BodyOffCommand>(HandleBodyOffCommand);
         }
 
         public void UpdatePauseImmuneOnly(float dt)
@@ -87,8 +84,6 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         public void Update(float dt)
         {
-            cmdHandler.ExecuteEnqueued();
-
             UpdateAabbs();
 
             SweepAndPrune(dt);
@@ -106,21 +101,6 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             {
                 var ad = activeDynamics[i];
                 UpdateAabb(ad.Body, ad.Position);
-            }
-        }
-
-        public override bool ExecuteCommand(object sender, ICommand cmd)
-        {
-            switch (cmd.Type)
-            {
-                case BodyOnCommand.TYPE:
-                    return HandleBodyOnCommand(sender, (BodyOnCommand)cmd);
-
-                case BodyOffCommand.TYPE:
-                    return HandleBodyOffCommand(sender, (BodyOffCommand)cmd);
-
-                default:
-                    return false;
             }
         }
 
@@ -144,7 +124,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         #region Protected Methods
 
-        protected override void RegisterEntity(IEntity entity)
+        protected override void OnAddEntity(Entity entity)
         {
             if (entity.Components.Any(item => item is VelocityComponent))
                 RegisterDynamicEntity(entity);
@@ -152,7 +132,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 RegisterStaticEntity(entity);
         }
 
-        protected override void UnregisterEntity(IEntity entity)
+        protected override void OnRemoveEntity(Entity entity)
         {
             if (entity.Components.Any(item => item is VelocityComponent))
                 UnregisterDynamicEntity(entity);
@@ -164,31 +144,35 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         #region Private Methods
 
-        private static Box2 GetAabb(IEntity entity)
+        private static Box2 GetAabb(Entity entity)
         {
-            var body = entity.GetComponent<BodyComponent>();
+            var body = entity.Get<BodyComponent>();
             return body.Aabb;
         }
 
-        private bool HandleBodyOnCommand(object sender, BodyOnCommand cmd)
+        private static bool HandleBodyOnCommand(ICore core, BodyOnCommand cmd)
         {
-            var dynamicToActivate = inactiveDynamics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
+            var system = core.GetSystemByEntityId<PhysicsSystem>(cmd.EntityId);
+            if (system == null)
+                return false;
 
-            var entity = Core.Entities.GetById(cmd.EntityId);
+            var dynamicToActivate = system.inactiveDynamics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
+
+            var entity = core.Entities.GetById(cmd.EntityId);
 
             if (dynamicToActivate != null)
             {
-                activeDynamics.Add(dynamicToActivate);
-                inactiveDynamics.Remove(dynamicToActivate);
+                system.activeDynamics.Add(dynamicToActivate);
+                system.inactiveDynamics.Remove(dynamicToActivate);
                 entity.RaiseEvent(new BodyOnEventArgs(entity));
                 return true;
             }
 
-            var staticToActivate = inactiveStatics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
+            var staticToActivate = system.inactiveStatics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
             if (staticToActivate != null)
             {
-                InsertToGrid(staticToActivate);
-                inactiveStatics.Remove(staticToActivate);
+                system.InsertToGrid(staticToActivate);
+                system.inactiveStatics.Remove(staticToActivate);
                 entity.RaiseEvent(new BodyOnEventArgs(entity));
                 return true;
             }
@@ -196,26 +180,30 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             return false;
         }
 
-        private bool HandleBodyOffCommand(object sender, BodyOffCommand cmd)
+        private static bool HandleBodyOffCommand(ICore core, BodyOffCommand cmd)
         {
-            var dynamicToDeactivate = activeDynamics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
+            var system = core.GetSystemByEntityId<PhysicsSystem>(cmd.EntityId);
+            if (system == null)
+                return false;
 
-            var entity = Core.Entities.GetById(cmd.EntityId);
+            var dynamicToDeactivate = system.activeDynamics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
+
+            var entity = core.Entities.GetById(cmd.EntityId);
 
             if (dynamicToDeactivate != null)
             {
-                inactiveDynamics.Add(dynamicToDeactivate);
-                activeDynamics.Remove(dynamicToDeactivate);
+                system.inactiveDynamics.Add(dynamicToDeactivate);
+                system.activeDynamics.Remove(dynamicToDeactivate);
 
                 entity.RaiseEvent(new BodyOffEventArgs(entity));
                 return true;
             }
 
-            var staticToDeactivate = RemoveFromGrid(entity);
+            var staticToDeactivate = system.RemoveFromGrid(entity);
 
             if (staticToDeactivate != null)
             {
-                inactiveStatics.Add(staticToDeactivate);
+                system.inactiveStatics.Add(staticToDeactivate);
                 entity.RaiseEvent(new BodyOffEventArgs(entity));
                 return true;
             }
@@ -421,7 +409,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             }
         }
 
-        private StaticPack RemoveFromGrid(IEntity entity)
+        private StaticPack RemoveFromGrid(Entity entity)
         {
             StaticPack result = null;
             var aabb = GetAabb(entity);
@@ -447,31 +435,31 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             return result;
         }
 
-        private void RegisterStaticEntity(IEntity entity)
+        private void RegisterStaticEntity(Entity entity)
         {
             var pack = new StaticPack(entity.Id,
-                                      entity.GetComponent<BodyComponent>(),
-                                      entity.GetComponent<PositionComponent>());
+                                      entity.Get<BodyComponent>(),
+                                      entity.Get<PositionComponent>());
 
             InsertToGrid(pack);
         }
 
-        private void UnregisterStaticEntity(IEntity entity)
+        private void UnregisterStaticEntity(Entity entity)
         {
             RemoveFromGrid(entity);
         }
 
-        private void RegisterDynamicEntity(IEntity entity)
+        private void RegisterDynamicEntity(Entity entity)
         {
             var pack = new DynamicPack(entity.Id,
-                                      entity.GetComponent<BodyComponent>(),
-                                      entity.GetComponent<PositionComponent>(),
-                                      entity.GetComponent<VelocityComponent>());
+                                      entity.Get<BodyComponent>(),
+                                      entity.Get<PositionComponent>(),
+                                      entity.Get<VelocityComponent>());
 
             activeDynamics.Add(pack);
         }
 
-        private void UnregisterDynamicEntity(IEntity entity)
+        private void UnregisterDynamicEntity(Entity entity)
         {
             var dynamic = activeDynamics.FirstOrDefault(item => item.EntityId == entity.Id);
 

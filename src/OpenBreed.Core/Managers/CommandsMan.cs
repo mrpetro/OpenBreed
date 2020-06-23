@@ -1,5 +1,10 @@
 ﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Components;
+using OpenBreed.Core.Helpers;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace OpenBreed.Core.Managers
 {
@@ -13,7 +18,6 @@ namespace OpenBreed.Core.Managers
         }
 
         #endregion Public Constructors
-
         #region Public Properties
 
         public ICore Core { get; }
@@ -22,41 +26,56 @@ namespace OpenBreed.Core.Managers
 
         #region Public Methods
 
-        public void Post(object sender, IMsg msg)
+        private readonly Dictionary<Type, (MethodInfo Method, object Target)> handlers = new Dictionary<Type, (MethodInfo Method, object Target)>();
+
+        public void Register<T>(Func<ICore, T, bool> cmdHandler)
         {
-            if (msg is IEntityCommand)
+            handlers.Add(typeof(T), (cmdHandler.Method, cmdHandler.Target));
+        }
+
+        private Queue<ICommand> messageQueue = new Queue<ICommand>();
+
+        public void ExecuteEnqueued()
+        {
+            while (messageQueue.Count > 0)
             {
-                Post(sender, (IEntityCommand)msg);
-                return;
+                var cmd = messageQueue.Dequeue();
+                Execute(cmd);
             }
-            else if (msg is IWorldCommand)
-            {
-                Post(sender, (IWorldCommand)msg);
+        }
+
+        private void Execute(ICommand msg)
+        {
+            if (!handlers.TryGetValue(msg.GetType(), out (MethodInfo Method, object Target) handler))
                 return;
-            }
+
+            handler.Method.Invoke(handler.Target, new object[] {Core,  msg });
+        }
+
+        private bool TryHandle(ICommand msg)
+        {
+            if (!handlers.TryGetValue(msg.GetType(), out (MethodInfo Method, object Target) handler))
+                return false;
+
+            messageQueue.Enqueue(msg);
+
+            //handler.Method.Invoke(handler.Target, new object[] { msg });
+            return true;
+        }
+
+        public void Post(ICommand msg)
+        {
+            Debug.Assert(msg != null);
+
+            if (TryHandle(msg))
+                return;
+
+            Core.Logging.Warning($"Command '{msg.GetType()}' not registered.");
         }
 
         #endregion Public Methods
 
         #region Private Methods
-
-        private void Post(object sender, IEntityCommand msg)
-        {
-            Debug.Assert(msg != null);
-            Debug.Assert(msg.EntityId >= 0);
-
-            var entity = Core.Entities.GetById(msg.EntityId);
-
-            if(entity.World != null)
-                entity.World.Handle(sender, msg);
-        }
-
-        private void Post(object sender, IWorldCommand msg)
-        {
-            Debug.Assert(msg != null);
-
-            Core.Worlds.PostCommand(sender, msg);
-        }
 
         #endregion Private Methods
     }

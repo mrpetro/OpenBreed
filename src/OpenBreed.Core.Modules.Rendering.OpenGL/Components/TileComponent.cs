@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Modules.Physics.Builders;
 
 namespace OpenBreed.Core.Modules.Rendering.Components
 {
@@ -7,16 +8,16 @@ namespace OpenBreed.Core.Modules.Rendering.Components
     /// </summary>
     public class TileComponent : IEntityComponent
     {
-        #region Private Constructors
+        #region Internal Constructors
 
-        private TileComponent(int atlasId, int imageId, float order)
+        internal TileComponent(TileComponentBuilder builder)
         {
-            AtlasId = atlasId;
-            ImageId = imageId;
-            Order = order;
+            AtlasId = builder.AtlasId;
+            ImageId = builder.ImageId;
+            Order = builder.Order;
         }
 
-        #endregion Private Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
 
@@ -38,21 +39,5 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         public bool IsEmpty { get { return ImageId == 0 && AtlasId == 0; } }
 
         #endregion Public Properties
-
-        #region Public Methods
-
-        /// <summary>
-        /// Create tile render component using given tile atlas
-        /// </summary>
-        /// <param name="atlasId">Id of tile atlas to use for this tile component</param>
-        /// <param name="imageId">Optiona initial tile atlas image id</param>
-        /// <param name="order">Optional initial object rendering order</param>
-        /// <returns>Tile component</returns>
-        public static TileComponent Create(int atlasId, int imageId = 0, float order = 0.0f)
-        {
-            return new TileComponent(atlasId, imageId, order);
-        }
-
-        #endregion Public Methods
     }
 }

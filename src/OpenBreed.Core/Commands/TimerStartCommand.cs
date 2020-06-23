@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Core.Commands
 {
-    public class TimerStartCommand : IEntityCommand
+    public class TimerStartCommand : ICommand
     {
         #region Public Fields
 
@@ -22,7 +22,7 @@
         #region Public Properties
 
         public int EntityId { get; }
-        public string Type { get { return TYPE; } }
+        public string Name { get { return TYPE; } }
         public int TimerId { get; }
         public double Interval { get; }
 

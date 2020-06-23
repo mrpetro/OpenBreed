@@ -49,7 +49,7 @@ namespace OpenBreed.Core.Modules.Rendering.Helpers
 
         internal void SetFontName(string fontName)
         {
-            FontName = FontName;
+            FontName = fontName;
         }
 
         internal void SetFontSize(int fontSize)

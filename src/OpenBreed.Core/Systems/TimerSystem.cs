@@ -4,22 +4,19 @@ using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Helpers;
+using OpenBreed.Core.Managers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Systems
 {
-    public class TimerSystem : WorldSystem, ICommandExecutor, IUpdatableSystem
+    public class TimerSystem : WorldSystem, IUpdatableSystem
     {
         #region Private Fields
 
         private readonly List<int> entities = new List<int>();
-
-        private readonly CommandHandler cmdHandler;
 
         #endregion Private Fields
 
@@ -27,7 +24,6 @@ namespace OpenBreed.Core.Systems
 
         public TimerSystem(ICore core) : base(core)
         {
-            cmdHandler = new CommandHandler(this);
             Require<TimerComponent>();
         }
 
@@ -35,18 +31,14 @@ namespace OpenBreed.Core.Systems
 
         #region Public Methods
 
-        public override void Initialize(World world)
+        public static void RegisterHandlers(CommandsMan commands)
         {
-            base.Initialize(world);
-
-            World.RegisterHandler(TimerStartCommand.TYPE, cmdHandler);
-            World.RegisterHandler(TimerStopCommand.TYPE, cmdHandler);
+            commands.Register<TimerStartCommand>(HandleTimerStartCommand);
+            commands.Register<TimerStopCommand>(HandleTimerStopCommand);
         }
 
         public void Update(float dt)
         {
-            cmdHandler.ExecuteEnqueued();
-
             for (int i = 0; i < entities.Count; i++)
             {
                 var entity = Core.Entities.GetById(entities[i]);
@@ -58,8 +50,6 @@ namespace OpenBreed.Core.Systems
 
         public void UpdatePauseImmuneOnly(float dt)
         {
-            cmdHandler.ExecuteEnqueued();
-
             for (int i = 0; i < entities.Count; i++)
             {
                 var entity = Core.Entities.GetById(entities[i]);
@@ -68,59 +58,16 @@ namespace OpenBreed.Core.Systems
             }
         }
 
-        private void Update(IEntity entity, float dt)
-        {
-            var tc = entity.GetComponent<TimerComponent>();
-
-            //Update all timers with delta time
-            for (int i = 0; i < tc.Items.Count; i++)
-                UpdateTimer(entity, tc.Items[i], dt);
-        }
-
-        private void UpdateTimer(IEntity entity, TimerData timerData, float dt)
-        {
-            if (!timerData.Enabled)
-                return;
-
-            timerData.Interval -= dt;
-
-            if (timerData.Interval > 0.0)
-                return;
-
-            timerData.Enabled = false;
-            RaiseTimerElapsedEvent(entity, timerData);
-        }
-
-        private void RaiseTimerElapsedEvent(IEntity entity, TimerData timerData)
-        {
-            entity.RaiseEvent(new TimerElapsedEventArgs(timerData.TimerId));
-        }
-
-        public override bool ExecuteCommand(object sender, ICommand cmd)
-        {
-            switch (cmd.Type)
-            {
-                case TimerStartCommand.TYPE:
-                    return HandleTimerStartCommandMsg(sender, (TimerStartCommand)cmd);
-
-                case TimerStopCommand.TYPE:
-                    return HandleTimerStopCommandMsg(sender, (TimerStopCommand)cmd);
-
-                default:
-                    return false;
-            }
-        }
-
         #endregion Public Methods
 
         #region Protected Methods
 
-        protected override void RegisterEntity(IEntity entity)
+        protected override void OnAddEntity(Entity entity)
         {
             entities.Add(entity.Id);
         }
 
-        protected override void UnregisterEntity(IEntity entity)
+        protected override void OnRemoveEntity(Entity entity)
         {
             var index = entities.IndexOf(entity.Id);
 
@@ -134,15 +81,15 @@ namespace OpenBreed.Core.Systems
 
         #region Private Methods
 
-        private bool HandleTimerStartCommandMsg(object sender, TimerStartCommand cmd)
+        private static bool HandleTimerStartCommand(ICore core, TimerStartCommand cmd)
         {
-            var entity = Core.Entities.GetById(cmd.EntityId);
+            var entity = core.Entities.GetById(cmd.EntityId);
 
-            var timerComponent = entity.GetComponent<TimerComponent>();
+            var timerComponent = entity.Get<TimerComponent>();
 
             if (timerComponent == null)
             {
-                Core.Logging.Warning($"Entity '{cmd.EntityId}' has missing Timer Component.");
+                core.Logging.Warning($"Entity '{cmd.EntityId}' has missing Timer Component.");
                 return false;
             }
 
@@ -161,15 +108,15 @@ namespace OpenBreed.Core.Systems
             return true;
         }
 
-        private bool HandleTimerStopCommandMsg(object sender, TimerStopCommand cmd)
+        private static bool HandleTimerStopCommand(ICore core, TimerStopCommand cmd)
         {
-            var entity = Core.Entities.GetById(cmd.EntityId);
+            var entity = core.Entities.GetById(cmd.EntityId);
 
-            var timerComponent = entity.GetComponent<TimerComponent>();
+            var timerComponent = entity.Get<TimerComponent>();
 
             if (timerComponent == null)
             {
-                Core.Logging.Warning($"Entity '{cmd.EntityId}' has missing Timer Component.");
+                core.Logging.Warning($"Entity '{cmd.EntityId}' has missing Timer Component.");
                 return false;
             }
 
@@ -183,6 +130,41 @@ namespace OpenBreed.Core.Systems
             return true;
         }
 
+        private void Update(Entity entity, float dt)
+        {
+            var tc = entity.Get<TimerComponent>();
+
+            //Update all timers with delta time
+            for (int i = 0; i < tc.Items.Count; i++)
+                UpdateTimer(entity, tc.Items[i], dt);
+        }
+
+        private void UpdateTimer(Entity entity, TimerData timerData, float dt)
+        {
+            if (!timerData.Enabled)
+                return;
+
+            timerData.Interval -= dt;
+
+            if (timerData.Interval > 0.0)
+            {
+                RaiseTimerUpdateEvent(entity, timerData);
+                return;
+            }
+
+            timerData.Enabled = false;
+            RaiseTimerElapsedEvent(entity, timerData);
+        }
+
+        private void RaiseTimerUpdateEvent(Entity entity, TimerData timerData)
+        {
+            entity.RaiseEvent(new TimerUpdateEventArgs(timerData.TimerId));
+        }
+
+        private void RaiseTimerElapsedEvent(Entity entity, TimerData timerData)
+        {
+            entity.RaiseEvent(new TimerElapsedEventArgs(timerData.TimerId));
+        }
 
         #endregion Private Methods
     }

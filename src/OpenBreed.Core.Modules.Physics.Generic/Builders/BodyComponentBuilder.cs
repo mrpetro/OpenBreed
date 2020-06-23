@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Core.Modules.Physics.Builders
 {
-    public class BodyComponentBuilder : BaseComponentBuilder<BodyComponentBuilder>
+    public class BodyComponentBuilder : BaseComponentBuilder<BodyComponentBuilder, BodyComponent>
     {
         #region Internal Fields
 

@@ -13,9 +13,9 @@ namespace OpenBreed.Core.States
 
         #region Public Methods
 
-        void EnterState(IEntity entity);
+        void EnterState(Entity entity);
 
-        void LeaveState(IEntity entity);
+        void LeaveState(Entity entity);
 
         #endregion Public Methods
     }

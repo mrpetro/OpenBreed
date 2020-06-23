@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Core.Commands
 {
-    public class SetStateCommand : IEntityCommand
+    public class SetStateCommand : ICommand
     {
         #region Public Fields
 
@@ -22,7 +22,7 @@
         #region Public Properties
 
         public int EntityId { get; }
-        public string Type { get { return TYPE; } }
+        public string Name { get { return TYPE; } }
         public int FsmId { get; }
         public int ImpulseId { get; }
 

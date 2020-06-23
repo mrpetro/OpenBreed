@@ -45,25 +45,25 @@ namespace OpenBreed.Sandbox.Components.States
 
         #region Public Methods
 
-        public void EnterState(IEntity entity)
+        public void EnterState(Entity entity)
         {
-            entity.PostCommand(new SpriteOffCommand(entity.Id));
-            entity.PostCommand(new BodyOffCommand(entity.Id));
+            entity.Core.Commands.Post(new SpriteOffCommand(entity.Id));
+            entity.Core.Commands.Post(new BodyOffCommand(entity.Id));
 
-            var pos = entity.GetComponent<PositionComponent>();
+            var pos = entity.Get<PositionComponent>();
 
             //entity.PostCommand(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
 
-            var className = entity.GetComponent<ClassComponent>().Name;
+            var className = entity.Get<ClassComponent>().Name;
             var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
             var stampId = entity.Core.Rendering.Stamps.GetByName($"{stampPrefix}/{className}/{stateName}").Id;
-            entity.PostCommand(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
+            entity.Core.Commands.Post(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
 
 
-            entity.PostCommand(new TextSetCommand(entity.Id, 0, "Door - Opened"));
+            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, "Door - Opened"));
         }
 
-        public void LeaveState(IEntity entity)
+        public void LeaveState(Entity entity)
         {
         }
 

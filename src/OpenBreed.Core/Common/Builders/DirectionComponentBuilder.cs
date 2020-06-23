@@ -4,7 +4,7 @@ using System;
 
 namespace OpenBreed.Core.Common.Builders
 {
-    public class DirectionComponentBuilder : BaseComponentBuilder<DirectionComponentBuilder>
+    public class DirectionComponentBuilder : BaseComponentBuilder<DirectionComponentBuilder, DirectionComponent>
     {
         #region Private Fields
 
@@ -46,11 +46,6 @@ namespace OpenBreed.Core.Common.Builders
                 y = Convert.ToSingle(value);
             else
                 throw new ArgumentException("Too many property keys given.");
-        }
-
-        public static void Register(ICore core)
-        {
-            core.Entities.RegisterComponentBuilder(nameof(DirectionComponent), DirectionComponentBuilder.New);
         }
 
         #endregion Public Methods

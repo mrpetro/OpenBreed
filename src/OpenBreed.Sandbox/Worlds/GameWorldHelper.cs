@@ -1,9 +1,11 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
+using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Helpers;
@@ -47,6 +49,8 @@ namespace OpenBreed.Sandbox.Worlds
 
             //Action
             builder.AddSystem(core.CreateMovementSystem().Build());
+            builder.AddSystem(new FollowerSystem(core));
+            //builder.AddSystem(new FollowerSystem(core));
             builder.AddSystem(core.CreatePhysicsSystem().SetGridSize(width, height).Build());
             builder.AddSystem(core.CreateAnimationSystem().Build());
 
@@ -79,7 +83,7 @@ namespace OpenBreed.Sandbox.Worlds
             return builder.Build();
         }
 
-        internal static void CreateGameWorld(Program core)
+        internal static void Create(Program core)
         {
             World gameWorld = null;
 
@@ -101,45 +105,28 @@ namespace OpenBreed.Sandbox.Worlds
             using (var reader = new TxtFileWorldReader(core, ".\\Content\\Maps\\hub.txt"))
                 gameWorld = reader.GetWorld();
 
-            //GameWorld = GameWorldHelper.CreateGameWorld(Core, "DEMO6");
-
-
-
-
-            gameWorld.AddEntity(playerCamera);
-            gameWorld.AddEntity(gameCamera);
-
             var actor = ActorHelper.CreateActor(core, new Vector2(128, 128));
-            actor.Add(new FsmComponent());
-            actor.Tag = playerCamera;
 
             actor.Add(new WalkingControl());
             actor.Add(new AttackControl());
 
             //actor.Add(TextHelper.Create(core, new Vector2(0, 32), "Hero"));
 
-            actor.Subscribe<EntityEnteredWorldEventArgs>(OnEntityEntered);
-            actor.Subscribe<EntityLeftWorldEventArgs>(OnEntityLeftWorld);
-
-
-            core.Jobs.Execute(new CameraFollowJob(playerCamera, actor));
+            //actor.Subscribe<EntityEnteredWorldEventArgs>(OnEntityEntered);
+            core.Worlds.Subscribe<EntityAddedEventArgs>(OnEntityAdded);
+            core.Worlds.Subscribe<EntityRemovedEventArgs>(OnEntityRemoved);
 
             var player1 = core.Players.GetByName("P1");
             player1.AssumeControl(actor);
             var player2 = core.Players.GetByName("P2");
             player2.AssumeControl(actor);
 
-            var movementFsm = core.StateMachines.GetByName("Actor.Movement");
-            var atackFsm = core.StateMachines.GetByName("Actor.Attacking");
-            var rotateFsm = core.StateMachines.GetByName("Actor.Rotation");
-            movementFsm.SetInitialState(actor, (int)Entities.Actor.States.Movement.MovementState.Standing);
-            atackFsm.SetInitialState(actor, (int)Entities.Actor.States.Attacking.AttackingState.Idle);
-            rotateFsm.SetInitialState(actor, (int)Entities.Actor.States.Rotation.RotationState.Idle);
-            gameWorld.AddEntity(actor);
+            core.Commands.Post(new AddEntityCommand(gameWorld.Id, actor.Id));
+            //gameWorld.AddEntity(actor);
 
             var gameViewport = core.Entities.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
 
-            gameViewport.GetComponent<ViewportComponent>().CameraEntityId = playerCamera.Id;
+            gameViewport.Get<ViewportComponent>().CameraEntityId = playerCamera.Id;
 
             var cursorEntity = core.Entities.Create();
         
@@ -154,30 +141,36 @@ namespace OpenBreed.Sandbox.Worlds
             //gameViewport.Subscribe(GfxEventTypes.VIEWPORT_RESIZED, (s, a) => UpdateCameraFov(playerCamera, (ViewportResizedEventArgs)a));
             //SetPreserveAspectRatio(gameViewport);
 
-            gameWorld.AddEntity(cursorEntity);
+            core.Commands.Post(new AddEntityCommand(gameWorld.Id, cursorEntity.Id));
+
+            core.Commands.Post(new FollowedAddFollowerCommand(actor.Id, playerCamera.Id));
+            //gameWorld.PostCommand(new FollowerSetTargetCommand(playerCamera.Id, actor.Id));
         }
 
-        public static void SetPreserveAspectRatio(IEntity viewportEntity)
+        public static void SetPreserveAspectRatio(Entity viewportEntity)
         {
-            var cameraEntity = viewportEntity.Core.Entities.GetById(viewportEntity.GetComponent<ViewportComponent>().CameraEntityId);
+            var cameraEntity = viewportEntity.Core.Entities.GetById(viewportEntity.Get<ViewportComponent>().CameraEntityId);
             viewportEntity.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateCameraFov(cameraEntity, a));
         }
 
-        private static void UpdateCameraFov(IEntity cameraEntity, ViewportResizedEventArgs a)
+        private static void UpdateCameraFov(Entity cameraEntity, ViewportResizedEventArgs a)
         {
-            cameraEntity.GetComponent<CameraComponent>().Width = a.Width;
-            cameraEntity.GetComponent<CameraComponent>().Height = a.Height;
+            cameraEntity.Get<CameraComponent>().Width = a.Width;
+            cameraEntity.Get<CameraComponent>().Height = a.Height;
         }
 
-        private static void OnEntityEntered(object sender, EntityEnteredWorldEventArgs a)
+        private static void OnEntityAdded(object sender, EntityAddedEventArgs a)
         {
-            a.Entity.Core.Logging.Verbose($"Entity '{a.Entity.Id}' entered world '{a.World.Name}'.");
+            var worldMan = sender as WorldMan;
+            var world = worldMan.GetById(a.WorldId);
+            world.Core.Logging.Verbose($"Entity '{a.EntityId}' added to world '{world.Name}'.");
         }
 
-        private static void OnEntityLeftWorld(object sender, EntityLeftWorldEventArgs a)
+        private static void OnEntityRemoved(object sender, EntityRemovedEventArgs a)
         {
-            a.Entity.Core.Logging.Verbose($"Entity '{a.Entity.Id}' left world '{a.World.Name}'.");
-
+            var worldMan = sender as WorldMan;
+            var world = worldMan.GetById(a.WorldId);
+            world.Core.Logging.Verbose($"Entity '{a.EntityId}' removed from world '{world.Name}'.");
         }
     }
 }

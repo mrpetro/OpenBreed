@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
@@ -21,12 +22,10 @@ namespace OpenBreed.Sandbox.Entities.Button
 
             var button = core.Entities.CreateFromTemplate("Button");
 
-            button.GetComponent<PositionComponent>().Value = new Vector2(0, 0);
+            button.Get<PositionComponent>().Value = new Vector2(0, 0);
 
-            var buttonSm = world.Core.StateMachines.GetByName("Button");
-            buttonSm.SetInitialState(button, (int)ButtonState.Idle);
-
-            world.AddEntity(button);
+            world.Core.Commands.Post(new AddEntityCommand(world.Id, button.Id));
+            //world.AddEntity(button);
         }
 
         public static void CreateFSM(ICore core)

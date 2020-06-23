@@ -31,7 +31,7 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
 
         #region Public Methods
 
-        bool UpdateWithNextFrame(IEntity entity, Animator animator, out object nextFrame);
+        bool UpdateWithNextFrame(Entity entity, Animator animator, out object nextFrame);
 
         #endregion Public Methods
     }

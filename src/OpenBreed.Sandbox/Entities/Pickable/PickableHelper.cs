@@ -18,7 +18,7 @@
 //        private const string STAMP_AMMO_PICKED = "Tiles/Stamps/Items/Ammo/Picked";
 //        #region Public Methods
 
-//        public static StateMachine CreateFSM(IEntity entity)
+//        public static StateMachine CreateFSM(Entity entity)
 //        {
 //            var stateMachine = entity.AddFSM("Functioning");
 

@@ -3,7 +3,7 @@ using System;
 
 namespace OpenBreed.Core.Common.Builders
 {
-    public class ThrustComponentBuilder : BaseComponentBuilder<ThrustComponentBuilder>
+    public class ThrustComponentBuilder : BaseComponentBuilder<ThrustComponentBuilder, ThrustComponent>
     {
         protected ThrustComponentBuilder(ICore core) : base(core)
         {

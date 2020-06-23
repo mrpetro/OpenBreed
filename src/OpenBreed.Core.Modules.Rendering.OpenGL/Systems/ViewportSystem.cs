@@ -4,6 +4,7 @@ using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Helpers;
+using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
@@ -24,7 +25,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
     /// - CameraComponent
     /// - Position
     /// </summary>
-    public class ViewportSystem : WorldSystem, ICommandExecutor, IRenderableSystem
+    public class ViewportSystem : WorldSystem, IRenderableSystem
     {
         #region Private Fields
 
@@ -32,8 +33,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         private const float ZOOM_BASE = 1.0f / 512.0f;
         private const float BRIGHTNESS_Z_LEVEL = 50.0f;
 
-        private readonly List<IEntity> entities = new List<IEntity>();
-        private CommandHandler cmdHandler;
+        private readonly List<Entity> entities = new List<Entity>();
 
         #endregion Private Fields
 
@@ -41,8 +41,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         public ViewportSystem(ICore core) : base(core)
         {
-            cmdHandler = new CommandHandler(this);
-
             Require<ViewportComponent>();
             Require<PositionComponent>();
         }
@@ -51,29 +49,15 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Public Methods
 
-        public override void Initialize(World world)
+        public static void RegisterHandlers(CommandsMan commands)
         {
-            base.Initialize(world);
-
-            World.RegisterHandler(ViewportResizeCommand.TYPE, cmdHandler);
+            commands.Register<ViewportResizeCommand>(HandleViewportResizeCommand);
         }
 
-        public override bool ExecuteCommand(object sender, ICommand cmd)
+        public Vector4 ClientToWorld(Vector4 coords, Entity viewport)
         {
-            switch (cmd.Type)
-            {
-                case ViewportResizeCommand.TYPE:
-                    return HandleViewportResizeCommand(sender, (ViewportResizeCommand)cmd);
-
-                default:
-                    return false;
-            }
-        }
-
-        public Vector4 ClientToWorld(Vector4 coords, IEntity viewport)
-        {
-            var vpc = viewport.GetComponent<ViewportComponent>();
-            var pos = viewport.GetComponent<PositionComponent>();
+            var vpc = viewport.Get<ViewportComponent>();
+            var pos = viewport.Get<PositionComponent>();
 
             var camera = Core.Entities.GetById(vpc.CameraEntityId);
 
@@ -108,10 +92,10 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// This will return camera tranformation matrix which includes aspect ratio correction
         /// </summary>
         /// <returns>Camera transformation matrix</returns>
-        public Matrix4 GetCameraTransform(ViewportComponent vpc, IEntity camera)
+        public Matrix4 GetCameraTransform(ViewportComponent vpc, Entity camera)
         {
-            var pos = camera.GetComponent<PositionComponent>();
-            var cmc = camera.GetComponent<CameraComponent>();
+            var pos = camera.Get<PositionComponent>();
+            var cmc = camera.Get<CameraComponent>();
 
             var transform = Matrix4.Identity;
             transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-pos.Value.X, -pos.Value.Y, 0.0f));
@@ -152,8 +136,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         public void Render(Box2 clipBox, int depth, float dt)
         {
-            cmdHandler.ExecuteEnqueued();
-
             if (depth > RENDER_MAX_DEPTH)
                 return;
 
@@ -163,21 +145,16 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                 RenderViewport(entities[i], clipBox, depth, dt);
         }
 
-        public bool EnqueueMsg(object sender, IEntityCommand msg)
-        {
-            return false;
-        }
-
         #endregion Public Methods
 
         #region Protected Methods
 
-        protected override void RegisterEntity(IEntity entity)
+        protected override void OnAddEntity(Entity entity)
         {
             entities.Add(entity);
         }
 
-        protected override void UnregisterEntity(IEntity entity)
+        protected override void OnRemoveEntity(Entity entity)
         {
             entities.Remove(entity);
         }
@@ -186,13 +163,13 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Methods
 
-        private bool HandleViewportResizeCommand(object sender, ViewportResizeCommand cmd)
+        private static bool HandleViewportResizeCommand(ICore core, ViewportResizeCommand cmd)
         {
-            var toResize = entities.FirstOrDefault(item => item.Id == cmd.EntityId);
+            var toResize = core.Entities.GetById(cmd.EntityId);
 
             if (toResize != null)
             {
-                var vpc = toResize.GetComponent<ViewportComponent>();
+                var vpc = toResize.Get<ViewportComponent>();
 
                 if (vpc.Width == cmd.Width && vpc.Height == cmd.Height)
                     return true;
@@ -206,10 +183,10 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             return true;
         }
 
-        private void GetVisibleRectangle(IEntity camera, Matrix4 cameraT, out Box2 viewBox)
+        private void GetVisibleRectangle(Entity camera, Matrix4 cameraT, out Box2 viewBox)
         {
-            var pos = camera.GetComponent<PositionComponent>();
-            var cmc = camera.GetComponent<CameraComponent>();
+            var pos = camera.Get<PositionComponent>();
+            var cmc = camera.Get<CameraComponent>();
             var x = pos.Value.X;
             var y = pos.Value.Y;
 
@@ -232,10 +209,10 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// Render this viewport content to the client
         /// </summary>
         /// <param name="dt">Time step</param>
-        private void RenderViewport(IEntity vpe, Box2 clipBox, int depth, float dt)
+        private void RenderViewport(Entity vpe, Box2 clipBox, int depth, float dt)
         {
-            var vpc = vpe.GetComponent<ViewportComponent>();
-            var pos = vpe.GetComponent<PositionComponent>();
+            var vpc = vpe.Get<ViewportComponent>();
+            var pos = vpe.Get<PositionComponent>();
 
             //Test viewport for clippling here
             if (pos.Value.X + vpc.Width < clipBox.Left)
@@ -278,7 +255,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
         /// This will render world part currently visible by the camera into given viewport
         /// </summary>
         /// <param name="dt">Time step</param>
-        private void DrawCameraView(int depth, float dt, ViewportComponent vpc, IEntity camera)
+        private void DrawCameraView(int depth, float dt, ViewportComponent vpc, Entity camera)
         {
             try
             {
@@ -341,7 +318,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
                 GL.PopMatrix();
             }
 
-            var cameraComponent = camera.GetComponent<CameraComponent>();
+            var cameraComponent = camera.Get<CameraComponent>();
 
             //Draw camera effects
             DrawBrightnessEffect(cameraComponent.Brightness);

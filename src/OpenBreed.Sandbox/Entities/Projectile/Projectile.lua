@@ -1,4 +1,5 @@
 ﻿Templates.Entities.Projectile = {
+    FsmComponent = { { "Projectile" , "Fired"} },
     AnimationComponent = {
         Speed = 10.0,
         Loop = true},

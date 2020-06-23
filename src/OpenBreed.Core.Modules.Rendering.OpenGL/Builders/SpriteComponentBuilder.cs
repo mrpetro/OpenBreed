@@ -5,7 +5,7 @@ using System;
 
 namespace OpenBreed.Core.Modules.Physics.Builders
 {
-    public class SpriteComponentBuilder : BaseComponentBuilder<SpriteComponentBuilder>
+    public class SpriteComponentBuilder : BaseComponentBuilder<SpriteComponentBuilder, SpriteComponent>
     {
         #region Private Fields
 

@@ -32,11 +32,11 @@ namespace OpenBreed.Core.Systems
         /// </summary>
         void Deinitialize();
 
-        bool Matches(IEntity entity);
+        bool Matches(Entity entity);
 
-        void AddEntity(IEntity entity);
+        void AddEntity(Entity entity);
 
-        void RemoveEntity(IEntity entity);
+        void RemoveEntity(Entity entity);
 
         /// <summary>
         /// Handle given command
@@ -44,7 +44,7 @@ namespace OpenBreed.Core.Systems
         /// <param name="sender">Object is sending the command</param>
         /// <param name="cmd">Command to recieve</param>
         /// <returns>True if command was handled, false otherwise</returns>
-        bool ExecuteCommand(object sender, ICommand cmd);
+        bool ExecuteCommand(ICommand cmd);
 
         #endregion Public Methods
     }

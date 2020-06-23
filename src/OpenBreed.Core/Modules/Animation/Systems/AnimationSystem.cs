@@ -3,6 +3,7 @@ using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Helpers;
+using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Animation.Builders;
 using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Animation.Components;
@@ -15,14 +16,11 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Animation.Systems
 {
-    public class AnimationSystem : WorldSystem, ICommandExecutor, IUpdatableSystem
+    public class AnimationSystem : WorldSystem, IUpdatableSystem
     {
         #region Private Fields
 
         private readonly List<int> entities = new List<int>();
-
-        //private readonly List<AnimationComponent> animationComps = new List<AnimationComponent>();
-        private readonly CommandHandler cmdHandler;
 
         #endregion Private Fields
 
@@ -30,7 +28,6 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         public AnimationSystem(AnimationSystemBuilder builder) : base(builder.core)
         {
-            cmdHandler = new CommandHandler(this);
             Require<AnimationComponent>();
         }
 
@@ -38,20 +35,16 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         #region Public Methods
 
-        public override void Initialize(World world)
+        public static void RegisterHandlers(CommandsMan commands)
         {
-            base.Initialize(world);
-
-            World.RegisterHandler(SetAnimCommand.TYPE, cmdHandler);
-            World.RegisterHandler(PlayAnimCommand.TYPE, cmdHandler);
-            World.RegisterHandler(PauseAnimCommand.TYPE, cmdHandler);
-            World.RegisterHandler(StopAnimCommand.TYPE, cmdHandler);
+            commands.Register<SetAnimCommand>(HandleSetAnimCommand);
+            commands.Register<PlayAnimCommand>(HandlePlayAnimCommand);
+            commands.Register<PauseAnimCommand>(HandlePauseAnimCommand);
+            commands.Register<StopAnimCommand>(HandleStopAnimCommand);
         }
 
         public void UpdatePauseImmuneOnly(float dt)
         {
-            cmdHandler.ExecuteEnqueued();
-
             for (int i = 0; i < entities.Count; i++)
             {
                 var entity = Core.Entities.GetById(entities[i]);
@@ -62,8 +55,6 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         public void Update(float dt)
         {
-            cmdHandler.ExecuteEnqueued();
-
             for (int i = 0; i < entities.Count; i++)
             {
                 var entity = Core.Entities.GetById(entities[i]);
@@ -73,14 +64,14 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             }
         }
 
-        public void Set(IEntity entity, Animator animator, int animId = -1, float startPosition = 0.0f)
+        public void Set(Entity entity, Animator animator, int animId = -1, float startPosition = 0.0f)
         {
             animator.AnimId = animId;
             animator.Position = startPosition;
             animator.Paused = false;
         }
 
-        public void Play(IEntity entity, Animator animator, int animId = -1, float startPosition = 0.0f)
+        public void Play(Entity entity, Animator animator, int animId = -1, float startPosition = 0.0f)
         {
             if (animId != -1)
                 animator.AnimId = animId;
@@ -90,49 +81,28 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             animator.Paused = false;
         }
 
-        public void Pause(IEntity entity, Animator animator)
+        public void Pause(Entity entity, Animator animator)
         {
             animator.Paused = true;
         }
 
-        public void Stop(IEntity entity, Animator animator)
+        public void Stop(Entity entity, Animator animator)
         {
             animator.Position = 0.0f;
             animator.Paused = true;
             RaiseAnimStoppedEvent(entity, animator);
         }
 
-        public override bool ExecuteCommand(object sender, ICommand cmd)
-        {
-            switch (cmd.Type)
-            {
-                case SetAnimCommand.TYPE:
-                    return HandleSetAnimCommand(sender, (SetAnimCommand)cmd);
-
-                case PlayAnimCommand.TYPE:
-                    return HandlePlayAnimCommand(sender, (PlayAnimCommand)cmd);
-
-                case PauseAnimCommand.TYPE:
-                    return HandlePauseAnimCommand(sender, (PauseAnimCommand)cmd);
-
-                case StopAnimCommand.TYPE:
-                    return HandleStopAnimCommand(sender, (StopAnimCommand)cmd);
-
-                default:
-                    return false;
-            }
-        }
-
         #endregion Public Methods
 
         #region Protected Methods
 
-        protected override void RegisterEntity(IEntity entity)
+        protected override void OnAddEntity(Entity entity)
         {
             entities.Add(entity.Id);
         }
 
-        protected override void UnregisterEntity(IEntity entity)
+        protected override void OnRemoveEntity(Entity entity)
         {
             var index = entities.IndexOf(entity.Id);
 
@@ -146,16 +116,16 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         #region Private Methods
 
-        private void Animate(IEntity entity, float dt)
+        private void Animate(Entity entity, float dt)
         {
-            var ac = entity.GetComponent<AnimationComponent>();
+            var ac = entity.Get<AnimationComponent>();
 
             //Update all animators with delta time
             for (int i = 0; i < ac.Items.Count; i++)
                 UpdateAnimator(entity, ac.Items[i], dt);
         }
 
-        private void UpdateAnimator(IEntity entity, Animator animator, float dt)
+        private void UpdateAnimator(Entity entity, Animator animator, float dt)
         {
             if (animator.Paused)
                 return;
@@ -187,67 +157,83 @@ namespace OpenBreed.Core.Modules.Animation.Systems
             }
         }
 
-        private void RaiseAnimStoppedEvent(IEntity entity, Animator animator)
+        private void RaiseAnimStoppedEvent(Entity entity, Animator animator)
         {
             entity.RaiseEvent(new AnimStoppedEventArgs(animator));
         }
 
-        private void RaiseAnimChangedEvent(IEntity entity, Animator animator)
+        private void RaiseAnimChangedEvent(Entity entity, Animator animator)
         {
             entity.RaiseEvent(new AnimChangedEventArgs(animator.Frame));
         }
 
-        private bool HandlePauseAnimCommand(object sender, PauseAnimCommand cmd)
+        private static bool HandlePauseAnimCommand(ICore core, PauseAnimCommand cmd)
         {
-            var entity = Core.Entities.GetById(cmd.EntityId);
-            var ac = entity.GetComponent<AnimationComponent>();
+            var system = core.GetSystemByEntityId<AnimationSystem>(cmd.EntityId);
+            if(system == null)
+                return false;
+
+            var entity = core.Entities.GetById(cmd.EntityId);
+            var ac = entity.Get<AnimationComponent>();
             var animator = ac.Items[cmd.AnimatorId];
 
-            Pause(entity, animator);
+            system.Pause(entity, animator);
 
             return true;
         }
 
-        private bool HandleStopAnimCommand(object sender, StopAnimCommand cmd)
+        private static bool HandleStopAnimCommand(ICore core, StopAnimCommand cmd)
         {
-            var entity = Core.Entities.GetById(cmd.EntityId);
-            var ac = entity.GetComponent<AnimationComponent>();
+            var system = core.GetSystemByEntityId<AnimationSystem>(cmd.EntityId);
+            if (system == null)
+                return false;
+
+            var entity = core.Entities.GetById(cmd.EntityId);
+            var ac = entity.Get<AnimationComponent>();
             var animator = ac.Items[cmd.AnimatorId];
 
-            Stop(entity, animator);
+            system.Stop(entity, animator);
 
             return true;
         }
 
-        private bool HandleSetAnimCommand(object sender, SetAnimCommand cmd)
+        private static bool HandleSetAnimCommand(ICore core, SetAnimCommand cmd)
         {
-            var entity = Core.Entities.GetById(cmd.EntityId);
-            var ac = entity.GetComponent<AnimationComponent>();
+            var system = core.GetSystemByEntityId<AnimationSystem>(cmd.EntityId);
+            if (system == null)
+                return false;
 
-            var animData = Core.Animations.GetByName(cmd.Id);
+            var entity = core.Entities.GetById(cmd.EntityId);
+            var ac = entity.Get<AnimationComponent>();
+
+            var animData = core.Animations.GetByName(cmd.Id);
 
             if (animData == null)
-                Core.Logging.Warning($"Animation with ID '{cmd.Id}' not found.");
+                core.Logging.Warning($"Animation with ID '{cmd.Id}' not found.");
 
-            Play(entity, ac.Items[cmd.AnimatorId], animData.Id);
+            system.Play(entity, ac.Items[cmd.AnimatorId], animData.Id);
 
             return true;
         }
 
-        private bool HandlePlayAnimCommand(object sender, PlayAnimCommand cmd)
+        private static bool HandlePlayAnimCommand(ICore core, PlayAnimCommand cmd)
         {
-            var entity = Core.Entities.GetById(cmd.EntityId);
-            var ac = entity.GetComponent<AnimationComponent>();
+            var system = core.GetSystemByEntityId<AnimationSystem>(cmd.EntityId);
+            if (system == null)
+                return false;
+
+            var entity = core.Entities.GetById(cmd.EntityId);
+            var ac = entity.Get<AnimationComponent>();
             var animator = ac.Items[cmd.AnimatorId];
 
             int animId = -1;
 
             if (cmd.Id != null)
             {
-                var data = Core.Animations.GetByName(cmd.Id);
+                var data = core.Animations.GetByName(cmd.Id);
 
                 if (data == null)
-                    Core.Logging.Warning($"Animation with ID = '{cmd.Id}' not found.");
+                    core.Logging.Warning($"Animation with ID = '{cmd.Id}' not found.");
                 else
                     animId = data.Id;
             }
@@ -256,7 +242,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
                 animId = animator.AnimId;
             }
 
-            Play(entity, animator, animId);
+            system.Play(entity, animator, animId);
 
             return true;
         }

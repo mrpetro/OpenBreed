@@ -1,18 +1,12 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Physics.Systems;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
-using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Sandbox.Entities.FpsCounter;
-using OpenBreed.Sandbox.Jobs;
 using OpenTK;
-using OpenTK.Graphics;
-using System;
 using System.Linq;
 
 namespace OpenBreed.Sandbox.Worlds
@@ -21,7 +15,7 @@ namespace OpenBreed.Sandbox.Worlds
     {
         #region Public Methods
 
-        public static void AddSystems(Program core, WorldBuilder builder)
+        private static void AddSystems(Program core, WorldBuilder builder)
         {
             //Input
             //builder.AddSystem(core.CreateWalkingControlSystem().Build());
@@ -45,7 +39,7 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem(core.CreateTextSystem().Build());
         }
 
-        public static void CreateHudWorld(Program core)
+        public static void Create(Program core)
         {
             var builder = core.Worlds.Create().SetName("HUD");
 
@@ -61,17 +55,18 @@ namespace OpenBreed.Sandbox.Worlds
         private static void Setup(World world)
         {
             var cameraBuilder = new CameraBuilder(world.Core);
-            cameraBuilder.SetPosition(new Vector2(0,0));
+            cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetFov(world.Core.ClientRectangle.Width, world.Core.ClientRectangle.Height);
             var hudCamera = cameraBuilder.Build();
             hudCamera.Tag = "HudCamera";
-            world.AddEntity(hudCamera);
+            world.Core.Commands.Post(new AddEntityCommand(world.Id, hudCamera.Id));
+            //world.AddEntity(hudCamera);
 
             FpsCounterHelper.AddToWorld(world);
 
             var hudViewport = world.Core.Entities.GetByTag(ScreenWorldHelper.HUD_VIEWPORT).First();
-            hudViewport.GetComponent<ViewportComponent>().CameraEntityId = hudCamera.Id;
+            hudViewport.Get<ViewportComponent>().CameraEntityId = hudCamera.Id;
 
             //world.Core.Rendering.Subscribe(GfxEventTypes.CLIENT_RESIZED, (s, a) => UpdateFpsPos(fpsTextEntity, (ClientResizedEventArgs)a));
             //world.Core.Rendering.Subscribe(GfxEventTypes.CLIENT_RESIZED, (s, a) => UpdateCameraFov(hudCamera, (ClientResizedEventArgs)a));
@@ -79,11 +74,10 @@ namespace OpenBreed.Sandbox.Worlds
             hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateCameraFov(hudCamera, a));
         }
 
-
-        private static void UpdateCameraFov(IEntity cameraEntity, ViewportResizedEventArgs a)
+        private static void UpdateCameraFov(Entity cameraEntity, ViewportResizedEventArgs a)
         {
-            cameraEntity.GetComponent<CameraComponent>().Width = a.Width;
-            cameraEntity.GetComponent<CameraComponent>().Height = a.Height;
+            cameraEntity.Get<CameraComponent>().Width = a.Width;
+            cameraEntity.Get<CameraComponent>().Height = a.Height;
         }
 
         #endregion Private Methods

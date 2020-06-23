@@ -21,7 +21,7 @@ namespace OpenBreed.Core.Entities.Builders
 
         #region Public Methods
 
-        public abstract IEntity Build();
+        public abstract Entity Build();
 
         #endregion Public Methods
     }

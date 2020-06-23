@@ -1,4 +1,9 @@
 ﻿Templates.Entities.Arrow = {
+    ClassComponent = { "Actor" },
+    TimerComponent = {},
+    FsmComponent = { { "Actor.Movement", "Standing" },
+					 { "Actor.Attacking", "Idle" },
+					 { "Actor.Rotation", "Idle" } },
     AnimationComponent = {
         Speed = 10.0,
         Loop = true},

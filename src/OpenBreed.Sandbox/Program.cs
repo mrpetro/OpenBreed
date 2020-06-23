@@ -1,17 +1,23 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common.Builders;
 using OpenBreed.Core.Common.Systems.Shapes;
+using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Builders;
+using OpenBreed.Core.Modules.Animation.Systems;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Audio.Builders;
 using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Physics.Builders;
+using OpenBreed.Core.Modules.Physics.Systems;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Modules.Rendering.Builders;
+using OpenBreed.Core.Modules.Rendering.Systems;
+using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Control.Systems;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Button;
@@ -33,35 +39,32 @@ using System.Reflection;
 
 namespace OpenBreed.Sandbox
 {
-    public class Program : GameWindow, ICore
+    public class Program : CoreBase
     {
         #region Private Fields
 
         private string appVersion;
 
-        private Dictionary<Type, ICoreModule> modules = new Dictionary<Type, ICoreModule>();
-
         #endregion Private Fields
 
         #region Public Constructors
+
 
         public Program()
             : base(800, 600, new GraphicsMode(new ColorFormat(8, 8, 8, 8), 24, 8), "OpenBreed")
         {
             appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
+
             Logging = new LogMan(this);
 
             Scripts = new LuaScriptMan(this);
-            Commands = new CommandsMan(this);
-            Events = new EventsMan(this);
-            Entities = new EntityMan(this);
             StateMachines = new FsmMan(this);
             Shapes = new ShapeMan(this);
             Players = new PlayersMan(this);
             Items = new ItemsMan(this);
             Inputs = new InputsMan(this);
-            Worlds = new WorldMan(this);
+
             Jobs = new JobMan(this);
 
             Rendering = new OpenGLModule(this);
@@ -73,6 +76,7 @@ namespace OpenBreed.Sandbox
             RegisterModule(Physics);
             RegisterModule(Sounds);
 
+
             VSync = VSyncMode.On;
         }
 
@@ -80,41 +84,33 @@ namespace OpenBreed.Sandbox
 
         #region Public Properties
 
-        public IRenderModule Rendering { get; }
+        public override IRenderModule Rendering { get; }
 
         public PhysicsModule Physics { get; }
 
-        public IAudioModule Sounds { get; }
+        public override IAudioModule Sounds { get; }
 
-        public AnimMan Animations { get; }
+        public override AnimMan Animations { get; }
 
-        public EntityMan Entities { get; }
-
-        public FsmMan StateMachines { get; }
+        public override FsmMan StateMachines { get; }
 
         public ShapeMan Shapes { get; }
 
-        public PlayersMan Players { get; }
+        public override PlayersMan Players { get; }
 
-        public ILogMan Logging { get; }
+        public override ILogMan Logging { get; }
 
-        public JobMan Jobs { get; }
+        public override JobMan Jobs { get; }
 
-        public ItemsMan Items { get; }
+        public override ItemsMan Items { get; }
 
-        public InputsMan Inputs { get; }
+        public override InputsMan Inputs { get; }
 
-        public CommandsMan Commands { get; }
+        public override IScriptMan Scripts { get; }
 
-        public EventsMan Events { get; }
+        public override Matrix4 ClientTransform { get; protected set; }
 
-        public WorldMan Worlds { get; }
-
-        public IScriptMan Scripts { get; }
-
-        public Matrix4 ClientTransform { get; private set; }
-
-        public float ClientRatio { get { return (float)ClientRectangle.Width / (float)ClientRectangle.Height; } }
+        public override float ClientRatio { get { return (float)ClientRectangle.Width / (float)ClientRectangle.Height; } }
 
         #endregion Public Properties
 
@@ -170,10 +166,7 @@ namespace OpenBreed.Sandbox
             return new SoundSystemBuilder(this);
         }
 
-        public T GetModule<T>() where T : ICoreModule
-        {
-            return (T)modules[typeof(T)];
-        }
+
 
         #endregion Public Methods
 
@@ -221,18 +214,35 @@ namespace OpenBreed.Sandbox
             Inputs.OnKeyPress(e);
         }
 
+        private void RegisterSystems()
+        {
+            FollowerSystem.RegisterHandlers(Commands);
+            StateMachineSystem.RegisterHandlers(Commands);
+            TextInputSystem.RegisterHandlers(Commands);
+            TimerSystem.RegisterHandlers(Commands);
+            SpriteSystem.RegisterHandlers(Commands);
+            TileSystem.RegisterHandlers(Commands);
+            TextPresenterSystem.RegisterHandlers(Commands);
+            ViewportSystem.RegisterHandlers(Commands);
+            AnimationSystem.RegisterHandlers(Commands);
+            TextSystem.RegisterHandlers(Commands);
+            WalkingControlSystem.RegisterHandlers(Commands);
+            PhysicsSystem.RegisterHandlers(Commands);
+        }
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
             Title = $"Open Breed Sandbox (Version: {appVersion} Vsync: {VSync})";
 
+            RegisterSystems();
             RegisterComponentBuilders();
             RegisterShapes();
             RegisterFixtures();
             RegisterEntityTemplates();
             RegisterItems();
-
+ 
             Inputs.RegisterHandler(new WalkingControlHandler());
             Inputs.RegisterHandler(new AttackControlHandler());
 
@@ -276,14 +286,12 @@ namespace OpenBreed.Sandbox
 
             CameraHelper.CreateAnimations(this);
             DoorHelper.CreateStamps(this);
-            //PickableHelper.CreateStamps(this);
             DoorHelper.CreateAnimations(this);
             ActorHelper.CreateAnimations(this);
             TeleportHelper.CreateAnimations(this);
             ProjectileHelper.CreateAnimations(this);
 
-            DoorHelper.CreateHorizontalFSM(this);
-            DoorHelper.CreateVerticalFSM(this);
+            DoorHelper.CreateFsm(this);
             ProjectileHelper.CreateFsm(this);
             ButtonHelper.CreateFSM(this);
             ActorHelper.CreateAttackingFSM(this);
@@ -292,31 +300,11 @@ namespace OpenBreed.Sandbox
 
             Rendering.ScreenWorld = ScreenWorldHelper.CreateWorld(this);
 
-            HudWorldHelper.CreateHudWorld(this);
-
-            GameWorldHelper.CreateGameWorld(this);
-
-            //GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.One);                  // Select The Type Of Blending
-
-            //GL.Enable(EnableCap.StencilTest);
-            GL.ClearStencil(0x0);
-            GL.StencilMask(0xFFFFFFFF);
-            GL.ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-            //GL.Enable(EnableCap.Blend);
-            //GL.BlendFunc(BlendingFactor.SrcAlpha,BlendingFactor.OneMinusSrcAlpha);
-
-            GL.DepthFunc(DepthFunction.Lequal);
-            GL.Enable(EnableCap.DepthTest);
-
-            //var func = Scripts.RunFile(@"Entities\Actor\States\Attacking\IdleState.lua");
-
-            //var r = func.Invoke();
-
-            //var result = Scripts.RunFile("Content\\Scripts\\start.lua");
+            //TextWorldHelper.Create(this);
+            HudWorldHelper.Create(this);
+            GameWorldHelper.Create(this);
 
             OnEngineInitialized();
-
-            //var myass = (IViewport)Scripts.GetObject("myass");
         }
 
         protected void OnEngineInitialized()
@@ -343,9 +331,14 @@ namespace OpenBreed.Sandbox
         {
             base.OnUpdateFrame(e);
 
+            Commands.ExecuteEnqueued();
+
             Worlds.Cleanup();
+
             Rendering.Cleanup();
+
             Players.ResetInputs();
+
             Inputs.Update();
             Players.ApplyInputs();
             //StateMachine.Update((float)e.Time);
@@ -380,23 +373,22 @@ namespace OpenBreed.Sandbox
             program.Run(30.0, 60.0);
         }
 
-        private void RegisterModule(ICoreModule module)
-        {
-            modules.Add(module.GetType(), module);
-        }
 
         private void RegisterComponentBuilders()
         {
             BodyComponentBuilder.Register(this);
             AnimationComponentBuilder.Register(this);
-            DirectionComponentBuilder.Register(this);
 
+            Entities.RegisterComponentBuilder("DirectionComponent", DirectionComponentBuilder.New);
             Entities.RegisterComponentBuilder("VelocityComponent", VelocityComponentBuilder.New);
             Entities.RegisterComponentBuilder("ThrustComponent", ThrustComponentBuilder.New);
             Entities.RegisterComponentBuilder("PositionComponent", PositionComponentBuilder.New);
             Entities.RegisterComponentBuilder("MotionComponent", MotionComponentBuilder.New);
             Entities.RegisterComponentBuilder("SpriteComponent", SpriteComponentBuilder.New);
             Entities.RegisterComponentBuilder("TextComponent", TextComponentBuilder.New);
+            Entities.RegisterComponentBuilder("ClassComponent", ClassComponentBuilder.New);
+            Entities.RegisterComponentBuilder("FsmComponent", FsmComponentBuilder.New);
+            Entities.RegisterComponentBuilder("TimerComponent", TimerComponentBuilder.New);
         }
 
         private void RegisterShapes()

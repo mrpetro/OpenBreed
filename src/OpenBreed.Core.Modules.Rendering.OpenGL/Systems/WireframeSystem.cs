@@ -18,7 +18,7 @@
 //    {
 //        #region Private Fields
 
-//        private readonly List<IEntity> entities = new List<IEntity>();
+//        private readonly List<Entity> entities = new List<Entity>();
 //        private readonly List<IWireframe> wireframeComps = new List<IWireframe>();
 //        private readonly List<Position> positionComps = new List<Position>();
 //        private readonly List<IShapeComponent> shapeComps = new List<IShapeComponent>();
@@ -132,7 +132,7 @@
 
 //        #region Protected Methods
 
-//        protected override void RegisterEntity(IEntity entity)
+//        protected override void RegisterEntity(Entity entity)
 //        {
 //            entities.Add(entity);
 //            wireframeComps.Add(entity.GetComponent<IWireframe>().First());
@@ -140,7 +140,7 @@
 //            shapeComps.Add(entity.GetComponent<IShapeComponent>().First());
 //        }
 
-//        protected override void UnregisterEntity(IEntity entity)
+//        protected override void UnregisterEntity(Entity entity)
 //        {
 //            var index = entities.IndexOf(entity);
 

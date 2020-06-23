@@ -11,13 +11,13 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
         #region Private Fields
 
         private SortedDictionary<float, T> frames = new SortedDictionary<float, T>();
-        private Action<IEntity, T> frameUpdateAction;
+        private Action<Entity, T> frameUpdateAction;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal Animation(int id, string name, Action<IEntity, T> frameUpdateAction)
+        internal Animation(int id, string name, Action<Entity, T> frameUpdateAction)
         {
             Id = id;
             Name = name;
@@ -36,7 +36,7 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
 
         #region Public Methods
 
-        public bool UpdateWithNextFrame(IEntity entity, Animator animator, out object nextFrame)
+        public bool UpdateWithNextFrame(Entity entity, Animator animator, out object nextFrame)
         {
             T cf = default(T);
 

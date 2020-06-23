@@ -13,7 +13,7 @@ namespace OpenBreed.Core
     {
         #region Private Fields
 
-        private readonly List<IEntity> controlledEntities = new List<IEntity>();
+        private readonly List<Entity> controlledEntities = new List<Entity>();
         private readonly List<IPlayerInput> inputs = new List<IPlayerInput>();
 
         #endregion Private Fields
@@ -26,14 +26,14 @@ namespace OpenBreed.Core
             Core = core;
 
             Inputs = new ReadOnlyCollection<IPlayerInput>(inputs);
-            ControlledEntities = new ReadOnlyCollection<IEntity>(controlledEntities);
+            ControlledEntities = new ReadOnlyCollection<Entity>(controlledEntities);
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public ReadOnlyCollection<IEntity> ControlledEntities { get; }
+        public ReadOnlyCollection<Entity> ControlledEntities { get; }
         public ICore Core { get; }
         public string Name { get; }
         public ReadOnlyCollection<IPlayerInput> Inputs { get; }
@@ -62,15 +62,15 @@ namespace OpenBreed.Core
             inputs.ForEach(item => item.Apply(this));
         }
 
-        public void LoseControl(IEntity entity)
+        public void LoseControl(Entity entity)
         {
             if (!controlledEntities.Remove(entity))
                 Core.Logging.Warning($"'{entity}' was no under control.");
         }
 
-        public void AssumeControl(IEntity entity)
+        public void AssumeControl(Entity entity)
         {
-            var controlComponent = entity.TryGetComponent<IControlComponent>();
+            var controlComponent = entity.TryGet<IControlComponent>();
 
             if (controlComponent == null)
                 throw new InvalidOperationException($"Control on entity '{entity}' not allowed.");

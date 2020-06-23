@@ -3,6 +3,7 @@ using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Helpers;
+using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
@@ -15,12 +16,11 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Rendering.Systems
 {
-    public class TextSystem : WorldSystem, ICommandExecutor, IRenderableSystem
+    public class TextSystem : WorldSystem, IRenderableSystem
     {
         #region Private Fields
 
-        private readonly List<IEntity> entities = new List<IEntity>();
-        private CommandHandler cmdHandler;
+        private readonly List<Entity> entities = new List<Entity>();
 
         #endregion Private Fields
 
@@ -28,8 +28,6 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         internal TextSystem(TextSystemBuilder builder) : base(builder.core)
         {
-            cmdHandler = new CommandHandler(this);
-
             Require<TextComponent>();
             Require<PositionComponent>();
         }
@@ -38,17 +36,13 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Public Methods
 
-        public override void Initialize(World world)
+        public static void RegisterHandlers(CommandsMan commands)
         {
-            base.Initialize(world);
-
-            World.RegisterHandler(TextSetCommand.TYPE, cmdHandler);
+            commands.Register<TextSetCommand>(HandleTextSetCommand);
         }
 
         public void Render(Box2 clipBox, int depth, float dt)
         {
-            cmdHandler.ExecuteEnqueued();
-
             GL.Enable(EnableCap.Blend);
             GL.Enable(EnableCap.AlphaTest);
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusConstantColor);
@@ -64,33 +58,16 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Disable(EnableCap.Blend);
         }
 
-        public override bool ExecuteCommand(object sender, ICommand cmd)
-        {
-            switch (cmd.Type)
-            {
-                case TextSetCommand.TYPE:
-                    return HandleTextSetCommand(sender, (TextSetCommand)cmd);
-
-                default:
-                    return false;
-            }
-        }
-
-        public bool EnqueueMsg(object sender, IEntityCommand msg)
-        {
-            return false;
-        }
-
         #endregion Public Methods
 
         #region Protected Methods
 
-        protected override void RegisterEntity(IEntity entity)
+        protected override void OnAddEntity(Entity entity)
         {
             entities.Add(entity);
         }
 
-        protected override void UnregisterEntity(IEntity entity)
+        protected override void OnRemoveEntity(Entity entity)
         {
             entities.Remove(entity);
         }
@@ -99,10 +76,10 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Private Methods
 
-        private void RenderText(IEntity entity, Box2 clipBox)
+        private void RenderText(Entity entity, Box2 clipBox)
         {
-            var pos = entity.GetComponent<PositionComponent>();
-            var tcp = entity.GetComponent<TextComponent>();
+            var pos = entity.Get<PositionComponent>();
+            var tcp = entity.Get<TextComponent>();
 
             GL.Enable(EnableCap.Texture2D);
             GL.PushMatrix();
@@ -120,17 +97,17 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
             GL.Disable(EnableCap.Texture2D);
         }
 
-        private bool HandleTextSetCommand(object sender, TextSetCommand cmd)
+        private static bool HandleTextSetCommand(ICore core, TextSetCommand cmd)
         {
-            var toModify = entities.FirstOrDefault(item => item.Id == cmd.EntityId);
+            var toModify = core.Entities.GetById(cmd.EntityId);
             if (toModify == null)
                 return false;
 
-            var text = toModify.GetComponent<TextComponent>();
+            var text = toModify.Get<TextComponent>();
 
             if (cmd.PartId < 0 || cmd.PartId >= text.Parts.Count)
             {
-                Core.Logging.Error($"Unknown text part ID({cmd.PartId}) to modify.");
+                core.Logging.Error($"Unknown text part ID({cmd.PartId}) to modify.");
             }
 
             text.Parts[cmd.PartId].Text = cmd.Text;

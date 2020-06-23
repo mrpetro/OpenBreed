@@ -13,15 +13,15 @@ using OpenBreed.Core.Commands;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Systems;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 {
-    public class WalkingControlSystem : WorldSystem, IUpdatableSystem, ICommandExecutor
+    public class WalkingControlSystem : WorldSystem, IUpdatableSystem
     {
         #region Private Fields
 
-        private readonly List<IEntity> entities = new List<IEntity>();
-        private CommandHandler cmdHandler;
+        private readonly List<Entity> entities = new List<Entity>();
 
         #endregion Private Fields
 
@@ -29,8 +29,6 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         internal WalkingControlSystem(WalkingControlSystemBuilder builder) : base(builder.core)
         {
-            cmdHandler = new CommandHandler(this);
-
             Require<IControlComponent>();
         }
 
@@ -38,12 +36,10 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         #region Public Methods
 
-        public override void Initialize(World world)
+        public static void RegisterHandlers(CommandsMan commands)
         {
-            base.Initialize(world);
-
-            World.RegisterHandler(WalkingControlCommand.TYPE, cmdHandler);
-            World.RegisterHandler(AttackControlCommand.TYPE, cmdHandler);
+            commands.Register<WalkingControlCommand>(HandleWalkingControlCommand);
+            commands.Register<AttackControlCommand>(HandleAttackControlCommand);
         }
 
         public void UpdatePauseImmuneOnly(float dt)
@@ -52,32 +48,18 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         public void Update(float dt)
         {
-            cmdHandler.ExecuteEnqueued();
-        }
-
-        public override bool ExecuteCommand(object sender, ICommand cmd)
-        {
-            switch (cmd.Type)
-            {
-                case WalkingControlCommand.TYPE:
-                    return HandleWalkingControlCommand(sender, (WalkingControlCommand)cmd);
-                case AttackControlCommand.TYPE:
-                    return HandleAttackControlCommand(sender, (AttackControlCommand)cmd);
-                default:
-                    return false;
-            }
         }
 
         #endregion Public Methods
 
         #region Protected Methods
 
-        protected override void RegisterEntity(IEntity entity)
+        protected override void OnAddEntity(Entity entity)
         {
             entities.Add(entity);
         }
 
-        protected override void UnregisterEntity(IEntity entity)
+        protected override void OnRemoveEntity(Entity entity)
         {
             var index = entities.IndexOf(entity);
 
@@ -91,12 +73,11 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         #region Private Methods
 
-        private bool HandleAttackControlCommand(object sender, AttackControlCommand cmd)
+        private static bool HandleAttackControlCommand(ICore core, AttackControlCommand cmd)
         {
-            var entity = Core.Entities.GetById(cmd.EntityId);
+            var entity = core.Entities.GetById(cmd.EntityId);
 
-
-            var control = entity.GetComponent<AttackControl>();
+            var control = entity.Get<AttackControl>();
 
             if (control.AttackPrimary != cmd.Primary)
             {
@@ -107,11 +88,11 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
             return true;
         }
 
-        private bool HandleWalkingControlCommand(object sender, WalkingControlCommand cmd)
+        private static bool HandleWalkingControlCommand(ICore core, WalkingControlCommand cmd)
         {
-            var entity = Core.Entities.GetById(cmd.EntityId);
+            var entity = core.Entities.GetById(cmd.EntityId);
 
-            var control = entity.GetComponent<WalkingControl>();
+            var control = entity.Get<WalkingControl>();
 
             if (control.Direction != cmd.Direction)
             {

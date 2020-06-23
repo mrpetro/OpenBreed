@@ -1,9 +1,11 @@
 ﻿using OpenBreed.Core.Collections;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
+using OpenBreed.Core.Events;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 
 namespace OpenBreed.Core.Managers
@@ -28,6 +30,10 @@ namespace OpenBreed.Core.Managers
         {
             Core = core;
             Items = worlds.Items;
+
+            Core.Commands.Register<PauseWorldCommand>(HandlePauseWorld);
+            Core.Commands.Register<RemoveEntityCommand>(HandleRemoveEntity);
+            Core.Commands.Register<AddEntityCommand>(HandleAddEntity);
         }
 
         #endregion Public Constructors
@@ -80,6 +86,11 @@ namespace OpenBreed.Core.Managers
             return worlds[worldId];
         }
 
+        public void RaiseEvent<T>(T eventArgs) where T : EventArgs
+        {
+            Core.Events.Raise(this, eventArgs);
+        }
+
         /// <summary>
         /// Marks given world to be removed from Core, it will be removed at nearest Manager Update
         /// </summary>
@@ -103,6 +114,16 @@ namespace OpenBreed.Core.Managers
         {
             for (int i = 0; i < Items.Count; i++)
                 Items[i].Update(dt);
+        }
+
+        public void Subscribe<T>(Action<object, T> callback) where T : EventArgs
+        {
+            Core.Events.Subscribe(this, callback);
+        }
+
+        public void Unsubscribe<T>(Action<object, T> callback) where T : EventArgs
+        {
+            Core.Events.Unsubscribe(this, callback);
         }
 
         /// <summary>
@@ -140,12 +161,6 @@ namespace OpenBreed.Core.Managers
 
         #region Internal Methods
 
-        internal void PostCommand(object sender, IWorldCommand cmd)
-        {
-            var targetWorld = Core.Worlds.GetById(cmd.WorldId);
-            targetWorld.Handle(sender, cmd);
-        }
-
         internal void RegisterWorld(World newWorld)
         {
             newWorld.Id = worlds.Add(newWorld);
@@ -154,5 +169,32 @@ namespace OpenBreed.Core.Managers
         }
 
         #endregion Internal Methods
+
+        #region Private Methods
+
+        private bool HandleRemoveEntity(ICore core, RemoveEntityCommand cmd)
+        {
+            var world = GetById(cmd.WorldId);
+            var entity = Core.Entities.GetById(cmd.EntityId);
+            world.RemoveEntity(entity);
+            return true;
+        }
+
+        private bool HandleAddEntity(ICore core, AddEntityCommand cmd)
+        {
+            var world = GetById(cmd.WorldId);
+            var entity = Core.Entities.GetById(cmd.EntityId);
+            world.AddEntity(entity);
+            return true;
+        }
+
+        private bool HandlePauseWorld(ICore core, PauseWorldCommand cmd)
+        {
+            var world = GetById(cmd.WorldId);
+            world.Pause(cmd.Pause);
+            return true;
+        }
+
+        #endregion Private Methods
     }
 }

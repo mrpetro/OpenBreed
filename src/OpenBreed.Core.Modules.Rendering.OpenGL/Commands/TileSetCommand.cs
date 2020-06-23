@@ -4,7 +4,7 @@ using OpenTK;
 
 namespace OpenBreed.Core.Modules.Rendering.Commands
 {
-    public struct TileSetCommand : IWorldCommand
+    public struct TileSetCommand : ICommand
     {
         #region Public Fields
 
@@ -32,7 +32,7 @@ namespace OpenBreed.Core.Modules.Rendering.Commands
         public int ImageId { get; }
         public Vector2 Position { get; }
 
-        public string Type { get { return TYPE; } }
+        public string Name { get { return TYPE; } }
 
         #endregion Public Properties
     }

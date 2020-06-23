@@ -1,30 +1,26 @@
-﻿using OpenBreed.Core.Common;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Managers;
+﻿using OpenBreed.Core.Managers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Core
 {
-    public class WorldJob : IJob
+    public class WorldJob<TEventArgs> : IJob where TEventArgs : EventArgs
     {
         #region Private Fields
 
-        private World world;
+        private Action action;
 
-        private string actionName;
+        private Func<object, TEventArgs, bool> triggerFunc;
+        private WorldMan worldMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public WorldJob(World world, string actionName)
+        public WorldJob(WorldMan worldMan, Func<object, TEventArgs, bool> triggerFunc, Action action)
         {
-            this.world = world;
-            this.actionName = actionName;
+            this.worldMan = worldMan;
+            this.triggerFunc = triggerFunc;
+            this.action = action;
         }
 
         #endregion Public Constructors
@@ -37,33 +33,33 @@ namespace OpenBreed.Core
 
         #region Public Methods
 
+        public void Dispose()
+        {
+        }
+
         public void Execute()
         {
-            switch (actionName)
-            {
-                case "Pause":
-                    world.Paused = true;
-                    break;
-                case "Unpause":
-                    world.Paused = false;
-                    break;
-                default:
-                    break;
-            }
-
-            Complete(this);
+            worldMan.Subscribe<TEventArgs>(OnEvent);
+            action.Invoke();
         }
 
         public void Update(float dt)
         {
         }
 
-        public void Dispose()
-        {
-
-        }
-
         #endregion Public Methods
 
+        #region Private Methods
+
+        private void OnEvent(object sender, TEventArgs args)
+        {
+            if (!triggerFunc.Invoke(sender, args))
+                return;
+
+            worldMan.Unsubscribe<TEventArgs>(OnEvent);
+            Complete(this);
+        }
+
+        #endregion Private Methods
     }
 }

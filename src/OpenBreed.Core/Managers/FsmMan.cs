@@ -57,9 +57,9 @@ namespace OpenBreed.Core.Managers
             return GetStateName(state.FsmId, state.StateId);
         }
 
-        public IEnumerable<string> GetStateNames(IEntity entity)
+        public IEnumerable<string> GetStateNames(Entity entity)
         {
-            var fsmComponent = entity.GetComponent<FsmComponent>();
+            var fsmComponent = entity.Get<FsmComponent>();
             return fsmComponent.States.Select(item => GetStateName(item));
         }
 
@@ -74,12 +74,12 @@ namespace OpenBreed.Core.Managers
 
         #region Internal Methods
 
-        internal void EnterState(IEntity entity, MachineState state)
+        internal void EnterState(Entity entity, MachineState state)
         {
             list[state.FsmId].EnterState(entity, state.StateId);
         }
 
-        internal void LeaveState(IEntity entity, MachineState state)
+        internal void LeaveState(Entity entity, MachineState state)
         {
             list[state.FsmId].LeaveState(entity, state.StateId);
         }

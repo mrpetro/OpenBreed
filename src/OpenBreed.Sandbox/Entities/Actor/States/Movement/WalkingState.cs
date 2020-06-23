@@ -44,25 +44,25 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         #region Public Methods
 
-        public void EnterState(IEntity entity)
+        public void EnterState(Entity entity)
         {
-            var direction = entity.GetComponent<DirectionComponent>();
-            var movement = entity.GetComponent<MotionComponent>();
-            entity.GetComponent<ThrustComponent>().Value = direction.Value * movement.Acceleration;
+            var direction = entity.Get<DirectionComponent>();
+            var movement = entity.Get<MotionComponent>();
+            entity.Get<ThrustComponent>().Value = direction.Value * movement.Acceleration;
 
             var animDirPostfix = AnimHelper.ToDirectionName(direction.Value);
 
             var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
-            var className = entity.GetComponent<ClassComponent>().Name;
-            entity.PostCommand(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{stateName}/{animDirPostfix}", 0));
+            var className = entity.Get<ClassComponent>().Name;
+            entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{stateName}/{animDirPostfix}", 0));
 
             var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
-            entity.PostCommand(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
+            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
             entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
      
-        public void LeaveState(IEntity entity)
+        public void LeaveState(Entity entity)
         {
             entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
@@ -73,12 +73,12 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         private void OnControlDirectionChanged(object sender, ControlDirectionChangedEventArgs e)
         {
-            var entity = sender as IEntity;
+            var entity = sender as Entity;
 
             if (e.Direction != Vector2.Zero)
-                entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)MovementImpulse.Walk));
+                entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)MovementImpulse.Walk));
             else
-                entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)MovementImpulse.Stop));
+                entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)MovementImpulse.Stop));
         }
 
         #endregion Private Methods

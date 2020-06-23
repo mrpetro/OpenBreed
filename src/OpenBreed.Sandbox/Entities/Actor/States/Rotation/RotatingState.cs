@@ -38,25 +38,25 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 
         #region Public Methods
 
-        public void EnterState(IEntity entity)
+        public void EnterState(Entity entity)
         {
-            var direction = entity.GetComponent<DirectionComponent>();
-            var movement = entity.GetComponent<MotionComponent>();
-            entity.GetComponent<ThrustComponent>().Value = direction.Value * movement.Acceleration;
+            var direction = entity.Get<DirectionComponent>();
+            var movement = entity.Get<MotionComponent>();
+            entity.Get<ThrustComponent>().Value = direction.Value * movement.Acceleration;
 
             var animDirName = AnimHelper.ToDirectionName(direction.Value);
-            var className = entity.GetComponent<ClassComponent>().Name;
+            var className = entity.Get<ClassComponent>().Name;
             var movementFsm = entity.Core.StateMachines.GetByName("Actor.Movement");
             var movementStateName = movementFsm.GetCurrentStateName(entity);
-            entity.PostCommand(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{movementStateName}/{animDirName}", 0));
+            entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{movementStateName}/{animDirName}", 0));
 
             var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
-            entity.PostCommand(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
+            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
-            entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)RotationImpulse.Stop));
+            entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)RotationImpulse.Stop));
         }
 
-        public void LeaveState(IEntity entity)
+        public void LeaveState(Entity entity)
         {
         }
 

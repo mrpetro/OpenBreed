@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Events;
@@ -86,11 +87,11 @@ namespace OpenBreed.Sandbox.Worlds
 
             var vp = ScreenWorldHelper.CreateViewportEntity(core, $"TV{pairCode}" , x * 16, y * 16, viewportData.Width, viewportData.Height, true);
 
-            vp.GetComponent<ViewportComponent>().CameraEntityId = core.Entities.GetByTag(viewportData.CameraName).FirstOrDefault().Id;
-            vp.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
+            vp.Get<ViewportComponent>().CameraEntityId = core.Entities.GetByTag(viewportData.CameraName).FirstOrDefault().Id;
+            vp.Get<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
             //GameWorldHelper.SetPreserveAspectRatio(vp);
-
-            world.AddEntity(vp);
+            world.Core.Commands.Post(new AddEntityCommand(world.Id, vp.Id));
+            //world.AddEntity(vp);
         }
 
         private static void AddTeleportEntry(World world, int code, object[] args)
@@ -101,7 +102,7 @@ namespace OpenBreed.Sandbox.Worlds
             var pairCode = (int)args[2];
 
             TeleportHelper.AddTeleportEntry(world, x, y, pairCode);
-            world.Core.Commands.Post(null, new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            world.Core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private static void AddWorldEntry(World world, int code, object[] args)
@@ -112,7 +113,7 @@ namespace OpenBreed.Sandbox.Worlds
             var pairCode = (int)args[2];
 
             WorldGateHelper.AddWorldEntry(world, x, y, pairCode);
-            world.Core.Commands.Post(null, new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            world.Core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private static void AddTeleportExit(World world, int code, object[] args)
@@ -123,7 +124,7 @@ namespace OpenBreed.Sandbox.Worlds
             var pairCode = (int)args[2];
 
             TeleportHelper.AddTeleportExit(world, x, y, pairCode);
-            world.Core.Commands.Post(null, new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            world.Core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private void AddWorldExit(World world, int code, object[] args)
@@ -138,7 +139,7 @@ namespace OpenBreed.Sandbox.Worlds
                 return;
 
             WorldGateHelper.AddWorldExit(world, x, y, exitInfo.Item1, exitInfo.Item2);
-            world.Core.Commands.Post(null, new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            world.Core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private static void AddPlayer(World world, int code, object[] args)
@@ -193,7 +194,10 @@ namespace OpenBreed.Sandbox.Worlds
             blockBuilder.HasBody = false;
             blockBuilder.SetPosition(new Vector2(x * 16, y * 16));
             blockBuilder.SetTileId(ToTileId(gfxCode));
-            world.AddEntity(blockBuilder.Build());
+
+            var entity = blockBuilder.Build();
+            world.Core.Commands.Post(new AddEntityCommand(world.Id, entity.Id));
+            //world.AddEntity(blockBuilder.Build());
         }
 
         private static void AddObstacleCell(World world, int code, object[] args)
@@ -208,7 +212,10 @@ namespace OpenBreed.Sandbox.Worlds
             blockBuilder.HasBody = true;
             blockBuilder.SetPosition(new Vector2(x * 16, y * 16));
             blockBuilder.SetTileId(ToTileId(gfxCode));
-            world.AddEntity(blockBuilder.Build());
+
+            var entity = blockBuilder.Build();
+            world.Core.Commands.Post(new AddEntityCommand(world.Id, entity.Id));
+            //world.AddEntity(blockBuilder.Build());
         }
 
         private static void AddDoor(World world, int code, object[] args)

@@ -77,14 +77,36 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Commands\FollowedAddFollowerCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Commands\IWorldCommand.cs" />
+    <Compile Include="Commands\AddEntityCommand.cs" />
+    <Compile Include="Commands\RemoveEntityCommand.cs" />
+    <Compile Include="Commands\FollowerSetTargetCommand.cs" />
+    <Compile Include="Commands\TextDataRemove.cs" />
+    <Compile Include="Commands\TextDataInsert.cs" />
+    <Compile Include="Commands\TextCaretSetPosition.cs" />
     <Compile Include="Commands\TimerStopCommand.cs" />
     <Compile Include="Commands\TimerStartCommand.cs" />
-    <Compile Include="Commands\WorldSetPauseCommand.cs" />
+    <Compile Include="Commands\PauseWorldCommand.cs" />
+    <Compile Include="Common\Builders\TimerComponentBuilder.cs" />
+    <Compile Include="Common\Builders\FsmComponentBuilder.cs" />
+    <Compile Include="Common\Builders\ClassComponentBuilder.cs" />
     <Compile Include="Common\Components\ClassComponent.cs" />
+    <Compile Include="Common\Components\FollowerComponent.cs" />
+    <Compile Include="Common\Components\GroupComponent.cs" />
+    <Compile Include="Common\Components\TextCaretComponent.cs" />
+    <Compile Include="Common\Components\TextDataComponent.cs" />
     <Compile Include="Common\Components\TimerComponent.cs" />
+    <Compile Include="CoreBase.cs" />
+    <Compile Include="Events\EntityAddedEventArgs.cs" />
+    <Compile Include="Events\EntityRemovedEventArgs.cs" />
+    <Compile Include="Events\TextDataChanged.cs" />
+    <Compile Include="Events\TextCaretPositionChanged.cs" />
+    <Compile Include="Events\TimerUpdateEventArgs.cs" />
     <Compile Include="Events\TimerElapsedEventArgs.cs" />
+    <Compile Include="EntityJob.cs" />
+    <Compile Include="Events\WorldUnpausedEventArgs.cs" />
+    <Compile Include="Events\WorldPausedEventArgs.cs" />
     <Compile Include="Modules\Animation\Builders\AnimationComponentBuilder.cs" />
     <Compile Include="Common\Builders\BaseComponentBuilder.cs" />
     <Compile Include="Common\Builders\IBuilder.cs" />
@@ -103,8 +125,6 @@
     <Compile Include="Common\Shapes\CircleShape.cs" />
     <Compile Include="Common\Shapes\IShape.cs" />
     <Compile Include="Common\Shapes\PolygonShape.cs" />
-    <Compile Include="Events\EntityEnteredWorldEventArgs.cs" />
-    <Compile Include="Events\EntityLeftWorldEventArgs.cs" />
     <Compile Include="Events\WorldDeinitializedEventArgs.cs" />
     <Compile Include="Events\WorldInitializedEventArgs.cs" />
     <Compile Include="IJob.cs" />
@@ -115,11 +135,7 @@
     <Compile Include="Common\Components\InventoryComponent.cs" />
     <Compile Include="Managers\AnimMan.cs" />
     <Compile Include="Managers\EventsMan.cs" />
-    <Compile Include="Commands\IEntityCommand.cs" />
-    <Compile Include="Commands\IMsgHandler.cs" />
-    <Compile Include="Commands\ICommandExecutor.cs" />
     <Compile Include="Helpers\MovementTools.cs" />
-    <Compile Include="Helpers\CommandHandler.cs" />
     <Compile Include="Managers\FsmMan.cs" />
     <Compile Include="Managers\IScriptMan.cs" />
     <Compile Include="Managers\LuaScriptMan.cs" />
@@ -135,11 +151,13 @@
     <Compile Include="Modules\BaseCoreModule.cs" />
     <Compile Include="Scripting\IScriptFunc.cs" />
     <Compile Include="Scripting\LuaScriptFunc.cs" />
+    <Compile Include="Systems\FollowerSystem.cs" />
+    <Compile Include="Systems\ISystem.cs" />
+    <Compile Include="Systems\TextInputSystem.cs" />
+    <Compile Include="WorldJob.cs" />
     <Compile Include="Systems\StateMachineSystem.cs" />
     <Compile Include="Systems\TimerSystem.cs" />
     <Compile Include="CoreTools.cs" />
-    <Compile Include="Commands\IMsg.cs" />
-    <Compile Include="Helpers\MsgHandlerRelay.cs" />
     <Compile Include="Managers\CommandsMan.cs" />
     <Compile Include="Commands\DestroyEntityCommand.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
@@ -198,11 +216,9 @@
     <Compile Include="Entities\Builders\EntityBuilder.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Managers\EntityMan.cs" />
-    <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\World.cs" />
     <Compile Include="WorldBuilder.cs" />
-    <Compile Include="WorldJob.cs" />
     <Compile Include="Managers\WorldMan.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -13,13 +13,11 @@ using System.Linq;
 
 namespace OpenBreed.Sandbox.Systems
 {
-    public class UiSystem : WorldSystem, ICommandExecutor
+    public class UiSystem : WorldSystem
     {
         #region Private Fields
 
-        private CommandHandler cmdHandler;
-
-        private List<IEntity> entities = new List<IEntity>();
+        private List<Entity> entities = new List<Entity>();
 
         #endregion Private Fields
 
@@ -27,8 +25,6 @@ namespace OpenBreed.Sandbox.Systems
 
         public UiSystem(ICore core) : base(core)
         {
-            cmdHandler = new CommandHandler(this);
-
             Require<CursorInputComponent>();
             Require<PositionComponent>();
         }
@@ -48,7 +44,7 @@ namespace OpenBreed.Sandbox.Systems
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                var icc = entities[i].GetComponent<CursorInputComponent>();
+                var icc = entities[i].Get<CursorInputComponent>();
 
                 if (icc.CursorId != 0)
                     return;
@@ -60,7 +56,7 @@ namespace OpenBreed.Sandbox.Systems
                 if (gameViewport == null)
                     return;
 
-                var pos = entities[i].GetComponent<PositionComponent>();
+                var pos = entities[i].Get<PositionComponent>();
 
 
                 var coord = viewportSystem.ClientToWorld(new OpenTK.Vector4(e.X, e.Y, 0.0f, 1.0f), gameViewport);
@@ -74,12 +70,12 @@ namespace OpenBreed.Sandbox.Systems
 
         #region Protected Methods
 
-        protected override void RegisterEntity(IEntity entity)
+        protected override void OnAddEntity(Entity entity)
         {
             entities.Add(entity);
         }
 
-        protected override void UnregisterEntity(IEntity entity)
+        protected override void OnRemoveEntity(Entity entity)
         {
             entities.Remove(entity);
         }

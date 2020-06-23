@@ -5,7 +5,7 @@ using OpenTK;
 
 namespace OpenBreed.Core.Modules.Animation.Systems.Control.Commands
 {
-    public struct AttackControlCommand : IEntityCommand
+    public struct AttackControlCommand : ICommand
     {
         #region Public Fields
 
@@ -15,7 +15,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Commands
 
         #region Public Constructors
 
-        public AttackControlCommand(int entityId, IEntity entity, bool primary, bool secondary)
+        public AttackControlCommand(int entityId, Entity entity, bool primary, bool secondary)
         {
             EntityId = entityId;
             Primary = primary;
@@ -27,7 +27,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Commands
         #region Public Properties
 
         public int EntityId { get; }
-        public string Type { get { return TYPE; } }
+        public string Name { get { return TYPE; } }
 
         public bool Primary { get; }
         public bool Secondary { get; }

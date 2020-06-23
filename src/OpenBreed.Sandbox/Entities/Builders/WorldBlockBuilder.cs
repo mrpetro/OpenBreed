@@ -4,6 +4,7 @@ using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Entities.Builders;
 using OpenBreed.Core.Modules.Physics;
+using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Components;
@@ -57,20 +58,33 @@ namespace OpenBreed.Sandbox.Entities.Builders
 
         public bool HasBody { get; set; }
 
-        public override IEntity Build()
+        public override Entity Build()
         {
             var entity = Core.Entities.Create();
 
             entity.Add(PositionComponent.Create(pos));
 
+
             if (HasBody)
             {
+                var bodyComponentBuilder = BodyComponentBuilder.New(Core);
+
                 var fixtureId = physics.Fixturs.GetByAlias("Fixtures/GridCell").Id;
 
-                entity.Add(BodyComponent.Create(1.0f, 1.0f, "Static",new List<int>(new int[] { fixtureId })));
+                bodyComponentBuilder.SetProperty("CofFactor", 1.0f);
+                bodyComponentBuilder.SetProperty("CorFactor", 1.0f);
+                bodyComponentBuilder.SetProperty("Type", "Static");
+                bodyComponentBuilder.SetProperty("Fixtures", new List<int> (new int[] { fixtureId }));
+
+                entity.Add(bodyComponentBuilder.Build());
             }
 
-            entity.Add(TileComponent.Create(atlasId, tileId));
+
+            var tileComponentBuilder = TileComponentBuilder.New(Core);
+            tileComponentBuilder.SetProperty("AtlasId", atlasId);
+            tileComponentBuilder.SetProperty("ImageId", tileId);
+
+            entity.Add(tileComponentBuilder.Build());
 
             return entity;
         }

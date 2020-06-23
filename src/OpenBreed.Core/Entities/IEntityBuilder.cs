@@ -8,6 +8,6 @@ namespace OpenBreed.Core.Entities
 {
     public interface IEntityBuilder
     {
-        IEntity Build();
+        Entity Build();
     }
 }

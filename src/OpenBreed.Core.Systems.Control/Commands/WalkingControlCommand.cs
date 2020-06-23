@@ -5,7 +5,7 @@ using OpenTK;
 
 namespace OpenBreed.Core.Modules.Animation.Systems.Control.Commands
 {
-    public struct WalkingControlCommand : IEntityCommand
+    public struct WalkingControlCommand : ICommand
     {
         #region Public Fields
 
@@ -26,7 +26,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Commands
         #region Public Properties
 
         public int EntityId { get; }
-        public string Type { get { return TYPE; } }
+        public string Name { get { return TYPE; } }
         public Vector2 Direction { get; }
 
         #endregion Public Properties

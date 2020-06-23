@@ -41,27 +41,27 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         #region Public Methods
 
-        public void EnterState(IEntity entity)
+        public void EnterState(Entity entity)
         {
-            var direction = entity.GetComponent<DirectionComponent>().Value;
+            var direction = entity.Get<DirectionComponent>().Value;
 
             var animDirName = AnimHelper.ToDirectionName(direction);
-            var className = entity.GetComponent<ClassComponent>().Name;
+            var className = entity.Get<ClassComponent>().Name;
 
-            var thrust = entity.GetComponent<ThrustComponent>();
+            var thrust = entity.Get<ThrustComponent>();
 
             thrust.Value = Vector2.Zero;
 
             var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
-            entity.PostCommand(new PlayAnimCommand(entity.Id,  $"{animPrefix}/{className}/{stateName}/{animDirName}", 0));
+            entity.Core.Commands.Post(new PlayAnimCommand(entity.Id,  $"{animPrefix}/{className}/{stateName}/{animDirName}", 0));
 
             var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
-            entity.PostCommand(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
+            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
             entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
-        public void LeaveState(IEntity entity)
+        public void LeaveState(Entity entity)
         {
             entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
@@ -72,10 +72,10 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         private void OnControlDirectionChanged(object sender, ControlDirectionChangedEventArgs eventArgs)
         {
-            var entity = sender as IEntity;
+            var entity = sender as Entity;
 
             if (eventArgs.Direction != Vector2.Zero)
-                entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)MovementImpulse.Walk));
+                entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)MovementImpulse.Walk));
         }
 
         #endregion Private Methods

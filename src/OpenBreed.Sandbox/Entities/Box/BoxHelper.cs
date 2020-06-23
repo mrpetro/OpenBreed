@@ -15,7 +15,7 @@
 //{
 //    public static class BoxHelper
 //    {
-//        public static IEntity CreateBox(ICore core, Vector2 size, Vector2 position, Vector2 velocity)
+//        public static Entity CreateBox(ICore core, Vector2 size, Vector2 position, Vector2 velocity)
 //        {
 //            var ball = core.Entities.Create();
 

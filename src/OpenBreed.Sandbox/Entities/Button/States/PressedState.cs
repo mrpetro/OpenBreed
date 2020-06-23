@@ -34,18 +34,18 @@ namespace OpenBreed.Sandbox.Entities.Button.States
 
         #region Public Methods
 
-        public void EnterState(IEntity entity)
+        public void EnterState(Entity entity)
         {
-            entity.PostCommand(new SpriteOffCommand(entity.Id));
+            entity.Core.Commands.Post(new SpriteOffCommand(entity.Id));
 
-            var pos = entity.GetComponent<PositionComponent>();
-            entity.PostCommand(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
-            entity.PostCommand(new TextSetCommand(entity.Id, 0, "Door - Closed"));
+            var pos = entity.Get<PositionComponent>();
+            entity.Core.Commands.Post(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
+            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, "Door - Closed"));
 
             entity.Subscribe<CollisionEventArgs>(OnCollision);
         }
 
-        public void LeaveState(IEntity entity)
+        public void LeaveState(Entity entity)
         {
             entity.Unsubscribe<CollisionEventArgs>(OnCollision);
         }
@@ -56,8 +56,8 @@ namespace OpenBreed.Sandbox.Entities.Button.States
 
         private void OnCollision(object sender, CollisionEventArgs eventArgs)
         {
-            var entity = sender as IEntity;
-            entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)ButtonImpulse.Unpress));
+            var entity = sender as Entity;
+            entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)ButtonImpulse.Unpress));
         }
 
         #endregion Private Methods

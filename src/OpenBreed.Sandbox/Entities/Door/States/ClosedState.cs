@@ -40,25 +40,25 @@ namespace OpenBreed.Sandbox.Components.States
 
         #region Public Methods
 
-        public void EnterState(IEntity entity)
+        public void EnterState(Entity entity)
         {
-            entity.PostCommand(new SpriteOffCommand(entity.Id));
+            entity.Core.Commands.Post(new SpriteOffCommand(entity.Id));
 
-            var pos = entity.GetComponent<PositionComponent>();
+            var pos = entity.Get<PositionComponent>();
 
-            var className = entity.GetComponent<ClassComponent>().Name;
+            var className = entity.Get<ClassComponent>().Name;
             var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
             var stampId = entity.Core.Rendering.Stamps.GetByName($"{stampPrefix}/{className}/{stateName}").Id;
-            entity.PostCommand(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
+            entity.Core.Commands.Post(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
 
             //STAMP_DOOR_HORIZONTAL_CLOSED = $"{stampPrefix}/{className}/{stateName}";
 
-            entity.PostCommand(new TextSetCommand(entity.Id, 0, "Door - Closed"));
+            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, "Door - Closed"));
 
             entity.Subscribe<CollisionEventArgs>(OnCollision);
         }
 
-        public void LeaveState(IEntity entity)
+        public void LeaveState(Entity entity)
         {
             entity.Unsubscribe<CollisionEventArgs>(OnCollision);
         }
@@ -69,8 +69,8 @@ namespace OpenBreed.Sandbox.Components.States
 
         private void OnCollision(object sender, CollisionEventArgs eventArgs)
         {
-            var entity = sender as IEntity;
-            entity.PostCommand(new SetStateCommand(entity.Id, FsmId, (int)FunctioningImpulse.Open));
+            var entity = sender as Entity;
+            entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)FunctioningImpulse.Open));
         }
 
         #endregion Private Methods

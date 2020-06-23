@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Modules.Rendering.Builders;
 
 namespace OpenBreed.Core.Modules.Rendering.Components
 {
@@ -9,16 +10,16 @@ namespace OpenBreed.Core.Modules.Rendering.Components
     /// </summary>
     public class CameraComponent : IEntityComponent
     {
-        #region Private Constructors
+        #region Internal Constructors
 
-        private CameraComponent(float width, float height, float brightness)
+        internal CameraComponent(CameraComponentBuilder builder)
         {
-            Width = width;
-            Height = height;
-            Brightness = brightness;
+            Width = builder.Width;
+            Height = builder.Height;
+            Brightness = builder.Brightness;
         }
 
-        #endregion Private Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
 
@@ -43,20 +44,5 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         public float Brightness { get; set; }
 
         #endregion Public Properties
-
-        #region Public Methods
-
-        /// <summary>
-        /// Creates camera component for viewport system
-        /// </summary>
-        /// <param name="width">Initial zoom value</param>
-        /// <param name="brightness">Initial brightness value</param>
-        /// <returns>Camera component</returns>
-        public static CameraComponent Create(float width, float height, float brightness = 1.0f)
-        {
-            return new CameraComponent(width, height, brightness);
-        }
-
-        #endregion Public Methods
     }
 }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Core.Modules.Rendering.Builders
 {
-    public class TextComponentBuilder : BaseComponentBuilder<TextComponentBuilder>
+    public class TextComponentBuilder : BaseComponentBuilder<TextComponentBuilder, TextComponent>
     {
         #region Private Fields
 
@@ -59,7 +59,7 @@ namespace OpenBreed.Core.Modules.Rendering.Builders
 
         public override IEntityComponent Build()
         {
-            return TextComponent.Create(FontId, Offset, Color, Text, Order);
+            return new TextComponent(this);
         }
 
         public override void SetProperty(object key, object value)

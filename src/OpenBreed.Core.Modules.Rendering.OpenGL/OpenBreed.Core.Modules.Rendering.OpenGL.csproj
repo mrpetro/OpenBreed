@@ -68,10 +68,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\CameraComponentBuilder.cs" />
+    <Compile Include="Builders\TileComponentBuilder.cs" />
     <Compile Include="Builders\SpriteComponentBuilder.cs" />
     <Compile Include="Builders\TextComponentBuilder.cs" />
     <Compile Include="Builders\ViewportComponentBuilder.cs" />
-    <Compile Include="Builders\WireframeSystemBuilder.cs" />
     <Compile Include="Builders\TextSystemBuilder.cs" />
     <Compile Include="Builders\SpriteSystemBuilder.cs" />
     <Compile Include="Builders\TileSystemBuilder.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Commands\ViewportResizeCommand.cs" />
     <Compile Include="Components\CameraComponent.cs" />
     <Compile Include="Components\SpriteComponent.cs" />
+    <Compile Include="Components\TextPresentationComponent.cs" />
     <Compile Include="Components\TextComponent.cs" />
     <Compile Include="Events\ViewportClickedEventArgs.cs" />
     <Compile Include="Events\ViewportResizedEventArgs.cs" />
@@ -113,6 +115,7 @@
     <Compile Include="OpenGLModule.cs" />
     <Compile Include="Managers\TextureMan.cs" />
     <Compile Include="Systems\StampSystem.cs" />
+    <Compile Include="Systems\TextPresenterSystem.cs" />
     <Compile Include="Systems\ViewportSystem.cs" />
     <Compile Include="Systems\WireframeSystem.cs" />
     <Compile Include="Systems\TextSystem.cs" />

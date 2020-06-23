@@ -1,7 +1,7 @@
 ﻿using NLua;
 using OpenBreed.Core.Collections;
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common.Builders;
-using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
@@ -16,7 +16,7 @@ namespace OpenBreed.Core.Managers
         #region Private Fields
 
         private const string TEMPLATES_NAMESPACE = "Templates.Entities";
-        private readonly IdMap<IEntity> entities = new IdMap<IEntity>();
+        private readonly IdMap<Entity> entities = new IdMap<Entity>();
 
         private readonly Dictionary<string, Func<ICore, IComponentBuilder>> builders = new Dictionary<string, Func<ICore, IComponentBuilder>>();
 
@@ -47,14 +47,19 @@ namespace OpenBreed.Core.Managers
 
         #region Public Methods
 
-        public IEnumerable<IEntity> GetByTag(object tag)
+        public IEnumerable<Entity> GetByTag(object tag)
         {
             return entities.Items.Where(item => item.Tag != null && item.Tag.Equals(tag));
         }
 
-        public IEntity GetById(int id)
+        public IEnumerable<Entity> Where(Func<Entity, bool> predicate)
         {
-            if (entities.TryGetValue(id, out IEntity entity))
+            return entities.Items.Where(predicate);
+        }
+
+        public Entity GetById(int id)
+        {
+            if (entities.TryGetValue(id, out Entity entity))
                 return entity;
             else
                 return null;
@@ -65,7 +70,7 @@ namespace OpenBreed.Core.Managers
             builders.Add(componentName, newAction);
         }
 
-        public IEntity CreateFromTemplate(string templateName)
+        public Entity CreateFromTemplate(string templateName)
         {
             Core.Logging.Verbose($"Creating entity from '{templateName}' template.");
 
@@ -80,17 +85,17 @@ namespace OpenBreed.Core.Managers
             return Create(components);
         }
 
-        public IEntity Create(List<IEntityComponent> initialComponents = null)
+        public Entity Create(List<IEntityComponent> initialComponents = null)
         {
             var newEntity = new Entity(Core, initialComponents);
             newEntity.Id = entities.Add(newEntity);
             return newEntity;
         }
 
-        public void Destroy(IEntity entity)
+        public void Destroy(Entity entity)
         {
-            entity.Subscribe<EntityLeftWorldEventArgs>(OnEntityLeftWorld);
-            entity.World.RemoveEntity(entity);
+            Core.Worlds.Subscribe<EntityRemovedEventArgs>(OnEntityRemovedEventArgs);
+            entity.Core.Commands.Post(new RemoveEntityCommand(entity.World.Id, entity.Id));
         }
 
         #endregion Public Methods
@@ -135,10 +140,10 @@ namespace OpenBreed.Core.Managers
             components.Add(builder.Build());
         }
 
-        private void OnEntityLeftWorld(object sender, EntityLeftWorldEventArgs e)
+        private void OnEntityRemovedEventArgs(object sender, EntityRemovedEventArgs e)
         {
-            var entity = (IEntity)sender;
-            entity.Unsubscribe<EntityLeftWorldEventArgs>(OnEntityLeftWorld);
+            var entity = Core.Entities.GetById(e.EntityId);
+            Core.Worlds.Unsubscribe<EntityRemovedEventArgs>(OnEntityRemovedEventArgs);
             entities.RemoveById(entity.Id);
         }
 

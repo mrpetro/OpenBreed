@@ -9,7 +9,7 @@ namespace OpenBreed.Core.Modules.Rendering.Builders
     /// <summary>
     /// Builder for viewport components
     /// </summary>
-    public class ViewportComponentBuilder : BaseComponentBuilder<ViewportComponentBuilder>
+    public class ViewportComponentBuilder : BaseComponentBuilder<ViewportComponentBuilder, ViewportComponent>
     {
         #region Private Constructors
 

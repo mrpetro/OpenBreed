@@ -4,7 +4,7 @@ using OpenBreed.Core.Entities;
 
 namespace OpenBreed.Core.Modules.Animation.Commands
 {
-    public struct PlayAnimCommand : IEntityCommand
+    public struct PlayAnimCommand : ICommand
     {
         #region Public Fields
 
@@ -26,7 +26,7 @@ namespace OpenBreed.Core.Modules.Animation.Commands
         #region Public Properties
 
         public int EntityId { get; }
-        public string Type { get { return TYPE; } }
+        public string Name { get { return TYPE; } }
         public int AnimatorId { get; }
         public string Id { get; }
 
