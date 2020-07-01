@@ -61,8 +61,6 @@ namespace OpenBreed.Sandbox.Systems
 
                 var coord = viewportSystem.ClientToWorld(new OpenTK.Vector4(e.X, e.Y, 0.0f, 1.0f), gameViewport);
                 pos.Value = new OpenTK.Vector2(coord.X, coord.Y);
-
-                Console.WriteLine($"{coord.X}, {coord.Y}");
             }
         }
 

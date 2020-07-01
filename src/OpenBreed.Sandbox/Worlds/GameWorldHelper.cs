@@ -134,6 +134,7 @@ namespace OpenBreed.Sandbox.Worlds
             spriteBuilder.SetProperty("AtlasId", "Atlases/Sprites/Cursors");
             spriteBuilder.SetProperty("Order", 100.0);
             spriteBuilder.SetProperty("ImageId", 0);
+            cursorEntity.Tag = "MouseCursor";
             cursorEntity.Add(spriteBuilder.Build());
             cursorEntity.Add(PositionComponent.Create(0, 0));
             cursorEntity.Add(new CursorInputComponent(0));

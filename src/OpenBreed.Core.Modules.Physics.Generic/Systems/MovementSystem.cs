@@ -18,11 +18,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         #region Private Fields
 
-        private readonly List<Entity> entities = new List<Entity>();
-        private readonly List<ThrustComponent> thrustComps = new List<ThrustComponent>();
-        private readonly List<PositionComponent> positionComps = new List<PositionComponent>();
-        private readonly List<VelocityComponent> velocityComps = new List<VelocityComponent>();
-        private readonly List<BodyComponent> dynamicBodyComps = new List<BodyComponent>();
+        private readonly List<int> entities = new List<int>();
 
         #endregion Private Fields
 
@@ -47,16 +43,16 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         public void Update(float dt)
         {
             for (int i = 0; i < entities.Count; i++)
-                UpdateEntity(dt, i);
+                UpdateEntity(dt, entities[i]);
         }
 
-        public void UpdateEntity(float dt, int index)
+        public void UpdateEntity(float dt, int id)
         {
-            var entity = entities[index];
-            var position = positionComps[index];
-            var thrust = thrustComps[index];
-            var velocity = velocityComps[index];
-            var dynamicBody = dynamicBodyComps[index];
+            var entity = Core.Entities.GetById(id);
+            var position = entity.Get<PositionComponent>();
+            var thrust = entity.Get<ThrustComponent>();
+            var velocity = entity.Get<VelocityComponent>();
+            var dynamicBody = entity.Get<BodyComponent>();
 
             //Velocity equation
             var newVel = velocity.Value + thrust.Value * dt;
@@ -78,25 +74,17 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         protected override void OnAddEntity(Entity entity)
         {
-            entities.Add(entity);
-            positionComps.Add(entity.Get<PositionComponent>());
-            thrustComps.Add(entity.Get<ThrustComponent>());
-            velocityComps.Add(entity.Get<VelocityComponent>());
-            dynamicBodyComps.Add(entity.Get<BodyComponent>());
+            entities.Add(entity.Id);
         }
 
         protected override void OnRemoveEntity(Entity entity)
         {
-            var index = entities.IndexOf(entity);
+            var index = entities.IndexOf(entity.Id);
 
             if (index < 0)
                 throw new InvalidOperationException("Entity not found in this system.");
 
             entities.RemoveAt(index);
-            positionComps.RemoveAt(index);
-            thrustComps.RemoveAt(index);
-            velocityComps.RemoveAt(index);
-            dynamicBodyComps.RemoveAt(index);
         }
 
         #endregion Protected Methods

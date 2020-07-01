@@ -28,7 +28,7 @@ namespace OpenBreed.Sandbox.Entities.Button
             //world.AddEntity(button);
         }
 
-        public static void CreateFSM(ICore core)
+        public static void CreateFsm(ICore core)
         {
             var buttonFsm = core.StateMachines.Create<ButtonState, ButtonImpulse>("Button");
 

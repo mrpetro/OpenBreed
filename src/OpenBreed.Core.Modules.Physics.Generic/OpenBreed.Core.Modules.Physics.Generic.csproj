@@ -96,6 +96,7 @@
     <Compile Include="Systems\MovementSystem.cs" />
     <Compile Include="Systems\PhysicsSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Systems\DirectionSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">

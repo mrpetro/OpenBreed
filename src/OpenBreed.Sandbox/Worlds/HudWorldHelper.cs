@@ -5,6 +5,7 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Entities.Builders;
+using OpenBreed.Sandbox.Entities.CursorCoords;
 using OpenBreed.Sandbox.Entities.FpsCounter;
 using OpenTK;
 using System.Linq;
@@ -64,6 +65,7 @@ namespace OpenBreed.Sandbox.Worlds
             //world.AddEntity(hudCamera);
 
             FpsCounterHelper.AddToWorld(world);
+            CursorCoordsHelper.AddToWorld(world);
 
             var hudViewport = world.Core.Entities.GetByTag(ScreenWorldHelper.HUD_VIEWPORT).First();
             hudViewport.Get<ViewportComponent>().CameraEntityId = hudCamera.Id;

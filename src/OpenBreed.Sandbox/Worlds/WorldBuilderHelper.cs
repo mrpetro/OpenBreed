@@ -8,6 +8,7 @@ using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.Teleport;
+using OpenBreed.Sandbox.Entities.Turret;
 using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenTK;
 using System;
@@ -65,6 +66,7 @@ namespace OpenBreed.Sandbox.Worlds
             builder.RegisterCode('}', AddWorldEntry);
             builder.RegisterCode('{', AddWorldExit);
             builder.RegisterCode('V', AddViewport);
+            builder.RegisterCode('T', AddTurret);
 
             builder.RegisterCode(' ', AddAirCell);
 
@@ -113,6 +115,18 @@ namespace OpenBreed.Sandbox.Worlds
             var pairCode = (int)args[2];
 
             WorldGateHelper.AddWorldEntry(world, x, y, pairCode);
+            world.Core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+        }
+
+        private static void AddTurret(World world, int code, object[] args)
+        {
+            var core = world.Core;
+            var x = (int)args[0];
+            var y = (int)args[1];
+            var pairCode = (int)args[2];
+
+            var turret = TurretHelper.Create(world.Core, new Vector2(x * 16, y * 16));
+            core.Commands.Post(new AddEntityCommand(world.Id, turret.Id));
             world.Core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 

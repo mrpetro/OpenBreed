@@ -85,6 +85,9 @@
     <None Include="Content\Graphics\Cursors.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Content\Graphics\TurretSpriteSet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="Entities\Actor\Arrow.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -107,6 +110,7 @@
     <Compile Include="Entities\Button\States\PressedState.cs" />
     <Compile Include="Entities\Button\States\IdleState.cs" />
     <Compile Include="Entities\Camera\CameraHelper.cs" />
+    <Compile Include="Entities\CursorCoords\CursorCoordsHelper.cs" />
     <Compile Include="Entities\Door\DoorHelper.cs" />
     <Compile Include="Entities\Door\States\FunctioningState.cs" />
     <Compile Include="Entities\Door\States\OpenedAwaitClose.cs" />
@@ -124,9 +128,11 @@
     <Compile Include="Entities\Projectile\ProjectileHelper.cs" />
     <Compile Include="Entities\Projectile\States\FiredState.cs" />
     <Compile Include="Entities\Text\TextHelper.cs" />
+    <Compile Include="Entities\Turret\TurretHelper.cs" />
     <Compile Include="Entities\WorldGate\WorldGateHelper.cs" />
     <Compile Include="Helpers\AnimHelper.cs" />
     <Compile Include="IWorldReader.cs" />
+    <Compile Include="Jobs\CursorCoordsTextUpdateJob.cs" />
     <Compile Include="Jobs\FpsTextUpdateJob.cs" />
     <Compile Include="Managers\LogMan.cs" />
     <Compile Include="Items\CreditsItem.cs" />
@@ -175,6 +181,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Door\DoorSShh.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\Turret\Turret.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="OpenTK.dll.config" />

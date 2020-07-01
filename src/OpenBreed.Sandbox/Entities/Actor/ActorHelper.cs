@@ -1,35 +1,27 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Rendering.Helpers;
-using OpenBreed.Core.States;
-using OpenBreed.Sandbox.Entities.Actor.States;
-using OpenTK;
-using OpenTK.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Sandbox.Entities.Actor.States.Movement;
-using OpenBreed.Sandbox.Entities.Actor.States.Attacking;
+using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Physics.Helpers;
-using OpenBreed.Sandbox.Entities.Actor.States.Rotation;
-using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Modules.Rendering.Commands;
+using OpenBreed.Sandbox.Entities.Actor.States.Attacking;
+using OpenBreed.Sandbox.Entities.Actor.States.Movement;
+using OpenBreed.Sandbox.Entities.Actor.States.Rotation;
+using OpenTK;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
     public static class ActorHelper
     {
-        private static void OnFrameUpdate(Entity entity, int nextValue)
-        {
-            entity.Core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
-        }
+        #region Public Fields
+
+        public const string SPRITE_ARROW = "Atlases/Sprites/Arrow";
+
+        #endregion Public Fields
+
+        #region Public Methods
 
         public static void CreateAnimations(ICore core)
         {
@@ -117,24 +109,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             return actor;
         }
 
-        private static void OnCollision(object sender, CollisionEventArgs args)
-        {
-            var entity = (Entity)sender;
-            var body = args.Entity.TryGet<BodyComponent>();
-
-            var type = body.Tag;
-
-            switch (type)
-            {
-                case "Static":
-                    DynamicHelper.ResolveVsStatic(entity, args.Entity, args.Projection);
-                    return;
-                default:
-                    break;
-            }
-        }
-
-        public static void CreateAttackingFSM(ICore core)
+        public static void CreateAttackingFsm(ICore core)
         {
             var stateMachine = core.StateMachines.Create<AttackingState, AttackingImpulse>("Actor.Attacking");
 
@@ -149,25 +124,20 @@ namespace OpenBreed.Sandbox.Entities.Actor
             stateMachine.AddTransition(AttackingState.Idle, AttackingImpulse.Shoot, AttackingState.Shooting);
         }
 
-        public static void CreateRotationFSM(ICore core)
+        public static void CreateRotationFsm(ICore core)
         {
             var stateMachine = core.StateMachines.Create<RotationState, RotationImpulse>("Actor.Rotation");
 
             stateMachine.AddState(new States.Rotation.IdleState());
             stateMachine.AddState(new States.Rotation.RotatingState());
 
-            stateMachine.AddTransition(RotationState.Rotating, RotationImpulse.Stop , RotationState.Idle);
+            stateMachine.AddTransition(RotationState.Rotating, RotationImpulse.Stop, RotationState.Idle);
             stateMachine.AddTransition(RotationState.Idle, RotationImpulse.Rotate, RotationState.Rotating);
 
             stateMachine.AddOnEnterState(RotationState.Idle, RotationImpulse.Stop, OnStop);
         }
 
-        private static void OnStop()
-        {
-            //Console.WriteLine("Rotation -> Stopped");
-        }
-
-        public static void CreateMovementFSM(ICore core)
+        public static void CreateMovementFsm(ICore core)
         {
             var stateMachine = core.StateMachines.Create<MovementState, MovementImpulse>("Actor.Movement");
 
@@ -178,5 +148,39 @@ namespace OpenBreed.Sandbox.Entities.Actor
             stateMachine.AddTransition(MovementState.Standing, MovementImpulse.Walk, MovementState.Walking);
             stateMachine.AddTransition(MovementState.Walking, MovementImpulse.Walk, MovementState.Walking);
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private static void OnFrameUpdate(Entity entity, int nextValue)
+        {
+            entity.Core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
+        }
+
+        private static void OnCollision(object sender, CollisionEventArgs args)
+        {
+            var entity = (Entity)sender;
+            var body = args.Entity.TryGet<BodyComponent>();
+
+            var type = body.Tag;
+
+            switch (type)
+            {
+                case "Static":
+                    DynamicHelper.ResolveVsStatic(entity, args.Entity, args.Projection);
+                    return;
+
+                default:
+                    break;
+            }
+        }
+
+        private static void OnStop()
+        {
+            //Console.WriteLine("Rotation -> Stopped");
+        }
+
+        #endregion Private Methods
     }
 }

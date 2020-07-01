@@ -25,6 +25,7 @@ using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Sandbox.Entities.Teleport;
+using OpenBreed.Sandbox.Entities.Turret;
 using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Sandbox.Items;
 using OpenBreed.Sandbox.Managers;
@@ -279,7 +280,10 @@ namespace OpenBreed.Sandbox
             Rendering.Sprites.Create("Atlases/Sprites/Projectiles/Laser", laserTex.Id, 16, 16, 8, 1, 0, 0);
 
             var arrowTex = Rendering.Textures.Create("Textures/Sprites/Arrow", @"Content\Graphics\ArrowSpriteSet.png");
-            Rendering.Sprites.Create("Atlases/Sprites/Arrow", arrowTex.Id, 32, 32, 8, 5);
+            Rendering.Sprites.Create(ActorHelper.SPRITE_ARROW, arrowTex.Id, 32, 32, 8, 5);
+            
+            var turretTex = Rendering.Textures.Create("Textures/Sprites/Turret", @"Content\Graphics\TurretSpriteSet.png");
+            Rendering.Sprites.Create(TurretHelper.SPRITE_TURRET, turretTex.Id, 32, 32, 8, 2);
 
             var cursorsTex = Rendering.Textures.Create("Textures/Sprites/Cursors", @"Content\Graphics\Cursors.png");
             Rendering.Sprites.Create("Atlases/Sprites/Cursors", cursorsTex.Id, 16, 16, 1, 1);
@@ -288,15 +292,17 @@ namespace OpenBreed.Sandbox
             DoorHelper.CreateStamps(this);
             DoorHelper.CreateAnimations(this);
             ActorHelper.CreateAnimations(this);
+            TurretHelper.CreateAnimations(this);
             TeleportHelper.CreateAnimations(this);
             ProjectileHelper.CreateAnimations(this);
 
             DoorHelper.CreateFsm(this);
             ProjectileHelper.CreateFsm(this);
-            ButtonHelper.CreateFSM(this);
-            ActorHelper.CreateAttackingFSM(this);
-            ActorHelper.CreateMovementFSM(this);
-            ActorHelper.CreateRotationFSM(this);
+            ButtonHelper.CreateFsm(this);
+            ActorHelper.CreateAttackingFsm(this);
+            ActorHelper.CreateMovementFsm(this);
+            ActorHelper.CreateRotationFsm(this);
+            TurretHelper.CreateRotationFsm(this);
 
             Rendering.ScreenWorld = ScreenWorldHelper.CreateWorld(this);
 
@@ -409,11 +415,13 @@ namespace OpenBreed.Sandbox
             Physics.Fixturs.Create("Fixtures/DoorVertical", "Static", Shapes.GetByTag("Shapes/Box_0_0_16_32"));
             Physics.Fixturs.Create("Fixtures/DoorHorizontal", "Static", Shapes.GetByTag("Shapes/Box_0_0_32_16"));
             Physics.Fixturs.Create("Fixtures/Arrow", "Dynamic", Shapes.GetByTag("Shapes/Box_0_0_32_32"));
+            Physics.Fixturs.Create("Fixtures/Turret", "Static", Shapes.GetByTag("Shapes/Box_0_0_32_32"));
         }
 
         private void RegisterEntityTemplates()
         {
             Scripts.RunFile(@"Entities\Actor\Arrow.lua");
+            Scripts.RunFile(@"Entities\Turret\Turret.lua");
             Scripts.RunFile(@"Entities\Door\DoorHorizontal.lua");
             Scripts.RunFile(@"Entities\Door\DoorVertical.lua");
             Scripts.RunFile(@"Entities\Projectile\Projectile.lua");
