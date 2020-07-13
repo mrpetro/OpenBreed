@@ -299,9 +299,9 @@ namespace OpenBreed.Sandbox
             DoorHelper.CreateFsm(this);
             ProjectileHelper.CreateFsm(this);
             ButtonHelper.CreateFsm(this);
-            ActorHelper.CreateAttackingFsm(this);
-            ActorHelper.CreateMovementFsm(this);
-            ActorHelper.CreateRotationFsm(this);
+            ActorAttackingHelper.CreateFsm(this);
+            ActorMovementHelper.CreateFsm(this);
+            ActorRotationHelper.CreateFsm(this);
             TurretHelper.CreateRotationFsm(this);
 
             Rendering.ScreenWorld = ScreenWorldHelper.CreateWorld(this);

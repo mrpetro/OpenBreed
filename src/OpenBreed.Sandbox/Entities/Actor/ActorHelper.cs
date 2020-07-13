@@ -1,15 +1,25 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Events;
+using OpenBreed.Core.Modules.Animation.Commands;
+using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Physics.Helpers;
 using OpenBreed.Core.Modules.Rendering.Commands;
+using OpenBreed.Core.Systems.Control.Components;
 using OpenBreed.Sandbox.Entities.Actor.States.Attacking;
 using OpenBreed.Sandbox.Entities.Actor.States.Movement;
 using OpenBreed.Sandbox.Entities.Actor.States.Rotation;
+using OpenBreed.Sandbox.Entities.Projectile;
+using OpenBreed.Sandbox.Helpers;
 using OpenTK;
+using System;
+using System.CodeDom;
+using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
@@ -109,46 +119,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
             return actor;
         }
 
-        public static void CreateAttackingFsm(ICore core)
-        {
-            var stateMachine = core.StateMachines.Create<AttackingState, AttackingImpulse>("Actor.Attacking");
-
-            stateMachine.AddState(new States.Attacking.ShootingState());
-            stateMachine.AddState(new States.Attacking.IdleState());
-            stateMachine.AddState(new States.Attacking.CooldownState());
-
-            stateMachine.AddTransition(AttackingState.Shooting, AttackingImpulse.Stop, AttackingState.Idle);
-            stateMachine.AddTransition(AttackingState.Shooting, AttackingImpulse.Wait, AttackingState.Cooldown);
-            stateMachine.AddTransition(AttackingState.Cooldown, AttackingImpulse.Stop, AttackingState.Idle);
-            stateMachine.AddTransition(AttackingState.Cooldown, AttackingImpulse.Shoot, AttackingState.Shooting);
-            stateMachine.AddTransition(AttackingState.Idle, AttackingImpulse.Shoot, AttackingState.Shooting);
-        }
-
-        public static void CreateRotationFsm(ICore core)
-        {
-            var stateMachine = core.StateMachines.Create<RotationState, RotationImpulse>("Actor.Rotation");
-
-            stateMachine.AddState(new States.Rotation.IdleState());
-            stateMachine.AddState(new States.Rotation.RotatingState());
-
-            stateMachine.AddTransition(RotationState.Rotating, RotationImpulse.Stop, RotationState.Idle);
-            stateMachine.AddTransition(RotationState.Idle, RotationImpulse.Rotate, RotationState.Rotating);
-
-            stateMachine.AddOnEnterState(RotationState.Idle, RotationImpulse.Stop, OnStop);
-        }
-
-        public static void CreateMovementFsm(ICore core)
-        {
-            var stateMachine = core.StateMachines.Create<MovementState, MovementImpulse>("Actor.Movement");
-
-            stateMachine.AddState(new StandingState());
-            stateMachine.AddState(new WalkingState());
-
-            stateMachine.AddTransition(MovementState.Walking, MovementImpulse.Stop, MovementState.Standing);
-            stateMachine.AddTransition(MovementState.Standing, MovementImpulse.Walk, MovementState.Walking);
-            stateMachine.AddTransition(MovementState.Walking, MovementImpulse.Walk, MovementState.Walking);
-        }
-
         #endregion Public Methods
 
         #region Private Methods
@@ -174,11 +144,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
                 default:
                     break;
             }
-        }
-
-        private static void OnStop()
-        {
-            //Console.WriteLine("Rotation -> Stopped");
         }
 
         #endregion Private Methods

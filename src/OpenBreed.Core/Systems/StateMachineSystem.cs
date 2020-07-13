@@ -78,7 +78,7 @@ namespace OpenBreed.Core.Systems
             var fsmComponent = entity.Get<FsmComponent>();
 
             foreach (var state in fsmComponent.States)
-                Core.StateMachines.EnterState(entity, state);
+                Core.StateMachines.EnterState(entity, state, 0);
         }
 
         private void DeinitializeComponent(Entity entity)
@@ -86,7 +86,7 @@ namespace OpenBreed.Core.Systems
             var fsmComponent = entity.Get<FsmComponent>();
 
             foreach (var state in fsmComponent.States)
-                Core.StateMachines.EnterState(entity, state);
+                Core.StateMachines.EnterState(entity, state, 0);
         }
 
         private static bool HandleSetStateCommand(ICore core, SetStateCommand cmd)
@@ -111,7 +111,7 @@ namespace OpenBreed.Core.Systems
                 return false;
             }
 
-            core.StateMachines.LeaveState(entity, fsmData);
+            core.StateMachines.LeaveState(entity, fsmData, cmd.ImpulseId);
             var nextStateId = fsm.GetNextStateId(fsmData.StateId, cmd.ImpulseId);
 
             if (nextStateId == -1)
@@ -124,7 +124,7 @@ namespace OpenBreed.Core.Systems
             }
 
             fsmData.StateId = nextStateId;
-            core.StateMachines.EnterState(entity, fsmData);
+            core.StateMachines.EnterState(entity, fsmData, cmd.ImpulseId);
 
             return true;
         }

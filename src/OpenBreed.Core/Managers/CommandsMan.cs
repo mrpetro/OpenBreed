@@ -44,6 +44,13 @@ namespace OpenBreed.Core.Managers
             }
         }
 
+        public void LogUnhandled()
+        {
+
+
+            //core.Logging.Warning($"Entity '{cmd.EntityId}' has missing FSM transition from state '{fromStateName}' using impulse '{impulseName}'.");
+        }
+
         private void Execute(ICommand msg)
         {
             if (!handlers.TryGetValue(msg.GetType(), out (MethodInfo Method, object Target) handler))

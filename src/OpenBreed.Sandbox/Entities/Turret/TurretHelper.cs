@@ -4,6 +4,7 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Sandbox.Entities.Actor.States.Rotation;
 using OpenTK;
+using System;
 
 namespace OpenBreed.Sandbox.Entities.Turret
 {
@@ -50,7 +51,7 @@ namespace OpenBreed.Sandbox.Entities.Turret
         }
         private static void OnStop()
         {
-            //Console.WriteLine("Rotation -> Stopped");
+            Console.WriteLine("Rotation -> Stopped");
         }
 
         public static void CreateRotationFsm(ICore core)
@@ -63,7 +64,6 @@ namespace OpenBreed.Sandbox.Entities.Turret
             stateMachine.AddTransition(RotationState.Rotating, RotationImpulse.Stop, RotationState.Idle);
             stateMachine.AddTransition(RotationState.Idle, RotationImpulse.Rotate, RotationState.Rotating);
 
-            stateMachine.AddOnEnterState(RotationState.Idle, RotationImpulse.Stop, OnStop);
         }
 
         private static void OnFrameUpdate(Entity entity, int nextValue)

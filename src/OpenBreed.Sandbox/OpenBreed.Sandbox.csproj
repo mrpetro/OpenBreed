@@ -92,6 +92,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Compile Include="Components\CursorInputComponent.cs" />
+    <Compile Include="Entities\Actor\ActorAttackingHelper.cs" />
+    <Compile Include="Entities\Actor\ActorMovementHelper.cs" />
+    <Compile Include="Entities\Actor\ActorRotationHelper.cs" />
     <Compile Include="Entities\Actor\States\Attacking\AttackingState.cs" />
     <Compile Include="Entities\Actor\States\Attacking\IdleState.cs" />
     <Compile Include="Entities\Actor\States\Attacking\CooldownState.cs" />

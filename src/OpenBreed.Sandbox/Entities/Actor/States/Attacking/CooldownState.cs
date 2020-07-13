@@ -37,27 +37,27 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 
         public void EnterState(Entity entity)
         {
-            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
-            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
+            //var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
+            //entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
-            entity.Subscribe<TimerElapsedEventArgs>(OnTimerElapsed);
-            entity.Core.Commands.Post(new TimerStartCommand(entity.Id, 0, 0.2));
+            //entity.Subscribe<TimerElapsedEventArgs>(OnTimerElapsed);
+            //entity.Core.Commands.Post(new TimerStartCommand(entity.Id, 0, 0.2));
         }
 
-        private void OnTimerElapsed(object sender, TimerElapsedEventArgs e)
-        {
-            if (e.TimerId != 0)
-                return;
+        //private void OnTimerElapsed(object sender, TimerElapsedEventArgs e)
+        //{
+        //    if (e.TimerId != 0)
+        //        return;
 
-            var entity = sender as Entity;
+        //    var entity = sender as Entity;
 
-            var cc = entity.Get<AttackControl>();
+        //    var cc = entity.Get<AttackControl>();
 
-            if(cc.AttackPrimary)
-                entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Shoot));
-            else
-                entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Stop));
-        }
+        //    if(cc.AttackPrimary)
+        //        entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Shoot));
+        //    else
+        //        entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Stop));
+        //}
 
         public void Initialize(Entity entity) 
         {
@@ -67,8 +67,8 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 
         public void LeaveState(Entity entity)
         {
-            entity.Unsubscribe<TimerElapsedEventArgs>(OnTimerElapsed);
-            entity.Core.Commands.Post(new TimerStopCommand(entity.Id, 0));
+            //entity.Unsubscribe<TimerElapsedEventArgs>(OnTimerElapsed);
+            //entity.Core.Commands.Post(new TimerStopCommand(entity.Id, 0));
         }
 
         #endregion Public Methods
