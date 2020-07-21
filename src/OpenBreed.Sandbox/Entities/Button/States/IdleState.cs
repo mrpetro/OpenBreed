@@ -18,7 +18,6 @@ namespace OpenBreed.Sandbox.Entities.Button.States
 
         #region Private Fields
 
-        private readonly string animationId;
 
         #endregion Private Fields
 
@@ -42,7 +41,7 @@ namespace OpenBreed.Sandbox.Entities.Button.States
         public void EnterState(Entity entity)
         {
             entity.Core.Commands.Post(new SpriteOnCommand(entity.Id));
-            entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, animationId, 0));
+            entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, "NotUsedYet", 0));
             entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, "Door - Opening"));
 
             entity.Subscribe<AnimStoppedEventArgs>(OnAnimStopped);

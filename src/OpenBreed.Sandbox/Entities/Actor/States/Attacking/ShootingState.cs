@@ -1,6 +1,6 @@
 ﻿
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Rendering.Commands;
@@ -33,20 +33,20 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 
         public void EnterState(Entity entity)
         {
-            ////Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            //var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
-            //entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, string.Join(", ", currentStateNames.ToArray())));
+            //Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
+            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
+            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, string.Join(", ", currentStateNames.ToArray())));
 
-            //var pos = entity.Get<PositionComponent>().Value;
-            //pos += new Vector2(8,8);
-            //var direction = entity.Get<DirectionComponent>().Value;
-            //direction.Normalize();
-            //direction *= 500.0f;
-            //ProjectileHelper.AddProjectile(entity.Core, entity.World, pos.X, pos.Y, direction.X, direction.Y);
+            var pos = entity.Get<PositionComponent>().Value;
+            pos += new Vector2(8, 8);
+            var direction = entity.Get<DirectionComponent>().GetDirection();
+            direction.Normalize();
+            direction *= 500.0f;
+            ProjectileHelper.AddProjectile(entity.Core, entity.World, pos.X, pos.Y, direction.X, direction.Y);
 
-            ////Entity.Impulse<AttackingState, AttackingImpulse>(AttackingImpulse.Wait);
-            ////entity.PostCommand(new EntitySetStateCommand(entity.Id, "AttackingState", "Wait"));
-            //entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Wait));
+            //Entity.Impulse<AttackingState, AttackingImpulse>(AttackingImpulse.Wait);
+            //entity.PostCommand(new EntitySetStateCommand(entity.Id, "AttackingState", "Wait"));
+            entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Wait));
         }
 
         public void LeaveState(Entity entity)

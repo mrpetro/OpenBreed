@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Core.Common.Builders;
-using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Modules.Physics.Components;
 using System;
 using System.Collections.Generic;

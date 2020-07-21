@@ -1,37 +1,22 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common.Components;
-using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
-using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
-using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Physics.Helpers;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.Systems.Control.Components;
 using OpenBreed.Sandbox.Entities.Actor.States.Attacking;
-using OpenBreed.Sandbox.Entities.Actor.States.Movement;
-using OpenBreed.Sandbox.Entities.Actor.States.Rotation;
 using OpenBreed.Sandbox.Entities.Projectile;
-using OpenBreed.Sandbox.Helpers;
 using OpenTK;
 using System;
-using System.CodeDom;
 using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
     public static class ActorAttackingHelper
     {
-        #region Public Fields
-
-   #endregion Public Fields
-
         #region Public Methods
-
-
 
         public static void CreateFsm(ICore core)
         {
@@ -47,38 +32,39 @@ namespace OpenBreed.Sandbox.Entities.Actor
             stateMachine.AddTransition(AttackingState.Cooldown, AttackingImpulse.Shoot, AttackingState.Shooting);
             stateMachine.AddTransition(AttackingState.Idle, AttackingImpulse.Shoot, AttackingState.Shooting);
 
-
-            stateMachine.AddOnEnterState(AttackingState.Shooting, AttackingImpulse.Shoot, OnAttackingEnterShootingWithShoot);
-            stateMachine.AddOnEnterState(AttackingState.Cooldown, AttackingImpulse.Wait, OnAttackingEnterCooldownWithWait);
-            stateMachine.AddOnEnterState(AttackingState.Idle, AttackingImpulse.Stop, OnAttackingEnterIdleWithStop);
-            stateMachine.AddOnLeaveState(AttackingState.Cooldown, AttackingImpulse.Stop, OnAttackingLeaveCooldownWithStop);
-            stateMachine.AddOnLeaveState(AttackingState.Cooldown, AttackingImpulse.Shoot, OnAttackingLeaveCooldownWithShoot);
-            stateMachine.AddOnLeaveState(AttackingState.Idle, AttackingImpulse.Shoot, OnAttackingLeaveIdleWithShoot);
-
-
+            //stateMachine.AddOnEnterState(AttackingState.Shooting, AttackingImpulse.Shoot, OnAttackingEnterShootingWithShoot);
+            //stateMachine.AddOnEnterState(AttackingState.Cooldown, AttackingImpulse.Wait, OnAttackingEnterCooldownWithWait);
+            //stateMachine.AddOnEnterState(AttackingState.Idle, AttackingImpulse.Stop, OnAttackingEnterIdleWithStop);
+            //stateMachine.AddOnLeaveState(AttackingState.Cooldown, AttackingImpulse.Stop, OnAttackingLeaveCooldownWithStop);
+            //stateMachine.AddOnLeaveState(AttackingState.Cooldown, AttackingImpulse.Shoot, OnAttackingLeaveCooldownWithShoot);
+            //stateMachine.AddOnLeaveState(AttackingState.Idle, AttackingImpulse.Shoot, OnAttackingLeaveIdleWithShoot);
         }
 
-        private static void OnAttackingLeaveCooldownWithStop(ICore core, int entityId)
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private static void OnAttackingLeaveCooldownWithStop(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
             var entity = core.Entities.GetById(entityId);
             entity.Unsubscribe<TimerElapsedEventArgs>(OnTimerElapsed);
             entity.Core.Commands.Post(new TimerStopCommand(entity.Id, 0));
         }
 
-        private static void OnAttackingLeaveCooldownWithShoot(ICore core, int entityId)
+        private static void OnAttackingLeaveCooldownWithShoot(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
             var entity = core.Entities.GetById(entityId);
             entity.Unsubscribe<TimerElapsedEventArgs>(OnTimerElapsed);
             entity.Core.Commands.Post(new TimerStopCommand(entity.Id, 0));
         }
 
-        private static void OnAttackingLeaveIdleWithShoot(ICore core, int entityId)
+        private static void OnAttackingLeaveIdleWithShoot(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
             var entity = core.Entities.GetById(entityId);
             entity.Unsubscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
         }
 
-        private static void OnAttackingEnterIdleWithStop(ICore core, int entityId)
+        private static void OnAttackingEnterIdleWithStop(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
             var entity = core.Entities.GetById(entityId);
 
@@ -88,7 +74,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             entity.Subscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
         }
 
-        private static void OnAttackingEnterCooldownWithWait(ICore core, int entityId)
+        private static void OnAttackingEnterCooldownWithWait(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
             var entity = core.Entities.GetById(entityId);
 
@@ -125,7 +111,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
                 entity.Core.Commands.Post(new SetStateCommand(entity.Id, fsmId, (int)AttackingImpulse.Shoot));
         }
 
-        private static void OnAttackingEnterShootingWithShoot(ICore core, int entityId)
+        private static void OnAttackingEnterShootingWithShoot(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
             var entity = core.Entities.GetById(entityId);
 
@@ -135,18 +121,13 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
             var pos = entity.Get<PositionComponent>().Value;
             pos += new Vector2(8, 8);
-            var direction = entity.Get<DirectionComponent>().Value;
+            var direction = entity.Get<DirectionComponent>().GetDirection();
             direction.Normalize();
             direction *= 500.0f;
             ProjectileHelper.AddProjectile(entity.Core, entity.World, pos.X, pos.Y, direction.X, direction.Y);
 
-            var fsmId = entity.Core.StateMachines.GetByName("Actor.Attacking").Id;
             entity.Core.Commands.Post(new SetStateCommand(entity.Id, fsmId, (int)AttackingImpulse.Wait));
         }
-
-        #endregion Public Methods
-
-        #region Private Methods
 
         #endregion Private Methods
     }

@@ -41,16 +41,12 @@ namespace OpenBreed.Core.States
     {
         #region Private Fields
 
-        private readonly Dictionary<TState, IState<TState, TImpulse>> states = new Dictionary<TState, IState<TState, TImpulse>>();
+        private readonly Dictionary<TState, IState<TState,TImpulse>> states = new Dictionary<TState, IState<TState, TImpulse>>();
         private readonly Dictionary<TState, Dictionary<TImpulse, TState>> transitions = new Dictionary<TState, Dictionary<TImpulse, TState>>();
-        private readonly Dictionary<TState, Dictionary<TImpulse, Action<ICore, int>>> onEnterActions = new Dictionary<TState, Dictionary<TImpulse, Action<ICore, int>>>();
-        private readonly Dictionary<TState, Dictionary<TImpulse, Action<ICore, int>>> onLeaveActions = new Dictionary<TState, Dictionary<TImpulse, Action<ICore, int>>>();
 
         #endregion Private Fields
 
         #region Internal Constructors
-
-        internal ICore Core { get; }
 
         internal StateMachine(ICore core, string name)
         {
@@ -67,7 +63,23 @@ namespace OpenBreed.Core.States
 
         #endregion Public Properties
 
+        #region Internal Properties
+
+        internal ICore Core { get; }
+
+        #endregion Internal Properties
+
         #region Public Methods
+
+        public static TState ToState(int stateId)
+        {
+            return (TState)(ValueType)stateId;
+        }
+
+        public static TImpulse ToImpulse(int impulseId)
+        {
+            return (TImpulse)(ValueType)impulseId;
+        }
 
         public override string ToString()
         {
@@ -81,18 +93,18 @@ namespace OpenBreed.Core.States
             if (!Enum.IsDefined(typeof(TState), state.Id))
                 throw new InvalidOperationException($"State '{state.Id}' not defined in this FSM.");
 
-            states.Add((TState)(ValueType)state.Id, state);
+            states.Add(ToState(state.Id), state);
             state.FsmId = Id;
         }
 
         public int GetNextStateId(int currentStateId, int impulseId, params object[] arguments)
         {
             Dictionary<TImpulse, TState> transition;
-            if (!transitions.TryGetValue((TState)(ValueType)currentStateId, out transition))
+            if (!transitions.TryGetValue(ToState(currentStateId), out transition))
                 return -1;
 
             TState toState;
-            if (transition.TryGetValue((TImpulse)(ValueType)impulseId, out toState))
+            if (transition.TryGetValue(ToImpulse(impulseId), out toState))
                 return (int)(ValueType)toState;
             else
                 return -1;
@@ -111,50 +123,24 @@ namespace OpenBreed.Core.States
             transition[impulse] = toState;
         }
 
-        public void AddOnEnterState(TState enteredState, TImpulse fromImpulse, Action<ICore, int> action)
-        {
-            Dictionary<TImpulse, Action<ICore, int>> fromImpulses;
-
-            if (!onEnterActions.TryGetValue(enteredState, out fromImpulses))
-            {
-                fromImpulses = new Dictionary<TImpulse, Action<ICore, int>>();
-                onEnterActions.Add(enteredState, fromImpulses);
-            }
-
-            fromImpulses[fromImpulse] = action;
-        }
-
-        public void AddOnLeaveState(TState leftState, TImpulse toImpulse, Action<ICore, int> action)
-        {
-            Dictionary<TImpulse, Action<ICore, int>> toImpulses;
-
-            if (!onLeaveActions.TryGetValue(leftState, out toImpulses))
-            {
-                toImpulses = new Dictionary<TImpulse, Action<ICore, int>>();
-                onLeaveActions.Add(leftState, toImpulses);
-            }
-
-            toImpulses[toImpulse] = action;
-        }
-
         public void EnterState(Entity entity, int stateId, int withImpulseId)
         {
-            states[(TState)(ValueType)stateId].EnterState(entity);
+            states[ToState(stateId)].EnterState(entity);
 
-            Dictionary<TImpulse, Action<ICore, int>> fromImpulses;
-            if (onEnterActions.TryGetValue(ToState(stateId), out fromImpulses))
-                if (fromImpulses.TryGetValue(ToImpulse(withImpulseId), out Action<ICore, int> action))
-                    action.Invoke(Core, entity.Id);
+            //Dictionary<int, StateChangeCallback> fromImpulses;
+            //if (onEnterActions.TryGetValue(stateId, out fromImpulses))
+            //    if (fromImpulses.TryGetValue(withImpulseId, out StateChangeCallback callback))
+            //        callback.Invoke(Core, entity.Id, Id, stateId, withImpulseId);
         }
 
         public void LeaveState(Entity entity, int stateId, int withImpulseId)
         {
-            states[(TState)(ValueType)stateId].LeaveState(entity);
+            states[ToState(stateId)].LeaveState(entity);
 
-            Dictionary<TImpulse, Action<ICore, int>> toImpulses;
-            if (onLeaveActions.TryGetValue(ToState(stateId), out toImpulses))
-                if (toImpulses.TryGetValue(ToImpulse(withImpulseId), out Action<ICore, int> action))
-                    action.Invoke(Core, entity.Id);
+            //Dictionary<int, StateChangeCallback> toImpulses;
+            //if (onLeaveActions.TryGetValue(stateId, out toImpulses))
+            //    if (toImpulses.TryGetValue(withImpulseId, out StateChangeCallback action))
+            //        action.Invoke(Core, entity.Id, Id, stateId, withImpulseId);
         }
 
         public void SetInitialState(Entity entity, int initialStateId)
@@ -194,34 +180,11 @@ namespace OpenBreed.Core.States
             return (int)Enum.Parse(typeof(TState), stateName);
         }
 
-        public static TState ToState(int stateId)
-        {
-            return (TState)(ValueType)stateId;
-        }
-
-        public static TImpulse ToImpulse(int impulseId)
-        {
-            return (TImpulse)(ValueType)impulseId;
-        }
-
         public string GetImpulseName(int impulseId)
         {
             return ToImpulse(impulseId).ToString();
         }
 
         #endregion Public Methods
-
-        #region Private Methods
-
-        #endregion Private Methods
-
-        //private void ChangeState(int impulseId, int nextStateId, params object[] arguments)
-        //{
-        //    currentState.LeaveState();
-        //    TryInvokeOnLeaveState(currentState.Id, impulseId);
-        //    currentState = states[nextStateId];
-        //    TryInvokeOnEnterState(nextStateId, impulseId);
-        //    currentState.EnterState();
-        //}
     }
 }

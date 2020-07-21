@@ -1,8 +1,12 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Animation.Commands;
+using OpenBreed.Core.Modules.Animation.Events;
+using OpenBreed.Core.Modules.Physics.Events;
+using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
 using OpenBreed.Sandbox.Entities.Button.States;
 using OpenTK;
@@ -37,6 +41,59 @@ namespace OpenBreed.Sandbox.Entities.Button
 
             buttonFsm.AddTransition(ButtonState.Pressed, ButtonImpulse.Unpress, ButtonState.Idle);
             buttonFsm.AddTransition(ButtonState.Idle, ButtonImpulse.Press, ButtonState.Pressed);
+
+            //buttonFsm.AddOnEnterState(ButtonState.Idle, ButtonImpulse.Unpress, OnButtonEnterIdleWithUnpress);
+            //buttonFsm.AddOnEnterState(ButtonState.Pressed, ButtonImpulse.Press, OnButtonEnterPressedWithPress);
+            //buttonFsm.AddOnLeaveState(ButtonState.Pressed, ButtonImpulse.Unpress, OnButtonLeavePressedWithUnpress);
+            //buttonFsm.AddOnLeaveState(ButtonState.Idle, ButtonImpulse.Press, OnButtonLeaveIdleWithPress);
+        }
+
+        private static void OnButtonEnterIdleWithUnpress(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
+        {
+            var entity = core.Entities.GetById(entityId);
+
+            entity.Core.Commands.Post(new SpriteOnCommand(entity.Id));
+            entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, "ToDefine", 0));
+            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, "Door - Opening"));
+
+            entity.Subscribe<AnimStoppedEventArgs>(OnAnimStopped);
+        }
+
+        private static void OnButtonEnterPressedWithPress(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
+        {
+            var entity = core.Entities.GetById(entityId);
+            entity.Core.Commands.Post(new SpriteOffCommand(entity.Id));
+
+            var pos = entity.Get<PositionComponent>();
+            entity.Core.Commands.Post(new PutStampCommand(entity.World.Id, -1000000, 0, pos.Value));
+            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, "Door - Closed"));
+
+            entity.Subscribe<CollisionEventArgs>(OnCollision);
+        }
+
+        private static void OnCollision(object sender, CollisionEventArgs eventArgs)
+        {
+            var entity = sender as Entity;
+            var fsmId = entity.Core.StateMachines.GetByName("Button").Id;
+            entity.Core.Commands.Post(new SetStateCommand(entity.Id, fsmId, (int)ButtonImpulse.Unpress));
+        }
+
+        private static void OnButtonLeavePressedWithUnpress(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
+        {
+        }
+
+        private static void OnButtonLeaveIdleWithPress(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
+        {
+            var entity = core.Entities.GetById(entityId);
+            entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
+        }
+
+        private static void OnAnimStopped(object sender, AnimStoppedEventArgs eventArgs)
+        {
+            var entity = sender as Entity;
+
+            var fsmId = entity.Core.StateMachines.GetByName("Button").Id;
+            entity.Core.Commands.Post(new SetStateCommand(entity.Id, fsmId, (int)ButtonImpulse.Press));
         }
     }
 }

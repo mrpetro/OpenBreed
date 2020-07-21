@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core.Common.Systems.Components;
-
+﻿
 namespace OpenBreed.Core.Common.Components
 {
     public struct Slot

@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Common.Systems.Components;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -9,6 +8,7 @@ using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Systems;
 using OpenBreed.Core.Modules.Physics.Helpers;
+using OpenBreed.Core.Common.Components;
 
 namespace OpenBreed.Core.Modules.Physics.Systems
 {

@@ -1,21 +1,20 @@
-﻿using System.Collections.Generic;
-
+﻿
 namespace OpenBreed.Core.Common.Components
 {
-    public class ShapeComponent : IEntityComponent
+    public class AngularVelocityComponent : IEntityComponent
     {
         #region Public Constructors
 
-        public ShapeComponent()
+        public AngularVelocityComponent(float value)
         {
-            Items = new List<int>();
+            Value = value;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public List<int> Items { get; }
+        public float Value { get; set; }
 
         #endregion Public Properties
     }

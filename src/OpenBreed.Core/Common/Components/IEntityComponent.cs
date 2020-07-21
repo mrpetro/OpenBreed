@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Core.Entities;
 using System;
 
-namespace OpenBreed.Core.Common.Systems.Components
+namespace OpenBreed.Core.Common.Components
 {
     /// <summary>
     /// Component inteface for all entities

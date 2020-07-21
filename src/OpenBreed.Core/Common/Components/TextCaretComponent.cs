@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core.Common.Systems.Components;
-using OpenTK;
+﻿using OpenTK;
 using OpenTK.Graphics;
 using System.Collections.Generic;
 

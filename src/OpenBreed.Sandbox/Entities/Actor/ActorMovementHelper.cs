@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common.Components;
-using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
@@ -28,35 +27,36 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
             stateMachine.AddTransition(MovementState.Walking, MovementImpulse.Stop, MovementState.Standing);
             stateMachine.AddTransition(MovementState.Standing, MovementImpulse.Walk, MovementState.Walking);
+            stateMachine.AddTransition(MovementState.Walking, MovementImpulse.Walk, MovementState.Walking);
 
-            stateMachine.AddOnEnterState(MovementState.Standing, MovementImpulse.Stop, OnMovementEnterStandingWithStop);
-            stateMachine.AddOnEnterState(MovementState.Walking, MovementImpulse.Walk, OnMovementEnterWalkingWithWalk);
-            stateMachine.AddOnLeaveState(MovementState.Standing, MovementImpulse.Walk, OnMovementLeaveStandingWithWalk);
-            stateMachine.AddOnLeaveState(MovementState.Walking, MovementImpulse.Stop, OnMovementLeaveWalkingWithStop);
+
+            //stateMachine.AddOnEnterState(MovementState.Standing, MovementImpulse.Stop, OnMovementEnterStandingWithStop);
+            //stateMachine.AddOnEnterState(MovementState.Walking, MovementImpulse.Walk, OnMovementEnterWalkingWithWalk);
+            //stateMachine.AddOnLeaveState(MovementState.Standing, MovementImpulse.Walk, OnMovementLeaveStandingWithWalk);
+            //stateMachine.AddOnLeaveState(MovementState.Walking, MovementImpulse.Stop, OnMovementLeaveWalkingWithStop);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private static void OnMovementLeaveWalkingWithStop(ICore core, int entityId)
+        private static void OnMovementLeaveWalkingWithStop(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
             var entity = core.Entities.GetById(entityId);
 
             entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
-        private static void OnMovementEnterWalkingWithWalk(ICore core, int entityId)
+        private static void OnMovementEnterWalkingWithWalk(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
             var entity = core.Entities.GetById(entityId);
 
             var direction = entity.Get<DirectionComponent>();
             var movement = entity.Get<MotionComponent>();
-            entity.Get<ThrustComponent>().Value = direction.Value * movement.Acceleration;
+            entity.Get<ThrustComponent>().Value = direction.GetDirection() * movement.Acceleration;
 
-            var animDirPostfix = AnimHelper.ToDirectionName(direction.Value);
+            var animDirPostfix = AnimHelper.ToDirectionName(direction.GetDirection());
 
-            var fsmId = entity.Core.StateMachines.GetByName("Actor.Movement").Id;
             var stateName = entity.Core.StateMachines.GetStateName(fsmId, (int)MovementState.Walking);
             var className = entity.Get<ClassComponent>().Name;
             entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, $"{"Animations"}/{className}/{stateName}/{animDirPostfix}", 0));
@@ -78,11 +78,13 @@ namespace OpenBreed.Sandbox.Entities.Actor
                 entity.Core.Commands.Post(new SetStateCommand(entity.Id, fsmId, (int)MovementImpulse.Stop));
         }
 
-        private static void OnMovementEnterStandingWithStop(ICore core, int entityId)
+        private static void OnMovementEnterStandingWithStop(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
+            Console.WriteLine("Enter Standing(Stop)");
+
             var entity = core.Entities.GetById(entityId);
 
-            var direction = entity.Get<DirectionComponent>().Value;
+            var direction = entity.Get<DirectionComponent>().GetDirection();
 
             var animDirName = AnimHelper.ToDirectionName(direction);
             var className = entity.Get<ClassComponent>().Name;
@@ -91,7 +93,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
             thrust.Value = Vector2.Zero;
 
-            var fsmId = entity.Core.StateMachines.GetByName("Actor.Movement").Id;
             var stateName = entity.Core.StateMachines.GetStateName(fsmId, (int)MovementState.Standing);
             entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, $"{"Animations"}/{className}/{stateName}/{animDirName}", 0));
 
@@ -101,8 +102,10 @@ namespace OpenBreed.Sandbox.Entities.Actor
             entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged2);
         }
 
-        private static void OnMovementLeaveStandingWithWalk(ICore core, int entityId)
+        private static void OnMovementLeaveStandingWithWalk(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
+            Console.WriteLine("Leave Standing(Walk)");
+
             var entity = core.Entities.GetById(entityId);
 
             entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged2);

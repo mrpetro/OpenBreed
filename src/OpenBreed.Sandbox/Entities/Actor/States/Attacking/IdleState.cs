@@ -1,7 +1,6 @@
 ﻿
 using NLua;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Rendering.Commands;
@@ -26,24 +25,24 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 
         public void EnterState(Entity entity)
         {
-            //var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
-            //entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
+            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
+            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
-            //entity.Subscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
+            entity.Subscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
         }
 
         public void LeaveState(Entity entity)
         {
-            //entity.Unsubscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
+            entity.Unsubscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
         }
 
-        //private void OnControlFireChanged(object sender, ControlFireChangedEvenrArgs eventArgs)
-        //{
-        //    var entity = sender as Entity;
+        private void OnControlFireChanged(object sender, ControlFireChangedEvenrArgs eventArgs)
+        {
+            var entity = sender as Entity;
 
-        //    if (eventArgs.Fire)
-        //        entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Shoot));
-        //}
+            if (eventArgs.Fire)
+                entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Shoot));
+        }
 
     }
 }

@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core.Common.Systems.Components;
-using OpenBreed.Core.Common.Systems.Shapes;
+﻿using OpenBreed.Core.Common.Systems.Shapes;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenTK;
 using System;

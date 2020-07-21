@@ -1,6 +1,5 @@
-﻿
-using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Systems.Components;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Rendering.Commands;
@@ -25,32 +24,32 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 
         public void EnterState(Entity entity)
         {
-            //// Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            //var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
-            //entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
+            // Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
+            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
+            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
-            //entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
+            entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
         public void LeaveState(Entity entity)
         {
-            //entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
+            entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
-        //private void OnControlDirectionChanged(object sender, ControlDirectionChangedEventArgs e)
-        //{
-        //    var entity = sender as Entity;
+        private void OnControlDirectionChanged(object sender, ControlDirectionChangedEventArgs e)
+        {
+            var entity = sender as Entity;
 
-        //    if (e.Direction != Vector2.Zero)
-        //    {
-        //        var dir = entity.Get<DirectionComponent>();
+            if (e.Direction != Vector2.Zero)
+            {
+                var dir = entity.Get<DirectionComponent>();
 
-        //        if (dir.Value != e.Direction)
-        //        {
-        //            dir.Value = e.Direction;
-        //            entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)RotationImpulse.Rotate));
-        //        }
-        //    }
-        //}
+                if (dir.GetDirection() != e.Direction)
+                {
+                    dir.SetDirection(e.Direction);
+                    entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)RotationImpulse.Rotate));
+                }
+            }
+        }
     }
 }

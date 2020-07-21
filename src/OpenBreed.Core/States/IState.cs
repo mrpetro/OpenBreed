@@ -8,6 +8,7 @@ namespace OpenBreed.Core.States
         #region Public Properties
 
         int Id { get; }
+        int FsmId { get; set; }
 
         #endregion Public Properties
 
@@ -22,6 +23,5 @@ namespace OpenBreed.Core.States
 
     public interface IState<TState, TImpulse> : IState where TState : Enum where TImpulse : Enum
     {
-        int FsmId { get; set; }
     }
 }

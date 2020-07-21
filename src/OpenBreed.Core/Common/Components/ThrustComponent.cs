@@ -2,7 +2,7 @@
 using OpenTK;
 using System;
 
-namespace OpenBreed.Core.Common.Systems.Components
+namespace OpenBreed.Core.Common.Components
 {
     /// <summary>
     /// Thrust entity component class that can be used to store entity current thrust information

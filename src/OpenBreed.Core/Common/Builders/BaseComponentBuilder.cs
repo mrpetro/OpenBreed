@@ -1,5 +1,5 @@
 ﻿using NLua;
-using OpenBreed.Core.Common.Systems.Components;
+using OpenBreed.Core.Common.Components;
 using OpenTK;
 using OpenTK.Graphics;
 using System;

@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Common.Systems.Components;
+﻿using OpenBreed.Core.Common.Components;
 using System;
 
 namespace OpenBreed.Core.Common.Builders

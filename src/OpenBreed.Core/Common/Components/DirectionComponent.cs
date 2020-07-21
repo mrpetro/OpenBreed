@@ -2,7 +2,7 @@
 using OpenTK;
 using System;
 
-namespace OpenBreed.Core.Common.Systems.Components
+namespace OpenBreed.Core.Common.Components
 {
     /// <summary>
     /// Direction entity component class that can be used to store entity current direction information
@@ -11,8 +11,6 @@ namespace OpenBreed.Core.Common.Systems.Components
     public class DirectionComponent : IEntityComponent
     {
         #region Private Fields
-
-        private Vector2 value;
 
         #endregion Private Fields
 
@@ -24,34 +22,41 @@ namespace OpenBreed.Core.Common.Systems.Components
         /// <param name="value">Initial value vector</param>
         internal DirectionComponent(DirectionComponentBuilder builder)
         {
-            this.value = builder.Value;
+            //Value = builder.Value;
+
+            SetDirection(builder.Value);
         }
 
         #endregion Internal Constructors
 
         #region Public Events
 
-        public event EventHandler<Vector2> ValueChanged;
-
         #endregion Public Events
 
         #region Public Properties
 
+        public float ValueEx { get; set; }
+
         /// <summary>
         /// Direction value
         /// </summary>
-        public Vector2 Value
+        public void SetDirection(Vector2 vector)
         {
-            get { return value; }
-            set
-            {
-                if (this.value == value)
-                    return;
-
-                this.value = value;
-                ValueChanged?.Invoke(this, this.value);
-            }
+            ValueEx = (float)Math.Atan2((float)vector.Y, (float)vector.X);
         }
+
+        /// <summary>
+        /// Direction value
+        /// </summary>
+        public Vector2 GetDirection()
+        {
+            return new Vector2((float)Math.Cos(ValueEx), (float)Math.Sin(ValueEx));
+        }
+
+        /// <summary>
+        /// Direction value
+        /// </summary>
+        //public Vector2 Value { get; set; }
 
         #endregion Public Properties
     }

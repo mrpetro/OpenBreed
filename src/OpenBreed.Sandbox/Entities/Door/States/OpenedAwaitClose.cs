@@ -12,7 +12,6 @@ using System.Linq;
 using OpenBreed.Core.Common.Systems;
 
 using OpenBreed.Core.Modules.Physics.Commands;
-using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Sandbox.Entities.Door.States;
 using System;
 using OpenBreed.Core.Common.Components;

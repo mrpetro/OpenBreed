@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common.Components;
-using OpenBreed.Core.Common.Systems.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
@@ -34,33 +33,32 @@ namespace OpenBreed.Sandbox.Entities.Actor
             stateMachine.AddTransition(RotationState.Rotating, RotationImpulse.Stop, RotationState.Idle);
             stateMachine.AddTransition(RotationState.Idle, RotationImpulse.Rotate, RotationState.Rotating);
 
-            stateMachine.AddOnEnterState(RotationState.Idle, RotationImpulse.Stop, OnRotationEnterIdleWithStop);
-            stateMachine.AddOnEnterState(RotationState.Rotating, RotationImpulse.Rotate, OnRotationEnterRotatingWithRotate);
-            stateMachine.AddOnLeaveState(RotationState.Idle, RotationImpulse.Rotate, OnRotationLeaveIdleWithRotate);
-            stateMachine.AddOnLeaveState(RotationState.Rotating, RotationImpulse.Stop, OnRotationLeaveRotatingWithStop);
+            //stateMachine.AddOnEnterState(RotationState.Idle, RotationImpulse.Stop, OnRotationEnterIdleWithStop);
+            //stateMachine.AddOnEnterState(RotationState.Rotating, RotationImpulse.Rotate, OnRotationEnterRotatingWithRotate);
+            //stateMachine.AddOnLeaveState(RotationState.Idle, RotationImpulse.Rotate, OnRotationLeaveIdleWithRotate);
+            //stateMachine.AddOnLeaveState(RotationState.Rotating, RotationImpulse.Stop, OnRotationLeaveRotatingWithStop);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private static void OnRotationLeaveRotatingWithStop(ICore core, int entityId)
+        private static void OnRotationLeaveRotatingWithStop(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
             var entity = core.Entities.GetById(entityId);
             Console.WriteLine("Rotation (!Rotating -> Stop)");
         }
 
-        private static void OnRotationEnterRotatingWithRotate(ICore core, int entityId)
+        private static void OnRotationEnterRotatingWithRotate(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
             var entity = core.Entities.GetById(entityId);
             var direction = entity.Get<DirectionComponent>();
             var movement = entity.Get<MotionComponent>();
-            entity.Get<ThrustComponent>().Value = direction.Value * movement.Acceleration;
+            entity.Get<ThrustComponent>().Value = direction.GetDirection() * movement.Acceleration;
 
-            var animDirName = AnimHelper.ToDirectionName(direction.Value);
+            var animDirName = AnimHelper.ToDirectionName(direction.GetDirection());
             var className = entity.Get<ClassComponent>().Name;
             var movementFsm = entity.Core.StateMachines.GetByName("Actor.Movement");
-            var fsmId = entity.Core.StateMachines.GetByName("Actor.Rotation").Id;
             var movementStateName = movementFsm.GetCurrentStateName(entity);
             entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, $"{"Animations"}/{className}/{movementStateName}/{animDirName}", 0));
 
@@ -70,7 +68,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             entity.Core.Commands.Post(new SetStateCommand(entity.Id, fsmId, (int)RotationImpulse.Stop));
         }
 
-        private static void OnRotationEnterIdleWithStop(ICore core, int entityId)
+        private static void OnRotationEnterIdleWithStop(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
             var entity = core.Entities.GetById(entityId);
 
@@ -81,7 +79,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
-        private static void OnRotationLeaveIdleWithRotate(ICore core, int entityId)
+        private static void OnRotationLeaveIdleWithRotate(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
             var entity = core.Entities.GetById(entityId);
             entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
@@ -96,9 +94,9 @@ namespace OpenBreed.Sandbox.Entities.Actor
             {
                 var dir = entity.Get<DirectionComponent>();
 
-                if (dir.Value != e.Direction)
+                if (dir.GetDirection() != e.Direction)
                 {
-                    dir.Value = e.Direction;
+                    dir.SetDirection(e.Direction);
                     var fsmId = entity.Core.StateMachines.GetByName("Actor.Rotation").Id;
                     entity.Core.Commands.Post(new SetStateCommand(entity.Id, fsmId, (int)RotationImpulse.Rotate));
                 }
