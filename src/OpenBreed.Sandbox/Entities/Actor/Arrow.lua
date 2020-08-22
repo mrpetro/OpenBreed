@@ -2,15 +2,14 @@
     ClassComponent = { "Actor" },
     TimerComponent = {},
     FsmComponent = { { "Actor.Movement", "Standing" },
-					 { "Actor.Attacking", "Idle" },
-					 { "Actor.Rotation", "Idle" } },
+					 { "Actor.Attacking", "Idle" } },
     AnimationComponent = {
         Speed = 10.0,
         Loop = true},
     PositionComponent = { 0, 0 },
     ThrustComponent = { 0, 0 },
     VelocityComponent = { 0, 0 },
-    DirectionComponent = { 0, 0 },
+    AngularPositionComponent = { 0 },
     BodyComponent = {
         CofFactor = 1.0,
         CorFactor = 0.0,
@@ -19,7 +18,9 @@
 	MotionComponent = {},
 	SpriteComponent = {
 		AtlasId = "Atlases/Sprites/Arrow",
-        Order = 100.0},
+        Order = 100.0,
+        Width = 32.0,
+        Height = 32.0},
 	TextComponent = {
 		Text = "Hero",
 		Offset = { 0, 32 },

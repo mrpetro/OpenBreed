@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Sandbox.Entities.Actor.States.Rotation;
 using OpenTK;
@@ -75,7 +76,7 @@ namespace OpenBreed.Sandbox.Entities.Turret
         {
             var entity = core.Entities.CreateFromTemplate("Turret");
             entity.Get<PositionComponent>().Value = pos;
-
+            entity.Add(new CollisionComponent(ColliderTypes.StaticObstacle));
             //entity.Subscribe<CollisionEventArgs>(OnCollision);
 
             return entity;

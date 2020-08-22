@@ -24,6 +24,11 @@ namespace OpenBreed.Core.Helpers
 
         #region Public Methods
 
+        public static float AngleBetween(Vector2 a, Vector2 b)
+        {
+            return (float)Math.Atan2(b.Y - a.Y, b.X - a.X);
+        }
+
         public static Vector2 SnapToCompass8Way(Vector2 direction)
         {
             int octant = (((int)Math.Round(Math.Atan2(direction.Y, direction.X) / (2 * Math.PI / 8))) + 8) % 8;

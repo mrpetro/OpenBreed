@@ -25,6 +25,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         private const int CELL_SIZE = 16;
 
         public FixtureMan Fixtures { get; }
+        public CollisionMan Collisions { get; }
 
         private readonly List<DynamicPack> inactiveDynamics = new List<DynamicPack>();
         private readonly List<DynamicPack> activeDynamics = new List<DynamicPack>();
@@ -38,6 +39,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
         internal PhysicsSystem(PhysicsSystemBuilder builder) : base(builder.core)
         {
             Fixtures = Core.GetModule<PhysicsModule>().Fixturs;
+            Collisions = Core.GetModule<PhysicsModule>().Collisions;
 
             Require<BodyComponent>();
 
@@ -261,8 +263,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 var entityA = Core.Entities.GetById(packA.EntityId);
                 var entityB = Core.Entities.GetById(packB.EntityId);
 
-                entityA.RaiseEvent(new CollisionEventArgs(entityB, projection));
-                entityB.RaiseEvent(new CollisionEventArgs(entityA, projection));
+                Collisions.Callback(entityA, entityB, projection);
 
                 //bodyA.Entity.RaiseEvent(new CollisionEvent(bodyB.Entity));
                 //bodyB.Entity.RaiseEvent(new CollisionEvent(bodyA.Entity));
@@ -278,8 +279,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
                 var entityA = Core.Entities.GetById(packA.EntityId);
                 var entityB = Core.Entities.GetById(packB.EntityId);
 
-                entityA.RaiseEvent(new CollisionEventArgs(entityB, projection));
-                entityB.RaiseEvent(new CollisionEventArgs(entityA, projection));
+                Collisions.Callback(entityA, entityB, projection);
+                Collisions.Callback(entityB, entityA, -projection);
             }
         }
 

@@ -8,41 +8,35 @@ namespace OpenBreed.Core.Common.Components
     /// Direction entity component class that can be used to store entity current direction information
     /// Example: Actor is facing particular direction when standing
     /// </summary>
-    public class DirectionComponent : IEntityComponent
+    public class AngularPositionComponent : IEntityComponent
     {
-        #region Private Fields
-
-        #endregion Private Fields
-
         #region Internal Constructors
 
         /// <summary>
         /// Constructor with passed initial direction value
         /// </summary>
         /// <param name="value">Initial value vector</param>
-        internal DirectionComponent(DirectionComponentBuilder builder)
+        internal AngularPositionComponent(AngularPositionComponentBuilder builder)
         {
-            //Value = builder.Value;
-
-            SetDirection(builder.Value);
+            Value = builder.Value;
         }
 
         #endregion Internal Constructors
 
-        #region Public Events
-
-        #endregion Public Events
-
         #region Public Properties
 
-        public float ValueEx { get; set; }
+        public float Value { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
 
         /// <summary>
         /// Direction value
         /// </summary>
         public void SetDirection(Vector2 vector)
         {
-            ValueEx = (float)Math.Atan2((float)vector.Y, (float)vector.X);
+            Value = (float)Math.Atan2((float)vector.Y, (float)vector.X);
         }
 
         /// <summary>
@@ -50,14 +44,14 @@ namespace OpenBreed.Core.Common.Components
         /// </summary>
         public Vector2 GetDirection()
         {
-            return new Vector2((float)Math.Cos(ValueEx), (float)Math.Sin(ValueEx));
+            return new Vector2((float)Math.Cos(Value), (float)Math.Sin(Value));
         }
+
+        #endregion Public Methods
 
         /// <summary>
         /// Direction value
         /// </summary>
         //public Vector2 Value { get; set; }
-
-        #endregion Public Properties
     }
 }

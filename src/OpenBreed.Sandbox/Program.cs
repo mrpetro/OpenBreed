@@ -19,6 +19,7 @@ using OpenBreed.Core.Modules.Rendering.Builders;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Control.Systems;
+using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Button;
 using OpenBreed.Sandbox.Entities.Camera;
@@ -288,6 +289,12 @@ namespace OpenBreed.Sandbox
             var cursorsTex = Rendering.Textures.Create("Textures/Sprites/Cursors", @"Content\Graphics\Cursors.png");
             Rendering.Sprites.Create("Atlases/Sprites/Cursors", cursorsTex.Id, 16, 16, 1, 1);
 
+            ColliderTypes.Initialize(Physics.Collisions);
+            ActorHelper.RegisterCollisionPairs(this);
+            WorldGateHelper.RegisterCollisionPairs(this);
+            ProjectileHelper.RegisterCollisionPairs(this);
+
+
             CameraHelper.CreateAnimations(this);
             DoorHelper.CreateStamps(this);
             DoorHelper.CreateAnimations(this);
@@ -301,7 +308,7 @@ namespace OpenBreed.Sandbox
             ButtonHelper.CreateFsm(this);
             ActorAttackingHelper.CreateFsm(this);
             ActorMovementHelper.CreateFsm(this);
-            ActorRotationHelper.CreateFsm(this);
+            //ActorRotationHelper.CreateFsm(this);
             TurretHelper.CreateRotationFsm(this);
 
             Rendering.ScreenWorld = ScreenWorldHelper.CreateWorld(this);
@@ -385,7 +392,7 @@ namespace OpenBreed.Sandbox
             BodyComponentBuilder.Register(this);
             AnimationComponentBuilder.Register(this);
 
-            Entities.RegisterComponentBuilder("DirectionComponent", DirectionComponentBuilder.New);
+            Entities.RegisterComponentBuilder("AngularPositionComponent", AngularPositionComponentBuilder.New);
             Entities.RegisterComponentBuilder("VelocityComponent", VelocityComponentBuilder.New);
             Entities.RegisterComponentBuilder("ThrustComponent", ThrustComponentBuilder.New);
             Entities.RegisterComponentBuilder("PositionComponent", PositionComponentBuilder.New);

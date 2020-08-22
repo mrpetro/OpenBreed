@@ -11,7 +11,9 @@
 		Fixtures = { "Fixtures/TeleportExit" } },
 	SpriteComponent = {
 		AtlasId = "Atlases/Sprites/World/Exit",
-        Order = 0.0},
+        Order = 0.0,
+        Width = 32.0,
+        Height = 32.0},
 	TextComponent = {
 		Text = "WorldExit",
 		Offset = { 0, 32 },

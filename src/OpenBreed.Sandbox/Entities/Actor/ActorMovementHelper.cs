@@ -51,7 +51,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
         {
             var entity = core.Entities.GetById(entityId);
 
-            var direction = entity.Get<DirectionComponent>();
+            var direction = entity.Get<AngularPositionComponent>();
             var movement = entity.Get<MotionComponent>();
             entity.Get<ThrustComponent>().Value = direction.GetDirection() * movement.Acceleration;
 
@@ -84,7 +84,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
             var entity = core.Entities.GetById(entityId);
 
-            var direction = entity.Get<DirectionComponent>().GetDirection();
+            var direction = entity.Get<AngularPositionComponent>().GetDirection();
 
             var animDirName = AnimHelper.ToDirectionName(direction);
             var className = entity.Get<ClassComponent>().Name;

@@ -22,6 +22,7 @@ using OpenBreed.Core.Events;
 using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Core.Common.Components;
+using OpenBreed.Core.Modules.Physics;
 
 namespace OpenBreed.Sandbox.Entities.WorldGate
 {
@@ -51,7 +52,8 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             teleportEntity.Tag = (worldName, entryId);
 
             teleportEntity.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
-            teleportEntity.Subscribe<CollisionEventArgs>(OnCollision);
+            teleportEntity.Add(new CollisionComponent(ColliderTypes.WorldExitTrigger));
+            //teleportEntity.Subscribe<CollisionEventArgs>(OnCollision);
 
             world.Core.Commands.Post(new AddEntityCommand(world.Id, teleportEntity.Id));
             //world.AddEntity(teleportEntity);
@@ -59,28 +61,17 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             return teleportEntity;
         }
 
-        public static Entity AddWorldEntry(World world, int x, int y, int entryId)
+        public static void RegisterCollisionPairs(ICore core)
         {
-            var core = world.Core;
-            var teleportEntity = core.Entities.CreateFromTemplate("WorldGateEntry");
-            teleportEntity.Tag = new WorldGatePair() { Id = entryId };
-            teleportEntity.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, teleportEntity.Id));
-            //world.AddEntity(teleportEntity);
+            var collisionMan = core.GetModule<PhysicsModule>().Collisions;
 
-            return teleportEntity;
+            collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.WorldExitTrigger, Actor2TriggerCallback);
+            //collisionMan.RegisterCollisionPair(ColliderTypes.WorldExitTrigger, ColliderTypes.ActorBody, Actor2TriggerCallback);
         }
 
-        #endregion Public Methods
-
-        #region Private Methods
-
-        private static void OnCollision(object sender, CollisionEventArgs args)
+        private static void PerformEntityExit(Entity targetEntity, Entity exitEntity)
         {
-            var entity = (Entity)sender;
-            var core = entity.Core;
-            var exitEntity = entity;
-            var targetEntity = args.Entity;
+            var core = targetEntity.Core;
 
             var cameraEntity = targetEntity.TryGet<FollowerComponent>()?.FollowerIds.
                                                                               Select(item => core.Entities.GetById(item)).
@@ -108,12 +99,76 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             //Set position of entity to entry position in next world
             jobChain.Equeue(new EntityJob(() => SetPosition(targetEntity, exitInfo.EntryId, true)));
             //Unpause this world
-            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(core.Worlds, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => core.Commands.Post( new PauseWorldCommand(worldIdToRemoveFrom, false))));
+            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(core.Worlds, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => core.Commands.Post(new PauseWorldCommand(worldIdToRemoveFrom, false))));
             //Fade in camera
             jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => core.Commands.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0))));
 
             exitEntity.Core.Jobs.Execute(jobChain);
         }
+
+        private static void Actor2TriggerCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
+        {
+            if (colliderTypeA == ColliderTypes.WorldExitTrigger && colliderTypeB == ColliderTypes.ActorBody)
+                PerformEntityExit(entityB, entityA);
+            else if (colliderTypeA == ColliderTypes.ActorBody && colliderTypeB == ColliderTypes.WorldExitTrigger)
+                PerformEntityExit(entityA, entityB);
+        }
+
+        public static Entity AddWorldEntry(World world, int x, int y, int entryId)
+        {
+            var core = world.Core;
+            var teleportEntity = core.Entities.CreateFromTemplate("WorldGateEntry");
+            teleportEntity.Tag = new WorldGatePair() { Id = entryId };
+            teleportEntity.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
+            world.Core.Commands.Post(new AddEntityCommand(world.Id, teleportEntity.Id));
+            //world.AddEntity(teleportEntity);
+
+            return teleportEntity;
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        //private static void OnCollision(object sender, CollisionEventArgs args)
+        //{
+        //    var entity = (Entity)sender;
+        //    var core = entity.Core;
+        //    var exitEntity = entity;
+        //    var targetEntity = args.Entity;
+
+        //    var cameraEntity = targetEntity.TryGet<FollowerComponent>()?.FollowerIds.
+        //                                                                      Select(item => core.Entities.GetById(item)).
+        //                                                                      FirstOrDefault(item => item.Tag is "PlayerCamera");
+
+        //    if (cameraEntity == null)
+        //        return;
+
+        //    var exitInfo = ((string WorldName, int EntryId))exitEntity.Tag;
+
+        //    var jobChain = new JobChain();
+
+        //    var worldIdToRemoveFrom = targetEntity.World.Id;
+
+        //    //Pause this world
+        //    jobChain.Equeue(new WorldJob<WorldPausedEventArgs>(core.Worlds, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => core.Commands.Post(new PauseWorldCommand(worldIdToRemoveFrom, true))));
+        //    //Fade out camera
+        //    jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => core.Commands.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_OUT, 0))));
+        //    //Remove entity from this world
+        //    jobChain.Equeue(new WorldJob<EntityRemovedEventArgs>(core.Worlds, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => core.Commands.Post(new RemoveEntityCommand(targetEntity.World.Id, targetEntity.Id))));
+        //    //Load next world if needed
+        //    jobChain.Equeue(new EntityJob(() => TryLoadWorld(core, exitInfo.WorldName, exitInfo.EntryId)));
+        //    //Add entity to next world
+        //    jobChain.Equeue(new WorldJob<EntityAddedEventArgs>(core.Worlds, (s, a) => { return core.Worlds.GetById(a.WorldId).Name == exitInfo.WorldName; }, () => AddToWorld(targetEntity, exitInfo.WorldName, exitInfo.EntryId)));
+        //    //Set position of entity to entry position in next world
+        //    jobChain.Equeue(new EntityJob(() => SetPosition(targetEntity, exitInfo.EntryId, true)));
+        //    //Unpause this world
+        //    jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(core.Worlds, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => core.Commands.Post( new PauseWorldCommand(worldIdToRemoveFrom, false))));
+        //    //Fade in camera
+        //    jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => core.Commands.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0))));
+
+        //    exitEntity.Core.Jobs.Execute(jobChain);
+        //}
 
         private static void AddToWorld(Entity target, string worldName, int entryId)
         {
@@ -143,7 +198,6 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
 
             var entryPos = entryEntity.Get<PositionComponent>();
-            var entryAabb = entryEntity.Get<BodyComponent>().Aabb;
             var targetPos = target.Get<PositionComponent>();
             var targetAabb = target.Get<BodyComponent>().Aabb;
             var offset = new Vector2((32 - targetAabb.Width) / 2.0f, (32 - targetAabb.Height) / 2.0f);

@@ -76,6 +76,7 @@ namespace OpenBreed.Sandbox.Entities.Builders
                 bodyComponentBuilder.SetProperty("Fixtures", new List<int> (new int[] { fixtureId }));
 
                 entity.Add(bodyComponentBuilder.Build());
+                entity.Add(new CollisionComponent(ColliderTypes.StaticObstacle));
             }
 
 

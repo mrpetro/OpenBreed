@@ -13,7 +13,9 @@
 		Fixtures = { "Fixtures/DoorVertical" } },
 	SpriteComponent = {
 		AtlasId = "Atlases/Sprites/Door/Vertical",
-        Order = 0.0},
+        Order = 0.0,
+        Width = 16.0,
+        Height = 32.0},
 	TextComponent = {
 		Text = "Door",
 		Offset = { -10, 10 },

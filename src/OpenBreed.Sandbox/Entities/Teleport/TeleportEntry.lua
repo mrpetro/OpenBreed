@@ -11,7 +11,9 @@
 		Fixtures = { "Fixtures/TeleportEntry" } },
 	SpriteComponent = {
 		AtlasId = "Atlases/Sprites/Teleport/Entry",
-        Order = 0.0},
+        Order = 0.0,
+        Width = 32.0,
+        Height = 32.0},
 	TextComponent = {
 		Text = "TeleportEntry",
 		Offset = { 0, 32 },

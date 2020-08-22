@@ -91,6 +91,7 @@
     <Compile Include="Common\Builders\TimerComponentBuilder.cs" />
     <Compile Include="Common\Builders\FsmComponentBuilder.cs" />
     <Compile Include="Common\Builders\ClassComponentBuilder.cs" />
+    <Compile Include="Common\Components\AngularThrustComponent.cs" />
     <Compile Include="Common\Components\AngularVelocityComponent.cs" />
     <Compile Include="Common\Components\ClassComponent.cs" />
     <Compile Include="Common\Components\FollowerComponent.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Common\Components\TimerComponent.cs" />
     <Compile Include="CoreBase.cs" />
     <Compile Include="Events\EntityAddedEventArgs.cs" />
+    <Compile Include="Events\EntityComponentChangedEventArgs.cs" />
     <Compile Include="Events\EntityRemovedEventArgs.cs" />
     <Compile Include="Events\TextDataChanged.cs" />
     <Compile Include="Events\TextCaretPositionChanged.cs" />
@@ -108,13 +110,16 @@
     <Compile Include="EntityJob.cs" />
     <Compile Include="Events\WorldUnpausedEventArgs.cs" />
     <Compile Include="Events\WorldPausedEventArgs.cs" />
+    <Compile Include="Extensions\QuaternionExtension.cs" />
+    <Compile Include="Extensions\Vector2Extension.cs" />
+    <Compile Include="Extensions\Vector3Extension.cs" />
     <Compile Include="Modules\Animation\Builders\AnimationComponentBuilder.cs" />
     <Compile Include="Common\Builders\BaseComponentBuilder.cs" />
     <Compile Include="Common\Builders\IBuilder.cs" />
     <Compile Include="Common\Builders\PositionComponentBuilder.cs" />
     <Compile Include="Common\Builders\VelocityComponentBuilder.cs" />
     <Compile Include="Common\Builders\ThrustComponentBuilder.cs" />
-    <Compile Include="Common\Builders\DirectionComponentBuilder.cs" />
+    <Compile Include="Common\Builders\AngularPositionComponentBuilder.cs" />
     <Compile Include="Common\Builders\IComponentBuilder.cs" />
     <Compile Include="Modules\Animation\Builders\AnimationSystemBuilder.cs" />
     <Compile Include="Modules\Animation\Components\AnimationComponent.cs" />
@@ -203,7 +208,7 @@
     <Compile Include="Common\Components\ThrustComponent.cs" />
     <Compile Include="Common\Components\VelocityComponent.cs" />
     <Compile Include="Common\Components\PositionComponent.cs" />
-    <Compile Include="Common\Components\DirectionComponent.cs" />
+    <Compile Include="Common\Components\AngularPositionComponent.cs" />
     <Compile Include="Modules\Physics\IPhysicsSystem.cs" />
     <Compile Include="Modules\Audio\Systems\IAudioSystem.cs" />
     <Compile Include="Systems\IRenderableSystem.cs" />

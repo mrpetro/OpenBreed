@@ -5,6 +5,7 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
+using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Physics.Helpers;
@@ -31,6 +32,13 @@ namespace OpenBreed.Sandbox.Entities.Actor
         #endregion Public Fields
 
         #region Public Methods
+
+        public static void RegisterCollisionPairs(ICore core)
+        {
+            var collisionMan = core.GetModule<PhysicsModule>().Collisions;
+
+            collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.StaticObstacle, Dynamic2StaticCallback);
+        }
 
         public static void CreateAnimations(ICore core)
         {
@@ -106,14 +114,16 @@ namespace OpenBreed.Sandbox.Entities.Actor
             //var actor = core.Entities.Create();
 
             var actor = core.Entities.CreateFromTemplate("Arrow");
-            //actor.Add(new TimerComponent());
+            actor.Add(new AngularVelocityComponent(0));
+            actor.Add(new AngularThrustComponent(0));
+            actor.Add(new CollisionComponent(ColliderTypes.ActorBody));
             //actor.Add(new InventoryComponent(new Bag[] { new Bag("Backpack") }));
             //actor.Add(new EquipmentComponent(new Slot[] { new Slot("Torso"), new Slot("Hands") }));
             //actor.Add(AxisAlignedBoxShape.Create(0, 0, 32, 32));
             actor.Add(new FollowerComponent());
             actor.Get<PositionComponent>().Value = pos;
 
-            actor.Subscribe<CollisionEventArgs>(OnCollision);
+            //actor.Subscribe<CollisionEventArgs>(OnCollision);
 
             return actor;
         }
@@ -127,23 +137,28 @@ namespace OpenBreed.Sandbox.Entities.Actor
             entity.Core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
         }
 
-        private static void OnCollision(object sender, CollisionEventArgs args)
+        private static void Dynamic2StaticCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
         {
-            var entity = (Entity)sender;
-            var body = args.Entity.TryGet<BodyComponent>();
-
-            var type = body.Tag;
-
-            switch (type)
-            {
-                case "Static":
-                    DynamicHelper.ResolveVsStatic(entity, args.Entity, args.Projection);
-                    return;
-
-                default:
-                    break;
-            }
+            DynamicHelper.ResolveVsStatic(entityA, entityB, projection);
         }
+
+        //private static void OnCollision(object sender, CollisionEventArgs args)
+        //{
+        //    var entity = (Entity)sender;
+        //    var body = args.Entity.TryGet<BodyComponent>();
+
+        //    var type = body.Tag;
+
+        //    switch (type)
+        //    {
+        //        case "Static":
+        //            DynamicHelper.ResolveVsStatic(entity, args.Entity, args.Projection);
+        //            return;
+
+        //        default:
+        //            break;
+        //    }
+        //}
 
         #endregion Private Methods
     }

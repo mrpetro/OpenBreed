@@ -11,6 +11,8 @@ using System.Linq;
 using OpenBreed.Core.Commands;
 using OpenBreed.Sandbox.Entities.Door.States;
 using OpenBreed.Core.Common.Components;
+using OpenBreed.Core.Modules.Physics.Components;
+using OpenBreed.Sandbox.Entities;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -56,6 +58,9 @@ namespace OpenBreed.Sandbox.Components.States
         public void LeaveState(Entity entity)
         {
             entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
+
+            var colCmp = entity.Get<CollisionComponent>();
+            colCmp.ColliderTypes.Remove(ColliderTypes.StaticObstacle);
         }
 
         #endregion Public Methods

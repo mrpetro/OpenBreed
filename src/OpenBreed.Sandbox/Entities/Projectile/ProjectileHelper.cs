@@ -4,6 +4,7 @@ using OpenBreed.Core.Common;
 using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
+using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Physics.Helpers;
@@ -47,21 +48,33 @@ namespace OpenBreed.Sandbox.Entities.Projectile
             entity.Core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
         }
 
-        private static void OnCollision(object sender, CollisionEventArgs args)
+        //private static void OnCollision(object sender, CollisionEventArgs args)
+        //{
+        //    //var entity = (Entity)sender;
+        //    //var body = args.Entity.TryGet<BodyComponent>();
+
+        //    //var type = body.Tag;
+
+        //    //switch (type)
+        //    //{
+        //    //    case "Solid":
+        //    //        DynamicHelper.ResolveVsStatic(entity, args.Entity, args.Projection);
+        //    //        return;
+        //    //    default:
+        //    //        break;
+        //    //}
+        //}
+
+        public static void RegisterCollisionPairs(ICore core)
         {
-            var entity = (Entity)sender;
-            var body = args.Entity.TryGet<BodyComponent>();
+            var collisionMan = core.GetModule<PhysicsModule>().Collisions;
 
-            var type = body.Tag;
+            collisionMan.RegisterCollisionPair(ColliderTypes.Projectile, ColliderTypes.StaticObstacle, Projectile2StaticObstacle);
+        }
 
-            switch (type)
-            {
-                case "Solid":
-                    DynamicHelper.ResolveVsStatic(entity, args.Entity, args.Projection);
-                    return;
-                default:
-                    break;
-            }
+        private static void Projectile2StaticObstacle(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
+        {
+            DynamicHelper.ResolveVsStatic(entityA, entityB, projection);
         }
 
         public static void AddProjectile(ICore core, World world, float x, float y, float vx, float vy)
@@ -71,8 +84,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
             projectile.Get<PositionComponent>().Value = new Vector2(x, y);
             projectile.Get<VelocityComponent>().Value = new Vector2(vx, vy);
-
-            projectile.Subscribe<CollisionEventArgs>(OnCollision);
+            projectile.Add(new CollisionComponent(ColliderTypes.Projectile));
 
             //var projectileFsm = core.StateMachines.GetByName("Projectile");
             //projectileFsm.SetInitialState(projectile, (int)AttackingState.Fired);

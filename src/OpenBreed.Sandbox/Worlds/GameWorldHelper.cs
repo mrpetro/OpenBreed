@@ -48,6 +48,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             //Action
             builder.AddSystem(core.CreateMovementSystem().Build());
+            builder.AddSystem(new DirectionSystem(core));
             builder.AddSystem(new FollowerSystem(core));
             //builder.AddSystem(new FollowerSystem(core));
             builder.AddSystem(core.CreatePhysicsSystem().SetGridSize(width, height).Build());

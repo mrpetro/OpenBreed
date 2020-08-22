@@ -113,6 +113,7 @@
     <Compile Include="Entities\Button\States\PressedState.cs" />
     <Compile Include="Entities\Button\States\IdleState.cs" />
     <Compile Include="Entities\Camera\CameraHelper.cs" />
+    <Compile Include="Entities\ColliderTypes.cs" />
     <Compile Include="Entities\CursorCoords\CursorCoordsHelper.cs" />
     <Compile Include="Entities\Door\DoorHelper.cs" />
     <Compile Include="Entities\Door\States\FunctioningState.cs" />

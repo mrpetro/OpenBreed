@@ -67,16 +67,8 @@ namespace OpenBreed.Sandbox.Entities.Button
             var pos = entity.Get<PositionComponent>();
             entity.Core.Commands.Post(new PutStampCommand(entity.World.Id, -1000000, 0, pos.Value));
             entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, "Door - Closed"));
-
-            entity.Subscribe<CollisionEventArgs>(OnCollision);
         }
 
-        private static void OnCollision(object sender, CollisionEventArgs eventArgs)
-        {
-            var entity = sender as Entity;
-            var fsmId = entity.Core.StateMachines.GetByName("Button").Id;
-            entity.Core.Commands.Post(new SetStateCommand(entity.Id, fsmId, (int)ButtonImpulse.Unpress));
-        }
 
         private static void OnButtonLeavePressedWithUnpress(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {

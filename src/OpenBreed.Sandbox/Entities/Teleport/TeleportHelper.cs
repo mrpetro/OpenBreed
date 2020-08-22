@@ -76,12 +76,8 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             teleportEntry.Tag = new TeleportPair { Id = pairId };
 
             teleportEntry.Get<PositionComponent>().Value = new Vector2( 16 * x, 16 * y);
-
-            //teleportEntry.Subscribe<AnimChangedEventArgs>(OnFrameChanged);
-            teleportEntry.Subscribe<CollisionEventArgs>(OnCollision);
+            teleportEntry.Add(new CollisionComponent(ColliderTypes.TeleportEntryTrigger));
             world.Core.Commands.Post(new AddEntityCommand(world.Id, teleportEntry.Id));
-            //world.AddEntity(teleportEntry);
-
             return teleportEntry;
         }
 
@@ -107,37 +103,6 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         #region Private Methods
 
-        private static void OnCollision(object sender, CollisionEventArgs args)
-        {
-            var entity = (Entity)sender;
-            var entryEntity = entity;
-            var world = entity.World;
-            var targetEntity = args.Entity;
-            var core = targetEntity.Core;
-
-            var cameraEntity = targetEntity.TryGet<FollowerComponent>()?.FollowerIds.
-                                                                              Select(item => core.Entities.GetById(item)).
-                                                                              FirstOrDefault(item => item.Tag is "PlayerCamera");
-
-            if (cameraEntity == null)
-                return;
-
-            //Vanilla game
-            var jobChain = new JobChain();
-            //1. Pause game
-            jobChain.Equeue(new WorldJob<WorldPausedEventArgs>(core.Worlds, (s, a) => { return a.WorldId == world.Id; }, () => core.Commands.Post(new PauseWorldCommand(world.Id, true))));
-            //2. Camera fade-out   
-            jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => core.Commands.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_OUT, 0))));
-            //3. Teleport character
-            jobChain.Equeue(new EntityJob(() => SetPosition(targetEntity, entryEntity, true)));
-            //4. Unpause game
-            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(core.Worlds, (s, a) => { return a.WorldId == world.Id; }, () => core.Commands.Post(new PauseWorldCommand(world.Id, false))));
-            //5. Camera fade-in
-            jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => core.Commands.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0))));
-
-            entryEntity.Core.Jobs.Execute(jobChain);
-        }
-
         public static void SetPosition(Entity target, Entity entryEntity, bool cancelMovement)
         {
             var pair = (TeleportPair)entryEntity.Tag;
@@ -147,7 +112,6 @@ namespace OpenBreed.Sandbox.Entities.Teleport
                 throw new Exception("No exit entity found");
 
             var exitPos = exitEntity.Get<PositionComponent>();
-            var exitAabb = exitEntity.Get<BodyComponent>().Aabb;
             var targetPos = target.Get<PositionComponent>();
             var targetAabb = target.Get<BodyComponent>().Aabb;
             var offset = new Vector2((32 - targetAabb.Width) / 2.0f, (32 - targetAabb.Height) / 2.0f);

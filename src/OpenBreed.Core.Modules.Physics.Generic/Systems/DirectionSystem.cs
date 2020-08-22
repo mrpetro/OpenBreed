@@ -1,7 +1,11 @@
 ﻿using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Extensions;
+using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Modules.Physics.Components;
+using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Systems;
+using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +16,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 {
     public class DirectionSystem : WorldSystem, IUpdatableSystem
     {
-        private const float FLOOR_FRICTION = 0.2f;
+        private const float FLOOR_FRICTION = 1.0f;
 
         #region Private Fields
 
@@ -24,7 +28,9 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         public DirectionSystem(ICore core) : base(core)
         {
-            Require<DirectionComponent>();
+            Require<AngularPositionComponent>();
+            Require<AngularVelocityComponent>();
+            Require<AngularThrustComponent>();
         }
 
         #endregion Public Constructors
@@ -43,24 +49,25 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         public void UpdateEntity(float dt, int id)
         {
-            //var entity = Core.Entities.GetById(id);
-            //var direction = entity.Get<DirectionComponent>();
-            //var thrust = entity.Get<ThrustComponent>();
-            //var velocity = entity.Get<AngularVelocityComponent>();
-            //var dynamicBody = entity.Get<BodyComponent>();
+            var entity = Core.Entities.GetById(id);
+            var angularPos = entity.Get<AngularPositionComponent>();
+            var angularVel = entity.Get<AngularVelocityComponent>();
+            var angularThrust = entity.Get<AngularThrustComponent>();
 
-            ////Velocity equation
-            //var newVel = velocity.Value + thrust.Value * dt;
+            //Velocity equation
+            //var newVel = angularVel.Value + angularThrust.Value * dt;
 
-            ////Apply friction force
-            //newVel += -newVel * FLOOR_FRICTION * dynamicBody.CofFactor;
+            var aPos = angularPos.GetDirection();
+            var dPos = angularVel.GetDirection();
 
-            ////Verlet integration
-            //var newPos = direction.Value + (velocity.Value + newVel) * 0.5f * dt;
+            var newPos = aPos.RotateTowards(dPos, (float)Math.PI * 0.125f, 1.0f);
+            //newPos = MovementTools.SnapToCompass8Way(newPos);
 
-            //velocity.Value = newVel;
-            //dynamicBody.OldPosition = direction.Value;
-            //direction.Value = newPos;
+            if (newPos == aPos)
+                return;
+
+            angularPos.SetDirection(newPos);
+            entity.RaiseEvent(new DirectionChangedEventArgs(angularPos.GetDirection()));
         }
 
         #endregion Public Methods

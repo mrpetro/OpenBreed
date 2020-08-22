@@ -74,7 +74,7 @@ namespace OpenBreed.Sandbox.Entities.Door
             fsm.AddState(new OpeningState());
             fsm.AddState(new OpenedAwaitClose());
             fsm.AddState(new ClosingState());
-            fsm.AddState(new ClosedState());
+            fsm.AddState(new ClosedState(core));
 
             fsm.AddTransition(FunctioningState.Closed, FunctioningImpulse.Open, FunctioningState.Opening);
             fsm.AddTransition(FunctioningState.Opening, FunctioningImpulse.StopOpening, FunctioningState.Opened);
@@ -109,16 +109,9 @@ namespace OpenBreed.Sandbox.Entities.Door
             //var door = core.Entities.Create();
             var door = core.Entities.CreateFromTemplate("DoorVertical");
             door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
+            door.Add(new CollisionComponent());
 
             world.Core.Commands.Post(new AddEntityCommand(world.Id, door.Id));
-            //world.AddEntity(door);
-
-            //door.Subscribe<EntityEnteredWorldEventArgs>((s, a) =>
-            //{
-            //    door.PostCommand(new SetStateCommand(door.Id, doorSm.Id, (int)FunctioningState.Closed));
-            //});
-
-            //doorSm.SetInitialState(FunctioningState.Closed);
         }
 
         public static void AddHorizontalDoor(World world, int x, int y)
@@ -127,20 +120,9 @@ namespace OpenBreed.Sandbox.Entities.Door
 
             var door = core.Entities.CreateFromTemplate("DoorHorizontal");
             door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
-
-            //var doorFsm = world.Core.StateMachines.GetByName("Door.Functioning");
-            //doorFsm.SetInitialState(door, (int)FunctioningState.Closed);
-
-            //door.Subscribe<EntityEnteredWorldEventArgs>((s, a) =>
-            //{
-            //    door.PostCommand(new SetStateCommand(door.Id, doorSm.Id, FunctioningState.Closed));
-            //});
+            door.Add(new CollisionComponent());
 
             world.Core.Commands.Post(new AddEntityCommand(world.Id, door.Id));
-            //world.AddEntity(door);
-
-
-            //doorSm.SetInitialState(FunctioningState.Closed);
         }
 
         public static void CreateStamps(ICore core)

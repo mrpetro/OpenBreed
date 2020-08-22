@@ -2,6 +2,8 @@
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Extensions;
+using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Physics.Components;
@@ -52,7 +54,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
         private static void OnRotationEnterRotatingWithRotate(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
             var entity = core.Entities.GetById(entityId);
-            var direction = entity.Get<DirectionComponent>();
+            var direction = entity.Get<AngularPositionComponent>();
             var movement = entity.Get<MotionComponent>();
             entity.Get<ThrustComponent>().Value = direction.GetDirection() * movement.Acceleration;
 
@@ -92,11 +94,18 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
             if (e.Direction != Vector2.Zero)
             {
-                var dir = entity.Get<DirectionComponent>();
+                var angularPos = entity.Get<AngularPositionComponent>();
 
-                if (dir.GetDirection() != e.Direction)
+                if (angularPos.GetDirection() != e.Direction)
                 {
-                    dir.SetDirection(e.Direction);
+                    var aPos3 = new Vector3(angularPos.GetDirection());
+                    var dPos3 = new Vector3(e.Direction);
+                    var newVec = Vector3Extension.RotateTowards(aPos3, dPos3, 0.1f, 1.0f);
+                    var angularThrust = entity.Get<AngularVelocityComponent>();
+                    angularThrust.SetDirection(new Vector2(newVec.X, newVec.Y));
+
+
+                    //angularPos.SetDirection(e.Direction);
                     var fsmId = entity.Core.StateMachines.GetByName("Actor.Rotation").Id;
                     entity.Core.Commands.Post(new SetStateCommand(entity.Id, fsmId, (int)RotationImpulse.Rotate));
                 }

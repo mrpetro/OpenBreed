@@ -121,7 +121,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
             var pos = entity.Get<PositionComponent>().Value;
             pos += new Vector2(8, 8);
-            var direction = entity.Get<DirectionComponent>().GetDirection();
+            var direction = entity.Get<AngularPositionComponent>().GetDirection();
             direction.Normalize();
             direction *= 500.0f;
             ProjectileHelper.AddProjectile(entity.Core, entity.World, pos.X, pos.Y, direction.X, direction.Y);

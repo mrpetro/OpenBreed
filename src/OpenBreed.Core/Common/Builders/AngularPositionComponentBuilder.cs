@@ -4,20 +4,17 @@ using System;
 
 namespace OpenBreed.Core.Common.Builders
 {
-    public class DirectionComponentBuilder : BaseComponentBuilder<DirectionComponentBuilder, DirectionComponent>
+    public class AngularPositionComponentBuilder : BaseComponentBuilder<AngularPositionComponentBuilder, AngularPositionComponent>
     {
         #region Private Fields
 
-        private float x;
-        private float y;
-
-        internal Vector2 Value;
+        internal float Value { get; private set; }
 
         #endregion Private Fields
 
         #region Protected Constructors
 
-        protected DirectionComponentBuilder(ICore core) : base(core)
+        protected AngularPositionComponentBuilder(ICore core) : base(core)
         {
         }
 
@@ -27,13 +24,12 @@ namespace OpenBreed.Core.Common.Builders
 
         public static IComponentBuilder New(ICore core)
         {
-            return new DirectionComponentBuilder(core);
+            return new AngularPositionComponentBuilder(core);
         }
 
         public override IEntityComponent Build()
         {
-            Value = new Vector2(x, y);
-            return new DirectionComponent(this);
+            return new AngularPositionComponent(this);
         }
 
         public override void SetProperty(object key, object value)
@@ -41,9 +37,7 @@ namespace OpenBreed.Core.Common.Builders
             var index = Convert.ToInt64(key);
 
             if (index == 1)
-                x = Convert.ToSingle(value);
-            else if (index == 2)
-                y = Convert.ToSingle(value);
+                Value = Convert.ToSingle(value);
             else
                 throw new ArgumentException("Too many property keys given.");
         }

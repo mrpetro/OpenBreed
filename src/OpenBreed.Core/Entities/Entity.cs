@@ -94,6 +94,8 @@ namespace OpenBreed.Core.Entities
         /// <returns>Entity component if exists, throws exception if not</returns>
         public T Get<T>()
         {
+            Debug.Assert(components.OfType<T>().Any(), $"Expected to get component '{typeof(T).Name}'.");
+
             return components.OfType<T>().First();
         }
 

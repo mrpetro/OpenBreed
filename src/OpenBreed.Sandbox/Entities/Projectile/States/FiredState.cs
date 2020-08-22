@@ -44,7 +44,6 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
 
             entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, animPrefix + animDirName, 0));
             entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, "Projectile - Fired"));
-            entity.Subscribe<CollisionEventArgs>(OnCollision);
         }
 
         public void Initialize(Entity entity)
@@ -59,10 +58,6 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
 
         #region Private Methods
 
-        private void OnCollision(object sender, CollisionEventArgs e)
-        {
-            //Entity.PostMsg(new StateChangeMsg(Entity, "Attacking", "Open"));
-        }
 
         #endregion Private Methods
     }

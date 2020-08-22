@@ -41,7 +41,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
         public void EnterState(Entity entity)
         {
-            var direction = entity.Get<DirectionComponent>().GetDirection();
+            var direction = entity.Get<AngularPositionComponent>().GetDirection();
 
             var animDirName = AnimHelper.ToDirectionName(direction);
             var className = entity.Get<ClassComponent>().Name;
@@ -73,7 +73,12 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             var entity = sender as Entity;
 
             if (eventArgs.Direction != Vector2.Zero)
+            {
                 entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)MovementImpulse.Walk));
+
+                var angularThrust = entity.Get<AngularVelocityComponent>();
+                angularThrust.SetDirection(new Vector2(eventArgs.Direction.X, eventArgs.Direction.Y));
+            }
         }
 
         #endregion Private Methods

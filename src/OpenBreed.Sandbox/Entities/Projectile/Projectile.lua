@@ -13,7 +13,9 @@
 		Fixtures = { "Fixtures/Projectile" } },
 	SpriteComponent = {
 		AtlasId = "Atlases/Sprites/Projectiles/Laser",
-        Order = 0.0},
+        Order = 0.0,
+        Width = 16.0,
+        Height = 16.0},
 	TextComponent = {
 		Text = "Bullet",
 		Offset = { -10, 10 },

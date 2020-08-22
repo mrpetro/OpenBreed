@@ -42,23 +42,23 @@ namespace OpenBreed.Sandbox.Entities.Button.States
             entity.Core.Commands.Post(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
             entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, "Door - Closed"));
 
-            entity.Subscribe<CollisionEventArgs>(OnCollision);
+            //entity.Subscribe<CollisionEventArgs>(OnCollision);
         }
 
         public void LeaveState(Entity entity)
         {
-            entity.Unsubscribe<CollisionEventArgs>(OnCollision);
+            //entity.Unsubscribe<CollisionEventArgs>(OnCollision);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void OnCollision(object sender, CollisionEventArgs eventArgs)
-        {
-            var entity = sender as Entity;
-            entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)ButtonImpulse.Unpress));
-        }
+        //private void OnCollision(object sender, CollisionEventArgs eventArgs)
+        //{
+        //    var entity = sender as Entity;
+        //    entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)ButtonImpulse.Unpress));
+        //}
 
         #endregion Private Methods
     }

@@ -1,6 +1,8 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Extensions;
+using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.States;
@@ -28,12 +30,12 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
             var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
             entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
-            entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
+            //entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
         public void LeaveState(Entity entity)
         {
-            entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
+            //entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
         private void OnControlDirectionChanged(object sender, ControlDirectionChangedEventArgs e)
@@ -42,11 +44,16 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 
             if (e.Direction != Vector2.Zero)
             {
-                var dir = entity.Get<DirectionComponent>();
+                var angularPos = entity.Get<AngularPositionComponent>();
 
-                if (dir.GetDirection() != e.Direction)
+                if (angularPos.GetDirection() != e.Direction)
                 {
-                    dir.SetDirection(e.Direction);
+                    //var aPos3 = new Vector3(angularPos.GetDirection());
+                    //var dPos3 = new Vector3(e.Direction);
+                    //var newVec = Vector3Extension.RotateTowards(aPos3, dPos3, 0.4f, 1.0f);
+                    var angularThrust = entity.Get<AngularVelocityComponent>();
+                    angularThrust.SetDirection(new Vector2(e.Direction.X, e.Direction.Y));
+                    //dir.SetDirection(e.Direction);
                     entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)RotationImpulse.Rotate));
                 }
             }

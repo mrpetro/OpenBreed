@@ -5,14 +5,6 @@ namespace OpenBreed.Core.Common.Builders
 {
     public class ClassComponentBuilder : BaseComponentBuilder<ClassComponentBuilder, ClassComponent>
     {
-        #region Private Fields
-
-        private float x;
-
-        private float y;
-
-        #endregion Private Fields
-
         #region Protected Constructors
 
         protected ClassComponentBuilder(ICore core) : base(core)

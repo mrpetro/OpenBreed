@@ -3,11 +3,11 @@ using System;
 
 namespace OpenBreed.Core.Common.Components
 {
-    public class AngularVelocityComponent : IEntityComponent
+    public class AngularThrustComponent : IEntityComponent
     {
         #region Public Constructors
 
-        public AngularVelocityComponent(float value)
+        public AngularThrustComponent(float value)
         {
             Value = value;
         }

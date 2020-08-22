@@ -33,6 +33,8 @@ namespace OpenBreed.Core
         /// </summary>
         AnimMan Animations { get; }
 
+        void Run();
+
         /// <summary>
         /// Logging manager
         /// </summary>
