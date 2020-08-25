@@ -78,8 +78,8 @@ namespace OpenBreed.Sandbox.Worlds
             world.Core.Commands.Post(new AddEntityCommand(world.Id, hudCamera.Id));
 
             var caret = TextHelper.CreateText(world);
-            ((Program)world.Core).KeyDown += (s, a) => ProcessKey(caret, a);
-            ((Program)world.Core).KeyPress += (s, a) => AddChar(caret, a);
+            world.Core.Inputs.KeyDown += (s, a) => ProcessKey(caret, a);
+            world.Core.Inputs.KeyPress += (s, a) => AddChar(caret, a);
 
             //caret.Subscribe<TextCaretPositionChanged>(OnTextCaretPositionChanged);
             //caret.Subscribe<TextDataChanged>(OnTextDataChanged);

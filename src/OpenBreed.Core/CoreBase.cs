@@ -10,10 +10,11 @@ using OpenTK;
 using OpenTK.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace OpenBreed.Core
 {
-    public abstract class CoreBase : GameWindow, ICore
+    public abstract class CoreBase : ICore
     {
         #region Private Fields
 
@@ -23,7 +24,7 @@ namespace OpenBreed.Core
 
         #region Protected Constructors
 
-        protected CoreBase(int width, int height, GraphicsMode mode, string title) : base(width, height, mode, title)
+        protected CoreBase()
         {
             Commands = new CommandsMan(this);
             Events = new EventsMan(this);
@@ -39,6 +40,8 @@ namespace OpenBreed.Core
         public CommandsMan Commands { get; }
         public EventsMan Events { get; }
         public WorldMan Worlds { get; }
+
+        public abstract Rectangle ClientRectangle { get; }
 
         public abstract IRenderModule Rendering { get; }
 
@@ -67,6 +70,11 @@ namespace OpenBreed.Core
         #endregion Public Properties
 
         #region Public Methods
+
+        public abstract void Run();
+
+        public abstract void Exit();
+
 
         public T GetModule<T>() where T : ICoreModule
         {
@@ -118,11 +126,6 @@ namespace OpenBreed.Core
         protected void RegisterModule(ICoreModule module)
         {
             modules.Add(module.GetType(), module);
-        }
-
-        protected override void OnUpdateFrame(FrameEventArgs e)
-        {
-            base.OnUpdateFrame(e);
         }
 
         #endregion Protected Methods

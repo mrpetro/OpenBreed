@@ -7,12 +7,16 @@ using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Systems;
 using OpenTK;
+using OpenTK.Graphics;
 using System;
+using System.Drawing;
 
 namespace OpenBreed.Game
 {
-    internal class Game : ICore
+    internal class Game : CoreBase
     {
+
+
         #region Private Fields
 
         private IDatabase database;
@@ -22,79 +26,48 @@ namespace OpenBreed.Game
 
         #region Public Constructors
 
-        public Game(IDatabase database)
+        public Game(IDatabase database)// : 
+           // base(800, 600, new GraphicsMode(new ColorFormat(8, 8, 8, 8), 24, 8), "OpenBreed")
         {
             this.database = database;
+        }
+
+        public override IRenderModule Rendering => throw new NotImplementedException();
+
+        public override IAudioModule Sounds => throw new NotImplementedException();
+
+        public override AnimMan Animations => throw new NotImplementedException();
+
+        public override ILogMan Logging => throw new NotImplementedException();
+
+        public override JobMan Jobs => throw new NotImplementedException();
+
+        public override FsmMan StateMachines => throw new NotImplementedException();
+
+        public override PlayersMan Players => throw new NotImplementedException();
+
+        public override ItemsMan Items => throw new NotImplementedException();
+
+        public override InputsMan Inputs => throw new NotImplementedException();
+
+        public override IScriptMan Scripts => throw new NotImplementedException();
+
+        public override Matrix4 ClientTransform { get => throw new NotImplementedException(); protected set => throw new NotImplementedException(); }
+
+        public override float ClientRatio => throw new NotImplementedException();
+
+        public override Rectangle ClientRectangle => throw new NotImplementedException();
+
+        public override void Exit()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public IRenderModule Rendering => throw new NotImplementedException();
-
-        public IAudioModule Sounds => throw new NotImplementedException();
-
-        public AnimMan Animations => throw new NotImplementedException();
-
-        public ILogMan Logging => throw new NotImplementedException();
-
-        public JobMan Jobs => throw new NotImplementedException();
-
-        public EntityMan Entities => throw new NotImplementedException();
-
-        public FsmMan StateMachines => throw new NotImplementedException();
-
-        public PlayersMan Players => throw new NotImplementedException();
-
-        public ItemsMan Items => throw new NotImplementedException();
-
-        public InputsMan Inputs => throw new NotImplementedException();
-
-        public WorldMan Worlds => throw new NotImplementedException();
-
-        public CommandsMan Commands => throw new NotImplementedException();
-
-        public EventsMan Events => throw new NotImplementedException();
-
-        public IScriptMan Scripts => throw new NotImplementedException();
-
-        public Matrix4 ClientTransform => throw new NotImplementedException();
-
-        public System.Drawing.Rectangle ClientRectangle => throw new NotImplementedException();
-
-        public float ClientRatio => throw new NotImplementedException();
-
-        #endregion Public Properties
-
-        #region Public Methods
-
-        public void Exit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public TBuilder GetBuilder<TBuilder>() where TBuilder : IComponentBuilder
-        {
-            throw new NotImplementedException();
-        }
-
-        public T GetModule<T>() where T : ICoreModule
-        {
-            throw new NotImplementedException();
-        }
-
-        public T GetSystemByEntityId<T>(int entityId) where T : IWorldSystem
-        {
-            throw new NotImplementedException();
-        }
-
-        public T GetSystemByWorldId<T>(int worldId) where T : IWorldSystem
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Run()
+        public override void Run()
         {
             unitOfWork = database.CreateUnitOfWork();
 
@@ -103,6 +76,7 @@ namespace OpenBreed.Game
 
             //MainLoophere
         }
+
 
         #endregion Public Methods
     }

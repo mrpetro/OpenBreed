@@ -37,12 +37,15 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Reflection;
 
 namespace OpenBreed.Sandbox
 {
     public class Program : CoreBase
     {
+        private GameWindow window;
+
         #region Private Fields
 
         private string appVersion;
@@ -52,11 +55,23 @@ namespace OpenBreed.Sandbox
         #region Public Constructors
 
 
+
         public Program()
-            : base(800, 600, new GraphicsMode(new ColorFormat(8, 8, 8, 8), 24, 8), "OpenBreed")
         {
             appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            window = new GameWindow(800, 600, new GraphicsMode(new ColorFormat(8, 8, 8, 8), 24, 8), "OpenBreed");
 
+            window.MouseDown += (s,a) => Inputs.OnMouseDown(a);
+            window.MouseUp += (s, a) => Inputs.OnMouseUp(a);
+            window.MouseMove += (s, a) => Inputs.OnMouseMove(a);
+            window.MouseWheel += (s, a) => Inputs.OnMouseWheel(a);
+            window.KeyDown += (s, a) => Inputs.OnKeyDown(a);
+            window.KeyUp += (s, a) => Inputs.OnKeyUp(a);
+            window.KeyPress += (s, a) => Inputs.OnKeyPress(a);
+            window.Load += (s,a) => OnWindowLoad();
+            window.Resize += (s, a) => OnResize();
+            window.UpdateFrame += OnUpdateFrame;
+            window.RenderFrame += OnRenderFrame;
 
             Logging = new LogMan(this);
 
@@ -79,7 +94,7 @@ namespace OpenBreed.Sandbox
             RegisterModule(Sounds);
 
 
-            VSync = VSyncMode.On;
+            window.VSync = VSyncMode.On;
         }
 
         #endregion Public Constructors
@@ -113,6 +128,8 @@ namespace OpenBreed.Sandbox
         public override Matrix4 ClientTransform { get; protected set; }
 
         public override float ClientRatio { get { return (float)ClientRectangle.Width / (float)ClientRectangle.Height; } }
+
+        public override Rectangle ClientRectangle => window.ClientRectangle;
 
         #endregion Public Properties
 
@@ -174,48 +191,6 @@ namespace OpenBreed.Sandbox
 
         #region Protected Methods
 
-        protected override void OnMouseDown(MouseButtonEventArgs e)
-        {
-            base.OnMouseDown(e);
-            Inputs.OnMouseDown(e);
-        }
-
-        protected override void OnMouseUp(MouseButtonEventArgs e)
-        {
-            base.OnMouseUp(e);
-            Inputs.OnMouseUp(e);
-        }
-
-        protected override void OnMouseMove(MouseMoveEventArgs e)
-        {
-            base.OnMouseMove(e);
-            Inputs.OnMouseMove(e);
-        }
-
-        protected override void OnMouseWheel(MouseWheelEventArgs e)
-        {
-            base.OnMouseWheel(e);
-            Inputs.OnMouseWheel(e);
-        }
-
-        protected override void OnKeyDown(KeyboardKeyEventArgs e)
-        {
-            base.OnKeyDown(e);
-            Inputs.OnKeyDown(e);
-        }
-
-        protected override void OnKeyUp(KeyboardKeyEventArgs e)
-        {
-            base.OnKeyUp(e);
-            Inputs.OnKeyUp(e);
-        }
-
-        protected override void OnKeyPress(KeyPressEventArgs e)
-        {
-            base.OnKeyPress(e);
-            Inputs.OnKeyPress(e);
-        }
-
         private void RegisterSystems()
         {
             FollowerSystem.RegisterHandlers(Commands);
@@ -232,11 +207,11 @@ namespace OpenBreed.Sandbox
             PhysicsSystem.RegisterHandlers(Commands);
         }
 
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
 
-            Title = $"Open Breed Sandbox (Version: {appVersion} Vsync: {VSync})";
+
+        private void OnWindowLoad()
+        {
+            window.Title = $"Open Breed Sandbox (Version: {appVersion} Vsync: {window.VSync})";
 
             RegisterSystems();
             RegisterComponentBuilders();
@@ -244,7 +219,7 @@ namespace OpenBreed.Sandbox
             RegisterFixtures();
             RegisterEntityTemplates();
             RegisterItems();
- 
+
             Inputs.RegisterHandler(new WalkingControlHandler());
             Inputs.RegisterHandler(new AttackControlHandler());
 
@@ -282,7 +257,7 @@ namespace OpenBreed.Sandbox
 
             var arrowTex = Rendering.Textures.Create("Textures/Sprites/Arrow", @"Content\Graphics\ArrowSpriteSet.png");
             Rendering.Sprites.Create(ActorHelper.SPRITE_ARROW, arrowTex.Id, 32, 32, 8, 5);
-            
+
             var turretTex = Rendering.Textures.Create("Textures/Sprites/Turret", @"Content\Graphics\TurretSpriteSet.png");
             Rendering.Sprites.Create(TurretHelper.SPRITE_TURRET, turretTex.Id, 32, 32, 8, 2);
 
@@ -325,10 +300,8 @@ namespace OpenBreed.Sandbox
             Scripts.TryInvokeFunction("EngineInitialized");
         }
 
-        protected override void OnResize(EventArgs e)
+        private void OnResize()
         {
-            base.OnResize(e);
-
             GL.LoadIdentity();
             GL.Viewport(0, 0, ClientRectangle.Width, ClientRectangle.Height);
             GL.MatrixMode(MatrixMode.Modelview);
@@ -336,14 +309,12 @@ namespace OpenBreed.Sandbox
             GL.LoadMatrix(ref ortho);
             ClientTransform = Matrix4.Identity;
             ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateTranslation(0.0f, -ClientRectangle.Height, 0.0f));
-            ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateScale(1.0f,-1.0f,1.0f));
+            ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateScale(1.0f, -1.0f, 1.0f));
             Rendering.OnClientResized(ClientRectangle.Width, ClientRectangle.Height);
         }
 
-        protected override void OnUpdateFrame(FrameEventArgs e)
+        private void OnUpdateFrame(object sender, FrameEventArgs e)
         {
-            base.OnUpdateFrame(e);
-
             Commands.ExecuteEnqueued();
 
             Worlds.Cleanup();
@@ -359,13 +330,11 @@ namespace OpenBreed.Sandbox
             Jobs.Update((float)e.Time);
         }
 
-        protected override void OnRenderFrame(FrameEventArgs e)
+        protected void OnRenderFrame(object sender, FrameEventArgs e)
         {
-            base.OnRenderFrame(e);
-
             Rendering.Draw((float)e.Time);
 
-            SwapBuffers();
+            window.SwapBuffers();
         }
 
         #endregion Protected Methods
@@ -383,7 +352,7 @@ namespace OpenBreed.Sandbox
 
             //program.Sounds.Sounds.PlaySound(0);
 
-            program.Run(30.0, 60.0);
+            program.Run();
         }
 
 
@@ -441,6 +410,16 @@ namespace OpenBreed.Sandbox
         private void RegisterItems()
         {
             Items.Register(new CreditsItem());
+        }
+
+        public override void Run()
+        {
+            window.Run(30.0, 60.0);
+        }
+
+        public override void Exit()
+        {
+            window.Exit();
         }
 
         #endregion Private Methods
