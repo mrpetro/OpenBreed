@@ -86,6 +86,7 @@ namespace OpenBreed.Common.XmlDatabase
             RegisterRepository(new XmlTextsRepository(_context));
             RegisterRepository(new XmlMapsRepository(_context));
             RegisterRepository(new XmlSoundsRepository(_context));
+            RegisterRepository(new XmlScriptsRepository(_context));
         }
 
         #endregion Private Methods
