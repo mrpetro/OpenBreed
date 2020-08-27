@@ -73,6 +73,7 @@
     </Compile>
     <Compile Include="Database\Entries\DbDataSourceEntryVM.cs" />
     <Compile Include="Database\Tables\DbDataSourceTableVM.cs" />
+    <Compile Include="Database\Tables\DbScriptTableVM.cs" />
     <Compile Include="DataSources\DataSourceEditorVM.cs" />
     <Compile Include="DataSources\DataSourceVM.cs" />
     <Compile Include="DataSources\FileDataSourceVM.cs" />
