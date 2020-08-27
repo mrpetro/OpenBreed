@@ -111,6 +111,17 @@ namespace OpenBreed.Common.XmlDatabase
             return table;
         }
 
+        internal XmlDbScriptTableDef GetScriptsTable()
+        {
+            var table = Data.Tables.OfType<XmlDbScriptTableDef>().FirstOrDefault();
+            if (table == null)
+            {
+                table = new XmlDbScriptTableDef();
+                Data.Tables.Add(table);
+            }
+            return table;
+        }
+
         internal XmlDbImageTableDef GetImageTable()
         {
             var table = Data.Tables.OfType<XmlDbImageTableDef>().FirstOrDefault();

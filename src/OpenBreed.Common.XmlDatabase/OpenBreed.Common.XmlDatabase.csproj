@@ -78,6 +78,8 @@
     <Compile Include="Items\Palettes\XmlPaletteFromBinaryEntry.cs" />
     <Compile Include="Items\Palettes\XmlPaletteFromMapEntry.cs" />
     <Compile Include="Items\Palettes\XmlPaletteEntry.cs" />
+    <Compile Include="Items\Scripts\XmlScriptEmbeddedEntry.cs" />
+    <Compile Include="Items\Scripts\XmlScriptEntry.cs" />
     <Compile Include="Items\Sounds\XmlSoundEntry.cs" />
     <Compile Include="Items\Sprites\XmlSpriteCoords.cs" />
     <Compile Include="Items\Sprites\XmlSpriteSetEntry.cs" />
@@ -99,11 +101,13 @@
     <Compile Include="Repositories\XmlRepositoryBase.cs" />
     <Compile Include="Repositories\XmlSoundsRepository.cs" />
     <Compile Include="Repositories\XmlSpriteSetsRepository.cs" />
+    <Compile Include="Repositories\XmlScriptsRepository.cs" />
     <Compile Include="Repositories\XmlTextsRepository.cs" />
     <Compile Include="Repositories\XmlTileSetsRepository.cs" />
     <Compile Include="Resources\ResourceDef.cs" />
     <Compile Include="Resources\ResourceLevelDef.cs" />
     <Compile Include="Tables\XmlDbActionSetTableDef.cs" />
+    <Compile Include="Tables\XmlDbScriptTableDef.cs" />
     <Compile Include="Tables\XmlDbTextTableDef.cs" />
     <Compile Include="Tables\XmlDbDataSourceTableDef.cs" />
     <Compile Include="Tables\XmlDbTableDef.cs" />

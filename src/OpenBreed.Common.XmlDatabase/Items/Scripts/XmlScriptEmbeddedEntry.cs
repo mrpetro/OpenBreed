@@ -11,13 +11,13 @@ using System.Xml.Serialization;
 namespace OpenBreed.Common.XmlDatabase.Items.Texts
 {
     [Serializable]
-    [Description("Text embedded"), Category("Appearance")]
-    public class XmlTextEmbeddedEntry : XmlTextEntry, ITextEmbeddedEntry
+    [Description("Script embedded"), Category("Appearance")]
+    public class XmlScriptEmbeddedEntry : XmlScriptEntry, IScriptEmbeddedEntry
     {
         #region Public Properties
 
-        [XmlElement("Text")]
-        public string Text { get; set; }
+        [XmlElement("Script")]
+        public string Script { get; set; }
 
         #endregion Public Properties
 
@@ -25,12 +25,12 @@ namespace OpenBreed.Common.XmlDatabase.Items.Texts
 
         public override IEntry Copy()
         {
-            return new XmlTextEmbeddedEntry()
+            return new XmlScriptEmbeddedEntry()
             {
                 Id = this.Id,
                 Description = this.Description,
                 DataRef = this.DataRef,
-                Text = this.Text
+                Script = this.Script
             };
         }
 
