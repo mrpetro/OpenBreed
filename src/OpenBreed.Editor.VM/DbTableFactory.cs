@@ -42,6 +42,8 @@ namespace OpenBreed.Editor.VM
                 return new DbPaletteTableVM();
             else if (repository is IRepository<ITextEntry>)
                 return new DbTextTableVM();
+            else if (repository is IRepository<IScriptEntry>)
+                return new DbTextTableVM();
             else
                 throw new NotImplementedException(repository.ToString());
         }
