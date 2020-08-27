@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common.Data;
 using OpenBreed.Common.DataSources;
 using OpenBreed.Common.Formats;
+using OpenBreed.Database.Interface.Items.Assets;
 using System;
 using System.Collections.Generic;
 

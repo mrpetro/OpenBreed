@@ -75,9 +75,6 @@
     <Compile Include="DataSources\DataSourceBase.cs" />
     <Compile Include="DataSources\EPFArchiveFileDataSource.cs" />
     <Compile Include="DataSources\FileDataSource.cs" />
-    <Compile Include="DataSources\IDataSourceEntry.cs" />
-    <Compile Include="DataSources\IEPFArchiveDataSourceEntry.cs" />
-    <Compile Include="DataSources\IFileDataSourceEntry.cs" />
     <Compile Include="Data\ActionSetsDataProvider.cs" />
     <Compile Include="Data\DataSourceProvider.cs" />
     <Compile Include="Data\DataProvider.cs" />
@@ -94,17 +91,14 @@
     <Compile Include="Data\TileSetsDataProvider.cs" />
     <Compile Include="Formats\IFFImageFormat.cs" />
     <Compile Include="Formats\DataFormat.cs" />
-    <Compile Include="Formats\FormatParameter.cs" />
     <Compile Include="Formats\PCMSoundFormat.cs" />
     <Compile Include="Helpers\IOHelper.cs" />
     <Compile Include="Helpers\XmlHelper.cs" />
     <Compile Include="IDatabase.cs" />
-    <Compile Include="Images\IImageEntry.cs" />
     <Compile Include="Data\MapsDataProvider.cs" />
     <Compile Include="Images\Readers\IFF\Helpers\BMHDBlock.cs" />
     <Compile Include="Images\Readers\IFF\IFFImageReader.cs" />
     <Compile Include="Maps\IMapDataBlock.cs" />
-    <Compile Include="Maps\IMapEntry.cs" />
     <Compile Include="Maps\Blocks\MapBodyBlock.cs" />
     <Compile Include="Maps\Blocks\MapMissionBlock.cs" />
     <Compile Include="Maps\Blocks\MapPaletteBlock.cs" />
@@ -112,31 +106,10 @@
     <Compile Include="Maps\Blocks\MapTextBlock.cs" />
     <Compile Include="Maps\Blocks\MapUnknownBlock.cs" />
     <Compile Include="Maps\Blocks\MapUInt32Block.cs" />
-    <Compile Include="Palettes\IPaletteFromBinaryEntry.cs" />
-    <Compile Include="Palettes\IPaletteFromMapEntry.cs" />
-    <Compile Include="Palettes\IPaletteEntry.cs" />
-    <Compile Include="Actions\IActionEntry.cs" />
-    <Compile Include="Actions\IActionPresentation.cs" />
-    <Compile Include="Actions\IActionTriggers.cs" />
-    <Compile Include="Actions\IActionSetEntry.cs" />
     <Compile Include="Actions\ActionSetModel.cs" />
-    <Compile Include="Scripts\IScriptEntry.cs" />
-    <Compile Include="Scripts\IScriptEmbeddedEntry.cs" />
-    <Compile Include="Sounds\ISoundEntry.cs" />
     <Compile Include="Sounds\SoundModel.cs" />
-    <Compile Include="Sprites\ISpriteCoords.cs" />
-    <Compile Include="Sprites\ISpriteSetEntry.cs" />
-    <Compile Include="Sprites\ISpriteSetFromImageEntry.cs" />
-    <Compile Include="Sprites\ISpriteSetFromSprEntry.cs" />
-    <Compile Include="Texts\ITextEntry.cs" />
-    <Compile Include="Texts\ITextEmbeddedEntry.cs" />
-    <Compile Include="Texts\ITextFromMapEntry.cs" />
     <Compile Include="Texts\TextModel.cs" />
-    <Compile Include="Tiles\ITileSetFromImageEntry.cs" />
-    <Compile Include="Tiles\ITileSetFromBlkEntry.cs" />
-    <Compile Include="Tiles\ITileSetEntry.cs" />
     <Compile Include="Helpers\BitmapHelper.cs" />
-    <Compile Include="IEntry.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="FileMan.cs" />
     <Compile Include="Formats\DataFormatMan.cs" />
@@ -167,7 +140,6 @@
     <Compile Include="Readers\BigEndianBinaryReader.cs" />
     <Compile Include="Sounds\PCMPlayer.cs" />
     <Compile Include="Sounds\WaveMemoryStream.cs" />
-    <Compile Include="Assets\IAssetEntry.cs" />
     <Compile Include="Assets\IAssetsFactory.cs" />
     <Compile Include="Assets\AssetBase.cs" />
     <Compile Include="Formats\ABHCMAPFormat.cs" />
@@ -198,6 +170,10 @@
     <ProjectReference Include="..\..\..\EPFArchive\src\EPFArchive\EPFArchive.csproj">
       <Project>{52249c4e-eaf8-45ce-a757-aaa3c3c125d4}</Project>
       <Name>EPFArchive</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj">
+      <Project>{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}</Project>
+      <Name>OpenBreed.Database.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
