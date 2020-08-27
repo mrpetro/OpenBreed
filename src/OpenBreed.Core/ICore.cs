@@ -101,6 +101,11 @@ namespace OpenBreed.Core
         Rectangle ClientRectangle { get; }
 
         /// <summary>
+        /// Core client instance
+        /// </summary>
+        ICoreClient Client { get; }
+
+        /// <summary>
         /// Client display aspect ratio
         /// </summary>
         float ClientRatio { get; }
@@ -131,6 +136,8 @@ namespace OpenBreed.Core
         T GetSystemByEntityId<T>(int entityId) where T : IWorldSystem;
 
         T GetSystemByWorldId<T>(int worldId) where T : IWorldSystem;
+
+        void Update(float dt);
 
         #endregion Public Methods
     }

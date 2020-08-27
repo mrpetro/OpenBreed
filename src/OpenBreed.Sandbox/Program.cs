@@ -59,6 +59,9 @@ namespace OpenBreed.Sandbox
         public Program()
         {
             appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+            Client = new GameWindowClient(this, 800, 600, "OpenBreed");
+
             window = new GameWindow(800, 600, new GraphicsMode(new ColorFormat(8, 8, 8, 8), 24, 8), "OpenBreed");
 
             window.MouseDown += (s,a) => Inputs.OnMouseDown(a);
@@ -70,7 +73,7 @@ namespace OpenBreed.Sandbox
             window.KeyPress += (s, a) => Inputs.OnKeyPress(a);
             window.Load += (s,a) => OnWindowLoad();
             window.Resize += (s, a) => OnResize();
-            window.UpdateFrame += OnUpdateFrame;
+            window.UpdateFrame += (s,a) => Update((float)a.Time);
             window.RenderFrame += OnRenderFrame;
 
             Logging = new LogMan(this);
@@ -313,7 +316,7 @@ namespace OpenBreed.Sandbox
             Rendering.OnClientResized(ClientRectangle.Width, ClientRectangle.Height);
         }
 
-        private void OnUpdateFrame(object sender, FrameEventArgs e)
+        public override void Update(float dt)
         {
             Commands.ExecuteEnqueued();
 
@@ -326,8 +329,8 @@ namespace OpenBreed.Sandbox
             Inputs.Update();
             Players.ApplyInputs();
             //StateMachine.Update((float)e.Time);
-            Worlds.Update((float)e.Time);
-            Jobs.Update((float)e.Time);
+            Worlds.Update(dt);
+            Jobs.Update(dt);
         }
 
         protected void OnRenderFrame(object sender, FrameEventArgs e)

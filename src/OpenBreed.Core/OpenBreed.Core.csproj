@@ -113,6 +113,7 @@
     <Compile Include="Extensions\QuaternionExtension.cs" />
     <Compile Include="Extensions\Vector2Extension.cs" />
     <Compile Include="Extensions\Vector3Extension.cs" />
+    <Compile Include="ICoreClient.cs" />
     <Compile Include="Modules\Animation\Builders\AnimationComponentBuilder.cs" />
     <Compile Include="Common\Builders\BaseComponentBuilder.cs" />
     <Compile Include="Common\Builders\IBuilder.cs" />

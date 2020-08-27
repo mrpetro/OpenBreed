@@ -63,6 +63,8 @@ namespace OpenBreed.Core
 
         public abstract IScriptMan Scripts { get; }
 
+        public ICoreClient Client { get; protected set; }
+
         public abstract Matrix4 ClientTransform { get; protected set; }
 
         public abstract float ClientRatio { get; }
@@ -80,6 +82,8 @@ namespace OpenBreed.Core
         {
             return (T)modules[typeof(T)];
         }
+
+        public abstract void Update(float dt);
 
         public bool ExecuteCommand(ICommand cmd)
         {

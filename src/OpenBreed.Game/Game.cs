@@ -67,16 +67,18 @@ namespace OpenBreed.Game
 
         #region Public Properties
 
+        public override void Update(float dt)
+        {
+            throw new NotImplementedException();
+        }
+
         public override void Run()
         {
             unitOfWork = database.CreateUnitOfWork();
 
 
-
-
             //MainLoophere
         }
-
 
         #endregion Public Methods
     }

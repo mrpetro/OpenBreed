@@ -134,6 +134,7 @@
     <Compile Include="Entities\Text\TextHelper.cs" />
     <Compile Include="Entities\Turret\TurretHelper.cs" />
     <Compile Include="Entities\WorldGate\WorldGateHelper.cs" />
+    <Compile Include="GameWindowClient.cs" />
     <Compile Include="Helpers\AnimHelper.cs" />
     <Compile Include="IWorldReader.cs" />
     <Compile Include="Jobs\CursorCoordsTextUpdateJob.cs" />
