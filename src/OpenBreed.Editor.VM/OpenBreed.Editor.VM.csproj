@@ -220,9 +220,13 @@
       <Project>{52249c4e-eaf8-45ce-a757-aaa3c3c125d4}</Project>
       <Name>EPFArchive</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common.XmlDatabase\OpenBreed.Common.XmlDatabase.csproj">
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj">
+      <Project>{e1a9b090-0090-4c7c-bddf-b0bb4509dc63}</Project>
+      <Name>OpenBreed.Database.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Database.Xml\OpenBreed.Database.Xml.csproj">
       <Project>{c4095745-e19c-4de9-b2e4-37e55fa0d225}</Project>
-      <Name>OpenBreed.Common.XmlDatabase</Name>
+      <Name>OpenBreed.Database.Xml</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
       <Project>{9894e7f4-7c85-4173-9d05-f50cfd2e4163}</Project>

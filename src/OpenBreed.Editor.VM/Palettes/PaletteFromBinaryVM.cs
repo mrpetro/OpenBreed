@@ -2,7 +2,8 @@
 using OpenBreed.Common.Assets;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Palettes;
-using OpenBreed.Common.XmlDatabase.Items.Assets;
+using OpenBreed.Database.Interface.Items.Palettes;
+using OpenBreed.Database.Xml.Items.Assets;
 using OpenBreed.Editor.VM.Base;
 using System;
 using System.Collections.Generic;

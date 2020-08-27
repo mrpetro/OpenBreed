@@ -24,7 +24,7 @@ using OpenBreed.Common.Formats;
 using OpenBreed.Common.Tiles;
 using OpenBreed.Common.Sprites;
 using OpenBreed.Common.Actions;
-using OpenBreed.Common.XmlDatabase;
+using OpenBreed.Database.Xml;
 using OpenBreed.Common.Sounds;
 using OpenBreed.Editor.VM.Sounds;
 using OpenBreed.Editor.VM.Database.Entries;
@@ -37,6 +37,15 @@ using OpenBreed.Editor.VM.Logging;
 using OpenBreed.Common.Texts;
 using OpenBreed.Editor.VM.Texts;
 using OpenBreed.Common.DataSources;
+using OpenBreed.Database.Interface.Items.Actions;
+using OpenBreed.Database.Interface.Items.Tiles;
+using OpenBreed.Database.Interface.Items.Palettes;
+using OpenBreed.Database.Interface.Items.Sounds;
+using OpenBreed.Database.Interface.Items.DataSources;
+using OpenBreed.Database.Interface.Items.Images;
+using OpenBreed.Database.Interface.Items.Texts;
+using OpenBreed.Database.Interface.Items.Sprites;
+using OpenBreed.Database.Interface.Items.Maps;
 
 namespace OpenBreed.Editor.VM
 {

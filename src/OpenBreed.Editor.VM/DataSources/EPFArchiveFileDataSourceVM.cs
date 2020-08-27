@@ -1,7 +1,9 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Assets;
 using OpenBreed.Common.DataSources;
-using OpenBreed.Common.XmlDatabase.Items.Assets;
+using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.DataSources;
+using OpenBreed.Database.Xml.Items.Assets;
 using System;
 using System.Collections.Generic;
 using System.Linq;

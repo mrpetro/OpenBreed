@@ -667,6 +667,10 @@
       <Project>{9894e7f4-7c85-4173-9d05-f50cfd2e4163}</Project>
       <Name>OpenBreed.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj">
+      <Project>{e1a9b090-0090-4c7c-bddf-b0bb4509dc63}</Project>
+      <Name>OpenBreed.Database.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Editor.Cfg\OpenBreed.Editor.Cfg.csproj">
       <Project>{91F957F8-8C01-462C-9FE3-276BB56A7B7E}</Project>
       <Name>OpenBreed.Editor.Cfg</Name>

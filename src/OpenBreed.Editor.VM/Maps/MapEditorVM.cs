@@ -11,6 +11,7 @@ using OpenBreed.Editor.VM.Sprites;
 using OpenBreed.Common;
 using OpenBreed.Common.Maps;
 using System.ComponentModel;
+using OpenBreed.Database.Interface.Items.Maps;
 
 namespace OpenBreed.Editor.VM.Maps
 {

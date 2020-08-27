@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.DataSources;
+using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.DataSources;
 
 namespace OpenBreed.Editor.VM.DataSources
 {

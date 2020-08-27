@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Editor.VM", "OpenBreed.Editor.VM\OpenBreed.Editor.VM.csproj", "{4E57CB0D-A13B-48A9-9D47-52B96D75F283}"
 EndProject
@@ -19,11 +19,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Editor.UI.WinForm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Common.Graphics", "..\OpenBreed.Common\src\OpenBreed.Common.Graphics\OpenBreed.Common.Graphics.csproj", "{8BFE3867-C6E7-437D-8D2B-1290D202BEB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Common.XmlDatabase", "..\OpenBreed.Common\src\OpenBreed.Common.XmlDatabase\OpenBreed.Common.XmlDatabase.csproj", "{C4095745-E19C-4DE9-B2E4-37E55FA0D225}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Database.Xml", "..\OpenBreed.Common\src\OpenBreed.Database.Xml\OpenBreed.Database.Xml.csproj", "{C4095745-E19C-4DE9-B2E4-37E55FA0D225}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{4EC1463F-E1B7-439F-B038-2FFE4EB75BE5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other", "Other", "{CF44CF7A-FF57-4727-A0B6-2CF536FF5284}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Database.Interface", "..\OpenBreed.Common\src\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj", "{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -194,6 +196,26 @@ Global
 		{C4095745-E19C-4DE9-B2E4-37E55FA0D225}.Release|x64.Build.0 = Release|Any CPU
 		{C4095745-E19C-4DE9-B2E4-37E55FA0D225}.Release|x86.ActiveCfg = Release|Any CPU
 		{C4095745-E19C-4DE9-B2E4-37E55FA0D225}.Release|x86.Build.0 = Release|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Debug|Win32.Build.0 = Debug|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Debug|x64.Build.0 = Debug|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Debug|x86.Build.0 = Debug|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Release|Win32.ActiveCfg = Release|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Release|Win32.Build.0 = Release|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Release|x64.ActiveCfg = Release|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Release|x64.Build.0 = Release|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Release|x86.ActiveCfg = Release|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -206,6 +228,7 @@ Global
 		{C4095745-E19C-4DE9-B2E4-37E55FA0D225} = {4EC1463F-E1B7-439F-B038-2FFE4EB75BE5}
 		{4EC1463F-E1B7-439F-B038-2FFE4EB75BE5} = {C6944750-FB54-4033-89BF-73BFF6850DA7}
 		{CF44CF7A-FF57-4727-A0B6-2CF536FF5284} = {C6944750-FB54-4033-89BF-73BFF6850DA7}
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63} = {4EC1463F-E1B7-439F-B038-2FFE4EB75BE5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E7F78DD2-AA67-4DDC-824E-6BCF925446B0}

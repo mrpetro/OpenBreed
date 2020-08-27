@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common;
+using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.Palettes;
 
 namespace OpenBreed.Editor.VM.Palettes
 {
