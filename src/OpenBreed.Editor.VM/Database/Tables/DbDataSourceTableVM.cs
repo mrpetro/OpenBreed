@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.DataSources;
+using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.DataSources;
 
 namespace OpenBreed.Editor.VM.Database.Tables

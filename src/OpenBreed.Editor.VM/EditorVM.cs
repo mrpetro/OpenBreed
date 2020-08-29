@@ -46,6 +46,7 @@ using OpenBreed.Database.Interface.Items.Images;
 using OpenBreed.Database.Interface.Items.Texts;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Database.Interface.Items.Maps;
+using OpenBreed.Database.Interface;
 
 namespace OpenBreed.Editor.VM
 {

@@ -26,6 +26,7 @@ using OpenBreed.Database.Interface.Items.Assets;
 using OpenBreed.Database.Interface.Items.Maps;
 using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Database.Interface.Items.Texts;
+using OpenBreed.Database.Interface;
 
 namespace OpenBreed.Editor.VM
 {
