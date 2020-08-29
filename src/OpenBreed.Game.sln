@@ -26,9 +26,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Common", "..\Open
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPFArchive", "..\EPFArchive\src\EPFArchive\EPFArchive.csproj", "{52249C4E-EAF8-45CE-A757-AAA3C3C125D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Common.XmlDatabase", "..\OpenBreed.Common\src\OpenBreed.Common.XmlDatabase\OpenBreed.Common.XmlDatabase.csproj", "{C4095745-E19C-4DE9-B2E4-37E55FA0D225}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Game", "OpenBreed.Game\OpenBreed.Game.csproj", "{6FC15DD4-5043-4BE3-AA9A-D69B9A60A626}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Database.Interface", "..\OpenBreed.Common\src\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj", "{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Database.Xml", "..\OpenBreed.Common\src\OpenBreed.Database.Xml\OpenBreed.Database.Xml.csproj", "{0BECCD62-1285-498B-877D-86F66D415B71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -102,14 +104,6 @@ Global
 		{52249C4E-EAF8-45CE-A757-AAA3C3C125D4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{52249C4E-EAF8-45CE-A757-AAA3C3C125D4}.Release|x64.ActiveCfg = Release|Any CPU
 		{52249C4E-EAF8-45CE-A757-AAA3C3C125D4}.Release|x64.Build.0 = Release|Any CPU
-		{C4095745-E19C-4DE9-B2E4-37E55FA0D225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C4095745-E19C-4DE9-B2E4-37E55FA0D225}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C4095745-E19C-4DE9-B2E4-37E55FA0D225}.Debug|x64.ActiveCfg = Debug|x64
-		{C4095745-E19C-4DE9-B2E4-37E55FA0D225}.Debug|x64.Build.0 = Debug|x64
-		{C4095745-E19C-4DE9-B2E4-37E55FA0D225}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C4095745-E19C-4DE9-B2E4-37E55FA0D225}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C4095745-E19C-4DE9-B2E4-37E55FA0D225}.Release|x64.ActiveCfg = Release|Any CPU
-		{C4095745-E19C-4DE9-B2E4-37E55FA0D225}.Release|x64.Build.0 = Release|Any CPU
 		{6FC15DD4-5043-4BE3-AA9A-D69B9A60A626}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6FC15DD4-5043-4BE3-AA9A-D69B9A60A626}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FC15DD4-5043-4BE3-AA9A-D69B9A60A626}.Debug|x64.ActiveCfg = Debug|x64
@@ -118,6 +112,22 @@ Global
 		{6FC15DD4-5043-4BE3-AA9A-D69B9A60A626}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6FC15DD4-5043-4BE3-AA9A-D69B9A60A626}.Release|x64.ActiveCfg = Release|Any CPU
 		{6FC15DD4-5043-4BE3-AA9A-D69B9A60A626}.Release|x64.Build.0 = Release|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Debug|x64.Build.0 = Debug|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Release|x64.ActiveCfg = Release|Any CPU
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}.Release|x64.Build.0 = Release|Any CPU
+		{0BECCD62-1285-498B-877D-86F66D415B71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BECCD62-1285-498B-877D-86F66D415B71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BECCD62-1285-498B-877D-86F66D415B71}.Debug|x64.ActiveCfg = Debug|x64
+		{0BECCD62-1285-498B-877D-86F66D415B71}.Debug|x64.Build.0 = Debug|x64
+		{0BECCD62-1285-498B-877D-86F66D415B71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BECCD62-1285-498B-877D-86F66D415B71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BECCD62-1285-498B-877D-86F66D415B71}.Release|x64.ActiveCfg = Release|x64
+		{0BECCD62-1285-498B-877D-86F66D415B71}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -125,7 +135,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{9894E7F4-7C85-4173-9D05-F50CFD2E4163} = {FB7D9CCD-64E4-46A6-B723-F64B48C35D2E}
 		{52249C4E-EAF8-45CE-A757-AAA3C3C125D4} = {FB7D9CCD-64E4-46A6-B723-F64B48C35D2E}
-		{C4095745-E19C-4DE9-B2E4-37E55FA0D225} = {FB7D9CCD-64E4-46A6-B723-F64B48C35D2E}
+		{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63} = {FB7D9CCD-64E4-46A6-B723-F64B48C35D2E}
+		{0BECCD62-1285-498B-877D-86F66D415B71} = {FB7D9CCD-64E4-46A6-B723-F64B48C35D2E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {36FCF31C-C702-49A1-8355-120BD345CF95}

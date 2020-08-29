@@ -6,6 +6,7 @@ using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Systems;
+using OpenBreed.Database.Interface;
 using OpenTK;
 using OpenTK.Graphics;
 using System;

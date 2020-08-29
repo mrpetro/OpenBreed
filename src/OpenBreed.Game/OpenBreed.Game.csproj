@@ -77,13 +77,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common.XmlDatabase\OpenBreed.Common.XmlDatabase.csproj">
-      <Project>{C4095745-E19C-4DE9-B2E4-37E55FA0D225}</Project>
-      <Name>OpenBreed.Common.XmlDatabase</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
       <Project>{9894E7F4-7C85-4173-9D05-F50CFD2E4163}</Project>
       <Name>OpenBreed.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj">
+      <Project>{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}</Project>
+      <Name>OpenBreed.Database.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Database.Xml\OpenBreed.Database.Xml.csproj">
+      <Project>{0BECCD62-1285-498B-877D-86F66D415B71}</Project>
+      <Name>OpenBreed.Database.Xml</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">
       <Project>{95BDF122-FAC8-4AC4-B9A8-B549D942E37D}</Project>
