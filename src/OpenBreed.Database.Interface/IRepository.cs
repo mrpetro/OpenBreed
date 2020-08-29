@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common
+namespace OpenBreed.Database.Interface
 {
     public interface IRepository
     {

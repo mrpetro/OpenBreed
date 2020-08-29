@@ -10,6 +10,7 @@ using OpenBreed.Database.Xml.Items.Sounds;
 using OpenBreed.Common;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Sounds;
+using OpenBreed.Database.Interface;
 
 namespace OpenBreed.Database.Xml.Repositories
 {

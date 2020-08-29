@@ -9,6 +9,7 @@ using OpenBreed.Database.Xml.Items.Images;
 using OpenBreed.Common;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Images;
+using OpenBreed.Database.Interface;
 
 namespace OpenBreed.Database.Xml.Repositories
 {

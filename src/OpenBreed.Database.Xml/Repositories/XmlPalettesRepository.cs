@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common;
 using OpenBreed.Common.Palettes;
+using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Database.Xml.Items.Palettes;

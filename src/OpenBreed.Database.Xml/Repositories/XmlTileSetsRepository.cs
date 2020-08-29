@@ -10,6 +10,7 @@ using OpenBreed.Database.Xml.Items.Tiles;
 using OpenBreed.Common;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Tiles;
+using OpenBreed.Database.Interface;
 
 namespace OpenBreed.Database.Xml.Repositories
 {

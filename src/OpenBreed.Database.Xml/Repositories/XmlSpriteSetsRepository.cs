@@ -10,6 +10,7 @@ using OpenBreed.Database.Xml.Items.Sprites;
 using OpenBreed.Common;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Sprites;
+using OpenBreed.Database.Interface;
 
 namespace OpenBreed.Database.Xml.Repositories
 {

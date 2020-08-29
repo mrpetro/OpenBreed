@@ -1,12 +1,11 @@
-﻿using OpenBreed.Common.Formats;
-using OpenBreed.Database.Interface.Items;
+﻿using OpenBreed.Database.Interface.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common
+namespace OpenBreed.Database.Interface
 {
     public interface IUnitOfWork
     {

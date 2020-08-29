@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="IDatabase.cs" />
+    <Compile Include="IDatabaseFactory.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="Items\Actions\IActionEntry.cs" />
     <Compile Include="Items\Actions\IActionPresentation.cs" />
     <Compile Include="Items\Actions\IActionSetEntry.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="Items\Tiles\ITileSetEntry.cs" />
     <Compile Include="Items\Tiles\ITileSetFromBlkEntry.cs" />
     <Compile Include="Items\Tiles\ITileSetFromImageEntry.cs" />
+    <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -94,7 +94,6 @@
     <Compile Include="Formats\PCMSoundFormat.cs" />
     <Compile Include="Helpers\IOHelper.cs" />
     <Compile Include="Helpers\XmlHelper.cs" />
-    <Compile Include="IDatabase.cs" />
     <Compile Include="Data\MapsDataProvider.cs" />
     <Compile Include="Images\Readers\IFF\Helpers\BMHDBlock.cs" />
     <Compile Include="Images\Readers\IFF\IFFImageReader.cs" />
@@ -115,11 +114,8 @@
     <Compile Include="Formats\DataFormatMan.cs" />
     <Compile Include="Formats\BinaryFormat.cs" />
     <Compile Include="Helpers\MathHelper.cs" />
-    <Compile Include="IUnitOfWork.cs" />
-    <Compile Include="IDatabaseFactory.cs" />
     <Compile Include="Images\Builders\ImageBuilder.cs" />
     <Compile Include="Images\Readers\ACBM\ACBMImageReader.cs" />
-    <Compile Include="IRepository.cs" />
     <Compile Include="Logging\LogFile.cs" />
     <Compile Include="Logging\LogMan.cs" />
     <Compile Include="Logging\LogType.cs" />
