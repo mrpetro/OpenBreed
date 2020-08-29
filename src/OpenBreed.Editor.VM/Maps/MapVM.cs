@@ -20,6 +20,9 @@ using System.Drawing;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Palettes.Builders;
 using OpenBreed.Common.Maps.Blocks;
+using OpenBreed.Database.Interface.Items.Actions;
+using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.Maps;
 
 namespace OpenBreed.Editor.VM.Maps
 {

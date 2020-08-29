@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Palettes;
+using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.Palettes;
 using System;
 
 namespace OpenBreed.Editor.VM.Database.Entries

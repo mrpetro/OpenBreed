@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Maps;
+using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.Maps;
 using System;
 
 namespace OpenBreed.Editor.VM.Database.Entries

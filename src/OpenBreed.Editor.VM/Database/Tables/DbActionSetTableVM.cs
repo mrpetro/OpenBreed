@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Actions;
+using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Editor.VM.Database.Entries;
 using System;
 using System.Collections.Generic;

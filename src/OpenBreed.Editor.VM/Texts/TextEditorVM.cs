@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Texts;
+using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Texts;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Maps;
 using System;

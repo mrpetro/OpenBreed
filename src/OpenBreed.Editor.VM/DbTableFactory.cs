@@ -15,6 +15,18 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Texts;
 using OpenBreed.Common.DataSources;
+using OpenBreed.Database.Interface.Items.Actions;
+using OpenBreed.Database.Interface.Items.Images;
+using OpenBreed.Database.Interface.Items.Tiles;
+using OpenBreed.Database.Interface.Items.Scripts;
+using OpenBreed.Database.Interface.Items.Sprites;
+using OpenBreed.Database.Interface.Items.DataSources;
+using OpenBreed.Database.Interface.Items.Sounds;
+using OpenBreed.Database.Interface.Items.Assets;
+using OpenBreed.Database.Interface.Items.Maps;
+using OpenBreed.Database.Interface.Items.Palettes;
+using OpenBreed.Database.Interface.Items.Texts;
+using OpenBreed.Database.Interface;
 
 namespace OpenBreed.Editor.VM
 {

@@ -11,6 +11,7 @@ using OpenBreed.Common.Actions;
 using OpenBreed.Editor.VM.Common;
 using OpenBreed.Editor.VM.Maps.Layers;
 using OpenBreed.Common.Data;
+using OpenBreed.Database.Interface.Items.Actions;
 
 namespace OpenBreed.Editor.VM.Maps
 {

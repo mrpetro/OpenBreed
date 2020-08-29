@@ -9,6 +9,8 @@ using OpenBreed.Common.Sounds;
 using OpenBreed.Editor.VM.Sounds;
 using OpenBreed.Editor.VM.Database;
 using OpenBreed.Common;
+using OpenBreed.Database.Interface.Items.Sounds;
+using OpenBreed.Database.Interface;
 
 namespace OpenBreed.Editor.VM.Sounds
 {

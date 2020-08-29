@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Actions;
 using System.ComponentModel;
+using OpenBreed.Database.Interface.Items.Actions;
 
 namespace OpenBreed.Editor.VM.Actions
 {

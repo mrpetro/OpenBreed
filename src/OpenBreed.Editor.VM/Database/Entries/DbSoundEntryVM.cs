@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Sounds;
+using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.Sounds;
 using System;
 
 namespace OpenBreed.Editor.VM.Database.Entries
