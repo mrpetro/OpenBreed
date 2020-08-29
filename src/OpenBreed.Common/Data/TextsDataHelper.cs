@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common.Maps;
 using OpenBreed.Common.Maps.Blocks;
 using OpenBreed.Common.Texts;
+using OpenBreed.Database.Interface.Items.Texts;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

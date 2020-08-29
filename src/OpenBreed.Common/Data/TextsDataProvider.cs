@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.Texts;
+using OpenBreed.Database.Interface.Items.Texts;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -3,6 +3,7 @@ using OpenBreed.Common.Maps;
 using OpenBreed.Common.Maps.Builders;
 using OpenBreed.Common.Maps.Readers.MAP;
 using OpenBreed.Common.Maps.Writers.MAP;
+using OpenBreed.Database.Interface.Items.Assets;
 using System;
 using System.Collections.Generic;
 using System.IO;
