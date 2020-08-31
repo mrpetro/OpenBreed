@@ -1,33 +1,28 @@
-﻿using OpenBreed.Common.Model.Texts.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OpenBreed.Common.Model.Scripts.Builders;
 
-namespace OpenBreed.Common.Model.Texts
+namespace OpenBreed.Common.Model.Scripts
 {
-    public class TextModel
+    public class ScriptModel
     {
+        #region Internal Constructors
 
-        #region Public Constructors
-
-        internal TextModel(TextBuilder builder)
+        internal ScriptModel(ScriptBuilder builder)
         {
-            Text = builder.Text;
+            Script = builder.Script;
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
 
         public string Name { get; set; }
+
         /// <summary>
         ///  Gets or sets an object that provides additional data context.
         /// </summary>
         public object Tag { get; set; }
 
-        public string Text { get; set; }
+        public string Script { get; set; }
 
         #endregion Public Properties
 
@@ -39,6 +34,5 @@ namespace OpenBreed.Common.Model.Texts
         }
 
         #endregion Public Methods
-
     }
 }

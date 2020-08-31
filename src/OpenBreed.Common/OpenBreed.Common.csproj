@@ -81,6 +81,8 @@
     <Compile Include="Data\AssetsDataProvider.cs" />
     <Compile Include="Data\ImagesDataProvider.cs" />
     <Compile Include="Data\SpriteSetsDataHelper.cs" />
+    <Compile Include="Data\ScriptsDataProvider.cs" />
+    <Compile Include="Data\ScriptsDataHelper.cs" />
     <Compile Include="Data\TileSetsDataHelper.cs" />
     <Compile Include="Data\TextsDataHelper.cs" />
     <Compile Include="Data\PalettesDataHelper.cs" />
@@ -106,7 +108,10 @@
     <Compile Include="Model\Maps\Blocks\MapUnknownBlock.cs" />
     <Compile Include="Model\Maps\Blocks\MapUInt32Block.cs" />
     <Compile Include="Actions\ActionSetModel.cs" />
+    <Compile Include="Model\Scripts\Builders\ScriptBuilder.cs" />
+    <Compile Include="Model\Scripts\ScriptModel.cs" />
     <Compile Include="Model\Sounds\SoundModel.cs" />
+    <Compile Include="Model\Texts\Builders\TextBuilder.cs" />
     <Compile Include="Model\Texts\TextModel.cs" />
     <Compile Include="Helpers\BitmapHelper.cs" />
     <Compile Include="EnumerableExtensions.cs" />

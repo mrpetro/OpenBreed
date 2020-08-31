@@ -2,6 +2,7 @@
 using OpenBreed.Common.Model.Maps;
 using OpenBreed.Common.Model.Maps.Blocks;
 using OpenBreed.Common.Model.Texts;
+using OpenBreed.Common.Model.Texts.Builders;
 using OpenBreed.Database.Interface.Items.Texts;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,10 @@ namespace OpenBreed.Common.Data
     {
         public static TextModel Create(MapTextBlock textBlock)
         {
-            var textModel = new TextModel();
-            textModel.Name = textBlock.Name;
-            textModel.Text = textBlock.Value;
-            return textModel;
+            var builder = TextBuilder.NewTextModel();
+            builder.SetName(textBlock.Name);
+            builder.Text = textBlock.Value;
+            return builder.Build();
         }
 
         public static TextModel FromMapModel(DataProvider provider, ITextFromMapEntry textData)
@@ -38,9 +39,11 @@ namespace OpenBreed.Common.Data
             return Create(textBlock);
         }
 
-        public static TextModel FromBinary(DataProvider provider, ITextEmbeddedEntry textData)
+        public static TextModel FromBinary(DataProvider provider, ITextEmbeddedEntry textEntry)
         {
-            return null;
+            var builder = TextBuilder.NewTextModel();
+            builder.SetText(textEntry.Text);
+            return builder.Build();
         }
     }
 }
