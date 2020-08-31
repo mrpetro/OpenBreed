@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common.Helpers;
-using OpenBreed.Common.Sprites.Builders;
+using OpenBreed.Common.Model.Sprites;
+using OpenBreed.Common.Model.Sprites.Builders;
 using System;
 using System.IO;
 

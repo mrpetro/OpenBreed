@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using OpenBreed.Common.Sprites.Builders;
 using OpenBreed.Common.Sprites.Readers.SPR;
 using OpenBreed.Common.Assets;
 using OpenBreed.Common.DataSources;
 using OpenBreed.Database.Interface.Items.Assets;
+using OpenBreed.Common.Model.Sprites.Builders;
 
 namespace OpenBreed.Common.Formats
 {

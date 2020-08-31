@@ -6,8 +6,9 @@ using System.IO;
 using OpenBreed.Common.Palettes;
 using OpenBreed.Common.Writers;
 using OpenBreed.Common.Logging;
-using OpenBreed.Common.Maps.Blocks;
+using OpenBreed.Common.Model.Maps.Blocks;
 using OpenBreed.Common.Maps.Readers.MAP;
+using OpenBreed.Common.Model.Maps;
 
 namespace OpenBreed.Common.Maps.Writers.MAP
 {

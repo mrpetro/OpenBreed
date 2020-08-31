@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Texts;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Texts;

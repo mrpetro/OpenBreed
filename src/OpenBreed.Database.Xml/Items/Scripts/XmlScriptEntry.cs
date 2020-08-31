@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Common.Formats;
 using OpenBreed.Common.Palettes;
-using OpenBreed.Common.Texts;
 using OpenBreed.Database.Interface.Items.Scripts;
 using System;
 using System.Collections.Generic;

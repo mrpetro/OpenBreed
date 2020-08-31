@@ -1,11 +1,11 @@
 ﻿using OpenBreed.Common.Helpers;
 using OpenBreed.Common.Maps;
-using OpenBreed.Common.Maps.Blocks;
+using OpenBreed.Common.Model.Maps.Blocks;
+using OpenBreed.Common.Model.Sprites;
+using OpenBreed.Common.Model.Sprites.Builders;
 using OpenBreed.Common.Palettes;
-using OpenBreed.Common.Palettes.Builders;
 using OpenBreed.Common.Palettes.Readers;
 using OpenBreed.Common.Sprites;
-using OpenBreed.Common.Sprites.Builders;
 using OpenBreed.Database.Interface.Items.Sprites;
 using System;
 using System.Collections.Generic;

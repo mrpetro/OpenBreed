@@ -1,5 +1,5 @@
-﻿using OpenBreed.Common.Images.Builders;
-using OpenBreed.Common.Images.Readers.IFF.Helpers;
+﻿using OpenBreed.Common.Images.Readers.IFF.Helpers;
+using OpenBreed.Common.Model.Images.Builders;
 using OpenBreed.Common.Readers;
 using System;
 using System.Collections;

@@ -1,6 +1,5 @@
-﻿using OpenBreed.Common.Images.Builders;
+﻿using OpenBreed.Common.Model.Images.Builders;
 using OpenBreed.Common.Readers;
-using OpenBreed.Common.Tiles.Builders;
 using System;
 using System.Collections;
 using System.Collections.Generic;

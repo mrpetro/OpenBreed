@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Common.Maps;
-using OpenBreed.Common.Maps.Blocks;
+using OpenBreed.Common.Model.Maps.Blocks;
+using OpenBreed.Common.Model.Tiles;
 using OpenBreed.Common.Palettes;
-using OpenBreed.Common.Palettes.Builders;
 using OpenBreed.Common.Palettes.Readers;
 using OpenBreed.Common.Tiles;
 using OpenBreed.Database.Interface.Items.Tiles;

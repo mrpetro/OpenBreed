@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Palettes.Builders;
+﻿using OpenBreed.Common.Model.Palettes;
+using OpenBreed.Common.Model.Palettes.Builders;
 using OpenBreed.Common.Readers;
 using System;
 using System.Collections.Generic;
