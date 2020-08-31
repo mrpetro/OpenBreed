@@ -13,7 +13,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Common.Texts;
 using OpenBreed.Common.DataSources;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Actions;

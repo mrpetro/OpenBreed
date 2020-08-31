@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using OpenBreed.Editor.VM.Palettes;
+using OpenBreed.Common.Model.Palettes;
 
 namespace OpenBreed.Editor.VM.Maps
 {

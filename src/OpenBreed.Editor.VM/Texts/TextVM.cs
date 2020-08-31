@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common;
-using OpenBreed.Common.Texts;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Texts;
+using OpenBreed.Common.Model.Texts;
 
 namespace OpenBreed.Editor.VM.Texts
 {

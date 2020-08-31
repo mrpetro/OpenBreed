@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Helpers;
+using OpenBreed.Common.Model.Palettes;
 using OpenBreed.Common.Palettes;
 using OpenBreed.Common.Sprites;
 using OpenBreed.Database.Interface;

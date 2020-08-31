@@ -18,11 +18,13 @@ using OpenBreed.Common.Actions;
 using OpenBreed.Common;
 using System.Drawing;
 using OpenBreed.Common.Data;
-using OpenBreed.Common.Palettes.Builders;
-using OpenBreed.Common.Maps.Blocks;
+using OpenBreed.Common.Model.Maps.Blocks;
 using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Maps;
+using OpenBreed.Common.Model.Maps;
+using OpenBreed.Common.Model.Palettes;
+using OpenBreed.Common.Model.Tiles;
 
 namespace OpenBreed.Editor.VM.Maps
 {

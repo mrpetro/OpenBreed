@@ -2,7 +2,7 @@
 using OpenBreed.Common.Assets;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Palettes;
-using OpenBreed.Common.Texts;
+using OpenBreed.Common.Model.Texts;
 using OpenBreed.Database.Interface.Items.Texts;
 using OpenBreed.Database.Xml.Items.Assets;
 using OpenBreed.Editor.VM.Base;

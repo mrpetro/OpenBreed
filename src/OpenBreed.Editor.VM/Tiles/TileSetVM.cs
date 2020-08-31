@@ -12,6 +12,8 @@ using System;
 using OpenBreed.Common.Formats;
 using OpenBreed.Common.Palettes;
 using OpenBreed.Common.Helpers;
+using OpenBreed.Common.Model.Tiles;
+using OpenBreed.Common.Model.Palettes;
 
 namespace OpenBreed.Editor.VM.Tiles
 {

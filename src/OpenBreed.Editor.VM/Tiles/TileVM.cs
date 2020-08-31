@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using OpenBreed.Common.Model.Tiles;
 using OpenBreed.Common.Tiles;
 
 namespace OpenBreed.Editor.VM.Tiles

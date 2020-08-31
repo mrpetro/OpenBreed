@@ -12,9 +12,9 @@ using OpenBreed.Editor.VM.Maps.Layers;
 using OpenBreed.Common.Tiles;
 using OpenBreed.Editor.VM.Tiles;
 using OpenBreed.Common.Actions;
-using OpenBreed.Common.Maps.Builders;
 using OpenBreed.Common;
-using OpenBreed.Common.Maps.Blocks;
+using OpenBreed.Common.Model.Maps.Blocks;
+using OpenBreed.Common.Model.Maps;
 
 namespace OpenBreed.Editor.VM.Maps
 {

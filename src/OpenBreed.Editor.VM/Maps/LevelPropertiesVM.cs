@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.Maps;
+using OpenBreed.Common.Model.Maps;
 using OpenBreed.Editor.VM.Base;
 using System;
 using System.Linq;
