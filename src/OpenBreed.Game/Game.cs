@@ -1,4 +1,7 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
+using OpenBreed.Common.Model.Scripts;
+using OpenBreed.Common.Model.Texts;
 using OpenBreed.Core;
 using OpenBreed.Core.Common.Builders;
 using OpenBreed.Core.Managers;
@@ -7,6 +10,7 @@ using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Systems;
 using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Scripts;
 using OpenTK;
 using OpenTK.Graphics;
 using System;
@@ -75,7 +79,12 @@ namespace OpenBreed.Game
 
         public override void Run()
         {
-            unitOfWork = database.CreateUnitOfWork();
+            var unitOfWork = database.CreateUnitOfWork();
+            var provider = new DataProvider(unitOfWork);
+
+            if (provider.TryGetData<ScriptModel>("Entry", out ScriptModel entryScript, out string msg))
+            {
+            }
 
 
             //MainLoophere
