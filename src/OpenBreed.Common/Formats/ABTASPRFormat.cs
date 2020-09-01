@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using OpenBreed.Common.Sprites.Readers.SPR;
 using OpenBreed.Common.Assets;
 using OpenBreed.Common.DataSources;
 using OpenBreed.Database.Interface.Items.Assets;
-using OpenBreed.Common.Model.Sprites.Builders;
+using OpenBreed.Common.Builders.Sprites;
+using OpenBreed.Common.Readers.Sprites.SPR;
 
 namespace OpenBreed.Common.Formats
 {
@@ -24,7 +24,7 @@ namespace OpenBreed.Common.Formats
 
             var spriteSetBuilder = SpriteSetBuilder.NewSpriteSet();
             //spriteSetBuilder.SetSource(source);
-            SPRReader sprReader = new SPRReader(spriteSetBuilder);
+            var sprReader = new SPRReader(spriteSetBuilder);
             return sprReader.Read(ds.Stream);
         }
 

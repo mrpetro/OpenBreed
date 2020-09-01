@@ -1,5 +1,4 @@
-﻿using OpenBreed.Common.Sprites;
-using OpenBreed.Database.Interface.Items.Sprites;
+﻿using OpenBreed.Database.Interface.Items.Sprites;
 using System.Xml.Serialization;
 
 namespace OpenBreed.Database.Xml.Items.Sprites

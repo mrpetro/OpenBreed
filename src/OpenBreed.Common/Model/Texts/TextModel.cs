@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.Model.Texts.Builders;
+﻿using OpenBreed.Common.Builders.Texts;
 using System;
 using System.Collections.Generic;
 using System.Linq;

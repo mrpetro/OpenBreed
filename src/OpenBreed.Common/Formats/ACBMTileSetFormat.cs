@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Common.DataSources;
-using OpenBreed.Common.Model.Tiles.Builders;
-using OpenBreed.Common.Tiles.Readers.ACBM;
+using OpenBreed.Common.Builders.Tiles;
+using OpenBreed.Common.Readers.Tiles.ACBM;
 using OpenBreed.Database.Interface.Items.Assets;
 using System;
 using System.Collections.Generic;

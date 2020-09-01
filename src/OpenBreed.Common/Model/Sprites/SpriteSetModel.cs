@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.Model.Sprites.Builders;
+﻿using OpenBreed.Common.Builders.Sprites;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Common.DataSources;
 using OpenBreed.Common.Model.Sounds;
-using OpenBreed.Common.Sounds;
 using OpenBreed.Database.Interface.Items.Assets;
 using System;
 using System.Collections.Generic;

@@ -1,10 +1,9 @@
 ﻿using OpenBreed.Common.Assets;
 using OpenBreed.Common.DataSources;
-using OpenBreed.Common.Maps;
-using OpenBreed.Common.Maps.Readers.MAP;
-using OpenBreed.Common.Maps.Writers.MAP;
 using OpenBreed.Common.Model.Maps;
-using OpenBreed.Common.Model.Maps.Builders;
+using OpenBreed.Common.Builders.Maps;
+using OpenBreed.Common.Readers.Maps.MAP;
+using OpenBreed.Common.Writers.Maps.MAP;
 using OpenBreed.Database.Interface.Items.Assets;
 using System;
 using System.Collections.Generic;
@@ -42,7 +41,7 @@ namespace OpenBreed.Common.Formats
             //Remember to clear the stream before writing
             ds.Stream.SetLength(0);
 
-            MAPWriter mapWriter = new MAPWriter(ds.Stream, MAPFormat.ABHC);
+            var mapWriter = new MAPWriter(ds.Stream, MAPFormat.ABHC);
             mapWriter.Write((MapModel)model);
         }
 

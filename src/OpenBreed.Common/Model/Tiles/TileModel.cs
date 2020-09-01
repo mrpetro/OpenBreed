@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
-using OpenBreed.Common.Model.Tiles.Builders;
+using OpenBreed.Common.Builders.Tiles;
 
 namespace OpenBreed.Common.Model.Tiles
 {

@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Common.DataSources;
-using OpenBreed.Common.Model.Tiles.Builders;
-using OpenBreed.Common.Readers.BLK;
+using OpenBreed.Common.Builders.Tiles;
+using OpenBreed.Common.Readers.Tiles.BLK;
 using OpenBreed.Database.Interface.Items.Assets;
 using System;
 using System.Collections.Generic;
@@ -26,7 +26,7 @@ namespace OpenBreed.Common.Formats
             ds.Stream.Seek(0, SeekOrigin.Begin);
 
             var tileSetBuilder = TileSetBuilder.NewTileSet();
-            BLKReader blkReader = new BLKReader(tileSetBuilder);
+            var blkReader = new BLKReader(tileSetBuilder);
             return blkReader.Read(ds.Stream);
         }
 

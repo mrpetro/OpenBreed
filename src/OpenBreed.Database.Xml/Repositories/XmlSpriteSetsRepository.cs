@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Common.Sprites;
 using OpenBreed.Database.Xml.Tables;
 using OpenBreed.Database.Xml.Items.Sprites;
 using OpenBreed.Common;

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0BECCD62-1285-498B-877D-86F66D415B71}</ProjectGuid>
+    <ProjectGuid>{C4095745-E19C-4DE9-B2E4-37E55FA0D225}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OpenBreed.Common.Database.Xml</RootNamespace>

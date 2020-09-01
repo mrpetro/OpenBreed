@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing.Imaging;
 using System.Drawing;
-using OpenBreed.Common.Model.Palettes.Builders;
+using OpenBreed.Common.Builders.Palettes;
 
 namespace OpenBreed.Common.Model.Palettes
 {

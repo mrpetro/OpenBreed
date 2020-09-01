@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Database.Xml.Items.Assets;
 using OpenBreed.Common.Formats;
-using OpenBreed.Common.Maps;
 using System;
 using System.Collections.Generic;
 using System.Linq;

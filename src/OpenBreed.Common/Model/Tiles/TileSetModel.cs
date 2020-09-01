@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.Model.Tiles.Builders;
+﻿using OpenBreed.Common.Builders.Tiles;
 using System.Collections.Generic;
 
 namespace OpenBreed.Common.Model.Tiles

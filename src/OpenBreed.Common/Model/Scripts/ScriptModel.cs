@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.Model.Scripts.Builders;
+﻿using OpenBreed.Common.Builders.Scripts;
 
 namespace OpenBreed.Common.Model.Scripts
 {

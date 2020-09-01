@@ -1,8 +1,7 @@
-﻿using OpenBreed.Common.Maps;
-using OpenBreed.Common.Model.Maps;
+﻿using OpenBreed.Common.Model.Maps;
 using OpenBreed.Common.Model.Maps.Blocks;
 using OpenBreed.Common.Model.Scripts;
-using OpenBreed.Common.Model.Scripts.Builders;
+using OpenBreed.Common.Builders.Scripts;
 using OpenBreed.Common.Model.Texts;
 using OpenBreed.Database.Interface.Items.Scripts;
 using OpenBreed.Database.Interface.Items.Texts;

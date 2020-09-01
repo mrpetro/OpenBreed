@@ -1,6 +1,4 @@
-﻿using OpenBreed.Common.Formats;
-using OpenBreed.Common.Palettes;
-using OpenBreed.Database.Interface.Items.Texts;
+﻿using OpenBreed.Database.Interface.Items.Texts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

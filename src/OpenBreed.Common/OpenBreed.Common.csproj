@@ -66,7 +66,7 @@
     <Compile Include="..\Shared\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="BinaryModel.cs" />
+    <Compile Include="Model\BinaryModel.cs" />
     <Compile Include="Commands\CommandMan.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Configs\BaseCfg.cs" />
@@ -97,8 +97,9 @@
     <Compile Include="Helpers\IOHelper.cs" />
     <Compile Include="Helpers\XmlHelper.cs" />
     <Compile Include="Data\MapsDataProvider.cs" />
-    <Compile Include="Images\Readers\IFF\Helpers\BMHDBlock.cs" />
-    <Compile Include="Images\Readers\IFF\IFFImageReader.cs" />
+    <Compile Include="Model\Maps\TileRef.cs" />
+    <Compile Include="Readers\Images\IFF\Helpers\BMHDBlock.cs" />
+    <Compile Include="Readers\Images\IFF\IFFImageReader.cs" />
     <Compile Include="Model\Maps\IMapDataBlock.cs" />
     <Compile Include="Model\Maps\Blocks\MapBodyBlock.cs" />
     <Compile Include="Model\Maps\Blocks\MapMissionBlock.cs" />
@@ -107,11 +108,11 @@
     <Compile Include="Model\Maps\Blocks\MapTextBlock.cs" />
     <Compile Include="Model\Maps\Blocks\MapUnknownBlock.cs" />
     <Compile Include="Model\Maps\Blocks\MapUInt32Block.cs" />
-    <Compile Include="Actions\ActionSetModel.cs" />
-    <Compile Include="Model\Scripts\Builders\ScriptBuilder.cs" />
+    <Compile Include="Model\Actions\ActionSetModel.cs" />
+    <Compile Include="Builders\Scripts\ScriptBuilder.cs" />
     <Compile Include="Model\Scripts\ScriptModel.cs" />
     <Compile Include="Model\Sounds\SoundModel.cs" />
-    <Compile Include="Model\Texts\Builders\TextBuilder.cs" />
+    <Compile Include="Builders\Texts\TextBuilder.cs" />
     <Compile Include="Model\Texts\TextModel.cs" />
     <Compile Include="Helpers\BitmapHelper.cs" />
     <Compile Include="EnumerableExtensions.cs" />
@@ -119,28 +120,27 @@
     <Compile Include="Formats\DataFormatMan.cs" />
     <Compile Include="Formats\BinaryFormat.cs" />
     <Compile Include="Helpers\MathHelper.cs" />
-    <Compile Include="Model\Images\Builders\ImageBuilder.cs" />
-    <Compile Include="Images\Readers\ACBM\ACBMImageReader.cs" />
+    <Compile Include="Builders\Images\ImageBuilder.cs" />
+    <Compile Include="Readers\Images\ACBM\ACBMImageReader.cs" />
     <Compile Include="Logging\LogFile.cs" />
     <Compile Include="Logging\LogMan.cs" />
     <Compile Include="Logging\LogType.cs" />
-    <Compile Include="Model\Maps\Builders\MapBuilder.cs" />
+    <Compile Include="Builders\Maps\MapBuilder.cs" />
     <Compile Include="Model\Maps\MapLayerModel.cs" />
-    <Compile Include="Maps\Readers\IMapModelReader.cs" />
-    <Compile Include="Maps\Readers\MAP\MAPReader.cs" />
-    <Compile Include="Maps\TileRef.cs" />
-    <Compile Include="Maps\Writers\IMapModelWriter.cs" />
-    <Compile Include="Maps\Writers\MAP\MAPWriter.cs" />
-    <Compile Include="Model\Palettes\Builders\PaletteBuilder.cs" />
+    <Compile Include="Readers\Maps\IMapModelReader.cs" />
+    <Compile Include="Readers\Maps\MAP\MAPReader.cs" />
+    <Compile Include="Writers\Maps\IMapModelWriter.cs" />
+    <Compile Include="Writers\Maps\MAP\MAPWriter.cs" />
+    <Compile Include="Builders\Palettes\PaletteBuilder.cs" />
     <Compile Include="Model\Maps\MapLayoutModel.cs" />
     <Compile Include="Model\Maps\MapModel.cs" />
     <Compile Include="Model\Palettes\PaletteModel.cs" />
-    <Compile Include="Palettes\Readers\PaletteReader.cs" />
+    <Compile Include="Readers\Palettes\PaletteReader.cs" />
     <Compile Include="ProgramTools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Readers\BigEndianBinaryReader.cs" />
-    <Compile Include="Sounds\PCMPlayer.cs" />
-    <Compile Include="Sounds\WaveMemoryStream.cs" />
+    <Compile Include="Helpers\Sounds\PCMPlayer.cs" />
+    <Compile Include="Helpers\Sounds\WaveMemoryStream.cs" />
     <Compile Include="Assets\IAssetsFactory.cs" />
     <Compile Include="Assets\AssetBase.cs" />
     <Compile Include="Formats\ABHCMAPFormat.cs" />
@@ -151,22 +151,24 @@
     <Compile Include="Formats\ACBMImageFormat.cs" />
     <Compile Include="Formats\ACBMTileSetFormat.cs" />
     <Compile Include="Formats\IDataFormatType.cs" />
-    <Compile Include="Model\Sprites\Builders\SpriteBuilder.cs" />
-    <Compile Include="Model\Sprites\Builders\SpriteSetBuilder.cs" />
-    <Compile Include="Sprites\Readers\SPRReader.cs" />
+    <Compile Include="Builders\Sprites\SpriteBuilder.cs" />
+    <Compile Include="Builders\Sprites\SpriteSetBuilder.cs" />
+    <Compile Include="Readers\Sprites\SPR\SPRReader.cs" />
     <Compile Include="Model\Sprites\SpriteModel.cs" />
     <Compile Include="Model\Sprites\SpriteSetModel.cs" />
-    <Compile Include="Model\Tiles\Builders\TileBuilder.cs" />
-    <Compile Include="Model\Tiles\Builders\TileSetBuilder.cs" />
-    <Compile Include="Tiles\Readers\ACBM\ACBMTileSetReader.cs" />
-    <Compile Include="Tiles\Readers\BLK\BLKReader.cs" />
+    <Compile Include="Builders\Tiles\TileBuilder.cs" />
+    <Compile Include="Builders\Tiles\TileSetBuilder.cs" />
+    <Compile Include="Readers\Tiles\ACBM\ACBMTileSetReader.cs" />
+    <Compile Include="Readers\Tiles\BLK\BLKReader.cs" />
     <Compile Include="Model\Tiles\TileModel.cs" />
     <Compile Include="Model\Tiles\TileSetModel.cs" />
     <Compile Include="Other.cs" />
     <Compile Include="Tools\ABTAPasswordEncoder.cs" />
     <Compile Include="Writers\BigEndianBinaryWriter.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Model\Images\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\EPFArchive\src\EPFArchive\EPFArchive.csproj">
       <Project>{52249c4e-eaf8-45ce-a757-aaa3c3c125d4}</Project>

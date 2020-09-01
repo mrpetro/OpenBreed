@@ -1,5 +1,4 @@
-﻿using OpenBreed.Common.Tiles;
-using OpenBreed.Database.Interface.Items.Tiles;
+﻿using OpenBreed.Database.Interface.Items.Tiles;
 using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
