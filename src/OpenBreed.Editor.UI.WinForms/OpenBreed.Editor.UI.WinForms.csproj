@@ -260,6 +260,24 @@
     <Compile Include="Controls\Maps\MapEditorActionsSelectorCtrl.Designer.cs">
       <DependentUpon>MapEditorActionsSelectorCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Scripts\ScriptEditorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Scripts\ScriptEditorCtrl.Designer.cs">
+      <DependentUpon>ScriptEditorCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Scripts\ScriptEmbeddedCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Scripts\ScriptEmbeddedCtrl.Designer.cs">
+      <DependentUpon>ScriptEmbeddedCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Scripts\ScriptFromFileCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Scripts\ScriptFromFileCtrl.Designer.cs">
+      <DependentUpon>ScriptFromFileCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Sounds\SoundEditorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -562,6 +580,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Maps\MapEditorActionsSelectorCtrl.resx">
       <DependentUpon>MapEditorActionsSelectorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Scripts\ScriptEditorCtrl.resx">
+      <DependentUpon>ScriptEditorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Scripts\ScriptEmbeddedCtrl.resx">
+      <DependentUpon>ScriptEmbeddedCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Scripts\ScriptFromFileCtrl.resx">
+      <DependentUpon>ScriptFromFileCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Sounds\SoundEditorCtrl.resx">
       <DependentUpon>SoundEditorCtrl.cs</DependentUpon>

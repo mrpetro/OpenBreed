@@ -19,6 +19,7 @@ using OpenBreed.Database.Interface.Items.Tiles;
 using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Database.Interface.Items.Texts;
+using OpenBreed.Database.Interface.Items.Scripts;
 
 namespace OpenBreed.Editor.VM.Database
 {
@@ -48,6 +49,8 @@ namespace OpenBreed.Editor.VM.Database
                 return new DbPaletteEntryVM();
             else if (entry is ITextEntry)
                 return new DbTextEntryVM();
+            else if (entry is IScriptEntry)
+                return new DbScriptEntryVM();
             else
                 throw new NotImplementedException(entry.ToString());
         }
