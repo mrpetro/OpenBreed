@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Common.Model.Sprites;
-using OpenBreed.Common.Sprites;
 using OpenBreed.Editor.VM.Base;
 using System.Drawing;
 using System.Drawing.Imaging;

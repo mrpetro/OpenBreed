@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using OpenBreed.Common.Palettes;
 using OpenBreed.Editor.UI.WinForms.Views;
 using OpenBreed.Editor.VM.Palettes;
 using OpenBreed.Editor.VM.Maps;

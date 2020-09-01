@@ -5,12 +5,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Common.Sounds;
 using OpenBreed.Editor.VM.Sounds;
 using OpenBreed.Editor.VM.Database;
 using OpenBreed.Common;
 using OpenBreed.Database.Interface.Items.Sounds;
 using OpenBreed.Database.Interface;
+using OpenBreed.Common.Helpers.Sounds;
 
 namespace OpenBreed.Editor.VM.Sounds
 {

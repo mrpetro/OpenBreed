@@ -1,5 +1,4 @@
-﻿using OpenBreed.Common.Maps;
-using OpenBreed.Common.UI.WinForms.Controls;
+﻿using OpenBreed.Common.UI.WinForms.Controls;
 using OpenBreed.Editor.VM.Maps;
 using System;
 using System.ComponentModel;

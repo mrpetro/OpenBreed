@@ -1,9 +1,7 @@
-﻿using OpenBreed.Common.Tiles;
-using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Editor.VM.Base;
 using System;
 using System.ComponentModel;
 using System.Linq;
-using OpenBreed.Common.Maps;
 using System.Drawing;
 using OpenBreed.Editor.VM.Maps;
 using System.Collections.Generic;

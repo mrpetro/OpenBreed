@@ -1,5 +1,4 @@
-﻿using OpenBreed.Common.Tiles;
-using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Editor.VM.Base;
 using OpenBreed.Common.Assets;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +9,6 @@ using OpenBreed.Editor.VM.Palettes;
 using System.Linq;
 using System;
 using OpenBreed.Common.Formats;
-using OpenBreed.Common.Palettes;
 using OpenBreed.Common.Helpers;
 using OpenBreed.Common.Model.Tiles;
 using OpenBreed.Common.Model.Palettes;

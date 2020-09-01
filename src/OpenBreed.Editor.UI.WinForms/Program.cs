@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using OpenBreed.Common.Sounds;
 using System.IO;
 using OpenABEd.Modules;
 using OpenABEdCfg;

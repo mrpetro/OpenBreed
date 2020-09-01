@@ -1,12 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Assets;
-using OpenBreed.Common.Images;
-using OpenBreed.Common.Maps;
-using OpenBreed.Common.Palettes;
 using OpenBreed.Common.Actions;
-using OpenBreed.Common.Sounds;
-using OpenBreed.Common.Sprites;
-using OpenBreed.Common.Tiles;
 using OpenBreed.Editor.VM.Database.Entries;
 using System;
 using System.Collections.Generic;

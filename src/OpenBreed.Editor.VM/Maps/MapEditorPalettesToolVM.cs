@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Editor.VM.Base;
-using OpenBreed.Common.Palettes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

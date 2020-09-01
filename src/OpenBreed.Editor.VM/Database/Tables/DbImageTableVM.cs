@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Images;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Images;
 using OpenBreed.Editor.VM.Database.Entries;

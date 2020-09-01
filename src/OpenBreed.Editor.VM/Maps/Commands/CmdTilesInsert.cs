@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using OpenBreed.Common.Commands;
+using OpenBreed.Common.Model.Maps;
 
 namespace OpenBreed.Editor.VM.Maps.Commands
 {
@@ -35,7 +36,7 @@ namespace OpenBreed.Editor.VM.Maps.Commands
                 Point tileCoords = Operations[i].IndexCoords;
                 int tileId = Operations[i].TileIdAfter;
 
-                Inserter.Layer.SetCell(tileCoords.X, tileCoords.Y, new OpenBreed.Common.Maps.TileRef(0, tileId));
+                Inserter.Layer.SetCell(tileCoords.X, tileCoords.Y, new TileRef(0, tileId));
             }
 
             //Inserter.Model.Update();
@@ -48,7 +49,7 @@ namespace OpenBreed.Editor.VM.Maps.Commands
                 Point tileCoords = Operations[i].IndexCoords;
                 int tileId = Operations[i].TileIdBefore;
 
-                Inserter.Layer.SetCell(tileCoords.X, tileCoords.Y, new OpenBreed.Common.Maps.TileRef(0, tileId));
+                Inserter.Layer.SetCell(tileCoords.X, tileCoords.Y, new TileRef(0, tileId));
             }
 
             //Inserter.Model.Update();

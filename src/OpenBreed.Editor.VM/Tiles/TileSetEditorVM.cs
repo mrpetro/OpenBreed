@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
-using OpenBreed.Common.Tiles;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Tiles;
 using OpenBreed.Editor.VM.Base;

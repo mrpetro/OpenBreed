@@ -1,6 +1,4 @@
 ﻿using OpenBreed.Common.Commands;
-using OpenBreed.Common.Maps;
-using OpenBreed.Common.Palettes;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Palettes;
 using OpenBreed.Common.Assets;
@@ -12,8 +10,6 @@ using OpenBreed.Editor.VM.Tiles;
 using OpenBreed.Editor.VM.Actions;
 using System.Collections.Generic;
 using OpenBreed.Editor.VM.Sprites;
-using OpenBreed.Common.Tiles;
-using OpenBreed.Common.Sprites;
 using OpenBreed.Common.Actions;
 using OpenBreed.Common;
 using System.Drawing;

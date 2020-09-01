@@ -1,8 +1,6 @@
 ﻿using OpenBreed.Common.Helpers;
 using OpenBreed.Common.Model.Palettes;
 using OpenBreed.Common.Model.Tiles;
-using OpenBreed.Common.Palettes;
-using OpenBreed.Common.Tiles;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Tiles.Helpers;
 using System.Collections.Generic;

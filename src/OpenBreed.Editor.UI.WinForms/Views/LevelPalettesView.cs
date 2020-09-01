@@ -11,7 +11,6 @@ using OpenBreed.Editor.VM.Palettes;
 using WeifenLuo.WinFormsUI.Docking;
 using System.Drawing.Imaging;
 using OpenBreed.Editor.VM.Maps;
-using OpenBreed.Common.Palettes;
 
 namespace OpenBreed.Editor.UI.WinForms.Views
 {

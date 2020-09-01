@@ -1,5 +1,4 @@
-﻿using OpenBreed.Common.Maps;
-using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Maps.Helpers;
 using OpenBreed.Editor.VM.Actions;
 using System;
@@ -9,7 +8,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using OpenBreed.Editor.VM.Maps.Layers;
-using OpenBreed.Common.Tiles;
 using OpenBreed.Editor.VM.Tiles;
 using OpenBreed.Common.Actions;
 using OpenBreed.Common;
