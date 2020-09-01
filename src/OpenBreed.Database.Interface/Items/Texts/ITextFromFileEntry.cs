@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Database.Interface.Items.Texts
 {
-    public interface ITextFromFileEntry : ITextEntry
+    public interface ITextFromMapEntry : ITextEntry
     {
+        string BlockName { get; set; }
     }
 }

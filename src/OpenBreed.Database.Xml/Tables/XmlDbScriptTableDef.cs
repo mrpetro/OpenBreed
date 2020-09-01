@@ -1,4 +1,4 @@
-﻿using OpenBreed.Database.Xml.Items.Texts;
+﻿using OpenBreed.Database.Xml.Items.Scripts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ namespace OpenBreed.Database.Xml.Tables
 
         [XmlArray("Items"),
         XmlArrayItem("ScriptEmbedded", typeof(XmlScriptEmbeddedEntry)),
-            ]
+        XmlArrayItem("ScriptFromFile", typeof(XmlScriptFromFileEntry)),]
         public readonly List<XmlScriptEntry> Items = new List<XmlScriptEntry>();
 
         #endregion Public Fields

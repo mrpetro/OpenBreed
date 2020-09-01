@@ -59,6 +59,7 @@
     <Compile Include="Items\Palettes\IPaletteEntry.cs" />
     <Compile Include="Items\Palettes\IPaletteFromBinaryEntry.cs" />
     <Compile Include="Items\Palettes\IPaletteFromMapEntry.cs" />
+    <Compile Include="Items\Scripts\IScriptFromFileEntry.cs" />
     <Compile Include="Items\Scripts\IScriptEmbeddedEntry.cs" />
     <Compile Include="Items\Scripts\IScriptEntry.cs" />
     <Compile Include="Items\Sounds\ISoundEntry.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Items\Sprites\ISpriteSetFromSprEntry.cs" />
     <Compile Include="Items\Texts\ITextEmbeddedEntry.cs" />
     <Compile Include="Items\Texts\ITextEntry.cs" />
+    <Compile Include="Items\Texts\ITextFromFileEntry.cs" />
     <Compile Include="Items\Texts\ITextFromMapEntry.cs" />
     <Compile Include="Items\Tiles\ITileSetEntry.cs" />
     <Compile Include="Items\Tiles\ITileSetFromBlkEntry.cs" />

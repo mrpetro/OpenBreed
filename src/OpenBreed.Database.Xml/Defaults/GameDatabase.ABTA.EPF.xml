@@ -182,6 +182,7 @@
 				<EPFArchiveFileDataSource Id="DataSources.IPC.LBM" EntryName="IPC.LBM" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
 				<EPFArchiveFileDataSource Id="DataSources.SMARTPIC.LBM" EntryName="SMARTPIC.LBM" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
 				<EPFArchiveFileDataSource Id="DataSources.TITLEBAC.LBM" EntryName="TITLEBAC.LBM" ArchivePath="%Cfg.Options.ABTA.GameFolderPath%\ta.epf" />
+				<FileDataSource Id="DataSources.Scripts.Entry.lua" FilePath=".\Scripts\entry.lua" />
 			</Items>
 		</DataSources>
 		<Assets>
@@ -1010,6 +1011,9 @@
 				</Asset>
 				<Asset Id="Assets.TITLEBAC.LBM" DataSourceRef="DataSources.TITLEBAC.LBM" FormatType="IFF_IMAGE">
 					<Parameters/>
+				</Asset>
+				<Asset Id="Assets.Scripts.Entry.lua" DataSourceRef="DataSources.Scripts.Entry.lua" FormatType="TEXT">
+					<Parameters />
 				</Asset>
 			</Items>
 		</Assets>
@@ -3928,6 +3932,9 @@
 		</Texts>
 		<Scripts>
 			<Items>
+				<ScriptFromFile Id="Scripts.Entry.lua">
+					<DataRef>Assets.Scripts.Entry.lua</DataRef>
+				</ScriptFromFile>
 			</Items>
 		</Scripts>
 	</Tables>

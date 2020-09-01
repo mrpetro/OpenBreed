@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Database.Interface.Items.Texts
+namespace OpenBreed.Database.Interface.Items.Scripts
 {
-    public interface ITextFromFileEntry : ITextEntry
+    public interface IScriptFromFileEntry : IScriptEntry
     {
     }
 }

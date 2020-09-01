@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace OpenBreed.Database.Xml.Items.Texts
+namespace OpenBreed.Database.Xml.Items.Scripts
 {
     [Serializable]
 

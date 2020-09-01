@@ -12,13 +12,10 @@ using System.Xml.Serialization;
 namespace OpenBreed.Database.Xml.Items.Scripts
 {
     [Serializable]
-    [Description("Script embedded"), Category("Appearance")]
-    public class XmlScriptEmbeddedEntry : XmlScriptEntry, IScriptEmbeddedEntry
+    [Description("Script from file"), Category("Appearance")]
+    public class XmlScriptFromFileEntry : XmlScriptEntry, IScriptFromFileEntry
     {
         #region Public Properties
-
-        [XmlElement("Script")]
-        public string Script { get; set; }
 
         #endregion Public Properties
 
@@ -30,8 +27,7 @@ namespace OpenBreed.Database.Xml.Items.Scripts
             {
                 Id = this.Id,
                 Description = this.Description,
-                DataRef = this.DataRef,
-                Script = this.Script
+                DataRef = this.DataRef
             };
         }
 

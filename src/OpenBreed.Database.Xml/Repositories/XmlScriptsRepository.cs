@@ -2,6 +2,7 @@
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Scripts;
+using OpenBreed.Database.Xml.Items.Scripts;
 using OpenBreed.Database.Xml.Items.Texts;
 using OpenBreed.Database.Xml.Tables;
 using System;

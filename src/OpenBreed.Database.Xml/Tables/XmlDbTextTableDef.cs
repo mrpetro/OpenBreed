@@ -15,7 +15,7 @@ namespace OpenBreed.Database.Xml.Tables
         [XmlArray("Items"),
         XmlArrayItem("TextEmbedded", typeof(XmlTextEmbeddedEntry)),
         XmlArrayItem("TextFromMAP", typeof(XmlTextFromMapEntry)),
-            ]
+        XmlArrayItem("TextFromFile", typeof(XmlTextFromFileEntry)),]
         public readonly List<XmlTextEntry> Items = new List<XmlTextEntry>();
 
         #endregion Public Fields

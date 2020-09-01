@@ -80,6 +80,7 @@
     <Compile Include="Items\Palettes\XmlPaletteEntry.cs" />
     <Compile Include="Items\Scripts\XmlScriptEmbeddedEntry.cs" />
     <Compile Include="Items\Scripts\XmlScriptEntry.cs" />
+    <Compile Include="Items\Scripts\XmlScriptFromFileEntry.cs" />
     <Compile Include="Items\Sounds\XmlSoundEntry.cs" />
     <Compile Include="Items\Sprites\XmlSpriteCoords.cs" />
     <Compile Include="Items\Sprites\XmlSpriteSetEntry.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Items\Sprites\XmlSpriteSetFromImageEntry.cs" />
     <Compile Include="Items\Texts\XmlTextEntry.cs" />
     <Compile Include="Items\Texts\XmlTextEmbeddedEntry.cs" />
+    <Compile Include="Items\Texts\XmlTextFromFileEntry.cs" />
     <Compile Include="Items\Texts\XmlTextFromMapEntry.cs" />
     <Compile Include="Items\Tiles\XmlTileSetEntry.cs" />
     <Compile Include="Items\Tiles\XmlTileSetFromImageEntry.cs" />
@@ -135,6 +137,9 @@
     <Content Include="Defaults\GameDatabase.ABTA.EPF.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Defaults\Scripts\entry.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
