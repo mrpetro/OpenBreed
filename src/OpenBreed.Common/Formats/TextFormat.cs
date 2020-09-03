@@ -37,7 +37,16 @@ namespace OpenBreed.Common.Formats
 
         public void Save(DataSourceBase ds, object model, List<FormatParameter> parameters)
         {
-            throw new NotImplementedException();
+            if (ds.Stream == null)
+                throw new InvalidOperationException("Asset stream not opened.");
+
+            //Remember to clear the stream before writing
+            ds.Stream.SetLength(0);
+
+            using (var sw = new StreamWriter(ds.Stream, Encoding.UTF8, 1024, true))
+            {
+                sw.Write(((TextModel)model).Text);
+            }
         }
 
         #endregion Public Methods
