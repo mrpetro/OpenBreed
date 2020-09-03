@@ -151,7 +151,7 @@
     <Compile Include="Scripts\ScriptEditorVM.cs" />
     <Compile Include="Scripts\ScriptVM.cs" />
     <Compile Include="Scripts\ScriptEmbeddedVM.cs" />
-    <Compile Include="Scripts\ScriptFromMapVM.cs" />
+    <Compile Include="Scripts\ScriptFromFileVM.cs" />
     <Compile Include="SettingsMan.cs" />
     <Compile Include="Sprites\SpriteFromImageEditorVM.cs" />
     <Compile Include="Sprites\SpriteSetEditorVM.cs" />
