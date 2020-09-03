@@ -24,5 +24,20 @@ namespace OpenBreed.Common.Data
             builder.SetScript(scriptEntry.Script);
             return builder.Build();
         }
+
+        internal static ScriptModel FromText(DataProvider provider, IScriptFromFileEntry entry)
+        {
+            if (entry.DataRef == null)
+                return null;
+
+            var data = provider.GetData(entry.DataRef) as TextModel;
+
+            if (data == null)
+                return null;
+
+            var builder = ScriptBuilder.NewScriptModel();
+            builder.SetScript(data.Text);
+            return builder.Build();
+        }
     }
 }

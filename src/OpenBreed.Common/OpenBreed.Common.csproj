@@ -66,6 +66,10 @@
     <Compile Include="..\Shared\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="ApplicationBase.cs" />
+    <Compile Include="Formats\TextFormat.cs" />
+    <Compile Include="IApplication.cs" />
+    <Compile Include="IApplicationInterface.cs" />
     <Compile Include="Model\BinaryModel.cs" />
     <Compile Include="Commands\CommandMan.cs" />
     <Compile Include="Commands\ICommand.cs" />
@@ -129,6 +133,7 @@
     <Compile Include="Model\Maps\MapLayerModel.cs" />
     <Compile Include="Readers\Maps\IMapModelReader.cs" />
     <Compile Include="Readers\Maps\MAP\MAPReader.cs" />
+    <Compile Include="VariableMan.cs" />
     <Compile Include="Writers\Maps\IMapModelWriter.cs" />
     <Compile Include="Writers\Maps\MAP\MAPWriter.cs" />
     <Compile Include="Builders\Palettes\PaletteBuilder.cs" />

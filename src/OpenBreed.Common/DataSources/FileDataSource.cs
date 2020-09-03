@@ -32,7 +32,7 @@ namespace OpenBreed.Common.DataSources
 
         protected override Stream CreateStream()
         {
-            string filePath = DataSourceProvider.ExpandVariables(FilePath);
+            string filePath = provider.ExpandVariables(FilePath);
             return File.Open(filePath, FileMode.Open, FileAccess.ReadWrite);
         }
 

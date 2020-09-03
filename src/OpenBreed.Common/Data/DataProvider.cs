@@ -118,6 +118,7 @@ namespace OpenBreed.Common.Data
             FormatMan.RegisterFormat("IFF_IMAGE", new IFFImageFormat());
             FormatMan.RegisterFormat("BINARY", new BinaryFormat());
             FormatMan.RegisterFormat("PCM_SOUND", new PCMSoundFormat());
+            FormatMan.RegisterFormat("TEXT", new TextFormat());
         }
 
         private void SaveModels()

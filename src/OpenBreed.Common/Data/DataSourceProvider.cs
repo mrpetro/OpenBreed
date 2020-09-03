@@ -1,14 +1,10 @@
 ﻿using EPF;
-using OpenBreed.Common.Assets;
 using OpenBreed.Common.DataSources;
 using OpenBreed.Common.Helpers;
 using OpenBreed.Database.Interface.Items.DataSources;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Data
 {
@@ -16,7 +12,6 @@ namespace OpenBreed.Common.Data
 
     public class DataSourceProvider
     {
-
         #region Private Fields
 
         private readonly Dictionary<string, DataSourceBase> _openedDataSources = new Dictionary<string, DataSourceBase>();
@@ -35,8 +30,7 @@ namespace OpenBreed.Common.Data
 
         #region Public Properties
 
-        public static ExpandVariablesDelegate ExpandVariables { get; set; }
-
+        public static ExpandVariablesDelegate ExpandGlobalVariables { get; set; }
         public DataProvider DataProvider { get; }
 
         #endregion Public Properties
@@ -61,6 +55,15 @@ namespace OpenBreed.Common.Data
         #endregion Public Methods
 
         #region Internal Methods
+
+        internal string ExpandVariables(string text)
+        {
+            var result = ExpandGlobalVariables(text);
+
+
+
+            return result;
+        }
 
         internal void CloseAll()
         {
@@ -100,7 +103,7 @@ namespace OpenBreed.Common.Data
         internal void Save()
         {
             foreach (var openedArchive in _openedArchives)
-                    openedArchive.Value.Save();
+                openedArchive.Value.Save();
         }
 
         #endregion Internal Methods

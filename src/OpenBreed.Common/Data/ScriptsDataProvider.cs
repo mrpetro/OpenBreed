@@ -27,6 +27,10 @@ namespace OpenBreed.Common.Data
 
         #endregion Public Properties
 
+        private ScriptModel GetModelImpl(IScriptFromFileEntry entry)
+        {
+            return ScriptsDataHelper.FromText(Provider, entry);
+        }
 
         private ScriptModel GetModelImpl(IScriptEmbeddedEntry entry)
         {

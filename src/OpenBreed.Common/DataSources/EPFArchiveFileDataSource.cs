@@ -64,7 +64,7 @@ namespace OpenBreed.Common.DataSources
             if (_entry != null)
                 throw new InvalidOperationException($"Entry {EntryName} already initialized.");
 
-            var archive = provider.GetArchive(DataSourceProvider.ExpandVariables(ArchivePath));
+            var archive = provider.GetArchive(provider.ExpandVariables(ArchivePath));
             _entry = archive.FindEntry(EntryName);
         }
 
