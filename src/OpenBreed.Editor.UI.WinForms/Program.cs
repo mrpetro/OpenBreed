@@ -27,9 +27,11 @@ namespace OpenBreed.Editor.UI.WinForms
 
             //Application.Run(new GLTestForm());
 
+            var application = new EditorApplication();
+
             ServiceLocator.Instance.RegisterService<IDialogProvider>(new DialogProvider());
 
-            using (var editor = new EditorVM())
+            using (var editor = new EditorVM(application))
             {
                 editor.Run();
             }

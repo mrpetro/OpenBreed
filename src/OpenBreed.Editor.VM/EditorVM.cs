@@ -61,8 +61,12 @@ namespace OpenBreed.Editor.VM
 
         #region Public Constructors
 
-        public EditorVM()
+        private EditorApplication application;
+
+        public EditorVM(EditorApplication application)
         {
+            this.application = application;
+
             Logger = new LoggerVM();
 
             ServiceLocator.Instance.RegisterService<EditorVM>(this);
@@ -86,13 +90,15 @@ namespace OpenBreed.Editor.VM
 
             DialogProvider = ServiceLocator.Instance.GetService<IDialogProvider>();
 
-
-            Settings = new SettingsMan();
-
-            DbEditor = new DbEditorVM();
+            DbEditor = new DbEditorVM(application);
             //PaletteEditor = new PaletteEditorVM();
             //SpriteViewer = new SpriteViewerVM(this);
-            DataSourceProvider.ExpandVariables = Settings.ExpandVariables;
+            DataSourceProvider.ExpandGlobalVariables = application.Variables.ExpandVariables;
+        }
+
+        public void ShowOptions()
+        {
+            ShowOptionsAction?.Invoke(application.Settings);
         }
 
         #endregion Public Constructors
@@ -103,8 +109,8 @@ namespace OpenBreed.Editor.VM
         public IDialogProvider DialogProvider { get; }
         public LoggerVM Logger { get; }
         public PaletteEditorVM PaletteEditor { get; }
-        public SettingsMan Settings { get; private set; }
         public Action<LoggerVM> ShowLoggerAction { get; set; }
+        public Action<SettingsMan> ShowOptionsAction { get; set; }
 
         //public SourceMan SourceMan { get; }
         public EditorState State
@@ -120,7 +126,6 @@ namespace OpenBreed.Editor.VM
         //public SpriteViewerVM SpriteViewer { get; }
         public void Dispose()
         {
-            Settings.Store();
         }
 
         public void Run()
@@ -173,15 +178,13 @@ namespace OpenBreed.Editor.VM
 
             //LevelEditor.Connect();
             //SpriteViewer.Connect();
-
-            Settings.Restore();
         }
         private void RunABTAGame()
         {
             Process proc = new Process();
-            proc.StartInfo.FileName = Settings.Cfg.Options.ABTA.GameRunFilePath;
-            proc.StartInfo.Arguments = Settings.Cfg.Options.ABTA.GameRunFileArgs;
-            proc.StartInfo.WorkingDirectory = Settings.Cfg.Options.ABTA.GameFolderPath;
+            proc.StartInfo.FileName = application.Settings.Cfg.Options.ABTA.GameRunFilePath;
+            proc.StartInfo.Arguments = application.Settings.Cfg.Options.ABTA.GameRunFileArgs;
+            proc.StartInfo.WorkingDirectory = application.Settings.Cfg.Options.ABTA.GameFolderPath;
             proc.Start();
         }
 

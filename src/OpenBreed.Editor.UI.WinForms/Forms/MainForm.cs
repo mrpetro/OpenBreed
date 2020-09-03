@@ -94,7 +94,11 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             VM.DbEditor.PropertyChanged += VM_PropertyChanged;
 
             ViewToggleLoggerToolStripMenuItem.Click += (s, a) => VM.ShowLogger();
+
+            OptionsToolStripMenuItem.Click += (s, a) => VM.ShowOptions();
+
             VM.ShowLoggerAction = OnShowLogger;
+            VM.ShowOptionsAction = OnShowOptions;
         }
 
         #endregion Public Methods
@@ -146,6 +150,16 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             }
         }
 
+        private void OnShowOptions(SettingsMan settings)
+        {
+            using (OptionsForm optionsForm = new OptionsForm(settings))
+            {
+                DialogResult result = optionsForm.ShowDialog();
+
+                if (result == System.Windows.Forms.DialogResult.OK)
+                    optionsForm.UpdateSettings();
+            }
+        }
 
         private void OpenABTAPasswordGenerator()
         {
@@ -156,22 +170,6 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             if (result == System.Windows.Forms.DialogResult.OK)
             {
             }
-        }
-
-        private void OpenOptionsForm()
-        {
-            using (OptionsForm optionsForm = new OptionsForm(VM.Settings))
-            {
-                DialogResult result = optionsForm.ShowDialog();
-
-                if (result == System.Windows.Forms.DialogResult.OK)
-                    optionsForm.UpdateSettings();
-            }
-        }
-
-        private void OptionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Other.TryAction(OpenOptionsForm);
         }
 
         private void ShowLogConsoleToolStripMenuItem_CheckedChanged(object sender, EventArgs e)

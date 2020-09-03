@@ -4,6 +4,7 @@ using OpenBreed.Common.Data;
 using OpenBreed.Common.Model.Maps;
 using OpenBreed.Common.Model.Maps.Blocks;
 using OpenBreed.Common.Model.Scripts;
+using OpenBreed.Common.Model.Texts;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Scripts;
 using OpenBreed.Database.Xml.Items.Assets;
@@ -75,6 +76,15 @@ namespace OpenBreed.Editor.VM.Scripts
             DataRef = entry.DataRef;
         }
 
+        private void ToEntry(IScriptFromFileEntry source)
+        {
+            var model = ServiceLocator.Instance.GetService<DataProvider>().GetData(DataRef) as TextModel;
+
+            model.Text = Script;
+
+            source.DataRef = DataRef;
+        }
+
         private void This_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
@@ -85,16 +95,6 @@ namespace OpenBreed.Editor.VM.Scripts
                 default:
                     break;
             }
-        }
-
-        private void ToEntry(IScriptFromFileEntry source)
-        {
-            var model = ServiceLocator.Instance.GetService<DataProvider>().GetData(DataRef) as ScriptModel;
-
-
-            model.Script = Script;
-
-            source.DataRef = DataRef;
         }
 
         private bool ValidateSettings()

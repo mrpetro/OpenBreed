@@ -17,6 +17,8 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Data;
 using OpenBreed.Database.Interface;
+using OpenBreed.Common.Helpers;
+using System.IO;
 
 namespace OpenBreed.Editor.VM.Database
 {
@@ -33,9 +35,11 @@ namespace OpenBreed.Editor.VM.Database
         #endregion Private Fields
 
         #region Public Constructors
-
-        public DbEditorVM()
+        private EditorApplication application;
+        public DbEditorVM(EditorApplication application)
         {
+            this.application = application;
+
             DbTablesEditor = new DbTablesEditorVM();
         }
 
@@ -99,9 +103,62 @@ namespace OpenBreed.Editor.VM.Database
                 return false;
         }
 
-        public void TryOpenXmlDatabase()
+        /// <summary>
+        /// This checks if database is opened already,
+        /// If it is then it asks of it can be closed
+        /// </summary>
+        /// <returns>True if no database was opened or if previous one was closed, false otherwise</returns>
+        internal bool CheckCloseCurrentDatabase(DbEditorVM dbEditor, string newDatabaseFilePath)
         {
-            DbEditorVMHelper.TryOpenXmlDatabase(this);
+            if (dbEditor.Editable != null)
+            {
+                if (IOHelper.GetNormalizedPath(newDatabaseFilePath) == IOHelper.GetNormalizedPath(dbEditor.Editable.Name))
+                {
+                    //Root.Logger.Warning("Database already opened.");
+                    return false;
+                }
+
+                var answer = ServiceLocator.Instance.GetService<IDialogProvider>().ShowMessageWithQuestion($"Another database ({dbEditor.Editable.Name}) is already opened. Do you want to close it?",
+                                                                "Close current database?",
+                                                                QuestionDialogButtons.OKCancel);
+                if (answer != DialogAnswer.OK)
+                    return false;
+
+                if (!dbEditor.TryCloseDatabase())
+                    return false;
+            }
+
+            return true;
+        }
+
+        public bool TryOpenXmlDatabase()
+        {
+            var openFileDialog = ServiceLocator.Instance.GetService<IDialogProvider>().OpenFileDialog();
+            openFileDialog.Title = "Select an Open Breed Editor Database file to open...";
+            openFileDialog.Filter = "Open Breed Editor Database files (*.xml)|*.xml|All Files (*.*)|*.*";
+            openFileDialog.InitialDirectory = XmlDatabase.DefaultDirectoryPath;
+            openFileDialog.Multiselect = false;
+
+            var answer = openFileDialog.Show();
+
+            if (answer != DialogAnswer.OK)
+                return false;
+
+            string databaseFilePath = openFileDialog.FileName;
+
+            if (!CheckCloseCurrentDatabase(this, databaseFilePath))
+                return false;
+
+            var unitOfWork = XmlDatabaseMan.Open(databaseFilePath).CreateUnitOfWork();
+
+            var directoryPath = Path.GetDirectoryName(databaseFilePath);
+            var fileName = Path.GetFileName(databaseFilePath);
+
+            application.Variables.RegisterVariable(typeof(string), directoryPath, "Db.Current.FolderPath");
+            application.Variables.RegisterVariable(typeof(string), fileName, "Db.Current.FileName");
+
+            EditModel(unitOfWork);
+            return true;
         }
 
         public void TrySaveDatabase()
