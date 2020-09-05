@@ -203,6 +203,8 @@ namespace OpenBreed.Core.Common
             Cleanup();
 
             Core.Worlds.RaiseEvent(new WorldInitializedEventArgs(Id));
+            Core.Scripts.TryInvokeFunction("WorldLoaded", Id);
+
         }
 
         internal void Deinitialize()

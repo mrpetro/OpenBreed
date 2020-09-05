@@ -1,11 +1,18 @@
 ﻿
 
 EngineInitialized = function()
-	myass = Core.Rendering.Viewports:Create(10,10,400,400)
+    Logging:Verbose("Engine initialized.")
+
+	 --Entities:CreateFromTemplate("")
+	--myass = Core.Rendering.Viewports:Create(10,10,400,400)
 end
 
 WorldLoaded = function(world)
-	player = Core.Players.GetPlayer("P1")
+    Logging:Verbose("World '" .. world .. "' loaded.")
+
+	--Trigger.OnEvent(Collision.Events.FadeIn, camera, Logo2FadedIn)
+
+	--player = Players:GetPlayer("P1")
 
 	--Trigger.AfterDelay(
 	--	DateTime.Seconds(5), 

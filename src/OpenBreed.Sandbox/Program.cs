@@ -216,6 +216,8 @@ namespace OpenBreed.Sandbox
         {
             window.Title = $"Open Breed Sandbox (Version: {appVersion} Vsync: {window.VSync})";
 
+            ExposeScriptingApi();
+
             RegisterSystems();
             RegisterComponentBuilders();
             RegisterShapes();
@@ -296,6 +298,18 @@ namespace OpenBreed.Sandbox
             GameWorldHelper.Create(this);
 
             OnEngineInitialized();
+        }
+
+        private void ExposeScriptingApi()
+        {
+            Scripts.Expose("Worlds", Worlds);
+            Scripts.Expose("Entities", Entities);
+            Scripts.Expose("Commands", Commands);
+            Scripts.Expose("Inputs", Inputs);
+            Scripts.Expose("Logging", Logging);
+            Scripts.Expose("Players", Players);
+
+            Scripts.RunFile(@"Content\Scripts\start.lua");
         }
 
         protected void OnEngineInitialized()

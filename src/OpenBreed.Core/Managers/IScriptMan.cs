@@ -25,6 +25,8 @@ namespace OpenBreed.Core.Managers
 
         void SetObject(string objectName, object value);
 
+        void Expose(string apiName, object apiObj);
+
         #endregion Public Methods
     }
 }

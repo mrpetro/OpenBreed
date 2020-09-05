@@ -22,7 +22,6 @@ namespace OpenBreed.Core.Managers
 
             luaState = new Lua();
             luaState.LoadCLRPackage();
-            luaState["Core"] = Core;
 
             //Define table placeholder for templates namespace
             luaState.NewTable("Templates");
@@ -43,6 +42,11 @@ namespace OpenBreed.Core.Managers
         #endregion Public Properties
 
         #region Public Methods
+
+        public void Expose(string apiName, object apiObj)
+        {
+            luaState[apiName] = apiObj;
+        }
 
         public object GetObject(string objectName)
         {
