@@ -36,7 +36,7 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
 
         #region Public Methods
 
-        public bool UpdateWithNextFrame(Entity entity, Animator animator, out object nextFrame)
+        public bool UpdateWithNextFrame(Entity entity, Animator animator)
         {
             T cf = default(T);
 
@@ -45,17 +45,18 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
 
             var nf = GetFrame(animator.Position, animator.Transition);
 
-            nextFrame = nf;
-
             var update = !cf.Equals(nf);
 
             if (update)
+            {
                 frameUpdateAction.Invoke(entity, nf);
+                animator.Frame = nf;
+            }
 
             return update;
         }
 
-        public T GetFrame(float time, FrameTransition transition = FrameTransition.None)
+        private T GetFrame(float time, FrameTransition transition = FrameTransition.None)
         {
             switch (transition)
             {

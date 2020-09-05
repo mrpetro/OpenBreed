@@ -148,13 +148,8 @@ namespace OpenBreed.Core.Modules.Animation.Systems
                 }
             }
 
-            object nextFrame;
-
-            if (data.UpdateWithNextFrame(entity, animator, out nextFrame))
-            {
-                animator.Frame = nextFrame;
+            if (data.UpdateWithNextFrame(entity, animator))
                 RaiseAnimChangedEvent(entity, animator);
-            }
         }
 
         private void RaiseAnimStoppedEvent(Entity entity, Animator animator)

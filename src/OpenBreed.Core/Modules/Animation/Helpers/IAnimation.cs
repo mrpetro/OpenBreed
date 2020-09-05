@@ -31,7 +31,7 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
 
         #region Public Methods
 
-        bool UpdateWithNextFrame(Entity entity, Animator animator, out object nextFrame);
+        bool UpdateWithNextFrame(Entity entity, Animator animator);
 
         #endregion Public Methods
     }
@@ -39,8 +39,6 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
     public interface IAnimation<T> : IAnimation
     {
         #region Public Methods
-
-        T GetFrame(float time, FrameTransition transition = FrameTransition.None);
 
         void AddFrame(T value, float frameTime);
 
