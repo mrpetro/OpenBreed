@@ -148,18 +148,12 @@ namespace OpenBreed.Core.Modules.Animation.Systems
                 }
             }
 
-            if (data.UpdateWithNextFrame(entity, animator))
-                RaiseAnimChangedEvent(entity, animator);
+            data.UpdateWithNextFrame(entity, animator);
         }
 
         private void RaiseAnimStoppedEvent(Entity entity, Animator animator)
         {
             entity.RaiseEvent(new AnimStoppedEventArgs(animator));
-        }
-
-        private void RaiseAnimChangedEvent(Entity entity, Animator animator)
-        {
-            entity.RaiseEvent(new AnimChangedEventArgs(animator.Frame));
         }
 
         private static bool HandlePauseAnimCommand(ICore core, PauseAnimCommand cmd)

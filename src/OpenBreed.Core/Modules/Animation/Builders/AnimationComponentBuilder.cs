@@ -12,7 +12,7 @@ namespace OpenBreed.Core.Modules.Animation.Builders
 
         internal float Speed;
         internal bool Loop;
-        internal int AnimId;
+        internal int AnimId = -1;
 
         #endregion Internal Fields
 

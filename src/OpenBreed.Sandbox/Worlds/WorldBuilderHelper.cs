@@ -67,7 +67,7 @@ namespace OpenBreed.Sandbox.Worlds
             builder.RegisterCode('{', AddWorldExit);
             builder.RegisterCode('V', AddViewport);
             builder.RegisterCode('T', AddTurret);
-
+            builder.RegisterCode('A', AddAnimTest);
             builder.RegisterCode(' ', AddAirCell);
 
             builder.RegisterCode(PLAYER_SPAWN_POINT, AddPlayer);
@@ -115,6 +115,17 @@ namespace OpenBreed.Sandbox.Worlds
             var pairCode = (int)args[2];
 
             WorldGateHelper.AddWorldEntry(world, x, y, pairCode);
+            world.Core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+        }
+
+        private static void AddAnimTest(World world, int code, object[] args)
+        {
+            var core = world.Core;
+            var x = (int)args[0];
+            var y = (int)args[1];
+            var pairCode = (int)args[2];
+
+            Misc.AddToWorld(world);
             world.Core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 

@@ -30,7 +30,7 @@ namespace OpenBreed.Core.Modules.Animation.Components
         public bool Paused { get; set; }
         public float Speed { get; set; }
         public bool Loop { get; set; }
-        public object Frame { get; set; }
+        //public object Frame { get; set; }
 
         #endregion Public Properties
     }
@@ -39,7 +39,7 @@ namespace OpenBreed.Core.Modules.Animation.Components
     {
         #region Public Constructors
 
-        public AnimationComponent(float speed = 1.0f, bool loop = false, int animId = 0, FrameTransition transition = FrameTransition.None)
+        public AnimationComponent(float speed = 1.0f, bool loop = false, int animId = -1, FrameTransition transition = FrameTransition.None)
         {
             //Speed = speed;
             //Loop = loop;

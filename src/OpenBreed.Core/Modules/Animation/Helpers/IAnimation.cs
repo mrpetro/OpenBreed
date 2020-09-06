@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
+using System;
 
 namespace OpenBreed.Core.Modules.Animation.Helpers
 {
@@ -33,10 +34,21 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
 
         bool UpdateWithNextFrame(Entity entity, Animator animator);
 
+        IAnimationPart<T> AddPart<T>(Action<Entity, T> frameUpdateAction, T initialValue);
+
         #endregion Public Methods
     }
 
-    public interface IAnimation<T> : IAnimation
+    public interface IAnimationPart
+    {
+        #region Public Methods
+
+        bool UpdateWithNextFrame(Entity entity, Animator animator);
+
+        #endregion Public Methods
+    }
+
+    public interface IAnimationPart<T> : IAnimationPart
     {
         #region Public Methods
 

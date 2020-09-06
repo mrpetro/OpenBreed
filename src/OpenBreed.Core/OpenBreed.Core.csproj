@@ -151,9 +151,9 @@
     <Compile Include="Modules\Animation\Commands\PlayAnimCommand.cs" />
     <Compile Include="Modules\Animation\Commands\SetAnimCommand.cs" />
     <Compile Include="Modules\Animation\Commands\StopAnimCommand.cs" />
-    <Compile Include="Modules\Animation\Events\AnimChangedEventArgs.cs" />
     <Compile Include="Modules\Animation\Events\AnimStoppedEventArgs.cs" />
     <Compile Include="Modules\Animation\Helpers\Animation.cs" />
+    <Compile Include="Modules\Animation\Helpers\AnimationPart.cs" />
     <Compile Include="Modules\Animation\Systems\AnimationSystem.cs" />
     <Compile Include="Modules\BaseCoreModule.cs" />
     <Compile Include="Scripting\IScriptFunc.cs" />

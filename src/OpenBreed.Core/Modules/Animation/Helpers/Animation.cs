@@ -6,22 +6,21 @@ using System.Linq;
 
 namespace OpenBreed.Core.Modules.Animation.Helpers
 {
-    internal class Animation<T> : IAnimation<T>
+    internal class Animation : IAnimation
     {
         #region Private Fields
 
-        private SortedDictionary<float, T> frames = new SortedDictionary<float, T>();
-        private Action<Entity, T> frameUpdateAction;
+        private readonly List<IAnimationPart> parts = new List<IAnimationPart>();
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal Animation(int id, string name, Action<Entity, T> frameUpdateAction)
+        internal Animation(int id, string name, float length)
         {
             Id = id;
             Name = name;
-            this.frameUpdateAction = frameUpdateAction;
+            Length = length;
         }
 
         #endregion Internal Constructors
@@ -30,100 +29,31 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
 
         public int Id { get; }
         public string Name { get; }
-        public float Length { get { return frames.Last().Key; } }
+        public float Length { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
+        public IAnimationPart<T> AddPart<T>(Action<Entity, T> frameUpdateAction, T initialValue)
+        {
+            var newPart = new AnimationPart<T>(frameUpdateAction, initialValue);
+            parts.Add(newPart);
+            return newPart;
+        }
+
         public bool UpdateWithNextFrame(Entity entity, Animator animator)
         {
-            T cf = default(T);
+            for (int i = 0; i < parts.Count; i++)
+                parts[i].UpdateWithNextFrame(entity, animator);
 
-            if (animator.Frame != null)
-                cf = (T)animator.Frame;
-
-            var nf = GetFrame(animator.Position, animator.Transition);
-
-            var update = !cf.Equals(nf);
-
-            if (update)
-            {
-                frameUpdateAction.Invoke(entity, nf);
-                animator.Frame = nf;
-            }
-
-            return update;
-        }
-
-        private T GetFrame(float time, FrameTransition transition = FrameTransition.None)
-        {
-            switch (transition)
-            {
-                case FrameTransition.None:
-                    return GetFrameNoTransition(time);
-
-                case FrameTransition.LinearInterpolation:
-                    return GetFrameLinearInterpolation(time);
-
-                default:
-                    throw new NotImplementedException($"Transition '{transition}' not implemented.");
-            }
-        }
-
-        public void AddFrame(T value, float frameTime)
-        {
-            if (frames.Any())
-                frames.Add(frames.Last().Key + frameTime, value);
-            else
-                frames.Add(frameTime, value);
+            return true;
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private T GetFrameNoTransition(float time)
-        {
-            foreach (var frame in frames)
-            {
-                if (time <= frame.Key)
-                    return frame.Value;
-            }
-
-            return frames.Last().Value;
-        }
-
-        private void GetFrames(float time, out KeyValuePair<float, T> start, out KeyValuePair<float, T> end)
-        {
-            start = frames.First();
-
-            foreach (var frame in frames)
-            {
-                if (time <= frame.Key)
-                {
-                    end = frame;
-                    return;
-                }
-                else
-                    start = frame;
-            }
-
-            end = frames.Last();
-        }
-
-        private T GetFrameLinearInterpolation(float time)
-        {
-            KeyValuePair<float, T> start;
-            KeyValuePair<float, T> end;
-
-            GetFrames(time, out start, out end);
-
-            var ct = time - start.Key;
-            var dt = end.Key - start.Key;
-
-            return (T)MathTools.Lerp(start.Value, end.Value, ct / dt);
-        }
 
         #endregion Private Methods
     }

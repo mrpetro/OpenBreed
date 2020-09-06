@@ -282,6 +282,7 @@ namespace OpenBreed.Sandbox
             TurretHelper.CreateAnimations(this);
             TeleportHelper.CreateAnimations(this);
             ProjectileHelper.CreateAnimations(this);
+            Misc.CreateAnimations(this);
 
             DoorHelper.CreateFsm(this);
             ProjectileHelper.CreateFsm(this);
