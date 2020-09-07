@@ -3,6 +3,8 @@ using OpenBreed.Core.Common.Components;
 using System;
 using System.Collections.Generic;
 using OpenBreed.Core.Modules.Animation.Components;
+using OpenBreed.Core.Commands;
+using OpenBreed.Core.Modules.Animation.Helpers;
 
 namespace OpenBreed.Core.Modules.Animation.Builders
 {
@@ -10,8 +12,6 @@ namespace OpenBreed.Core.Modules.Animation.Builders
     {
         #region Internal Fields
 
-        internal float Speed;
-        internal bool Loop;
         internal int AnimId = -1;
 
         #endregion Internal Fields
@@ -32,16 +32,33 @@ namespace OpenBreed.Core.Modules.Animation.Builders
 
         public static IComponentBuilder New(ICore core)
         {
+            var builder = new AnimationComponentBuilder(core);
+            builder.AddAnimator();
+            return builder;
+        }
+
+        public static AnimationComponentBuilder NewAnimation(ICore core)
+        {
             return new AnimationComponentBuilder(core);
+        }
+
+        internal List<AnimatorBuilder> animatorBuilders = new List<AnimatorBuilder>();
+
+        public AnimatorBuilder AddAnimator()
+        {
+            var animatorBuilder = new AnimatorBuilder(Core);
+            animatorBuilders.Add(animatorBuilder);
+            return animatorBuilder;
         }
 
         public static void Register(ICore core)
         {
             core.Entities.RegisterComponentBuilder(nameof(AnimationComponent), New);
 
-            RegisterSetter(nameof(Speed), (o, value) => { o.Speed = Convert.ToSingle(value); });
-            RegisterSetter(nameof(Loop), (o, value) => { o.Loop = Convert.ToBoolean(value); });
-            RegisterSetter(nameof(AnimId), (o, value) => { o.AnimId = o.ToAnimId(value); });
+            RegisterSetter("Speed", (o, value) => { o.animatorBuilders[0].SetSpeed(Convert.ToSingle(value)); });
+            RegisterSetter("Loop", (o, value) => { o.animatorBuilders[0].SetLoop(Convert.ToBoolean(value)); });
+            RegisterSetter("AnimId", (o, value) => { o.animatorBuilders[0].SetAnimId(o.ToAnimId(value)); });
+            RegisterSetter("Transition", (o, value) => { o.animatorBuilders[0].SetTransition(o.ToTransition(value)); });
         }
 
         public override IEntityComponent Build()
@@ -59,6 +76,16 @@ namespace OpenBreed.Core.Modules.Animation.Builders
                 return (int)value;
 
             return Core.Animations.GetByName(Convert.ToString(value)).Id;
+        }
+
+        private FrameTransition ToTransition(object value)
+        {
+            if (value is "LinearInterpolation")
+                return FrameTransition.LinearInterpolation;
+            else if (value is "None")
+                return FrameTransition.None;
+            else
+                throw new Exception();
         }
 
         #endregion Private Methods

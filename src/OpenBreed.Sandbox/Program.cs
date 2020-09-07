@@ -415,6 +415,7 @@ namespace OpenBreed.Sandbox
         private void RegisterEntityTemplates()
         {
             Scripts.RunFile(@"Entities\Actor\Arrow.lua");
+            Scripts.RunFile(@"Entities\CrazyMover\CrazyMover.lua");
             Scripts.RunFile(@"Entities\Turret\Turret.lua");
             Scripts.RunFile(@"Entities\Door\DoorHorizontal.lua");
             Scripts.RunFile(@"Entities\Door\DoorVertical.lua");

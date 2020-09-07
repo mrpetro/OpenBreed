@@ -50,6 +50,11 @@ namespace OpenBreed.Core.Modules.Animation.Helpers
             return true;
         }
 
+
+        public override string ToString()
+        {
+            return $"{Name} ({Id})";
+        }
         #endregion Public Methods
 
         #region Private Methods

@@ -60,20 +60,30 @@ namespace OpenBreed.Sandbox
         {
             var arial12 = world.Core.Rendering.Fonts.Create("ARIAL", 10);
 
-            var crazyMover = world.Core.Entities.Create();
+            var crazyMover = world.Core.Entities.CreateFromTemplate("CrazyMover");
 
 
 
-            crazyMover.Add(PositionComponent.Create(0,0));
-            crazyMover.Add(new AnimationComponent(10.0f, true, world.Core.Animations.GetByName(CRAZY_MOVE_ANIM).Id, FrameTransition.LinearInterpolation));
-            var textBuilder = TextComponentBuilder.New(world.Core);
-            textBuilder.SetProperty("FontId", arial12.Id);
-            textBuilder.SetProperty("Offset", Vector2.Zero);
-            textBuilder.SetProperty("Color", Color4.White);
-            textBuilder.SetProperty("Text", "Crazy Moveroooooooooooo");
-            textBuilder.SetProperty("Order", 100.0f);
+            //crazyMover.Add(PositionComponent.Create(0,0));
 
-            crazyMover.Add(textBuilder.Build());
+            //var animCmpBuilder = AnimationComponentBuilder.NewAnimation(world.Core);
+            //animCmpBuilder.AddAnimator().SetSpeed(10.0f)
+            //                            .SetLoop(true)
+            //                            .SetAnimId(world.Core.Animations.GetByName(CRAZY_MOVE_ANIM).Id)
+            //                            .SetTransition(FrameTransition.LinearInterpolation);
+            //crazyMover.Add(animCmpBuilder.Build());
+
+
+            //var textBuilder = TextComponentBuilder.New(world.Core);
+            //textBuilder.SetProperty("FontId", arial12.Id);
+            //textBuilder.SetProperty("Offset", Vector2.Zero);
+            //textBuilder.SetProperty("Color", Color4.White);
+            //textBuilder.SetProperty("Text", "Crazy Mover");
+            //textBuilder.SetProperty("Order", 100.0f);
+
+            //crazyMover.Add(textBuilder.Build());
+
+
             world.Core.Commands.Post(new AddEntityCommand(world.Id, crazyMover.Id));
         }
 

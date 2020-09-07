@@ -141,7 +141,7 @@
     <Compile Include="Jobs\FpsTextUpdateJob.cs" />
     <Compile Include="Managers\LogMan.cs" />
     <Compile Include="Items\CreditsItem.cs" />
-    <Compile Include="Entities\AnimTest\Misc.cs" />
+    <Compile Include="Entities\CrazyMover\Misc.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Systems\UiSystem.cs" />
@@ -190,6 +190,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Entities\Turret\Turret.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Entities\CrazyMover\CrazyMover.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="OpenTK.dll.config" />

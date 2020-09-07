@@ -6,6 +6,7 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Animation;
+using OpenBreed.Core.Modules.Animation.Builders;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Helpers;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
@@ -95,12 +96,26 @@ namespace OpenBreed.Sandbox.Worlds
 
             var playerCamera = cameraBuilder.Build();
             playerCamera.Tag = "PlayerCamera";
-            playerCamera.Add(new AnimationComponent(10.0f, false, -1, FrameTransition.LinearInterpolation));
+
+            var animCmpBuilder = AnimationComponentBuilder.NewAnimation(core);
+            animCmpBuilder.AddAnimator().SetSpeed(10.0f)
+                                        .SetLoop(false)
+                                        .SetAnimId(-1)
+                                        .SetTransition(FrameTransition.LinearInterpolation);
+
+            playerCamera.Add(animCmpBuilder.Build());
 
             cameraBuilder.SetFov(640, 480);
             var gameCamera = cameraBuilder.Build();
             gameCamera.Tag = "HubCamera";
-            gameCamera.Add(new AnimationComponent(10.0f, false, -1, FrameTransition.LinearInterpolation));
+
+            animCmpBuilder = AnimationComponentBuilder.NewAnimation(core);
+            animCmpBuilder.AddAnimator().SetSpeed(10.0f)
+                                        .SetLoop(false)
+                                        .SetAnimId(-1)
+                                        .SetTransition(FrameTransition.LinearInterpolation);
+
+            gameCamera.Add(animCmpBuilder.Build());
 
             using (var reader = new TxtFileWorldReader(core, ".\\Content\\Maps\\hub.txt"))
                 gameWorld = reader.GetWorld();
