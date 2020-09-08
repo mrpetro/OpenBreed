@@ -17,7 +17,7 @@ using OpenBreed.Database.Interface;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
-    public class XmlAssetsRepository : XmlRepositoryBase, IRepository<IAssetEntry>
+    public class XmlAssetsRepository : XmlRepositoryBase<IAssetEntry>
     {
 
         #region Private Fields
@@ -39,10 +39,10 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public IEnumerable<IEntry> Entries { get { return _table.Items; } }
-        public string Name { get { return "Assets"; } }
+        public override IEnumerable<IEntry> Entries { get { return _table.Items; } }
+        public override string Name { get { return "Assets"; } }
 
-        public IEnumerable<Type> EntryTypes
+        public override IEnumerable<Type> EntryTypes
         {
             get
             {
@@ -50,85 +50,31 @@ namespace OpenBreed.Database.Xml.Repositories
             }
         }
 
+        public override int Count => _table.Items.Count;
+
         #endregion Public Properties
 
         #region Public Methods
 
-        public void Add(IAssetEntry entity)
+        protected override IAssetEntry GetEntryWithIndex(int index)
         {
-            throw new NotImplementedException();
+            return _table.Items[index];
         }
 
-        public IEntry Find(string id)
+        protected override int GetIndexOf(IAssetEntry entry)
         {
-            return _table.Items.FirstOrDefault(item => item.Id == id);
+            return _table.Items.IndexOf((XmlAssetEntry)entry);
         }
 
-        public IAssetEntry GetById(string id)
+        protected override void ReplaceEntryWithIndex(int index, IAssetEntry newEntry)
         {
-            var assetDef = _table.Items.FirstOrDefault(item => item.Id == id);
-            if (assetDef == null)
-                throw new Exception("No Asset definition found with Id: " + id);
-
-            return assetDef;
+            _table.Items[index] = (XmlAssetEntry)newEntry;
         }
 
-        public IAssetEntry GetNextTo(IAssetEntry entry)
+        public override void Add(IAssetEntry newEntry)
         {
-            var index = _table.Items.IndexOf((XmlAssetEntry)entry);
-            if (index < 0)
-                throw new InvalidOperationException($"{entry} not found in repository");
-
-            index++;
-
-            if (index > _table.Items.Count - 1)
-                return null;
-            else
-                return _table.Items[index];
+            _table.Items.Add((XmlAssetEntry)newEntry);
         }
-
-        public IAssetEntry GetPreviousTo(IAssetEntry entry)
-        {
-            var index = _table.Items.IndexOf((XmlAssetEntry)entry);
-            if (index < 0)
-                throw new InvalidOperationException($"{entry} not found in repository");
-
-            index--;
-
-            if (index < 0)
-                return null;
-            else
-                return _table.Items[index];
-        }
-
-        public IEntry New(string newId, Type entryType = null)
-        {
-            if (Find(newId) != null)
-                throw new Exception($"Entry with Id '{newId}' already exist.");
-
-            if (entryType == null)
-                entryType = EntryTypes.FirstOrDefault();
-
-            var newEntry = Create(entryType) as XmlAssetEntry;
-
-            newEntry.Id = newId;
-            _table.Items.Add(newEntry);
-            return newEntry;
-        }
-        public void Remove(IAssetEntry entry)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(IAssetEntry entry)
-        {
-            var index = _table.Items.IndexOf((XmlAssetEntry)entry);
-            if (index < 0)
-                throw new InvalidOperationException($"{entry} not found in repository");
-
-            _table.Items[index] = (XmlAssetEntry)entry;
-        }
-
         #endregion Public Methods
 
     }

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
-    public class XmlTextsRepository : XmlRepositoryBase, IRepository<ITextEntry>
+    public class XmlTextsRepository : XmlRepositoryBase<ITextEntry>
     {
 
         #region Private Fields
@@ -32,96 +32,42 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public IEnumerable<IEntry> Entries { get { return _table.Items; } }
-        public IEnumerable<Type> EntryTypes
+        public override IEnumerable<IEntry> Entries { get { return _table.Items; } }
+        public override IEnumerable<Type> EntryTypes
         {
             get
             {
                 yield return typeof(XmlTextEmbeddedEntry);
                 yield return typeof(XmlTextFromMapEntry);
+                yield return typeof(XmlTextFromFileEntry);
             }
         }
-        public string Name { get { return "Texts"; } }
+        public override string Name { get { return "Texts"; } }
+
+        public override int Count => _table.Items.Count;
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void Add(ITextEntry entity)
+        protected override ITextEntry GetEntryWithIndex(int index)
         {
-            throw new NotImplementedException();
+            return _table.Items[index];
         }
 
-        public IEntry Find(string id)
+        protected override int GetIndexOf(ITextEntry entry)
         {
-            return _table.Items.FirstOrDefault(item => item.Id == id);
+            return _table.Items.IndexOf((XmlTextEntry)entry);
         }
 
-        public ITextEntry GetById(string id)
+        protected override void ReplaceEntryWithIndex(int index, ITextEntry newEntry)
         {
-            var entryDef = _table.Items.FirstOrDefault(item => item.Id == id);
-            if (entryDef == null)
-                throw new Exception("No Text definition found with Id: " + id);
-
-            return entryDef;
+            _table.Items[index] = (XmlTextEntry)newEntry;
         }
 
-        public ITextEntry GetNextTo(ITextEntry entry)
+        public override void Add(ITextEntry newEntry)
         {
-            var index = _table.Items.IndexOf((XmlTextEntry)entry);
-
-            if (index < 0)
-                throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
-
-            index++;
-
-            if (index < _table.Items.Count)
-                return _table.Items[index];
-            else
-                return null;
-        }
-
-        public ITextEntry GetPreviousTo(ITextEntry entry)
-        {
-            var index = _table.Items.IndexOf((XmlTextEntry)entry);
-
-            if (index < 0)
-                throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
-
-            index--;
-
-            if (index >= 0)
-                return _table.Items[index];
-            else
-                return null;
-        }
-
-        public IEntry New(string newId, Type entryType = null)
-        {
-            if (Find(newId) != null)
-                throw new Exception($"Entry with Id '{newId}' already exist.");
-
-            if (entryType == null)
-                entryType = EntryTypes.FirstOrDefault();
-
-            var newEntry = Create(entryType) as XmlTextEntry;
-
-            newEntry.Id = newId;
-            _table.Items.Add(newEntry);
-            return newEntry;
-        }
-        public void Remove(ITextEntry entry)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(ITextEntry entry)
-        {
-            var index = _table.Items.IndexOf((XmlTextEntry)entry);
-            if (index < 0)
-                throw new InvalidOperationException($"{entry} not found in repository");
-
-            _table.Items[index] = (XmlTextEntry)entry;
+            _table.Items.Add((XmlTextEntry)newEntry);
         }
 
         #endregion Public Methods

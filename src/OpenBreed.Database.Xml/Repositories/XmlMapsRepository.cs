@@ -1,20 +1,14 @@
-﻿using OpenBreed.Common;
-using OpenBreed.Database.Interface;
-using OpenBreed.Database.Interface.Items;
+﻿using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Maps;
 using OpenBreed.Database.Xml.Items.Maps;
 using OpenBreed.Database.Xml.Tables;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
-    public class XmlMapsRepository : XmlRepositoryBase, IRepository<IMapEntry>
+    public class XmlMapsRepository : XmlRepositoryBase<IMapEntry>
     {
-
         #region Private Fields
 
         private readonly XmlDbMapTableDef _table;
@@ -32,92 +26,38 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public IEnumerable<IEntry> Entries { get { return _table.Items; } }
-        public string Name { get { return "Maps"; } }
+        public override IEnumerable<IEntry> Entries { get { return _table.Items; } }
 
-        public IEnumerable<Type> EntryTypes { get { yield return typeof(XmlMapEntry); } }
+        public override string Name { get { return "Maps"; } }
+
+        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlMapEntry); } }
+
+        public override int Count => _table.Items.Count;
+
         #endregion Public Properties
 
-        #region Public Methods
+        #region Protected Methods
 
-        public void Add(IMapEntry entity)
+        protected override IMapEntry GetEntryWithIndex(int index)
         {
-            throw new NotImplementedException();
+            return _table.Items[index];
         }
 
-        public IEntry Find(string id)
+        protected override int GetIndexOf(IMapEntry entry)
         {
-            return _table.Items.FirstOrDefault(item => item.Id == id);
+            return _table.Items.IndexOf((XmlMapEntry)entry);
         }
 
-        public IMapEntry GetById(string id)
+        protected override void ReplaceEntryWithIndex(int index, IMapEntry newEntry)
         {
-            var levelDef = _table.Items.FirstOrDefault(item => item.Id == id);
-            if (levelDef == null)
-                throw new Exception("No Level definition found with Id: " + id);
-
-            return levelDef;
+            _table.Items[index] = (XmlMapEntry)newEntry;
         }
 
-        public IMapEntry GetNextTo(IMapEntry entry)
+        public override void Add(IMapEntry newEntry)
         {
-            var index = _table.Items.IndexOf((XmlMapEntry)entry);
-
-            if (index < 0)
-                throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
-
-            index++;
-
-            if (index < _table.Items.Count)
-                return _table.Items[index];
-            else
-                return null;
+            _table.Items.Add((XmlMapEntry)newEntry);
         }
 
-        public IMapEntry GetPreviousTo(IMapEntry entry)
-        {
-            var index = _table.Items.IndexOf((XmlMapEntry)entry);
-
-            if (index < 0)
-                throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
-
-            index--;
-
-            if (index >= 0)
-                return _table.Items[index];
-            else
-                return null;
-        }
-
-        public IEntry New(string newId, Type entryType = null)
-        {
-            if (Find(newId) != null)
-                throw new Exception($"Entry with Id '{newId}' already exist.");
-
-            if (entryType == null)
-                entryType = EntryTypes.FirstOrDefault();
-
-            var newEntry = Create(entryType) as XmlMapEntry;
-
-            newEntry.Id = newId;
-            _table.Items.Add(newEntry);
-            return newEntry;
-        }
-        public void Remove(IMapEntry entry)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(IMapEntry entry)
-        {
-            var index = _table.Items.IndexOf((XmlMapEntry)entry);
-            if (index < 0)
-                throw new InvalidOperationException($"{entry} not found in repository");
-
-            _table.Items[index] = (XmlMapEntry)entry;
-        }
-
-        #endregion Public Methods
-
+        #endregion Protected Methods
     }
 }

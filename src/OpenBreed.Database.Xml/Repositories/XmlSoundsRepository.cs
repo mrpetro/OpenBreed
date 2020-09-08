@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenBreed.Database.Xml.Tables;
-using OpenBreed.Database.Xml.Items.Sounds;
-using OpenBreed.Common;
-using OpenBreed.Database.Interface.Items;
+﻿using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Sounds;
-using OpenBreed.Database.Interface;
+using OpenBreed.Database.Xml.Items.Sounds;
+using OpenBreed.Database.Xml.Tables;
+using System;
+using System.Collections.Generic;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
-    public class XmlSoundsRepository : XmlRepositoryBase, IRepository<ISoundEntry>
+    public class XmlSoundsRepository : XmlRepositoryBase<ISoundEntry>
     {
-
         #region Private Fields
 
         private readonly XmlDbSoundTableDef _table;
@@ -32,92 +26,36 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public IEnumerable<IEntry> Entries { get { return _table.Items; } }
-        public IEnumerable<Type> EntryTypes { get { yield return typeof(XmlSoundEntry); } }
-        public string Name { get { return "Sounds"; } }
+        public override IEnumerable<IEntry> Entries { get { return _table.Items; } }
+        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlSoundEntry); } }
+        public override string Name { get { return "Sounds"; } }
+
+        public override int Count => _table.Items.Count;
 
         #endregion Public Properties
 
-        #region Public Methods
+        #region Protected Methods
 
-        public void Add(ISoundEntry entity)
+        protected override ISoundEntry GetEntryWithIndex(int index)
         {
-            throw new NotImplementedException();
+            return _table.Items[index];
         }
 
-        public IEntry Find(string id)
+        protected override int GetIndexOf(ISoundEntry entry)
         {
-            return _table.Items.FirstOrDefault(item => item.Id == id);
+            return _table.Items.IndexOf((XmlSoundEntry)entry);
         }
 
-        public ISoundEntry GetById(string id)
+        protected override void ReplaceEntryWithIndex(int index, ISoundEntry newEntry)
         {
-            var entry = _table.Items.FirstOrDefault(item => item.Id == id);
-            if (entry == null)
-                throw new Exception("No Sound entry found with Id: " + id);
-
-            return entry;
+            _table.Items[index] = (XmlSoundEntry)newEntry;
         }
 
-        public ISoundEntry GetNextTo(ISoundEntry entry)
+        public override void Add(ISoundEntry newEntry)
         {
-            var index = _table.Items.IndexOf((XmlSoundEntry)entry);
-
-            if (index < 0)
-                throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
-
-            index++;
-
-            if (index < _table.Items.Count)
-                return _table.Items[index];
-            else
-                return null;
+            _table.Items.Add((XmlSoundEntry)newEntry);
         }
 
-        public ISoundEntry GetPreviousTo(ISoundEntry entry)
-        {
-            var index = _table.Items.IndexOf((XmlSoundEntry)entry);
-
-            if (index < 0)
-                throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
-
-            index--;
-
-            if (index >= 0)
-                return _table.Items[index];
-            else
-                return null;
-        }
-
-        public IEntry New(string newId, Type entryType = null)
-        {
-            if (Find(newId) != null)
-                throw new Exception($"Entry with Id '{newId}' already exist.");
-
-            if (entryType == null)
-                entryType = EntryTypes.FirstOrDefault();
-
-            var newEntry = Create(entryType) as XmlSoundEntry;
-
-            newEntry.Id = newId;
-            _table.Items.Add(newEntry);
-            return newEntry;
-        }
-        public void Remove(ISoundEntry entry)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(ISoundEntry entry)
-        {
-            var index = _table.Items.IndexOf((XmlSoundEntry)entry);
-            if (index < 0)
-                throw new InvalidOperationException($"{entry} not found in repository");
-
-            _table.Items[index] = (XmlSoundEntry)entry;
-        }
-
-        #endregion Public Methods
-
+        #endregion Protected Methods
     }
 }

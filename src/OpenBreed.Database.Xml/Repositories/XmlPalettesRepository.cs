@@ -12,7 +12,7 @@ using OpenBreed.Database.Xml.Tables;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
-    public class XmlPalettesRepository : XmlRepositoryBase, IRepository<IPaletteEntry>
+    public class XmlPalettesRepository : XmlRepositoryBase<IPaletteEntry>
     {
 
         #region Private Fields
@@ -32,8 +32,8 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Public Properties
 
-        public IEnumerable<IEntry> Entries { get { return _table.Items; } }
-        public IEnumerable<Type> EntryTypes
+        public override IEnumerable<IEntry> Entries { get { return _table.Items; } }
+        public override IEnumerable<Type> EntryTypes
         {
             get
             {
@@ -42,87 +42,33 @@ namespace OpenBreed.Database.Xml.Repositories
             }
         }
 
-        public string Name { get { return "Palettes"; } }
+        public override  string Name { get { return "Palettes"; } }
+
+        public override int Count => _table.Items.Count;
+
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void Add(IPaletteEntry entity)
+        protected override IPaletteEntry GetEntryWithIndex(int index)
         {
-            throw new NotImplementedException();
+            return _table.Items[index];
         }
 
-        public IEntry Find(string id)
+        protected override int GetIndexOf(IPaletteEntry entry)
         {
-            return _table.Items.FirstOrDefault(item => item.Id == id);
+            return _table.Items.IndexOf((XmlPaletteEntry)entry);
         }
 
-        public IPaletteEntry GetById(string id)
+        protected override void ReplaceEntryWithIndex(int index, IPaletteEntry newEntry)
         {
-            var paletteDef = _table.Items.FirstOrDefault(item => item.Id == id);
-            if (paletteDef == null)
-                throw new Exception("No Palette definition found with Id: " + id);
-
-            return paletteDef;
+            _table.Items[index] = (XmlPaletteEntry)newEntry;
         }
 
-        public IPaletteEntry GetNextTo(IPaletteEntry entry)
+        public override void Add(IPaletteEntry newEntry)
         {
-            var index = _table.Items.IndexOf((XmlPaletteEntry)entry);
-
-            if (index < 0)
-                throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
-
-            index++;
-
-            if (index < _table.Items.Count)
-                return _table.Items[index];
-            else
-                return null;
-        }
-
-        public IPaletteEntry GetPreviousTo(IPaletteEntry entry)
-        {
-            var index = _table.Items.IndexOf((XmlPaletteEntry)entry);
-
-            if (index < 0)
-                throw new InvalidOperationException($"Entry {entry.Id} index not found in repository.");
-
-            index--;
-
-            if (index >= 0)
-                return _table.Items[index];
-            else
-                return null;
-        }
-
-        public IEntry New(string newId, Type entryType = null)
-        {
-            if (Find(newId) != null)
-                throw new Exception($"Entry with Id '{newId}' already exist.");
-
-            if (entryType == null)
-                entryType = EntryTypes.FirstOrDefault();
-
-            var newEntry = Create(entryType) as XmlPaletteEntry;
-
-            newEntry.Id = newId;
-            _table.Items.Add(newEntry);
-            return newEntry;
-        }
-        public void Remove(IPaletteEntry entry)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(IPaletteEntry entry)
-        {
-            var index = _table.Items.IndexOf((XmlPaletteEntry)entry);
-            if (index < 0)
-                throw new InvalidOperationException($"{entry} not found in repository");
-
-            _table.Items[index] = (XmlPaletteEntry)entry;
+            _table.Items.Add((XmlPaletteEntry)newEntry);
         }
 
         #endregion Public Methods
