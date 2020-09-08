@@ -26,7 +26,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         public XmlSpriteSetsRepository(XmlDatabaseMan context) : base(context)
         {
-            _table = context.GetSpriteSetTable();
+            _table = context.GetTable<XmlDbSpriteSetTableDef>();
         }
 
         #endregion Public Constructors

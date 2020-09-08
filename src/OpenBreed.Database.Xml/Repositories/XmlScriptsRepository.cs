@@ -26,7 +26,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         public XmlScriptsRepository(XmlDatabaseMan context) : base(context)
         {
-            _table = context.GetScriptsTable();
+            _table = context.GetTable<XmlDbScriptTableDef>();
         }
 
         #endregion Public Constructors

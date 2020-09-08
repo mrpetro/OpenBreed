@@ -30,7 +30,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         public XmlAssetsRepository(XmlDatabaseMan context) : base(context)
         {
-            _table = context.GetAssetsTable();
+            _table = context.GetTable<XmlDbAssetTableDef>();
 
 
         }

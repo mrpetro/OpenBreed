@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Database.Xml.Tables
 {
-    public class DatabaseSoundTableDef : XmlDbTableDef
+    public class XmlDbSoundTableDef : XmlDbTableDef
     {
         [XmlArray("Items"),
         XmlArrayItem("Sound", typeof(XmlSoundEntry))]

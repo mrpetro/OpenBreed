@@ -25,7 +25,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         public XmlImagesRepository(XmlDatabaseMan context) : base(context)
         {
-            _table = context.GetImageTable();
+            _table = context.GetTable<XmlDbImageTableDef>();
         }
 
         #endregion Public Constructors

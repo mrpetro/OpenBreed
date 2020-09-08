@@ -25,7 +25,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         public XmlTextsRepository(XmlDatabaseMan context) : base(context)
         {
-            _table = context.GetTextTable();
+            _table = context.GetTable<XmlDbTextTableDef>();
         }
 
         #endregion Public Constructors

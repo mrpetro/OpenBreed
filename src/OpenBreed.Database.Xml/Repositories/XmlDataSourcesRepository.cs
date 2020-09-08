@@ -30,7 +30,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         public XmlDataSourcesRepository(XmlDatabaseMan context) : base(context)
         {
-            _table = context.GetDataSourcesTable();
+            _table = context.GetTable<XmlDbDataSourceTableDef>();
 
 
         }

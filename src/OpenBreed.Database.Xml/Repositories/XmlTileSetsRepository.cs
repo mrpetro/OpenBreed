@@ -26,7 +26,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         public XmlTileSetsRepository(XmlDatabaseMan context) : base(context)
         {
-            _table = context.GetTileSetTable();
+            _table = context.GetTable<XmlDbTileSetTableDef>();
         }
 
         #endregion Public Constructors

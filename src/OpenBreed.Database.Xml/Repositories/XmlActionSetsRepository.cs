@@ -26,7 +26,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         public XmlActionSetsRepository(XmlDatabaseMan context) : base(context)
         {
-            _table = context.GetActionSetTable();
+            _table = context.GetTable<XmlDbActionSetTableDef>();
         }
 
         #endregion Public Constructors

@@ -25,7 +25,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         public XmlPalettesRepository(XmlDatabaseMan context) : base(context)
         {
-            _table = context.GetPaletteTable();
+            _table = context.GetTable<XmlDbPaletteTableDef>();
         }
 
         #endregion Public Constructors

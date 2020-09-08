@@ -17,7 +17,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Private Fields
 
-        private readonly DatabaseSoundTableDef _table;
+        private readonly XmlDbSoundTableDef _table;
 
         #endregion Private Fields
 
@@ -25,7 +25,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         public XmlSoundsRepository(XmlDatabaseMan context) : base(context)
         {
-            _table = context.GetSoundTable();
+            _table = context.GetTable<XmlDbSoundTableDef>();
         }
 
         #endregion Public Constructors

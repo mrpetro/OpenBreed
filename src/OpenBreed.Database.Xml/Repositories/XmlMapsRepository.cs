@@ -25,7 +25,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         public XmlMapsRepository(XmlDatabaseMan context) : base(context)
         {
-            _table = context.GetMapsTable();
+            _table = context.GetTable<XmlDbMapTableDef>();
         }
 
         #endregion Public Constructors

@@ -80,121 +80,12 @@ namespace OpenBreed.Database.Xml
 
         #region Internal Methods
 
-        internal XmlDbActionSetTableDef GetActionSetTable()
+        internal T GetTable<T>() where T : XmlDbTableDef, new()
         {
-            var table = Data.Tables.OfType<XmlDbActionSetTableDef>().FirstOrDefault();
+            var table = Data.Tables.OfType<T>().FirstOrDefault();
             if (table == null)
             {
-                table = new XmlDbActionSetTableDef();
-                Data.Tables.Add(table);
-            }
-            return table;
-        }
-
-        internal XmlDbDataSourceTableDef GetDataSourcesTable()
-        {
-            var table = Data.Tables.OfType<XmlDbDataSourceTableDef>().FirstOrDefault();
-            if (table == null)
-            {
-                table = new XmlDbDataSourceTableDef();
-                Data.Tables.Add(table);
-            }
-            return table;
-        }
-
-        internal XmlDbAssetTableDef GetAssetsTable()
-        {
-            var table = Data.Tables.OfType<XmlDbAssetTableDef>().FirstOrDefault();
-            if (table == null)
-            {
-                table = new XmlDbAssetTableDef();
-                Data.Tables.Add(table);
-            }
-            return table;
-        }
-
-        internal XmlDbScriptTableDef GetScriptsTable()
-        {
-            var table = Data.Tables.OfType<XmlDbScriptTableDef>().FirstOrDefault();
-            if (table == null)
-            {
-                table = new XmlDbScriptTableDef();
-                Data.Tables.Add(table);
-            }
-            return table;
-        }
-
-        internal XmlDbImageTableDef GetImageTable()
-        {
-            var table = Data.Tables.OfType<XmlDbImageTableDef>().FirstOrDefault();
-            if (table == null)
-            {
-                table = new XmlDbImageTableDef();
-                Data.Tables.Add(table);
-            }
-            return table;
-        }
-
-        internal XmlDbMapTableDef GetMapsTable()
-        {
-            var table = Data.Tables.OfType<XmlDbMapTableDef>().FirstOrDefault();
-            if (table == null)
-            {
-                table = new XmlDbMapTableDef();
-                Data.Tables.Add(table);
-            }
-            return table;
-        }
-
-        internal XmlDbTextTableDef GetTextTable()
-        {
-            var table = Data.Tables.OfType<XmlDbTextTableDef>().FirstOrDefault();
-            if (table == null)
-            {
-                table = new XmlDbTextTableDef();
-                Data.Tables.Add(table);
-            }
-            return table;
-        }
-
-        internal XmlDbPaletteTableDef GetPaletteTable()
-        {
-            var table = Data.Tables.OfType<XmlDbPaletteTableDef>().FirstOrDefault();
-            if (table == null)
-            {
-                table = new XmlDbPaletteTableDef();
-                Data.Tables.Add(table);
-            }
-            return table;
-        }
-
-        internal DatabaseSoundTableDef GetSoundTable()
-        {
-            var table = Data.Tables.OfType<DatabaseSoundTableDef>().FirstOrDefault();
-            if (table == null)
-            {
-                table = new DatabaseSoundTableDef();
-                Data.Tables.Add(table);
-            }
-            return table;
-        }
-        internal XmlDbSpriteSetTableDef GetSpriteSetTable()
-        {
-            var table = Data.Tables.OfType<XmlDbSpriteSetTableDef>().FirstOrDefault();
-            if (table == null)
-            {
-                table = new XmlDbSpriteSetTableDef();
-                Data.Tables.Add(table);
-            }
-            return table;
-        }
-
-        internal XmlDbTileSetTableDef GetTileSetTable()
-        {
-            var table = Data.Tables.OfType<XmlDbTileSetTableDef>().FirstOrDefault();
-            if (table == null)
-            {
-                table = new XmlDbTileSetTableDef();
+                table = new T();
                 Data.Tables.Add(table);
             }
             return table;
