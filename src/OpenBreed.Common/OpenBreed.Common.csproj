@@ -67,6 +67,9 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ApplicationBase.cs" />
+    <Compile Include="Builders\EntityTemplates\EntityTemplateBuilder.cs" />
+    <Compile Include="Data\EntityTemplatesDataProvider.cs" />
+    <Compile Include="Data\EntityTemplatesDataHelper.cs" />
     <Compile Include="Formats\TextFormat.cs" />
     <Compile Include="IApplication.cs" />
     <Compile Include="IApplicationInterface.cs" />
@@ -101,6 +104,7 @@
     <Compile Include="Helpers\IOHelper.cs" />
     <Compile Include="Helpers\XmlHelper.cs" />
     <Compile Include="Data\MapsDataProvider.cs" />
+    <Compile Include="Model\EntityTemplates\EntityTemplateModel.cs" />
     <Compile Include="Model\Maps\TileRef.cs" />
     <Compile Include="Readers\Images\IFF\Helpers\BMHDBlock.cs" />
     <Compile Include="Readers\Images\IFF\IFFImageReader.cs" />

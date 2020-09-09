@@ -53,6 +53,7 @@
     <Compile Include="Items\DataSources\IDataSourceEntry.cs" />
     <Compile Include="Items\DataSources\IEPFArchiveDataSourceEntry.cs" />
     <Compile Include="Items\DataSources\IFileDataSourceEntry.cs" />
+    <Compile Include="Items\EntityTemplates\IEntityTemplateFromFileEntry.cs" />
     <Compile Include="Items\IEntry.cs" />
     <Compile Include="Items\Images\IImageEntry.cs" />
     <Compile Include="Items\Maps\IMapEntry.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Items\Sprites\ISpriteSetEntry.cs" />
     <Compile Include="Items\Sprites\ISpriteSetFromImageEntry.cs" />
     <Compile Include="Items\Sprites\ISpriteSetFromSprEntry.cs" />
+    <Compile Include="Items\EntityTemplates\IEntityTemplateEntry.cs" />
     <Compile Include="Items\Texts\ITextEmbeddedEntry.cs" />
     <Compile Include="Items\Texts\ITextEntry.cs" />
     <Compile Include="Items\Texts\ITextFromFileEntry.cs" />

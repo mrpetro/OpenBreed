@@ -31,6 +31,7 @@ namespace OpenBreed.Common.Data
             Palettes = new PalettesDataProvider(this);
             Texts = new TextsDataProvider(this);
             Scripts = new ScriptsDataProvider(this);
+            EntityTemplates = new EntityTemplatesDataProvider(this);
             Initialize();
         }
 
@@ -47,6 +48,7 @@ namespace OpenBreed.Common.Data
         public PalettesDataProvider Palettes { get; }
         public TextsDataProvider Texts { get; }
         public ScriptsDataProvider Scripts { get; }
+        public EntityTemplatesDataProvider EntityTemplates { get; }
         public SoundsDataProvider Sounds { get; }
         public SpriteSetsDataProvider SpriteSets { get; }
         public TileSetsDataProvider TileSets { get; }

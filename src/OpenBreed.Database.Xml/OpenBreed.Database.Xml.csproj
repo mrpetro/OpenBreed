@@ -73,6 +73,8 @@
     <Compile Include="Items\DataSources\XmlDataSourceEntry.cs" />
     <Compile Include="Items\DataSources\XmlEPFArchiveFileDataSourceEntry.cs" />
     <Compile Include="Items\DataSources\XmlFileDataSourceEntry.cs" />
+    <Compile Include="Items\EntityTemplates\XmlEntityTemplateFromFileEntry.cs" />
+    <Compile Include="Items\EntityTemplates\XmlEntityTemplateEntry.cs" />
     <Compile Include="Items\Images\XmlImageEntry.cs" />
     <Compile Include="Items\Maps\XmlMapEntry.cs" />
     <Compile Include="Items\Palettes\XmlPaletteFromBinaryEntry.cs" />
@@ -105,10 +107,12 @@
     <Compile Include="Repositories\XmlSpriteSetsRepository.cs" />
     <Compile Include="Repositories\XmlScriptsRepository.cs" />
     <Compile Include="Repositories\XmlTextsRepository.cs" />
+    <Compile Include="Repositories\XmlEntityTemplatesRepository.cs" />
     <Compile Include="Repositories\XmlTileSetsRepository.cs" />
     <Compile Include="Resources\ResourceDef.cs" />
     <Compile Include="Resources\ResourceLevelDef.cs" />
     <Compile Include="Tables\XmlDbActionSetTableDef.cs" />
+    <Compile Include="Tables\XmlDbEntityTemplateTableDef.cs" />
     <Compile Include="Tables\XmlDbScriptTableDef.cs" />
     <Compile Include="Tables\XmlDbTextTableDef.cs" />
     <Compile Include="Tables\XmlDbDataSourceTableDef.cs" />
