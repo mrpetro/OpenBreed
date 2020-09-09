@@ -137,6 +137,18 @@
     <Compile Include="Controls\EditorOptionsABTA.Designer.cs">
       <DependentUpon>EditorOptionsABTA.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\EntityTemplates\EntityTemplateEditorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\EntityTemplates\EntityTemplateEditorCtrl.Designer.cs">
+      <DependentUpon>EntityTemplateEditorCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EntityTemplates\EntityTemplateFromFileCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\EntityTemplates\EntityTemplateFromFileCtrl.Designer.cs">
+      <DependentUpon>EntityTemplateFromFileCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\EntryEditorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -523,6 +535,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\EditorOptionsABTA.resx">
       <DependentUpon>EditorOptionsABTA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\EntityTemplates\EntityTemplateEditorCtrl.resx">
+      <DependentUpon>EntityTemplateEditorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\EntityTemplates\EntityTemplateFromFileCtrl.resx">
+      <DependentUpon>EntityTemplateFromFileCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\EntryEditorCtrl.resx">
       <DependentUpon>EntryEditorCtrl.cs</DependentUpon>

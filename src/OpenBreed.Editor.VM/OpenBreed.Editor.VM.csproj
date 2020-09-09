@@ -72,6 +72,7 @@
       <Link>SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Database\Entries\DbDataSourceEntryVM.cs" />
+    <Compile Include="Database\Entries\DbEntityTemplateEntryVM.cs" />
     <Compile Include="Database\Entries\DbScriptEntryVM.cs" />
     <Compile Include="Database\Tables\DbDataSourceTableVM.cs" />
     <Compile Include="Database\Tables\DbScriptTableVM.cs" />
@@ -121,6 +122,9 @@
     <Compile Include="EditorVM.cs" />
     <Compile Include="EditorVMHelper.cs" />
     <Compile Include="DbEntryEditorFactory.cs" />
+    <Compile Include="EntityTemplates\EntityTemplateEditorVM.cs" />
+    <Compile Include="EntityTemplates\EntityTemplateFromFileVM.cs" />
+    <Compile Include="EntityTemplates\EntityTemplateVM.cs" />
     <Compile Include="EntryEditorVM.cs" />
     <Compile Include="EntryEditorBaseVM.cs" />
     <Compile Include="EditableEntryVM.cs" />

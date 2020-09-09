@@ -21,6 +21,7 @@ using OpenBreed.Database.Interface.Items.Maps;
 using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Database.Interface.Items.Texts;
 using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.EntityTemplates;
 
 namespace OpenBreed.Editor.VM
 {
@@ -49,6 +50,8 @@ namespace OpenBreed.Editor.VM
             else if (repository is IRepository<ITextEntry>)
                 return new DbTextTableVM();
             else if (repository is IRepository<IScriptEntry>)
+                return new DbTextTableVM();
+            else if (repository is IRepository<IEntityTemplateEntry>)
                 return new DbTextTableVM();
             else
                 throw new NotImplementedException(repository.ToString());

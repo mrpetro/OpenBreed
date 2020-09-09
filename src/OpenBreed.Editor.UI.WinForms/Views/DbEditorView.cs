@@ -32,6 +32,8 @@ using OpenBreed.Editor.VM.Sprites;
 using OpenBreed.Editor.UI.WinForms.Controls.Sprites;
 using OpenBreed.Editor.VM.Scripts;
 using OpenBreed.Editor.UI.WinForms.Controls.Scripts;
+using OpenBreed.Editor.VM.EntityTemplates;
+using OpenBreed.Editor.UI.WinForms.Controls.EntityTemplates;
 
 namespace OpenBreed.Editor.UI.WinForms.Views
 {
@@ -83,6 +85,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
             _viewFactory.Register<PaletteEditorVM, EntryEditorView<PaletteEditorCtrl>>();
             _viewFactory.Register<TextEditorVM, EntryEditorView<TextEditorCtrl>>();
             _viewFactory.Register<ScriptEditorVM, EntryEditorView<ScriptEditorCtrl>>();
+            _viewFactory.Register<EntityTemplateEditorVM, EntryEditorView<EntityTemplateEditorCtrl>>();
             _viewFactory.Register<MapEditorVM, EntryEditorView<MapEditorCtrl>>();
             _viewFactory.Register<DataSourceEditorVM, EntryEditorView<DataSourceEditorCtrl>>();
         }

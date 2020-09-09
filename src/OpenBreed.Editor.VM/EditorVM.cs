@@ -40,6 +40,8 @@ using OpenBreed.Database.Interface.Items.Maps;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Scripts;
 using OpenBreed.Editor.VM.Scripts;
+using OpenBreed.Database.Interface.Items.EntityTemplates;
+using OpenBreed.Editor.VM.EntityTemplates;
 
 namespace OpenBreed.Editor.VM
 {
@@ -78,6 +80,7 @@ namespace OpenBreed.Editor.VM
             entryEditorFactory.Register<IRepository<IPaletteEntry>, PaletteEditorVM>();
             entryEditorFactory.Register<IRepository<ITextEntry>, TextEditorVM>();
             entryEditorFactory.Register<IRepository<IScriptEntry>, ScriptEditorVM>();
+            entryEditorFactory.Register<IRepository<IEntityTemplateEntry>, EntityTemplateEditorVM>();
             entryEditorFactory.Register<IRepository<IImageEntry>, ImageEditorVM>();
             entryEditorFactory.Register<IRepository<ISoundEntry>, SoundEditorVM>();
             entryEditorFactory.Register<IRepository<IMapEntry>, MapEditorVM>();
