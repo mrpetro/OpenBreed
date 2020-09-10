@@ -78,7 +78,7 @@ namespace OpenBreed.Editor.VM.EntityTemplates
 
         private void ToEntry(IEntityTemplateFromFileEntry source)
         {
-            var model = ServiceLocator.Instance.GetService<DataProvider>().GetData(DataRef) as TextModel;
+            var model = ServiceLocator.Instance.GetService<DataProvider>().GetData<TextModel>(DataRef);
 
             model.Text = EntityTemplate;
 

@@ -36,7 +36,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Scripts
         {
             _vm = vm ?? throw new ArgumentNullException(nameof(vm));
 
-            tbxFileDataRef.DataBindings.Add(nameof(tbxFileDataRef.Text), _vm, nameof(_vm.DataRef), false, DataSourceUpdateMode.OnPropertyChanged);
+            tbxAssetDataRef.DataBindings.Add(nameof(tbxAssetDataRef.Text), _vm, nameof(_vm.DataRef), false, DataSourceUpdateMode.OnPropertyChanged);
 
             tbxText.DataBindings.Add(nameof(tbxText.Text), _vm, nameof(_vm.Script), false, DataSourceUpdateMode.OnPropertyChanged);
             tbxText.DataBindings.Add(nameof(tbxText.Enabled), _vm, nameof(_vm.EditEnabled), false, DataSourceUpdateMode.OnPropertyChanged);

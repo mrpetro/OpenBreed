@@ -82,7 +82,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
                 var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
 
-                var map = dataProvider.GetData(source.DataRef) as MapModel;
+                var map = dataProvider.GetData<MapModel>(source.DataRef);
 
                 if (map == null)
                     return;
@@ -131,7 +131,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
         private void ToEntry(IPaletteFromMapEntry source)
         {
-            var mapModel = ServiceLocator.Instance.GetService<DataProvider>().GetData(DataRef) as MapModel;
+            var mapModel = ServiceLocator.Instance.GetService<DataProvider>().GetData<MapModel>(DataRef);
 
             var paletteBlock = mapModel.Blocks.OfType<MapPaletteBlock>().FirstOrDefault(item => item.Name == BlockName);
 

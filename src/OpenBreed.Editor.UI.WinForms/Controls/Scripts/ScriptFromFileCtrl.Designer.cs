@@ -30,9 +30,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Scripts
         private void InitializeComponent()
         {
             this.btnDataRefBrowser = new System.Windows.Forms.Button();
-            this.tbxFileDataRef = new System.Windows.Forms.TextBox();
+            this.tbxAssetDataRef = new System.Windows.Forms.TextBox();
             this.grpPaletteFromMapSelection = new System.Windows.Forms.GroupBox();
-            this.lblMapDataRef = new System.Windows.Forms.Label();
+            this.lblAssetDataRef = new System.Windows.Forms.Label();
             this.grpScript = new System.Windows.Forms.GroupBox();
             this.tbxText = new System.Windows.Forms.TextBox();
             this.grpPaletteFromMapSelection.SuspendLayout();
@@ -49,20 +49,20 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Scripts
             this.btnDataRefBrowser.Text = "...";
             this.btnDataRefBrowser.UseVisualStyleBackColor = true;
             // 
-            // tbxFileDataRef
+            // tbxAssetDataRef
             // 
-            this.tbxFileDataRef.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbxAssetDataRef.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbxFileDataRef.Location = new System.Drawing.Point(98, 19);
-            this.tbxFileDataRef.Name = "tbxFileDataRef";
-            this.tbxFileDataRef.Size = new System.Drawing.Size(504, 20);
-            this.tbxFileDataRef.TabIndex = 1;
+            this.tbxAssetDataRef.Location = new System.Drawing.Point(98, 19);
+            this.tbxAssetDataRef.Name = "tbxAssetDataRef";
+            this.tbxAssetDataRef.Size = new System.Drawing.Size(504, 20);
+            this.tbxAssetDataRef.TabIndex = 1;
             // 
             // grpPaletteFromMapSelection
             // 
-            this.grpPaletteFromMapSelection.Controls.Add(this.lblMapDataRef);
+            this.grpPaletteFromMapSelection.Controls.Add(this.lblAssetDataRef);
             this.grpPaletteFromMapSelection.Controls.Add(this.btnDataRefBrowser);
-            this.grpPaletteFromMapSelection.Controls.Add(this.tbxFileDataRef);
+            this.grpPaletteFromMapSelection.Controls.Add(this.tbxAssetDataRef);
             this.grpPaletteFromMapSelection.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpPaletteFromMapSelection.Location = new System.Drawing.Point(0, 0);
             this.grpPaletteFromMapSelection.Name = "grpPaletteFromMapSelection";
@@ -71,14 +71,14 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Scripts
             this.grpPaletteFromMapSelection.TabStop = false;
             this.grpPaletteFromMapSelection.Text = "Source data";
             // 
-            // lblMapDataRef
+            // lblAssetDataRef
             // 
-            this.lblMapDataRef.AutoSize = true;
-            this.lblMapDataRef.Location = new System.Drawing.Point(6, 23);
-            this.lblMapDataRef.Name = "lblMapDataRef";
-            this.lblMapDataRef.Size = new System.Drawing.Size(74, 13);
-            this.lblMapDataRef.TabIndex = 3;
-            this.lblMapDataRef.Text = "File reference:";
+            this.lblAssetDataRef.AutoSize = true;
+            this.lblAssetDataRef.Location = new System.Drawing.Point(6, 23);
+            this.lblAssetDataRef.Name = "lblAssetDataRef";
+            this.lblAssetDataRef.Size = new System.Drawing.Size(74, 13);
+            this.lblAssetDataRef.TabIndex = 3;
+            this.lblAssetDataRef.Text = "File reference:";
             // 
             // grpScript
             // 
@@ -119,9 +119,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Scripts
         #endregion
 
         private System.Windows.Forms.Button btnDataRefBrowser;
-        private System.Windows.Forms.TextBox tbxFileDataRef;
+        private System.Windows.Forms.TextBox tbxAssetDataRef;
         private System.Windows.Forms.GroupBox grpPaletteFromMapSelection;
-        private System.Windows.Forms.Label lblMapDataRef;
+        private System.Windows.Forms.Label lblAssetDataRef;
         private System.Windows.Forms.GroupBox grpScript;
         private System.Windows.Forms.TextBox tbxText;
     }

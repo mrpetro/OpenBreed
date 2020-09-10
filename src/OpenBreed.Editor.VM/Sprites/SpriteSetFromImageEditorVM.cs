@@ -102,7 +102,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
             var dataProvicer = ServiceLocator.Instance.GetService<DataProvider>();
 
-            SourceImage = dataProvicer.GetData(spriteSetEntry.DataRef) as Bitmap;
+            SourceImage = dataProvicer.GetData<Bitmap>(spriteSetEntry.DataRef);
 
             Items.UpdateAfter(() =>
             {

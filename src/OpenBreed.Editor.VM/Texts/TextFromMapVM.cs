@@ -83,7 +83,7 @@ namespace OpenBreed.Editor.VM.Texts
 
                 var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
 
-                var map = dataProvider.GetData(source.DataRef) as MapModel;
+                var map = dataProvider.GetData<MapModel>(source.DataRef);
 
                 if (map == null)
                     return;
@@ -124,7 +124,7 @@ namespace OpenBreed.Editor.VM.Texts
 
         private void ToEntry(ITextFromMapEntry source)
         {
-            var mapModel = ServiceLocator.Instance.GetService<DataProvider>().GetData(DataRef) as MapModel;
+            var mapModel = ServiceLocator.Instance.GetService<DataProvider>().GetData<MapModel>(DataRef);
 
             var textBlock = mapModel.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == BlockName);
 
