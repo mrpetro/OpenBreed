@@ -25,7 +25,7 @@ namespace OpenBreed.Common.Data
 
         public static TextModel FromMapModel(DataProvider provider, ITextFromMapEntry textData)
         {
-            var mapModel = provider.GetData(textData.DataRef) as MapModel;
+            var mapModel = provider.GetData<MapModel>(textData.DataRef);
 
             if (mapModel == null)
                 return null;

@@ -20,7 +20,7 @@ namespace OpenBreed.Common.Data
             if (entry.DataRef == null)
                 return null;
 
-            var data = provider.GetData(entry.DataRef) as EntityTemplateModel;
+            var data = provider.GetData<EntityTemplateModel>(entry.DataRef);
 
             if (data == null)
                 return null;

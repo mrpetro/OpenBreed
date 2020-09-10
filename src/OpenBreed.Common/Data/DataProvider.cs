@@ -60,7 +60,7 @@ namespace OpenBreed.Common.Data
 
         public bool TryGetData<T>(string id, out T item, out string message)
         {
-            var data = GetData(id);
+            var data = GetData<T>(id);
 
             if (data == null)
             {
@@ -81,18 +81,18 @@ namespace OpenBreed.Common.Data
             return false;
         }
 
-        public object GetData(string id)
+        public T GetData<T>(string id)
         {
             object data;
 
             if (_models.TryGetValue(id, out data))
-                return data;
+                return (T)data;
 
             var asset = Assets.GetAsset(id);
             data = asset.Load();
             _models.Add(id, data);
 
-            return data;
+            return (T)data;
         }
 
         public void Save()

@@ -34,7 +34,7 @@ namespace OpenBreed.Common.Data
             if (entry.DataRef == null)
                 return null;
 
-            return Provider.GetData(entry.DataRef) as Image;
+            return Provider.GetData<Image>(entry.DataRef);
         }
 
     }

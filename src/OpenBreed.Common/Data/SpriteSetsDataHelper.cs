@@ -17,12 +17,12 @@ namespace OpenBreed.Common.Data
     {
         public static SpriteSetModel FromSprModel(DataProvider provider, ISpriteSetFromSprEntry entry)
         {
-            return provider.GetData(entry.DataRef) as SpriteSetModel;
+            return provider.GetData<SpriteSetModel>(entry.DataRef);
         }
 
         public static SpriteSetModel FromImageModel(DataProvider provider, ISpriteSetFromImageEntry entry)
         {
-            var image = provider.GetData(entry.DataRef) as Bitmap;
+            var image = provider.GetData<Bitmap>(entry.DataRef);
 
             var spriteSetBuilder = SpriteSetBuilder.NewSpriteSet();
 

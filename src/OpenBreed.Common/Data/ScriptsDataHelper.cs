@@ -30,7 +30,7 @@ namespace OpenBreed.Common.Data
             if (entry.DataRef == null)
                 return null;
 
-            var data = provider.GetData(entry.DataRef) as TextModel;
+            var data = provider.GetData<TextModel>(entry.DataRef);
 
             if (data == null)
                 return null;

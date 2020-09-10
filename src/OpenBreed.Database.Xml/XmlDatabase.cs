@@ -33,7 +33,8 @@ namespace OpenBreed.Database.Xml
         XmlArrayItem("SpriteSets", typeof(XmlDbSpriteSetTableDef)),
         XmlArrayItem("Sounds", typeof(XmlDbSoundTableDef)),
         XmlArrayItem("Images", typeof(XmlDbImageTableDef)),
-        XmlArrayItem("Scripts", typeof(XmlDbScriptTableDef))]
+        XmlArrayItem("Scripts", typeof(XmlDbScriptTableDef)),
+        XmlArrayItem("EntityTemplates", typeof(XmlDbEntityTemplateTableDef))]
         public readonly List<XmlDbTableDef> Tables = new List<XmlDbTableDef>();
 
         #endregion Public Fields

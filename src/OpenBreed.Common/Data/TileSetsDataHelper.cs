@@ -15,7 +15,7 @@ namespace OpenBreed.Common.Data
     {
         public static TileSetModel FromBlkModel(DataProvider provider, ITileSetFromBlkEntry entry)
         {
-            return provider.GetData(entry.DataRef) as TileSetModel;
+            return provider.GetData<TileSetModel>(entry.DataRef);
         }
 
         public static TileSetModel FromImageModel(DataProvider provider, ITileSetFromImageEntry entry)
