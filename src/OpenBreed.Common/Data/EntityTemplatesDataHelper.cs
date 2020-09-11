@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Common.Model.Texts;
 
 namespace OpenBreed.Common.Data
 {
@@ -20,13 +21,13 @@ namespace OpenBreed.Common.Data
             if (entry.DataRef == null)
                 return null;
 
-            var data = provider.GetData<EntityTemplateModel>(entry.DataRef);
+            var data = provider.GetData<TextModel>(entry.DataRef);
 
             if (data == null)
                 return null;
 
             var builder = EntityTemplateBuilder.NewEntityTemplateModel();
-            builder.SetEntityTemplate(data.EntityTemplate);
+            builder.SetEntityTemplate(data.Text);
             return builder.Build();
         }
     }

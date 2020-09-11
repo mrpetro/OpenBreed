@@ -185,6 +185,7 @@
 				<FileDataSource Id="DataSources.Scripts.Entry.lua" FilePath="%Db.Current.FolderPath%\Scripts\entry.lua" />
 				<FileDataSource Id="DataSources.Scripts.SimpleEntry.lua" FilePath="%Db.Current.FolderPath%\Scripts\SimpleEntry.lua" />
 				<FileDataSource Id="DataSources.Scripts.Exit.lua" FilePath="%Db.Current.FolderPath%\Scripts\Exit.lua" />
+				<FileDataSource Id="DataSources.Templates.Logo1.lua" FilePath="%Db.Current.FolderPath%\Templates\Logo1.lua" />
 			</Items>
 		</DataSources>
 		<Assets>
@@ -1018,6 +1019,9 @@
 					<Parameters />
 				</Asset>
 				<Asset Id="Assets.Scripts.Exit.lua" DataSourceRef="DataSources.Scripts.Exit.lua" FormatType="TEXT">
+					<Parameters />
+				</Asset>
+				<Asset Id="Assets.Templates.Logo1.lua" DataSourceRef="DataSources.Templates.Logo1.lua" FormatType="TEXT">
 					<Parameters />
 				</Asset>
 			</Items>
@@ -3945,5 +3949,12 @@
 				</ScriptFromFile>
 			</Items>
 		</Scripts>
+		<EntityTemplates>
+			<Items>
+				<EntityTemplateFromFile Id="EntityTemplates.Logo1.lua">
+					<DataRef>Assets.Templates.Logo1.lua</DataRef>
+				</EntityTemplateFromFile>
+			</Items>
+		</EntityTemplates>
 	</Tables>
 </Database>
