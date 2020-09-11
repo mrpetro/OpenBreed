@@ -1,8 +1,10 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Model.Scripts;
 using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Assets;
 using OpenBreed.Database.Interface.Items.Scripts;
 using OpenBreed.Editor.VM.Base;
+using OpenBreed.Editor.VM.Common;
 using OpenBreed.Editor.VM.Maps;
 using System;
 using System.Collections.Generic;

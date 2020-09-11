@@ -1,26 +1,14 @@
-﻿using OpenBreed.Common;
-using OpenBreed.Common.Assets;
-using OpenBreed.Common.Data;
-using OpenBreed.Common.Model.Maps;
-using OpenBreed.Common.Model.Maps.Blocks;
-using OpenBreed.Common.Model.Scripts;
+﻿using OpenBreed.Common.Data;
 using OpenBreed.Common.Model.Texts;
 using OpenBreed.Database.Interface.Items;
+using OpenBreed.Database.Interface.Items.Assets;
 using OpenBreed.Database.Interface.Items.Scripts;
-using OpenBreed.Database.Xml.Items.Assets;
-using OpenBreed.Editor.VM.Base;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OpenBreed.Editor.VM.Common;
 
 namespace OpenBreed.Editor.VM.Scripts
 {
     public class ScriptFromFileVM : ScriptVM
     {
-
         #region Private Fields
 
         private bool _editEnabled;
@@ -32,11 +20,16 @@ namespace OpenBreed.Editor.VM.Scripts
         public ScriptFromFileVM()
         {
             PropertyChanged += This_PropertyChanged;
+
+            ScriptAssetRefIdEditor = new EntryRefIdEditorVM(typeof(IAssetEntry));
+            ScriptAssetRefIdEditor.RefIdSelected = (newRefId) => { DataRef = newRefId; };
         }
 
         #endregion Public Constructors
 
         #region Public Properties
+
+        public EntryRefIdEditorVM ScriptAssetRefIdEditor { get; }
 
         public bool EditEnabled
         {
@@ -91,7 +84,9 @@ namespace OpenBreed.Editor.VM.Scripts
             {
                 case nameof(DataRef):
                     EditEnabled = ValidateSettings();
+                    ScriptAssetRefIdEditor.RefId = (DataRef == null) ? null : DataRef;
                     break;
+
                 default:
                     break;
             }

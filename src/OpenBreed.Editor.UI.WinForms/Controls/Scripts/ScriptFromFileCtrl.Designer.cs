@@ -29,64 +29,53 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Scripts
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnDataRefBrowser = new System.Windows.Forms.Button();
-            this.tbxAssetDataRef = new System.Windows.Forms.TextBox();
             this.grpPaletteFromMapSelection = new System.Windows.Forms.GroupBox();
-            this.lblAssetDataRef = new System.Windows.Forms.Label();
+            this.grpScriptAssetRefIdEditor = new System.Windows.Forms.GroupBox();
+            this.ScriptAssetRefIdEditor = new OpenBreed.Editor.UI.WinForms.Controls.Common.EntryRefIdEditorCtrl();
             this.grpScript = new System.Windows.Forms.GroupBox();
             this.tbxText = new System.Windows.Forms.TextBox();
             this.grpPaletteFromMapSelection.SuspendLayout();
+            this.grpScriptAssetRefIdEditor.SuspendLayout();
             this.grpScript.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnDataRefBrowser
-            // 
-            this.btnDataRefBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDataRefBrowser.Location = new System.Drawing.Point(608, 19);
-            this.btnDataRefBrowser.Name = "btnDataRefBrowser";
-            this.btnDataRefBrowser.Size = new System.Drawing.Size(26, 20);
-            this.btnDataRefBrowser.TabIndex = 0;
-            this.btnDataRefBrowser.Text = "...";
-            this.btnDataRefBrowser.UseVisualStyleBackColor = true;
-            // 
-            // tbxAssetDataRef
-            // 
-            this.tbxAssetDataRef.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbxAssetDataRef.Location = new System.Drawing.Point(98, 19);
-            this.tbxAssetDataRef.Name = "tbxAssetDataRef";
-            this.tbxAssetDataRef.Size = new System.Drawing.Size(504, 20);
-            this.tbxAssetDataRef.TabIndex = 1;
-            // 
             // grpPaletteFromMapSelection
             // 
-            this.grpPaletteFromMapSelection.Controls.Add(this.lblAssetDataRef);
-            this.grpPaletteFromMapSelection.Controls.Add(this.btnDataRefBrowser);
-            this.grpPaletteFromMapSelection.Controls.Add(this.tbxAssetDataRef);
+            this.grpPaletteFromMapSelection.Controls.Add(this.grpScriptAssetRefIdEditor);
             this.grpPaletteFromMapSelection.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpPaletteFromMapSelection.Location = new System.Drawing.Point(0, 0);
             this.grpPaletteFromMapSelection.Name = "grpPaletteFromMapSelection";
-            this.grpPaletteFromMapSelection.Size = new System.Drawing.Size(640, 82);
+            this.grpPaletteFromMapSelection.Size = new System.Drawing.Size(640, 66);
             this.grpPaletteFromMapSelection.TabIndex = 3;
             this.grpPaletteFromMapSelection.TabStop = false;
             this.grpPaletteFromMapSelection.Text = "Source data";
             // 
-            // lblAssetDataRef
+            // grpScriptAssetRefIdEditor
             // 
-            this.lblAssetDataRef.AutoSize = true;
-            this.lblAssetDataRef.Location = new System.Drawing.Point(6, 23);
-            this.lblAssetDataRef.Name = "lblAssetDataRef";
-            this.lblAssetDataRef.Size = new System.Drawing.Size(74, 13);
-            this.lblAssetDataRef.TabIndex = 3;
-            this.lblAssetDataRef.Text = "File reference:";
+            this.grpScriptAssetRefIdEditor.Controls.Add(this.ScriptAssetRefIdEditor);
+            this.grpScriptAssetRefIdEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpScriptAssetRefIdEditor.Location = new System.Drawing.Point(3, 16);
+            this.grpScriptAssetRefIdEditor.Name = "grpScriptAssetRefIdEditor";
+            this.grpScriptAssetRefIdEditor.Size = new System.Drawing.Size(634, 47);
+            this.grpScriptAssetRefIdEditor.TabIndex = 4;
+            this.grpScriptAssetRefIdEditor.TabStop = false;
+            this.grpScriptAssetRefIdEditor.Text = "Script asset reference ID";
+            // 
+            // ScriptAssetRefIdEditor
+            // 
+            this.ScriptAssetRefIdEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ScriptAssetRefIdEditor.Location = new System.Drawing.Point(3, 16);
+            this.ScriptAssetRefIdEditor.Name = "ScriptAssetRefIdEditor";
+            this.ScriptAssetRefIdEditor.Size = new System.Drawing.Size(628, 28);
+            this.ScriptAssetRefIdEditor.TabIndex = 0;
             // 
             // grpScript
             // 
             this.grpScript.Controls.Add(this.tbxText);
             this.grpScript.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpScript.Location = new System.Drawing.Point(0, 82);
+            this.grpScript.Location = new System.Drawing.Point(0, 66);
             this.grpScript.Name = "grpScript";
-            this.grpScript.Size = new System.Drawing.Size(640, 398);
+            this.grpScript.Size = new System.Drawing.Size(640, 414);
             this.grpScript.TabIndex = 15;
             this.grpScript.TabStop = false;
             this.grpScript.Text = "Script";
@@ -97,7 +86,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Scripts
             this.tbxText.Location = new System.Drawing.Point(3, 16);
             this.tbxText.Multiline = true;
             this.tbxText.Name = "tbxText";
-            this.tbxText.Size = new System.Drawing.Size(634, 379);
+            this.tbxText.Size = new System.Drawing.Size(634, 395);
             this.tbxText.TabIndex = 14;
             // 
             // ScriptFromFileCtrl
@@ -109,7 +98,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Scripts
             this.Name = "ScriptFromFileCtrl";
             this.Size = new System.Drawing.Size(640, 480);
             this.grpPaletteFromMapSelection.ResumeLayout(false);
-            this.grpPaletteFromMapSelection.PerformLayout();
+            this.grpScriptAssetRefIdEditor.ResumeLayout(false);
             this.grpScript.ResumeLayout(false);
             this.grpScript.PerformLayout();
             this.ResumeLayout(false);
@@ -117,12 +106,10 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Scripts
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnDataRefBrowser;
-        private System.Windows.Forms.TextBox tbxAssetDataRef;
         private System.Windows.Forms.GroupBox grpPaletteFromMapSelection;
-        private System.Windows.Forms.Label lblAssetDataRef;
         private System.Windows.Forms.GroupBox grpScript;
         private System.Windows.Forms.TextBox tbxText;
+        private System.Windows.Forms.GroupBox grpScriptAssetRefIdEditor;
+        private Common.EntryRefIdEditorCtrl ScriptAssetRefIdEditor;
     }
 }

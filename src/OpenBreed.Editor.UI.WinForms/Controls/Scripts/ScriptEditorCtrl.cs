@@ -26,7 +26,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Scripts
             _vm = vm as ScriptEditorVM ?? throw new InvalidOperationException(nameof(vm));
 
             _vm.PropertyChanged += _vm_PropertyChanged;
-
             OnEditableChanged(_vm.Editable);
         }
 
