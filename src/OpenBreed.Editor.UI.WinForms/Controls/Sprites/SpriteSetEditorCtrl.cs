@@ -11,6 +11,7 @@ using OpenBreed.Editor.VM.Tiles;
 using OpenBreed.Editor.VM;
 using OpenBreed.Editor.VM.Sprites;
 using OpenBreed.Database.Interface.Items.Sprites;
+using OpenBreed.Database.Interface.Items.Texts;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
 {

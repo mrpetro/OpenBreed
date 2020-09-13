@@ -1,22 +1,18 @@
-﻿using OpenBreed.Common;
-using OpenBreed.Common.Data;
-using OpenBreed.Common.Model.Texts;
+﻿using OpenBreed.Common.Data;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Texts;
-using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM.Maps;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Texts
 {
-    public class TextEditorVM : EntryEditorBaseVM<ITextEntry, TextVM>
+    public class TextEditorVM : EntryEditorBaseExVM<ITextEntry>
     {
+        #region Private Fields
+
+        private IEntryEditor<ITextEntry> subeditor;
+
+
+        #endregion Private Fields
 
         #region Public Constructors
 
@@ -28,32 +24,40 @@ namespace OpenBreed.Editor.VM.Texts
 
         #region Public Properties
 
+
+
+        public IEntryEditor<ITextEntry> Subeditor
+        {
+            get { return subeditor; }
+            private set { SetProperty(ref subeditor, value); }
+        }
+
         public override string EditorName { get { return "Text Editor"; } }
 
         #endregion Public Properties
 
         #region Protected Methods
 
-        protected override TextVM CreateVM(ITextEntry entry)
+        protected override void UpdateVM(ITextEntry entry)
         {
             if (entry is ITextEmbeddedEntry)
-                return new TextEmbeddedVM();
+                Subeditor = new TextEmbeddedEditorVM(this);
             else if (entry is ITextFromMapEntry)
-                return new TextFromMapVM();
+                Subeditor = new TextFromMapEditorVM(this);
             else
                 throw new NotImplementedException();
+
+            base.UpdateVM(entry);
+            Subeditor.UpdateVM(entry);
         }
 
-        protected override void UpdateEntry(TextVM source, ITextEntry target)
+        protected override void UpdateEntry(ITextEntry target)
         {
-            var model = DataProvider.Texts.GetText(target.Id);
 
-            model.Text = source.Text;
-
-            base.UpdateEntry(source, target);
+            base.UpdateEntry(target);
+            Subeditor.UpdateEntry(target);
         }
 
         #endregion Protected Methods
-
     }
 }

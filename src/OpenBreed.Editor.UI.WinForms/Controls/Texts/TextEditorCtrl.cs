@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenBreed.Editor.VM.Texts;
 using OpenBreed.Editor.VM;
+using OpenBreed.Database.Interface.Items.Texts;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Texts
 {
@@ -27,39 +28,39 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Texts
 
             _vm.PropertyChanged += _vm_PropertyChanged;
 
-            OnEditableChanged(_vm.Editable);
+            OnSubeditorChanged(_vm.Subeditor);
         }
 
         private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
-                case nameof(_vm.Editable):
-                    OnEditableChanged(_vm.Editable);
+                case nameof(_vm.Subeditor):
+                    OnSubeditorChanged(_vm.Subeditor);
                     break;
                 default:
                     break;
             }
         }
 
-        private void OnEditableChanged(TextVM text)
+        private void OnSubeditorChanged(IEntryEditor<ITextEntry> subeditor)
         {
             Controls.Clear();
 
-            if (text == null)
+            if (subeditor == null)
                 return;
 
-            if (text is TextEmbeddedVM)
+            if (subeditor is TextEmbeddedEditorVM)
             {
-                var control = new TextEmbeddedCtrl();
-                control.Initialize((TextEmbeddedVM)text);
+                var control = new TextEmbeddedEditorCtrl();
+                control.Initialize((TextEmbeddedEditorVM)subeditor);
                 control.Dock = DockStyle.Fill;
                 Controls.Add(control);
             }
-            else if (text is TextFromMapVM)
+            else if (subeditor is TextFromMapEditorVM)
             {
-                var control = new TextFromMapCtrl();
-                control.Initialize((TextFromMapVM)text);
+                var control = new TextFromMapEditorCtrl();
+                control.Initialize((TextFromMapEditorVM)subeditor);
                 control.Dock = DockStyle.Fill;
                 Controls.Add(control);
             }

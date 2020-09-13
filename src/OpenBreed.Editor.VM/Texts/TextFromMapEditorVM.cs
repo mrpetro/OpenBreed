@@ -1,36 +1,32 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Assets;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Model.Maps;
 using OpenBreed.Common.Model.Maps.Blocks;
-using OpenBreed.Common.Model.Texts;
-using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Texts;
-using OpenBreed.Database.Xml.Items.Assets;
 using OpenBreed.Editor.VM.Base;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Texts
 {
-    public class TextFromMapVM : TextVM
+    public class TextFromMapEditorVM : BaseViewModel, IEntryEditor<ITextEntry>
     {
-
         #region Private Fields
 
         private string _blockName;
         private bool _editEnabled;
 
+        private string _text;
+
+        private string _dataRef;
+
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TextFromMapVM()
+        public TextFromMapEditorVM(TextEditorVM parent)
         {
+            Parent = parent;
             BlockNames = new BindingList<string>();
             BlockNames.ListChanged += (s, a) => OnPropertyChanged(nameof(BlockNames));
 
@@ -41,6 +37,7 @@ namespace OpenBreed.Editor.VM.Texts
 
         #region Public Properties
 
+        public TextEditorVM Parent { get; }
         public BindingList<string> BlockNames { get; }
 
         public string BlockName
@@ -55,23 +52,55 @@ namespace OpenBreed.Editor.VM.Texts
             set { SetProperty(ref _editEnabled, value); }
         }
 
+        public string DataRef
+        {
+            get { return _dataRef; }
+            set { SetProperty(ref _dataRef, value); }
+        }
+
+        public string Text
+        {
+            get { return _text; }
+            set { SetProperty(ref _text, value); }
+        }
+
         #endregion Public Properties
 
-        #region Internal Methods
+        #region Public Methods
 
-        internal override void FromEntry(IEntry entry)
+        public virtual void UpdateVM(ITextEntry entry)
         {
-            base.FromEntry(entry);
-            FromEntry((ITextFromMapEntry)entry);
+            var textFromMapEntry = (ITextFromMapEntry)entry;
+
+            UpdateTextBlocksList(textFromMapEntry);
+
+            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
+
+            var model = dataProvider.Texts.GetText(entry.Id);
+
+            if (model != null)
+                Text = model.Text;
+
+            BlockName = textFromMapEntry.BlockName;
         }
 
-        internal override void ToEntry(IEntry entry)
+        public virtual void UpdateEntry(ITextEntry entry)
         {
-            base.ToEntry(entry);
-            ToEntry((ITextFromMapEntry)entry);
+            var textFromMapEntry = (ITextFromMapEntry)entry;
+            var mapModel = ServiceLocator.Instance.GetService<DataProvider>().GetData<MapModel>(DataRef);
+
+            var textBlock = mapModel.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == BlockName);
+
+            textBlock.Value = Text;
+
+            var model = Parent.DataProvider.Texts.GetText(entry.Id);
+            model.Text = Text;
+
+            textFromMapEntry.DataRef = DataRef;
+            textFromMapEntry.BlockName = BlockName;
         }
 
-        #endregion Internal Methods
+        #endregion Public Methods
 
         #region Private Methods
 
@@ -90,23 +119,7 @@ namespace OpenBreed.Editor.VM.Texts
 
                 foreach (var textBlock in map.Blocks.OfType<MapTextBlock>())
                     BlockNames.Add(textBlock.Name);
-
             });
-        }
-
-        private void FromEntry(ITextFromMapEntry entry)
-        {
-            UpdateTextBlocksList(entry);
-
-            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
-
-            var model = dataProvider.Texts.GetText(entry.Id);
-
-            if (model != null)
-                Text = model.Text;
-
-            DataRef = entry.DataRef;
-            BlockName = entry.BlockName;
         }
 
         private void This_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -117,6 +130,7 @@ namespace OpenBreed.Editor.VM.Texts
                 case nameof(DataRef):
                     EditEnabled = ValidateSettings();
                     break;
+
                 default:
                     break;
             }
@@ -124,14 +138,6 @@ namespace OpenBreed.Editor.VM.Texts
 
         private void ToEntry(ITextFromMapEntry source)
         {
-            var mapModel = ServiceLocator.Instance.GetService<DataProvider>().GetData<MapModel>(DataRef);
-
-            var textBlock = mapModel.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == BlockName);
-
-            textBlock.Value = Text;
-
-            source.DataRef = DataRef;
-            source.BlockName = BlockName;
         }
 
         private bool ValidateSettings()

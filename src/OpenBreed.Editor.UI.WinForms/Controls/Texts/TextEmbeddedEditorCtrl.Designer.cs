@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Texts
 {
-    partial class TextEmbeddedCtrl
+    partial class TextEmbeddedEditorCtrl
     {
         /// <summary> 
         /// Required designer variable.
@@ -53,12 +53,12 @@
             this.tbxText.Size = new System.Drawing.Size(634, 461);
             this.tbxText.TabIndex = 15;
             // 
-            // TextEmbeddedCtrl
+            // TextEmbeddedEditorCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.grpText);
-            this.Name = "TextEmbeddedCtrl";
+            this.Name = "TextEmbeddedEditorCtrl";
             this.Size = new System.Drawing.Size(640, 480);
             this.grpText.ResumeLayout(false);
             this.grpText.PerformLayout();

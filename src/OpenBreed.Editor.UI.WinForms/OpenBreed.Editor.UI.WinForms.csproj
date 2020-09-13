@@ -338,17 +338,17 @@
     <Compile Include="Controls\Sprites\SpriteSetViewCtrl.Designer.cs">
       <DependentUpon>SpriteSetViewCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Texts\TextEmbeddedCtrl.cs">
+    <Compile Include="Controls\Texts\TextEmbeddedEditorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Texts\TextEmbeddedCtrl.Designer.cs">
-      <DependentUpon>TextEmbeddedCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Texts\TextEmbeddedEditorCtrl.Designer.cs">
+      <DependentUpon>TextEmbeddedEditorCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Texts\TextFromMapCtrl.cs">
+    <Compile Include="Controls\Texts\TextFromMapEditorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Texts\TextFromMapCtrl.Designer.cs">
-      <DependentUpon>TextFromMapCtrl.cs</DependentUpon>
+    <Compile Include="Controls\Texts\TextFromMapEditorCtrl.Designer.cs">
+      <DependentUpon>TextFromMapEditorCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Texts\TextEditorCtrl.cs">
       <SubType>UserControl</SubType>
@@ -632,11 +632,11 @@
     <EmbeddedResource Include="Controls\Sprites\SpriteSetViewCtrl.resx">
       <DependentUpon>SpriteSetViewCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Texts\TextEmbeddedCtrl.resx">
-      <DependentUpon>TextEmbeddedCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Texts\TextEmbeddedEditorCtrl.resx">
+      <DependentUpon>TextEmbeddedEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Texts\TextFromMapCtrl.resx">
-      <DependentUpon>TextFromMapCtrl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Texts\TextFromMapEditorCtrl.resx">
+      <DependentUpon>TextFromMapEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Texts\TextEditorCtrl.resx">
       <DependentUpon>TextEditorCtrl.cs</DependentUpon>

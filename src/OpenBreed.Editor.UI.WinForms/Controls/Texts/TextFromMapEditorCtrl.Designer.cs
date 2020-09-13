@@ -1,7 +1,7 @@
 ﻿
 namespace OpenBreed.Editor.UI.WinForms.Controls.Texts
 {
-    partial class TextFromMapCtrl
+    partial class TextFromMapEditorCtrl
     {
         /// <summary> 
         /// Required designer variable.
@@ -124,13 +124,13 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Texts
             this.tbxText.Size = new System.Drawing.Size(634, 379);
             this.tbxText.TabIndex = 14;
             // 
-            // TextFromMapCtrl
+            // TextFromMapEditorCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.grpText);
             this.Controls.Add(this.grpPaletteFromMapSelection);
-            this.Name = "TextFromMapCtrl";
+            this.Name = "TextFromMapEditorCtrl";
             this.Size = new System.Drawing.Size(640, 480);
             this.grpPaletteFromMapSelection.ResumeLayout(false);
             this.grpPaletteFromMapSelection.PerformLayout();

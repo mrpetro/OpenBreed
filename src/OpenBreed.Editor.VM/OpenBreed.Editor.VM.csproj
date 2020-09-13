@@ -164,9 +164,8 @@
     <Compile Include="Sprites\SpriteFromImageVM.cs" />
     <Compile Include="Sprites\SpriteSetFromSprEditorVM.cs" />
     <Compile Include="Texts\TextEditorVM.cs" />
-    <Compile Include="Texts\TextEmbeddedVM.cs" />
-    <Compile Include="Texts\TextFromMapVM.cs" />
-    <Compile Include="Texts\TextVM.cs" />
+    <Compile Include="Texts\TextEmbeddedEditorVM.cs" />
+    <Compile Include="Texts\TextFromMapEditorVM.cs" />
     <Compile Include="Tools\IScrollableVM.cs" />
     <Compile Include="Tools\IZoomableVM.cs" />
     <Compile Include="Renderer\LayoutRenderer.cs" />
