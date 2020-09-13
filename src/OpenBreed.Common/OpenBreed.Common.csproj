@@ -137,6 +137,7 @@
     <Compile Include="Model\Maps\MapLayerModel.cs" />
     <Compile Include="Readers\Maps\IMapModelReader.cs" />
     <Compile Include="Readers\Maps\MAP\MAPReader.cs" />
+    <Compile Include="ServiceLocator.cs" />
     <Compile Include="VariableMan.cs" />
     <Compile Include="Writers\Maps\IMapModelWriter.cs" />
     <Compile Include="Writers\Maps\MAP\MAPWriter.cs" />

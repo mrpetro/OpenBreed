@@ -8,6 +8,5 @@ namespace OpenBreed.Common
 {
     public interface IApplication
     {
-        T GetInterface<T>() where T : IApplicationInterface;
     }
 }

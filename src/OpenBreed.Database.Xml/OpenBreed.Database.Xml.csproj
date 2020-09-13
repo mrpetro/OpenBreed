@@ -161,7 +161,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Defaults\Scripts\Entry.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Defaults\Templates\Logo1.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

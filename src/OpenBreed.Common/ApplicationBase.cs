@@ -8,9 +8,11 @@ namespace OpenBreed.Common
 {
     public class ApplicationBase : IApplication
     {
-        public T GetInterface<T>() where T : IApplicationInterface
+        public ServiceLocator ServiceLocator { get; }
+
+        protected ApplicationBase()
         {
-            throw new NotImplementedException();
+            ServiceLocator = ServiceLocator.Instance;
         }
     }
 }
