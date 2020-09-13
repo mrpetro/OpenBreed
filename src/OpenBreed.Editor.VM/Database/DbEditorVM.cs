@@ -79,8 +79,8 @@ namespace OpenBreed.Editor.VM.Database
 
             _edited = model;
 
-            ServiceLocator.Instance.RegisterService<IUnitOfWork>(model);
-            ServiceLocator.Instance.RegisterService<DataProvider>(new DataProvider(model));
+            application.ServiceLocator.RegisterService<IUnitOfWork>(model);
+            application.ServiceLocator.RegisterService<DataProvider>(new DataProvider(model));
 
             var vm = new DatabaseVM();
             UpdateVM(model, vm);
@@ -95,8 +95,8 @@ namespace OpenBreed.Editor.VM.Database
             if (DbEditorVMHelper.TryCloseDatabase(this))
             {
                 _edited = null;
-                ServiceLocator.Instance.UnregisterService<DataProvider>();
-                ServiceLocator.Instance.UnregisterService<IUnitOfWork>();
+                application.ServiceLocator.UnregisterService<DataProvider>();
+                application.ServiceLocator.UnregisterService<IUnitOfWork>();
                 return true;
             }
             else

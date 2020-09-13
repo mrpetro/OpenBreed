@@ -10,6 +10,7 @@ using OpenBreed.Common;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
 using OpenBreed.Common.Model.EntityTemplates;
+using OpenBreed.Common.Data;
 
 namespace OpenBreed.Editor.VM.EntityTemplates
 {

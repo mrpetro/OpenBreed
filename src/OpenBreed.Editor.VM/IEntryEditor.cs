@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM
 {
-    public interface IEntryEditor<E, VM>
+    public interface IEntryEditor<E>
     {
-        VM CreateVM(E entry);
-        void UpdateEntry(VM source, E entry);
-        void UpdateVM(E entry, VM target);
+        void UpdateEntry(E entry);
+        void UpdateVM(E entry);
     }
 }

@@ -1,28 +1,15 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Assets;
 using OpenBreed.Common.Data;
 using OpenBreed.Database.Interface.Items.Palettes;
-using OpenBreed.Database.Xml.Items.Assets;
 using OpenBreed.Editor.VM.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Palettes
 {
     public class PaletteFromBinaryVM : PaletteVM
     {
+        #region Public Constructors
 
-        #region Private Fields
-
-        #endregion Private Fields
-
-        #region Public Properties
-
-
-        #endregion Public Properties
+        #endregion Public Constructors
 
         #region Internal Methods
 
@@ -68,6 +55,5 @@ namespace OpenBreed.Editor.VM.Palettes
         }
 
         #endregion Private Methods
-
     }
 }

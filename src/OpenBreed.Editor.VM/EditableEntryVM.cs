@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Editor.VM.Base;
 using System;
@@ -19,6 +20,7 @@ namespace OpenBreed.Editor.VM
         #endregion Private Fields
 
         #region Public Properties
+
 
         public string Id
         {

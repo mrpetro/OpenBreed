@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using OpenBreed.Editor.VM.Tiles;
 using OpenBreed.Editor.VM;
 using OpenBreed.Editor.VM.Sprites;
+using OpenBreed.Database.Interface.Items.Sprites;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
 {
@@ -20,6 +21,13 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
         public SpriteSetEditorCtrl()
         {
             InitializeComponent();
+
+            cbxPalettes.SelectionChangeCommitted += combobox1_SelectionChangesCommitted;
+        }
+
+        private void combobox1_SelectionChangesCommitted(Object sender, EventArgs e)
+        {
+            ((ComboBox)sender).DataBindings["SelectedItem"].WriteValue();
         }
 
         public override void Initialize(EntryEditorVM vm)
@@ -31,36 +39,36 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
 
             _vm.PropertyChanged += _vm_PropertyChanged;
 
-            OnEditableChanged(_vm.Editable);
+            OnSubeditorChanged(_vm.Subeditor);
         }
 
         private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
-                case nameof(_vm.Editable):
-                    OnEditableChanged(_vm.Editable);
+                case nameof(_vm.Subeditor):
+                    OnSubeditorChanged(_vm.Subeditor);
                     break;
                 default:
                     break;
             }
         }
 
-        private void OnEditableChanged(SpriteSetVM spriteSet)
+        private void OnSubeditorChanged(IEntryEditor<ISpriteSetEntry> subeditor)
         {
             Panel.Controls.Clear();
 
-            if (spriteSet == null)
+            if (subeditor == null)
                 return;
 
-            if (spriteSet is SpriteSetFromSprVM)
+            if (subeditor is SpriteSetFromSprEditorVM)
             {
                 var control = new SpriteSetFromSprEditorCtrl();
                 control.Initialize((SpriteSetFromSprEditorVM)_vm.Subeditor);
                 control.Dock = DockStyle.Fill;
                 Panel.Controls.Add(control);
             }
-            else if (spriteSet is SpriteSetFromImageVM)
+            else if (subeditor is SpriteSetFromImageEditorVM)
             {
                 var control = new SpriteSetFromImageEditorCtrl();
                 control.Initialize((SpriteSetFromImageEditorVM)_vm.Subeditor);

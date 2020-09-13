@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
-using OpenBreed.Common.Helpers;
 using OpenBreed.Common.Model.Palettes;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Sprites;
@@ -12,13 +11,15 @@ using System.Linq;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
-    public class SpriteSetEditorVM : EntryEditorBaseVM<ISpriteSetEntry, SpriteSetVM>
+    public class SpriteSetEditorVM : EntryEditorBaseExVM<ISpriteSetEntry>
     {
         #region Private Fields
 
         private string _currentPaletteId;
 
         private PaletteModel palette;
+
+        private IEntryEditor<ISpriteSetEntry> subeditor;
 
         #endregion Private Fields
 
@@ -50,13 +51,17 @@ namespace OpenBreed.Editor.VM.Sprites
         public BindingList<string> PaletteIds { get; }
         public int SelectedIndex { get; private set; }
 
-        public IEntryEditor<ISpriteSetEntry, SpriteSetVM> Subeditor { get; private set; }
+        public IEntryEditor<ISpriteSetEntry> Subeditor
+        {
+            get { return subeditor; }
+            private set { SetProperty(ref subeditor, value); }
+        }
 
         #endregion Public Properties
 
         #region Internal Methods
 
-        internal void SetupPaletteIds(List<string> paletteRefs, SpriteSetVM target)
+        internal void SetupPaletteIds(List<string> paletteRefs)
         {
             PaletteIds.UpdateAfter(() =>
             {
@@ -71,7 +76,13 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Protected Methods
 
-        protected override SpriteSetVM CreateVM(ISpriteSetEntry entry)
+        protected override void UpdateEntry(ISpriteSetEntry entry)
+        {
+            base.UpdateEntry(entry);
+            Subeditor.UpdateEntry(entry);
+        }
+
+        protected override void UpdateVM(ISpriteSetEntry entry)
         {
             if (entry is ISpriteSetFromSprEntry)
                 Subeditor = new SpriteSetFromSprEditorVM(this);
@@ -80,21 +91,9 @@ namespace OpenBreed.Editor.VM.Sprites
             else
                 throw new NotImplementedException();
 
-            return Subeditor.CreateVM(entry);
-        }
-
-        protected override void UpdateEntry(SpriteSetVM vm, ISpriteSetEntry entry)
-        {
-            base.UpdateEntry(vm, entry);
-
-            Subeditor.UpdateEntry(vm, entry);
-        }
-
-        protected override void UpdateVM(ISpriteSetEntry entry, SpriteSetVM vm)
-        {
-            base.UpdateVM(entry, vm);
-            Subeditor.UpdateVM(entry, vm);
-            SetupPaletteIds(entry.PaletteRefs, vm);
+            base.UpdateVM(entry);
+            Subeditor.UpdateVM(entry);
+            SetupPaletteIds(entry.PaletteRefs);
         }
 
         #endregion Protected Methods
@@ -113,6 +112,7 @@ namespace OpenBreed.Editor.VM.Sprites
                 case nameof(CurrentPaletteId):
                     SwitchPalette(CurrentPaletteId);
                     break;
+
                 default:
                     break;
             }

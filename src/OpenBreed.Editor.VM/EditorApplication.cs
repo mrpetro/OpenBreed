@@ -13,6 +13,7 @@ namespace OpenBreed.Editor.VM
 
         #region Public Constructors
 
+
         public EditorApplication()
         {
             Settings = new SettingsMan(this);

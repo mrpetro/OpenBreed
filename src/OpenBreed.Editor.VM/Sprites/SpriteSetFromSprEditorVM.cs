@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Data;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Common.Helpers;
 using OpenBreed.Common.Model.Sprites;
 using OpenBreed.Database.Interface.Items.Sprites;
@@ -8,7 +9,7 @@ using System.ComponentModel;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
-    public class SpriteSetFromSprEditorVM : BaseViewModel, IEntryEditor<ISpriteSetEntry, SpriteSetVM>
+    public class SpriteSetFromSprEditorVM : BaseViewModel, IEntryEditor<ISpriteSetEntry>
     {
         #region Private Fields
 
@@ -44,16 +45,11 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Public Methods
 
-        public SpriteSetVM CreateVM(ISpriteSetEntry entry)
-        {
-            return new SpriteSetFromSprVM();
-        }
-
-        public void UpdateEntry(SpriteSetVM vm, ISpriteSetEntry entry)
+        public void UpdateEntry(ISpriteSetEntry entry)
         {
         }
 
-        public void UpdateVM(ISpriteSetEntry entry, SpriteSetVM vm)
+        public void UpdateVM(ISpriteSetEntry entry)
         {
             var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
 

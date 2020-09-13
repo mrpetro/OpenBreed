@@ -125,6 +125,7 @@
     <Compile Include="EntityTemplates\EntityTemplateEditorVM.cs" />
     <Compile Include="EntityTemplates\EntityTemplateFromFileVM.cs" />
     <Compile Include="EntityTemplates\EntityTemplateVM.cs" />
+    <Compile Include="EntryEditorBaseExVM.cs" />
     <Compile Include="EntryEditorVM.cs" />
     <Compile Include="EntryEditorBaseVM.cs" />
     <Compile Include="EditableEntryVM.cs" />
@@ -160,7 +161,6 @@
     <Compile Include="Sprites\SpriteFromImageEditorVM.cs" />
     <Compile Include="Sprites\SpriteSetEditorVM.cs" />
     <Compile Include="Sprites\SpriteSetFromImageEditorVM.cs" />
-    <Compile Include="Sprites\SpriteSetFromImageVM.cs" />
     <Compile Include="Sprites\SpriteFromImageVM.cs" />
     <Compile Include="Sprites\SpriteSetFromSprEditorVM.cs" />
     <Compile Include="Texts\TextEditorVM.cs" />
@@ -175,7 +175,6 @@
     <Compile Include="Renderer\RenderTarget.cs" />
     <Compile Include="Renderer\RendererBase.cs" />
     <Compile Include="Renderer\TileRenderer.cs" />
-    <Compile Include="ServiceLocator.cs" />
     <Compile Include="ViewFinder.cs" />
     <Compile Include="VMConnectorBase.cs" />
     <Compile Include="Maps\Commands\CmdPropertiesInsert.cs" />
@@ -214,7 +213,6 @@
     <Compile Include="Sounds\SoundEditorVM.cs" />
     <Compile Include="Sounds\SoundVM.cs" />
     <Compile Include="Sprites\SpriteSetVM.cs" />
-    <Compile Include="Sprites\SpriteSetFromSprVM.cs" />
     <Compile Include="Sprites\SpriteVM.cs" />
     <Compile Include="Common\SelectionRectangle.cs" />
     <Compile Include="Tiles\Helpers\TileSelectTool.cs" />

@@ -5,16 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Assets;
+using OpenBreed.Common.Data;
 
 namespace OpenBreed.Editor.VM.DataSources
 {
     public class DataSourceVM : EditableEntryVM
     {
         #region Public Constructors
-
-        public DataSourceVM()
-        {
-        }
 
         #endregion Public Constructors
 

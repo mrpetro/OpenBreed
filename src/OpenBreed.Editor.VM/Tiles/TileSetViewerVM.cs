@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Helpers;
+﻿using OpenBreed.Common.Data;
+using OpenBreed.Common.Helpers;
 using OpenBreed.Common.Model.Palettes;
 using OpenBreed.Common.Model.Tiles;
 using OpenBreed.Editor.VM.Base;

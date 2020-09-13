@@ -72,7 +72,6 @@
             // 
             this.cbxPalettes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbxPalettes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxPalettes.FormattingEnabled = true;
             this.cbxPalettes.Location = new System.Drawing.Point(426, 20);
             this.cbxPalettes.Name = "cbxPalettes";
             this.cbxPalettes.Size = new System.Drawing.Size(149, 21);

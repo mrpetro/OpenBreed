@@ -7,10 +7,11 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using OpenBreed.Common;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
-    public class SpriteSetFromImageEditorVM : BaseViewModel, IEntryEditor<ISpriteSetEntry, SpriteSetVM>
+    public class SpriteSetFromImageEditorVM : BaseViewModel, IEntryEditor<ISpriteSetEntry>
     {
         #region Private Fields
 
@@ -77,12 +78,7 @@ namespace OpenBreed.Editor.VM.Sprites
         {
         }
 
-        public SpriteSetVM CreateVM(ISpriteSetEntry entry)
-        {
-            return new SpriteSetFromImageVM();
-        }
-
-        public void UpdateEntry(SpriteSetVM source, ISpriteSetEntry entry)
+        public void UpdateEntry(ISpriteSetEntry entry)
         {
             var spriteSetEntry = (ISpriteSetFromImageEntry)entry;
 
@@ -95,11 +91,9 @@ namespace OpenBreed.Editor.VM.Sprites
             }
         }
 
-        public void UpdateVM(ISpriteSetEntry entry, SpriteSetVM source)
+        public void UpdateVM(ISpriteSetEntry entry)
         {
             var spriteSetEntry = (ISpriteSetFromImageEntry)entry;
-            var spriteSetVM = (SpriteSetFromImageVM)source;
-
             var dataProvicer = ServiceLocator.Instance.GetService<DataProvider>();
 
             SourceImage = dataProvicer.GetData<Bitmap>(spriteSetEntry.DataRef);

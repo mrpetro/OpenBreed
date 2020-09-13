@@ -71,7 +71,7 @@ namespace OpenBreed.Editor.VM
 
             Logger = new LoggerVM();
 
-            ServiceLocator.Instance.RegisterService<EditorVM>(this);
+            application.ServiceLocator.RegisterService<EditorVM>(this);
 
             var entryEditorFactory = new DbEntryEditorFactory();
             entryEditorFactory.Register<IRepository<ITileSetEntry>, TileSetEditorVM>();
@@ -85,10 +85,10 @@ namespace OpenBreed.Editor.VM
             entryEditorFactory.Register<IRepository<ISoundEntry>, SoundEditorVM>();
             entryEditorFactory.Register<IRepository<IMapEntry>, MapEditorVM>();
             entryEditorFactory.Register<IRepository<IDataSourceEntry>, DataSourceEditorVM>();
-            ServiceLocator.Instance.RegisterService<DbEntryEditorFactory>(entryEditorFactory);
+            application.ServiceLocator.RegisterService<DbEntryEditorFactory>(entryEditorFactory);
 
-            ServiceLocator.Instance.RegisterService<DbTableFactory>(new DbTableFactory());
-            ServiceLocator.Instance.RegisterService<DbEntryFactory>(new DbEntryFactory());
+            application.ServiceLocator.RegisterService<DbTableFactory>(new DbTableFactory());
+            application.ServiceLocator.RegisterService<DbEntryFactory>(new DbEntryFactory());
 
 
             DialogProvider = ServiceLocator.Instance.GetService<IDialogProvider>();
