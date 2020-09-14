@@ -71,11 +71,29 @@ namespace OpenBreed.Editor.UI.WinForms.Controls
             _vm.PropertyChanged += _vm_PropertyChanged;
 
             OnEditableChanged(_vm.Editable);
+
+            OnEditedChanged();
         }
 
         #endregion Public Methods
 
         #region Private Methods
+
+        private void OnEditedChanged()
+        {
+            tbxId.DataBindings.Clear();
+            tbxDescription.DataBindings.Clear();
+            if (_vm.Id == null)
+            {
+                tbxId.Text = null;
+                tbxDescription.Text = null;
+            }
+            else
+            {
+                tbxId.DataBindings.Add(nameof(tbxId.Text), _vm, nameof(_vm.Id), false, DataSourceUpdateMode.OnPropertyChanged);
+                tbxDescription.DataBindings.Add(nameof(tbxDescription.Text), _vm, nameof(_vm.Description), false, DataSourceUpdateMode.OnPropertyChanged);
+            }
+        }
 
         private void OnEditableChanged(EditableEntryVM entry)
         {

@@ -15,10 +15,6 @@ namespace OpenBreed.Editor.VM
         private E _previous;
         private IRepository<E> _repository;
 
-        private string _id;
-
-        private string _description;
-
         #endregion Private Fields
 
         #region Public Constructors
@@ -40,18 +36,6 @@ namespace OpenBreed.Editor.VM
         #endregion Protected Constructors
 
         #region Public Properties
-
-        public string Id
-        {
-            get { return _id; }
-            set { SetProperty(ref _id, value); }
-        }
-
-        public string Description
-        {
-            get { return _description; }
-            set { SetProperty(ref _description, value); }
-        }
 
         #endregion Public Properties
 
@@ -120,21 +104,11 @@ namespace OpenBreed.Editor.VM
             Description = source.Description;
         }
 
-        protected override bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = "")
-        {
-            var propertyChanged = base.SetProperty(ref storage, value, propertyName);
-
-            if (propertyChanged)
-                OnEditablePropertyChanged(propertyName);
-
-            return propertyChanged;
-        }
-
-        protected virtual void OnEditablePropertyChanged(string propertyName)
+        protected override void OnPropertyChanged(string name)
         {
             var canCommit = true;
 
-            switch (propertyName)
+            switch (name)
             {
                 case nameof(Id):
                     canCommit = IsIdUnique();
@@ -145,6 +119,8 @@ namespace OpenBreed.Editor.VM
             }
 
             CommitEnabled = canCommit;
+
+            base.OnPropertyChanged(name);
         }
 
         #endregion Protected Methods
@@ -161,18 +137,25 @@ namespace OpenBreed.Editor.VM
             return false;
         }
 
-        private void Editable_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        protected virtual void DisableChangesTracking()
         {
-            OnEditablePropertyChanged(e.PropertyName);
+        }
+
+        protected virtual void EnableChangesTracking()
+        {
         }
 
         private void EditEntry(E entry)
         {
+            DisableChangesTracking();
+
             _edited = entry;
             _next = _repository.GetNextTo(_edited);
             _previous = _repository.GetPreviousTo(_edited);
 
             UpdateVM(entry);
+
+            EnableChangesTracking();
 
             UpdateControls();
 

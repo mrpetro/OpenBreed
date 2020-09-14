@@ -23,6 +23,8 @@ namespace OpenBreed.Editor.VM
         private bool _previousAvailable;
         private bool _revertEnabled;
         private string _title;
+        private string _id;
+        private string _description;
 
         #endregion Private Fields
 
@@ -68,6 +70,18 @@ namespace OpenBreed.Editor.VM
         {
             get { return _revertEnabled; }
             protected set { SetProperty(ref _revertEnabled, value); }
+        }
+
+        public string Id
+        {
+            get { return _id; }
+            set { SetProperty(ref _id, value); }
+        }
+
+        public string Description
+        {
+            get { return _description; }
+            set { SetProperty(ref _description, value); }
         }
 
         public string Title

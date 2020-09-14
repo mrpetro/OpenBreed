@@ -18,7 +18,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Scripts
     {
         #region Private Fields
 
-        private ScriptEmbeddedVM _vm;
+        private ScriptEmbeddedEditorVM _vm;
 
         #endregion Private Fields
 
@@ -33,7 +33,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Scripts
 
         #region Public Methods
 
-        public void Initialize(ScriptEmbeddedVM vm)
+        public void Initialize(ScriptEmbeddedEditorVM vm)
         {
             _vm = vm ?? throw new ArgumentNullException(nameof(vm));
 

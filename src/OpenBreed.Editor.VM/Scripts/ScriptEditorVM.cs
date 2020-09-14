@@ -1,24 +1,17 @@
-﻿using OpenBreed.Common;
-using OpenBreed.Common.Data;
-using OpenBreed.Common.Model.Scripts;
+﻿using OpenBreed.Common.Data;
 using OpenBreed.Database.Interface;
-using OpenBreed.Database.Interface.Items.Assets;
 using OpenBreed.Database.Interface.Items.Scripts;
-using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM.Common;
-using OpenBreed.Editor.VM.Maps;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Scripts
 {
-    public class ScriptEditorVM : EntryEditorBaseVM<IScriptEntry, ScriptVM>
+    public class ScriptEditorVM : EntryEditorBaseExVM<IScriptEntry>
     {
+        #region Private Fields
+
+        private IEntryEditor<IScriptEntry> subeditor;
+
+        #endregion Private Fields
 
         #region Public Constructors
 
@@ -30,32 +23,37 @@ namespace OpenBreed.Editor.VM.Scripts
 
         #region Public Properties
 
+        public IEntryEditor<IScriptEntry> Subeditor
+        {
+            get { return subeditor; }
+            private set { SetProperty(ref subeditor, value); }
+        }
+
         public override string EditorName { get { return "Script Editor"; } }
 
         #endregion Public Properties
 
         #region Protected Methods
 
-        protected override ScriptVM CreateVM(IScriptEntry entry)
+        protected override void UpdateVM(IScriptEntry source)
         {
-            if (entry is IScriptEmbeddedEntry)
-                return new ScriptEmbeddedVM();
-            else if (entry is IScriptFromFileEntry)
-                return new ScriptFromFileVM();
+            if (source is IScriptEmbeddedEntry)
+                Subeditor = new ScriptEmbeddedEditorVM(this);
+            else if (source is IScriptFromFileEntry)
+                Subeditor = new ScriptFromFileEditorVM(this);
             else
                 throw new NotImplementedException();
+
+            base.UpdateVM(source);
+            Subeditor.UpdateVM(source);
         }
 
-        protected override void UpdateEntry(ScriptVM source, IScriptEntry target)
+        protected override void UpdateEntry(IScriptEntry target)
         {
-            var model = DataProvider.Scripts.GetScript(target.Id);
-
-            model.Script = source.Script;
-
-            base.UpdateEntry(source, target);
+            base.UpdateEntry(target);
+            Subeditor.UpdateVM(target);
         }
 
         #endregion Protected Methods
-
     }
 }

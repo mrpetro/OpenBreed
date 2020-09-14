@@ -155,8 +155,8 @@
     <Compile Include="Renderer\ViewRenderer.cs" />
     <Compile Include="Scripts\ScriptEditorVM.cs" />
     <Compile Include="Scripts\ScriptVM.cs" />
-    <Compile Include="Scripts\ScriptEmbeddedVM.cs" />
-    <Compile Include="Scripts\ScriptFromFileVM.cs" />
+    <Compile Include="Scripts\ScriptEmbeddedEditorVM.cs" />
+    <Compile Include="Scripts\ScriptFromFileEditorVM.cs" />
     <Compile Include="SettingsMan.cs" />
     <Compile Include="Sprites\SpriteFromImageEditorVM.cs" />
     <Compile Include="Sprites\SpriteSetEditorVM.cs" />
@@ -210,7 +210,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Actions\ActionVMHelper.cs" />
     <Compile Include="Sounds\SoundEditorVM.cs" />
-    <Compile Include="Sounds\SoundVM.cs" />
+    <Compile Include="Sounds\SoundFromPcmEditorVM.cs" />
     <Compile Include="Sprites\SpriteSetVM.cs" />
     <Compile Include="Sprites\SpriteVM.cs" />
     <Compile Include="Common\SelectionRectangle.cs" />

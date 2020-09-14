@@ -1,21 +1,18 @@
-﻿using OpenBreed.Editor.VM.Base;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenBreed.Editor.VM.Sounds;
-using OpenBreed.Editor.VM.Database;
-using OpenBreed.Common;
-using OpenBreed.Database.Interface.Items.Sounds;
+﻿using OpenBreed.Common.Helpers.Sounds;
 using OpenBreed.Database.Interface;
-using OpenBreed.Common.Helpers.Sounds;
+using OpenBreed.Database.Interface.Items.Sounds;
+using System;
 
 namespace OpenBreed.Editor.VM.Sounds
 {
-    public class SoundEditorVM : EntryEditorBaseVM<ISoundEntry, SoundVM>
+    public class SoundEditorVM : EntryEditorBaseExVM<ISoundEntry>
     {
+        #region Private Fields
+
+        private IEntryEditor<ISoundEntry> subeditor;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
         public SoundEditorVM(IRepository repository) : base(repository)
@@ -28,46 +25,49 @@ namespace OpenBreed.Editor.VM.Sounds
 
         public override string EditorName { get { return "Sound Editor"; } }
 
+        public IEntryEditor<ISoundEntry> Subeditor
+        {
+            get { return subeditor; }
+            private set { SetProperty(ref subeditor, value); }
+        }
+
         #endregion Public Properties
 
         #region Public Methods
 
-        #endregion Public Methods
-
-        #region Private Methods
+        internal Action PlayAction { get; private set; }
 
         public void Play()
         {
-            var pcmPlayer = new PCMPlayer(Editable.Data,
-                                          Editable.SampleRate, 
-                                          Editable.BitsPerSample, 
-                                          Editable.Channels);
-            pcmPlayer.PlaySync();
+            PlayAction?.Invoke();
         }
 
-        protected override void UpdateEntry(SoundVM source, ISoundEntry target)
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        protected override void UpdateEntry(ISoundEntry target)
         {
-            base.UpdateEntry(source, target);
-
-            var model = DataProvider.Sounds.GetSound(target.Id);
-
-            model.BitsPerSample = source.BitsPerSample;
-            model.Channels = source.Channels;
-            model.SampleRate = source.SampleRate;
-            model.Data = source.Data;
+            base.UpdateEntry(target);
+            Subeditor.UpdateEntry(target);
         }
 
-        protected override void UpdateVM(ISoundEntry source, SoundVM target)
+        protected override void UpdateVM(ISoundEntry source)
         {
-            var model = DataProvider.Sounds.GetSound(source.Id);
-            target.BitsPerSample = model.BitsPerSample;
-            target.Channels = model.Channels;
-            target.SampleRate = model.SampleRate;
-            target.Data = model.Data;
+            if (source is ISoundEntry)
+            {
+                var pcmEditor = new SoundFromPcmEditorVM(this);
+                PlayAction = pcmEditor.Play;
+                Subeditor = pcmEditor;
+            }
+            else
+                throw new NotImplementedException();
 
-            base.UpdateVM(source, target);
+
+            base.UpdateVM(source);
+            Subeditor.UpdateVM(source);
         }
 
-        #endregion Private Methods
+        #endregion Protected Methods
     }
 }

@@ -81,6 +81,7 @@ namespace OpenBreed.Editor.VM.Texts
             if (model != null)
                 Text = model.Text;
 
+            DataRef = textFromMapEntry.DataRef;
             BlockName = textFromMapEntry.BlockName;
         }
 
