@@ -4,22 +4,29 @@ using OpenBreed.Common.Model.Texts;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Assets;
 using OpenBreed.Database.Interface.Items.Scripts;
+using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Common;
 
 namespace OpenBreed.Editor.VM.Scripts
 {
-    public class ScriptFromFileVM : ScriptVM
+    public class ScriptFromFileEditorVM : BaseViewModel, IEntryEditor<IScriptEntry>
     {
         #region Private Fields
 
         private bool _editEnabled;
 
+        private string _dataRef;
+
+        private string _script;
+
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ScriptFromFileVM()
+        public ScriptFromFileEditorVM(ScriptEditorVM parent)
         {
+            Parent = parent;
+
             PropertyChanged += This_PropertyChanged;
 
             ScriptAssetRefIdEditor = new EntryRefIdEditorVM(typeof(IAssetEntry));
@@ -30,6 +37,14 @@ namespace OpenBreed.Editor.VM.Scripts
 
         #region Public Properties
 
+        public ScriptEditorVM Parent { get; }
+
+        public string DataRef
+        {
+            get { return _dataRef; }
+            set { SetProperty(ref _dataRef, value); }
+        }
+
         public EntryRefIdEditorVM ScriptAssetRefIdEditor { get; }
 
         public bool EditEnabled
@@ -38,28 +53,20 @@ namespace OpenBreed.Editor.VM.Scripts
             set { SetProperty(ref _editEnabled, value); }
         }
 
+        public string Script
+        {
+            get { return _script; }
+            set { SetProperty(ref _script, value); }
+        }
+
         #endregion Public Properties
 
-        #region Internal Methods
+        #region Public Methods
 
-        internal override void FromEntry(IEntry entry)
+        public void UpdateVM(IScriptEntry entry)
         {
-            base.FromEntry(entry);
-            FromEntry((IScriptFromFileEntry)entry);
-        }
+            var scriptFromFileEntry = (IScriptFromFileEntry)entry;
 
-        internal override void ToEntry(IEntry entry)
-        {
-            base.ToEntry(entry);
-            ToEntry((IScriptFromFileEntry)entry);
-        }
-
-        #endregion Internal Methods
-
-        #region Private Methods
-
-        private void FromEntry(IScriptFromFileEntry entry)
-        {
             var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
 
             var model = dataProvider.Scripts.GetScript(entry.Id);
@@ -67,17 +74,22 @@ namespace OpenBreed.Editor.VM.Scripts
             if (model != null)
                 Script = model.Script;
 
-            DataRef = entry.DataRef;
+            DataRef = scriptFromFileEntry.DataRef;
         }
 
-        private void ToEntry(IScriptFromFileEntry source)
+        public void UpdateEntry(IScriptEntry entry)
         {
+            var scriptFromFileEntry = (IScriptFromFileEntry)entry;
+
             var model = ServiceLocator.Instance.GetService<DataProvider>().GetData<TextModel>(DataRef);
 
             model.Text = Script;
-
-            source.DataRef = DataRef;
+            scriptFromFileEntry.DataRef = DataRef;
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private void This_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
