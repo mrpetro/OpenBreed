@@ -1,8 +1,7 @@
 ﻿using OpenBreed.Common.Helpers;
-using OpenBreed.Common.Model.Sprites;
-using OpenBreed.Common.Builders.Sprites;
 using System;
 using System.IO;
+using OpenBreed.Model.Sprites;
 
 namespace OpenBreed.Common.Readers.Sprites.SPR
 {
@@ -55,7 +54,7 @@ namespace OpenBreed.Common.Readers.Sprites.SPR
             width = MathHelper.ToNextPowOf2(width);
             int height = binReader.ReadInt16();
             height = MathHelper.ToNextPowOf2(height);
-            spriteBuilder.SetSize(width, height);
+
             UInt16 offset = binReader.ReadUInt16();
 
             //Remember sprites headers data position
@@ -63,7 +62,7 @@ namespace OpenBreed.Common.Readers.Sprites.SPR
             //Jump with reader to sprite data
             binReader.BaseStream.Seek(offset, SeekOrigin.Begin);
             //Read the sprite bitmap data
-            ReadSpriteBitmap(binReader, spriteBuilder);
+            ReadSpriteBitmap(binReader, spriteBuilder, width, height);
             //Jump back to sprite headers data
             binReader.BaseStream.Seek(currentHeadPos, SeekOrigin.Begin);
 
@@ -71,9 +70,11 @@ namespace OpenBreed.Common.Readers.Sprites.SPR
             Builder.AddSprite(spriteBuilder.Build());
         }
 
-        private void ReadSpriteBitmap(BinaryReader binReader, SpriteBuilder spriteBuilder)
+        private void ReadSpriteBitmap(BinaryReader binReader, SpriteBuilder spriteBuilder, int width, int height)
         {
-            byte[] spriteData = new byte[spriteBuilder.Width * spriteBuilder.Height];
+            spriteBuilder.SetSize(width, height);
+
+            byte[] spriteData = new byte[width * height];
 
             while (true)
             {
@@ -87,7 +88,7 @@ namespace OpenBreed.Common.Readers.Sprites.SPR
                 var lineBytes = binReader.ReadBytes(lineLength);
 
                 for (byte i = 0; i < lineLength; i++)
-                    spriteData[(lineStart + i) * spriteBuilder.Width + lineNo] = lineBytes[i];
+                    spriteData[(lineStart + i) * width + lineNo] = lineBytes[i];
             }
 
             spriteBuilder.SetData(spriteData);

@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.Model.Maps;
+﻿using OpenBreed.Model.Maps;
 using System;
 using System.Collections.Generic;
 using System.Linq;

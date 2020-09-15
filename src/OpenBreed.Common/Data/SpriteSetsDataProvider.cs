@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.Model.Sprites;
+﻿using OpenBreed.Model.Sprites;
 using OpenBreed.Database.Interface.Items.Sprites;
 using System;
 

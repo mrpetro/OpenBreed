@@ -1,5 +1,5 @@
-﻿using OpenBreed.Common.Model.Scripts;
-using OpenBreed.Common.Model.Texts;
+﻿using OpenBreed.Model.Scripts;
+using OpenBreed.Model.Texts;
 using OpenBreed.Database.Interface.Items.Scripts;
 using OpenBreed.Database.Interface.Items.Texts;
 using System;

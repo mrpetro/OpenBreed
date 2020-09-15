@@ -1,5 +1,4 @@
-﻿using OpenBreed.Common.Model.Tiles;
-using OpenBreed.Common.Builders.Tiles;
+﻿using OpenBreed.Model.Tiles;
 using System.IO;
 
 namespace OpenBreed.Common.Readers.Tiles.BLK

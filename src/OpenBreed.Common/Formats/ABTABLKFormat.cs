@@ -1,10 +1,10 @@
 ﻿using OpenBreed.Common.DataSources;
-using OpenBreed.Common.Builders.Tiles;
 using OpenBreed.Common.Readers.Tiles.BLK;
 using OpenBreed.Database.Interface.Items.Assets;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using OpenBreed.Model.Tiles;
 
 namespace OpenBreed.Common.Formats
 {

@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Common.DataSources;
-using OpenBreed.Common.Model.Maps;
-using OpenBreed.Common.Builders.Maps;
+using OpenBreed.Model.Maps;
 using OpenBreed.Common.Readers.Maps.MAP;
 using OpenBreed.Common.Writers.Maps.MAP;
 using OpenBreed.Database.Interface.Items.Assets;

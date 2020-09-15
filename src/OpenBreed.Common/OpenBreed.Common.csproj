@@ -67,13 +67,11 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ApplicationBase.cs" />
-    <Compile Include="Builders\EntityTemplates\EntityTemplateBuilder.cs" />
     <Compile Include="Data\EntityTemplatesDataProvider.cs" />
     <Compile Include="Data\EntityTemplatesDataHelper.cs" />
     <Compile Include="Formats\TextFormat.cs" />
     <Compile Include="IApplication.cs" />
     <Compile Include="IApplicationInterface.cs" />
-    <Compile Include="Model\BinaryModel.cs" />
     <Compile Include="Commands\CommandMan.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Configs\BaseCfg.cs" />
@@ -104,47 +102,23 @@
     <Compile Include="Helpers\IOHelper.cs" />
     <Compile Include="Helpers\XmlHelper.cs" />
     <Compile Include="Data\MapsDataProvider.cs" />
-    <Compile Include="Model\EntityTemplates\EntityTemplateModel.cs" />
-    <Compile Include="Model\Maps\TileRef.cs" />
     <Compile Include="Readers\Images\IFF\Helpers\BMHDBlock.cs" />
     <Compile Include="Readers\Images\IFF\IFFImageReader.cs" />
-    <Compile Include="Model\Maps\IMapDataBlock.cs" />
-    <Compile Include="Model\Maps\Blocks\MapBodyBlock.cs" />
-    <Compile Include="Model\Maps\Blocks\MapMissionBlock.cs" />
-    <Compile Include="Model\Maps\Blocks\MapPaletteBlock.cs" />
-    <Compile Include="Model\Maps\Blocks\MapStringBlock.cs" />
-    <Compile Include="Model\Maps\Blocks\MapTextBlock.cs" />
-    <Compile Include="Model\Maps\Blocks\MapUnknownBlock.cs" />
-    <Compile Include="Model\Maps\Blocks\MapUInt32Block.cs" />
-    <Compile Include="Model\Actions\ActionSetModel.cs" />
-    <Compile Include="Builders\Scripts\ScriptBuilder.cs" />
-    <Compile Include="Model\Scripts\ScriptModel.cs" />
-    <Compile Include="Model\Sounds\SoundModel.cs" />
-    <Compile Include="Builders\Texts\TextBuilder.cs" />
-    <Compile Include="Model\Texts\TextModel.cs" />
-    <Compile Include="Helpers\BitmapHelper.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="FileMan.cs" />
     <Compile Include="Formats\DataFormatMan.cs" />
     <Compile Include="Formats\BinaryFormat.cs" />
     <Compile Include="Helpers\MathHelper.cs" />
-    <Compile Include="Builders\Images\ImageBuilder.cs" />
     <Compile Include="Readers\Images\ACBM\ACBMImageReader.cs" />
     <Compile Include="Logging\LogFile.cs" />
     <Compile Include="Logging\LogMan.cs" />
     <Compile Include="Logging\LogType.cs" />
-    <Compile Include="Builders\Maps\MapBuilder.cs" />
-    <Compile Include="Model\Maps\MapLayerModel.cs" />
     <Compile Include="Readers\Maps\IMapModelReader.cs" />
     <Compile Include="Readers\Maps\MAP\MAPReader.cs" />
     <Compile Include="ServiceLocator.cs" />
     <Compile Include="VariableMan.cs" />
     <Compile Include="Writers\Maps\IMapModelWriter.cs" />
     <Compile Include="Writers\Maps\MAP\MAPWriter.cs" />
-    <Compile Include="Builders\Palettes\PaletteBuilder.cs" />
-    <Compile Include="Model\Maps\MapLayoutModel.cs" />
-    <Compile Include="Model\Maps\MapModel.cs" />
-    <Compile Include="Model\Palettes\PaletteModel.cs" />
     <Compile Include="Readers\Palettes\PaletteReader.cs" />
     <Compile Include="ProgramTools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -161,24 +135,14 @@
     <Compile Include="Formats\ACBMImageFormat.cs" />
     <Compile Include="Formats\ACBMTileSetFormat.cs" />
     <Compile Include="Formats\IDataFormatType.cs" />
-    <Compile Include="Builders\Sprites\SpriteBuilder.cs" />
-    <Compile Include="Builders\Sprites\SpriteSetBuilder.cs" />
     <Compile Include="Readers\Sprites\SPR\SPRReader.cs" />
-    <Compile Include="Model\Sprites\SpriteModel.cs" />
-    <Compile Include="Model\Sprites\SpriteSetModel.cs" />
-    <Compile Include="Builders\Tiles\TileBuilder.cs" />
-    <Compile Include="Builders\Tiles\TileSetBuilder.cs" />
     <Compile Include="Readers\Tiles\ACBM\ACBMTileSetReader.cs" />
     <Compile Include="Readers\Tiles\BLK\BLKReader.cs" />
-    <Compile Include="Model\Tiles\TileModel.cs" />
-    <Compile Include="Model\Tiles\TileSetModel.cs" />
     <Compile Include="Other.cs" />
     <Compile Include="Tools\ABTAPasswordEncoder.cs" />
     <Compile Include="Writers\BigEndianBinaryWriter.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\Images\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\..\EPFArchive\src\EPFArchive\EPFArchive.csproj">
       <Project>{52249c4e-eaf8-45ce-a757-aaa3c3c125d4}</Project>
@@ -187,6 +151,10 @@
     <ProjectReference Include="..\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj">
       <Project>{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}</Project>
       <Name>OpenBreed.Database.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Model\OpenBreed.Model.csproj">
+      <Project>{A05B933E-1C80-4AAE-93B9-BE37C6B94270}</Project>
+      <Name>OpenBreed.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

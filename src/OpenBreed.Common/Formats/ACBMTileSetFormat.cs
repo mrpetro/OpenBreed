@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common.DataSources;
-using OpenBreed.Common.Builders.Tiles;
+using OpenBreed.Model.Tiles;
 using OpenBreed.Common.Readers.Tiles.ACBM;
 using OpenBreed.Database.Interface.Items.Assets;
 using System;
