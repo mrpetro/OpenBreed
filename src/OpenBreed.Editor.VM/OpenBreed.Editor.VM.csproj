@@ -154,7 +154,6 @@
     <Compile Include="Renderer\ViewCursorRenderer.cs" />
     <Compile Include="Renderer\ViewRenderer.cs" />
     <Compile Include="Scripts\ScriptEditorVM.cs" />
-    <Compile Include="Scripts\ScriptVM.cs" />
     <Compile Include="Scripts\ScriptEmbeddedEditorVM.cs" />
     <Compile Include="Scripts\ScriptFromFileEditorVM.cs" />
     <Compile Include="SettingsMan.cs" />
