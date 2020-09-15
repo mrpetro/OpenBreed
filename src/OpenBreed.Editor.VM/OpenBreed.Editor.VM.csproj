@@ -239,6 +239,10 @@
       <Project>{9894e7f4-7c85-4173-9d05-f50cfd2e4163}</Project>
       <Name>OpenBreed.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Model\OpenBreed.Model.csproj">
+      <Project>{A05B933E-1C80-4AAE-93B9-BE37C6B94270}</Project>
+      <Name>OpenBreed.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Editor.Cfg\OpenBreed.Editor.Cfg.csproj">
       <Project>{91f957f8-8c01-462c-9fe3-276bb56a7b7e}</Project>
       <Name>OpenBreed.Editor.Cfg</Name>

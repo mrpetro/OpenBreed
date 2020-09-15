@@ -9,10 +9,10 @@ using System.ComponentModel;
 using System.Linq;
 using OpenBreed.Editor.VM.Maps.Layers;
 using OpenBreed.Editor.VM.Tiles;
-using OpenBreed.Common.Actions;
+using OpenBreed.Model.Actions;
 using OpenBreed.Common;
-using OpenBreed.Common.Model.Maps.Blocks;
-using OpenBreed.Common.Model.Maps;
+using OpenBreed.Model.Maps.Blocks;
+using OpenBreed.Model.Maps;
 
 namespace OpenBreed.Editor.VM.Maps
 {

@@ -10,7 +10,6 @@ using OpenBreed.Common.Assets;
 using System.ComponentModel;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Common.Logging;
-using OpenBreed.Common.Actions;
 using OpenBreed.Common;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Actions;

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using OpenBreed.Common;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Palettes;
-using OpenBreed.Common.Model.Palettes;
+using OpenBreed.Model.Palettes;
 
 namespace OpenBreed.Editor.VM.Palettes
 {

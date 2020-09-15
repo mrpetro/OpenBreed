@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common;
-using OpenBreed.Common.Actions;
 using OpenBreed.Editor.VM.Common;
 using OpenBreed.Editor.VM.Maps.Layers;
 using OpenBreed.Common.Data;

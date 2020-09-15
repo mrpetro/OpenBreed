@@ -1,13 +1,12 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Assets;
-using OpenBreed.Common.Actions;
 using OpenBreed.Editor.VM.Database.Tables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Common.Model.Texts;
+using OpenBreed.Model.Texts;
 using OpenBreed.Common.DataSources;
 using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Database.Interface.Items.Images;

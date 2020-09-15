@@ -18,7 +18,7 @@ using System.ComponentModel;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Images;
 using OpenBreed.Common.Formats;
-using OpenBreed.Common.Actions;
+using OpenBreed.Model.Actions;
 using OpenBreed.Database.Xml;
 using OpenBreed.Editor.VM.Sounds;
 using OpenBreed.Editor.VM.Database.Entries;

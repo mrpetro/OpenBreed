@@ -1,8 +1,8 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Assets;
 using OpenBreed.Common.Data;
-using OpenBreed.Common.Model.Maps;
-using OpenBreed.Common.Model.Maps.Blocks;
+using OpenBreed.Model.Maps;
+using OpenBreed.Model.Maps.Blocks;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Database.Xml.Items.Assets;

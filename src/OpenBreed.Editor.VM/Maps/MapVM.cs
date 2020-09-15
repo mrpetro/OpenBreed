@@ -10,17 +10,16 @@ using OpenBreed.Editor.VM.Tiles;
 using OpenBreed.Editor.VM.Actions;
 using System.Collections.Generic;
 using OpenBreed.Editor.VM.Sprites;
-using OpenBreed.Common.Actions;
 using OpenBreed.Common;
 using System.Drawing;
 using OpenBreed.Common.Data;
-using OpenBreed.Common.Model.Maps.Blocks;
+using OpenBreed.Model.Maps.Blocks;
 using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Maps;
-using OpenBreed.Common.Model.Maps;
-using OpenBreed.Common.Model.Palettes;
-using OpenBreed.Common.Model.Tiles;
+using OpenBreed.Model.Maps;
+using OpenBreed.Model.Palettes;
+using OpenBreed.Model.Tiles;
 
 namespace OpenBreed.Editor.VM.Maps
 {

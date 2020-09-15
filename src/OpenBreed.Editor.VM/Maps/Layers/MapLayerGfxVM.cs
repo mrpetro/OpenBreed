@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Model.Maps;
-using OpenBreed.Common.Model.Maps.Blocks;
+using OpenBreed.Model.Maps;
+using OpenBreed.Model.Maps.Blocks;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

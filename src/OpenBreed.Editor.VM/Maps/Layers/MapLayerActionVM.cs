@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.Model.Maps.Blocks;
+﻿using OpenBreed.Model.Maps.Blocks;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

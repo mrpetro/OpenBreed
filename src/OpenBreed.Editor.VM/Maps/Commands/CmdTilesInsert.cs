@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using OpenBreed.Common.Commands;
-using OpenBreed.Common.Model.Maps;
+using OpenBreed.Model.Maps;
 
 namespace OpenBreed.Editor.VM.Maps.Commands
 {

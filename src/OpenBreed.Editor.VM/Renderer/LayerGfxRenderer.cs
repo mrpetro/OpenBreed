@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.Model.Maps;
+﻿using OpenBreed.Model.Maps;
 using OpenBreed.Editor.VM.Maps.Layers;
 using OpenBreed.Editor.VM.Tiles;
 using System;

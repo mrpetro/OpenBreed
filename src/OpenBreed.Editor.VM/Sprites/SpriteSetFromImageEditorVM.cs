@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Common.Data;
 using OpenBreed.Common.Helpers;
-using OpenBreed.Common.Builders.Sprites;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Editor.VM.Base;
 using System;
@@ -8,6 +7,8 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using OpenBreed.Common;
+using OpenBreed.Model.Sprites;
+using OpenBreed.Model;
 
 namespace OpenBreed.Editor.VM.Sprites
 {

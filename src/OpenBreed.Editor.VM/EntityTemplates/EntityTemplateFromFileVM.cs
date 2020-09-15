@@ -1,10 +1,10 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Assets;
 using OpenBreed.Common.Data;
-using OpenBreed.Common.Model.Maps;
-using OpenBreed.Common.Model.Maps.Blocks;
-using OpenBreed.Common.Model.EntityTemplates;
-using OpenBreed.Common.Model.Texts;
+using OpenBreed.Model.Maps;
+using OpenBreed.Model.Maps.Blocks;
+using OpenBreed.Model.EntityTemplates;
+using OpenBreed.Model.Texts;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
 using OpenBreed.Database.Xml.Items.Assets;

@@ -1,11 +1,12 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Helpers;
-using OpenBreed.Common.Model.Sprites;
+using OpenBreed.Model.Sprites;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Editor.VM.Base;
 using System.Collections.Generic;
 using System.ComponentModel;
+using OpenBreed.Model;
 
 namespace OpenBreed.Editor.VM.Sprites
 {

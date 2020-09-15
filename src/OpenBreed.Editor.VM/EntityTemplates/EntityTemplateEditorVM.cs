@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Model.EntityTemplates;
+using OpenBreed.Model.EntityTemplates;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
 using OpenBreed.Editor.VM.Base;

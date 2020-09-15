@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 using OpenBreed.Common;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
-using OpenBreed.Common.Model.EntityTemplates;
+using OpenBreed.Model.EntityTemplates;
 using OpenBreed.Common.Data;
+using OpenBreed.Model.EntityTemplates;
 
 namespace OpenBreed.Editor.VM.EntityTemplates
 {
