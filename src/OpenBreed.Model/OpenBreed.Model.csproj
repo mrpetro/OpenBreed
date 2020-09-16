@@ -47,8 +47,6 @@
     </Compile>
     <Compile Include="Actions\ActionSetModel.cs" />
     <Compile Include="BinaryModel.cs" />
-    <Compile Include="BitmapHelper.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="EntityTemplates\EntityTemplateBuilder.cs" />
     <Compile Include="EntityTemplates\EntityTemplateModel.cs" />
     <Compile Include="Images\ImageBuilder.cs" />
@@ -79,6 +77,12 @@
     <Compile Include="Tiles\TileModel.cs" />
     <Compile Include="Tiles\TileSetBuilder.cs" />
     <Compile Include="Tiles\TileSetModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj">
+      <Project>{B4E4CD19-64AF-42A5-8713-0D0DE35853B6}</Project>
+      <Name>OpenBreed.Common.Tools</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

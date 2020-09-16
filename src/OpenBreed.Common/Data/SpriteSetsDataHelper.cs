@@ -1,5 +1,4 @@
-﻿using OpenBreed.Common.Helpers;
-using OpenBreed.Model.Maps.Blocks;
+﻿using OpenBreed.Model.Maps.Blocks;
 using OpenBreed.Model.Sprites;
 using OpenBreed.Database.Interface.Items.Sprites;
 using System;
@@ -10,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Model;
+using OpenBreed.Common.Tools;
 
 namespace OpenBreed.Common.Data
 {

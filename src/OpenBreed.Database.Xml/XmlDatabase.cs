@@ -9,7 +9,7 @@ using OpenBreed.Database.Xml.Resources;
 using OpenBreed.Database.Xml.Tables;
 using OpenBreed.Database.Xml.Items.Images;
 using OpenBreed.Database.Xml.Items.Maps;
-using OpenBreed.Common.Helpers;
+using OpenBreed.Common.Tools;
 
 namespace OpenBreed.Database.Xml
 {

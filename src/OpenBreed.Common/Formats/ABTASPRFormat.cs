@@ -6,8 +6,8 @@ using System.IO;
 using OpenBreed.Common.Assets;
 using OpenBreed.Common.DataSources;
 using OpenBreed.Database.Interface.Items.Assets;
-using OpenBreed.Common.Readers.Sprites.SPR;
 using OpenBreed.Model.Sprites;
+using OpenBreed.Reader.Legacy.Sprites.SPR;
 
 namespace OpenBreed.Common.Formats
 {

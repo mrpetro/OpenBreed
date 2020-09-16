@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Model.Maps;
 using OpenBreed.Model.Maps.Blocks;
 using OpenBreed.Model.Palettes;
-using OpenBreed.Common.Readers.Palettes;
 using OpenBreed.Database.Interface.Items.Palettes;
 using System;
 using System.Collections.Generic;
@@ -11,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Model;
+using OpenBreed.Reader.Legacy.Palettes;
 
 namespace OpenBreed.Common.Data
 {

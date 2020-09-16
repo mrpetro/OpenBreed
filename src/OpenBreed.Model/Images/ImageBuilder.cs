@@ -1,4 +1,5 @@
-﻿using OpenBreed.Model;
+﻿using OpenBreed.Common.Tools;
+using OpenBreed.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Common.Builders.Images
+namespace OpenBreed.Model.Images
 {
     public class ImageBuilder
     {
