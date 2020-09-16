@@ -14,6 +14,7 @@ using OpenBreed.Editor.UI.WinForms.Forms.States;
 using OpenBreed.Editor.VM.Logging;
 using OpenBreed.Editor.UI.WinForms.Views;
 using WeifenLuo.WinFormsUI.Docking;
+using OpenBreed.Common.Tools;
 
 namespace OpenBreed.Editor.UI.WinForms.Forms
 {

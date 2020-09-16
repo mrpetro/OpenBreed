@@ -227,6 +227,10 @@
       <Project>{52249c4e-eaf8-45ce-a757-aaa3c3c125d4}</Project>
       <Name>EPFArchive</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj">
+      <Project>{B4E4CD19-64AF-42A5-8713-0D0DE35853B6}</Project>
+      <Name>OpenBreed.Common.Tools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj">
       <Project>{e1a9b090-0090-4c7c-bddf-b0bb4509dc63}</Project>
       <Name>OpenBreed.Database.Interface</Name>

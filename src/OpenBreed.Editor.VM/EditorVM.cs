@@ -42,6 +42,7 @@ using OpenBreed.Database.Interface.Items.Scripts;
 using OpenBreed.Editor.VM.Scripts;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
 using OpenBreed.Editor.VM.EntityTemplates;
+using OpenBreed.Common.Tools;
 
 namespace OpenBreed.Editor.VM
 {

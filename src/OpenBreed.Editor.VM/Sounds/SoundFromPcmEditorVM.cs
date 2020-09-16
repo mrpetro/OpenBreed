@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.Helpers.Sounds;
+﻿using OpenBreed.Common.Tools.Sounds;
 using OpenBreed.Database.Interface.Items.Sounds;
 using OpenBreed.Editor.VM.Base;
 using System;

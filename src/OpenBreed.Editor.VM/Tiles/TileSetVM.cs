@@ -9,10 +9,10 @@ using OpenBreed.Editor.VM.Palettes;
 using System.Linq;
 using System;
 using OpenBreed.Common.Formats;
-using OpenBreed.Common.Helpers;
 using OpenBreed.Model.Tiles;
 using OpenBreed.Model.Palettes;
 using OpenBreed.Model;
+using OpenBreed.Common.Tools;
 
 namespace OpenBreed.Editor.VM.Tiles
 {
