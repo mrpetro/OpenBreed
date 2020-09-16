@@ -15,7 +15,6 @@ namespace OpenBreed.Editor.VM.Database.Tables
 
         #region Private Fields
 
-        private readonly IRepository<IImageEntry> _repository;
 
         #endregion Private Fields
 
