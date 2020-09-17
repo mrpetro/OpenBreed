@@ -9,8 +9,9 @@ namespace OpenBreed.Common.Logging
 {
     public class LogFile:  IDisposable
     {
-         #region private members
+        #region private members
 
+        private ILogger logger;
         private StreamWriter m_Stream;
 
         #endregion
@@ -20,8 +21,9 @@ namespace OpenBreed.Common.Logging
         /// <summary>
         /// Generic constructor
         /// </summary>
-        public LogFile()
+        public LogFile(ILogger logger)
         {
+            this.logger = logger;
             LogDebug = false;
             m_Stream = null;
         }
@@ -69,7 +71,7 @@ namespace OpenBreed.Common.Logging
         {
             if (m_Stream != null)
             {
-                LogMan.Instance.MessageAdded -= LogMessage;
+                logger.MessageAdded -= LogMessage;
                 m_Stream.Flush();
                 m_Stream.Close();
                 m_Stream.Dispose();
@@ -88,7 +90,7 @@ namespace OpenBreed.Common.Logging
 
             m_Stream = File.CreateText(filename);
             m_Stream.AutoFlush = true;
-            LogMan.Instance.MessageAdded += LogMessage;
+            logger.MessageAdded += LogMessage;
         }
 
         static public string SetupLogFile(string directoryPath, string projectName)
@@ -101,9 +103,9 @@ namespace OpenBreed.Common.Logging
             if (string.IsNullOrEmpty(outDir))
                 throw new InvalidOperationException("Log Folder Dorectory is not set!");
 
-            outName += "-" + Other.TimeNowForFilename() + ".log";
+            outName += "-" + PathHelpers.TimeNowForFilename() + ".log";
             var path = Path.GetFullPath(outDir + "\\" + outName);
-            FileMan.Instance.CreateEmptyFile(path);
+            PathHelpers.CreateEmptyFile(path);
             return path;
         }
 

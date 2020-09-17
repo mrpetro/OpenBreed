@@ -46,15 +46,5 @@ namespace OpenBreed.Common.Tools
 
             return input.Replace("\n", "\r\n");
         }
-
-        /// <summary>
-        /// Gets current time
-        /// </summary>
-        /// <returns></returns>
-        public static string TimeNowForFilename()
-        {
-            return DateTime.Now.ToString("yyMMdd-HHmmss");
-        }
-
     }
 }

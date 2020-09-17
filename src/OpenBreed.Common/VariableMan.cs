@@ -11,6 +11,7 @@ namespace OpenBreed.Common
         #region Private Fields
 
         private IApplication application;
+        private ILogger logger;
 
         private Dictionary<string, object> m_Variables = new Dictionary<string, object>();
 
@@ -18,9 +19,10 @@ namespace OpenBreed.Common
 
         #region Public Constructors
 
-        public VariableMan(IApplication application)
+        public VariableMan(IApplication application, ILogger logger)
         {
             this.application = application;
+            this.logger = logger;
         }
 
         #endregion Public Constructors
@@ -76,7 +78,7 @@ namespace OpenBreed.Common
                 return varValue.ToString();
             else
             {
-                LogMan.Instance.Warning("Unknown Cfg variable: " + varName);
+                logger.Warning("Unknown Cfg variable: " + varName);
                 return string.Empty;
             }
         }

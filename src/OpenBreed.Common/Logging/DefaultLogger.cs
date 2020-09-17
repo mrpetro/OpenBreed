@@ -3,51 +3,28 @@
 namespace OpenBreed.Common.Logging
 {
     /// <summary>
-    /// LogMan class
+    /// DefaultLogger class
     /// </summary>
-    public class LogMan
+    public class DefaultLogger : ILogger
     {
-        #region Private members
+        #region Public Constructors
 
-        private static readonly LogMan _logMan = new LogMan();
-
-        #endregion
-
-        #region Constructor
-
-        /// <summary>
-        /// Private constructor
-        /// </summary>
-        private LogMan()
+        public DefaultLogger()
         {
         }
 
-        #endregion
+        #endregion Public Constructors
 
-        #region Events
-
-        public delegate void Message(LogType type, string msg);
+        #region Public Events
 
         /// <summary>
         /// Rised when new message incomming
         /// </summary>
         public event Message MessageAdded;
 
-        #endregion
+        #endregion Public Events
 
-        #region Public methods
-
-        /// <summary>
-        /// Gets instance to this object
-        /// </summary>
-        public static LogMan Instance
-        {
-            get { return _logMan; }
-        }
-
-        #endregion
-
-        #region Public methods
+        #region Public Methods
 
         /// <summary>
         /// Log debug message
@@ -122,7 +99,6 @@ namespace OpenBreed.Common.Logging
             MessageAdded?.Invoke(LogType.Critical, msg);
         }
 
-
         /// <summary>
         /// Log message as success
         /// </summary>
@@ -132,6 +108,6 @@ namespace OpenBreed.Common.Logging
             MessageAdded?.Invoke(LogType.Success, msg);
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

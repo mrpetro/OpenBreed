@@ -1,54 +1,29 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
-namespace OpenBreed.Common
+namespace OpenBreed.Common.Tools
 {
     /// <summary>
-    /// TempFileManager
+    /// File manager class
     /// </summary>
-    public class FileMan
+    public class PathHelpers
     {
-        #region Private members
-
-        /// <summary>
-        /// Keeps reference to this object
-        /// </summary>
-        private static FileMan instance = new FileMan();
+        #region Private Fields
 
         /// <summary>
         /// Keeps path to temporary directory
         /// </summary>
-        private string path;
+        private static string path;
 
-        #endregion
+        #endregion Private Fields
 
-        #region Constructors
-
-        /// <summary>
-        /// Generic private constructor
-        /// </summary>
-        private FileMan()
-        {
-            SetTempDirectory(null);
-        }
-
-        #endregion
-
-        #region Public properties
-
-        /// <summary>
-        /// Gets instance of this object
-        /// </summary>
-        public static FileMan Instance { get { return instance; } }
-
-        #endregion
-
-        #region Public methods
+        #region Public Methods
 
         /// <summary>
         /// Creates directory if doesn't exist
         /// </summary>
         /// <param name="path"></param>
-        public void CreateDirectory(string path)
+        public static void CreateDirectory(string path)
         {
             if (string.IsNullOrEmpty(path))
                 return;
@@ -61,13 +36,24 @@ namespace OpenBreed.Common
         /// Creates empty file
         /// </summary>
         /// <param name="filename"></param>
-        public void CreateEmptyFile(string filename)
+        public static void CreateEmptyFile(string filename)
         {
             var fullpath = Path.GetFullPath(filename);
             var dirpath = Path.GetDirectoryName(fullpath);
             CreateDirectory(dirpath);
             using (var stream = File.Create(fullpath))
                 stream.Close();
+        }
+
+        /// <summary>
+        /// Sets name of temporary directory
+        /// </summary>
+        /// <returns></returns>
+        public static void SetTempDirectory(string dirPath)
+        {
+            path = string.IsNullOrEmpty(dirPath) ?
+                Path.GetTempPath() :
+                Path.GetFullPath(dirPath);
         }
 
         /// <summary>
@@ -78,6 +64,15 @@ namespace OpenBreed.Common
         {
             if (File.Exists(filename))
                 File.Delete(filename);
+        }
+
+        /// <summary>
+        /// Gets current time
+        /// </summary>
+        /// <returns></returns>
+        public static string TimeNowForFilename()
+        {
+            return DateTime.Now.ToString("yyMMdd-HHmmss");
         }
 
         /// <summary>
@@ -94,17 +89,6 @@ namespace OpenBreed.Common
             return name;
         }
 
-        /// <summary>
-        /// Sets name of temporary directory
-        /// </summary>
-        /// <returns></returns>
-        public void SetTempDirectory(string dirPath)
-        {
-            this.path = string.IsNullOrEmpty(dirPath) ?
-                Path.GetTempPath() :
-                Path.GetFullPath(dirPath);
-        }
-
-        #endregion
+        #endregion Public Methods
     }
 }

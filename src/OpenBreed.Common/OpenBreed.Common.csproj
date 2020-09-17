@@ -72,7 +72,6 @@
     <Compile Include="Formats\TextFormat.cs" />
     <Compile Include="IApplication.cs" />
     <Compile Include="IApplicationInterface.cs" />
-    <Compile Include="Commands\CommandMan.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Configs\BaseCfg.cs" />
     <Compile Include="Configs\IConfig.cs" />
@@ -101,11 +100,11 @@
     <Compile Include="Formats\PCMSoundFormat.cs" />
     <Compile Include="Data\MapsDataProvider.cs" />
     <Compile Include="EnumerableExtensions.cs" />
-    <Compile Include="FileMan.cs" />
     <Compile Include="Formats\DataFormatMan.cs" />
     <Compile Include="Formats\BinaryFormat.cs" />
+    <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\LogFile.cs" />
-    <Compile Include="Logging\LogMan.cs" />
+    <Compile Include="Logging\DefaultLogger.cs" />
     <Compile Include="Logging\LogType.cs" />
     <Compile Include="ServiceLocator.cs" />
     <Compile Include="VariableMan.cs" />
@@ -121,7 +120,9 @@
     <Compile Include="Formats\ACBMTileSetFormat.cs" />
     <Compile Include="Formats\IDataFormatType.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Managers\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\EPFArchive\src\EPFArchive\EPFArchive.csproj">
       <Project>{52249c4e-eaf8-45ce-a757-aaa3c3c125d4}</Project>

@@ -12,6 +12,8 @@ namespace OpenBreed.Common.UI.WinForms.Controls
 {
     public partial class LogConsoleCtrl : UserControl
     {
+        private ILogger logger;
+
         private Color m_SuccessColor = Color.Green;
         private Color m_WarningColor = Color.Orange;
         private Color m_DebugColor = Color.Gray;
@@ -22,14 +24,20 @@ namespace OpenBreed.Common.UI.WinForms.Controls
         {
             InitializeComponent();
 
-            LogMan.Instance.MessageAdded += new LogMan.Message(LogMan_MessageAdded);
 
             Disposed += new EventHandler(LogConsoleCtrl_Disposed);
         }
 
+        public void Initialize(ILogger logger)
+        {
+            this.logger = logger;
+            this.logger.MessageAdded += LogMan_MessageAdded;
+        }
+
         void LogConsoleCtrl_Disposed(object sender, EventArgs e)
         {
-            LogMan.Instance.MessageAdded -= new LogMan.Message(LogMan_MessageAdded);
+            if(logger != null)
+                logger.MessageAdded -= LogMan_MessageAdded;
         }
 
         void LogMan_MessageAdded(LogType type, string messageText)

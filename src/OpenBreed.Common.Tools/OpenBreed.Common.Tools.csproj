@@ -50,6 +50,7 @@
     <Compile Include="IOHelper.cs" />
     <Compile Include="MathHelper.cs" />
     <Compile Include="Other.cs" />
+    <Compile Include="PathHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sounds\PCMPlayer.cs" />
     <Compile Include="Sounds\WaveMemoryStream.cs" />
