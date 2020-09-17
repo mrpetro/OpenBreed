@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Common.Logging;
 using System;
 
 namespace OpenBreed.Editor.VM
@@ -16,8 +17,9 @@ namespace OpenBreed.Editor.VM
 
         public EditorApplication()
         {
-            Settings = new SettingsMan(this);
-            Variables = new VariableMan(this);
+            Logger = new DefaultLogger();
+            Settings = new SettingsMan(this, Logger);
+            Variables = new VariableMan(this, Logger);
 
             Settings.Restore();
         }
@@ -25,6 +27,8 @@ namespace OpenBreed.Editor.VM
         #endregion Public Constructors
 
         #region Public Properties
+
+        public ILogger Logger { get; }
 
         public SettingsMan Settings { get; }
 

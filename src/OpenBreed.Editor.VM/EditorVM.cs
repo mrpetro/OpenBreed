@@ -70,7 +70,7 @@ namespace OpenBreed.Editor.VM
         {
             this.application = application;
 
-            Logger = new LoggerVM();
+            Logger = new LoggerVM(application.Logger);
 
             application.ServiceLocator.RegisterService<EditorVM>(this);
 

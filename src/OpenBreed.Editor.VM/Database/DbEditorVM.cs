@@ -79,7 +79,7 @@ namespace OpenBreed.Editor.VM.Database
             _edited = model;
 
             application.ServiceLocator.RegisterService<IUnitOfWork>(model);
-            application.ServiceLocator.RegisterService<DataProvider>(new DataProvider(model));
+            application.ServiceLocator.RegisterService<DataProvider>(new DataProvider(model, application.Logger));
 
             var vm = new DatabaseVM();
             UpdateVM(model, vm);

@@ -14,15 +14,17 @@ namespace OpenBreed.Editor.VM
         private const string DEFAULT_CFG_PATH = @"Resources\DefaultSettings.xml";
         private const string CFG_FILE_NAME = @"Settings.xml";
 
+        private ILogger logger;
         private EditorApplication application;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public SettingsMan(EditorApplication application)
+        public SettingsMan(EditorApplication application, ILogger logger)
         {
             this.application = application;
+            this.logger = logger;
         }
 
         #endregion Public Constructors
@@ -44,19 +46,19 @@ namespace OpenBreed.Editor.VM
                 if (File.Exists(cfgPath))
                 {
                     Cfg = XmlHelper.RestoreFromXml<SettingsCfg>(cfgPath);
-                    LogMan.Instance.Success("Settings configuration restored.");
+                    logger.Success("Settings configuration restored.");
                 }
                 else
                 {
                     Cfg = GetDefault();
-                    LogMan.Instance.Success("No settings file yet. Default Settings configuration restored.");
+                    logger.Success("No settings file yet. Default Settings configuration restored.");
                 }
 
                 RegisterVariables();
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error("Unable to restore settings. Reason: " + ex.Message);
+                logger.Error("Unable to restore settings. Reason: " + ex.Message);
             }
         }
 
@@ -67,11 +69,11 @@ namespace OpenBreed.Editor.VM
                 string cfgPath = Path.Combine(ProgramTools.AppProductDataDir, CFG_FILE_NAME);
                 XmlHelper.StoreAsXml<SettingsCfg>(cfgPath, Cfg, true);
 
-                LogMan.Instance.Success("Settings configuration stored.");
+                logger.Success("Settings configuration stored.");
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error("Unable to store settings. Reason: " + ex.Message);
+                logger.Error("Unable to store settings. Reason: " + ex.Message);
             }
         }
 

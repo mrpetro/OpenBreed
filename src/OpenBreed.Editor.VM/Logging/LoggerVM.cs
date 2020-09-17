@@ -13,17 +13,18 @@ namespace OpenBreed.Editor.VM.Logging
     public class LoggerVM : BaseViewModel
     {
         #region Public Fields
-
+        private ILogger logger;
         public BindingList<LogItemVM> Items;
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public LoggerVM()
+        public LoggerVM(ILogger logger)
         {
-            LogMan.Instance.MessageAdded += Instance_MessageAdded;
+            this.logger = logger;
 
+            logger.MessageAdded += Instance_MessageAdded;
             Items = new BindingList<LogItemVM>();
             Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
         }

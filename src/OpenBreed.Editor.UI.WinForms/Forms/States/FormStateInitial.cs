@@ -54,6 +54,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             MainForm.FileToolStripMenuItem.DropDownItems.Add(FileOpenDatabaseToolStripMenuItem);
             MainForm.FileToolStripMenuItem.DropDownItems.Add(FileSeparator);
             MainForm.FileToolStripMenuItem.DropDownItems.Add(ExitToolStripMenuItem);
+            MainForm.EditToolStripMenuItem.DropDownItems.Add(ViewLoggerMenuItem);
 
             //Setup the View menu
             MainForm.EditToolStripMenuItem.Visible = false;
