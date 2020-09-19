@@ -1,9 +1,9 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
-using OpenBreed.Model.Maps;
-using OpenBreed.Model.Maps.Blocks;
 using OpenBreed.Database.Interface.Items.Texts;
 using OpenBreed.Editor.VM.Base;
+using OpenBreed.Model.Maps;
+using OpenBreed.Model.Maps.Blocks;
 using System.ComponentModel;
 using System.Linq;
 
@@ -24,7 +24,7 @@ namespace OpenBreed.Editor.VM.Texts
 
         #region Public Constructors
 
-        public TextFromMapEditorVM(TextEditorVM parent)
+        public TextFromMapEditorVM(ParentEntryEditor<ITextEntry> parent)
         {
             Parent = parent;
             BlockNames = new BindingList<string>();
@@ -37,7 +37,7 @@ namespace OpenBreed.Editor.VM.Texts
 
         #region Public Properties
 
-        public TextEditorVM Parent { get; }
+        public ParentEntryEditor<ITextEntry> Parent { get; }
         public BindingList<string> BlockNames { get; }
 
         public string BlockName

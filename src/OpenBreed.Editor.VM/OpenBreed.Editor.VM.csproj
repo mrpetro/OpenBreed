@@ -133,7 +133,7 @@
     <Compile Include="IEntryEditor.cs" />
     <Compile Include="IFolderBrowserQuery.cs" />
     <Compile Include="Images\ImageEditorVM.cs" />
-    <Compile Include="Images\ImageVM.cs" />
+    <Compile Include="Images\ImageFromFileEditorVM.cs" />
     <Compile Include="IOpenFileQuery.cs" />
     <Compile Include="ISaveFileQuery.cs" />
     <Compile Include="IToolView.cs" />
@@ -149,6 +149,7 @@
     <Compile Include="Palettes\PaletteEditorExVM.cs" />
     <Compile Include="Palettes\PaletteFromBinaryEditorVM.cs" />
     <Compile Include="Palettes\PaletteFromMapEditorVM.cs" />
+    <Compile Include="ParentEntryEditor.cs" />
     <Compile Include="Renderer\LayerActionRenderer.cs" />
     <Compile Include="Renderer\LayerGfxRenderer.cs" />
     <Compile Include="Renderer\TilesToolRenderer.cs" />

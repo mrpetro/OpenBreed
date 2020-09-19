@@ -17,7 +17,7 @@ namespace OpenBreed.Editor.VM.Texts
 
         #region Public Constructors
 
-        public TextEmbeddedEditorVM(TextEditorVM parent)
+        public TextEmbeddedEditorVM(ParentEntryEditor<ITextEntry> parent)
         {
             Parent = parent;
         }
@@ -26,7 +26,7 @@ namespace OpenBreed.Editor.VM.Texts
 
         #region Public Properties
 
-        public TextEditorVM Parent { get; }
+        public ParentEntryEditor<ITextEntry> Parent { get; }
 
         public string DataRef
         {

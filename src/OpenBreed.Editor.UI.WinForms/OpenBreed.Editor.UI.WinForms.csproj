@@ -161,17 +161,17 @@
     <Compile Include="Controls\EntryEditorInnerCtrl.Designer.cs">
       <DependentUpon>EntryEditorInnerCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Images\ImageFromFileEditorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Images\ImageFromFileEditorCtrl.Designer.cs">
+      <DependentUpon>ImageFromFileEditorCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Images\ImageEditorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\Images\ImageEditorCtrl.Designer.cs">
       <DependentUpon>ImageEditorCtrl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Images\ImageViewCtrl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Images\ImageViewCtrl.Designer.cs">
-      <DependentUpon>ImageViewCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Logging\LoggerCtrl.cs">
       <SubType>UserControl</SubType>
@@ -295,6 +295,12 @@
     </Compile>
     <Compile Include="Controls\Sounds\SoundEditorCtrl.Designer.cs">
       <DependentUpon>SoundEditorCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Sounds\SoundFromPcmEditorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Sounds\SoundFromPcmEditorCtrl.Designer.cs">
+      <DependentUpon>SoundFromPcmEditorCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Sprites\SpriteEditorViewCtrl.cs">
       <SubType>UserControl</SubType>
@@ -548,11 +554,11 @@
     <EmbeddedResource Include="Controls\EntryEditorInnerCtrl.resx">
       <DependentUpon>EntryEditorInnerCtrl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Images\ImageFromFileEditorCtrl.resx">
+      <DependentUpon>ImageFromFileEditorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Images\ImageEditorCtrl.resx">
       <DependentUpon>ImageEditorCtrl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Images\ImageViewCtrl.resx">
-      <DependentUpon>ImageViewCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Logging\LoggerCtrl.resx">
       <DependentUpon>LoggerCtrl.cs</DependentUpon>
@@ -610,6 +616,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Sounds\SoundEditorCtrl.resx">
       <DependentUpon>SoundEditorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Sounds\SoundFromPcmEditorCtrl.resx">
+      <DependentUpon>SoundFromPcmEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Sprites\SpriteEditorViewCtrl.resx">
       <DependentUpon>SpriteEditorViewCtrl.cs</DependentUpon>

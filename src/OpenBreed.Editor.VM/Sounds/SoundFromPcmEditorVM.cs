@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Common.Tools.Sounds;
 using OpenBreed.Database.Interface.Items.Sounds;
 using OpenBreed.Editor.VM.Base;
-using System;
 
 namespace OpenBreed.Editor.VM.Sounds
 {
@@ -18,7 +17,7 @@ namespace OpenBreed.Editor.VM.Sounds
 
         #region Public Constructors
 
-        public SoundFromPcmEditorVM(SoundEditorVM parent)
+        public SoundFromPcmEditorVM(ParentEntryEditor<ISoundEntry> parent)
         {
             Parent = parent;
         }
@@ -27,7 +26,7 @@ namespace OpenBreed.Editor.VM.Sounds
 
         #region Public Properties
 
-        public SoundEditorVM Parent { get; }
+        public ParentEntryEditor<ISoundEntry> Parent { get; }
 
         public int BitsPerSample
         {
@@ -57,6 +56,15 @@ namespace OpenBreed.Editor.VM.Sounds
 
         #region Public Methods
 
+        public void Play()
+        {
+            var pcmPlayer = new PCMPlayer(Data,
+                                          SampleRate,
+                                          BitsPerSample,
+                                          Channels);
+            pcmPlayer.PlaySync();
+        }
+
         public void UpdateEntry(ISoundEntry entry)
         {
             var model = Parent.DataProvider.Sounds.GetSound(entry.Id);
@@ -65,15 +73,6 @@ namespace OpenBreed.Editor.VM.Sounds
             model.Channels = Channels;
             model.SampleRate = SampleRate;
             model.Data = Data;
-        }
-
-        internal void Play()
-        {
-            var pcmPlayer = new PCMPlayer(Data,
-                                          SampleRate,
-                                          BitsPerSample,
-                                          Channels);
-            pcmPlayer.PlaySync();
         }
 
         public void UpdateVM(ISoundEntry entry)

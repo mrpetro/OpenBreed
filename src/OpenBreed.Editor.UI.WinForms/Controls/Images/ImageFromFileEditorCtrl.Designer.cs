@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Images
 {
-    partial class ImageViewCtrl
+    partial class ImageFromFileEditorCtrl
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,11 +30,11 @@
         {
             this.SuspendLayout();
             // 
-            // ImageViewCtrl
+            // ImageFromFileEditorCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "ImageViewCtrl";
+            this.Name = "ImageFromFileEditorCtrl";
             this.Size = new System.Drawing.Size(398, 231);
             this.ResumeLayout(false);
 

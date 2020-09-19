@@ -1,20 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using OpenBreed.Editor.VM.Sounds;
+﻿using OpenBreed.Database.Interface.Items.Sounds;
 using OpenBreed.Editor.VM;
+using OpenBreed.Editor.VM.Sounds;
+using System;
+using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Sounds
 {
     public partial class SoundEditorCtrl : EntryEditorInnerCtrl
     {
-        private SoundEditorVM _vm;
+        #region Private Fields
+
+        private SoundEditorVM vm;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public SoundEditorCtrl()
         {
@@ -23,48 +24,52 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sounds
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
         }
 
+        #endregion Public Constructors
+
+        #region Public Methods
+
         public override void Initialize(EntryEditorVM vm)
         {
-            _vm = vm as SoundEditorVM ?? throw new InvalidOperationException(nameof(vm));
+            this.vm = vm as SoundEditorVM ?? throw new InvalidOperationException(nameof(vm));
 
-            _vm.PropertyChanged += _vm_PropertyChanged;
+            OnSubeditorChanged(this.vm.Subeditor);
 
-            UpdateViewState();
+            this.vm.PropertyChanged += _vm_PropertyChanged;
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
-                case nameof(_vm.Editable):
-                    UpdateViewState();
+                case nameof(vm.Subeditor):
+                    OnSubeditorChanged(vm.Subeditor);
                     break;
+
                 default:
                     break;
             }
         }
 
-        private void UpdateViewState()
+        private void OnSubeditorChanged(IEntryEditor<ISoundEntry> subeditor)
         {
-            if (_vm.Editable == null)
-                SetNoEditableState();
-            else
-                SetEditableState();
+            Panel.Controls.Clear();
+
+            if (subeditor == null)
+                return;
+
+            if (subeditor is SoundFromPcmEditorVM)
+            {
+                var control = new SoundFromPcmEditorCtrl();
+                control.Initialize((SoundFromPcmEditorVM)vm.Subeditor);
+                control.Dock = DockStyle.Fill;
+                Panel.Controls.Add(control);
+            }
         }
 
-        private void SetNoEditableState()
-        {
-            Invalidate();
-        }
-
-        private void SetEditableState()
-        {
-            Invalidate();
-        }
-
-        private void btnPlaySound_Click(object sender, EventArgs e)
-        {
-            _vm.Play();
-        }
+        #endregion Private Methods
     }
 }

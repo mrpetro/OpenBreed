@@ -23,7 +23,7 @@ namespace OpenBreed.Editor.VM.Scripts
 
         #region Public Constructors
 
-        public ScriptFromFileEditorVM(ScriptEditorVM parent)
+        public ScriptFromFileEditorVM(ParentEntryEditor<IScriptEntry> parent)
         {
             Parent = parent;
 
@@ -37,7 +37,7 @@ namespace OpenBreed.Editor.VM.Scripts
 
         #region Public Properties
 
-        public ScriptEditorVM Parent { get; }
+        public ParentEntryEditor<IScriptEntry> Parent { get; }
 
         public string DataRef
         {
