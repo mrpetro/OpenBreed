@@ -14,7 +14,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 {
     public partial class ColorSelectorCtrl : UserControl
     {
-        private PaletteVM _vm;
+        private PaletteEditorExVM vm;
 
         private int m_ColorsInRow = 16;
         private int m_ColorsBtnSize = 16;
@@ -27,21 +27,21 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
         }
 
-        public void Initialize(PaletteVM vm)
+        public void Initialize(PaletteEditorExVM vm)
         {
-            _vm = vm;
+            this.vm = vm;
 
-            _vm.PropertyChanged += _vm_PropertyChanged;
+            this.vm.PropertyChanged += vm_PropertyChanged;
         }
 
-        private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
-                case nameof(_vm.CurrentColorIndex):
+                case nameof(vm.CurrentColorIndex):
                     Invalidate();
                     break;
-                case nameof(_vm.CurrentColor):
+                case nameof(vm.CurrentColor):
                     Invalidate();
                     break;
                 default:
@@ -85,7 +85,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 
         private void DrawPaletteGrid(Graphics gfx)
         {
-            int colorsNo = _vm.Colors.Count;
+            int colorsNo = vm.Colors.Count;
             int xMax = m_ColorsInRow;
             int yMax = colorsNo / xMax;
             int btnSize = m_ColorsBtnSize;
@@ -99,7 +99,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
                     if (colorNo >= colorsNo)
                         return;
 
-                    Color color = _vm.Colors[colorNo];
+                    Color color = vm.Colors[colorNo];
                     DrawColor(color, gfx, i * btnSize, j * btnSize, btnSize, btnSize);
                 }
             }
@@ -107,13 +107,13 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 
         void ColorSelectorCtrl_Paint(object sender, PaintEventArgs e)
         {
-            if (_vm == null)
+            if (vm == null)
                 return;
 
             DrawPaletteGrid(e.Graphics);
 
             int btnSize = m_ColorsBtnSize;
-            int selectedColorIndex = _vm.CurrentColorIndex;
+            int selectedColorIndex = vm.CurrentColorIndex;
 
             if (selectedColorIndex != -1)
             {
@@ -138,10 +138,10 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 
                 int newSelectedColorIndex = GetPaletteIndex(pos.X, pos.Y);
 
-                if (newSelectedColorIndex >= _vm.Colors.Count)
+                if (newSelectedColorIndex >= vm.Colors.Count)
                     return;
 
-                _vm.CurrentColorIndex = newSelectedColorIndex;
+                vm.CurrentColorIndex = newSelectedColorIndex;
             }
         }
     }

@@ -17,7 +17,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
     {
         #region Private Fields
 
-        private PaletteFromBinaryVM _vm;
+        private PaletteFromBinaryEditorVM _vm;
 
         #endregion Private Fields
 
@@ -32,7 +32,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 
         #region Public Methods
 
-        public void Initialize(PaletteFromBinaryVM vm)
+        public void Initialize(PaletteFromBinaryEditorVM vm)
         {
             _vm = vm ?? throw new ArgumentNullException(nameof(vm));
 

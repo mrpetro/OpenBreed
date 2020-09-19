@@ -1,21 +1,20 @@
-﻿using OpenBreed.Common;
-using OpenBreed.Common.Data;
+﻿using OpenBreed.Common.Data;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Palettes;
-using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Maps;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Palettes
 {
-    public class PaletteEditorVM : EntryEditorBaseVM<IPaletteEntry, PaletteVM>
+    public class PaletteEditorVM : EntryEditorBaseExVM<IPaletteEntry>
     {
+        #region Private Fields
+
+        private IEntryEditor<IPaletteEntry> subeditor;
+
+        #endregion Private Fields
 
         #region Public Constructors
 
@@ -27,37 +26,37 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Public Properties
 
-        public override string EditorName { get { return "Palette Editor"; } }
+        public IEntryEditor<IPaletteEntry> Subeditor
+        {
+            get { return subeditor; }
+            private set { SetProperty(ref subeditor, value); }
+        }
 
-        public MapEditorPalettesToolVM Palettes { get; private set; }
+        public override string EditorName { get { return "Palette Editor"; } }
 
         #endregion Public Properties
 
         #region Protected Methods
 
-        protected override PaletteVM CreateVM(IPaletteEntry entry)
+        protected override void UpdateVM(IPaletteEntry entry)
         {
             if (entry is IPaletteFromBinaryEntry)
-                return new PaletteFromBinaryVM();
+                Subeditor = new PaletteFromBinaryEditorVM(this);
             else if (entry is IPaletteFromMapEntry)
-                return new PaletteFromMapVM();
+                Subeditor = new PaletteFromMapEditorVM(this);
             else
                 throw new NotImplementedException();
+
+            base.UpdateVM(entry);
+            Subeditor.UpdateVM(entry);
         }
 
-        protected override void UpdateEntry(PaletteVM source, IPaletteEntry target)
+        protected override void UpdateEntry(IPaletteEntry target)
         {
-            var model = DataProvider.Palettes.GetPalette(target.Id);
-
-            for (int i = 0; i < model.Length; i++)
-            {
-                model.Data[i] = source.Colors[i];
-            }
-
-            base.UpdateEntry(source, target);
+            base.UpdateEntry(target);
+            Subeditor.UpdateEntry(target);
         }
 
         #endregion Protected Methods
-
     }
 }

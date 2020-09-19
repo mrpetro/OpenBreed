@@ -1,39 +1,48 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Assets;
 using OpenBreed.Common.Data;
-using OpenBreed.Model.Maps;
-using OpenBreed.Model.Maps.Blocks;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Palettes;
-using OpenBreed.Database.Xml.Items.Assets;
 using OpenBreed.Editor.VM.Base;
-using System;
-using System.Collections.Generic;
+using OpenBreed.Model.Maps;
+using OpenBreed.Model.Maps.Blocks;
+using OpenBreed.Model.Palettes;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Palettes
 {
-    public class PaletteFromMapVM : PaletteVM
+    public class PaletteFromMapEditorVM : PaletteEditorExVM
     {
-
         #region Private Fields
 
         private string _blockName;
-        private bool _editEnabled;
+        private bool editEnabled;
+        private string dataRef;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PaletteFromMapVM()
+        public PaletteFromMapEditorVM(PaletteEditorVM parent) : base(parent)
         {
             BlockNames = new BindingList<string>();
             BlockNames.ListChanged += (s, a) => OnPropertyChanged(nameof(BlockNames));
+        }
 
-            PropertyChanged += This_PropertyChanged;
+        protected override void OnPropertyChanged(string name)
+        {
+            switch (name)
+            {
+                case nameof(BlockName):
+                case nameof(DataRef):
+                    EditEnabled = ValidateSettings();
+                    break;
+
+                default:
+                    break;
+            }
+
+            base.OnPropertyChanged(name);
         }
 
         #endregion Public Constructors
@@ -50,24 +59,25 @@ namespace OpenBreed.Editor.VM.Palettes
 
         public bool EditEnabled
         {
-            get { return _editEnabled; }
-            set { SetProperty(ref _editEnabled, value); }
+            get { return editEnabled; }
+            set { SetProperty(ref editEnabled, value); }
         }
 
         #endregion Public Properties
 
         #region Internal Methods
 
-        internal override void FromEntry(IEntry entry)
+
+        public override void UpdateVM(IPaletteEntry entry)
         {
-            base.FromEntry(entry);
-            FromEntry((IPaletteFromMapEntry)entry);
+            base.UpdateVM(entry);
+            UpdateVM((IPaletteFromMapEntry)entry);
         }
 
-        internal override void ToEntry(IEntry entry)
+        public override void UpdateEntry(IPaletteEntry entry)
         {
-            base.ToEntry(entry);
-            ToEntry((IPaletteFromMapEntry)entry);
+            base.UpdateEntry(entry);
+            UpdateEntry((IPaletteFromMapEntry)entry);
         }
 
         #endregion Internal Methods
@@ -89,11 +99,16 @@ namespace OpenBreed.Editor.VM.Palettes
 
                 foreach (var paletteBlock in map.Blocks.OfType<MapPaletteBlock>())
                     BlockNames.Add(paletteBlock.Name);
-
             });
         }
 
-        private void FromEntry(IPaletteFromMapEntry entry)
+        public string DataRef
+        {
+            get { return dataRef; }
+            set { SetProperty(ref dataRef, value); }
+        }
+
+        private void UpdateVM(IPaletteFromMapEntry entry)
         {
             UpdatePaletteBlocksList(entry);
 
@@ -102,34 +117,13 @@ namespace OpenBreed.Editor.VM.Palettes
             var model = dataProvider.Palettes.GetPalette(entry.Id);
 
             if (model != null)
-            {
-                Colors.UpdateAfter(() =>
-                {
-                    for (int i = 0; i < model.Data.Length; i++)
-                        Colors[i] = model.Data[i];
-                });
-
-                CurrentColorIndex = 0;
-            }
+                UpdateVMColors(model);
 
             DataRef = entry.DataRef;
             BlockName = entry.BlockName;
         }
 
-        private void This_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(BlockName):
-                case nameof(DataRef):
-                    EditEnabled = ValidateSettings();
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void ToEntry(IPaletteFromMapEntry source)
+        private void UpdateEntry(IPaletteFromMapEntry source)
         {
             var mapModel = ServiceLocator.Instance.GetService<DataProvider>().GetData<MapModel>(DataRef);
 

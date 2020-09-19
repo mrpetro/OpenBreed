@@ -146,8 +146,9 @@
     <Compile Include="Maps\MapViewCursorVM.cs" />
     <Compile Include="Maps\MapEditorTilesInserter.cs" />
     <Compile Include="Maps\MapEditorTileInsertOperation.cs" />
-    <Compile Include="Palettes\PaletteFromBinaryVM.cs" />
-    <Compile Include="Palettes\PaletteFromMapVM.cs" />
+    <Compile Include="Palettes\PaletteEditorExVM.cs" />
+    <Compile Include="Palettes\PaletteFromBinaryEditorVM.cs" />
+    <Compile Include="Palettes\PaletteFromMapEditorVM.cs" />
     <Compile Include="Renderer\LayerActionRenderer.cs" />
     <Compile Include="Renderer\LayerGfxRenderer.cs" />
     <Compile Include="Renderer\TilesToolRenderer.cs" />

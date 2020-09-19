@@ -24,8 +24,6 @@ namespace OpenBreed.Editor.VM.Texts
 
         #region Public Properties
 
-
-
         public IEntryEditor<ITextEntry> Subeditor
         {
             get { return subeditor; }
@@ -53,7 +51,6 @@ namespace OpenBreed.Editor.VM.Texts
 
         protected override void UpdateEntry(ITextEntry target)
         {
-
             base.UpdateEntry(target);
             Subeditor.UpdateEntry(target);
         }
