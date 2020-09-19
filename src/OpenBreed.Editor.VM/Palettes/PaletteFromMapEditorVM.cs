@@ -23,7 +23,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Public Constructors
 
-        public PaletteFromMapEditorVM(PaletteEditorVM parent) : base(parent)
+        public PaletteFromMapEditorVM(ParentEntryEditor<IPaletteEntry> parent) : base(parent)
         {
             BlockNames = new BindingList<string>();
             BlockNames.ListChanged += (s, a) => OnPropertyChanged(nameof(BlockNames));

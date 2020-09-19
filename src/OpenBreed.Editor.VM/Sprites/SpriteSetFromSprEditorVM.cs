@@ -1,16 +1,15 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
-using OpenBreed.Model.Sprites;
+using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Editor.VM.Base;
+using OpenBreed.Model.Sprites;
 using System.Collections.Generic;
 using System.ComponentModel;
-using OpenBreed.Model;
-using OpenBreed.Common.Tools;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
-    public class SpriteSetFromSprEditorVM : BaseViewModel, IEntryEditor<ISpriteSetEntry>
+    public class SpriteSetFromSprEditorVM : SpriteSetEditorExVM
     {
         #region Private Fields
 
@@ -20,12 +19,8 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Public Constructors
 
-        public SpriteSetFromSprEditorVM(SpriteSetEditorVM parent)
+        public SpriteSetFromSprEditorVM(ParentEntryEditor<ISpriteSetEntry> parent) : base(parent)
         {
-            Parent = parent;
-
-            Parent.PropertyChanged += Parent_PropertyChanged;
-
             Items = new BindingList<SpriteVM>();
         }
 
@@ -33,7 +28,6 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Public Properties
 
-        public SpriteSetEditorVM Parent { get; }
         public BindingList<SpriteVM> Items { get; }
 
         public int CurrentSpriteIndex
@@ -46,11 +40,47 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Public Methods
 
-        public void UpdateEntry(ISpriteSetEntry entry)
+        public override void UpdateEntry(ISpriteSetEntry entry)
+        {
+            base.UpdateEntry(entry);
+            UpdateEntry((ISpriteSetFromSprEntry)entry);
+        }
+
+        public override void UpdateVM(ISpriteSetEntry entry)
+        {
+            base.UpdateVM(entry);
+            UpdateVM((ISpriteSetFromSprEntry)entry);
+        }
+
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        protected override void OnPropertyChanged(string name)
+        {
+            switch (name)
+            {
+                case nameof(Palette):
+                    foreach (var item in Items)
+                        BitmapHelper.SetPaletteColors(item.Image, Palette.Data);
+                    break;
+
+                default:
+                    break;
+            }
+
+            base.OnPropertyChanged(name);
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
+
+        private void UpdateEntry(ISpriteSetFromSprEntry entry)
         {
         }
 
-        public void UpdateVM(ISpriteSetEntry entry)
+        private void UpdateVM(ISpriteSetFromSprEntry entry)
         {
             var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
 
@@ -60,11 +90,10 @@ namespace OpenBreed.Editor.VM.Sprites
                 FromModel(model);
 
             CurrentSpriteIndex = 0;
+
+            foreach (var item in Items)
+                BitmapHelper.SetPaletteColors(item.Image, Palette.Data);
         }
-
-        #endregion Public Methods
-
-        #region Private Methods
 
         private void FromModel(SpriteSetModel spriteSet)
         {
@@ -80,20 +109,6 @@ namespace OpenBreed.Editor.VM.Sprites
                 foreach (var sprite in sprites)
                     Items.Add(SpriteVM.Create(sprite));
             });
-        }
-
-        private void Parent_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(Parent.Palette):
-                    foreach (var item in Items)
-                        BitmapHelper.SetPaletteColors(item.Image, Parent.Palette.Data);
-                    break;
-
-                default:
-                    break;
-            }
         }
 
         #endregion Private Methods

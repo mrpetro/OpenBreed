@@ -11,7 +11,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
         private string _dataRef;
 
-        public PaletteFromBinaryEditorVM(PaletteEditorVM parent) : base(parent)
+        public PaletteFromBinaryEditorVM(ParentEntryEditor<IPaletteEntry> parent) : base(parent)
         {
         }
         public string DataRef

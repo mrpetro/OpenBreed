@@ -18,7 +18,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Public Constructors
 
-        public PaletteEditorExVM(PaletteEditorVM parent)
+        public PaletteEditorExVM(ParentEntryEditor<IPaletteEntry> parent)
         {
             Parent = parent;
 
@@ -32,7 +32,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Public Properties
 
-        public PaletteEditorVM Parent { get; }
+        public ParentEntryEditor<IPaletteEntry> Parent { get; }
         public BindingList<Color> Colors { get; }
 
         public Color CurrentColor

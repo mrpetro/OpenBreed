@@ -1,18 +1,17 @@
-﻿using OpenBreed.Common.Data;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
+using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Editor.VM.Base;
+using OpenBreed.Model.Sprites;
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
-using OpenBreed.Common;
-using OpenBreed.Model.Sprites;
-using OpenBreed.Model;
-using OpenBreed.Common.Tools;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
-    public class SpriteSetFromImageEditorVM : BaseViewModel, IEntryEditor<ISpriteSetEntry>
+    public class SpriteSetFromImageEditorVM : SpriteSetEditorExVM
     {
         #region Private Fields
 
@@ -22,21 +21,16 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Public Constructors
 
-        public SpriteSetFromImageEditorVM(SpriteSetEditorVM parent)
+        public SpriteSetFromImageEditorVM(ParentEntryEditor<ISpriteSetEntry> parent) : base(parent)
         {
-            Parent = parent;
-
             SpriteEditor = new SpriteFromImageEditorVM(this);
             Items = new BindingList<SpriteFromImageVM>();
-
-            Parent.PropertyChanged += Parent_PropertyChanged;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public SpriteSetEditorVM Parent { get; }
         public BindingList<SpriteFromImageVM> Items { get; }
 
         public SpriteFromImageEditorVM SpriteEditor { get; }
@@ -79,49 +73,16 @@ namespace OpenBreed.Editor.VM.Sprites
         {
         }
 
-        public void UpdateEntry(ISpriteSetEntry entry)
+        public override void UpdateEntry(ISpriteSetEntry entry)
         {
-            var spriteSetEntry = (ISpriteSetFromImageEntry)entry;
-
-            spriteSetEntry.ClearCoords();
-
-            for (int i = 0; i < Items.Count; i++)
-            {
-                var coords = Items[i].SourceRectangle;
-                spriteSetEntry.AddCoords(coords.X, coords.Y, coords.Width, coords.Height);
-            }
+            base.UpdateEntry(entry);
+            UpdateEntry((ISpriteSetFromImageEntry)entry);
         }
 
-        public void UpdateVM(ISpriteSetEntry entry)
+        public override void UpdateVM(ISpriteSetEntry entry)
         {
-            var spriteSetEntry = (ISpriteSetFromImageEntry)entry;
-            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
-
-            SourceImage = dataProvider.GetData<Bitmap>(spriteSetEntry.DataRef);
-
-            Items.UpdateAfter(() =>
-            {
-                Items.Clear();
-
-                for (int i = 0; i < spriteSetEntry.Sprites.Count; i++)
-                {
-                    var spriteDef = spriteSetEntry.Sprites[i];
-
-                    var spriteBuilder = SpriteBuilder.NewSprite();
-                    spriteBuilder.SetIndex(i);
-                    spriteBuilder.SetSize(spriteDef.Width, spriteDef.Height);
-                    var cutout = new Rectangle(spriteDef.X, spriteDef.Y, spriteDef.Width, spriteDef.Height);
-                    var bytes = BitmapHelper.ToBytes(SourceImage, cutout);
-                    spriteBuilder.SetData(bytes);
-
-                    var sprite = spriteBuilder.Build();
-
-                    var spriteVM = SpriteFromImageVM.Create(sprite, cutout);
-                    Items.Add(spriteVM);
-                }
-            });
-
-            CurrentSpriteIndex = 0;
+            UpdateVM((ISpriteSetFromImageEntry)entry);
+            base.UpdateVM(entry);
         }
 
         #endregion Public Methods
@@ -140,22 +101,70 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #endregion Internal Methods
 
-        #region Private Methods
+        #region Protected Methods
 
-        private void Parent_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override void OnPropertyChanged(string name)
         {
-            switch (e.PropertyName)
+            switch (name)
             {
-                case nameof(Parent.Palette):
-                    BitmapHelper.SetPaletteColors(SourceImage, Parent.Palette.Data);
+                case nameof(Palette):
+                    BitmapHelper.SetPaletteColors(SourceImage, Palette.Data);
 
                     foreach (var item in Items)
-                        BitmapHelper.SetPaletteColors(item.Image, Parent.Palette.Data);
+                        BitmapHelper.SetPaletteColors(item.Image, Palette.Data);
                     break;
 
                 default:
                     break;
             }
+
+            base.OnPropertyChanged(name);
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
+
+        private void UpdateEntry(ISpriteSetFromImageEntry entry)
+        {
+            entry.ClearCoords();
+
+            for (int i = 0; i < Items.Count; i++)
+            {
+                var coords = Items[i].SourceRectangle;
+                entry.AddCoords(coords.X, coords.Y, coords.Width, coords.Height);
+            }
+        }
+
+        private void UpdateVM(ISpriteSetFromImageEntry entry)
+        {
+            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
+
+            SourceImage = dataProvider.GetData<Bitmap>(entry.DataRef);
+
+            Items.UpdateAfter(() =>
+            {
+                Items.Clear();
+
+                for (int i = 0; i < entry.Sprites.Count; i++)
+                {
+                    var spriteDef = entry.Sprites[i];
+
+                    var spriteBuilder = SpriteBuilder.NewSprite();
+                    spriteBuilder.SetIndex(i);
+                    spriteBuilder.SetSize(spriteDef.Width, spriteDef.Height);
+                    var cutout = new Rectangle(spriteDef.X, spriteDef.Y, spriteDef.Width, spriteDef.Height);
+                    var bytes = BitmapHelper.ToBytes(SourceImage, cutout);
+                    spriteBuilder.SetData(bytes);
+
+                    var sprite = spriteBuilder.Build();
+
+                    var spriteVM = SpriteFromImageVM.Create(sprite, cutout);
+                    Items.Add(spriteVM);
+                }
+            });
+
+            CurrentSpriteIndex = 0;
         }
 
         #endregion Private Methods

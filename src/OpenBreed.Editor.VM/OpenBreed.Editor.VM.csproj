@@ -160,6 +160,7 @@
     <Compile Include="Scripts\ScriptFromFileEditorVM.cs" />
     <Compile Include="SettingsMan.cs" />
     <Compile Include="Sprites\SpriteFromImageEditorVM.cs" />
+    <Compile Include="Sprites\SpriteSetEditorExVM.cs" />
     <Compile Include="Sprites\SpriteSetEditorVM.cs" />
     <Compile Include="Sprites\SpriteSetFromImageEditorVM.cs" />
     <Compile Include="Sprites\SpriteFromImageVM.cs" />
@@ -212,7 +213,6 @@
     <Compile Include="Actions\ActionVMHelper.cs" />
     <Compile Include="Sounds\SoundEditorVM.cs" />
     <Compile Include="Sounds\SoundFromPcmEditorVM.cs" />
-    <Compile Include="Sprites\SpriteSetVM.cs" />
     <Compile Include="Sprites\SpriteVM.cs" />
     <Compile Include="Common\SelectionRectangle.cs" />
     <Compile Include="Tiles\Helpers\TileSelectTool.cs" />

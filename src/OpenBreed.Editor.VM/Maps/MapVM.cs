@@ -20,6 +20,7 @@ using OpenBreed.Database.Interface.Items.Maps;
 using OpenBreed.Model.Maps;
 using OpenBreed.Model.Palettes;
 using OpenBreed.Model.Tiles;
+using OpenBreed.Model.Sprites;
 
 namespace OpenBreed.Editor.VM.Maps
 {
@@ -49,7 +50,7 @@ namespace OpenBreed.Editor.VM.Maps
             Palettes = new BindingList<PaletteModel>();
             Palettes.ListChanged += (s, e) => OnPropertyChanged(nameof(Palettes));
 
-            SpriteSets = new BindingList<SpriteSetVM>();
+            SpriteSets = new BindingList<SpriteSetModel>();
             SpriteSets.ListChanged += (s, e) => OnPropertyChanged(nameof(SpriteSets));
 
             PropertyChanged += MapVM_PropertyChanged;
@@ -82,7 +83,7 @@ namespace OpenBreed.Editor.VM.Maps
             get { return _source; }
             set { SetProperty(ref _source, value); }
         }
-        public BindingList<SpriteSetVM> SpriteSets { get; }
+        public BindingList<SpriteSetModel> SpriteSets { get; }
         public BindingList<TileSetVM> TileSets { get; }
 
         public int TileSize { get { return 16; } }
