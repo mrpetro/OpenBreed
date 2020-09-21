@@ -8,37 +8,58 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenBreed.Editor.VM.Actions;
-using OpenBreed.Editor.VM.Maps;
+using OpenBreed.Editor.VM;
 
-namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
+namespace OpenBreed.Editor.UI.WinForms.Controls.Actions
 {
-    public partial class MapEditorActionsSelectorCtrl : UserControl
+    public partial class ActionSetEmbeddedEditorCtrl : UserControl
     {
-
         #region Private Fields
 
-        private MapEditorActionsSelectorVM _vm;
+        private ActionSetEmbeddedEditorVM vm;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public MapEditorActionsSelectorCtrl()
+        public ActionSetEmbeddedEditorCtrl()
         {
             InitializeComponent();
+
+            DGV.CurrentCellDirtyStateChanged += DGV_CurrentCellDirtyStateChanged;
+            DGV.CellContentClick += DGV_CellContentClick;
+
+            SetupDataGridView();
+        }
+
+        private void DGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var cell = DGV.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+            var action = cell.OwningRow.DataBoundItem as ActionVM;
+
+            if (cell.OwningColumn.DataPropertyName == "Icon")
+            {
+                using (var colorDialog = new ColorDialog())
+                {
+                    colorDialog.Color = action.Color;
+
+                    var result = colorDialog.ShowDialog();
+                    if (result == DialogResult.OK)
+                        action.Color = colorDialog.Color;
+                } 
+            }
         }
 
         #endregion Public Constructors
 
         #region Public Methods
 
-        public void Initialize(MapEditorActionsSelectorVM vm)
+        public void Initialize(ActionSetEmbeddedEditorVM vm)
         {
-            _vm = vm;
+            this.vm = vm;
 
-            DGV.CurrentCellDirtyStateChanged += DGV_CurrentCellDirtyStateChanged;
-            DGV.DataBindings.Add(nameof(DGV.CurrentRowIndex), _vm, nameof(_vm.SelectedIndex), false, DataSourceUpdateMode.OnPropertyChanged);
-            SetupDataGridView(_vm);
+            DGV.DataSource = vm.Items;
         }
 
         #endregion Public Methods
@@ -51,7 +72,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
                 DGV.CommitEdit(DataGridViewDataErrorContexts.Commit);
         }
 
-        private void SetupDataGridView(MapEditorActionsSelectorVM vm)
+        private void SetupDataGridView()
         {
             DGV.DataSource = null;
 
@@ -66,9 +87,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
             DGV.RowTemplate.Height = 32;
 
             DataGridViewCheckBoxColumn visibilityColumn = new DataGridViewCheckBoxColumn();
-            visibilityColumn.HeaderText = "Is visible";
-            visibilityColumn.Name = "IsVisible";
-            visibilityColumn.DataPropertyName = "IsVisible";
+            visibilityColumn.HeaderText = "Visibility";
+            visibilityColumn.Name = "Visibility";
+            visibilityColumn.DataPropertyName = "Visibility";
             visibilityColumn.MinimumWidth = 50;
             visibilityColumn.Width = 50;
             visibilityColumn.Resizable = DataGridViewTriState.False;
@@ -96,20 +117,26 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
             idColumn.Resizable = DataGridViewTriState.False;
             DGV.Columns.Add(idColumn);
 
+            //DataGridViewTextBoxColumn binaryColumn = new DataGridViewTextBoxColumn();
+            //binaryColumn.HeaderText = "Binary";
+            //binaryColumn.Name = m_Model.Data.Columns[3].ColumnName;
+            //binaryColumn.DataPropertyName = m_Model.Data.Columns[3].ColumnName;
+            //binaryColumn.MinimumWidth = 80;
+            //binaryColumn.Width = 80;
+            //binaryColumn.ReadOnly = true;
+            //DataGridView.Columns.Add(binaryColumn);
+
             DataGridViewTextBoxColumn descriptionColumn = new DataGridViewTextBoxColumn();
             descriptionColumn.HeaderText = "Description";
             descriptionColumn.Name = "Description";
             descriptionColumn.DataPropertyName = "Description";
             descriptionColumn.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             descriptionColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            descriptionColumn.ReadOnly = true;
+            descriptionColumn.ReadOnly = false;
             descriptionColumn.Resizable = DataGridViewTriState.False;
             DGV.Columns.Add(descriptionColumn);
-
-            DGV.DataSource = vm.Items;
         }
 
         #endregion Private Methods
-
     }
 }

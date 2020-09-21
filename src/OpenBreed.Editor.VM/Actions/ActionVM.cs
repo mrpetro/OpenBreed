@@ -1,48 +1,32 @@
-﻿using OpenBreed.Editor.VM.Base;
-using System;
-using System.Collections.Generic;
+﻿using OpenBreed.Common.Data;
+using OpenBreed.Editor.VM.Base;
+using OpenBreed.Model.Actions;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
-using OpenBreed.Database.Interface.Items.Actions;
 
 namespace OpenBreed.Editor.VM.Actions
 {
     public class ActionVM : BaseViewModel
     {
-
         #region Private Fields
 
-        private Color _color;
-        private string _description;
-        private int _id;
-        private Image _icon;
-        private bool _isVisible;
-        private string _name;
+        private Color color;
+        private string description;
+        private int id;
+        private Image icon;
+        private bool isVisible;
+        private string name;
+
+        private ActionModel model;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ActionVM(ActionSetVM owner)
+        public ActionVM(ActionModel model)
         {
-            Owner = owner;
+            this.model = model;
 
-            PropertyChanged += ActionVM_PropertyChanged;
-        }
-
-        private void ActionVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(Color):
-                    ActionVMHelper.SetPresentationDefault(this, Color);
-                    break;
-                default:
-                    break;
-            }
+            Restore();
         }
 
         #endregion Public Constructors
@@ -51,65 +35,91 @@ namespace OpenBreed.Editor.VM.Actions
 
         public Color Color
         {
-            get { return _color; }
-            set { SetProperty(ref _color, value); }
+            get { return color; }
+            set { SetProperty(ref color, value); }
         }
 
         public string Description
         {
-            get { return _description; }
-            set { SetProperty(ref _description, value); }
+            get { return description; }
+            set { SetProperty(ref description, value); }
         }
 
         public int Id
         {
-            get { return _id; }
-            set { SetProperty(ref _id, value); }
+            get { return id; }
+            set { SetProperty(ref id, value); }
         }
 
         public Image Icon
         {
-            get { return _icon; }
-            set { SetProperty(ref _icon, value); }
+            get { return icon; }
+            set { SetProperty(ref icon, value); }
         }
 
         public string Name
         {
-            get { return _name; }
-            set { SetProperty(ref _name, value); }
+            get { return name; }
+            set { SetProperty(ref name, value); }
         }
 
-        public ActionSetVM Owner { get; }
-
-        public bool Visibility
+        public bool IsVisible
         {
-            get { return _isVisible; }
-            set { SetProperty(ref _isVisible, value); }
+            get { return isVisible; }
+            set { SetProperty(ref isVisible, value); }
         }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void FromModel(IActionEntry action)
+        public void Restore()
         {
-            Name = action.Name;
-            Id = action.Id;
-            Description = action.Description;
-
-            ActionVMHelper.FromModel(this, action.Presentation);
-        }
-
-        public void ToModel(IActionEntry action)
-        {
-            action.Name = Name;
-            action.Id = Id;
-            action.Description = Description;
-
-            ActionVMHelper.ToModel(this, action.Presentation);
+            color = model.Color;
+            description = model.Description;
+            id = model.Id;
+            name = model.Name;
+            icon = model.Icon;
+            isVisible = model.Visibility;
         }
 
         #endregion Public Methods
 
+        #region Protected Methods
+
+        protected override void OnPropertyChanged(string name)
+        {
+            switch (name)
+            {
+                case nameof(Color):
+                    ActionSetsDataHelper.SetPresentationDefault(model, Color);
+                    Icon = model.Icon;
+                    model.Color = Color;
+                    break;
+
+                case nameof(Description):
+                    model.Description = Description;
+                    break;
+
+                case nameof(Name):
+                    model.Name = Name;
+                    break;
+
+                case nameof(IsVisible):
+                    model.Visibility = IsVisible;
+                    break;
+
+                case nameof(Id):
+                    model.Id = Id;
+                    break;
+
+                default:
+                    break;
+            }
+
+            base.OnPropertyChanged(name);
+        }
+
+        #endregion Protected Methods
     }
 }

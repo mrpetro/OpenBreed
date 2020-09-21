@@ -1,36 +1,25 @@
-﻿using OpenBreed.Common.Commands;
-using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM.Palettes;
+﻿using OpenBreed.Common;
 using OpenBreed.Common.Assets;
-using System;
-using System.IO;
-using System.Linq;
-using System.ComponentModel;
-using OpenBreed.Editor.VM.Tiles;
-using OpenBreed.Editor.VM.Actions;
-using System.Collections.Generic;
-using OpenBreed.Editor.VM.Sprites;
-using OpenBreed.Common;
-using System.Drawing;
 using OpenBreed.Common.Data;
-using OpenBreed.Model.Maps.Blocks;
-using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Maps;
+using OpenBreed.Editor.VM.Base;
+using OpenBreed.Editor.VM.Tiles;
+using OpenBreed.Model.Actions;
 using OpenBreed.Model.Maps;
 using OpenBreed.Model.Palettes;
 using OpenBreed.Model.Tiles;
-using OpenBreed.Model.Sprites;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
 
 namespace OpenBreed.Editor.VM.Maps
 {
     public class MapVM : EditableEntryVM
     {
-
         #region Private Fields
 
         private MapModel _model;
-        private ActionSetVM _actionSet;
         private bool _isModified;
         private AssetBase _source = null;
         private string _title;
@@ -50,9 +39,6 @@ namespace OpenBreed.Editor.VM.Maps
             Palettes = new BindingList<PaletteModel>();
             Palettes.ListChanged += (s, e) => OnPropertyChanged(nameof(Palettes));
 
-            SpriteSets = new BindingList<SpriteSetModel>();
-            SpriteSets.ListChanged += (s, e) => OnPropertyChanged(nameof(SpriteSets));
-
             PropertyChanged += MapVM_PropertyChanged;
 
             Layout.PropertyChanged += (s, e) => OnPropertyChanged(nameof(Layout));
@@ -61,12 +47,6 @@ namespace OpenBreed.Editor.VM.Maps
         #endregion Public Constructors
 
         #region Public Properties
-
-        public ActionSetVM ActionSet
-        {
-            get { return _actionSet; }
-            set { SetProperty(ref _actionSet, value); }
-        }
 
         public bool IsModified
         {
@@ -78,12 +58,13 @@ namespace OpenBreed.Editor.VM.Maps
 
         public BindingList<PaletteModel> Palettes { get; }
         public LevelPropertiesVM Properties { get; }
+
         public AssetBase Source
         {
             get { return _source; }
             set { SetProperty(ref _source, value); }
         }
-        public BindingList<SpriteSetModel> SpriteSets { get; }
+
         public BindingList<TileSetVM> TileSets { get; }
 
         public int TileSize { get { return 16; } }
@@ -131,11 +112,6 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Internal Methods
 
-        internal void ConnectEvents()
-        {
-            Layout.ConnectEvents();
-        }
-
         internal override void FromEntry(IEntry entry)
         {
             base.FromEntry(entry);
@@ -147,14 +123,7 @@ namespace OpenBreed.Editor.VM.Maps
             if (mapEntry.TileSetRef != null)
             {
                 var tileSet = dataProvider.TileSets.GetTileSet(mapEntry.TileSetRef);
-                SetTileSets(new List<TileSetModel>( new TileSetModel[] { tileSet }));
-            }
-
-            if (mapEntry.ActionSetRef != null)
-            {
-                var actionSet = dataProvider.ActionSets.GetActionSet(mapEntry.ActionSetRef);
-                if (actionSet != null)
-                    SetActionSet(actionSet);
+                SetTileSets(new List<TileSetModel>(new TileSetModel[] { tileSet }));
             }
 
             foreach (var spriteSetRef in mapEntry.SpriteSetRefs)
@@ -176,29 +145,18 @@ namespace OpenBreed.Editor.VM.Maps
 
             SetPalettes(palettes);
         }
-        internal void SetActionSet(IActionSetEntry propSet)
-        {
-            var propSetVM = new ActionSetVM();
-
-            propSetVM.FromEntry(propSet);
-
-            ActionSet = propSetVM;
-        }
 
         internal override void ToEntry(IEntry entry)
         {
             base.ToEntry(entry);
 
             Layout.ToMap(_model);
-
-            var mapEntry = entry as IMapEntry;
-
-            mapEntry.ActionSetRef = ActionSet != null ? ActionSet.Id : null;
         }
 
         #endregion Internal Methods
 
         #region Private Methods
+
 
         private void MapVM_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
@@ -231,6 +189,5 @@ namespace OpenBreed.Editor.VM.Maps
         }
 
         #endregion Private Methods
-
     }
 }

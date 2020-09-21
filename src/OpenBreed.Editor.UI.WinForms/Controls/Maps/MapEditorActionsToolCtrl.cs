@@ -26,7 +26,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
         {
             _vm = vm;
 
-            EntryRef.Initialize(vm.ActionEntryRef);
+            EntryRef.Initialize(vm.RefIdEditor);
             ActionsSelector.Initialize(vm.ActionsSelector);
         }
 

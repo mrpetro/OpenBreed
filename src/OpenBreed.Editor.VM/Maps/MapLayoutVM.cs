@@ -83,39 +83,10 @@ namespace OpenBreed.Editor.VM.Maps
         //    return CurrentMapBody.Cells[x, y];
         //}
 
-
-        public void Resize(int newSizeX, int newSizeY)
-        {
-            //m_CurrentMapBody.Resize(newSizeX, newSizeY);
-        }
-
-        public void ResizeOld(int newSizeX, int newSizeY)
-        {
-            //var mapResizeOperation = new MapResizeOperation(Size.Width, Size.Height, newSizeX, newSizeY);
-            //Map.Commands.ExecuteCommand(new CmdResize(this, mapResizeOperation));
-        }
-
-        public void SetTileGfx(int x, int y, int gfxId)
-        {
-            //CurrentMapBody.SetTileGfx(x, y, gfxId);
-
-            Owner.IsModified = true;
-        }
-
-        public void SetTileProperty(int x, int y, int propertyId)
-        {
-            //CurrentMapBody.SetTileProperty(x, y, propertyId);
-
-            Owner.IsModified = true;
-        }
-
         #endregion Public Methods
 
         #region Internal Methods
 
-        internal void ConnectEvents()
-        {
-        }
 
         internal void ToMap(MapModel mapModel)
         {

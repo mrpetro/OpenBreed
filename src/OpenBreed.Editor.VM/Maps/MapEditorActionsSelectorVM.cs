@@ -1,6 +1,10 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
+using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Editor.VM.Actions;
 using OpenBreed.Editor.VM.Base;
+using OpenBreed.Model.Actions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -48,17 +52,18 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Private Methods
 
-        private void OnActionSetChanged(ActionSetVM actionSet)
+        private void OnActionSetChanged()
         {
             Items.UpdateAfter(() =>
             {
                 Items.Clear();
                 SelectedIndex = -1;
 
-                if (actionSet == null)
+                if(Parent.Parent.ActionSet == null)
                     return;
 
-                actionSet.Items.ForEach(item => Items.Add(item));
+                foreach (var actionModel in Parent.Parent.ActionSet.Items)
+                    Items.Add(new ActionVM(actionModel));
             });
         }
 
@@ -66,8 +71,8 @@ namespace OpenBreed.Editor.VM.Maps
         {
             switch (e.PropertyName)
             {
-                case nameof(Parent.ActionSet):
-                    OnActionSetChanged(Parent.ActionSet);
+                case nameof(Parent.ActionSetRef):
+                    OnActionSetChanged();
                     break;
                 default:
                     break;

@@ -57,7 +57,7 @@ namespace OpenBreed.Editor.VM
         protected override void UpdateEntry(E target)
         {
             base.UpdateEntry(target);
-            Subeditor.UpdateVM(target);
+            Subeditor.UpdateEntry(target);
         }
 
         #endregion Protected Methods

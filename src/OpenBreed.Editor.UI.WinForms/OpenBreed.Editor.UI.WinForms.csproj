@@ -59,6 +59,12 @@
     <Compile Include="..\Shared\SharedAssemblyInfo.cs">
       <Link>SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Controls\Actions\ActionSetEmbeddedEditorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Actions\ActionSetEmbeddedEditorCtrl.Designer.cs">
+      <DependentUpon>ActionSetEmbeddedEditorCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DataSources\DataSourceEditorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -503,6 +509,9 @@
     <Content Include="Resources\InsertTilesLine.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\Actions\ActionSetEmbeddedEditorCtrl.resx">
+      <DependentUpon>ActionSetEmbeddedEditorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataSources\DataSourceEditorCtrl.resx">
       <DependentUpon>DataSourceEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>

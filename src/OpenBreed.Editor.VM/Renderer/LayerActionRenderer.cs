@@ -2,6 +2,7 @@
 using OpenBreed.Editor.VM.Maps;
 using OpenBreed.Editor.VM.Maps.Layers;
 using OpenBreed.Editor.VM.Tiles;
+using OpenBreed.Model.Actions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -39,7 +40,7 @@ namespace OpenBreed.Editor.VM.Renderer
 
         #region Private Methods
 
-        private void DrawAction(ActionSetVM actionSet, int id, float x, float y, int tileSize)
+        private void DrawAction(ActionSetModel actionSet, int id, float x, float y, int tileSize)
         {
             if (id >= actionSet.Items.Count)
                 return;
@@ -65,7 +66,7 @@ namespace OpenBreed.Editor.VM.Renderer
             int yFrom = renderable.Layout.GetMapIndexY(viewRect.Top);
             int yTo = renderable.Layout.GetMapIndexY(viewRect.Bottom);
 
-            var actionSet = renderable.Layout.Owner.ActionSet;
+            var actionSet = _actionsTool.Parent.ActionSet;
 
             if (actionSet == null)
                 return;

@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Actions
 {
-    partial class ActionSetEditorCtrl
+    partial class ActionSetEmbeddedEditorCtrl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,30 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Panel = new System.Windows.Forms.Panel();
+            this.DGV = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
             this.SuspendLayout();
             // 
-            // Panel
+            // DGV
             // 
-            this.Panel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Panel.Location = new System.Drawing.Point(0, 0);
-            this.Panel.Name = "Panel";
-            this.Panel.Size = new System.Drawing.Size(541, 360);
-            this.Panel.TabIndex = 8;
+            this.DGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DGV.Location = new System.Drawing.Point(0, 0);
+            this.DGV.Name = "DGV";
+            this.DGV.Size = new System.Drawing.Size(541, 360);
+            this.DGV.TabIndex = 0;
             // 
-            // ActionSetEditorCtrl
+            // ActionSetEmbeddedEditorCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.Panel);
-            this.Name = "ActionSetEditorCtrl";
+            this.Controls.Add(this.DGV);
+            this.Name = "ActionSetEmbeddedEditorCtrl";
             this.Size = new System.Drawing.Size(541, 360);
+            ((System.ComponentModel.ISupportInitialize)(this.DGV)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel Panel;
+        private System.Windows.Forms.DataGridView DGV;
     }
 }

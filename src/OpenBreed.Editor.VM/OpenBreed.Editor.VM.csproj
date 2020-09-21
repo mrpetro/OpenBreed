@@ -207,10 +207,9 @@
     <Compile Include="Database\DatabaseVM.cs" />
     <Compile Include="Actions\ActionSetEditorVM.cs" />
     <Compile Include="Maps\MapEditorActionsToolVM.cs" />
-    <Compile Include="Actions\ActionSetVM.cs" />
+    <Compile Include="Actions\ActionSetEmbeddedEditorVM.cs" />
     <Compile Include="Actions\ActionVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Actions\ActionVMHelper.cs" />
     <Compile Include="Sounds\SoundEditorVM.cs" />
     <Compile Include="Sounds\SoundFromPcmEditorVM.cs" />
     <Compile Include="Sprites\SpriteVM.cs" />
