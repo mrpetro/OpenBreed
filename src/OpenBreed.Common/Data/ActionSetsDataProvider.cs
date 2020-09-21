@@ -1,5 +1,6 @@
 ﻿
 using OpenBreed.Database.Interface.Items.Actions;
+using OpenBreed.Model.Actions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,13 +29,23 @@ namespace OpenBreed.Common.Data
 
         #region Public Methods
 
-        public IActionSetEntry GetActionSet(string id)
+        private ActionSetModel GetModelImpl(IActionSetEntry entry)
+        {
+            return ActionSetsDataHelper.FromEmbeddedData(Provider, entry);
+        }
+
+        private ActionSetModel GetModel(dynamic entry)
+        {
+            return GetModelImpl(entry);
+        }
+
+        public ActionSetModel GetActionSet(string id)
         {
             var entry = Provider.UnitOfWork.GetRepository<IActionSetEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("ActionSet error: " + id);
 
-            return entry;
+            return GetModel(entry);
         }
 
         #endregion Public Methods
