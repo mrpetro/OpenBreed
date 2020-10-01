@@ -1,11 +1,8 @@
-﻿using OpenBreed.Common;
-using OpenBreed.Common.Data;
-using OpenBreed.Database.Interface;
-using OpenBreed.Database.Interface.Items.Actions;
-using OpenBreed.Editor.VM.Actions;
-using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Editor.VM.Common;
 using OpenBreed.Editor.VM.Maps.Layers;
+using OpenBreed.Model.Actions;
+using System;
 using System.ComponentModel;
 using System.Linq;
 
@@ -15,7 +12,7 @@ namespace OpenBreed.Editor.VM.Maps
     {
         #region Private Fields
 
-        private string actionSetRef;
+        private string currentActionSetRef;
 
         #endregion Private Fields
 
@@ -34,33 +31,24 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Properties
 
-        public string ActionSetRef
+        public string CurrentActionSetRef
         {
-            get { return actionSetRef; }
-            set { SetProperty(ref actionSetRef, value); }
+            get { return currentActionSetRef; }
+            set { SetProperty(ref currentActionSetRef, value); }
         }
 
         public EntryRefIdEditorVM RefIdEditor { get; }
-
         public MapEditorActionsSelectorVM ActionsSelector { get; }
-
         public MapEditorVM Parent { get; }
-
-        protected override void OnPropertyChanged(string name)
-        {
-            switch (name)
-            {
-                case nameof(ActionSetRef):
-                    RefIdEditor.RefId = ActionSetRef;
-                    break;
-                default:
-                    break;
-            }
-
-            base.OnPropertyChanged(name);
-        }
+        public Action<string> ModelChangeAction { get; internal set; }
 
         #endregion Public Properties
+
+        #region Internal Properties
+
+        internal ActionSetModel CurrentActionSet { get; private set; }
+
+        #endregion Internal Properties
 
         #region Internal Methods
 
@@ -68,7 +56,7 @@ namespace OpenBreed.Editor.VM.Maps
         {
             if ((cursor.Action == CursorActions.Move || cursor.Action == CursorActions.Down) && cursor.Buttons.HasFlag(CursorButtons.Left))
             {
-                var actionLayer = Parent.Editable.Layout.Layers.OfType<MapLayerActionVM>().FirstOrDefault();
+                var actionLayer = Parent.Layout.Layers.OfType<MapLayerActionVM>().FirstOrDefault();
 
                 var actionCode = ActionsSelector.SelectedIndex;
 
@@ -78,14 +66,39 @@ namespace OpenBreed.Editor.VM.Maps
 
         #endregion Internal Methods
 
+        #region Protected Methods
+
+        protected override void OnPropertyChanged(string name)
+        {
+            switch (name)
+            {
+                case nameof(CurrentActionSetRef):
+                    RefIdEditor.RefId = CurrentActionSetRef;
+                    UpdateModel();
+                    break;
+
+                default:
+                    break;
+            }
+
+            base.OnPropertyChanged(name);
+        }
+
+        #endregion Protected Methods
+
         #region Private Methods
+
+        private void UpdateModel()
+        {
+             ModelChangeAction?.Invoke(CurrentActionSetRef);
+        }
 
         private void ActionEntryRef_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
                 case nameof(RefIdEditor.RefId):
-                    ActionSetRef = RefIdEditor.RefId;
+                    CurrentActionSetRef = RefIdEditor.RefId;
                     break;
 
                 default:

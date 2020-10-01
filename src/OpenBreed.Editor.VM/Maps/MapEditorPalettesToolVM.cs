@@ -14,7 +14,7 @@ namespace OpenBreed.Editor.VM.Maps
         #region Private Fields
 
         private int _currentIndex = -1;
-        private PaletteModel _currentItem = null;
+        private string _currentItem = null;
 
         #endregion Private Fields
 
@@ -24,6 +24,7 @@ namespace OpenBreed.Editor.VM.Maps
         {
             Parent = parent;
 
+            PaletteNames = new BindingList<string>();
             PropertyChanged += LevelPaletteSelectorVM_PropertyChanged;
         }
 
@@ -31,13 +32,15 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Properties
 
+        public BindingList<string> PaletteNames { get; }
+
         public int CurrentIndex
         {
             get { return _currentIndex; }
             set { SetProperty(ref _currentIndex, value); }
         }
 
-        public PaletteModel CurrentItem
+        public string CurrentItem
         {
             get { return _currentItem; }
             set { SetProperty(ref _currentItem, value); }
@@ -65,7 +68,7 @@ namespace OpenBreed.Editor.VM.Maps
         }
         private void UpdateCurrentIndex()
         {
-            CurrentIndex = Parent.Editable.Palettes.IndexOf(CurrentItem);
+            CurrentIndex = PaletteNames.IndexOf(CurrentItem);
         }
 
         private void UpdateCurrentItem()
@@ -73,7 +76,7 @@ namespace OpenBreed.Editor.VM.Maps
             if (CurrentIndex == -1)
                 CurrentItem = null;
             else
-                CurrentItem = Parent.Editable.Palettes[CurrentIndex];
+                CurrentItem = PaletteNames[CurrentIndex];
         }
 
         #endregion Private Methods

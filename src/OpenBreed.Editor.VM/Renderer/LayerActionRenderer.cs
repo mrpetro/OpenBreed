@@ -60,7 +60,7 @@ namespace OpenBreed.Editor.VM.Renderer
         {
             RectangleF viewRect = Target.Gfx.ClipBounds;
 
-            int tileSize = renderable.Layout.Owner.TileSize;
+            int tileSize = renderable.Layout.Parent.TileSize;
             int xFrom = renderable.Layout.GetMapIndexX(viewRect.Left);
             int xTo = renderable.Layout.GetMapIndexX(viewRect.Right);
             int yFrom = renderable.Layout.GetMapIndexY(viewRect.Top);

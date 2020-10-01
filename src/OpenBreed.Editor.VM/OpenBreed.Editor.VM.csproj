@@ -203,7 +203,6 @@
     <Compile Include="Tools\ZoomTool.cs" />
     <Compile Include="Palettes\PaletteEditorVM.cs" />
     <Compile Include="Maps\MapEditorPalettesToolVM.cs" />
-    <Compile Include="Palettes\PaletteVM.cs" />
     <Compile Include="Database\DatabaseVM.cs" />
     <Compile Include="Actions\ActionSetEditorVM.cs" />
     <Compile Include="Maps\MapEditorActionsToolVM.cs" />
@@ -219,7 +218,7 @@
     <Compile Include="Tiles\TileSetEditorVM.cs" />
     <Compile Include="Tiles\TileSetViewerVM.cs" />
     <Compile Include="Maps\MapEditorTilesSelectorVM.cs" />
-    <Compile Include="Tiles\TileSetVM.cs" />
+    <Compile Include="Tiles\TileSetFromBlkEditorVM.cs" />
     <Compile Include="Tiles\TileVM.cs" />
     <Compile Include="Tiles\Tools\TileSelectTool.cs" />
   </ItemGroup>

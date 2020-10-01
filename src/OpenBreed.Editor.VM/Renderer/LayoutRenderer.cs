@@ -26,7 +26,7 @@ namespace OpenBreed.Editor.VM.Renderer
             _editor = editor;
 
             _layerRenderers = new Dictionary<Type, RendererBase<MapLayerBaseVM>>();
-            _layerRenderers.Add(typeof(MapLayerGfxVM), new LayerGfxRenderer(target));
+            _layerRenderers.Add(typeof(MapLayerGfxVM), new LayerGfxRenderer(_editor.TilesTool, target));
             _layerRenderers.Add(typeof(MapLayerActionVM), new LayerActionRenderer(_editor.ActionsTool, target));
         }
 

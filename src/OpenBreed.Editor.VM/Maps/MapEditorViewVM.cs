@@ -35,8 +35,6 @@ namespace OpenBreed.Editor.VM.Maps
             Cursor.CalculateWorldIndexCoordsFunc = GetIndexCoords;
 
             Cursor.PropertyChanged += Cursor_PropertyChanged;
-
-            PropertyChanged += MapBodyViewerVM_PropertyChanged;
         }
 
         #endregion Public Constructors
@@ -44,11 +42,8 @@ namespace OpenBreed.Editor.VM.Maps
         #region Public Properties
 
         public MapViewCursorVM Cursor { get; }
-        public MapLayoutVM Layout
-        {
-            get { return _layout; }
-            set { SetProperty(ref _layout, value); }
-        }
+
+        public MapLayoutVM Layout => Parent.Layout;
 
         public MapEditorVM Parent { get; }
 
@@ -196,16 +191,19 @@ namespace OpenBreed.Editor.VM.Maps
         {
             Refresh();
         }
-        private void MapBodyViewerVM_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+
+        protected override void OnPropertyChanged(string name)
         {
-            switch (e.PropertyName)
+            switch (name)
             {
                 case nameof(Layout):
-                    Title = "Map body - " + Layout.Owner.Title;
+                    Title = "Map body - " + Layout.Parent.Title;
                     break;
                 default:
                     break;
             }
+
+            base.OnPropertyChanged(name);
         }
 
         #endregion Private Methods

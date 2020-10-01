@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Editor.UI.WinForms.Controls.Tiles
 {
-    partial class TileSetEditorCtrl
+    partial class TileSetViewCtrl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,30 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Panel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // Panel
-            // 
-            this.Panel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Panel.Location = new System.Drawing.Point(0, 0);
-            this.Panel.Name = "Panel";
-            this.Panel.Size = new System.Drawing.Size(480, 320);
-            this.Panel.TabIndex = 7;
-            // 
-            // TileSetEditorCtrl
+            // TileSetViewCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.Panel);
-            this.Name = "TileSetEditorCtrl";
-            this.Size = new System.Drawing.Size(480, 320);
+            this.Name = "TileSetViewCtrl";
+            this.Size = new System.Drawing.Size(509, 473);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel Panel;
     }
 }

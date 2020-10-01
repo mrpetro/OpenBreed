@@ -1,10 +1,16 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Maps;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Model.Actions;
-using System.ComponentModel;
+using OpenBreed.Model.Maps;
+using OpenBreed.Model.Palettes;
+using OpenBreed.Model.Tiles;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 namespace OpenBreed.Editor.VM.Maps
@@ -15,23 +21,31 @@ namespace OpenBreed.Editor.VM.Maps
 
         private string actionSetRef;
 
+        private string currentPaletteRef;
+
         #endregion Private Fields
 
         #region Public Constructors
+
+        public MapLayoutVM Layout { get; }
 
         public MapEditorVM(IRepository repository) : base(repository)
         {
             Tools = new MapEditorToolsVM();
 
             TilesTool = new MapEditorTilesToolVM(this);
+            TilesTool.TilesSelector.ModelChangeAction = OnTileSetModelChange;
+            UpdateTileSets = TilesTool.TileSetSelector.UpdateList;
+            TilesTool.TileSetSelector.CurrentItemChanged += OnTileSetChanged;
+
             ActionsTool = new MapEditorActionsToolVM(this);
+            ActionsTool.ModelChangeAction = OnActionSetModelChange;
+
             PalettesTool = new MapEditorPalettesToolVM(this);
 
             MapView = new MapEditorViewVM(this);
-
-            PalettesTool.PropertyChanged += PaletteSelector_PropertyChanged;
-
-            ActionsTool.PropertyChanged += ActionsTool_PropertyChanged;
+            Layout = new MapLayoutVM(this);
+            Layout.PropertyChanged += (s, e) => OnPropertyChanged(nameof(Layout));
 
             InitializeTools();
 
@@ -43,7 +57,9 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Properties
 
-        public ActionSetModel ActionSet { get; private set; }
+        public Bitmap CurrentTilesBitmap { get; private set; }
+
+        public Action<string> UpdateTileSets { get; private set; }
 
         public MapEditorActionsToolVM ActionsTool { get; }
 
@@ -63,14 +79,96 @@ namespace OpenBreed.Editor.VM.Maps
             set { SetProperty(ref actionSetRef, value); }
         }
 
+        public string CurrentPaletteRef
+        {
+            get { return currentPaletteRef; }
+            set { SetProperty(ref currentPaletteRef, value); }
+        }
+
+        internal List<PaletteModel> Palettes => Model.Palettes;
+
         #endregion Public Properties
+
+        #region Internal Properties
+
+        internal ActionSetModel ActionSet
+        {
+            get => Model.ActionSet;
+            private set => Model.ActionSet = value;
+        }
+
+        internal TileSetModel TileSet
+        {
+            get => Model.TileSet;
+            private set => Model.TileSet = value;
+        }
+
+        internal int TileSize => Model.TileSet.TileSize;
+
+        internal MapModel Model { get; private set; }
+
+        #endregion Internal Properties
+
+        #region Public Methods
+
+        public void DrawTileSet(Graphics gfx)
+        {
+            var tileSize = Model.TileSet.TileSize;
+            int xMax = Model.TileSet.TilesNoX;
+            int yMax = Model.TileSet.TilesNoY;
+
+            for (int j = 0; j < yMax; j++)
+            {
+                for (int i = 0; i < xMax; i++)
+                {
+                    int gfxId = i + xMax * j;
+                    DrawTile(gfx, gfxId, i * tileSize, j * tileSize, tileSize);
+                }
+            }
+        }
+
+        public void RenderDefaultTile(Graphics gfx, int tileId, float x, float y, int tileSize)
+        {
+            Font font = new Font("Arial", 5);
+
+            var rectangle = new Rectangle((int)x, (int)y, tileSize, tileSize);
+
+            Color c = Color.Black;
+            Pen tileColor = new Pen(c);
+            Brush brush = new SolidBrush(c);
+
+            gfx.FillRectangle(brush, rectangle);
+
+            c = Color.White;
+            tileColor = new Pen(c);
+            brush = new SolidBrush(c);
+
+            gfx.DrawRectangle(tileColor, rectangle);
+            gfx.DrawString(string.Format("{0,2:D2}", tileId / 100), font, brush, x + 2, y + 1);
+            gfx.DrawString(string.Format("{0,2:D2}", tileId % 100), font, brush, x + 2, y + 7);
+        }
+
+        public void DrawTile(Graphics gfx, int tileId, float x, float y, int tileSize)
+        {
+            if (Model.TileSet == null)
+            {
+                RenderDefaultTile(gfx, tileId, x, y, tileSize);
+                return;
+            }
+
+            if (tileId >= Model.TileSet.Tiles.Count)
+                return;
+
+            var tileRect = Model.TileSet.Tiles[tileId].Rectangle;
+            gfx.DrawImage(CurrentTilesBitmap, (int)x, (int)y, tileRect, GraphicsUnit.Pixel);
+        }
+
+        #endregion Public Methods
 
         #region Internal Methods
 
         internal void Connect()
         {
-            ActionsTool.ActionsSelector.PropertyChanged += ActionsSelector_PropertyChanged;
-
             TilesTool.Connect();
         }
 
@@ -85,19 +183,67 @@ namespace OpenBreed.Editor.VM.Maps
             var mapEntry = target as IMapEntry;
 
             mapEntry.ActionSetRef = ActionSetRef != null ? ActionSetRef : null;
+
+            Layout.ToMap(Model);
         }
 
         protected override void UpdateVM(IMapEntry source, MapVM target)
         {
             base.UpdateVM(source, target);
 
+            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
+
+            Model = dataProvider.Maps.GetMap(source.Id);
+
+            UpdateTileSets(source.TileSetRef);
+
             ActionSetRef = source.ActionSetRef;
-            ActionsTool.ActionSetRef = source.ActionSetRef;
+            ActionsTool.CurrentActionSetRef = source.ActionSetRef;
+
+            Layout.FromMap(Model);
+        }
+
+        protected override void OnPropertyChanged(string name)
+        {
+            switch (name)
+            {
+                case nameof(Editable):
+                    ActionSetRef = ActionsTool.CurrentActionSetRef;
+                    break;
+
+                case nameof(ActionSetRef):
+                    UpdateActionModel();
+                    break;
+
+                default:
+                    break;
+            }
+
+            base.OnPropertyChanged(name);
         }
 
         #endregion Protected Methods
 
         #region Private Methods
+
+        private void OnTileSetChanged(object sender, string e)
+        {
+            TilesTool.TilesSelector.CurrentTileSetRef = e;
+        }
+
+        private void OnTileSetModelChange(string tileSetRef)
+        {
+            TileSet = DataProvider.TileSets.GetTileSet(tileSetRef);
+
+            CurrentTilesBitmap = (Bitmap)TileSet.Bitmap.Clone();
+
+            BitmapHelper.SetPaletteColors(CurrentTilesBitmap, Model.Palettes.First().Data);
+        }
+
+        private void OnActionSetModelChange(string tileSetRef)
+        {
+            ActionSet = DataProvider.ActionSets.GetActionSet(tileSetRef);
+        }
 
         private void UpdateActionModel()
         {
@@ -112,35 +258,6 @@ namespace OpenBreed.Editor.VM.Maps
             var actionSet = dataProvider.ActionSets.GetActionSet(ActionSetRef);
             if (actionSet != null)
                 ActionSet = actionSet;
-        }
-
-        private void ActionsSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            var actionSelector = sender as MapEditorActionsSelectorVM;
-
-            switch (e.PropertyName)
-            {
-                case nameof(actionSelector.Items):
-                    MapView.Refresh();
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-        private void ActionsTool_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(ActionsTool.ActionSetRef):
-                    if (Editable != null)
-                        ActionSetRef = ActionsTool.ActionSetRef;
-                    break;
-
-                default:
-                    break;
-            }
         }
 
         private void InitializeTool(MapEditorToolVM tool)
@@ -161,44 +278,10 @@ namespace OpenBreed.Editor.VM.Maps
             MapView.Cursor.UpdateAction = Tools.OnCursorUpdate;
         }
 
-        private void PaletteSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(PalettesTool.CurrentItem):
-                    foreach (var tileSet in Editable.TileSets)
-                        tileSet.Palette = PalettesTool.CurrentItem;
-                    break;
-
-                default:
-                    break;
-            }
-        }
+        #endregion Private Methods
 
         //    base.UpdateVM(source, target);
         //}
-
-        protected override void OnPropertyChanged(string name)
-        {
-            switch (name)
-            {
-                case nameof(Editable):
-                    MapView.Layout = Editable.Layout;
-                    PalettesTool.CurrentItem = Editable.Palettes.FirstOrDefault();
-                    ActionSetRef = ActionsTool.ActionSetRef;
-                    break;
-                case nameof(ActionSetRef):
-                    UpdateActionModel();
-                    break;
-                default:
-                    break;
-            }
-
-            base.OnPropertyChanged(name);
-        }
-
-        #endregion Private Methods
-
         //    TileSelector.CurrentItem = CurrentLevel.TileSets.FirstOrDefault();
         //    PropSelector.CurrentItem = CurrentLevel.PropSet;
         //    SpriteSetViewer.CurrentItem = CurrentLevel.SpriteSets.FirstOrDefault();

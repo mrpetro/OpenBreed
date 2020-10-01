@@ -332,12 +332,6 @@
     <Compile Include="Controls\Sprites\SpriteSetFromSprEditorCtrl.Designer.cs">
       <DependentUpon>SpriteSetFromSprEditorCtrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Maps\MapEditorTileSetSelectorCtrl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Maps\MapEditorTileSetSelectorCtrl.Designer.cs">
-      <DependentUpon>MapEditorTileSetSelectorCtrl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Sprites\SpriteSetEditorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -368,11 +362,23 @@
     <Compile Include="Controls\Texts\TextEditorCtrl.Designer.cs">
       <DependentUpon>TextEditorCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Tiles\TileSetFromBlkEditorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Tiles\TileSetFromBlkEditorCtrl.Designer.cs">
+      <DependentUpon>TileSetFromBlkEditorCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Tiles\TileSetEditorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\Tiles\TileSetEditorCtrl.Designer.cs">
       <DependentUpon>TileSetEditorCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Tiles\TileSetViewCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Tiles\TileSetViewCtrl.Designer.cs">
+      <DependentUpon>TileSetViewCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Tiles\TileSetViewerCtrl.cs">
       <SubType>UserControl</SubType>
@@ -641,9 +647,6 @@
     <EmbeddedResource Include="Controls\Sprites\SpriteSetFromSprEditorCtrl.resx">
       <DependentUpon>SpriteSetFromSprEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Maps\MapEditorTileSetSelectorCtrl.resx">
-      <DependentUpon>MapEditorTileSetSelectorCtrl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Sprites\SpriteSetEditorCtrl.resx">
       <DependentUpon>SpriteSetEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
@@ -659,8 +662,14 @@
     <EmbeddedResource Include="Controls\Texts\TextEditorCtrl.resx">
       <DependentUpon>TextEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Tiles\TileSetFromBlkEditorCtrl.resx">
+      <DependentUpon>TileSetFromBlkEditorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Tiles\TileSetEditorCtrl.resx">
       <DependentUpon>TileSetEditorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Tiles\TileSetViewCtrl.resx">
+      <DependentUpon>TileSetViewCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Tiles\TileSetViewerCtrl.resx">
       <DependentUpon>TileSetViewerCtrl.cs</DependentUpon>

@@ -26,7 +26,7 @@ namespace OpenBreed.Editor.VM.Renderer
         {
             foreach (var tile in renderable.TilesCursor)
             {
-                renderable.TilesSelector.CurrentTileSet.DrawTile(Target.Gfx, tile.TileIdAfter, tile.IndexCoords.X * 16, tile.IndexCoords.Y * 16, 16);
+                _editor.DrawTile(Target.Gfx, tile.TileIdAfter, tile.IndexCoords.X * 16, tile.IndexCoords.Y * 16, 16);
             }
         }
 

@@ -1,16 +1,8 @@
-﻿using OpenBreed.Common;
-using OpenBreed.Common.Data;
-using OpenBreed.Database.Interface;
-using OpenBreed.Database.Interface.Items.Actions;
-using OpenBreed.Editor.VM.Actions;
+﻿using OpenBreed.Editor.VM.Actions;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Model.Actions;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Maps
 {
@@ -39,7 +31,6 @@ namespace OpenBreed.Editor.VM.Maps
         #region Public Properties
 
         public BindingList<ActionVM> Items { get; }
-
         public MapEditorActionsToolVM Parent { get; }
 
         public int SelectedIndex
@@ -50,7 +41,19 @@ namespace OpenBreed.Editor.VM.Maps
 
         #endregion Public Properties
 
+        #region Internal Properties
+
+        #endregion Internal Properties
+
         #region Private Methods
+
+        private string currentActionSetRef;
+
+        public string CurrentActionSetRef
+        {
+            get { return currentActionSetRef; }
+            set { SetProperty(ref currentActionSetRef, value); }
+        }
 
         private void OnActionSetChanged()
         {
@@ -59,7 +62,7 @@ namespace OpenBreed.Editor.VM.Maps
                 Items.Clear();
                 SelectedIndex = -1;
 
-                if(Parent.Parent.ActionSet == null)
+                if (Parent.Parent.ActionSet == null)
                     return;
 
                 foreach (var actionModel in Parent.Parent.ActionSet.Items)
@@ -71,15 +74,15 @@ namespace OpenBreed.Editor.VM.Maps
         {
             switch (e.PropertyName)
             {
-                case nameof(Parent.ActionSetRef):
+                case nameof(Parent.CurrentActionSetRef):
                     OnActionSetChanged();
                     break;
+
                 default:
                     break;
             }
         }
 
         #endregion Private Methods
-
     }
 }

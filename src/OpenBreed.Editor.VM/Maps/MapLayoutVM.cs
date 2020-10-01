@@ -27,9 +27,9 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Constructors
 
-        public MapLayoutVM(MapVM owner)
+        public MapLayoutVM(MapEditorVM parent)
         {
-            Owner = owner;
+            Parent = parent;
 
             Layers = new BindingList<MapLayerBaseVM>();
             Layers.ListChanged += (s, e) => OnPropertyChanged(nameof(Layers));
@@ -42,7 +42,7 @@ namespace OpenBreed.Editor.VM.Maps
         public BindingList<MapLayerBaseVM> Layers { get; }
         public float MaxCoordX { get; private set; }
         public float MaxCoordY { get; private set; }
-        public MapVM Owner { get; }
+        public MapEditorVM Parent { get; }
 
         public Size Size
         {
@@ -56,7 +56,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         public int GetMapIndexX(float xCoord)
         {
-            int xIndex = (int)(xCoord / Owner.TileSize);
+            int xIndex = (int)(xCoord / Parent.TileSize);
 
             if (xIndex < 0)
                 xIndex = 0;
@@ -68,7 +68,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         public int GetMapIndexY(float yCoord)
         {
-            int yIndex = (int)(yCoord / Owner.TileSize);
+            int yIndex = (int)(yCoord / Parent.TileSize);
 
             if (yIndex < 0)
                 yIndex = 0;
@@ -131,8 +131,8 @@ namespace OpenBreed.Editor.VM.Maps
                 Layers.Add(actionLayerVM);
             });
 
-            MaxCoordX = Size.Width * Owner.TileSize;
-            MaxCoordY = Size.Height * Owner.TileSize;
+            MaxCoordX = Size.Width * Parent.TileSize;
+            MaxCoordY = Size.Height * Parent.TileSize;
         }
 
         #endregion Internal Methods

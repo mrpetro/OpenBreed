@@ -35,6 +35,8 @@
             this.TabActions = new System.Windows.Forms.TabPage();
             this.ActionsTool = new OpenBreed.Editor.UI.WinForms.Controls.Maps.MapEditorActionsToolCtrl();
             this.TabTemplates = new System.Windows.Forms.TabPage();
+            this.TabPalettes = new System.Windows.Forms.TabPage();
+            this.PalettesTool = new OpenBreed.Editor.UI.WinForms.Controls.Maps.MapEditorPalettesToolCtrl();
             this.MainSplit = new System.Windows.Forms.SplitContainer();
             this.SideSplit = new System.Windows.Forms.SplitContainer();
             this.GrpLayers = new System.Windows.Forms.GroupBox();
@@ -42,6 +44,7 @@
             this.ToolTabs.SuspendLayout();
             this.TabTiles.SuspendLayout();
             this.TabActions.SuspendLayout();
+            this.TabPalettes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplit)).BeginInit();
             this.MainSplit.Panel1.SuspendLayout();
             this.MainSplit.Panel2.SuspendLayout();
@@ -65,6 +68,7 @@
             // 
             this.ToolTabs.Controls.Add(this.TabTiles);
             this.ToolTabs.Controls.Add(this.TabActions);
+            this.ToolTabs.Controls.Add(this.TabPalettes);
             this.ToolTabs.Controls.Add(this.TabTemplates);
             this.ToolTabs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ToolTabs.Location = new System.Drawing.Point(3, 16);
@@ -98,7 +102,7 @@
             this.TabActions.Location = new System.Drawing.Point(4, 22);
             this.TabActions.Name = "TabActions";
             this.TabActions.Padding = new System.Windows.Forms.Padding(3);
-            this.TabActions.Size = new System.Drawing.Size(319, 278);
+            this.TabActions.Size = new System.Drawing.Size(349, 278);
             this.TabActions.TabIndex = 1;
             this.TabActions.Text = "Actions";
             this.TabActions.UseVisualStyleBackColor = true;
@@ -108,7 +112,7 @@
             this.ActionsTool.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ActionsTool.Location = new System.Drawing.Point(3, 3);
             this.ActionsTool.Name = "ActionsTool";
-            this.ActionsTool.Size = new System.Drawing.Size(313, 272);
+            this.ActionsTool.Size = new System.Drawing.Size(343, 272);
             this.ActionsTool.TabIndex = 0;
             // 
             // TabTemplates
@@ -116,10 +120,28 @@
             this.TabTemplates.Location = new System.Drawing.Point(4, 22);
             this.TabTemplates.Name = "TabTemplates";
             this.TabTemplates.Padding = new System.Windows.Forms.Padding(3);
-            this.TabTemplates.Size = new System.Drawing.Size(319, 278);
+            this.TabTemplates.Size = new System.Drawing.Size(349, 278);
             this.TabTemplates.TabIndex = 3;
             this.TabTemplates.Text = "Templates";
             this.TabTemplates.UseVisualStyleBackColor = true;
+            // 
+            // TabPalettes
+            // 
+            this.TabPalettes.Controls.Add(this.PalettesTool);
+            this.TabPalettes.Location = new System.Drawing.Point(4, 22);
+            this.TabPalettes.Name = "TabPalettes";
+            this.TabPalettes.Size = new System.Drawing.Size(349, 278);
+            this.TabPalettes.TabIndex = 4;
+            this.TabPalettes.Text = "Palettes";
+            this.TabPalettes.UseVisualStyleBackColor = true;
+            // 
+            // PalettesTool
+            // 
+            this.PalettesTool.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PalettesTool.Location = new System.Drawing.Point(0, 0);
+            this.PalettesTool.Name = "PalettesTool";
+            this.PalettesTool.Size = new System.Drawing.Size(349, 278);
+            this.PalettesTool.TabIndex = 0;
             // 
             // MainSplit
             // 
@@ -191,6 +213,7 @@
             this.ToolTabs.ResumeLayout(false);
             this.TabTiles.ResumeLayout(false);
             this.TabActions.ResumeLayout(false);
+            this.TabPalettes.ResumeLayout(false);
             this.MainSplit.Panel1.ResumeLayout(false);
             this.MainSplit.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MainSplit)).EndInit();
@@ -217,5 +240,7 @@
         private System.Windows.Forms.GroupBox GrpTools;
         private MapEditorActionsToolCtrl ActionsTool;
         private MapEditorTilesToolCtrl TilesTool;
+        private System.Windows.Forms.TabPage TabPalettes;
+        private MapEditorPalettesToolCtrl PalettesTool;
     }
 }
