@@ -61,6 +61,7 @@
     <Compile Include="Maps\IMapDataBlock.cs" />
     <Compile Include="Maps\MapBuilder.cs" />
     <Compile Include="Maps\MapModel.cs" />
+    <Compile Include="Maps\MapTileSet.cs" />
     <Compile Include="Maps\TileRef.cs" />
     <Compile Include="Palettes\PaletteBuilder.cs" />
     <Compile Include="Palettes\PaletteModel.cs" />
