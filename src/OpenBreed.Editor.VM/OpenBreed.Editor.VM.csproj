@@ -77,9 +77,8 @@
     <Compile Include="Database\Tables\DbDataSourceTableVM.cs" />
     <Compile Include="Database\Tables\DbScriptTableVM.cs" />
     <Compile Include="DataSources\DataSourceEditorVM.cs" />
-    <Compile Include="DataSources\DataSourceVM.cs" />
-    <Compile Include="DataSources\FileDataSourceVM.cs" />
-    <Compile Include="DataSources\EPFArchiveFileDataSourceVM.cs" />
+    <Compile Include="DataSources\FileDataSourceEditorVM.cs" />
+    <Compile Include="DataSources\EpfArchiveFileDataSourceEditorVM.cs" />
     <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="Base\BindingListExtensions.cs" />
     <Compile Include="Base\Command.cs" />
@@ -124,10 +123,8 @@
     <Compile Include="DbEntryEditorFactory.cs" />
     <Compile Include="EntityTemplates\EntityTemplateEditorVM.cs" />
     <Compile Include="EntityTemplates\EntityTemplateFromFileEditorVM.cs" />
-    <Compile Include="EntityTemplates\EntityTemplateVM.cs" />
-    <Compile Include="EntryEditorBaseExVM.cs" />
-    <Compile Include="EntryEditorVM.cs" />
     <Compile Include="EntryEditorBaseVM.cs" />
+    <Compile Include="EntryEditorVM.cs" />
     <Compile Include="EditableEntryVM.cs" />
     <Compile Include="IDialogProvider.cs" />
     <Compile Include="IEntryEditor.cs" />

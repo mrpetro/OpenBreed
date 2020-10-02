@@ -15,7 +15,7 @@ using System.Linq;
 
 namespace OpenBreed.Editor.VM.Maps
 {
-    public class MapEditorVM : EntryEditorBaseExVM<IMapEntry>
+    public class MapEditorVM : EntryEditorBaseVM<IMapEntry>
     {
         #region Private Fields
 
@@ -213,10 +213,6 @@ namespace OpenBreed.Editor.VM.Maps
         {
             switch (name)
             {
-                case nameof(Editable):
-                    ActionSetRef = ActionsTool.CurrentActionSetRef;
-                    break;
-
                 case nameof(ActionSetRef):
                     UpdateActionModel();
                     break;

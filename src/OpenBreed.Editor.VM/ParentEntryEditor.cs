@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Editor.VM
 {
-    public abstract class ParentEntryEditor<E> : EntryEditorBaseExVM<E> where E : IEntry
+    public abstract class ParentEntryEditor<E> : EntryEditorBaseVM<E> where E : IEntry
     {
         #region Private Fields
 

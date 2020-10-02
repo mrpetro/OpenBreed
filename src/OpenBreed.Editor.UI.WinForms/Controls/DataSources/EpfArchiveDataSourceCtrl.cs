@@ -15,7 +15,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.DataSources
     {
         #region Private Fields
 
-        private EPFArchiveFileDataSourceVM _vm;
+        private EpfArchiveFileDataSourceEditorVM _vm;
 
         #endregion Private Fields
 
@@ -30,7 +30,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.DataSources
 
         #region Public Methods
 
-        public void Initialize(EPFArchiveFileDataSourceVM vm)
+        public void Initialize(EpfArchiveFileDataSourceEditorVM vm)
         {
             _vm = vm;
 
