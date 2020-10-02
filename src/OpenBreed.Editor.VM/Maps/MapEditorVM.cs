@@ -15,7 +15,7 @@ using System.Linq;
 
 namespace OpenBreed.Editor.VM.Maps
 {
-    public class MapEditorVM : EntryEditorBaseVM<IMapEntry, MapVM>
+    public class MapEditorVM : EntryEditorBaseExVM<IMapEntry>
     {
         #region Private Fields
 
@@ -23,11 +23,11 @@ namespace OpenBreed.Editor.VM.Maps
 
         private string currentPaletteRef;
 
+        private bool isModified;
+
         #endregion Private Fields
 
         #region Public Constructors
-
-        public MapLayoutVM Layout { get; }
 
         public MapEditorVM(IRepository repository) : base(repository)
         {
@@ -45,25 +45,25 @@ namespace OpenBreed.Editor.VM.Maps
 
             MapView = new MapEditorViewVM(this);
             Layout = new MapLayoutVM(this);
+            Properties = new LevelPropertiesVM(this);
             Layout.PropertyChanged += (s, e) => OnPropertyChanged(nameof(Layout));
 
             InitializeTools();
 
-            //TODO: This is probably bad place for VM connection method
-            Connect();
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
+        public MapLayoutVM Layout { get; }
         public Bitmap CurrentTilesBitmap { get; private set; }
 
         public Action<string> UpdateTileSets { get; private set; }
 
         public MapEditorActionsToolVM ActionsTool { get; }
 
-        public override string EditorName { get { return "Level Editor"; } }
+        public override string EditorName { get { return "Map Editor"; } }
 
         public MapEditorViewVM MapView { get; }
 
@@ -85,7 +85,17 @@ namespace OpenBreed.Editor.VM.Maps
             set { SetProperty(ref currentPaletteRef, value); }
         }
 
+        public LevelPropertiesVM Properties { get; }
+
         internal List<PaletteModel> Palettes => Model.Palettes;
+
+        public bool IsModified
+        {
+            get { return isModified; }
+            set { SetProperty(ref isModified, value); }
+        }
+
+        internal int TileSize => Model.TileSet.TileSize;
 
         #endregion Public Properties
 
@@ -102,8 +112,6 @@ namespace OpenBreed.Editor.VM.Maps
             get => Model.TileSet;
             private set => Model.TileSet = value;
         }
-
-        internal int TileSize => Model.TileSet.TileSize;
 
         internal MapModel Model { get; private set; }
 
@@ -167,18 +175,13 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Internal Methods
 
-        internal void Connect()
-        {
-            TilesTool.Connect();
-        }
-
         #endregion Internal Methods
 
         #region Protected Methods
 
-        protected override void UpdateEntry(MapVM source, IMapEntry target)
+        protected override void UpdateEntry(IMapEntry target)
         {
-            base.UpdateEntry(source, target);
+            base.UpdateEntry(target);
 
             var mapEntry = target as IMapEntry;
 
@@ -187,9 +190,9 @@ namespace OpenBreed.Editor.VM.Maps
             Layout.ToMap(Model);
         }
 
-        protected override void UpdateVM(IMapEntry source, MapVM target)
+        protected override void UpdateVM(IMapEntry source)
         {
-            base.UpdateVM(source, target);
+            base.UpdateVM(source);
 
             var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
 
@@ -201,6 +204,9 @@ namespace OpenBreed.Editor.VM.Maps
             ActionsTool.CurrentActionSetRef = source.ActionSetRef;
 
             Layout.FromMap(Model);
+            Properties.Load(Model);
+
+            TilesTool.UpdateVM();
         }
 
         protected override void OnPropertyChanged(string name)

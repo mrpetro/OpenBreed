@@ -17,7 +17,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.EntityTemplates
     {
         #region Private Fields
 
-        private EntityTemplateFromFileVM _vm;
+        private EntityTemplateFromFileEditorVM _vm;
 
         #endregion Private Fields
 
@@ -32,7 +32,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.EntityTemplates
 
         #region Public Methods
 
-        public void Initialize(EntityTemplateFromFileVM vm)
+        public void Initialize(EntityTemplateFromFileEditorVM vm)
         {
             _vm = vm ?? throw new ArgumentNullException(nameof(vm));
 

@@ -30,21 +30,21 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Constructors
 
-        public LevelPropertiesVM(MapVM map)
+        public LevelPropertiesVM(MapEditorVM parent)
         {
-            if (map == null)
-                throw new ArgumentNullException(nameof(map));
+            if (parent == null)
+                throw new ArgumentNullException(nameof(parent));
 
-            Map = map;
+            Parent = parent;
 
-            Map.PropertyChanged += Map_PropertyChanged;
+            Parent.PropertyChanged += Map_PropertyChanged;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public MapVM Map { get; private set; }
+        public MapEditorVM Parent { get; private set; }
         public byte[] Header { get; set; }
 
         public string ALTM
@@ -169,8 +169,8 @@ namespace OpenBreed.Editor.VM.Maps
         {
             switch (e.PropertyName)
             {
-                case nameof(Map.Title):
-                    Title = "Map properties - " + Map.Title;
+                case nameof(Parent.Title):
+                    Title = "Map properties - " + Parent.Title;
                     break;
 
                 default:

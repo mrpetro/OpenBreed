@@ -123,7 +123,7 @@
     <Compile Include="EditorVMHelper.cs" />
     <Compile Include="DbEntryEditorFactory.cs" />
     <Compile Include="EntityTemplates\EntityTemplateEditorVM.cs" />
-    <Compile Include="EntityTemplates\EntityTemplateFromFileVM.cs" />
+    <Compile Include="EntityTemplates\EntityTemplateFromFileEditorVM.cs" />
     <Compile Include="EntityTemplates\EntityTemplateVM.cs" />
     <Compile Include="EntryEditorBaseExVM.cs" />
     <Compile Include="EntryEditorVM.cs" />
@@ -194,7 +194,6 @@
     <Compile Include="Maps\MapLayoutVM.cs" />
     <Compile Include="Maps\LevelPropertiesVM.cs" />
     <Compile Include="Maps\MapEditorTileSetSelectorVM.cs" />
-    <Compile Include="Maps\MapVM.cs" />
     <Compile Include="Tools\IEditorTool.cs" />
     <Compile Include="Tools\InsertPropertyTool.cs" />
     <Compile Include="Tools\InsertTileTool.cs" />

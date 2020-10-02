@@ -64,7 +64,7 @@ namespace OpenBreed.Editor.VM.Maps.Layers
                 return;
 
             _cells[y * Layout.Size.Width + x] = value;
-            Layout.Parent.Editable.IsModified = true;
+            Layout.Parent.IsModified = true;
         }
 
         #endregion Public Methods
