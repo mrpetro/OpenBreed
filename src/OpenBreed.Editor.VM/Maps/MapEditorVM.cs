@@ -42,6 +42,8 @@ namespace OpenBreed.Editor.VM.Maps
             ActionsTool.ModelChangeAction = OnActionSetModelChange;
 
             PalettesTool = new MapEditorPalettesToolVM(this);
+            UpdatePalettes = PalettesTool.UpdateList;
+            PalettesTool.ModelChangeAction = OnPalettesModelChange;
 
             MapView = new MapEditorViewVM(this);
             Layout = new MapLayoutVM(this);
@@ -60,6 +62,7 @@ namespace OpenBreed.Editor.VM.Maps
         public Bitmap CurrentTilesBitmap { get; private set; }
 
         public Action<string> UpdateTileSets { get; private set; }
+        public Action<IEnumerable<string>> UpdatePalettes { get; private set; }
 
         public MapEditorActionsToolVM ActionsTool { get; }
 
@@ -199,6 +202,7 @@ namespace OpenBreed.Editor.VM.Maps
             Model = dataProvider.Maps.GetMap(source.Id);
 
             UpdateTileSets(source.TileSetRef);
+            UpdatePalettes(source.PaletteRefs);
 
             ActionSetRef = source.ActionSetRef;
             ActionsTool.CurrentActionSetRef = source.ActionSetRef;
@@ -240,6 +244,12 @@ namespace OpenBreed.Editor.VM.Maps
             CurrentTilesBitmap = (Bitmap)TileSet.Bitmap.Clone();
 
             BitmapHelper.SetPaletteColors(CurrentTilesBitmap, Model.Palettes.First().Data);
+        }
+
+        private void OnPalettesModelChange(string paletteRef)
+        {
+            var paletteModel = DataProvider.Palettes.GetPalette(paletteRef);
+            BitmapHelper.SetPaletteColors(CurrentTilesBitmap, paletteModel.Data);
         }
 
         private void OnActionSetModelChange(string tileSetRef)

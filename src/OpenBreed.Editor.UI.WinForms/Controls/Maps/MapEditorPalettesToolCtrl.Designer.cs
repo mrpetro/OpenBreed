@@ -30,7 +30,7 @@
         {
             this.btnAddPalette = new System.Windows.Forms.Button();
             this.btnRemovePalette = new System.Windows.Forms.Button();
-            this.cbxPalettes = new System.Windows.Forms.ComboBox();
+            this.cbxPalettes = new OpenBreed.Common.UI.WinForms.Controls.ComboBoxEx();
             this.SuspendLayout();
             // 
             // btnAddPalette
@@ -84,6 +84,6 @@
         #endregion
         private System.Windows.Forms.Button btnAddPalette;
         private System.Windows.Forms.Button btnRemovePalette;
-        private System.Windows.Forms.ComboBox cbxPalettes;
+        private OpenBreed.Common.UI.WinForms.Controls.ComboBoxEx cbxPalettes;
     }
 }
