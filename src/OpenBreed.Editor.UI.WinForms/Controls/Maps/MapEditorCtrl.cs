@@ -30,7 +30,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
             TilesTool.Initialize(_vm.TilesTool);
             ActionsTool.Initialize(_vm.ActionsTool);
             PalettesTool.Initialize(_vm.PalettesTool);
-
             ToolTabs.DataBindings.Add(nameof(ToolTabs.SelectedIndex), _vm.Tools, nameof(_vm.Tools.CurrentToolIndex), false, DataSourceUpdateMode.OnPropertyChanged);
 
         }

@@ -45,7 +45,7 @@ namespace OpenBreed.Editor.VM.Maps
             UpdatePalettes = PalettesTool.UpdateList;
             PalettesTool.ModelChangeAction = OnPalettesModelChange;
 
-            MapView = new MapEditorViewVM(this);
+            MapView = new MapEditorViewVM(this, new Renderer.RenderTarget(1,1));
             Layout = new MapLayoutVM(this);
             Properties = new LevelPropertiesVM(this);
             Layout.PropertyChanged += (s, e) => OnPropertyChanged(nameof(Layout));
@@ -61,6 +61,7 @@ namespace OpenBreed.Editor.VM.Maps
         public MapLayoutVM Layout { get; }
         public Bitmap CurrentTilesBitmap { get; private set; }
 
+        public Action<string> UpdateLayout { get; private set; }
         public Action<string> UpdateTileSets { get; private set; }
         public Action<IEnumerable<string>> UpdatePalettes { get; private set; }
 
@@ -182,30 +183,28 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Protected Methods
 
-        protected override void UpdateEntry(IMapEntry target)
+        protected override void UpdateEntry(IMapEntry entry)
         {
-            base.UpdateEntry(target);
+            base.UpdateEntry(entry);
 
-            var mapEntry = target as IMapEntry;
-
-            mapEntry.ActionSetRef = ActionSetRef != null ? ActionSetRef : null;
+            entry.ActionSetRef = ActionSetRef != null ? ActionSetRef : null;
 
             Layout.ToMap(Model);
         }
 
-        protected override void UpdateVM(IMapEntry source)
+        protected override void UpdateVM(IMapEntry entry)
         {
-            base.UpdateVM(source);
+            base.UpdateVM(entry);
 
             var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
 
-            Model = dataProvider.Maps.GetMap(source.Id);
+            Model = dataProvider.Maps.GetMap(entry.Id);
 
-            UpdateTileSets(source.TileSetRef);
-            UpdatePalettes(source.PaletteRefs);
+            UpdateTileSets(entry.TileSetRef);
+            UpdatePalettes(entry.PaletteRefs);
 
-            ActionSetRef = source.ActionSetRef;
-            ActionsTool.CurrentActionSetRef = source.ActionSetRef;
+            ActionSetRef = entry.ActionSetRef;
+            ActionsTool.CurrentActionSetRef = entry.ActionSetRef;
 
             Layout.FromMap(Model);
             Properties.Load(Model);

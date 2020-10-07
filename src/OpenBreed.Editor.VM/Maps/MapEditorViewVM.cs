@@ -1,19 +1,14 @@
 ﻿using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM.Tools;
 using OpenBreed.Editor.VM.Renderer;
+using OpenBreed.Editor.VM.Tools;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Maps
 {
     public class MapEditorViewVM : BaseViewModel, IScrollableVM, IZoomableVM
     {
-
         #region Private Fields
 
         private MapLayoutVM _layout;
@@ -24,9 +19,10 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Constructors
 
-        public MapEditorViewVM(MapEditorVM parent)
+        public MapEditorViewVM(MapEditorVM parent, RenderTarget renderTarget)
         {
             Parent = parent;
+            this.RenderTarget = renderTarget;
 
             Transformation = new Matrix();
             Cursor = new MapViewCursorVM();
@@ -41,6 +37,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Properties
 
+        public RenderTarget RenderTarget { get; }
         public MapViewCursorVM Cursor { get; }
 
         public MapLayoutVM Layout => Parent.Layout;
@@ -94,11 +91,16 @@ namespace OpenBreed.Editor.VM.Maps
             return new Point(point.X / 16, point.Y / 16);
         }
 
+        public void Resize(int width, int height)
+        {
+            RenderTarget.Resize(width, height);
+        }
+
         public Point GetWorldSnapCoords(Point point)
         {
             var worldCoords = GetWorldCoords(point);
 
-            return new Point((worldCoords.X /  16) * 16, (worldCoords.Y / 16) * 16);
+            return new Point((worldCoords.X / 16) * 16, (worldCoords.Y / 16) * 16);
         }
 
         public Point GetWorldCoords(Point viewCoords)
@@ -123,6 +125,11 @@ namespace OpenBreed.Editor.VM.Maps
             invMatrix.TransformPoints(clipPoints);
 
             return clipPoints[0];
+        }
+
+        public void Render(Graphics graphics)
+        {
+            RenderTarget.Flush(graphics);
         }
 
         public void Refresh()
@@ -174,6 +181,25 @@ namespace OpenBreed.Editor.VM.Maps
 
         #endregion Public Methods
 
+        #region Protected Methods
+
+        protected override void OnPropertyChanged(string name)
+        {
+            switch (name)
+            {
+                case nameof(Layout):
+                    Title = "Map body - " + Layout.Parent.Title;
+                    break;
+
+                default:
+                    break;
+            }
+
+            base.OnPropertyChanged(name);
+        }
+
+        #endregion Protected Methods
+
         #region Private Methods
 
         private Point CalculateWorldPosition(Point viewPosition)
@@ -192,21 +218,6 @@ namespace OpenBreed.Editor.VM.Maps
             Refresh();
         }
 
-        protected override void OnPropertyChanged(string name)
-        {
-            switch (name)
-            {
-                case nameof(Layout):
-                    Title = "Map body - " + Layout.Parent.Title;
-                    break;
-                default:
-                    break;
-            }
-
-            base.OnPropertyChanged(name);
-        }
-
         #endregion Private Methods
-
     }
 }
