@@ -25,7 +25,10 @@ namespace OpenBreed.Editor.VM.Renderer
 
         public override void Render(MapViewCursorVM renderable)
         {
-            Target.Gfx.DrawRectangle(System.Drawing.Pens.Red, new Rectangle(renderable.WorldCoords, new Size(16, 16)));
+            if (!renderable.Visible)
+                return;
+
+            Target.DrawRectangle(System.Drawing.Pens.Red, new Rectangle(renderable.WorldCoords, new Size(16, 16)));
         }
 
         #endregion Public Constructors

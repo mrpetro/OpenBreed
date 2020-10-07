@@ -11,7 +11,7 @@ namespace OpenBreed.Editor.VM.Maps
     {
         #region Private Fields
 
-        private MapLayoutVM _layout;
+        private ViewRenderer renderer;
         private string _title;
         private Matrix _transformation;
 
@@ -19,10 +19,11 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Constructors
 
-        public MapEditorViewVM(MapEditorVM parent, RenderTarget renderTarget)
+        public MapEditorViewVM(MapEditorVM parent, ViewRenderer renderer, RenderTarget renderTarget)
         {
             Parent = parent;
-            this.RenderTarget = renderTarget;
+            this.renderer = renderer;
+            RenderTarget = renderTarget;
 
             Transformation = new Matrix();
             Cursor = new MapViewCursorVM();
@@ -129,6 +130,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         public void Render(Graphics graphics)
         {
+            renderer.Render(this);
             RenderTarget.Flush(graphics);
         }
 
@@ -189,6 +191,10 @@ namespace OpenBreed.Editor.VM.Maps
             {
                 case nameof(Layout):
                     Title = "Map body - " + Layout.Parent.Title;
+                    Refresh();
+                    break;
+                case nameof(Transformation):
+                    Refresh();
                     break;
 
                 default:

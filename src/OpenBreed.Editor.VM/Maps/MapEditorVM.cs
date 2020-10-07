@@ -4,6 +4,7 @@ using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Maps;
 using OpenBreed.Editor.VM.Base;
+using OpenBreed.Editor.VM.Renderer;
 using OpenBreed.Model.Actions;
 using OpenBreed.Model.Maps;
 using OpenBreed.Model.Palettes;
@@ -45,7 +46,10 @@ namespace OpenBreed.Editor.VM.Maps
             UpdatePalettes = PalettesTool.UpdateList;
             PalettesTool.ModelChangeAction = OnPalettesModelChange;
 
-            MapView = new MapEditorViewVM(this, new Renderer.RenderTarget(1,1));
+            var renderTarget = new Renderer.RenderTarget(1, 1);
+            var renderer = new ViewRenderer(this, renderTarget);
+
+            MapView = new MapEditorViewVM(this, renderer, renderTarget);
             Layout = new MapLayoutVM(this);
             Properties = new LevelPropertiesVM(this);
             Layout.PropertyChanged += (s, e) => OnPropertyChanged(nameof(Layout));
@@ -139,6 +143,27 @@ namespace OpenBreed.Editor.VM.Maps
             }
         }
 
+        public void RenderDefaultTile(RenderTarget renderTarget, int tileId, float x, float y, int tileSize)
+        {
+            Font font = new Font("Arial", 5);
+
+            var rectangle = new Rectangle((int)x, (int)y, tileSize, tileSize);
+
+            Color c = Color.Black;
+            Pen tileColor = new Pen(c);
+            Brush brush = new SolidBrush(c);
+
+            renderTarget.FillRectangle(brush, rectangle);
+
+            c = Color.White;
+            tileColor = new Pen(c);
+            brush = new SolidBrush(c);
+
+            renderTarget.DrawRectangle(tileColor, rectangle);
+            renderTarget.DrawString(string.Format("{0,2:D2}", tileId / 100), font, brush, x + 2, y + 1);
+            renderTarget.DrawString(string.Format("{0,2:D2}", tileId % 100), font, brush, x + 2, y + 7);
+        }
+
         public void RenderDefaultTile(Graphics gfx, int tileId, float x, float y, int tileSize)
         {
             Font font = new Font("Arial", 5);
@@ -158,6 +183,21 @@ namespace OpenBreed.Editor.VM.Maps
             gfx.DrawRectangle(tileColor, rectangle);
             gfx.DrawString(string.Format("{0,2:D2}", tileId / 100), font, brush, x + 2, y + 1);
             gfx.DrawString(string.Format("{0,2:D2}", tileId % 100), font, brush, x + 2, y + 7);
+        }
+
+        public void DrawTile(RenderTarget renderTarget, int tileId, float x, float y, int tileSize)
+        {
+            if (Model.TileSet == null)
+            {
+                RenderDefaultTile(renderTarget, tileId, x, y, tileSize);
+                return;
+            }
+
+            if (tileId >= Model.TileSet.Tiles.Count)
+                return;
+
+            var tileRect = Model.TileSet.Tiles[tileId].Rectangle;
+            renderTarget.DrawImage(CurrentTilesBitmap, (int)x, (int)y, tileRect);
         }
 
         public void DrawTile(Graphics gfx, int tileId, float x, float y, int tileSize)

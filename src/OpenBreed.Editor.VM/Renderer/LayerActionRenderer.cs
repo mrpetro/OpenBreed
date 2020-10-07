@@ -52,13 +52,13 @@ namespace OpenBreed.Editor.VM.Renderer
 
             var image = action.Icon;
 
-            Target.Gfx.DrawImage(image, x, y, tileSize, tileSize);
+            Target.DrawImage(image, x, y, tileSize, tileSize);
 
         }
 
         private void Render(MapLayerActionVM renderable)
         {
-            RectangleF viewRect = Target.Gfx.ClipBounds;
+            RectangleF viewRect = Target.ClipBounds;
 
             int tileSize = renderable.Layout.Parent.TileSize;
             int xFrom = renderable.Layout.GetMapIndexX(viewRect.Left);

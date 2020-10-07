@@ -39,7 +39,7 @@ namespace OpenBreed.Editor.VM.Renderer
 
         private void Render(MapLayerGfxVM renderable)
         {
-            RectangleF viewRect = Target.Gfx.ClipBounds;
+            RectangleF viewRect = Target.ClipBounds;
 
             int tileSize = renderable.Layout.Parent.TileSize;
             int xFrom = renderable.Layout.GetMapIndexX(viewRect.Left);
@@ -55,7 +55,7 @@ namespace OpenBreed.Editor.VM.Renderer
                     var x = xIndex * tileSize;
                     var y = yIndex * tileSize;
 
-                    tilesTool.Parent.DrawTile(Target.Gfx, tileRef.TileId, x, y, tileSize);
+                    tilesTool.Parent.DrawTile(Target, tileRef.TileId, x, y, tileSize);
                 }
             }
         }

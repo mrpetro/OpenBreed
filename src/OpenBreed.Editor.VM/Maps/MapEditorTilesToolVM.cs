@@ -4,6 +4,7 @@ using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Common;
 using OpenBreed.Editor.VM.Maps.Commands;
 using OpenBreed.Editor.VM.Maps.Layers;
+using OpenBreed.Editor.VM.Renderer;
 using OpenBreed.Editor.VM.Tiles;
 using OpenBreed.Model.Tiles;
 using System;
@@ -207,7 +208,7 @@ namespace OpenBreed.Editor.VM.Maps
             InsertBuffer = new MapEditorTileInsertOperation[Layer.Size.Width, Layer.Size.Height];
         }
 
-        public void DrawBuffer(Graphics gfx, int tileSize)
+        public void DrawBuffer(RenderTarget renderTarget, int tileSize)
         {
             for (int indexY = 0; indexY < InsertBuffer.GetLength(1); indexY++)
             {
@@ -218,7 +219,7 @@ namespace OpenBreed.Editor.VM.Maps
                     if (tileReplacement == null)
                         continue;
 
-                    Parent.DrawTile(gfx, tileReplacement.TileIdAfter, indexX * tileSize, indexY * tileSize, tileSize);
+                    Parent.DrawTile(renderTarget, tileReplacement.TileIdAfter, indexX * tileSize, indexY * tileSize, tileSize);
                 }
             }
         }
