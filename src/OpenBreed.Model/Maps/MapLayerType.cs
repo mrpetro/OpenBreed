@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Model.Maps
 {
-    public class MapTileSet
+    public enum MapLayerType
     {
+        Gfx,
+        Action
     }
 }

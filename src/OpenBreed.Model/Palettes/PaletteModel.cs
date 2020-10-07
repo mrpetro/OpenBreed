@@ -1,61 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing.Imaging;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace OpenBreed.Model.Palettes
 {
     public class PaletteModel
     {
-
-        #region Private Fields
-
-        private static PaletteModel m_NullPalette = null;
-        private Color[] m_Data = null;
-
-        #endregion Private Fields
-
         #region Public Constructors
+
+        static PaletteModel()
+        {
+            NullPalette = new PaletteModel();
+            NullPalette.LoadFromDefault();
+        }
 
         public PaletteModel(PaletteBuilder builder)
         {
             Name = builder.Name;
-            m_Data = builder.Colors;
-        }
-
-        public PaletteModel()
-        {
-            LoadFromDefault();
+            Data = builder.Colors;
         }
 
         #endregion Public Constructors
 
+        #region Private Constructors
+
+        private PaletteModel()
+        {
+            LoadFromDefault();
+        }
+
+        #endregion Private Constructors
+
         #region Public Properties
 
-        public static PaletteModel NullPalette
-        {
-            get
-            {
-                if (m_NullPalette == null)
-                {
-                    m_NullPalette = new PaletteModel();
-                    m_NullPalette.LoadFromDefault();
-                }
+        public static PaletteModel NullPalette { get; }
 
-                return m_NullPalette;
-            }
-        }
+        public Color[] Data { get; private set; }
 
-        public Color[] Data { get { return m_Data; } }
-        public int Length
-        {
-            get
-            {
-                return Data.Length;
-            }
-        }
+        public int Length => Data.Length;
 
         public string Name { get; set; }
 
@@ -103,15 +83,15 @@ namespace OpenBreed.Model.Palettes
 
         public void LoadFromDefault()
         {
-            m_Data = DefaultPalette();
+            Data = DefaultPalette();
             Name = "Default";
         }
+
         public override string ToString()
         {
             return Name;
         }
 
         #endregion Public Methods
-
     }
 }

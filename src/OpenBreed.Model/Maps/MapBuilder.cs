@@ -16,7 +16,15 @@ namespace OpenBreed.Model.Maps
 
         #endregion Internal Fields
 
+        internal MapLayoutBuilder Layout { get; private set; }
+
         #region Public Methods
+
+        public MapLayoutBuilder CreateLayout()
+        {
+            Layout = MapLayoutBuilder.NewMapLayoutModel();
+            return Layout;
+        }
 
         public static MapBuilder NewMapModel()
         {

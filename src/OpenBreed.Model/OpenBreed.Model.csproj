@@ -59,9 +59,14 @@
     <Compile Include="Maps\Blocks\MapUInt32Block.cs" />
     <Compile Include="Maps\Blocks\MapUnknownBlock.cs" />
     <Compile Include="Maps\IMapDataBlock.cs" />
+    <Compile Include="Maps\MapLayerBuilder.cs" />
+    <Compile Include="Maps\MapLayerType.cs" />
+    <Compile Include="Maps\MapLayoutBuilder.cs" />
     <Compile Include="Maps\MapBuilder.cs" />
+    <Compile Include="Maps\MapLayerModel.cs" />
     <Compile Include="Maps\MapModel.cs" />
-    <Compile Include="Maps\MapTileSet.cs" />
+    <Compile Include="Maps\MapLayoutModel.cs" />
+    <Compile Include="Maps\MapCellModel.cs" />
     <Compile Include="Maps\TileRef.cs" />
     <Compile Include="Palettes\PaletteBuilder.cs" />
     <Compile Include="Palettes\PaletteModel.cs" />

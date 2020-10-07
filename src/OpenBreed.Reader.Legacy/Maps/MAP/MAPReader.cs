@@ -176,6 +176,12 @@ namespace OpenBreed.Reader.Legacy.Maps.MAP
             if (tilesNo != expectedTilesNo)
                 throw new InvalidDataException("Incorrect number of tiles in body (" + tilesNo + "). Expected: " + expectedTilesNo);
 
+            var layout = MapBuilder.CreateLayout();
+            layout.SetSize(sizeX, sizeY);
+            var gfxLayerBuilder = layout.AddLayer(MapLayerType.Gfx);
+            var actionLayerBuilder = layout.AddLayer(MapLayerType.Action);
+
+
             var bodyBlock = new MapBodyBlock(tilesNo);
 
             for (int i = 0; i < tilesNo; i++)
@@ -195,9 +201,18 @@ namespace OpenBreed.Reader.Legacy.Maps.MAP
                     gfxId = data >> 6;
                 }
 
+                var x = i % sizeX;
+                var y = i / sizeX;
+
+                gfxLayerBuilder.SetValue(x, y, gfxId);
+                actionLayerBuilder.SetValue(x, y, actionId);
+
                 bodyBlock.Cells[i].GfxId = gfxId;
                 bodyBlock.Cells[i].ActionId = actionId;
             }
+
+
+
 
             MapBuilder.AddBlock(bodyBlock);
         }
