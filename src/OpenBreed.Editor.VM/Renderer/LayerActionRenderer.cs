@@ -1,18 +1,11 @@
-﻿using OpenBreed.Editor.VM.Actions;
-using OpenBreed.Editor.VM.Maps;
-using OpenBreed.Editor.VM.Maps.Layers;
-using OpenBreed.Editor.VM.Tiles;
+﻿using OpenBreed.Editor.VM.Maps;
 using OpenBreed.Model.Actions;
-using System;
-using System.Collections.Generic;
+using OpenBreed.Model.Maps;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Renderer
 {
-    public class LayerActionRenderer : RendererBase<MapLayerBaseVM>
+    public class LayerActionRenderer : RendererBase<MapLayerModel>
     {
         #region Private Fields
 
@@ -31,9 +24,31 @@ namespace OpenBreed.Editor.VM.Renderer
 
         #region Public Methods
 
-        public override void Render(MapLayerBaseVM renderable)
+        public override void Render(MapLayerModel renderable)
         {
-            Render((MapLayerActionVM)renderable);
+            RectangleF viewRect = Target.ClipBounds;
+
+            //TODO: Get this from model
+            int tileSize = 16;
+            int xFrom, xTo, yFrom, yTo;
+            renderable.GetClipIndices(viewRect, out xFrom, out yFrom, out xTo, out yTo);
+
+            var actionSet = _actionsTool.Parent.ActionSet;
+
+            if (actionSet == null)
+                return;
+
+            for (int xIndex = xFrom; xIndex <= xTo; xIndex++)
+            {
+                for (int yIndex = yFrom; yIndex <= yTo; yIndex++)
+                {
+                    var propertyId = renderable.GetValue(xIndex, yIndex);
+                    var x = xIndex * tileSize;
+                    var y = yIndex * tileSize;
+
+                    DrawAction(actionSet, propertyId, x, y, tileSize);
+                }
+            }
         }
 
         #endregion Public Methods
@@ -53,35 +68,6 @@ namespace OpenBreed.Editor.VM.Renderer
             var image = action.Icon;
 
             Target.DrawImage(image, x, y, tileSize, tileSize);
-
-        }
-
-        private void Render(MapLayerActionVM renderable)
-        {
-            RectangleF viewRect = Target.ClipBounds;
-
-            int tileSize = renderable.Layout.Parent.TileSize;
-            int xFrom = renderable.Layout.GetMapIndexX(viewRect.Left);
-            int xTo = renderable.Layout.GetMapIndexX(viewRect.Right);
-            int yFrom = renderable.Layout.GetMapIndexY(viewRect.Top);
-            int yTo = renderable.Layout.GetMapIndexY(viewRect.Bottom);
-
-            var actionSet = _actionsTool.Parent.ActionSet;
-
-            if (actionSet == null)
-                return;
-
-            for (int xIndex = xFrom; xIndex <= xTo; xIndex++)
-            {
-                for (int yIndex = yFrom; yIndex <= yTo; yIndex++)
-                {
-                    var propertyId = renderable.GetCell(xIndex, yIndex);
-                    var x = xIndex * tileSize;
-                    var y = yIndex * tileSize;
-
-                    DrawAction(actionSet, propertyId, x, y, tileSize);
-                }
-            }
         }
 
         #endregion Private Methods

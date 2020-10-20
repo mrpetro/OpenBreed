@@ -36,7 +36,7 @@ namespace OpenBreed.Editor.VM.Maps.Commands
                 Point tileCoords = Operations[i].IndexCoords;
                 int tileId = Operations[i].TileIdAfter;
 
-                Inserter.Layer.SetCell(tileCoords.X, tileCoords.Y, new TileRef(0, tileId));
+                Inserter.Layer.SetValue(tileCoords.X, tileCoords.Y, tileId);
             }
 
             //Inserter.Model.Update();
@@ -49,7 +49,7 @@ namespace OpenBreed.Editor.VM.Maps.Commands
                 Point tileCoords = Operations[i].IndexCoords;
                 int tileId = Operations[i].TileIdBefore;
 
-                Inserter.Layer.SetCell(tileCoords.X, tileCoords.Y, new TileRef(0, tileId));
+                Inserter.Layer.SetValue(tileCoords.X, tileCoords.Y, tileId);
             }
 
             //Inserter.Model.Update();

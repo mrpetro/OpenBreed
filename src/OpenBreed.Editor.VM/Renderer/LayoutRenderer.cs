@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Editor.VM.Maps;
 using OpenBreed.Editor.VM.Maps.Layers;
+using OpenBreed.Model.Maps;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Renderer
 {
-    public class LayoutRenderer : RendererBase<MapLayoutVM>
+    public class LayoutRenderer : RendererBase<MapLayoutModel>
     {
         #region Private Fields
 
         private MapEditorVM _editor;
-        private Dictionary<Type, RendererBase<MapLayerBaseVM>> _layerRenderers;
+        private Dictionary<MapLayerType, RendererBase<MapLayerModel>> _layerRenderers;
 
         #endregion Private Fields
 
@@ -25,21 +26,21 @@ namespace OpenBreed.Editor.VM.Renderer
         {
             _editor = editor;
 
-            _layerRenderers = new Dictionary<Type, RendererBase<MapLayerBaseVM>>();
-            _layerRenderers.Add(typeof(MapLayerGfxVM), new LayerGfxRenderer(_editor.TilesTool, target));
-            _layerRenderers.Add(typeof(MapLayerActionVM), new LayerActionRenderer(_editor.ActionsTool, target));
+            _layerRenderers = new Dictionary<MapLayerType, RendererBase<MapLayerModel>>();
+            _layerRenderers.Add(MapLayerType.Gfx, new LayerGfxRenderer(_editor.TilesTool, target));
+            _layerRenderers.Add(MapLayerType.Action, new LayerActionRenderer(_editor.ActionsTool, target));
         }
 
         #endregion Public Constructors
 
         #region Public Methods
 
-        public override void Render(MapLayoutVM renderable)
+        public override void Render(MapLayoutModel renderable)
         {
             var visibleLayers = renderable.Layers.Where(item => item.IsVisible);
 
             foreach (var layer in visibleLayers)
-                _layerRenderers[layer.GetType()].Render(layer);
+                _layerRenderers[layer.LayerType].Render(layer);
         }
 
         #endregion Public Methods

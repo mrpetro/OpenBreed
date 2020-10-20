@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Renderer;
 using OpenBreed.Editor.VM.Tools;
+using OpenBreed.Model.Maps;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -41,7 +42,7 @@ namespace OpenBreed.Editor.VM.Maps
         public RenderTarget RenderTarget { get; }
         public MapViewCursorVM Cursor { get; }
 
-        public MapLayoutVM Layout => Parent.Layout;
+        public MapLayoutModel Layout => Parent.Layout;
 
         public MapEditorVM Parent { get; }
 
@@ -77,14 +78,14 @@ namespace OpenBreed.Editor.VM.Maps
 
         public void FitViewToBody(float width, float height)
         {
-            float scaleW = width / Layout.MaxCoordX;
-            float scaleH = height / Layout.MaxCoordY;
+            float scaleW = width / Layout.Bounds.Width;
+            float scaleH = height / Layout.Bounds.Height;
             float scale = Math.Min(scaleW, scaleH);
 
             if (scale == 0.0f)
                 scale = 1.0f;
 
-            CenterView(Layout.MaxCoordX / 2, Layout.MaxCoordY / 2, width, height, scale);
+            CenterView(Layout.Bounds.Width / 2, Layout.Bounds.Height / 2, width, height, scale);
         }
 
         public Point GetIndexCoords(Point point)
@@ -190,7 +191,7 @@ namespace OpenBreed.Editor.VM.Maps
             switch (name)
             {
                 case nameof(Layout):
-                    Title = "Map body - " + Layout.Parent.Title;
+                    //Title = "Map body - " + Layout.Parent.Title;
                     Refresh();
                     break;
                 case nameof(Transformation):

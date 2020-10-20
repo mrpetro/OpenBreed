@@ -56,11 +56,11 @@ namespace OpenBreed.Editor.VM.Maps
         {
             if ((cursor.Action == CursorActions.Move || cursor.Action == CursorActions.Down) && cursor.Buttons.HasFlag(CursorButtons.Left))
             {
-                var actionLayer = Parent.Layout.Layers.OfType<MapLayerActionVM>().FirstOrDefault();
+                var actionLayer = Parent.Layout.Layers.FirstOrDefault(item => item.LayerType == Model.Maps.MapLayerType.Action);
 
                 var actionCode = ActionsSelector.SelectedIndex;
 
-                actionLayer.SetCell(cursor.WorldIndexCoords.X, cursor.WorldIndexCoords.Y, actionCode);
+                actionLayer.SetValue(cursor.WorldIndexCoords.X, cursor.WorldIndexCoords.Y, actionCode);
             }
         }
 

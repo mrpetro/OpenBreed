@@ -66,7 +66,9 @@ namespace OpenBreed.Editor.VM.Maps
                     return;
 
                 foreach (var actionModel in Parent.Parent.ActionSet.Items)
+                {
                     Items.Add(new ActionVM(actionModel));
+                }
             });
         }
 

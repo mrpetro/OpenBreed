@@ -148,7 +148,10 @@
     <Compile Include="Palettes\PaletteFromMapEditorVM.cs" />
     <Compile Include="ParentEntryEditor.cs" />
     <Compile Include="Renderer\LayerActionRenderer.cs" />
+    <Compile Include="Renderer\TileSetRenderer.cs" />
+    <Compile Include="Renderer\TilesSelectorRenderer.cs" />
     <Compile Include="Renderer\LayerGfxRenderer.cs" />
+    <Compile Include="Renderer\TilesSelectorSelectionRenderer.cs" />
     <Compile Include="Renderer\TilesToolRenderer.cs" />
     <Compile Include="Renderer\ViewCursorRenderer.cs" />
     <Compile Include="Renderer\ViewRenderer.cs" />

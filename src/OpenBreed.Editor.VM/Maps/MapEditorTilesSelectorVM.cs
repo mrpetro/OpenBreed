@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Common;
+using OpenBreed.Editor.VM.Renderer;
 using OpenBreed.Model.Tiles;
 using System;
 using System.Collections.Generic;
@@ -22,14 +23,19 @@ namespace OpenBreed.Editor.VM.Maps
         #region Private Fields
 
         private string currentTileSetRef;
+        private TilesSelectorRenderer renderer;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public MapEditorTilesSelectorVM(MapEditorTilesToolVM parent)
+        public RenderTarget RenderTarget { get; }
+
+        public MapEditorTilesSelectorVM(MapEditorTilesToolVM parent, TilesSelectorRenderer renderer, RenderTarget renderTarget)
         {
             Parent = parent;
+            this.renderer = renderer;
+            RenderTarget = renderTarget;
             SelectedIndexes = new List<int>();
             SelectionRectangle = new SelectionRectangle();
             SelectMode = SelectModeEnum.Nothing;
@@ -46,6 +52,11 @@ namespace OpenBreed.Editor.VM.Maps
         {
             get { return currentTileSetRef; }
             set { SetProperty(ref currentTileSetRef, value); }
+        }
+
+        public void Resize(int width, int height)
+        {
+            RenderTarget.Resize(width, height);
         }
 
         public bool IsEmpty { get { return SelectedIndexes.Count == 0; } }
@@ -72,13 +83,10 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Methods
 
-        public void Draw(Graphics graphics)
+        public void Render(Graphics graphics)
         {
-            if (CurrentTileSet == null)
-                return;
-
-            Parent.Parent.DrawTileSet(graphics);
-            DrawSelection(graphics);
+            renderer.Render(this);
+            RenderTarget.Flush(graphics);
         }
 
         public void AddSelection(List<int> tileIdList)
@@ -96,33 +104,6 @@ namespace OpenBreed.Editor.VM.Maps
         public void ClearSelection()
         {
             SelectedIndexes.Clear();
-        }
-
-        //public void DrawTile(Graphics gfx, int tileId, float x, float y, int tileSize)
-        //{
-        //    if (tileId >= CurrentTileSet.Tiles.Count)
-        //        return;
-
-        //    var tileRect = CurrentTileSet.Tiles[tileId].Rectangle;
-        //    gfx.DrawImage(Parent.Parent.CurrentTilesBitmap, (int)x, (int)y, tileRect, GraphicsUnit.Pixel);
-        //}
-
-        public void DrawSelection(Graphics gfx)
-        {
-            Pen selectedPen = new Pen(Color.LightGreen);
-            Pen selectPen = new Pen(Color.LightBlue);
-            Pen deselectPen = new Pen(Color.Red);
-
-            for (int index = 0; index < SelectedIndexes.Count; index++)
-            {
-                var rectangle = CurrentTileSet.Tiles[SelectedIndexes[index]].Rectangle;
-                gfx.DrawRectangle(selectedPen, rectangle);
-            }
-
-            if (SelectMode == SelectModeEnum.Select)
-                gfx.DrawRectangle(selectPen, SelectionRectangle.GetRectangle(CurrentTileSet.TileSize));
-            else if (SelectMode == SelectModeEnum.Deselect)
-                gfx.DrawRectangle(deselectPen, SelectionRectangle.GetRectangle(CurrentTileSet.TileSize));
         }
 
         public List<int> GetTileIdList(Rectangle rectangle)

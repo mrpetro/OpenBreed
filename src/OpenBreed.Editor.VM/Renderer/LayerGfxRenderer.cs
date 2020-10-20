@@ -1,23 +1,19 @@
-﻿using OpenBreed.Model.Maps;
-using OpenBreed.Editor.VM.Maps.Layers;
-using OpenBreed.Editor.VM.Tiles;
+﻿using OpenBreed.Editor.VM.Maps;
+using OpenBreed.Model.Maps;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenBreed.Editor.VM.Maps;
-using OpenBreed.Model.Tiles;
 
 namespace OpenBreed.Editor.VM.Renderer
 {
-    public class LayerGfxRenderer : RendererBase<MapLayerBaseVM>
+    public class LayerGfxRenderer : RendererBase<MapLayerModel>
     {
-
-        #region Public Constructors
+        #region Private Fields
 
         private MapEditorTilesToolVM tilesTool;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public LayerGfxRenderer(MapEditorTilesToolVM tilesTool, RenderTarget target) : base(target)
         {
@@ -28,38 +24,28 @@ namespace OpenBreed.Editor.VM.Renderer
 
         #region Public Methods
 
-        public override void Render(MapLayerBaseVM renderable)
-        {
-            Render((MapLayerGfxVM)renderable);
-        }
-
-        #endregion Public Methods
-
-        #region Private Methods
-
-        private void Render(MapLayerGfxVM renderable)
+        public override void Render(MapLayerModel renderable)
         {
             RectangleF viewRect = Target.ClipBounds;
 
-            int tileSize = renderable.Layout.Parent.TileSize;
-            int xFrom = renderable.Layout.GetMapIndexX(viewRect.Left);
-            int xTo = renderable.Layout.GetMapIndexX(viewRect.Right);
-            int yFrom = renderable.Layout.GetMapIndexY(viewRect.Top);
-            int yTo = renderable.Layout.GetMapIndexY(viewRect.Bottom);
+            //TODO: Get this from model
+            int tileSize = 16;
+            int xFrom, xTo, yFrom, yTo;
+            renderable.GetClipIndices(viewRect, out xFrom, out yFrom, out xTo, out yTo);
 
             for (int xIndex = xFrom; xIndex <= xTo; xIndex++)
             {
                 for (int yIndex = yFrom; yIndex <= yTo; yIndex++)
                 {
-                    var tileRef = renderable.GetCell(xIndex, yIndex);
+                    var tileId = renderable.GetValue(xIndex, yIndex);
                     var x = xIndex * tileSize;
                     var y = yIndex * tileSize;
 
-                    tilesTool.Parent.DrawTile(Target, tileRef.TileId, x, y, tileSize);
+                    tilesTool.Parent.DrawTile(Target, tileId, x, y, tileSize);
                 }
             }
         }
 
-        #endregion Private Methods
+        #endregion Public Methods
     }
 }

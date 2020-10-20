@@ -5,6 +5,8 @@ using System.Drawing;
 
 namespace OpenBreed.Editor.VM.Actions
 {
+    public delegate bool VisibilityChangedEventHandler(ActionVM action, bool isVisible);
+
     public class ActionVM : BaseViewModel
     {
         #region Private Fields
@@ -32,6 +34,8 @@ namespace OpenBreed.Editor.VM.Actions
         #endregion Public Constructors
 
         #region Public Properties
+
+        public VisibilityChangedEventHandler VisibilityChanged { get; set; }
 
         public Color Color
         {
@@ -107,6 +111,7 @@ namespace OpenBreed.Editor.VM.Actions
 
                 case nameof(IsVisible):
                     model.Visibility = IsVisible;
+                    VisibilityChanged?.Invoke(this, IsVisible);
                     break;
 
                 case nameof(Id):

@@ -43,6 +43,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
             MouseDown += TileSelectorCtrl_MouseDown;
             MouseUp += TileSelectorCtrl_MouseUp;
             MouseMove += TileSelectorCtrl_MouseMove;
+            Resize += (s, a) => _vm.Resize(this.ClientSize.Width, this.ClientSize.Height);
 
             _vm.PropertyChanged += _vm_PropertyChanged;
 
@@ -58,7 +59,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
             if (_vm == null)
                 return;
 
-            _vm.Draw(e.Graphics);
+            _vm.Render(e.Graphics);
 
             base.OnPaint(e);
         }

@@ -46,13 +46,13 @@ namespace OpenBreed.Editor.VM.Maps
             UpdatePalettes = PalettesTool.UpdateList;
             PalettesTool.ModelChangeAction = OnPalettesModelChange;
 
-            var renderTarget = new Renderer.RenderTarget(1, 1);
-            var renderer = new ViewRenderer(this, renderTarget);
+            var mapViewRenderTarget = new RenderTarget(1, 1);
+            var renderer = new ViewRenderer(this, mapViewRenderTarget);
 
-            MapView = new MapEditorViewVM(this, renderer, renderTarget);
-            Layout = new MapLayoutVM(this);
+            MapView = new MapEditorViewVM(this, renderer, mapViewRenderTarget);
+            //LayoutVm = new MapLayoutVM(this);
             Properties = new LevelPropertiesVM(this);
-            Layout.PropertyChanged += (s, e) => OnPropertyChanged(nameof(Layout));
+            //LayoutVm.PropertyChanged += (s, e) => OnPropertyChanged(nameof(LayoutVm));
 
             InitializeTools();
 
@@ -62,7 +62,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Properties
 
-        public MapLayoutVM Layout { get; }
+        //public MapLayoutVM LayoutVm { get; }
         public Bitmap CurrentTilesBitmap { get; private set; }
 
         public Action<string> UpdateLayout { get; private set; }
@@ -96,6 +96,7 @@ namespace OpenBreed.Editor.VM.Maps
         public LevelPropertiesVM Properties { get; }
 
         internal List<PaletteModel> Palettes => Model.Palettes;
+        internal MapLayoutModel Layout => Model.Layout;
 
         public bool IsModified
         {
@@ -127,22 +128,6 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Methods
 
-        public void DrawTileSet(Graphics gfx)
-        {
-            var tileSize = Model.TileSet.TileSize;
-            int xMax = Model.TileSet.TilesNoX;
-            int yMax = Model.TileSet.TilesNoY;
-
-            for (int j = 0; j < yMax; j++)
-            {
-                for (int i = 0; i < xMax; i++)
-                {
-                    int gfxId = i + xMax * j;
-                    DrawTile(gfx, gfxId, i * tileSize, j * tileSize, tileSize);
-                }
-            }
-        }
-
         public void RenderDefaultTile(RenderTarget renderTarget, int tileId, float x, float y, int tileSize)
         {
             Font font = new Font("Arial", 5);
@@ -164,27 +149,6 @@ namespace OpenBreed.Editor.VM.Maps
             renderTarget.DrawString(string.Format("{0,2:D2}", tileId % 100), font, brush, x + 2, y + 7);
         }
 
-        public void RenderDefaultTile(Graphics gfx, int tileId, float x, float y, int tileSize)
-        {
-            Font font = new Font("Arial", 5);
-
-            var rectangle = new Rectangle((int)x, (int)y, tileSize, tileSize);
-
-            Color c = Color.Black;
-            Pen tileColor = new Pen(c);
-            Brush brush = new SolidBrush(c);
-
-            gfx.FillRectangle(brush, rectangle);
-
-            c = Color.White;
-            tileColor = new Pen(c);
-            brush = new SolidBrush(c);
-
-            gfx.DrawRectangle(tileColor, rectangle);
-            gfx.DrawString(string.Format("{0,2:D2}", tileId / 100), font, brush, x + 2, y + 1);
-            gfx.DrawString(string.Format("{0,2:D2}", tileId % 100), font, brush, x + 2, y + 7);
-        }
-
         public void DrawTile(RenderTarget renderTarget, int tileId, float x, float y, int tileSize)
         {
             if (Model.TileSet == null)
@@ -198,21 +162,6 @@ namespace OpenBreed.Editor.VM.Maps
 
             var tileRect = Model.TileSet.Tiles[tileId].Rectangle;
             renderTarget.DrawImage(CurrentTilesBitmap, (int)x, (int)y, tileRect);
-        }
-
-        public void DrawTile(Graphics gfx, int tileId, float x, float y, int tileSize)
-        {
-            if (Model.TileSet == null)
-            {
-                RenderDefaultTile(gfx, tileId, x, y, tileSize);
-                return;
-            }
-
-            if (tileId >= Model.TileSet.Tiles.Count)
-                return;
-
-            var tileRect = Model.TileSet.Tiles[tileId].Rectangle;
-            gfx.DrawImage(CurrentTilesBitmap, (int)x, (int)y, tileRect, GraphicsUnit.Pixel);
         }
 
         #endregion Public Methods
@@ -229,7 +178,7 @@ namespace OpenBreed.Editor.VM.Maps
 
             entry.ActionSetRef = ActionSetRef != null ? ActionSetRef : null;
 
-            Layout.ToMap(Model);
+            //LayoutVm.ToMap(Model);
         }
 
         protected override void UpdateVM(IMapEntry entry)
@@ -246,7 +195,7 @@ namespace OpenBreed.Editor.VM.Maps
             ActionSetRef = entry.ActionSetRef;
             ActionsTool.CurrentActionSetRef = entry.ActionSetRef;
 
-            Layout.FromMap(Model);
+            //LayoutVm.FromMap(Model);
             Properties.Load(Model);
 
             TilesTool.UpdateVM();
