@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 namespace OpenBreed.Model.Maps
@@ -10,17 +11,22 @@ namespace OpenBreed.Model.Maps
 
         internal MapLayoutModel(MapLayoutBuilder builder)
         {
+            CellSize = builder.CellSize;
             Width = builder.Width;
             Height = builder.Height;
             Layers = builder.Layers.Select(layer => layer.Build()).ToList();
+            Bounds = new RectangleF(0, 0, CellSize * Width, CellSize * Height);
         }
 
         #endregion Internal Constructors
 
         #region Public Properties
 
-        public int Width { get; set; }
-        public int Height { get; set; }
+        public RectangleF Bounds { get; }
+
+        public int CellSize { get; }
+        public int Width { get; }
+        public int Height { get; }
 
         public List<MapLayerModel> Layers { get; }
 

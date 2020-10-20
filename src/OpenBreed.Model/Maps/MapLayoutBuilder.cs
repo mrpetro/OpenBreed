@@ -16,7 +16,7 @@ namespace OpenBreed.Model.Maps
 
         #region Internal Properties
 
-
+        internal int CellSize { get; private set; }
         internal int Width { get; private set; }
         internal int Height { get; private set; }
 
@@ -29,6 +29,14 @@ namespace OpenBreed.Model.Maps
         public static MapLayoutBuilder NewMapLayoutModel()
         {
             return new MapLayoutBuilder();
+        }
+
+        public void SetCellSize(int cellSize)
+        {
+            if (cellSize == 0)
+                throw new InvalidOperationException("CellSize must have non zero positive values");
+
+            CellSize = cellSize;
         }
 
         public void SetSize(int width, int height)

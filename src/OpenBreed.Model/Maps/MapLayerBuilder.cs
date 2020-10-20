@@ -6,17 +6,14 @@ namespace OpenBreed.Model.Maps
     {
         #region Private Fields
 
-        private int width;
-        private int height;
-
         #endregion Private Fields
 
         #region Internal Constructors
 
         internal MapLayerBuilder(int width, int height, MapLayerType layerType)
         {
-            this.width = width;
-            this.height = height;
+            this.Width = width;
+            this.Height = height;
             LayerType = layerType;
             CellValues = new int[width * height];
         }
@@ -27,6 +24,8 @@ namespace OpenBreed.Model.Maps
 
         internal MapLayerType LayerType { get; }
         internal int[] CellValues { get; }
+        internal int Width { get; }
+        internal int Height { get; }
 
         #endregion Internal Properties
 
@@ -34,13 +33,13 @@ namespace OpenBreed.Model.Maps
 
         public void SetValue(int x, int y, int value)
         {
-            if (x < 0 || x >= width)
-                throw new ArgumentOutOfRangeException(nameof(x), x, $"Expected in range from 0 to {width - 1}");
+            if (x < 0 || x >= Width)
+                throw new ArgumentOutOfRangeException(nameof(x), x, $"Expected in range from 0 to {Width - 1}");
 
-            if (y < 0 || y >= height)
-                throw new ArgumentOutOfRangeException(nameof(y), y, $"Expected in range from 0 to {height - 1}");
+            if (y < 0 || y >= Height)
+                throw new ArgumentOutOfRangeException(nameof(y), y, $"Expected in range from 0 to {Height - 1}");
 
-            CellValues[y * width + x] = value;
+            CellValues[y * Width + x] = value;
         }
 
         public MapLayerModel Build()

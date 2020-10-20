@@ -177,6 +177,7 @@ namespace OpenBreed.Reader.Legacy.Maps.MAP
                 throw new InvalidDataException("Incorrect number of tiles in body (" + tilesNo + "). Expected: " + expectedTilesNo);
 
             var layout = MapBuilder.CreateLayout();
+            layout.SetCellSize(16);
             layout.SetSize(sizeX, sizeY);
             var gfxLayerBuilder = layout.AddLayer(MapLayerType.Gfx);
             var actionLayerBuilder = layout.AddLayer(MapLayerType.Action);
