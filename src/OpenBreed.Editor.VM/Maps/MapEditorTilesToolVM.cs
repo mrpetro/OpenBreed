@@ -55,6 +55,18 @@ namespace OpenBreed.Editor.VM.Maps
             RefIdEditor.PropertyChanged += EntryRef_PropertyChanged;
         }
 
+        internal void SetValue(Point tileCoords, int value)
+        {
+            var oldValue = Layer.GetValue(tileCoords.X, tileCoords.Y);
+
+            if (oldValue == value)
+                return;
+
+            Layer.SetValue(tileCoords.X, tileCoords.Y, value);
+
+            Parent.IsModified = true;
+        }
+
         #endregion Public Constructors
 
         #region Public Properties

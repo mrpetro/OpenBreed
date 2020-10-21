@@ -9,9 +9,9 @@ namespace OpenBreed.Editor.VM.Texts
     {
         #region Private Fields
 
-        private string _text;
+        private string text;
 
-        private string _dataRef;
+        private string dataRef;
 
         #endregion Private Fields
 
@@ -30,14 +30,14 @@ namespace OpenBreed.Editor.VM.Texts
 
         public string DataRef
         {
-            get { return _dataRef; }
-            set { SetProperty(ref _dataRef, value); }
+            get { return dataRef; }
+            set { SetProperty(ref dataRef, value); }
         }
 
         public string Text
         {
-            get { return _text; }
-            set { SetProperty(ref _text, value); }
+            get { return text; }
+            set { SetProperty(ref text, value); }
         }
 
         #endregion Public Properties

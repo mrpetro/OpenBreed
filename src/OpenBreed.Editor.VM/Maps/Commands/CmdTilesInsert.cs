@@ -31,15 +31,19 @@ namespace OpenBreed.Editor.VM.Maps.Commands
 
         public void Execute()
         {
+            //Inserter.StartModelUpdate();
+
             for (int i = 0; i < Operations.Count; i++)
             {
                 Point tileCoords = Operations[i].IndexCoords;
                 int tileId = Operations[i].TileIdAfter;
 
-                Inserter.Layer.SetValue(tileCoords.X, tileCoords.Y, tileId);
+                Inserter.SetValue(tileCoords, tileId);
             }
 
             //Inserter.Model.Update();
+
+            //Inserter.FinishModelUpdate();
         }
 
         public void UnExecute()

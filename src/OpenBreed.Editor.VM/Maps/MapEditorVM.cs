@@ -55,7 +55,6 @@ namespace OpenBreed.Editor.VM.Maps
             //LayoutVm.PropertyChanged += (s, e) => OnPropertyChanged(nameof(LayoutVm));
 
             InitializeTools();
-
         }
 
         #endregion Public Constructors
@@ -166,10 +165,6 @@ namespace OpenBreed.Editor.VM.Maps
 
         #endregion Public Methods
 
-        #region Internal Methods
-
-        #endregion Internal Methods
-
         #region Protected Methods
 
         protected override void UpdateEntry(IMapEntry entry)
@@ -199,6 +194,9 @@ namespace OpenBreed.Editor.VM.Maps
             Properties.Load(Model);
 
             TilesTool.UpdateVM();
+            ActionsTool.UpdateVM();
+
+            IsModified = false;
         }
 
         protected override void OnPropertyChanged(string name)

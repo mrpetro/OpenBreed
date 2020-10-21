@@ -1,9 +1,10 @@
 ﻿using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Editor.VM.Common;
-using OpenBreed.Editor.VM.Maps.Layers;
 using OpenBreed.Model.Actions;
+using OpenBreed.Model.Maps;
 using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 
 namespace OpenBreed.Editor.VM.Maps
@@ -42,6 +43,8 @@ namespace OpenBreed.Editor.VM.Maps
         public MapEditorVM Parent { get; }
         public Action<string> ModelChangeAction { get; internal set; }
 
+        public MapLayerModel Layer { get; private set; }
+
         #endregion Public Properties
 
         #region Internal Properties
@@ -52,16 +55,27 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Internal Methods
 
+        internal void SetValue(Point tileCoords, int value)
+        {
+            var oldValue = Layer.GetValue(tileCoords.X, tileCoords.Y);
+
+            if (oldValue == value)
+                return;
+
+            Layer.SetValue(tileCoords.X, tileCoords.Y, value);
+
+            Parent.IsModified = true;
+        }
+
         internal override void OnCursor(MapViewCursorVM cursor)
         {
             if ((cursor.Action == CursorActions.Move || cursor.Action == CursorActions.Down) && cursor.Buttons.HasFlag(CursorButtons.Left))
-            {
-                var actionLayer = Parent.Layout.Layers.FirstOrDefault(item => item.LayerType == Model.Maps.MapLayerType.Action);
+                SetValue(cursor.WorldIndexCoords, ActionsSelector.SelectedIndex);
+        }
 
-                var actionCode = ActionsSelector.SelectedIndex;
-
-                actionLayer.SetValue(cursor.WorldIndexCoords.X, cursor.WorldIndexCoords.Y, actionCode);
-            }
+        internal void UpdateVM()
+        {
+            Layer = Parent.Layout.Layers.FirstOrDefault(item => item.LayerType == Model.Maps.MapLayerType.Action);
         }
 
         #endregion Internal Methods
@@ -90,7 +104,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         private void UpdateModel()
         {
-             ModelChangeAction?.Invoke(CurrentActionSetRef);
+            ModelChangeAction?.Invoke(CurrentActionSetRef);
         }
 
         private void ActionEntryRef_PropertyChanged(object sender, PropertyChangedEventArgs e)

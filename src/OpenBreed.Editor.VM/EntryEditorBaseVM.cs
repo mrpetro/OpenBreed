@@ -2,7 +2,7 @@
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items;
 using System;
-using System.Runtime.CompilerServices;
+using System.Collections.Generic;
 
 namespace OpenBreed.Editor.VM
 {
@@ -10,6 +10,7 @@ namespace OpenBreed.Editor.VM
     {
         #region Private Fields
 
+        private static readonly HashSet<string> propertyNamesIgnoredForChanges = new HashSet<string>();
         private E _edited;
         private E _next;
         private E _previous;
@@ -34,10 +35,6 @@ namespace OpenBreed.Editor.VM
         }
 
         #endregion Protected Constructors
-
-        #region Public Properties
-
-        #endregion Public Properties
 
         #region Public Methods
 
@@ -69,7 +66,6 @@ namespace OpenBreed.Editor.VM
         {
             var entry = _repository.GetById(id);
             EditEntry(entry);
-            EditMode = true;
         }
 
         public override void EditNextEntry()
@@ -92,10 +88,21 @@ namespace OpenBreed.Editor.VM
 
         #region Protected Methods
 
+        protected static void IgnoreProperty(string propertyName)
+        {
+            propertyNamesIgnoredForChanges.Add(propertyName);
+        }
+
         protected virtual void UpdateEntry(E target)
         {
             target.Id = Id;
             target.Description = Description;
+        }
+
+        static EntryEditorBaseVM()
+        {
+            IgnoreProperty(nameof(CommitEnabled));
+            IgnoreProperty(nameof(RevertEnabled));
         }
 
         protected virtual void UpdateVM(E source)
@@ -106,21 +113,36 @@ namespace OpenBreed.Editor.VM
 
         protected override void OnPropertyChanged(string name)
         {
-            var canCommit = true;
-
-            switch (name)
+            if (!propertyNamesIgnoredForChanges.Contains(name) && changesTrackingEnabled)
             {
-                case nameof(Id):
-                    canCommit = IsIdUnique();
-                    break;
+                var canCommit = true;
 
-                default:
-                    break;
+                switch (name)
+                {
+                    case nameof(Id):
+                        canCommit = IsIdUnique();
+                        break;
+
+                    default:
+                        break;
+                }
+
+                CommitEnabled = canCommit;
             }
 
-            CommitEnabled = canCommit;
-
             base.OnPropertyChanged(name);
+        }
+
+        private bool changesTrackingEnabled;
+
+        protected virtual void DisableChangesTracking()
+        {
+            changesTrackingEnabled = false;
+        }
+
+        protected virtual void EnableChangesTracking()
+        {
+            changesTrackingEnabled = true;
         }
 
         #endregion Protected Methods
@@ -137,14 +159,6 @@ namespace OpenBreed.Editor.VM
             return false;
         }
 
-        protected virtual void DisableChangesTracking()
-        {
-        }
-
-        protected virtual void EnableChangesTracking()
-        {
-        }
-
         private void EditEntry(E entry)
         {
             DisableChangesTracking();
@@ -155,11 +169,11 @@ namespace OpenBreed.Editor.VM
 
             UpdateVM(entry);
 
-            EnableChangesTracking();
-
             UpdateControls();
 
+            EditMode = true;
             CommitEnabled = false;
+            EnableChangesTracking();
         }
 
         private void UpdateControls()

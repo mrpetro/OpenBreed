@@ -31,6 +31,20 @@ namespace OpenBreed.Editor.VM
             private set { SetProperty(ref subeditor, value); }
         }
 
+        //protected override void OnPropertyChanged(string name)
+        //{
+        //    switch (name)
+        //    {
+        //        case nameof(Subeditor):
+
+        //            break;
+        //        default:
+        //            break;
+        //    }
+
+        //    base.OnPropertyChanged(name);
+        //}
+
         public override string EditorName { get; }
 
         #endregion Public Properties
@@ -46,13 +60,26 @@ namespace OpenBreed.Editor.VM
 
         #region Protected Methods
 
+
+
         protected override void UpdateVM(E source)
         {
+            void SubmodelPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+            {
+                OnPropertyChanged(e.PropertyName);
+            }
+
+            if (Subeditor != null)
+                Subeditor.PropertyChanged -= SubmodelPropertyChanged;
+
             Subeditor = CreateSubeditor(source);
 
             base.UpdateVM(source);
             Subeditor.UpdateVM(source);
+
+            Subeditor.PropertyChanged += SubmodelPropertyChanged;
         }
+
 
         protected override void UpdateEntry(E target)
         {
