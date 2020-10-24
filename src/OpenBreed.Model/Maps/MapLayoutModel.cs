@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace OpenBreed.Model.Maps
 {
-    public class MapLayoutModel
+    public class MapLayoutModel : IMapLayoutModel
     {
         #region Internal Constructors
 
@@ -34,7 +34,13 @@ namespace OpenBreed.Model.Maps
 
         #region Public Methods
 
-        public MapCellModel GetCell(int x, int y)
+        public int GetLayerIndex(MapLayerType layerType)
+        {
+            var layer = Layers.First(item => item.LayerType == layerType);
+            return Layers.IndexOf(layer);
+        }
+
+        public int[] GetCellValues(int x, int y)
         {
             if (x > Width)
                 throw new ArgumentOutOfRangeException(nameof(x), x, $"Expecting 0 <= x < {Width}");
@@ -47,7 +53,7 @@ namespace OpenBreed.Model.Maps
             for (int i = 0; i < Layers.Count; i++)
                 values[i] = Layers[i].GetCellValue(valueIndex);
 
-            return new MapCellModel(x, y, values);
+            return values;
         }
 
         #endregion Public Methods

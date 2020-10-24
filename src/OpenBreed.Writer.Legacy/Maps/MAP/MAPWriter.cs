@@ -1,26 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using OpenBreed.Common.Tools;
+using OpenBreed.Model.Maps;
+using OpenBreed.Model.Maps.Blocks;
+using OpenBreed.Reader.Legacy.Maps.MAP;
+using OpenBreed.Writer.Interface.Maps;
+using System;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.IO;
-using OpenBreed.Model.Maps.Blocks;
-using OpenBreed.Model.Maps;
-using OpenBreed.Reader.Legacy.Maps.MAP;
-using OpenBreed.Common.Tools;
-using OpenBreed.Writer.Interface.Maps;
 
 namespace OpenBreed.Writer.Legacy.Maps.MAP
 {
     public class MAPWriter : IMapModelWriter, IDisposable
     {
-        #region Private Fields
-
-        private readonly BigEndianBinaryWriter _binWriter;
-
-        #endregion Private Fields
+        #region Public Fields
 
         public readonly MAPFormat Format;
 
+        #endregion Public Fields
+
+        #region Private Fields
+
+        private const string XBLK = "XBLK";
+        private const string YBLK = "YBLK";
+        private const string XOFC = "XOFC";
+        private const string YOFC = "YOFC";
+        private const string XOFM = "XOFM";
+        private const string YOFM = "YOFM";
+        private const string XOFA = "XOFA";
+        private const string YOFA = "YOFA";
+        private const string IFFP = "IFFP";
+        private const string ALTM = "ALTM";
+        private const string ALTP = "ALTP";
+        private const string CMAP = "CMAP";
+        private const string ALCM = "ALCM";
+        private const string CCCI = "CCCI";
+        private const string CCIN = "CCIN";
+        private const string CSIN = "CSIN";
+        private const string MTXT = "MTXT";
+        private const string LCTX = "LCTX";
+        private const string NOT1 = "NOT1";
+        private const string NOT2 = "NOT2";
+        private const string NOT3 = "NOT3";
+        private const string BODY = "BODY";
+
+        private readonly BigEndianBinaryWriter _binWriter;
+
+        private readonly CellValueGetter GetCellValue;
+
+        #endregion Private Fields
 
         #region Public Constructors
 
@@ -31,98 +58,114 @@ namespace OpenBreed.Writer.Legacy.Maps.MAP
 
             Format = format;
 
+            if (Format == MAPFormat.ABSE)
+                GetCellValue = GetABSEBodyCellValue;
+            else
+                GetCellValue = GetABTABodyCellValue;
+
             //Don't call Dispode of this Writer for stream to stay opened
             _binWriter = new BigEndianBinaryWriter(stream);
         }
 
         #endregion Public Constructors
 
+        #region Private Delegates
+
+        private delegate int CellValueGetter(int actionId, int gfxId);
+
+        #endregion Private Delegates
+
         #region Public Methods
 
         public void Dispose()
         {
-
         }
 
         public void Write(MapModel map)
         {
             WriteHeader(map);
 
+            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == XBLK));
+            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == YBLK));
+            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == XOFC));
+            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == YOFC));
+            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == XOFM));
+            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == YOFM));
+            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == XOFA));
+            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == YOFA));
 
-            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == "XBLK"));
-            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == "YBLK"));
-            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == "XOFC"));
-            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == "YOFC"));
-            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == "XOFM"));
-            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == "YOFM"));
-            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == "XOFA"));
-            WriteUInt32Block(map.Blocks.OfType<MapUInt32Block>().First(item => item.Name == "YOFA"));
+            WriteStringBlock(map.Blocks.OfType<MapStringBlock>().First(item => item.Name == IFFP));
+            WriteStringBlock(map.Blocks.OfType<MapStringBlock>().First(item => item.Name == ALTM));
+            WriteStringBlock(map.Blocks.OfType<MapStringBlock>().First(item => item.Name == ALTP));
 
-            WriteStringBlock(map.Blocks.OfType<MapStringBlock>().First(item => item.Name == "IFFP"));
-            WriteStringBlock(map.Blocks.OfType<MapStringBlock>().First(item => item.Name == "ALTM"));
-            WriteStringBlock(map.Blocks.OfType<MapStringBlock>().First(item => item.Name == "ALTP"));
+            WritePaletteBlock(map.Blocks.OfType<MapPaletteBlock>().First(item => item.Name == CMAP));
+            WritePaletteBlock(map.Blocks.OfType<MapPaletteBlock>().First(item => item.Name == ALCM));
 
-            WritePaletteBlock(map.Blocks.OfType<MapPaletteBlock>().First(item => item.Name == "CMAP"));
-            WritePaletteBlock(map.Blocks.OfType<MapPaletteBlock>().First(item => item.Name == "ALCM"));
-
-            WriteBytesBlock(map.Blocks.OfType<MapUnknownBlock>().First(item => item.Name == "CCCI"));
-            WriteBytesBlock(map.Blocks.OfType<MapUnknownBlock>().First(item => item.Name == "CCIN"));
-            WriteBytesBlock(map.Blocks.OfType<MapUnknownBlock>().First(item => item.Name == "CSIN"));
+            WriteBytesBlock(map.Blocks.OfType<MapUnknownBlock>().First(item => item.Name == CCCI));
+            WriteBytesBlock(map.Blocks.OfType<MapUnknownBlock>().First(item => item.Name == CCIN));
+            WriteBytesBlock(map.Blocks.OfType<MapUnknownBlock>().First(item => item.Name == CSIN));
 
             var missionBlock = map.Blocks.OfType<MapMissionBlock>().FirstOrDefault();
             if (missionBlock != null)
                 WriteMissionBlock(missionBlock);
 
-            var mtxtBlock = map.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == "MTXT");
+            var mtxtBlock = map.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == MTXT);
             if (mtxtBlock != null)
                 WriteTextBlock(mtxtBlock);
 
-            var lctxBlock = map.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == "LCTX");
+            var lctxBlock = map.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == LCTX);
             if (lctxBlock != null)
                 WriteTextBlock(lctxBlock);
 
-            var not1Block = map.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == "NOT1");
+            var not1Block = map.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == NOT1);
             if (not1Block != null)
                 WriteTextBlock(not1Block);
 
-            var not2Block = map.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == "NOT2");
+            var not2Block = map.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == NOT2);
             if (not2Block != null)
                 WriteTextBlock(not2Block);
 
-            var not3Block = map.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == "NOT3");
+            var not3Block = map.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == NOT3);
             if (not3Block != null)
                 WriteTextBlock(not3Block);
 
-            WriteBodyBlock(map.Blocks.OfType<MapBodyBlock>().First(item => item.Name == "BODY"));
+            WriteBodyBlock(map);
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void WriteBodyBlock(MapBodyBlock block)
+        private int GetABSEBodyCellValue(int actionId, int gfxId)
         {
-            _binWriter.Write(Encoding.ASCII.GetBytes(block.Name));
-            _binWriter.Write((UInt32)(block.Cells.Length * 2));
+            return (gfxId << 9) | (actionId << 7) >> 7;
+        }
 
-            if (Format == MAPFormat.ABSE)
+        private int GetABTABodyCellValue(int actionId, int gfxId)
+        {
+            return (gfxId << 6) | (actionId << 10) >> 10;
+        }
+
+        private void WriteBodyBlock(MapModel map)
+        {
+            var layout = map.Layout;
+            var blockName = BODY;
+            var blockSize = layout.Width * layout.Height * 2;
+            var actionLayerIndex = layout.GetLayerIndex(MapLayerType.Action);
+            var gfxLayerIndex = layout.GetLayerIndex(MapLayerType.Gfx);
+
+            _binWriter.Write(Encoding.ASCII.GetBytes(blockName));
+            _binWriter.Write(Convert.ToUInt32(blockSize));
+
+            for (int y = 0; y < layout.Height; y++)
             {
-                for (int i = 0; i < block.Cells.Length; i++)
+                for (int x = 0; x < layout.Width; x++)
                 {
-                    var gfxId = block.Cells[i].GfxId;
-                    var actionId = block.Cells[i].ActionId;
-                    var value = (UInt16)((gfxId << 9) | (actionId << 7) >> 7);
-                    _binWriter.Write(value);
-                }
-            }
-            else
-            {
-                for (int i = 0; i < block.Cells.Length; i++)
-                {
-                    var gfxId = block.Cells[i].GfxId;
-                    var actionId = block.Cells[i].ActionId;
-                    var value = (UInt16)((gfxId << 6) | (actionId << 10) >> 10);
-                    _binWriter.Write(value);
+                    var cellValues = layout.GetCellValues(x, y);
+                    var actionId = cellValues[actionLayerIndex];
+                    var gfxId = cellValues[gfxLayerIndex];
+                    var value = GetCellValue(actionId, gfxId);
+                    _binWriter.Write(Convert.ToUInt16(value));
                 }
             }
         }
