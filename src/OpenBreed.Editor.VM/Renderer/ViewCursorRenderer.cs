@@ -28,7 +28,7 @@ namespace OpenBreed.Editor.VM.Renderer
             if (!renderable.Visible)
                 return;
 
-            Target.DrawRectangle(System.Drawing.Pens.Red, new Rectangle(renderable.WorldCoords, new Size(16, 16)));
+            Target.DrawRectangle(System.Drawing.Pens.Red, new Rectangle(renderable.WorldSnapCoords, new Size(16, 16)));
         }
 
         #endregion Public Constructors

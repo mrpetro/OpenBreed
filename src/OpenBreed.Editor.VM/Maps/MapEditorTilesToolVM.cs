@@ -3,7 +3,6 @@ using OpenBreed.Database.Interface.Items.Tiles;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Common;
 using OpenBreed.Editor.VM.Maps.Commands;
-using OpenBreed.Editor.VM.Maps.Layers;
 using OpenBreed.Editor.VM.Renderer;
 using OpenBreed.Editor.VM.Tiles;
 using OpenBreed.Model.Maps;

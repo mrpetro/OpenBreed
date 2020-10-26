@@ -27,11 +27,9 @@ namespace OpenBreed.Editor.VM.Maps
             RenderTarget = renderTarget;
 
             Transformation = new Matrix();
-            Cursor = new MapViewCursorVM();
+            Cursor = new MapViewCursorVM(Parent);
 
-            Cursor.CalculateWorldCoordsFunc = GetWorldSnapCoords;
-            Cursor.CalculateWorldIndexCoordsFunc = GetIndexCoords;
-
+            Cursor.ToWorldCoordsFunc = ToWorldCoords;
             Cursor.PropertyChanged += Cursor_PropertyChanged;
         }
 
@@ -88,24 +86,12 @@ namespace OpenBreed.Editor.VM.Maps
             CenterView(Layout.Bounds.Width / 2, Layout.Bounds.Height / 2, width, height, scale);
         }
 
-        public Point GetIndexCoords(Point point)
-        {
-            return new Point(point.X / 16, point.Y / 16);
-        }
-
         public void Resize(int width, int height)
         {
             RenderTarget.Resize(width, height);
         }
 
-        public Point GetWorldSnapCoords(Point point)
-        {
-            var worldCoords = GetWorldCoords(point);
-
-            return new Point((worldCoords.X / 16) * 16, (worldCoords.Y / 16) * 16);
-        }
-
-        public Point GetWorldCoords(Point viewCoords)
+        public Point ToWorldCoords(Point viewCoords)
         {
             Matrix invMatrix = Transformation.Clone();
             invMatrix.Invert();
@@ -117,7 +103,7 @@ namespace OpenBreed.Editor.VM.Maps
             return clipPoints[0];
         }
 
-        public PointF GetWorldCoords(PointF viewCoords)
+        public PointF ToWorldCoords(PointF viewCoords)
         {
             Matrix invMatrix = Transformation.Clone();
             invMatrix.Invert();

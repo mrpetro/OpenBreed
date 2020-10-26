@@ -34,10 +34,12 @@
             this.TilesTool = new OpenBreed.Editor.UI.WinForms.Controls.Maps.MapEditorTilesToolCtrl();
             this.TabActions = new System.Windows.Forms.TabPage();
             this.ActionsTool = new OpenBreed.Editor.UI.WinForms.Controls.Maps.MapEditorActionsToolCtrl();
-            this.TabTemplates = new System.Windows.Forms.TabPage();
             this.TabPalettes = new System.Windows.Forms.TabPage();
             this.PalettesTool = new OpenBreed.Editor.UI.WinForms.Controls.Maps.MapEditorPalettesToolCtrl();
+            this.TabTemplates = new System.Windows.Forms.TabPage();
             this.MainSplit = new System.Windows.Forms.SplitContainer();
+            this.Status = new System.Windows.Forms.StatusStrip();
+            this.CursorPosInfoLbl = new OpenBreed.Common.UI.WinForms.Controls.ToolStripStatusLabelEx();
             this.SideSplit = new System.Windows.Forms.SplitContainer();
             this.GrpLayers = new System.Windows.Forms.GroupBox();
             this.GrpTools = new System.Windows.Forms.GroupBox();
@@ -49,6 +51,7 @@
             this.MainSplit.Panel1.SuspendLayout();
             this.MainSplit.Panel2.SuspendLayout();
             this.MainSplit.SuspendLayout();
+            this.Status.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SideSplit)).BeginInit();
             this.SideSplit.Panel1.SuspendLayout();
             this.SideSplit.Panel2.SuspendLayout();
@@ -61,7 +64,7 @@
             this.MapView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MapView.Location = new System.Drawing.Point(0, 0);
             this.MapView.Name = "MapView";
-            this.MapView.Size = new System.Drawing.Size(437, 456);
+            this.MapView.Size = new System.Drawing.Size(437, 432);
             this.MapView.TabIndex = 0;
             // 
             // ToolTabs
@@ -115,16 +118,6 @@
             this.ActionsTool.Size = new System.Drawing.Size(343, 272);
             this.ActionsTool.TabIndex = 0;
             // 
-            // TabTemplates
-            // 
-            this.TabTemplates.Location = new System.Drawing.Point(4, 22);
-            this.TabTemplates.Name = "TabTemplates";
-            this.TabTemplates.Padding = new System.Windows.Forms.Padding(3);
-            this.TabTemplates.Size = new System.Drawing.Size(349, 278);
-            this.TabTemplates.TabIndex = 3;
-            this.TabTemplates.Text = "Templates";
-            this.TabTemplates.UseVisualStyleBackColor = true;
-            // 
             // TabPalettes
             // 
             this.TabPalettes.Controls.Add(this.PalettesTool);
@@ -143,6 +136,16 @@
             this.PalettesTool.Size = new System.Drawing.Size(349, 278);
             this.PalettesTool.TabIndex = 0;
             // 
+            // TabTemplates
+            // 
+            this.TabTemplates.Location = new System.Drawing.Point(4, 22);
+            this.TabTemplates.Name = "TabTemplates";
+            this.TabTemplates.Padding = new System.Windows.Forms.Padding(3);
+            this.TabTemplates.Size = new System.Drawing.Size(349, 278);
+            this.TabTemplates.TabIndex = 3;
+            this.TabTemplates.Text = "Templates";
+            this.TabTemplates.UseVisualStyleBackColor = true;
+            // 
             // MainSplit
             // 
             this.MainSplit.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -154,6 +157,7 @@
             // MainSplit.Panel1
             // 
             this.MainSplit.Panel1.Controls.Add(this.MapView);
+            this.MainSplit.Panel1.Controls.Add(this.Status);
             // 
             // MainSplit.Panel2
             // 
@@ -162,6 +166,28 @@
             this.MainSplit.Size = new System.Drawing.Size(812, 460);
             this.MainSplit.SplitterDistance = 441;
             this.MainSplit.TabIndex = 2;
+            // 
+            // Status
+            // 
+            this.Status.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CursorPosInfoLbl});
+            this.Status.Location = new System.Drawing.Point(0, 432);
+            this.Status.Name = "Status";
+            this.Status.Size = new System.Drawing.Size(437, 24);
+            this.Status.TabIndex = 4;
+            this.Status.Text = "statusStrip1";
+            // 
+            // CursorPosInfoLbl
+            // 
+            this.CursorPosInfoLbl.AutoSize = false;
+            this.CursorPosInfoLbl.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.CursorPosInfoLbl.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
+            this.CursorPosInfoLbl.Name = "CursorPosInfoLbl";
+            this.CursorPosInfoLbl.Size = new System.Drawing.Size(100, 19);
+            this.CursorPosInfoLbl.Text = "0, 0";
+            this.CursorPosInfoLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // SideSplit
             // 
@@ -215,9 +241,12 @@
             this.TabActions.ResumeLayout(false);
             this.TabPalettes.ResumeLayout(false);
             this.MainSplit.Panel1.ResumeLayout(false);
+            this.MainSplit.Panel1.PerformLayout();
             this.MainSplit.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MainSplit)).EndInit();
             this.MainSplit.ResumeLayout(false);
+            this.Status.ResumeLayout(false);
+            this.Status.PerformLayout();
             this.SideSplit.Panel1.ResumeLayout(false);
             this.SideSplit.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SideSplit)).EndInit();
@@ -242,5 +271,7 @@
         private MapEditorTilesToolCtrl TilesTool;
         private System.Windows.Forms.TabPage TabPalettes;
         private MapEditorPalettesToolCtrl PalettesTool;
+        private System.Windows.Forms.StatusStrip Status;
+        private OpenBreed.Common.UI.WinForms.Controls.ToolStripStatusLabelEx CursorPosInfoLbl;
     }
 }

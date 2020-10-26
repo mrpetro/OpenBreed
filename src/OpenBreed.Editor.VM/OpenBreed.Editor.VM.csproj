@@ -187,9 +187,6 @@
     <Compile Include="Maps\Helpers\TileInsertOperation.cs" />
     <Compile Include="Maps\Helpers\TilesInserter.cs" />
     <Compile Include="Maps\MapEditorVM.cs" />
-    <Compile Include="Maps\Layers\MapLayerBaseVM.cs" />
-    <Compile Include="Maps\Layers\MapLayerGfxVM.cs" />
-    <Compile Include="Maps\Layers\MapLayerActionVM.cs" />
     <Compile Include="Maps\MapEditorViewVM.cs" />
     <Compile Include="Maps\MapLayoutVM.cs" />
     <Compile Include="Maps\LevelPropertiesVM.cs" />
@@ -251,7 +248,9 @@
       <Name>OpenBreed.Editor.Cfg</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Maps\Layers\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

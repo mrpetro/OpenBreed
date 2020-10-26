@@ -1,11 +1,7 @@
 ﻿using OpenBreed.Editor.VM.Base;
+using OpenBreed.Model.Maps;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Maps
 {
@@ -29,68 +25,88 @@ namespace OpenBreed.Editor.VM.Maps
 
     public class MapViewCursorVM : BaseViewModel
     {
+        #region Public Fields
+
+        public Action<MapViewCursorVM> UpdateAction;
+
+        #endregion Public Fields
 
         #region Private Fields
-        private CursorActions _action;
-        private CursorButtons _buttons;
-        private Point _viewCoords;
-        private bool _visible;
-        private Point _worldCoords;
-        private Point _worldIndexCoords;
+
+        private CursorActions action;
+        private CursorButtons buttons;
+        private Point viewCoords;
+        private bool visible;
+        private Point worldCoords;
+        private Point worldIndexCoords;
+        private string info;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public MapViewCursorVM()
+        public MapViewCursorVM(MapEditorVM parent)
         {
-            PropertyChanged += This_PropertyChanged;
+            Parent = parent;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public Action<MapViewCursorVM> UpdateAction;
+        public MapLayoutModel Layout => Parent.Layout;
+        public MapEditorVM Parent { get; }
 
-        public Func<Point, Point> CalculateWorldCoordsFunc { get; set; }
-
-        public Func<Point, Point> CalculateWorldIndexCoordsFunc { get; set; }
+        public Func<Point, Point> ToWorldCoordsFunc { get; set; }
 
         public CursorActions Action
         {
-            get { return _action; }
-            private set { SetProperty(ref _action, value); }
+            get { return action; }
+            private set { SetProperty(ref action, value); }
         }
 
         public CursorButtons Buttons
         {
-            get { return _buttons; }
-            private set { SetProperty(ref _buttons, value); }
+            get { return buttons; }
+            private set { SetProperty(ref buttons, value); }
         }
 
         public Point ViewCoords
         {
-            get { return _viewCoords; }
-            private set { SetProperty(ref _viewCoords, value); }
+            get { return viewCoords; }
+            private set { SetProperty(ref viewCoords, value); }
         }
 
         public bool Visible
         {
-            get { return _visible; }
-            private set { SetProperty(ref _visible, value); }
+            get { return visible; }
+            private set { SetProperty(ref visible, value); }
         }
 
         public Point WorldCoords
         {
-            get { return _worldCoords; }
-            set { SetProperty(ref _worldCoords, value); }
+            get { return worldCoords; }
+            set { SetProperty(ref worldCoords, value); }
+        }
+
+        public Point WorldSnapCoords
+        {
+            get
+            {
+                return new Point(WorldIndexCoords.X * Layout.CellSize, WorldIndexCoords.Y * Layout.CellSize);
+            }
+        }
+
+        public string Info
+        {
+            get { return info; }
+            set { SetProperty(ref info, value); }
         }
 
         public Point WorldIndexCoords
         {
-            get { return _worldIndexCoords; }
-            set { SetProperty(ref _worldIndexCoords, value); }
+            get { return worldIndexCoords; }
+            set { SetProperty(ref worldIndexCoords, value); }
         }
 
         #endregion Public Properties
@@ -145,19 +161,47 @@ namespace OpenBreed.Editor.VM.Maps
 
         #endregion Public Methods
 
-        #region Private Methods
+        #region Protected Methods
 
-        private void This_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        protected override void OnPropertyChanged(string name)
         {
-            switch (e.PropertyName)
+            switch (name)
             {
                 case nameof(ViewCoords):
-                    WorldCoords = CalculateWorldCoordsFunc(ViewCoords);
-                    WorldIndexCoords = CalculateWorldIndexCoordsFunc(WorldCoords);
+                    WorldCoords = GetWorldCoords(ViewCoords);
+                    WorldIndexCoords = Layout.GetIndexPoint(WorldCoords);
+
+                    Info = $"{WorldCoords.X}, {WorldCoords.Y} ({WorldIndexCoords.X}, {WorldIndexCoords.Y})";
                     break;
+
+                case nameof(WorldCoords):
+                    Visible = Layout.IndexBounds.Contains(WorldIndexCoords);
+                    break;
+
                 default:
                     break;
             }
+
+            base.OnPropertyChanged(name);
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
+
+        private Point GetWorldCoords(Point point)
+        {
+            var cellSize = Layout.CellSize;
+            var worldCoords = ToWorldCoordsFunc(point);
+            return worldCoords;
+        }
+
+        private Point GetWorldSnapCoords(Point point)
+        {
+            var cellSize = Layout.CellSize;
+            var worldCoords = ToWorldCoordsFunc(point);
+
+            return new Point((worldCoords.X / cellSize) * cellSize, (worldCoords.Y / cellSize) * cellSize);
         }
 
         #endregion Private Methods
