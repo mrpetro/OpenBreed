@@ -76,6 +76,19 @@
     <Compile Include="Controls\TextConsoleCtrl.Designer.cs">
       <DependentUpon>TextConsoleCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ToolStripButtonEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ToolStripMenuItemEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ToolStripProgressBarEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ToolStripStatusLabelEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

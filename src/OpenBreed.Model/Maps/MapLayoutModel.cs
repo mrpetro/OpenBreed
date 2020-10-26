@@ -16,6 +16,7 @@ namespace OpenBreed.Model.Maps
             Height = builder.Height;
             Layers = builder.Layers.Select(layer => layer.Build()).ToList();
             Bounds = new RectangleF(0, 0, CellSize * Width, CellSize * Height);
+            IndexBounds = GetIndexRectangle(Bounds);
         }
 
         #endregion Internal Constructors
@@ -23,6 +24,7 @@ namespace OpenBreed.Model.Maps
         #region Public Properties
 
         public RectangleF Bounds { get; }
+        public Rectangle IndexBounds { get; }
 
         public int CellSize { get; }
         public int Width { get; }
@@ -38,6 +40,25 @@ namespace OpenBreed.Model.Maps
         {
             var layer = Layers.First(item => item.LayerType == layerType);
             return Layers.IndexOf(layer);
+        }
+
+        public Rectangle GetIndexRectangle(RectangleF rect)
+        {
+            return new Rectangle((int)(rect.X / CellSize), (int)(rect.Y / CellSize), (int)(rect.Width / CellSize), (int)(rect.Height / CellSize));
+        }
+
+        public Point GetIndexPoint(Point point)
+        {
+            var x = point.X / CellSize;
+            var y = point.Y / CellSize;
+
+            if (point.X < 0)
+                x--;
+
+            if (point.Y < 0)
+                y--;
+
+            return new Point(x, y);
         }
 
         public int[] GetCellValues(int x, int y)

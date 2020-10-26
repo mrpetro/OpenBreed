@@ -183,7 +183,7 @@ namespace OpenBreed.Reader.Legacy.Maps.MAP
             var actionLayerBuilder = layout.AddLayer(MapLayerType.Action);
 
 
-            var bodyBlock = new MapBodyBlock(tilesNo);
+            //var bodyBlock = new MapBodyBlock(tilesNo);
 
             for (int i = 0; i < tilesNo; i++)
             {
@@ -208,14 +208,14 @@ namespace OpenBreed.Reader.Legacy.Maps.MAP
                 gfxLayerBuilder.SetValue(x, y, gfxId);
                 actionLayerBuilder.SetValue(x, y, actionId);
 
-                bodyBlock.Cells[i].GfxId = gfxId;
-                bodyBlock.Cells[i].ActionId = actionId;
+                //bodyBlock.Cells[i].GfxId = gfxId;
+                //bodyBlock.Cells[i].ActionId = actionId;
             }
 
 
 
 
-            MapBuilder.AddBlock(bodyBlock);
+            //MapBuilder.AddBlock(bodyBlock);
         }
 
         private void ReadBytesBlock(string name, BigEndianBinaryReader binReader)
