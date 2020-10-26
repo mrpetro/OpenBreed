@@ -33,24 +33,20 @@ namespace OpenBreed.Editor.VM.Logging
 
         #region Public Methods
 
-        public static Color GetMessageTypeColor(LogType type)
+        public static Color GetMessageTypeColor(LogLevel level)
         {
-            switch (type)
+            switch (level)
             {
-                case LogType.Critical:
-                    return Color.Red;
-                case LogType.Error:
-                    return Color.Red;
-                case LogType.Warning:
-                    return Color.Gold;
-                case LogType.Info:
-                    return Color.Black;
-                case LogType.Success:
-                    return Color.Green;
-                case LogType.Debug:
+                case LogLevel.Verbose:
                     return Color.Gray;
-                case LogType.None:
+                case LogLevel.Info:
                     return Color.Black;
+                case LogLevel.Warning:
+                    return Color.Gold;
+                case LogLevel.Error:
+                    return Color.Red;
+                case LogLevel.Critical:
+                    return Color.Red;
                 default:
                     return Color.Black;
             }
@@ -60,13 +56,13 @@ namespace OpenBreed.Editor.VM.Logging
 
         #region Private Methods
 
-        private void Instance_MessageAdded(LogType type, string msg)
+        private void Instance_MessageAdded(LogLevel level, string msg)
         {
             Items.Add(new LogItemVM()
             {
-                Color = GetMessageTypeColor(type),
+                Color = GetMessageTypeColor(level),
                 MessageText = msg,
-                MessageType = type.ToString()
+                MessageType = level.ToString()
             });
         }
 

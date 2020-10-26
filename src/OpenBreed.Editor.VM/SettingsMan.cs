@@ -46,12 +46,12 @@ namespace OpenBreed.Editor.VM
                 if (File.Exists(cfgPath))
                 {
                     Cfg = XmlHelper.RestoreFromXml<SettingsCfg>(cfgPath);
-                    logger.Success("Settings configuration restored.");
+                    logger.Info("Settings configuration restored.");
                 }
                 else
                 {
                     Cfg = GetDefault();
-                    logger.Success("No settings file yet. Default Settings configuration restored.");
+                    logger.Info("No settings file yet. Default Settings configuration restored.");
                 }
 
                 RegisterVariables();
@@ -69,7 +69,7 @@ namespace OpenBreed.Editor.VM
                 string cfgPath = Path.Combine(ProgramTools.AppProductDataDir, CFG_FILE_NAME);
                 XmlHelper.StoreAsXml<SettingsCfg>(cfgPath, Cfg, true);
 
-                logger.Success("Settings configuration stored.");
+                logger.Info("Settings configuration stored.");
             }
             catch (Exception ex)
             {
