@@ -1,10 +1,11 @@
-﻿using OpenBreed.Core;
+﻿using OpenBreed.Common.Logging;
+using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using System;
 
 namespace OpenBreed.Sandbox.Managers
 {
-    internal class LogMan : ILogMan
+    internal class LogMan : ILogger
     {
         #region Private Fields
 
@@ -13,6 +14,8 @@ namespace OpenBreed.Sandbox.Managers
         private static ConsoleColor VERBOSE_COLOR = ConsoleColor.Gray;
 
         private ICore core;
+
+        public event Message MessageAdded;
 
         #endregion Private Fields
 
@@ -73,6 +76,21 @@ namespace OpenBreed.Sandbox.Managers
             Console.ForegroundColor = color;
             Console.WriteLine(message);
             Console.ForegroundColor = prevColor;
+        }
+
+        public void Info(string msg)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Critical(string msg)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Success(string msg)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion Private Methods

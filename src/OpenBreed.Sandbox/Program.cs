@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core;
+﻿using OpenBreed.Common.Logging;
+using OpenBreed.Core;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common.Builders;
 using OpenBreed.Core.Common.Systems.Shapes;
@@ -118,7 +119,7 @@ namespace OpenBreed.Sandbox
 
         public override PlayersMan Players { get; }
 
-        public override ILogMan Logging { get; }
+        public override ILogger Logging { get; }
 
         public override JobMan Jobs { get; }
 

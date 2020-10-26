@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Commands;
+﻿using OpenBreed.Common.Logging;
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common.Builders;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
@@ -49,7 +50,7 @@ namespace OpenBreed.Core
 
         public abstract AnimMan Animations { get; }
 
-        public abstract ILogMan Logging { get; }
+        public abstract ILogger Logging { get; }
 
         public abstract JobMan Jobs { get; }
 

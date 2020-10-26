@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
-using OpenBreed.Common.Model.Scripts;
-using OpenBreed.Common.Model.Texts;
+using OpenBreed.Model.Scripts;
+using OpenBreed.Model.Texts;
 using OpenBreed.Core;
 using OpenBreed.Core.Common.Builders;
 using OpenBreed.Core.Managers;
@@ -15,6 +15,7 @@ using OpenTK;
 using OpenTK.Graphics;
 using System;
 using System.Drawing;
+using OpenBreed.Common.Logging;
 
 namespace OpenBreed.Game
 {
@@ -43,7 +44,7 @@ namespace OpenBreed.Game
 
         public override AnimMan Animations => throw new NotImplementedException();
 
-        public override ILogMan Logging => throw new NotImplementedException();
+        public override ILogger Logging => throw new NotImplementedException();
 
         public override JobMan Jobs => throw new NotImplementedException();
 
@@ -80,7 +81,7 @@ namespace OpenBreed.Game
         public override void Run()
         {
             var unitOfWork = database.CreateUnitOfWork();
-            var provider = new DataProvider(unitOfWork);
+            var provider = new DataProvider(unitOfWork, Logging);
 
             if (provider.TryGetData<ScriptModel>("Entry", out ScriptModel entryScript, out string msg))
             {

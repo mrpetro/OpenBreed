@@ -1,3 +1,4 @@
+using OpenBreed.Common.Logging;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Common.Builders;
 using OpenBreed.Core.Helpers;
@@ -36,9 +37,9 @@ namespace OpenBreed.Core
         void Run();
 
         /// <summary>
-        /// Logging manager
+        /// Object for logging functionality
         /// </summary>
-        ILogMan Logging { get; }
+        ILogger Logging { get; }
 
         /// <summary>
         /// Jobs manager
