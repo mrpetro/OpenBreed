@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using OpenBreed.Editor.UI.WinForms.Helpers;
 using OpenBreed.Common;
 using OpenBreed.Editor.Cfg.Options.ABTA;
+using OpenBreed.Common.Tools;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls
 {

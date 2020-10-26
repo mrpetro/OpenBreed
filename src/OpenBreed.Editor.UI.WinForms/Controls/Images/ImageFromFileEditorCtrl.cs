@@ -13,24 +13,24 @@ using System.Drawing.Drawing2D;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Images
 {
-    public partial class ImageViewCtrl : UserControl
+    public partial class ImageFromFileEditorCtrl : UserControl
     {
-        private ImageEditorVM _vm;
+        private ImageFromFileEditorVM vm;
 
 
-        public ImageViewCtrl()
+        public ImageFromFileEditorCtrl()
         {
             InitializeComponent();
 
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
         }
 
-        public void Initialize(ImageEditorVM vm)
+        public void Initialize(ImageFromFileEditorVM vm)
         {
-            _vm = vm as ImageEditorVM ?? throw new InvalidOperationException(nameof(vm));
-            _vm.PropertyChanged += _vm_PropertyChanged;
+            this.vm = vm;
 
-            _vm.RefreshAction = Invalidate;
+            this.vm.PropertyChanged += _vm_PropertyChanged;
+            this.vm.RefreshAction = Invalidate;
 
             UpdateViewState();
         }
@@ -39,7 +39,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Images
         {
             switch (e.PropertyName)
             {
-                case nameof(_vm.Editable):
+                case nameof(vm.Image):
                     UpdateViewState();
                     break;
                 default:
@@ -49,7 +49,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Images
 
         private void UpdateViewState()
         {
-            if (_vm.Editable == null)
+            if (vm.Image == null)
                 SetNoImageState();
             else
                 SetImageState();
@@ -62,14 +62,14 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Images
 
         private void SetImageState()
         {
-            Width = _vm.Image.Width;
-            Height = _vm.Image.Height;
+            Width = vm.Image.Width;
+            Height = vm.Image.Height;
             Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (_vm == null)
+            if (vm == null)
                 return;
 
             e.Graphics.PixelOffsetMode = PixelOffsetMode.Half;
@@ -78,7 +78,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Images
             e.Graphics.SmoothingMode = SmoothingMode.None;
             e.Graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
 
-            _vm.Draw(e.Graphics);
+            vm.Draw(e.Graphics);
 
             base.OnPaint(e);
         }

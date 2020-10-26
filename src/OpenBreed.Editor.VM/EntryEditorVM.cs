@@ -16,7 +16,6 @@ namespace OpenBreed.Editor.VM
 
         #region Private Fields
 
-        protected EditableEntryVM _editable;
         private bool _commitEnabled;
         private bool _editMode;
         private bool _nextAvailable;
@@ -58,12 +57,6 @@ namespace OpenBreed.Editor.VM
         {
             get { return _previousAvailable; }
             protected set { SetProperty(ref _previousAvailable, value); }
-        }
-
-        public EditableEntryVM Editable
-        {
-            get { return _editable; }
-            set { SetProperty(ref _editable, value); }
         }
 
         public bool RevertEnabled

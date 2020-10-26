@@ -9,15 +9,15 @@ namespace OpenBreed.Editor.VM.Scripts
     {
         #region Private Fields
 
-        private string _dataRef;
+        private string dataRef;
 
-        private string _script;
+        private string script;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal ScriptEmbeddedEditorVM(ScriptEditorVM parent)
+        internal ScriptEmbeddedEditorVM(ParentEntryEditor<IScriptEntry> parent)
         {
             Parent = parent;
         }
@@ -28,16 +28,16 @@ namespace OpenBreed.Editor.VM.Scripts
 
         public string Script
         {
-            get { return _script; }
-            set { SetProperty(ref _script, value); }
+            get { return script; }
+            set { SetProperty(ref script, value); }
         }
 
-        public ScriptEditorVM Parent { get; }
+        public ParentEntryEditor<IScriptEntry> Parent { get; }
 
         public string DataRef
         {
-            get { return _dataRef; }
-            set { SetProperty(ref _dataRef, value); }
+            get { return dataRef; }
+            set { SetProperty(ref dataRef, value); }
         }
 
         #endregion Public Properties

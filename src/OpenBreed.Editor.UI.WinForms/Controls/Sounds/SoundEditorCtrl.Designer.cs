@@ -28,24 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnPlaySound = new System.Windows.Forms.Button();
+            this.Panel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // btnPlaySound
+            // Panel
             // 
-            this.btnPlaySound.Location = new System.Drawing.Point(93, 72);
-            this.btnPlaySound.Name = "btnPlaySound";
-            this.btnPlaySound.Size = new System.Drawing.Size(75, 23);
-            this.btnPlaySound.TabIndex = 0;
-            this.btnPlaySound.Text = "Play";
-            this.btnPlaySound.UseVisualStyleBackColor = true;
-            this.btnPlaySound.Click += new System.EventHandler(this.btnPlaySound_Click);
+            this.Panel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Panel.Location = new System.Drawing.Point(0, 0);
+            this.Panel.Name = "Panel";
+            this.Panel.Size = new System.Drawing.Size(309, 166);
+            this.Panel.TabIndex = 7;
             // 
             // SoundEditorCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnPlaySound);
+            this.Controls.Add(this.Panel);
             this.Name = "SoundEditorCtrl";
             this.Size = new System.Drawing.Size(309, 166);
             this.ResumeLayout(false);
@@ -54,6 +52,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnPlaySound;
+        private System.Windows.Forms.Panel Panel;
     }
 }

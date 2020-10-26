@@ -22,21 +22,11 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
         public SpriteSetEditorCtrl()
         {
             InitializeComponent();
-
-            cbxPalettes.SelectionChangeCommitted += combobox1_SelectionChangesCommitted;
-        }
-
-        private void combobox1_SelectionChangesCommitted(Object sender, EventArgs e)
-        {
-            ((ComboBox)sender).DataBindings["SelectedItem"].WriteValue();
         }
 
         public override void Initialize(EntryEditorVM vm)
         {
             _vm = vm as SpriteSetEditorVM ?? throw new InvalidOperationException(nameof(vm));
-
-            cbxPalettes.DataSource = _vm.PaletteIds;
-            cbxPalettes.DataBindings.Add(nameof(cbxPalettes.SelectedItem), _vm, nameof(_vm.CurrentPaletteId), false, DataSourceUpdateMode.OnPropertyChanged);
 
             _vm.PropertyChanged += _vm_PropertyChanged;
 

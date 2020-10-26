@@ -16,7 +16,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
     {
         #region Private Fields
 
-        private PaletteFromMapVM _vm;
+        private PaletteFromMapEditorVM _vm;
 
         #endregion Private Fields
 
@@ -31,7 +31,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 
         #region Public Methods
 
-        public void Initialize(PaletteFromMapVM vm)
+        public void Initialize(PaletteFromMapEditorVM vm)
         {
             _vm = vm ?? throw new ArgumentNullException(nameof(vm));
 

@@ -68,10 +68,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls
             btnNext.Click += (s, a) => _vm.EditNextEntry();
             btnPrevious.Click += (s, a) => _vm.EditPreviousEntry();
 
-            _vm.PropertyChanged += _vm_PropertyChanged;
-
-            OnEditableChanged(_vm.Editable);
-
             OnEditedChanged();
         }
 
@@ -92,34 +88,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls
             {
                 tbxId.DataBindings.Add(nameof(tbxId.Text), _vm, nameof(_vm.Id), false, DataSourceUpdateMode.OnPropertyChanged);
                 tbxDescription.DataBindings.Add(nameof(tbxDescription.Text), _vm, nameof(_vm.Description), false, DataSourceUpdateMode.OnPropertyChanged);
-            }
-        }
-
-        private void OnEditableChanged(EditableEntryVM entry)
-        {
-            tbxId.DataBindings.Clear();
-            tbxDescription.DataBindings.Clear();
-            if (entry == null)
-            {
-                tbxId.Text = null;
-                tbxDescription.Text = null;
-            }
-            else
-            {
-                tbxId.DataBindings.Add(nameof(tbxId.Text), entry, nameof(entry.Id), false, DataSourceUpdateMode.OnPropertyChanged);
-                tbxDescription.DataBindings.Add(nameof(tbxDescription.Text), entry, nameof(entry.Description), false, DataSourceUpdateMode.OnPropertyChanged);
-            }
-        }
-
-        private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(_vm.Editable):
-                    OnEditableChanged(_vm.Editable);
-                    break;
-                default:
-                    break;
             }
         }
 

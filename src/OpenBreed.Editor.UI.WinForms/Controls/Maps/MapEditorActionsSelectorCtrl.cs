@@ -66,9 +66,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
             DGV.RowTemplate.Height = 32;
 
             DataGridViewCheckBoxColumn visibilityColumn = new DataGridViewCheckBoxColumn();
-            visibilityColumn.HeaderText = "Visibility";
-            visibilityColumn.Name = "Visibility";
-            visibilityColumn.DataPropertyName = "Visibility";
+            visibilityColumn.HeaderText = "Is visible";
+            visibilityColumn.Name = "IsVisible";
+            visibilityColumn.DataPropertyName = "IsVisible";
             visibilityColumn.MinimumWidth = 50;
             visibilityColumn.Width = 50;
             visibilityColumn.Resizable = DataGridViewTriState.False;

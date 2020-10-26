@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OpenBreed.Editor.VM</RootNamespace>
     <AssemblyName>OpenBreed.Editor.VM</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -77,9 +77,8 @@
     <Compile Include="Database\Tables\DbDataSourceTableVM.cs" />
     <Compile Include="Database\Tables\DbScriptTableVM.cs" />
     <Compile Include="DataSources\DataSourceEditorVM.cs" />
-    <Compile Include="DataSources\DataSourceVM.cs" />
-    <Compile Include="DataSources\FileDataSourceVM.cs" />
-    <Compile Include="DataSources\EPFArchiveFileDataSourceVM.cs" />
+    <Compile Include="DataSources\FileDataSourceEditorVM.cs" />
+    <Compile Include="DataSources\EpfArchiveFileDataSourceEditorVM.cs" />
     <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="Base\BindingListExtensions.cs" />
     <Compile Include="Base\Command.cs" />
@@ -123,17 +122,15 @@
     <Compile Include="EditorVMHelper.cs" />
     <Compile Include="DbEntryEditorFactory.cs" />
     <Compile Include="EntityTemplates\EntityTemplateEditorVM.cs" />
-    <Compile Include="EntityTemplates\EntityTemplateFromFileVM.cs" />
-    <Compile Include="EntityTemplates\EntityTemplateVM.cs" />
-    <Compile Include="EntryEditorBaseExVM.cs" />
-    <Compile Include="EntryEditorVM.cs" />
+    <Compile Include="EntityTemplates\EntityTemplateFromFileEditorVM.cs" />
     <Compile Include="EntryEditorBaseVM.cs" />
+    <Compile Include="EntryEditorVM.cs" />
     <Compile Include="EditableEntryVM.cs" />
     <Compile Include="IDialogProvider.cs" />
     <Compile Include="IEntryEditor.cs" />
     <Compile Include="IFolderBrowserQuery.cs" />
     <Compile Include="Images\ImageEditorVM.cs" />
-    <Compile Include="Images\ImageVM.cs" />
+    <Compile Include="Images\ImageFromFileEditorVM.cs" />
     <Compile Include="IOpenFileQuery.cs" />
     <Compile Include="ISaveFileQuery.cs" />
     <Compile Include="IToolView.cs" />
@@ -146,10 +143,15 @@
     <Compile Include="Maps\MapViewCursorVM.cs" />
     <Compile Include="Maps\MapEditorTilesInserter.cs" />
     <Compile Include="Maps\MapEditorTileInsertOperation.cs" />
-    <Compile Include="Palettes\PaletteFromBinaryVM.cs" />
-    <Compile Include="Palettes\PaletteFromMapVM.cs" />
+    <Compile Include="Palettes\PaletteEditorExVM.cs" />
+    <Compile Include="Palettes\PaletteFromBinaryEditorVM.cs" />
+    <Compile Include="Palettes\PaletteFromMapEditorVM.cs" />
+    <Compile Include="ParentEntryEditor.cs" />
     <Compile Include="Renderer\LayerActionRenderer.cs" />
+    <Compile Include="Renderer\TileSetRenderer.cs" />
+    <Compile Include="Renderer\TilesSelectorRenderer.cs" />
     <Compile Include="Renderer\LayerGfxRenderer.cs" />
+    <Compile Include="Renderer\TilesSelectorSelectionRenderer.cs" />
     <Compile Include="Renderer\TilesToolRenderer.cs" />
     <Compile Include="Renderer\ViewCursorRenderer.cs" />
     <Compile Include="Renderer\ViewRenderer.cs" />
@@ -158,6 +160,7 @@
     <Compile Include="Scripts\ScriptFromFileEditorVM.cs" />
     <Compile Include="SettingsMan.cs" />
     <Compile Include="Sprites\SpriteFromImageEditorVM.cs" />
+    <Compile Include="Sprites\SpriteSetEditorExVM.cs" />
     <Compile Include="Sprites\SpriteSetEditorVM.cs" />
     <Compile Include="Sprites\SpriteSetFromImageEditorVM.cs" />
     <Compile Include="Sprites\SpriteFromImageVM.cs" />
@@ -184,14 +187,10 @@
     <Compile Include="Maps\Helpers\TileInsertOperation.cs" />
     <Compile Include="Maps\Helpers\TilesInserter.cs" />
     <Compile Include="Maps\MapEditorVM.cs" />
-    <Compile Include="Maps\Layers\MapLayerBaseVM.cs" />
-    <Compile Include="Maps\Layers\MapLayerGfxVM.cs" />
-    <Compile Include="Maps\Layers\MapLayerActionVM.cs" />
     <Compile Include="Maps\MapEditorViewVM.cs" />
     <Compile Include="Maps\MapLayoutVM.cs" />
     <Compile Include="Maps\LevelPropertiesVM.cs" />
     <Compile Include="Maps\MapEditorTileSetSelectorVM.cs" />
-    <Compile Include="Maps\MapVM.cs" />
     <Compile Include="Tools\IEditorTool.cs" />
     <Compile Include="Tools\InsertPropertyTool.cs" />
     <Compile Include="Tools\InsertTileTool.cs" />
@@ -200,17 +199,14 @@
     <Compile Include="Tools\ZoomTool.cs" />
     <Compile Include="Palettes\PaletteEditorVM.cs" />
     <Compile Include="Maps\MapEditorPalettesToolVM.cs" />
-    <Compile Include="Palettes\PaletteVM.cs" />
     <Compile Include="Database\DatabaseVM.cs" />
     <Compile Include="Actions\ActionSetEditorVM.cs" />
     <Compile Include="Maps\MapEditorActionsToolVM.cs" />
-    <Compile Include="Actions\ActionSetVM.cs" />
+    <Compile Include="Actions\ActionSetEmbeddedEditorVM.cs" />
     <Compile Include="Actions\ActionVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Actions\ActionVMHelper.cs" />
     <Compile Include="Sounds\SoundEditorVM.cs" />
     <Compile Include="Sounds\SoundFromPcmEditorVM.cs" />
-    <Compile Include="Sprites\SpriteSetVM.cs" />
     <Compile Include="Sprites\SpriteVM.cs" />
     <Compile Include="Common\SelectionRectangle.cs" />
     <Compile Include="Tiles\Helpers\TileSelectTool.cs" />
@@ -218,7 +214,7 @@
     <Compile Include="Tiles\TileSetEditorVM.cs" />
     <Compile Include="Tiles\TileSetViewerVM.cs" />
     <Compile Include="Maps\MapEditorTilesSelectorVM.cs" />
-    <Compile Include="Tiles\TileSetVM.cs" />
+    <Compile Include="Tiles\TileSetFromBlkEditorVM.cs" />
     <Compile Include="Tiles\TileVM.cs" />
     <Compile Include="Tiles\Tools\TileSelectTool.cs" />
   </ItemGroup>
@@ -226,6 +222,10 @@
     <ProjectReference Include="..\..\EPFArchive\src\EPFArchive\EPFArchive.csproj">
       <Project>{52249c4e-eaf8-45ce-a757-aaa3c3c125d4}</Project>
       <Name>EPFArchive</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj">
+      <Project>{B4E4CD19-64AF-42A5-8713-0D0DE35853B6}</Project>
+      <Name>OpenBreed.Common.Tools</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj">
       <Project>{e1a9b090-0090-4c7c-bddf-b0bb4509dc63}</Project>
@@ -239,12 +239,18 @@
       <Project>{9894e7f4-7c85-4173-9d05-f50cfd2e4163}</Project>
       <Name>OpenBreed.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Model\OpenBreed.Model.csproj">
+      <Project>{A05B933E-1C80-4AAE-93B9-BE37C6B94270}</Project>
+      <Name>OpenBreed.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Editor.Cfg\OpenBreed.Editor.Cfg.csproj">
       <Project>{91f957f8-8c01-462c-9fe3-276bb56a7b7e}</Project>
       <Name>OpenBreed.Editor.Cfg</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Maps\Layers\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -34,8 +34,8 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
         {
             _vm = vm ?? throw new InvalidOperationException(nameof(vm));
 
+            EntryRef.Initialize(vm.RefIdEditor);
             TilesSelector.Initialize(_vm.TilesSelector);
-            TileSetSelector.Initialize(_vm.TileSetSelector);
 
         }
 

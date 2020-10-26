@@ -1,22 +1,32 @@
-﻿using OpenBreed.Editor.VM.Base;
-
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
+using OpenBreed.Common.Tools;
+using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Maps;
+using OpenBreed.Editor.VM.Base;
+using OpenBreed.Editor.VM.Renderer;
+using OpenBreed.Model.Actions;
+using OpenBreed.Model.Maps;
+using OpenBreed.Model.Palettes;
+using OpenBreed.Model.Tiles;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenBreed.Editor.VM.Tiles;
-using OpenBreed.Editor.VM.Sprites;
-using OpenBreed.Common;
-using System.ComponentModel;
-using OpenBreed.Database.Interface.Items.Maps;
-using OpenBreed.Database.Interface;
 
 namespace OpenBreed.Editor.VM.Maps
 {
-    public class MapEditorVM : EntryEditorBaseVM<IMapEntry, MapVM>
+    public class MapEditorVM : EntryEditorBaseVM<IMapEntry>
     {
+        #region Private Fields
+
+        private string actionSetRef;
+
+        private string currentPaletteRef;
+
+        private bool isModified;
+
+        #endregion Private Fields
 
         #region Public Constructors
 
@@ -25,95 +35,231 @@ namespace OpenBreed.Editor.VM.Maps
             Tools = new MapEditorToolsVM();
 
             TilesTool = new MapEditorTilesToolVM(this);
+            TilesTool.TilesSelector.ModelChangeAction = OnTileSetModelChange;
+            UpdateTileSets = TilesTool.TileSetSelector.UpdateList;
+            TilesTool.TileSetSelector.CurrentItemChanged += OnTileSetChanged;
+
             ActionsTool = new MapEditorActionsToolVM(this);
+            ActionsTool.ModelChangeAction = OnActionSetModelChange;
+
             PalettesTool = new MapEditorPalettesToolVM(this);
+            UpdatePalettes = PalettesTool.UpdateList;
+            PalettesTool.ModelChangeAction = OnPalettesModelChange;
 
-            MapView = new MapEditorViewVM(this);
+            var mapViewRenderTarget = new RenderTarget(1, 1);
+            var renderer = new ViewRenderer(this, mapViewRenderTarget);
 
-            PropertyChanged += This_PropertyChanged;
-
-            PalettesTool.PropertyChanged += PaletteSelector_PropertyChanged;
-
-            ActionsTool.PropertyChanged += ActionsTool_PropertyChanged;
+            MapView = new MapEditorViewVM(this, renderer, mapViewRenderTarget);
+            //LayoutVm = new MapLayoutVM(this);
+            Properties = new LevelPropertiesVM(this);
+            //LayoutVm.PropertyChanged += (s, e) => OnPropertyChanged(nameof(LayoutVm));
 
             InitializeTools();
-
-            //TODO: This is probably bad place for VM connection method
-            Connect();
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
+        //public MapLayoutVM LayoutVm { get; }
+        public Bitmap CurrentTilesBitmap { get; private set; }
+
+        public Action<string> UpdateLayout { get; private set; }
+        public Action<string> UpdateTileSets { get; private set; }
+        public Action<IEnumerable<string>> UpdatePalettes { get; private set; }
+
         public MapEditorActionsToolVM ActionsTool { get; }
-        public override string EditorName { get { return "Level Editor"; } }
+
+        public override string EditorName { get { return "Map Editor"; } }
+
         public MapEditorViewVM MapView { get; }
+
         public MapEditorPalettesToolVM PalettesTool { get; }
+
         public MapEditorTilesToolVM TilesTool { get; }
+
         public MapEditorToolsVM Tools { get; }
+
+        public string ActionSetRef
+        {
+            get { return actionSetRef; }
+            set { SetProperty(ref actionSetRef, value); }
+        }
+
+        public string CurrentPaletteRef
+        {
+            get { return currentPaletteRef; }
+            set { SetProperty(ref currentPaletteRef, value); }
+        }
+
+        public LevelPropertiesVM Properties { get; }
+
+        internal List<PaletteModel> Palettes => Model.Palettes;
+        internal MapLayoutModel Layout => Model.Layout;
+
+        public bool IsModified
+        {
+            get { return isModified; }
+            set { SetProperty(ref isModified, value); }
+        }
+
+        internal int TileSize => Model.TileSet.TileSize;
 
         #endregion Public Properties
 
-        #region Internal Methods
+        #region Internal Properties
 
-        internal void Connect()
+        internal ActionSetModel ActionSet
         {
-            ActionsTool.ActionsSelector.PropertyChanged += ActionsSelector_PropertyChanged;
-
-            TilesTool.Connect();
+            get => Model.ActionSet;
+            private set => Model.ActionSet = value;
         }
 
-        #endregion Internal Methods
+        internal TileSetModel TileSet
+        {
+            get => Model.TileSet;
+            private set => Model.TileSet = value;
+        }
+
+        internal MapModel Model { get; private set; }
+
+        #endregion Internal Properties
+
+        #region Public Methods
+
+        public void RenderDefaultTile(RenderTarget renderTarget, int tileId, float x, float y, int tileSize)
+        {
+            Font font = new Font("Arial", 5);
+
+            var rectangle = new Rectangle((int)x, (int)y, tileSize, tileSize);
+
+            Color c = Color.Black;
+            Pen tileColor = new Pen(c);
+            Brush brush = new SolidBrush(c);
+
+            renderTarget.FillRectangle(brush, rectangle);
+
+            c = Color.White;
+            tileColor = new Pen(c);
+            brush = new SolidBrush(c);
+
+            renderTarget.DrawRectangle(tileColor, rectangle);
+            renderTarget.DrawString(string.Format("{0,2:D2}", tileId / 100), font, brush, x + 2, y + 1);
+            renderTarget.DrawString(string.Format("{0,2:D2}", tileId % 100), font, brush, x + 2, y + 7);
+        }
+
+        public void DrawTile(RenderTarget renderTarget, int tileId, float x, float y, int tileSize)
+        {
+            if (Model.TileSet == null)
+            {
+                RenderDefaultTile(renderTarget, tileId, x, y, tileSize);
+                return;
+            }
+
+            if (tileId >= Model.TileSet.Tiles.Count)
+                return;
+
+            var tileRect = Model.TileSet.Tiles[tileId].Rectangle;
+            renderTarget.DrawImage(CurrentTilesBitmap, (int)x, (int)y, tileRect);
+        }
+
+        #endregion Public Methods
 
         #region Protected Methods
 
-        protected override void UpdateEntry(MapVM source, IMapEntry target)
+        protected override void UpdateEntry(IMapEntry entry)
         {
-            base.UpdateEntry(source, target);
+            base.UpdateEntry(entry);
+
+            entry.ActionSetRef = ActionSetRef != null ? ActionSetRef : null;
+
+            //LayoutVm.ToMap(Model);
         }
 
-        protected override void UpdateVM(IMapEntry source, MapVM target)
+        protected override void UpdateVM(IMapEntry entry)
         {
-            base.UpdateVM(source, target);
+            base.UpdateVM(entry);
 
-            ActionsTool.ActionSet = target.ActionSet;
+            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
+
+            Model = dataProvider.Maps.GetMap(entry.Id);
+
+            UpdateTileSets(entry.TileSetRef);
+            UpdatePalettes(entry.PaletteRefs);
+
+            ActionSetRef = entry.ActionSetRef;
+            ActionsTool.CurrentActionSetRef = entry.ActionSetRef;
+
+            //LayoutVm.FromMap(Model);
+            Properties.Load(Model);
+
+            TilesTool.UpdateVM();
+            ActionsTool.UpdateVM();
+
+            IsModified = false;
+        }
+
+        protected override void OnPropertyChanged(string name)
+        {
+            switch (name)
+            {
+                case nameof(ActionSetRef):
+                    UpdateActionModel();
+                    break;
+
+                default:
+                    break;
+            }
+
+            base.OnPropertyChanged(name);
         }
 
         #endregion Protected Methods
 
         #region Private Methods
 
-        private void ActionsSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnTileSetChanged(object sender, string e)
         {
-            var actionSelector = sender as MapEditorActionsSelectorVM;
-
-            switch (e.PropertyName)
-            {
-                case nameof(actionSelector.Items):
-                    MapView.Refresh();
-                    break;
-                default:
-                    break;
-            }
+            TilesTool.TilesSelector.CurrentTileSetRef = e;
         }
 
-        private void ActionsTool_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnTileSetModelChange(string tileSetRef)
         {
-            switch (e.PropertyName)
+            TileSet = DataProvider.TileSets.GetTileSet(tileSetRef);
+
+            CurrentTilesBitmap = (Bitmap)TileSet.Bitmap.Clone();
+
+            BitmapHelper.SetPaletteColors(CurrentTilesBitmap, Model.Palettes.First().Data);
+        }
+
+        private void OnPalettesModelChange(string paletteRef)
+        {
+            var paletteModel = DataProvider.Palettes.GetPalette(paletteRef);
+            BitmapHelper.SetPaletteColors(CurrentTilesBitmap, paletteModel.Data);
+        }
+
+        private void OnActionSetModelChange(string tileSetRef)
+        {
+            ActionSet = DataProvider.ActionSets.GetActionSet(tileSetRef);
+        }
+
+        private void UpdateActionModel()
+        {
+            if (ActionSetRef == null)
             {
-                case nameof(ActionsTool.ActionSet):
-                    if (Editable != null)
-                        Editable.ActionSet = ActionsTool.ActionSet;
-                    break;
-                default:
-                    break;
+                ActionSet = null;
+                return;
             }
+
+            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
+
+            var actionSet = dataProvider.ActionSets.GetActionSet(ActionSetRef);
+            if (actionSet != null)
+                ActionSet = actionSet;
         }
 
         private void InitializeTool(MapEditorToolVM tool)
         {
-
         }
 
         private void InitializeTools()
@@ -129,37 +275,11 @@ namespace OpenBreed.Editor.VM.Maps
 
             MapView.Cursor.UpdateAction = Tools.OnCursorUpdate;
         }
-        private void PaletteSelector_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(PalettesTool.CurrentItem):
-                    foreach (var tileSet in Editable.TileSets)
-                        tileSet.Palette = PalettesTool.CurrentItem;
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        //    base.UpdateVM(source, target);
-        //}
-        private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(Editable):
-                    MapView.Layout = Editable.Layout;
-                    PalettesTool.CurrentItem = Editable.Palettes.FirstOrDefault();
-                    Editable.ActionSet = ActionsTool.ActionSet;
-                    break;
-                default:
-                    break;
-            }
-        }
 
         #endregion Private Methods
 
+        //    base.UpdateVM(source, target);
+        //}
         //    TileSelector.CurrentItem = CurrentLevel.TileSets.FirstOrDefault();
         //    PropSelector.CurrentItem = CurrentLevel.PropSet;
         //    SpriteSetViewer.CurrentItem = CurrentLevel.SpriteSets.FirstOrDefault();
@@ -191,6 +311,5 @@ namespace OpenBreed.Editor.VM.Maps
         //            break;
         //    }
         //}
-
     }
 }

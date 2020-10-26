@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Actions;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Editor.VM.Database.Entries;
@@ -14,8 +13,6 @@ namespace OpenBreed.Editor.VM.Database.Tables
     public class DbActionSetTableVM : DbTableVM
     {
         #region Private Fields
-
-        private readonly IRepository<IActionSetEntry> _repository;
 
         #endregion Private Fields
 

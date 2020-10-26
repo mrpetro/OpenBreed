@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OpenBreed.Editor.UI.WinForms</RootNamespace>
     <AssemblyName>OpenBreed.Editor.UI.WinForms</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -58,6 +58,12 @@
   <ItemGroup>
     <Compile Include="..\Shared\SharedAssemblyInfo.cs">
       <Link>SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Controls\Actions\ActionSetEmbeddedEditorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Actions\ActionSetEmbeddedEditorCtrl.Designer.cs">
+      <DependentUpon>ActionSetEmbeddedEditorCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\DataSources\DataSourceEditorCtrl.cs">
       <SubType>UserControl</SubType>
@@ -161,17 +167,17 @@
     <Compile Include="Controls\EntryEditorInnerCtrl.Designer.cs">
       <DependentUpon>EntryEditorInnerCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Images\ImageFromFileEditorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Images\ImageFromFileEditorCtrl.Designer.cs">
+      <DependentUpon>ImageFromFileEditorCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Images\ImageEditorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\Images\ImageEditorCtrl.Designer.cs">
       <DependentUpon>ImageEditorCtrl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Images\ImageViewCtrl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Images\ImageViewCtrl.Designer.cs">
-      <DependentUpon>ImageViewCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Logging\LoggerCtrl.cs">
       <SubType>UserControl</SubType>
@@ -296,6 +302,12 @@
     <Compile Include="Controls\Sounds\SoundEditorCtrl.Designer.cs">
       <DependentUpon>SoundEditorCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Sounds\SoundFromPcmEditorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Sounds\SoundFromPcmEditorCtrl.Designer.cs">
+      <DependentUpon>SoundFromPcmEditorCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Sprites\SpriteEditorViewCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -319,12 +331,6 @@
     </Compile>
     <Compile Include="Controls\Sprites\SpriteSetFromSprEditorCtrl.Designer.cs">
       <DependentUpon>SpriteSetFromSprEditorCtrl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Maps\MapEditorTileSetSelectorCtrl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Maps\MapEditorTileSetSelectorCtrl.Designer.cs">
-      <DependentUpon>MapEditorTileSetSelectorCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Sprites\SpriteSetEditorCtrl.cs">
       <SubType>UserControl</SubType>
@@ -356,11 +362,23 @@
     <Compile Include="Controls\Texts\TextEditorCtrl.Designer.cs">
       <DependentUpon>TextEditorCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Tiles\TileSetFromBlkEditorCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Tiles\TileSetFromBlkEditorCtrl.Designer.cs">
+      <DependentUpon>TileSetFromBlkEditorCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Tiles\TileSetEditorCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\Tiles\TileSetEditorCtrl.Designer.cs">
       <DependentUpon>TileSetEditorCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Tiles\TileSetViewCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Tiles\TileSetViewCtrl.Designer.cs">
+      <DependentUpon>TileSetViewCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Tiles\TileSetViewerCtrl.cs">
       <SubType>UserControl</SubType>
@@ -497,6 +515,9 @@
     <Content Include="Resources\InsertTilesLine.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\Actions\ActionSetEmbeddedEditorCtrl.resx">
+      <DependentUpon>ActionSetEmbeddedEditorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataSources\DataSourceEditorCtrl.resx">
       <DependentUpon>DataSourceEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
@@ -548,11 +569,11 @@
     <EmbeddedResource Include="Controls\EntryEditorInnerCtrl.resx">
       <DependentUpon>EntryEditorInnerCtrl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Images\ImageFromFileEditorCtrl.resx">
+      <DependentUpon>ImageFromFileEditorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Images\ImageEditorCtrl.resx">
       <DependentUpon>ImageEditorCtrl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Images\ImageViewCtrl.resx">
-      <DependentUpon>ImageViewCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Logging\LoggerCtrl.resx">
       <DependentUpon>LoggerCtrl.cs</DependentUpon>
@@ -611,6 +632,9 @@
     <EmbeddedResource Include="Controls\Sounds\SoundEditorCtrl.resx">
       <DependentUpon>SoundEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Sounds\SoundFromPcmEditorCtrl.resx">
+      <DependentUpon>SoundFromPcmEditorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Sprites\SpriteEditorViewCtrl.resx">
       <DependentUpon>SpriteEditorViewCtrl.cs</DependentUpon>
     </EmbeddedResource>
@@ -622,9 +646,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Sprites\SpriteSetFromSprEditorCtrl.resx">
       <DependentUpon>SpriteSetFromSprEditorCtrl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Maps\MapEditorTileSetSelectorCtrl.resx">
-      <DependentUpon>MapEditorTileSetSelectorCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Sprites\SpriteSetEditorCtrl.resx">
       <DependentUpon>SpriteSetEditorCtrl.cs</DependentUpon>
@@ -641,8 +662,14 @@
     <EmbeddedResource Include="Controls\Texts\TextEditorCtrl.resx">
       <DependentUpon>TextEditorCtrl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Tiles\TileSetFromBlkEditorCtrl.resx">
+      <DependentUpon>TileSetFromBlkEditorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Tiles\TileSetEditorCtrl.resx">
       <DependentUpon>TileSetEditorCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Tiles\TileSetViewCtrl.resx">
+      <DependentUpon>TileSetViewCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Tiles\TileSetViewerCtrl.resx">
       <DependentUpon>TileSetViewerCtrl.cs</DependentUpon>
@@ -704,6 +731,10 @@
     <Folder Include="General\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj">
+      <Project>{B4E4CD19-64AF-42A5-8713-0D0DE35853B6}</Project>
+      <Name>OpenBreed.Common.Tools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common.UI.WinForms\OpenBreed.Common.UI.WinForms.csproj">
       <Project>{9827deda-205f-465e-b8df-e0e3ff9cd8d1}</Project>
       <Name>OpenBreed.Common.UI.WinForms</Name>

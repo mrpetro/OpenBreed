@@ -43,6 +43,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
             MouseDown += TileSelectorCtrl_MouseDown;
             MouseUp += TileSelectorCtrl_MouseUp;
             MouseMove += TileSelectorCtrl_MouseMove;
+            Resize += (s, a) => _vm.Resize(this.ClientSize.Width, this.ClientSize.Height);
 
             _vm.PropertyChanged += _vm_PropertyChanged;
 
@@ -58,15 +59,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
             if (_vm == null)
                 return;
 
-            if (_vm.CurrentTileSet == null)
-                return;
-
-            _vm.CurrentTileSet.Draw(e.Graphics);
-            _vm.DrawSelection(e.Graphics);
-
-            Pen selectedPen = new Pen(Color.LightGreen);
-            Pen selectPen = new Pen(Color.LightBlue);
-            Pen deselectPen = new Pen(Color.Red);
+            _vm.Render(e.Graphics);
 
             base.OnPaint(e);
         }
@@ -79,7 +72,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
         {
             switch (e.PropertyName)
             {
-                case nameof(_vm.CurrentTileSet):
+                case nameof(_vm.CurrentTileSetRef):
                     UpdateViewState();
                     break;
                 default:
@@ -94,8 +87,8 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
 
         private void SetTileSetState()
         {
-            Width = _vm.CurrentTileSet.Bitmap.Width;
-            Height = _vm.CurrentTileSet.Bitmap.Height;
+            //Width = _vm.CurrentTileSet.Bitmap.Width;
+            //Height = _vm.CurrentTileSet.Bitmap.Height;
             Invalidate();
         }
 
@@ -144,10 +137,10 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
 
         private void UpdateViewState()
         {
-            if (_vm.CurrentTileSet == null)
-                SetNoTileSetState();
-            else
-                SetTileSetState();
+            //if (_vm.CurrentTileSet == null)
+            //    SetNoTileSetState();
+            //else
+            //    SetTileSetState();
         }
 
         #endregion Private Methods

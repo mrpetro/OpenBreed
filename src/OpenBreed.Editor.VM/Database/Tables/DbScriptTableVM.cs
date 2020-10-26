@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Model.Texts;
+using OpenBreed.Model.Texts;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Scripts;
 using System;
@@ -13,8 +13,6 @@ namespace OpenBreed.Editor.VM.Database.Tables
     public class DbScriptTableVM : DbTableVM
     {
         #region Private Fields
-
-        private readonly IRepository<IScriptEntry> _repository;
 
         #endregion Private Fields
 

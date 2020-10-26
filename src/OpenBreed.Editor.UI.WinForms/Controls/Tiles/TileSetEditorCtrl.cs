@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenBreed.Editor.VM.Tiles;
 using OpenBreed.Editor.VM;
+using OpenBreed.Database.Interface.Items.Tiles;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Tiles
 {
@@ -25,15 +26,37 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Tiles
         {
             _vm = vm as TileSetEditorVM ?? throw new InvalidOperationException(nameof(vm));
 
-            cbxPalettes.DataSource = _vm.PaletteIds;
-            cbxPalettes.DataBindings.Add(nameof(cbxPalettes.SelectedIndex), _vm, nameof(_vm.CurrentPaletteIndex), false, DataSourceUpdateMode.OnPropertyChanged);
+            _vm.PropertyChanged += _vm_PropertyChanged;
 
-            TileSetViewer.Initialize(_vm.Editable);
+            OnSubeditorChanged(_vm.Subeditor);
         }
 
-        private void btnImport_Click(object sender, EventArgs e)
+        private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            MessageBox.Show("Not implemented yet");
+            switch (e.PropertyName)
+            {
+                case nameof(_vm.Subeditor):
+                    OnSubeditorChanged(_vm.Subeditor);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void OnSubeditorChanged(IEntryEditor<ITileSetEntry> subeditor)
+        {
+            Panel.Controls.Clear();
+
+            if (subeditor == null)
+                return;
+
+            if (subeditor is TileSetFromBlkEditorVM)
+            {
+                var control = new TileSetFromBlkEditorCtrl();
+                control.Initialize((TileSetFromBlkEditorVM)_vm.Subeditor);
+                control.Dock = DockStyle.Fill;
+                Panel.Controls.Add(control);
+            }
         }
     }
 }

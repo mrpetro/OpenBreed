@@ -17,7 +17,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
     {
         #region Private Fields
 
-        private MapEditorPalettesToolVM _vm;
+        private MapEditorPalettesToolVM vm;
 
         #endregion Private Fields
 
@@ -26,7 +26,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
         public MapEditorPalettesToolCtrl()
         {
             InitializeComponent();
+
         }
+
 
         #endregion Public Constructors
 
@@ -34,13 +36,16 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
 
         public void Initialize(MapEditorPalettesToolVM vm)
         {
-            _vm = vm;
+            this.vm = vm;
+            BindControls();
+        }
 
+        private void BindControls()
+        {
             cbxPalettes.DataBindings.Clear();
-            //cbxPalettes.DataSource = _vm.Parent.Root.LevelEditor.CurrentLevel.Palettes;
+            cbxPalettes.DataSource = vm.PaletteNames;
             cbxPalettes.DisplayMember = "Name";
-
-            cbxPalettes.DataBindings.Add("SelectedIndex", _vm, nameof(_vm.CurrentIndex), false, DataSourceUpdateMode.OnPropertyChanged);
+            cbxPalettes.DataBindings.Add(nameof(cbxPalettes.SelectedItem), vm, nameof(vm.CurrentPaletteRef), false, DataSourceUpdateMode.OnPropertyChanged);
         }
 
         #endregion Public Methods

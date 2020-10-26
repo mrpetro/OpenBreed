@@ -1,42 +1,36 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Assets;
 using OpenBreed.Common.Data;
-using OpenBreed.Common.Model.Maps;
-using OpenBreed.Common.Model.Maps.Blocks;
-using OpenBreed.Common.Model.EntityTemplates;
-using OpenBreed.Common.Model.Texts;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
-using OpenBreed.Database.Xml.Items.Assets;
 using OpenBreed.Editor.VM.Base;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OpenBreed.Model.Texts;
 
 namespace OpenBreed.Editor.VM.EntityTemplates
 {
-    public class EntityTemplateFromFileVM : EntityTemplateVM
+    public class EntityTemplateFromFileEditorVM : BaseViewModel, IEntryEditor<IEntityTemplateEntry>
     {
-
         #region Private Fields
 
         private bool _editEnabled;
+
+        private string dataRef;
+
+        private string entityTemplate;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public EntityTemplateFromFileVM()
+        public EntityTemplateFromFileEditorVM(ParentEntryEditor<IEntityTemplateEntry> parent)
         {
-            PropertyChanged += This_PropertyChanged;
+            Parent = parent;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
+
+        public ParentEntryEditor<IEntityTemplateEntry> Parent { get; }
 
         public bool EditEnabled
         {
@@ -44,27 +38,23 @@ namespace OpenBreed.Editor.VM.EntityTemplates
             set { SetProperty(ref _editEnabled, value); }
         }
 
+        public string DataRef
+        {
+            get { return dataRef; }
+            set { SetProperty(ref dataRef, value); }
+        }
+
+        public string EntityTemplate
+        {
+            get { return entityTemplate; }
+            set { SetProperty(ref entityTemplate, value); }
+        }
+
         #endregion Public Properties
 
-        #region Internal Methods
+        #region Public Methods
 
-        internal override void FromEntry(IEntry entry)
-        {
-            base.FromEntry(entry);
-            FromEntry((IEntityTemplateFromFileEntry)entry);
-        }
-
-        internal override void ToEntry(IEntry entry)
-        {
-            base.ToEntry(entry);
-            ToEntry((IEntityTemplateFromFileEntry)entry);
-        }
-
-        #endregion Internal Methods
-
-        #region Private Methods
-
-        private void FromEntry(IEntityTemplateFromFileEntry entry)
+        public void UpdateVM(IEntityTemplateEntry entry)
         {
             var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
 
@@ -76,25 +66,34 @@ namespace OpenBreed.Editor.VM.EntityTemplates
             DataRef = entry.DataRef;
         }
 
-        private void ToEntry(IEntityTemplateFromFileEntry source)
+        public void UpdateEntry(IEntityTemplateEntry entry)
         {
             var model = ServiceLocator.Instance.GetService<DataProvider>().GetData<TextModel>(DataRef);
-
             model.Text = EntityTemplate;
-
-            source.DataRef = DataRef;
+            entry.DataRef = DataRef;
         }
 
-        private void This_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        #endregion Public Methods
+
+        #region Internal Methods
+
+        #endregion Internal Methods
+
+        #region Private Methods
+
+        protected override void OnPropertyChanged(string name)
         {
-            switch (e.PropertyName)
+            switch (name)
             {
                 case nameof(DataRef):
                     EditEnabled = ValidateSettings();
                     break;
+
                 default:
                     break;
             }
+
+            base.OnPropertyChanged(name);
         }
 
         private bool ValidateSettings()

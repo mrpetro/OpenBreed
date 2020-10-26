@@ -37,6 +37,10 @@
             this.LayoutTable = new System.Windows.Forms.TableLayoutPanel();
             this.grpImageAssetRefIdEditor = new System.Windows.Forms.GroupBox();
             this.ImageAssetRefIdEditor = new OpenBreed.Editor.UI.WinForms.Controls.Common.EntryRefIdEditorCtrl();
+            this.grpTools = new System.Windows.Forms.GroupBox();
+            this.btnImport = new System.Windows.Forms.Button();
+            this.lblPalettes = new System.Windows.Forms.Label();
+            this.cbxPalettes = new System.Windows.Forms.ComboBox();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Split)).BeginInit();
@@ -45,6 +49,7 @@
             this.Split.SuspendLayout();
             this.LayoutTable.SuspendLayout();
             this.grpImageAssetRefIdEditor.SuspendLayout();
+            this.grpTools.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainPanel
@@ -56,7 +61,7 @@
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(0, 0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(329, 343);
+            this.MainPanel.Size = new System.Drawing.Size(329, 294);
             this.MainPanel.TabIndex = 9;
             // 
             // DGV
@@ -68,7 +73,7 @@
             this.DGV.CurrentRowIndex = -1;
             this.DGV.Location = new System.Drawing.Point(2, 32);
             this.DGV.Name = "DGV";
-            this.DGV.Size = new System.Drawing.Size(322, 307);
+            this.DGV.Size = new System.Drawing.Size(322, 258);
             this.DGV.TabIndex = 10;
             // 
             // btnAddSprite
@@ -107,7 +112,7 @@
             // Split.Panel2
             // 
             this.Split.Panel2.Controls.Add(this.SpriteEditor);
-            this.Split.Size = new System.Drawing.Size(668, 343);
+            this.Split.Size = new System.Drawing.Size(668, 294);
             this.Split.SplitterDistance = 329;
             this.Split.TabIndex = 0;
             // 
@@ -118,7 +123,7 @@
             this.SpriteEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SpriteEditor.Location = new System.Drawing.Point(0, 0);
             this.SpriteEditor.Name = "SpriteEditor";
-            this.SpriteEditor.Size = new System.Drawing.Size(335, 343);
+            this.SpriteEditor.Size = new System.Drawing.Size(335, 294);
             this.SpriteEditor.TabIndex = 0;
             // 
             // LayoutTable
@@ -128,12 +133,12 @@
             this.LayoutTable.Controls.Add(this.grpImageAssetRefIdEditor, 0, 0);
             this.LayoutTable.Controls.Add(this.Split, 0, 1);
             this.LayoutTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LayoutTable.Location = new System.Drawing.Point(0, 0);
+            this.LayoutTable.Location = new System.Drawing.Point(0, 49);
             this.LayoutTable.Name = "LayoutTable";
             this.LayoutTable.RowCount = 2;
             this.LayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.LayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.LayoutTable.Size = new System.Drawing.Size(674, 399);
+            this.LayoutTable.Size = new System.Drawing.Size(674, 350);
             this.LayoutTable.TabIndex = 1;
             // 
             // grpImageAssetRefIdEditor
@@ -155,11 +160,53 @@
             this.ImageAssetRefIdEditor.Size = new System.Drawing.Size(662, 25);
             this.ImageAssetRefIdEditor.TabIndex = 0;
             // 
+            // grpTools
+            // 
+            this.grpTools.Controls.Add(this.btnImport);
+            this.grpTools.Controls.Add(this.lblPalettes);
+            this.grpTools.Controls.Add(this.cbxPalettes);
+            this.grpTools.Dock = System.Windows.Forms.DockStyle.Top;
+            this.grpTools.Location = new System.Drawing.Point(0, 0);
+            this.grpTools.Name = "grpTools";
+            this.grpTools.Size = new System.Drawing.Size(674, 49);
+            this.grpTools.TabIndex = 6;
+            this.grpTools.TabStop = false;
+            this.grpTools.Text = "Tools";
+            // 
+            // btnImport
+            // 
+            this.btnImport.Location = new System.Drawing.Point(6, 20);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(60, 21);
+            this.btnImport.TabIndex = 1;
+            this.btnImport.Text = "Import...";
+            this.btnImport.UseVisualStyleBackColor = true;
+            // 
+            // lblPalettes
+            // 
+            this.lblPalettes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPalettes.AutoSize = true;
+            this.lblPalettes.Location = new System.Drawing.Point(423, 23);
+            this.lblPalettes.Name = "lblPalettes";
+            this.lblPalettes.Size = new System.Drawing.Size(90, 13);
+            this.lblPalettes.TabIndex = 3;
+            this.lblPalettes.Text = "Example palettes:";
+            // 
+            // cbxPalettes
+            // 
+            this.cbxPalettes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxPalettes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxPalettes.Location = new System.Drawing.Point(519, 20);
+            this.cbxPalettes.Name = "cbxPalettes";
+            this.cbxPalettes.Size = new System.Drawing.Size(149, 21);
+            this.cbxPalettes.TabIndex = 2;
+            // 
             // SpriteSetFromImageEditorCtrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.LayoutTable);
+            this.Controls.Add(this.grpTools);
             this.Name = "SpriteSetFromImageEditorCtrl";
             this.Size = new System.Drawing.Size(674, 399);
             this.MainPanel.ResumeLayout(false);
@@ -170,6 +217,8 @@
             this.Split.ResumeLayout(false);
             this.LayoutTable.ResumeLayout(false);
             this.grpImageAssetRefIdEditor.ResumeLayout(false);
+            this.grpTools.ResumeLayout(false);
+            this.grpTools.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -184,5 +233,9 @@
         private System.Windows.Forms.TableLayoutPanel LayoutTable;
         private System.Windows.Forms.GroupBox grpImageAssetRefIdEditor;
         private Common.EntryRefIdEditorCtrl ImageAssetRefIdEditor;
+        private System.Windows.Forms.GroupBox grpTools;
+        private System.Windows.Forms.Button btnImport;
+        private System.Windows.Forms.Label lblPalettes;
+        private System.Windows.Forms.ComboBox cbxPalettes;
     }
 }

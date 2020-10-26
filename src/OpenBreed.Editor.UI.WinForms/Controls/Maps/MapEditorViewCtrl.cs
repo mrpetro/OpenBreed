@@ -19,9 +19,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
     {
         #region Private Fields
 
-        private ViewRenderer _renderer;
-        private RenderTarget _renderTarget;
-
         private ScrollTool _scrollTool;
         private ZoomTool _zoomTool;
         private MapEditorViewVM _vm;
@@ -59,9 +56,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
         {
             _vm = vm ?? throw new ArgumentNullException(nameof(MapEditorViewVM));
 
-            _renderTarget = new RenderTarget(1, 1);
-            _renderer = new ViewRenderer(_vm.Parent, _renderTarget);
-
             _vm.RefreshAction = this.Invalidate;
 
             _scrollTool = new ScrollTool(_vm, this);
@@ -74,23 +68,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
             MouseMove += (s, a) => vm.Cursor.Move(ToCursorButtons(a.Button), a.Location);
             MouseUp += (s, a) => vm.Cursor.Up(ToCursorButtons(a.Button), a.Location);
             MouseDown += (s, a) => vm.Cursor.Down(ToCursorButtons(a.Button), a.Location);
-
-            Resize += (s,a) => _renderTarget.Resize(this.ClientSize.Width, this.ClientSize.Height);
-
-            _vm.PropertyChanged += _vm_PropertyChanged;
-        }
-
-        private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(_vm.Layout):
-                case nameof(_vm.Transformation):
-                    Invalidate();
-                    break;
-                default:
-                    break;
-            }
+            Resize += (s, a) => _vm.Resize(this.ClientSize.Width, this.ClientSize.Height);
         }
 
         #endregion Public Methods
@@ -102,8 +80,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
             if (_vm == null)
                 return;
 
-            _renderer.Render(_vm);
-            _renderTarget.Flush(e.Graphics);
+            _vm.Render(e.Graphics);
 
             base.OnPaint(e);
         }

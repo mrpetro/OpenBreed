@@ -1,22 +1,18 @@
 ﻿using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM.Tools;
 using OpenBreed.Editor.VM.Renderer;
+using OpenBreed.Editor.VM.Tools;
+using OpenBreed.Model.Maps;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Maps
 {
     public class MapEditorViewVM : BaseViewModel, IScrollableVM, IZoomableVM
     {
-
         #region Private Fields
 
-        private MapLayoutVM _layout;
+        private ViewRenderer renderer;
         private string _title;
         private Matrix _transformation;
 
@@ -24,31 +20,27 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Constructors
 
-        public MapEditorViewVM(MapEditorVM parent)
+        public MapEditorViewVM(MapEditorVM parent, ViewRenderer renderer, RenderTarget renderTarget)
         {
             Parent = parent;
+            this.renderer = renderer;
+            RenderTarget = renderTarget;
 
             Transformation = new Matrix();
-            Cursor = new MapViewCursorVM();
+            Cursor = new MapViewCursorVM(Parent);
 
-            Cursor.CalculateWorldCoordsFunc = GetWorldSnapCoords;
-            Cursor.CalculateWorldIndexCoordsFunc = GetIndexCoords;
-
+            Cursor.ToWorldCoordsFunc = ToWorldCoords;
             Cursor.PropertyChanged += Cursor_PropertyChanged;
-
-            PropertyChanged += MapBodyViewerVM_PropertyChanged;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
+        public RenderTarget RenderTarget { get; }
         public MapViewCursorVM Cursor { get; }
-        public MapLayoutVM Layout
-        {
-            get { return _layout; }
-            set { SetProperty(ref _layout, value); }
-        }
+
+        public MapLayoutModel Layout => Parent.Layout;
 
         public MapEditorVM Parent { get; }
 
@@ -84,29 +76,22 @@ namespace OpenBreed.Editor.VM.Maps
 
         public void FitViewToBody(float width, float height)
         {
-            float scaleW = width / Layout.MaxCoordX;
-            float scaleH = height / Layout.MaxCoordY;
+            float scaleW = width / Layout.Bounds.Width;
+            float scaleH = height / Layout.Bounds.Height;
             float scale = Math.Min(scaleW, scaleH);
 
             if (scale == 0.0f)
                 scale = 1.0f;
 
-            CenterView(Layout.MaxCoordX / 2, Layout.MaxCoordY / 2, width, height, scale);
+            CenterView(Layout.Bounds.Width / 2, Layout.Bounds.Height / 2, width, height, scale);
         }
 
-        public Point GetIndexCoords(Point point)
+        public void Resize(int width, int height)
         {
-            return new Point(point.X / 16, point.Y / 16);
+            RenderTarget.Resize(width, height);
         }
 
-        public Point GetWorldSnapCoords(Point point)
-        {
-            var worldCoords = GetWorldCoords(point);
-
-            return new Point((worldCoords.X /  16) * 16, (worldCoords.Y / 16) * 16);
-        }
-
-        public Point GetWorldCoords(Point viewCoords)
+        public Point ToWorldCoords(Point viewCoords)
         {
             Matrix invMatrix = Transformation.Clone();
             invMatrix.Invert();
@@ -118,7 +103,7 @@ namespace OpenBreed.Editor.VM.Maps
             return clipPoints[0];
         }
 
-        public PointF GetWorldCoords(PointF viewCoords)
+        public PointF ToWorldCoords(PointF viewCoords)
         {
             Matrix invMatrix = Transformation.Clone();
             invMatrix.Invert();
@@ -128,6 +113,12 @@ namespace OpenBreed.Editor.VM.Maps
             invMatrix.TransformPoints(clipPoints);
 
             return clipPoints[0];
+        }
+
+        public void Render(Graphics graphics)
+        {
+            renderer.Render(this);
+            RenderTarget.Flush(graphics);
         }
 
         public void Refresh()
@@ -179,6 +170,29 @@ namespace OpenBreed.Editor.VM.Maps
 
         #endregion Public Methods
 
+        #region Protected Methods
+
+        protected override void OnPropertyChanged(string name)
+        {
+            switch (name)
+            {
+                case nameof(Layout):
+                    //Title = "Map body - " + Layout.Parent.Title;
+                    Refresh();
+                    break;
+                case nameof(Transformation):
+                    Refresh();
+                    break;
+
+                default:
+                    break;
+            }
+
+            base.OnPropertyChanged(name);
+        }
+
+        #endregion Protected Methods
+
         #region Private Methods
 
         private Point CalculateWorldPosition(Point viewPosition)
@@ -196,19 +210,7 @@ namespace OpenBreed.Editor.VM.Maps
         {
             Refresh();
         }
-        private void MapBodyViewerVM_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(Layout):
-                    Title = "Map body - " + Layout.Owner.Title;
-                    break;
-                default:
-                    break;
-            }
-        }
 
         #endregion Private Methods
-
     }
 }

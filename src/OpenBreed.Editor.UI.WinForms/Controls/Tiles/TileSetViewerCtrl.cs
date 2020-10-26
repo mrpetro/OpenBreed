@@ -105,12 +105,8 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Tiles
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            _vm.Draw(e.Graphics);
-            _vm.Selector.DrawSelection(e.Graphics);
-
-            Pen selectedPen = new Pen(Color.LightGreen);
-            Pen selectPen = new Pen(Color.LightBlue);
-            Pen deselectPen = new Pen(Color.Red);
+            //_vm.Draw(e.Graphics);
+            //_vm.Selector.DrawSelection(e.Graphics);
 
             base.OnPaint(e);
         }

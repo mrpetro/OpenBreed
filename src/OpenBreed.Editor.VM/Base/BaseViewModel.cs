@@ -20,7 +20,7 @@ namespace OpenBreed.Editor.VM.Base
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
         }
 
-        protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = "")
+        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = "")
         {
             if (EqualityComparer<T>.Default.Equals(storage, value))
                 return false;

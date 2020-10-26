@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenBreed.Editor.VM.EntityTemplates;
 using OpenBreed.Editor.VM;
+using OpenBreed.Database.Interface.Items.EntityTemplates;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.EntityTemplates
 {
@@ -26,37 +27,35 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.EntityTemplates
             _vm = vm as EntityTemplateEditorVM ?? throw new InvalidOperationException(nameof(vm));
 
             _vm.PropertyChanged += _vm_PropertyChanged;
-
-            OnEditableChanged(_vm.Editable);
+            OnSubeditorChanged(_vm.Subeditor);
         }
 
         private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
-                case nameof(_vm.Editable):
-                    OnEditableChanged(_vm.Editable);
+                case nameof(_vm.Subeditor):
+                    OnSubeditorChanged(_vm.Subeditor);
                     break;
                 default:
                     break;
             }
         }
 
-        private void OnEditableChanged(EntityTemplateVM entityTemplate)
+        private void OnSubeditorChanged(IEntryEditor<IEntityTemplateEntry> subeditor)
         {
             Controls.Clear();
 
-            if (entityTemplate == null)
+            if (subeditor == null)
                 return;
 
-            if (entityTemplate is EntityTemplateFromFileVM)
+            if (subeditor is EntityTemplateFromFileEditorVM)
             {
                 var control = new EntityTemplateFromFileCtrl();
-                control.Initialize((EntityTemplateFromFileVM)entityTemplate);
+                control.Initialize((EntityTemplateFromFileEditorVM)subeditor);
                 control.Dock = DockStyle.Fill;
                 Controls.Add(control);
             }
         }
-
     }
 }

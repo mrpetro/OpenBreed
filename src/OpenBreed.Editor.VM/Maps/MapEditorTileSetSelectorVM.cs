@@ -1,6 +1,8 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Tiles;
+using OpenBreed.Editor.VM.Tiles.Helpers;
+using OpenBreed.Model.Tiles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,9 +17,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Private Fields
 
-        private int _currentIndex = -1;
-        private TileSetVM _currentItem = null;
-        private string _title;
+        private string currentItem = null;
 
         #endregion Private Fields
 
@@ -27,66 +27,65 @@ namespace OpenBreed.Editor.VM.Maps
         {
             Parent = parent;
 
-            TileSets = new BindingList<TileSetVM>();
-            TileSets.ListChanged += (s, a) => OnPropertyChanged(nameof(TileSets));
-
-            PropertyChanged += This_PropertyChanged;
+            TileSetNames = new BindingList<string>();
+            TileSetNames.ListChanged += (s, a) => OnPropertyChanged(nameof(TileSetNames));
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public int CurrentIndex
+        public string CurrentItem
         {
-            get { return _currentIndex; }
-            set { SetProperty(ref _currentIndex, value); }
-        }
-
-        public TileSetVM CurrentItem
-        {
-            get { return _currentItem; }
-            set { SetProperty(ref _currentItem, value); }
+            get { return currentItem; }
+            set { SetProperty(ref currentItem, value); }
         }
 
         public MapEditorTilesToolVM Parent { get; }
-        public BindingList<TileSetVM> TileSets { get; }
-        public string Title
-        {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
-        }
+
+        public BindingList<string> TileSetNames { get; }
 
         #endregion Public Properties
 
+        #region Internal Methods
+
+        internal void UpdateList(string tileSetRef)
+        {
+            TileSetNames.UpdateAfter(() =>
+            {
+                TileSetNames.Clear();
+                TileSetNames.Add(tileSetRef);
+            });
+
+            CurrentItem = TileSetNames.FirstOrDefault();
+        }
+
+        #endregion Internal Methods
+
         #region Private Methods
 
-        private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
+
+        public event EventHandler<string> CurrentItemChanged;
+
+        private void OnCurrentItemChanged()
         {
-            switch (e.PropertyName)
+            CurrentItemChanged?.Invoke(this, CurrentItem);
+        }
+
+        protected override void OnPropertyChanged(string name)
+        {
+            switch (name)
             {
-                case nameof(CurrentIndex):
-                    UpdateCurrentItem();
-                    break;
                 case nameof(CurrentItem):
-                    UpdateCurrentIndex();
+                    OnCurrentItemChanged();
                     break;
                 default:
                     break;
             }
-        }
-        private void UpdateCurrentIndex()
-        {
-            CurrentIndex = Parent.Parent.Editable.TileSets.IndexOf(CurrentItem);
+
+            base.OnPropertyChanged(name);
         }
 
-        private void UpdateCurrentItem()
-        {
-            if (CurrentIndex == -1)
-                CurrentItem = null;
-            else
-                CurrentItem = Parent.Parent.Editable.TileSets[CurrentIndex];
-        }
 
         #endregion Private Methods
 

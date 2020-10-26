@@ -1,12 +1,8 @@
-﻿using OpenBreed.Common;
-using OpenBreed.Editor.VM.Actions;
+﻿using OpenBreed.Editor.VM.Actions;
 using OpenBreed.Editor.VM.Base;
+using OpenBreed.Model.Actions;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Maps
 {
@@ -35,7 +31,6 @@ namespace OpenBreed.Editor.VM.Maps
         #region Public Properties
 
         public BindingList<ActionVM> Items { get; }
-
         public MapEditorActionsToolVM Parent { get; }
 
         public int SelectedIndex
@@ -46,19 +41,34 @@ namespace OpenBreed.Editor.VM.Maps
 
         #endregion Public Properties
 
+        #region Internal Properties
+
+        #endregion Internal Properties
+
         #region Private Methods
 
-        private void OnActionSetChanged(ActionSetVM actionSet)
+        private string currentActionSetRef;
+
+        public string CurrentActionSetRef
+        {
+            get { return currentActionSetRef; }
+            set { SetProperty(ref currentActionSetRef, value); }
+        }
+
+        private void OnActionSetChanged()
         {
             Items.UpdateAfter(() =>
             {
                 Items.Clear();
                 SelectedIndex = -1;
 
-                if (actionSet == null)
+                if (Parent.Parent.ActionSet == null)
                     return;
 
-                actionSet.Items.ForEach(item => Items.Add(item));
+                foreach (var actionModel in Parent.Parent.ActionSet.Items)
+                {
+                    Items.Add(new ActionVM(actionModel));
+                }
             });
         }
 
@@ -66,15 +76,15 @@ namespace OpenBreed.Editor.VM.Maps
         {
             switch (e.PropertyName)
             {
-                case nameof(Parent.ActionSet):
-                    OnActionSetChanged(Parent.ActionSet);
+                case nameof(Parent.CurrentActionSetRef):
+                    OnActionSetChanged();
                     break;
+
                 default:
                     break;
             }
         }
 
         #endregion Private Methods
-
     }
 }

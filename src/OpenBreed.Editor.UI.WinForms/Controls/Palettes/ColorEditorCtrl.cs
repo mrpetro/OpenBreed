@@ -16,7 +16,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
     {
         #region Private Fields
 
-        private PaletteVM _vm;
+        private PaletteEditorExVM vm;
 
         #endregion Private Fields
 
@@ -31,24 +31,24 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 
         #region Public Methods
 
-        public void Initialize(PaletteVM vm)
+        public void Initialize(PaletteEditorExVM vm)
         {
-            _vm = vm;
+            this.vm = vm;
 
-            _vm.PropertyChanged += _vm_PropertyChanged;
+            vm.PropertyChanged += vm_PropertyChanged;
 
-            SetupWithColor(_vm.CurrentColorIndex, _vm.CurrentColor);
+            SetupWithColor(this.vm.CurrentColorIndex, this.vm.CurrentColor);
         }
 
-        private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
-                case nameof(_vm.CurrentColorIndex):
-                    SetupWithColor(_vm.CurrentColorIndex, _vm.CurrentColor);
+                case nameof(vm.CurrentColorIndex):
+                    SetupWithColor(vm.CurrentColorIndex, vm.CurrentColor);
                     break;
-                case nameof(_vm.CurrentColor):
-                    SetupWithColor(_vm.CurrentColorIndex, _vm.CurrentColor);
+                case nameof(vm.CurrentColor):
+                    SetupWithColor(vm.CurrentColorIndex, vm.CurrentColor);
                     break;
                 default:
                     break;
@@ -75,20 +75,20 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Palettes
 
         private void SetB(byte value)
         {
-            Color oldColor = _vm.CurrentColor;
-            _vm.CurrentColor = Color.FromArgb(oldColor.R, oldColor.G, value);
+            Color oldColor = vm.CurrentColor;
+            vm.CurrentColor = Color.FromArgb(oldColor.R, oldColor.G, value);
         }
 
         private void SetG(byte value)
         {
-            Color oldColor = _vm.CurrentColor;
-            _vm.CurrentColor = Color.FromArgb(oldColor.R, value, oldColor.B);
+            Color oldColor = vm.CurrentColor;
+            vm.CurrentColor = Color.FromArgb(oldColor.R, value, oldColor.B);
         }
 
         private void SetR(byte value)
         {
-            Color oldColor = _vm.CurrentColor;
-            _vm.CurrentColor = Color.FromArgb(value, oldColor.G, oldColor.B);
+            Color oldColor = vm.CurrentColor;
+            vm.CurrentColor = Color.FromArgb(value, oldColor.G, oldColor.B);
         }
         private void sliderB_ValueChanged(object sender, EventArgs e)
         {

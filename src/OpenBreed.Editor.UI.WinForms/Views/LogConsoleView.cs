@@ -13,7 +13,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 {
     public partial class LogConsoleView : DockContent
     {
-        private LoggerVM _vm;
+        private LoggerVM vm;
 
         public LogConsoleView()
         {
@@ -22,7 +22,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         public void Initialize(LoggerVM vm)
         {
-            _vm = vm ?? throw new InvalidOperationException(nameof(vm));
+            this.vm = vm ?? throw new InvalidOperationException(nameof(vm));
 
 
         }

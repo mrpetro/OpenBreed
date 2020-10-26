@@ -17,8 +17,8 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Common.Data;
 using OpenBreed.Database.Interface;
-using OpenBreed.Common.Helpers;
 using System.IO;
+using OpenBreed.Common.Tools;
 
 namespace OpenBreed.Editor.VM.Database
 {
@@ -30,7 +30,6 @@ namespace OpenBreed.Editor.VM.Database
         private readonly Dictionary<string, EntryEditorVM> _openedEntryEditors = new Dictionary<string, EntryEditorVM>();
         private DatabaseVM _editable;
         private IUnitOfWork _edited;
-        private readonly EntryEditorVM _activeEntryEditor;
 
         #endregion Private Fields
 
@@ -80,7 +79,7 @@ namespace OpenBreed.Editor.VM.Database
             _edited = model;
 
             application.ServiceLocator.RegisterService<IUnitOfWork>(model);
-            application.ServiceLocator.RegisterService<DataProvider>(new DataProvider(model));
+            application.ServiceLocator.RegisterService<DataProvider>(new DataProvider(model, application.Logger));
 
             var vm = new DatabaseVM();
             UpdateVM(model, vm);

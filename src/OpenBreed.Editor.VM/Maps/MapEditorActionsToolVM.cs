@@ -1,26 +1,19 @@
-﻿using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM.Actions;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenBreed.Common;
-using OpenBreed.Common.Actions;
+﻿using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Editor.VM.Common;
-using OpenBreed.Editor.VM.Maps.Layers;
-using OpenBreed.Common.Data;
-using OpenBreed.Database.Interface.Items.Actions;
+using OpenBreed.Model.Actions;
+using OpenBreed.Model.Maps;
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
 
 namespace OpenBreed.Editor.VM.Maps
 {
     public class MapEditorActionsToolVM : MapEditorToolVM
     {
-
         #region Private Fields
 
-        private ActionSetVM _actionSet;
+        private string currentActionSetRef;
 
         #endregion Private Fields
 
@@ -29,96 +22,104 @@ namespace OpenBreed.Editor.VM.Maps
         public MapEditorActionsToolVM(MapEditorVM parent)
         {
             Parent = parent;
-
-            ActionEntryRef = new EntryRefIdEditorVM(typeof(IActionSetEntry));
+            RefIdEditor = new EntryRefIdEditorVM(typeof(IActionSetEntry));
             ActionsSelector = new MapEditorActionsSelectorVM(this);
 
-            ActionEntryRef.PropertyChanged += ActionEntryRef_PropertyChanged;
-
-            PropertyChanged += This_PropertyChanged;
+            RefIdEditor.PropertyChanged += ActionEntryRef_PropertyChanged;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public EntryRefIdEditorVM ActionEntryRef { get; }
-
-        public ActionSetVM ActionSet
+        public string CurrentActionSetRef
         {
-            get { return _actionSet; }
-            set { SetProperty(ref _actionSet, value); }
+            get { return currentActionSetRef; }
+            set { SetProperty(ref currentActionSetRef, value); }
         }
 
+        public EntryRefIdEditorVM RefIdEditor { get; }
         public MapEditorActionsSelectorVM ActionsSelector { get; }
-
         public MapEditorVM Parent { get; }
+        public Action<string> ModelChangeAction { get; internal set; }
+
+        public MapLayerModel Layer { get; private set; }
 
         #endregion Public Properties
 
+        #region Internal Properties
+
+        internal ActionSetModel CurrentActionSet { get; private set; }
+
+        #endregion Internal Properties
+
         #region Internal Methods
 
-        internal void Load(string actionSetEntryId)
+        internal void SetValue(Point tileCoords, int value)
         {
-            if (actionSetEntryId == null)
-                ActionSet = null;
-            else
-            {
-                var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
-                var actionSet = dataProvider.ActionSets.GetActionSet(actionSetEntryId);
+            var oldValue = Layer.GetValue(tileCoords.X, tileCoords.Y);
 
-                var actionSetVM = new ActionSetVM();
-                actionSetVM.FromEntry(actionSet);
-                ActionSet = actionSetVM;
-            }
+            if (oldValue == value)
+                return;
+
+            Layer.SetValue(tileCoords.X, tileCoords.Y, value);
+
+            Parent.IsModified = true;
+        }
+
+        internal override void OnCursor(MapViewCursorVM cursor)
+        {
+            if ((cursor.Action == CursorActions.Move || cursor.Action == CursorActions.Down) && cursor.Buttons.HasFlag(CursorButtons.Left))
+                SetValue(cursor.WorldIndexCoords, ActionsSelector.SelectedIndex);
+        }
+
+        internal void UpdateVM()
+        {
+            Layer = Parent.Layout.Layers.FirstOrDefault(item => item.LayerType == Model.Maps.MapLayerType.Action);
         }
 
         #endregion Internal Methods
 
         #region Protected Methods
 
-        internal override void OnCursor(MapViewCursorVM cursor)
+        protected override void OnPropertyChanged(string name)
         {
-            if ((cursor.Action == CursorActions.Move || cursor.Action == CursorActions.Down) && cursor.Buttons.HasFlag(CursorButtons.Left))
+            switch (name)
             {
-                var actionLayer = Parent.Editable.Layout.Layers.OfType<MapLayerActionVM>().FirstOrDefault();
+                case nameof(CurrentActionSetRef):
+                    RefIdEditor.RefId = CurrentActionSetRef;
+                    UpdateModel();
+                    break;
 
-                var actionCode = ActionsSelector.SelectedIndex;
-
-                actionLayer.SetCell(cursor.WorldIndexCoords.X, cursor.WorldIndexCoords.Y, actionCode);
-
+                default:
+                    break;
             }
+
+            base.OnPropertyChanged(name);
         }
 
         #endregion Protected Methods
 
         #region Private Methods
 
+        private void UpdateModel()
+        {
+            ModelChangeAction?.Invoke(CurrentActionSetRef);
+        }
+
         private void ActionEntryRef_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
-                case nameof(ActionEntryRef.RefId):
-                    Load(ActionEntryRef.RefId);
+                case nameof(RefIdEditor.RefId):
+                    CurrentActionSetRef = RefIdEditor.RefId;
                     break;
-                default:
-                    break;
-            }
-        }
 
-        private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(ActionSet):
-                    ActionEntryRef.RefId = (ActionSet == null) ? null : ActionSet.Id;
-                    break;
                 default:
                     break;
             }
         }
 
         #endregion Private Methods
-
     }
 }

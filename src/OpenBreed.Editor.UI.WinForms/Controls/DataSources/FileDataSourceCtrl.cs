@@ -15,7 +15,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.DataSources
     {
         #region Private Fields
 
-        private FileDataSourceVM _vm;
+        private FileDataSourceEditorVM _vm;
 
         #endregion Private Fields
 
@@ -30,7 +30,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.DataSources
 
         #region Public Methods
 
-        public void Initialize(FileDataSourceVM vm)
+        public void Initialize(FileDataSourceEditorVM vm)
         {
             _vm = vm;
 

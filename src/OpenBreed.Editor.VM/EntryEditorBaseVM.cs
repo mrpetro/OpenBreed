@@ -2,17 +2,16 @@
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items;
 using System;
+using System.Collections.Generic;
 
 namespace OpenBreed.Editor.VM
 {
-    public abstract class EntryEditorBaseVM<E, VM> : EntryEditorVM where VM : EditableEntryVM, new() where E : IEntry
+    public abstract class EntryEditorBaseVM<E> : EntryEditorVM where E : IEntry
     {
         #region Private Fields
 
-        //private VM _editable;
-        //private string _editableName;
+        private static readonly HashSet<string> propertyNamesIgnoredForChanges = new HashSet<string>();
         private E _edited;
-
         private E _next;
         private E _previous;
         private IRepository<E> _repository;
@@ -37,29 +36,13 @@ namespace OpenBreed.Editor.VM
 
         #endregion Protected Constructors
 
-        #region Public Properties
-
-        public new VM Editable
-        {
-            get { return (VM)_editable; }
-            set { base.SetProperty(ref _editable, value); }
-        }
-
-        #endregion Public Properties
-
-        //public override string EditableName
-        //{
-        //    get { return _editableName; }
-        //    set { SetProperty(ref _editableName, value); }
-        //}
-
         #region Public Methods
 
         public override void Commit()
         {
             var originalId = _edited.Id;
 
-            UpdateEntry((VM)_editable, _edited);
+            UpdateEntry(_edited);
 
             if (EditMode)
                 _repository.Update(_edited);
@@ -83,7 +66,6 @@ namespace OpenBreed.Editor.VM
         {
             var entry = _repository.GetById(id);
             EditEntry(entry);
-            EditMode = true;
         }
 
         public override void EditNextEntry()
@@ -106,36 +88,61 @@ namespace OpenBreed.Editor.VM
 
         #region Protected Methods
 
-        protected virtual VM CreateVM(E model)
+        protected static void IgnoreProperty(string propertyName)
         {
-            return new VM();
+            propertyNamesIgnoredForChanges.Add(propertyName);
         }
 
-        protected virtual void UpdateEntry(VM source, E target)
+        protected virtual void UpdateEntry(E target)
         {
-            source.ToEntry(target);
+            target.Id = Id;
+            target.Description = Description;
         }
 
-        protected virtual void UpdateVM(E source, VM target)
+        static EntryEditorBaseVM()
         {
-            target.FromEntry(source);
+            IgnoreProperty(nameof(CommitEnabled));
+            IgnoreProperty(nameof(RevertEnabled));
         }
 
-        protected virtual void OnEditablePropertyChanged(string propertyName)
+        protected virtual void UpdateVM(E source)
         {
-            var canCommit = true;
+            Id = source.Id;
+            Description = source.Description;
+        }
 
-            switch (propertyName)
+        protected override void OnPropertyChanged(string name)
+        {
+            if (!propertyNamesIgnoredForChanges.Contains(name) && changesTrackingEnabled)
             {
-                case nameof(Editable.Id):
-                    canCommit = IsIdUnique();
-                    break;
+                var canCommit = true;
 
-                default:
-                    break;
+                switch (name)
+                {
+                    case nameof(Id):
+                        canCommit = IsIdUnique();
+                        break;
+
+                    default:
+                        break;
+                }
+
+                CommitEnabled = canCommit;
             }
 
-            CommitEnabled = canCommit;
+            base.OnPropertyChanged(name);
+        }
+
+        private bool changesTrackingEnabled;
+
+        protected virtual void DisableChangesTracking()
+        {
+            changesTrackingEnabled = false;
+        }
+
+        protected virtual void EnableChangesTracking()
+        {
+            changesTrackingEnabled = true;
         }
 
         #endregion Protected Methods
@@ -144,7 +151,7 @@ namespace OpenBreed.Editor.VM
 
         private bool IsIdUnique()
         {
-            var foundEntry = _repository.Find(Editable.Id);
+            var foundEntry = _repository.Find(Id);
 
             if (foundEntry == null)
                 return true;
@@ -152,37 +159,29 @@ namespace OpenBreed.Editor.VM
             return false;
         }
 
-        private void Editable_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            OnEditablePropertyChanged(e.PropertyName);
-        }
-
         private void EditEntry(E entry)
         {
-            //Unsubscribe to previous edited item changes
-            if (Editable != null)
-                Editable.PropertyChanged -= Editable_PropertyChanged;
+            DisableChangesTracking();
 
             _edited = entry;
             _next = _repository.GetNextTo(_edited);
             _previous = _repository.GetPreviousTo(_edited);
 
-            var vm = CreateVM(_edited);
+            UpdateVM(entry);
 
-            UpdateVM(entry, vm);
-            Editable = vm;
-            Editable.PropertyChanged += Editable_PropertyChanged;
             UpdateControls();
 
+            EditMode = true;
             CommitEnabled = false;
+            EnableChangesTracking();
         }
 
         private void UpdateControls()
         {
-            if (Editable == null)
+            if (_edited == null)
                 Title = $"{EditorName} - no entry to edit";
             else
-                Title = $"{EditorName} - {Editable.Id}";
+                Title = $"{EditorName} - {Id}";
 
             NextAvailable = _next != null;
             PreviousAvailable = _previous != null;

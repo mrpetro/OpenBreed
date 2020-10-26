@@ -1,25 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Data;
-using OpenBreed.Editor.VM.Actions;
-using OpenBreed.Common.Assets;
-using System.ComponentModel;
-using OpenBreed.Editor.VM.Base;
-using OpenBreed.Common.Logging;
-using OpenBreed.Common.Actions;
-using OpenBreed.Common;
-using OpenBreed.Database.Interface.Items;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Database.Interface.Items.Actions;
+using OpenBreed.Editor.VM.Base;
+using OpenBreed.Model.Actions;
+using System.ComponentModel;
+using System.Drawing;
 
 namespace OpenBreed.Editor.VM.Actions
 {
-    public class ActionSetVM : EditableEntryVM
+    public class ActionSetEmbeddedEditorVM : BaseViewModel, IEntryEditor<IActionSetEntry>
     {
-
         #region Private Fields
 
         private const int PROP_SIZE = 32;
@@ -28,8 +18,9 @@ namespace OpenBreed.Editor.VM.Actions
 
         #region Public Constructors
 
-        public ActionSetVM()
+        public ActionSetEmbeddedEditorVM(ParentEntryEditor<IActionSetEntry> parent)
         {
+            Parent = parent;
             Items = new BindingList<ActionVM>();
             Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
         }
@@ -38,16 +29,14 @@ namespace OpenBreed.Editor.VM.Actions
 
         #region Public Properties
 
+        public ParentEntryEditor<IActionSetEntry> Parent { get; }
         public BindingList<ActionVM> Items { get; }
+
+        public int SelectedIndex { get; private set; }
 
         #endregion Public Properties
 
         #region Public Methods
-
-        public ActionVM NewItem()
-        {
-            return new ActionVM(this);
-        }
 
         public void DrawProperty(Graphics gfx, int id, float x, float y, int tileSize)
         {
@@ -56,7 +45,7 @@ namespace OpenBreed.Editor.VM.Actions
 
             var propertyData = Items[id];
 
-            if (!propertyData.Visibility)
+            if (!propertyData.IsVisible)
                 return;
 
             var image = propertyData.Icon;
@@ -72,56 +61,37 @@ namespace OpenBreed.Editor.VM.Actions
             //gfx.DrawImage(image, new Rectangle((int)x, (int)y, image.Width, image.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, ia);
 
             gfx.DrawImage(image, x, y, tileSize, tileSize);
-
         }
 
-        #endregion Public Methods
+        private ActionSetModel model;
 
-        #region Internal Methods
-
-        internal override void FromEntry(IEntry entry)
+        public virtual void UpdateVM(IActionSetEntry entry)
         {
-            base.FromEntry(entry);
-            FromEntry((IActionSetEntry)entry);
-        }
+            model = ServiceLocator.Instance.GetService<DataProvider>().ActionSets.GetActionSet(entry.Id);
 
-        internal override void ToEntry(IEntry entry)
-        {
-            base.ToEntry(entry);
-            ToEntry((IActionSetEntry)entry);
-        }
-
-        #endregion Internal Methods
-
-        #region Private Methods
-
-        private void ToEntry(IActionSetEntry entry)
-        {
-            entry.Actions.Clear();
-
-            foreach (var item in Items)
-            {
-                var newAction = entry.NewItem();
-                item.ToModel(newAction);
-                entry.Actions.Add(newAction);
-            }
-        }
-
-        private void FromEntry(IActionSetEntry entry)
-        {
             Items.UpdateAfter(() =>
             {
                 Items.Clear();
 
-                foreach (var item in entry.Actions)
-                {
-                    var newAction = NewItem();
-                    newAction.FromModel(item);
-                    Items.Add(newAction);
-                }
+                foreach (var item in model.Items)
+                    Items.Add(new ActionVM(item));
             });
+
+            SelectedIndex = 0;
         }
 
-        #endregion Private Methods
+        public virtual void UpdateEntry(IActionSetEntry entry)
+        {
+            entry.Actions.Clear();
+
+            foreach (var item in model.Items)
+            {
+                var newAction = entry.NewItem();
+                ActionSetsDataHelper.ToEntry(item, newAction);
+                entry.Actions.Add(newAction);
+            }
+        }
+
+        #endregion Public Methods
     }
 }

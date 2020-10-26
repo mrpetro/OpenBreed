@@ -1,20 +1,17 @@
-﻿using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Common;
+using OpenBreed.Editor.VM.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using OpenBreed.Editor.VM.Palettes;
-using OpenBreed.Common.Model.Palettes;
+using System.Linq;
 
 namespace OpenBreed.Editor.VM.Maps
 {
     public class MapEditorPalettesToolVM : MapEditorToolVM
     {
-
         #region Private Fields
 
-        private int _currentIndex = -1;
-        private PaletteModel _currentItem = null;
+        private string currentPaletteRef;
 
         #endregion Private Fields
 
@@ -24,59 +21,68 @@ namespace OpenBreed.Editor.VM.Maps
         {
             Parent = parent;
 
-            PropertyChanged += LevelPaletteSelectorVM_PropertyChanged;
+            PaletteNames = new BindingList<string>();
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public int CurrentIndex
-        {
-            get { return _currentIndex; }
-            set { SetProperty(ref _currentIndex, value); }
-        }
+        public BindingList<string> PaletteNames { get; }
 
-        public PaletteModel CurrentItem
+        public Action<string> ModelChangeAction { get; internal set; }
+
+        public string CurrentPaletteRef
         {
-            get { return _currentItem; }
-            set { SetProperty(ref _currentItem, value); }
+            get { return currentPaletteRef; }
+            set { SetProperty(ref currentPaletteRef, value); }
         }
 
         public MapEditorVM Parent { get; }
 
         #endregion Public Properties
 
-        #region Private Methods
+        #region Internal Methods
 
-        private void LevelPaletteSelectorVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        internal void UpdateList(IEnumerable<string> paletteRefs)
         {
-            switch (e.PropertyName)
+            PaletteNames.UpdateAfter(() =>
             {
-                case nameof(CurrentIndex):
-                    UpdateCurrentItem();
+                PaletteNames.Clear();
+                paletteRefs.ForEach(item => PaletteNames.Add(item));
+            });
+
+            CurrentPaletteRef = PaletteNames.FirstOrDefault();
+        }
+
+        #endregion Internal Methods
+
+        #region Protected Methods
+
+        protected override void OnPropertyChanged(string name)
+        {
+            switch (name)
+            {
+                case nameof(CurrentPaletteRef):
+                    UpdateModel();
                     break;
-                case nameof(CurrentItem):
-                    UpdateCurrentIndex();
-                    break;
+
                 default:
                     break;
             }
-        }
-        private void UpdateCurrentIndex()
-        {
-            CurrentIndex = Parent.Editable.Palettes.IndexOf(CurrentItem);
+
+            base.OnPropertyChanged(name);
         }
 
-        private void UpdateCurrentItem()
+        #endregion Protected Methods
+
+        #region Private Methods
+
+        private void UpdateModel()
         {
-            if (CurrentIndex == -1)
-                CurrentItem = null;
-            else
-                CurrentItem = Parent.Editable.Palettes[CurrentIndex];
+            ModelChangeAction?.Invoke(CurrentPaletteRef);
         }
 
         #endregion Private Methods
-
     }
 }

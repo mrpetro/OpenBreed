@@ -18,7 +18,7 @@ using System.ComponentModel;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Images;
 using OpenBreed.Common.Formats;
-using OpenBreed.Common.Actions;
+using OpenBreed.Model.Actions;
 using OpenBreed.Database.Xml;
 using OpenBreed.Editor.VM.Sounds;
 using OpenBreed.Editor.VM.Database.Entries;
@@ -42,6 +42,7 @@ using OpenBreed.Database.Interface.Items.Scripts;
 using OpenBreed.Editor.VM.Scripts;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
 using OpenBreed.Editor.VM.EntityTemplates;
+using OpenBreed.Common.Tools;
 
 namespace OpenBreed.Editor.VM
 {
@@ -69,7 +70,7 @@ namespace OpenBreed.Editor.VM
         {
             this.application = application;
 
-            Logger = new LoggerVM();
+            Logger = new LoggerVM(application.Logger);
 
             application.ServiceLocator.RegisterService<EditorVM>(this);
 

@@ -22,14 +22,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
 
         #region Private Fields
 
-        static float angle = 0.0f;
         private OpenTK.GLControl _glControl;
-
-        private int px;
-        private int py;
-
-
-        private bool _loaded = false;
 
         #endregion Private Fields
 

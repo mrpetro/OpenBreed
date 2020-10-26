@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.Model.Sprites;
+﻿using OpenBreed.Model.Sprites;
 using System.Drawing;
 
 namespace OpenBreed.Editor.VM.Sprites

@@ -32,20 +32,11 @@ namespace OpenBreed.Editor.VM.Renderer
 
         public override void Render(MapEditorViewVM renderable)
         {
-            Target.Gfx.Transform = renderable.Transformation;
-
-            if (renderable.Layout == null)
-                return;
+            Target.Transform = renderable.Transformation;
 
             _layoutRenderer.Render(renderable.Layout);
-
-
-            _editor.TilesTool.DrawBuffer(Target.Gfx, 16);
-
             _tilesToolRenderer.Render(_editor.TilesTool);
-
-            if (renderable.Cursor.Visible)
-                _cursorRenderer.Render(renderable.Cursor);
+            _cursorRenderer.Render(renderable.Cursor);
         }
 
         #endregion Public Constructors

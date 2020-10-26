@@ -13,10 +13,6 @@ namespace OpenBreed.Editor.VM.Renderer
 
         private readonly MapEditorVM _editor;
 
-        private readonly ViewCursorRenderer _cursorRenderer;
-        private readonly LayoutRenderer _layoutRenderer;
-
-
         public TilesToolRenderer(MapEditorVM editor, RenderTarget target) : base(target)
         {
             _editor = editor;
@@ -24,9 +20,11 @@ namespace OpenBreed.Editor.VM.Renderer
 
         public override void Render(MapEditorTilesToolVM renderable)
         {
+            renderable.DrawBuffer(Target, 16);
+
             foreach (var tile in renderable.TilesCursor)
             {
-                renderable.TilesSelector.CurrentTileSet.DrawTile(Target.Gfx, tile.TileIdAfter, tile.IndexCoords.X * 16, tile.IndexCoords.Y * 16, 16);
+                _editor.DrawTile(Target, tile.TileIdAfter, tile.IndexCoords.X * 16, tile.IndexCoords.Y * 16, 16);
             }
         }
 

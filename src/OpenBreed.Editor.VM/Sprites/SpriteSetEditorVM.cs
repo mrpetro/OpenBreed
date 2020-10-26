@@ -1,123 +1,23 @@
-﻿using OpenBreed.Common;
-using OpenBreed.Common.Data;
-using OpenBreed.Common.Model.Palettes;
-using OpenBreed.Database.Interface;
+﻿using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Sprites;
-using OpenBreed.Editor.VM.Base;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 
 namespace OpenBreed.Editor.VM.Sprites
 {
-    public class SpriteSetEditorVM : EntryEditorBaseExVM<ISpriteSetEntry>
+    public class SpriteSetEditorVM : ParentEntryEditor<ISpriteSetEntry>
     {
-        #region Private Fields
-
-        private string _currentPaletteId;
-
-        private PaletteModel palette;
-
-        private IEntryEditor<ISpriteSetEntry> subeditor;
-
-        #endregion Private Fields
-
         #region Public Constructors
 
-        public SpriteSetEditorVM(IRepository repository) : base(repository)
+        static SpriteSetEditorVM()
         {
-            PaletteIds = new BindingList<string>();
-            PropertyChanged += This_PropertyChanged;
+            RegisterSubeditor<ISpriteSetFromSprEntry>((parent) => new SpriteSetFromSprEditorVM(parent));
+            RegisterSubeditor<ISpriteSetFromImageEntry>((parent) => new SpriteSetFromImageEditorVM(parent));
+        }
+
+        public SpriteSetEditorVM(IRepository repository) : base(repository, "Sprite Set Editor")
+        {
         }
 
         #endregion Public Constructors
-
-        #region Public Properties
-
-        public string CurrentPaletteId
-        {
-            get { return _currentPaletteId; }
-            set { SetProperty(ref _currentPaletteId, value); }
-        }
-
-        public PaletteModel Palette
-        {
-            get { return palette; }
-            set { SetProperty(ref palette, value); }
-        }
-
-        public override string EditorName { get { return "Sprite Set Editor"; } }
-        public BindingList<string> PaletteIds { get; }
-        public int SelectedIndex { get; private set; }
-
-        public IEntryEditor<ISpriteSetEntry> Subeditor
-        {
-            get { return subeditor; }
-            private set { SetProperty(ref subeditor, value); }
-        }
-
-        #endregion Public Properties
-
-        #region Internal Methods
-
-        internal void SetupPaletteIds(List<string> paletteRefs)
-        {
-            PaletteIds.UpdateAfter(() =>
-            {
-                PaletteIds.Clear();
-                paletteRefs.ForEach(item => PaletteIds.Add(item));
-            });
-
-            CurrentPaletteId = PaletteIds.FirstOrDefault();
-        }
-
-        #endregion Internal Methods
-
-        #region Protected Methods
-
-        protected override void UpdateEntry(ISpriteSetEntry entry)
-        {
-            base.UpdateEntry(entry);
-            Subeditor.UpdateEntry(entry);
-        }
-
-        protected override void UpdateVM(ISpriteSetEntry entry)
-        {
-            if (entry is ISpriteSetFromSprEntry)
-                Subeditor = new SpriteSetFromSprEditorVM(this);
-            else if (entry is ISpriteSetFromImageEntry)
-                Subeditor = new SpriteSetFromImageEditorVM(this);
-            else
-                throw new NotImplementedException();
-
-            base.UpdateVM(entry);
-            Subeditor.UpdateVM(entry);
-            SetupPaletteIds(entry.PaletteRefs);
-        }
-
-        #endregion Protected Methods
-
-        #region Private Methods
-
-        private void SwitchPalette(string paletteId)
-        {
-            Palette = ServiceLocator.Instance.GetService<DataProvider>().Palettes.GetPalette(paletteId);
-        }
-
-        private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(CurrentPaletteId):
-                    SwitchPalette(CurrentPaletteId);
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-        #endregion Private Methods
     }
 }

@@ -9,15 +9,15 @@ namespace OpenBreed.Editor.VM.Texts
     {
         #region Private Fields
 
-        private string _text;
+        private string text;
 
-        private string _dataRef;
+        private string dataRef;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TextEmbeddedEditorVM(TextEditorVM parent)
+        public TextEmbeddedEditorVM(ParentEntryEditor<ITextEntry> parent)
         {
             Parent = parent;
         }
@@ -26,18 +26,18 @@ namespace OpenBreed.Editor.VM.Texts
 
         #region Public Properties
 
-        public TextEditorVM Parent { get; }
+        public ParentEntryEditor<ITextEntry> Parent { get; }
 
         public string DataRef
         {
-            get { return _dataRef; }
-            set { SetProperty(ref _dataRef, value); }
+            get { return dataRef; }
+            set { SetProperty(ref dataRef, value); }
         }
 
         public string Text
         {
-            get { return _text; }
-            set { SetProperty(ref _text, value); }
+            get { return text; }
+            set { SetProperty(ref text, value); }
         }
 
         #endregion Public Properties
