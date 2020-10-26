@@ -9,9 +9,11 @@ namespace OpenBreed.Sandbox.Managers
     {
         #region Private Fields
 
-        private static ConsoleColor ERROR_COLOR = ConsoleColor.Red;
-        private static ConsoleColor WARNING_COLOR = ConsoleColor.Yellow;
         private static ConsoleColor VERBOSE_COLOR = ConsoleColor.Gray;
+        private static ConsoleColor INFO_COLOR = ConsoleColor.White;
+        private static ConsoleColor WARNING_COLOR = ConsoleColor.Yellow;
+        private static ConsoleColor ERROR_COLOR = ConsoleColor.Red;
+        private static ConsoleColor CRITICAL_COLOR = ConsoleColor.DarkRed;
 
         private ICore core;
 
@@ -36,34 +38,39 @@ namespace OpenBreed.Sandbox.Managers
 
         #region Public Methods
 
-        public void Verbose(string message)
-        {
-            Verbose(DefaultChannel, message);
-        }
+        public void Verbose(string message) => Verbose(DefaultChannel, message);
 
         public void Verbose(int channel, string message)
         {
             WriteLineWithColor(message, VERBOSE_COLOR);
         }
 
+        public void Info(string message) => Info(DefaultChannel, message);
+
+        public void Info(int channel, string message)
+        {
+            WriteLineWithColor(message, INFO_COLOR);
+        }
+
+        public void Warning(string message) => Warning(DefaultChannel, message);
+
         public void Warning(int channel, string message)
         {
             WriteLineWithColor(message, WARNING_COLOR);
         }
 
-        public void Warning(string message)
-        {
-            Warning(DefaultChannel, message);
-        }
+        public void Error(string message) => Error(DefaultChannel, message);
 
         public void Error(int channel, string message)
         {
             WriteLineWithColor(message, ERROR_COLOR);
         }
 
-        public void Error(string message)
+        public void Critical(string message) => Critical(DefaultChannel, message);
+
+        public void Critical(int channel, string message)
         {
-            Warning(DefaultChannel, message);
+            WriteLineWithColor(message, CRITICAL_COLOR);
         }
 
         #endregion Public Methods
@@ -76,21 +83,6 @@ namespace OpenBreed.Sandbox.Managers
             Console.ForegroundColor = color;
             Console.WriteLine(message);
             Console.ForegroundColor = prevColor;
-        }
-
-        public void Info(string msg)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Critical(string msg)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Success(string msg)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion Private Methods
