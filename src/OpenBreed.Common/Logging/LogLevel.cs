@@ -6,16 +6,14 @@ using System.Text;
 namespace OpenBreed.Common.Logging
 {
     /// <summary>
-    /// Types of logger messages
+    /// Levels of logging messages
     /// </summary>
-    public enum LogType
+    public enum LogLevel
     {
-        Critical,
-        Error,
-        Warning,
+        Verbose,
         Info,
-        Success,
-        Debug,
-        None,
+        Warning,
+        Error,
+        Critical
     }
 }

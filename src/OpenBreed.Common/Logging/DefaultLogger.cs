@@ -7,6 +7,7 @@ namespace OpenBreed.Common.Logging
     /// </summary>
     public class DefaultLogger : ILogger
     {
+        public int DefaultChannel { get; }
         #region Public Constructors
 
         public DefaultLogger()
@@ -27,85 +28,78 @@ namespace OpenBreed.Common.Logging
         #region Public Methods
 
         /// <summary>
-        /// Log debug message
+        /// Log message of Verbose level to default channel
         /// </summary>
-        /// <param name="msg"></param>
-        public void Debug(string msg)
+        /// <param name="message">Message text</param>
+        public void Verbose(string message) => Verbose(DefaultChannel, message);
+
+        /// <summary>
+        /// Log message of Verbose level to channel with given number
+        /// </summary>
+        /// <param name="msg">Message text</param>
+        public void Verbose(int channel, string message)
         {
-            MessageAdded?.Invoke(LogType.Debug, msg);
-            Console.WriteLine("Debug: " + msg);
+            MessageAdded?.Invoke(LogLevel.Verbose, message);
         }
 
         /// <summary>
-        /// Log debug message
+        /// Log message of Info level to default channel
         /// </summary>
-        /// <param name="msg"></param>
-        public void Debug(Exception ex)
+        /// <param name="message">Message text</param>
+        public void Info(string message) => Info(DefaultChannel, message);
+
+        /// <summary>
+        /// Log message of Info level to channel with given number
+        /// </summary>
+        /// <param name="msg">Message text</param>
+        public void Info(int channel, string message)
         {
-            Debug(ex.Message);
+            MessageAdded?.Invoke(LogLevel.Info, message);
         }
 
         /// <summary>
-        /// Log message as info
+        /// Log message of Warning level to default channel
         /// </summary>
-        /// <param name="msg"></param>
-        public void Info(string msg)
+        /// <param name="message">Message text</param>
+        public void Warning(string message) => Warning(DefaultChannel, message);
+
+        /// <summary>
+        /// Log message of Warning level to channel with given number
+        /// </summary>
+        /// <param name="msg">Message text</param>
+        public void Warning(int channel, string message)
         {
-            MessageAdded?.Invoke(LogType.Info, msg);
+            MessageAdded?.Invoke(LogLevel.Warning, message);
         }
 
         /// <summary>
-        /// Log message as warning
+        /// Log message of Error level to default channel
         /// </summary>
-        /// <param name="msg"></param>
-        public void Warning(string msg)
+        /// <param name="message">Message text</param>
+        public void Error(string message) => Error(DefaultChannel, message);
+
+        /// <summary>
+        /// Log message of Error level to channel with given number
+        /// </summary>
+        /// <param name="msg">Message text</param>
+        public void Error(int channel, string message)
         {
-            MessageAdded?.Invoke(LogType.Warning, msg);
+            MessageAdded?.Invoke(LogLevel.Error, message);
         }
 
         /// <summary>
-        /// Log message as error
+        /// Log message of Critical level to default channel
         /// </summary>
-        /// <param name="ex"></param>
-        public void Error(Exception ex)
-        {
-            Error(ex.Message);
-        }
+        /// <param name="message">Message text</param>
+        public void Critical(string message) => Critical(DefaultChannel, message);
 
         /// <summary>
-        /// Log message as error
+        /// Log message of Critical level to channel with given number
         /// </summary>
-        /// <param name="msg"></param>
-        public void Error(string msg)
+        /// <param name="msg">Message text</param>
+        public void Critical(int channel, string message)
         {
-            MessageAdded?.Invoke(LogType.Error, msg);
-        }
-
-        /// <summary>
-        /// Log message as critical
-        /// </summary>
-        /// <param name="ex"></param>
-        public void Critical(Exception ex)
-        {
-            Critical(ex.Message);
-        }
-
-        /// <summary>
-        /// Log message as critical
-        /// </summary>
-        /// <param name="msg"></param>
-        public void Critical(string msg)
-        {
-            MessageAdded?.Invoke(LogType.Critical, msg);
-        }
-
-        /// <summary>
-        /// Log message as success
-        /// </summary>
-        /// <param name="msg"></param>
-        public void Success(string msg)
-        {
-            MessageAdded?.Invoke(LogType.Success, msg);
+            MessageAdded?.Invoke(LogLevel.Critical, message);
         }
 
         #endregion Public Methods

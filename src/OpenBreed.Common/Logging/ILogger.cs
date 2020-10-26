@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Common.Logging
 {
-    public delegate void Message(LogType type, string msg);
+    public delegate void Message(LogLevel type, string msg);
 
     public interface ILogger
     {
@@ -10,17 +10,25 @@
 
         #endregion Public Events
 
+        #region Public Properties
+
+        int DefaultChannel { get; }
+
+        #endregion Public Properties
+
         #region Public Methods
 
-        void Info(string msg);
+        void Verbose(string message);
 
-        void Warning(string msg);
+        void Verbose(int channel, string message);
 
-        void Error(string msg);
+        void Warning(string message);
 
-        void Critical(string msg);
+        void Warning(int channel, string message);
 
-        void Success(string msg);
+        void Error(string message);
+
+        void Error(int channel, string message);
 
         #endregion Public Methods
     }

@@ -106,7 +106,7 @@
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\LogFile.cs" />
     <Compile Include="Logging\DefaultLogger.cs" />
-    <Compile Include="Logging\LogType.cs" />
+    <Compile Include="Logging\LogLevel.cs" />
     <Compile Include="ServiceLocator.cs" />
     <Compile Include="VariableMan.cs" />
     <Compile Include="ProgramTools.cs" />

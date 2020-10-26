@@ -41,16 +41,12 @@ namespace OpenBreed.Common.Logging
 
         #region Private methods
 
-        private void LogMessage(LogType type, string msg)
+        private void LogMessage(LogLevel type, string msg)
         {
             if (m_Stream == null)
                 return;
-            if (!LogDebug && type == LogType.Debug)
-                return;
-            if (type == LogType.None)
-                m_Stream.WriteLine(msg);
-            else
-                m_Stream.WriteLine(type + ": " + msg);
+
+            m_Stream.WriteLine(type + ": " + msg);
         }
 
         #endregion
