@@ -22,6 +22,10 @@
 
         void Verbose(int channel, string message);
 
+        void Info(string message);
+
+        void Info(int channel, string message);
+
         void Warning(string message);
 
         void Warning(int channel, string message);

@@ -14,11 +14,11 @@ namespace OpenBreed.Common.UI.WinForms.Controls
     {
         private ILogger logger;
 
-        private Color m_SuccessColor = Color.Green;
-        private Color m_WarningColor = Color.Orange;
-        private Color m_DebugColor = Color.Gray;
+        private Color m_VerboseColor = Color.Gray;
         private Color m_InfoColor = Color.Black;
+        private Color m_WarningColor = Color.Orange;
         private Color m_ErrorColor = Color.Red;
+        private Color m_CriticalColor = Color.DarkRed;
 
         public LogConsoleCtrl()
         {
@@ -40,62 +40,63 @@ namespace OpenBreed.Common.UI.WinForms.Controls
                 logger.MessageAdded -= LogMan_MessageAdded;
         }
 
-        void LogMan_MessageAdded(LogType type, string messageText)
+        void LogMan_MessageAdded(LogLevel level, string messageText)
         {
-            switch (type)
+            switch (level)
             {
-                case LogType.Error:
-                    PrintErrorMessage(messageText);
+                case LogLevel.Verbose:
+                    PrintVerboseMessage(messageText);
                     break;
-                case LogType.Warning:
-                    PrintWarningMessage(messageText);
-                    break;
-                case LogType.Info:
+                case LogLevel.Info:
                     PrintInfoMessage(messageText);
                     break;
-                case LogType.Success:
-                    PrintSuccessMessage(messageText);
+                case LogLevel.Warning:
+                    PrintWarningMessage(messageText);
                     break;
-                case LogType.Debug:
-                    PrintDebugMessage(messageText);
+                case LogLevel.Error:
+                    PrintErrorMessage(messageText);
                     break;
-                case LogType.None:
+                case LogLevel.Critical:
+                    PrintCriticalMessage(messageText);
                     break;
                 default:
                     break;
             }
         }
 
-        void PrintErrorMessage(string messageText)
+        void PrintVerboseMessage(string messageText)
         {
-            tbxConsole.SelectionColor = m_ErrorColor;
-            tbxConsole.AppendText(messageText + "\n");
-        }
-
-        void PrintWarningMessage(string messageText)
-        {
-            tbxConsole.SelectionColor = m_WarningColor;
-            tbxConsole.AppendText(messageText + "\n");
-        }
-
-        void PrintSuccessMessage(string messageText)
-        {
-            tbxConsole.SelectionColor = m_SuccessColor;
+            tbxConsole.SelectionColor = m_VerboseColor;
+            tbxConsole.SelectionBackColor = tbxConsole.BackColor;
             tbxConsole.AppendText(messageText + "\n");
         }
 
         void PrintInfoMessage(string messageText)
         {
             tbxConsole.SelectionColor = m_InfoColor;
+            tbxConsole.SelectionBackColor = tbxConsole.BackColor;
             tbxConsole.AppendText(messageText + "\n");
         }
 
-        void PrintDebugMessage(string messageText)
+        void PrintWarningMessage(string messageText)
         {
-            tbxConsole.SelectionColor = m_DebugColor;
+            tbxConsole.SelectionColor = m_WarningColor;
+            tbxConsole.SelectionBackColor = tbxConsole.BackColor;
             tbxConsole.AppendText(messageText + "\n");
         }
 
+        void PrintErrorMessage(string messageText)
+        {
+            tbxConsole.SelectionColor = m_ErrorColor;
+            tbxConsole.SelectionBackColor = tbxConsole.BackColor;
+            tbxConsole.AppendText(messageText + "\n");
+        }
 
+        void PrintCriticalMessage(string messageText)
+        {
+            tbxConsole.SelectionColor = tbxConsole.BackColor;
+            tbxConsole.SelectionBackColor = m_ErrorColor;
+            tbxConsole.AppendText(messageText + "\n");
+        }
     }
 }
