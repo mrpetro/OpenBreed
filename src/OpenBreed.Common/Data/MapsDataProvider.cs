@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common.Model.Maps;
+﻿using OpenBreed.Model.Maps;
 using OpenBreed.Database.Interface.Items.Maps;
 using System;
 using System.Collections.Generic;
@@ -34,7 +34,19 @@ namespace OpenBreed.Common.Data
             if (entry.DataRef == null)
                 return null;
 
-            return Provider.GetData<MapModel>(entry.DataRef);
+            var map = Provider.GetData<MapModel>(entry.DataRef);
+
+            if (entry.TileSetRef != null)
+                map.TileSet = Provider.TileSets.GetTileSet(entry.TileSetRef);
+
+            map.Palettes.Clear();
+            foreach (var paletteRef in entry.PaletteRefs)
+                map.Palettes.Add(Provider.Palettes.GetPalette(paletteRef));
+
+            if (entry.ActionSetRef != null)
+                map.ActionSet = Provider.ActionSets.GetActionSet(entry.ActionSetRef);
+
+            return map;
         }
 
     }

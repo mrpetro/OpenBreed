@@ -1,5 +1,4 @@
-﻿using OpenBreed.Common.Model.Maps.Blocks;
-using OpenBreed.Common.Model.Tiles;
+﻿using OpenBreed.Model.Tiles;
 using OpenBreed.Database.Interface.Items.Tiles;
 using System;
 using System.Collections.Generic;

@@ -11,14 +11,16 @@ namespace OpenBreed.Common.Data
         #region Private Fields
 
         private Dictionary<string, object> _models = new Dictionary<string, object>();
+        private ILogger logger;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DataProvider(IUnitOfWork unitOfWork)
+        public DataProvider(IUnitOfWork unitOfWork, ILogger logger)
         {
             UnitOfWork = unitOfWork;
+            this.logger = logger;
 
             DataSources = new DataSourceProvider(this);
             TileSets = new TileSetsDataProvider(this);
@@ -138,7 +140,7 @@ namespace OpenBreed.Common.Data
                 }
                 catch (Exception ex)
                 {
-                    LogMan.Instance.Error($"Problems saving model to asset '{asset.Id}'. Reason: {ex.Message}");
+                    logger.Error($"Problems saving model to asset '{asset.Id}'. Reason: {ex.Message}");
                 }
             }
         }

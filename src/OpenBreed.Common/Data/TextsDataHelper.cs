@@ -1,7 +1,6 @@
-﻿using OpenBreed.Common.Model.Maps;
-using OpenBreed.Common.Model.Maps.Blocks;
-using OpenBreed.Common.Model.Texts;
-using OpenBreed.Common.Builders.Texts;
+﻿using OpenBreed.Model.Maps;
+using OpenBreed.Model.Maps.Blocks;
+using OpenBreed.Model.Texts;
 using OpenBreed.Database.Interface.Items.Texts;
 using System;
 using System.Collections.Generic;
@@ -19,7 +18,7 @@ namespace OpenBreed.Common.Data
         {
             var builder = TextBuilder.NewTextModel();
             builder.SetName(textBlock.Name);
-            builder.Text = textBlock.Value;
+            builder.SetText(textBlock.Value);
             return builder.Build();
         }
 

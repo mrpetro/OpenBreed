@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OpenBreed.Common</RootNamespace>
     <AssemblyName>OpenBreed.Common</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -67,14 +67,12 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ApplicationBase.cs" />
-    <Compile Include="Builders\EntityTemplates\EntityTemplateBuilder.cs" />
     <Compile Include="Data\EntityTemplatesDataProvider.cs" />
     <Compile Include="Data\EntityTemplatesDataHelper.cs" />
+    <Compile Include="Data\ActionSetsDataHelper.cs" />
     <Compile Include="Formats\TextFormat.cs" />
     <Compile Include="IApplication.cs" />
     <Compile Include="IApplicationInterface.cs" />
-    <Compile Include="Model\BinaryModel.cs" />
-    <Compile Include="Commands\CommandMan.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Configs\BaseCfg.cs" />
     <Compile Include="Configs\IConfig.cs" />
@@ -101,57 +99,18 @@
     <Compile Include="Formats\IFFImageFormat.cs" />
     <Compile Include="Formats\DataFormat.cs" />
     <Compile Include="Formats\PCMSoundFormat.cs" />
-    <Compile Include="Helpers\IOHelper.cs" />
-    <Compile Include="Helpers\XmlHelper.cs" />
     <Compile Include="Data\MapsDataProvider.cs" />
-    <Compile Include="Model\EntityTemplates\EntityTemplateModel.cs" />
-    <Compile Include="Model\Maps\TileRef.cs" />
-    <Compile Include="Readers\Images\IFF\Helpers\BMHDBlock.cs" />
-    <Compile Include="Readers\Images\IFF\IFFImageReader.cs" />
-    <Compile Include="Model\Maps\IMapDataBlock.cs" />
-    <Compile Include="Model\Maps\Blocks\MapBodyBlock.cs" />
-    <Compile Include="Model\Maps\Blocks\MapMissionBlock.cs" />
-    <Compile Include="Model\Maps\Blocks\MapPaletteBlock.cs" />
-    <Compile Include="Model\Maps\Blocks\MapStringBlock.cs" />
-    <Compile Include="Model\Maps\Blocks\MapTextBlock.cs" />
-    <Compile Include="Model\Maps\Blocks\MapUnknownBlock.cs" />
-    <Compile Include="Model\Maps\Blocks\MapUInt32Block.cs" />
-    <Compile Include="Model\Actions\ActionSetModel.cs" />
-    <Compile Include="Builders\Scripts\ScriptBuilder.cs" />
-    <Compile Include="Model\Scripts\ScriptModel.cs" />
-    <Compile Include="Model\Sounds\SoundModel.cs" />
-    <Compile Include="Builders\Texts\TextBuilder.cs" />
-    <Compile Include="Model\Texts\TextModel.cs" />
-    <Compile Include="Helpers\BitmapHelper.cs" />
     <Compile Include="EnumerableExtensions.cs" />
-    <Compile Include="FileMan.cs" />
     <Compile Include="Formats\DataFormatMan.cs" />
     <Compile Include="Formats\BinaryFormat.cs" />
-    <Compile Include="Helpers\MathHelper.cs" />
-    <Compile Include="Builders\Images\ImageBuilder.cs" />
-    <Compile Include="Readers\Images\ACBM\ACBMImageReader.cs" />
+    <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\LogFile.cs" />
-    <Compile Include="Logging\LogMan.cs" />
+    <Compile Include="Logging\DefaultLogger.cs" />
     <Compile Include="Logging\LogType.cs" />
-    <Compile Include="Builders\Maps\MapBuilder.cs" />
-    <Compile Include="Model\Maps\MapLayerModel.cs" />
-    <Compile Include="Readers\Maps\IMapModelReader.cs" />
-    <Compile Include="Readers\Maps\MAP\MAPReader.cs" />
     <Compile Include="ServiceLocator.cs" />
     <Compile Include="VariableMan.cs" />
-    <Compile Include="Writers\Maps\IMapModelWriter.cs" />
-    <Compile Include="Writers\Maps\MAP\MAPWriter.cs" />
-    <Compile Include="Builders\Palettes\PaletteBuilder.cs" />
-    <Compile Include="Model\Maps\MapLayoutModel.cs" />
-    <Compile Include="Model\Maps\MapModel.cs" />
-    <Compile Include="Model\Palettes\PaletteModel.cs" />
-    <Compile Include="Readers\Palettes\PaletteReader.cs" />
     <Compile Include="ProgramTools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Readers\BigEndianBinaryReader.cs" />
-    <Compile Include="Helpers\Sounds\PCMPlayer.cs" />
-    <Compile Include="Helpers\Sounds\WaveMemoryStream.cs" />
-    <Compile Include="Assets\IAssetsFactory.cs" />
     <Compile Include="Assets\AssetBase.cs" />
     <Compile Include="Formats\ABHCMAPFormat.cs" />
     <Compile Include="Formats\ABSEMAPFormat.cs" />
@@ -161,32 +120,38 @@
     <Compile Include="Formats\ACBMImageFormat.cs" />
     <Compile Include="Formats\ACBMTileSetFormat.cs" />
     <Compile Include="Formats\IDataFormatType.cs" />
-    <Compile Include="Builders\Sprites\SpriteBuilder.cs" />
-    <Compile Include="Builders\Sprites\SpriteSetBuilder.cs" />
-    <Compile Include="Readers\Sprites\SPR\SPRReader.cs" />
-    <Compile Include="Model\Sprites\SpriteModel.cs" />
-    <Compile Include="Model\Sprites\SpriteSetModel.cs" />
-    <Compile Include="Builders\Tiles\TileBuilder.cs" />
-    <Compile Include="Builders\Tiles\TileSetBuilder.cs" />
-    <Compile Include="Readers\Tiles\ACBM\ACBMTileSetReader.cs" />
-    <Compile Include="Readers\Tiles\BLK\BLKReader.cs" />
-    <Compile Include="Model\Tiles\TileModel.cs" />
-    <Compile Include="Model\Tiles\TileSetModel.cs" />
-    <Compile Include="Other.cs" />
-    <Compile Include="Tools\ABTAPasswordEncoder.cs" />
-    <Compile Include="Writers\BigEndianBinaryWriter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\Images\" />
+    <Folder Include="Managers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\EPFArchive\src\EPFArchive\EPFArchive.csproj">
       <Project>{52249c4e-eaf8-45ce-a757-aaa3c3c125d4}</Project>
       <Name>EPFArchive</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj">
+      <Project>{B4E4CD19-64AF-42A5-8713-0D0DE35853B6}</Project>
+      <Name>OpenBreed.Common.Tools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj">
       <Project>{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}</Project>
       <Name>OpenBreed.Database.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Model\OpenBreed.Model.csproj">
+      <Project>{A05B933E-1C80-4AAE-93B9-BE37C6B94270}</Project>
+      <Name>OpenBreed.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Reader.Interface\OpenBreed.Reader.Interface.csproj">
+      <Project>{CFDCF7E3-8EA1-4D17-8B16-C6BE157FE87C}</Project>
+      <Name>OpenBreed.Reader.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Reader.Legacy\OpenBreed.Reader.Legacy.csproj">
+      <Project>{9A47D236-1810-413A-B609-A38FDE119D3F}</Project>
+      <Name>OpenBreed.Reader.Legacy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Writer.Legacy\OpenBreed.Writer.Legacy.csproj">
+      <Project>{0B8B1C59-2BEC-45C3-BD7A-AEB955337407}</Project>
+      <Name>OpenBreed.Writer.Legacy</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

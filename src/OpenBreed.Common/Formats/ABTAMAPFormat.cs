@@ -1,13 +1,12 @@
 ﻿using OpenBreed.Common.Assets;
 using OpenBreed.Common.DataSources;
-using OpenBreed.Common.Model.Maps;
-using OpenBreed.Common.Builders.Maps;
-using OpenBreed.Common.Readers.Maps.MAP;
-using OpenBreed.Common.Writers.Maps.MAP;
+using OpenBreed.Model.Maps;
 using OpenBreed.Database.Interface.Items.Assets;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using OpenBreed.Reader.Legacy.Maps.MAP;
+using OpenBreed.Writer.Legacy.Maps.MAP;
 
 namespace OpenBreed.Common.Formats
 {

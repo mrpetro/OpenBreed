@@ -1,7 +1,5 @@
-﻿using OpenBreed.Common.Builders.Texts;
-using OpenBreed.Common.DataSources;
-using OpenBreed.Common.Model;
-using OpenBreed.Common.Model.Texts;
+﻿using OpenBreed.Common.DataSources;
+using OpenBreed.Model.Texts;
 using OpenBreed.Database.Interface.Items.Assets;
 using System;
 using System.Collections.Generic;
@@ -30,7 +28,7 @@ namespace OpenBreed.Common.Formats
             using (var sr = new StreamReader(ds.Stream, Encoding.UTF8, true, 1024 , true))
             {
                 var builder = TextBuilder.NewTextModel();
-                builder.Text = sr.ReadToEnd();
+                builder.SetText(sr.ReadToEnd());
                 return builder.Build();
             }
         }

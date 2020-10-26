@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Common.DataSources;
-using OpenBreed.Common.Readers.Images.ACBM;
-using OpenBreed.Common.Builders.Images;
 using OpenBreed.Database.Interface.Items.Assets;
+using OpenBreed.Model.Images;
+using OpenBreed.Reader.Legacy.Images.ACBM;
 using System;
 using System.Collections.Generic;
 using System.IO;
