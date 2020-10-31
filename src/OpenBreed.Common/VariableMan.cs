@@ -19,10 +19,10 @@ namespace OpenBreed.Common
 
         #region Public Constructors
 
-        public VariableMan(IApplication application, ILogger logger)
+        public VariableMan(IApplication application)
         {
             this.application = application;
-            this.logger = logger;
+            this.logger = application.GetInterface<ILogger>();
         }
 
         #endregion Public Constructors

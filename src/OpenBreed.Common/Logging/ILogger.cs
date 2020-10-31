@@ -2,7 +2,7 @@
 {
     public delegate void Message(LogLevel type, string msg);
 
-    public interface ILogger
+    public interface ILogger : IApplicationInterface
     {
         #region Public Events
 
