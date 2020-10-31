@@ -16,7 +16,7 @@ namespace OpenBreed.Editor.VM
 
         #region Public Constructors
 
-        public ParentEntryEditor(IRepository repository, string editorName) : base(repository)
+        public ParentEntryEditor(EditorApplication application, IRepository repository, string editorName) : base(application, repository)
         {
             EditorName = editorName;
         }
@@ -30,6 +30,8 @@ namespace OpenBreed.Editor.VM
             get { return subeditor; }
             private set { SetProperty(ref subeditor, value); }
         }
+
+        public EditorApplication Application => application;
 
         //protected override void OnPropertyChanged(string name)
         //{

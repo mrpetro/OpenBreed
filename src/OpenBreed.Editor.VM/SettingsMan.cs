@@ -7,7 +7,7 @@ using System.IO;
 
 namespace OpenBreed.Editor.VM
 {
-    public class SettingsMan
+    public class SettingsMan : IApplicationInterface
     {
         #region Private Fields
 
@@ -21,10 +21,12 @@ namespace OpenBreed.Editor.VM
 
         #region Public Constructors
 
-        public SettingsMan(EditorApplication application, ILogger logger)
+
+
+        public SettingsMan(EditorApplication application)
         {
             this.application = application;
-            this.logger = logger;
+            this.logger = application.GetInterface<ILogger>();
         }
 
         #endregion Public Constructors

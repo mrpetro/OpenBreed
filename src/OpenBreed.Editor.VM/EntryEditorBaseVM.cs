@@ -15,22 +15,19 @@ namespace OpenBreed.Editor.VM
         private E _next;
         private E _previous;
         private IRepository<E> _repository;
+        protected EditorApplication application;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public EntryEditorBaseVM()
-        {
-            _repository = ServiceLocator.Instance.GetService<IUnitOfWork>().GetRepository<E>();
-        }
-
         #endregion Public Constructors
 
         #region Protected Constructors
 
-        protected EntryEditorBaseVM(IRepository repository)
+        protected EntryEditorBaseVM(EditorApplication application, IRepository repository)
         {
+            this.application = application;
             _repository = (IRepository<E>)repository;
         }
 
@@ -59,7 +56,7 @@ namespace OpenBreed.Editor.VM
 
         public override void Revert()
         {
-            ServiceLocator.Instance.GetService<IDialogProvider>().ShowMessage("Function not implemented yet.", "Not implemented");
+            application.GetInterface<IDialogProvider>().ShowMessage("Function not implemented yet.", "Not implemented");
         }
 
         public override void EditEntry(string id)

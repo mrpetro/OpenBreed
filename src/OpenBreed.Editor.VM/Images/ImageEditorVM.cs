@@ -12,7 +12,7 @@ namespace OpenBreed.Editor.VM.Images
             RegisterSubeditor<IImageEntry>((parent) => new ImageFromFileEditorVM(parent));
         }
 
-        public ImageEditorVM(IRepository repository) : base(repository, "Image Editor")
+        public ImageEditorVM(EditorApplication application, IRepository repository) : base(application, repository, "Image Editor")
         {
         }
 

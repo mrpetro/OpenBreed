@@ -53,7 +53,7 @@ namespace OpenBreed.Editor.VM
         Exited
     }
 
-    public class EditorVM : BaseViewModel, IDisposable
+    public class EditorVM : BaseViewModel, IDisposable, IApplicationInterface
     {
 
         #region Private Fields
@@ -72,27 +72,7 @@ namespace OpenBreed.Editor.VM
 
             Logger = new LoggerVM(application.Logger);
 
-            application.ServiceLocator.RegisterService<EditorVM>(this);
-
-            var entryEditorFactory = new DbEntryEditorFactory();
-            entryEditorFactory.Register<IRepository<ITileSetEntry>, TileSetEditorVM>();
-            entryEditorFactory.Register<IRepository<ISpriteSetEntry>, SpriteSetEditorVM>();
-            entryEditorFactory.Register<IRepository<IActionSetEntry>, ActionSetEditorVM>();
-            entryEditorFactory.Register<IRepository<IPaletteEntry>, PaletteEditorVM>();
-            entryEditorFactory.Register<IRepository<ITextEntry>, TextEditorVM>();
-            entryEditorFactory.Register<IRepository<IScriptEntry>, ScriptEditorVM>();
-            entryEditorFactory.Register<IRepository<IEntityTemplateEntry>, EntityTemplateEditorVM>();
-            entryEditorFactory.Register<IRepository<IImageEntry>, ImageEditorVM>();
-            entryEditorFactory.Register<IRepository<ISoundEntry>, SoundEditorVM>();
-            entryEditorFactory.Register<IRepository<IMapEntry>, MapEditorVM>();
-            entryEditorFactory.Register<IRepository<IDataSourceEntry>, DataSourceEditorVM>();
-            application.ServiceLocator.RegisterService<DbEntryEditorFactory>(entryEditorFactory);
-
-            application.ServiceLocator.RegisterService<DbTableFactory>(new DbTableFactory());
-            application.ServiceLocator.RegisterService<DbEntryFactory>(new DbEntryFactory());
-
-
-            DialogProvider = ServiceLocator.Instance.GetService<IDialogProvider>();
+            DialogProvider = application.GetInterface<IDialogProvider>();
 
             DbEditor = new DbEditorVM(application);
             //PaletteEditor = new PaletteEditorVM();
@@ -112,11 +92,9 @@ namespace OpenBreed.Editor.VM
         public DbEditorVM DbEditor { get; }
         public IDialogProvider DialogProvider { get; }
         public LoggerVM Logger { get; }
-        public PaletteEditorVM PaletteEditor { get; }
         public Action<LoggerVM> ShowLoggerAction { get; set; }
         public Action<SettingsMan> ShowOptionsAction { get; set; }
 
-        //public SourceMan SourceMan { get; }
         public EditorState State
         {
             get { return _state; }
@@ -127,7 +105,6 @@ namespace OpenBreed.Editor.VM
 
         #region Public Methods
 
-        //public SpriteViewerVM SpriteViewer { get; }
         public void Dispose()
         {
         }

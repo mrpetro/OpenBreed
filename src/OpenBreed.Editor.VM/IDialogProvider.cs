@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.VM.Database;
+﻿using OpenBreed.Common;
+using OpenBreed.Editor.VM.Database;
 using OpenBreed.Editor.VM.Database.Entries;
 using System.Linq;
 
@@ -26,7 +27,7 @@ namespace OpenBreed.Editor.VM
         RetryCancel = 5
     }
 
-    public interface IDialogProvider
+    public interface IDialogProvider : IApplicationInterface
     {
         #region Public Methods
 

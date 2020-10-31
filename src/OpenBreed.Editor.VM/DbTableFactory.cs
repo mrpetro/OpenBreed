@@ -24,7 +24,7 @@ using OpenBreed.Database.Interface.Items.EntityTemplates;
 
 namespace OpenBreed.Editor.VM
 {
-    public class DbTableFactory
+    public class DbTableFactory : IApplicationInterface
     {
         public DbTableVM CreateTable(IRepository repository)
         {

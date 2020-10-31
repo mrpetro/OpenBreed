@@ -18,7 +18,7 @@ namespace OpenBreed.Editor.VM.Palettes
             RegisterSubeditor<IPaletteFromMapEntry>((parent) => new PaletteFromMapEditorVM(parent));
         }
 
-        public PaletteEditorVM(IRepository repository) : base(repository, "Palette Editor")
+        public PaletteEditorVM(EditorApplication application, IRepository repository) : base(application, repository, "Palette Editor")
         {
         }
 

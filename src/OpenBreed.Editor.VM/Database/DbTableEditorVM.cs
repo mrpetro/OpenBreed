@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace OpenBreed.Editor.VM.Database
 {
@@ -27,8 +28,11 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Internal Constructors
 
-        internal DbTableEditorVM()
+        private readonly EditorApplication application;
+
+        internal DbTableEditorVM(EditorApplication application)
         {
+            this.application = application;
         }
 
         #endregion Internal Constructors
@@ -108,7 +112,7 @@ namespace OpenBreed.Editor.VM.Database
 
             var entry = _edited.New(newEntryId, newEntryType);
 
-            var dbEntryFactory = ServiceLocator.Instance.GetService<DbEntryFactory>();
+            var dbEntryFactory = application.GetInterface<DbEntryFactory>();
             var dbEntry = dbEntryFactory.Create(entry);
             dbEntry.Load(entry);
             Editable.Entries.Add(dbEntry);
@@ -120,7 +124,7 @@ namespace OpenBreed.Editor.VM.Database
 
             //Check if entry editor is already opened. If yes then focus on this entry editor.
             //var openedDbEntryEditor = DbEntryEditors.FirstOrDefault(item => item.)
-            var dbEditor = ServiceLocator.Instance.GetService<EditorVM>().DbEditor;
+            var dbEditor = application.GetInterface<EditorVM>().DbEditor;
 
             var entryEditor = dbEditor.OpenEntryEditor(_edited, entryId);
             entryEditor.CommitedAction = OnEntryCommited;
@@ -134,7 +138,7 @@ namespace OpenBreed.Editor.VM.Database
 
             _edited = model;
 
-            var vm = ServiceLocator.Instance.GetService<DbTableFactory>().CreateTable(_edited);
+            var vm = application.GetInterface<DbTableFactory>().CreateTable(_edited);
             UpdateVM(model, vm);
             Editable = vm;
             Editable.PropertyChanged += Editable_PropertyChanged;
@@ -183,7 +187,7 @@ namespace OpenBreed.Editor.VM.Database
 
         protected void UpdateVM(IRepository source, DbTableVM target)
         {
-            var dbEntryFactory = ServiceLocator.Instance.GetService<DbEntryFactory>();
+            var dbEntryFactory = application.GetInterface<DbEntryFactory>();
 
             target.Entries.UpdateAfter(() =>
             {

@@ -23,7 +23,7 @@ using OpenBreed.Database.Interface.Items.EntityTemplates;
 
 namespace OpenBreed.Editor.VM.Database
 {
-    public class DbEntryFactory
+    public class DbEntryFactory : IApplicationInterface
     {
         #region Public Methods
 

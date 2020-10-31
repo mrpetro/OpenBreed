@@ -30,7 +30,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Constructors
 
-        public MapEditorVM(IRepository repository) : base(repository)
+        public MapEditorVM(EditorApplication application, IRepository repository) : base(application, repository)
         {
             Tools = new MapEditorToolsVM();
 

@@ -1,6 +1,10 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Common.Logging;
+using OpenBreed.Database.Interface;
+using OpenBreed.Database.Xml;
 using System;
+using System.IO;
 
 namespace OpenBreed.Editor.VM
 {
@@ -8,18 +12,24 @@ namespace OpenBreed.Editor.VM
     {
         #region Private Fields
 
+        private readonly Lazy<ILogger> logger;
+        private readonly Lazy<VariableMan> variables;
+        private readonly Lazy<SettingsMan> settings;
         private bool disposedValue;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-
         public EditorApplication()
         {
-            Logger = new DefaultLogger();
-            Settings = new SettingsMan(this, Logger);
-            Variables = new VariableMan(this, Logger);
+            RegisterInterface<ILogger>(() => new DefaultLogger());
+            RegisterInterface<VariableMan>(() => new VariableMan(this));
+            RegisterInterface<SettingsMan>(() => new SettingsMan(this));
+
+            logger = new Lazy<ILogger>(GetInterface<ILogger>);
+            variables = new Lazy<VariableMan>(GetInterface<VariableMan>);
+            settings = new Lazy<SettingsMan>(GetInterface<SettingsMan>);
 
             Settings.Restore();
         }
@@ -28,15 +38,36 @@ namespace OpenBreed.Editor.VM
 
         #region Public Properties
 
-        public ILogger Logger { get; }
+        public ILogger Logger => logger.Value;
 
-        public SettingsMan Settings { get; }
+        public SettingsMan Settings => settings.Value;
 
-        public VariableMan Variables { get; }
+        public VariableMan Variables => variables.Value;
 
         #endregion Public Properties
 
+        public IUnitOfWork UnitOfWork { get; set; }
+
         #region Public Methods
+
+        public IUnitOfWork OpenXmlDatabase(string databaseFilePath)
+        {
+            if (UnitOfWork != null)
+                throw new Exception("There is already database opened.");
+
+            UnitOfWork = XmlDatabaseMan.Open(databaseFilePath).CreateUnitOfWork();
+
+            var directoryPath = Path.GetDirectoryName(databaseFilePath);
+            var fileName = Path.GetFileName(databaseFilePath);
+
+            Variables.RegisterVariable(typeof(string), directoryPath, "Db.Current.FolderPath");
+            Variables.RegisterVariable(typeof(string), fileName, "Db.Current.FileName");
+
+            ServiceLocator.RegisterService<IUnitOfWork>(UnitOfWork);
+            ServiceLocator.RegisterService<DataProvider>(new DataProvider(UnitOfWork, Logger));
+
+            return UnitOfWork;
+        }
 
         public void Dispose()
         {
@@ -59,6 +90,17 @@ namespace OpenBreed.Editor.VM
 
                 disposedValue = true;
             }
+        }
+
+        public void CloseDatabase()
+        {
+            if (UnitOfWork == null)
+                throw new Exception("Database not opened.");
+
+            ServiceLocator.UnregisterService<DataProvider>();
+            ServiceLocator.UnregisterService<IUnitOfWork>();
+
+            UnitOfWork = null;
         }
 
         #endregion Protected Methods

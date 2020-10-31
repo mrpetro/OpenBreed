@@ -13,7 +13,7 @@ namespace OpenBreed.Editor.VM.DataSources
             RegisterSubeditor<IEPFArchiveDataSourceEntry>((parent) => new EpfArchiveFileDataSourceEditorVM(parent));
         }
 
-        public DataSourceEditorVM(IRepository repository) : base(repository, "Data Source Editor")
+        public DataSourceEditorVM(EditorApplication application, IRepository repository) : base(application, repository, "Data Source Editor")
         {
         }
 

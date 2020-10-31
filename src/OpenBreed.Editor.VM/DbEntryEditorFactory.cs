@@ -12,22 +12,38 @@ namespace OpenBreed.Editor.VM
 
     internal interface IEntryEditorCreator
     {
-        EntryEditorVM Create(IRepository repository);
+
+        #region Public Methods
+
+        EntryEditorVM Create(EditorApplication application, IRepository repository);
+
+        #endregion Public Methods
+
     }
 
-    internal class EntryEditorCreator<T> : IEntryEditorCreator where T: EntryEditorVM
+    public class DbEntryEditorFactory : IApplicationInterface
     {
-        public EntryEditorVM Create(IRepository repository)
-        {
-            return Activator.CreateInstance(typeof(T), repository) as T;
-        }
-    }
 
-    public class DbEntryEditorFactory
-    {
+        #region Private Fields
+
+        private EditorApplication application;
+
         private Dictionary<Type, IEntryEditorCreator> _creators = new Dictionary<Type, IEntryEditorCreator>();
 
-        public void Register<E,C>() where C : EntryEditorVM
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public DbEntryEditorFactory(EditorApplication application)
+        {
+            this.application = application;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Methods
+
+        public void Register<E, C>() where C : EntryEditorVM
         {
             var entryType = typeof(E);
 
@@ -47,7 +63,7 @@ namespace OpenBreed.Editor.VM
             {
                 if (entryType.IsSubclassOf(item.Key) || entryType.Equals(item.Key))
                 {
-                    return item.Value.Create(repository);
+                    return item.Value.Create(application, repository);
                 }
             }
 
@@ -59,5 +75,22 @@ namespace OpenBreed.Editor.VM
             //    throw new InvalidOperationException($"{entryType}' type not registered.");
 
         }
+
+        #endregion Public Methods
+
+    }
+
+    internal class EntryEditorCreator<T> : IEntryEditorCreator where T : EntryEditorVM
+    {
+
+        #region Public Methods
+
+        public EntryEditorVM Create(EditorApplication application, IRepository repository)
+        {
+            return Activator.CreateInstance(typeof(T), application, repository) as T;
+        }
+
+        #endregion Public Methods
+
     }
 }

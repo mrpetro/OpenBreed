@@ -12,7 +12,7 @@ namespace OpenBreed.Editor.VM.EntityTemplates
             RegisterSubeditor<IEntityTemplateFromFileEntry>((parent) => new EntityTemplateFromFileEditorVM(parent));
         }
 
-        public EntityTemplateEditorVM(IRepository repository) : base(repository, "Entity Template Editor")
+        public EntityTemplateEditorVM(EditorApplication application, IRepository repository) : base(application, repository, "Entity Template Editor")
         {
         }
 

@@ -13,7 +13,7 @@ namespace OpenBreed.Editor.VM.Sounds
             RegisterSubeditor<ISoundEntry>((parent) => new SoundFromPcmEditorVM(parent));
         }
 
-        public SoundEditorVM(IRepository repository) : base(repository, "Sound Editor")
+        public SoundEditorVM(EditorApplication application, IRepository repository) : base(application, repository, "Sound Editor")
         {
         }
 

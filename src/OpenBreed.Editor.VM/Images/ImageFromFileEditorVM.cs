@@ -92,7 +92,7 @@ namespace OpenBreed.Editor.VM.Images
 
                 if (!dataProvider.TryGetData<Image>(AssetRef, out Image item, out string message))
                 {
-                    ServiceLocator.Instance.GetService<IDialogProvider>().ShowMessage(message, "Invalid asset");
+                    Parent.Application.GetInterface<IDialogProvider>().ShowMessage(message, "Invalid asset");
                     Image = System.Drawing.SystemIcons.Error.ToBitmap();
                 }
                 else
