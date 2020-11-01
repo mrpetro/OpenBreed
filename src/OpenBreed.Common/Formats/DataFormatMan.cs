@@ -21,14 +21,6 @@ namespace OpenBreed.Common.Formats
 
         #region Public Methods
 
-        public DataFormat Create(AssetBase asset, string formatType, List<FormatParameter> formatParameters)
-        {
-            var ft = GetFormatType(formatType);
-            if (ft == null)
-                throw new InvalidOperationException("Unknown format type: " + formatType);
-
-            return new DataFormat(ft, asset, formatParameters);
-        }
 
         public void RegisterFormat(string formatType, IDataFormatType format)
         {

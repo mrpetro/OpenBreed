@@ -97,7 +97,6 @@
     <Compile Include="Data\TextsDataProvider.cs" />
     <Compile Include="Data\TileSetsDataProvider.cs" />
     <Compile Include="Formats\IFFImageFormat.cs" />
-    <Compile Include="Formats\DataFormat.cs" />
     <Compile Include="Formats\PCMSoundFormat.cs" />
     <Compile Include="Data\MapsDataProvider.cs" />
     <Compile Include="EnumerableExtensions.cs" />
