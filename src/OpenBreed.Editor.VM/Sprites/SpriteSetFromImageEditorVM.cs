@@ -138,9 +138,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         private void UpdateVM(ISpriteSetFromImageEntry entry)
         {
-            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
-
-            SourceImage = dataProvider.GetData<Bitmap>(entry.DataRef);
+            SourceImage = Parent.DataProvider.GetData<Bitmap>(entry.DataRef);
 
             Items.UpdateAfter(() =>
             {

@@ -67,7 +67,7 @@ namespace OpenBreed.Editor.VM.Actions
 
         public virtual void UpdateVM(IActionSetEntry entry)
         {
-            model = ServiceLocator.Instance.GetService<DataProvider>().ActionSets.GetActionSet(entry.Id);
+            model = Parent.DataProvider.ActionSets.GetActionSet(entry.Id);
 
             Items.UpdateAfter(() =>
             {

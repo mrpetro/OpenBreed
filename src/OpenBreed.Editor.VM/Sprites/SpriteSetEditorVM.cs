@@ -1,4 +1,5 @@
-﻿using OpenBreed.Database.Interface;
+﻿using OpenBreed.Common.Data;
+using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Sprites;
 using System;
 
@@ -14,7 +15,7 @@ namespace OpenBreed.Editor.VM.Sprites
             RegisterSubeditor<ISpriteSetFromImageEntry>((parent) => new SpriteSetFromImageEditorVM(parent));
         }
 
-        public SpriteSetEditorVM(EditorApplication application, IRepository repository) : base(application, repository, "Sprite Set Editor")
+        public SpriteSetEditorVM(EditorApplication application, DataProvider dataProvider) : base(application, dataProvider, "Sprite Set Editor")
         {
         }
 

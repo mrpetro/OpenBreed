@@ -88,9 +88,9 @@ namespace OpenBreed.Editor.VM.Database
             if (!CheckCloseCurrentDatabase(this, databaseFilePath))
                 return false;
 
-            var unitOfWork = application.OpenXmlDatabase(databaseFilePath);
+            application.OpenXmlDatabase(databaseFilePath);
 
-            Editable = CreateDatabaseVm(unitOfWork);
+            Editable = CreateDatabaseVm(application.UnitOfWork);
             return true;
         }
 
@@ -141,7 +141,8 @@ namespace OpenBreed.Editor.VM.Database
             EntryEditorVM entryEditor = null;
             if (!_openedEntryEditors.TryGetValue(entryEditorKey, out entryEditor))
             {
-                entryEditor = application.GetInterface<DbEntryEditorFactory>().CreateEditor(repository);
+                var creator = application.GetInterface<DbEntryEditorFactory>().GetCreator(repository);
+                entryEditor = creator.Create(application, application.DataProvider);
                 _openedEntryEditors.Add(entryEditorKey, entryEditor);
                 entryEditor.ClosedAction = () => OnEntryEditorClosed(entryEditor);
                 entryEditor.EditEntry(entryId);
@@ -155,8 +156,7 @@ namespace OpenBreed.Editor.VM.Database
 
         internal void Save()
         {
-            ServiceLocator.Instance.GetService<DataProvider>().Save();
-            //_edited.Save();
+            application.DataProvider.Save();
         }
 
         #endregion Internal Methods

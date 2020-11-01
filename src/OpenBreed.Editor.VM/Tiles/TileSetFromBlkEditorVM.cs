@@ -89,7 +89,7 @@ namespace OpenBreed.Editor.VM.Tiles
 
         public virtual void UpdateVM(ITileSetEntry entry)
         {
-            model = ServiceLocator.Instance.GetService<DataProvider>().TileSets.GetTileSet(entry.Id);
+            model = Parent.DataProvider.TileSets.GetTileSet(entry.Id);
 
             if (model == null)
                 return;
@@ -191,7 +191,7 @@ namespace OpenBreed.Editor.VM.Tiles
 
         private void SwitchPalette()
         {
-            CurrentPalette = ServiceLocator.Instance.GetService<DataProvider>().Palettes.GetPalette(CurrentPaletteRef);
+            CurrentPalette = Parent.DataProvider.Palettes.GetPalette(CurrentPaletteRef);
             BitmapHelper.SetPaletteColors(model.Bitmap, CurrentPalette.Data);
         }
 

@@ -74,9 +74,7 @@ namespace OpenBreed.Editor.VM.Texts
 
             UpdateTextBlocksList(textFromMapEntry);
 
-            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
-
-            var model = dataProvider.Texts.GetText(entry.Id);
+            var model = Parent.DataProvider.Texts.GetText(entry.Id);
 
             if (model != null)
                 Text = model.Text;
@@ -88,7 +86,8 @@ namespace OpenBreed.Editor.VM.Texts
         public virtual void UpdateEntry(ITextEntry entry)
         {
             var textFromMapEntry = (ITextFromMapEntry)entry;
-            var mapModel = ServiceLocator.Instance.GetService<DataProvider>().GetData<MapModel>(DataRef);
+
+            var mapModel = Parent.DataProvider.GetData<MapModel>(DataRef);
 
             var textBlock = mapModel.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == BlockName);
 
@@ -111,9 +110,7 @@ namespace OpenBreed.Editor.VM.Texts
             {
                 BlockNames.Clear();
 
-                var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
-
-                var map = dataProvider.GetData<MapModel>(source.DataRef);
+                var map = Parent.DataProvider.GetData<MapModel>(source.DataRef);
 
                 if (map == null)
                     return;

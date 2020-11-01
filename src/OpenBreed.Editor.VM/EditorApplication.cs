@@ -44,13 +44,14 @@ namespace OpenBreed.Editor.VM
 
         public VariableMan Variables => variables.Value;
 
-        #endregion Public Properties
-
         public IUnitOfWork UnitOfWork { get; set; }
+        public DataProvider DataProvider { get; set; }
+
+        #endregion Public Properties
 
         #region Public Methods
 
-        public IUnitOfWork OpenXmlDatabase(string databaseFilePath)
+        public void OpenXmlDatabase(string databaseFilePath)
         {
             if (UnitOfWork != null)
                 throw new Exception("There is already database opened.");
@@ -63,10 +64,9 @@ namespace OpenBreed.Editor.VM
             Variables.RegisterVariable(typeof(string), directoryPath, "Db.Current.FolderPath");
             Variables.RegisterVariable(typeof(string), fileName, "Db.Current.FileName");
 
-            ServiceLocator.RegisterService<IUnitOfWork>(UnitOfWork);
-            ServiceLocator.RegisterService<DataProvider>(new DataProvider(UnitOfWork, Logger));
+            DataProvider = new DataProvider(UnitOfWork, Logger);
 
-            return UnitOfWork;
+            ServiceLocator.RegisterService<IUnitOfWork>(UnitOfWork);
         }
 
         public void Run() => GetInterface<EditorVM>().Run();
@@ -75,6 +75,17 @@ namespace OpenBreed.Editor.VM
         {
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
+        }
+
+        public void CloseDatabase()
+        {
+            if (UnitOfWork == null)
+                throw new Exception("Database not opened.");
+
+            ServiceLocator.UnregisterService<IUnitOfWork>();
+
+            UnitOfWork = null;
+            DataProvider = null;
         }
 
         #endregion Public Methods
@@ -92,17 +103,6 @@ namespace OpenBreed.Editor.VM
 
                 disposedValue = true;
             }
-        }
-
-        public void CloseDatabase()
-        {
-            if (UnitOfWork == null)
-                throw new Exception("Database not opened.");
-
-            ServiceLocator.UnregisterService<DataProvider>();
-            ServiceLocator.UnregisterService<IUnitOfWork>();
-
-            UnitOfWork = null;
         }
 
         #endregion Protected Methods

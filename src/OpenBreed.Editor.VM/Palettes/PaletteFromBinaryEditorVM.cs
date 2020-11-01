@@ -46,9 +46,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
         private void UpdateVM(IPaletteFromBinaryEntry entry)
         {
-            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
-
-            var model = dataProvider.Palettes.GetPalette(entry.Id);
+            var model = Parent.DataProvider.Palettes.GetPalette(entry.Id);
 
             if (model != null)
                 UpdateVMColors(model);

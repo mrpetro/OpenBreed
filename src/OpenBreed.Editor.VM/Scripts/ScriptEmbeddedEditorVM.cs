@@ -46,9 +46,7 @@ namespace OpenBreed.Editor.VM.Scripts
 
         public void UpdateVM(IScriptEntry entry)
         {
-            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
-
-            var model = dataProvider.Scripts.GetScript(entry.Id);
+            var model = Parent.DataProvider.Scripts.GetScript(entry.Id);
 
             if (model != null)
                 Script = model.Script;

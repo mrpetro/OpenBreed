@@ -1,4 +1,5 @@
-﻿using OpenBreed.Database.Interface;
+﻿using OpenBreed.Common.Data;
+using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Images;
 
 namespace OpenBreed.Editor.VM.Images
@@ -12,7 +13,7 @@ namespace OpenBreed.Editor.VM.Images
             RegisterSubeditor<IImageEntry>((parent) => new ImageFromFileEditorVM(parent));
         }
 
-        public ImageEditorVM(EditorApplication application, IRepository repository) : base(application, repository, "Image Editor")
+        public ImageEditorVM(EditorApplication application, DataProvider dataProvider) : base(application, dataProvider, "Image Editor")
         {
         }
 

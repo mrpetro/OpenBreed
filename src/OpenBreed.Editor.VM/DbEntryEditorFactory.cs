@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Database.Interface;
 using OpenBreed.Editor.VM.Database.Entries;
 using System;
@@ -10,12 +11,12 @@ using System.Threading.Tasks;
 namespace OpenBreed.Editor.VM
 {
 
-    internal interface IEntryEditorCreator
+    public interface IEntryEditorCreator
     {
 
         #region Public Methods
 
-        EntryEditorVM Create(EditorApplication application, IRepository repository);
+        EntryEditorVM Create(EditorApplication application, IDataProvider dataProvider);
 
         #endregion Public Methods
 
@@ -53,27 +54,19 @@ namespace OpenBreed.Editor.VM
             _creators.Add(typeof(E), new EntryEditorCreator<C>());
         }
 
-        public EntryEditorVM CreateEditor(IRepository repository)
+        public IEntryEditorCreator GetCreator(IRepository repository)
         {
             var entryType = repository.GetType().GetInterfaces().FirstOrDefault();
-
-            //IEntryEditorCreator creator = null;
 
             foreach (var item in _creators)
             {
                 if (entryType.IsSubclassOf(item.Key) || entryType.Equals(item.Key))
                 {
-                    return item.Value.Create(application, repository);
+                    return item.Value;
                 }
             }
 
             throw new InvalidOperationException($"{entryType}' type not registered.");
-
-            //if (_creators.TryGetValue(entryType, out creator))
-            //    return creator.Create(repository);
-            //else
-            //    throw new InvalidOperationException($"{entryType}' type not registered.");
-
         }
 
         #endregion Public Methods
@@ -85,9 +78,9 @@ namespace OpenBreed.Editor.VM
 
         #region Public Methods
 
-        public EntryEditorVM Create(EditorApplication application, IRepository repository)
+        public EntryEditorVM Create(EditorApplication application, IDataProvider dataProvider)
         {
-            return Activator.CreateInstance(typeof(T), application, repository) as T;
+            return Activator.CreateInstance(typeof(T), application, dataProvider) as T;
         }
 
         #endregion Public Methods

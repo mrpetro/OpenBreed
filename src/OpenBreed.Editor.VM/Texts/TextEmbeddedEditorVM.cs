@@ -53,9 +53,7 @@ namespace OpenBreed.Editor.VM.Texts
 
         public virtual void UpdateVM(ITextEntry entry)
         {
-            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
-
-            var model = dataProvider.Texts.GetText(entry.Id);
+            var model = Parent.DataProvider.Texts.GetText(entry.Id);
 
             if (model != null)
                 Text = model.Text;

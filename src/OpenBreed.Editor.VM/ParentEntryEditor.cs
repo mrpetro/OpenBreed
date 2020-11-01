@@ -1,4 +1,5 @@
-﻿using OpenBreed.Database.Interface;
+﻿using OpenBreed.Common.Data;
+using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace OpenBreed.Editor.VM
 
         #region Public Constructors
 
-        public ParentEntryEditor(EditorApplication application, IRepository repository, string editorName) : base(application, repository)
+        public ParentEntryEditor(EditorApplication application, DataProvider dataProvider, string editorName) : base(application, dataProvider)
         {
             EditorName = editorName;
         }

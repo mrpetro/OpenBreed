@@ -37,7 +37,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Common
             _vm = vm ?? throw new ArgumentNullException(nameof(EntryRefIdEditorVM));
 
             tbxEntryId.DataBindings.Add(nameof(tbxEntryId.Text), _vm, nameof(_vm.RefId), false, DataSourceUpdateMode.OnPropertyChanged);
-            btnEntryIdSelect.Click += (s,a) => _vm.SelectActionSetId();
+            btnEntryIdSelect.Click += (s,a) => _vm.SelectEntryId();
             _vm.OpenRefIdSelectorAction = OnOpenRefIdSelector;
         }
 

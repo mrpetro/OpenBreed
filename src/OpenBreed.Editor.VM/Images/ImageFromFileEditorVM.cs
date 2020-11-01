@@ -26,7 +26,7 @@ namespace OpenBreed.Editor.VM.Images
         {
             Parent = parent;
 
-            ImageAssetRefIdEditor = new EntryRefIdEditorVM(typeof(IAssetEntry));
+            ImageAssetRefIdEditor = new EntryRefIdEditorVM(Parent.DataProvider, typeof(IAssetEntry));
             ImageAssetRefIdEditor.RefIdSelected = (newRefId) => { AssetRef = newRefId; };
             PropertyChanged += This_PropertyChanged;
         }
@@ -88,9 +88,7 @@ namespace OpenBreed.Editor.VM.Images
         {
             if (AssetRef != null)
             {
-                var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
-
-                if (!dataProvider.TryGetData<Image>(AssetRef, out Image item, out string message))
+                if (!Parent.DataProvider.TryGetData<Image>(AssetRef, out Image item, out string message))
                 {
                     Parent.Application.GetInterface<IDialogProvider>().ShowMessage(message, "Invalid asset");
                     Image = System.Drawing.SystemIcons.Error.ToBitmap();

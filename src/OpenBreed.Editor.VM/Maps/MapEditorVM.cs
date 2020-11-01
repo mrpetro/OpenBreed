@@ -30,7 +30,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Constructors
 
-        public MapEditorVM(EditorApplication application, IRepository repository) : base(application, repository)
+        public MapEditorVM(EditorApplication application, DataProvider dataProvider) : base(application, dataProvider)
         {
             Tools = new MapEditorToolsVM();
 
@@ -180,9 +180,7 @@ namespace OpenBreed.Editor.VM.Maps
         {
             base.UpdateVM(entry);
 
-            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
-
-            Model = dataProvider.Maps.GetMap(entry.Id);
+            Model = DataProvider.Maps.GetMap(entry.Id);
 
             UpdateTileSets(entry.TileSetRef);
             UpdatePalettes(entry.PaletteRefs);
@@ -251,9 +249,7 @@ namespace OpenBreed.Editor.VM.Maps
                 return;
             }
 
-            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
-
-            var actionSet = dataProvider.ActionSets.GetActionSet(ActionSetRef);
+            var actionSet = DataProvider.ActionSets.GetActionSet(ActionSetRef);
             if (actionSet != null)
                 ActionSet = actionSet;
         }

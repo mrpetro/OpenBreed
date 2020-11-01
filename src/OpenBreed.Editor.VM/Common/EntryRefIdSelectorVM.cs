@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Database.Interface;
 using OpenBreed.Editor.VM.Base;
 using System;
@@ -21,11 +22,11 @@ namespace OpenBreed.Editor.VM.Common
 
         public BindingList<string> Items { get; }
 
-        public EntryRefIdSelectorVM(Type type)
+        public EntryRefIdSelectorVM(IDataProvider dataProvider, Type type)
         {
             Items = new BindingList<string>();
 
-            var repository = ServiceLocator.Instance.GetService<IUnitOfWork>().GetRepository(type);
+            var repository = dataProvider.GetRepository(type);
 
             Items.UpdateAfter(() =>
             {
