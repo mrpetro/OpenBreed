@@ -18,6 +18,7 @@ namespace OpenBreed.Editor.VM.Database
     {
         #region Private Fields
 
+        private readonly IUnitOfWork unitOfWork;
         private string _name;
         private ProjectState _state;
 
@@ -25,8 +26,11 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Internal Constructors
 
-        internal DatabaseVM()
+        internal DatabaseVM(IUnitOfWork unitOfWork)
         {
+            this.unitOfWork = unitOfWork;
+
+            Name = unitOfWork.Name;
         }
 
         #endregion Internal Constructors
@@ -61,8 +65,6 @@ namespace OpenBreed.Editor.VM.Database
 
         internal IEnumerable<string> GetTableNames()
         {
-            var unitOfWork = ServiceLocator.Instance.GetService<IUnitOfWork>();
-
             foreach (var repository in unitOfWork.Repositories)
                 yield return repository.Name;
         }

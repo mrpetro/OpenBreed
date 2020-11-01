@@ -53,7 +53,7 @@ namespace OpenBreed.Editor.VM
         Exited
     }
 
-    public class EditorVM : BaseViewModel, IDisposable, IApplicationInterface
+    public class EditorVM : BaseViewModel, IApplicationInterface
     {
 
         #region Private Fields
@@ -105,10 +105,6 @@ namespace OpenBreed.Editor.VM
 
         #region Public Methods
 
-        public void Dispose()
-        {
-        }
-
         public void Run()
         {
             try
@@ -156,9 +152,6 @@ namespace OpenBreed.Editor.VM
             dbTableSelectorConnector.ConnectTo(DbEditor);
             var dbTableEditorConnector = new DbTableEditorConnector(DbEditor.DbTablesEditor.DbTableEditor);
             dbTableEditorConnector.ConnectTo(DbEditor.DbTablesEditor.DbTableSelector);
-
-            //LevelEditor.Connect();
-            //SpriteViewer.Connect();
         }
         private void RunABTAGame()
         {

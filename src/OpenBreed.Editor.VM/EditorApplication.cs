@@ -69,6 +69,8 @@ namespace OpenBreed.Editor.VM
             return UnitOfWork;
         }
 
+        public void Run() => GetInterface<EditorVM>().Run();
+
         public void Dispose()
         {
             Dispose(disposing: true);
