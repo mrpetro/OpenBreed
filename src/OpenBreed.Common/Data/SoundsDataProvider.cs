@@ -27,7 +27,7 @@ namespace OpenBreed.Common.Data
 
         public SoundModel GetSound(string id)
         {
-            var entry = Provider.UnitOfWork.GetRepository<ISoundEntry>().GetById(id);
+            var entry = Provider.GetRepository<ISoundEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("Sound error: " + id);
 

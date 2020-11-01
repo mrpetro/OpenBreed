@@ -43,7 +43,7 @@ namespace OpenBreed.Common.Data
             if (_openedDataSources.TryGetValue(name, out ds))
                 return ds;
 
-            var entry = DataProvider.UnitOfWork.GetRepository<IDataSourceEntry>().GetById(name);
+            var entry = DataProvider.GetRepository<IDataSourceEntry>().GetById(name);
             if (entry == null)
                 throw new Exception($"Data source error: {name}");
 

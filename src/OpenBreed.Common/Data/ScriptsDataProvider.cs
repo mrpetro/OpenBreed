@@ -44,7 +44,7 @@ namespace OpenBreed.Common.Data
 
         public ScriptModel GetScript(string id)
         {
-            var entry = Provider.UnitOfWork.GetRepository<IScriptEntry>().GetById(id);
+            var entry = Provider.GetRepository<IScriptEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("Script error: " + id);
 

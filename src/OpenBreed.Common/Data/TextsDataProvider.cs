@@ -43,7 +43,7 @@ namespace OpenBreed.Common.Data
 
         public TextModel GetText(string id)
         {
-            var entry = Provider.UnitOfWork.GetRepository<ITextEntry>().GetById(id);
+            var entry = Provider.GetRepository<ITextEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("Text error: " + id);
 

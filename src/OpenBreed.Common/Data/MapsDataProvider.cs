@@ -27,7 +27,7 @@ namespace OpenBreed.Common.Data
 
         public MapModel GetMap(string id)
         {
-            var entry = Provider.UnitOfWork.GetRepository<IMapEntry>().GetById(id);
+            var entry = Provider.GetRepository<IMapEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("Map error: " + id);
 

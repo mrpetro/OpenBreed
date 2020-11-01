@@ -39,7 +39,7 @@ namespace OpenBreed.Common.Data
 
         public EntityTemplateModel GetEntityTemplate(string id)
         {
-            var entry = Provider.UnitOfWork.GetRepository<IEntityTemplateEntry>().GetById(id);
+            var entry = Provider.GetRepository<IEntityTemplateEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("Script error: " + id);
 

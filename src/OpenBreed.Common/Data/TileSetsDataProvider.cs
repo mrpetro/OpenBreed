@@ -45,7 +45,7 @@ namespace OpenBreed.Common.Data
 
         public TileSetModel GetTileSet(string id)
         {
-            var entry = Provider.UnitOfWork.GetRepository<ITileSetEntry>().GetById(id);
+            var entry = Provider.GetRepository<ITileSetEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("TileSet error: " + id);
 

@@ -70,6 +70,7 @@
     <Compile Include="Data\EntityTemplatesDataProvider.cs" />
     <Compile Include="Data\EntityTemplatesDataHelper.cs" />
     <Compile Include="Data\ActionSetsDataHelper.cs" />
+    <Compile Include="Data\IDataProvider.cs" />
     <Compile Include="Formats\TextFormat.cs" />
     <Compile Include="IApplication.cs" />
     <Compile Include="IApplicationInterface.cs" />

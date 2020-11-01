@@ -42,7 +42,7 @@ namespace OpenBreed.Common.Data
             if (_openedAssets.TryGetValue(id, out asset))
                 return asset;
 
-            var entry = DataProvider.UnitOfWork.GetRepository<IAssetEntry>().GetById(id);
+            var entry = DataProvider.GetRepository<IAssetEntry>().GetById(id);
             if (entry == null)
                 throw new Exception($"Asset error: {id}");
 

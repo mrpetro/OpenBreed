@@ -25,7 +25,7 @@ namespace OpenBreed.Common.Data
 
         public SpriteSetModel GetSpriteSet(string id)
         {
-            var entry = Provider.UnitOfWork.GetRepository<ISpriteSetEntry>().GetById(id);
+            var entry = Provider.GetRepository<ISpriteSetEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("SpriteSet error: " + id);
 

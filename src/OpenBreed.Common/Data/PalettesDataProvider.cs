@@ -44,7 +44,7 @@ namespace OpenBreed.Common.Data
 
         public PaletteModel GetPalette(string id)
         {
-            var entry = Provider.UnitOfWork.GetRepository<IPaletteEntry>().GetById(id);
+            var entry = Provider.GetRepository<IPaletteEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("Palette error: " + id);
 

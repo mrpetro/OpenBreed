@@ -41,7 +41,7 @@ namespace OpenBreed.Common.Data
 
         public ActionSetModel GetActionSet(string id)
         {
-            var entry = Provider.UnitOfWork.GetRepository<IActionSetEntry>().GetById(id);
+            var entry = Provider.GetRepository<IActionSetEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("ActionSet error: " + id);
 

@@ -1,17 +1,19 @@
 ﻿using OpenBreed.Common.Formats;
 using OpenBreed.Common.Logging;
 using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items;
 using System;
 using System.Collections.Generic;
 
 namespace OpenBreed.Common.Data
 {
-    public class DataProvider
+    public class DataProvider : IDataProvider
     {
         #region Private Fields
 
+        private readonly IUnitOfWork unitOfWork;
         private Dictionary<string, object> _models = new Dictionary<string, object>();
-        private ILogger logger;
+        private readonly ILogger logger;
 
         #endregion Private Fields
 
@@ -19,7 +21,7 @@ namespace OpenBreed.Common.Data
 
         public DataProvider(IUnitOfWork unitOfWork, ILogger logger)
         {
-            UnitOfWork = unitOfWork;
+            this.unitOfWork = unitOfWork;
             this.logger = logger;
 
             DataSources = new DataSourceProvider(this);
@@ -54,11 +56,20 @@ namespace OpenBreed.Common.Data
         public SoundsDataProvider Sounds { get; }
         public SpriteSetsDataProvider SpriteSets { get; }
         public TileSetsDataProvider TileSets { get; }
-        public IUnitOfWork UnitOfWork { get; }
 
         #endregion Public Properties
 
         #region Public Methods
+
+        public IRepository<T> GetRepository<T>() where T : IEntry
+        {
+            return unitOfWork.GetRepository<T>();
+        }
+
+        public IRepository GetRepository(Type entryType)
+        {
+            return unitOfWork.GetRepository(entryType);
+        }
 
         public bool TryGetData<T>(string id, out T item, out string message)
         {
@@ -103,7 +114,7 @@ namespace OpenBreed.Common.Data
 
             DataSources.Save();
 
-            UnitOfWork.Save();
+            unitOfWork.Save();
         }
 
         #endregion Public Methods

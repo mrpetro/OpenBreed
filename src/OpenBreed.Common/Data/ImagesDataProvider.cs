@@ -27,7 +27,7 @@ namespace OpenBreed.Common.Data
 
         public Image GetImage(string id)
         {
-            var entry = Provider.UnitOfWork.GetRepository<IImageEntry>().GetById(id);
+            var entry = Provider.GetRepository<IImageEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("Image error: " + id);
 
