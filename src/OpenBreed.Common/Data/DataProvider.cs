@@ -71,6 +71,11 @@ namespace OpenBreed.Common.Data
             return unitOfWork.GetRepository(entryType);
         }
 
+        public IRepository GetRepository(string entryId)
+        {
+            return unitOfWork.GetRepository(entryId);
+        }
+
         public bool TryGetData<T>(string id, out T item, out string message)
         {
             var data = GetData<T>(id);

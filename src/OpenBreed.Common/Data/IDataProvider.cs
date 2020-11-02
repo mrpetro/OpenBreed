@@ -10,6 +10,7 @@ namespace OpenBreed.Common.Data
 
         IRepository<T> GetRepository<T>() where T : IEntry;
         IRepository GetRepository(Type entryType);
+        IRepository GetRepository(string entryId);
 
         bool TryGetData<T>(string id, out T item, out string message);
         T GetData<T>(string id);

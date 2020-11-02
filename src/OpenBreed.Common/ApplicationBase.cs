@@ -17,14 +17,11 @@ namespace OpenBreed.Common
 
         protected ApplicationBase()
         {
-            ServiceLocator = ServiceLocator.Instance;
         }
 
         #endregion Protected Constructors
 
         #region Public Properties
-
-        public ServiceLocator ServiceLocator { get; }
 
         #endregion Public Properties
 
