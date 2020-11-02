@@ -92,7 +92,7 @@ namespace OpenBreed.Editor.UI.WinForms
             return new SaveFileQuery();
         }
 
-        public void ShowEditorView(EditorVM editor)
+        public void ShowEditorView(EditorApplicationVM editor)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

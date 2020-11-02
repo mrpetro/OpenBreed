@@ -65,11 +65,9 @@ namespace OpenBreed.Editor.VM
             Variables.RegisterVariable(typeof(string), fileName, "Db.Current.FileName");
 
             DataProvider = new DataProvider(UnitOfWork, Logger);
-
-            ServiceLocator.RegisterService<IUnitOfWork>(UnitOfWork);
         }
 
-        public void Run() => GetInterface<EditorVM>().Run();
+        public void Run() => GetInterface<EditorApplicationVM>().Run();
 
         public void Dispose()
         {
@@ -81,8 +79,6 @@ namespace OpenBreed.Editor.VM
         {
             if (UnitOfWork == null)
                 throw new Exception("Database not opened.");
-
-            ServiceLocator.UnregisterService<IUnitOfWork>();
 
             UnitOfWork = null;
             DataProvider = null;

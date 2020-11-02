@@ -40,7 +40,7 @@ namespace OpenBreed.Editor.VM.Tiles.Helpers
 
         public bool MultiSelect { get; set; }
 
-        public EditorVM Root { get; }
+        public EditorApplicationVM Root { get; }
 
         public List<int> SelectedIndexes { get; }
 

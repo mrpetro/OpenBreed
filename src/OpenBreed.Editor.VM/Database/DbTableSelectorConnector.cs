@@ -35,15 +35,15 @@ namespace OpenBreed.Editor.VM.Database
 
             switch (e.PropertyName)
             {
-                case nameof(dbEditor.Editable):
-                    OnDatabaseChanged(dbEditor.Editable);
+                case nameof(dbEditor.DbName):
+                    OnDatabaseChanged(dbEditor);
                     break;
                 default:
                     break;
             }
         }
 
-        private void OnDatabaseChanged(DatabaseVM db)
+        private void OnDatabaseChanged(DbEditorVM db)
         {
             if (db != null)
                 UpdateWithDbTables(db);
@@ -51,7 +51,7 @@ namespace OpenBreed.Editor.VM.Database
                 UpdateWithNoItems();
         }
 
-        private void UpdateWithDbTables(DatabaseVM db)
+        private void UpdateWithDbTables(DbEditorVM db)
         {
             Source.Items.UpdateAfter(() =>
             {

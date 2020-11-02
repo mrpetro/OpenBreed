@@ -17,23 +17,8 @@ namespace OpenBreed.Editor.VM.Database
 
         public DbTableEditorConnector(DbTableEditorVM source) : base(source)
         {
-            source.EditEntryAction = OnEditEntry;
         }
 
-        private void OnEditEntry(string tableName, string entryName)
-        {
-            var repository = ServiceLocator.Instance.GetService<IUnitOfWork>().GetRepository(tableName);
-
-            if (repository == null)
-                throw new InvalidOperationException($"Repository with name '{tableName}' not found");
-
-            var entry = repository.Find(entryName);
-
-            if (entry == null)
-                throw new InvalidOperationException($"Entry with name '{tableName}' not found in repository '{repository.Name}'");
-
-            //ServiceLocator.Instance.GetService<EditorVM>().DbEditor.OpenEntryEditor(entry);
-        }
 
         #endregion Public Constructors
 

@@ -47,7 +47,7 @@ namespace OpenBreed.Editor.UI.WinForms
             application.RegisterInterface<DbEntryEditorFactory>(() => CreateEntryEditorFactory(application));
             application.RegisterInterface<DbTableFactory>(() => new DbTableFactory());
             application.RegisterInterface<DbEntryFactory>(() => new DbEntryFactory());
-            application.RegisterInterface<EditorVM>(() => new EditorVM(application));
+            application.RegisterInterface<EditorApplicationVM>(() => new EditorApplicationVM(application));
             application.Run();
         }
 

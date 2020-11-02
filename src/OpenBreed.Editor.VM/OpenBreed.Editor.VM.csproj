@@ -89,7 +89,6 @@
     <Compile Include="Database\DbTableSelectorVM.cs" />
     <Compile Include="Database\DbTableSelectorConnector.cs" />
     <Compile Include="Database\DbEditorVM.cs" />
-    <Compile Include="Database\DbEditorVMHelper.cs" />
     <Compile Include="Database\DbEntryFactory.cs" />
     <Compile Include="Database\DbTablesEditorVM.cs" />
     <Compile Include="Database\DbTableEditorConnector.cs" />
@@ -117,8 +116,7 @@
     <Compile Include="Database\Tables\DbAssetTableVM.cs" />
     <Compile Include="DbTableFactory.cs" />
     <Compile Include="EditorApplication.cs" />
-    <Compile Include="EditorVM.cs" />
-    <Compile Include="EditorVMHelper.cs" />
+    <Compile Include="EditorApplicationVM.cs" />
     <Compile Include="DbEntryEditorFactory.cs" />
     <Compile Include="EntityTemplates\EntityTemplateEditorVM.cs" />
     <Compile Include="EntityTemplates\EntityTemplateFromFileEditorVM.cs" />

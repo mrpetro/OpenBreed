@@ -1,6 +1,4 @@
-﻿using OpenBreed.Common;
-using OpenBreed.Common.Data;
-using OpenBreed.Common.Tools;
+﻿using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Xml;
 using OpenBreed.Editor.VM.Base;
@@ -15,9 +13,10 @@ namespace OpenBreed.Editor.VM.Database
         #region Private Fields
 
         private readonly Dictionary<string, EntryEditorVM> _openedEntryEditors = new Dictionary<string, EntryEditorVM>();
-        private DatabaseVM _editable;
 
         private EditorApplication application;
+
+        private string dbName;
 
         #endregion Private Fields
 
@@ -36,10 +35,10 @@ namespace OpenBreed.Editor.VM.Database
 
         public DbTablesEditorVM DbTablesEditor { get; }
 
-        public DatabaseVM Editable
+        public string DbName
         {
-            get { return _editable; }
-            set { SetProperty(ref _editable, value); }
+            get { return dbName; }
+            set { SetProperty(ref dbName, value); }
         }
 
         public Action<EntryEditorVM> EntryEditorOpeningAction { get; set; }
@@ -60,14 +59,21 @@ namespace OpenBreed.Editor.VM.Database
 
         public bool TryCloseDatabase()
         {
-            if (TryCloseDatabaseInternal())
+            if (TrySaveDatabaseInternal())
             {
+                DbName = null;
                 application.CloseDatabase();
 
                 return true;
             }
             else
                 return false;
+        }
+
+        internal IEnumerable<string> GetTableNames()
+        {
+            foreach (var repository in application.UnitOfWork.Repositories)
+                yield return repository.Name;
         }
 
         public bool TryOpenXmlDatabase()
@@ -90,13 +96,14 @@ namespace OpenBreed.Editor.VM.Database
 
             application.OpenXmlDatabase(databaseFilePath);
 
-            Editable = CreateDatabaseVm(application.UnitOfWork);
+            DbName = application.UnitOfWork.Name;
+
             return true;
         }
 
         public void TrySaveDatabase()
         {
-            if (Editable == null)
+            if (application.UnitOfWork == null)
                 throw new InvalidOperationException("Expected current database");
 
             Save();
@@ -113,15 +120,15 @@ namespace OpenBreed.Editor.VM.Database
         /// <returns>True if no database was opened or if previous one was closed, false otherwise</returns>
         internal bool CheckCloseCurrentDatabase(DbEditorVM dbEditor, string newDatabaseFilePath)
         {
-            if (dbEditor.Editable != null)
+            if (application.UnitOfWork != null)
             {
-                if (IOHelper.GetNormalizedPath(newDatabaseFilePath) == IOHelper.GetNormalizedPath(dbEditor.Editable.Name))
+                if (IOHelper.GetNormalizedPath(newDatabaseFilePath) == IOHelper.GetNormalizedPath(dbEditor.DbName))
                 {
                     //Root.Logger.Warning("Database already opened.");
                     return false;
                 }
 
-                var answer = application.GetInterface<IDialogProvider>().ShowMessageWithQuestion($"Another database ({dbEditor.Editable.Name}) is already opened. Do you want to close it?",
+                var answer = application.GetInterface<IDialogProvider>().ShowMessageWithQuestion($"Another database ({dbEditor.DbName}) is already opened. Do you want to close it?",
                                                                 "Close current database?",
                                                                 QuestionDialogButtons.OKCancel);
                 if (answer != DialogAnswer.OK)
@@ -163,21 +170,16 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Protected Methods
 
-        protected DatabaseVM CreateDatabaseVm(IUnitOfWork model)
-        {
-            return new DatabaseVM(model);
-        }
-
         #endregion Protected Methods
 
         #region Private Methods
 
-        private bool TryCloseDatabaseInternal()
+        private bool TrySaveDatabaseInternal()
         {
-            if (Editable == null)
+            if (application.UnitOfWork == null)
                 throw new InvalidOperationException("Expected current database");
 
-            if (Editable.IsModified)
+            if (IsModified)
             {
                 var answer = application.GetInterface<IDialogProvider>().ShowMessageWithQuestion("Current database has been modified. Do you want to save it before closing?",
                                                                            "Save database before closing?", QuestionDialogButtons.YesNoCancel);
@@ -187,9 +189,6 @@ namespace OpenBreed.Editor.VM.Database
                 else if (answer == DialogAnswer.Yes)
                     Save();
             }
-
-            Editable.Dispose();
-            Editable = null;
 
             return true;
         }

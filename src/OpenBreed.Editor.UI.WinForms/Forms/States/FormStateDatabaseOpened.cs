@@ -99,7 +99,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
 
         internal override void Setup()
         {
-            if (MainForm.VM.DbEditor.Editable == null)
+            if (MainForm.VM.DbEditor.DbName == null)
                 throw new InvalidOperationException("No current database!");
 
             //Setup the File menu
@@ -119,7 +119,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
 
             MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewDatabaseMenuItem);
 
-            MainForm.Text = $"{MainForm.APP_NAME} - {MainForm.VM.DbEditor.Editable.Name}";
+            MainForm.Text = $"{MainForm.APP_NAME} - {MainForm.VM.DbEditor.DbName}";
 
             //_projectView.ActiveContentChanged += new EventHandler(ProjectView_ActiveContentChanged);
 

@@ -53,8 +53,6 @@ namespace OpenBreed.Editor.VM.Database
             set { SetProperty(ref _editable, value); }
         }
 
-        public Action<string, string> EditEntryAction { get; set; }
-
         public string EditorName { get { return "Table Editor"; } }
 
         public Action<DbTableNewEntryCreatorVM> OpenNewEntryCreatorAction { get; set; }
@@ -124,7 +122,7 @@ namespace OpenBreed.Editor.VM.Database
 
             //Check if entry editor is already opened. If yes then focus on this entry editor.
             //var openedDbEntryEditor = DbEntryEditors.FirstOrDefault(item => item.)
-            var dbEditor = application.GetInterface<EditorVM>().DbEditor;
+            var dbEditor = application.GetInterface<EditorApplicationVM>().DbEditor;
 
             var entryEditor = dbEditor.OpenEntryEditor(_edited, entryId);
             entryEditor.CommitedAction = OnEntryCommited;
@@ -153,7 +151,7 @@ namespace OpenBreed.Editor.VM.Database
 
         public void SetModel(string modelName)
         {
-            var repository = ServiceLocator.Instance.GetService<IUnitOfWork>().GetRepository(modelName);
+            var repository = application.DataProvider.GetRepository(modelName);
 
             if (repository == null)
                 throw new InvalidOperationException($"Repository with name '{modelName}' not found.");

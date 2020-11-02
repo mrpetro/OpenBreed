@@ -63,7 +63,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
         #region Public Properties
 
-        public EditorVM VM { get; private set; }
+        public EditorApplicationVM VM { get; private set; }
 
         #endregion Public Properties
 
@@ -86,7 +86,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
         #region Public Methods
 
-        public void Initialize(EditorVM vm)
+        public void Initialize(EditorApplicationVM vm)
         {
             VM = vm ?? throw new ArgumentNullException(nameof(vm));
 
@@ -136,7 +136,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         }
         private void OnDatabaseChanged()
         {
-            if (VM.DbEditor.Editable != null)
+            if (VM.DbEditor.DbName != null)
                 State = DatabaseOpenedState;
             else
                 State = InitialState;
@@ -196,7 +196,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         {
             switch (e.PropertyName)
             {
-                case nameof(VM.DbEditor.Editable):
+                case nameof(VM.DbEditor.DbName):
                     OnDatabaseChanged();
                     break;
                 default:

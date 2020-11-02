@@ -53,7 +53,7 @@ namespace OpenBreed.Editor.VM
         Exited
     }
 
-    public class EditorVM : BaseViewModel, IApplicationInterface
+    public class EditorApplicationVM : BaseViewModel, IApplicationInterface
     {
 
         #region Private Fields
@@ -66,7 +66,7 @@ namespace OpenBreed.Editor.VM
 
         private EditorApplication application;
 
-        public EditorVM(EditorApplication application)
+        public EditorApplicationVM(EditorApplication application)
         {
             this.application = application;
 
@@ -125,7 +125,21 @@ namespace OpenBreed.Editor.VM
 
         public bool TryExit()
         {
-            return EditorVMHelper.TryExit(this);
+            if (application.UnitOfWork != null)
+            {
+                if (DbEditor.IsModified)
+                {
+                    var answer = DialogProvider.ShowMessageWithQuestion("Current database has been modified. Do you want to save it before exiting?",
+                                                                               "Save database before exiting?", QuestionDialogButtons.YesNoCancel);
+
+                    if (answer == DialogAnswer.Cancel)
+                        return false;
+                    else if (answer == DialogAnswer.Yes)
+                        DbEditor.Save();
+                }
+            }
+
+            return true;
         }
 
         public void TryRunABTAGame()
@@ -139,7 +153,7 @@ namespace OpenBreed.Editor.VM
 
         internal bool TrySaveDatabase()
         {
-            return EditorVMHelper.TrySaveDatabase(this);
+            throw new NotImplementedException();
         }
 
         #endregion Internal Methods
