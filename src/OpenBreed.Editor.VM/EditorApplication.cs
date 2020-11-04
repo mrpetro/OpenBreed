@@ -3,6 +3,8 @@ using OpenBreed.Common.Data;
 using OpenBreed.Common.Logging;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Xml;
+using OpenBreed.Editor.VM.Database;
+using OpenBreed.Editor.VM.Logging;
 using System;
 using System.IO;
 
@@ -63,8 +65,14 @@ namespace OpenBreed.Editor.VM
 
             Variables.RegisterVariable(typeof(string), directoryPath, "Db.Current.FolderPath");
             Variables.RegisterVariable(typeof(string), fileName, "Db.Current.FileName");
+            DataSourceProvider.ExpandGlobalVariables = Variables.ExpandVariables;
 
             DataProvider = new DataProvider(UnitOfWork, Logger);
+        }
+
+        internal DbTablesEditorVM CreateDbTablesEditorVm()
+        {
+            return new DbTablesEditorVM(this);
         }
 
         public void Run() => GetInterface<EditorApplicationVM>().Run();
@@ -82,6 +90,11 @@ namespace OpenBreed.Editor.VM
 
             UnitOfWork = null;
             DataProvider = null;
+        }
+
+        public LoggerVM CreateLoggerVm()
+        {
+            return new LoggerVM(Logger);
         }
 
         #endregion Public Methods

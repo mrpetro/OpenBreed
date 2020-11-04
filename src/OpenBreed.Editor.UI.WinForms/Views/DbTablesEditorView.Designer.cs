@@ -28,23 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.DatabaseViewer = new OpenBreed.Editor.UI.WinForms.Controls.Database.DbTablesEditorCtrl();
+            this.DbTablesEditorCtrl = new OpenBreed.Editor.UI.WinForms.Controls.Database.DbTablesEditorCtrl();
             this.SuspendLayout();
             // 
-            // DatabaseViewer
+            // DbTablesEditorCtrl
             // 
-            this.DatabaseViewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DatabaseViewer.Location = new System.Drawing.Point(0, 0);
-            this.DatabaseViewer.Name = "DatabaseViewer";
-            this.DatabaseViewer.Size = new System.Drawing.Size(304, 331);
-            this.DatabaseViewer.TabIndex = 0;
+            this.DbTablesEditorCtrl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DbTablesEditorCtrl.Location = new System.Drawing.Point(0, 0);
+            this.DbTablesEditorCtrl.Name = "DbTablesEditorCtrl";
+            this.DbTablesEditorCtrl.Size = new System.Drawing.Size(304, 331);
+            this.DbTablesEditorCtrl.TabIndex = 0;
             // 
             // DbTablesEditorView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(304, 331);
-            this.Controls.Add(this.DatabaseViewer);
+            this.Controls.Add(this.DbTablesEditorCtrl);
             this.HideOnClose = true;
             this.Name = "DbTablesEditorView";
             this.Text = "Database";
@@ -54,6 +54,6 @@
 
         #endregion
 
-        private Controls.Database.DbTablesEditorCtrl DatabaseViewer;
+        private Controls.Database.DbTablesEditorCtrl DbTablesEditorCtrl;
     }
 }

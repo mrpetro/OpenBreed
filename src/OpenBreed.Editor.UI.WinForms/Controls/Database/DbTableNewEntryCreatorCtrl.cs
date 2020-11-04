@@ -15,7 +15,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
     {
         #region Private Fields
 
-        private DbTableNewEntryCreatorVM _vm;
+        private DbTableNewEntryCreatorVM vm;
 
         #endregion Private Fields
 
@@ -32,17 +32,27 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
 
         public void Initialize(DbTableNewEntryCreatorVM vm)
         {
-            _vm = vm ?? throw new ArgumentNullException(nameof(DbTableNewEntryCreatorVM));
+            this.vm = vm ?? throw new ArgumentNullException(nameof(DbTableNewEntryCreatorVM));
 
-            tbxEntryId.DataBindings.Add(nameof(tbxEntryId.Text), _vm, nameof(_vm.NewId), false, DataSourceUpdateMode.OnPropertyChanged);
-            cbxEntryType.DataSource = _vm.EntryTypes;
-            cbxEntryType.DisplayMember = "Name";
-            cbxEntryType.DataBindings.Add(nameof(cbxEntryType.SelectedItem), _vm, nameof(_vm.EntryType), false, DataSourceUpdateMode.OnPropertyChanged);
-            btnCreate.DataBindings.Add(nameof(btnCreate.Enabled), _vm, nameof(_vm.CreateEnabled), false, DataSourceUpdateMode.OnPropertyChanged);
-            btnCreate.Click += (s, a) => _vm.Create();
-            btnCancel.Click += (s, a) => _vm.Close();
+            BindControls();
+            BindEvents();
 
             tbxEntryId.Focus();
+        }
+
+        private void BindEvents()
+        {
+            btnCreate.Click += (s, a) => vm.Create();
+            btnCancel.Click += (s, a) => vm.Close();
+        }
+
+        private void BindControls()
+        {
+            tbxEntryId.DataBindings.Add(nameof(tbxEntryId.Text), vm, nameof(vm.NewId), false, DataSourceUpdateMode.OnPropertyChanged);
+            cbxEntryType.DataSource = vm.EntryTypes;
+            cbxEntryType.DisplayMember = "Name";
+            cbxEntryType.DataBindings.Add(nameof(cbxEntryType.SelectedItem), vm, nameof(vm.EntryType), false, DataSourceUpdateMode.OnPropertyChanged);
+            btnCreate.DataBindings.Add(nameof(btnCreate.Enabled), vm, nameof(vm.CreateEnabled), false, DataSourceUpdateMode.OnPropertyChanged);
         }
 
         #endregion Public Methods

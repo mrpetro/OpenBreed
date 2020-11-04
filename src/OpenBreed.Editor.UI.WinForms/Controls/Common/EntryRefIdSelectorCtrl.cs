@@ -1,36 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OpenBreed.Editor.VM.Common;
 using System.Windows.Forms;
-using OpenBreed.Editor.VM.Common;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Common
 {
     public partial class EntryRefIdSelectorCtrl : UserControl
     {
-        private EntryRefIdSelectorVM _vm;
+        #region Private Fields
+
+        private EntryRefIdSelectorVM vm;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public EntryRefIdSelectorCtrl()
         {
             InitializeComponent();
         }
 
+        #endregion Public Constructors
+
+        #region Public Methods
+
         public void Initialize(EntryRefIdSelectorVM vm)
         {
-            _vm = vm;
+            this.vm = vm;
 
-            cbxEntryItems.DataSource = _vm.Items;
+            BindControls();
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void BindControls()
+        {
+            cbxEntryItems.DataSource = vm.Items;
 
             cbxEntryItems.DataBindings.Add(nameof(cbxEntryItems.SelectedItem),
-                                           _vm, 
-                                           nameof(_vm.CurrentEntryId), 
-                                           false, 
+                                           vm,
+                                           nameof(vm.CurrentEntryId),
+                                           false,
                                            DataSourceUpdateMode.OnPropertyChanged);
         }
+
+        #endregion Private Methods
     }
 }

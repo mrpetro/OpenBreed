@@ -33,7 +33,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             ExitToolStripMenuItem.Click += (s, a) => MainForm.Close();
 
             ViewLoggerMenuItem = new ToolStripMenuItem("Logs");
-            ViewLoggerMenuItem.Click += (s, a) => MainForm.VM.ShowLogger();
+            //ViewLoggerMenuItem.Click += (s, a) => MainForm.VM.ShowLogger();
 
         }
 

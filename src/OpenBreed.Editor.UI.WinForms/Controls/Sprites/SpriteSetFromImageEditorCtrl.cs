@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Editor.VM.Sprites;
 using System;
-using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -25,11 +24,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
             cbxPalettes.SelectionChangeCommitted += combobox1_SelectionChangesCommitted;
         }
 
-        private void combobox1_SelectionChangesCommitted(Object sender, EventArgs e)
-        {
-            ((ComboBox)sender).DataBindings["SelectedItem"].WriteValue();
-        }
-
         #endregion Public Constructors
 
         #region Public Methods
@@ -40,14 +34,30 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
 
             SpriteEditor.Initialize(this.vm.SpriteEditor);
 
+            BindControls();
+            BindEvents();
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void combobox1_SelectionChangesCommitted(Object sender, EventArgs e)
+        {
+            ((ComboBox)sender).DataBindings["SelectedItem"].WriteValue();
+        }
+
+        private void BindEvents()
+        {
             btnAddSprite.Click += (s, a) => vm.AddSprite();
             btnRemoveSprite.Click += (s, a) => vm.RemoveSprite();
+        }
 
+        private void BindControls()
+        {
             cbxPalettes.DataSource = vm.PaletteIds;
             cbxPalettes.DataBindings.Add(nameof(cbxPalettes.SelectedItem), vm, nameof(vm.CurrentPaletteId), false, DataSourceUpdateMode.OnPropertyChanged);
-
             DGV.DataBindings.Add(nameof(DGV.CurrentRowIndex), vm, nameof(vm.CurrentSpriteIndex), false, DataSourceUpdateMode.OnPropertyChanged);
-
             DGV.DataSource = vm.Items;
         }
 
@@ -89,7 +99,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
             DGV.Columns.Add(imageColumn);
         }
 
-        #endregion Public Methods
-
+        #endregion Private Methods
     }
 }

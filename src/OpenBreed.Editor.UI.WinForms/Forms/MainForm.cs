@@ -94,11 +94,12 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
             VM.DbEditor.PropertyChanged += VM_PropertyChanged;
 
-            ViewToggleLoggerToolStripMenuItem.Click += (s, a) => VM.ShowLogger();
+            ViewToggleLoggerToolStripMenuItem.Click += (s, a) => VM.ToggleLogger(true);
 
             OptionsToolStripMenuItem.Click += (s, a) => VM.ShowOptions();
 
-            VM.ShowLoggerAction = OnShowLogger;
+            VM.ToggleLoggerAction = OnToggleLogger;
+
             VM.ShowOptionsAction = OnShowOptions;
         }
 
@@ -142,13 +143,23 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
                 State = InitialState;
         }
 
-        private void OnShowLogger(LoggerVM vm)
+        private void OnToggleLogger(LoggerVM vm, bool toggle)
         {
-            if (_loggerView == null)
+            if (toggle)
             {
-                _loggerView = new LoggerView();
-                _loggerView.Initialize(vm);
+                if (_loggerView == null)
+                {
+                    _loggerView = new LoggerView();
+
+                    _loggerView.Initialize(vm);
+                    _loggerView.VisibleChanged += (s, a) => ChangeCheckedState(LogConsoleShowToolStripMenuItem, s as Control);
+                    _loggerView.Show(EditorView, DockState.Float);
+                }
+                else
+                    _loggerView.Show(EditorView);
             }
+            else
+                _loggerView.Hide();
         }
 
         private void OnShowOptions(SettingsMan settings)
@@ -175,6 +186,9 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
         private void ShowLogConsoleToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
+            //ToolStripMenuItem item = sender as ToolStripMenuItem;
+            //VM.ToggleLogger(item.Checked);
+            
             ToolStripMenuItem item = sender as ToolStripMenuItem;
             ToggleLogConsole(item.Checked);
         }
@@ -183,8 +197,12 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         {
             if (toogle)
             {
+
                 if (_logConsoleView == null)
+                {
                     InitLogConsole();
+
+                }
                 else
                     _logConsoleView.Show(EditorView);
             }

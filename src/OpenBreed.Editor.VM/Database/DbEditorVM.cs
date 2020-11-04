@@ -26,14 +26,14 @@ namespace OpenBreed.Editor.VM.Database
         {
             this.application = application;
 
-            DbTablesEditor = new DbTablesEditorVM(application);
+            //DbTablesEditor = new DbTablesEditorVM(application);
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public DbTablesEditorVM DbTablesEditor { get; }
+        //public DbTablesEditorVM DbTablesEditor { get; }
 
         public string DbName
         {

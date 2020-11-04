@@ -1,92 +1,77 @@
 ﻿using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM.Database.Entries;
-using OpenBreed.Editor.VM.Database.Tables;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database
 {
     public class DbTableSelectorVM : BaseViewModel
     {
-
         #region Private Fields
 
-        private int _currentIndex = -1;
-        private string _currentTable = null;
+        private string currentItem;
+
+        private readonly EditorApplication application;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal DbTableSelectorVM()
+        internal DbTableSelectorVM(EditorApplication application)
         {
+            this.application = application;
+
             Items = new BindingList<string>();
             Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
 
-            PropertyChanged += This_PropertyChanged;
+            UpdateWithDbTables();
         }
 
         #endregion Internal Constructors
 
         #region Public Properties
 
-        public int CurrentIndex
-        {
-            get { return _currentIndex; }
-            set { SetProperty(ref _currentIndex, value); }
-        }
-
         public string CurrentItem
         {
-            get { return _currentTable; }
-            set { SetProperty(ref _currentTable, value); }
+            get { return currentItem; }
+            set { SetProperty(ref currentItem, value); }
         }
 
         public BindingList<string> Items { get; }
 
         #endregion Public Properties
 
-        #region Private Methods
+        #region Protected Methods
 
-        private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override void OnPropertyChanged(string name)
         {
-            switch (e.PropertyName)
+            switch (name)
             {
-                case nameof(CurrentIndex):
-                    UpdateCurrentItem();
-                    break;
-                case nameof(CurrentItem):
-                    UpdateCurrentIndex();
-                    break;
                 case nameof(Items):
                     CurrentItem = Items.FirstOrDefault();
                     break;
+
                 default:
                     break;
             }
+
+            base.OnPropertyChanged(name);
         }
 
-        private void UpdateCurrentIndex()
-        {
-            if (CurrentItem == null)
-                CurrentIndex = -1;
-            else
-                CurrentIndex = Items.IndexOf(CurrentItem);
-        }
+        #endregion Protected Methods
 
-        private void UpdateCurrentItem()
+        #region Private Methods
+
+        private void UpdateWithDbTables()
         {
-            if (CurrentIndex == -1)
-                CurrentItem = null;
-            else
-                CurrentItem = Items[CurrentIndex];
+            Items.UpdateAfter(() =>
+            {
+                Items.Clear();
+
+                foreach (var repository in application.UnitOfWork.Repositories)
+                    Items.Add(repository.Name);
+            });
         }
 
         #endregion Private Methods
-
     }
 }

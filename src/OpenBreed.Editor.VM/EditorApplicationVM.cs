@@ -1,48 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using OpenBreed.Editor.VM.Palettes;
-using OpenBreed.Editor.VM.Maps;
-using OpenBreed.Editor.VM.Tiles;
-using System.Drawing;
-using OpenBreed.Editor.VM.Database;
-using OpenBreed.Editor.VM.Actions;
-using OpenBreed.Editor.VM.Sprites;
-using System.Diagnostics;
-using OpenBreed.Common;
-using OpenBreed.Common.Logging;
-using OpenBreed.Editor.Cfg;
-using System.ComponentModel;
-using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM.Images;
-using OpenBreed.Common.Formats;
-using OpenBreed.Model.Actions;
-using OpenBreed.Database.Xml;
-using OpenBreed.Editor.VM.Sounds;
-using OpenBreed.Editor.VM.Database.Entries;
-using OpenBreed.Editor.VM.DataSources;
-using OpenBreed.Common.Assets;
-using OpenBreed.Common.Data;
-using OpenBreed.Editor.VM.Logging;
-using OpenBreed.Editor.VM.Texts;
-using OpenBreed.Common.DataSources;
-using OpenBreed.Database.Interface.Items.Actions;
-using OpenBreed.Database.Interface.Items.Tiles;
-using OpenBreed.Database.Interface.Items.Palettes;
-using OpenBreed.Database.Interface.Items.Sounds;
-using OpenBreed.Database.Interface.Items.DataSources;
-using OpenBreed.Database.Interface.Items.Images;
-using OpenBreed.Database.Interface.Items.Texts;
-using OpenBreed.Database.Interface.Items.Sprites;
-using OpenBreed.Database.Interface.Items.Maps;
-using OpenBreed.Database.Interface;
-using OpenBreed.Database.Interface.Items.Scripts;
-using OpenBreed.Editor.VM.Scripts;
-using OpenBreed.Database.Interface.Items.EntityTemplates;
-using OpenBreed.Editor.VM.EntityTemplates;
+﻿using OpenBreed.Common;
 using OpenBreed.Common.Tools;
+using OpenBreed.Editor.VM.Base;
+using OpenBreed.Editor.VM.Database;
+using OpenBreed.Editor.VM.Logging;
+using System;
+using System.Diagnostics;
 
 namespace OpenBreed.Editor.VM
 {
@@ -55,34 +17,25 @@ namespace OpenBreed.Editor.VM
 
     public class EditorApplicationVM : BaseViewModel, IApplicationInterface
     {
-
         #region Private Fields
 
         private EditorState _state;
+
+        private EditorApplication application;
+
+        private LoggerVM logger;
+        private DbTablesEditorVM dbTablesEditor;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        private EditorApplication application;
-
         public EditorApplicationVM(EditorApplication application)
         {
             this.application = application;
 
-            Logger = new LoggerVM(application.Logger);
-
             DialogProvider = application.GetInterface<IDialogProvider>();
-
             DbEditor = new DbEditorVM(application);
-            //PaletteEditor = new PaletteEditorVM();
-            //SpriteViewer = new SpriteViewerVM(this);
-            DataSourceProvider.ExpandGlobalVariables = application.Variables.ExpandVariables;
-        }
-
-        public void ShowOptions()
-        {
-            ShowOptionsAction?.Invoke(application.Settings);
         }
 
         #endregion Public Constructors
@@ -90,9 +43,13 @@ namespace OpenBreed.Editor.VM
         #region Public Properties
 
         public DbEditorVM DbEditor { get; }
+
         public IDialogProvider DialogProvider { get; }
-        public LoggerVM Logger { get; }
-        public Action<LoggerVM> ShowLoggerAction { get; set; }
+
+        public Action<LoggerVM, bool> ToggleLoggerAction { get; set; }
+        public Action<DbTablesEditorVM, bool> ToggleDbTablesEditorAction { get; set; }
+        public Action<DbTablesEditorVM> CloseDbTablesEditorAction { get; set; }
+
         public Action<SettingsMan> ShowOptionsAction { get; set; }
 
         public EditorState State
@@ -105,11 +62,15 @@ namespace OpenBreed.Editor.VM
 
         #region Public Methods
 
+        public void ShowOptions()
+        {
+            ShowOptionsAction?.Invoke(application.Settings);
+        }
+
         public void Run()
         {
             try
             {
-                Initialize();
                 DialogProvider.ShowEditorView(this);
             }
             catch (Exception ex)
@@ -118,9 +79,35 @@ namespace OpenBreed.Editor.VM
             }
         }
 
-        public void ShowLogger()
+        public void ToggleLogger(bool toggle)
         {
-            ShowLoggerAction?.Invoke(Logger);
+            if (logger == null)
+                logger = application.CreateLoggerVm();
+
+            ToggleLoggerAction?.Invoke(logger, toggle);
+        }
+
+        private void Initialize(DbTablesEditorVM dbTablesEditorVm)
+        {
+            var dbTableEditorConnector = new DbTableEditorConnector(dbTablesEditorVm.DbTableEditor);
+            dbTableEditorConnector.ConnectTo(dbTablesEditorVm.DbTableSelector);
+        }
+
+        public void ToggleDbTablesEditor(bool toggle)
+        {
+            if (dbTablesEditor == null)
+            {
+                dbTablesEditor = application.CreateDbTablesEditorVm();
+                Initialize(dbTablesEditor);
+            }
+
+            ToggleDbTablesEditorAction?.Invoke(dbTablesEditor, toggle);
+        }
+
+        public void CloseDbTablesEditor()
+        {
+            CloseDbTablesEditorAction?.Invoke(dbTablesEditor);
+            dbTablesEditor = null;
         }
 
         public bool TryExit()
@@ -160,13 +147,7 @@ namespace OpenBreed.Editor.VM
 
         #region Private Methods
 
-        private void Initialize()
-        {
-            var dbTableSelectorConnector = new DbTableSelectorConnector(DbEditor.DbTablesEditor.DbTableSelector);
-            dbTableSelectorConnector.ConnectTo(DbEditor);
-            var dbTableEditorConnector = new DbTableEditorConnector(DbEditor.DbTablesEditor.DbTableEditor);
-            dbTableEditorConnector.ConnectTo(DbEditor.DbTablesEditor.DbTableSelector);
-        }
+
         private void RunABTAGame()
         {
             Process proc = new Process();
@@ -177,6 +158,5 @@ namespace OpenBreed.Editor.VM
         }
 
         #endregion Private Methods
-
     }
 }

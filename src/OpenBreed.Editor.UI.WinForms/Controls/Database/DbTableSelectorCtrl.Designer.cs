@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cbxTables = new System.Windows.Forms.ComboBox();
+            this.cbxTables = new OpenBreed.Common.UI.WinForms.Controls.ComboBoxEx();
             this.SuspendLayout();
             // 
             // cbxTables
@@ -52,6 +52,6 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cbxTables;
+        private OpenBreed.Common.UI.WinForms.Controls.ComboBoxEx cbxTables;
     }
 }

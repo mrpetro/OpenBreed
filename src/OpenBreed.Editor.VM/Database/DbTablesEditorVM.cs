@@ -23,8 +23,10 @@ namespace OpenBreed.Editor.VM.Database
         {
             this.application = application;
 
-            DbTableSelector = new DbTableSelectorVM();
+            DbTableSelector = new DbTableSelectorVM(application);
             DbTableEditor = new DbTableEditorVM(application);
+
+
         }
 
         #endregion Internal Constructors
