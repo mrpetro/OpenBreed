@@ -14,7 +14,7 @@ namespace OpenBreed.Editor.VM.Database
 
         private readonly Dictionary<string, EntryEditorVM> _openedEntryEditors = new Dictionary<string, EntryEditorVM>();
 
-        private EditorApplication application;
+        private readonly EditorApplication application;
 
         private string dbName;
 
@@ -25,15 +25,11 @@ namespace OpenBreed.Editor.VM.Database
         public DbEditorVM(EditorApplication application)
         {
             this.application = application;
-
-            //DbTablesEditor = new DbTablesEditorVM(application);
         }
 
         #endregion Public Constructors
 
         #region Public Properties
-
-        //public DbTablesEditorVM DbTablesEditor { get; }
 
         public string DbName
         {
@@ -68,12 +64,6 @@ namespace OpenBreed.Editor.VM.Database
             }
             else
                 return false;
-        }
-
-        internal IEnumerable<string> GetTableNames()
-        {
-            foreach (var repository in application.UnitOfWork.Repositories)
-                yield return repository.Name;
         }
 
         public bool TryOpenXmlDatabase()

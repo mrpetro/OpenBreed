@@ -1,23 +1,17 @@
 ﻿using OpenBreed.Editor.VM.Base;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database
 {
     public class DbTablesEditorVM : BaseViewModel
     {
-
-        #region Public Fields
-
-        #endregion Public Fields
-
-        #region Internal Constructors
+        #region Private Fields
 
         private readonly EditorApplication application;
+
+        #endregion Private Fields
+
+        #region Internal Constructors
 
         internal DbTablesEditorVM(EditorApplication application)
         {
@@ -25,8 +19,6 @@ namespace OpenBreed.Editor.VM.Database
 
             DbTableSelector = new DbTableSelectorVM(application);
             DbTableEditor = new DbTableEditorVM(application);
-
-
         }
 
         #endregion Internal Constructors
@@ -36,7 +28,31 @@ namespace OpenBreed.Editor.VM.Database
         public DbTableSelectorVM DbTableSelector { get; private set; }
         public DbTableEditorVM DbTableEditor { get; private set; }
 
+        public Action ShowingAction { get; set; }
+        public Action HidingAction { get; set; }
+        public Action ClosingAction { get; set; }
+
         #endregion Public Properties
 
+        #region Public Methods
+
+        public bool Close()
+        {
+            ClosingAction?.Invoke();
+
+            return true;
+        }
+
+        public void Show()
+        {
+            ShowingAction?.Invoke();
+        }
+
+        public void Hide()
+        {
+            HidingAction?.Invoke();
+        }
+
+        #endregion Public Methods
     }
 }

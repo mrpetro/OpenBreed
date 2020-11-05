@@ -1,4 +1,5 @@
-﻿using OpenBreed.Editor.UI.WinForms.Views;
+﻿using OpenBreed.Common.UI.WinForms.Controls;
+using OpenBreed.Editor.UI.WinForms.Views;
 using OpenBreed.Editor.VM.Database;
 using OpenBreed.Editor.VM.Database.Entries;
 using System;
@@ -20,7 +21,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
         internal ToolStripSeparator FileSeparator = null;
 
         //View menu
-        internal ToolStripMenuItem ViewDatabaseMenuItem = null;
+        internal ToolStripMenuItemEx ViewDatabaseMenuItem = null;
 
         #endregion Internal Fields
 
@@ -54,14 +55,8 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             //ViewImagesMenuItem.Click += (s, a) => _projectView.ShowView(ProjectViewType.Images);
             //ViewToolsMenuItem = new ToolStripMenuItem("Tools");
             //ViewToolsMenuItem.Click += (s, a) => _projectView.ShowView(ProjectViewType.Tools);
-            ViewDatabaseMenuItem = new ToolStripMenuItem("Database items");
-            ViewDatabaseMenuItem.Click += (s, a) => MainForm.VM.ToggleDbTablesEditor(true);
-        }
-
-        void ChangeCheckedState(ToolStripMenuItem menuItem, Control ctrl)
-        {
-            if (menuItem.Checked != ctrl.Visible)
-                menuItem.Checked = ctrl.Visible;
+            ViewDatabaseMenuItem = new ToolStripMenuItemEx("Database items");
+            ViewDatabaseMenuItem.CheckOnClick = true;
         }
 
         #endregion Internal Constructors
@@ -103,42 +98,30 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             MainForm.ViewToolStripMenuItem.Enabled = true;
             MainForm.ViewToolStripMenuItem.Visible = true;
 
+
+            ViewDatabaseMenuItem = new ToolStripMenuItemEx("Database items");
+            ViewDatabaseMenuItem.CheckOnClick = true;
+            ViewDatabaseMenuItem.DataBindings.Add(nameof(ViewDatabaseMenuItem.Checked),
+                                                  MainForm.VM,
+                                                  nameof(MainForm.VM.DbTablesEditorChecked),
+                                                  false,
+                                                  DataSourceUpdateMode.OnPropertyChanged);
+            //ViewDatabaseMenuItem.Click += (s, a) => MainForm.VM.ToggleDbTablesEditor(true);
+
             MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewDatabaseMenuItem);
 
             MainForm.Text = $"{MainForm.APP_NAME} - {MainForm.VM.DbEditor.DbName}";
 
-            //_projectView.ActiveContentChanged += new EventHandler(ProjectView_ActiveContentChanged);
-
-            MainForm.VM.ToggleDbTablesEditorAction = OnToggleDbTablesEditor;
-            MainForm.VM.CloseDbTablesEditorAction = OnCloseDbTablesEditor;
-            MainForm.VM.ToggleDbTablesEditor(true);
+            MainForm.VM.InitDbTablesEditorAction = OnInitDbTablesEditor;
+            MainForm.VM.DbTablesEditorChecked = true;
         }
 
-        private void OnCloseDbTablesEditor(DbTablesEditorVM dbTablesEditorVm)
-        {
-            if (databaseView == null)
-                return;
-            databaseView.Close();
-            databaseView = null;
-        }
 
-        private DbTablesEditorView databaseView;
-
-        private void OnToggleDbTablesEditor(DbTablesEditorVM dbTablesEditorVm, bool toggle)
+        private void OnInitDbTablesEditor(DbTablesEditorVM dbTablesEditorVm)
         {
-            if (toggle)
-            {
-                if (databaseView == null)
-                {
-                    databaseView = new DbTablesEditorView();
-                    databaseView.Initialize(dbTablesEditorVm);
-                    databaseView.Show(MainForm.EditorView, DockState.DockLeft);
-                }
-                else
-                    databaseView.Show(MainForm.EditorView);
-            }
-            else
-                databaseView.Hide();
+            var databaseView = new DbTablesEditorView();
+            databaseView.Initialize(dbTablesEditorVm);
+            databaseView.Show(MainForm.EditorView, DockState.DockLeft);
         }
 
         #endregion Internal Methods

@@ -4,6 +4,7 @@ using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Database;
 using OpenBreed.Editor.VM.Logging;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 
 namespace OpenBreed.Editor.VM
@@ -26,6 +27,8 @@ namespace OpenBreed.Editor.VM
         private LoggerVM logger;
         private DbTablesEditorVM dbTablesEditor;
 
+        private bool dbTablesEditorChecked;
+
         #endregion Private Fields
 
         #region Public Constructors
@@ -36,19 +39,31 @@ namespace OpenBreed.Editor.VM
 
             DialogProvider = application.GetInterface<IDialogProvider>();
             DbEditor = new DbEditorVM(application);
+
+            MenuItems = new BindingList<MenuItemVM>();
+
+            //MenuItems =
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
+        public BindingList<MenuItemVM> MenuItems { get; }
+
         public DbEditorVM DbEditor { get; }
 
         public IDialogProvider DialogProvider { get; }
 
         public Action<LoggerVM, bool> ToggleLoggerAction { get; set; }
-        public Action<DbTablesEditorVM, bool> ToggleDbTablesEditorAction { get; set; }
-        public Action<DbTablesEditorVM> CloseDbTablesEditorAction { get; set; }
+
+        public Action<DbTablesEditorVM> InitDbTablesEditorAction { get; set; }
+
+        public bool DbTablesEditorChecked
+        {
+            get { return dbTablesEditorChecked; }
+            set { SetProperty(ref dbTablesEditorChecked, value); }
+        }
 
         public Action<SettingsMan> ShowOptionsAction { get; set; }
 
@@ -87,26 +102,24 @@ namespace OpenBreed.Editor.VM
             ToggleLoggerAction?.Invoke(logger, toggle);
         }
 
-        private void Initialize(DbTablesEditorVM dbTablesEditorVm)
-        {
-            var dbTableEditorConnector = new DbTableEditorConnector(dbTablesEditorVm.DbTableEditor);
-            dbTableEditorConnector.ConnectTo(dbTablesEditorVm.DbTableSelector);
-        }
-
         public void ToggleDbTablesEditor(bool toggle)
         {
             if (dbTablesEditor == null)
             {
                 dbTablesEditor = application.CreateDbTablesEditorVm();
+                InitDbTablesEditorAction?.Invoke(dbTablesEditor);
                 Initialize(dbTablesEditor);
             }
 
-            ToggleDbTablesEditorAction?.Invoke(dbTablesEditor, toggle);
+            if (toggle)
+                dbTablesEditor.Show();
+            else
+                dbTablesEditor.Hide();
         }
 
         public void CloseDbTablesEditor()
         {
-            CloseDbTablesEditorAction?.Invoke(dbTablesEditor);
+            dbTablesEditor.Close();
             dbTablesEditor = null;
         }
 
@@ -145,8 +158,32 @@ namespace OpenBreed.Editor.VM
 
         #endregion Internal Methods
 
+        #region Protected Methods
+
+        protected override void OnPropertyChanged(string name)
+        {
+            switch (name)
+            {
+                case nameof(DbTablesEditorChecked):
+                    ToggleDbTablesEditor(DbTablesEditorChecked);
+                    break;
+
+                default:
+                    break;
+            }
+
+            base.OnPropertyChanged(name);
+        }
+
+        #endregion Protected Methods
+
         #region Private Methods
 
+        private void Initialize(DbTablesEditorVM dbTablesEditorVm)
+        {
+            var dbTableEditorConnector = new DbTableEditorConnector(dbTablesEditorVm.DbTableEditor);
+            dbTableEditorConnector.ConnectTo(dbTablesEditorVm.DbTableSelector);
+        }
 
         private void RunABTAGame()
         {

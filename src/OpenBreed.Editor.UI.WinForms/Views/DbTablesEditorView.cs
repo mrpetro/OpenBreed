@@ -22,6 +22,10 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         public void Initialize(DbTablesEditorVM vm)
         {
             DbTablesEditorCtrl.Initialize(vm);
+
+            vm.ShowingAction = () => this.InvokeIfRequired(() => base.Show());
+            vm.HidingAction = () => this.InvokeIfRequired(() => base.Hide());
+            vm.ClosingAction = () => this.InvokeIfRequired(() => base.Close());
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
