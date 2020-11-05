@@ -28,7 +28,7 @@ namespace OpenBreed.Common.UI.WinForms.Controls
 
         #region Public Properties
 
-        [Bindable(true, BindingDirection.TwoWay)]
+        [Bindable(BindableSupport.Yes, BindingDirection.TwoWay)]
         public int CurrentRowIndex
         {
             get
