@@ -87,8 +87,6 @@ namespace OpenBreed.Editor.VM
 
         #region Internal Properties
 
-        internal DataProvider DataProvider { get { return ServiceLocator.Instance.GetService<DataProvider>(); } }
-
         #endregion Internal Properties
 
         #region Public Methods

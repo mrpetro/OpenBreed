@@ -3,6 +3,8 @@ using OpenBreed.Common.Data;
 using OpenBreed.Common.Logging;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Xml;
+using OpenBreed.Editor.VM.Database;
+using OpenBreed.Editor.VM.Logging;
 using System;
 using System.IO;
 
@@ -44,13 +46,14 @@ namespace OpenBreed.Editor.VM
 
         public VariableMan Variables => variables.Value;
 
-        #endregion Public Properties
-
         public IUnitOfWork UnitOfWork { get; set; }
+        public DataProvider DataProvider { get; set; }
+
+        #endregion Public Properties
 
         #region Public Methods
 
-        public IUnitOfWork OpenXmlDatabase(string databaseFilePath)
+        public void OpenXmlDatabase(string databaseFilePath)
         {
             if (UnitOfWork != null)
                 throw new Exception("There is already database opened.");
@@ -62,17 +65,36 @@ namespace OpenBreed.Editor.VM
 
             Variables.RegisterVariable(typeof(string), directoryPath, "Db.Current.FolderPath");
             Variables.RegisterVariable(typeof(string), fileName, "Db.Current.FileName");
+            DataSourceProvider.ExpandGlobalVariables = Variables.ExpandVariables;
 
-            ServiceLocator.RegisterService<IUnitOfWork>(UnitOfWork);
-            ServiceLocator.RegisterService<DataProvider>(new DataProvider(UnitOfWork, Logger));
-
-            return UnitOfWork;
+            DataProvider = new DataProvider(UnitOfWork, Logger);
         }
+
+        internal DbTablesEditorVM CreateDbTablesEditorVm()
+        {
+            return new DbTablesEditorVM(this);
+        }
+
+        public void Run() => GetInterface<EditorApplicationVM>().Run();
 
         public void Dispose()
         {
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
+        }
+
+        public void CloseDatabase()
+        {
+            if (UnitOfWork == null)
+                throw new Exception("Database not opened.");
+
+            UnitOfWork = null;
+            DataProvider = null;
+        }
+
+        public LoggerVM CreateLoggerVm()
+        {
+            return new LoggerVM(Logger);
         }
 
         #endregion Public Methods
@@ -90,17 +112,6 @@ namespace OpenBreed.Editor.VM
 
                 disposedValue = true;
             }
-        }
-
-        public void CloseDatabase()
-        {
-            if (UnitOfWork == null)
-                throw new Exception("Database not opened.");
-
-            ServiceLocator.UnregisterService<DataProvider>();
-            ServiceLocator.UnregisterService<IUnitOfWork>();
-
-            UnitOfWork = null;
         }
 
         #endregion Protected Methods

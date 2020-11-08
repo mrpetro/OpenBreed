@@ -1,4 +1,5 @@
-﻿using OpenBreed.Database.Interface;
+﻿using OpenBreed.Common.Data;
+using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
 
 namespace OpenBreed.Editor.VM.EntityTemplates
@@ -12,7 +13,7 @@ namespace OpenBreed.Editor.VM.EntityTemplates
             RegisterSubeditor<IEntityTemplateFromFileEntry>((parent) => new EntityTemplateFromFileEditorVM(parent));
         }
 
-        public EntityTemplateEditorVM(EditorApplication application, IRepository repository) : base(application, repository, "Entity Template Editor")
+        public EntityTemplateEditorVM(EditorApplication application, DataProvider dataProvider) : base(application, dataProvider, "Entity Template Editor")
         {
         }
 

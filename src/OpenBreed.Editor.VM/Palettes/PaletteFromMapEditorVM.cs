@@ -90,9 +90,7 @@ namespace OpenBreed.Editor.VM.Palettes
             {
                 BlockNames.Clear();
 
-                var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
-
-                var map = dataProvider.GetData<MapModel>(source.DataRef);
+                var map = Parent.DataProvider.GetData<MapModel>(source.DataRef);
 
                 if (map == null)
                     return;
@@ -112,9 +110,7 @@ namespace OpenBreed.Editor.VM.Palettes
         {
             UpdatePaletteBlocksList(entry);
 
-            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
-
-            var model = dataProvider.Palettes.GetPalette(entry.Id);
+            var model = Parent.DataProvider.Palettes.GetPalette(entry.Id);
 
             if (model != null)
                 UpdateVMColors(model);
@@ -125,7 +121,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
         private void UpdateEntry(IPaletteFromMapEntry source)
         {
-            var mapModel = ServiceLocator.Instance.GetService<DataProvider>().GetData<MapModel>(DataRef);
+            var mapModel = Parent.DataProvider.GetData<MapModel>(DataRef);
 
             var paletteBlock = mapModel.Blocks.OfType<MapPaletteBlock>().FirstOrDefault(item => item.Name == BlockName);
 

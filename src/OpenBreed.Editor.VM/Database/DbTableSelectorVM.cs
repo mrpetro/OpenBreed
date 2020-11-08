@@ -1,92 +1,77 @@
 ﻿using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM.Database.Entries;
-using OpenBreed.Editor.VM.Database.Tables;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM.Database
 {
     public class DbTableSelectorVM : BaseViewModel
     {
-
         #region Private Fields
 
-        private int _currentIndex = -1;
-        private string _currentTable = null;
+        private readonly EditorApplication application;
+        private string currentTableName;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal DbTableSelectorVM()
+        internal DbTableSelectorVM(EditorApplication application)
         {
-            Items = new BindingList<string>();
-            Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
+            this.application = application;
 
-            PropertyChanged += This_PropertyChanged;
+            TableNames = new BindingList<string>();
+            TableNames.ListChanged += (s, a) => OnPropertyChanged(nameof(TableNames));
+
+            UpdateWithDbTables();
         }
 
         #endregion Internal Constructors
 
         #region Public Properties
 
-        public int CurrentIndex
+        public string CurrentTableName
         {
-            get { return _currentIndex; }
-            set { SetProperty(ref _currentIndex, value); }
+            get { return currentTableName; }
+            set { SetProperty(ref currentTableName, value); }
         }
 
-        public string CurrentItem
-        {
-            get { return _currentTable; }
-            set { SetProperty(ref _currentTable, value); }
-        }
-
-        public BindingList<string> Items { get; }
+        public BindingList<string> TableNames { get; }
 
         #endregion Public Properties
 
-        #region Private Methods
+        #region Protected Methods
 
-        private void This_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override void OnPropertyChanged(string name)
         {
-            switch (e.PropertyName)
+            switch (name)
             {
-                case nameof(CurrentIndex):
-                    UpdateCurrentItem();
+                case nameof(TableNames):
+                    CurrentTableName = TableNames.FirstOrDefault();
                     break;
-                case nameof(CurrentItem):
-                    UpdateCurrentIndex();
-                    break;
-                case nameof(Items):
-                    CurrentItem = Items.FirstOrDefault();
-                    break;
+
                 default:
                     break;
             }
+
+            base.OnPropertyChanged(name);
         }
 
-        private void UpdateCurrentIndex()
-        {
-            if (CurrentItem == null)
-                CurrentIndex = -1;
-            else
-                CurrentIndex = Items.IndexOf(CurrentItem);
-        }
+        #endregion Protected Methods
 
-        private void UpdateCurrentItem()
+        #region Private Methods
+
+        private void UpdateWithDbTables()
         {
-            if (CurrentIndex == -1)
-                CurrentItem = null;
-            else
-                CurrentItem = Items[CurrentIndex];
+            TableNames.UpdateAfter(() =>
+            {
+                TableNames.Clear();
+
+                foreach (var repository in application.UnitOfWork.Repositories)
+                    TableNames.Add(repository.Name);
+            });
         }
 
         #endregion Private Methods
-
     }
 }

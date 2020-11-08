@@ -1,4 +1,5 @@
-﻿using OpenBreed.Database.Interface;
+﻿using OpenBreed.Common.Data;
+using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Scripts;
 using System;
@@ -16,7 +17,7 @@ namespace OpenBreed.Editor.VM.Scripts
             RegisterSubeditor<IScriptFromFileEntry>((parent) => new ScriptFromFileEditorVM(parent));
         }
 
-        public ScriptEditorVM(EditorApplication application, IRepository repository) : base(application, repository, "Script Editor")
+        public ScriptEditorVM(EditorApplication application, DataProvider dataProvider) : base(application, dataProvider, "Script Editor")
         {
         }
 

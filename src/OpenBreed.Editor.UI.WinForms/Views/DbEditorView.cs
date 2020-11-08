@@ -60,7 +60,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         private const string LAYOUT_CFG_FILE_NAME = "Layout.cfg";
 
         //private ToolsView _toolsView = new ToolsView();
-        private DbTablesEditorView _databaseView = new DbTablesEditorView();
+        //private DbTablesEditorView _databaseView = new DbTablesEditorView();
 
         private DeserializeDockContent _deserializeDockContent;
 
@@ -94,19 +94,12 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         #region Public Methods
 
-        public void CloseDatabaseView()
-        {
-            if (_databaseView == null)
-                return;
-            _databaseView.Close();
-            _databaseView = null;
-        }
-
         public void HideAllViews()
         {
             _vm.CloseAllEditors();
 
-            CloseDatabaseView();
+            //TODO:
+            //CloseDatabaseView();
         }
 
         public void Initialize(DbEditorVM vm)
@@ -127,14 +120,14 @@ namespace OpenBreed.Editor.UI.WinForms.Views
                 LoadFromXml(configFile, _deserializeDockContent);
         }
 
-        public void ShowDatabaseView()
-        {
-            if (_databaseView == null)
-                _databaseView = new DbTablesEditorView();
+        //public void ShowDatabaseView()
+        //{
+        //    if (_databaseView == null)
+        //        _databaseView = new DbTablesEditorView();
 
-            _databaseView.Initialize(_vm.DbTablesEditor);
-            _databaseView.Show(this, DockState.DockLeft);
-        }
+        //    _databaseView.Initialize(_vm.DbTablesEditor);
+        //    _databaseView.Show(this, DockState.DockLeft);
+        //}
 
         //public void ShowLevelBodyEditorView()
         //{
@@ -184,19 +177,6 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         #endregion Public Methods
 
         #region Internal Methods
-
-        internal void ShowLevelView()
-        {
-            //ShowLevelTileSelectorView();
-            //ShowLevelPropSelectorView();
-            //ShowLevelPalettesView();
-            //ShowLevelBodyEditorView();
-        }
-
-        internal void ShowSpriteSetEditorView()
-        {
-            throw new NotImplementedException();
-        }
 
         #endregion Internal Methods
 

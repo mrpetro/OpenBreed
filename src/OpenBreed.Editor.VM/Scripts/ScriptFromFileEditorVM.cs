@@ -29,7 +29,7 @@ namespace OpenBreed.Editor.VM.Scripts
 
             PropertyChanged += This_PropertyChanged;
 
-            ScriptAssetRefIdEditor = new EntryRefIdEditorVM(typeof(IAssetEntry));
+            ScriptAssetRefIdEditor = new EntryRefIdEditorVM(Parent.DataProvider, typeof(IAssetEntry));
             ScriptAssetRefIdEditor.RefIdSelected = (newRefId) => { DataRef = newRefId; };
         }
 
@@ -67,9 +67,7 @@ namespace OpenBreed.Editor.VM.Scripts
         {
             var scriptFromFileEntry = (IScriptFromFileEntry)entry;
 
-            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
-
-            var model = dataProvider.Scripts.GetScript(entry.Id);
+            var model = Parent.DataProvider.Scripts.GetScript(entry.Id);
 
             if (model != null)
                 Script = model.Script;
@@ -81,7 +79,7 @@ namespace OpenBreed.Editor.VM.Scripts
         {
             var scriptFromFileEntry = (IScriptFromFileEntry)entry;
 
-            var model = ServiceLocator.Instance.GetService<DataProvider>().GetData<TextModel>(DataRef);
+            var model = Parent.DataProvider.GetData<TextModel>(DataRef);
 
             model.Text = Script;
             scriptFromFileEntry.DataRef = DataRef;

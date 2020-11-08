@@ -1,4 +1,5 @@
-﻿using OpenBreed.Database.Interface;
+﻿using OpenBreed.Common.Data;
+using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Sounds;
 using System;
 
@@ -13,7 +14,7 @@ namespace OpenBreed.Editor.VM.Sounds
             RegisterSubeditor<ISoundEntry>((parent) => new SoundFromPcmEditorVM(parent));
         }
 
-        public SoundEditorVM(EditorApplication application, IRepository repository) : base(application, repository, "Sound Editor")
+        public SoundEditorVM(EditorApplication application, DataProvider dataProvider) : base(application, dataProvider, "Sound Editor")
         {
         }
 

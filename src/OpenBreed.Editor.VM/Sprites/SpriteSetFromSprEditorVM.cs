@@ -82,9 +82,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         private void UpdateVM(ISpriteSetFromSprEntry entry)
         {
-            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
-
-            var model = dataProvider.SpriteSets.GetSpriteSet(entry.Id);
+            var model = Parent.DataProvider.SpriteSets.GetSpriteSet(entry.Id);
 
             if (model != null)
                 FromModel(model);

@@ -56,9 +56,7 @@ namespace OpenBreed.Editor.VM.EntityTemplates
 
         public void UpdateVM(IEntityTemplateEntry entry)
         {
-            var dataProvider = ServiceLocator.Instance.GetService<DataProvider>();
-
-            var model = dataProvider.EntityTemplates.GetEntityTemplate(entry.Id);
+            var model = Parent.DataProvider.EntityTemplates.GetEntityTemplate(entry.Id);
 
             if (model != null)
                 EntityTemplate = model.EntityTemplate;
@@ -68,7 +66,7 @@ namespace OpenBreed.Editor.VM.EntityTemplates
 
         public void UpdateEntry(IEntityTemplateEntry entry)
         {
-            var model = ServiceLocator.Instance.GetService<DataProvider>().GetData<TextModel>(DataRef);
+            var model = Parent.DataProvider.GetData<TextModel>(DataRef);
             model.Text = EntityTemplate;
             entry.DataRef = DataRef;
         }

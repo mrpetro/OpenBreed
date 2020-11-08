@@ -1,23 +1,25 @@
-﻿using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Common.Data;
+using OpenBreed.Editor.VM.Base;
 using System;
 
 namespace OpenBreed.Editor.VM.Common
 {
     public class EntryRefIdEditorVM : BaseViewModel
     {
-
         #region Private Fields
 
-        private readonly Type _entryType;
-        private string _refId;
+        private readonly IDataProvider dataProvider;
+        private readonly Type entryType;
+        private string refId;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public EntryRefIdEditorVM(Type type)
+        public EntryRefIdEditorVM(IDataProvider dataProvider, Type entryType)
         {
-            _entryType = type;
+            this.dataProvider = dataProvider;
+            this.entryType = entryType;
         }
 
         #endregion Public Constructors
@@ -29,17 +31,17 @@ namespace OpenBreed.Editor.VM.Common
 
         public string RefId
         {
-            get { return _refId; }
-            set { base.SetProperty(ref _refId, value); }
+            get { return refId; }
+            set { base.SetProperty(ref refId, value); }
         }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public void SelectActionSetId()
+        public void SelectEntryId()
         {
-            var refSelector = new EntryRefIdSelectorVM(_entryType);
+            var refSelector = new EntryRefIdSelectorVM(dataProvider, entryType);
             refSelector.CurrentEntryId = RefId;
             OpenRefIdSelectorAction?.Invoke(refSelector);
 
@@ -51,6 +53,5 @@ namespace OpenBreed.Editor.VM.Common
         }
 
         #endregion Public Methods
-
     }
 }

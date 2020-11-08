@@ -32,7 +32,7 @@
             this.grpTools = new System.Windows.Forms.GroupBox();
             this.btnImport = new System.Windows.Forms.Button();
             this.lblPalettes = new System.Windows.Forms.Label();
-            this.cbxPalettes = new System.Windows.Forms.ComboBox();
+            this.cbxPalettes = new OpenBreed.Common.UI.WinForms.Controls.ComboBoxEx();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
             this.grpTools.SuspendLayout();
             this.SuspendLayout();
@@ -109,6 +109,6 @@
         private System.Windows.Forms.GroupBox grpTools;
         private System.Windows.Forms.Button btnImport;
         private System.Windows.Forms.Label lblPalettes;
-        private System.Windows.Forms.ComboBox cbxPalettes;
+        private OpenBreed.Common.UI.WinForms.Controls.ComboBoxEx cbxPalettes;
     }
 }

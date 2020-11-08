@@ -13,7 +13,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
 {
     public partial class DbTableSelectorCtrl : UserControl
     {
-        private DbTableSelectorVM _vm;
+        private DbTableSelectorVM vm;
 
         public DbTableSelectorCtrl()
         {
@@ -24,12 +24,17 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
 
         internal void Initialize(DbTableSelectorVM vm)
         {
-            _vm = vm;
+            this.vm = vm;
 
+            BindControls();
+        }
+
+        private void BindControls()
+        {
             cbxTables.DataBindings.Clear();
-            cbxTables.DataSource = _vm.Items;
+            cbxTables.DataSource = vm.TableNames;
             cbxTables.DisplayMember = "Name";
-            cbxTables.DataBindings.Add(nameof(cbxTables.SelectedIndex), _vm, nameof(_vm.CurrentIndex), false, DataSourceUpdateMode.OnPropertyChanged);
+            cbxTables.DataBindings.Add(nameof(cbxTables.SelectedItem), vm, nameof(vm.CurrentTableName), false, DataSourceUpdateMode.OnPropertyChanged);
         }
     }
 }

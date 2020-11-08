@@ -20,12 +20,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
             InitializeComponent();
 
             SetupDataGridView();
-            cbxPalettes.SelectionChangeCommitted += combobox1_SelectionChangesCommitted;
-        }
-
-        private void combobox1_SelectionChangesCommitted(Object sender, EventArgs e)
-        {
-            ((ComboBox)sender).DataBindings["SelectedItem"].WriteValue();
         }
 
         #endregion Public Constructors
@@ -36,15 +30,20 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Sprites
         {
             this.vm = vm ?? throw new InvalidOperationException(nameof(vm));
 
-            cbxPalettes.DataSource = vm.PaletteIds;
-            cbxPalettes.DataBindings.Add(nameof(cbxPalettes.SelectedItem), vm, nameof(vm.CurrentPaletteId), false, DataSourceUpdateMode.OnPropertyChanged);
-
-            DGV.DataSource = vm.Items;
+            BindControls();
         }
 
         #endregion Public Methods
 
         #region Private Methods
+
+        private void BindControls()
+        {
+            cbxPalettes.DataSource = vm.PaletteIds;
+            cbxPalettes.DataBindings.Add(nameof(cbxPalettes.SelectedItem), vm, nameof(vm.CurrentPaletteId), false, DataSourceUpdateMode.OnPropertyChanged);
+
+            DGV.DataSource = vm.Items;
+        }
 
         private void SetupDataGridView()
         {

@@ -22,7 +22,7 @@ namespace OpenBreed.Editor.VM.Maps
         public MapEditorActionsToolVM(MapEditorVM parent)
         {
             Parent = parent;
-            RefIdEditor = new EntryRefIdEditorVM(typeof(IActionSetEntry));
+            RefIdEditor = new EntryRefIdEditorVM(Parent.DataProvider, typeof(IActionSetEntry));
             ActionsSelector = new MapEditorActionsSelectorVM(this);
 
             RefIdEditor.PropertyChanged += ActionEntryRef_PropertyChanged;

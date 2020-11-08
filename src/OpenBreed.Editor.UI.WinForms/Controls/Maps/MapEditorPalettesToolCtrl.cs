@@ -37,6 +37,7 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Maps
         public void Initialize(MapEditorPalettesToolVM vm)
         {
             this.vm = vm;
+
             BindControls();
         }
 

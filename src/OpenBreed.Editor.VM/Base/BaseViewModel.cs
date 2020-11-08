@@ -14,6 +14,9 @@ namespace OpenBreed.Editor.VM.Base
 
         #region Protected Methods
 
+
+        
+
         protected virtual void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)

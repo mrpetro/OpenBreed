@@ -1,4 +1,5 @@
-﻿using OpenBreed.Database.Interface;
+﻿using OpenBreed.Common.Data;
+using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Actions;
 
 namespace OpenBreed.Editor.VM.Actions
@@ -12,7 +13,7 @@ namespace OpenBreed.Editor.VM.Actions
             RegisterSubeditor<IActionSetEntry>((parent) => new ActionSetEmbeddedEditorVM(parent));
         }
 
-        public ActionSetEditorVM(EditorApplication application, IRepository repository) : base(application, repository, "Action Set Editor")
+        public ActionSetEditorVM(EditorApplication application, DataProvider dataProvider) : base(application, dataProvider, "Action Set Editor")
         {
         }
 

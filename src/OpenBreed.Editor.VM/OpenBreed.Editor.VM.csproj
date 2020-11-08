@@ -74,8 +74,6 @@
     <Compile Include="Database\Entries\DbDataSourceEntryVM.cs" />
     <Compile Include="Database\Entries\DbEntityTemplateEntryVM.cs" />
     <Compile Include="Database\Entries\DbScriptEntryVM.cs" />
-    <Compile Include="Database\Tables\DbDataSourceTableVM.cs" />
-    <Compile Include="Database\Tables\DbScriptTableVM.cs" />
     <Compile Include="DataSources\DataSourceEditorVM.cs" />
     <Compile Include="DataSources\FileDataSourceEditorVM.cs" />
     <Compile Include="DataSources\EpfArchiveFileDataSourceEditorVM.cs" />
@@ -87,9 +85,7 @@
     <Compile Include="Common\SelectModeEnum.cs" />
     <Compile Include="Database\DbTableNewEntryCreatorVM.cs" />
     <Compile Include="Database\DbTableSelectorVM.cs" />
-    <Compile Include="Database\DbTableSelectorConnector.cs" />
     <Compile Include="Database\DbEditorVM.cs" />
-    <Compile Include="Database\DbEditorVMHelper.cs" />
     <Compile Include="Database\DbEntryFactory.cs" />
     <Compile Include="Database\DbTablesEditorVM.cs" />
     <Compile Include="Database\DbTableEditorConnector.cs" />
@@ -105,20 +101,8 @@
     <Compile Include="Database\Entries\DbActionSetEntryVM.cs" />
     <Compile Include="Database\Entries\DbAssetEntryVM.cs" />
     <Compile Include="Database\EntryTypeVM.cs" />
-    <Compile Include="Database\Tables\DbTableVM.cs" />
-    <Compile Include="Database\Tables\DbImageTableVM.cs" />
-    <Compile Include="Database\Tables\DbMapTableVM.cs" />
-    <Compile Include="Database\Tables\DbPaletteTableVM.cs" />
-    <Compile Include="Database\Tables\DbSoundTableVM.cs" />
-    <Compile Include="Database\Tables\DbSpriteSetTableVM.cs" />
-    <Compile Include="Database\Tables\DbTextTableVM.cs" />
-    <Compile Include="Database\Tables\DbTileSetTableVM.cs" />
-    <Compile Include="Database\Tables\DbActionSetTableVM.cs" />
-    <Compile Include="Database\Tables\DbAssetTableVM.cs" />
-    <Compile Include="DbTableFactory.cs" />
     <Compile Include="EditorApplication.cs" />
-    <Compile Include="EditorVM.cs" />
-    <Compile Include="EditorVMHelper.cs" />
+    <Compile Include="EditorApplicationVM.cs" />
     <Compile Include="DbEntryEditorFactory.cs" />
     <Compile Include="EntityTemplates\EntityTemplateEditorVM.cs" />
     <Compile Include="EntityTemplates\EntityTemplateFromFileEditorVM.cs" />
@@ -142,6 +126,7 @@
     <Compile Include="Maps\MapViewCursorVM.cs" />
     <Compile Include="Maps\MapEditorTilesInserter.cs" />
     <Compile Include="Maps\MapEditorTileInsertOperation.cs" />
+    <Compile Include="MenuItemVM.cs" />
     <Compile Include="Palettes\PaletteEditorExVM.cs" />
     <Compile Include="Palettes\PaletteFromBinaryEditorVM.cs" />
     <Compile Include="Palettes\PaletteFromMapEditorVM.cs" />
@@ -198,7 +183,6 @@
     <Compile Include="Tools\ZoomTool.cs" />
     <Compile Include="Palettes\PaletteEditorVM.cs" />
     <Compile Include="Maps\MapEditorPalettesToolVM.cs" />
-    <Compile Include="Database\DatabaseVM.cs" />
     <Compile Include="Actions\ActionSetEditorVM.cs" />
     <Compile Include="Maps\MapEditorActionsToolVM.cs" />
     <Compile Include="Actions\ActionSetEmbeddedEditorVM.cs" />

@@ -63,7 +63,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
         #region Public Properties
 
-        public EditorVM VM { get; private set; }
+        public EditorApplicationVM VM { get; private set; }
 
         #endregion Public Properties
 
@@ -86,7 +86,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
         #region Public Methods
 
-        public void Initialize(EditorVM vm)
+        public void Initialize(EditorApplicationVM vm)
         {
             VM = vm ?? throw new ArgumentNullException(nameof(vm));
 
@@ -94,11 +94,12 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
             VM.DbEditor.PropertyChanged += VM_PropertyChanged;
 
-            ViewToggleLoggerToolStripMenuItem.Click += (s, a) => VM.ShowLogger();
+            ViewToggleLoggerToolStripMenuItem.Click += (s, a) => VM.ToggleLogger(true);
 
             OptionsToolStripMenuItem.Click += (s, a) => VM.ShowOptions();
 
-            VM.ShowLoggerAction = OnShowLogger;
+            VM.ToggleLoggerAction = OnToggleLogger;
+
             VM.ShowOptionsAction = OnShowOptions;
         }
 
@@ -136,19 +137,29 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         }
         private void OnDatabaseChanged()
         {
-            if (VM.DbEditor.Editable != null)
+            if (VM.DbEditor.DbName != null)
                 State = DatabaseOpenedState;
             else
                 State = InitialState;
         }
 
-        private void OnShowLogger(LoggerVM vm)
+        private void OnToggleLogger(LoggerVM vm, bool toggle)
         {
-            if (_loggerView == null)
+            if (toggle)
             {
-                _loggerView = new LoggerView();
-                _loggerView.Initialize(vm);
+                if (_loggerView == null)
+                {
+                    _loggerView = new LoggerView();
+
+                    _loggerView.Initialize(vm);
+                    _loggerView.VisibleChanged += (s, a) => ChangeCheckedState(LogConsoleShowToolStripMenuItem, s as Control);
+                    _loggerView.Show(EditorView, DockState.Float);
+                }
+                else
+                    _loggerView.Show(EditorView);
             }
+            else
+                _loggerView.Hide();
         }
 
         private void OnShowOptions(SettingsMan settings)
@@ -175,6 +186,9 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
         private void ShowLogConsoleToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
+            //ToolStripMenuItem item = sender as ToolStripMenuItem;
+            //VM.ToggleLogger(item.Checked);
+            
             ToolStripMenuItem item = sender as ToolStripMenuItem;
             ToggleLogConsole(item.Checked);
         }
@@ -183,8 +197,12 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         {
             if (toogle)
             {
+
                 if (_logConsoleView == null)
+                {
                     InitLogConsole();
+
+                }
                 else
                     _logConsoleView.Show(EditorView);
             }
@@ -196,7 +214,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         {
             switch (e.PropertyName)
             {
-                case nameof(VM.DbEditor.Editable):
+                case nameof(VM.DbEditor.DbName):
                     OnDatabaseChanged();
                     break;
                 default:

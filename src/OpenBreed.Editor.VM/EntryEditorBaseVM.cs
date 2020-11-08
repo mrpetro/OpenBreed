@@ -1,4 +1,4 @@
-﻿using OpenBreed.Common;
+﻿using OpenBreed.Common.Data;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items;
 using System;
@@ -8,43 +8,62 @@ namespace OpenBreed.Editor.VM
 {
     public abstract class EntryEditorBaseVM<E> : EntryEditorVM where E : IEntry
     {
+        #region Protected Fields
+
+        protected readonly EditorApplication application;
+
+        #endregion Protected Fields
+
         #region Private Fields
 
         private static readonly HashSet<string> propertyNamesIgnoredForChanges = new HashSet<string>();
-        private E _edited;
-        private E _next;
-        private E _previous;
-        private IRepository<E> _repository;
-        protected EditorApplication application;
+        private readonly IRepository<E> repository;
+        private E edited;
+        private E next;
+        private E previous;
+        private bool changesTrackingEnabled;
 
         #endregion Private Fields
 
         #region Public Constructors
 
+        static EntryEditorBaseVM()
+        {
+            IgnoreProperty(nameof(CommitEnabled));
+            IgnoreProperty(nameof(RevertEnabled));
+        }
+
         #endregion Public Constructors
 
         #region Protected Constructors
 
-        protected EntryEditorBaseVM(EditorApplication application, IRepository repository)
+        protected EntryEditorBaseVM(EditorApplication application, DataProvider dataProvider)
         {
             this.application = application;
-            _repository = (IRepository<E>)repository;
+            DataProvider = dataProvider;
+            repository = DataProvider.GetRepository<E>();
         }
 
         #endregion Protected Constructors
+
+        #region Internal Properties
+
+        internal DataProvider DataProvider { get; }
+
+        #endregion Internal Properties
 
         #region Public Methods
 
         public override void Commit()
         {
-            var originalId = _edited.Id;
+            var originalId = edited.Id;
 
-            UpdateEntry(_edited);
+            UpdateEntry(edited);
 
             if (EditMode)
-                _repository.Update(_edited);
+                repository.Update(edited);
             else
-                _repository.Add(_edited);
+                repository.Add(edited);
 
             UpdateControls();
             CommitEnabled = false;
@@ -61,24 +80,24 @@ namespace OpenBreed.Editor.VM
 
         public override void EditEntry(string id)
         {
-            var entry = _repository.GetById(id);
+            var entry = repository.GetById(id);
             EditEntry(entry);
         }
 
         public override void EditNextEntry()
         {
-            if (_next == null)
+            if (next == null)
                 throw new InvalidOperationException("No next entry available");
 
-            EditEntry(_next);
+            EditEntry(next);
         }
 
         public override void EditPreviousEntry()
         {
-            if (_previous == null)
+            if (previous == null)
                 throw new InvalidOperationException("No previous entry available");
 
-            EditEntry(_previous);
+            EditEntry(previous);
         }
 
         #endregion Public Methods
@@ -94,12 +113,6 @@ namespace OpenBreed.Editor.VM
         {
             target.Id = Id;
             target.Description = Description;
-        }
-
-        static EntryEditorBaseVM()
-        {
-            IgnoreProperty(nameof(CommitEnabled));
-            IgnoreProperty(nameof(RevertEnabled));
         }
 
         protected virtual void UpdateVM(E source)
@@ -130,8 +143,6 @@ namespace OpenBreed.Editor.VM
             base.OnPropertyChanged(name);
         }
 
-        private bool changesTrackingEnabled;
-
         protected virtual void DisableChangesTracking()
         {
             changesTrackingEnabled = false;
@@ -148,7 +159,7 @@ namespace OpenBreed.Editor.VM
 
         private bool IsIdUnique()
         {
-            var foundEntry = _repository.Find(Id);
+            var foundEntry = repository.Find(Id);
 
             if (foundEntry == null)
                 return true;
@@ -160,9 +171,9 @@ namespace OpenBreed.Editor.VM
         {
             DisableChangesTracking();
 
-            _edited = entry;
-            _next = _repository.GetNextTo(_edited);
-            _previous = _repository.GetPreviousTo(_edited);
+            edited = entry;
+            next = repository.GetNextTo(edited);
+            previous = repository.GetPreviousTo(edited);
 
             UpdateVM(entry);
 
@@ -175,13 +186,13 @@ namespace OpenBreed.Editor.VM
 
         private void UpdateControls()
         {
-            if (_edited == null)
+            if (edited == null)
                 Title = $"{EditorName} - no entry to edit";
             else
                 Title = $"{EditorName} - {Id}";
 
-            NextAvailable = _next != null;
-            PreviousAvailable = _previous != null;
+            NextAvailable = next != null;
+            PreviousAvailable = previous != null;
         }
 
         #endregion Private Methods

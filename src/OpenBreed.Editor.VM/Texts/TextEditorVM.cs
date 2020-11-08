@@ -15,7 +15,7 @@ namespace OpenBreed.Editor.VM.Texts
             RegisterSubeditor<ITextFromMapEntry>((parent) => new TextFromMapEditorVM(parent));
         }
 
-        public TextEditorVM(EditorApplication application, IRepository repository) : base(application, repository, "Text Editor")
+        public TextEditorVM(EditorApplication application, DataProvider dataProvider) : base(application, dataProvider, "Text Editor")
         {
         }
 

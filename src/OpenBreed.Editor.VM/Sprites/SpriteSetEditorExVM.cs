@@ -84,7 +84,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         private void SwitchPalette(string paletteId)
         {
-            Palette = ServiceLocator.Instance.GetService<DataProvider>().Palettes.GetPalette(paletteId);
+            Palette = Parent.DataProvider.Palettes.GetPalette(paletteId);
         }
 
         protected override void OnPropertyChanged(string name)
