@@ -178,19 +178,6 @@ namespace OpenBreed.Editor.UI.WinForms.Views
 
         #region Internal Methods
 
-        internal void ShowLevelView()
-        {
-            //ShowLevelTileSelectorView();
-            //ShowLevelPropSelectorView();
-            //ShowLevelPalettesView();
-            //ShowLevelBodyEditorView();
-        }
-
-        internal void ShowSpriteSetEditorView()
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion Internal Methods
 
         #region Private Methods

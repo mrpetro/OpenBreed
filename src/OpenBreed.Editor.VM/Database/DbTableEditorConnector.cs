@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Database.Interface;
 using OpenBreed.Editor.VM.Base;
-using OpenBreed.Editor.VM.Database.Tables;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,8 +38,8 @@ namespace OpenBreed.Editor.VM.Database
 
             switch (e.PropertyName)
             {
-                case nameof(tableSelector.CurrentItem):
-                    OnRepositoryChanged(tableSelector.CurrentItem);
+                case nameof(tableSelector.CurrentTableName):
+                    OnRepositoryChanged(tableSelector.CurrentTableName);
                     break;
                 default:
                     break;

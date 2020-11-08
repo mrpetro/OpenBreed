@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Editor.VM.Base;
+using System;
 using System.ComponentModel;
 using System.Linq;
 
@@ -8,9 +9,8 @@ namespace OpenBreed.Editor.VM.Database
     {
         #region Private Fields
 
-        private string currentItem;
-
         private readonly EditorApplication application;
+        private string currentTableName;
 
         #endregion Private Fields
 
@@ -20,8 +20,8 @@ namespace OpenBreed.Editor.VM.Database
         {
             this.application = application;
 
-            Items = new BindingList<string>();
-            Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
+            TableNames = new BindingList<string>();
+            TableNames.ListChanged += (s, a) => OnPropertyChanged(nameof(TableNames));
 
             UpdateWithDbTables();
         }
@@ -30,13 +30,13 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Public Properties
 
-        public string CurrentItem
+        public string CurrentTableName
         {
-            get { return currentItem; }
-            set { SetProperty(ref currentItem, value); }
+            get { return currentTableName; }
+            set { SetProperty(ref currentTableName, value); }
         }
 
-        public BindingList<string> Items { get; }
+        public BindingList<string> TableNames { get; }
 
         #endregion Public Properties
 
@@ -46,8 +46,8 @@ namespace OpenBreed.Editor.VM.Database
         {
             switch (name)
             {
-                case nameof(Items):
-                    CurrentItem = Items.FirstOrDefault();
+                case nameof(TableNames):
+                    CurrentTableName = TableNames.FirstOrDefault();
                     break;
 
                 default:
@@ -63,12 +63,12 @@ namespace OpenBreed.Editor.VM.Database
 
         private void UpdateWithDbTables()
         {
-            Items.UpdateAfter(() =>
+            TableNames.UpdateAfter(() =>
             {
-                Items.Clear();
+                TableNames.Clear();
 
                 foreach (var repository in application.UnitOfWork.Repositories)
-                    Items.Add(repository.Name);
+                    TableNames.Add(repository.Name);
             });
         }
 

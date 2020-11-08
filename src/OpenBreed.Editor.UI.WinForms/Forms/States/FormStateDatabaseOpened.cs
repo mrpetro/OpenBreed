@@ -10,6 +10,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
 {
     internal class FormStateDatabaseOpened : FormState
     {
+
         #region Internal Fields
 
         //File menu
@@ -39,22 +40,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             FileSaveDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.DbEditor.TrySaveDatabase();
             ExitToolStripMenuItem = new ToolStripMenuItem("Exit");
             ExitToolStripMenuItem.Click += (s, a) => MainForm.Close();
-            //ViewMapBodyMenuItem = new ToolStripMenuItem("Map body");
-            //ViewMapBodyMenuItem.Click += (s, a) => _projectView.ShowView(ProjectViewType.MapBody);
-            //ViewMapPropertiesMenuItem = new ToolStripMenuItem("Map properties");
-            //ViewMapPropertiesMenuItem.Click += (s, a) => _projectView.ShowView(ProjectViewType.MapProperties);
-            //ViewMapPalettesMenuItem = new ToolStripMenuItem("Palettes");
-            //ViewMapPalettesMenuItem.Click += (s, a) => _projectView.ShowView(ProjectViewType.MapPalettes);
-            //ViewTileSetMenuItem = new ToolStripMenuItem("Tile set");
-            //ViewTileSetMenuItem.Click += (s, a) => _projectView.ShowView(ProjectViewType.TileSet);
-            //ViewSpriteSetsMenuItem = new ToolStripMenuItem("Sprite sets");
-            //ViewSpriteSetsMenuItem.Click += (s, a) => _projectView.ShowView(ProjectViewType.SpriteSets);
-            //ViewPropertySetMenuItem = new ToolStripMenuItem("Property set");
-            //ViewPropertySetMenuItem.Click += (s, a) => _projectView.ShowView(ProjectViewType.PropertySet);
-            //ViewImagesMenuItem = new ToolStripMenuItem("Images");
-            //ViewImagesMenuItem.Click += (s, a) => _projectView.ShowView(ProjectViewType.Images);
-            //ViewToolsMenuItem = new ToolStripMenuItem("Tools");
-            //ViewToolsMenuItem.Click += (s, a) => _projectView.ShowView(ProjectViewType.Tools);
+
             ViewDatabaseMenuItem = new ToolStripMenuItemEx("Database items");
             ViewDatabaseMenuItem.CheckOnClick = true;
         }
@@ -102,8 +88,8 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             ViewDatabaseMenuItem = new ToolStripMenuItemEx("Database items");
             ViewDatabaseMenuItem.CheckOnClick = true;
             ViewDatabaseMenuItem.DataBindings.Add(nameof(ViewDatabaseMenuItem.Checked),
-                                                  MainForm.VM,
-                                                  nameof(MainForm.VM.DbTablesEditorChecked),
+                                                  MainForm.VM.DbEditor,
+                                                  nameof(MainForm.VM.DbEditor.DbTablesEditorChecked),
                                                   false,
                                                   DataSourceUpdateMode.OnPropertyChanged);
             //ViewDatabaseMenuItem.Click += (s, a) => MainForm.VM.ToggleDbTablesEditor(true);
@@ -112,10 +98,14 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
 
             MainForm.Text = $"{MainForm.APP_NAME} - {MainForm.VM.DbEditor.DbName}";
 
-            MainForm.VM.InitDbTablesEditorAction = OnInitDbTablesEditor;
-            MainForm.VM.DbTablesEditorChecked = true;
+            MainForm.VM.DbEditor.InitDbTablesEditorAction = OnInitDbTablesEditor;
+            MainForm.VM.DbEditor.DbTablesEditorChecked = true;
         }
 
+        #endregion Internal Methods
+
+
+        #region Private Methods
 
         private void OnInitDbTablesEditor(DbTablesEditorVM dbTablesEditorVm)
         {
@@ -124,22 +114,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             databaseView.Show(MainForm.EditorView, DockState.DockLeft);
         }
 
-        #endregion Internal Methods
-
-        #region Private Methods
-
-        private void OnOpenedItemChanged(DbEntryVM databaseItemVM)
-        {
-            if (databaseItemVM == null)
-                return;
-            else if (databaseItemVM is DbMapEntryVM)
-                MainForm.EditorView.ShowLevelView();
-            else if (databaseItemVM is DbSpriteSetEntryVM)
-                MainForm.EditorView.ShowSpriteSetEditorView();
-            else
-                throw new NotImplementedException();
-        }
-
         #endregion Private Methods
+
     }
 }

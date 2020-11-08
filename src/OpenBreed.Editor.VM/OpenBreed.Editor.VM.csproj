@@ -74,8 +74,6 @@
     <Compile Include="Database\Entries\DbDataSourceEntryVM.cs" />
     <Compile Include="Database\Entries\DbEntityTemplateEntryVM.cs" />
     <Compile Include="Database\Entries\DbScriptEntryVM.cs" />
-    <Compile Include="Database\Tables\DbDataSourceTableVM.cs" />
-    <Compile Include="Database\Tables\DbScriptTableVM.cs" />
     <Compile Include="DataSources\DataSourceEditorVM.cs" />
     <Compile Include="DataSources\FileDataSourceEditorVM.cs" />
     <Compile Include="DataSources\EpfArchiveFileDataSourceEditorVM.cs" />
@@ -103,17 +101,6 @@
     <Compile Include="Database\Entries\DbActionSetEntryVM.cs" />
     <Compile Include="Database\Entries\DbAssetEntryVM.cs" />
     <Compile Include="Database\EntryTypeVM.cs" />
-    <Compile Include="Database\Tables\DbTableVM.cs" />
-    <Compile Include="Database\Tables\DbImageTableVM.cs" />
-    <Compile Include="Database\Tables\DbMapTableVM.cs" />
-    <Compile Include="Database\Tables\DbPaletteTableVM.cs" />
-    <Compile Include="Database\Tables\DbSoundTableVM.cs" />
-    <Compile Include="Database\Tables\DbSpriteSetTableVM.cs" />
-    <Compile Include="Database\Tables\DbTextTableVM.cs" />
-    <Compile Include="Database\Tables\DbTileSetTableVM.cs" />
-    <Compile Include="Database\Tables\DbActionSetTableVM.cs" />
-    <Compile Include="Database\Tables\DbAssetTableVM.cs" />
-    <Compile Include="DbTableFactory.cs" />
     <Compile Include="EditorApplication.cs" />
     <Compile Include="EditorApplicationVM.cs" />
     <Compile Include="DbEntryEditorFactory.cs" />

@@ -32,9 +32,9 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
         private void BindControls()
         {
             cbxTables.DataBindings.Clear();
-            cbxTables.DataSource = vm.Items;
+            cbxTables.DataSource = vm.TableNames;
             cbxTables.DisplayMember = "Name";
-            cbxTables.DataBindings.Add(nameof(cbxTables.SelectedItem), vm, nameof(vm.CurrentItem), false, DataSourceUpdateMode.OnPropertyChanged);
+            cbxTables.DataBindings.Add(nameof(cbxTables.SelectedItem), vm, nameof(vm.CurrentTableName), false, DataSourceUpdateMode.OnPropertyChanged);
         }
     }
 }

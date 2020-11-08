@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenBreed.Editor.VM.Database;
 using OpenBreed.Editor.VM.Database.Entries;
-using OpenBreed.Editor.VM.Database.Tables;
 
 namespace OpenBreed.Editor.UI.WinForms.Controls.Database
 {
@@ -53,27 +52,15 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
         {
             _vm = vm;
 
-            _vm.PropertyChanged += _vm_PropertyChanged;
             _vm.OpenNewEntryCreatorAction = OnOpenNewEntryCreator;
 
-            OnEditableChanged(_vm.Editable);
+            DGV.DataSource = _vm.Entries;
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void _vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(_vm.Editable):
-                    OnEditableChanged(_vm.Editable);
-                    break;
-                default:
-                    break;
-            }
-        }
 
         private void AddNewEntryCtrl(DbTableNewEntryCreatorVM vm)
         {
@@ -111,13 +98,6 @@ namespace OpenBreed.Editor.UI.WinForms.Controls.Database
 
                 menu.Show(DGV, new Point(e.X, e.Y));
             }
-        }
-        private void OnEditableChanged(DbTableVM dbTable)
-        {
-            if (dbTable == null)
-                DGV.DataSource = null;
-            else
-                DGV.DataSource = dbTable.Entries;
         }
 
         private void OnCloseNewEntryCreator()

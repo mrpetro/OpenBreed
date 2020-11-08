@@ -51,6 +51,8 @@ namespace OpenBreed.Editor.VM.Database
 
             foreach (var entryEditor in toClose)
                 entryEditor.Close();
+
+            CloseDbTablesEditor();
         }
 
         public bool TryCloseDatabase()
@@ -65,6 +67,63 @@ namespace OpenBreed.Editor.VM.Database
             else
                 return false;
         }
+
+        private DbTablesEditorVM dbTablesEditor;
+
+        private bool dbTablesEditorChecked;
+
+        public Action<DbTablesEditorVM> InitDbTablesEditorAction { get; set; }
+
+        public bool DbTablesEditorChecked
+        {
+            get { return dbTablesEditorChecked; }
+            set { SetProperty(ref dbTablesEditorChecked, value); }
+        }
+
+        public void CloseDbTablesEditor()
+        {
+            dbTablesEditor.Close();
+            dbTablesEditor = null;
+        }
+
+        protected override void OnPropertyChanged(string name)
+        {
+            switch (name)
+            {
+                case nameof(DbTablesEditorChecked):
+                    ToggleDbTablesEditor(DbTablesEditorChecked);
+                    break;
+
+                default:
+                    break;
+            }
+
+            base.OnPropertyChanged(name);
+        }
+
+        private void Initialize(DbTablesEditorVM dbTablesEditorVm)
+        {
+            var dbTableEditorConnector = new DbTableEditorConnector(dbTablesEditorVm.DbTableEditor);
+            dbTableEditorConnector.ConnectTo(dbTablesEditorVm.DbTableSelector);
+        }
+
+        public void ToggleDbTablesEditor(bool toggle)
+        {
+            if (dbTablesEditor == null)
+            {
+                dbTablesEditor = application.CreateDbTablesEditorVm();
+                InitDbTablesEditorAction?.Invoke(dbTablesEditor);
+
+                dbTablesEditor.DbTableEditor.SetModel(dbTablesEditor.DbTableSelector.CurrentTableName);
+                Initialize(dbTablesEditor);
+            }
+
+            if (toggle)
+                dbTablesEditor.Show();
+            else
+                dbTablesEditor.Hide();
+        }
+
 
         public bool TryOpenXmlDatabase()
         {

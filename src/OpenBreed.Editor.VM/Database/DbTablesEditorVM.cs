@@ -32,6 +32,7 @@ namespace OpenBreed.Editor.VM.Database
         public Action HidingAction { get; set; }
         public Action ClosingAction { get; set; }
 
+
         #endregion Public Properties
 
         #region Public Methods
