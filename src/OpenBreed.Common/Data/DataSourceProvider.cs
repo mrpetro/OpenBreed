@@ -96,7 +96,7 @@ namespace OpenBreed.Common.Data
             if (!_openedArchives.TryGetValue(normalizedPath, out archive))
             {
                 File.Copy(normalizedPath, normalizedPath + ".bkp", true);
-                archive = EPFArchive.ToUpdate(File.Open(normalizedPath, FileMode.Open), true);
+                archive = EPFArchive.ToUpdate(File.Open(normalizedPath, FileMode.Open), false);
                 _openedArchives.Add(normalizedPath, archive);
 
                 logger.Verbose($"EPF Archive data source '{normalizedPath}' opened for update.");
