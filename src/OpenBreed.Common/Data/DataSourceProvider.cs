@@ -1,5 +1,6 @@
 ﻿using EPF;
 using OpenBreed.Common.DataSources;
+using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface.Items.DataSources;
 using System;
@@ -10,19 +11,23 @@ namespace OpenBreed.Common.Data
 {
     public delegate string ExpandVariablesDelegate(string text);
 
-    public class DataSourceProvider
+    public class DataSourceProvider : IDisposable
     {
         #region Private Fields
 
         private readonly Dictionary<string, DataSourceBase> _openedDataSources = new Dictionary<string, DataSourceBase>();
         private Dictionary<string, EPFArchive> _openedArchives = new Dictionary<string, EPFArchive>();
+        private bool disposedValue;
+
+        private ILogger logger;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DataSourceProvider(DataProvider dataProvider)
+        public DataSourceProvider(DataProvider dataProvider, ILogger logger)
         {
+            this.logger = logger;
             DataProvider = dataProvider;
         }
 
@@ -52,6 +57,13 @@ namespace OpenBreed.Common.Data
             return ds;
         }
 
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
         #endregion Public Methods
 
         #region Internal Methods
@@ -60,19 +72,20 @@ namespace OpenBreed.Common.Data
         {
             var result = ExpandGlobalVariables(text);
 
-
-
             return result;
         }
 
         internal void CloseAll()
         {
-            Save();
-
             foreach (var openedArchive in _openedArchives)
+            {
                 openedArchive.Value.Dispose();
+                logger.Verbose($"EPF Archive data source '{openedArchive.Key}' closed.");
+            }
 
             _openedArchives.Clear();
+
+            logger.Info($"All data sources closed.");
         }
 
         internal EPFArchive GetArchive(string archivePath)
@@ -85,6 +98,8 @@ namespace OpenBreed.Common.Data
                 File.Copy(normalizedPath, normalizedPath + ".bkp", true);
                 archive = EPFArchive.ToUpdate(File.Open(normalizedPath, FileMode.Open), true);
                 _openedArchives.Add(normalizedPath, archive);
+
+                logger.Verbose($"EPF Archive data source '{normalizedPath}' opened for update.");
             }
 
             return archive;
@@ -103,10 +118,32 @@ namespace OpenBreed.Common.Data
         internal void Save()
         {
             foreach (var openedArchive in _openedArchives)
+            {
                 openedArchive.Value.Save();
+                logger.Verbose($"EPF Archive data source '{openedArchive.Key}' saved.");
+            }
+
+            logger.Info($"All data sources saved.");
         }
 
         #endregion Internal Methods
+
+        #region Protected Methods
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    CloseAll();
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        #endregion Protected Methods
 
         #region Private Methods
 

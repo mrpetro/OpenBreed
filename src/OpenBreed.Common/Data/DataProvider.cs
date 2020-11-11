@@ -24,7 +24,7 @@ namespace OpenBreed.Common.Data
             this.unitOfWork = unitOfWork;
             this.logger = logger;
 
-            DataSources = new DataSourceProvider(this);
+            DataSources = new DataSourceProvider(this, logger);
             TileSets = new TileSetsDataProvider(this);
             SpriteSets = new SpriteSetsDataProvider(this);
             ActionSets = new ActionSetsDataProvider(this);
@@ -108,9 +108,18 @@ namespace OpenBreed.Common.Data
 
             var asset = Assets.GetAsset(id);
             data = asset.Load();
+            logger.Verbose($"Model loaded from asset '{asset.Id}'.");
+
             _models.Add(id, data);
 
             return (T)data;
+        }
+
+        public void Close()
+        {
+            DataSources.CloseAll();
+
+            logger.Info($"All data closed.");
         }
 
         public void Save()
@@ -120,6 +129,8 @@ namespace OpenBreed.Common.Data
             DataSources.Save();
 
             unitOfWork.Save();
+
+            logger.Info($"All data saved.");
         }
 
         #endregion Public Methods
@@ -153,12 +164,15 @@ namespace OpenBreed.Common.Data
                 try
                 {
                     asset.Save(data);
+                    logger.Verbose($"Model saved to asset '{asset.Id}'.");
                 }
                 catch (Exception ex)
                 {
                     logger.Error($"Problems saving model to asset '{asset.Id}'. Reason: {ex.Message}");
                 }
             }
+
+            logger.Info($"All models saved.");
         }
 
         #endregion Private Methods
