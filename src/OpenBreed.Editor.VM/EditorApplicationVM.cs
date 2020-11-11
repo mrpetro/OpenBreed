@@ -133,6 +133,8 @@ namespace OpenBreed.Editor.VM
 
             DbName = application.UnitOfWork.Name;
 
+            var dbEditor = application.CreateDbEditorVm(application.UnitOfWork);
+
             return true;
         }
 

@@ -1,28 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-
-using OpenBreed.Editor.VM;
-
-using OpenBreed.Common;
-using OpenBreed.Editor.UI.WinForms.Forms.States;
-using OpenBreed.Editor.VM.Logging;
-using OpenBreed.Editor.UI.WinForms.Views;
-using WeifenLuo.WinFormsUI.Docking;
-using OpenBreed.Common.Tools;
+﻿using OpenBreed.Common.Tools;
 using OpenBreed.Common.UI.WinForms.Controls;
+using OpenBreed.Editor.UI.WinForms.Forms.States;
+using OpenBreed.Editor.UI.WinForms.Views;
+using OpenBreed.Editor.VM;
+using OpenBreed.Editor.VM.Logging;
+using System;
+using System.ComponentModel;
+using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace OpenBreed.Editor.UI.WinForms.Forms
 {
     public partial class MainForm : Form
     {
-
         #region Public Fields
+
+        public DbEditorView EditorView = new DbEditorView();
 
         #endregion Public Fields
 
@@ -32,6 +25,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         internal ToolStripMenuItem ABTAGamePasswordsToolStripMenuItem = new ToolStripMenuItem();
         internal ToolStripMenuItem ABTAGameRunToolStripMenuItem = new ToolStripMenuItem();
         internal ToolStripMenuItemEx LogConsoleShowToolStripMenuItem = new ToolStripMenuItemEx("Log Console");
+
         #endregion Internal Fields
 
         #region Private Fields
@@ -49,6 +43,11 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         public MainForm()
         {
             InitializeComponent();
+
+            EditorView.Dock = System.Windows.Forms.DockStyle.Fill;
+            EditorView.Name = "EditorView";
+            Controls.Add(EditorView);
+            EditorView.BringToFront();
 
             DatabaseOpenedState = new FormStateDatabaseOpened(this);
             InitialState = new FormStateInitial(this);
@@ -75,11 +74,11 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             LogConsoleShowToolStripMenuItem.CheckedChanged += new System.EventHandler(this.ShowLogConsoleToolStripMenuItem_CheckedChanged);
         }
 
-    #endregion Public Constructors
+        #endregion Public Constructors
 
-    #region Public Properties
+        #region Public Properties
 
-    public EditorApplicationVM VM { get; private set; }
+        public EditorApplicationVM VM { get; private set; }
 
         #endregion Public Properties
 
@@ -111,8 +110,11 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             BindProperties();
             BindEvents();
             BindActions();
-
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private void BindActions()
         {
@@ -128,7 +130,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             OptionsToolStripMenuItem.Click += (s, a) => VM.ShowOptions();
             FormClosing += (s, a) => a.Cancel = !VM.TrySaveBeforeExiting();
 
-            ABTAGamePasswordsToolStripMenuItem.Click += (s, a)=> Other.TryAction(OpenABTAPasswordGenerator);
+            ABTAGamePasswordsToolStripMenuItem.Click += (s, a) => Other.TryAction(OpenABTAPasswordGenerator);
             ABTAGameRunToolStripMenuItem.Click += (s, a) => VM.TryRunABTAGame();
         }
 
@@ -137,11 +139,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             DataBindings.Add(nameof(Text), VM, nameof(VM.Title), false, DataSourceUpdateMode.OnPropertyChanged);
         }
 
-        #endregion Public Methods
-
-        #region Private Methods
-
-        void ChangeCheckedState(ToolStripMenuItem menuItem, Control ctrl)
+        private void ChangeCheckedState(ToolStripMenuItem menuItem, Control ctrl)
         {
             if (menuItem.Checked != ctrl.Visible)
                 menuItem.Checked = ctrl.Visible;
@@ -208,7 +206,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         {
             //ToolStripMenuItem item = sender as ToolStripMenuItem;
             //VM.ToggleLogger(item.Checked);
-            
+
             ToolStripMenuItem item = sender as ToolStripMenuItem;
             ToggleLogConsole(item.Checked);
         }
@@ -217,11 +215,9 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         {
             if (toogle)
             {
-
                 if (_logConsoleView == null)
                 {
                     InitLogConsole();
-
                 }
                 else
                     _logConsoleView.Show(EditorView);
@@ -237,6 +233,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
                 case nameof(VM.DbName):
                     OnDatabaseChanged();
                     break;
+
                 default:
                     break;
             }
@@ -244,5 +241,4 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
         #endregion Private Methods
     }
-
 }

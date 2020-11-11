@@ -116,16 +116,17 @@ namespace OpenBreed.Editor.VM
             return new LoggerVM(Logger);
         }
 
-        #endregion Public Methods
+        public DbEditorVM CreateDbEditorVm(IUnitOfWork unitOfWork)
+        {
+            return new DbEditorVM(this);
+        }
 
-        #region Internal Methods
-
-        internal DbTablesEditorVM CreateDbTablesEditorVm()
+        public DbTablesEditorVM CreateDbTablesEditorVm()
         {
             return new DbTablesEditorVM(this);
         }
 
-        #endregion Internal Methods
+        #endregion Public Methods
 
         #region Protected Methods
 
