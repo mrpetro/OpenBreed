@@ -34,10 +34,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ABTAGamePasswordsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ABTAGameRunToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EPFPackUnpackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.LogConsoleShowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
@@ -81,42 +78,17 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ABTAGamePasswordsToolStripMenuItem,
-            this.ABTAGameRunToolStripMenuItem,
             this.EPFPackUnpackToolStripMenuItem,
-            this.LogConsoleShowToolStripMenuItem,
             this.OptionsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
-            // 
-            // ABTAGamePasswordsToolStripMenuItem
-            // 
-            this.ABTAGamePasswordsToolStripMenuItem.Name = "ABTAGamePasswordsToolStripMenuItem";
-            this.ABTAGamePasswordsToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.ABTAGamePasswordsToolStripMenuItem.Text = "ABTA Game passwords...";
-            this.ABTAGamePasswordsToolStripMenuItem.Click += new System.EventHandler(this.ABTAGamePasswordsToolStripMenuItem_Click);
-            // 
-            // ABTAGameRunToolStripMenuItem
-            // 
-            this.ABTAGameRunToolStripMenuItem.Name = "ABTAGameRunToolStripMenuItem";
-            this.ABTAGameRunToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.ABTAGameRunToolStripMenuItem.Text = "Run ABTA Game";
-            this.ABTAGameRunToolStripMenuItem.Click += new System.EventHandler(this.ABTAGameRunToolStripMenuItem_Click);
             // 
             // EPFPackUnpackToolStripMenuItem
             // 
             this.EPFPackUnpackToolStripMenuItem.Name = "EPFPackUnpackToolStripMenuItem";
             this.EPFPackUnpackToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.EPFPackUnpackToolStripMenuItem.Text = "EPF pack/unpack...";
-            // 
-            // LogConsoleShowToolStripMenuItem
-            // 
-            this.LogConsoleShowToolStripMenuItem.CheckOnClick = true;
-            this.LogConsoleShowToolStripMenuItem.Name = "LogConsoleShowToolStripMenuItem";
-            this.LogConsoleShowToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.LogConsoleShowToolStripMenuItem.Text = "Log Console";
-            this.LogConsoleShowToolStripMenuItem.CheckedChanged += new System.EventHandler(this.ShowLogConsoleToolStripMenuItem_CheckedChanged);
             // 
             // OptionsToolStripMenuItem
             // 
@@ -173,12 +145,9 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         private System.Windows.Forms.StatusStrip MainStatusStrip;
         private System.Windows.Forms.ToolStripStatusLabel MessageLabelMainStatusStrip;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ABTAGamePasswordsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem EPFPackUnpackToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem EditToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem ViewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ABTAGameRunToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem LogConsoleShowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem OptionsToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem FileToolStripMenuItem;
         internal System.Windows.Forms.OpenFileDialog OpenFileDialog;

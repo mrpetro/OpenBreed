@@ -12,6 +12,12 @@ namespace OpenBreed.Editor.VM
 {
     public class EditorApplication : ApplicationBase, IDisposable
     {
+        #region Public Fields
+
+        public const string APP_NAME = "Open Breed Map Editor";
+
+        #endregion Public Fields
+
         #region Private Fields
 
         private readonly Lazy<ILogger> logger;
@@ -68,11 +74,8 @@ namespace OpenBreed.Editor.VM
             DataSourceProvider.ExpandGlobalVariables = Variables.ExpandVariables;
 
             DataProvider = new DataProvider(UnitOfWork, Logger);
-        }
 
-        internal DbTablesEditorVM CreateDbTablesEditorVm()
-        {
-            return new DbTablesEditorVM(this);
+            Logger.Info($"Database '{UnitOfWork.Name}' opened.");
         }
 
         public void Run() => GetInterface<EditorApplicationVM>().Run();
@@ -88,8 +91,24 @@ namespace OpenBreed.Editor.VM
             if (UnitOfWork == null)
                 throw new Exception("Database not opened.");
 
+            var databaseName = UnitOfWork.Name;
+
+            DataProvider.Close();
+
             UnitOfWork = null;
             DataProvider = null;
+
+            Logger.Info($"Database '{databaseName}' closed.");
+        }
+
+        public void SaveDatabase()
+        {
+            if (UnitOfWork == null)
+                throw new Exception("Database not opened.");
+
+            DataProvider.Save();
+
+            Logger.Info($"Database '{UnitOfWork.Name}' saved.");
         }
 
         public LoggerVM CreateLoggerVm()
@@ -98,6 +117,15 @@ namespace OpenBreed.Editor.VM
         }
 
         #endregion Public Methods
+
+        #region Internal Methods
+
+        internal DbTablesEditorVM CreateDbTablesEditorVm()
+        {
+            return new DbTablesEditorVM(this);
+        }
+
+        #endregion Internal Methods
 
         #region Protected Methods
 
