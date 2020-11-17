@@ -104,6 +104,7 @@
     <Compile Include="Formats\DataFormatMan.cs" />
     <Compile Include="Formats\BinaryFormat.cs" />
     <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\LogConsolePrinter.cs" />
     <Compile Include="Logging\LogFile.cs" />
     <Compile Include="Logging\DefaultLogger.cs" />
     <Compile Include="Logging\LogLevel.cs" />

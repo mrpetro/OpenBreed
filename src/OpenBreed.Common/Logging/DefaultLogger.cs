@@ -39,7 +39,7 @@ namespace OpenBreed.Common.Logging
         /// <param name="msg">Message text</param>
         public void Verbose(int channel, string message)
         {
-            MessageAdded?.Invoke(LogLevel.Verbose, message);
+            MessageAdded?.Invoke(LogLevel.Verbose, channel, message);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace OpenBreed.Common.Logging
         /// <param name="msg">Message text</param>
         public void Info(int channel, string message)
         {
-            MessageAdded?.Invoke(LogLevel.Info, message);
+            MessageAdded?.Invoke(LogLevel.Info, channel, message);
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace OpenBreed.Common.Logging
         /// <param name="msg">Message text</param>
         public void Warning(int channel, string message)
         {
-            MessageAdded?.Invoke(LogLevel.Warning, message);
+            MessageAdded?.Invoke(LogLevel.Warning, channel, message);
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace OpenBreed.Common.Logging
         /// <param name="msg">Message text</param>
         public void Error(int channel, string message)
         {
-            MessageAdded?.Invoke(LogLevel.Error, message);
+            MessageAdded?.Invoke(LogLevel.Error, channel, message);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace OpenBreed.Common.Logging
         /// <param name="msg">Message text</param>
         public void Critical(int channel, string message)
         {
-            MessageAdded?.Invoke(LogLevel.Critical, message);
+            MessageAdded?.Invoke(LogLevel.Critical, channel, message);
         }
 
         #endregion Public Methods

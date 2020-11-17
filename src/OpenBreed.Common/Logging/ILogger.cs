@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Common.Logging
 {
-    public delegate void Message(LogLevel type, string msg);
+    public delegate void Message(LogLevel type, int channel, string msg);
 
     public interface ILogger : IApplicationInterface
     {

@@ -41,7 +41,7 @@ namespace OpenBreed.Common.Logging
 
         #region Private methods
 
-        private void LogMessage(LogLevel type, string msg)
+        private void LogMessage(LogLevel type, int channel, string msg)
         {
             if (m_Stream == null)
                 return;
