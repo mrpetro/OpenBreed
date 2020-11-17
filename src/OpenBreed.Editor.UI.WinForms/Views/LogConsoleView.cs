@@ -24,7 +24,7 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         {
             this.vm = vm ?? throw new InvalidOperationException(nameof(vm));
 
-
+            LogConsoleCtrl.Initialize(vm.logger);
         }
     }
 }

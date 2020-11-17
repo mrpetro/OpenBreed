@@ -12,11 +12,19 @@ namespace OpenBreed.Editor.VM
 {
     public class EditorApplication : ApplicationBase, IDisposable
     {
+        #region Public Fields
+
+        public const string APP_NAME = "Open Breed Map Editor";
+
+        #endregion Public Fields
+
         #region Private Fields
 
         private readonly Lazy<ILogger> logger;
         private readonly Lazy<VariableMan> variables;
         private readonly Lazy<SettingsMan> settings;
+        private readonly Lazy<IDialogProvider> dialogProvider;
+
         private bool disposedValue;
 
         #endregion Private Fields
@@ -32,6 +40,7 @@ namespace OpenBreed.Editor.VM
             logger = new Lazy<ILogger>(GetInterface<ILogger>);
             variables = new Lazy<VariableMan>(GetInterface<VariableMan>);
             settings = new Lazy<SettingsMan>(GetInterface<SettingsMan>);
+            dialogProvider = new Lazy<IDialogProvider>(GetInterface<IDialogProvider>);
 
             Settings.Restore();
         }
@@ -46,8 +55,9 @@ namespace OpenBreed.Editor.VM
 
         public VariableMan Variables => variables.Value;
 
-        public IUnitOfWork UnitOfWork { get; set; }
-        public DataProvider DataProvider { get; set; }
+        public IUnitOfWork UnitOfWork { get; private set; }
+        public DataProvider DataProvider { get; private set; }
+        public IDialogProvider DialogProvider => dialogProvider.Value;
 
         #endregion Public Properties
 
@@ -68,14 +78,21 @@ namespace OpenBreed.Editor.VM
             DataSourceProvider.ExpandGlobalVariables = Variables.ExpandVariables;
 
             DataProvider = new DataProvider(UnitOfWork, Logger);
+
+            Logger.Info($"Database '{UnitOfWork.Name}' opened.");
         }
 
-        internal DbTablesEditorVM CreateDbTablesEditorVm()
+        public void Run()
         {
-            return new DbTablesEditorVM(this);
+            try
+            {
+                DialogProvider.ShowEditorView();
+            }
+            catch (Exception ex)
+            {
+                DialogProvider.ShowMessage("Critical exception: " + ex, "Open Breed Editor critial exception");
+            }
         }
-
-        public void Run() => GetInterface<EditorApplicationVM>().Run();
 
         public void Dispose()
         {
@@ -88,13 +105,44 @@ namespace OpenBreed.Editor.VM
             if (UnitOfWork == null)
                 throw new Exception("Database not opened.");
 
+            var databaseName = UnitOfWork.Name;
+
+            DataProvider.Close();
+
             UnitOfWork = null;
             DataProvider = null;
+
+            Logger.Info($"Database '{databaseName}' closed.");
+        }
+
+        public void SaveDatabase()
+        {
+            if (UnitOfWork == null)
+                throw new Exception("Database not opened.");
+
+            DataProvider.Save();
+
+            Logger.Info($"Database '{UnitOfWork.Name}' saved.");
         }
 
         public LoggerVM CreateLoggerVm()
         {
             return new LoggerVM(Logger);
+        }
+
+        public DbEditorVM CreateDbEditorVm(IUnitOfWork unitOfWork)
+        {
+            return new DbEditorVM(this);
+        }
+
+        public DbTablesEditorVM CreateDbTablesEditorVm()
+        {
+            return new DbTablesEditorVM(this);
+        }
+
+        public EditorApplicationVM CreateEditorApplicationVm()
+        {
+            return new EditorApplicationVM(this);
         }
 
         #endregion Public Methods

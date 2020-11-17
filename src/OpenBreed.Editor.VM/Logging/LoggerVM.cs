@@ -13,7 +13,7 @@ namespace OpenBreed.Editor.VM.Logging
     public class LoggerVM : BaseViewModel
     {
         #region Public Fields
-        private ILogger logger;
+        public ILogger logger;
         public BindingList<LogItemVM> Items;
 
         #endregion Public Fields

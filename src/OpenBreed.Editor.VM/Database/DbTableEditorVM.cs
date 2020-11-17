@@ -8,6 +8,8 @@ using System.Linq;
 
 namespace OpenBreed.Editor.VM.Database
 {
+    internal delegate EntryEditorVM EntryEditorOpener(IRepository repository, string entryId);
+
     public class DbTableEditorVM : BaseViewModel
     {
         #region Private Fields
@@ -62,6 +64,12 @@ namespace OpenBreed.Editor.VM.Database
 
         #endregion Public Properties
 
+        #region Internal Properties
+
+        internal EntryEditorOpener EntryEditorOpener { get; set; }
+
+        #endregion Internal Properties
+
         #region Public Methods
 
         public void OpenNewEntryCreator()
@@ -81,9 +89,7 @@ namespace OpenBreed.Editor.VM.Database
         {
             //Check if entry editor is already opened. If yes then focus on this entry editor.
             //var openedDbEntryEditor = DbEntryEditors.FirstOrDefault(item => item.)
-            var dbEditor = application.GetInterface<EditorApplicationVM>().DbEditor;
-
-            var entryEditor = dbEditor.OpenEntryEditor(_edited, entryId);
+            var entryEditor = EntryEditorOpener.Invoke(_edited, entryId);
             entryEditor.CommitedAction = OnEntryCommited;
         }
 

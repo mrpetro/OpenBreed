@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Tools;
+using OpenBreed.Database.Xml;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Database;
 using OpenBreed.Editor.VM.Logging;
@@ -18,13 +19,20 @@ namespace OpenBreed.Editor.VM
 
     public class EditorApplicationVM : BaseViewModel, IApplicationInterface
     {
+        #region Public Fields
+
+        public EditorApplication application;
+
+        #endregion Public Fields
+
         #region Private Fields
 
         private EditorState _state;
-
-        private EditorApplication application;
-
         private LoggerVM logger;
+
+        private string title;
+
+        private string dbName;
 
         #endregion Private Fields
 
@@ -39,7 +47,7 @@ namespace OpenBreed.Editor.VM
 
             MenuItems = new BindingList<MenuItemVM>();
 
-            //MenuItems =
+            Title = EditorApplication.APP_NAME;
         }
 
         #endregion Public Constructors
@@ -54,9 +62,13 @@ namespace OpenBreed.Editor.VM
 
         public Action<LoggerVM, bool> ToggleLoggerAction { get; set; }
 
-
-
         public Action<SettingsMan> ShowOptionsAction { get; set; }
+
+        public string Title
+        {
+            get { return title; }
+            set { SetProperty(ref title, value); }
+        }
 
         public EditorState State
         {
@@ -64,25 +76,71 @@ namespace OpenBreed.Editor.VM
             set { SetProperty(ref _state, value); }
         }
 
+        public Action ExitAction { get; set; }
+
+        public string DbName
+        {
+            get { return dbName; }
+            set { SetProperty(ref dbName, value); }
+        }
+
         #endregion Public Properties
 
         #region Public Methods
+
+        public void TryExit()
+        {
+            ExitAction?.Invoke();
+        }
 
         public void ShowOptions()
         {
             ShowOptionsAction?.Invoke(application.Settings);
         }
 
+        public bool TryCloseDatabase()
+        {
+            if (TrySaveBeforeClosing())
+            {
+                DbName = null;
+                application.CloseDatabase();
+
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public bool TryOpenXmlDatabase()
+        {
+            var openFileDialog = application.GetInterface<IDialogProvider>().OpenFileDialog();
+            openFileDialog.Title = "Select an Open Breed Editor Database file to open...";
+            openFileDialog.Filter = "Open Breed Editor Database files (*.xml)|*.xml|All Files (*.*)|*.*";
+            openFileDialog.InitialDirectory = XmlDatabase.DefaultDirectoryPath;
+            openFileDialog.Multiselect = false;
+
+            var answer = openFileDialog.Show();
+
+            if (answer != DialogAnswer.OK)
+                return false;
+
+            string databaseFilePath = openFileDialog.FileName;
+
+            if (!CheckCloseCurrentDatabase(databaseFilePath))
+                return false;
+
+            application.OpenXmlDatabase(databaseFilePath);
+
+            DbName = application.UnitOfWork.Name;
+
+            var dbEditor = application.CreateDbEditorVm(application.UnitOfWork);
+
+            return true;
+        }
+
         public void Run()
         {
-            try
-            {
-                DialogProvider.ShowEditorView(this);
-            }
-            catch (Exception ex)
-            {
-                DialogProvider.ShowMessage("Critical exception: " + ex, "Open Breed Editor critial exception");
-            }
+
         }
 
         public void ToggleLogger(bool toggle)
@@ -93,10 +151,15 @@ namespace OpenBreed.Editor.VM
             ToggleLoggerAction?.Invoke(logger, toggle);
         }
 
+        public void TrySaveDatabase()
+        {
+            if (application.UnitOfWork != null)
+            {
+                application.SaveDatabase();
+            }
+        }
 
-
-
-        public bool TryExit()
+        public bool TrySaveBeforeExiting()
         {
             if (application.UnitOfWork != null)
             {
@@ -108,7 +171,7 @@ namespace OpenBreed.Editor.VM
                     if (answer == DialogAnswer.Cancel)
                         return false;
                     else if (answer == DialogAnswer.Yes)
-                        DbEditor.Save();
+                        application.SaveDatabase();
                 }
             }
 
@@ -124,22 +187,75 @@ namespace OpenBreed.Editor.VM
 
         #region Internal Methods
 
-        internal bool TrySaveDatabase()
+        /// <summary>
+        /// This checks if database is opened already,
+        /// If it is then it asks of it can be closed
+        /// </summary>
+        /// <returns>True if no database was opened or if previous one was closed, false otherwise</returns>
+        internal bool CheckCloseCurrentDatabase(string newDatabaseFilePath)
         {
-            throw new NotImplementedException();
+            if (application.UnitOfWork != null)
+            {
+                if (IOHelper.GetNormalizedPath(newDatabaseFilePath) == IOHelper.GetNormalizedPath(DbName))
+                {
+                    //Root.Logger.Warning("Database already opened.");
+                    return false;
+                }
+
+                var answer = application.GetInterface<IDialogProvider>().ShowMessageWithQuestion($"Another database ({DbName}) is already opened. Do you want to close it?",
+                                                                "Close current database?",
+                                                                QuestionDialogButtons.OKCancel);
+                if (answer != DialogAnswer.OK)
+                    return false;
+
+                if (!TryCloseDatabase())
+                    return false;
+            }
+
+            return true;
         }
 
         #endregion Internal Methods
 
         #region Protected Methods
 
+        protected override void OnPropertyChanged(string name)
+        {
+            switch (name)
+            {
+                case nameof(DbName):
+                    Title = $"{EditorApplication.APP_NAME} - {DbName}";
+                    break;
 
+                default:
+                    break;
+            }
+
+            base.OnPropertyChanged(name);
+        }
 
         #endregion Protected Methods
 
         #region Private Methods
 
+        private bool TrySaveBeforeClosing()
+        {
+            if (application.UnitOfWork != null)
+            {
+                if (DbEditor.IsModified)
+                {
+                    var answer = application.GetInterface<IDialogProvider>().ShowMessageWithQuestion("Current database has been modified. Do you want to save it before closing?",
+                                                                               "Save database before closing?", QuestionDialogButtons.YesNoCancel);
 
+                    if (answer == DialogAnswer.Cancel)
+                        return false;
+                    else if (answer == DialogAnswer.Yes)
+                        application.SaveDatabase();
+                }
+            }
+
+            return true;
+        }
 
         private void RunABTAGame()
         {

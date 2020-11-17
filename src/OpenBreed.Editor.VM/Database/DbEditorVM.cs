@@ -16,8 +16,6 @@ namespace OpenBreed.Editor.VM.Database
 
         private readonly EditorApplication application;
 
-        private string dbName;
-
         #endregion Private Fields
 
         #region Public Constructors
@@ -30,12 +28,6 @@ namespace OpenBreed.Editor.VM.Database
         #endregion Public Constructors
 
         #region Public Properties
-
-        public string DbName
-        {
-            get { return dbName; }
-            set { SetProperty(ref dbName, value); }
-        }
 
         public Action<EntryEditorVM> EntryEditorOpeningAction { get; set; }
 
@@ -55,19 +47,6 @@ namespace OpenBreed.Editor.VM.Database
             CloseDbTablesEditor();
         }
 
-        public bool TryCloseDatabase()
-        {
-            if (TrySaveDatabaseInternal())
-            {
-                DbName = null;
-                application.CloseDatabase();
-
-                return true;
-            }
-            else
-                return false;
-        }
-
         private DbTablesEditorVM dbTablesEditor;
 
         private bool dbTablesEditorChecked;
@@ -84,6 +63,7 @@ namespace OpenBreed.Editor.VM.Database
         {
             dbTablesEditor.Close();
             dbTablesEditor = null;
+            DbTablesEditorChecked = false;
         }
 
         protected override void OnPropertyChanged(string name)
@@ -101,94 +81,25 @@ namespace OpenBreed.Editor.VM.Database
             base.OnPropertyChanged(name);
         }
 
-        private void Initialize(DbTablesEditorVM dbTablesEditorVm)
-        {
-            var dbTableEditorConnector = new DbTableEditorConnector(dbTablesEditorVm.DbTableEditor);
-            dbTableEditorConnector.ConnectTo(dbTablesEditorVm.DbTableSelector);
-        }
-
         public void ToggleDbTablesEditor(bool toggle)
         {
             if (dbTablesEditor == null)
             {
                 dbTablesEditor = application.CreateDbTablesEditorVm();
+                dbTablesEditor.EntryEditorOpener = OpenEntryEditor;
                 InitDbTablesEditorAction?.Invoke(dbTablesEditor);
 
                 dbTablesEditor.DbTableEditor.SetModel(dbTablesEditor.DbTableSelector.CurrentTableName);
-                Initialize(dbTablesEditor);
+
+                dbTablesEditor.PropertyChanged += (s, a) => { if (Equals(a.PropertyName, "IsHidden")) DbTablesEditorChecked = !dbTablesEditor.IsHidden; };
             }
 
-            if (toggle)
-                dbTablesEditor.Show();
-            else
-                dbTablesEditor.Hide();
-        }
-
-
-        public bool TryOpenXmlDatabase()
-        {
-            var openFileDialog = application.GetInterface<IDialogProvider>().OpenFileDialog();
-            openFileDialog.Title = "Select an Open Breed Editor Database file to open...";
-            openFileDialog.Filter = "Open Breed Editor Database files (*.xml)|*.xml|All Files (*.*)|*.*";
-            openFileDialog.InitialDirectory = XmlDatabase.DefaultDirectoryPath;
-            openFileDialog.Multiselect = false;
-
-            var answer = openFileDialog.Show();
-
-            if (answer != DialogAnswer.OK)
-                return false;
-
-            string databaseFilePath = openFileDialog.FileName;
-
-            if (!CheckCloseCurrentDatabase(this, databaseFilePath))
-                return false;
-
-            application.OpenXmlDatabase(databaseFilePath);
-
-            DbName = application.UnitOfWork.Name;
-
-            return true;
-        }
-
-        public void TrySaveDatabase()
-        {
-            if (application.UnitOfWork == null)
-                throw new InvalidOperationException("Expected current database");
-
-            Save();
+            dbTablesEditor.IsHidden = !toggle;
         }
 
         #endregion Public Methods
 
         #region Internal Methods
-
-        /// <summary>
-        /// This checks if database is opened already,
-        /// If it is then it asks of it can be closed
-        /// </summary>
-        /// <returns>True if no database was opened or if previous one was closed, false otherwise</returns>
-        internal bool CheckCloseCurrentDatabase(DbEditorVM dbEditor, string newDatabaseFilePath)
-        {
-            if (application.UnitOfWork != null)
-            {
-                if (IOHelper.GetNormalizedPath(newDatabaseFilePath) == IOHelper.GetNormalizedPath(dbEditor.DbName))
-                {
-                    //Root.Logger.Warning("Database already opened.");
-                    return false;
-                }
-
-                var answer = application.GetInterface<IDialogProvider>().ShowMessageWithQuestion($"Another database ({dbEditor.DbName}) is already opened. Do you want to close it?",
-                                                                "Close current database?",
-                                                                QuestionDialogButtons.OKCancel);
-                if (answer != DialogAnswer.OK)
-                    return false;
-
-                if (!dbEditor.TryCloseDatabase())
-                    return false;
-            }
-
-            return true;
-        }
 
         internal EntryEditorVM OpenEntryEditor(IRepository repository, string entryId)
         {
@@ -210,11 +121,6 @@ namespace OpenBreed.Editor.VM.Database
             return entryEditor;
         }
 
-        internal void Save()
-        {
-            application.DataProvider.Save();
-        }
-
         #endregion Internal Methods
 
         #region Protected Methods
@@ -223,24 +129,7 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Private Methods
 
-        private bool TrySaveDatabaseInternal()
-        {
-            if (application.UnitOfWork == null)
-                throw new InvalidOperationException("Expected current database");
 
-            if (IsModified)
-            {
-                var answer = application.GetInterface<IDialogProvider>().ShowMessageWithQuestion("Current database has been modified. Do you want to save it before closing?",
-                                                                           "Save database before closing?", QuestionDialogButtons.YesNoCancel);
-
-                if (answer == DialogAnswer.Cancel)
-                    return false;
-                else if (answer == DialogAnswer.Yes)
-                    Save();
-            }
-
-            return true;
-        }
 
         private void OnEntryEditorClosed(EntryEditorVM editor)
         {

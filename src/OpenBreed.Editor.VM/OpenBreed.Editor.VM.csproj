@@ -88,7 +88,6 @@
     <Compile Include="Database\DbEditorVM.cs" />
     <Compile Include="Database\DbEntryFactory.cs" />
     <Compile Include="Database\DbTablesEditorVM.cs" />
-    <Compile Include="Database\DbTableEditorConnector.cs" />
     <Compile Include="Database\Entries\DbImageEntryVM.cs" />
     <Compile Include="Database\Entries\DbEntryVM.cs" />
     <Compile Include="Database\DbTableEditorVM.cs" />

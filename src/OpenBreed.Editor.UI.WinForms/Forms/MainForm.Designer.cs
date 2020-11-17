@@ -34,16 +34,12 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ABTAGamePasswordsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ABTAGameRunToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EPFPackUnpackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.LogConsoleShowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.MainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.MessageLabelMainStatusStrip = new System.Windows.Forms.ToolStripStatusLabel();
-            this.EditorView = new OpenBreed.Editor.UI.WinForms.Views.DbEditorView();
             this.MainStatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,42 +77,17 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ABTAGamePasswordsToolStripMenuItem,
-            this.ABTAGameRunToolStripMenuItem,
             this.EPFPackUnpackToolStripMenuItem,
-            this.LogConsoleShowToolStripMenuItem,
             this.OptionsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
-            // 
-            // ABTAGamePasswordsToolStripMenuItem
-            // 
-            this.ABTAGamePasswordsToolStripMenuItem.Name = "ABTAGamePasswordsToolStripMenuItem";
-            this.ABTAGamePasswordsToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.ABTAGamePasswordsToolStripMenuItem.Text = "ABTA Game passwords...";
-            this.ABTAGamePasswordsToolStripMenuItem.Click += new System.EventHandler(this.ABTAGamePasswordsToolStripMenuItem_Click);
-            // 
-            // ABTAGameRunToolStripMenuItem
-            // 
-            this.ABTAGameRunToolStripMenuItem.Name = "ABTAGameRunToolStripMenuItem";
-            this.ABTAGameRunToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.ABTAGameRunToolStripMenuItem.Text = "Run ABTA Game";
-            this.ABTAGameRunToolStripMenuItem.Click += new System.EventHandler(this.ABTAGameRunToolStripMenuItem_Click);
             // 
             // EPFPackUnpackToolStripMenuItem
             // 
             this.EPFPackUnpackToolStripMenuItem.Name = "EPFPackUnpackToolStripMenuItem";
             this.EPFPackUnpackToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.EPFPackUnpackToolStripMenuItem.Text = "EPF pack/unpack...";
-            // 
-            // LogConsoleShowToolStripMenuItem
-            // 
-            this.LogConsoleShowToolStripMenuItem.CheckOnClick = true;
-            this.LogConsoleShowToolStripMenuItem.Name = "LogConsoleShowToolStripMenuItem";
-            this.LogConsoleShowToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.LogConsoleShowToolStripMenuItem.Text = "Log Console";
-            this.LogConsoleShowToolStripMenuItem.CheckedChanged += new System.EventHandler(this.ShowLogConsoleToolStripMenuItem_CheckedChanged);
             // 
             // OptionsToolStripMenuItem
             // 
@@ -139,21 +110,14 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             // 
             this.MessageLabelMainStatusStrip.Name = "MessageLabelMainStatusStrip";
             this.MessageLabelMainStatusStrip.Size = new System.Drawing.Size(0, 17);
-            // 
-            // EditorView
-            // 
-            this.EditorView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.EditorView.Location = new System.Drawing.Point(0, 24);
-            this.EditorView.Name = "EditorView";
-            this.EditorView.Size = new System.Drawing.Size(1041, 458);
-            this.EditorView.TabIndex = 4;
+
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1041, 504);
-            this.Controls.Add(this.EditorView);
+
             this.Controls.Add(this.MainStatusStrip);
             this.Controls.Add(this.MainMenuStrip);
             this.IsMdiContainer = true;
@@ -173,17 +137,13 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         private System.Windows.Forms.StatusStrip MainStatusStrip;
         private System.Windows.Forms.ToolStripStatusLabel MessageLabelMainStatusStrip;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ABTAGamePasswordsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem EPFPackUnpackToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem EditToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem ViewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ABTAGameRunToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem LogConsoleShowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem OptionsToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem FileToolStripMenuItem;
         internal System.Windows.Forms.OpenFileDialog OpenFileDialog;
         internal System.Windows.Forms.SaveFileDialog SaveFileDialog;
-        internal Views.DbEditorView EditorView;
     }
 }
 

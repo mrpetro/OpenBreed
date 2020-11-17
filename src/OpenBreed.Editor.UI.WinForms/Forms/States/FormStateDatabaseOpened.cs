@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common.UI.WinForms.Controls;
 using OpenBreed.Editor.UI.WinForms.Views;
+using OpenBreed.Editor.VM;
 using OpenBreed.Editor.VM.Database;
 using OpenBreed.Editor.VM.Database.Entries;
 using System;
@@ -33,13 +34,13 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             FileSeparator = new ToolStripSeparator();
 
             FileCloseDatabaseToolStripMenuItem = new ToolStripMenuItem("Close database");
-            FileCloseDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.DbEditor.TryCloseDatabase();
+            FileCloseDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.TryCloseDatabase();
             FileOpenDatabaseToolStripMenuItem = new ToolStripMenuItem("Open Database...");
-            FileOpenDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.DbEditor.TryOpenXmlDatabase();
+            FileOpenDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.TryOpenXmlDatabase();
             FileSaveDatabaseToolStripMenuItem = new ToolStripMenuItem("Save Database");
-            FileSaveDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.DbEditor.TrySaveDatabase();
+            FileSaveDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.TrySaveDatabase();
             ExitToolStripMenuItem = new ToolStripMenuItem("Exit");
-            ExitToolStripMenuItem.Click += (s, a) => MainForm.Close();
+            ExitToolStripMenuItem.Click += (s, a) => MainForm.VM.TryExit();
 
             ViewDatabaseMenuItem = new ToolStripMenuItemEx("Database items");
             ViewDatabaseMenuItem.CheckOnClick = true;
@@ -66,7 +67,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
 
         internal override void Setup()
         {
-            if (MainForm.VM.DbEditor.DbName == null)
+            if (MainForm.VM.DbName == null)
                 throw new InvalidOperationException("No current database!");
 
             //Setup the File menu
@@ -85,18 +86,14 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             MainForm.ViewToolStripMenuItem.Visible = true;
 
 
-            ViewDatabaseMenuItem = new ToolStripMenuItemEx("Database items");
-            ViewDatabaseMenuItem.CheckOnClick = true;
+            ViewDatabaseMenuItem.DataBindings.Clear();
             ViewDatabaseMenuItem.DataBindings.Add(nameof(ViewDatabaseMenuItem.Checked),
                                                   MainForm.VM.DbEditor,
                                                   nameof(MainForm.VM.DbEditor.DbTablesEditorChecked),
                                                   false,
                                                   DataSourceUpdateMode.OnPropertyChanged);
-            //ViewDatabaseMenuItem.Click += (s, a) => MainForm.VM.ToggleDbTablesEditor(true);
 
             MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewDatabaseMenuItem);
-
-            MainForm.Text = $"{MainForm.APP_NAME} - {MainForm.VM.DbEditor.DbName}";
 
             MainForm.VM.DbEditor.InitDbTablesEditorAction = OnInitDbTablesEditor;
             MainForm.VM.DbEditor.DbTablesEditorChecked = true;

@@ -1,35 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-
-using OpenBreed.Editor.VM;
-
-using OpenBreed.Common;
+﻿using OpenBreed.Common.Tools;
+using OpenBreed.Common.UI.WinForms.Controls;
 using OpenBreed.Editor.UI.WinForms.Forms.States;
-using OpenBreed.Editor.VM.Logging;
 using OpenBreed.Editor.UI.WinForms.Views;
+using OpenBreed.Editor.VM;
+using OpenBreed.Editor.VM.Logging;
+using System;
+using System.ComponentModel;
+using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
-using OpenBreed.Common.Tools;
 
 namespace OpenBreed.Editor.UI.WinForms.Forms
 {
     public partial class MainForm : Form
     {
-
         #region Public Fields
 
-        public const string APP_NAME = "Open Breed Map Editor";
+        public DbEditorView EditorView = new DbEditorView();
 
         #endregion Public Fields
 
         #region Internal Fields
 
         internal ToolStripMenuItem ViewToggleLoggerToolStripMenuItem = new ToolStripMenuItem();
+        internal ToolStripMenuItem ABTAGamePasswordsToolStripMenuItem = new ToolStripMenuItem();
+        internal ToolStripMenuItem ABTAGameRunToolStripMenuItem = new ToolStripMenuItem();
+        internal ToolStripMenuItemEx LogConsoleShowToolStripMenuItem = new ToolStripMenuItemEx("Log Console");
 
         #endregion Internal Fields
 
@@ -49,14 +44,34 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         {
             InitializeComponent();
 
+            EditorView.Dock = System.Windows.Forms.DockStyle.Fill;
+            EditorView.Name = "EditorView";
+            Controls.Add(EditorView);
+            EditorView.BringToFront();
+
             DatabaseOpenedState = new FormStateDatabaseOpened(this);
             InitialState = new FormStateInitial(this);
-
-            FormClosing += new FormClosingEventHandler(MainForm_FormClosing);
 
             State = new FormStateInitial(this);
 
             ViewToolStripMenuItem.DropDownItems.Add(ViewToggleLoggerToolStripMenuItem);
+
+            ABTAGamePasswordsToolStripMenuItem.Name = "ABTAGamePasswordsToolStripMenuItem";
+            ABTAGamePasswordsToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            ABTAGamePasswordsToolStripMenuItem.Text = "ABTA Game passwords...";
+            toolsToolStripMenuItem.DropDownItems.Add(ABTAGamePasswordsToolStripMenuItem);
+
+            ABTAGameRunToolStripMenuItem.Name = "ABTAGameRunToolStripMenuItem";
+            ABTAGameRunToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            ABTAGameRunToolStripMenuItem.Text = "Run ABTA Game";
+            toolsToolStripMenuItem.DropDownItems.Add(ABTAGameRunToolStripMenuItem);
+
+            LogConsoleShowToolStripMenuItem.CheckOnClick = true;
+            LogConsoleShowToolStripMenuItem.Name = "LogConsoleShowToolStripMenuItem";
+            LogConsoleShowToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            LogConsoleShowToolStripMenuItem.Text = "Log Console";
+            toolsToolStripMenuItem.DropDownItems.Add(LogConsoleShowToolStripMenuItem);
+            LogConsoleShowToolStripMenuItem.CheckedChanged += new System.EventHandler(this.ShowLogConsoleToolStripMenuItem_CheckedChanged);
         }
 
         #endregion Public Constructors
@@ -92,32 +107,39 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
             EditorView.Initialize(VM.DbEditor);
 
-            VM.DbEditor.PropertyChanged += VM_PropertyChanged;
-
-            ViewToggleLoggerToolStripMenuItem.Click += (s, a) => VM.ToggleLogger(true);
-
-            OptionsToolStripMenuItem.Click += (s, a) => VM.ShowOptions();
-
-            VM.ToggleLoggerAction = OnToggleLogger;
-
-            VM.ShowOptionsAction = OnShowOptions;
+            BindProperties();
+            BindEvents();
+            BindActions();
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void ABTAGamePasswordsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void BindActions()
         {
-            Other.TryAction(OpenABTAPasswordGenerator);
+            VM.ToggleLoggerAction = OnToggleLogger;
+            VM.ShowOptionsAction = OnShowOptions;
+            VM.ExitAction = Close;
         }
 
-        private void ABTAGameRunToolStripMenuItem_Click(object sender, EventArgs e)
+        private void BindEvents()
         {
-            VM.TryRunABTAGame();
+            VM.PropertyChanged += VM_PropertyChanged;
+            ViewToggleLoggerToolStripMenuItem.Click += (s, a) => VM.ToggleLogger(true);
+            OptionsToolStripMenuItem.Click += (s, a) => VM.ShowOptions();
+            FormClosing += (s, a) => a.Cancel = !VM.TrySaveBeforeExiting();
+
+            ABTAGamePasswordsToolStripMenuItem.Click += (s, a) => Other.TryAction(OpenABTAPasswordGenerator);
+            ABTAGameRunToolStripMenuItem.Click += (s, a) => VM.TryRunABTAGame();
         }
 
-        void ChangeCheckedState(ToolStripMenuItem menuItem, Control ctrl)
+        private void BindProperties()
+        {
+            DataBindings.Add(nameof(Text), VM, nameof(VM.Title), false, DataSourceUpdateMode.OnPropertyChanged);
+        }
+
+        private void ChangeCheckedState(ToolStripMenuItem menuItem, Control ctrl)
         {
             if (menuItem.Checked != ctrl.Visible)
                 menuItem.Checked = ctrl.Visible;
@@ -127,17 +149,13 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         {
             _logConsoleView = new LogConsoleView();
             _logConsoleView.VisibleChanged += (s, a) => ChangeCheckedState(LogConsoleShowToolStripMenuItem, s as Control);
+            _logConsoleView.Initialize(VM.application.CreateLoggerVm());
             _logConsoleView.Show(EditorView, DockState.Float);
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (!VM.TryExit())
-                e.Cancel = true;
-        }
         private void OnDatabaseChanged()
         {
-            if (VM.DbEditor.DbName != null)
+            if (VM.DbName != null)
                 State = DatabaseOpenedState;
             else
                 State = InitialState;
@@ -188,7 +206,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         {
             //ToolStripMenuItem item = sender as ToolStripMenuItem;
             //VM.ToggleLogger(item.Checked);
-            
+
             ToolStripMenuItem item = sender as ToolStripMenuItem;
             ToggleLogConsole(item.Checked);
         }
@@ -197,11 +215,9 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         {
             if (toogle)
             {
-
                 if (_logConsoleView == null)
                 {
                     InitLogConsole();
-
                 }
                 else
                     _logConsoleView.Show(EditorView);
@@ -214,9 +230,10 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         {
             switch (e.PropertyName)
             {
-                case nameof(VM.DbEditor.DbName):
+                case nameof(VM.DbName):
                     OnDatabaseChanged();
                     break;
+
                 default:
                     break;
             }
@@ -224,5 +241,4 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
 
         #endregion Private Methods
     }
-
 }
