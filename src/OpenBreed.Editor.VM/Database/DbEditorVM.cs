@@ -63,6 +63,7 @@ namespace OpenBreed.Editor.VM.Database
         {
             dbTablesEditor.Close();
             dbTablesEditor = null;
+            DbTablesEditorChecked = false;
         }
 
         protected override void OnPropertyChanged(string name)
@@ -80,27 +81,20 @@ namespace OpenBreed.Editor.VM.Database
             base.OnPropertyChanged(name);
         }
 
-        private void Initialize(DbTablesEditorVM dbTablesEditorVm)
-        {
-            var dbTableEditorConnector = new DbTableEditorConnector(dbTablesEditorVm.DbTableEditor);
-            dbTableEditorConnector.ConnectTo(dbTablesEditorVm.DbTableSelector);
-        }
-
         public void ToggleDbTablesEditor(bool toggle)
         {
             if (dbTablesEditor == null)
             {
                 dbTablesEditor = application.CreateDbTablesEditorVm();
+                dbTablesEditor.EntryEditorOpener = OpenEntryEditor;
                 InitDbTablesEditorAction?.Invoke(dbTablesEditor);
 
                 dbTablesEditor.DbTableEditor.SetModel(dbTablesEditor.DbTableSelector.CurrentTableName);
-                Initialize(dbTablesEditor);
+
+                dbTablesEditor.PropertyChanged += (s, a) => { if (Equals(a.PropertyName, "IsHidden")) DbTablesEditorChecked = !dbTablesEditor.IsHidden; };
             }
 
-            if (toggle)
-                dbTablesEditor.Show();
-            else
-                dbTablesEditor.Hide();
+            dbTablesEditor.IsHidden = !toggle;
         }
 
         #endregion Public Methods

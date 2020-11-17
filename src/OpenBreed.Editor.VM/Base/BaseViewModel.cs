@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -13,9 +14,6 @@ namespace OpenBreed.Editor.VM.Base
         #endregion Public Events
 
         #region Protected Methods
-
-
-        
 
         protected virtual void OnPropertyChanged(string name)
         {

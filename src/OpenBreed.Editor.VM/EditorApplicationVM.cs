@@ -140,14 +140,7 @@ namespace OpenBreed.Editor.VM
 
         public void Run()
         {
-            try
-            {
-                DialogProvider.ShowEditorView(this);
-            }
-            catch (Exception ex)
-            {
-                DialogProvider.ShowMessage("Critical exception: " + ex, "Open Breed Editor critial exception");
-            }
+
         }
 
         public void ToggleLogger(bool toggle)

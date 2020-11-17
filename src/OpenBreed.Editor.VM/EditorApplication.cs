@@ -23,6 +23,8 @@ namespace OpenBreed.Editor.VM
         private readonly Lazy<ILogger> logger;
         private readonly Lazy<VariableMan> variables;
         private readonly Lazy<SettingsMan> settings;
+        private readonly Lazy<IDialogProvider> dialogProvider;
+
         private bool disposedValue;
 
         #endregion Private Fields
@@ -38,6 +40,7 @@ namespace OpenBreed.Editor.VM
             logger = new Lazy<ILogger>(GetInterface<ILogger>);
             variables = new Lazy<VariableMan>(GetInterface<VariableMan>);
             settings = new Lazy<SettingsMan>(GetInterface<SettingsMan>);
+            dialogProvider = new Lazy<IDialogProvider>(GetInterface<IDialogProvider>);
 
             Settings.Restore();
         }
@@ -52,8 +55,9 @@ namespace OpenBreed.Editor.VM
 
         public VariableMan Variables => variables.Value;
 
-        public IUnitOfWork UnitOfWork { get; set; }
-        public DataProvider DataProvider { get; set; }
+        public IUnitOfWork UnitOfWork { get; private set; }
+        public DataProvider DataProvider { get; private set; }
+        public IDialogProvider DialogProvider => dialogProvider.Value;
 
         #endregion Public Properties
 
@@ -78,7 +82,17 @@ namespace OpenBreed.Editor.VM
             Logger.Info($"Database '{UnitOfWork.Name}' opened.");
         }
 
-        public void Run() => GetInterface<EditorApplicationVM>().Run();
+        public void Run()
+        {
+            try
+            {
+                DialogProvider.ShowEditorView();
+            }
+            catch (Exception ex)
+            {
+                DialogProvider.ShowMessage("Critical exception: " + ex, "Open Breed Editor critial exception");
+            }
+        }
 
         public void Dispose()
         {
@@ -124,6 +138,11 @@ namespace OpenBreed.Editor.VM
         public DbTablesEditorVM CreateDbTablesEditorVm()
         {
             return new DbTablesEditorVM(this);
+        }
+
+        public EditorApplicationVM CreateEditorApplicationVm()
+        {
+            return new EditorApplicationVM(this);
         }
 
         #endregion Public Methods

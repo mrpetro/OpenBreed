@@ -23,26 +23,9 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         {
             DbTablesEditorCtrl.Initialize(vm);
 
-            vm.ShowingAction = () => this.InvokeIfRequired(() => base.Show());
-            vm.HidingAction = () => this.InvokeIfRequired(() => base.Hide());
-            vm.ClosingAction = () => this.InvokeIfRequired(() => base.Close());
-        }
+            vm.CloseAction = () => this.InvokeIfRequired(() => base.Close());
 
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            base.OnFormClosing(e);
-
-
-            //VM.ClosingAction();
-            //if (e.CloseReason == CloseReason.UserClosing)
-            //    e.Cancel = !VM.Close();
-        }
-
-        protected override void OnFormClosed(FormClosedEventArgs e)
-        {
-            base.OnFormClosed(e);
-
-            //VM.ClosedAction();
+            this.DataBindings.Add(nameof(this.IsHidden), vm, nameof(vm.IsHidden), false, DataSourceUpdateMode.OnPropertyChanged);
         }
     }
 }

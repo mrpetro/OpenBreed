@@ -43,10 +43,10 @@ namespace OpenBreed.Editor.UI.WinForms
             //Application.Run(new GLTestForm());
 
             var application = new EditorApplication();
-            application.RegisterInterface<IDialogProvider>(() => new DialogProvider());
+            application.RegisterInterface<IDialogProvider>(() => new DialogProvider(application));
             application.RegisterInterface<DbEntryEditorFactory>(() => CreateEntryEditorFactory(application));
             application.RegisterInterface<DbEntryFactory>(() => new DbEntryFactory());
-            application.RegisterInterface<EditorApplicationVM>(() => new EditorApplicationVM(application));
+
             application.Run();
         }
 

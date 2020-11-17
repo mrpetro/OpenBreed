@@ -14,7 +14,13 @@ namespace OpenBreed.Editor.UI.WinForms
 {
     public class DialogProvider : IDialogProvider
     {
+        public DialogProvider(EditorApplication application)
+        {
+            this.application = application;
+        }
+
         private MainForm _mainForm;
+        private readonly EditorApplication application;
 
         private MessageBoxButtons ToMessageBoxButtons(QuestionDialogButtons buttons)
         {
@@ -92,13 +98,14 @@ namespace OpenBreed.Editor.UI.WinForms
             return new SaveFileQuery();
         }
 
-        public void ShowEditorView(EditorApplicationVM editor)
+        public void ShowEditorView()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            var vm = application.CreateEditorApplicationVm();
             _mainForm = new MainForm();
-            _mainForm.Initialize(editor);
+            _mainForm.Initialize(vm);
             Application.Run(_mainForm);
         }
     }
