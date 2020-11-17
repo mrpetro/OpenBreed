@@ -30,7 +30,6 @@ using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Entities.Turret;
 using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Sandbox.Items;
-using OpenBreed.Sandbox.Managers;
 using OpenBreed.Sandbox.Worlds;
 using OpenTK;
 using OpenTK.Graphics;
@@ -55,13 +54,14 @@ namespace OpenBreed.Sandbox
 
         #region Public Constructors
 
+        //private 
+
+        private readonly LogConsolePrinter logConsolePrinter;
 
 
         public Program()
         {
             appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
-            Client = new GameWindowClient(this, 800, 600, "OpenBreed");
 
             window = new GameWindow(800, 600, new GraphicsMode(new ColorFormat(8, 8, 8, 8), 24, 8), "OpenBreed");
 
@@ -77,8 +77,9 @@ namespace OpenBreed.Sandbox
             window.UpdateFrame += (s,a) => Update((float)a.Time);
             window.RenderFrame += OnRenderFrame;
 
-            Logging = new LogMan(this);
-
+            Logging = new DefaultLogger();
+            logConsolePrinter = new LogConsolePrinter(Logging);
+            logConsolePrinter.StartPrinting();
             Scripts = new LuaScriptMan(this);
             StateMachines = new FsmMan(this);
             Shapes = new ShapeMan(this);

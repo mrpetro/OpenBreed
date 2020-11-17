@@ -1,42 +1,43 @@
-﻿using OpenBreed.Common;
-using OpenBreed.Common.Data;
-using OpenBreed.Model.Scripts;
-using OpenBreed.Model.Texts;
+﻿using OpenBreed.Common.Data;
+using OpenBreed.Common.Logging;
 using OpenBreed.Core;
-using OpenBreed.Core.Common.Builders;
 using OpenBreed.Core.Managers;
-using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Rendering;
-using OpenBreed.Core.Systems;
 using OpenBreed.Database.Interface;
-using OpenBreed.Database.Interface.Items.Scripts;
+using OpenBreed.Model.Scripts;
 using OpenTK;
-using OpenTK.Graphics;
 using System;
 using System.Drawing;
-using OpenBreed.Common.Logging;
 
 namespace OpenBreed.Game
 {
     internal class Game : CoreBase
     {
-
-
         #region Private Fields
 
         private IDatabase database;
         private IUnitOfWork unitOfWork;
+        private readonly LogConsolePrinter logConsolePrinter;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public Game(IDatabase database)// : 
-           // base(800, 600, new GraphicsMode(new ColorFormat(8, 8, 8, 8), 24, 8), "OpenBreed")
+        public Game(IDatabase database)
         {
             this.database = database;
+
+            Logging = new DefaultLogger();
+            logConsolePrinter = new LogConsolePrinter(Logging);
+            logConsolePrinter.StartPrinting();
+
+            Client = new GameWindowClient(this, 800, 600, "OpenBreed");
         }
+
+        #endregion Public Constructors
+
+        #region Public Properties
 
         public override IRenderModule Rendering => throw new NotImplementedException();
 
@@ -44,7 +45,7 @@ namespace OpenBreed.Game
 
         public override AnimMan Animations => throw new NotImplementedException();
 
-        public override ILogger Logging => throw new NotImplementedException();
+        public override ILogger Logging { get; }
 
         public override JobMan Jobs => throw new NotImplementedException();
 
@@ -64,14 +65,14 @@ namespace OpenBreed.Game
 
         public override Rectangle ClientRectangle => throw new NotImplementedException();
 
+        #endregion Public Properties
+
+        #region Public Methods
+
         public override void Exit()
         {
             throw new NotImplementedException();
         }
-
-        #endregion Public Constructors
-
-        #region Public Properties
 
         public override void Update(float dt)
         {
@@ -83,10 +84,9 @@ namespace OpenBreed.Game
             var unitOfWork = database.CreateUnitOfWork();
             var provider = new DataProvider(unitOfWork, Logging);
 
-            if (provider.TryGetData<ScriptModel>("Entry", out ScriptModel entryScript, out string msg))
+            if (provider.TryGetData<ScriptModel>("Entry.lua", out ScriptModel entryScript, out string msg))
             {
             }
-
 
             //MainLoophere
         }
