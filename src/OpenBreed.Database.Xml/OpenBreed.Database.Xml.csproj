@@ -65,9 +65,9 @@
     <Compile Include="..\Shared\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Items\Actions\ActionDef.cs" />
-    <Compile Include="Items\Actions\ActionPresentationDef.cs" />
-    <Compile Include="Items\Actions\ActionTriggersDef.cs" />
+    <Compile Include="Items\Actions\XmlActionDef.cs" />
+    <Compile Include="Items\Actions\XmlActionPresentationDef.cs" />
+    <Compile Include="Items\Actions\XmlActionTriggersDef.cs" />
     <Compile Include="Items\Actions\XmlActionSetEntry.cs" />
     <Compile Include="Items\Assets\XmlAssetEntry.cs" />
     <Compile Include="Items\DataSources\XmlDataSourceEntry.cs" />

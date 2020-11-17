@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace OpenBreed.Database.Xml.Items.Actions
 {
     [Serializable]
-    public class ActionDef : IActionEntry
+    public class XmlActionDef : IActionEntry
     {
         #region Public Properties
 
@@ -20,17 +20,17 @@ namespace OpenBreed.Database.Xml.Items.Actions
         public string Name { get; set; }
 
         [XmlIgnore]
-        public IActionPresentation Presentation { get; private set; } = new ActionPresentationDef();
+        public IActionPresentation Presentation { get; private set; } = new XmlActionPresentationDef();
 
         [XmlIgnore]
-        public IActionTriggers Triggers { get; private set; } = new ActionTriggersDef();
+        public IActionTriggers Triggers { get; private set; } = new XmlActionTriggersDef();
 
         [XmlElement("Presentation")]
-        public ActionPresentationDef XmlPresentation
+        public XmlActionPresentationDef XmlPresentation
         {
             get
             {
-                return (ActionPresentationDef)Presentation;
+                return (XmlActionPresentationDef)Presentation;
             }
 
             set
@@ -40,11 +40,11 @@ namespace OpenBreed.Database.Xml.Items.Actions
         }
 
         [XmlElement("Triggers")]
-        public ActionTriggersDef XmlTriggers
+        public XmlActionTriggersDef XmlTriggers
         {
             get
             {
-                return (ActionTriggersDef)Triggers;
+                return (XmlActionTriggersDef)Triggers;
             }
 
             set

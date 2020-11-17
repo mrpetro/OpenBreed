@@ -17,7 +17,7 @@ namespace OpenBreed.Database.Xml.Items.Actions
     public class XmlActionSetEntry : XmlDbEntry, IActionSetEntry
     {
         private List<IActionEntry> _actions = null;
-        private List<ActionDef> _xmlActions = new List<ActionDef>();
+        private List<XmlActionDef> _xmlActions = new List<XmlActionDef>();
 
         #region Public Properties
 
@@ -38,12 +38,12 @@ namespace OpenBreed.Database.Xml.Items.Actions
 
         [XmlArray("Actions")]
         [XmlArrayItem("Action")]
-        public List<ActionDef> XmlActions
+        public List<XmlActionDef> XmlActions
         {
             get
             {
                 if (_actions != null)
-                    _xmlActions = _actions.Cast<ActionDef>().ToList();
+                    _xmlActions = _actions.Cast<XmlActionDef>().ToList();
 
                 return _xmlActions;
             }
@@ -60,7 +60,7 @@ namespace OpenBreed.Database.Xml.Items.Actions
 
         public IActionEntry NewItem()
         {
-            return new ActionDef();
+            return new XmlActionDef();
         }
 
         #endregion Public Methods

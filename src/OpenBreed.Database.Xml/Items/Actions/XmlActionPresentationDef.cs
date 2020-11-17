@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Database.Xml.Items.Actions
 {
-    public class ActionPresentationDef : IActionPresentation
+    public class XmlActionPresentationDef : IActionPresentation
     {
 
         #region Public Properties

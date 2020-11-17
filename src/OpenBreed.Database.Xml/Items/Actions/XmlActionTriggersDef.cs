@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Database.Xml.Items.Actions
 {
-    public class ActionTriggersDef : IActionTriggers
+    public class XmlActionTriggersDef : IActionTriggers
     {
         #region Public Properties
 
