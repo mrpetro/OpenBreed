@@ -40,7 +40,7 @@ namespace OpenBreed.Common.UI.WinForms.Controls
                 logger.MessageAdded -= LogMan_MessageAdded;
         }
 
-        void LogMan_MessageAdded(LogLevel level, string messageText)
+        void LogMan_MessageAdded(LogLevel level, int channel, string messageText)
         {
             switch (level)
             {
