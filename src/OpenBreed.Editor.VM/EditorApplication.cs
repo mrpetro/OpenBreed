@@ -35,7 +35,7 @@ namespace OpenBreed.Editor.VM
         public EditorApplication()
         {
             RegisterInterface<ILogger>(() => new DefaultLogger());
-            RegisterInterface<VariableMan>(() => new VariableMan(this));
+            RegisterInterface<VariableMan>(() => new VariableMan(GetInterface<ILogger>()));
             RegisterInterface<SettingsMan>(() => new SettingsMan(this));
 
             logger = new Lazy<ILogger>(GetInterface<ILogger>);

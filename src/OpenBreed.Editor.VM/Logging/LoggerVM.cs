@@ -56,7 +56,7 @@ namespace OpenBreed.Editor.VM.Logging
 
         #region Private Methods
 
-        private void Instance_MessageAdded(LogLevel level, string msg)
+        private void Instance_MessageAdded(LogLevel level, int channel, string msg)
         {
             Items.Add(new LogItemVM()
             {
