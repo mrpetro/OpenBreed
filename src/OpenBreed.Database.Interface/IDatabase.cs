@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace OpenBreed.Database.Interface
 {
     public enum DatabaseMode
-    {
+    {   
+        Unset,
         Create,
         ReadOnly,
         Update

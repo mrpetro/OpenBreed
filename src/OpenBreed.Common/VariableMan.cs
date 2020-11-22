@@ -60,6 +60,14 @@ namespace OpenBreed.Common
             }
         }
 
+        public void UnregisterVariable(string name)
+        {
+            if (!m_Variables.ContainsKey(name))
+                throw new Exception("Variable '{name}' not registered");
+
+            m_Variables.Remove(name);
+        }
+
         public string ExpandVariables(string query)
         {
             return Regex.Replace(query, @"\%[^\%]+\%", MatchEvaluator);

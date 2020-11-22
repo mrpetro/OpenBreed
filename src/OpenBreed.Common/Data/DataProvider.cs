@@ -12,17 +12,19 @@ namespace OpenBreed.Common.Data
         #region Private Fields
 
         private readonly IUnitOfWork unitOfWork;
-        private Dictionary<string, object> _models = new Dictionary<string, object>();
         private readonly ILogger logger;
+        private readonly VariableMan variables;
+        private Dictionary<string, object> _models = new Dictionary<string, object>();
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DataProvider(IUnitOfWork unitOfWork, ILogger logger)
+        public DataProvider(IUnitOfWork unitOfWork, ILogger logger, VariableMan variables)
         {
             this.unitOfWork = unitOfWork;
             this.logger = logger;
+            this.variables = variables;
 
             DataSources = new DataSourceProvider(this, logger);
             TileSets = new TileSetsDataProvider(this);
@@ -134,6 +136,12 @@ namespace OpenBreed.Common.Data
         }
 
         #endregion Public Methods
+
+        #region Internal Methods
+
+        internal string ExpandVariables(string text) => variables.ExpandVariables(text);
+
+        #endregion Internal Methods
 
         #region Private Methods
 

@@ -9,7 +9,6 @@ using System.IO;
 
 namespace OpenBreed.Common.Data
 {
-    public delegate string ExpandVariablesDelegate(string text);
 
     public class DataSourceProvider : IDisposable
     {
@@ -35,7 +34,6 @@ namespace OpenBreed.Common.Data
 
         #region Public Properties
 
-        public static ExpandVariablesDelegate ExpandGlobalVariables { get; set; }
         public DataProvider DataProvider { get; }
 
         #endregion Public Properties
@@ -68,12 +66,7 @@ namespace OpenBreed.Common.Data
 
         #region Internal Methods
 
-        internal string ExpandVariables(string text)
-        {
-            var result = ExpandGlobalVariables(text);
-
-            return result;
-        }
+        internal string ExpandVariables(string text) => DataProvider.ExpandVariables(text);
 
         internal void CloseAll()
         {
