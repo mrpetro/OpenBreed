@@ -24,6 +24,7 @@ namespace OpenBreed.Editor.VM
         private readonly Lazy<VariableMan> variables;
         private readonly Lazy<SettingsMan> settings;
         private readonly Lazy<IDialogProvider> dialogProvider;
+        private readonly XmlDatabaseMan databaseMan;
 
         private bool disposedValue;
 
@@ -41,6 +42,7 @@ namespace OpenBreed.Editor.VM
             variables = new Lazy<VariableMan>(GetInterface<VariableMan>);
             settings = new Lazy<SettingsMan>(GetInterface<SettingsMan>);
             dialogProvider = new Lazy<IDialogProvider>(GetInterface<IDialogProvider>);
+            databaseMan = new XmlDatabaseMan(Variables);
 
             Settings.Restore();
         }
@@ -68,16 +70,10 @@ namespace OpenBreed.Editor.VM
             if (UnitOfWork != null)
                 throw new Exception("There is already database opened.");
 
-            UnitOfWork = XmlDatabaseMan.Open(databaseFilePath).CreateUnitOfWork();
+            databaseMan.Open(databaseFilePath);
+            UnitOfWork = databaseMan.CreateUnitOfWork();
 
-            var directoryPath = Path.GetDirectoryName(databaseFilePath);
-            var fileName = Path.GetFileName(databaseFilePath);
-
-            Variables.RegisterVariable(typeof(string), directoryPath, "Db.Current.FolderPath");
-            Variables.RegisterVariable(typeof(string), fileName, "Db.Current.FileName");
-            DataSourceProvider.ExpandGlobalVariables = Variables.ExpandVariables;
-
-            DataProvider = new DataProvider(UnitOfWork, Logger);
+            DataProvider = new DataProvider(UnitOfWork, Logger, Variables);
 
             Logger.Info($"Database '{UnitOfWork.Name}' opened.");
         }
@@ -108,6 +104,7 @@ namespace OpenBreed.Editor.VM
             var databaseName = UnitOfWork.Name;
 
             DataProvider.Close();
+            databaseMan.Close();
 
             UnitOfWork = null;
             DataProvider = null;
