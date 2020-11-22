@@ -10,19 +10,16 @@ namespace OpenBreed.Common
     {
         #region Private Fields
 
-        private IApplication application;
-        private ILogger logger;
-
-        private Dictionary<string, object> m_Variables = new Dictionary<string, object>();
+        private readonly ILogger logger;
+        private readonly Dictionary<string, object> variables = new Dictionary<string, object>();
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public VariableMan(IApplication application)
+        public VariableMan(ILogger logger)
         {
-            this.application = application;
-            this.logger = application.GetInterface<ILogger>();
+            this.logger = logger;
         }
 
         #endregion Public Constructors
@@ -37,15 +34,15 @@ namespace OpenBreed.Common
         /// <param name="name"></param>
         public void RegisterVariable(Type type, object value, string name)
         {
-            if (m_Variables.ContainsKey(name))
+            if (variables.ContainsKey(name))
             {
-                m_Variables[name] = value;
+                variables[name] = value;
                 return;
             }
 
             if (type == typeof(string) || type == typeof(decimal))
             {
-                m_Variables.Add(name, value);
+                variables.Add(name, value);
             }
             else
             {
@@ -62,10 +59,10 @@ namespace OpenBreed.Common
 
         public void UnregisterVariable(string name)
         {
-            if (!m_Variables.ContainsKey(name))
+            if (!variables.ContainsKey(name))
                 throw new Exception("Variable '{name}' not registered");
 
-            m_Variables.Remove(name);
+            variables.Remove(name);
         }
 
         public string ExpandVariables(string query)
@@ -82,7 +79,7 @@ namespace OpenBreed.Common
             string varName = match.ToString().Trim(new char[] { '%' });
             object varValue = null;
 
-            if (m_Variables.TryGetValue(varName, out varValue))
+            if (variables.TryGetValue(varName, out varValue))
                 return varValue.ToString();
             else
             {
