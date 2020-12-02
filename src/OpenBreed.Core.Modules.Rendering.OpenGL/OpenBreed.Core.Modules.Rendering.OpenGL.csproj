@@ -121,6 +121,7 @@
     <Compile Include="Systems\TextSystem.cs" />
     <Compile Include="Systems\SpriteSystem.cs" />
     <Compile Include="Systems\TileSystem.cs" />
+    <Compile Include="VideoSystemsFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">

@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Common.Logging;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Builders;
+using OpenBreed.Core.Builders;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
@@ -83,6 +83,8 @@ namespace OpenBreed.Core
         {
             return (T)modules[typeof(T)];
         }
+
+        public abstract void Load();
 
         public abstract void Update(float dt);
 

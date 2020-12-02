@@ -10,7 +10,7 @@ using System;
 using System.Linq;
 using OpenBreed.Core.Commands;
 using OpenBreed.Sandbox.Entities.Door.States;
-using OpenBreed.Core.Common.Components;
+using OpenBreed.Core.Components;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Sandbox.Entities;
 

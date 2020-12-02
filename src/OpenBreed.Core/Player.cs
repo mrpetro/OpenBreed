@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Common.Components;
+﻿using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Inputs;
 using OpenTK.Input;

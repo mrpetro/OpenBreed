@@ -52,7 +52,7 @@ namespace OpenBreed.Game
 
         private void Window_Load(object sender, System.EventArgs e)
         {
-            //TODO: Connect this to core
+            core.Load();
         }
 
         private void Window_Resize(object sender, System.EventArgs e)
@@ -78,6 +78,16 @@ namespace OpenBreed.Game
         {
             core.Rendering.Draw((float)e.Time);
             window.SwapBuffers();
+        }
+
+        public void Exit()
+        {
+            window.Exit();
+        }
+
+        public void Run()
+        {
+            window.Run(30.0, 60.0);
         }
 
         #endregion Private Methods

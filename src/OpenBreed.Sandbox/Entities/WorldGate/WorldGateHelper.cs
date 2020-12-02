@@ -21,7 +21,7 @@ using OpenBreed.Core.Commands;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Sandbox.Worlds;
-using OpenBreed.Core.Common.Components;
+using OpenBreed.Core.Components;
 using OpenBreed.Core.Modules.Physics;
 
 namespace OpenBreed.Sandbox.Entities.WorldGate

@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Core.Common;
-using OpenBreed.Core.Common.Components;
+using OpenBreed.Core.Components;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

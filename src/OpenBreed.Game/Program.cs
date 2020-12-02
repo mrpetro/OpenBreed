@@ -25,14 +25,10 @@ namespace OpenBreed.Game
             var execFolderPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var gameDbFilePath = Path.Combine(execFolderPath, gameDbFileName);
 
-            var gameSelector = CreateGame(gameDbFilePath);
-
-            gameSelector.Run();     
+            var gameFactory = new GameFactory();
+            var game = gameFactory.CreateGame(gameDbFilePath);
+            game.Run();     
         }
 
-        private static ICore CreateGame(string gameDbFilePath)
-        {
-            return new Game(XmlDatabaseMan.Open(gameDbFilePath, true));
-        }
     }
 }

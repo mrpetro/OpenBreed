@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Common.Logging;
 using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Builders;
+using OpenBreed.Core.Builders;
 using OpenBreed.Core.Common.Systems.Shapes;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
@@ -331,6 +331,10 @@ namespace OpenBreed.Sandbox
             ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateTranslation(0.0f, -ClientRectangle.Height, 0.0f));
             ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateScale(1.0f, -1.0f, 1.0f));
             Rendering.OnClientResized(ClientRectangle.Width, ClientRectangle.Height);
+        }
+
+        public override void Load()
+        {
         }
 
         public override void Update(float dt)

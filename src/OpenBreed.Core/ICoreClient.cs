@@ -22,6 +22,18 @@ namespace OpenBreed.Core
         /// </summary>
         Rectangle ClientRectangle { get; }
 
+        /// <summary>
+        /// Exits the application
+        /// TODO: Show not be part of this inteface
+        /// </summary>
+        void Exit();
+
+        /// <summary>
+        /// Start running main aplication loop
+        /// TODO: Show not be part of this inteface
+        /// </summary>
+        void Run();
+
         #endregion Public Properties
     }
 }

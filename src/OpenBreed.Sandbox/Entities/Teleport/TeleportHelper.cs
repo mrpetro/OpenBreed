@@ -19,7 +19,7 @@ using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Components;
+using OpenBreed.Core.Components;
 using OpenBreed.Sandbox.Entities.WorldGate;
 
 namespace OpenBreed.Sandbox.Entities.Teleport

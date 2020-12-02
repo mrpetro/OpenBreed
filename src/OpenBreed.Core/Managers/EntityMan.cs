@@ -1,8 +1,8 @@
 ﻿using NLua;
 using OpenBreed.Core.Collections;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Builders;
-using OpenBreed.Core.Common.Components;
+using OpenBreed.Core.Builders;
+using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
 using System;

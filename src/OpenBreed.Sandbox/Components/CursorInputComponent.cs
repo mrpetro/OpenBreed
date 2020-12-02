@@ -1,5 +1,5 @@
 ﻿
-using OpenBreed.Core.Common.Components;
+using OpenBreed.Core.Components;
 
 namespace OpenBreed.Sandbox.Components
 {

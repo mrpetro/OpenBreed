@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Core.Collections;
-using OpenBreed.Core.Common.Components;
+using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.States;
 using System;

@@ -14,7 +14,7 @@ using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Modules.Physics.Commands;
 using OpenBreed.Sandbox.Entities.Door.States;
 using System;
-using OpenBreed.Core.Common.Components;
+using OpenBreed.Core.Components;
 
 namespace OpenBreed.Sandbox.Components.States
 {

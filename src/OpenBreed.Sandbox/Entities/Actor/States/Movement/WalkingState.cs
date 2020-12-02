@@ -13,7 +13,7 @@ using OpenTK;
 using System;
 using System.Linq;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Components;
+using OpenBreed.Core.Components;
 using OpenBreed.Core.Systems.Control.Components;
 using OpenBreed.Core.Modules.Physics.Events;
 

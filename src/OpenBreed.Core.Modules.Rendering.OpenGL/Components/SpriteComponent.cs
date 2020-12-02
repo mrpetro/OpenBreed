@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Common.Components;
+﻿using OpenBreed.Core.Components;
 using OpenBreed.Core.Modules.Physics.Builders;
 
 namespace OpenBreed.Core.Modules.Rendering.Components

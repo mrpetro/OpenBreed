@@ -8,7 +8,7 @@ using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Systems;
 using OpenBreed.Core.Modules.Physics.Helpers;
-using OpenBreed.Core.Common.Components;
+using OpenBreed.Core.Components;
 
 namespace OpenBreed.Core.Modules.Physics.Systems
 {

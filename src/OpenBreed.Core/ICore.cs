@@ -1,6 +1,6 @@
 using OpenBreed.Common.Logging;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Builders;
+using OpenBreed.Core.Builders;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
@@ -139,6 +139,8 @@ namespace OpenBreed.Core
         T GetSystemByWorldId<T>(int worldId) where T : IWorldSystem;
 
         void Update(float dt);
+
+        void Load();
 
         #endregion Public Methods
     }

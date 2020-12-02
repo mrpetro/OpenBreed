@@ -9,7 +9,7 @@ using OpenTK;
 using System;
 using System.Linq;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common.Components;
+using OpenBreed.Core.Components;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 {
