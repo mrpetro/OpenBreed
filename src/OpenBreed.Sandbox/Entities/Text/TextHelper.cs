@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common;
 using OpenBreed.Core.Builders;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
@@ -12,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Core;
 
 namespace OpenBreed.Sandbox.Entities
 {

@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Common;
+﻿using OpenBreed.Core;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Physics.Events;

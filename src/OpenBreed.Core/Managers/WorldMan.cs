@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Core.Collections;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Common;
+using OpenBreed.Core;
 using OpenBreed.Core.Events;
 using System;
 using System.Collections.Generic;

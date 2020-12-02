@@ -13,7 +13,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
-namespace OpenBreed.Core.Common
+namespace OpenBreed.Core
 {
     /// <summary>
     /// World class which contains systems and entities

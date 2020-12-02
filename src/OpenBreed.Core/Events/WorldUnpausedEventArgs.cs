@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Common;
+﻿using OpenBreed.Core;
 using System;
 
 namespace OpenBreed.Core.Events
