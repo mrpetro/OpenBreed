@@ -2,7 +2,6 @@
 using OpenBreed.Core;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Builders;
-using OpenBreed.Core.Common.Systems.Shapes;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
@@ -39,6 +38,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
+using OpenBreed.Core.Modules.Physics.Shapes;
 
 namespace OpenBreed.Sandbox
 {
@@ -82,7 +82,6 @@ namespace OpenBreed.Sandbox
             logConsolePrinter.StartPrinting();
             Scripts = new LuaScriptMan(this);
             StateMachines = new FsmMan(this);
-            Shapes = new ShapeMan(this);
             Players = new PlayersMan(this);
             Items = new ItemsMan(this);
             Inputs = new InputsMan(this);
@@ -115,8 +114,6 @@ namespace OpenBreed.Sandbox
         public override AnimMan Animations { get; }
 
         public override FsmMan StateMachines { get; }
-
-        public ShapeMan Shapes { get; }
 
         public override PlayersMan Players { get; }
 
@@ -399,23 +396,23 @@ namespace OpenBreed.Sandbox
 
         private void RegisterShapes()
         {
-            Shapes.Register("Shapes/Box_0_0_16_16", new BoxShape(0, 0, 16, 16));
-            Shapes.Register("Shapes/Box_16_16_8_8", new BoxShape(16, 16, 8, 8));
-            Shapes.Register("Shapes/Box_0_0_16_32", new BoxShape(0, 0, 16, 32));
-            Shapes.Register("Shapes/Box_0_0_32_16", new BoxShape(0, 0, 32, 16));
-            Shapes.Register("Shapes/Box_0_0_32_32", new BoxShape(0, 0, 32, 32));
+            Physics.Shapes.Register("Shapes/Box_0_0_16_16", new BoxShape(0, 0, 16, 16));
+            Physics.Shapes.Register("Shapes/Box_16_16_8_8", new BoxShape(16, 16, 8, 8));
+            Physics.Shapes.Register("Shapes/Box_0_0_16_32", new BoxShape(0, 0, 16, 32));
+            Physics.Shapes.Register("Shapes/Box_0_0_32_16", new BoxShape(0, 0, 32, 16));
+            Physics.Shapes.Register("Shapes/Box_0_0_32_32", new BoxShape(0, 0, 32, 32));
         }
 
         private void RegisterFixtures()
         {
-            Physics.Fixturs.Create("Fixtures/GridCell", "Trigger", Shapes.GetByTag("Shapes/Box_0_0_16_16"));
-            Physics.Fixturs.Create("Fixtures/TeleportEntry", "Trigger", Shapes.GetByTag("Shapes/Box_16_16_8_8"));
-            Physics.Fixturs.Create("Fixtures/TeleportExit", "Trigger", Shapes.GetByTag("Shapes/Box_16_16_8_8"));
-            Physics.Fixturs.Create("Fixtures/Projectile", "Dynamic", Shapes.GetByTag("Shapes/Box_0_0_16_16"));
-            Physics.Fixturs.Create("Fixtures/DoorVertical", "Static", Shapes.GetByTag("Shapes/Box_0_0_16_32"));
-            Physics.Fixturs.Create("Fixtures/DoorHorizontal", "Static", Shapes.GetByTag("Shapes/Box_0_0_32_16"));
-            Physics.Fixturs.Create("Fixtures/Arrow", "Dynamic", Shapes.GetByTag("Shapes/Box_0_0_32_32"));
-            Physics.Fixturs.Create("Fixtures/Turret", "Static", Shapes.GetByTag("Shapes/Box_0_0_32_32"));
+            Physics.Fixturs.Create("Fixtures/GridCell", "Trigger", Physics.Shapes.GetByTag("Shapes/Box_0_0_16_16"));
+            Physics.Fixturs.Create("Fixtures/TeleportEntry", "Trigger", Physics.Shapes.GetByTag("Shapes/Box_16_16_8_8"));
+            Physics.Fixturs.Create("Fixtures/TeleportExit", "Trigger", Physics.Shapes.GetByTag("Shapes/Box_16_16_8_8"));
+            Physics.Fixturs.Create("Fixtures/Projectile", "Dynamic", Physics.Shapes.GetByTag("Shapes/Box_0_0_16_16"));
+            Physics.Fixturs.Create("Fixtures/DoorVertical", "Static", Physics.Shapes.GetByTag("Shapes/Box_0_0_16_32"));
+            Physics.Fixturs.Create("Fixtures/DoorHorizontal", "Static", Physics.Shapes.GetByTag("Shapes/Box_0_0_32_16"));
+            Physics.Fixturs.Create("Fixtures/Arrow", "Dynamic", Physics.Shapes.GetByTag("Shapes/Box_0_0_32_32"));
+            Physics.Fixturs.Create("Fixtures/Turret", "Static", Physics.Shapes.GetByTag("Shapes/Box_0_0_32_32"));
         }
 
         private void RegisterEntityTemplates()

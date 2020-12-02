@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core.Components;
-using OpenBreed.Core.Common.Systems;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Components;

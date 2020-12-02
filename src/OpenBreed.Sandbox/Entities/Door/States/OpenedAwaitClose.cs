@@ -9,8 +9,6 @@ using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenTK;
 using System.Linq;
-using OpenBreed.Core.Common.Systems;
-
 using OpenBreed.Core.Modules.Physics.Commands;
 using OpenBreed.Sandbox.Entities.Door.States;
 using System;

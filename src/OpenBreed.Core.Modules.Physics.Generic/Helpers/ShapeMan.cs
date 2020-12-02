@@ -1,9 +1,10 @@
 ﻿using OpenBreed.Core.Collections;
-using OpenBreed.Core.Common.Systems.Shapes;
+using OpenBreed.Core.Modules.Physics.Shapes;
 using System;
 using System.Collections;
+using System.Diagnostics;
 
-namespace OpenBreed.Core.Managers
+namespace OpenBreed.Core.Modules.Physics.Helpers
 {
     public class ShapeMan
     {
@@ -16,16 +17,18 @@ namespace OpenBreed.Core.Managers
 
         #region Public Constructors
 
-        public ShapeMan(ICore core)
+        public ShapeMan(PhysicsModule module)
         {
-            Core = core;
+            Debug.Assert(module != null);
+
+            Module = module;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public ICore Core { get; }
+        public PhysicsModule Module { get; }
 
         public int Count
         {
@@ -62,7 +65,7 @@ namespace OpenBreed.Core.Managers
             if (tagsToIds.ContainsKey(tag))
             {
                 if (overwrite)
-                    Core.Logging.Warning($"Overwriting existing shape under tag '{tag}'.");
+                    Module.Core.Logging.Warning($"Overwriting existing shape under tag '{tag}'.");
                 else
                     throw new InvalidOperationException($"Shape already registered under tag '{tag}'.");
             }

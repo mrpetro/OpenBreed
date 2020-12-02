@@ -1,6 +1,6 @@
 ﻿using OpenTK;
 
-namespace OpenBreed.Core.Common.Systems.Shapes
+namespace OpenBreed.Core.Modules.Physics.Shapes
 {
     /// <summary>
     /// Place holder implementation for fixture circle shape

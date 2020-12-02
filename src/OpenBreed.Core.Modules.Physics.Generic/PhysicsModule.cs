@@ -9,6 +9,7 @@ namespace OpenBreed.Core.Modules.Physics
 
         public PhysicsModule(ICore core) : base(core)
         {
+            Shapes = new ShapeMan(this);
             Fixturs = new FixtureMan(this);
             Collisions = new CollisionMan(this);
        }
@@ -18,6 +19,8 @@ namespace OpenBreed.Core.Modules.Physics
         #region Public Properties
 
         public FixtureMan Fixturs { get; }
+
+        public ShapeMan Shapes { get; }
 
         public CollisionMan Collisions { get; }
 
