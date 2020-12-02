@@ -121,9 +121,7 @@
     <Compile Include="Formats\ACBMTileSetFormat.cs" />
     <Compile Include="Formats\IDataFormatType.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Managers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\..\EPFArchive\src\EPFArchive\EPFArchive.csproj">
       <Project>{52249c4e-eaf8-45ce-a757-aaa3c3c125d4}</Project>
