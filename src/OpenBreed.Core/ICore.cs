@@ -9,6 +9,7 @@ using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Systems;
 using OpenTK;
 using System.Drawing;
+using OpenBreed.Core.Components;
 
 namespace OpenBreed.Core
 {
@@ -50,6 +51,9 @@ namespace OpenBreed.Core
         /// Entities manager
         /// </summary>
         EntityMan Entities { get; }
+
+        //EntityFactory
+        EntityFactory EntityFactory { get; }
 
         /// <summary>
         /// State machine manager

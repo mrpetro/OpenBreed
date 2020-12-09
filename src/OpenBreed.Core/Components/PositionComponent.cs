@@ -2,11 +2,21 @@
 
 namespace OpenBreed.Core.Components
 {
+    public interface IPositionComponentTemplate : IComponentTemplate
+    {
+        #region Public Properties
+
+        float X { get; }
+        float Y { get; }
+
+        #endregion Public Properties
+    }
+
     /// <summary>
     /// Position entity component class that can be used to store entity current position information
     /// Example: Actor is standing somewhere in the world at current position
     /// </summary>
-    public class PositionComponent : IEntityComponent
+    public sealed class PositionComponent : IEntityComponent
     {
         #region Private Constructors
 
@@ -53,5 +63,25 @@ namespace OpenBreed.Core.Components
         }
 
         #endregion Public Methods
+    }
+
+    public sealed class PositionComponentFactory : ComponentFactoryBase<IPositionComponentTemplate>
+    {
+        #region Public Constructors
+
+        public PositionComponentFactory(ICore core) : base(core)
+        {
+        }
+
+        #endregion Public Constructors
+
+        #region Protected Methods
+
+        protected override IEntityComponent Create(IPositionComponentTemplate template)
+        {
+            return PositionComponent.Create(template.X, template.Y);
+        }
+
+        #endregion Protected Methods
     }
 }

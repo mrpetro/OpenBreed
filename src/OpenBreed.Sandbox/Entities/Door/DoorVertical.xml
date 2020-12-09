@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+		<Class>
+			<Name>DoorVertical</Name>
+		</Class>
+		<Timer>
+		</Timer>
+		<Fsm>
+			<States>
+				<State FsmName="Door.Functioning" StateName="Closed" />
+			</States>
+		</Fsm>
+		<Animation>
+			<Speed>5</Speed>
+			<Loop>false</Loop>
+		</Animation>
+        <Position x="0" y="0" />
+		<Body>
+			<CofFactor>1.0</CofFactor>
+			<CorFactor>1.0</CorFactor>
+			<Type>Static</Type>
+			<Fixtures>
+				<Fixture>Fixtures/DoorVertical</Fixture>
+			</Fixtures>
+		</Body>
+		<Sprite>
+			<AtlasName>Atlases/Sprites/Door/Vertical</AtlasName>
+			<ImageIndex>0</ImageIndex>
+			<Order>0</Order>
+		</Sprite>
+		<Text>
+			<Text>Door</Text>
+			<Offset X="-10" Y="10" />
+			<Color R="255" G="255" B="255" A="255" />
+			<FontName>Arial</FontName>
+			<FontSize>9</FontSize>
+			<Order>0</Order>
+		</Text>
+    </Components>
+</EntityTemplate>

@@ -4,6 +4,11 @@ using System.Linq;
 
 namespace OpenBreed.Core.Components
 {
+    public interface ITimerComponentTemplate : IComponentTemplate
+    {
+    }
+
+
     public class TimerData
     {
         #region Public Constructors
@@ -29,10 +34,15 @@ namespace OpenBreed.Core.Components
     {
         #region Public Constructors
 
-        public TimerComponent(TimerComponentBuilder builder)
+        public TimerComponent()
         {
-            Items = builder.Items.ToList();
+            Items = new List<TimerData>();
         }
+
+        //public TimerComponent(TimerComponentBuilder builder)
+        //{
+        //    Items = builder.Items.ToList();
+        //}
 
         #endregion Public Constructors
 
@@ -41,5 +51,18 @@ namespace OpenBreed.Core.Components
         public List<TimerData> Items { get; }
 
         #endregion Public Properties
+    }
+
+    public sealed class TimerComponentFactory : ComponentFactoryBase<ITimerComponentTemplate>
+    {
+        public TimerComponentFactory(ICore core) : base(core)
+        {
+
+        }
+
+        protected override IEntityComponent Create(ITimerComponentTemplate template)
+        {
+            return new TimerComponent();
+        }
     }
 }

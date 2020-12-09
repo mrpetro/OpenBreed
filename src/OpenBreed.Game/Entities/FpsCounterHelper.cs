@@ -3,7 +3,6 @@ using OpenBreed.Core.Commands;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Builders;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenTK;
 using OpenTK.Graphics;
@@ -25,12 +24,12 @@ namespace OpenBreed.Game.Entities
 
             fpsTextEntity.Add(PositionComponent.Create(new Vector2(0,0)));
 
-            var textBuilder = TextComponentBuilder.New(world.Core);
-            textBuilder.SetProperty("FontId", arial12.Id);
-            textBuilder.SetProperty("Offset", Vector2.Zero);
-            textBuilder.SetProperty("Color", Color4.White);
-            textBuilder.SetProperty("Text", "FPS: 0.0");
-            textBuilder.SetProperty("Order", 100.0f);
+            var textBuilder = TextComponentBuilderEx.New(world.Core);
+            textBuilder.SetFontById(arial12.Id);
+            textBuilder.SetOffset(Vector2.Zero);
+            textBuilder.SetColor(Color4.White);
+            textBuilder.SetText("FPS: 0.0");
+            textBuilder.SetOrder(100);
 
 
 

@@ -15,10 +15,7 @@ namespace OpenBreed.Core.Managers
     {
         #region Private Fields
 
-        private const string TEMPLATES_NAMESPACE = "Templates.Entities";
         private readonly IdMap<Entity> entities = new IdMap<Entity>();
-
-        private readonly Dictionary<string, Func<ICore, IComponentBuilder>> builders = new Dictionary<string, Func<ICore, IComponentBuilder>>();
 
         #endregion Private Fields
 
@@ -65,26 +62,6 @@ namespace OpenBreed.Core.Managers
                 return null;
         }
 
-        public void RegisterComponentBuilder(string componentName, Func<ICore, IComponentBuilder> newAction)
-        {
-            builders.Add(componentName, newAction);
-        }
-
-        public Entity CreateFromTemplate(string templateName)
-        {
-            Core.Logging.Verbose($"Creating entity from '{templateName}' template.");
-
-            var entityTable = Core.Scripts.GetObject($"{TEMPLATES_NAMESPACE}.{templateName}") as LuaTable;
-
-            if (entityTable == null)
-                throw new Exception($"Entity template '{templateName}' not found.");
-
-            var components = new List<IEntityComponent>();
-            BuildEntityComponents(entityTable, ref components);
-
-            return Create(components);
-        }
-
         public Entity Create(List<IEntityComponent> initialComponents = null)
         {
             var newEntity = new Entity(Core, initialComponents);
@@ -101,44 +78,6 @@ namespace OpenBreed.Core.Managers
         #endregion Public Methods
 
         #region Private Methods
-
-        private void BuildEntityComponents(LuaTable entityTable, ref List<IEntityComponent> components)
-        {
-            foreach (KeyValuePair<object, object> pair in entityTable)
-            {
-                var cmpName = pair.Key as string;
-                if (cmpName == null)
-                    throw new Exception("Expected component name of 'string' type in entity table key.");
-
-                var cmpTable = pair.Value as LuaTable;
-                if (cmpTable == null)
-                    throw new Exception("Expected component value of 'LuaTable' type in entity table value.");
-
-                AppendComponent(cmpName, cmpTable, ref components);
-            }
-        }
-
-        private void AppendComponent(string componentName, LuaTable componentTable, ref List<IEntityComponent> components)
-        {
-            if (!builders.TryGetValue(componentName, out Func<ICore, IComponentBuilder> newAction))
-                throw new NotImplementedException($"Builder for entity component '{componentName}' not implemented.");
-
-            var builder = newAction.Invoke(this.Core);
-
-            foreach (KeyValuePair<object, object> pair in componentTable)
-            {
-                try
-                {
-                    builder.SetProperty(pair.Key, pair.Value);
-                }
-                catch (Exception ex)
-                {
-                    throw new InvalidOperationException($"Invalid component property with key '{pair.Key}'.", ex);
-                }
-            }
-
-            components.Add(builder.Build());
-        }
 
         private void OnEntityRemovedEventArgs(object sender, EntityRemovedEventArgs e)
         {

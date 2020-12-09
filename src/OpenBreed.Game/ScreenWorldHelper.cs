@@ -4,7 +4,6 @@ using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Builders;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Systems;
@@ -38,13 +37,12 @@ namespace OpenBreed.Game
             var viewport = core.Entities.Create();
             viewport.Tag = name;
 
-            var vpcBuilder = ViewportComponentBuilder.New(core);
-            vpcBuilder.SetProperty("Width", width);
-            vpcBuilder.SetProperty("Height", height);
-            vpcBuilder.SetProperty("DrawBorder", true);
-            vpcBuilder.SetProperty("DrawBackground", drawBackground);
-            vpcBuilder.SetProperty("Clipping", clipping);
-            vpcBuilder.SetProperty("BackgroundColor", Color4.Black);
+            var vpcBuilder = ViewportComponentBuilderEx.New(core);
+            vpcBuilder.SetSize(width, height);
+            vpcBuilder.SetDrawBorderFlag(true);
+            vpcBuilder.SetDrawBackgroundFlag(drawBackground);
+            vpcBuilder.SetClippingFlag(clipping);
+            vpcBuilder.SetBackgroundColor(Color4.Black);
 
             viewport.Add(vpcBuilder.Build());
             viewport.Add(PositionComponent.Create(x, y));

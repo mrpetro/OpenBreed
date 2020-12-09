@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<EntityTemplate>
+    <Components>
+        <Position x="0" y="0" />
+        <Animation>
+            <Speed>10</Speed>
+            <Loop>true</Loop>
+            <AnimName>Animations/Teleport/Entry</AnimName>
+            <Transition>None</Transition>
+        </Animation>
+		<Body>
+			<CofFactor>1.0</CofFactor>
+			<CorFactor>1.0</CorFactor>
+			<Type>Trigger</Type>
+			<Fixtures>
+				<Fixture>Fixtures/TeleportExit</Fixture>
+			</Fixtures>	
+		</Body>
+		<Sprite>
+			<AtlasName>Atlases/Sprites/World/Exit</AtlasName>
+			<ImageIndex>0</ImageIndex>
+			<Order>0</Order>
+		</Sprite>
+		<Text>
+			<Text>WorldExit</Text>
+			<Offset X="0" Y="32" />
+			<Color R="255" G="255" B="255" A="255" />
+			<FontName>Arial</FontName>
+			<FontSize>9</FontSize>
+			<Order>0</Order>
+		</Text>
+    </Components>
+</EntityTemplate>

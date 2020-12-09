@@ -66,14 +66,14 @@ namespace OpenBreed.Sandbox.Entities.Builders
 
             if (HasBody)
             {
-                var bodyComponentBuilder = BodyComponentBuilder.New(Core);
+                var bodyComponentBuilder = BodyComponentBuilderEx.New(Core);
 
                 var fixtureId = physics.Fixturs.GetByAlias("Fixtures/GridCell").Id;
 
-                bodyComponentBuilder.SetProperty("CofFactor", 1.0f);
-                bodyComponentBuilder.SetProperty("CorFactor", 1.0f);
-                bodyComponentBuilder.SetProperty("Type", "Static");
-                bodyComponentBuilder.SetProperty("Fixtures", new List<int> (new int[] { fixtureId }));
+                bodyComponentBuilder.SetCofFactor(1.0f);
+                bodyComponentBuilder.SetCorFactor(1.0f);
+                bodyComponentBuilder.SetType("Static");
+                bodyComponentBuilder.AddFixture(fixtureId);
 
                 entity.Add(bodyComponentBuilder.Build());
                 entity.Add(new CollisionComponent(ColliderTypes.StaticObstacle));
@@ -81,8 +81,8 @@ namespace OpenBreed.Sandbox.Entities.Builders
 
 
             var tileComponentBuilder = TileComponentBuilder.New(Core);
-            tileComponentBuilder.SetProperty("AtlasId", atlasId);
-            tileComponentBuilder.SetProperty("ImageId", tileId);
+            tileComponentBuilder.SetAtlasById(atlasId);
+            tileComponentBuilder.SetImageIndex(tileId);
 
             entity.Add(tileComponentBuilder.Build());
 

@@ -12,6 +12,7 @@ using OpenTK.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using OpenBreed.Core.Components;
 
 namespace OpenBreed.Core
 {
@@ -55,6 +56,8 @@ namespace OpenBreed.Core
         public abstract JobMan Jobs { get; }
 
         public abstract FsmMan StateMachines { get; }
+
+        public abstract EntityFactory EntityFactory { get; }
 
         public abstract PlayersMan Players { get; }
 

@@ -20,6 +20,9 @@ using OpenBreed.Core.Events;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Components;
 using OpenBreed.Sandbox.Entities.WorldGate;
+using OpenBreed.Core.Entities.Xml;
+using OpenBreed.Common.Tools;
+using OpenBreed.Core.Modules.Physics;
 
 namespace OpenBreed.Sandbox.Entities.Teleport
 {
@@ -71,7 +74,8 @@ namespace OpenBreed.Sandbox.Entities.Teleport
         {
             var core = world.Core;
 
-            var teleportEntry = core.Entities.CreateFromTemplate("TeleportEntry");
+            var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Teleport\TeleportEntry.xml");
+            var teleportEntry = world.Core.EntityFactory.Create(entityTemplate);
 
             teleportEntry.Tag = new TeleportPair { Id = pairId };
 
@@ -81,11 +85,30 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             return teleportEntry;
         }
 
+        //public static void RegisterCollisionPairs(ICore core)
+        //{
+        //    var collisionMan = core.GetModule<PhysicsModule>().Collisions;
+
+        //    collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.TeleportEntryTrigger, Actor2TriggerCallback);
+        //    //collisionMan.RegisterCollisionPair(ColliderTypes.WorldExitTrigger, ColliderTypes.ActorBody, Actor2TriggerCallback);
+        //}
+
+        //private static void Actor2TriggerCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
+        //{
+        //    if (colliderTypeA == ColliderTypes.WorldExitTrigger && colliderTypeB == ColliderTypes.ActorBody)
+        //        PerformEntityExit(entityB, entityA);
+        //    else if (colliderTypeA == ColliderTypes.ActorBody && colliderTypeB == ColliderTypes.WorldExitTrigger)
+        //        PerformEntityExit(entityA, entityB);
+        //}
+
+
         public static Entity AddTeleportExit(World world, int x, int y, int pairId)
         {
             var core = world.Core;
 
-            var teleportExit = core.Entities.CreateFromTemplate("TeleportExit");
+            var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Teleport\TeleportExit.xml");
+            var teleportExit = world.Core.EntityFactory.Create(entityTemplate);
+            //var teleportExit = core.Entities.CreateFromTemplate("TeleportExit");
 
             teleportExit.Tag = new TeleportPair { Id = pairId };
 

@@ -15,7 +15,6 @@ using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Physics.Systems;
 using OpenBreed.Core.Modules.Rendering;
-using OpenBreed.Core.Modules.Rendering.Builders;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Control.Systems;
@@ -39,6 +38,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
 using OpenBreed.Core.Modules.Physics.Shapes;
+using OpenBreed.Core.Components.Xml;
+using OpenBreed.Core.Modules.Rendering.Components.Xml;
+using OpenBreed.Core.Modules.Animation.Components.Xml;
+using OpenBreed.Core.Components;
+using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Core.Modules.Animation.Components;
+using OpenBreed.Core.Modules.Physics.Components;
 
 namespace OpenBreed.Sandbox
 {
@@ -88,6 +94,8 @@ namespace OpenBreed.Sandbox
 
             Jobs = new JobMan(this);
 
+            EntityFactory = new EntityFactory(this);
+
             Rendering = new OpenGLModule(this);
             Physics = new PhysicsModule(this);
             Sounds = new OpenALModule(this);
@@ -110,6 +118,8 @@ namespace OpenBreed.Sandbox
         public PhysicsModule Physics { get; }
 
         public override IAudioModule Sounds { get; }
+
+        public override EntityFactory EntityFactory { get; }
 
         public override AnimMan Animations { get; }
 
@@ -215,13 +225,14 @@ namespace OpenBreed.Sandbox
         {
             window.Title = $"Open Breed Sandbox (Version: {appVersion} Vsync: {window.VSync})";
 
+            RegisterXmlComponents();
+            RegisterComponentFactories();
+
             ExposeScriptingApi();
 
             RegisterSystems();
-            RegisterComponentBuilders();
             RegisterShapes();
             RegisterFixtures();
-            RegisterEntityTemplates();
             RegisterItems();
 
             Inputs.RegisterHandler(new WalkingControlHandler());
@@ -271,6 +282,7 @@ namespace OpenBreed.Sandbox
             ColliderTypes.Initialize(Physics.Collisions);
             ActorHelper.RegisterCollisionPairs(this);
             WorldGateHelper.RegisterCollisionPairs(this);
+            //TeleportHelper.RegisterCollisionPairs(this);
             ProjectileHelper.RegisterCollisionPairs(this);
 
 
@@ -298,6 +310,38 @@ namespace OpenBreed.Sandbox
             GameWorldHelper.Create(this);
 
             OnEngineInitialized();
+        }
+
+        private void RegisterXmlComponents()
+        {
+            XmlComponentsList.RegisterComponentType<XmlPositionComponent>();
+            XmlComponentsList.RegisterComponentType<XmlVelocityComponent>();
+            XmlComponentsList.RegisterComponentType<XmlThrustComponent>();
+            XmlComponentsList.RegisterComponentType<XmlSpriteComponent>();
+            XmlComponentsList.RegisterComponentType<XmlTextComponent>();
+            XmlComponentsList.RegisterComponentType<XmlAnimationComponent>();
+            XmlComponentsList.RegisterComponentType<XmlBodyComponent>();
+            XmlComponentsList.RegisterComponentType<XmlClassComponent>();
+            XmlComponentsList.RegisterComponentType<XmlAngularPositionComponent>();
+            XmlComponentsList.RegisterComponentType<XmlMotionComponent>();
+            XmlComponentsList.RegisterComponentType<XmlTimerComponent>();
+            XmlComponentsList.RegisterComponentType<XmlFsmComponent>();
+        }
+
+        private void RegisterComponentFactories()
+        {
+            EntityFactory.RegisterComponentFactory<XmlPositionComponent>(new PositionComponentFactory(this));
+            EntityFactory.RegisterComponentFactory<XmlVelocityComponent>(new VelocityComponentFactory(this));
+            EntityFactory.RegisterComponentFactory<XmlThrustComponent>(new ThrustComponentFactory(this));
+            EntityFactory.RegisterComponentFactory<XmlSpriteComponent>(new SpriteComponentFactory(this));
+            EntityFactory.RegisterComponentFactory<XmlTextComponent>(new TextComponentFactory(this));
+            EntityFactory.RegisterComponentFactory<XmlAnimationComponent>(new AnimationComponentFactory(this));
+            EntityFactory.RegisterComponentFactory<XmlBodyComponent>(new BodyComponentFactory(this));
+            EntityFactory.RegisterComponentFactory<XmlClassComponent>(new ClassComponentFactory(this));
+            EntityFactory.RegisterComponentFactory<XmlAngularPositionComponent>(new AngularPositionComponentFactory(this));
+            EntityFactory.RegisterComponentFactory<XmlMotionComponent>(new MotionComponentFactory(this));
+            EntityFactory.RegisterComponentFactory<XmlTimerComponent>(new TimerComponentFactory(this));
+            EntityFactory.RegisterComponentFactory<XmlFsmComponent>(new FsmComponentFactory(this));
         }
 
         private void ExposeScriptingApi()
@@ -376,24 +420,6 @@ namespace OpenBreed.Sandbox
             program.Run();
         }
 
-
-        private void RegisterComponentBuilders()
-        {
-            BodyComponentBuilder.Register(this);
-            AnimationComponentBuilder.Register(this);
-
-            Entities.RegisterComponentBuilder("AngularPositionComponent", AngularPositionComponentBuilder.New);
-            Entities.RegisterComponentBuilder("VelocityComponent", VelocityComponentBuilder.New);
-            Entities.RegisterComponentBuilder("ThrustComponent", ThrustComponentBuilder.New);
-            Entities.RegisterComponentBuilder("PositionComponent", PositionComponentBuilder.New);
-            Entities.RegisterComponentBuilder("MotionComponent", MotionComponentBuilder.New);
-            Entities.RegisterComponentBuilder("SpriteComponent", SpriteComponentBuilder.New);
-            Entities.RegisterComponentBuilder("TextComponent", TextComponentBuilder.New);
-            Entities.RegisterComponentBuilder("ClassComponent", ClassComponentBuilder.New);
-            Entities.RegisterComponentBuilder("FsmComponent", FsmComponentBuilder.New);
-            Entities.RegisterComponentBuilder("TimerComponent", TimerComponentBuilder.New);
-        }
-
         private void RegisterShapes()
         {
             Physics.Shapes.Register("Shapes/Box_0_0_16_16", new BoxShape(0, 0, 16, 16));
@@ -413,20 +439,6 @@ namespace OpenBreed.Sandbox
             Physics.Fixturs.Create("Fixtures/DoorHorizontal", "Static", Physics.Shapes.GetByTag("Shapes/Box_0_0_32_16"));
             Physics.Fixturs.Create("Fixtures/Arrow", "Dynamic", Physics.Shapes.GetByTag("Shapes/Box_0_0_32_32"));
             Physics.Fixturs.Create("Fixtures/Turret", "Static", Physics.Shapes.GetByTag("Shapes/Box_0_0_32_32"));
-        }
-
-        private void RegisterEntityTemplates()
-        {
-            Scripts.RunFile(@"Entities\Actor\Arrow.lua");
-            Scripts.RunFile(@"Entities\CrazyMover\CrazyMover.lua");
-            Scripts.RunFile(@"Entities\Turret\Turret.lua");
-            Scripts.RunFile(@"Entities\Door\DoorHorizontal.lua");
-            Scripts.RunFile(@"Entities\Door\DoorVertical.lua");
-            Scripts.RunFile(@"Entities\Projectile\Projectile.lua");
-            Scripts.RunFile(@"Entities\Teleport\TeleportEntry.lua");
-            Scripts.RunFile(@"Entities\Teleport\TeleportExit.lua");
-            Scripts.RunFile(@"Entities\WorldGate\WorldGateEntry.lua");
-            Scripts.RunFile(@"Entities\WorldGate\WorldGateExit.lua");
         }
 
         private void RegisterItems()

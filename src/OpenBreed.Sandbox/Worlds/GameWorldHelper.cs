@@ -96,11 +96,11 @@ namespace OpenBreed.Sandbox.Worlds
             var playerCamera = cameraBuilder.Build();
             playerCamera.Tag = "PlayerCamera";
 
-            var animCmpBuilder = AnimationComponentBuilder.NewAnimation(core);
-            animCmpBuilder.AddAnimator().SetSpeed(10.0f)
-                                        .SetLoop(false)
-                                        .SetAnimId(-1)
-                                        .SetTransition(FrameTransition.LinearInterpolation);
+            var animCmpBuilder = AnimationComponentBuilderEx.New(core);
+            animCmpBuilder.SetSpeed(10.0f);
+            animCmpBuilder.SetLoop(false);
+            animCmpBuilder.SetById(-1);
+            animCmpBuilder.SetTransition(FrameTransition.LinearInterpolation);
 
             playerCamera.Add(animCmpBuilder.Build());
 
@@ -108,11 +108,11 @@ namespace OpenBreed.Sandbox.Worlds
             var gameCamera = cameraBuilder.Build();
             gameCamera.Tag = "HubCamera";
 
-            animCmpBuilder = AnimationComponentBuilder.NewAnimation(core);
-            animCmpBuilder.AddAnimator().SetSpeed(10.0f)
-                                        .SetLoop(false)
-                                        .SetAnimId(-1)
-                                        .SetTransition(FrameTransition.LinearInterpolation);
+            animCmpBuilder = AnimationComponentBuilderEx.New(core);
+            animCmpBuilder.SetSpeed(10.0f);
+            animCmpBuilder.SetLoop(false);
+            animCmpBuilder.SetById(-1);
+            animCmpBuilder.SetTransition(FrameTransition.LinearInterpolation);
 
             gameCamera.Add(animCmpBuilder.Build());
 
@@ -144,10 +144,10 @@ namespace OpenBreed.Sandbox.Worlds
 
             var cursorEntity = core.Entities.Create();
         
-            var spriteBuilder = SpriteComponentBuilder.New(core);
-            spriteBuilder.SetProperty("AtlasId", "Atlases/Sprites/Cursors");
-            spriteBuilder.SetProperty("Order", 100.0);
-            spriteBuilder.SetProperty("ImageId", 0);
+            var spriteBuilder = SpriteComponentBuilderEx.New(core);
+            spriteBuilder.SetAtlasByName("Atlases/Sprites/Cursors");
+            spriteBuilder.SetOrder(100);
+            spriteBuilder.SetImageId(0);
             cursorEntity.Tag = "MouseCursor";
             cursorEntity.Add(spriteBuilder.Build());
             cursorEntity.Add(PositionComponent.Create(0, 0));

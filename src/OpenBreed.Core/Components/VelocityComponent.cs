@@ -4,6 +4,16 @@ using System;
 
 namespace OpenBreed.Core.Components
 {
+    public interface IVelocityComponentTemplate : IComponentTemplate
+    {
+        #region Public Properties
+
+        float X { get; }
+        float Y { get; }
+
+        #endregion Public Properties
+    }
+
     /// <summary>
     /// Velocity entity component class that can be used to store entity current velocity information
     /// Example: Actor is going somewhere with specific velocity vector
@@ -55,5 +65,25 @@ namespace OpenBreed.Core.Components
         }
 
         #endregion Public Methods
+    }
+
+    public sealed class VelocityComponentFactory : ComponentFactoryBase<IVelocityComponentTemplate>
+    {
+        #region Public Constructors
+
+        public VelocityComponentFactory(ICore core) : base(core)
+        {
+        }
+
+        #endregion Public Constructors
+
+        #region Protected Methods
+
+        protected override IEntityComponent Create(IVelocityComponentTemplate template)
+        {
+            return VelocityComponent.Create(template.X, template.Y);
+        }
+
+        #endregion Protected Methods
     }
 }

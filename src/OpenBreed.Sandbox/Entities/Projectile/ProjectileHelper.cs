@@ -1,7 +1,9 @@
-﻿using OpenBreed.Core;
+﻿using OpenBreed.Common.Tools;
+using OpenBreed.Core;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Entities.Xml;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Physics.Components;
@@ -76,9 +78,16 @@ namespace OpenBreed.Sandbox.Entities.Projectile
             DynamicHelper.ResolveVsStatic(entityA, entityB, projection);
         }
 
+        static IEntityTemplate projectileTemplate;
+
         public static void AddProjectile(ICore core, World world, float x, float y, float vx, float vy)
         {
-            var projectile = core.Entities.CreateFromTemplate("Projectile");
+            if(projectileTemplate == null)
+                projectileTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Projectile\Projectile.xml");
+
+            var projectile = core.EntityFactory.Create(projectileTemplate);
+            //var projectile = core.Entities.CreateFromTemplate("Projectile");
+
             //projectile.Add(new FsmComponent());
 
             projectile.Get<PositionComponent>().Value = new Vector2(x, y);

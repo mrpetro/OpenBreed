@@ -56,4 +56,24 @@ namespace OpenBreed.Core.Components
 
         #endregion Public Methods
     }
+
+
+    public interface IThrustComponentTemplate : IComponentTemplate
+    {
+        float X { get; }
+        float Y { get; }
+    }
+
+    public sealed class ThrustComponentFactory : ComponentFactoryBase<IThrustComponentTemplate>
+    {
+        public ThrustComponentFactory(ICore core) : base(core)
+        {
+
+        }
+
+        protected override IEntityComponent Create(IThrustComponentTemplate template)
+        {
+            return ThrustComponent.Create(template.X, template.Y);
+        }
+    }
 }

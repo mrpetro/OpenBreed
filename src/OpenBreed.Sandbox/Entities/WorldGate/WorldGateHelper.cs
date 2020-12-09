@@ -22,6 +22,8 @@ using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Modules.Physics;
+using OpenBreed.Common.Tools;
+using OpenBreed.Core.Entities.Xml;
 
 namespace OpenBreed.Sandbox.Entities.WorldGate
 {
@@ -46,7 +48,9 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
         {
             var core = world.Core;
 
-            var teleportEntity = core.Entities.CreateFromTemplate("WorldGateExit");
+            var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\WorldGate\WorldGateExit.xml");
+            var teleportEntity = world.Core.EntityFactory.Create(entityTemplate);
+
 
             teleportEntity.Tag = (worldName, entryId);
 
@@ -116,7 +120,10 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
         public static Entity AddWorldEntry(World world, int x, int y, int entryId)
         {
             var core = world.Core;
-            var teleportEntity = core.Entities.CreateFromTemplate("WorldGateEntry");
+
+            var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\WorldGate\WorldGateEntry.xml");
+            var teleportEntity = world.Core.EntityFactory.Create(entityTemplate);
+
             teleportEntity.Tag = new WorldGatePair() { Id = entryId };
             teleportEntity.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
             world.Core.Commands.Post(new AddEntityCommand(world.Id, teleportEntity.Id));

@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Entities.Builders;
-using OpenBreed.Core.Modules.Rendering.Builders;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenTK;
 
@@ -33,9 +32,8 @@ namespace OpenBreed.Core.Modules.Rendering.Entities.Builders
             var entity = Core.Entities.Create();
             entity.Add(PositionComponent.Create(position));
 
-            var ccBuilder = CameraComponentBuilder.New(Core);
-            ccBuilder.SetProperty("Width", width);
-            ccBuilder.SetProperty("Height", height);
+            var ccBuilder = CameraComponentBuilderEx.New(Core);
+            ccBuilder.SetSize(width, height);
             entity.Add(ccBuilder.Build());
             entity.Add(new PauseImmuneComponent());
             return entity;

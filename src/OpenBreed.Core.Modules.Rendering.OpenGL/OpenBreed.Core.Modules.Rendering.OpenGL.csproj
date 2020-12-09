@@ -68,11 +68,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builders\CameraComponentBuilder.cs" />
-    <Compile Include="Builders\TileComponentBuilder.cs" />
-    <Compile Include="Builders\SpriteComponentBuilder.cs" />
-    <Compile Include="Builders\TextComponentBuilder.cs" />
-    <Compile Include="Builders\ViewportComponentBuilder.cs" />
     <Compile Include="Builders\TextSystemBuilder.cs" />
     <Compile Include="Builders\SpriteSystemBuilder.cs" />
     <Compile Include="Builders\TileSystemBuilder.cs" />
@@ -82,6 +77,8 @@
     <Compile Include="Components\SpriteComponent.cs" />
     <Compile Include="Components\TextPresentationComponent.cs" />
     <Compile Include="Components\TextComponent.cs" />
+    <Compile Include="Components\Xml\XmlTextComponent.cs" />
+    <Compile Include="Components\Xml\XmlSpriteComponent.cs" />
     <Compile Include="Events\ViewportClickedEventArgs.cs" />
     <Compile Include="Events\ViewportResizedEventArgs.cs" />
     <Compile Include="Events\ClientResizedEventArgs.cs" />

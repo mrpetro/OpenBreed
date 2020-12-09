@@ -1,7 +1,9 @@
-﻿using OpenBreed.Core;
+﻿using OpenBreed.Common.Tools;
+using OpenBreed.Core;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Entities.Xml;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Physics.Components;
@@ -109,8 +111,9 @@ namespace OpenBreed.Sandbox.Entities.Door
         {
             var core = world.Core;
 
-            //var door = core.Entities.Create();
-            var door = core.Entities.CreateFromTemplate("DoorVertical");
+            var doorVerticalTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Door\DoorVertical.xml");
+            var door = core.EntityFactory.Create(doorVerticalTemplate);
+
             door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
             door.Add(new CollisionComponent());
 
@@ -121,7 +124,9 @@ namespace OpenBreed.Sandbox.Entities.Door
         {
             var core = world.Core;
 
-            var door = core.Entities.CreateFromTemplate("DoorHorizontal");
+            var doorHorizontalTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Door\DoorHorizontal.xml");
+            var door = core.EntityFactory.Create(doorHorizontalTemplate);
+
             door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
             door.Add(new CollisionComponent());
 

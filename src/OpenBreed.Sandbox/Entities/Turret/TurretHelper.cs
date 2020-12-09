@@ -1,6 +1,8 @@
-﻿using OpenBreed.Core;
+﻿using OpenBreed.Common.Tools;
+using OpenBreed.Core;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Entities.Xml;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Rendering.Commands;
 using OpenBreed.Sandbox.Entities.Actor.States.Rotation;
@@ -74,7 +76,9 @@ namespace OpenBreed.Sandbox.Entities.Turret
 
         public static Entity Create(ICore core, Vector2 pos)
         {
-            var entity = core.Entities.CreateFromTemplate("Turret");
+            var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Turret\Turret.xml");
+            var entity = core.EntityFactory.Create(entityTemplate);
+
             entity.Get<PositionComponent>().Value = pos;
             entity.Add(new CollisionComponent(ColliderTypes.StaticObstacle));
             //entity.Subscribe<CollisionEventArgs>(OnCollision);

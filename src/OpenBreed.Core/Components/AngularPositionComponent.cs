@@ -4,6 +4,11 @@ using System;
 
 namespace OpenBreed.Core.Components
 {
+    public interface IAngularPositionComponentTemplate : IComponentTemplate
+    {
+        float Value { get; }
+    }
+
     /// <summary>
     /// Direction entity component class that can be used to store entity current direction information
     /// Example: Actor is facing particular direction when standing
@@ -16,9 +21,14 @@ namespace OpenBreed.Core.Components
         /// Constructor with passed initial direction value
         /// </summary>
         /// <param name="value">Initial value vector</param>
-        internal AngularPositionComponent(AngularPositionComponentBuilder builder)
+        //internal AngularPositionComponent(AngularPositionComponentBuilder builder)
+        //{
+        //    Value = builder.Value;
+        //}
+
+        internal AngularPositionComponent(float value)
         {
-            Value = builder.Value;
+            Value = value;
         }
 
         #endregion Internal Constructors
@@ -48,10 +58,19 @@ namespace OpenBreed.Core.Components
         }
 
         #endregion Public Methods
+    }
 
-        /// <summary>
-        /// Direction value
-        /// </summary>
-        //public Vector2 Value { get; set; }
+
+    public sealed class AngularPositionComponentFactory : ComponentFactoryBase<IAngularPositionComponentTemplate>
+    {
+        public AngularPositionComponentFactory(ICore core) : base(core)
+        {
+
+        }
+
+        protected override IEntityComponent Create(IAngularPositionComponentTemplate template)
+        {
+            return new AngularPositionComponent(template.Value);
+        }
     }
 }

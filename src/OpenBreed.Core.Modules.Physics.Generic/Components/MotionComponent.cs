@@ -1,11 +1,12 @@
 ﻿using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
 using OpenTK;
-using System;
-using System.Linq;
 
 namespace OpenBreed.Core.Modules.Physics.Components
 {
+    public interface IMotionComponentTemplate : IComponentTemplate
+    {
+    }
+
     public class MotionComponent : IEntityComponent
     {
         #region Private Fields
@@ -41,5 +42,26 @@ namespace OpenBreed.Core.Modules.Physics.Components
         public float Acceleration { get { return speedPercent * MAX_ACCELERATION; } }
 
         #endregion Public Properties
+    }
+
+
+    public sealed class MotionComponentFactory : ComponentFactoryBase<IMotionComponentTemplate>
+    {
+        #region Public Constructors
+
+        public MotionComponentFactory(ICore core) : base(core)
+        {
+        }
+
+        #endregion Public Constructors
+
+        #region Protected Methods
+
+        protected override IEntityComponent Create(IMotionComponentTemplate template)
+        {
+            return new MotionComponent();
+        }
+
+        #endregion Protected Methods
     }
 }

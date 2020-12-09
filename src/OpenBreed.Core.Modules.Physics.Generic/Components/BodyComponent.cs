@@ -6,6 +6,18 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Core.Modules.Physics.Components
 {
+    public interface IBodyComponentTemplate : IComponentTemplate
+    {
+        #region Public Properties
+
+        float CofFactor { get; set; }
+        float CorFactor { get; set; }
+        string Type { get; set; }
+        string[] Fixtures { get; set; }
+
+        #endregion Public Properties
+    }
+
     /// <summary>
     /// Physical Body data
     /// </summary>
@@ -13,7 +25,7 @@ namespace OpenBreed.Core.Modules.Physics.Components
     {
         #region Public Constructors
 
-        public BodyComponent(BodyComponentBuilder builder)
+        public BodyComponent(BodyComponentBuilderEx builder)
         {
             CofFactor = builder.CofFactor;
             CorFactor = builder.CorFactor;
@@ -68,5 +80,102 @@ namespace OpenBreed.Core.Modules.Physics.Components
         public Vector2 OldPosition { get; set; }
 
         #endregion Public Properties
+    }
+
+    public sealed class BodyComponentFactory : ComponentFactoryBase<IBodyComponentTemplate>
+    {
+        #region Public Constructors
+
+        public BodyComponentFactory(ICore core) : base(core)
+        {
+        }
+
+        #endregion Public Constructors
+
+        #region Protected Methods
+
+        protected override IEntityComponent Create(IBodyComponentTemplate template)
+        {
+            var builder = BodyComponentBuilderEx.New(core);
+            builder.SetCofFactor(template.CofFactor);
+            builder.SetCorFactor(template.CorFactor);
+            builder.SetType(template.Type);
+
+            foreach (var fixtureName in template.Fixtures)
+                builder.AddFixtureByName(fixtureName);
+
+            return builder.Build();
+        }
+
+        #endregion Protected Methods
+    }
+
+    public class BodyComponentBuilderEx
+    {
+        #region Internal Fields
+
+        internal float CofFactor;
+        internal float CorFactor;
+        internal string Type;
+        internal readonly List<int> Fixtures = new List<int>();
+
+        #endregion Internal Fields
+
+        #region Private Fields
+
+        private ICore core;
+
+        #endregion Private Fields
+
+        #region Private Constructors
+
+        private BodyComponentBuilderEx(ICore core)
+        {
+            this.core = core;
+        }
+
+        #endregion Private Constructors
+
+        #region Public Methods
+
+        public static BodyComponentBuilderEx New(ICore core)
+        {
+            return new BodyComponentBuilderEx(core);
+        }
+
+        public BodyComponent Build()
+        {
+            return new BodyComponent(this);
+        }
+
+        public void SetCofFactor(float cofFactor)
+        {
+            CofFactor = cofFactor;
+        }
+
+        public void SetCorFactor(float corFactor)
+        {
+            CorFactor = corFactor;
+        }
+
+        public void AddFixture(int fixtureId)
+        {
+            Fixtures.Add(fixtureId);
+        }
+
+        public void AddFixtureByName(string fixtureName)
+        {
+            var fixture = core.GetModule<PhysicsModule>().Fixturs.GetByAlias(fixtureName);
+
+            if (fixture != null)
+                Fixtures.Add(fixture.Id);
+        }
+
+        public void SetType(string type)
+        {
+            Type = type;
+        }
+
+        #endregion Public Methods
     }
 }

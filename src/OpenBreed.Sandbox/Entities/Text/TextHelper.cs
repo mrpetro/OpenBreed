@@ -2,7 +2,6 @@
 using OpenBreed.Core.Builders;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Rendering.Builders;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenTK;
 using OpenTK.Graphics;

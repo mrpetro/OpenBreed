@@ -72,8 +72,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builders\MotionComponentBuilder.cs" />
-    <Compile Include="Builders\BodyComponentBuilder.cs" />
     <Compile Include="Builders\MovementSystemBuilder.cs" />
     <Compile Include="Builders\PhysicsSystemBuilder.cs" />
     <Compile Include="Components\BodyComponent.cs" />
@@ -81,6 +79,8 @@
     <Compile Include="Components\Fixture.cs" />
     <Compile Include="Components\Material.cs" />
     <Compile Include="Components\MotionComponent.cs" />
+    <Compile Include="Components\Xml\XmlMotionComponent.cs" />
+    <Compile Include="Components\Xml\XmlBodyComponent.cs" />
     <Compile Include="Events\BodyOnEventArgs.cs" />
     <Compile Include="Events\BodyOffEventArgs.cs" />
     <Compile Include="Events\CollisionEventArgs.cs" />

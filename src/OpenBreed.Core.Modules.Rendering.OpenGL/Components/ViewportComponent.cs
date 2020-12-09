@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Core.Components;
-using OpenBreed.Core.Modules.Rendering.Builders;
 using OpenTK;
 using OpenTK.Graphics;
+using System;
 
 namespace OpenBreed.Core.Modules.Rendering.Components
 {
@@ -30,7 +30,7 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         /// Constructor for builder
         /// </summary>
         /// <param name="builder"></param>
-        internal ViewportComponent(ViewportComponentBuilder builder)
+        internal ViewportComponent(ViewportComponentBuilderEx builder)
         {
             Width = builder.Width;
             Height = builder.Height;
@@ -96,5 +96,75 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         public int CameraEntityId { get; set; }
 
         #endregion Public Properties
+    }
+
+    public class ViewportComponentBuilderEx
+    {
+        #region Private Fields
+
+        private ICore core;
+
+        #endregion Private Fields
+
+        #region Private Constructors
+
+        private ViewportComponentBuilderEx(ICore core)
+        {
+            this.core = core;
+        }
+
+        #endregion Private Constructors
+
+        #region Internal Properties
+
+        internal float Width;
+        internal float Height;
+        internal int CameraEntityId = -1;
+        internal bool DrawBorder = false;
+        internal bool DrawBackground = false;
+        internal Color4 BackgroundColor;
+        internal bool Clipping = false;
+
+        #endregion Internal Properties
+
+        #region Public Methods
+
+        public static ViewportComponentBuilderEx New(ICore core)
+        {
+            return new ViewportComponentBuilderEx(core);
+        }
+
+        public ViewportComponent Build()
+        {
+            return new ViewportComponent(this);
+        }
+
+        public void SetSize(float width, float height)
+        {
+            Width = width;
+            Height = height;
+        }
+
+        public void SetBackgroundColor(Color4 value)
+        {
+            BackgroundColor = value;
+        }
+
+        public void SetDrawBorderFlag(bool value)
+        {
+            DrawBorder = value;
+        }
+
+        public void SetDrawBackgroundFlag(bool value)
+        {
+            DrawBackground = value;
+        }
+
+        public void SetClippingFlag(bool value)
+        {
+            Clipping = value;
+        }
+
+        #endregion Public Methods
     }
 }

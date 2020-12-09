@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Components;
 using OpenBreed.Core.Modules.Physics.Builders;
+using System;
 
 namespace OpenBreed.Core.Modules.Rendering.Components
 {
@@ -40,4 +41,58 @@ namespace OpenBreed.Core.Modules.Rendering.Components
 
         #endregion Public Properties
     }
+
+    public class TileComponentBuilder
+    {
+        #region Private Fields
+
+        internal int AtlasId;
+        internal int ImageId;
+        internal float Order;
+
+        #endregion Private Fields
+
+        #region Private Constructors
+
+        private readonly ICore core;
+
+        private TileComponentBuilder(ICore core)
+        {
+            this.core = core;
+        }
+
+        #endregion Private Constructors
+
+        #region Public Methods
+
+        public static TileComponentBuilder New(ICore core)
+        {
+            return new TileComponentBuilder(core);
+        }
+
+        public TileComponent Build()
+        {
+            return new TileComponent(this);
+        }
+
+        public void SetAtlasById(int atlasId)
+        {
+            AtlasId = atlasId;
+        }
+
+        public void SetAtlasByName(string atlasName)
+        {
+            var atlas = core.Rendering.Tiles.GetByAlias(atlasName);
+
+            SetAtlasById(atlas.Id);
+        }
+
+        public void SetImageIndex(int imageIndex)
+        {
+            ImageId = imageIndex;
+        }
+
+        #endregion Public Methods
+    }
+
 }

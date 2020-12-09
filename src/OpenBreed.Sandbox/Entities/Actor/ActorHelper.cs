@@ -1,7 +1,9 @@
-﻿using OpenBreed.Core;
+﻿using OpenBreed.Common.Tools;
+using OpenBreed.Core;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Entities.Xml;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
@@ -121,7 +123,11 @@ namespace OpenBreed.Sandbox.Entities.Actor
         {
             //var actor = core.Entities.Create();
 
-            var actor = core.Entities.CreateFromTemplate("Arrow");
+            var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Actor\Arrow.xml");
+            var actor = core.EntityFactory.Create(entityTemplate);
+            //var actor = core.Entities.CreateFromTemplate("Arrow");
+
+
             actor.Add(new AngularVelocityComponent(0));
             actor.Add(new AngularThrustComponent(0));
             actor.Add(new CollisionComponent(ColliderTypes.ActorBody));

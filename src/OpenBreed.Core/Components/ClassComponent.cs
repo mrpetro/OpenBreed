@@ -2,14 +2,19 @@
 
 namespace OpenBreed.Core.Components
 {
+    public interface IClassComponentTemplate : IComponentTemplate
+    {
+        string Name { get; }
+    }
+
     public class ClassComponent : IEntityComponent
     {
         #region Public Constructors
 
-        public ClassComponent(ClassComponentBuilder builder)
-        {
-            Name = builder.Name;
-        }
+        //public ClassComponent(ClassComponentBuilder builder)
+        //{
+        //    Name = builder.Name;
+        //}
 
         public ClassComponent(string name)
         {
@@ -23,5 +28,19 @@ namespace OpenBreed.Core.Components
         public string Name { get; }
 
         #endregion Public Properties
+    }
+
+
+    public sealed class ClassComponentFactory : ComponentFactoryBase<IClassComponentTemplate>
+    {
+        public ClassComponentFactory(ICore core) : base(core)
+        {
+
+        }
+
+        protected override IEntityComponent Create(IClassComponentTemplate template)
+        {
+            return new ClassComponent(template.Name);
+        }
     }
 }
