@@ -10,13 +10,13 @@ namespace OpenBreed.Core
         private Action action;
 
         private Func<object, TEventArgs, bool> triggerFunc;
-        private WorldMan worldMan;
+        private IWorldMan worldMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public WorldJob(WorldMan worldMan, Func<object, TEventArgs, bool> triggerFunc, Action action)
+        public WorldJob(IWorldMan worldMan, Func<object, TEventArgs, bool> triggerFunc, Action action)
         {
             this.worldMan = worldMan;
             this.triggerFunc = triggerFunc;

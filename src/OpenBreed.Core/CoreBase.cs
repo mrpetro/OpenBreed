@@ -28,13 +28,13 @@ namespace OpenBreed.Core
 
         protected CoreBase(IManagerCollection manCollection)
         {
+            this.manCollection = manCollection;
             manCollection.AddSingleton<ICore>(this);
 
             Commands = manCollection.GetManager<ICommandsMan>();
-            Events = new EventsMan(this);
+            Events = manCollection.GetManager<IEventsMan>();
             Entities = manCollection.GetManager<IEntityMan>();
-            Worlds = new WorldMan(this);
-            this.manCollection = manCollection;
+            Worlds = manCollection.GetManager<IWorldMan>();
         }
 
         #endregion Protected Constructors
@@ -43,8 +43,8 @@ namespace OpenBreed.Core
 
         public IEntityMan Entities { get; }
         public ICommandsMan Commands { get; }
-        public EventsMan Events { get; }
-        public WorldMan Worlds { get; }
+        public IEventsMan Events { get; }
+        public IWorldMan Worlds { get; }
 
         public abstract Rectangle ClientRectangle { get; }
 

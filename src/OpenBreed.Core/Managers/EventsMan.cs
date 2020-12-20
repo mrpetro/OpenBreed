@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace OpenBreed.Core.Managers
 {
-    public class EventsMan
+    public class EventsMan : IEventsMan
     {
         #region Private Fields
 

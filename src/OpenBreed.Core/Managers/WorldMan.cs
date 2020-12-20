@@ -13,7 +13,7 @@ namespace OpenBreed.Core.Managers
     /// <summary>
     /// Manager responsible for creating, removing and updating core worlds
     /// </summary>
-    public class WorldMan
+    public class WorldMan : IWorldMan
     {
         #region Private Fields
 
@@ -161,7 +161,7 @@ namespace OpenBreed.Core.Managers
 
         #region Internal Methods
 
-        internal void RegisterWorld(World newWorld)
+        public void RegisterWorld(World newWorld)
         {
             newWorld.Id = worlds.Add(newWorld);
             namesToIds.Add(newWorld.Name, newWorld.Id);

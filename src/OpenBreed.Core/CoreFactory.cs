@@ -20,6 +20,10 @@ namespace OpenBreed.Core
                                                                               manCollection.GetManager<ILogger>()));
             manCollection.AddSingleton<IEntityMan>(() => new EntityMan(manCollection.GetManager<ICore>(),
                                                                           manCollection.GetManager<ICommandsMan>()));
+
+            manCollection.AddSingleton<IEventsMan>(() => new EventsMan(manCollection.GetManager<ICore>()));
+
+            manCollection.AddSingleton<IWorldMan>(() => new WorldMan(manCollection.GetManager<ICore>()));
         }
 
 

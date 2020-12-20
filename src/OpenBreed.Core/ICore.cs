@@ -78,7 +78,7 @@ namespace OpenBreed.Core
         /// <summary>
         /// Worlds manager
         /// </summary>
-        WorldMan Worlds { get; }
+        IWorldMan Worlds { get; }
 
         /// <summary>
         /// Commands manager
@@ -88,7 +88,7 @@ namespace OpenBreed.Core
         /// <summary>
         /// Events manager
         /// </summary>
-        EventsMan Events { get; }
+        IEventsMan Events { get; }
 
         /// <summary>
         /// Scripts manager
