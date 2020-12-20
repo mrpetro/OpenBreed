@@ -14,15 +14,17 @@ namespace OpenBreed.Database.Xml
         private const string DB_CURRENT_FOLDER_PATH = "Db.Current.FolderPath";
         private const string DB_CURRENT_FILE_NAME = "Db.Current.FileName";
 
-        private readonly VariableMan variables;
+        private readonly IVariableMan variables;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public XmlDatabaseMan(VariableMan variableMan)
+        public XmlDatabaseMan(IVariableMan variableMan, string dbFilePath)
         {
             this.variables = variableMan;
+
+            Open(dbFilePath);
         }
 
         #endregion Public Constructors

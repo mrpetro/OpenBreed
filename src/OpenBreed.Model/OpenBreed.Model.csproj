@@ -47,6 +47,8 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Actions\ActionSetModel.cs" />
+    <Compile Include="Anims\AnimBuilder.cs" />
+    <Compile Include="Anims\AnimModel.cs" />
     <Compile Include="BinaryModel.cs" />
     <Compile Include="EntityTemplates\EntityTemplateBuilder.cs" />
     <Compile Include="EntityTemplates\EntityTemplateModel.cs" />

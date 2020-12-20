@@ -13,14 +13,14 @@ namespace OpenBreed.Common.Data
 
         private readonly IUnitOfWork unitOfWork;
         private readonly ILogger logger;
-        private readonly VariableMan variables;
+        private readonly IVariableMan variables;
         private Dictionary<string, object> _models = new Dictionary<string, object>();
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DataProvider(IUnitOfWork unitOfWork, ILogger logger, VariableMan variables)
+        public DataProvider(IUnitOfWork unitOfWork, ILogger logger, IVariableMan variables)
         {
             this.unitOfWork = unitOfWork;
             this.logger = logger;
