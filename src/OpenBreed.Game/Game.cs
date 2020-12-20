@@ -35,7 +35,7 @@ namespace OpenBreed.Game
         private readonly IDatabase database;
         private readonly IUnitOfWork unitOfWork;
         private readonly LogConsolePrinter logConsolePrinter;
-        private readonly VariableMan variables;
+        private readonly IVariableMan variables;
         private readonly DataProvider dataProvider;
         #endregion Private Fields
 
@@ -43,11 +43,12 @@ namespace OpenBreed.Game
 
         internal VideoSystemsFactory VideoSystemsFactory { get; }
 
-        public Game(IDatabase database, VariableMan variables, ILogger logger, ICoreModulesFactory modulesFactory)
+        public Game(IManagerCollection manCollection, ICoreModulesFactory modulesFactory) : 
+            base(manCollection)
         {
-            this.database = database;
-            this.variables = variables;
-            Logging = logger;
+            this.database = manCollection.GetManager<IDatabase>();
+            this.variables = manCollection.GetManager<IVariableMan>();
+            Logging = manCollection.GetManager<ILogger>();
             logConsolePrinter = new LogConsolePrinter(Logging);
             logConsolePrinter.StartPrinting();
 
@@ -149,7 +150,6 @@ namespace OpenBreed.Game
             RegisterComponentFactories();
 
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"D:\Projects\DB\Templates\Logo1.xml");
-            entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"D:\Projects\DB\Templates\CrazyMover.xml");
 
             var entity = EntityFactory.Create(entityTemplate);
 
@@ -158,7 +158,10 @@ namespace OpenBreed.Game
             GameWorldHelper.Create(this);
 
             var entryScript = dataProvider.Scripts.GetScript("Scripts.Entry.lua");
-            var templateScript = dataProvider.EntityTemplates.GetEntityTemplate("EntityTemplates.Logo1.lua");
+
+
+
+            //var templateScript = dataProvider.EntityTemplates.GetEntityTemplate("EntityTemplates.Logo1.lua");
 
             
             Scripts.RunString(entryScript.Script);

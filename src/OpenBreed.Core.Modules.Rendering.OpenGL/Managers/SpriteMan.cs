@@ -3,6 +3,7 @@ using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Helpers.Builders;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace OpenBreed.Core.Modules.Rendering.Managers
 {
@@ -11,7 +12,8 @@ namespace OpenBreed.Core.Modules.Rendering.Managers
         #region Private Fields
 
         private readonly List<ISpriteAtlas> items = new List<ISpriteAtlas>();
-        private readonly Dictionary<string, ISpriteAtlas> aliases = new Dictionary<string, ISpriteAtlas>();
+        private readonly Dictionary<string, ISpriteAtlas> names = new Dictionary<string, ISpriteAtlas>();
+        private ISpriteAtlas MissingSpriteAtlas;
 
         #endregion Private Fields
 
@@ -19,7 +21,11 @@ namespace OpenBreed.Core.Modules.Rendering.Managers
 
         internal SpriteMan(OpenGLModule module)
         {
+            Debug.Assert(module != null, $"Argument '{nameof(module)}' must be non-null.");
+
             Module = module ?? throw new ArgumentNullException(nameof(module));
+
+            //MissingSpriteAtlas = Create("Animations/Missing", 1.0f);
         }
 
         #endregion Internal Constructors
@@ -35,7 +41,7 @@ namespace OpenBreed.Core.Modules.Rendering.Managers
         public ISpriteAtlas Create(string alias, int textureId, int spriteWidth, int spriteHeight, int spriteColumns, int spriteRows, int offsetX = 0, int offsetY = 0)
         {
             ISpriteAtlas result;
-            if (aliases.TryGetValue(alias, out result))
+            if (names.TryGetValue(alias, out result))
                 return result;
 
             var saBuilder = new SpriteAtlasBuilder(this);
@@ -47,7 +53,7 @@ namespace OpenBreed.Core.Modules.Rendering.Managers
             saBuilder.BuildCoords(spriteRows, spriteColumns);
             result = saBuilder.Build();
             items.Add(result);
-            aliases.Add(alias, result);
+            names.Add(alias, result);
             return result;
         }
 
@@ -56,11 +62,15 @@ namespace OpenBreed.Core.Modules.Rendering.Managers
             return items[id];
         }
 
-        public ISpriteAtlas GetByAlias(string alias)
+        public ISpriteAtlas GetByName(string name)
         {
-            ISpriteAtlas result = null;
-            aliases.TryGetValue(alias, out result);
-            return result;
+            if (names.TryGetValue(name, out ISpriteAtlas result))
+                return result;
+
+            Module.Core.Logging.Error($"Unable to find animation with name '{name}'");
+
+            return MissingSpriteAtlas;
+
         }
 
         public void UnloadAll()

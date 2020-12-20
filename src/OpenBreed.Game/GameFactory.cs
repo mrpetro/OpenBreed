@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core;
+using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Xml;
 using System;
@@ -11,24 +12,19 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Game
 {
-    public class GameFactory
+    public class GameFactory : CoreFactory
     {
-        private readonly ILogger logger;
-        private readonly VariableMan variables;
-        private readonly XmlDatabaseMan databaseMan;
-
-
         public GameFactory()
         {
-            this.logger = new DefaultLogger();
-            this.variables = new VariableMan(logger);
-            this.databaseMan = new XmlDatabaseMan(variables);
+
+            manCollection.AddSingleton<IVariableMan>(() => new VariableMan(manCollection.GetManager<ILogger>()));
+
         }
 
         public ICore CreateGame(string gameDbFilePath)
         {
-            databaseMan.Open(gameDbFilePath);
-            return new Game(databaseMan, variables, logger, new GameModulesFactory());
+            manCollection.AddSingleton<IDatabase>(() => new XmlDatabaseMan(manCollection.GetManager<IVariableMan>(), gameDbFilePath));
+            return new Game(manCollection, new GameModulesFactory());
         }
     }
 }

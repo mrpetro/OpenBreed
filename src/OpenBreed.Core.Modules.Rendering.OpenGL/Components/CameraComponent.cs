@@ -22,7 +22,7 @@ namespace OpenBreed.Core.Modules.Rendering.Components
     {
         #region Internal Constructors
 
-        internal CameraComponent(CameraComponentBuilderEx builder)
+        internal CameraComponent(CameraComponentBuilder builder)
         {
             Width = builder.Width;
             Height = builder.Height;
@@ -30,13 +30,6 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         }
 
         #endregion Internal Constructors
-
-        //internal CameraComponent(CameraComponentBuilder builder)
-        //{
-        //    Width = builder.Width;
-        //    Height = builder.Height;
-        //    Brightness = builder.Brightness;
-        //}
 
         #region Public Properties
 
@@ -77,7 +70,7 @@ namespace OpenBreed.Core.Modules.Rendering.Components
 
         protected override IEntityComponent Create(ICameraComponentTemplate template)
         {
-            var builder = CameraComponentBuilderEx.New(core);
+            var builder = CameraComponentBuilder.New(core);
             builder.SetSize(template.Width, template.Height);
             builder.SetBrightness(template.Brightness);
             return builder.Build();
@@ -86,7 +79,7 @@ namespace OpenBreed.Core.Modules.Rendering.Components
         #endregion Protected Methods
     }
 
-    public class CameraComponentBuilderEx
+    public class CameraComponentBuilder
     {
         #region Internal Fields
 
@@ -104,7 +97,7 @@ namespace OpenBreed.Core.Modules.Rendering.Components
 
         #region Private Constructors
 
-        private CameraComponentBuilderEx(ICore core)
+        private CameraComponentBuilder(ICore core)
         {
             this.core = core;
         }
@@ -113,9 +106,9 @@ namespace OpenBreed.Core.Modules.Rendering.Components
 
         #region Public Methods
 
-        public static CameraComponentBuilderEx New(ICore core)
+        public static CameraComponentBuilder New(ICore core)
         {
-            return new CameraComponentBuilderEx(core);
+            return new CameraComponentBuilder(core);
         }
 
         public CameraComponent Build()

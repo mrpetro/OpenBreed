@@ -126,7 +126,7 @@ namespace OpenBreed.Core.Modules.Rendering.Components
 
         public void SetAtlasByName(string atlasName)
         {
-            AtlasId = core.Rendering.Sprites.GetByAlias(atlasName).Id;
+            AtlasId = core.Rendering.Sprites.GetByName(atlasName).Id;
         }
 
         #endregion Public Methods

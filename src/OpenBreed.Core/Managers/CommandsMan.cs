@@ -1,6 +1,5 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Helpers;
+﻿using OpenBreed.Common.Logging;
+using OpenBreed.Core.Commands;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,32 +7,33 @@ using System.Reflection;
 
 namespace OpenBreed.Core.Managers
 {
-    public class CommandsMan
+    internal class CommandsMan : ICommandsMan
     {
-        #region Public Constructors
-
-        public CommandsMan(ICore core)
-        {
-            Core = core;
-        }
-
-        #endregion Public Constructors
-        #region Public Properties
-
-        public ICore Core { get; }
-
-        #endregion Public Properties
-
-        #region Public Methods
+        #region Private Fields
 
         private readonly Dictionary<Type, (MethodInfo Method, object Target)> handlers = new Dictionary<Type, (MethodInfo Method, object Target)>();
+        private readonly ICore core;
+        private readonly ILogger logger;
+        private Queue<ICommand> messageQueue = new Queue<ICommand>();
+
+        #endregion Private Fields
+
+        #region Internal Constructors
+
+        internal CommandsMan(ICore core, ILogger logger)
+        {
+            this.core = core;
+            this.logger = logger;
+        }
+
+        #endregion Internal Constructors
+
+        #region Public Methods
 
         public void Register<T>(Func<ICore, T, bool> cmdHandler)
         {
             handlers.Add(typeof(T), (cmdHandler.Method, cmdHandler.Target));
         }
-
-        private Queue<ICommand> messageQueue = new Queue<ICommand>();
 
         public void ExecuteEnqueued()
         {
@@ -44,19 +44,26 @@ namespace OpenBreed.Core.Managers
             }
         }
 
-        public void LogUnhandled()
+        public void Post(ICommand msg)
         {
+            Debug.Assert(msg != null);
 
+            if (TryHandle(msg))
+                return;
 
-            //core.Logging.Warning($"Entity '{cmd.EntityId}' has missing FSM transition from state '{fromStateName}' using impulse '{impulseName}'.");
+            logger.Warning($"Command '{msg.GetType()}' not registered.");
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private void Execute(ICommand msg)
         {
             if (!handlers.TryGetValue(msg.GetType(), out (MethodInfo Method, object Target) handler))
                 return;
 
-            handler.Method.Invoke(handler.Target, new object[] {Core,  msg });
+            handler.Method.Invoke(handler.Target, new object[] { core, msg });
         }
 
         private bool TryHandle(ICommand msg)
@@ -69,20 +76,6 @@ namespace OpenBreed.Core.Managers
             //handler.Method.Invoke(handler.Target, new object[] { msg });
             return true;
         }
-
-        public void Post(ICommand msg)
-        {
-            Debug.Assert(msg != null);
-
-            if (TryHandle(msg))
-                return;
-
-            Core.Logging.Warning($"Command '{msg.GetType()}' not registered.");
-        }
-
-        #endregion Public Methods
-
-        #region Private Methods
 
         #endregion Private Methods
     }

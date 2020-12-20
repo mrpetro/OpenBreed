@@ -73,7 +73,7 @@ namespace OpenBreed.Core.Modules.Physics.Systems
             return new Box2(bx, by, bx + CELL_SIZE, by + CELL_SIZE);
         }
 
-        public static void RegisterHandlers(CommandsMan commands)
+        public static void RegisterHandlers(ICommandsMan commands)
         {
             commands.Register<BodyOnCommand>(HandleBodyOnCommand);
             commands.Register<BodyOffCommand>(HandleBodyOffCommand);

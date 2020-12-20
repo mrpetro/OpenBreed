@@ -112,6 +112,8 @@
     <Compile Include="Components\Xml\XmlColor4.cs" />
     <Compile Include="Components\Xml\XmlVector2.cs" />
     <Compile Include="CoreBase.cs" />
+    <Compile Include="CoreFactory.cs" />
+    <Compile Include="DefaultManagerCollection.cs" />
     <Compile Include="Entities\IEntityTemplate.cs" />
     <Compile Include="Entities\Xml\XmlEntityTemplate.cs" />
     <Compile Include="Events\EntityAddedEventArgs.cs" />
@@ -128,6 +130,8 @@
     <Compile Include="Extensions\Vector2Extension.cs" />
     <Compile Include="Extensions\Vector3Extension.cs" />
     <Compile Include="ICoreClient.cs" />
+    <Compile Include="Managers\ICommandsMan.cs" />
+    <Compile Include="Managers\IEntityMan.cs" />
     <Compile Include="Modules\Animation\Builders\AnimatorBuilder.cs" />
     <Compile Include="Builders\IBuilder.cs" />
     <Compile Include="Builders\IComponentBuilder.cs" />

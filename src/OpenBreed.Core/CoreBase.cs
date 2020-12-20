@@ -1,18 +1,17 @@
-﻿using OpenBreed.Common.Logging;
-using OpenBreed.Core.Commands;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Logging;
 using OpenBreed.Core.Builders;
-using OpenBreed.Core.Helpers;
+using OpenBreed.Core.Commands;
+using OpenBreed.Core.Components;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Systems;
 using OpenTK;
-using OpenTK.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using OpenBreed.Core.Components;
 
 namespace OpenBreed.Core
 {
@@ -20,26 +19,30 @@ namespace OpenBreed.Core
     {
         #region Private Fields
 
-        private Dictionary<Type, ICoreModule> modules = new Dictionary<Type, ICoreModule>();
+        private readonly Dictionary<Type, ICoreModule> modules = new Dictionary<Type, ICoreModule>();
+        private readonly IManagerCollection manCollection;
 
         #endregion Private Fields
 
         #region Protected Constructors
 
-        protected CoreBase()
+        protected CoreBase(IManagerCollection manCollection)
         {
-            Commands = new CommandsMan(this);
+            manCollection.AddSingleton<ICore>(this);
+
+            Commands = manCollection.GetManager<ICommandsMan>();
             Events = new EventsMan(this);
-            Entities = new EntityMan(this);
+            Entities = manCollection.GetManager<IEntityMan>();
             Worlds = new WorldMan(this);
+            this.manCollection = manCollection;
         }
 
         #endregion Protected Constructors
 
         #region Public Properties
 
-        public EntityMan Entities { get; }
-        public CommandsMan Commands { get; }
+        public IEntityMan Entities { get; }
+        public ICommandsMan Commands { get; }
         public EventsMan Events { get; }
         public WorldMan Worlds { get; }
 
@@ -81,6 +84,7 @@ namespace OpenBreed.Core
 
         public abstract void Exit();
 
+        public TManager GetManager<TManager>() => manCollection.GetManager<TManager>();
 
         public T GetModule<T>() where T : ICoreModule
         {

@@ -34,7 +34,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems.Control.Systems
 
         #region Public Methods
 
-        public static void RegisterHandlers(CommandsMan commands)
+        public static void RegisterHandlers(ICommandsMan commands)
         {
             commands.Register<WalkingControlCommand>(HandleWalkingControlCommand);
             commands.Register<AttackControlCommand>(HandleAttackControlCommand);

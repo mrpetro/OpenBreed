@@ -29,7 +29,7 @@ namespace OpenBreed.Core.Systems
 
         }
 
-        public static void RegisterHandlers(CommandsMan commands)
+        public static void RegisterHandlers(ICommandsMan commands)
         {
             commands.Register<FollowedAddFollowerCommand>(HandleFollowedAddFollowerCommand);
         }

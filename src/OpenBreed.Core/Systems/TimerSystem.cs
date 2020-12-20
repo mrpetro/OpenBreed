@@ -31,7 +31,7 @@ namespace OpenBreed.Core.Systems
 
         #region Public Methods
 
-        public static void RegisterHandlers(CommandsMan commands)
+        public static void RegisterHandlers(ICommandsMan commands)
         {
             commands.Register<TimerStartCommand>(HandleTimerStartCommand);
             commands.Register<TimerStopCommand>(HandleTimerStopCommand);

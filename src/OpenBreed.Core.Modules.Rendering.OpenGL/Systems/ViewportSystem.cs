@@ -49,7 +49,7 @@ namespace OpenBreed.Core.Modules.Rendering.Systems
 
         #region Public Methods
 
-        public static void RegisterHandlers(CommandsMan commands)
+        public static void RegisterHandlers(ICommandsMan commands)
         {
             commands.Register<ViewportResizeCommand>(HandleViewportResizeCommand);
         }

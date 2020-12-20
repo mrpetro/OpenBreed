@@ -11,19 +11,21 @@ using System.Linq;
 
 namespace OpenBreed.Core.Managers
 {
-    public class EntityMan
+    internal class EntityMan : IEntityMan
     {
         #region Private Fields
 
         private readonly IdMap<Entity> entities = new IdMap<Entity>();
+        private readonly ICommandsMan commandsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public EntityMan(ICore core)
+        internal EntityMan(ICore core, ICommandsMan commandsMan)
         {
             Core = core;
+            this.commandsMan = commandsMan;
         }
 
         #endregion Public Constructors

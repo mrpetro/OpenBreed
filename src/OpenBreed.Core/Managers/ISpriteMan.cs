@@ -17,13 +17,13 @@ namespace OpenBreed.Core.Managers
         ISpriteAtlas GetById(int id);
 
         /// <summary>
-        /// Get sprite atlas by it's alias
+        /// Get sprite atlas by it's name
         /// </summary>
-        /// <param name="alias">Alias of sprite atlas to get</param>
+        /// <param name="name">Name of sprite atlas to get</param>
         /// <returns>Sprite atlas object</returns>
-        ISpriteAtlas GetByAlias(string alias);
+        ISpriteAtlas GetByName(string name);
 
-        ISpriteAtlas Create(string alias, int textureId, int spriteWidth, int spriteHeight, int spriteColumns, int spriteRows, int offsetX = 0, int offsetY = 0);
+        ISpriteAtlas Create(string name, int textureId, int spriteWidth, int spriteHeight, int spriteColumns, int spriteRows, int offsetX = 0, int offsetY = 0);
 
         /// <summary>
         /// Unloads all textures

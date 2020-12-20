@@ -50,7 +50,7 @@ namespace OpenBreed.Core
         /// <summary>
         /// Entities manager
         /// </summary>
-        EntityMan Entities { get; }
+        IEntityMan Entities { get; }
 
         //EntityFactory
         EntityFactory EntityFactory { get; }
@@ -83,7 +83,7 @@ namespace OpenBreed.Core
         /// <summary>
         /// Commands manager
         /// </summary>
-        CommandsMan Commands { get; }
+        ICommandsMan Commands { get; }
 
         /// <summary>
         /// Events manager
@@ -118,6 +118,13 @@ namespace OpenBreed.Core
         #endregion Public Properties
 
         #region Public Methods
+
+        /// <summary>
+        /// Gets manager of specific type
+        /// </summary>
+        /// <typeparam name="TManager">Type of manager to get</typeparam>
+        /// <returns>Return manager instance</returns>
+        TManager GetManager<TManager>();
 
         /// <summary>
         /// Get core module of specific type

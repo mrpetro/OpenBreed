@@ -1,20 +1,24 @@
-﻿using OpenBreed.Common.Logging;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Logging;
 using OpenBreed.Core;
-using OpenBreed.Core.Commands;
-using OpenBreed.Core.Builders;
-using OpenBreed.Core.Helpers;
+using OpenBreed.Core.Components;
+using OpenBreed.Core.Components.Xml;
 using OpenBreed.Core.Managers;
-using OpenBreed.Core.Modules;
-using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Builders;
+using OpenBreed.Core.Modules.Animation.Components;
+using OpenBreed.Core.Modules.Animation.Components.Xml;
 using OpenBreed.Core.Modules.Animation.Systems;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Audio.Builders;
 using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Physics.Builders;
+using OpenBreed.Core.Modules.Physics.Components;
+using OpenBreed.Core.Modules.Physics.Shapes;
 using OpenBreed.Core.Modules.Physics.Systems;
 using OpenBreed.Core.Modules.Rendering;
+using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Core.Modules.Rendering.Components.Xml;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Control.Systems;
@@ -34,25 +38,27 @@ using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
-using OpenBreed.Core.Modules.Physics.Shapes;
-using OpenBreed.Core.Components.Xml;
-using OpenBreed.Core.Modules.Rendering.Components.Xml;
-using OpenBreed.Core.Modules.Animation.Components.Xml;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Physics.Components;
 
 namespace OpenBreed.Sandbox
 {
+    public class ProgramFactory : CoreFactory
+    {
+
+
+        public ICore Create()
+        {
+            return new Program(manCollection);
+        }
+    }
+
     public class Program : CoreBase
     {
-        private GameWindow window;
-
         #region Private Fields
+
+        private readonly LogConsolePrinter logConsolePrinter;
+        private GameWindow window;
 
         private string appVersion;
 
@@ -60,27 +66,25 @@ namespace OpenBreed.Sandbox
 
         #region Public Constructors
 
-        //private 
-
-        private readonly LogConsolePrinter logConsolePrinter;
-
-
-        public Program()
+        public Program(IManagerCollection manCollection) :
+            base(manCollection)
         {
+
+
             appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
             window = new GameWindow(800, 600, new GraphicsMode(new ColorFormat(8, 8, 8, 8), 24, 8), "OpenBreed");
 
-            window.MouseDown += (s,a) => Inputs.OnMouseDown(a);
+            window.MouseDown += (s, a) => Inputs.OnMouseDown(a);
             window.MouseUp += (s, a) => Inputs.OnMouseUp(a);
             window.MouseMove += (s, a) => Inputs.OnMouseMove(a);
             window.MouseWheel += (s, a) => Inputs.OnMouseWheel(a);
             window.KeyDown += (s, a) => Inputs.OnKeyDown(a);
             window.KeyUp += (s, a) => Inputs.OnKeyUp(a);
             window.KeyPress += (s, a) => Inputs.OnKeyPress(a);
-            window.Load += (s,a) => OnWindowLoad();
+            window.Load += (s, a) => OnWindowLoad();
             window.Resize += (s, a) => OnResize();
-            window.UpdateFrame += (s,a) => Update((float)a.Time);
+            window.UpdateFrame += (s, a) => Update((float)a.Time);
             window.RenderFrame += OnRenderFrame;
 
             Logging = new DefaultLogger();
@@ -104,7 +108,6 @@ namespace OpenBreed.Sandbox
             RegisterModule(Rendering);
             RegisterModule(Physics);
             RegisterModule(Sounds);
-
 
             window.VSync = VSyncMode.On;
         }
@@ -197,11 +200,72 @@ namespace OpenBreed.Sandbox
             return new SoundSystemBuilder(this);
         }
 
+        public override void Load()
+        {
+        }
 
+        public override void Update(float dt)
+        {
+            Commands.ExecuteEnqueued();
+
+            Worlds.Cleanup();
+
+            Rendering.Cleanup();
+
+            Players.ResetInputs();
+
+            Inputs.Update();
+            Players.ApplyInputs();
+            //StateMachine.Update((float)e.Time);
+            Worlds.Update(dt);
+            Jobs.Update(dt);
+        }
+
+        public override void Run()
+        {
+            window.Run(30.0, 60.0);
+        }
+
+        public override void Exit()
+        {
+            window.Exit();
+        }
 
         #endregion Public Methods
 
         #region Protected Methods
+
+        protected void OnEngineInitialized()
+        {
+            Scripts.TryInvokeFunction("EngineInitialized");
+        }
+
+        protected void OnRenderFrame(object sender, FrameEventArgs e)
+        {
+            Rendering.Draw((float)e.Time);
+
+            window.SwapBuffers();
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
+
+        [STAThread]
+        private static void Main(string[] args)
+        {
+            //var luaTest = new LoadTest();
+
+            //luaTest.Example();
+
+            var programFactory = new ProgramFactory();
+
+            var program = programFactory.Create();
+
+            //program.Sounds.Sounds.PlaySound(0);
+
+            program.Run();
+        }
 
         private void RegisterSystems()
         {
@@ -218,8 +282,6 @@ namespace OpenBreed.Sandbox
             WalkingControlSystem.RegisterHandlers(Commands);
             PhysicsSystem.RegisterHandlers(Commands);
         }
-
-
 
         private void OnWindowLoad()
         {
@@ -284,7 +346,6 @@ namespace OpenBreed.Sandbox
             WorldGateHelper.RegisterCollisionPairs(this);
             //TeleportHelper.RegisterCollisionPairs(this);
             ProjectileHelper.RegisterCollisionPairs(this);
-
 
             CameraHelper.CreateAnimations(this);
             DoorHelper.CreateStamps(this);
@@ -356,11 +417,6 @@ namespace OpenBreed.Sandbox
             Scripts.RunFile(@"Content\Scripts\start.lua");
         }
 
-        protected void OnEngineInitialized()
-        {
-            Scripts.TryInvokeFunction("EngineInitialized");
-        }
-
         private void OnResize()
         {
             GL.LoadIdentity();
@@ -372,52 +428,6 @@ namespace OpenBreed.Sandbox
             ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateTranslation(0.0f, -ClientRectangle.Height, 0.0f));
             ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateScale(1.0f, -1.0f, 1.0f));
             Rendering.OnClientResized(ClientRectangle.Width, ClientRectangle.Height);
-        }
-
-        public override void Load()
-        {
-        }
-
-        public override void Update(float dt)
-        {
-            Commands.ExecuteEnqueued();
-
-            Worlds.Cleanup();
-
-            Rendering.Cleanup();
-
-            Players.ResetInputs();
-
-            Inputs.Update();
-            Players.ApplyInputs();
-            //StateMachine.Update((float)e.Time);
-            Worlds.Update(dt);
-            Jobs.Update(dt);
-        }
-
-        protected void OnRenderFrame(object sender, FrameEventArgs e)
-        {
-            Rendering.Draw((float)e.Time);
-
-            window.SwapBuffers();
-        }
-
-        #endregion Protected Methods
-
-        #region Private Methods
-
-        [STAThread]
-        private static void Main(string[] args)
-        {
-            //var luaTest = new LoadTest();
-
-            //luaTest.Example();
-
-            var program = new Program();
-
-            //program.Sounds.Sounds.PlaySound(0);
-
-            program.Run();
         }
 
         private void RegisterShapes()
@@ -444,16 +454,6 @@ namespace OpenBreed.Sandbox
         private void RegisterItems()
         {
             Items.Register(new CreditsItem());
-        }
-
-        public override void Run()
-        {
-            window.Run(30.0, 60.0);
-        }
-
-        public override void Exit()
-        {
-            window.Exit();
         }
 
         #endregion Private Methods

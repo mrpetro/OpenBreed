@@ -58,7 +58,7 @@ namespace OpenBreed.Core.Modules.Animation.Components
     {
         #region Internal Constructors
 
-        internal AnimationComponent(AnimationComponentBuilderEx builder)
+        internal AnimationComponent(AnimationComponentBuilder builder)
         {
             Items = new List<Animator>();
             Items.Add(new Animator()
@@ -98,7 +98,7 @@ namespace OpenBreed.Core.Modules.Animation.Components
 
         protected override IEntityComponent Create(IAnimationComponentTemplate template)
         {
-            var builder = AnimationComponentBuilderEx.New(core);
+            var builder = AnimationComponentBuilder.New(core);
 
             if(template.AnimName != null)
                 builder.SetByName(template.AnimName);
@@ -115,7 +115,7 @@ namespace OpenBreed.Core.Modules.Animation.Components
         #endregion Protected Methods
     }
 
-    public class AnimationComponentBuilderEx
+    public class AnimationComponentBuilder
     {
         #region Private Fields
 
@@ -125,7 +125,7 @@ namespace OpenBreed.Core.Modules.Animation.Components
 
         #region Private Constructors
 
-        private AnimationComponentBuilderEx(ICore core)
+        private AnimationComponentBuilder(ICore core)
         {
             this.core = core;
         }
@@ -143,9 +143,9 @@ namespace OpenBreed.Core.Modules.Animation.Components
 
         #region Public Methods
 
-        public static AnimationComponentBuilderEx New(ICore core)
+        public static AnimationComponentBuilder New(ICore core)
         {
-            return new AnimationComponentBuilderEx(core);
+            return new AnimationComponentBuilder(core);
         }
 
         public AnimationComponent Build()

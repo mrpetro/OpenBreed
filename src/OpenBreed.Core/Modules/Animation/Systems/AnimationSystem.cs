@@ -35,7 +35,7 @@ namespace OpenBreed.Core.Modules.Animation.Systems
 
         #region Public Methods
 
-        public static void RegisterHandlers(CommandsMan commands)
+        public static void RegisterHandlers(ICommandsMan commands)
         {
             commands.Register<SetAnimCommand>(HandleSetAnimCommand);
             commands.Register<PlayAnimCommand>(HandlePlayAnimCommand);

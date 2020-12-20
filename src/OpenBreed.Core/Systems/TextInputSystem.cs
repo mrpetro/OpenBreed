@@ -28,7 +28,7 @@ namespace OpenBreed.Core.Systems
 
         #region Public Methods
 
-        public static void RegisterHandlers(CommandsMan commands)
+        public static void RegisterHandlers(ICommandsMan commands)
         {
             commands.Register<TextCaretSetPosition>(HandleTextCaretSetPosition);
             commands.Register<TextDataInsert>(HandleTextDataInsert);

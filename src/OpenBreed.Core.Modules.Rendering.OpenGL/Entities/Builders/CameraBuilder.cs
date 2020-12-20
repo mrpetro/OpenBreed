@@ -32,7 +32,7 @@ namespace OpenBreed.Core.Modules.Rendering.Entities.Builders
             var entity = Core.Entities.Create();
             entity.Add(PositionComponent.Create(position));
 
-            var ccBuilder = CameraComponentBuilderEx.New(Core);
+            var ccBuilder = CameraComponentBuilder.New(Core);
             ccBuilder.SetSize(width, height);
             entity.Add(ccBuilder.Build());
             entity.Add(new PauseImmuneComponent());

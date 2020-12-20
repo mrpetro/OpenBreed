@@ -20,9 +20,13 @@ namespace OpenBreed.Core.Managers
 
         #region Public Constructors
 
+        private IAnimation MissingAnim;
+
         public AnimMan(ICore core)
         {
             Core = core;
+
+            MissingAnim = Create("Animations/Missing", 1.0f);
         }
 
         #endregion Public Constructors
@@ -49,7 +53,14 @@ namespace OpenBreed.Core.Managers
 
         public IAnimation GetByName(string name)
         {
-            return items.FirstOrDefault(item => item.Name == name);
+            var anim = items.FirstOrDefault(item => item.Name == name);
+
+            if (anim != null)
+                return anim;
+
+            Core.Logging.Error($"Unable to find animation with name '{name}'");
+
+            return MissingAnim;
         }
 
         public void UnloadAll()

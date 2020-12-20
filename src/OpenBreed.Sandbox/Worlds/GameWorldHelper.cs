@@ -96,7 +96,7 @@ namespace OpenBreed.Sandbox.Worlds
             var playerCamera = cameraBuilder.Build();
             playerCamera.Tag = "PlayerCamera";
 
-            var animCmpBuilder = AnimationComponentBuilderEx.New(core);
+            var animCmpBuilder = AnimationComponentBuilder.New(core);
             animCmpBuilder.SetSpeed(10.0f);
             animCmpBuilder.SetLoop(false);
             animCmpBuilder.SetById(-1);
@@ -108,7 +108,7 @@ namespace OpenBreed.Sandbox.Worlds
             var gameCamera = cameraBuilder.Build();
             gameCamera.Tag = "HubCamera";
 
-            animCmpBuilder = AnimationComponentBuilderEx.New(core);
+            animCmpBuilder = AnimationComponentBuilder.New(core);
             animCmpBuilder.SetSpeed(10.0f);
             animCmpBuilder.SetLoop(false);
             animCmpBuilder.SetById(-1);
