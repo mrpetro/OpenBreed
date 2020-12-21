@@ -1,29 +1,31 @@
-﻿using System;
+﻿using OpenBreed.Common.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Core.Managers
 {
-    public class PlayersMan
+    public class PlayersMan : IPlayersMan
     {
         #region Private Fields
 
         private readonly List<Player> players = new List<Player>();
+        private readonly ILogger logger;
+        private readonly IInputsMan inputsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PlayersMan(ICore core)
+        public PlayersMan(ILogger logger, IInputsMan inputsMan)
         {
-            Core = core;
+            this.logger = logger;
+            this.inputsMan = inputsMan;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
-
-        public ICore Core { get; }
 
         #endregion Public Properties
 
@@ -34,7 +36,7 @@ namespace OpenBreed.Core.Managers
             if (players.Any(item => item.Name == name))
                 throw new InvalidOperationException($"Player with name '{name}' already exists.");
 
-            var newPlayer = new Player(name, Core);
+            var newPlayer = new Player(name, logger, inputsMan);
             players.Add(newPlayer);
 
             return newPlayer;

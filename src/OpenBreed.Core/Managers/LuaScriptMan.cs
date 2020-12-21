@@ -1,4 +1,5 @@
 ﻿using NLua;
+using OpenBreed.Common.Logging;
 using OpenBreed.Core.Scripting;
 
 namespace OpenBreed.Core.Managers
@@ -11,14 +12,15 @@ namespace OpenBreed.Core.Managers
         #region Private Fields
 
         private readonly Lua luaState;
+        private readonly ILogger logger;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public LuaScriptMan(ICore core)
+        public LuaScriptMan(ILogger logger)
         {
-            Core = core;
+            this.logger = logger;
 
             luaState = new Lua();
             luaState.LoadCLRPackage();
@@ -29,15 +31,11 @@ namespace OpenBreed.Core.Managers
             luaState.NewTable("Templates.Entities");
             //Define table placeholder for viewport templates namespace
             luaState.NewTable("Templates.Viewports");
-
         }
-
 
         #endregion Public Constructors
 
         #region Public Properties
-
-        public ICore Core { get; }
 
         #endregion Public Properties
 
@@ -100,9 +98,10 @@ namespace OpenBreed.Core.Managers
             if (func == null)
             {
                 funcResult = null;
-#if DEBUG
-                Core.Logging.Warning($"'{funcName}' not existing.");
-#endif
+
+                #if DEBUG
+                logger.Warning($"'{funcName}' not existing.");
+                #endif
                 return false;
             }
 

@@ -1,6 +1,8 @@
-﻿using OpenBreed.Core.Components;
+﻿using OpenBreed.Common.Logging;
+using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Inputs;
+using OpenBreed.Core.Managers;
 using OpenTK.Input;
 using System;
 using System.Collections.Generic;
@@ -20,10 +22,11 @@ namespace OpenBreed.Core
 
         #region Public Constructors
 
-        public Player(string name, ICore core)
+        public Player(string name, ILogger logger, IInputsMan inputsMan)
         {
             Name = name;
-            Core = core;
+            this.logger = logger;
+            this.inputsMan = inputsMan;
 
             Inputs = new ReadOnlyCollection<IPlayerInput>(inputs);
             ControlledEntities = new ReadOnlyCollection<Entity>(controlledEntities);
@@ -34,7 +37,9 @@ namespace OpenBreed.Core
         #region Public Properties
 
         public ReadOnlyCollection<Entity> ControlledEntities { get; }
-        public ICore Core { get; }
+        private readonly IInputsMan inputsMan;
+        private readonly ILogger logger;
+
         public string Name { get; }
         public ReadOnlyCollection<IPlayerInput> Inputs { get; }
 
@@ -65,7 +70,7 @@ namespace OpenBreed.Core
         public void LoseControl(Entity entity)
         {
             if (!controlledEntities.Remove(entity))
-                Core.Logging.Warning($"'{entity}' was no under control.");
+                logger.Warning($"'{entity}' was no under control.");
         }
 
         public void AssumeControl(Entity entity)
@@ -80,7 +85,7 @@ namespace OpenBreed.Core
 
         public void AddKeyBinding(string controlType, string controlAction, Key key)
         {
-            Core.Inputs.AddPlayerKeyBinding(this, controlType, controlAction, key);
+            inputsMan.AddPlayerKeyBinding(this, controlType, controlAction, key);
         }
 
         #endregion Public Methods

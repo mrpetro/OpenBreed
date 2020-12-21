@@ -33,7 +33,7 @@ namespace OpenBreed.Core
         /// <summary>
         /// Reference to animation manager
         /// </summary>
-        AnimMan Animations { get; }
+        IAnimMan Animations { get; }
 
         void Run();
 
@@ -58,22 +58,17 @@ namespace OpenBreed.Core
         /// <summary>
         /// State machine manager
         /// </summary>
-        FsmMan StateMachines { get; }
+        IFsmMan StateMachines { get; }
 
         /// <summary>
         /// Players manager
         /// </summary>
-        PlayersMan Players { get; }
-
-        /// <summary>
-        /// Items manager
-        /// </summary>
-        ItemsMan Items { get; }
+        IPlayersMan Players { get; }
 
         /// <summary>
         /// Inputs manager
         /// </summary>
-        InputsMan Inputs { get; }
+        IInputsMan Inputs { get; }
 
         /// <summary>
         /// Worlds manager
@@ -89,11 +84,6 @@ namespace OpenBreed.Core
         /// Events manager
         /// </summary>
         IEventsMan Events { get; }
-
-        /// <summary>
-        /// Scripts manager
-        /// </summary>
-        IScriptMan Scripts { get; }
 
         /// <summary>
         /// Client display transformation matrix

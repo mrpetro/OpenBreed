@@ -45,7 +45,21 @@ namespace OpenBreed.Sandbox
 {
     public class ProgramFactory : CoreFactory
     {
+        public ProgramFactory()
+        {
+            manCollection.AddSingleton<IScriptMan>(() => new LuaScriptMan(manCollection.GetManager<ILogger>()));
 
+            manCollection.AddSingleton<IFsmMan>(() => new FsmMan());
+
+            manCollection.AddSingleton<IAnimMan>(() => new AnimMan(manCollection.GetManager<ILogger>()));
+
+            manCollection.AddSingleton<IInputsMan>(() => new InputsMan(manCollection.GetManager<ICore>()));
+
+            manCollection.AddSingleton<IPlayersMan>(() => new PlayersMan(manCollection.GetManager<ILogger>(),
+                                                                         manCollection.GetManager<IInputsMan>()));
+
+            OpenGLModule.AddManagers(manCollection);
+        }
 
         public ICore Create()
         {
@@ -57,6 +71,7 @@ namespace OpenBreed.Sandbox
     {
         #region Private Fields
 
+        private readonly IScriptMan scriptMan;
         private readonly LogConsolePrinter logConsolePrinter;
         private GameWindow window;
 
@@ -69,7 +84,11 @@ namespace OpenBreed.Sandbox
         public Program(IManagerCollection manCollection) :
             base(manCollection)
         {
-
+            scriptMan = manCollection.GetManager<IScriptMan>();
+            StateMachines = manCollection.GetManager<IFsmMan>();
+            Animations = manCollection.GetManager<IAnimMan>();
+            Inputs = manCollection.GetManager<IInputsMan>();
+            Players = manCollection.GetManager<IPlayersMan>();
 
             appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
@@ -87,14 +106,8 @@ namespace OpenBreed.Sandbox
             window.UpdateFrame += (s, a) => Update((float)a.Time);
             window.RenderFrame += OnRenderFrame;
 
-            Logging = new DefaultLogger();
             logConsolePrinter = new LogConsolePrinter(Logging);
             logConsolePrinter.StartPrinting();
-            Scripts = new LuaScriptMan(this);
-            StateMachines = new FsmMan(this);
-            Players = new PlayersMan(this);
-            Items = new ItemsMan(this);
-            Inputs = new InputsMan(this);
 
             Jobs = new JobMan(this);
 
@@ -103,7 +116,6 @@ namespace OpenBreed.Sandbox
             Rendering = new OpenGLModule(this);
             Physics = new PhysicsModule(this);
             Sounds = new OpenALModule(this);
-            Animations = new AnimMan(this);
 
             RegisterModule(Rendering);
             RegisterModule(Physics);
@@ -124,21 +136,15 @@ namespace OpenBreed.Sandbox
 
         public override EntityFactory EntityFactory { get; }
 
-        public override AnimMan Animations { get; }
+        public override IAnimMan Animations { get; }
 
-        public override FsmMan StateMachines { get; }
+        public override IFsmMan StateMachines { get; }
 
-        public override PlayersMan Players { get; }
-
-        public override ILogger Logging { get; }
+        public override IPlayersMan Players { get; }
 
         public override JobMan Jobs { get; }
 
-        public override ItemsMan Items { get; }
-
-        public override InputsMan Inputs { get; }
-
-        public override IScriptMan Scripts { get; }
+        public override IInputsMan Inputs { get; }
 
         public override Matrix4 ClientTransform { get; protected set; }
 
@@ -237,7 +243,7 @@ namespace OpenBreed.Sandbox
 
         protected void OnEngineInitialized()
         {
-            Scripts.TryInvokeFunction("EngineInitialized");
+            scriptMan.TryInvokeFunction("EngineInitialized");
         }
 
         protected void OnRenderFrame(object sender, FrameEventArgs e)
@@ -295,7 +301,6 @@ namespace OpenBreed.Sandbox
             RegisterSystems();
             RegisterShapes();
             RegisterFixtures();
-            RegisterItems();
 
             Inputs.RegisterHandler(new WalkingControlHandler());
             Inputs.RegisterHandler(new AttackControlHandler());
@@ -407,14 +412,14 @@ namespace OpenBreed.Sandbox
 
         private void ExposeScriptingApi()
         {
-            Scripts.Expose("Worlds", Worlds);
-            Scripts.Expose("Entities", Entities);
-            Scripts.Expose("Commands", Commands);
-            Scripts.Expose("Inputs", Inputs);
-            Scripts.Expose("Logging", Logging);
-            Scripts.Expose("Players", Players);
+            scriptMan.Expose("Worlds", Worlds);
+            scriptMan.Expose("Entities", Entities);
+            scriptMan.Expose("Commands", Commands);
+            scriptMan.Expose("Inputs", Inputs);
+            scriptMan.Expose("Logging", Logging);
+            scriptMan.Expose("Players", Players);
 
-            Scripts.RunFile(@"Content\Scripts\start.lua");
+            scriptMan.RunFile(@"Content\Scripts\start.lua");
         }
 
         private void OnResize()
@@ -449,11 +454,6 @@ namespace OpenBreed.Sandbox
             Physics.Fixturs.Create("Fixtures/DoorHorizontal", "Static", Physics.Shapes.GetByTag("Shapes/Box_0_0_32_16"));
             Physics.Fixturs.Create("Fixtures/Arrow", "Dynamic", Physics.Shapes.GetByTag("Shapes/Box_0_0_32_32"));
             Physics.Fixturs.Create("Fixtures/Turret", "Static", Physics.Shapes.GetByTag("Shapes/Box_0_0_32_32"));
-        }
-
-        private void RegisterItems()
-        {
-            Items.Register(new CreditsItem());
         }
 
         #endregion Private Methods

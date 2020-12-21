@@ -8,7 +8,7 @@ namespace OpenBreed.Core.Modules.Rendering.Managers
     {
         #region Internal Fields
 
-        internal readonly OpenGLModule Module;
+        private readonly ITextureMan textureMan;
 
         #endregion Internal Fields
 
@@ -22,9 +22,9 @@ namespace OpenBreed.Core.Modules.Rendering.Managers
 
         #region Internal Constructors
 
-        internal FontMan(OpenGLModule module)
+        internal FontMan(ITextureMan textureMan)
         {
-            Module = module;
+            this.textureMan = textureMan;
         }
 
         #endregion Internal Constructors
@@ -45,11 +45,11 @@ namespace OpenBreed.Core.Modules.Rendering.Managers
             if (aliases.TryGetValue(alias, out result))
                 return result;
 
-            var faBuilder = new FontAtlasBuilder(this);
+            var faBuilder = new FontAtlasBuilder(this, textureMan);
             faBuilder.SetFontName(fontName);
             faBuilder.SetFontSize(fontSize);
 
-            result = new FontAtlas(faBuilder);
+            result = faBuilder.Build();
             items.Add(result);
             aliases.Add(alias, result);
             return result;

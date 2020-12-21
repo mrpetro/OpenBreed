@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Entities;
+﻿using OpenBreed.Common.Logging;
+using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Helpers;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Linq;
 
 namespace OpenBreed.Core.Managers
 {
-    public class AnimMan
+    public class AnimMan : IAnimMan
     {
         #region Internal Fields
 
@@ -15,6 +16,7 @@ namespace OpenBreed.Core.Managers
         #region Private Fields
 
         private readonly List<IAnimation> items = new List<IAnimation>();
+        private readonly ILogger logger;
 
         #endregion Private Fields
 
@@ -22,9 +24,9 @@ namespace OpenBreed.Core.Managers
 
         private IAnimation MissingAnim;
 
-        public AnimMan(ICore core)
+        public AnimMan(ILogger logger)
         {
-            Core = core;
+            this.logger = logger;
 
             MissingAnim = Create("Animations/Missing", 1.0f);
         }
@@ -32,8 +34,6 @@ namespace OpenBreed.Core.Managers
         #endregion Public Constructors
 
         #region Public Properties
-
-        public ICore Core { get; }
 
         #endregion Public Properties
 
@@ -58,7 +58,7 @@ namespace OpenBreed.Core.Managers
             if (anim != null)
                 return anim;
 
-            Core.Logging.Error($"Unable to find animation with name '{name}'");
+            logger.Error($"Unable to find animation with name '{name}'");
 
             return MissingAnim;
         }

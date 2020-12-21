@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core.Components;
-using OpenBreed.Core.Inputs;
+﻿using OpenBreed.Core.Inputs;
 using OpenTK;
 using OpenTK.Input;
 using System;
@@ -42,7 +41,7 @@ namespace OpenBreed.Core.Managers
         #endregion Public Methods
     }
 
-    public class InputsMan
+    public class InputsMan : IInputsMan
     {
         #region Private Fields
 
@@ -197,18 +196,14 @@ namespace OpenBreed.Core.Managers
             }
         }
 
-        #endregion Public Methods
-
-        #region Internal Methods
-
-        internal void AddPlayerKeyBinding(Player player, string controlType, string controlAction, Key key)
+        public void AddPlayerKeyBinding(Player player, string controlType, string controlAction, Key key)
         {
             var controlHandler = GetHandler(controlType);
 
             keyBindings.Add(key, new KeyBinding(player, controlHandler, controlAction));
         }
 
-        #endregion Internal Methods
+        #endregion Public Methods
 
         #region Protected Methods
 

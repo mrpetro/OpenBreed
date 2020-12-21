@@ -35,6 +35,7 @@ namespace OpenBreed.Core
             Events = manCollection.GetManager<IEventsMan>();
             Entities = manCollection.GetManager<IEntityMan>();
             Worlds = manCollection.GetManager<IWorldMan>();
+            Logging = manCollection.GetManager<ILogger>();
         }
 
         #endregion Protected Constructors
@@ -45,6 +46,7 @@ namespace OpenBreed.Core
         public ICommandsMan Commands { get; }
         public IEventsMan Events { get; }
         public IWorldMan Worlds { get; }
+        public ILogger Logging { get; }
 
         public abstract Rectangle ClientRectangle { get; }
 
@@ -52,23 +54,18 @@ namespace OpenBreed.Core
 
         public abstract IAudioModule Sounds { get; }
 
-        public abstract AnimMan Animations { get; }
+        public abstract IAnimMan Animations { get; }
 
-        public abstract ILogger Logging { get; }
 
         public abstract JobMan Jobs { get; }
 
-        public abstract FsmMan StateMachines { get; }
+        public abstract IFsmMan StateMachines { get; }
 
         public abstract EntityFactory EntityFactory { get; }
 
-        public abstract PlayersMan Players { get; }
+        public abstract IPlayersMan Players { get; }
 
-        public abstract ItemsMan Items { get; }
-
-        public abstract InputsMan Inputs { get; }
-
-        public abstract IScriptMan Scripts { get; }
+        public abstract IInputsMan Inputs { get; }
 
         public ICoreClient Client { get; protected set; }
 

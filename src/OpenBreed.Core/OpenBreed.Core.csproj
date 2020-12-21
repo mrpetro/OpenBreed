@@ -131,8 +131,12 @@
     <Compile Include="Extensions\Vector3Extension.cs" />
     <Compile Include="ICoreClient.cs" />
     <Compile Include="IEventsMan.cs" />
+    <Compile Include="Managers\IAnimMan.cs" />
     <Compile Include="Managers\ICommandsMan.cs" />
     <Compile Include="Managers\IEntityMan.cs" />
+    <Compile Include="Managers\IFsmMan.cs" />
+    <Compile Include="Managers\IInputsMan.cs" />
+    <Compile Include="Managers\IPlayersMan.cs" />
     <Compile Include="Managers\IWorldMan.cs" />
     <Compile Include="Modules\Animation\Builders\AnimatorBuilder.cs" />
     <Compile Include="Builders\IBuilder.cs" />
@@ -188,7 +192,6 @@
     <Compile Include="Managers\InputsMan.cs" />
     <Compile Include="Inputs\IPlayerInput.cs" />
     <Compile Include="Item.cs" />
-    <Compile Include="Managers\ItemsMan.cs" />
     <Compile Include="JobChain.cs" />
     <Compile Include="Managers\JobMan.cs" />
     <Compile Include="MathTools.cs" />

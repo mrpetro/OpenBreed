@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Managers;
+﻿using OpenBreed.Common.Logging;
+using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Helpers.Builders;
 using System;
@@ -13,17 +14,18 @@ namespace OpenBreed.Core.Modules.Rendering.Managers
 
         private readonly List<ISpriteAtlas> items = new List<ISpriteAtlas>();
         private readonly Dictionary<string, ISpriteAtlas> names = new Dictionary<string, ISpriteAtlas>();
+        private readonly ITextureMan textureMan;
+        private readonly ILogger logger;
         private ISpriteAtlas MissingSpriteAtlas;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal SpriteMan(OpenGLModule module)
+        internal SpriteMan(ITextureMan textureMan, ILogger logger)
         {
-            Debug.Assert(module != null, $"Argument '{nameof(module)}' must be non-null.");
-
-            Module = module ?? throw new ArgumentNullException(nameof(module));
+            this.textureMan = textureMan;
+            this.logger = logger;
 
             //MissingSpriteAtlas = Create("Animations/Missing", 1.0f);
         }
@@ -31,8 +33,6 @@ namespace OpenBreed.Core.Modules.Rendering.Managers
         #endregion Internal Constructors
 
         #region Public Properties
-
-        internal  OpenGLModule Module { get; }
 
         #endregion Public Properties
 
@@ -46,7 +46,7 @@ namespace OpenBreed.Core.Modules.Rendering.Managers
 
             var saBuilder = new SpriteAtlasBuilder(this);
 
-            var texture = Module.Textures.GetById(textureId);
+            var texture = textureMan.GetById(textureId);
             saBuilder.SetTexture(texture);
             saBuilder.SetSpriteSize(spriteWidth, spriteHeight);
             saBuilder.SetOffset(offsetX, offsetY);
@@ -67,7 +67,7 @@ namespace OpenBreed.Core.Modules.Rendering.Managers
             if (names.TryGetValue(name, out ISpriteAtlas result))
                 return result;
 
-            Module.Core.Logging.Error($"Unable to find animation with name '{name}'");
+            logger.Error($"Unable to find animation with name '{name}'");
 
             return MissingSpriteAtlas;
 

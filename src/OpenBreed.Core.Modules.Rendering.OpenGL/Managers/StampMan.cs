@@ -18,16 +18,13 @@ namespace OpenBreed.Core.Modules.Rendering.Managers
 
         #region Internal Constructors
 
-        internal StampMan(OpenGLModule module)
+        internal StampMan()
         {
-            Module = module ?? throw new ArgumentNullException(nameof(module));
         }
 
         #endregion Internal Constructors
 
         #region Internal Properties
-
-        internal OpenGLModule Module { get; }
 
         #endregion Internal Properties
 

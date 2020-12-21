@@ -21,7 +21,7 @@ namespace OpenBreed.Core
     /// Enqueues events:
     /// WorldInitializedEvent - when world is initialized
     /// </summary>
-    public class World
+    public sealed class World
     {
         #region Public Fields
 
@@ -51,8 +51,6 @@ namespace OpenBreed.Core
 
             systems = builder.systems;
             Systems = new ReadOnlyCollection<IWorldSystem>(systems);
-
-            Components = new ComponentsMan();
 
             Core.Worlds.RegisterWorld(this);
 
@@ -92,8 +90,6 @@ namespace OpenBreed.Core
         public ReadOnlyCollection<Entity> Entities { get; }
 
         public ReadOnlyCollection<IWorldSystem> Systems { get; }
-
-        public ComponentsMan Components { get; }
 
         /// <summary>
         /// Id of this world
@@ -203,7 +199,7 @@ namespace OpenBreed.Core
             Cleanup();
 
             Core.Worlds.RaiseEvent(new WorldInitializedEventArgs(Id));
-            Core.Scripts.TryInvokeFunction("WorldLoaded", Id);
+            Core.GetManager<IScriptMan>().TryInvokeFunction("WorldLoaded", Id);
 
         }
 

@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace OpenBreed.Core.Managers
 {
-    public class FsmMan
+    public class FsmMan : IFsmMan
     {
         #region Private Fields
 
@@ -18,18 +18,11 @@ namespace OpenBreed.Core.Managers
 
         #region Public Constructors
 
-        public FsmMan(ICore core)
+        public FsmMan()
         {
-            Core = core;
         }
 
         #endregion Public Constructors
-
-        #region Public Properties
-
-        public ICore Core { get; }
-
-        #endregion Public Properties
 
         #region Public Methods
 
@@ -65,25 +58,21 @@ namespace OpenBreed.Core.Managers
 
         public StateMachine<TState, TImpulse> Create<TState, TImpulse>(string name) where TState : Enum where TImpulse : Enum
         {
-            var newFsm = new StateMachine<TState, TImpulse>(Core, name);
+            var newFsm = new StateMachine<TState, TImpulse>(name);
             newFsm.Id = list.Add(newFsm);
             return newFsm;
         }
 
-        #endregion Public Methods
-
-        #region Internal Methods
-
-        internal void EnterState(Entity entity, MachineState state, int withImpulseId)
+        public void EnterState(Entity entity, MachineState state, int withImpulseId)
         {
             list[state.FsmId].EnterState(entity, state.StateId, withImpulseId);
         }
 
-        internal void LeaveState(Entity entity, MachineState state, int withImpulseId)
+        public void LeaveState(Entity entity, MachineState state, int withImpulseId)
         {
             list[state.FsmId].LeaveState(entity, state.StateId, withImpulseId);
         }
 
-        #endregion Internal Methods
+        #endregion Public Methods
     }
 }

@@ -1,5 +1,7 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Core.Extensions;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Logging;
+
+//using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Managers;
@@ -12,40 +14,30 @@ namespace OpenBreed.Core.Modules.Rendering
 {
     public class OpenGLModule : BaseCoreModule, IRenderModule
     {
-        #region Private Fields
-
-        private readonly SpriteMan spriteMan;
-        private readonly StampMan stampMan;
-        private readonly FontMan fontMan;
-        private TextureMan textureMan;
-        private TileMan tileMan;
-
-        #endregion Private Fields
-
         #region Public Constructors
 
         public OpenGLModule(ICore core) : base(core)
         {
-            textureMan = new TextureMan(this);
-            tileMan = new TileMan(this);
-            spriteMan = new SpriteMan(this);
-            stampMan = new StampMan(this);
-            fontMan = new FontMan(this);
+            Textures = core.GetManager<ITextureMan>();
+            Tiles = core.GetManager<ITileMan>();
+            Sprites = core.GetManager<ISpriteMan>();
+            Stamps = core.GetManager<IStampMan>();
+            Fonts = core.GetManager<IFontMan>();
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public ITextureMan Textures { get { return textureMan; } }
+        public ITextureMan Textures { get; }
 
-        public ISpriteMan Sprites { get { return spriteMan; } }
+        public ISpriteMan Sprites { get; }
 
-        public IStampMan Stamps { get { return stampMan; } }
+        public IStampMan Stamps { get; }
 
-        public ITileMan Tiles { get { return tileMan; } }
+        public ITileMan Tiles { get; }
 
-        public IFontMan Fonts { get { return fontMan; } }
+        public IFontMan Fonts { get; }
 
         public World ScreenWorld { get; set; }
 
@@ -60,6 +52,20 @@ namespace OpenBreed.Core.Modules.Rendering
         #endregion Private Properties
 
         #region Public Methods
+
+        public static void AddManagers(IManagerCollection manCollection)
+        {
+            manCollection.AddSingleton<ITextureMan>(() => new TextureMan());
+
+            manCollection.AddSingleton<ITileMan>(() => new TileMan(manCollection.GetManager<ITextureMan>()));
+
+            manCollection.AddSingleton<ISpriteMan>(() => new SpriteMan(manCollection.GetManager<ITextureMan>(),
+                                                                       manCollection.GetManager<ILogger>()));
+
+            manCollection.AddSingleton<IStampMan>(() => new StampMan());
+
+            manCollection.AddSingleton<IFontMan>(() => new FontMan(manCollection.GetManager<ITextureMan>()));
+        }
 
         public void Draw(float dt)
         {

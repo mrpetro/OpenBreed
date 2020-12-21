@@ -48,9 +48,8 @@ namespace OpenBreed.Core.States
 
         #region Internal Constructors
 
-        internal StateMachine(ICore core, string name)
+        internal StateMachine(string name)
         {
-            Core = core;
             Name = name;
         }
 

@@ -3,7 +3,6 @@ using OpenBreed.Common.Data;
 using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools;
 using OpenBreed.Core;
-using OpenBreed.Core.Builders;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Components.Xml;
 using OpenBreed.Core.Entities.Xml;
@@ -12,19 +11,15 @@ using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Components.Xml;
 using OpenBreed.Core.Modules.Audio;
-using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Components.Xml;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Database.Interface;
-using OpenBreed.Model.Scripts;
-using OpenBreed.Model.Texts;
 using OpenTK;
 using System;
 using System.Drawing;
-using System.Xml;
 
 namespace OpenBreed.Game
 {
@@ -32,35 +27,36 @@ namespace OpenBreed.Game
     {
         #region Private Fields
 
+        private readonly IScriptMan scriptMan;
         private readonly IDatabase database;
         private readonly IUnitOfWork unitOfWork;
         private readonly LogConsolePrinter logConsolePrinter;
         private readonly IVariableMan variables;
         private readonly DataProvider dataProvider;
+
         #endregion Private Fields
 
         #region Public Constructors
 
-        internal VideoSystemsFactory VideoSystemsFactory { get; }
-
-        public Game(IManagerCollection manCollection, ICoreModulesFactory modulesFactory) : 
+        public Game(IManagerCollection manCollection, ICoreModulesFactory modulesFactory) :
             base(manCollection)
         {
+            scriptMan = manCollection.GetManager<IScriptMan>();
             this.database = manCollection.GetManager<IDatabase>();
             this.variables = manCollection.GetManager<IVariableMan>();
-            Logging = manCollection.GetManager<ILogger>();
+            Inputs = manCollection.GetManager<IInputsMan>();
             logConsolePrinter = new LogConsolePrinter(Logging);
             logConsolePrinter.StartPrinting();
 
+            Animations = manCollection.GetManager<IAnimMan>();
+
             Sounds = modulesFactory.CreateAudioModule(this);
             Rendering = modulesFactory.CreateVideoModule(this);
-            Scripts = new LuaScriptMan(this);
 
             VideoSystemsFactory = new VideoSystemsFactory(this);
 
             Inputs = new InputsMan(this);
             EntityFactory = new EntityFactory(this);
-            Animations = new AnimMan(this);
 
             this.unitOfWork = this.database.CreateUnitOfWork();
             this.dataProvider = new DataProvider(unitOfWork, Logging, this.variables);
@@ -72,26 +68,13 @@ namespace OpenBreed.Game
         #region Public Properties
 
         public override IRenderModule Rendering { get; }
-
         public override EntityFactory EntityFactory { get; }
-
         public override IAudioModule Sounds { get; }
-
-        public override AnimMan Animations { get; }
-
-        public override ILogger Logging { get; }
-
+        public override IAnimMan Animations { get; }
         public override JobMan Jobs => throw new NotImplementedException();
-
-        public override FsmMan StateMachines => throw new NotImplementedException();
-
-        public override PlayersMan Players => throw new NotImplementedException();
-
-        public override ItemsMan Items => throw new NotImplementedException();
-
-        public override InputsMan Inputs { get; }
-
-        public override IScriptMan Scripts { get; }
+        public override IFsmMan StateMachines => throw new NotImplementedException();
+        public override IPlayersMan Players => throw new NotImplementedException();
+        public override IInputsMan Inputs { get; }
 
         public override Matrix4 ClientTransform
         {
@@ -100,10 +83,15 @@ namespace OpenBreed.Game
         }
 
         public override float ClientRatio => Client.ClientRatio;
-
         public override Rectangle ClientRectangle => Client.ClientRectangle;
 
         #endregion Public Properties
+
+        #region Internal Properties
+
+        internal VideoSystemsFactory VideoSystemsFactory { get; }
+
+        #endregion Internal Properties
 
         #region Public Methods
 
@@ -111,6 +99,60 @@ namespace OpenBreed.Game
         {
             Client.Exit();
         }
+
+        public override void Load()
+        {
+            RegisterXmlComponents();
+            RegisterComponentFactories();
+
+            var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"D:\Projects\DB\Templates\Logo1.xml");
+
+            var entity = EntityFactory.Create(entityTemplate);
+
+            Rendering.ScreenWorld = ScreenWorldHelper.CreateWorld(this);
+
+            GameWorldHelper.Create(this);
+
+            var entryScript = dataProvider.Scripts.GetScript("Scripts.Entry.lua");
+
+            //var templateScript = dataProvider.EntityTemplates.GetEntityTemplate("EntityTemplates.Logo1.lua");
+
+            scriptMan.RunString(entryScript.Script);
+        }
+
+        public override void Update(float dt)
+        {
+            Commands.ExecuteEnqueued();
+
+            Worlds.Cleanup();
+
+            Rendering.Cleanup();
+
+            //Players.ResetInputs();
+
+            Inputs.Update();
+            //Players.ApplyInputs();
+            //StateMachine.Update((float)e.Time);
+            Worlds.Update(dt);
+            //Jobs.Update(dt);
+        }
+
+        public override void Run()
+        {
+            ExposeScriptingApi();
+
+            SpriteSystem.RegisterHandlers(Commands);
+            TileSystem.RegisterHandlers(Commands);
+            TextPresenterSystem.RegisterHandlers(Commands);
+            ViewportSystem.RegisterHandlers(Commands);
+            TextSystem.RegisterHandlers(Commands);
+
+            Client.Run();
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private void RegisterXmlComponents()
         {
@@ -144,76 +186,22 @@ namespace OpenBreed.Game
             EntityFactory.RegisterComponentFactory<XmlFsmComponent>(new FsmComponentFactory(this));
         }
 
-        public override void Load()
-        {
-            RegisterXmlComponents();
-            RegisterComponentFactories();
-
-            var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"D:\Projects\DB\Templates\Logo1.xml");
-
-            var entity = EntityFactory.Create(entityTemplate);
-
-            Rendering.ScreenWorld = ScreenWorldHelper.CreateWorld(this);
-
-            GameWorldHelper.Create(this);
-
-            var entryScript = dataProvider.Scripts.GetScript("Scripts.Entry.lua");
-
-
-
-            //var templateScript = dataProvider.EntityTemplates.GetEntityTemplate("EntityTemplates.Logo1.lua");
-
-            
-            Scripts.RunString(entryScript.Script);
-        }
-
-        public override void Update(float dt)
-        {
-            Commands.ExecuteEnqueued();
-
-            Worlds.Cleanup();
-
-            Rendering.Cleanup();
-
-            //Players.ResetInputs();
-
-            Inputs.Update();
-            //Players.ApplyInputs();
-            //StateMachine.Update((float)e.Time);
-            Worlds.Update(dt);
-            //Jobs.Update(dt);
-        }
-
         private void ExposeScriptingApi()
         {
-            Scripts.Expose("Worlds", Worlds);
-            Scripts.Expose("Entities", Entities);
-            Scripts.Expose("Commands", Commands);
-            Scripts.Expose("Inputs", Inputs);
-            Scripts.Expose("Logging", Logging);
-            Scripts.Expose("DataProvider", dataProvider);
+            scriptMan.Expose("Worlds", Worlds);
+            scriptMan.Expose("Entities", Entities);
+            scriptMan.Expose("Commands", Commands);
+            scriptMan.Expose("Inputs", Inputs);
+            scriptMan.Expose("Logging", Logging);
+            scriptMan.Expose("DataProvider", dataProvider);
             //Scripts.Expose("Players", Players);
 
             //Scripts.RunFile(@"Content\Scripts\start.lua");
-            Scripts.RunFile(@"D:\Projects\DB\Templates\Logo1.lua");
-
+            scriptMan.RunFile(@"D:\Projects\DB\Templates\Logo1.lua");
 
             //var xmlTemplateReader = new XmlComponentReader(@"D:\Projects\DB\Templates\Logo1.xml");
         }
 
-        public override void Run()
-        {
-            ExposeScriptingApi();
-
-            SpriteSystem.RegisterHandlers(Commands);
-            TileSystem.RegisterHandlers(Commands);
-            TextPresenterSystem.RegisterHandlers(Commands);
-            ViewportSystem.RegisterHandlers(Commands);
-            TextSystem.RegisterHandlers(Commands);
-
-            Client.Run();
-        }
-
-        #endregion Public Methods
+        #endregion Private Methods
     }
 }

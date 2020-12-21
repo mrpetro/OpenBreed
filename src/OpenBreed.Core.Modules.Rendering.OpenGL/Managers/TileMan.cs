@@ -12,14 +12,15 @@ namespace OpenBreed.Core.Modules.Rendering.Managers
 
         private readonly List<ITileAtlas> items = new List<ITileAtlas>();
         private readonly Dictionary<string, ITileAtlas> aliases = new Dictionary<string, ITileAtlas>();
+        private readonly ITextureMan textureMan;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal TileMan(OpenGLModule module)
+        internal TileMan(ITextureMan textureMan)
         {
-            Module = module ?? throw new ArgumentNullException(nameof(module));
+            this.textureMan = textureMan;
         }
 
         #endregion Internal Constructors
@@ -38,7 +39,7 @@ namespace OpenBreed.Core.Modules.Rendering.Managers
             if (aliases.TryGetValue(alias, out result))
                 return result;
 
-            var texture = Module.Textures.GetById(textureId);
+            var texture = textureMan.GetById(textureId);
             result = new TileAtlas(items.Count, texture, tileSize, tileColumns, tileRows);
             items.Add(result);
             aliases.Add(alias, result);
