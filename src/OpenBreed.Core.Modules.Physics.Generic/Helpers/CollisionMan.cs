@@ -1,38 +1,31 @@
-﻿using OpenBreed.Core.Collections;
+﻿using OpenBreed.Common.Logging;
+using OpenBreed.Core.Collections;
 using OpenBreed.Core.Entities;
+using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenTK;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace OpenBreed.Core.Modules.Physics.Helpers
 {
-    public class CollisionMan
+    internal class CollisionMan : ICollisionMan
     {
         #region Private Fields
 
         private readonly Dictionary<string, int> aliases = new Dictionary<string, int>();
+        private readonly ILogger logger;
         private IdMap<ColliderType> list = new IdMap<ColliderType>();
 
         #endregion Private Fields
 
-        #region Private Constructors
+        #region Public Constructors
 
-        public CollisionMan(PhysicsModule module)
+        public CollisionMan(ILogger logger)
         {
-            Debug.Assert(module != null);
-
-            Module = module;
+            this.logger = logger;
         }
 
-        #endregion Private Constructors
-
-        #region Internal Properties
-
-        internal PhysicsModule Module { get; }
-
-        #endregion Internal Properties
+        #endregion Public Constructors
 
         #region Public Methods
 
@@ -69,7 +62,7 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
             return list[id].Name;
         }
 
-        internal void Callback(Entity entityA, Entity entityB, Vector2 projection)
+        public void Callback(Entity entityA, Entity entityB, Vector2 projection)
         {
             var colCmpA = entityA.Get<CollisionComponent>();
             var colCmpB = entityB.Get<CollisionComponent>();

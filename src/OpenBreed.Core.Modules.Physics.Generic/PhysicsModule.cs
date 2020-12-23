@@ -1,4 +1,7 @@
-﻿using OpenBreed.Core.Modules.Physics.Helpers;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Logging;
+using OpenBreed.Core.Managers;
+using OpenBreed.Core.Modules.Physics.Helpers;
 using System;
 
 namespace OpenBreed.Core.Modules.Physics
@@ -9,20 +12,27 @@ namespace OpenBreed.Core.Modules.Physics
 
         public PhysicsModule(ICore core) : base(core)
         {
-            Shapes = new ShapeMan(this);
-            Fixturs = new FixtureMan(this);
-            Collisions = new CollisionMan(this);
-       }
+            Shapes = core.GetManager<IShapeMan>();
+            Fixturs = core.GetManager<IFixtureMan>();
+            Collisions = core.GetManager<ICollisionMan>();
+        }
+
+        public static void AddManagers(IManagerCollection manCollection)
+        {
+            manCollection.AddSingleton<IShapeMan>(() => new ShapeMan(manCollection.GetManager<ILogger>()));
+            manCollection.AddSingleton<IFixtureMan>(() => new FixtureMan(manCollection.GetManager<ILogger>()));
+            manCollection.AddSingleton<ICollisionMan>(() => new CollisionMan(manCollection.GetManager<ILogger>()));
+        }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public FixtureMan Fixturs { get; }
+        public IFixtureMan Fixturs { get; }
 
-        public ShapeMan Shapes { get; }
+        public IShapeMan Shapes { get; }
 
-        public CollisionMan Collisions { get; }
+        public ICollisionMan Collisions { get; }
 
 
         #endregion Public Properties

@@ -1,9 +1,10 @@
 ﻿
+using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Physics.Shapes;
 
 namespace OpenBreed.Core.Modules.Physics.Components
 {
-    public class Fixture
+    public class Fixture : IFixture
     {
         #region Public Constructors
 

@@ -59,6 +59,7 @@ namespace OpenBreed.Sandbox
                                                                          manCollection.GetManager<IInputsMan>()));
 
             OpenGLModule.AddManagers(manCollection);
+            PhysicsModule.AddManagers(manCollection);
         }
 
         public ICore Create()

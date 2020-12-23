@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Modules.Physics;
+﻿using OpenBreed.Core.Managers;
+using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Physics.Helpers;
 
 namespace OpenBreed.Sandbox.Entities
@@ -19,7 +20,7 @@ namespace OpenBreed.Sandbox.Entities
 
         #region Public Methods
 
-        public static void Initialize(CollisionMan collisions)
+        public static void Initialize(ICollisionMan collisions)
         {
             ActorBody = collisions.CreateColliderType("ActorBody");
             DoorOpener = collisions.CreateColliderType("DoorOpener");

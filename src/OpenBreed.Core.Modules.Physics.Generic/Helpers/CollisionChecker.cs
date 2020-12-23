@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core.Modules.Physics.Components;
+﻿using OpenBreed.Core.Managers;
+using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Shapes;
 using OpenTK;
 using System;
@@ -80,7 +81,7 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
             return false;
         }
 
-        public static bool Check(Vector2 posA, Fixture fixtureA, Vector2 posB, Fixture fixtureB, out Vector2 projection)
+        public static bool Check(Vector2 posA, IFixture fixtureA, Vector2 posB, IFixture fixtureB, out Vector2 projection)
         {
             if (fixtureA.Shape is BoxShape && fixtureB.Shape is BoxShape)
                 return Check(posA, (BoxShape)fixtureA.Shape, posB, (BoxShape)fixtureB.Shape, out projection);

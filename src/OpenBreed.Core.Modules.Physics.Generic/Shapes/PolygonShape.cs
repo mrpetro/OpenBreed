@@ -1,4 +1,5 @@
-﻿using OpenTK;
+﻿using OpenBreed.Core.Managers;
+using OpenTK;
 using System;
 
 namespace OpenBreed.Core.Modules.Physics.Shapes

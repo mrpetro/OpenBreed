@@ -1,12 +1,11 @@
 ﻿using OpenBreed.Core.Entities;
+using OpenBreed.Core.Managers;
 using OpenTK;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Core.Modules.Physics.Helpers
 {
-    public delegate void CollisionPairCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection);
-
     internal class ColliderType
     {
         #region Private Fields

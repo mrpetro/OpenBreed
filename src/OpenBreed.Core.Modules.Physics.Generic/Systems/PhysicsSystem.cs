@@ -23,8 +23,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         private const int CELL_SIZE = 16;
 
-        public FixtureMan Fixtures { get; }
-        public CollisionMan Collisions { get; }
+        public IFixtureMan Fixtures { get; }
+        public ICollisionMan Collisions { get; }
 
         private readonly List<DynamicPack> inactiveDynamics = new List<DynamicPack>();
         private readonly List<DynamicPack> activeDynamics = new List<DynamicPack>();
@@ -37,8 +37,8 @@ namespace OpenBreed.Core.Modules.Physics.Systems
 
         internal PhysicsSystem(PhysicsSystemBuilder builder) : base(builder.core)
         {
-            Fixtures = Core.GetModule<PhysicsModule>().Fixturs;
-            Collisions = Core.GetModule<PhysicsModule>().Collisions;
+            Fixtures = Core.GetManager<IFixtureMan>();
+            Collisions = Core.GetManager<ICollisionMan>();
 
             Require<BodyComponent>();
 

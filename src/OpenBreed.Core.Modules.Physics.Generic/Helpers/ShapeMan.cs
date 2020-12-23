@@ -1,4 +1,6 @@
-﻿using OpenBreed.Core.Collections;
+﻿using OpenBreed.Common.Logging;
+using OpenBreed.Core.Collections;
+using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Physics.Shapes;
 using System;
 using System.Collections;
@@ -6,29 +8,26 @@ using System.Diagnostics;
 
 namespace OpenBreed.Core.Modules.Physics.Helpers
 {
-    public class ShapeMan
+    internal class ShapeMan : IShapeMan
     {
         #region Private Fields
 
         private readonly IdMap<IShape> items = new IdMap<IShape>();
         private readonly Hashtable tagsToIds = new Hashtable();
+        private readonly ILogger logger;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ShapeMan(PhysicsModule module)
+        public ShapeMan(ILogger logger)
         {
-            Debug.Assert(module != null);
-
-            Module = module;
+            this.logger = logger;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
-
-        public PhysicsModule Module { get; }
 
         public int Count
         {
@@ -65,7 +64,7 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
             if (tagsToIds.ContainsKey(tag))
             {
                 if (overwrite)
-                    Module.Core.Logging.Warning($"Overwriting existing shape under tag '{tag}'.");
+                    logger.Warning($"Overwriting existing shape under tag '{tag}'.");
                 else
                     throw new InvalidOperationException($"Shape already registered under tag '{tag}'.");
             }

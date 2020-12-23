@@ -1,40 +1,33 @@
-﻿using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Physics.Shapes;
+﻿using OpenBreed.Common.Logging;
+using OpenBreed.Core.Managers;
+using OpenBreed.Core.Modules.Physics.Components;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace OpenBreed.Core.Modules.Physics.Helpers
 {
-    public class FixtureMan
+    internal class FixtureMan : IFixtureMan
     {
         #region Private Fields
 
         private readonly List<Fixture> items = new List<Fixture>();
         private readonly Dictionary<string, Fixture> aliases = new Dictionary<string, Fixture>();
+        private readonly ILogger logger;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal FixtureMan(PhysicsModule module)
+        internal FixtureMan(ILogger logger)
         {
-            Debug.Assert(module != null);
-
-            Module = module;
+            this.logger = logger;
         }
 
         #endregion Internal Constructors
 
-        #region Internal Properties
-
-        internal PhysicsModule Module { get; }
-
-        #endregion Internal Properties
-
         #region Public Methods
 
-        public Fixture Create(string alias, string type, IShape shape)
+        public IFixture Create(string alias, string type, IShape shape)
         {
             Fixture result;
             if (aliases.TryGetValue(alias, out result))
@@ -46,12 +39,12 @@ namespace OpenBreed.Core.Modules.Physics.Helpers
             return result;
         }
 
-        public Fixture GetById(int id)
+        public IFixture GetById(int id)
         {
             return items[id];
         }
 
-        public Fixture GetByAlias(string alias)
+        public IFixture GetByAlias(string alias)
         {
             Fixture result;
             aliases.TryGetValue(alias, out result);
