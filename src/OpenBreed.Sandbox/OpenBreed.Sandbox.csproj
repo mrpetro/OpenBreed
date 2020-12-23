@@ -109,6 +109,7 @@
     <Compile Include="Entities\Button\ButtonState.cs" />
     <Compile Include="Entities\Button\States\PressedState.cs" />
     <Compile Include="Entities\Button\States\IdleState.cs" />
+    <Compile Include="Entities\Camera\CameraBuilder.cs" />
     <Compile Include="Entities\Camera\CameraHelper.cs" />
     <Compile Include="Entities\ColliderTypes.cs" />
     <Compile Include="Entities\CursorCoords\CursorCoordsHelper.cs" />
@@ -206,10 +207,6 @@
       <Project>{82af3d57-a4f4-4339-859a-7e82942b96df}</Project>
       <Name>OpenBreed.Core.Modules.Audio.OpenAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Core.Modules.Rendering.OpenGL\OpenBreed.Core.Modules.Rendering.OpenGL.csproj">
-      <Project>{EA747476-89FE-462A-9BDC-DFC2E9A64EAD}</Project>
-      <Name>OpenBreed.Core.Modules.Rendering.OpenGL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Core.Systems.Control\OpenBreed.Core.Systems.Control.csproj">
       <Project>{CF689601-0842-497F-A05F-B31431697B4E}</Project>
       <Name>OpenBreed.Core.Systems.Control</Name>
@@ -221,6 +218,22 @@
     <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">
       <Project>{95BDF122-FAC8-4AC4-B9A8-B549D942E37D}</Project>
       <Name>OpenBreed.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Rendering.Components\OpenBreed.Rendering.Components.csproj">
+      <Project>{4BF54E49-6BEA-4733-8189-0A9204819A11}</Project>
+      <Name>OpenBreed.Rendering.Components</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Rendering.Interface\OpenBreed.Rendering.Interface.csproj">
+      <Project>{33B3ECA4-715E-475E-B01E-80B6DB0876FC}</Project>
+      <Name>OpenBreed.Rendering.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Rendering.OpenGL\OpenBreed.Rendering.OpenGL.csproj">
+      <Project>{08856058-9DE1-43E5-A4AA-91BF98BBDE50}</Project>
+      <Name>OpenBreed.Rendering.OpenGL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Rendering.Systems\OpenBreed.Rendering.Systems.csproj">
+      <Project>{DFE12B44-E9BF-466C-B74B-75D14458C4E8}</Project>
+      <Name>OpenBreed.Rendering.Systems</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,7 @@ using OpenBreed.Core;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Components.Xml;
 using OpenBreed.Core.Managers;
+using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Animation.Builders;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Components.Xml;
@@ -22,6 +23,12 @@ using OpenBreed.Core.Modules.Rendering.Components.Xml;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Control.Systems;
+using OpenBreed.Rendering.Components;
+using OpenBreed.Rendering.Components.Xml;
+using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.OpenGL;
+using OpenBreed.Rendering.Systems;
+using OpenBreed.Rendering.Systems.Builders;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Button;
@@ -114,13 +121,14 @@ namespace OpenBreed.Sandbox
 
             EntityFactory = new EntityFactory(this);
 
-            Rendering = new OpenGLModule(this);
+            renderingModule = new OpenGLModule(this);
+
             Physics = new PhysicsModule(this);
             Sounds = new OpenALModule(this);
 
-            RegisterModule(Rendering);
-            RegisterModule(Physics);
-            RegisterModule(Sounds);
+            RegisterModule<IRenderModule>(renderingModule);
+            RegisterModule<IPhysicsModule>(Physics);
+            RegisterModule<IAudioModule>(Sounds);
 
             window.VSync = VSyncMode.On;
         }
@@ -129,13 +137,13 @@ namespace OpenBreed.Sandbox
 
         #region Public Properties
 
-        public override IRenderModule Rendering { get; }
-
-        public PhysicsModule Physics { get; }
+        public IPhysicsModule Physics { get; }
 
         public override IAudioModule Sounds { get; }
 
         public override EntityFactory EntityFactory { get; }
+
+        private readonly IRenderModule renderingModule;
 
         public override IAnimMan Animations { get; }
 
@@ -217,7 +225,7 @@ namespace OpenBreed.Sandbox
 
             Worlds.Cleanup();
 
-            Rendering.Cleanup();
+            renderingModule.Cleanup();
 
             Players.ResetInputs();
 
@@ -249,7 +257,7 @@ namespace OpenBreed.Sandbox
 
         protected void OnRenderFrame(object sender, FrameEventArgs e)
         {
-            Rendering.Draw((float)e.Time);
+            renderingModule.Draw((float)e.Time);
 
             window.SwapBuffers();
         }
@@ -322,30 +330,30 @@ namespace OpenBreed.Sandbox
             p2.AddKeyBinding("Walking", "Up", Key.W);
             p2.AddKeyBinding("Walking", "Down", Key.S);
 
-            var tileTex = Rendering.Textures.Create("Textures/Tiles/16/Test", @"Content\Graphics\TileAtlasTest32bit.bmp");
-            Rendering.Tiles.Create("Atlases/Tiles/16/Test", tileTex.Id, 16, 4, 4);
+            var tileTex = renderingModule.Textures.Create("Textures/Tiles/16/Test", @"Content\Graphics\TileAtlasTest32bit.bmp");
+            renderingModule.Tiles.Create("Atlases/Tiles/16/Test", tileTex.Id, 16, 4, 4);
 
-            var doorTex = Rendering.Textures.Create("Textures/Sprites/Door", @"Content\Graphics\DoorSpriteSet.png");
-            Rendering.Sprites.Create("Atlases/Sprites/Door/Horizontal", doorTex.Id, 32, 16, 5, 1, 0, 0);
-            Rendering.Sprites.Create("Atlases/Sprites/Door/Vertical", doorTex.Id, 16, 32, 5, 1, 0, 16);
+            var doorTex = renderingModule.Textures.Create("Textures/Sprites/Door", @"Content\Graphics\DoorSpriteSet.png");
+            renderingModule.Sprites.Create("Atlases/Sprites/Door/Horizontal", doorTex.Id, 32, 16, 5, 1, 0, 0);
+            renderingModule.Sprites.Create("Atlases/Sprites/Door/Vertical", doorTex.Id, 16, 32, 5, 1, 0, 16);
 
-            var teleportTex = Rendering.Textures.Create("Textures/Sprites/Teleport", @"Content\Graphics\TeleportSpriteSet.png");
-            Rendering.Sprites.Create(TeleportHelper.SPRITE_TELEPORT_ENTRY, teleportTex.Id, 32, 32, 4, 1, 0, 0);
-            Rendering.Sprites.Create(TeleportHelper.SPRITE_TELEPORT_EXIT, teleportTex.Id, 32, 32, 4, 1, 0, 32);
-            Rendering.Sprites.Create(WorldGateHelper.SPRITE_WORLD_ENTRY, teleportTex.Id, 32, 32, 4, 1, 0, 96);
-            Rendering.Sprites.Create(WorldGateHelper.SPRITE_WORLD_EXIT, teleportTex.Id, 32, 32, 4, 1, 0, 64);
+            var teleportTex = renderingModule.Textures.Create("Textures/Sprites/Teleport", @"Content\Graphics\TeleportSpriteSet.png");
+            renderingModule.Sprites.Create(TeleportHelper.SPRITE_TELEPORT_ENTRY, teleportTex.Id, 32, 32, 4, 1, 0, 0);
+            renderingModule.Sprites.Create(TeleportHelper.SPRITE_TELEPORT_EXIT, teleportTex.Id, 32, 32, 4, 1, 0, 32);
+            renderingModule.Sprites.Create(WorldGateHelper.SPRITE_WORLD_ENTRY, teleportTex.Id, 32, 32, 4, 1, 0, 96);
+            renderingModule.Sprites.Create(WorldGateHelper.SPRITE_WORLD_EXIT, teleportTex.Id, 32, 32, 4, 1, 0, 64);
 
-            var laserTex = Rendering.Textures.Create("Textures/Sprites/Laser", @"Content\Graphics\LaserSpriteSet.png");
-            Rendering.Sprites.Create("Atlases/Sprites/Projectiles/Laser", laserTex.Id, 16, 16, 8, 1, 0, 0);
+            var laserTex = renderingModule.Textures.Create("Textures/Sprites/Laser", @"Content\Graphics\LaserSpriteSet.png");
+            renderingModule.Sprites.Create("Atlases/Sprites/Projectiles/Laser", laserTex.Id, 16, 16, 8, 1, 0, 0);
 
-            var arrowTex = Rendering.Textures.Create("Textures/Sprites/Arrow", @"Content\Graphics\ArrowSpriteSet.png");
-            Rendering.Sprites.Create(ActorHelper.SPRITE_ARROW, arrowTex.Id, 32, 32, 8, 5);
+            var arrowTex = renderingModule.Textures.Create("Textures/Sprites/Arrow", @"Content\Graphics\ArrowSpriteSet.png");
+            renderingModule.Sprites.Create(ActorHelper.SPRITE_ARROW, arrowTex.Id, 32, 32, 8, 5);
 
-            var turretTex = Rendering.Textures.Create("Textures/Sprites/Turret", @"Content\Graphics\TurretSpriteSet.png");
-            Rendering.Sprites.Create(TurretHelper.SPRITE_TURRET, turretTex.Id, 32, 32, 8, 2);
+            var turretTex = renderingModule.Textures.Create("Textures/Sprites/Turret", @"Content\Graphics\TurretSpriteSet.png");
+            renderingModule.Sprites.Create(TurretHelper.SPRITE_TURRET, turretTex.Id, 32, 32, 8, 2);
 
-            var cursorsTex = Rendering.Textures.Create("Textures/Sprites/Cursors", @"Content\Graphics\Cursors.png");
-            Rendering.Sprites.Create("Atlases/Sprites/Cursors", cursorsTex.Id, 16, 16, 1, 1);
+            var cursorsTex = renderingModule.Textures.Create("Textures/Sprites/Cursors", @"Content\Graphics\Cursors.png");
+            renderingModule.Sprites.Create("Atlases/Sprites/Cursors", cursorsTex.Id, 16, 16, 1, 1);
 
             ColliderTypes.Initialize(Physics.Collisions);
             ActorHelper.RegisterCollisionPairs(this);
@@ -370,7 +378,7 @@ namespace OpenBreed.Sandbox
             //ActorRotationHelper.CreateFsm(this);
             TurretHelper.CreateRotationFsm(this);
 
-            Rendering.ScreenWorld = ScreenWorldHelper.CreateWorld(this);
+            renderingModule.ScreenWorld = ScreenWorldHelper.CreateWorld(this);
 
             //TextWorldHelper.Create(this);
             HudWorldHelper.Create(this);
@@ -433,7 +441,7 @@ namespace OpenBreed.Sandbox
             ClientTransform = Matrix4.Identity;
             ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateTranslation(0.0f, -ClientRectangle.Height, 0.0f));
             ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateScale(1.0f, -1.0f, 1.0f));
-            Rendering.OnClientResized(ClientRectangle.Width, ClientRectangle.Height);
+            renderingModule.OnClientResized(ClientRectangle.Width, ClientRectangle.Height);
         }
 
         private void RegisterShapes()

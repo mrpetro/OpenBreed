@@ -24,6 +24,7 @@ using OpenBreed.Core.Components;
 using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Common.Tools;
 using OpenBreed.Core.Entities.Xml;
+using OpenBreed.Core.Modules;
 
 namespace OpenBreed.Sandbox.Entities.WorldGate
 {
@@ -66,7 +67,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
         public static void RegisterCollisionPairs(ICore core)
         {
-            var collisionMan = core.GetModule<PhysicsModule>().Collisions;
+            var collisionMan = core.GetModule<IPhysicsModule>().Collisions;
 
             collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.WorldExitTrigger, Actor2TriggerCallback);
             //collisionMan.RegisterCollisionPair(ColliderTypes.WorldExitTrigger, ColliderTypes.ActorBody, Actor2TriggerCallback);

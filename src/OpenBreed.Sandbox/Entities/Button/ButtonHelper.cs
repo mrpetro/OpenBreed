@@ -5,7 +5,7 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Animation.Events;
 using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Commands;
+using OpenBreed.Rendering.Systems.Commands;
 using OpenBreed.Core.States;
 using OpenBreed.Sandbox.Entities.Button.States;
 using OpenTK;

@@ -1,5 +1,4 @@
 ﻿using NLua;
-using OpenBreed.Core.Collections;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Builders;
 using OpenBreed.Core.Components;
@@ -8,6 +7,7 @@ using OpenBreed.Core.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenBreed.Common.Tools.Collections;
 
 namespace OpenBreed.Core.Managers
 {

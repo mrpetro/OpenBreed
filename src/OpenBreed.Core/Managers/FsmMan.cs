@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Collections;
+﻿using OpenBreed.Common.Tools.Collections;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.States;

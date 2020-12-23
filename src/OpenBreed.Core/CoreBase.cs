@@ -50,8 +50,6 @@ namespace OpenBreed.Core
 
         public abstract Rectangle ClientRectangle { get; }
 
-        public abstract IRenderModule Rendering { get; }
-
         public abstract IAudioModule Sounds { get; }
 
         public abstract IAnimMan Animations { get; }
@@ -134,9 +132,9 @@ namespace OpenBreed.Core
 
         #region Protected Methods
 
-        protected void RegisterModule(ICoreModule module)
+        protected void RegisterModule<TModule>(ICoreModule module) where TModule : ICoreModule
         {
-            modules.Add(module.GetType(), module);
+            modules.Add(typeof(TModule), module);
         }
 
         #endregion Protected Methods

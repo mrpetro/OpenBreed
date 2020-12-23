@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Rendering.Commands;
+using OpenBreed.Rendering.Systems.Commands;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

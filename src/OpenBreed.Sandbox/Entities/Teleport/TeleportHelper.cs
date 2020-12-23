@@ -15,7 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Commands;
+using OpenBreed.Rendering.Systems.Commands;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Components;

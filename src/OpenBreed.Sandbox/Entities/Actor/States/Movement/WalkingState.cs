@@ -6,7 +6,7 @@ using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Commands;
+using OpenBreed.Rendering.Systems.Commands;
 using OpenBreed.Core.States;
 using OpenBreed.Sandbox.Helpers;
 using OpenTK;

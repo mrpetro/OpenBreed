@@ -32,9 +32,5 @@ namespace OpenBreed.Game
             throw new NotImplementedException();
         }
 
-        public IRenderModule CreateVideoModule(ICore core)
-        {
-            return new OpenGLModule(core);
-        }
     }
 }

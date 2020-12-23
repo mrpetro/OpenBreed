@@ -7,8 +7,6 @@ namespace OpenBreed.Core.Modules
     {
         #region Public Methods
 
-        IRenderModule CreateVideoModule(ICore core);
-
         IAudioModule CreateAudioModule(ICore core);
 
         IInputModule CreateInputModule(ICore core);

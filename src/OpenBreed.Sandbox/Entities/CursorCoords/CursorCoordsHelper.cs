@@ -4,6 +4,9 @@ using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Rendering.Components;
+using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Systems.Events;
 using OpenBreed.Sandbox.Jobs;
 using OpenBreed.Sandbox.Worlds;
 using OpenTK;
@@ -20,7 +23,7 @@ namespace OpenBreed.Sandbox.Entities.CursorCoords
     {
         public static void AddToWorld(World world)
         {
-            var arial12 = world.Core.Rendering.Fonts.Create("ARIAL", 10);
+            var arial12 = world.Core.GetModule<IRenderModule>().Fonts.Create("ARIAL", 10);
 
             var entity = world.Core.Entities.Create();
 

@@ -5,7 +5,7 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Rendering.Commands;
+using OpenBreed.Rendering.Systems.Commands;
 using OpenBreed.Sandbox.Entities.Actor.States.Movement;
 using OpenBreed.Sandbox.Helpers;
 using OpenTK;

@@ -6,7 +6,7 @@ using System;
 
 namespace OpenBreed.Core.Modules.Physics
 {
-    public class PhysicsModule : BaseCoreModule
+    public class PhysicsModule : BaseCoreModule, IPhysicsModule
     {
         #region Public Constructors
 

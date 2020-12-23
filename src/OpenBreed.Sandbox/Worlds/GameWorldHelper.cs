@@ -13,13 +13,16 @@ using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Physics.Systems;
 using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Entities.Builders;
-using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Control.Components;
+using OpenBreed.Rendering.Components;
+using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Systems;
+using OpenBreed.Rendering.Systems.Events;
 using OpenBreed.Sandbox.Components;
 using OpenBreed.Sandbox.Entities.Actor;
+using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Systems;
@@ -36,6 +39,8 @@ namespace OpenBreed.Sandbox.Worlds
     {
         public static void AddSystems(Program core, WorldBuilder builder)
         {
+            var renderingModule = core.GetModule<IRenderModule>();
+
             int width = builder.width;
             int height = builder.height;
 
@@ -70,9 +75,9 @@ namespace OpenBreed.Sandbox.Worlds
             //builder.AddSystem(core.CreateWireframeSystem().Build());
             builder.AddSystem(core.CreateTextSystem().Build());
 
-            builder.AddSystem(new UiSystem(core));
+            builder.AddSystem(new UiSystem(core, renderingModule));
 
-            builder.AddSystem(new ViewportSystem(core));
+            builder.AddSystem(new ViewportSystem(core, core.GetModule<IRenderModule>()));
         }
 
         public static World CreateGameWorld(Program core, string worldName)

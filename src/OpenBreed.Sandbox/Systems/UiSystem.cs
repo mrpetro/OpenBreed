@@ -5,6 +5,8 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems;
+using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Systems;
 using OpenBreed.Sandbox.Components;
 using System;
 using System.Collections.Generic;
@@ -17,15 +19,17 @@ namespace OpenBreed.Sandbox.Systems
         #region Private Fields
 
         private List<Entity> entities = new List<Entity>();
+        private readonly IRenderModule renderingModule;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public UiSystem(ICore core) : base(core)
+        public UiSystem(ICore core, IRenderModule renderingModule) : base(core)
         {
             Require<CursorInputComponent>();
             Require<PositionComponent>();
+            this.renderingModule = renderingModule;
         }
 
         #endregion Public Constructors
@@ -48,9 +52,9 @@ namespace OpenBreed.Sandbox.Systems
                 if (icc.CursorId != 0)
                     return;
 
-                var viewportSystem = Core.Rendering.ScreenWorld.Systems.OfType<ViewportSystem>().FirstOrDefault();
+                var viewportSystem = renderingModule.ScreenWorld.Systems.OfType<ViewportSystem>().FirstOrDefault();
 
-                var gameViewport = Core.Rendering.ScreenWorld.Entities.FirstOrDefault( item => object.Equals(item.Tag, "GameViewport"));
+                var gameViewport = renderingModule.ScreenWorld.Entities.FirstOrDefault( item => object.Equals(item.Tag, "GameViewport"));
 
                 if (gameViewport == null)
                     return;

@@ -11,6 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Core;
+using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Components;
 
 namespace OpenBreed.Sandbox.Entities
 {
@@ -26,7 +28,7 @@ namespace OpenBreed.Sandbox.Entities
             e.Add(new TextCaretComponent());
             e.Add(new TextDataComponent("This is test"));
 
-            var font = world.Core.Rendering.Fonts.Create("Consolas", 20);
+            var font = world.Core.GetModule<IRenderModule>().Fonts.Create("Consolas", 20);
 
             e.Add(new TextPresentationComponent(font.Id, Color4.White, 200.0f));
             e.Add(PositionComponent.Create(-200.0f,50.0f));

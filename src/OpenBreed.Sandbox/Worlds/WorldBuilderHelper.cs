@@ -2,8 +2,9 @@
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Commands;
+using OpenBreed.Rendering.Systems.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Rendering.Components;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.Teleport;

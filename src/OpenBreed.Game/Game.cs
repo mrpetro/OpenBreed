@@ -17,6 +17,10 @@ using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Components.Xml;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Database.Interface;
+using OpenBreed.Rendering.Components;
+using OpenBreed.Rendering.Components.Xml;
+using OpenBreed.Rendering.OpenGL;
+using OpenBreed.Rendering.Systems;
 using OpenTK;
 using System;
 using System.Drawing;
@@ -51,7 +55,7 @@ namespace OpenBreed.Game
             Animations = manCollection.GetManager<IAnimMan>();
 
             Sounds = modulesFactory.CreateAudioModule(this);
-            Rendering = modulesFactory.CreateVideoModule(this);
+            renderingModule = new OpenGLModule(this);
 
             VideoSystemsFactory = new VideoSystemsFactory(this);
 
@@ -67,9 +71,11 @@ namespace OpenBreed.Game
 
         #region Public Properties
 
-        public override IRenderModule Rendering { get; }
         public override EntityFactory EntityFactory { get; }
         public override IAudioModule Sounds { get; }
+
+        private readonly OpenGLModule renderingModule;
+
         public override IAnimMan Animations { get; }
         public override JobMan Jobs => throw new NotImplementedException();
         public override IFsmMan StateMachines => throw new NotImplementedException();
@@ -109,7 +115,7 @@ namespace OpenBreed.Game
 
             var entity = EntityFactory.Create(entityTemplate);
 
-            Rendering.ScreenWorld = ScreenWorldHelper.CreateWorld(this);
+            renderingModule.ScreenWorld = ScreenWorldHelper.CreateWorld(this);
 
             GameWorldHelper.Create(this);
 
@@ -126,7 +132,7 @@ namespace OpenBreed.Game
 
             Worlds.Cleanup();
 
-            Rendering.Cleanup();
+            renderingModule.Cleanup();
 
             //Players.ResetInputs();
 

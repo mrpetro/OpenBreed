@@ -165,7 +165,7 @@ namespace OpenBreed.Core.Modules.Physics.Components
 
         public void AddFixtureByName(string fixtureName)
         {
-            var fixture = core.GetModule<PhysicsModule>().Fixturs.GetByAlias(fixtureName);
+            var fixture = core.GetModule<IPhysicsModule>().Fixturs.GetByAlias(fixtureName);
 
             if (fixture != null)
                 Fixtures.Add(fixture.Id);

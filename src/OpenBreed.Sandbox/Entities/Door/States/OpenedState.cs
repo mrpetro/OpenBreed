@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Commands;
+using OpenBreed.Rendering.Systems.Commands;
 using OpenBreed.Core.States;
 using OpenBreed.Core.Modules.Animation.Systems;
 using OpenBreed.Core.Modules.Animation.Components;
@@ -14,6 +14,7 @@ using OpenBreed.Core.Modules.Physics.Commands;
 using OpenBreed.Sandbox.Entities.Door.States;
 using System;
 using OpenBreed.Core.Components;
+using OpenBreed.Rendering.Interface;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -54,7 +55,7 @@ namespace OpenBreed.Sandbox.Components.States
 
             var className = entity.Get<ClassComponent>().Name;
             var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
-            var stampId = entity.Core.Rendering.Stamps.GetByName($"{stampPrefix}/{className}/{stateName}").Id;
+            var stampId = entity.Core.GetModule<IRenderModule>().Stamps.GetByName($"{stampPrefix}/{className}/{stateName}").Id;
             entity.Core.Commands.Post(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
 
 

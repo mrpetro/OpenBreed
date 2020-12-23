@@ -2,12 +2,14 @@
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Entities.Builders;
+using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Helpers;
+using OpenBreed.Rendering.Components;
+using OpenBreed.Rendering.Interface;
 using OpenTK;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,10 +32,10 @@ namespace OpenBreed.Sandbox.Entities.Builders
         {
             HasBody = true;
 
-            physics = core.GetModule<PhysicsModule>();
+            physics = core.GetModule<IPhysicsModule>();
         }
 
-        private PhysicsModule physics;
+        private IPhysicsModule physics;
 
         #endregion Public Constructors
 
@@ -46,7 +48,7 @@ namespace OpenBreed.Sandbox.Entities.Builders
 
         public void SetTileAtlas(string atlasAlias)
         {
-            var atlas = Core.Rendering.Tiles.GetByAlias(atlasAlias);
+            var atlas = Core.GetModule<IRenderModule>().Tiles.GetByAlias(atlasAlias);
             this.atlasId = atlas.Id;
         }
 

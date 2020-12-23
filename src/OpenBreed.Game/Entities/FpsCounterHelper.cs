@@ -4,6 +4,9 @@ using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Rendering.Components;
+using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Systems.Events;
 using OpenTK;
 using OpenTK.Graphics;
 using System;
@@ -18,7 +21,7 @@ namespace OpenBreed.Game.Entities
     {
         public static void AddToWorld(World world)
         {
-            var arial12 = world.Core.Rendering.Fonts.Create("ARIAL", 10);
+            var arial12 = world.Core.GetModule<IRenderModule>().Fonts.Create("ARIAL", 10);
 
             var fpsTextEntity = world.Core.Entities.Create();
 

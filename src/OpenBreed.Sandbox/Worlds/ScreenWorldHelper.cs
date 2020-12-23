@@ -4,15 +4,19 @@ using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Commands;
+using OpenBreed.Rendering.Systems.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Systems;
+using OpenBreed.Rendering.Components;
+using OpenBreed.Rendering.Interface;
 using OpenTK.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Rendering.Systems.Events;
+using OpenBreed.Rendering.Systems;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -25,7 +29,7 @@ namespace OpenBreed.Sandbox.Worlds
         public static void AddSystems(Program core, WorldBuilder builder)
         {
             //Video
-            builder.AddSystem(new ViewportSystem(core));
+            builder.AddSystem(new ViewportSystem(core, core.GetModule<IRenderModule>()));
             //builder.AddSystem(core.CreateSpriteSystem().Build());
             //builder.AddSystem(core.CreateWireframeSystem().Build());
             //builder.AddSystem(core.CreateTextSystem().Build());
@@ -63,9 +67,11 @@ namespace OpenBreed.Sandbox.Worlds
             var hudViewport = CreateViewportEntity(core, HUD_VIEWPORT, 0, 0, core.ClientRectangle.Width, core.ClientRectangle.Height, false, true);
             var textViewport = CreateViewportEntity(core, TEXT_VIEWPORT, 0, 0, core.ClientRectangle.Width, core.ClientRectangle.Height, false, true);
 
-            core.Rendering.Subscribe<ClientResizedEventArgs>((s, a) => ResizeGameViewport(gameViewport, a));
-            core.Rendering.Subscribe<ClientResizedEventArgs>((s, a) => ResizeHudViewport(hudViewport, a));
-            core.Rendering.Subscribe<ClientResizedEventArgs>((s, a) => ResizeTextViewport(hudViewport, a));
+            var renderingModule = core.GetModule<IRenderModule>();
+
+            renderingModule.Subscribe<ClientResizedEventArgs>((s, a) => ResizeGameViewport(gameViewport, a));
+            renderingModule.Subscribe<ClientResizedEventArgs>((s, a) => ResizeHudViewport(hudViewport, a));
+            renderingModule.Subscribe<ClientResizedEventArgs>((s, a) => ResizeTextViewport(hudViewport, a));
 
 
             core.Commands.Post(new AddEntityCommand(world.Id, gameViewport.Id));

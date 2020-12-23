@@ -1,27 +1,14 @@
 ﻿using OpenBreed.Common.Tools;
 using OpenBreed.Core;
-using OpenBreed.Core.Commands;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Entities.Xml;
-using OpenBreed.Core.Events;
-using OpenBreed.Core.Modules.Animation.Commands;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
+using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Physics.Helpers;
-using OpenBreed.Core.Modules.Rendering.Commands;
-using OpenBreed.Core.Systems.Control.Components;
-using OpenBreed.Sandbox.Entities.Actor.States.Attacking;
-using OpenBreed.Sandbox.Entities.Actor.States.Movement;
-using OpenBreed.Sandbox.Entities.Actor.States.Rotation;
-using OpenBreed.Sandbox.Entities.Projectile;
-using OpenBreed.Sandbox.Helpers;
+using OpenBreed.Rendering.Systems.Commands;
 using OpenTK;
-using System;
-using System.CodeDom;
-using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
@@ -37,7 +24,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         public static void RegisterCollisionPairs(ICore core)
         {
-            var collisionMan = core.GetModule<PhysicsModule>().Collisions;
+            var collisionMan = core.GetModule<IPhysicsModule>().Collisions;
 
             collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.StaticObstacle, Dynamic2StaticCallback);
         }

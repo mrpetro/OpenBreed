@@ -21,11 +21,6 @@ namespace OpenBreed.Core
         #region Public Properties
 
         /// <summary>
-        /// Reference to rendering core module
-        /// </summary>
-        IRenderModule Rendering { get; }
-
-        /// <summary>
         /// Reference to sounds core module
         /// </summary>
         IAudioModule Sounds { get; }

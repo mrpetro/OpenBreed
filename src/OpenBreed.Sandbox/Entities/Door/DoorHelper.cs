@@ -8,10 +8,10 @@ using OpenBreed.Core.Events;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Commands;
+using OpenBreed.Rendering.Systems.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Helpers;
 using OpenBreed.Core.States;
+using OpenBreed.Rendering.Interface;
 using OpenBreed.Sandbox.Components;
 using OpenBreed.Sandbox.Components.States;
 using OpenBreed.Sandbox.Entities.Door.States;
@@ -135,7 +135,7 @@ namespace OpenBreed.Sandbox.Entities.Door
 
         public static void CreateStamps(ICore core)
         {
-            var stampBuilder = core.Rendering.Stamps.Create();
+            var stampBuilder = core.GetModule<IRenderModule>().Stamps.Create();
 
             stampBuilder.ClearTiles();
             stampBuilder.SetName(STAMP_DOOR_HORIZONTAL_CLOSED);

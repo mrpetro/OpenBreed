@@ -4,16 +4,19 @@ using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Physics.Builders;
 using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Commands;
+using OpenBreed.Rendering.Systems.Commands;
 using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Game.Entities;
+using OpenBreed.Rendering.Components;
+using OpenBreed.Rendering.Interface;
 using OpenTK.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Rendering.Systems.Events;
 
 namespace OpenBreed.Game
 {
@@ -62,7 +65,7 @@ namespace OpenBreed.Game
             //gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitHeightPreserveAspectRatio;
             gameViewport.Get<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
 
-            game.Rendering.Subscribe<ClientResizedEventArgs>((s, a) => ResizeGameViewport(gameViewport, a));
+            game.GetModule<IRenderModule>().Subscribe<ClientResizedEventArgs>((s, a) => ResizeGameViewport(gameViewport, a));
 
             FpsCounterHelper.AddToWorld(world);
 

@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Rendering.Commands;
+using OpenBreed.Rendering.Systems.Commands;
+using OpenBreed.Rendering.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,7 +42,7 @@ namespace OpenBreed.Sandbox.Jobs
 
         public void Update(float dt)
         {
-            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, $"FPS: {entity.Core.Rendering.Fps.ToString("0.00")}"));
+            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, $"FPS: {entity.Core.GetModule<IRenderModule>().Fps.ToString("0.00")}"));
         }
 
         public void Dispose()
