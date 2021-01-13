@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Managers;
 using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Builders;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using System;

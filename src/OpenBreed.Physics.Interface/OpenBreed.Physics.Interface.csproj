@@ -64,12 +64,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ICollisionMan.cs" />
+    <Compile Include="Managers\ICollisionMan.cs" />
     <Compile Include="IFixture.cs" />
-    <Compile Include="IFixtureMan.cs" />
+    <Compile Include="Managers\IFixtureMan.cs" />
     <Compile Include="IPhysicsModule.cs" />
     <Compile Include="IShape.cs" />
-    <Compile Include="IShapeMan.cs" />
+    <Compile Include="Managers\IShapeMan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

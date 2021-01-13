@@ -88,9 +88,9 @@
       <Project>{EA5C8B57-F636-45FC-B6D4-1344C6764352}</Project>
       <Name>OpenBreed.Components.Physics</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Core.Modules.Physics.Generic\OpenBreed.Core.Modules.Physics.Generic.csproj">
+    <ProjectReference Include="..\OpenBreed.Physics.Generic\OpenBreed.Physics.Generic.csproj">
       <Project>{C9F84CE7-732C-4A31-89DC-B87E3D9685BE}</Project>
-      <Name>OpenBreed.Core.Modules.Physics.Generic</Name>
+      <Name>OpenBreed.Physics.Generic</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">
       <Project>{95BDF122-FAC8-4AC4-B9A8-B549D942E37D}</Project>

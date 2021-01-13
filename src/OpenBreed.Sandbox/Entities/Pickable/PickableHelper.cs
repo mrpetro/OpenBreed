@@ -3,8 +3,8 @@
 //using OpenBreed.Core.Common;
 //using OpenBreed.Core.Common.Systems.Components;
 //using OpenBreed.Core.Entities;
-//using OpenBreed.Core.Modules.Physics.Components;
-//using OpenBreed.Core.Modules.Physics.Events;
+//using OpenBreed.Physics.Generic.Components;
+//using OpenBreed.Physics.Generic.Events;
 //using OpenBreed.Core.States;
 //using OpenBreed.Sandbox.Entities.Pickable.States;
 //using OpenBreed.Sandbox.Helpers;

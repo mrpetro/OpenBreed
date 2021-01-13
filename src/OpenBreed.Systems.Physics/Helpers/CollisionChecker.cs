@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Core.Managers;
-using OpenBreed.Core.Modules.Physics.Shapes;
+using OpenBreed.Physics.Generic.Shapes;
 using OpenBreed.Physics.Interface;
 using OpenTK;
 using System;

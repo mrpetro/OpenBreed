@@ -1,7 +1,7 @@
 ﻿//using OpenBreed.Core;
 //using OpenBreed.Core.Common.Systems.Components;
 //using OpenBreed.Core.Entities;
-//using OpenBreed.Core.Modules.Physics.Components;
+//using OpenBreed.Physics.Generic.Components;
 //using OpenBreed.Core.Modules.Rendering.Helpers;
 //using OpenTK;
 //using OpenTK.Graphics;

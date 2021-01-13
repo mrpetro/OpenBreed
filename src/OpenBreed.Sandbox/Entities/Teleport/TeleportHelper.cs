@@ -18,7 +18,7 @@ using OpenBreed.Core.Components;
 using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Core.Entities.Xml;
 using OpenBreed.Common.Tools;
-using OpenBreed.Core.Modules.Physics;
+using OpenBreed.Physics.Generic;
 using OpenBreed.Components.Physics;
 
 namespace OpenBreed.Sandbox.Entities.Teleport

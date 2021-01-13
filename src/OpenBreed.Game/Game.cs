@@ -21,6 +21,7 @@ using OpenBreed.Systems.Rendering;
 using OpenTK;
 using System;
 using System.Drawing;
+using OpenBreed.Audio.Interface;
 
 namespace OpenBreed.Game
 {
@@ -51,7 +52,7 @@ namespace OpenBreed.Game
 
             Animations = manCollection.GetManager<IAnimMan>();
 
-            Sounds = modulesFactory.CreateAudioModule(this);
+            soundModule = new OpenALModule(this);
             renderingModule = new OpenGLModule(this);
 
             VideoSystemsFactory = new VideoSystemsFactory(this);
@@ -70,8 +71,8 @@ namespace OpenBreed.Game
         #region Public Properties
 
         public override EntityFactory EntityFactory { get; }
-        public override IAudioModule Sounds { get; }
 
+        private readonly OpenALModule soundModule;
         private readonly OpenGLModule renderingModule;
 
         public override IAnimMan Animations { get; }

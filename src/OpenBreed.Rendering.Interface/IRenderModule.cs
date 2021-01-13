@@ -2,6 +2,7 @@
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Rendering.Systems;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenTK;
 using OpenTK.Graphics;
 using System;

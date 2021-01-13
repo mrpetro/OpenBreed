@@ -1,7 +1,7 @@
 ﻿//using OpenBreed.Core.Common.Systems;
 //using OpenBreed.Core.Common.Systems.Components;
 //using OpenBreed.Core.Entities;
-//using OpenBreed.Core.Modules.Physics.Builders;
+//using OpenBreed.Physics.Generic.Builders;
 //using OpenBreed.Core.Modules.Rendering.Components;
 //using OpenBreed.Core.Modules.Rendering.Helpers;
 //using OpenBreed.Core.Systems;

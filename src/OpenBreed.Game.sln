@@ -7,11 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core", "OpenBreed
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Sandbox", "OpenBreed.Sandbox\OpenBreed.Sandbox.csproj", "{FB015343-45FD-4482-991D-90F21613E361}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Modules.Physics.Generic", "OpenBreed.Core.Modules.Physics.Generic\OpenBreed.Core.Modules.Physics.Generic.csproj", "{C9F84CE7-732C-4A31-89DC-B87E3D9685BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Physics.Generic", "OpenBreed.Physics.Generic\OpenBreed.Physics.Generic.csproj", "{C9F84CE7-732C-4A31-89DC-B87E3D9685BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Systems.Control", "OpenBreed.Core.Systems.Control\OpenBreed.Core.Systems.Control.csproj", "{CF689601-0842-497F-A05F-B31431697B4E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Systems.Control", "OpenBreed.Core.Systems.Control\OpenBreed.Systems.Control.csproj", "{CF689601-0842-497F-A05F-B31431697B4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Core.Modules.Audio.OpenAL", "OpenBreed.Core.Modules.Audio.OpenAL\OpenBreed.Core.Modules.Audio.OpenAL.csproj", "{82AF3D57-A4F4-4339-859A-7E82942B96DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Audio.OpenAL", "OpenBreed.Core.Modules.Audio.OpenAL\OpenBreed.Audio.OpenAL.csproj", "{82AF3D57-A4F4-4339-859A-7E82942B96DF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{AC17BDB5-E1D1-4635-A7D5-065BCA642796}"
 	ProjectSection(SolutionItems) = preProject
@@ -55,6 +55,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Components.Physics", "OpenBreed.Components.Physics\OpenBreed.Components.Physics.csproj", "{EA5C8B57-F636-45FC-B6D4-1344C6764352}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Physics.Interface", "OpenBreed.Physics.Interface\OpenBreed.Physics.Interface.csproj", "{29FF6C36-A229-4C2F-8CDD-09181C7A6B59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Components.Control", "OpenBreed.Components.Control\OpenBreed.Components.Control.csproj", "{5710DB62-0796-4683-B52E-0423A73830F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Components.Audio", "OpenBreed.Components.Audio\OpenBreed.Components.Audio.csproj", "{3D35AFBE-7307-4F98-8A1B-4A39AE2B2690}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Systems.Audio", "OpenBreed.Systems.Audio\OpenBreed.Systems.Audio.csproj", "{79EDB034-9742-467F-9615-FEDAF5448583}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Audio.Interface", "OpenBreed.Audio.Interface\OpenBreed.Audio.Interface.csproj", "{A281E554-E5B2-4198-96F6-F772A552C7D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -248,6 +256,38 @@ Global
 		{29FF6C36-A229-4C2F-8CDD-09181C7A6B59}.Release|Any CPU.Build.0 = Release|Any CPU
 		{29FF6C36-A229-4C2F-8CDD-09181C7A6B59}.Release|x64.ActiveCfg = Release|Any CPU
 		{29FF6C36-A229-4C2F-8CDD-09181C7A6B59}.Release|x64.Build.0 = Release|Any CPU
+		{5710DB62-0796-4683-B52E-0423A73830F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5710DB62-0796-4683-B52E-0423A73830F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5710DB62-0796-4683-B52E-0423A73830F0}.Debug|x64.ActiveCfg = Debug|x64
+		{5710DB62-0796-4683-B52E-0423A73830F0}.Debug|x64.Build.0 = Debug|x64
+		{5710DB62-0796-4683-B52E-0423A73830F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5710DB62-0796-4683-B52E-0423A73830F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5710DB62-0796-4683-B52E-0423A73830F0}.Release|x64.ActiveCfg = Release|Any CPU
+		{5710DB62-0796-4683-B52E-0423A73830F0}.Release|x64.Build.0 = Release|Any CPU
+		{3D35AFBE-7307-4F98-8A1B-4A39AE2B2690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D35AFBE-7307-4F98-8A1B-4A39AE2B2690}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D35AFBE-7307-4F98-8A1B-4A39AE2B2690}.Debug|x64.ActiveCfg = Debug|x64
+		{3D35AFBE-7307-4F98-8A1B-4A39AE2B2690}.Debug|x64.Build.0 = Debug|x64
+		{3D35AFBE-7307-4F98-8A1B-4A39AE2B2690}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D35AFBE-7307-4F98-8A1B-4A39AE2B2690}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D35AFBE-7307-4F98-8A1B-4A39AE2B2690}.Release|x64.ActiveCfg = Release|Any CPU
+		{3D35AFBE-7307-4F98-8A1B-4A39AE2B2690}.Release|x64.Build.0 = Release|Any CPU
+		{79EDB034-9742-467F-9615-FEDAF5448583}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79EDB034-9742-467F-9615-FEDAF5448583}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79EDB034-9742-467F-9615-FEDAF5448583}.Debug|x64.ActiveCfg = Debug|x64
+		{79EDB034-9742-467F-9615-FEDAF5448583}.Debug|x64.Build.0 = Debug|x64
+		{79EDB034-9742-467F-9615-FEDAF5448583}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79EDB034-9742-467F-9615-FEDAF5448583}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79EDB034-9742-467F-9615-FEDAF5448583}.Release|x64.ActiveCfg = Release|Any CPU
+		{79EDB034-9742-467F-9615-FEDAF5448583}.Release|x64.Build.0 = Release|Any CPU
+		{A281E554-E5B2-4198-96F6-F772A552C7D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A281E554-E5B2-4198-96F6-F772A552C7D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A281E554-E5B2-4198-96F6-F772A552C7D0}.Debug|x64.ActiveCfg = Debug|x64
+		{A281E554-E5B2-4198-96F6-F772A552C7D0}.Debug|x64.Build.0 = Debug|x64
+		{A281E554-E5B2-4198-96F6-F772A552C7D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A281E554-E5B2-4198-96F6-F772A552C7D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A281E554-E5B2-4198-96F6-F772A552C7D0}.Release|x64.ActiveCfg = Release|Any CPU
+		{A281E554-E5B2-4198-96F6-F772A552C7D0}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

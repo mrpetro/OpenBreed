@@ -203,21 +203,29 @@
       <Project>{9894E7F4-7C85-4173-9D05-F50CFD2E4163}</Project>
       <Name>OpenBreed.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Audio.Interface\OpenBreed.Audio.Interface.csproj">
+      <Project>{A281E554-E5B2-4198-96F6-F772A552C7D0}</Project>
+      <Name>OpenBreed.Audio.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Components.Control\OpenBreed.Components.Control.csproj">
+      <Project>{5710db62-0796-4683-b52e-0423a73830f0}</Project>
+      <Name>OpenBreed.Components.Control</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Components.Physics\OpenBreed.Components.Physics.csproj">
       <Project>{ea5c8b57-f636-45fc-b6d4-1344c6764352}</Project>
       <Name>OpenBreed.Components.Physics</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Core.Modules.Audio.OpenAL\OpenBreed.Core.Modules.Audio.OpenAL.csproj">
+    <ProjectReference Include="..\OpenBreed.Core.Modules.Audio.OpenAL\OpenBreed.Audio.OpenAL.csproj">
       <Project>{82af3d57-a4f4-4339-859a-7e82942b96df}</Project>
-      <Name>OpenBreed.Core.Modules.Audio.OpenAL</Name>
+      <Name>OpenBreed.Audio.OpenAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Core.Systems.Control\OpenBreed.Core.Systems.Control.csproj">
-      <Project>{CF689601-0842-497F-A05F-B31431697B4E}</Project>
-      <Name>OpenBreed.Core.Systems.Control</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Core.Modules.Physics.Generic\OpenBreed.Core.Modules.Physics.Generic.csproj">
+    <ProjectReference Include="..\OpenBreed.Physics.Generic\OpenBreed.Physics.Generic.csproj">
       <Project>{C9F84CE7-732C-4A31-89DC-B87E3D9685BE}</Project>
-      <Name>OpenBreed.Core.Modules.Physics.Generic</Name>
+      <Name>OpenBreed.Physics.Generic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Core.Systems.Control\OpenBreed.Systems.Control.csproj">
+      <Project>{cf689601-0842-497f-a05f-b31431697b4e}</Project>
+      <Name>OpenBreed.Systems.Control</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">
       <Project>{95BDF122-FAC8-4AC4-B9A8-B549D942E37D}</Project>

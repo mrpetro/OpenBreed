@@ -1,8 +1,7 @@
-﻿using OpenBreed.Core.Builders;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
-using OpenBreed.Core.Modules.Rendering.Systems;
+﻿using OpenBreed.Core;
+using OpenBreed.Core.Builders;
 
-namespace OpenBreed.Core.Modules.Physics.Builders
+namespace OpenBreed.Systems.Control.Builders
 {
     public class WalkingControlSystemBuilder : IWorldSystemBuilder<WalkingControlSystem>
     {

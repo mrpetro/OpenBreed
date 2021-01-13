@@ -13,14 +13,8 @@ using OpenBreed.Core.Modules.Animation.Components.Xml;
 using OpenBreed.Core.Modules.Animation.Systems;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Audio;
-using OpenBreed.Core.Modules.Audio.Builders;
-using OpenBreed.Core.Modules.Physics;
-using OpenBreed.Core.Modules.Physics.Builders;
-using OpenBreed.Core.Modules.Physics.Shapes;
-using OpenBreed.Core.Modules.Rendering;
-using OpenBreed.Core.Modules.Rendering.Systems;
+using OpenBreed.Physics.Generic;
 using OpenBreed.Core.Systems;
-using OpenBreed.Core.Systems.Control.Systems;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Components.Rendering;
 using OpenBreed.Components.Rendering.Xml;
@@ -47,6 +41,11 @@ using OpenTK.Input;
 using System;
 using System.Drawing;
 using System.Reflection;
+using OpenBreed.Physics.Generic.Shapes;
+using OpenBreed.Systems.Control.Builders;
+using OpenBreed.Systems.Control.Systems;
+using OpenBreed.Systems.Control;
+using OpenBreed.Audio.Interface;
 
 namespace OpenBreed.Sandbox
 {
@@ -126,12 +125,12 @@ namespace OpenBreed.Sandbox
             EntityFactory = new EntityFactory(this);
 
             renderingModule = new OpenGLModule(this);
+            Physics = new PhysicsModule(this);
+            Sounds = new OpenALModule(this);
 
             VideoSystemsFactory = new VideoSystemsFactory(this);
             PhysicsSystemsFactory = new PhysicsSystemsFactory(this);
 
-            Physics = new PhysicsModule(this);
-            Sounds = new OpenALModule(this);
 
             RegisterModule<IRenderModule>(renderingModule);
             RegisterModule<IPhysicsModule>(Physics);
@@ -145,8 +144,7 @@ namespace OpenBreed.Sandbox
         #region Public Properties
 
         public IPhysicsModule Physics { get; }
-
-        public override IAudioModule Sounds { get; }
+        public IAudioModule Sounds { get; }
 
         public override EntityFactory EntityFactory { get; }
 
@@ -195,11 +193,6 @@ namespace OpenBreed.Sandbox
         public MovementSystemBuilder CreateMovementSystem()
         {
             return new MovementSystemBuilder(this);
-        }
-
-        public SoundSystemBuilder CreateSoundSystem()
-        {
-            return new SoundSystemBuilder(this);
         }
 
         public override void Load()

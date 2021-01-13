@@ -12,11 +12,6 @@ namespace OpenBreed.Game
 {
     internal class GameModulesFactory : ICoreModulesFactory
     {
-        public IAudioModule CreateAudioModule(ICore core)
-        {
-            return new OpenALModule(core);
-        }
-
         public IInputModule CreateInputModule(ICore core)
         {
             throw new NotImplementedException();

@@ -1,13 +1,14 @@
 ﻿using OpenBreed.Core.Inputs;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Commands;
-using OpenBreed.Core.Systems.Control.Components;
+using OpenBreed.Components.Control;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Core;
 
-namespace OpenBreed.Core.Systems.Control.Systems
+namespace OpenBreed.Systems.Control.Systems
 {
     public class AttackingPlayerInput : IPlayerInput
     {

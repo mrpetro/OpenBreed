@@ -1,7 +1,8 @@
-﻿using OpenBreed.Core.Managers;
-using OpenBreed.Core.Modules.Audio.Components;
-using OpenBreed.Core.Modules.Audio.Helpers;
-using OpenBreed.Core.Modules.Audio.Systems;
+﻿using OpenBreed.Audio.Interface;
+using OpenBreed.Audio.Interface.Managers;
+using OpenBreed.Audio.OpenAL.Managers;
+using OpenBreed.Core.Components;
+using OpenBreed.Core.Managers;
 using System;
 
 namespace OpenBreed.Core.Modules.Audio
@@ -31,23 +32,6 @@ namespace OpenBreed.Core.Modules.Audio
 
         #region Public Methods
 
-        /// <summary>
-        /// Create local sound emiter that emits sound from specific position in owning world coordinates
-        /// </summary>
-        /// <returns>Local sound emiter</returns>
-        public ISoundEmiter CreateLocalSoundEmiter()
-        {
-            return new LocalSoundEmiter();
-        }
-
-        /// <summary>
-        /// Create global sound emiter that emits sound on entire world
-        /// </summary>
-        /// <returns>Global sound emiter</returns>
-        public ISoundEmiter CreateGlobalSoundEmiter()
-        {
-            return new GlobalSoundEmiter();
-        }
 
         #endregion Public Methods
     }

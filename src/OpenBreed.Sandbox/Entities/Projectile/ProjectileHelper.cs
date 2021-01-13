@@ -6,7 +6,7 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Entities.Xml;
 using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Physics.Helpers;
+using OpenBreed.Physics.Generic.Helpers;
 using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Core.States;
 using OpenBreed.Sandbox.Entities.Projectile.States;

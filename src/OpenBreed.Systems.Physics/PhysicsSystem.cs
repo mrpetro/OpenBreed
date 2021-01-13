@@ -14,6 +14,7 @@ using OpenBreed.Systems.Physics.Helpers;
 using OpenBreed.Systems.Physics.Events;
 using OpenBreed.Systems.Physics.Commands;
 using OpenBreed.Physics.Interface;
+using OpenBreed.Physics.Interface.Managers;
 
 namespace OpenBreed.Systems.Physics
 {

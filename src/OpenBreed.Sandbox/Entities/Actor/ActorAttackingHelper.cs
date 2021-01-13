@@ -5,7 +5,7 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Systems.Rendering.Commands;
-using OpenBreed.Core.Systems.Control.Components;
+using OpenBreed.Components.Control;
 using OpenBreed.Sandbox.Entities.Actor.States.Attacking;
 using OpenBreed.Sandbox.Entities.Projectile;
 using OpenTK;

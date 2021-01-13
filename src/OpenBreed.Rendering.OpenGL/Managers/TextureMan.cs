@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using System;
 using System.Collections.Generic;

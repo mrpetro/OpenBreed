@@ -194,12 +194,7 @@
     <Compile Include="Managers\JobMan.cs" />
     <Compile Include="MathTools.cs" />
     <Compile Include="Modules\Animation\Helpers\IAnimation.cs" />
-    <Compile Include="Modules\Audio\Components\IAudioComponent.cs" />
-    <Compile Include="Modules\Audio\Components\ISoundEmiter.cs" />
-    <Compile Include="Modules\Audio\Helpers\ISound.cs" />
-    <Compile Include="Managers\ISoundMan.cs" />
     <Compile Include="Modules\ICoreModule.cs" />
-    <Compile Include="Modules\Audio\IAudioModule.cs" />
     <Compile Include="Modules\Rendering\Systems\IWireframeSystem.cs" />
     <Compile Include="Other.cs" />
     <Compile Include="Player.cs" />
@@ -211,7 +206,6 @@
     <Compile Include="Components\VelocityComponent.cs" />
     <Compile Include="Components\PositionComponent.cs" />
     <Compile Include="Components\AngularPositionComponent.cs" />
-    <Compile Include="Modules\Audio\Systems\IAudioSystem.cs" />
     <Compile Include="Systems\IRenderableSystem.cs" />
     <Compile Include="Systems\IUpdatableSystem.cs" />
     <Compile Include="Systems\IWorldSystem.cs" />
@@ -269,6 +263,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Modules\Audio\Helpers\" />
+    <Folder Include="Modules\Audio\Systems\" />
     <Folder Include="Modules\Physics\" />
     <Folder Include="Modules\Rendering\Components\Builders\" />
     <Folder Include="Modules\Rendering\Helpers\" />

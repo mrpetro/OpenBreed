@@ -4,8 +4,6 @@ using OpenBreed.Core.Builders;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
-using OpenBreed.Core.Modules.Audio;
-using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Systems;
 using OpenTK;
 using System.Drawing;
@@ -19,11 +17,6 @@ namespace OpenBreed.Core
     public interface ICore
     {
         #region Public Properties
-
-        /// <summary>
-        /// Reference to sounds core module
-        /// </summary>
-        IAudioModule Sounds { get; }
 
         /// <summary>
         /// Reference to animation manager

@@ -17,7 +17,7 @@ using OpenBreed.Core.Events;
 using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Core.Components;
-using OpenBreed.Core.Modules.Physics;
+using OpenBreed.Physics.Generic;
 using OpenBreed.Common.Tools;
 using OpenBreed.Core.Entities.Xml;
 using OpenBreed.Core.Modules;

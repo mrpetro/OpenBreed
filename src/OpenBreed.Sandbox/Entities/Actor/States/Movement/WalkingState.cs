@@ -12,7 +12,7 @@ using System;
 using System.Linq;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Components;
-using OpenBreed.Core.Systems.Control.Components;
+using OpenBreed.Components.Control;
 using OpenBreed.Components.Physics;
 using OpenBreed.Systems.Physics.Events;
 

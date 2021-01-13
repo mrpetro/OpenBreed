@@ -7,7 +7,7 @@ using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
-using OpenBreed.Core.Modules.Physics.Helpers;
+using OpenBreed.Physics.Generic.Helpers;
 using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Sandbox.Entities.Actor.States.Attacking;
 using OpenBreed.Sandbox.Entities.Actor.States.Movement;

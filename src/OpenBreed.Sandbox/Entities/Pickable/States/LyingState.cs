@@ -3,7 +3,7 @@
 //using OpenBreed.Core.Common.Systems.Components;
 //using OpenBreed.Core.Entities;
 //using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
-//using OpenBreed.Core.Modules.Physics.Events;
+//using OpenBreed.Physics.Generic.Events;
 //using OpenBreed.Systems.Rendering.Commands;
 //using OpenBreed.Core.States;
 //using OpenBreed.Sandbox.Entities.Door.States;

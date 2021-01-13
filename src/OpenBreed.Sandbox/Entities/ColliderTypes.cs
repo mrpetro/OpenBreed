@@ -1,7 +1,8 @@
 ﻿using OpenBreed.Core.Managers;
-using OpenBreed.Core.Modules.Physics;
-using OpenBreed.Core.Modules.Physics.Helpers;
+using OpenBreed.Physics.Generic;
+using OpenBreed.Physics.Generic.Helpers;
 using OpenBreed.Physics.Interface;
+using OpenBreed.Physics.Interface.Managers;
 
 namespace OpenBreed.Sandbox.Entities
 {

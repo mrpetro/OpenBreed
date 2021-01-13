@@ -5,7 +5,6 @@ using OpenBreed.Core.Commands;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
-using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Systems;
 using OpenTK;
@@ -50,10 +49,7 @@ namespace OpenBreed.Core
 
         public abstract Rectangle ClientRectangle { get; }
 
-        public abstract IAudioModule Sounds { get; }
-
         public abstract IAnimMan Animations { get; }
-
 
         public abstract JobMan Jobs { get; }
 

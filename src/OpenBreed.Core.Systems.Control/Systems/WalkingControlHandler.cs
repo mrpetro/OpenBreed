@@ -1,8 +1,8 @@
 ﻿using OpenBreed.Core.Components;
 using OpenBreed.Core.Inputs;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Commands;
-using OpenBreed.Core.Systems.Control.Components;
-using OpenBreed.Core.Systems.Control.Systems;
+using OpenBreed.Components.Control;
+using OpenBreed.Systems.Control.Systems;
 using OpenTK.Input;
 using System;
 using System.Collections.Generic;

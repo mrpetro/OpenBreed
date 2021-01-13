@@ -5,8 +5,8 @@
 //using OpenBreed.Core.Modules.Rendering.Helpers;
 //using OpenBreed.Core.Modules.Rendering.Systems;
 //using OpenBreed.Core.Modules.Animation.Systems.Common.Components;
-//using OpenBreed.Core.Modules.Physics.Components;
-//using OpenBreed.Core.Modules.Physics.Helpers;
+//using OpenBreed.Physics.Generic.Components;
+//using OpenBreed.Physics.Generic.Helpers;
 //using OpenTK;
 //using OpenTK.Graphics;
 //using System;

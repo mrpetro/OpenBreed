@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
+using OpenBreed.Physics.Interface.Managers;
 
 namespace OpenBreed.Physics.Interface
 {
