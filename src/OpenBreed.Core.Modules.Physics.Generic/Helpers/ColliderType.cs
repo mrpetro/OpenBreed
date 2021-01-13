@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core.Entities;
 using OpenBreed.Core.Managers;
+using OpenBreed.Physics.Interface;
 using OpenTK;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,8 +1,9 @@
 ﻿using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools.Collections;
+using OpenBreed.Components.Physics;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Managers;
-using OpenBreed.Core.Modules.Physics.Components;
+using OpenBreed.Physics.Interface;
 using OpenTK;
 using System.Collections.Generic;
 

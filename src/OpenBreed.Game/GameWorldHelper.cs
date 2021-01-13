@@ -8,14 +8,11 @@ using OpenBreed.Core.Modules.Animation;
 using OpenBreed.Core.Modules.Animation.Builders;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Helpers;
-using OpenBreed.Core.Modules.Physics.Builders;
-using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems;
 using OpenBreed.Game.Entities;
-using OpenBreed.Rendering.Components;
-using OpenBreed.Rendering.Systems.Events;
+using OpenBreed.Components.Rendering;
+using OpenBreed.Systems.Rendering.Events;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -40,9 +37,9 @@ namespace OpenBreed.Game
             ////Audio
             //builder.AddSystem(core.CreateSoundSystem().Build());
 
-            builder.AddSystem(game.VideoSystemsFactory.CreateSpriteSystem());
-            builder.AddSystem(game.VideoSystemsFactory.CreateTextSystem());
-            builder.AddSystem(game.VideoSystemsFactory.CreateViewportSystem());
+            builder.AddSystem(game.VideoSystemsFactory.CreateSpriteSystem().Build());
+            builder.AddSystem(game.VideoSystemsFactory.CreateTextSystem().Build());
+            builder.AddSystem(game.VideoSystemsFactory.CreateViewportSystem().Build());
         }
 
         public static World CreateGameWorld(Game game, string worldName)

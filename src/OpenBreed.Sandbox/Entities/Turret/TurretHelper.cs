@@ -1,10 +1,10 @@
 ﻿using OpenBreed.Common.Tools;
+using OpenBreed.Components.Physics;
 using OpenBreed.Core;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Entities.Xml;
-using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Rendering.Systems.Commands;
+using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Sandbox.Entities.Actor.States.Rotation;
 using OpenTK;
 using System;

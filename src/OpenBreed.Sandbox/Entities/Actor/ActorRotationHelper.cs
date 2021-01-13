@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core;
+﻿using OpenBreed.Components.Physics;
+using OpenBreed.Core;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
@@ -6,10 +7,8 @@ using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
-using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Physics.Helpers;
-using OpenBreed.Rendering.Systems.Commands;
+using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Sandbox.Entities.Actor.States.Attacking;
 using OpenBreed.Sandbox.Entities.Actor.States.Movement;
 using OpenBreed.Sandbox.Entities.Actor.States.Rotation;

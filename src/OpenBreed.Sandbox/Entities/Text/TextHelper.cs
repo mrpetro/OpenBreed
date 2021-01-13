@@ -2,7 +2,6 @@
 using OpenBreed.Core.Builders;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Rendering.Components;
 using OpenTK;
 using OpenTK.Graphics;
 using System;
@@ -12,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Core;
 using OpenBreed.Rendering.Interface;
-using OpenBreed.Rendering.Components;
+using OpenBreed.Components.Rendering;
 
 namespace OpenBreed.Sandbox.Entities
 {

@@ -42,13 +42,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Writer.Interface"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Writer.Legacy", "..\OpenBreed.Common\src\OpenBreed.Writer.Legacy\OpenBreed.Writer.Legacy.csproj", "{0B8B1C59-2BEC-45C3-BD7A-AEB955337407}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Rendering.Components", "OpenBreed.Rendering.Components\OpenBreed.Rendering.Components.csproj", "{4BF54E49-6BEA-4733-8189-0A9204819A11}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Components.Rendering", "OpenBreed.Components.Rendering\OpenBreed.Components.Rendering.csproj", "{4BF54E49-6BEA-4733-8189-0A9204819A11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Rendering.Systems", "OpenBreed.Rendering.Systems\OpenBreed.Rendering.Systems.csproj", "{DFE12B44-E9BF-466C-B74B-75D14458C4E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Systems.Rendering", "OpenBreed.Systems.Rendering\OpenBreed.Systems.Rendering.csproj", "{DFE12B44-E9BF-466C-B74B-75D14458C4E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Rendering.Interface", "OpenBreed.Rendering.Interface\OpenBreed.Rendering.Interface.csproj", "{33B3ECA4-715E-475E-B01E-80B6DB0876FC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Rendering.OpenGL", "OpenBreed.Rendering.OpenGL\OpenBreed.Rendering.OpenGL.csproj", "{08856058-9DE1-43E5-A4AA-91BF98BBDE50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Systems.Physics", "OpenBreed.Systems.Physics\OpenBreed.Systems.Physics.csproj", "{12E847DA-BE51-4F20-BC87-117491415D8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Components.Physics", "OpenBreed.Components.Physics\OpenBreed.Components.Physics.csproj", "{EA5C8B57-F636-45FC-B6D4-1344C6764352}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Physics.Interface", "OpenBreed.Physics.Interface\OpenBreed.Physics.Interface.csproj", "{29FF6C36-A229-4C2F-8CDD-09181C7A6B59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -218,6 +224,30 @@ Global
 		{08856058-9DE1-43E5-A4AA-91BF98BBDE50}.Release|Any CPU.Build.0 = Release|Any CPU
 		{08856058-9DE1-43E5-A4AA-91BF98BBDE50}.Release|x64.ActiveCfg = Release|Any CPU
 		{08856058-9DE1-43E5-A4AA-91BF98BBDE50}.Release|x64.Build.0 = Release|Any CPU
+		{12E847DA-BE51-4F20-BC87-117491415D8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12E847DA-BE51-4F20-BC87-117491415D8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12E847DA-BE51-4F20-BC87-117491415D8C}.Debug|x64.ActiveCfg = Debug|x64
+		{12E847DA-BE51-4F20-BC87-117491415D8C}.Debug|x64.Build.0 = Debug|x64
+		{12E847DA-BE51-4F20-BC87-117491415D8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12E847DA-BE51-4F20-BC87-117491415D8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12E847DA-BE51-4F20-BC87-117491415D8C}.Release|x64.ActiveCfg = Release|Any CPU
+		{12E847DA-BE51-4F20-BC87-117491415D8C}.Release|x64.Build.0 = Release|Any CPU
+		{EA5C8B57-F636-45FC-B6D4-1344C6764352}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA5C8B57-F636-45FC-B6D4-1344C6764352}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA5C8B57-F636-45FC-B6D4-1344C6764352}.Debug|x64.ActiveCfg = Debug|x64
+		{EA5C8B57-F636-45FC-B6D4-1344C6764352}.Debug|x64.Build.0 = Debug|x64
+		{EA5C8B57-F636-45FC-B6D4-1344C6764352}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA5C8B57-F636-45FC-B6D4-1344C6764352}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA5C8B57-F636-45FC-B6D4-1344C6764352}.Release|x64.ActiveCfg = Release|Any CPU
+		{EA5C8B57-F636-45FC-B6D4-1344C6764352}.Release|x64.Build.0 = Release|Any CPU
+		{29FF6C36-A229-4C2F-8CDD-09181C7A6B59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29FF6C36-A229-4C2F-8CDD-09181C7A6B59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29FF6C36-A229-4C2F-8CDD-09181C7A6B59}.Debug|x64.ActiveCfg = Debug|x64
+		{29FF6C36-A229-4C2F-8CDD-09181C7A6B59}.Debug|x64.Build.0 = Debug|x64
+		{29FF6C36-A229-4C2F-8CDD-09181C7A6B59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29FF6C36-A229-4C2F-8CDD-09181C7A6B59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29FF6C36-A229-4C2F-8CDD-09181C7A6B59}.Release|x64.ActiveCfg = Release|Any CPU
+		{29FF6C36-A229-4C2F-8CDD-09181C7A6B59}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

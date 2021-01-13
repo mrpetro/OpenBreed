@@ -3,16 +3,15 @@ using OpenBreed.Core.Commands;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules;
-using OpenBreed.Core.Modules.Physics;
-using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Rendering.Systems.Commands;
+using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Core.States;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Door.States;
 using OpenTK;
 using System;
+using OpenBreed.Components.Physics;
+using OpenBreed.Physics.Interface;
 
 namespace OpenBreed.Sandbox.Components.States
 {

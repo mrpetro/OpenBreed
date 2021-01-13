@@ -4,9 +4,6 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Events;
 using OpenBreed.Core.Modules.Animation.Commands;
-using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Physics.Commands;
-using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Jobs;
@@ -14,8 +11,7 @@ using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Rendering.Systems.Commands;
+using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Components;
@@ -23,6 +19,7 @@ using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Core.Entities.Xml;
 using OpenBreed.Common.Tools;
 using OpenBreed.Core.Modules.Physics;
+using OpenBreed.Components.Physics;
 
 namespace OpenBreed.Sandbox.Entities.Teleport
 {

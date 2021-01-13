@@ -2,7 +2,7 @@
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Entities.Builders;
-using OpenBreed.Rendering.Components;
+using OpenBreed.Components.Rendering;
 using OpenTK;
 
 namespace OpenBreed.Game.Entities

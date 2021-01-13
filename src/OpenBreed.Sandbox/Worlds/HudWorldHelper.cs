@@ -1,10 +1,8 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Rendering.Components;
-using OpenBreed.Rendering.Systems.Events;
+using OpenBreed.Components.Rendering;
+using OpenBreed.Systems.Rendering.Events;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.CursorCoords;
 using OpenBreed.Sandbox.Entities.FpsCounter;
@@ -38,7 +36,7 @@ namespace OpenBreed.Sandbox.Worlds
             //                               .Build());
 
             //builder.AddSystem(core.CreateSpriteSystem().Build());
-            builder.AddSystem(core.CreateTextSystem().Build());
+            builder.AddSystem(core.VideoSystemsFactory.CreateTextSystem().Build());
         }
 
         public static void Create(Program core)

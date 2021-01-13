@@ -98,9 +98,9 @@
       <Project>{33B3ECA4-715E-475E-B01E-80B6DB0876FC}</Project>
       <Name>OpenBreed.Rendering.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Rendering.Systems\OpenBreed.Rendering.Systems.csproj">
+    <ProjectReference Include="..\OpenBreed.Systems.Rendering\OpenBreed.Systems.Rendering.csproj">
       <Project>{DFE12B44-E9BF-466C-B74B-75D14458C4E8}</Project>
-      <Name>OpenBreed.Rendering.Systems</Name>
+      <Name>OpenBreed.Systems.Rendering</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

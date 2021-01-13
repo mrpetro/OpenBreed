@@ -2,7 +2,7 @@
 //using OpenBreed.Core.Common.Systems.Components;
 //using OpenBreed.Core.Entities;
 //using OpenBreed.Core.Modules.Physics.Events;
-//using OpenBreed.Rendering.Systems.Commands;
+//using OpenBreed.Systems.Rendering.Commands;
 //using OpenBreed.Core.States;
 //using OpenBreed.Sandbox.Entities.Projectile;
 //using OpenTK;

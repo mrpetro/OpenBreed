@@ -2,6 +2,7 @@
 using OpenBreed.Common.Logging;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Physics.Helpers;
+using OpenBreed.Physics.Interface;
 using System;
 
 namespace OpenBreed.Core.Modules.Physics

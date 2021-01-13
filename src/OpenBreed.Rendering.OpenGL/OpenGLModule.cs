@@ -9,7 +9,7 @@ using OpenBreed.Core.Systems;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.OpenGL.Helpers;
 using OpenBreed.Rendering.OpenGL.Managers;
-using OpenBreed.Rendering.Systems.Events;
+using OpenBreed.Systems.Rendering.Events;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System.Linq;

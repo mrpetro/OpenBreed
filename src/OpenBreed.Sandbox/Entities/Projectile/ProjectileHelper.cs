@@ -6,11 +6,8 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Entities.Xml;
 using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Physics;
-using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Physics.Events;
 using OpenBreed.Core.Modules.Physics.Helpers;
-using OpenBreed.Rendering.Systems.Commands;
+using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Core.States;
 using OpenBreed.Sandbox.Entities.Projectile.States;
 using OpenBreed.Sandbox.Helpers;
@@ -20,6 +17,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Components.Physics;
+using OpenBreed.Physics.Interface;
+using OpenBreed.Systems.Physics.Helpers;
 
 namespace OpenBreed.Sandbox.Entities.Projectile
 {

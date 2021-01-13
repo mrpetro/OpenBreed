@@ -11,8 +11,6 @@ namespace OpenBreed.Core.Modules
 
         IInputModule CreateInputModule(ICore core);
 
-        IPhysicsModule CreatePhysicsModule(ICore core);
-
         IScriptingModule CreateScriptingModule(ICore core);
 
         #endregion Public Methods

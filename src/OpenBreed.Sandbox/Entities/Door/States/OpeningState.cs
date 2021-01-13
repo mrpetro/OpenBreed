@@ -3,16 +3,15 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Events;
 using OpenBreed.Core.Modules.Animation.Commands;
-using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Rendering.Systems.Commands;
+using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Core.States;
 using System;
 using System.Linq;
 using OpenBreed.Core.Commands;
 using OpenBreed.Sandbox.Entities.Door.States;
 using OpenBreed.Core.Components;
-using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Sandbox.Entities;
+using OpenBreed.Components.Physics;
 
 namespace OpenBreed.Sandbox.Components.States
 {

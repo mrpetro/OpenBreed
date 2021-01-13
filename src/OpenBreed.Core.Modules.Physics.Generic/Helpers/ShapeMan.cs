@@ -2,6 +2,7 @@
 using OpenBreed.Common.Tools.Collections;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules.Physics.Shapes;
+using OpenBreed.Physics.Interface;
 using System;
 using System.Collections;
 using System.Diagnostics;

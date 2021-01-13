@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common.Logging;
+using OpenBreed.Components.Physics;
 using OpenBreed.Core.Managers;
-using OpenBreed.Core.Modules.Physics.Components;
+using OpenBreed.Physics.Interface;
 using System;
 using System.Collections.Generic;
 

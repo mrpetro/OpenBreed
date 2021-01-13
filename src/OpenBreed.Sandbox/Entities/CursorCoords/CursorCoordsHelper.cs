@@ -2,11 +2,9 @@
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Rendering.Components;
+using OpenBreed.Components.Rendering;
 using OpenBreed.Rendering.Interface;
-using OpenBreed.Rendering.Systems.Events;
+using OpenBreed.Systems.Rendering.Events;
 using OpenBreed.Sandbox.Jobs;
 using OpenBreed.Sandbox.Worlds;
 using OpenTK;

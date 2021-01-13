@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Entities;
-using OpenBreed.Rendering.Systems.Commands;
+using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Rendering.Interface;
 using System;
 using System.Collections.Generic;

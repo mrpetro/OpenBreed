@@ -131,17 +131,12 @@
     <Compile Include="Extensions\Vector3Extension.cs" />
     <Compile Include="ICoreClient.cs" />
     <Compile Include="IEventsMan.cs" />
-    <Compile Include="Managers\ICollisionMan.cs" />
-    <Compile Include="Managers\IFixture.cs" />
     <Compile Include="Managers\IAnimMan.cs" />
     <Compile Include="Managers\ICommandsMan.cs" />
     <Compile Include="Managers\IEntityMan.cs" />
-    <Compile Include="Managers\IFixtureMan.cs" />
     <Compile Include="Managers\IFsmMan.cs" />
     <Compile Include="Managers\IInputsMan.cs" />
     <Compile Include="Managers\IPlayersMan.cs" />
-    <Compile Include="Managers\IShape.cs" />
-    <Compile Include="Managers\IShapeMan.cs" />
     <Compile Include="Managers\IWorldMan.cs" />
     <Compile Include="Modules\Animation\Builders\AnimatorBuilder.cs" />
     <Compile Include="Builders\IBuilder.cs" />
@@ -175,7 +170,6 @@
     <Compile Include="Modules\BaseCoreModule.cs" />
     <Compile Include="Modules\ICoreModulesFactory.cs" />
     <Compile Include="Modules\IInputModule.cs" />
-    <Compile Include="Modules\IPhysicsModule.cs" />
     <Compile Include="Modules\IScriptingModule.cs" />
     <Compile Include="Scripting\IScriptFunc.cs" />
     <Compile Include="Scripting\LuaScriptFunc.cs" />
@@ -217,7 +211,6 @@
     <Compile Include="Components\VelocityComponent.cs" />
     <Compile Include="Components\PositionComponent.cs" />
     <Compile Include="Components\AngularPositionComponent.cs" />
-    <Compile Include="Modules\Physics\IPhysicsSystem.cs" />
     <Compile Include="Modules\Audio\Systems\IAudioSystem.cs" />
     <Compile Include="Systems\IRenderableSystem.cs" />
     <Compile Include="Systems\IUpdatableSystem.cs" />
@@ -276,6 +269,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Modules\Physics\" />
     <Folder Include="Modules\Rendering\Components\Builders\" />
     <Folder Include="Modules\Rendering\Helpers\" />
   </ItemGroup>

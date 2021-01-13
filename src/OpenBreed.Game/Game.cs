@@ -2,6 +2,8 @@
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools;
+using OpenBreed.Components.Physics;
+using OpenBreed.Components.Physics.Xml;
 using OpenBreed.Core;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Components.Xml;
@@ -11,16 +13,11 @@ using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Components.Xml;
 using OpenBreed.Core.Modules.Audio;
-using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Rendering;
-using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Components.Xml;
-using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Database.Interface;
-using OpenBreed.Rendering.Components;
-using OpenBreed.Rendering.Components.Xml;
+using OpenBreed.Components.Rendering;
+using OpenBreed.Components.Rendering.Xml;
 using OpenBreed.Rendering.OpenGL;
-using OpenBreed.Rendering.Systems;
+using OpenBreed.Systems.Rendering;
 using OpenTK;
 using System;
 using System.Drawing;
@@ -58,6 +55,7 @@ namespace OpenBreed.Game
             renderingModule = new OpenGLModule(this);
 
             VideoSystemsFactory = new VideoSystemsFactory(this);
+            PhysicsSystemsFactory = new PhysicsSystemsFactory(this);
 
             Inputs = new InputsMan(this);
             EntityFactory = new EntityFactory(this);
@@ -96,6 +94,7 @@ namespace OpenBreed.Game
         #region Internal Properties
 
         internal VideoSystemsFactory VideoSystemsFactory { get; }
+        internal PhysicsSystemsFactory PhysicsSystemsFactory { get; }
 
         #endregion Internal Properties
 

@@ -1,13 +1,15 @@
 ﻿using OpenBreed.Common.Tools;
+using OpenBreed.Components.Physics;
 using OpenBreed.Core;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Entities.Xml;
 using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Physics;
-using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Helpers;
-using OpenBreed.Rendering.Systems.Commands;
+using OpenBreed.Physics.Interface;
+using OpenBreed.Systems.Rendering.Commands;
+using OpenBreed.Systems.Physics.Helpers;
 using OpenTK;
 
 namespace OpenBreed.Sandbox.Entities.Actor

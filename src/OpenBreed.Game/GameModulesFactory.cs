@@ -22,11 +22,6 @@ namespace OpenBreed.Game
             throw new NotImplementedException();
         }
 
-        public IPhysicsModule CreatePhysicsModule(ICore core)
-        {
-            throw new NotImplementedException();
-        }
-
         public IScriptingModule CreateScriptingModule(ICore core)
         {
             throw new NotImplementedException();

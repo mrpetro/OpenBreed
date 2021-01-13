@@ -2,13 +2,10 @@
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Physics.Builders;
-using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Rendering.Systems.Commands;
-using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Game.Entities;
-using OpenBreed.Rendering.Components;
+using OpenBreed.Components.Rendering;
 using OpenBreed.Rendering.Interface;
 using OpenTK.Graphics;
 using System;
@@ -16,7 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Rendering.Systems.Events;
+using OpenBreed.Systems.Rendering.Events;
 
 namespace OpenBreed.Game
 {
@@ -29,10 +26,10 @@ namespace OpenBreed.Game
         public static void AddSystems(Game game, WorldBuilder builder)
         {
             //Video
-            builder.AddSystem(game.VideoSystemsFactory.CreateViewportSystem());
+            builder.AddSystem(game.VideoSystemsFactory.CreateViewportSystem().Build());
             //builder.AddSystem(core.CreateSpriteSystem().Build());
             //builder.AddSystem(core.CreateWireframeSystem().Build());
-            builder.AddSystem(game.VideoSystemsFactory.CreateTextSystem());
+            builder.AddSystem(game.VideoSystemsFactory.CreateTextSystem().Build());
         }
 
         public static Entity CreateViewportEntity(ICore core, string name, float x, float y, float width, float height, bool drawBackground, bool clipping = true)

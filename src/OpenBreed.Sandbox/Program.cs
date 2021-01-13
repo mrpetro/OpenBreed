@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Logging;
+using OpenBreed.Components.Physics;
+using OpenBreed.Components.Physics.Xml;
 using OpenBreed.Core;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Components.Xml;
@@ -14,21 +16,18 @@ using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Core.Modules.Audio.Builders;
 using OpenBreed.Core.Modules.Physics;
 using OpenBreed.Core.Modules.Physics.Builders;
-using OpenBreed.Core.Modules.Physics.Components;
 using OpenBreed.Core.Modules.Physics.Shapes;
-using OpenBreed.Core.Modules.Physics.Systems;
 using OpenBreed.Core.Modules.Rendering;
-using OpenBreed.Core.Modules.Rendering.Components;
-using OpenBreed.Core.Modules.Rendering.Components.Xml;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Control.Systems;
-using OpenBreed.Rendering.Components;
-using OpenBreed.Rendering.Components.Xml;
+using OpenBreed.Physics.Interface;
+using OpenBreed.Components.Rendering;
+using OpenBreed.Components.Rendering.Xml;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.OpenGL;
-using OpenBreed.Rendering.Systems;
-using OpenBreed.Rendering.Systems.Builders;
+using OpenBreed.Systems.Rendering;
+using OpenBreed.Systems.Rendering.Builders;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Button;
@@ -40,6 +39,7 @@ using OpenBreed.Sandbox.Entities.Turret;
 using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Sandbox.Items;
 using OpenBreed.Sandbox.Worlds;
+using OpenBreed.Systems.Physics;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
@@ -78,6 +78,10 @@ namespace OpenBreed.Sandbox
     public class Program : CoreBase
     {
         #region Private Fields
+
+        internal VideoSystemsFactory VideoSystemsFactory { get; }
+        internal PhysicsSystemsFactory PhysicsSystemsFactory { get; }
+
 
         private readonly IScriptMan scriptMan;
         private readonly LogConsolePrinter logConsolePrinter;
@@ -122,6 +126,9 @@ namespace OpenBreed.Sandbox
             EntityFactory = new EntityFactory(this);
 
             renderingModule = new OpenGLModule(this);
+
+            VideoSystemsFactory = new VideoSystemsFactory(this);
+            PhysicsSystemsFactory = new PhysicsSystemsFactory(this);
 
             Physics = new PhysicsModule(this);
             Sounds = new OpenALModule(this);
@@ -189,26 +196,6 @@ namespace OpenBreed.Sandbox
         {
             return new MovementSystemBuilder(this);
         }
-
-        public TileSystemBuilder CreateTileSystem()
-        {
-            return new TileSystemBuilder(this);
-        }
-
-        public SpriteSystemBuilder CreateSpriteSystem()
-        {
-            return new SpriteSystemBuilder(this);
-        }
-
-        public TextSystemBuilder CreateTextSystem()
-        {
-            return new TextSystemBuilder(this);
-        }
-
-        //public WireframeSystemBuilder CreateWireframeSystem()
-        //{
-        //    return new WireframeSystemBuilder(this);
-        //}
 
         public SoundSystemBuilder CreateSoundSystem()
         {

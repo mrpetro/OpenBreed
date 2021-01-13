@@ -6,7 +6,7 @@ using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems;
 using OpenBreed.Rendering.Interface;
-using OpenBreed.Rendering.Systems;
+using OpenBreed.Systems.Rendering;
 using OpenBreed.Sandbox.Components;
 using System;
 using System.Collections.Generic;

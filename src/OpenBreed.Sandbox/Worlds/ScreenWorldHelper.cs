@@ -2,12 +2,9 @@
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Physics.Builders;
-using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Rendering.Systems.Commands;
-using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Core.Modules.Rendering.Systems;
-using OpenBreed.Rendering.Components;
+using OpenBreed.Components.Rendering;
 using OpenBreed.Rendering.Interface;
 using OpenTK.Graphics;
 using System;
@@ -15,8 +12,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Rendering.Systems.Events;
-using OpenBreed.Rendering.Systems;
+using OpenBreed.Systems.Rendering.Events;
+using OpenBreed.Systems.Rendering;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -29,7 +26,7 @@ namespace OpenBreed.Sandbox.Worlds
         public static void AddSystems(Program core, WorldBuilder builder)
         {
             //Video
-            builder.AddSystem(new ViewportSystem(core, core.GetModule<IRenderModule>()));
+            builder.AddSystem(core.VideoSystemsFactory.CreateViewportSystem().Build());
             //builder.AddSystem(core.CreateSpriteSystem().Build());
             //builder.AddSystem(core.CreateWireframeSystem().Build());
             //builder.AddSystem(core.CreateTextSystem().Build());

@@ -10,22 +10,20 @@ using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Core.Modules.Animation.Helpers;
 using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Physics.Builders;
-using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Core.Modules.Physics.Systems;
-using OpenBreed.Core.Modules.Rendering.Components;
 using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems;
 using OpenBreed.Core.Systems.Control.Components;
-using OpenBreed.Rendering.Components;
+using OpenBreed.Components.Rendering;
 using OpenBreed.Rendering.Interface;
-using OpenBreed.Rendering.Systems;
-using OpenBreed.Rendering.Systems.Events;
+using OpenBreed.Systems.Rendering;
+using OpenBreed.Systems.Rendering.Events;
 using OpenBreed.Sandbox.Components;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Systems;
+using OpenBreed.Systems.Physics;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -66,18 +64,18 @@ namespace OpenBreed.Sandbox.Worlds
             //builder.AddSystem(core.CreateSoundSystem().Build());
 
             //Video
-            builder.AddSystem(core.CreateTileSystem().SetGridSize(width, height)
+            builder.AddSystem(core.VideoSystemsFactory.CreateTileSystem().SetGridSize(width, height)
                                                        .SetLayersNo(1)
                                                        .SetTileSize(16)
                                                        .SetGridVisible(true)
                                                        .Build());
-            builder.AddSystem(core.CreateSpriteSystem().Build());
+            builder.AddSystem(core.VideoSystemsFactory.CreateSpriteSystem().Build());
             //builder.AddSystem(core.CreateWireframeSystem().Build());
-            builder.AddSystem(core.CreateTextSystem().Build());
+            builder.AddSystem(core.VideoSystemsFactory.CreateTextSystem().Build());
 
             builder.AddSystem(new UiSystem(core, renderingModule));
 
-            builder.AddSystem(new ViewportSystem(core, core.GetModule<IRenderModule>()));
+            builder.AddSystem(core.VideoSystemsFactory.CreateViewportSystem().Build());
         }
 
         public static World CreateGameWorld(Program core, string worldName)

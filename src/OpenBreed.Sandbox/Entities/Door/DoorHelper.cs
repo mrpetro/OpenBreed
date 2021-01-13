@@ -6,10 +6,7 @@ using OpenBreed.Core.Entities;
 using OpenBreed.Core.Entities.Xml;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Physics.Components;
-using OpenBreed.Core.Modules.Physics.Events;
-using OpenBreed.Rendering.Systems.Commands;
-using OpenBreed.Core.Modules.Rendering.Components;
+using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Core.States;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Sandbox.Components;
@@ -23,6 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Components.Physics;
 
 namespace OpenBreed.Sandbox.Entities.Door
 {
