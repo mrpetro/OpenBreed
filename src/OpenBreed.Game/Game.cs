@@ -24,6 +24,8 @@ using OpenBreed.Animation.Generic;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Components.Animation.Xml;
 using OpenBreed.Components.Animation;
+using OpenBreed.Input.Generic;
+using OpenBreed.Input.Interface;
 
 namespace OpenBreed.Game
 {
@@ -80,8 +82,8 @@ namespace OpenBreed.Game
         public IAnimMan Animations { get; }
         public override JobMan Jobs => throw new NotImplementedException();
         public override IFsmMan StateMachines => throw new NotImplementedException();
-        public override IPlayersMan Players => throw new NotImplementedException();
-        public override IInputsMan Inputs { get; }
+        public IPlayersMan Players => throw new NotImplementedException();
+        public IInputsMan Inputs { get; }
 
         public override Matrix4 ClientTransform
         {

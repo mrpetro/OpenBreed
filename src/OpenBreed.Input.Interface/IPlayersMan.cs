@@ -1,12 +1,12 @@
-﻿namespace OpenBreed.Core.Managers
+﻿namespace OpenBreed.Input.Interface
 {
     public interface IPlayersMan
     {
         #region Public Methods
 
-        Player AddPlayer(string name);
+        IPlayer AddPlayer(string name);
 
-        Player GetByName(string name);
+        IPlayer GetByName(string name);
 
         void LooseAllControls();
 

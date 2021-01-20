@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Core.Inputs
+namespace OpenBreed.Input.Generic
 {
     public class InputController
     {

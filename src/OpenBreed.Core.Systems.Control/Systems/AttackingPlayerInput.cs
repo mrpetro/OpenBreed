@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core.Inputs;
-using OpenBreed.Components.Control;
+﻿using OpenBreed.Components.Control;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Core;
 using OpenBreed.Systems.Control.Commands;
+using OpenBreed.Input.Interface;
 
 namespace OpenBreed.Systems.Control.Systems
 {
@@ -17,13 +17,13 @@ namespace OpenBreed.Systems.Control.Systems
         public bool Primary { get; set; }
         public bool Secondary { get; set; }
 
-        public void Reset(Player player)
+        public void Reset(IPlayer player)
         {
             Primary = false;
             Secondary = false;
         }
 
-        public void Apply(Player player)
+        public void Apply(IPlayer player)
         {
             if (Primary == OldPrimary && Secondary == OldSecondary)
                 return;

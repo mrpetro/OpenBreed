@@ -15,6 +15,7 @@ using OpenTK.Input;
 using System;
 using System.Linq;
 using OpenBreed.Systems.Core;
+using OpenBreed.Input.Interface;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -78,8 +79,10 @@ namespace OpenBreed.Sandbox.Worlds
             world.Core.Commands.Post(new AddEntityCommand(world.Id, hudCamera.Id));
 
             var caret = TextHelper.CreateText(world);
-            world.Core.Inputs.KeyDown += (s, a) => ProcessKey(caret, a);
-            world.Core.Inputs.KeyPress += (s, a) => AddChar(caret, a);
+            var inputs = world.Core.GetManager<IInputsMan>();
+
+            inputs.KeyDown += (s, a) => ProcessKey(caret, a);
+            inputs.KeyPress += (s, a) => AddChar(caret, a);
 
             //caret.Subscribe<TextCaretPositionChanged>(OnTextCaretPositionChanged);
             //caret.Subscribe<TextDataChanged>(OnTextDataChanged);

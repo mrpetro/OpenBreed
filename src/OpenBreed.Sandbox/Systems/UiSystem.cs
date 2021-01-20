@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenBreed.Systems.Core;
+using OpenBreed.Input.Interface;
 
 namespace OpenBreed.Sandbox.Systems
 {
@@ -39,7 +40,7 @@ namespace OpenBreed.Sandbox.Systems
         {
             base.Initialize(world);
 
-            Core.Inputs.MouseMove += Inputs_MouseMove;
+            Core.GetManager<IInputsMan>().MouseMove += Inputs_MouseMove;
         }
 
         private void Inputs_MouseMove(object sender, OpenTK.Input.MouseMoveEventArgs e)

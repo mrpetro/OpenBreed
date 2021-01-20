@@ -1,6 +1,7 @@
-﻿using OpenTK.Input;
+﻿using OpenBreed.Core;
+using OpenTK.Input;
 
-namespace OpenBreed.Core.Inputs
+namespace OpenBreed.Input.Interface
 {
     public interface IControlHandler
     {
@@ -16,18 +17,18 @@ namespace OpenBreed.Core.Inputs
 
         #region Public Methods
 
-        void HandleKeyDown(Player player, float value, string actionName);
-        void HandleKeyUp(Player player, float value, string actionName);
-        void HandleKeyPressed(Player player, string controlAction);
+        void HandleKeyDown(IPlayer player, float value, string actionName);
+        void HandleKeyUp(IPlayer player, float value, string actionName);
+        void HandleKeyPressed(IPlayer player, string controlAction);
 
         #endregion Public Methods
     }
 
-    internal class KeyBinding
+    public class KeyBinding
     {
         #region Internal Constructors
 
-        internal KeyBinding(Player player, IControlHandler controlHandler, string controlAction)
+        public KeyBinding(IPlayer player, IControlHandler controlHandler, string controlAction)
         {
             Player = player;
             ControlHandler = controlHandler;
@@ -38,7 +39,7 @@ namespace OpenBreed.Core.Inputs
 
         #region Internal Properties
 
-        internal Player Player { get; }
+        internal IPlayer Player { get; }
         internal string ControlAction { get; }
         internal IControlHandler ControlHandler { get; }
 
@@ -46,17 +47,17 @@ namespace OpenBreed.Core.Inputs
 
         #region Internal Methods
 
-        internal void OnKeyPressed()
+        public void OnKeyPressed()
         {
             ControlHandler.HandleKeyPressed(Player, ControlAction);
         }
 
-        internal void OnKeyDown(float value)
+        public void OnKeyDown(float value)
         {
             ControlHandler.HandleKeyDown(Player, value, ControlAction);
         }
 
-        internal void OnKeyUp(float value)
+        public void OnKeyUp(float value)
         {
             ControlHandler.HandleKeyUp(Player, value, ControlAction);
         }

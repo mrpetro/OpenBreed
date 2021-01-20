@@ -1,11 +1,12 @@
-﻿using OpenBreed.Core.Inputs;
+﻿using OpenBreed.Core;
+using OpenBreed.Input.Interface;
 using OpenTK;
 using OpenTK.Input;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace OpenBreed.Core.Managers
+namespace OpenBreed.Input.Generic
 {
     public class KeyboardStateEventArgs : EventArgs
     {
@@ -196,7 +197,7 @@ namespace OpenBreed.Core.Managers
             }
         }
 
-        public void AddPlayerKeyBinding(Player player, string controlType, string controlAction, Key key)
+        public void AddPlayerKeyBinding(IPlayer player, string controlType, string controlAction, Key key)
         {
             var controlHandler = GetHandler(controlType);
 

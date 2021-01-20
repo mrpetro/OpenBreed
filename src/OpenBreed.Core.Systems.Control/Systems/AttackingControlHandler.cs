@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core.Components;
-using OpenBreed.Core.Inputs;
 using OpenBreed.Components.Control;
 using OpenBreed.Systems.Control.Systems;
 using OpenTK.Input;
@@ -9,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Core;
+using OpenBreed.Input.Interface;
+using OpenBreed.Input.Generic;
 
 namespace OpenBreed.Systems.Control.Systems
 {
@@ -19,15 +20,15 @@ namespace OpenBreed.Systems.Control.Systems
 
         public string ControlType => "Attacking";
 
-        public void HandleKeyDown(Player player, float value, string actionName)
+        public void HandleKeyDown(IPlayer player, float value, string actionName)
         {
         }
 
-        public void HandleKeyUp(Player player, float value, string actionName)
+        public void HandleKeyUp(IPlayer player, float value, string actionName)
         {
         }
 
-        public void HandleKeyPressed(Player player, string actionName)
+        public void HandleKeyPressed(IPlayer player, string actionName)
         {
             var input = player.Inputs.OfType<AttackingPlayerInput>().FirstOrDefault();
 

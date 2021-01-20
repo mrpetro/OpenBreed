@@ -1,17 +1,17 @@
 ﻿using OpenBreed.Common.Logging;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Inputs;
 using OpenBreed.Core.Managers;
+using OpenBreed.Input.Interface;
 using OpenTK.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace OpenBreed.Core
+namespace OpenBreed.Input.Generic
 {
-    public class Player
+    public class Player : IPlayer
     {
         #region Private Fields
 

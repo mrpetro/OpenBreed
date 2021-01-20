@@ -1,9 +1,10 @@
 ﻿using OpenBreed.Common.Logging;
+using OpenBreed.Input.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OpenBreed.Core.Managers
+namespace OpenBreed.Input.Generic
 {
     public class PlayersMan : IPlayersMan
     {
@@ -31,7 +32,7 @@ namespace OpenBreed.Core.Managers
 
         #region Public Methods
 
-        public Player AddPlayer(string name)
+        public IPlayer AddPlayer(string name)
         {
             if (players.Any(item => item.Name == name))
                 throw new InvalidOperationException($"Player with name '{name}' already exists.");
@@ -42,7 +43,7 @@ namespace OpenBreed.Core.Managers
             return newPlayer;
         }
 
-        public Player GetByName(string name)
+        public IPlayer GetByName(string name)
         {
             return players.FirstOrDefault(item => item.Name == name);
         }

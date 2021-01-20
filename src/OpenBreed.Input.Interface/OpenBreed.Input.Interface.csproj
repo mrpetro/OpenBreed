@@ -4,18 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CF689601-0842-497F-A05F-B31431697B4E}</ProjectGuid>
+    <ProjectGuid>{7CD20CF7-1CB8-4351-BDA1-6376C7A1D5E2}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>OpenBreed.Systems.Control</RootNamespace>
-    <AssemblyName>OpenBreed.Systems.Control</AssemblyName>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OpenBreed.Input.Interface</RootNamespace>
+    <AssemblyName>OpenBreed.Input.Interface</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,20 +21,14 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.2</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -44,7 +36,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.2</LangVersion>
+    <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -54,13 +46,13 @@
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.2</LangVersion>
+    <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="OpenTK, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\Packages\OpenTK.3.0.1\lib\net20\OpenTK.dll</HintPath>
+      <HintPath>..\..\packages\OpenTK.3.0.1\lib\net20\OpenTK.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -72,46 +64,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builders\AiControlSystemBuilder.cs" />
-    <Compile Include="Builders\WalkingControlSystemBuilder.cs" />
-    <Compile Include="Events\ControlFireChangedEvenrArgs.cs" />
-    <Compile Include="Events\ControlDirectionChangedEventArgs.cs" />
-    <Compile Include="Commands\AttackControlCommand.cs" />
-    <Compile Include="Commands\WalkingControlCommand.cs" />
-    <Compile Include="AiControlSystem.cs" />
-    <Compile Include="Systems\AttackingControlHandler.cs" />
-    <Compile Include="Systems\WalkingControlHandler.cs" />
-    <Compile Include="WalkingControlSystem.cs" />
+    <Compile Include="IControlHandler.cs" />
+    <Compile Include="IInputModule.cs" />
+    <Compile Include="IInputsMan.cs" />
+    <Compile Include="IPlayer.cs" />
+    <Compile Include="IPlayerInput.cs" />
+    <Compile Include="IPlayersMan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Systems\AttackingPlayerInput.cs" />
-    <Compile Include="Systems\WalkingPlayerInput.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">
+      <Project>{95BDF122-FAC8-4AC4-B9A8-B549D942E37D}</Project>
+      <Name>OpenBreed.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\OpenBreed.Components.Control\OpenBreed.Components.Control.csproj">
-      <Project>{5710db62-0796-4683-b52e-0423a73830f0}</Project>
-      <Name>OpenBreed.Components.Control</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">
-      <Project>{95BDF122-FAC8-4AC4-B9A8-B549D942E37D}</Project>
-      <Name>OpenBreed.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Input.Generic\OpenBreed.Input.Generic.csproj">
-      <Project>{4061AE76-DDD9-4FED-ACA3-1859A04F60C0}</Project>
-      <Name>OpenBreed.Input.Generic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Input.Interface\OpenBreed.Input.Interface.csproj">
-      <Project>{7CD20CF7-1CB8-4351-BDA1-6376C7A1D5E2}</Project>
-      <Name>OpenBreed.Input.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Systems.Core\OpenBreed.Systems.Core.csproj">
-      <Project>{36DBA7C4-EA4A-4F4D-82D3-D586E08346F6}</Project>
-      <Name>OpenBreed.Systems.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

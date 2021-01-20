@@ -53,10 +53,6 @@ namespace OpenBreed.Core
 
         public abstract EntityFactory EntityFactory { get; }
 
-        public abstract IPlayersMan Players { get; }
-
-        public abstract IInputsMan Inputs { get; }
-
         public ICoreClient Client { get; protected set; }
 
         public abstract Matrix4 ClientTransform { get; protected set; }

@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core.Inputs;
-using OpenBreed.Components.Control;
+﻿using OpenBreed.Components.Control;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Core;
 using OpenBreed.Systems.Control.Commands;
+using OpenBreed.Input.Interface;
 
 namespace OpenBreed.Systems.Control.Systems
 {
@@ -17,13 +17,13 @@ namespace OpenBreed.Systems.Control.Systems
         public float AxisX { get; set; }
         public float AxisY { get; set; }
 
-        public void Reset(Player player)
+        public void Reset(IPlayer player)
         {
             AxisX = 0.0f;
             AxisY = 0.0f;
         }
 
-        public void Apply(Player player)
+        public void Apply(IPlayer player)
         {
             if (AxisX == OldAxisX && AxisY == OldAxisY)
                 return;

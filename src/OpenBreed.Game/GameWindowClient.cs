@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Input.Interface;
 using OpenBreed.Rendering.Interface;
 using OpenTK;
 using OpenTK.Graphics;
@@ -25,13 +26,15 @@ namespace OpenBreed.Game
             this.renderModule = core.GetModule<IRenderModule>();
             window = new GameWindow(width, height, new GraphicsMode(new ColorFormat(8, 8, 8, 8), 24, 8), title);
 
-            window.MouseDown += (s, a) => core.Inputs.OnMouseDown(a);
-            window.MouseUp += (s, a) => core.Inputs.OnMouseUp(a);
-            window.MouseMove += (s, a) => core.Inputs.OnMouseMove(a);
-            window.MouseWheel += (s, a) => core.Inputs.OnMouseWheel(a);
-            window.KeyDown += (s, a) => core.Inputs.OnKeyDown(a);
-            window.KeyUp += (s, a) => core.Inputs.OnKeyUp(a);
-            window.KeyPress += (s, a) => core.Inputs.OnKeyPress(a);
+            var inputs = core.GetManager<IInputsMan>();
+
+            window.MouseDown += (s, a) => inputs.OnMouseDown(a);
+            window.MouseUp += (s, a) => inputs.OnMouseUp(a);
+            window.MouseMove += (s, a) => inputs.OnMouseMove(a);
+            window.MouseWheel += (s, a) => inputs.OnMouseWheel(a);
+            window.KeyDown += (s, a) => inputs.OnKeyDown(a);
+            window.KeyUp += (s, a) => inputs.OnKeyUp(a);
+            window.KeyPress += (s, a) => inputs.OnKeyPress(a);
             window.Load += Window_Load;
             window.Resize += Window_Resize;
             window.UpdateFrame += Window_UpdateFrame;

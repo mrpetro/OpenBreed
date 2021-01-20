@@ -11,11 +11,6 @@ namespace OpenBreed.Game
 {
     internal class GameModulesFactory : ICoreModulesFactory
     {
-        public IInputModule CreateInputModule(ICore core)
-        {
-            throw new NotImplementedException();
-        }
-
         public IScriptingModule CreateScriptingModule(ICore core)
         {
             throw new NotImplementedException();

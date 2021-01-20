@@ -1,21 +1,21 @@
-﻿using OpenBreed.Core.Inputs;
+﻿using OpenBreed.Core;
 using OpenTK;
 using OpenTK.Input;
 using System;
 
-namespace OpenBreed.Core.Managers
+namespace OpenBreed.Input.Interface
 {
     public interface IInputsMan
     {
         #region Public Events
 
-        public event EventHandler<KeyboardKeyEventArgs> KeyDown;
+        event EventHandler<KeyboardKeyEventArgs> KeyDown;
 
-        public event EventHandler<KeyboardKeyEventArgs> KeyUp;
+        event EventHandler<KeyboardKeyEventArgs> KeyUp;
 
-        public event EventHandler<KeyPressEventArgs> KeyPress;
+        event EventHandler<KeyPressEventArgs> KeyPress;
 
-        public event EventHandler<MouseMoveEventArgs> MouseMove;
+        event EventHandler<MouseMoveEventArgs> MouseMove;
 
         #endregion Public Events
 
@@ -45,7 +45,7 @@ namespace OpenBreed.Core.Managers
 
         #region Public Methods
 
-        void AddPlayerKeyBinding(Player player, string controlType, string controlAction, Key key);
+        void AddPlayerKeyBinding(IPlayer player, string controlType, string controlAction, Key key);
 
         void OnKeyDown(KeyboardKeyEventArgs e);
 

@@ -129,6 +129,14 @@
       <Project>{82af3d57-a4f4-4339-859a-7e82942b96df}</Project>
       <Name>OpenBreed.Audio.OpenAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Input.Generic\OpenBreed.Input.Generic.csproj">
+      <Project>{4061AE76-DDD9-4FED-ACA3-1859A04F60C0}</Project>
+      <Name>OpenBreed.Input.Generic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Input.Interface\OpenBreed.Input.Interface.csproj">
+      <Project>{7CD20CF7-1CB8-4351-BDA1-6376C7A1D5E2}</Project>
+      <Name>OpenBreed.Input.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Physics.Generic\OpenBreed.Physics.Generic.csproj">
       <Project>{c9f84ce7-732c-4a31-89dc-b87e3d9685be}</Project>
       <Name>OpenBreed.Physics.Generic</Name>

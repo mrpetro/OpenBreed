@@ -43,16 +43,6 @@ namespace OpenBreed.Core
         IFsmMan StateMachines { get; }
 
         /// <summary>
-        /// Players manager
-        /// </summary>
-        IPlayersMan Players { get; }
-
-        /// <summary>
-        /// Inputs manager
-        /// </summary>
-        IInputsMan Inputs { get; }
-
-        /// <summary>
         /// Worlds manager
         /// </summary>
         IWorldMan Worlds { get; }

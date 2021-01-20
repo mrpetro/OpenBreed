@@ -47,6 +47,8 @@ using OpenBreed.Components.Animation.Xml;
 using OpenBreed.Systems.Animation.Builders;
 using OpenBreed.Components.Animation;
 using OpenBreed.Systems.Animation;
+using OpenBreed.Input.Interface;
+using OpenBreed.Input.Generic;
 
 namespace OpenBreed.Sandbox
 {
@@ -155,11 +157,11 @@ namespace OpenBreed.Sandbox
 
         public override IFsmMan StateMachines { get; }
 
-        public override IPlayersMan Players { get; }
+        public IPlayersMan Players { get; }
 
         public override JobMan Jobs { get; }
 
-        public override IInputsMan Inputs { get; }
+        public IInputsMan Inputs { get; }
 
         public override Matrix4 ClientTransform { get; protected set; }
 
