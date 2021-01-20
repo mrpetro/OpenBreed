@@ -1,8 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Commands;
 using OpenBreed.Components.Control;
 using System;
 using System.Collections.Generic;
@@ -10,8 +8,11 @@ using System.Linq;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Systems.Control.Builders;
-using OpenBreed.Core.Systems;
 using OpenBreed.Core.Managers;
+using OpenBreed.Systems.Core;
+using OpenBreed.Core.Systems;
+using OpenBreed.Systems.Control.Commands;
+using OpenBreed.Systems.Control.Events;
 
 namespace OpenBreed.Systems.Control
 {

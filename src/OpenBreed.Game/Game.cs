@@ -10,8 +10,6 @@ using OpenBreed.Core.Components.Xml;
 using OpenBreed.Core.Entities.Xml;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
-using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Animation.Components.Xml;
 using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Database.Interface;
 using OpenBreed.Components.Rendering;
@@ -22,6 +20,10 @@ using OpenTK;
 using System;
 using System.Drawing;
 using OpenBreed.Audio.Interface;
+using OpenBreed.Animation.Generic;
+using OpenBreed.Animation.Interface;
+using OpenBreed.Components.Animation.Xml;
+using OpenBreed.Components.Animation;
 
 namespace OpenBreed.Game
 {
@@ -75,7 +77,7 @@ namespace OpenBreed.Game
         private readonly OpenALModule soundModule;
         private readonly OpenGLModule renderingModule;
 
-        public override IAnimMan Animations { get; }
+        public IAnimMan Animations { get; }
         public override JobMan Jobs => throw new NotImplementedException();
         public override IFsmMan StateMachines => throw new NotImplementedException();
         public override IPlayersMan Players => throw new NotImplementedException();

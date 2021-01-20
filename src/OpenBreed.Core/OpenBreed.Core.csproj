@@ -131,20 +131,13 @@
     <Compile Include="Extensions\Vector3Extension.cs" />
     <Compile Include="ICoreClient.cs" />
     <Compile Include="IEventsMan.cs" />
-    <Compile Include="Managers\IAnimMan.cs" />
     <Compile Include="Managers\ICommandsMan.cs" />
     <Compile Include="Managers\IEntityMan.cs" />
     <Compile Include="Managers\IFsmMan.cs" />
     <Compile Include="Managers\IInputsMan.cs" />
     <Compile Include="Managers\IPlayersMan.cs" />
     <Compile Include="Managers\IWorldMan.cs" />
-    <Compile Include="Modules\Animation\Builders\AnimatorBuilder.cs" />
-    <Compile Include="Builders\IBuilder.cs" />
-    <Compile Include="Builders\IComponentBuilder.cs" />
-    <Compile Include="Modules\Animation\Builders\AnimationSystemBuilder.cs" />
-    <Compile Include="Modules\Animation\Components\AnimationComponent.cs" />
     <Compile Include="Components\PauseImmuneComponent.cs" />
-    <Compile Include="Builders\IWorldSystemBuilder.cs" />
     <Compile Include="Components\FsmComponent.cs" />
     <Compile Include="Events\WorldDeinitializedEventArgs.cs" />
     <Compile Include="Events\WorldInitializedEventArgs.cs" />
@@ -152,34 +145,23 @@
     <Compile Include="Components\EquipmentComponent.cs" />
     <Compile Include="Components\IControlComponent.cs" />
     <Compile Include="Components\InventoryComponent.cs" />
-    <Compile Include="Managers\AnimMan.cs" />
     <Compile Include="Managers\EventsMan.cs" />
     <Compile Include="Helpers\MovementTools.cs" />
     <Compile Include="Managers\FsmMan.cs" />
     <Compile Include="Managers\IScriptMan.cs" />
     <Compile Include="Managers\LuaScriptMan.cs" />
-    <Compile Include="Modules\Animation\Commands\PauseAnimCommand.cs" />
-    <Compile Include="Modules\Animation\Commands\PlayAnimCommand.cs" />
-    <Compile Include="Modules\Animation\Commands\SetAnimCommand.cs" />
-    <Compile Include="Modules\Animation\Commands\StopAnimCommand.cs" />
-    <Compile Include="Modules\Animation\Events\AnimStoppedEventArgs.cs" />
-    <Compile Include="Modules\Animation\Helpers\Animation.cs" />
-    <Compile Include="Modules\Animation\Helpers\AnimationPart.cs" />
-    <Compile Include="Modules\Animation\Systems\AnimationSystem.cs" />
-    <Compile Include="Modules\Animation\Components\Xml\XmlAnimationComponent.cs" />
     <Compile Include="Modules\BaseCoreModule.cs" />
     <Compile Include="Modules\ICoreModulesFactory.cs" />
     <Compile Include="Modules\IInputModule.cs" />
     <Compile Include="Modules\IScriptingModule.cs" />
     <Compile Include="Scripting\IScriptFunc.cs" />
     <Compile Include="Scripting\LuaScriptFunc.cs" />
-    <Compile Include="Systems\FollowerSystem.cs" />
+    <Compile Include="Systems\IRenderableSystem.cs" />
     <Compile Include="Systems\ISystem.cs" />
-    <Compile Include="Systems\TextInputSystem.cs" />
+    <Compile Include="Systems\IUpdatableSystem.cs" />
+    <Compile Include="Systems\IWorldSystem.cs" />
+    <Compile Include="Systems\IWorldSystemBuilder.cs" />
     <Compile Include="WorldJob.cs" />
-    <Compile Include="Systems\StateMachineSystem.cs" />
-    <Compile Include="Systems\TimerSystem.cs" />
-    <Compile Include="CoreTools.cs" />
     <Compile Include="Managers\CommandsMan.cs" />
     <Compile Include="Commands\DestroyEntityCommand.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
@@ -189,13 +171,10 @@
     <Compile Include="Inputs\InputController.cs" />
     <Compile Include="Managers\InputsMan.cs" />
     <Compile Include="Inputs\IPlayerInput.cs" />
-    <Compile Include="Item.cs" />
     <Compile Include="JobChain.cs" />
     <Compile Include="Managers\JobMan.cs" />
     <Compile Include="MathTools.cs" />
-    <Compile Include="Modules\Animation\Helpers\IAnimation.cs" />
     <Compile Include="Modules\ICoreModule.cs" />
-    <Compile Include="Modules\Rendering\Systems\IWireframeSystem.cs" />
     <Compile Include="Other.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Managers\PlayersMan.cs" />
@@ -206,10 +185,6 @@
     <Compile Include="Components\VelocityComponent.cs" />
     <Compile Include="Components\PositionComponent.cs" />
     <Compile Include="Components\AngularPositionComponent.cs" />
-    <Compile Include="Systems\IRenderableSystem.cs" />
-    <Compile Include="Systems\IUpdatableSystem.cs" />
-    <Compile Include="Systems\IWorldSystem.cs" />
-    <Compile Include="Systems\WorldSystem.cs" />
     <Compile Include="Components\Transformation.cs" />
     <Compile Include="ICore.cs" />
     <Compile Include="Components\IEntityComponent.cs" />
@@ -263,11 +238,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Modules\Audio\Helpers\" />
-    <Folder Include="Modules\Audio\Systems\" />
-    <Folder Include="Modules\Physics\" />
-    <Folder Include="Modules\Rendering\Components\Builders\" />
-    <Folder Include="Modules\Rendering\Helpers\" />
+    <Folder Include="Modules\Animation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\KeraLua.1.0.22\build\net45\KeraLua.targets" Condition="Exists('..\..\packages\KeraLua.1.0.22\build\net45\KeraLua.targets')" />

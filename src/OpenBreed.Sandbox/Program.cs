@@ -7,11 +7,6 @@ using OpenBreed.Core.Components;
 using OpenBreed.Core.Components.Xml;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
-using OpenBreed.Core.Modules.Animation.Builders;
-using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Animation.Components.Xml;
-using OpenBreed.Core.Modules.Animation.Systems;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
 using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Physics.Generic;
 using OpenBreed.Core.Systems;
@@ -31,7 +26,6 @@ using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Entities.Turret;
 using OpenBreed.Sandbox.Entities.WorldGate;
-using OpenBreed.Sandbox.Items;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Systems.Physics;
 using OpenTK;
@@ -46,6 +40,13 @@ using OpenBreed.Systems.Control.Builders;
 using OpenBreed.Systems.Control.Systems;
 using OpenBreed.Systems.Control;
 using OpenBreed.Audio.Interface;
+using OpenBreed.Animation.Generic;
+using OpenBreed.Animation.Interface;
+using OpenBreed.Systems.Core;
+using OpenBreed.Components.Animation.Xml;
+using OpenBreed.Systems.Animation.Builders;
+using OpenBreed.Components.Animation;
+using OpenBreed.Systems.Animation;
 
 namespace OpenBreed.Sandbox
 {
@@ -150,7 +151,7 @@ namespace OpenBreed.Sandbox
 
         private readonly IRenderModule renderingModule;
 
-        public override IAnimMan Animations { get; }
+        public IAnimMan Animations { get; }
 
         public override IFsmMan StateMachines { get; }
 

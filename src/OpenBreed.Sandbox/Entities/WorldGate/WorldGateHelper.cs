@@ -1,7 +1,5 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Animation.Events;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Helpers;
@@ -14,7 +12,6 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Events;
-using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Core.Components;
 using OpenBreed.Physics.Generic;
@@ -23,6 +20,8 @@ using OpenBreed.Core.Entities.Xml;
 using OpenBreed.Core.Modules;
 using OpenBreed.Components.Physics;
 using OpenBreed.Physics.Interface;
+using OpenBreed.Systems.Animation.Events;
+using OpenBreed.Systems.Animation.Commands;
 
 namespace OpenBreed.Sandbox.Entities.WorldGate
 {

@@ -1,9 +1,6 @@
 ﻿using OpenBreed.Core;
 
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Animation.Events;
-using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Jobs;
@@ -20,6 +17,7 @@ using OpenBreed.Core.Entities.Xml;
 using OpenBreed.Common.Tools;
 using OpenBreed.Physics.Generic;
 using OpenBreed.Components.Physics;
+using OpenBreed.Animation.Interface;
 
 namespace OpenBreed.Sandbox.Entities.Teleport
 {
@@ -53,7 +51,9 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         public static void CreateAnimations(ICore core)
         {
-            var animationTeleportEntry = core.Animations.Create(ANIMATION_TELEPORT_ENTRY, 4.0f);
+            var animations = core.GetManager<IAnimMan>();
+
+            var animationTeleportEntry = animations.Create(ANIMATION_TELEPORT_ENTRY, 4.0f);
             var te = animationTeleportEntry.AddPart<int>(OnFrameUpdate, 0);
             te.AddFrame(0, 1.0f);
             te.AddFrame(1, 2.0f);

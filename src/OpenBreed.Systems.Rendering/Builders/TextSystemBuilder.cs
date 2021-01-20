@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Builders;
-using OpenBreed.Core.Modules.Rendering.Systems;
+using OpenBreed.Core.Systems;
 using OpenBreed.Systems.Rendering;
 
 namespace OpenBreed.Systems.Rendering.Builders

@@ -1,6 +1,4 @@
-﻿using OpenBreed.Core.Modules.Rendering;
-
-namespace OpenBreed.Core.Modules
+﻿namespace OpenBreed.Core.Modules
 {
     public interface ICoreModulesFactory
     {

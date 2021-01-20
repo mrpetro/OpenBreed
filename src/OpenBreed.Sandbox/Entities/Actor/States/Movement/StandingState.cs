@@ -1,7 +1,4 @@
 ﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Animation.Commands;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Core.States;
 using OpenBreed.Sandbox.Helpers;
 using OpenTK;
@@ -10,6 +7,8 @@ using System.Linq;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Components;
 using OpenBreed.Systems.Rendering.Commands;
+using OpenBreed.Systems.Animation.Commands;
+using OpenBreed.Systems.Control.Events;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 {

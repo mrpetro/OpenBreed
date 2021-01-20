@@ -1,11 +1,9 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Logging;
-using OpenBreed.Core.Builders;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
-using OpenBreed.Core.Modules.Rendering;
 using OpenBreed.Core.Systems;
 using OpenTK;
 using System;
@@ -49,8 +47,6 @@ namespace OpenBreed.Core
 
         public abstract Rectangle ClientRectangle { get; }
 
-        public abstract IAnimMan Animations { get; }
-
         public abstract JobMan Jobs { get; }
 
         public abstract IFsmMan StateMachines { get; }
@@ -93,11 +89,6 @@ namespace OpenBreed.Core
                 default:
                     return false;
             }
-        }
-
-        public TBuilder GetBuilder<TBuilder>() where TBuilder : IComponentBuilder
-        {
-            throw new NotImplementedException();
         }
 
         public T GetSystemByEntityId<T>(int entityId) where T : IWorldSystem

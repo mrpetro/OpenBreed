@@ -1,6 +1,5 @@
 ﻿using NLua;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Builders;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;

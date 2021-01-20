@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Audio;
-using OpenBreed.Core.Modules.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;

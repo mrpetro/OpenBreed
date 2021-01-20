@@ -3,9 +3,10 @@ using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenBreed.Core.Systems;
 using OpenBreed.Core.Components;
 using OpenBreed.Components.Physics;
+using OpenBreed.Systems.Core;
+using OpenBreed.Core.Systems;
 
 namespace OpenBreed.Systems.Physics
 {

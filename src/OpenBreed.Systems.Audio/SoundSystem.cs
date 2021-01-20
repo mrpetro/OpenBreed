@@ -1,10 +1,9 @@
-﻿using OpenBreed.Core.Modules.Animation.Systems;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using OpenBreed.Core.Systems;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Components;
 using OpenBreed.Systems.Audio.Builders;
+using OpenBreed.Systems.Core;
 
 namespace OpenBreed.Systems.Audio
 {

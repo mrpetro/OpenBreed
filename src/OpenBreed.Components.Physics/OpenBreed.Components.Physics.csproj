@@ -65,7 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BodyComponent.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="CollisionComponent.cs" />
     <Compile Include="Fixture.cs" />
     <Compile Include="Material.cs" />

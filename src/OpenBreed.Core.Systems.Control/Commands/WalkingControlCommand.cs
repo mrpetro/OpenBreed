@@ -3,7 +3,7 @@
 using OpenBreed.Core.Entities;
 using OpenTK;
 
-namespace OpenBreed.Core.Modules.Animation.Systems.Control.Commands
+namespace OpenBreed.Systems.Control.Commands
 {
     public struct WalkingControlCommand : ICommand
     {

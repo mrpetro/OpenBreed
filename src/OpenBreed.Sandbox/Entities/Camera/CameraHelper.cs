@@ -2,15 +2,13 @@
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Animation.Events;
-using OpenBreed.Core.Modules.Animation.Helpers;
 using OpenBreed.Components.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Animation.Interface;
 
 namespace OpenBreed.Sandbox.Entities.Camera
 {
@@ -21,11 +19,11 @@ namespace OpenBreed.Sandbox.Entities.Camera
 
         public static void CreateAnimations(ICore core)
         {
-            var cameraEffectFadeOut = core.Animations.Create(CAMERA_FADE_OUT, 10.0f);
+            var cameraEffectFadeOut = core.GetManager<IAnimMan>().Create(CAMERA_FADE_OUT, 10.0f);
             var fo = cameraEffectFadeOut.AddPart<float>(OnFrameUpdate, 1.0f);
             fo.AddFrame(0.0f, 10.0f);
 
-            var cameraEffectFadeIn = core.Animations.Create(CAMERA_FADE_IN, 10.0f);
+            var cameraEffectFadeIn = core.GetManager<IAnimMan>().Create(CAMERA_FADE_IN, 10.0f);
             var fi = cameraEffectFadeIn.AddPart<float>(OnFrameUpdate, 0.0f);
             fi.AddFrame(1.0f, 10.0f);
         }

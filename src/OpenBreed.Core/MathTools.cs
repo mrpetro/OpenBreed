@@ -1,13 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OpenTK;
+using System;
 
 namespace OpenBreed.Core
 {
     public static class MathTools
     {
+        #region Public Methods
+
+        public static float AngleBetween(Vector2 a, Vector2 b)
+        {
+            return (float)Math.Atan2(b.Y - a.Y, b.X - a.X);
+        }
+
         public static object Lerp(object start, object end, float by)
         {
             if (start is float && end is float)
@@ -20,5 +24,7 @@ namespace OpenBreed.Core
         {
             return start + (end - start) * by;
         }
+
+        #endregion Public Methods
     }
 }

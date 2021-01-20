@@ -3,14 +3,14 @@ using OpenBreed.Core;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Commands;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Sandbox.Entities.Actor.States.Movement;
 using OpenBreed.Sandbox.Helpers;
 using OpenTK;
 using System;
 using System.Linq;
+using OpenBreed.Systems.Animation.Commands;
+using OpenBreed.Systems.Control.Events;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {

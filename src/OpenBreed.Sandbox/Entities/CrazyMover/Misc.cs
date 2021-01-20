@@ -1,11 +1,10 @@
-﻿using OpenBreed.Common.Tools;
+﻿using OpenBreed.Animation.Interface;
+using OpenBreed.Common.Tools;
 using OpenBreed.Core;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Entities.Xml;
-using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Animation.Helpers;
 using OpenBreed.Rendering.Interface;
 using OpenTK;
 using OpenTK.Graphics;
@@ -24,7 +23,7 @@ namespace OpenBreed.Sandbox
 
         public static void CreateAnimations(ICore core)
         {
-            var updatePosAnim = core.Animations.Create(CRAZY_MOVE_ANIM, 25.0f);
+            var updatePosAnim = core.GetManager<IAnimMan>().Create(CRAZY_MOVE_ANIM, 25.0f);
             var updateX = updatePosAnim.AddPart<float>(OnUpdatePosXFrame, 0);
             updateX.AddFrame(5 * 16, 5.0f);
             updateX.AddFrame(0 * 16, 10.0f);

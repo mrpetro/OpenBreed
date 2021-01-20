@@ -1,6 +1,4 @@
-﻿using OpenBreed.Core.Builders;
-
-namespace OpenBreed.Core.Components
+﻿namespace OpenBreed.Core.Components
 {
     public interface IClassComponentTemplate : IComponentTemplate
     {

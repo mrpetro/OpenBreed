@@ -3,7 +3,6 @@ using OpenBreed.Core.Commands;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Core.States;
 using OpenBreed.Components.Control;

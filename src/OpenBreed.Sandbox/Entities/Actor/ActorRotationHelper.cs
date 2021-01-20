@@ -5,8 +5,6 @@ using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Helpers;
-using OpenBreed.Core.Modules.Animation.Commands;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Physics.Generic.Helpers;
 using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Sandbox.Entities.Actor.States.Attacking;
@@ -17,6 +15,8 @@ using OpenTK;
 using System;
 using System.CodeDom;
 using System.Linq;
+using OpenBreed.Systems.Animation.Commands;
+using OpenBreed.Systems.Control.Events;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {

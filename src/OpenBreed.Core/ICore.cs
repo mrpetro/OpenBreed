@@ -1,6 +1,5 @@
 using OpenBreed.Common.Logging;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Builders;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
@@ -17,11 +16,6 @@ namespace OpenBreed.Core
     public interface ICore
     {
         #region Public Properties
-
-        /// <summary>
-        /// Reference to animation manager
-        /// </summary>
-        IAnimMan Animations { get; }
 
         void Run();
 
@@ -110,13 +104,6 @@ namespace OpenBreed.Core
         /// <typeparam name="T">Type of module to get</typeparam>
         /// <returns>Core module</returns>
         T GetModule<T>() where T : ICoreModule;
-
-        /// <summary>
-        /// Get component builder
-        /// </summary>
-        /// <typeparam name="TBuilder">Component builder type to get</typeparam>
-        /// <returns>Component builder of specified type</returns>
-        TBuilder GetBuilder<TBuilder>() where TBuilder : IComponentBuilder;
 
         /// <summary>
         /// Perform exit

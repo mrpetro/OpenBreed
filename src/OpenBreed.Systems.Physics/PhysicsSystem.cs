@@ -4,7 +4,6 @@ using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
-using OpenBreed.Core.Systems;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -15,6 +14,8 @@ using OpenBreed.Systems.Physics.Events;
 using OpenBreed.Systems.Physics.Commands;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Systems.Core;
+using OpenBreed.Core.Systems;
 
 namespace OpenBreed.Systems.Physics
 {

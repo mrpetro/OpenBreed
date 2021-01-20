@@ -3,7 +3,6 @@ using OpenBreed.Core.Commands;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
-using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems;
 using OpenBreed.Components.Rendering;
 using OpenBreed.Systems.Rendering;
@@ -15,6 +14,7 @@ using OpenTK;
 using OpenTK.Input;
 using System;
 using System.Linq;
+using OpenBreed.Systems.Core;
 
 namespace OpenBreed.Sandbox.Worlds
 {

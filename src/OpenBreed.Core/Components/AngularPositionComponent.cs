@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core.Builders;
-using OpenTK;
+﻿using OpenTK;
 using System;
 
 namespace OpenBreed.Core.Components

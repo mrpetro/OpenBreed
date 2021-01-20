@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Systems.Physics;
 
 namespace OpenBreed.Systems.Rendering

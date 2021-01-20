@@ -4,7 +4,6 @@ using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
-using OpenBreed.Core.Systems;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
@@ -14,6 +13,8 @@ using OpenBreed.Rendering.Interface;
 using OpenBreed.Components.Rendering;
 using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Systems.Rendering.Builders;
+using OpenBreed.Systems.Core;
+using OpenBreed.Core.Systems;
 
 namespace OpenBreed.Systems.Rendering
 {

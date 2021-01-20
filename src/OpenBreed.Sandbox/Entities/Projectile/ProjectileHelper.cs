@@ -5,7 +5,6 @@ using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Entities.Xml;
 using OpenBreed.Core.Modules;
-using OpenBreed.Core.Modules.Animation.Components;
 using OpenBreed.Physics.Generic.Helpers;
 using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Core.States;
@@ -20,6 +19,7 @@ using System.Threading.Tasks;
 using OpenBreed.Components.Physics;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Systems.Physics.Helpers;
+using OpenBreed.Animation.Interface;
 
 namespace OpenBreed.Sandbox.Entities.Projectile
 {
@@ -27,21 +27,23 @@ namespace OpenBreed.Sandbox.Entities.Projectile
     {
         public static void CreateAnimations(ICore core)
         {
-            var laserR = core.Animations.Create("Animations/Laser/Fired/Right", 2.0f);
+            var animations = core.GetManager<IAnimMan>();
+
+            var laserR = animations.Create("Animations/Laser/Fired/Right", 2.0f);
             laserR.AddPart<int>(OnFrameUpdate, 0).AddFrame(0, 2.0f);
-            var laserRD = core.Animations.Create("Animations/Laser/Fired/RightDown", 2.0f);
+            var laserRD = animations.Create("Animations/Laser/Fired/RightDown", 2.0f);
             laserRD.AddPart<int>(OnFrameUpdate, 1).AddFrame(1, 2.0f);
-            var laserD = core.Animations.Create("Animations/Laser/Fired/Down", 2.0f);
+            var laserD = animations.Create("Animations/Laser/Fired/Down", 2.0f);
             laserD.AddPart<int>(OnFrameUpdate, 2).AddFrame(2, 2.0f);
-            var laserDL = core.Animations.Create("Animations/Laser/Fired/DownLeft", 2.0f);
+            var laserDL = animations.Create("Animations/Laser/Fired/DownLeft", 2.0f);
             laserDL.AddPart<int>(OnFrameUpdate, 3).AddFrame(3, 2.0f);
-            var laserL = core.Animations.Create("Animations/Laser/Fired/Left", 2.0f);
+            var laserL = animations.Create("Animations/Laser/Fired/Left", 2.0f);
             laserL.AddPart<int>(OnFrameUpdate, 4).AddFrame(4, 2.0f);
-            var laserLU = core.Animations.Create("Animations/Laser/Fired/LeftUp", 2.0f);
+            var laserLU = animations.Create("Animations/Laser/Fired/LeftUp", 2.0f);
             laserLU.AddPart<int>(OnFrameUpdate, 5).AddFrame(5, 2.0f);
-            var laserU = core.Animations.Create("Animations/Laser/Fired/Up", 2.0f);
+            var laserU = animations.Create("Animations/Laser/Fired/Up", 2.0f);
             laserU.AddPart<int>(OnFrameUpdate, 6).AddFrame(6, 2.0f);
-            var laserUR = core.Animations.Create("Animations/Laser/Fired/UpRight", 2.0f);
+            var laserUR = animations.Create("Animations/Laser/Fired/UpRight", 2.0f);
             laserUR.AddPart<int>(OnFrameUpdate, 7).AddFrame(7, 2.0f);
         }
 

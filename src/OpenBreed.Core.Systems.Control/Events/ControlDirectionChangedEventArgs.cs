@@ -2,7 +2,7 @@
 using OpenTK;
 using System;
 
-namespace OpenBreed.Core.Modules.Animation.Systems.Control.Events
+namespace OpenBreed.Systems.Control.Events
 {
     /// <summary>
     /// Event args for event that occurs when control direction is changed

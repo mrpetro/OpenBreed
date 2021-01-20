@@ -1,8 +1,5 @@
 ﻿
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Animation.Events;
-using OpenBreed.Core.Modules.Animation.Commands;
 using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Core.States;
 using System;
@@ -12,6 +9,8 @@ using OpenBreed.Sandbox.Entities.Door.States;
 using OpenBreed.Core.Components;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Components.Physics;
+using OpenBreed.Systems.Animation.Commands;
+using OpenBreed.Systems.Animation.Events;
 
 namespace OpenBreed.Sandbox.Components.States
 {

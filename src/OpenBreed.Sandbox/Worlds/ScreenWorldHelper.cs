@@ -3,7 +3,6 @@ using OpenBreed.Core.Commands;
 using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Systems.Rendering.Commands;
-using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Components.Rendering;
 using OpenBreed.Rendering.Interface;
 using OpenTK.Graphics;

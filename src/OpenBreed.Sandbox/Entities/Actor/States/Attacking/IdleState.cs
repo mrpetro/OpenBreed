@@ -2,7 +2,6 @@
 using NLua;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Core.States;
 using OpenTK;
@@ -11,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Systems.Control.Events;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {

@@ -105,9 +105,21 @@
       <Project>{a05b933e-1c80-4aae-93b9-be37c6b94270}</Project>
       <Name>OpenBreed.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Animation.Generic\OpenBreed.Animation.Generic.csproj">
+      <Project>{877FEE86-A92F-4194-A7C3-70E069D1347A}</Project>
+      <Name>OpenBreed.Animation.Generic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Animation.Interface\OpenBreed.Animation.Interface.csproj">
+      <Project>{C064426D-B551-4C55-917B-65FA8F6F2C8D}</Project>
+      <Name>OpenBreed.Animation.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Audio.Interface\OpenBreed.Audio.Interface.csproj">
       <Project>{A281E554-E5B2-4198-96F6-F772A552C7D0}</Project>
       <Name>OpenBreed.Audio.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Components.Animation\OpenBreed.Components.Animation.csproj">
+      <Project>{2AC675A2-6989-4EAA-B8E8-46D50DDB88C6}</Project>
+      <Name>OpenBreed.Components.Animation</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Components.Physics\OpenBreed.Components.Physics.csproj">
       <Project>{ea5c8b57-f636-45fc-b6d4-1344c6764352}</Project>
@@ -136,6 +148,10 @@
     <ProjectReference Include="..\OpenBreed.Rendering.OpenGL\OpenBreed.Rendering.OpenGL.csproj">
       <Project>{08856058-9DE1-43E5-A4AA-91BF98BBDE50}</Project>
       <Name>OpenBreed.Rendering.OpenGL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Systems.Core\OpenBreed.Systems.Core.csproj">
+      <Project>{36DBA7C4-EA4A-4F4D-82D3-D586E08346F6}</Project>
+      <Name>OpenBreed.Systems.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Systems.Rendering\OpenBreed.Systems.Rendering.csproj">
       <Project>{DFE12B44-E9BF-466C-B74B-75D14458C4E8}</Project>

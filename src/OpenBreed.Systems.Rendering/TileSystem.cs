@@ -10,12 +10,13 @@ using System.Diagnostics;
 using System.Linq;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Helpers;
-using OpenBreed.Core.Systems;
 using OpenBreed.Core.Managers;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Components.Rendering;
 using OpenBreed.Core;
 using OpenBreed.Systems.Rendering.Builders;
+using OpenBreed.Systems.Core;
+using OpenBreed.Core.Systems;
 
 namespace OpenBreed.Systems.Rendering
 {

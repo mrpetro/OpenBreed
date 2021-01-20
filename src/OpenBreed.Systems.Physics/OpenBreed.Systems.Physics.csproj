@@ -100,6 +100,10 @@
       <Project>{29FF6C36-A229-4C2F-8CDD-09181C7A6B59}</Project>
       <Name>OpenBreed.Physics.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Systems.Core\OpenBreed.Systems.Core.csproj">
+      <Project>{36DBA7C4-EA4A-4F4D-82D3-D586E08346F6}</Project>
+      <Name>OpenBreed.Systems.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config" />

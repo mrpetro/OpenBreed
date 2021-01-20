@@ -16,6 +16,7 @@ using OpenBreed.Components.Rendering;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Systems.Rendering.Events;
 using OpenBreed.Systems.Rendering.Builders;
+using OpenBreed.Systems.Core;
 
 namespace OpenBreed.Systems.Rendering
 {

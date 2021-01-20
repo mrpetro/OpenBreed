@@ -4,12 +4,6 @@ using OpenBreed.Core.Components;
 using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Managers;
-using OpenBreed.Core.Modules.Animation;
-using OpenBreed.Core.Modules.Animation.Builders;
-using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Animation.Helpers;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Systems;
-using OpenBreed.Core.Modules.Rendering.Systems;
 using OpenBreed.Core.Systems;
 using OpenBreed.Components.Control;
 using OpenBreed.Components.Rendering;
@@ -29,6 +23,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Systems.Core;
+using OpenBreed.Animation.Interface;
+using OpenBreed.Components.Animation;
 
 namespace OpenBreed.Sandbox.Worlds
 {

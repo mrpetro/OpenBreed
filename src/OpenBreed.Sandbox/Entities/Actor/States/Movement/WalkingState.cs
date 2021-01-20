@@ -1,9 +1,5 @@
 ﻿
 using OpenBreed.Core.Entities;
-using OpenBreed.Core.Modules.Animation.Components;
-using OpenBreed.Core.Modules.Animation.Events;
-using OpenBreed.Core.Modules.Animation.Commands;
-using OpenBreed.Core.Modules.Animation.Systems.Control.Events;
 using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Core.States;
 using OpenBreed.Sandbox.Helpers;
@@ -15,6 +11,8 @@ using OpenBreed.Core.Components;
 using OpenBreed.Components.Control;
 using OpenBreed.Components.Physics;
 using OpenBreed.Systems.Physics.Events;
+using OpenBreed.Systems.Animation.Commands;
+using OpenBreed.Systems.Control.Events;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 {

@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core.Builders;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Core.Components
@@ -24,8 +23,8 @@ namespace OpenBreed.Core.Components
         #region Public Properties
 
         public int TimerId { get; }
-        public bool Enabled { get; internal set; }
-        public double Interval { get; internal set; }
+        public bool Enabled { get; set; }
+        public double Interval { get; set; }
 
         #endregion Public Properties
     }
