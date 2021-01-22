@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
 using OpenTK;
@@ -15,7 +14,9 @@ using OpenBreed.Systems.Physics.Commands;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Systems.Core;
-using OpenBreed.Core.Systems;
+using OpenBreed.Ecsw.Systems;
+using OpenBreed.Ecsw.Entities;
+using OpenBreed.Ecsw;
 
 namespace OpenBreed.Systems.Physics
 {
@@ -155,13 +156,13 @@ namespace OpenBreed.Systems.Physics
 
         private static bool HandleBodyOnCommand(ICore core, BodyOnCommand cmd)
         {
-            var system = core.GetSystemByEntityId<PhysicsSystem>(cmd.EntityId);
+            var system = core.GetManager<ISystemFinder>().GetSystemByEntityId<PhysicsSystem>(cmd.EntityId);
             if (system == null)
                 return false;
 
             var dynamicToActivate = system.inactiveDynamics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
 
-            var entity = core.Entities.GetById(cmd.EntityId);
+            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
 
             if (dynamicToActivate != null)
             {
@@ -185,13 +186,13 @@ namespace OpenBreed.Systems.Physics
 
         private static bool HandleBodyOffCommand(ICore core, BodyOffCommand cmd)
         {
-            var system = core.GetSystemByEntityId<PhysicsSystem>(cmd.EntityId);
+            var system = core.GetManager<ISystemFinder>().GetSystemByEntityId<PhysicsSystem>(cmd.EntityId);
             if (system == null)
                 return false;
 
             var dynamicToDeactivate = system.activeDynamics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
 
-            var entity = core.Entities.GetById(cmd.EntityId);
+            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
 
             if (dynamicToDeactivate != null)
             {
@@ -224,7 +225,7 @@ namespace OpenBreed.Systems.Physics
             //Clear dynamics
             for (int i = 0; i < activeDynamics.Count; i++)
             {
-                var entity = Core.Entities.GetById(activeDynamics[i].EntityId);
+                var entity = Core.GetManager<IEntityMan>().GetById(activeDynamics[i].EntityId);
                 entity.DebugData = null;
             }
 
@@ -261,8 +262,8 @@ namespace OpenBreed.Systems.Physics
             Vector2 projection;
             if (DynamicHelper.TestVsDynamic(this, packA, packB, dt, out projection))
             {
-                var entityA = Core.Entities.GetById(packA.EntityId);
-                var entityB = Core.Entities.GetById(packB.EntityId);
+                var entityA = Core.GetManager<IEntityMan>().GetById(packA.EntityId);
+                var entityB = Core.GetManager<IEntityMan>().GetById(packB.EntityId);
 
                 Collisions.Callback(entityA, entityB, projection);
 
@@ -277,8 +278,8 @@ namespace OpenBreed.Systems.Physics
             Vector2 projection;
             if (DynamicHelper.TestVsStatic(this, packA, packB, dt, out projection))
             {
-                var entityA = Core.Entities.GetById(packA.EntityId);
-                var entityB = Core.Entities.GetById(packB.EntityId);
+                var entityA = Core.GetManager<IEntityMan>().GetById(packA.EntityId);
+                var entityB = Core.GetManager<IEntityMan>().GetById(packB.EntityId);
 
                 Collisions.Callback(entityA, entityB, projection);
                 Collisions.Callback(entityB, entityA, -projection);

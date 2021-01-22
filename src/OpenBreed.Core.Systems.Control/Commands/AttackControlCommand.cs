@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Core.Commands;
-
-using OpenBreed.Core.Entities;
+using OpenBreed.Ecsw.Entities;
 using OpenTK;
 
 namespace OpenBreed.Systems.Control.Commands

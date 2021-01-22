@@ -1,9 +1,7 @@
 ﻿using OpenBreed.Common.Tools;
 using OpenBreed.Components.Physics;
 using OpenBreed.Core;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Entities.Xml;
+using OpenBreed.Components.Common;
 using OpenBreed.Core.Modules;
 using OpenBreed.Physics.Generic;
 using OpenBreed.Physics.Generic.Helpers;
@@ -12,6 +10,9 @@ using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Systems.Physics.Helpers;
 using OpenTK;
 using OpenBreed.Animation.Interface;
+using OpenBreed.Ecsw.Entities.Xml;
+using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
@@ -113,11 +114,11 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         public static Entity CreateActor(ICore core, Vector2 pos)
         {
-            //var actor = core.Entities.Create();
+            //var actor = core.GetManager<IEntityMan>().Create();
 
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Actor\Arrow.xml");
-            var actor = core.EntityFactory.Create(entityTemplate);
-            //var actor = core.Entities.CreateFromTemplate("Arrow");
+            var actor = core.GetManager<IEntityFactory>().Create(entityTemplate);
+            //var actor = core.GetManager<IEntityMan>().CreateFromTemplate("Arrow");
 
 
             actor.Add(new AngularVelocityComponent(0));

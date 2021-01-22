@@ -1,15 +1,15 @@
-﻿using OpenBreed.Core.Entities;
-using OpenBreed.Systems.Rendering.Commands;
-using OpenBreed.Core.States;
+﻿using OpenBreed.Systems.Rendering.Commands;
 using OpenTK;
 using System.Linq;
 using OpenBreed.Sandbox.Entities.Door.States;
 using System;
-using OpenBreed.Core.Components;
+using OpenBreed.Components.Common;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Commands;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Systems.Physics.Commands;
+using OpenBreed.Fsm;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -49,7 +49,7 @@ namespace OpenBreed.Sandbox.Components.States
             //entity.PostCommand(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
 
             var className = entity.Get<ClassComponent>().Name;
-            var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
+            var stateName = entity.Core.GetManager<IFsmMan>().GetStateName(FsmId, Id);
             var stampId = entity.Core.GetModule<IRenderModule>().Stamps.GetByName($"{stampPrefix}/{className}/{stateName}").Id;
             entity.Core.Commands.Post(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
             entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, "Door - Opened"));

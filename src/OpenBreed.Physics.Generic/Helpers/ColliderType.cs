@@ -1,5 +1,5 @@
-﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.Managers;
+﻿using OpenBreed.Core.Managers;
+using OpenBreed.Ecsw.Entities;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Managers;
 using OpenTK;

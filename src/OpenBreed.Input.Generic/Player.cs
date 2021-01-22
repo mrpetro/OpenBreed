@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Common.Logging;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Core.Managers;
+using OpenBreed.Ecsw.Entities;
 using OpenBreed.Input.Interface;
 using OpenTK.Input;
 using System;

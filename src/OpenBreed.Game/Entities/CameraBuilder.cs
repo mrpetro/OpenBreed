@@ -1,9 +1,10 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Entities.Builders;
+using OpenBreed.Components.Common;
 using OpenBreed.Components.Rendering;
 using OpenTK;
+using OpenBreed.Ecsw.Entities.Builders;
+using OpenBreed.Ecsw.Entities;
+using OpenBreed.Ecsw;
 
 namespace OpenBreed.Game.Entities
 {
@@ -30,7 +31,7 @@ namespace OpenBreed.Game.Entities
 
         public override Entity Build()
         {
-            var entity = Core.Entities.Create();
+            var entity = Core.GetManager<IEntityMan>().Create();
             entity.Add(PositionComponent.Create(position));
 
             var ccBuilder = CameraComponentBuilder.New(Core);

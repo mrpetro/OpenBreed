@@ -1,10 +1,8 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
-using OpenBreed.Core.Systems;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -30,8 +28,6 @@ namespace OpenBreed.Core
 
             Commands = manCollection.GetManager<ICommandsMan>();
             Events = manCollection.GetManager<IEventsMan>();
-            Entities = manCollection.GetManager<IEntityMan>();
-            Worlds = manCollection.GetManager<IWorldMan>();
             Logging = manCollection.GetManager<ILogger>();
         }
 
@@ -39,19 +35,13 @@ namespace OpenBreed.Core
 
         #region Public Properties
 
-        public IEntityMan Entities { get; }
         public ICommandsMan Commands { get; }
         public IEventsMan Events { get; }
-        public IWorldMan Worlds { get; }
         public ILogger Logging { get; }
 
         public abstract Rectangle ClientRectangle { get; }
 
         public abstract JobMan Jobs { get; }
-
-        public abstract IFsmMan StateMachines { get; }
-
-        public abstract EntityFactory EntityFactory { get; }
 
         public ICoreClient Client { get; protected set; }
 
@@ -87,29 +77,6 @@ namespace OpenBreed.Core
             }
         }
 
-        public T GetSystemByEntityId<T>(int entityId) where T : IWorldSystem
-        {
-            var entity = Entities.GetById(entityId);
-            if (entity.World == null)
-                return default(T);
-            var system = entity.World.GetSystem<T>();
-            if (system == null)
-                return default(T);
-
-            return system;
-        }
-
-        public T GetSystemByWorldId<T>(int worldId) where T : IWorldSystem
-        {
-            var world = Worlds.GetById(worldId);
-            if (world == null)
-                return default(T);
-            var system = world.GetSystem<T>();
-            if (system == null)
-                return default(T);
-
-            return system;
-        }
 
         #endregion Public Methods
 

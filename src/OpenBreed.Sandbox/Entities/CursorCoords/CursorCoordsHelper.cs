@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Components.Rendering;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Systems.Rendering.Events;
@@ -14,6 +13,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Sandbox.Entities.CursorCoords
 {
@@ -23,7 +24,7 @@ namespace OpenBreed.Sandbox.Entities.CursorCoords
         {
             var arial12 = world.Core.GetModule<IRenderModule>().Fonts.Create("ARIAL", 10);
 
-            var entity = world.Core.Entities.Create();
+            var entity = world.Core.GetManager<IEntityMan>().Create();
 
             entity.Add(PositionComponent.Create(new Vector2(entity.Core.ClientRectangle.Width / 2.0f - 120.0f, -entity.Core.ClientRectangle.Height / 2.0f)));
 
@@ -41,7 +42,7 @@ namespace OpenBreed.Sandbox.Entities.CursorCoords
             //world.AddEntity(fpsTextEntity);
 
 
-            var hudViewport = world.Core.Entities.GetByTag(ScreenWorldHelper.HUD_VIEWPORT).First();
+            var hudViewport = world.Core.GetManager<IEntityMan>().GetByTag(ScreenWorldHelper.HUD_VIEWPORT).First();
 
             world.Core.Jobs.Execute(new CursorCoordsTextUpdateJob(entity));
             hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdatePos(entity, a));

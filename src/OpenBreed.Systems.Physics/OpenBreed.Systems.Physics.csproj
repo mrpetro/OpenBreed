@@ -84,9 +84,17 @@
     <Compile Include="PhysicsSystemsFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OpenBreed.Components.Common\OpenBreed.Components.Common.csproj">
+      <Project>{983742FE-CB64-4BD9-BB24-90646172A0E2}</Project>
+      <Name>OpenBreed.Components.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Components.Physics\OpenBreed.Components.Physics.csproj">
       <Project>{EA5C8B57-F636-45FC-B6D4-1344C6764352}</Project>
       <Name>OpenBreed.Components.Physics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Ecsw\OpenBreed.Ecsw.csproj">
+      <Project>{D22D74E0-7FE4-4278-A93B-9983B788F40E}</Project>
+      <Name>OpenBreed.Ecsw</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Physics.Generic\OpenBreed.Physics.Generic.csproj">
       <Project>{C9F84CE7-732C-4A31-89DC-B87E3D9685BE}</Project>

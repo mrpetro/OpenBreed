@@ -1,15 +1,15 @@
 ﻿
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Core.Events;
 using OpenBreed.Systems.Rendering.Commands;
-using OpenBreed.Core.States;
 using OpenBreed.Components.Control;
 using OpenTK;
 using System;
 using System.Linq;
 using System.Timers;
+using OpenBreed.Fsm;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {
@@ -36,7 +36,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 
         public void EnterState(Entity entity)
         {
-            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
+            var currentStateNames = entity.Core.GetManager<IFsmMan>().GetStateNames(entity);
             entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
             entity.Subscribe<TimerElapsedEventArgs>(OnTimerElapsed);

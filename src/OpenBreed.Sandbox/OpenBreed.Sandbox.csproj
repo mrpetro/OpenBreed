@@ -217,6 +217,10 @@
       <Project>{2AC675A2-6989-4EAA-B8E8-46D50DDB88C6}</Project>
       <Name>OpenBreed.Components.Animation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Components.Common\OpenBreed.Components.Common.csproj">
+      <Project>{983742FE-CB64-4BD9-BB24-90646172A0E2}</Project>
+      <Name>OpenBreed.Components.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Components.Control\OpenBreed.Components.Control.csproj">
       <Project>{5710db62-0796-4683-b52e-0423a73830f0}</Project>
       <Name>OpenBreed.Components.Control</Name>
@@ -228,6 +232,14 @@
     <ProjectReference Include="..\OpenBreed.Core.Modules.Audio.OpenAL\OpenBreed.Audio.OpenAL.csproj">
       <Project>{82af3d57-a4f4-4339-859a-7e82942b96df}</Project>
       <Name>OpenBreed.Audio.OpenAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Ecsw\OpenBreed.Ecsw.csproj">
+      <Project>{D22D74E0-7FE4-4278-A93B-9983B788F40E}</Project>
+      <Name>OpenBreed.Ecsw</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Fsm\OpenBreed.Fsm.csproj">
+      <Project>{53D8026C-4C23-4BB7-B75A-03BE53F1F655}</Project>
+      <Name>OpenBreed.Fsm</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Input.Generic\OpenBreed.Input.Generic.csproj">
       <Project>{4061AE76-DDD9-4FED-ACA3-1859A04F60C0}</Project>
@@ -264,6 +276,14 @@
     <ProjectReference Include="..\OpenBreed.Rendering.OpenGL\OpenBreed.Rendering.OpenGL.csproj">
       <Project>{08856058-9DE1-43E5-A4AA-91BF98BBDE50}</Project>
       <Name>OpenBreed.Rendering.OpenGL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Scripting.Interface\OpenBreed.Scripting.Interface.csproj">
+      <Project>{937DDE8D-E618-4620-BEEE-A834DA85FA97}</Project>
+      <Name>OpenBreed.Scripting.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Scripting.Lua\OpenBreed.Scripting.Lua.csproj">
+      <Project>{ce239744-67dd-4e16-b79a-eb6ec47a3558}</Project>
+      <Name>OpenBreed.Scripting.Lua</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Systems.Animation\OpenBreed.Systems.Animation.csproj">
       <Project>{7D41F74D-CAFA-4AD2-A06A-230B50F43D31}</Project>

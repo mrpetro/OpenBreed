@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Components.Rendering;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Systems.Rendering.Events;
@@ -12,6 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Game.Entities
 {
@@ -21,7 +22,7 @@ namespace OpenBreed.Game.Entities
         {
             var arial12 = world.Core.GetModule<IRenderModule>().Fonts.Create("ARIAL", 10);
 
-            var fpsTextEntity = world.Core.Entities.Create();
+            var fpsTextEntity = world.Core.GetManager<IEntityMan>().Create();
 
             fpsTextEntity.Add(PositionComponent.Create(new Vector2(0,0)));
 
@@ -39,7 +40,7 @@ namespace OpenBreed.Game.Entities
             //world.AddEntity(fpsTextEntity);
 
 
-            var gameViewport = world.Core.Entities.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
+            var gameViewport = world.Core.GetManager<IEntityMan>().GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
 
             //world.Core.Jobs.Execute(new FpsTextUpdateJob(fpsTextEntity));
             gameViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateFpsPos(fpsTextEntity, a));

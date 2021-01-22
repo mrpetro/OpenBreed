@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Components.Rendering;
 using OpenBreed.Rendering.Interface;
@@ -13,6 +12,8 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Systems.Rendering.Events;
 using OpenBreed.Systems.Rendering;
+using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -33,7 +34,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         public static Entity CreateViewportEntity(ICore core, string name, float x, float y, float width, float height, bool drawBackground, bool clipping = true)
         {
-            var viewport = core.Entities.Create();
+            var viewport = core.GetManager<IEntityMan>().Create();
             viewport.Tag = name;
 
             var vpcBuilder = ViewportComponentBuilderEx.New(core);
@@ -51,7 +52,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         public static World CreateWorld(Program core)
         {
-            var builder = core.Worlds.Create().SetName("ScreenWorld");
+            var builder = core.GetManager<IWorldMan>().Create().SetName("ScreenWorld");
             AddSystems(core, builder);
 
             var world = builder.Build();

@@ -1,6 +1,5 @@
 ﻿//using OpenBreed.Core;
 //using OpenBreed.Core.Common.Systems.Components;
-//using OpenBreed.Core.Entities;
 //using OpenBreed.Physics.Generic.Components;
 //using OpenBreed.Core.Modules.Rendering.Helpers;
 //using OpenTK;
@@ -17,7 +16,7 @@
 //    {
 //        public static Entity CreateBox(ICore core, Vector2 size, Vector2 position, Vector2 velocity)
 //        {
-//            var ball = core.Entities.Create();
+//            var ball = core.GetManager<IEntityMan>().Create();
 
 //            ball.Add(core.Rendering.CreateWireframe(1.0f, Color4.Red));
 //            ball.Add(Position.Create(position));

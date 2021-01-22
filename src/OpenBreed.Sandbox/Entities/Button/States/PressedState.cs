@@ -1,8 +1,8 @@
 ﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
+using OpenBreed.Ecsw.Entities;
 using OpenBreed.Systems.Rendering.Commands;
-using OpenBreed.Core.States;
+using OpenBreed.Fsm;
 
 namespace OpenBreed.Sandbox.Entities.Button.States
 {

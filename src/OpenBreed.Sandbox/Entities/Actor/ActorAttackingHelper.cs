@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Core.Events;
 using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Components.Control;
@@ -11,6 +10,9 @@ using OpenTK;
 using System;
 using System.Linq;
 using OpenBreed.Systems.Control.Events;
+using OpenBreed.Fsm;
+using OpenBreed.Ecsw.Entities;
+using OpenBreed.Ecsw;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
@@ -20,7 +22,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         public static void CreateFsm(ICore core)
         {
-            var stateMachine = core.StateMachines.Create<AttackingState, AttackingImpulse>("Actor.Attacking");
+            var stateMachine = core.GetManager<IFsmMan>().Create<AttackingState, AttackingImpulse>("Actor.Attacking");
 
             stateMachine.AddState(new States.Attacking.ShootingState());
             stateMachine.AddState(new States.Attacking.IdleState());
@@ -46,29 +48,29 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         private static void OnAttackingLeaveCooldownWithStop(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
-            var entity = core.Entities.GetById(entityId);
+            var entity = core.GetManager<IEntityMan>().GetById(entityId);
             entity.Unsubscribe<TimerElapsedEventArgs>(OnTimerElapsed);
             entity.Core.Commands.Post(new TimerStopCommand(entity.Id, 0));
         }
 
         private static void OnAttackingLeaveCooldownWithShoot(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
-            var entity = core.Entities.GetById(entityId);
+            var entity = core.GetManager<IEntityMan>().GetById(entityId);
             entity.Unsubscribe<TimerElapsedEventArgs>(OnTimerElapsed);
             entity.Core.Commands.Post(new TimerStopCommand(entity.Id, 0));
         }
 
         private static void OnAttackingLeaveIdleWithShoot(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
-            var entity = core.Entities.GetById(entityId);
+            var entity = core.GetManager<IEntityMan>().GetById(entityId);
             entity.Unsubscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
         }
 
         private static void OnAttackingEnterIdleWithStop(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
-            var entity = core.Entities.GetById(entityId);
+            var entity = core.GetManager<IEntityMan>().GetById(entityId);
 
-            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
+            var currentStateNames = entity.Core.GetManager<IFsmMan>().GetStateNames(entity);
             entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
             entity.Subscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
@@ -76,9 +78,9 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         private static void OnAttackingEnterCooldownWithWait(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
-            var entity = core.Entities.GetById(entityId);
+            var entity = core.GetManager<IEntityMan>().GetById(entityId);
 
-            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
+            var currentStateNames = entity.Core.GetManager<IFsmMan>().GetStateNames(entity);
             entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
             entity.Subscribe<TimerElapsedEventArgs>(OnTimerElapsed);
@@ -94,7 +96,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
             var cc = entity.Get<AttackControl>();
 
-            var fsmId = entity.Core.StateMachines.GetByName("Actor.Attacking").Id;
+            var fsmId = entity.Core.GetManager<IFsmMan>().GetByName("Actor.Attacking").Id;
 
             if (cc.AttackPrimary)
                 entity.Core.Commands.Post(new SetStateCommand(entity.Id, fsmId, (int)AttackingImpulse.Shoot));
@@ -105,7 +107,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
         private static void OnControlFireChanged(object sender, ControlFireChangedEvenrArgs eventArgs)
         {
             var entity = sender as Entity;
-            var fsmId = entity.Core.StateMachines.GetByName("Actor.Attacking").Id;
+            var fsmId = entity.Core.GetManager<IFsmMan>().GetByName("Actor.Attacking").Id;
 
             if (eventArgs.Fire)
                 entity.Core.Commands.Post(new SetStateCommand(entity.Id, fsmId, (int)AttackingImpulse.Shoot));
@@ -113,10 +115,10 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         private static void OnAttackingEnterShootingWithShoot(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
-            var entity = core.Entities.GetById(entityId);
+            var entity = core.GetManager<IEntityMan>().GetById(entityId);
 
             //Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
+            var currentStateNames = entity.Core.GetManager<IFsmMan>().GetStateNames(entity);
             entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, string.Join(", ", currentStateNames.ToArray())));
 
             var pos = entity.Get<PositionComponent>().Value;

@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Audio.Interface.Managers;
-using OpenBreed.Core.Components;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
 

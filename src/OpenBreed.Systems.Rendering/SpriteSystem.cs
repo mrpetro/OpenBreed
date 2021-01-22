@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Core.Managers;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
@@ -12,7 +11,9 @@ using OpenBreed.Components.Rendering;
 using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Systems.Rendering.Builders;
 using OpenBreed.Systems.Core;
-using OpenBreed.Core.Systems;
+using OpenBreed.Ecsw.Systems;
+using OpenBreed.Ecsw.Entities;
+using OpenBreed.Ecsw;
 
 namespace OpenBreed.Systems.Rendering
 {
@@ -81,7 +82,7 @@ namespace OpenBreed.Systems.Rendering
 
         private static bool HandleSpriteOnCommand(ICore core, SpriteOnCommand cmd)
         {
-            var system = core.GetSystemByEntityId<SpriteSystem>(cmd.EntityId);
+            var system = core.GetManager<ISystemFinder>().GetSystemByEntityId<SpriteSystem>(cmd.EntityId);
 
             var toActivate = system.inactive.FirstOrDefault(item => item.Id == cmd.EntityId);
 
@@ -96,7 +97,7 @@ namespace OpenBreed.Systems.Rendering
 
         private static bool HandleSpriteSetCommand(ICore core, SpriteSetCommand cmd)
         {
-            var system = core.GetSystemByEntityId<SpriteSystem>(cmd.EntityId);
+            var system = core.GetManager<ISystemFinder>().GetSystemByEntityId<SpriteSystem>(cmd.EntityId);
 
             var toModify = system.active.FirstOrDefault(item => item.Id == cmd.EntityId);
             if (toModify == null)
@@ -110,7 +111,7 @@ namespace OpenBreed.Systems.Rendering
 
         private static bool HandleSpriteOffCommand(ICore core, SpriteOffCommand cmd)
         {
-            var system = core.GetSystemByEntityId<SpriteSystem>(cmd.EntityId);
+            var system = core.GetManager<ISystemFinder>().GetSystemByEntityId<SpriteSystem>(cmd.EntityId);
 
             var toDeactivate = system.active.FirstOrDefault(item => item.Id == cmd.EntityId);
 
@@ -163,7 +164,7 @@ namespace OpenBreed.Systems.Rendering
         ///// <param name="viewport">Viewport which this sprite will be rendered to</param>
         //private void DrawDebug(SpritePack pack, IViewport viewport)
         //{
-        //    var entity = Core.Entities.GetById(pack.EntityId);
+        //    var entity = Core.GetManager<IEntityMan>().GetById(pack.EntityId);
 
         //    var body = entity.GetComponent<Body>().FirstOrDefault();
 

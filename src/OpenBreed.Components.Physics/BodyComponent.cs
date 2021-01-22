@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Components;
+using OpenBreed.Components.Common;
 using OpenBreed.Core.Modules;
 using OpenBreed.Physics.Interface;
 using OpenTK;

@@ -1,6 +1,5 @@
-﻿using OpenBreed.Components.Physics;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+﻿using OpenBreed.Components.Common;
+using OpenBreed.Components.Physics;
 using OpenTK;
 
 namespace OpenBreed.Systems.Physics.Helpers

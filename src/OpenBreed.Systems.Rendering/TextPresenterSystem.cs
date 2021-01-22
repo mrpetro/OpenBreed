@@ -1,7 +1,5 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
 using OpenTK;
@@ -12,7 +10,9 @@ using System.Linq;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Components.Rendering;
 using OpenBreed.Systems.Core;
-using OpenBreed.Core.Systems;
+using OpenBreed.Ecsw.Systems;
+using OpenBreed.Ecsw.Entities;
+using OpenBreed.Components.Common;
 
 namespace OpenBreed.Systems.Rendering
 {

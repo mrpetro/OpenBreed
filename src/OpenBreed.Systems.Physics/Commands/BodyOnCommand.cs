@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Core.Commands;
 
-using OpenBreed.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

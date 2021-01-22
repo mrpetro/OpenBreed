@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Components.Rendering;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Systems.Rendering.Events;
@@ -14,6 +13,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Sandbox.Entities.FpsCounter
 {
@@ -23,7 +24,7 @@ namespace OpenBreed.Sandbox.Entities.FpsCounter
         {
             var arial12 = world.Core.GetModule<IRenderModule>().Fonts.Create("ARIAL", 10);
 
-            var fpsTextEntity = world.Core.Entities.Create();
+            var fpsTextEntity = world.Core.GetManager<IEntityMan>().Create();
 
             fpsTextEntity.Add(PositionComponent.Create(new Vector2(-fpsTextEntity.Core.ClientRectangle.Width / 2.0f, -fpsTextEntity.Core.ClientRectangle.Height / 2.0f)));
 
@@ -41,7 +42,7 @@ namespace OpenBreed.Sandbox.Entities.FpsCounter
             //world.AddEntity(fpsTextEntity);
 
 
-            var hudViewport = world.Core.Entities.GetByTag(ScreenWorldHelper.HUD_VIEWPORT).First();
+            var hudViewport = world.Core.GetManager<IEntityMan>().GetByTag(ScreenWorldHelper.HUD_VIEWPORT).First();
 
             world.Core.Jobs.Execute(new FpsTextUpdateJob(fpsTextEntity));
             hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateFpsPos(fpsTextEntity, a));

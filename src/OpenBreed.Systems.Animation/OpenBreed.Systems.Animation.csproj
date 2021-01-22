@@ -87,9 +87,17 @@
       <Project>{2AC675A2-6989-4EAA-B8E8-46D50DDB88C6}</Project>
       <Name>OpenBreed.Components.Animation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Components.Common\OpenBreed.Components.Common.csproj">
+      <Project>{983742FE-CB64-4BD9-BB24-90646172A0E2}</Project>
+      <Name>OpenBreed.Components.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">
       <Project>{95BDF122-FAC8-4AC4-B9A8-B549D942E37D}</Project>
       <Name>OpenBreed.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Ecsw\OpenBreed.Ecsw.csproj">
+      <Project>{D22D74E0-7FE4-4278-A93B-9983B788F40E}</Project>
+      <Name>OpenBreed.Ecsw</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Systems.Core\OpenBreed.Systems.Core.csproj">
       <Project>{36DBA7C4-EA4A-4F4D-82D3-D586E08346F6}</Project>

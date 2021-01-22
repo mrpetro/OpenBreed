@@ -1,6 +1,5 @@
 ﻿
 //using OpenBreed.Core.Common.Systems.Components;
-//using OpenBreed.Core.Entities;
 //using OpenBreed.Physics.Generic.Events;
 //using OpenBreed.Systems.Rendering.Commands;
 //using OpenBreed.Core.States;
@@ -45,7 +44,7 @@
 //            var pos = Entity.GetComponent<PositionComponent>();
 //            Entity.PostCommand(new PutStampCommand(Entity.World.Id, stampId, 0, pos.Value));
 
-//            Entity.Core.Entities.Destroy(Entity);
+//            Entity.Core.GetManager<IEntityMan>().Destroy(Entity);
 //        }
 
 //        public void Initialize(Entity entity)

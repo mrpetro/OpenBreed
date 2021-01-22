@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Core;
+using OpenBreed.Ecsw;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -66,7 +67,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         public World GetWorld()
         {
-            var worldBuilder = Core.Worlds.Create();
+            var worldBuilder = Core.GetManager<IWorldMan>().Create();
             var helper = new WorldBuilderHelper(worldBuilder);
 
             helper.RegisterHandlers();

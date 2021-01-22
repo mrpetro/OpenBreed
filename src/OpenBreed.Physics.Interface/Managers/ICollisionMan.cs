@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Entities;
+﻿using OpenBreed.Ecsw.Entities;
 using OpenTK;
 using System;
 using System.Collections.Generic;

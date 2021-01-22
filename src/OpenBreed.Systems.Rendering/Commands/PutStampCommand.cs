@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Entities;
 using OpenTK;
 using System;
 using System.Collections.Generic;

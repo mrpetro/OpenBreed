@@ -1,9 +1,7 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Systems.Rendering.Commands;
-using OpenBreed.Core.States;
 using OpenBreed.Sandbox.Entities.Button.States;
 using OpenTK;
 using System;
@@ -13,6 +11,9 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Systems.Animation.Commands;
 using OpenBreed.Systems.Animation.Events;
+using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Entities;
+using OpenBreed.Fsm;
 
 namespace OpenBreed.Sandbox.Entities.Button
 {
@@ -22,7 +23,7 @@ namespace OpenBreed.Sandbox.Entities.Button
         {
             var core = world.Core;
 
-            //var button = core.Entities.CreateFromTemplate("Button");
+            //var button = core.GetManager<IEntityMan>().CreateFromTemplate("Button");
 
             //button.Get<PositionComponent>().Value = new Vector2(0, 0);
 
@@ -32,7 +33,7 @@ namespace OpenBreed.Sandbox.Entities.Button
 
         public static void CreateFsm(ICore core)
         {
-            var buttonFsm = core.StateMachines.Create<ButtonState, ButtonImpulse>("Button");
+            var buttonFsm = core.GetManager<IFsmMan>().Create<ButtonState, ButtonImpulse>("Button");
 
             buttonFsm.AddState(new IdleState());
             buttonFsm.AddState(new PressedState());
@@ -48,7 +49,7 @@ namespace OpenBreed.Sandbox.Entities.Button
 
         private static void OnButtonEnterIdleWithUnpress(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
-            var entity = core.Entities.GetById(entityId);
+            var entity = core.GetManager<IEntityMan>().GetById(entityId);
 
             entity.Core.Commands.Post(new SpriteOnCommand(entity.Id));
             entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, "ToDefine", 0));
@@ -59,7 +60,7 @@ namespace OpenBreed.Sandbox.Entities.Button
 
         private static void OnButtonEnterPressedWithPress(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
-            var entity = core.Entities.GetById(entityId);
+            var entity = core.GetManager<IEntityMan>().GetById(entityId);
             entity.Core.Commands.Post(new SpriteOffCommand(entity.Id));
 
             var pos = entity.Get<PositionComponent>();
@@ -74,7 +75,7 @@ namespace OpenBreed.Sandbox.Entities.Button
 
         private static void OnButtonLeaveIdleWithPress(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
         {
-            var entity = core.Entities.GetById(entityId);
+            var entity = core.GetManager<IEntityMan>().GetById(entityId);
             entity.Unsubscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
 
@@ -82,7 +83,7 @@ namespace OpenBreed.Sandbox.Entities.Button
         {
             var entity = sender as Entity;
 
-            var fsmId = entity.Core.StateMachines.GetByName("Button").Id;
+            var fsmId = entity.Core.GetManager<IFsmMan>().GetByName("Button").Id;
             entity.Core.Commands.Post(new SetStateCommand(entity.Id, fsmId, (int)ButtonImpulse.Press));
         }
     }

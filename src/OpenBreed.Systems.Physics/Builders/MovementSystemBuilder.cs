@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Systems;
+using OpenBreed.Ecsw.Systems;
 
 namespace OpenBreed.Systems.Physics
 {

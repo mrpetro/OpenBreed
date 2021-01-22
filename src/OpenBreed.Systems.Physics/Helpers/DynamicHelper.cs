@@ -1,7 +1,8 @@
 ﻿using OpenBreed.Components.Physics;
 using OpenBreed.Core;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
+using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Entities;
 using OpenTK;
 using System;
 using System.Linq;
@@ -69,8 +70,8 @@ namespace OpenBreed.Systems.Physics.Helpers
         /// <param name="dt">Delta time</param>
         internal static void ResolveVsDynamic(ICore core, DynamicPack bodyA, DynamicPack bodyB, Vector2 projection, float dt)
         {
-            var entityA = core.Entities.GetById(bodyA.EntityId);
-            var entityB = core.Entities.GetById(bodyB.EntityId);
+            var entityA = core.GetManager<IEntityMan>().GetById(bodyA.EntityId);
+            var entityB = core.GetManager<IEntityMan>().GetById(bodyB.EntityId);
 
             entityA.DebugData = new object[] { "COLLISION_PAIR", bodyA.Aabb.GetCenter(), bodyB.Aabb.GetCenter() };
             entityB.DebugData = new object[] { "COLLISION_PAIR", bodyA.Aabb.GetCenter(), bodyB.Aabb.GetCenter() };

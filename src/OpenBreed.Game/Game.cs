@@ -5,9 +5,8 @@ using OpenBreed.Common.Tools;
 using OpenBreed.Components.Physics;
 using OpenBreed.Components.Physics.Xml;
 using OpenBreed.Core;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Components.Xml;
-using OpenBreed.Core.Entities.Xml;
+using OpenBreed.Components.Common;
+using OpenBreed.Components.Common.Xml;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Audio;
@@ -26,6 +25,11 @@ using OpenBreed.Components.Animation.Xml;
 using OpenBreed.Components.Animation;
 using OpenBreed.Input.Generic;
 using OpenBreed.Input.Interface;
+using OpenBreed.Scripting.Interface;
+using OpenBreed.Ecsw.Entities.Xml;
+using OpenBreed.Ecsw;
+using OpenBreed.Fsm;
+using OpenBreed.Fsm.Xml;
 
 namespace OpenBreed.Game
 {
@@ -44,7 +48,7 @@ namespace OpenBreed.Game
 
         #region Public Constructors
 
-        public Game(IManagerCollection manCollection, ICoreModulesFactory modulesFactory) :
+        public Game(IManagerCollection manCollection) :
             base(manCollection)
         {
             scriptMan = manCollection.GetManager<IScriptMan>();
@@ -63,7 +67,7 @@ namespace OpenBreed.Game
             PhysicsSystemsFactory = new PhysicsSystemsFactory(this);
 
             Inputs = new InputsMan(this);
-            EntityFactory = new EntityFactory(this);
+            EntityFactory = new EntityFactory(Entities);
 
             this.unitOfWork = this.database.CreateUnitOfWork();
             this.dataProvider = new DataProvider(unitOfWork, Logging, this.variables);
@@ -74,15 +78,17 @@ namespace OpenBreed.Game
 
         #region Public Properties
 
-        public override EntityFactory EntityFactory { get; }
+        public EntityFactory EntityFactory { get; }
 
         private readonly OpenALModule soundModule;
         private readonly OpenGLModule renderingModule;
 
         public IAnimMan Animations { get; }
         public override JobMan Jobs => throw new NotImplementedException();
-        public override IFsmMan StateMachines => throw new NotImplementedException();
+        public IFsmMan StateMachines => throw new NotImplementedException();
         public IPlayersMan Players => throw new NotImplementedException();
+        public IEntityMan Entities => throw new NotImplementedException();
+        public IWorldMan Worlds => throw new NotImplementedException();
         public IInputsMan Inputs { get; }
 
         public override Matrix4 ClientTransform

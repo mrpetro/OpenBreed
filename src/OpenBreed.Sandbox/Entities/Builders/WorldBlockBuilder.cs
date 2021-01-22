@@ -1,8 +1,6 @@
 ﻿using OpenBreed.Components.Physics;
 using OpenBreed.Core;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Entities.Builders;
+using OpenBreed.Components.Common;
 using OpenBreed.Core.Modules;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Components.Rendering;
@@ -10,6 +8,9 @@ using OpenBreed.Rendering.Interface;
 using OpenTK;
 using System.Collections.Generic;
 using System.Linq;
+using OpenBreed.Ecsw.Entities.Builders;
+using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Sandbox.Entities.Builders
 {
@@ -58,7 +59,7 @@ namespace OpenBreed.Sandbox.Entities.Builders
 
         public override Entity Build()
         {
-            var entity = Core.Entities.Create();
+            var entity = Core.GetManager<IEntityMan>().Create();
 
             entity.Add(PositionComponent.Create(pos));
 

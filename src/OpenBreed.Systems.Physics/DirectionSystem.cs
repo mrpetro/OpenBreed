@@ -1,9 +1,9 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Helpers;
-using OpenBreed.Core.Systems;
+using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Systems;
 using OpenBreed.Systems.Core;
 using OpenBreed.Systems.Physics.Events;
 using OpenTK;
@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Systems.Physics
 {
@@ -50,7 +51,7 @@ namespace OpenBreed.Systems.Physics
 
         public void UpdateEntity(float dt, int id)
         {
-            var entity = Core.Entities.GetById(id);
+            var entity = Core.GetManager<IEntityMan>().GetById(id);
             var angularPos = entity.Get<AngularPositionComponent>();
             var angularVel = entity.Get<AngularVelocityComponent>();
             var angularThrust = entity.Get<AngularThrustComponent>();

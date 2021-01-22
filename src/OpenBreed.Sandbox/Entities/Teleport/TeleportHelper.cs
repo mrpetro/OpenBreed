@@ -1,6 +1,4 @@
 ﻿using OpenBreed.Core;
-
-using OpenBreed.Core.Entities;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Jobs;
@@ -11,13 +9,15 @@ using System.Linq;
 using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
+using OpenBreed.Components.Common;
 using OpenBreed.Sandbox.Entities.WorldGate;
-using OpenBreed.Core.Entities.Xml;
 using OpenBreed.Common.Tools;
 using OpenBreed.Physics.Generic;
 using OpenBreed.Components.Physics;
 using OpenBreed.Animation.Interface;
+using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Entities.Xml;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Sandbox.Entities.Teleport
 {
@@ -72,7 +72,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             var core = world.Core;
 
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Teleport\TeleportEntry.xml");
-            var teleportEntry = world.Core.EntityFactory.Create(entityTemplate);
+            var teleportEntry = world.Core.GetManager<IEntityFactory>().Create(entityTemplate);
 
             teleportEntry.Tag = new TeleportPair { Id = pairId };
 
@@ -104,8 +104,8 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             var core = world.Core;
 
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Teleport\TeleportExit.xml");
-            var teleportExit = world.Core.EntityFactory.Create(entityTemplate);
-            //var teleportExit = core.Entities.CreateFromTemplate("TeleportExit");
+            var teleportExit = world.Core.GetManager<IEntityFactory>().Create(entityTemplate);
+            //var teleportExit = core.GetManager<IEntityMan>().CreateFromTemplate("TeleportExit");
 
             teleportExit.Tag = new TeleportPair { Id = pairId };
 
@@ -126,7 +126,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
         public static void SetPosition(Entity target, Entity entryEntity, bool cancelMovement)
         {
             var pair = (TeleportPair)entryEntity.Tag;
-            var exitEntity = target.Core.Entities.GetByTag(pair).FirstOrDefault(item => item != entryEntity);
+            var exitEntity = target.Core.GetManager<IEntityMan>().GetByTag(pair).FirstOrDefault(item => item != entryEntity);
 
             if (exitEntity == null)
                 throw new Exception("No exit entity found");

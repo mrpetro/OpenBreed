@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core.Entities;
-using System;
+﻿using System;
 
 namespace OpenBreed.Systems.Rendering.Events
 {

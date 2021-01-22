@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Entities;
 using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Rendering.Interface;
 using System;
@@ -7,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Sandbox.Jobs
 {

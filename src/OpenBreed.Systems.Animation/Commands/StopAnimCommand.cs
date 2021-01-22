@@ -1,6 +1,4 @@
 ﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Entities;
-
 namespace OpenBreed.Systems.Animation.Commands
 {
     public struct StopAnimCommand : ICommand

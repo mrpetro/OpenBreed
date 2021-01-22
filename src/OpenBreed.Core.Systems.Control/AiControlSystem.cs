@@ -1,8 +1,8 @@
-﻿using OpenBreed.Components.Control;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+﻿using OpenBreed.Components.Common;
+using OpenBreed.Components.Control;
 using OpenBreed.Core.Helpers;
-using OpenBreed.Core.Systems;
+using OpenBreed.Ecsw.Entities;
+using OpenBreed.Ecsw.Systems;
 using OpenBreed.Systems.Control.Builders;
 using OpenBreed.Systems.Control.Events;
 using OpenBreed.Systems.Core;

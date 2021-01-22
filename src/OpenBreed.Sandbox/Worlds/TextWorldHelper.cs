@@ -1,9 +1,8 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Core.Events;
-using OpenBreed.Core.Systems;
+using OpenBreed.Ecsw.Systems;
 using OpenBreed.Components.Rendering;
 using OpenBreed.Systems.Rendering;
 using OpenBreed.Systems.Rendering.Events;
@@ -16,6 +15,8 @@ using System;
 using System.Linq;
 using OpenBreed.Systems.Core;
 using OpenBreed.Input.Interface;
+using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -28,7 +29,7 @@ namespace OpenBreed.Sandbox.Worlds
         {
 
 
-            var builder = core.Worlds.Create().SetName("TEXT");
+            var builder = core.GetManager<IWorldMan>().Create().SetName("TEXT");
 
             AddSystems(core, builder);
 
@@ -90,7 +91,7 @@ namespace OpenBreed.Sandbox.Worlds
             world.Core.Commands.Post(new AddEntityCommand(world.Id, caret.Id));
 
 
-            var hudViewport = world.Core.Entities.GetByTag(ScreenWorldHelper.TEXT_VIEWPORT).First();
+            var hudViewport = world.Core.GetManager<IEntityMan>().GetByTag(ScreenWorldHelper.TEXT_VIEWPORT).First();
             hudViewport.Get<ViewportComponent>().CameraEntityId = hudCamera.Id;
 
             hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateCameraFov(hudCamera, a));

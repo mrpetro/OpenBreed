@@ -1,14 +1,13 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using OpenBreed.Core.Systems;
+using OpenBreed.Ecsw.Systems;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Logging;
 using OpenBreed.Systems.Core;
@@ -17,6 +16,8 @@ using OpenBreed.Components.Animation;
 using OpenBreed.Systems.Animation.Events;
 using OpenBreed.Animation.Generic;
 using OpenBreed.Systems.Animation.Builders;
+using OpenBreed.Ecsw.Entities;
+using OpenBreed.Ecsw;
 
 namespace OpenBreed.Systems.Animation
 {
@@ -51,7 +52,7 @@ namespace OpenBreed.Systems.Animation
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                var entity = Core.Entities.GetById(entities[i]);
+                var entity = Core.GetManager<IEntityMan>().GetById(entities[i]);
                 if (entity.Components.OfType<PauseImmuneComponent>().Any())
                     Animate(entity, dt);
             }
@@ -61,7 +62,7 @@ namespace OpenBreed.Systems.Animation
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                var entity = Core.Entities.GetById(entities[i]);
+                var entity = Core.GetManager<IEntityMan>().GetById(entities[i]);
                 Debug.Assert(entity != null);
 
                 Animate(entity, dt);
@@ -162,11 +163,11 @@ namespace OpenBreed.Systems.Animation
 
         private static bool HandlePauseAnimCommand(ICore core, PauseAnimCommand cmd)
         {
-            var system = core.GetSystemByEntityId<AnimationSystem>(cmd.EntityId);
+            var system = core.GetManager<ISystemFinder>().GetSystemByEntityId<AnimationSystem>(cmd.EntityId);
             if(system == null)
                 return false;
 
-            var entity = core.Entities.GetById(cmd.EntityId);
+            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
             var ac = entity.Get<AnimationComponent>();
             var animator = ac.Items[cmd.AnimatorId];
 
@@ -177,11 +178,11 @@ namespace OpenBreed.Systems.Animation
 
         private static bool HandleStopAnimCommand(ICore core, StopAnimCommand cmd)
         {
-            var system = core.GetSystemByEntityId<AnimationSystem>(cmd.EntityId);
+            var system = core.GetManager<ISystemFinder>().GetSystemByEntityId<AnimationSystem>(cmd.EntityId);
             if (system == null)
                 return false;
 
-            var entity = core.Entities.GetById(cmd.EntityId);
+            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
             var ac = entity.Get<AnimationComponent>();
             var animator = ac.Items[cmd.AnimatorId];
 
@@ -192,11 +193,11 @@ namespace OpenBreed.Systems.Animation
 
         private static bool HandleSetAnimCommand(ICore core, SetAnimCommand cmd)
         {
-            var system = core.GetSystemByEntityId<AnimationSystem>(cmd.EntityId);
+            var system = core.GetManager<ISystemFinder>().GetSystemByEntityId<AnimationSystem>(cmd.EntityId);
             if (system == null)
                 return false;
 
-            var entity = core.Entities.GetById(cmd.EntityId);
+            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
             var ac = entity.Get<AnimationComponent>();
 
             var animData = core.GetManager<IAnimMan>().GetByName(cmd.Id);
@@ -211,11 +212,11 @@ namespace OpenBreed.Systems.Animation
 
         private static bool HandlePlayAnimCommand(ICore core, PlayAnimCommand cmd)
         {
-            var system = core.GetSystemByEntityId<AnimationSystem>(cmd.EntityId);
+            var system = core.GetManager<ISystemFinder>().GetSystemByEntityId<AnimationSystem>(cmd.EntityId);
             if (system == null)
                 return false;
 
-            var entity = core.Entities.GetById(cmd.EntityId);
+            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
             var ac = entity.Get<AnimationComponent>();
             var animator = ac.Items[cmd.AnimatorId];
 

@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Animation.Interface;
-using OpenBreed.Core.Entities;
+using OpenBreed.Ecsw.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

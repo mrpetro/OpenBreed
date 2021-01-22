@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Components.Xml;
+﻿using OpenBreed.Components.Common.Xml;
 using System;
 using System.Collections.Generic;
 using System.Linq;

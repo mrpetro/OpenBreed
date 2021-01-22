@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Game.Entities;
 using OpenBreed.Components.Rendering;
@@ -13,6 +12,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Systems.Rendering.Events;
+using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Game
 {
@@ -33,7 +34,7 @@ namespace OpenBreed.Game
 
         public static Entity CreateViewportEntity(ICore core, string name, float x, float y, float width, float height, bool drawBackground, bool clipping = true)
         {
-            var viewport = core.Entities.Create();
+            var viewport = core.GetManager<IEntityMan>().Create();
             viewport.Tag = name;
 
             var vpcBuilder = ViewportComponentBuilderEx.New(core);

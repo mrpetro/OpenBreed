@@ -1,12 +1,13 @@
-﻿using OpenBreed.Core.Entities;
-using OpenTK;
+﻿using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenBreed.Core.Components;
+using OpenBreed.Components.Common;
 using OpenBreed.Components.Physics;
 using OpenBreed.Systems.Core;
-using OpenBreed.Core.Systems;
+using OpenBreed.Ecsw.Systems;
+using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Systems.Physics
 {
@@ -46,7 +47,7 @@ namespace OpenBreed.Systems.Physics
 
         public void UpdateEntity(float dt, int id)
         {
-            var entity = Core.Entities.GetById(id);
+            var entity = Core.GetManager<IEntityMan>().GetById(id);
             var position = entity.Get<PositionComponent>();
             var thrust = entity.Get<ThrustComponent>();
             var velocity = entity.Get<VelocityComponent>();

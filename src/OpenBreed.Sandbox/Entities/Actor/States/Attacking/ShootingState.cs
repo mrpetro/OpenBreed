@@ -1,13 +1,13 @@
 ﻿
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.States;
+using OpenBreed.Components.Common;
 using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Sandbox.Entities.Projectile;
 using OpenTK;
 using System;
 using System.Linq;
+using OpenBreed.Fsm;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {
@@ -33,7 +33,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         public void EnterState(Entity entity)
         {
             //Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
+            var currentStateNames = entity.Core.GetManager<IFsmMan>().GetStateNames(entity);
             entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, string.Join(", ", currentStateNames.ToArray())));
 
             var pos = entity.Get<PositionComponent>().Value;

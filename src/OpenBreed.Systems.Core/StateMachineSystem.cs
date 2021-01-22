@@ -1,14 +1,17 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenBreed.Core.Systems;
+using OpenBreed.Ecsw.Systems;
+using OpenBreed.Ecsw.Entities;
+using OpenBreed.Ecsw;
+using OpenBreed.Fsm;
+using OpenBreed.Fsm.Interface;
 
 namespace OpenBreed.Systems.Core
 {
@@ -79,7 +82,7 @@ namespace OpenBreed.Systems.Core
             var fsmComponent = entity.Get<FsmComponent>();
 
             foreach (var state in fsmComponent.States)
-                Core.StateMachines.EnterState(entity, state, 0);
+                Core.GetManager<IFsmMan>().EnterState(entity, state, 0);
         }
 
         private void DeinitializeComponent(Entity entity)
@@ -87,12 +90,12 @@ namespace OpenBreed.Systems.Core
             var fsmComponent = entity.Get<FsmComponent>();
 
             foreach (var state in fsmComponent.States)
-                Core.StateMachines.EnterState(entity, state, 0);
+                Core.GetManager<IFsmMan>().EnterState(entity, state, 0);
         }
 
         private static bool HandleSetStateCommand(ICore core, SetStateCommand cmd)
         {
-            var entity = core.Entities.GetById(cmd.EntityId);
+            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
 
             var fsmComponent = entity.Get<FsmComponent>();
 
@@ -102,7 +105,7 @@ namespace OpenBreed.Systems.Core
                 return false;
             }
 
-            var fsm = core.StateMachines.GetById(cmd.FsmId);
+            var fsm = core.GetManager<IFsmMan>().GetById(cmd.FsmId);
 
             var fsmData = fsmComponent.States.FirstOrDefault(item => item.FsmId == cmd.FsmId);
 
@@ -112,7 +115,7 @@ namespace OpenBreed.Systems.Core
                 return false;
             }
 
-            core.StateMachines.LeaveState(entity, fsmData, cmd.ImpulseId);
+            core.GetManager<IFsmMan>().LeaveState(entity, fsmData, cmd.ImpulseId);
             var nextStateId = fsm.GetNextStateId(fsmData.StateId, cmd.ImpulseId);
 
             if (nextStateId == -1)
@@ -125,7 +128,7 @@ namespace OpenBreed.Systems.Core
             }
 
             fsmData.StateId = nextStateId;
-            core.StateMachines.EnterState(entity, fsmData, cmd.ImpulseId);
+            core.GetManager<IFsmMan>().EnterState(entity, fsmData, cmd.ImpulseId);
 
             return true;
         }

@@ -33,7 +33,7 @@
 
 //        public static void AddItem(ICore core, World world, int x, int y)
 //        {
-//            var item = core.Entities.Create();
+//            var item = core.GetManager<IEntityMan>().Create();
 
 //            //item.Add(new Animator(5.0f, false));
 //            item.Add(BodyComponent.Create(1.0f, 1.0f, "Trigger"));

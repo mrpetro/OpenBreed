@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
 using OpenTK;
@@ -14,7 +13,9 @@ using OpenBreed.Components.Rendering;
 using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Systems.Rendering.Builders;
 using OpenBreed.Systems.Core;
-using OpenBreed.Core.Systems;
+using OpenBreed.Ecsw.Systems;
+using OpenBreed.Ecsw.Entities;
+using OpenBreed.Ecsw;
 
 namespace OpenBreed.Systems.Rendering
 {
@@ -101,7 +102,7 @@ namespace OpenBreed.Systems.Rendering
 
         private static bool HandleTextSetCommand(ICore core, TextSetCommand cmd)
         {
-            var toModify = core.Entities.GetById(cmd.EntityId);
+            var toModify = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
             if (toModify == null)
                 return false;
 

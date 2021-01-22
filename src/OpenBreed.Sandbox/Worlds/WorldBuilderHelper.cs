@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Entities;
 using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Components.Rendering;
 using OpenBreed.Sandbox.Entities.Builders;
@@ -12,6 +11,7 @@ using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenBreed.Ecsw;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -87,7 +87,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             var vp = ScreenWorldHelper.CreateViewportEntity(core, $"TV{pairCode}" , x * 16, y * 16, viewportData.Width, viewportData.Height, true);
 
-            vp.Get<ViewportComponent>().CameraEntityId = core.Entities.GetByTag(viewportData.CameraName).FirstOrDefault().Id;
+            vp.Get<ViewportComponent>().CameraEntityId = core.GetManager<IEntityMan>().GetByTag(viewportData.CameraName).FirstOrDefault().Id;
             vp.Get<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
             //GameWorldHelper.SetPreserveAspectRatio(vp);
             world.Core.Commands.Post(new AddEntityCommand(world.Id, vp.Id));

@@ -1,12 +1,11 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Systems.Rendering.Commands;
-using OpenBreed.Core.Systems;
+using OpenBreed.Ecsw.Systems;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
@@ -17,6 +16,8 @@ using OpenBreed.Rendering.Interface;
 using OpenBreed.Systems.Rendering.Events;
 using OpenBreed.Systems.Rendering.Builders;
 using OpenBreed.Systems.Core;
+using OpenBreed.Ecsw.Entities;
+using OpenBreed.Ecsw;
 
 namespace OpenBreed.Systems.Rendering
 {
@@ -64,7 +65,7 @@ namespace OpenBreed.Systems.Rendering
             var vpc = viewport.Get<ViewportComponent>();
             var pos = viewport.Get<PositionComponent>();
 
-            var camera = Core.Entities.GetById(vpc.CameraEntityId);
+            var camera = Core.GetManager<IEntityMan>().GetById(vpc.CameraEntityId);
 
             var x = Matrix4.Identity;
 
@@ -170,7 +171,7 @@ namespace OpenBreed.Systems.Rendering
 
         private static bool HandleViewportResizeCommand(ICore core, ViewportResizeCommand cmd)
         {
-            var toResize = core.Entities.GetById(cmd.EntityId);
+            var toResize = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
 
             if (toResize != null)
             {
@@ -248,7 +249,7 @@ namespace OpenBreed.Systems.Rendering
                 renderModule.DrawUnitRectangle();
             }
 
-            var cameraEntity = Core.Entities.GetById(vpc.CameraEntityId);
+            var cameraEntity = Core.GetManager<IEntityMan>().GetById(vpc.CameraEntityId);
 
             if (cameraEntity != null)
                 DrawCameraView(depth, dt, vpc, cameraEntity);

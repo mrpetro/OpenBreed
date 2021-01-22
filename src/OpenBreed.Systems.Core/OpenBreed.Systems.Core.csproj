@@ -76,9 +76,25 @@
       <Project>{9894e7f4-7c85-4173-9d05-f50cfd2e4163}</Project>
       <Name>OpenBreed.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Components.Common\OpenBreed.Components.Common.csproj">
+      <Project>{983742FE-CB64-4BD9-BB24-90646172A0E2}</Project>
+      <Name>OpenBreed.Components.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">
       <Project>{95BDF122-FAC8-4AC4-B9A8-B549D942E37D}</Project>
       <Name>OpenBreed.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Ecsw\OpenBreed.Ecsw.csproj">
+      <Project>{D22D74E0-7FE4-4278-A93B-9983B788F40E}</Project>
+      <Name>OpenBreed.Ecsw</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Fsm.Interface\OpenBreed.Fsm.Interface.csproj">
+      <Project>{56C2920F-61E4-436D-BC6E-9F964098E097}</Project>
+      <Name>OpenBreed.Fsm.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Fsm\OpenBreed.Fsm.csproj">
+      <Project>{53D8026C-4C23-4BB7-B75A-03BE53F1F655}</Project>
+      <Name>OpenBreed.Fsm</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

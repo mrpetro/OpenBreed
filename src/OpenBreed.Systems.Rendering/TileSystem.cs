@@ -1,5 +1,4 @@
-﻿using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+﻿using OpenBreed.Components.Common;
 using OpenBreed.Systems.Rendering.Commands;
 using OpenTK;
 using OpenTK.Graphics;
@@ -16,7 +15,9 @@ using OpenBreed.Components.Rendering;
 using OpenBreed.Core;
 using OpenBreed.Systems.Rendering.Builders;
 using OpenBreed.Systems.Core;
-using OpenBreed.Core.Systems;
+using OpenBreed.Ecsw.Systems;
+using OpenBreed.Ecsw.Entities;
+using OpenBreed.Ecsw;
 
 namespace OpenBreed.Systems.Rendering
 {
@@ -162,7 +163,7 @@ namespace OpenBreed.Systems.Rendering
 
         private static bool HandleTileSetCommand(ICore core, TileSetCommand cmd)
         {
-            var system = core.GetSystemByWorldId<TileSystem>(cmd.WorldId);
+            var system = core.GetManager<ISystemFinder>().GetSystemByWorldId<TileSystem>(cmd.WorldId);
 
             int xIndex;
             int yIndex;
@@ -181,7 +182,7 @@ namespace OpenBreed.Systems.Rendering
 
         private static bool HandlePutStampCommand(ICore core, PutStampCommand cmd)
         {
-            var system = core.GetSystemByWorldId<TileSystem>(cmd.WorldId);
+            var system = core.GetManager<ISystemFinder>().GetSystemByWorldId<TileSystem>(cmd.WorldId);
 
             var stamp = core.GetModule<IRenderModule>().Stamps.GetById(cmd.StampId);
 

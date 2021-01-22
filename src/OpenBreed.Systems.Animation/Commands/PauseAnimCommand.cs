@@ -1,5 +1,5 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Entities;
+﻿
+using OpenBreed.Core.Commands;
 
 namespace OpenBreed.Systems.Animation.Commands
 {

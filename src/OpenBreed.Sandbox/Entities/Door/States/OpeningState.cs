@@ -1,16 +1,15 @@
-﻿
-using OpenBreed.Core.Entities;
-using OpenBreed.Systems.Rendering.Commands;
-using OpenBreed.Core.States;
+﻿using OpenBreed.Systems.Rendering.Commands;
 using System;
 using System.Linq;
 using OpenBreed.Core.Commands;
 using OpenBreed.Sandbox.Entities.Door.States;
-using OpenBreed.Core.Components;
+using OpenBreed.Components.Common;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Components.Physics;
 using OpenBreed.Systems.Animation.Commands;
 using OpenBreed.Systems.Animation.Events;
+using OpenBreed.Fsm;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -45,7 +44,7 @@ namespace OpenBreed.Sandbox.Components.States
             entity.Core.Commands.Post(new SpriteOnCommand(entity.Id));
 
             var className = entity.Get<ClassComponent>().Name;
-            var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
+            var stateName = entity.Core.GetManager<IFsmMan>().GetStateName(FsmId, Id);
             entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{stateName}", 0));
 
             entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, "Door - Opening"));

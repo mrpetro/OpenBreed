@@ -1,10 +1,9 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Managers;
-using OpenBreed.Core.Systems;
+using OpenBreed.Ecsw.Systems;
 using OpenBreed.Components.Control;
 using OpenBreed.Components.Rendering;
 using OpenBreed.Rendering.Interface;
@@ -26,6 +25,8 @@ using System.Threading.Tasks;
 using OpenBreed.Systems.Core;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Components.Animation;
+using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -76,7 +77,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         public static World CreateGameWorld(Program core, string worldName)
         {
-            var builder = core.Worlds.Create().SetName(worldName);
+            var builder = core.GetManager<IWorldMan>().Create().SetName(worldName);
             AddSystems(core, builder);
 
             return builder.Build();
@@ -126,8 +127,8 @@ namespace OpenBreed.Sandbox.Worlds
             //actor.Add(TextHelper.Create(core, new Vector2(0, 32), "Hero"));
 
             //actor.Subscribe<EntityEnteredWorldEventArgs>(OnEntityEntered);
-            core.Worlds.Subscribe<EntityAddedEventArgs>(OnEntityAdded);
-            core.Worlds.Subscribe<EntityRemovedEventArgs>(OnEntityRemoved);
+            core.GetManager<IWorldMan>().Subscribe<EntityAddedEventArgs>(OnEntityAdded);
+            core.GetManager<IWorldMan>().Subscribe<EntityRemovedEventArgs>(OnEntityRemoved);
 
             var player1 = core.Players.GetByName("P1");
             player1.AssumeControl(actor);
@@ -137,11 +138,11 @@ namespace OpenBreed.Sandbox.Worlds
             core.Commands.Post(new AddEntityCommand(gameWorld.Id, actor.Id));
             //gameWorld.AddEntity(actor);
 
-            var gameViewport = core.Entities.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
+            var gameViewport = core.GetManager<IEntityMan>().GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
 
             gameViewport.Get<ViewportComponent>().CameraEntityId = playerCamera.Id;
 
-            var cursorEntity = core.Entities.Create();
+            var cursorEntity = core.GetManager<IEntityMan>().Create();
         
             var spriteBuilder = SpriteComponentBuilderEx.New(core);
             spriteBuilder.SetAtlasByName("Atlases/Sprites/Cursors");
@@ -163,7 +164,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         public static void SetPreserveAspectRatio(Entity viewportEntity)
         {
-            var cameraEntity = viewportEntity.Core.Entities.GetById(viewportEntity.Get<ViewportComponent>().CameraEntityId);
+            var cameraEntity = viewportEntity.Core.GetManager<IEntityMan>().GetById(viewportEntity.Get<ViewportComponent>().CameraEntityId);
             viewportEntity.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateCameraFov(cameraEntity, a));
         }
 

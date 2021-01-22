@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Systems.Rendering;
@@ -11,6 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenBreed.Systems.Core;
 using OpenBreed.Input.Interface;
+using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Sandbox.Systems
 {

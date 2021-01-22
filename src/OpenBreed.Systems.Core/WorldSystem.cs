@@ -1,11 +1,12 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
+using OpenBreed.Ecsw.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenBreed.Core.Systems;
+using OpenBreed.Ecsw.Systems;
+using OpenBreed.Ecsw;
 
 namespace OpenBreed.Systems.Core
 {

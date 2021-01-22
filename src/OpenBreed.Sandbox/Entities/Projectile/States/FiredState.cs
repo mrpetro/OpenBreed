@@ -1,9 +1,9 @@
-﻿using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+﻿using OpenBreed.Components.Common;
 using OpenBreed.Systems.Rendering.Commands;
-using OpenBreed.Core.States;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Systems.Animation.Commands;
+using OpenBreed.Fsm;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Sandbox.Entities.Projectile.States
 {

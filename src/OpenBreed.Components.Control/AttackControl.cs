@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Components;
+﻿using OpenBreed.Components.Common;
 
 namespace OpenBreed.Components.Control
 {

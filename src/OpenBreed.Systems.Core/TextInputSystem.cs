@@ -1,11 +1,12 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Managers;
 using System.Collections.Generic;
-using OpenBreed.Core.Systems;
+using OpenBreed.Ecsw.Systems;
+using OpenBreed.Ecsw.Entities;
+using OpenBreed.Ecsw;
 
 namespace OpenBreed.Systems.Core
 {
@@ -64,7 +65,7 @@ namespace OpenBreed.Systems.Core
 
         private static bool HandleTextDataInsert(ICore core, TextDataInsert cmd)
         {
-            var toModify = core.Entities.GetById(cmd.EntityId);
+            var toModify = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
             if (toModify == null)
                 return false;
 
@@ -85,7 +86,7 @@ namespace OpenBreed.Systems.Core
 
         private static bool HandleTextDataBackspace(ICore core, TextDataBackspace cmd)
         {
-            var toModify = core.Entities.GetById(cmd.EntityId);
+            var toModify = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
             if (toModify == null)
                 return false;
 
@@ -109,7 +110,7 @@ namespace OpenBreed.Systems.Core
 
         private static bool HandleTextCaretSetPosition(ICore core, TextCaretSetPosition cmd)
         {
-            var toModify = core.Entities.GetById(cmd.EntityId);
+            var toModify = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
             if (toModify == null)
                 return false;
 

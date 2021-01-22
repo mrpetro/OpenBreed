@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Systems.Rendering.Commands;
 using System;
 using System.Collections.Generic;
@@ -8,6 +7,8 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Sandbox.Jobs
 {
@@ -42,7 +43,7 @@ namespace OpenBreed.Sandbox.Jobs
 
         public void Update(float dt)
         {
-            var cursorEntity = entity.Core.Entities.GetByTag("MouseCursor").First();
+            var cursorEntity = entity.Core.GetManager<IEntityMan>().GetByTag("MouseCursor").First();
 
             var cursorPos = cursorEntity.Get<PositionComponent>();
 

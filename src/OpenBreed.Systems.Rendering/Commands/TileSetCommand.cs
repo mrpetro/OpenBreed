@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Entities;
 using OpenTK;
 
 namespace OpenBreed.Systems.Rendering.Commands

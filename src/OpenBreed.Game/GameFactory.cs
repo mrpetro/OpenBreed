@@ -24,7 +24,7 @@ namespace OpenBreed.Game
         public ICore CreateGame(string gameDbFilePath)
         {
             manCollection.AddSingleton<IDatabase>(() => new XmlDatabaseMan(manCollection.GetManager<IVariableMan>(), gameDbFilePath));
-            return new Game(manCollection, new GameModulesFactory());
+            return new Game(manCollection);
         }
     }
 }

@@ -91,6 +91,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OpenBreed.Components.Common\OpenBreed.Components.Common.csproj">
+      <Project>{983742FE-CB64-4BD9-BB24-90646172A0E2}</Project>
+      <Name>OpenBreed.Components.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Components.Control\OpenBreed.Components.Control.csproj">
       <Project>{5710db62-0796-4683-b52e-0423a73830f0}</Project>
       <Name>OpenBreed.Components.Control</Name>
@@ -98,6 +102,10 @@
     <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">
       <Project>{95BDF122-FAC8-4AC4-B9A8-B549D942E37D}</Project>
       <Name>OpenBreed.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Ecsw\OpenBreed.Ecsw.csproj">
+      <Project>{D22D74E0-7FE4-4278-A93B-9983B788F40E}</Project>
+      <Name>OpenBreed.Ecsw</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Input.Generic\OpenBreed.Input.Generic.csproj">
       <Project>{4061AE76-DDD9-4FED-ACA3-1859A04F60C0}</Project>

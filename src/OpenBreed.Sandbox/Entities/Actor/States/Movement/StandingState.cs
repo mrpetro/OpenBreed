@@ -1,14 +1,14 @@
-﻿using OpenBreed.Core.Entities;
-using OpenBreed.Core.States;
-using OpenBreed.Sandbox.Helpers;
+﻿using OpenBreed.Sandbox.Helpers;
 using OpenTK;
 using System;
 using System.Linq;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
+using OpenBreed.Components.Common;
 using OpenBreed.Systems.Rendering.Commands;
 using OpenBreed.Systems.Animation.Commands;
 using OpenBreed.Systems.Control.Events;
+using OpenBreed.Ecsw.Entities;
+using OpenBreed.Fsm;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 {
@@ -49,10 +49,10 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
             thrust.Value = Vector2.Zero;
 
-            var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
+            var stateName = entity.Core.GetManager<IFsmMan>().GetStateName(FsmId, Id);
             entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{stateName}/{animDirName}", 0));
 
-            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
+            var currentStateNames = entity.Core.GetManager<IFsmMan>().GetStateNames(entity);
             entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
             entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);

@@ -3,13 +3,13 @@ using OpenBreed.Common.Logging;
 using OpenBreed.Components.Physics;
 using OpenBreed.Components.Physics.Xml;
 using OpenBreed.Core;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Components.Xml;
+using OpenBreed.Components.Common;
+using OpenBreed.Components.Common.Xml;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Physics.Generic;
-using OpenBreed.Core.Systems;
+using OpenBreed.Ecsw.Systems;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Components.Rendering;
 using OpenBreed.Components.Rendering.Xml;
@@ -49,6 +49,11 @@ using OpenBreed.Components.Animation;
 using OpenBreed.Systems.Animation;
 using OpenBreed.Input.Interface;
 using OpenBreed.Input.Generic;
+using OpenBreed.Scripting.Interface;
+using OpenBreed.Scripting.Lua;
+using OpenBreed.Ecsw;
+using OpenBreed.Fsm;
+using OpenBreed.Fsm.Xml;
 
 namespace OpenBreed.Sandbox
 {
@@ -66,6 +71,17 @@ namespace OpenBreed.Sandbox
 
             manCollection.AddSingleton<IPlayersMan>(() => new PlayersMan(manCollection.GetManager<ILogger>(),
                                                                          manCollection.GetManager<IInputsMan>()));
+
+            manCollection.AddSingleton<IEntityMan>(() => new EntityMan(manCollection.GetManager<ICore>(),
+                                                              manCollection.GetManager<ICommandsMan>()));
+
+
+            manCollection.AddSingleton<IEntityFactory>(() => new EntityFactory(manCollection.GetManager<IEntityMan>()));
+
+            manCollection.AddSingleton<IWorldMan>(() => new WorldMan(manCollection.GetManager<ICore>()));
+
+            manCollection.AddSingleton<ISystemFinder>(() => new SystemFinder(manCollection.GetManager<IEntityMan>(),
+                                                                             manCollection.GetManager<IWorldMan>()));
 
             OpenGLModule.AddManagers(manCollection);
             PhysicsModule.AddManagers(manCollection);
@@ -103,6 +119,8 @@ namespace OpenBreed.Sandbox
             Animations = manCollection.GetManager<IAnimMan>();
             Inputs = manCollection.GetManager<IInputsMan>();
             Players = manCollection.GetManager<IPlayersMan>();
+            Worlds = manCollection.GetManager<IWorldMan>();
+            EntityFactory = manCollection.GetManager<IEntityFactory>();
 
             appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
@@ -125,7 +143,6 @@ namespace OpenBreed.Sandbox
 
             Jobs = new JobMan(this);
 
-            EntityFactory = new EntityFactory(this);
 
             renderingModule = new OpenGLModule(this);
             Physics = new PhysicsModule(this);
@@ -149,15 +166,19 @@ namespace OpenBreed.Sandbox
         public IPhysicsModule Physics { get; }
         public IAudioModule Sounds { get; }
 
-        public override EntityFactory EntityFactory { get; }
+        public IEntityFactory EntityFactory { get; }
 
         private readonly IRenderModule renderingModule;
 
         public IAnimMan Animations { get; }
 
-        public override IFsmMan StateMachines { get; }
+        public IFsmMan StateMachines { get; }
 
         public IPlayersMan Players { get; }
+
+        public IWorldMan Worlds { get; }
+
+        public IEntityMan Entities { get; }
 
         public override JobMan Jobs { get; }
 

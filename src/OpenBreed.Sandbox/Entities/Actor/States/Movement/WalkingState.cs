@@ -1,18 +1,18 @@
 ﻿
-using OpenBreed.Core.Entities;
 using OpenBreed.Systems.Rendering.Commands;
-using OpenBreed.Core.States;
 using OpenBreed.Sandbox.Helpers;
 using OpenTK;
 using System;
 using System.Linq;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
+using OpenBreed.Components.Common;
 using OpenBreed.Components.Control;
 using OpenBreed.Components.Physics;
 using OpenBreed.Systems.Physics.Events;
 using OpenBreed.Systems.Animation.Commands;
 using OpenBreed.Systems.Control.Events;
+using OpenBreed.Ecsw.Entities;
+using OpenBreed.Fsm;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 {
@@ -51,11 +51,11 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
             var animDirPostfix = AnimHelper.ToDirectionName(direction.GetDirection());
 
-            var stateName = entity.Core.StateMachines.GetStateName(FsmId, Id);
+            var stateName = entity.Core.GetManager<IFsmMan>().GetStateName(FsmId, Id);
             var className = entity.Get<ClassComponent>().Name;
             entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{stateName}/{animDirPostfix}", 0));
 
-            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
+            var currentStateNames = entity.Core.GetManager<IFsmMan>().GetStateNames(entity);
             entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
             entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
@@ -82,7 +82,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             //entity.Get<ThrustComponent>().Value = direction.GetDirection() * movement.Acceleration;
             var animDirName = AnimHelper.ToDirectionName(direction.GetDirection());
             var className = entity.Get<ClassComponent>().Name;
-            var movementFsm = entity.Core.StateMachines.GetByName("Actor.Movement");
+            var movementFsm = entity.Core.GetManager<IFsmMan>().GetByName("Actor.Movement");
             var movementStateName = movementFsm.GetCurrentStateName(entity);
             entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, $"{"Animations"}/{className}/{movementStateName}/{animDirName}", 0));
 

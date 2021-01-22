@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
@@ -9,7 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using OpenBreed.Core.Systems;
+using OpenBreed.Ecsw.Systems;
+using OpenBreed.Ecsw.Entities;
+using OpenBreed.Ecsw;
 
 namespace OpenBreed.Systems.Core
 {
@@ -55,7 +56,7 @@ namespace OpenBreed.Systems.Core
 
             for (int i = 0; i < fc.FollowerIds.Count; i++)
             {
-                var followerEntity = Core.Entities.GetById(fc.FollowerIds[i]);
+                var followerEntity = Core.GetManager<IEntityMan>().GetById(fc.FollowerIds[i]);
 
                 if (followerEntity == null)
                     continue;
@@ -93,7 +94,7 @@ namespace OpenBreed.Systems.Core
 
             for (int i = 0; i < fc.FollowerIds.Count; i++)
             {
-                var follower = Core.Entities.GetById(fc.FollowerIds[i]);
+                var follower = Core.GetManager<IEntityMan>().GetById(fc.FollowerIds[i]);
 
                 if (follower == null)
                     continue;
@@ -110,7 +111,7 @@ namespace OpenBreed.Systems.Core
 
             for (int i = 0; i < fc.FollowerIds.Count; i++)
             {
-                var follower = Core.Entities.GetById(fc.FollowerIds[i]);
+                var follower = Core.GetManager<IEntityMan>().GetById(fc.FollowerIds[i]);
 
                 if (follower == null)
                     continue;
@@ -125,7 +126,7 @@ namespace OpenBreed.Systems.Core
 
         private static bool HandleFollowedAddFollowerCommand(ICore core, FollowedAddFollowerCommand cmd)
         {
-            var entity = core.Entities.GetById(cmd.EntityId);
+            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
             var fc = entity.Get<FollowerComponent>();
             fc.FollowerIds.Add(cmd.FollowerEntityId);
             return true;

@@ -2,12 +2,13 @@
 using OpenBreed.Common.Tools;
 using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Entities.Xml;
+using OpenBreed.Components.Common;
+using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Entities.Xml;
 using OpenBreed.Rendering.Interface;
 using OpenTK;
 using OpenTK.Graphics;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Sandbox
 {
@@ -60,11 +61,11 @@ namespace OpenBreed.Sandbox
             var arial12 = world.Core.GetModule<IRenderModule>().Fonts.Create("ARIAL", 10);
 
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\CrazyMover\CrazyMover.xml");
-            var crazyMover = world.Core.EntityFactory.Create(entityTemplate);
+            var crazyMover = world.Core.GetManager<IEntityFactory>().Create(entityTemplate);
 
 
 
-            //var crazyMover = world.Core.Entities.CreateFromTemplate("CrazyMover");
+            //var crazyMover = world.Core.GetManager<IEntityMan>().CreateFromTemplate("CrazyMover");
 
 
 

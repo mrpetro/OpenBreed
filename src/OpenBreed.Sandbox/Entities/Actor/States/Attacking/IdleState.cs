@@ -1,9 +1,7 @@
 ﻿
 using NLua;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Entities;
 using OpenBreed.Systems.Rendering.Commands;
-using OpenBreed.Core.States;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -11,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Systems.Control.Events;
+using OpenBreed.Ecsw.Entities;
+using OpenBreed.Fsm;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {
@@ -25,7 +25,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 
         public void EnterState(Entity entity)
         {
-            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
+            var currentStateNames = entity.Core.GetManager<IFsmMan>().GetStateNames(entity);
             entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
             entity.Subscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);

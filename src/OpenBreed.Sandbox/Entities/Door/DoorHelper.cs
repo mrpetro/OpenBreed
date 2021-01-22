@@ -1,12 +1,9 @@
 ﻿using OpenBreed.Common.Tools;
 using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Entities.Xml;
+using OpenBreed.Components.Common;
 using OpenBreed.Core.Events;
 using OpenBreed.Systems.Rendering.Commands;
-using OpenBreed.Core.States;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Sandbox.Components;
 using OpenBreed.Sandbox.Components.States;
@@ -21,6 +18,10 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Components.Physics;
 using OpenBreed.Animation.Interface;
+using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Entities.Xml;
+using OpenBreed.Ecsw.Entities;
+using OpenBreed.Fsm;
 
 namespace OpenBreed.Sandbox.Entities.Door
 {
@@ -74,7 +75,7 @@ namespace OpenBreed.Sandbox.Entities.Door
 
         public static void CreateFsm(ICore core)
         {
-            var fsm = core.StateMachines.Create<FunctioningState, FunctioningImpulse>("Door.Functioning");
+            var fsm = core.GetManager<IFsmMan>().Create<FunctioningState, FunctioningImpulse>("Door.Functioning");
 
             fsm.AddState(new OpeningState());
             fsm.AddState(new OpenedAwaitClose());
@@ -112,7 +113,7 @@ namespace OpenBreed.Sandbox.Entities.Door
             var core = world.Core;
 
             var doorVerticalTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Door\DoorVertical.xml");
-            var door = core.EntityFactory.Create(doorVerticalTemplate);
+            var door = core.GetManager<IEntityFactory>().Create(doorVerticalTemplate);
 
             door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
             door.Add(new CollisionComponent());
@@ -125,7 +126,7 @@ namespace OpenBreed.Sandbox.Entities.Door
             var core = world.Core;
 
             var doorHorizontalTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Door\DoorHorizontal.xml");
-            var door = core.EntityFactory.Create(doorHorizontalTemplate);
+            var door = core.GetManager<IEntityFactory>().Create(doorHorizontalTemplate);
 
             door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
             door.Add(new CollisionComponent());

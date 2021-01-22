@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenTK;
 using OpenTK.Graphics;
 using System;
@@ -11,6 +10,8 @@ using System.Threading.Tasks;
 using OpenBreed.Core;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Components.Rendering;
+using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Sandbox.Entities
 {
@@ -22,7 +23,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public static Entity CreateText(World world)
         {
-            var e = world.Core.Entities.Create();
+            var e = world.Core.GetManager<IEntityMan>().Create();
             e.Add(new TextCaretComponent());
             e.Add(new TextDataComponent("This is test"));
 

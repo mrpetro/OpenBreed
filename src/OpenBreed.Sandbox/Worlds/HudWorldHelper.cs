@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Entities;
 using OpenBreed.Components.Rendering;
 using OpenBreed.Systems.Rendering.Events;
 using OpenBreed.Sandbox.Entities.Camera;
@@ -8,6 +7,8 @@ using OpenBreed.Sandbox.Entities.CursorCoords;
 using OpenBreed.Sandbox.Entities.FpsCounter;
 using OpenTK;
 using System.Linq;
+using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -41,7 +42,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         public static void Create(Program core)
         {
-            var builder = core.Worlds.Create().SetName("HUD");
+            var builder = core.GetManager<IWorldMan>().Create().SetName("HUD");
 
             AddSystems(core, builder);
 
@@ -66,7 +67,7 @@ namespace OpenBreed.Sandbox.Worlds
             FpsCounterHelper.AddToWorld(world);
             CursorCoordsHelper.AddToWorld(world);
 
-            var hudViewport = world.Core.Entities.GetByTag(ScreenWorldHelper.HUD_VIEWPORT).First();
+            var hudViewport = world.Core.GetManager<IEntityMan>().GetByTag(ScreenWorldHelper.HUD_VIEWPORT).First();
             hudViewport.Get<ViewportComponent>().CameraEntityId = hudCamera.Id;
 
             //world.Core.Rendering.Subscribe(GfxEventTypes.CLIENT_RESIZED, (s, a) => UpdateFpsPos(fpsTextEntity, (ClientResizedEventArgs)a));

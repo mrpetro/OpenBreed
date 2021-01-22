@@ -1,10 +1,9 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Managers;
-using OpenBreed.Core.Systems;
+using OpenBreed.Ecsw.Systems;
 using OpenBreed.Game.Entities;
 using OpenBreed.Components.Rendering;
 using OpenBreed.Systems.Rendering.Events;
@@ -15,6 +14,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Systems.Core;
+using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Game
 {
@@ -82,7 +83,7 @@ namespace OpenBreed.Game
 
         public static void SetPreserveAspectRatio(Entity viewportEntity)
         {
-            var cameraEntity = viewportEntity.Core.Entities.GetById(viewportEntity.Get<ViewportComponent>().CameraEntityId);
+            var cameraEntity = viewportEntity.Core.GetManager<IEntityMan>().GetById(viewportEntity.Get<ViewportComponent>().CameraEntityId);
             viewportEntity.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateCameraFov(cameraEntity, a));
         }
 

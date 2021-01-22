@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Components.Xml;
+﻿using OpenBreed.Components.Common.Xml;
 using System.Xml.Serialization;
 
 namespace OpenBreed.Components.Animation.Xml

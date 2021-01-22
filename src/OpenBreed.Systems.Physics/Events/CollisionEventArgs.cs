@@ -1,5 +1,4 @@
-﻿//using OpenBreed.Core.Entities;
-//using OpenTK;
+﻿//using OpenTK;
 //using System;
 
 //namespace OpenBreed.Systems.Physics.Events

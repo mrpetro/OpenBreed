@@ -1,10 +1,8 @@
 ﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Systems.Rendering.Commands;
-using OpenBreed.Core.States;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -12,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Systems.Control.Events;
+using OpenBreed.Fsm;
+using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 {
@@ -27,7 +27,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
         public void EnterState(Entity entity)
         {
             // Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            var currentStateNames = entity.Core.StateMachines.GetStateNames(entity);
+            var currentStateNames = entity.Core.GetManager<IFsmMan>().GetStateNames(entity);
             entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
             //entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);

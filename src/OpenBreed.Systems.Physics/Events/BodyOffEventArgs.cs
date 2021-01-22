@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core.Entities;
+﻿using OpenBreed.Ecsw.Entities;
 using System;
 
 namespace OpenBreed.Systems.Physics.Events

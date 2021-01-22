@@ -1,13 +1,10 @@
 ﻿using OpenBreed.Common.Tools;
 using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Entities.Xml;
+using OpenBreed.Components.Common;
 using OpenBreed.Core.Modules;
 using OpenBreed.Physics.Generic.Helpers;
 using OpenBreed.Systems.Rendering.Commands;
-using OpenBreed.Core.States;
 using OpenBreed.Sandbox.Entities.Projectile.States;
 using OpenBreed.Sandbox.Helpers;
 using OpenTK;
@@ -20,6 +17,10 @@ using OpenBreed.Components.Physics;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Systems.Physics.Helpers;
 using OpenBreed.Animation.Interface;
+using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Entities.Xml;
+using OpenBreed.Ecsw.Entities;
+using OpenBreed.Fsm;
 
 namespace OpenBreed.Sandbox.Entities.Projectile
 {
@@ -88,8 +89,8 @@ namespace OpenBreed.Sandbox.Entities.Projectile
             if(projectileTemplate == null)
                 projectileTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Projectile\Projectile.xml");
 
-            var projectile = core.EntityFactory.Create(projectileTemplate);
-            //var projectile = core.Entities.CreateFromTemplate("Projectile");
+            var projectile = core.GetManager<IEntityFactory>().Create(projectileTemplate);
+            //var projectile = core.GetManager<IEntityMan>().CreateFromTemplate("Projectile");
 
             //projectile.Add(new FsmComponent());
 
@@ -97,7 +98,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
             projectile.Get<VelocityComponent>().Value = new Vector2(vx, vy);
             projectile.Add(new CollisionComponent(ColliderTypes.Projectile));
 
-            //var projectileFsm = core.StateMachines.GetByName("Projectile");
+            //var projectileFsm = core.GetManager<IFsmMan>().GetByName("Projectile");
             //projectileFsm.SetInitialState(projectile, (int)AttackingState.Fired);
             world.Core.Commands.Post(new AddEntityCommand(world.Id, projectile.Id));
             //world.AddEntity(projectile);
@@ -106,7 +107,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
         public static void CreateFsm(ICore core)
         {
-            var stateMachine = core.StateMachines.Create<AttackingState, AttackingImpulse>("Projectile");
+            var stateMachine = core.GetManager<IFsmMan>().Create<AttackingState, AttackingImpulse>("Projectile");
             stateMachine.AddState(new FiredState("Animations/Laser/Fired/"));
         }
     }

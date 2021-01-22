@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using OpenBreed.Core.Entities;
-using OpenBreed.Core.Components;
+using OpenBreed.Components.Common;
+using OpenBreed.Ecsw.Entities;
 using OpenBreed.Systems.Audio.Builders;
 using OpenBreed.Systems.Core;
 

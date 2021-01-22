@@ -1,7 +1,5 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
@@ -9,7 +7,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using OpenBreed.Core.Systems;
+using OpenBreed.Ecsw.Systems;
+using OpenBreed.Ecsw.Entities;
+using OpenBreed.Components.Common;
+using OpenBreed.Ecsw;
 
 namespace OpenBreed.Systems.Core
 {
@@ -42,7 +43,7 @@ namespace OpenBreed.Systems.Core
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                var entity = Core.Entities.GetById(entities[i]);
+                var entity = Core.GetManager<IEntityMan>().GetById(entities[i]);
                 Debug.Assert(entity != null);
 
                 Update(entity, dt);
@@ -53,7 +54,7 @@ namespace OpenBreed.Systems.Core
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                var entity = Core.Entities.GetById(entities[i]);
+                var entity = Core.GetManager<IEntityMan>().GetById(entities[i]);
                 if (entity.Components.OfType<PauseImmuneComponent>().Any())
                     Update(entity, dt);
             }
@@ -84,7 +85,7 @@ namespace OpenBreed.Systems.Core
 
         private static bool HandleTimerStartCommand(ICore core, TimerStartCommand cmd)
         {
-            var entity = core.Entities.GetById(cmd.EntityId);
+            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
 
             var timerComponent = entity.Get<TimerComponent>();
 
@@ -111,7 +112,7 @@ namespace OpenBreed.Systems.Core
 
         private static bool HandleTimerStopCommand(ICore core, TimerStopCommand cmd)
         {
-            var entity = core.Entities.GetById(cmd.EntityId);
+            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
 
             var timerComponent = entity.Get<TimerComponent>();
 

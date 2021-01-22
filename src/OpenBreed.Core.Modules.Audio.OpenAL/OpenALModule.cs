@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Audio.Interface;
 using OpenBreed.Audio.Interface.Managers;
 using OpenBreed.Audio.OpenAL.Managers;
-using OpenBreed.Core.Components;
 using OpenBreed.Core.Managers;
 using System;
 

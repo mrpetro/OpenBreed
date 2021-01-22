@@ -1,7 +1,5 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core.Helpers;
-using OpenBreed.Core.Entities;
-
 namespace OpenBreed.Systems.Animation.Commands
 {
     public struct PlayAnimCommand : ICommand

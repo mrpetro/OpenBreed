@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Components;
+using OpenBreed.Components.Common;
 
 namespace OpenBreed.Components.Rendering
 {

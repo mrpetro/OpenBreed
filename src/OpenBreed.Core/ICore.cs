@@ -3,10 +3,8 @@ using OpenBreed.Core.Commands;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
-using OpenBreed.Core.Systems;
 using OpenTK;
 using System.Drawing;
-using OpenBreed.Core.Components;
 
 namespace OpenBreed.Core
 {
@@ -28,24 +26,6 @@ namespace OpenBreed.Core
         /// Jobs manager
         /// </summary>
         JobMan Jobs { get; }
-
-        /// <summary>
-        /// Entities manager
-        /// </summary>
-        IEntityMan Entities { get; }
-
-        //EntityFactory
-        EntityFactory EntityFactory { get; }
-
-        /// <summary>
-        /// State machine manager
-        /// </summary>
-        IFsmMan StateMachines { get; }
-
-        /// <summary>
-        /// Worlds manager
-        /// </summary>
-        IWorldMan Worlds { get; }
 
         /// <summary>
         /// Commands manager
@@ -99,10 +79,6 @@ namespace OpenBreed.Core
         /// Perform exit
         /// </summary>
         void Exit();
-
-        T GetSystemByEntityId<T>(int entityId) where T : IWorldSystem;
-
-        T GetSystemByWorldId<T>(int worldId) where T : IWorldSystem;
 
         void Update(float dt);
 

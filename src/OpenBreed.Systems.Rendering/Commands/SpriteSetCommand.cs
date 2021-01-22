@@ -1,7 +1,5 @@
 ﻿using OpenBreed.Core.Commands;
 
-using OpenBreed.Core.Entities;
-
 namespace OpenBreed.Systems.Rendering.Commands
 {
     public struct SpriteSetCommand : ICommand

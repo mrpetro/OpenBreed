@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Components;
-using OpenBreed.Core.Entities;
+using OpenBreed.Components.Common;
 using OpenBreed.Components.Control;
 using System;
 using System.Collections.Generic;
@@ -10,9 +9,11 @@ using OpenBreed.Core.Helpers;
 using OpenBreed.Systems.Control.Builders;
 using OpenBreed.Core.Managers;
 using OpenBreed.Systems.Core;
-using OpenBreed.Core.Systems;
+using OpenBreed.Ecsw.Systems;
 using OpenBreed.Systems.Control.Commands;
 using OpenBreed.Systems.Control.Events;
+using OpenBreed.Ecsw.Entities;
+using OpenBreed.Ecsw;
 
 namespace OpenBreed.Systems.Control
 {
@@ -74,7 +75,7 @@ namespace OpenBreed.Systems.Control
 
         private static bool HandleAttackControlCommand(ICore core, AttackControlCommand cmd)
         {
-            var entity = core.Entities.GetById(cmd.EntityId);
+            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
 
             var control = entity.Get<AttackControl>();
 
@@ -89,7 +90,7 @@ namespace OpenBreed.Systems.Control
 
         private static bool HandleWalkingControlCommand(ICore core, WalkingControlCommand cmd)
         {
-            var entity = core.Entities.GetById(cmd.EntityId);
+            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
 
             var control = entity.Get<WalkingControl>();
 
