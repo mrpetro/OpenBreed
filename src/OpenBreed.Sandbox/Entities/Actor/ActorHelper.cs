@@ -1,18 +1,18 @@
 ﻿using OpenBreed.Common.Tools;
-using OpenBreed.Components.Physics;
+using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Core;
-using OpenBreed.Components.Common;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Core.Modules;
 using OpenBreed.Physics.Generic;
 using OpenBreed.Physics.Generic.Helpers;
 using OpenBreed.Physics.Interface;
-using OpenBreed.Systems.Rendering.Commands;
-using OpenBreed.Systems.Physics.Helpers;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenTK;
 using OpenBreed.Animation.Interface;
-using OpenBreed.Ecsw.Entities.Xml;
-using OpenBreed.Ecsw;
-using OpenBreed.Ecsw.Entities;
+using OpenBreed.Wecs.Entities.Xml;
+using OpenBreed.Wecs;
+using OpenBreed.Wecs.Entities;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {

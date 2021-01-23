@@ -1,8 +1,8 @@
 ﻿using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools.Collections;
-using OpenBreed.Components.Physics;
+using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Core.Managers;
-using OpenBreed.Ecsw.Entities;
+using OpenBreed.Wecs.Entities;
 using OpenBreed.Physics.Generic.Helpers;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Managers;

@@ -1,10 +1,10 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Components.Common;
-using OpenBreed.Components.Rendering;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Rendering;
 using OpenTK;
-using OpenBreed.Ecsw.Entities.Builders;
-using OpenBreed.Ecsw.Entities;
-using OpenBreed.Ecsw;
+using OpenBreed.Wecs.Entities.Builders;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs;
 
 namespace OpenBreed.Game.Entities
 {

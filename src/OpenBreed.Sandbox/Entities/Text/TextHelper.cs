@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Core.Commands;
-using OpenBreed.Components.Common;
+using OpenBreed.Wecs.Components.Common;
 using OpenTK;
 using OpenTK.Graphics;
 using System;
@@ -9,10 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Core;
 using OpenBreed.Rendering.Interface;
-using OpenBreed.Components.Rendering;
-using OpenBreed.Ecsw;
-using OpenBreed.Ecsw.Entities;
-using OpenBreed.Ecsw.Worlds;
+using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Entities
 {

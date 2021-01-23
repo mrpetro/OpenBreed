@@ -1,10 +1,10 @@
 ﻿using OpenBreed.Common.Tools;
 using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Components.Common;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Core.Modules;
 using OpenBreed.Physics.Generic.Helpers;
-using OpenBreed.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Sandbox.Entities.Projectile.States;
 using OpenBreed.Sandbox.Helpers;
 using OpenTK;
@@ -13,15 +13,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Components.Physics;
+using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Physics.Interface;
-using OpenBreed.Systems.Physics.Helpers;
+using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenBreed.Animation.Interface;
-using OpenBreed.Ecsw;
-using OpenBreed.Ecsw.Entities.Xml;
-using OpenBreed.Ecsw.Entities;
+using OpenBreed.Wecs;
+using OpenBreed.Wecs.Entities.Xml;
+using OpenBreed.Wecs.Entities;
 using OpenBreed.Fsm;
-using OpenBreed.Ecsw.Worlds;
+using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Entities.Projectile
 {

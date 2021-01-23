@@ -2,14 +2,14 @@
 using OpenBreed.Common.Tools;
 using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Components.Common;
-using OpenBreed.Ecsw;
-using OpenBreed.Ecsw.Entities.Xml;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs;
+using OpenBreed.Wecs.Entities.Xml;
 using OpenBreed.Rendering.Interface;
 using OpenTK;
 using OpenTK.Graphics;
-using OpenBreed.Ecsw.Entities;
-using OpenBreed.Ecsw.Worlds;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox
 {

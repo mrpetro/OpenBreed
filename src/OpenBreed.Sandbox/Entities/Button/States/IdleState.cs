@@ -1,11 +1,11 @@
-﻿using OpenBreed.Systems.Rendering.Commands;
+﻿using OpenBreed.Wecs.Systems.Rendering.Commands;
 using System;
 using System.Linq;
 using OpenBreed.Core.Commands;
-using OpenBreed.Systems.Animation.Commands;
-using OpenBreed.Systems.Animation.Events;
+using OpenBreed.Wecs.Systems.Animation.Commands;
+using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Fsm;
-using OpenBreed.Ecsw.Entities;
+using OpenBreed.Wecs.Entities;
 
 namespace OpenBreed.Sandbox.Entities.Button.States
 {

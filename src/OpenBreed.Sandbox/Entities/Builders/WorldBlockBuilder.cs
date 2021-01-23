@@ -1,16 +1,16 @@
-﻿using OpenBreed.Components.Physics;
+﻿using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Core;
-using OpenBreed.Components.Common;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Core.Modules;
 using OpenBreed.Physics.Interface;
-using OpenBreed.Components.Rendering;
+using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Rendering.Interface;
 using OpenTK;
 using System.Collections.Generic;
 using System.Linq;
-using OpenBreed.Ecsw.Entities.Builders;
-using OpenBreed.Ecsw;
-using OpenBreed.Ecsw.Entities;
+using OpenBreed.Wecs.Entities.Builders;
+using OpenBreed.Wecs;
+using OpenBreed.Wecs.Entities;
 
 namespace OpenBreed.Sandbox.Entities.Builders
 {

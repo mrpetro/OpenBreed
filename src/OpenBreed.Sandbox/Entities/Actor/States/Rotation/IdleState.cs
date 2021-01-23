@@ -1,17 +1,17 @@
 ﻿using OpenBreed.Core.Commands;
-using OpenBreed.Components.Common;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Helpers;
-using OpenBreed.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Systems.Control.Events;
+using OpenBreed.Wecs.Systems.Control.Events;
 using OpenBreed.Fsm;
-using OpenBreed.Ecsw.Entities;
+using OpenBreed.Wecs.Entities;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 {

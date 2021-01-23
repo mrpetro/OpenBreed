@@ -213,29 +213,25 @@
       <Project>{A281E554-E5B2-4198-96F6-F772A552C7D0}</Project>
       <Name>OpenBreed.Audio.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Components.Animation\OpenBreed.Components.Animation.csproj">
+    <ProjectReference Include="..\OpenBreed.Wecs.Components.Animation\OpenBreed.Wecs.Components.Animation.csproj">
       <Project>{2AC675A2-6989-4EAA-B8E8-46D50DDB88C6}</Project>
-      <Name>OpenBreed.Components.Animation</Name>
+      <Name>OpenBreed.Wecs.Components.Animation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Components.Common\OpenBreed.Components.Common.csproj">
+    <ProjectReference Include="..\OpenBreed.Wecs.Components.Common\OpenBreed.Wecs.Components.Common.csproj">
       <Project>{983742FE-CB64-4BD9-BB24-90646172A0E2}</Project>
-      <Name>OpenBreed.Components.Common</Name>
+      <Name>OpenBreed.Wecs.Components.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Components.Control\OpenBreed.Components.Control.csproj">
+    <ProjectReference Include="..\OpenBreed.Wecs.Components.Control\OpenBreed.Wecs.Components.Control.csproj">
       <Project>{5710db62-0796-4683-b52e-0423a73830f0}</Project>
-      <Name>OpenBreed.Components.Control</Name>
+      <Name>OpenBreed.Wecs.Components.Control</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Components.Physics\OpenBreed.Components.Physics.csproj">
+    <ProjectReference Include="..\OpenBreed.Wecs.Components.Physics\OpenBreed.Wecs.Components.Physics.csproj">
       <Project>{ea5c8b57-f636-45fc-b6d4-1344c6764352}</Project>
-      <Name>OpenBreed.Components.Physics</Name>
+      <Name>OpenBreed.Wecs.Components.Physics</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Core.Modules.Audio.OpenAL\OpenBreed.Audio.OpenAL.csproj">
       <Project>{82af3d57-a4f4-4339-859a-7e82942b96df}</Project>
       <Name>OpenBreed.Audio.OpenAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Ecsw\OpenBreed.Ecsw.csproj">
-      <Project>{D22D74E0-7FE4-4278-A93B-9983B788F40E}</Project>
-      <Name>OpenBreed.Ecsw</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Fsm\OpenBreed.Fsm.csproj">
       <Project>{53D8026C-4C23-4BB7-B75A-03BE53F1F655}</Project>
@@ -253,9 +249,9 @@
       <Project>{C9F84CE7-732C-4A31-89DC-B87E3D9685BE}</Project>
       <Name>OpenBreed.Physics.Generic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Core.Systems.Control\OpenBreed.Systems.Control.csproj">
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Control\OpenBreed.Wecs.Systems.Control.csproj">
       <Project>{cf689601-0842-497f-a05f-b31431697b4e}</Project>
-      <Name>OpenBreed.Systems.Control</Name>
+      <Name>OpenBreed.Wecs.Systems.Control</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">
       <Project>{95BDF122-FAC8-4AC4-B9A8-B549D942E37D}</Project>
@@ -265,9 +261,9 @@
       <Project>{29FF6C36-A229-4C2F-8CDD-09181C7A6B59}</Project>
       <Name>OpenBreed.Physics.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Components.Rendering\OpenBreed.Components.Rendering.csproj">
+    <ProjectReference Include="..\OpenBreed.Wecs.Components.Rendering\OpenBreed.Wecs.Components.Rendering.csproj">
       <Project>{4BF54E49-6BEA-4733-8189-0A9204819A11}</Project>
-      <Name>OpenBreed.Components.Rendering</Name>
+      <Name>OpenBreed.Wecs.Components.Rendering</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Rendering.Interface\OpenBreed.Rendering.Interface.csproj">
       <Project>{33B3ECA4-715E-475E-B01E-80B6DB0876FC}</Project>
@@ -285,21 +281,25 @@
       <Project>{ce239744-67dd-4e16-b79a-eb6ec47a3558}</Project>
       <Name>OpenBreed.Scripting.Lua</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Systems.Animation\OpenBreed.Systems.Animation.csproj">
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Animation\OpenBreed.Wecs.Systems.Animation.csproj">
       <Project>{7D41F74D-CAFA-4AD2-A06A-230B50F43D31}</Project>
-      <Name>OpenBreed.Systems.Animation</Name>
+      <Name>OpenBreed.Wecs.Systems.Animation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Systems.Core\OpenBreed.Systems.Core.csproj">
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Core\OpenBreed.Wecs.Systems.Core.csproj">
       <Project>{36DBA7C4-EA4A-4F4D-82D3-D586E08346F6}</Project>
-      <Name>OpenBreed.Systems.Core</Name>
+      <Name>OpenBreed.Wecs.Systems.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Systems.Rendering\OpenBreed.Systems.Rendering.csproj">
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Rendering\OpenBreed.Wecs.Systems.Rendering.csproj">
       <Project>{DFE12B44-E9BF-466C-B74B-75D14458C4E8}</Project>
-      <Name>OpenBreed.Systems.Rendering</Name>
+      <Name>OpenBreed.Wecs.Systems.Rendering</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Systems.Physics\OpenBreed.Systems.Physics.csproj">
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Physics\OpenBreed.Wecs.Systems.Physics.csproj">
       <Project>{12E847DA-BE51-4F20-BC87-117491415D8C}</Project>
-      <Name>OpenBreed.Systems.Physics</Name>
+      <Name>OpenBreed.Wecs.Systems.Physics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj">
+      <Project>{d22d74e0-7fe4-4278-a93b-9983b788f40e}</Project>
+      <Name>OpenBreed.Wecs</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

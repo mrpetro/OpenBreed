@@ -6,19 +6,19 @@ using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenBreed.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Commands;
-using OpenBreed.Components.Common;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Common.Tools;
 using OpenBreed.Physics.Generic;
-using OpenBreed.Components.Physics;
+using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Animation.Interface;
-using OpenBreed.Ecsw;
-using OpenBreed.Ecsw.Entities.Xml;
-using OpenBreed.Ecsw.Entities;
-using OpenBreed.Ecsw.Worlds;
+using OpenBreed.Wecs;
+using OpenBreed.Wecs.Entities.Xml;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Entities.Teleport
 {

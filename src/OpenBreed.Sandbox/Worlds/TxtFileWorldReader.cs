@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Core;
-using OpenBreed.Ecsw;
-using OpenBreed.Ecsw.Worlds;
+using OpenBreed.Wecs;
+using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Worlds
 {

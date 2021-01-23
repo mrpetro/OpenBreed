@@ -12,18 +12,18 @@ using System.Threading.Tasks;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Events;
 using OpenBreed.Sandbox.Worlds;
-using OpenBreed.Components.Common;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Physics.Generic;
 using OpenBreed.Common.Tools;
 using OpenBreed.Core.Modules;
-using OpenBreed.Components.Physics;
+using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Physics.Interface;
-using OpenBreed.Systems.Animation.Events;
-using OpenBreed.Systems.Animation.Commands;
-using OpenBreed.Ecsw;
-using OpenBreed.Ecsw.Entities.Xml;
-using OpenBreed.Ecsw.Entities;
-using OpenBreed.Ecsw.Worlds;
+using OpenBreed.Wecs.Systems.Animation.Events;
+using OpenBreed.Wecs.Systems.Animation.Commands;
+using OpenBreed.Wecs;
+using OpenBreed.Wecs.Entities.Xml;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Entities.WorldGate
 {

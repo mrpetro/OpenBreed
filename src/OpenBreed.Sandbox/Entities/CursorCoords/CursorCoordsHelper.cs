@@ -1,9 +1,9 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Components.Common;
-using OpenBreed.Components.Rendering;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Rendering.Interface;
-using OpenBreed.Systems.Rendering.Events;
+using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Sandbox.Jobs;
 using OpenBreed.Sandbox.Worlds;
 using OpenTK;
@@ -13,9 +13,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Ecsw;
-using OpenBreed.Ecsw.Entities;
-using OpenBreed.Ecsw.Worlds;
+using OpenBreed.Wecs;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Entities.CursorCoords
 {

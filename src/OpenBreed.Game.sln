@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Sandbox", "OpenBr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Physics.Generic", "OpenBreed.Physics.Generic\OpenBreed.Physics.Generic.csproj", "{C9F84CE7-732C-4A31-89DC-B87E3D9685BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Systems.Control", "OpenBreed.Core.Systems.Control\OpenBreed.Systems.Control.csproj", "{CF689601-0842-497F-A05F-B31431697B4E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Wecs.Systems.Control", "OpenBreed.Wecs.Systems.Control\OpenBreed.Wecs.Systems.Control.csproj", "{CF689601-0842-497F-A05F-B31431697B4E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Audio.OpenAL", "OpenBreed.Core.Modules.Audio.OpenAL\OpenBreed.Audio.OpenAL.csproj", "{82AF3D57-A4F4-4339-859A-7E82942B96DF}"
 EndProject
@@ -42,37 +42,37 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Writer.Interface"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Writer.Legacy", "..\OpenBreed.Common\src\OpenBreed.Writer.Legacy\OpenBreed.Writer.Legacy.csproj", "{0B8B1C59-2BEC-45C3-BD7A-AEB955337407}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Components.Rendering", "OpenBreed.Components.Rendering\OpenBreed.Components.Rendering.csproj", "{4BF54E49-6BEA-4733-8189-0A9204819A11}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Wecs.Components.Rendering", "OpenBreed.Wecs.Components.Rendering\OpenBreed.Wecs.Components.Rendering.csproj", "{4BF54E49-6BEA-4733-8189-0A9204819A11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Systems.Rendering", "OpenBreed.Systems.Rendering\OpenBreed.Systems.Rendering.csproj", "{DFE12B44-E9BF-466C-B74B-75D14458C4E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Wecs.Systems.Rendering", "OpenBreed.Wecs.Systems.Rendering\OpenBreed.Wecs.Systems.Rendering.csproj", "{DFE12B44-E9BF-466C-B74B-75D14458C4E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Rendering.Interface", "OpenBreed.Rendering.Interface\OpenBreed.Rendering.Interface.csproj", "{33B3ECA4-715E-475E-B01E-80B6DB0876FC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Rendering.OpenGL", "OpenBreed.Rendering.OpenGL\OpenBreed.Rendering.OpenGL.csproj", "{08856058-9DE1-43E5-A4AA-91BF98BBDE50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Systems.Physics", "OpenBreed.Systems.Physics\OpenBreed.Systems.Physics.csproj", "{12E847DA-BE51-4F20-BC87-117491415D8C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Wecs.Systems.Physics", "OpenBreed.Wecs.Systems.Physics\OpenBreed.Wecs.Systems.Physics.csproj", "{12E847DA-BE51-4F20-BC87-117491415D8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Components.Physics", "OpenBreed.Components.Physics\OpenBreed.Components.Physics.csproj", "{EA5C8B57-F636-45FC-B6D4-1344C6764352}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Wecs.Components.Physics", "OpenBreed.Wecs.Components.Physics\OpenBreed.Wecs.Components.Physics.csproj", "{EA5C8B57-F636-45FC-B6D4-1344C6764352}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Physics.Interface", "OpenBreed.Physics.Interface\OpenBreed.Physics.Interface.csproj", "{29FF6C36-A229-4C2F-8CDD-09181C7A6B59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Components.Control", "OpenBreed.Components.Control\OpenBreed.Components.Control.csproj", "{5710DB62-0796-4683-B52E-0423A73830F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Wecs.Components.Control", "OpenBreed.Wecs.Components.Control\OpenBreed.Wecs.Components.Control.csproj", "{5710DB62-0796-4683-B52E-0423A73830F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Components.Audio", "OpenBreed.Components.Audio\OpenBreed.Components.Audio.csproj", "{3D35AFBE-7307-4F98-8A1B-4A39AE2B2690}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Wecs.Components.Audio", "OpenBreed.Wecs.Components.Audio\OpenBreed.Wecs.Components.Audio.csproj", "{3D35AFBE-7307-4F98-8A1B-4A39AE2B2690}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Systems.Audio", "OpenBreed.Systems.Audio\OpenBreed.Systems.Audio.csproj", "{79EDB034-9742-467F-9615-FEDAF5448583}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Wecs.Systems.Audio", "OpenBreed.Wecs.Systems.Audio\OpenBreed.Wecs.Systems.Audio.csproj", "{79EDB034-9742-467F-9615-FEDAF5448583}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Audio.Interface", "OpenBreed.Audio.Interface\OpenBreed.Audio.Interface.csproj", "{A281E554-E5B2-4198-96F6-F772A552C7D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Systems.Core", "OpenBreed.Systems.Core\OpenBreed.Systems.Core.csproj", "{36DBA7C4-EA4A-4F4D-82D3-D586E08346F6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Wecs.Systems.Core", "OpenBreed.Wecs.Systems.Core\OpenBreed.Wecs.Systems.Core.csproj", "{36DBA7C4-EA4A-4F4D-82D3-D586E08346F6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Animation.Generic", "OpenBreed.Animation.Generic\OpenBreed.Animation.Generic.csproj", "{877FEE86-A92F-4194-A7C3-70E069D1347A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Animation.Interface", "OpenBreed.Animation.Interface\OpenBreed.Animation.Interface.csproj", "{C064426D-B551-4C55-917B-65FA8F6F2C8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Components.Animation", "OpenBreed.Components.Animation\OpenBreed.Components.Animation.csproj", "{2AC675A2-6989-4EAA-B8E8-46D50DDB88C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Wecs.Components.Animation", "OpenBreed.Wecs.Components.Animation\OpenBreed.Wecs.Components.Animation.csproj", "{2AC675A2-6989-4EAA-B8E8-46D50DDB88C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Systems.Animation", "OpenBreed.Systems.Animation\OpenBreed.Systems.Animation.csproj", "{7D41F74D-CAFA-4AD2-A06A-230B50F43D31}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Wecs.Systems.Animation", "OpenBreed.Wecs.Systems.Animation\OpenBreed.Wecs.Systems.Animation.csproj", "{7D41F74D-CAFA-4AD2-A06A-230B50F43D31}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{117E35C5-A272-4591-A61E-4E42504AF6FE}"
 EndProject
@@ -88,11 +88,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Scripting.Interfa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Scripting.Lua", "OpenBreed.Scripting.Lua\OpenBreed.Scripting.Lua.csproj", "{CE239744-67DD-4E16-B79A-EB6EC47A3558}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Ecsw", "OpenBreed.Ecsw\OpenBreed.Ecsw.csproj", "{D22D74E0-7FE4-4278-A93B-9983B788F40E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Wecs", "OpenBreed.Wecs\OpenBreed.Wecs.csproj", "{D22D74E0-7FE4-4278-A93B-9983B788F40E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Components.Common", "OpenBreed.Components.Common\OpenBreed.Components.Common.csproj", "{983742FE-CB64-4BD9-BB24-90646172A0E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Wecs.Components.Common", "OpenBreed.Wecs.Components.Common\OpenBreed.Wecs.Components.Common.csproj", "{983742FE-CB64-4BD9-BB24-90646172A0E2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBreed.Fsm", "OpenBreed.Fsm\OpenBreed.Fsm.csproj", "{53D8026C-4C23-4BB7-B75A-03BE53F1F655}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wecs", "Wecs", "{6D181003-D8D4-46F6-9293-3B778CD94FBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -448,6 +450,8 @@ Global
 		{C064426D-B551-4C55-917B-65FA8F6F2C8D} = {FDDE652A-F7BD-4EB9-9B75-96E5BB6702CC}
 		{2AC675A2-6989-4EAA-B8E8-46D50DDB88C6} = {117E35C5-A272-4591-A61E-4E42504AF6FE}
 		{7D41F74D-CAFA-4AD2-A06A-230B50F43D31} = {875B70CE-FA5D-4049-831A-A3F538EA25BD}
+		{117E35C5-A272-4591-A61E-4E42504AF6FE} = {6D181003-D8D4-46F6-9293-3B778CD94FBB}
+		{875B70CE-FA5D-4049-831A-A3F538EA25BD} = {6D181003-D8D4-46F6-9293-3B778CD94FBB}
 		{4061AE76-DDD9-4FED-ACA3-1859A04F60C0} = {FDDE652A-F7BD-4EB9-9B75-96E5BB6702CC}
 		{7CD20CF7-1CB8-4351-BDA1-6376C7A1D5E2} = {FDDE652A-F7BD-4EB9-9B75-96E5BB6702CC}
 		{937DDE8D-E618-4620-BEEE-A834DA85FA97} = {FDDE652A-F7BD-4EB9-9B75-96E5BB6702CC}

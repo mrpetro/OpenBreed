@@ -81,13 +81,13 @@
       <Project>{95BDF122-FAC8-4AC4-B9A8-B549D942E37D}</Project>
       <Name>OpenBreed.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Ecsw\OpenBreed.Ecsw.csproj">
+    <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj">
       <Project>{D22D74E0-7FE4-4278-A93B-9983B788F40E}</Project>
-      <Name>OpenBreed.Ecsw</Name>
+      <Name>OpenBreed.Wecs</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Systems.Core\OpenBreed.Systems.Core.csproj">
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Core\OpenBreed.Wecs.Systems.Core.csproj">
       <Project>{36dba7c4-ea4a-4f4d-82d3-d586e08346f6}</Project>
-      <Name>OpenBreed.Systems.Core</Name>
+      <Name>OpenBreed.Wecs.Systems.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

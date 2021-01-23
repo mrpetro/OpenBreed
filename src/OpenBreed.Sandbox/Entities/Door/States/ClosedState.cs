@@ -1,17 +1,17 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Components.Common;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Core.Modules;
-using OpenBreed.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Door.States;
 using OpenTK;
 using System;
-using OpenBreed.Components.Physics;
+using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Fsm;
-using OpenBreed.Ecsw.Entities;
+using OpenBreed.Wecs.Entities;
 
 namespace OpenBreed.Sandbox.Components.States
 {

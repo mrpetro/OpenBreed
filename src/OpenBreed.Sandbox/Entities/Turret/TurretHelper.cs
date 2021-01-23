@@ -1,15 +1,15 @@
 ﻿using OpenBreed.Common.Tools;
-using OpenBreed.Components.Physics;
+using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Core;
-using OpenBreed.Components.Common;
-using OpenBreed.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Sandbox.Entities.Actor.States.Rotation;
 using OpenTK;
 using System;
 using OpenBreed.Animation.Interface;
-using OpenBreed.Ecsw.Entities;
-using OpenBreed.Ecsw.Entities.Xml;
-using OpenBreed.Ecsw;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Entities.Xml;
+using OpenBreed.Wecs;
 using OpenBreed.Fsm;
 
 namespace OpenBreed.Sandbox.Entities.Turret

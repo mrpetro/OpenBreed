@@ -1,7 +1,7 @@
 ﻿
 //using OpenBreed.Core.Common.Systems.Components;
 //using OpenBreed.Physics.Generic.Events;
-//using OpenBreed.Systems.Rendering.Commands;
+//using OpenBreed.Wecs.Systems.Rendering.Commands;
 //using OpenBreed.Core.States;
 //using OpenBreed.Sandbox.Entities.Projectile;
 //using OpenTK;

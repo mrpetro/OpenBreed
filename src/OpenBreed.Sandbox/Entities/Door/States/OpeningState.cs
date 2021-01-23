@@ -1,15 +1,15 @@
-﻿using OpenBreed.Systems.Rendering.Commands;
+﻿using OpenBreed.Wecs.Systems.Rendering.Commands;
 using System;
 using System.Linq;
 using OpenBreed.Core.Commands;
 using OpenBreed.Sandbox.Entities.Door.States;
-using OpenBreed.Components.Common;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Sandbox.Entities;
-using OpenBreed.Components.Physics;
-using OpenBreed.Systems.Animation.Commands;
-using OpenBreed.Systems.Animation.Events;
+using OpenBreed.Wecs.Components.Physics;
+using OpenBreed.Wecs.Systems.Animation.Commands;
+using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Fsm;
-using OpenBreed.Ecsw.Entities;
+using OpenBreed.Wecs.Entities;
 
 namespace OpenBreed.Sandbox.Components.States
 {

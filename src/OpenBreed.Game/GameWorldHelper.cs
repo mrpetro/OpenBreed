@@ -1,22 +1,22 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Components.Common;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Core.Events;
 using OpenBreed.Core.Managers;
-using OpenBreed.Ecsw.Systems;
+using OpenBreed.Wecs.Systems;
 using OpenBreed.Game.Entities;
-using OpenBreed.Components.Rendering;
-using OpenBreed.Systems.Rendering.Events;
+using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Systems.Core;
-using OpenBreed.Ecsw;
-using OpenBreed.Ecsw.Entities;
-using OpenBreed.Ecsw.Worlds;
+using OpenBreed.Wecs.Systems.Core;
+using OpenBreed.Wecs;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Game
 {

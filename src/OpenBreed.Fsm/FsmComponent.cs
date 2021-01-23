@@ -1,6 +1,6 @@
-﻿using OpenBreed.Components.Common;
+﻿using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Core;
-using OpenBreed.Ecsw.Components;
+using OpenBreed.Wecs.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;

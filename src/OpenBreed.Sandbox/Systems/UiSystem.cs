@@ -1,18 +1,18 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Components.Common;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Core.Helpers;
 using OpenBreed.Rendering.Interface;
-using OpenBreed.Systems.Rendering;
+using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Sandbox.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenBreed.Input.Interface;
-using OpenBreed.Ecsw;
-using OpenBreed.Ecsw.Entities;
-using OpenBreed.Ecsw.Systems;
-using OpenBreed.Ecsw.Worlds;
+using OpenBreed.Wecs;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems;
+using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Systems
 {

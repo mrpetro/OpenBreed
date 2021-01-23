@@ -1,15 +1,15 @@
 ﻿
 using OpenBreed.Core.Commands;
-using OpenBreed.Components.Common;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Core.Events;
-using OpenBreed.Systems.Rendering.Commands;
-using OpenBreed.Components.Control;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Components.Control;
 using OpenTK;
 using System;
 using System.Linq;
 using System.Timers;
 using OpenBreed.Fsm;
-using OpenBreed.Ecsw.Entities;
+using OpenBreed.Wecs.Entities;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {

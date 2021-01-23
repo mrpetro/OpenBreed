@@ -1,18 +1,18 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Components.Common;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Core.Events;
-using OpenBreed.Systems.Rendering.Commands;
-using OpenBreed.Components.Control;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Sandbox.Entities.Actor.States.Attacking;
 using OpenBreed.Sandbox.Entities.Projectile;
 using OpenTK;
 using System;
 using System.Linq;
-using OpenBreed.Systems.Control.Events;
+using OpenBreed.Wecs.Systems.Control.Events;
 using OpenBreed.Fsm;
-using OpenBreed.Ecsw.Entities;
-using OpenBreed.Ecsw;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {

@@ -3,11 +3,11 @@ using OpenTK;
 using System;
 using System.Linq;
 using OpenBreed.Core.Commands;
-using OpenBreed.Components.Common;
-using OpenBreed.Systems.Rendering.Commands;
-using OpenBreed.Systems.Animation.Commands;
-using OpenBreed.Systems.Control.Events;
-using OpenBreed.Ecsw.Entities;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Systems.Animation.Commands;
+using OpenBreed.Wecs.Systems.Control.Events;
+using OpenBreed.Wecs.Entities;
 using OpenBreed.Fsm;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Movement

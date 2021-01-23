@@ -1,14 +1,14 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Components.Common;
-using OpenBreed.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Ecsw;
-using OpenBreed.Ecsw.Entities;
+using OpenBreed.Wecs;
+using OpenBreed.Wecs.Entities;
 
 namespace OpenBreed.Sandbox.Jobs
 {

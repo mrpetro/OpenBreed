@@ -1,11 +1,11 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Components.Common;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Core.Events;
-using OpenBreed.Ecsw.Systems;
-using OpenBreed.Components.Rendering;
-using OpenBreed.Systems.Rendering;
-using OpenBreed.Systems.Rendering.Events;
+using OpenBreed.Wecs.Systems;
+using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Systems.Rendering;
+using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.FpsCounter;
@@ -13,11 +13,11 @@ using OpenTK;
 using OpenTK.Input;
 using System;
 using System.Linq;
-using OpenBreed.Systems.Core;
+using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Input.Interface;
-using OpenBreed.Ecsw;
-using OpenBreed.Ecsw.Entities;
-using OpenBreed.Ecsw.Worlds;
+using OpenBreed.Wecs;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Worlds
 {

@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Systems.Rendering.Commands;
-using OpenBreed.Components.Rendering;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.Teleport;
@@ -11,9 +11,9 @@ using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenBreed.Ecsw;
-using OpenBreed.Ecsw.Worlds;
-using OpenBreed.Ecsw.Entities;
+using OpenBreed.Wecs;
+using OpenBreed.Wecs.Worlds;
+using OpenBreed.Wecs.Entities;
 
 namespace OpenBreed.Sandbox.Worlds
 {

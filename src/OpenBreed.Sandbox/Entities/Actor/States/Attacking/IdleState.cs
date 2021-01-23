@@ -1,15 +1,15 @@
 ﻿
 using NLua;
 using OpenBreed.Core.Commands;
-using OpenBreed.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenBreed.Systems.Control.Events;
-using OpenBreed.Ecsw.Entities;
+using OpenBreed.Wecs.Systems.Control.Events;
+using OpenBreed.Wecs.Entities;
 using OpenBreed.Fsm;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking

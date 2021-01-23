@@ -1,11 +1,11 @@
 ﻿using OpenBreed.Core.Commands;
-using OpenBreed.Components.Common;
-using OpenBreed.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Sandbox.Helpers;
 using System;
 using System.Linq;
 using OpenBreed.Fsm;
-using OpenBreed.Ecsw.Entities;
+using OpenBreed.Wecs.Entities;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 {

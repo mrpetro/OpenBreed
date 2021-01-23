@@ -1,14 +1,14 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
-using OpenBreed.Components.Common;
-using OpenBreed.Components.Rendering;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Animation.Interface;
-using OpenBreed.Ecsw.Entities;
+using OpenBreed.Wecs.Entities;
 
 namespace OpenBreed.Sandbox.Entities.Camera
 {

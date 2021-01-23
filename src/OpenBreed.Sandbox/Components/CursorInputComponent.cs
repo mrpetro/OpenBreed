@@ -1,6 +1,6 @@
 ﻿
-using OpenBreed.Components.Common;
-using OpenBreed.Ecsw.Components;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components;
 
 namespace OpenBreed.Sandbox.Components
 {
