@@ -1,7 +1,8 @@
-﻿using System;
+﻿using OpenBreed.Ecsw.Worlds;
+using System;
 using System.Collections.ObjectModel;
 
-namespace OpenBreed.Ecsw
+namespace OpenBreed.Ecsw.Worlds
 {
     public interface IWorldMan
     {

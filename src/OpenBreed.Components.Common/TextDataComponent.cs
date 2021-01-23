@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenBreed.Ecsw.Components;
+using System;
 
 namespace OpenBreed.Components.Common
 {

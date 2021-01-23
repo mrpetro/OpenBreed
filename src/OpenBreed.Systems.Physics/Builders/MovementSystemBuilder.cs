@@ -3,7 +3,7 @@ using OpenBreed.Ecsw.Systems;
 
 namespace OpenBreed.Systems.Physics
 {
-    public class MovementSystemBuilder : IWorldSystemBuilder<MovementSystem>
+    public class MovementSystemBuilder : ISystemBuilder<MovementSystem>
     {
         #region Internal Fields
 

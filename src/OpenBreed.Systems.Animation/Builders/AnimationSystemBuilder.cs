@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Systems.Animation.Builders
 {
-    public class AnimationSystemBuilder : IWorldSystemBuilder<AnimationSystem>
+    public class AnimationSystemBuilder : ISystemBuilder<AnimationSystem>
     {
         #region Internal Fields
 

@@ -2,6 +2,7 @@
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
 using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Worlds;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenTK;
 using OpenTK.Graphics;

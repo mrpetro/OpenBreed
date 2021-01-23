@@ -69,14 +69,10 @@
     <Compile Include="AngularVelocityComponent.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="ClassComponent.cs" />
-    <Compile Include="ComponentFactoryBase.cs" />
     <Compile Include="EquipmentComponent.cs" />
     <Compile Include="FollowerComponent.cs" />
     <Compile Include="GroupComponent.cs" />
-    <Compile Include="IComponentFactory.cs" />
-    <Compile Include="IComponentTemplate.cs" />
     <Compile Include="IControlComponent.cs" />
-    <Compile Include="IEntityComponent.cs" />
     <Compile Include="InventoryComponent.cs" />
     <Compile Include="PauseImmuneComponent.cs" />
     <Compile Include="PositionComponent.cs" />
@@ -90,8 +86,6 @@
     <Compile Include="Xml\XmlAngularPositionComponent.cs" />
     <Compile Include="Xml\XmlClassComponent.cs" />
     <Compile Include="Xml\XmlColor4.cs" />
-    <Compile Include="Xml\XmlComponentsList.cs" />
-    <Compile Include="Xml\XmlComponentTemplate.cs" />
     <Compile Include="Xml\XmlPositionComponent.cs" />
     <Compile Include="Xml\XmlThrustComponent.cs" />
     <Compile Include="Xml\XmlTimerComponent.cs" />
@@ -106,6 +100,10 @@
     <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">
       <Project>{95BDF122-FAC8-4AC4-B9A8-B549D942E37D}</Project>
       <Name>OpenBreed.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Ecsw\OpenBreed.Ecsw.csproj">
+      <Project>{D22D74E0-7FE4-4278-A93B-9983B788F40E}</Project>
+      <Name>OpenBreed.Ecsw</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

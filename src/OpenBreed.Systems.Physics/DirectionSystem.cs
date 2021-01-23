@@ -16,7 +16,7 @@ using OpenBreed.Ecsw.Entities;
 
 namespace OpenBreed.Systems.Physics
 {
-    public class DirectionSystem : WorldSystem, IUpdatableSystem
+    public class DirectionSystem : SystemBase, IUpdatableSystem
     {
         private const float FLOOR_FRICTION = 1.0f;
 

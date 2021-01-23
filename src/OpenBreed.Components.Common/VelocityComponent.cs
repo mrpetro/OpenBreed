@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Ecsw.Components;
 using OpenTK;
 using System;
 

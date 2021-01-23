@@ -15,6 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Ecsw;
 using OpenBreed.Ecsw.Entities;
+using OpenBreed.Ecsw.Worlds;
 
 namespace OpenBreed.Sandbox.Entities.FpsCounter
 {

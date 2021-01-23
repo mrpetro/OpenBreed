@@ -5,6 +5,7 @@ using OpenBreed.Physics.Interface;
 using OpenTK;
 using System;
 using System.Collections.Generic;
+using OpenBreed.Ecsw.Components;
 
 namespace OpenBreed.Components.Physics
 {

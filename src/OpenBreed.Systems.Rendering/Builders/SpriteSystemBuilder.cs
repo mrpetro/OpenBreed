@@ -4,7 +4,7 @@ using OpenBreed.Systems.Rendering;
 
 namespace OpenBreed.Systems.Rendering.Builders
 {
-    public class SpriteSystemBuilder : IWorldSystemBuilder<SpriteSystem>
+    public class SpriteSystemBuilder : ISystemBuilder<SpriteSystem>
     {
         #region Internal Fields
 

@@ -87,10 +87,6 @@
       <Project>{d22d74e0-7fe4-4278-a93b-9983b788f40e}</Project>
       <Name>OpenBreed.Ecsw</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Fsm.Interface\OpenBreed.Fsm.Interface.csproj">
-      <Project>{56c2920f-61e4-436d-bc6e-9f964098e097}</Project>
-      <Name>OpenBreed.Fsm.Interface</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,6 +1,8 @@
-﻿using OpenBreed.Ecsw.Systems;
+﻿using OpenBreed.Ecsw.Entities;
+using OpenBreed.Ecsw.Systems;
+using OpenBreed.Ecsw.Worlds;
 
-namespace OpenBreed.Ecsw
+namespace OpenBreed.Ecsw.Systems
 {
     public class SystemFinder : ISystemFinder
     {
@@ -24,7 +26,7 @@ namespace OpenBreed.Ecsw
 
         #region Public Methods
 
-        public T GetSystemByEntityId<T>(int entityId) where T : IWorldSystem
+        public T GetSystemByEntityId<T>(int entityId) where T : ISystem
         {
             var entity = entityMan.GetById(entityId);
             if (entity.World == null)
@@ -36,7 +38,7 @@ namespace OpenBreed.Ecsw
             return system;
         }
 
-        public T GetSystemByWorldId<T>(int worldId) where T : IWorldSystem
+        public T GetSystemByWorldId<T>(int worldId) where T : ISystem
         {
             var world = worldMan.GetById(worldId);
             if (world == null)

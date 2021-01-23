@@ -21,7 +21,7 @@ using OpenBreed.Ecsw;
 
 namespace OpenBreed.Systems.Rendering
 {
-    public class TileSystem : WorldSystem, IRenderableSystem
+    public class TileSystem : SystemBase, IRenderableSystem
     {
         #region Public Fields
 

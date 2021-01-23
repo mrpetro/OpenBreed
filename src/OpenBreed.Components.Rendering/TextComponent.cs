@@ -5,6 +5,7 @@ using OpenTK;
 using OpenTK.Graphics;
 using System;
 using System.Collections.Generic;
+using OpenBreed.Ecsw.Components;
 
 namespace OpenBreed.Components.Rendering
 {

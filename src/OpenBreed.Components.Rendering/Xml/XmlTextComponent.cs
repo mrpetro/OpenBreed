@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Components.Common.Xml;
+using OpenBreed.Ecsw.Components.Xml;
 using OpenTK;
 using OpenTK.Graphics;
 using System.Xml.Serialization;

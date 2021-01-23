@@ -3,6 +3,7 @@ using OpenBreed.Components.Common;
 using OpenTK;
 using OpenTK.Graphics;
 using System;
+using OpenBreed.Ecsw.Components;
 
 namespace OpenBreed.Components.Rendering
 {

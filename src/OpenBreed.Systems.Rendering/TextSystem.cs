@@ -19,7 +19,7 @@ using OpenBreed.Ecsw;
 
 namespace OpenBreed.Systems.Rendering
 {
-    public class TextSystem : WorldSystem, IRenderableSystem
+    public class TextSystem : SystemBase, IRenderableSystem
     {
         #region Private Fields
 

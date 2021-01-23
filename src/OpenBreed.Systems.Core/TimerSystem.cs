@@ -14,7 +14,7 @@ using OpenBreed.Ecsw;
 
 namespace OpenBreed.Systems.Core
 {
-    public class TimerSystem : WorldSystem, IUpdatableSystem
+    public class TimerSystem : SystemBase, IUpdatableSystem
     {
         #region Private Fields
 

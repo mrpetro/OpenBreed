@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Components.Common
+namespace OpenBreed.Ecsw.Components
 {
-    public interface IComponentFactory
+    public interface IComponentTemplate
     {
-        IEntityComponent Create(IComponentTemplate data);
     }
 }

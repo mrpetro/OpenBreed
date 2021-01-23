@@ -64,29 +64,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="ComponentsMan.cs" />
+    <Compile Include="Components\ComponentFactoryBase.cs" />
+    <Compile Include="Components\ComponentsMan.cs" />
+    <Compile Include="Components\IComponentFactory.cs" />
+    <Compile Include="Components\IComponentTemplate.cs" />
+    <Compile Include="Components\IEntityComponent.cs" />
+    <Compile Include="Components\Xml\XmlComponentsList.cs" />
+    <Compile Include="Components\Xml\XmlComponentTemplate.cs" />
     <Compile Include="Entities\Builders\EntityBuilder.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\IEntityBuilder.cs" />
     <Compile Include="Entities\IEntityTemplate.cs" />
     <Compile Include="Entities\Xml\XmlEntityTemplate.cs" />
-    <Compile Include="EntityFactory.cs" />
-    <Compile Include="EntityJob.cs" />
-    <Compile Include="EntityMan.cs" />
-    <Compile Include="IEntityMan.cs" />
-    <Compile Include="ISystemFinder.cs" />
-    <Compile Include="IWorldMan.cs" />
+    <Compile Include="Entities\EntityFactory.cs" />
+    <Compile Include="Entities\EntityJob.cs" />
+    <Compile Include="Entities\EntityMan.cs" />
+    <Compile Include="Entities\IEntityMan.cs" />
+    <Compile Include="Systems\ISystemFinder.cs" />
+    <Compile Include="Worlds\IWorldMan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SystemFinder.cs" />
-    <Compile Include="Systems\ISystem.cs" />
+    <Compile Include="Systems\SystemFinder.cs" />
     <Compile Include="Systems\IUpdatableSystem.cs" />
-    <Compile Include="Systems\IWorldSystem.cs" />
-    <Compile Include="Systems\IWorldSystemBuilder.cs" />
-    <Compile Include="World.cs" />
-    <Compile Include="WorldBuilder.cs" />
-    <Compile Include="WorldJob.cs" />
-    <Compile Include="WorldMan.cs" />
+    <Compile Include="Systems\ISystem.cs" />
+    <Compile Include="Systems\ISystemBuilder.cs" />
+    <Compile Include="Systems\SystemBase.cs" />
+    <Compile Include="Worlds\World.cs" />
+    <Compile Include="Worlds\WorldBuilder.cs" />
+    <Compile Include="Worlds\WorldJob.cs" />
+    <Compile Include="Worlds\WorldMan.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj">
@@ -97,10 +102,6 @@
       <Project>{9894E7F4-7C85-4173-9D05-F50CFD2E4163}</Project>
       <Name>OpenBreed.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Components.Common\OpenBreed.Components.Common.csproj">
-      <Project>{983742FE-CB64-4BD9-BB24-90646172A0E2}</Project>
-      <Name>OpenBreed.Components.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">
       <Project>{95BDF122-FAC8-4AC4-B9A8-B549D942E37D}</Project>
       <Name>OpenBreed.Core</Name>
@@ -110,9 +111,7 @@
       <Name>OpenBreed.Scripting.Interface</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Fsm\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />

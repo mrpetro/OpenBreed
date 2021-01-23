@@ -1,4 +1,5 @@
-﻿using OpenTK;
+﻿using OpenBreed.Ecsw.Components;
+using OpenTK;
 using OpenTK.Graphics;
 using System.Collections.Generic;
 

@@ -10,7 +10,7 @@ using OpenBreed.Ecsw;
 
 namespace OpenBreed.Systems.Core
 {
-    public class TextInputSystem : WorldSystem, IUpdatableSystem
+    public class TextInputSystem : SystemBase, IUpdatableSystem
     {
         #region Private Fields
 

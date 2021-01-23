@@ -28,7 +28,7 @@ namespace OpenBreed.Systems.Rendering
     /// - CameraComponent
     /// - Position
     /// </summary>
-    public class ViewportSystem : WorldSystem, IRenderableSystem
+    public class ViewportSystem : SystemBase, IRenderableSystem
     {
         #region Private Fields
 

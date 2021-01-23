@@ -1,5 +1,6 @@
 ﻿
 using OpenBreed.Components.Common;
+using OpenBreed.Ecsw.Components;
 
 namespace OpenBreed.Sandbox.Components
 {

@@ -3,7 +3,7 @@ using OpenBreed.Ecsw.Systems;
 
 namespace OpenBreed.Systems.Audio.Builders
 {
-    public class SoundSystemBuilder : IWorldSystemBuilder<SoundSystem>
+    public class SoundSystemBuilder : ISystemBuilder<SoundSystem>
     {
         #region Internal Fields
 

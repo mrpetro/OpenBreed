@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Commands;
+using OpenBreed.Ecsw.Components;
 using System.Collections.Generic;
 
 namespace OpenBreed.Components.Common

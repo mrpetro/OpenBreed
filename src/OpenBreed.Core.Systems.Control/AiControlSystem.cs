@@ -16,7 +16,7 @@ namespace OpenBreed.Systems.Control
     /// <summary>
     /// Control system should be used to control actions
     /// </summary>
-    public class AiControlSystem : WorldSystem, IUpdatableSystem
+    public class AiControlSystem : SystemBase, IUpdatableSystem
     {
         #region Private Fields
 

@@ -16,7 +16,7 @@ using OpenBreed.Components.Common;
 
 namespace OpenBreed.Systems.Rendering
 {
-    public class TextPresenterSystem : WorldSystem, IRenderableSystem
+    public class TextPresenterSystem : SystemBase, IRenderableSystem
     {
         #region Private Fields
 

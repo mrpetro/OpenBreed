@@ -1,6 +1,6 @@
 ﻿namespace OpenBreed.Ecsw.Systems
 {
-    public interface IWorldSystemBuilder<T> where T : IWorldSystem
+    public interface ISystemBuilder<T> where T : ISystem
     {
         #region Public Methods
 

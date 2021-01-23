@@ -30,6 +30,9 @@ using OpenBreed.Ecsw.Entities.Xml;
 using OpenBreed.Ecsw;
 using OpenBreed.Fsm;
 using OpenBreed.Fsm.Xml;
+using OpenBreed.Ecsw.Entities;
+using OpenBreed.Ecsw.Worlds;
+using OpenBreed.Ecsw.Components.Xml;
 
 namespace OpenBreed.Game
 {

@@ -15,7 +15,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
-namespace OpenBreed.Ecsw
+namespace OpenBreed.Ecsw.Worlds
 {
     /// <summary>
     /// World class which contains systems and entities
@@ -36,7 +36,7 @@ namespace OpenBreed.Ecsw
         private readonly List<Entity> entities = new List<Entity>();
         private readonly List<Entity> toAdd = new List<Entity>();
         private readonly List<Entity> toRemove = new List<Entity>();
-        private readonly List<IWorldSystem> systems = new List<IWorldSystem>();
+        private readonly List<ISystem> systems = new List<ISystem>();
 
         private float timeMultiplier = 1.0f;
 
@@ -52,7 +52,7 @@ namespace OpenBreed.Ecsw
             Entities = new ReadOnlyCollection<Entity>(entities);
 
             systems = builder.systems;
-            Systems = new ReadOnlyCollection<IWorldSystem>(systems);
+            Systems = new ReadOnlyCollection<ISystem>(systems);
 
             Core.GetManager<IWorldMan>().RegisterWorld(this);
 
@@ -91,7 +91,7 @@ namespace OpenBreed.Ecsw
 
         public ReadOnlyCollection<Entity> Entities { get; }
 
-        public ReadOnlyCollection<IWorldSystem> Systems { get; }
+        public ReadOnlyCollection<ISystem> Systems { get; }
 
         /// <summary>
         /// Id of this world
@@ -122,7 +122,7 @@ namespace OpenBreed.Ecsw
                 RemoveEntity(entities[i]);
         }
 
-        public T GetSystem<T>() where T : IWorldSystem
+        public T GetSystem<T>() where T : ISystem
         {
             return systems.OfType<T>().FirstOrDefault();
         }

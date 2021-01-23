@@ -3,7 +3,7 @@ using OpenBreed.Ecsw.Systems;
 using System;
 using System.Collections.Generic;
 
-namespace OpenBreed.Ecsw
+namespace OpenBreed.Ecsw.Worlds
 {
     public class WorldBuilder
     {
@@ -17,7 +17,7 @@ namespace OpenBreed.Ecsw
         #region Internal Fields
 
         internal string name;
-        internal List<IWorldSystem> systems = new List<IWorldSystem>();
+        internal List<ISystem> systems = new List<ISystem>();
 
         #endregion Internal Fields
 
@@ -37,7 +37,7 @@ namespace OpenBreed.Ecsw
             this.core = core;
         }
 
-        public void AddSystem(IWorldSystem system)
+        public void AddSystem(ISystem system)
         {
             if (systems.Contains(system))
                 throw new InvalidOperationException($"System '{system}' already added.");

@@ -1,10 +1,10 @@
 ﻿using OpenBreed.Animation.Generic;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Core;
-using OpenBreed.Components.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenBreed.Ecsw.Components;
 
 namespace OpenBreed.Components.Animation
 {

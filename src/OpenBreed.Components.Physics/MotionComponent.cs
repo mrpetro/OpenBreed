@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Components.Common;
 using OpenTK;
+using OpenBreed.Ecsw.Components;
 
 namespace OpenBreed.Components.Physics
 {

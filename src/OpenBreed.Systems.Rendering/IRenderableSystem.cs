@@ -6,7 +6,7 @@ namespace OpenBreed.Systems.Rendering
     /// <summary>
     /// System that state will be rendered to parricular viewport during core render phase
     /// </summary>
-    public interface IRenderableSystem : IWorldSystem
+    public interface IRenderableSystem : ISystem
     {
         #region Public Methods
 

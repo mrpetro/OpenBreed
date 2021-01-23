@@ -1,4 +1,4 @@
-﻿using OpenBreed.Components.Common;
+﻿using OpenBreed.Ecsw.Components;
 using OpenBreed.Ecsw.Entities;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Ecsw
+namespace OpenBreed.Ecsw.Entities
 {
     public interface IEntityMan
     {

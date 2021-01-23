@@ -20,7 +20,7 @@ using OpenBreed.Ecsw;
 
 namespace OpenBreed.Systems.Physics
 {
-    public class PhysicsSystem : WorldSystem, IUpdatableSystem
+    public class PhysicsSystem : SystemBase, IUpdatableSystem
     {
         #region Private Fields
 

@@ -69,7 +69,6 @@
     <Compile Include="StateMachineSystem.cs" />
     <Compile Include="TextInputSystem.cs" />
     <Compile Include="TimerSystem.cs" />
-    <Compile Include="WorldSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
@@ -87,10 +86,6 @@
     <ProjectReference Include="..\OpenBreed.Ecsw\OpenBreed.Ecsw.csproj">
       <Project>{D22D74E0-7FE4-4278-A93B-9983B788F40E}</Project>
       <Name>OpenBreed.Ecsw</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Fsm.Interface\OpenBreed.Fsm.Interface.csproj">
-      <Project>{56C2920F-61E4-436D-BC6E-9F964098E097}</Project>
-      <Name>OpenBreed.Fsm.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Fsm\OpenBreed.Fsm.csproj">
       <Project>{53D8026C-4C23-4BB7-B75A-03BE53F1F655}</Project>

@@ -7,8 +7,10 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using OpenBreed.Common.Tools.Collections;
+using OpenBreed.Ecsw.Worlds;
+using OpenBreed.Ecsw.Entities;
 
-namespace OpenBreed.Ecsw
+namespace OpenBreed.Ecsw.Worlds
 {
     /// <summary>
     /// Manager responsible for creating, removing and updating core worlds

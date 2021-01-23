@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace OpenBreed.Components.Common.Xml
+namespace OpenBreed.Ecsw.Components.Xml
 {
     public class XmlComponentsList : List<XmlComponentTemplate>, IXmlSerializable
     {

@@ -3,7 +3,7 @@ using OpenBreed.Ecsw.Systems;
 
 namespace OpenBreed.Systems.Control.Builders
 {
-    public class AiControlSystemBuilder : IWorldSystemBuilder<AiControlSystem>
+    public class AiControlSystemBuilder : ISystemBuilder<AiControlSystem>
     {
         #region Internal Fields
 

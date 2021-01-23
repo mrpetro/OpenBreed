@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Core;
 using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Worlds;
 
 namespace OpenBreed.Sandbox.Worlds
 {

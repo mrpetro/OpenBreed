@@ -6,6 +6,7 @@ using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Core.Modules;
 using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Worlds;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Helpers;

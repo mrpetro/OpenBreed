@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Core.Commands;
-using OpenBreed.Components.Common;
 using OpenBreed.Core.Events;
 using System;
 using System.Collections.Generic;
@@ -8,8 +7,10 @@ using OpenBreed.Common.Tools.Collections;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Ecsw.Entities;
+using OpenBreed.Ecsw.Worlds;
+using OpenBreed.Ecsw.Components;
 
-namespace OpenBreed.Ecsw
+namespace OpenBreed.Ecsw.Entities
 {
     public class EntityMan : IEntityMan
     {

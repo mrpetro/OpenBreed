@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Fsm.Interface
+namespace OpenBreed.Ecsw.Components.Xml
 {
-    public class Class1
+    public class XmlComponentTemplate : IComponentTemplate
     {
     }
 }

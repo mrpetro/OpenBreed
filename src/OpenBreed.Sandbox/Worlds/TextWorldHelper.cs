@@ -17,6 +17,7 @@ using OpenBreed.Systems.Core;
 using OpenBreed.Input.Interface;
 using OpenBreed.Ecsw;
 using OpenBreed.Ecsw.Entities;
+using OpenBreed.Ecsw.Worlds;
 
 namespace OpenBreed.Sandbox.Worlds
 {

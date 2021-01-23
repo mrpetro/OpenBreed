@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using OpenBreed.Ecsw.Components.Xml;
+using System.Xml.Serialization;
 
 namespace OpenBreed.Components.Common.Xml
 {

@@ -12,6 +12,7 @@ using OpenBreed.Rendering.Interface;
 using OpenBreed.Components.Rendering;
 using OpenBreed.Ecsw;
 using OpenBreed.Ecsw.Entities;
+using OpenBreed.Ecsw.Worlds;
 
 namespace OpenBreed.Sandbox.Entities
 {

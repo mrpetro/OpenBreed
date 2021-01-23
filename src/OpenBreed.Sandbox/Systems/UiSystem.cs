@@ -8,14 +8,15 @@ using OpenBreed.Sandbox.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenBreed.Systems.Core;
 using OpenBreed.Input.Interface;
 using OpenBreed.Ecsw;
 using OpenBreed.Ecsw.Entities;
+using OpenBreed.Ecsw.Systems;
+using OpenBreed.Ecsw.Worlds;
 
 namespace OpenBreed.Sandbox.Systems
 {
-    public class UiSystem : WorldSystem
+    public class UiSystem : SystemBase
     {
         #region Private Fields
 

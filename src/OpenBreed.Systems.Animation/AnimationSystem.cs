@@ -21,7 +21,7 @@ using OpenBreed.Ecsw;
 
 namespace OpenBreed.Systems.Animation
 {
-    public class AnimationSystem : WorldSystem, IUpdatableSystem
+    public class AnimationSystem : SystemBase, IUpdatableSystem
     {
         #region Private Fields
 

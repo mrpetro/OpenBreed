@@ -1,5 +1,5 @@
-﻿using OpenBreed.Components.Common;
-using OpenBreed.Components.Common.Xml;
+﻿using OpenBreed.Ecsw.Components;
+using OpenBreed.Ecsw.Components.Xml;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Components.Common;
 using OpenBreed.Rendering.Interface;
 using System;
+using OpenBreed.Ecsw.Components;
 
 namespace OpenBreed.Components.Rendering
 {

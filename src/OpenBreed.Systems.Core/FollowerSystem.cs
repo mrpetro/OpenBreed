@@ -14,7 +14,7 @@ using OpenBreed.Ecsw;
 
 namespace OpenBreed.Systems.Core
 {
-    public class FollowerSystem : WorldSystem, IUpdatableSystem
+    public class FollowerSystem : SystemBase, IUpdatableSystem
     {
         #region Private Fields
 

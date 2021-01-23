@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Components.Common;
+using OpenBreed.Ecsw.Components;
 using OpenTK.Graphics;
 
 namespace OpenBreed.Components.Rendering

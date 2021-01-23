@@ -4,7 +4,7 @@ using OpenBreed.Systems.Rendering;
 
 namespace OpenBreed.Systems.Rendering.Builders
 {
-    public class TileSystemBuilder : IWorldSystemBuilder<TileSystem>
+    public class TileSystemBuilder : ISystemBuilder<TileSystem>
     {
         #region Internal Fields
 

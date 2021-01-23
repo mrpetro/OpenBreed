@@ -3,7 +3,7 @@ using OpenBreed.Core.Commands;
 using OpenBreed.Ecsw.Entities;
 using System;
 
-namespace OpenBreed.Ecsw
+namespace OpenBreed.Ecsw.Entities
 {
     public class EntityJob : IJob
     {

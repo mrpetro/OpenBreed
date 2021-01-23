@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenBreed.Components.Common;
+using OpenBreed.Ecsw.Components;
 using OpenBreed.Ecsw.Entities;
+using OpenBreed.Ecsw.Systems;
 using OpenBreed.Systems.Audio.Builders;
-using OpenBreed.Systems.Core;
 
 namespace OpenBreed.Systems.Audio
 {
-    public class SoundSystem : WorldSystem
+    public class SoundSystem : SystemBase
     {
         #region Private Fields
 

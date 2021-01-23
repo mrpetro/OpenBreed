@@ -14,6 +14,7 @@ using OpenBreed.Systems.Rendering.Events;
 using OpenBreed.Systems.Rendering;
 using OpenBreed.Ecsw;
 using OpenBreed.Ecsw.Entities;
+using OpenBreed.Ecsw.Worlds;
 
 namespace OpenBreed.Sandbox.Worlds
 {

@@ -1,4 +1,6 @@
 ﻿
+using OpenBreed.Ecsw.Components;
+
 namespace OpenBreed.Components.Common
 {
     public struct Slot

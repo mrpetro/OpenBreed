@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using OpenBreed.Systems.Rendering.Events;
 using OpenBreed.Ecsw;
 using OpenBreed.Ecsw.Entities;
+using OpenBreed.Ecsw.Worlds;
 
 namespace OpenBreed.Game
 {

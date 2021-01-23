@@ -1,16 +1,17 @@
 ﻿using OpenBreed.Core.Commands;
 using OpenBreed.Core;
-using OpenBreed.Components.Common;
 using OpenBreed.Ecsw.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenBreed.Ecsw.Systems;
 using OpenBreed.Ecsw;
+using OpenBreed.Ecsw.Worlds;
+using OpenBreed.Ecsw.Components;
 
-namespace OpenBreed.Systems.Core
+namespace OpenBreed.Ecsw.Systems
 {
-    public abstract class WorldSystem : IWorldSystem
+    public abstract class SystemBase : ISystem
     {
         #region Private Fields
 
@@ -23,7 +24,7 @@ namespace OpenBreed.Systems.Core
 
         #region Protected Constructors
 
-        protected WorldSystem(ICore core)
+        protected SystemBase(ICore core)
         {
             Core = core;
         }

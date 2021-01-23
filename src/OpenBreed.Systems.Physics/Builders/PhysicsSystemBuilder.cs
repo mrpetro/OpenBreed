@@ -3,7 +3,7 @@ using OpenBreed.Ecsw.Systems;
 
 namespace OpenBreed.Systems.Physics
 {
-    public class PhysicsSystemBuilder : IWorldSystemBuilder<PhysicsSystem>
+    public class PhysicsSystemBuilder : ISystemBuilder<PhysicsSystem>
     {
         #region Internal Fields
 

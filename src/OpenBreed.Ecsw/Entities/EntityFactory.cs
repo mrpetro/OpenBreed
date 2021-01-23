@@ -1,10 +1,10 @@
-﻿using OpenBreed.Components.Common;
+﻿using OpenBreed.Ecsw.Components;
 using OpenBreed.Ecsw.Entities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace OpenBreed.Ecsw
+namespace OpenBreed.Ecsw.Entities
 {
     public interface IEntityFactory
     {

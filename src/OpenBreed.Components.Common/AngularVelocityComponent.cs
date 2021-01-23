@@ -1,4 +1,5 @@
-﻿using OpenTK;
+﻿using OpenBreed.Ecsw.Components;
+using OpenTK;
 using System;
 
 namespace OpenBreed.Components.Common

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using OpenBreed.Ecsw.Components;
+using System.Collections.Generic;
 
 namespace OpenBreed.Components.Common
 {

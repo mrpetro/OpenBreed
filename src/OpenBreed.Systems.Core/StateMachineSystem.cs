@@ -11,11 +11,10 @@ using OpenBreed.Ecsw.Systems;
 using OpenBreed.Ecsw.Entities;
 using OpenBreed.Ecsw;
 using OpenBreed.Fsm;
-using OpenBreed.Fsm.Interface;
 
 namespace OpenBreed.Systems.Core
 {
-    public class StateMachineSystem : WorldSystem, IUpdatableSystem
+    public class StateMachineSystem : SystemBase, IUpdatableSystem
     {
         #region Private Fields
 

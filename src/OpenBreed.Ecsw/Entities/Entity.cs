@@ -1,10 +1,11 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Components.Common;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using OpenBreed.Ecsw.Worlds;
+using OpenBreed.Ecsw.Components;
 
 namespace OpenBreed.Ecsw.Entities
 {

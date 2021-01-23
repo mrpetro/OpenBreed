@@ -1,4 +1,4 @@
-﻿using OpenBreed.Components.Common;
+﻿using OpenBreed.Ecsw.Components;
 using System.Collections.Generic;
 
 namespace OpenBreed.Ecsw.Entities

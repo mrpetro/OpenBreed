@@ -5,7 +5,7 @@ using OpenBreed.Systems.Rendering;
 
 namespace OpenBreed.Systems.Rendering.Builders
 {
-    public class ViewportSystemBuilder : IWorldSystemBuilder<ViewportSystem>
+    public class ViewportSystemBuilder : ISystemBuilder<ViewportSystem>
     {
         #region Internal Fields
 

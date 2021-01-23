@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Components.Common;
+using OpenBreed.Ecsw.Components;
 using System;
 
 namespace OpenBreed.Components.Audio

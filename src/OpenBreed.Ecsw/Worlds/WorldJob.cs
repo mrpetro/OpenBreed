@@ -2,7 +2,7 @@
 using OpenBreed.Core.Managers;
 using System;
 
-namespace OpenBreed.Ecsw
+namespace OpenBreed.Ecsw.Worlds
 {
     public class WorldJob<TEventArgs> : IJob where TEventArgs : EventArgs
     {

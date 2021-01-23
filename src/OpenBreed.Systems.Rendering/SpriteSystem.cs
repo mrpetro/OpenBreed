@@ -17,7 +17,7 @@ using OpenBreed.Ecsw;
 
 namespace OpenBreed.Systems.Rendering
 {
-    public class SpriteSystem : WorldSystem, IRenderableSystem
+    public class SpriteSystem : SystemBase, IRenderableSystem
     {
         #region Private Fields
 

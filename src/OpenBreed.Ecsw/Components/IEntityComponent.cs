@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenBreed.Components.Common
+namespace OpenBreed.Ecsw.Components
 {
     /// <summary>
     /// Component inteface for all entities

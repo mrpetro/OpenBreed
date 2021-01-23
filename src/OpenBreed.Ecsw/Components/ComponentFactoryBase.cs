@@ -1,6 +1,6 @@
 ﻿using OpenBreed.Core;
 
-namespace OpenBreed.Components.Common
+namespace OpenBreed.Ecsw.Components
 {
     public abstract class ComponentFactoryBase<TComponentTemplate> : IComponentFactory where TComponentTemplate : IComponentTemplate
     {
