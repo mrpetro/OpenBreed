@@ -1,15 +1,15 @@
 ﻿using System;
 
-namespace OpenBreed.Core.Events
+namespace OpenBreed.Wecs.Systems.Core.Events
 {
     /// <summary>
     /// Event args for event that occurs when timer has elapsed
     /// </summary>
-    public class TimerUpdateEventArgs : EventArgs
+    public class TimerElapsedEventArgs : EventArgs
     {
         #region Public Constructors
 
-        public TimerUpdateEventArgs(int timerId)
+        public TimerElapsedEventArgs(int timerId)
         {
             TimerId = timerId;
         }

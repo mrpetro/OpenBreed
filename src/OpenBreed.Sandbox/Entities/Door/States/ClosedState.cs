@@ -70,7 +70,7 @@ namespace OpenBreed.Sandbox.Components.States
 
         private void DoorOpenTriggerCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
         {
-            entityA.Core.Commands.Post(new SetStateCommand(entityA.Id, FsmId, (int)FunctioningImpulse.Open));
+            entityA.Core.Commands.Post(new SetEntityStateCommand(entityA.Id, FsmId, (int)FunctioningImpulse.Open));
         }
 
         public void LeaveState(Entity entity)

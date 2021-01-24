@@ -45,7 +45,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 
             //Entity.Impulse<AttackingState, AttackingImpulse>(AttackingImpulse.Wait);
             //entity.PostCommand(new EntitySetStateCommand(entity.Id, "AttackingState", "Wait"));
-            entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Wait));
+            entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Wait));
         }
 
         public void LeaveState(Entity entity)

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenBreed.Core.Events
+namespace OpenBreed.Wecs.Events
 {
     public class EntityComponentChangedEventArgs<TComponent> : EventArgs
     {

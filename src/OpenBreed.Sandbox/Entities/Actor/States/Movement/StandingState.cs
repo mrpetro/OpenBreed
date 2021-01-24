@@ -73,7 +73,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
             if (eventArgs.Direction != Vector2.Zero)
             {
-                entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)MovementImpulse.Walk));
+                entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)MovementImpulse.Walk));
 
                 var angularThrust = entity.Get<AngularVelocityComponent>();
                 angularThrust.SetDirection(new Vector2(eventArgs.Direction.X, eventArgs.Direction.Y));

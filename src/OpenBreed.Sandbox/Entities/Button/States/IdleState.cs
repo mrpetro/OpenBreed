@@ -56,7 +56,7 @@ namespace OpenBreed.Sandbox.Entities.Button.States
         private void OnAnimStopped(object sender, AnimStoppedEventArgs eventArgs)
         {
             var entity = sender as Entity;
-            entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)ButtonImpulse.Press));
+            entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)ButtonImpulse.Press));
 
         }
 

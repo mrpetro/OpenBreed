@@ -10,6 +10,8 @@ using System.Linq;
 using System.Timers;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Core.Commands;
+using OpenBreed.Wecs.Systems.Core.Events;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 {
@@ -53,9 +55,9 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             var cc = entity.Get<AttackControl>();
 
             if (cc.AttackPrimary)
-                entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Shoot));
+                entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Shoot));
             else
-                entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Stop));
+                entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Stop));
         }
 
         public void Initialize(Entity entity) 

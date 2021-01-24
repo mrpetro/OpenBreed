@@ -17,6 +17,8 @@ using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
+using OpenBreed.Wecs.Systems.Control.Systems;
+using OpenBreed.Wecs.Events;
 
 namespace OpenBreed.Game
 {
@@ -30,7 +32,7 @@ namespace OpenBreed.Game
             //builder.AddSystem(game.CreateAnimationSystem().Build());
 
             builder.AddSystem(new TimerSystem(game));
-            builder.AddSystem(new StateMachineSystem(game));
+            builder.AddSystem(new FsmSystem(game));
 
             ////Audio
             //builder.AddSystem(core.CreateSoundSystem().Build());

@@ -41,7 +41,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             var entity = sender as Entity;
 
             if (eventArgs.Fire)
-                entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Shoot));
+                entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Shoot));
         }
 
     }

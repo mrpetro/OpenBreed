@@ -1,30 +1,31 @@
-﻿namespace OpenBreed.Core.Commands
+﻿using OpenBreed.Core.Commands;
+
+namespace OpenBreed.Wecs.Commands
 {
-    public class SetStateCommand : ICommand
+    public class AddEntityCommand : ICommand
     {
         #region Public Fields
 
-        public const string TYPE = "SET_STATE";
+        public const string TYPE = "ADD_ENTITY";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public SetStateCommand(int entityId, int fsmId, int impulseId)
+        public AddEntityCommand(int worldId, int entityId)
         {
+            WorldId = worldId;
             EntityId = entityId;
-            FsmId = fsmId;
-            ImpulseId = impulseId;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
+        public int WorldId { get; }
         public int EntityId { get; }
+
         public string Name { get { return TYPE; } }
-        public int FsmId { get; }
-        public int ImpulseId { get; }
 
         #endregion Public Properties
     }

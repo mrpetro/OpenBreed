@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Core;
 using System;
 
-namespace OpenBreed.Core.Events
+namespace OpenBreed.Wecs.Events
 {
     /// <summary>
     /// Event args for event that occurs when world is deinitialized

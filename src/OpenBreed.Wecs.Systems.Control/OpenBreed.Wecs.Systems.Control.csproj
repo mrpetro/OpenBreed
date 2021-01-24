@@ -74,12 +74,15 @@
   <ItemGroup>
     <Compile Include="Builders\AiControlSystemBuilder.cs" />
     <Compile Include="Builders\WalkingControlSystemBuilder.cs" />
+    <Compile Include="Commands\FollowedAddFollowerCommand.cs" />
+    <Compile Include="Commands\FollowerSetTargetCommand.cs" />
     <Compile Include="Events\ControlFireChangedEvenrArgs.cs" />
     <Compile Include="Events\ControlDirectionChangedEventArgs.cs" />
     <Compile Include="Commands\AttackControlCommand.cs" />
     <Compile Include="Commands\WalkingControlCommand.cs" />
     <Compile Include="AiControlSystem.cs" />
     <Compile Include="Systems\AttackingControlHandler.cs" />
+    <Compile Include="Systems\FollowerSystem.cs" />
     <Compile Include="Systems\WalkingControlHandler.cs" />
     <Compile Include="WalkingControlSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

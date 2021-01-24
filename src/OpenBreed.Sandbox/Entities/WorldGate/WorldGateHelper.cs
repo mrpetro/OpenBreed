@@ -24,6 +24,8 @@ using OpenBreed.Wecs;
 using OpenBreed.Wecs.Entities.Xml;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
+using OpenBreed.Wecs.Commands;
+using OpenBreed.Wecs.Events;
 
 namespace OpenBreed.Sandbox.Entities.WorldGate
 {

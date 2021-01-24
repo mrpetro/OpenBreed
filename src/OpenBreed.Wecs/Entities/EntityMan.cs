@@ -9,6 +9,8 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Components;
+using OpenBreed.Wecs.Commands;
+using OpenBreed.Wecs.Events;
 
 namespace OpenBreed.Wecs.Entities
 {

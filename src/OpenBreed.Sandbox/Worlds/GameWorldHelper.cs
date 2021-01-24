@@ -28,6 +28,10 @@ using OpenBreed.Wecs.Components.Animation;
 using OpenBreed.Wecs;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
+using OpenBreed.Wecs.Commands;
+using OpenBreed.Wecs.Systems.Control.Commands;
+using OpenBreed.Wecs.Systems.Control.Systems;
+using OpenBreed.Wecs.Events;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -56,7 +60,7 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem(core.CreateAnimationSystem().Build());
 
             builder.AddSystem(new TimerSystem(core));
-            builder.AddSystem(new StateMachineSystem(core));
+            builder.AddSystem(new FsmSystem(core));
 
             ////Audio
             //builder.AddSystem(core.CreateSoundSystem().Build());

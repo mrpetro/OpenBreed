@@ -74,7 +74,7 @@ namespace OpenBreed.Sandbox.Components.States
         private void OnAnimStopped(object sender, AnimStoppedEventArgs e)
         {
             var entity = sender as Entity;
-            entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)FunctioningImpulse.StopOpening));
+            entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)FunctioningImpulse.StopOpening));
         }
 
         #endregion Private Methods

@@ -1,35 +1,32 @@
-﻿using System;
+﻿using OpenBreed.Core.Commands;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Core.Commands
+namespace OpenBreed.Wecs.Commands
 {
-    public class FollowerSetTargetCommand : ICommand
+    public class DestroyEntityCommand : ICommand
     {
         #region Public Fields
 
-        public const string TYPE = "FOLLOWER_SET_TARGET";
+        public const string TYPE = "ENTITY_DESTROY";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public FollowerSetTargetCommand(int followerEntityId, int targetEntityId)
+        public DestroyEntityCommand(int entityId)
         {
-            EntityId = followerEntityId;
-            TargetEntityId = targetEntityId;
+            EntityId = entityId;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
-
-        public int TargetEntityId { get; }
-
         public int EntityId { get; }
-
         public string Name { get { return TYPE; } }
 
         #endregion Public Properties

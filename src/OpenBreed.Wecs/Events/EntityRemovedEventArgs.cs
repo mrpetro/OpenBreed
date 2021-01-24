@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenBreed.Core.Events
+namespace OpenBreed.Wecs.Events
 {
     /// <summary>
     /// Event args for event that occurs when is removed from world

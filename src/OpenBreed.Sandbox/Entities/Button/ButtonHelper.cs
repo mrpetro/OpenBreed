@@ -85,7 +85,7 @@ namespace OpenBreed.Sandbox.Entities.Button
             var entity = sender as Entity;
 
             var fsmId = entity.Core.GetManager<IFsmMan>().GetByName("Button").Id;
-            entity.Core.Commands.Post(new SetStateCommand(entity.Id, fsmId, (int)ButtonImpulse.Press));
+            entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, fsmId, (int)ButtonImpulse.Press));
         }
     }
 }

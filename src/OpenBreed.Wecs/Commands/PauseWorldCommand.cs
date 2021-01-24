@@ -1,4 +1,6 @@
-﻿namespace OpenBreed.Core.Commands
+﻿using OpenBreed.Core.Commands;
+
+namespace OpenBreed.Wecs.Commands
 {
     public class PauseWorldCommand : ICommand
     {

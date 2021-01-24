@@ -15,6 +15,7 @@ using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Wecs;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
+using OpenBreed.Wecs.Commands;
 
 namespace OpenBreed.Game
 {

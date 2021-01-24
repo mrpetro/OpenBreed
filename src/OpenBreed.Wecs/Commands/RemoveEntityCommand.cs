@@ -1,16 +1,18 @@
-﻿namespace OpenBreed.Core.Commands
+﻿using OpenBreed.Core.Commands;
+
+namespace OpenBreed.Wecs.Commands
 {
-    public class AddEntityCommand : ICommand
+    public class RemoveEntityCommand : ICommand
     {
         #region Public Fields
 
-        public const string TYPE = "ADD_ENTITY";
+        public const string TYPE = "REMOVE_ENTITY";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public AddEntityCommand(int worldId, int entityId)
+        public RemoveEntityCommand(int worldId, int entityId)
         {
             WorldId = worldId;
             EntityId = entityId;

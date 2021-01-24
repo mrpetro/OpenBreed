@@ -1,10 +1,11 @@
-﻿using System;
+﻿using OpenBreed.Core.Commands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Core.Commands
+namespace OpenBreed.Wecs.Systems.Control.Commands
 {
     public class FollowedAddFollowerCommand : ICommand
     {

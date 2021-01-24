@@ -75,9 +75,9 @@ namespace OpenBreed.Sandbox.Entities.Actor
             var fsmId = entity.Core.GetManager<IFsmMan>().GetByName("Actor.Movement").Id;
 
             if (e.Direction != Vector2.Zero)
-                entity.Core.Commands.Post(new SetStateCommand(entity.Id, fsmId, (int)MovementImpulse.Walk));
+                entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, fsmId, (int)MovementImpulse.Walk));
             else
-                entity.Core.Commands.Post(new SetStateCommand(entity.Id, fsmId, (int)MovementImpulse.Stop));
+                entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, fsmId, (int)MovementImpulse.Stop));
         }
 
         private static void OnMovementEnterStandingWithStop(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
@@ -120,7 +120,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             var fsmId = entity.Core.GetManager<IFsmMan>().GetByName("Actor.Movement").Id;
 
             if (eventArgs.Direction != Vector2.Zero)
-                entity.Core.Commands.Post(new SetStateCommand(entity.Id, fsmId, (int)MovementImpulse.Walk));
+                entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, fsmId, (int)MovementImpulse.Walk));
         }
 
         #endregion Private Methods

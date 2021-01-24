@@ -11,8 +11,10 @@ using System.Linq;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs;
+using OpenBreed.Wecs.Commands;
+using OpenBreed.Wecs.Systems.Control.Commands;
 
-namespace OpenBreed.Wecs.Systems.Core
+namespace OpenBreed.Wecs.Systems.Control.Systems
 {
     public class FollowerSystem : SystemBase, IUpdatableSystem
     {

@@ -1,7 +1,7 @@
 ﻿using OpenBreed.Core;
 using System;
 
-namespace OpenBreed.Core.Events
+namespace OpenBreed.Wecs.Events
 {
     public class WorldPausedEventArgs : EventArgs
     {

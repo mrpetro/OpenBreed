@@ -11,6 +11,8 @@ using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs;
+using OpenBreed.Wecs.Systems.Core.Commands;
+using OpenBreed.Wecs.Systems.Core.Events;
 
 namespace OpenBreed.Wecs.Systems.Core
 {

@@ -1,19 +1,22 @@
-﻿namespace OpenBreed.Core.Commands
+﻿using OpenBreed.Core.Commands;
+
+namespace OpenBreed.Wecs.Systems.Core.Commands
 {
-    public class TimerStopCommand : ICommand
+    public class TimerStartCommand : ICommand
     {
         #region Public Fields
 
-        public const string TYPE = "TIMER_STOP";
+        public const string TYPE = "TIMER_START";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public TimerStopCommand(int entityId, int timerId)
+        public TimerStartCommand(int entityId, int timerId, double interval)
         {
             EntityId = entityId;
             TimerId = timerId;
+            Interval = interval;
         }
 
         #endregion Public Constructors
@@ -23,6 +26,7 @@
         public int EntityId { get; }
         public string Name { get { return TYPE; } }
         public int TimerId { get; }
+        public double Interval { get; }
 
         #endregion Public Properties
     }

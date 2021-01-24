@@ -14,7 +14,7 @@ using OpenBreed.Fsm;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
-    public class StateMachineSystem : SystemBase, IUpdatableSystem
+    public class FsmSystem : SystemBase, IUpdatableSystem
     {
         #region Private Fields
 
@@ -24,7 +24,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Public Constructors
 
-        public StateMachineSystem(ICore core) : base(core)
+        public FsmSystem(ICore core) : base(core)
         {
             Require<FsmComponent>();
         }
@@ -35,7 +35,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         public static void RegisterHandlers(ICommandsMan commands)
         {
-            commands.Register<SetStateCommand>(HandleSetStateCommand);
+            commands.Register<SetEntityStateCommand>(HandleSetStateCommand);
         }
 
         public void Update(float dt)
@@ -92,7 +92,7 @@ namespace OpenBreed.Wecs.Systems.Core
                 Core.GetManager<IFsmMan>().EnterState(entity, state, 0);
         }
 
-        private static bool HandleSetStateCommand(ICore core, SetStateCommand cmd)
+        private static bool HandleSetStateCommand(ICore core, SetEntityStateCommand cmd)
         {
             var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
 

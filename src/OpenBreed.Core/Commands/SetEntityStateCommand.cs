@@ -1,20 +1,20 @@
 ﻿namespace OpenBreed.Core.Commands
 {
-    public class TimerStartCommand : ICommand
+    public class SetEntityStateCommand : ICommand
     {
         #region Public Fields
 
-        public const string TYPE = "TIMER_START";
+        public const string TYPE = "SET_STATE";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public TimerStartCommand(int entityId, int timerId, double interval)
+        public SetEntityStateCommand(int entityId, int fsmId, int impulseId)
         {
             EntityId = entityId;
-            TimerId = timerId;
-            Interval = interval;
+            FsmId = fsmId;
+            ImpulseId = impulseId;
         }
 
         #endregion Public Constructors
@@ -23,8 +23,8 @@
 
         public int EntityId { get; }
         public string Name { get { return TYPE; } }
-        public int TimerId { get; }
-        public double Interval { get; }
+        public int FsmId { get; }
+        public int ImpulseId { get; }
 
         #endregion Public Properties
     }

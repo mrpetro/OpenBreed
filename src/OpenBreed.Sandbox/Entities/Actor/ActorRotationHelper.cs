@@ -68,7 +68,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             var currentStateNames = entity.Core.GetManager<IFsmMan>().GetStateNames(entity);
             entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
-            entity.Core.Commands.Post(new SetStateCommand(entity.Id, fsmId, (int)RotationImpulse.Stop));
+            entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, fsmId, (int)RotationImpulse.Stop));
         }
 
         private static void OnRotationEnterIdleWithStop(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
@@ -108,7 +108,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
                     //angularPos.SetDirection(e.Direction);
                     var fsmId = entity.Core.GetManager<IFsmMan>().GetByName("Actor.Rotation").Id;
-                    entity.Core.Commands.Post(new SetStateCommand(entity.Id, fsmId, (int)RotationImpulse.Rotate));
+                    entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, fsmId, (int)RotationImpulse.Rotate));
                 }
             }
         }

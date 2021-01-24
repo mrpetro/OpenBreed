@@ -54,7 +54,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
                     var angularThrust = entity.Get<AngularVelocityComponent>();
                     angularThrust.SetDirection(new Vector2(e.Direction.X, e.Direction.Y));
                     //dir.SetDirection(e.Direction);
-                    entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)RotationImpulse.Rotate));
+                    entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)RotationImpulse.Rotate));
                 }
             }
         }

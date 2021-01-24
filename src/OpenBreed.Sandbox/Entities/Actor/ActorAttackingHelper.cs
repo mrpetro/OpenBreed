@@ -13,6 +13,8 @@ using OpenBreed.Wecs.Systems.Control.Events;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs;
+using OpenBreed.Wecs.Systems.Core.Commands;
+using OpenBreed.Wecs.Systems.Core.Events;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
@@ -99,9 +101,9 @@ namespace OpenBreed.Sandbox.Entities.Actor
             var fsmId = entity.Core.GetManager<IFsmMan>().GetByName("Actor.Attacking").Id;
 
             if (cc.AttackPrimary)
-                entity.Core.Commands.Post(new SetStateCommand(entity.Id, fsmId, (int)AttackingImpulse.Shoot));
+                entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, fsmId, (int)AttackingImpulse.Shoot));
             else
-                entity.Core.Commands.Post(new SetStateCommand(entity.Id, fsmId, (int)AttackingImpulse.Stop));
+                entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, fsmId, (int)AttackingImpulse.Stop));
         }
 
         private static void OnControlFireChanged(object sender, ControlFireChangedEvenrArgs eventArgs)
@@ -110,7 +112,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             var fsmId = entity.Core.GetManager<IFsmMan>().GetByName("Actor.Attacking").Id;
 
             if (eventArgs.Fire)
-                entity.Core.Commands.Post(new SetStateCommand(entity.Id, fsmId, (int)AttackingImpulse.Shoot));
+                entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, fsmId, (int)AttackingImpulse.Shoot));
         }
 
         private static void OnAttackingEnterShootingWithShoot(ICore core, int entityId, int fsmId, int stateId, int withImpulseId)
@@ -128,7 +130,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             direction *= 500.0f;
             ProjectileHelper.AddProjectile(entity.Core, entity.World, pos.X, pos.Y, direction.X, direction.Y);
 
-            entity.Core.Commands.Post(new SetStateCommand(entity.Id, fsmId, (int)AttackingImpulse.Wait));
+            entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, fsmId, (int)AttackingImpulse.Wait));
         }
 
         #endregion Private Methods

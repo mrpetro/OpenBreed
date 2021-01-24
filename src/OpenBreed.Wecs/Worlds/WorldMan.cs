@@ -9,6 +9,7 @@ using System.Linq;
 using OpenBreed.Common.Tools.Collections;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Commands;
 
 namespace OpenBreed.Wecs.Worlds
 {

@@ -64,9 +64,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FollowerSystem.cs" />
+    <Compile Include="Commands\TimerStartCommand.cs" />
+    <Compile Include="Commands\TimerStopCommand.cs" />
+    <Compile Include="Events\TimerElapsedEventArgs.cs" />
+    <Compile Include="Events\TimerUpdateEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StateMachineSystem.cs" />
+    <Compile Include="FsmSystem.cs" />
     <Compile Include="TextInputSystem.cs" />
     <Compile Include="TimerSystem.cs" />
   </ItemGroup>
@@ -96,8 +99,6 @@
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Events\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

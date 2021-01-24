@@ -10,6 +10,8 @@ using OpenBreed.Rendering.Interface;
 using OpenBreed.Wecs.Systems.Physics.Commands;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Core.Commands;
+using OpenBreed.Wecs.Systems.Core.Events;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -66,7 +68,7 @@ namespace OpenBreed.Sandbox.Components.States
 
             var entity = sender as Entity;
 
-            entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)FunctioningImpulse.Close));
+            entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)FunctioningImpulse.Close));
         }
 
         private void OnTimerUpdate(object sender, TimerUpdateEventArgs e)
