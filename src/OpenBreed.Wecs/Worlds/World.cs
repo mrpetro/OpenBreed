@@ -1,20 +1,13 @@
-﻿using OpenBreed.Common.Tools;
-using OpenBreed.Core;
-using OpenBreed.Core.Commands;
-using OpenBreed.Core.Events;
+﻿using OpenBreed.Core;
 using OpenBreed.Core.Extensions;
-using OpenBreed.Core.Helpers;
-using OpenBreed.Core.Managers;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems;
 using OpenBreed.Scripting.Interface;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Events;
+using OpenBreed.Wecs.Systems;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using OpenBreed.Wecs.Events;
 
 namespace OpenBreed.Wecs.Worlds
 {
@@ -37,8 +30,6 @@ namespace OpenBreed.Wecs.Worlds
         private readonly List<Entity> entities = new List<Entity>();
         private readonly List<Entity> toAdd = new List<Entity>();
         private readonly List<Entity> toRemove = new List<Entity>();
-        private readonly List<ISystem> systems = new List<ISystem>();
-
         private float timeMultiplier = 1.0f;
 
         #endregion Private Fields
@@ -50,14 +41,13 @@ namespace OpenBreed.Wecs.Worlds
             Core = builder.core;
             Name = builder.name;
 
-            Entities = new ReadOnlyCollection<Entity>(entities);
+            Systems = builder.systems.Values.ToArray();
 
-            systems = builder.systems;
-            Systems = new ReadOnlyCollection<ISystem>(systems);
+            Entities = new ReadOnlyCollection<Entity>(entities);
 
             Core.GetManager<IWorldMan>().RegisterWorld(this);
 
-            foreach (var system in systems)
+            foreach (var system in Systems)
                 system.Initialize(this);
 
             builder.InvokeActions(this);
@@ -66,6 +56,8 @@ namespace OpenBreed.Wecs.Worlds
         #endregion Internal Constructors
 
         #region Public Properties
+
+        public ISystem[] Systems { get; }
 
         /// <summary>
         /// Pauses or unpauses this world
@@ -91,8 +83,6 @@ namespace OpenBreed.Wecs.Worlds
         public ICore Core { get; }
 
         public ReadOnlyCollection<Entity> Entities { get; }
-
-        public ReadOnlyCollection<ISystem> Systems { get; }
 
         /// <summary>
         /// Id of this world
@@ -125,7 +115,7 @@ namespace OpenBreed.Wecs.Worlds
 
         public T GetSystem<T>() where T : ISystem
         {
-            return systems.OfType<T>().FirstOrDefault();
+            return Systems.OfType<T>().FirstOrDefault();
         }
 
         /// <summary>
@@ -177,17 +167,16 @@ namespace OpenBreed.Wecs.Worlds
         {
             if (Paused)
             {
-                foreach (var item in systems.OfType<IUpdatableSystem>())
+                foreach (var item in Systems.OfType<IUpdatableSystem>())
                 {
                     Core.Commands.ExecuteEnqueued();
                     item.UpdatePauseImmuneOnly(dt * TimeMultiplier);
                 }
                 //systems.OfType<IUpdatableSystem>().ForEach(item => item.UpdatePauseImmuneOnly(dt * TimeMultiplier));
             }
-
             else
             {
-                foreach (var item in systems.OfType<IUpdatableSystem>())
+                foreach (var item in Systems.OfType<IUpdatableSystem>())
                 {
                     Core.Commands.ExecuteEnqueued();
                     item.Update(dt * TimeMultiplier);
@@ -203,7 +192,6 @@ namespace OpenBreed.Wecs.Worlds
 
             Core.GetManager<IWorldMan>().RaiseEvent(new WorldInitializedEventArgs(Id));
             Core.GetManager<IScriptMan>().TryInvokeFunction("WorldLoaded", Id);
-
         }
 
         internal void Deinitialize()
@@ -258,13 +246,13 @@ namespace OpenBreed.Wecs.Worlds
 
         private void InitializeSystems()
         {
-            for (int i = 0; i < systems.Count; i++)
-                systems[i].Initialize(this);
+            for (int i = 0; i < Systems.Length; i++)
+                Systems[i].Initialize(this);
         }
 
         private void AddEntityToSystems(Entity entity)
         {
-            foreach (var system in systems)
+            foreach (var system in Systems)
             {
                 if (system.Matches(entity))
                     system.AddEntity(entity);
@@ -273,7 +261,7 @@ namespace OpenBreed.Wecs.Worlds
 
         private void RemoveEntityFromSystems(Entity entity)
         {
-            foreach (var system in systems)
+            foreach (var system in Systems)
             {
                 if (system.Matches(entity))
                     system.RemoveEntity(entity);

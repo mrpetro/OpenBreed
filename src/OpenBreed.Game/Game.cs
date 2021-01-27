@@ -1,38 +1,33 @@
-﻿using OpenBreed.Common;
+﻿using OpenBreed.Animation.Interface;
+using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools;
-using OpenBreed.Wecs.Components.Physics;
-using OpenBreed.Wecs.Components.Physics.Xml;
 using OpenBreed.Core;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Components.Common.Xml;
 using OpenBreed.Core.Managers;
-using OpenBreed.Core.Modules;
 using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Database.Interface;
+using OpenBreed.Fsm;
+using OpenBreed.Fsm.Xml;
+using OpenBreed.Input.Interface;
+using OpenBreed.Rendering.OpenGL;
+using OpenBreed.Scripting.Interface;
+using OpenBreed.Wecs.Components.Animation;
+using OpenBreed.Wecs.Components.Animation.Xml;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Common.Xml;
+using OpenBreed.Wecs.Components.Physics;
+using OpenBreed.Wecs.Components.Physics.Xml;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Components.Rendering.Xml;
-using OpenBreed.Rendering.OpenGL;
+using OpenBreed.Wecs.Components.Xml;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Entities.Xml;
 using OpenBreed.Wecs.Systems.Rendering;
+using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using System;
 using System.Drawing;
-using OpenBreed.Audio.Interface;
-using OpenBreed.Animation.Generic;
-using OpenBreed.Animation.Interface;
-using OpenBreed.Wecs.Components.Animation.Xml;
-using OpenBreed.Wecs.Components.Animation;
-using OpenBreed.Input.Generic;
-using OpenBreed.Input.Interface;
-using OpenBreed.Scripting.Interface;
-using OpenBreed.Wecs.Entities.Xml;
-using OpenBreed.Wecs;
-using OpenBreed.Fsm;
-using OpenBreed.Fsm.Xml;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Worlds;
-using OpenBreed.Wecs.Components.Xml;
 
 namespace OpenBreed.Game
 {
@@ -46,31 +41,40 @@ namespace OpenBreed.Game
         private readonly LogConsolePrinter logConsolePrinter;
         private readonly IVariableMan variables;
         private readonly DataProvider dataProvider;
+        private readonly OpenALModule soundModule;
+        private readonly OpenGLModule renderingModule;
+        private readonly IEntityMan entities;
+        private readonly IInputsMan inputs;
+        private readonly IAnimMan animations;
+        private readonly IWorldMan worlds;
+        private readonly IEntityFactory entityFactory;
+
+        private readonly IPlayersMan players;
 
         #endregion Private Fields
 
         #region Public Constructors
 
         public Game(IManagerCollection manCollection) :
-            base(manCollection)
+                                                                            base(manCollection)
         {
-            scriptMan = manCollection.GetManager<IScriptMan>();
+            this.scriptMan = manCollection.GetManager<IScriptMan>();
             this.database = manCollection.GetManager<IDatabase>();
             this.variables = manCollection.GetManager<IVariableMan>();
-            Inputs = manCollection.GetManager<IInputsMan>();
+            this.entities = manCollection.GetManager<IEntityMan>();
+            this.inputs = manCollection.GetManager<IInputsMan>();
+            this.animations = manCollection.GetManager<IAnimMan>();
+            this.entityFactory = manCollection.GetManager<IEntityFactory>();
+            this.worlds = manCollection.GetManager<IWorldMan>();
+            this.players = manCollection.GetManager<IPlayersMan>();
             logConsolePrinter = new LogConsolePrinter(Logging);
             logConsolePrinter.StartPrinting();
-
-            Animations = manCollection.GetManager<IAnimMan>();
 
             soundModule = new OpenALModule(this);
             renderingModule = new OpenGLModule(this);
 
             VideoSystemsFactory = new VideoSystemsFactory(this);
             PhysicsSystemsFactory = new PhysicsSystemsFactory(this);
-
-            Inputs = new InputsMan(this);
-            EntityFactory = new EntityFactory(Entities);
 
             this.unitOfWork = this.database.CreateUnitOfWork();
             this.dataProvider = new DataProvider(unitOfWork, Logging, this.variables);
@@ -81,18 +85,8 @@ namespace OpenBreed.Game
 
         #region Public Properties
 
-        public EntityFactory EntityFactory { get; }
-
-        private readonly OpenALModule soundModule;
-        private readonly OpenGLModule renderingModule;
-
-        public IAnimMan Animations { get; }
         public override JobMan Jobs => throw new NotImplementedException();
         public IFsmMan StateMachines => throw new NotImplementedException();
-        public IPlayersMan Players => throw new NotImplementedException();
-        public IEntityMan Entities => throw new NotImplementedException();
-        public IWorldMan Worlds => throw new NotImplementedException();
-        public IInputsMan Inputs { get; }
 
         public override Matrix4 ClientTransform
         {
@@ -126,7 +120,7 @@ namespace OpenBreed.Game
 
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"D:\Projects\DB\Templates\Logo1.xml");
 
-            var entity = EntityFactory.Create(entityTemplate);
+            var entity = entityFactory.Create(entityTemplate);
 
             renderingModule.ScreenWorld = ScreenWorldHelper.CreateWorld(this);
 
@@ -143,16 +137,16 @@ namespace OpenBreed.Game
         {
             Commands.ExecuteEnqueued();
 
-            Worlds.Cleanup();
+            worlds.Cleanup();
 
             renderingModule.Cleanup();
 
             //Players.ResetInputs();
 
-            Inputs.Update();
+            inputs.Update();
             //Players.ApplyInputs();
             //StateMachine.Update((float)e.Time);
-            Worlds.Update(dt);
+            worlds.Update(dt);
             //Jobs.Update(dt);
         }
 
@@ -191,26 +185,26 @@ namespace OpenBreed.Game
 
         private void RegisterComponentFactories()
         {
-            EntityFactory.RegisterComponentFactory<XmlPositionComponent>(new PositionComponentFactory(this));
-            EntityFactory.RegisterComponentFactory<XmlVelocityComponent>(new VelocityComponentFactory(this));
-            EntityFactory.RegisterComponentFactory<XmlThrustComponent>(new ThrustComponentFactory(this));
-            EntityFactory.RegisterComponentFactory<XmlSpriteComponent>(new SpriteComponentFactory(this));
-            EntityFactory.RegisterComponentFactory<XmlTextComponent>(new TextComponentFactory(this));
-            EntityFactory.RegisterComponentFactory<XmlAnimationComponent>(new AnimationComponentFactory(this));
-            EntityFactory.RegisterComponentFactory<XmlBodyComponent>(new BodyComponentFactory(this));
-            EntityFactory.RegisterComponentFactory<XmlClassComponent>(new ClassComponentFactory(this));
-            EntityFactory.RegisterComponentFactory<XmlAngularPositionComponent>(new AngularPositionComponentFactory(this));
-            EntityFactory.RegisterComponentFactory<XmlMotionComponent>(new MotionComponentFactory(this));
-            EntityFactory.RegisterComponentFactory<XmlTimerComponent>(new TimerComponentFactory(this));
-            EntityFactory.RegisterComponentFactory<XmlFsmComponent>(new FsmComponentFactory(this));
+            entityFactory.RegisterComponentFactory<XmlPositionComponent>(new PositionComponentFactory(this));
+            entityFactory.RegisterComponentFactory<XmlVelocityComponent>(new VelocityComponentFactory(this));
+            entityFactory.RegisterComponentFactory<XmlThrustComponent>(new ThrustComponentFactory(this));
+            entityFactory.RegisterComponentFactory<XmlSpriteComponent>(new SpriteComponentFactory(this));
+            entityFactory.RegisterComponentFactory<XmlTextComponent>(new TextComponentFactory(this));
+            entityFactory.RegisterComponentFactory<XmlAnimationComponent>(new AnimationComponentFactory(this));
+            entityFactory.RegisterComponentFactory<XmlBodyComponent>(new BodyComponentFactory(this));
+            entityFactory.RegisterComponentFactory<XmlClassComponent>(new ClassComponentFactory(this));
+            entityFactory.RegisterComponentFactory<XmlAngularPositionComponent>(new AngularPositionComponentFactory(this));
+            entityFactory.RegisterComponentFactory<XmlMotionComponent>(new MotionComponentFactory(this));
+            entityFactory.RegisterComponentFactory<XmlTimerComponent>(new TimerComponentFactory(this));
+            entityFactory.RegisterComponentFactory<XmlFsmComponent>(new FsmComponentFactory(this));
         }
 
         private void ExposeScriptingApi()
         {
-            scriptMan.Expose("Worlds", Worlds);
-            scriptMan.Expose("Entities", Entities);
+            scriptMan.Expose("Worlds", worlds);
+            scriptMan.Expose("Entities", entities);
             scriptMan.Expose("Commands", Commands);
-            scriptMan.Expose("Inputs", Inputs);
+            scriptMan.Expose("Inputs", inputs);
             scriptMan.Expose("Logging", Logging);
             scriptMan.Expose("DataProvider", dataProvider);
             //Scripts.Expose("Players", Players);

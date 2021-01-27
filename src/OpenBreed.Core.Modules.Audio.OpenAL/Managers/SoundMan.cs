@@ -1,18 +1,31 @@
 ﻿using OpenBreed.Audio.Interface;
 using OpenBreed.Audio.Interface.Managers;
-using OpenBreed.Core.Managers;
+using OpenBreed.Common.Logging;
 using OpenTK;
 using OpenTK.Audio.OpenAL;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Audio.OpenAL.Managers
 {
     public class SoundMan : ISoundMan
     {
+        #region Private Fields
+
+        private readonly ILogger logger;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public SoundMan(ILogger logger)
+        {
+            this.logger = logger;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Methods
+
         public ISound GetById(int id)
         {
             throw new NotImplementedException();
@@ -82,5 +95,7 @@ namespace OpenBreed.Audio.OpenAL.Managers
             }
             device = IntPtr.Zero;
         }
+
+        #endregion Public Methods
     }
 }

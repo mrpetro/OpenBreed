@@ -44,7 +44,7 @@ namespace OpenBreed.Game
 
         public static World CreateGameWorld(Game game, string worldName)
         {
-            var builder = game.Worlds.Create().SetName(worldName);
+            var builder = game.GetManager<IWorldMan>().Create().SetName(worldName);
             AddSystems(game, builder);
 
             return builder.Build();
@@ -66,8 +66,8 @@ namespace OpenBreed.Game
             //using (var reader = new TxtFileWorldReader(core, ".\\Content\\Maps\\hub.txt"))
             //    gameWorld = reader.GetWorld();
 
-            game.Worlds.Subscribe<EntityAddedEventArgs>(OnEntityAdded);
-            game.Worlds.Subscribe<EntityRemovedEventArgs>(OnEntityRemoved);
+            game.GetManager<IWorldMan>().Subscribe<EntityAddedEventArgs>(OnEntityAdded);
+            game.GetManager<IWorldMan>().Subscribe<EntityRemovedEventArgs>(OnEntityRemoved);
 
             //var player1 = core.Players.GetByName("P1");
             //player1.AssumeControl(actor);
@@ -79,7 +79,7 @@ namespace OpenBreed.Game
 
             gameWorld.AddEntity(playerCamera);
 
-            var gameViewport = game.Entities.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
+            var gameViewport = game.GetManager<IEntityMan>().GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
 
             gameViewport.Get<ViewportComponent>().CameraEntityId = playerCamera.Id;
         }

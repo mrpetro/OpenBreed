@@ -17,7 +17,7 @@ namespace OpenBreed.Wecs.Worlds
         #region Internal Fields
 
         internal string name;
-        internal List<ISystem> systems = new List<ISystem>();
+        internal Dictionary<Type, ISystem> systems = new Dictionary<Type, ISystem>();
 
         #endregion Internal Fields
 
@@ -37,12 +37,14 @@ namespace OpenBreed.Wecs.Worlds
             this.core = core;
         }
 
-        public void AddSystem(ISystem system)
+        public void AddSystem( ISystem system)
         {
-            if (systems.Contains(system))
-                throw new InvalidOperationException($"System '{system}' already added.");
+            var systemType = system.GetType();
 
-            systems.Add(system);
+            if (systems.ContainsKey(systemType))
+                throw new InvalidOperationException($"System with type '{systemType}' already added.");
+
+            systems.Add(systemType, system);
         }
 
         #endregion Public Constructors

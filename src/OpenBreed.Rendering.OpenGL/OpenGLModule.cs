@@ -60,20 +60,6 @@ namespace OpenBreed.Rendering.OpenGL
 
         #region Public Methods
 
-        public static void AddManagers(IManagerCollection manCollection)
-        {
-            manCollection.AddSingleton<ITextureMan>(() => new TextureMan());
-
-            manCollection.AddSingleton<ITileMan>(() => new TileMan(manCollection.GetManager<ITextureMan>()));
-
-            manCollection.AddSingleton<ISpriteMan>(() => new SpriteMan(manCollection.GetManager<ITextureMan>(),
-                                                                       manCollection.GetManager<ILogger>()));
-
-            manCollection.AddSingleton<IStampMan>(() => new StampMan());
-
-            manCollection.AddSingleton<IFontMan>(() => new FontMan(manCollection.GetManager<ITextureMan>()));
-        }
-
         public void Draw(float dt)
         {
             Fps = 1.0f / dt;

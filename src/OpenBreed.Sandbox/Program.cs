@@ -57,6 +57,9 @@ using OpenBreed.Fsm.Xml;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Components.Xml;
+using OpenBreed.Rendering.OpenGL.Extensions;
+using OpenBreed.Audio.OpenAL.Extensions;
+using OpenBreed.Physics.Generic.Extensions;
 
 namespace OpenBreed.Sandbox
 {
@@ -86,8 +89,9 @@ namespace OpenBreed.Sandbox
             manCollection.AddSingleton<ISystemFinder>(() => new SystemFinder(manCollection.GetManager<IEntityMan>(),
                                                                              manCollection.GetManager<IWorldMan>()));
 
-            OpenGLModule.AddManagers(manCollection);
-            PhysicsModule.AddManagers(manCollection);
+            manCollection.AddGenericPhysicsManagers();
+            manCollection.AddOpenALManagers();
+            manCollection.AddOpenGLManagers();
         }
 
         public ICore Create()

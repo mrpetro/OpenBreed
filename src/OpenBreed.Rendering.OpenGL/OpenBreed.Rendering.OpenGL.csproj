@@ -69,6 +69,8 @@
     <Compile Include="Builders\SpriteAtlasBuilder.cs" />
     <Compile Include="Builders\StampBuilder.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="CoreExtensions.cs" />
+    <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="Helpers\FontAtlas.cs" />
     <Compile Include="Helpers\GridCell.cs" />
     <Compile Include="Helpers\RenderTools.cs" />

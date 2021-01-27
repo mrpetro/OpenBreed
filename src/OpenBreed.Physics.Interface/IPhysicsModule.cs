@@ -14,6 +14,9 @@ namespace OpenBreed.Physics.Interface
 
         ICollisionMan Collisions { get; }
 
+
+        IPhysicalWorld CreateWorld();
+
         #endregion Public Properties
     }
 }

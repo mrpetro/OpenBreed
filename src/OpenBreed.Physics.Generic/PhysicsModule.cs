@@ -22,11 +22,9 @@ namespace OpenBreed.Physics.Generic
             Collisions = core.GetManager<ICollisionMan>();
         }
 
-        public static void AddManagers(IManagerCollection manCollection)
+        public IPhysicalWorld CreateWorld()
         {
-            manCollection.AddSingleton<IShapeMan>(() => new ShapeMan(manCollection.GetManager<ILogger>()));
-            manCollection.AddSingleton<IFixtureMan>(() => new FixtureMan(manCollection.GetManager<ILogger>()));
-            manCollection.AddSingleton<ICollisionMan>(() => new CollisionMan(manCollection.GetManager<ILogger>()));
+            throw new NotImplementedException();
         }
 
         #endregion Public Constructors

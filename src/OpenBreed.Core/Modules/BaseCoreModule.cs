@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenBreed.Common.Logging;
+using System;
 
 namespace OpenBreed.Core.Modules
 {
@@ -11,7 +12,7 @@ namespace OpenBreed.Core.Modules
 
         protected BaseCoreModule(ICore core)
         {
-            Core = core ?? throw new ArgumentNullException(nameof(core));
+            Core = core;
         }
 
         #endregion Protected Constructors

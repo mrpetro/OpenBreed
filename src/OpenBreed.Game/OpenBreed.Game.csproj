@@ -116,6 +116,10 @@
       <Project>{A281E554-E5B2-4198-96F6-F772A552C7D0}</Project>
       <Name>OpenBreed.Audio.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Scripting.Lua\OpenBreed.Scripting.Lua.csproj">
+      <Project>{CE239744-67DD-4E16-B79A-EB6EC47A3558}</Project>
+      <Name>OpenBreed.Scripting.Lua</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Animation\OpenBreed.Wecs.Components.Animation.csproj">
       <Project>{2AC675A2-6989-4EAA-B8E8-46D50DDB88C6}</Project>
       <Name>OpenBreed.Wecs.Components.Animation</Name>
