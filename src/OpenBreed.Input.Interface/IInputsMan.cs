@@ -59,9 +59,9 @@ namespace OpenBreed.Input.Interface
 
         void OnMouseMove(MouseMoveEventArgs e);
 
-        void RegisterHandler(IControlHandler handler);
+        void RegisterHandler(IInputHandler handler);
 
-        IControlHandler GetHandler(string controlType);
+        IInputHandler GetHandler(string controlType);
 
         void OnMouseWheel(MouseWheelEventArgs e);
 

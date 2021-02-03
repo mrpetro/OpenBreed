@@ -12,14 +12,14 @@ using OpenBreed.Input.Interface;
 
 namespace OpenBreed.Wecs.Systems.Control.Systems
 {
-    public class WalkingControlHandler : IControlHandler
+    public class DigitalJoyInputHandler : IInputHandler
     {
         public const string WALK_LEFT = "Left";
         public const string WALK_RIGHT = "Right";
         public const string WALK_UP = "Up";
         public const string WALK_DOWN = "Down";
 
-        public string ControlType => "Walking";
+        public string InputType => "Walking";
 
         public void HandleKeyDown(IPlayer player, float value, string actionName)
         {
@@ -31,7 +31,7 @@ namespace OpenBreed.Wecs.Systems.Control.Systems
 
         public void HandleKeyPressed(IPlayer player, string actionName)
         {
-            var input = player.Inputs.OfType<WalkingPlayerInput>().FirstOrDefault();
+            var input = player.Inputs.OfType<DigitalJoyPlayerInput>().FirstOrDefault();
 
             if (input == null)
                 throw new InvalidOperationException($"Input {input} not registered");

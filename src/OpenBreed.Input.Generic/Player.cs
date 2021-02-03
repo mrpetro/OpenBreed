@@ -22,8 +22,9 @@ namespace OpenBreed.Input.Generic
 
         #region Public Constructors
 
-        public Player(string name, ILogger logger, IInputsMan inputsMan)
+        public Player(int id, string name, ILogger logger, IInputsMan inputsMan)
         {
+            Id = id;
             Name = name;
             this.logger = logger;
             this.inputsMan = inputsMan;
@@ -40,6 +41,7 @@ namespace OpenBreed.Input.Generic
         private readonly IInputsMan inputsMan;
         private readonly ILogger logger;
 
+        public int Id { get; }
         public string Name { get; }
         public ReadOnlyCollection<IPlayerInput> Inputs { get; }
 
@@ -60,11 +62,6 @@ namespace OpenBreed.Input.Generic
         public void RegisterInput(IPlayerInput input)
         {
             inputs.Add(input);
-        }
-
-        public void ApplyInputs()
-        {
-            inputs.ForEach(item => item.Apply(this));
         }
 
         public void LoseControl(Entity entity)

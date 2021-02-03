@@ -64,7 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IControlHandler.cs" />
+    <Compile Include="IInputHandler.cs" />
     <Compile Include="IInputModule.cs" />
     <Compile Include="IInputsMan.cs" />
     <Compile Include="IPlayer.cs" />

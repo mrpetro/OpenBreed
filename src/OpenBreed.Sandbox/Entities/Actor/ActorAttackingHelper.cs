@@ -96,7 +96,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
             var entity = sender as Entity;
 
-            var cc = entity.Get<AttackControl>();
+            var cc = entity.Get<AttackControlComponent>();
 
             var fsmId = entity.Core.GetManager<IFsmMan>().GetByName("Actor.Attacking").Id;
 

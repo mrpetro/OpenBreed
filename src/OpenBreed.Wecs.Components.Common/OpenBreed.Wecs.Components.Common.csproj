@@ -67,7 +67,6 @@
     <Compile Include="AngularPositionComponent.cs" />
     <Compile Include="AngularThrustComponent.cs" />
     <Compile Include="AngularVelocityComponent.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="ClassComponent.cs" />
     <Compile Include="EquipmentComponent.cs" />
     <Compile Include="FollowerComponent.cs" />

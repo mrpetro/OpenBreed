@@ -8,11 +8,11 @@
 
         IPlayer GetByName(string name);
 
+        IPlayer GetById(int playerId);
+
         void LooseAllControls();
 
         void ResetInputs();
-
-        void ApplyInputs();
 
         #endregion Public Methods
     }

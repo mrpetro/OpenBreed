@@ -46,7 +46,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
         {
             var direction = entity.Get<AngularPositionComponent>();
             var movement = entity.Get<MotionComponent>();
-            var control = entity.Get<WalkingControl>();
+            var control = entity.Get<WalkingControlComponent>();
             entity.Get<ThrustComponent>().Value = control.Direction * movement.Acceleration;
 
             var animDirPostfix = AnimHelper.ToDirectionName(direction.GetDirection());

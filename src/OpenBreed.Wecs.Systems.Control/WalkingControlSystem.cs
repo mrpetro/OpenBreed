@@ -77,7 +77,7 @@ namespace OpenBreed.Wecs.Systems.Control
         {
             var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
 
-            var control = entity.Get<AttackControl>();
+            var control = entity.Get<AttackControlComponent>();
 
             if (control.AttackPrimary != cmd.Primary)
             {
@@ -90,15 +90,15 @@ namespace OpenBreed.Wecs.Systems.Control
 
         private static bool HandleWalkingControlCommand(ICore core, WalkingControlCommand cmd)
         {
-            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
+            //var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
 
-            var control = entity.Get<WalkingControl>();
+            //var control = entity.Get<WalkingControl>();
 
-            if (control.Direction != cmd.Direction)
-            {
-                control.Direction = cmd.Direction;
-                entity.RaiseEvent(new ControlDirectionChangedEventArgs(control.Direction));
-            }
+            //if (control.Direction != cmd.Direction)
+            //{
+            //    control.Direction = cmd.Direction;
+            //    entity.RaiseEvent(new ControlDirectionChangedEventArgs(control.Direction));
+            //}
 
             return true;
         }

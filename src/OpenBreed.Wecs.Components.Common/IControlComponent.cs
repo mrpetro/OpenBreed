@@ -9,6 +9,5 @@ namespace OpenBreed.Wecs.Components.Common
 {
     public interface IControlComponent : IEntityComponent
     {
-        string Type { get; }
     }
 }

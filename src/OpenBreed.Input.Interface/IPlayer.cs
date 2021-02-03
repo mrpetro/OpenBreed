@@ -11,6 +11,7 @@ namespace OpenBreed.Input.Interface
 {
     public interface IPlayer
     {
+        int Id { get; }
         string Name { get; }
         ReadOnlyCollection<Entity> ControlledEntities { get; }
         ReadOnlyCollection<IPlayerInput> Inputs { get; }

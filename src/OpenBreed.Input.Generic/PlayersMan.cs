@@ -37,15 +37,20 @@ namespace OpenBreed.Input.Generic
             if (players.Any(item => item.Name == name))
                 throw new InvalidOperationException($"Player with name '{name}' already exists.");
 
-            var newPlayer = new Player(name, logger, inputsMan);
+            var newPlayer = new Player(players.Count, name, logger, inputsMan);
             players.Add(newPlayer);
 
             return newPlayer;
         }
 
-        public IPlayer GetByName(string name)
+        public IPlayer GetByName(string playerName)
         {
-            return players.FirstOrDefault(item => item.Name == name);
+            return players.FirstOrDefault(item => item.Name == playerName);
+        }
+
+        public IPlayer GetById(int playerId)
+        {
+            return players.FirstOrDefault(item => item.Id == playerId);
         }
 
         public void LooseAllControls()
@@ -56,11 +61,6 @@ namespace OpenBreed.Input.Generic
         public void ResetInputs()
         {
             players.ForEach(item => item.ResetInputs());
-        }
-
-        public void ApplyInputs()
-        {
-            players.ForEach(item => item.ApplyInputs());
         }
 
         #endregion Public Methods

@@ -43,6 +43,11 @@ namespace OpenBreed.Wecs.Systems
         /// </summary>
         public World World { get; private set; }
 
+        /// <summary>
+        /// Id of the phase in which system will be updated
+        /// </summary>
+        public int PhaseId { get; }
+
         #endregion Public Properties
 
         #region Public Methods

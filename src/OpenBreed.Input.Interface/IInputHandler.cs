@@ -3,11 +3,11 @@ using OpenTK.Input;
 
 namespace OpenBreed.Input.Interface
 {
-    public interface IControlHandler
+    public interface IInputHandler
     {
         #region Public Properties
 
-        string ControlType { get; }
+        string InputType { get; }
 
         #endregion Public Properties
 
@@ -28,7 +28,7 @@ namespace OpenBreed.Input.Interface
     {
         #region Internal Constructors
 
-        public KeyBinding(IPlayer player, IControlHandler controlHandler, string controlAction)
+        public KeyBinding(IPlayer player, IInputHandler controlHandler, string controlAction)
         {
             Player = player;
             ControlHandler = controlHandler;
@@ -41,7 +41,7 @@ namespace OpenBreed.Input.Interface
 
         internal IPlayer Player { get; }
         internal string ControlAction { get; }
-        internal IControlHandler ControlHandler { get; }
+        internal IInputHandler ControlHandler { get; }
 
         #endregion Internal Properties
 

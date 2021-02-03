@@ -13,12 +13,12 @@ using OpenBreed.Input.Generic;
 
 namespace OpenBreed.Wecs.Systems.Control.Systems
 {
-    public class AttackControlHandler : IControlHandler
+    public class AttackControlHandler : IInputHandler
     {
         public const string ATTACK_PRIMARY = "Primary";
         public const string ATTACK_SECONDARY = "Secondary";
 
-        public string ControlType => "Attacking";
+        public string InputType => "Attacking";
 
         public void HandleKeyDown(IPlayer player, float value, string actionName)
         {
@@ -30,7 +30,7 @@ namespace OpenBreed.Wecs.Systems.Control.Systems
 
         public void HandleKeyPressed(IPlayer player, string actionName)
         {
-            var input = player.Inputs.OfType<AttackingPlayerInput>().FirstOrDefault();
+            var input = player.Inputs.OfType<ButtonPlayerInput>().FirstOrDefault();
 
             if (input == null)
                 throw new InvalidOperationException($"Input {input} not registered");

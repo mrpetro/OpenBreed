@@ -65,14 +65,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AIControl.cs" />
-    <Compile Include="AttackControl.cs" />
+    <Compile Include="AttackControlComponent.cs" />
+    <Compile Include="AttackInputComponent.cs" />
     <Compile Include="BaseControl.cs" />
+    <Compile Include="WalkingInputComponent.cs" />
     <Compile Include="DrivingControl.cs" />
     <Compile Include="FlyingControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TankControl.cs" />
     <Compile Include="TurretControl.cs" />
-    <Compile Include="WalkingControl.cs" />
+    <Compile Include="WalkingControlComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config" />

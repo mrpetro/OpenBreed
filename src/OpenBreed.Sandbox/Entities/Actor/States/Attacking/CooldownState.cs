@@ -52,7 +52,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
 
             var entity = sender as Entity;
 
-            var cc = entity.Get<AttackControl>();
+            var cc = entity.Get<AttackControlComponent>();
 
             if (cc.AttackPrimary)
                 entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)AttackingImpulse.Shoot));

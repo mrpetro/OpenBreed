@@ -82,12 +82,14 @@
     <Compile Include="Commands\WalkingControlCommand.cs" />
     <Compile Include="AiControlSystem.cs" />
     <Compile Include="Systems\AttackingControlHandler.cs" />
+    <Compile Include="Systems\AttackControllerSystem.cs" />
+    <Compile Include="Systems\WalkingControllerSystem.cs" />
     <Compile Include="Systems\FollowerSystem.cs" />
-    <Compile Include="Systems\WalkingControlHandler.cs" />
+    <Compile Include="Systems\DigitalJoyInputHandler.cs" />
     <Compile Include="WalkingControlSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Systems\AttackingPlayerInput.cs" />
-    <Compile Include="Systems\WalkingPlayerInput.cs" />
+    <Compile Include="Systems\ButtonPlayerInput.cs" />
+    <Compile Include="Systems\DigitalJoyPlayerInput.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config" />

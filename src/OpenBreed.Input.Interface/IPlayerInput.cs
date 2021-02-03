@@ -1,12 +1,14 @@
-﻿using OpenBreed.Core;
-
-namespace OpenBreed.Input.Interface
+﻿namespace OpenBreed.Input.Interface
 {
     public interface IPlayerInput
     {
-        #region Public Methods
+        #region Public Properties
 
-        void Apply(IPlayer player);
+        bool Changed { get; }
+
+        #endregion Public Properties
+
+        #region Public Methods
 
         void Reset(IPlayer player);
 

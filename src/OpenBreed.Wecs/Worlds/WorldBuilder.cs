@@ -37,7 +37,7 @@ namespace OpenBreed.Wecs.Worlds
             this.core = core;
         }
 
-        public void AddSystem( ISystem system)
+        public void AddSystem(ISystem system)
         {
             var systemType = system.GetType();
 

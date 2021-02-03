@@ -13,6 +13,11 @@ namespace OpenBreed.Wecs.Systems
         #region Public Methods
 
         /// <summary>
+        /// Id of the phase in which system will be updated
+        /// </summary>
+        int PhaseId { get; }
+
+        /// <summary>
         /// World which owns this system
         /// </summary>
         World World { get; }

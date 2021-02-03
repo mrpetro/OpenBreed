@@ -47,7 +47,7 @@ namespace OpenBreed.Input.Generic
         #region Private Fields
 
         private readonly Dictionary<Key, KeyBinding> keyBindings = new Dictionary<Key, KeyBinding>();
-        private Dictionary<string, IControlHandler> controlHandlers = new Dictionary<string, IControlHandler>();
+        private Dictionary<string, IInputHandler> controlHandlers = new Dictionary<string, IInputHandler>();
         private float oldWheelPos;
         private Vector2 oldCursorPos;
 
@@ -146,9 +146,9 @@ namespace OpenBreed.Input.Generic
             UpdateCursorPos(new Vector2(e.Position.X, e.Position.Y));
         }
 
-        public void RegisterHandler(IControlHandler handler)
+        public void RegisterHandler(IInputHandler handler)
         {
-            var controlType = handler.ControlType;
+            var controlType = handler.InputType;
 
             if (controlHandlers.ContainsKey(controlType))
                 throw new InvalidOperationException($"Control type handler '{controlType}' already registered.");
@@ -156,11 +156,11 @@ namespace OpenBreed.Input.Generic
             controlHandlers.Add(controlType, handler);
         }
 
-        public IControlHandler GetHandler(string controlType)
+        public IInputHandler GetHandler(string controlType)
         {
             Debug.Assert(controlType != null, "Control type is null");
 
-            IControlHandler handler;
+            IInputHandler handler;
 
             controlHandlers.TryGetValue(controlType, out handler);
 

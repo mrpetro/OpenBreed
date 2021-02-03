@@ -50,6 +50,8 @@ namespace OpenBreed.Sandbox.Worlds
             //Input
             builder.AddSystem(core.CreateWalkingControlSystem().Build());
             builder.AddSystem(core.CreateAiControlSystem().Build());
+            builder.AddSystem(new WalkingControllerSystem(core));
+            builder.AddSystem(new AttackControllerSystem(core));
 
             //Action
             builder.AddSystem(core.CreateMovementSystem().Build());
@@ -126,8 +128,12 @@ namespace OpenBreed.Sandbox.Worlds
 
             var actor = ActorHelper.CreateActor(core, new Vector2(128, 128));
 
-            actor.Add(new WalkingControl());
-            actor.Add(new AttackControl());
+            var p1 = core.Players.GetByName("P1");
+
+            actor.Add(new WalkingInputComponent(p1.Id, 0));
+            actor.Add(new AttackInputComponent(p1.Id, 0));
+            actor.Add(new WalkingControlComponent());
+            actor.Add(new AttackControlComponent());
 
             //actor.Add(TextHelper.Create(core, new Vector2(0, 32), "Hero"));
 

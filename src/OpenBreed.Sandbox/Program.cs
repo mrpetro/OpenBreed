@@ -235,13 +235,12 @@ namespace OpenBreed.Sandbox
             Commands.ExecuteEnqueued();
 
             Worlds.Cleanup();
-
             renderingModule.Cleanup();
 
             Players.ResetInputs();
 
             Inputs.Update();
-            Players.ApplyInputs();
+
             //StateMachine.Update((float)e.Time);
             Worlds.Update(dt);
             Jobs.Update(dt);
@@ -322,12 +321,12 @@ namespace OpenBreed.Sandbox
             RegisterShapes();
             RegisterFixtures();
 
-            Inputs.RegisterHandler(new WalkingControlHandler());
+            Inputs.RegisterHandler(new DigitalJoyInputHandler());
             Inputs.RegisterHandler(new AttackControlHandler());
 
             var p1 = Players.AddPlayer("P1");
-            p1.RegisterInput(new AttackingPlayerInput());
-            p1.RegisterInput(new WalkingPlayerInput());
+            p1.RegisterInput(new ButtonPlayerInput());
+            p1.RegisterInput(new DigitalJoyPlayerInput());
             p1.AddKeyBinding("Attacking", "Primary", Key.ControlRight);
             p1.AddKeyBinding("Walking", "Left", Key.Left);
             p1.AddKeyBinding("Walking", "Right", Key.Right);
@@ -335,7 +334,7 @@ namespace OpenBreed.Sandbox
             p1.AddKeyBinding("Walking", "Down", Key.Down);
 
             var p2 = Players.AddPlayer("P2");
-            p2.RegisterInput(new WalkingPlayerInput());
+            p2.RegisterInput(new DigitalJoyPlayerInput());
             p2.AddKeyBinding("Walking", "Left", Key.A);
             p2.AddKeyBinding("Walking", "Right", Key.D);
             p2.AddKeyBinding("Walking", "Up", Key.W);
