@@ -1,38 +1,30 @@
-﻿using EPF;
-using OpenBreed.Common.Assets;
+﻿using OpenBreed.Common.Assets;
+using OpenBreed.Common.Formats;
 using OpenBreed.Database.Interface.Items.Assets;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Data
 {
     public class AssetsDataProvider
     {
-
         #region Private Fields
 
         private readonly Dictionary<string, AssetBase> _openedAssets = new Dictionary<string, AssetBase>();
+        private readonly DataFormatMan formatMan;
+        private readonly DataProvider dataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public AssetsDataProvider(DataProvider dataProvider)
+        public AssetsDataProvider(DataProvider dataProvider, DataFormatMan formatMan)
         {
-            DataProvider = dataProvider;
+            this.dataProvider = dataProvider;
+            this.formatMan = formatMan;
         }
 
         #endregion Public Constructors
-
-        #region Public Properties
-
-        public DataProvider DataProvider { get; }
-
-        #endregion Public Properties
 
         #region Public Methods
 
@@ -42,7 +34,7 @@ namespace OpenBreed.Common.Data
             if (_openedAssets.TryGetValue(id, out asset))
                 return asset;
 
-            var entry = DataProvider.GetRepository<IAssetEntry>().GetById(id);
+            var entry = dataProvider.GetRepository<IAssetEntry>().GetById(id);
             if (entry == null)
                 throw new Exception($"Asset error: {id}");
 
@@ -71,12 +63,12 @@ namespace OpenBreed.Common.Data
 
         private AssetBase CreateAsset(IAssetEntry assetEntry)
         {
-            var formatType = DataProvider.FormatMan.GetFormatType(assetEntry.FormatType);
+            var formatType = formatMan.GetFormatType(assetEntry.FormatType);
 
             if (formatType == null)
                 throw new Exception($"Unknown format {assetEntry.FormatType}");
 
-            var ds = DataProvider.DataSources.GetDataSource(assetEntry.DataSourceRef);
+            var ds = dataProvider.DataSources.GetDataSource(assetEntry.DataSourceRef);
 
             if (ds == null)
                 throw new Exception($"Unknown DataSourceRef {assetEntry.DataSourceRef}");

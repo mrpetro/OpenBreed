@@ -20,7 +20,7 @@ namespace OpenBreed.Common.Data
 
         #region Public Constructors
 
-        public DataProvider(IUnitOfWork unitOfWork, ILogger logger, IVariableMan variables)
+        public DataProvider(IUnitOfWork unitOfWork, ILogger logger, IVariableMan variables, DataFormatMan formatMan)
         {
             this.unitOfWork = unitOfWork;
             this.logger = logger;
@@ -31,14 +31,13 @@ namespace OpenBreed.Common.Data
             SpriteSets = new SpriteSetsDataProvider(this);
             ActionSets = new ActionSetsDataProvider(this);
             Maps = new MapsDataProvider(this);
-            Assets = new AssetsDataProvider(this);
+            Assets = new AssetsDataProvider(this, formatMan);
             Sounds = new SoundsDataProvider(this);
             Images = new ImagesDataProvider(this);
             Palettes = new PalettesDataProvider(this);
             Texts = new TextsDataProvider(this);
             Scripts = new ScriptsDataProvider(this);
             EntityTemplates = new EntityTemplatesDataProvider(this);
-            Initialize();
         }
 
         #endregion Public Constructors
@@ -48,7 +47,6 @@ namespace OpenBreed.Common.Data
         public DataSourceProvider DataSources { get; }
         public ActionSetsDataProvider ActionSets { get; }
         public AssetsDataProvider Assets { get; }
-        public DataFormatMan FormatMan { get; } = new DataFormatMan();
         public ImagesDataProvider Images { get; }
         public MapsDataProvider Maps { get; }
         public PalettesDataProvider Palettes { get; }
@@ -144,21 +142,6 @@ namespace OpenBreed.Common.Data
         #endregion Internal Methods
 
         #region Private Methods
-
-        private void Initialize()
-        {
-            FormatMan.RegisterFormat("ABSE_MAP", new ABSEMAPFormat());
-            FormatMan.RegisterFormat("ABHC_MAP", new ABHCMAPFormat());
-            FormatMan.RegisterFormat("ABTA_MAP", new ABTAMAPFormat());
-            FormatMan.RegisterFormat("ABTABLK", new ABTABLKFormat());
-            FormatMan.RegisterFormat("ABTASPR", new ABTASPRFormat());
-            FormatMan.RegisterFormat("ACBM_TILE_SET", new ACBMTileSetFormat());
-            FormatMan.RegisterFormat("ACBM_IMAGE", new ACBMImageFormat());
-            FormatMan.RegisterFormat("IFF_IMAGE", new IFFImageFormat());
-            FormatMan.RegisterFormat("BINARY", new BinaryFormat());
-            FormatMan.RegisterFormat("PCM_SOUND", new PCMSoundFormat());
-            FormatMan.RegisterFormat("TEXT", new TextFormat());
-        }
 
         private void SaveModels()
         {
