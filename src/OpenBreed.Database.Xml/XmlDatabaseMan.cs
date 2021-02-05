@@ -20,11 +20,12 @@ namespace OpenBreed.Database.Xml
 
         #region Public Constructors
 
-        public XmlDatabaseMan(IVariableMan variableMan, string dbFilePath)
+        public XmlDatabaseMan(IVariableMan variableMan, string dbFilePath = null)
         {
             this.variables = variableMan;
 
-            Open(dbFilePath);
+            if(dbFilePath != null)
+                Open(dbFilePath);
         }
 
         #endregion Public Constructors

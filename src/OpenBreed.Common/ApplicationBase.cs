@@ -60,11 +60,6 @@ namespace OpenBreed.Common
             interfaces.Add(typeof(T), new InterfaceContainer(interfaceInitializer));
         }
 
-        public bool InterfaceExists<T>() where T : IApplicationInterface
-        {
-            return interfaces.ContainsKey(typeof(T));
-        }
-
         #endregion Public Methods
 
         #region Private Classes

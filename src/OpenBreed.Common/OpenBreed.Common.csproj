@@ -71,6 +71,7 @@
     <Compile Include="Data\EntityTemplatesDataHelper.cs" />
     <Compile Include="Data\ActionSetsDataHelper.cs" />
     <Compile Include="Data\IDataProvider.cs" />
+    <Compile Include="DefaultManagerCollection.cs" />
     <Compile Include="Extensions\Setup.cs" />
     <Compile Include="Formats\TextFormat.cs" />
     <Compile Include="IApplication.cs" />
