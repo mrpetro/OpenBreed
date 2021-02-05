@@ -1,4 +1,6 @@
-﻿using OpenBreed.Database.Interface;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Extensions;
+using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Database.Interface.Items.DataSources;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
@@ -42,7 +44,10 @@ namespace OpenBreed.Editor.UI.WinForms
 
             //Application.Run(new GLTestForm());
 
-            var application = new EditorApplication();
+            var managerCollection = new DefaultManagerCollection();
+            managerCollection.SetupABFormats();
+
+            var application = new EditorApplication(managerCollection);
             application.RegisterInterface<IDialogProvider>(() => new DialogProvider(application));
             application.RegisterInterface<DbEntryEditorFactory>(() => CreateEntryEditorFactory(application));
             application.RegisterInterface<DbEntryFactory>(() => new DbEntryFactory());

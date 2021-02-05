@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Formats;
 using OpenBreed.Common.Logging;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Xml;
@@ -25,14 +26,14 @@ namespace OpenBreed.Editor.VM
         private readonly Lazy<SettingsMan> settings;
         private readonly Lazy<IDialogProvider> dialogProvider;
         private readonly XmlDatabaseMan databaseMan;
-
+        private readonly DataFormatMan dataFormatMan;
         private bool disposedValue;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public EditorApplication()
+        public EditorApplication(IManagerCollection managerCollection)
         {
             RegisterInterface<ILogger>(() => new DefaultLogger());
             RegisterInterface<VariableMan>(() => new VariableMan(GetInterface<ILogger>()));
@@ -43,7 +44,7 @@ namespace OpenBreed.Editor.VM
             settings = new Lazy<SettingsMan>(GetInterface<SettingsMan>);
             dialogProvider = new Lazy<IDialogProvider>(GetInterface<IDialogProvider>);
             databaseMan = new XmlDatabaseMan(Variables);
-
+            dataFormatMan = managerCollection.GetManager<DataFormatMan>();
             Settings.Restore();
         }
 
@@ -73,7 +74,7 @@ namespace OpenBreed.Editor.VM
             databaseMan.Open(databaseFilePath);
             UnitOfWork = databaseMan.CreateUnitOfWork();
 
-            DataProvider = new DataProvider(UnitOfWork, Logger, Variables);
+            DataProvider = new DataProvider(UnitOfWork, Logger, Variables, dataFormatMan);
 
             Logger.Info($"Database '{UnitOfWork.Name}' opened.");
         }
@@ -157,6 +158,21 @@ namespace OpenBreed.Editor.VM
 
                 disposedValue = true;
             }
+        }
+
+        public TManager GetManager<TManager>()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddSingleton<TInterface>(Func<object> initializer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddSingleton<TInterface>(TInterface instance)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion Protected Methods
