@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Logging;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Logging;
 using OpenBreed.Core.Managers;
 using System;
 using System.Collections.Generic;

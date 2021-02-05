@@ -83,7 +83,6 @@
     <Compile Include="Commands\TextCaretSetPosition.cs" />
     <Compile Include="CoreBase.cs" />
     <Compile Include="CoreFactory.cs" />
-    <Compile Include="DefaultManagerCollection.cs" />
     <Compile Include="Events\TextDataChanged.cs" />
     <Compile Include="Events\TextCaretPositionChanged.cs" />
     <Compile Include="Extensions\QuaternionExtension.cs" />
