@@ -1,5 +1,5 @@
 ﻿
-WorldLoaded = function(World world)
+WorldLoaded = function(world)
 	camera = Entities.GetByName("MainCamera")
 
 	logo = Entities.CreateFromTemplate("Logo1");
