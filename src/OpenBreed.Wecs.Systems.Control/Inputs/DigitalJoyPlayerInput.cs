@@ -3,7 +3,7 @@ using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Systems.Control.Commands;
 using System;
 
-namespace OpenBreed.Wecs.Systems.Control.Systems
+namespace OpenBreed.Wecs.Systems.Control.Inputs
 {
     public class DigitalJoyPlayerInput : IPlayerInput
     {

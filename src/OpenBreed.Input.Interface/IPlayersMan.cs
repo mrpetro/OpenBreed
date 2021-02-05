@@ -10,8 +10,6 @@
 
         IPlayer GetById(int playerId);
 
-        void LooseAllControls();
-
         void ResetInputs();
 
         #endregion Public Methods

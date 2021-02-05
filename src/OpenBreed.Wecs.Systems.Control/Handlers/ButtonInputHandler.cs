@@ -9,17 +9,17 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Core;
 using OpenBreed.Input.Interface;
+using OpenBreed.Input.Generic;
+using OpenBreed.Wecs.Systems.Control.Inputs;
 
-namespace OpenBreed.Wecs.Systems.Control.Systems
+namespace OpenBreed.Wecs.Systems.Control.Handlers
 {
-    public class DigitalJoyInputHandler : IInputHandler
+    public class ButtonInputHandler : IInputHandler
     {
-        public const string WALK_LEFT = "Left";
-        public const string WALK_RIGHT = "Right";
-        public const string WALK_UP = "Up";
-        public const string WALK_DOWN = "Down";
+        public const string ATTACK_PRIMARY = "Primary";
+        public const string ATTACK_SECONDARY = "Secondary";
 
-        public string InputType => "Walking";
+        public string InputType => "Attacking";
 
         public void HandleKeyDown(IPlayer player, float value, string actionName)
         {
@@ -31,24 +31,18 @@ namespace OpenBreed.Wecs.Systems.Control.Systems
 
         public void HandleKeyPressed(IPlayer player, string actionName)
         {
-            var input = player.Inputs.OfType<DigitalJoyPlayerInput>().FirstOrDefault();
+            var input = player.Inputs.OfType<ButtonPlayerInput>().FirstOrDefault();
 
             if (input == null)
                 throw new InvalidOperationException($"Input {input} not registered");
 
             switch (actionName)
             {
-                case WALK_LEFT:
-                    input.AxisX = -1.0f;
+                case ATTACK_PRIMARY:
+                    input.Primary = true;
                     break;
-                case WALK_RIGHT:
-                    input.AxisX = 1.0f;
-                    break;
-                case WALK_UP:
-                    input.AxisY = 1.0f;
-                    break;
-                case WALK_DOWN:
-                    input.AxisY = -1.0f;
+                case ATTACK_SECONDARY:
+                    input.Secondary = true;
                     break;
                 default:
                     break;

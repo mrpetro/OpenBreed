@@ -31,8 +31,8 @@ namespace OpenBreed.Core
         {
             var managerType = typeof(TInterface);
 
-            if (!managerType.IsInterface)
-                throw new InvalidOperationException("TInterface must be an IManager interface.");
+            //if (!managerType.IsInterface)
+            //    throw new InvalidOperationException("TInterface must be an IManager interface.");
 
             if (managers.ContainsKey(managerType))
                 throw new InvalidOperationException($"Manager type '{managerType.Name}' already registered.");

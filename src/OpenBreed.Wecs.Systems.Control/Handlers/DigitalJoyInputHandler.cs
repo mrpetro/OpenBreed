@@ -9,16 +9,18 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Core;
 using OpenBreed.Input.Interface;
-using OpenBreed.Input.Generic;
+using OpenBreed.Wecs.Systems.Control.Inputs;
 
-namespace OpenBreed.Wecs.Systems.Control.Systems
+namespace OpenBreed.Wecs.Systems.Control.Handlers
 {
-    public class AttackControlHandler : IInputHandler
+    public class DigitalJoyInputHandler : IInputHandler
     {
-        public const string ATTACK_PRIMARY = "Primary";
-        public const string ATTACK_SECONDARY = "Secondary";
+        public const string LEFT = "Left";
+        public const string RIGHT = "Right";
+        public const string UP = "Up";
+        public const string DOWN = "Down";
 
-        public string InputType => "Attacking";
+        public string InputType => "Walking";
 
         public void HandleKeyDown(IPlayer player, float value, string actionName)
         {
@@ -30,18 +32,24 @@ namespace OpenBreed.Wecs.Systems.Control.Systems
 
         public void HandleKeyPressed(IPlayer player, string actionName)
         {
-            var input = player.Inputs.OfType<ButtonPlayerInput>().FirstOrDefault();
+            var input = player.Inputs.OfType<DigitalJoyPlayerInput>().FirstOrDefault();
 
             if (input == null)
                 throw new InvalidOperationException($"Input {input} not registered");
 
             switch (actionName)
             {
-                case ATTACK_PRIMARY:
-                    input.Primary = true;
+                case LEFT:
+                    input.AxisX = -1.0f;
                     break;
-                case ATTACK_SECONDARY:
-                    input.Secondary = true;
+                case RIGHT:
+                    input.AxisX = 1.0f;
+                    break;
+                case UP:
+                    input.AxisY = 1.0f;
+                    break;
+                case DOWN:
+                    input.AxisY = -1.0f;
                     break;
                 default:
                     break;

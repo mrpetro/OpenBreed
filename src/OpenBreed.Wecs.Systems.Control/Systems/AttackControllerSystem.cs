@@ -5,6 +5,7 @@ using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Control.Commands;
 using OpenBreed.Wecs.Systems.Control.Events;
+using OpenBreed.Wecs.Systems.Control.Inputs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,8 +75,8 @@ namespace OpenBreed.Wecs.Systems.Control.Systems
             if (input is null)
                 return;
 
-            //if (!input.Changed)
-            //    return;
+            if (!input.Changed)
+                return;
 
             entity.Core.Commands.Post(new AttackControlCommand(entity.Id, entity, input.Primary, input.Secondary));
         }

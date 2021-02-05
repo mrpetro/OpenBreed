@@ -15,7 +15,6 @@ namespace OpenBreed.Input.Generic
     {
         #region Private Fields
 
-        private readonly List<Entity> controlledEntities = new List<Entity>();
         private readonly List<IPlayerInput> inputs = new List<IPlayerInput>();
 
         #endregion Private Fields
@@ -30,25 +29,18 @@ namespace OpenBreed.Input.Generic
             this.inputsMan = inputsMan;
 
             Inputs = new ReadOnlyCollection<IPlayerInput>(inputs);
-            ControlledEntities = new ReadOnlyCollection<Entity>(controlledEntities);
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public ReadOnlyCollection<Entity> ControlledEntities { get; }
         private readonly IInputsMan inputsMan;
         private readonly ILogger logger;
 
         public int Id { get; }
         public string Name { get; }
         public ReadOnlyCollection<IPlayerInput> Inputs { get; }
-
-        public void LoseControls()
-        {
-            controlledEntities.Clear();
-        }
 
         #endregion Public Properties
 
@@ -62,22 +54,6 @@ namespace OpenBreed.Input.Generic
         public void RegisterInput(IPlayerInput input)
         {
             inputs.Add(input);
-        }
-
-        public void LoseControl(Entity entity)
-        {
-            if (!controlledEntities.Remove(entity))
-                logger.Warning($"'{entity}' was no under control.");
-        }
-
-        public void AssumeControl(Entity entity)
-        {
-            var controlComponent = entity.TryGet<IControlComponent>();
-
-            if (controlComponent == null)
-                throw new InvalidOperationException($"Control on entity '{entity}' not allowed.");
-
-            controlledEntities.Add(entity);
         }
 
         public void AddKeyBinding(string controlType, string controlAction, Key key)

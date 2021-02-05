@@ -10,6 +10,7 @@ using OpenBreed.Database.Interface;
 using OpenBreed.Fsm;
 using OpenBreed.Fsm.Xml;
 using OpenBreed.Input.Interface;
+using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.OpenGL;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Animation;
@@ -40,7 +41,7 @@ namespace OpenBreed.Game
         private readonly IUnitOfWork unitOfWork;
         private readonly LogConsolePrinter logConsolePrinter;
         private readonly IVariableMan variables;
-        private readonly DataProvider dataProvider;
+        private readonly IDataProvider dataProvider;
         private readonly OpenALModule soundModule;
         private readonly OpenGLModule renderingModule;
         private readonly IEntityMan entities;
@@ -55,8 +56,7 @@ namespace OpenBreed.Game
 
         #region Public Constructors
 
-        public Game(IManagerCollection manCollection) :
-                                                                            base(manCollection)
+        public Game(IManagerCollection manCollection) : base(manCollection)
         {
             this.scriptMan = manCollection.GetManager<IScriptMan>();
             this.database = manCollection.GetManager<IDatabase>();
@@ -67,17 +67,20 @@ namespace OpenBreed.Game
             this.entityFactory = manCollection.GetManager<IEntityFactory>();
             this.worlds = manCollection.GetManager<IWorldMan>();
             this.players = manCollection.GetManager<IPlayersMan>();
+            this.unitOfWork = manCollection.GetManager<IUnitOfWork>();
+            this.dataProvider = manCollection.GetManager<IDataProvider>();
             logConsolePrinter = new LogConsolePrinter(Logging);
             logConsolePrinter.StartPrinting();
 
             soundModule = new OpenALModule(this);
             renderingModule = new OpenGLModule(this);
 
+            RegisterModule<IRenderModule>(renderingModule);
+
             VideoSystemsFactory = new VideoSystemsFactory(this);
             PhysicsSystemsFactory = new PhysicsSystemsFactory(this);
 
-            this.unitOfWork = this.database.CreateUnitOfWork();
-            this.dataProvider = new DataProvider(unitOfWork, Logging, this.variables);
+
             Client = new GameWindowClient(this, 800, 600, "OpenBreed");
         }
 
@@ -126,7 +129,7 @@ namespace OpenBreed.Game
 
             GameWorldHelper.Create(this);
 
-            var entryScript = dataProvider.Scripts.GetScript("Scripts.Entry.lua");
+            var entryScript = ((DataProvider)dataProvider).Scripts.GetScript("Scripts.Entry.lua");
 
             //var templateScript = dataProvider.EntityTemplates.GetEntityTemplate("EntityTemplates.Logo1.lua");
 

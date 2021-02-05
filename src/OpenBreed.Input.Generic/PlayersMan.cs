@@ -53,11 +53,6 @@ namespace OpenBreed.Input.Generic
             return players.FirstOrDefault(item => item.Id == playerId);
         }
 
-        public void LooseAllControls()
-        {
-            players.ForEach(item => item.LoseControls());
-        }
-
         public void ResetInputs()
         {
             players.ForEach(item => item.ResetInputs());

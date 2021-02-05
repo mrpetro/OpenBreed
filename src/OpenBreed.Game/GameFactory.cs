@@ -2,6 +2,9 @@
 using OpenBreed.Animation.Interface;
 using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Common;
+using OpenBreed.Common.Data;
+using OpenBreed.Common.Extensions;
+using OpenBreed.Common.Formats;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
@@ -57,6 +60,14 @@ namespace OpenBreed.Game
             manCollection.AddSingleton<ISystemFinder>(() => new SystemFinder(manCollection.GetManager<IEntityMan>(),
                                                                              manCollection.GetManager<IWorldMan>()));
 
+            manCollection.AddSingleton<IUnitOfWork>(() => manCollection.GetManager<IDatabase>().CreateUnitOfWork());
+
+            manCollection.SetupABFormats();
+
+            manCollection.AddSingleton<IDataProvider>(() => new DataProvider(manCollection.GetManager<IUnitOfWork>(), 
+                                                                             manCollection.GetManager<ILogger>(),
+                                                                             manCollection.GetManager<IVariableMan>(),
+                                                                             manCollection.GetManager<DataFormatMan>()));
 
             manCollection.AddGenericPhysicsManagers();
             manCollection.AddOpenALManagers();

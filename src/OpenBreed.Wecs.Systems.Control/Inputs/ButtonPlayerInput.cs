@@ -8,10 +8,12 @@ using OpenBreed.Core;
 using OpenBreed.Wecs.Systems.Control.Commands;
 using OpenBreed.Input.Interface;
 
-namespace OpenBreed.Wecs.Systems.Control.Systems
+namespace OpenBreed.Wecs.Systems.Control.Inputs
 {
     public class ButtonPlayerInput : IPlayerInput
     {
+
+
         public bool OldPrimary { get; set; }
         public bool OldSecondary { get; set; }
         public bool Primary { get; set; }

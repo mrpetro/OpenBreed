@@ -4,6 +4,7 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Control.Events;
+using OpenBreed.Wecs.Systems.Control.Inputs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,14 +74,11 @@ namespace OpenBreed.Wecs.Systems.Control.Systems
             if (input is null)
                 return;
 
-            //if (input.Changed)
-            //    return;
+            if (!input.Changed)
+                return;
 
-            var oldDirection = walkingControl.Direction;
             walkingControl.Direction = new OpenTK.Vector2(input.AxisX, input.AxisY);
-
-            if (walkingControl.Direction != oldDirection)
-                entity.RaiseEvent(new ControlDirectionChangedEventArgs(walkingControl.Direction));
+            entity.RaiseEvent(new ControlDirectionChangedEventArgs(walkingControl.Direction));
         }
 
         #endregion Private Methods

@@ -141,11 +141,6 @@ namespace OpenBreed.Sandbox.Worlds
             core.GetManager<IWorldMan>().Subscribe<EntityAddedEventArgs>(OnEntityAdded);
             core.GetManager<IWorldMan>().Subscribe<EntityRemovedEventArgs>(OnEntityRemoved);
 
-            var player1 = core.Players.GetByName("P1");
-            player1.AssumeControl(actor);
-            var player2 = core.Players.GetByName("P2");
-            player2.AssumeControl(actor);
-
             core.Commands.Post(new AddEntityCommand(gameWorld.Id, actor.Id));
             //gameWorld.AddEntity(actor);
 
@@ -155,7 +150,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             var cursorEntity = core.GetManager<IEntityMan>().Create();
         
-            var spriteBuilder = SpriteComponentBuilderEx.New(core);
+            var spriteBuilder = SpriteComponentBuilder.New(core);
             spriteBuilder.SetAtlasByName("Atlases/Sprites/Cursors");
             spriteBuilder.SetOrder(100);
             spriteBuilder.SetImageId(0);

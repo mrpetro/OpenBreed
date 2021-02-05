@@ -26,7 +26,7 @@ namespace OpenBreed.Wecs.Components.Rendering
     {
         #region Internal Constructors
 
-        internal SpriteComponent(SpriteComponentBuilderEx builder)
+        internal SpriteComponent(SpriteComponentBuilder builder)
         {
             AtlasId = builder.AtlasId;
             ImageId = builder.ImageId;
@@ -69,7 +69,7 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         protected override IEntityComponent Create(ISpriteComponentTemplate template)
         {
-            var builder = SpriteComponentBuilderEx.New(core);
+            var builder = SpriteComponentBuilder.New(core);
             builder.SetAtlasByName(template.AtlasName);
             builder.SetImageId(template.ImageIndex);
             builder.SetOrder(template.Order);
@@ -79,7 +79,7 @@ namespace OpenBreed.Wecs.Components.Rendering
         #endregion Protected Methods
     }
 
-    public class SpriteComponentBuilderEx
+    public class SpriteComponentBuilder
     {
         #region Private Fields
 
@@ -89,7 +89,7 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         #region Private Constructors
 
-        private SpriteComponentBuilderEx(ICore core)
+        private SpriteComponentBuilder(ICore core)
         {
             this.core = core;
         }
@@ -106,9 +106,9 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         #region Public Methods
 
-        public static SpriteComponentBuilderEx New(ICore core)
+        public static SpriteComponentBuilder New(ICore core)
         {
-            return new SpriteComponentBuilderEx(core);
+            return new SpriteComponentBuilder(core);
         }
 
         public SpriteComponent Build()

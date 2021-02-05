@@ -13,11 +13,9 @@ namespace OpenBreed.Input.Interface
     {
         int Id { get; }
         string Name { get; }
-        ReadOnlyCollection<Entity> ControlledEntities { get; }
         ReadOnlyCollection<IPlayerInput> Inputs { get; }
 
         void RegisterInput(IPlayerInput input);
         void AddKeyBinding(string controlType, string controlAction, Key key);
-        void AssumeControl(Entity entity);
     }
 }

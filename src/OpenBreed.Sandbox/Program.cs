@@ -60,6 +60,8 @@ using OpenBreed.Wecs.Components.Xml;
 using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Physics.Generic.Extensions;
+using OpenBreed.Wecs.Systems.Control.Handlers;
+using OpenBreed.Wecs.Systems.Control.Inputs;
 
 namespace OpenBreed.Sandbox
 {
@@ -322,7 +324,7 @@ namespace OpenBreed.Sandbox
             RegisterFixtures();
 
             Inputs.RegisterHandler(new DigitalJoyInputHandler());
-            Inputs.RegisterHandler(new AttackControlHandler());
+            Inputs.RegisterHandler(new ButtonInputHandler());
 
             var p1 = Players.AddPlayer("P1");
             p1.RegisterInput(new ButtonPlayerInput());
