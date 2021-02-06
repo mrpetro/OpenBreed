@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Tools;
+﻿using OpenBreed.Common.Data;
+using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Xml;
 using OpenBreed.Editor.VM.Base;
@@ -109,7 +110,7 @@ namespace OpenBreed.Editor.VM.Database
             if (!_openedEntryEditors.TryGetValue(entryEditorKey, out entryEditor))
             {
                 var creator = application.GetInterface<DbEntryEditorFactory>().GetCreator(repository);
-                entryEditor = creator.Create(application, application.DataProvider);
+                entryEditor = creator.Create(application, application.DataProvider, application.UnitOfWork);
                 _openedEntryEditors.Add(entryEditorKey, entryEditor);
                 entryEditor.ClosedAction = () => OnEntryEditorClosed(entryEditor);
                 entryEditor.EditEntry(entryId);

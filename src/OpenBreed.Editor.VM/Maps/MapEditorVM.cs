@@ -30,16 +30,16 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Constructors
 
-        public MapEditorVM(EditorApplication application, DataProvider dataProvider) : base(application, dataProvider)
+        public MapEditorVM(EditorApplication application, DataProvider dataProvider, IUnitOfWork unitOfWork) : base(application, dataProvider, unitOfWork)
         {
             Tools = new MapEditorToolsVM();
 
-            TilesTool = new MapEditorTilesToolVM(this);
+            TilesTool = new MapEditorTilesToolVM(this, application.UnitOfWork);
             TilesTool.TilesSelector.ModelChangeAction = OnTileSetModelChange;
             UpdateTileSets = TilesTool.TileSetSelector.UpdateList;
             TilesTool.TileSetSelector.CurrentItemChanged += OnTileSetChanged;
 
-            ActionsTool = new MapEditorActionsToolVM(this);
+            ActionsTool = new MapEditorActionsToolVM(this, application.UnitOfWork);
             ActionsTool.ModelChangeAction = OnActionSetModelChange;
 
             PalettesTool = new MapEditorPalettesToolVM(this);

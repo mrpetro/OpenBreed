@@ -26,7 +26,7 @@ namespace OpenBreed.Editor.VM.Images
         {
             Parent = parent;
 
-            ImageAssetRefIdEditor = new EntryRefIdEditorVM(Parent.DataProvider, typeof(IAssetEntry));
+            ImageAssetRefIdEditor = new EntryRefIdEditorVM(Parent.Application.UnitOfWork, typeof(IAssetEntry));
             ImageAssetRefIdEditor.RefIdSelected = (newRefId) => { AssetRef = newRefId; };
             PropertyChanged += This_PropertyChanged;
         }

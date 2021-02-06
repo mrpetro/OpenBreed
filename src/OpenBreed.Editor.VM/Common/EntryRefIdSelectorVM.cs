@@ -22,11 +22,11 @@ namespace OpenBreed.Editor.VM.Common
 
         public BindingList<string> Items { get; }
 
-        public EntryRefIdSelectorVM(IDataProvider dataProvider, Type type)
+        public EntryRefIdSelectorVM(IUnitOfWork unitOfWork, Type type)
         {
             Items = new BindingList<string>();
 
-            var repository = dataProvider.GetRepository(type);
+            var repository = unitOfWork.GetRepository(type);
 
             Items.UpdateAfter(() =>
             {

@@ -13,7 +13,7 @@ namespace OpenBreed.Editor.VM.Actions
             RegisterSubeditor<IActionSetEntry>((parent) => new ActionSetEmbeddedEditorVM(parent));
         }
 
-        public ActionSetEditorVM(EditorApplication application, DataProvider dataProvider) : base(application, dataProvider, "Action Set Editor")
+        public ActionSetEditorVM(EditorApplication application, DataProvider dataProvider, IUnitOfWork unitOfWork) : base(application, dataProvider, unitOfWork, "Action Set Editor")
         {
         }
 

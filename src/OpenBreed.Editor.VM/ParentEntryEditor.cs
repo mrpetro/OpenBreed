@@ -17,7 +17,7 @@ namespace OpenBreed.Editor.VM
 
         #region Public Constructors
 
-        public ParentEntryEditor(EditorApplication application, DataProvider dataProvider, string editorName) : base(application, dataProvider)
+        public ParentEntryEditor(EditorApplication application, DataProvider dataProvider, IUnitOfWork unitOfWork, string editorName) : base(application, dataProvider, unitOfWork)
         {
             EditorName = editorName;
         }

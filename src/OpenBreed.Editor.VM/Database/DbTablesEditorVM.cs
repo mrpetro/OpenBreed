@@ -16,13 +16,13 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Internal Constructors
 
-        internal DbTablesEditorVM(EditorApplication application)
+        internal DbTablesEditorVM(EditorApplication application, DbEntryFactory dbEntryFactory)
         {
             this.application = application;
 
             DbTableSelector = new DbTableSelectorVM(application);
             DbTableSelector.PropertyChanged += DbTableSelector_PropertyChanged;
-            DbTableEditor = new DbTableEditorVM(application);
+            DbTableEditor = new DbTableEditorVM(application, dbEntryFactory);
         }
 
         #endregion Internal Constructors

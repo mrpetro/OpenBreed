@@ -29,7 +29,7 @@ namespace OpenBreed.Editor.VM.Scripts
 
             PropertyChanged += This_PropertyChanged;
 
-            ScriptAssetRefIdEditor = new EntryRefIdEditorVM(Parent.DataProvider, typeof(IAssetEntry));
+            ScriptAssetRefIdEditor = new EntryRefIdEditorVM(Parent.Application.UnitOfWork, typeof(IAssetEntry));
             ScriptAssetRefIdEditor.RefIdSelected = (newRefId) => { DataRef = newRefId; };
         }
 

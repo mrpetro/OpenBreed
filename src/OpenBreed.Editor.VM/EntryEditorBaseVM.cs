@@ -11,6 +11,7 @@ namespace OpenBreed.Editor.VM
         #region Protected Fields
 
         protected readonly EditorApplication application;
+        private readonly IUnitOfWork unitOfWork;
 
         #endregion Protected Fields
 
@@ -37,11 +38,12 @@ namespace OpenBreed.Editor.VM
 
         #region Protected Constructors
 
-        protected EntryEditorBaseVM(EditorApplication application, DataProvider dataProvider)
+        protected EntryEditorBaseVM(EditorApplication application, DataProvider dataProvider, IUnitOfWork unitOfWork)
         {
             this.application = application;
             DataProvider = dataProvider;
-            repository = DataProvider.GetRepository<E>();
+            this.unitOfWork = unitOfWork;
+            repository = unitOfWork.GetRepository<E>();
         }
 
         #endregion Protected Constructors

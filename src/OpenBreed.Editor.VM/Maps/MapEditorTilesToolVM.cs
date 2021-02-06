@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Tiles;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Common;
@@ -35,11 +36,11 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Constructors
 
-        public MapEditorTilesToolVM(MapEditorVM parent)
+        public MapEditorTilesToolVM(MapEditorVM parent, IUnitOfWork unitOfWork)
         {
             Parent = parent;
 
-            RefIdEditor = new EntryRefIdEditorVM(Parent.DataProvider, typeof(ITileSetEntry));
+            RefIdEditor = new EntryRefIdEditorVM(unitOfWork, typeof(ITileSetEntry));
 
             TilesCursor = new List<MapEditorTileInsertOperation>();
             //Inserter = new MapEditorTilesInserter(Parent);

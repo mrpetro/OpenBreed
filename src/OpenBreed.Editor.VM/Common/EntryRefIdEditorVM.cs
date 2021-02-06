@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.Data;
+using OpenBreed.Database.Interface;
 using OpenBreed.Editor.VM.Base;
 using System;
 
@@ -8,7 +9,7 @@ namespace OpenBreed.Editor.VM.Common
     {
         #region Private Fields
 
-        private readonly IDataProvider dataProvider;
+        private readonly IUnitOfWork unitOfWork;
         private readonly Type entryType;
         private string refId;
 
@@ -16,9 +17,9 @@ namespace OpenBreed.Editor.VM.Common
 
         #region Public Constructors
 
-        public EntryRefIdEditorVM(IDataProvider dataProvider, Type entryType)
+        public EntryRefIdEditorVM(IUnitOfWork unitOfWork, Type entryType)
         {
-            this.dataProvider = dataProvider;
+            this.unitOfWork = unitOfWork;
             this.entryType = entryType;
         }
 
@@ -41,7 +42,7 @@ namespace OpenBreed.Editor.VM.Common
 
         public void SelectEntryId()
         {
-            var refSelector = new EntryRefIdSelectorVM(dataProvider, entryType);
+            var refSelector = new EntryRefIdSelectorVM(unitOfWork, entryType);
             refSelector.CurrentEntryId = RefId;
             OpenRefIdSelectorAction?.Invoke(refSelector);
 

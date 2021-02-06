@@ -21,9 +21,9 @@ namespace OpenBreed.Editor.VM
 
         #region Private Fields
 
-        private readonly Lazy<ILogger> logger;
-        private readonly Lazy<VariableMan> variables;
-        private readonly Lazy<SettingsMan> settings;
+        private readonly ILogger logger;
+        private readonly VariableMan variables;
+        private readonly SettingsMan settings;
         private readonly Lazy<IDialogProvider> dialogProvider;
         private readonly XmlDatabaseMan databaseMan;
         private readonly DataFormatMan dataFormatMan;
@@ -35,28 +35,20 @@ namespace OpenBreed.Editor.VM
 
         public EditorApplication(IManagerCollection managerCollection)
         {
-            RegisterInterface<ILogger>(() => new DefaultLogger());
-            RegisterInterface<VariableMan>(() => new VariableMan(GetInterface<ILogger>()));
-            RegisterInterface<SettingsMan>(() => new SettingsMan(this));
-
-            logger = new Lazy<ILogger>(GetInterface<ILogger>);
-            variables = new Lazy<VariableMan>(GetInterface<VariableMan>);
-            settings = new Lazy<SettingsMan>(GetInterface<SettingsMan>);
-            dialogProvider = new Lazy<IDialogProvider>(GetInterface<IDialogProvider>);
-            databaseMan = new XmlDatabaseMan(Variables);
+            logger = managerCollection.GetManager<ILogger>();
+            variables = managerCollection.GetManager<VariableMan>();
+            settings = managerCollection.GetManager<SettingsMan>();
             dataFormatMan = managerCollection.GetManager<DataFormatMan>();
-            Settings.Restore();
+
+            dialogProvider = new Lazy<IDialogProvider>(GetInterface<IDialogProvider>);
+            databaseMan = new XmlDatabaseMan(variables);
+
+            settings.Restore();
         }
 
         #endregion Public Constructors
 
         #region Public Properties
-
-        public ILogger Logger => logger.Value;
-
-        public SettingsMan Settings => settings.Value;
-
-        public VariableMan Variables => variables.Value;
 
         public IUnitOfWork UnitOfWork { get; private set; }
         public DataProvider DataProvider { get; private set; }
@@ -74,9 +66,9 @@ namespace OpenBreed.Editor.VM
             databaseMan.Open(databaseFilePath);
             UnitOfWork = databaseMan.CreateUnitOfWork();
 
-            DataProvider = new DataProvider(UnitOfWork, Logger, Variables, dataFormatMan);
+            DataProvider = new DataProvider(UnitOfWork, logger, variables, dataFormatMan);
 
-            Logger.Info($"Database '{UnitOfWork.Name}' opened.");
+            logger.Info($"Database '{UnitOfWork.Name}' opened.");
         }
 
         public void Run()
@@ -110,7 +102,7 @@ namespace OpenBreed.Editor.VM
             UnitOfWork = null;
             DataProvider = null;
 
-            Logger.Info($"Database '{databaseName}' closed.");
+            logger.Info($"Database '{databaseName}' closed.");
         }
 
         public void SaveDatabase()
@@ -120,12 +112,12 @@ namespace OpenBreed.Editor.VM
 
             DataProvider.Save();
 
-            Logger.Info($"Database '{UnitOfWork.Name}' saved.");
+            logger.Info($"Database '{UnitOfWork.Name}' saved.");
         }
 
         public LoggerVM CreateLoggerVm()
         {
-            return new LoggerVM(Logger);
+            return new LoggerVM(logger);
         }
 
         public DbEditorVM CreateDbEditorVm(IUnitOfWork unitOfWork)
@@ -135,12 +127,12 @@ namespace OpenBreed.Editor.VM
 
         public DbTablesEditorVM CreateDbTablesEditorVm()
         {
-            return new DbTablesEditorVM(this);
+            return new DbTablesEditorVM(this, GetInterface<DbEntryFactory>());
         }
 
         public EditorApplicationVM CreateEditorApplicationVm()
         {
-            return new EditorApplicationVM(this);
+            return new EditorApplicationVM(this, settings);
         }
 
         #endregion Public Methods
@@ -153,7 +145,7 @@ namespace OpenBreed.Editor.VM
             {
                 if (disposing)
                 {
-                    Settings.Store();
+                    settings.Store();
                 }
 
                 disposedValue = true;

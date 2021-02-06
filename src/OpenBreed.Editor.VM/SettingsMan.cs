@@ -14,19 +14,17 @@ namespace OpenBreed.Editor.VM
         private const string DEFAULT_CFG_PATH = @"Resources\DefaultSettings.xml";
         private const string CFG_FILE_NAME = @"Settings.xml";
 
-        private ILogger logger;
-        private EditorApplication application;
+        private readonly ILogger logger;
+        private readonly VariableMan variables;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-
-
-        public SettingsMan(EditorApplication application)
+        public SettingsMan(VariableMan variables, ILogger logger)
         {
-            this.application = application;
-            this.logger = application.GetInterface<ILogger>();
+            this.variables = variables;
+            this.logger = logger;
         }
 
         #endregion Public Constructors
@@ -94,8 +92,8 @@ namespace OpenBreed.Editor.VM
             if (Cfg == null)
                 throw new InvalidOperationException("Cfg not loaded.");
 
-            application.Variables.RegisterVariable(Cfg.GetType(), Cfg, "Cfg");
-            application.Variables.RegisterVariable(typeof(string), Path.Combine(ProgramTools.AppDir, "Resources"), "App.ResourcesFolder");
+            variables.RegisterVariable(Cfg.GetType(), Cfg, "Cfg");
+            variables.RegisterVariable(typeof(string), Path.Combine(ProgramTools.AppDir, "Resources"), "App.ResourcesFolder");
         }
 
         #endregion Private Methods

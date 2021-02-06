@@ -17,7 +17,7 @@ namespace OpenBreed.Editor.VM.Scripts
             RegisterSubeditor<IScriptFromFileEntry>((parent) => new ScriptFromFileEditorVM(parent));
         }
 
-        public ScriptEditorVM(EditorApplication application, DataProvider dataProvider) : base(application, dataProvider, "Script Editor")
+        public ScriptEditorVM(EditorApplication application, DataProvider dataProvider, IUnitOfWork unitOfWork) : base(application, dataProvider, unitOfWork, "Script Editor")
         {
         }
 

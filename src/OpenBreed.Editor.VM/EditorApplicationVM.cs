@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Common.Tools;
 using OpenBreed.Database.Xml;
 using OpenBreed.Editor.VM.Base;
@@ -22,6 +23,7 @@ namespace OpenBreed.Editor.VM
         #region Public Fields
 
         public EditorApplication application;
+        private readonly SettingsMan settings;
 
         #endregion Public Fields
 
@@ -38,10 +40,10 @@ namespace OpenBreed.Editor.VM
 
         #region Public Constructors
 
-        public EditorApplicationVM(EditorApplication application)
+        public EditorApplicationVM(EditorApplication application, SettingsMan settings)
         {
             this.application = application;
-
+            this.settings = settings;
             DialogProvider = application.GetInterface<IDialogProvider>();
             DbEditor = new DbEditorVM(application);
 
@@ -95,7 +97,7 @@ namespace OpenBreed.Editor.VM
 
         public void ShowOptions()
         {
-            ShowOptionsAction?.Invoke(application.Settings);
+            ShowOptionsAction?.Invoke(settings);
         }
 
         public bool TryCloseDatabase()
@@ -260,9 +262,9 @@ namespace OpenBreed.Editor.VM
         private void RunABTAGame()
         {
             Process proc = new Process();
-            proc.StartInfo.FileName = application.Settings.Cfg.Options.ABTA.GameRunFilePath;
-            proc.StartInfo.Arguments = application.Settings.Cfg.Options.ABTA.GameRunFileArgs;
-            proc.StartInfo.WorkingDirectory = application.Settings.Cfg.Options.ABTA.GameFolderPath;
+            proc.StartInfo.FileName = settings.Cfg.Options.ABTA.GameRunFilePath;
+            proc.StartInfo.Arguments = settings.Cfg.Options.ABTA.GameRunFileArgs;
+            proc.StartInfo.WorkingDirectory = settings.Cfg.Options.ABTA.GameFolderPath;
             proc.Start();
         }
 

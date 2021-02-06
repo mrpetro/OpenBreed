@@ -15,6 +15,7 @@ namespace OpenBreed.Editor.VM.Database
         #region Private Fields
 
         private readonly EditorApplication application;
+        private readonly DbEntryFactory dbEntryFactory;
         private DbTableNewEntryCreatorVM _newEntryCreator;
 
         private DbEntryVM _currentItem;
@@ -26,10 +27,10 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Internal Constructors
 
-        internal DbTableEditorVM(EditorApplication application)
+        internal DbTableEditorVM(EditorApplication application, DbEntryFactory dbEntryFactory)
         {
             this.application = application;
-
+            this.dbEntryFactory = dbEntryFactory;
             Entries = new BindingList<Entries.DbEntryVM>();
             Entries.ListChanged += (s, a) => OnPropertyChanged(nameof(Entries));
         }
@@ -111,7 +112,7 @@ namespace OpenBreed.Editor.VM.Database
 
         public void SetModel(string modelName)
         {
-            var repository = application.DataProvider.GetRepository(modelName);
+            var repository = application.UnitOfWork.GetRepository(modelName);
 
             if (repository == null)
                 throw new InvalidOperationException($"Repository with name '{modelName}' not found.");
@@ -136,8 +137,6 @@ namespace OpenBreed.Editor.VM.Database
 
         protected void UpdateVM(IRepository source)
         {
-            var dbEntryFactory = application.GetInterface<DbEntryFactory>();
-
             Entries.UpdateAfter(() =>
             {
                 Entries.Clear();
@@ -185,8 +184,6 @@ namespace OpenBreed.Editor.VM.Database
             _newEntryCreator.Close();
 
             var entry = _edited.New(newEntryId, newEntryType);
-
-            var dbEntryFactory = application.GetInterface<DbEntryFactory>();
             var dbEntry = dbEntryFactory.Create(entry);
             dbEntry.Load(entry);
             Entries.Add(dbEntry);

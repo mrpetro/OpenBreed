@@ -16,7 +16,7 @@ namespace OpenBreed.Editor.VM
 
         #region Public Methods
 
-        EntryEditorVM Create(EditorApplication application, IDataProvider dataProvider);
+        EntryEditorVM Create(EditorApplication application, IDataProvider dataProvider, IUnitOfWork unitOfWork);
 
         #endregion Public Methods
 
@@ -78,9 +78,9 @@ namespace OpenBreed.Editor.VM
 
         #region Public Methods
 
-        public EntryEditorVM Create(EditorApplication application, IDataProvider dataProvider)
+        public EntryEditorVM Create(EditorApplication application, IDataProvider dataProvider, IUnitOfWork unitOfWork)
         {
-            return Activator.CreateInstance(typeof(T), application, dataProvider) as T;
+            return Activator.CreateInstance(typeof(T), application, dataProvider, unitOfWork) as T;
         }
 
         #endregion Public Methods

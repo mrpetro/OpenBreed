@@ -18,7 +18,7 @@ namespace OpenBreed.Editor.VM.Tiles
             RegisterSubeditor<ITileSetFromBlkEntry>((parent) => new TileSetFromBlkEditorVM(parent));
         }
 
-        public TileSetEditorVM(EditorApplication application, DataProvider dataProvider) : base(application, dataProvider, "Tile Set Editor")
+        public TileSetEditorVM(EditorApplication application, DataProvider dataProvider, IUnitOfWork unitOfWork) : base(application, dataProvider, unitOfWork, "Tile Set Editor")
         {
         }
 

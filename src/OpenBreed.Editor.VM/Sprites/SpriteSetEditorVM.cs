@@ -15,7 +15,7 @@ namespace OpenBreed.Editor.VM.Sprites
             RegisterSubeditor<ISpriteSetFromImageEntry>((parent) => new SpriteSetFromImageEditorVM(parent));
         }
 
-        public SpriteSetEditorVM(EditorApplication application, DataProvider dataProvider) : base(application, dataProvider, "Sprite Set Editor")
+        public SpriteSetEditorVM(EditorApplication application, DataProvider dataProvider, IUnitOfWork unitOfWork) : base(application, dataProvider, unitOfWork, "Sprite Set Editor")
         {
         }
 

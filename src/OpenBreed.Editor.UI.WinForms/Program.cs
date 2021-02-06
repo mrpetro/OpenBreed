@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Extensions;
+using OpenBreed.Common.Logging;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Database.Interface.Items.DataSources;
@@ -45,6 +46,11 @@ namespace OpenBreed.Editor.UI.WinForms
             //Application.Run(new GLTestForm());
 
             var managerCollection = new DefaultManagerCollection();
+            managerCollection.AddSingleton<ILogger>(() => new DefaultLogger());
+            managerCollection.AddSingleton<VariableMan>(() => new VariableMan(managerCollection.GetManager<ILogger>()));
+            managerCollection.AddSingleton<SettingsMan>(() => new SettingsMan(managerCollection.GetManager<VariableMan>(),
+                                                                              managerCollection.GetManager<ILogger>()));
+
             managerCollection.SetupABFormats();
 
             var application = new EditorApplication(managerCollection);
