@@ -5,17 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Database.Interface;
 
 namespace OpenBreed.Common.Data
 {
     public class TileSetsDataProvider
     {
+        private readonly IUnitOfWork unitOfWork;
 
         #region Public Constructors
 
-        public TileSetsDataProvider(DataProvider provider)
+        public TileSetsDataProvider(DataProvider provider, IUnitOfWork unitOfWork)
         {
             Provider = provider;
+            this.unitOfWork = unitOfWork;
         }
 
         #endregion Public Constructors
@@ -45,7 +48,7 @@ namespace OpenBreed.Common.Data
 
         public TileSetModel GetTileSet(string id)
         {
-            var entry = Provider.GetRepository<ITileSetEntry>().GetById(id);
+            var entry = unitOfWork.GetRepository<ITileSetEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("TileSet error: " + id);
 

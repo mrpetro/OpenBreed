@@ -5,16 +5,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Database.Interface;
 
 namespace OpenBreed.Common.Data
 {
     public class TextsDataProvider
     {
+        private readonly IUnitOfWork unitOfWork;
         #region Public Constructors
 
-        public TextsDataProvider(DataProvider provider)
+        public TextsDataProvider(DataProvider provider, IUnitOfWork unitOfWork)
         {
             Provider = provider;
+            this.unitOfWork = unitOfWork;
         }
 
         #endregion Public Constructors
@@ -43,7 +46,7 @@ namespace OpenBreed.Common.Data
 
         public TextModel GetText(string id)
         {
-            var entry = Provider.GetRepository<ITextEntry>().GetById(id);
+            var entry = unitOfWork.GetRepository<ITextEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("Text error: " + id);
 

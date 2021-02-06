@@ -1,22 +1,24 @@
-﻿using OpenBreed.Model.Scripts;
-using OpenBreed.Model.Texts;
+﻿using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Scripts;
-using OpenBreed.Database.Interface.Items.Texts;
+using OpenBreed.Model.Scripts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Data
 {
     public class ScriptsDataProvider
     {
+        #region Private Fields
+
+        private readonly IUnitOfWork unitOfWork;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
-        public ScriptsDataProvider(DataProvider provider)
+        public ScriptsDataProvider(DataProvider provider, IUnitOfWork unitOfWork)
         {
             Provider = provider;
+            this.unitOfWork = unitOfWork;
         }
 
         #endregion Public Constructors
@@ -26,6 +28,21 @@ namespace OpenBreed.Common.Data
         public DataProvider Provider { get; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public ScriptModel GetScript(string id)
+        {
+            var entry = unitOfWork.GetRepository<IScriptEntry>().GetById(id);
+            if (entry == null)
+                throw new Exception("Script error: " + id);
+
+            return GetModel(entry);
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private ScriptModel GetModelImpl(IScriptFromFileEntry entry)
         {
@@ -42,14 +59,6 @@ namespace OpenBreed.Common.Data
             return GetModelImpl(entry);
         }
 
-        public ScriptModel GetScript(string id)
-        {
-            var entry = Provider.GetRepository<IScriptEntry>().GetById(id);
-            if (entry == null)
-                throw new Exception("Script error: " + id);
-
-            return GetModel(entry);
-        }
+        #endregion Private Methods
     }
 }
-

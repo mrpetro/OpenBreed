@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common.Assets;
 using OpenBreed.Common.Formats;
+using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Assets;
 using System;
 using System.Collections.Generic;
@@ -12,15 +13,17 @@ namespace OpenBreed.Common.Data
 
         private readonly Dictionary<string, AssetBase> _openedAssets = new Dictionary<string, AssetBase>();
         private readonly DataFormatMan formatMan;
-        private readonly DataProvider dataProvider;
+        private readonly IUnitOfWork unitOfWork;
+        private readonly DataSourceProvider dataSources;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public AssetsDataProvider(DataProvider dataProvider, DataFormatMan formatMan)
+        public AssetsDataProvider(IUnitOfWork unitOfWork, DataSourceProvider dataSources, DataFormatMan formatMan)
         {
-            this.dataProvider = dataProvider;
+            this.unitOfWork = unitOfWork;
+            this.dataSources = dataSources;
             this.formatMan = formatMan;
         }
 
@@ -34,7 +37,7 @@ namespace OpenBreed.Common.Data
             if (_openedAssets.TryGetValue(id, out asset))
                 return asset;
 
-            var entry = dataProvider.GetRepository<IAssetEntry>().GetById(id);
+            var entry = unitOfWork.GetRepository<IAssetEntry>().GetById(id);
             if (entry == null)
                 throw new Exception($"Asset error: {id}");
 
@@ -68,7 +71,7 @@ namespace OpenBreed.Common.Data
             if (formatType == null)
                 throw new Exception($"Unknown format {assetEntry.FormatType}");
 
-            var ds = dataProvider.DataSources.GetDataSource(assetEntry.DataSourceRef);
+            var ds = dataSources.GetDataSource(assetEntry.DataSourceRef);
 
             if (ds == null)
                 throw new Exception($"Unknown DataSourceRef {assetEntry.DataSourceRef}");

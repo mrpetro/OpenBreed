@@ -6,16 +6,19 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenBreed.Database.Interface;
 
 namespace OpenBreed.Common.Data
 {
     public class PalettesDataProvider
     {
+        private readonly IUnitOfWork unitOfWork;
         #region Public Constructors
 
-        public PalettesDataProvider(DataProvider provider)
+        public PalettesDataProvider(DataProvider provider, IUnitOfWork unitOfWork)
         {
             Provider = provider;
+            this.unitOfWork = unitOfWork;
         }
 
         #endregion Public Constructors
@@ -44,7 +47,7 @@ namespace OpenBreed.Common.Data
 
         public PaletteModel GetPalette(string id)
         {
-            var entry = Provider.GetRepository<IPaletteEntry>().GetById(id);
+            var entry = unitOfWork.GetRepository<IPaletteEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("Palette error: " + id);
 

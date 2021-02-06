@@ -2,6 +2,7 @@
 using OpenBreed.Common.DataSources;
 using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools;
+using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.DataSources;
 using System;
 using System.Collections.Generic;
@@ -17,17 +18,20 @@ namespace OpenBreed.Common.Data
         private readonly Dictionary<string, DataSourceBase> _openedDataSources = new Dictionary<string, DataSourceBase>();
         private Dictionary<string, EPFArchive> _openedArchives = new Dictionary<string, EPFArchive>();
         private bool disposedValue;
-
+        private readonly IUnitOfWork unitOfWork;
         private ILogger logger;
+        private readonly IVariableMan variables;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DataSourceProvider(DataProvider dataProvider, ILogger logger)
+        public DataSourceProvider(DataProvider dataProvider, IUnitOfWork unitOfWork, ILogger logger, IVariableMan variables)
         {
-            this.logger = logger;
             DataProvider = dataProvider;
+            this.unitOfWork = unitOfWork;
+            this.logger = logger;
+            this.variables = variables;
         }
 
         #endregion Public Constructors
@@ -46,7 +50,7 @@ namespace OpenBreed.Common.Data
             if (_openedDataSources.TryGetValue(name, out ds))
                 return ds;
 
-            var entry = DataProvider.GetRepository<IDataSourceEntry>().GetById(name);
+            var entry = unitOfWork.GetRepository<IDataSourceEntry>().GetById(name);
             if (entry == null)
                 throw new Exception($"Data source error: {name}");
 
@@ -66,7 +70,7 @@ namespace OpenBreed.Common.Data
 
         #region Internal Methods
 
-        internal string ExpandVariables(string text) => DataProvider.ExpandVariables(text);
+        internal string ExpandVariables(string text) => variables.ExpandVariables(text);
 
         internal void CloseAll()
         {

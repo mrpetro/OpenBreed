@@ -1,53 +1,63 @@
-﻿using OpenBreed.Model.Maps;
+﻿using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Maps;
+using OpenBreed.Model.Maps;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Data
 {
     public class MapsDataProvider
     {
+        #region Private Fields
+
+        private readonly TileSetsDataProvider tileSets;
+        private readonly PalettesDataProvider palettes;
+        private readonly ActionSetsDataProvider actionSets;
+
+        private readonly IDataProvider provider;
+
+        private readonly IUnitOfWork unitOfWork;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
-        public MapsDataProvider(DataProvider provider)
+        public MapsDataProvider(IDataProvider provider, IUnitOfWork unitOfWork, TileSetsDataProvider tileSets, PalettesDataProvider palettes, ActionSetsDataProvider actionSets)
         {
-            Provider = provider;
+            this.provider = provider;
+            this.unitOfWork = unitOfWork;
+            this.tileSets = tileSets;
+            this.palettes = palettes;
+            this.actionSets = actionSets;
         }
 
         #endregion Public Constructors
 
-        #region Public Properties
-
-        public DataProvider Provider { get; }
-
-        #endregion Public Properties
+        #region Public Methods
 
         public MapModel GetMap(string id)
         {
-            var entry = Provider.GetRepository<IMapEntry>().GetById(id);
+            var entry = unitOfWork.GetRepository<IMapEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("Map error: " + id);
 
             if (entry.DataRef == null)
                 return null;
 
-            var map = Provider.GetData<MapModel>(entry.DataRef);
+            var map = provider.GetData<MapModel>(entry.DataRef);
 
             if (entry.TileSetRef != null)
-                map.TileSet = Provider.TileSets.GetTileSet(entry.TileSetRef);
+                map.TileSet = tileSets.GetTileSet(entry.TileSetRef);
 
             map.Palettes.Clear();
             foreach (var paletteRef in entry.PaletteRefs)
-                map.Palettes.Add(Provider.Palettes.GetPalette(paletteRef));
+                map.Palettes.Add(palettes.GetPalette(paletteRef));
 
             if (entry.ActionSetRef != null)
-                map.ActionSet = Provider.ActionSets.GetActionSet(entry.ActionSetRef);
+                map.ActionSet = actionSets.GetActionSet(entry.ActionSetRef);
 
             return map;
         }
 
+        #endregion Public Methods
     }
 }

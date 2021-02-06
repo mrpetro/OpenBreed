@@ -1,22 +1,24 @@
-﻿using OpenBreed.Model.EntityTemplates;
-using OpenBreed.Model.Texts;
+﻿using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
-using OpenBreed.Database.Interface.Items.Texts;
+using OpenBreed.Model.EntityTemplates;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Data
 {
     public class EntityTemplatesDataProvider
     {
+        #region Private Fields
+
+        private readonly IUnitOfWork unitOfWork;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
-        public EntityTemplatesDataProvider(DataProvider provider)
+        public EntityTemplatesDataProvider(DataProvider provider, IUnitOfWork unitOfWork)
         {
             Provider = provider;
+            this.unitOfWork = unitOfWork;
         }
 
         #endregion Public Constructors
@@ -26,6 +28,21 @@ namespace OpenBreed.Common.Data
         public DataProvider Provider { get; }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public EntityTemplateModel GetEntityTemplate(string id)
+        {
+            var entry = unitOfWork.GetRepository<IEntityTemplateEntry>().GetById(id);
+            if (entry == null)
+                throw new Exception("Script error: " + id);
+
+            return GetModel(entry);
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private EntityTemplateModel GetModelImpl(IEntityTemplateFromFileEntry entry)
         {
@@ -37,14 +54,6 @@ namespace OpenBreed.Common.Data
             return GetModelImpl(entry);
         }
 
-        public EntityTemplateModel GetEntityTemplate(string id)
-        {
-            var entry = Provider.GetRepository<IEntityTemplateEntry>().GetById(id);
-            if (entry == null)
-                throw new Exception("Script error: " + id);
-
-            return GetModel(entry);
-        }
+        #endregion Private Methods
     }
 }
-

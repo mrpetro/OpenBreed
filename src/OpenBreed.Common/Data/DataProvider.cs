@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Common.Formats;
 using OpenBreed.Common.Logging;
 using OpenBreed.Database.Interface;
-using OpenBreed.Database.Interface.Items;
 using System;
 using System.Collections.Generic;
 
@@ -26,18 +25,18 @@ namespace OpenBreed.Common.Data
             this.logger = logger;
             this.variables = variables;
 
-            DataSources = new DataSourceProvider(this, logger);
-            TileSets = new TileSetsDataProvider(this);
-            SpriteSets = new SpriteSetsDataProvider(this);
-            ActionSets = new ActionSetsDataProvider(this);
-            Maps = new MapsDataProvider(this);
-            Assets = new AssetsDataProvider(this, formatMan);
-            Sounds = new SoundsDataProvider(this);
-            Images = new ImagesDataProvider(this);
-            Palettes = new PalettesDataProvider(this);
-            Texts = new TextsDataProvider(this);
-            Scripts = new ScriptsDataProvider(this);
-            EntityTemplates = new EntityTemplatesDataProvider(this);
+            DataSources = new DataSourceProvider(this, unitOfWork, logger, variables);
+            Palettes = new PalettesDataProvider(this, unitOfWork);
+            TileSets = new TileSetsDataProvider(this, unitOfWork);
+            SpriteSets = new SpriteSetsDataProvider(this, unitOfWork);
+            ActionSets = new ActionSetsDataProvider(this, unitOfWork);
+            Maps = new MapsDataProvider(this, unitOfWork, TileSets, Palettes, ActionSets);
+            Assets = new AssetsDataProvider(unitOfWork, DataSources, formatMan);
+            Sounds = new SoundsDataProvider(this, unitOfWork);
+            Images = new ImagesDataProvider(this, unitOfWork);
+            Texts = new TextsDataProvider(this, unitOfWork);
+            Scripts = new ScriptsDataProvider(this, unitOfWork);
+            EntityTemplates = new EntityTemplatesDataProvider(this, unitOfWork);
         }
 
         #endregion Public Constructors
@@ -60,21 +59,6 @@ namespace OpenBreed.Common.Data
         #endregion Public Properties
 
         #region Public Methods
-
-        public IRepository<T> GetRepository<T>() where T : IEntry
-        {
-            return unitOfWork.GetRepository<T>();
-        }
-
-        public IRepository GetRepository(Type entryType)
-        {
-            return unitOfWork.GetRepository(entryType);
-        }
-
-        public IRepository GetRepository(string entryId)
-        {
-            return unitOfWork.GetRepository(entryId);
-        }
 
         public bool TryGetData<T>(string id, out T item, out string message)
         {
@@ -134,12 +118,6 @@ namespace OpenBreed.Common.Data
         }
 
         #endregion Public Methods
-
-        #region Internal Methods
-
-        internal string ExpandVariables(string text) => variables.ExpandVariables(text);
-
-        #endregion Internal Methods
 
         #region Private Methods
 

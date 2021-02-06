@@ -1,4 +1,5 @@
-﻿using OpenBreed.Database.Interface.Items.Images;
+﻿using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Images;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,11 +11,13 @@ namespace OpenBreed.Common.Data
 {
     public class ImagesDataProvider
     {
+        private readonly IUnitOfWork unitOfWork;
         #region Public Constructors
 
-        public ImagesDataProvider(DataProvider provider)
+        public ImagesDataProvider(DataProvider provider, IUnitOfWork unitOfWork)
         {
             Provider = provider;
+            this.unitOfWork = unitOfWork;
         }
 
         #endregion Public Constructors
@@ -27,7 +30,7 @@ namespace OpenBreed.Common.Data
 
         public Image GetImage(string id)
         {
-            var entry = Provider.GetRepository<IImageEntry>().GetById(id);
+            var entry = unitOfWork.GetRepository<IImageEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("Image error: " + id);
 

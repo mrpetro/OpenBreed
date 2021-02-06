@@ -1,4 +1,5 @@
 ﻿
+using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Model.Actions;
 using System;
@@ -11,12 +12,14 @@ namespace OpenBreed.Common.Data
 {
     public class ActionSetsDataProvider
     {
+        private readonly IUnitOfWork unitOfWork;
 
         #region Public Constructors
 
-        public ActionSetsDataProvider(DataProvider provider)
+        public ActionSetsDataProvider(DataProvider provider, IUnitOfWork unitOfWork)
         {
             Provider = provider;
+            this.unitOfWork = unitOfWork;
         }
 
         #endregion Public Constructors
@@ -41,7 +44,7 @@ namespace OpenBreed.Common.Data
 
         public ActionSetModel GetActionSet(string id)
         {
-            var entry = Provider.GetRepository<IActionSetEntry>().GetById(id);
+            var entry = unitOfWork.GetRepository<IActionSetEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("ActionSet error: " + id);
 
