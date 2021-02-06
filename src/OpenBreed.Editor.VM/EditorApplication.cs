@@ -22,11 +22,10 @@ namespace OpenBreed.Editor.VM
         #region Private Fields
 
         private readonly ILogger logger;
-        private readonly VariableMan variables;
         private readonly SettingsMan settings;
         private readonly Lazy<IDialogProvider> dialogProvider;
         private readonly XmlDatabaseMan databaseMan;
-        private readonly DataFormatMan dataFormatMan;
+        private readonly IManagerCollection managerCollection;
         private bool disposedValue;
 
         #endregion Private Fields
@@ -35,13 +34,12 @@ namespace OpenBreed.Editor.VM
 
         public EditorApplication(IManagerCollection managerCollection)
         {
-            logger = managerCollection.GetManager<ILogger>();
-            variables = managerCollection.GetManager<VariableMan>();
-            settings = managerCollection.GetManager<SettingsMan>();
-            dataFormatMan = managerCollection.GetManager<DataFormatMan>();
+            this.managerCollection = managerCollection;
 
-            dialogProvider = new Lazy<IDialogProvider>(GetInterface<IDialogProvider>);
-            databaseMan = new XmlDatabaseMan(variables);
+            logger = managerCollection.GetManager<ILogger>();
+            settings = managerCollection.GetManager<SettingsMan>();
+            databaseMan = managerCollection.GetManager<XmlDatabaseMan>();       
+            dialogProvider = new Lazy<IDialogProvider>(() => managerCollection.GetManager<IDialogProvider>());
 
             settings.Restore();
         }
@@ -66,7 +64,9 @@ namespace OpenBreed.Editor.VM
             databaseMan.Open(databaseFilePath);
             UnitOfWork = databaseMan.CreateUnitOfWork();
 
-            DataProvider = new DataProvider(UnitOfWork, logger, variables, dataFormatMan);
+            DataProvider = new DataProvider(UnitOfWork, managerCollection.GetManager<ILogger>(), 
+                                                        managerCollection.GetManager<VariableMan>(),
+                                                        managerCollection.GetManager<DataFormatMan>());
 
             logger.Info($"Database '{UnitOfWork.Name}' opened.");
         }
@@ -122,17 +122,17 @@ namespace OpenBreed.Editor.VM
 
         public DbEditorVM CreateDbEditorVm(IUnitOfWork unitOfWork)
         {
-            return new DbEditorVM(this);
+            return new DbEditorVM(this, managerCollection.GetManager<DbEntryEditorFactory>());
         }
 
         public DbTablesEditorVM CreateDbTablesEditorVm()
         {
-            return new DbTablesEditorVM(this, GetInterface<DbEntryFactory>());
+            return new DbTablesEditorVM(this, managerCollection.GetManager<DbEntryFactory>());
         }
 
         public EditorApplicationVM CreateEditorApplicationVm()
         {
-            return new EditorApplicationVM(this, settings);
+            return new EditorApplicationVM(this, settings, managerCollection.GetManager<DbEntryEditorFactory>(), DialogProvider);
         }
 
         #endregion Public Methods

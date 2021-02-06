@@ -13,6 +13,7 @@ using OpenBreed.Database.Interface.Items.Sounds;
 using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Database.Interface.Items.Texts;
 using OpenBreed.Database.Interface.Items.Tiles;
+using OpenBreed.Database.Xml;
 using OpenBreed.Editor.VM;
 using OpenBreed.Editor.VM.Actions;
 using OpenBreed.Editor.VM.Database;
@@ -50,14 +51,15 @@ namespace OpenBreed.Editor.UI.WinForms
             managerCollection.AddSingleton<VariableMan>(() => new VariableMan(managerCollection.GetManager<ILogger>()));
             managerCollection.AddSingleton<SettingsMan>(() => new SettingsMan(managerCollection.GetManager<VariableMan>(),
                                                                               managerCollection.GetManager<ILogger>()));
+            managerCollection.AddSingleton<DbEntryFactory>(() => new DbEntryFactory());
+            managerCollection.AddSingleton<EditorApplication>(() => new EditorApplication(managerCollection));
+            managerCollection.AddSingleton<DbEntryEditorFactory>(() => CreateEntryEditorFactory(managerCollection.GetManager<EditorApplication>()));
+            managerCollection.AddSingleton<XmlDatabaseMan>(() => new XmlDatabaseMan(managerCollection.GetManager<VariableMan>()));
+            managerCollection.AddSingleton<IDialogProvider>(() => new DialogProvider(managerCollection.GetManager<EditorApplication>()));
 
             managerCollection.SetupABFormats();
 
-            var application = new EditorApplication(managerCollection);
-            application.RegisterInterface<IDialogProvider>(() => new DialogProvider(application));
-            application.RegisterInterface<DbEntryEditorFactory>(() => CreateEntryEditorFactory(application));
-            application.RegisterInterface<DbEntryFactory>(() => new DbEntryFactory());
-
+            var application = managerCollection.GetManager<EditorApplication>();
             application.Run();
         }
 

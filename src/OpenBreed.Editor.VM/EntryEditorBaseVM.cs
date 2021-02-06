@@ -77,7 +77,7 @@ namespace OpenBreed.Editor.VM
 
         public override void Revert()
         {
-            application.GetInterface<IDialogProvider>().ShowMessage("Function not implemented yet.", "Not implemented");
+            application.DialogProvider.ShowMessage("Function not implemented yet.", "Not implemented");
         }
 
         public override void EditEntry(string id)

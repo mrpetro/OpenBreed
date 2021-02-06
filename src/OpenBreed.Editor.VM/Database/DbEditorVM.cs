@@ -16,14 +16,16 @@ namespace OpenBreed.Editor.VM.Database
         private readonly Dictionary<string, EntryEditorVM> _openedEntryEditors = new Dictionary<string, EntryEditorVM>();
 
         private readonly EditorApplication application;
+        private readonly DbEntryEditorFactory dbEntryEditorFactory;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DbEditorVM(EditorApplication application)
+        public DbEditorVM(EditorApplication application, DbEntryEditorFactory dbEntryEditorFactory)
         {
             this.application = application;
+            this.dbEntryEditorFactory = dbEntryEditorFactory;
         }
 
         #endregion Public Constructors
@@ -109,7 +111,7 @@ namespace OpenBreed.Editor.VM.Database
             EntryEditorVM entryEditor = null;
             if (!_openedEntryEditors.TryGetValue(entryEditorKey, out entryEditor))
             {
-                var creator = application.GetInterface<DbEntryEditorFactory>().GetCreator(repository);
+                var creator = dbEntryEditorFactory.GetCreator(repository);
                 entryEditor = creator.Create(application, application.DataProvider, application.UnitOfWork);
                 _openedEntryEditors.Add(entryEditorKey, entryEditor);
                 entryEditor.ClosedAction = () => OnEntryEditorClosed(entryEditor);

@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Data;
 using OpenBreed.Common.Tools;
 using OpenBreed.Database.Xml;
 using OpenBreed.Editor.VM.Base;
@@ -23,12 +22,14 @@ namespace OpenBreed.Editor.VM
         #region Public Fields
 
         public EditorApplication application;
-        private readonly SettingsMan settings;
 
         #endregion Public Fields
 
         #region Private Fields
 
+        private readonly SettingsMan settings;
+
+        private readonly IDialogProvider dialogProvider;
         private EditorState _state;
         private LoggerVM logger;
 
@@ -40,12 +41,12 @@ namespace OpenBreed.Editor.VM
 
         #region Public Constructors
 
-        public EditorApplicationVM(EditorApplication application, SettingsMan settings)
+        public EditorApplicationVM(EditorApplication application, SettingsMan settings, DbEntryEditorFactory dbEntryEditorFactory, IDialogProvider dialogProvider)
         {
             this.application = application;
             this.settings = settings;
-            DialogProvider = application.GetInterface<IDialogProvider>();
-            DbEditor = new DbEditorVM(application);
+            this.dialogProvider = dialogProvider;
+            DbEditor = new DbEditorVM(application, dbEntryEditorFactory);
 
             MenuItems = new BindingList<MenuItemVM>();
 
@@ -59,9 +60,6 @@ namespace OpenBreed.Editor.VM
         public BindingList<MenuItemVM> MenuItems { get; }
 
         public DbEditorVM DbEditor { get; }
-
-        public IDialogProvider DialogProvider { get; }
-
         public Action<LoggerVM, bool> ToggleLoggerAction { get; set; }
 
         public Action<SettingsMan> ShowOptionsAction { get; set; }
@@ -115,7 +113,7 @@ namespace OpenBreed.Editor.VM
 
         public bool TryOpenXmlDatabase()
         {
-            var openFileDialog = application.GetInterface<IDialogProvider>().OpenFileDialog();
+            var openFileDialog = dialogProvider.OpenFileDialog();
             openFileDialog.Title = "Select an Open Breed Editor Database file to open...";
             openFileDialog.Filter = "Open Breed Editor Database files (*.xml)|*.xml|All Files (*.*)|*.*";
             openFileDialog.InitialDirectory = XmlDatabase.DefaultDirectoryPath;
@@ -142,7 +140,6 @@ namespace OpenBreed.Editor.VM
 
         public void Run()
         {
-
         }
 
         public void ToggleLogger(bool toggle)
@@ -167,7 +164,7 @@ namespace OpenBreed.Editor.VM
             {
                 if (DbEditor.IsModified)
                 {
-                    var answer = DialogProvider.ShowMessageWithQuestion("Current database has been modified. Do you want to save it before exiting?",
+                    var answer = dialogProvider.ShowMessageWithQuestion("Current database has been modified. Do you want to save it before exiting?",
                                                                                "Save database before exiting?", QuestionDialogButtons.YesNoCancel);
 
                     if (answer == DialogAnswer.Cancel)
@@ -204,7 +201,7 @@ namespace OpenBreed.Editor.VM
                     return false;
                 }
 
-                var answer = application.GetInterface<IDialogProvider>().ShowMessageWithQuestion($"Another database ({DbName}) is already opened. Do you want to close it?",
+                var answer = dialogProvider.ShowMessageWithQuestion($"Another database ({DbName}) is already opened. Do you want to close it?",
                                                                 "Close current database?",
                                                                 QuestionDialogButtons.OKCancel);
                 if (answer != DialogAnswer.OK)
@@ -246,7 +243,7 @@ namespace OpenBreed.Editor.VM
             {
                 if (DbEditor.IsModified)
                 {
-                    var answer = application.GetInterface<IDialogProvider>().ShowMessageWithQuestion("Current database has been modified. Do you want to save it before closing?",
+                    var answer = application.DialogProvider.ShowMessageWithQuestion("Current database has been modified. Do you want to save it before closing?",
                                                                                "Save database before closing?", QuestionDialogButtons.YesNoCancel);
 
                     if (answer == DialogAnswer.Cancel)
