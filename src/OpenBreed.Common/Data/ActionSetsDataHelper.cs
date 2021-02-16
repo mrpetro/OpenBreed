@@ -15,7 +15,7 @@ namespace OpenBreed.Common.Data
 {
     public class ActionSetsDataHelper
     {
-        public static ActionSetModel FromEmbeddedData(DataProvider provider, IActionSetEntry entry)
+        public static ActionSetModel FromEmbeddedData(IDataProvider provider, IActionSetEntry entry)
         {
             var model = new ActionSetModel();
 

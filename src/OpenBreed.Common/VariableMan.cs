@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace OpenBreed.Common
 {
-    public class VariableMan : IApplicationInterface, IVariableMan
+    public class VariableMan : IVariableMan
     {
         #region Private Fields
 

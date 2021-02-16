@@ -13,16 +13,16 @@ namespace OpenBreed.Common.Data
 
         private readonly Dictionary<string, AssetBase> _openedAssets = new Dictionary<string, AssetBase>();
         private readonly DataFormatMan formatMan;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IWorkspaceMan workspaceMan;
         private readonly DataSourceProvider dataSources;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public AssetsDataProvider(IUnitOfWork unitOfWork, DataSourceProvider dataSources, DataFormatMan formatMan)
+        public AssetsDataProvider(IWorkspaceMan workspaceMan, DataSourceProvider dataSources, DataFormatMan formatMan)
         {
-            this.unitOfWork = unitOfWork;
+            this.workspaceMan = workspaceMan;
             this.dataSources = dataSources;
             this.formatMan = formatMan;
         }
@@ -37,7 +37,7 @@ namespace OpenBreed.Common.Data
             if (_openedAssets.TryGetValue(id, out asset))
                 return asset;
 
-            var entry = unitOfWork.GetRepository<IAssetEntry>().GetById(id);
+            var entry = workspaceMan.UnitOfWork.GetRepository<IAssetEntry>().GetById(id);
             if (entry == null)
                 throw new Exception($"Asset error: {id}");
 

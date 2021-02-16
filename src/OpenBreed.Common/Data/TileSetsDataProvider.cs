@@ -1,54 +1,34 @@
-﻿using OpenBreed.Model.Tiles;
-using OpenBreed.Database.Interface.Items.Tiles;
+﻿using OpenBreed.Database.Interface.Items.Tiles;
+using OpenBreed.Model.Tiles;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenBreed.Database.Interface;
 
 namespace OpenBreed.Common.Data
 {
     public class TileSetsDataProvider
     {
-        private readonly IUnitOfWork unitOfWork;
+        #region Private Fields
+
+        private readonly IWorkspaceMan workspaceMan;
+
+        private readonly IDataProvider dataProvider;
+
+        #endregion Private Fields
 
         #region Public Constructors
 
-        public TileSetsDataProvider(DataProvider provider, IUnitOfWork unitOfWork)
+        public TileSetsDataProvider(IDataProvider dataProvider, IWorkspaceMan workspaceMan)
         {
-            Provider = provider;
-            this.unitOfWork = unitOfWork;
+            this.dataProvider = dataProvider;
+            this.workspaceMan = workspaceMan;
         }
 
         #endregion Public Constructors
 
-        #region Public Properties
-
-        public DataProvider Provider { get; }
-
-        #endregion Public Properties
-
         #region Public Methods
-
-        private TileSetModel GetModelImpl(ITileSetFromBlkEntry entry)
-        {
-            return TileSetsDataHelper.FromBlkModel(Provider, entry);
-        }
-
-        private TileSetModel GetModelImpl(ITileSetFromImageEntry entry)
-        {
-            return TileSetsDataHelper.FromImageModel(Provider, entry);
-        }
-
-        private TileSetModel GetModel(dynamic entry)
-        {
-            return GetModelImpl(entry);
-        }
 
         public TileSetModel GetTileSet(string id)
         {
-            var entry = unitOfWork.GetRepository<ITileSetEntry>().GetById(id);
+            var entry = workspaceMan.UnitOfWork.GetRepository<ITileSetEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("TileSet error: " + id);
 
@@ -57,5 +37,23 @@ namespace OpenBreed.Common.Data
 
         #endregion Public Methods
 
+        #region Private Methods
+
+        private TileSetModel GetModelImpl(ITileSetFromBlkEntry entry)
+        {
+            return TileSetsDataHelper.FromBlkModel(dataProvider, entry);
+        }
+
+        private TileSetModel GetModelImpl(ITileSetFromImageEntry entry)
+        {
+            return TileSetsDataHelper.FromImageModel(dataProvider, entry);
+        }
+
+        private TileSetModel GetModel(dynamic entry)
+        {
+            return GetModelImpl(entry);
+        }
+
+        #endregion Private Methods
     }
 }

@@ -9,23 +9,23 @@ namespace OpenBreed.Common.Data
     {
         #region Private Fields
 
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IWorkspaceMan workspaceMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public EntityTemplatesDataProvider(DataProvider provider, IUnitOfWork unitOfWork)
+        public EntityTemplatesDataProvider(IDataProvider provider, IWorkspaceMan workspaceMan)
         {
             Provider = provider;
-            this.unitOfWork = unitOfWork;
+            this.workspaceMan = workspaceMan;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public DataProvider Provider { get; }
+        public IDataProvider Provider { get; }
 
         #endregion Public Properties
 
@@ -33,7 +33,7 @@ namespace OpenBreed.Common.Data
 
         public EntityTemplateModel GetEntityTemplate(string id)
         {
-            var entry = unitOfWork.GetRepository<IEntityTemplateEntry>().GetById(id);
+            var entry = workspaceMan.UnitOfWork.GetRepository<IEntityTemplateEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("Script error: " + id);
 

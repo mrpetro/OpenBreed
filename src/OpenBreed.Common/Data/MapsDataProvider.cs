@@ -15,16 +15,16 @@ namespace OpenBreed.Common.Data
 
         private readonly IDataProvider provider;
 
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IWorkspaceMan workspaceMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public MapsDataProvider(IDataProvider provider, IUnitOfWork unitOfWork, TileSetsDataProvider tileSets, PalettesDataProvider palettes, ActionSetsDataProvider actionSets)
+        public MapsDataProvider(IDataProvider provider, IWorkspaceMan workspaceMan, TileSetsDataProvider tileSets, PalettesDataProvider palettes, ActionSetsDataProvider actionSets)
         {
             this.provider = provider;
-            this.unitOfWork = unitOfWork;
+            this.workspaceMan = workspaceMan;
             this.tileSets = tileSets;
             this.palettes = palettes;
             this.actionSets = actionSets;
@@ -36,7 +36,7 @@ namespace OpenBreed.Common.Data
 
         public MapModel GetMap(string id)
         {
-            var entry = unitOfWork.GetRepository<IMapEntry>().GetById(id);
+            var entry = workspaceMan.UnitOfWork.GetRepository<IMapEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("Map error: " + id);
 

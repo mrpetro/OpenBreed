@@ -1,42 +1,52 @@
-﻿using OpenBreed.Model.Texts;
-using OpenBreed.Database.Interface.Items.Texts;
+﻿using OpenBreed.Database.Interface.Items.Texts;
+using OpenBreed.Model.Texts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenBreed.Database.Interface;
 
 namespace OpenBreed.Common.Data
 {
     public class TextsDataProvider
     {
-        private readonly IUnitOfWork unitOfWork;
+        #region Private Fields
+
+        private readonly IWorkspaceMan workspaceMan;
+
+        private readonly IDataProvider dataProvider;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
-        public TextsDataProvider(DataProvider provider, IUnitOfWork unitOfWork)
+        public TextsDataProvider(IDataProvider dataProvider, IWorkspaceMan workspaceMan)
         {
-            Provider = provider;
-            this.unitOfWork = unitOfWork;
+            this.dataProvider = dataProvider;
+            this.workspaceMan = workspaceMan;
         }
 
         #endregion Public Constructors
 
-        #region Public Properties
+        #region Public Methods
 
-        public DataProvider Provider { get; }
+        public TextModel GetText(string id)
+        {
+            var entry = workspaceMan.UnitOfWork.GetRepository<ITextEntry>().GetById(id);
+            if (entry == null)
+                throw new Exception("Text error: " + id);
 
-        #endregion Public Properties
+            return GetModel(entry);
+        }
 
+        #endregion Public Methods
+
+        #region Private Methods
 
         private TextModel GetModelImpl(ITextFromMapEntry entry)
         {
-            return TextsDataHelper.FromMapModel(Provider, entry);
+            return TextsDataHelper.FromMapModel(dataProvider, entry);
         }
 
         private TextModel GetModelImpl(ITextEmbeddedEntry entry)
         {
-            return TextsDataHelper.FromBinary(Provider, entry);
+            return TextsDataHelper.FromBinary(dataProvider, entry);
         }
 
         private TextModel GetModel(dynamic entry)
@@ -44,14 +54,6 @@ namespace OpenBreed.Common.Data
             return GetModelImpl(entry);
         }
 
-        public TextModel GetText(string id)
-        {
-            var entry = unitOfWork.GetRepository<ITextEntry>().GetById(id);
-            if (entry == null)
-                throw new Exception("Text error: " + id);
-
-            return GetModel(entry);
-        }
+        #endregion Private Methods
     }
 }
-

@@ -1,5 +1,4 @@
-﻿using OpenBreed.Database.Interface;
-using OpenBreed.Database.Interface.Items.Scripts;
+﻿using OpenBreed.Database.Interface.Items.Scripts;
 using OpenBreed.Model.Scripts;
 using System;
 
@@ -9,31 +8,27 @@ namespace OpenBreed.Common.Data
     {
         #region Private Fields
 
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IWorkspaceMan workspaceMan;
+
+        private readonly IDataProvider dataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ScriptsDataProvider(DataProvider provider, IUnitOfWork unitOfWork)
+        public ScriptsDataProvider(IDataProvider dataProvider, IWorkspaceMan workspaceMan)
         {
-            Provider = provider;
-            this.unitOfWork = unitOfWork;
+            this.dataProvider = dataProvider;
+            this.workspaceMan = workspaceMan;
         }
 
         #endregion Public Constructors
-
-        #region Public Properties
-
-        public DataProvider Provider { get; }
-
-        #endregion Public Properties
 
         #region Public Methods
 
         public ScriptModel GetScript(string id)
         {
-            var entry = unitOfWork.GetRepository<IScriptEntry>().GetById(id);
+            var entry = workspaceMan.UnitOfWork.GetRepository<IScriptEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("Script error: " + id);
 
@@ -46,12 +41,12 @@ namespace OpenBreed.Common.Data
 
         private ScriptModel GetModelImpl(IScriptFromFileEntry entry)
         {
-            return ScriptsDataHelper.FromText(Provider, entry);
+            return ScriptsDataHelper.FromText(dataProvider, entry);
         }
 
         private ScriptModel GetModelImpl(IScriptEmbeddedEntry entry)
         {
-            return ScriptsDataHelper.FromBinary(Provider, entry);
+            return ScriptsDataHelper.FromBinary(dataProvider, entry);
         }
 
         private ScriptModel GetModel(dynamic entry)

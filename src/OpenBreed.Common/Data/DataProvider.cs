@@ -10,42 +10,45 @@ namespace OpenBreed.Common.Data
     {
         #region Private Fields
 
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IWorkspaceMan workspaceMan;
         private readonly ILogger logger;
         private readonly IVariableMan variables;
+        private readonly DataSourceProvider dataSources;
+        private readonly AssetsDataProvider assets;
         private Dictionary<string, object> _models = new Dictionary<string, object>();
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DataProvider(IUnitOfWork unitOfWork, ILogger logger, IVariableMan variables, DataFormatMan formatMan)
+        public DataProvider(IWorkspaceMan workspaceMan, ILogger logger, IVariableMan variables, DataFormatMan formatMan)
         {
-            this.unitOfWork = unitOfWork;
+            this.workspaceMan = workspaceMan;
             this.logger = logger;
             this.variables = variables;
 
-            DataSources = new DataSourceProvider(this, unitOfWork, logger, variables);
-            Palettes = new PalettesDataProvider(this, unitOfWork);
-            TileSets = new TileSetsDataProvider(this, unitOfWork);
-            SpriteSets = new SpriteSetsDataProvider(this, unitOfWork);
-            ActionSets = new ActionSetsDataProvider(this, unitOfWork);
-            Maps = new MapsDataProvider(this, unitOfWork, TileSets, Palettes, ActionSets);
-            Assets = new AssetsDataProvider(unitOfWork, DataSources, formatMan);
-            Sounds = new SoundsDataProvider(this, unitOfWork);
-            Images = new ImagesDataProvider(this, unitOfWork);
-            Texts = new TextsDataProvider(this, unitOfWork);
-            Scripts = new ScriptsDataProvider(this, unitOfWork);
-            EntityTemplates = new EntityTemplatesDataProvider(this, unitOfWork);
+            dataSources = new DataSourceProvider(this.workspaceMan, logger, variables);
+            assets = new AssetsDataProvider(this.workspaceMan, dataSources, formatMan);
+
+            Palettes = new PalettesDataProvider(this, this.workspaceMan);
+            TileSets = new TileSetsDataProvider(this, this.workspaceMan);
+            SpriteSets = new SpriteSetsDataProvider(this, this.workspaceMan);
+            ActionSets = new ActionSetsDataProvider(this, this.workspaceMan);
+            Maps = new MapsDataProvider(this, this.workspaceMan, TileSets, Palettes, ActionSets);
+
+            Sounds = new SoundsDataProvider(this, this.workspaceMan);
+            Images = new ImagesDataProvider(this, this.workspaceMan);
+            Texts = new TextsDataProvider(this, this.workspaceMan);
+            Scripts = new ScriptsDataProvider(this, this.workspaceMan);
+            EntityTemplates = new EntityTemplatesDataProvider(this, this.workspaceMan);
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public DataSourceProvider DataSources { get; }
         public ActionSetsDataProvider ActionSets { get; }
-        public AssetsDataProvider Assets { get; }
+
         public ImagesDataProvider Images { get; }
         public MapsDataProvider Maps { get; }
         public PalettesDataProvider Palettes { get; }
@@ -90,7 +93,7 @@ namespace OpenBreed.Common.Data
             if (_models.TryGetValue(id, out data))
                 return (T)data;
 
-            var asset = Assets.GetAsset(id);
+            var asset = assets.GetAsset(id);
             data = asset.Load();
             logger.Verbose($"Model loaded from asset '{asset.Id}'.");
 
@@ -101,7 +104,7 @@ namespace OpenBreed.Common.Data
 
         public void Close()
         {
-            DataSources.CloseAll();
+            dataSources.CloseAll();
 
             logger.Info($"All data closed.");
         }
@@ -110,9 +113,9 @@ namespace OpenBreed.Common.Data
         {
             SaveModels();
 
-            DataSources.Save();
+            dataSources.Save();
 
-            unitOfWork.Save();
+            workspaceMan.UnitOfWork.Save();
 
             logger.Info($"All data saved.");
         }
@@ -128,7 +131,7 @@ namespace OpenBreed.Common.Data
                 var entryId = item.Key;
                 var data = item.Value;
 
-                var asset = Assets.GetAsset(entryId);
+                var asset = assets.GetAsset(entryId);
 
                 try
                 {

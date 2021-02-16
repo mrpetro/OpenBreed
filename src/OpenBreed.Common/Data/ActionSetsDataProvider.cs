@@ -12,21 +12,21 @@ namespace OpenBreed.Common.Data
 {
     public class ActionSetsDataProvider
     {
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IWorkspaceMan workspaceMan;
 
         #region Public Constructors
 
-        public ActionSetsDataProvider(DataProvider provider, IUnitOfWork unitOfWork)
+        public ActionSetsDataProvider(IDataProvider provider, IWorkspaceMan workspaceMan)
         {
             Provider = provider;
-            this.unitOfWork = unitOfWork;
+            this.workspaceMan = workspaceMan;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public DataProvider Provider { get; }
+        public IDataProvider Provider { get; }
 
         #endregion Public Properties
 
@@ -44,7 +44,7 @@ namespace OpenBreed.Common.Data
 
         public ActionSetModel GetActionSet(string id)
         {
-            var entry = unitOfWork.GetRepository<IActionSetEntry>().GetById(id);
+            var entry = workspaceMan.UnitOfWork.GetRepository<IActionSetEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("ActionSet error: " + id);
 

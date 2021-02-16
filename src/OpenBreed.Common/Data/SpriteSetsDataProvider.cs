@@ -1,34 +1,34 @@
-﻿using OpenBreed.Model.Sprites;
-using OpenBreed.Database.Interface.Items.Sprites;
+﻿using OpenBreed.Database.Interface.Items.Sprites;
+using OpenBreed.Model.Sprites;
 using System;
-using OpenBreed.Database.Interface;
 
 namespace OpenBreed.Common.Data
 {
     public class SpriteSetsDataProvider
     {
-        private readonly IUnitOfWork unitOfWork;
+        #region Private Fields
+
+        private readonly IWorkspaceMan workspaceMan;
+
+        private readonly IDataProvider dataProvider;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
-        public SpriteSetsDataProvider(DataProvider provider, IUnitOfWork unitOfWork)
+        public SpriteSetsDataProvider(IDataProvider dataProvider, IWorkspaceMan workspaceMan)
         {
-            Provider = provider;
-            this.unitOfWork = unitOfWork;
+            this.dataProvider = dataProvider;
+            this.workspaceMan = workspaceMan;
         }
 
         #endregion Public Constructors
-
-        #region Public Properties
-
-        public DataProvider Provider { get; }
-
-        #endregion Public Properties
 
         #region Public Methods
 
         public SpriteSetModel GetSpriteSet(string id)
         {
-            var entry = unitOfWork.GetRepository<ISpriteSetEntry>().GetById(id);
+            var entry = workspaceMan.UnitOfWork.GetRepository<ISpriteSetEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("SpriteSet error: " + id);
 
@@ -46,12 +46,12 @@ namespace OpenBreed.Common.Data
 
         private SpriteSetModel GetModelImpl(ISpriteSetFromSprEntry entry)
         {
-            return SpriteSetsDataHelper.FromSprModel(Provider, entry);
+            return SpriteSetsDataHelper.FromSprModel(dataProvider, entry);
         }
 
         private SpriteSetModel GetModelImpl(ISpriteSetFromImageEntry entry)
         {
-            return SpriteSetsDataHelper.FromImageModel(Provider, entry);
+            return SpriteSetsDataHelper.FromImageModel(dataProvider, entry);
         }
 
         #endregion Private Methods

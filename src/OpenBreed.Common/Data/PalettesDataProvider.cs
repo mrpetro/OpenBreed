@@ -1,43 +1,52 @@
-﻿using OpenBreed.Model.Palettes;
-using OpenBreed.Database.Interface.Items.Palettes;
+﻿using OpenBreed.Database.Interface.Items.Palettes;
+using OpenBreed.Model.Palettes;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenBreed.Database.Interface;
 
 namespace OpenBreed.Common.Data
 {
     public class PalettesDataProvider
     {
-        private readonly IUnitOfWork unitOfWork;
+        #region Private Fields
+
+        private readonly IWorkspaceMan workspaceMan;
+
+        private readonly IDataProvider dataProvider;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
-        public PalettesDataProvider(DataProvider provider, IUnitOfWork unitOfWork)
+        public PalettesDataProvider(IDataProvider dataProvider, IWorkspaceMan workspaceMan)
         {
-            Provider = provider;
-            this.unitOfWork = unitOfWork;
+            this.dataProvider = dataProvider;
+            this.workspaceMan = workspaceMan;
         }
 
         #endregion Public Constructors
 
-        #region Public Properties
+        #region Public Methods
 
-        public DataProvider Provider { get; }
+        public PaletteModel GetPalette(string id)
+        {
+            var entry = workspaceMan.UnitOfWork.GetRepository<IPaletteEntry>().GetById(id);
+            if (entry == null)
+                throw new Exception("Palette error: " + id);
 
-        #endregion Public Properties
+            return GetModel(entry);
+        }
 
+        #endregion Public Methods
+
+        #region Private Methods
 
         private PaletteModel GetModelImpl(IPaletteFromMapEntry entry)
         {
-            return PalettesDataHelper.FromMapModel(Provider, entry);
+            return PalettesDataHelper.FromMapModel(dataProvider, entry);
         }
 
         private PaletteModel GetModelImpl(IPaletteFromBinaryEntry entry)
         {
-            return PalettesDataHelper.FromBinary(Provider, entry);
+            return PalettesDataHelper.FromBinary(dataProvider, entry);
         }
 
         private PaletteModel GetModel(dynamic entry)
@@ -45,13 +54,6 @@ namespace OpenBreed.Common.Data
             return GetModelImpl(entry);
         }
 
-        public PaletteModel GetPalette(string id)
-        {
-            var entry = unitOfWork.GetRepository<IPaletteEntry>().GetById(id);
-            if (entry == null)
-                throw new Exception("Palette error: " + id);
-
-            return GetModel(entry);
-        }
+        #endregion Private Methods
     }
 }

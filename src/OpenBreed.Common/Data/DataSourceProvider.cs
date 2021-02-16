@@ -18,7 +18,7 @@ namespace OpenBreed.Common.Data
         private readonly Dictionary<string, DataSourceBase> _openedDataSources = new Dictionary<string, DataSourceBase>();
         private Dictionary<string, EPFArchive> _openedArchives = new Dictionary<string, EPFArchive>();
         private bool disposedValue;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IWorkspaceMan workspaceMan;
         private ILogger logger;
         private readonly IVariableMan variables;
 
@@ -26,10 +26,9 @@ namespace OpenBreed.Common.Data
 
         #region Public Constructors
 
-        public DataSourceProvider(DataProvider dataProvider, IUnitOfWork unitOfWork, ILogger logger, IVariableMan variables)
+        public DataSourceProvider(IWorkspaceMan workspaceMan, ILogger logger, IVariableMan variables)
         {
-            DataProvider = dataProvider;
-            this.unitOfWork = unitOfWork;
+            this.workspaceMan = workspaceMan;
             this.logger = logger;
             this.variables = variables;
         }
@@ -37,8 +36,6 @@ namespace OpenBreed.Common.Data
         #endregion Public Constructors
 
         #region Public Properties
-
-        public DataProvider DataProvider { get; }
 
         #endregion Public Properties
 
@@ -50,7 +47,7 @@ namespace OpenBreed.Common.Data
             if (_openedDataSources.TryGetValue(name, out ds))
                 return ds;
 
-            var entry = unitOfWork.GetRepository<IDataSourceEntry>().GetById(name);
+            var entry = workspaceMan.UnitOfWork.GetRepository<IDataSourceEntry>().GetById(name);
             if (entry == null)
                 throw new Exception($"Data source error: {name}");
 

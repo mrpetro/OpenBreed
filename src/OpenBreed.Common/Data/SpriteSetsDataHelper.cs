@@ -15,14 +15,14 @@ namespace OpenBreed.Common.Data
 {
     internal class SpriteSetsDataHelper
     {
-        public static SpriteSetModel FromSprModel(DataProvider provider, ISpriteSetFromSprEntry entry)
+        public static SpriteSetModel FromSprModel(IDataProvider dataProvider, ISpriteSetFromSprEntry entry)
         {
-            return provider.GetData<SpriteSetModel>(entry.DataRef);
+            return dataProvider.GetData<SpriteSetModel>(entry.DataRef);
         }
 
-        public static SpriteSetModel FromImageModel(DataProvider provider, ISpriteSetFromImageEntry entry)
+        public static SpriteSetModel FromImageModel(IDataProvider dataProvider, ISpriteSetFromImageEntry entry)
         {
-            var image = provider.GetData<Bitmap>(entry.DataRef);
+            var image = dataProvider.GetData<Bitmap>(entry.DataRef);
 
             var spriteSetBuilder = SpriteSetBuilder.NewSpriteSet();
 
