@@ -8,7 +8,11 @@ namespace OpenBreed.Common
 
         TManager GetManager<TManager>();
 
+        object GetManager(Type type);
+
         void AddSingleton<TInterface>(Func<object> initializer);
+
+        void AddTransient<TInterface>(Func<object> initializer);
 
         void AddSingleton<TInterface>(TInterface instance);
 
