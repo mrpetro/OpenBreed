@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Common.Formats;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Actions;
@@ -30,6 +31,13 @@ namespace OpenBreed.Editor.UI.WinForms.Extensions
     public static class ManagerCollectionExtension
     {
         #region Public Methods
+
+
+        public static void SetupDbEntrySubEditors(this IManagerCollection managerCollection)
+        {
+            managerCollection.AddTransient<IEntryEditor<ITileSetFromBlkEntry>>(() => new TileSetFromBlkEditorVM(managerCollection.GetManager<DataProvider>().TileSets,
+                                                                                                                managerCollection.GetManager<DataProvider>().Palettes));
+        }
 
         public static void SetupDbEntryEditorFactory(this IManagerCollection managerCollection)
         {

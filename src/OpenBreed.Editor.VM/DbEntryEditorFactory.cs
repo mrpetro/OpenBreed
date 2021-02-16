@@ -16,7 +16,7 @@ namespace OpenBreed.Editor.VM
 
         #region Public Methods
 
-        EntryEditorVM Create(IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider);
+        EntryEditorVM Create(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider);
 
         #endregion Public Methods
 
@@ -75,9 +75,9 @@ namespace OpenBreed.Editor.VM
 
         #region Public Methods
 
-        public EntryEditorVM Create(IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider)
+        public EntryEditorVM Create(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider)
         {
-            return Activator.CreateInstance(typeof(T), workspaceMan, dataProvider, dialogProvider) as T;
+            return Activator.CreateInstance(typeof(T), managerCollection, workspaceMan, dataProvider, dialogProvider) as T;
         }
 
         #endregion Public Methods

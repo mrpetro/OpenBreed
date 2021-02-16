@@ -15,11 +15,10 @@ namespace OpenBreed.Editor.VM.Tiles
 
         static TileSetEditorVM()
         {
-            RegisterSubeditor<ITileSetFromBlkEntry>((parent) => new TileSetFromBlkEditorVM(parent.DataProvider.TileSets,
-                                                                                           parent.DataProvider.Palettes));
+            RegisterSubeditorEx<ITileSetFromBlkEntry, ITileSetEntry>();
         }
 
-        public TileSetEditorVM(IWorkspaceMan workspace, DataProvider dataProvider, IDialogProvider dialogProvider) : base(workspace, dataProvider, dialogProvider, "Tile Set Editor")
+        public TileSetEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspace, DataProvider dataProvider, IDialogProvider dialogProvider) : base(managerCollection, workspace, dataProvider, dialogProvider, "Tile Set Editor")
         {
         }
 

@@ -103,9 +103,9 @@ namespace OpenBreed.Editor.VM
             return new LoggerVM(logger);
         }
 
-        public DbEditorVM CreateDbEditorVm(IUnitOfWork unitOfWork)
+        public DbEditorVM CreateDbEditorVm()
         {
-            return new DbEditorVM(this, managerCollection.GetManager<DbEntryEditorFactory>(), workspaceMan, (DataProvider)dataProvider, DialogProvider);
+            return new DbEditorVM(this, managerCollection, managerCollection.GetManager<DbEntryEditorFactory>(), workspaceMan, (DataProvider)dataProvider, DialogProvider);
         }
 
         public DbTablesEditorVM CreateDbTablesEditorVm()
@@ -115,7 +115,7 @@ namespace OpenBreed.Editor.VM
 
         public EditorApplicationVM CreateEditorApplicationVm()
         {
-            return new EditorApplicationVM(this, workspaceMan, (DataProvider)dataProvider , settings, managerCollection.GetManager<DbEntryEditorFactory>(), DialogProvider);
+            return new EditorApplicationVM(this, managerCollection, workspaceMan, (DataProvider)dataProvider , settings, managerCollection.GetManager<DbEntryEditorFactory>(), DialogProvider);
         }
 
         #endregion Public Methods

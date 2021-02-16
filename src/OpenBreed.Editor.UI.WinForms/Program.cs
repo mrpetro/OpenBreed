@@ -77,8 +77,7 @@ namespace OpenBreed.Editor.UI.WinForms
 
             managerCollection.AddSingleton<IDataProvider>(managerCollection.GetManager<DataProvider>());
 
-
-
+            managerCollection.SetupDbEntrySubEditors();
             managerCollection.SetupDbEntryEditorFactory();
 
             var application = managerCollection.GetManager<EditorApplication>();

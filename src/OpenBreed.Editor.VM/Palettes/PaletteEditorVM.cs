@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Data;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Editor.VM.Maps;
@@ -14,13 +15,13 @@ namespace OpenBreed.Editor.VM.Palettes
 
         static PaletteEditorVM()
         {
-            RegisterSubeditor<IPaletteFromBinaryEntry>((parent) => new PaletteFromBinaryEditorVM(parent.DataProvider.Palettes,
-                                                                                                 parent.DataProvider));
-            RegisterSubeditor<IPaletteFromMapEntry>((parent) => new PaletteFromMapEditorVM(parent.DataProvider.Palettes,
-                                                                                           parent.DataProvider));
+            RegisterSubeditor<IPaletteFromBinaryEntry>((workspaceMan, dataProvider, dialogProvider) => new PaletteFromBinaryEditorVM(dataProvider.Palettes,
+                                                                                                 dataProvider));
+            RegisterSubeditor<IPaletteFromMapEntry>((workspaceMan, dataProvider, dialogProvider) => new PaletteFromMapEditorVM(dataProvider.Palettes,
+                                                                                           dataProvider));
         }
 
-        public PaletteEditorVM(IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(workspaceMan,dataProvider, dialogProvider, "Palette Editor")
+        public PaletteEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan,dataProvider, dialogProvider, "Palette Editor")
         {
         }
 

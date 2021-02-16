@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Data;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.DataSources;
 
@@ -10,11 +11,11 @@ namespace OpenBreed.Editor.VM.DataSources
 
         static DataSourceEditorVM()
         {
-            RegisterSubeditor<IFileDataSourceEntry>((parent) => new FileDataSourceEditorVM());
-            RegisterSubeditor<IEPFArchiveDataSourceEntry>((parent) => new EpfArchiveFileDataSourceEditorVM());
+            RegisterSubeditor<IFileDataSourceEntry>((workspaceMan, dataProvider, dialogProvider) => new FileDataSourceEditorVM());
+            RegisterSubeditor<IEPFArchiveDataSourceEntry>((workspaceMan, dataProvider, dialogProvider) => new EpfArchiveFileDataSourceEditorVM());
         }
 
-        public DataSourceEditorVM(IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(workspaceMan, dataProvider, dialogProvider, "Data Source Editor")
+        public DataSourceEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dataProvider, dialogProvider, "Data Source Editor")
         {
         }
 

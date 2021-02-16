@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Data;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Scripts;
@@ -13,11 +14,11 @@ namespace OpenBreed.Editor.VM.Scripts
 
         static ScriptEditorVM()
         {
-            RegisterSubeditor<IScriptEmbeddedEntry>((parent) => new ScriptEmbeddedEditorVM(parent.DataProvider.Scripts));
-            RegisterSubeditor<IScriptFromFileEntry>((parent) => new ScriptFromFileEditorVM(parent.WorkspaceMan, parent.DataProvider.Scripts, parent.DataProvider));
+            RegisterSubeditor<IScriptEmbeddedEntry>((workspaceMan, dataProvider, dialogProvider) => new ScriptEmbeddedEditorVM(dataProvider.Scripts));
+            RegisterSubeditor<IScriptFromFileEntry>((workspaceMan, dataProvider, dialogProvider) => new ScriptFromFileEditorVM(workspaceMan, dataProvider.Scripts, dataProvider));
         }
 
-        public ScriptEditorVM(IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(workspaceMan, dataProvider, dialogProvider, "Script Editor")
+        public ScriptEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dataProvider, dialogProvider, "Script Editor")
         {
         }
 

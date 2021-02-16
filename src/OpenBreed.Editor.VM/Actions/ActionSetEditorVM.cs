@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Data;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Actions;
 
@@ -10,10 +11,10 @@ namespace OpenBreed.Editor.VM.Actions
 
         static ActionSetEditorVM()
         {
-            RegisterSubeditor<IActionSetEntry>((parent) => new ActionSetEmbeddedEditorVM(parent.DataProvider.ActionSets));
+            RegisterSubeditor<IActionSetEntry>((workspaceMan, dataProvider, dialogProvider) => new ActionSetEmbeddedEditorVM(dataProvider.ActionSets));
         }
 
-        public ActionSetEditorVM(IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(workspaceMan, dataProvider, dialogProvider, "Action Set Editor")
+        public ActionSetEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dataProvider, dialogProvider, "Action Set Editor")
         {
         }
 

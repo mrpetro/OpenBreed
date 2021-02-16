@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Data;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Images;
 
@@ -10,12 +11,12 @@ namespace OpenBreed.Editor.VM.Images
 
         static ImageEditorVM()
         {
-            RegisterSubeditor<IImageEntry>((parent) => new ImageFromFileEditorVM(parent.WorkspaceMan,
-                                                                                 parent.DialogProvider,
-                                                                                 parent.DataProvider));
+            RegisterSubeditor<IImageEntry>((workspaceMan, dataProvider, dialogProvider) => new ImageFromFileEditorVM(workspaceMan,
+                                                                                 dialogProvider,
+                                                                                 dataProvider));
         }
 
-        public ImageEditorVM(IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(workspaceMan, dataProvider, dialogProvider, "Image Editor")
+        public ImageEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dataProvider, dialogProvider, "Image Editor")
         {
         }
 

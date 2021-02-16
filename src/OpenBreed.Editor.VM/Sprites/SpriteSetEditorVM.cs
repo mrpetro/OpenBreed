@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Data;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Sprites;
 using System;
@@ -11,15 +12,15 @@ namespace OpenBreed.Editor.VM.Sprites
 
         static SpriteSetEditorVM()
         {
-            RegisterSubeditor<ISpriteSetFromSprEntry>((parent) => new SpriteSetFromSprEditorVM(parent.DataProvider.SpriteSets,
-                                                                                               parent.DataProvider.Palettes,
-                                                                                               parent.DataProvider));
-            RegisterSubeditor<ISpriteSetFromImageEntry>((parent) => new SpriteSetFromImageEditorVM(parent.DataProvider.SpriteSets,
-                                                                                                   parent.DataProvider.Palettes,
-                                                                                                   parent.DataProvider));
+            RegisterSubeditor<ISpriteSetFromSprEntry>((workspaceMan, dataProvider, dialogProvider) => new SpriteSetFromSprEditorVM(dataProvider.SpriteSets,
+                                                                                               dataProvider.Palettes,
+                                                                                               dataProvider));
+            RegisterSubeditor<ISpriteSetFromImageEntry>((workspaceMan, dataProvider, dialogProvider) => new SpriteSetFromImageEditorVM(dataProvider.SpriteSets,
+                                                                                                   dataProvider.Palettes,
+                                                                                                   dataProvider));
         }
 
-        public SpriteSetEditorVM(IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(workspaceMan, dataProvider, dialogProvider, "Sprite Set Editor")
+        public SpriteSetEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dataProvider, dialogProvider, "Sprite Set Editor")
         {
         }
 

@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Data;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Common.Tools;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Xml;
@@ -16,6 +17,7 @@ namespace OpenBreed.Editor.VM.Database
         private readonly Dictionary<string, EntryEditorVM> _openedEntryEditors = new Dictionary<string, EntryEditorVM>();
 
         private readonly EditorApplication application;
+        private readonly IManagerCollection managerCollection;
         private readonly DbEntryEditorFactory dbEntryEditorFactory;
         private readonly IWorkspaceMan workspaceMan;
         private readonly DataProvider dataProvider;
@@ -26,12 +28,14 @@ namespace OpenBreed.Editor.VM.Database
         #region Public Constructors
 
         public DbEditorVM(EditorApplication application,
+                          IManagerCollection managerCollection,
                           DbEntryEditorFactory dbEntryEditorFactory,
                           IWorkspaceMan workspaceMan,
                           DataProvider dataProvider,
                           IDialogProvider dialogProvider)
         {
             this.application = application;
+            this.managerCollection = managerCollection;
             this.dbEntryEditorFactory = dbEntryEditorFactory;
             this.workspaceMan = workspaceMan;
             this.dataProvider = dataProvider;
@@ -122,7 +126,7 @@ namespace OpenBreed.Editor.VM.Database
             if (!_openedEntryEditors.TryGetValue(entryEditorKey, out entryEditor))
             {
                 var creator = dbEntryEditorFactory.GetCreator(repository);
-                entryEditor = creator.Create(workspaceMan, dataProvider, dialogProvider);
+                entryEditor = creator.Create(managerCollection, workspaceMan, dataProvider, dialogProvider);
                 _openedEntryEditors.Add(entryEditorKey, entryEditor);
                 entryEditor.ClosedAction = () => OnEntryEditorClosed(entryEditor);
                 entryEditor.EditEntry(entryId);

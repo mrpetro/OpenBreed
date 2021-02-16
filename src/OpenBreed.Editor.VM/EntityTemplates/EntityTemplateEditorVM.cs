@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Data;
+﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.EntityTemplates;
 
@@ -10,11 +11,11 @@ namespace OpenBreed.Editor.VM.EntityTemplates
 
         static EntityTemplateEditorVM()
         {
-            RegisterSubeditor<IEntityTemplateFromFileEntry>((parent) => new EntityTemplateFromFileEditorVM(parent.DataProvider.EntityTemplates,
-                                                                                                           parent.DataProvider));
+            RegisterSubeditor<IEntityTemplateFromFileEntry>((workspaceMan, dataProvider, dialogProvider) => new EntityTemplateFromFileEditorVM(dataProvider.EntityTemplates,
+                                                                                                           dataProvider));
         }
 
-        public EntityTemplateEditorVM(IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(workspaceMan, dataProvider, dialogProvider, "Entity Template Editor")
+        public EntityTemplateEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dataProvider, dialogProvider, "Entity Template Editor")
         {
         }
 
