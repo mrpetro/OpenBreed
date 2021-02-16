@@ -1,10 +1,44 @@
-﻿using OpenBreed.Common.Formats;
+﻿using OpenBreed.Common.Data;
+using OpenBreed.Common.Formats;
 
 namespace OpenBreed.Common.Extensions
 {
     public static class ManagerCollectionExtension
     {
         #region Public Methods
+
+        public static void SetupDataProviders(this IManagerCollection managerCollection)
+        {
+            managerCollection.AddSingleton<SpriteSetsDataProvider>(() => new SpriteSetsDataProvider(managerCollection.GetManager<IDataProvider>(),
+                                                                                                    managerCollection.GetManager<IWorkspaceMan>()));
+
+            managerCollection.AddSingleton<TileSetsDataProvider>(() => new TileSetsDataProvider(managerCollection.GetManager<IDataProvider>(),
+                                                                                                    managerCollection.GetManager<IWorkspaceMan>()));
+
+            managerCollection.AddSingleton<ScriptsDataProvider>(() => new ScriptsDataProvider(managerCollection.GetManager<IDataProvider>(),
+                                                                                                    managerCollection.GetManager<IWorkspaceMan>()));
+
+            managerCollection.AddSingleton<EntityTemplatesDataProvider>(() => new EntityTemplatesDataProvider(managerCollection.GetManager<IDataProvider>(),
+                                                                                                    managerCollection.GetManager<IWorkspaceMan>()));
+
+            managerCollection.AddSingleton<PalettesDataProvider>(() => new PalettesDataProvider(managerCollection.GetManager<IDataProvider>(),
+                                                                                                    managerCollection.GetManager<IWorkspaceMan>()));
+
+            managerCollection.AddSingleton<TextsDataProvider>(() => new TextsDataProvider(managerCollection.GetManager<IDataProvider>(),
+                                                                                                    managerCollection.GetManager<IWorkspaceMan>()));
+
+            managerCollection.AddSingleton<MapsDataProvider>(() => new MapsDataProvider(managerCollection.GetManager<IDataProvider>(),
+                                                                                        managerCollection.GetManager<IWorkspaceMan>(),
+                                                                                        managerCollection.GetManager<TileSetsDataProvider>(),
+                                                                                        managerCollection.GetManager<PalettesDataProvider>(),
+                                                                                        managerCollection.GetManager<ActionSetsDataProvider>()));
+
+            managerCollection.AddSingleton<ImagesDataProvider>(() => new ImagesDataProvider(managerCollection.GetManager<IDataProvider>(),
+                                                                                                    managerCollection.GetManager<IWorkspaceMan>()));
+
+            managerCollection.AddSingleton<SoundsDataProvider>(() => new SoundsDataProvider(managerCollection.GetManager<IDataProvider>(),
+                                                                                                    managerCollection.GetManager<IWorkspaceMan>()));
+        }
 
         public static void SetupABFormats(this IManagerCollection managerCollection)
         {
