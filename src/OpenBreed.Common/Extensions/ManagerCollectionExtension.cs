@@ -2,7 +2,7 @@
 
 namespace OpenBreed.Common.Extensions
 {
-    public static class Setup
+    public static class ManagerCollectionExtension
     {
         #region Public Methods
 
