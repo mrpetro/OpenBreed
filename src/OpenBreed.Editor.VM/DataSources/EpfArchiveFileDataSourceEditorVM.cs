@@ -12,13 +12,13 @@ namespace OpenBreed.Editor.VM.DataSources
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
-        internal EpfArchiveFileDataSourceEditorVM()
+        public EpfArchiveFileDataSourceEditorVM()
         {
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Properties
 

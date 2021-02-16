@@ -37,6 +37,64 @@ namespace OpenBreed.Editor.UI.WinForms.Extensions
         {
             managerCollection.AddTransient<IEntryEditor<ITileSetFromBlkEntry>>(() => new TileSetFromBlkEditorVM(managerCollection.GetManager<DataProvider>().TileSets,
                                                                                                                 managerCollection.GetManager<DataProvider>().Palettes));
+
+
+            managerCollection.AddTransient<IEntryEditor<IActionSetEntry>>(() => new ActionSetEmbeddedEditorVM(managerCollection.GetManager<DataProvider>().ActionSets));
+
+
+            managerCollection.AddTransient<IEntryEditor<IFileDataSourceEntry>>(() => new FileDataSourceEditorVM());
+
+            managerCollection.AddTransient<IEntryEditor<IEPFArchiveDataSourceEntry>>(() => new EpfArchiveFileDataSourceEditorVM());
+
+
+            managerCollection.AddTransient<IEntryEditor<IEntityTemplateFromFileEntry>>(() => new EntityTemplateFromFileEditorVM(managerCollection.GetManager<EntityTemplatesDataProvider>(),
+                                                                                                                                managerCollection.GetManager<DataProvider>()));
+
+
+            managerCollection.AddTransient<IEntryEditor<IImageEntry>>(() => new ImageFromFileEditorVM(managerCollection.GetManager<IWorkspaceMan>(),
+                                                                                                                managerCollection.GetManager<IDialogProvider>(),
+                                                                                                                managerCollection.GetManager<DataProvider>()));
+
+
+            managerCollection.AddTransient<IEntryEditor<ISpriteSetFromSprEntry>>(() => new SpriteSetFromSprEditorVM(managerCollection.GetManager<SpriteSetsDataProvider>(),
+                                                                                                                managerCollection.GetManager<PalettesDataProvider>(),
+                                                                                                                managerCollection.GetManager<DataProvider>()));
+
+
+
+            managerCollection.AddTransient<IEntryEditor<ISpriteSetFromImageEntry>>(() => new SpriteSetFromImageEditorVM(managerCollection.GetManager<SpriteSetsDataProvider>(),
+                                                                                                                managerCollection.GetManager<PalettesDataProvider>(),
+                                                                                                                managerCollection.GetManager<DataProvider>()));
+
+
+            managerCollection.AddTransient<IEntryEditor<IPaletteFromBinaryEntry>>(() => new PaletteFromBinaryEditorVM(managerCollection.GetManager<PalettesDataProvider>(),
+                                                                                                                managerCollection.GetManager<DataProvider>()));
+
+
+            managerCollection.AddTransient<IEntryEditor<IPaletteFromMapEntry>>(() => new PaletteFromMapEditorVM(managerCollection.GetManager<PalettesDataProvider>(),
+                                                                                                                managerCollection.GetManager<DataProvider>()));
+
+
+            managerCollection.AddTransient<IEntryEditor<ITextEmbeddedEntry>>(() => new TextEmbeddedEditorVM(managerCollection.GetManager<TextsDataProvider>()));
+
+
+
+            managerCollection.AddTransient<IEntryEditor<ITextFromMapEntry>>(() => new TextFromMapEditorVM(managerCollection.GetManager<TextsDataProvider>(),
+                                                                                                          managerCollection.GetManager<DataProvider>()));
+
+
+
+            managerCollection.AddTransient<IEntryEditor<ISoundEntry>>(() => new SoundFromPcmEditorVM(managerCollection.GetManager<SoundsDataProvider>()));
+
+            managerCollection.AddTransient<IEntryEditor<IScriptEmbeddedEntry>>(() => new ScriptEmbeddedEditorVM(managerCollection.GetManager<ScriptsDataProvider>()));
+
+
+            managerCollection.AddTransient<IEntryEditor<IScriptFromFileEntry>>(() => new ScriptFromFileEditorVM(managerCollection.GetManager<IWorkspaceMan>(),
+                                                                                                                managerCollection.GetManager<ScriptsDataProvider>(),
+                                                                                                                managerCollection.GetManager<DataProvider>()));
+
+
+
         }
 
         public static void SetupDbEntryEditorFactory(this IManagerCollection managerCollection)

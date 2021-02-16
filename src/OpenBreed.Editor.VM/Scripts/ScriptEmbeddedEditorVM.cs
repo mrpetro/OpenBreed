@@ -1,5 +1,4 @@
-﻿using OpenBreed.Common;
-using OpenBreed.Common.Data;
+﻿using OpenBreed.Common.Data;
 using OpenBreed.Database.Interface.Items.Scripts;
 using OpenBreed.Editor.VM.Base;
 
@@ -9,21 +8,21 @@ namespace OpenBreed.Editor.VM.Scripts
     {
         #region Private Fields
 
+        private readonly ScriptsDataProvider scriptsDataProvider;
         private string dataRef;
 
         private string script;
-        private readonly ScriptsDataProvider scriptsDataProvider;
 
         #endregion Private Fields
 
-        #region Internal Constructors
+        #region Public Constructors
 
-        internal ScriptEmbeddedEditorVM(ScriptsDataProvider scriptsDataProvider)
+        public ScriptEmbeddedEditorVM(ScriptsDataProvider scriptsDataProvider)
         {
             this.scriptsDataProvider = scriptsDataProvider;
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Properties
 

@@ -15,10 +15,8 @@ namespace OpenBreed.Editor.VM.Palettes
 
         static PaletteEditorVM()
         {
-            RegisterSubeditor<IPaletteFromBinaryEntry>((workspaceMan, dataProvider, dialogProvider) => new PaletteFromBinaryEditorVM(dataProvider.Palettes,
-                                                                                                 dataProvider));
-            RegisterSubeditor<IPaletteFromMapEntry>((workspaceMan, dataProvider, dialogProvider) => new PaletteFromMapEditorVM(dataProvider.Palettes,
-                                                                                           dataProvider));
+            RegisterSubeditor<IPaletteFromBinaryEntry, IPaletteEntry>();
+            RegisterSubeditor<IPaletteFromMapEntry, IPaletteEntry>();
         }
 
         public PaletteEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan,dataProvider, dialogProvider, "Palette Editor")
