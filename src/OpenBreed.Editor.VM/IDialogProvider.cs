@@ -27,7 +27,7 @@ namespace OpenBreed.Editor.VM
         RetryCancel = 5
     }
 
-    public interface IDialogProvider : IApplicationInterface
+    public interface IDialogProvider
     {
         #region Public Methods
 

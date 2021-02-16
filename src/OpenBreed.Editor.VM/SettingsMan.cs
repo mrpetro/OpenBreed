@@ -7,7 +7,7 @@ using System.IO;
 
 namespace OpenBreed.Editor.VM
 {
-    public class SettingsMan : IApplicationInterface
+    public class SettingsMan
     {
         #region Private Fields
 
@@ -15,13 +15,13 @@ namespace OpenBreed.Editor.VM
         private const string CFG_FILE_NAME = @"Settings.xml";
 
         private readonly ILogger logger;
-        private readonly VariableMan variables;
+        private readonly IVariableMan variables;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public SettingsMan(VariableMan variables, ILogger logger)
+        public SettingsMan(IVariableMan variables, ILogger logger)
         {
             this.variables = variables;
             this.logger = logger;

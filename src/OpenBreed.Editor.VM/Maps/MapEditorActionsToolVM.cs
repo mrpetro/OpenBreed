@@ -1,4 +1,5 @@
-﻿using OpenBreed.Database.Interface;
+﻿using OpenBreed.Common.Data;
+using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Editor.VM.Common;
 using OpenBreed.Model.Actions;
@@ -20,10 +21,10 @@ namespace OpenBreed.Editor.VM.Maps
 
         #region Public Constructors
 
-        public MapEditorActionsToolVM(MapEditorVM parent, IUnitOfWork unitOfWork)
+        public MapEditorActionsToolVM(MapEditorVM parent, IWorkspaceMan workspaceMan)
         {
             Parent = parent;
-            RefIdEditor = new EntryRefIdEditorVM(unitOfWork, typeof(IActionSetEntry));
+            RefIdEditor = new EntryRefIdEditorVM(workspaceMan, typeof(IActionSetEntry));
             ActionsSelector = new MapEditorActionsSelectorVM(this);
 
             RefIdEditor.PropertyChanged += ActionEntryRef_PropertyChanged;

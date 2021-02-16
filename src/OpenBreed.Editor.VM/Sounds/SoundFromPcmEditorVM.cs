@@ -1,4 +1,5 @@
-﻿using OpenBreed.Common.Tools.Sounds;
+﻿using OpenBreed.Common.Data;
+using OpenBreed.Common.Tools.Sounds;
 using OpenBreed.Database.Interface.Items.Sounds;
 using OpenBreed.Editor.VM.Base;
 
@@ -6,6 +7,7 @@ namespace OpenBreed.Editor.VM.Sounds
 {
     public class SoundFromPcmEditorVM : BaseViewModel, IEntryEditor<ISoundEntry>
     {
+        private readonly SoundsDataProvider soundsDataProvider;
         #region Private Fields
 
         private int _bitsPerSample;
@@ -17,16 +19,14 @@ namespace OpenBreed.Editor.VM.Sounds
 
         #region Public Constructors
 
-        public SoundFromPcmEditorVM(ParentEntryEditor<ISoundEntry> parent)
+        public SoundFromPcmEditorVM(SoundsDataProvider soundsDataProvider)
         {
-            Parent = parent;
+            this.soundsDataProvider = soundsDataProvider;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
-
-        public ParentEntryEditor<ISoundEntry> Parent { get; }
 
         public int BitsPerSample
         {
@@ -67,7 +67,7 @@ namespace OpenBreed.Editor.VM.Sounds
 
         public void UpdateEntry(ISoundEntry entry)
         {
-            var model = Parent.DataProvider.Sounds.GetSound(entry.Id);
+            var model = soundsDataProvider.GetSound(entry.Id);
 
             model.BitsPerSample = BitsPerSample;
             model.Channels = Channels;
@@ -77,7 +77,7 @@ namespace OpenBreed.Editor.VM.Sounds
 
         public void UpdateVM(ISoundEntry entry)
         {
-            var model = Parent.DataProvider.Sounds.GetSound(entry.Id);
+            var model = soundsDataProvider.GetSound(entry.Id);
             BitsPerSample = model.BitsPerSample;
             Channels = model.Channels;
             SampleRate = model.SampleRate;

@@ -19,7 +19,9 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Public Constructors
 
-        public SpriteSetFromSprEditorVM(ParentEntryEditor<ISpriteSetEntry> parent) : base(parent)
+        public SpriteSetFromSprEditorVM(SpriteSetsDataProvider spriteSetsDataProvider,
+                                          PalettesDataProvider palettesDataProvider,
+                                          DataProvider dataProvider) : base(spriteSetsDataProvider, palettesDataProvider, dataProvider)
         {
             Items = new BindingList<SpriteVM>();
         }
@@ -82,7 +84,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         private void UpdateVM(ISpriteSetFromSprEntry entry)
         {
-            var model = Parent.DataProvider.SpriteSets.GetSpriteSet(entry.Id);
+            var model = spriteSetsDataProvider.GetSpriteSet(entry.Id);
 
             if (model != null)
                 FromModel(model);

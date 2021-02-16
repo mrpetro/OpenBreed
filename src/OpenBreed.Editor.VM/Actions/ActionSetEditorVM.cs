@@ -10,10 +10,10 @@ namespace OpenBreed.Editor.VM.Actions
 
         static ActionSetEditorVM()
         {
-            RegisterSubeditor<IActionSetEntry>((parent) => new ActionSetEmbeddedEditorVM(parent));
+            RegisterSubeditor<IActionSetEntry>((parent) => new ActionSetEmbeddedEditorVM(parent.DataProvider.ActionSets));
         }
 
-        public ActionSetEditorVM(EditorApplication application, DataProvider dataProvider, IUnitOfWork unitOfWork) : base(application, dataProvider, unitOfWork, "Action Set Editor")
+        public ActionSetEditorVM(IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(workspaceMan, dataProvider, dialogProvider, "Action Set Editor")
         {
         }
 

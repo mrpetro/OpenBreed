@@ -12,14 +12,15 @@ namespace OpenBreed.Editor.VM.Scripts
         private string dataRef;
 
         private string script;
+        private readonly ScriptsDataProvider scriptsDataProvider;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal ScriptEmbeddedEditorVM(ParentEntryEditor<IScriptEntry> parent)
+        internal ScriptEmbeddedEditorVM(ScriptsDataProvider scriptsDataProvider)
         {
-            Parent = parent;
+            this.scriptsDataProvider = scriptsDataProvider;
         }
 
         #endregion Internal Constructors
@@ -31,8 +32,6 @@ namespace OpenBreed.Editor.VM.Scripts
             get { return script; }
             set { SetProperty(ref script, value); }
         }
-
-        public ParentEntryEditor<IScriptEntry> Parent { get; }
 
         public string DataRef
         {
@@ -46,7 +45,7 @@ namespace OpenBreed.Editor.VM.Scripts
 
         public void UpdateVM(IScriptEntry entry)
         {
-            var model = Parent.DataProvider.Scripts.GetScript(entry.Id);
+            var model = scriptsDataProvider.GetScript(entry.Id);
 
             if (model != null)
                 Script = model.Script;

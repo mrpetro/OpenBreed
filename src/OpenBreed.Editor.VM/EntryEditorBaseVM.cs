@@ -8,16 +8,10 @@ namespace OpenBreed.Editor.VM
 {
     public abstract class EntryEditorBaseVM<E> : EntryEditorVM where E : IEntry
     {
-        #region Protected Fields
-
-        protected readonly EditorApplication application;
-        private readonly IUnitOfWork unitOfWork;
-
-        #endregion Protected Fields
-
         #region Private Fields
 
         private static readonly HashSet<string> propertyNamesIgnoredForChanges = new HashSet<string>();
+        private readonly IDialogProvider dialogProvider;
         private readonly IRepository<E> repository;
         private E edited;
         private E next;
@@ -38,19 +32,23 @@ namespace OpenBreed.Editor.VM
 
         #region Protected Constructors
 
-        protected EntryEditorBaseVM(EditorApplication application, DataProvider dataProvider, IUnitOfWork unitOfWork)
+        protected EntryEditorBaseVM(IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider)
         {
-            this.application = application;
+            WorkspaceMan = workspaceMan;
             DataProvider = dataProvider;
-            this.unitOfWork = unitOfWork;
-            repository = unitOfWork.GetRepository<E>();
+            this.dialogProvider = dialogProvider;
+            repository = WorkspaceMan.UnitOfWork.GetRepository<E>();
         }
 
         #endregion Protected Constructors
 
         #region Internal Properties
 
+        internal IWorkspaceMan WorkspaceMan { get; }
+
         internal DataProvider DataProvider { get; }
+
+        internal IDialogProvider DialogProvider => dialogProvider;
 
         #endregion Internal Properties
 
@@ -77,7 +75,7 @@ namespace OpenBreed.Editor.VM
 
         public override void Revert()
         {
-            application.DialogProvider.ShowMessage("Function not implemented yet.", "Not implemented");
+            dialogProvider.ShowMessage("Function not implemented yet.", "Not implemented");
         }
 
         public override void EditEntry(string id)

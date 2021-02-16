@@ -23,7 +23,8 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Public Constructors
 
-        public PaletteFromMapEditorVM(ParentEntryEditor<IPaletteEntry> parent) : base(parent)
+        public PaletteFromMapEditorVM(PalettesDataProvider palettesDataProvider,
+                                      IDataProvider dataProvider) : base(palettesDataProvider, dataProvider)
         {
             BlockNames = new BindingList<string>();
             BlockNames.ListChanged += (s, a) => OnPropertyChanged(nameof(BlockNames));
@@ -90,7 +91,7 @@ namespace OpenBreed.Editor.VM.Palettes
             {
                 BlockNames.Clear();
 
-                var map = Parent.DataProvider.GetData<MapModel>(source.DataRef);
+                var map = dataProvider.GetData<MapModel>(source.DataRef);
 
                 if (map == null)
                     return;
@@ -110,7 +111,7 @@ namespace OpenBreed.Editor.VM.Palettes
         {
             UpdatePaletteBlocksList(entry);
 
-            var model = Parent.DataProvider.Palettes.GetPalette(entry.Id);
+            var model = palettesDataProvider.GetPalette(entry.Id);
 
             if (model != null)
                 UpdateVMColors(model);
@@ -121,7 +122,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
         private void UpdateEntry(IPaletteFromMapEntry source)
         {
-            var mapModel = Parent.DataProvider.GetData<MapModel>(DataRef);
+            var mapModel = dataProvider.GetData<MapModel>(DataRef);
 
             var paletteBlock = mapModel.Blocks.OfType<MapPaletteBlock>().FirstOrDefault(item => item.Name == BlockName);
 

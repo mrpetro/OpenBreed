@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Common.Tools;
 using OpenBreed.Database.Xml;
 using OpenBreed.Editor.VM.Base;
@@ -17,18 +18,20 @@ namespace OpenBreed.Editor.VM
         Exited
     }
 
-    public class EditorApplicationVM : BaseViewModel, IApplicationInterface
+    public class EditorApplicationVM : BaseViewModel
     {
         #region Public Fields
 
         public EditorApplication application;
+        private readonly IWorkspaceMan workspaceMan;
+        private readonly DataProvider dataProvider;
 
         #endregion Public Fields
 
         #region Private Fields
 
         private readonly SettingsMan settings;
-
+        private readonly DbEntryEditorFactory dbEntryEditorFactory;
         private readonly IDialogProvider dialogProvider;
         private EditorState _state;
         private LoggerVM logger;
@@ -41,16 +44,23 @@ namespace OpenBreed.Editor.VM
 
         #region Public Constructors
 
-        public EditorApplicationVM(EditorApplication application, SettingsMan settings, DbEntryEditorFactory dbEntryEditorFactory, IDialogProvider dialogProvider)
+        public EditorApplicationVM(EditorApplication application, IWorkspaceMan workspaceMan, DataProvider dataProvider, SettingsMan settings, DbEntryEditorFactory dbEntryEditorFactory, IDialogProvider dialogProvider)
         {
             this.application = application;
+            this.workspaceMan = workspaceMan;
+            this.dataProvider = dataProvider;
             this.settings = settings;
+            this.dbEntryEditorFactory = dbEntryEditorFactory;
             this.dialogProvider = dialogProvider;
-            DbEditor = new DbEditorVM(application, dbEntryEditorFactory);
 
             MenuItems = new BindingList<MenuItemVM>();
 
             Title = EditorApplication.APP_NAME;
+        }
+
+        public DbEditorVM CreateDbEditorVM()
+        {
+            return new DbEditorVM(application, dbEntryEditorFactory, workspaceMan, dataProvider, application.DialogProvider);
         }
 
         #endregion Public Constructors
@@ -59,7 +69,6 @@ namespace OpenBreed.Editor.VM
 
         public BindingList<MenuItemVM> MenuItems { get; }
 
-        public DbEditorVM DbEditor { get; }
         public Action<LoggerVM, bool> ToggleLoggerAction { get; set; }
 
         public Action<SettingsMan> ShowOptionsAction { get; set; }
@@ -98,9 +107,9 @@ namespace OpenBreed.Editor.VM
             ShowOptionsAction?.Invoke(settings);
         }
 
-        public bool TryCloseDatabase()
+        public bool TryCloseDatabase(DbEditorVM dbEditorVM)
         {
-            if (TrySaveBeforeClosing())
+            if (TrySaveBeforeClosing(dbEditorVM))
             {
                 DbName = null;
                 application.CloseDatabase();
@@ -111,7 +120,7 @@ namespace OpenBreed.Editor.VM
                 return false;
         }
 
-        public bool TryOpenXmlDatabase()
+        public bool TryOpenXmlDatabase(DbEditorVM dbEditorVM)
         {
             var openFileDialog = dialogProvider.OpenFileDialog();
             openFileDialog.Title = "Select an Open Breed Editor Database file to open...";
@@ -126,14 +135,14 @@ namespace OpenBreed.Editor.VM
 
             string databaseFilePath = openFileDialog.FileName;
 
-            if (!CheckCloseCurrentDatabase(databaseFilePath))
+            if (!CheckCloseCurrentDatabase(databaseFilePath, dbEditorVM))
                 return false;
 
             application.OpenXmlDatabase(databaseFilePath);
 
-            DbName = application.UnitOfWork.Name;
+            DbName = workspaceMan.UnitOfWork.Name;
 
-            var dbEditor = application.CreateDbEditorVm(application.UnitOfWork);
+            var dbEditor = application.CreateDbEditorVm(workspaceMan.UnitOfWork);
 
             return true;
         }
@@ -152,17 +161,14 @@ namespace OpenBreed.Editor.VM
 
         public void TrySaveDatabase()
         {
-            if (application.UnitOfWork != null)
-            {
-                application.SaveDatabase();
-            }
+            application.SaveDatabase();
         }
 
-        public bool TrySaveBeforeExiting()
+        public bool TrySaveBeforeExiting(DbEditorVM dbEditorVM)
         {
-            if (application.UnitOfWork != null)
+            if (workspaceMan.UnitOfWork != null)
             {
-                if (DbEditor.IsModified)
+                if (dbEditorVM.IsModified)
                 {
                     var answer = dialogProvider.ShowMessageWithQuestion("Current database has been modified. Do you want to save it before exiting?",
                                                                                "Save database before exiting?", QuestionDialogButtons.YesNoCancel);
@@ -191,9 +197,9 @@ namespace OpenBreed.Editor.VM
         /// If it is then it asks of it can be closed
         /// </summary>
         /// <returns>True if no database was opened or if previous one was closed, false otherwise</returns>
-        internal bool CheckCloseCurrentDatabase(string newDatabaseFilePath)
+        internal bool CheckCloseCurrentDatabase(string newDatabaseFilePath, DbEditorVM dbEditorVM)
         {
-            if (application.UnitOfWork != null)
+            if (workspaceMan.UnitOfWork != null)
             {
                 if (IOHelper.GetNormalizedPath(newDatabaseFilePath) == IOHelper.GetNormalizedPath(DbName))
                 {
@@ -207,7 +213,7 @@ namespace OpenBreed.Editor.VM
                 if (answer != DialogAnswer.OK)
                     return false;
 
-                if (!TryCloseDatabase())
+                if (!TryCloseDatabase(dbEditorVM))
                     return false;
             }
 
@@ -237,11 +243,11 @@ namespace OpenBreed.Editor.VM
 
         #region Private Methods
 
-        private bool TrySaveBeforeClosing()
+        private bool TrySaveBeforeClosing(DbEditorVM dbEditorVM)
         {
-            if (application.UnitOfWork != null)
+            if (workspaceMan.UnitOfWork != null)
             {
-                if (DbEditor.IsModified)
+                if (dbEditorVM.IsModified)
                 {
                     var answer = application.DialogProvider.ShowMessageWithQuestion("Current database has been modified. Do you want to save it before closing?",
                                                                                "Save database before closing?", QuestionDialogButtons.YesNoCancel);

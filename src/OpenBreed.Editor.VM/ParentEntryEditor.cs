@@ -17,7 +17,7 @@ namespace OpenBreed.Editor.VM
 
         #region Public Constructors
 
-        public ParentEntryEditor(EditorApplication application, DataProvider dataProvider, IUnitOfWork unitOfWork, string editorName) : base(application, dataProvider, unitOfWork)
+        public ParentEntryEditor(IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider, string editorName) : base(workspaceMan, dataProvider, dialogProvider)
         {
             EditorName = editorName;
         }
@@ -31,8 +31,6 @@ namespace OpenBreed.Editor.VM
             get { return subeditor; }
             private set { SetProperty(ref subeditor, value); }
         }
-
-        public EditorApplication Application => application;
 
         //protected override void OnPropertyChanged(string name)
         //{

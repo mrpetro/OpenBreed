@@ -14,11 +14,13 @@ namespace OpenBreed.Editor.VM.Palettes
 
         static PaletteEditorVM()
         {
-            RegisterSubeditor<IPaletteFromBinaryEntry>((parent) => new PaletteFromBinaryEditorVM(parent));
-            RegisterSubeditor<IPaletteFromMapEntry>((parent) => new PaletteFromMapEditorVM(parent));
+            RegisterSubeditor<IPaletteFromBinaryEntry>((parent) => new PaletteFromBinaryEditorVM(parent.DataProvider.Palettes,
+                                                                                                 parent.DataProvider));
+            RegisterSubeditor<IPaletteFromMapEntry>((parent) => new PaletteFromMapEditorVM(parent.DataProvider.Palettes,
+                                                                                           parent.DataProvider));
         }
 
-        public PaletteEditorVM(EditorApplication application, DataProvider dataProvider, IUnitOfWork unitOfWork) : base(application, dataProvider, unitOfWork, "Palette Editor")
+        public PaletteEditorVM(IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(workspaceMan,dataProvider, dialogProvider, "Palette Editor")
         {
         }
 

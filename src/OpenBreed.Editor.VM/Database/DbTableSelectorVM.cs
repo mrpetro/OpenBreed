@@ -1,4 +1,6 @@
-﻿using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Common.Data;
+using OpenBreed.Database.Interface;
+using OpenBreed.Editor.VM.Base;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -9,17 +11,16 @@ namespace OpenBreed.Editor.VM.Database
     {
         #region Private Fields
 
-        private readonly EditorApplication application;
+        private readonly IWorkspaceMan workspaceMan;
         private string currentTableName;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal DbTableSelectorVM(EditorApplication application)
+        internal DbTableSelectorVM(IWorkspaceMan workspaceMan)
         {
-            this.application = application;
-
+            this.workspaceMan = workspaceMan;
             TableNames = new BindingList<string>();
             TableNames.ListChanged += (s, a) => OnPropertyChanged(nameof(TableNames));
 
@@ -69,7 +70,7 @@ namespace OpenBreed.Editor.VM.Database
             {
                 TableNames.Clear();
 
-                foreach (var repository in application.UnitOfWork.Repositories)
+                foreach (var repository in workspaceMan.UnitOfWork.Repositories)
                     TableNames.Add(repository.Name);
             });
         }

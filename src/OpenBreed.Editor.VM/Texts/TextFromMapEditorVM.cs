@@ -19,14 +19,18 @@ namespace OpenBreed.Editor.VM.Texts
         private string _text;
 
         private string _dataRef;
+        private readonly TextsDataProvider textsDataProvider;
+        private readonly DataProvider dataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TextFromMapEditorVM(ParentEntryEditor<ITextEntry> parent)
+        public TextFromMapEditorVM(TextsDataProvider textsDataProvider,
+                                   DataProvider dataProvider)
         {
-            Parent = parent;
+            this.textsDataProvider = textsDataProvider;
+            this.dataProvider = dataProvider;
             BlockNames = new BindingList<string>();
             BlockNames.ListChanged += (s, a) => OnPropertyChanged(nameof(BlockNames));
 
@@ -37,7 +41,6 @@ namespace OpenBreed.Editor.VM.Texts
 
         #region Public Properties
 
-        public ParentEntryEditor<ITextEntry> Parent { get; }
         public BindingList<string> BlockNames { get; }
 
         public string BlockName
@@ -74,7 +77,7 @@ namespace OpenBreed.Editor.VM.Texts
 
             UpdateTextBlocksList(textFromMapEntry);
 
-            var model = Parent.DataProvider.Texts.GetText(entry.Id);
+            var model = textsDataProvider.GetText(entry.Id);
 
             if (model != null)
                 Text = model.Text;
@@ -87,13 +90,13 @@ namespace OpenBreed.Editor.VM.Texts
         {
             var textFromMapEntry = (ITextFromMapEntry)entry;
 
-            var mapModel = Parent.DataProvider.GetData<MapModel>(DataRef);
+            var mapModel = dataProvider.GetData<MapModel>(DataRef);
 
             var textBlock = mapModel.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == BlockName);
 
             textBlock.Value = Text;
 
-            var model = Parent.DataProvider.Texts.GetText(entry.Id);
+            var model = textsDataProvider.GetText(entry.Id);
             model.Text = Text;
 
             textFromMapEntry.DataRef = DataRef;
@@ -110,7 +113,7 @@ namespace OpenBreed.Editor.VM.Texts
             {
                 BlockNames.Clear();
 
-                var map = Parent.DataProvider.GetData<MapModel>(source.DataRef);
+                var map = dataProvider.GetData<MapModel>(source.DataRef);
 
                 if (map == null)
                     return;

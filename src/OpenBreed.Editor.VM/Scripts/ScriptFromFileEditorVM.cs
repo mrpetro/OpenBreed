@@ -18,26 +18,26 @@ namespace OpenBreed.Editor.VM.Scripts
         private string _dataRef;
 
         private string _script;
+        private readonly ScriptsDataProvider scriptsDataProvider;
+        private readonly IDataProvider dataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ScriptFromFileEditorVM(ParentEntryEditor<IScriptEntry> parent)
+        public ScriptFromFileEditorVM(IWorkspaceMan workspaceMan, ScriptsDataProvider scriptsDataProvider, IDataProvider dataProvider)
         {
-            Parent = parent;
-
+            this.scriptsDataProvider = scriptsDataProvider;
+            this.dataProvider = dataProvider;
             PropertyChanged += This_PropertyChanged;
 
-            ScriptAssetRefIdEditor = new EntryRefIdEditorVM(Parent.Application.UnitOfWork, typeof(IAssetEntry));
+            ScriptAssetRefIdEditor = new EntryRefIdEditorVM(workspaceMan, typeof(IAssetEntry));
             ScriptAssetRefIdEditor.RefIdSelected = (newRefId) => { DataRef = newRefId; };
         }
 
         #endregion Public Constructors
 
         #region Public Properties
-
-        public ParentEntryEditor<IScriptEntry> Parent { get; }
 
         public string DataRef
         {
@@ -67,7 +67,7 @@ namespace OpenBreed.Editor.VM.Scripts
         {
             var scriptFromFileEntry = (IScriptFromFileEntry)entry;
 
-            var model = Parent.DataProvider.Scripts.GetScript(entry.Id);
+            var model = scriptsDataProvider.GetScript(entry.Id);
 
             if (model != null)
                 Script = model.Script;
@@ -79,7 +79,7 @@ namespace OpenBreed.Editor.VM.Scripts
         {
             var scriptFromFileEntry = (IScriptFromFileEntry)entry;
 
-            var model = Parent.DataProvider.GetData<TextModel>(DataRef);
+            var model = dataProvider.GetData<TextModel>(DataRef);
 
             model.Text = Script;
             scriptFromFileEntry.DataRef = DataRef;

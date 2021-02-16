@@ -1,4 +1,6 @@
-﻿using OpenBreed.Editor.VM.Base;
+﻿using OpenBreed.Common.Data;
+using OpenBreed.Database.Interface;
+using OpenBreed.Editor.VM.Base;
 using System;
 using System.ComponentModel;
 
@@ -8,21 +10,18 @@ namespace OpenBreed.Editor.VM.Database
     {
         #region Private Fields
 
-        private readonly EditorApplication application;
-
         private bool isHidden;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal DbTablesEditorVM(EditorApplication application, DbEntryFactory dbEntryFactory)
+        internal DbTablesEditorVM(IWorkspaceMan workspaceMan,
+                                  DbEntryFactory dbEntryFactory)
         {
-            this.application = application;
-
-            DbTableSelector = new DbTableSelectorVM(application);
+            DbTableSelector = new DbTableSelectorVM(workspaceMan);
             DbTableSelector.PropertyChanged += DbTableSelector_PropertyChanged;
-            DbTableEditor = new DbTableEditorVM(application, dbEntryFactory);
+            DbTableEditor = new DbTableEditorVM(workspaceMan, dbEntryFactory);
         }
 
         #endregion Internal Constructors

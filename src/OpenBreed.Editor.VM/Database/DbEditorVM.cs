@@ -17,15 +17,25 @@ namespace OpenBreed.Editor.VM.Database
 
         private readonly EditorApplication application;
         private readonly DbEntryEditorFactory dbEntryEditorFactory;
+        private readonly IWorkspaceMan workspaceMan;
+        private readonly DataProvider dataProvider;
+        private readonly IDialogProvider dialogProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DbEditorVM(EditorApplication application, DbEntryEditorFactory dbEntryEditorFactory)
+        public DbEditorVM(EditorApplication application,
+                          DbEntryEditorFactory dbEntryEditorFactory,
+                          IWorkspaceMan workspaceMan,
+                          DataProvider dataProvider,
+                          IDialogProvider dialogProvider)
         {
             this.application = application;
             this.dbEntryEditorFactory = dbEntryEditorFactory;
+            this.workspaceMan = workspaceMan;
+            this.dataProvider = dataProvider;
+            this.dialogProvider = dialogProvider;
         }
 
         #endregion Public Constructors
@@ -112,7 +122,7 @@ namespace OpenBreed.Editor.VM.Database
             if (!_openedEntryEditors.TryGetValue(entryEditorKey, out entryEditor))
             {
                 var creator = dbEntryEditorFactory.GetCreator(repository);
-                entryEditor = creator.Create(application, application.DataProvider, application.UnitOfWork);
+                entryEditor = creator.Create(workspaceMan, dataProvider, dialogProvider);
                 _openedEntryEditors.Add(entryEditorKey, entryEditor);
                 entryEditor.ClosedAction = () => OnEntryEditorClosed(entryEditor);
                 entryEditor.EditEntry(entryId);

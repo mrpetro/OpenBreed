@@ -16,18 +16,16 @@ namespace OpenBreed.Editor.VM
 
         #region Public Methods
 
-        EntryEditorVM Create(EditorApplication application, IDataProvider dataProvider, IUnitOfWork unitOfWork);
+        EntryEditorVM Create(IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider);
 
         #endregion Public Methods
 
     }
 
-    public class DbEntryEditorFactory : IApplicationInterface
+    public class DbEntryEditorFactory
     {
 
         #region Private Fields
-
-        private EditorApplication application;
 
         private Dictionary<Type, IEntryEditorCreator> _creators = new Dictionary<Type, IEntryEditorCreator>();
 
@@ -35,9 +33,8 @@ namespace OpenBreed.Editor.VM
 
         #region Public Constructors
 
-        public DbEntryEditorFactory(EditorApplication application)
+        public DbEntryEditorFactory()
         {
-            this.application = application;
         }
 
         #endregion Public Constructors
@@ -78,9 +75,9 @@ namespace OpenBreed.Editor.VM
 
         #region Public Methods
 
-        public EntryEditorVM Create(EditorApplication application, IDataProvider dataProvider, IUnitOfWork unitOfWork)
+        public EntryEditorVM Create(IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider)
         {
-            return Activator.CreateInstance(typeof(T), application, dataProvider, unitOfWork) as T;
+            return Activator.CreateInstance(typeof(T), workspaceMan, dataProvider, dialogProvider) as T;
         }
 
         #endregion Public Methods

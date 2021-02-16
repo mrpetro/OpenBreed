@@ -1,5 +1,7 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Common.Extensions;
+using OpenBreed.Common.Formats;
 using OpenBreed.Common.Logging;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Actions;
@@ -14,6 +16,7 @@ using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Database.Interface.Items.Texts;
 using OpenBreed.Database.Interface.Items.Tiles;
 using OpenBreed.Database.Xml;
+using OpenBreed.Editor.UI.WinForms.Extensions;
 using OpenBreed.Editor.VM;
 using OpenBreed.Editor.VM.Actions;
 using OpenBreed.Editor.VM.Database;
@@ -47,37 +50,39 @@ namespace OpenBreed.Editor.UI.WinForms
             //Application.Run(new GLTestForm());
 
             var managerCollection = new DefaultManagerCollection();
-            managerCollection.AddSingleton<ILogger>(() => new DefaultLogger());
-            managerCollection.AddSingleton<VariableMan>(() => new VariableMan(managerCollection.GetManager<ILogger>()));
-            managerCollection.AddSingleton<SettingsMan>(() => new SettingsMan(managerCollection.GetManager<VariableMan>(),
-                                                                              managerCollection.GetManager<ILogger>()));
-            managerCollection.AddSingleton<DbEntryFactory>(() => new DbEntryFactory());
-            managerCollection.AddSingleton<EditorApplication>(() => new EditorApplication(managerCollection));
-            managerCollection.AddSingleton<DbEntryEditorFactory>(() => CreateEntryEditorFactory(managerCollection.GetManager<EditorApplication>()));
-            managerCollection.AddSingleton<XmlDatabaseMan>(() => new XmlDatabaseMan(managerCollection.GetManager<VariableMan>()));
-            managerCollection.AddSingleton<IDialogProvider>(() => new DialogProvider(managerCollection.GetManager<EditorApplication>()));
 
             managerCollection.SetupABFormats();
 
+            managerCollection.AddSingleton<ILogger>(() => new DefaultLogger());
+
+            managerCollection.AddSingleton<IVariableMan>(() => new VariableMan(managerCollection.GetManager<ILogger>()));
+
+            managerCollection.AddSingleton<SettingsMan>(() => new SettingsMan(managerCollection.GetManager<IVariableMan>(),
+                                                                              managerCollection.GetManager<ILogger>()));
+            managerCollection.AddSingleton<DbEntryFactory>(() => new DbEntryFactory());
+
+            managerCollection.AddSingleton<EditorApplication>(() => new EditorApplication(managerCollection));
+
+            managerCollection.AddSingleton<XmlDatabaseMan>(() => new XmlDatabaseMan(managerCollection.GetManager<IVariableMan>()));
+
+            managerCollection.AddSingleton<IDialogProvider>(() => new DialogProvider(managerCollection.GetManager<EditorApplication>()));
+
+            managerCollection.AddSingleton<IWorkspaceMan>(() => new EditorWorkspaceMan(managerCollection.GetManager<XmlDatabaseMan>(),
+                                                                                       managerCollection.GetManager<ILogger>()));
+
+            managerCollection.AddSingleton<DataProvider>(() => new DataProvider(managerCollection.GetManager<IWorkspaceMan>(),
+                                                                                managerCollection.GetManager<ILogger>(), 
+                                                                                managerCollection.GetManager<IVariableMan>(),
+                                                                                managerCollection.GetManager<DataFormatMan>()));
+
+            managerCollection.AddSingleton<IDataProvider>(managerCollection.GetManager<DataProvider>());
+
+
+
+            managerCollection.SetupDbEntryEditorFactory();
+
             var application = managerCollection.GetManager<EditorApplication>();
             application.Run();
-        }
-
-        private static DbEntryEditorFactory CreateEntryEditorFactory(EditorApplication application)
-        {
-            var entryEditorFactory = new DbEntryEditorFactory(application);
-            entryEditorFactory.Register<IRepository<ITileSetEntry>, TileSetEditorVM>();
-            entryEditorFactory.Register<IRepository<ISpriteSetEntry>, SpriteSetEditorVM>();
-            entryEditorFactory.Register<IRepository<IActionSetEntry>, ActionSetEditorVM>();
-            entryEditorFactory.Register<IRepository<IPaletteEntry>, PaletteEditorVM>();
-            entryEditorFactory.Register<IRepository<ITextEntry>, TextEditorVM>();
-            entryEditorFactory.Register<IRepository<IScriptEntry>, ScriptEditorVM>();
-            entryEditorFactory.Register<IRepository<IEntityTemplateEntry>, EntityTemplateEditorVM>();
-            entryEditorFactory.Register<IRepository<IImageEntry>, ImageEditorVM>();
-            entryEditorFactory.Register<IRepository<ISoundEntry>, SoundEditorVM>();
-            entryEditorFactory.Register<IRepository<IMapEntry>, MapEditorVM>();
-            entryEditorFactory.Register<IRepository<IDataSourceEntry>, DataSourceEditorVM>();
-            return entryEditorFactory;
         }
 
         #endregion Private Methods

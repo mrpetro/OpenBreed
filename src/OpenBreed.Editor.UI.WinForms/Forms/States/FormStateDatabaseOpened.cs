@@ -34,9 +34,9 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             FileSeparator = new ToolStripSeparator();
 
             FileCloseDatabaseToolStripMenuItem = new ToolStripMenuItem("Close database");
-            FileCloseDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.TryCloseDatabase();
+            FileCloseDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.TryCloseDatabase(MainForm.EditorView.VM);
             FileOpenDatabaseToolStripMenuItem = new ToolStripMenuItem("Open Database...");
-            FileOpenDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.TryOpenXmlDatabase();
+            FileOpenDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.TryOpenXmlDatabase(MainForm.EditorView.VM);
             FileSaveDatabaseToolStripMenuItem = new ToolStripMenuItem("Save Database");
             FileSaveDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.TrySaveDatabase();
             ExitToolStripMenuItem = new ToolStripMenuItem("Exit");
@@ -88,15 +88,15 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
 
             ViewDatabaseMenuItem.DataBindings.Clear();
             ViewDatabaseMenuItem.DataBindings.Add(nameof(ViewDatabaseMenuItem.Checked),
-                                                  MainForm.VM.DbEditor,
-                                                  nameof(MainForm.VM.DbEditor.DbTablesEditorChecked),
+                                                  MainForm.EditorView.VM,
+                                                  nameof(MainForm.EditorView.VM.DbTablesEditorChecked),
                                                   false,
                                                   DataSourceUpdateMode.OnPropertyChanged);
 
             MainForm.ViewToolStripMenuItem.DropDownItems.Add(ViewDatabaseMenuItem);
 
-            MainForm.VM.DbEditor.InitDbTablesEditorAction = OnInitDbTablesEditor;
-            MainForm.VM.DbEditor.DbTablesEditorChecked = true;
+            MainForm.EditorView.VM.InitDbTablesEditorAction = OnInitDbTablesEditor;
+            MainForm.EditorView.VM.DbTablesEditorChecked = true;
         }
 
         #endregion Internal Methods

@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common;
+using OpenBreed.Common.Data;
 using OpenBreed.Database.Interface;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Database.Entries;
@@ -14,7 +15,7 @@ namespace OpenBreed.Editor.VM.Database
     {
         #region Private Fields
 
-        private readonly EditorApplication application;
+        private readonly IWorkspaceMan workspaceMan;
         private readonly DbEntryFactory dbEntryFactory;
         private DbTableNewEntryCreatorVM _newEntryCreator;
 
@@ -27,9 +28,9 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Internal Constructors
 
-        internal DbTableEditorVM(EditorApplication application, DbEntryFactory dbEntryFactory)
+        internal DbTableEditorVM(IWorkspaceMan workspaceMan, DbEntryFactory dbEntryFactory)
         {
-            this.application = application;
+            this.workspaceMan = workspaceMan;
             this.dbEntryFactory = dbEntryFactory;
             Entries = new BindingList<Entries.DbEntryVM>();
             Entries.ListChanged += (s, a) => OnPropertyChanged(nameof(Entries));
@@ -112,7 +113,7 @@ namespace OpenBreed.Editor.VM.Database
 
         public void SetModel(string modelName)
         {
-            var repository = application.UnitOfWork.GetRepository(modelName);
+            var repository = workspaceMan.UnitOfWork.GetRepository(modelName);
 
             if (repository == null)
                 throw new InvalidOperationException($"Repository with name '{modelName}' not found.");

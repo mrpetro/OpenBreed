@@ -28,7 +28,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms.States
             //NewLevelToolStripMenuItem = new ToolStripMenuItem("New Level");
             //NewLevelToolStripMenuItem.Click += (s, a) => MainForm.VM.Project.TryNewLevel();
             FileOpenDatabaseToolStripMenuItem = new ToolStripMenuItem("Open Database...");
-            FileOpenDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.TryOpenXmlDatabase();
+            FileOpenDatabaseToolStripMenuItem.Click += (s, a) => MainForm.VM.TryOpenXmlDatabase(MainForm.EditorView.VM);
             ExitToolStripMenuItem = new ToolStripMenuItem("Exit");
             ExitToolStripMenuItem.Click += (s, a) => MainForm.VM.TryExit();
 

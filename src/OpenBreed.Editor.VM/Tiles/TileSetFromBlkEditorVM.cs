@@ -22,18 +22,21 @@ namespace OpenBreed.Editor.VM.Tiles
         private int _tileSize;
 
         private TileSetModel model;
+        private readonly TileSetsDataProvider tileSetsDataProvider;
+        private readonly PalettesDataProvider palettesDataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TileSetFromBlkEditorVM(ParentEntryEditor<ITileSetEntry> parent)
+        public TileSetFromBlkEditorVM(TileSetsDataProvider tileSetsDataProvider,
+                                      PalettesDataProvider palettesDataProvider)
         {
-            Parent = parent;
-
             PaletteIds = new BindingList<string>();
             Items = new BindingList<TileVM>();
             Items.ListChanged += (s, e) => OnPropertyChanged(nameof(Items));
+            this.tileSetsDataProvider = tileSetsDataProvider;
+            this.palettesDataProvider = palettesDataProvider;
 
             //Viewer = new TileSetViewerVM();
         }
@@ -45,8 +48,6 @@ namespace OpenBreed.Editor.VM.Tiles
         #region Public Properties
 
         public BindingList<string> PaletteIds { get; }
-
-        public ParentEntryEditor<ITileSetEntry> Parent { get; }
 
         public string CurrentPaletteRef
         {
@@ -89,7 +90,7 @@ namespace OpenBreed.Editor.VM.Tiles
 
         public virtual void UpdateVM(ITileSetEntry entry)
         {
-            model = Parent.DataProvider.TileSets.GetTileSet(entry.Id);
+            model = tileSetsDataProvider.GetTileSet(entry.Id);
 
             if (model == null)
                 return;
@@ -191,7 +192,7 @@ namespace OpenBreed.Editor.VM.Tiles
 
         private void SwitchPalette()
         {
-            CurrentPalette = Parent.DataProvider.Palettes.GetPalette(CurrentPaletteRef);
+            CurrentPalette = palettesDataProvider.GetPalette(CurrentPaletteRef);
             BitmapHelper.SetPaletteColors(model.Bitmap, CurrentPalette.Data);
         }
 

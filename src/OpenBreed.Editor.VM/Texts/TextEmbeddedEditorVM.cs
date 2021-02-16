@@ -1,5 +1,4 @@
-﻿using OpenBreed.Common;
-using OpenBreed.Common.Data;
+﻿using OpenBreed.Common.Data;
 using OpenBreed.Database.Interface.Items.Texts;
 using OpenBreed.Editor.VM.Base;
 
@@ -9,6 +8,8 @@ namespace OpenBreed.Editor.VM.Texts
     {
         #region Private Fields
 
+        private readonly TextsDataProvider textsDataProvider;
+
         private string text;
 
         private string dataRef;
@@ -17,16 +18,14 @@ namespace OpenBreed.Editor.VM.Texts
 
         #region Public Constructors
 
-        public TextEmbeddedEditorVM(ParentEntryEditor<ITextEntry> parent)
+        public TextEmbeddedEditorVM(TextsDataProvider textsDataProvider)
         {
-            Parent = parent;
+            this.textsDataProvider = textsDataProvider;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
-
-        public ParentEntryEditor<ITextEntry> Parent { get; }
 
         public string DataRef
         {
@@ -46,14 +45,14 @@ namespace OpenBreed.Editor.VM.Texts
 
         public virtual void UpdateEntry(ITextEntry entry)
         {
-            var model = Parent.DataProvider.Texts.GetText(entry.Id);
+            var model = textsDataProvider.GetText(entry.Id);
             model.Text = Text;
             entry.DataRef = DataRef;
         }
 
         public virtual void UpdateVM(ITextEntry entry)
         {
-            var model = Parent.DataProvider.Texts.GetText(entry.Id);
+            var model = textsDataProvider.GetText(entry.Id);
 
             if (model != null)
                 Text = model.Text;

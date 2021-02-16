@@ -25,21 +25,25 @@ namespace OpenBreed.Editor.VM
         private readonly SettingsMan settings;
         private readonly Lazy<IDialogProvider> dialogProvider;
         private readonly XmlDatabaseMan databaseMan;
-        private readonly IManagerCollection managerCollection;
+        private readonly IWorkspaceMan workspaceMan;
+        private readonly IDataProvider dataProvider;
         private bool disposedValue;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public EditorApplication(IManagerCollection managerCollection)
+        public EditorApplication(IManagerCollection managerCollection) : base(managerCollection)
         {
-            this.managerCollection = managerCollection;
 
             logger = managerCollection.GetManager<ILogger>();
+
             settings = managerCollection.GetManager<SettingsMan>();
-            databaseMan = managerCollection.GetManager<XmlDatabaseMan>();       
+            dataProvider = managerCollection.GetManager<IDataProvider>();
+            databaseMan = managerCollection.GetManager<XmlDatabaseMan>();
+            workspaceMan = managerCollection.GetManager<IWorkspaceMan>();
             dialogProvider = new Lazy<IDialogProvider>(() => managerCollection.GetManager<IDialogProvider>());
+            //DialogProvider = managerCollection.GetManager<IDialogProvider>();
 
             settings.Restore();
         }
@@ -48,8 +52,6 @@ namespace OpenBreed.Editor.VM
 
         #region Public Properties
 
-        public IUnitOfWork UnitOfWork { get; private set; }
-        public DataProvider DataProvider { get; private set; }
         public IDialogProvider DialogProvider => dialogProvider.Value;
 
         #endregion Public Properties
@@ -58,17 +60,7 @@ namespace OpenBreed.Editor.VM
 
         public void OpenXmlDatabase(string databaseFilePath)
         {
-            if (UnitOfWork != null)
-                throw new Exception("There is already database opened.");
-
-            databaseMan.Open(databaseFilePath);
-            UnitOfWork = databaseMan.CreateUnitOfWork();
-
-            DataProvider = new DataProvider(UnitOfWork, managerCollection.GetManager<ILogger>(), 
-                                                        managerCollection.GetManager<VariableMan>(),
-                                                        managerCollection.GetManager<DataFormatMan>());
-
-            logger.Info($"Database '{UnitOfWork.Name}' opened.");
+            workspaceMan.OpenXmlDatabase(databaseFilePath);
         }
 
         public void Run()
@@ -91,28 +83,19 @@ namespace OpenBreed.Editor.VM
 
         public void CloseDatabase()
         {
-            if (UnitOfWork == null)
-                throw new Exception("Database not opened.");
-
-            var databaseName = UnitOfWork.Name;
-
-            DataProvider.Close();
-            databaseMan.Close();
-
-            UnitOfWork = null;
-            DataProvider = null;
-
-            logger.Info($"Database '{databaseName}' closed.");
+            //TODO: Lazy thing here, fix that at some point
+            ((DataProvider)dataProvider).Close();
+            workspaceMan.CloseDatabase();
         }
 
         public void SaveDatabase()
         {
-            if (UnitOfWork == null)
-                throw new Exception("Database not opened.");
+            if (workspaceMan.UnitOfWork != null)
+            {
+                ((DataProvider)dataProvider).Save();
+                workspaceMan.SaveDatabase();
+            }
 
-            DataProvider.Save();
-
-            logger.Info($"Database '{UnitOfWork.Name}' saved.");
         }
 
         public LoggerVM CreateLoggerVm()
@@ -122,17 +105,17 @@ namespace OpenBreed.Editor.VM
 
         public DbEditorVM CreateDbEditorVm(IUnitOfWork unitOfWork)
         {
-            return new DbEditorVM(this, managerCollection.GetManager<DbEntryEditorFactory>());
+            return new DbEditorVM(this, managerCollection.GetManager<DbEntryEditorFactory>(), workspaceMan, (DataProvider)dataProvider, DialogProvider);
         }
 
         public DbTablesEditorVM CreateDbTablesEditorVm()
         {
-            return new DbTablesEditorVM(this, managerCollection.GetManager<DbEntryFactory>());
+            return new DbTablesEditorVM(workspaceMan, managerCollection.GetManager<DbEntryFactory>());
         }
 
         public EditorApplicationVM CreateEditorApplicationVm()
         {
-            return new EditorApplicationVM(this, settings, managerCollection.GetManager<DbEntryEditorFactory>(), DialogProvider);
+            return new EditorApplicationVM(this, workspaceMan, (DataProvider)dataProvider , settings, managerCollection.GetManager<DbEntryEditorFactory>(), DialogProvider);
         }
 
         #endregion Public Methods
@@ -150,11 +133,6 @@ namespace OpenBreed.Editor.VM
 
                 disposedValue = true;
             }
-        }
-
-        public TManager GetManager<TManager>()
-        {
-            throw new NotImplementedException();
         }
 
         public void AddSingleton<TInterface>(Func<object> initializer)

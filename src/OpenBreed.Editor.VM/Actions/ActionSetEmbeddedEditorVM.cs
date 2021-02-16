@@ -13,23 +13,23 @@ namespace OpenBreed.Editor.VM.Actions
         #region Private Fields
 
         private const int PROP_SIZE = 32;
+        private readonly ActionSetsDataProvider actionSetsDataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ActionSetEmbeddedEditorVM(ParentEntryEditor<IActionSetEntry> parent)
+        public ActionSetEmbeddedEditorVM(ActionSetsDataProvider actionSetsDataProvider)
         {
-            Parent = parent;
             Items = new BindingList<ActionVM>();
             Items.ListChanged += (s, a) => OnPropertyChanged(nameof(Items));
+            this.actionSetsDataProvider = actionSetsDataProvider;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public ParentEntryEditor<IActionSetEntry> Parent { get; }
         public BindingList<ActionVM> Items { get; }
 
         public int SelectedIndex { get; private set; }
@@ -67,7 +67,7 @@ namespace OpenBreed.Editor.VM.Actions
 
         public virtual void UpdateVM(IActionSetEntry entry)
         {
-            model = Parent.DataProvider.ActionSets.GetActionSet(entry.Id);
+            model = actionSetsDataProvider.GetActionSet(entry.Id);
 
             Items.UpdateAfter(() =>
             {

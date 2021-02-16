@@ -17,16 +17,20 @@ namespace OpenBreed.Editor.VM.Images
         private string _assetRef;
 
         private Image image;
+        private readonly IWorkspaceMan workspaceMan;
+        private readonly IDialogProvider dialogProvider;
+        private readonly IDataProvider dataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ImageFromFileEditorVM(ParentEntryEditor<IImageEntry> parent)
+        public ImageFromFileEditorVM(IWorkspaceMan workspaceMan, IDialogProvider dialogProvider, IDataProvider dataProvider)
         {
-            Parent = parent;
-
-            ImageAssetRefIdEditor = new EntryRefIdEditorVM(Parent.Application.UnitOfWork, typeof(IAssetEntry));
+            this.workspaceMan = workspaceMan;
+            this.dialogProvider = dialogProvider;
+            this.dataProvider = dataProvider;
+            ImageAssetRefIdEditor = new EntryRefIdEditorVM(workspaceMan, typeof(IAssetEntry));
             ImageAssetRefIdEditor.RefIdSelected = (newRefId) => { AssetRef = newRefId; };
             PropertyChanged += This_PropertyChanged;
         }
@@ -35,7 +39,6 @@ namespace OpenBreed.Editor.VM.Images
 
         #region Public Properties
 
-        public ParentEntryEditor<IImageEntry> Parent { get; }
         public EntryRefIdEditorVM ImageAssetRefIdEditor { get; }
 
         public Image Image
@@ -88,9 +91,9 @@ namespace OpenBreed.Editor.VM.Images
         {
             if (AssetRef != null)
             {
-                if (!Parent.DataProvider.TryGetData<Image>(AssetRef, out Image item, out string message))
+                if (!dataProvider.TryGetData<Image>(AssetRef, out Image item, out string message))
                 {
-                    Parent.Application.DialogProvider.ShowMessage(message, "Invalid asset");
+                    dialogProvider.ShowMessage(message, "Invalid asset");
                     Image = System.Drawing.SystemIcons.Error.ToBitmap();
                 }
                 else

@@ -387,6 +387,7 @@
       <DependentUpon>TileSetViewerCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="DialogProvider.cs" />
+    <Compile Include="Extensions\ManagerCollectionExtension.cs" />
     <Compile Include="FolderBrowserQuery.cs" />
     <Compile Include="Forms\ABTAPasswordGeneratorForm.cs">
       <SubType>Form</SubType>

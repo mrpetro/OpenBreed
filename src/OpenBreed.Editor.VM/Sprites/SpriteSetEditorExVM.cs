@@ -16,15 +16,21 @@ namespace OpenBreed.Editor.VM.Sprites
         private string _currentPaletteId;
 
         private PaletteModel palette;
+        protected readonly SpriteSetsDataProvider spriteSetsDataProvider;
+        protected readonly PalettesDataProvider palettesDataProvider;
+        protected readonly DataProvider dataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public SpriteSetEditorExVM(ParentEntryEditor<ISpriteSetEntry> parent)
+        public SpriteSetEditorExVM(SpriteSetsDataProvider spriteSetsDataProvider,
+                                   PalettesDataProvider palettesDataProvider,
+                                   DataProvider dataProvider)
         {
-            Parent = parent;
-
+            this.spriteSetsDataProvider = spriteSetsDataProvider;
+            this.palettesDataProvider = palettesDataProvider;
+            this.dataProvider = dataProvider;
             PaletteIds = new BindingList<string>();
         }
 
@@ -84,7 +90,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         private void SwitchPalette(string paletteId)
         {
-            Palette = Parent.DataProvider.Palettes.GetPalette(paletteId);
+            Palette = palettesDataProvider.GetPalette(paletteId);
         }
 
         protected override void OnPropertyChanged(string name)

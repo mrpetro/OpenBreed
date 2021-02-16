@@ -105,7 +105,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         {
             VM = vm ?? throw new ArgumentNullException(nameof(vm));
 
-            EditorView.Initialize(VM.DbEditor);
+            EditorView.Initialize(VM.CreateDbEditorVM());
 
             BindProperties();
             BindEvents();
@@ -128,7 +128,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             VM.PropertyChanged += VM_PropertyChanged;
             ViewToggleLoggerToolStripMenuItem.Click += (s, a) => VM.ToggleLogger(true);
             OptionsToolStripMenuItem.Click += (s, a) => VM.ShowOptions();
-            FormClosing += (s, a) => a.Cancel = !VM.TrySaveBeforeExiting();
+            FormClosing += (s, a) => a.Cancel = !VM.TrySaveBeforeExiting(EditorView.VM);
 
             ABTAGamePasswordsToolStripMenuItem.Click += (s, a) => Other.TryAction(OpenABTAPasswordGenerator);
             ABTAGameRunToolStripMenuItem.Click += (s, a) => VM.TryRunABTAGame();

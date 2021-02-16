@@ -9,7 +9,7 @@ namespace OpenBreed.Editor.VM.Common
     {
         #region Private Fields
 
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IWorkspaceMan workspaceMan;
         private readonly Type entryType;
         private string refId;
 
@@ -17,9 +17,9 @@ namespace OpenBreed.Editor.VM.Common
 
         #region Public Constructors
 
-        public EntryRefIdEditorVM(IUnitOfWork unitOfWork, Type entryType)
+        public EntryRefIdEditorVM(IWorkspaceMan workspaceMan, Type entryType)
         {
-            this.unitOfWork = unitOfWork;
+            this.workspaceMan = workspaceMan;
             this.entryType = entryType;
         }
 
@@ -42,7 +42,7 @@ namespace OpenBreed.Editor.VM.Common
 
         public void SelectEntryId()
         {
-            var refSelector = new EntryRefIdSelectorVM(unitOfWork, entryType);
+            var refSelector = new EntryRefIdSelectorVM(workspaceMan, entryType);
             refSelector.CurrentEntryId = RefId;
             OpenRefIdSelectorAction?.Invoke(refSelector);
 

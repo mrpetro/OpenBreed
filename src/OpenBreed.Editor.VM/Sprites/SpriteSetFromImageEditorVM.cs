@@ -21,7 +21,9 @@ namespace OpenBreed.Editor.VM.Sprites
 
         #region Public Constructors
 
-        public SpriteSetFromImageEditorVM(ParentEntryEditor<ISpriteSetEntry> parent) : base(parent)
+        public SpriteSetFromImageEditorVM(SpriteSetsDataProvider spriteSetsDataProvider,
+                                          PalettesDataProvider palettesDataProvider,
+                                          DataProvider dataProvider) : base(spriteSetsDataProvider, palettesDataProvider, dataProvider)
         {
             SpriteEditor = new SpriteFromImageEditorVM(this);
             Items = new BindingList<SpriteFromImageVM>();
@@ -138,7 +140,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         private void UpdateVM(ISpriteSetFromImageEntry entry)
         {
-            SourceImage = Parent.DataProvider.GetData<Bitmap>(entry.DataRef);
+            SourceImage = dataProvider.GetData<Bitmap>(entry.DataRef);
 
             Items.UpdateAfter(() =>
             {

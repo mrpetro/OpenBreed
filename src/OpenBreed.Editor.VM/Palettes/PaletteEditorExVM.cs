@@ -1,4 +1,5 @@
-﻿using OpenBreed.Database.Interface.Items.Palettes;
+﻿using OpenBreed.Common.Data;
+using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Editor.VM.Base;
 using OpenBreed.Editor.VM.Maps;
 using OpenBreed.Model.Palettes;
@@ -13,15 +14,18 @@ namespace OpenBreed.Editor.VM.Palettes
 
         private Color _currentColor = Color.Empty;
         private int _currentColorIndex = -1;
+        protected readonly PalettesDataProvider palettesDataProvider;
+        protected readonly IDataProvider dataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PaletteEditorExVM(ParentEntryEditor<IPaletteEntry> parent)
+        public PaletteEditorExVM(PalettesDataProvider palettesDataProvider,
+                                 IDataProvider dataProvider)
         {
-            Parent = parent;
-
+            this.palettesDataProvider = palettesDataProvider;
+            this.dataProvider = dataProvider;
             Colors = new BindingList<Color>();
             Initialize();
 
@@ -32,7 +36,6 @@ namespace OpenBreed.Editor.VM.Palettes
 
         #region Public Properties
 
-        public ParentEntryEditor<IPaletteEntry> Parent { get; }
         public BindingList<Color> Colors { get; }
 
         public Color CurrentColor
@@ -67,7 +70,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
         public virtual void UpdateEntry(IPaletteEntry target)
         {
-            var model = Parent.DataProvider.Palettes.GetPalette(target.Id);
+            var model = palettesDataProvider.GetPalette(target.Id);
 
             for (int i = 0; i < model.Length; i++)
                 model.Data[i] = Colors[i];

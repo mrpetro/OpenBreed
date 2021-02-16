@@ -103,6 +103,7 @@
     <Compile Include="EditorApplication.cs" />
     <Compile Include="EditorApplicationVM.cs" />
     <Compile Include="DbEntryEditorFactory.cs" />
+    <Compile Include="EditorWorkspaceMan.cs" />
     <Compile Include="EntityTemplates\EntityTemplateEditorVM.cs" />
     <Compile Include="EntityTemplates\EntityTemplateFromFileEditorVM.cs" />
     <Compile Include="EntryEditorBaseVM.cs" />

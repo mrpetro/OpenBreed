@@ -11,7 +11,8 @@ namespace OpenBreed.Editor.VM.Palettes
 
         private string _dataRef;
 
-        public PaletteFromBinaryEditorVM(ParentEntryEditor<IPaletteEntry> parent) : base(parent)
+        public PaletteFromBinaryEditorVM(PalettesDataProvider palettesDataProvider,
+                                         IDataProvider dataProvider) : base(palettesDataProvider, dataProvider)
         {
         }
         public string DataRef
@@ -46,7 +47,7 @@ namespace OpenBreed.Editor.VM.Palettes
 
         private void UpdateVM(IPaletteFromBinaryEntry entry)
         {
-            var model = Parent.DataProvider.Palettes.GetPalette(entry.Id);
+            var model = palettesDataProvider.GetPalette(entry.Id);
 
             if (model != null)
                 UpdateVMColors(model);

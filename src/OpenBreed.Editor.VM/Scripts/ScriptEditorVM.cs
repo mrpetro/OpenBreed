@@ -13,11 +13,11 @@ namespace OpenBreed.Editor.VM.Scripts
 
         static ScriptEditorVM()
         {
-            RegisterSubeditor<IScriptEmbeddedEntry>((parent) => new ScriptEmbeddedEditorVM(parent));
-            RegisterSubeditor<IScriptFromFileEntry>((parent) => new ScriptFromFileEditorVM(parent));
+            RegisterSubeditor<IScriptEmbeddedEntry>((parent) => new ScriptEmbeddedEditorVM(parent.DataProvider.Scripts));
+            RegisterSubeditor<IScriptFromFileEntry>((parent) => new ScriptFromFileEditorVM(parent.WorkspaceMan, parent.DataProvider.Scripts, parent.DataProvider));
         }
 
-        public ScriptEditorVM(EditorApplication application, DataProvider dataProvider, IUnitOfWork unitOfWork) : base(application, dataProvider, unitOfWork, "Script Editor")
+        public ScriptEditorVM(IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(workspaceMan, dataProvider, dialogProvider, "Script Editor")
         {
         }
 

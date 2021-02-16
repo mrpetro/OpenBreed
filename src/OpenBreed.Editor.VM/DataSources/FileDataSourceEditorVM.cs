@@ -13,16 +13,13 @@ namespace OpenBreed.Editor.VM.DataSources
 
         #region Internal Constructors
 
-        internal FileDataSourceEditorVM(ParentEntryEditor<IDataSourceEntry> parent)
+        internal FileDataSourceEditorVM()
         {
-            Parent = parent;
         }
 
         #endregion Internal Constructors
 
         #region Public Properties
-
-        public ParentEntryEditor<IDataSourceEntry> Parent { get; }
 
         public string FilePath
         {

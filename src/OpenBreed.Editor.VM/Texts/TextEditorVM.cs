@@ -11,11 +11,12 @@ namespace OpenBreed.Editor.VM.Texts
 
         static TextEditorVM()
         {
-            RegisterSubeditor<ITextEmbeddedEntry>((parent) => new TextEmbeddedEditorVM(parent));
-            RegisterSubeditor<ITextFromMapEntry>((parent) => new TextFromMapEditorVM(parent));
+            RegisterSubeditor<ITextEmbeddedEntry>((parent) => new TextEmbeddedEditorVM(parent.DataProvider.Texts));
+            RegisterSubeditor<ITextFromMapEntry>((parent) => new TextFromMapEditorVM(parent.DataProvider.Texts,
+                                                                                     parent.DataProvider));
         }
 
-        public TextEditorVM(EditorApplication application, DataProvider dataProvider, IUnitOfWork unitOfWork) : base(application, dataProvider, unitOfWork, "Text Editor")
+        public TextEditorVM(IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(workspaceMan, dataProvider, dialogProvider, "Text Editor")
         {
         }
 

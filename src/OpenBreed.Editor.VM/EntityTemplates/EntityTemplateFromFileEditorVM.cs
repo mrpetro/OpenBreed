@@ -16,21 +16,22 @@ namespace OpenBreed.Editor.VM.EntityTemplates
         private string dataRef;
 
         private string entityTemplate;
+        private readonly EntityTemplatesDataProvider entityTemplatesDataProvider;
+        private readonly DataProvider dataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public EntityTemplateFromFileEditorVM(ParentEntryEditor<IEntityTemplateEntry> parent)
+        public EntityTemplateFromFileEditorVM(EntityTemplatesDataProvider entityTemplatesDataProvider, DataProvider dataProvider)
         {
-            Parent = parent;
+            this.entityTemplatesDataProvider = entityTemplatesDataProvider;
+            this.dataProvider = dataProvider;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
-
-        public ParentEntryEditor<IEntityTemplateEntry> Parent { get; }
 
         public bool EditEnabled
         {
@@ -56,7 +57,7 @@ namespace OpenBreed.Editor.VM.EntityTemplates
 
         public void UpdateVM(IEntityTemplateEntry entry)
         {
-            var model = Parent.DataProvider.EntityTemplates.GetEntityTemplate(entry.Id);
+            var model = entityTemplatesDataProvider.GetEntityTemplate(entry.Id);
 
             if (model != null)
                 EntityTemplate = model.EntityTemplate;
@@ -66,7 +67,7 @@ namespace OpenBreed.Editor.VM.EntityTemplates
 
         public void UpdateEntry(IEntityTemplateEntry entry)
         {
-            var model = Parent.DataProvider.GetData<TextModel>(DataRef);
+            var model = dataProvider.GetData<TextModel>(DataRef);
             model.Text = EntityTemplate;
             entry.DataRef = DataRef;
         }

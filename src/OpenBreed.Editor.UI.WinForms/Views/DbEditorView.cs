@@ -67,6 +67,8 @@ namespace OpenBreed.Editor.UI.WinForms.Views
         private bool _saveLayout = true;
         private DbEditorVM _vm;
 
+        public DbEditorVM VM => _vm;
+
         #endregion Private Fields
 
         #region Public Constructors
