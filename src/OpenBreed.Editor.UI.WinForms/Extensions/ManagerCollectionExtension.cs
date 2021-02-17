@@ -97,11 +97,42 @@ namespace OpenBreed.Editor.UI.WinForms.Extensions
 
         }
 
+
+        public static void SetupDbEntryEditors(this IManagerCollection managerCollection)
+        {
+            managerCollection.AddTransient<TileSetEditorVM>(() => new TileSetEditorVM(managerCollection, managerCollection.GetManager<IWorkspaceMan>(),
+                                                                                                                managerCollection.GetManager<IDialogProvider>()));
+            managerCollection.AddTransient<SpriteSetEditorVM>(() => new SpriteSetEditorVM(managerCollection, managerCollection.GetManager<IWorkspaceMan>(),
+                                                                                                                managerCollection.GetManager<IDialogProvider>()));
+            managerCollection.AddTransient<ActionSetEditorVM>(() => new ActionSetEditorVM(managerCollection, managerCollection.GetManager<IWorkspaceMan>(),
+                                                                                                                managerCollection.GetManager<IDialogProvider>()));
+            managerCollection.AddTransient<PaletteEditorVM>(() => new PaletteEditorVM(managerCollection, managerCollection.GetManager<IWorkspaceMan>(),
+                                                                                                                managerCollection.GetManager<IDialogProvider>()));
+            managerCollection.AddTransient<TextEditorVM>(() => new TextEditorVM(managerCollection, managerCollection.GetManager<IWorkspaceMan>(),
+                                                                                                                managerCollection.GetManager<IDialogProvider>()));
+            managerCollection.AddTransient<ScriptEditorVM>(() => new ScriptEditorVM(managerCollection, managerCollection.GetManager<IWorkspaceMan>(),
+                                                                                                                managerCollection.GetManager<IDialogProvider>()));
+            managerCollection.AddTransient<EntityTemplateEditorVM>(() => new EntityTemplateEditorVM(managerCollection, managerCollection.GetManager<IWorkspaceMan>(),
+                                                                                                                managerCollection.GetManager<IDialogProvider>()));
+            managerCollection.AddTransient<ImageEditorVM>(() => new ImageEditorVM(managerCollection, managerCollection.GetManager<IWorkspaceMan>(),
+                                                                                                                managerCollection.GetManager<IDialogProvider>()));
+            managerCollection.AddTransient<SoundEditorVM>(() => new SoundEditorVM(managerCollection, managerCollection.GetManager<IWorkspaceMan>(),
+                                                                                                                managerCollection.GetManager<IDialogProvider>()));
+            managerCollection.AddTransient<MapEditorVM>(() => new MapEditorVM(managerCollection.GetManager<IWorkspaceMan>(),
+                                                                                                                managerCollection.GetManager<MapsDataProvider>(),
+                                                                                                                managerCollection.GetManager<PalettesDataProvider>(),
+                                                                                                                managerCollection.GetManager<ActionSetsDataProvider>(),
+                                                                                                                managerCollection.GetManager<TileSetsDataProvider>(),
+                                                                                                                managerCollection.GetManager<IDialogProvider>()));
+            managerCollection.AddTransient<DataSourceEditorVM>(() => new DataSourceEditorVM(managerCollection, managerCollection.GetManager<IWorkspaceMan>(),
+                                                                                                                managerCollection.GetManager<IDialogProvider>()));
+        }
+
         public static void SetupDbEntryEditorFactory(this IManagerCollection managerCollection)
         {
             managerCollection.AddSingleton<DbEntryEditorFactory>(() =>
             {
-                var entryEditorFactory = new DbEntryEditorFactory();
+                var entryEditorFactory = new DbEntryEditorFactory(managerCollection);
                 entryEditorFactory.Register<IRepository<ITileSetEntry>, TileSetEditorVM>();
                 entryEditorFactory.Register<IRepository<ISpriteSetEntry>, SpriteSetEditorVM>();
                 entryEditorFactory.Register<IRepository<IActionSetEntry>, ActionSetEditorVM>();

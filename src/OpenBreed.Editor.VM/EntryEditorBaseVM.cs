@@ -32,10 +32,9 @@ namespace OpenBreed.Editor.VM
 
         #region Protected Constructors
 
-        protected EntryEditorBaseVM(IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider)
+        protected EntryEditorBaseVM(IWorkspaceMan workspaceMan, IDialogProvider dialogProvider)
         {
             WorkspaceMan = workspaceMan;
-            DataProvider = dataProvider;
             this.dialogProvider = dialogProvider;
             repository = WorkspaceMan.UnitOfWork.GetRepository<E>();
         }
@@ -45,8 +44,6 @@ namespace OpenBreed.Editor.VM
         #region Internal Properties
 
         internal IWorkspaceMan WorkspaceMan { get; }
-
-        internal DataProvider DataProvider { get; }
 
         internal IDialogProvider DialogProvider => dialogProvider;
 

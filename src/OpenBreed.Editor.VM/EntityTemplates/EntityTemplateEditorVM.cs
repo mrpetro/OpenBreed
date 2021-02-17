@@ -14,7 +14,7 @@ namespace OpenBreed.Editor.VM.EntityTemplates
             RegisterSubeditor<IEntityTemplateFromFileEntry, IEntityTemplateEntry>();
         }
 
-        public EntityTemplateEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dataProvider, dialogProvider, "Entity Template Editor")
+        public EntityTemplateEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dialogProvider, "Entity Template Editor")
         {
         }
 

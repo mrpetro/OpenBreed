@@ -21,7 +21,7 @@ namespace OpenBreed.Editor.VM
 
         #region Public Constructors
 
-        public ParentEntryEditor(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider, string editorName) : base(workspaceMan, dataProvider, dialogProvider)
+        public ParentEntryEditor(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, IDialogProvider dialogProvider, string editorName) : base(workspaceMan, dialogProvider)
         {
             this.managerCollection = managerCollection;
             EditorName = editorName;

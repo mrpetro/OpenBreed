@@ -18,7 +18,7 @@ namespace OpenBreed.Editor.VM.Scripts
             RegisterSubeditor<IScriptFromFileEntry, IScriptEntry>();
         }
 
-        public ScriptEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dataProvider, dialogProvider, "Script Editor")
+        public ScriptEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dialogProvider, "Script Editor")
         {
         }
 

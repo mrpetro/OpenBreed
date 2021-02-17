@@ -16,7 +16,7 @@ namespace OpenBreed.Editor.VM.Texts
             RegisterSubeditor<ITextFromMapEntry, ITextEntry>();
         }
 
-        public TextEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dataProvider, dialogProvider, "Text Editor")
+        public TextEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dialogProvider, "Text Editor")
         {
         }
 

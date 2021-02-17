@@ -14,7 +14,7 @@ namespace OpenBreed.Editor.VM.Images
             RegisterSubeditor<IImageEntry, IImageEntry>();
         }
 
-        public ImageEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dataProvider, dialogProvider, "Image Editor")
+        public ImageEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dialogProvider, "Image Editor")
         {
         }
 

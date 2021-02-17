@@ -25,7 +25,6 @@ namespace OpenBreed.Editor.VM
         public EditorApplication application;
         private readonly IManagerCollection managerCollection;
         private readonly IWorkspaceMan workspaceMan;
-        private readonly DataProvider dataProvider;
 
         #endregion Public Fields
 
@@ -45,12 +44,11 @@ namespace OpenBreed.Editor.VM
 
         #region Public Constructors
 
-        public EditorApplicationVM(EditorApplication application, IManagerCollection managerCollection , IWorkspaceMan workspaceMan, DataProvider dataProvider, SettingsMan settings, DbEntryEditorFactory dbEntryEditorFactory, IDialogProvider dialogProvider)
+        public EditorApplicationVM(EditorApplication application, IManagerCollection managerCollection , IWorkspaceMan workspaceMan, SettingsMan settings, DbEntryEditorFactory dbEntryEditorFactory, IDialogProvider dialogProvider)
         {
             this.application = application;
             this.managerCollection = managerCollection;
             this.workspaceMan = workspaceMan;
-            this.dataProvider = dataProvider;
             this.settings = settings;
             this.dbEntryEditorFactory = dbEntryEditorFactory;
             this.dialogProvider = dialogProvider;
@@ -62,7 +60,7 @@ namespace OpenBreed.Editor.VM
 
         public DbEditorVM CreateDbEditorVM()
         {
-            return new DbEditorVM(application, managerCollection, dbEntryEditorFactory, workspaceMan, dataProvider, application.DialogProvider);
+            return new DbEditorVM(application, managerCollection, dbEntryEditorFactory, workspaceMan, application.DialogProvider);
         }
 
         #endregion Public Constructors

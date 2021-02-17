@@ -19,7 +19,7 @@ namespace OpenBreed.Editor.VM.Palettes
             RegisterSubeditor<IPaletteFromMapEntry, IPaletteEntry>();
         }
 
-        public PaletteEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan,dataProvider, dialogProvider, "Palette Editor")
+        public PaletteEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dialogProvider, "Palette Editor")
         {
         }
 

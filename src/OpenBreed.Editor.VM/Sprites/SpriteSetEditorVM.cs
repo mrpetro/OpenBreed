@@ -16,7 +16,7 @@ namespace OpenBreed.Editor.VM.Sprites
             RegisterSubeditor<ISpriteSetFromImageEntry, ISpriteSetEntry>();
         }
 
-        public SpriteSetEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dataProvider, dialogProvider, "Sprite Set Editor")
+        public SpriteSetEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dialogProvider, "Sprite Set Editor")
         {
         }
 

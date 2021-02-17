@@ -20,7 +20,6 @@ namespace OpenBreed.Editor.VM.Database
         private readonly IManagerCollection managerCollection;
         private readonly DbEntryEditorFactory dbEntryEditorFactory;
         private readonly IWorkspaceMan workspaceMan;
-        private readonly DataProvider dataProvider;
         private readonly IDialogProvider dialogProvider;
 
         #endregion Private Fields
@@ -31,14 +30,12 @@ namespace OpenBreed.Editor.VM.Database
                           IManagerCollection managerCollection,
                           DbEntryEditorFactory dbEntryEditorFactory,
                           IWorkspaceMan workspaceMan,
-                          DataProvider dataProvider,
                           IDialogProvider dialogProvider)
         {
             this.application = application;
             this.managerCollection = managerCollection;
             this.dbEntryEditorFactory = dbEntryEditorFactory;
             this.workspaceMan = workspaceMan;
-            this.dataProvider = dataProvider;
             this.dialogProvider = dialogProvider;
         }
 
@@ -125,8 +122,7 @@ namespace OpenBreed.Editor.VM.Database
             EntryEditorVM entryEditor = null;
             if (!_openedEntryEditors.TryGetValue(entryEditorKey, out entryEditor))
             {
-                var creator = dbEntryEditorFactory.GetCreator(repository);
-                entryEditor = creator.Create(managerCollection, workspaceMan, dataProvider, dialogProvider);
+                entryEditor = dbEntryEditorFactory.Create(repository);
                 _openedEntryEditors.Add(entryEditorKey, entryEditor);
                 entryEditor.ClosedAction = () => OnEntryEditorClosed(entryEditor);
                 entryEditor.EditEntry(entryId);

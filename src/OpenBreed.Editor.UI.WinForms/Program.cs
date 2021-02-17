@@ -71,13 +71,12 @@ namespace OpenBreed.Editor.UI.WinForms
             managerCollection.AddSingleton<IWorkspaceMan>(() => new EditorWorkspaceMan(managerCollection.GetManager<XmlDatabaseMan>(),
                                                                                        managerCollection.GetManager<ILogger>()));
 
-            managerCollection.AddSingleton<DataProvider>(() => new DataProvider(managerCollection.GetManager<IWorkspaceMan>(),
+            managerCollection.AddSingleton<IDataProvider>(() => new DataProvider(managerCollection.GetManager<IWorkspaceMan>(),
                                                                                 managerCollection.GetManager<ILogger>(), 
                                                                                 managerCollection.GetManager<IVariableMan>(),
                                                                                 managerCollection.GetManager<DataFormatMan>()));
 
-            managerCollection.AddSingleton<IDataProvider>(managerCollection.GetManager<DataProvider>());
-
+            managerCollection.SetupDbEntryEditors();
             managerCollection.SetupDbEntrySubEditors();
             managerCollection.SetupDbEntryEditorFactory();
 

@@ -15,7 +15,7 @@ namespace OpenBreed.Editor.VM.Sounds
             RegisterSubeditor<ISoundEntry, ISoundEntry>();
         }
 
-        public SoundEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dataProvider, dialogProvider, "Sound Editor")
+        public SoundEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dialogProvider, "Sound Editor")
         {
         }
 

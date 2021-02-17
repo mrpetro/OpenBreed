@@ -1,40 +1,25 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Data;
 using OpenBreed.Database.Interface;
-using OpenBreed.Editor.VM.Database.Entries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Editor.VM
 {
-
-    public interface IEntryEditorCreator
-    {
-
-        #region Public Methods
-
-        EntryEditorVM Create(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider);
-
-        #endregion Public Methods
-
-    }
-
     public class DbEntryEditorFactory
     {
-
         #region Private Fields
 
-        private Dictionary<Type, IEntryEditorCreator> _creators = new Dictionary<Type, IEntryEditorCreator>();
+        private readonly Dictionary<Type, Type> creators = new Dictionary<Type, Type>();
+        private readonly IManagerCollection managerCollection;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DbEntryEditorFactory()
+        public DbEntryEditorFactory(IManagerCollection managerCollection)
         {
+            this.managerCollection = managerCollection;
         }
 
         #endregion Public Constructors
@@ -45,42 +30,39 @@ namespace OpenBreed.Editor.VM
         {
             var entryType = typeof(E);
 
-            if (_creators.ContainsKey(entryType))
+            if (creators.ContainsKey(entryType))
                 throw new InvalidOperationException($"Factory already has type '{entryType}' registered.");
 
-            _creators.Add(typeof(E), new EntryEditorCreator<C>());
+            creators.Add(typeof(E), typeof(C));
         }
 
-        public IEntryEditorCreator GetCreator(IRepository repository)
+        #endregion Public Methods
+
+        #region Internal Methods
+
+        internal EntryEditorVM Create(IRepository repository)
+        {
+            var type = GetCreator(repository);
+            return (EntryEditorVM)managerCollection.GetManager(type);
+        }
+
+        #endregion Internal Methods
+
+        #region Private Methods
+
+        private Type GetCreator(IRepository repository)
         {
             var entryType = repository.GetType().GetInterfaces().FirstOrDefault();
 
-            foreach (var item in _creators)
+            foreach (var item in creators)
             {
                 if (entryType.IsSubclassOf(item.Key) || entryType.Equals(item.Key))
-                {
                     return item.Value;
-                }
             }
 
             throw new InvalidOperationException($"{entryType}' type not registered.");
         }
 
-        #endregion Public Methods
-
-    }
-
-    internal class EntryEditorCreator<T> : IEntryEditorCreator where T : EntryEditorVM
-    {
-
-        #region Public Methods
-
-        public EntryEditorVM Create(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider)
-        {
-            return Activator.CreateInstance(typeof(T), managerCollection, workspaceMan, dataProvider, dialogProvider) as T;
-        }
-
-        #endregion Public Methods
-
+        #endregion Private Methods
     }
 }

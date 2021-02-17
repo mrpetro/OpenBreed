@@ -15,7 +15,7 @@ namespace OpenBreed.Editor.VM.DataSources
             RegisterSubeditor<IEPFArchiveDataSourceEntry, IDataSourceEntry>();
         }
 
-        public DataSourceEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dataProvider, dialogProvider, "Data Source Editor")
+        public DataSourceEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dialogProvider, "Data Source Editor")
         {
         }
 

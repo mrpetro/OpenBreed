@@ -25,12 +25,16 @@ namespace OpenBreed.Editor.VM.Maps
         private string currentPaletteRef;
 
         private bool isModified;
+        private readonly MapsDataProvider mapsDataProvider;
+        private readonly PalettesDataProvider palettesDataProvider;
+        private readonly ActionSetsDataProvider actionSetsDataProvider;
+        private readonly TileSetsDataProvider tileSetsDataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public MapEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, DataProvider dataProvider, IDialogProvider dialogProvider) : base(workspaceMan, dataProvider, dialogProvider)
+        public MapEditorVM(IWorkspaceMan workspaceMan, MapsDataProvider mapsDataProvider, PalettesDataProvider palettesDataProvider, ActionSetsDataProvider actionSetsDataProvider, TileSetsDataProvider tileSetsDataProvider, IDialogProvider dialogProvider) : base(workspaceMan, dialogProvider)
         {
             Tools = new MapEditorToolsVM();
 
@@ -55,6 +59,10 @@ namespace OpenBreed.Editor.VM.Maps
             //LayoutVm.PropertyChanged += (s, e) => OnPropertyChanged(nameof(LayoutVm));
 
             InitializeTools();
+            this.mapsDataProvider = mapsDataProvider;
+            this.palettesDataProvider = palettesDataProvider;
+            this.actionSetsDataProvider = actionSetsDataProvider;
+            this.tileSetsDataProvider = tileSetsDataProvider;
         }
 
         #endregion Public Constructors
@@ -180,7 +188,7 @@ namespace OpenBreed.Editor.VM.Maps
         {
             base.UpdateVM(entry);
 
-            Model = DataProvider.Maps.GetMap(entry.Id);
+            Model = mapsDataProvider.GetMap(entry.Id);
 
             UpdateTileSets(entry.TileSetRef);
             UpdatePalettes(entry.PaletteRefs);
@@ -223,7 +231,7 @@ namespace OpenBreed.Editor.VM.Maps
 
         private void OnTileSetModelChange(string tileSetRef)
         {
-            TileSet = DataProvider.TileSets.GetTileSet(tileSetRef);
+            TileSet = tileSetsDataProvider.GetTileSet(tileSetRef);
 
             CurrentTilesBitmap = (Bitmap)TileSet.Bitmap.Clone();
 
@@ -232,13 +240,13 @@ namespace OpenBreed.Editor.VM.Maps
 
         private void OnPalettesModelChange(string paletteRef)
         {
-            var paletteModel = DataProvider.Palettes.GetPalette(paletteRef);
+            var paletteModel = palettesDataProvider.GetPalette(paletteRef);
             BitmapHelper.SetPaletteColors(CurrentTilesBitmap, paletteModel.Data);
         }
 
         private void OnActionSetModelChange(string tileSetRef)
         {
-            ActionSet = DataProvider.ActionSets.GetActionSet(tileSetRef);
+            ActionSet = actionSetsDataProvider.GetActionSet(tileSetRef);
         }
 
         private void UpdateActionModel()
@@ -249,7 +257,7 @@ namespace OpenBreed.Editor.VM.Maps
                 return;
             }
 
-            var actionSet = DataProvider.ActionSets.GetActionSet(ActionSetRef);
+            var actionSet = actionSetsDataProvider.GetActionSet(ActionSetRef);
             if (actionSet != null)
                 ActionSet = actionSet;
         }
