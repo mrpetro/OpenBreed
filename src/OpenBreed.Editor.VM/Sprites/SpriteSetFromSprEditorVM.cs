@@ -21,7 +21,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         public SpriteSetFromSprEditorVM(SpriteSetsDataProvider spriteSetsDataProvider,
                                           PalettesDataProvider palettesDataProvider,
-                                          DataProvider dataProvider) : base(spriteSetsDataProvider, palettesDataProvider, dataProvider)
+                                          IDataProvider dataProvider) : base(spriteSetsDataProvider, palettesDataProvider, dataProvider)
         {
             Items = new BindingList<SpriteVM>();
         }

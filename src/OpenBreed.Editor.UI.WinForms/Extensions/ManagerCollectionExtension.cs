@@ -35,11 +35,11 @@ namespace OpenBreed.Editor.UI.WinForms.Extensions
 
         public static void SetupDbEntrySubEditors(this IManagerCollection managerCollection)
         {
-            managerCollection.AddTransient<IEntryEditor<ITileSetFromBlkEntry>>(() => new TileSetFromBlkEditorVM(managerCollection.GetManager<DataProvider>().TileSets,
-                                                                                                                managerCollection.GetManager<DataProvider>().Palettes));
+            managerCollection.AddTransient<IEntryEditor<ITileSetFromBlkEntry>>(() => new TileSetFromBlkEditorVM(managerCollection.GetManager<TileSetsDataProvider>(),
+                                                                                                                managerCollection.GetManager<PalettesDataProvider>()));
 
 
-            managerCollection.AddTransient<IEntryEditor<IActionSetEntry>>(() => new ActionSetEmbeddedEditorVM(managerCollection.GetManager<DataProvider>().ActionSets));
+            managerCollection.AddTransient<IEntryEditor<IActionSetEntry>>(() => new ActionSetEmbeddedEditorVM(managerCollection.GetManager<ActionSetsDataProvider>()));
 
 
             managerCollection.AddTransient<IEntryEditor<IFileDataSourceEntry>>(() => new FileDataSourceEditorVM());
@@ -48,31 +48,31 @@ namespace OpenBreed.Editor.UI.WinForms.Extensions
 
 
             managerCollection.AddTransient<IEntryEditor<IEntityTemplateFromFileEntry>>(() => new EntityTemplateFromFileEditorVM(managerCollection.GetManager<EntityTemplatesDataProvider>(),
-                                                                                                                                managerCollection.GetManager<DataProvider>()));
+                                                                                                                                managerCollection.GetManager<IDataProvider>()));
 
 
             managerCollection.AddTransient<IEntryEditor<IImageEntry>>(() => new ImageFromFileEditorVM(managerCollection.GetManager<IWorkspaceMan>(),
                                                                                                                 managerCollection.GetManager<IDialogProvider>(),
-                                                                                                                managerCollection.GetManager<DataProvider>()));
+                                                                                                                managerCollection.GetManager<IDataProvider>()));
 
 
             managerCollection.AddTransient<IEntryEditor<ISpriteSetFromSprEntry>>(() => new SpriteSetFromSprEditorVM(managerCollection.GetManager<SpriteSetsDataProvider>(),
                                                                                                                 managerCollection.GetManager<PalettesDataProvider>(),
-                                                                                                                managerCollection.GetManager<DataProvider>()));
+                                                                                                                managerCollection.GetManager<IDataProvider>()));
 
 
 
             managerCollection.AddTransient<IEntryEditor<ISpriteSetFromImageEntry>>(() => new SpriteSetFromImageEditorVM(managerCollection.GetManager<SpriteSetsDataProvider>(),
                                                                                                                 managerCollection.GetManager<PalettesDataProvider>(),
-                                                                                                                managerCollection.GetManager<DataProvider>()));
+                                                                                                                managerCollection.GetManager<IDataProvider>()));
 
 
             managerCollection.AddTransient<IEntryEditor<IPaletteFromBinaryEntry>>(() => new PaletteFromBinaryEditorVM(managerCollection.GetManager<PalettesDataProvider>(),
-                                                                                                                managerCollection.GetManager<DataProvider>()));
+                                                                                                                managerCollection.GetManager<IDataProvider>()));
 
 
             managerCollection.AddTransient<IEntryEditor<IPaletteFromMapEntry>>(() => new PaletteFromMapEditorVM(managerCollection.GetManager<PalettesDataProvider>(),
-                                                                                                                managerCollection.GetManager<DataProvider>()));
+                                                                                                                managerCollection.GetManager<IDataProvider>()));
 
 
             managerCollection.AddTransient<IEntryEditor<ITextEmbeddedEntry>>(() => new TextEmbeddedEditorVM(managerCollection.GetManager<TextsDataProvider>()));
@@ -80,7 +80,7 @@ namespace OpenBreed.Editor.UI.WinForms.Extensions
 
 
             managerCollection.AddTransient<IEntryEditor<ITextFromMapEntry>>(() => new TextFromMapEditorVM(managerCollection.GetManager<TextsDataProvider>(),
-                                                                                                          managerCollection.GetManager<DataProvider>()));
+                                                                                                          managerCollection.GetManager<IDataProvider>()));
 
 
 
@@ -91,7 +91,7 @@ namespace OpenBreed.Editor.UI.WinForms.Extensions
 
             managerCollection.AddTransient<IEntryEditor<IScriptFromFileEntry>>(() => new ScriptFromFileEditorVM(managerCollection.GetManager<IWorkspaceMan>(),
                                                                                                                 managerCollection.GetManager<ScriptsDataProvider>(),
-                                                                                                                managerCollection.GetManager<DataProvider>()));
+                                                                                                                managerCollection.GetManager<IDataProvider>()));
 
 
 

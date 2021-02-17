@@ -17,13 +17,13 @@ namespace OpenBreed.Editor.VM.EntityTemplates
 
         private string entityTemplate;
         private readonly EntityTemplatesDataProvider entityTemplatesDataProvider;
-        private readonly DataProvider dataProvider;
+        private readonly IDataProvider dataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public EntityTemplateFromFileEditorVM(EntityTemplatesDataProvider entityTemplatesDataProvider, DataProvider dataProvider)
+        public EntityTemplateFromFileEditorVM(EntityTemplatesDataProvider entityTemplatesDataProvider, IDataProvider dataProvider)
         {
             this.entityTemplatesDataProvider = entityTemplatesDataProvider;
             this.dataProvider = dataProvider;

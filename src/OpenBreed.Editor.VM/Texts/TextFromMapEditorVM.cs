@@ -20,14 +20,14 @@ namespace OpenBreed.Editor.VM.Texts
 
         private string _dataRef;
         private readonly TextsDataProvider textsDataProvider;
-        private readonly DataProvider dataProvider;
+        private readonly IDataProvider dataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
         public TextFromMapEditorVM(TextsDataProvider textsDataProvider,
-                                   DataProvider dataProvider)
+                                   IDataProvider dataProvider)
         {
             this.textsDataProvider = textsDataProvider;
             this.dataProvider = dataProvider;

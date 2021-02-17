@@ -18,7 +18,7 @@ namespace OpenBreed.Editor.VM.Sprites
         private PaletteModel palette;
         protected readonly SpriteSetsDataProvider spriteSetsDataProvider;
         protected readonly PalettesDataProvider palettesDataProvider;
-        protected readonly DataProvider dataProvider;
+        protected readonly IDataProvider dataProvider;
 
         #endregion Private Fields
 
@@ -26,7 +26,7 @@ namespace OpenBreed.Editor.VM.Sprites
 
         public SpriteSetEditorExVM(SpriteSetsDataProvider spriteSetsDataProvider,
                                    PalettesDataProvider palettesDataProvider,
-                                   DataProvider dataProvider)
+                                   IDataProvider dataProvider)
         {
             this.spriteSetsDataProvider = spriteSetsDataProvider;
             this.palettesDataProvider = palettesDataProvider;
