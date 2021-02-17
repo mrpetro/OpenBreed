@@ -9,6 +9,9 @@ namespace OpenBreed.Common.Extensions
 
         public static void SetupDataProviders(this IManagerCollection managerCollection)
         {
+            managerCollection.AddSingleton<ActionSetsDataProvider>(() => new ActionSetsDataProvider(managerCollection.GetManager<IDataProvider>(),
+                                                                                                    managerCollection.GetManager<IWorkspaceMan>()));
+
             managerCollection.AddSingleton<SpriteSetsDataProvider>(() => new SpriteSetsDataProvider(managerCollection.GetManager<IDataProvider>(),
                                                                                                     managerCollection.GetManager<IWorkspaceMan>()));
 

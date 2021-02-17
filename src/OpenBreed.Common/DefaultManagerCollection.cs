@@ -10,7 +10,7 @@ namespace OpenBreed.Common
     {
         #region Private Fields
 
-        private readonly Dictionary<Type, object> singletons = new Dictionary<Type, object>();
+        private readonly Dictionary<Type, object> managerTypes = new Dictionary<Type, object>();
 
         #endregion Private Fields
 
@@ -18,7 +18,7 @@ namespace OpenBreed.Common
 
         public TManager GetManager<TManager>()
         {
-            if (!singletons.TryGetValue(typeof(TManager), out object manager))
+            if (!managerTypes.TryGetValue(typeof(TManager), out object manager))
                 throw new InvalidOperationException($"Manager type '{typeof(TManager).Name}' not registered.");
 
             if (manager is Lazy<object>)
@@ -33,7 +33,7 @@ namespace OpenBreed.Common
 
         public object GetManager(Type type)
         {
-            if (!singletons.TryGetValue(type, out object manager))
+            if (!managerTypes.TryGetValue(type, out object manager))
                 throw new InvalidOperationException($"Manager type '{type.Name}' not registered.");
 
             if (manager is Lazy<object>)
@@ -53,10 +53,10 @@ namespace OpenBreed.Common
             //if (!managerType.IsInterface)
             //    throw new InvalidOperationException("TInterface must be an IManager interface.");
 
-            if (singletons.ContainsKey(managerType))
+            if (managerTypes.ContainsKey(managerType))
                 throw new InvalidOperationException($"Manager type '{managerType.Name}' already registered.");
 
-            singletons.Add(managerType, new Lazy<object>(initializer, System.Threading.LazyThreadSafetyMode.PublicationOnly));
+            managerTypes.Add(managerType, new Lazy<object>(initializer, System.Threading.LazyThreadSafetyMode.PublicationOnly));
         }
 
         public void AddTransient<TInterface>(Func<object> initializer)
@@ -66,10 +66,10 @@ namespace OpenBreed.Common
             //if (!managerType.IsInterface)
             //    throw new InvalidOperationException("TInterface must be an IManager interface.");
 
-            if (singletons.ContainsKey(managerType))
+            if (managerTypes.ContainsKey(managerType))
                 throw new InvalidOperationException($"Manager type '{managerType.Name}' already registered.");
 
-            singletons.Add(managerType, initializer);
+            managerTypes.Add(managerType, initializer);
         }
 
         public void AddSingleton<TInterface>(TInterface instance)
@@ -79,10 +79,10 @@ namespace OpenBreed.Common
             if (!managerType.IsInterface)
                 throw new InvalidOperationException("TInterface must be an IManager interface.");
 
-            if (singletons.ContainsKey(managerType))
+            if (managerTypes.ContainsKey(managerType))
                 throw new InvalidOperationException($"Manager type '{managerType.Name}' already registered.");
 
-            singletons.Add(managerType, instance);
+            managerTypes.Add(managerType, instance);
         }
 
         #endregion Public Methods

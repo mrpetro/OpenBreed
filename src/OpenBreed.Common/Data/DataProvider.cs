@@ -29,35 +29,11 @@ namespace OpenBreed.Common.Data
 
             dataSources = new DataSourceProvider(this.workspaceMan, logger, variables);
             assets = new AssetsDataProvider(this.workspaceMan, dataSources, formatMan);
-
-            Palettes = new PalettesDataProvider(this, this.workspaceMan);
-            TileSets = new TileSetsDataProvider(this, this.workspaceMan);
-            SpriteSets = new SpriteSetsDataProvider(this, this.workspaceMan);
-            ActionSets = new ActionSetsDataProvider(this, this.workspaceMan);
-            Maps = new MapsDataProvider(this, this.workspaceMan, TileSets, Palettes, ActionSets);
-
-            Sounds = new SoundsDataProvider(this, this.workspaceMan);
-            Images = new ImagesDataProvider(this, this.workspaceMan);
-            Texts = new TextsDataProvider(this, this.workspaceMan);
-            Scripts = new ScriptsDataProvider(this, this.workspaceMan);
-            EntityTemplates = new EntityTemplatesDataProvider(this, this.workspaceMan);
         }
 
         #endregion Public Constructors
 
         #region Public Properties
-
-        public ActionSetsDataProvider ActionSets { get; }
-
-        public ImagesDataProvider Images { get; }
-        public MapsDataProvider Maps { get; }
-        public PalettesDataProvider Palettes { get; }
-        public TextsDataProvider Texts { get; }
-        public ScriptsDataProvider Scripts { get; }
-        public EntityTemplatesDataProvider EntityTemplates { get; }
-        public SoundsDataProvider Sounds { get; }
-        public SpriteSetsDataProvider SpriteSets { get; }
-        public TileSetsDataProvider TileSets { get; }
 
         #endregion Public Properties
 
