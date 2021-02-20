@@ -23,16 +23,18 @@ namespace OpenBreed.Editor.VM
         #region Public Fields
 
         public EditorApplication application;
-        private readonly IManagerCollection managerCollection;
-        private readonly IWorkspaceMan workspaceMan;
 
         #endregion Public Fields
 
         #region Private Fields
 
+        private readonly IManagerCollection managerCollection;
+        private readonly IWorkspaceMan workspaceMan;
+
         private readonly SettingsMan settings;
         private readonly DbEntryEditorFactory dbEntryEditorFactory;
         private readonly IDialogProvider dialogProvider;
+        private readonly Lazy<DbEditorVM> lazyDbEditor;
         private EditorState _state;
         private LoggerVM logger;
 
@@ -44,7 +46,7 @@ namespace OpenBreed.Editor.VM
 
         #region Public Constructors
 
-        public EditorApplicationVM(EditorApplication application, IManagerCollection managerCollection , IWorkspaceMan workspaceMan, SettingsMan settings, DbEntryEditorFactory dbEntryEditorFactory, IDialogProvider dialogProvider)
+        public EditorApplicationVM(EditorApplication application, IManagerCollection managerCollection, IWorkspaceMan workspaceMan, SettingsMan settings, DbEntryEditorFactory dbEntryEditorFactory, IDialogProvider dialogProvider)
         {
             this.application = application;
             this.managerCollection = managerCollection;
@@ -53,14 +55,11 @@ namespace OpenBreed.Editor.VM
             this.dbEntryEditorFactory = dbEntryEditorFactory;
             this.dialogProvider = dialogProvider;
 
+            lazyDbEditor = new Lazy<DbEditorVM>(() => managerCollection.GetManager<DbEditorVM>());
+
             MenuItems = new BindingList<MenuItemVM>();
 
             Title = EditorApplication.APP_NAME;
-        }
-
-        public DbEditorVM CreateDbEditorVM()
-        {
-            return new DbEditorVM(application, managerCollection, dbEntryEditorFactory, workspaceMan, application.DialogProvider);
         }
 
         #endregion Public Constructors
@@ -72,6 +71,8 @@ namespace OpenBreed.Editor.VM
         public Action<LoggerVM, bool> ToggleLoggerAction { get; set; }
 
         public Action<SettingsMan> ShowOptionsAction { get; set; }
+
+        public DbEditorVM DbEditor => lazyDbEditor.Value;
 
         public string Title
         {
@@ -142,8 +143,6 @@ namespace OpenBreed.Editor.VM
 
             DbName = workspaceMan.UnitOfWork.Name;
 
-            var dbEditor = application.CreateDbEditorVm();
-
             return true;
         }
 
@@ -154,7 +153,7 @@ namespace OpenBreed.Editor.VM
         public void ToggleLogger(bool toggle)
         {
             if (logger == null)
-                logger = application.CreateLoggerVm();
+                logger = managerCollection.GetManager<LoggerVM>();
 
             ToggleLoggerAction?.Invoke(logger, toggle);
         }

@@ -16,7 +16,7 @@ using OpenBreed.Database.Interface.Items.Sprites;
 using OpenBreed.Database.Interface.Items.Texts;
 using OpenBreed.Database.Interface.Items.Tiles;
 using OpenBreed.Database.Xml;
-using OpenBreed.Editor.UI.WinForms.Extensions;
+using OpenBreed.Editor.VM.Extensions;
 using OpenBreed.Editor.VM;
 using OpenBreed.Editor.VM.Actions;
 using OpenBreed.Editor.VM.Database;
@@ -62,7 +62,7 @@ namespace OpenBreed.Editor.UI.WinForms
                                                                               managerCollection.GetManager<ILogger>()));
             managerCollection.AddSingleton<DbEntryFactory>(() => new DbEntryFactory());
 
-            managerCollection.AddSingleton<EditorApplication>(() => new EditorApplication(managerCollection));
+            managerCollection.AddSingleton<EditorApplication>(() => new EditorApplication(managerCollection, managerCollection.GetManager<DataSourceProvider>()));
 
             managerCollection.AddSingleton<XmlDatabaseMan>(() => new XmlDatabaseMan(managerCollection.GetManager<IVariableMan>()));
 
@@ -71,11 +71,11 @@ namespace OpenBreed.Editor.UI.WinForms
             managerCollection.AddSingleton<IWorkspaceMan>(() => new EditorWorkspaceMan(managerCollection.GetManager<XmlDatabaseMan>(),
                                                                                        managerCollection.GetManager<ILogger>()));
 
-            managerCollection.AddSingleton<IDataProvider>(() => new DataProvider(managerCollection.GetManager<IWorkspaceMan>(),
-                                                                                managerCollection.GetManager<ILogger>(), 
-                                                                                managerCollection.GetManager<IVariableMan>(),
-                                                                                managerCollection.GetManager<DataFormatMan>()));
+            managerCollection.AddSingleton<IDataProvider>(() => new DataProvider(managerCollection.GetManager<ILogger>(), 
+                                                                                 managerCollection.GetManager<DataSourceProvider>(),
+                                                                                 managerCollection.GetManager<AssetsDataProvider>()));
 
+            managerCollection.SetupCommonViewModels();
             managerCollection.SetupDbEntryEditors();
             managerCollection.SetupDbEntrySubEditors();
             managerCollection.SetupDbEntryEditorFactory();

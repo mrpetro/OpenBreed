@@ -15,8 +15,6 @@ namespace OpenBreed.Editor.VM.Database
         #region Private Fields
 
         private readonly Dictionary<string, EntryEditorVM> _openedEntryEditors = new Dictionary<string, EntryEditorVM>();
-
-        private readonly EditorApplication application;
         private readonly IManagerCollection managerCollection;
         private readonly DbEntryEditorFactory dbEntryEditorFactory;
         private readonly IWorkspaceMan workspaceMan;
@@ -26,13 +24,11 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Public Constructors
 
-        public DbEditorVM(EditorApplication application,
-                          IManagerCollection managerCollection,
+        public DbEditorVM(IManagerCollection managerCollection,
                           DbEntryEditorFactory dbEntryEditorFactory,
                           IWorkspaceMan workspaceMan,
                           IDialogProvider dialogProvider)
         {
-            this.application = application;
             this.managerCollection = managerCollection;
             this.dbEntryEditorFactory = dbEntryEditorFactory;
             this.workspaceMan = workspaceMan;
@@ -99,7 +95,7 @@ namespace OpenBreed.Editor.VM.Database
         {
             if (dbTablesEditor == null)
             {
-                dbTablesEditor = application.CreateDbTablesEditorVm();
+                dbTablesEditor = managerCollection.GetManager<DbTablesEditorVM>();
                 dbTablesEditor.EntryEditorOpener = OpenEntryEditor;
                 InitDbTablesEditorAction?.Invoke(dbTablesEditor);
 

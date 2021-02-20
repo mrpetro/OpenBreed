@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Data;
 using OpenBreed.Common.Formats;
+using OpenBreed.Common.Logging;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Database.Interface.Items.DataSources;
@@ -15,9 +16,11 @@ using OpenBreed.Database.Interface.Items.Texts;
 using OpenBreed.Database.Interface.Items.Tiles;
 using OpenBreed.Editor.VM;
 using OpenBreed.Editor.VM.Actions;
+using OpenBreed.Editor.VM.Database;
 using OpenBreed.Editor.VM.DataSources;
 using OpenBreed.Editor.VM.EntityTemplates;
 using OpenBreed.Editor.VM.Images;
+using OpenBreed.Editor.VM.Logging;
 using OpenBreed.Editor.VM.Maps;
 using OpenBreed.Editor.VM.Palettes;
 using OpenBreed.Editor.VM.Scripts;
@@ -26,7 +29,7 @@ using OpenBreed.Editor.VM.Sprites;
 using OpenBreed.Editor.VM.Texts;
 using OpenBreed.Editor.VM.Tiles;
 
-namespace OpenBreed.Editor.UI.WinForms.Extensions
+namespace OpenBreed.Editor.VM.Extensions
 {
     public static class ManagerCollectionExtension
     {
@@ -97,9 +100,19 @@ namespace OpenBreed.Editor.UI.WinForms.Extensions
 
         }
 
+        public static void SetupCommonViewModels(this IManagerCollection managerCollection)
+        {
+            managerCollection.AddTransient<LoggerVM>(() => new LoggerVM(managerCollection.GetManager<ILogger>()));
+        }
 
         public static void SetupDbEntryEditors(this IManagerCollection managerCollection)
         {
+            managerCollection.AddTransient<DbEditorVM>(() => new DbEditorVM(managerCollection,
+                                                                            managerCollection.GetManager<DbEntryEditorFactory>(),
+                                                                            managerCollection.GetManager<IWorkspaceMan>(),
+                                                                            managerCollection.GetManager<IDialogProvider>()));
+            managerCollection.AddTransient<DbTablesEditorVM>(() => new DbTablesEditorVM(managerCollection.GetManager<IWorkspaceMan>(),
+                                                                                                                managerCollection.GetManager<DbEntryFactory>()));
             managerCollection.AddTransient<TileSetEditorVM>(() => new TileSetEditorVM(managerCollection, managerCollection.GetManager<IWorkspaceMan>(),
                                                                                                                 managerCollection.GetManager<IDialogProvider>()));
             managerCollection.AddTransient<SpriteSetEditorVM>(() => new SpriteSetEditorVM(managerCollection, managerCollection.GetManager<IWorkspaceMan>(),

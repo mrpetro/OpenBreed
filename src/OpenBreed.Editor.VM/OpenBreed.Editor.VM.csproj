@@ -109,6 +109,7 @@
     <Compile Include="EntryEditorBaseVM.cs" />
     <Compile Include="EntryEditorVM.cs" />
     <Compile Include="EditableEntryVM.cs" />
+    <Compile Include="Extensions\ManagerCollectionExtension.cs" />
     <Compile Include="IDialogProvider.cs" />
     <Compile Include="IEntryEditor.cs" />
     <Compile Include="IFolderBrowserQuery.cs" />

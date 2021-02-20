@@ -66,6 +66,8 @@ namespace OpenBreed.Editor.VM
             if (UnitOfWork == null)
                 throw new Exception("Database not opened.");
 
+            UnitOfWork.Save();
+
             logger.Info($"Database '{UnitOfWork.Name}' saved.");
         }
 

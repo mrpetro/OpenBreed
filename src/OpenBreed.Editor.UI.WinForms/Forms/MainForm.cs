@@ -105,7 +105,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         {
             VM = vm ?? throw new ArgumentNullException(nameof(vm));
 
-            EditorView.Initialize(VM.CreateDbEditorVM());
+            EditorView.Initialize(VM.DbEditor);
 
             BindProperties();
             BindEvents();
@@ -149,7 +149,7 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
         {
             _logConsoleView = new LogConsoleView();
             _logConsoleView.VisibleChanged += (s, a) => ChangeCheckedState(LogConsoleShowToolStripMenuItem, s as Control);
-            _logConsoleView.Initialize(VM.application.CreateLoggerVm());
+            //_logConsoleView.Initialize(VM.application.CreateLoggerVm());
             _logConsoleView.Show(EditorView, DockState.Float);
         }
 

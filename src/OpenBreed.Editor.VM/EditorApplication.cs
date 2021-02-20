@@ -11,7 +11,7 @@ using System.IO;
 
 namespace OpenBreed.Editor.VM
 {
-    public class EditorApplication : ApplicationBase, IDisposable
+    public class EditorApplication : IDisposable
     {
         #region Public Fields
 
@@ -27,13 +27,15 @@ namespace OpenBreed.Editor.VM
         private readonly XmlDatabaseMan databaseMan;
         private readonly IWorkspaceMan workspaceMan;
         private readonly IDataProvider dataProvider;
+        private readonly IManagerCollection managerCollection;
+        private readonly DataSourceProvider dataSources;
         private bool disposedValue;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public EditorApplication(IManagerCollection managerCollection) : base(managerCollection)
+        public EditorApplication(IManagerCollection managerCollection, DataSourceProvider dataSources)
         {
 
             logger = managerCollection.GetManager<ILogger>();
@@ -46,6 +48,8 @@ namespace OpenBreed.Editor.VM
             //DialogProvider = managerCollection.GetManager<IDialogProvider>();
 
             settings.Restore();
+            this.managerCollection = managerCollection;
+            this.dataSources = dataSources;
         }
 
         #endregion Public Constructors
@@ -83,8 +87,8 @@ namespace OpenBreed.Editor.VM
 
         public void CloseDatabase()
         {
-            //TODO: Lazy thing here, fix that at some point
-            ((DataProvider)dataProvider).Close();
+            dataSources.CloseAll();
+
             workspaceMan.CloseDatabase();
         }
 
@@ -93,24 +97,12 @@ namespace OpenBreed.Editor.VM
             if (workspaceMan.UnitOfWork != null)
             {
                 ((DataProvider)dataProvider).Save();
+
+                dataSources.Save();
+
                 workspaceMan.SaveDatabase();
             }
 
-        }
-
-        public LoggerVM CreateLoggerVm()
-        {
-            return new LoggerVM(logger);
-        }
-
-        public DbEditorVM CreateDbEditorVm()
-        {
-            return new DbEditorVM(this, managerCollection, managerCollection.GetManager<DbEntryEditorFactory>(), workspaceMan, DialogProvider);
-        }
-
-        public DbTablesEditorVM CreateDbTablesEditorVm()
-        {
-            return new DbTablesEditorVM(workspaceMan, managerCollection.GetManager<DbEntryFactory>());
         }
 
         public EditorApplicationVM CreateEditorApplicationVm()
@@ -133,16 +125,6 @@ namespace OpenBreed.Editor.VM
 
                 disposedValue = true;
             }
-        }
-
-        public void AddSingleton<TInterface>(Func<object> initializer)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddSingleton<TInterface>(TInterface instance)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion Protected Methods
