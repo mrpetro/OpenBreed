@@ -66,7 +66,6 @@
     <Compile Include="..\Shared\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="ApplicationBase.cs" />
     <Compile Include="Data\EntityTemplatesDataProvider.cs" />
     <Compile Include="Data\EntityTemplatesDataHelper.cs" />
     <Compile Include="Data\ActionSetsDataHelper.cs" />
@@ -75,7 +74,6 @@
     <Compile Include="DefaultManagerCollection.cs" />
     <Compile Include="Extensions\ManagerCollectionExtension.cs" />
     <Compile Include="Formats\TextFormat.cs" />
-    <Compile Include="IApplication.cs" />
     <Compile Include="IApplicationInterface.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Configs\BaseCfg.cs" />

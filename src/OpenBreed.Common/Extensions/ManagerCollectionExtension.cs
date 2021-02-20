@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common.Data;
 using OpenBreed.Common.Formats;
+using OpenBreed.Common.Logging;
 
 namespace OpenBreed.Common.Extensions
 {
@@ -9,6 +10,14 @@ namespace OpenBreed.Common.Extensions
 
         public static void SetupDataProviders(this IManagerCollection managerCollection)
         {
+            managerCollection.AddSingleton<DataSourceProvider>(() => new DataSourceProvider(managerCollection.GetManager<IWorkspaceMan>(),
+                                                                                                    managerCollection.GetManager<ILogger>(),
+                                                                                                    managerCollection.GetManager<IVariableMan>()));
+
+            managerCollection.AddSingleton<AssetsDataProvider>(() => new AssetsDataProvider(managerCollection.GetManager<IWorkspaceMan>(),
+                                                                                                    managerCollection.GetManager<DataSourceProvider>(),
+                                                                                                    managerCollection.GetManager<DataFormatMan>()));
+
             managerCollection.AddSingleton<ActionSetsDataProvider>(() => new ActionSetsDataProvider(managerCollection.GetManager<IDataProvider>(),
                                                                                                     managerCollection.GetManager<IWorkspaceMan>()));
 

@@ -10,9 +10,7 @@ namespace OpenBreed.Common.Data
     {
         #region Private Fields
 
-        private readonly IWorkspaceMan workspaceMan;
         private readonly ILogger logger;
-        private readonly IVariableMan variables;
         private readonly DataSourceProvider dataSources;
         private readonly AssetsDataProvider assets;
         private Dictionary<string, object> _models = new Dictionary<string, object>();
@@ -21,14 +19,11 @@ namespace OpenBreed.Common.Data
 
         #region Public Constructors
 
-        public DataProvider(IWorkspaceMan workspaceMan, ILogger logger, IVariableMan variables, DataFormatMan formatMan)
+        public DataProvider(ILogger logger, DataSourceProvider dataSources, AssetsDataProvider assets)
         {
-            this.workspaceMan = workspaceMan;
             this.logger = logger;
-            this.variables = variables;
-
-            dataSources = new DataSourceProvider(this.workspaceMan, logger, variables);
-            assets = new AssetsDataProvider(this.workspaceMan, dataSources, formatMan);
+            this.dataSources = dataSources;
+            this.assets = assets;
         }
 
         #endregion Public Constructors
@@ -78,20 +73,9 @@ namespace OpenBreed.Common.Data
             return (T)data;
         }
 
-        public void Close()
-        {
-            dataSources.CloseAll();
-
-            logger.Info($"All data closed.");
-        }
-
         public void Save()
         {
             SaveModels();
-
-            dataSources.Save();
-
-            workspaceMan.UnitOfWork.Save();
 
             logger.Info($"All data saved.");
         }
