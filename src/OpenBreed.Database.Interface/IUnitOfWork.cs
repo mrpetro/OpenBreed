@@ -1,20 +1,17 @@
-﻿using OpenBreed.Database.Interface.Items;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OpenBreed.Database.Interface
+﻿namespace OpenBreed.Database.Interface
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IRepositoryProvider
     {
+        #region Public Properties
+
         string Name { get; }
-        IRepository<T> GetRepository<T>() where T : IEntry;
-        IRepository GetRepository(string name);
-        IRepository GetRepository(Type type);
+
+        #endregion Public Properties
+
+        #region Public Methods
 
         void Save();
-        IEnumerable<IRepository> Repositories{ get; }
+
+        #endregion Public Methods
     }
 }

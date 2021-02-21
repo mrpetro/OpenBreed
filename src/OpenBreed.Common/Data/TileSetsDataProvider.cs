@@ -1,4 +1,5 @@
-﻿using OpenBreed.Database.Interface.Items.Tiles;
+﻿using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Tiles;
 using OpenBreed.Model.Tiles;
 using System;
 
@@ -8,7 +9,7 @@ namespace OpenBreed.Common.Data
     {
         #region Private Fields
 
-        private readonly IWorkspaceMan workspaceMan;
+        private readonly IRepositoryProvider repositoryProvider;
 
         private readonly IModelsProvider dataProvider;
 
@@ -16,10 +17,10 @@ namespace OpenBreed.Common.Data
 
         #region Public Constructors
 
-        public TileSetsDataProvider(IModelsProvider dataProvider, IWorkspaceMan workspaceMan)
+        public TileSetsDataProvider(IModelsProvider dataProvider, IRepositoryProvider repositoryProvider)
         {
             this.dataProvider = dataProvider;
-            this.workspaceMan = workspaceMan;
+            this.repositoryProvider = repositoryProvider;
         }
 
         #endregion Public Constructors
@@ -28,7 +29,7 @@ namespace OpenBreed.Common.Data
 
         public TileSetModel GetTileSet(string id)
         {
-            var entry = workspaceMan.UnitOfWork.GetRepository<ITileSetEntry>().GetById(id);
+            var entry = repositoryProvider.GetRepository<ITileSetEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("TileSet error: " + id);
 

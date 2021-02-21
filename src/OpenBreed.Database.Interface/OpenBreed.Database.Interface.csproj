@@ -65,6 +65,7 @@
     <Compile Include="IDatabase.cs" />
     <Compile Include="IDatabaseFactory.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="IRepositoryProvider.cs" />
     <Compile Include="Items\Actions\IActionEntry.cs" />
     <Compile Include="Items\Actions\IActionPresentation.cs" />
     <Compile Include="Items\Actions\IActionSetEntry.cs" />

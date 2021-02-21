@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Common.Formats;
+using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Assets;
 using System;
 
@@ -9,16 +10,16 @@ namespace OpenBreed.Common.Data
         #region Private Fields
 
         private readonly DataFormatMan formatMan;
-        private readonly IWorkspaceMan workspaceMan;
+        private readonly IRepositoryProvider repositoryProvider;
         private readonly DataSourceProvider dataSources;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public AssetsDataProvider(IWorkspaceMan workspaceMan, DataSourceProvider dataSources, DataFormatMan formatMan)
+        public AssetsDataProvider(IRepositoryProvider repositoryProvider, DataSourceProvider dataSources, DataFormatMan formatMan)
         {
-            this.workspaceMan = workspaceMan;
+            this.repositoryProvider = repositoryProvider;
             this.dataSources = dataSources;
             this.formatMan = formatMan;
         }
@@ -29,7 +30,7 @@ namespace OpenBreed.Common.Data
 
         public object LoadModel(string entryId)
         {
-            var assetEntry = workspaceMan.UnitOfWork.GetRepository<IAssetEntry>().GetById(entryId);
+            var assetEntry = repositoryProvider.GetRepository<IAssetEntry>().GetById(entryId);
             if (assetEntry == null)
                 throw new Exception($"Asset error: {entryId}");
 
@@ -48,7 +49,7 @@ namespace OpenBreed.Common.Data
 
         public void SaveModel(string entryId, object data)
         {
-            var assetEntry = workspaceMan.UnitOfWork.GetRepository<IAssetEntry>().GetById(entryId);
+            var assetEntry = repositoryProvider.GetRepository<IAssetEntry>().GetById(entryId);
             if (assetEntry == null)
                 throw new Exception($"Asset error: {entryId}");
 

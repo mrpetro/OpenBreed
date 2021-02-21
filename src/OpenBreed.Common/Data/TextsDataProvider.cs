@@ -1,4 +1,5 @@
-﻿using OpenBreed.Database.Interface.Items.Texts;
+﻿using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Texts;
 using OpenBreed.Model.Texts;
 using System;
 
@@ -8,7 +9,7 @@ namespace OpenBreed.Common.Data
     {
         #region Private Fields
 
-        private readonly IWorkspaceMan workspaceMan;
+        private readonly IRepositoryProvider repositoryProvider;
 
         private readonly IModelsProvider dataProvider;
 
@@ -16,10 +17,10 @@ namespace OpenBreed.Common.Data
 
         #region Public Constructors
 
-        public TextsDataProvider(IModelsProvider dataProvider, IWorkspaceMan workspaceMan)
+        public TextsDataProvider(IModelsProvider dataProvider, IRepositoryProvider repositoryProvider)
         {
             this.dataProvider = dataProvider;
-            this.workspaceMan = workspaceMan;
+            this.repositoryProvider = repositoryProvider;
         }
 
         #endregion Public Constructors
@@ -28,7 +29,7 @@ namespace OpenBreed.Common.Data
 
         public TextModel GetText(string id)
         {
-            var entry = workspaceMan.UnitOfWork.GetRepository<ITextEntry>().GetById(id);
+            var entry = repositoryProvider.GetRepository<ITextEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("Text error: " + id);
 

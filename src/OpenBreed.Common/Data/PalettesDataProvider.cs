@@ -1,4 +1,5 @@
-﻿using OpenBreed.Database.Interface.Items.Palettes;
+﻿using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items.Palettes;
 using OpenBreed.Model.Palettes;
 using System;
 
@@ -8,7 +9,7 @@ namespace OpenBreed.Common.Data
     {
         #region Private Fields
 
-        private readonly IWorkspaceMan workspaceMan;
+        private readonly IRepositoryProvider repositoryProvider;
 
         private readonly IModelsProvider dataProvider;
 
@@ -16,10 +17,10 @@ namespace OpenBreed.Common.Data
 
         #region Public Constructors
 
-        public PalettesDataProvider(IModelsProvider dataProvider, IWorkspaceMan workspaceMan)
+        public PalettesDataProvider(IModelsProvider dataProvider, IRepositoryProvider repositoryProvider)
         {
             this.dataProvider = dataProvider;
-            this.workspaceMan = workspaceMan;
+            this.repositoryProvider = repositoryProvider;
         }
 
         #endregion Public Constructors
@@ -28,7 +29,7 @@ namespace OpenBreed.Common.Data
 
         public PaletteModel GetPalette(string id)
         {
-            var entry = workspaceMan.UnitOfWork.GetRepository<IPaletteEntry>().GetById(id);
+            var entry = repositoryProvider.GetRepository<IPaletteEntry>().GetById(id);
             if (entry == null)
                 throw new Exception("Palette error: " + id);
 

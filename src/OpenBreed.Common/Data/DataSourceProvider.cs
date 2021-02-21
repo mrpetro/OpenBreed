@@ -2,6 +2,7 @@
 using OpenBreed.Common.DataSources;
 using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools;
+using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.DataSources;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace OpenBreed.Common.Data
         #region Private Fields
 
         private readonly Dictionary<string, DataSourceBase> _openedDataSources = new Dictionary<string, DataSourceBase>();
-        private readonly IWorkspaceMan workspaceMan;
+        private readonly IRepositoryProvider repositoryProvider;
         private readonly IVariableMan variables;
         private Dictionary<string, EPFArchive> _openedArchives = new Dictionary<string, EPFArchive>();
         private bool disposedValue;
@@ -24,9 +25,9 @@ namespace OpenBreed.Common.Data
 
         #region Public Constructors
 
-        public DataSourceProvider(IWorkspaceMan workspaceMan, ILogger logger, IVariableMan variables)
+        public DataSourceProvider(IRepositoryProvider repositoryProvider, ILogger logger, IVariableMan variables)
         {
-            this.workspaceMan = workspaceMan;
+            this.repositoryProvider = repositoryProvider;
             this.logger = logger;
             this.variables = variables;
         }
@@ -41,7 +42,7 @@ namespace OpenBreed.Common.Data
             if (_openedDataSources.TryGetValue(name, out ds))
                 return ds;
 
-            var entry = workspaceMan.UnitOfWork.GetRepository<IDataSourceEntry>().GetById(name);
+            var entry = repositoryProvider.GetRepository<IDataSourceEntry>().GetById(name);
             if (entry == null)
                 throw new Exception($"Data source error: {name}");
 

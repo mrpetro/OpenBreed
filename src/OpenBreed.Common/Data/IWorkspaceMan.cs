@@ -2,9 +2,8 @@
 
 namespace OpenBreed.Common.Data
 {
-    public interface IWorkspaceMan
+    public interface IWorkspaceMan : IRepositoryProvider
     {
-
         #region Public Properties
 
         IUnitOfWork UnitOfWork { get; }
@@ -14,10 +13,11 @@ namespace OpenBreed.Common.Data
         #region Public Methods
 
         void OpenXmlDatabase(string databaseFilePath);
+
         void CloseDatabase();
+
         void SaveDatabase();
 
         #endregion Public Methods
-
     }
 }

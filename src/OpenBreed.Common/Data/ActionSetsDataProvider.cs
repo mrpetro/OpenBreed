@@ -1,25 +1,24 @@
-﻿
-using OpenBreed.Database.Interface;
+﻿using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Actions;
 using OpenBreed.Model.Actions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Common.Data
 {
     public class ActionSetsDataProvider
     {
-        private readonly IWorkspaceMan workspaceMan;
+        #region Private Fields
+
+        private readonly IRepositoryProvider repositoryProvider;
+
+        #endregion Private Fields
 
         #region Public Constructors
 
-        public ActionSetsDataProvider(IModelsProvider provider, IWorkspaceMan workspaceMan)
+        public ActionSetsDataProvider(IModelsProvider modelsProvider, IRepositoryProvider repositoryProvider)
         {
-            Provider = provider;
-            this.workspaceMan = workspaceMan;
+            Provider = modelsProvider;
+            this.repositoryProvider = repositoryProvider;
         }
 
         #endregion Public Constructors
@@ -32,6 +31,19 @@ namespace OpenBreed.Common.Data
 
         #region Public Methods
 
+        public ActionSetModel GetActionSet(string id)
+        {
+            var entry = repositoryProvider.GetRepository<IActionSetEntry>().GetById(id);
+            if (entry == null)
+                throw new Exception("ActionSet error: " + id);
+
+            return GetModel(entry);
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
         private ActionSetModel GetModelImpl(IActionSetEntry entry)
         {
             return ActionSetsDataHelper.FromEmbeddedData(Provider, entry);
@@ -42,16 +54,6 @@ namespace OpenBreed.Common.Data
             return GetModelImpl(entry);
         }
 
-        public ActionSetModel GetActionSet(string id)
-        {
-            var entry = workspaceMan.UnitOfWork.GetRepository<IActionSetEntry>().GetById(id);
-            if (entry == null)
-                throw new Exception("ActionSet error: " + id);
-
-            return GetModel(entry);
-        }
-
-        #endregion Public Methods
-
+        #endregion Private Methods
     }
 }
