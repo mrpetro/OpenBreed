@@ -50,6 +50,12 @@ namespace OpenBreed.Common.Extensions
 
             managerCollection.AddSingleton<SoundsDataProvider>(() => new SoundsDataProvider(managerCollection.GetManager<IDataProvider>(),
                                                                                                     managerCollection.GetManager<IWorkspaceMan>()));
+
+
+            managerCollection.AddSingleton<IDataProvider>(() => new DataProvider(managerCollection.GetManager<ILogger>(),
+                                                                                 managerCollection.GetManager<DataSourceProvider>(),
+                                                                                 managerCollection.GetManager<AssetsDataProvider>()));
+
         }
 
         public static void SetupABFormats(this IManagerCollection managerCollection)
