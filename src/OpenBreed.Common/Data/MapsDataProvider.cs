@@ -13,7 +13,7 @@ namespace OpenBreed.Common.Data
         private readonly PalettesDataProvider palettes;
         private readonly ActionSetsDataProvider actionSets;
 
-        private readonly IDataProvider provider;
+        private readonly IModelsProvider provider;
 
         private readonly IWorkspaceMan workspaceMan;
 
@@ -21,7 +21,7 @@ namespace OpenBreed.Common.Data
 
         #region Public Constructors
 
-        public MapsDataProvider(IDataProvider provider, IWorkspaceMan workspaceMan, TileSetsDataProvider tileSets, PalettesDataProvider palettes, ActionSetsDataProvider actionSets)
+        public MapsDataProvider(IModelsProvider provider, IWorkspaceMan workspaceMan, TileSetsDataProvider tileSets, PalettesDataProvider palettes, ActionSetsDataProvider actionSets)
         {
             this.provider = provider;
             this.workspaceMan = workspaceMan;
@@ -43,7 +43,7 @@ namespace OpenBreed.Common.Data
             if (entry.DataRef == null)
                 return null;
 
-            var map = provider.GetData<MapModel>(entry.DataRef);
+            var map = provider.GetModel<MapModel>(entry.DataRef);
 
             if (entry.TileSetRef != null)
                 map.TileSet = tileSets.GetTileSet(entry.TileSetRef);

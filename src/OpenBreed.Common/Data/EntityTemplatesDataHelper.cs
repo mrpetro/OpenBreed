@@ -14,12 +14,12 @@ namespace OpenBreed.Common.Data
 {
     internal class EntityTemplatesDataHelper
     {
-        internal static EntityTemplateModel FromText(IDataProvider provider, IEntityTemplateFromFileEntry entry)
+        internal static EntityTemplateModel FromText(IModelsProvider provider, IEntityTemplateFromFileEntry entry)
         {
             if (entry.DataRef == null)
                 return null;
 
-            var data = provider.GetData<TextModel>(entry.DataRef);
+            var data = provider.GetModel<TextModel>(entry.DataRef);
 
             if (data == null)
                 return null;

@@ -16,7 +16,7 @@ namespace OpenBreed.Common.Data
 
         #region Public Constructors
 
-        public ActionSetsDataProvider(IDataProvider provider, IWorkspaceMan workspaceMan)
+        public ActionSetsDataProvider(IModelsProvider provider, IWorkspaceMan workspaceMan)
         {
             Provider = provider;
             this.workspaceMan = workspaceMan;
@@ -26,7 +26,7 @@ namespace OpenBreed.Common.Data
 
         #region Public Properties
 
-        public IDataProvider Provider { get; }
+        public IModelsProvider Provider { get; }
 
         #endregion Public Properties
 

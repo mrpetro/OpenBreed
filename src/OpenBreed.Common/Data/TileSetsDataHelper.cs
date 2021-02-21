@@ -12,12 +12,12 @@ namespace OpenBreed.Common.Data
 {
     internal class TileSetsDataHelper
     {
-        public static TileSetModel FromBlkModel(IDataProvider dataProvider, ITileSetFromBlkEntry entry)
+        public static TileSetModel FromBlkModel(IModelsProvider dataProvider, ITileSetFromBlkEntry entry)
         {
-            return dataProvider.GetData<TileSetModel>(entry.DataRef);
+            return dataProvider.GetModel<TileSetModel>(entry.DataRef);
         }
 
-        public static TileSetModel FromImageModel(IDataProvider dataProvider, ITileSetFromImageEntry entry)
+        public static TileSetModel FromImageModel(IModelsProvider dataProvider, ITileSetFromImageEntry entry)
         {
             return null;
         }

@@ -10,13 +10,13 @@ namespace OpenBreed.Common.Data
 
         private readonly IWorkspaceMan workspaceMan;
 
-        private readonly IDataProvider dataProvider;
+        private readonly IModelsProvider dataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public SoundsDataProvider(IDataProvider dataProvider, IWorkspaceMan workspaceMan)
+        public SoundsDataProvider(IModelsProvider dataProvider, IWorkspaceMan workspaceMan)
         {
             this.dataProvider = dataProvider;
             this.workspaceMan = workspaceMan;
@@ -35,7 +35,7 @@ namespace OpenBreed.Common.Data
             if (entry.DataRef == null)
                 return null;
 
-            return dataProvider.GetData<SoundModel>(entry.DataRef);
+            return dataProvider.GetModel<SoundModel>(entry.DataRef);
         }
 
         #endregion Public Methods

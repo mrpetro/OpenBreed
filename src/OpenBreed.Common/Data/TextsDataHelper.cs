@@ -22,9 +22,9 @@ namespace OpenBreed.Common.Data
             return builder.Build();
         }
 
-        public static TextModel FromMapModel(IDataProvider dataProvider, ITextFromMapEntry textData)
+        public static TextModel FromMapModel(IModelsProvider dataProvider, ITextFromMapEntry textData)
         {
-            var mapModel = dataProvider.GetData<MapModel>(textData.DataRef);
+            var mapModel = dataProvider.GetModel<MapModel>(textData.DataRef);
 
             if (mapModel == null)
                 return null;
@@ -37,7 +37,7 @@ namespace OpenBreed.Common.Data
             return Create(textBlock);
         }
 
-        public static TextModel FromBinary(IDataProvider dataProvider, ITextEmbeddedEntry textEntry)
+        public static TextModel FromBinary(IModelsProvider dataProvider, ITextEmbeddedEntry textEntry)
         {
             var builder = TextBuilder.NewTextModel();
             builder.SetText(textEntry.Text);

@@ -10,13 +10,13 @@ namespace OpenBreed.Common.Data
 
         private readonly IWorkspaceMan workspaceMan;
 
-        private readonly IDataProvider dataProvider;
+        private readonly IModelsProvider dataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PalettesDataProvider(IDataProvider dataProvider, IWorkspaceMan workspaceMan)
+        public PalettesDataProvider(IModelsProvider dataProvider, IWorkspaceMan workspaceMan)
         {
             this.dataProvider = dataProvider;
             this.workspaceMan = workspaceMan;

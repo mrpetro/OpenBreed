@@ -18,42 +18,41 @@ namespace OpenBreed.Common.Extensions
                                                                                                     managerCollection.GetManager<DataSourceProvider>(),
                                                                                                     managerCollection.GetManager<DataFormatMan>()));
 
-            managerCollection.AddSingleton<ActionSetsDataProvider>(() => new ActionSetsDataProvider(managerCollection.GetManager<IDataProvider>(),
+            managerCollection.AddSingleton<ActionSetsDataProvider>(() => new ActionSetsDataProvider(managerCollection.GetManager<IModelsProvider>(),
                                                                                                     managerCollection.GetManager<IWorkspaceMan>()));
 
-            managerCollection.AddSingleton<SpriteSetsDataProvider>(() => new SpriteSetsDataProvider(managerCollection.GetManager<IDataProvider>(),
+            managerCollection.AddSingleton<SpriteSetsDataProvider>(() => new SpriteSetsDataProvider(managerCollection.GetManager<IModelsProvider>(),
                                                                                                     managerCollection.GetManager<IWorkspaceMan>()));
 
-            managerCollection.AddSingleton<TileSetsDataProvider>(() => new TileSetsDataProvider(managerCollection.GetManager<IDataProvider>(),
+            managerCollection.AddSingleton<TileSetsDataProvider>(() => new TileSetsDataProvider(managerCollection.GetManager<IModelsProvider>(),
                                                                                                     managerCollection.GetManager<IWorkspaceMan>()));
 
-            managerCollection.AddSingleton<ScriptsDataProvider>(() => new ScriptsDataProvider(managerCollection.GetManager<IDataProvider>(),
+            managerCollection.AddSingleton<ScriptsDataProvider>(() => new ScriptsDataProvider(managerCollection.GetManager<IModelsProvider>(),
                                                                                                     managerCollection.GetManager<IWorkspaceMan>()));
 
-            managerCollection.AddSingleton<EntityTemplatesDataProvider>(() => new EntityTemplatesDataProvider(managerCollection.GetManager<IDataProvider>(),
+            managerCollection.AddSingleton<EntityTemplatesDataProvider>(() => new EntityTemplatesDataProvider(managerCollection.GetManager<IModelsProvider>(),
                                                                                                     managerCollection.GetManager<IWorkspaceMan>()));
 
-            managerCollection.AddSingleton<PalettesDataProvider>(() => new PalettesDataProvider(managerCollection.GetManager<IDataProvider>(),
+            managerCollection.AddSingleton<PalettesDataProvider>(() => new PalettesDataProvider(managerCollection.GetManager<IModelsProvider>(),
                                                                                                     managerCollection.GetManager<IWorkspaceMan>()));
 
-            managerCollection.AddSingleton<TextsDataProvider>(() => new TextsDataProvider(managerCollection.GetManager<IDataProvider>(),
+            managerCollection.AddSingleton<TextsDataProvider>(() => new TextsDataProvider(managerCollection.GetManager<IModelsProvider>(),
                                                                                                     managerCollection.GetManager<IWorkspaceMan>()));
 
-            managerCollection.AddSingleton<MapsDataProvider>(() => new MapsDataProvider(managerCollection.GetManager<IDataProvider>(),
+            managerCollection.AddSingleton<MapsDataProvider>(() => new MapsDataProvider(managerCollection.GetManager<IModelsProvider>(),
                                                                                         managerCollection.GetManager<IWorkspaceMan>(),
                                                                                         managerCollection.GetManager<TileSetsDataProvider>(),
                                                                                         managerCollection.GetManager<PalettesDataProvider>(),
                                                                                         managerCollection.GetManager<ActionSetsDataProvider>()));
 
-            managerCollection.AddSingleton<ImagesDataProvider>(() => new ImagesDataProvider(managerCollection.GetManager<IDataProvider>(),
+            managerCollection.AddSingleton<ImagesDataProvider>(() => new ImagesDataProvider(managerCollection.GetManager<IModelsProvider>(),
                                                                                                     managerCollection.GetManager<IWorkspaceMan>()));
 
-            managerCollection.AddSingleton<SoundsDataProvider>(() => new SoundsDataProvider(managerCollection.GetManager<IDataProvider>(),
+            managerCollection.AddSingleton<SoundsDataProvider>(() => new SoundsDataProvider(managerCollection.GetManager<IModelsProvider>(),
                                                                                                     managerCollection.GetManager<IWorkspaceMan>()));
 
 
-            managerCollection.AddSingleton<IDataProvider>(() => new DataProvider(managerCollection.GetManager<ILogger>(),
-                                                                                 managerCollection.GetManager<DataSourceProvider>(),
+            managerCollection.AddSingleton<IModelsProvider>(() => new ModelsProvider(managerCollection.GetManager<ILogger>(),
                                                                                  managerCollection.GetManager<AssetsDataProvider>()));
 
         }

@@ -36,9 +36,9 @@ namespace OpenBreed.Common.Data
             return paletteBuilder.Build();
         }
 
-        public static PaletteModel FromMapModel(IDataProvider dataProvider, IPaletteFromMapEntry entry)
+        public static PaletteModel FromMapModel(IModelsProvider dataProvider, IPaletteFromMapEntry entry)
         {
-            var mapModel = dataProvider.GetData<MapModel>(entry.DataRef);
+            var mapModel = dataProvider.GetModel<MapModel>(entry.DataRef);
 
             if (mapModel == null)
                 return null;
@@ -51,12 +51,12 @@ namespace OpenBreed.Common.Data
             return Create(paletteBlock);
         }
 
-        public static PaletteModel FromBinary(IDataProvider dataProvider, IPaletteFromBinaryEntry entry)
+        public static PaletteModel FromBinary(IModelsProvider dataProvider, IPaletteFromBinaryEntry entry)
         {
             if (entry.DataRef == null)
                 return null;
 
-            var binaryModel = dataProvider.GetData<BinaryModel>(entry.DataRef);
+            var binaryModel = dataProvider.GetModel<BinaryModel>(entry.DataRef);
 
             if (binaryModel == null)
                 return null;
