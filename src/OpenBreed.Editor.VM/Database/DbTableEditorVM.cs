@@ -113,7 +113,7 @@ namespace OpenBreed.Editor.VM.Database
 
         public void SetModel(string modelName)
         {
-            var repository = workspaceMan.UnitOfWork.GetRepository(modelName);
+            var repository = workspaceMan.GetRepository(modelName);
 
             if (repository == null)
                 throw new InvalidOperationException($"Repository with name '{modelName}' not found.");

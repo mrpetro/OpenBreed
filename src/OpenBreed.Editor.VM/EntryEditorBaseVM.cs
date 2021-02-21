@@ -36,7 +36,7 @@ namespace OpenBreed.Editor.VM
         {
             WorkspaceMan = workspaceMan;
             this.dialogProvider = dialogProvider;
-            repository = WorkspaceMan.UnitOfWork.GetRepository<E>();
+            repository = WorkspaceMan.GetRepository<E>();
         }
 
         #endregion Protected Constructors

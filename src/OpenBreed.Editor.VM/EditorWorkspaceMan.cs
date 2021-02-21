@@ -1,10 +1,10 @@
-﻿using OpenBreed.Common;
-using OpenBreed.Common.Data;
-using OpenBreed.Common.Formats;
+﻿using OpenBreed.Common.Data;
 using OpenBreed.Common.Logging;
 using OpenBreed.Database.Interface;
+using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Xml;
 using System;
+using System.Collections.Generic;
 
 namespace OpenBreed.Editor.VM
 {
@@ -31,6 +31,8 @@ namespace OpenBreed.Editor.VM
         #region Public Properties
 
         public IUnitOfWork UnitOfWork { get; private set; }
+
+        public IEnumerable<IRepository> Repositories => UnitOfWork.Repositories;
 
         #endregion Public Properties
 
@@ -70,6 +72,12 @@ namespace OpenBreed.Editor.VM
 
             logger.Info($"Database '{UnitOfWork.Name}' saved.");
         }
+
+        public IRepository<T> GetRepository<T>() where T : IEntry => UnitOfWork.GetRepository<T>();
+
+        public IRepository GetRepository(string name) => UnitOfWork.GetRepository(name);
+
+        public IRepository GetRepository(Type type) => UnitOfWork.GetRepository(type);
 
         #endregion Public Methods
     }

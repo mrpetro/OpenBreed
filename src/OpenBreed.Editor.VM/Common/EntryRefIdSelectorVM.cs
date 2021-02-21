@@ -26,7 +26,7 @@ namespace OpenBreed.Editor.VM.Common
         {
             Items = new BindingList<string>();
 
-            var repository = workspaceMan.UnitOfWork.GetRepository(type);
+            var repository = workspaceMan.GetRepository(type);
 
             Items.UpdateAfter(() =>
             {

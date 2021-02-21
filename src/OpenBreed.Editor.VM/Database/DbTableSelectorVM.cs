@@ -70,7 +70,7 @@ namespace OpenBreed.Editor.VM.Database
             {
                 TableNames.Clear();
 
-                foreach (var repository in workspaceMan.UnitOfWork.Repositories)
+                foreach (var repository in workspaceMan.Repositories)
                     TableNames.Add(repository.Name);
             });
         }
