@@ -42,7 +42,7 @@ namespace OpenBreed.Editor.VM
 
         internal EntryEditorVM Create(IRepository repository)
         {
-            var type = GetCreator(repository);
+            var type = GetEditorType(repository);
             return (EntryEditorVM)managerCollection.GetManager(type);
         }
 
@@ -50,7 +50,7 @@ namespace OpenBreed.Editor.VM
 
         #region Private Methods
 
-        private Type GetCreator(IRepository repository)
+        private Type GetEditorType(IRepository repository)
         {
             var entryType = repository.GetType().GetInterfaces().FirstOrDefault();
 

@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Common;
-using OpenBreed.Common.Assets;
 using OpenBreed.Editor.VM.Database.Entries;
 using System;
 using System.Collections.Generic;
