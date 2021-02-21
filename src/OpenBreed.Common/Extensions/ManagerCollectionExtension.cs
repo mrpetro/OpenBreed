@@ -8,6 +8,12 @@ namespace OpenBreed.Common.Extensions
     {
         #region Public Methods
 
+        public static void SetupModelProvider(this IManagerCollection managerCollection)
+        {
+            managerCollection.AddSingleton<IModelsProvider>(() => new ModelsProvider(managerCollection.GetManager<ILogger>(),
+                                                                                 managerCollection.GetManager<AssetsDataProvider>()));
+        }
+
         public static void SetupDataProviders(this IManagerCollection managerCollection)
         {
             managerCollection.AddSingleton<DataSourceProvider>(() => new DataSourceProvider(managerCollection.GetManager<IWorkspaceMan>(),
@@ -50,11 +56,6 @@ namespace OpenBreed.Common.Extensions
 
             managerCollection.AddSingleton<SoundsDataProvider>(() => new SoundsDataProvider(managerCollection.GetManager<IModelsProvider>(),
                                                                                                     managerCollection.GetManager<IWorkspaceMan>()));
-
-
-            managerCollection.AddSingleton<IModelsProvider>(() => new ModelsProvider(managerCollection.GetManager<ILogger>(),
-                                                                                 managerCollection.GetManager<AssetsDataProvider>()));
-
         }
 
         public static void SetupABFormats(this IManagerCollection managerCollection)
