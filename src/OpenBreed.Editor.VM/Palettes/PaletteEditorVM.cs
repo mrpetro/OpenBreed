@@ -13,13 +13,7 @@ namespace OpenBreed.Editor.VM.Palettes
     {
         #region Public Constructors
 
-        static PaletteEditorVM()
-        {
-            RegisterSubeditor<IPaletteFromBinaryEntry, IPaletteEntry>();
-            RegisterSubeditor<IPaletteFromMapEntry, IPaletteEntry>();
-        }
-
-        public PaletteEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dialogProvider, "Palette Editor")
+        public PaletteEditorVM(DbEntrySubEditorFactory subEditorFactory, IWorkspaceMan workspaceMan, IDialogProvider dialogProvider) : base(subEditorFactory, workspaceMan, dialogProvider, "Palette Editor")
         {
         }
 

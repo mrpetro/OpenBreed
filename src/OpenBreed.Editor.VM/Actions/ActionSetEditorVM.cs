@@ -9,12 +9,7 @@ namespace OpenBreed.Editor.VM.Actions
     {
         #region Public Constructors
 
-        static ActionSetEditorVM()
-        {
-            RegisterSubeditor<IActionSetEntry, IActionSetEntry>();
-        }
-
-        public ActionSetEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dialogProvider, "Action Set Editor")
+        public ActionSetEditorVM(DbEntrySubEditorFactory subEditorFactory, IWorkspaceMan workspaceMan, IDialogProvider dialogProvider) : base(subEditorFactory, workspaceMan, dialogProvider, "Action Set Editor")
         {
         }
 

@@ -10,13 +10,7 @@ namespace OpenBreed.Editor.VM.Texts
     {
         #region Public Constructors
 
-        static TextEditorVM()
-        {
-            RegisterSubeditor<ITextEmbeddedEntry, ITextEntry>();
-            RegisterSubeditor<ITextFromMapEntry, ITextEntry>();
-        }
-
-        public TextEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dialogProvider, "Text Editor")
+        public TextEditorVM(DbEntrySubEditorFactory subEditorFactory, IWorkspaceMan workspaceMan, IDialogProvider dialogProvider) : base(subEditorFactory, workspaceMan, dialogProvider, "Text Editor")
         {
         }
 

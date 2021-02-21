@@ -150,6 +150,7 @@
     <Compile Include="Sprites\SpriteSetFromImageEditorVM.cs" />
     <Compile Include="Sprites\SpriteFromImageVM.cs" />
     <Compile Include="Sprites\SpriteSetFromSprEditorVM.cs" />
+    <Compile Include="DbEntrySubEditorFactory.cs" />
     <Compile Include="Texts\TextEditorVM.cs" />
     <Compile Include="Texts\TextEmbeddedEditorVM.cs" />
     <Compile Include="Texts\TextFromMapEditorVM.cs" />

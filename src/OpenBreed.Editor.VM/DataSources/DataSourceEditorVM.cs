@@ -9,13 +9,7 @@ namespace OpenBreed.Editor.VM.DataSources
     {
         #region Public Constructors
 
-        static DataSourceEditorVM()
-        {
-            RegisterSubeditor<IFileDataSourceEntry, IDataSourceEntry>();
-            RegisterSubeditor<IEPFArchiveDataSourceEntry, IDataSourceEntry>();
-        }
-
-        public DataSourceEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dialogProvider, "Data Source Editor")
+        public DataSourceEditorVM(DbEntrySubEditorFactory subEditorFactory, IWorkspaceMan workspaceMan, IDialogProvider dialogProvider) : base(subEditorFactory, workspaceMan, dialogProvider, "Data Source Editor")
         {
         }
 

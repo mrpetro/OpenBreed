@@ -9,12 +9,7 @@ namespace OpenBreed.Editor.VM.Images
     {
         #region Public Constructors
 
-        static ImageEditorVM()
-        {
-            RegisterSubeditor<IImageEntry, IImageEntry>();
-        }
-
-        public ImageEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dialogProvider, "Image Editor")
+        public ImageEditorVM(DbEntrySubEditorFactory subEditorFactory, IWorkspaceMan workspaceMan, IDialogProvider dialogProvider) : base(subEditorFactory, workspaceMan, dialogProvider, "Image Editor")
         {
         }
 

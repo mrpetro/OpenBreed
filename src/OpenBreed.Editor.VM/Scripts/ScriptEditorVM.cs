@@ -12,13 +12,7 @@ namespace OpenBreed.Editor.VM.Scripts
     {
         #region Public Constructors
 
-        static ScriptEditorVM()
-        {
-            RegisterSubeditor<IScriptEmbeddedEntry, IScriptEntry>();
-            RegisterSubeditor<IScriptFromFileEntry, IScriptEntry>();
-        }
-
-        public ScriptEditorVM(IManagerCollection managerCollection, IWorkspaceMan workspaceMan, IDialogProvider dialogProvider) : base(managerCollection, workspaceMan, dialogProvider, "Script Editor")
+        public ScriptEditorVM(DbEntrySubEditorFactory subEditorFactory, IWorkspaceMan workspaceMan, IDialogProvider dialogProvider) : base(subEditorFactory, workspaceMan, dialogProvider, "Script Editor")
         {
         }
 

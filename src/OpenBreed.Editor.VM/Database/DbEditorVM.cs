@@ -17,22 +17,16 @@ namespace OpenBreed.Editor.VM.Database
         private readonly Dictionary<string, EntryEditorVM> _openedEntryEditors = new Dictionary<string, EntryEditorVM>();
         private readonly IManagerCollection managerCollection;
         private readonly DbEntryEditorFactory dbEntryEditorFactory;
-        private readonly IWorkspaceMan workspaceMan;
-        private readonly IDialogProvider dialogProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
         public DbEditorVM(IManagerCollection managerCollection,
-                          DbEntryEditorFactory dbEntryEditorFactory,
-                          IWorkspaceMan workspaceMan,
-                          IDialogProvider dialogProvider)
+                          DbEntryEditorFactory dbEntryEditorFactory)
         {
             this.managerCollection = managerCollection;
             this.dbEntryEditorFactory = dbEntryEditorFactory;
-            this.workspaceMan = workspaceMan;
-            this.dialogProvider = dialogProvider;
         }
 
         #endregion Public Constructors
