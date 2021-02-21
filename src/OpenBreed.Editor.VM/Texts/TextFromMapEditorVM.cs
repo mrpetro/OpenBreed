@@ -20,14 +20,14 @@ namespace OpenBreed.Editor.VM.Texts
 
         private string _dataRef;
         private readonly TextsDataProvider textsDataProvider;
-        private readonly IDataProvider dataProvider;
+        private readonly IModelsProvider dataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
         public TextFromMapEditorVM(TextsDataProvider textsDataProvider,
-                                   IDataProvider dataProvider)
+                                   IModelsProvider dataProvider)
         {
             this.textsDataProvider = textsDataProvider;
             this.dataProvider = dataProvider;
@@ -90,7 +90,7 @@ namespace OpenBreed.Editor.VM.Texts
         {
             var textFromMapEntry = (ITextFromMapEntry)entry;
 
-            var mapModel = dataProvider.GetData<MapModel>(DataRef);
+            var mapModel = dataProvider.GetModel<MapModel>(DataRef);
 
             var textBlock = mapModel.Blocks.OfType<MapTextBlock>().FirstOrDefault(item => item.Name == BlockName);
 
@@ -113,7 +113,7 @@ namespace OpenBreed.Editor.VM.Texts
             {
                 BlockNames.Clear();
 
-                var map = dataProvider.GetData<MapModel>(source.DataRef);
+                var map = dataProvider.GetModel<MapModel>(source.DataRef);
 
                 if (map == null)
                     return;

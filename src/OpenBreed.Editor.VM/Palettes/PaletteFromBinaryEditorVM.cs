@@ -12,7 +12,7 @@ namespace OpenBreed.Editor.VM.Palettes
         private string _dataRef;
 
         public PaletteFromBinaryEditorVM(PalettesDataProvider palettesDataProvider,
-                                         IDataProvider dataProvider) : base(palettesDataProvider, dataProvider)
+                                         IModelsProvider dataProvider) : base(palettesDataProvider, dataProvider)
         {
         }
         public string DataRef

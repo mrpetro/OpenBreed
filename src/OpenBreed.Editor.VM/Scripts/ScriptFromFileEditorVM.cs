@@ -19,13 +19,13 @@ namespace OpenBreed.Editor.VM.Scripts
 
         private string _script;
         private readonly ScriptsDataProvider scriptsDataProvider;
-        private readonly IDataProvider dataProvider;
+        private readonly IModelsProvider dataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ScriptFromFileEditorVM(IWorkspaceMan workspaceMan, ScriptsDataProvider scriptsDataProvider, IDataProvider dataProvider)
+        public ScriptFromFileEditorVM(IWorkspaceMan workspaceMan, ScriptsDataProvider scriptsDataProvider, IModelsProvider dataProvider)
         {
             this.scriptsDataProvider = scriptsDataProvider;
             this.dataProvider = dataProvider;
@@ -79,7 +79,7 @@ namespace OpenBreed.Editor.VM.Scripts
         {
             var scriptFromFileEntry = (IScriptFromFileEntry)entry;
 
-            var model = dataProvider.GetData<TextModel>(DataRef);
+            var model = dataProvider.GetModel<TextModel>(DataRef);
 
             model.Text = Script;
             scriptFromFileEntry.DataRef = DataRef;

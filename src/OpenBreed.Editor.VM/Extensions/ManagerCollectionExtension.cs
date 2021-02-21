@@ -51,31 +51,31 @@ namespace OpenBreed.Editor.VM.Extensions
 
 
             managerCollection.AddTransient<IEntryEditor<IEntityTemplateFromFileEntry>>(() => new EntityTemplateFromFileEditorVM(managerCollection.GetManager<EntityTemplatesDataProvider>(),
-                                                                                                                                managerCollection.GetManager<IDataProvider>()));
+                                                                                                                                managerCollection.GetManager<IModelsProvider>()));
 
 
             managerCollection.AddTransient<IEntryEditor<IImageEntry>>(() => new ImageFromFileEditorVM(managerCollection.GetManager<IWorkspaceMan>(),
                                                                                                                 managerCollection.GetManager<IDialogProvider>(),
-                                                                                                                managerCollection.GetManager<IDataProvider>()));
+                                                                                                                managerCollection.GetManager<IModelsProvider>()));
 
 
             managerCollection.AddTransient<IEntryEditor<ISpriteSetFromSprEntry>>(() => new SpriteSetFromSprEditorVM(managerCollection.GetManager<SpriteSetsDataProvider>(),
                                                                                                                 managerCollection.GetManager<PalettesDataProvider>(),
-                                                                                                                managerCollection.GetManager<IDataProvider>()));
+                                                                                                                managerCollection.GetManager<IModelsProvider>()));
 
 
 
             managerCollection.AddTransient<IEntryEditor<ISpriteSetFromImageEntry>>(() => new SpriteSetFromImageEditorVM(managerCollection.GetManager<SpriteSetsDataProvider>(),
                                                                                                                 managerCollection.GetManager<PalettesDataProvider>(),
-                                                                                                                managerCollection.GetManager<IDataProvider>()));
+                                                                                                                managerCollection.GetManager<IModelsProvider>()));
 
 
             managerCollection.AddTransient<IEntryEditor<IPaletteFromBinaryEntry>>(() => new PaletteFromBinaryEditorVM(managerCollection.GetManager<PalettesDataProvider>(),
-                                                                                                                managerCollection.GetManager<IDataProvider>()));
+                                                                                                                managerCollection.GetManager<IModelsProvider>()));
 
 
             managerCollection.AddTransient<IEntryEditor<IPaletteFromMapEntry>>(() => new PaletteFromMapEditorVM(managerCollection.GetManager<PalettesDataProvider>(),
-                                                                                                                managerCollection.GetManager<IDataProvider>()));
+                                                                                                                managerCollection.GetManager<IModelsProvider>()));
 
 
             managerCollection.AddTransient<IEntryEditor<ITextEmbeddedEntry>>(() => new TextEmbeddedEditorVM(managerCollection.GetManager<TextsDataProvider>()));
@@ -83,7 +83,7 @@ namespace OpenBreed.Editor.VM.Extensions
 
 
             managerCollection.AddTransient<IEntryEditor<ITextFromMapEntry>>(() => new TextFromMapEditorVM(managerCollection.GetManager<TextsDataProvider>(),
-                                                                                                          managerCollection.GetManager<IDataProvider>()));
+                                                                                                          managerCollection.GetManager<IModelsProvider>()));
 
 
 
@@ -94,7 +94,7 @@ namespace OpenBreed.Editor.VM.Extensions
 
             managerCollection.AddTransient<IEntryEditor<IScriptFromFileEntry>>(() => new ScriptFromFileEditorVM(managerCollection.GetManager<IWorkspaceMan>(),
                                                                                                                 managerCollection.GetManager<ScriptsDataProvider>(),
-                                                                                                                managerCollection.GetManager<IDataProvider>()));
+                                                                                                                managerCollection.GetManager<IModelsProvider>()));
 
 
 

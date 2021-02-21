@@ -26,7 +26,7 @@ namespace OpenBreed.Editor.VM
         private readonly Lazy<IDialogProvider> dialogProvider;
         private readonly XmlDatabaseMan databaseMan;
         private readonly IWorkspaceMan workspaceMan;
-        private readonly IDataProvider dataProvider;
+        private readonly IModelsProvider dataProvider;
         private readonly IManagerCollection managerCollection;
         private readonly DataSourceProvider dataSources;
         private bool disposedValue;
@@ -41,7 +41,7 @@ namespace OpenBreed.Editor.VM
             logger = managerCollection.GetManager<ILogger>();
 
             settings = managerCollection.GetManager<SettingsMan>();
-            dataProvider = managerCollection.GetManager<IDataProvider>();
+            dataProvider = managerCollection.GetManager<IModelsProvider>();
             databaseMan = managerCollection.GetManager<XmlDatabaseMan>();
             workspaceMan = managerCollection.GetManager<IWorkspaceMan>();
             dialogProvider = new Lazy<IDialogProvider>(() => managerCollection.GetManager<IDialogProvider>());
@@ -96,7 +96,7 @@ namespace OpenBreed.Editor.VM
         {
             if (workspaceMan.UnitOfWork != null)
             {
-                ((DataProvider)dataProvider).Save();
+                ((ModelsProvider)dataProvider).Save();
 
                 dataSources.Save();
 

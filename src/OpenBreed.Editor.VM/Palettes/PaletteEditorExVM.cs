@@ -15,14 +15,14 @@ namespace OpenBreed.Editor.VM.Palettes
         private Color _currentColor = Color.Empty;
         private int _currentColorIndex = -1;
         protected readonly PalettesDataProvider palettesDataProvider;
-        protected readonly IDataProvider dataProvider;
+        protected readonly IModelsProvider dataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
         public PaletteEditorExVM(PalettesDataProvider palettesDataProvider,
-                                 IDataProvider dataProvider)
+                                 IModelsProvider dataProvider)
         {
             this.palettesDataProvider = palettesDataProvider;
             this.dataProvider = dataProvider;

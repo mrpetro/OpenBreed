@@ -19,13 +19,13 @@ namespace OpenBreed.Editor.VM.Images
         private Image image;
         private readonly IWorkspaceMan workspaceMan;
         private readonly IDialogProvider dialogProvider;
-        private readonly IDataProvider dataProvider;
+        private readonly IModelsProvider dataProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ImageFromFileEditorVM(IWorkspaceMan workspaceMan, IDialogProvider dialogProvider, IDataProvider dataProvider)
+        public ImageFromFileEditorVM(IWorkspaceMan workspaceMan, IDialogProvider dialogProvider, IModelsProvider dataProvider)
         {
             this.workspaceMan = workspaceMan;
             this.dialogProvider = dialogProvider;
@@ -91,7 +91,7 @@ namespace OpenBreed.Editor.VM.Images
         {
             if (AssetRef != null)
             {
-                if (!dataProvider.TryGetData<Image>(AssetRef, out Image item, out string message))
+                if (!dataProvider.TryGetModel<Image>(AssetRef, out Image item, out string message))
                 {
                     dialogProvider.ShowMessage(message, "Invalid asset");
                     Image = System.Drawing.SystemIcons.Error.ToBitmap();
