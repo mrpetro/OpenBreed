@@ -6,23 +6,21 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Common.Data
 {
-    public class DataProvider : IDataProvider
+    public class ModelsProvider : IModelsProvider
     {
         #region Private Fields
 
         private readonly ILogger logger;
-        private readonly DataSourceProvider dataSources;
         private readonly AssetsDataProvider assets;
-        private Dictionary<string, object> _models = new Dictionary<string, object>();
+        private Dictionary<string, object> loadedModels = new Dictionary<string, object>();
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DataProvider(ILogger logger, DataSourceProvider dataSources, AssetsDataProvider assets)
+        public ModelsProvider(ILogger logger, AssetsDataProvider assets)
         {
             this.logger = logger;
-            this.dataSources = dataSources;
             this.assets = assets;
         }
 
@@ -34,9 +32,9 @@ namespace OpenBreed.Common.Data
 
         #region Public Methods
 
-        public bool TryGetData<T>(string id, out T item, out string message)
+        public bool TryGetModel<T>(string id, out T item, out string message)
         {
-            var data = GetData<T>(id);
+            var data = GetModel<T>(id);
 
             if (data == null)
             {
@@ -57,36 +55,25 @@ namespace OpenBreed.Common.Data
             return false;
         }
 
-        public T GetData<T>(string id)
+        public T GetModel<T>(string id)
         {
             object data;
 
-            if (_models.TryGetValue(id, out data))
+            if (loadedModels.TryGetValue(id, out data))
                 return (T)data;
 
             var asset = assets.GetAsset(id);
             data = asset.Load();
             logger.Verbose($"Model loaded from asset '{asset.Id}'.");
 
-            _models.Add(id, data);
+            loadedModels.Add(id, data);
 
             return (T)data;
         }
 
         public void Save()
         {
-            SaveModels();
-
-            logger.Info($"All data saved.");
-        }
-
-        #endregion Public Methods
-
-        #region Private Methods
-
-        private void SaveModels()
-        {
-            foreach (var item in _models)
+            foreach (var item in loadedModels)
             {
                 var entryId = item.Key;
                 var data = item.Value;
@@ -107,6 +94,6 @@ namespace OpenBreed.Common.Data
             logger.Info($"All models saved.");
         }
 
-        #endregion Private Methods
+        #endregion Public Methods
     }
 }

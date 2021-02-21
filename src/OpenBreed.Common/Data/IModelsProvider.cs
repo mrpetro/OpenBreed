@@ -4,12 +4,12 @@ using System;
 
 namespace OpenBreed.Common.Data
 {
-    public interface IDataProvider
+    public interface IModelsProvider
     {
         #region Public Methods
 
-        bool TryGetData<T>(string id, out T item, out string message);
-        T GetData<T>(string id);
+        bool TryGetModel<T>(string id, out T item, out string message);
+        T GetModel<T>(string id);
         #endregion Public Methods
     }
 }
