@@ -53,6 +53,7 @@ namespace OpenBreed.Editor.UI.WinForms
 
             managerCollection.SetupABFormats();
             managerCollection.SetupDataProviders();
+            managerCollection.SetupModelProvider();
 
             managerCollection.AddSingleton<ILogger>(() => new DefaultLogger());
 

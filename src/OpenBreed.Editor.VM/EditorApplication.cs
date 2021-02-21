@@ -24,7 +24,6 @@ namespace OpenBreed.Editor.VM
         private readonly ILogger logger;
         private readonly SettingsMan settings;
         private readonly Lazy<IDialogProvider> dialogProvider;
-        private readonly XmlDatabaseMan databaseMan;
         private readonly IWorkspaceMan workspaceMan;
         private readonly IModelsProvider dataProvider;
         private readonly IManagerCollection managerCollection;
@@ -39,10 +38,8 @@ namespace OpenBreed.Editor.VM
         {
 
             logger = managerCollection.GetManager<ILogger>();
-
             settings = managerCollection.GetManager<SettingsMan>();
             dataProvider = managerCollection.GetManager<IModelsProvider>();
-            databaseMan = managerCollection.GetManager<XmlDatabaseMan>();
             workspaceMan = managerCollection.GetManager<IWorkspaceMan>();
             dialogProvider = new Lazy<IDialogProvider>(() => managerCollection.GetManager<IDialogProvider>());
             //DialogProvider = managerCollection.GetManager<IDialogProvider>();
