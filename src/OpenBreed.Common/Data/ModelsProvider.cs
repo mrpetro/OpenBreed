@@ -62,9 +62,9 @@ namespace OpenBreed.Common.Data
             if (loadedModels.TryGetValue(id, out data))
                 return (T)data;
 
-            var asset = assets.GetAsset(id);
-            data = asset.Load();
-            logger.Verbose($"Model loaded from asset '{asset.Id}'.");
+            data = assets.LoadModel(id);
+
+            logger.Verbose($"Model loaded from asset '{id}'.");
 
             loadedModels.Add(id, data);
 
@@ -78,16 +78,14 @@ namespace OpenBreed.Common.Data
                 var entryId = item.Key;
                 var data = item.Value;
 
-                var asset = assets.GetAsset(entryId);
-
                 try
                 {
-                    asset.Save(data);
-                    logger.Verbose($"Model saved to asset '{asset.Id}'.");
+                    assets.SaveModel(entryId, data);
+                    logger.Verbose($"Model saved to asset '{entryId}'.");
                 }
                 catch (Exception ex)
                 {
-                    logger.Error($"Problems saving model to asset '{asset.Id}'. Reason: {ex.Message}");
+                    logger.Error($"Problems saving model to asset '{entryId}'. Reason: {ex.Message}");
                 }
             }
 

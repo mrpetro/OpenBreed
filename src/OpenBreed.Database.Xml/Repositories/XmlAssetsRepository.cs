@@ -7,7 +7,6 @@ using OpenBreed.Common.Formats;
 using OpenBreed.Common.Logging;
 using System.ComponentModel;
 using System.Globalization;
-using OpenBreed.Common.Assets;
 using OpenBreed.Database.Xml.Tables;
 using OpenBreed.Database.Xml.Items.Assets;
 using OpenBreed.Common;

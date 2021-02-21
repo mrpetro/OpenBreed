@@ -1,5 +1,4 @@
-﻿using OpenBreed.Common.Assets;
-using OpenBreed.Database.Interface.Items.Assets;
+﻿using OpenBreed.Database.Interface.Items.Assets;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

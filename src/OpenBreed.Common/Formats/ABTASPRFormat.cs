@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using OpenBreed.Common.Assets;
 using OpenBreed.Common.DataSources;
 using OpenBreed.Database.Interface.Items.Assets;
 using OpenBreed.Model.Sprites;
