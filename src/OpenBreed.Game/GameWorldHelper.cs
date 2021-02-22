@@ -19,6 +19,8 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Systems.Control.Systems;
 using OpenBreed.Wecs.Events;
+using OpenBreed.Fsm;
+using OpenBreed.Wecs.Systems.Rendering;
 
 namespace OpenBreed.Game
 {
@@ -26,19 +28,21 @@ namespace OpenBreed.Game
     {
         internal static void AddSystems(Game game, WorldBuilder builder)
         {
+            var systemFactory = game.GetManager<ISystemFactory>();
+
             //Action
-            builder.AddSystem(new FollowerSystem(game));
+            builder.AddSystem(new FollowerSystem(game, game.GetManager<IEntityMan>()));
 
             //builder.AddSystem(game.CreateAnimationSystem().Build());
 
-            builder.AddSystem(new TimerSystem(game));
-            builder.AddSystem(new FsmSystem(game));
+            builder.AddSystem(new TimerSystem(game, game.GetManager<IEntityMan>()));
+            builder.AddSystem(new FsmSystem(game, game.GetManager<IFsmMan>()));
 
             ////Audio
             //builder.AddSystem(core.CreateSoundSystem().Build());
 
             builder.AddSystem(game.VideoSystemsFactory.CreateSpriteSystem().Build());
-            builder.AddSystem(game.VideoSystemsFactory.CreateTextSystem().Build());
+            builder.AddSystem(systemFactory.Create<TextSystem>());
             builder.AddSystem(game.VideoSystemsFactory.CreateViewportSystem().Build());
         }
 

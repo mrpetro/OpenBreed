@@ -32,6 +32,8 @@ using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Systems.Control.Commands;
 using OpenBreed.Wecs.Systems.Control.Systems;
 using OpenBreed.Wecs.Events;
+using OpenBreed.Input.Interface;
+using OpenBreed.Fsm;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -39,6 +41,7 @@ namespace OpenBreed.Sandbox.Worlds
     {
         public static void AddSystems(Program core, WorldBuilder builder)
         {
+            var systemFactory = core.GetManager<ISystemFactory>();
             var renderingModule = core.GetModule<IRenderModule>();
 
             int width = builder.width;
@@ -55,14 +58,14 @@ namespace OpenBreed.Sandbox.Worlds
 
             //Action
             builder.AddSystem(core.CreateMovementSystem().Build());
-            builder.AddSystem(new DirectionSystem(core));
-            builder.AddSystem(new FollowerSystem(core));
+            builder.AddSystem(new DirectionSystem(core, core.GetManager<IEntityMan>()));
+            builder.AddSystem(new FollowerSystem(core, core.GetManager<IEntityMan>()));
             //builder.AddSystem(new FollowerSystem(core));
             builder.AddSystem(core.CreatePhysicsSystem().SetGridSize(width, height).Build());
             builder.AddSystem(core.CreateAnimationSystem().Build());
 
-            builder.AddSystem(new TimerSystem(core));
-            builder.AddSystem(new FsmSystem(core));
+            builder.AddSystem(new TimerSystem(core, core.GetManager<IEntityMan>()));
+            builder.AddSystem(new FsmSystem(core, core.GetManager<IFsmMan>()));
 
             ////Audio
             //builder.AddSystem(core.CreateSoundSystem().Build());
@@ -75,9 +78,9 @@ namespace OpenBreed.Sandbox.Worlds
                                                        .Build());
             builder.AddSystem(core.VideoSystemsFactory.CreateSpriteSystem().Build());
             //builder.AddSystem(core.CreateWireframeSystem().Build());
-            builder.AddSystem(core.VideoSystemsFactory.CreateTextSystem().Build());
+            builder.AddSystem(systemFactory.Create<TextSystem>());
 
-            builder.AddSystem(new UiSystem(core, renderingModule));
+            builder.AddSystem(new UiSystem(core, renderingModule, core.GetManager<IInputsMan>()));
 
             builder.AddSystem(core.VideoSystemsFactory.CreateViewportSystem().Build());
         }

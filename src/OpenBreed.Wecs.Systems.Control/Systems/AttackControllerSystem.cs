@@ -23,7 +23,7 @@ namespace OpenBreed.Wecs.Systems.Control.Systems
 
         #region Public Constructors
 
-        public AttackControllerSystem(ICore core) : base(core)
+        public AttackControllerSystem(ICore core)
         {
             players = core.GetManager<IPlayersMan>();
 

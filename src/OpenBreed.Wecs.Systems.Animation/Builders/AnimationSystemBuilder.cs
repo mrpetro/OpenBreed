@@ -1,4 +1,6 @@
-﻿using OpenBreed.Core;
+﻿using OpenBreed.Animation.Interface;
+using OpenBreed.Core;
+using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;
 using System;
 using System.Collections.Generic;
@@ -29,7 +31,9 @@ namespace OpenBreed.Wecs.Systems.Animation.Builders
 
         public AnimationSystem Build()
         {
-            return new AnimationSystem(this);
+            return new AnimationSystem(this,
+                                       core.GetManager<IEntityMan>(),
+                                       core.GetManager<IAnimMan>());
         }
 
         #endregion Public Methods

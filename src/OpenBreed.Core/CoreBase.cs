@@ -39,15 +39,9 @@ namespace OpenBreed.Core
         public IEventsMan Events { get; }
         public ILogger Logging { get; }
 
-        public abstract Rectangle ClientRectangle { get; }
-
         public abstract JobMan Jobs { get; }
 
         public ICoreClient Client { get; protected set; }
-
-        public abstract Matrix4 ClientTransform { get; protected set; }
-
-        public abstract float ClientRatio { get; }
 
         #endregion Public Properties
 
@@ -65,8 +59,6 @@ namespace OpenBreed.Core
         }
 
         public abstract void Load();
-
-        public abstract void Update(float dt);
 
         public bool ExecuteCommand(ICommand cmd)
         {

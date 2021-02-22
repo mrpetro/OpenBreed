@@ -47,6 +47,7 @@ namespace OpenBreed.Input.Generic
         #region Private Fields
 
         private readonly Dictionary<Key, KeyBinding> keyBindings = new Dictionary<Key, KeyBinding>();
+        private readonly ICoreClient coreClient;
         private Dictionary<string, IInputHandler> controlHandlers = new Dictionary<string, IInputHandler>();
         private float oldWheelPos;
         private Vector2 oldCursorPos;
@@ -57,9 +58,9 @@ namespace OpenBreed.Input.Generic
 
         #region Public Constructors
 
-        public InputsMan(ICore core)
+        public InputsMan(ICoreClient coreClient)
         {
-            Core = core;
+            this.coreClient = coreClient;
 
             KeyboardStateChanged += InputsMan_KeyboardStateChanged;
         }
@@ -87,8 +88,6 @@ namespace OpenBreed.Input.Generic
         #endregion Public Events
 
         #region Public Properties
-
-        public ICore Core { get; }
 
         /// <summary>
         /// Gets cursor position in client coordinates
@@ -245,7 +244,7 @@ namespace OpenBreed.Input.Generic
         private void UpdateCursorPos(Vector2 newPos)
         {
             var newPos4 = new Vector4(newPos) { W = 1 };
-            newPos4 *= Core.ClientTransform;
+            newPos4 *= coreClient.ClientTransform;
             CursorPos = new Vector2(newPos4.X, newPos4.Y);
         }
 

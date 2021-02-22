@@ -1,51 +1,78 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Input.Interface;
-using OpenBreed.Rendering.Interface;
 using OpenTK;
 using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using System;
 using System.Drawing;
 
 namespace OpenBreed.Game
 {
-    public class GameWindowClient : ICoreClient
+    public class SandboxWindowClient : ICoreClient
     {
         #region Private Fields
 
-        private readonly IRenderModule renderModule;
-        private ICore core;
         private GameWindow window;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public GameWindowClient(ICore core, int width, int height, string title)
+        public SandboxWindowClient(int width, int height, string title)
         {
-            this.core = core;
-            this.renderModule = core.GetModule<IRenderModule>();
             window = new GameWindow(width, height, new GraphicsMode(new ColorFormat(8, 8, 8, 8), 24, 8), title);
 
-            var inputs = core.GetManager<IInputsMan>();
-
-            window.MouseDown += (s, a) => inputs.OnMouseDown(a);
-            window.MouseUp += (s, a) => inputs.OnMouseUp(a);
-            window.MouseMove += (s, a) => inputs.OnMouseMove(a);
-            window.MouseWheel += (s, a) => inputs.OnMouseWheel(a);
-            window.KeyDown += (s, a) => inputs.OnKeyDown(a);
-            window.KeyUp += (s, a) => inputs.OnKeyUp(a);
-            window.KeyPress += (s, a) => inputs.OnKeyPress(a);
             window.Load += Window_Load;
             window.Resize += Window_Resize;
             window.UpdateFrame += Window_UpdateFrame;
             window.RenderFrame += Window_RenderFrame;
+            window.VSync = VSyncMode.On;
         }
 
         #endregion Public Constructors
 
         #region Public Events
+
+        public event EventHandler<MouseButtonEventArgs> MouseDownEvent
+        {
+            add => window.MouseDown += value;
+            remove => window.MouseDown -= value;
+        }
+
+        public event EventHandler<MouseButtonEventArgs> MouseUpEvent
+        {
+            add => window.MouseUp += value;
+            remove => window.MouseUp -= value;
+        }
+
+        public event EventHandler<MouseMoveEventArgs> MouseMoveEvent
+        {
+            add => window.MouseMove += value;
+            remove => window.MouseMove -= value;
+        }
+
+        public event EventHandler<MouseWheelEventArgs> MouseWheelEvent
+        {
+            add => window.MouseWheel += value;
+            remove => window.MouseWheel -= value;
+        }
+
+        public event EventHandler<KeyboardKeyEventArgs> KeyDownEvent
+        {
+            add => window.KeyDown += value;
+            remove => window.KeyDown -= value;
+        }
+
+        public event EventHandler<KeyboardKeyEventArgs> KeyUpEvent
+        {
+            add => window.KeyUp += value;
+            remove => window.KeyUp -= value;
+        }
+
+        public event EventHandler<KeyPressEventArgs> KeyPressEvent
+        {
+            add => window.KeyPress += value;
+            remove => window.KeyPress -= value;
+        }
 
         public event EventHandler<float> UpdateFrameEvent;
 
@@ -54,13 +81,6 @@ namespace OpenBreed.Game
         public event EventHandler LoadEvent;
 
         public event EventHandler<Size> ResizeEvent;
-        public event EventHandler<MouseButtonEventArgs> MouseDownEvent;
-        public event EventHandler<MouseButtonEventArgs> MouseUpEvent;
-        public event EventHandler<MouseMoveEventArgs> MouseMoveEvent;
-        public event EventHandler<MouseWheelEventArgs> MouseWheelEvent;
-        public event EventHandler<KeyboardKeyEventArgs> KeyDownEvent;
-        public event EventHandler<KeyboardKeyEventArgs> KeyUpEvent;
-        public event EventHandler<KeyPressEventArgs> KeyPressEvent;
 
         #endregion Public Events
 
@@ -92,31 +112,27 @@ namespace OpenBreed.Game
 
         private void Window_Load(object sender, System.EventArgs e)
         {
-            core.Load();
+            LoadEvent?.Invoke(sender, new EventArgs());
         }
 
         private void Window_Resize(object sender, System.EventArgs e)
         {
-            GL.LoadIdentity();
-            GL.Viewport(0, 0, ClientRectangle.Width, ClientRectangle.Height);
-            GL.MatrixMode(MatrixMode.Modelview);
-            var ortho = Matrix4.CreateOrthographicOffCenter(0.0f, ClientRectangle.Width, 0.0f, ClientRectangle.Height, -100.0f, 100.0f);
-            GL.LoadMatrix(ref ortho);
             ClientTransform = Matrix4.Identity;
             ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateTranslation(0.0f, -ClientRectangle.Height, 0.0f));
             ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateScale(1.0f, -1.0f, 1.0f));
 
-            renderModule.OnClientResized(ClientRectangle.Width, ClientRectangle.Height);
+            ResizeEvent?.Invoke(sender, new Size(ClientRectangle.Width, ClientRectangle.Height));
         }
 
         private void Window_UpdateFrame(object sender, FrameEventArgs e)
         {
-            //core.OnUpdateFrame((float)e.Time);
+            UpdateFrameEvent?.Invoke(sender, (float)e.Time);
         }
 
         private void Window_RenderFrame(object sender, FrameEventArgs e)
         {
-            renderModule.Draw((float)e.Time);
+            RenderFrameEvent.Invoke(sender, (float)e.Time);
+
             window.SwapBuffers();
         }
 

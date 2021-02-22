@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Rendering;
 
@@ -55,7 +56,7 @@ namespace OpenBreed.Wecs.Systems.Rendering.Builders
 
         public TileSystem Build()
         {
-            return new TileSystem(this);
+            return new TileSystem(this, core.GetManager<ITileMan>());
         }
 
         #endregion Public Methods

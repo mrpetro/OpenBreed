@@ -11,6 +11,8 @@ using OpenBreed.Wecs;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Commands;
+using OpenBreed.Wecs.Systems;
+using OpenBreed.Wecs.Systems.Rendering;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -20,6 +22,8 @@ namespace OpenBreed.Sandbox.Worlds
 
         private static void AddSystems(Program core, WorldBuilder builder)
         {
+            var systemFactory = core.GetManager<ISystemFactory>();
+
             //Input
             //builder.AddSystem(core.CreateWalkingControlSystem().Build());
             //builder.AddSystem(core.CreateAiControlSystem().Build());
@@ -39,7 +43,7 @@ namespace OpenBreed.Sandbox.Worlds
             //                               .Build());
 
             //builder.AddSystem(core.CreateSpriteSystem().Build());
-            builder.AddSystem(core.VideoSystemsFactory.CreateTextSystem().Build());
+            builder.AddSystem(systemFactory.Create<TextSystem>());
         }
 
         public static void Create(Program core)
@@ -57,10 +61,11 @@ namespace OpenBreed.Sandbox.Worlds
 
         private static void Setup(World world)
         {
+            var windowClient = world.Core.GetManager<ICoreClient>();
             var cameraBuilder = new CameraBuilder(world.Core);
             cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);
-            cameraBuilder.SetFov(world.Core.ClientRectangle.Width, world.Core.ClientRectangle.Height);
+            cameraBuilder.SetFov(windowClient.ClientRectangle.Width, windowClient.ClientRectangle.Height);
             var hudCamera = cameraBuilder.Build();
             hudCamera.Tag = "HudCamera";
             world.Core.Commands.Post(new AddEntityCommand(world.Id, hudCamera.Id));

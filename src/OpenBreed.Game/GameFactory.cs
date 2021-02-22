@@ -22,6 +22,7 @@ using OpenBreed.Scripting.Interface;
 using OpenBreed.Scripting.Lua;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,7 @@ namespace OpenBreed.Game
     {
         public GameFactory()
         {
+            manCollection.AddSingleton<ISystemFactory>(() => new DefaultSystemFactory());
 
             manCollection.AddSingleton<IVariableMan>(() => new VariableMan(manCollection.GetManager<ILogger>()));
 
@@ -44,7 +46,7 @@ namespace OpenBreed.Game
 
             manCollection.AddSingleton<IAnimMan>(() => new AnimMan(manCollection.GetManager<ILogger>()));
 
-            manCollection.AddSingleton<IInputsMan>(() => new InputsMan(manCollection.GetManager<ICore>()));
+            manCollection.AddSingleton<IInputsMan>(() => new InputsMan(manCollection.GetManager<ICoreClient>()));
 
             manCollection.AddSingleton<IPlayersMan>(() => new PlayersMan(manCollection.GetManager<ILogger>(),
                                                                          manCollection.GetManager<IInputsMan>()));
@@ -67,6 +69,8 @@ namespace OpenBreed.Game
             manCollection.AddGenericPhysicsManagers();
             manCollection.AddOpenALManagers();
             manCollection.AddOpenGLManagers();
+
+            manCollection.SetupRenderingSystems();
         }
 
         public ICore CreateGame(string gameDbFilePath, string gameFolderPath)

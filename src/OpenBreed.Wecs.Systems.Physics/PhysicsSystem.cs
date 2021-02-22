@@ -32,16 +32,17 @@ namespace OpenBreed.Wecs.Systems.Physics
         private readonly List<DynamicPack> inactiveDynamics = new List<DynamicPack>();
         private readonly List<DynamicPack> activeDynamics = new List<DynamicPack>();
         private readonly List<StaticPack> inactiveStatics = new List<StaticPack>();
+        private readonly IEntityMan entityMan;
         private List<StaticPack>[] gridStatics;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal PhysicsSystem(PhysicsSystemBuilder builder) : base(builder.core)
+        internal PhysicsSystem(PhysicsSystemBuilder builder, IEntityMan entityMan, IFixtureMan fixtureMan, ICollisionMan collisionMan)
         {
-            Fixtures = Core.GetManager<IFixtureMan>();
-            Collisions = Core.GetManager<ICollisionMan>();
+            Fixtures = fixtureMan;
+            Collisions = collisionMan;
 
             Require<BodyComponent>();
 
@@ -49,6 +50,7 @@ namespace OpenBreed.Wecs.Systems.Physics
             GridHeight = builder.gridHeight;
 
             InitializeGrid();
+            this.entityMan = entityMan;
         }
 
         #endregion Internal Constructors
@@ -225,7 +227,7 @@ namespace OpenBreed.Wecs.Systems.Physics
             //Clear dynamics
             for (int i = 0; i < activeDynamics.Count; i++)
             {
-                var entity = Core.GetManager<IEntityMan>().GetById(activeDynamics[i].EntityId);
+                var entity = entityMan.GetById(activeDynamics[i].EntityId);
                 entity.DebugData = null;
             }
 
@@ -262,8 +264,8 @@ namespace OpenBreed.Wecs.Systems.Physics
             Vector2 projection;
             if (DynamicHelper.TestVsDynamic(this, packA, packB, dt, out projection))
             {
-                var entityA = Core.GetManager<IEntityMan>().GetById(packA.EntityId);
-                var entityB = Core.GetManager<IEntityMan>().GetById(packB.EntityId);
+                var entityA = entityMan.GetById(packA.EntityId);
+                var entityB = entityMan.GetById(packB.EntityId);
 
                 Collisions.Callback(entityA, entityB, projection);
 
@@ -278,8 +280,8 @@ namespace OpenBreed.Wecs.Systems.Physics
             Vector2 projection;
             if (DynamicHelper.TestVsStatic(this, packA, packB, dt, out projection))
             {
-                var entityA = Core.GetManager<IEntityMan>().GetById(packA.EntityId);
-                var entityB = Core.GetManager<IEntityMan>().GetById(packB.EntityId);
+                var entityA = entityMan.GetById(packA.EntityId);
+                var entityB = entityMan.GetById(packB.EntityId);
 
                 Collisions.Callback(entityA, entityB, projection);
                 Collisions.Callback(entityB, entityA, -projection);

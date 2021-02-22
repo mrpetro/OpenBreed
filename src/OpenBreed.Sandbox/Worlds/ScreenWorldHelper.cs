@@ -54,17 +54,18 @@ namespace OpenBreed.Sandbox.Worlds
 
         public static World CreateWorld(Program core)
         {
+            var windowClient = core.GetManager<ICoreClient>();
             var builder = core.GetManager<IWorldMan>().Create().SetName("ScreenWorld");
             AddSystems(core, builder);
 
             var world = builder.Build();
 
-            var gameViewport = CreateViewportEntity(core, GAME_VIEWPORT, 32, 32, core.ClientRectangle.Width - 64, core.ClientRectangle.Height - 64, true, true);
+            var gameViewport = CreateViewportEntity(core, GAME_VIEWPORT, 32, 32, windowClient.ClientRectangle.Width - 64, windowClient.ClientRectangle.Height - 64, true, true);
             //gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
             //gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitHeightPreserveAspectRatio;
             gameViewport.Get<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
-            var hudViewport = CreateViewportEntity(core, HUD_VIEWPORT, 0, 0, core.ClientRectangle.Width, core.ClientRectangle.Height, false, true);
-            var textViewport = CreateViewportEntity(core, TEXT_VIEWPORT, 0, 0, core.ClientRectangle.Width, core.ClientRectangle.Height, false, true);
+            var hudViewport = CreateViewportEntity(core, HUD_VIEWPORT, 0, 0, windowClient.ClientRectangle.Width, windowClient.ClientRectangle.Height, false, true);
+            var textViewport = CreateViewportEntity(core, TEXT_VIEWPORT, 0, 0, windowClient.ClientRectangle.Width, windowClient.ClientRectangle.Height, false, true);
 
             var renderingModule = core.GetModule<IRenderModule>();
 

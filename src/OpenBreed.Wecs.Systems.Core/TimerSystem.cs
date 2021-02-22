@@ -21,13 +21,15 @@ namespace OpenBreed.Wecs.Systems.Core
         #region Private Fields
 
         private readonly List<int> entities = new List<int>();
+        private readonly IEntityMan entityMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public TimerSystem(ICore core) : base(core)
+        public TimerSystem(ICore core, IEntityMan entityMan)
         {
+            this.entityMan = entityMan;
             Require<TimerComponent>();
         }
 
@@ -45,7 +47,7 @@ namespace OpenBreed.Wecs.Systems.Core
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                var entity = Core.GetManager<IEntityMan>().GetById(entities[i]);
+                var entity = entityMan.GetById(entities[i]);
                 Debug.Assert(entity != null);
 
                 Update(entity, dt);
@@ -56,7 +58,7 @@ namespace OpenBreed.Wecs.Systems.Core
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                var entity = Core.GetManager<IEntityMan>().GetById(entities[i]);
+                var entity = entityMan.GetById(entities[i]);
                 if (entity.Components.OfType<PauseImmuneComponent>().Any())
                     Update(entity, dt);
             }

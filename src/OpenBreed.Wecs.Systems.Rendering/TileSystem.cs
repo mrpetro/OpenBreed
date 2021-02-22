@@ -18,6 +18,7 @@ using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs;
+using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
@@ -26,6 +27,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
         #region Public Fields
 
         public const int TILE_SIZE = 16;
+        private readonly ITileMan tileMan;
         public int MAX_TILES_COUNT = 1024 * 1024;
 
         #endregion Public Fields
@@ -39,7 +41,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Constructors
 
-        internal TileSystem(TileSystemBuilder builder) : base(builder.core)
+        internal TileSystem(TileSystemBuilder builder, ITileMan tileMan)
         {
             Require<TileComponent>();
             Require<PositionComponent>();
@@ -51,6 +53,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             GridVisible = builder.gridVisible;
 
             InitializeTilesMap();
+            this.tileMan = tileMan;
         }
 
         #endregion Public Constructors
@@ -223,7 +226,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
                 GL.Translate(xIndex * TILE_SIZE, yIndex * TILE_SIZE, 0.0f);
 
-                Core.GetModule<IRenderModule>().Tiles.GetById(cellTile.AtlasId).Draw(cellTile.ImageId);
+                tileMan.GetById(cellTile.AtlasId).Draw(cellTile.ImageId);
 
                 GL.PopMatrix();
             }

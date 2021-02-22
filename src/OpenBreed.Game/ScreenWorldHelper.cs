@@ -16,6 +16,8 @@ using OpenBreed.Wecs;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Commands;
+using OpenBreed.Wecs.Systems;
+using OpenBreed.Wecs.Systems.Rendering;
 
 namespace OpenBreed.Game
 {
@@ -27,11 +29,13 @@ namespace OpenBreed.Game
 
         public static void AddSystems(Game game, WorldBuilder builder)
         {
+            var systemFactory = game.GetManager<ISystemFactory>();
+
             //Video
             builder.AddSystem(game.VideoSystemsFactory.CreateViewportSystem().Build());
             //builder.AddSystem(core.CreateSpriteSystem().Build());
             //builder.AddSystem(core.CreateWireframeSystem().Build());
-            builder.AddSystem(game.VideoSystemsFactory.CreateTextSystem().Build());
+            builder.AddSystem(systemFactory.Create<TextSystem>());
         }
 
         public static Entity CreateViewportEntity(ICore core, string name, float x, float y, float width, float height, bool drawBackground, bool clipping = true)
@@ -54,14 +58,14 @@ namespace OpenBreed.Game
 
         public static World CreateWorld(Game game)
         {
-
+            var windowClient = game.GetManager<ICoreClient>();
 
             var builder = game.GetManager<IWorldMan>().Create().SetName("ScreenWorld");
             AddSystems(game, builder);
 
             var world = builder.Build();
 
-            var gameViewport = CreateViewportEntity(game, GAME_VIEWPORT, 32, 32, game.ClientRectangle.Width - 64, game.ClientRectangle.Height - 64, true, true);
+            var gameViewport = CreateViewportEntity(game, GAME_VIEWPORT, 32, 32, windowClient.ClientRectangle.Width - 64, windowClient.ClientRectangle.Height - 64, true, true);
             //gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
             //gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitHeightPreserveAspectRatio;
             gameViewport.Get<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;

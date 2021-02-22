@@ -21,16 +21,18 @@ namespace OpenBreed.Wecs.Systems.Control.Systems
         #region Private Fields
 
         private readonly List<Entity> entities = new List<Entity>();
+        private readonly IEntityMan entityMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public FollowerSystem(ICore core) : base(core)
+        public FollowerSystem(ICore core, IEntityMan entityMan)
         {
+            this.entityMan = entityMan;
+
             Require<FollowerComponent>();
             Require<PositionComponent>();
-
         }
 
         public static void RegisterHandlers(ICommandsMan commands)
@@ -58,7 +60,7 @@ namespace OpenBreed.Wecs.Systems.Control.Systems
 
             for (int i = 0; i < fc.FollowerIds.Count; i++)
             {
-                var followerEntity = Core.GetManager<IEntityMan>().GetById(fc.FollowerIds[i]);
+                var followerEntity = entityMan.GetById(fc.FollowerIds[i]);
 
                 if (followerEntity == null)
                     continue;
@@ -96,7 +98,7 @@ namespace OpenBreed.Wecs.Systems.Control.Systems
 
             for (int i = 0; i < fc.FollowerIds.Count; i++)
             {
-                var follower = Core.GetManager<IEntityMan>().GetById(fc.FollowerIds[i]);
+                var follower = entityMan.GetById(fc.FollowerIds[i]);
 
                 if (follower == null)
                     continue;
@@ -113,7 +115,7 @@ namespace OpenBreed.Wecs.Systems.Control.Systems
 
             for (int i = 0; i < fc.FollowerIds.Count; i++)
             {
-                var follower = Core.GetManager<IEntityMan>().GetById(fc.FollowerIds[i]);
+                var follower = entityMan.GetById(fc.FollowerIds[i]);
 
                 if (follower == null)
                     continue;

@@ -23,13 +23,16 @@ namespace OpenBreed.Wecs.Systems.Physics
         #region Private Fields
 
         private readonly List<int> entities = new List<int>();
+        private readonly IEntityMan entityMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public DirectionSystem(ICore core) : base(core)
+        public DirectionSystem(ICore core, IEntityMan entityMan)
         {
+            this.entityMan = entityMan;
+
             Require<AngularPositionComponent>();
             Require<AngularVelocityComponent>();
             Require<AngularThrustComponent>();
@@ -51,7 +54,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         public void UpdateEntity(float dt, int id)
         {
-            var entity = Core.GetManager<IEntityMan>().GetById(id);
+            var entity = entityMan.GetById(id);
             var angularPos = entity.Get<AngularPositionComponent>();
             var angularVel = entity.Get<AngularVelocityComponent>();
             var angularThrust = entity.Get<AngularThrustComponent>();

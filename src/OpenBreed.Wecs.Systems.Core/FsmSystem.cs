@@ -19,13 +19,16 @@ namespace OpenBreed.Wecs.Systems.Core
         #region Private Fields
 
         private readonly List<Entity> entities = new List<Entity>();
+        private readonly IFsmMan fsmMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public FsmSystem(ICore core) : base(core)
+        public FsmSystem(ICore core, IFsmMan fsmMan)
         {
+            this.fsmMan = fsmMan;
+
             Require<FsmComponent>();
         }
 
@@ -81,7 +84,7 @@ namespace OpenBreed.Wecs.Systems.Core
             var fsmComponent = entity.Get<FsmComponent>();
 
             foreach (var state in fsmComponent.States)
-                Core.GetManager<IFsmMan>().EnterState(entity, state, 0);
+                fsmMan.EnterState(entity, state, 0);
         }
 
         private void DeinitializeComponent(Entity entity)
@@ -89,7 +92,7 @@ namespace OpenBreed.Wecs.Systems.Core
             var fsmComponent = entity.Get<FsmComponent>();
 
             foreach (var state in fsmComponent.States)
-                Core.GetManager<IFsmMan>().EnterState(entity, state, 0);
+                fsmMan.EnterState(entity, state, 0);
         }
 
         private static bool HandleSetStateCommand(ICore core, SetEntityStateCommand cmd)

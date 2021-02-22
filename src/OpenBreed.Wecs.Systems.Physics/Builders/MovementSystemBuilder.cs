@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;
 
 namespace OpenBreed.Wecs.Systems.Physics
@@ -24,7 +25,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         public MovementSystem Build()
         {
-            return new MovementSystem(this);
+            return new MovementSystem(this, core.GetManager<IEntityMan>());
         }
 
         #endregion Public Methods

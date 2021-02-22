@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Rendering;
 
@@ -25,7 +26,7 @@ namespace OpenBreed.Wecs.Systems.Rendering.Builders
 
         public SpriteSystem Build()
         {
-            return new SpriteSystem(this);
+            return new SpriteSystem(core.GetManager<ISpriteMan>());
         }
 
         #endregion Public Methods

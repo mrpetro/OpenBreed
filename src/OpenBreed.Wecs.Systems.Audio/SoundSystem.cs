@@ -18,7 +18,7 @@ namespace OpenBreed.Wecs.Systems.Audio
 
         #region Public Constructors
 
-        internal SoundSystem(SoundSystemBuilder builder) : base(builder.core)
+        internal SoundSystem(SoundSystemBuilder builder)
         {
             components = new List<IEntityComponent>();
         }

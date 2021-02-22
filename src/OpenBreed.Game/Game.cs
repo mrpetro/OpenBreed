@@ -75,7 +75,7 @@ namespace OpenBreed.Game
             logConsolePrinter.StartPrinting();
 
             soundModule = new OpenALModule(this);
-            renderingModule = new OpenGLModule(this);
+            renderingModule = new OpenGLModule(this, Client);
 
             RegisterModule<IRenderModule>(renderingModule);
 
@@ -92,15 +92,6 @@ namespace OpenBreed.Game
 
         public override JobMan Jobs => throw new NotImplementedException();
         public IFsmMan StateMachines => throw new NotImplementedException();
-
-        public override Matrix4 ClientTransform
-        {
-            get => Client.ClientTransform;
-            protected set => ClientTransform = value;
-        }
-
-        public override float ClientRatio => Client.ClientRatio;
-        public override Rectangle ClientRectangle => Client.ClientRectangle;
 
         #endregion Public Properties
 
@@ -140,7 +131,7 @@ namespace OpenBreed.Game
             scriptMan.RunString(entryScript.Script);
         }
 
-        public override void Update(float dt)
+        public void OnUpdateFrame(float dt)
         {
             Commands.ExecuteEnqueued();
 

@@ -24,11 +24,12 @@ namespace OpenBreed.Sandbox.Entities.FpsCounter
     {
         public static void AddToWorld(World world)
         {
+            var windowClient = world.Core.GetManager<ICoreClient>();
             var arial12 = world.Core.GetModule<IRenderModule>().Fonts.Create("ARIAL", 10);
 
             var fpsTextEntity = world.Core.GetManager<IEntityMan>().Create();
 
-            fpsTextEntity.Add(PositionComponent.Create(new Vector2(-fpsTextEntity.Core.ClientRectangle.Width / 2.0f, -fpsTextEntity.Core.ClientRectangle.Height / 2.0f)));
+            fpsTextEntity.Add(PositionComponent.Create(new Vector2(-windowClient.ClientRectangle.Width / 2.0f, -windowClient.ClientRectangle.Height / 2.0f)));
 
             var textBuilder = TextComponentBuilderEx.New(world.Core);
             textBuilder.SetFontById(arial12.Id);

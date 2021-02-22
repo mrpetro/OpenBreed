@@ -1,4 +1,6 @@
 ﻿using OpenBreed.Core;
+using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;
 
 namespace OpenBreed.Wecs.Systems.Physics
@@ -34,7 +36,10 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         public PhysicsSystem Build()
         {
-            return new PhysicsSystem(this);
+            return new PhysicsSystem(this,
+                                    core.GetManager<IEntityMan>(),
+                                    core.GetManager<IFixtureMan>(),
+                                    core.GetManager<ICollisionMan>());
         }
 
         #endregion Public Methods

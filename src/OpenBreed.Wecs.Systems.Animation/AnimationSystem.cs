@@ -26,13 +26,17 @@ namespace OpenBreed.Wecs.Systems.Animation
         #region Private Fields
 
         private readonly List<int> entities = new List<int>();
+        private readonly IEntityMan entityMan;
+        private readonly IAnimMan animMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public AnimationSystem(AnimationSystemBuilder builder) : base(builder.core)
+        public AnimationSystem(AnimationSystemBuilder builder, IEntityMan entityMan, IAnimMan animMan)
         {
+            this.entityMan = entityMan;
+            this.animMan = animMan;
             Require<AnimationComponent>();
         }
 
@@ -52,7 +56,7 @@ namespace OpenBreed.Wecs.Systems.Animation
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                var entity = Core.GetManager<IEntityMan>().GetById(entities[i]);
+                var entity = entityMan.GetById(entities[i]);
                 if (entity.Components.OfType<PauseImmuneComponent>().Any())
                     Animate(entity, dt);
             }
@@ -62,7 +66,7 @@ namespace OpenBreed.Wecs.Systems.Animation
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                var entity = Core.GetManager<IEntityMan>().GetById(entities[i]);
+                var entity = entityMan.GetById(entities[i]);
                 Debug.Assert(entity != null);
 
                 Animate(entity, dt);
@@ -138,7 +142,7 @@ namespace OpenBreed.Wecs.Systems.Animation
             if (animator.AnimId < 0)
                 return;
 
-            var data = Core.GetManager<IAnimMan>().GetById(animator.AnimId);
+            var data = animMan.GetById(animator.AnimId);
 
             animator.Position += animator.Speed * dt;
 

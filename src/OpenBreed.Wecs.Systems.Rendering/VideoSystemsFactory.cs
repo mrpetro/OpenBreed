@@ -23,11 +23,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Methods
 
-        public TextSystemBuilder CreateTextSystem()
-        {
-            return new TextSystemBuilder(core);
-        }
-
         public SpriteSystemBuilder CreateSpriteSystem()
         {
             return new SpriteSystemBuilder(core);

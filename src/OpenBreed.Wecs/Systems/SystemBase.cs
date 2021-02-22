@@ -1,13 +1,10 @@
 ﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core;
+using OpenBreed.Wecs.Components;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs;
-using OpenBreed.Wecs.Worlds;
-using OpenBreed.Wecs.Components;
 
 namespace OpenBreed.Wecs.Systems
 {
@@ -22,21 +19,7 @@ namespace OpenBreed.Wecs.Systems
 
         #endregion Private Fields
 
-        #region Protected Constructors
-
-        protected SystemBase(ICore core)
-        {
-            Core = core;
-        }
-
-        #endregion Protected Constructors
-
         #region Public Properties
-
-        /// <summary>
-        /// Reference to Core
-        /// </summary>
-        public ICore Core { get; }
 
         /// <summary>
         /// World which owns this system
@@ -146,6 +129,5 @@ namespace OpenBreed.Wecs.Systems
         }
 
         #endregion Protected Methods
-
     }
 }

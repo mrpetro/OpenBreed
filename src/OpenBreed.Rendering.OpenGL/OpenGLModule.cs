@@ -21,15 +21,22 @@ namespace OpenBreed.Rendering.OpenGL
 {
     public class OpenGLModule : BaseCoreModule, IRenderModule
     {
+        #region Private Fields
+
+        private readonly ICoreClient client;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
-        public OpenGLModule(ICore core) : base(core)
+        public OpenGLModule(ICore core, ICoreClient client) : base(core)
         {
             Textures = core.GetManager<ITextureMan>();
             Tiles = core.GetManager<ITileMan>();
             Sprites = core.GetManager<ISpriteMan>();
             Stamps = core.GetManager<IStampMan>();
             Fonts = core.GetManager<IFontMan>();
+            this.client = client;
         }
 
         #endregion Public Constructors
@@ -54,7 +61,7 @@ namespace OpenBreed.Rendering.OpenGL
 
         #region Private Properties
 
-        private Box2 ClipBox { get { return Box2.FromTLRB(Core.ClientRectangle.Width, 0.0f, Core.ClientRectangle.Height, 0.0f); } }
+        private Box2 ClipBox { get { return Box2.FromTLRB(client.ClientRectangle.Width, 0.0f, client.ClientRectangle.Height, 0.0f); } }
 
         #endregion Private Properties
 
@@ -83,9 +90,16 @@ namespace OpenBreed.Rendering.OpenGL
 
         public void OnClientResized(float width, float height)
         {
+            GL.LoadIdentity();
+            GL.Viewport(0, 0, (int)width, (int)height);
+            GL.MatrixMode(MatrixMode.Modelview);
+            var ortho = Matrix4.CreateOrthographicOffCenter(0.0f, width, 0.0f, height, -100.0f, 100.0f);
+            GL.LoadMatrix(ref ortho);
+
             Core.Events.Raise(this, new ClientResizedEventArgs(width, height));
         }
 
         #endregion Public Methods
+
     }
 }

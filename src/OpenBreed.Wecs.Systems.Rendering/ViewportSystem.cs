@@ -37,18 +37,21 @@ namespace OpenBreed.Wecs.Systems.Rendering
         private const float BRIGHTNESS_Z_LEVEL = 50.0f;
 
         private readonly List<Entity> entities = new List<Entity>();
-        private readonly IRenderModule renderModule;
+        private readonly ICore core;
+        private readonly IEntityMan entityMan;
         private readonly IPrimitiveRenderer primitiveRenderer;
+        private readonly ICoreClient windowClient;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ViewportSystem(ViewportSystemBuilder builder, IPrimitiveRenderer primitiveRenderer) : base(builder.core)
+        public ViewportSystem(ICore core, IEntityMan entityMan, IPrimitiveRenderer primitiveRenderer, ICoreClient windowClient)
         {
-            this.renderModule = builder.renderModule;
+            this.core = core;
+            this.entityMan = entityMan;
             this.primitiveRenderer = primitiveRenderer;
-
+            this.windowClient = windowClient;
             Require<ViewportComponent>();
             Require<PositionComponent>();
         }
@@ -67,11 +70,11 @@ namespace OpenBreed.Wecs.Systems.Rendering
             var vpc = viewport.Get<ViewportComponent>();
             var pos = viewport.Get<PositionComponent>();
 
-            var camera = Core.GetManager<IEntityMan>().GetById(vpc.CameraEntityId);
+            var camera = entityMan.GetById(vpc.CameraEntityId);
 
             var x = Matrix4.Identity;
 
-            var screenX = Core.ClientTransform;
+            var screenX = windowClient.ClientTransform;
             x = Matrix4.Mult(screenX, x);
 
             var viewportX = GetViewportTransform(pos, vpc);
@@ -251,7 +254,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
                 primitiveRenderer.DrawUnitRectangle();
             }
 
-            var cameraEntity = Core.GetManager<IEntityMan>().GetById(vpc.CameraEntityId);
+            var cameraEntity = entityMan.GetById(vpc.CameraEntityId);
 
             if (cameraEntity != null)
                 DrawCameraView(depth, dt, vpc, cameraEntity);

@@ -22,7 +22,7 @@ namespace OpenBreed.Wecs.Systems.Control.Systems
 
         #region Public Constructors
 
-        public WalkingControllerSystem(ICore core) : base(core)
+        public WalkingControllerSystem(ICore core)
         {
             players = core.GetManager<IPlayersMan>();
 

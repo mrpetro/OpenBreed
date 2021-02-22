@@ -38,24 +38,9 @@ namespace OpenBreed.Core
         IEventsMan Events { get; }
 
         /// <summary>
-        /// Client display transformation matrix
-        /// </summary>
-        Matrix4 ClientTransform { get; }
-
-        /// <summary>
-        /// Client display rectangle
-        /// </summary>
-        Rectangle ClientRectangle { get; }
-
-        /// <summary>
         /// Core client instance
         /// </summary>
         ICoreClient Client { get; }
-
-        /// <summary>
-        /// Client display aspect ratio
-        /// </summary>
-        float ClientRatio { get; }
 
         #endregion Public Properties
 
@@ -79,8 +64,6 @@ namespace OpenBreed.Core
         /// Perform exit
         /// </summary>
         void Exit();
-
-        void Update(float dt);
 
         void Load();
 

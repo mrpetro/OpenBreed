@@ -16,6 +16,7 @@ using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs;
+using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
@@ -24,15 +25,17 @@ namespace OpenBreed.Wecs.Systems.Rendering
         #region Private Fields
 
         private readonly List<Entity> entities = new List<Entity>();
+        private readonly IFontMan fontMan;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal TextSystem(TextSystemBuilder builder) : base(builder.core)
+        internal TextSystem(IFontMan fontMan)
         {
             Require<TextComponent>();
             Require<PositionComponent>();
+            this.fontMan = fontMan;
         }
 
         #endregion Internal Constructors
@@ -93,7 +96,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             {
                 var part = tcp.Parts[i];
                 GL.Translate(part.Offset.X, part.Offset.Y, 0.0f);
-                Core.GetModule<IRenderModule>().Fonts.GetById(part.FontId).Draw(part.Text);
+                fontMan.GetById(part.FontId).Draw(part.Text);
             }
 
             GL.PopMatrix();

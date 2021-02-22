@@ -13,6 +13,7 @@ using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
@@ -21,13 +22,16 @@ namespace OpenBreed.Wecs.Systems.Rendering
         #region Private Fields
 
         private readonly List<Entity> entities = new List<Entity>();
+        private readonly IFontMan fontMan;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        public TextPresenterSystem(ICore core) : base(core)
+        public TextPresenterSystem(IFontMan fontMan)
         {
+            this.fontMan = fontMan;
+
             Require<TextDataComponent>();
             Require<TextPresentationComponent>();
             Require<PositionComponent>();
@@ -88,7 +92,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             GL.Translate(pos.Value.X, pos.Value.Y, 0.0f);
 
             var caretPosX = 0.0f;
-            var font = Core.GetModule<IRenderModule>().Fonts.GetById(tp.FontId);
+            var font = fontMan.GetById(tp.FontId);
             var height = font.Height;
 
             for (int i = 0; i < td.Data.Length; i++)

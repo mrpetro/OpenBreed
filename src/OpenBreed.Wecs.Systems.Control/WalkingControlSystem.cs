@@ -27,7 +27,7 @@ namespace OpenBreed.Wecs.Systems.Control
 
         #region Public Constructors
 
-        internal WalkingControlSystem(WalkingControlSystemBuilder builder) : base(builder.core)
+        internal WalkingControlSystem(WalkingControlSystemBuilder builder)
         {
             Require<IControlComponent>();
         }

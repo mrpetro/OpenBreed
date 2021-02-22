@@ -28,7 +28,7 @@ namespace OpenBreed.Wecs.Systems.Control
 
         #region Public Constructors
 
-        internal AiControlSystem(AiControlSystemBuilder builder) : base(builder.core)
+        internal AiControlSystem(AiControlSystemBuilder builder)
         {
             Require<AiControl>();
             Require<PositionComponent>();

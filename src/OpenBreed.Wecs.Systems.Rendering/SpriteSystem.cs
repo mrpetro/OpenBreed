@@ -14,6 +14,7 @@ using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs;
+using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
@@ -23,13 +24,16 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         private readonly List<Entity> inactive = new List<Entity>();
         private readonly List<Entity> active = new List<Entity>();
+        private readonly ISpriteMan spriteMan;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal SpriteSystem(SpriteSystemBuilder builder) : base(builder.core)
+        internal SpriteSystem(ISpriteMan spriteMan)
         {
+            this.spriteMan = spriteMan;
+
             Require<SpriteComponent>();
             Require<PositionComponent>();
         }
@@ -132,7 +136,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
         {
             var pos = entity.Get<PositionComponent>();
             var spc = entity.Get<SpriteComponent>();
-            var atlas = Core.GetModule<IRenderModule>().Sprites.GetById(spc.AtlasId);
+            var atlas = spriteMan.GetById(spc.AtlasId);
 
             //Test viewport for clippling here
             if (pos.Value.X + atlas.SpriteWidth < clipBox.Left)

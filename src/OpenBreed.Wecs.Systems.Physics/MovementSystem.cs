@@ -18,13 +18,16 @@ namespace OpenBreed.Wecs.Systems.Physics
         #region Private Fields
 
         private readonly List<int> entities = new List<int>();
+        private readonly IEntityMan entityMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public MovementSystem(MovementSystemBuilder builder) : base(builder.core)
+        public MovementSystem(MovementSystemBuilder builder, IEntityMan entityMan)
         {
+            this.entityMan = entityMan;
+
             Require<ThrustComponent>();
             Require<PositionComponent>();
             Require<VelocityComponent>();
@@ -47,7 +50,7 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         public void UpdateEntity(float dt, int id)
         {
-            var entity = Core.GetManager<IEntityMan>().GetById(id);
+            var entity = entityMan.GetById(id);
             var position = entity.Get<PositionComponent>();
             var thrust = entity.Get<ThrustComponent>();
             var velocity = entity.Get<VelocityComponent>();

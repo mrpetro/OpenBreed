@@ -62,24 +62,18 @@ using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Physics.Generic.Extensions;
 using OpenBreed.Wecs.Systems.Control.Handlers;
 using OpenBreed.Wecs.Systems.Control.Inputs;
+using OpenBreed.Wecs.Systems.Rendering.Extensions;
+using OpenBreed.Game;
 
 namespace OpenBreed.Sandbox
 {
     public class ProgramFactory : CoreFactory
     {
-
-        private DefaultSystemFactory CreateDefaultSystemFactory()
-        {
-            var factory = new DefaultSystemFactory();
-
-            //factory.Register(() => new 
-
-            return factory;
-        }
-
         public ProgramFactory()
         {
-            manCollection.AddSingleton<ISystemFactory>(() => CreateDefaultSystemFactory());
+            manCollection.AddSingleton<ISystemFactory>(() => new DefaultSystemFactory());
+
+            manCollection.AddSingleton<ICoreClient>(() => new SandboxWindowClient(800, 600, "OpenBreed"));
 
             manCollection.AddSingleton<IScriptMan>(() => new LuaScriptMan(manCollection.GetManager<ILogger>()));
 
@@ -87,7 +81,7 @@ namespace OpenBreed.Sandbox
 
             manCollection.AddSingleton<IAnimMan>(() => new AnimMan(manCollection.GetManager<ILogger>()));
 
-            manCollection.AddSingleton<IInputsMan>(() => new InputsMan(manCollection.GetManager<ICore>()));
+            manCollection.AddSingleton<IInputsMan>(() => new InputsMan(manCollection.GetManager<ICoreClient>()));
 
             manCollection.AddSingleton<IPlayersMan>(() => new PlayersMan(manCollection.GetManager<ILogger>(),
                                                                          manCollection.GetManager<IInputsMan>()));
@@ -106,11 +100,12 @@ namespace OpenBreed.Sandbox
             manCollection.AddGenericPhysicsManagers();
             manCollection.AddOpenALManagers();
             manCollection.AddOpenGLManagers();
+            manCollection.SetupRenderingSystems();
         }
 
         public ICore Create()
         {
-            return new Program(manCollection);
+            return new Program(manCollection, manCollection.GetManager<ICoreClient>());
         }
     }
 
@@ -124,7 +119,7 @@ namespace OpenBreed.Sandbox
 
         private readonly IScriptMan scriptMan;
         private readonly LogConsolePrinter logConsolePrinter;
-        private GameWindow window;
+        //private GameWindow window;
 
         private string appVersion;
 
@@ -132,32 +127,34 @@ namespace OpenBreed.Sandbox
 
         #region Public Constructors
 
-        public Program(IManagerCollection manCollection) :
+        public Program(IManagerCollection manCollection, ICoreClient coreClient) :
             base(manCollection)
         {
+            Client = coreClient;
+
             scriptMan = manCollection.GetManager<IScriptMan>();
             StateMachines = manCollection.GetManager<IFsmMan>();
             Animations = manCollection.GetManager<IAnimMan>();
             Inputs = manCollection.GetManager<IInputsMan>();
+
+            Client.KeyDownEvent += (s,a) => Inputs.OnKeyDown(a);
+            Client.KeyUpEvent += (s, a) => Inputs.OnKeyUp(a);
+            Client.KeyPressEvent += (s, a) => Inputs.OnKeyPress(a);
+            Client.MouseMoveEvent += (s, a) => Inputs.OnMouseMove(a);
+            Client.MouseDownEvent += (s, a) => Inputs.OnMouseDown(a);
+            Client.MouseUpEvent += (s, a) => Inputs.OnMouseUp(a);
+            Client.MouseWheelEvent += (s, a) => Inputs.OnMouseWheel(a);
+
             Players = manCollection.GetManager<IPlayersMan>();
             Worlds = manCollection.GetManager<IWorldMan>();
             EntityFactory = manCollection.GetManager<IEntityFactory>();
 
             appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-            window = new GameWindow(800, 600, new GraphicsMode(new ColorFormat(8, 8, 8, 8), 24, 8), "OpenBreed");
-
-            window.MouseDown += (s, a) => Inputs.OnMouseDown(a);
-            window.MouseUp += (s, a) => Inputs.OnMouseUp(a);
-            window.MouseMove += (s, a) => Inputs.OnMouseMove(a);
-            window.MouseWheel += (s, a) => Inputs.OnMouseWheel(a);
-            window.KeyDown += (s, a) => Inputs.OnKeyDown(a);
-            window.KeyUp += (s, a) => Inputs.OnKeyUp(a);
-            window.KeyPress += (s, a) => Inputs.OnKeyPress(a);
-            window.Load += (s, a) => OnWindowLoad();
-            window.Resize += (s, a) => OnResize();
-            window.UpdateFrame += (s, a) => Update((float)a.Time);
-            window.RenderFrame += OnRenderFrame;
+            coreClient.LoadEvent += (s, a) => OnLoad();
+            coreClient.ResizeEvent += (s, a) => OnResize(a);
+            coreClient.UpdateFrameEvent += (s, a) => OnUpdateFrame(a);
+            coreClient.RenderFrameEvent += (s, a) => OnRenderFrame(a);
 
             logConsolePrinter = new LogConsolePrinter(Logging);
             logConsolePrinter.StartPrinting();
@@ -165,7 +162,7 @@ namespace OpenBreed.Sandbox
             Jobs = new JobMan(this);
 
 
-            renderingModule = new OpenGLModule(this);
+            renderingModule = new OpenGLModule(this, Client);
             Physics = new PhysicsModule(this);
             Sounds = new OpenALModule(this);
 
@@ -177,7 +174,7 @@ namespace OpenBreed.Sandbox
             RegisterModule<IPhysicsModule>(Physics);
             RegisterModule<IAudioModule>(Sounds);
 
-            window.VSync = VSyncMode.On;
+            this.coreClient = coreClient;
         }
 
         #endregion Public Constructors
@@ -190,6 +187,7 @@ namespace OpenBreed.Sandbox
         public IEntityFactory EntityFactory { get; }
 
         private readonly IRenderModule renderingModule;
+        private readonly ICoreClient coreClient;
 
         public IAnimMan Animations { get; }
 
@@ -204,12 +202,6 @@ namespace OpenBreed.Sandbox
         public override JobMan Jobs { get; }
 
         public IInputsMan Inputs { get; }
-
-        public override Matrix4 ClientTransform { get; protected set; }
-
-        public override float ClientRatio { get { return (float)ClientRectangle.Width / (float)ClientRectangle.Height; } }
-
-        public override Rectangle ClientRectangle => window.ClientRectangle;
 
         #endregion Public Properties
 
@@ -244,7 +236,7 @@ namespace OpenBreed.Sandbox
         {
         }
 
-        public override void Update(float dt)
+        private void OnUpdateFrame(float dt)
         {
             Commands.ExecuteEnqueued();
 
@@ -262,12 +254,12 @@ namespace OpenBreed.Sandbox
 
         public override void Run()
         {
-            window.Run(30.0, 60.0);
+            Client.Run();
         }
 
         public override void Exit()
         {
-            window.Exit();
+            Client.Exit();
         }
 
         #endregion Public Methods
@@ -279,11 +271,9 @@ namespace OpenBreed.Sandbox
             scriptMan.TryInvokeFunction("EngineInitialized");
         }
 
-        protected void OnRenderFrame(object sender, FrameEventArgs e)
+        private void OnRenderFrame(float dt)
         {
-            renderingModule.Draw((float)e.Time);
-
-            window.SwapBuffers();
+            renderingModule.Draw(dt);
         }
 
         #endregion Protected Methods
@@ -322,9 +312,9 @@ namespace OpenBreed.Sandbox
             PhysicsSystem.RegisterHandlers(Commands);
         }
 
-        private void OnWindowLoad()
+        private void OnLoad()
         {
-            window.Title = $"Open Breed Sandbox (Version: {appVersion} Vsync: {window.VSync})";
+            //Client.Title = $"Open Breed Sandbox (Version: {appVersion} Vsync: {window.VSync})";
 
             RegisterXmlComponents();
             RegisterComponentFactories();
@@ -455,17 +445,9 @@ namespace OpenBreed.Sandbox
             scriptMan.RunFile(@"Content\Scripts\start.lua");
         }
 
-        private void OnResize()
+        private void OnResize(Size size)
         {
-            GL.LoadIdentity();
-            GL.Viewport(0, 0, ClientRectangle.Width, ClientRectangle.Height);
-            GL.MatrixMode(MatrixMode.Modelview);
-            var ortho = Matrix4.CreateOrthographicOffCenter(0.0f, ClientRectangle.Width, 0.0f, ClientRectangle.Height, -100.0f, 100.0f);
-            GL.LoadMatrix(ref ortho);
-            ClientTransform = Matrix4.Identity;
-            ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateTranslation(0.0f, -ClientRectangle.Height, 0.0f));
-            ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateScale(1.0f, -1.0f, 1.0f));
-            renderingModule.OnClientResized(ClientRectangle.Width, ClientRectangle.Height);
+            renderingModule.OnClientResized(size.Width, size.Height);
         }
 
         private void RegisterShapes()

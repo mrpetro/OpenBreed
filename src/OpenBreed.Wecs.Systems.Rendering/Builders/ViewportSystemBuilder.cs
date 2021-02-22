@@ -2,6 +2,7 @@
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Wecs.Systems.Rendering;
+using OpenBreed.Wecs.Entities;
 
 namespace OpenBreed.Wecs.Systems.Rendering.Builders
 {
@@ -10,7 +11,6 @@ namespace OpenBreed.Wecs.Systems.Rendering.Builders
         #region Internal Fields
 
         internal ICore core;
-        internal IRenderModule renderModule;
 
         #endregion Internal Fields
 
@@ -19,7 +19,6 @@ namespace OpenBreed.Wecs.Systems.Rendering.Builders
         public ViewportSystemBuilder(ICore core)
         {
             this.core = core;
-            this.renderModule = core.GetModule<IRenderModule>();
         }
 
         #endregion Public Constructors
@@ -28,8 +27,10 @@ namespace OpenBreed.Wecs.Systems.Rendering.Builders
 
         public ViewportSystem Build()
         {
-            return new ViewportSystem(this,
-                                      core.GetManager<IPrimitiveRenderer>());
+            return new ViewportSystem(core,
+                                      core.GetManager<IEntityMan>(),
+                                      core.GetManager<IPrimitiveRenderer>(),
+                                      core.GetManager<ICoreClient>());
         }
 
         #endregion Public Methods

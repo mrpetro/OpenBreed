@@ -24,11 +24,12 @@ namespace OpenBreed.Sandbox.Entities.CursorCoords
     {
         public static void AddToWorld(World world)
         {
+            var windowClient = world.Core.GetManager<ICoreClient>();
             var arial12 = world.Core.GetModule<IRenderModule>().Fonts.Create("ARIAL", 10);
 
             var entity = world.Core.GetManager<IEntityMan>().Create();
 
-            entity.Add(PositionComponent.Create(new Vector2(entity.Core.ClientRectangle.Width / 2.0f - 120.0f, -entity.Core.ClientRectangle.Height / 2.0f)));
+            entity.Add(PositionComponent.Create(new Vector2(windowClient.ClientRectangle.Width / 2.0f - 120.0f, -windowClient.ClientRectangle.Height / 2.0f)));
 
             var textBuilder = TextComponentBuilderEx.New(world.Core);
             textBuilder.SetFontById(arial12.Id);

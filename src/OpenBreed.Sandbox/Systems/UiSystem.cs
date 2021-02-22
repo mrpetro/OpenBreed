@@ -22,16 +22,19 @@ namespace OpenBreed.Sandbox.Systems
 
         private List<Entity> entities = new List<Entity>();
         private readonly IRenderModule renderingModule;
+        private readonly IInputsMan inputsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public UiSystem(ICore core, IRenderModule renderingModule) : base(core)
+        public UiSystem(ICore core, IRenderModule renderingModule, IInputsMan inputsMan)
         {
+            this.renderingModule = renderingModule;
+            this.inputsMan = inputsMan;
+
             Require<CursorInputComponent>();
             Require<PositionComponent>();
-            this.renderingModule = renderingModule;
         }
 
         #endregion Public Constructors
@@ -42,7 +45,7 @@ namespace OpenBreed.Sandbox.Systems
         {
             base.Initialize(world);
 
-            Core.GetManager<IInputsMan>().MouseMove += Inputs_MouseMove;
+            inputsMan.MouseMove += Inputs_MouseMove;
         }
 
         private void Inputs_MouseMove(object sender, OpenTK.Input.MouseMoveEventArgs e)
