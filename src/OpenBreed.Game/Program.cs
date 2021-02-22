@@ -22,11 +22,12 @@ namespace OpenBreed.Game
                 return;
 
             var gameDbFileName = args[0];
+            var gameFolderPath  = args[1];
             var execFolderPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var gameDbFilePath = Path.Combine(execFolderPath, gameDbFileName);
 
             var gameFactory = new GameFactory();
-            var game = gameFactory.CreateGame(gameDbFilePath);
+            var game = gameFactory.CreateGame(gameDbFilePath, gameFolderPath);
             game.Run();     
         }
 

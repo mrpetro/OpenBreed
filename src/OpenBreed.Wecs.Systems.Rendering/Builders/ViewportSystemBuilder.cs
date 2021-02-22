@@ -28,7 +28,8 @@ namespace OpenBreed.Wecs.Systems.Rendering.Builders
 
         public ViewportSystem Build()
         {
-            return new ViewportSystem(this);
+            return new ViewportSystem(this,
+                                      core.GetManager<IPrimitiveRenderer>());
         }
 
         #endregion Public Methods

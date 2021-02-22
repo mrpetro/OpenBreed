@@ -38,14 +38,16 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         private readonly List<Entity> entities = new List<Entity>();
         private readonly IRenderModule renderModule;
+        private readonly IPrimitiveRenderer primitiveRenderer;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ViewportSystem(ViewportSystemBuilder builder) : base(builder.core)
+        public ViewportSystem(ViewportSystemBuilder builder, IPrimitiveRenderer primitiveRenderer) : base(builder.core)
         {
             this.renderModule = builder.renderModule;
+            this.primitiveRenderer = primitiveRenderer;
 
             Require<ViewportComponent>();
             Require<PositionComponent>();
@@ -246,7 +248,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             if (vpc.DrawBorder)
             {
                 GL.Color4(1.0f, 0.0f, 0.0f, 1.0f);
-                renderModule.DrawUnitRectangle();
+                primitiveRenderer.DrawUnitRectangle();
             }
 
             var cameraEntity = Core.GetManager<IEntityMan>().GetById(vpc.CameraEntityId);
@@ -275,7 +277,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
                 GetVisibleRectangle(camera, transform, out Box2 clipBox);
 
                 GL.Color4(Color4.LightBlue);
-                renderModule.DrawRectangle(clipBox);
+                primitiveRenderer.DrawRectangle(clipBox);
 
                 if (vpc.Clipping)
                 {
@@ -290,7 +292,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
                     // Draw black box
                     GL.Color4(Color4.Black);
-                    renderModule.DrawBox(clipBox);
+                    primitiveRenderer.DrawBox(clipBox);
 
                     GL.ColorMask(true, true, true, true);
                     GL.DepthMask(true);
@@ -310,7 +312,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
                     // Draw black box
                     GL.Color4(Color4.Black);
-                    renderModule.DrawBox(clipBox);
+                    primitiveRenderer.DrawBox(clipBox);
 
                     GL.ColorMask(true, true, true, true);
                     GL.DepthMask(true);
@@ -345,7 +347,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             }
 
             GL.Translate(0, 0, BRIGHTNESS_Z_LEVEL);
-            renderModule.DrawUnitBox();
+            primitiveRenderer.DrawUnitBox();
             GL.Disable(EnableCap.Blend);
         }
 
@@ -353,7 +355,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
         {
             //Draw background for this viewport
             GL.Color4(vpc.BackgroundColor);
-            renderModule.DrawUnitBox();
+            primitiveRenderer.DrawUnitBox();
         }
 
         #endregion Private Methods

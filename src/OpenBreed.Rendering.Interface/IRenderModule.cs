@@ -61,10 +61,6 @@ namespace OpenBreed.Rendering.Interface
         void Draw(float dt);
 
         void OnClientResized(float width, float height);
-        void DrawUnitRectangle();
-        void DrawRectangle(Box2 clipBox);
-        void DrawBox(Box2 clipBox);
-        void DrawUnitBox();
 
         #endregion Public Methods
     }

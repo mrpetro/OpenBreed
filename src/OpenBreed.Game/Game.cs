@@ -34,6 +34,7 @@ namespace OpenBreed.Game
 {
     internal class Game : CoreBase
     {
+        private readonly IManagerCollection manCollection2;
         #region Private Fields
 
         private readonly IScriptMan scriptMan;
@@ -41,7 +42,7 @@ namespace OpenBreed.Game
         private readonly IUnitOfWork unitOfWork;
         private readonly LogConsolePrinter logConsolePrinter;
         private readonly IVariableMan variables;
-        private readonly IDataProvider dataProvider;
+        private readonly IModelsProvider modelsProvider;
         private readonly OpenALModule soundModule;
         private readonly OpenGLModule renderingModule;
         private readonly IEntityMan entities;
@@ -58,6 +59,7 @@ namespace OpenBreed.Game
 
         public Game(IManagerCollection manCollection) : base(manCollection)
         {
+            this.manCollection2 = manCollection;
             this.scriptMan = manCollection.GetManager<IScriptMan>();
             this.database = manCollection.GetManager<IDatabase>();
             this.variables = manCollection.GetManager<IVariableMan>();
@@ -68,7 +70,7 @@ namespace OpenBreed.Game
             this.worlds = manCollection.GetManager<IWorldMan>();
             this.players = manCollection.GetManager<IPlayersMan>();
             this.unitOfWork = manCollection.GetManager<IUnitOfWork>();
-            this.dataProvider = manCollection.GetManager<IDataProvider>();
+            this.modelsProvider = manCollection.GetManager<IModelsProvider>();
             logConsolePrinter = new LogConsolePrinter(Logging);
             logConsolePrinter.StartPrinting();
 
@@ -129,7 +131,9 @@ namespace OpenBreed.Game
 
             GameWorldHelper.Create(this);
 
-            var entryScript = ((DataProvider)dataProvider).Scripts.GetScript("Scripts.Entry.lua");
+            var entryScript = manCollection2.GetManager<ScriptsDataProvider>().GetScript("Scripts.Entry.lua");
+
+            var map = manCollection2.GetManager<MapsDataProvider>().GetMap("CRASH LANDING SITE");
 
             //var templateScript = dataProvider.EntityTemplates.GetEntityTemplate("EntityTemplates.Logo1.lua");
 
@@ -209,7 +213,7 @@ namespace OpenBreed.Game
             scriptMan.Expose("Commands", Commands);
             scriptMan.Expose("Inputs", inputs);
             scriptMan.Expose("Logging", Logging);
-            scriptMan.Expose("DataProvider", dataProvider);
+            scriptMan.Expose("DataProvider", modelsProvider);
             //Scripts.Expose("Players", Players);
 
             //Scripts.RunFile(@"Content\Scripts\start.lua");

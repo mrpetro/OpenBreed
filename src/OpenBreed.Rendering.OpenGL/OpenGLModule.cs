@@ -86,26 +86,6 @@ namespace OpenBreed.Rendering.OpenGL
             Core.Events.Raise(this, new ClientResizedEventArgs(width, height));
         }
 
-        public void DrawUnitRectangle()
-        {
-            RenderTools.DrawUnitRectangle();
-        }
-
-        public void DrawRectangle(Box2 clipBox)
-        {
-            RenderTools.DrawRectangle(clipBox);
-        }
-
-        public void DrawBox(Box2 clipBox)
-        {
-            RenderTools.DrawBox(clipBox);
-        }
-
-        public void DrawUnitBox()
-        {
-            RenderTools.DrawUnitBox();
-        }
-
         #endregion Public Methods
     }
 }

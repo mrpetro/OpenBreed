@@ -60,23 +60,22 @@ namespace OpenBreed.Game
             manCollection.AddSingleton<ISystemFinder>(() => new SystemFinder(manCollection.GetManager<IEntityMan>(),
                                                                              manCollection.GetManager<IWorldMan>()));
 
-            manCollection.AddSingleton<IUnitOfWork>(() => manCollection.GetManager<IDatabase>().CreateUnitOfWork());
-
             manCollection.SetupABFormats();
 
-            manCollection.AddSingleton<IDataProvider>(() => new DataProvider(manCollection.GetManager<IUnitOfWork>(), 
-                                                                             manCollection.GetManager<ILogger>(),
-                                                                             manCollection.GetManager<IVariableMan>(),
-                                                                             manCollection.GetManager<DataFormatMan>()));
+            manCollection.SetupDataProviders();
 
             manCollection.AddGenericPhysicsManagers();
             manCollection.AddOpenALManagers();
             manCollection.AddOpenGLManagers();
         }
 
-        public ICore CreateGame(string gameDbFilePath)
+        public ICore CreateGame(string gameDbFilePath, string gameFolderPath)
         {
-            manCollection.AddSingleton<IDatabase>(() => new XmlDatabaseMan(manCollection.GetManager<IVariableMan>(), gameDbFilePath));
+            var variables = manCollection.GetManager<IVariableMan>();
+
+            variables.RegisterVariable(typeof(string), gameFolderPath, "Cfg.Options.ABTA.GameFolderPath");
+
+            manCollection.AddSingleton<IDatabase>(() => new XmlDatabaseMan(variables, gameDbFilePath));
             return new Game(manCollection);
         }
     }

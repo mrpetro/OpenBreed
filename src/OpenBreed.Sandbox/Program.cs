@@ -67,8 +67,20 @@ namespace OpenBreed.Sandbox
 {
     public class ProgramFactory : CoreFactory
     {
+
+        private DefaultSystemFactory CreateDefaultSystemFactory()
+        {
+            var factory = new DefaultSystemFactory();
+
+            //factory.Register(() => new 
+
+            return factory;
+        }
+
         public ProgramFactory()
         {
+            manCollection.AddSingleton<ISystemFactory>(() => CreateDefaultSystemFactory());
+
             manCollection.AddSingleton<IScriptMan>(() => new LuaScriptMan(manCollection.GetManager<ILogger>()));
 
             manCollection.AddSingleton<IFsmMan>(() => new FsmMan());

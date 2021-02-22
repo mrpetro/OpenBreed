@@ -80,6 +80,7 @@
     <Compile Include="Helpers\TileStamp.cs" />
     <Compile Include="Helpers\Vertex.cs" />
     <Compile Include="Managers\FontMan.cs" />
+    <Compile Include="Managers\PrimitiveRenderer.cs" />
     <Compile Include="Managers\SpriteMan.cs" />
     <Compile Include="Managers\StampMan.cs" />
     <Compile Include="Managers\TextureMan.cs" />

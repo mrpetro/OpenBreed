@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Logging;
+using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL.Managers;
 using System;
@@ -24,6 +25,8 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
             manCollection.AddSingleton<IStampMan>(() => new StampMan());
 
             manCollection.AddSingleton<IFontMan>(() => new FontMan(manCollection.GetManager<ITextureMan>()));
+
+            manCollection.AddSingleton<IPrimitiveRenderer>(() => new PrimitiveRenderer());
         }
     }
 }
