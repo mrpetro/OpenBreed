@@ -1,18 +1,13 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core;
-using OpenBreed.Core.Events;
-using OpenBreed.Core.Helpers;
+﻿using OpenBreed.Core;
 using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Core.Commands;
+using OpenBreed.Wecs.Systems.Core.Events;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs;
-using OpenBreed.Wecs.Systems.Core.Commands;
-using OpenBreed.Wecs.Systems.Core.Events;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
@@ -25,15 +20,15 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        public TimerSystem(ICore core, IEntityMan entityMan)
+        internal TimerSystem(IEntityMan entityMan)
         {
             this.entityMan = entityMan;
             Require<TimerComponent>();
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Methods
 

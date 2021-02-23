@@ -20,7 +20,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Public Constructors
 
-        public TextInputSystem(ICore core)
+        internal TextInputSystem()
         {
             Require<TextCaretComponent>();
             Require<TextDataComponent>();

@@ -1,37 +1,33 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Input.Interface;
-using OpenBreed.Wecs.Components.Common;
+﻿using OpenBreed.Input.Interface;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Control.Commands;
-using OpenBreed.Wecs.Systems.Control.Events;
 using OpenBreed.Wecs.Systems.Control.Inputs;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OpenBreed.Wecs.Systems.Control.Systems
+namespace OpenBreed.Wecs.Systems.Control
 {
     public class AttackControllerSystem : SystemBase, IUpdatableSystem
     {
         #region Private Fields
 
-        private readonly IPlayersMan players;
+        private readonly IPlayersMan playersMan;
         private readonly List<Entity> entities = new List<Entity>();
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        public AttackControllerSystem(ICore core)
+        internal AttackControllerSystem(IPlayersMan playersMan)
         {
-            players = core.GetManager<IPlayersMan>();
+            this.playersMan = playersMan;
 
             Require<AttackInputComponent>();
             Require<AttackControlComponent>();
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Methods
 
@@ -68,7 +64,7 @@ namespace OpenBreed.Wecs.Systems.Control.Systems
             var inputComponent = entity.Get<AttackInputComponent>();
             var control = entity.Get<AttackControlComponent>();
 
-            var player = players.GetById(inputComponent.PlayerId);
+            var player = playersMan.GetById(inputComponent.PlayerId);
 
             var input = player.Inputs.OfType<ButtonPlayerInput>().FirstOrDefault();
 

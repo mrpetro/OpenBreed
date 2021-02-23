@@ -17,11 +17,11 @@ using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
-using OpenBreed.Wecs.Systems.Control.Systems;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Common.Logging;
+using OpenBreed.Wecs.Systems.Control;
 
 namespace OpenBreed.Game
 {
@@ -32,12 +32,12 @@ namespace OpenBreed.Game
             var systemFactory = game.GetManager<ISystemFactory>();
 
             //Action
-            builder.AddSystem(new FollowerSystem(game, game.GetManager<IEntityMan>()));
+            builder.AddSystem(systemFactory.Create<FollowerSystem>());
 
             //builder.AddSystem(game.CreateAnimationSystem().Build());
 
-            builder.AddSystem(new TimerSystem(game, game.GetManager<IEntityMan>()));
-            builder.AddSystem(new FsmSystem(game.GetManager<IFsmMan>(), game.GetManager<ILogger>()));
+            builder.AddSystem(systemFactory.Create<TimerSystem>());
+            builder.AddSystem(systemFactory.Create<FsmSystem>());
 
             ////Audio
             //builder.AddSystem(core.CreateSoundSystem().Build());

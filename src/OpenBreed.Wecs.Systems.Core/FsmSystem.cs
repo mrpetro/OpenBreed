@@ -31,6 +31,7 @@ namespace OpenBreed.Wecs.Systems.Core
         {
             this.fsmMan = fsmMan;
             this.logger = logger;
+
             Require<FsmComponent>();
         }
 

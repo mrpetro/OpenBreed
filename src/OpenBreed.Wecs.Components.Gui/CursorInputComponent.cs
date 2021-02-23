@@ -1,8 +1,4 @@
-﻿
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Components;
-
-namespace OpenBreed.Sandbox.Components
+﻿namespace OpenBreed.Wecs.Components.Gui
 {
     public class CursorInputComponent : IEntityComponent
     {

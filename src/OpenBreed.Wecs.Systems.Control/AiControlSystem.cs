@@ -1,11 +1,8 @@
-﻿using OpenBreed.Wecs.Components.Common;
+﻿using OpenBreed.Core.Helpers;
+using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;
-using OpenBreed.Core.Helpers;
 using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Systems.Control.Builders;
 using OpenBreed.Wecs.Systems.Control.Events;
-using OpenBreed.Wecs.Systems.Core;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -26,15 +23,15 @@ namespace OpenBreed.Wecs.Systems.Control
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        internal AiControlSystem(AiControlSystemBuilder builder)
+        internal AiControlSystem()
         {
             Require<AiControl>();
             Require<PositionComponent>();
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Methods
 

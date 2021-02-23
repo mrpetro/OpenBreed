@@ -35,15 +35,12 @@ using System;
 using System.Drawing;
 using System.Reflection;
 using OpenBreed.Physics.Generic.Shapes;
-using OpenBreed.Wecs.Systems.Control.Builders;
-using OpenBreed.Wecs.Systems.Control.Systems;
 using OpenBreed.Wecs.Systems.Control;
 using OpenBreed.Audio.Interface;
 using OpenBreed.Animation.Generic;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Components.Animation.Xml;
-using OpenBreed.Wecs.Systems.Animation.Builders;
 using OpenBreed.Wecs.Components.Animation;
 using OpenBreed.Wecs.Systems.Animation;
 using OpenBreed.Input.Interface;
@@ -64,6 +61,10 @@ using OpenBreed.Wecs.Systems.Control.Inputs;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Game;
 using OpenBreed.Wecs.Systems.Physics.Extensions;
+using OpenBreed.Wecs.Systems.Core.Extensions;
+using OpenBreed.Wecs.Systems.Control.Extensions;
+using OpenBreed.Wecs.Systems.Animation.Extensions;
+using OpenBreed.Wecs.Systems.Gui.Extensions;
 
 namespace OpenBreed.Sandbox
 {
@@ -102,6 +103,11 @@ namespace OpenBreed.Sandbox
             manCollection.AddOpenGLManagers();
             manCollection.SetupRenderingSystems();
             manCollection.SetupPhysicsSystems();
+            manCollection.SetupCoreSystems();
+            manCollection.SetupControlSystems();
+            manCollection.SetupAnimationSystems();
+            manCollection.SetupGuiSystems();
+            //manCollection.SetupAudioSystems();
         }
 
         public ICore Create()
@@ -199,21 +205,6 @@ namespace OpenBreed.Sandbox
         #endregion Public Properties
 
         #region Public Methods
-
-        public WalkingControlSystemBuilder CreateWalkingControlSystem()
-        {
-            return new WalkingControlSystemBuilder(this);
-        }
-
-        public AiControlSystemBuilder CreateAiControlSystem()
-        {
-            return new AiControlSystemBuilder(this);
-        }
-
-        public AnimationSystemBuilder CreateAnimationSystem()
-        {
-            return new AnimationSystemBuilder(this);
-        }
 
         public override void Load()
         {

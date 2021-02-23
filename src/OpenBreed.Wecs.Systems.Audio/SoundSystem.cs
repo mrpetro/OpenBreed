@@ -4,7 +4,6 @@ using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Systems.Audio.Builders;
 
 namespace OpenBreed.Wecs.Systems.Audio
 {
@@ -18,7 +17,7 @@ namespace OpenBreed.Wecs.Systems.Audio
 
         #region Public Constructors
 
-        internal SoundSystem(SoundSystemBuilder builder)
+        internal SoundSystem()
         {
             components = new List<IEntityComponent>();
         }

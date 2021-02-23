@@ -14,7 +14,7 @@ using OpenBreed.Wecs;
 using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Systems.Control.Commands;
 
-namespace OpenBreed.Wecs.Systems.Control.Systems
+namespace OpenBreed.Wecs.Systems.Control
 {
     public class FollowerSystem : SystemBase, IUpdatableSystem
     {
@@ -27,7 +27,7 @@ namespace OpenBreed.Wecs.Systems.Control.Systems
 
         #region Public Constructors
 
-        public FollowerSystem(ICore core, IEntityMan entityMan)
+        public FollowerSystem(IEntityMan entityMan)
         {
             this.entityMan = entityMan;
 

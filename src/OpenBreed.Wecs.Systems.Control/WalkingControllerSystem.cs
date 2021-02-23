@@ -9,22 +9,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OpenBreed.Wecs.Systems.Control.Systems
+namespace OpenBreed.Wecs.Systems.Control
 {
     public class WalkingControllerSystem : SystemBase, IUpdatableSystem
     {
         #region Private Fields
 
-        private readonly IPlayersMan players;
+        private readonly IPlayersMan playersMan;
         private readonly List<Entity> entities = new List<Entity>();
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public WalkingControllerSystem(ICore core)
+        internal WalkingControllerSystem(IPlayersMan playersMan)
         {
-            players = core.GetManager<IPlayersMan>();
+            this.playersMan = playersMan;
 
             Require<WalkingInputComponent>();
             Require<WalkingControlComponent>();
@@ -67,7 +67,7 @@ namespace OpenBreed.Wecs.Systems.Control.Systems
             var controlComponent = entity.Get<WalkingInputComponent>();
             var walkingControl = entity.Get<WalkingControlComponent>();
 
-            var player = players.GetById(controlComponent.PlayerId);
+            var player = playersMan.GetById(controlComponent.PlayerId);
 
             var input = player.Inputs.OfType<DigitalJoyPlayerInput>().FirstOrDefault();
 

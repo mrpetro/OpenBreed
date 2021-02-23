@@ -14,7 +14,6 @@ using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Helpers;
-using OpenBreed.Sandbox.Systems;
 using OpenBreed.Wecs.Systems.Physics;
 using OpenTK;
 using System;
@@ -30,11 +29,14 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Systems.Control.Commands;
-using OpenBreed.Wecs.Systems.Control.Systems;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Input.Interface;
 using OpenBreed.Fsm;
 using OpenBreed.Common.Logging;
+using OpenBreed.Wecs.Systems.Control;
+using OpenBreed.Wecs.Systems.Animation;
+using OpenBreed.Wecs.Systems.Gui;
+using OpenBreed.Wecs.Components.Gui;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -52,21 +54,20 @@ namespace OpenBreed.Sandbox.Worlds
             // Pathfinding/ AI systems here
 
             //Input
-            builder.AddSystem(core.CreateWalkingControlSystem().Build());
-            builder.AddSystem(core.CreateAiControlSystem().Build());
-            builder.AddSystem(new WalkingControllerSystem(core));
-            builder.AddSystem(new AttackControllerSystem(core));
+            builder.AddSystem(systemFactory.Create<WalkingControlSystem>());
+            builder.AddSystem(systemFactory.Create<AiControlSystem>());
+            builder.AddSystem(systemFactory.Create<WalkingControllerSystem>());
+            builder.AddSystem(systemFactory.Create<AttackControllerSystem>());
 
             //Action
             builder.AddSystem(systemFactory.Create<MovementSystem>());
             builder.AddSystem(systemFactory.Create<DirectionSystem>());
-            builder.AddSystem(new FollowerSystem(core, core.GetManager<IEntityMan>()));
+            builder.AddSystem(systemFactory.Create<FollowerSystem>());
             //builder.AddSystem(new FollowerSystem(core));
             builder.AddSystem(systemFactory.Create<PhysicsSystem>());
-            builder.AddSystem(core.CreateAnimationSystem().Build());
-
-            builder.AddSystem(new TimerSystem(core, core.GetManager<IEntityMan>()));
-            builder.AddSystem(new FsmSystem(core.GetManager<IFsmMan>(), core.GetManager<ILogger>()));
+            builder.AddSystem(systemFactory.Create<AnimationSystem>());
+            builder.AddSystem(systemFactory.Create<TimerSystem>());
+            builder.AddSystem(systemFactory.Create<FsmSystem>());
 
             ////Audio
             //builder.AddSystem(core.CreateSoundSystem().Build());
@@ -77,7 +78,7 @@ namespace OpenBreed.Sandbox.Worlds
             //builder.AddSystem(core.CreateWireframeSystem().Build());
             builder.AddSystem(systemFactory.Create<TextSystem>());
 
-            builder.AddSystem(new UiSystem(core, renderingModule, core.GetManager<IInputsMan>()));
+            builder.AddSystem(systemFactory.Create<UiSystem>());
 
             builder.AddSystem(systemFactory.Create<ViewportSystem>());
         }

@@ -13,6 +13,7 @@ using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Rendering;
+using OpenBreed.Wecs.Systems.Animation;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -30,7 +31,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             //Action
             //builder.AddSystem(core.CreateMovementSystem().Build());
-            builder.AddSystem(core.CreateAnimationSystem().Build());
+            builder.AddSystem(systemFactory.Create<AnimationSystem>());
 
             ////Audio
             //builder.AddSystem(core.CreateSoundSystem().Build());

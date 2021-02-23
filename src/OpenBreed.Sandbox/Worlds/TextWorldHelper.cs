@@ -20,6 +20,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Commands;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Wecs.Systems.Animation;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -53,7 +54,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             //Action
             //builder.AddSystem(core.CreateMovementSystem().Build());
-            builder.AddSystem(core.CreateAnimationSystem().Build());
+            builder.AddSystem(systemFactory.Create<AnimationSystem>());
 
             ////Audio
             //builder.AddSystem(core.CreateSoundSystem().Build());
@@ -65,8 +66,7 @@ namespace OpenBreed.Sandbox.Worlds
             //                               .SetGridVisible(false)
             //                               .Build());
 
-            //builder.AddSystem(core.CreateSpriteSystem().Build());
-            builder.AddSystem(new TextInputSystem(core));
+            builder.AddSystem(systemFactory.Create<TextInputSystem>());
             builder.AddSystem(systemFactory.Create<TextPresenterSystem>());
         }
 

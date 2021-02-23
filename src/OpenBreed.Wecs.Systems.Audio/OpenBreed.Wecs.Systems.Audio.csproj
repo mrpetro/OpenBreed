@@ -61,11 +61,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builders\SoundSystemBuilder.cs" />
+    <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SoundSystem.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
+      <Project>{9894E7F4-7C85-4173-9D05-F50CFD2E4163}</Project>
+      <Name>OpenBreed.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">
       <Project>{95BDF122-FAC8-4AC4-B9A8-B549D942E37D}</Project>
       <Name>OpenBreed.Core</Name>

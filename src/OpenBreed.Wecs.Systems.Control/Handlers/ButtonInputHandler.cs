@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Components.Control;
-using OpenBreed.Wecs.Systems.Control.Systems;
 using OpenTK.Input;
 using System;
 using System.Collections.Generic;

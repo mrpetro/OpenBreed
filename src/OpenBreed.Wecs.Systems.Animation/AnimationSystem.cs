@@ -1,23 +1,17 @@
-﻿using OpenBreed.Core.Commands;
+﻿using OpenBreed.Animation.Generic;
+using OpenBreed.Animation.Interface;
+using OpenBreed.Common.Logging;
 using OpenBreed.Core;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Components.Animation;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Animation.Commands;
+using OpenBreed.Wecs.Systems.Animation.Events;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using OpenBreed.Wecs.Systems;
-using OpenBreed.Animation.Interface;
-using OpenBreed.Common.Logging;
-using OpenBreed.Wecs.Systems.Core;
-using OpenBreed.Wecs.Systems.Animation.Commands;
-using OpenBreed.Wecs.Components.Animation;
-using OpenBreed.Wecs.Systems.Animation.Events;
-using OpenBreed.Animation.Generic;
-using OpenBreed.Wecs.Systems.Animation.Builders;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs;
 
 namespace OpenBreed.Wecs.Systems.Animation
 {
@@ -31,16 +25,17 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        public AnimationSystem(AnimationSystemBuilder builder, IEntityMan entityMan, IAnimMan animMan)
+        internal AnimationSystem(IEntityMan entityMan, IAnimMan animMan)
         {
             this.entityMan = entityMan;
             this.animMan = animMan;
+
             Require<AnimationComponent>();
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Methods
 
@@ -125,50 +120,10 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         #region Private Methods
 
-        private void Animate(Entity entity, float dt)
-        {
-            var ac = entity.Get<AnimationComponent>();
-
-            //Update all animators with delta time
-            for (int i = 0; i < ac.Items.Count; i++)
-                UpdateAnimator(entity, ac.Items[i], dt);
-        }
-
-        private void UpdateAnimator(Entity entity, Animator animator, float dt)
-        {
-            if (animator.Paused)
-                return;
-
-            if (animator.AnimId < 0)
-                return;
-
-            var data = animMan.GetById(animator.AnimId);
-
-            animator.Position += animator.Speed * dt;
-
-            if (animator.Position > data.Length)
-            {
-                if (animator.Loop)
-                    animator.Position = animator.Position - data.Length;
-                else
-                {
-                    Stop(entity, animator);
-                    return;
-                }
-            }
-
-            data.UpdateWithNextFrame(entity, animator);
-        }
-
-        private void RaiseAnimStoppedEvent(Entity entity, Animator animator)
-        {
-            entity.RaiseEvent(new AnimStoppedEventArgs(animator));
-        }
-
         private static bool HandlePauseAnimCommand(ICore core, PauseAnimCommand cmd)
         {
             var system = core.GetManager<ISystemFinder>().GetSystemByEntityId<AnimationSystem>(cmd.EntityId);
-            if(system == null)
+            if (system == null)
                 return false;
 
             var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
@@ -243,6 +198,46 @@ namespace OpenBreed.Wecs.Systems.Animation
             system.Play(entity, animator, animId);
 
             return true;
+        }
+
+        private void Animate(Entity entity, float dt)
+        {
+            var ac = entity.Get<AnimationComponent>();
+
+            //Update all animators with delta time
+            for (int i = 0; i < ac.Items.Count; i++)
+                UpdateAnimator(entity, ac.Items[i], dt);
+        }
+
+        private void UpdateAnimator(Entity entity, Animator animator, float dt)
+        {
+            if (animator.Paused)
+                return;
+
+            if (animator.AnimId < 0)
+                return;
+
+            var data = animMan.GetById(animator.AnimId);
+
+            animator.Position += animator.Speed * dt;
+
+            if (animator.Position > data.Length)
+            {
+                if (animator.Loop)
+                    animator.Position = animator.Position - data.Length;
+                else
+                {
+                    Stop(entity, animator);
+                    return;
+                }
+            }
+
+            data.UpdateWithNextFrame(entity, animator);
+        }
+
+        private void RaiseAnimStoppedEvent(Entity entity, Animator animator)
+        {
+            entity.RaiseEvent(new AnimStoppedEventArgs(animator));
         }
 
         #endregion Private Methods

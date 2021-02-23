@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Helpers;
-using OpenBreed.Wecs.Systems.Control.Builders;
 using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems;
@@ -27,7 +26,7 @@ namespace OpenBreed.Wecs.Systems.Control
 
         #region Public Constructors
 
-        internal WalkingControlSystem(WalkingControlSystemBuilder builder)
+        internal WalkingControlSystem()
         {
             Require<IControlComponent>();
         }

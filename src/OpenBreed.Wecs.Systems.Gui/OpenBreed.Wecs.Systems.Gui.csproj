@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7D41F74D-CAFA-4AD2-A06A-230B50F43D31}</ProjectGuid>
+    <ProjectGuid>{503E0ABA-13D8-4033-A046-448DBFFF4A33}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpenBreed.Wecs.Systems.Animation</RootNamespace>
-    <AssemblyName>OpenBreed.Wecs.Systems.Animation</AssemblyName>
+    <RootNamespace>OpenBreed.Wecs.Systems.Gui</RootNamespace>
+    <AssemblyName>OpenBreed.Wecs.Systems.Gui</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -51,6 +51,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="OpenTK, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\OpenTK.3.0.1\lib\net20\OpenTK.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -61,48 +64,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnimationSystem.cs" />
-    <Compile Include="Commands\PauseAnimCommand.cs" />
-    <Compile Include="Commands\PlayAnimCommand.cs" />
-    <Compile Include="Commands\SetAnimCommand.cs" />
-    <Compile Include="Commands\StopAnimCommand.cs" />
-    <Compile Include="Events\AnimStoppedEventArgs.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UiSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
       <Project>{9894E7F4-7C85-4173-9D05-F50CFD2E4163}</Project>
       <Name>OpenBreed.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Animation.Generic\OpenBreed.Animation.Generic.csproj">
-      <Project>{877FEE86-A92F-4194-A7C3-70E069D1347A}</Project>
-      <Name>OpenBreed.Animation.Generic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Animation.Interface\OpenBreed.Animation.Interface.csproj">
-      <Project>{C064426D-B551-4C55-917B-65FA8F6F2C8D}</Project>
-      <Name>OpenBreed.Animation.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Wecs.Components.Animation\OpenBreed.Wecs.Components.Animation.csproj">
-      <Project>{2AC675A2-6989-4EAA-B8E8-46D50DDB88C6}</Project>
-      <Name>OpenBreed.Wecs.Components.Animation</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">
-      <Project>{95BDF122-FAC8-4AC4-B9A8-B549D942E37D}</Project>
+      <Project>{95bdf122-fac8-4ac4-b9a8-b549d942e37d}</Project>
       <Name>OpenBreed.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Input.Interface\OpenBreed.Input.Interface.csproj">
+      <Project>{7CD20CF7-1CB8-4351-BDA1-6376C7A1D5E2}</Project>
+      <Name>OpenBreed.Input.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Common\OpenBreed.Wecs.Components.Common.csproj">
-      <Project>{983742fe-cb64-4bd9-bb24-90646172a0e2}</Project>
+      <Project>{983742FE-CB64-4BD9-BB24-90646172A0E2}</Project>
       <Name>OpenBreed.Wecs.Components.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Core\OpenBreed.Wecs.Systems.Core.csproj">
-      <Project>{36DBA7C4-EA4A-4F4D-82D3-D586E08346F6}</Project>
-      <Name>OpenBreed.Wecs.Systems.Core</Name>
+    <ProjectReference Include="..\OpenBreed.Wecs.Components.Gui\OpenBreed.Wecs.Components.Gui.csproj">
+      <Project>{9A7295ED-F6E8-4C6A-9B89-F2ADFD501A04}</Project>
+      <Name>OpenBreed.Wecs.Components.Gui</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj">
       <Project>{d22d74e0-7fe4-4278-a93b-9983b788f40e}</Project>
       <Name>OpenBreed.Wecs</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="OpenTK.dll.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -68,6 +68,7 @@
     <Compile Include="Commands\TimerStopCommand.cs" />
     <Compile Include="Events\TimerElapsedEventArgs.cs" />
     <Compile Include="Events\TimerUpdateEventArgs.cs" />
+    <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FsmSystem.cs" />
     <Compile Include="TextInputSystem.cs" />

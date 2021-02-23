@@ -172,6 +172,10 @@
       <Project>{937DDE8D-E618-4620-BEEE-A834DA85FA97}</Project>
       <Name>OpenBreed.Scripting.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Animation\OpenBreed.Wecs.Systems.Animation.csproj">
+      <Project>{7d41f74d-cafa-4ad2-a06a-230b50f43d31}</Project>
+      <Name>OpenBreed.Wecs.Systems.Animation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs.Systems.Control\OpenBreed.Wecs.Systems.Control.csproj">
       <Project>{CF689601-0842-497F-A05F-B31431697B4E}</Project>
       <Name>OpenBreed.Wecs.Systems.Control</Name>
@@ -179,6 +183,10 @@
     <ProjectReference Include="..\OpenBreed.Wecs.Systems.Core\OpenBreed.Wecs.Systems.Core.csproj">
       <Project>{36DBA7C4-EA4A-4F4D-82D3-D586E08346F6}</Project>
       <Name>OpenBreed.Wecs.Systems.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Gui\OpenBreed.Wecs.Systems.Gui.csproj">
+      <Project>{503e0aba-13d8-4033-a046-448dbfff4a33}</Project>
+      <Name>OpenBreed.Wecs.Systems.Gui</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs.Systems.Physics\OpenBreed.Wecs.Systems.Physics.csproj">
       <Project>{12e847da-be51-4f20-bc87-117491415d8c}</Project>
