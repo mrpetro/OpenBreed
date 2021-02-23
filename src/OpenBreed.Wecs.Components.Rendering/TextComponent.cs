@@ -6,6 +6,7 @@ using OpenTK.Graphics;
 using System;
 using System.Collections.Generic;
 using OpenBreed.Wecs.Components;
+using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Wecs.Components.Rendering
 {
@@ -193,7 +194,7 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         public void SetFont(string fontName, int fontSize)
         {
-            var font = core.GetModule<IRenderModule>().Fonts.Create(fontName, fontSize);
+            var font = core.GetManager<IFontMan>().Create(fontName, fontSize);
             SetFontById(font.Id);
         }
 

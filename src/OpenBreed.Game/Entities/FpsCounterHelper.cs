@@ -15,6 +15,7 @@ using OpenBreed.Wecs;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Commands;
+using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Game.Entities
 {
@@ -22,7 +23,7 @@ namespace OpenBreed.Game.Entities
     {
         public static void AddToWorld(World world)
         {
-            var arial12 = world.Core.GetModule<IRenderModule>().Fonts.Create("ARIAL", 10);
+            var arial12 = world.Core.GetManager<IFontMan>().Create("ARIAL", 10);
 
             var fpsTextEntity = world.Core.GetManager<IEntityMan>().Create();
 

@@ -2,6 +2,7 @@
 using OpenBreed.Rendering.Interface;
 using System;
 using OpenBreed.Wecs.Components;
+using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Wecs.Components.Rendering
 {
@@ -83,7 +84,7 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         public void SetAtlasByName(string atlasName)
         {
-            var atlas = core.GetModule<IRenderModule>().Tiles.GetByAlias(atlasName);
+            var atlas = core.GetManager<ITileMan>().GetByAlias(atlasName);
 
             SetAtlasById(atlas.Id);
         }

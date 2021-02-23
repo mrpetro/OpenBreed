@@ -41,8 +41,6 @@ namespace OpenBreed.Core
 
         public abstract JobMan Jobs { get; }
 
-        public ICoreClient Client { get; protected set; }
-
         #endregion Public Properties
 
         #region Public Methods

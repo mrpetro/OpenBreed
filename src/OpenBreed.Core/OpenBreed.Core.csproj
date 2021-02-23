@@ -88,7 +88,7 @@
     <Compile Include="Extensions\QuaternionExtension.cs" />
     <Compile Include="Extensions\Vector2Extension.cs" />
     <Compile Include="Extensions\Vector3Extension.cs" />
-    <Compile Include="ICoreClient.cs" />
+    <Compile Include="IClientMan.cs" />
     <Compile Include="Managers\IEventsMan.cs" />
     <Compile Include="Managers\ICommandsMan.cs" />
     <Compile Include="IJob.cs" />

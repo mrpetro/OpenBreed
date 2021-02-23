@@ -75,7 +75,7 @@ namespace OpenBreed.Sandbox.Worlds
             //((Program)world.Core).KeyDown += (s, a) => ProcessKey(world, a);
             //((Program)world.Core).KeyPress += (s, a) => AddChar(world, a);
 
-            var windowClient = world.Core.GetManager<ICoreClient>();
+            var windowClient = world.Core.GetManager<IClientMan>();
             var cameraBuilder = new CameraBuilder(world.Core);
             cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);

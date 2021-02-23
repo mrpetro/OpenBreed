@@ -49,6 +49,7 @@ namespace OpenBreed.Game
         private readonly IInputsMan inputs;
         private readonly IAnimMan animations;
         private readonly IWorldMan worlds;
+        private readonly IClientMan clientMan;
         private readonly IEntityFactory entityFactory;
 
         private readonly IPlayersMan players;
@@ -74,12 +75,11 @@ namespace OpenBreed.Game
             logConsolePrinter = new LogConsolePrinter(Logging);
             logConsolePrinter.StartPrinting();
 
+            clientMan = new GameWindowClient(this, 800, 600, "OpenBreed");
             soundModule = new OpenALModule(this);
-            renderingModule = new OpenGLModule(this, Client);
+            renderingModule = new OpenGLModule(this, clientMan);
 
             RegisterModule<IRenderModule>(renderingModule);
-
-            Client = new GameWindowClient(this, 800, 600, "OpenBreed");
         }
 
         #endregion Public Constructors
@@ -99,7 +99,7 @@ namespace OpenBreed.Game
 
         public override void Exit()
         {
-            Client.Exit();
+            clientMan.Exit();
         }
 
         public override void Load()
@@ -151,7 +151,7 @@ namespace OpenBreed.Game
             ViewportSystem.RegisterHandlers(Commands);
             TextSystem.RegisterHandlers(Commands);
 
-            Client.Run();
+            clientMan.Run();
         }
 
         #endregion Public Methods

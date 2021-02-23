@@ -23,19 +23,14 @@ namespace OpenBreed.Rendering.OpenGL
     {
         #region Private Fields
 
-        private readonly ICoreClient client;
+        private readonly IClientMan client;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public OpenGLModule(ICore core, ICoreClient client) : base(core)
+        public OpenGLModule(ICore core, IClientMan client) : base(core)
         {
-            Textures = core.GetManager<ITextureMan>();
-            Tiles = core.GetManager<ITileMan>();
-            Sprites = core.GetManager<ISpriteMan>();
-            Stamps = core.GetManager<IStampMan>();
-            Fonts = core.GetManager<IFontMan>();
             this.client = client;
         }
 
@@ -43,15 +38,7 @@ namespace OpenBreed.Rendering.OpenGL
 
         #region Public Properties
 
-        public ITextureMan Textures { get; }
-
-        public ISpriteMan Sprites { get; }
-
         public IStampMan Stamps { get; }
-
-        public ITileMan Tiles { get; }
-
-        public IFontMan Fonts { get; }
 
         public World ScreenWorld { get; set; }
 

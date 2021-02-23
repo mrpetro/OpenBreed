@@ -13,6 +13,7 @@ using OpenBreed.Animation.Interface;
 using OpenBreed.Wecs.Entities.Xml;
 using OpenBreed.Wecs;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Physics.Interface.Managers;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
@@ -28,7 +29,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         public static void RegisterCollisionPairs(ICore core)
         {
-            var collisionMan = core.GetModule<IPhysicsModule>().Collisions;
+            var collisionMan = core.GetManager<ICollisionMan>();
 
             collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.StaticObstacle, Dynamic2StaticCallback);
         }

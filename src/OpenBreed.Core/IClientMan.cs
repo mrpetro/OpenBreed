@@ -5,7 +5,7 @@ using System.Drawing;
 
 namespace OpenBreed.Core
 {
-    public interface ICoreClient
+    public interface IClientMan
     {
         #region Public Events
 

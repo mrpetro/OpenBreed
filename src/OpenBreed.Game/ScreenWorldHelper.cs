@@ -58,7 +58,7 @@ namespace OpenBreed.Game
 
         public static World CreateWorld(Game game)
         {
-            var windowClient = game.GetManager<ICoreClient>();
+            var windowClient = game.GetManager<IClientMan>();
 
             var builder = game.GetManager<IWorldMan>().Create().SetName("ScreenWorld");
             AddSystems(game, builder);

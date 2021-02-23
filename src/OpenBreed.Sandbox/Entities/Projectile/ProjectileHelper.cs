@@ -23,6 +23,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Commands;
+using OpenBreed.Physics.Interface.Managers;
 
 namespace OpenBreed.Sandbox.Entities.Projectile
 {
@@ -74,7 +75,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
         public static void RegisterCollisionPairs(ICore core)
         {
-            var collisionMan = core.GetModule<IPhysicsModule>().Collisions;
+            var collisionMan = core.GetManager<ICollisionMan>();
 
             collisionMan.RegisterCollisionPair(ColliderTypes.Projectile, ColliderTypes.StaticObstacle, Projectile2StaticObstacle);
         }

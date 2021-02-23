@@ -37,11 +37,6 @@ namespace OpenBreed.Core
         /// </summary>
         IEventsMan Events { get; }
 
-        /// <summary>
-        /// Core client instance
-        /// </summary>
-        ICoreClient Client { get; }
-
         #endregion Public Properties
 
         #region Public Methods

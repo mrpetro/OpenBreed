@@ -11,6 +11,8 @@ using System.Linq;
 using OpenBreed.Wecs.Entities.Builders;
 using OpenBreed.Wecs;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Sandbox.Entities.Builders
 {
@@ -29,11 +31,7 @@ namespace OpenBreed.Sandbox.Entities.Builders
         public WorldBlockBuilder(ICore core) : base(core)
         {
             HasBody = true;
-
-            physics = core.GetModule<IPhysicsModule>();
         }
-
-        private IPhysicsModule physics;
 
         #endregion Public Constructors
 
@@ -46,7 +44,7 @@ namespace OpenBreed.Sandbox.Entities.Builders
 
         public void SetTileAtlas(string atlasAlias)
         {
-            var atlas = Core.GetModule<IRenderModule>().Tiles.GetByAlias(atlasAlias);
+            var atlas = Core.GetManager<ITileMan>().GetByAlias(atlasAlias);
             this.atlasId = atlas.Id;
         }
 
@@ -60,6 +58,7 @@ namespace OpenBreed.Sandbox.Entities.Builders
         public override Entity Build()
         {
             var entity = Core.GetManager<IEntityMan>().Create();
+            var fixtureMan = Core.GetManager<IFixtureMan>();
 
             entity.Add(PositionComponent.Create(pos));
 
@@ -68,7 +67,7 @@ namespace OpenBreed.Sandbox.Entities.Builders
             {
                 var bodyComponentBuilder = BodyComponentBuilderEx.New(Core);
 
-                var fixtureId = physics.Fixturs.GetByAlias("Fixtures/GridCell").Id;
+                var fixtureId = fixtureMan.GetByAlias("Fixtures/GridCell").Id;
 
                 bodyComponentBuilder.SetCofFactor(1.0f);
                 bodyComponentBuilder.SetCorFactor(1.0f);

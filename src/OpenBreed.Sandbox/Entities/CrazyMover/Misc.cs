@@ -11,6 +11,7 @@ using OpenTK.Graphics;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Commands;
+using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Sandbox
 {
@@ -60,7 +61,7 @@ namespace OpenBreed.Sandbox
 
         public static void AddToWorld(World world)
         {
-            var arial12 = world.Core.GetModule<IRenderModule>().Fonts.Create("ARIAL", 10);
+            var arial12 = world.Core.GetManager<IFontMan>().Create("ARIAL", 10);
 
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\CrazyMover\CrazyMover.xml");
             var crazyMover = world.Core.GetManager<IEntityFactory>().Create(entityTemplate);

@@ -51,7 +51,7 @@ namespace OpenBreed.Game
 
             manCollection.AddSingleton<IAnimMan>(() => new AnimMan(manCollection.GetManager<ILogger>()));
 
-            manCollection.AddSingleton<IInputsMan>(() => new InputsMan(manCollection.GetManager<ICoreClient>()));
+            manCollection.AddSingleton<IInputsMan>(() => new InputsMan(manCollection.GetManager<IClientMan>()));
 
             manCollection.AddSingleton<IPlayersMan>(() => new PlayersMan(manCollection.GetManager<ILogger>(),
                                                                          manCollection.GetManager<IInputsMan>()));

@@ -24,6 +24,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Commands;
+using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Sandbox.Entities.Door
 {
@@ -138,7 +139,7 @@ namespace OpenBreed.Sandbox.Entities.Door
 
         public static void CreateStamps(ICore core)
         {
-            var stampBuilder = core.GetModule<IRenderModule>().Stamps.Create();
+            var stampBuilder = core.GetManager<IStampMan>().Create();
 
             stampBuilder.ClearTiles();
             stampBuilder.SetName(STAMP_DOOR_HORIZONTAL_CLOSED);

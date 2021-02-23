@@ -10,7 +10,7 @@ using System.Drawing;
 
 namespace OpenBreed.Game
 {
-    public class GameWindowClient : ICoreClient
+    public class GameWindowClient : IClientMan
     {
         #region Private Fields
 

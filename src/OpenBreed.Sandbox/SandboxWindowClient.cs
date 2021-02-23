@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace OpenBreed.Game
 {
-    public class SandboxWindowClient : ICoreClient
+    public class SandboxWindowClient : IClientMan
     {
         #region Private Fields
 

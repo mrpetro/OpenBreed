@@ -57,7 +57,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         public static World CreateWorld(Program core)
         {
-            var windowClient = core.GetManager<ICoreClient>();
+            var windowClient = core.GetManager<IClientMan>();
             var builder = core.GetManager<IWorldMan>().Create().SetName("ScreenWorld");
             AddSystems(core, builder);
 

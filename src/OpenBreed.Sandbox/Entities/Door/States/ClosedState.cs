@@ -12,6 +12,8 @@ using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Physics.Interface;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -29,7 +31,7 @@ namespace OpenBreed.Sandbox.Components.States
         {
             stampPrefix = "Tiles/Stamps";
 
-            core.GetModule<IPhysicsModule>().Collisions.RegisterCollisionPair(ColliderTypes.DoorOpenTrigger, ColliderTypes.ActorBody, DoorOpenTriggerCallback);
+            core.GetManager<ICollisionMan>().RegisterCollisionPair(ColliderTypes.DoorOpenTrigger, ColliderTypes.ActorBody, DoorOpenTriggerCallback);
         }
 
         #endregion Public Constructors
@@ -55,7 +57,7 @@ namespace OpenBreed.Sandbox.Components.States
 
             var className = entity.Get<ClassComponent>().Name;
             var stateName = entity.Core.GetManager<IFsmMan>().GetStateName(FsmId, Id);
-            var stampId = entity.Core.GetModule<IRenderModule>().Stamps.GetByName($"{stampPrefix}/{className}/{stateName}").Id;
+            var stampId = entity.Core.GetManager<IStampMan>().GetByName($"{stampPrefix}/{className}/{stateName}").Id;
             entity.Core.Commands.Post(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
 
             //STAMP_DOOR_HORIZONTAL_CLOSED = $"{stampPrefix}/{className}/{stateName}";

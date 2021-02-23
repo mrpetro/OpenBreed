@@ -2,6 +2,7 @@
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Wecs.Components;
+using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Wecs.Components.Rendering
 {
@@ -128,7 +129,7 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         public void SetAtlasByName(string atlasName)
         {
-            AtlasId = core.GetModule<IRenderModule>().Sprites.GetByName(atlasName).Id;
+            AtlasId = core.GetManager<ISpriteMan>().GetByName(atlasName).Id;
         }
 
         #endregion Public Methods

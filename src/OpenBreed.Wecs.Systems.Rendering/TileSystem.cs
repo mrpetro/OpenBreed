@@ -187,7 +187,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
         {
             var system = core.GetManager<ISystemFinder>().GetSystemByWorldId<TileSystem>(cmd.WorldId);
 
-            var stamp = core.GetModule<IRenderModule>().Stamps.GetById(cmd.StampId);
+            var stamp = core.GetManager<IStampMan>().GetById(cmd.StampId);
 
             if (stamp == null)
                 return false;

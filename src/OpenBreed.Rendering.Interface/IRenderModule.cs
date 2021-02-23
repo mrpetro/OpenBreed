@@ -23,31 +23,6 @@ namespace OpenBreed.Rendering.Interface
         float Fps { get; }
 
         /// <summary>
-        /// Textures manager
-        /// </summary>
-        ITextureMan Textures { get; }
-
-        /// <summary>
-        /// Sprite manager
-        /// </summary>
-        ISpriteMan Sprites { get; }
-
-        /// <summary>
-        /// Tile manager
-        /// </summary>
-        ITileMan Tiles { get; }
-
-        /// <summary>
-        /// Stamp manager
-        /// </summary>
-        IStampMan Stamps { get; }
-
-        /// <summary>
-        /// Font manager
-        /// </summary>
-        IFontMan Fonts { get; }
-
-        /// <summary>
         /// World from which rendering will start
         /// </summary>
         World ScreenWorld { get; set; }

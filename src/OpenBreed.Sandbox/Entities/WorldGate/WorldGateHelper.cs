@@ -26,6 +26,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Events;
+using OpenBreed.Physics.Interface.Managers;
 
 namespace OpenBreed.Sandbox.Entities.WorldGate
 {
@@ -68,7 +69,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
         public static void RegisterCollisionPairs(ICore core)
         {
-            var collisionMan = core.GetModule<IPhysicsModule>().Collisions;
+            var collisionMan = core.GetManager<ICollisionMan>();
 
             collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.WorldExitTrigger, Actor2TriggerCallback);
             //collisionMan.RegisterCollisionPair(ColliderTypes.WorldExitTrigger, ColliderTypes.ActorBody, Actor2TriggerCallback);

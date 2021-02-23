@@ -17,6 +17,7 @@ using OpenBreed.Wecs;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Commands;
+using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Sandbox.Entities.FpsCounter
 {
@@ -24,8 +25,8 @@ namespace OpenBreed.Sandbox.Entities.FpsCounter
     {
         public static void AddToWorld(World world)
         {
-            var windowClient = world.Core.GetManager<ICoreClient>();
-            var arial12 = world.Core.GetModule<IRenderModule>().Fonts.Create("ARIAL", 10);
+            var windowClient = world.Core.GetManager<IClientMan>();
+            var arial12 = world.Core.GetManager<IFontMan>().Create("ARIAL", 10);
 
             var fpsTextEntity = world.Core.GetManager<IEntityMan>().Create();
 

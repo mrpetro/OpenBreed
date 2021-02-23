@@ -6,6 +6,7 @@ using OpenTK;
 using System;
 using System.Collections.Generic;
 using OpenBreed.Wecs.Components;
+using OpenBreed.Physics.Interface.Managers;
 
 namespace OpenBreed.Wecs.Components.Physics
 {
@@ -168,7 +169,7 @@ namespace OpenBreed.Wecs.Components.Physics
 
         public void AddFixtureByName(string fixtureName)
         {
-            var fixture = core.GetModule<IPhysicsModule>().Fixturs.GetByAlias(fixtureName);
+            var fixture = core.GetManager<IFixtureMan>().GetByAlias(fixtureName);
 
             if (fixture != null)
                 Fixtures.Add(fixture.Id);
