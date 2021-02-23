@@ -34,6 +34,7 @@ using OpenBreed.Wecs.Systems.Control.Systems;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Input.Interface;
 using OpenBreed.Fsm;
+using OpenBreed.Common.Logging;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -57,32 +58,28 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem(new AttackControllerSystem(core));
 
             //Action
-            builder.AddSystem(core.CreateMovementSystem().Build());
-            builder.AddSystem(new DirectionSystem(core, core.GetManager<IEntityMan>()));
+            builder.AddSystem(systemFactory.Create<MovementSystem>());
+            builder.AddSystem(systemFactory.Create<DirectionSystem>());
             builder.AddSystem(new FollowerSystem(core, core.GetManager<IEntityMan>()));
             //builder.AddSystem(new FollowerSystem(core));
-            builder.AddSystem(core.CreatePhysicsSystem().SetGridSize(width, height).Build());
+            builder.AddSystem(systemFactory.Create<PhysicsSystem>());
             builder.AddSystem(core.CreateAnimationSystem().Build());
 
             builder.AddSystem(new TimerSystem(core, core.GetManager<IEntityMan>()));
-            builder.AddSystem(new FsmSystem(core, core.GetManager<IFsmMan>()));
+            builder.AddSystem(new FsmSystem(core.GetManager<IFsmMan>(), core.GetManager<ILogger>()));
 
             ////Audio
             //builder.AddSystem(core.CreateSoundSystem().Build());
 
             //Video
-            builder.AddSystem(core.VideoSystemsFactory.CreateTileSystem().SetGridSize(width, height)
-                                                       .SetLayersNo(1)
-                                                       .SetTileSize(16)
-                                                       .SetGridVisible(true)
-                                                       .Build());
-            builder.AddSystem(core.VideoSystemsFactory.CreateSpriteSystem().Build());
+            builder.AddSystem(systemFactory.Create<TileSystem>());
+            builder.AddSystem(systemFactory.Create<SpriteSystem>());
             //builder.AddSystem(core.CreateWireframeSystem().Build());
             builder.AddSystem(systemFactory.Create<TextSystem>());
 
             builder.AddSystem(new UiSystem(core, renderingModule, core.GetManager<IInputsMan>()));
 
-            builder.AddSystem(core.VideoSystemsFactory.CreateViewportSystem().Build());
+            builder.AddSystem(systemFactory.Create<ViewportSystem>());
         }
 
         public static World CreateGameWorld(Program core, string worldName)

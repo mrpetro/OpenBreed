@@ -21,6 +21,7 @@ using OpenBreed.Wecs.Systems.Control.Systems;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Systems.Rendering;
+using OpenBreed.Common.Logging;
 
 namespace OpenBreed.Game
 {
@@ -36,14 +37,14 @@ namespace OpenBreed.Game
             //builder.AddSystem(game.CreateAnimationSystem().Build());
 
             builder.AddSystem(new TimerSystem(game, game.GetManager<IEntityMan>()));
-            builder.AddSystem(new FsmSystem(game, game.GetManager<IFsmMan>()));
+            builder.AddSystem(new FsmSystem(game.GetManager<IFsmMan>(), game.GetManager<ILogger>()));
 
             ////Audio
             //builder.AddSystem(core.CreateSoundSystem().Build());
 
-            builder.AddSystem(game.VideoSystemsFactory.CreateSpriteSystem().Build());
+            builder.AddSystem(systemFactory.Create<SpriteSystem>());
             builder.AddSystem(systemFactory.Create<TextSystem>());
-            builder.AddSystem(game.VideoSystemsFactory.CreateViewportSystem().Build());
+            builder.AddSystem(systemFactory.Create<ViewportSystem>());
         }
 
         public static World CreateGameWorld(Game game, string worldName)

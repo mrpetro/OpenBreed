@@ -28,7 +28,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Internal Constructors
 
-        public TextPresenterSystem(IFontMan fontMan)
+        internal TextPresenterSystem(IFontMan fontMan)
         {
             this.fontMan = fontMan;
 

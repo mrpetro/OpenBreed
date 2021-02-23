@@ -1,22 +1,16 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Core.Helpers;
+﻿using OpenBreed.Core;
 using OpenBreed.Core.Managers;
+using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Physics;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Physics.Commands;
+using OpenBreed.Wecs.Systems.Physics.Events;
+using OpenBreed.Wecs.Systems.Physics.Helpers;
 using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenBreed.Wecs.Components.Physics;
-using OpenBreed.Wecs.Systems.Physics.Helpers;
-using OpenBreed.Wecs.Systems.Physics.Events;
-using OpenBreed.Wecs.Systems.Physics.Commands;
-using OpenBreed.Physics.Interface;
-using OpenBreed.Physics.Interface.Managers;
-using OpenBreed.Wecs.Systems.Core;
-using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs;
 
 namespace OpenBreed.Wecs.Systems.Physics
 {
@@ -25,9 +19,6 @@ namespace OpenBreed.Wecs.Systems.Physics
         #region Private Fields
 
         private const int CELL_SIZE = 16;
-
-        public IFixtureMan Fixtures { get; }
-        public ICollisionMan Collisions { get; }
 
         private readonly List<DynamicPack> inactiveDynamics = new List<DynamicPack>();
         private readonly List<DynamicPack> activeDynamics = new List<DynamicPack>();
@@ -39,24 +30,27 @@ namespace OpenBreed.Wecs.Systems.Physics
 
         #region Internal Constructors
 
-        internal PhysicsSystem(PhysicsSystemBuilder builder, IEntityMan entityMan, IFixtureMan fixtureMan, ICollisionMan collisionMan)
+        internal PhysicsSystem(IEntityMan entityMan, IFixtureMan fixtureMan, ICollisionMan collisionMan)
         {
             Fixtures = fixtureMan;
             Collisions = collisionMan;
+            this.entityMan = entityMan;
 
             Require<BodyComponent>();
 
-            GridWidth = builder.gridWidth;
-            GridHeight = builder.gridHeight;
+            //TODO: This must not be a constant
+            GridWidth = 128;
+            GridHeight = 128;
 
             InitializeGrid();
-            this.entityMan = entityMan;
         }
 
         #endregion Internal Constructors
 
         #region Public Properties
 
+        public IFixtureMan Fixtures { get; }
+        public ICollisionMan Collisions { get; }
         public int GridWidth { get; }
 
         public int GridHeight { get; }
@@ -93,21 +87,6 @@ namespace OpenBreed.Wecs.Systems.Physics
             UpdateAabbs();
 
             SweepAndPrune(dt);
-        }
-
-        private void UpdateAabb(BodyComponent body, PositionComponent pos)
-        {
-            var fixture = Fixtures.GetById(body.Fixtures.First());
-            body.Aabb = fixture.Shape.GetAabb().Translated(pos.Value);
-        }
-
-        private void UpdateAabbs()
-        {
-            for (int i = 0; i < activeDynamics.Count; i++)
-            {
-                var ad = activeDynamics[i];
-                UpdateAabb(ad.Body, ad.Position);
-            }
         }
 
         public bool TryGetGridIndices(Vector2 point, out int xIndex, out int yIndex)
@@ -215,6 +194,21 @@ namespace OpenBreed.Wecs.Systems.Physics
             }
 
             return false;
+        }
+
+        private void UpdateAabb(BodyComponent body, PositionComponent pos)
+        {
+            var fixture = Fixtures.GetById(body.Fixtures.First());
+            body.Aabb = fixture.Shape.GetAabb().Translated(pos.Value);
+        }
+
+        private void UpdateAabbs()
+        {
+            for (int i = 0; i < activeDynamics.Count; i++)
+            {
+                var ad = activeDynamics[i];
+                UpdateAabb(ad.Body, ad.Position);
+            }
         }
 
         private void SweepAndPrune(float dt)

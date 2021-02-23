@@ -16,6 +16,7 @@ using OpenBreed.Wecs;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Commands;
+using OpenBreed.Wecs.Systems;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -27,8 +28,10 @@ namespace OpenBreed.Sandbox.Worlds
 
         public static void AddSystems(Program core, WorldBuilder builder)
         {
+            var systemFactory = core.GetManager<ISystemFactory>();
+
             //Video
-            builder.AddSystem(core.VideoSystemsFactory.CreateViewportSystem().Build());
+            builder.AddSystem(systemFactory.Create<ViewportSystem>());
             //builder.AddSystem(core.CreateSpriteSystem().Build());
             //builder.AddSystem(core.CreateWireframeSystem().Build());
             //builder.AddSystem(core.CreateTextSystem().Build());

@@ -11,6 +11,7 @@ using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs;
 using OpenBreed.Fsm;
+using OpenBreed.Common.Logging;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
@@ -20,15 +21,16 @@ namespace OpenBreed.Wecs.Systems.Core
 
         private readonly List<Entity> entities = new List<Entity>();
         private readonly IFsmMan fsmMan;
+        private readonly ILogger logger;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public FsmSystem(ICore core, IFsmMan fsmMan)
+        public FsmSystem(IFsmMan fsmMan, ILogger logger)
         {
             this.fsmMan = fsmMan;
-
+            this.logger = logger;
             Require<FsmComponent>();
         }
 

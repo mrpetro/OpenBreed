@@ -1,23 +1,17 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core;
-using OpenBreed.Wecs.Components.Common;
+﻿using OpenBreed.Core;
 using OpenBreed.Core.Extensions;
-using OpenBreed.Core.Helpers;
 using OpenBreed.Core.Managers;
+using OpenBreed.Rendering.Interface;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Rendering.Commands;
-using OpenBreed.Wecs.Systems;
+using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System.Collections.Generic;
 using System.Linq;
-using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Rendering.Interface;
-using OpenBreed.Wecs.Systems.Rendering.Events;
-using OpenBreed.Wecs.Systems.Rendering.Builders;
-using OpenBreed.Wecs.Systems.Core;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
@@ -37,18 +31,16 @@ namespace OpenBreed.Wecs.Systems.Rendering
         private const float BRIGHTNESS_Z_LEVEL = 50.0f;
 
         private readonly List<Entity> entities = new List<Entity>();
-        private readonly ICore core;
         private readonly IEntityMan entityMan;
         private readonly IPrimitiveRenderer primitiveRenderer;
         private readonly ICoreClient windowClient;
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        public ViewportSystem(ICore core, IEntityMan entityMan, IPrimitiveRenderer primitiveRenderer, ICoreClient windowClient)
+        internal ViewportSystem(IEntityMan entityMan, IPrimitiveRenderer primitiveRenderer, ICoreClient windowClient)
         {
-            this.core = core;
             this.entityMan = entityMan;
             this.primitiveRenderer = primitiveRenderer;
             this.windowClient = windowClient;
@@ -56,7 +48,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
             Require<PositionComponent>();
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Methods
 
@@ -243,7 +235,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
             //Apply viewport transformation matrix
             var transform = GetViewportTransform(pos, vpc);
             GL.MultMatrix(ref transform);
-
 
             if (vpc.DrawBackgroud)
                 DrawBackground(vpc);

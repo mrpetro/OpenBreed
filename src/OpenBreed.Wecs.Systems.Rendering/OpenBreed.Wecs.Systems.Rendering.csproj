@@ -66,9 +66,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builders\SpriteSystemBuilder.cs" />
-    <Compile Include="Builders\ViewportSystemBuilder.cs" />
-    <Compile Include="Builders\TileSystemBuilder.cs" />
     <Compile Include="Commands\CameraFollowCommand.cs" />
     <Compile Include="Commands\PutStampCommand.cs" />
     <Compile Include="Commands\SpriteOffCommand.cs" />
@@ -88,7 +85,6 @@
     <Compile Include="TextPresenterSystem.cs" />
     <Compile Include="TextSystem.cs" />
     <Compile Include="TileSystem.cs" />
-    <Compile Include="VideoSystemsFactory.cs" />
     <Compile Include="ViewportSystem.cs" />
     <Compile Include="WireframeSystem.cs" />
   </ItemGroup>

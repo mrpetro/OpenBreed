@@ -1,35 +1,26 @@
-﻿using OpenBreed.Core;
+﻿using OpenBreed.Core.Extensions;
 using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Core.Extensions;
-using OpenBreed.Core.Helpers;
-using OpenBreed.Wecs;
-using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Systems.Core;
+using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Physics.Events;
-using OpenTK;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenBreed.Wecs.Entities;
 
 namespace OpenBreed.Wecs.Systems.Physics
 {
     public class DirectionSystem : SystemBase, IUpdatableSystem
     {
-        private const float FLOOR_FRICTION = 1.0f;
-
         #region Private Fields
+
+        private const float FLOOR_FRICTION = 1.0f;
 
         private readonly List<int> entities = new List<int>();
         private readonly IEntityMan entityMan;
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        public DirectionSystem(ICore core, IEntityMan entityMan)
+        internal DirectionSystem(IEntityMan entityMan)
         {
             this.entityMan = entityMan;
 
@@ -38,7 +29,7 @@ namespace OpenBreed.Wecs.Systems.Physics
             Require<AngularThrustComponent>();
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Methods
 

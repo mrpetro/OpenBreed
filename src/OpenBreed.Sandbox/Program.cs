@@ -16,7 +16,6 @@ using OpenBreed.Wecs.Components.Rendering.Xml;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.OpenGL;
 using OpenBreed.Wecs.Systems.Rendering;
-using OpenBreed.Wecs.Systems.Rendering.Builders;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
 using OpenBreed.Sandbox.Entities.Button;
@@ -64,6 +63,7 @@ using OpenBreed.Wecs.Systems.Control.Handlers;
 using OpenBreed.Wecs.Systems.Control.Inputs;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Game;
+using OpenBreed.Wecs.Systems.Physics.Extensions;
 
 namespace OpenBreed.Sandbox
 {
@@ -101,6 +101,7 @@ namespace OpenBreed.Sandbox
             manCollection.AddOpenALManagers();
             manCollection.AddOpenGLManagers();
             manCollection.SetupRenderingSystems();
+            manCollection.SetupPhysicsSystems();
         }
 
         public ICore Create()
@@ -112,10 +113,6 @@ namespace OpenBreed.Sandbox
     public class Program : CoreBase
     {
         #region Private Fields
-
-        internal VideoSystemsFactory VideoSystemsFactory { get; }
-        internal PhysicsSystemsFactory PhysicsSystemsFactory { get; }
-
 
         private readonly IScriptMan scriptMan;
         private readonly LogConsolePrinter logConsolePrinter;
@@ -166,10 +163,6 @@ namespace OpenBreed.Sandbox
             Physics = new PhysicsModule(this);
             Sounds = new OpenALModule(this);
 
-            VideoSystemsFactory = new VideoSystemsFactory(this);
-            PhysicsSystemsFactory = new PhysicsSystemsFactory(this);
-
-
             RegisterModule<IRenderModule>(renderingModule);
             RegisterModule<IPhysicsModule>(Physics);
             RegisterModule<IAudioModule>(Sounds);
@@ -217,19 +210,9 @@ namespace OpenBreed.Sandbox
             return new AiControlSystemBuilder(this);
         }
 
-        public PhysicsSystemBuilder CreatePhysicsSystem()
-        {
-            return new PhysicsSystemBuilder(this);
-        }
-
         public AnimationSystemBuilder CreateAnimationSystem()
         {
             return new AnimationSystemBuilder(this);
-        }
-
-        public MovementSystemBuilder CreateMovementSystem()
-        {
-            return new MovementSystemBuilder(this);
         }
 
         public override void Load()

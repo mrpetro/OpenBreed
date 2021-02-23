@@ -79,10 +79,6 @@ namespace OpenBreed.Game
 
             RegisterModule<IRenderModule>(renderingModule);
 
-            VideoSystemsFactory = new VideoSystemsFactory(this);
-            PhysicsSystemsFactory = new PhysicsSystemsFactory(this);
-
-
             Client = new GameWindowClient(this, 800, 600, "OpenBreed");
         }
 
@@ -96,9 +92,6 @@ namespace OpenBreed.Game
         #endregion Public Properties
 
         #region Internal Properties
-
-        internal VideoSystemsFactory VideoSystemsFactory { get; }
-        internal PhysicsSystemsFactory PhysicsSystemsFactory { get; }
 
         #endregion Internal Properties
 

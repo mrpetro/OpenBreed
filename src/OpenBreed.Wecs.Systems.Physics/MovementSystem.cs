@@ -1,30 +1,25 @@
-﻿using OpenTK;
+﻿using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Physics;
+using OpenBreed.Wecs.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Components.Physics;
-using OpenBreed.Wecs.Systems.Core;
-using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs;
-using OpenBreed.Wecs.Entities;
 
 namespace OpenBreed.Wecs.Systems.Physics
 {
     public class MovementSystem : SystemBase, IUpdatableSystem
     {
-        private const float FLOOR_FRICTION = 0.2f;
-
         #region Private Fields
+
+        private const float FLOOR_FRICTION = 0.2f;
 
         private readonly List<int> entities = new List<int>();
         private readonly IEntityMan entityMan;
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        public MovementSystem(MovementSystemBuilder builder, IEntityMan entityMan)
+        internal MovementSystem(IEntityMan entityMan)
         {
             this.entityMan = entityMan;
 
@@ -34,7 +29,7 @@ namespace OpenBreed.Wecs.Systems.Physics
             Require<BodyComponent>();
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Methods
 

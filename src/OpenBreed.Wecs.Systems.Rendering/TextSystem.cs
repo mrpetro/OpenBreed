@@ -11,7 +11,6 @@ using System.Linq;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Systems.Rendering.Commands;
-using OpenBreed.Wecs.Systems.Rendering.Builders;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Entities;

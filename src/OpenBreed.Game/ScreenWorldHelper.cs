@@ -32,7 +32,7 @@ namespace OpenBreed.Game
             var systemFactory = game.GetManager<ISystemFactory>();
 
             //Video
-            builder.AddSystem(game.VideoSystemsFactory.CreateViewportSystem().Build());
+            builder.AddSystem(systemFactory.Create<ViewportSystem>());
             //builder.AddSystem(core.CreateSpriteSystem().Build());
             //builder.AddSystem(core.CreateWireframeSystem().Build());
             builder.AddSystem(systemFactory.Create<TextSystem>());

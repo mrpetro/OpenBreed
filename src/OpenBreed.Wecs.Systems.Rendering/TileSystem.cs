@@ -13,7 +13,6 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Core;
-using OpenBreed.Wecs.Systems.Rendering.Builders;
 using OpenBreed.Wecs.Systems.Core;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Entities;
@@ -41,16 +40,17 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Constructors
 
-        internal TileSystem(TileSystemBuilder builder, ITileMan tileMan)
+        internal TileSystem(ITileMan tileMan)
         {
             Require<TileComponent>();
             Require<PositionComponent>();
 
-            GridWidth = builder.gridWidth;
-            GridHeight = builder.gridHeight;
-            LayersNo = builder.layersNo;
-            TileSize = builder.tileSize;
-            GridVisible = builder.gridVisible;
+            //TODO: This can't be constant
+            GridWidth = 128;
+            GridHeight = 128;
+            LayersNo = 1;
+            TileSize = 16.0f;
+            GridVisible = true;
 
             InitializeTilesMap();
             this.tileMan = tileMan;

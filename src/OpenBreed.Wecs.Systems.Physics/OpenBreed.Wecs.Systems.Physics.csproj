@@ -64,11 +64,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builders\MovementSystemBuilder.cs" />
-    <Compile Include="Builders\PhysicsSystemBuilder.cs" />
     <Compile Include="Commands\BodyOffCommand.cs" />
     <Compile Include="Commands\BodyOnCommand.cs" />
     <Compile Include="DirectionSystem.cs" />
+    <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="Helpers\Box2Extensions.cs" />
     <Compile Include="Helpers\CollisionChecker.cs" />
     <Compile Include="Helpers\DynamicHelper.cs" />
@@ -81,9 +80,12 @@
     <Compile Include="MovementSystem.cs" />
     <Compile Include="PhysicsSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PhysicsSystemsFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
+      <Project>{9894E7F4-7C85-4173-9D05-F50CFD2E4163}</Project>
+      <Name>OpenBreed.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Physics.Generic\OpenBreed.Physics.Generic.csproj">
       <Project>{C9F84CE7-732C-4A31-89DC-B87E3D9685BE}</Project>
       <Name>OpenBreed.Physics.Generic</Name>

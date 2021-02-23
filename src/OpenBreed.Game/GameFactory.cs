@@ -22,6 +22,7 @@ using OpenBreed.Scripting.Interface;
 using OpenBreed.Scripting.Lua;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;
+using OpenBreed.Wecs.Systems.Physics.Extensions;
 using OpenBreed.Wecs.Systems.Rendering.Extensions;
 using OpenBreed.Wecs.Worlds;
 using System;
@@ -71,6 +72,7 @@ namespace OpenBreed.Game
             manCollection.AddOpenGLManagers();
 
             manCollection.SetupRenderingSystems();
+            manCollection.SetupPhysicsSystems();
         }
 
         public ICore CreateGame(string gameDbFilePath, string gameFolderPath)
