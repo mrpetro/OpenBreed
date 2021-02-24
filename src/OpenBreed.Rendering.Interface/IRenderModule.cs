@@ -37,6 +37,8 @@ namespace OpenBreed.Rendering.Interface
 
         void OnClientResized(float width, float height);
 
+        void Subscribe<T>(Action<object, T> callback) where T : EventArgs;
+
         #endregion Public Methods
     }
 }

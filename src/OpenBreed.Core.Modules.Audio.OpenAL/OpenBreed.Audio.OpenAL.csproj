@@ -69,7 +69,6 @@
   <ItemGroup>
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="Managers\SoundMan.cs" />
-    <Compile Include="OpenALModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

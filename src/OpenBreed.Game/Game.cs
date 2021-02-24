@@ -5,7 +5,6 @@ using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
-using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Database.Interface;
 using OpenBreed.Fsm;
 using OpenBreed.Fsm.Xml;
@@ -43,7 +42,6 @@ namespace OpenBreed.Game
         private readonly LogConsolePrinter logConsolePrinter;
         private readonly IVariableMan variables;
         private readonly IModelsProvider modelsProvider;
-        private readonly OpenALModule soundModule;
         private readonly OpenGLModule renderingModule;
         private readonly IEntityMan entities;
         private readonly IInputsMan inputs;
@@ -76,8 +74,10 @@ namespace OpenBreed.Game
             logConsolePrinter.StartPrinting();
 
             clientMan = new GameWindowClient(this, 800, 600, "OpenBreed");
-            soundModule = new OpenALModule(this);
-            renderingModule = new OpenGLModule(this, clientMan);
+
+            renderingModule = new OpenGLModule(manCollection.GetManager<IEventsMan>(),
+                                               manCollection.GetManager<IClientMan>(),
+                                               manCollection.GetManager<IWorldMan>());
 
             RegisterModule<IRenderModule>(renderingModule);
         }

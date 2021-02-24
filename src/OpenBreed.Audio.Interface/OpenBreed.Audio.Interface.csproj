@@ -61,7 +61,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IAudioModule.cs" />
     <Compile Include="ISound.cs" />
     <Compile Include="Managers\ISoundMan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

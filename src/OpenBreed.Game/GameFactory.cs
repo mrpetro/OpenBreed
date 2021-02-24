@@ -8,7 +8,6 @@ using OpenBreed.Common.Formats;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
-using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Xml;
 using OpenBreed.Fsm;

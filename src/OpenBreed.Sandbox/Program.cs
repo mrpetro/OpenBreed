@@ -6,7 +6,6 @@ using OpenBreed.Common;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
-using OpenBreed.Core.Modules.Audio;
 using OpenBreed.Fsm;
 using OpenBreed.Fsm.Xml;
 using OpenBreed.Game;
@@ -169,18 +168,17 @@ namespace OpenBreed.Sandbox
 
             Jobs = new JobMan(this);
 
-            renderingModule = new OpenGLModule(this, clientMan);
-            Sounds = new OpenALModule(this);
+            renderingModule = new OpenGLModule(manCollection.GetManager<IEventsMan>(),
+                                               manCollection.GetManager<IClientMan>(),
+                                               manCollection.GetManager<IWorldMan>());
 
             RegisterModule<IRenderModule>(renderingModule);
-            RegisterModule<IAudioModule>(Sounds);
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public IAudioModule Sounds { get; }
 
         public IEntityFactory EntityFactory { get; }
         public IAnimMan Animations { get; }
