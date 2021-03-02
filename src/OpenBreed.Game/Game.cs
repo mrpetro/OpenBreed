@@ -10,6 +10,7 @@ using OpenBreed.Fsm;
 using OpenBreed.Fsm.Xml;
 using OpenBreed.Input.Interface;
 using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Components.Animation;
@@ -42,7 +43,7 @@ namespace OpenBreed.Game
         private readonly LogConsolePrinter logConsolePrinter;
         private readonly IVariableMan variables;
         private readonly IModelsProvider modelsProvider;
-        private readonly OpenGLModule renderingModule;
+        private readonly IRenderingMan renderingMan;
         private readonly IEntityMan entities;
         private readonly IInputsMan inputs;
         private readonly IAnimMan animations;
@@ -70,16 +71,12 @@ namespace OpenBreed.Game
             this.players = manCollection.GetManager<IPlayersMan>();
             this.unitOfWork = manCollection.GetManager<IUnitOfWork>();
             this.modelsProvider = manCollection.GetManager<IModelsProvider>();
+            this.renderingMan = manCollection.GetManager<IRenderingMan>();
+
             logConsolePrinter = new LogConsolePrinter(Logging);
             logConsolePrinter.StartPrinting();
 
             clientMan = new GameWindowClient(this, 800, 600, "OpenBreed");
-
-            renderingModule = new OpenGLModule(manCollection.GetManager<IEventsMan>(),
-                                               manCollection.GetManager<IClientMan>(),
-                                               manCollection.GetManager<IWorldMan>());
-
-            RegisterModule<IRenderModule>(renderingModule);
         }
 
         #endregion Public Constructors
@@ -111,7 +108,7 @@ namespace OpenBreed.Game
 
             var entity = entityFactory.Create(entityTemplate);
 
-            renderingModule.ScreenWorld = ScreenWorldHelper.CreateWorld(this);
+            renderingMan.ScreenWorld = ScreenWorldHelper.CreateWorld(this);
 
             GameWorldHelper.Create(this);
 
@@ -130,7 +127,7 @@ namespace OpenBreed.Game
 
             worlds.Cleanup();
 
-            renderingModule.Cleanup();
+            renderingMan.Cleanup();
 
             //Players.ResetInputs();
 

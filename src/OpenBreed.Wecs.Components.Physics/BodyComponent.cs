@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Core.Modules;
 using OpenBreed.Physics.Interface;
 using OpenTK;
 using System;

@@ -3,8 +3,8 @@ using OpenBreed.Core;
 
 //using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Managers;
-using OpenBreed.Core.Modules;
 using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Systems.Rendering.Events;
 using OpenBreed.Wecs.Worlds;
@@ -13,9 +13,9 @@ using OpenTK.Graphics.OpenGL;
 using System;
 using System.Linq;
 
-namespace OpenBreed.Rendering.OpenGL
+namespace OpenBreed.Rendering.OpenGL.Managers
 {
-    public class OpenGLModule : BaseCoreModule, IRenderModule
+    public class RenderingMan : IRenderingMan
     {
         #region Private Fields
 
@@ -28,7 +28,7 @@ namespace OpenBreed.Rendering.OpenGL
 
         #region Public Constructors
 
-        public OpenGLModule(IEventsMan eventsMan, IClientMan client, IWorldMan worldMan)
+        public RenderingMan(IEventsMan eventsMan, IClientMan client, IWorldMan worldMan)
         {
             this.eventsMan = eventsMan;
             this.client = client;
@@ -62,6 +62,7 @@ namespace OpenBreed.Rendering.OpenGL
             try
             {
                 GL.PushMatrix();
+
                 ScreenWorld?.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(ClipBox, 0, dt));
             }
             finally

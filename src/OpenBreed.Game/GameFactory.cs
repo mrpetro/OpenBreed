@@ -12,6 +12,7 @@ using OpenBreed.Database.Interface;
 using OpenBreed.Database.Xml;
 using OpenBreed.Fsm;
 using OpenBreed.Input.Generic;
+using OpenBreed.Input.Generic.Extensions;
 using OpenBreed.Input.Interface;
 using OpenBreed.Physics.Generic;
 using OpenBreed.Physics.Generic.Extensions;
@@ -20,6 +21,7 @@ using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Scripting.Lua;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
 using OpenBreed.Wecs.Systems.Control.Extensions;
@@ -40,8 +42,6 @@ namespace OpenBreed.Game
     {
         public GameFactory()
         {
-            manCollection.AddSingleton<ISystemFactory>(() => new DefaultSystemFactory());
-
             manCollection.AddSingleton<IVariableMan>(() => new VariableMan(manCollection.GetManager<ILogger>()));
 
             manCollection.AddSingleton<IScriptMan>(() => new LuaScriptMan(manCollection.GetManager<ILogger>()));
@@ -50,30 +50,14 @@ namespace OpenBreed.Game
 
             manCollection.AddSingleton<IAnimMan>(() => new AnimMan(manCollection.GetManager<ILogger>()));
 
-            manCollection.AddSingleton<IInputsMan>(() => new InputsMan(manCollection.GetManager<IClientMan>()));
-
-            manCollection.AddSingleton<IPlayersMan>(() => new PlayersMan(manCollection.GetManager<ILogger>(),
-                                                                         manCollection.GetManager<IInputsMan>()));
-
-            manCollection.AddSingleton<IEntityMan>(() => new EntityMan(manCollection.GetManager<ICore>(),
-                                                              manCollection.GetManager<ICommandsMan>()));
-
-
-            manCollection.AddSingleton<IEntityFactory>(() => new EntityFactory(manCollection.GetManager<IEntityMan>()));
-
-            manCollection.AddSingleton<IWorldMan>(() => new WorldMan(manCollection.GetManager<ICore>()));
-
-            manCollection.AddSingleton<ISystemFinder>(() => new SystemFinder(manCollection.GetManager<IEntityMan>(),
-                                                                             manCollection.GetManager<IWorldMan>()));
-
             manCollection.SetupABFormats();
 
             manCollection.SetupDataProviders();
-
-            manCollection.AddGenericPhysicsManagers();
-            manCollection.AddOpenALManagers();
-            manCollection.AddOpenGLManagers();
-
+            manCollection.SetupGenericInputManagers();
+            manCollection.SetupGenericPhysicsManagers();
+            manCollection.SetupOpenALManagers();
+            manCollection.SetupOpenGLManagers();
+            manCollection.SetupWecsManagers();
             manCollection.SetupRenderingSystems();
             manCollection.SetupPhysicsSystems();
             manCollection.SetupCoreSystems();

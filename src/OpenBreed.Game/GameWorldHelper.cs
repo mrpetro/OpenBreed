@@ -52,7 +52,7 @@ namespace OpenBreed.Game
             var builder = game.GetManager<IWorldMan>().Create().SetName(worldName);
             AddSystems(game, builder);
 
-            return builder.Build();
+            return builder.Build(game);
         }
 
         internal static void Create(Game game)
@@ -71,8 +71,10 @@ namespace OpenBreed.Game
             //using (var reader = new TxtFileWorldReader(core, ".\\Content\\Maps\\hub.txt"))
             //    gameWorld = reader.GetWorld();
 
-            game.GetManager<IWorldMan>().Subscribe<EntityAddedEventArgs>(OnEntityAdded);
-            game.GetManager<IWorldMan>().Subscribe<EntityRemovedEventArgs>(OnEntityRemoved);
+            var worldMan = game.GetManager<IWorldMan>();
+            var eventsMan = game.GetManager<IEventsMan>();
+            eventsMan.Subscribe<EntityAddedEventArgs>(worldMan,OnEntityAdded);
+            eventsMan.Subscribe<EntityRemovedEventArgs>(worldMan, OnEntityRemoved);
 
             //var player1 = core.Players.GetByName("P1");
             //player1.AssumeControl(actor);

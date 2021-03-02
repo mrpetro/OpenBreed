@@ -27,7 +27,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Internal Properties
 
-        internal OpenGLModule Module { get; }
+        internal RenderingMan Module { get; }
 
         #endregion Internal Properties
 

@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Wecs.Systems
@@ -13,16 +12,16 @@ namespace OpenBreed.Wecs.Systems
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        public SystemFinder(IEntityMan entityMan,
+        internal SystemFinder(IEntityMan entityMan,
                             IWorldMan worldMan)
         {
             this.entityMan = entityMan;
             this.worldMan = worldMan;
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Methods
 

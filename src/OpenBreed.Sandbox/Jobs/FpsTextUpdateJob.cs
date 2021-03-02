@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Sandbox.Jobs
 {
@@ -42,7 +43,7 @@ namespace OpenBreed.Sandbox.Jobs
 
         public void Update(float dt)
         {
-            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, $"FPS: {entity.Core.GetModule<IRenderModule>().Fps.ToString("0.00")}"));
+            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, $"FPS: {entity.Core.GetManager<IRenderingMan>().Fps.ToString("0.00")}"));
         }
 
         public void Dispose()

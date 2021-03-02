@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Managers;
-using OpenBreed.Core.Modules;
 using OpenBreed.Wecs;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Rendering.Interface.Managers;
@@ -8,12 +7,12 @@ using OpenTK;
 using OpenTK.Graphics;
 using System;
 
-namespace OpenBreed.Rendering.Interface
+namespace OpenBreed.Rendering.Interface.Managers
 {
     /// <summary>
-    /// Core module interface specialized in graphical rendering related work
+    /// Rendering manager interface
     /// </summary>
-    public interface IRenderModule : ICoreModule
+    public interface IRenderingMan
     {
         #region Public Properties
 

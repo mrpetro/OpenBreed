@@ -2,7 +2,6 @@
 using OpenBreed.Core;
 using OpenBreed.Core.Commands;
 using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Core.Modules;
 using OpenBreed.Physics.Generic.Helpers;
 using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Sandbox.Entities.Projectile.States;

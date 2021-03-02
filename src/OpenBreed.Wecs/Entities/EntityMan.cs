@@ -1,16 +1,13 @@
-﻿using OpenBreed.Core.Commands;
-using OpenBreed.Core.Events;
+﻿using OpenBreed.Common.Tools.Collections;
+using OpenBreed.Core;
+using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Commands;
+using OpenBreed.Wecs.Components;
+using OpenBreed.Wecs.Events;
+using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenBreed.Common.Tools.Collections;
-using OpenBreed.Core;
-using OpenBreed.Core.Managers;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Worlds;
-using OpenBreed.Wecs.Components;
-using OpenBreed.Wecs.Commands;
-using OpenBreed.Wecs.Events;
 
 namespace OpenBreed.Wecs.Entities
 {
@@ -23,15 +20,15 @@ namespace OpenBreed.Wecs.Entities
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        public EntityMan(ICore core, ICommandsMan commandsMan)
+        internal EntityMan(ICore core, ICommandsMan commandsMan)
         {
             Core = core;
             this.commandsMan = commandsMan;
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
 
@@ -76,20 +73,20 @@ namespace OpenBreed.Wecs.Entities
 
         public void Destroy(Entity entity)
         {
-            Core.GetManager<IWorldMan>().Subscribe<EntityRemovedEventArgs>(OnEntityRemovedEventArgs);
-            entity.Core.Commands.Post(new RemoveEntityCommand(entity.World.Id, entity.Id));
+            //worldMan.Subscribe<EntityRemovedEventArgs>(OnEntityRemovedEventArgs);
+            commandsMan.Post(new RemoveEntityCommand(entity.World.Id, entity.Id));
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private void OnEntityRemovedEventArgs(object sender, EntityRemovedEventArgs e)
-        {
-            var entity = Core.GetManager<IEntityMan>().GetById(e.EntityId);
-            Core.GetManager<IWorldMan>().Unsubscribe<EntityRemovedEventArgs>(OnEntityRemovedEventArgs);
-            entities.RemoveById(entity.Id);
-        }
+        //private void OnEntityRemovedEventArgs(object sender, EntityRemovedEventArgs e)
+        //{
+        //    var entity = GetById(e.EntityId);
+        //    worldMan.Unsubscribe<EntityRemovedEventArgs>(OnEntityRemovedEventArgs);
+        //    entities.RemoveById(entity.Id);
+        //}
 
         #endregion Private Methods
     }

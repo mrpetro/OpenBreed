@@ -2,7 +2,6 @@
 using OpenBreed.Wecs.Components.Physics;
 using OpenBreed.Core;
 using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Core.Modules;
 using OpenBreed.Physics.Generic;
 using OpenBreed.Physics.Generic.Helpers;
 using OpenBreed.Physics.Interface;

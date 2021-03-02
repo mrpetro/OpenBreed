@@ -1,5 +1,4 @@
 ﻿using OpenBreed.Wecs.Components;
-using OpenBreed.Wecs.Entities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -27,14 +26,14 @@ namespace OpenBreed.Wecs.Entities
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        public EntityFactory(IEntityMan entityMan)
+        internal EntityFactory(IEntityMan entityMan)
         {
             this.entityMan = entityMan;
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Methods
 

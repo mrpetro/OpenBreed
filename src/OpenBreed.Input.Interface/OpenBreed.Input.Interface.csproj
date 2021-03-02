@@ -65,7 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IInputHandler.cs" />
-    <Compile Include="IInputModule.cs" />
     <Compile Include="IInputsMan.cs" />
     <Compile Include="IPlayer.cs" />
     <Compile Include="IPlayerInput.cs" />

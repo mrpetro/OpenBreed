@@ -56,16 +56,16 @@ namespace OpenBreed.Input.Generic
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        public InputsMan(IClientMan clientMan)
+        internal InputsMan(IClientMan clientMan)
         {
             this.clientMan = clientMan;
 
             KeyboardStateChanged += InputsMan_KeyboardStateChanged;
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Events
 

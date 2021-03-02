@@ -1,4 +1,5 @@
-﻿using OpenBreed.Core;
+﻿using OpenBreed.Common.Logging;
+using OpenBreed.Core;
 using OpenBreed.Wecs.Systems;
 using System;
 using System.Collections.Generic;
@@ -18,12 +19,13 @@ namespace OpenBreed.Wecs.Worlds
 
         internal string name;
         internal Dictionary<Type, ISystem> systems = new Dictionary<Type, ISystem>();
+        private readonly IWorldMan worldMan;
 
         #endregion Internal Fields
 
         #region Private Fields
 
-        internal ICore core;
+        private readonly ILogger logger;
         private Dictionary<int, Action<World, int, object[]>> codesToActions = new Dictionary<int, Action<World, int, object[]>>();
 
         private List<Tuple<int, object[]>> actions = new List<Tuple<int, object[]>>();
@@ -32,9 +34,10 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Public Constructors
 
-        public WorldBuilder(ICore core)
+        public WorldBuilder(IWorldMan worldMan, ILogger logger)
         {
-            this.core = core;
+            this.worldMan = worldMan;
+            this.logger = logger;
         }
 
         public void AddSystem(ISystem system)
@@ -60,16 +63,16 @@ namespace OpenBreed.Wecs.Worlds
                 if (codesToActions.TryGetValue(action.Item1, out actionHandler))
                     actionHandler.Invoke(world, action.Item1, action.Item2);
                 else
-                    core.Logging.Warning($"Unsupported action code '{action.Item1}'");
+                    logger.Warning($"Unsupported action code '{action.Item1}'");
             }
         }
 
-        public World Build()
+        public World Build(ICore core)
         {
-            if(core.GetManager<IWorldMan>().GetByName(name) != null)
+            if(worldMan.GetByName(name) != null)
                 throw new InvalidOperationException($"World with name '{name}' already exist.");
 
-            return new World(this); 
+            return new World(this, core); 
         }
 
         public WorldBuilder SetName(string name)

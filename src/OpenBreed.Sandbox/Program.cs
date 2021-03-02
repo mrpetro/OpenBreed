@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Animation.Generic;
 using OpenBreed.Animation.Interface;
-using OpenBreed.Audio.Interface;
 using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Common;
 using OpenBreed.Common.Logging;
@@ -10,15 +9,12 @@ using OpenBreed.Fsm;
 using OpenBreed.Fsm.Xml;
 using OpenBreed.Game;
 using OpenBreed.Input.Generic;
+using OpenBreed.Input.Generic.Extensions;
 using OpenBreed.Input.Interface;
-using OpenBreed.Physics.Generic;
 using OpenBreed.Physics.Generic.Extensions;
 using OpenBreed.Physics.Generic.Shapes;
-using OpenBreed.Physics.Interface;
 using OpenBreed.Physics.Interface.Managers;
-using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
-using OpenBreed.Rendering.OpenGL;
 using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Actor;
@@ -32,6 +28,7 @@ using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Scripting.Lua;
+using OpenBreed.Scripting.Lua.Extensions;
 using OpenBreed.Wecs.Components.Animation;
 using OpenBreed.Wecs.Components.Animation.Xml;
 using OpenBreed.Wecs.Components.Common;
@@ -42,6 +39,7 @@ using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Components.Rendering.Xml;
 using OpenBreed.Wecs.Components.Xml;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Animation;
 using OpenBreed.Wecs.Systems.Animation.Extensions;
@@ -70,34 +68,19 @@ namespace OpenBreed.Sandbox
 
         public ProgramFactory()
         {
-            manCollection.AddSingleton<ISystemFactory>(() => new DefaultSystemFactory());
 
             manCollection.AddSingleton<IClientMan>(() => new SandboxWindowClient(800, 600, "OpenBreed"));
-
-            manCollection.AddSingleton<IScriptMan>(() => new LuaScriptMan(manCollection.GetManager<ILogger>()));
 
             manCollection.AddSingleton<IFsmMan>(() => new FsmMan());
 
             manCollection.AddSingleton<IAnimMan>(() => new AnimMan(manCollection.GetManager<ILogger>()));
 
-            manCollection.AddSingleton<IInputsMan>(() => new InputsMan(manCollection.GetManager<IClientMan>()));
-
-            manCollection.AddSingleton<IPlayersMan>(() => new PlayersMan(manCollection.GetManager<ILogger>(),
-                                                                         manCollection.GetManager<IInputsMan>()));
-
-            manCollection.AddSingleton<IEntityMan>(() => new EntityMan(manCollection.GetManager<ICore>(),
-                                                              manCollection.GetManager<ICommandsMan>()));
-
-            manCollection.AddSingleton<IEntityFactory>(() => new EntityFactory(manCollection.GetManager<IEntityMan>()));
-
-            manCollection.AddSingleton<IWorldMan>(() => new WorldMan(manCollection.GetManager<ICore>()));
-
-            manCollection.AddSingleton<ISystemFinder>(() => new SystemFinder(manCollection.GetManager<IEntityMan>(),
-                                                                             manCollection.GetManager<IWorldMan>()));
-
-            manCollection.AddGenericPhysicsManagers();
-            manCollection.AddOpenALManagers();
-            manCollection.AddOpenGLManagers();
+            manCollection.SetupLuaScripting();
+            manCollection.SetupGenericInputManagers();
+            manCollection.SetupGenericPhysicsManagers();
+            manCollection.SetupOpenALManagers();
+            manCollection.SetupOpenGLManagers();
+            manCollection.SetupWecsManagers();
             manCollection.SetupRenderingSystems();
             manCollection.SetupPhysicsSystems();
             manCollection.SetupCoreSystems();
@@ -125,10 +108,10 @@ namespace OpenBreed.Sandbox
 
         private readonly IScriptMan scriptMan;
         private readonly IClientMan clientMan;
+        private readonly IRenderingMan renderingMan;
         private readonly LogConsolePrinter logConsolePrinter;
         //private GameWindow window;
 
-        private readonly IRenderModule renderingModule;
         private string appVersion;
 
         #endregion Private Fields
@@ -143,6 +126,7 @@ namespace OpenBreed.Sandbox
             StateMachines = manCollection.GetManager<IFsmMan>();
             Animations = manCollection.GetManager<IAnimMan>();
             Inputs = manCollection.GetManager<IInputsMan>();
+            renderingMan = manCollection.GetManager<IRenderingMan>();
 
             clientMan.KeyDownEvent += (s, a) => Inputs.OnKeyDown(a);
             clientMan.KeyUpEvent += (s, a) => Inputs.OnKeyUp(a);
@@ -167,18 +151,11 @@ namespace OpenBreed.Sandbox
             logConsolePrinter.StartPrinting();
 
             Jobs = new JobMan(this);
-
-            renderingModule = new OpenGLModule(manCollection.GetManager<IEventsMan>(),
-                                               manCollection.GetManager<IClientMan>(),
-                                               manCollection.GetManager<IWorldMan>());
-
-            RegisterModule<IRenderModule>(renderingModule);
         }
 
         #endregion Public Constructors
 
         #region Public Properties
-
 
         public IEntityFactory EntityFactory { get; }
         public IAnimMan Animations { get; }
@@ -247,7 +224,7 @@ namespace OpenBreed.Sandbox
             Commands.ExecuteEnqueued();
 
             Worlds.Cleanup();
-            renderingModule.Cleanup();
+            renderingMan.Cleanup();
 
             Players.ResetInputs();
 
@@ -260,7 +237,7 @@ namespace OpenBreed.Sandbox
 
         private void OnRenderFrame(float dt)
         {
-            renderingModule.Draw(dt);
+            renderingMan.Draw(dt);
         }
 
         private void RegisterSystems()
@@ -318,8 +295,6 @@ namespace OpenBreed.Sandbox
             var tileTex = textureMan.Create("Textures/Tiles/16/Test", @"Content\Graphics\TileAtlasTest32bit.bmp");
             tileMan.Create("Atlases/Tiles/16/Test", tileTex.Id, 16, 4, 4);
 
-
-
             var doorTex = textureMan.Create("Textures/Sprites/Door", @"Content\Graphics\DoorSpriteSet.png");
             spriteMan.Create("Atlases/Sprites/Door/Horizontal", doorTex.Id, 32, 16, 5, 1, 0, 0);
             spriteMan.Create("Atlases/Sprites/Door/Vertical", doorTex.Id, 16, 32, 5, 1, 0, 16);
@@ -365,7 +340,7 @@ namespace OpenBreed.Sandbox
             //ActorRotationHelper.CreateFsm(this);
             TurretHelper.CreateRotationFsm(this);
 
-            renderingModule.ScreenWorld = ScreenWorldHelper.CreateWorld(this);
+            renderingMan.ScreenWorld = ScreenWorldHelper.CreateWorld(this);
 
             //TextWorldHelper.Create(this);
             HudWorldHelper.Create(this);
@@ -420,7 +395,7 @@ namespace OpenBreed.Sandbox
 
         private void OnResize(Size size)
         {
-            renderingModule.OnClientResized(size.Width, size.Height);
+            renderingMan.OnClientResized(size.Width, size.Height);
         }
 
         private void RegisterShapes()

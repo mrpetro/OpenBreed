@@ -37,6 +37,7 @@ using OpenBreed.Wecs.Systems.Control;
 using OpenBreed.Wecs.Systems.Animation;
 using OpenBreed.Wecs.Systems.Gui;
 using OpenBreed.Wecs.Components.Gui;
+using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -45,7 +46,7 @@ namespace OpenBreed.Sandbox.Worlds
         public static void AddSystems(Program core, WorldBuilder builder)
         {
             var systemFactory = core.GetManager<ISystemFactory>();
-            var renderingModule = core.GetModule<IRenderModule>();
+            var renderingMan = core.GetManager<IRenderingMan>();
 
             int width = builder.width;
             int height = builder.height;
@@ -88,7 +89,7 @@ namespace OpenBreed.Sandbox.Worlds
             var builder = core.GetManager<IWorldMan>().Create().SetName(worldName);
             AddSystems(core, builder);
 
-            return builder.Build();
+            return builder.Build(core);
         }
 
         internal static void Create(Program core)
@@ -139,8 +140,10 @@ namespace OpenBreed.Sandbox.Worlds
             //actor.Add(TextHelper.Create(core, new Vector2(0, 32), "Hero"));
 
             //actor.Subscribe<EntityEnteredWorldEventArgs>(OnEntityEntered);
-            core.GetManager<IWorldMan>().Subscribe<EntityAddedEventArgs>(OnEntityAdded);
-            core.GetManager<IWorldMan>().Subscribe<EntityRemovedEventArgs>(OnEntityRemoved);
+            var worldMan = core.GetManager<IWorldMan>();
+            var eventsMan = core.GetManager<IEventsMan>();
+            eventsMan.Subscribe<EntityAddedEventArgs>(worldMan, OnEntityAdded);
+            eventsMan.Subscribe<EntityRemovedEventArgs>(worldMan, OnEntityRemoved);
 
             core.Commands.Post(new AddEntityCommand(gameWorld.Id, actor.Id));
             //gameWorld.AddEntity(actor);

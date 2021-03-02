@@ -12,7 +12,7 @@ namespace OpenBreed.Audio.OpenAL.Extensions
 {
     public static class ManagerCollectionExtensions
     {
-        public static void AddOpenALManagers(this IManagerCollection manCollection)
+        public static void SetupOpenALManagers(this IManagerCollection manCollection)
         {
             manCollection.AddSingleton<ISoundMan>(() => new SoundMan(manCollection.GetManager<ILogger>()));
         }

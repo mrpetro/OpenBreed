@@ -53,7 +53,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             AddSystems(core, builder);
 
-            Setup(builder.Build());
+            Setup(builder.Build(core));
         }
 
         #endregion Public Methods

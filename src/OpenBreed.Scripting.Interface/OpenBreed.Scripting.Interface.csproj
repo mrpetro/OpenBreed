@@ -62,7 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IScriptFunc.cs" />
-    <Compile Include="IScriptingModule.cs" />
     <Compile Include="IScriptMan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

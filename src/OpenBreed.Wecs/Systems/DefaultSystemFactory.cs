@@ -11,6 +11,14 @@ namespace OpenBreed.Wecs.Systems
 
         #endregion Private Fields
 
+        #region Internal Constructors
+
+        internal DefaultSystemFactory()
+        {
+        }
+
+        #endregion Internal Constructors
+
         #region Public Methods
 
         public void Register<TSystem>(Func<TSystem> initializer) where TSystem : ISystem

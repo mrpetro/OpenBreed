@@ -69,7 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="LuaScriptFunc.cs" />
     <Compile Include="LuaScriptMan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

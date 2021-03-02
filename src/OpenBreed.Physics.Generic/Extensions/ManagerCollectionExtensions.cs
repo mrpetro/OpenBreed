@@ -12,7 +12,7 @@ namespace OpenBreed.Physics.Generic.Extensions
 {
     public static class ManagerCollectionExtensions
     {
-        public static void AddGenericPhysicsManagers(this IManagerCollection manCollection)
+        public static void SetupGenericPhysicsManagers(this IManagerCollection manCollection)
         {
             manCollection.AddSingleton<IShapeMan>(() => new ShapeMan(manCollection.GetManager<ILogger>()));
             manCollection.AddSingleton<IFixtureMan>(() => new FixtureMan(manCollection.GetManager<ILogger>()));

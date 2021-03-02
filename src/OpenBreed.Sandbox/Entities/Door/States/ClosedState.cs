@@ -1,7 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Commands;
 using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Core.Modules;
 using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Rendering.Interface;
 using OpenBreed.Sandbox.Entities;

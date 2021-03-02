@@ -69,7 +69,7 @@
     <Compile Include="IFont.cs" />
     <Compile Include="IPrimitiveRenderer.cs" />
     <Compile Include="Managers\IFontMan.cs" />
-    <Compile Include="IRenderModule.cs" />
+    <Compile Include="Managers\IRenderingMan.cs" />
     <Compile Include="ISpriteAtlas.cs" />
     <Compile Include="Managers\ISpriteMan.cs" />
     <Compile Include="IStampBuilder.cs" />

@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Input.Interface;
 using OpenBreed.Rendering.Interface;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
@@ -14,7 +15,7 @@ namespace OpenBreed.Game
     {
         #region Private Fields
 
-        private readonly IRenderModule renderModule;
+        private readonly IRenderingMan renderingMan;
         private ICore core;
         private GameWindow window;
 
@@ -25,7 +26,7 @@ namespace OpenBreed.Game
         public GameWindowClient(ICore core, int width, int height, string title)
         {
             this.core = core;
-            this.renderModule = core.GetModule<IRenderModule>();
+            this.renderingMan = core.GetManager<IRenderingMan>();
             window = new GameWindow(width, height, new GraphicsMode(new ColorFormat(8, 8, 8, 8), 24, 8), title);
 
             var inputs = core.GetManager<IInputsMan>();
@@ -106,7 +107,7 @@ namespace OpenBreed.Game
             ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateTranslation(0.0f, -ClientRectangle.Height, 0.0f));
             ClientTransform = Matrix4.Mult(ClientTransform, Matrix4.CreateScale(1.0f, -1.0f, 1.0f));
 
-            renderModule.OnClientResized(ClientRectangle.Width, ClientRectangle.Height);
+            renderingMan.OnClientResized(ClientRectangle.Width, ClientRectangle.Height);
         }
 
         private void Window_UpdateFrame(object sender, FrameEventArgs e)
@@ -116,7 +117,7 @@ namespace OpenBreed.Game
 
         private void Window_RenderFrame(object sender, FrameEventArgs e)
         {
-            renderModule.Draw((float)e.Time);
+            renderingMan.Draw((float)e.Time);
             window.SwapBuffers();
         }
 

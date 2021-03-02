@@ -1,15 +1,13 @@
-﻿using OpenBreed.Core.Commands;
+﻿using OpenBreed.Common.Logging;
+using OpenBreed.Common.Tools.Collections;
 using OpenBreed.Core;
-using OpenBreed.Core.Events;
+using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Commands;
+using OpenBreed.Wecs.Entities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
-using OpenBreed.Common.Tools.Collections;
-using OpenBreed.Wecs.Worlds;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Commands;
 
 namespace OpenBreed.Wecs.Worlds
 {
@@ -24,22 +22,29 @@ namespace OpenBreed.Wecs.Worlds
         private readonly List<World> toRemove = new List<World>();
         private readonly IdMap<World> worlds = new IdMap<World>();
         private readonly Dictionary<string, int> namesToIds = new Dictionary<string, int>();
+        private readonly IEntityMan entityMan;
+        private readonly ICommandsMan commandsMan;
+        private readonly IEventsMan eventsMan;
+        private readonly ILogger logger;
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        public WorldMan(ICore core)
+        internal WorldMan(IEntityMan entityMan, ICommandsMan commandsMan, IEventsMan eventsMan, ILogger logger)
         {
-            Core = core;
+            this.entityMan = entityMan;
+            this.commandsMan = commandsMan;
+            this.eventsMan = eventsMan;
+            this.logger = logger;
             Items = worlds.Items;
 
-            Core.Commands.Register<PauseWorldCommand>(HandlePauseWorld);
-            Core.Commands.Register<RemoveEntityCommand>(HandleRemoveEntity);
-            Core.Commands.Register<AddEntityCommand>(HandleAddEntity);
+            commandsMan.Register<PauseWorldCommand>(HandlePauseWorld);
+            commandsMan.Register<RemoveEntityCommand>(HandleRemoveEntity);
+            commandsMan.Register<AddEntityCommand>(HandleAddEntity);
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
 
@@ -59,7 +64,7 @@ namespace OpenBreed.Wecs.Worlds
 
         public WorldBuilder Create()
         {
-            return new WorldBuilder(Core);
+            return new WorldBuilder(this, logger);
         }
 
         /// <summary>
@@ -91,7 +96,7 @@ namespace OpenBreed.Wecs.Worlds
 
         public void RaiseEvent<T>(T eventArgs) where T : EventArgs
         {
-            Core.Events.Raise(this, eventArgs);
+            eventsMan.Raise(this, eventArgs);
         }
 
         /// <summary>
@@ -102,7 +107,7 @@ namespace OpenBreed.Wecs.Worlds
         {
             if (toRemove.Contains(world))
             {
-                Core.Logging.Warning($"World '{world}' already pending removing.");
+                logger.Warning($"World '{world}' already pending removing.");
                 return;
             }
 
@@ -121,12 +126,12 @@ namespace OpenBreed.Wecs.Worlds
 
         public void Subscribe<T>(Action<object, T> callback) where T : EventArgs
         {
-            Core.Events.Subscribe(this, callback);
+            eventsMan.Subscribe(this, callback);
         }
 
         public void Unsubscribe<T>(Action<object, T> callback) where T : EventArgs
         {
-            Core.Events.Unsubscribe(this, callback);
+            eventsMan.Unsubscribe(this, callback);
         }
 
         /// <summary>
@@ -160,10 +165,6 @@ namespace OpenBreed.Wecs.Worlds
                 worlds.Items[i].Cleanup();
         }
 
-        #endregion Public Methods
-
-        #region Internal Methods
-
         public void RegisterWorld(World newWorld)
         {
             newWorld.Id = worlds.Add(newWorld);
@@ -171,14 +172,14 @@ namespace OpenBreed.Wecs.Worlds
             toInitialize.Add(newWorld);
         }
 
-        #endregion Internal Methods
+        #endregion Public Methods
 
         #region Private Methods
 
         private bool HandleRemoveEntity(ICore core, RemoveEntityCommand cmd)
         {
             var world = GetById(cmd.WorldId);
-            var entity = Core.GetManager<IEntityMan>().GetById(cmd.EntityId);
+            var entity = entityMan.GetById(cmd.EntityId);
             world.RemoveEntity(entity);
             return true;
         }
@@ -186,7 +187,7 @@ namespace OpenBreed.Wecs.Worlds
         private bool HandleAddEntity(ICore core, AddEntityCommand cmd)
         {
             var world = GetById(cmd.WorldId);
-            var entity = Core.GetManager<IEntityMan>().GetById(cmd.EntityId);
+            var entity = entityMan.GetById(cmd.EntityId);
             world.AddEntity(entity);
             return true;
         }

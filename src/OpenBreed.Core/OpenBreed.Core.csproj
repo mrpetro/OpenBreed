@@ -94,13 +94,11 @@
     <Compile Include="IJob.cs" />
     <Compile Include="Managers\EventsMan.cs" />
     <Compile Include="Helpers\MovementTools.cs" />
-    <Compile Include="Modules\BaseCoreModule.cs" />
     <Compile Include="Managers\CommandsMan.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="JobChain.cs" />
     <Compile Include="Managers\JobMan.cs" />
     <Compile Include="MathTools.cs" />
-    <Compile Include="Modules\ICoreModule.cs" />
     <Compile Include="Other.cs" />
     <Compile Include="Commands\SetEntityStateCommand.cs" />
     <Compile Include="ICore.cs" />

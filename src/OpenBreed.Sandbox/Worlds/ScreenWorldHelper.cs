@@ -17,6 +17,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Systems;
+using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -61,7 +62,7 @@ namespace OpenBreed.Sandbox.Worlds
             var builder = core.GetManager<IWorldMan>().Create().SetName("ScreenWorld");
             AddSystems(core, builder);
 
-            var world = builder.Build();
+            var world = builder.Build(core);
 
             var gameViewport = CreateViewportEntity(core, GAME_VIEWPORT, 32, 32, windowClient.ClientRectangle.Width - 64, windowClient.ClientRectangle.Height - 64, true, true);
             //gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
@@ -70,11 +71,11 @@ namespace OpenBreed.Sandbox.Worlds
             var hudViewport = CreateViewportEntity(core, HUD_VIEWPORT, 0, 0, windowClient.ClientRectangle.Width, windowClient.ClientRectangle.Height, false, true);
             var textViewport = CreateViewportEntity(core, TEXT_VIEWPORT, 0, 0, windowClient.ClientRectangle.Width, windowClient.ClientRectangle.Height, false, true);
 
-            var renderingModule = core.GetModule<IRenderModule>();
+            var renderingMan = core.GetManager<IRenderingMan>();
 
-            renderingModule.Subscribe<ClientResizedEventArgs>((s, a) => ResizeGameViewport(gameViewport, a));
-            renderingModule.Subscribe<ClientResizedEventArgs>((s, a) => ResizeHudViewport(hudViewport, a));
-            renderingModule.Subscribe<ClientResizedEventArgs>((s, a) => ResizeTextViewport(hudViewport, a));
+            renderingMan.Subscribe<ClientResizedEventArgs>((s, a) => ResizeGameViewport(gameViewport, a));
+            renderingMan.Subscribe<ClientResizedEventArgs>((s, a) => ResizeHudViewport(hudViewport, a));
+            renderingMan.Subscribe<ClientResizedEventArgs>((s, a) => ResizeTextViewport(hudViewport, a));
 
 
             core.Commands.Post(new AddEntityCommand(world.Id, gameViewport.Id));

@@ -78,7 +78,7 @@ namespace OpenBreed.Sandbox.Worlds
             ReadExits(worldBuilder, helper);
             ReadViewports(worldBuilder, helper);
             GameWorldHelper.AddSystems((Program)Core, worldBuilder);
-            return worldBuilder.Build(); 
+            return worldBuilder.Build(Core); 
         }
 
         private void ReadName(WorldBuilder builder)

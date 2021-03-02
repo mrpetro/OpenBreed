@@ -2,11 +2,6 @@
 using OpenBreed.Common.Logging;
 using OpenBreed.Core.Commands;
 using OpenBreed.Core.Managers;
-using OpenBreed.Core.Modules;
-using OpenTK;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
 
 namespace OpenBreed.Core
 {
@@ -14,7 +9,6 @@ namespace OpenBreed.Core
     {
         #region Private Fields
 
-        private readonly Dictionary<Type, ICoreModule> modules = new Dictionary<Type, ICoreModule>();
         private readonly IManagerCollection manCollection;
 
         #endregion Private Fields
@@ -51,11 +45,6 @@ namespace OpenBreed.Core
 
         public TManager GetManager<TManager>() => manCollection.GetManager<TManager>();
 
-        public T GetModule<T>() where T : ICoreModule
-        {
-            return (T)modules[typeof(T)];
-        }
-
         public abstract void Load();
 
         public bool ExecuteCommand(ICommand cmd)
@@ -67,16 +56,6 @@ namespace OpenBreed.Core
             }
         }
 
-
         #endregion Public Methods
-
-        #region Protected Methods
-
-        protected void RegisterModule<TModule>(ICoreModule module) where TModule : ICoreModule
-        {
-            modules.Add(typeof(TModule), module);
-        }
-
-        #endregion Protected Methods
     }
 }

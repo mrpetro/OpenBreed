@@ -68,7 +68,6 @@
     <Compile Include="Builders\FontAtlasBuilder.cs" />
     <Compile Include="Builders\SpriteAtlasBuilder.cs" />
     <Compile Include="Builders\StampBuilder.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="CoreExtensions.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="Helpers\FontAtlas.cs" />
@@ -85,7 +84,7 @@
     <Compile Include="Managers\StampMan.cs" />
     <Compile Include="Managers\TextureMan.cs" />
     <Compile Include="Managers\TileMan.cs" />
-    <Compile Include="OpenGLModule.cs" />
+    <Compile Include="Managers\RenderingMan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

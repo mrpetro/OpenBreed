@@ -16,19 +16,15 @@ namespace OpenBreed.Input.Generic
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        public PlayersMan(ILogger logger, IInputsMan inputsMan)
+        internal PlayersMan(ILogger logger, IInputsMan inputsMan)
         {
             this.logger = logger;
             this.inputsMan = inputsMan;
         }
 
-        #endregion Public Constructors
-
-        #region Public Properties
-
-        #endregion Public Properties
+        #endregion Internal Constructors
 
         #region Public Methods
 

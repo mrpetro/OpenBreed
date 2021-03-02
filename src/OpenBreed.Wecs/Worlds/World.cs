@@ -36,9 +36,9 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Internal Constructors
 
-        internal World(WorldBuilder builder)
+        internal World(WorldBuilder builder, ICore core)
         {
-            Core = builder.core;
+            Core = core;
             Name = builder.name;
 
             Systems = builder.systems.Values.ToArray();

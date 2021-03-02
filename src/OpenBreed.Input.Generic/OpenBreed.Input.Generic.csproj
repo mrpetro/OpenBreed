@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="InputControl.cs" />
     <Compile Include="InputController.cs" />
     <Compile Include="InputsMan.cs" />
