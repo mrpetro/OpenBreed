@@ -59,12 +59,12 @@ namespace OpenBreed.Sandbox
             pos.Value = new OpenTK.Vector2(pos.Value.X, nextValue);
         }
 
-        public static void AddToWorld(World world)
+        public static void AddToWorld(ICore core, World world)
         {
-            var arial12 = world.Core.GetManager<IFontMan>().Create("ARIAL", 10);
+            var arial12 = core.GetManager<IFontMan>().Create("ARIAL", 10);
 
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\CrazyMover\CrazyMover.xml");
-            var crazyMover = world.Core.GetManager<IEntityFactory>().Create(entityTemplate);
+            var crazyMover = core.GetManager<IEntityFactory>().Create(entityTemplate);
 
 
 
@@ -92,7 +92,7 @@ namespace OpenBreed.Sandbox
             //crazyMover.Add(textBuilder.Build());
 
 
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, crazyMover.Id));
+            core.Commands.Post(new AddEntityCommand(world.Id, crazyMover.Id));
         }
 
         #endregion Private Methods

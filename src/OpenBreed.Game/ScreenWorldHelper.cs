@@ -73,7 +73,7 @@ namespace OpenBreed.Game
 
             game.GetManager<IRenderingMan>().Subscribe<ClientResizedEventArgs>((s, a) => ResizeGameViewport(gameViewport, a));
 
-            FpsCounterHelper.AddToWorld(world);
+            FpsCounterHelper.AddToWorld(game, world);
 
             game.Commands.Post(new AddEntityCommand(world.Id, gameViewport.Id));
             //world.AddEntity(gameViewport);

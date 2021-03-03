@@ -23,16 +23,16 @@ namespace OpenBreed.Sandbox.Entities.FpsCounter
 {
     public static class FpsCounterHelper
     {
-        public static void AddToWorld(World world)
+        public static void AddToWorld(ICore core, World world)
         {
-            var windowClient = world.Core.GetManager<IClientMan>();
-            var arial12 = world.Core.GetManager<IFontMan>().Create("ARIAL", 10);
+            var windowClient = core.GetManager<IClientMan>();
+            var arial12 = core.GetManager<IFontMan>().Create("ARIAL", 10);
 
-            var fpsTextEntity = world.Core.GetManager<IEntityMan>().Create();
+            var fpsTextEntity = core.GetManager<IEntityMan>().Create();
 
             fpsTextEntity.Add(PositionComponent.Create(new Vector2(-windowClient.ClientRectangle.Width / 2.0f, -windowClient.ClientRectangle.Height / 2.0f)));
 
-            var textBuilder = TextComponentBuilderEx.New(world.Core);
+            var textBuilder = TextComponentBuilderEx.New(core);
             textBuilder.SetFontById(arial12.Id);
             textBuilder.SetOffset(Vector2.Zero);
             textBuilder.SetColor(Color4.White);
@@ -42,13 +42,13 @@ namespace OpenBreed.Sandbox.Entities.FpsCounter
 
 
             fpsTextEntity.Add(textBuilder.Build());
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, fpsTextEntity.Id));
+            core.Commands.Post(new AddEntityCommand(world.Id, fpsTextEntity.Id));
             //world.AddEntity(fpsTextEntity);
 
 
-            var hudViewport = world.Core.GetManager<IEntityMan>().GetByTag(ScreenWorldHelper.HUD_VIEWPORT).First();
+            var hudViewport = core.GetManager<IEntityMan>().GetByTag(ScreenWorldHelper.HUD_VIEWPORT).First();
 
-            world.Core.Jobs.Execute(new FpsTextUpdateJob(fpsTextEntity));
+            core.Jobs.Execute(new FpsTextUpdateJob(fpsTextEntity));
             hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateFpsPos(fpsTextEntity, a));
         }
 

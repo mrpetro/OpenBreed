@@ -142,8 +142,8 @@ namespace OpenBreed.Sandbox.Worlds
             //actor.Subscribe<EntityEnteredWorldEventArgs>(OnEntityEntered);
             var worldMan = core.GetManager<IWorldMan>();
             var eventsMan = core.GetManager<IEventsMan>();
-            eventsMan.Subscribe<EntityAddedEventArgs>(worldMan, OnEntityAdded);
-            eventsMan.Subscribe<EntityRemovedEventArgs>(worldMan, OnEntityRemoved);
+            eventsMan.Subscribe<EntityAddedEventArgs>(worldMan, (s,a) => OnEntityAdded(core, s,a));
+            eventsMan.Subscribe<EntityRemovedEventArgs>(worldMan, (s,a) => OnEntityRemoved(core, s,a));
 
             core.Commands.Post(new AddEntityCommand(gameWorld.Id, actor.Id));
             //gameWorld.AddEntity(actor);
@@ -184,18 +184,18 @@ namespace OpenBreed.Sandbox.Worlds
             cameraEntity.Get<CameraComponent>().Height = a.Height;
         }
 
-        private static void OnEntityAdded(object sender, EntityAddedEventArgs a)
+        private static void OnEntityAdded(ICore core, object sender, EntityAddedEventArgs a)
         {
             var worldMan = sender as WorldMan;
             var world = worldMan.GetById(a.WorldId);
-            world.Core.Logging.Verbose($"Entity '{a.EntityId}' added to world '{world.Name}'.");
+            core.Logging.Verbose($"Entity '{a.EntityId}' added to world '{world.Name}'.");
         }
 
-        private static void OnEntityRemoved(object sender, EntityRemovedEventArgs a)
+        private static void OnEntityRemoved(ICore core, object sender, EntityRemovedEventArgs a)
         {
             var worldMan = sender as WorldMan;
             var world = worldMan.GetById(a.WorldId);
-            world.Core.Logging.Verbose($"Entity '{a.EntityId}' removed from world '{world.Name}'.");
+            core.Logging.Verbose($"Entity '{a.EntityId}' removed from world '{world.Name}'.");
         }
     }
 }

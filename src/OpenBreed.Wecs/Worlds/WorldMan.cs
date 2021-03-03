@@ -2,8 +2,11 @@
 using OpenBreed.Common.Tools.Collections;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
+using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Events;
+using OpenBreed.Wecs.Systems;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,17 +28,19 @@ namespace OpenBreed.Wecs.Worlds
         private readonly IEntityMan entityMan;
         private readonly ICommandsMan commandsMan;
         private readonly IEventsMan eventsMan;
+        private readonly IScriptMan scriptMan;
         private readonly ILogger logger;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal WorldMan(IEntityMan entityMan, ICommandsMan commandsMan, IEventsMan eventsMan, ILogger logger)
+        internal WorldMan(IEntityMan entityMan, ICommandsMan commandsMan, IEventsMan eventsMan, IScriptMan scriptMan, ILogger logger)
         {
             this.entityMan = entityMan;
             this.commandsMan = commandsMan;
             this.eventsMan = eventsMan;
+            this.scriptMan = scriptMan;
             this.logger = logger;
             Items = worlds.Items;
 
@@ -52,11 +57,6 @@ namespace OpenBreed.Wecs.Worlds
         /// ReadOnly collection of all loaded worlds
         /// </summary>
         public ReadOnlyCollection<World> Items { get; }
-
-        /// <summary>
-        /// Reference to Core object
-        /// </summary>
-        public ICore Core { get; }
 
         #endregion Public Properties
 
@@ -121,7 +121,7 @@ namespace OpenBreed.Wecs.Worlds
         public void Update(float dt)
         {
             for (int i = 0; i < Items.Count; i++)
-                Items[i].Update(dt);
+                UpdateWorld(Items[i], dt);
         }
 
         public void Subscribe<T>(Action<object, T> callback) where T : EventArgs
@@ -134,6 +134,11 @@ namespace OpenBreed.Wecs.Worlds
             eventsMan.Unsubscribe(this, callback);
         }
 
+        private void DeinitializeWorld(World world)
+        {
+            RaiseEvent(new WorldDeinitializedEventArgs(world.Id));
+        }
+
         /// <summary>
         /// Initialize or remove any pending worlds
         /// </summary>
@@ -144,7 +149,7 @@ namespace OpenBreed.Wecs.Worlds
                 //Process entities to remove
                 for (int i = 0; i < toRemove.Count; i++)
                 {
-                    toRemove[i].Deinitialize();
+                    DeinitializeWorld(toRemove[i]);
                     worlds.RemoveById(toRemove[i].Id);
                 }
 
@@ -155,18 +160,25 @@ namespace OpenBreed.Wecs.Worlds
             {
                 //Process entities for initialization
                 for (int i = 0; i < toInitialize.Count; i++)
-                    toInitialize[i].Initialize();
+                    InitializeWorld(toInitialize[i]);
 
                 toInitialize.Clear();
             }
 
             //Do cleanups on remaining worlds
             for (int i = 0; i < worlds.Items.Count; i++)
-                worlds.Items[i].Cleanup();
+                worlds.Items[i].Cleanup(this);
+        }
+
+        private void InitializeWorld(World world)
+        {
+            world.Initialize(this);
+            scriptMan.TryInvokeFunction("WorldLoaded", world.Id);
         }
 
         public void RegisterWorld(World newWorld)
         {
+            newWorld.InitializeSystems();
             newWorld.Id = worlds.Add(newWorld);
             namesToIds.Add(newWorld.Name, newWorld.Id);
             toInitialize.Add(newWorld);
@@ -175,6 +187,28 @@ namespace OpenBreed.Wecs.Worlds
         #endregion Public Methods
 
         #region Private Methods
+
+        private void UpdateWorld(World world, float dt)
+        {
+            if (world.Paused)
+            {
+                foreach (var item in world.Systems.OfType<IUpdatableSystem>())
+                {
+                    commandsMan.ExecuteEnqueued();
+                    item.UpdatePauseImmuneOnly(dt * world.TimeMultiplier);
+                }
+                //systems.OfType<IUpdatableSystem>().ForEach(item => item.UpdatePauseImmuneOnly(dt * TimeMultiplier));
+            }
+            else
+            {
+                foreach (var item in world.Systems.OfType<IUpdatableSystem>())
+                {
+                    commandsMan.ExecuteEnqueued();
+                    item.Update(dt * world.TimeMultiplier);
+                }
+                //systems.OfType<IUpdatableSystem>().ForEach(item => item.Update(dt * TimeMultiplier));
+            }
+        }
 
         private bool HandleRemoveEntity(ICore core, RemoveEntityCommand cmd)
         {
@@ -195,7 +229,17 @@ namespace OpenBreed.Wecs.Worlds
         private bool HandlePauseWorld(ICore core, PauseWorldCommand cmd)
         {
             var world = GetById(cmd.WorldId);
-            world.Pause(cmd.Pause);
+
+            if (cmd.Pause == world.Paused)
+                return true;
+
+            world.Paused = cmd.Pause;
+
+            if (world.Paused)
+                RaiseEvent(new WorldPausedEventArgs(world.Id));
+            else
+                RaiseEvent(new WorldUnpausedEventArgs(world.Id));
+
             return true;
         }
 

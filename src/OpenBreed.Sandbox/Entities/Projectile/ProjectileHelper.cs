@@ -102,7 +102,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
             //var projectileFsm = core.GetManager<IFsmMan>().GetByName("Projectile");
             //projectileFsm.SetInitialState(projectile, (int)AttackingState.Fired);
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, projectile.Id));
+            core.Commands.Post(new AddEntityCommand(world.Id, projectile.Id));
             //world.AddEntity(projectile);
 
         }

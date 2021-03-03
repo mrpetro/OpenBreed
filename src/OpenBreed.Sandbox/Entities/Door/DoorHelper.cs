@@ -111,30 +111,26 @@ namespace OpenBreed.Sandbox.Entities.Door
             Console.WriteLine("Door -> Opened");
         }
 
-        public static void AddVerticalDoor(World world, int x, int y)
+        public static void AddVerticalDoor(ICore core, World world, int x, int y)
         {
-            var core = world.Core;
-
             var doorVerticalTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Door\DoorVertical.xml");
             var door = core.GetManager<IEntityFactory>().Create(doorVerticalTemplate);
 
             door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
             door.Add(new CollisionComponent());
 
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, door.Id));
+            core.Commands.Post(new AddEntityCommand(world.Id, door.Id));
         }
 
-        public static void AddHorizontalDoor(World world, int x, int y)
+        public static void AddHorizontalDoor(ICore core, World world, int x, int y)
         {
-            var core = world.Core;
-
             var doorHorizontalTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Door\DoorHorizontal.xml");
             var door = core.GetManager<IEntityFactory>().Create(doorHorizontalTemplate);
 
             door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
             door.Add(new CollisionComponent());
 
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, door.Id));
+            core.Commands.Post(new AddEntityCommand(world.Id, door.Id));
         }
 
         public static void CreateStamps(ICore core)

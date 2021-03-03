@@ -56,7 +56,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
             var animations = core.GetManager<IAnimMan>();
 
             var animationTeleportEntry = animations.Create(ANIMATION_TELEPORT_ENTRY, 4.0f);
-            var te = animationTeleportEntry.AddPart<int>(OnFrameUpdate, 0);
+            var te = animationTeleportEntry.AddPart<int>((e,nv) => OnFrameUpdate(core, e, nv), 0);
             te.AddFrame(0, 1.0f);
             te.AddFrame(1, 2.0f);
             te.AddFrame(2, 3.0f);
@@ -64,23 +64,21 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         }
 
-        private static void OnFrameUpdate(Entity entity, int nextValue)
+        private static void OnFrameUpdate(ICore core, Entity entity, int nextValue)
         {
-            entity.Core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
+            core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
         }
 
-        public static Entity AddTeleportEntry(World world, int x, int y, int pairId)
+        public static Entity AddTeleportEntry(ICore core, World world, int x, int y, int pairId)
         {
-            var core = world.Core;
-
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Teleport\TeleportEntry.xml");
-            var teleportEntry = world.Core.GetManager<IEntityFactory>().Create(entityTemplate);
+            var teleportEntry = core.GetManager<IEntityFactory>().Create(entityTemplate);
 
             teleportEntry.Tag = new TeleportPair { Id = pairId };
 
             teleportEntry.Get<PositionComponent>().Value = new Vector2( 16 * x, 16 * y);
             teleportEntry.Add(new CollisionComponent(ColliderTypes.TeleportEntryTrigger));
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, teleportEntry.Id));
+            core.Commands.Post(new AddEntityCommand(world.Id, teleportEntry.Id));
             return teleportEntry;
         }
 
@@ -101,12 +99,10 @@ namespace OpenBreed.Sandbox.Entities.Teleport
         //}
 
 
-        public static Entity AddTeleportExit(World world, int x, int y, int pairId)
+        public static Entity AddTeleportExit(ICore core, World world, int x, int y, int pairId)
         {
-            var core = world.Core;
-
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Teleport\TeleportExit.xml");
-            var teleportExit = world.Core.GetManager<IEntityFactory>().Create(entityTemplate);
+            var teleportExit = core.GetManager<IEntityFactory>().Create(entityTemplate);
             //var teleportExit = core.GetManager<IEntityMan>().CreateFromTemplate("TeleportExit");
 
             teleportExit.Tag = new TeleportPair { Id = pairId };
@@ -115,7 +111,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
             //teleportExit.Subscribe<AnimChangedEventArgs>(OnFrameChanged);
 
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, teleportExit.Id));
+            core.Commands.Post(new AddEntityCommand(world.Id, teleportExit.Id));
             //world.AddEntity(teleportExit);
 
             return teleportExit;

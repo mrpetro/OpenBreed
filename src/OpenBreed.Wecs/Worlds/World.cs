@@ -1,6 +1,5 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Extensions;
-using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Wecs.Systems;
@@ -36,21 +35,11 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Internal Constructors
 
-        internal World(WorldBuilder builder, ICore core)
+        internal World(WorldBuilder builder)
         {
-            Core = core;
             Name = builder.name;
-
             Systems = builder.systems.Values.ToArray();
-
             Entities = new ReadOnlyCollection<Entity>(entities);
-
-            Core.GetManager<IWorldMan>().RegisterWorld(this);
-
-            foreach (var system in Systems)
-                system.Initialize(this);
-
-            builder.InvokeActions(this);
         }
 
         #endregion Internal Constructors
@@ -62,7 +51,7 @@ namespace OpenBreed.Wecs.Worlds
         /// <summary>
         /// Pauses or unpauses this world
         /// </summary>
-        public bool Paused { get; private set; }
+        public bool Paused { get; internal set; }
 
         /// <summary>
         /// Time "speed" control value, can't be negative but can be 0 (Basicaly stops time).
@@ -92,7 +81,7 @@ namespace OpenBreed.Wecs.Worlds
         /// <summary>
         /// Name of this world
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; }
 
         #endregion Public Properties
 
@@ -146,108 +135,67 @@ namespace OpenBreed.Wecs.Worlds
             toRemove.Add(entity);
         }
 
-        public void Pause(bool value)
-        {
-            if (Paused == value)
-                return;
-
-            Paused = value;
-
-            if (Paused)
-                Core.GetManager<IWorldMan>().RaiseEvent(new WorldPausedEventArgs(Id));
-            else
-                Core.GetManager<IWorldMan>().RaiseEvent(new WorldUnpausedEventArgs(Id));
-        }
-
         #endregion Public Methods
 
         #region Internal Methods
 
-        internal void Update(float dt)
-        {
-            if (Paused)
-            {
-                foreach (var item in Systems.OfType<IUpdatableSystem>())
-                {
-                    Core.Commands.ExecuteEnqueued();
-                    item.UpdatePauseImmuneOnly(dt * TimeMultiplier);
-                }
-                //systems.OfType<IUpdatableSystem>().ForEach(item => item.UpdatePauseImmuneOnly(dt * TimeMultiplier));
-            }
-            else
-            {
-                foreach (var item in Systems.OfType<IUpdatableSystem>())
-                {
-                    Core.Commands.ExecuteEnqueued();
-                    item.Update(dt * TimeMultiplier);
-                }
-                //systems.OfType<IUpdatableSystem>().ForEach(item => item.Update(dt * TimeMultiplier));
-            }
-        }
-
-        internal void Initialize()
+        internal void Initialize(IWorldMan worldMan)
         {
             //InitializeSystems();
-            Cleanup();
+            Cleanup(worldMan);
 
-            Core.GetManager<IWorldMan>().RaiseEvent(new WorldInitializedEventArgs(Id));
-            Core.GetManager<IScriptMan>().TryInvokeFunction("WorldLoaded", Id);
+            worldMan.RaiseEvent(new WorldInitializedEventArgs(Id));
         }
 
-        internal void Deinitialize()
-        {
-            Core.GetManager<IWorldMan>().RaiseEvent(new WorldDeinitializedEventArgs(Id));
-        }
-
-        internal void Cleanup()
+        internal void Cleanup(IWorldMan worldMan)
         {
             //Perform deinitialization of removed entities
-            toRemove.ForEach(item => DeinitializeEntity(item));
+            toRemove.ForEach(item => DeinitializeEntity(worldMan, item));
 
             //Perform cleanup on all world systems
             Systems.ForEach(item => item.Cleanup());
 
             //Perform initialization of added entities
-            toAdd.ForEach(item => InitializeEntity(item));
+            toAdd.ForEach(item => InitializeEntity(worldMan, item));
 
             toRemove.Clear();
             toAdd.Clear();
+        }
+
+        internal void InitializeSystems()
+        {
+            for (int i = 0; i < Systems.Length; i++)
+                Systems[i].Initialize(this);
         }
 
         #endregion Internal Methods
 
         #region Private Methods
 
-        private void DeinitializeEntity(Entity entity)
+        private void DeinitializeEntity(IWorldMan worldMan, Entity entity)
         {
             ((Entity)entity).World = null;
             entities.Remove(entity);
             RemoveEntityFromSystems(entity);
-            OnEntityRemoved(entity);
+            OnEntityRemoved(worldMan, entity);
         }
 
-        private void InitializeEntity(Entity entity)
+        private void InitializeEntity(IWorldMan worldMan, Entity entity)
         {
             entities.Add(entity);
             ((Entity)entity).World = this;
             AddEntityToSystems(entity);
-            OnEntityAdded(entity);
+            OnEntityAdded(worldMan, entity);
         }
 
-        private void OnEntityAdded(Entity entity)
+        private void OnEntityAdded(IWorldMan worldMan, Entity entity)
         {
-            Core.GetManager<IWorldMan>().RaiseEvent(new EntityAddedEventArgs(Id, entity.Id));
+            worldMan.RaiseEvent(new EntityAddedEventArgs(Id, entity.Id));
         }
 
-        private void OnEntityRemoved(Entity entity)
+        private void OnEntityRemoved(IWorldMan worldMan, Entity entity)
         {
-            Core.GetManager<IWorldMan>().RaiseEvent(new EntityRemovedEventArgs(Id, entity.Id));
-        }
-
-        private void InitializeSystems()
-        {
-            for (int i = 0; i < Systems.Length; i++)
-                Systems[i].Initialize(this);
+            worldMan.RaiseEvent(new EntityRemovedEventArgs(Id, entity.Id));
         }
 
         private void AddEntityToSystems(Entity entity)

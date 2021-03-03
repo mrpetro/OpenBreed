@@ -37,7 +37,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             AddSystems(core, builder);
 
-            Setup(builder.Build(core));
+            Setup(core, builder.Build(core));
         }
 
         #endregion Public Methods
@@ -70,22 +70,22 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem(systemFactory.Create<TextPresenterSystem>());
         }
 
-        private static void Setup(World world)
+        private static void Setup(ICore core, World world)
         {
             //((Program)world.Core).KeyDown += (s, a) => ProcessKey(world, a);
             //((Program)world.Core).KeyPress += (s, a) => AddChar(world, a);
 
-            var windowClient = world.Core.GetManager<IClientMan>();
-            var cameraBuilder = new CameraBuilder(world.Core);
+            var windowClient = core.GetManager<IClientMan>();
+            var cameraBuilder = new CameraBuilder(core);
             cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetFov(windowClient.ClientRectangle.Width, windowClient.ClientRectangle.Height);
             var hudCamera = cameraBuilder.Build();
             hudCamera.Tag = "HudCamera";
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, hudCamera.Id));
+            core.Commands.Post(new AddEntityCommand(world.Id, hudCamera.Id));
 
-            var caret = TextHelper.CreateText(world);
-            var inputs = world.Core.GetManager<IInputsMan>();
+            var caret = TextHelper.CreateText(core, world);
+            var inputs = core.GetManager<IInputsMan>();
 
             inputs.KeyDown += (s, a) => ProcessKey(caret, a);
             inputs.KeyPress += (s, a) => AddChar(caret, a);
@@ -93,10 +93,10 @@ namespace OpenBreed.Sandbox.Worlds
             //caret.Subscribe<TextCaretPositionChanged>(OnTextCaretPositionChanged);
             //caret.Subscribe<TextDataChanged>(OnTextDataChanged);
 
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, caret.Id));
+            core.Commands.Post(new AddEntityCommand(world.Id, caret.Id));
 
 
-            var hudViewport = world.Core.GetManager<IEntityMan>().GetByTag(ScreenWorldHelper.TEXT_VIEWPORT).First();
+            var hudViewport = core.GetManager<IEntityMan>().GetByTag(ScreenWorldHelper.TEXT_VIEWPORT).First();
             hudViewport.Get<ViewportComponent>().CameraEntityId = hudCamera.Id;
 
             hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateCameraFov(hudCamera, a));

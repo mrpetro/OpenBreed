@@ -22,8 +22,6 @@ namespace OpenBreed.Sandbox.Entities.Button
     {
         public static void AddButton(World world, int x, int y)
         {
-            var core = world.Core;
-
             //var button = core.GetManager<IEntityMan>().CreateFromTemplate("Button");
 
             //button.Get<PositionComponent>().Value = new Vector2(0, 0);

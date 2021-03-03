@@ -23,16 +23,16 @@ namespace OpenBreed.Sandbox.Entities.CursorCoords
 {
     public static class CursorCoordsHelper
     {
-        public static void AddToWorld(World world)
+        public static void AddToWorld(ICore core, World world)
         {
-            var windowClient = world.Core.GetManager<IClientMan>();
-            var arial12 = world.Core.GetManager<IFontMan>().Create("ARIAL", 10);
+            var windowClient = core.GetManager<IClientMan>();
+            var arial12 = core.GetManager<IFontMan>().Create("ARIAL", 10);
 
-            var entity = world.Core.GetManager<IEntityMan>().Create();
+            var entity = core.GetManager<IEntityMan>().Create();
 
             entity.Add(PositionComponent.Create(new Vector2(windowClient.ClientRectangle.Width / 2.0f - 120.0f, -windowClient.ClientRectangle.Height / 2.0f)));
 
-            var textBuilder = TextComponentBuilderEx.New(world.Core);
+            var textBuilder = TextComponentBuilderEx.New(core);
             textBuilder.SetFontById(arial12.Id);
             textBuilder.SetOffset(Vector2.Zero);
             textBuilder.SetColor(Color4.White);
@@ -42,13 +42,13 @@ namespace OpenBreed.Sandbox.Entities.CursorCoords
 
 
             entity.Add(textBuilder.Build());
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, entity.Id));
+            core.Commands.Post(new AddEntityCommand(world.Id, entity.Id));
             //world.AddEntity(fpsTextEntity);
 
 
-            var hudViewport = world.Core.GetManager<IEntityMan>().GetByTag(ScreenWorldHelper.HUD_VIEWPORT).First();
+            var hudViewport = core.GetManager<IEntityMan>().GetByTag(ScreenWorldHelper.HUD_VIEWPORT).First();
 
-            world.Core.Jobs.Execute(new CursorCoordsTextUpdateJob(entity));
+            core.Jobs.Execute(new CursorCoordsTextUpdateJob(entity));
             hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdatePos(entity, a));
         }
 

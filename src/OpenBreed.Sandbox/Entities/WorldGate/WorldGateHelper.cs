@@ -46,12 +46,10 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
         #region Public Methods
 
-        public static Entity AddWorldExit(World world, int x, int y, string worldName, int entryId)
+        public static Entity AddWorldExit(ICore core, World world, int x, int y, string worldName, int entryId)
         {
-            var core = world.Core;
-
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\WorldGate\WorldGateExit.xml");
-            var teleportEntity = world.Core.GetManager<IEntityFactory>().Create(entityTemplate);
+            var teleportEntity = core.GetManager<IEntityFactory>().Create(entityTemplate);
 
 
             teleportEntity.Tag = (worldName, entryId);
@@ -60,7 +58,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             teleportEntity.Add(new CollisionComponent(ColliderTypes.WorldExitTrigger));
             //teleportEntity.Subscribe<CollisionEventArgs>(OnCollision);
 
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, teleportEntity.Id));
+            core.Commands.Post(new AddEntityCommand(world.Id, teleportEntity.Id));
             //world.AddEntity(teleportEntity);
 
             return teleportEntity;
@@ -70,14 +68,12 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
         {
             var collisionMan = core.GetManager<ICollisionMan>();
 
-            collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.WorldExitTrigger, Actor2TriggerCallback);
+            collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.WorldExitTrigger, (ca, ea, cb, eb, pv ) => Actor2TriggerCallback(core, ca, ea, cb,eb, pv));
             //collisionMan.RegisterCollisionPair(ColliderTypes.WorldExitTrigger, ColliderTypes.ActorBody, Actor2TriggerCallback);
         }
 
-        private static void PerformEntityExit(Entity targetEntity, Entity exitEntity)
+        private static void PerformEntityExit(ICore core, Entity targetEntity, Entity exitEntity)
         {
-            var core = targetEntity.Core;
-
             var cameraEntity = targetEntity.TryGet<FollowerComponent>()?.FollowerIds.
                                                                               Select(item => core.GetManager<IEntityMan>().GetById(item)).
                                                                               FirstOrDefault(item => item.Tag is "PlayerCamera");
@@ -100,7 +96,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             //Load next world if needed
             jobChain.Equeue(new EntityJob(() => TryLoadWorld(core, exitInfo.WorldName, exitInfo.EntryId)));
             //Add entity to next world
-            jobChain.Equeue(new WorldJob<EntityAddedEventArgs>(core.GetManager<IWorldMan>(), (s, a) => { return core.GetManager<IWorldMan>().GetById(a.WorldId).Name == exitInfo.WorldName; }, () => AddToWorld(targetEntity, exitInfo.WorldName, exitInfo.EntryId)));
+            jobChain.Equeue(new WorldJob<EntityAddedEventArgs>(core.GetManager<IWorldMan>(), (s, a) => { return core.GetManager<IWorldMan>().GetById(a.WorldId).Name == exitInfo.WorldName; }, () => AddToWorld(core, targetEntity, exitInfo.WorldName, exitInfo.EntryId)));
             //Set position of entity to entry position in next world
             jobChain.Equeue(new EntityJob(() => SetPosition(targetEntity, exitInfo.EntryId, true)));
             //Unpause this world
@@ -111,24 +107,22 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             exitEntity.Core.Jobs.Execute(jobChain);
         }
 
-        private static void Actor2TriggerCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
+        private static void Actor2TriggerCallback(ICore core, int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
         {
             if (colliderTypeA == ColliderTypes.WorldExitTrigger && colliderTypeB == ColliderTypes.ActorBody)
-                PerformEntityExit(entityB, entityA);
+                PerformEntityExit(core, entityB, entityA);
             else if (colliderTypeA == ColliderTypes.ActorBody && colliderTypeB == ColliderTypes.WorldExitTrigger)
-                PerformEntityExit(entityA, entityB);
+                PerformEntityExit(core, entityA, entityB);
         }
 
-        public static Entity AddWorldEntry(World world, int x, int y, int entryId)
+        public static Entity AddWorldEntry(ICore core, World world, int x, int y, int entryId)
         {
-            var core = world.Core;
-
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\WorldGate\WorldGateEntry.xml");
-            var teleportEntity = world.Core.GetManager<IEntityFactory>().Create(entityTemplate);
+            var teleportEntity = core.GetManager<IEntityFactory>().Create(entityTemplate);
 
             teleportEntity.Tag = new WorldGatePair() { Id = entryId };
             teleportEntity.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, teleportEntity.Id));
+            core.Commands.Post(new AddEntityCommand(world.Id, teleportEntity.Id));
             //world.AddEntity(teleportEntity);
 
             return teleportEntity;
@@ -178,10 +172,10 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
         //    exitEntity.Core.Jobs.Execute(jobChain);
         //}
 
-        private static void AddToWorld(Entity target, string worldName, int entryId)
+        private static void AddToWorld(ICore core, Entity target, string worldName, int entryId)
         {
-            var world = target.Core.GetManager<IWorldMan>().GetByName(worldName);
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, target.Id));
+            var world = core.GetManager<IWorldMan>().GetByName(worldName);
+            core.Commands.Post(new AddEntityCommand(world.Id, target.Id));
         }
 
         private static void TryLoadWorld(ICore core, string worldName, int entryId)

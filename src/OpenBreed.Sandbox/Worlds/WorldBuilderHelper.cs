@@ -78,9 +78,8 @@ namespace OpenBreed.Sandbox.Worlds
 
         #region Private Methods
 
-        private void AddViewport(World world, int code, object[] args)
+        private void AddViewport(ICore core, World world, int code, object[] args)
         {
-            var core = world.Core;
             var x = (int)args[0];
             var y = (int)args[1];
             var pairCode = (int)args[2];
@@ -93,69 +92,63 @@ namespace OpenBreed.Sandbox.Worlds
             vp.Get<ViewportComponent>().CameraEntityId = core.GetManager<IEntityMan>().GetByTag(viewportData.CameraName).FirstOrDefault().Id;
             vp.Get<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
             //GameWorldHelper.SetPreserveAspectRatio(vp);
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, vp.Id));
+            core.Commands.Post(new AddEntityCommand(world.Id, vp.Id));
             //world.AddEntity(vp);
         }
 
-        private static void AddTeleportEntry(World world, int code, object[] args)
+        private static void AddTeleportEntry(ICore core, World world, int code, object[] args)
         {
-            var core = world.Core;
             var x = (int)args[0];
             var y = (int)args[1];
             var pairCode = (int)args[2];
 
-            TeleportHelper.AddTeleportEntry(world, x, y, pairCode);
-            world.Core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            TeleportHelper.AddTeleportEntry(core, world, x, y, pairCode);
+            core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
-        private static void AddWorldEntry(World world, int code, object[] args)
+        private static void AddWorldEntry(ICore core, World world, int code, object[] args)
         {
-            var core = world.Core;
             var x = (int)args[0];
             var y = (int)args[1];
             var pairCode = (int)args[2];
 
-            WorldGateHelper.AddWorldEntry(world, x, y, pairCode);
-            world.Core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            WorldGateHelper.AddWorldEntry(core, world, x, y, pairCode);
+            core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
-        private static void AddAnimTest(World world, int code, object[] args)
+        private static void AddAnimTest(ICore core, World world, int code, object[] args)
         {
-            var core = world.Core;
             var x = (int)args[0];
             var y = (int)args[1];
             var pairCode = (int)args[2];
 
-            Misc.AddToWorld(world);
-            world.Core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            Misc.AddToWorld(core, world);
+            core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
-        private static void AddTurret(World world, int code, object[] args)
+        private static void AddTurret(ICore core, World world, int code, object[] args)
         {
-            var core = world.Core;
             var x = (int)args[0];
             var y = (int)args[1];
             var pairCode = (int)args[2];
 
-            var turret = TurretHelper.Create(world.Core, new Vector2(x * 16, y * 16));
+            var turret = TurretHelper.Create(core, new Vector2(x * 16, y * 16));
             core.Commands.Post(new AddEntityCommand(world.Id, turret.Id));
-            world.Core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
-        private static void AddTeleportExit(World world, int code, object[] args)
+        private static void AddTeleportExit(ICore core, World world, int code, object[] args)
         {
-            var core = world.Core;
             var x = (int)args[0];
             var y = (int)args[1];
             var pairCode = (int)args[2];
 
-            TeleportHelper.AddTeleportExit(world, x, y, pairCode);
-            world.Core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            TeleportHelper.AddTeleportExit(core, world, x, y, pairCode);
+            core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
-        private void AddWorldExit(World world, int code, object[] args)
+        private void AddWorldExit(ICore core, World world, int code, object[] args)
         {
-            var core = world.Core;
             var x = (int)args[0];
             var y = (int)args[1];
             var exitNo = (int)args[2];
@@ -164,11 +157,11 @@ namespace OpenBreed.Sandbox.Worlds
             if (!exits.TryGetValue(exitNo, out exitInfo))
                 return;
 
-            WorldGateHelper.AddWorldExit(world, x, y, exitInfo.Item1, exitInfo.Item2);
-            world.Core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            WorldGateHelper.AddWorldExit(core, world, x, y, exitInfo.Item1, exitInfo.Item2);
+            core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
-        private static void AddPlayer(World world, int code, object[] args)
+        private static void AddPlayer(ICore core, World world, int code, object[] args)
         {
         }
 
@@ -208,53 +201,50 @@ namespace OpenBreed.Sandbox.Worlds
             }
         }
 
-        private static void AddAirCell(World world, int code, object[] args)
+        private static void AddAirCell(ICore core, World world, int code, object[] args)
         {
-            var core = world.Core;
             var x = (int)args[0];
             var y = (int)args[1];
             var gfxCode = (int)args[2];
 
-            var blockBuilder = new WorldBlockBuilder(world.Core);
+            var blockBuilder = new WorldBlockBuilder(core);
             blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
             blockBuilder.HasBody = false;
             blockBuilder.SetPosition(new Vector2(x * 16, y * 16));
             blockBuilder.SetTileId(ToTileId(gfxCode));
 
             var entity = blockBuilder.Build();
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, entity.Id));
+            core.Commands.Post(new AddEntityCommand(world.Id, entity.Id));
             //world.AddEntity(blockBuilder.Build());
         }
 
-        private static void AddObstacleCell(World world, int code, object[] args)
+        private static void AddObstacleCell(ICore core, World world, int code, object[] args)
         {
-            var core = world.Core;
             var x = (int)args[0];
             var y = (int)args[1];
             var gfxCode = (int)args[2];
 
-            var blockBuilder = new WorldBlockBuilder(world.Core);
+            var blockBuilder = new WorldBlockBuilder(core);
             blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
             blockBuilder.HasBody = true;
             blockBuilder.SetPosition(new Vector2(x * 16, y * 16));
             blockBuilder.SetTileId(ToTileId(gfxCode));
 
             var entity = blockBuilder.Build();
-            world.Core.Commands.Post(new AddEntityCommand(world.Id, entity.Id));
+            core.Commands.Post(new AddEntityCommand(world.Id, entity.Id));
             //world.AddEntity(blockBuilder.Build());
         }
 
-        private static void AddDoor(World world, int code, object[] args)
+        private static void AddDoor(ICore core, World world, int code, object[] args)
         {
-            var core = world.Core;
             var x = (int)args[0];
             var y = (int)args[1];
             var type = (int)args[2];
 
             if (type == 'H')
-                DoorHelper.AddHorizontalDoor(world, x, y);
+                DoorHelper.AddHorizontalDoor(core, world, x, y);
             else if (type == 'V')
-                DoorHelper.AddVerticalDoor(world, x, y);
+                DoorHelper.AddVerticalDoor(core, world, x, y);
         }
 
         #endregion Private Methods

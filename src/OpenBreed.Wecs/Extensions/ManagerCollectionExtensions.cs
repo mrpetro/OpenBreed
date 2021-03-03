@@ -2,6 +2,7 @@
 using OpenBreed.Common.Logging;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
+using OpenBreed.Scripting.Interface;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Worlds;
@@ -27,6 +28,7 @@ namespace OpenBreed.Wecs.Extensions
             manCollection.AddSingleton<IWorldMan>(() => new WorldMan(manCollection.GetManager<IEntityMan>(),
                                                                      manCollection.GetManager<ICommandsMan>(),
                                                                      manCollection.GetManager<IEventsMan>(),
+                                                                     manCollection.GetManager<IScriptMan>(),
                                                                      manCollection.GetManager<ILogger>()));
 
             manCollection.AddSingleton<ISystemFinder>(() => new SystemFinder(manCollection.GetManager<IEntityMan>(),
