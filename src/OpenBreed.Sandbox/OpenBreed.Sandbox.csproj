@@ -130,6 +130,7 @@
     <Compile Include="Entities\Text\TextHelper.cs" />
     <Compile Include="Entities\Turret\TurretHelper.cs" />
     <Compile Include="Entities\WorldGate\WorldGateHelper.cs" />
+    <Compile Include="Extensions\SystemCollectionExtensions.cs" />
     <Compile Include="SandboxWindowClient.cs" />
     <Compile Include="Helpers\AnimHelper.cs" />
     <Compile Include="IWorldReader.cs" />

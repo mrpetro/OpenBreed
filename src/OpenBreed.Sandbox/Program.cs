@@ -25,6 +25,7 @@ using OpenBreed.Sandbox.Entities.Projectile;
 using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Entities.Turret;
 using OpenBreed.Sandbox.Entities.WorldGate;
+using OpenBreed.Sandbox.Extensions;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Scripting.Lua;
@@ -88,6 +89,8 @@ namespace OpenBreed.Sandbox
             manCollection.SetupAnimationSystems();
             manCollection.SetupGuiSystems();
             //manCollection.SetupAudioSystems();
+
+            //manCollection.SetupGameScriptingApi();
         }
 
         #endregion Public Constructors
@@ -263,7 +266,7 @@ namespace OpenBreed.Sandbox
             RegisterXmlComponents();
             RegisterComponentFactories();
 
-            ExposeScriptingApi();
+            InitLua();
 
             RegisterSystems();
             RegisterShapes();
@@ -381,16 +384,9 @@ namespace OpenBreed.Sandbox
             EntityFactory.RegisterComponentFactory<XmlFsmComponent>(new FsmComponentFactory(this));
         }
 
-        private void ExposeScriptingApi()
+        private void InitLua()
         {
-            scriptMan.Expose("Worlds", Worlds);
-            scriptMan.Expose("Entities", Entities);
-            scriptMan.Expose("Commands", Commands);
-            scriptMan.Expose("Inputs", Inputs);
-            scriptMan.Expose("Logging", Logging);
-            scriptMan.Expose("Players", Players);
-
-            scriptMan.RunFile(@"Content\Scripts\start.lua");
+            //scriptMan.RunFile(@"Content\Scripts\start.lua");
         }
 
         private void OnResize(Size size)

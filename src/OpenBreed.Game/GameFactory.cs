@@ -11,6 +11,7 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Xml;
 using OpenBreed.Fsm;
+using OpenBreed.Game.Extensions;
 using OpenBreed.Input.Generic;
 using OpenBreed.Input.Generic.Extensions;
 using OpenBreed.Input.Interface;
@@ -20,6 +21,7 @@ using OpenBreed.Rendering.OpenGL;
 using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Scripting.Lua;
+using OpenBreed.Scripting.Lua.Extensions;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
@@ -44,14 +46,13 @@ namespace OpenBreed.Game
         {
             manCollection.AddSingleton<IVariableMan>(() => new VariableMan(manCollection.GetManager<ILogger>()));
 
-            manCollection.AddSingleton<IScriptMan>(() => new LuaScriptMan(manCollection.GetManager<ILogger>()));
 
             manCollection.AddSingleton<IFsmMan>(() => new FsmMan());
 
             manCollection.AddSingleton<IAnimMan>(() => new AnimMan(manCollection.GetManager<ILogger>()));
 
             manCollection.SetupABFormats();
-
+            manCollection.SetupLuaScripting();
             manCollection.SetupDataProviders();
             manCollection.SetupGenericInputManagers();
             manCollection.SetupGenericPhysicsManagers();
@@ -65,6 +66,8 @@ namespace OpenBreed.Game
             manCollection.SetupAnimationSystems();
             manCollection.SetupGuiSystems();
             //manCollection.SetupAudioSystems();
+
+            manCollection.SetupGameScriptingApi();
         }
 
         public ICore CreateGame(string gameDbFilePath, string gameFolderPath)

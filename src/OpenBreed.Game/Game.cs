@@ -189,14 +189,6 @@ namespace OpenBreed.Game
 
         private void ExposeScriptingApi()
         {
-            scriptMan.Expose("Worlds", worlds);
-            scriptMan.Expose("Entities", entities);
-            scriptMan.Expose("Commands", Commands);
-            scriptMan.Expose("Inputs", inputs);
-            scriptMan.Expose("Logging", Logging);
-            scriptMan.Expose("DataProvider", modelsProvider);
-            //Scripts.Expose("Players", Players);
-
             //Scripts.RunFile(@"Content\Scripts\start.lua");
             scriptMan.RunFile(@"D:\Projects\DB\Templates\Logo1.lua");
 

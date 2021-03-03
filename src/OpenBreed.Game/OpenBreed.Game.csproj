@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="Entities\CameraBuilder.cs" />
     <Compile Include="Entities\FpsCounterHelper.cs" />
+    <Compile Include="Extensions\SystemCollectionExtensions.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameFactory.cs" />
     <Compile Include="GameWindowClient.cs" />
