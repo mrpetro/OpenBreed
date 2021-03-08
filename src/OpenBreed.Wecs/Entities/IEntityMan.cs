@@ -1,4 +1,5 @@
-﻿using OpenBreed.Wecs.Components;
+﻿using OpenBreed.Core;
+using OpenBreed.Wecs.Components;
 using OpenBreed.Wecs.Entities;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace OpenBreed.Wecs.Entities
 
         Entity GetById(int id);
 
-        Entity Create(List<IEntityComponent> initialComponents = null);
+        Entity Create(ICore core, List<IEntityComponent> initialComponents = null);
 
         void Destroy(Entity entity);
     }

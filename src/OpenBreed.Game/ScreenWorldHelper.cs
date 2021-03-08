@@ -41,7 +41,7 @@ namespace OpenBreed.Game
 
         public static Entity CreateViewportEntity(ICore core, string name, float x, float y, float width, float height, bool drawBackground, bool clipping = true)
         {
-            var viewport = core.GetManager<IEntityMan>().Create();
+            var viewport = core.GetManager<IEntityMan>().Create(core);
             viewport.Tag = name;
 
             var vpcBuilder = ViewportComponentBuilderEx.New(core);
@@ -59,7 +59,7 @@ namespace OpenBreed.Game
 
         public static World CreateWorld(Game game)
         {
-            var windowClient = game.GetManager<IClientMan>();
+            var windowClient = game.GetManager<IViewClient>();
 
             var builder = game.GetManager<IWorldMan>().Create().SetName("ScreenWorld");
             AddSystems(game, builder);

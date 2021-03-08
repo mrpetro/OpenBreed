@@ -19,7 +19,7 @@ namespace OpenBreed.Wecs.Systems.Rendering.Extensions
             var systemFactory = manCollection.GetManager<ISystemFactory>();
             systemFactory.Register(() => new ViewportSystem(manCollection.GetManager<IEntityMan>(),
                                                             manCollection.GetManager<IPrimitiveRenderer>(),
-                                                            manCollection.GetManager<IClientMan>()));
+                                                            manCollection.GetManager<IViewClient>()));
             systemFactory.Register(() => new SpriteSystem(manCollection.GetManager<ISpriteMan>()));
             systemFactory.Register(() => new TileSystem(manCollection.GetManager<ITileMan>()));
             systemFactory.Register(() => new TextPresenterSystem(manCollection.GetManager<IFontMan>()));

@@ -44,14 +44,16 @@ namespace OpenBreed.Game
     {
         public GameFactory()
         {
+
+            manCollection.AddSingleton<IViewClient>(() => new OpenTKWindowClient(800, 600, "OpenBreed"));
+
             manCollection.AddSingleton<IVariableMan>(() => new VariableMan(manCollection.GetManager<ILogger>()));
-
-
             manCollection.AddSingleton<IFsmMan>(() => new FsmMan());
 
             manCollection.AddSingleton<IAnimMan>(() => new AnimMan(manCollection.GetManager<ILogger>()));
 
             manCollection.SetupABFormats();
+            manCollection.SetupModelProvider();
             manCollection.SetupLuaScripting();
             manCollection.SetupDataProviders();
             manCollection.SetupGenericInputManagers();

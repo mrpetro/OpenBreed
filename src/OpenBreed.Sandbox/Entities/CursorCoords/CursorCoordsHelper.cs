@@ -25,10 +25,10 @@ namespace OpenBreed.Sandbox.Entities.CursorCoords
     {
         public static void AddToWorld(ICore core, World world)
         {
-            var windowClient = core.GetManager<IClientMan>();
+            var windowClient = core.GetManager<IViewClient>();
             var arial12 = core.GetManager<IFontMan>().Create("ARIAL", 10);
 
-            var entity = core.GetManager<IEntityMan>().Create();
+            var entity = core.GetManager<IEntityMan>().Create(core);
 
             entity.Add(PositionComponent.Create(new Vector2(windowClient.ClientRectangle.Width / 2.0f - 120.0f, -windowClient.ClientRectangle.Height / 2.0f)));
 

@@ -3,8 +3,6 @@ using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Components;
-using OpenBreed.Wecs.Events;
-using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +20,8 @@ namespace OpenBreed.Wecs.Entities
 
         #region Internal Constructors
 
-        internal EntityMan(ICore core, ICommandsMan commandsMan)
+        internal EntityMan(ICommandsMan commandsMan)
         {
-            Core = core;
             this.commandsMan = commandsMan;
         }
 
@@ -32,15 +29,7 @@ namespace OpenBreed.Wecs.Entities
 
         #region Public Properties
 
-        public ICore Core { get; }
-
-        public int Count
-        {
-            get
-            {
-                return entities.Count;
-            }
-        }
+        public int Count => entities.Count;
 
         #endregion Public Properties
 
@@ -64,9 +53,9 @@ namespace OpenBreed.Wecs.Entities
                 return null;
         }
 
-        public Entity Create(List<IEntityComponent> initialComponents = null)
+        public Entity Create(ICore core, List<IEntityComponent> initialComponents = null)
         {
-            var newEntity = new Entity(Core, initialComponents);
+            var newEntity = new Entity(core, initialComponents);
             newEntity.Id = entities.Add(newEntity);
             return newEntity;
         }
@@ -79,15 +68,11 @@ namespace OpenBreed.Wecs.Entities
 
         #endregion Public Methods
 
-        #region Private Methods
-
         //private void OnEntityRemovedEventArgs(object sender, EntityRemovedEventArgs e)
         //{
         //    var entity = GetById(e.EntityId);
         //    worldMan.Unsubscribe<EntityRemovedEventArgs>(OnEntityRemovedEventArgs);
         //    entities.RemoveById(entity.Id);
         //}
-
-        #endregion Private Methods
     }
 }

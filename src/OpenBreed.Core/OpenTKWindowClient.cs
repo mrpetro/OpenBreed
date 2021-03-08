@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace OpenBreed.Game
 {
-    public class SandboxWindowClient : IClientMan
+    public class OpenTKWindowClient : IViewClient
     {
         #region Private Fields
 
@@ -17,7 +17,7 @@ namespace OpenBreed.Game
 
         #region Public Constructors
 
-        public SandboxWindowClient(int width, int height, string title)
+        public OpenTKWindowClient(int width, int height, string title)
         {
             window = new GameWindow(width, height, new GraphicsMode(new ColorFormat(8, 8, 8, 8), 24, 8), title);
 

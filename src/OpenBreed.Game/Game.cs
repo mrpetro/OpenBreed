@@ -48,7 +48,7 @@ namespace OpenBreed.Game
         private readonly IInputsMan inputs;
         private readonly IAnimMan animations;
         private readonly IWorldMan worlds;
-        private readonly IClientMan clientMan;
+        private readonly IViewClient clientMan;
         private readonly IEntityFactory entityFactory;
 
         private readonly IPlayersMan players;
@@ -76,7 +76,7 @@ namespace OpenBreed.Game
             logConsolePrinter = new LogConsolePrinter(Logging);
             logConsolePrinter.StartPrinting();
 
-            clientMan = new GameWindowClient(this, 800, 600, "OpenBreed");
+            clientMan = new OpenTKWindowClient(800, 600, "OpenBreed");
         }
 
         #endregion Public Constructors
@@ -106,7 +106,7 @@ namespace OpenBreed.Game
 
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"D:\Projects\DB\Templates\Logo1.xml");
 
-            var entity = entityFactory.Create(entityTemplate);
+            var entity = entityFactory.Create(this, entityTemplate);
 
             renderingMan.ScreenWorld = ScreenWorldHelper.CreateWorld(this);
 
@@ -123,7 +123,7 @@ namespace OpenBreed.Game
 
         public void OnUpdateFrame(float dt)
         {
-            Commands.ExecuteEnqueued();
+            Commands.ExecuteEnqueued(this);
 
             worlds.Cleanup();
 
@@ -134,7 +134,7 @@ namespace OpenBreed.Game
             inputs.Update();
             //Players.ApplyInputs();
             //StateMachine.Update((float)e.Time);
-            worlds.Update(dt);
+            worlds.Update(this, dt);
             //Jobs.Update(dt);
         }
 

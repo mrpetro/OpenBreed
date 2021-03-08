@@ -91,7 +91,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
             if(projectileTemplate == null)
                 projectileTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Projectile\Projectile.xml");
 
-            var projectile = core.GetManager<IEntityFactory>().Create(projectileTemplate);
+            var projectile = core.GetManager<IEntityFactory>().Create(core, projectileTemplate);
             //var projectile = core.GetManager<IEntityMan>().CreateFromTemplate("Projectile");
 
             //projectile.Add(new FsmComponent());

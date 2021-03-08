@@ -70,7 +70,7 @@ namespace OpenBreed.Sandbox
         public ProgramFactory()
         {
 
-            manCollection.AddSingleton<IClientMan>(() => new SandboxWindowClient(800, 600, "OpenBreed"));
+            manCollection.AddSingleton<IViewClient>(() => new OpenTKWindowClient(800, 600, "OpenBreed"));
 
             manCollection.AddSingleton<IFsmMan>(() => new FsmMan());
 
@@ -99,7 +99,7 @@ namespace OpenBreed.Sandbox
 
         public ICore Create()
         {
-            return new Program(manCollection, manCollection.GetManager<IClientMan>());
+            return new Program(manCollection, manCollection.GetManager<IViewClient>());
         }
 
         #endregion Public Methods
@@ -110,7 +110,7 @@ namespace OpenBreed.Sandbox
         #region Private Fields
 
         private readonly IScriptMan scriptMan;
-        private readonly IClientMan clientMan;
+        private readonly IViewClient clientMan;
         private readonly IRenderingMan renderingMan;
         private readonly LogConsolePrinter logConsolePrinter;
         //private GameWindow window;
@@ -121,7 +121,7 @@ namespace OpenBreed.Sandbox
 
         #region Public Constructors
 
-        public Program(IManagerCollection manCollection, IClientMan clientMan) :
+        public Program(IManagerCollection manCollection, IViewClient clientMan) :
             base(manCollection)
         {
             this.clientMan = clientMan;
@@ -131,13 +131,13 @@ namespace OpenBreed.Sandbox
             Inputs = manCollection.GetManager<IInputsMan>();
             renderingMan = manCollection.GetManager<IRenderingMan>();
 
-            clientMan.KeyDownEvent += (s, a) => Inputs.OnKeyDown(a);
-            clientMan.KeyUpEvent += (s, a) => Inputs.OnKeyUp(a);
-            clientMan.KeyPressEvent += (s, a) => Inputs.OnKeyPress(a);
-            clientMan.MouseMoveEvent += (s, a) => Inputs.OnMouseMove(a);
-            clientMan.MouseDownEvent += (s, a) => Inputs.OnMouseDown(a);
-            clientMan.MouseUpEvent += (s, a) => Inputs.OnMouseUp(a);
-            clientMan.MouseWheelEvent += (s, a) => Inputs.OnMouseWheel(a);
+            //clientMan.KeyDownEvent += (s, a) => Inputs.OnKeyDown(a);
+            //clientMan.KeyUpEvent += (s, a) => Inputs.OnKeyUp(a);
+            //clientMan.KeyPressEvent += (s, a) => Inputs.OnKeyPress(a);
+            //clientMan.MouseMoveEvent += (s, a) => Inputs.OnMouseMove(a);
+            //clientMan.MouseDownEvent += (s, a) => Inputs.OnMouseDown(a);
+            //clientMan.MouseUpEvent += (s, a) => Inputs.OnMouseUp(a);
+            //clientMan.MouseWheelEvent += (s, a) => Inputs.OnMouseWheel(a);
 
             Players = manCollection.GetManager<IPlayersMan>();
             Worlds = manCollection.GetManager<IWorldMan>();
@@ -145,10 +145,8 @@ namespace OpenBreed.Sandbox
 
             appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-            clientMan.LoadEvent += (s, a) => OnLoad();
-            clientMan.ResizeEvent += (s, a) => OnResize(a);
             clientMan.UpdateFrameEvent += (s, a) => OnUpdateFrame(a);
-            clientMan.RenderFrameEvent += (s, a) => OnRenderFrame(a);
+            clientMan.LoadEvent += (s, a) => OnLoad();
 
             logConsolePrinter = new LogConsolePrinter(Logging);
             logConsolePrinter.StartPrinting();
@@ -224,7 +222,7 @@ namespace OpenBreed.Sandbox
 
         private void OnUpdateFrame(float dt)
         {
-            Commands.ExecuteEnqueued();
+            Commands.ExecuteEnqueued(this);
 
             Worlds.Cleanup();
             renderingMan.Cleanup();
@@ -234,13 +232,8 @@ namespace OpenBreed.Sandbox
             Inputs.Update();
 
             //StateMachine.Update((float)e.Time);
-            Worlds.Update(dt);
+            Worlds.Update(this, dt);
             Jobs.Update(dt);
-        }
-
-        private void OnRenderFrame(float dt)
-        {
-            renderingMan.Draw(dt);
         }
 
         private void RegisterSystems()
@@ -387,11 +380,6 @@ namespace OpenBreed.Sandbox
         private void InitLua()
         {
             //scriptMan.RunFile(@"Content\Scripts\start.lua");
-        }
-
-        private void OnResize(Size size)
-        {
-            renderingMan.OnClientResized(size.Width, size.Height);
         }
 
         private void RegisterShapes()

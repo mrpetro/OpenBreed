@@ -31,7 +31,7 @@ namespace OpenBreed.Sandbox.Entities.Camera
 
         public override Entity Build()
         {
-            var entity = Core.GetManager<IEntityMan>().Create();
+            var entity = Core.GetManager<IEntityMan>().Create(Core);
             entity.Add(PositionComponent.Create(position));
 
             var ccBuilder = CameraComponentBuilder.New(Core);

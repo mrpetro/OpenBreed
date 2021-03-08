@@ -18,8 +18,7 @@ namespace OpenBreed.Wecs.Extensions
     {
         public static void SetupWecsManagers(this IManagerCollection manCollection)
         {
-            manCollection.AddSingleton<IEntityMan>(() => new EntityMan(manCollection.GetManager<ICore>(),
-                                                                       manCollection.GetManager<ICommandsMan>()));
+            manCollection.AddSingleton<IEntityMan>(() => new EntityMan(manCollection.GetManager<ICommandsMan>()));
 
             manCollection.AddSingleton<ISystemFactory>(() => new DefaultSystemFactory());
 

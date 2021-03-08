@@ -62,7 +62,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         private static void Setup(ICore core, World world)
         {
-            var windowClient = core.GetManager<IClientMan>();
+            var windowClient = core.GetManager<IViewClient>();
             var cameraBuilder = new CameraBuilder(core);
             cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);

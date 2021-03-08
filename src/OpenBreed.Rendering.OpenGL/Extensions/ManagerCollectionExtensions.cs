@@ -32,7 +32,7 @@ namespace OpenBreed.Rendering.OpenGL.Extensions
             manCollection.AddSingleton<IPrimitiveRenderer>(() => new PrimitiveRenderer());
 
             manCollection.AddSingleton<IRenderingMan>(() => new RenderingMan(manCollection.GetManager<IEventsMan>(),
-                                                                             manCollection.GetManager<IClientMan>(),
+                                                                             manCollection.GetManager<IViewClient>(),
                                                                              manCollection.GetManager<IWorldMan>()));
 
         }

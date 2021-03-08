@@ -117,7 +117,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             //var actor = core.GetManager<IEntityMan>().Create();
 
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Actor\Arrow.xml");
-            var actor = core.GetManager<IEntityFactory>().Create(entityTemplate);
+            var actor = core.GetManager<IEntityFactory>().Create(core, entityTemplate);
             //var actor = core.GetManager<IEntityMan>().CreateFromTemplate("Arrow");
 
 

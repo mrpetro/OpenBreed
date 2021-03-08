@@ -3,7 +3,6 @@ using OpenBreed.Core;
 
 //using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Managers;
-using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Systems.Rendering.Events;
@@ -21,18 +20,21 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         private readonly IEventsMan eventsMan;
 
-        private readonly IClientMan client;
+        private readonly IViewClient viewClient;
         private readonly IWorldMan worldMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public RenderingMan(IEventsMan eventsMan, IClientMan client, IWorldMan worldMan)
+        public RenderingMan(IEventsMan eventsMan, IViewClient viewClient, IWorldMan worldMan)
         {
             this.eventsMan = eventsMan;
-            this.client = client;
+            this.viewClient = viewClient;
             this.worldMan = worldMan;
+
+            viewClient.ResizeEvent += (s, a) => OnResize(a.Width, a.Height);
+            viewClient.RenderFrameEvent += (s, a) => OnRenderFrame(a);
         }
 
         #endregion Public Constructors
@@ -47,13 +49,26 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Private Properties
 
-        private Box2 ClipBox { get { return Box2.FromTLRB(client.ClientRectangle.Width, 0.0f, client.ClientRectangle.Height, 0.0f); } }
+        private Box2 ClipBox { get { return Box2.FromTLRB(viewClient.ClientRectangle.Width, 0.0f, viewClient.ClientRectangle.Height, 0.0f); } }
 
         #endregion Private Properties
 
         #region Public Methods
 
-        public void Draw(float dt)
+        public void Subscribe<T>(Action<object, T> callback) where T : EventArgs
+        {
+            eventsMan.Subscribe(this, callback);
+        }
+
+        public void Cleanup()
+        {
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void OnRenderFrame(float dt)
         {
             Fps = 1.0f / dt;
 
@@ -71,16 +86,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             }
         }
 
-        public void Subscribe<T>(Action<object, T> callback) where T : EventArgs
-        {
-            eventsMan.Subscribe(this, callback);
-        }
-
-        public void Cleanup()
-        {
-        }
-
-        public void OnClientResized(float width, float height)
+        private void OnResize(float width, float height)
         {
             GL.LoadIdentity();
             GL.Viewport(0, 0, (int)width, (int)height);
@@ -91,6 +97,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             eventsMan.Raise(this, new ClientResizedEventArgs(width, height));
         }
 
-        #endregion Public Methods
+        #endregion Private Methods
     }
 }

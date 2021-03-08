@@ -1,10 +1,4 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Core.Managers;
-using OpenBreed.Wecs;
-using OpenBreed.Wecs.Worlds;
-using OpenBreed.Rendering.Interface.Managers;
-using OpenTK;
-using OpenTK.Graphics;
+﻿using OpenBreed.Wecs.Worlds;
 using System;
 
 namespace OpenBreed.Rendering.Interface.Managers
@@ -31,10 +25,6 @@ namespace OpenBreed.Rendering.Interface.Managers
         #region Public Methods
 
         void Cleanup();
-
-        void Draw(float dt);
-
-        void OnClientResized(float width, float height);
 
         void Subscribe<T>(Action<object, T> callback) where T : EventArgs;
 

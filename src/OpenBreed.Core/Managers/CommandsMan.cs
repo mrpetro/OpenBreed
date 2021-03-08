@@ -12,7 +12,6 @@ namespace OpenBreed.Core.Managers
         #region Private Fields
 
         private readonly Dictionary<Type, (MethodInfo Method, object Target)> handlers = new Dictionary<Type, (MethodInfo Method, object Target)>();
-        private readonly ICore core;
         private readonly ILogger logger;
         private Queue<ICommand> messageQueue = new Queue<ICommand>();
 
@@ -20,9 +19,8 @@ namespace OpenBreed.Core.Managers
 
         #region Internal Constructors
 
-        internal CommandsMan(ICore core, ILogger logger)
+        internal CommandsMan(ILogger logger)
         {
-            this.core = core;
             this.logger = logger;
         }
 
@@ -35,12 +33,12 @@ namespace OpenBreed.Core.Managers
             handlers.Add(typeof(T), (cmdHandler.Method, cmdHandler.Target));
         }
 
-        public void ExecuteEnqueued()
+        public void ExecuteEnqueued(ICore core)
         {
             while (messageQueue.Count > 0)
             {
                 var cmd = messageQueue.Dequeue();
-                Execute(cmd);
+                Execute(core, cmd);
             }
         }
 
@@ -58,7 +56,7 @@ namespace OpenBreed.Core.Managers
 
         #region Private Methods
 
-        private void Execute(ICommand msg)
+        private void Execute(ICore core, ICommand msg)
         {
             if (!handlers.TryGetValue(msg.GetType(), out (MethodInfo Method, object Target) handler))
                 return;

@@ -47,23 +47,9 @@ namespace OpenBreed.Input.Interface
 
         void AddPlayerKeyBinding(IPlayer player, string controlType, string controlAction, Key key);
 
-        void OnKeyDown(KeyboardKeyEventArgs e);
-
-        void OnKeyUp(KeyboardKeyEventArgs e);
-
-        void OnKeyPress(KeyPressEventArgs e);
-
-        void OnMouseDown(MouseButtonEventArgs e);
-
-        void OnMouseUp(MouseButtonEventArgs e);
-
-        void OnMouseMove(MouseMoveEventArgs e);
-
         void RegisterHandler(IInputHandler handler);
 
         IInputHandler GetHandler(string controlType);
-
-        void OnMouseWheel(MouseWheelEventArgs e);
 
         void Update();
 

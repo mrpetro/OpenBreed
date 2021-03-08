@@ -152,7 +152,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             gameViewport.Get<ViewportComponent>().CameraEntityId = playerCamera.Id;
 
-            var cursorEntity = core.GetManager<IEntityMan>().Create();
+            var cursorEntity = core.GetManager<IEntityMan>().Create(core);
         
             var spriteBuilder = SpriteComponentBuilder.New(core);
             spriteBuilder.SetAtlasByName("Atlases/Sprites/Cursors");

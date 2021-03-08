@@ -25,7 +25,7 @@ namespace OpenBreed.Sandbox.Entities
 
         public static Entity CreateText(ICore core, World world)
         {
-            var e = core.GetManager<IEntityMan>().Create();
+            var e = core.GetManager<IEntityMan>().Create(core);
             e.Add(new TextCaretComponent());
             e.Add(new TextDataComponent("This is test"));
 

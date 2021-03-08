@@ -14,18 +14,11 @@ namespace OpenBreed.Core.Managers
 
         #region Public Constructors
 
-        public EventsMan(ICore core)
+        public EventsMan()
         {
-            Core = core;
         }
 
         #endregion Public Constructors
-
-        #region Public Properties
-
-        public ICore Core { get; }
-
-        #endregion Public Properties
 
         #region Public Methods
 

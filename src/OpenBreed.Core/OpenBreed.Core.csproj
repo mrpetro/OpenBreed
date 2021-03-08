@@ -88,7 +88,7 @@
     <Compile Include="Extensions\QuaternionExtension.cs" />
     <Compile Include="Extensions\Vector2Extension.cs" />
     <Compile Include="Extensions\Vector3Extension.cs" />
-    <Compile Include="IClientMan.cs" />
+    <Compile Include="IViewClient.cs" />
     <Compile Include="Managers\IEventsMan.cs" />
     <Compile Include="Managers\ICommandsMan.cs" />
     <Compile Include="IJob.cs" />
@@ -103,6 +103,7 @@
     <Compile Include="Commands\SetEntityStateCommand.cs" />
     <Compile Include="ICore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="OpenTKWindowClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config" />

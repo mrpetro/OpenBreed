@@ -33,13 +33,13 @@ namespace OpenBreed.Wecs.Systems.Rendering
         private readonly List<Entity> entities = new List<Entity>();
         private readonly IEntityMan entityMan;
         private readonly IPrimitiveRenderer primitiveRenderer;
-        private readonly IClientMan windowClient;
+        private readonly IViewClient windowClient;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal ViewportSystem(IEntityMan entityMan, IPrimitiveRenderer primitiveRenderer, IClientMan windowClient)
+        internal ViewportSystem(IEntityMan entityMan, IPrimitiveRenderer primitiveRenderer, IViewClient windowClient)
         {
             this.entityMan = entityMan;
             this.primitiveRenderer = primitiveRenderer;

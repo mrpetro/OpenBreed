@@ -1,4 +1,5 @@
-﻿using OpenBreed.Wecs.Components;
+﻿using OpenBreed.Core;
+using OpenBreed.Wecs.Components;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,7 +12,7 @@ namespace OpenBreed.Wecs.Entities
 
         void RegisterComponentFactory<T>(IComponentFactory factory) where T : IComponentTemplate;
 
-        Entity Create(IEntityTemplate template);
+        Entity Create(ICore core, IEntityTemplate template);
 
         #endregion Public Methods
     }
@@ -44,7 +45,7 @@ namespace OpenBreed.Wecs.Entities
             componentFactories.Add(typeof(T), factory);
         }
 
-        public Entity Create(IEntityTemplate template)
+        public Entity Create(ICore core, IEntityTemplate template)
         {
             var components = new List<IEntityComponent>();
 
@@ -56,7 +57,7 @@ namespace OpenBreed.Wecs.Entities
                     throw new Exception($"Don't know how to create component based on template '{componentTemplate.GetType()}'");
             }
 
-            return entityMan.Create(components);
+            return entityMan.Create(core, components);
         }
 
         #endregion Public Methods

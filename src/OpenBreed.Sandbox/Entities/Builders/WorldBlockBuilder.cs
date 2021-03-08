@@ -56,7 +56,7 @@ namespace OpenBreed.Sandbox.Entities.Builders
 
         public override Entity Build()
         {
-            var entity = Core.GetManager<IEntityMan>().Create();
+            var entity = Core.GetManager<IEntityMan>().Create(Core);
             var fixtureMan = Core.GetManager<IFixtureMan>();
 
             entity.Add(PositionComponent.Create(pos));

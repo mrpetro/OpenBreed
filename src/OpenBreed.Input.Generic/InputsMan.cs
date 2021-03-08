@@ -47,7 +47,7 @@ namespace OpenBreed.Input.Generic
         #region Private Fields
 
         private readonly Dictionary<Key, KeyBinding> keyBindings = new Dictionary<Key, KeyBinding>();
-        private readonly IClientMan clientMan;
+        private readonly IViewClient clientMan;
         private Dictionary<string, IInputHandler> controlHandlers = new Dictionary<string, IInputHandler>();
         private float oldWheelPos;
         private Vector2 oldCursorPos;
@@ -58,9 +58,17 @@ namespace OpenBreed.Input.Generic
 
         #region Internal Constructors
 
-        internal InputsMan(IClientMan clientMan)
+        internal InputsMan(IViewClient clientMan)
         {
             this.clientMan = clientMan;
+
+            clientMan.KeyDownEvent += (s, a) => OnKeyDown(a);
+            clientMan.KeyUpEvent += (s, a) => OnKeyUp(a);
+            clientMan.KeyPressEvent += (s, a) => OnKeyPress(a);
+            clientMan.MouseMoveEvent += (s, a) => OnMouseMove(a);
+            clientMan.MouseDownEvent += (s, a) => OnMouseDown(a);
+            clientMan.MouseUpEvent += (s, a) => OnMouseUp(a);
+            clientMan.MouseWheelEvent += (s, a) => OnMouseWheel(a);
 
             KeyboardStateChanged += InputsMan_KeyboardStateChanged;
         }
@@ -113,38 +121,6 @@ namespace OpenBreed.Input.Generic
 
         #region Public Methods
 
-        public void OnKeyDown(KeyboardKeyEventArgs e)
-        {
-            KeyDown?.Invoke(this, e);
-        }
-
-        public void OnKeyUp(KeyboardKeyEventArgs e)
-        {
-            KeyUp?.Invoke(this, e);
-        }
-
-        public void OnKeyPress(KeyPressEventArgs e)
-        {
-            KeyPress?.Invoke(this, e);
-        }
-
-        public void OnMouseDown(MouseButtonEventArgs e)
-        {
-            MouseDown?.Invoke(this, e);
-        }
-
-        public void OnMouseUp(MouseButtonEventArgs e)
-        {
-            MouseUp?.Invoke(this, e);
-        }
-
-        public void OnMouseMove(MouseMoveEventArgs e)
-        {
-            MouseMove?.Invoke(this, e);
-
-            UpdateCursorPos(new Vector2(e.Position.X, e.Position.Y));
-        }
-
         public void RegisterHandler(IInputHandler handler)
         {
             var controlType = handler.InputType;
@@ -164,13 +140,6 @@ namespace OpenBreed.Input.Generic
             controlHandlers.TryGetValue(controlType, out handler);
 
             return handler;
-        }
-
-        public void OnMouseWheel(MouseWheelEventArgs e)
-        {
-            MouseWheel?.Invoke(this, e);
-
-            UpdateWheelPos(e.ValuePrecise);
         }
 
         public void Update()
@@ -215,6 +184,45 @@ namespace OpenBreed.Input.Generic
         #endregion Protected Methods
 
         #region Private Methods
+
+        private void OnMouseWheel(MouseWheelEventArgs e)
+        {
+            MouseWheel?.Invoke(this, e);
+
+            UpdateWheelPos(e.ValuePrecise);
+        }
+
+        private void OnKeyDown(KeyboardKeyEventArgs e)
+        {
+            KeyDown?.Invoke(this, e);
+        }
+
+        private void OnKeyUp(KeyboardKeyEventArgs e)
+        {
+            KeyUp?.Invoke(this, e);
+        }
+
+        private void OnKeyPress(KeyPressEventArgs e)
+        {
+            KeyPress?.Invoke(this, e);
+        }
+
+        private void OnMouseDown(MouseButtonEventArgs e)
+        {
+            MouseDown?.Invoke(this, e);
+        }
+
+        private void OnMouseUp(MouseButtonEventArgs e)
+        {
+            MouseUp?.Invoke(this, e);
+        }
+
+        private void OnMouseMove(MouseMoveEventArgs e)
+        {
+            MouseMove?.Invoke(this, e);
+
+            UpdateCursorPos(new Vector2(e.Position.X, e.Position.Y));
+        }
 
         private void CheckKeysPressed(KeyboardState state)
         {

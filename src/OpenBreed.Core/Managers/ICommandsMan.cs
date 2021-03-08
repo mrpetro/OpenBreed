@@ -9,7 +9,7 @@ namespace OpenBreed.Core.Managers
 
         void Register<T>(Func<ICore, T, bool> cmdHandler);
 
-        void ExecuteEnqueued();
+        void ExecuteEnqueued(ICore core);
 
         void Post(ICommand msg);
 

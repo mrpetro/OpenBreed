@@ -1,4 +1,5 @@
-﻿using OpenBreed.Wecs.Worlds;
+﻿using OpenBreed.Core;
+using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.ObjectModel;
 
@@ -24,7 +25,7 @@ namespace OpenBreed.Wecs.Worlds
 
         void Remove(World world);
 
-        void Update(float dt);
+        void Update(ICore core, float dt);
 
         void Subscribe<T>(Action<object, T> callback) where T : EventArgs;
 

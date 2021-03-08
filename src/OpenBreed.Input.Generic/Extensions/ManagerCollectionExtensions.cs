@@ -16,7 +16,7 @@ namespace OpenBreed.Input.Generic.Extensions
     {
         public static void SetupGenericInputManagers(this IManagerCollection manCollection)
         {
-            manCollection.AddSingleton<IInputsMan>(() => new InputsMan(manCollection.GetManager<IClientMan>()));
+            manCollection.AddSingleton<IInputsMan>(() => new InputsMan(manCollection.GetManager<IViewClient>()));
 
             manCollection.AddSingleton<IPlayersMan>(() => new PlayersMan(manCollection.GetManager<ILogger>(),
                                                                          manCollection.GetManager<IInputsMan>()));

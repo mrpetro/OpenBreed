@@ -49,7 +49,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
         public static Entity AddWorldExit(ICore core, World world, int x, int y, string worldName, int entryId)
         {
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\WorldGate\WorldGateExit.xml");
-            var teleportEntity = core.GetManager<IEntityFactory>().Create(entityTemplate);
+            var teleportEntity = core.GetManager<IEntityFactory>().Create(core, entityTemplate);
 
 
             teleportEntity.Tag = (worldName, entryId);
@@ -118,7 +118,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
         public static Entity AddWorldEntry(ICore core, World world, int x, int y, int entryId)
         {
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\WorldGate\WorldGateEntry.xml");
-            var teleportEntity = core.GetManager<IEntityFactory>().Create(entityTemplate);
+            var teleportEntity = core.GetManager<IEntityFactory>().Create(core, entityTemplate);
 
             teleportEntity.Tag = new WorldGatePair() { Id = entryId };
             teleportEntity.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);

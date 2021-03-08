@@ -118,10 +118,10 @@ namespace OpenBreed.Wecs.Worlds
         /// Updates all worlds
         /// </summary>
         /// <param name="dt">Delta time</param>
-        public void Update(float dt)
+        public void Update(ICore core, float dt)
         {
             for (int i = 0; i < Items.Count; i++)
-                UpdateWorld(Items[i], dt);
+                UpdateWorld(core, Items[i], dt);
         }
 
         public void Subscribe<T>(Action<object, T> callback) where T : EventArgs
@@ -188,13 +188,13 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Private Methods
 
-        private void UpdateWorld(World world, float dt)
+        private void UpdateWorld(ICore core, World world, float dt)
         {
             if (world.Paused)
             {
                 foreach (var item in world.Systems.OfType<IUpdatableSystem>())
                 {
-                    commandsMan.ExecuteEnqueued();
+                    commandsMan.ExecuteEnqueued(core);
                     item.UpdatePauseImmuneOnly(dt * world.TimeMultiplier);
                 }
                 //systems.OfType<IUpdatableSystem>().ForEach(item => item.UpdatePauseImmuneOnly(dt * TimeMultiplier));
@@ -203,7 +203,7 @@ namespace OpenBreed.Wecs.Worlds
             {
                 foreach (var item in world.Systems.OfType<IUpdatableSystem>())
                 {
-                    commandsMan.ExecuteEnqueued();
+                    commandsMan.ExecuteEnqueued(core);
                     item.Update(dt * world.TimeMultiplier);
                 }
                 //systems.OfType<IUpdatableSystem>().ForEach(item => item.Update(dt * TimeMultiplier));

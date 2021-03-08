@@ -40,7 +40,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         public static Entity CreateViewportEntity(ICore core, string name, float x, float y, float width, float height, bool drawBackground, bool clipping = true)
         {
-            var viewport = core.GetManager<IEntityMan>().Create();
+            var viewport = core.GetManager<IEntityMan>().Create(core);
             viewport.Tag = name;
 
             var vpcBuilder = ViewportComponentBuilderEx.New(core);
@@ -58,7 +58,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         public static World CreateWorld(Program core)
         {
-            var windowClient = core.GetManager<IClientMan>();
+            var windowClient = core.GetManager<IViewClient>();
             var builder = core.GetManager<IWorldMan>().Create().SetName("ScreenWorld");
             AddSystems(core, builder);
 
