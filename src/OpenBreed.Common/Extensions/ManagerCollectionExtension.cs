@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common.Data;
 using OpenBreed.Common.Formats;
 using OpenBreed.Common.Logging;
+using OpenBreed.Database.Interface;
 
 namespace OpenBreed.Common.Extensions
 {
@@ -16,46 +17,46 @@ namespace OpenBreed.Common.Extensions
 
         public static void SetupDataProviders(this IManagerCollection managerCollection)
         {
-            managerCollection.AddSingleton<DataSourceProvider>(() => new DataSourceProvider(managerCollection.GetManager<IWorkspaceMan>(),
+            managerCollection.AddSingleton<DataSourceProvider>(() => new DataSourceProvider(managerCollection.GetManager<IRepositoryProvider>(),
                                                                                                     managerCollection.GetManager<ILogger>(),
                                                                                                     managerCollection.GetManager<IVariableMan>()));
 
-            managerCollection.AddSingleton<AssetsDataProvider>(() => new AssetsDataProvider(managerCollection.GetManager<IWorkspaceMan>(),
+            managerCollection.AddSingleton<AssetsDataProvider>(() => new AssetsDataProvider(managerCollection.GetManager<IRepositoryProvider>(),
                                                                                                     managerCollection.GetManager<DataSourceProvider>(),
                                                                                                     managerCollection.GetManager<DataFormatMan>()));
 
             managerCollection.AddSingleton<ActionSetsDataProvider>(() => new ActionSetsDataProvider(managerCollection.GetManager<IModelsProvider>(),
-                                                                                                    managerCollection.GetManager<IWorkspaceMan>()));
+                                                                                                    managerCollection.GetManager<IRepositoryProvider>()));
 
             managerCollection.AddSingleton<SpriteSetsDataProvider>(() => new SpriteSetsDataProvider(managerCollection.GetManager<IModelsProvider>(),
-                                                                                                    managerCollection.GetManager<IWorkspaceMan>()));
+                                                                                                    managerCollection.GetManager<IRepositoryProvider>()));
 
             managerCollection.AddSingleton<TileSetsDataProvider>(() => new TileSetsDataProvider(managerCollection.GetManager<IModelsProvider>(),
-                                                                                                    managerCollection.GetManager<IWorkspaceMan>()));
+                                                                                                    managerCollection.GetManager<IRepositoryProvider>()));
 
             managerCollection.AddSingleton<ScriptsDataProvider>(() => new ScriptsDataProvider(managerCollection.GetManager<IModelsProvider>(),
-                                                                                                    managerCollection.GetManager<IWorkspaceMan>()));
+                                                                                                    managerCollection.GetManager<IRepositoryProvider>()));
 
             managerCollection.AddSingleton<EntityTemplatesDataProvider>(() => new EntityTemplatesDataProvider(managerCollection.GetManager<IModelsProvider>(),
-                                                                                                    managerCollection.GetManager<IWorkspaceMan>()));
+                                                                                                    managerCollection.GetManager<IRepositoryProvider>()));
 
             managerCollection.AddSingleton<PalettesDataProvider>(() => new PalettesDataProvider(managerCollection.GetManager<IModelsProvider>(),
-                                                                                                    managerCollection.GetManager<IWorkspaceMan>()));
+                                                                                                    managerCollection.GetManager<IRepositoryProvider>()));
 
             managerCollection.AddSingleton<TextsDataProvider>(() => new TextsDataProvider(managerCollection.GetManager<IModelsProvider>(),
-                                                                                                    managerCollection.GetManager<IWorkspaceMan>()));
+                                                                                                    managerCollection.GetManager<IRepositoryProvider>()));
 
             managerCollection.AddSingleton<MapsDataProvider>(() => new MapsDataProvider(managerCollection.GetManager<IModelsProvider>(),
-                                                                                        managerCollection.GetManager<IWorkspaceMan>(),
+                                                                                        managerCollection.GetManager<IRepositoryProvider>(),
                                                                                         managerCollection.GetManager<TileSetsDataProvider>(),
                                                                                         managerCollection.GetManager<PalettesDataProvider>(),
                                                                                         managerCollection.GetManager<ActionSetsDataProvider>()));
 
             managerCollection.AddSingleton<ImagesDataProvider>(() => new ImagesDataProvider(managerCollection.GetManager<IModelsProvider>(),
-                                                                                                    managerCollection.GetManager<IWorkspaceMan>()));
+                                                                                                    managerCollection.GetManager<IRepositoryProvider>()));
 
             managerCollection.AddSingleton<SoundsDataProvider>(() => new SoundsDataProvider(managerCollection.GetManager<IModelsProvider>(),
-                                                                                                    managerCollection.GetManager<IWorkspaceMan>()));
+                                                                                                    managerCollection.GetManager<IRepositoryProvider>()));
         }
 
         public static void SetupABFormats(this IManagerCollection managerCollection)
