@@ -71,6 +71,7 @@ namespace OpenBreed.Editor.UI.WinForms
 
             managerCollection.AddSingleton<IWorkspaceMan>(() => new EditorWorkspaceMan(managerCollection.GetManager<XmlDatabaseMan>(),
                                                                                        managerCollection.GetManager<ILogger>()));
+            managerCollection.AddSingleton<IRepositoryProvider>(() => managerCollection.GetManager<IWorkspaceMan>());
 
 
             managerCollection.SetupCommonViewModels();
