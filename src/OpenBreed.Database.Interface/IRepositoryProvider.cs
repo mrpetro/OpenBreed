@@ -1,10 +1,28 @@
-﻿using OpenBreed.Database.Interface;
-using OpenBreed.Database.Interface.Items;
+﻿using OpenBreed.Database.Interface.Items;
 using System;
 using System.Collections.Generic;
 
 namespace OpenBreed.Database.Interface
 {
+    public interface IReadonlyRepositoryProvider
+    {
+        #region Public Properties
+
+        IEnumerable<IReadonlyRepository> Repositories { get; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        IReadonlyRepository<TEntry> GetRepository<TEntry>() where TEntry : IEntry;
+
+        IReadonlyRepository GetRepository(string name);
+
+        IReadonlyRepository GetRepository(Type type);
+
+        #endregion Public Methods
+    }
+
     public interface IRepositoryProvider
     {
         #region Public Properties
@@ -15,7 +33,7 @@ namespace OpenBreed.Database.Interface
 
         #region Public Methods
 
-        IRepository<T> GetRepository<T>() where T : IEntry;
+        IRepository<TEntry> GetRepository<TEntry>() where TEntry : IEntry;
 
         IRepository GetRepository(string name);
 
