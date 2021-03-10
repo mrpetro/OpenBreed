@@ -78,7 +78,7 @@ namespace OpenBreed.Game
 
             variables.RegisterVariable(typeof(string), gameFolderPath, "Cfg.Options.ABTA.GameFolderPath");
 
-            manCollection.AddSingleton<IDatabase>(() => new XmlDatabaseMan(variables, gameDbFilePath));
+            manCollection.AddSingleton<IDatabase>(() => new XmlReadonlyDatabaseMan(variables, gameDbFilePath));
             return new Game(manCollection);
         }
     }
