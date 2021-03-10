@@ -11,51 +11,55 @@ namespace OpenBreed.Database.Xml.Repositories
     {
         #region Private Fields
 
-        private readonly XmlDbMapTableDef _table;
+        private readonly XmlDbMapTableDef context;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public XmlMapsRepository(XmlDatabaseMan context) : base(context)
+        public XmlMapsRepository(XmlDbMapTableDef context)
         {
-            _table = context.GetTable<XmlDbMapTableDef>();
+            this.context = context;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return _table.Items; } }
+        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
 
         public override string Name { get { return "Maps"; } }
 
         public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlMapEntry); } }
 
-        public override int Count => _table.Items.Count;
+        public override int Count => context.Items.Count;
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public override void Add(IMapEntry newEntry)
+        {
+            context.Items.Add((XmlMapEntry)newEntry);
+        }
+
+        #endregion Public Methods
 
         #region Protected Methods
 
         protected override IMapEntry GetEntryWithIndex(int index)
         {
-            return _table.Items[index];
+            return context.Items[index];
         }
 
         protected override int GetIndexOf(IMapEntry entry)
         {
-            return _table.Items.IndexOf((XmlMapEntry)entry);
+            return context.Items.IndexOf((XmlMapEntry)entry);
         }
 
         protected override void ReplaceEntryWithIndex(int index, IMapEntry newEntry)
         {
-            _table.Items[index] = (XmlMapEntry)newEntry;
-        }
-
-        public override void Add(IMapEntry newEntry)
-        {
-            _table.Items.Add((XmlMapEntry)newEntry);
+            context.Items[index] = (XmlMapEntry)newEntry;
         }
 
         #endregion Protected Methods

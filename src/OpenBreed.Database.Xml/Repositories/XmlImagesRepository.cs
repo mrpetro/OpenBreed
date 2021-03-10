@@ -11,49 +11,53 @@ namespace OpenBreed.Database.Xml.Repositories
     {
         #region Private Fields
 
-        private readonly XmlDbImageTableDef _table;
+        private readonly XmlDbImageTableDef context;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public XmlImagesRepository(XmlDatabaseMan context) : base(context)
+        public XmlImagesRepository(XmlDbImageTableDef context)
         {
-            _table = context.GetTable<XmlDbImageTableDef>();
+            this.context = context;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return _table.Items; } }
+        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
         public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlImageEntry); } }
         public override string Name { get { return "Images"; } }
 
-        public override int Count => _table.Items.Count;
+        public override int Count => context.Items.Count;
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public override void Add(IImageEntry newEntry)
+        {
+            context.Items.Add((XmlImageEntry)newEntry);
+        }
+
+        #endregion Public Methods
 
         #region Protected Methods
 
         protected override IImageEntry GetEntryWithIndex(int index)
         {
-            return _table.Items[index];
+            return context.Items[index];
         }
 
         protected override int GetIndexOf(IImageEntry entry)
         {
-            return _table.Items.IndexOf((XmlImageEntry)entry);
+            return context.Items.IndexOf((XmlImageEntry)entry);
         }
 
         protected override void ReplaceEntryWithIndex(int index, IImageEntry newEntry)
         {
-            _table.Items[index] = (XmlImageEntry)newEntry;
-        }
-
-        public override void Add(IImageEntry newEntry)
-        {
-            _table.Items.Add((XmlImageEntry)newEntry);
+            context.Items[index] = (XmlImageEntry)newEntry;
         }
 
         #endregion Protected Methods

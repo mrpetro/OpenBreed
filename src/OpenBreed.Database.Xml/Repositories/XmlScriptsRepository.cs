@@ -11,22 +11,22 @@ namespace OpenBreed.Database.Xml.Repositories
     {
         #region Private Fields
 
-        private readonly XmlDbScriptTableDef _table;
+        private readonly XmlDbScriptTableDef context;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public XmlScriptsRepository(XmlDatabaseMan context) : base(context)
+        public XmlScriptsRepository(XmlDbScriptTableDef context)
         {
-            _table = context.GetTable<XmlDbScriptTableDef>();
+            this.context = context;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return _table.Items; } }
+        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
 
         public override IEnumerable<Type> EntryTypes
         {
@@ -39,7 +39,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         public override string Name { get { return "Scripts"; } }
 
-        public override int Count => _table.Items.Count;
+        public override int Count => context.Items.Count;
 
         #endregion Public Properties
 
@@ -47,22 +47,22 @@ namespace OpenBreed.Database.Xml.Repositories
 
         protected override IScriptEntry GetEntryWithIndex(int index)
         {
-            return _table.Items[index];
+            return context.Items[index];
         }
 
         protected override int GetIndexOf(IScriptEntry entry)
         {
-            return _table.Items.IndexOf((XmlScriptEntry)entry);
+            return context.Items.IndexOf((XmlScriptEntry)entry);
         }
 
         protected override void ReplaceEntryWithIndex(int index, IScriptEntry newEntry)
         {
-            _table.Items[index] = (XmlScriptEntry)newEntry;
+            context.Items[index] = (XmlScriptEntry)newEntry;
         }
 
         public override void Add(IScriptEntry newEntry)
         {
-            _table.Items.Add((XmlScriptEntry)newEntry);
+            context.Items.Add((XmlScriptEntry)newEntry);
         }
 
         #endregion Protected Methods

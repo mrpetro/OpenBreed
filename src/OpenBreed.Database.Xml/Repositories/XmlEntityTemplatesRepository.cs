@@ -11,22 +11,22 @@ namespace OpenBreed.Database.Xml.Repositories
     {
         #region Private Fields
 
-        private readonly XmlDbEntityTemplateTableDef _table;
+        private readonly XmlDbEntityTemplateTableDef context;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public XmlEntityTemplatesRepository(XmlDatabaseMan context) : base(context)
+        public XmlEntityTemplatesRepository(XmlDbEntityTemplateTableDef context)
         {
-            _table = context.GetTable<XmlDbEntityTemplateTableDef>();
+            this.context = context;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return _table.Items; } }
+        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
 
         public override IEnumerable<Type> EntryTypes
         {
@@ -38,30 +38,34 @@ namespace OpenBreed.Database.Xml.Repositories
 
         public override string Name { get { return "Entity templates"; } }
 
-        public override int Count => _table.Items.Count;
+        public override int Count => context.Items.Count;
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public override void Add(IEntityTemplateEntry newEntry)
+        {
+            context.Items.Add((XmlEntityTemplateEntry)newEntry);
+        }
+
+        #endregion Public Methods
 
         #region Protected Methods
 
         protected override IEntityTemplateEntry GetEntryWithIndex(int index)
         {
-            return _table.Items[index];
+            return context.Items[index];
         }
 
         protected override int GetIndexOf(IEntityTemplateEntry entry)
         {
-            return _table.Items.IndexOf((XmlEntityTemplateEntry)entry);
+            return context.Items.IndexOf((XmlEntityTemplateEntry)entry);
         }
 
         protected override void ReplaceEntryWithIndex(int index, IEntityTemplateEntry newEntry)
         {
-            _table.Items[index] = (XmlEntityTemplateEntry)newEntry;
-        }
-
-        public override void Add(IEntityTemplateEntry newEntry)
-        {
-            _table.Items.Add((XmlEntityTemplateEntry)newEntry);
+            context.Items[index] = (XmlEntityTemplateEntry)newEntry;
         }
 
         #endregion Protected Methods

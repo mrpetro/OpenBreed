@@ -17,22 +17,22 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Private Fields
 
-        private readonly XmlDbPaletteTableDef _table;
+        private readonly XmlDbPaletteTableDef context;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public XmlPalettesRepository(XmlDatabaseMan context) : base(context)
+        public XmlPalettesRepository(XmlDbPaletteTableDef context)
         {
-            _table = context.GetTable<XmlDbPaletteTableDef>();
+            this.context = context;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return _table.Items; } }
+        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
         public override IEnumerable<Type> EntryTypes
         {
             get
@@ -44,7 +44,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         public override  string Name { get { return "Palettes"; } }
 
-        public override int Count => _table.Items.Count;
+        public override int Count => context.Items.Count;
 
 
         #endregion Public Properties
@@ -53,22 +53,22 @@ namespace OpenBreed.Database.Xml.Repositories
 
         protected override IPaletteEntry GetEntryWithIndex(int index)
         {
-            return _table.Items[index];
+            return context.Items[index];
         }
 
         protected override int GetIndexOf(IPaletteEntry entry)
         {
-            return _table.Items.IndexOf((XmlPaletteEntry)entry);
+            return context.Items.IndexOf((XmlPaletteEntry)entry);
         }
 
         protected override void ReplaceEntryWithIndex(int index, IPaletteEntry newEntry)
         {
-            _table.Items[index] = (XmlPaletteEntry)newEntry;
+            context.Items[index] = (XmlPaletteEntry)newEntry;
         }
 
         public override void Add(IPaletteEntry newEntry)
         {
-            _table.Items.Add((XmlPaletteEntry)newEntry);
+            context.Items.Add((XmlPaletteEntry)newEntry);
         }
 
         #endregion Public Methods

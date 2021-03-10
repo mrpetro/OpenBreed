@@ -8,22 +8,19 @@ namespace OpenBreed.Database.Xml.Repositories
 {
     public abstract class XmlRepositoryBase<T> : IRepository<T> where T : class, IEntry
     {
-        #region Protected Fields
+        #region Public Properties
 
-        protected XmlDatabaseMan context;
+        public abstract string Name { get; }
 
-        #endregion Protected Fields
+        public abstract IEnumerable<Type> EntryTypes { get; }
 
-        #region Protected Constructors
+        public abstract IEnumerable<IEntry> Entries { get; }
 
-        protected XmlRepositoryBase(XmlDatabaseMan context)
-        {
-            this.context = context;
-        }
+        public abstract int Count { get; }
 
-        #endregion Protected Constructors
+        #endregion Public Properties
 
-        #region Protected Methods
+        #region Public Methods
 
         public T GetNextTo(T entry)
         {
@@ -86,7 +83,6 @@ namespace OpenBreed.Database.Xml.Repositories
                 return null;
         }
 
-
         public IEntry Find(string id)
         {
             return Entries.FirstOrDefault(item => item.Id == id);
@@ -101,13 +97,9 @@ namespace OpenBreed.Database.Xml.Repositories
             return entry as T;
         }
 
-        public abstract string Name { get; }
+        #endregion Public Methods
 
-        public abstract IEnumerable<Type> EntryTypes { get; }
-
-        public abstract IEnumerable<IEntry> Entries { get; }
-
-        public abstract int Count { get; }
+        #region Protected Methods
 
         protected abstract T GetEntryWithIndex(int index);
 

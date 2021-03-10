@@ -11,24 +11,24 @@ namespace OpenBreed.Database.Xml.Repositories
     {
         #region Private Fields
 
-        private readonly XmlDbDataSourceTableDef _table;
+        private readonly XmlDbDataSourceTableDef context;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public XmlDataSourcesRepository(XmlDatabaseMan context) : base(context)
+        public XmlDataSourcesRepository(XmlDbDataSourceTableDef context)
         {
-            _table = context.GetTable<XmlDbDataSourceTableDef>();
+            this.context = context;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public override int Count => _table.Items.Count;
+        public override int Count => context.Items.Count;
 
-        public override IEnumerable<IEntry> Entries { get { return _table.Items; } }
+        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
 
         public override string Name { get { return "Data sources"; } }
 
@@ -43,22 +43,22 @@ namespace OpenBreed.Database.Xml.Repositories
 
         protected override IDataSourceEntry GetEntryWithIndex(int index)
         {
-            return _table.Items[index];
+            return context.Items[index];
         }
 
         protected override int GetIndexOf(IDataSourceEntry entry)
         {
-            return _table.Items.IndexOf((XmlDataSourceEntry)entry);
+            return context.Items.IndexOf((XmlDataSourceEntry)entry);
         }
 
         protected override void ReplaceEntryWithIndex(int index, IDataSourceEntry newEntry)
         {
-            _table.Items[index] = (XmlDataSourceEntry)newEntry;
+            context.Items[index] = (XmlDataSourceEntry)newEntry;
         }
 
         public override void Add(IDataSourceEntry newEntry)
         {
-            _table.Items.Add((XmlDataSourceEntry)newEntry);
+            context.Items.Add((XmlDataSourceEntry)newEntry);
         }
 
         #endregion Public Properties

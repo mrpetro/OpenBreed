@@ -11,22 +11,22 @@ namespace OpenBreed.Database.Xml.Repositories
     {
         #region Private Fields
 
-        private readonly XmlDbTileSetTableDef _table;
+        private readonly XmlDbTileSetTableDef context;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public XmlTileSetsRepository(XmlDatabaseMan context) : base(context)
+        public XmlTileSetsRepository(XmlDbTileSetTableDef context)
         {
-            _table = context.GetTable<XmlDbTileSetTableDef>();
+            this.context = context;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return _table.Items; } }
+        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
 
         public override IEnumerable<Type> EntryTypes
         {
@@ -39,7 +39,7 @@ namespace OpenBreed.Database.Xml.Repositories
 
         public override string Name { get { return "Tile sets"; } }
 
-        public override int Count => _table.Items.Count;
+        public override int Count => context.Items.Count;
 
         #endregion Public Properties
 
@@ -47,22 +47,22 @@ namespace OpenBreed.Database.Xml.Repositories
 
         protected override ITileSetEntry GetEntryWithIndex(int index)
         {
-            return _table.Items[index];
+            return context.Items[index];
         }
 
         protected override int GetIndexOf(ITileSetEntry entry)
         {
-            return _table.Items.IndexOf((XmlTileSetEntry)entry);
+            return context.Items.IndexOf((XmlTileSetEntry)entry);
         }
 
         protected override void ReplaceEntryWithIndex(int index, ITileSetEntry newEntry)
         {
-            _table.Items[index] = (XmlTileSetEntry)newEntry;
+            context.Items[index] = (XmlTileSetEntry)newEntry;
         }
 
         public override void Add(ITileSetEntry newEntry)
         {
-            _table.Items.Add((XmlTileSetEntry)newEntry);
+            context.Items.Add((XmlTileSetEntry)newEntry);
         }
 
         #endregion Protected Methods

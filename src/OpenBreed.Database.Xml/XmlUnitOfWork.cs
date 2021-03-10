@@ -2,6 +2,7 @@
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Xml.Repositories;
+using OpenBreed.Database.Xml.Tables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace OpenBreed.Database.Xml
     {
         #region Private Fields
 
-        private readonly XmlDatabaseMan _context;
+        private readonly XmlDatabaseMan context;
 
         private readonly Dictionary<Type, IRepository> _repositories = new Dictionary<Type, IRepository>();
 
@@ -22,7 +23,7 @@ namespace OpenBreed.Database.Xml
 
         internal XmlUnitOfWork(XmlDatabaseMan context)
         {
-            _context = context;
+            this.context = context;
 
             RegisterRepos();
         }
@@ -31,7 +32,7 @@ namespace OpenBreed.Database.Xml
 
         #region Public Properties
 
-        public string Name { get { return _context.Name; } }
+        public string Name { get { return context.Name; } }
 
         public IEnumerable<IRepository> Repositories { get { return _repositories.Values; } }
 
@@ -61,7 +62,7 @@ namespace OpenBreed.Database.Xml
 
         public void Save()
         {
-            _context.Save();
+            context.Save();
         }
 
         #endregion Public Methods
@@ -79,18 +80,18 @@ namespace OpenBreed.Database.Xml
 
         private void RegisterRepos()
         {
-            RegisterRepository(new XmlDataSourcesRepository(_context));
-            RegisterRepository(new XmlAssetsRepository(_context));
-            RegisterRepository(new XmlTileSetsRepository(_context));
-            RegisterRepository(new XmlSpriteSetsRepository(_context));
-            RegisterRepository(new XmlActionSetsRepository(_context));
-            RegisterRepository(new XmlImagesRepository(_context));
-            RegisterRepository(new XmlPalettesRepository(_context));
-            RegisterRepository(new XmlTextsRepository(_context));
-            RegisterRepository(new XmlMapsRepository(_context));
-            RegisterRepository(new XmlSoundsRepository(_context));
-            RegisterRepository(new XmlScriptsRepository(_context));
-            RegisterRepository(new XmlEntityTemplatesRepository(_context));
+            RegisterRepository(new XmlDataSourcesRepository(context.GetTable<XmlDbDataSourceTableDef>()));
+            RegisterRepository(new XmlAssetsRepository(context.GetTable<XmlDbAssetTableDef>()));
+            RegisterRepository(new XmlTileSetsRepository(context.GetTable<XmlDbTileSetTableDef>()));
+            RegisterRepository(new XmlSpriteSetsRepository(context.GetTable<XmlDbSpriteSetTableDef>()));
+            RegisterRepository(new XmlActionSetsRepository(context.GetTable<XmlDbActionSetTableDef>()));
+            RegisterRepository(new XmlImagesRepository(context.GetTable<XmlDbImageTableDef>()));
+            RegisterRepository(new XmlPalettesRepository(context.GetTable<XmlDbPaletteTableDef>()));
+            RegisterRepository(new XmlTextsRepository(context.GetTable<XmlDbTextTableDef>()));
+            RegisterRepository(new XmlMapsRepository(context.GetTable<XmlDbMapTableDef>()));
+            RegisterRepository(new XmlSoundsRepository(context.GetTable<XmlDbSoundTableDef>()));
+            RegisterRepository(new XmlScriptsRepository(context.GetTable<XmlDbScriptTableDef>()));
+            RegisterRepository(new XmlEntityTemplatesRepository(context.GetTable<XmlDbEntityTemplateTableDef>()));
         }
 
         #endregion Private Methods

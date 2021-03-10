@@ -1,44 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using OpenBreed.Common.Formats;
-using OpenBreed.Common.Logging;
-using System.ComponentModel;
-using System.Globalization;
-using OpenBreed.Database.Xml.Tables;
-using OpenBreed.Database.Xml.Items.Assets;
-using OpenBreed.Common;
-using OpenBreed.Database.Interface.Items;
+﻿using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Assets;
-using OpenBreed.Database.Interface;
+using OpenBreed.Database.Xml.Items.Assets;
+using OpenBreed.Database.Xml.Tables;
+using System;
+using System.Collections.Generic;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
     public class XmlAssetsRepository : XmlRepositoryBase<IAssetEntry>
     {
-
         #region Private Fields
 
-        private readonly XmlDbAssetTableDef _table;
+        private readonly XmlDbAssetTableDef context;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public XmlAssetsRepository(XmlDatabaseMan context) : base(context)
+        public XmlAssetsRepository(XmlDbAssetTableDef context)
         {
-            _table = context.GetTable<XmlDbAssetTableDef>();
-
-
+            this.context = context;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return _table.Items; } }
+        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
         public override string Name { get { return "Assets"; } }
 
         public override IEnumerable<Type> EntryTypes
@@ -49,32 +37,36 @@ namespace OpenBreed.Database.Xml.Repositories
             }
         }
 
-        public override int Count => _table.Items.Count;
+        public override int Count => context.Items.Count;
 
         #endregion Public Properties
 
         #region Public Methods
 
+        public override void Add(IAssetEntry newEntry)
+        {
+            context.Items.Add((XmlAssetEntry)newEntry);
+        }
+
+        #endregion Public Methods
+
+        #region Protected Methods
+
         protected override IAssetEntry GetEntryWithIndex(int index)
         {
-            return _table.Items[index];
+            return context.Items[index];
         }
 
         protected override int GetIndexOf(IAssetEntry entry)
         {
-            return _table.Items.IndexOf((XmlAssetEntry)entry);
+            return context.Items.IndexOf((XmlAssetEntry)entry);
         }
 
         protected override void ReplaceEntryWithIndex(int index, IAssetEntry newEntry)
         {
-            _table.Items[index] = (XmlAssetEntry)newEntry;
+            context.Items[index] = (XmlAssetEntry)newEntry;
         }
 
-        public override void Add(IAssetEntry newEntry)
-        {
-            _table.Items.Add((XmlAssetEntry)newEntry);
-        }
-        #endregion Public Methods
-
+        #endregion Protected Methods
     }
 }

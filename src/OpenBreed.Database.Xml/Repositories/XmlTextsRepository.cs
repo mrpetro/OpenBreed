@@ -17,22 +17,22 @@ namespace OpenBreed.Database.Xml.Repositories
 
         #region Private Fields
 
-        private readonly XmlDbTextTableDef _table;
+        private readonly XmlDbTextTableDef context;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public XmlTextsRepository(XmlDatabaseMan context) : base(context)
+        public XmlTextsRepository(XmlDbTextTableDef context)
         {
-            _table = context.GetTable<XmlDbTextTableDef>();
+            this.context = context;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public override IEnumerable<IEntry> Entries { get { return _table.Items; } }
+        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
         public override IEnumerable<Type> EntryTypes
         {
             get
@@ -44,7 +44,7 @@ namespace OpenBreed.Database.Xml.Repositories
         }
         public override string Name { get { return "Texts"; } }
 
-        public override int Count => _table.Items.Count;
+        public override int Count => context.Items.Count;
 
         #endregion Public Properties
 
@@ -52,22 +52,22 @@ namespace OpenBreed.Database.Xml.Repositories
 
         protected override ITextEntry GetEntryWithIndex(int index)
         {
-            return _table.Items[index];
+            return context.Items[index];
         }
 
         protected override int GetIndexOf(ITextEntry entry)
         {
-            return _table.Items.IndexOf((XmlTextEntry)entry);
+            return context.Items.IndexOf((XmlTextEntry)entry);
         }
 
         protected override void ReplaceEntryWithIndex(int index, ITextEntry newEntry)
         {
-            _table.Items[index] = (XmlTextEntry)newEntry;
+            context.Items[index] = (XmlTextEntry)newEntry;
         }
 
         public override void Add(ITextEntry newEntry)
         {
-            _table.Items.Add((XmlTextEntry)newEntry);
+            context.Items.Add((XmlTextEntry)newEntry);
         }
 
         #endregion Public Methods
