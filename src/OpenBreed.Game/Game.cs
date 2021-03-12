@@ -38,8 +38,6 @@ namespace OpenBreed.Game
         #region Private Fields
 
         private readonly IScriptMan scriptMan;
-        private readonly IDatabase database;
-        private readonly IUnitOfWork unitOfWork;
         private readonly LogConsolePrinter logConsolePrinter;
         private readonly IVariableMan variables;
         private readonly IModelsProvider modelsProvider;
@@ -48,7 +46,6 @@ namespace OpenBreed.Game
         private readonly IInputsMan inputs;
         private readonly IAnimMan animations;
         private readonly IWorldMan worlds;
-        private readonly IViewClient clientMan;
         private readonly IEntityFactory entityFactory;
 
         private readonly IPlayersMan players;
@@ -61,7 +58,6 @@ namespace OpenBreed.Game
         {
             this.manCollection2 = manCollection;
             this.scriptMan = manCollection.GetManager<IScriptMan>();
-            this.database = manCollection.GetManager<IDatabase>();
             this.variables = manCollection.GetManager<IVariableMan>();
             this.entities = manCollection.GetManager<IEntityMan>();
             this.inputs = manCollection.GetManager<IInputsMan>();
@@ -69,14 +65,11 @@ namespace OpenBreed.Game
             this.entityFactory = manCollection.GetManager<IEntityFactory>();
             this.worlds = manCollection.GetManager<IWorldMan>();
             this.players = manCollection.GetManager<IPlayersMan>();
-            this.unitOfWork = manCollection.GetManager<IUnitOfWork>();
             this.modelsProvider = manCollection.GetManager<IModelsProvider>();
             this.renderingMan = manCollection.GetManager<IRenderingMan>();
 
             logConsolePrinter = new LogConsolePrinter(Logging);
             logConsolePrinter.StartPrinting();
-
-            clientMan = new OpenTKWindowClient(800, 600, "OpenBreed");
         }
 
         #endregion Public Constructors
@@ -96,7 +89,7 @@ namespace OpenBreed.Game
 
         public override void Exit()
         {
-            clientMan.Exit();
+            manCollection2.GetManager<IViewClient>().Exit();
         }
 
         public override void Load()
@@ -148,7 +141,7 @@ namespace OpenBreed.Game
             ViewportSystem.RegisterHandlers(Commands);
             TextSystem.RegisterHandlers(Commands);
 
-            clientMan.Run();
+            manCollection2.GetManager<IViewClient>().Run();
         }
 
         #endregion Public Methods

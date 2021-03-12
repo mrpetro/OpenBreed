@@ -3,6 +3,7 @@ using OpenBreed.Animation.Interface;
 using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Common;
 using OpenBreed.Common.Data;
+using OpenBreed.Common.Database.Xml.Extensions;
 using OpenBreed.Common.Extensions;
 using OpenBreed.Common.Formats;
 using OpenBreed.Common.Logging;
@@ -67,9 +68,9 @@ namespace OpenBreed.Game
             manCollection.SetupControlSystems();
             manCollection.SetupAnimationSystems();
             manCollection.SetupGuiSystems();
+            manCollection.SetupXmlReadonlyDatabase();
             //manCollection.SetupAudioSystems();
 
-            manCollection.SetupGameScriptingApi();
         }
 
         public ICore CreateGame(string gameDbFilePath, string gameFolderPath)
@@ -78,7 +79,10 @@ namespace OpenBreed.Game
 
             variables.RegisterVariable(typeof(string), gameFolderPath, "Cfg.Options.ABTA.GameFolderPath");
 
-            manCollection.AddSingleton<IDatabase>(() => new XmlReadonlyDatabaseMan(variables, gameDbFilePath));
+            manCollection.AddSingleton<IRepositoryProvider>(() => new XmlReadonlyDatabaseMan(variables, gameDbFilePath));
+
+            manCollection.SetupGameScriptingApi();
+
             return new Game(manCollection);
         }
     }

@@ -28,6 +28,8 @@ namespace OpenBreed.Game
 
             var gameFactory = new GameFactory();
             var game = gameFactory.CreateGame(gameDbFilePath, gameFolderPath);
+
+
             game.Run();     
         }
 
