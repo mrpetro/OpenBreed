@@ -131,6 +131,7 @@
     <Compile Include="XmlDatabaseMan.cs" />
     <Compile Include="XmlDbEntry.cs" />
     <Compile Include="XmlFormatParameter.cs" />
+    <Compile Include="XmlReadonlyDatabaseMan.cs" />
     <Compile Include="XmlUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>

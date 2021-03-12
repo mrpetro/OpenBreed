@@ -14,5 +14,10 @@ namespace OpenBreed.Common.Database.Xml.Extensions
         {
             managerCollection.AddSingleton<XmlDatabaseMan>(() => new XmlDatabaseMan(managerCollection.GetManager<IVariableMan>()));
         }
+
+        public static void SetupXmlReadonlyDatabase(this IManagerCollection managerCollection)
+        {
+            managerCollection.AddSingleton<XmlReadonlyDatabaseMan>(() => new XmlReadonlyDatabaseMan(managerCollection.GetManager<IVariableMan>()));
+        }
     }
 }
