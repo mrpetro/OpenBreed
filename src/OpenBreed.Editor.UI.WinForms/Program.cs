@@ -31,6 +31,7 @@ using OpenBreed.Editor.VM.Sprites;
 using OpenBreed.Editor.VM.Texts;
 using OpenBreed.Editor.VM.Tiles;
 using System;
+using OpenBreed.Common.Database.Xml.Extensions;
 
 namespace OpenBreed.Editor.UI.WinForms
 {
@@ -65,15 +66,13 @@ namespace OpenBreed.Editor.UI.WinForms
 
             managerCollection.AddSingleton<EditorApplication>(() => new EditorApplication(managerCollection, managerCollection.GetManager<DataSourceProvider>()));
 
-            managerCollection.AddSingleton<XmlDatabaseMan>(() => new XmlDatabaseMan(managerCollection.GetManager<IVariableMan>()));
-
             managerCollection.AddSingleton<IDialogProvider>(() => new DialogProvider(managerCollection.GetManager<EditorApplication>()));
 
             managerCollection.AddSingleton<IWorkspaceMan>(() => new EditorWorkspaceMan(managerCollection.GetManager<XmlDatabaseMan>(),
                                                                                        managerCollection.GetManager<ILogger>()));
             managerCollection.AddSingleton<IRepositoryProvider>(() => managerCollection.GetManager<IWorkspaceMan>());
 
-
+            managerCollection.SetupXmlDatabase();
             managerCollection.SetupCommonViewModels();
             managerCollection.SetupDbEntryEditors();
             managerCollection.SetupDbEntrySubEditors();
