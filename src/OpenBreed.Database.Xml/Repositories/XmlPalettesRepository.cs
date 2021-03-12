@@ -12,6 +12,59 @@ using OpenBreed.Database.Xml.Tables;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
+    public class XmlReadonlyPalettesRepository : XmlReadonlyRepositoryBase<IPaletteEntry>
+    {
+
+        #region Private Fields
+
+        private readonly XmlDbPaletteTableDef context;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public XmlReadonlyPalettesRepository(XmlDbPaletteTableDef context)
+        {
+            this.context = context;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<Type> EntryTypes
+        {
+            get
+            {
+                yield return typeof(XmlPaletteFromBinaryEntry);
+                yield return typeof(XmlPaletteFromMapEntry);
+            }
+        }
+
+        public override string Name { get { return "Palettes"; } }
+
+        public override int Count => context.Items.Count;
+
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        protected override IPaletteEntry GetEntryWithIndex(int index)
+        {
+            return context.Items[index];
+        }
+
+        protected override int GetIndexOf(IPaletteEntry entry)
+        {
+            return context.Items.IndexOf((XmlPaletteEntry)entry);
+        }
+
+        #endregion Public Methods
+
+    }
+
     public class XmlPalettesRepository : XmlRepositoryBase<IPaletteEntry>
     {
 

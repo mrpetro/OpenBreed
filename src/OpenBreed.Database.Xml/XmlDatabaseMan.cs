@@ -18,17 +18,17 @@ namespace OpenBreed.Database.Xml
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        public XmlDatabaseMan(IVariableMan variableMan, string dbFilePath = null)
+        internal XmlDatabaseMan(IVariableMan variableMan, string dbFilePath = null)
         {
             this.variables = variableMan;
 
-            if(dbFilePath != null)
+            if (dbFilePath != null)
                 Open(dbFilePath);
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
 

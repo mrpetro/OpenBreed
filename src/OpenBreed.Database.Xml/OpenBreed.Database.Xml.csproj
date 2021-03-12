@@ -65,6 +65,7 @@
     <Compile Include="..\Shared\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Extensions\ServiceCollectionExtensions.cs" />
     <Compile Include="Items\Actions\XmlActionDef.cs" />
     <Compile Include="Items\Actions\XmlActionPresentationDef.cs" />
     <Compile Include="Items\Actions\XmlActionTriggersDef.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Repositories\XmlImagesRepository.cs" />
     <Compile Include="Repositories\XmlMapsRepository.cs" />
     <Compile Include="Repositories\XmlPalettesRepository.cs" />
+    <Compile Include="Repositories\XmlReadonlyRepositoryBase.cs" />
     <Compile Include="Repositories\XmlRepositoryBase.cs" />
     <Compile Include="Repositories\XmlSoundsRepository.cs" />
     <Compile Include="Repositories\XmlSpriteSetsRepository.cs" />

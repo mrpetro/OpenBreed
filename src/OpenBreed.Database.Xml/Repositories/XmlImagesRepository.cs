@@ -7,6 +7,52 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
+    public class XmlReadonlyImagesRepository : XmlReadonlyRepositoryBase<IImageEntry>
+    {
+        #region Private Fields
+
+        private readonly XmlDbImageTableDef context;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public XmlReadonlyImagesRepository(XmlDbImageTableDef context)
+        {
+            this.context = context;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
+        public override IEnumerable<Type> EntryTypes { get { yield return typeof(XmlImageEntry); } }
+        public override string Name { get { return "Images"; } }
+
+        public override int Count => context.Items.Count;
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        protected override IImageEntry GetEntryWithIndex(int index)
+        {
+            return context.Items[index];
+        }
+
+        protected override int GetIndexOf(IImageEntry entry)
+        {
+            return context.Items.IndexOf((XmlImageEntry)entry);
+        }
+
+        #endregion Protected Methods
+    }
+
     public class XmlImagesRepository : XmlRepositoryBase<IImageEntry>
     {
         #region Private Fields

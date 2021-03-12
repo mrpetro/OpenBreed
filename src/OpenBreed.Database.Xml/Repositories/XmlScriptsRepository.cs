@@ -7,6 +7,57 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
+    public class XmlReadonlyScriptsRepository : XmlReadonlyRepositoryBase<IScriptEntry>
+    {
+        #region Private Fields
+
+        private readonly XmlDbScriptTableDef context;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public XmlReadonlyScriptsRepository(XmlDbScriptTableDef context)
+        {
+            this.context = context;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
+
+        public override IEnumerable<Type> EntryTypes
+        {
+            get
+            {
+                yield return typeof(XmlScriptEmbeddedEntry);
+                yield return typeof(XmlScriptFromFileEntry);
+            }
+        }
+
+        public override string Name { get { return "Scripts"; } }
+
+        public override int Count => context.Items.Count;
+
+        #endregion Public Properties
+
+        #region Protected Methods
+
+        protected override IScriptEntry GetEntryWithIndex(int index)
+        {
+            return context.Items[index];
+        }
+
+        protected override int GetIndexOf(IScriptEntry entry)
+        {
+            return context.Items.IndexOf((XmlScriptEntry)entry);
+        }
+
+        #endregion Protected Methods
+    }
+
     public class XmlScriptsRepository : XmlRepositoryBase<IScriptEntry>
     {
         #region Private Fields

@@ -7,6 +7,53 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Database.Xml.Repositories
 {
+    public class XmlReadonlyDataSourcesRepository : XmlReadonlyRepositoryBase<IDataSourceEntry>
+    {
+        #region Private Fields
+
+        private readonly XmlDbDataSourceTableDef context;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public XmlReadonlyDataSourcesRepository(XmlDbDataSourceTableDef context)
+        {
+            this.context = context;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public override int Count => context.Items.Count;
+
+        public override IEnumerable<IEntry> Entries { get { return context.Items; } }
+
+        public override string Name { get { return "Data sources"; } }
+
+        public override IEnumerable<Type> EntryTypes
+        {
+            get
+            {
+                yield return typeof(XmlFileDataSourceEntry);
+                yield return typeof(XmlEPFArchiveFileDataSourceEntry);
+            }
+        }
+
+        protected override IDataSourceEntry GetEntryWithIndex(int index)
+        {
+            return context.Items[index];
+        }
+
+        protected override int GetIndexOf(IDataSourceEntry entry)
+        {
+            return context.Items.IndexOf((XmlDataSourceEntry)entry);
+        }
+
+        #endregion Public Properties
+    }
+
     public class XmlDataSourcesRepository : XmlRepositoryBase<IDataSourceEntry>
     {
         #region Private Fields
