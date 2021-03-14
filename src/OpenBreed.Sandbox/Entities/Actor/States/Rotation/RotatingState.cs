@@ -6,19 +6,24 @@ using System;
 using System.Linq;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 {
     public class RotatingState : IState<RotationState, RotationImpulse>
     {
+        private readonly IFsmMan fsmMan;
+        private readonly ICommandsMan commandsMan;
         #region Private Fields
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public RotatingState()
+        public RotatingState(IFsmMan fsmMan, ICommandsMan commandsMan)
         {
+            this.fsmMan = fsmMan;
+            this.commandsMan = commandsMan;
         }
 
         #endregion Public Constructors

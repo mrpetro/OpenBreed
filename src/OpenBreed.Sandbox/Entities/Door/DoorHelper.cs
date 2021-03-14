@@ -25,6 +25,8 @@ using OpenBreed.Fsm;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Commands;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Core.Managers;
+using OpenBreed.Physics.Interface.Managers;
 
 namespace OpenBreed.Sandbox.Entities.Door
 {
@@ -78,12 +80,16 @@ namespace OpenBreed.Sandbox.Entities.Door
 
         public static void CreateFsm(ICore core)
         {
+            var fsmMan = core.GetManager<IFsmMan>();
+            var commandsMan = core.GetManager<ICommandsMan>();
+            var collisionMan = core.GetManager<ICollisionMan>();
+
             var fsm = core.GetManager<IFsmMan>().Create<FunctioningState, FunctioningImpulse>("Door.Functioning");
 
-            fsm.AddState(new OpeningState());
-            fsm.AddState(new OpenedAwaitClose());
-            fsm.AddState(new ClosingState());
-            fsm.AddState(new ClosedState(core));
+            fsm.AddState(new OpeningState(fsmMan, commandsMan));
+            fsm.AddState(new OpenedAwaitClose(fsmMan, commandsMan));
+            fsm.AddState(new ClosingState(fsmMan, commandsMan));
+            fsm.AddState(new ClosedState(fsmMan, commandsMan, collisionMan));
 
             fsm.AddTransition(FunctioningState.Closed, FunctioningImpulse.Open, FunctioningState.Opening);
             fsm.AddTransition(FunctioningState.Opening, FunctioningImpulse.StopOpening, FunctioningState.Opened);

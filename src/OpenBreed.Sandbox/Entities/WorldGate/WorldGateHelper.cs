@@ -26,6 +26,7 @@ using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Entities.WorldGate
 {
@@ -87,20 +88,24 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
             var worldIdToRemoveFrom = targetEntity.World.Id;
 
+            var worldMan = core.GetManager<IWorldMan>();
+            var eventsMan = core.GetManager<IEventsMan>();
+
+
             //Pause this world
-            jobChain.Equeue(new WorldJob<WorldPausedEventArgs>(core.GetManager<IWorldMan>(), (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => core.Commands.Post(new PauseWorldCommand(worldIdToRemoveFrom, true))));
+            jobChain.Equeue(new WorldJob<WorldPausedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => core.Commands.Post(new PauseWorldCommand(worldIdToRemoveFrom, true))));
             //Fade out camera
             jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => core.Commands.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_OUT, 0))));
             //Remove entity from this world
-            jobChain.Equeue(new WorldJob<EntityRemovedEventArgs>(core.GetManager<IWorldMan>(), (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => core.Commands.Post(new RemoveEntityCommand(targetEntity.World.Id, targetEntity.Id))));
+            jobChain.Equeue(new WorldJob<EntityRemovedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => core.Commands.Post(new RemoveEntityCommand(targetEntity.World.Id, targetEntity.Id))));
             //Load next world if needed
             jobChain.Equeue(new EntityJob(() => TryLoadWorld(core, exitInfo.WorldName, exitInfo.EntryId)));
             //Add entity to next world
-            jobChain.Equeue(new WorldJob<EntityAddedEventArgs>(core.GetManager<IWorldMan>(), (s, a) => { return core.GetManager<IWorldMan>().GetById(a.WorldId).Name == exitInfo.WorldName; }, () => AddToWorld(core, targetEntity, exitInfo.WorldName, exitInfo.EntryId)));
+            jobChain.Equeue(new WorldJob<EntityAddedEventArgs>(worldMan, eventsMan, (s, a) => { return core.GetManager<IWorldMan>().GetById(a.WorldId).Name == exitInfo.WorldName; }, () => AddToWorld(core, targetEntity, exitInfo.WorldName, exitInfo.EntryId)));
             //Set position of entity to entry position in next world
             jobChain.Equeue(new EntityJob(() => SetPosition(targetEntity, exitInfo.EntryId, true)));
             //Unpause this world
-            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(core.GetManager<IWorldMan>(), (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => core.Commands.Post(new PauseWorldCommand(worldIdToRemoveFrom, false))));
+            jobChain.Equeue(new WorldJob<WorldUnpausedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => core.Commands.Post(new PauseWorldCommand(worldIdToRemoveFrom, false))));
             //Fade in camera
             jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => core.Commands.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0))));
 

@@ -12,14 +12,16 @@ namespace OpenBreed.Wecs.Worlds
 
         private Func<object, TEventArgs, bool> triggerFunc;
         private IWorldMan worldMan;
+        private readonly IEventsMan eventsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public WorldJob(IWorldMan worldMan, Func<object, TEventArgs, bool> triggerFunc, Action action)
+        public WorldJob(IWorldMan worldMan, IEventsMan eventsMan, Func<object, TEventArgs, bool> triggerFunc, Action action)
         {
             this.worldMan = worldMan;
+            this.eventsMan = eventsMan;
             this.triggerFunc = triggerFunc;
             this.action = action;
         }
@@ -40,7 +42,7 @@ namespace OpenBreed.Wecs.Worlds
 
         public void Execute()
         {
-            worldMan.Subscribe<TEventArgs>(OnEvent);
+            eventsMan.Subscribe<TEventArgs>(worldMan, OnEvent);
             action.Invoke();
         }
 
@@ -57,7 +59,7 @@ namespace OpenBreed.Wecs.Worlds
             if (!triggerFunc.Invoke(sender, args))
                 return;
 
-            worldMan.Unsubscribe<TEventArgs>(OnEvent);
+            eventsMan.Unsubscribe<TEventArgs>(worldMan, OnEvent);
             Complete(this);
         }
 

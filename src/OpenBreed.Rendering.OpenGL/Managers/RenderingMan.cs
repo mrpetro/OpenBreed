@@ -55,11 +55,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Public Methods
 
-        public void Subscribe<T>(Action<object, T> callback) where T : EventArgs
-        {
-            eventsMan.Subscribe(this, callback);
-        }
-
         public void Cleanup()
         {
         }

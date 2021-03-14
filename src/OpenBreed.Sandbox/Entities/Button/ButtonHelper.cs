@@ -15,6 +15,7 @@ using OpenBreed.Wecs;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Worlds;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Entities.Button
 {
@@ -32,10 +33,13 @@ namespace OpenBreed.Sandbox.Entities.Button
 
         public static void CreateFsm(ICore core)
         {
-            var buttonFsm = core.GetManager<IFsmMan>().Create<ButtonState, ButtonImpulse>("Button");
+            var fsmMan = core.GetManager<IFsmMan>();
+            var commandsMan = core.GetManager<ICommandsMan>();
 
-            buttonFsm.AddState(new IdleState());
-            buttonFsm.AddState(new PressedState());
+            var buttonFsm = fsmMan.Create<ButtonState, ButtonImpulse>("Button");
+
+            buttonFsm.AddState(new IdleState(fsmMan, commandsMan));
+            buttonFsm.AddState(new PressedState(fsmMan, commandsMan));
 
             buttonFsm.AddTransition(ButtonState.Pressed, ButtonImpulse.Unpress, ButtonState.Idle);
             buttonFsm.AddTransition(ButtonState.Idle, ButtonImpulse.Press, ButtonState.Pressed);

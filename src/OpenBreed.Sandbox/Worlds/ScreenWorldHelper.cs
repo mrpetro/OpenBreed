@@ -18,6 +18,7 @@ using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -73,10 +74,10 @@ namespace OpenBreed.Sandbox.Worlds
 
             var renderingMan = core.GetManager<IRenderingMan>();
 
-            renderingMan.Subscribe<ClientResizedEventArgs>((s, a) => ResizeGameViewport(gameViewport, a));
-            renderingMan.Subscribe<ClientResizedEventArgs>((s, a) => ResizeHudViewport(hudViewport, a));
-            renderingMan.Subscribe<ClientResizedEventArgs>((s, a) => ResizeTextViewport(hudViewport, a));
-
+            var eventsMan = core.GetManager<IEventsMan>();
+            eventsMan.Subscribe<ClientResizedEventArgs>(renderingMan, (s, a) => ResizeGameViewport(gameViewport, a));
+            eventsMan.Subscribe<ClientResizedEventArgs>(renderingMan, (s, a) => ResizeHudViewport(hudViewport, a));
+            eventsMan.Subscribe<ClientResizedEventArgs>(renderingMan, (s, a) => ResizeTextViewport(hudViewport, a));
 
             core.Commands.Post(new AddEntityCommand(world.Id, gameViewport.Id));
             core.Commands.Post(new AddEntityCommand(world.Id, hudViewport.Id));

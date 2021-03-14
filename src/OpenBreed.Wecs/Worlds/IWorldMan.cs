@@ -27,10 +27,6 @@ namespace OpenBreed.Wecs.Worlds
 
         void Update(ICore core, float dt);
 
-        void Subscribe<T>(Action<object, T> callback) where T : EventArgs;
-
-        void Unsubscribe<T>(Action<object, T> callback) where T : EventArgs;
-
         void Cleanup();
 
         void RegisterWorld(World newWorld);

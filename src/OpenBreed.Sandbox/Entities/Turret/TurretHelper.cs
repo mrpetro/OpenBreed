@@ -11,6 +11,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Entities.Xml;
 using OpenBreed.Wecs;
 using OpenBreed.Fsm;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Entities.Turret
 {
@@ -64,10 +65,13 @@ namespace OpenBreed.Sandbox.Entities.Turret
 
         public static void CreateRotationFsm(ICore core)
         {
-            var stateMachine = core.GetManager<IFsmMan>().Create<RotationState, RotationImpulse>("Turret.Rotation");
+            var fsmMan = core.GetManager<IFsmMan>();
+            var commandsMan = core.GetManager<ICommandsMan>();
 
-            stateMachine.AddState(new Actor.States.Rotation.IdleState());
-            stateMachine.AddState(new Actor.States.Rotation.RotatingState());
+            var stateMachine = fsmMan.Create<RotationState, RotationImpulse>("Turret.Rotation");
+
+            stateMachine.AddState(new Actor.States.Rotation.IdleState(fsmMan, commandsMan));
+            stateMachine.AddState(new Actor.States.Rotation.RotatingState(fsmMan, commandsMan));
 
             stateMachine.AddTransition(RotationState.Rotating, RotationImpulse.Stop, RotationState.Idle);
             stateMachine.AddTransition(RotationState.Idle, RotationImpulse.Rotate, RotationState.Rotating);

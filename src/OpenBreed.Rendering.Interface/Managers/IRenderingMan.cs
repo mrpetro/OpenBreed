@@ -26,8 +26,6 @@ namespace OpenBreed.Rendering.Interface.Managers
 
         void Cleanup();
 
-        void Subscribe<T>(Action<object, T> callback) where T : EventArgs;
-
         #endregion Public Methods
     }
 }

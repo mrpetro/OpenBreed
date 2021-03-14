@@ -9,6 +9,7 @@ using OpenBreed.Wecs.Systems.Physics.Commands;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -17,14 +18,18 @@ namespace OpenBreed.Sandbox.Components.States
         #region Private Fields
 
         private readonly string stampPrefix;
+        private readonly IFsmMan fsmMan;
+        private readonly ICommandsMan commandsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public OpenedState()
+        public OpenedState(IFsmMan fsmMan, ICommandsMan commandsMan)
         {
             this.stampPrefix = "Tiles/Stamps";
+            this.fsmMan = fsmMan;
+            this.commandsMan = commandsMan;
         }
 
         #endregion Public Constructors
@@ -40,20 +45,20 @@ namespace OpenBreed.Sandbox.Components.States
 
         public void EnterState(Entity entity)
         {
-            entity.Core.Commands.Post(new SpriteOffCommand(entity.Id));
-            entity.Core.Commands.Post(new BodyOffCommand(entity.Id));
+            commandsMan.Post(new SpriteOffCommand(entity.Id));
+            commandsMan.Post(new BodyOffCommand(entity.Id));
 
             var pos = entity.Get<PositionComponent>();
 
             //entity.PostCommand(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
 
             var className = entity.Get<ClassComponent>().Name;
-            var stateName = entity.Core.GetManager<IFsmMan>().GetStateName(FsmId, Id);
+            var stateName = fsmMan.GetStateName(FsmId, Id);
             var stampId = entity.Core.GetManager<IStampMan>().GetByName($"{stampPrefix}/{className}/{stateName}").Id;
             entity.Core.Commands.Post(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
 
 
-            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, "Door - Opened"));
+            commandsMan.Post(new TextSetCommand(entity.Id, 0, "Door - Opened"));
         }
 
         public void LeaveState(Entity entity)

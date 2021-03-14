@@ -10,6 +10,7 @@ using OpenBreed.Wecs.Systems.Animation.Commands;
 using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -18,13 +19,17 @@ namespace OpenBreed.Sandbox.Components.States
         #region Private Fields
 
         private readonly string animPrefix;
+        private readonly IFsmMan fsmMan;
+        private readonly ICommandsMan commandsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public OpeningState()
+        public OpeningState(IFsmMan fsmMan, ICommandsMan commandsMan)
         {
+            this.fsmMan = fsmMan;
+            this.commandsMan = commandsMan;
             animPrefix = "Animations";
         }
 
@@ -41,13 +46,13 @@ namespace OpenBreed.Sandbox.Components.States
 
         public void EnterState(Entity entity)
         {
-            entity.Core.Commands.Post(new SpriteOnCommand(entity.Id));
+            commandsMan.Post(new SpriteOnCommand(entity.Id));
 
             var className = entity.Get<ClassComponent>().Name;
-            var stateName = entity.Core.GetManager<IFsmMan>().GetStateName(FsmId, Id);
-            entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{stateName}", 0));
+            var stateName = fsmMan.GetStateName(FsmId, Id);
+            commandsMan.Post(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{stateName}", 0));
 
-            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, "Door - Opening"));
+            commandsMan.Post(new TextSetCommand(entity.Id, 0, "Door - Opening"));
 
             entity.Subscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
@@ -74,7 +79,7 @@ namespace OpenBreed.Sandbox.Components.States
         private void OnAnimStopped(object sender, AnimStoppedEventArgs e)
         {
             var entity = sender as Entity;
-            entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)FunctioningImpulse.StopOpening));
+            commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)FunctioningImpulse.StopOpening));
         }
 
         #endregion Private Methods

@@ -1,27 +1,34 @@
-﻿using OpenBreed.Wecs.Systems.Rendering.Commands;
-using System;
-using System.Linq;
-using OpenBreed.Core.Commands;
-using OpenBreed.Wecs.Systems.Animation.Commands;
-using OpenBreed.Wecs.Systems.Animation.Events;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Animation.Commands;
+using OpenBreed.Wecs.Systems.Animation.Events;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
 
 namespace OpenBreed.Sandbox.Entities.Button.States
 {
     public class IdleState : IState<ButtonState, ButtonImpulse>
     {
-        public  const string NAME = "Idle";
+        #region Public Fields
+
+        public const string NAME = "Idle";
+
+        #endregion Public Fields
 
         #region Private Fields
 
+        private readonly IFsmMan fsmMan;
+        private readonly ICommandsMan commandsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public IdleState()
+        public IdleState(IFsmMan fsmMan, ICommandsMan commandsMan)
         {
+            this.fsmMan = fsmMan;
+            this.commandsMan = commandsMan;
         }
 
         #endregion Public Constructors
@@ -37,9 +44,9 @@ namespace OpenBreed.Sandbox.Entities.Button.States
 
         public void EnterState(Entity entity)
         {
-            entity.Core.Commands.Post(new SpriteOnCommand(entity.Id));
-            entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, "NotUsedYet", 0));
-            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, "Door - Opening"));
+            commandsMan.Post(new SpriteOnCommand(entity.Id));
+            commandsMan.Post(new PlayAnimCommand(entity.Id, "NotUsedYet", 0));
+            commandsMan.Post(new TextSetCommand(entity.Id, 0, "Door - Opening"));
 
             entity.Subscribe<AnimStoppedEventArgs>(OnAnimStopped);
         }
@@ -56,8 +63,7 @@ namespace OpenBreed.Sandbox.Entities.Button.States
         private void OnAnimStopped(object sender, AnimStoppedEventArgs eventArgs)
         {
             var entity = sender as Entity;
-            entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)ButtonImpulse.Press));
-
+            commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)ButtonImpulse.Press));
         }
 
         #endregion Private Methods

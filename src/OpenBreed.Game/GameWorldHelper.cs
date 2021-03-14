@@ -91,10 +91,11 @@ namespace OpenBreed.Game
             gameViewport.Get<ViewportComponent>().CameraEntityId = playerCamera.Id;
         }
 
-        public static void SetPreserveAspectRatio(Entity viewportEntity)
+        public static void SetPreserveAspectRatio(IEventsMan eventsMan, Entity viewportEntity)
         {
             var cameraEntity = viewportEntity.Core.GetManager<IEntityMan>().GetById(viewportEntity.Get<ViewportComponent>().CameraEntityId);
-            viewportEntity.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateCameraFov(cameraEntity, a));
+
+            eventsMan.Subscribe<ViewportResizedEventArgs>(viewportEntity, (s, a) => UpdateCameraFov(cameraEntity, a));
         }
 
         private static void UpdateCameraFov(Entity cameraEntity, ViewportResizedEventArgs a)

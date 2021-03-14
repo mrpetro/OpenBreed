@@ -9,6 +9,7 @@ using OpenBreed.Wecs.Systems.Animation.Commands;
 using OpenBreed.Wecs.Systems.Control.Events;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Fsm;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 {
@@ -17,13 +18,17 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
         #region Private Fields
 
         private readonly string animPrefix;
+        private readonly IFsmMan fsmMan;
+        private readonly ICommandsMan commandsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public StandingState()
+        public StandingState(IFsmMan fsmMan, ICommandsMan commandsMan)
         {
+            this.fsmMan = fsmMan;
+            this.commandsMan = commandsMan;
             this.animPrefix = "Animations";
         }
 
@@ -49,10 +54,10 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
             thrust.Value = Vector2.Zero;
 
-            var stateName = entity.Core.GetManager<IFsmMan>().GetStateName(FsmId, Id);
+            var stateName = fsmMan.GetStateName(FsmId, Id);
             entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{stateName}/{animDirName}", 0));
 
-            var currentStateNames = entity.Core.GetManager<IFsmMan>().GetStateNames(entity);
+            var currentStateNames = fsmMan.GetStateNames(entity);
             entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
             entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
@@ -73,7 +78,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
             if (eventArgs.Direction != Vector2.Zero)
             {
-                entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)MovementImpulse.Walk));
+                commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)MovementImpulse.Walk));
 
                 var angularThrust = entity.Get<AngularVelocityComponent>();
                 angularThrust.SetDirection(new Vector2(eventArgs.Direction.X, eventArgs.Direction.Y));

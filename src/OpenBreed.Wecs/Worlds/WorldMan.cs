@@ -124,16 +124,6 @@ namespace OpenBreed.Wecs.Worlds
                 UpdateWorld(core, Items[i], dt);
         }
 
-        public void Subscribe<T>(Action<object, T> callback) where T : EventArgs
-        {
-            eventsMan.Subscribe(this, callback);
-        }
-
-        public void Unsubscribe<T>(Action<object, T> callback) where T : EventArgs
-        {
-            eventsMan.Unsubscribe(this, callback);
-        }
-
         private void DeinitializeWorld(World world)
         {
             RaiseEvent(new WorldDeinitializedEventArgs(world.Id));

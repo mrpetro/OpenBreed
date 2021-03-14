@@ -16,6 +16,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Commands;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Game.Entities
 {
@@ -45,8 +46,10 @@ namespace OpenBreed.Game.Entities
 
             var gameViewport = core.GetManager<IEntityMan>().GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
 
+            var eventsMan = core.GetManager<IEventsMan>();
+
             //world.Core.Jobs.Execute(new FpsTextUpdateJob(fpsTextEntity));
-            gameViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateFpsPos(fpsTextEntity, a));
+            eventsMan.Subscribe<ViewportResizedEventArgs>(gameViewport, (s, a) => UpdateFpsPos(fpsTextEntity, a));
         }
 
         private static void UpdateFpsPos(Entity fpsTextEntity, ViewportResizedEventArgs a)

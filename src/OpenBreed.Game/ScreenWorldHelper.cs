@@ -19,6 +19,7 @@ using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Game
 {
@@ -71,13 +72,18 @@ namespace OpenBreed.Game
             //gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitHeightPreserveAspectRatio;
             gameViewport.Get<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
 
-            game.GetManager<IRenderingMan>().Subscribe<ClientResizedEventArgs>((s, a) => ResizeGameViewport(gameViewport, a));
+            var renderingMan = game.GetManager<IRenderingMan>();
+            var eventsMan = game.GetManager<IEventsMan>();
+            eventsMan.Subscribe<ClientResizedEventArgs>(renderingMan, (s, a) => ResizeGameViewport(gameViewport, a));
 
             FpsCounterHelper.AddToWorld(game, world);
 
             game.Commands.Post(new AddEntityCommand(world.Id, gameViewport.Id));
             //world.AddEntity(gameViewport);
             //world.AddEntity(hudViewport);
+
+
+
 
             gameViewport.Subscribe<ViewportClickedEventArgs>(OnViewportClick);
 

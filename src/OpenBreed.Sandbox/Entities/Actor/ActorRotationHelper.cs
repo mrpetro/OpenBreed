@@ -19,6 +19,7 @@ using OpenBreed.Wecs.Systems.Control.Events;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
@@ -28,10 +29,14 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         public static void CreateFsm(ICore core)
         {
-            var stateMachine = core.GetManager<IFsmMan>().Create<RotationState, RotationImpulse>("Actor.Rotation");
+            var fsmMan = core.GetManager<IFsmMan>();
+            var commandsMan = core.GetManager<ICommandsMan>();
 
-            stateMachine.AddState(new States.Rotation.IdleState());
-            stateMachine.AddState(new States.Rotation.RotatingState());
+
+            var stateMachine = fsmMan.Create<RotationState, RotationImpulse>("Actor.Rotation");
+
+            stateMachine.AddState(new States.Rotation.IdleState(fsmMan, commandsMan));
+            stateMachine.AddState(new States.Rotation.RotatingState(fsmMan, commandsMan));
 
             stateMachine.AddTransition(RotationState.Rotating, RotationImpulse.Stop, RotationState.Idle);
             stateMachine.AddTransition(RotationState.Idle, RotationImpulse.Rotate, RotationState.Rotating);

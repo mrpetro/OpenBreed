@@ -33,17 +33,17 @@ namespace OpenBreed.Wecs.Systems.Rendering
         private readonly List<Entity> entities = new List<Entity>();
         private readonly IEntityMan entityMan;
         private readonly IPrimitiveRenderer primitiveRenderer;
-        private readonly IViewClient windowClient;
+        private readonly IViewClient viewClient;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal ViewportSystem(IEntityMan entityMan, IPrimitiveRenderer primitiveRenderer, IViewClient windowClient)
+        internal ViewportSystem(IEntityMan entityMan, IPrimitiveRenderer primitiveRenderer, IViewClient viewClient)
         {
             this.entityMan = entityMan;
             this.primitiveRenderer = primitiveRenderer;
-            this.windowClient = windowClient;
+            this.viewClient = viewClient;
             Require<ViewportComponent>();
             Require<PositionComponent>();
         }
@@ -66,7 +66,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
             var x = Matrix4.Identity;
 
-            var screenX = windowClient.ClientTransform;
+            var screenX = viewClient.ClientTransform;
             x = Matrix4.Mult(screenX, x);
 
             var viewportX = GetViewportTransform(pos, vpc);

@@ -1,18 +1,16 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Core.Commands;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
-using OpenBreed.Rendering.Interface;
-using OpenBreed.Sandbox.Entities;
-using OpenBreed.Sandbox.Entities.Door.States;
-using OpenTK;
-using System;
-using OpenBreed.Wecs.Components.Physics;
-using OpenBreed.Physics.Interface;
+﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
-using OpenBreed.Wecs.Entities;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Sandbox.Entities;
+using OpenBreed.Sandbox.Entities.Door.States;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Physics;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
+using OpenTK;
+using System;
 
 namespace OpenBreed.Sandbox.Components.States
 {
@@ -21,16 +19,22 @@ namespace OpenBreed.Sandbox.Components.States
         #region Private Fields
 
         private readonly string stampPrefix;
+        private readonly IFsmMan fsmMan;
+        private readonly ICommandsMan commandsMan;
+        private readonly ICollisionMan collisionMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ClosedState(ICore core)
+        public ClosedState(IFsmMan fsmMan, ICommandsMan commandsMan, ICollisionMan collisionMan)
         {
-            stampPrefix = "Tiles/Stamps";
+            this.fsmMan = fsmMan;
+            this.commandsMan = commandsMan;
+            this.collisionMan = collisionMan;
 
-            core.GetManager<ICollisionMan>().RegisterCollisionPair(ColliderTypes.DoorOpenTrigger, ColliderTypes.ActorBody, DoorOpenTriggerCallback);
+            stampPrefix = "Tiles/Stamps";
+            collisionMan.RegisterCollisionPair(ColliderTypes.DoorOpenTrigger, ColliderTypes.ActorBody, DoorOpenTriggerCallback);
         }
 
         #endregion Public Constructors
@@ -55,23 +59,18 @@ namespace OpenBreed.Sandbox.Components.States
             var pos = entity.Get<PositionComponent>();
 
             var className = entity.Get<ClassComponent>().Name;
-            var stateName = entity.Core.GetManager<IFsmMan>().GetStateName(FsmId, Id);
+            var stateName = fsmMan.GetStateName(FsmId, Id);
             var stampId = entity.Core.GetManager<IStampMan>().GetByName($"{stampPrefix}/{className}/{stateName}").Id;
-            entity.Core.Commands.Post(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
+            commandsMan.Post(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
 
             //STAMP_DOOR_HORIZONTAL_CLOSED = $"{stampPrefix}/{className}/{stateName}";
 
-            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, "Door - Closed"));
+            commandsMan.Post(new TextSetCommand(entity.Id, 0, "Door - Closed"));
 
             var colCmp = entity.Get<CollisionComponent>();
 
             colCmp.ColliderTypes.Add(ColliderTypes.StaticObstacle);
             colCmp.ColliderTypes.Add(ColliderTypes.DoorOpenTrigger);
-        }
-
-        private void DoorOpenTriggerCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
-        {
-            entityA.Core.Commands.Post(new SetEntityStateCommand(entityA.Id, FsmId, (int)FunctioningImpulse.Open));
         }
 
         public void LeaveState(Entity entity)
@@ -84,12 +83,17 @@ namespace OpenBreed.Sandbox.Components.States
 
         #region Private Methods
 
+        private void DoorOpenTriggerCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
+        {
+            commandsMan.Post(new SetEntityStateCommand(entityA.Id, FsmId, (int)FunctioningImpulse.Open));
+        }
+
+        #endregion Private Methods
+
         //private void OnCollision(object sender, CollisionEventArgs eventArgs)
         //{
         //    var entity = sender as Entity;
         //    entity.Core.Commands.Post(new SetStateCommand(entity.Id, FsmId, (int)FunctioningImpulse.Open));
         //}
-
-        #endregion Private Methods
     }
 }

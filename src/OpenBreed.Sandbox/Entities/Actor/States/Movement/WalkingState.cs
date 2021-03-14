@@ -13,6 +13,7 @@ using OpenBreed.Wecs.Systems.Animation.Commands;
 using OpenBreed.Wecs.Systems.Control.Events;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Fsm;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 {
@@ -21,14 +22,18 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
         #region Private Fields
 
         private readonly string animPrefix;
+        private readonly IFsmMan fsmMan;
+        private readonly ICommandsMan commandsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public WalkingState()
+        public WalkingState(IFsmMan fsmMan, ICommandsMan commandsMan)
         {
             this.animPrefix = "Animations";
+            this.fsmMan = fsmMan;
+            this.commandsMan = commandsMan;
         }
 
         #endregion Public Constructors
@@ -51,12 +56,12 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 
             var animDirPostfix = AnimHelper.ToDirectionName(direction.GetDirection());
 
-            var stateName = entity.Core.GetManager<IFsmMan>().GetStateName(FsmId, Id);
+            var stateName = fsmMan.GetStateName(FsmId, Id);
             var className = entity.Get<ClassComponent>().Name;
-            entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{stateName}/{animDirPostfix}", 0));
+            commandsMan.Post(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{stateName}/{animDirPostfix}", 0));
 
             var currentStateNames = entity.Core.GetManager<IFsmMan>().GetStateNames(entity);
-            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
+            commandsMan.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
             entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
             entity.Subscribe<DirectionChangedEventArgs>(OnDirectionChanged);
@@ -64,7 +69,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
      
         public void LeaveState(Entity entity)
         {
-            entity.Subscribe<DirectionChangedEventArgs>(OnDirectionChanged);
+            entity.Unsubscribe<DirectionChangedEventArgs>(OnDirectionChanged);
             entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
 
@@ -82,9 +87,9 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             //entity.Get<ThrustComponent>().Value = direction.GetDirection() * movement.Acceleration;
             var animDirName = AnimHelper.ToDirectionName(direction.GetDirection());
             var className = entity.Get<ClassComponent>().Name;
-            var movementFsm = entity.Core.GetManager<IFsmMan>().GetByName("Actor.Movement");
+            var movementFsm = fsmMan.GetByName("Actor.Movement");
             var movementStateName = movementFsm.GetCurrentStateName(entity);
-            entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, $"{"Animations"}/{className}/{movementStateName}/{animDirName}", 0));
+            commandsMan.Post(new PlayAnimCommand(entity.Id, $"{"Animations"}/{className}/{movementStateName}/{animDirName}", 0));
 
             //throw new NotImplementedException();
         }

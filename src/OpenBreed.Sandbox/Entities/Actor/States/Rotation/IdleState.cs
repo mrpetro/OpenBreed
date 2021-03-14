@@ -1,34 +1,49 @@
 ﻿using OpenBreed.Core.Commands;
+using OpenBreed.Core.Managers;
+using OpenBreed.Fsm;
 using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Core.Extensions;
-using OpenBreed.Core.Helpers;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Control.Events;
 using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenTK;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenBreed.Wecs.Systems.Control.Events;
-using OpenBreed.Fsm;
-using OpenBreed.Wecs.Entities;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
 {
     public class IdleState : IState<RotationState, RotationImpulse>
     {
-        public IdleState()
+        #region Private Fields
+
+        private readonly IFsmMan fsmMan;
+        private readonly ICommandsMan commandsMan;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public IdleState(IFsmMan fsmMan, ICommandsMan commandsMan)
         {
+            this.fsmMan = fsmMan;
+            this.commandsMan = commandsMan;
         }
+
+        #endregion Public Constructors
+
+        #region Public Properties
 
         public int Id => (int)RotationState.Idle;
         public int FsmId { get; set; }
 
+        #endregion Public Properties
+
+        #region Public Methods
+
         public void EnterState(Entity entity)
         {
             // Entity.PostMsg(new PlayAnimMsg(Entity, animationId));
-            var currentStateNames = entity.Core.GetManager<IFsmMan>().GetStateNames(entity);
-            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
+            var currentStateNames = fsmMan.GetStateNames(entity);
+            commandsMan.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
             //entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
@@ -37,6 +52,10 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
         {
             //entity.Unsubscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private void OnControlDirectionChanged(object sender, ControlDirectionChangedEventArgs e)
         {
@@ -54,9 +73,11 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Rotation
                     var angularThrust = entity.Get<AngularVelocityComponent>();
                     angularThrust.SetDirection(new Vector2(e.Direction.X, e.Direction.Y));
                     //dir.SetDirection(e.Direction);
-                    entity.Core.Commands.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)RotationImpulse.Rotate));
+                    commandsMan.Post(new SetEntityStateCommand(entity.Id, FsmId, (int)RotationImpulse.Rotate));
                 }
             }
         }
+
+        #endregion Private Methods
     }
 }
