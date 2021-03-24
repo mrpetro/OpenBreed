@@ -20,6 +20,7 @@ namespace OpenBreed.Wecs.Systems.Core
         #region Private Fields
 
         private readonly List<Entity> entities = new List<Entity>();
+        private readonly IEntityMan entityMan;
         private readonly IFsmMan fsmMan;
         private readonly ILogger logger;
 
@@ -27,22 +28,20 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Public Constructors
 
-        public FsmSystem(IFsmMan fsmMan, ILogger logger)
+        public FsmSystem(IEntityMan entityMan, ICommandsMan commandsMan, IFsmMan fsmMan, ILogger logger)
         {
+            this.entityMan = entityMan;
             this.fsmMan = fsmMan;
             this.logger = logger;
 
             Require<FsmComponent>();
+
+            commandsMan.Register<SetEntityStateCommand>(HandleSetStateCommand);
         }
 
         #endregion Public Constructors
 
         #region Public Methods
-
-        public static void RegisterHandlers(ICommandsMan commands)
-        {
-            commands.Register<SetEntityStateCommand>(HandleSetStateCommand);
-        }
 
         public void Update(float dt)
         {
@@ -98,9 +97,9 @@ namespace OpenBreed.Wecs.Systems.Core
                 fsmMan.EnterState(entity, state, 0);
         }
 
-        private static bool HandleSetStateCommand(ICore core, SetEntityStateCommand cmd)
+        private bool HandleSetStateCommand(ICore core, SetEntityStateCommand cmd)
         {
-            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
+            var entity = entityMan.GetById(cmd.EntityId);
 
             var fsmComponent = entity.Get<FsmComponent>();
 

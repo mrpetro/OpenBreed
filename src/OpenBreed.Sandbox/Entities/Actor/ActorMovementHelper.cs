@@ -1,19 +1,7 @@
-﻿using OpenBreed.Wecs.Components.Physics;
-using OpenBreed.Core;
-using OpenBreed.Core.Commands;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
-using OpenBreed.Sandbox.Entities.Actor.States.Movement;
-using OpenBreed.Sandbox.Helpers;
-using OpenTK;
-using System;
-using System.Linq;
-using OpenBreed.Wecs.Systems.Animation.Commands;
-using OpenBreed.Wecs.Systems.Control.Events;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Fsm;
-using OpenBreed.Wecs;
+﻿using OpenBreed.Core;
 using OpenBreed.Core.Managers;
+using OpenBreed.Fsm;
+using OpenBreed.Sandbox.Entities.Actor.States.Movement;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
@@ -35,5 +23,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             stateMachine.AddTransition(MovementState.Standing, MovementImpulse.Walk, MovementState.Walking);
             stateMachine.AddTransition(MovementState.Walking, MovementImpulse.Walk, MovementState.Walking);
         }
+
+        #endregion Public Methods
     }
 }

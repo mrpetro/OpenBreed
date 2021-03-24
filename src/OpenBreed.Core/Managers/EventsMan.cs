@@ -8,6 +8,7 @@ namespace OpenBreed.Core.Managers
     {
         #region Private Fields
 
+        private readonly Dictionary<Type, IEventHandler> eventHandlers = new Dictionary<Type, IEventHandler>();
         private Dictionary<object, Dictionary<Type, List<(object, MethodInfo)>>> listeners = new Dictionary<object, Dictionary<Type, List<(object, MethodInfo)>>>();
 
         #endregion Private Fields
@@ -22,8 +23,25 @@ namespace OpenBreed.Core.Managers
 
         #region Public Methods
 
+        public void RegisterHandler<TEvent>(IEventHandler<TEvent> eventHandler) where TEvent : EventArgs
+        {
+            eventHandlers.Add(typeof(TEvent), eventHandler);
+        }
+
+        private bool TryHandle<TEvent>(TEvent eventV) where TEvent : EventArgs
+        {
+            if (!eventHandlers.TryGetValue(eventV.GetType(), out IEventHandler eventHandler))
+                return false;
+
+            ((IEventHandler<TEvent>)eventHandler).Handle(eventV);
+            return true;
+        }
+
         public void Raise<T>(object sender, T eventArgs) where T : EventArgs
         {
+            if (TryHandle(eventArgs))
+                return;
+
             NotifyListeners(sender, eventArgs.GetType(), eventArgs);
         }
 

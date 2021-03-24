@@ -13,6 +13,10 @@ using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
 {
+    public interface ITriggerMan
+    {
+    }
+
     public class StandingState : IState<MovementState, MovementImpulse>
     {
         #region Private Fields
@@ -55,12 +59,15 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Movement
             thrust.Value = Vector2.Zero;
 
             var stateName = fsmMan.GetStateName(FsmId, Id);
-            entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{stateName}/{animDirName}", 0));
+            commandsMan.Post(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{stateName}/{animDirName}", 0));
 
             var currentStateNames = fsmMan.GetStateNames(entity);
-            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
+            commandsMan.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
 
             entity.Subscribe<ControlDirectionChangedEventArgs>(OnControlDirectionChanged);
+
+
+            //triggerMan.OnTrigger<ControlDirectionChangedEventArgs>(entity, OnControlDirectionChanged);
         }
 
         public void LeaveState(Entity entity)

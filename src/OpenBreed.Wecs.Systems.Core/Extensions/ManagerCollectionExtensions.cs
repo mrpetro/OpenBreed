@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Common.Logging;
+using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
 
@@ -12,7 +13,9 @@ namespace OpenBreed.Wecs.Systems.Core.Extensions
         public static void SetupCoreSystems(this IManagerCollection manCollection)
         {
             var systemFactory = manCollection.GetManager<ISystemFactory>();
-            systemFactory.Register(() => new FsmSystem(manCollection.GetManager<IFsmMan>(),
+            systemFactory.Register(() => new FsmSystem(manCollection.GetManager<IEntityMan>(),
+                                                       manCollection.GetManager<ICommandsMan>(), 
+                                                       manCollection.GetManager<IFsmMan>(),
                                                        manCollection.GetManager<ILogger>()));
             systemFactory.Register(() => new TextInputSystem());
             systemFactory.Register(() => new TimerSystem(manCollection.GetManager<IEntityMan>()));

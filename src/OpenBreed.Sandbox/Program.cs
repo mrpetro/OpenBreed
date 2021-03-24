@@ -239,7 +239,7 @@ namespace OpenBreed.Sandbox
         private void RegisterSystems()
         {
             FollowerSystem.RegisterHandlers(Commands);
-            FsmSystem.RegisterHandlers(Commands);
+            //FsmSystem.RegisterHandlers(Commands);
             TextInputSystem.RegisterHandlers(Commands);
             TimerSystem.RegisterHandlers(Commands);
             SpriteSystem.RegisterHandlers(Commands);

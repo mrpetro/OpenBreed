@@ -33,7 +33,6 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
         {
             var currentStateNames = fsmMan.GetStateNames(entity);
             commandsMan.Post(new TextSetCommand(entity.Id, 0, String.Join(", ", currentStateNames.ToArray())));
-
             entity.Subscribe<ControlFireChangedEvenrArgs>(OnControlFireChanged);
         }
 
