@@ -94,9 +94,6 @@ namespace OpenBreed.Game
 
         public override void Load()
         {
-            RegisterXmlComponents();
-            RegisterComponentFactories();
-
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"D:\Projects\DB\Templates\Logo1.xml");
 
             var entity = entityFactory.Create(this, entityTemplate);
@@ -147,38 +144,6 @@ namespace OpenBreed.Game
         #endregion Public Methods
 
         #region Private Methods
-
-        private void RegisterXmlComponents()
-        {
-            XmlComponentsList.RegisterComponentType<XmlPositionComponent>();
-            XmlComponentsList.RegisterComponentType<XmlVelocityComponent>();
-            XmlComponentsList.RegisterComponentType<XmlThrustComponent>();
-            XmlComponentsList.RegisterComponentType<XmlSpriteComponent>();
-            XmlComponentsList.RegisterComponentType<XmlTextComponent>();
-            XmlComponentsList.RegisterComponentType<XmlAnimationComponent>();
-            XmlComponentsList.RegisterComponentType<XmlBodyComponent>();
-            XmlComponentsList.RegisterComponentType<XmlClassComponent>();
-            XmlComponentsList.RegisterComponentType<XmlAngularPositionComponent>();
-            XmlComponentsList.RegisterComponentType<XmlMotionComponent>();
-            XmlComponentsList.RegisterComponentType<XmlTimerComponent>();
-            XmlComponentsList.RegisterComponentType<XmlFsmComponent>();
-        }
-
-        private void RegisterComponentFactories()
-        {
-            entityFactory.RegisterComponentFactory<XmlPositionComponent>(new PositionComponentFactory(this));
-            entityFactory.RegisterComponentFactory<XmlVelocityComponent>(new VelocityComponentFactory(this));
-            entityFactory.RegisterComponentFactory<XmlThrustComponent>(new ThrustComponentFactory(this));
-            entityFactory.RegisterComponentFactory<XmlSpriteComponent>(new SpriteComponentFactory(this));
-            entityFactory.RegisterComponentFactory<XmlTextComponent>(new TextComponentFactory(this));
-            entityFactory.RegisterComponentFactory<XmlAnimationComponent>(new AnimationComponentFactory(this));
-            entityFactory.RegisterComponentFactory<XmlBodyComponent>(new BodyComponentFactory(this));
-            entityFactory.RegisterComponentFactory<XmlClassComponent>(new ClassComponentFactory(this));
-            entityFactory.RegisterComponentFactory<XmlAngularPositionComponent>(new AngularPositionComponentFactory(this));
-            entityFactory.RegisterComponentFactory<XmlMotionComponent>(new MotionComponentFactory(this));
-            entityFactory.RegisterComponentFactory<XmlTimerComponent>(new TimerComponentFactory(this));
-            entityFactory.RegisterComponentFactory<XmlFsmComponent>(new FsmComponentFactory(this));
-        }
 
         private void ExposeScriptingApi()
         {

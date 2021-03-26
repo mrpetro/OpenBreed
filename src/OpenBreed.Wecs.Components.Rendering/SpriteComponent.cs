@@ -1,7 +1,4 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Rendering.Interface;
-using OpenBreed.Wecs.Components;
+﻿using OpenBreed.Common;
 using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Wecs.Components.Rendering
@@ -58,19 +55,26 @@ namespace OpenBreed.Wecs.Components.Rendering
 
     public sealed class SpriteComponentFactory : ComponentFactoryBase<ISpriteComponentTemplate>
     {
-        #region Public Constructors
+        #region Private Fields
 
-        public SpriteComponentFactory(ICore core) : base(core)
+        private readonly IManagerCollection managerCollection;
+
+        #endregion Private Fields
+
+        #region Internal Constructors
+
+        internal SpriteComponentFactory(IManagerCollection managerCollection) : base(null)
         {
+            this.managerCollection = managerCollection;
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Protected Methods
 
         protected override IEntityComponent Create(ISpriteComponentTemplate template)
         {
-            var builder = SpriteComponentBuilder.New(core);
+            var builder = managerCollection.GetManager<SpriteComponentBuilder>();
             builder.SetAtlasByName(template.AtlasName);
             builder.SetImageId(template.ImageIndex);
             builder.SetOrder(template.Order);
@@ -84,18 +88,18 @@ namespace OpenBreed.Wecs.Components.Rendering
     {
         #region Private Fields
 
-        private ICore core;
+        private readonly ISpriteMan spriteMan;
 
         #endregion Private Fields
 
-        #region Private Constructors
+        #region Internal Constructors
 
-        private SpriteComponentBuilder(ICore core)
+        internal SpriteComponentBuilder(ISpriteMan spriteMan)
         {
-            this.core = core;
+            this.spriteMan = spriteMan;
         }
 
-        #endregion Private Constructors
+        #endregion Internal Constructors
 
         #region Internal Properties
 
@@ -106,11 +110,6 @@ namespace OpenBreed.Wecs.Components.Rendering
         #endregion Internal Properties
 
         #region Public Methods
-
-        public static SpriteComponentBuilder New(ICore core)
-        {
-            return new SpriteComponentBuilder(core);
-        }
 
         public SpriteComponent Build()
         {
@@ -129,7 +128,7 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         public void SetAtlasByName(string atlasName)
         {
-            AtlasId = core.GetManager<ISpriteMan>().GetByName(atlasName).Id;
+            AtlasId = spriteMan.GetByName(atlasName).Id;
         }
 
         #endregion Public Methods

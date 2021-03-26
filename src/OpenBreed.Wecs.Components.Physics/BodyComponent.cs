@@ -1,11 +1,8 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Physics.Interface;
+﻿using OpenBreed.Common;
+using OpenBreed.Physics.Interface.Managers;
 using OpenTK;
 using System;
 using System.Collections.Generic;
-using OpenBreed.Wecs.Components;
-using OpenBreed.Physics.Interface.Managers;
 
 namespace OpenBreed.Wecs.Components.Physics
 {
@@ -28,7 +25,7 @@ namespace OpenBreed.Wecs.Components.Physics
     {
         #region Public Constructors
 
-        public BodyComponent(BodyComponentBuilderEx builder)
+        public BodyComponent(BodyComponentBuilder builder)
         {
             CofFactor = builder.CofFactor;
             CorFactor = builder.CorFactor;
@@ -87,10 +84,17 @@ namespace OpenBreed.Wecs.Components.Physics
 
     public sealed class BodyComponentFactory : ComponentFactoryBase<IBodyComponentTemplate>
     {
+        #region Private Fields
+
+        private readonly IManagerCollection managerCollection;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
-        public BodyComponentFactory(ICore core) : base(core)
+        public BodyComponentFactory(IManagerCollection managerCollection) : base(null)
         {
+            this.managerCollection = managerCollection;
         }
 
         #endregion Public Constructors
@@ -99,7 +103,7 @@ namespace OpenBreed.Wecs.Components.Physics
 
         protected override IEntityComponent Create(IBodyComponentTemplate template)
         {
-            var builder = BodyComponentBuilderEx.New(core);
+            var builder = managerCollection.GetManager<BodyComponentBuilder>();
             builder.SetCofFactor(template.CofFactor);
             builder.SetCorFactor(template.CorFactor);
             builder.SetType(template.Type);
@@ -113,38 +117,33 @@ namespace OpenBreed.Wecs.Components.Physics
         #endregion Protected Methods
     }
 
-    public class BodyComponentBuilderEx
+    public class BodyComponentBuilder
     {
         #region Internal Fields
 
+        internal readonly List<int> Fixtures = new List<int>();
         internal float CofFactor;
         internal float CorFactor;
         internal string Type;
-        internal readonly List<int> Fixtures = new List<int>();
 
         #endregion Internal Fields
 
         #region Private Fields
 
-        private ICore core;
+        private readonly IFixtureMan fixtureMan;
 
         #endregion Private Fields
 
-        #region Private Constructors
+        #region Internal Constructors
 
-        private BodyComponentBuilderEx(ICore core)
+        internal BodyComponentBuilder(IFixtureMan fixtureMan)
         {
-            this.core = core;
+            this.fixtureMan = fixtureMan;
         }
 
-        #endregion Private Constructors
+        #endregion Internal Constructors
 
         #region Public Methods
-
-        public static BodyComponentBuilderEx New(ICore core)
-        {
-            return new BodyComponentBuilderEx(core);
-        }
 
         public BodyComponent Build()
         {
@@ -168,7 +167,7 @@ namespace OpenBreed.Wecs.Components.Physics
 
         public void AddFixtureByName(string fixtureName)
         {
-            var fixture = core.GetManager<IFixtureMan>().GetByAlias(fixtureName);
+            var fixture = fixtureMan.GetByAlias(fixtureName);
 
             if (fixture != null)
                 Fixtures.Add(fixture.Id);

@@ -62,10 +62,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnimationComponent.cs" />
+    <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Xml\XmlAnimationComponent.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
+      <Project>{9894E7F4-7C85-4173-9D05-F50CFD2E4163}</Project>
+      <Name>OpenBreed.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Animation.Generic\OpenBreed.Animation.Generic.csproj">
       <Project>{877FEE86-A92F-4194-A7C3-70E069D1347A}</Project>
       <Name>OpenBreed.Animation.Generic</Name>

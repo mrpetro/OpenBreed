@@ -1,14 +1,10 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Wecs.Components;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Components.Common
 {
     public interface ITimerComponentTemplate : IComponentTemplate
     {
     }
-
 
     public class TimerData
     {
@@ -40,12 +36,12 @@ namespace OpenBreed.Wecs.Components.Common
             Items = new List<TimerData>();
         }
 
+        #endregion Public Constructors
+
         //public TimerComponent(TimerComponentBuilder builder)
         //{
         //    Items = builder.Items.ToList();
         //}
-
-        #endregion Public Constructors
 
         #region Public Properties
 
@@ -56,14 +52,21 @@ namespace OpenBreed.Wecs.Components.Common
 
     public sealed class TimerComponentFactory : ComponentFactoryBase<ITimerComponentTemplate>
     {
-        public TimerComponentFactory(ICore core) : base(core)
-        {
+        #region Internal Constructors
 
+        internal TimerComponentFactory() : base(null)
+        {
         }
+
+        #endregion Internal Constructors
+
+        #region Protected Methods
 
         protected override IEntityComponent Create(ITimerComponentTemplate template)
         {
             return new TimerComponent();
         }
+
+        #endregion Protected Methods
     }
 }

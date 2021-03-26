@@ -1,6 +1,4 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Wecs.Components;
-using OpenTK;
+﻿using OpenTK;
 
 namespace OpenBreed.Wecs.Components.Common
 {
@@ -69,13 +67,13 @@ namespace OpenBreed.Wecs.Components.Common
 
     public sealed class PositionComponentFactory : ComponentFactoryBase<IPositionComponentTemplate>
     {
-        #region Public Constructors
+        #region Internal Constructors
 
-        public PositionComponentFactory(ICore core) : base(core)
+        internal PositionComponentFactory() : base(null)
         {
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Protected Methods
 

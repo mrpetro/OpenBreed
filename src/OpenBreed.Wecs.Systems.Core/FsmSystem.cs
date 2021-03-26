@@ -36,6 +36,7 @@ namespace OpenBreed.Wecs.Systems.Core
 
             Require<FsmComponent>();
 
+
             commandsMan.Register<SetEntityStateCommand>(HandleSetStateCommand);
         }
 

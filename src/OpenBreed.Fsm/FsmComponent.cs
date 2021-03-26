@@ -1,5 +1,4 @@
-﻿using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Core;
+﻿using OpenBreed.Common;
 using OpenBreed.Wecs.Components;
 using System;
 using System.Collections.Generic;
@@ -9,30 +8,38 @@ namespace OpenBreed.Fsm
 {
     public interface IMachineStateTemplate
     {
+        #region Public Properties
+
         string FsmName { get; set; }
         string StateName { get; set; }
+
+        #endregion Public Properties
     }
 
     public interface IFsmComponentTemplate : IComponentTemplate
     {
+        #region Public Properties
+
         IEnumerable<IMachineStateTemplate> States { get; }
+
+        #endregion Public Properties
     }
 
     public class FsmComponent : IEntityComponent
     {
         #region Public Constructors
 
-        public FsmComponent(FsmComponentBuilderEx builder)
+        public FsmComponent(FsmComponentBuilder builder)
         {
             States = builder.States.ToList();
         }
+
+        #endregion Public Constructors
 
         //public FsmComponent(FsmComponentBuilder builder)
         //{
         //    States = builder.States.ToList();
         //}
-
-        #endregion Public Constructors
 
         #region Public Properties
 
@@ -41,22 +48,28 @@ namespace OpenBreed.Fsm
         #endregion Public Properties
     }
 
-
     public sealed class FsmComponentFactory : ComponentFactoryBase<IFsmComponentTemplate>
     {
-        #region Public Constructors
+        #region Private Fields
 
-        public FsmComponentFactory(ICore core) : base(core)
+        private readonly IManagerCollection managerCollection;
+
+        #endregion Private Fields
+
+        #region Internal Constructors
+
+        internal FsmComponentFactory(IManagerCollection managerCollection) : base(null)
         {
+            this.managerCollection = managerCollection;
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Protected Methods
 
         protected override IEntityComponent Create(IFsmComponentTemplate template)
         {
-            var builder = FsmComponentBuilderEx.New(core);
+            var builder = managerCollection.GetManager<FsmComponentBuilder>();
 
             foreach (var state in template.States)
                 builder.AddState(state.FsmName, state.StateName);
@@ -67,7 +80,7 @@ namespace OpenBreed.Fsm
         #endregion Protected Methods
     }
 
-    public class FsmComponentBuilderEx
+    public class FsmComponentBuilder
     {
         #region Internal Fields
 
@@ -77,25 +90,20 @@ namespace OpenBreed.Fsm
 
         #region Private Fields
 
-        private ICore core;
+        private readonly IFsmMan fsmMan;
 
         #endregion Private Fields
 
-        #region Private Constructors
+        #region Internal Constructors
 
-        private FsmComponentBuilderEx(ICore core)
+        internal FsmComponentBuilder(IFsmMan fsmMan)
         {
-            this.core = core;
+            this.fsmMan = fsmMan;
         }
 
-        #endregion Private Constructors
+        #endregion Internal Constructors
 
         #region Public Methods
-
-        public static FsmComponentBuilderEx New(ICore core)
-        {
-            return new FsmComponentBuilderEx(core);
-        }
 
         public FsmComponent Build()
         {
@@ -104,7 +112,7 @@ namespace OpenBreed.Fsm
 
         public void AddState(string fsmName, string stateName)
         {
-            var fsm = core.GetManager<IFsmMan>().GetByName(fsmName);
+            var fsm = fsmMan.GetByName(fsmName);
 
             if (fsm == null)
                 throw new InvalidOperationException($"FSM '{fsmName}' does not exist.");

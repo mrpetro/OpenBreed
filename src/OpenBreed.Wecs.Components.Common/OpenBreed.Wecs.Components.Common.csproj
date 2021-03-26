@@ -69,6 +69,7 @@
     <Compile Include="AngularVelocityComponent.cs" />
     <Compile Include="ClassComponent.cs" />
     <Compile Include="EquipmentComponent.cs" />
+    <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="FollowerComponent.cs" />
     <Compile Include="GroupComponent.cs" />
     <Compile Include="IControlComponent.cs" />
@@ -95,6 +96,10 @@
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj">
       <Project>{B4E4CD19-64AF-42A5-8713-0D0DE35853B6}</Project>
       <Name>OpenBreed.Common.Tools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
+      <Project>{9894E7F4-7C85-4173-9D05-F50CFD2E4163}</Project>
+      <Name>OpenBreed.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Core\OpenBreed.Core.csproj">
       <Project>{95BDF122-FAC8-4AC4-B9A8-B549D942E37D}</Project>

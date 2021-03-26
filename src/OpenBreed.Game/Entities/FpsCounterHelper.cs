@@ -30,7 +30,7 @@ namespace OpenBreed.Game.Entities
 
             fpsTextEntity.Add(PositionComponent.Create(new Vector2(0,0)));
 
-            var textBuilder = TextComponentBuilderEx.New(core);
+            var textBuilder = core.GetManager<TextComponentBuilder>();
             textBuilder.SetFontById(arial12.Id);
             textBuilder.SetOffset(Vector2.Zero);
             textBuilder.SetColor(Color4.White);

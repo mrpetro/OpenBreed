@@ -6,6 +6,7 @@ using OpenBreed.Common.Logging;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
+using OpenBreed.Fsm.Extensions;
 using OpenBreed.Fsm.Xml;
 using OpenBreed.Game;
 using OpenBreed.Input.Generic;
@@ -31,12 +32,16 @@ using OpenBreed.Scripting.Interface;
 using OpenBreed.Scripting.Lua;
 using OpenBreed.Scripting.Lua.Extensions;
 using OpenBreed.Wecs.Components.Animation;
+using OpenBreed.Wecs.Components.Animation.Extensions;
 using OpenBreed.Wecs.Components.Animation.Xml;
 using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Common.Extensions;
 using OpenBreed.Wecs.Components.Common.Xml;
 using OpenBreed.Wecs.Components.Physics;
+using OpenBreed.Wecs.Components.Physics.Extensions;
 using OpenBreed.Wecs.Components.Physics.Xml;
 using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Components.Rendering.Extensions;
 using OpenBreed.Wecs.Components.Rendering.Xml;
 using OpenBreed.Wecs.Components.Xml;
 using OpenBreed.Wecs.Entities;
@@ -88,6 +93,15 @@ namespace OpenBreed.Sandbox
             manCollection.SetupControlSystems();
             manCollection.SetupAnimationSystems();
             manCollection.SetupGuiSystems();
+
+
+            manCollection.SetupCommonComponents();
+            manCollection.SetupPhysicsComponents();
+            manCollection.SetupRenderingComponents();
+            manCollection.SetupAnimationComponents();
+            manCollection.SetupFsmComponents();
+
+
             //manCollection.SetupAudioSystems();
 
             //manCollection.SetupGameScriptingApi();
@@ -256,9 +270,6 @@ namespace OpenBreed.Sandbox
         {
             //Client.Title = $"Open Breed Sandbox (Version: {appVersion} Vsync: {window.VSync})";
 
-            RegisterXmlComponents();
-            RegisterComponentFactories();
-
             InitLua();
 
             RegisterSystems();
@@ -343,38 +354,6 @@ namespace OpenBreed.Sandbox
             GameWorldHelper.Create(this);
 
             OnEngineInitialized();
-        }
-
-        private void RegisterXmlComponents()
-        {
-            XmlComponentsList.RegisterComponentType<XmlPositionComponent>();
-            XmlComponentsList.RegisterComponentType<XmlVelocityComponent>();
-            XmlComponentsList.RegisterComponentType<XmlThrustComponent>();
-            XmlComponentsList.RegisterComponentType<XmlSpriteComponent>();
-            XmlComponentsList.RegisterComponentType<XmlTextComponent>();
-            XmlComponentsList.RegisterComponentType<XmlAnimationComponent>();
-            XmlComponentsList.RegisterComponentType<XmlBodyComponent>();
-            XmlComponentsList.RegisterComponentType<XmlClassComponent>();
-            XmlComponentsList.RegisterComponentType<XmlAngularPositionComponent>();
-            XmlComponentsList.RegisterComponentType<XmlMotionComponent>();
-            XmlComponentsList.RegisterComponentType<XmlTimerComponent>();
-            XmlComponentsList.RegisterComponentType<XmlFsmComponent>();
-        }
-
-        private void RegisterComponentFactories()
-        {
-            EntityFactory.RegisterComponentFactory<XmlPositionComponent>(new PositionComponentFactory(this));
-            EntityFactory.RegisterComponentFactory<XmlVelocityComponent>(new VelocityComponentFactory(this));
-            EntityFactory.RegisterComponentFactory<XmlThrustComponent>(new ThrustComponentFactory(this));
-            EntityFactory.RegisterComponentFactory<XmlSpriteComponent>(new SpriteComponentFactory(this));
-            EntityFactory.RegisterComponentFactory<XmlTextComponent>(new TextComponentFactory(this));
-            EntityFactory.RegisterComponentFactory<XmlAnimationComponent>(new AnimationComponentFactory(this));
-            EntityFactory.RegisterComponentFactory<XmlBodyComponent>(new BodyComponentFactory(this));
-            EntityFactory.RegisterComponentFactory<XmlClassComponent>(new ClassComponentFactory(this));
-            EntityFactory.RegisterComponentFactory<XmlAngularPositionComponent>(new AngularPositionComponentFactory(this));
-            EntityFactory.RegisterComponentFactory<XmlMotionComponent>(new MotionComponentFactory(this));
-            EntityFactory.RegisterComponentFactory<XmlTimerComponent>(new TimerComponentFactory(this));
-            EntityFactory.RegisterComponentFactory<XmlFsmComponent>(new FsmComponentFactory(this));
         }
 
         private void InitLua()

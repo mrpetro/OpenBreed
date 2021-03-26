@@ -1,10 +1,8 @@
 ﻿using OpenBreed.Animation.Generic;
 using OpenBreed.Animation.Interface;
-using OpenBreed.Core;
+using OpenBreed.Common;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using OpenBreed.Wecs.Components;
 
 namespace OpenBreed.Wecs.Components.Animation
 {
@@ -36,12 +34,12 @@ namespace OpenBreed.Wecs.Components.Animation
             });
         }
 
+        #endregion Internal Constructors
+
         //internal AnimationComponent(AnimationComponentBuilder builder)
         //{
         //    Items = builder.animatorBuilders.Select(item => item.Build()).ToList();
         //}
-
-        #endregion Internal Constructors
 
         #region Public Properties
 
@@ -52,10 +50,17 @@ namespace OpenBreed.Wecs.Components.Animation
 
     public sealed class AnimationComponentFactory : ComponentFactoryBase<IAnimationComponentTemplate>
     {
+        #region Private Fields
+
+        private readonly IManagerCollection managerCollection;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
-        public AnimationComponentFactory(ICore core) : base(core)
+        public AnimationComponentFactory(IManagerCollection managerCollection) : base(null)
         {
+            this.managerCollection = managerCollection;
         }
 
         #endregion Public Constructors
@@ -64,15 +69,15 @@ namespace OpenBreed.Wecs.Components.Animation
 
         protected override IEntityComponent Create(IAnimationComponentTemplate template)
         {
-            var builder = AnimationComponentBuilder.New(core);
+            var builder = managerCollection.GetManager<AnimationComponentBuilder>();
 
-            if(template.AnimName != null)
+            if (template.AnimName != null)
                 builder.SetByName(template.AnimName);
 
             builder.SetLoop(template.Loop);
             builder.SetSpeed(template.Speed);
 
-            if(template.Transition != null)
+            if (template.Transition != null)
                 builder.SetTransition(template.Transition);
 
             return builder.Build();
@@ -83,36 +88,31 @@ namespace OpenBreed.Wecs.Components.Animation
 
     public class AnimationComponentBuilder
     {
-        #region Private Fields
-
-        private ICore core;
-
-        #endregion Private Fields
-
-        #region Private Constructors
-
-        private AnimationComponentBuilder(ICore core)
-        {
-            this.core = core;
-        }
-
-        #endregion Private Constructors
-
-        #region Internal Properties
+        #region Internal Fields
 
         internal float Speed = 0.0f;
         internal bool Loop = false;
         internal int AnimId = -1;
         internal FrameTransition Transition = FrameTransition.None;
 
-        #endregion Internal Properties
+        #endregion Internal Fields
+
+        #region Private Fields
+
+        private readonly IAnimMan animMan;
+
+        #endregion Private Fields
+
+        #region Internal Constructors
+
+        internal AnimationComponentBuilder(IAnimMan animMan)
+        {
+            this.animMan = animMan;
+        }
+
+        #endregion Internal Constructors
 
         #region Public Methods
-
-        public static AnimationComponentBuilder New(ICore core)
-        {
-            return new AnimationComponentBuilder(core);
-        }
 
         public AnimationComponent Build()
         {
@@ -126,7 +126,7 @@ namespace OpenBreed.Wecs.Components.Animation
 
         public void SetByName(string animName)
         {
-            AnimId = core.GetManager<IAnimMan>().GetByName(animName).Id;
+            AnimId = animMan.GetByName(animName).Id;
         }
 
         public void SetLoop(bool loop)

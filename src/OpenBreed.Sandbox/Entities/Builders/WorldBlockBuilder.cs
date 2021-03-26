@@ -64,7 +64,7 @@ namespace OpenBreed.Sandbox.Entities.Builders
 
             if (HasBody)
             {
-                var bodyComponentBuilder = BodyComponentBuilderEx.New(Core);
+                var bodyComponentBuilder = Core.GetManager<BodyComponentBuilder>();
 
                 var fixtureId = fixtureMan.GetByAlias("Fixtures/GridCell").Id;
 

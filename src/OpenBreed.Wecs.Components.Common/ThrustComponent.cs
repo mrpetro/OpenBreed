@@ -1,17 +1,24 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Wecs.Components;
-using OpenTK;
-using System;
+﻿using OpenTK;
 
 namespace OpenBreed.Wecs.Components.Common
 {
+    public interface IThrustComponentTemplate : IComponentTemplate
+    {
+        #region Public Properties
+
+        float X { get; }
+        float Y { get; }
+
+        #endregion Public Properties
+    }
+
     /// <summary>
     /// Thrust entity component class that can be used to store entity current thrust information
     /// Example: Actor is applied with specific thrust vector to move in specific direction
     /// </summary>
     public class ThrustComponent : IEntityComponent
     {
-        #region Public Constructors
+        #region Private Constructors
 
         /// <summary>
         /// Constructor with passed initial thrust value
@@ -32,7 +39,7 @@ namespace OpenBreed.Wecs.Components.Common
             Value = new Vector2(x, y);
         }
 
-        #endregion Public Constructors
+        #endregion Private Constructors
 
         #region Public Properties
 
@@ -58,23 +65,23 @@ namespace OpenBreed.Wecs.Components.Common
         #endregion Public Methods
     }
 
-
-    public interface IThrustComponentTemplate : IComponentTemplate
-    {
-        float X { get; }
-        float Y { get; }
-    }
-
     public sealed class ThrustComponentFactory : ComponentFactoryBase<IThrustComponentTemplate>
     {
-        public ThrustComponentFactory(ICore core) : base(core)
-        {
+        #region Internal Constructors
 
+        internal ThrustComponentFactory() : base(null)
+        {
         }
+
+        #endregion Internal Constructors
+
+        #region Protected Methods
 
         protected override IEntityComponent Create(IThrustComponentTemplate template)
         {
             return ThrustComponent.Create(template.X, template.Y);
         }
+
+        #endregion Protected Methods
     }
 }

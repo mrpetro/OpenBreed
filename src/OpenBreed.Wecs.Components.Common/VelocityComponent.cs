@@ -1,7 +1,4 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Wecs.Components;
-using OpenTK;
-using System;
+﻿using OpenTK;
 
 namespace OpenBreed.Wecs.Components.Common
 {
@@ -21,7 +18,7 @@ namespace OpenBreed.Wecs.Components.Common
     /// </summary>
     public class VelocityComponent : IEntityComponent
     {
-        #region Public Constructors
+        #region Private Constructors
 
         /// <summary>
         /// Constructor with passed initial velocity value
@@ -42,7 +39,7 @@ namespace OpenBreed.Wecs.Components.Common
             Value = new Vector2(x, y);
         }
 
-        #endregion Public Constructors
+        #endregion Private Constructors
 
         #region Public Properties
 
@@ -70,13 +67,13 @@ namespace OpenBreed.Wecs.Components.Common
 
     public sealed class VelocityComponentFactory : ComponentFactoryBase<IVelocityComponentTemplate>
     {
-        #region Public Constructors
+        #region Internal Constructors
 
-        public VelocityComponentFactory(ICore core) : base(core)
+        internal VelocityComponentFactory() : base(null)
         {
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Protected Methods
 

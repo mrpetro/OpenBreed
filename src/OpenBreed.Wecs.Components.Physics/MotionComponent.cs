@@ -1,7 +1,4 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Wecs.Components.Common;
-using OpenTK;
-using OpenBreed.Wecs.Components;
+﻿using OpenTK;
 
 namespace OpenBreed.Wecs.Components.Physics
 {
@@ -46,16 +43,15 @@ namespace OpenBreed.Wecs.Components.Physics
         #endregion Public Properties
     }
 
-
     public sealed class MotionComponentFactory : ComponentFactoryBase<IMotionComponentTemplate>
     {
-        #region Public Constructors
+        #region Internal Constructors
 
-        public MotionComponentFactory(ICore core) : base(core)
+        internal MotionComponentFactory() : base(null)
         {
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Protected Methods
 

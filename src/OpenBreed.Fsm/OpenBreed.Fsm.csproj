@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="FsmComponent.cs" />
     <Compile Include="FsmMan.cs" />
     <Compile Include="IFsmMan.cs" />
@@ -74,6 +75,10 @@
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common.Tools\OpenBreed.Common.Tools.csproj">
       <Project>{B4E4CD19-64AF-42A5-8713-0D0DE35853B6}</Project>
       <Name>OpenBreed.Common.Tools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
+      <Project>{9894E7F4-7C85-4173-9D05-F50CFD2E4163}</Project>
+      <Name>OpenBreed.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Wecs.Components.Common\OpenBreed.Wecs.Components.Common.csproj">
       <Project>{983742FE-CB64-4BD9-BB24-90646172A0E2}</Project>

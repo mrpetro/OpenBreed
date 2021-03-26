@@ -1,21 +1,22 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Wecs.Components;
-
-namespace OpenBreed.Wecs.Components.Common
+﻿namespace OpenBreed.Wecs.Components.Common
 {
     public interface IClassComponentTemplate : IComponentTemplate
     {
+        #region Public Properties
+
         string Name { get; }
+
+        #endregion Public Properties
     }
 
     public class ClassComponent : IEntityComponent
     {
-        #region Public Constructors
-
         //public ClassComponent(ClassComponentBuilder builder)
         //{
         //    Name = builder.Name;
         //}
+
+        #region Public Constructors
 
         public ClassComponent(string name)
         {
@@ -31,17 +32,23 @@ namespace OpenBreed.Wecs.Components.Common
         #endregion Public Properties
     }
 
-
     public sealed class ClassComponentFactory : ComponentFactoryBase<IClassComponentTemplate>
     {
-        public ClassComponentFactory(ICore core) : base(core)
-        {
+        #region Internal Constructors
 
+        internal ClassComponentFactory() : base(null)
+        {
         }
+
+        #endregion Internal Constructors
+
+        #region Protected Methods
 
         protected override IEntityComponent Create(IClassComponentTemplate template)
         {
             return new ClassComponent(template.Name);
         }
+
+        #endregion Protected Methods
     }
 }

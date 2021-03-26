@@ -32,7 +32,7 @@ namespace OpenBreed.Sandbox.Entities.FpsCounter
 
             fpsTextEntity.Add(PositionComponent.Create(new Vector2(-windowClient.ClientRectangle.Width / 2.0f, -windowClient.ClientRectangle.Height / 2.0f)));
 
-            var textBuilder = TextComponentBuilderEx.New(core);
+            var textBuilder = core.GetManager<TextComponentBuilder>();
             textBuilder.SetFontById(arial12.Id);
             textBuilder.SetOffset(Vector2.Zero);
             textBuilder.SetColor(Color4.White);

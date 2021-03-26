@@ -1,12 +1,9 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Rendering.Interface;
+﻿using OpenBreed.Common;
+using OpenBreed.Core;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenTK;
 using OpenTK.Graphics;
-using System;
 using System.Collections.Generic;
-using OpenBreed.Wecs.Components;
-using OpenBreed.Rendering.Interface.Managers;
 
 namespace OpenBreed.Wecs.Components.Rendering
 {
@@ -96,7 +93,7 @@ namespace OpenBreed.Wecs.Components.Rendering
     {
         #region Internal Constructors
 
-        internal TextComponent(TextComponentBuilderEx builder)
+        internal TextComponent(TextComponentBuilder builder)
         {
             Parts = new List<TextPart>();
             Parts.Add(new TextPart(builder.FontId, builder.Offset, builder.Color, builder.Text, builder.Order));
@@ -113,10 +110,12 @@ namespace OpenBreed.Wecs.Components.Rendering
 
     public sealed class TextComponentFactory : ComponentFactoryBase<ITextComponentTemplate>
     {
+        private readonly IManagerCollection managerCollection;
         #region Public Constructors
 
-        public TextComponentFactory(ICore core) : base(core)
+        public TextComponentFactory(IManagerCollection managerCollection) : base(null)
         {
+            this.managerCollection = managerCollection;
         }
 
         #endregion Public Constructors
@@ -125,7 +124,7 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         protected override IEntityComponent Create(ITextComponentTemplate template)
         {
-            var builder = TextComponentBuilderEx.New(core);
+            var builder = managerCollection.GetManager<TextComponentBuilder>();
             builder.SetColor(template.Color);
             builder.SetFont(template.FontName, template.FontSize);
             builder.SetOffset(template.Offset);
@@ -138,22 +137,22 @@ namespace OpenBreed.Wecs.Components.Rendering
         #endregion Protected Methods
     }
 
-    public class TextComponentBuilderEx
+    public class TextComponentBuilder
     {
         #region Private Fields
 
-        private ICore core;
+        private readonly IFontMan fontMan;
 
         #endregion Private Fields
 
-        #region Private Constructors
+        #region Internal Constructors
 
-        private TextComponentBuilderEx(ICore core)
+        internal TextComponentBuilder(IFontMan fontMan)
         {
-            this.core = core;
+            this.fontMan = fontMan;
         }
 
-        #endregion Private Constructors
+        #endregion Internal Constructors
 
         #region Internal Properties
 
@@ -166,11 +165,6 @@ namespace OpenBreed.Wecs.Components.Rendering
         #endregion Internal Properties
 
         #region Public Methods
-
-        public static TextComponentBuilderEx New(ICore core)
-        {
-            return new TextComponentBuilderEx(core);
-        }
 
         public TextComponent Build()
         {
@@ -194,7 +188,7 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         public void SetFont(string fontName, int fontSize)
         {
-            var font = core.GetManager<IFontMan>().Create(fontName, fontSize);
+            var font = fontMan.Create(fontName, fontSize);
             SetFontById(font.Id);
         }
 

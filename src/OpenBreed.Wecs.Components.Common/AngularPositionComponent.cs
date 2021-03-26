@@ -64,7 +64,7 @@ namespace OpenBreed.Wecs.Components.Common
 
     public sealed class AngularPositionComponentFactory : ComponentFactoryBase<IAngularPositionComponentTemplate>
     {
-        public AngularPositionComponentFactory(ICore core) : base(core)
+        internal AngularPositionComponentFactory() : base(null)
         {
 
         }

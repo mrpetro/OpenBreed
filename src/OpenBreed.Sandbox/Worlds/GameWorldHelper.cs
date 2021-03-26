@@ -105,7 +105,7 @@ namespace OpenBreed.Sandbox.Worlds
             var playerCamera = cameraBuilder.Build();
             playerCamera.Tag = "PlayerCamera";
 
-            var animCmpBuilder = AnimationComponentBuilder.New(core);
+            var animCmpBuilder = core.GetManager<AnimationComponentBuilder>();
             animCmpBuilder.SetSpeed(10.0f);
             animCmpBuilder.SetLoop(false);
             animCmpBuilder.SetById(-1);
@@ -117,7 +117,7 @@ namespace OpenBreed.Sandbox.Worlds
             var gameCamera = cameraBuilder.Build();
             gameCamera.Tag = "HubCamera";
 
-            animCmpBuilder = AnimationComponentBuilder.New(core);
+            animCmpBuilder = core.GetManager<AnimationComponentBuilder>();
             animCmpBuilder.SetSpeed(10.0f);
             animCmpBuilder.SetLoop(false);
             animCmpBuilder.SetById(-1);
@@ -154,7 +154,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             var cursorEntity = core.GetManager<IEntityMan>().Create(core);
         
-            var spriteBuilder = SpriteComponentBuilder.New(core);
+            var spriteBuilder = core.GetManager<SpriteComponentBuilder>();
             spriteBuilder.SetAtlasByName("Atlases/Sprites/Cursors");
             spriteBuilder.SetOrder(100);
             spriteBuilder.SetImageId(0);
