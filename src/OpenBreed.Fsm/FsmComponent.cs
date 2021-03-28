@@ -58,7 +58,7 @@ namespace OpenBreed.Fsm
 
         #region Internal Constructors
 
-        internal FsmComponentFactory(IManagerCollection managerCollection) : base(null)
+        internal FsmComponentFactory(IManagerCollection managerCollection)
         {
             this.managerCollection = managerCollection;
         }

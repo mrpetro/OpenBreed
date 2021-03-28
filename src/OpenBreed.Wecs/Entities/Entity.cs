@@ -50,9 +50,9 @@ namespace OpenBreed.Wecs.Entities
         public object Tag { get; set; }
 
         /// <summary>
-        /// World reference this entity is currently in
+        /// Id of world which this entity is part of 
         /// </summary>
-        public World World { get; internal set; }
+        public int WorldId { get; internal set; } = -1;
 
         /// <summary>
         /// Identification number of this entity

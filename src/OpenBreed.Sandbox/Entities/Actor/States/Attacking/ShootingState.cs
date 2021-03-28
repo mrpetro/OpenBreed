@@ -49,7 +49,7 @@ namespace OpenBreed.Sandbox.Entities.Actor.States.Attacking
             var direction = entity.Get<AngularPositionComponent>().GetDirection();
             direction.Normalize();
             direction *= 500.0f;
-            ProjectileHelper.AddProjectile(entity.Core, entity.World, pos.X, pos.Y, direction.X, direction.Y);
+            ProjectileHelper.AddProjectile(entity.Core, entity.WorldId, pos.X, pos.Y, direction.X, direction.Y);
 
             //Entity.Impulse<AttackingState, AttackingImpulse>(AttackingImpulse.Wait);
             //entity.PostCommand(new EntitySetStateCommand(entity.Id, "AttackingState", "Wait"));

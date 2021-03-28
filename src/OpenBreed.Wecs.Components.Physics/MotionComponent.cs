@@ -47,7 +47,7 @@ namespace OpenBreed.Wecs.Components.Physics
     {
         #region Internal Constructors
 
-        internal MotionComponentFactory() : base(null)
+        internal MotionComponentFactory()
         {
         }
 

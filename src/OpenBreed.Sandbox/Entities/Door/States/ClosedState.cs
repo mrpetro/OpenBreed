@@ -54,6 +54,9 @@ namespace OpenBreed.Sandbox.Components.States
 
         public void EnterState(Entity entity)
         {
+            //var messaging = entity.Get<MessagingComponent>();
+            //messaging.Messages.Add(new SpriteOffMsg());
+
             entity.Core.Commands.Post(new SpriteOffCommand(entity.Id));
 
             var pos = entity.Get<PositionComponent>();
@@ -61,7 +64,7 @@ namespace OpenBreed.Sandbox.Components.States
             var className = entity.Get<ClassComponent>().Name;
             var stateName = fsmMan.GetStateName(FsmId, Id);
             var stampId = entity.Core.GetManager<IStampMan>().GetByName($"{stampPrefix}/{className}/{stateName}").Id;
-            commandsMan.Post(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
+            commandsMan.Post(new PutStampCommand(entity.WorldId, stampId, 0, pos.Value));
 
             //STAMP_DOOR_HORIZONTAL_CLOSED = $"{stampPrefix}/{className}/{stateName}";
 

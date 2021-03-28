@@ -113,7 +113,7 @@ namespace OpenBreed.Wecs.Components.Rendering
         private readonly IManagerCollection managerCollection;
         #region Public Constructors
 
-        public TextComponentFactory(IManagerCollection managerCollection) : base(null)
+        public TextComponentFactory(IManagerCollection managerCollection)
         {
             this.managerCollection = managerCollection;
         }

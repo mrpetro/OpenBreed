@@ -7,6 +7,7 @@ using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Rendering.Commands;
 using OpenBreed.Wecs.Systems.Rendering.Events;
+using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
@@ -32,6 +33,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         private readonly List<Entity> entities = new List<Entity>();
         private readonly IEntityMan entityMan;
+        private readonly IWorldMan worldMan;
         private readonly IPrimitiveRenderer primitiveRenderer;
         private readonly IViewClient viewClient;
 
@@ -39,9 +41,10 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Internal Constructors
 
-        internal ViewportSystem(IEntityMan entityMan, IPrimitiveRenderer primitiveRenderer, IViewClient viewClient)
+        internal ViewportSystem(IEntityMan entityMan, IWorldMan worldMan, IPrimitiveRenderer primitiveRenderer, IViewClient viewClient)
         {
             this.entityMan = entityMan;
+            this.worldMan = worldMan;
             this.primitiveRenderer = primitiveRenderer;
             this.viewClient = viewClient;
             Require<ViewportComponent>();
@@ -294,8 +297,11 @@ namespace OpenBreed.Wecs.Systems.Rendering
                     GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Keep);
                 }
 
-                if (camera.World != null)
-                    camera.World.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(clipBox, depth, dt));
+                if (camera.WorldId != -1)
+                {
+                    var world = worldMan.GetById(camera.WorldId);
+                    world.Systems.OfType<IRenderableSystem>().ForEach(item => item.Render(clipBox, depth, dt));
+                }
 
                 if (vpc.Clipping)
                 {

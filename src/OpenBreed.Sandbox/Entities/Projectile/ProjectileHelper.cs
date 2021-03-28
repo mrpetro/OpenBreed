@@ -86,7 +86,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
         static IEntityTemplate projectileTemplate;
 
-        public static void AddProjectile(ICore core, World world, float x, float y, float vx, float vy)
+        public static void AddProjectile(ICore core, int worldId, float x, float y, float vx, float vy)
         {
             if(projectileTemplate == null)
                 projectileTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Projectile\Projectile.xml");
@@ -102,7 +102,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
             //var projectileFsm = core.GetManager<IFsmMan>().GetByName("Projectile");
             //projectileFsm.SetInitialState(projectile, (int)AttackingState.Fired);
-            core.Commands.Post(new AddEntityCommand(world.Id, projectile.Id));
+            core.Commands.Post(new AddEntityCommand(worldId, projectile.Id));
             //world.AddEntity(projectile);
 
         }

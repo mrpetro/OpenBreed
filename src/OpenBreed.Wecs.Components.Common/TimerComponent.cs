@@ -54,7 +54,7 @@ namespace OpenBreed.Wecs.Components.Common
     {
         #region Internal Constructors
 
-        internal TimerComponentFactory() : base(null)
+        internal TimerComponentFactory()
         {
         }
 

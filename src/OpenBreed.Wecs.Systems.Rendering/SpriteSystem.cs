@@ -35,6 +35,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
             Require<SpriteComponent>();
             Require<PositionComponent>();
+
         }
 
         #endregion Internal Constructors
@@ -112,6 +113,8 @@ namespace OpenBreed.Wecs.Systems.Rendering
             return true;
         }
 
+
+
         private static bool HandleSpriteOffCommand(ICore core, SpriteOffCommand cmd)
         {
             var system = core.GetManager<ISystemFinder>().GetSystemByEntityId<SpriteSystem>(cmd.EntityId);
@@ -133,6 +136,12 @@ namespace OpenBreed.Wecs.Systems.Rendering
         /// <param name="viewport">Viewport which this sprite will be rendered to</param>
         private void RenderSprite(Entity entity, Box2 clipBox)
         {
+            //var messaging = entity.TryGet<MessagingComponent>();
+
+            //if (messaging.Messages.Count > 0)
+            //{
+            //}
+
             var pos = entity.Get<PositionComponent>();
             var spc = entity.Get<SpriteComponent>();
             var atlas = spriteMan.GetById(spc.AtlasId);

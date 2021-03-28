@@ -28,9 +28,12 @@ namespace OpenBreed.Wecs.Systems
         public T GetSystemByEntityId<T>(int entityId) where T : ISystem
         {
             var entity = entityMan.GetById(entityId);
-            if (entity.World == null)
+            if (entity.WorldId == -1)
                 return default(T);
-            var system = entity.World.GetSystem<T>();
+
+            var world = worldMan.GetById(entity.WorldId);
+
+            var system = world.GetSystem<T>();
             if (system == null)
                 return default(T);
 

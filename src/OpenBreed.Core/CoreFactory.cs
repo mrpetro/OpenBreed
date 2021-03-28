@@ -20,6 +20,8 @@ namespace OpenBreed.Core
             manCollection.AddSingleton<ICommandsMan>(() => new CommandsMan(manCollection.GetManager<ILogger>()));
 
             manCollection.AddSingleton<IEventsMan>(() => new EventsMan());
+
+            manCollection.AddSingleton<IMessagesMan>(() => new MessagesMan());
         }
 
 

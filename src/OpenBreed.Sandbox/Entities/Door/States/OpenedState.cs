@@ -55,7 +55,7 @@ namespace OpenBreed.Sandbox.Components.States
             var className = entity.Get<ClassComponent>().Name;
             var stateName = fsmMan.GetStateName(FsmId, Id);
             var stampId = entity.Core.GetManager<IStampMan>().GetByName($"{stampPrefix}/{className}/{stateName}").Id;
-            entity.Core.Commands.Post(new PutStampCommand(entity.World.Id, stampId, 0, pos.Value));
+            entity.Core.Commands.Post(new PutStampCommand(entity.WorldId, stampId, 0, pos.Value));
 
 
             commandsMan.Post(new TextSetCommand(entity.Id, 0, "Door - Opened"));

@@ -37,12 +37,17 @@ namespace OpenBreed.Wecs.Systems.Core
             Require<FsmComponent>();
 
 
-            commandsMan.Register<SetEntityStateCommand>(HandleSetStateCommand);
+
         }
 
         #endregion Public Constructors
 
         #region Public Methods
+
+        public static void RegisterHandlers(ICommandsMan commandsMan)
+        {
+            commandsMan.Register<SetEntityStateCommand>(HandleSetStateCommand);
+        }
 
         public void Update(float dt)
         {
@@ -98,9 +103,9 @@ namespace OpenBreed.Wecs.Systems.Core
                 fsmMan.EnterState(entity, state, 0);
         }
 
-        private bool HandleSetStateCommand(ICore core, SetEntityStateCommand cmd)
+        private static bool HandleSetStateCommand(ICore core, SetEntityStateCommand cmd)
         {
-            var entity = entityMan.GetById(cmd.EntityId);
+            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
 
             var fsmComponent = entity.Get<FsmComponent>();
 

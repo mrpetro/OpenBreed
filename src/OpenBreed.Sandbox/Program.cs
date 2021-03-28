@@ -253,7 +253,7 @@ namespace OpenBreed.Sandbox
         private void RegisterSystems()
         {
             FollowerSystem.RegisterHandlers(Commands);
-            //FsmSystem.RegisterHandlers(Commands);
+            FsmSystem.RegisterHandlers(Commands);
             TextInputSystem.RegisterHandlers(Commands);
             TimerSystem.RegisterHandlers(Commands);
             SpriteSystem.RegisterHandlers(Commands);
@@ -266,19 +266,14 @@ namespace OpenBreed.Sandbox
             PhysicsSystem.RegisterHandlers(Commands);
         }
 
-        private void OnLoad()
+        private void RegisterInputs()
         {
-            //Client.Title = $"Open Breed Sandbox (Version: {appVersion} Vsync: {window.VSync})";
-
-            InitLua();
-
-            RegisterSystems();
-            RegisterShapes();
-            RegisterFixtures();
-
             Inputs.RegisterHandler(new DigitalJoyInputHandler());
             Inputs.RegisterHandler(new ButtonInputHandler());
+        }
 
+        private void RegisterPlayers()
+        {
             var p1 = Players.AddPlayer("P1");
             p1.RegisterInput(new ButtonPlayerInput());
             p1.RegisterInput(new DigitalJoyPlayerInput());
@@ -294,6 +289,19 @@ namespace OpenBreed.Sandbox
             p2.AddKeyBinding("Walking", "Right", Key.D);
             p2.AddKeyBinding("Walking", "Up", Key.W);
             p2.AddKeyBinding("Walking", "Down", Key.S);
+        }
+
+        private void OnLoad()
+        {
+            //Client.Title = $"Open Breed Sandbox (Version: {appVersion} Vsync: {window.VSync})";
+
+            InitLua();
+
+            RegisterSystems();
+            RegisterShapes();
+            RegisterFixtures();
+            RegisterInputs();
+            RegisterPlayers();
 
             var spriteMan = GetManager<ISpriteMan>();
             var tileMan = GetManager<ITileMan>();

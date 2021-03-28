@@ -20,9 +20,11 @@ namespace OpenBreed.Wecs.Components.Rendering.Extensions
 
             manCollection.AddTransient<SpriteComponentBuilder>(() => new SpriteComponentBuilder(manCollection.GetManager<ISpriteMan>()));
             manCollection.AddTransient<TextComponentBuilder>(() => new TextComponentBuilder(manCollection.GetManager<IFontMan>()));
+            manCollection.AddTransient<CameraComponentBuilder>(() => new CameraComponentBuilder());
 
             manCollection.AddSingleton<SpriteComponentFactory>(() => new SpriteComponentFactory(manCollection));
             manCollection.AddSingleton<TextComponentFactory>(() => new TextComponentFactory(manCollection));
+            manCollection.AddSingleton<CameraComponentFactory>(() => new CameraComponentFactory(manCollection));
 
             var entityFactory = manCollection.GetManager<IEntityFactory>();
             entityFactory.RegisterComponentFactory<XmlSpriteComponent>(manCollection.GetManager<SpriteComponentFactory>());

@@ -36,7 +36,7 @@
     {
         #region Internal Constructors
 
-        internal ClassComponentFactory() : base(null)
+        internal ClassComponentFactory()
         {
         }
 

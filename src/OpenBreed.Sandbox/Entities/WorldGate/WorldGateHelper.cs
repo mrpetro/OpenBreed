@@ -86,7 +86,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
             var jobChain = new JobChain();
 
-            var worldIdToRemoveFrom = targetEntity.World.Id;
+            var worldIdToRemoveFrom = targetEntity.WorldId;
 
             var worldMan = core.GetManager<IWorldMan>();
             var eventsMan = core.GetManager<IEventsMan>();
@@ -97,7 +97,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             //Fade out camera
             jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => core.Commands.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_OUT, 0))));
             //Remove entity from this world
-            jobChain.Equeue(new WorldJob<EntityRemovedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => core.Commands.Post(new RemoveEntityCommand(targetEntity.World.Id, targetEntity.Id))));
+            jobChain.Equeue(new WorldJob<EntityRemovedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => core.Commands.Post(new RemoveEntityCommand(targetEntity.WorldId, targetEntity.Id))));
             //Load next world if needed
             jobChain.Equeue(new EntityJob(() => TryLoadWorld(core, exitInfo.WorldName, exitInfo.EntryId)));
             //Add entity to next world

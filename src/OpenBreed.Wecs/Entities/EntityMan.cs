@@ -63,7 +63,7 @@ namespace OpenBreed.Wecs.Entities
         public void Destroy(Entity entity)
         {
             //worldMan.Subscribe<EntityRemovedEventArgs>(OnEntityRemovedEventArgs);
-            commandsMan.Post(new RemoveEntityCommand(entity.World.Id, entity.Id));
+            commandsMan.Post(new RemoveEntityCommand(entity.Id, entity.Id));
         }
 
         #endregion Public Methods

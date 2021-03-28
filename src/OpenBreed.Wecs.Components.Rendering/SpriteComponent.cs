@@ -63,7 +63,7 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         #region Internal Constructors
 
-        internal SpriteComponentFactory(IManagerCollection managerCollection) : base(null)
+        internal SpriteComponentFactory(IManagerCollection managerCollection)
         {
             this.managerCollection = managerCollection;
         }

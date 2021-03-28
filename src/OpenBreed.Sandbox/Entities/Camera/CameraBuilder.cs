@@ -34,7 +34,7 @@ namespace OpenBreed.Sandbox.Entities.Camera
             var entity = Core.GetManager<IEntityMan>().Create(Core);
             entity.Add(PositionComponent.Create(position));
 
-            var ccBuilder = CameraComponentBuilder.New(Core);
+            var ccBuilder = Core.GetManager<CameraComponentBuilder>();
             ccBuilder.SetSize(width, height);
             entity.Add(ccBuilder.Build());
             entity.Add(new PauseImmuneComponent());

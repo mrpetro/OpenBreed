@@ -115,7 +115,7 @@ namespace OpenBreed.Wecs.Worlds
         /// <param name="entity">Entity to be added to this world</param>
         public void AddEntity(Entity entity)
         {
-            if (entity.World != null)
+            if (entity.WorldId != -1)
                 throw new InvalidOperationException("Entity can't exist in more than one world.");
 
             toAdd.Add(entity);
@@ -129,7 +129,7 @@ namespace OpenBreed.Wecs.Worlds
         /// <param name="entity">Entity to be removed from this world</param>
         public void RemoveEntity(Entity entity)
         {
-            if (entity.World != this)
+            if (entity.WorldId != Id)
                 throw new InvalidOperationException("Entity doesn't exist in this world");
 
             toRemove.Add(entity);
@@ -174,7 +174,7 @@ namespace OpenBreed.Wecs.Worlds
 
         private void DeinitializeEntity(IWorldMan worldMan, Entity entity)
         {
-            ((Entity)entity).World = null;
+            entity.WorldId = -1;
             entities.Remove(entity);
             RemoveEntityFromSystems(entity);
             OnEntityRemoved(worldMan, entity);
@@ -183,7 +183,7 @@ namespace OpenBreed.Wecs.Worlds
         private void InitializeEntity(IWorldMan worldMan, Entity entity)
         {
             entities.Add(entity);
-            ((Entity)entity).World = this;
+            entity.WorldId = Id;
             AddEntityToSystems(entity);
             OnEntityAdded(worldMan, entity);
         }

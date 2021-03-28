@@ -58,7 +58,7 @@ namespace OpenBreed.Wecs.Components.Animation
 
         #region Public Constructors
 
-        public AnimationComponentFactory(IManagerCollection managerCollection) : base(null)
+        public AnimationComponentFactory(IManagerCollection managerCollection)
         {
             this.managerCollection = managerCollection;
         }

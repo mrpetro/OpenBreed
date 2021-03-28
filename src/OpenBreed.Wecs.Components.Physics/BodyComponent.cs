@@ -92,7 +92,7 @@ namespace OpenBreed.Wecs.Components.Physics
 
         #region Public Constructors
 
-        public BodyComponentFactory(IManagerCollection managerCollection) : base(null)
+        public BodyComponentFactory(IManagerCollection managerCollection)
         {
             this.managerCollection = managerCollection;
         }

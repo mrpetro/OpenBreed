@@ -69,7 +69,7 @@ namespace OpenBreed.Wecs.Components.Common
     {
         #region Internal Constructors
 
-        internal PositionComponentFactory() : base(null)
+        internal PositionComponentFactory()
         {
         }
 

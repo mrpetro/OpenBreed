@@ -1,6 +1,4 @@
-﻿using OpenBreed.Core;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Components;
+﻿using OpenBreed.Common;
 
 namespace OpenBreed.Wecs.Components.Rendering
 {
@@ -60,19 +58,26 @@ namespace OpenBreed.Wecs.Components.Rendering
 
     public sealed class CameraComponentFactory : ComponentFactoryBase<ICameraComponentTemplate>
     {
-        #region Public Constructors
+        #region Private Fields
 
-        public CameraComponentFactory(ICore core) : base(core)
+        private readonly IManagerCollection managerCollection;
+
+        #endregion Private Fields
+
+        #region Internal Constructors
+
+        internal CameraComponentFactory(IManagerCollection managerCollection)
         {
+            this.managerCollection = managerCollection;
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Protected Methods
 
         protected override IEntityComponent Create(ICameraComponentTemplate template)
         {
-            var builder = CameraComponentBuilder.New(core);
+            var builder = managerCollection.GetManager<CameraComponentBuilder>();
             builder.SetSize(template.Width, template.Height);
             builder.SetBrightness(template.Brightness);
             return builder.Build();
@@ -91,27 +96,15 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         #endregion Internal Fields
 
-        #region Private Fields
+        #region Internal Constructors
 
-        private ICore core;
-
-        #endregion Private Fields
-
-        #region Private Constructors
-
-        private CameraComponentBuilder(ICore core)
+        internal CameraComponentBuilder()
         {
-            this.core = core;
         }
 
-        #endregion Private Constructors
+        #endregion Internal Constructors
 
         #region Public Methods
-
-        public static CameraComponentBuilder New(ICore core)
-        {
-            return new CameraComponentBuilder(core);
-        }
 
         public CameraComponent Build()
         {

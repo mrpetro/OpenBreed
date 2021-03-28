@@ -74,6 +74,7 @@
     <Compile Include="GroupComponent.cs" />
     <Compile Include="IControlComponent.cs" />
     <Compile Include="InventoryComponent.cs" />
+    <Compile Include="MessagingComponent.cs" />
     <Compile Include="PauseImmuneComponent.cs" />
     <Compile Include="PositionComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Xml\XmlThrustComponent.cs" />
     <Compile Include="Xml\XmlTimerComponent.cs" />
     <Compile Include="Xml\XmlVector2.cs" />
+    <Compile Include="Xml\XmlMessagingComponent.cs" />
     <Compile Include="Xml\XmlVelocityComponent.cs" />
   </ItemGroup>
   <ItemGroup>
