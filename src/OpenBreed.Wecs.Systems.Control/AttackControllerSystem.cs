@@ -1,4 +1,5 @@
-﻿using OpenBreed.Input.Interface;
+﻿using OpenBreed.Core.Managers;
+using OpenBreed.Input.Interface;
 using OpenBreed.Wecs.Components.Control;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Control.Commands;
@@ -13,15 +14,17 @@ namespace OpenBreed.Wecs.Systems.Control
         #region Private Fields
 
         private readonly IPlayersMan playersMan;
+        private readonly ICommandsMan commandsMan;
         private readonly List<Entity> entities = new List<Entity>();
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal AttackControllerSystem(IPlayersMan playersMan)
+        internal AttackControllerSystem(IPlayersMan playersMan, ICommandsMan commandsMan)
         {
             this.playersMan = playersMan;
+            this.commandsMan = commandsMan;
 
             Require<AttackInputComponent>();
             Require<AttackControlComponent>();
@@ -74,7 +77,7 @@ namespace OpenBreed.Wecs.Systems.Control
             if (!input.Changed)
                 return;
 
-            entity.Core.Commands.Post(new AttackControlCommand(entity.Id, entity, input.Primary, input.Secondary));
+            commandsMan.Post(new AttackControlCommand(entity.Id, entity, input.Primary, input.Secondary));
         }
 
         #endregion Private Methods

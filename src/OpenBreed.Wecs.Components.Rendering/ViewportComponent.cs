@@ -1,9 +1,5 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Wecs.Components.Common;
-using OpenTK;
 using OpenTK.Graphics;
-using System;
-using OpenBreed.Wecs.Components;
 
 namespace OpenBreed.Wecs.Components.Rendering
 {
@@ -26,7 +22,7 @@ namespace OpenBreed.Wecs.Components.Rendering
     /// </summary>
     public class ViewportComponent : IEntityComponent
     {
-        #region Public Constructors
+        #region Internal Constructors
 
         /// <summary>
         /// Constructor for builder
@@ -43,7 +39,7 @@ namespace OpenBreed.Wecs.Components.Rendering
             Clipping = builder.Clipping;
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
 
@@ -88,7 +84,7 @@ namespace OpenBreed.Wecs.Components.Rendering
         public float Ratio { get { return Width / Height; } }
 
         /// <summary>
-        /// Type of scaling strategy for camera display 
+        /// Type of scaling strategy for camera display
         /// </summary>
         public ViewportScalingType ScalingType { get; set; }
 
@@ -102,38 +98,37 @@ namespace OpenBreed.Wecs.Components.Rendering
 
     public class ViewportComponentBuilderEx
     {
-        #region Private Fields
+        #region Internal Fields
 
-        private ICore core;
+        internal float Width;
 
-        #endregion Private Fields
+        internal float Height;
+
+        internal int CameraEntityId = -1;
+
+        internal bool DrawBorder = false;
+
+        internal bool DrawBackground = false;
+
+        internal Color4 BackgroundColor;
+
+        internal bool Clipping = false;
+
+        #endregion Internal Fields
 
         #region Private Constructors
 
-        private ViewportComponentBuilderEx(ICore core)
+        private ViewportComponentBuilderEx()
         {
-            this.core = core;
         }
 
         #endregion Private Constructors
 
-        #region Internal Properties
-
-        internal float Width;
-        internal float Height;
-        internal int CameraEntityId = -1;
-        internal bool DrawBorder = false;
-        internal bool DrawBackground = false;
-        internal Color4 BackgroundColor;
-        internal bool Clipping = false;
-
-        #endregion Internal Properties
-
         #region Public Methods
 
-        public static ViewportComponentBuilderEx New(ICore core)
+        public static ViewportComponentBuilderEx New()
         {
-            return new ViewportComponentBuilderEx(core);
+            return new ViewportComponentBuilderEx();
         }
 
         public ViewportComponent Build()

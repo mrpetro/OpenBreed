@@ -24,27 +24,33 @@ using OpenBreed.Wecs.Systems.Animation;
 
 namespace OpenBreed.Sandbox.Worlds
 {
-    public static class TextWorldHelper
+    public class TextWorldHelper
     {
+        private readonly ICore core;
+
+        public TextWorldHelper(ICore core)
+        {
+            this.core = core;
+        }
 
         #region Public Methods
 
-        public static void Create(Program core)
+        public void Create()
         {
 
 
             var builder = core.GetManager<IWorldMan>().Create().SetName("TEXT");
 
-            AddSystems(core, builder);
+            AddSystems(builder);
 
-            Setup(core, builder.Build(core));
+            Setup(builder.Build(core));
         }
 
         #endregion Public Methods
 
         #region Private Methods
 
-        private static void AddSystems(Program core, WorldBuilder builder)
+        private void AddSystems(WorldBuilder builder)
         {
             var systemFactory = core.GetManager<ISystemFactory>();
 
@@ -70,7 +76,7 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem(systemFactory.Create<TextPresenterSystem>());
         }
 
-        private static void Setup(ICore core, World world)
+        private void Setup(World world)
         {
             //((Program)world.Core).KeyDown += (s, a) => ProcessKey(world, a);
             //((Program)world.Core).KeyPress += (s, a) => AddChar(world, a);
@@ -129,32 +135,32 @@ namespace OpenBreed.Sandbox.Worlds
             Console.WriteLine($"{caretCmp.Position}: {text}");
         }
 
-        private static void AddChar(Entity caret, KeyPressEventArgs a)
+        private void AddChar(Entity caret, KeyPressEventArgs a)
         {
             caret.Core.Commands.Post(new TextDataInsert(caret.Id, a.KeyChar.ToString()));
         }
 
-        private static void ProcessKey(Entity entity, KeyboardKeyEventArgs a)
+        private void ProcessKey(Entity entity, KeyboardKeyEventArgs a)
         {
             var caretCmp = entity.Get<TextCaretComponent>();
 
             switch (a.Key)
             {
                 case Key.Left:
-                    entity.Core.Commands.Post(new TextCaretSetPosition(entity.Id, caretCmp.Position - 1));
+                    core.Commands.Post(new TextCaretSetPosition(entity.Id, caretCmp.Position - 1));
                     break;
                 case Key.Right:
-                    entity.Core.Commands.Post(new TextCaretSetPosition(entity.Id, caretCmp.Position + 1));
+                    core.Commands.Post(new TextCaretSetPosition(entity.Id, caretCmp.Position + 1));
                     break;
                 case Key.Enter:
-                    entity.Core.Commands.Post(new TextDataInsert(entity.Id, "\r\n"));
+                    core.Commands.Post(new TextDataInsert(entity.Id, "\r\n"));
                     break;
                 default:
                     break;
             }
 
             if(a.Key == Key.BackSpace)
-                entity.Core.Commands.Post(new TextDataBackspace(entity.Id));
+                core.Commands.Post(new TextDataBackspace(entity.Id));
         }
 
         private static char KeyToChar(KeyboardKeyEventArgs e)

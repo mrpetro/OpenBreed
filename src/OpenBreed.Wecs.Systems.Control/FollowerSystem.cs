@@ -22,14 +22,16 @@ namespace OpenBreed.Wecs.Systems.Control
 
         private readonly List<Entity> entities = new List<Entity>();
         private readonly IEntityMan entityMan;
+        private readonly ICommandsMan commandsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public FollowerSystem(IEntityMan entityMan)
+        public FollowerSystem(IEntityMan entityMan, ICommandsMan commandsMan)
         {
             this.entityMan = entityMan;
+            this.commandsMan = commandsMan;
 
             Require<FollowerComponent>();
             Require<PositionComponent>();
@@ -103,7 +105,7 @@ namespace OpenBreed.Wecs.Systems.Control
                 if (follower == null)
                     continue;
 
-                follower.Core.Commands.Post(new AddEntityCommand(World.Id, follower.Id));
+                commandsMan.Post(new AddEntityCommand(World.Id, follower.Id));
             }
         }
 
@@ -120,7 +122,7 @@ namespace OpenBreed.Wecs.Systems.Control
                 if (follower == null)
                     continue;
 
-                follower.Core.Commands.Post(new RemoveEntityCommand(World.Id, follower.Id));
+                commandsMan.Post(new RemoveEntityCommand(World.Id, follower.Id));
             }
         }
 

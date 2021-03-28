@@ -1,20 +1,19 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Commands;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
-using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Entities.Turret;
 using OpenBreed.Sandbox.Entities.WorldGate;
+using OpenBreed.Sandbox.Helpers;
+using OpenBreed.Wecs.Commands;
+using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Rendering.Commands;
+using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenBreed.Wecs;
-using OpenBreed.Wecs.Worlds;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Commands;
 
 namespace OpenBreed.Sandbox.Worlds
 {
@@ -87,7 +86,9 @@ namespace OpenBreed.Sandbox.Worlds
             if (!viewports.TryGetValue(pairCode, out (int Width, int Height, string CameraName ) viewportData))
                 return;
 
-            var vp = ScreenWorldHelper.CreateViewportEntity(core, $"TV{pairCode}" , x * 16, y * 16, viewportData.Width, viewportData.Height, true);
+            var viewportCreator = core.GetManager<ViewportCreator>();
+
+            var vp = viewportCreator.CreateViewportEntity($"TV{pairCode}" , x * 16, y * 16, viewportData.Width, viewportData.Height, true);
 
             vp.Get<ViewportComponent>().CameraEntityId = core.GetManager<IEntityMan>().GetByTag(viewportData.CameraName).FirstOrDefault().Id;
             vp.Get<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;

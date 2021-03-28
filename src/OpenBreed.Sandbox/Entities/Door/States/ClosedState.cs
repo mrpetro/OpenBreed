@@ -22,17 +22,18 @@ namespace OpenBreed.Sandbox.Components.States
         private readonly IFsmMan fsmMan;
         private readonly ICommandsMan commandsMan;
         private readonly ICollisionMan collisionMan;
+        private readonly IStampMan stampMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ClosedState(IFsmMan fsmMan, ICommandsMan commandsMan, ICollisionMan collisionMan)
+        public ClosedState(IFsmMan fsmMan, ICommandsMan commandsMan, ICollisionMan collisionMan, IStampMan stampMan)
         {
             this.fsmMan = fsmMan;
             this.commandsMan = commandsMan;
             this.collisionMan = collisionMan;
-
+            this.stampMan = stampMan;
             stampPrefix = "Tiles/Stamps";
             collisionMan.RegisterCollisionPair(ColliderTypes.DoorOpenTrigger, ColliderTypes.ActorBody, DoorOpenTriggerCallback);
         }
@@ -57,13 +58,13 @@ namespace OpenBreed.Sandbox.Components.States
             //var messaging = entity.Get<MessagingComponent>();
             //messaging.Messages.Add(new SpriteOffMsg());
 
-            entity.Core.Commands.Post(new SpriteOffCommand(entity.Id));
+            commandsMan.Post(new SpriteOffCommand(entity.Id));
 
             var pos = entity.Get<PositionComponent>();
 
             var className = entity.Get<ClassComponent>().Name;
             var stateName = fsmMan.GetStateName(FsmId, Id);
-            var stampId = entity.Core.GetManager<IStampMan>().GetByName($"{stampPrefix}/{className}/{stateName}").Id;
+            var stampId = stampMan.GetByName($"{stampPrefix}/{className}/{stateName}").Id;
             commandsMan.Post(new PutStampCommand(entity.WorldId, stampId, 0, pos.Value));
 
             //STAMP_DOOR_HORIZONTAL_CLOSED = $"{stampPrefix}/{className}/{stateName}";

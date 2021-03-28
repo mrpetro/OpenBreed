@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Core;
+using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
 using OpenBreed.Wecs.Entities;
 using System;
@@ -18,8 +19,10 @@ namespace OpenBreed.Wecs.Systems.Control.Extensions
             systemFactory.Register(() => new AiControlSystem());
             systemFactory.Register(() => new WalkingControlSystem());
             systemFactory.Register(() => new WalkingControllerSystem(manCollection.GetManager<IPlayersMan>()));
-            systemFactory.Register(() => new AttackControllerSystem(manCollection.GetManager<IPlayersMan>()));
-            systemFactory.Register(() => new FollowerSystem(manCollection.GetManager<IEntityMan>()));
+            systemFactory.Register(() => new AttackControllerSystem(manCollection.GetManager<IPlayersMan>(),
+                                                                    manCollection.GetManager<ICommandsMan>()));
+            systemFactory.Register(() => new FollowerSystem(manCollection.GetManager<IEntityMan>(),
+                                                            manCollection.GetManager<ICommandsMan>()));
         }
     }
 }

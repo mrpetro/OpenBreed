@@ -4,6 +4,7 @@ using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Wecs.Systems.Animation.Commands;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Entities.Projectile.States
 {
@@ -12,14 +13,16 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
         #region Private Fields
 
         private readonly string animPrefix;
+        private readonly ICommandsMan commandsMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public FiredState(string animPrefix)
+        public FiredState(string animPrefix, ICommandsMan commandsMan)
         {
             this.animPrefix = animPrefix;
+            this.commandsMan = commandsMan;
         }
 
         #endregion Public Constructors
@@ -39,8 +42,8 @@ namespace OpenBreed.Sandbox.Entities.Projectile.States
 
             var animDirName = AnimHelper.ToDirectionName(direction);
 
-            entity.Core.Commands.Post(new PlayAnimCommand(entity.Id, animPrefix + animDirName, 0));
-            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, "Projectile - Fired"));
+            commandsMan.Post(new PlayAnimCommand(entity.Id, animPrefix + animDirName, 0));
+            commandsMan.Post(new TextSetCommand(entity.Id, 0, "Projectile - Fired"));
         }
 
         public void Initialize(Entity entity)

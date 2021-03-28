@@ -23,6 +23,7 @@ using OpenBreed.Fsm;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Commands;
 using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Entities.Projectile
 {
@@ -109,8 +110,11 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
         public static void CreateFsm(ICore core)
         {
-            var stateMachine = core.GetManager<IFsmMan>().Create<AttackingState, AttackingImpulse>("Projectile");
-            stateMachine.AddState(new FiredState("Animations/Laser/Fired/"));
+            var fsmMan = core.GetManager<IFsmMan>();
+            var commandsMan = core.GetManager<ICommandsMan>();
+
+            var stateMachine = fsmMan.Create<AttackingState, AttackingImpulse>("Projectile");
+            stateMachine.AddState(new FiredState("Animations/Laser/Fired/", commandsMan));
         }
     }
 }

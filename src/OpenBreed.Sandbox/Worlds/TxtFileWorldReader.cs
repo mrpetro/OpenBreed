@@ -69,6 +69,8 @@ namespace OpenBreed.Sandbox.Worlds
         public World GetWorld()
         {
             var worldBuilder = Core.GetManager<IWorldMan>().Create();
+            var gameWorldHelper = Core.GetManager<GameWorldHelper>();
+
             var helper = new WorldBuilderHelper(worldBuilder);
 
             helper.RegisterHandlers();
@@ -77,7 +79,7 @@ namespace OpenBreed.Sandbox.Worlds
             ReadBody(worldBuilder);
             ReadExits(worldBuilder, helper);
             ReadViewports(worldBuilder, helper);
-            GameWorldHelper.AddSystems((Program)Core, worldBuilder);
+            gameWorldHelper.AddSystems(worldBuilder);
             return worldBuilder.Build(Core); 
         }
 

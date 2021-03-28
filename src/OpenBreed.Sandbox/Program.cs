@@ -27,6 +27,7 @@ using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Entities.Turret;
 using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Sandbox.Extensions;
+using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Scripting.Lua;
@@ -113,7 +114,31 @@ namespace OpenBreed.Sandbox
 
         public ICore Create()
         {
-            return new Program(manCollection, manCollection.GetManager<IViewClient>());
+            var core = new Program(manCollection, manCollection.GetManager<IViewClient>());
+
+            manCollection.AddSingleton<ViewportCreator>(() => new ViewportCreator(core, manCollection.GetManager<IEntityMan>()));
+            manCollection.AddSingleton<ScreenWorldHelper>(() => new ScreenWorldHelper(core, manCollection.GetManager<ISystemFactory>(),
+                                                                                            manCollection.GetManager<ICommandsMan>(), 
+                                                                                            manCollection.GetManager<IRenderingMan>(),
+                                                                                            manCollection.GetManager<IWorldMan>(), 
+                                                                                            manCollection.GetManager<IEventsMan>(),
+                                                                                            manCollection.GetManager<ViewportCreator>(),
+                                                                                            manCollection.GetManager<IViewClient>()));
+            manCollection.AddSingleton<HudWorldHelper>(() => new HudWorldHelper(core, manCollection.GetManager<ISystemFactory>(),
+                                                                                            manCollection.GetManager<IWorldMan>(),
+                                                                                            manCollection.GetManager<IViewClient>(),
+                                                                                            manCollection.GetManager<IEntityMan>()));
+            manCollection.AddSingleton<GameWorldHelper>(() => new GameWorldHelper(core, manCollection,
+                                                                                        manCollection.GetManager<IPlayersMan>(),
+                                                                                            manCollection.GetManager<ICommandsMan>(),
+                                                                                            manCollection.GetManager<IEntityMan>(),
+                                                                                        manCollection.GetManager<ISystemFactory>(),
+                                                                                            manCollection.GetManager<IWorldMan>(),
+                                                                                            manCollection.GetManager<IRenderingMan>(),
+                                                                                            manCollection.GetManager<IEventsMan>()));
+
+
+            return core;
         }
 
         #endregion Public Methods
@@ -355,11 +380,17 @@ namespace OpenBreed.Sandbox
             //ActorRotationHelper.CreateFsm(this);
             TurretHelper.CreateRotationFsm(this);
 
-            renderingMan.ScreenWorld = ScreenWorldHelper.CreateWorld(this);
 
+            var screenWorldHelper = GetManager<ScreenWorldHelper>();
+
+            renderingMan.ScreenWorld = screenWorldHelper.CreateWorld();
             //TextWorldHelper.Create(this);
-            HudWorldHelper.Create(this);
-            GameWorldHelper.Create(this);
+
+            var hudWorldHelper = GetManager<HudWorldHelper>();
+            hudWorldHelper.Create();
+
+            var gameWorldHelper = GetManager<GameWorldHelper>();
+            gameWorldHelper.Create();
 
             OnEngineInitialized();
         }

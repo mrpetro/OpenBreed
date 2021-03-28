@@ -40,24 +40,6 @@ namespace OpenBreed.Game
             builder.AddSystem(systemFactory.Create<TextSystem>());
         }
 
-        public static Entity CreateViewportEntity(ICore core, string name, float x, float y, float width, float height, bool drawBackground, bool clipping = true)
-        {
-            var viewport = core.GetManager<IEntityMan>().Create(core);
-            viewport.Tag = name;
-
-            var vpcBuilder = ViewportComponentBuilderEx.New(core);
-            vpcBuilder.SetSize(width, height);
-            vpcBuilder.SetDrawBorderFlag(true);
-            vpcBuilder.SetDrawBackgroundFlag(drawBackground);
-            vpcBuilder.SetClippingFlag(clipping);
-            vpcBuilder.SetBackgroundColor(Color4.Black);
-
-            viewport.Add(vpcBuilder.Build());
-            viewport.Add(PositionComponent.Create(x, y));
-
-            return viewport;
-        }
-
         public static World CreateWorld(Game game)
         {
             var windowClient = game.GetManager<IViewClient>();
@@ -67,7 +49,9 @@ namespace OpenBreed.Game
 
             var world = builder.Build(game);
 
-            var gameViewport = CreateViewportEntity(game, GAME_VIEWPORT, 32, 32, windowClient.ClientRectangle.Width - 64, windowClient.ClientRectangle.Height - 64, true, true);
+            var viewportCreator = game.GetManager<ViewportCreator>();
+
+            var gameViewport = viewportCreator.CreateViewportEntity(GAME_VIEWPORT, 32, 32, windowClient.ClientRectangle.Width - 64, windowClient.ClientRectangle.Height - 64, true, true);
             //gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
             //gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitHeightPreserveAspectRatio;
             gameViewport.Get<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;

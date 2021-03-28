@@ -38,16 +38,37 @@ using OpenBreed.Wecs.Systems.Animation;
 using OpenBreed.Wecs.Systems.Gui;
 using OpenBreed.Wecs.Components.Gui;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Common;
 
 namespace OpenBreed.Sandbox.Worlds
 {
-    public static class GameWorldHelper
+    public class GameWorldHelper
     {
-        public static void AddSystems(Program core, WorldBuilder builder)
-        {
-            var systemFactory = core.GetManager<ISystemFactory>();
-            var renderingMan = core.GetManager<IRenderingMan>();
+        private readonly ICore core;
+        private readonly IManagerCollection managerCollection;
+        private readonly IPlayersMan playersMan;
+        private readonly ICommandsMan commandsMan;
+        private readonly IEntityMan entityMan;
+        private readonly ISystemFactory systemFactory;
+        private readonly IWorldMan worldMan;
+        private readonly IRenderingMan renderingMan;
+        private readonly IEventsMan eventsMan;
 
+        public GameWorldHelper(ICore core, IManagerCollection managerCollection, IPlayersMan playersMan, ICommandsMan commandsMan, IEntityMan entityMan, ISystemFactory systemFactory, IWorldMan worldMan, IRenderingMan renderingMan, IEventsMan eventsMan)
+        {
+            this.core = core;
+            this.managerCollection = managerCollection;
+            this.playersMan = playersMan;
+            this.commandsMan = commandsMan;
+            this.entityMan = entityMan;
+            this.systemFactory = systemFactory;
+            this.worldMan = worldMan;
+            this.renderingMan = renderingMan;
+            this.eventsMan = eventsMan;
+        }
+
+        public void AddSystems(WorldBuilder builder)
+        {
             int width = builder.width;
             int height = builder.height;
 
@@ -84,15 +105,15 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem(systemFactory.Create<ViewportSystem>());
         }
 
-        public static World CreateGameWorld(Program core, string worldName)
+        public World CreateGameWorld(string worldName)
         {
-            var builder = core.GetManager<IWorldMan>().Create().SetName(worldName);
-            AddSystems(core, builder);
+            var builder = worldMan.Create().SetName(worldName);
+            AddSystems(builder);
 
             return builder.Build(core);
         }
 
-        internal static void Create(Program core)
+        internal void Create()
         {
             World gameWorld = null;
 
@@ -117,7 +138,7 @@ namespace OpenBreed.Sandbox.Worlds
             var gameCamera = cameraBuilder.Build();
             gameCamera.Tag = "HubCamera";
 
-            animCmpBuilder = core.GetManager<AnimationComponentBuilder>();
+            animCmpBuilder = managerCollection.GetManager<AnimationComponentBuilder>();
             animCmpBuilder.SetSpeed(10.0f);
             animCmpBuilder.SetLoop(false);
             animCmpBuilder.SetById(-1);
@@ -130,7 +151,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             var actor = ActorHelper.CreateActor(core, new Vector2(128, 128));
 
-            var p1 = core.Players.GetByName("P1");
+            var p1 = playersMan.GetByName("P1");
 
             actor.Add(new WalkingInputComponent(p1.Id, 0));
             actor.Add(new AttackInputComponent(p1.Id, 0));
@@ -140,21 +161,19 @@ namespace OpenBreed.Sandbox.Worlds
             //actor.Add(TextHelper.Create(core, new Vector2(0, 32), "Hero"));
 
             //actor.Subscribe<EntityEnteredWorldEventArgs>(OnEntityEntered);
-            var worldMan = core.GetManager<IWorldMan>();
-            var eventsMan = core.GetManager<IEventsMan>();
-            eventsMan.Subscribe<EntityAddedEventArgs>(worldMan, (s,a) => OnEntityAdded(core, s,a));
-            eventsMan.Subscribe<EntityRemovedEventArgs>(worldMan, (s,a) => OnEntityRemoved(core, s,a));
+            eventsMan.Subscribe<EntityAddedEventArgs>(worldMan, (s,a) => OnEntityAdded(s,a));
+            eventsMan.Subscribe<EntityRemovedEventArgs>(worldMan, (s,a) => OnEntityRemoved(s,a));
 
             core.Commands.Post(new AddEntityCommand(gameWorld.Id, actor.Id));
             //gameWorld.AddEntity(actor);
 
-            var gameViewport = core.GetManager<IEntityMan>().GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
+            var gameViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
 
             gameViewport.Get<ViewportComponent>().CameraEntityId = playerCamera.Id;
 
-            var cursorEntity = core.GetManager<IEntityMan>().Create(core);
+            var cursorEntity = entityMan.Create(core);
         
-            var spriteBuilder = core.GetManager<SpriteComponentBuilder>();
+            var spriteBuilder = managerCollection.GetManager<SpriteComponentBuilder>();
             spriteBuilder.SetAtlasByName("Atlases/Sprites/Cursors");
             spriteBuilder.SetOrder(100);
             spriteBuilder.SetImageId(0);
@@ -166,34 +185,32 @@ namespace OpenBreed.Sandbox.Worlds
             //gameViewport.Subscribe(GfxEventTypes.VIEWPORT_RESIZED, (s, a) => UpdateCameraFov(playerCamera, (ViewportResizedEventArgs)a));
             //SetPreserveAspectRatio(gameViewport);
 
-            core.Commands.Post(new AddEntityCommand(gameWorld.Id, cursorEntity.Id));
+            commandsMan.Post(new AddEntityCommand(gameWorld.Id, cursorEntity.Id));
 
-            core.Commands.Post(new FollowedAddFollowerCommand(actor.Id, playerCamera.Id));
+            commandsMan.Post(new FollowedAddFollowerCommand(actor.Id, playerCamera.Id));
             //gameWorld.PostCommand(new FollowerSetTargetCommand(playerCamera.Id, actor.Id));
         }
 
-        public static void SetPreserveAspectRatio(Entity viewportEntity)
+        public void SetPreserveAspectRatio(Entity viewportEntity)
         {
-            var cameraEntity = viewportEntity.Core.GetManager<IEntityMan>().GetById(viewportEntity.Get<ViewportComponent>().CameraEntityId);
+            var cameraEntity = entityMan.GetById(viewportEntity.Get<ViewportComponent>().CameraEntityId);
             viewportEntity.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateCameraFov(cameraEntity, a));
         }
 
-        private static void UpdateCameraFov(Entity cameraEntity, ViewportResizedEventArgs a)
+        private void UpdateCameraFov(Entity cameraEntity, ViewportResizedEventArgs a)
         {
             cameraEntity.Get<CameraComponent>().Width = a.Width;
             cameraEntity.Get<CameraComponent>().Height = a.Height;
         }
 
-        private static void OnEntityAdded(ICore core, object sender, EntityAddedEventArgs a)
+        private void OnEntityAdded(object sender, EntityAddedEventArgs a)
         {
-            var worldMan = sender as WorldMan;
             var world = worldMan.GetById(a.WorldId);
             core.Logging.Verbose($"Entity '{a.EntityId}' added to world '{world.Name}'.");
         }
 
-        private static void OnEntityRemoved(ICore core, object sender, EntityRemovedEventArgs a)
+        private void OnEntityRemoved(object sender, EntityRemovedEventArgs a)
         {
-            var worldMan = sender as WorldMan;
             var world = worldMan.GetById(a.WorldId);
             core.Logging.Verbose($"Entity '{a.EntityId}' removed from world '{world.Name}'.");
         }
