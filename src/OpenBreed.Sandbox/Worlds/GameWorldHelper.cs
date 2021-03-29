@@ -149,7 +149,10 @@ namespace OpenBreed.Sandbox.Worlds
             using (var reader = new TxtFileWorldReader(core, ".\\Content\\Maps\\hub.txt"))
                 gameWorld = reader.GetWorld();
 
-            var actor = ActorHelper.CreateActor(core, new Vector2(128, 128));
+
+            var actorHelper = core.GetManager<ActorHelper>();
+
+            var actor = actorHelper.CreateActor(new Vector2(128, 128));
 
             var p1 = playersMan.GetByName("P1");
 

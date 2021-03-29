@@ -48,7 +48,7 @@ namespace OpenBreed.Sandbox.Entities.FpsCounter
 
             var hudViewport = core.GetManager<IEntityMan>().GetByTag(ScreenWorldHelper.HUD_VIEWPORT).First();
 
-            core.Jobs.Execute(new FpsTextUpdateJob(fpsTextEntity));
+            core.Jobs.Execute(new FpsTextUpdateJob(core, fpsTextEntity));
             hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateFpsPos(fpsTextEntity, a));
         }
 

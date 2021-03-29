@@ -137,6 +137,11 @@ namespace OpenBreed.Sandbox
                                                                                             manCollection.GetManager<IRenderingMan>(),
                                                                                             manCollection.GetManager<IEventsMan>()));
 
+            manCollection.AddSingleton<WorldGateHelper>(() => new WorldGateHelper(core));
+            manCollection.AddSingleton<DoorHelper>(() => new DoorHelper(core));
+            manCollection.AddSingleton<ProjectileHelper>(() => new ProjectileHelper(core));
+            manCollection.AddSingleton<ActorHelper>(() => new ActorHelper(core));
+
 
             return core;
         }
@@ -357,23 +362,30 @@ namespace OpenBreed.Sandbox
             var cursorsTex = textureMan.Create("Textures/Sprites/Cursors", @"Content\Graphics\Cursors.png");
             spriteMan.Create("Atlases/Sprites/Cursors", cursorsTex.Id, 16, 16, 1, 1);
 
+            var worldGateHelper = GetManager<WorldGateHelper>();
+            var doorHelper = GetManager<DoorHelper>();
+            var projectileHelper = GetManager<ProjectileHelper>();
+            var actorHelper = GetManager<ActorHelper>();
+
+
             ColliderTypes.Initialize(GetManager<ICollisionMan>());
-            ActorHelper.RegisterCollisionPairs(this);
-            WorldGateHelper.RegisterCollisionPairs(this);
+            actorHelper.RegisterCollisionPairs();
+            worldGateHelper.RegisterCollisionPairs();
             //TeleportHelper.RegisterCollisionPairs(this);
-            ProjectileHelper.RegisterCollisionPairs(this);
+            projectileHelper.RegisterCollisionPairs();
 
             CameraHelper.CreateAnimations(this);
-            DoorHelper.CreateStamps(this);
-            DoorHelper.CreateAnimations(this);
-            ActorHelper.CreateAnimations(this);
+            doorHelper.CreateStamps();
+            doorHelper.CreateAnimations();
+            actorHelper.CreateAnimations();
             TurretHelper.CreateAnimations(this);
             TeleportHelper.CreateAnimations(this);
-            ProjectileHelper.CreateAnimations(this);
+            projectileHelper.CreateAnimations();
             Misc.CreateAnimations(this);
 
-            DoorHelper.CreateFsm(this);
-            ProjectileHelper.CreateFsm(this);
+
+            doorHelper.CreateFsm();
+            projectileHelper.CreateFsm();
             ButtonHelper.CreateFsm(this);
             ActorAttackingHelper.CreateFsm(this);
             ActorMovementHelper.CreateFsm(this);

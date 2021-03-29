@@ -2,6 +2,7 @@
 using OpenBreed.Core.Managers;
 using OpenBreed.Fsm;
 using OpenBreed.Sandbox.Entities.Actor.States.Attacking;
+using OpenBreed.Sandbox.Entities.Projectile;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
@@ -13,10 +14,11 @@ namespace OpenBreed.Sandbox.Entities.Actor
         {
             var fsmMan = core.GetManager<IFsmMan>();
             var commandsMan = core.GetManager<ICommandsMan>();
+            var projectileHelper = core.GetManager<ProjectileHelper>();
 
             var stateMachine = fsmMan.Create<AttackingState, AttackingImpulse>("Actor.Attacking");
 
-            stateMachine.AddState(new States.Attacking.ShootingState(fsmMan, commandsMan));
+            stateMachine.AddState(new States.Attacking.ShootingState(fsmMan, commandsMan, projectileHelper));
             stateMachine.AddState(new States.Attacking.IdleState(fsmMan, commandsMan));
             stateMachine.AddState(new States.Attacking.CooldownState(fsmMan, commandsMan));
 

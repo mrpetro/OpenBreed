@@ -98,9 +98,13 @@ namespace OpenBreed.Game
 
             var entity = entityFactory.Create(this, entityTemplate);
 
-            renderingMan.ScreenWorld = ScreenWorldHelper.CreateWorld(this);
+            var screenWorld = GetManager<ScreenWorldHelper>();
 
-            GameWorldHelper.Create(this);
+            renderingMan.ScreenWorld = screenWorld.CreateWorld();
+
+            var gameWorldHelper = GetManager<GameWorldHelper>();
+
+            gameWorldHelper.Create();
 
             var entryScript = manCollection2.GetManager<ScriptsDataProvider>().GetScript("Scripts.Entry.lua");
 

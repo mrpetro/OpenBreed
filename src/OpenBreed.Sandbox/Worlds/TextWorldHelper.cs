@@ -21,16 +21,27 @@ using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Commands;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Systems.Animation;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Worlds
 {
     public class TextWorldHelper
     {
         private readonly ICore core;
+        private readonly IWorldMan worldMan;
+        private readonly ISystemFactory systemFactory;
+        private readonly IInputsMan inputsMan;
+        private readonly ICommandsMan commandsMan;
+        private readonly IViewClient viewClient;
 
-        public TextWorldHelper(ICore core)
+        public TextWorldHelper(ICore core, IWorldMan worldMan, ISystemFactory systemFactory, IInputsMan inputsMan, ICommandsMan commandsMan, IViewClient viewClient)
         {
             this.core = core;
+            this.worldMan = worldMan;
+            this.systemFactory = systemFactory;
+            this.inputsMan = inputsMan;
+            this.commandsMan = commandsMan;
+            this.viewClient = viewClient;
         }
 
         #region Public Methods
@@ -39,7 +50,7 @@ namespace OpenBreed.Sandbox.Worlds
         {
 
 
-            var builder = core.GetManager<IWorldMan>().Create().SetName("TEXT");
+            var builder = worldMan.Create().SetName("TEXT");
 
             AddSystems(builder);
 
@@ -52,8 +63,6 @@ namespace OpenBreed.Sandbox.Worlds
 
         private void AddSystems(WorldBuilder builder)
         {
-            var systemFactory = core.GetManager<ISystemFactory>();
-
             //Input
             //builder.AddSystem(core.CreateWalkingControlSystem().Build());
             //builder.AddSystem(core.CreateAiControlSystem().Build());
@@ -81,25 +90,23 @@ namespace OpenBreed.Sandbox.Worlds
             //((Program)world.Core).KeyDown += (s, a) => ProcessKey(world, a);
             //((Program)world.Core).KeyPress += (s, a) => AddChar(world, a);
 
-            var windowClient = core.GetManager<IViewClient>();
             var cameraBuilder = new CameraBuilder(core);
             cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);
-            cameraBuilder.SetFov(windowClient.ClientRectangle.Width, windowClient.ClientRectangle.Height);
+            cameraBuilder.SetFov(viewClient.ClientRectangle.Width, viewClient.ClientRectangle.Height);
             var hudCamera = cameraBuilder.Build();
             hudCamera.Tag = "HudCamera";
-            core.Commands.Post(new AddEntityCommand(world.Id, hudCamera.Id));
+            commandsMan.Post(new AddEntityCommand(world.Id, hudCamera.Id));
 
             var caret = TextHelper.CreateText(core, world);
-            var inputs = core.GetManager<IInputsMan>();
 
-            inputs.KeyDown += (s, a) => ProcessKey(caret, a);
-            inputs.KeyPress += (s, a) => AddChar(caret, a);
+            inputsMan.KeyDown += (s, a) => ProcessKey(caret, a);
+            inputsMan.KeyPress += (s, a) => AddChar(caret, a);
 
             //caret.Subscribe<TextCaretPositionChanged>(OnTextCaretPositionChanged);
             //caret.Subscribe<TextDataChanged>(OnTextDataChanged);
 
-            core.Commands.Post(new AddEntityCommand(world.Id, caret.Id));
+            commandsMan.Post(new AddEntityCommand(world.Id, caret.Id));
 
 
             var hudViewport = core.GetManager<IEntityMan>().GetByTag(ScreenWorldHelper.TEXT_VIEWPORT).First();
@@ -108,7 +115,7 @@ namespace OpenBreed.Sandbox.Worlds
             hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateCameraFov(hudCamera, a));
         }
 
-        private static void OnTextCaretPositionChanged(object sender, TextCaretPositionChanged e)
+        private void OnTextCaretPositionChanged(object sender, TextCaretPositionChanged e)
         {
             var entity = sender as Entity;
             var dataCmp = entity.Get<TextDataComponent>();
@@ -121,7 +128,7 @@ namespace OpenBreed.Sandbox.Worlds
             Console.WriteLine($"{e.Position}: {text}");
         }
 
-        private static void OnTextDataChanged(object sender, TextDataChanged e)
+        private void OnTextDataChanged(object sender, TextDataChanged e)
         {
             var entity = sender as Entity;
 
@@ -137,7 +144,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         private void AddChar(Entity caret, KeyPressEventArgs a)
         {
-            caret.Core.Commands.Post(new TextDataInsert(caret.Id, a.KeyChar.ToString()));
+            commandsMan.Post(new TextDataInsert(caret.Id, a.KeyChar.ToString()));
         }
 
         private void ProcessKey(Entity entity, KeyboardKeyEventArgs a)
@@ -147,20 +154,20 @@ namespace OpenBreed.Sandbox.Worlds
             switch (a.Key)
             {
                 case Key.Left:
-                    core.Commands.Post(new TextCaretSetPosition(entity.Id, caretCmp.Position - 1));
+                    commandsMan.Post(new TextCaretSetPosition(entity.Id, caretCmp.Position - 1));
                     break;
                 case Key.Right:
-                    core.Commands.Post(new TextCaretSetPosition(entity.Id, caretCmp.Position + 1));
+                    commandsMan.Post(new TextCaretSetPosition(entity.Id, caretCmp.Position + 1));
                     break;
                 case Key.Enter:
-                    core.Commands.Post(new TextDataInsert(entity.Id, "\r\n"));
+                    commandsMan.Post(new TextDataInsert(entity.Id, "\r\n"));
                     break;
                 default:
                     break;
             }
 
             if(a.Key == Key.BackSpace)
-                core.Commands.Post(new TextDataBackspace(entity.Id));
+                commandsMan.Post(new TextDataBackspace(entity.Id));
         }
 
         private static char KeyToChar(KeyboardKeyEventArgs e)

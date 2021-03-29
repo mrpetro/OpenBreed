@@ -113,7 +113,8 @@ namespace OpenBreed.Sandbox.Worlds
             var y = (int)args[1];
             var pairCode = (int)args[2];
 
-            WorldGateHelper.AddWorldEntry(core, world, x, y, pairCode);
+            var worldGateHelper = core.GetManager<WorldGateHelper>();
+            worldGateHelper.AddWorldEntry(world, x, y, pairCode);
             core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
@@ -158,7 +159,9 @@ namespace OpenBreed.Sandbox.Worlds
             if (!exits.TryGetValue(exitNo, out exitInfo))
                 return;
 
-            WorldGateHelper.AddWorldExit(core, world, x, y, exitInfo.Item1, exitInfo.Item2);
+            var worldGateHelper = core.GetManager<WorldGateHelper>();
+
+            worldGateHelper.AddWorldExit(world, x, y, exitInfo.Item1, exitInfo.Item2);
             core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
@@ -238,14 +241,16 @@ namespace OpenBreed.Sandbox.Worlds
 
         private static void AddDoor(ICore core, World world, int code, object[] args)
         {
+            var doorHelper = core.GetManager<DoorHelper>();
+
             var x = (int)args[0];
             var y = (int)args[1];
             var type = (int)args[2];
 
             if (type == 'H')
-                DoorHelper.AddHorizontalDoor(core, world, x, y);
+                doorHelper.AddHorizontalDoor(world, x, y);
             else if (type == 'V')
-                DoorHelper.AddVerticalDoor(core, world, x, y);
+                doorHelper.AddVerticalDoor(world, x, y);
         }
 
         #endregion Private Methods

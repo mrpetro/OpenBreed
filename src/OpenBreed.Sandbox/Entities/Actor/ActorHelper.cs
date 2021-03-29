@@ -16,24 +16,30 @@ using OpenBreed.Physics.Interface.Managers;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
-    public static class ActorHelper
+    public  class ActorHelper
     {
+        public ActorHelper(ICore core)
+        {
+            this.core = core;
+        }
+
         #region Public Fields
 
         public const string SPRITE_ARROW = "Atlases/Sprites/Arrow";
+        private readonly ICore core;
 
         #endregion Public Fields
 
         #region Public Methods
 
-        public static void RegisterCollisionPairs(ICore core)
+        public void RegisterCollisionPairs()
         {
             var collisionMan = core.GetManager<ICollisionMan>();
 
             collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.StaticObstacle, Dynamic2StaticCallback);
         }
 
-        public static void CreateAnimations(ICore core)
+        public void CreateAnimations()
         {
             var animations = core.GetManager<IAnimMan>();
 
@@ -112,7 +118,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             awur.AddFrame(39, 5.0f);
         }
 
-        public static Entity CreateActor(ICore core, Vector2 pos)
+        public Entity CreateActor(Vector2 pos)
         {
             //var actor = core.GetManager<IEntityMan>().Create();
 
@@ -139,12 +145,12 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         #region Private Methods
 
-        private static void OnFrameUpdate(Entity entity, int nextValue)
+        private void OnFrameUpdate(Entity entity, int nextValue)
         {
-            entity.Core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
+            core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
         }
 
-        private static void Dynamic2StaticCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
+        private void Dynamic2StaticCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
         {
             DynamicHelper.ResolveVsStatic(entityA, entityB, projection);
         }

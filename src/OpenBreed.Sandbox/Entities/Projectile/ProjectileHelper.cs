@@ -27,9 +27,14 @@ using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Entities.Projectile
 {
-    public static class ProjectileHelper
+    public class ProjectileHelper
     {
-        public static void CreateAnimations(ICore core)
+        public ProjectileHelper(ICore core)
+        {
+            this.core = core;
+        }
+
+        public void CreateAnimations()
         {
             var animations = core.GetManager<IAnimMan>();
 
@@ -51,9 +56,9 @@ namespace OpenBreed.Sandbox.Entities.Projectile
             laserUR.AddPart<int>(OnFrameUpdate, 7).AddFrame(7, 2.0f);
         }
 
-        private static void OnFrameUpdate(Entity entity, int nextValue)
+        private void OnFrameUpdate(Entity entity, int nextValue)
         {
-            entity.Core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
+            core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
         }
 
         //private static void OnCollision(object sender, CollisionEventArgs args)
@@ -73,21 +78,22 @@ namespace OpenBreed.Sandbox.Entities.Projectile
         //    //}
         //}
 
-        public static void RegisterCollisionPairs(ICore core)
+        public void RegisterCollisionPairs()
         {
             var collisionMan = core.GetManager<ICollisionMan>();
 
             collisionMan.RegisterCollisionPair(ColliderTypes.Projectile, ColliderTypes.StaticObstacle, Projectile2StaticObstacle);
         }
 
-        private static void Projectile2StaticObstacle(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
+        private void Projectile2StaticObstacle(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
         {
             DynamicHelper.ResolveVsStatic(entityA, entityB, projection);
         }
 
         static IEntityTemplate projectileTemplate;
+        private readonly ICore core;
 
-        public static void AddProjectile(ICore core, int worldId, float x, float y, float vx, float vy)
+        public void AddProjectile(int worldId, float x, float y, float vx, float vy)
         {
             if(projectileTemplate == null)
                 projectileTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Projectile\Projectile.xml");
@@ -108,7 +114,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
         }
 
-        public static void CreateFsm(ICore core)
+        public void CreateFsm()
         {
             var fsmMan = core.GetManager<IFsmMan>();
             var commandsMan = core.GetManager<ICommandsMan>();

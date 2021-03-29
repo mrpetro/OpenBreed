@@ -8,11 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Sandbox.Jobs
 {
     public class FpsTextUpdateJob : IJob
     {
+        private readonly ICore core;
         #region Private Fields
 
         private Entity entity;
@@ -21,8 +23,9 @@ namespace OpenBreed.Sandbox.Jobs
 
         #region Public Constructors
 
-        public FpsTextUpdateJob(Entity entity)
+        public FpsTextUpdateJob(ICore core, Entity entity)
         {
+            this.core = core;
             this.entity = entity;
         }
 
@@ -43,7 +46,7 @@ namespace OpenBreed.Sandbox.Jobs
 
         public void Update(float dt)
         {
-            entity.Core.Commands.Post(new TextSetCommand(entity.Id, 0, $"FPS: {entity.Core.GetManager<IRenderingMan>().Fps.ToString("0.00")}"));
+            core.GetManager<ICommandsMan>().Post(new TextSetCommand(entity.Id, 0, $"FPS: {core.GetManager<IRenderingMan>().Fps.ToString("0.00")}"));
         }
 
         public void Dispose()

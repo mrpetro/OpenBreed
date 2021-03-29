@@ -42,12 +42,18 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
     public class WorldGateHelper
     {
+        public WorldGateHelper(ICore core)
+        {
+            this.core = core;
+        }
+
         public const string SPRITE_WORLD_ENTRY = "Atlases/Sprites/World/Entry";
         public const string SPRITE_WORLD_EXIT = "Atlases/Sprites/World/Exit";
+        private readonly ICore core;
 
         #region Public Methods
 
-        public static Entity AddWorldExit(ICore core, World world, int x, int y, string worldName, int entryId)
+        public Entity AddWorldExit(World world, int x, int y, string worldName, int entryId)
         {
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\WorldGate\WorldGateExit.xml");
             var teleportEntity = core.GetManager<IEntityFactory>().Create(core, entityTemplate);
@@ -65,15 +71,15 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             return teleportEntity;
         }
 
-        public static void RegisterCollisionPairs(ICore core)
+        public void RegisterCollisionPairs()
         {
             var collisionMan = core.GetManager<ICollisionMan>();
 
-            collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.WorldExitTrigger, (ca, ea, cb, eb, pv ) => Actor2TriggerCallback(core, ca, ea, cb,eb, pv));
+            collisionMan.RegisterCollisionPair(ColliderTypes.ActorBody, ColliderTypes.WorldExitTrigger, (ca, ea, cb, eb, pv ) => Actor2TriggerCallback(ca, ea, cb,eb, pv));
             //collisionMan.RegisterCollisionPair(ColliderTypes.WorldExitTrigger, ColliderTypes.ActorBody, Actor2TriggerCallback);
         }
 
-        private static void PerformEntityExit(ICore core, Entity targetEntity, Entity exitEntity)
+        private void PerformEntityExit(Entity targetEntity, Entity exitEntity)
         {
             var cameraEntity = targetEntity.TryGet<FollowerComponent>()?.FollowerIds.
                                                                               Select(item => core.GetManager<IEntityMan>().GetById(item)).
@@ -99,9 +105,9 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             //Remove entity from this world
             jobChain.Equeue(new WorldJob<EntityRemovedEventArgs>(worldMan, eventsMan, (s, a) => { return a.WorldId == worldIdToRemoveFrom; }, () => core.Commands.Post(new RemoveEntityCommand(targetEntity.WorldId, targetEntity.Id))));
             //Load next world if needed
-            jobChain.Equeue(new EntityJob(() => TryLoadWorld(core, exitInfo.WorldName, exitInfo.EntryId)));
+            jobChain.Equeue(new EntityJob(() => TryLoadWorld(exitInfo.WorldName, exitInfo.EntryId)));
             //Add entity to next world
-            jobChain.Equeue(new WorldJob<EntityAddedEventArgs>(worldMan, eventsMan, (s, a) => { return core.GetManager<IWorldMan>().GetById(a.WorldId).Name == exitInfo.WorldName; }, () => AddToWorld(core, targetEntity, exitInfo.WorldName, exitInfo.EntryId)));
+            jobChain.Equeue(new WorldJob<EntityAddedEventArgs>(worldMan, eventsMan, (s, a) => { return core.GetManager<IWorldMan>().GetById(a.WorldId).Name == exitInfo.WorldName; }, () => AddToWorld(targetEntity, exitInfo.WorldName, exitInfo.EntryId)));
             //Set position of entity to entry position in next world
             jobChain.Equeue(new EntityJob(() => SetPosition(targetEntity, exitInfo.EntryId, true)));
             //Unpause this world
@@ -109,18 +115,18 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             //Fade in camera
             jobChain.Equeue(new EntityJob<AnimStoppedEventArgs>(cameraEntity, () => core.Commands.Post(new PlayAnimCommand(cameraEntity.Id, CameraHelper.CAMERA_FADE_IN, 0))));
 
-            exitEntity.Core.Jobs.Execute(jobChain);
+            core.Jobs.Execute(jobChain);
         }
 
-        private static void Actor2TriggerCallback(ICore core, int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
+        private void Actor2TriggerCallback(int colliderTypeA, Entity entityA, int colliderTypeB, Entity entityB, Vector2 projection)
         {
             if (colliderTypeA == ColliderTypes.WorldExitTrigger && colliderTypeB == ColliderTypes.ActorBody)
-                PerformEntityExit(core, entityB, entityA);
+                PerformEntityExit(entityB, entityA);
             else if (colliderTypeA == ColliderTypes.ActorBody && colliderTypeB == ColliderTypes.WorldExitTrigger)
-                PerformEntityExit(core, entityA, entityB);
+                PerformEntityExit(entityA, entityB);
         }
 
-        public static Entity AddWorldEntry(ICore core, World world, int x, int y, int entryId)
+        public Entity AddWorldEntry(World world, int x, int y, int entryId)
         {
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\WorldGate\WorldGateEntry.xml");
             var teleportEntity = core.GetManager<IEntityFactory>().Create(core, entityTemplate);
@@ -177,13 +183,13 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
         //    exitEntity.Core.Jobs.Execute(jobChain);
         //}
 
-        private static void AddToWorld(ICore core, Entity target, string worldName, int entryId)
+        private void AddToWorld(Entity target, string worldName, int entryId)
         {
             var world = core.GetManager<IWorldMan>().GetByName(worldName);
             core.Commands.Post(new AddEntityCommand(world.Id, target.Id));
         }
 
-        private static void TryLoadWorld(ICore core, string worldName, int entryId)
+        private void TryLoadWorld(string worldName, int entryId)
         {
             var world = core.GetManager<IWorldMan>().GetByName(worldName);
 
@@ -194,11 +200,11 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
             }
         }
 
-        private static void SetPosition(Entity target, int entryId, bool cancelMovement)
+        private void SetPosition(Entity target, int entryId, bool cancelMovement)
         {
             var pair = new WorldGatePair() { Id = entryId };
 
-            var entryEntity = target.Core.GetManager<IEntityMan>().GetByTag(pair).FirstOrDefault();
+            var entryEntity = core.GetManager<IEntityMan>().GetByTag(pair).FirstOrDefault();
 
             if (entryEntity == null)
                 throw new Exception($"No entry with id '{pair.Id}' found.");

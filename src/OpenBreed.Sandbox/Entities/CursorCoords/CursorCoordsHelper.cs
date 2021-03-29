@@ -48,7 +48,7 @@ namespace OpenBreed.Sandbox.Entities.CursorCoords
 
             var hudViewport = core.GetManager<IEntityMan>().GetByTag(ScreenWorldHelper.HUD_VIEWPORT).First();
 
-            core.Jobs.Execute(new CursorCoordsTextUpdateJob(entity));
+            core.Jobs.Execute(new CursorCoordsTextUpdateJob(core, entity));
             hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdatePos(entity, a));
         }
 

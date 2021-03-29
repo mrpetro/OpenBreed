@@ -121,10 +121,10 @@ namespace OpenBreed.Sandbox.Entities.Teleport
 
         #region Private Methods
 
-        public static void SetPosition(Entity target, Entity entryEntity, bool cancelMovement)
+        public static void SetPosition(ICore core, Entity target, Entity entryEntity, bool cancelMovement)
         {
             var pair = (TeleportPair)entryEntity.Tag;
-            var exitEntity = target.Core.GetManager<IEntityMan>().GetByTag(pair).FirstOrDefault(item => item != entryEntity);
+            var exitEntity = core.GetManager<IEntityMan>().GetByTag(pair).FirstOrDefault(item => item != entryEntity);
 
             if (exitEntity == null)
                 throw new Exception("No exit entity found");

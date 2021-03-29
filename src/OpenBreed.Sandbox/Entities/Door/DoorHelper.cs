@@ -30,15 +30,21 @@ using OpenBreed.Physics.Interface.Managers;
 
 namespace OpenBreed.Sandbox.Entities.Door
 {
-    public static class DoorHelper
+    public class DoorHelper
     {
+        public DoorHelper(ICore core)
+        {
+            this.core = core;
+        }
+
         private const string TILE_ATLAS = "Atlases/Tiles/16/Test";
         private const string STAMP_DOOR_HORIZONTAL_CLOSED = "Tiles/Stamps/DoorHorizontal/Closed";
         private const string STAMP_DOOR_HORIZONTAL_OPENED = "Tiles/Stamps/DoorHorizontal/Opened";
         private const string STAMP_DOOR_VERTICAL_CLOSED = "Tiles/Stamps/DoorVertical/Closed";
         private const string STAMP_DOOR_VERTICAL_OPENED = "Tiles/Stamps/DoorVertical/Opened";
+        private readonly ICore core;
 
-        public static void CreateAnimations(ICore core)
+        public void CreateAnimations()
         {
             var animations = core.GetManager<IAnimMan>();
 
@@ -72,13 +78,13 @@ namespace OpenBreed.Sandbox.Entities.Door
             vdc.AddFrame(0, 5.0f);
         }
 
-        private static void OnFrameUpdate(Entity entity, int nextValue)
+        private void OnFrameUpdate(Entity entity, int nextValue)
         {
-            entity.Core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
+            core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
         }
 
 
-        public static void CreateFsm(ICore core)
+        public void CreateFsm()
         {
             var fsmMan = core.GetManager<IFsmMan>();
             var commandsMan = core.GetManager<ICommandsMan>();
@@ -99,27 +105,27 @@ namespace OpenBreed.Sandbox.Entities.Door
             fsm.AddTransition(FunctioningState.Closing, FunctioningImpulse.StopClosing, FunctioningState.Closed);
         }
 
-        private static void OnOpenningEnding()
+        private void OnOpenningEnding()
         {
             Console.WriteLine("Door -> OpenningEnding");
         }
 
-        private static void OnOpeningStarting()
+        private void OnOpeningStarting()
         {
             Console.WriteLine("Door -> OpenningStarting");
         }
 
-        private static void OnOpen()
+        private void OnOpen()
         {
             Console.WriteLine("Door -> Open");
         }
 
-        private static void OnOpened()
+        private void OnOpened()
         {
             Console.WriteLine("Door -> Opened");
         }
 
-        public static void AddVerticalDoor(ICore core, World world, int x, int y)
+        public void AddVerticalDoor(World world, int x, int y)
         {
             var doorVerticalTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Door\DoorVertical.xml");
             var door = core.GetManager<IEntityFactory>().Create(core, doorVerticalTemplate);
@@ -130,7 +136,7 @@ namespace OpenBreed.Sandbox.Entities.Door
             core.Commands.Post(new AddEntityCommand(world.Id, door.Id));
         }
 
-        public static void AddHorizontalDoor(ICore core, World world, int x, int y)
+        public void AddHorizontalDoor(World world, int x, int y)
         {
             var doorHorizontalTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Door\DoorHorizontal.xml");
             var door = core.GetManager<IEntityFactory>().Create(core, doorHorizontalTemplate);
@@ -141,7 +147,7 @@ namespace OpenBreed.Sandbox.Entities.Door
             core.Commands.Post(new AddEntityCommand(world.Id, door.Id));
         }
 
-        public static void CreateStamps(ICore core)
+        public void CreateStamps()
         {
             var stampBuilder = core.GetManager<IStampMan>().Create();
 
