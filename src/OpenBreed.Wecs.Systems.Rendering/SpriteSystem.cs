@@ -36,21 +36,19 @@ namespace OpenBreed.Wecs.Systems.Rendering
             Require<SpriteComponent>();
             Require<PositionComponent>();
 
+            RegisterHandler<SpriteOnCommand>(HandleSpriteOnCommand);
+            RegisterHandler<SpriteOffCommand>(HandleSpriteOffCommand);
+            RegisterHandler<SpriteSetCommand>(HandleSpriteSetCommand);
         }
 
         #endregion Internal Constructors
 
         #region Public Methods
 
-        public static void RegisterHandlers(ICommandsMan commands)
-        {
-            commands.Register<SpriteOnCommand>(HandleSpriteOnCommand);
-            commands.Register<SpriteOffCommand>(HandleSpriteOffCommand);
-            commands.Register<SpriteSetCommand>(HandleSpriteSetCommand);
-        }
-
         public void Render(Box2 clipBox, int depth, float dt)
         {
+            ExecuteCommands();
+
             //GL.Color4(1.0f, 1.0f, 1.0f, 1.0f);
             GL.Enable(EnableCap.Blend);
             GL.Enable(EnableCap.AlphaTest);
@@ -84,26 +82,22 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Private Methods
 
-        private static bool HandleSpriteOnCommand(ICore core, SpriteOnCommand cmd)
+        private bool HandleSpriteOnCommand(SpriteOnCommand cmd)
         {
-            var system = core.GetManager<ISystemFinder>().GetSystemByEntityId<SpriteSystem>(cmd.EntityId);
-
-            var toActivate = system.inactive.FirstOrDefault(item => item.Id == cmd.EntityId);
+            var toActivate = inactive.FirstOrDefault(item => item.Id == cmd.EntityId);
 
             if (toActivate != null)
             {
-                system.active.Add(toActivate);
-                system.inactive.Remove(toActivate);
+                active.Add(toActivate);
+                inactive.Remove(toActivate);
             }
 
             return true;
         }
 
-        private static bool HandleSpriteSetCommand(ICore core, SpriteSetCommand cmd)
+        private bool HandleSpriteSetCommand(SpriteSetCommand cmd)
         {
-            var system = core.GetManager<ISystemFinder>().GetSystemByEntityId<SpriteSystem>(cmd.EntityId);
-
-            var toModify = system.active.FirstOrDefault(item => item.Id == cmd.EntityId);
+            var toModify = active.FirstOrDefault(item => item.Id == cmd.EntityId);
             if (toModify == null)
                 return false;
 
@@ -115,16 +109,14 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
 
 
-        private static bool HandleSpriteOffCommand(ICore core, SpriteOffCommand cmd)
+        private bool HandleSpriteOffCommand(SpriteOffCommand cmd)
         {
-            var system = core.GetManager<ISystemFinder>().GetSystemByEntityId<SpriteSystem>(cmd.EntityId);
-
-            var toDeactivate = system.active.FirstOrDefault(item => item.Id == cmd.EntityId);
+            var toDeactivate = active.FirstOrDefault(item => item.Id == cmd.EntityId);
 
             if (toDeactivate != null)
             {
-                system.inactive.Add(toDeactivate);
-                system.active.Remove(toDeactivate);
+                inactive.Add(toDeactivate);
+                active.Remove(toDeactivate);
             }
 
             return true;

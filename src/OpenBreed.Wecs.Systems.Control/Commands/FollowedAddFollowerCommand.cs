@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Commands;
+using OpenBreed.Wecs.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Wecs.Systems.Control.Commands
 {
-    public class FollowedAddFollowerCommand : ICommand
+    public class FollowedAddFollowerCommand : IEntityCommand
     {
         #region Public Fields
 

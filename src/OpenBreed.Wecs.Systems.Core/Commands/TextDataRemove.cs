@@ -1,26 +1,25 @@
-﻿namespace OpenBreed.Core.Commands
+﻿using OpenBreed.Wecs.Commands;
+
+namespace OpenBreed.Wecs.Systems.Core.Commands
 {
-    public class TextDataInsert : ICommand
+    public class TextDataBackspace : IEntityCommand
     {
         #region Public Fields
 
-        public const string TYPE = "TEXT_DATA_INSERT";
+        public const string TYPE = "TEXT_DATA_BACKSPACE";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public TextDataInsert(int entityId, string text)
+        public TextDataBackspace(int entityId)
         {
             EntityId = entityId;
-            Text = text;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
-
-        public string Text { get; }
 
         public int EntityId { get; }
 

@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Commands;
+using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Components;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
@@ -16,6 +17,10 @@ namespace OpenBreed.Wecs.Systems
         private readonly List<Entity> toRemove = new List<Entity>();
 
         private readonly List<Type> requiredComponentTypes = new List<Type>();
+
+        private readonly Queue<IEntityCommand> commandQueue = new Queue<IEntityCommand>();
+
+        private Dictionary<Type, Delegate> handlers = new Dictionary<Type, Delegate>();
 
         #endregion Private Fields
 
@@ -79,8 +84,14 @@ namespace OpenBreed.Wecs.Systems
             toRemove.Add(entity);
         }
 
-        public virtual bool ExecuteCommand(ICommand cmd)
+        protected void RegisterHandler<TCommand>(Func<TCommand, bool> cmdHandler) where TCommand : IEntityCommand
         {
+            handlers.Add(typeof(TCommand), cmdHandler);
+        }
+
+        public virtual bool EnqueueCommand(IEntityCommand command)
+        {
+            commandQueue.Enqueue(command);
             return false;
         }
 
@@ -105,9 +116,38 @@ namespace OpenBreed.Wecs.Systems
             }
         }
 
+        public bool HandleCommand(ICommand cmd)
+        {
+            return false;
+        }
+
         #endregion Public Methods
 
         #region Protected Methods
+
+        protected virtual bool DenqueueCommand(IEntityCommand entityCommand)
+        {
+            if (handlers.TryGetValue(entityCommand.GetType(), out Delegate handler))
+            {
+                handler.DynamicInvoke(entityCommand);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        protected void ExecuteCommands()
+        {
+            while (commandQueue.Count > 0)
+            {
+                if (!DenqueueCommand(commandQueue.Dequeue()))
+                {
+                    //TODO: Log not handled command here
+                }
+            }
+        }
 
         protected abstract void OnRemoveEntity(Entity entity);
 

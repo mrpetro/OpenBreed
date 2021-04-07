@@ -12,6 +12,7 @@ using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs;
 using OpenBreed.Fsm;
 using OpenBreed.Common.Logging;
+using OpenBreed.Wecs.Systems.Core.Commands;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
@@ -35,26 +36,21 @@ namespace OpenBreed.Wecs.Systems.Core
             this.logger = logger;
 
             Require<FsmComponent>();
-
-
-
+            RegisterHandler<SetEntityStateCommand>(HandleSetStateCommand);
         }
 
         #endregion Public Constructors
 
         #region Public Methods
 
-        public static void RegisterHandlers(ICommandsMan commandsMan)
-        {
-            commandsMan.Register<SetEntityStateCommand>(HandleSetStateCommand);
-        }
-
         public void Update(float dt)
         {
+            ExecuteCommands();
         }
 
         public void UpdatePauseImmuneOnly(float dt)
         {
+            ExecuteCommands();
         }
 
         #endregion Public Methods
@@ -103,29 +99,29 @@ namespace OpenBreed.Wecs.Systems.Core
                 fsmMan.EnterState(entity, state, 0);
         }
 
-        private static bool HandleSetStateCommand(ICore core, SetEntityStateCommand cmd)
+        private bool HandleSetStateCommand(SetEntityStateCommand cmd)
         {
-            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
+            var entity = entityMan.GetById(cmd.EntityId);
 
             var fsmComponent = entity.Get<FsmComponent>();
 
             if (fsmComponent == null)
             {
-                core.Logging.Warning($"Entity '{cmd.EntityId}' has missing FSM component.");
+                logger.Warning($"Entity '{cmd.EntityId}' has missing FSM component.");
                 return false;
             }
 
-            var fsm = core.GetManager<IFsmMan>().GetById(cmd.FsmId);
+            var fsm = fsmMan.GetById(cmd.FsmId);
 
             var fsmData = fsmComponent.States.FirstOrDefault(item => item.FsmId == cmd.FsmId);
 
             if (fsmData == null)
             {
-                core.Logging.Warning($"Entity '{cmd.EntityId}' has missing data for FSM '{fsm.Name}'.");
+                logger.Warning($"Entity '{cmd.EntityId}' has missing data for FSM '{fsm.Name}'.");
                 return false;
             }
 
-            core.GetManager<IFsmMan>().LeaveState(entity, fsmData, cmd.ImpulseId);
+            fsmMan.LeaveState(entity, fsmData, cmd.ImpulseId);
             var nextStateId = fsm.GetNextStateId(fsmData.StateId, cmd.ImpulseId);
 
             if (nextStateId == -1)
@@ -133,12 +129,12 @@ namespace OpenBreed.Wecs.Systems.Core
                 var fromStateName = fsm.GetStateName(fsmData.StateId);
                 var impulseName = fsm.GetImpulseName(cmd.ImpulseId);
 
-                core.Logging.Warning($"Entity '{cmd.EntityId}' has missing FSM transition from state '{fromStateName}' using impulse '{impulseName}'.");
+                logger.Warning($"Entity '{cmd.EntityId}' has missing FSM transition from state '{fromStateName}' using impulse '{impulseName}'.");
                 return false;
             }
 
             fsmData.StateId = nextStateId;
-            core.GetManager<IFsmMan>().EnterState(entity, fsmData, cmd.ImpulseId);
+            fsmMan.EnterState(entity, fsmData, cmd.ImpulseId);
 
             return true;
         }

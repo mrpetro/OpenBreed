@@ -37,6 +37,8 @@ namespace OpenBreed.Wecs.Systems.Physics
             this.entityMan = entityMan;
 
             Require<BodyComponent>();
+            RegisterHandler<BodyOnCommand>(HandleBodyOnCommand);
+            RegisterHandler<BodyOffCommand>(HandleBodyOffCommand);
 
             //TODO: This must not be a constant
             GridWidth = 128;
@@ -72,18 +74,15 @@ namespace OpenBreed.Wecs.Systems.Physics
             return new Box2(bx, by, bx + CELL_SIZE, by + CELL_SIZE);
         }
 
-        public static void RegisterHandlers(ICommandsMan commands)
-        {
-            commands.Register<BodyOnCommand>(HandleBodyOnCommand);
-            commands.Register<BodyOffCommand>(HandleBodyOffCommand);
-        }
-
         public void UpdatePauseImmuneOnly(float dt)
         {
+            ExecuteCommands();
         }
 
         public void Update(float dt)
         {
+            ExecuteCommands();
+
             UpdateAabbs();
 
             SweepAndPrune(dt);
@@ -135,29 +134,25 @@ namespace OpenBreed.Wecs.Systems.Physics
             return body.Aabb;
         }
 
-        private static bool HandleBodyOnCommand(ICore core, BodyOnCommand cmd)
+        private bool HandleBodyOnCommand(BodyOnCommand cmd)
         {
-            var system = core.GetManager<ISystemFinder>().GetSystemByEntityId<PhysicsSystem>(cmd.EntityId);
-            if (system == null)
-                return false;
+            var dynamicToActivate = inactiveDynamics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
 
-            var dynamicToActivate = system.inactiveDynamics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
-
-            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
+            var entity = entityMan.GetById(cmd.EntityId);
 
             if (dynamicToActivate != null)
             {
-                system.activeDynamics.Add(dynamicToActivate);
-                system.inactiveDynamics.Remove(dynamicToActivate);
+                activeDynamics.Add(dynamicToActivate);
+                inactiveDynamics.Remove(dynamicToActivate);
                 entity.RaiseEvent(new BodyOnEventArgs(entity));
                 return true;
             }
 
-            var staticToActivate = system.inactiveStatics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
+            var staticToActivate = inactiveStatics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
             if (staticToActivate != null)
             {
-                system.InsertToGrid(staticToActivate);
-                system.inactiveStatics.Remove(staticToActivate);
+                InsertToGrid(staticToActivate);
+                inactiveStatics.Remove(staticToActivate);
                 entity.RaiseEvent(new BodyOnEventArgs(entity));
                 return true;
             }
@@ -165,30 +160,26 @@ namespace OpenBreed.Wecs.Systems.Physics
             return false;
         }
 
-        private static bool HandleBodyOffCommand(ICore core, BodyOffCommand cmd)
+        private bool HandleBodyOffCommand(BodyOffCommand cmd)
         {
-            var system = core.GetManager<ISystemFinder>().GetSystemByEntityId<PhysicsSystem>(cmd.EntityId);
-            if (system == null)
-                return false;
+            var dynamicToDeactivate = activeDynamics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
 
-            var dynamicToDeactivate = system.activeDynamics.FirstOrDefault(item => item.EntityId == cmd.EntityId);
-
-            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
+            var entity = entityMan.GetById(cmd.EntityId);
 
             if (dynamicToDeactivate != null)
             {
-                system.inactiveDynamics.Add(dynamicToDeactivate);
-                system.activeDynamics.Remove(dynamicToDeactivate);
+                inactiveDynamics.Add(dynamicToDeactivate);
+                activeDynamics.Remove(dynamicToDeactivate);
 
                 entity.RaiseEvent(new BodyOffEventArgs(entity));
                 return true;
             }
 
-            var staticToDeactivate = system.RemoveFromGrid(entity);
+            var staticToDeactivate = RemoveFromGrid(entity);
 
             if (staticToDeactivate != null)
             {
-                system.inactiveStatics.Add(staticToDeactivate);
+                inactiveStatics.Add(staticToDeactivate);
                 entity.RaiseEvent(new BodyOffEventArgs(entity));
                 return true;
             }

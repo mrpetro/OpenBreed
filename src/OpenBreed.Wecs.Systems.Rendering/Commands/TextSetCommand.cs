@@ -1,7 +1,9 @@
 ﻿using OpenBreed.Core.Commands;
+using OpenBreed.Wecs.Commands;
+
 namespace OpenBreed.Wecs.Systems.Rendering.Commands
 {
-    public struct TextSetCommand : ICommand
+    public struct TextSetCommand : IEntityCommand
     {
         #region Public Fields
 

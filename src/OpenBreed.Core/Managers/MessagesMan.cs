@@ -1,4 +1,7 @@
 ﻿using OpenBreed.Common.Tools.Collections;
+using OpenBreed.Core.Events;
+using System;
+using System.Collections.Generic;
 
 namespace OpenBreed.Core.Managers
 {

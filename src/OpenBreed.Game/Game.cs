@@ -136,10 +136,8 @@ namespace OpenBreed.Game
         {
             ExposeScriptingApi();
 
-            SpriteSystem.RegisterHandlers(Commands);
             TileSystem.RegisterHandlers(Commands);
-            TextPresenterSystem.RegisterHandlers(Commands);
-            ViewportSystem.RegisterHandlers(Commands);
+            //TextPresenterSystem.RegisterHandlers(Commands);
             TextSystem.RegisterHandlers(Commands);
 
             manCollection2.GetManager<IViewClient>().Run();

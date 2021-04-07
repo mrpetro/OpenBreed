@@ -16,6 +16,7 @@ using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Common.Logging;
 
 namespace OpenBreed.Wecs.Systems.Rendering
 {
@@ -24,30 +25,34 @@ namespace OpenBreed.Wecs.Systems.Rendering
         #region Private Fields
 
         private readonly List<Entity> entities = new List<Entity>();
+        private readonly IEntityMan entityMan;
         private readonly IFontMan fontMan;
+        private readonly ILogger logger;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal TextSystem(IFontMan fontMan)
+        internal TextSystem(IEntityMan entityMan, IFontMan fontMan, ILogger logger )
         {
+            this.entityMan = entityMan;
+            this.fontMan = fontMan;
+            this.logger = logger;
+
             Require<TextComponent>();
             Require<PositionComponent>();
-            this.fontMan = fontMan;
+
+            RegisterHandler<TextSetCommand>(HandleTextSetCommand);
         }
 
         #endregion Internal Constructors
 
         #region Public Methods
 
-        public static void RegisterHandlers(ICommandsMan commands)
-        {
-            commands.Register<TextSetCommand>(HandleTextSetCommand);
-        }
-
         public void Render(Box2 clipBox, int depth, float dt)
         {
+            ExecuteCommands();
+
             GL.Enable(EnableCap.Blend);
             GL.Enable(EnableCap.AlphaTest);
             GL.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusConstantColor);
@@ -102,9 +107,9 @@ namespace OpenBreed.Wecs.Systems.Rendering
             GL.Disable(EnableCap.Texture2D);
         }
 
-        private static bool HandleTextSetCommand(ICore core, TextSetCommand cmd)
+        private bool HandleTextSetCommand(TextSetCommand cmd)
         {
-            var toModify = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
+            var toModify = entityMan.GetById(cmd.EntityId);
             if (toModify == null)
                 return false;
 
@@ -112,7 +117,7 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
             if (cmd.PartId < 0 || cmd.PartId >= text.Parts.Count)
             {
-                core.Logging.Error($"Unknown text part ID({cmd.PartId}) to modify.");
+                logger.Error($"Unknown text part ID({cmd.PartId}) to modify.");
             }
 
             text.Parts[cmd.PartId].Text = cmd.Text;

@@ -1,8 +1,9 @@
 ﻿using OpenBreed.Core.Commands;
+using OpenBreed.Wecs.Commands;
 
 namespace OpenBreed.Wecs.Systems.Rendering.Commands
 {
-    public class ViewportResizeCommand : ICommand
+    public class ViewportResizeCommand : IEntityCommand
     {
         #region Public Fields
 

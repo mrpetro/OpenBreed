@@ -49,16 +49,13 @@ namespace OpenBreed.Wecs.Systems.Rendering
             this.viewClient = viewClient;
             Require<ViewportComponent>();
             Require<PositionComponent>();
+
+            RegisterHandler<ViewportResizeCommand>(HandleViewportResizeCommand);
         }
 
         #endregion Internal Constructors
 
         #region Public Methods
-
-        public static void RegisterHandlers(ICommandsMan commands)
-        {
-            commands.Register<ViewportResizeCommand>(HandleViewportResizeCommand);
-        }
 
         public Vector4 ClientToWorld(Vector4 coords, Entity viewport)
         {
@@ -147,6 +144,8 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
             depth++;
 
+            ExecuteCommands();
+
             for (int i = 0; i < entities.Count; i++)
                 RenderViewport(entities[i], clipBox, depth, dt);
         }
@@ -169,9 +168,9 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Private Methods
 
-        private static bool HandleViewportResizeCommand(ICore core, ViewportResizeCommand cmd)
+        private bool HandleViewportResizeCommand(ViewportResizeCommand cmd)
         {
-            var toResize = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
+            var toResize = entityMan.GetById(cmd.EntityId);
 
             if (toResize != null)
             {

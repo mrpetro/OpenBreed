@@ -1,6 +1,8 @@
-﻿namespace OpenBreed.Core.Commands
+﻿using OpenBreed.Wecs.Commands;
+
+namespace OpenBreed.Wecs.Systems.Core.Commands
 {
-    public class SetEntityStateCommand : ICommand
+    public class SetEntityStateCommand : IEntityCommand
     {
         #region Public Fields
 

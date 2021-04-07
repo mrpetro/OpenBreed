@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Common;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Physics.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,11 @@ namespace OpenBreed.Wecs.Systems.Physics.Extensions
             systemFactory.Register(() => new PhysicsSystem(manCollection.GetManager<IEntityMan>(),
                                                            manCollection.GetManager<IFixtureMan>(),
                                                            manCollection.GetManager<ICollisionMan>()));
+
+
+            var entityCommandHandler = manCollection.GetManager<EntityCommandHandler>();
+            entityCommandHandler.BindCommand<BodyOffCommand, PhysicsSystem>();
+            entityCommandHandler.BindCommand<BodyOnCommand, PhysicsSystem>();
         }
     }
 }

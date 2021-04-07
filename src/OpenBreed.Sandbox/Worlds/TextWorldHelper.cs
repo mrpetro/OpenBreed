@@ -22,6 +22,7 @@ using OpenBreed.Wecs.Commands;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Systems.Animation;
 using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Systems.Core.Commands;
 
 namespace OpenBreed.Sandbox.Worlds
 {

@@ -1,6 +1,8 @@
 ﻿using OpenBreed.Animation.Interface;
 using OpenBreed.Common;
+using OpenBreed.Common.Logging;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Animation.Commands;
 
 namespace OpenBreed.Wecs.Systems.Animation.Extensions
 {
@@ -12,7 +14,15 @@ namespace OpenBreed.Wecs.Systems.Animation.Extensions
         {
             var systemFactory = manCollection.GetManager<ISystemFactory>();
             systemFactory.Register(() => new AnimationSystem(manCollection.GetManager<IEntityMan>(),
-                                                             manCollection.GetManager<IAnimMan>()));
+                                                             manCollection.GetManager<IAnimMan>(),
+                                                             manCollection.GetManager<ILogger>()));
+
+            var entityCommandHandler = manCollection.GetManager<EntityCommandHandler>();
+
+            entityCommandHandler.BindCommand<SetAnimCommand, AnimationSystem>();
+            entityCommandHandler.BindCommand<PlayAnimCommand, AnimationSystem>();
+            entityCommandHandler.BindCommand<PauseAnimCommand, AnimationSystem>();
+            entityCommandHandler.BindCommand<StopAnimCommand, AnimationSystem>();
         }
 
         #endregion Public Methods

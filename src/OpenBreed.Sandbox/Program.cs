@@ -32,6 +32,8 @@ using OpenBreed.Sandbox.Worlds;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Scripting.Lua;
 using OpenBreed.Scripting.Lua.Extensions;
+using OpenBreed.Wecs;
+using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Components.Animation;
 using OpenBreed.Wecs.Components.Animation.Extensions;
 using OpenBreed.Wecs.Components.Animation.Xml;
@@ -82,6 +84,11 @@ namespace OpenBreed.Sandbox
 
             manCollection.AddSingleton<IAnimMan>(() => new AnimMan(manCollection.GetManager<ILogger>()));
 
+            manCollection.AddSingleton<EntityCommandHandler>(() => new EntityCommandHandler(manCollection.GetManager<IEntityMan>(),
+                                                                                            manCollection.GetManager<IWorldMan>(),
+                                                                                            manCollection.GetManager<ICommandsMan>(),
+                                                                                            manCollection.GetManager<IEventsMan>()));
+
             manCollection.SetupLuaScripting();
             manCollection.SetupGenericInputManagers();
             manCollection.SetupGenericPhysicsManagers();
@@ -101,6 +108,8 @@ namespace OpenBreed.Sandbox
             manCollection.SetupRenderingComponents();
             manCollection.SetupAnimationComponents();
             manCollection.SetupFsmComponents();
+
+
 
 
             //manCollection.SetupAudioSystems();
@@ -141,7 +150,6 @@ namespace OpenBreed.Sandbox
             manCollection.AddSingleton<DoorHelper>(() => new DoorHelper(core));
             manCollection.AddSingleton<ProjectileHelper>(() => new ProjectileHelper(core));
             manCollection.AddSingleton<ActorHelper>(() => new ActorHelper(core));
-
 
             return core;
         }
@@ -266,6 +274,8 @@ namespace OpenBreed.Sandbox
 
         private void OnUpdateFrame(float dt)
         {
+            GetManager<IEventQueue>().Fire();
+
             Commands.ExecuteEnqueued(this);
 
             Worlds.Cleanup();
@@ -282,18 +292,8 @@ namespace OpenBreed.Sandbox
 
         private void RegisterSystems()
         {
-            FollowerSystem.RegisterHandlers(Commands);
-            FsmSystem.RegisterHandlers(Commands);
-            TextInputSystem.RegisterHandlers(Commands);
-            TimerSystem.RegisterHandlers(Commands);
-            SpriteSystem.RegisterHandlers(Commands);
             TileSystem.RegisterHandlers(Commands);
-            TextPresenterSystem.RegisterHandlers(Commands);
-            ViewportSystem.RegisterHandlers(Commands);
-            AnimationSystem.RegisterHandlers(Commands);
-            TextSystem.RegisterHandlers(Commands);
             WalkingControlSystem.RegisterHandlers(Commands);
-            PhysicsSystem.RegisterHandlers(Commands);
         }
 
         private void RegisterInputs()

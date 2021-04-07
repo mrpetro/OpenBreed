@@ -2,6 +2,7 @@
 using OpenBreed.Core;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
+using OpenBreed.Wecs.Commands;
 
 namespace OpenBreed.Wecs.Systems
 {
@@ -44,13 +45,15 @@ namespace OpenBreed.Wecs.Systems
 
         void RemoveEntity(Entity entity);
 
+        bool HandleCommand(ICommand cmd);
+
         /// <summary>
         /// Handle given command
         /// </summary>
         /// <param name="sender">Object is sending the command</param>
         /// <param name="cmd">Command to recieve</param>
         /// <returns>True if command was handled, false otherwise</returns>
-        bool ExecuteCommand(ICommand cmd);
+        bool EnqueueCommand(IEntityCommand command);
 
         #endregion Public Methods
     }

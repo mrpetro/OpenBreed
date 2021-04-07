@@ -1,9 +1,13 @@
-﻿using OpenBreed.Core;
+﻿using OpenBreed.Common.Logging;
+using OpenBreed.Core;
+using OpenBreed.Core.Commands;
 using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Core.Commands;
 using OpenBreed.Wecs.Systems.Core.Events;
+using OpenBreed.Wecs.Worlds;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,29 +21,30 @@ namespace OpenBreed.Wecs.Systems.Core
 
         private readonly List<int> entities = new List<int>();
         private readonly IEntityMan entityMan;
+        private readonly ILogger logger;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal TimerSystem(IEntityMan entityMan)
+        internal TimerSystem(IEntityMan entityMan, ILogger logger)
         {
             this.entityMan = entityMan;
+            this.logger = logger;
+
             Require<TimerComponent>();
+            RegisterHandler<TimerStartCommand>(HandleTimerStartCommand);
+            RegisterHandler<TimerStopCommand>(HandleTimerStopCommand);
         }
 
         #endregion Internal Constructors
 
         #region Public Methods
 
-        public static void RegisterHandlers(ICommandsMan commands)
-        {
-            commands.Register<TimerStartCommand>(HandleTimerStartCommand);
-            commands.Register<TimerStopCommand>(HandleTimerStopCommand);
-        }
-
         public void Update(float dt)
         {
+            ExecuteCommands();
+
             for (int i = 0; i < entities.Count; i++)
             {
                 var entity = entityMan.GetById(entities[i]);
@@ -51,6 +56,8 @@ namespace OpenBreed.Wecs.Systems.Core
 
         public void UpdatePauseImmuneOnly(float dt)
         {
+            ExecuteCommands();
+
             for (int i = 0; i < entities.Count; i++)
             {
                 var entity = entityMan.GetById(entities[i]);
@@ -82,15 +89,15 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Private Methods
 
-        private static bool HandleTimerStartCommand(ICore core, TimerStartCommand cmd)
+        private bool HandleTimerStartCommand(TimerStartCommand cmd)
         {
-            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
+            var entity = entityMan.GetById(cmd.EntityId);
 
             var timerComponent = entity.Get<TimerComponent>();
 
             if (timerComponent == null)
             {
-                core.Logging.Warning($"Entity '{cmd.EntityId}' has missing Timer Component.");
+                logger.Warning($"Entity '{cmd.EntityId}' has missing Timer Component.");
                 return false;
             }
 
@@ -109,15 +116,15 @@ namespace OpenBreed.Wecs.Systems.Core
             return true;
         }
 
-        private static bool HandleTimerStopCommand(ICore core, TimerStopCommand cmd)
+        private bool HandleTimerStopCommand(TimerStopCommand cmd)
         {
-            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
+            var entity = entityMan.GetById(cmd.EntityId);
 
             var timerComponent = entity.Get<TimerComponent>();
 
             if (timerComponent == null)
             {
-                core.Logging.Warning($"Entity '{cmd.EntityId}' has missing Timer Component.");
+                logger.Warning($"Entity '{cmd.EntityId}' has missing Timer Component.");
                 return false;
             }
 
@@ -159,6 +166,8 @@ namespace OpenBreed.Wecs.Systems.Core
 
         private void RaiseTimerUpdateEvent(Entity entity, TimerData timerData)
         {
+            //eventQueue.Enqueue(new ComponentChangedEvent<TimerComponent>(entity.Id,
+
             entity.RaiseEvent(new TimerUpdateEventArgs(timerData.TimerId));
         }
 

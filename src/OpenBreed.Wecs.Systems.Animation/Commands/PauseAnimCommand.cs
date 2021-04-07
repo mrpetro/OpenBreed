@@ -1,9 +1,10 @@
 ﻿
 using OpenBreed.Core.Commands;
+using OpenBreed.Wecs.Commands;
 
 namespace OpenBreed.Wecs.Systems.Animation.Commands
 {
-    public struct PauseAnimCommand : ICommand
+    public struct PauseAnimCommand : IEntityCommand
     {
         #region Public Fields
 

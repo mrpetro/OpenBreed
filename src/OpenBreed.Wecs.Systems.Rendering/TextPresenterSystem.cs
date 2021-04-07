@@ -41,10 +41,6 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Methods
 
-        public static void RegisterHandlers(ICommandsMan commands)
-        {
-        }
-
         public void Render(Box2 clipBox, int depth, float dt)
         {
             GL.Enable(EnableCap.Blend);

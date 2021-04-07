@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using OpenBreed.Wecs.Systems;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs;
+using OpenBreed.Wecs.Systems.Core.Commands;
 
 namespace OpenBreed.Wecs.Systems.Core
 {
@@ -15,34 +16,36 @@ namespace OpenBreed.Wecs.Systems.Core
         #region Private Fields
 
         private readonly List<Entity> entities = new List<Entity>();
+        private readonly IEntityMan entityMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        internal TextInputSystem()
+        internal TextInputSystem(IEntityMan entityMan)
         {
+            this.entityMan = entityMan;
+
             Require<TextCaretComponent>();
             Require<TextDataComponent>();
+
+            RegisterHandler<TextCaretSetPosition>(HandleTextCaretSetPosition);
+            RegisterHandler<TextDataInsert>(HandleTextDataInsert);
+            RegisterHandler<TextDataBackspace>(HandleTextDataBackspace);
         }
 
         #endregion Public Constructors
 
         #region Public Methods
 
-        public static void RegisterHandlers(ICommandsMan commands)
-        {
-            commands.Register<TextCaretSetPosition>(HandleTextCaretSetPosition);
-            commands.Register<TextDataInsert>(HandleTextDataInsert);
-            commands.Register<TextDataBackspace>(HandleTextDataBackspace);
-        }
-
         public void UpdatePauseImmuneOnly(float dt)
         {
+            ExecuteCommands();
         }
 
         public void Update(float dt)
         {
+            ExecuteCommands();
         }
 
         #endregion Public Methods
@@ -63,9 +66,9 @@ namespace OpenBreed.Wecs.Systems.Core
 
         #region Private Methods
 
-        private static bool HandleTextDataInsert(ICore core, TextDataInsert cmd)
+        private bool HandleTextDataInsert(TextDataInsert cmd)
         {
-            var toModify = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
+            var toModify = entityMan.GetById(cmd.EntityId);
             if (toModify == null)
                 return false;
 
@@ -84,9 +87,9 @@ namespace OpenBreed.Wecs.Systems.Core
             return true;
         }
 
-        private static bool HandleTextDataBackspace(ICore core, TextDataBackspace cmd)
+        private bool HandleTextDataBackspace(TextDataBackspace cmd)
         {
-            var toModify = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
+            var toModify = entityMan.GetById(cmd.EntityId);
             if (toModify == null)
                 return false;
 
@@ -108,9 +111,9 @@ namespace OpenBreed.Wecs.Systems.Core
             return true;
         }
 
-        private static bool HandleTextCaretSetPosition(ICore core, TextCaretSetPosition cmd)
+        private bool HandleTextCaretSetPosition(TextCaretSetPosition cmd)
         {
-            var toModify = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
+            var toModify = entityMan.GetById(cmd.EntityId);
             if (toModify == null)
                 return false;
 

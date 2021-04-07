@@ -11,6 +11,7 @@ using OpenBreed.Wecs.Systems.Animation.Events;
 using OpenBreed.Fsm;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Systems.Core.Commands;
 
 namespace OpenBreed.Sandbox.Components.States
 {

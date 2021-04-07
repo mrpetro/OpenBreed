@@ -3,6 +3,7 @@ using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
+using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Components.Animation;
 using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Wecs.Entities;
@@ -22,33 +23,33 @@ namespace OpenBreed.Wecs.Systems.Animation
         private readonly List<int> entities = new List<int>();
         private readonly IEntityMan entityMan;
         private readonly IAnimMan animMan;
+        private readonly ILogger logger;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal AnimationSystem(IEntityMan entityMan, IAnimMan animMan)
+        internal AnimationSystem(IEntityMan entityMan, IAnimMan animMan, ILogger logger)
         {
             this.entityMan = entityMan;
             this.animMan = animMan;
+            this.logger = logger;
 
             Require<AnimationComponent>();
+            RegisterHandler<SetAnimCommand>(HandleSetAnimCommand);
+            RegisterHandler<PlayAnimCommand>(HandlePlayAnimCommand);
+            RegisterHandler<PauseAnimCommand>(HandlePauseAnimCommand);
+            RegisterHandler<StopAnimCommand>(HandleStopAnimCommand);
         }
 
         #endregion Internal Constructors
 
         #region Public Methods
 
-        public static void RegisterHandlers(ICommandsMan commands)
-        {
-            commands.Register<SetAnimCommand>(HandleSetAnimCommand);
-            commands.Register<PlayAnimCommand>(HandlePlayAnimCommand);
-            commands.Register<PauseAnimCommand>(HandlePauseAnimCommand);
-            commands.Register<StopAnimCommand>(HandleStopAnimCommand);
-        }
-
         public void UpdatePauseImmuneOnly(float dt)
         {
+            ExecuteCommands();
+
             for (int i = 0; i < entities.Count; i++)
             {
                 var entity = entityMan.GetById(entities[i]);
@@ -59,6 +60,8 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         public void Update(float dt)
         {
+            ExecuteCommands();
+
             for (int i = 0; i < entities.Count; i++)
             {
                 var entity = entityMan.GetById(entities[i]);
@@ -101,6 +104,11 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         #region Protected Methods
 
+        protected override bool DenqueueCommand(IEntityCommand entityCommand)
+        {
+            return base.DenqueueCommand(entityCommand);
+        }
+
         protected override void OnAddEntity(Entity entity)
         {
             entities.Add(entity.Id);
@@ -120,62 +128,46 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         #region Private Methods
 
-        private static bool HandlePauseAnimCommand(ICore core, PauseAnimCommand cmd)
+        private  bool HandlePauseAnimCommand(PauseAnimCommand cmd)
         {
-            var system = core.GetManager<ISystemFinder>().GetSystemByEntityId<AnimationSystem>(cmd.EntityId);
-            if (system == null)
-                return false;
-
-            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
+            var entity = entityMan.GetById(cmd.EntityId);
             var ac = entity.Get<AnimationComponent>();
             var animator = ac.Items[cmd.AnimatorId];
 
-            system.Pause(entity, animator);
+            Pause(entity, animator);
 
             return true;
         }
 
-        private static bool HandleStopAnimCommand(ICore core, StopAnimCommand cmd)
+        private bool HandleStopAnimCommand(StopAnimCommand cmd)
         {
-            var system = core.GetManager<ISystemFinder>().GetSystemByEntityId<AnimationSystem>(cmd.EntityId);
-            if (system == null)
-                return false;
-
-            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
+            var entity = entityMan.GetById(cmd.EntityId);
             var ac = entity.Get<AnimationComponent>();
             var animator = ac.Items[cmd.AnimatorId];
 
-            system.Stop(entity, animator);
+            Stop(entity, animator);
 
             return true;
         }
 
-        private static bool HandleSetAnimCommand(ICore core, SetAnimCommand cmd)
+        private bool HandleSetAnimCommand(SetAnimCommand cmd)
         {
-            var system = core.GetManager<ISystemFinder>().GetSystemByEntityId<AnimationSystem>(cmd.EntityId);
-            if (system == null)
-                return false;
-
-            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
+            var entity = entityMan.GetById(cmd.EntityId);
             var ac = entity.Get<AnimationComponent>();
 
-            var animData = core.GetManager<IAnimMan>().GetByName(cmd.Id);
+            var animData = animMan.GetByName(cmd.Id);
 
             if (animData == null)
-                core.GetManager<ILogger>().Warning($"Animation with ID '{cmd.Id}' not found.");
+                logger.Warning($"Animation with ID '{cmd.Id}' not found.");
 
-            system.Play(entity, ac.Items[cmd.AnimatorId], animData.Id);
+            Play(entity, ac.Items[cmd.AnimatorId], animData.Id);
 
             return true;
         }
 
-        private static bool HandlePlayAnimCommand(ICore core, PlayAnimCommand cmd)
+        private bool HandlePlayAnimCommand(PlayAnimCommand cmd)
         {
-            var system = core.GetManager<ISystemFinder>().GetSystemByEntityId<AnimationSystem>(cmd.EntityId);
-            if (system == null)
-                return false;
-
-            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
+            var entity = entityMan.GetById(cmd.EntityId);
             var ac = entity.Get<AnimationComponent>();
             var animator = ac.Items[cmd.AnimatorId];
 
@@ -183,10 +175,10 @@ namespace OpenBreed.Wecs.Systems.Animation
 
             if (cmd.Id != null)
             {
-                var data = core.GetManager<IAnimMan>().GetByName(cmd.Id);
+                var data = animMan.GetByName(cmd.Id);
 
                 if (data == null)
-                    core.Logging.Warning($"Animation with ID = '{cmd.Id}' not found.");
+                    logger.Warning($"Animation with ID = '{cmd.Id}' not found.");
                 else
                     animId = data.Id;
             }
@@ -195,7 +187,7 @@ namespace OpenBreed.Wecs.Systems.Animation
                 animId = animator.AnimId;
             }
 
-            system.Play(entity, animator, animId);
+            Play(entity, animator, animId);
 
             return true;
         }

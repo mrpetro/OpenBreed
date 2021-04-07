@@ -78,11 +78,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Commands\TextDataRemove.cs" />
-    <Compile Include="Commands\TextDataInsert.cs" />
-    <Compile Include="Commands\TextCaretSetPosition.cs" />
     <Compile Include="CoreBase.cs" />
     <Compile Include="CoreFactory.cs" />
+    <Compile Include="Events\IEvent.cs" />
     <Compile Include="Events\TextDataChanged.cs" />
     <Compile Include="Events\TextCaretPositionChanged.cs" />
     <Compile Include="Extensions\QuaternionExtension.cs" />
@@ -90,6 +88,7 @@
     <Compile Include="Extensions\Vector3Extension.cs" />
     <Compile Include="IViewClient.cs" />
     <Compile Include="Managers\IEventHandler.cs" />
+    <Compile Include="Managers\IEventQueue.cs" />
     <Compile Include="Managers\IEventsMan.cs" />
     <Compile Include="Managers\ICommandsMan.cs" />
     <Compile Include="IJob.cs" />
@@ -100,10 +99,10 @@
     <Compile Include="JobChain.cs" />
     <Compile Include="Managers\IMessagesMan.cs" />
     <Compile Include="Managers\JobMan.cs" />
+    <Compile Include="Managers\EventQueue.cs" />
     <Compile Include="Managers\MessagesMan.cs" />
     <Compile Include="MathTools.cs" />
     <Compile Include="Other.cs" />
-    <Compile Include="Commands\SetEntityStateCommand.cs" />
     <Compile Include="ICore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OpenTKWindowClient.cs" />

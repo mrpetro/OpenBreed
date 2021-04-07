@@ -3,6 +3,7 @@ using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems.Control.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,10 @@ namespace OpenBreed.Wecs.Systems.Control.Extensions
                                                                     manCollection.GetManager<ICommandsMan>()));
             systemFactory.Register(() => new FollowerSystem(manCollection.GetManager<IEntityMan>(),
                                                             manCollection.GetManager<ICommandsMan>()));
+
+            var entityCommandHandler = manCollection.GetManager<EntityCommandHandler>();
+
+            entityCommandHandler.BindCommand<FollowedAddFollowerCommand, FollowerSystem>();
         }
     }
 }

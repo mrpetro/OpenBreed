@@ -64,6 +64,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\SetEntityStateCommand.cs" />
+    <Compile Include="Commands\TextCaretSetPosition.cs" />
+    <Compile Include="Commands\TextDataInsert.cs" />
+    <Compile Include="Commands\TextDataRemove.cs" />
     <Compile Include="Commands\TimerStartCommand.cs" />
     <Compile Include="Commands\TimerStopCommand.cs" />
     <Compile Include="Events\TimerElapsedEventArgs.cs" />
@@ -71,6 +75,7 @@
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FsmSystem.cs" />
+    <Compile Include="SystemCommandsHandler.cs" />
     <Compile Include="TextInputSystem.cs" />
     <Compile Include="TimerSystem.cs" />
   </ItemGroup>

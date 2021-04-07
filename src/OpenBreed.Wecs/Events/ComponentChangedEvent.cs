@@ -1,20 +1,23 @@
-﻿using System;
+﻿using OpenBreed.Core.Events;
 
 namespace OpenBreed.Wecs.Events
 {
-    public abstract class ComponentChangedEvent : EventArgs
+    public interface IComponentChangedEvent : IEvent
     {
-        public int EntityId { get; }
+        #region Public Properties
 
+        int EntityId { get; }
+
+        #endregion Public Properties
     }
 
-    public class ComponentChangedEvent<TComponent> : ComponentChangedEvent
+    public struct ComponentChangedEvent<TComponent> : IComponentChangedEvent
     {
         #region Public Constructors
 
         public ComponentChangedEvent(int entityId, TComponent component, string propertyName)
         {
-            //EntityId = entityId;
+            EntityId = entityId;
             Component = component;
             ProperyName = propertyName;
         }
@@ -23,6 +26,7 @@ namespace OpenBreed.Wecs.Events
 
         #region Public Properties
 
+        public int EntityId { get; }
 
         public TComponent Component { get; }
 

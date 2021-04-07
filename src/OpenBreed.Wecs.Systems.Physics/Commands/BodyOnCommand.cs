@@ -1,5 +1,5 @@
 ﻿using OpenBreed.Core.Commands;
-
+using OpenBreed.Wecs.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Wecs.Systems.Physics.Commands
 {
-    public struct BodyOnCommand : ICommand
+    public struct BodyOnCommand : IEntityCommand
     {
         #region Public Fields
 

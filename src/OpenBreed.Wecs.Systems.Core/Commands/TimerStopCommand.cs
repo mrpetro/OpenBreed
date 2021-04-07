@@ -1,8 +1,9 @@
 ﻿using OpenBreed.Core.Commands;
+using OpenBreed.Wecs.Commands;
 
 namespace OpenBreed.Wecs.Systems.Core.Commands
 {
-    public class TimerStopCommand : ICommand
+    public class TimerStopCommand : IEntityCommand
     {
         #region Public Fields
 

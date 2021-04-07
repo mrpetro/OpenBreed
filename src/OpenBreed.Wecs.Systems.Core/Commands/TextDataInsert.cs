@@ -1,26 +1,28 @@
-﻿namespace OpenBreed.Core.Commands
+﻿using OpenBreed.Wecs.Commands;
+
+namespace OpenBreed.Wecs.Systems.Core.Commands
 {
-    public class TextCaretSetPosition : ICommand
+    public class TextDataInsert : IEntityCommand
     {
         #region Public Fields
 
-        public const string TYPE = "TEXT_CARET_SET_POSITION";
+        public const string TYPE = "TEXT_DATA_INSERT";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public TextCaretSetPosition(int entityId, int newPosition)
+        public TextDataInsert(int entityId, string text)
         {
             EntityId = entityId;
-            NewPosition = newPosition;
+            Text = text;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public int NewPosition { get; }
+        public string Text { get; }
 
         public int EntityId { get; }
 

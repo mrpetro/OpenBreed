@@ -1,23 +1,28 @@
-﻿namespace OpenBreed.Core.Commands
+﻿using OpenBreed.Wecs.Commands;
+
+namespace OpenBreed.Wecs.Systems.Core.Commands
 {
-    public class TextDataBackspace : ICommand
+    public class TextCaretSetPosition : IEntityCommand
     {
         #region Public Fields
 
-        public const string TYPE = "TEXT_DATA_BACKSPACE";
+        public const string TYPE = "TEXT_CARET_SET_POSITION";
 
         #endregion Public Fields
 
         #region Public Constructors
 
-        public TextDataBackspace(int entityId)
+        public TextCaretSetPosition(int entityId, int newPosition)
         {
             EntityId = entityId;
+            NewPosition = newPosition;
         }
 
         #endregion Public Constructors
 
         #region Public Properties
+
+        public int NewPosition { get; }
 
         public int EntityId { get; }
 

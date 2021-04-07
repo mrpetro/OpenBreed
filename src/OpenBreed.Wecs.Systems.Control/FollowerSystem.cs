@@ -35,11 +35,8 @@ namespace OpenBreed.Wecs.Systems.Control
 
             Require<FollowerComponent>();
             Require<PositionComponent>();
-        }
 
-        public static void RegisterHandlers(ICommandsMan commands)
-        {
-            commands.Register<FollowedAddFollowerCommand>(HandleFollowedAddFollowerCommand);
+            RegisterHandler<FollowedAddFollowerCommand>(HandleFollowedAddFollowerCommand);
         }
 
         #endregion Public Constructors
@@ -48,10 +45,13 @@ namespace OpenBreed.Wecs.Systems.Control
 
         public void UpdatePauseImmuneOnly(float dt)
         {
+            ExecuteCommands();
         }
 
         public void Update(float dt)
         {
+            ExecuteCommands();
+
             for (int i = 0; i < entities.Count; i++)
                 Update(entities[i], dt);
         }
@@ -130,11 +130,13 @@ namespace OpenBreed.Wecs.Systems.Control
 
         #region Private Methods
 
-        private static bool HandleFollowedAddFollowerCommand(ICore core, FollowedAddFollowerCommand cmd)
+        private bool HandleFollowedAddFollowerCommand(FollowedAddFollowerCommand cmd)
         {
-            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
+            var entity = entityMan.GetById(cmd.EntityId);
             var fc = entity.Get<FollowerComponent>();
             fc.FollowerIds.Add(cmd.FollowerEntityId);
+            commandsMan.Post(new AddEntityCommand(World.Id, cmd.FollowerEntityId));
+
             return true;
         }
 

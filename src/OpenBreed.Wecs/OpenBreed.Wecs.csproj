@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Commands\AddEntityCommand.cs" />
     <Compile Include="Commands\DestroyEntityCommand.cs" />
+    <Compile Include="Commands\IEntityCommand.cs" />
     <Compile Include="Commands\PauseWorldCommand.cs" />
     <Compile Include="Commands\RemoveEntityCommand.cs" />
     <Compile Include="Components\ComponentFactoryBase.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Entities\EntityJob.cs" />
     <Compile Include="Entities\EntityMan.cs" />
     <Compile Include="Entities\IEntityMan.cs" />
+    <Compile Include="EntityCommandHandler.cs" />
     <Compile Include="Events\ComponentChangedEventHandler.cs" />
     <Compile Include="Events\EntityAddedEventArgs.cs" />
     <Compile Include="Events\ComponentChangedEvent.cs" />

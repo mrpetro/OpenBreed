@@ -37,7 +37,6 @@ namespace OpenBreed.Wecs.Systems.Control
 
         public static void RegisterHandlers(ICommandsMan commands)
         {
-            commands.Register<WalkingControlCommand>(HandleWalkingControlCommand);
             commands.Register<AttackControlCommand>(HandleAttackControlCommand);
         }
 
@@ -83,21 +82,6 @@ namespace OpenBreed.Wecs.Systems.Control
                 control.AttackPrimary = cmd.Primary;
                 entity.RaiseEvent(new ControlFireChangedEvenrArgs(control.AttackPrimary));
             }
-
-            return true;
-        }
-
-        private static bool HandleWalkingControlCommand(ICore core, WalkingControlCommand cmd)
-        {
-            //var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
-
-            //var control = entity.Get<WalkingControl>();
-
-            //if (control.Direction != cmd.Direction)
-            //{
-            //    control.Direction = cmd.Direction;
-            //    entity.RaiseEvent(new ControlDirectionChangedEventArgs(control.Direction));
-            //}
 
             return true;
         }
