@@ -74,7 +74,6 @@
     <Compile Include="DefaultManagerCollection.cs" />
     <Compile Include="Extensions\ManagerCollectionExtension.cs" />
     <Compile Include="Formats\TextFormat.cs" />
-    <Compile Include="IApplicationInterface.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Configs\BaseCfg.cs" />
     <Compile Include="Configs\IConfig.cs" />
