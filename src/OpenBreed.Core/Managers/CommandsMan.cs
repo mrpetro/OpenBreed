@@ -46,17 +46,17 @@ namespace OpenBreed.Core.Managers
             handlersEx.Add(typeof(TCommand), cmdHandler);
         }
 
-        public void Register<T>(Func<ICore, T, bool> cmdHandler)
+        public void Register<T>(Func<T, bool> cmdHandler)
         {
             handlers.Add(typeof(T), (cmdHandler.Method, cmdHandler.Target));
         }
 
-        public void ExecuteEnqueued(ICore core)
+        public void ExecuteEnqueued()
         {
             while (messageQueue.Count > 0)
             {
                 var cmd = messageQueue.Dequeue();
-                Execute(core, cmd);
+                Execute(cmd);
             }
         }
 
@@ -77,12 +77,12 @@ namespace OpenBreed.Core.Managers
 
         #region Private Methods
 
-        private void Execute(ICore core, ICommand msg)
+        private void Execute(ICommand msg)
         {
             if (!handlers.TryGetValue(msg.GetType(), out (MethodInfo Method, object Target) handler))
                 return;
 
-            handler.Method.Invoke(handler.Target, new object[] { core, msg });
+            handler.Method.Invoke(handler.Target, new object[] { msg });
         }
 
         private bool TryHandleEx(ICommand msg)

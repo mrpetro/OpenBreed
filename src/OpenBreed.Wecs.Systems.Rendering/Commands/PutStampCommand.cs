@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Core.Commands;
+using OpenBreed.Wecs.Commands;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenBreed.Wecs.Systems.Rendering.Commands
 {
-    public class PutStampCommand : ICommand
+    public class PutStampCommand : IEntityCommand
     {
         #region Public Fields
 
@@ -18,9 +19,9 @@ namespace OpenBreed.Wecs.Systems.Rendering.Commands
 
         #region Public Constructors
 
-        public PutStampCommand(int worldId, int stampId, int layerNo, Vector2 position)
+        public PutStampCommand(int entityId, int stampId, int layerNo, Vector2 position)
         {
-            WorldId = worldId;
+            EntityId = entityId;
             StampId = stampId;
             LayerNo = layerNo;
             Position = position;
@@ -30,7 +31,7 @@ namespace OpenBreed.Wecs.Systems.Rendering.Commands
 
         #region Public Properties
 
-        public int WorldId { get; }
+        public int EntityId { get; }
         public int StampId { get; }
 
         /// <summary>

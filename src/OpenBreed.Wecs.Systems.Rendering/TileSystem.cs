@@ -26,7 +26,9 @@ namespace OpenBreed.Wecs.Systems.Rendering
         #region Public Fields
 
         public const int TILE_SIZE = 16;
+        private readonly IEntityMan entityMan;
         private readonly ITileMan tileMan;
+        private readonly IStampMan stampMan;
         public int MAX_TILES_COUNT = 1024 * 1024;
 
         #endregion Public Fields
@@ -40,8 +42,11 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Constructors
 
-        internal TileSystem(ITileMan tileMan)
+        internal TileSystem(IEntityMan entityMan, ITileMan tileMan, IStampMan stampMan)
         {
+            this.entityMan = entityMan;
+            this.tileMan = tileMan;
+            this.stampMan = stampMan;
             Require<TileComponent>();
             Require<PositionComponent>();
 
@@ -53,7 +58,9 @@ namespace OpenBreed.Wecs.Systems.Rendering
             GridVisible = true;
 
             InitializeTilesMap();
-            this.tileMan = tileMan;
+
+            RegisterHandler<TileSetCommand>(HandleTileSetCommand);
+            RegisterHandler<PutStampCommand>(HandlePutStampCommand);
         }
 
         #endregion Public Constructors
@@ -74,14 +81,10 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Public Methods
 
-        public static void RegisterHandlers(ICommandsMan commands)
-        {
-            commands.Register<TileSetCommand>(HandleTileSetCommand);
-            commands.Register<PutStampCommand>(HandlePutStampCommand);
-        }
-
         public void Render(Box2 clipBox, int depth, float dt)
         {
+            ExecuteCommands();
+
             int leftIndex = (int)clipBox.Left / TILE_SIZE;
             int bottomIndex = (int)clipBox.Bottom / TILE_SIZE;
             int rightIndex = (int)clipBox.Right / TILE_SIZE + 1;
@@ -164,30 +167,28 @@ namespace OpenBreed.Wecs.Systems.Rendering
 
         #region Private Methods
 
-        private static bool HandleTileSetCommand(ICore core, TileSetCommand cmd)
+        private bool HandleTileSetCommand(TileSetCommand cmd)
         {
-            var system = core.GetManager<ISystemFinder>().GetSystemByWorldId<TileSystem>(cmd.WorldId);
+            var entity = entityMan.GetById(cmd.EntityId);
 
             int xIndex;
             int yIndex;
 
-            if (!system.TryGetGridIndices(cmd.Position, out xIndex, out yIndex))
+            if (!TryGetGridIndices(cmd.Position, out xIndex, out yIndex))
                 throw new InvalidOperationException($"Tile position exceeds tile grid limits.");
 
-            var cellIndex = xIndex + system.GridWidth * yIndex;
+            var cellIndex = xIndex + GridWidth * yIndex;
 
-            var tileCell = system.cells[cellIndex];
+            var tileCell = cells[cellIndex];
             tileCell.AtlasId = cmd.AtlasId;
             tileCell.ImageId = cmd.ImageId;
 
             return true;
         }
 
-        private static bool HandlePutStampCommand(ICore core, PutStampCommand cmd)
+        private bool HandlePutStampCommand(PutStampCommand cmd)
         {
-            var system = core.GetManager<ISystemFinder>().GetSystemByWorldId<TileSystem>(cmd.WorldId);
-
-            var stamp = core.GetManager<IStampMan>().GetById(cmd.StampId);
+            var stamp = stampMan.GetById(cmd.StampId);
 
             if (stamp == null)
                 return false;
@@ -195,18 +196,18 @@ namespace OpenBreed.Wecs.Systems.Rendering
             int xIndex;
             int yIndex;
 
-            if (!system.TryGetGridIndices(cmd.Position, out xIndex, out yIndex))
+            if (!TryGetGridIndices(cmd.Position, out xIndex, out yIndex))
                 throw new InvalidOperationException($"Tile position exceeds tile grid limits.");
 
             for (int j = 0; j < stamp.Height; j++)
             {
-                var cellIndex = xIndex + system.GridWidth * (yIndex + j);
+                var cellIndex = xIndex + GridWidth * (yIndex + j);
 
                 for (int i = 0; i < stamp.Width; i++)
                 {
                     var imageId = stamp.Data[i + stamp.Width * j];
-                    system.cells[cellIndex].ImageId = imageId;
-                    system.cells[cellIndex].AtlasId = 0;
+                    cells[cellIndex].ImageId = imageId;
+                    cells[cellIndex].AtlasId = 0;
                     cellIndex++;
                 }
             }

@@ -117,7 +117,7 @@ namespace OpenBreed.Game
 
         public void OnUpdateFrame(float dt)
         {
-            Commands.ExecuteEnqueued(this);
+            Commands.ExecuteEnqueued();
 
             worlds.Cleanup();
 
@@ -128,7 +128,7 @@ namespace OpenBreed.Game
             inputs.Update();
             //Players.ApplyInputs();
             //StateMachine.Update((float)e.Time);
-            worlds.Update(this, dt);
+            worlds.Update(dt);
             //Jobs.Update(dt);
         }
 
@@ -136,10 +136,7 @@ namespace OpenBreed.Game
         {
             ExposeScriptingApi();
 
-            TileSystem.RegisterHandlers(Commands);
             //TextPresenterSystem.RegisterHandlers(Commands);
-            TextSystem.RegisterHandlers(Commands);
-
             manCollection2.GetManager<IViewClient>().Run();
         }
 

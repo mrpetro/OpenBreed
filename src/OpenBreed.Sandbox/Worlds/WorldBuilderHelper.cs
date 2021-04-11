@@ -103,8 +103,8 @@ namespace OpenBreed.Sandbox.Worlds
             var y = (int)args[1];
             var pairCode = (int)args[2];
 
-            TeleportHelper.AddTeleportEntry(core, world, x, y, pairCode);
-            core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            var teleportEntry = TeleportHelper.AddTeleportEntry(core, world, x, y, pairCode);
+            core.Commands.Post(new TileSetCommand(teleportEntry.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private static void AddWorldEntry(ICore core, World world, int code, object[] args)
@@ -114,8 +114,8 @@ namespace OpenBreed.Sandbox.Worlds
             var pairCode = (int)args[2];
 
             var worldGateHelper = core.GetManager<WorldGateHelper>();
-            worldGateHelper.AddWorldEntry(world, x, y, pairCode);
-            core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            var worldEntry = worldGateHelper.AddWorldEntry(world, x, y, pairCode);
+            core.Commands.Post(new TileSetCommand(worldEntry.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private static void AddAnimTest(ICore core, World world, int code, object[] args)
@@ -124,8 +124,8 @@ namespace OpenBreed.Sandbox.Worlds
             var y = (int)args[1];
             var pairCode = (int)args[2];
 
-            Misc.AddToWorld(core, world);
-            core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            var crazyMover = Misc.AddToWorld(core, world);
+            core.Commands.Post(new TileSetCommand(crazyMover.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private static void AddTurret(ICore core, World world, int code, object[] args)
@@ -136,7 +136,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             var turret = TurretHelper.Create(core, new Vector2(x * 16, y * 16));
             core.Commands.Post(new AddEntityCommand(world.Id, turret.Id));
-            core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            core.Commands.Post(new TileSetCommand(turret.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private static void AddTeleportExit(ICore core, World world, int code, object[] args)
@@ -145,8 +145,8 @@ namespace OpenBreed.Sandbox.Worlds
             var y = (int)args[1];
             var pairCode = (int)args[2];
 
-            TeleportHelper.AddTeleportExit(core, world, x, y, pairCode);
-            core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            var teleportEntity = TeleportHelper.AddTeleportExit(core, world, x, y, pairCode);
+            core.Commands.Post(new TileSetCommand(teleportEntity.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private void AddWorldExit(ICore core, World world, int code, object[] args)
@@ -161,8 +161,8 @@ namespace OpenBreed.Sandbox.Worlds
 
             var worldGateHelper = core.GetManager<WorldGateHelper>();
 
-            worldGateHelper.AddWorldExit(world, x, y, exitInfo.Item1, exitInfo.Item2);
-            core.Commands.Post(new TileSetCommand(world.Id, 0, 12, new Vector2(x * 16, y * 16)));
+            var worldExit = worldGateHelper.AddWorldExit(world, x, y, exitInfo.Item1, exitInfo.Item2);
+            core.Commands.Post(new TileSetCommand(worldExit.Id, 0, 12, new Vector2(x * 16, y * 16)));
         }
 
         private static void AddPlayer(ICore core, World world, int code, object[] args)

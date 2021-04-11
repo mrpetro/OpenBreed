@@ -77,7 +77,7 @@ namespace OpenBreed.Wecs.Systems.Control
             if (!input.Changed)
                 return;
 
-            commandsMan.Post(new AttackControlCommand(entity.Id, entity, input.Primary, input.Secondary));
+            commandsMan.Post(new AttackControlCommand(entity.Id, input.Primary, input.Secondary));
         }
 
         #endregion Private Methods

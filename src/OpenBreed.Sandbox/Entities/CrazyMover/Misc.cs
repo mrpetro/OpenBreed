@@ -59,7 +59,7 @@ namespace OpenBreed.Sandbox
             pos.Value = new OpenTK.Vector2(pos.Value.X, nextValue);
         }
 
-        public static void AddToWorld(ICore core, World world)
+        public static Entity AddToWorld(ICore core, World world)
         {
             var arial12 = core.GetManager<IFontMan>().Create("ARIAL", 10);
 
@@ -93,6 +93,8 @@ namespace OpenBreed.Sandbox
 
 
             core.Commands.Post(new AddEntityCommand(world.Id, crazyMover.Id));
+
+            return crazyMover;
         }
 
         #endregion Private Methods

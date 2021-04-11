@@ -276,7 +276,7 @@ namespace OpenBreed.Sandbox
         {
             GetManager<IEventQueue>().Fire();
 
-            Commands.ExecuteEnqueued(this);
+            Commands.ExecuteEnqueued();
 
             Worlds.Cleanup();
             renderingMan.Cleanup();
@@ -286,14 +286,8 @@ namespace OpenBreed.Sandbox
             Inputs.Update();
 
             //StateMachine.Update((float)e.Time);
-            Worlds.Update(this, dt);
+            Worlds.Update(dt);
             Jobs.Update(dt);
-        }
-
-        private void RegisterSystems()
-        {
-            TileSystem.RegisterHandlers(Commands);
-            WalkingControlSystem.RegisterHandlers(Commands);
         }
 
         private void RegisterInputs()
@@ -327,7 +321,6 @@ namespace OpenBreed.Sandbox
 
             InitLua();
 
-            RegisterSystems();
             RegisterShapes();
             RegisterFixtures();
             RegisterInputs();

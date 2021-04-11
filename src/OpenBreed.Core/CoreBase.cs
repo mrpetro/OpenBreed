@@ -47,15 +47,6 @@ namespace OpenBreed.Core
 
         public abstract void Load();
 
-        public bool ExecuteCommand(ICommand cmd)
-        {
-            switch (cmd.Name)
-            {
-                default:
-                    return false;
-            }
-        }
-
         #endregion Public Methods
     }
 }

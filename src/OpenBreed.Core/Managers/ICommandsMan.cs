@@ -25,9 +25,9 @@ namespace OpenBreed.Core.Managers
 
         void RegisterCommand<TCommand>(ICommandHandler commandHandler) where TCommand : ICommand;
 
-        void Register<TCommand>(Func<ICore, TCommand, bool> cmdHandler);
+        void Register<TCommand>(Func<TCommand, bool> cmdHandler);
 
-        void ExecuteEnqueued(ICore core);
+        void ExecuteEnqueued();
 
         void Post(ICommand msg);
 

@@ -18,7 +18,7 @@ namespace OpenBreed.Wecs.Systems.Control.Extensions
         {
             var systemFactory = manCollection.GetManager<ISystemFactory>();
             systemFactory.Register(() => new AiControlSystem());
-            systemFactory.Register(() => new WalkingControlSystem());
+            systemFactory.Register(() => new WalkingControlSystem(manCollection.GetManager<IEntityMan>()));
             systemFactory.Register(() => new WalkingControllerSystem(manCollection.GetManager<IPlayersMan>()));
             systemFactory.Register(() => new AttackControllerSystem(manCollection.GetManager<IPlayersMan>(),
                                                                     manCollection.GetManager<ICommandsMan>()));
@@ -28,6 +28,8 @@ namespace OpenBreed.Wecs.Systems.Control.Extensions
             var entityCommandHandler = manCollection.GetManager<EntityCommandHandler>();
 
             entityCommandHandler.BindCommand<FollowedAddFollowerCommand, FollowerSystem>();
+
+            entityCommandHandler.BindCommand<AttackControlCommand, WalkingControlSystem>();
         }
     }
 }

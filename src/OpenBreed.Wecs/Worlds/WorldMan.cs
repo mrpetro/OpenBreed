@@ -118,10 +118,10 @@ namespace OpenBreed.Wecs.Worlds
         /// Updates all worlds
         /// </summary>
         /// <param name="dt">Delta time</param>
-        public void Update(ICore core, float dt)
+        public void Update(float dt)
         {
             for (int i = 0; i < Items.Count; i++)
-                UpdateWorld(core, Items[i], dt);
+                UpdateWorld(Items[i], dt);
         }
 
         private void DeinitializeWorld(World world)
@@ -178,13 +178,13 @@ namespace OpenBreed.Wecs.Worlds
 
         #region Private Methods
 
-        private void UpdateWorld(ICore core, World world, float dt)
+        private void UpdateWorld(World world, float dt)
         {
             if (world.Paused)
             {
                 foreach (var item in world.Systems.OfType<IUpdatableSystem>())
                 {
-                    commandsMan.ExecuteEnqueued(core);
+                    commandsMan.ExecuteEnqueued();
                     item.UpdatePauseImmuneOnly(dt * world.TimeMultiplier);
                 }
                 //systems.OfType<IUpdatableSystem>().ForEach(item => item.UpdatePauseImmuneOnly(dt * TimeMultiplier));
@@ -193,14 +193,14 @@ namespace OpenBreed.Wecs.Worlds
             {
                 foreach (var item in world.Systems.OfType<IUpdatableSystem>())
                 {
-                    commandsMan.ExecuteEnqueued(core);
+                    commandsMan.ExecuteEnqueued();
                     item.Update(dt * world.TimeMultiplier);
                 }
                 //systems.OfType<IUpdatableSystem>().ForEach(item => item.Update(dt * TimeMultiplier));
             }
         }
 
-        private bool HandleRemoveEntity(ICore core, RemoveEntityCommand cmd)
+        private bool HandleRemoveEntity(RemoveEntityCommand cmd)
         {
             var world = GetById(cmd.WorldId);
             var entity = entityMan.GetById(cmd.EntityId);
@@ -208,7 +208,7 @@ namespace OpenBreed.Wecs.Worlds
             return true;
         }
 
-        private bool HandleAddEntity(ICore core, AddEntityCommand cmd)
+        private bool HandleAddEntity(AddEntityCommand cmd)
         {
             var world = GetById(cmd.WorldId);
             var entity = entityMan.GetById(cmd.EntityId);
@@ -216,7 +216,7 @@ namespace OpenBreed.Wecs.Worlds
             return true;
         }
 
-        private bool HandlePauseWorld(ICore core, PauseWorldCommand cmd)
+        private bool HandlePauseWorld(PauseWorldCommand cmd)
         {
             var world = GetById(cmd.WorldId);
 

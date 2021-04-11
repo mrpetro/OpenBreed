@@ -1,9 +1,10 @@
 ﻿using OpenBreed.Core.Commands;
+using OpenBreed.Wecs.Commands;
 using OpenTK;
 
 namespace OpenBreed.Wecs.Systems.Rendering.Commands
 {
-    public struct TileSetCommand : ICommand
+    public struct TileSetCommand : IEntityCommand
     {
         #region Public Fields
 
@@ -13,9 +14,9 @@ namespace OpenBreed.Wecs.Systems.Rendering.Commands
 
         #region Public Constructors
 
-        public TileSetCommand(int worldId, int atlasId, int imageId, Vector2 position)
+        public TileSetCommand(int entityId, int atlasId, int imageId, Vector2 position)
         {
-            WorldId = worldId;
+            EntityId = entityId;
 
             AtlasId = atlasId;
             ImageId = imageId;
@@ -26,7 +27,7 @@ namespace OpenBreed.Wecs.Systems.Rendering.Commands
 
         #region Public Properties
 
-        public int WorldId { get; }
+        public int EntityId { get; }
         public int AtlasId { get; }
         public int ImageId { get; }
         public Vector2 Position { get; }

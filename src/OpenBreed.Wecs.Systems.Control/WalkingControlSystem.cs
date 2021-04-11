@@ -21,31 +21,34 @@ namespace OpenBreed.Wecs.Systems.Control
         #region Private Fields
 
         private readonly List<Entity> entities = new List<Entity>();
+        private readonly IEntityMan entityMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        internal WalkingControlSystem()
+        internal WalkingControlSystem(IEntityMan entityMan)
         {
+            this.entityMan = entityMan;
+
             Require<IControlComponent>();
+
+            RegisterHandler<AttackControlCommand>(HandleAttackControlCommand);
         }
 
         #endregion Public Constructors
 
         #region Public Methods
 
-        public static void RegisterHandlers(ICommandsMan commands)
-        {
-            commands.Register<AttackControlCommand>(HandleAttackControlCommand);
-        }
-
         public void UpdatePauseImmuneOnly(float dt)
         {
+            ExecuteCommands();
+
         }
 
         public void Update(float dt)
         {
+            ExecuteCommands();
         }
 
         #endregion Public Methods
@@ -71,9 +74,9 @@ namespace OpenBreed.Wecs.Systems.Control
 
         #region Private Methods
 
-        private static bool HandleAttackControlCommand(ICore core, AttackControlCommand cmd)
+        private bool HandleAttackControlCommand(AttackControlCommand cmd)
         {
-            var entity = core.GetManager<IEntityMan>().GetById(cmd.EntityId);
+            var entity = entityMan.GetById(cmd.EntityId);
 
             var control = entity.Get<AttackControlComponent>();
 

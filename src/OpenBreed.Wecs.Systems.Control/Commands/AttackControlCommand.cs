@@ -1,10 +1,11 @@
 ﻿using OpenBreed.Core.Commands;
+using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Entities;
 using OpenTK;
 
 namespace OpenBreed.Wecs.Systems.Control.Commands
 {
-    public struct AttackControlCommand : ICommand
+    public struct AttackControlCommand : IEntityCommand
     {
         #region Public Fields
 
@@ -14,7 +15,7 @@ namespace OpenBreed.Wecs.Systems.Control.Commands
 
         #region Public Constructors
 
-        public AttackControlCommand(int entityId, Entity entity, bool primary, bool secondary)
+        public AttackControlCommand(int entityId, bool primary, bool secondary)
         {
             EntityId = entityId;
             Primary = primary;

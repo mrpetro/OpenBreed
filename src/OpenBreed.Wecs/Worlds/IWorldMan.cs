@@ -25,7 +25,7 @@ namespace OpenBreed.Wecs.Worlds
 
         void Remove(World world);
 
-        void Update(ICore core, float dt);
+        void Update(float dt);
 
         void Cleanup();
 
