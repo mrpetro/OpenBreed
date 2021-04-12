@@ -59,6 +59,11 @@ namespace OpenBreed.Common.Extensions
                                                                                                     managerCollection.GetManager<IRepositoryProvider>()));
         }
 
+        public static void SetupVariableManager(this IManagerCollection managerCollection)
+        {
+            managerCollection.AddSingleton<IVariableMan>(() => new VariableMan(managerCollection.GetManager<ILogger>()));
+        }
+
         public static void SetupABFormats(this IManagerCollection managerCollection)
         {
             managerCollection.AddSingleton<DataFormatMan>(() =>
