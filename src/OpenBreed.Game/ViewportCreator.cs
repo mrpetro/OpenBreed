@@ -29,7 +29,7 @@ namespace OpenBreed.Game
 
         public Entity CreateViewportEntity(string name, float x, float y, float width, float height, bool drawBackground, bool clipping = true)
         {
-            var viewport = entityMan.Create(core);
+            var viewport = entityMan.Create();
             viewport.Tag = name;
 
             var vpcBuilder = ViewportComponentBuilderEx.New();

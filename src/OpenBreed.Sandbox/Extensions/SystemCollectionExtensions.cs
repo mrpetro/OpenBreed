@@ -2,8 +2,14 @@
 using OpenBreed.Common.Logging;
 using OpenBreed.Core.Managers;
 using OpenBreed.Input.Interface;
+using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Sandbox.Entities.Builders;
+using OpenBreed.Sandbox.Entities.Camera;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Scripting.Lua.Extensions;
+using OpenBreed.Wecs.Components.Physics;
+using OpenBreed.Wecs.Components.Rendering;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 using System;
@@ -26,6 +32,18 @@ namespace OpenBreed.Sandbox.Extensions
             scriptMan.Expose("Inputs", manCollection.GetManager<IInputsMan>());
             scriptMan.Expose("Logging", manCollection.GetManager<ILogger>());
             scriptMan.Expose("Players", manCollection.GetManager<IPlayersMan>());
+        }
+
+        public static void SetupSandboxBuilders(this IManagerCollection manCollection)
+        {
+            manCollection.AddTransient<CameraBuilder>(() => new CameraBuilder(manCollection.GetManager<IEntityMan>(),
+                                                                              manCollection.GetManager<CameraComponentBuilder>()));
+
+            manCollection.AddTransient<WorldBlockBuilder>(() => new WorldBlockBuilder(manCollection.GetManager<ITileMan>(),
+                                                                                      manCollection.GetManager<IFixtureMan>(),
+                                                                                      manCollection.GetManager<IEntityMan>(),
+                                                                                      manCollection.GetManager<BodyComponentBuilder>()));
+            
         }
     }
 }

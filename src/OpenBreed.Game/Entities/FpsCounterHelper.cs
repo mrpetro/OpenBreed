@@ -26,7 +26,7 @@ namespace OpenBreed.Game.Entities
         {
             var arial12 = core.GetManager<IFontMan>().Create("ARIAL", 10);
 
-            var fpsTextEntity = core.GetManager<IEntityMan>().Create(core);
+            var fpsTextEntity = core.GetManager<IEntityMan>().Create();
 
             fpsTextEntity.Add(PositionComponent.Create(new Vector2(0,0)));
 

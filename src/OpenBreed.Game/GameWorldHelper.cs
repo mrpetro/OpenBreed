@@ -86,7 +86,7 @@ namespace OpenBreed.Game
         {
             World gameWorld = CreateGameWorld("GameWorld");
 
-            var cameraBuilder = new CameraBuilder(core);
+            var cameraBuilder = core.GetManager<CameraBuilder>();
 
             cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);

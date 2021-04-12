@@ -15,14 +15,17 @@ namespace OpenBreed.Wecs.Entities
 
         private readonly IdMap<Entity> entities = new IdMap<Entity>();
         private readonly ICommandsMan commandsMan;
+        private readonly IEventsMan eventsMan;
+
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal EntityMan(ICommandsMan commandsMan)
+        internal EntityMan(ICommandsMan commandsMan, IEventsMan eventsMan)
         {
             this.commandsMan = commandsMan;
+            this.eventsMan = eventsMan;
         }
 
         #endregion Internal Constructors
@@ -53,9 +56,9 @@ namespace OpenBreed.Wecs.Entities
                 return null;
         }
 
-        public Entity Create(ICore core, List<IEntityComponent> initialComponents = null)
+        public Entity Create(List<IEntityComponent> initialComponents = null)
         {
-            var newEntity = new Entity(core, initialComponents);
+            var newEntity = new Entity(eventsMan, initialComponents);
             newEntity.Id = entities.Add(newEntity);
             return newEntity;
         }

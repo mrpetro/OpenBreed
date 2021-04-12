@@ -45,8 +45,6 @@ namespace OpenBreed.Core
 
         public TManager GetManager<TManager>() => manCollection.GetManager<TManager>();
 
-        public abstract void Load();
-
         #endregion Public Methods
     }
 }

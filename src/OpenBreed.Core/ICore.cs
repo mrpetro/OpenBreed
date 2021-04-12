@@ -52,8 +52,6 @@ namespace OpenBreed.Core
         /// </summary>
         void Exit();
 
-        void Load();
-
         #endregion Public Methods
     }
 }

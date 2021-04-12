@@ -23,13 +23,13 @@ namespace OpenBreed.Sandbox.Entities
         {
         }
 
-        public static Entity CreateText(ICore core, World world)
+        public static Entity CreateText(IEntityMan entityMan, IFontMan fontMan, World world)
         {
-            var e = core.GetManager<IEntityMan>().Create(core);
+            var e = entityMan.Create();
             e.Add(new TextCaretComponent());
             e.Add(new TextDataComponent("This is test"));
 
-            var font = core.GetManager<IFontMan>().Create("Consolas", 20);
+            var font = fontMan.Create("Consolas", 20);
 
             e.Add(new TextPresentationComponent(font.Id, Color4.White, 200.0f));
             e.Add(PositionComponent.Create(-200.0f,50.0f));

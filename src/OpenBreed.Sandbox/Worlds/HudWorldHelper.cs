@@ -74,7 +74,7 @@ namespace OpenBreed.Sandbox.Worlds
 
         private void Setup(World world)
         {
-            var cameraBuilder = new CameraBuilder(core);
+            var cameraBuilder = core.GetManager<CameraBuilder>();
             cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetFov(viewClient.ClientRectangle.Width, viewClient.ClientRectangle.Height);

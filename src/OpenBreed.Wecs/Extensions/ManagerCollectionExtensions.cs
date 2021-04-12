@@ -18,7 +18,8 @@ namespace OpenBreed.Wecs.Extensions
     {
         public static void SetupWecsManagers(this IManagerCollection manCollection)
         {
-            manCollection.AddSingleton<IEntityMan>(() => new EntityMan(manCollection.GetManager<ICommandsMan>()));
+            manCollection.AddSingleton<IEntityMan>(() => new EntityMan(manCollection.GetManager<ICommandsMan>(),
+                                                                       manCollection.GetManager<IEventsMan>()));
 
             manCollection.AddSingleton<ISystemFactory>(() => new DefaultSystemFactory());
 
@@ -32,6 +33,14 @@ namespace OpenBreed.Wecs.Extensions
 
             manCollection.AddSingleton<ISystemFinder>(() => new SystemFinder(manCollection.GetManager<IEntityMan>(),
                                                                              manCollection.GetManager<IWorldMan>()));
+
+            manCollection.AddTransient<WorldBuilder>(() => new WorldBuilder(manCollection.GetManager<IWorldMan>(),
+                                                                              manCollection.GetManager<ILogger>()));
+
+            manCollection.AddSingleton<EntityCommandHandler>(() => new EntityCommandHandler(manCollection.GetManager<IEntityMan>(),
+                                                                                            manCollection.GetManager<IWorldMan>(),
+                                                                                            manCollection.GetManager<ICommandsMan>(),
+                                                                                            manCollection.GetManager<IEventsMan>()));
         }
     }
 }

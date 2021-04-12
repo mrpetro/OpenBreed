@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Animation.Generic;
+using OpenBreed.Animation.Generic.Extensions;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Common;
@@ -80,15 +81,7 @@ namespace OpenBreed.Sandbox
 
             manCollection.AddSingleton<IViewClient>(() => new OpenTKWindowClient(800, 600, "OpenBreed"));
 
-            manCollection.AddSingleton<IFsmMan>(() => new FsmMan());
-
-            manCollection.AddSingleton<IAnimMan>(() => new AnimMan(manCollection.GetManager<ILogger>()));
-
-            manCollection.AddSingleton<EntityCommandHandler>(() => new EntityCommandHandler(manCollection.GetManager<IEntityMan>(),
-                                                                                            manCollection.GetManager<IWorldMan>(),
-                                                                                            manCollection.GetManager<ICommandsMan>(),
-                                                                                            manCollection.GetManager<IEventsMan>()));
-
+            manCollection.SetupAnimationManagers();
             manCollection.SetupLuaScripting();
             manCollection.SetupGenericInputManagers();
             manCollection.SetupGenericPhysicsManagers();
@@ -112,9 +105,15 @@ namespace OpenBreed.Sandbox
 
 
 
+
             //manCollection.SetupAudioSystems();
 
             //manCollection.SetupGameScriptingApi();
+
+
+            manCollection.SetupSandboxBuilders();
+
+            manCollection.AddSingleton<ViewportCreator>(() => new ViewportCreator(manCollection.GetManager<IEntityMan>()));
         }
 
         #endregion Public Constructors
@@ -125,7 +124,6 @@ namespace OpenBreed.Sandbox
         {
             var core = new Program(manCollection, manCollection.GetManager<IViewClient>());
 
-            manCollection.AddSingleton<ViewportCreator>(() => new ViewportCreator(core, manCollection.GetManager<IEntityMan>()));
             manCollection.AddSingleton<ScreenWorldHelper>(() => new ScreenWorldHelper(core, manCollection.GetManager<ISystemFactory>(),
                                                                                             manCollection.GetManager<ICommandsMan>(), 
                                                                                             manCollection.GetManager<IRenderingMan>(),
@@ -228,10 +226,6 @@ namespace OpenBreed.Sandbox
         #endregion Public Properties
 
         #region Public Methods
-
-        public override void Load()
-        {
-        }
 
         public override void Run()
         {

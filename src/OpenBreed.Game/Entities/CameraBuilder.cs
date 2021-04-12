@@ -16,13 +16,15 @@ namespace OpenBreed.Game.Entities
         internal float rotation;
         internal float width;
         internal float height;
+        private readonly CameraComponentBuilder cameraComponentBuilder;
 
         #endregion Internal Fields
 
         #region Public Constructors
 
-        public CameraBuilder(ICore core) : base(core)
+        public CameraBuilder(IEntityMan entityMan, CameraComponentBuilder cameraComponentBuilder) : base(entityMan)
         {
+            this.cameraComponentBuilder = cameraComponentBuilder;
         }
 
         #endregion Public Constructors
@@ -31,12 +33,11 @@ namespace OpenBreed.Game.Entities
 
         public override Entity Build()
         {
-            var entity = Core.GetManager<IEntityMan>().Create(Core);
+            var entity = entityMan.Create();
             entity.Add(PositionComponent.Create(position));
 
-            var ccBuilder = Core.GetManager<CameraComponentBuilder>();
-            ccBuilder.SetSize(width, height);
-            entity.Add(ccBuilder.Build());
+            cameraComponentBuilder.SetSize(width, height);
+            entity.Add(cameraComponentBuilder.Build());
             entity.Add(new PauseImmuneComponent());
             return entity;
         }

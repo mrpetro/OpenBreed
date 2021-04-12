@@ -1,17 +1,11 @@
-﻿using OpenBreed.Wecs.Components.Physics;
-using OpenBreed.Core;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Physics.Interface;
-using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Rendering.Interface;
-using OpenTK;
-using System.Collections.Generic;
-using System.Linq;
-using OpenBreed.Wecs.Entities.Builders;
-using OpenBreed.Wecs;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Physics.Interface.Managers;
+﻿using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Physics;
+using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Entities.Builders;
+using OpenTK;
 
 namespace OpenBreed.Sandbox.Entities.Builders
 {
@@ -25,25 +19,43 @@ namespace OpenBreed.Sandbox.Entities.Builders
 
         #endregion Internal Fields
 
-        #region Public Constructors
+        #region Private Fields
 
-        public WorldBlockBuilder(ICore core) : base(core)
+        private readonly ITileMan tileMan;
+        private readonly IFixtureMan fixtureMan;
+        private readonly BodyComponentBuilder bodyComponentBuilder;
+
+        #endregion Private Fields
+
+        #region Internal Constructors
+
+        internal WorldBlockBuilder(ITileMan tileMan, IFixtureMan fixtureMan, IEntityMan entityMan, BodyComponentBuilder bodyComponentBuilder) : base(entityMan)
         {
+            this.tileMan = tileMan;
+            this.fixtureMan = fixtureMan;
+            this.bodyComponentBuilder = bodyComponentBuilder;
+
             HasBody = true;
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
+
+        #region Public Properties
+
+        public bool HasBody { get; set; }
+
+        #endregion Public Properties
 
         #region Public Methods
 
-        public void SetPosition(Vector2 pos )
+        public void SetPosition(Vector2 pos)
         {
             this.pos = pos;
         }
 
         public void SetTileAtlas(string atlasAlias)
         {
-            var atlas = Core.GetManager<ITileMan>().GetByAlias(atlasAlias);
+            var atlas = tileMan.GetByAlias(atlasAlias);
             this.atlasId = atlas.Id;
         }
 
@@ -52,20 +64,13 @@ namespace OpenBreed.Sandbox.Entities.Builders
             this.tileId = tileId;
         }
 
-        public bool HasBody { get; set; }
-
         public override Entity Build()
         {
-            var entity = Core.GetManager<IEntityMan>().Create(Core);
-            var fixtureMan = Core.GetManager<IFixtureMan>();
-
+            var entity = entityMan.Create();
             entity.Add(PositionComponent.Create(pos));
-
 
             if (HasBody)
             {
-                var bodyComponentBuilder = Core.GetManager<BodyComponentBuilder>();
-
                 var fixtureId = fixtureMan.GetByAlias("Fixtures/GridCell").Id;
 
                 bodyComponentBuilder.SetCofFactor(1.0f);
@@ -76,7 +81,6 @@ namespace OpenBreed.Sandbox.Entities.Builders
                 entity.Add(bodyComponentBuilder.Build());
                 entity.Add(new CollisionComponent(ColliderTypes.StaticObstacle));
             }
-
 
             var tileComponentBuilder = TileComponentBuilder.New(Core);
             tileComponentBuilder.SetAtlasById(atlasId);

@@ -10,16 +10,14 @@ namespace OpenBreed.Sandbox.Helpers
     {
         #region Private Fields
 
-        private readonly ICore core;
         private readonly IEntityMan entityMan;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ViewportCreator(ICore core, IEntityMan entityMan)
+        public ViewportCreator(IEntityMan entityMan)
         {
-            this.core = core;
             this.entityMan = entityMan;
         }
 
@@ -29,7 +27,7 @@ namespace OpenBreed.Sandbox.Helpers
 
         public Entity CreateViewportEntity(string name, float x, float y, float width, float height, bool drawBackground, bool clipping = true)
         {
-            var viewport = entityMan.Create(core);
+            var viewport = entityMan.Create();
             viewport.Tag = name;
 
             var vpcBuilder = ViewportComponentBuilderEx.New();

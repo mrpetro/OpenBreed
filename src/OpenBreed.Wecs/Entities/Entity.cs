@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using OpenBreed.Wecs.Worlds;
 using OpenBreed.Wecs.Components;
+using OpenBreed.Core.Managers;
 
 namespace OpenBreed.Wecs.Entities
 {
@@ -14,6 +15,7 @@ namespace OpenBreed.Wecs.Entities
     /// </summary>
     public class Entity
     {
+        private readonly IEventsMan eventsMan;
         #region Private Fields
 
         private readonly List<IEntityComponent> components = new List<IEntityComponent>();
@@ -22,9 +24,9 @@ namespace OpenBreed.Wecs.Entities
 
         #region Internal Constructors
 
-        internal Entity(ICore core, List<IEntityComponent> initialComponents)
+        internal Entity(IEventsMan eventsMan, List<IEntityComponent> initialComponents)
         {
-            Core = core ?? throw new ArgumentNullException(nameof(core));
+            this.eventsMan = eventsMan;
 
             components = initialComponents ?? new List<IEntityComponent>();
             Components = new ReadOnlyCollection<IEntityComponent>(components);
@@ -38,11 +40,6 @@ namespace OpenBreed.Wecs.Entities
         /// Read-olny list of components for this entity
         /// </summary>
         public ReadOnlyCollection<IEntityComponent> Components { get; }
-
-        /// <summary>
-        /// Core reference
-        /// </summary>
-        public ICore Core { get; }
 
         /// <summary>
         /// Property for user purpose data
@@ -106,7 +103,7 @@ namespace OpenBreed.Wecs.Entities
         /// <param name="eventArgs">Arguments of event</param>
         public void RaiseEvent<T>(T eventArgs) where T : EventArgs
         {
-            Core.Events.Raise(this, eventArgs);
+            eventsMan.Raise(this, eventArgs);
         }
 
         /// <summary>
@@ -115,7 +112,7 @@ namespace OpenBreed.Wecs.Entities
         /// <param name="callback">event callback</param>
         public void Subscribe<T>(Action<object, T> callback) where T : EventArgs
         {
-            Core.Events.Subscribe(this, callback);
+            eventsMan.Subscribe(this, callback);
         }
 
         /// <summary>
@@ -124,7 +121,7 @@ namespace OpenBreed.Wecs.Entities
         /// <param name="callback">event callback to unsubscribe</param>
         public void Unsubscribe<T>(Action<object, T> callback) where T : EventArgs
         {
-            Core.Events.Unsubscribe(this, callback);
+            eventsMan.Unsubscribe(this, callback);
         }
 
         /// <summary>

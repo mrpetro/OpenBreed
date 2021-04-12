@@ -28,7 +28,7 @@ namespace OpenBreed.Sandbox.Entities.CursorCoords
             var windowClient = core.GetManager<IViewClient>();
             var arial12 = core.GetManager<IFontMan>().Create("ARIAL", 10);
 
-            var entity = core.GetManager<IEntityMan>().Create(core);
+            var entity = core.GetManager<IEntityMan>().Create();
 
             entity.Add(PositionComponent.Create(new Vector2(windowClient.ClientRectangle.Width / 2.0f - 120.0f, -windowClient.ClientRectangle.Height / 2.0f)));
 

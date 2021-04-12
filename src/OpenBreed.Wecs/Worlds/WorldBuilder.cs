@@ -33,15 +33,15 @@ namespace OpenBreed.Wecs.Worlds
 
         #endregion Private Fields
 
-        #region Public Constructors
+        #region Internal Constructors
 
-        public WorldBuilder(IWorldMan worldMan, ILogger logger)
+        internal WorldBuilder(IWorldMan worldMan, ILogger logger)
         {
             this.worldMan = worldMan;
             this.logger = logger;
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Methods
 

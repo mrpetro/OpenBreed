@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Animation.Generic;
+using OpenBreed.Animation.Generic.Extensions;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Common;
@@ -12,6 +13,7 @@ using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Xml;
 using OpenBreed.Fsm;
+using OpenBreed.Fsm.Extensions;
 using OpenBreed.Game.Extensions;
 using OpenBreed.Input.Generic;
 using OpenBreed.Input.Generic.Extensions;
@@ -23,6 +25,10 @@ using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Scripting.Interface;
 using OpenBreed.Scripting.Lua;
 using OpenBreed.Scripting.Lua.Extensions;
+using OpenBreed.Wecs.Components.Animation.Extensions;
+using OpenBreed.Wecs.Components.Common.Extensions;
+using OpenBreed.Wecs.Components.Physics.Extensions;
+using OpenBreed.Wecs.Components.Rendering.Extensions;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Extensions;
 using OpenBreed.Wecs.Systems;
@@ -48,13 +54,10 @@ namespace OpenBreed.Game
 
             manCollection.AddSingleton<IViewClient>(() => new OpenTKWindowClient(800, 600, "OpenBreed"));
 
-            manCollection.AddSingleton<IVariableMan>(() => new VariableMan(manCollection.GetManager<ILogger>()));
-            manCollection.AddSingleton<IFsmMan>(() => new FsmMan());
-
-            manCollection.AddSingleton<IAnimMan>(() => new AnimMan(manCollection.GetManager<ILogger>()));
-
+            manCollection.SetupVariableManager();
             manCollection.SetupABFormats();
             manCollection.SetupModelProvider();
+            manCollection.SetupAnimationManagers();
             manCollection.SetupLuaScripting();
             manCollection.SetupDataProviders();
             manCollection.SetupGenericInputManagers();
@@ -71,6 +74,12 @@ namespace OpenBreed.Game
             manCollection.SetupXmlReadonlyDatabase();
             //manCollection.SetupAudioSystems();
 
+
+            manCollection.SetupCommonComponents();
+            manCollection.SetupPhysicsComponents();
+            manCollection.SetupRenderingComponents();
+            manCollection.SetupAnimationComponents();
+            manCollection.SetupFsmComponents();
         }
 
         public ICore CreateGame(string gameDbFilePath, string gameFolderPath)

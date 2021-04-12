@@ -34,8 +34,6 @@ namespace OpenBreed.Fsm
 
         #region Internal Properties
 
-        internal ICore Core { get; }
-
         #endregion Internal Properties
 
         #region Public Methods

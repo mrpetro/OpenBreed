@@ -57,7 +57,7 @@ namespace OpenBreed.Wecs.Entities
                     throw new Exception($"Don't know how to create component based on template '{componentTemplate.GetType()}'");
             }
 
-            return entityMan.Create(core, components);
+            return entityMan.Create(components);
         }
 
         #endregion Public Methods

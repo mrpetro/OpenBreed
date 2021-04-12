@@ -5,11 +5,12 @@ namespace OpenBreed.Wecs.Entities.Builders
 {
     public abstract class EntityBuilder : IEntityBuilder
     {
+        protected readonly IEntityMan entityMan;
         #region Public Constructors
 
-        public EntityBuilder(ICore core)
+        public EntityBuilder(IEntityMan entityMan)
         {
-            Core = core ?? throw new ArgumentNullException(nameof(core));
+            this.entityMan = entityMan;
         }
 
         #endregion Public Constructors

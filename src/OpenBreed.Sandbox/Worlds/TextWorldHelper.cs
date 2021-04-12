@@ -1,46 +1,47 @@
 ﻿using OpenBreed.Core;
-using OpenBreed.Core.Commands;
-using OpenBreed.Wecs.Components.Common;
 using OpenBreed.Core.Events;
-using OpenBreed.Wecs.Systems;
-using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Wecs.Systems.Rendering;
-using OpenBreed.Wecs.Systems.Rendering.Events;
+using OpenBreed.Core.Managers;
+using OpenBreed.Input.Interface;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Entities;
 using OpenBreed.Sandbox.Entities.Camera;
-using OpenBreed.Sandbox.Entities.FpsCounter;
+using OpenBreed.Wecs.Commands;
+using OpenBreed.Wecs.Components.Common;
+using OpenBreed.Wecs.Components.Rendering;
+using OpenBreed.Wecs.Entities;
+using OpenBreed.Wecs.Systems;
+using OpenBreed.Wecs.Systems.Animation;
+using OpenBreed.Wecs.Systems.Core;
+using OpenBreed.Wecs.Systems.Core.Commands;
+using OpenBreed.Wecs.Systems.Rendering;
+using OpenBreed.Wecs.Systems.Rendering.Events;
+using OpenBreed.Wecs.Worlds;
 using OpenTK;
 using OpenTK.Input;
 using System;
 using System.Linq;
-using OpenBreed.Wecs.Systems.Core;
-using OpenBreed.Input.Interface;
-using OpenBreed.Wecs;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Worlds;
-using OpenBreed.Wecs.Commands;
-using OpenBreed.Rendering.Interface.Managers;
-using OpenBreed.Wecs.Systems.Animation;
-using OpenBreed.Core.Managers;
-using OpenBreed.Wecs.Systems.Core.Commands;
 
 namespace OpenBreed.Sandbox.Worlds
 {
     public class TextWorldHelper
     {
         private readonly ICore core;
+        private readonly IEntityMan entityMan;
         private readonly IWorldMan worldMan;
         private readonly ISystemFactory systemFactory;
         private readonly IInputsMan inputsMan;
+        private readonly IFontMan fontMan;
         private readonly ICommandsMan commandsMan;
         private readonly IViewClient viewClient;
 
-        public TextWorldHelper(ICore core, IWorldMan worldMan, ISystemFactory systemFactory, IInputsMan inputsMan, ICommandsMan commandsMan, IViewClient viewClient)
+        public TextWorldHelper(ICore core, IEntityMan entityMan, IWorldMan worldMan, ISystemFactory systemFactory, IInputsMan inputsMan, IFontMan fontMan, ICommandsMan commandsMan, IViewClient viewClient)
         {
             this.core = core;
+            this.entityMan = entityMan;
             this.worldMan = worldMan;
             this.systemFactory = systemFactory;
             this.inputsMan = inputsMan;
+            this.fontMan = fontMan;
             this.commandsMan = commandsMan;
             this.viewClient = viewClient;
         }
@@ -91,7 +92,7 @@ namespace OpenBreed.Sandbox.Worlds
             //((Program)world.Core).KeyDown += (s, a) => ProcessKey(world, a);
             //((Program)world.Core).KeyPress += (s, a) => AddChar(world, a);
 
-            var cameraBuilder = new CameraBuilder(core);
+            var cameraBuilder = core.GetManager<CameraBuilder>();
             cameraBuilder.SetPosition(new Vector2(0, 0));
             cameraBuilder.SetRotation(0.0f);
             cameraBuilder.SetFov(viewClient.ClientRectangle.Width, viewClient.ClientRectangle.Height);
@@ -99,7 +100,7 @@ namespace OpenBreed.Sandbox.Worlds
             hudCamera.Tag = "HudCamera";
             commandsMan.Post(new AddEntityCommand(world.Id, hudCamera.Id));
 
-            var caret = TextHelper.CreateText(core, world);
+            var caret = TextHelper.CreateText(entityMan, fontMan, world);
 
             inputsMan.KeyDown += (s, a) => ProcessKey(caret, a);
             inputsMan.KeyPress += (s, a) => AddChar(caret, a);
@@ -110,7 +111,7 @@ namespace OpenBreed.Sandbox.Worlds
             commandsMan.Post(new AddEntityCommand(world.Id, caret.Id));
 
 
-            var hudViewport = core.GetManager<IEntityMan>().GetByTag(ScreenWorldHelper.TEXT_VIEWPORT).First();
+            var hudViewport = entityMan.GetByTag(ScreenWorldHelper.TEXT_VIEWPORT).First();
             hudViewport.Get<ViewportComponent>().CameraEntityId = hudCamera.Id;
 
             hudViewport.Subscribe<ViewportResizedEventArgs>((s, a) => UpdateCameraFov(hudCamera, a));

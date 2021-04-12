@@ -5,37 +5,22 @@ using OpenBreed.Common.Logging;
 using OpenBreed.Common.Tools;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
-using OpenBreed.Database.Interface;
 using OpenBreed.Fsm;
-using OpenBreed.Fsm.Xml;
 using OpenBreed.Input.Interface;
-using OpenBreed.Rendering.Interface;
 using OpenBreed.Rendering.Interface.Managers;
-using OpenBreed.Rendering.OpenGL;
 using OpenBreed.Scripting.Interface;
-using OpenBreed.Wecs.Components.Animation;
-using OpenBreed.Wecs.Components.Animation.Xml;
-using OpenBreed.Wecs.Components.Common;
-using OpenBreed.Wecs.Components.Common.Xml;
-using OpenBreed.Wecs.Components.Physics;
-using OpenBreed.Wecs.Components.Physics.Xml;
-using OpenBreed.Wecs.Components.Rendering;
-using OpenBreed.Wecs.Components.Rendering.Xml;
-using OpenBreed.Wecs.Components.Xml;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Entities.Xml;
-using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Worlds;
-using OpenTK;
 using System;
-using System.Drawing;
 
 namespace OpenBreed.Game
 {
     internal class Game : CoreBase
     {
-        private readonly IManagerCollection manCollection2;
         #region Private Fields
+
+        private readonly IManagerCollection manCollection2;
 
         private readonly IScriptMan scriptMan;
         private readonly LogConsolePrinter logConsolePrinter;
@@ -81,10 +66,6 @@ namespace OpenBreed.Game
 
         #endregion Public Properties
 
-        #region Internal Properties
-
-        #endregion Internal Properties
-
         #region Public Methods
 
         public override void Exit()
@@ -92,7 +73,24 @@ namespace OpenBreed.Game
             manCollection2.GetManager<IViewClient>().Exit();
         }
 
-        public override void Load()
+        public override void Run()
+        {
+            ExposeScriptingApi();
+
+            var viewClient = manCollection2.GetManager<IViewClient>();
+
+            viewClient.UpdateFrameEvent += (s, a) => OnUpdateFrame(a);
+            viewClient.LoadEvent += (s, a) => OnLoad();
+
+            //TextPresenterSystem.RegisterHandlers(Commands);
+            viewClient.Run();
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void OnLoad()
         {
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"D:\Projects\DB\Templates\Logo1.xml");
 
@@ -115,7 +113,7 @@ namespace OpenBreed.Game
             scriptMan.RunString(entryScript.Script);
         }
 
-        public void OnUpdateFrame(float dt)
+        private void OnUpdateFrame(float dt)
         {
             Commands.ExecuteEnqueued();
 
@@ -131,18 +129,6 @@ namespace OpenBreed.Game
             worlds.Update(dt);
             //Jobs.Update(dt);
         }
-
-        public override void Run()
-        {
-            ExposeScriptingApi();
-
-            //TextPresenterSystem.RegisterHandlers(Commands);
-            manCollection2.GetManager<IViewClient>().Run();
-        }
-
-        #endregion Public Methods
-
-        #region Private Methods
 
         private void ExposeScriptingApi()
         {

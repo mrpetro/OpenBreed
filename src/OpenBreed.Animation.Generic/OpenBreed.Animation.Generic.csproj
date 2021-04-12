@@ -64,6 +64,7 @@
     <Compile Include="AnimatorBuilder.cs" />
     <Compile Include="AnimMan.cs" />
     <Compile Include="Animator.cs" />
+    <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="Helpers\Animation.cs" />
     <Compile Include="Helpers\AnimationPart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

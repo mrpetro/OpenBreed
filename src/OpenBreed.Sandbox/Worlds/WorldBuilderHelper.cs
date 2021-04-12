@@ -211,7 +211,7 @@ namespace OpenBreed.Sandbox.Worlds
             var y = (int)args[1];
             var gfxCode = (int)args[2];
 
-            var blockBuilder = new WorldBlockBuilder(core);
+            var blockBuilder = core.GetManager<WorldBlockBuilder>();
             blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
             blockBuilder.HasBody = false;
             blockBuilder.SetPosition(new Vector2(x * 16, y * 16));
@@ -228,7 +228,7 @@ namespace OpenBreed.Sandbox.Worlds
             var y = (int)args[1];
             var gfxCode = (int)args[2];
 
-            var blockBuilder = new WorldBlockBuilder(core);
+            var blockBuilder = core.GetManager<WorldBlockBuilder>();
             blockBuilder.SetTileAtlas("Atlases/Tiles/16/Test");
             blockBuilder.HasBody = true;
             blockBuilder.SetPosition(new Vector2(x * 16, y * 16));

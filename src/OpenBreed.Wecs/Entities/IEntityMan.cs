@@ -17,7 +17,7 @@ namespace OpenBreed.Wecs.Entities
 
         Entity GetById(int id);
 
-        Entity Create(ICore core, List<IEntityComponent> initialComponents = null);
+        Entity Create(List<IEntityComponent> initialComponents = null);
 
         void Destroy(Entity entity);
     }
