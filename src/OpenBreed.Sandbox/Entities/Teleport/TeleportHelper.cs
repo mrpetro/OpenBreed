@@ -72,7 +72,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
         public static Entity AddTeleportEntry(ICore core, World world, int x, int y, int pairId)
         {
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Teleport\TeleportEntry.xml");
-            var teleportEntry = core.GetManager<IEntityFactory>().Create(core, entityTemplate);
+            var teleportEntry = core.GetManager<IEntityFactory>().Create(entityTemplate);
 
             teleportEntry.Tag = new TeleportPair { Id = pairId };
 
@@ -102,7 +102,7 @@ namespace OpenBreed.Sandbox.Entities.Teleport
         public static Entity AddTeleportExit(ICore core, World world, int x, int y, int pairId)
         {
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Teleport\TeleportExit.xml");
-            var teleportExit = core.GetManager<IEntityFactory>().Create(core, entityTemplate);
+            var teleportExit = core.GetManager<IEntityFactory>().Create(entityTemplate);
             //var teleportExit = core.GetManager<IEntityMan>().CreateFromTemplate("TeleportExit");
 
             teleportExit.Tag = new TeleportPair { Id = pairId };

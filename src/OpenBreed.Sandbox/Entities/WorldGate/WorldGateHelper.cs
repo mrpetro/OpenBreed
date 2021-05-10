@@ -27,6 +27,7 @@ using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Events;
 using OpenBreed.Physics.Interface.Managers;
 using OpenBreed.Core.Managers;
+using OpenBreed.Sandbox.Entities.Viewport;
 
 namespace OpenBreed.Sandbox.Entities.WorldGate
 {
@@ -42,21 +43,27 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
     public class WorldGateHelper
     {
-        public WorldGateHelper(ICore core)
+        public WorldGateHelper(ICore core, IWorldMan worldMan, IEntityMan entityMan, ViewportCreator viewportCreator)
         {
             this.core = core;
+            this.worldMan = worldMan;
+            this.entityMan = entityMan;
+            this.viewportCreator = viewportCreator;
         }
 
         public const string SPRITE_WORLD_ENTRY = "Atlases/Sprites/World/Entry";
         public const string SPRITE_WORLD_EXIT = "Atlases/Sprites/World/Exit";
         private readonly ICore core;
+        private readonly IWorldMan worldMan;
+        private readonly IEntityMan entityMan;
+        private readonly ViewportCreator viewportCreator;
 
         #region Public Methods
 
         public Entity AddWorldExit(World world, int x, int y, string worldName, int entryId)
         {
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\WorldGate\WorldGateExit.xml");
-            var teleportEntity = core.GetManager<IEntityFactory>().Create(core, entityTemplate);
+            var teleportEntity = core.GetManager<IEntityFactory>().Create(entityTemplate);
 
 
             teleportEntity.Tag = (worldName, entryId);
@@ -129,7 +136,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
         public Entity AddWorldEntry(World world, int x, int y, int entryId)
         {
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\WorldGate\WorldGateEntry.xml");
-            var teleportEntity = core.GetManager<IEntityFactory>().Create(core, entityTemplate);
+            var teleportEntity = core.GetManager<IEntityFactory>().Create(entityTemplate);
 
             teleportEntity.Tag = new WorldGatePair() { Id = entryId };
             teleportEntity.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
@@ -195,7 +202,7 @@ namespace OpenBreed.Sandbox.Entities.WorldGate
 
             if (world == null)
             {
-                using (var reader = new TxtFileWorldReader(core, $".\\Content\\Maps\\{worldName}.txt"))
+                using (var reader = new TxtFileWorldReader(core, worldMan, entityMan, viewportCreator, $".\\Content\\Maps\\{worldName}.txt"))
                     world = reader.GetWorld();
             }
         }

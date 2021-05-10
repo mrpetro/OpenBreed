@@ -48,17 +48,6 @@ namespace OpenBreed.Sandbox.Worlds
 
         #region Public Methods
 
-        public void Create()
-        {
-
-
-            var builder = worldMan.Create().SetName("TEXT");
-
-            AddSystems(builder);
-
-            Setup(builder.Build(core));
-        }
-
         #endregion Public Methods
 
         #region Private Methods

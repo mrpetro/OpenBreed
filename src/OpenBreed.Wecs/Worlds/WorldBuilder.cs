@@ -6,6 +6,11 @@ using System.Collections.Generic;
 
 namespace OpenBreed.Wecs.Worlds
 {
+    public interface IBuilderModule
+    {
+        void Build(int code, World world, object[] args);
+    }
+
     public class WorldBuilder
     {
         #region Public Fields
@@ -28,6 +33,9 @@ namespace OpenBreed.Wecs.Worlds
 
         private readonly ILogger logger;
         private Dictionary<int, Action<ICore, World, int, object[]>> codesToActions = new Dictionary<int, Action<ICore, World, int, object[]>>();
+
+        private Dictionary<int, IBuilderModule> codesToModules = new Dictionary<int, IBuilderModule>();
+
 
         private List<Tuple<int, object[]>> actions = new List<Tuple<int, object[]>>();
 
@@ -73,6 +81,11 @@ namespace OpenBreed.Wecs.Worlds
             return this;
         }
 
+        public void RegisterCodeModule(int code, IBuilderModule module)
+        {
+            codesToModules.Add(code, module);
+        }
+
         public void RegisterCode(int code, Action<ICore, World, int, object[]> action)
         {
             codesToActions.Add(code, action);
@@ -97,6 +110,12 @@ namespace OpenBreed.Wecs.Worlds
         {
             foreach (var action in actions)
             {
+                if (codesToModules.TryGetValue(action.Item1, out IBuilderModule module))
+                {
+                    module.Build(action.Item1, world, action.Item2);
+                    continue;
+                }
+
                 Action<ICore, World, int, object[]> actionHandler = null;
 
                 if (codesToActions.TryGetValue(action.Item1, out actionHandler))

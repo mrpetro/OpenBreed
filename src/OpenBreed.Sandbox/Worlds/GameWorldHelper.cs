@@ -39,12 +39,12 @@ using OpenBreed.Wecs.Systems.Gui;
 using OpenBreed.Wecs.Components.Gui;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Common;
+using OpenBreed.Sandbox.Entities.Viewport;
 
 namespace OpenBreed.Sandbox.Worlds
 {
     public class GameWorldHelper
     {
-        private readonly ICore core;
         private readonly IManagerCollection managerCollection;
         private readonly IPlayersMan playersMan;
         private readonly ICommandsMan commandsMan;
@@ -53,10 +53,11 @@ namespace OpenBreed.Sandbox.Worlds
         private readonly IWorldMan worldMan;
         private readonly IRenderingMan renderingMan;
         private readonly IEventsMan eventsMan;
+        private readonly ILogger logger;
+        private readonly ViewportCreator viewportCreator;
 
-        public GameWorldHelper(ICore core, IManagerCollection managerCollection, IPlayersMan playersMan, ICommandsMan commandsMan, IEntityMan entityMan, ISystemFactory systemFactory, IWorldMan worldMan, IRenderingMan renderingMan, IEventsMan eventsMan)
+        public GameWorldHelper(IManagerCollection managerCollection, IPlayersMan playersMan, ICommandsMan commandsMan, IEntityMan entityMan, ISystemFactory systemFactory, IWorldMan worldMan, IRenderingMan renderingMan, IEventsMan eventsMan, ILogger logger, ViewportCreator viewportCreator)
         {
-            this.core = core;
             this.managerCollection = managerCollection;
             this.playersMan = playersMan;
             this.commandsMan = commandsMan;
@@ -65,6 +66,8 @@ namespace OpenBreed.Sandbox.Worlds
             this.worldMan = worldMan;
             this.renderingMan = renderingMan;
             this.eventsMan = eventsMan;
+            this.logger = logger;
+            this.viewportCreator = viewportCreator;
         }
 
         public void AddSystems(WorldBuilder builder)
@@ -105,15 +108,7 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem(systemFactory.Create<ViewportSystem>());
         }
 
-        public World CreateGameWorld(string worldName)
-        {
-            var builder = worldMan.Create().SetName(worldName);
-            AddSystems(builder);
-
-            return builder.Build(core);
-        }
-
-        internal void Create()
+        internal void Create(ICore core)
         {
             World gameWorld = null;
 
@@ -146,7 +141,7 @@ namespace OpenBreed.Sandbox.Worlds
 
             gameCamera.Add(animCmpBuilder.Build());
 
-            using (var reader = new TxtFileWorldReader(core, ".\\Content\\Maps\\hub.txt"))
+            using (var reader = new TxtFileWorldReader(core, worldMan, entityMan, viewportCreator, ".\\Content\\Maps\\hub.txt"))
                 gameWorld = reader.GetWorld();
 
 
@@ -167,7 +162,7 @@ namespace OpenBreed.Sandbox.Worlds
             eventsMan.Subscribe<EntityAddedEventArgs>(worldMan, (s,a) => OnEntityAdded(s,a));
             eventsMan.Subscribe<EntityRemovedEventArgs>(worldMan, (s,a) => OnEntityRemoved(s,a));
 
-            core.Commands.Post(new AddEntityCommand(gameWorld.Id, actor.Id));
+            commandsMan.Post(new AddEntityCommand(gameWorld.Id, actor.Id));
             //gameWorld.AddEntity(actor);
 
             var gameViewport = entityMan.GetByTag(ScreenWorldHelper.GAME_VIEWPORT).First();
@@ -209,13 +204,13 @@ namespace OpenBreed.Sandbox.Worlds
         private void OnEntityAdded(object sender, EntityAddedEventArgs a)
         {
             var world = worldMan.GetById(a.WorldId);
-            core.Logging.Verbose($"Entity '{a.EntityId}' added to world '{world.Name}'.");
+            logger.Verbose($"Entity '{a.EntityId}' added to world '{world.Name}'.");
         }
 
         private void OnEntityRemoved(object sender, EntityRemovedEventArgs a)
         {
             var world = worldMan.GetById(a.WorldId);
-            core.Logging.Verbose($"Entity '{a.EntityId}' removed from world '{world.Name}'.");
+            logger.Verbose($"Entity '{a.EntityId}' removed from world '{world.Name}'.");
         }
     }
 }

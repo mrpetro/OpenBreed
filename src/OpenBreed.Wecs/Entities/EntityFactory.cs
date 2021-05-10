@@ -12,7 +12,7 @@ namespace OpenBreed.Wecs.Entities
 
         void RegisterComponentFactory<T>(IComponentFactory factory) where T : IComponentTemplate;
 
-        Entity Create(ICore core, IEntityTemplate template);
+        Entity Create(IEntityTemplate template);
 
         #endregion Public Methods
     }
@@ -45,7 +45,7 @@ namespace OpenBreed.Wecs.Entities
             componentFactories.Add(typeof(T), factory);
         }
 
-        public Entity Create(ICore core, IEntityTemplate template)
+        public Entity Create(IEntityTemplate template)
         {
             var components = new List<IEntityComponent>();
 

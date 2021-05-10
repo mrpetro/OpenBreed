@@ -59,7 +59,7 @@ namespace OpenBreed.Sandbox.Worlds
             builder.AddSystem(systemFactory.Create<TextSystem>());
         }
 
-        public void Create()
+        public void Create(ICore core)
         {
             var builder = worldMan.Create().SetName("HUD");
 

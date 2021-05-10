@@ -32,7 +32,7 @@ namespace OpenBreed.Game
             var viewport = entityMan.Create();
             viewport.Tag = name;
 
-            var vpcBuilder = ViewportComponentBuilderEx.New();
+            var vpcBuilder = ViewportComponentBuilder.New();
             vpcBuilder.SetSize(width, height);
             vpcBuilder.SetDrawBorderFlag(true);
             vpcBuilder.SetDrawBackgroundFlag(drawBackground);

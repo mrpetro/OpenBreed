@@ -20,6 +20,7 @@ using OpenBreed.Input.Generic.Extensions;
 using OpenBreed.Input.Interface;
 using OpenBreed.Physics.Generic;
 using OpenBreed.Physics.Generic.Extensions;
+using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Rendering.OpenGL;
 using OpenBreed.Rendering.OpenGL.Extensions;
 using OpenBreed.Scripting.Interface;
@@ -80,6 +81,14 @@ namespace OpenBreed.Game
             manCollection.SetupRenderingComponents();
             manCollection.SetupAnimationComponents();
             manCollection.SetupFsmComponents();
+
+
+            //manCollection.AddSingleton<ScreenWorldHelper>(() => new ScreenWorldHelper(core, manCollection.GetManager<ICommandsMan>(),
+            //                                                                                manCollection.GetManager<IRenderingMan>(),
+            //                                                                                manCollection.GetManager<IWorldMan>(),
+            //                                                                                manCollection.GetManager<IEventsMan>(),
+            //                                                                                manCollection.GetManager<ViewportCreator>(),
+            //                                                                                manCollection.GetManager<IViewClient>()));
         }
 
         public ICore CreateGame(string gameDbFilePath, string gameFolderPath)

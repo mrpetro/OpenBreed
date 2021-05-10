@@ -92,17 +92,17 @@ namespace OpenBreed.Game
 
         private void OnLoad()
         {
-            var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"D:\Projects\DB\Templates\Logo1.xml");
+            //var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"D:\Projects\DB\Templates\Logo1.xml");
 
-            var entity = entityFactory.Create(this, entityTemplate);
+            //var entity = entityFactory.Create(this, entityTemplate);
 
             var screenWorld = GetManager<ScreenWorldHelper>();
 
             renderingMan.ScreenWorld = screenWorld.CreateWorld();
 
-            var gameWorldHelper = GetManager<GameWorldHelper>();
+            //var gameWorldHelper = GetManager<GameWorldHelper>();
 
-            gameWorldHelper.Create();
+            //gameWorldHelper.Create();
 
             var entryScript = manCollection2.GetManager<ScriptsDataProvider>().GetScript("Scripts.Entry.lua");
 

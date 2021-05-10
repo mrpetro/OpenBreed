@@ -64,7 +64,7 @@ namespace OpenBreed.Sandbox
             var arial12 = core.GetManager<IFontMan>().Create("ARIAL", 10);
 
             var entityTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\CrazyMover\CrazyMover.xml");
-            var crazyMover = core.GetManager<IEntityFactory>().Create(core, entityTemplate);
+            var crazyMover = core.GetManager<IEntityFactory>().Create(entityTemplate);
 
 
 

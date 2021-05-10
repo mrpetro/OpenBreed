@@ -128,7 +128,7 @@ namespace OpenBreed.Sandbox.Entities.Door
         public void AddVerticalDoor(World world, int x, int y)
         {
             var doorVerticalTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Door\DoorVertical.xml");
-            var door = core.GetManager<IEntityFactory>().Create(core, doorVerticalTemplate);
+            var door = core.GetManager<IEntityFactory>().Create(doorVerticalTemplate);
 
             door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
             door.Add(new CollisionComponent());
@@ -139,7 +139,7 @@ namespace OpenBreed.Sandbox.Entities.Door
         public void AddHorizontalDoor(World world, int x, int y)
         {
             var doorHorizontalTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Door\DoorHorizontal.xml");
-            var door = core.GetManager<IEntityFactory>().Create(core, doorHorizontalTemplate);
+            var door = core.GetManager<IEntityFactory>().Create(doorHorizontalTemplate);
 
             door.Get<PositionComponent>().Value = new Vector2(16 * x, 16 * y);
             door.Add(new CollisionComponent());

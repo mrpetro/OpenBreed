@@ -5,7 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Core;
+using OpenBreed.Sandbox.Entities.Viewport;
+using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Wecs;
+using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Worlds;
 
 namespace OpenBreed.Sandbox.Worlds
@@ -14,10 +17,16 @@ namespace OpenBreed.Sandbox.Worlds
     {
         public ICore Core { get; }
         private StreamReader txtReader;
+        private readonly IWorldMan worldMan;
+        private readonly IEntityMan entityMan;
+        private readonly ViewportCreator viewportCreator;
 
-        internal TxtFileWorldReader(ICore core, string filePath)
+        internal TxtFileWorldReader(ICore core, IWorldMan worldMan , IEntityMan entityMan, ViewportCreator viewportCreator, string filePath)
         {
             Core = core;
+            this.worldMan = worldMan;
+            this.entityMan = entityMan;
+            this.viewportCreator = viewportCreator;
             txtReader = File.OpenText(filePath);
         }
 
@@ -68,10 +77,10 @@ namespace OpenBreed.Sandbox.Worlds
 
         public World GetWorld()
         {
-            var worldBuilder = Core.GetManager<IWorldMan>().Create();
+            var worldBuilder = worldMan.Create();
             var gameWorldHelper = Core.GetManager<GameWorldHelper>();
 
-            var helper = new WorldBuilderHelper(worldBuilder);
+            var helper = new WorldBuilderHelper(worldBuilder, entityMan, viewportCreator);
 
             helper.RegisterHandlers();
 

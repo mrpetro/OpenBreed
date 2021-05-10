@@ -1,6 +1,7 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Managers;
 using OpenBreed.Rendering.Interface.Managers;
+using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Wecs.Commands;
 using OpenBreed.Wecs.Components.Rendering;
@@ -73,12 +74,12 @@ namespace OpenBreed.Sandbox.Worlds
 
             var world = builder.Build(core);
 
-            var gameViewport = viewportCreator.CreateViewportEntity(GAME_VIEWPORT, 32, 32, viewClient.ClientRectangle.Width - 64, viewClient.ClientRectangle.Height - 64, true, true);
+            var gameViewport = viewportCreator.CreateViewportEntity(GAME_VIEWPORT, 32, 32, viewClient.ClientRectangle.Width - 64, viewClient.ClientRectangle.Height - 64, GAME_VIEWPORT);
             //gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
             //gameViewport.GetComponent<ViewportComponent>().ScalingType = ViewportScalingType.FitHeightPreserveAspectRatio;
             gameViewport.Get<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
-            var hudViewport = viewportCreator.CreateViewportEntity(HUD_VIEWPORT, 0, 0, viewClient.ClientRectangle.Width, viewClient.ClientRectangle.Height, false, true);
-            var textViewport = viewportCreator.CreateViewportEntity(TEXT_VIEWPORT, 0, 0, viewClient.ClientRectangle.Width, viewClient.ClientRectangle.Height, false, true);
+            var hudViewport = viewportCreator.CreateViewportEntity(HUD_VIEWPORT, 0, 0, viewClient.ClientRectangle.Width, viewClient.ClientRectangle.Height, HUD_VIEWPORT);
+            var textViewport = viewportCreator.CreateViewportEntity(TEXT_VIEWPORT, 0, 0, viewClient.ClientRectangle.Width, viewClient.ClientRectangle.Height, TEXT_VIEWPORT);
 
             eventsMan.Subscribe<ClientResizedEventArgs>(renderingMan, (s, a) => ResizeGameViewport(gameViewport, a));
             eventsMan.Subscribe<ClientResizedEventArgs>(renderingMan, (s, a) => ResizeHudViewport(hudViewport, a));

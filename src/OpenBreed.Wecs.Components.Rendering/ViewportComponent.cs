@@ -1,4 +1,4 @@
-﻿using OpenBreed.Core;
+﻿using OpenBreed.Common;
 using OpenTK.Graphics;
 
 namespace OpenBreed.Wecs.Components.Rendering
@@ -15,6 +15,65 @@ namespace OpenBreed.Wecs.Components.Rendering
         FitBothIgnoreAspectRatio
     }
 
+    public interface IViewportComponentTemplate : IComponentTemplate
+    {
+        #region Public Properties
+
+        float Width { get; set; }
+
+        float Height { get; set; }
+
+        bool DrawBorder { get; set; }
+
+        float Order { get; set; }
+
+        bool Clipping { get; set; }
+
+        Color4 BackgroundColor { get; set; }
+
+        bool DrawBackgroud { get; set; }
+
+        ViewportScalingType ScalingType { get; set; }
+
+        #endregion Public Properties
+
+        //public int CameraEntityId { get; set; }
+    }
+
+    public sealed class ViewportComponentFactory : ComponentFactoryBase<IViewportComponentTemplate>
+    {
+        #region Private Fields
+
+        private readonly IManagerCollection managerCollection;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public ViewportComponentFactory(IManagerCollection managerCollection)
+        {
+            this.managerCollection = managerCollection;
+        }
+
+        #endregion Public Constructors
+
+        #region Protected Methods
+
+        protected override IEntityComponent Create(IViewportComponentTemplate template)
+        {
+            var builder = managerCollection.GetManager<ViewportComponentBuilder>();
+            builder.SetBackgroundColor(template.BackgroundColor);
+            builder.SetClippingFlag(template.Clipping);
+            builder.SetDrawBackgroundFlag(template.DrawBackgroud);
+            builder.SetDrawBorderFlag(template.DrawBorder);
+            builder.SetSize(template.Width, template.Height);
+
+            return builder.Build();
+        }
+
+        #endregion Protected Methods
+    }
+
     /// <summary>
     /// Viewport component as display for cameras
     /// Related systems:
@@ -28,7 +87,7 @@ namespace OpenBreed.Wecs.Components.Rendering
         /// Constructor for builder
         /// </summary>
         /// <param name="builder"></param>
-        internal ViewportComponent(ViewportComponentBuilderEx builder)
+        internal ViewportComponent(ViewportComponentBuilder builder)
         {
             Width = builder.Width;
             Height = builder.Height;
@@ -96,7 +155,7 @@ namespace OpenBreed.Wecs.Components.Rendering
         #endregion Public Properties
     }
 
-    public class ViewportComponentBuilderEx
+    public class ViewportComponentBuilder
     {
         #region Internal Fields
 
@@ -116,19 +175,19 @@ namespace OpenBreed.Wecs.Components.Rendering
 
         #endregion Internal Fields
 
-        #region Private Constructors
+        #region Public Constructors
 
-        private ViewportComponentBuilderEx()
+        public ViewportComponentBuilder()
         {
         }
 
-        #endregion Private Constructors
+        #endregion Public Constructors
 
         #region Public Methods
 
-        public static ViewportComponentBuilderEx New()
+        public static ViewportComponentBuilder New()
         {
-            return new ViewportComponentBuilderEx();
+            return new ViewportComponentBuilder();
         }
 
         public ViewportComponent Build()

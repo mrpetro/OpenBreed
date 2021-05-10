@@ -3,6 +3,7 @@ using OpenBreed.Sandbox.Entities.Builders;
 using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.Teleport;
 using OpenBreed.Sandbox.Entities.Turret;
+using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Entities.WorldGate;
 using OpenBreed.Sandbox.Helpers;
 using OpenBreed.Wecs.Commands;
@@ -28,7 +29,8 @@ namespace OpenBreed.Sandbox.Worlds
         #region Private Fields
 
         private WorldBuilder builder;
-
+        private readonly IEntityMan entityMan;
+        private readonly ViewportCreator viewportCreator;
         private Dictionary<int, Tuple<string, int>> exits = new Dictionary<int, Tuple<string, int>>();
 
         private Dictionary<int, (int, int, string)> viewports = new Dictionary<int, (int, int, string)>();
@@ -38,9 +40,11 @@ namespace OpenBreed.Sandbox.Worlds
 
         #region Public Constructors
 
-        public WorldBuilderHelper(WorldBuilder builder)
+        public WorldBuilderHelper(WorldBuilder builder, IEntityMan entityMan, ViewportCreator viewportCreator)
         {
             this.builder = builder;
+            this.entityMan = entityMan;
+            this.viewportCreator = viewportCreator;
         }
 
         #endregion Public Constructors
@@ -70,6 +74,8 @@ namespace OpenBreed.Sandbox.Worlds
             builder.RegisterCode('A', AddAnimTest);
             builder.RegisterCode(' ', AddAirCell);
 
+            //builder.RegisterCodeModule(' ', new AirBuilderModule(commandsMan, worldBlockBuilder);
+
             builder.RegisterCode(PLAYER_SPAWN_POINT, AddPlayer);
         }
 
@@ -86,11 +92,9 @@ namespace OpenBreed.Sandbox.Worlds
             if (!viewports.TryGetValue(pairCode, out (int Width, int Height, string CameraName ) viewportData))
                 return;
 
-            var viewportCreator = core.GetManager<ViewportCreator>();
+            var vp = viewportCreator.CreateViewportEntity($"TV{pairCode}" , x * 16, y * 16, viewportData.Width, viewportData.Height, ScreenWorldHelper.GAME_VIEWPORT);
 
-            var vp = viewportCreator.CreateViewportEntity($"TV{pairCode}" , x * 16, y * 16, viewportData.Width, viewportData.Height, true);
-
-            vp.Get<ViewportComponent>().CameraEntityId = core.GetManager<IEntityMan>().GetByTag(viewportData.CameraName).FirstOrDefault().Id;
+            vp.Get<ViewportComponent>().CameraEntityId = entityMan.GetByTag(viewportData.CameraName).FirstOrDefault().Id;
             vp.Get<ViewportComponent>().ScalingType = ViewportScalingType.FitBothPreserveAspectRatio;
             //GameWorldHelper.SetPreserveAspectRatio(vp);
             core.Commands.Post(new AddEntityCommand(world.Id, vp.Id));
@@ -169,7 +173,7 @@ namespace OpenBreed.Sandbox.Worlds
         {
         }
 
-        private static int ToTileId(int gfxCode)
+        public static int ToTileId(int gfxCode)
         {
             switch (gfxCode)
             {
