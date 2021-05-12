@@ -52,7 +52,7 @@ namespace OpenBreed.Editor.VM
 
         private Type GetEditorType(IRepository repository)
         {
-            var entryType = repository.GetType().GetInterfaces().FirstOrDefault();
+            var entryType = repository.GetType().GetInterfaces().FirstOrDefault(item => item.IsGenericType && item.GetInterfaces().Contains(typeof(IRepository)));
 
             foreach (var item in creators)
             {
