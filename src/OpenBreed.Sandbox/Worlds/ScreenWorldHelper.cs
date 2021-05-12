@@ -1,5 +1,6 @@
 ﻿using OpenBreed.Core;
 using OpenBreed.Core.Managers;
+using OpenBreed.Rendering.Interface.Events;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Sandbox.Entities.Viewport;
 using OpenBreed.Sandbox.Helpers;
@@ -81,9 +82,9 @@ namespace OpenBreed.Sandbox.Worlds
             var hudViewport = viewportCreator.CreateViewportEntity(HUD_VIEWPORT, 0, 0, viewClient.ClientRectangle.Width, viewClient.ClientRectangle.Height, HUD_VIEWPORT);
             var textViewport = viewportCreator.CreateViewportEntity(TEXT_VIEWPORT, 0, 0, viewClient.ClientRectangle.Width, viewClient.ClientRectangle.Height, TEXT_VIEWPORT);
 
-            eventsMan.Subscribe<ClientResizedEventArgs>(renderingMan, (s, a) => ResizeGameViewport(gameViewport, a));
-            eventsMan.Subscribe<ClientResizedEventArgs>(renderingMan, (s, a) => ResizeHudViewport(hudViewport, a));
-            eventsMan.Subscribe<ClientResizedEventArgs>(renderingMan, (s, a) => ResizeTextViewport(hudViewport, a));
+            renderingMan.ClientResized += (s, a) => ResizeGameViewport(gameViewport, a);
+            renderingMan.ClientResized += (s, a) => ResizeHudViewport(hudViewport, a);
+            renderingMan.ClientResized += (s, a) => ResizeTextViewport(hudViewport, a);
 
             commandsMan.Post(new AddEntityCommand(world.Id, gameViewport.Id));
             commandsMan.Post(new AddEntityCommand(world.Id, hudViewport.Id));

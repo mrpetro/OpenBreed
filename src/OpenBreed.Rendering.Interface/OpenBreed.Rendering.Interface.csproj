@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Events\ClientResizedEventArgs.cs" />
     <Compile Include="IFont.cs" />
     <Compile Include="IPrimitiveRenderer.cs" />
     <Compile Include="Managers\IFontMan.cs" />

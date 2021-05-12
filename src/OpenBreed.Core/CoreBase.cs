@@ -9,7 +9,7 @@ namespace OpenBreed.Core
     {
         #region Private Fields
 
-        private readonly IManagerCollection manCollection;
+        protected readonly IManagerCollection manCollection;
 
         #endregion Private Fields
 

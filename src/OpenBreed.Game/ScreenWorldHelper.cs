@@ -21,6 +21,7 @@ using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Common;
+using OpenBreed.Rendering.Interface.Events;
 
 namespace OpenBreed.Game
 {
@@ -46,19 +47,12 @@ namespace OpenBreed.Game
             this.viewClient = viewClient;
         }
 
-        public void AddSystems(WorldBuilder builder)
-        {
-            //Video
-            builder.AddSystem(systemFactory.Create<ViewportSystem>());
-            //builder.AddSystem(core.CreateSpriteSystem().Build());
-            //builder.AddSystem(core.CreateWireframeSystem().Build());
-            builder.AddSystem(systemFactory.Create<TextSystem>());
-        }
-
         public World CreateWorld()
         {
             var builder = worldMan.Create().SetName("ScreenWorld");
-            AddSystems(builder);
+
+            builder.AddSystem(systemFactory.Create<ViewportSystem>());
+            builder.AddSystem(systemFactory.Create<TextSystem>());
 
             var world = builder.Build(core);
 
@@ -69,7 +63,8 @@ namespace OpenBreed.Game
 
             var renderingMan = core.GetManager<IRenderingMan>();
             var eventsMan = core.GetManager<IEventsMan>();
-            eventsMan.Subscribe<ClientResizedEventArgs>(renderingMan, (s, a) => ResizeGameViewport(gameViewport, a));
+
+            renderingMan.ClientResized += (s, a) => ResizeGameViewport(gameViewport, a);
 
             FpsCounterHelper.AddToWorld(core, world);
 
@@ -87,16 +82,6 @@ namespace OpenBreed.Game
         private void ResizeGameViewport(Entity viewport, ClientResizedEventArgs args)
         {
             commandsMan.Post(new ViewportResizeCommand(viewport.Id, args.Width - 64, args.Height - 64));
-        }
-
-        private void ResizeHudViewport(Entity viewport, ClientResizedEventArgs args)
-        {
-            commandsMan.Post(new ViewportResizeCommand(viewport.Id, args.Width, args.Height));
-        }
-
-        private void ResizeTextViewport(Entity viewport, ClientResizedEventArgs args)
-        {
-            commandsMan.Post(new ViewportResizeCommand(viewport.Id, args.Width, args.Height));
         }
     }
 }

@@ -376,15 +376,13 @@ namespace OpenBreed.Sandbox
             projectileHelper.CreateAnimations();
             Misc.CreateAnimations(this);
 
-
-            doorHelper.CreateFsm();
-            projectileHelper.CreateFsm();
-            ButtonHelper.CreateFsm(this);
-            ActorAttackingHelper.CreateFsm(this);
-            ActorMovementHelper.CreateFsm(this);
-            //ActorRotationHelper.CreateFsm(this);
-            TurretHelper.CreateRotationFsm(this);
-
+            manCollection.SetupButtonStates();
+            manCollection.SetupProjectileStates();
+            manCollection.SetupDoorStates();
+            manCollection.SetupActorAttackingStates();
+            manCollection.SetupActorMovementStates();
+            //manCollection.SetupActorRotationStates();
+            manCollection.CreateTurretRotationStates();
 
             var screenWorldHelper = GetManager<ScreenWorldHelper>();
 

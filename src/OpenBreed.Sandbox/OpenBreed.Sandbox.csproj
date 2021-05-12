@@ -87,9 +87,7 @@
     <None Include="Content\Graphics\TurretSpriteSet.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Compile Include="Entities\Actor\ActorAttackingHelper.cs" />
-    <Compile Include="Entities\Actor\ActorMovementHelper.cs" />
-    <Compile Include="Entities\Actor\ActorRotationHelper.cs" />
+    <Compile Include="Entities\Actor\ManagerCollectionExtensions.cs" />
     <Compile Include="Entities\Actor\States\Attacking\AttackingState.cs" />
     <Compile Include="Entities\Actor\States\Attacking\IdleState.cs" />
     <Compile Include="Entities\Actor\States\Attacking\CooldownState.cs" />
@@ -105,6 +103,7 @@
     <Compile Include="Entities\Builders\WorldBlockBuilder.cs" />
     <Compile Include="Entities\Button\ButtonHelper.cs" />
     <Compile Include="Entities\Button\ButtonState.cs" />
+    <Compile Include="Entities\Button\ManagerCollectionExtensions.cs" />
     <Compile Include="Entities\Button\States\PressedState.cs" />
     <Compile Include="Entities\Button\States\IdleState.cs" />
     <Compile Include="Entities\Camera\CameraBuilder.cs" />
@@ -112,6 +111,7 @@
     <Compile Include="Entities\ColliderTypes.cs" />
     <Compile Include="Entities\CursorCoords\CursorCoordsHelper.cs" />
     <Compile Include="Entities\Door\DoorHelper.cs" />
+    <Compile Include="Entities\Door\ManagerCollectionExtensions.cs" />
     <Compile Include="Entities\Door\States\FunctioningState.cs" />
     <Compile Include="Entities\Door\States\OpenedAwaitClose.cs" />
     <Compile Include="Entities\Door\States\OpenedState.cs" />
@@ -123,11 +123,13 @@
     <Compile Include="Entities\Pickable\States\FunctioningState.cs" />
     <Compile Include="Entities\Pickable\States\LyingState.cs" />
     <Compile Include="Entities\Pickable\States\PickingState.cs" />
+    <Compile Include="Entities\Projectile\ManagerCollectionExtensions.cs" />
     <Compile Include="Entities\Projectile\States\AttackingState.cs" />
     <Compile Include="Entities\Teleport\TeleportHelper.cs" />
     <Compile Include="Entities\Projectile\ProjectileHelper.cs" />
     <Compile Include="Entities\Projectile\States\FiredState.cs" />
     <Compile Include="Entities\Text\TextHelper.cs" />
+    <Compile Include="Entities\Turret\ManagerCollectionExtensions.cs" />
     <Compile Include="Entities\Turret\TurretHelper.cs" />
     <Compile Include="Entities\WorldGate\WorldGateHelper.cs" />
     <Compile Include="Extensions\SystemCollectionExtensions.cs" />

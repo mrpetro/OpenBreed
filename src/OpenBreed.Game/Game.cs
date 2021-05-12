@@ -24,14 +24,9 @@ namespace OpenBreed.Game
 
         private readonly IScriptMan scriptMan;
         private readonly LogConsolePrinter logConsolePrinter;
-        private readonly IVariableMan variables;
-        private readonly IModelsProvider modelsProvider;
         private readonly IRenderingMan renderingMan;
-        private readonly IEntityMan entities;
         private readonly IInputsMan inputs;
-        private readonly IAnimMan animations;
         private readonly IWorldMan worlds;
-        private readonly IEntityFactory entityFactory;
 
         private readonly IPlayersMan players;
 
@@ -43,14 +38,9 @@ namespace OpenBreed.Game
         {
             this.manCollection2 = manCollection;
             this.scriptMan = manCollection.GetManager<IScriptMan>();
-            this.variables = manCollection.GetManager<IVariableMan>();
-            this.entities = manCollection.GetManager<IEntityMan>();
             this.inputs = manCollection.GetManager<IInputsMan>();
-            this.animations = manCollection.GetManager<IAnimMan>();
-            this.entityFactory = manCollection.GetManager<IEntityFactory>();
             this.worlds = manCollection.GetManager<IWorldMan>();
             this.players = manCollection.GetManager<IPlayersMan>();
-            this.modelsProvider = manCollection.GetManager<IModelsProvider>();
             this.renderingMan = manCollection.GetManager<IRenderingMan>();
 
             logConsolePrinter = new LogConsolePrinter(Logging);

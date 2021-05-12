@@ -29,14 +29,6 @@ namespace OpenBreed.Sandbox.Entities.Viewport
 
         #region Public Methods
 
-        public Entity CreateSampleViewport()
-        {
-            var viewportTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>(@"Entities\Viewport\SampleViewport.xml");
-            var entity = entityFactory.Create(viewportTemplate);
-
-            return entity;
-        }
-
         public Entity CreateViewportEntity(string name, float x, float y, float width, float height, string templateName)
         {
             var viewportTemplate = XmlHelper.RestoreFromXml<XmlEntityTemplate>($@"Entities\Viewport\{templateName}.xml");

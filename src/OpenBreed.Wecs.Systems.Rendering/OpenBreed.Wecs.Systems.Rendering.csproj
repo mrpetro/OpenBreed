@@ -74,7 +74,6 @@
     <Compile Include="Commands\TextSetCommand.cs" />
     <Compile Include="Commands\TileSetCommand.cs" />
     <Compile Include="Commands\ViewportResizeCommand.cs" />
-    <Compile Include="Events\ClientResizedEventArgs.cs" />
     <Compile Include="Events\ViewportClickedEventArgs.cs" />
     <Compile Include="Events\ViewportResizedEventArgs.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />

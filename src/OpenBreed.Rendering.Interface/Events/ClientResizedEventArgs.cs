@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenBreed.Wecs.Systems.Rendering.Events
+namespace OpenBreed.Rendering.Interface.Events
 {
     /// <summary>
     /// Event args for event that occurs when rendering client screen was resized

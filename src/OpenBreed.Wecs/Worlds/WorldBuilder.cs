@@ -52,7 +52,7 @@ namespace OpenBreed.Wecs.Worlds
         #endregion Internal Constructors
 
         #region Public Methods
-
+        
         public void AddSystem(ISystem system)
         {
             var systemType = system.GetType();

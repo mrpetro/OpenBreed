@@ -63,21 +63,6 @@ namespace OpenBreed.Sandbox.Entities.Turret
             Console.WriteLine("Rotation -> Stopped");
         }
 
-        public static void CreateRotationFsm(ICore core)
-        {
-            var fsmMan = core.GetManager<IFsmMan>();
-            var commandsMan = core.GetManager<ICommandsMan>();
-
-            var stateMachine = fsmMan.Create<RotationState, RotationImpulse>("Turret.Rotation");
-
-            stateMachine.AddState(new Actor.States.Rotation.IdleState(fsmMan, commandsMan));
-            stateMachine.AddState(new Actor.States.Rotation.RotatingState(fsmMan, commandsMan));
-
-            stateMachine.AddTransition(RotationState.Rotating, RotationImpulse.Stop, RotationState.Idle);
-            stateMachine.AddTransition(RotationState.Idle, RotationImpulse.Rotate, RotationState.Rotating);
-
-        }
-
         private static void OnFrameUpdate(Entity entity, int nextValue)
         {
             //entity.Core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));

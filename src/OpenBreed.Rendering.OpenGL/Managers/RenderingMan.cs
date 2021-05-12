@@ -3,6 +3,7 @@ using OpenBreed.Core;
 
 //using OpenBreed.Core.Extensions;
 using OpenBreed.Core.Managers;
+using OpenBreed.Rendering.Interface.Events;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Wecs.Systems.Rendering;
 using OpenBreed.Wecs.Systems.Rendering.Events;
@@ -18,8 +19,6 @@ namespace OpenBreed.Rendering.OpenGL.Managers
     {
         #region Private Fields
 
-        private readonly IEventsMan eventsMan;
-
         private readonly IViewClient viewClient;
         private readonly IWorldMan worldMan;
 
@@ -27,9 +26,8 @@ namespace OpenBreed.Rendering.OpenGL.Managers
 
         #region Public Constructors
 
-        public RenderingMan(IEventsMan eventsMan, IViewClient viewClient, IWorldMan worldMan)
+        public RenderingMan(IViewClient viewClient, IWorldMan worldMan)
         {
-            this.eventsMan = eventsMan;
             this.viewClient = viewClient;
             this.worldMan = worldMan;
 
@@ -38,6 +36,12 @@ namespace OpenBreed.Rendering.OpenGL.Managers
         }
 
         #endregion Public Constructors
+
+        #region Public Events
+
+        public event EventHandler<ClientResizedEventArgs> ClientResized;
+
+        #endregion Public Events
 
         #region Public Properties
 
@@ -89,7 +93,7 @@ namespace OpenBreed.Rendering.OpenGL.Managers
             var ortho = Matrix4.CreateOrthographicOffCenter(0.0f, width, 0.0f, height, -100.0f, 100.0f);
             GL.LoadMatrix(ref ortho);
 
-            eventsMan.Raise(this, new ClientResizedEventArgs(width, height));
+            ClientResized?.Invoke(this, new ClientResizedEventArgs(width, height));
         }
 
         #endregion Private Methods

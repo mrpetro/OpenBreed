@@ -113,14 +113,5 @@ namespace OpenBreed.Sandbox.Entities.Projectile
             //world.AddEntity(projectile);
 
         }
-
-        public void CreateFsm()
-        {
-            var fsmMan = core.GetManager<IFsmMan>();
-            var commandsMan = core.GetManager<ICommandsMan>();
-
-            var stateMachine = fsmMan.Create<AttackingState, AttackingImpulse>("Projectile");
-            stateMachine.AddState(new FiredState("Animations/Laser/Fired/", commandsMan));
-        }
     }
 }

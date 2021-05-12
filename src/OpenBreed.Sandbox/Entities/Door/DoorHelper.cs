@@ -83,28 +83,6 @@ namespace OpenBreed.Sandbox.Entities.Door
             core.Commands.Post(new SpriteSetCommand(entity.Id, nextValue));
         }
 
-
-        public void CreateFsm()
-        {
-            var fsmMan = core.GetManager<IFsmMan>();
-            var commandsMan = core.GetManager<ICommandsMan>();
-            var collisionMan = core.GetManager<ICollisionMan>();
-            var stampMan = core.GetManager<IStampMan>();
-
-
-            var fsm = core.GetManager<IFsmMan>().Create<FunctioningState, FunctioningImpulse>("Door.Functioning");
-
-            fsm.AddState(new OpeningState(fsmMan, commandsMan));
-            fsm.AddState(new OpenedAwaitClose(fsmMan, commandsMan, stampMan));
-            fsm.AddState(new ClosingState(fsmMan, commandsMan));
-            fsm.AddState(new ClosedState(fsmMan, commandsMan, collisionMan, stampMan));
-
-            fsm.AddTransition(FunctioningState.Closed, FunctioningImpulse.Open, FunctioningState.Opening);
-            fsm.AddTransition(FunctioningState.Opening, FunctioningImpulse.StopOpening, FunctioningState.Opened);
-            fsm.AddTransition(FunctioningState.Opened, FunctioningImpulse.Close, FunctioningState.Closing);
-            fsm.AddTransition(FunctioningState.Closing, FunctioningImpulse.StopClosing, FunctioningState.Closed);
-        }
-
         private void OnOpenningEnding()
         {
             Console.WriteLine("Door -> OpenningEnding");
