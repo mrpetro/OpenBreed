@@ -74,6 +74,7 @@
     <Compile Include="Database\Entries\DbDataSourceEntryVM.cs" />
     <Compile Include="Database\Entries\DbEntityTemplateEntryVM.cs" />
     <Compile Include="Database\Entries\DbScriptEntryVM.cs" />
+    <Compile Include="Database\Entries\DbAnimationEntryVM.cs" />
     <Compile Include="DataSources\DataSourceEditorVM.cs" />
     <Compile Include="DataSources\FileDataSourceEditorVM.cs" />
     <Compile Include="DataSources\EpfArchiveFileDataSourceEditorVM.cs" />
