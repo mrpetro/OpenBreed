@@ -48,6 +48,7 @@ namespace OpenBreed.Database.Xml
             RegisterRepository(new XmlMapsRepository(GetTable<XmlDbMapTableDef>()));
             RegisterRepository(new XmlSoundsRepository(GetTable<XmlDbSoundTableDef>()));
             RegisterRepository(new XmlScriptsRepository(GetTable<XmlDbScriptTableDef>()));
+            RegisterRepository(new XmlAnimationsRepository(GetTable<XmlDbAnimationTableDef>()));
             RegisterRepository(new XmlEntityTemplatesRepository(GetTable<XmlDbEntityTemplateTableDef>()));
         }
 

@@ -70,6 +70,8 @@
     <Compile Include="Items\Actions\XmlActionPresentationDef.cs" />
     <Compile Include="Items\Actions\XmlActionTriggersDef.cs" />
     <Compile Include="Items\Actions\XmlActionSetEntry.cs" />
+    <Compile Include="Items\Animations\XmlAnimationFrame.cs" />
+    <Compile Include="Items\Animations\XmlAnimationEntry.cs" />
     <Compile Include="Items\Assets\XmlAssetEntry.cs" />
     <Compile Include="Items\DataSources\XmlDataSourceEntry.cs" />
     <Compile Include="Items\DataSources\XmlEPFArchiveFileDataSourceEntry.cs" />
@@ -106,6 +108,7 @@
     <Compile Include="Repositories\XmlReadonlyRepositoryBase.cs" />
     <Compile Include="Repositories\XmlRepositoryBase.cs" />
     <Compile Include="Repositories\XmlSoundsRepository.cs" />
+    <Compile Include="Repositories\XmlAnimationsRepository.cs" />
     <Compile Include="Repositories\XmlSpriteSetsRepository.cs" />
     <Compile Include="Repositories\XmlScriptsRepository.cs" />
     <Compile Include="Repositories\XmlTextsRepository.cs" />
@@ -116,6 +119,7 @@
     <Compile Include="Tables\XmlDbActionSetTableDef.cs" />
     <Compile Include="Tables\XmlDbEntityTemplateTableDef.cs" />
     <Compile Include="Tables\XmlDbScriptTableDef.cs" />
+    <Compile Include="Tables\XmlDbAnimationTableDef.cs" />
     <Compile Include="Tables\XmlDbTextTableDef.cs" />
     <Compile Include="Tables\XmlDbDataSourceTableDef.cs" />
     <Compile Include="Tables\XmlDbTableDef.cs" />

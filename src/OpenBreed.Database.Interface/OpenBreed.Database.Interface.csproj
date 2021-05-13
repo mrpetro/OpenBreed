@@ -70,6 +70,8 @@
     <Compile Include="Items\Actions\IActionPresentation.cs" />
     <Compile Include="Items\Actions\IActionSetEntry.cs" />
     <Compile Include="Items\Actions\IActionTriggers.cs" />
+    <Compile Include="Items\Animations\IAnimationEntry.cs" />
+    <Compile Include="Items\Animations\IAnimationFrame.cs" />
     <Compile Include="Items\Assets\FormatParameter.cs" />
     <Compile Include="Items\Assets\IAssetEntry.cs" />
     <Compile Include="Items\DataSources\IDataSourceEntry.cs" />

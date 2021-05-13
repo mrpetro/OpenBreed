@@ -3949,6 +3949,28 @@
 				</ScriptFromFile>
 			</Items>
 		</Scripts>
+		<Animations>
+			<Items>
+				<Animation Id="Animations.VerticalDoor.Closing">
+					<ValueSetRef>SpriteSets.SPR3A</ValueSetRef>
+					<Frames>
+						<Frame ValueIndex="3" FrameTime="1.0" />
+						<Frame ValueIndex="2" FrameTime="1.0" />
+						<Frame ValueIndex="1" FrameTime="1.0" />
+						<Frame ValueIndex="0" FrameTime="1.0" />
+					</Frames>
+				</Animation>
+				<Animation Id="Animations.VerticalDoor.Opening">
+					<ValueSetRef>SpriteSets.SPR3A</ValueSetRef>
+					<Frames>
+						<Frame ValueIndex="0" FrameTime="1.0" />
+						<Frame ValueIndex="1" FrameTime="1.0" />
+						<Frame ValueIndex="2" FrameTime="1.0" />
+						<Frame ValueIndex="3" FrameTime="1.0" />
+					</Frames>
+				</Animation>
+			</Items>
+		</Animations>
 		<EntityTemplates>
 			<Items>
 				<EntityTemplateFromFile Id="EntityTemplates.Logo1.lua">
