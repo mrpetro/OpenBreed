@@ -10,6 +10,11 @@ namespace OpenBreed.Database.Xml.Tables
 {
     public class XmlDbPaletteTableDef : XmlDbTableDef
     {
+        public const string NAME = "Palettes";
+
+        [XmlIgnore]
+        public override string Name => NAME;
+
         #region Public Fields
 
         [XmlArray("Items"),

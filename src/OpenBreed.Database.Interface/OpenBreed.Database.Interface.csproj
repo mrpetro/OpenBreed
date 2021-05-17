@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IArgument.cs" />
     <Compile Include="IDatabase.cs" />
     <Compile Include="IDatabaseFactory.cs" />
     <Compile Include="IRepository.cs" />

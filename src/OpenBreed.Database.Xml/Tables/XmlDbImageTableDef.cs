@@ -10,6 +10,11 @@ namespace OpenBreed.Database.Xml.Tables
 {
     public class XmlDbImageTableDef : XmlDbTableDef
     {
+        public const string NAME = "Images";
+
+        [XmlIgnore]
+        public override string Name => NAME;
+
         [XmlArray("Items"),
         XmlArrayItem("Image", typeof(XmlImageEntry))]
         public readonly List<XmlImageEntry> Items = new List<XmlImageEntry>();

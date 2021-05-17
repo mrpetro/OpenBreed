@@ -134,6 +134,7 @@
     <Compile Include="XmlDatabaseFactory.cs" />
     <Compile Include="XmlDatabaseMan.cs" />
     <Compile Include="XmlDbEntry.cs" />
+    <Compile Include="XmlArgument.cs" />
     <Compile Include="XmlFormatParameter.cs" />
     <Compile Include="XmlReadonlyDatabaseMan.cs" />
     <Compile Include="XmlUnitOfWork.cs" />

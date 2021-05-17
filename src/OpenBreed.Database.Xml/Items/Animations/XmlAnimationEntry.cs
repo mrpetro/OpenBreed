@@ -11,6 +11,7 @@ using OpenBreed.Common;
 using OpenBreed.Database.Interface.Items;
 using OpenBreed.Database.Interface.Items.Animations;
 using System.Collections.ObjectModel;
+using OpenBreed.Database.Interface;
 
 namespace OpenBreed.Database.Xml.Items.Animations
 {
@@ -19,13 +20,25 @@ namespace OpenBreed.Database.Xml.Items.Animations
     {
         #region Public Properties
 
-        [XmlElement("ValueSetRef")]
-        public string ValueSetRef { get; set; }
+        [XmlElement("AnimatorType")]
+        public string AnimatorType { get; set; }
 
+        [XmlArray("AnimatorArguments")]
+        [XmlArrayItem(ElementName = "Arg")]
+        public List<XmlArgument> XmlAnimatorArguments { get; set; }
 
         [XmlArray("Frames")]
         [XmlArrayItem(ElementName = "Frame")]
         public List<XmlAnimationFrame> XmlFrames { get; set; }
+
+        [XmlIgnore]
+        public ReadOnlyCollection<IArgument> AnimatorArguments
+        {
+            get
+            {
+                return new ReadOnlyCollection<IArgument>(XmlAnimatorArguments.Cast<IArgument>().ToList());
+            }
+        }
 
         [XmlIgnore]
         public ReadOnlyCollection<IAnimationFrame> Frames

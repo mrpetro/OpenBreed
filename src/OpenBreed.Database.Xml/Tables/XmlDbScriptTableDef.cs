@@ -10,6 +10,11 @@ namespace OpenBreed.Database.Xml.Tables
 {
     public class XmlDbScriptTableDef : XmlDbTableDef
     {
+        public const string NAME = "Scripts";
+
+        [XmlIgnore]
+        public override string Name => NAME;
+
         #region Public Fields
 
         [XmlArray("Items"),

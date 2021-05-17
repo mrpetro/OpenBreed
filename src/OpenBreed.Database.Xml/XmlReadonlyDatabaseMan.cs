@@ -20,6 +20,7 @@ namespace OpenBreed.Database.Xml
 
         private readonly IVariableMan variables;
         private readonly Dictionary<Type, IRepository> repositories = new Dictionary<Type, IRepository>();
+        private readonly Dictionary<string, XmlDbTableDef> tables = new Dictionary<string, XmlDbTableDef>();
 
         #endregion Private Fields
 
@@ -32,7 +33,30 @@ namespace OpenBreed.Database.Xml
             if(dbFilePath != null)
                 Open(dbFilePath);
 
+            RegisterTables();
             RegisterRepos();
+        }
+
+        private void RegisterTable(XmlDbTableDef dbTable)
+        {
+            tables.Add(dbTable.Name, dbTable);
+        }
+
+        private void RegisterTables()
+        {
+            RegisterTable(GetTable<XmlDbDataSourceTableDef>());
+            RegisterTable(GetTable<XmlDbAssetTableDef>());
+            RegisterTable(GetTable<XmlDbTileSetTableDef>());
+            RegisterTable(GetTable<XmlDbSpriteSetTableDef>());
+            RegisterTable(GetTable<XmlDbActionSetTableDef>());
+            RegisterTable(GetTable<XmlDbImageTableDef>());
+            RegisterTable(GetTable<XmlDbPaletteTableDef>());
+            RegisterTable(GetTable<XmlDbTextTableDef>());
+            RegisterTable(GetTable<XmlDbMapTableDef>());
+            RegisterTable(GetTable<XmlDbSoundTableDef>());
+            RegisterTable(GetTable<XmlDbScriptTableDef>());
+            RegisterTable(GetTable<XmlDbAnimationTableDef>());
+            RegisterTable(GetTable<XmlDbEntityTemplateTableDef>());
         }
 
         private void RegisterRepos()

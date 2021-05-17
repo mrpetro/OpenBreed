@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace OpenBreed.Database.Xml.Tables
 {
     public abstract class XmlDbTableDef
     {
         #region Public Methods
+
+        [XmlIgnore]
+        public abstract string Name { get; }
 
         public override string ToString()
         {
