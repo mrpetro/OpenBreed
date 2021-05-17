@@ -108,7 +108,8 @@ namespace OpenBreed.Editor.VM.Extensions
         public static void SetupDbEntryEditors(this IManagerCollection managerCollection)
         {
             managerCollection.AddTransient<DbEditorVM>(() => new DbEditorVM(managerCollection,
-                                                                            managerCollection.GetManager<DbEntryEditorFactory>()));
+                                                                            managerCollection.GetManager<DbEntryEditorFactory>(),
+                                                                            managerCollection.GetManager<IRepositoryProvider>()));
             managerCollection.AddTransient<DbTablesEditorVM>(() => new DbTablesEditorVM(managerCollection.GetManager<IWorkspaceMan>(),
                                                                                         managerCollection.GetManager<DbEntryFactory>()));
             managerCollection.AddTransient<TileSetEditorVM>(() => new TileSetEditorVM(managerCollection.GetManager<DbEntrySubEditorFactory>(),
