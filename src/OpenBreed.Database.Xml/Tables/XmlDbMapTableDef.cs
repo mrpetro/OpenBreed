@@ -10,6 +10,11 @@ namespace OpenBreed.Database.Xml.Tables
 {
     public class XmlDbMapTableDef : XmlDbTableDef
     {
+        public const string NAME = "Maps";
+
+        [XmlIgnore]
+        public override string Name => NAME;
+
         [XmlArray("Items"),
         XmlArrayItem("Map", typeof(XmlMapEntry))]
         public readonly List<XmlMapEntry> Items = new List<XmlMapEntry>();

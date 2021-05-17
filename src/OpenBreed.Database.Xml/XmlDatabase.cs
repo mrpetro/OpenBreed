@@ -34,6 +34,7 @@ namespace OpenBreed.Database.Xml
         XmlArrayItem("Sounds", typeof(XmlDbSoundTableDef)),
         XmlArrayItem("Images", typeof(XmlDbImageTableDef)),
         XmlArrayItem("Scripts", typeof(XmlDbScriptTableDef)),
+        XmlArrayItem("Animations", typeof(XmlDbAnimationTableDef)),
         XmlArrayItem("EntityTemplates", typeof(XmlDbEntityTemplateTableDef))]
         public readonly List<XmlDbTableDef> Tables = new List<XmlDbTableDef>();
 

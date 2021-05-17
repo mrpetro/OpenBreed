@@ -10,6 +10,11 @@ namespace OpenBreed.Database.Xml.Tables
 {
     public class XmlDbSoundTableDef : XmlDbTableDef
     {
+        public const string NAME = "Sounds";
+
+        [XmlIgnore]
+        public override string Name => NAME;
+
         [XmlArray("Items"),
         XmlArrayItem("Sound", typeof(XmlSoundEntry))]
         public readonly List<XmlSoundEntry> Items = new List<XmlSoundEntry>();

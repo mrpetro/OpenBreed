@@ -10,6 +10,11 @@ namespace OpenBreed.Database.Xml.Tables
 {
     public class XmlDbTileSetTableDef : XmlDbTableDef
     {
+        public const string NAME = "TileSets";
+
+        [XmlIgnore]
+        public override string Name => NAME;
+
         [XmlArray("Items"),
         XmlArrayItem("TileSetFromBLK", typeof(XmlTileSetFromBlkEntry)),
         XmlArrayItem("TileSetFromImage", typeof(XmlTileSetFromImageEntry))]

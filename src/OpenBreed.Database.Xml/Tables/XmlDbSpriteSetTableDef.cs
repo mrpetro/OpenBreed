@@ -10,6 +10,11 @@ namespace OpenBreed.Database.Xml.Tables
 {
     public class XmlDbSpriteSetTableDef : XmlDbTableDef
     {
+        public const string NAME = "SpriteSets";
+
+        [XmlIgnore]
+        public override string Name => NAME;
+
         [XmlArray("Items"),
         XmlArrayItem("SpriteSetFromSPR", typeof(XmlSpriteSetFromSprEntry)),
         XmlArrayItem("SpriteSetFromImage", typeof(XmlSpriteSetFromImageEntry))]

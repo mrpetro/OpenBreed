@@ -6,6 +6,12 @@ namespace OpenBreed.Database.Xml.Tables
 {
     public class XmlDbAssetTableDef : XmlDbTableDef
     {
+        public const string NAME = "Assets";
+
+        [XmlIgnore]
+        public override string Name => NAME;
+
+
         #region Public Fields
 
         [XmlArray("Items"),

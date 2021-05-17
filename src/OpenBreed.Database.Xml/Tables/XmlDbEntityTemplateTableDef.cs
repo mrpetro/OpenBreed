@@ -10,6 +10,11 @@ namespace OpenBreed.Database.Xml.Tables
 {
     public class XmlDbEntityTemplateTableDef : XmlDbTableDef
     {
+        public const string NAME = "EntityTemplates";
+
+        [XmlIgnore]
+        public override string Name => NAME;
+
         #region Public Fields
 
         [XmlArray("Items"),
