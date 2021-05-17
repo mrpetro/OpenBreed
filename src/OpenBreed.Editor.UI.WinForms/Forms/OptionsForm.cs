@@ -34,6 +34,8 @@ namespace OpenBreed.Editor.UI.WinForms.Forms
             OptionsABTA.UpdateCfgWithCtrl(m_Settings.Cfg.Options.ABTA);
             OptionsABHC.UpdateCfgWithCtrl(m_Settings.Cfg.Options.ABHC);
             OptionsABSE.UpdateCfgWithCtrl(m_Settings.Cfg.Options.ABSE);
+
+            m_Settings.Store();
         }
     }
 }

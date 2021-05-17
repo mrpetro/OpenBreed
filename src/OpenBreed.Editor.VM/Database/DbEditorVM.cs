@@ -17,16 +17,19 @@ namespace OpenBreed.Editor.VM.Database
         private readonly Dictionary<string, EntryEditorVM> _openedEntryEditors = new Dictionary<string, EntryEditorVM>();
         private readonly IManagerCollection managerCollection;
         private readonly DbEntryEditorFactory dbEntryEditorFactory;
+        private readonly IRepositoryProvider repositoryProvider;
 
         #endregion Private Fields
 
         #region Public Constructors
 
         public DbEditorVM(IManagerCollection managerCollection,
-                          DbEntryEditorFactory dbEntryEditorFactory)
+                          DbEntryEditorFactory dbEntryEditorFactory,
+                          IRepositoryProvider repositoryProvider)
         {
             this.managerCollection = managerCollection;
             this.dbEntryEditorFactory = dbEntryEditorFactory;
+            this.repositoryProvider = repositoryProvider;
         }
 
         #endregion Public Constructors
@@ -105,9 +108,11 @@ namespace OpenBreed.Editor.VM.Database
 
         #region Internal Methods
 
-        internal EntryEditorVM OpenEntryEditor(IRepository repository, string entryId)
+        internal EntryEditorVM OpenEntryEditor(string tableName, string entryId)
         {
-            string entryEditorKey = $"{repository.Name}#{entryId}";
+            var repository = repositoryProvider.GetRepository(tableName);
+
+            string entryEditorKey = $"{tableName}#{entryId}";
 
             EntryEditorVM entryEditor = null;
             if (!_openedEntryEditors.TryGetValue(entryEditorKey, out entryEditor))

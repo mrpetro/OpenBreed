@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace OpenBreed.Editor.VM.Database
 {
-    internal delegate EntryEditorVM EntryEditorOpener(IRepository repository, string entryId);
+    internal delegate EntryEditorVM EntryEditorOpener(string tableName, string entryId);
 
     public class DbTableEditorVM : BaseViewModel
     {
@@ -23,6 +23,7 @@ namespace OpenBreed.Editor.VM.Database
         private IRepository _edited;
         private string _title;
         private string tableName;
+        private string tablePresentationName;
 
         #endregion Private Fields
 
@@ -58,10 +59,10 @@ namespace OpenBreed.Editor.VM.Database
             set { SetProperty(ref _title, value); }
         }
 
-        public string TableName
+        public string TablePresentationName
         {
-            get { return tableName; }
-            set { SetProperty(ref tableName, value); }
+            get { return tablePresentationName; }
+            set { SetProperty(ref tablePresentationName, value); }
         }
 
         #endregion Public Properties
@@ -91,24 +92,8 @@ namespace OpenBreed.Editor.VM.Database
         {
             //Check if entry editor is already opened. If yes then focus on this entry editor.
             //var openedDbEntryEditor = DbEntryEditors.FirstOrDefault(item => item.)
-            var entryEditor = EntryEditorOpener.Invoke(_edited, entryId);
+            var entryEditor = EntryEditorOpener.Invoke(tableName, entryId);
             entryEditor.CommitedAction = OnEntryCommited;
-        }
-
-        public void EditRepository(IRepository model)
-        {
-            _edited = model;
-
-            //var vm = application.GetInterface<DbTableFactory>().CreateTable(_edited);
-            UpdateVM(model);
-
-            UpdateTitle();
-
-            if (_newEntryCreator != null)
-            {
-                _newEntryCreator.Close();
-                _newEntryCreator = null;
-            }
         }
 
         public void SetModel(string modelName)
@@ -118,7 +103,21 @@ namespace OpenBreed.Editor.VM.Database
             if (repository == null)
                 throw new InvalidOperationException($"Repository with name '{modelName}' not found.");
 
-            EditRepository(repository);
+            _edited = repository;
+
+            //var vm = application.GetInterface<DbTableFactory>().CreateTable(_edited);
+            UpdateVM(_edited);
+
+            tableName = modelName;
+            TablePresentationName = modelName;
+
+            UpdateTitle();
+
+            if (_newEntryCreator != null)
+            {
+                _newEntryCreator.Close();
+                _newEntryCreator = null;
+            }
         }
 
         public void SetNoModel()
@@ -150,7 +149,6 @@ namespace OpenBreed.Editor.VM.Database
                 }
             });
 
-            TableName = source.Name;
         }
 
         #endregion Protected Methods
@@ -159,7 +157,7 @@ namespace OpenBreed.Editor.VM.Database
 
         private string GetUniqueId()
         {
-            string uniqueId = $"{TableName}.{DateTime.Now.Ticks}";
+            string uniqueId = $"{TablePresentationName}.{DateTime.Now.Ticks}";
 
             return uniqueId;
         }
@@ -201,7 +199,7 @@ namespace OpenBreed.Editor.VM.Database
 
         private void UpdateTitle()
         {
-            Title = $"{EditorName} - {TableName}";
+            Title = $"{EditorName} - {TablePresentationName}";
         }
 
         #endregion Private Methods
