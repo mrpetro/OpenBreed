@@ -1,9 +1,8 @@
-﻿using OpenBreed.Animation.Generic.Helpers;
-using OpenBreed.Animation.Interface;
+﻿using OpenBreed.Animation.Interface;
 using OpenBreed.Core;
 using System;
 
-namespace OpenBreed.Animation.Generic
+namespace OpenBreed.Animation.Interface
 {
     public class AnimatorBuilder
     {
@@ -20,7 +19,7 @@ namespace OpenBreed.Animation.Generic
 
         #region Protected Constructors
 
-        internal AnimatorBuilder(ICore core)
+        internal AnimatorBuilder()
         {
             AnimId = -1;
         }
@@ -29,9 +28,9 @@ namespace OpenBreed.Animation.Generic
 
         #region Public Methods
 
-        public static AnimatorBuilder New(ICore core)
+        public static AnimatorBuilder New()
         {
-            return new AnimatorBuilder(core);
+            return new AnimatorBuilder();
         }
 
         public Animator Build()

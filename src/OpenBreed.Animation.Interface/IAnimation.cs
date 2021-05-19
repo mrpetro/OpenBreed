@@ -3,6 +3,8 @@ using System;
 
 namespace OpenBreed.Animation.Interface
 {
+    public delegate void FrameUpdater<TValue>(Entity entity, TValue value);
+
     /// <summary>
     /// Transition methods between frames
     /// </summary>
@@ -31,9 +33,9 @@ namespace OpenBreed.Animation.Interface
 
         #region Public Methods
 
-        bool UpdateWithNextFrame(Entity entity, IAnimator animator);
+        bool UpdateWithNextFrame(Entity entity, Animator animator);
 
-        IAnimationPart<T> AddPart<T>(Action<Entity, T> frameUpdateAction, T initialValue);
+        IAnimationPart<TValue> AddPart<TValue>(FrameUpdater<TValue> frameUpdater, TValue initialValue);
 
         #endregion Public Methods
     }
@@ -42,16 +44,16 @@ namespace OpenBreed.Animation.Interface
     {
         #region Public Methods
 
-        bool UpdateWithNextFrame(Entity entity, IAnimator animator);
+        bool UpdateWithNextFrame(Entity entity, Animator animator);
 
         #endregion Public Methods
     }
 
-    public interface IAnimationPart<T> : IAnimationPart
+    public interface IAnimationPart<TValue> : IAnimationPart
     {
         #region Public Methods
 
-        void AddFrame(T value, float frameTime);
+        void AddFrame(TValue value, float frameTime);
 
         #endregion Public Methods
     }

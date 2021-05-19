@@ -99,15 +99,15 @@ namespace OpenBreed.Wecs.Components.Animation
 
         #region Private Fields
 
-        private readonly IAnimMan animMan;
+        private readonly IAnimationMan animationMan;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal AnimationComponentBuilder(IAnimMan animMan)
+        internal AnimationComponentBuilder(IAnimationMan animationMan)
         {
-            this.animMan = animMan;
+            this.animationMan = animationMan;
         }
 
         #endregion Internal Constructors
@@ -126,7 +126,7 @@ namespace OpenBreed.Wecs.Components.Animation
 
         public void SetByName(string animName)
         {
-            AnimId = animMan.GetByName(animName).Id;
+            AnimId = animationMan.GetByName(animName).Id;
         }
 
         public void SetLoop(bool loop)

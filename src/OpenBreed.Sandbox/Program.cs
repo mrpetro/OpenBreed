@@ -3,9 +3,13 @@ using OpenBreed.Animation.Generic.Extensions;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Audio.OpenAL.Extensions;
 using OpenBreed.Common;
+using OpenBreed.Common.Data;
+using OpenBreed.Common.Extensions;
 using OpenBreed.Common.Logging;
 using OpenBreed.Core;
 using OpenBreed.Core.Managers;
+using OpenBreed.Database.Interface;
+using OpenBreed.Database.Xml;
 using OpenBreed.Fsm;
 using OpenBreed.Fsm.Extensions;
 using OpenBreed.Fsm.Xml;
@@ -69,6 +73,7 @@ using OpenBreed.Wecs.Worlds;
 using OpenTK.Input;
 using System;
 using System.Drawing;
+using System.IO;
 using System.Reflection;
 
 namespace OpenBreed.Sandbox
@@ -79,11 +84,14 @@ namespace OpenBreed.Sandbox
 
         public ProgramFactory()
         {
-
             manCollection.AddSingleton<IViewClient>(() => new OpenTKWindowClient(800, 600, "OpenBreed"));
 
+            manCollection.SetupVariableManager();
+            manCollection.SetupABFormats();
             manCollection.SetupAnimationManagers();
+            manCollection.SetupModelProvider();
             manCollection.SetupLuaScripting();
+            manCollection.SetupDataProviders();
             manCollection.SetupGenericInputManagers();
             manCollection.SetupGenericPhysicsManagers();
             manCollection.SetupOpenALManagers();
@@ -103,8 +111,9 @@ namespace OpenBreed.Sandbox
             manCollection.SetupAnimationComponents();
             manCollection.SetupFsmComponents();
 
+            manCollection.SetupAnimationDataFactory();
 
-
+            manCollection.SetupDataLoaderFactory();
 
 
             //manCollection.SetupAudioSystems();
@@ -117,11 +126,13 @@ namespace OpenBreed.Sandbox
             manCollection.AddSingleton<ViewportCreator>(() => new ViewportCreator(manCollection.GetManager<IEntityMan>(), manCollection.GetManager<IEntityFactory>()));
         }
 
+
+
         #endregion Public Constructors
 
         #region Public Methods
 
-        public ICore Create()
+        public ICore Create(string gameDbFilePath, string gameFolderPath)
         {
             var core = new Program(manCollection, manCollection.GetManager<IViewClient>());
 
@@ -155,6 +166,14 @@ namespace OpenBreed.Sandbox
             manCollection.AddSingleton<ProjectileHelper>(() => new ProjectileHelper(core));
             manCollection.AddSingleton<ActorHelper>(() => new ActorHelper(core));
 
+
+            var variables = manCollection.GetManager<IVariableMan>();
+
+            variables.RegisterVariable(typeof(string), gameFolderPath, "Cfg.Options.ABTA.GameFolderPath");
+
+            manCollection.AddSingleton<IRepositoryProvider>(() => new XmlReadonlyDatabaseMan(variables, gameDbFilePath));
+
+
             return core;
         }
 
@@ -164,6 +183,7 @@ namespace OpenBreed.Sandbox
     public class Program : CoreBase
     {
         #region Private Fields
+        private const string ABTA_PC_GAME_DB_FILE_NAME = "GameDatabase.ABTA.EPF.xml";
 
         private readonly IScriptMan scriptMan;
         private readonly IViewClient clientMan;
@@ -183,7 +203,7 @@ namespace OpenBreed.Sandbox
             this.clientMan = clientMan;
             scriptMan = manCollection.GetManager<IScriptMan>();
             StateMachines = manCollection.GetManager<IFsmMan>();
-            Animations = manCollection.GetManager<IAnimMan>();
+            Animations = manCollection.GetManager<IAnimationMan>();
             Inputs = manCollection.GetManager<IInputsMan>();
             renderingMan = manCollection.GetManager<IRenderingMan>();
 
@@ -215,7 +235,7 @@ namespace OpenBreed.Sandbox
         #region Public Properties
 
         public IEntityFactory EntityFactory { get; }
-        public IAnimMan Animations { get; }
+        public IAnimationMan Animations { get; }
 
         public IFsmMan StateMachines { get; }
 
@@ -259,13 +279,15 @@ namespace OpenBreed.Sandbox
         [STAThread]
         private static void Main(string[] args)
         {
-            //var luaTest = new LoadTest();
+            var gameDbFileName = args[0];
+            var gameFolderPath = args[1];
+            var execFolderPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var gameDbFilePath = Path.Combine(execFolderPath, gameDbFileName);
 
-            //luaTest.Example();
 
             var programFactory = new ProgramFactory();
 
-            var program = programFactory.Create();
+            var program = programFactory.Create(gameDbFilePath, gameFolderPath);
 
             //program.Sounds.Sounds.PlaySound(0);
 
@@ -325,6 +347,11 @@ namespace OpenBreed.Sandbox
             RegisterFixtures();
             RegisterInputs();
             RegisterPlayers();
+
+
+            //var map = manCollection.GetManager<MapsDataProvider>().GetMap("CRASH LANDING SITE");
+
+
 
             var spriteMan = GetManager<ISpriteMan>();
             var tileMan = GetManager<ITileMan>();

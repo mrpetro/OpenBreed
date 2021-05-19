@@ -41,7 +41,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
 
         public void CreateAnimations()
         {
-            var animations = core.GetManager<IAnimMan>();
+            var animations = core.GetManager<IAnimationMan>();
 
             var animationStandingRight = animations.Create("Animations/Actor/Standing/Right", 2.0f);
             animationStandingRight.AddPart<int>(OnFrameUpdate, 0).AddFrame(0, 2.0f);

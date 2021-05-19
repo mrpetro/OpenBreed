@@ -61,9 +61,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnimatorBuilder.cs" />
-    <Compile Include="AnimMan.cs" />
-    <Compile Include="Animator.cs" />
+    <Compile Include="FrameUpdaterMan.cs" />
+    <Compile Include="AnimationMan.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="Helpers\Animation.cs" />
     <Compile Include="Helpers\AnimationPart.cs" />

@@ -99,6 +99,9 @@ namespace OpenBreed.Game
 
             manCollection.AddSingleton<IRepositoryProvider>(() => new XmlReadonlyDatabaseMan(variables, gameDbFilePath));
 
+
+
+
             manCollection.SetupGameScriptingApi();
 
             return new Game(manCollection);

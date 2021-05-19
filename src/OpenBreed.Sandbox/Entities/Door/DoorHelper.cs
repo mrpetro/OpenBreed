@@ -27,6 +27,8 @@ using OpenBreed.Wecs.Commands;
 using OpenBreed.Rendering.Interface.Managers;
 using OpenBreed.Core.Managers;
 using OpenBreed.Physics.Interface.Managers;
+using OpenBreed.Database.Interface;
+using OpenBreed.Common;
 
 namespace OpenBreed.Sandbox.Entities.Door
 {
@@ -46,30 +48,38 @@ namespace OpenBreed.Sandbox.Entities.Door
 
         public void CreateAnimations()
         {
-            var animations = core.GetManager<IAnimMan>();
+            var animationMan = core.GetManager<IAnimationMan>();
+            var animatorMan = core.GetManager<IFrameUpdaterMan>();
+            var dataLoaderFactory = core.GetManager<IDataLoaderFactory>();
+            var animationLoader = dataLoaderFactory.GetLoader<IAnimation>();
+            var openingAnim = animationLoader.Load("Animations.VerticalDoor.Opening");
 
-            var horizontalDoorOpening = animations.Create("Animations/DoorHorizontal/Opening", 5.0f);
+            //var openingAnim  = dataLoader.Get<IAnimation>("Animations.VerticalDoor.Opening");
+
+
+
+            var horizontalDoorOpening = animationMan.Create("Animations/DoorHorizontal/Opening", 5.0f);
             var hdo = horizontalDoorOpening.AddPart<int>(OnFrameUpdate, 0);
             hdo.AddFrame(0, 1.0f);
             hdo.AddFrame(1, 2.0f);
             hdo.AddFrame(2, 3.0f);
             hdo.AddFrame(3, 4.0f);
             hdo.AddFrame(4, 5.0f);
-            var horizontalDoorClosing = animations.Create("Animations/DoorHorizontal/Closing", 5.0f);
+            var horizontalDoorClosing = animationMan.Create("Animations/DoorHorizontal/Closing", 5.0f);
             var hdc = horizontalDoorClosing.AddPart<int>(OnFrameUpdate, 4);
             hdc.AddFrame(4, 1.0f);
             hdc.AddFrame(3, 2.0f);
             hdc.AddFrame(2, 3.0f);
             hdc.AddFrame(1, 4.0f);
             hdc.AddFrame(0, 5.0f);
-            var verticalDoorOpening = animations.Create("Animations/DoorVertical/Opening", 5.0f);
+            var verticalDoorOpening = animationMan.Create("Animations/DoorVertical/Opening", 5.0f);
             var vdo = verticalDoorOpening.AddPart<int>(OnFrameUpdate, 0);
             vdo.AddFrame(0, 1.0f);
             vdo.AddFrame(1, 2.0f);
             vdo.AddFrame(2, 3.0f);
             vdo.AddFrame(3, 4.0f);
             vdo.AddFrame(4, 5.0f);
-            var verticalDoorClosing = animations.Create("Animations/DoorVertical/Closing", 5.0f);
+            var verticalDoorClosing = animationMan.Create("Animations/DoorVertical/Closing", 5.0f);
             var vdc = verticalDoorClosing.AddPart<int>(OnFrameUpdate, 4);
             vdc.AddFrame(4, 1.0f);
             vdc.AddFrame(3, 2.0f);

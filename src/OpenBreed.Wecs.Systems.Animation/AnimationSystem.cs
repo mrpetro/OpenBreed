@@ -22,17 +22,17 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         private readonly List<int> entities = new List<int>();
         private readonly IEntityMan entityMan;
-        private readonly IAnimMan animMan;
+        private readonly IAnimationMan animationMan;
         private readonly ILogger logger;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal AnimationSystem(IEntityMan entityMan, IAnimMan animMan, ILogger logger)
+        internal AnimationSystem(IEntityMan entityMan, IAnimationMan animationMan, ILogger logger)
         {
             this.entityMan = entityMan;
-            this.animMan = animMan;
+            this.animationMan = animationMan;
             this.logger = logger;
 
             Require<AnimationComponent>();
@@ -155,7 +155,7 @@ namespace OpenBreed.Wecs.Systems.Animation
             var entity = entityMan.GetById(cmd.EntityId);
             var ac = entity.Get<AnimationComponent>();
 
-            var animData = animMan.GetByName(cmd.Id);
+            var animData = animationMan.GetByName(cmd.Id);
 
             if (animData == null)
                 logger.Warning($"Animation with ID '{cmd.Id}' not found.");
@@ -175,7 +175,7 @@ namespace OpenBreed.Wecs.Systems.Animation
 
             if (cmd.Id != null)
             {
-                var data = animMan.GetByName(cmd.Id);
+                var data = animationMan.GetByName(cmd.Id);
 
                 if (data == null)
                     logger.Warning($"Animation with ID = '{cmd.Id}' not found.");
@@ -209,7 +209,7 @@ namespace OpenBreed.Wecs.Systems.Animation
             if (animator.AnimId < 0)
                 return;
 
-            var data = animMan.GetById(animator.AnimId);
+            var data = animationMan.GetById(animator.AnimId);
 
             animator.Position += animator.Speed * dt;
 

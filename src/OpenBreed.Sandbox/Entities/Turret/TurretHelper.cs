@@ -23,7 +23,7 @@ namespace OpenBreed.Sandbox.Entities.Turret
 
         public static void CreateAnimations(ICore core)
         {
-            var animations = core.GetManager<IAnimMan>();
+            var animations = core.GetManager<IAnimationMan>();
 
             var animationGuarding0 = animations.Create("Animations/Turret/Guarding/0", 2.0f);
             animationGuarding0.AddPart<int>(OnFrameUpdate, 0).AddFrame(0, 2.0f);

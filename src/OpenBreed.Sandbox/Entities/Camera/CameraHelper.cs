@@ -19,11 +19,11 @@ namespace OpenBreed.Sandbox.Entities.Camera
 
         public static void CreateAnimations(ICore core)
         {
-            var cameraEffectFadeOut = core.GetManager<IAnimMan>().Create(CAMERA_FADE_OUT, 10.0f);
+            var cameraEffectFadeOut = core.GetManager<IAnimationMan>().Create(CAMERA_FADE_OUT, 10.0f);
             var fo = cameraEffectFadeOut.AddPart<float>(OnFrameUpdate, 1.0f);
             fo.AddFrame(0.0f, 10.0f);
 
-            var cameraEffectFadeIn = core.GetManager<IAnimMan>().Create(CAMERA_FADE_IN, 10.0f);
+            var cameraEffectFadeIn = core.GetManager<IAnimationMan>().Create(CAMERA_FADE_IN, 10.0f);
             var fi = cameraEffectFadeIn.AddPart<float>(OnFrameUpdate, 0.0f);
             fi.AddFrame(1.0f, 10.0f);
         }

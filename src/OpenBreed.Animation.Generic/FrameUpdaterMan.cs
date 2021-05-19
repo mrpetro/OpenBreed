@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace OpenBreed.Animation.Generic
 {
-    public class AnimMan : IAnimMan
+    public class FrameUpdaterMan : IFrameUpdaterMan
     {
         #region Internal Fields
 
@@ -15,20 +15,16 @@ namespace OpenBreed.Animation.Generic
 
         #region Private Fields
 
-        private readonly List<IAnimation> items = new List<IAnimation>();
+        private readonly List<Delegate> items = new List<Delegate>();
         private readonly ILogger logger;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        private IAnimation MissingAnim;
-
-        public AnimMan(ILogger logger)
+        public FrameUpdaterMan(ILogger logger)
         {
             this.logger = logger;
-
-            MissingAnim = Create("Animations/Missing", 1.0f);
         }
 
         #endregion Public Constructors
@@ -39,28 +35,27 @@ namespace OpenBreed.Animation.Generic
 
         #region Public Methods
 
-        public IAnimation Create(string name, float length)
+        public int Register(Delegate frameUpdater)
         {
-            var newAnimationData = new OpenBreed.Animation.Generic.Helpers.Animation(items.Count, name, length);
-            items.Add(newAnimationData);
-            return newAnimationData;
+            items.Add(frameUpdater);
+            return items.Count - 1;
         }
 
-        public IAnimation GetById(int id)
+        public Delegate GetById(int id)
         {
             return items[id];
         }
 
-        public IAnimation GetByName(string name)
+        public Delegate GetByName(string name)
         {
-            var anim = items.FirstOrDefault(item => item.Name == name);
+            //var anim = items.FirstOrDefault(item => item.Name == name);
 
-            if (anim != null)
-                return anim;
+            //if (anim != null)
+            //    return anim;
 
-            logger.Error($"Unable to find animation with name '{name}'");
+            //logger.Error($"Unable to find animation with name '{name}'");
 
-            return MissingAnim;
+            return null;
         }
 
         public void UnloadAll()

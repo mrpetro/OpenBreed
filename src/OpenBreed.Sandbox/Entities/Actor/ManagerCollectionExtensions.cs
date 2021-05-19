@@ -1,9 +1,12 @@
-﻿using OpenBreed.Common;
+﻿using OpenBreed.Animation.Interface;
+using OpenBreed.Common;
 using OpenBreed.Core.Managers;
+using OpenBreed.Database.Interface;
 using OpenBreed.Fsm;
 using OpenBreed.Sandbox.Entities.Actor.States.Attacking;
 using OpenBreed.Sandbox.Entities.Actor.States.Movement;
 using OpenBreed.Sandbox.Entities.Actor.States.Rotation;
+using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.Projectile;
 
 namespace OpenBreed.Sandbox.Entities.Actor
@@ -44,6 +47,33 @@ namespace OpenBreed.Sandbox.Entities.Actor
             stateMachine.AddTransition(MovementState.Walking, MovementImpulse.Stop, MovementState.Standing);
             stateMachine.AddTransition(MovementState.Standing, MovementImpulse.Walk, MovementState.Walking);
             stateMachine.AddTransition(MovementState.Walking, MovementImpulse.Walk, MovementState.Walking);
+        }
+
+        public static void SetupAnimationDataFactory(this IManagerCollection managerCollection)
+        {
+            managerCollection.AddSingleton<AnimationDataFactory>(() =>
+            {
+                var animationDataFactory = new AnimationDataFactory();
+
+                animationDataFactory.Register("Sprite", new SpriteAnimationPartLoader(managerCollection.GetManager<ICommandsMan>()));
+
+                return animationDataFactory;
+            });
+        }
+
+        public static void SetupDataLoaderFactory(this IManagerCollection managerCollection)
+        {
+            managerCollection.AddSingleton<IDataLoaderFactory>(() =>
+            {
+                var dataLoaderFactory = new DataLoaderFactory();
+
+                dataLoaderFactory.Register(new AnimationDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
+                                                                   managerCollection.GetManager<IAnimationMan>(),
+                                                                   managerCollection.GetManager<IFrameUpdaterMan>(),
+                                                                   managerCollection.GetManager<AnimationDataFactory>()));
+
+                return dataLoaderFactory;
+            });
         }
 
         public static void SetupActorRotationStates(this IManagerCollection managerCollection)

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Animation.Generic
+namespace OpenBreed.Animation.Interface
 {
-    public class Animator : IAnimator
+    public class Animator
     {
         #region Internal Constructors
         public Animator()

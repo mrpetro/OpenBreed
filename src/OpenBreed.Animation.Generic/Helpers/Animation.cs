@@ -35,14 +35,14 @@ namespace OpenBreed.Animation.Generic.Helpers
 
         #region Public Methods
 
-        public IAnimationPart<T> AddPart<T>(Action<Entity, T> frameUpdateAction, T initialValue)
+        public IAnimationPart<TValue> AddPart<TValue>(FrameUpdater<TValue> frameUpdater, TValue initialValue)
         {
-            var newPart = new AnimationPart<T>(frameUpdateAction, initialValue);
+            var newPart = new AnimationPart<TValue>(frameUpdater, initialValue);
             parts.Add(newPart);
             return newPart;
         }
 
-        public bool UpdateWithNextFrame(Entity entity, IAnimator animator)
+        public bool UpdateWithNextFrame(Entity entity, Animator animator)
         {
             for (int i = 0; i < parts.Count; i++)
                 parts[i].UpdateWithNextFrame(entity, animator);

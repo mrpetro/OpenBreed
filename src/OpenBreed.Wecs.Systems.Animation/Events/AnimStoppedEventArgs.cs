@@ -10,7 +10,7 @@ namespace OpenBreed.Wecs.Systems.Animation.Events
     {
         #region Public Constructors
 
-        public AnimStoppedEventArgs(IAnimator animator )
+        public AnimStoppedEventArgs(Animator animator )
         {
             Animator = animator;
         }
@@ -19,7 +19,7 @@ namespace OpenBreed.Wecs.Systems.Animation.Events
 
         #region Public Properties
 
-        public IAnimator Animator { get; }
+        public Animator Animator { get; }
 
         #endregion Public Properties
     }

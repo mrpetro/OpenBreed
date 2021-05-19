@@ -4,37 +4,31 @@ using OpenBreed.Wecs.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenBreed.Animation.Generic.Helpers
 {
-    internal class AnimationPart<T> : IAnimationPart<T>
+    internal class AnimationPart<TValue> : IAnimationPart<TValue>
     {
         #region Private Fields
 
-        private SortedDictionary<float, T> frames = new SortedDictionary<float, T>();
-        private Action<Entity, T> frameUpdateAction;
+        private SortedDictionary<float, TValue> frames = new SortedDictionary<float, TValue>();
+        private FrameUpdater<TValue> frameUpdater;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal AnimationPart(Action<Entity, T> frameUpdateAction, T initialValue)
+        internal AnimationPart(FrameUpdater<TValue> frameUpdater, TValue initialValue)
         {
-            this.frameUpdateAction = frameUpdateAction;
+            this.frameUpdater = frameUpdater;
             frames.Add(0.0f, initialValue);
         }
 
         #endregion Internal Constructors
 
-        #region Public Properties
-
-        #endregion Public Properties
-
         #region Public Methods
 
-        public bool UpdateWithNextFrame(Entity entity, IAnimator animator)
+        public bool UpdateWithNextFrame(Entity entity, Animator animator)
         {
             //T cf = default(T);
 
@@ -47,14 +41,23 @@ namespace OpenBreed.Animation.Generic.Helpers
 
             //if (update)
             //{
-                frameUpdateAction.Invoke(entity, nf);
+            frameUpdater.Invoke(entity, nf);
             //    animator.Frame = nf;
             //}
 
             return true;
         }
 
-        private T GetFrame(float time, FrameTransition transition = FrameTransition.None)
+        public void AddFrame(TValue value, float frameTime)
+        {
+            frames.Add(frameTime, value);
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private TValue GetFrame(float time, FrameTransition transition = FrameTransition.None)
         {
             switch (transition)
             {
@@ -69,16 +72,7 @@ namespace OpenBreed.Animation.Generic.Helpers
             }
         }
 
-        public void AddFrame(T value, float frameTime)
-        {
-            frames.Add(frameTime, value);
-        }
-
-        #endregion Public Methods
-
-        #region Private Methods
-
-        private T GetFrameNoTransition(float time)
+        private TValue GetFrameNoTransition(float time)
         {
             foreach (var frame in frames)
             {
@@ -89,7 +83,7 @@ namespace OpenBreed.Animation.Generic.Helpers
             return frames.Last().Value;
         }
 
-        private void GetFrames(float time, out KeyValuePair<float, T> start, out KeyValuePair<float, T> end)
+        private void GetFrames(float time, out KeyValuePair<float, TValue> start, out KeyValuePair<float, TValue> end)
         {
             start = frames.First();
 
@@ -107,17 +101,17 @@ namespace OpenBreed.Animation.Generic.Helpers
             end = frames.Last();
         }
 
-        private T GetFrameLinearInterpolation(float time)
+        private TValue GetFrameLinearInterpolation(float time)
         {
-            KeyValuePair<float, T> start;
-            KeyValuePair<float, T> end;
+            KeyValuePair<float, TValue> start;
+            KeyValuePair<float, TValue> end;
 
             GetFrames(time, out start, out end);
 
             var ct = time - start.Key;
             var dt = end.Key - start.Key;
 
-            return (T)MathTools.Lerp(start.Value, end.Value, ct / dt);
+            return (TValue)MathTools.Lerp(start.Value, end.Value, ct / dt);
         }
 
         #endregion Private Methods

@@ -61,9 +61,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animator.cs" />
+    <Compile Include="AnimatorBuilder.cs" />
     <Compile Include="IAnimation.cs" />
+    <Compile Include="IAnimationLoader.cs" />
     <Compile Include="IAnimator.cs" />
-    <Compile Include="IAnimMan.cs" />
+    <Compile Include="IFrameUpdaterMan.cs" />
+    <Compile Include="IAnimationMan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -110,6 +110,8 @@
     <Compile Include="Entities\Camera\CameraHelper.cs" />
     <Compile Include="Entities\ColliderTypes.cs" />
     <Compile Include="Entities\CursorCoords\CursorCoordsHelper.cs" />
+    <Compile Include="Entities\Door\AnimationDataLoader.cs" />
+    <Compile Include="Entities\Door\AnimationDataFactory.cs" />
     <Compile Include="Entities\Door\DoorHelper.cs" />
     <Compile Include="Entities\Door\ManagerCollectionExtensions.cs" />
     <Compile Include="Entities\Door\States\FunctioningState.cs" />
@@ -211,6 +213,18 @@
     <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Common\OpenBreed.Common.csproj">
       <Project>{9894E7F4-7C85-4173-9D05-F50CFD2E4163}</Project>
       <Name>OpenBreed.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Database.Interface\OpenBreed.Database.Interface.csproj">
+      <Project>{E1A9B090-0090-4C7C-BDDF-B0BB4509DC63}</Project>
+      <Name>OpenBreed.Database.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Database.Xml\OpenBreed.Database.Xml.csproj">
+      <Project>{C4095745-E19C-4DE9-B2E4-37E55FA0D225}</Project>
+      <Name>OpenBreed.Database.Xml</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OpenBreed.Common\src\OpenBreed.Model\OpenBreed.Model.csproj">
+      <Project>{A05B933E-1C80-4AAE-93B9-BE37C6B94270}</Project>
+      <Name>OpenBreed.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenBreed.Animation.Generic\OpenBreed.Animation.Generic.csproj">
       <Project>{877FEE86-A92F-4194-A7C3-70E069D1347A}</Project>

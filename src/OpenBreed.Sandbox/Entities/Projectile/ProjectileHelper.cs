@@ -36,7 +36,7 @@ namespace OpenBreed.Sandbox.Entities.Projectile
 
         public void CreateAnimations()
         {
-            var animations = core.GetManager<IAnimMan>();
+            var animations = core.GetManager<IAnimationMan>();
 
             var laserR = animations.Create("Animations/Laser/Fired/Right", 2.0f);
             laserR.AddPart<int>(OnFrameUpdate, 0).AddFrame(0, 2.0f);

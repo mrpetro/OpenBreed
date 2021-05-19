@@ -1,7 +1,7 @@
 ﻿
 namespace OpenBreed.Animation.Interface
 {
-    public interface IAnimMan
+    public interface IAnimationMan
     {
         #region Public Methods
 
