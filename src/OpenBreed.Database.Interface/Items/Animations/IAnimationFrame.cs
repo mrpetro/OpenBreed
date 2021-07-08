@@ -1,8 +1,14 @@
-﻿namespace OpenBreed.Database.Interface.Items.Animations
+﻿using System.Collections.ObjectModel;
+
+namespace OpenBreed.Database.Interface.Items.Animations
 {
     public interface IAnimationFrame
     {
-        float FrameTime { get; set; }
+        #region Public Properties
+
+        float Time { get; set; }
         int ValueIndex { get; set; }
+
+        #endregion Public Properties
     }
 }

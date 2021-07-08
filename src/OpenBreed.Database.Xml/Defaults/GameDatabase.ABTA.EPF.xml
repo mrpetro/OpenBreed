@@ -3951,29 +3951,90 @@
 		</Scripts>
 		<Animations>
 			<Items>
-				<Animation Id="Animations.VerticalDoor.Closing">
-					<AnimatorType>Sprite</AnimatorType>
-					<AnimatorArguments>
-						<Arg Name="SpriteSet" >SpriteSets.SPR3A</Arg>
-					</AnimatorArguments>
-					<Frames>
-						<Frame ValueIndex="3" FrameTime="1.0" />
-						<Frame ValueIndex="2" FrameTime="1.0" />
-						<Frame ValueIndex="1" FrameTime="1.0" />
-						<Frame ValueIndex="0" FrameTime="1.0" />
-					</Frames>
+				<Animation Id="Animations.DoorVertical.Closing">
+					<Length>5.0</Length>
+					<Tracks>
+						<!-- <Track> -->
+							<!-- <AnimatorType>Sprite</AnimatorType> -->
+							<!-- <AnimatorArguments> -->
+								<!-- <Arg Name="SpriteSet" >SpriteSets.SPR3A</Arg> -->
+							<!-- </AnimatorArguments> -->
+							<!-- <Frames> -->
+								<!-- <Frame Time="0.0" ValueIndex="4" /> -->
+							<!-- </Frames> -->
+						<!-- </Track> -->
+						<Track>
+							<Interpolation>None</Interpolation>
+							<AnimatorType>Sprite</AnimatorType>
+							<AnimatorArguments>
+								<Arg Name="SpriteSet" >SpriteSets.SPR3A</Arg>
+							</AnimatorArguments>
+							<Frames>
+								<Frame Time="1.0" ValueIndex="4" />
+								<Frame Time="2.0" ValueIndex="3"  />
+								<Frame Time="3.0" ValueIndex="2" />
+								<Frame Time="4.0" ValueIndex="1" />
+								<Frame Time="5.0" ValueIndex="0" />
+							</Frames>
+						</Track>
+					</Tracks>
 				</Animation>
-				<Animation Id="Animations.VerticalDoor.Opening">
-					<AnimatorType>Sprite</AnimatorType>
-					<AnimatorArguments>
-						<Arg Name="SpriteSet" >SpriteSets.SPR3A</Arg>
-					</AnimatorArguments>
-					<Frames>
-						<Frame ValueIndex="0" FrameTime="1.0" />
-						<Frame ValueIndex="1" FrameTime="1.0" />
-						<Frame ValueIndex="2" FrameTime="1.0" />
-						<Frame ValueIndex="3" FrameTime="1.0" />
-					</Frames>
+				<Animation Id="Animations.DoorVertical.Opening">
+					<Length>5.0</Length>
+					<Tracks>
+						<Track>
+							<Interpolation>None</Interpolation>
+							<AnimatorType>Sprite</AnimatorType>
+							<AnimatorArguments>
+								<Arg Name="SpriteSet" >SpriteSets.SPR3A</Arg>
+							</AnimatorArguments>
+							<Frames>
+								<Frame Time="1.0" ValueIndex="0" />
+								<Frame Time="2.0" ValueIndex="1" />
+								<Frame Time="3.0" ValueIndex="2" />
+								<Frame Time="4.0" ValueIndex="3" />
+								<Frame Time="5.0" ValueIndex="4" />
+							</Frames>
+						</Track>
+					</Tracks>
+				</Animation>
+				<Animation Id="Animations.DoorHorizontal.Closing">
+					<Length>5.0</Length>
+					<Tracks>
+						<Track>
+							<Interpolation>None</Interpolation>
+							<AnimatorType>Sprite</AnimatorType>
+							<AnimatorArguments>
+								<Arg Name="SpriteSet" >SpriteSets.SPR3A</Arg>
+							</AnimatorArguments>
+							<Frames>
+								<Frame Time="1.0" ValueIndex="4" />
+								<Frame Time="2.0" ValueIndex="3"  />
+								<Frame Time="3.0" ValueIndex="2" />
+								<Frame Time="4.0" ValueIndex="1" />
+								<Frame Time="5.0" ValueIndex="0" />
+							</Frames>
+						</Track>
+					</Tracks>
+				</Animation>
+				<Animation Id="Animations.DoorHorizontal.Opening">
+					<Length>5.0</Length>
+					<Tracks>
+						<Track>
+							<Interpolation>None</Interpolation>
+							<AnimatorType>Sprite</AnimatorType>
+							<AnimatorArguments>
+								<Arg Name="SpriteSet" >SpriteSets.SPR3A</Arg>
+							</AnimatorArguments>
+							<Frames>
+								<Frame Time="1.0" ValueIndex="0" />
+								<Frame Time="2.0" ValueIndex="1" />
+								<Frame Time="3.0" ValueIndex="2" />
+								<Frame Time="4.0" ValueIndex="3" />
+								<Frame Time="5.0" ValueIndex="4" />
+							</Frames>
+						</Track>
+					</Tracks>
 				</Animation>
 			</Items>
 		</Animations>

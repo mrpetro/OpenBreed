@@ -20,6 +20,38 @@ namespace OpenBreed.Database.Xml.Items.Animations
     {
         #region Public Properties
 
+        [XmlElement("Length")]
+        public float Length { get; set; }
+
+        [XmlArray("Tracks")]
+        [XmlArrayItem(ElementName = "Track")]
+        public List<XmlAnimationEntryTrack> XmlTracks { get; set; }
+
+        [XmlIgnore]
+        public ReadOnlyCollection<IAnimationEntryTrack> Tracks
+        {
+            get
+            {
+                return new ReadOnlyCollection<IAnimationEntryTrack>(XmlTracks.Cast<IAnimationEntryTrack>().ToList());
+            }
+        }
+
+        public override IEntry Copy()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion Public Properties
+    }
+
+    [Serializable]
+    public class XmlAnimationEntryTrack : IAnimationEntryTrack
+    {
+        #region Public Properties
+
+        [XmlElement("Interpolation")]
+        public EntryFrameInterpolation Interpolation { get; set; }
+
         [XmlElement("AnimatorType")]
         public string AnimatorType { get; set; }
 
@@ -49,7 +81,7 @@ namespace OpenBreed.Database.Xml.Items.Animations
             }
         }
 
-        public override IEntry Copy()
+        public IEntry Copy()
         {
             throw new NotImplementedException();
         }
@@ -61,7 +93,7 @@ namespace OpenBreed.Database.Xml.Items.Animations
 
         public void AddFrame(int valueIndex, float frameTime)
         {
-            XmlFrames.Add(new XmlAnimationFrame { ValueIndex = valueIndex, FrameTime = frameTime });
+            XmlFrames.Add(new XmlAnimationFrame { ValueIndex = valueIndex, Time = frameTime });
         }
 
         #endregion Public Properties

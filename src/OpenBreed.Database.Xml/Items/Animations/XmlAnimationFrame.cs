@@ -1,4 +1,7 @@
 ﻿using OpenBreed.Database.Interface.Items.Animations;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Xml.Serialization;
 
 namespace OpenBreed.Database.Xml.Items.Animations
@@ -8,10 +11,10 @@ namespace OpenBreed.Database.Xml.Items.Animations
         #region Public Properties
 
         [XmlAttribute]
-        public int ValueIndex { get; set; }
+        public float Time { get; set; }
 
         [XmlAttribute]
-        public float FrameTime { get; set; }
+        public int ValueIndex { get; set; }
 
         #endregion Public Properties
     }
