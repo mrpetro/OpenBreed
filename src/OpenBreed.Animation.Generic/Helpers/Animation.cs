@@ -1,4 +1,6 @@
 ﻿using OpenBreed.Animation.Interface;
+using OpenBreed.Core;
+using OpenBreed.Wecs;
 using OpenBreed.Wecs.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,7 @@ namespace OpenBreed.Animation.Generic.Helpers
     {
         #region Private Fields
 
-        private readonly List<IAnimationPart> parts = new List<IAnimationPart>();
+        private readonly List<IAnimationTrack> tracks = new List<IAnimationTrack>();
 
         #endregion Private Fields
 
@@ -35,21 +37,20 @@ namespace OpenBreed.Animation.Generic.Helpers
 
         #region Public Methods
 
-        public IAnimationPart<TValue> AddPart<TValue>(FrameUpdater<TValue> frameUpdater, TValue initialValue)
+        public IAnimationTrack<TValue> AddTrack<TValue>(FrameInterpolation interpolation, FrameUpdater<TValue> frameUpdater, TValue initialValue)
         {
-            var newPart = new AnimationPart<TValue>(frameUpdater, initialValue);
-            parts.Add(newPart);
+            var newPart = new AnimationTrack<TValue>(interpolation, frameUpdater, initialValue);
+            tracks.Add(newPart);
             return newPart;
         }
 
         public bool UpdateWithNextFrame(Entity entity, Animator animator)
         {
-            for (int i = 0; i < parts.Count; i++)
-                parts[i].UpdateWithNextFrame(entity, animator);
+            for (int i = 0; i < tracks.Count; i++)
+                tracks[i].UpdateWithNextFrame(entity, animator);
 
             return true;
         }
-
 
         public override string ToString()
         {

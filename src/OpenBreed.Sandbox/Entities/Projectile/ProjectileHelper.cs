@@ -39,21 +39,21 @@ namespace OpenBreed.Sandbox.Entities.Projectile
             var animations = core.GetManager<IAnimationMan>();
 
             var laserR = animations.Create("Animations/Laser/Fired/Right", 2.0f);
-            laserR.AddPart<int>(OnFrameUpdate, 0).AddFrame(0, 2.0f);
+            laserR.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 0).AddFrame(0, 2.0f);
             var laserRD = animations.Create("Animations/Laser/Fired/RightDown", 2.0f);
-            laserRD.AddPart<int>(OnFrameUpdate, 1).AddFrame(1, 2.0f);
+            laserRD.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 1).AddFrame(1, 2.0f);
             var laserD = animations.Create("Animations/Laser/Fired/Down", 2.0f);
-            laserD.AddPart<int>(OnFrameUpdate, 2).AddFrame(2, 2.0f);
+            laserD.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 2).AddFrame(2, 2.0f);
             var laserDL = animations.Create("Animations/Laser/Fired/DownLeft", 2.0f);
-            laserDL.AddPart<int>(OnFrameUpdate, 3).AddFrame(3, 2.0f);
+            laserDL.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 3).AddFrame(3, 2.0f);
             var laserL = animations.Create("Animations/Laser/Fired/Left", 2.0f);
-            laserL.AddPart<int>(OnFrameUpdate, 4).AddFrame(4, 2.0f);
+            laserL.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 4).AddFrame(4, 2.0f);
             var laserLU = animations.Create("Animations/Laser/Fired/LeftUp", 2.0f);
-            laserLU.AddPart<int>(OnFrameUpdate, 5).AddFrame(5, 2.0f);
+            laserLU.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 5).AddFrame(5, 2.0f);
             var laserU = animations.Create("Animations/Laser/Fired/Up", 2.0f);
-            laserU.AddPart<int>(OnFrameUpdate, 6).AddFrame(6, 2.0f);
+            laserU.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 6).AddFrame(6, 2.0f);
             var laserUR = animations.Create("Animations/Laser/Fired/UpRight", 2.0f);
-            laserUR.AddPart<int>(OnFrameUpdate, 7).AddFrame(7, 2.0f);
+            laserUR.AddTrack<int>(FrameInterpolation.None, OnFrameUpdate, 7).AddFrame(7, 2.0f);
         }
 
         private void OnFrameUpdate(Entity entity, int nextValue)

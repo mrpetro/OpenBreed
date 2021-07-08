@@ -16,6 +16,7 @@ namespace OpenBreed.Animation.Generic
         #region Private Fields
 
         private readonly List<Delegate> items = new List<Delegate>();
+        private readonly Dictionary<string, int> namesToIds = new Dictionary<string, int>();
         private readonly ILogger logger;
 
         #endregion Private Fields
@@ -35,27 +36,29 @@ namespace OpenBreed.Animation.Generic
 
         #region Public Methods
 
-        public int Register(Delegate frameUpdater)
+        public int Register<TValue>(string name, FrameUpdater<TValue> frameUpdater)
         {
             items.Add(frameUpdater);
-            return items.Count - 1;
+            var id = items.Count - 1;
+            namesToIds.Add(name, id);
+
+            return id;
         }
 
-        public Delegate GetById(int id)
+        public FrameUpdater<TValue> GetById<TValue>(int id)
         {
-            return items[id];
+            return (FrameUpdater<TValue>)items[id];
         }
 
-        public Delegate GetByName(string name)
+        public FrameUpdater<TValue> GetByName<TValue>(string name)
         {
-            //var anim = items.FirstOrDefault(item => item.Name == name);
+            if (!namesToIds.TryGetValue(name, out int id))
+            {
+                logger.Error($"Unable to find frame updater with name '{name}'");
+                return null;
+            }
 
-            //if (anim != null)
-            //    return anim;
-
-            //logger.Error($"Unable to find animation with name '{name}'");
-
-            return null;
+            return GetById<TValue>(id);
         }
 
         public void UnloadAll()

@@ -8,6 +8,7 @@ using OpenBreed.Sandbox.Entities.Actor.States.Movement;
 using OpenBreed.Sandbox.Entities.Actor.States.Rotation;
 using OpenBreed.Sandbox.Entities.Door;
 using OpenBreed.Sandbox.Entities.Projectile;
+using OpenBreed.Wecs;
 
 namespace OpenBreed.Sandbox.Entities.Actor
 {
@@ -55,7 +56,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             {
                 var animationDataFactory = new AnimationDataFactory();
 
-                animationDataFactory.Register("Sprite", new SpriteAnimationPartLoader(managerCollection.GetManager<ICommandsMan>()));
+                animationDataFactory.Register("Sprite", new SpriteAnimationPartLoader(managerCollection.GetManager<IFrameUpdaterMan>()));
 
                 return animationDataFactory;
             });

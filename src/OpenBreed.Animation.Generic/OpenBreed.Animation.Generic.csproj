@@ -65,7 +65,7 @@
     <Compile Include="AnimationMan.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
     <Compile Include="Helpers\Animation.cs" />
-    <Compile Include="Helpers\AnimationPart.cs" />
+    <Compile Include="Helpers\AnimationTrack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -84,10 +84,6 @@
     <ProjectReference Include="..\OpenBreed.Wecs\OpenBreed.Wecs.csproj">
       <Project>{D22D74E0-7FE4-4278-A93B-9983B788F40E}</Project>
       <Name>OpenBreed.Wecs</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenBreed.Wecs.Systems.Core\OpenBreed.Wecs.Systems.Core.csproj">
-      <Project>{36dba7c4-ea4a-4f4d-82d3-d586e08346f6}</Project>
-      <Name>OpenBreed.Wecs.Systems.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

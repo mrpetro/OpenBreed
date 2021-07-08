@@ -6,7 +6,6 @@
             <Speed>10</Speed>
             <Loop>true</Loop>
             <AnimName>Animations/Teleport/Entry</AnimName>
-            <Transition>None</Transition>
         </Animation>
 		<Sprite>
 			<AtlasName>Atlases/Sprites/Teleport/Exit</AtlasName>

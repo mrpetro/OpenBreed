@@ -7,21 +7,23 @@ using System.Linq;
 
 namespace OpenBreed.Animation.Generic.Helpers
 {
-    internal class AnimationPart<TValue> : IAnimationPart<TValue>
+    internal class AnimationTrack<TValue> : IAnimationTrack<TValue>
     {
         #region Private Fields
 
         private SortedDictionary<float, TValue> frames = new SortedDictionary<float, TValue>();
+        private readonly FrameInterpolation interpolation;
         private FrameUpdater<TValue> frameUpdater;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal AnimationPart(FrameUpdater<TValue> frameUpdater, TValue initialValue)
+        internal AnimationTrack(FrameInterpolation interpolation, FrameUpdater<TValue> frameUpdater, TValue initialValue)
         {
+            this.interpolation = interpolation;
             this.frameUpdater = frameUpdater;
-            frames.Add(0.0f, initialValue);
+            this.frames.Add(0.0f, initialValue);
         }
 
         #endregion Internal Constructors
@@ -57,14 +59,14 @@ namespace OpenBreed.Animation.Generic.Helpers
 
         #region Private Methods
 
-        private TValue GetFrame(float time, FrameTransition transition = FrameTransition.None)
+        private TValue GetFrame(float time, FrameInterpolation transition = FrameInterpolation.None)
         {
-            switch (transition)
+            switch (interpolation)
             {
-                case FrameTransition.None:
+                case FrameInterpolation.None:
                     return GetFrameNoTransition(time);
 
-                case FrameTransition.LinearInterpolation:
+                case FrameInterpolation.Linear:
                     return GetFrameLinearInterpolation(time);
 
                 default:

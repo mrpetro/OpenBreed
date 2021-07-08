@@ -13,7 +13,6 @@ namespace OpenBreed.Wecs.Components.Animation
         float Speed { get; set; }
         bool Loop { get; set; }
         string AnimName { get; set; }
-        string Transition { get; set; }
 
         #endregion Public Properties
     }
@@ -29,8 +28,7 @@ namespace OpenBreed.Wecs.Components.Animation
             {
                 AnimId = builder.AnimId,
                 Loop = builder.Loop,
-                Speed = builder.Speed,
-                Transition = builder.Transition
+                Speed = builder.Speed
             });
         }
 
@@ -77,9 +75,6 @@ namespace OpenBreed.Wecs.Components.Animation
             builder.SetLoop(template.Loop);
             builder.SetSpeed(template.Speed);
 
-            if (template.Transition != null)
-                builder.SetTransition(template.Transition);
-
             return builder.Build();
         }
 
@@ -93,7 +88,6 @@ namespace OpenBreed.Wecs.Components.Animation
         internal float Speed = 0.0f;
         internal bool Loop = false;
         internal int AnimId = -1;
-        internal FrameTransition Transition = FrameTransition.None;
 
         #endregion Internal Fields
 
@@ -137,21 +131,6 @@ namespace OpenBreed.Wecs.Components.Animation
         public void SetSpeed(float speed)
         {
             Speed = speed;
-        }
-
-        public void SetTransition(FrameTransition transition)
-        {
-            Transition = transition;
-        }
-
-        public void SetTransition(string transitionName)
-        {
-            if (transitionName is "LinearInterpolation")
-                SetTransition(FrameTransition.LinearInterpolation);
-            else if (transitionName is "None")
-                SetTransition(FrameTransition.None);
-            else
-                throw new Exception();
         }
 
         #endregion Public Methods

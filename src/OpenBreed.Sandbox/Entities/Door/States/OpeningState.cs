@@ -51,7 +51,7 @@ namespace OpenBreed.Sandbox.Components.States
 
             var className = entity.Get<ClassComponent>().Name;
             var stateName = fsmMan.GetStateName(FsmId, Id);
-            commandsMan.Post(new PlayAnimCommand(entity.Id, $"{animPrefix}/{className}/{stateName}", 0));
+            commandsMan.Post(new PlayAnimCommand(entity.Id, $"{animPrefix}.{className}.{stateName}", 0));
 
             commandsMan.Post(new TextSetCommand(entity.Id, 0, "Door - Opening"));
 

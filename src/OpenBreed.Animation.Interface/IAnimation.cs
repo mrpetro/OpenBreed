@@ -8,7 +8,7 @@ namespace OpenBreed.Animation.Interface
     /// <summary>
     /// Transition methods between frames
     /// </summary>
-    public enum FrameTransition
+    public enum FrameInterpolation
     {
         /// <summary>
         /// Value of next frame is being set after specific time has passed. It's not smooth.
@@ -18,7 +18,7 @@ namespace OpenBreed.Animation.Interface
         /// <summary>
         /// Value of frame is being set based on linear interpolation between current and next frame and passed time.
         /// </summary>
-        LinearInterpolation
+        Linear
     }
 
     public interface IAnimation
@@ -34,13 +34,13 @@ namespace OpenBreed.Animation.Interface
         #region Public Methods
 
         bool UpdateWithNextFrame(Entity entity, Animator animator);
-
-        IAnimationPart<TValue> AddPart<TValue>(FrameUpdater<TValue> frameUpdater, TValue initialValue);
+         
+        IAnimationTrack<TValue> AddTrack<TValue>(FrameInterpolation interpolation, FrameUpdater<TValue> frameUpdater, TValue initialValue);
 
         #endregion Public Methods
     }
 
-    public interface IAnimationPart
+    public interface IAnimationTrack
     {
         #region Public Methods
 
@@ -49,7 +49,7 @@ namespace OpenBreed.Animation.Interface
         #endregion Public Methods
     }
 
-    public interface IAnimationPart<TValue> : IAnimationPart
+    public interface IAnimationTrack<TValue> : IAnimationTrack
     {
         #region Public Methods
 

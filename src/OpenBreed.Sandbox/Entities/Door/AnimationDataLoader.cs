@@ -3,41 +3,58 @@ using OpenBreed.Common;
 using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Animations;
+using OpenBreed.Wecs;
 using OpenBreed.Wecs.Entities;
 using OpenBreed.Wecs.Systems.Rendering.Commands;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Door
 {
     public interface IAnimationPartLoader
     {
-        void Load(IAnimation animation, IAnimationEntry entry);
+        void Load(IAnimation animation, IAnimationEntryTrack animationEntryPart);
     }
 
     public class SpriteAnimationPartLoader : IAnimationPartLoader
-    {
-        private readonly ICommandsMan commandsMan;
+    {    
+        private readonly IFrameUpdaterMan frameUpdaterMan;
 
-        public SpriteAnimationPartLoader(ICommandsMan commandsMan)
+        public SpriteAnimationPartLoader(IFrameUpdaterMan frameUpdaterMan)
         {
-            this.commandsMan = commandsMan;
+            this.frameUpdaterMan = frameUpdaterMan;
         }
 
-        private void OnFrameUpdate(Entity entity, int nextValue)
+        private readonly Dictionary<Type, Action> adders = new Dictionary<Type, Action>();
+
+        private void AddFrameKey()
         {
-            commandsMan.Post(new SpriteSetCommand(entity.Id, nextValue));
+
         }
 
-        public void Load(IAnimation animation, IAnimationEntry entry)
+        private FrameInterpolation GetFrameInterpolation(EntryFrameInterpolation interpolation)
         {
-            var animationPart = animation.AddPart<int>(OnFrameUpdate, 0);
-
-            var currentFrameTime = 0.0f;
-            foreach (var frame in entry.Frames)
+            switch (interpolation)
             {
-                currentFrameTime += frame.FrameTime;
-                animationPart.AddFrame(frame.ValueIndex, currentFrameTime);
+                case EntryFrameInterpolation.None:
+                    return FrameInterpolation.None;
+                case EntryFrameInterpolation.Linear:
+                    return FrameInterpolation.Linear;
+                default:
+                    return FrameInterpolation.None;
+            }
+        }
+
+        public void Load(IAnimation animation, IAnimationEntryTrack entryTrack)
+        {
+            var updater = frameUpdaterMan.GetByName<int>(entryTrack.AnimatorType);
+            var interpolation = GetFrameInterpolation(entryTrack.Interpolation);
+            var animationTrack = animation.AddTrack(interpolation, updater, 0);
+
+            foreach (var frame in entryTrack.Frames)
+            {
+                animationTrack.AddFrame(frame.ValueIndex, frame.Time);
             }
         }
     }
@@ -81,13 +98,16 @@ namespace OpenBreed.Sandbox.Entities.Door
             if (entry == null)
                 throw new Exception("Animation error: " + entryId);
 
-            var totalTime = entry.Frames.Sum(item => item.FrameTime);
+            var totalTime = entry.Length;
 
             var newAnim = animationMan.Create(entry.Id, totalTime);
 
-            var partLoader = animationDataFactory.GetPartLoader(entry.AnimatorType);
+            foreach (var part in entry.Tracks)
+            {
+                var partLoader = animationDataFactory.GetPartLoader(part.AnimatorType);
 
-            partLoader.Load(newAnim, entry);
+                partLoader.Load(newAnim, part);
+            }
 
             return newAnim;
         }

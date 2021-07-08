@@ -7,11 +7,11 @@ namespace OpenBreed.Animation.Interface
     {
         #region Public Methods
 
-        int Register(Delegate frameUpdater);
+        int Register<TValue>(string name, FrameUpdater<TValue> frameUpdater);
 
-        Delegate GetById(int id);
+        FrameUpdater<TValue> GetById<TValue>(int id);
 
-        Delegate GetByName(string name);
+        FrameUpdater<TValue> GetByName<TValue>(string name);
 
         #endregion Public Methods
     }

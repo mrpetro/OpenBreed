@@ -13,7 +13,7 @@ namespace OpenBreed.Animation.Interface
         internal int AnimId { get; private set; }
         internal float Position { get; private set; }
         internal bool Paused { get; private set; }
-        internal FrameTransition Transition { get; private set; }
+        internal FrameInterpolation Transition { get; private set; }
 
         #endregion Internal Fields
 
@@ -62,7 +62,7 @@ namespace OpenBreed.Animation.Interface
             return this;
         }
 
-        public AnimatorBuilder SetTransition(FrameTransition transition)
+        public AnimatorBuilder SetTransition(FrameInterpolation transition)
         {
             Transition = transition;
             return this;

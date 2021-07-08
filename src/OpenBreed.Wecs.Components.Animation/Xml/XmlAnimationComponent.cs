@@ -18,9 +18,6 @@ namespace OpenBreed.Wecs.Components.Animation.Xml
         [XmlElement("AnimName")]
         public string AnimName { get; set; }
 
-        [XmlElement("Transition")]
-        public string Transition { get; set; }
-
         #endregion Public Properties
     }
 }

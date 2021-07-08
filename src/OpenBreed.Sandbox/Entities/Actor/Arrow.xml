@@ -16,7 +16,6 @@
 			<Speed>10</Speed>
 			<Loop>true</Loop>
 			<AnimName>Animations/Teleport/Entry</AnimName>
-			<Transition>None</Transition>
 		</Animation>
         <Position x="0" y="0" />
 		<Thrust x="0" y="0" />

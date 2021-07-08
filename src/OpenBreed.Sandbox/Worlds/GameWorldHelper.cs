@@ -125,7 +125,6 @@ namespace OpenBreed.Sandbox.Worlds
             animCmpBuilder.SetSpeed(10.0f);
             animCmpBuilder.SetLoop(false);
             animCmpBuilder.SetById(-1);
-            animCmpBuilder.SetTransition(FrameTransition.LinearInterpolation);
 
             playerCamera.Add(animCmpBuilder.Build());
 
@@ -137,7 +136,6 @@ namespace OpenBreed.Sandbox.Worlds
             animCmpBuilder.SetSpeed(10.0f);
             animCmpBuilder.SetLoop(false);
             animCmpBuilder.SetById(-1);
-            animCmpBuilder.SetTransition(FrameTransition.LinearInterpolation);
 
             gameCamera.Add(animCmpBuilder.Build());
 

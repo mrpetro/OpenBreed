@@ -96,6 +96,8 @@
     <Compile Include="Events\WorldPausedEventArgs.cs" />
     <Compile Include="Events\WorldUnpausedEventArgs.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
+    <Compile Include="IComponentController.cs" />
+    <Compile Include="IControllerMan.cs" />
     <Compile Include="Systems\DefaultSystemFactory.cs" />
     <Compile Include="Systems\ISystemFactory.cs" />
     <Compile Include="Systems\ISystemFinder.cs" />

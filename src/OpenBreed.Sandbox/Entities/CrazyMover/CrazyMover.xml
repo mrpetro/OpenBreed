@@ -14,7 +14,6 @@
             <Speed>10</Speed>
             <Loop>true</Loop>
             <AnimName>Animations/Misc/CrazyMove</AnimName>
-            <Transition>LinearInterpolation</Transition>
         </Animation>
     </Components>
 </EntityTemplate>

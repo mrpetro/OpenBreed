@@ -31,7 +31,7 @@ namespace OpenBreed.Animation.Interface
         /// <summary>
         /// Transition method from frame to frame
         /// </summary>
-        public FrameTransition Transition { get; set; }
+        public FrameInterpolation Transition { get; set; }
 
         public int AnimId { get; set; }
         public float Position { get; set; }
