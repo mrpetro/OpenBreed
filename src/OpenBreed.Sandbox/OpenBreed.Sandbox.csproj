@@ -87,6 +87,7 @@
     <None Include="Content\Graphics\TurretSpriteSet.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Compile Include="Entities\Actor\AnimationDataFactory.cs" />
     <Compile Include="Entities\Actor\ManagerCollectionExtensions.cs" />
     <Compile Include="Entities\Actor\States\Attacking\AttackingState.cs" />
     <Compile Include="Entities\Actor\States\Attacking\IdleState.cs" />
@@ -110,8 +111,6 @@
     <Compile Include="Entities\Camera\CameraHelper.cs" />
     <Compile Include="Entities\ColliderTypes.cs" />
     <Compile Include="Entities\CursorCoords\CursorCoordsHelper.cs" />
-    <Compile Include="Entities\Door\AnimationDataLoader.cs" />
-    <Compile Include="Entities\Door\AnimationDataFactory.cs" />
     <Compile Include="Entities\Door\DoorHelper.cs" />
     <Compile Include="Entities\Door\ManagerCollectionExtensions.cs" />
     <Compile Include="Entities\Door\States\FunctioningState.cs" />
@@ -146,6 +145,7 @@
     <Compile Include="Worlds\AirBuilderModule.cs" />
     <Compile Include="Worlds\GameWorldHelper.cs" />
     <Compile Include="Worlds\HudWorldHelper.cs" />
+    <Compile Include="Worlds\MapWorldDataLoader.cs" />
     <Compile Include="Worlds\TextWorldHelper.cs" />
     <Compile Include="Worlds\MenuWorldHelper.cs" />
     <Compile Include="Worlds\ScreenWorldHelper.cs" />

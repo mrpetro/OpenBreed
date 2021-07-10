@@ -50,33 +50,6 @@ namespace OpenBreed.Sandbox.Entities.Actor
             stateMachine.AddTransition(MovementState.Walking, MovementImpulse.Walk, MovementState.Walking);
         }
 
-        public static void SetupAnimationDataFactory(this IManagerCollection managerCollection)
-        {
-            managerCollection.AddSingleton<AnimationDataFactory>(() =>
-            {
-                var animationDataFactory = new AnimationDataFactory();
-
-                animationDataFactory.Register<int>(new IntegerAnimationTrackLoader(managerCollection.GetManager<IFrameUpdaterMan>()));
-
-                return animationDataFactory;
-            });
-        }
-
-        public static void SetupDataLoaderFactory(this IManagerCollection managerCollection)
-        {
-            managerCollection.AddSingleton<IDataLoaderFactory>(() =>
-            {
-                var dataLoaderFactory = new DataLoaderFactory();
-
-                dataLoaderFactory.Register(new AnimationDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
-                                                                   managerCollection.GetManager<IClipMan>(),
-                                                                   managerCollection.GetManager<IFrameUpdaterMan>(),
-                                                                   managerCollection.GetManager<AnimationDataFactory>()));
-
-                return dataLoaderFactory;
-            });
-        }
-
         public static void SetupActorRotationStates(this IManagerCollection managerCollection)
         {
             var fsmMan = managerCollection.GetManager<IFsmMan>();

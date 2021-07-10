@@ -1,6 +1,9 @@
-﻿using OpenBreed.Animation.Interface;
+﻿using OpenBreed.Animation.Generic.Data;
+using OpenBreed.Animation.Interface;
+using OpenBreed.Animation.Interface.Data;
 using OpenBreed.Common;
 using OpenBreed.Common.Logging;
+using OpenBreed.Database.Interface;
 
 namespace OpenBreed.Animation.Generic.Extensions
 {
@@ -13,6 +16,21 @@ namespace OpenBreed.Animation.Generic.Extensions
             manCollection.AddSingleton<Interface.IClipMan>(() => new ClipMan(manCollection.GetManager<ILogger>()));
             manCollection.AddSingleton<IFrameUpdaterMan>(() => new FrameUpdaterMan(manCollection.GetManager<ILogger>()));
         }
+
+        public static void SetupDataLoaderFactory(this IManagerCollection managerCollection)
+        {
+            managerCollection.AddSingleton<IDataLoaderFactory>(() =>
+            {
+                var dataLoaderFactory = new DataLoaderFactory();
+
+                dataLoaderFactory.Register(new AnimationDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
+                                                                   managerCollection.GetManager<IClipMan>(),
+                                                                   managerCollection.GetManager<IFrameUpdaterMan>()));
+
+                return dataLoaderFactory;
+            });
+        }
+
 
         #endregion Public Methods
     }

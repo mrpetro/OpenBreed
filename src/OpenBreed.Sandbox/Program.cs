@@ -111,8 +111,6 @@ namespace OpenBreed.Sandbox
             manCollection.SetupAnimationComponents();
             manCollection.SetupFsmComponents();
 
-            manCollection.SetupAnimationDataFactory();
-
             manCollection.SetupDataLoaderFactory();
 
 
