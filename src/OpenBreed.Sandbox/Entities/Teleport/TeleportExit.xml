@@ -3,9 +3,13 @@
     <Components>
         <Position x="0" y="0" />
         <Animation>
-            <Speed>10</Speed>
-            <Loop>true</Loop>
-            <AnimName>Animations/Teleport/Entry</AnimName>
+			<States>
+				<State>
+					<Speed>10</Speed>
+					<Loop>true</Loop>
+					<ClipName>Animations/Teleport/Entry</ClipName>
+				</State>
+			</States>
         </Animation>
 		<Sprite>
 			<AtlasName>Atlases/Sprites/Teleport/Exit</AtlasName>

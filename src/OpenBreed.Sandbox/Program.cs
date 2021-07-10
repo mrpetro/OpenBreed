@@ -203,7 +203,7 @@ namespace OpenBreed.Sandbox
             this.clientMan = clientMan;
             scriptMan = manCollection.GetManager<IScriptMan>();
             StateMachines = manCollection.GetManager<IFsmMan>();
-            Animations = manCollection.GetManager<IAnimationMan>();
+            Animations = manCollection.GetManager<Animation.Interface.IClipMan>();
             Inputs = manCollection.GetManager<IInputsMan>();
             renderingMan = manCollection.GetManager<IRenderingMan>();
 
@@ -235,7 +235,7 @@ namespace OpenBreed.Sandbox
         #region Public Properties
 
         public IEntityFactory EntityFactory { get; }
-        public IAnimationMan Animations { get; }
+        public Animation.Interface.IClipMan Animations { get; }
 
         public IFsmMan StateMachines { get; }
 

@@ -5,23 +5,23 @@ namespace OpenBreed.Sandbox.Entities.Door
 {
     internal class AnimationDataFactory
     {
-        private readonly Dictionary<string, IAnimationPartLoader> partLoaders = new Dictionary<string, IAnimationPartLoader>();
+        private readonly Dictionary<Type, IAnimationTrackLoader> trackLoaders = new Dictionary<Type, IAnimationTrackLoader>();
 
         public AnimationDataFactory()
         {
         }
 
-        public IAnimationPartLoader GetPartLoader(string animatorType)
+        public IAnimationTrackLoader GetTrackLoader(Type type)
         {
-            if (partLoaders.TryGetValue(animatorType, out IAnimationPartLoader partLoader))
+            if (trackLoaders.TryGetValue(type, out IAnimationTrackLoader partLoader))
                 return partLoader;
             else
-                throw new InvalidOperationException($"Animation Part Loader for animator type '{animatorType}' is not registered");
+                throw new InvalidOperationException($"Animation Part Loader for animator type '{type}' is not registered");
         }
 
-        internal void Register(string animatorType, IAnimationPartLoader dataLoader)
+        internal void Register<TValue>(IAnimationTrackLoader trackLoader)
         {
-            partLoaders.Add(animatorType, dataLoader);
+            trackLoaders.Add(typeof(TValue), trackLoader);
         }
     }
 }

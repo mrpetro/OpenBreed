@@ -62,10 +62,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FrameUpdaterMan.cs" />
-    <Compile Include="AnimationMan.cs" />
+    <Compile Include="ClipMan.cs" />
     <Compile Include="Extensions\ManagerCollectionExtensions.cs" />
-    <Compile Include="Helpers\Animation.cs" />
-    <Compile Include="Helpers\AnimationTrack.cs" />
+    <Compile Include="Clip.cs" />
+    <Compile Include="Track.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

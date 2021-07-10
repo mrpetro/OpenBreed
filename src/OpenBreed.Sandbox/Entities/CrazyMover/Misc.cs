@@ -27,7 +27,7 @@ namespace OpenBreed.Sandbox
 
         public static void CreateAnimations(ICore core)
         {
-            var updatePosAnim = core.GetManager<IAnimationMan>().Create(CRAZY_MOVE_ANIM, 25.0f);
+            var updatePosAnim = core.GetManager<IClipMan>().CreateClip(CRAZY_MOVE_ANIM, 25.0f);
             var updateX = updatePosAnim.AddTrack<float>(FrameInterpolation.Linear, OnUpdatePosXFrame, 0);
             updateX.AddFrame(5 * 16, 5.0f);
             updateX.AddFrame(0 * 16, 10.0f);

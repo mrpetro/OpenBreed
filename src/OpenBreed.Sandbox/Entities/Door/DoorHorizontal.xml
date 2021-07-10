@@ -12,8 +12,12 @@
 			</States>
 		</Fsm>
 		<Animation>
-			<Speed>5</Speed>
-			<Loop>false</Loop>
+			<States>
+				<State>
+					<Speed>5</Speed>
+					<Loop>false</Loop>		
+				</State>
+			</States>
 		</Animation>
         <Position x="0" y="0" />
 		<Body>

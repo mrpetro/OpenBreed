@@ -21,7 +21,10 @@ namespace OpenBreed.Animation.Interface
         Linear
     }
 
-    public interface IAnimation
+    /// <summary>
+    /// Animation clip which represents collection of tracks
+    /// </summary>
+    public interface IClip
     {
         #region Public Properties
 
@@ -33,23 +36,23 @@ namespace OpenBreed.Animation.Interface
 
         #region Public Methods
 
-        bool UpdateWithNextFrame(Entity entity, Animator animator);
+        bool UpdateWithNextFrame(Entity entity, float time);
          
-        IAnimationTrack<TValue> AddTrack<TValue>(FrameInterpolation interpolation, FrameUpdater<TValue> frameUpdater, TValue initialValue);
+        ITrack<TValue> AddTrack<TValue>(FrameInterpolation interpolation, FrameUpdater<TValue> frameUpdater, TValue initialValue);
 
         #endregion Public Methods
     }
 
-    public interface IAnimationTrack
+    public interface ITrack
     {
         #region Public Methods
 
-        bool UpdateWithNextFrame(Entity entity, Animator animator);
+        bool UpdateWithNextFrame(Entity entity, float time);
 
         #endregion Public Methods
     }
 
-    public interface IAnimationTrack<TValue> : IAnimationTrack
+    public interface ITrack<TValue> : ITrack
     {
         #region Public Methods
 

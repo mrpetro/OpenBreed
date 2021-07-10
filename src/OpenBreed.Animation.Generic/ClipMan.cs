@@ -1,4 +1,4 @@
-﻿using OpenBreed.Animation.Generic.Helpers;
+﻿using OpenBreed.Animation.Generic;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Logging;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace OpenBreed.Animation.Generic
 {
-    public class AnimationMan : IAnimationMan
+    public class ClipMan : IClipMan
     {
         #region Internal Fields
 
@@ -15,20 +15,20 @@ namespace OpenBreed.Animation.Generic
 
         #region Private Fields
 
-        private readonly List<IAnimation> items = new List<IAnimation>();
+        private readonly List<IClip> clips = new List<IClip>();
         private readonly ILogger logger;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        private IAnimation MissingAnim;
+        private IClip MissingAnim;
 
-        public AnimationMan(ILogger logger)
+        public ClipMan(ILogger logger)
         {
             this.logger = logger;
 
-            MissingAnim = Create("Animations/Missing", 1.0f);
+            MissingAnim = CreateClip("Animations/Missing", 1.0f);
         }
 
         #endregion Public Constructors
@@ -39,21 +39,21 @@ namespace OpenBreed.Animation.Generic
 
         #region Public Methods
 
-        public IAnimation Create(string name, float length)
+        public IClip CreateClip(string name, float length)
         {
-            var newAnimationData = new OpenBreed.Animation.Generic.Helpers.Animation(items.Count, name, length);
-            items.Add(newAnimationData);
-            return newAnimationData;
+            var newClip = new Clip(clips.Count, name, length);
+            clips.Add(newClip);
+            return newClip;
         }
 
-        public IAnimation GetById(int id)
+        public IClip GetById(int id)
         {
-            return items[id];
+            return clips[id];
         }
 
-        public IAnimation GetByName(string name)
+        public IClip GetByName(string name)
         {
-            var anim = items.FirstOrDefault(item => item.Name == name);
+            var anim = clips.FirstOrDefault(item => item.Name == name);
 
             if (anim != null)
                 return anim;

@@ -22,14 +22,14 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         private readonly List<int> entities = new List<int>();
         private readonly IEntityMan entityMan;
-        private readonly IAnimationMan animationMan;
+        private readonly OpenBreed.Animation.Interface.IClipMan animationMan;
         private readonly ILogger logger;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal AnimationSystem(IEntityMan entityMan, IAnimationMan animationMan, ILogger logger)
+        internal AnimationSystem(IEntityMan entityMan, OpenBreed.Animation.Interface.IClipMan animationMan, ILogger logger)
         {
             this.entityMan = entityMan;
             this.animationMan = animationMan;
@@ -73,7 +73,7 @@ namespace OpenBreed.Wecs.Systems.Animation
 
         public void Set(Entity entity, Animator animator, int animId = -1, float startPosition = 0.0f)
         {
-            animator.AnimId = animId;
+            animator.ClipId = animId;
             animator.Position = startPosition;
             animator.Paused = false;
         }
@@ -81,9 +81,9 @@ namespace OpenBreed.Wecs.Systems.Animation
         public void Play(Entity entity, Animator animator, int animId = -1, float startPosition = 0.0f)
         {
             if (animId != -1)
-                animator.AnimId = animId;
+                animator.ClipId = animId;
 
-            animator.AnimId = animId;
+            animator.ClipId = animId;
             animator.Position = startPosition;
             animator.Paused = false;
         }
@@ -132,7 +132,7 @@ namespace OpenBreed.Wecs.Systems.Animation
         {
             var entity = entityMan.GetById(cmd.EntityId);
             var ac = entity.Get<AnimationComponent>();
-            var animator = ac.Items[cmd.AnimatorId];
+            var animator = ac.States[cmd.AnimatorId];
 
             Pause(entity, animator);
 
@@ -143,7 +143,7 @@ namespace OpenBreed.Wecs.Systems.Animation
         {
             var entity = entityMan.GetById(cmd.EntityId);
             var ac = entity.Get<AnimationComponent>();
-            var animator = ac.Items[cmd.AnimatorId];
+            var animator = ac.States[cmd.AnimatorId];
 
             Stop(entity, animator);
 
@@ -160,7 +160,7 @@ namespace OpenBreed.Wecs.Systems.Animation
             if (animData == null)
                 logger.Warning($"Animation with ID '{cmd.Id}' not found.");
 
-            Play(entity, ac.Items[cmd.AnimatorId], animData.Id);
+            Play(entity, ac.States[cmd.AnimatorId], animData.Id);
 
             return true;
         }
@@ -169,7 +169,7 @@ namespace OpenBreed.Wecs.Systems.Animation
         {
             var entity = entityMan.GetById(cmd.EntityId);
             var ac = entity.Get<AnimationComponent>();
-            var animator = ac.Items[cmd.AnimatorId];
+            var animator = ac.States[cmd.AnimatorId];
 
             int animId = -1;
 
@@ -184,7 +184,7 @@ namespace OpenBreed.Wecs.Systems.Animation
             }
             else
             {
-                animId = animator.AnimId;
+                animId = animator.ClipId;
             }
 
             Play(entity, animator, animId);
@@ -197,8 +197,8 @@ namespace OpenBreed.Wecs.Systems.Animation
             var ac = entity.Get<AnimationComponent>();
 
             //Update all animators with delta time
-            for (int i = 0; i < ac.Items.Count; i++)
-                UpdateAnimator(entity, ac.Items[i], dt);
+            for (int i = 0; i < ac.States.Count; i++)
+                UpdateAnimator(entity, ac.States[i], dt);
         }
 
         private void UpdateAnimator(Entity entity, Animator animator, float dt)
@@ -206,10 +206,10 @@ namespace OpenBreed.Wecs.Systems.Animation
             if (animator.Paused)
                 return;
 
-            if (animator.AnimId < 0)
+            if (animator.ClipId < 0)
                 return;
 
-            var data = animationMan.GetById(animator.AnimId);
+            var data = animationMan.GetById(animator.ClipId);
 
             animator.Position += animator.Speed * dt;
 
@@ -224,7 +224,7 @@ namespace OpenBreed.Wecs.Systems.Animation
                 }
             }
 
-            data.UpdateWithNextFrame(entity, animator);
+            data.UpdateWithNextFrame(entity, animator.Position);
         }
 
         private void RaiseAnimStoppedEvent(Entity entity, Animator animator)

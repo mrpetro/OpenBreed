@@ -11,9 +11,13 @@
             <Order>100</Order>
         </Text>
         <Animation>
-            <Speed>10</Speed>
-            <Loop>true</Loop>
-            <AnimName>Animations/Misc/CrazyMove</AnimName>
+			<States>
+				<State>
+					<Speed>10</Speed>
+					<Loop>true</Loop>
+					<ClipName>Animations/Misc/CrazyMove</ClipName>
+				</State>
+			</States>
         </Animation>
     </Components>
 </EntityTemplate>

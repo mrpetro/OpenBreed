@@ -50,15 +50,13 @@ namespace OpenBreed.Sandbox.Entities.Door
         {
 
 
-            var animationMan = core.GetManager<IAnimationMan>();
+            var animationMan = core.GetManager<IClipMan>();
             var animatorMan = core.GetManager<IFrameUpdaterMan>();
-
-            animatorMan.Register("Sprite", (FrameUpdater<int>)OnFrameUpdate);
 
             animatorMan.Register("Sprite.ImageId", (FrameUpdater<int>)OnFrameUpdate);
 
             var dataLoaderFactory = core.GetManager<IDataLoaderFactory>();
-            var animationLoader = dataLoaderFactory.GetLoader<IAnimation>();
+            var animationLoader = dataLoaderFactory.GetLoader<IClip>();
 
             var verticalDoorOpening = animationLoader.Load("Animations.DoorVertical.Opening");
             var verticalDoorClosing = animationLoader.Load("Animations.DoorVertical.Closing");

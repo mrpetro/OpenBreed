@@ -122,9 +122,9 @@ namespace OpenBreed.Sandbox.Worlds
             playerCamera.Tag = "PlayerCamera";
 
             var animCmpBuilder = core.GetManager<AnimationComponentBuilder>();
-            animCmpBuilder.SetSpeed(10.0f);
-            animCmpBuilder.SetLoop(false);
-            animCmpBuilder.SetById(-1);
+            animCmpBuilder.AddState().SetSpeed(10.0f)
+                                     .SetLoop(false)
+                                     .SetById(-1);
 
             playerCamera.Add(animCmpBuilder.Build());
 
@@ -133,9 +133,9 @@ namespace OpenBreed.Sandbox.Worlds
             gameCamera.Tag = "HubCamera";
 
             animCmpBuilder = managerCollection.GetManager<AnimationComponentBuilder>();
-            animCmpBuilder.SetSpeed(10.0f);
-            animCmpBuilder.SetLoop(false);
-            animCmpBuilder.SetById(-1);
+            animCmpBuilder.AddState().SetSpeed(10.0f)
+                                     .SetLoop(false)
+                                     .SetById(-1);
 
             gameCamera.Add(animCmpBuilder.Build());
 

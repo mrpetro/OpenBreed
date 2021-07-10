@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenBreed.Animation.Interface
+namespace OpenBreed.Wecs.Components.Animation
 {
     public class Animator
     {
@@ -14,26 +14,20 @@ namespace OpenBreed.Animation.Interface
         {
         }
 
-        internal Animator(AnimatorBuilder builder)
+        internal Animator(AnimationStateBuilder builder)
         {
-            AnimId = builder.AnimId;
-            Position = builder.Position;
+            ClipId = builder.ClipId;
+            Position = builder.Time;
             Speed = builder.Speed;
             Paused = builder.Paused;
             Loop = builder.Loop;
-            Transition = builder.Transition;
         }
 
         #endregion Internal Constructors
 
         #region Public Properties
 
-        /// <summary>
-        /// Transition method from frame to frame
-        /// </summary>
-        public FrameInterpolation Transition { get; set; }
-
-        public int AnimId { get; set; }
+        public int ClipId { get; set; }
         public float Position { get; set; }
         public float Speed { get; set; }
         public bool Paused { get; set; }

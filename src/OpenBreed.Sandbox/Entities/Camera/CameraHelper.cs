@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Wecs.Entities;
+using OpenBreed.Common;
 
 namespace OpenBreed.Sandbox.Entities.Camera
 {
@@ -19,13 +20,25 @@ namespace OpenBreed.Sandbox.Entities.Camera
 
         public static void CreateAnimations(ICore core)
         {
-            var cameraEffectFadeOut = core.GetManager<IAnimationMan>().Create(CAMERA_FADE_OUT, 10.0f);
-            var fo = cameraEffectFadeOut.AddTrack<float>(FrameInterpolation.Linear, OnFrameUpdate, 1.0f);
-            fo.AddFrame(0.0f, 10.0f);
 
-            var cameraEffectFadeIn = core.GetManager<IAnimationMan>().Create(CAMERA_FADE_IN, 10.0f);
-            var fi = cameraEffectFadeIn.AddTrack<float>(FrameInterpolation.Linear, OnFrameUpdate, 0.0f);
-            fi.AddFrame(1.0f, 10.0f);
+            var animationMan = core.GetManager<IClipMan>();
+            var animatorMan = core.GetManager<IFrameUpdaterMan>();
+
+            animatorMan.Register("Camera.Brightness", (FrameUpdater<float>)OnFrameUpdate);
+
+            var dataLoaderFactory = core.GetManager<IDataLoaderFactory>();
+            var animationLoader = dataLoaderFactory.GetLoader<IClip>();
+
+            var cameraFadeOut = animationLoader.Load("Animations/Camera/Effects/FadeOut");
+            var cameraFadeIn = animationLoader.Load("Animations/Camera/Effects/FadeIn");
+
+            //var cameraEffectFadeOut = core.GetManager<IAnimationMan>().Create(CAMERA_FADE_OUT, 10.0f);
+            //var fo = cameraEffectFadeOut.AddTrack<float>(FrameInterpolation.Linear, OnFrameUpdate, 1.0f);
+            //fo.AddFrame(0.0f, 10.0f);
+
+            //var cameraEffectFadeIn = core.GetManager<IAnimationMan>().Create(CAMERA_FADE_IN, 10.0f);
+            //var fi = cameraEffectFadeIn.AddTrack<float>(FrameInterpolation.Linear, OnFrameUpdate, 0.0f);
+            //fi.AddFrame(1.0f, 10.0f);
         }
 
         private static void OnFrameUpdate(Entity entity, float nextValue)

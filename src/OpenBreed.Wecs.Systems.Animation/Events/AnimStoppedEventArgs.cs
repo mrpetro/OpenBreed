@@ -1,4 +1,5 @@
 ﻿using OpenBreed.Animation.Interface;
+using OpenBreed.Wecs.Components.Animation;
 using System;
 
 namespace OpenBreed.Wecs.Systems.Animation.Events

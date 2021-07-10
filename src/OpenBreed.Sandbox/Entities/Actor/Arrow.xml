@@ -13,9 +13,13 @@
 			</States>
 		</Fsm>
 		<Animation>
-			<Speed>10</Speed>
-			<Loop>true</Loop>
-			<AnimName>Animations/Teleport/Entry</AnimName>
+			<States>
+				<State>
+					<Speed>10</Speed>
+					<Loop>true</Loop>
+					<ClipName>Animations/Teleport/Entry</ClipName>
+				</State>
+			</States>
 		</Animation>
         <Position x="0" y="0" />
 		<Thrust x="0" y="0" />

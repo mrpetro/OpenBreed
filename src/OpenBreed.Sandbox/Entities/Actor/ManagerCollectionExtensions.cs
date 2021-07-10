@@ -56,7 +56,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
             {
                 var animationDataFactory = new AnimationDataFactory();
 
-                animationDataFactory.Register("Sprite", new SpriteAnimationPartLoader(managerCollection.GetManager<IFrameUpdaterMan>()));
+                animationDataFactory.Register<int>(new IntegerAnimationTrackLoader(managerCollection.GetManager<IFrameUpdaterMan>()));
 
                 return animationDataFactory;
             });
@@ -69,7 +69,7 @@ namespace OpenBreed.Sandbox.Entities.Actor
                 var dataLoaderFactory = new DataLoaderFactory();
 
                 dataLoaderFactory.Register(new AnimationDataLoader(managerCollection.GetManager<IRepositoryProvider>(),
-                                                                   managerCollection.GetManager<IAnimationMan>(),
+                                                                   managerCollection.GetManager<IClipMan>(),
                                                                    managerCollection.GetManager<IFrameUpdaterMan>(),
                                                                    managerCollection.GetManager<AnimationDataFactory>()));
 

@@ -10,7 +10,7 @@ namespace OpenBreed.Animation.Generic.Extensions
 
         public static void SetupAnimationManagers(this IManagerCollection manCollection)
         {
-            manCollection.AddSingleton<IAnimationMan>(() => new AnimationMan(manCollection.GetManager<ILogger>()));
+            manCollection.AddSingleton<Interface.IClipMan>(() => new ClipMan(manCollection.GetManager<ILogger>()));
             manCollection.AddSingleton<IFrameUpdaterMan>(() => new FrameUpdaterMan(manCollection.GetManager<ILogger>()));
         }
 

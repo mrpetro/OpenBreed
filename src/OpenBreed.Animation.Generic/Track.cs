@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OpenBreed.Animation.Generic.Helpers
+namespace OpenBreed.Animation.Generic
 {
-    internal class AnimationTrack<TValue> : IAnimationTrack<TValue>
+    internal class Track<TValue> : ITrack<TValue>
     {
         #region Private Fields
 
@@ -19,25 +19,25 @@ namespace OpenBreed.Animation.Generic.Helpers
 
         #region Internal Constructors
 
-        internal AnimationTrack(FrameInterpolation interpolation, FrameUpdater<TValue> frameUpdater, TValue initialValue)
+        internal Track(FrameInterpolation interpolation, FrameUpdater<TValue> frameUpdater, TValue initialValue)
         {
             this.interpolation = interpolation;
             this.frameUpdater = frameUpdater;
-            this.frames.Add(0.0f, initialValue);
+            //this.frames.Add(0.0f, initialValue);
         }
 
         #endregion Internal Constructors
 
         #region Public Methods
 
-        public bool UpdateWithNextFrame(Entity entity, Animator animator)
+        public bool UpdateWithNextFrame(Entity entity, float time)
         {
             //T cf = default(T);
 
             //if (animator.Frame != null)
             //    cf = (T)animator.Frame;
 
-            var nf = GetFrame(animator.Position, animator.Transition);
+            var nf = SampleFrame(time);
 
             //var update = !cf.Equals(nf);
 
@@ -59,22 +59,22 @@ namespace OpenBreed.Animation.Generic.Helpers
 
         #region Private Methods
 
-        private TValue GetFrame(float time, FrameInterpolation transition = FrameInterpolation.None)
+        private TValue SampleFrame(float time)
         {
             switch (interpolation)
             {
                 case FrameInterpolation.None:
-                    return GetFrameNoTransition(time);
+                    return SampleNoInterpolation(time);
 
                 case FrameInterpolation.Linear:
-                    return GetFrameLinearInterpolation(time);
+                    return SampleLinearInterpolation(time);
 
                 default:
-                    throw new NotImplementedException($"Transition '{transition}' not implemented.");
+                    throw new NotImplementedException($"Interpolation type '{interpolation}' not implemented.");
             }
         }
 
-        private TValue GetFrameNoTransition(float time)
+        private TValue SampleNoInterpolation(float time)
         {
             foreach (var frame in frames)
             {
@@ -103,7 +103,7 @@ namespace OpenBreed.Animation.Generic.Helpers
             end = frames.Last();
         }
 
-        private TValue GetFrameLinearInterpolation(float time)
+        private TValue SampleLinearInterpolation(float time)
         {
             KeyValuePair<float, TValue> start;
             KeyValuePair<float, TValue> end;

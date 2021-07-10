@@ -1,4 +1,4 @@
-﻿using OpenBreed.Animation.Generic.Helpers;
+﻿using OpenBreed.Animation.Generic;
 using OpenBreed.Animation.Interface;
 using OpenBreed.Common.Logging;
 using System;

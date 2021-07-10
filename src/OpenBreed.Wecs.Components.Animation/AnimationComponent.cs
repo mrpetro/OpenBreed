@@ -1,8 +1,8 @@
-﻿using OpenBreed.Animation.Generic;
-using OpenBreed.Animation.Interface;
+﻿using OpenBreed.Animation.Interface;
 using OpenBreed.Common;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace OpenBreed.Wecs.Components.Animation
 {
@@ -10,9 +10,18 @@ namespace OpenBreed.Wecs.Components.Animation
     {
         #region Public Properties
 
+        ReadOnlyCollection<IAnimationStateTemplate> States { get; }
+
+        #endregion Public Properties
+    }
+
+    public interface IAnimationStateTemplate
+    {
+        #region Public Properties
+
         float Speed { get; set; }
         bool Loop { get; set; }
-        string AnimName { get; set; }
+        string ClipName { get; set; }
 
         #endregion Public Properties
     }
@@ -23,13 +32,12 @@ namespace OpenBreed.Wecs.Components.Animation
 
         internal AnimationComponent(AnimationComponentBuilder builder)
         {
-            Items = new List<Animator>();
-            Items.Add(new Animator()
+            States = new List<Animator>();
+
+            foreach (var state in builder.States)
             {
-                AnimId = builder.AnimId,
-                Loop = builder.Loop,
-                Speed = builder.Speed
-            });
+                States.Add(state.Build());
+            }
         }
 
         #endregion Internal Constructors
@@ -41,7 +49,7 @@ namespace OpenBreed.Wecs.Components.Animation
 
         #region Public Properties
 
-        public List<Animator> Items { get; }
+        public List<Animator> States { get; }
 
         #endregion Public Properties
     }
@@ -69,11 +77,13 @@ namespace OpenBreed.Wecs.Components.Animation
         {
             var builder = managerCollection.GetManager<AnimationComponentBuilder>();
 
-            if (template.AnimName != null)
-                builder.SetByName(template.AnimName);
-
-            builder.SetLoop(template.Loop);
-            builder.SetSpeed(template.Speed);
+            foreach (var stateTemplate in template.States)
+            {
+                builder.AddState()
+                            .SetClipByName(stateTemplate.ClipName)
+                            .SetLoop(stateTemplate.Loop)
+                            .SetSpeed(stateTemplate.Speed);
+            }
 
             return builder.Build();
         }
@@ -85,23 +95,21 @@ namespace OpenBreed.Wecs.Components.Animation
     {
         #region Internal Fields
 
-        internal float Speed = 0.0f;
-        internal bool Loop = false;
-        internal int AnimId = -1;
+        internal readonly List<AnimationStateBuilder> States = new List<AnimationStateBuilder>();
 
         #endregion Internal Fields
 
         #region Private Fields
 
-        private readonly IAnimationMan animationMan;
+        private readonly IClipMan clipMan;
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal AnimationComponentBuilder(IAnimationMan animationMan)
+        internal AnimationComponentBuilder(IClipMan clipMan)
         {
-            this.animationMan = animationMan;
+            this.clipMan = clipMan;
         }
 
         #endregion Internal Constructors
@@ -113,24 +121,76 @@ namespace OpenBreed.Wecs.Components.Animation
             return new AnimationComponent(this);
         }
 
-        public void SetById(int animId)
+        #endregion Public Methods
+
+        #region Internal Methods
+
+        public AnimationStateBuilder AddState()
         {
-            AnimId = animId;
+            var newAnimationStateBuilder = new AnimationStateBuilder(clipMan);
+            States.Add(newAnimationStateBuilder);
+            return newAnimationStateBuilder;
         }
 
-        public void SetByName(string animName)
+        #endregion Internal Methods
+    }
+
+    public class AnimationStateBuilder
+    {
+        #region Internal Fields
+
+        internal float Speed = 0.0f;
+        internal bool Loop = false;
+        internal int ClipId = -1;
+        internal float Time = 0.0f;
+        internal bool Paused = false;
+
+        #endregion Internal Fields
+
+        #region Private Fields
+
+        private readonly IClipMan clipMan;
+
+        #endregion Private Fields
+
+        #region Internal Constructors
+
+        internal AnimationStateBuilder(IClipMan clipMan)
         {
-            AnimId = animationMan.GetByName(animName).Id;
+            this.clipMan = clipMan;
         }
 
-        public void SetLoop(bool loop)
+        #endregion Internal Constructors
+
+        #region Public Methods
+
+        public AnimationStateBuilder SetClipByName(string clipName)
+        {
+            ClipId = clipMan.GetByName(clipName).Id;
+            return this;
+        }
+
+        public AnimationStateBuilder SetById(int animId)
+        {
+            ClipId = animId;
+            return this;
+        }
+
+        public AnimationStateBuilder SetLoop(bool loop)
         {
             Loop = loop;
+            return this;
         }
 
-        public void SetSpeed(float speed)
+        public AnimationStateBuilder SetSpeed(float speed)
         {
             Speed = speed;
+            return this;
+        }
+
+        public Animator Build()
+        {
+            return new Animator(this);
         }
 
         #endregion Public Methods

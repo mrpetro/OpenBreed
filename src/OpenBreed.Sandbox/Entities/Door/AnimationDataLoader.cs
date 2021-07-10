@@ -1,37 +1,57 @@
 ﻿using OpenBreed.Animation.Interface;
 using OpenBreed.Common;
-using OpenBreed.Core.Managers;
 using OpenBreed.Database.Interface;
 using OpenBreed.Database.Interface.Items.Animations;
-using OpenBreed.Wecs;
-using OpenBreed.Wecs.Entities;
-using OpenBreed.Wecs.Systems.Rendering.Commands;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace OpenBreed.Sandbox.Entities.Door
 {
-    public interface IAnimationPartLoader
+    public interface IAnimationTrackLoader
     {
-        void Load(IAnimation animation, IAnimationEntryTrack animationEntryPart);
+        #region Public Methods
+
+        void Load(IClip animation, IAnimationEntryTrack animationEntryPart);
+
+        #endregion Public Methods
     }
 
-    public class SpriteAnimationPartLoader : IAnimationPartLoader
-    {    
+    public class IntegerAnimationTrackLoader : IAnimationTrackLoader
+    {
+        #region Private Fields
+
         private readonly IFrameUpdaterMan frameUpdaterMan;
 
-        public SpriteAnimationPartLoader(IFrameUpdaterMan frameUpdaterMan)
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public IntegerAnimationTrackLoader(IFrameUpdaterMan frameUpdaterMan)
         {
             this.frameUpdaterMan = frameUpdaterMan;
         }
 
-        private readonly Dictionary<Type, Action> adders = new Dictionary<Type, Action>();
+        #endregion Public Constructors
 
-        private void AddFrameKey()
+        #region Public Methods
+
+        public void Load(IClip animation, IAnimationEntryTrack entryTrack)
         {
+            var updater = frameUpdaterMan.GetByName<int>(entryTrack.Controller);
+            var interpolation = GetFrameInterpolation(entryTrack.Interpolation);
+            var animationTrack = animation.AddTrack(interpolation, updater, 0);
 
+            if (entryTrack is IAnimationEntryTrack<int>)
+            {
+                var entryIntegerTrack = (IAnimationEntryTrack<int>)entryTrack;
+
+                foreach (var frame in entryIntegerTrack.Frames)
+                    animationTrack.AddFrame(frame.Value, frame.Time);
+            }
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private FrameInterpolation GetFrameInterpolation(EntryFrameInterpolation interpolation)
         {
@@ -39,32 +59,24 @@ namespace OpenBreed.Sandbox.Entities.Door
             {
                 case EntryFrameInterpolation.None:
                     return FrameInterpolation.None;
+
                 case EntryFrameInterpolation.Linear:
                     return FrameInterpolation.Linear;
+
                 default:
                     return FrameInterpolation.None;
             }
         }
 
-        public void Load(IAnimation animation, IAnimationEntryTrack entryTrack)
-        {
-            var updater = frameUpdaterMan.GetByName<int>(entryTrack.AnimatorType);
-            var interpolation = GetFrameInterpolation(entryTrack.Interpolation);
-            var animationTrack = animation.AddTrack(interpolation, updater, 0);
-
-            foreach (var frame in entryTrack.Frames)
-            {
-                animationTrack.AddFrame(frame.ValueIndex, frame.Time);
-            }
-        }
+        #endregion Private Methods
     }
 
-    internal class AnimationDataLoader : IDataLoader<IAnimation>
+    internal class AnimationDataLoader : IDataLoader<IClip>
     {
         #region Private Fields
 
         private readonly IRepositoryProvider repositoryProvider;
-        private readonly IAnimationMan animationMan;
+        private readonly IClipMan animationMan;
         private readonly IFrameUpdaterMan frameUpdaterMan;
         private readonly AnimationDataFactory animationDataFactory;
 
@@ -73,7 +85,7 @@ namespace OpenBreed.Sandbox.Entities.Door
         #region Public Constructors
 
         public AnimationDataLoader(IRepositoryProvider repositoryProvider,
-                                   IAnimationMan animationMan,
+                                   IClipMan animationMan,
                                    IFrameUpdaterMan frameUpdaterMan,
                                    AnimationDataFactory animationDataFactory)
         {
@@ -87,9 +99,9 @@ namespace OpenBreed.Sandbox.Entities.Door
 
         #region Public Methods
 
-        public IAnimation Load(string entryId)
+        public IClip Load(string entryId)
         {
-            return (IAnimation)LoadObject(entryId);
+            return (IClip)LoadObject(entryId);
         }
 
         public object LoadObject(string entryId)
@@ -100,18 +112,51 @@ namespace OpenBreed.Sandbox.Entities.Door
 
             var totalTime = entry.Length;
 
-            var newAnim = animationMan.Create(entry.Id, totalTime);
+            var newAnim = animationMan.CreateClip(entry.Id, totalTime);
 
             foreach (var part in entry.Tracks)
-            {
-                var partLoader = animationDataFactory.GetPartLoader(part.AnimatorType);
-
-                partLoader.Load(newAnim, part);
-            }
+                LoadTrack(newAnim, part);
 
             return newAnim;
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private FrameInterpolation GetFrameInterpolation(EntryFrameInterpolation interpolation)
+        {
+            switch (interpolation)
+            {
+                case EntryFrameInterpolation.None:
+                    return FrameInterpolation.None;
+
+                case EntryFrameInterpolation.Linear:
+                    return FrameInterpolation.Linear;
+
+                default:
+                    return FrameInterpolation.None;
+            }
+        }
+
+        private void LoadTrack<TValue>(IClip animation, IAnimationEntryTrack<TValue> entryTrack)
+        {
+            var updater = frameUpdaterMan.GetByName<TValue>(entryTrack.Controller);
+            var interpolation = GetFrameInterpolation(entryTrack.Interpolation);
+            var animationTrack = animation.AddTrack<TValue>(interpolation, updater, default(TValue));
+
+            foreach (var frame in entryTrack.Frames)
+                animationTrack.AddFrame(frame.Value, frame.Time);
+        }
+
+        private void LoadTrack(IClip animation, IAnimationEntryTrack entryTrack)
+        {
+            if (entryTrack is IAnimationEntryTrack<int>)
+                LoadTrack<int>(animation, (IAnimationEntryTrack<int>)entryTrack);
+            else if (entryTrack is IAnimationEntryTrack<float>)
+                LoadTrack<float>(animation, (IAnimationEntryTrack<float>)entryTrack);
+        }
+
+        #endregion Private Methods
     }
 }

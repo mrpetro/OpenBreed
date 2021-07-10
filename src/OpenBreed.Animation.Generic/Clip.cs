@@ -6,19 +6,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OpenBreed.Animation.Generic.Helpers
+namespace OpenBreed.Animation.Generic
 {
-    internal class Animation : IAnimation
+    internal class Clip : IClip
     {
         #region Private Fields
 
-        private readonly List<IAnimationTrack> tracks = new List<IAnimationTrack>();
+        private readonly List<ITrack> tracks = new List<ITrack>();
 
         #endregion Private Fields
 
         #region Internal Constructors
 
-        internal Animation(int id, string name, float length)
+        internal Clip(int id, string name, float length)
         {
             Id = id;
             Name = name;
@@ -37,17 +37,17 @@ namespace OpenBreed.Animation.Generic.Helpers
 
         #region Public Methods
 
-        public IAnimationTrack<TValue> AddTrack<TValue>(FrameInterpolation interpolation, FrameUpdater<TValue> frameUpdater, TValue initialValue)
+        public ITrack<TValue> AddTrack<TValue>(FrameInterpolation interpolation, FrameUpdater<TValue> frameUpdater, TValue initialValue)
         {
-            var newPart = new AnimationTrack<TValue>(interpolation, frameUpdater, initialValue);
+            var newPart = new Track<TValue>(interpolation, frameUpdater, initialValue);
             tracks.Add(newPart);
             return newPart;
         }
 
-        public bool UpdateWithNextFrame(Entity entity, Animator animator)
+        public bool UpdateWithNextFrame(Entity entity, float time)
         {
             for (int i = 0; i < tracks.Count; i++)
-                tracks[i].UpdateWithNextFrame(entity, animator);
+                tracks[i].UpdateWithNextFrame(entity, time);
 
             return true;
         }
