@@ -6,16 +6,24 @@ using System.Xml.Serialization;
 
 namespace OpenBreed.Database.Xml.Items.Animations
 {
-    public class XmlAnimationFrame : IAnimationFrame
+    public abstract class XmlAnimationFrame : IAnimationFrame
     {
         #region Public Properties
 
         [XmlAttribute]
         public float Time { get; set; }
 
+        #endregion Public Properties
+    }
+
+    public class XmlAnimationFrame<TValue> : XmlAnimationFrame, IAnimationFrame<TValue>
+    {
+        #region Public Properties
+
         [XmlAttribute]
-        public int ValueIndex { get; set; }
+        public TValue Value { get; set; }
 
         #endregion Public Properties
     }
+
 }

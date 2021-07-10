@@ -24,7 +24,8 @@ namespace OpenBreed.Database.Xml.Items.Animations
         public float Length { get; set; }
 
         [XmlArray("Tracks")]
-        [XmlArrayItem(ElementName = "Track")]
+        [XmlArrayItem(ElementName = "IntegerTrack", Type = typeof(XmlAnimationEntryTrack<int>))]
+        [XmlArrayItem(ElementName = "FloatTrack", Type = typeof(XmlAnimationEntryTrack<float>))]
         public List<XmlAnimationEntryTrack> XmlTracks { get; set; }
 
         [XmlIgnore]
@@ -44,46 +45,23 @@ namespace OpenBreed.Database.Xml.Items.Animations
         #endregion Public Properties
     }
 
+
     [Serializable]
-    public class XmlAnimationEntryTrack : IAnimationEntryTrack
+    public class XmlAnimationEntryTrack<TValue> : XmlAnimationEntryTrack, IAnimationEntryTrack<TValue>
     {
         #region Public Properties
 
-        [XmlElement("Interpolation")]
-        public EntryFrameInterpolation Interpolation { get; set; }
-
-        [XmlElement("AnimatorType")]
-        public string AnimatorType { get; set; }
-
-        [XmlArray("AnimatorArguments")]
-        [XmlArrayItem(ElementName = "Arg")]
-        public List<XmlArgument> XmlAnimatorArguments { get; set; }
-
         [XmlArray("Frames")]
         [XmlArrayItem(ElementName = "Frame")]
-        public List<XmlAnimationFrame> XmlFrames { get; set; }
+        public List<XmlAnimationFrame<TValue>> XmlFrames { get; set; }
 
         [XmlIgnore]
-        public ReadOnlyCollection<IArgument> AnimatorArguments
+        public ReadOnlyCollection<IAnimationFrame<TValue>> Frames
         {
             get
             {
-                return new ReadOnlyCollection<IArgument>(XmlAnimatorArguments.Cast<IArgument>().ToList());
+                return new ReadOnlyCollection<IAnimationFrame<TValue>>(XmlFrames.Cast<IAnimationFrame<TValue>>().ToList());
             }
-        }
-
-        [XmlIgnore]
-        public ReadOnlyCollection<IAnimationFrame> Frames
-        {
-            get
-            {
-                return new ReadOnlyCollection<IAnimationFrame>(XmlFrames.Cast<IAnimationFrame>().ToList());
-            }
-        }
-
-        public IEntry Copy()
-        {
-            throw new NotImplementedException();
         }
 
         public void ClearFrames()
@@ -91,9 +69,28 @@ namespace OpenBreed.Database.Xml.Items.Animations
             XmlFrames.Clear();
         }
 
-        public void AddFrame(int valueIndex, float frameTime)
+        public void AddFrame(TValue value, float frameTime)
         {
-            XmlFrames.Add(new XmlAnimationFrame { ValueIndex = valueIndex, Time = frameTime });
+            XmlFrames.Add(new XmlAnimationFrame<TValue> { Value = value, Time = frameTime });
+        }
+
+        #endregion Public Properties
+    }
+
+    [Serializable]
+    public abstract class XmlAnimationEntryTrack : IAnimationEntryTrack
+    {
+        #region Public Properties
+
+        [XmlElement("Interpolation")]
+        public EntryFrameInterpolation Interpolation { get; set; }
+
+        [XmlElement("Controller")]
+        public string Controller { get; set; }
+
+        public IEntry Copy()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion Public Properties

@@ -31,15 +31,16 @@ namespace OpenBreed.Database.Interface.Items.Animations
     {
         EntryFrameInterpolation Interpolation { get; }
 
-        string AnimatorType { get; set; }
+        string Controller { get; set; }
+    }
 
-        ReadOnlyCollection<IArgument> AnimatorArguments { get; }
-
-        ReadOnlyCollection<IAnimationFrame> Frames { get; }
-
-        void AddFrame(int valueIndex, float frameTime);
+    public interface IAnimationEntryTrack<TValue> : IAnimationEntryTrack
+    {
+        ReadOnlyCollection<IAnimationFrame<TValue>> Frames { get; }
 
         void ClearFrames();
+
+        void AddFrame(TValue value, float frameTime);
     }
 
 }
