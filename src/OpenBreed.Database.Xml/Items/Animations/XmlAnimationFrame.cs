@@ -1,18 +1,29 @@
 ﻿using OpenBreed.Database.Interface.Items.Animations;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Xml.Serialization;
 
 namespace OpenBreed.Database.Xml.Items.Animations
 {
-    public class XmlAnimationFrame : IAnimationFrame
+    public abstract class XmlAnimationFrame : IAnimationFrame
     {
         #region Public Properties
 
         [XmlAttribute]
-        public int ValueIndex { get; set; }
-
-        [XmlAttribute]
-        public float FrameTime { get; set; }
+        public float Time { get; set; }
 
         #endregion Public Properties
     }
+
+    public class XmlAnimationFrame<TValue> : XmlAnimationFrame, IAnimationFrame<TValue>
+    {
+        #region Public Properties
+
+        [XmlAttribute]
+        public TValue Value { get; set; }
+
+        #endregion Public Properties
+    }
+
 }

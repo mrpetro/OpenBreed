@@ -66,7 +66,6 @@
     <Compile Include="..\Shared\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="DataLoader.cs" />
     <Compile Include="DataLoaderFactory.cs" />
     <Compile Include="Data\EntityTemplatesDataProvider.cs" />
     <Compile Include="Data\EntityTemplatesDataHelper.cs" />

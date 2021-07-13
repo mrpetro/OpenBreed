@@ -2,7 +2,19 @@
 {
     public interface IAnimationFrame
     {
-        float FrameTime { get; set; }
-        int ValueIndex { get; set; }
+        #region Public Properties
+
+        float Time { get; set; }
+
+        #endregion Public Properties
+    }
+
+    public interface IAnimationFrame<TValue> : IAnimationFrame
+    {
+        #region Public Properties
+
+        TValue Value { get; set; }
+
+        #endregion Public Properties
     }
 }
